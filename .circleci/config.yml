@@ -6,6 +6,8 @@ workflows:
     jobs:
       - dockerhub/publish:
           image: toska/$CIRCLE_PROJECT_REPONAME
+          tag: 'production'
+          extra_build_args: '--build-arg BASE_PATH=/lomake/'
           filters:
             branches:
               only: master
