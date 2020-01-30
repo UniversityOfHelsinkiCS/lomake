@@ -15,7 +15,9 @@ const {
 initializeDatabaseConnection()
   .then(() => {
     const app = express()
-
+    const server = require('http').Server(app)
+    const io = require('socket.io')(server)
+    io.on('connection', require('@root/server/util/setupWebsocket'))
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
@@ -67,7 +69,7 @@ initializeDatabaseConnection()
       app.get('*', (req, res) => res.sendFile(INDEX_PATH))
     }
 
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       logger.info(`Started on port ${PORT}`)
     })
   })

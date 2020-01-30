@@ -1,25 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import OverallStatus from 'Components/FormView/OverallStatus'
-import Wellbeing from 'Components/FormView/Wellbeing'
-import SufficientResources from 'Components/FormView/SufficientResources'
-import JointProgramme from 'Components/FormView/JointProgramme'
-import SuccessesAndNeeds from 'Components/FormView/SuccessesAndNeeds'
-import ListOfMeasures from 'Components/FormView/ListOfMeasures'
-import Feedback from 'Components/FormView/Feedback'
+import { wsConnect } from 'Utilities/redux/websocketReducer'
 
-const Form = () => {
-  return (
-    <div className="the-form">
-      <OverallStatus />
-      <Wellbeing />
-      <SufficientResources />
-      <JointProgramme />
-      <SuccessesAndNeeds />
-      <ListOfMeasures />
-      <Feedback />
-    </div>
-  )
+import Form from 'Components/FormView/Form'
+
+const FormView = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    // TODO: Connect based on the faculty we're looking at
+    dispatch(wsConnect())
+  }, [])
+
+  return <Form />
 }
 
-export default Form
+export default FormView
