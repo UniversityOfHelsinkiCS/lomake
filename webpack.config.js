@@ -8,40 +8,44 @@ const webpack = require('webpack')
 
 module.exports = (env, argv) => {
   const { mode } = argv
-  const additionalPlugins = mode === 'production'
-    ? []
-    : [new webpack.HotModuleReplacementPlugin()] // Enable hot module replacement
+  const additionalPlugins =
+    mode === 'production' ? [] : [new webpack.HotModuleReplacementPlugin()] // Enable hot module replacement
 
-  const additionalOptimizations = mode === 'production'
-    ? {
-      minimizer: [
-        // Make CSS smaller
-        new OptimizeCssAssetsPlugin(),
-      ],
-    }
-    : {}
+  const additionalOptimizations =
+    mode === 'production'
+      ? {
+          minimizer: [
+            // Make CSS smaller
+            new OptimizeCssAssetsPlugin()
+          ]
+        }
+      : {}
 
-  const additionalEntries = mode === 'production' ? [] : ['webpack-hot-middleware/client?http://localhost:8000']
+  const additionalEntries =
+    mode === 'production'
+      ? []
+      : ['webpack-hot-middleware/client?http://localhost:8000']
 
   const BASE_PATH = process.env.BASE_PATH || '/'
 
   return {
     mode,
     output: {
-      publicPath: BASE_PATH,
+      publicPath: BASE_PATH
     },
     entry: [
       '@babel/polyfill', // so we don't need to import it anywhere
       './client',
-      ...additionalEntries,
+      ...additionalEntries
     ],
     resolve: {
       alias: {
         Utilities: path.resolve(__dirname, 'client/util/'),
         Components: path.resolve(__dirname, 'client/components/'),
         Assets: path.resolve(__dirname, 'client/assets/'),
-        '@root': path.resolve(__dirname),
-      },
+        Root: path.resolve(__dirname),
+        '@root': path.resolve(__dirname)
+      }
     },
     module: {
       rules: [
@@ -50,15 +54,16 @@ module.exports = (env, argv) => {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader',
-          },
+            loader: 'babel-loader'
+          }
         },
         {
           // Load CSS files
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          use: [MiniCssExtractPlugin.loader, 'css-loader']
         },
-        { // Load SCSS & SASS files
+        {
+          // Load SCSS & SASS files
           test: /\.s[ac]ss$/i,
           use: [
             // Creates `style` nodes from JS strings
@@ -70,26 +75,26 @@ module.exports = (env, argv) => {
               loader: 'sass-loader',
               options: {
                 // Prefer `dart-sass`
-                implementation: sass,
-              },
-            },
-          ],
+                implementation: sass
+              }
+            }
+          ]
         },
         {
           // Load other files
           test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-          use: ['file-loader'],
-        },
-      ],
+          use: ['file-loader']
+        }
+      ]
     },
     optimization: {
-      ...additionalOptimizations,
+      ...additionalOptimizations
     },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.BASE_PATH': JSON.stringify(BASE_PATH),
         'process.env.BUILT_AT': JSON.stringify(new Date().toISOString()),
-        'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.NODE_ENV': JSON.stringify(mode)
       }),
       // Skip the part where we would make a html template
       new HtmlWebpackPlugin({
@@ -97,14 +102,14 @@ module.exports = (env, argv) => {
         favicon: path.resolve(__dirname, 'client/assets/favicon-32x32.png'),
         inject: false,
         template: htmlTemplate,
-        appMountId: 'root',
+        appMountId: 'root'
       }),
       // Extract css
       new MiniCssExtractPlugin({
         filename: '[name].css',
-        chunkFilename: '[name]-[id].css',
+        chunkFilename: '[name]-[id].css'
       }),
-      ...additionalPlugins,
-    ],
+      ...additionalPlugins
+    ]
   }
 }

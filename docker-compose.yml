@@ -8,6 +8,8 @@ services:
     image: lomake_dev
     volumes:
       - ./:/usr/src/app
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
     ports:
       - 8000:8000
     container_name: lomake_dev
@@ -19,6 +21,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - pg_data:/data
+    container_name: lomake_db
 
 volumes:
   pg_data:
