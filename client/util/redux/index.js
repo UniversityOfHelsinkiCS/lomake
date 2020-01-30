@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import messages from './messageReducer'
+import form from './formReducer'
 
 export default combineReducers({
-  messages,
+  form,
 })

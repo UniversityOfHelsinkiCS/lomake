@@ -29,7 +29,6 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "semi": ["error", "never"],
-    "comma-dangle": ["error", "never"],
     "arrow-parens": ["error", "always"],
     "import/no-unresolved": "off",
     "react/jsx-filename-extension": "off",
