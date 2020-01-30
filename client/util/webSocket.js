@@ -3,7 +3,7 @@ import { basePath } from 'Utilities/common'
 import io from 'socket.io-client'
 
 const connect = () => {
-  return io(basePath)
+  return io(window.origin, { path: `${basePath}socket.io`})
 }
 
 const socketMiddleware = () => {
