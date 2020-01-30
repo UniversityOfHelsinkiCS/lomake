@@ -10,6 +10,51 @@ $mainColor: whitesmoke;
   min-height: calc(100vh - 10em);
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.the-form {
+  max-width: 50em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-textarea {
+  padding: 1.5em 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  label {
+    min-width: 15em;
+    width: 50%;
+    padding-right: 1em;
+  }
+  textarea {
+    flex-grow: 1;
+    min-width: 25em;
+    height: 6em;
+  }
+}
+
+.form-streetlights {
+  padding: 1.5em 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  label {
+    min-width: 15em;
+    width: 50%;
+    padding-right: 1em;
+  }
+  div {
+    flex-grow: 1;
+    div {
+      padding: 0.3em 0;
+      label {
+        padding-left: 1em;
+      }
+    }
+  }
 }
 
 .footer {
