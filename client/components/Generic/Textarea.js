@@ -6,8 +6,7 @@ const Textarea = ({ label, id }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value))
-  const value = useSelector(({ form }) => form.data[fieldName])
-
+  const value = useSelector(({ form }) => form.data[fieldName] || '')
   return (
     <div className="form-textarea">
       <label>{label}</label>

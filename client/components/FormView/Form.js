@@ -10,7 +10,7 @@ import Feedback from 'Components/FormView/Feedback'
 
 const Form = () => {
   return (
-    <div className="the-form">
+    <>
       <OverallStatus />
       <Wellbeing />
       <SufficientResources />
@@ -18,7 +18,7 @@ const Form = () => {
       <SuccessesAndNeeds />
       <ListOfMeasures />
       <Feedback />
-    </div>
+    </>
   )
 }
 

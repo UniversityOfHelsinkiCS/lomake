@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { setHeaders } from 'Utilities/mockHeaders'
 
-import 'semantic-ui-css/semantic.min.css'
-import 'react-virtualized/styles.css'
 import 'Assets/custom.scss'
 
 import store from 'Utilities/store'

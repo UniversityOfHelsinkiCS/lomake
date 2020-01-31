@@ -3,7 +3,7 @@ import callBuilder from '../apiConnection'
  * Actions and reducers are in the same file for readability
  */
 
-export const updateFormField = (field, value) => ({ type: 'UPDATE_FORM_FIELD', field, value })
+export const updateFormField = (field, value, host) => ({ type: 'UPDATE_FORM_FIELD', field, value, host })
 
 export const getFormAction = () => {
   const route = '/form'

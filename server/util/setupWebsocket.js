@@ -5,16 +5,25 @@ let formData = {
 }
 
 const setupWebsocket = (socket) => {
-  console.log('connection')
-  socket.emit('new_form_data', formData)
-
-  socket.on('update_field', (data) => {
+  socket.on('update_field', (payload) => {
+    const { room, data } = payload
     formData = {
       ...formData,
-      ...data
+      [room]: {
+        ...formData[room],
+        ...data
+      }
     }
-    console.log('Updated formdata', formData)
-    socket.broadcast.emit('new_form_data', formData)
+    socket.to(room).emit('new_form_data', formData[room])
+  })
+
+  socket.on('join', (room) => {
+    socket.join(room)
+    socket.emit('new_form_data', formData[room] || {})
+  })
+  socket.on('leave', (room) => {
+    socket.leave(room)
+    socket.emit('left_success', 'ok')
   })
 }
 
