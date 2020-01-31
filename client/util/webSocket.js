@@ -1,9 +1,8 @@
-import { wsConnected, wsDisconnected, wsJoinRoom } from 'Utilities/redux/websocketReducer'
 import { basePath } from 'Utilities/common'
 import io from 'socket.io-client'
 
 const connect = () => {
-  return io(`${window.origin}${basePath}`, { path: `/socket.io` })
+  return io(window.origin, { path: `${basePath}/socket.io` })
 }
 
 const socketMiddleware = () => {
