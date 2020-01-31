@@ -136,7 +136,7 @@ const programmes = [
   "Doctoral Programme in Sustainable Use of Renewable Natural Resources",
   "Doctoral Programme in Population Health",
   "Doctoral Programme in Interdisciplinary Environmental Sciences"
-]
+].sort((a, b) => a.localeCompare(b))
 
 const faculties = [
   "Faculty of Agriculture and Forestry",
@@ -151,7 +151,7 @@ const faculties = [
   "Faculty of Theology",
   "Faculty of Veterinary Medicine",
   "Swedish School of Social Science"
-]
+].sort((a, b) => a.localeCompare(b))
 
 module.exports = {
   inProduction,
