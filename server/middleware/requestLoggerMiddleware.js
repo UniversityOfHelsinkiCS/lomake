@@ -6,6 +6,7 @@ const requestLoggerMiddleware = (req, res, next) => {
   logger.info(`Body: ${JSON.stringify(req.body)}`)
   logger.info(`User: ${req.headers.uid}`)
   logger.info('---')
+
   next()
 }
 

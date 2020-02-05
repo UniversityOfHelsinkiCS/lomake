@@ -17,8 +17,19 @@ initializeDatabaseConnection()
     const app = express()
     const server = require('http').Server(app)
     const io = require('socket.io')(server)
-    io.on('connection', require('@root/server/util/setupWebsocket'))
+    io.on('connection', (socket) => {
+      socket.on('update_field', (room) =>
+        require('@util/websocketHandlers').updateField(socket, room)
+      )
+      socket.on('join', (room) =>
+        require('@util/websocketHandlers').joinRoom(socket, room)
+      )
+      socket.on('leave', (room) =>
+        require('@util/websocketHandlers').leaveRoom(socket, room)
+      )
+    })
     // Require is here so we can delete it from cache when files change (*)
+
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
     /**
@@ -27,6 +38,7 @@ initializeDatabaseConnection()
     const watcher = chokidar.watch('server') // Watch server folder
     watcher.on('ready', () => {
       watcher.on('all', () => {
+        logger.info('Hot reloaded.')
         Object.keys(require.cache).forEach((id) => {
           if (id.includes('server')) delete require.cache[id] // Delete all require caches that point to server folder (*)
         })

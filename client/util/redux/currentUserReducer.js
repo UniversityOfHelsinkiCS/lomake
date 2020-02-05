@@ -16,12 +16,12 @@ export const logoutAction = () => {
 }
 
 export const activateAdminModeAction = () => {
-  window.localStorage.setItem('adminmode', 'true')
+  window.localStorage.setItem('lomake_adminmode', 'true')
   return { type: 'ACTIVATE_ADMINMODE' }
 }
 
 export const disableAdminModeAction = () => {
-  window.localStorage.setItem('adminmode', 'false')
+  window.localStorage.setItem('lomake_adminmode', 'false')
   return { type: 'DISABLE_ADMINMODE' }
 }
 
@@ -34,7 +34,7 @@ export default (state = { data: undefined }, action) => {
         ...state,
         data: {
           ...action.response,
-          adminMode: window.localStorage.getItem('adminmode') === 'true'
+          adminMode: window.localStorage.getItem('lomake_adminmode') === 'true'
         },
         pending: false,
         error: false

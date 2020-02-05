@@ -2,14 +2,14 @@ import { basePath } from 'Utilities/common'
 import io from 'socket.io-client'
 
 const connect = () => {
-  return io(window.origin, { path: `${basePath}/socket.io` })
+  return io(window.origin, { path: `${basePath}socket.io` })
 }
 
 const socketMiddleware = () => {
   let socket = null
 
   const updateForm = (store) => (event) => {
-    store.dispatch(({ type: 'GET_FORM_SUCCESS', response: event }))
+    store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
   }
 
   // the middleware part of this function
@@ -25,7 +25,7 @@ const socketMiddleware = () => {
         break
       case 'WS_LEAVE_ROOM':
         if (!socket) socket = connect() // This really only happens when developing.
-        
+
         socket.emit('leave', action.room)
         break
       case 'WS_JOIN_ROOM':
