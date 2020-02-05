@@ -45,7 +45,7 @@ export default ({ user }) => {
           <Button
             data-cy="remove-access-confirm"
             color="red"
-            content="Remove access role"
+            content="Remove access"
             onClick={() => removeAccess()}
           />
         }
@@ -66,7 +66,7 @@ export default ({ user }) => {
           <Button
             data-cy="grant-access-confirm"
             color="green"
-            content="Grant access role"
+            content="Grant access"
             onClick={() => grantAccess()}
           />
         }
@@ -91,7 +91,7 @@ export default ({ user }) => {
           <Button
             data-cy="remove-irrelevant-confirm"
             color="red"
-            content="Remove access role"
+            content="Mark as relevant"
             onClick={() => removeIrrelevant()}
           />
         }

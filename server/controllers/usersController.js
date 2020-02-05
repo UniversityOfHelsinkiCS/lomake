@@ -38,7 +38,7 @@ const editUser = async (req, res) => {
   try {
     const user = req.body
 
-    const [rows, [updatedUser]] = await db.users.update(user, {
+    const [rows, [updatedUser]] = await db.user.update(user, {
       returning: true,
       where: { id: req.params.id }
     })
