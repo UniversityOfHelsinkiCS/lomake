@@ -11,16 +11,17 @@ import { basePath } from 'Utilities/common'
 import App from 'Components/App'
 import ErrorBoundary from 'Components/ErrorBoundary'
 
-const refresh = () => render(
-  <Provider store={store}>
-    <BrowserRouter basename={basePath}>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root'),
-)
+const refresh = () =>
+  render(
+    <Provider store={store}>
+      <BrowserRouter basename={basePath}>
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+  )
 
 setHeaders('admin')
 

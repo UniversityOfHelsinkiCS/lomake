@@ -57,6 +57,7 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
+    "semantic-ui-react": "^0.88.2",
     "sequelize": "^5.21.3",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",

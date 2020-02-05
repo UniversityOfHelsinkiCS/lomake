@@ -2,6 +2,7 @@ const logger = require('@util/logger')
 const db = require('@models/index')
 
 const userMiddleware = async (req, res, next) => {
+  if (req.path.includes('socket.io')) next()
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {

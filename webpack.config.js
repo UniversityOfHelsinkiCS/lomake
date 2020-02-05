@@ -98,11 +98,13 @@ module.exports = (env, argv) => {
       }),
       // Skip the part where we would make a html template
       new HtmlWebpackPlugin({
-        title: 'The Lomake',
+        title: 'Lomake',
         favicon: path.resolve(__dirname, 'client/assets/favicon-32x32.png'),
         inject: false,
         template: htmlTemplate,
-        appMountId: 'root'
+        appMountId: 'root',
+        headHtmlSnippet:
+          '<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />'
       }),
       // Extract css
       new MiniCssExtractPlugin({

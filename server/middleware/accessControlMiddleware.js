@@ -2,7 +2,7 @@ const { inProduction } = require('@util/common')
 const logger = require('@util/logger')
 
 const checkAccess = (req, res, next) => {
-  if (req.user.access || req.user.isAdmin) {
+  if (req.user.access || req.user.admin) {
     next()
   } else {
     res
