@@ -5,17 +5,7 @@ const Section = ({ title, number, children }) => {
 	const [collapsed, setCollapsed] = useState(true)
 	return (
 		<>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					cursor: 'pointer',
-					userSelect: 'none',
-					margin: '1em 0',
-				}}
-				onClick={() => setCollapsed(!collapsed)}
-			>
+			<div className="section-flex" onClick={() => setCollapsed(!collapsed)}>
 				<h2 style={{ margin: '0' }}>
 					<span style={{ color: '#007290' }}>{number}</span> - {title}
 				</h2>
