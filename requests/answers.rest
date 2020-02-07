@@ -1,0 +1,19 @@
+
+GET http://localhost:8000/api/answers
+uid: admin
+
+###
+
+POST http://localhost:8000/api/answers
+uid: admin
+content-type: application/json
+
+{
+  "room": "CS-KANDI",
+  "data": {
+    "kysymys1": "vastaus1",
+    "kysymys2": "vastaus2"
+  }
+}
+
+###

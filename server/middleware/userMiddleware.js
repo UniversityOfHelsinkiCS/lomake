@@ -3,6 +3,7 @@ const db = require('@models/index')
 
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) next()
+  if (!req.headers.uid) return res.status(400).json({ error: 'missing uid' })
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {
@@ -18,11 +19,11 @@ const userMiddleware = async (req, res, next) => {
     })
     if (created) logger.info(`New user: ${user.name}, ${user.email}`)
     req.user = user
+
+    next()
   } catch (error) {
     logger.error('Database error:', error)
   }
-
-  next()
 }
 
 module.exports = userMiddleware
