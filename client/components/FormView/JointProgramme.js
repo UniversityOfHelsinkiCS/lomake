@@ -19,7 +19,7 @@ const JointProgramme = () => {
 				How successfully have the partners cooperated? What are the major merits and challenges of
 				cross-faculty operations?
 			</p>
-			<Streetlights id="cooperation_success" label="General assessment" />
+			<Streetlights id="cooperation_success" label="General assessment" required={false} />
 			<TextArea id="cooperation_success" label="Main points of discussion" />
 		</Section>
 	)

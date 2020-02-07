@@ -23,7 +23,7 @@ const OverallStatus = () => {
 				well do student admissions (procedure for granting the right to complete a degree) and the
 				allocation of salaried doctoral student positions function?
 			</p>
-			<Streetlights id="student_admissions" label="General assessment" />
+			<Streetlights id="student_admissions" label="General assessment" required />
 			<TextArea id="student_admissions" label="Main points of discussion" required />
 			<h3>2. LANGUAGE ENVIRONMENT</h3>
 			<p>
@@ -35,7 +35,7 @@ const OverallStatus = () => {
 				Do international students have the opportunity to study the national languages of Finland
 				(Finnish and Swedish)?
 			</p>
-			<Streetlights id="language_environment" label="General assessment" />
+			<Streetlights id="language_environment" label="General assessment" required />
 			<TextArea id="language_environment" label="Main points of discussion" required />
 			<h3>
 				3. PROFILE AND DISTINCTIVE FEATURES OF THE DEGREE PROGRAMME WITHIN THE UNIVERSITY, IN
@@ -47,7 +47,7 @@ const OverallStatus = () => {
 				programme profile stand out from other degree programmes in the same field and of the same
 				level?
 			</p>
-			<Streetlights id="programme_identity" label="General assessment" />
+			<Streetlights id="programme_identity" label="General assessment" required />
 			<TextArea id="programme_identity" label="Main points of discussion" required />
 			<h3>4. EMPLOYABILITY</h3>
 			<p>
@@ -58,14 +58,14 @@ const OverallStatus = () => {
 				the programme take the special employment needs and challenges of international students
 				into account?
 			</p>
-			<Streetlights id="employability" label="General assessment" />
+			<Streetlights id="employability" label="General assessment" required />
 			<TextArea id="employability" label="Main points of discussion" required />
 			<h3>5. LEARNING OUTCOMES</h3>
 			<p>
 				Are the learning outcomes set for the degree programme clear and realistic? How should the
 				learning outcomes be developed?
 			</p>
-			<Streetlights id="learning_outcomes" label="General assessment" />
+			<Streetlights id="learning_outcomes" label="General assessment" required />
 			<TextArea id="learning_outcomes" label="Main points of discussion" required />
 			<h3>6. FUNCTIONALITY AND DEVELOPMENT OF THE CURRICULUM</h3>
 			<p>
@@ -75,7 +75,7 @@ const OverallStatus = () => {
 				languages (Finnish, Swedish and English)? How does Swedish-language education function,
 				particularly if the programme offers applicants a Swedish-language option?
 			</p>
-			<Streetlights id="curriculum" label="General assessment" />
+			<Streetlights id="curriculum" label="General assessment" required />
 			<TextArea id="curriculum" label="Main points of discussion" required />
 			<h3>7. STUDENT GUIDANCE AND SUPERVISION</h3>
 			<p>
@@ -84,7 +84,7 @@ const OverallStatus = () => {
 				guidance and supervision be developed? How does the supervision of theses and dissertations
 				function?
 			</p>
-			<Streetlights id="guidance" label="General assessment" />
+			<Streetlights id="guidance" label="General assessment" required />
 			<TextArea id="guidance" label="Main points of discussion" required />
 			<h3>8. USE OF STUDENT FEEDBACK</h3>
 			<p>
@@ -92,7 +92,7 @@ const OverallStatus = () => {
 				processed in the degree programme? Who has participated in processing the feedback? What
 				changes have been made based on the feedback?
 			</p>
-			<Streetlights id="student_feedback" label="General assessment" />
+			<Streetlights id="student_feedback" label="General assessment" required />
 			<TextArea id="student_feedback" label="Main points of discussion" required />
 		</Section>
 	)

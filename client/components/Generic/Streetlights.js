@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Streetlights.scss'
 
-const Streetlights = ({ label, id }) => {
+const Streetlights = ({ label, id, required }) => {
 	const dispatch = useDispatch()
 	const fieldName = `${id}_light`
 	const choose = (name, id) => dispatch(updateFormField(name, id))
@@ -13,7 +13,7 @@ const Streetlights = ({ label, id }) => {
 		<div className="form-streetlights">
 			<label>
 				{label}
-				<span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>
+				{required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
 			</label>
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div className="traffic-light">
