@@ -1,32 +1,46 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
+import './Streetlights.scss'
 
 const Streetlights = ({ label, id }) => {
-  const dispatch = useDispatch()
-  const fieldName = `${id}_light`
-  const choose = ({ target }) => dispatch(updateFormField(target.name, target.id))
-  const value = useSelector(({ form }) => form.data[fieldName])
+	const dispatch = useDispatch()
+	const fieldName = `${id}_light`
+	const choose = (name, id) => dispatch(updateFormField(name, id))
+	const value = useSelector(({ form }) => form.data[fieldName])
 
-  return (
-    <div className="form-streetlights">
-      <label>{label}</label>
-      <div>
-        <div>
-          <input id="green" name={fieldName} type="radio" checked={value === "green"} onChange={choose} />
-          <label>GREEN</label>
-        </div>
-        <div>
-          <input id="yellow" name={fieldName} type="radio" checked={value === "yellow"} onChange={choose} />
-          <label>YELLOW</label>
-        </div>
-        <div>
-          <input id="red" name={fieldName} type="radio" checked={value === "red"} onChange={choose} />
-          <label>RED</label>
-        </div>
-      </div>
-    </div>
-  )
+	return (
+		<div className="form-streetlights">
+			<label>{label}</label>
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<div className="traffic-light">
+					<div
+						id="red"
+						title="Red: Significant measures required/development areas not yet specified"
+						name={fieldName}
+						className={value === 'red' ? 'circle red-active' : 'circle red'}
+						onClick={() => choose(fieldName, 'red')}
+					/>
+					<div
+						id="yellow"
+						title="Yellow: Challenges identified and development underway"
+						name={fieldName}
+						className="circle yellow"
+						className={value === 'yellow' ? 'circle yellow-active' : 'circle yellow'}
+						onClick={() => choose(fieldName, 'yellow')}
+					/>
+					<div
+						id="green"
+						title="Green: No issues"
+						name={fieldName}
+						className="circle green"
+						className={value === 'green' ? 'circle green-active' : 'circle green'}
+						onClick={() => choose(fieldName, 'green')}
+					/>
+				</div>
+			</div>
+		</div>
+	)
 }
 
 export default Streetlights
