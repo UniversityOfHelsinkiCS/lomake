@@ -11,7 +11,10 @@ const Streetlights = ({ label, id }) => {
 
 	return (
 		<div className="form-streetlights">
-			<label>{label}</label>
+			<label>
+				{label}
+				<span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>
+			</label>
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				<div className="traffic-light">
 					<div

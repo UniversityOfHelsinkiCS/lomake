@@ -23,8 +23,8 @@ const OverallStatus = () => {
 				well do student admissions (procedure for granting the right to complete a degree) and the
 				allocation of salaried doctoral student positions function?
 			</p>
-			<Streetlights id="student_admissions" label="General assessment *" />
-			<TextArea id="student_admissions" label="Main points of discussion *" />
+			<Streetlights id="student_admissions" label="General assessment" />
+			<TextArea id="student_admissions" label="Main points of discussion" required />
 			<h3>2. LANGUAGE ENVIRONMENT</h3>
 			<p>
 				How successfully have teaching, guidance, supervision and student services been provided in
@@ -35,8 +35,8 @@ const OverallStatus = () => {
 				Do international students have the opportunity to study the national languages of Finland
 				(Finnish and Swedish)?
 			</p>
-			<Streetlights id="language_environment" label="General assessment *" />
-			<TextArea id="language_environment" label="Main points of discussion *" />
+			<Streetlights id="language_environment" label="General assessment" />
+			<TextArea id="language_environment" label="Main points of discussion" required />
 			<h3>
 				3. PROFILE AND DISTINCTIVE FEATURES OF THE DEGREE PROGRAMME WITHIN THE UNIVERSITY, IN
 				FINLAND AND ABROAD
@@ -47,8 +47,8 @@ const OverallStatus = () => {
 				programme profile stand out from other degree programmes in the same field and of the same
 				level?
 			</p>
-			<Streetlights id="programme_identity" label="General assessment *" />
-			<TextArea id="programme_identity" label="Main points of discussion *" />
+			<Streetlights id="programme_identity" label="General assessment" />
+			<TextArea id="programme_identity" label="Main points of discussion" required />
 			<h3>4. EMPLOYABILITY</h3>
 			<p>
 				How are the results of national career tracking used in the programme? In what other ways
@@ -58,15 +58,15 @@ const OverallStatus = () => {
 				the programme take the special employment needs and challenges of international students
 				into account?
 			</p>
-			<Streetlights id="employability" label="General assessment *" />
-			<TextArea id="employability" label="Main points of discussion *" />
+			<Streetlights id="employability" label="General assessment" />
+			<TextArea id="employability" label="Main points of discussion" required />
 			<h3>5. LEARNING OUTCOMES</h3>
 			<p>
 				Are the learning outcomes set for the degree programme clear and realistic? How should the
 				learning outcomes be developed?
 			</p>
-			<Streetlights id="learning_outcomes" label="General assessment *" />
-			<TextArea id="learning_outcomes" label="Main points of discussion *" />
+			<Streetlights id="learning_outcomes" label="General assessment" />
+			<TextArea id="learning_outcomes" label="Main points of discussion" required />
 			<h3>6. FUNCTIONALITY AND DEVELOPMENT OF THE CURRICULUM</h3>
 			<p>
 				How do the curriculum and the teaching programme ensure that all students can and do
@@ -75,8 +75,8 @@ const OverallStatus = () => {
 				languages (Finnish, Swedish and English)? How does Swedish-language education function,
 				particularly if the programme offers applicants a Swedish-language option?
 			</p>
-			<Streetlights id="curriculum" label="General assessment *" />
-			<TextArea id="curriculum" label="Main points of discussion *" />
+			<Streetlights id="curriculum" label="General assessment" />
+			<TextArea id="curriculum" label="Main points of discussion" required />
 			<h3>7. STUDENT GUIDANCE AND SUPERVISION</h3>
 			<p>
 				How does the programme offer guidance and supervision associated with personal study plans
@@ -84,16 +84,16 @@ const OverallStatus = () => {
 				guidance and supervision be developed? How does the supervision of theses and dissertations
 				function?
 			</p>
-			<Streetlights id="guidance" label="General assessment *" />
-			<TextArea id="guidance" label="Main points of discussion *" />
+			<Streetlights id="guidance" label="General assessment" />
+			<TextArea id="guidance" label="Main points of discussion" required />
 			<h3>8. USE OF STUDENT FEEDBACK</h3>
 			<p>
 				What types of feedback does the programme use and how? How has the feedback collected been
 				processed in the degree programme? Who has participated in processing the feedback? What
 				changes have been made based on the feedback?
 			</p>
-			<Streetlights id="student_feedback" label="General assessment *" />
-			<TextArea id="student_feedback" label="Main points of discussion *" />
+			<Streetlights id="student_feedback" label="General assessment" />
+			<TextArea id="student_feedback" label="Main points of discussion" required />
 		</Section>
 	)
 }
