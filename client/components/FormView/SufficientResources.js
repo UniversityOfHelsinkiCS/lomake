@@ -21,22 +21,22 @@ const SufficientResources = () => {
 				on the contributions of teachers? Have changes been made to the teaching resources to such a
 				degree that they have affected the programme operations? What areas should be developed?
 			</p>
-			<Streetlights id="teaching_resources" label="General assessment" required />
-			<TextArea id="teaching_resources" label="Main points of discussion" required />
+			<Streetlights id="teaching_resources" label="General assessment" />
+			<TextArea id="teaching_resources" label="Main points of discussion" />
 			<h3>13. OPPORTUNITIES TO INFLUENCE THE RECRUITMENT OF NEW STAFF</h3>
 			<p>
 				How has the degree programme been able to influence the recruitment of new staff? What areas
 				should be developed?
 			</p>
-			<Streetlights id="recruitment_influence" label="General assessment" required />
-			<TextArea id="recruitment_influence" label="Main points of discussion" required />
+			<Streetlights id="recruitment_influence" label="General assessment" />
+			<TextArea id="recruitment_influence" label="Main points of discussion" />
 			<h3>14. RESOURCES RELATED TO FACILITIES, EQUIPMENT AND LEARNING ENVIRONMENTS</h3>
 			<p>
 				How would you describe the degree programme resources relating to facilities, equipment and
 				learning environments?
 			</p>
-			<Streetlights id="resourcing" label="General assessment" required />
-			<TextArea id="resourcing" label="Main points of discussion" required />
+			<Streetlights id="resourcing" label="General assessment" />
+			<TextArea id="resourcing" label="Main points of discussion" />
 		</Section>
 	)
 }

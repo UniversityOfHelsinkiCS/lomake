@@ -15,7 +15,7 @@ const SuccessesAndNeeds = () => {
 				of the faculty’s implementation plan together with the resources required for each measure.
 			</p>
 			<h3>16. IN WHAT AREAS HAS THE DEGREE PROGRAMME SUCCEEDED PARTICULARLY WELL?</h3>
-			<TextArea id="successes_and_development_needs" label="Greatest successes" required />
+			<TextArea id="successes_and_development_needs" label="Greatest successes" />
 		</Section>
 	)
 }

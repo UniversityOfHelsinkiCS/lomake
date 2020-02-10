@@ -1,6 +1,9 @@
 import React from 'react'
+import { requiredFormIds } from 'Utilities/common'
 
-const Dropdown = ({ id, onChange, label, options, required }) => {
+const Dropdown = ({ id, onChange, label, options }) => {
+	const required = requiredFormIds.indexOf(id) !== -1
+
 	const handleChange = () => {
 		console.warn('123 Not yet implemented')
 	}

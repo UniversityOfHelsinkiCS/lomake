@@ -1,13 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { requiredFormIds } from 'Utilities/common'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Streetlights.scss'
 
-const Streetlights = ({ label, id, required }) => {
+const Streetlights = ({ label, id }) => {
 	const dispatch = useDispatch()
 	const fieldName = `${id}_light`
 	const choose = (name, id) => dispatch(updateFormField(name, id))
 	const value = useSelector(({ form }) => form.data[fieldName])
+	const required = requiredFormIds.indexOf(id) !== -1
 
 	return (
 		<div className="form-streetlights">

@@ -16,16 +16,16 @@ const Wellbeing = () => {
 				How is the wellbeing of teachers and students monitored? Has the workload of teachers and
 				students been assessed? What measures have been taken?
 			</p>
-			<Streetlights id="community_wellbeing" label="General assessment" required />
-			<TextArea id="community_wellbeing" label="Main points of discussion" required />
+			<Streetlights id="community_wellbeing" label="General assessment" />
+			<TextArea id="community_wellbeing" label="Main points of discussion" />
 			<h3>10. TEACHER SKILLS AND THEIR DEVELOPMENT</h3>
 			<p>
 				Are the skills and strengths of the degree programme teachers known and used? Are the
 				teachers encouraged to enhance their teaching skills? Do the teachers need support for
 				multilingual and multicultural education or digital skills?
 			</p>
-			<Streetlights id="teacher_skills" label="General assessment" required />
-			<TextArea id="teacher_skills" label="Main points of discussion" required />
+			<Streetlights id="teacher_skills" label="General assessment" />
+			<TextArea id="teacher_skills" label="Main points of discussion" />
 			<h3>11. MANAGEMENT AND COMMUNICATION</h3>
 			<p>
 				Has the steering group worked successfully? What challenges have been identified in the
@@ -33,8 +33,8 @@ const Wellbeing = () => {
 				distribution/communication/interaction function between the programme teachers, students and
 				leadership (director and steering group)? What development measures have been taken?
 			</p>
-			<Streetlights id="management" label="General assessment" required />
-			<TextArea id="management" label="Main points of discussion" required />
+			<Streetlights id="management" label="General assessment" />
+			<TextArea id="management" label="Main points of discussion" />
 		</Section>
 	)
 }
