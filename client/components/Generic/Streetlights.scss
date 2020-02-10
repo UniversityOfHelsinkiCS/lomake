@@ -1,52 +1,56 @@
 .traffic-light {
-	display: flex;
-	justify-content: space-between;
-	background-color: #a8a3a3;
-	width: 175px;
-	height: 60px;
-	border-radius: 100px;
-	padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #a8a3a3;
+  width: 175px;
+  height: 60px;
+  border-radius: 100px;
+  padding: 10px;
 }
 
 .circle {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .red {
-	background: #bd0903;
+  background: #bd0903;
 }
 
 .yellow {
-	background: #a26d02;
+  background: #a26d02;
 }
 
 .red:hover {
-	background: #f00;
+  background: #f00;
 }
 
 .yellow:hover {
-	background: #fdbe40;
+  background: #fdbe40;
 }
 
 .green:hover {
-	background: #34cb4a;
+  background: #34cb4a;
 }
 
 .green {
-	background: #15511e;
+  background: #15511e;
 }
 
 .red-active {
-	background: #f00;
+  background: #f00;
 }
 
 .yellow-active {
-	background: #fdbe40;
+  background: #fdbe40;
 }
 
 .green-active {
-	background: #34cb4a;
+  background: #34cb4a;
+}
+
+.grey {
+  background: #808080;
 }
