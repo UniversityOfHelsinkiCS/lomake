@@ -12,6 +12,7 @@ router.get('/form', forms.getOne)
 router.put('/form', forms.createOrUpdate)
 
 router.get('/answers', checkAdmin, answers.getAll)
+router.get('/answers/temp', checkAdmin, answers.getAllTemp)
 router.post('/answers', answers.create)
 
 router.post('/login', users.getCurrentUser)
