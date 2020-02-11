@@ -27,6 +27,12 @@ const Section = ({ title, number, children }) => {
 		return <Icon name="close" style={{ color: 'red' }} />
 	}
 
+	const textValuesOverLimit = () => {
+		return ids
+			.filter(id => id.indexOf('text') !== -1)
+			.some(id => values[id] && values[id].length > 500)
+	}
+
 	return (
 		<>
 			<div
@@ -46,15 +52,25 @@ const Section = ({ title, number, children }) => {
 			{!collapsed && (
 				<>
 					{children}
-					<Button
-						style={{ width: '150px' }}
-						onClick={() => {
-							setHasBeenClosed(true)
-							setCollapsed(true)
-						}}
-					>
-						Next
-					</Button>
+					{textValuesOverLimit() ? (
+						<>
+							<Button style={{ width: '150px' }} disabled={textValuesOverLimit()}>
+								Next
+							</Button>{' '}
+							<span style={{ color: 'red' }}>One or more answers that are too long</span>
+						</>
+					) : (
+						<Button
+							style={{ width: '150px' }}
+							disabled={textValuesOverLimit()}
+							onClick={() => {
+								setHasBeenClosed(true)
+								setCollapsed(true)
+							}}
+						>
+							Next
+						</Button>
+					)}
 				</>
 			)}
 		</>

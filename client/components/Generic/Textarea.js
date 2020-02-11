@@ -17,6 +17,7 @@ const Textarea = ({ label, id }) => {
 				{required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
 			</label>
 			<textarea id={fieldName} value={value} onChange={handleChange} />
+			<span style={{ color: value.length > 500 ? 'red' : undefined }}>{value.length}/500</span>
 		</div>
 	)
 }
