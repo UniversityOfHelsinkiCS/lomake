@@ -57,6 +57,21 @@ export default () => {
     )
   }
 
+  const AnalyticsButton = () => {
+    return (
+      <Menu.Item
+        data-cy="nav-analytics"
+        as={Link}
+        to={'/analytics'}
+        name="analytics"
+        active={activeItem === 'analytics'}
+        onClick={handleItemClick}
+      >
+        Analytics
+      </Menu.Item>
+    )
+  }
+
   if (!user) return null
   return (
     <Menu stackable size="huge" fluid>
@@ -80,6 +95,7 @@ export default () => {
         Current Lomake
       </Menu.Item>
 
+      {user.adminMode ? <AnalyticsButton /> : null}
       {user.adminMode ? <UsersButton /> : null}
       {user.admin ? getAdminButton() : null}
       <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>

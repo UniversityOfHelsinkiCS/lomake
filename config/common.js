@@ -193,11 +193,30 @@ const requiredFormIds = [
 	'list_of_measures_text'
 ]
 
+const allLightIds = [
+	'student_admissions_light',
+	'language_environment_light',
+	'programme_identity_light',
+	'employability_light',
+	'learning_outcomes_light',
+	'curriculum_light',
+	'guidance_light',
+	'student_feedback_light',
+	'community_wellbeing_light',
+	'teacher_skills_light',
+	'management_light',
+	'teaching_resources_light',
+	'recruitment_influence_light',
+	'resourcing_light',
+	'cooperation_success_light'
+]
+
 module.exports = {
 	inProduction,
 	basePath,
 	faculties,
 	programmes,
 	degreeLevels,
-	requiredFormIds
+	requiredFormIds,
+	allLightIds
 }
