@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Grid, Icon, Popup } from 'semantic-ui-react'
 import { editUserAction } from 'Utilities/redux/usersReducer'
+import './UsersPage.scss'
 
 export default ({ user }) => {
   const dispatch = useDispatch()
@@ -37,7 +38,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-has-access`}
             name="check"
-            color="green"
+            color="users-green"
             size="large"
           />
         }
@@ -58,7 +59,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-no-access`}
             name="close"
-            color="red"
+            color="users-red"
             size="large"
           />
         }
@@ -83,7 +84,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-is-irrelevant`}
             name="check"
-            color="green"
+            color="users-green"
             size="large"
           />
         }
@@ -104,7 +105,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-not-irrelevant`}
             name="close"
-            color="red"
+            color="users-red"
             size="large"
           />
         }
@@ -129,7 +130,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-is-admin`}
             name="check"
-            color="green"
+            color="users-green"
             size="large"
           />
         }
@@ -150,7 +151,7 @@ export default ({ user }) => {
           <Icon
             data-cy={`${user.name}-not-admin`}
             name="close"
-            color="red"
+            color="users-red"
             size="large"
           />
         }
