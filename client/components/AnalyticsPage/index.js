@@ -49,7 +49,7 @@ export default () => {
       <table className="ui fixed celled striped table">
         <thead>
           <tr>
-            <th>Programmes</th>
+            <th colspan="2">Programmes</th>
             {allLightIds.map((id) => (
               <th key={id}>{id.substring(0, id.length - 6)}</th>
             ))}
@@ -61,7 +61,7 @@ export default () => {
             if (!programme)
               return (
                 <tr key={p}>
-                  <th>{p}</th>
+                  <th colspan="2">{p}</th>
                   {allLightIds.map((q) => (
                     <td key={`${p}-${q}`} className="center aligned">
                       <div className="circle dot grey" />
@@ -71,7 +71,7 @@ export default () => {
               )
             return (
               <tr key={p}>
-                <th>{p}</th>
+                <th colspan="2">{p}</th>
                 {allLightIds.map((q) => {
                   return programme.data[q] ? (
                     <td key={`${p}-${q}`}>
