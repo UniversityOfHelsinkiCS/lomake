@@ -35,6 +35,20 @@ export default () => {
     return false
   })
 
+  const transformIdToTitle = (id) => {
+    const formatted = id.substring(0, id.length - 6).replace('_', ' ')
+
+    return (
+      <span
+        style={{
+          writingMode: 'vertical-lr'
+        }}
+      >
+        {formatted.charAt(0).toUpperCase() + formatted.slice(1)}
+      </span>
+    )
+  }
+
   if (answers.pending || !answers.data) return <>SPINNING!</>
 
   return (
@@ -46,12 +60,15 @@ export default () => {
         options={['All levels'].concat(degreeLevels)}
         onChange={handleChange}
       />
-      <table className="ui fixed celled striped table">
+      {/* Can't use Semantic's "fixed" because it makes the tooltips go under */}
+      <table style={{ tableLayout: 'fixed' }} className="ui celled striped table">
         <thead>
           <tr>
-            <th colspan="2">Programmes</th>
+            <th colSpan="2">Programmes</th>
             {allLightIds.map((id) => (
-              <th key={id}>{id.substring(0, id.length - 6)}</th>
+              <th key={id} style={{ wordWrap: 'break-word', textAlign: 'center' }}>
+                {transformIdToTitle(id)}
+              </th>
             ))}
           </tr>
         </thead>
@@ -61,7 +78,7 @@ export default () => {
             if (!programme)
               return (
                 <tr key={p}>
-                  <th colspan="2">{p}</th>
+                  <th colSpan="2">{p}</th>
                   {allLightIds.map((q) => (
                     <td key={`${p}-${q}`} className="center aligned">
                       <div className="circle dot grey" />
@@ -71,12 +88,17 @@ export default () => {
               )
             return (
               <tr key={p}>
-                <th colspan="2">{p}</th>
+                <th colSpan="2">{p}</th>
                 {allLightIds.map((q) => {
                   return programme.data[q] ? (
                     <td key={`${p}-${q}`}>
                       <div
                         className={`circle dot ${programme.data[q]}-active`}
+                        data-tooltip={
+                          programme.data[q.replace('light', 'text')]
+                            ? programme.data[q.replace('light', 'text')]
+                            : undefined
+                        }
                       />
                     </td>
                   ) : (
