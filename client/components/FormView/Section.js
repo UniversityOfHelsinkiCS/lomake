@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Icon, Button } from 'semantic-ui-react'
 
 import { requiredFormIds } from 'Utilities/common'
 import { useSelector } from 'react-redux'
@@ -21,10 +20,10 @@ const Section = ({ title, number, children }) => {
 
 		// checking that every id of a field is either not required or there is some input
 		if (ids.every(id => requiredFormIds.indexOf(id) === -1 || values[id])) {
-			return <Icon name="check" style={{ color: 'green' }} />
+			return <i className="icon check" style={{ color: 'green' }} />
 		}
 
-		return <Icon name="close" style={{ color: 'red' }} />
+		return <i className="icon close" style={{ color: 'red' }} />
 	}
 
 	const textValuesOverLimit = () => {
@@ -45,7 +44,7 @@ const Section = ({ title, number, children }) => {
 					<span style={{ color: '#007290' }}>{number}</span> - {title}
 				</h2>
 				<div>
-					<Icon name={collapsed ? 'plus' : 'minus'} style={{ color: '#007290' }} />
+					<i className={collapsed ? 'icon plus' : 'icon minus'} style={{ color: '#007290' }} />
 					{getProgressIcon()}
 				</div>
 			</div>
@@ -54,13 +53,18 @@ const Section = ({ title, number, children }) => {
 					{children}
 					{textValuesOverLimit() ? (
 						<>
-							<Button style={{ width: '150px' }} disabled={textValuesOverLimit()}>
+							<button
+								className="ui button"
+								style={{ width: '150px' }}
+								disabled={textValuesOverLimit()}
+							>
 								Next
-							</Button>{' '}
+							</button>{' '}
 							<span style={{ color: 'red' }}>One or more answers that are too long</span>
 						</>
 					) : (
-						<Button
+						<button
+							className="ui button"
 							style={{ width: '150px' }}
 							disabled={textValuesOverLimit()}
 							onClick={() => {
@@ -69,7 +73,7 @@ const Section = ({ title, number, children }) => {
 							}}
 						>
 							Next
-						</Button>
+						</button>
 					)}
 				</>
 			)}
