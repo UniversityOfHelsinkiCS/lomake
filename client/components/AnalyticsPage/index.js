@@ -3,6 +3,7 @@ import Dropdown from 'Components/Generic/Dropdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAnswersAction } from 'Utilities/redux/answersReducer'
 import { degreeLevels, allLightIds, programmes } from 'Utilities/common'
+import './AnalyticsPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
@@ -50,7 +51,7 @@ export default () => {
           <tr>
             <th>Programmes</th>
             {allLightIds.map((id) => (
-              <th>{id.substring(0, id.length - 6)}</th>
+              <th key={id}>{id.substring(0, id.length - 6)}</th>
             ))}
           </tr>
         </thead>
@@ -59,26 +60,28 @@ export default () => {
             const programme = answers.data.find((a) => a.programme === p)
             if (!programme)
               return (
-                <tr>
+                <tr key={p}>
                   <th>{p}</th>
                   {allLightIds.map((q) => (
                     <td key={`${p}-${q}`} className="center aligned">
-                      <div className="circle grey" />
+                      <div className="circle dot grey" />
                     </td>
                   ))}
                 </tr>
               )
             return (
-              <tr>
+              <tr key={p}>
                 <th>{p}</th>
                 {allLightIds.map((q) => {
                   return programme.data[q] ? (
                     <td key={`${p}-${q}`}>
-                      <div className={`circle ${programme.data[q]}-active`} />
+                      <div
+                        className={`circle dot ${programme.data[q]}-active`}
+                      />
                     </td>
                   ) : (
                     <td key={`${p}-${q}`}>
-                      <div className="circle grey" />
+                      <div className="circle dot grey" />
                     </td>
                   )
                 })}

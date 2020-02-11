@@ -17,26 +17,23 @@
 
 .red {
   background: #bd0903;
+  &:hover {
+    background: #f00;
+  }
 }
 
 .yellow {
   background: #a26d02;
-}
-
-.red:hover {
-  background: #f00;
-}
-
-.yellow:hover {
-  background: #fdbe40;
-}
-
-.green:hover {
-  background: #34cb4a;
+  &:hover {
+    background: #fdbe40;
+  }
 }
 
 .green {
   background: #15511e;
+  &:hover {
+    background: #34cb4a;
+  }
 }
 
 .red-active {
@@ -52,5 +49,5 @@
 }
 
 .grey {
-  background: #808080;
+  background: #cfcfcf;
 }
