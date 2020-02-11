@@ -1,17 +1,62 @@
 import React, { useState } from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Button } from 'semantic-ui-react'
+
+import { requiredFormIds } from 'Utilities/common'
+import { useSelector } from 'react-redux'
 
 const Section = ({ title, number, children }) => {
 	const [collapsed, setCollapsed] = useState(true)
+	const [hasBeenClosed, setHasBeenClosed] = useState(false)
+
+	const ids = children
+		.map(children => children.props.id)
+		.filter(id => id !== undefined)
+		.reduce((acc, cur) => {
+			return [...acc, `${cur}_light`, `${cur}_text`]
+		}, [])
+	const values = useSelector(({ form }) => form.data)
+
+	const getProgressIcon = () => {
+		if (!hasBeenClosed) return null
+
+		// checking that every id of a field is either not required or there is some input
+		if (ids.every(id => requiredFormIds.indexOf(id) === -1 || values[id])) {
+			return <Icon name="check" style={{ color: 'green' }} />
+		}
+
+		return <Icon name="close" style={{ color: 'red' }} />
+	}
+
 	return (
 		<>
-			<div className="section-flex" onClick={() => setCollapsed(!collapsed)}>
-				<h2 style={{ margin: '0' }}>
+			<div
+				className="section-flex"
+				onClick={() => {
+					setCollapsed(!collapsed)
+				}}
+			>
+				<h2 style={{ margin: '0', maxWidth: '650px' }}>
 					<span style={{ color: '#007290' }}>{number}</span> - {title}
 				</h2>
-				<Icon name={collapsed ? 'plus' : 'minus'} style={{ color: '#007290' }} />
+				<div>
+					<Icon name={collapsed ? 'plus' : 'minus'} style={{ color: '#007290' }} />
+					{getProgressIcon()}
+				</div>
 			</div>
-			{!collapsed && <>{children}</>}
+			{!collapsed && (
+				<>
+					{children}
+					<Button
+						style={{ width: '150px' }}
+						onClick={() => {
+							setHasBeenClosed(true)
+							setCollapsed(true)
+						}}
+					>
+						Next
+					</Button>
+				</>
+			)}
 		</>
 	)
 }

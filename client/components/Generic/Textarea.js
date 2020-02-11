@@ -8,7 +8,7 @@ const Textarea = ({ label, id }) => {
 	const fieldName = `${id}_text`
 	const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value))
 	const value = useSelector(({ form }) => form.data[fieldName] || '')
-	const required = requiredFormIds.indexOf(id) !== -1
+	const required = requiredFormIds.indexOf(fieldName) !== -1
 
 	return (
 		<div className="form-textarea">

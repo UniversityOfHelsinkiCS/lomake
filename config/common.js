@@ -9,7 +9,7 @@ const basePath = process.env.BASE_PATH || '/'
 const degreeLevels = [
 	'Bachelor´s level (1. cycle)',
 	'Master´s level (2. cycle)',
-	'Doctoral level (3. cycle)',
+	'Doctoral level (3. cycle)'
 ]
 
 const programmes = [
@@ -139,7 +139,7 @@ const programmes = [
 	'Doctoral Programme in Computer Science',
 	'Doctoral Programme in Sustainable Use of Renewable Natural Resources',
 	'Doctoral Programme in Population Health',
-	'Doctoral Programme in Interdisciplinary Environmental Sciences',
+	'Doctoral Programme in Interdisciplinary Environmental Sciences'
 ].sort((a, b) => a.localeCompare(b))
 
 const faculties = [
@@ -154,29 +154,43 @@ const faculties = [
 	'Faculty of Social Sciences',
 	'Faculty of Theology',
 	'Faculty of Veterinary Medicine',
-	'Swedish School of Social Science',
+	'Swedish School of Social Science'
 ].sort((a, b) => a.localeCompare(b))
 
 const requiredFormIds = [
 	'faculty',
 	'degree_level',
 	'programme',
-	'student_admissions',
-	'language_environment',
-	'programme_identity',
-	'employability',
-	'learning_outcomes',
-	'curriculum',
-	'guidance',
-	'student_feedback',
-	'community_wellbeing',
-	'teacher_skills',
-	'management',
-	'teaching_resources',
-	'recruitment_influence',
-	'resourcing',
-	'successes_and_development_needs',
-	'list_of_measures',
+	'student_admissions_light',
+	'student_admissions_text',
+	'language_environment_light',
+	'language_environment_text',
+	'programme_identity_light',
+	'programme_identity_text',
+	'employability_light',
+	'employability_text',
+	'learning_outcomes_light',
+	'learning_outcomes_text',
+	'curriculum_light',
+	'curriculum_text',
+	'guidance_light',
+	'guidance_text',
+	'student_feedback_light',
+	'student_feedback_text',
+	'community_wellbeing_light',
+	'community_wellbeing_text',
+	'teacher_skills_light',
+	'teacher_skills_text',
+	'management_light',
+	'management_text',
+	'teaching_resources_light',
+	'teaching_resources_text',
+	'recruitment_influence_light',
+	'recruitment_influence_text',
+	'resourcing_light',
+	'resourcing_text',
+	'successes_and_development_needs_text',
+	'list_of_measures_text'
 ]
 
 module.exports = {
@@ -185,5 +199,5 @@ module.exports = {
 	faculties,
 	programmes,
 	degreeLevels,
-	requiredFormIds,
+	requiredFormIds
 }
