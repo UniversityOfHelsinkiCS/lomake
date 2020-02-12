@@ -9,11 +9,11 @@ export default () => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.answers)
 
-  const [chosenDegreeLevel, setDegree] = useState('')
+  const [filter, setFilter] = useState('')
 
-  const handleChange = async ({ target }) => {
+  const handleChange = ({ target }) => {
     const { value } = target
-    setDegree(value)
+    setFilter(value)
   }
 
   useEffect(() => {
@@ -25,14 +25,7 @@ export default () => {
    */
 
   const filteredProgrammes = programmes.filter((prog) => {
-    if (!chosenDegreeLevel || chosenDegreeLevel === 'All levels') return true
-
-    const starting = prog.substr(0, 4)
-    const shortDegrees = degreeLevels.map((dl) => dl.substr(0, 4))
-    if (!shortDegrees.includes(starting)) return true
-
-    if (chosenDegreeLevel.includes(starting)) return true
-    return false
+    return prog.toLowerCase().includes(filter.toLowerCase())
   })
 
   const transformIdToTitle = (id) => {
@@ -53,20 +46,21 @@ export default () => {
 
   return (
     <>
-      <Dropdown
-        id="degree_level"
-        value={chosenDegreeLevel}
-        label="Degree level"
-        options={['All levels'].concat(degreeLevels)}
-        onChange={handleChange}
-      />
+      <label for="filter">Filter programmes:</label>
+      <input name="filter" type="text" onChange={handleChange} value={filter} />
       {/* Can't use Semantic's "fixed" because it makes the tooltips go under */}
-      <table style={{ tableLayout: 'fixed' }} className="ui celled striped table">
+      <table
+        style={{ tableLayout: 'fixed' }}
+        className="ui celled striped table"
+      >
         <thead>
           <tr>
             <th colSpan="2">Programmes</th>
             {allLightIds.map((id) => (
-              <th key={id} style={{ wordWrap: 'break-word', textAlign: 'center' }}>
+              <th
+                key={id}
+                style={{ wordWrap: 'break-word', textAlign: 'center' }}
+              >
                 {transformIdToTitle(id)}
               </th>
             ))}
