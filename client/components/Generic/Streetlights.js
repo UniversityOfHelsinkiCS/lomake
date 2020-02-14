@@ -14,42 +14,6 @@ const Streetlights = ({ label, id }) => {
   const value = useSelector(({ form }) => form.data[fieldName])
   const required = requiredFormIds.indexOf(fieldName) !== -1
 
-  /*return (
-		<div className="form-streetlights">
-			<label>
-				{label}
-				{required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
-			</label>
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
-				<div className="traffic-light">
-					<div
-						id="red"
-						title="Red: Significant measures required/development areas not yet specified"
-						name={fieldName}
-						className={value === 'red' ? 'circle red-active' : 'circle red'}
-						onClick={() => choose(fieldName, 'red')}
-					/>
-					<div
-						id="yellow"
-						title="Yellow: Challenges identified and development underway"
-						name={fieldName}
-						className="circle yellow"
-						className={value === 'yellow' ? 'circle yellow-active' : 'circle yellow'}
-						onClick={() => choose(fieldName, 'yellow')}
-					/>
-					<div
-						id="green"
-						title="Green: No issues"
-						name={fieldName}
-						className="circle green"
-						className={value === 'green' ? 'circle green-active' : 'circle green'}
-						onClick={() => choose(fieldName, 'green')}
-					/>
-				</div>
-			</div>
-		</div>
-	)*/
-
   return (
     <div className="form-streetlights">
       <label>
