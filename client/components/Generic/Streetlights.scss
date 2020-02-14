@@ -51,3 +51,29 @@
 .grey {
   background: #cfcfcf;
 }
+
+.emoji {
+  width: 50px;
+  height: auto;
+  margin: 0 5px;
+  filter: grayscale(100%);
+  &:hover {
+    filter: grayscale(0%);
+  }
+}
+
+.emoji-button {
+  cursor: pointer;
+}
+
+.active-emoji {
+  border-bottom: 5px solid #007290;
+}
+
+.invisible-border {
+  margin-bottom: 5px;
+}
+
+.colored {
+  filter: grayscale(0%);
+}

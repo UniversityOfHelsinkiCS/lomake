@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Dropdown from 'Components/Generic/Dropdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAnswersAction } from 'Utilities/redux/answersReducer'
 import { degreeLevels, allLightIds, programmes } from 'Utilities/common'
 import './AnalyticsPage.scss'
+import positiveEmoji from 'Assets/sunglasses.png'
+import neutralEmoji from 'Assets/neutral.png'
+import negativeEmoji from 'Assets/persevering.png'
 
 export default () => {
   const dispatch = useDispatch()
@@ -42,6 +44,12 @@ export default () => {
     )
   }
 
+  const lightEmojiMap = {
+    green: positiveEmoji,
+    yellow: neutralEmoji,
+    red: negativeEmoji
+  }
+
   if (answers.pending || !answers.data) return <>SPINNING!</>
 
   return (
@@ -49,18 +57,12 @@ export default () => {
       <label for="filter">Filter programmes:</label>
       <input name="filter" type="text" onChange={handleChange} value={filter} />
       {/* Can't use Semantic's "fixed" because it makes the tooltips go under */}
-      <table
-        style={{ tableLayout: 'fixed' }}
-        className="ui celled striped table"
-      >
+      <table style={{ tableLayout: 'fixed' }} className="ui celled striped table">
         <thead>
           <tr>
             <th colSpan="2">Programmes</th>
             {allLightIds.map((id) => (
-              <th
-                key={id}
-                style={{ wordWrap: 'break-word', textAlign: 'center' }}
-              >
+              <th key={id} style={{ wordWrap: 'break-word', textAlign: 'center' }}>
                 {transformIdToTitle(id)}
               </th>
             ))}
@@ -74,9 +76,7 @@ export default () => {
                 <tr key={p}>
                   <th colSpan="2">{p}</th>
                   {allLightIds.map((q) => (
-                    <td key={`${p}-${q}`} className="center aligned">
-                      <div className="circle dot grey" />
-                    </td>
+                    <td key={`${p}-${q}`} className="center aligned"></td>
                   ))}
                 </tr>
               )
@@ -85,20 +85,27 @@ export default () => {
                 <th colSpan="2">{p}</th>
                 {allLightIds.map((q) => {
                   return programme.data[q] ? (
-                    <td key={`${p}-${q}`}>
+                    <td
+                      key={`${p}-${q}`}
+                      style={{
+                        background: programme.data[q]
+                      }}
+                    >
                       <div
-                        className={`circle dot ${programme.data[q]}-active`}
                         data-tooltip={
                           programme.data[q.replace('light', 'text')]
                             ? programme.data[q.replace('light', 'text')]
                             : undefined
                         }
-                      />
+                      >
+                        <img
+                          src={lightEmojiMap[programme.data[q]]}
+                          style={{ width: '100%', height: 'auto' }}
+                        />
+                      </div>
                     </td>
                   ) : (
-                    <td key={`${p}-${q}`}>
-                      <div className="circle dot grey" />
-                    </td>
+                    <td key={`${p}-${q}`}></td>
                   )
                 })}
               </tr>
