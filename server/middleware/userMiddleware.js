@@ -1,5 +1,6 @@
 const logger = require('@util/logger')
 const db = require('@models/index')
+const { inProduction } = require('@util/common')
 
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) next()
@@ -12,7 +13,7 @@ const userMiddleware = async (req, res, next) => {
       defaults: {
         name: `${req.headers.givenname} ${req.headers.sn}`,
         email: req.headers.mail,
-        admin: false,
+        admin: !inProduction && req.headers.uid === 'admin' ? true : false, // Give admin bit by default in dev mode
         access: false,
         irrelevant: false
       }
