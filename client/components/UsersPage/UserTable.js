@@ -29,7 +29,7 @@ export default () => {
             <Header as="h4">Admin</Header>
           </Grid.Column>
           <Grid.Column width={1}>
-            <Header as="h4">Irrelevant</Header>
+            <Header as="h4">Hide</Header>
           </Grid.Column>
           <Grid.Column width={2} />
         </Grid.Row>
