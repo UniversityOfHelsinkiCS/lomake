@@ -156,6 +156,7 @@ export default () => {
                     >
                       <div
                         className="emoji-cell"
+                        style={{ display: 'flex', justifyContent: 'center' }}
                         data-tooltip={
                           programme.data[q.replace('light', 'text')]
                             ? programme.data[q.replace('light', 'text')]
@@ -164,7 +165,7 @@ export default () => {
                       >
                         <img
                           src={lightEmojiMap[programme.data[q]]}
-                          style={{ width: '100%', height: 'auto' }}
+                          style={{ width: '75%', maxWidth: '50px', height: 'auto' }}
                         />
                       </div>
                     </td>
