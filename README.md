@@ -1,7 +1,3 @@
-# Toskaboiler
-
-Toskaboiler is a boilerplate for anyone wanting to get a kickstart on mono-repo react - fullstack project. It contains all the parts that are common in toska projects.
-
 ## Short tutorial
 
 The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts.
@@ -10,7 +6,7 @@ The project is split into 2 parts: client and server while index.js in root work
 
 ApiConnection is a custom redux middleware that is used in most toska software. It is used to simplify redux usage by wrapping axios.
 
-You can see redux example using apiConnection in client/components/MessageComponent. 
+You can see redux example using apiConnection in client/components/MessageComponent.
 
 ## How users can get started with Toskaboiler
 
@@ -30,13 +26,37 @@ To create statistics on how big your project is.
 
 Please note that npm test doesn't do anything, this is intentional: testing framework is all up to you. I recommend looking into jest, ava and/or superbara.
 
-## Issues with Toskaboiler
+## questions.json
 
-Send an issue if you find mistakes, problems or something to improve in Toskaboiler.
-Feel free to create a pull request.
+The current questions of the form can be found in questions.json. It's format is an array of `Section` objects:
 
-## Maintainers and Contribution
+**Section**
 
-Toska of course.
+| Property   | Type                      | Required                 | Description                      |
+| ---------- | ------------------------- | ------------------------ | -------------------------------- |
+| title      | Localized                 | Yes                      | Title of the section             |
+| link_title | Localized                 | No                       | Title of the link of the section |
+| link_url   | string                    | Yes if link_title exists | URL of the link of the section   |
+| pages      | Array of Question objects | Yes                      | Contains actual form fields      |
 
-University of Helsinki.
+**Question**
+
+| Property    | Type      | Required | Description                                                               |
+| ----------- | --------- | -------- | ------------------------------------------------------------------------- |
+| id          | string    | Yes      |
+| type        | enum      | Yes      | TEXTAREA, ENTITY or MEASURES                                              |
+| label       | Localized | Yes      | Label of the form field                                                   |
+| required    | boolean   | Yes      | Is the form field required to be filled to submit the form                |
+| description | Localized | No       | (ENTITY only) More detailed explanation                                   |
+| no_light    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a light (emoji) form field |
+
+**Localized**
+
+| Property | Type   | Required | Description  |
+| -------- | ------ | -------- | ------------ |
+| fi       | string | Yes      | Finnish text |
+| se       | string | Yes      | Swedish text |
+| en       | string | Yes      | English text |
+
+![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/blob/master/entity_example.png)
+_Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
