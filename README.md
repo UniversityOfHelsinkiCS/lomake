@@ -58,5 +58,5 @@ The current questions of the form can be found in questions.json. It's format is
 | se       | string | Yes      | Swedish text |
 | en       | string | Yes      | English text |
 
-![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/blob/master/entity_example.png)
+![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
 _Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
