@@ -22,7 +22,7 @@ export default () => {
           <Grid.Column width={3}>
             <Header as="h4">Email</Header>
           </Grid.Column>
-          <Grid.Column width={1}>
+          <Grid.Column width={4}>
             <Header as="h4">Access</Header>
           </Grid.Column>
           <Grid.Column width={1}>

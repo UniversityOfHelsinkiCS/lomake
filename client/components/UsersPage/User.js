@@ -15,66 +15,12 @@ export default ({ user }) => {
     dispatch(editUserAction({ ...user, admin: false }))
   }
 
-  const grantAccess = () => {
-    dispatch(editUserAction({ ...user, access: true }))
-  }
-
-  const removeAccess = () => {
-    dispatch(editUserAction({ ...user, access: false }))
-  }
-
   const markIrrelevant = () => {
     dispatch(editUserAction({ ...user, irrelevant: true }))
   }
 
   const removeIrrelevant = () => {
     dispatch(editUserAction({ ...user, irrelevant: false }))
-  }
-
-  const AccessBadge = () => {
-    return user.access ? (
-      <Popup
-        trigger={
-          <Icon
-            data-cy={`${user.name}-has-access`}
-            name="check"
-            color="users-green"
-            size="large"
-          />
-        }
-        content={
-          <Button
-            data-cy="remove-access-confirm"
-            color="red"
-            content="Remove access"
-            onClick={() => removeAccess()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
-    ) : (
-      <Popup
-        trigger={
-          <Icon
-            data-cy={`${user.name}-no-access`}
-            name="close"
-            color="users-red"
-            size="large"
-          />
-        }
-        content={
-          <Button
-            data-cy="grant-access-confirm"
-            color="green"
-            content="Grant access"
-            onClick={() => grantAccess()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
-    )
   }
 
   const IrrelevantBadge = () => {
@@ -168,13 +114,32 @@ export default ({ user }) => {
       />
     )
   }
+
+  const formatRights = (programme) => {
+    return Object.keys(programme)
+      .filter((e) => programme[e])
+      .join(', ')
+  }
+
+  const FormattedAccess = () => {
+    if (!user.access || Object.keys(user.access).length === 0) return <>None</>
+    return (
+      <>
+        {Object.keys(user.access).map((programme) => (
+          <div key={`${user.uid}-${programme}`}>{`${programme}: ${formatRights(
+            user.access[programme]
+          )}`}</div>
+        ))}
+      </>
+    )
+  }
   return (
     <Grid.Row>
       <Grid.Column width={2}>{user.name}</Grid.Column>
       <Grid.Column>{user.uid}</Grid.Column>
       <Grid.Column width={3}>{user.email}</Grid.Column>
-      <Grid.Column textAlign="center">
-        <AccessBadge />
+      <Grid.Column width={4}>
+        <FormattedAccess />
       </Grid.Column>
       <Grid.Column textAlign="center">
         <AdminBadge />

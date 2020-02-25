@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
-      access: DataTypes.BOOLEAN,
+      access: DataTypes.JSONB,
       irrelevant: DataTypes.BOOLEAN
     },
     {

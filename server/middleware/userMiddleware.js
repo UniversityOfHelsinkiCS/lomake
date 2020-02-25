@@ -14,7 +14,7 @@ const userMiddleware = async (req, res, next) => {
         name: `${req.headers.givenname} ${req.headers.sn}`,
         email: req.headers.mail,
         admin: !inProduction && req.headers.uid === 'admin' ? true : false, // Give admin bit by default in dev mode
-        access: false,
+        access: {},
         irrelevant: false
       }
     })
