@@ -6,6 +6,7 @@ import lyyti_image from 'Assets/lyyti.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
+import questions from '../../questions'
 
 const FormView = () => {
   const room = useSelector(({ room }) => room)
@@ -40,7 +41,7 @@ const FormView = () => {
         </p>
       </div>
       <ProgrammeSelect />
-      {room && <Form />}
+      {room && <Form questions={questions} />}
     </div>
   )
 }

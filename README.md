@@ -28,7 +28,7 @@ Please note that npm test doesn't do anything, this is intentional: testing fram
 
 ## questions.json
 
-The current questions of the form can be found in questions.json. It's format is an array of `Section` objects:
+The current questions of the form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). Its format is an array of `Section` objects:
 
 **Section**
 
@@ -37,7 +37,7 @@ The current questions of the form can be found in questions.json. It's format is
 | title      | Localized                 | Yes                      | Title of the section             |
 | link_title | Localized                 | No                       | Title of the link of the section |
 | link_url   | string                    | Yes if link_title exists | URL of the link of the section   |
-| pages      | Array of Question objects | Yes                      | Contains actual form fields      |
+| parts      | Array of Question objects | Yes                      | Contains actual form fields      |
 
 **Question**
 

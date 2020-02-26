@@ -7,12 +7,11 @@ import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 
-const Streetlights = ({ label, id }) => {
+const Streetlights = ({ label, id, required }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id))
   const value = useSelector(({ form }) => form.data[fieldName])
-  const required = requiredFormIds.indexOf(fieldName) !== -1
 
   return (
     <div className="form-streetlights">
