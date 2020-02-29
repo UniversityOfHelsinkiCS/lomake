@@ -1,6 +1,7 @@
 import React from 'react'
 import Streetlights from './Streetlights'
 import Textarea from './Textarea'
+import { useSelector } from 'react-redux'
 
 const streetLightsLabel = {
   fi: 'Yleisarvio',
@@ -14,15 +15,18 @@ const textAreaLabel = {
   se: 'Diskussionens huvudpunkter'
 }
 
-const Entity = ({ id, label, description, required, noLight, langCode, number }) => {
+const Entity = ({ id, label, description, required, noLight, number }) => {
+  const languageCode = useSelector((state) => state.language)
   return (
     <>
       <h3>
         {number}. {label}
       </h3>
       <p>{description}</p>
-      {!noLight && <Streetlights id={id} label={streetLightsLabel[langCode]} required={required} />}
-      <Textarea id={id} label={textAreaLabel[langCode]} required={required} />
+      {!noLight && (
+        <Streetlights id={id} label={streetLightsLabel[languageCode]} required={required} />
+      )}
+      <Textarea id={id} label={textAreaLabel[languageCode]} required={required} />
     </>
   )
 }

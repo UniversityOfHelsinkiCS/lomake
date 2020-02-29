@@ -4,6 +4,7 @@ import Section from './Section'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
+import { useSelector } from 'react-redux'
 
 //https://stackoverflow.com/a/9083076
 function romanize(num) {
@@ -48,7 +49,7 @@ function romanize(num) {
 }
 
 const Form = ({ questions }) => {
-  const langCode = 'en'
+  const languageCode = useSelector((state) => state.language)
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -67,18 +68,17 @@ const Form = ({ questions }) => {
     if (part.type === 'ENTITY') number++
 
     const Component = partComponentMap[part.type]
-    const description = part.description ? part.description[langCode] : undefined
+    const description = part.description ? part.description[languageCode] : undefined
 
     return (
       <Component
         key={part.id}
         id={part.id}
-        label={part.label[langCode]}
+        label={part.label[languageCode]}
         description={description}
         required={part.required}
         noLight={part.no_light}
         number={number}
-        langCode={langCode}
       />
     )
   }
@@ -88,12 +88,12 @@ const Form = ({ questions }) => {
       {questions.map((section, index) => {
         return (
           <Section
-            title={section.title[langCode]}
+            title={section.title[languageCode]}
             number={romanize(index + 1)}
-            key={section.title[langCode]}
+            key={section.title[languageCode]}
           >
             {section.link_title && section.link_url && (
-              <a href={section.link_url}>{section.link_title[langCode]}</a>
+              <a href={section.link_url}>{section.link_title[languageCode]}</a>
             )}
             {section.parts.map(partMap)}
           </Section>

@@ -8,11 +8,12 @@ const measureLabel = {
   se: 'ÄTGÄRDER (1-5)'
 }
 
-const Measures = ({ label, id, required, number, langCode }) => {
+const Measures = ({ label, id, required, number }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value))
   const value = useSelector(({ form }) => form.data[fieldName] || '')
+  const languageCode = useSelector((state) => state.language)
 
   return (
     <>
@@ -21,7 +22,7 @@ const Measures = ({ label, id, required, number, langCode }) => {
       </h3>
       <div className="form-textarea">
         <label>
-          {number}. {measureLabel[langCode]}
+          {number}. {measureLabel[languageCode]}
           {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
         </label>
         <textarea id={fieldName} value={value} onChange={handleChange} />

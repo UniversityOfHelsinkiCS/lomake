@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Menu, Header } from 'semantic-ui-react'
+import { Menu, Header, Dropdown } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   logoutAction,
   activateAdminModeAction,
   disableAdminModeAction
 } from 'Utilities/redux/currentUserReducer'
+import { setLanguage } from 'Utilities/redux/languageReducer'
 import { images } from 'Utilities/common'
 import { Link } from 'react-router-dom'
 
@@ -14,13 +15,13 @@ export default () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
 
+  const setLanguageCode = (code) => dispatch(setLanguage(code))
+
   const handleLogout = () => {
     dispatch(logoutAction())
   }
   const handleAdminModeToggle = () => {
-    user.adminMode
-      ? dispatch(disableAdminModeAction())
-      : dispatch(activateAdminModeAction())
+    user.adminMode ? dispatch(disableAdminModeAction()) : dispatch(activateAdminModeAction())
   }
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
@@ -76,13 +77,23 @@ export default () => {
   return (
     <Menu stackable size="huge" fluid>
       <Menu.Item style={{ fontSize: 'xx-large', padding: '0.5em' }}>
-        <img
-          src={images.toska_color}
-          style={{ marginRight: '1em' }}
-          alt="tosca"
-        />{' '}
-        Lomake
+        <img src={images.toska_color} style={{ marginRight: '1em' }} alt="tosca" /> Lomake
       </Menu.Item>
+      <Menu.Menu>
+        <Dropdown item icon="globe" simple>
+          <Dropdown.Menu>
+            <Dropdown.Item value="fi" onClick={() => setLanguageCode('fi')}>
+              Suomi
+            </Dropdown.Item>
+            <Dropdown.Item value="se" onClick={() => setLanguageCode('se')}>
+              Svenska
+            </Dropdown.Item>
+            <Dropdown.Item value="en" onClick={() => setLanguageCode('en')}>
+              English
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Menu.Menu>
 
       <Menu.Item
         position="right"

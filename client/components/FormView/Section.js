@@ -7,7 +7,6 @@ const Section = ({ title, number, children }) => {
   const [collapsed, setCollapsed] = useState(true)
   const [hasBeenClosed, setHasBeenClosed] = useState(false)
 
-  console.log('children', children)
   const ids = []
     .concat(...children)
     .filter((child) => !!child)
@@ -16,7 +15,6 @@ const Section = ({ title, number, children }) => {
     .reduce((acc, cur) => {
       return [...acc, `${cur}_light`, `${cur}_text`]
     }, [])
-  console.log('ids', ids)
   const values = useSelector(({ form }) => form.data)
 
   const getProgressIcon = () => {
