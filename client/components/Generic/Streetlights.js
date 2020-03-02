@@ -23,21 +23,23 @@ const Streetlights = ({ label, id, required }) => {
         <div title="No issues">
           <img
             src={positiveEmoji}
-            className={value === 'green' ? 'emoji emoji-button active' : 'emoji emoji-button'}
+            className={value === 'green' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'green')}
           />
         </div>
         <div title="Challenges identified and development underway">
           <img
             src={neutralEmoji}
-            className={value === 'yellow' ? 'emoji emoji-button active' : 'emoji emoji-button'}
+            className={
+              value === 'yellow' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'
+            }
             onClick={() => choose(fieldName, 'yellow')}
           />
         </div>
         <div title="Significant measures required/development areas not yet specified">
           <img
             src={negativeEmoji}
-            className={value === 'red' ? 'emoji emoji-button active' : 'emoji emoji-button'}
+            className={value === 'red' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'red')}
           />
         </div>

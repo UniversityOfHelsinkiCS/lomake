@@ -379,7 +379,7 @@
     },
     "parts": [
       {
-        "id": "list_of_measures",
+        "id": "measures",
         "type": "MEASURES",
         "label": {
           "fi": "TOIMENPITEET JA NIIDEN VAATIMAT RESURSSIT TIEDEKUNNAN TOIMENPIDESUUNNITELMAA JA HENKILÖSTÖSUUNNITELMAA VARTEN",

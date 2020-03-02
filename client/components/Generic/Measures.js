@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
+import Textarea from './Textarea'
+import { Button } from 'semantic-ui-react'
 
 const measureLabel = {
   fi: 'TOIMENPIDELISTA (1-5 toimenpidettä)',
@@ -10,23 +12,76 @@ const measureLabel = {
 
 const Measures = ({ label, id, required, number }) => {
   const dispatch = useDispatch()
-  const fieldName = `${id}_text`
-  const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value))
-  const value = useSelector(({ form }) => form.data[fieldName] || '')
+  const clearMeasure = (number) => dispatch(updateFormField(`${id}${number}_text`, ''))
+  const formData = useSelector((state) => state.form.data)
   const languageCode = useSelector((state) => state.language)
+  console.log
+
+  const getInitialAmount = () => {
+    let measureNumber = 1
+    while (measureNumber <= 5) {
+      if (formData[`${id}_${measureNumber}_text`]) {
+        measureNumber++
+      } else {
+        break
+      }
+    }
+
+    if (measureNumber === 1) return 1
+
+    return measureNumber - 1
+  }
+
+  const [amountOfMeasures, setAmountOfMeasures] = useState(getInitialAmount())
 
   return (
     <>
       <h3>
         {number}. {label}
       </h3>
-      <div className="form-textarea">
-        <label>
-          {number}. {measureLabel[languageCode]}
-          {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
-        </label>
-        <textarea id={fieldName} value={value} onChange={handleChange} />
-        <span style={{ color: value.length > 1000 ? 'red' : undefined }}>{value.length}/1000</span>
+      <label>
+        {number}. {measureLabel[languageCode]}
+        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+      </label>
+      {/*<textarea id={fieldName} value={value} onChange={handleChange} />*/}
+      {['', '', '', '', ''].reduce((acc, cur, index) => {
+        if (index + 1 > amountOfMeasures) return acc
+        acc.push(
+          <div style={{ paddingTop: '0' }} key={index}>
+            {/*<label>{index + 1})</label>
+              <textarea
+                value={measures[index]}
+                onChange={(e) => {
+                  const copiedArray = [...measures]
+                  copiedArray[index] = e.target.value
+                  setMeasures(copiedArray)
+                }}
+              />*/}
+            <Textarea label={`${index + 1})`} id={`${id}_${index + 1}`} />
+          </div>
+        )
+        return acc
+      }, [])}
+      <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+        <Button
+          className="ui button"
+          disabled={amountOfMeasures === 5 || !formData[`${id}_${amountOfMeasures}_text`]}
+          onClick={() => setAmountOfMeasures(amountOfMeasures + 1)}
+        >
+          Add measure
+        </Button>
+        <span style={{ marginLeft: '5px' }}>
+          <Button
+            className="ui button"
+            disabled={amountOfMeasures === 1}
+            onClick={() => {
+              setAmountOfMeasures(amountOfMeasures - 1)
+              clearMeasure(amountOfMeasures)
+            }}
+          >
+            Remove measure
+          </Button>
+        </span>
       </div>
     </>
   )

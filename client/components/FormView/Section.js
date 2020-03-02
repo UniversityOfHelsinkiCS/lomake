@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { requiredFormIds } from 'Utilities/common'
 import { useSelector } from 'react-redux'
+import { Button } from 'semantic-ui-react'
 
 const Section = ({ title, number, children }) => {
   const [collapsed, setCollapsed] = useState(true)
@@ -13,10 +14,12 @@ const Section = ({ title, number, children }) => {
     .map((child) => child.props.id)
     .filter((id) => id !== undefined)
     .reduce((acc, cur) => {
+      if (cur === 'measures') {
+        return [...acc, `${cur}_1_text`]
+      }
       return [...acc, `${cur}_light`, `${cur}_text`]
     }, [])
   const values = useSelector(({ form }) => form.data)
-
   const getProgressIcon = () => {
     if (!hasBeenClosed) return null
 
@@ -53,30 +56,28 @@ const Section = ({ title, number, children }) => {
       {!collapsed && (
         <>
           {children}
-          {textValuesOverLimit() ? (
-            <>
-              <button
-                className="ui button"
+          <div style={{ marginTop: '2em' }}>
+            {textValuesOverLimit() ? (
+              <>
+                <Button primary style={{ width: '150px' }} disabled={textValuesOverLimit()}>
+                  Next
+                </Button>{' '}
+                <span style={{ color: 'red' }}>One or more answers that are too long</span>
+              </>
+            ) : (
+              <Button
+                primary
                 style={{ width: '150px' }}
                 disabled={textValuesOverLimit()}
+                onClick={() => {
+                  setHasBeenClosed(true)
+                  setCollapsed(true)
+                }}
               >
                 Next
-              </button>{' '}
-              <span style={{ color: 'red' }}>One or more answers that are too long</span>
-            </>
-          ) : (
-            <button
-              className="ui button"
-              style={{ width: '150px' }}
-              disabled={textValuesOverLimit()}
-              onClick={() => {
-                setHasBeenClosed(true)
-                setCollapsed(true)
-              }}
-            >
-              Next
-            </button>
-          )}
+              </Button>
+            )}
+          </div>
         </>
       )}
     </>

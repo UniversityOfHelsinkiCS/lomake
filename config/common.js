@@ -190,7 +190,7 @@ const requiredFormIds = [
 	'resourcing_light',
 	'resourcing_text',
 	'successes_and_development_needs_text',
-	'list_of_measures_text'
+	'measures_1_text'
 ]
 
 const allLightIds = [
