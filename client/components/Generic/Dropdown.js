@@ -1,24 +1,26 @@
 import React from 'react'
 import { requiredFormIds } from 'Utilities/common'
+import { Dropdown as SemanticDropdown } from 'semantic-ui-react'
 
-const Dropdown = ({ id, onChange, label, options }) => {
+const Dropdown = ({ id, value, onChange, label, options, search }) => {
 	const required = requiredFormIds.indexOf(id) !== -1
-
-	const handleChange = () => {
-		console.warn('123 Not yet implemented')
-	}
+	console.log('value', value)
 	return (
 		<div className="form-dropdown">
 			<label>
 				{label}
 				{required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
 			</label>
-			<select id={id} onChange={onChange || handleChange} defaultValue="Select:">
-				<option disabled> Select: </option>
-				{options.map(o => (
-					<option key={o}>{o}</option>
-				))}
-			</select>
+			<SemanticDropdown
+				id={id}
+				value={value}
+				placeholder="Select"
+				onChange={onChange}
+				fluid
+				search={search}
+				selection
+				options={options.map((option) => ({ key: option, value: option, text: option }))}
+			/>
 		</div>
 	)
 }
