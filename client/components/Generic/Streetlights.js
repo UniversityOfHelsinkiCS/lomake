@@ -19,31 +19,25 @@ const Streetlights = ({ label, id, required }) => {
         {label}
         {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </label>
-      <div style={{ display: 'flex' }}>
-        <div className={value === 'green' ? 'active-emoji' : 'invisible-border'} title="No issues">
+      <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+        <div title="No issues">
           <img
             src={positiveEmoji}
-            className={value === 'green' ? 'emoji emoji-button colored' : 'emoji emoji-button'}
+            className={value === 'green' ? 'emoji emoji-button active' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'green')}
           />
         </div>
-        <div
-          className={value === 'yellow' ? 'active-emoji' : 'invisible-border'}
-          title="Challenges identified and development underway"
-        >
+        <div title="Challenges identified and development underway">
           <img
             src={neutralEmoji}
-            className={value === 'yellow' ? 'emoji emoji-button colored' : 'emoji emoji-button'}
+            className={value === 'yellow' ? 'emoji emoji-button active' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'yellow')}
           />
         </div>
-        <div
-          className={value === 'red' ? 'active-emoji' : 'invisible-border'}
-          title="Significant measures required/development areas not yet specified"
-        >
+        <div title="Significant measures required/development areas not yet specified">
           <img
             src={negativeEmoji}
-            className={value === 'red' ? 'emoji emoji-button colored' : 'emoji emoji-button'}
+            className={value === 'red' ? 'emoji emoji-button active' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'red')}
           />
         </div>

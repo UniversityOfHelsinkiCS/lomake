@@ -1,64 +1,12 @@
-.traffic-light {
-  display: flex;
-  justify-content: space-between;
-  background-color: #a8a3a3;
-  width: 175px;
-  height: 60px;
-  border-radius: 100px;
-  padding: 10px;
-}
-
-.circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.red {
-  background: #bd0903;
-  &:hover {
-    background: #f00;
-  }
-}
-
-.yellow {
-  background: #a26d02;
-  &:hover {
-    background: #fdbe40;
-  }
-}
-
-.green {
-  background: #15511e;
-  &:hover {
-    background: #34cb4a;
-  }
-}
-
-.red-active {
-  background: #f00;
-}
-
-.yellow-active {
-  background: #fdbe40;
-}
-
-.green-active {
-  background: #34cb4a;
-}
-
-.grey {
-  background: #cfcfcf;
-}
-
 .emoji {
-  width: 50px;
+  width: 40px;
   height: auto;
-  margin: 0 5px;
+  margin: 0 7px;
   filter: grayscale(100%);
+  transition-duration: 300ms;
   &:hover {
     filter: grayscale(0%);
+    width: 50px;
   }
 }
 
@@ -66,14 +14,7 @@
   cursor: pointer;
 }
 
-.active-emoji {
-  border-bottom: 5px solid #007290;
-}
-
-.invisible-border {
-  margin-bottom: 5px;
-}
-
-.colored {
+.active {
   filter: grayscale(0%);
+  width: 50px;
 }
