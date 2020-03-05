@@ -2,6 +2,7 @@ const Router = require('express')
 const forms = require('@controllers/formsController')
 const users = require('@controllers/usersController')
 const answers = require('@controllers/answersController')
+const tokens = require('@controllers/tokensController')
 const { checkAdmin } = require('@middleware/accessControlMiddleware')
 
 const router = Router()
@@ -20,5 +21,7 @@ router.post('/logout', users.getLogoutUrl)
 
 router.get('/users', checkAdmin, users.getAllUsers)
 router.put('/users/:id', checkAdmin, users.editUser)
+
+router.post('/access/:url', tokens.claimToken)
 
 module.exports = router

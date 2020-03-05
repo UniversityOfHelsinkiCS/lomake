@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       url: DataTypes.STRING,
       programme: DataTypes.STRING,
       type: DataTypes.ENUM('ADMIN', 'WRITE', 'READ'),
+      valid: DataTypes.BOOLEAN,
       usageCounter: {
         type: DataTypes.INTEGER,
         field: 'usage_counter'
