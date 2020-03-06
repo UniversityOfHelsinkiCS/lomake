@@ -72,7 +72,7 @@
         },
         "description": {
           "fi": "Onko koulutusohjelmalla selkeä profiili ja identiteetti, jonka sekä ohjelmassa opettavat ja ohjaavat että opiskelijat/tohtorikoulutettavat tunnistavat? Miten ohjelman profiili erottuu muista saman koulutusalan ja koulutustason koulutusohjelmista?",
-          "se": "",
+          "se": "Har utbildningen en tydlig profil och identitet som erkänns av lärarna, handledare samt doktorander? Hur skiljer sig programprofilen från andra utbildningsprogram inom samma område och nivå?",
           "en": "Does the degree programme have a clear profile and identity recognised by its teachers, those providing guidance and supervision as well as (doctoral) students? How does the programme profile stand out from other degree programmes in the same field and of the same level?"
         },
         "required": true
