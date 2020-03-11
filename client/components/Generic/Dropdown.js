@@ -4,7 +4,6 @@ import { Dropdown as SemanticDropdown } from 'semantic-ui-react'
 
 const Dropdown = ({ id, value, onChange, label, options, search }) => {
 	const required = requiredFormIds.indexOf(id) !== -1
-	console.log('value', value)
 	return (
 		<div className="form-dropdown">
 			<label>

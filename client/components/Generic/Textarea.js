@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
-import ReactMde, { commands } from 'react-mde'
-import ReactMarkdown from 'react-markdown'
-import 'react-mde/lib/styles/css/react-mde-all.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
-
-const listCommands = [
-	{
-		commands: [
-			commands.boldCommand,
-			commands.italicCommand,
-			commands.headerCommand,
-			commands.linkCommand,
-			commands.quoteCommand,
-			commands.orderedListCommand,
-			commands.unorderedListCommand
-		]
-	}
-]
+import { Editor } from 'react-draft-wysiwyg'
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
+import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import './Textarea.scss'
 
 const Textarea = ({ label, id, required }) => {
 	const dispatch = useDispatch()
 	const fieldName = `${id}_text`
-	const handleChange = (text) => dispatch(updateFormField(fieldName, text))
-	const value = useSelector(({ form }) => form.data[fieldName] || '')
-	const [selectedTab, setSelectedTab] = useState('write')
+	const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
+
+	const handleChange = (value) => {
+		setEditorState(value)
+		const content = value.getCurrentContent()
+		const rawObject = convertToRaw(content)
+		const markdownStr = draftToMarkdown(rawObject)
+		dispatch(updateFormField(fieldName, markdownStr))
+	}
+
+	const editorStateFromRedux = () => {
+		const rawData = markdownToDraft(dataFromRedux)
+		const contentState = convertFromRaw(rawData)
+		return EditorState.createWithContent(contentState)
+	}
+	const [editorState, setEditorState] = useState(editorStateFromRedux())
+
+	const length = dataFromRedux.length
 
 	return (
 		<div style={{ margin: '1em 0' }}>
@@ -32,19 +35,21 @@ const Textarea = ({ label, id, required }) => {
 				{label}
 				{required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
 			</label>
-			<div style={{ marginTop: '1em' }} className="container">
-				<ReactMde
-					value={value}
-					onChange={handleChange}
-					selectedTab={selectedTab}
-					onTabChange={setSelectedTab}
-					commands={listCommands}
-					generateMarkdownPreview={(markdown) =>
-						Promise.resolve(<ReactMarkdown source={markdown} />)
+			<Editor
+				editorState={editorState}
+				onEditorStateChange={handleChange}
+				editorClassName="editor-class"
+				toolbar={{
+					options: ['inline', 'list', 'link', 'embedded', 'history'],
+					inline: {
+						options: ['bold', 'italic', 'underline']
+					},
+					list: {
+						options: ['unordered', 'ordered']
 					}
-				/>
-			</div>
-			<span style={{ color: value.length > 1000 ? 'red' : undefined }}>{value.length}/1000</span>
+				}}
+			/>
+			<span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
 		</div>
 	)
 }

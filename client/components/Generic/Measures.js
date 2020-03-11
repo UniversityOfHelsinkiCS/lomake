@@ -15,7 +15,6 @@ const Measures = ({ label, id, required, number }) => {
 	const clearMeasure = (number) => dispatch(updateFormField(`${id}_${number}_text`, ''))
 	const formData = useSelector((state) => state.form.data)
 	const languageCode = useSelector((state) => state.language)
-	console.log
 
 	const getInitialAmount = () => {
 		let measureNumber = 1

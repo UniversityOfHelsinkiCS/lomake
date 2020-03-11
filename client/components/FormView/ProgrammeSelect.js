@@ -30,14 +30,12 @@ const ProgrammeSelect = () => {
 	const [chosenFaculty, setFaculty] = useState('')
 
 	const handleChange = async (e, target) => {
-		console.log('target', target)
 		const { id, value } = target
 		if (id === 'degree_level') setDegree(value)
 		if (id === 'faculty') setFaculty(value)
 	}
 
 	const handleRoomChange = async (e, target) => {
-		console.log('target', target)
 		const { value } = target
 		await dispatch(wsLeaveRoom(value))
 		dispatch(wsJoinRoom(value))
