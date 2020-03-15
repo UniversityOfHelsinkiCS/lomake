@@ -1,11 +1,12 @@
 .dot {
-  margin: auto;
-  width: 30px;
-  height: 30px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
-.emoji-cell::after {
-  width: 300px;
-  white-space: normal;
-  text-align: center;
+thead tr:first-child > th {
+  position: sticky !important;
+  top: 0;
+  z-index: 2;
 }

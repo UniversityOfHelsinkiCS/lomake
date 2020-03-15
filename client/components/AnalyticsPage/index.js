@@ -4,9 +4,7 @@ import { LoremIpsum } from 'lorem-ipsum'
 import { getAnswersAction } from 'Utilities/redux/answersReducer'
 import { allLightIds, programmes } from 'Utilities/common'
 import './AnalyticsPage.scss'
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
+import { Icon, Modal, Header } from 'semantic-ui-react'
 
 export default () => {
   const dispatch = useDispatch()
@@ -14,6 +12,7 @@ export default () => {
   const user = useSelector((state) => state.currentUser.data)
 
   const [filter, setFilter] = useState('')
+  const [modalData, setModalData] = useState(null)
 
   const handleChange = ({ target }) => {
     const { value } = target
@@ -92,22 +91,32 @@ export default () => {
   }
 
   const lightEmojiMap = {
-    green: positiveEmoji,
-    yellow: neutralEmoji,
-    red: negativeEmoji
+    green: 'smile outline',
+    yellow: 'meh outline',
+    red: 'frown outline'
   }
 
   const backgroundColorMap = {
-    green: '#e5fbe5',
-    yellow: '#ffffed',
-    red: '#ffcccb'
+    green: '#9dff9d',
+    yellow: '#ffffb1',
+    red: '#ff7f7f'
   }
 
   if (answers.pending || !answers.data) return <>SPINNING!</>
 
   return (
     <>
-      <label for="filter">Filter programmes:</label>
+      <Modal open={!!modalData} onClose={() => setModalData(null)} basic size="small" closeIcon>
+        {/* Right now header is showing the question id but in the final version the full question is shown */}
+        <Header icon="question" content={modalData ? modalData.content : ''} />
+        <Modal.Content>
+          <Modal.Description>{modalData ? modalData.programme : ''}</Modal.Description>
+          <h3 style={{ color: backgroundColorMap[modalData ? modalData.color : 'green'] }}>
+            {modalData ? modalData.header : ''}
+          </h3>
+        </Modal.Content>
+      </Modal>
+      <label htmlFor="filter">Filter programmes:</label>
       <input name="filter" type="text" onChange={handleChange} value={filter} />
       {user.adminMode && (
         <div style={{ marginTop: '1em' }}>
@@ -118,13 +127,20 @@ export default () => {
           )}
         </div>
       )}
-      {/* Can't use Semantic's "fixed" because it makes the tooltips go under */}
-      <table style={{ tableLayout: 'fixed' }} className="ui celled striped table">
+      <table style={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-            <th colSpan="2">Programmes</th>
+            <th colSpan="2" />
             {allLightIds.map((id) => (
-              <th key={id} style={{ wordWrap: 'break-word', textAlign: 'center' }}>
+              <th
+                key={id}
+                style={{
+                  wordWrap: 'break-word',
+                  textAlign: 'center',
+                  position: 'sticky',
+                  background: 'white'
+                }}
+              >
                 {transformIdToTitle(id)}
               </th>
             ))}
@@ -139,7 +155,15 @@ export default () => {
                 <tr key={p}>
                   <th colSpan="2">{p}</th>
                   {allLightIds.map((q) => (
-                    <td key={`${p}-${q}`} className="center aligned"></td>
+                    <td
+                      style={{
+                        height: '75px',
+                        width: '75px',
+                        background: 'whitesmoke'
+                      }}
+                      key={`${p}-${q}`}
+                      className="center aligned"
+                    />
                   ))}
                 </tr>
               )
@@ -151,26 +175,28 @@ export default () => {
                     <td
                       key={`${p}-${q}`}
                       style={{
-                        background: backgroundColorMap[programme.data[q]]
+                        background: backgroundColorMap[programme.data[q]],
+                        height: '75px',
+                        width: '75px',
+                        textAlign: 'center'
                       }}
                     >
-                      <div
-                        className="emoji-cell"
-                        style={{ display: 'flex', justifyContent: 'center' }}
-                        data-tooltip={
-                          programme.data[q.replace('light', 'text')]
-                            ? programme.data[q.replace('light', 'text')]
-                            : undefined
+                      <Icon
+                        name={lightEmojiMap[programme.data[q]]}
+                        style={{ cursor: 'pointer' }}
+                        size="big"
+                        onClick={() =>
+                          setModalData({
+                            header: programme.data[q.replace('light', 'text')],
+                            programme: p,
+                            content: q,
+                            color: programme.data[q]
+                          })
                         }
-                      >
-                        <img
-                          src={lightEmojiMap[programme.data[q]]}
-                          style={{ width: '75%', maxWidth: '50px', height: 'auto' }}
-                        />
-                      </div>
+                      />
                     </td>
                   ) : (
-                    <td key={`${p}-${q}`}></td>
+                    <td style={{ background: 'whitesmoke' }} key={`${p}-${q}`}></td>
                   )
                 })}
               </tr>
