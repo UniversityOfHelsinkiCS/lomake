@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import Textarea from './Textarea'
 import { Button } from 'semantic-ui-react'
+import SimpleTextarea from './SimpleTextarea'
 
 const measureLabel = {
 	fi: 'TOIMENPIDELISTA (1-5 toimenpidettä)',
@@ -46,7 +47,7 @@ const Measures = ({ label, id, required, number }) => {
 				if (index + 1 > amountOfMeasures) return acc
 				acc.push(
 					<div style={{ paddingTop: '0' }} key={index}>
-						<Textarea label={`${index + 1})`} id={`${id}_${index + 1}`} />
+						<SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} />
 					</div>
 				)
 				return acc

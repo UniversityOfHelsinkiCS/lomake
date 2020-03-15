@@ -1,96 +1,95 @@
 $mainColor: whitesmoke;
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif,
+		Apple Color Emoji, Segoe UI Emoji;
 }
 
 .navbar {
-  height: 5em;
-  background-color: $mainColor;
+	height: 5em;
+	background-color: $mainColor;
 }
 
 .content {
-  padding: 10px;
-  min-height: calc(100vh - 10em);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	padding: 10px;
+	min-height: calc(100vh - 10em);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .the-form {
-  max-width: 50em;
-  display: flex;
-  flex-direction: column;
+	max-width: 50em;
+	display: flex;
+	flex-direction: column;
 }
 
 .form-textarea {
-  padding: 1.5em 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  label {
-    min-width: 15em;
-    width: 50%;
-    padding-right: 1em;
-  }
-  textarea {
-    flex-grow: 1;
-    min-width: 25em;
-    height: 6em;
-  }
+	padding: 1.5em 0;
+	display: flex;
+	flex-direction: column;
+	label {
+		min-width: 15em;
+		width: 50%;
+		padding-right: 1em;
+	}
+	textarea {
+		flex-grow: 1;
+		min-width: 25em;
+		height: 6em;
+	}
 }
 
 .form-streetlights {
-  padding: 1.5em 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  label {
-    min-width: 15em;
-    width: 50%;
-    padding-right: 1em;
-  }
+	padding: 1.5em 0;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	label {
+		min-width: 15em;
+		width: 50%;
+		padding-right: 1em;
+	}
 }
 
 .form-dropdown {
-  padding: 1.5em 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  label {
-    min-width: 15em;
-    width: 50%;
-    padding-right: 1em;
-  }
-  select {
-    flex-grow: 1;
-    font-size: 0.9em;
-    max-width: 25em;
-    min-width: 25em;
-    height: 2em;
-  }
+	padding: 1.5em 0;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	label {
+		min-width: 15em;
+		width: 50%;
+		padding-right: 1em;
+	}
+	select {
+		flex-grow: 1;
+		font-size: 0.9em;
+		max-width: 25em;
+		min-width: 25em;
+		height: 2em;
+	}
 }
 
 .img-responsive {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 .footer {
-  height: 5em;
-  background-color: $mainColor;
+	height: 5em;
+	background-color: $mainColor;
 }
 
 .section-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  margin: 1em 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+	margin: 1em 0;
 }
 
 label {
-  font-weight: bold;
-  font-size: 14px;
+	font-weight: bold;
+	font-size: 14px;
 }
