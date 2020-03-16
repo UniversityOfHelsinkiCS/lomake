@@ -60,6 +60,31 @@ const claimToken = async (req, res) => {
   }
 }
 
+const checkToken = async (req, res) => {
+  try {
+    const token = await db.token.findOne({ where: { url: req.params.url } })
+    if (!token || !token.valid) {
+      logger.error(
+        `User ${req.user.uid} tried to use invalid token url: ${req.params.url}`
+      )
+      return res.status(403).json({ error: 'invalid token url' })
+    }
+
+    if (!token.valid) {
+      logger.error(
+        `User ${req.user.uid} tried to use expired token url: ${req.params.url}`
+      )
+      return res.status(403).json({ error: 'expired token url' })
+    }
+
+    return res.status(200).json(token)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
-  claimToken
+  claimToken,
+  checkToken
 }

@@ -23,5 +23,6 @@ router.get('/users', checkAdmin, users.getAllUsers)
 router.put('/users/:id', checkAdmin, users.editUser)
 
 router.post('/access/:url', tokens.claimToken)
+router.get('/access/:url', tokens.checkToken)
 
 module.exports = router

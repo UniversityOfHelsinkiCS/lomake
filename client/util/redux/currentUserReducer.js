@@ -79,6 +79,16 @@ export default (state = { data: undefined }, action) => {
         ...state,
         data: { ...state.data, adminMode: false }
       }
+    case 'CLAIM_TOKEN_SUCCESS':
+      return {
+        ...state,
+        data: {
+          ...action.response,
+          adminMode: window.localStorage.getItem('lomake_adminmode') === 'true'
+        },
+        pending: false,
+        error: false
+      }
     default:
       return state
   }

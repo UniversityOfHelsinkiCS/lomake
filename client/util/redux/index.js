@@ -6,6 +6,7 @@ import currentUser from './currentUserReducer'
 import users from './usersReducer'
 import answers from './answersReducer'
 import language from './languageReducer'
+import accessToken from './accessTokenReducer'
 
 export default combineReducers({
   form,
@@ -13,5 +14,6 @@ export default combineReducers({
   currentUser,
   users,
   answers,
-  language
+  language,
+  accessToken
 })
