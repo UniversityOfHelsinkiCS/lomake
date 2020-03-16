@@ -10,5 +10,5 @@ const createOrUpdate = async (req, res) => {
 
 module.exports = {
   getOne,
-  createOrUpdate,
+  createOrUpdate
 }

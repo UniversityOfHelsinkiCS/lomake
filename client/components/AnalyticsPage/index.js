@@ -80,9 +80,7 @@ export default () => {
             return {
               ...acc,
               [cur]: randomLight,
-              [cur.replace('light', 'text')]: lorem.generateSentences(
-                Math.ceil(Math.random() * 10)
-              )
+              [cur.replace('light', 'text')]: lorem.generateSentences(Math.ceil(Math.random() * 10))
             }
           }, {})
         })
@@ -108,19 +106,11 @@ export default () => {
 
   return (
     <>
-      <Modal
-        open={!!modalData}
-        onClose={() => setModalData(null)}
-        basic
-        size="small"
-        closeIcon
-      >
+      <Modal open={!!modalData} onClose={() => setModalData(null)} basic size="small" closeIcon>
         {/* Right now header is showing the question id but in the final version the full question is shown */}
         <Header icon="question" content={modalData ? modalData.content : ''} />
         <Modal.Content>
-          <Modal.Description>
-            {modalData ? modalData.programme : ''}
-          </Modal.Description>
+          <Modal.Description>{modalData ? modalData.programme : ''}</Modal.Description>
           <h3
             style={{
               color: backgroundColorMap[modalData ? modalData.color : 'green']
@@ -137,9 +127,7 @@ export default () => {
           {fakeAnswers.length === 0 ? (
             <button onClick={() => fakeData()}>Fake answers</button>
           ) : (
-            <button onClick={() => setFakeAnswers([])}>
-              Use answers from backend
-            </button>
+            <button onClick={() => setFakeAnswers([])}>Use answers from backend</button>
           )}
         </div>
       )}
@@ -164,8 +152,7 @@ export default () => {
         </thead>
         <tbody>
           {filteredProgrammes.map((p) => {
-            const answersToUse =
-              fakeAnswers.length > 0 ? fakeAnswers : answers.data
+            const answersToUse = fakeAnswers.length > 0 ? fakeAnswers : answers.data
             const programme = answersToUse.find((a) => a.programme === p)
             if (!programme)
               return (
@@ -213,10 +200,7 @@ export default () => {
                       />
                     </td>
                   ) : (
-                    <td
-                      style={{ background: 'whitesmoke' }}
-                      key={`${p}-${q}`}
-                    ></td>
+                    <td style={{ background: 'whitesmoke' }} key={`${p}-${q}`}></td>
                   )
                 })}
               </tr>

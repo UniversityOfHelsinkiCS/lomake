@@ -42,9 +42,7 @@ export default (state = { data: [] }, action) => {
     case 'EDIT_USER_SUCCESS':
       return {
         ...state,
-        data: state.data.map((u) =>
-          u.id == action.response.id ? action.response : u
-        ),
+        data: state.data.map((u) => (u.id == action.response.id ? action.response : u)),
         pending: false,
         error: false
       }

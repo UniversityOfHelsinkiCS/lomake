@@ -8,7 +8,7 @@ export const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     schacPersonalUniqueCode: undefined,
-    sn: 'admin',
+    sn: 'admin'
   },
   {
     uid: 'student',
@@ -17,7 +17,7 @@ export const possibleUsers = [
     mail: 'grp-toska+mockstudent@helsinki.fi',
     schacDateOfBirth: 19770501,
     schacPersonalUniqueCode: 'urn:schac:personalUniqueCode:int:studentID:helsinki.fi:fuksi',
-    sn: 'fuksi',
+    sn: 'fuksi'
   },
   {
     uid: 'staff',
@@ -26,12 +26,12 @@ export const possibleUsers = [
     mail: 'grp-toska+mockstaff@helsinki.fi',
     schacDateOfBirth: undefined,
     schacPersonalUniqueCode: undefined,
-    sn: 'staff',
-  },
+    sn: 'staff'
+  }
 ]
 
 export const setHeaders = (uid) => {
-  const user = possibleUsers.find(u => u.uid === uid)
+  const user = possibleUsers.find((u) => u.uid === uid)
   if (!user) return
 
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))

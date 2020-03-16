@@ -6,5 +6,5 @@ const PORT = process.env.PORT || 8000
 module.exports = {
   ...common,
   DB_URL,
-  PORT,
+  PORT
 }

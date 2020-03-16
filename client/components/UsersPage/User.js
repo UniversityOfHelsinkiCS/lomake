@@ -73,12 +73,7 @@ export default ({ user }) => {
     return user.admin ? (
       <Popup
         trigger={
-          <Icon
-            data-cy={`${user.name}-is-admin`}
-            name="check"
-            color="users-green"
-            size="large"
-          />
+          <Icon data-cy={`${user.name}-is-admin`} name="check" color="users-green" size="large" />
         }
         content={
           <Button
@@ -94,12 +89,7 @@ export default ({ user }) => {
     ) : (
       <Popup
         trigger={
-          <Icon
-            data-cy={`${user.name}-not-admin`}
-            name="close"
-            color="users-red"
-            size="large"
-          />
+          <Icon data-cy={`${user.name}-not-admin`} name="close" color="users-red" size="large" />
         }
         content={
           <Button

@@ -8,8 +8,7 @@ const webpack = require('webpack')
 
 module.exports = (env, argv) => {
   const { mode } = argv
-  const additionalPlugins =
-    mode === 'production' ? [] : [new webpack.HotModuleReplacementPlugin()] // Enable hot module replacement
+  const additionalPlugins = mode === 'production' ? [] : [new webpack.HotModuleReplacementPlugin()] // Enable hot module replacement
 
   const additionalOptimizations =
     mode === 'production'
@@ -22,9 +21,7 @@ module.exports = (env, argv) => {
       : {}
 
   const additionalEntries =
-    mode === 'production'
-      ? []
-      : ['webpack-hot-middleware/client?http://localhost:8000']
+    mode === 'production' ? [] : ['webpack-hot-middleware/client?http://localhost:8000']
 
   const BASE_PATH = process.env.BASE_PATH || '/'
 

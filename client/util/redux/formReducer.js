@@ -3,7 +3,12 @@ import callBuilder from '../apiConnection'
  * Actions and reducers are in the same file for readability
  */
 
-export const updateFormField = (field, value, host) => ({ type: 'UPDATE_FORM_FIELD', field, value, host })
+export const updateFormField = (field, value, host) => ({
+  type: 'UPDATE_FORM_FIELD',
+  field,
+  value,
+  host
+})
 
 export const getFormAction = () => {
   const route = '/form'
@@ -34,14 +39,14 @@ export default (state = { data: {} }, action) => {
         ...state,
         data: action.response,
         pending: false,
-        error: false,
+        error: false
       }
     case 'GET_FORM_SUCCESS':
       return {
         ...state,
         data: action.response,
         pending: false,
-        error: false,
+        error: false
       }
     default:
       return state

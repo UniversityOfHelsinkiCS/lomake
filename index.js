@@ -8,9 +8,7 @@ require('express-async-errors')
 const { PORT, inProduction } = require('@util/common')
 const logger = require('@util/logger')
 
-const {
-  initializeDatabaseConnection
-} = require('@root/server/database/connection')
+const { initializeDatabaseConnection } = require('@root/server/database/connection')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -21,12 +19,8 @@ initializeDatabaseConnection()
       socket.on('update_field', (room) =>
         require('@util/websocketHandlers').updateField(socket, room)
       )
-      socket.on('join', (room) =>
-        require('@util/websocketHandlers').joinRoom(socket, room)
-      )
-      socket.on('leave', (room) =>
-        require('@util/websocketHandlers').leaveRoom(socket, room)
-      )
+      socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room))
+      socket.on('leave', (room) => require('@util/websocketHandlers').leaveRoom(socket, room))
     })
     // Require is here so we can delete it from cache when files change (*)
 
@@ -55,9 +49,7 @@ initializeDatabaseConnection()
       const hotMiddleWare = require('webpack-hot-middleware')
       const webpackConf = require('@root/webpack.config')
       /* eslint-enable */
-      const compiler = webpack(
-        webpackConf('development', { mode: 'development' })
-      )
+      const compiler = webpack(webpackConf('development', { mode: 'development' }))
 
       const devMiddleware = middleware(compiler)
       app.use(devMiddleware)

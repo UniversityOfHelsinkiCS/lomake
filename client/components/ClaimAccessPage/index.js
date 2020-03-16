@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getTokenAction,
-  claimTokenAction
-} from 'Utilities/redux/accessTokenReducer'
+import { getTokenAction, claimTokenAction } from 'Utilities/redux/accessTokenReducer'
 
 export default ({ url }) => {
   const dispatch = useDispatch()
