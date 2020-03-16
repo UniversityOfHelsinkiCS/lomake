@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoremIpsum } from 'lorem-ipsum'
-import { getAnswersAction } from 'Utilities/redux/answersReducer'
+import { getAllAnswersAction } from 'Utilities/redux/allAnswersReducer'
 import { allLightIds, programmes } from 'Utilities/common'
 import './AnalyticsPage.scss'
 import { Icon, Modal, Header } from 'semantic-ui-react'
 
 export default () => {
   const dispatch = useDispatch()
-  const answers = useSelector((state) => state.answers)
+  const answers = useSelector((state) => state.allAnswers)
   const user = useSelector((state) => state.currentUser.data)
 
   const [filter, setFilter] = useState('')
@@ -20,7 +20,7 @@ export default () => {
   }
 
   useEffect(() => {
-    dispatch(getAnswersAction())
+    dispatch(getAllAnswersAction())
   }, [])
 
   /**
@@ -80,7 +80,9 @@ export default () => {
             return {
               ...acc,
               [cur]: randomLight,
-              [cur.replace('light', 'text')]: lorem.generateSentences(Math.ceil(Math.random() * 10))
+              [cur.replace('light', 'text')]: lorem.generateSentences(
+                Math.ceil(Math.random() * 10)
+              )
             }
           }, {})
         })
@@ -106,12 +108,24 @@ export default () => {
 
   return (
     <>
-      <Modal open={!!modalData} onClose={() => setModalData(null)} basic size="small" closeIcon>
+      <Modal
+        open={!!modalData}
+        onClose={() => setModalData(null)}
+        basic
+        size="small"
+        closeIcon
+      >
         {/* Right now header is showing the question id but in the final version the full question is shown */}
         <Header icon="question" content={modalData ? modalData.content : ''} />
         <Modal.Content>
-          <Modal.Description>{modalData ? modalData.programme : ''}</Modal.Description>
-          <h3 style={{ color: backgroundColorMap[modalData ? modalData.color : 'green'] }}>
+          <Modal.Description>
+            {modalData ? modalData.programme : ''}
+          </Modal.Description>
+          <h3
+            style={{
+              color: backgroundColorMap[modalData ? modalData.color : 'green']
+            }}
+          >
             {modalData ? modalData.header : ''}
           </h3>
         </Modal.Content>
@@ -123,7 +137,9 @@ export default () => {
           {fakeAnswers.length === 0 ? (
             <button onClick={() => fakeData()}>Fake answers</button>
           ) : (
-            <button onClick={() => setFakeAnswers([])}>Use answers from backend</button>
+            <button onClick={() => setFakeAnswers([])}>
+              Use answers from backend
+            </button>
           )}
         </div>
       )}
@@ -148,7 +164,8 @@ export default () => {
         </thead>
         <tbody>
           {filteredProgrammes.map((p) => {
-            const answersToUse = fakeAnswers.length > 0 ? fakeAnswers : answers.data
+            const answersToUse =
+              fakeAnswers.length > 0 ? fakeAnswers : answers.data
             const programme = answersToUse.find((a) => a.programme === p)
             if (!programme)
               return (
@@ -196,7 +213,10 @@ export default () => {
                       />
                     </td>
                   ) : (
-                    <td style={{ background: 'whitesmoke' }} key={`${p}-${q}`}></td>
+                    <td
+                      style={{ background: 'whitesmoke' }}
+                      key={`${p}-${q}`}
+                    ></td>
                   )
                 })}
               </tr>

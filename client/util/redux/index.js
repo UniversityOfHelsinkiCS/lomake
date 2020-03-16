@@ -5,6 +5,7 @@ import room from './roomReducer'
 import currentUser from './currentUserReducer'
 import users from './usersReducer'
 import answers from './answersReducer'
+import allAnswers from './allAnswersReducer'
 import language from './languageReducer'
 import accessToken from './accessTokenReducer'
 
@@ -14,6 +15,7 @@ export default combineReducers({
   currentUser,
   users,
   answers,
+  allAnswers,
   language,
   accessToken
 })
