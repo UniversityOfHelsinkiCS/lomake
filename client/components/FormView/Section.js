@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { requiredFormIds } from 'Utilities/common'
+import { requiredFormIds, colors } from 'Utilities/common'
 import { useSelector } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 
@@ -46,7 +46,7 @@ const Section = ({ title, number, children }) => {
         }}
       >
         <h2 style={{ margin: '0', maxWidth: '650px' }}>
-          <span style={{ color: '#007290' }}>{number}</span> - {title}
+          <span style={{ color: colors.theme_blue }}>{number}</span> - {title}
         </h2>
         <div>
           <i className={collapsed ? 'icon plus' : 'icon minus'} style={{ color: '#007290' }} />

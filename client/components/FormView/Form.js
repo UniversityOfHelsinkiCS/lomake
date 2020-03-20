@@ -5,48 +5,7 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { useSelector } from 'react-redux'
-
-//https://stackoverflow.com/a/9083076
-function romanize(num) {
-  if (isNaN(num)) return NaN
-  var digits = String(+num).split(''),
-    key = [
-      '',
-      'C',
-      'CC',
-      'CCC',
-      'CD',
-      'D',
-      'DC',
-      'DCC',
-      'DCCC',
-      'CM',
-      '',
-      'X',
-      'XX',
-      'XXX',
-      'XL',
-      'L',
-      'LX',
-      'LXX',
-      'LXXX',
-      'XC',
-      '',
-      'I',
-      'II',
-      'III',
-      'IV',
-      'V',
-      'VI',
-      'VII',
-      'VIII',
-      'IX'
-    ],
-    roman = '',
-    i = 3
-  while (i--) roman = (key[+digits.pop() + i * 10] || '') + roman
-  return Array(+digits.join('') + 1).join('M') + roman
-}
+import { romanize } from 'Utilities/common'
 
 const Form = ({ questions }) => {
   const languageCode = useSelector((state) => state.language)
