@@ -6,6 +6,7 @@ import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { useSelector } from 'react-redux'
 import { romanize } from 'Utilities/common'
+import CSVDownload from './CSVDownload'
 
 const Form = ({ questions }) => {
   const languageCode = useSelector((state) => state.language)
@@ -44,6 +45,7 @@ const Form = ({ questions }) => {
 
   return (
     <>
+      <CSVDownload questions={questions} />
       {questions.map((section, index) => {
         return (
           <Section
