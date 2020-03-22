@@ -61,8 +61,6 @@ const CSVDownload = ({ questions }) => {
 
   csvDataFormatted = csvDataFormatted.join('\n')
 
-  console.log('csvDataFormatted', csvDataFormatted)
-
   return (
     <CSVLink filename="hy_ospa_lomake_answers.csv" data={csvDataFormatted + '\n'} separator=";">
       {downloadText[languageCode]}

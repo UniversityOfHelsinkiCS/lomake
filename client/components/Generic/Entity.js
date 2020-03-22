@@ -2,6 +2,12 @@ import React from 'react'
 import Streetlights from './Streetlights'
 import Textarea from './Textarea'
 import { useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
+import { mapLightsToEmojiPicture } from 'Utilities/common'
+import positiveEmoji from 'Assets/sunglasses.png'
+import neutralEmoji from 'Assets/neutral.png'
+import negativeEmoji from 'Assets/persevering.png'
+import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
 const streetLightsLabel = {
   fi: 'Yleisarvio',
@@ -15,14 +21,44 @@ const textAreaLabel = {
   se: 'Diskussionens huvudpunkter'
 }
 
-const Entity = ({ id, label, description, required, noLight, number }) => {
+const mapLightToValid = {
+  VIHREÄ: 'green',
+  KELTAINEN: 'yellow',
+  PUNAINEN: 'red'
+}
+
+const mapLightToImage = {
+  green: positiveEmoji,
+  yellow: neutralEmoji,
+  red: negativeEmoji
+}
+
+const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
   const languageCode = useSelector((state) => state.language)
+
+  let previousAnswerLight = previousYearsAnswers[`${id}_light`]
+  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
+    previousAnswerLight = mapLightToValid[previousAnswerLight]
+  }
+  const previousAnswerText = previousYearsAnswers[`${id}_text`]
+
   return (
     <>
       <h3>
         {number}. {label}
       </h3>
       <p>{description}</p>
+      {(previousAnswerText || previousAnswerLight) && (
+        <LastYearsAnswersAccordion>
+          {previousAnswerLight && (
+            <img
+              style={{ width: '40px', height: 'auto' }}
+              src={mapLightToImage[previousAnswerLight]}
+            />
+          )}
+          <ReactMarkdown source={previousAnswerText} />
+        </LastYearsAnswersAccordion>
+      )}
       {!noLight && (
         <Streetlights id={id} label={streetLightsLabel[languageCode]} required={required} />
       )}

@@ -8,6 +8,12 @@ import { useSelector } from 'react-redux'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
 
+const previousYearsAnswers = {
+  cooperation_success_light: 'VIHREÄ',
+  cooperation_success_text:
+    'Yhteistyö toimii hyvin, yhteishenki on hyvä. Tarve laajentaa johtoryhmää siten, että edustus tulisi myös harjoittelukouluista'
+}
+
 const Form = ({ questions }) => {
   const languageCode = useSelector((state) => state.language)
 
@@ -39,6 +45,7 @@ const Form = ({ questions }) => {
         required={part.required}
         noLight={part.no_light}
         number={number}
+        previousYearsAnswers={previousYearsAnswers}
       />
     )
   }
