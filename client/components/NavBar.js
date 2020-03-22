@@ -10,6 +10,10 @@ import { setLanguage } from 'Utilities/redux/languageReducer'
 import { images } from 'Utilities/common'
 import { Link } from 'react-router-dom'
 
+const isProgrammeOwner = (user) => {
+  return Object.keys(user.access).find((programme) => user.access[programme].admin)
+}
+
 export default () => {
   const [activeItem, setActiveItem] = useState('currentLomake')
   const dispatch = useDispatch()
@@ -73,6 +77,21 @@ export default () => {
     )
   }
 
+  const OwnerButton = () => {
+    return (
+      <Menu.Item
+        data-cy="nav-owner"
+        as={Link}
+        to={'/owner'}
+        name="owner"
+        active={activeItem === 'owner'}
+        onClick={handleItemClick}
+      >
+        Programme owner
+      </Menu.Item>
+    )
+  }
+
   if (!user) return null
   return (
     <Menu stackable size="huge" fluid>
@@ -105,7 +124,7 @@ export default () => {
       >
         Current Lomake
       </Menu.Item>
-
+      {isProgrammeOwner(user) ? <OwnerButton /> : null}
       {user.adminMode ? <AnalyticsButton /> : null}
       {user.adminMode ? <UsersButton /> : null}
       {user.admin ? getAdminButton() : null}

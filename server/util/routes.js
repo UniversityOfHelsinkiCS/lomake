@@ -13,6 +13,8 @@ router.get('/answers/:programme/previous', answers.getPreviousYear)
 router.post('/answers', answers.create)
 router.post('/bulkanswers', answers.bulkCreate)
 
+router.get('/programmes/:programme/tokens', tokens.programmesTokens)
+
 router.post('/login', users.getCurrentUser)
 router.post('/logout', users.getLogoutUrl)
 

@@ -17,3 +17,6 @@ content-type: application/json
 }
 
 ###
+
+GET http://localhost:8000/api/answers/CS-KANDI/previous
+uid: admin

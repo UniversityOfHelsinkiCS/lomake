@@ -47,6 +47,7 @@ const getPreviousYear = async (req, res) => {
       },
       order: [['createdAt', 'DESC']]
     })
+    if (data.length === 0) return res.status(204).end()
     res.status(200).json(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)

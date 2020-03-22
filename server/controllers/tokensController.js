@@ -1,5 +1,6 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
+const { uuid } = require('uuidv4')
 
 const claimToken = async (req, res) => {
   try {
@@ -43,6 +44,20 @@ const claimToken = async (req, res) => {
     await token.increment('usageCounter')
     if (token.type === 'ADMIN') {
       token.valid = false
+      await db.token.create({
+        url: uuid(),
+        programme: token.programme,
+        type: 'READ',
+        valid: true,
+        usageCounter: 0
+      })
+      await db.token.create({
+        url: uuid(),
+        programme: token.programme,
+        type: 'WRITE',
+        valid: true,
+        usageCounter: 0
+      })
     }
     await token.save()
 
@@ -76,7 +91,21 @@ const checkToken = async (req, res) => {
   }
 }
 
+const programmesTokens = async (req, res) => {
+  try {
+    const tokens = await db.token.findAll({
+      where: { programme: req.params.programme, valid: true }
+    })
+
+    return res.status(200).json(tokens)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   claimToken,
-  checkToken
+  checkToken,
+  programmesTokens
 }

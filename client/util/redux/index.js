@@ -8,6 +8,8 @@ import answers from './answersReducer'
 import allAnswers from './allAnswersReducer'
 import language from './languageReducer'
 import accessToken from './accessTokenReducer'
+import previousAnswers from './previousAnswersReducer'
+import programmesTokens from './programmesTokensReducer'
 
 export default combineReducers({
   form,
@@ -17,5 +19,7 @@ export default combineReducers({
   answers,
   allAnswers,
   language,
-  accessToken
+  accessToken,
+  previousAnswers,
+  programmesTokens
 })
