@@ -5,8 +5,16 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { useSelector, useDispatch } from 'react-redux'
+import { Button, Icon } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
+import { saveAnswersAction } from 'Utilities/redux/answersReducer'
+
+const submitButtonText = {
+  fi: 'Välitallenna',
+  en: 'Save current',
+  se: ''
+}
 
 const previousYearsAnswers = {
   cooperation_success_light: 'VIHREÄ',
@@ -18,10 +26,15 @@ const Form = ({ questions }) => {
   const dispatch = useDispatch()
   const room = useSelector(({ room }) => room)
   const languageCode = useSelector((state) => state.language)
+  const formData = useSelector(({ form }) => form.data)
 
   useEffect(() => {
     dispatch(getPreviousAnswersAction(room))
   }, [])
+
+  const handleSubmit = () => {
+    dispatch(saveAnswersAction({ data: formData, room }))
+  }
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -73,6 +86,12 @@ const Form = ({ questions }) => {
           </Section>
         )
       })}
+      <div style={{ maxWidth: '250px', marginTop: '2em' }}>
+        {/*TODO: Button should be disabled and help text shown when missing required fields or text value over allowed */}
+        <Button secondary onClick={() => handleSubmit()}>
+          {submitButtonText[languageCode]}
+        </Button>
+      </div>
     </>
   )
 }
