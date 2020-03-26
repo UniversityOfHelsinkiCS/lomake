@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoremIpsum } from 'lorem-ipsum'
 import { getAllAnswersAction } from 'Utilities/redux/allAnswersReducer'
+import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { allLightIds, programmes } from 'Utilities/common'
 import './OverviewPage.scss'
 import { Icon, Modal, Header } from 'semantic-ui-react'
+import { useHistory } from 'react-router'
 
 export default () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.allAnswers)
   const user = useSelector((state) => state.currentUser.data)
@@ -17,6 +20,12 @@ export default () => {
   const handleChange = ({ target }) => {
     const { value } = target
     setFilter(value)
+  }
+
+  const handleRoomChange = async (room) => {
+    await dispatch(wsLeaveRoom(room))
+    dispatch(wsJoinRoom(room))
+    history.push('/form')
   }
 
   useEffect(() => {
@@ -157,7 +166,14 @@ export default () => {
             if (!programme)
               return (
                 <tr key={p}>
-                  <th colSpan="2">{p}</th>
+                  <th colSpan="2">
+                    <span
+                      onClick={() => handleRoomChange(p)}
+                      style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                    >
+                      {p}
+                    </span>
+                  </th>
                   {allLightIds.map((q) => (
                     <td
                       style={{

@@ -62,21 +62,6 @@ export default () => {
     )
   }
 
-  const AnalyticsButton = () => {
-    return (
-      <Menu.Item
-        data-cy="nav-analytics"
-        as={Link}
-        to={'/analytics'}
-        name="analytics"
-        active={activeItem === 'analytics'}
-        onClick={handleItemClick}
-      >
-        Analytics
-      </Menu.Item>
-    )
-  }
-
   const OwnerButton = () => {
     return (
       <Menu.Item
@@ -94,9 +79,9 @@ export default () => {
 
   if (!user) return null
   return (
-    <Menu stackable size="huge" fluid>
-      <Menu.Item style={{ fontSize: 'xx-large', padding: '0.5em' }}>
-        <img src={images.toska_color} style={{ marginRight: '1em' }} alt="tosca" /> Lomake
+    <Menu stackable fluid inverted>
+      <Menu.Item style={{ fontSize: 'xx-large', padding: '0.5em' }} as={Link} to="/">
+        <img src={images.toska_color} alt="tosca" />
       </Menu.Item>
       <Menu.Menu>
         <Dropdown item icon="globe" simple>
@@ -113,24 +98,14 @@ export default () => {
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>
-
-      <Menu.Item
-        position="right"
-        as={Link}
-        to={'/'}
-        name="currentLomake"
-        active={activeItem === 'currentLomake'}
-        onClick={handleItemClick}
-      >
-        Current Lomake
-      </Menu.Item>
-      {isProgrammeOwner(user) ? <OwnerButton /> : null}
-      {user.adminMode ? <AnalyticsButton /> : null}
-      {user.adminMode ? <UsersButton /> : null}
-      {user.admin ? getAdminButton() : null}
-      <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-        Log out
-      </Menu.Item>
+      <Menu.Menu position="right">
+        {isProgrammeOwner(user) ? <OwnerButton /> : null}
+        {user.adminMode ? <UsersButton /> : null}
+        {user.admin ? getAdminButton() : null}
+        <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
+          Log out
+        </Menu.Item>
+      </Menu.Menu>
     </Menu>
   )
 }

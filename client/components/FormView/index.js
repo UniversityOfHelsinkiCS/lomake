@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router'
 import Form from 'Components/FormView/Form'
-import ProgrammeSelect from 'Components/FormView/ProgrammeSelect'
 import lyyti_image from 'Assets/lyyti.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
+import { colors } from 'Utilities/common'
 
 const translations = {
   title: {
@@ -48,11 +49,18 @@ const translations = {
 const FormView = () => {
   const room = useSelector(({ room }) => room)
   const languageCode = useSelector((state) => state.language)
+
+  if (!room) return <Redirect to="/" />
   return (
     <div className="the-form">
       <img className="img-responsive" src={lyyti_image} />
       <div className="intro">
-        <h1>{translations.title[languageCode]}</h1>
+        <h1>
+          {translations.title[languageCode]} {new Date().getFullYear()}
+        </h1>
+        <p style={{ color: colors.theme_blue }}>
+          <b>{room}</b>
+        </p>
         <p>{translations.p1[languageCode]}</p>
         <p>{translations.p2[languageCode]}</p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -77,8 +85,7 @@ const FormView = () => {
           {translations.negative[languageCode]}
         </div>
       </div>
-      <ProgrammeSelect />
-      {room && <Form questions={questions} />}
+      <Form questions={questions} />
     </div>
   )
 }
