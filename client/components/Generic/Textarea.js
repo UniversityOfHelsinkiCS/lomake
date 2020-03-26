@@ -4,10 +4,12 @@ import { updateFormField } from 'Utilities/redux/formReducer'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
+import ReactMarkdown from 'react-markdown'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
+import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
-const Textarea = ({ label, id, required }) => {
+const Textarea = ({ label, id, required, previousYearsAnswers }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
@@ -29,12 +31,19 @@ const Textarea = ({ label, id, required }) => {
 
   const length = dataFromRedux.length
 
+  const previousAnswerText = previousYearsAnswers[`${id}_text`]
+
   return (
     <div style={{ margin: '1em 0' }}>
       <label style={{ fontStyle: 'bold' }}>
         {label}
         {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </label>
+      {previousAnswerText && (
+        <LastYearsAnswersAccordion>
+          <ReactMarkdown source={previousAnswerText} />
+        </LastYearsAnswersAccordion>
+      )}
       <Editor
         editorState={editorState}
         onEditorStateChange={handleChange}
