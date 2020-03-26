@@ -189,7 +189,14 @@ export default () => {
               )
             return (
               <tr key={p}>
-                <th colSpan="2">{p}</th>
+                <th colSpan="2">
+                  <span
+                    onClick={() => handleRoomChange(p)}
+                    style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                  >
+                    {p}
+                  </span>
+                </th>
                 {allLightIds.map((q) => {
                   return programme.data[q] ? (
                     <td
