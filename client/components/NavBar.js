@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu, Header, Dropdown } from 'semantic-ui-react'
+import { Menu, Label, Dropdown } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   logoutAction,
@@ -32,17 +32,15 @@ export default () => {
 
   const getAdminButton = () => {
     return user.adminMode ? (
-      <Menu.Item
-        data-cy="adminmode-disable"
-        onClick={handleAdminModeToggle}
-        style={{ color: 'red' }}
-      >
-        <Header as="h4">AdminMode</Header>
-        <p>ENGAGED!</p>
+      <Menu.Item data-cy="adminmode-disable" onClick={handleAdminModeToggle}>
+        AdminMode{' '}
+        <Label color="red" horizontal>
+          Engaged
+        </Label>
       </Menu.Item>
     ) : (
       <Menu.Item data-cy="adminmode-enable" onClick={handleAdminModeToggle}>
-        AdminMode: off
+        AdminMode off
       </Menu.Item>
     )
   }

@@ -51,7 +51,7 @@ export default () => {
         size="huge"
       />
       <div style={{ marginTop: '2em' }}>
-        <SmileyTable filter={filter} />
+        <SmileyTable filter={filter} setModalData={setModalData} />
       </div>
     </>
   )
