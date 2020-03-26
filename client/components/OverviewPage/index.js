@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LoremIpsum } from 'lorem-ipsum'
 import { getAllAnswersAction } from 'Utilities/redux/allAnswersReducer'
 import { allLightIds, programmes } from 'Utilities/common'
-import './AnalyticsPage.scss'
+import './OverviewPage.scss'
 import { Icon, Modal, Header } from 'semantic-ui-react'
 
 export default () => {
