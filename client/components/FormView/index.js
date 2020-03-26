@@ -1,13 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router'
+import { Redirect, useHistory } from 'react-router'
 import Form from 'Components/FormView/Form'
-import lyyti_image from 'Assets/lyyti.jpg'
+import meri_image from 'Assets/meri.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
 import { colors } from 'Utilities/common'
+import { Link } from 'react-router'
+import { Button } from 'semantic-ui-react'
 
 const translations = {
   title: {
@@ -48,12 +50,16 @@ const translations = {
 
 const FormView = () => {
   const room = useSelector(({ room }) => room)
+  const history = useHistory()
   const languageCode = useSelector((state) => state.language)
 
   if (!room) return <Redirect to="/" />
   return (
     <div className="the-form">
-      <img className="img-responsive" src={lyyti_image} />
+      <div style={{ marginBottom: '2em' }}>
+        <Button onClick={() => history.push('/')} icon="arrow left" />
+      </div>
+      <img className="img-responsive" src={meri_image} />
       <div className="intro">
         <h1>
           {translations.title[languageCode]} {new Date().getFullYear()}
