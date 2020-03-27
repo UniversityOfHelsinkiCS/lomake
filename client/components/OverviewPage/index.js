@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './OverviewPage.scss'
 import { Modal, Header, Input } from 'semantic-ui-react'
+import { programmes } from 'Utilities/common'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 
@@ -25,6 +26,10 @@ export default () => {
     yellow: '#ffffb1',
     red: '#ff7f7f'
   }
+
+  const filteredProgrammes = programmes.filter((prog) => {
+    return prog.toLowerCase().includes(filter.toLowerCase())
+  })
 
   return (
     <>
@@ -51,7 +56,7 @@ export default () => {
         size="huge"
       />
       <div style={{ marginTop: '2em' }}>
-        <SmileyTable filter={filter} setModalData={setModalData} />
+        <SmileyTable filteredProgrammes={filteredProgrammes} setModalData={setModalData} />
       </div>
     </>
   )
