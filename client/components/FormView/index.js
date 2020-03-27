@@ -8,7 +8,6 @@ import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
 import { colors } from 'Utilities/common'
-import { Link } from 'react-router'
 import { Button } from 'semantic-ui-react'
 
 const translations = {

@@ -31,7 +31,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
 
   const length = dataFromRedux.length
 
-  const previousAnswerText = previousYearsAnswers[`${id}_text`]
+  const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
   return (
     <div style={{ margin: '1em 0' }}>
