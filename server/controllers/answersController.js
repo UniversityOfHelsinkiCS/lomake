@@ -21,6 +21,25 @@ const getAllTemp = async (req, res) => {
   }
 }
 
+const getAllTempUserHasAccessTo = async (req, res) => {
+  try {
+    if (req.user.admin) {
+      const data = await db.tempAnswer.findAll({})
+      return res.status(200).json(data)
+    } else {
+      const data = await db.tempAnswer.findAll({
+        where: {
+          programme: Object.keys(req.user.access)
+        }
+      })
+      return res.status(200).json(data)
+    }
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getOne = async (req, res) => {
   try {
     const data = await db.answer.findAll({
@@ -96,5 +115,6 @@ module.exports = {
   create,
   getOne,
   getPreviousYear,
-  bulkCreate
+  bulkCreate,
+  getAllTempUserHasAccessTo
 }

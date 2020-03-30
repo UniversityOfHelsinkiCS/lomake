@@ -15,6 +15,7 @@ export default () => {
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const languageCode = useSelector((state) => state.language)
+  const currentUser = useSelector((state) => state.currentUser)
 
   const handleChange = ({ target }) => {
     const { value } = target
@@ -27,7 +28,9 @@ export default () => {
     red: '#ff7f7f'
   }
 
-  const filteredProgrammes = programmes.filter((prog) => {
+  const usersProgrammes = currentUser.data.admin ? programmes : Object.keys(currentUser.data.access)
+
+  const filteredProgrammes = usersProgrammes.filter((prog) => {
     return prog.toLowerCase().includes(filter.toLowerCase())
   })
 

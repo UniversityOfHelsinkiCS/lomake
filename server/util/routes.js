@@ -12,7 +12,7 @@ const {
 const router = Router()
 
 router.get('/answers', checkAdmin, answers.getAll)
-router.get('/answers/temp', checkAdmin, answers.getAllTemp)
+router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/:programme', requireProgrammeRead, answers.getOne)
 router.get('/answers/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers', requireProgrammeWrite, answers.create)
