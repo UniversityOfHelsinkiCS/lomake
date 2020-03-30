@@ -38,7 +38,7 @@ const updateField = async (socket, payload) => {
         where: { programme: room }
       }
     )
-    socket.to(room).emit('new_form_data', updatedAnswer)
+    socket.to(room).emit('new_form_data', updatedAnswer.data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }

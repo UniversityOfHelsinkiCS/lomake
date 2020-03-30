@@ -16,15 +16,10 @@ const submitButtonText = {
   se: ''
 }
 
-const previousYearsAnswers = {
-  cooperation_success_light: 'VIHREÄ',
-  cooperation_success_text:
-    'Yhteistyö toimii hyvin, yhteishenki on hyvä. Tarve laajentaa johtoryhmää siten, että edustus tulisi myös harjoittelukouluista'
-}
-
 const Form = ({ questions }) => {
   const dispatch = useDispatch()
   const room = useSelector(({ room }) => room)
+  const previousYearsAnswers = useSelector((state) => state.previousAnswers)
   const languageCode = useSelector((state) => state.language)
   const formData = useSelector(({ form }) => form.data)
 
@@ -64,7 +59,11 @@ const Form = ({ questions }) => {
         required={part.required}
         noLight={part.no_light}
         number={number}
-        previousYearsAnswers={previousYearsAnswers}
+        previousYearsAnswers={
+          previousYearsAnswers.data && previousYearsAnswers.data.data
+            ? previousYearsAnswers.data.data
+            : null
+        }
       />
     )
   }
