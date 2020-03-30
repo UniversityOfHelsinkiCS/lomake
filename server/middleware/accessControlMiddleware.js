@@ -3,38 +3,35 @@ const logger = require('@util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
   const programme = req.params.programme
-  if (req.user.admin || req.user.access[programme].read) {
-    next()
-  } else {
-    res
+  if (req.user.admin) next()
+  else if (req.user.access[programme] && req.user.access[programme].read) next()
+  else
+    return res
       .status(401)
       .json({ error: 'Unauthorized access.' })
       .end()
-  }
 }
 
 const requireProgrammeWrite = (req, res, next) => {
-  const programme = req.body.room
-  if (req.user.admin || req.user.access[programme].write) {
-    next()
-  } else {
-    res
+  const programme = req.params.programme
+  if (req.user.admin) next()
+  else if (req.user.access[programme] && req.user.access[programme].write) next()
+  else
+    return res
       .status(401)
       .json({ error: 'Unauthorized access.' })
       .end()
-  }
 }
 
 const requireProgrammeOwner = (req, res, next) => {
   const programme = req.params.programme
-  if (req.user.admin || req.user.access[programme].admin) {
-    next()
-  } else {
-    res
+  if (req.user.admin) next()
+  else if (req.user.access[programme] && req.user.access[programme].admin) next()
+  else
+    return res
       .status(401)
       .json({ error: 'Unauthorized access.' })
       .end()
-  }
 }
 
 const checkAdmin = (req, res, next) => {
