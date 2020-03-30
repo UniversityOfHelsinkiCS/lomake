@@ -2,18 +2,23 @@ const Router = require('express')
 const users = require('@controllers/usersController')
 const answers = require('@controllers/answersController')
 const tokens = require('@controllers/tokensController')
-const { checkAdmin } = require('@middleware/accessControlMiddleware')
+const {
+  checkAdmin,
+  requireProgrammeRead,
+  requireProgrammeWrite,
+  requireProgrammeOwner
+} = require('@middleware/accessControlMiddleware')
 
 const router = Router()
 
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', checkAdmin, answers.getAllTemp)
-router.get('/answers/:programme', answers.getOne)
-router.get('/answers/:programme/previous', answers.getPreviousYear)
-router.post('/answers', answers.create)
+router.get('/answers/:programme', requireProgrammeRead, answers.getOne)
+router.get('/answers/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
+router.post('/answers', requireProgrammeWrite, answers.create)
 router.post('/bulkanswers', answers.bulkCreate)
 
-router.get('/programmes/:programme/tokens', tokens.programmesTokens)
+router.get('/programmes/:programme/tokens', requireProgrammeOwner, tokens.programmesTokens)
 
 router.post('/login', users.getCurrentUser)
 router.post('/logout', users.getLogoutUrl)

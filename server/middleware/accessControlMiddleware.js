@@ -1,8 +1,33 @@
 const { inProduction } = require('@util/common')
 const logger = require('@util/logger')
 
-const checkAccess = (req, res, next) => {
-  if (req.user.access || req.user.admin) {
+const requireProgrammeRead = (req, res, next) => {
+  const programme = req.params.programme
+  if (req.user.admin || req.user.access[programme].read) {
+    next()
+  } else {
+    res
+      .status(401)
+      .json({ error: 'Unauthorized access.' })
+      .end()
+  }
+}
+
+const requireProgrammeWrite = (req, res, next) => {
+  const programme = req.body.room
+  if (req.user.admin || req.user.access[programme].write) {
+    next()
+  } else {
+    res
+      .status(401)
+      .json({ error: 'Unauthorized access.' })
+      .end()
+  }
+}
+
+const requireProgrammeOwner = (req, res, next) => {
+  const programme = req.params.programme
+  if (req.user.admin || req.user.access[programme].admin) {
     next()
   } else {
     res
@@ -36,6 +61,8 @@ const notInProduction = (req, res, next) => {
 
 module.exports = {
   notInProduction,
-  checkAccess,
+  requireProgrammeRead,
+  requireProgrammeWrite,
+  requireProgrammeOwner,
   checkAdmin
 }
