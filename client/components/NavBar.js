@@ -10,10 +10,6 @@ import { setLanguage } from 'Utilities/redux/languageReducer'
 import { images } from 'Utilities/common'
 import { Link } from 'react-router-dom'
 
-const isProgrammeOwner = (user) => {
-  return Object.keys(user.access).find((programme) => user.access[programme].admin)
-}
-
 export default () => {
   const [activeItem, setActiveItem] = useState('currentLomake')
   const dispatch = useDispatch()
@@ -60,21 +56,6 @@ export default () => {
     )
   }
 
-  const OwnerButton = () => {
-    return (
-      <Menu.Item
-        data-cy="nav-owner"
-        as={Link}
-        to={'/owner'}
-        name="owner"
-        active={activeItem === 'owner'}
-        onClick={handleItemClick}
-      >
-        Programme owner
-      </Menu.Item>
-    )
-  }
-
   if (!user) return null
   return (
     <Menu stackable fluid inverted>
@@ -97,7 +78,6 @@ export default () => {
         </Dropdown>
       </Menu.Menu>
       <Menu.Menu position="right">
-        {isProgrammeOwner(user) ? <OwnerButton /> : null}
         {user.adminMode ? <UsersButton /> : null}
         {user.admin ? getAdminButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
