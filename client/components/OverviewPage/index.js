@@ -28,6 +28,14 @@ export default () => {
     red: '#ff7f7f'
   }
 
+  const translations = {
+    noPermissions: {
+      fi: "Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Stragegisiin Palveluihin tai koulutusohjelman johtajaan.",
+      en: "You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.",
+      se: ""
+    }
+  }
+
   const usersProgrammes = currentUser.data.admin ? programmes : Object.keys(currentUser.data.access)
 
   const filteredProgrammes = usersProgrammes.filter((prog) => {
@@ -50,17 +58,26 @@ export default () => {
           </h3>
         </Modal.Content>
       </Modal>
-      <Input
-        name="filter"
-        icon="filter"
-        placeholder={filterText[languageCode]}
-        onChange={handleChange}
-        value={filter}
-        size="huge"
-      />
-      <div style={{ marginTop: '2em' }}>
-        <SmileyTable filteredProgrammes={filteredProgrammes} setModalData={setModalData} />
-      </div>
+
+      {usersProgrammes.length > 0 ? (
+        <>
+          <Input
+            name="filter"
+            icon="filter"
+            placeholder={filterText[languageCode]}
+            onChange={handleChange}
+            value={filter}
+            size="huge"
+          />
+          <div style={{ marginTop: '2em' }}>
+            <SmileyTable filteredProgrammes={filteredProgrammes} setModalData={setModalData} />
+          </div>
+        </>
+      ) : (
+          <Header style={{ textAlign: "center" }} as="h2" disabled>
+            {translations.noPermissions[languageCode]}
+          </Header>
+        )}
     </>
   )
 }
