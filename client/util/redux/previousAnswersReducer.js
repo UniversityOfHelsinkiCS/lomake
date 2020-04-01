@@ -19,13 +19,24 @@ export default (state = { data: null }, action) => {
         pending: true,
         error: false
       }
-    case 'GET_PREVIOUS_ANSWERS_SUCCESS':
+    case 'GET_PREVIOUS_ANSWERS_SUCCESS': {
+      const formattedStrings = action.response.data ? Object.entries(action.response.data).reduce((prev, curr) => {
+        return prev = {
+          ...prev,
+          [curr[0]]: curr[1].replace(/_x000D_/g, "")
+        }
+      }, {}) : undefined
+
       return {
         ...state,
-        data: action.response,
+        data: {
+          ...action.response,
+          data: formattedStrings
+        },
         pending: false,
         error: false
       }
+    }
     case 'GET_PREVIOUS_ANSWERS_FAILURE':
       return {
         ...state,
