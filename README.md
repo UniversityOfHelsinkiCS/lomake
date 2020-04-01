@@ -60,3 +60,10 @@ The current questions of the form can be found in [questions.json](https://githu
 
 ![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
 _Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
+
+### How to start development:
+- git clone
+- npm install
+- npm run dev
+- localhost:8000
+- use setHeaders() to select user for development purposes
