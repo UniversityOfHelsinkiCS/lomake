@@ -35,11 +35,12 @@ const mapLightToImage = {
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
   const languageCode = useSelector((state) => state.language)
 
-  let previousAnswerLight = previousYearsAnswers[`${id}_light`]
+
+  let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
     previousAnswerLight = mapLightToValid[previousAnswerLight]
   }
-  const previousAnswerText = previousYearsAnswers[`${id}_text`]
+  const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
   return (
     <>
