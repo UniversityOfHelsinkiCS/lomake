@@ -30,9 +30,11 @@ export default () => {
 
   const translations = {
     noPermissions: {
-      fi: "Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Stragegisiin Palveluihin tai koulutusohjelman johtajaan.",
-      en: "You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.",
-      se: ""
+      fi:
+        'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
+      en:
+        'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
+      se: ''
     }
   }
 
@@ -74,10 +76,10 @@ export default () => {
           </div>
         </>
       ) : (
-          <Header style={{ textAlign: "center" }} as="h2" disabled>
-            {translations.noPermissions[languageCode]}
-          </Header>
-        )}
+        <Header style={{ textAlign: 'center' }} as="h2" disabled>
+          {translations.noPermissions[languageCode]}
+        </Header>
+      )}
     </>
   )
 }
