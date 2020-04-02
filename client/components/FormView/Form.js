@@ -5,7 +5,7 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
 import { saveAnswersAction } from 'Utilities/redux/answersReducer'
@@ -28,6 +28,7 @@ const Form = ({ questions }) => {
   }, [])
 
   const handleSubmit = () => {
+    scrollTo(0, 0)
     dispatch(saveAnswersAction({ data: formData, room }))
   }
 

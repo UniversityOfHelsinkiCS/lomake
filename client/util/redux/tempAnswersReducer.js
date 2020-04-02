@@ -9,12 +9,6 @@ export const getAllTempAnswersAction = () => {
   return callBuilder(route, prefix)
 }
 
-export const getAllAnswersAction = () => {
-  const route = '/answers'
-  const prefix = 'GET_ALL_ANSWERS'
-  return callBuilder(route, prefix)
-}
-
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: [] }, action) => {

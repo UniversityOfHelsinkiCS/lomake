@@ -5,7 +5,7 @@ import { useHistory } from 'react-router'
 import { colors } from 'Utilities/common'
 import { Icon, Loader, Header, Input, Grid, Segment, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllTempAnswersAction } from 'Utilities/redux/allAnswersReducer'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import './OverviewPage.scss'
 
 const translations = {
@@ -36,7 +36,7 @@ const backgroundColorMap = {
 const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const answers = useSelector((state) => state.allAnswers)
+  const answers = useSelector((state) => state.tempAnswers)
   const languageCode = useSelector((state) => state.language)
   const [programExpanded, setProgramExpanded] = useState(null)
 

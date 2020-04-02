@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import Form from 'Components/FormView/Form'
 import meri_image from 'Assets/meri.jpg'
@@ -9,6 +9,8 @@ import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
 import { colors } from 'Utilities/common'
 import { Button } from 'semantic-ui-react'
+import { getAnswersAction } from 'Utilities/redux/currentAnswersReducer'
+import SavedMessage from './SavedMessage'
 
 const translations = {
   title: {
@@ -48,9 +50,24 @@ const translations = {
 }
 
 const FormView = () => {
-  const room = useSelector(({ room }) => room)
+  const dispatch = useDispatch()
   const history = useHistory()
+  const room = useSelector(({ room }) => room)
+  const answers = useSelector(({ currentAnswers }) => currentAnswers.data || [])
+  const submittedAnswer = useSelector(({ answers }) => answers)
   const languageCode = useSelector((state) => state.language)
+
+  if (submittedAnswer.data) {
+    answers.push(submittedAnswer.data)
+  }
+
+  const roomsAnswers = answers
+    .filter((answer) => answer.programme === room)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+
+  useEffect(() => {
+    dispatch(getAnswersAction())
+  }, [])
 
   if (!room) return <Redirect to="/" />
   return (
@@ -59,13 +76,14 @@ const FormView = () => {
         <Button onClick={() => history.push('/')} icon="arrow left" />
       </div>
       <img className="img-responsive" src={meri_image} />
-      <div className="intro">
+      <div>
         <h1>
           {translations.title[languageCode]} {new Date().getFullYear()}
         </h1>
         <p style={{ color: colors.theme_blue }}>
           <b>{room}</b>
         </p>
+        <SavedMessage answers={roomsAnswers} />
         <p>{translations.p1[languageCode]}</p>
         <p>{translations.p2[languageCode]}</p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
