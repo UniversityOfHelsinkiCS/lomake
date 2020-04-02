@@ -5,7 +5,7 @@ import { useHistory } from 'react-router'
 import { colors } from 'Utilities/common'
 import { Icon, Loader, Header, Input, Grid, Segment, Button } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllAnswersAction } from 'Utilities/redux/allAnswersReducer'
+import { getAllTempAnswersAction } from 'Utilities/redux/allAnswersReducer'
 import './OverviewPage.scss'
 
 const translations = {
@@ -41,7 +41,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
   const [programExpanded, setProgramExpanded] = useState(null)
 
   useEffect(() => {
-    dispatch(getAllAnswersAction())
+    dispatch(getAllTempAnswersAction())
   }, [])
 
   useEffect(() => {

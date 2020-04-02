@@ -5,12 +5,6 @@ import { programmes } from 'Utilities/common'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 
-const filterText = {
-  fi: 'Filtteröi',
-  en: 'Filter',
-  se: ''
-}
-
 export default () => {
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
@@ -34,6 +28,11 @@ export default () => {
         'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
       en:
         'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
+      se: ''
+    },
+    filter: {
+      fi: 'Filtteröi',
+      en: 'Filter',
       se: ''
     }
   }
@@ -66,7 +65,7 @@ export default () => {
           <Input
             name="filter"
             icon="filter"
-            placeholder={filterText[languageCode]}
+            placeholder={translations.filter[languageCode]}
             onChange={handleChange}
             value={filter}
             size="huge"
