@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 const translations = {
   editPrompt: {
-    fi: 'Linkilla saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
+    fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
     en: 'Link grants edit access, share to editors only:',
     se: '',
   },
