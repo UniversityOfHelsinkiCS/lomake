@@ -3,34 +3,35 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { allLightIds } from 'Utilities/common'
 import { useHistory } from 'react-router'
 import { colors } from 'Utilities/common'
-import { Icon, Loader, Header, Input, Grid, Segment, Button } from 'semantic-ui-react'
+import { Icon, Loader, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import OwnerAccordionContent from './OwnerAccordionContent'
 import './OverviewPage.scss'
 
 const translations = {
   manageText: {
     fi: 'Hallitse',
     en: 'Manage',
-    se: ''
+    se: '',
   },
   noResultsText: {
     fi: 'Ohjelmia ei löytynyt. Kokeile toista filtteriä',
     en: 'No matching programmes found. Please try another filter',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const lightEmojiMap = {
   green: 'smile outline',
   yellow: 'meh outline',
-  red: 'frown outline'
+  red: 'frown outline',
 }
 
 const backgroundColorMap = {
   green: '#9dff9d',
   yellow: '#ffffb1',
-  red: '#ff7f7f'
+  red: '#ff7f7f',
 }
 
 const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
@@ -67,7 +68,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
     return (
       <span
         style={{
-          writingMode: 'vertical-lr'
+          writingMode: 'vertical-lr',
         }}
       >
         {formatted.charAt(0).toUpperCase() + formatted.slice(1)}
@@ -89,7 +90,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
       style={{
         cursor: 'pointer',
         color: colors.theme_blue,
-        textDecoration: 'underline'
+        textDecoration: 'underline',
       }}
     >
       {program !== programExpanded && (
@@ -98,131 +99,6 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
         </span>
       )}
     </td>
-  )
-
-  const mockUserData = [
-    { name: 'Testi Testilä', email: 'testi.testila@helsinki.fi', canView: true, canEdit: false },
-    { name: 'Useri Superi', email: 'useri.superi@helsinki.fi', canView: true, canEdit: true }
-  ]
-
-  // this is bit of a hack for demo - might be worth it to implement later properly using CSS Grid
-  const ManageRows = ({ program }) => (
-    <>
-      <tr>
-        <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ marginRight: '2em' }}>
-              Share this URL to grant <b>view only</b> access
-            </div>
-            <Input
-              style={{ width: '400px' }}
-              action={{
-                color: 'blue',
-                labelPosition: 'right',
-                icon: 'copy',
-                content: 'Copy'
-              }}
-              defaultValue="http://cs.helsinki.fi/lomake/c0opq"
-            />
-            <div
-              style={{
-                cursor: 'pointer',
-                color: 'red',
-                textDecoration: 'underline',
-                marginLeft: '2em'
-              }}
-            >
-              Reset
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ marginRight: '4.5em' }}>
-              Share this URL to grant <b>edit</b> access
-            </div>
-            <Input
-              style={{ width: '400px' }}
-              action={{
-                color: 'blue',
-                labelPosition: 'right',
-                icon: 'copy',
-                content: 'Copy'
-              }}
-              defaultValue="http://cs.helsinki.fi/lomake/aK04bg"
-            />
-            <div
-              style={{
-                cursor: 'pointer',
-                color: 'red',
-                textDecoration: 'underline',
-                marginLeft: '2em'
-              }}
-            >
-              Reset
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={18}>
-          <Segment style={{ marginTop: '1em', marginBottom: '1em' }}>
-            <Grid celled="internally">
-              <Grid.Row>
-                <Grid.Column width={2}>
-                  <Header as="h4">Name</Header>
-                </Grid.Column>
-                <Grid.Column width={3}>
-                  <Header as="h4">Email</Header>
-                </Grid.Column>
-                <Grid.Column width={1}>
-                  <Header as="h4">View</Header>
-                </Grid.Column>
-                <Grid.Column width={1}>
-                  <Header as="h4">Edit</Header>
-                </Grid.Column>
-                <Grid.Column width={3}>
-                  <Header as="h4"></Header>
-                </Grid.Column>
-              </Grid.Row>
-              {mockUserData.map((user) => (
-                <Grid.Row key={user.id}>
-                  <Grid.Column width={2}>{user.name}</Grid.Column>
-                  <Grid.Column width={3}>{user.email}</Grid.Column>
-                  <Grid.Column textAlign="center" width={1}>
-                    <Icon
-                      name={user.canView ? 'check' : 'close'}
-                      color={user.canView ? 'green' : 'red'}
-                      size="large"
-                    />
-                  </Grid.Column>
-                  <Grid.Column textAlign="center" width={1}>
-                    <Icon
-                      name={user.canEdit ? 'check' : 'close'}
-                      color={user.canEdit ? 'green' : 'red'}
-                      size="large"
-                    />
-                  </Grid.Column>
-                  <Grid.Column width={3}>
-                    <span
-                      style={{
-                        cursor: 'pointer',
-                        color: 'red',
-                        textDecoration: 'underline'
-                      }}
-                    >
-                      Revoke access
-                    </span>
-                  </Grid.Column>
-                </Grid.Row>
-              ))}
-            </Grid>
-          </Segment>
-        </td>
-      </tr>
-    </>
   )
 
   return (
@@ -237,7 +113,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
                 wordWrap: 'break-word',
                 textAlign: 'center',
                 position: 'sticky',
-                background: 'white'
+                background: 'white',
               }}
             >
               {transformIdToTitle(id)}
@@ -258,7 +134,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
                     style={{
                       cursor: 'pointer',
                       color: colors.theme_blue,
-                      textDecoration: 'underline'
+                      textDecoration: 'underline',
                     }}
                   >
                     {p}
@@ -280,7 +156,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
                               header: programme.data[q.replace('light', 'text')],
                               programme: p,
                               content: q,
-                              color: programme.data[q]
+                              color: programme.data[q],
                             })
                           }
                         />
@@ -294,7 +170,7 @@ const SmileyTable = ({ filter, setModalData, filteredProgrammes }) => {
                 })}
                 <ManageCell program={p} />
               </tr>
-              {programExpanded === p && <ManageRows program={p} />}
+              {programExpanded === p && <OwnerAccordionContent program={p} />}
             </React.Fragment>
           )
         })}
