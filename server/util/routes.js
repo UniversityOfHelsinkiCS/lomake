@@ -19,6 +19,7 @@ router.post('/answers', requireProgrammeWrite, answers.create)
 router.post('/bulkanswers', answers.bulkCreate)
 
 router.get('/programmes/:programme/tokens', requireProgrammeOwner, tokens.programmesTokens)
+router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 
 router.post('/login', users.getCurrentUser)
 router.post('/logout', users.getLogoutUrl)

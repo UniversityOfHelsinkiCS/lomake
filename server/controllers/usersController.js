@@ -34,6 +34,20 @@ const getAllUsers = async (req, res) => {
   }
 }
 
+const getProgrammesUsers = async (req, res) => {
+  try {
+    const users = await db.user.findAll({})
+    const programme = req.params.programme
+
+    const filteredUsers = users.filter((u) => u.access[programme])
+
+    res.json(filteredUsers)
+  } catch (e) {
+    logger.error(e)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const editUser = async (req, res) => {
   try {
     const user = req.body
@@ -54,5 +68,6 @@ module.exports = {
   getCurrentUser,
   getLogoutUrl,
   getAllUsers,
-  editUser
+  editUser,
+  getProgrammesUsers
 }
