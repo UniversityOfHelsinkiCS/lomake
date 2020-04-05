@@ -1,43 +1,45 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Header, Input, Grid, Segment } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
+import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
 
 const translations = {
   editPrompt: {
     fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
     en: 'Link grants edit access, share to editors only:',
-    se: '',
+    se: ''
   },
   viewPrompt: {
     fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
     en: 'Link grants read access, share e.g. to student members',
-    se: '',
+    se: ''
   },
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
     en: 'Reset the current link, and generate a new one',
-    se: '',
+    se: ''
   },
   nameHeader: {
     fi: 'Nimi',
     en: 'Name',
-    se: '',
+    se: ''
   },
   viewHeader: {
     fi: 'Luku',
     en: 'Read',
-    se: '',
+    se: ''
   },
   editHeader: {
     fi: 'Vastaus',
     en: 'Edit',
-    se: '',
+    se: ''
   },
   owerHeader: {
     fi: 'Omistaja',
     en: 'Owner',
-    se: '',
-  },
+    se: ''
+  }
 }
 
 const mockUserData = [
@@ -47,7 +49,7 @@ const mockUserData = [
     email: 'testi.testila@helsinki.fi',
     canView: true,
     canEdit: false,
-    isOwner: false,
+    isOwner: false
   },
   {
     id: 2,
@@ -55,15 +57,21 @@ const mockUserData = [
     email: 'useri.superi@helsinki.fi',
     canView: true,
     canEdit: true,
-    isOwner: true,
-  },
+    isOwner: true
+  }
 ]
 
-const OwnerAccordionContent = ({ program }) => {
+const OwnerAccordionLinks = ({ programme }) => {
+  const dispatch = useDispatch()
   const languageCode = useSelector((state) => state.language)
+  const tokens = useSelector((state) => state.programmesTokens)
   const [copied, setCopied] = useState(false)
   const viewLinkRef = useRef(null)
   const editLinkRef = useRef(null)
+
+  useEffect(() => {
+    dispatch(getProgrammesTokensAction(programme))
+  }, [])
 
   //https://stackoverflow.com/a/42844911
   function copyToClipboard(editOrView) {
@@ -76,6 +84,11 @@ const OwnerAccordionContent = ({ program }) => {
       setCopied(null)
     }, 5000)
   }
+
+  if (!tokens.data || tokens.pending) return null
+
+  const viewToken = tokens.data.find((t) => t.type === 'READ')
+  const editToken = tokens.data.find((t) => t.type === 'WRITE')
 
   return (
     <>
@@ -96,7 +109,7 @@ const OwnerAccordionContent = ({ program }) => {
                   onClick={() => copyToClipboard('VIEW')}
                 />
               }
-              value="http://cs.helsinki.fi/lomake/c0opq"
+              value={viewToken ? `https://study.cs.helsinki.fi/lomake/access/${viewToken.url}` : ''}
               onChange={null}
               ref={viewLinkRef}
             />
@@ -106,7 +119,7 @@ const OwnerAccordionContent = ({ program }) => {
                 color: 'red',
                 textDecoration: 'underline',
                 marginLeft: '2em',
-                width: '300px',
+                width: '300px'
               }}
             >
               {translations.resetPrompt[languageCode]}
@@ -131,7 +144,7 @@ const OwnerAccordionContent = ({ program }) => {
                   onClick={() => copyToClipboard('EDIT')}
                 />
               }
-              value="http://cs.helsinki.fi/lomake/aK04bg"
+              value={editToken ? `https://study.cs.helsinki.fi/lomake/access/${editToken.url}` : ''}
               onChange={null}
               ref={editLinkRef}
             />
@@ -141,7 +154,7 @@ const OwnerAccordionContent = ({ program }) => {
                 color: 'red',
                 textDecoration: 'underline',
                 marginLeft: '2em',
-                width: '300px',
+                width: '300px'
               }}
             >
               {translations.resetPrompt[languageCode]}
@@ -149,6 +162,23 @@ const OwnerAccordionContent = ({ program }) => {
           </div>
         </td>
       </tr>
+    </>
+  )
+}
+
+const OwnerAccordionUsers = ({ programme }) => {
+  const dispatch = useDispatch()
+  const languageCode = useSelector((state) => state.language)
+  const users = useSelector((state) => state.programmesUsers)
+
+  useEffect(() => {
+    dispatch(getProgrammesUsersAction(programme))
+  }, [])
+
+  if (!users.data || users.pending) return null
+
+  return (
+    <>
       <tr>
         <td colSpan={18}>
           <Segment style={{ margin: '1em 5em' }}>
@@ -205,6 +235,15 @@ const OwnerAccordionContent = ({ program }) => {
           </Segment>
         </td>
       </tr>
+    </>
+  )
+}
+
+const OwnerAccordionContent = ({ program }) => {
+  return (
+    <>
+      <OwnerAccordionLinks programme={program} />
+      <OwnerAccordionUsers programme={program} />
     </>
   )
 }

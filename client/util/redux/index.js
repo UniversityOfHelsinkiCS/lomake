@@ -10,6 +10,7 @@ import language from './languageReducer'
 import accessToken from './accessTokenReducer'
 import previousAnswers from './previousAnswersReducer'
 import programmesTokens from './programmesTokensReducer'
+import programmesUsers from './programmesUsersReducer'
 
 export default combineReducers({
   form,
@@ -22,4 +23,5 @@ export default combineReducers({
   accessToken,
   previousAnswers,
   programmesTokens,
+  programmesUsers
 })
