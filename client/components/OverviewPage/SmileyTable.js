@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import OwnerAccordionContent from './OwnerAccordionContent'
 import './OverviewPage.scss'
+import { Link } from 'react-router-dom'
 
 const translations = {
   manageText: {
@@ -55,12 +56,6 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
 
     setProgramExpanded(null)
   }, [filteredProgrammes])
-
-  const handleRoomChange = async (room) => {
-    dispatch(wsLeaveRoom(room))
-    dispatch(wsJoinRoom(room))
-    history.push('/form')
-  }
 
   const transformIdToTitle = (id) => {
     const formatted = id.substring(0, id.length - 6).replace('_', ' ')
@@ -129,16 +124,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
             <React.Fragment key={p}>
               <tr>
                 <th colSpan="2">
-                  <span
-                    onClick={() => handleRoomChange(p)}
-                    style={{
-                      cursor: 'pointer',
-                      color: colors.theme_blue,
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    {p}
-                  </span>
+                  <Link to={`/form/${encodeURIComponent(p)}`}>{p}</Link>
                 </th>
                 {allLightIds.map((q) => {
                   return programme && programme.data[q] ? (

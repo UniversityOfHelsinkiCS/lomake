@@ -12,7 +12,11 @@ export default () => (
     <Switch>
       <Route exact path="/" component={OverviewPage} />
       <Route exact path="/users" component={UsersPage} />
-      <Route exact path="/form" component={FormView} />
+      <Route
+        exact
+        path="/form/:room"
+        render={(props) => <FormView room={props.match.params.room} />}
+      />
       <Route
         exact
         path="/access/:url"

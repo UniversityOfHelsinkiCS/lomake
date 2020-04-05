@@ -9,8 +9,8 @@ import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
 import { colors } from 'Utilities/common'
 import { Button } from 'semantic-ui-react'
-import { getAnswersAction } from 'Utilities/redux/currentAnswersReducer'
 import StatusMessage from './StatusMessage'
+import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 
 const translations = {
   title: {
@@ -49,17 +49,21 @@ const translations = {
   },
 }
 
-const FormView = () => {
+const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const room = useSelector(({ room }) => room)
   const languageCode = useSelector((state) => state.language)
 
   useEffect(() => {
-    dispatch(getAnswersAction())
+    if (!room) return
+
+    dispatch(wsJoinRoom(decodeURIComponent(room)))
+
+    return dispatch(wsLeaveRoom(decodeURIComponent(room)))
   }, [])
 
   if (!room) return <Redirect to="/" />
+
   return (
     <div className="the-form">
       <div style={{ marginBottom: '2em' }}>
@@ -71,7 +75,7 @@ const FormView = () => {
           {translations.title[languageCode]} {new Date().getFullYear()}
         </h1>
         <p style={{ color: colors.theme_blue }}>
-          <b>{room}</b>
+          <b>{decodeURIComponent(room)}</b>
         </p>
         <StatusMessage />
         <p>{translations.p1[languageCode]}</p>
