@@ -16,7 +16,7 @@ const translations = {
   title: {
     en: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
     fi: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
-    se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING'
+    se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
   },
   p1: {
     en:
@@ -24,46 +24,36 @@ const translations = {
     fi:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     se:
-      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.'
+      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
   },
   p2: {
     en:
       'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
     fi: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
-    se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis'
+    se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
   },
   positive: {
     en: 'No issues',
     fi: 'Kunnossa',
-    se: 'I sin ordning'
+    se: 'I sin ordning',
   },
   neutral: {
     en: 'Challenges identified and development underway',
     fi: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
-    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår'
+    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
   },
   negative: {
     en: 'Significant measures required/development areas not yet specified',
     fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
-    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats'
-  }
+    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
+  },
 }
 
 const FormView = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const room = useSelector(({ room }) => room)
-  const answers = useSelector(({ currentAnswers }) => currentAnswers.data || [])
-  const submittedAnswer = useSelector(({ answers }) => answers)
   const languageCode = useSelector((state) => state.language)
-
-  if (submittedAnswer.data) {
-    answers.push(submittedAnswer.data)
-  }
-
-  const roomsAnswers = answers
-    .filter((answer) => answer.programme === room)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
   useEffect(() => {
     dispatch(getAnswersAction())
@@ -83,7 +73,7 @@ const FormView = () => {
         <p style={{ color: colors.theme_blue }}>
           <b>{room}</b>
         </p>
-        <SavedMessage answers={roomsAnswers} />
+        <SavedMessage answers={[]} />
         <p>{translations.p1[languageCode]}</p>
         <p>{translations.p2[languageCode]}</p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -98,7 +88,7 @@ const FormView = () => {
               height: 'auto',
               marginRight: '5px',
               marginTop: '5px',
-              marginBottom: '5px'
+              marginBottom: '5px',
             }}
           />{' '}
           {translations.neutral[languageCode]}

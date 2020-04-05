@@ -4,7 +4,6 @@ import form from './formReducer'
 import room from './roomReducer'
 import currentUser from './currentUserReducer'
 import users from './usersReducer'
-import answers from './answersReducer'
 import tempAnswers from './tempAnswersReducer'
 import currentAnswers from './currentAnswersReducer'
 import language from './languageReducer'
@@ -17,11 +16,10 @@ export default combineReducers({
   room,
   currentUser,
   users,
-  answers,
   tempAnswers,
   currentAnswers,
   language,
   accessToken,
   previousAnswers,
-  programmesTokens
+  programmesTokens,
 })
