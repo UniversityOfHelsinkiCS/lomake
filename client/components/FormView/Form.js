@@ -4,15 +4,8 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { useSelector } from 'react-redux'
-import { Button } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
-
-const submitButtonText = {
-  fi: 'Välitallenna',
-  en: 'Save current',
-  se: '',
-}
 
 const Form = ({ questions }) => {
   const previousYearsAnswers = useSelector((state) => state.previousAnswers)
