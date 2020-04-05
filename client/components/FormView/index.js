@@ -10,7 +10,7 @@ import questions from '../../questions'
 import { colors } from 'Utilities/common'
 import { Button } from 'semantic-ui-react'
 import { getAnswersAction } from 'Utilities/redux/currentAnswersReducer'
-import SavedMessage from './SavedMessage'
+import StatusMessage from './StatusMessage'
 
 const translations = {
   title: {
@@ -73,7 +73,7 @@ const FormView = () => {
         <p style={{ color: colors.theme_blue }}>
           <b>{room}</b>
         </p>
-        <SavedMessage answers={[]} />
+        <StatusMessage />
         <p>{translations.p1[languageCode]}</p>
         <p>{translations.p2[languageCode]}</p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
