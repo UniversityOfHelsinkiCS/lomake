@@ -81,7 +81,7 @@ const OwnerAccordionContent = ({ program }) => {
     <>
       <tr>
         <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
             <div style={{ marginRight: '2em', width: '375px' }}>
               {translations.viewPrompt[languageCode]}
             </div>
@@ -116,7 +116,7 @@ const OwnerAccordionContent = ({ program }) => {
       </tr>
       <tr>
         <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '0 3em' }}>
             <div style={{ marginRight: '2em', width: '375px' }}>
               {translations.editPrompt[languageCode]}
             </div>
@@ -151,7 +151,7 @@ const OwnerAccordionContent = ({ program }) => {
       </tr>
       <tr>
         <td colSpan={18}>
-          <Segment style={{ marginTop: '1em', marginBottom: '1em' }}>
+          <Segment style={{ margin: '1em 5em' }}>
             <Grid celled="internally">
               <Grid.Row>
                 <Grid.Column width={2} style={{ textAlign: 'center' }}>

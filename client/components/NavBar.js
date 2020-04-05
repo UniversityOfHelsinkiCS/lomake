@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   logoutAction,
   activateAdminModeAction,
-  disableAdminModeAction
+  disableAdminModeAction,
 } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { images } from 'Utilities/common'
@@ -58,9 +58,9 @@ export default () => {
 
   if (!user) return null
   return (
-    <Menu stackable fluid inverted>
-      <Menu.Item style={{ fontSize: 'xx-large', padding: '0.5em' }} as={Link} to="/">
-        <img src={images.toska_color} alt="tosca" />
+    <Menu stackable compact fluid inverted>
+      <Menu.Item as={Link} to="/">
+        <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
       <Menu.Menu>
         <Dropdown item icon="globe" simple>
