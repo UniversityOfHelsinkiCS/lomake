@@ -1,11 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Header, Segment } from 'semantic-ui-react'
+import { useHistory } from 'react-router'
 
 import User from 'Components/UsersPage/User'
 
 export default () => {
   const users = useSelector((state) => state.users.data)
+  const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
+  const history = useHistory()
+
+  if (!isAdmin) {
+    history.push('/')
+  }
 
   if (!users) return null
 
@@ -30,6 +37,9 @@ export default () => {
           </Grid.Column>
           <Grid.Column width={1}>
             <Header as="h4">Hide</Header>
+          </Grid.Column>
+          <Grid.Column width={1}>
+            <Header as="h4">Login as</Header>
           </Grid.Column>
           <Grid.Column width={2} />
         </Grid.Row>
