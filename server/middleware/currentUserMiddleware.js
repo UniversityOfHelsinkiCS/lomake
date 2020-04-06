@@ -1,15 +1,11 @@
-// const jwt = require('jsonwebtoken')
-// const { isAdmin, isShibboleth, JWT_SECRET } = require('@util/common')
 const db = require('@models/index')
 
-const usersAllowedToUseLoginAs = ['markokos', 'admin']
+const SUPERADMINS = ['markokos', 'tgtapio', 'jehelen', 'mluukkai', 'admin']
 
 const currentUser = async (req, res, next) => {
-  console.log(req.headers)
-
   let uid = req.headers.uid
 
-  if (usersAllowedToUseLoginAs.includes(uid)) {
+  if (SUPERADMINS.includes(uid)) {
     const loggedInAs = req.headers['x-admin-logged-in-as']
     if (loggedInAs) {
       uid = loggedInAs
