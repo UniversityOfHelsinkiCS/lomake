@@ -10,7 +10,7 @@
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "$(npm bin)/cypress open",
     "stats": "webpack --mode production --json --optimize-minimize > stats.json"
   },
   "engines": {
