@@ -34,7 +34,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
   return (
-    <div style={{ margin: '1em 0' }}>
+    <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
       <label style={{ fontStyle: 'bold' }}>
         {label}
         {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
