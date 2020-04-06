@@ -18,9 +18,6 @@ export default () => {
   const setLanguageCode = (code) => dispatch(setLanguage(code))
 
   const handleLogout = () => {
-    if (window.localStorage.getItem('adminLoggedInAs')) {
-      window.localStorage.removeItem('adminLoggedInAs')
-    }
     dispatch(logoutAction())
   }
   const handleAdminModeToggle = () => {
@@ -40,6 +37,21 @@ export default () => {
     ) : (
       <Menu.Item data-cy="adminmode-enable" onClick={handleAdminModeToggle}>
         AdminMode off
+      </Menu.Item>
+    )
+  }
+
+  const handleLoginAsDisable = () => {
+    window.localStorage.removeItem('adminLoggedInAs')
+    window.location.reload()
+  }
+
+  const logInAsButton = () => {
+    return (
+      <Menu.Item data-cy="sign-in-as" onClick={handleLoginAsDisable}>
+        <Label color="green" horizontal>
+          Stop "sign in as"
+        </Label>
       </Menu.Item>
     )
   }
@@ -83,6 +95,7 @@ export default () => {
       <Menu.Menu position="right">
         {user.adminMode && user.admin ? <UsersButton /> : null}
         {user.admin ? getAdminButton() : null}
+        {window.localStorage.getItem('adminLoggedInAs') ? logInAsButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`Log out (${user.uid})`}
         </Menu.Item>
