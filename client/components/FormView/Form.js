@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Section from './Section'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
+import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 
 const Form = ({ questions }) => {
   const previousYearsAnswers = useSelector((state) => state.previousAnswers)
+  const dispatch = useDispatch()
   const languageCode = useSelector((state) => state.language)
+  const room = useSelector(({ room }) => room)
+
+  useEffect(() => {
+    dispatch(getPreviousAnswersAction(room))
+  }, [])
 
   const partComponentMap = {
     TEXTAREA: Textarea,
