@@ -21,7 +21,7 @@ const Streetlights = ({ label, id, required }) => {
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
         <div title="No issues">
           <img
-            data-cy="street-light-positive"
+            data-cy={`street-light-positive-${id}`}
             src={positiveEmoji}
             className={value === 'green' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'green')}
@@ -29,7 +29,7 @@ const Streetlights = ({ label, id, required }) => {
         </div>
         <div title="Challenges identified and development underway">
           <img
-            data-cy="street-light-neutral"
+            data-cy={`street-light-neutral-${id}`}
             src={neutralEmoji}
             className={
               value === 'yellow' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'
@@ -39,7 +39,7 @@ const Streetlights = ({ label, id, required }) => {
         </div>
         <div title="Significant measures required/development areas not yet specified">
           <img
-            data-cy="street-light-negative"
+            data-cy={`street-light-negative-${id}`}
             src={negativeEmoji}
             className={value === 'red' ? 'emoji emoji-button active-emoji' : 'emoji emoji-button'}
             onClick={() => choose(fieldName, 'red')}
