@@ -15,8 +15,8 @@ const Form = ({ questions }) => {
   const room = useSelector(({ room }) => room)
 
   useEffect(() => {
-    dispatch(getPreviousAnswersAction(room))
-  }, [])
+    if (room) dispatch(getPreviousAnswersAction(room))
+  }, [room])
 
   const partComponentMap = {
     TEXTAREA: Textarea,
