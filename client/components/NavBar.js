@@ -41,14 +41,14 @@ export default () => {
     )
   }
 
-  const handleLoginAsDisable = () => {
+  const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
     window.location.reload()
   }
 
   const unHijackButton = () => {
     return (
-      <Menu.Item data-cy="sign-in-as" onClick={handleLoginAsDisable}>
+      <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
         <Label color="green" horizontal>
           Unhijack
         </Label>
