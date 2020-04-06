@@ -5,7 +5,6 @@ import FormView from 'Components/FormView'
 import UsersPage from 'Components/UsersPage'
 import OverviewPage from 'Components/OverviewPage'
 import ClaimAccessPage from 'Components/ClaimAccessPage'
-import OwnerPage from 'Components/OwnerPage'
 
 export default () => (
   <div className="content">
@@ -22,7 +21,6 @@ export default () => (
         path="/access/:url"
         render={(props) => <ClaimAccessPage url={props.match.params.url} />}
       />
-      <Route exact path="/owner" component={OwnerPage} />
       <Route path="*" render={() => <div>Page not found!</div>} />
     </Switch>
   </div>

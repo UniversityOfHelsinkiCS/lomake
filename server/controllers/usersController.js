@@ -64,10 +64,33 @@ const editUser = async (req, res) => {
   }
 }
 
+const editUserAccess = async (req, res) => {
+  try {
+    const programmeAccess = req.body
+
+    const user = await db.user.findOne({ where: { id: req.params.id } })
+
+    if (!user) return res.status(400).json({ error: 'id not found.' })
+
+    user.access = {
+      ...user.access,
+      [req.params.programme]: { ...user.access[req.params.programme], ...programmeAccess }
+    }
+
+    await user.save()
+
+    return res.status(200).json(user)
+  } catch (e) {
+    logger.error(e.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
   getAllUsers,
   editUser,
-  getProgrammesUsers
+  getProgrammesUsers,
+  editUserAccess
 }

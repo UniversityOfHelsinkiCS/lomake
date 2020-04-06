@@ -25,7 +25,7 @@ const translations = {
       en: 'Admin access',
       se: '',
     },
-    EDIT: {
+    WRITE: {
       fi: 'Vastausoikeudet',
       en: 'Edit access',
       se: '',
@@ -40,7 +40,7 @@ const translations = {
 
 const labelIcon = {
   ADMIN: 'key',
-  EDIT: 'write',
+  WRITE: 'write',
   READ: 'eye',
 }
 
@@ -59,7 +59,7 @@ export default ({ url }) => {
   }
 
   const buttonIsDisabled = () => {
-    if (['EDIT', 'READ'].includes(token.data.type)) {
+    if (['WRITE', 'READ'].includes(token.data.type)) {
       return false
     }
 
