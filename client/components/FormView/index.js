@@ -59,8 +59,8 @@ const FormView = ({ room }) => {
 
     dispatch(wsJoinRoom(decodeURIComponent(room)))
 
-    return dispatch(wsLeaveRoom(decodeURIComponent(room)))
-  }, [])
+    return () => dispatch(wsLeaveRoom(decodeURIComponent(room)))
+  }, [room])
 
   if (!room) return <Redirect to="/" />
 

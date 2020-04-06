@@ -51,11 +51,11 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
         toolbar={{
           options: ['inline', 'list', 'link', 'embedded', 'history'],
           inline: {
-            options: ['bold', 'italic', 'underline']
+            options: ['bold', 'italic', 'underline'],
           },
           list: {
-            options: ['unordered', 'ordered']
-          }
+            options: ['unordered', 'ordered'],
+          },
         }}
       />
       <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>

@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux'
 const expandText = {
   fi: 'Näytä viime vuoden vastaukset',
   en: 'Show answers from last year',
-  se: ''
+  se: '',
 }
 
 const collapseText = {
   fi: 'Piilota viime vuoden vastaukset',
   en: 'Hide answers from last year',
-  se: ''
+  se: '',
 }
 
 const LastYearsAnswersAccordion = ({ children }) => {
@@ -19,7 +19,12 @@ const LastYearsAnswersAccordion = ({ children }) => {
   return (
     <>
       <span
-        style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+        style={{
+          cursor: 'pointer',
+          color: 'blue',
+          textDecoration: 'underline',
+          marginLeft: '0.5em',
+        }}
         onClick={() => setExpanded(!expanded)}
       >
         {expanded ? collapseText[languageCode] : expandText[languageCode]}
@@ -30,7 +35,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
             marginTop: '1em',
             backgroundColor: '#F4F4F4',
             borderRadius: '5px',
-            padding: '1em'
+            padding: '1em',
           }}
         >
           {children}
