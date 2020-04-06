@@ -11,27 +11,27 @@ export const getAllTempAnswersAction = () => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: [] }, action) => {
+export default (state = { data: null }, action) => {
   switch (action.type) {
     case 'GET_ALL_TEMP_ANSWERS_ATTEMPT':
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'GET_ALL_TEMP_ANSWERS_SUCCESS':
       return {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     case 'GET_ALL_TEMP_ANSWERS_FAILURE':
       return {
         ...state,
         data: [],
         pending: false,
-        error: true
+        error: true,
       }
     default:
       return state
