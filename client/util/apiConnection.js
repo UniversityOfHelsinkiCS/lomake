@@ -11,11 +11,15 @@ const getAxios = axios.create({ baseURL: `${basePath}api` })
 const callApi = async (url, method = 'get', data) => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
   const headers = { ...defaultHeaders }
+
+  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs') // uid
+  if (adminLoggedInAs) headers['x-admin-logged-in-as'] = adminLoggedInAs
+
   return getAxios({
     method,
     url,
     data,
-    headers
+    headers,
   })
 }
 
@@ -26,8 +30,8 @@ export default (route, prefix, method = 'get', data, query) => ({
     method,
     data,
     prefix,
-    query
-  }
+    query,
+  },
 })
 
 /**
