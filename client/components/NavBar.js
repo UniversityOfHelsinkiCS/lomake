@@ -18,6 +18,9 @@ export default () => {
   const setLanguageCode = (code) => dispatch(setLanguage(code))
 
   const handleLogout = () => {
+    if (window.localStorage.getItem('adminLoggedInAs')) {
+      window.localStorage.removeItem('adminLoggedInAs')
+    }
     dispatch(logoutAction())
   }
   const handleAdminModeToggle = () => {
@@ -78,10 +81,10 @@ export default () => {
         </Dropdown>
       </Menu.Menu>
       <Menu.Menu position="right">
-        {user.adminMode ? <UsersButton /> : null}
+        {user.adminMode && user.admin ? <UsersButton /> : null}
         {user.admin ? getAdminButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          Log out
+          {`Log out (${user.uid})`}
         </Menu.Item>
       </Menu.Menu>
     </Menu>
