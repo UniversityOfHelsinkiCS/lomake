@@ -1,11 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Icon, Popup } from 'semantic-ui-react'
 import { editUserAction } from 'Utilities/redux/usersReducer'
+import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
 
 export default ({ user }) => {
   const dispatch = useDispatch()
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
   const grantAdmin = () => {
     dispatch(editUserAction({ ...user, admin: true }))
@@ -142,9 +144,13 @@ export default ({ user }) => {
       <Grid.Column textAlign="center">
         <IrrelevantBadge />
       </Grid.Column>
-      <Grid.Column>
-        <Icon onClick={logInAs} size="large" name="sign-in" />
-      </Grid.Column>
+
+      {isSuperAdmin(currentUser.uid) && (
+        <Grid.Column>
+          <Icon onClick={logInAs} size="large" name="sign-in" />
+        </Grid.Column>
+      )}
+
       <Grid.Column />
     </Grid.Row>
   )

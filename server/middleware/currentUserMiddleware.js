@@ -1,11 +1,11 @@
 const db = require('@models/index')
 
-const SUPERADMINS = ['markokos', 'tgtapio', 'jehelen', 'mluukkai', 'admin']
+const { isSuperAdmin } = require('@root/config/common')
 
 const currentUser = async (req, res, next) => {
   let uid = req.headers.uid
 
-  if (SUPERADMINS.includes(uid)) {
+  if (isSuperAdmin(uid)) {
     const loggedInAs = req.headers['x-admin-logged-in-as']
     if (loggedInAs) {
       uid = loggedInAs

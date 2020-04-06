@@ -9,7 +9,7 @@ const basePath = process.env.BASE_PATH || '/'
 const degreeLevels = [
   'Bachelor´s level (1. cycle)',
   'Master´s level (2. cycle)',
-  'Doctoral level (3. cycle)'
+  'Doctoral level (3. cycle)',
 ]
 
 const programmes = [
@@ -139,7 +139,7 @@ const programmes = [
   'Doctoral Programme in Computer Science',
   'Doctoral Programme in Sustainable Use of Renewable Natural Resources',
   'Doctoral Programme in Population Health',
-  'Doctoral Programme in Interdisciplinary Environmental Sciences'
+  'Doctoral Programme in Interdisciplinary Environmental Sciences',
 ].sort((a, b) => a.localeCompare(b))
 
 const faculties = [
@@ -154,7 +154,7 @@ const faculties = [
   'Faculty of Social Sciences',
   'Faculty of Theology',
   'Faculty of Veterinary Medicine',
-  'Swedish School of Social Science'
+  'Swedish School of Social Science',
 ].sort((a, b) => a.localeCompare(b))
 
 const requiredFormIds = [
@@ -190,7 +190,7 @@ const requiredFormIds = [
   'resourcing_light',
   'resourcing_text',
   'successes_and_development_needs_text',
-  'measures_1_text'
+  'measures_1_text',
 ]
 
 const allLightIds = [
@@ -208,8 +208,14 @@ const allLightIds = [
   'teaching_resources_light',
   'recruitment_influence_light',
   'resourcing_light',
-  'cooperation_success_light'
+  'cooperation_success_light',
 ]
+
+const SUPERADMINS = ['markokos', 'tgtapio', 'jehelen', 'mluukkai', 'admin']
+
+const isSuperAdmin = (uid) => {
+  return SUPERADMINS.includes(uid)
+}
 
 module.exports = {
   inProduction,
@@ -218,5 +224,6 @@ module.exports = {
   programmes,
   degreeLevels,
   requiredFormIds,
-  allLightIds
+  allLightIds,
+  isSuperAdmin,
 }

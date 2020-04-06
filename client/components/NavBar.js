@@ -46,11 +46,11 @@ export default () => {
     window.location.reload()
   }
 
-  const logInAsButton = () => {
+  const unHijackButton = () => {
     return (
       <Menu.Item data-cy="sign-in-as" onClick={handleLoginAsDisable}>
         <Label color="green" horizontal>
-          Stop "sign in as"
+          Unhijack
         </Label>
       </Menu.Item>
     )
@@ -95,7 +95,7 @@ export default () => {
       <Menu.Menu position="right">
         {user.adminMode && user.admin ? <UsersButton /> : null}
         {user.admin ? getAdminButton() : null}
-        {window.localStorage.getItem('adminLoggedInAs') ? logInAsButton() : null}
+        {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`Log out (${user.uid})`}
         </Menu.Item>

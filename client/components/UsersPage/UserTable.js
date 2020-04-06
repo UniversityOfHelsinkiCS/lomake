@@ -2,15 +2,15 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Header, Segment } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
-
 import User from 'Components/UsersPage/User'
+import { isSuperAdmin } from '../../../config/common'
 
 export default () => {
   const users = useSelector((state) => state.users.data)
-  const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
+  const user = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
 
-  if (!isAdmin) {
+  if (!user.admin) {
     history.push('/')
   }
 
@@ -38,9 +38,12 @@ export default () => {
           <Grid.Column width={1}>
             <Header as="h4">Hide</Header>
           </Grid.Column>
-          <Grid.Column width={1}>
-            <Header as="h4">Login as</Header>
-          </Grid.Column>
+          {isSuperAdmin(user.uid) && (
+            <Grid.Column width={1}>
+              <Header as="h4">Hijack</Header>
+            </Grid.Column>
+          )}
+
           <Grid.Column width={2} />
         </Grid.Row>
         {users.map((u) => (
