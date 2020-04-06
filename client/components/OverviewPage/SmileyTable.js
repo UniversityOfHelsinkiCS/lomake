@@ -121,7 +121,9 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
             <React.Fragment key={p}>
               <tr>
                 <th colSpan="2">
-                  <Link to={`/form/${encodeURIComponent(p)}`}>{p}</Link>
+                  <Link data-cy="smileytable-link-to-form" to={`/form/${encodeURIComponent(p)}`}>
+                    {p}
+                  </Link>
                 </th>
                 {allLightIds.map((q) => {
                   return programme && programme.data[q] ? (

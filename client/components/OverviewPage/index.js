@@ -63,6 +63,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <Input
+            data-cy="overviewpage-filter"
             name="filter"
             icon="filter"
             placeholder={translations.filter[languageCode]}

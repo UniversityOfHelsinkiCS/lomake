@@ -40,6 +40,7 @@ const Section = ({ title, number, children }) => {
   return (
     <>
       <div
+        data-cy={`form-section-${number}`}
         className="section-flex"
         onClick={() => {
           setCollapsed(!collapsed)

@@ -71,7 +71,7 @@ const FormView = ({ room }) => {
       </div>
       <img className="img-responsive" src={meri_image} />
       <div>
-        <h1>
+        <h1 data-cy="formview-title">
           {translations.title[languageCode]} {new Date().getFullYear()}
         </h1>
         <p style={{ color: colors.theme_blue }}>
