@@ -36,7 +36,6 @@ const backgroundColorMap = {
 }
 
 const SmileyTable = ({ setModalData, filteredProgrammes }) => {
-  const history = useHistory()
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
   const languageCode = useSelector((state) => state.language)
