@@ -10,8 +10,14 @@ const logger = require('@util/logger')
 
 const { initializeDatabaseConnection } = require('@root/server/database/connection')
 
+const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
+
 initializeDatabaseConnection()
   .then(() => {
+    if (process.argv[2] && process.argv[2] === 'reset_tokens') {
+      resetAllTokens().then(() => logger.info('Token reset done.'))
+      return
+    }
     const app = express()
     const server = require('http').Server(app)
     const io = require('socket.io')(server)

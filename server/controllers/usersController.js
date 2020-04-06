@@ -34,6 +34,20 @@ const getAllUsers = async (req, res) => {
   }
 }
 
+const getProgrammesUsers = async (req, res) => {
+  try {
+    const users = await db.user.findAll({})
+    const programme = req.params.programme
+
+    const filteredUsers = users.filter((u) => u.access[programme])
+
+    res.json(filteredUsers)
+  } catch (e) {
+    logger.error(e)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const editUser = async (req, res) => {
   try {
     const user = req.body
@@ -50,9 +64,33 @@ const editUser = async (req, res) => {
   }
 }
 
+const editUserAccess = async (req, res) => {
+  try {
+    const programmeAccess = req.body
+
+    const user = await db.user.findOne({ where: { id: req.params.id } })
+
+    if (!user) return res.status(400).json({ error: 'id not found.' })
+
+    user.access = {
+      ...user.access,
+      [req.params.programme]: { ...user.access[req.params.programme], ...programmeAccess }
+    }
+
+    await user.save()
+
+    return res.status(200).json(user)
+  } catch (e) {
+    logger.error(e.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
   getAllUsers,
-  editUser
+  editUser,
+  getProgrammesUsers,
+  editUserAccess
 }
