@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { allLightIds } from 'Utilities/common'
-import { useHistory } from 'react-router'
 import { colors } from 'Utilities/common'
 import { Icon, Loader, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
