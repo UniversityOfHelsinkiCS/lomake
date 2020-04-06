@@ -23,6 +23,11 @@ export default ({ user }) => {
     dispatch(editUserAction({ ...user, irrelevant: false }))
   }
 
+  const logInAs = () => {
+    localStorage.setItem('adminLoggedInAs', user.uid)
+    window.location.reload()
+  }
+
   const IrrelevantBadge = () => {
     return user.irrelevant ? (
       <Popup
@@ -136,6 +141,9 @@ export default ({ user }) => {
       </Grid.Column>
       <Grid.Column textAlign="center">
         <IrrelevantBadge />
+      </Grid.Column>
+      <Grid.Column>
+        <Icon onClick={logInAs} size="large" name="sign-in" />
       </Grid.Column>
       <Grid.Column />
     </Grid.Row>
