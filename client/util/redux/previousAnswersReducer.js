@@ -17,24 +17,26 @@ export default (state = { data: null }, action) => {
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'GET_PREVIOUS_ANSWERS_SUCCESS': {
-      const formattedStrings = action.response.data ? Object.entries(action.response.data).reduce((prev, curr) => {
-        return prev = {
-          ...prev,
-          [curr[0]]: curr[1].replace(/_x000D_/g, "")
-        }
-      }, {}) : undefined
+      const formattedStrings = action.response.data
+        ? Object.entries(action.response.data).reduce((prev, curr) => {
+            return (prev = {
+              ...prev,
+              [curr[0]]: curr[1].replace(/_x000D_/g, '\n'),
+            })
+          }, {})
+        : undefined
 
       return {
         ...state,
         data: {
           ...action.response,
-          data: formattedStrings
+          data: formattedStrings,
         },
         pending: false,
-        error: false
+        error: false,
       }
     }
     case 'GET_PREVIOUS_ANSWERS_FAILURE':
@@ -42,7 +44,7 @@ export default (state = { data: null }, action) => {
         ...state,
         data: null,
         pending: false,
-        error: true
+        error: true,
       }
     default:
       return state
