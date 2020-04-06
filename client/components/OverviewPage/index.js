@@ -19,7 +19,7 @@ export default () => {
   const backgroundColorMap = {
     green: '#9dff9d',
     yellow: '#ffffb1',
-    red: '#ff7f7f'
+    red: '#ff7f7f',
   }
 
   const translations = {
@@ -28,13 +28,13 @@ export default () => {
         'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
       en:
         'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
-      se: ''
+      se: '',
     },
     filter: {
       fi: 'Filtteröi',
       en: 'Filter',
-      se: ''
-    }
+      se: '',
+    },
   }
 
   const usersProgrammes = currentUser.data.admin ? programmes : Object.keys(currentUser.data.access)
@@ -52,7 +52,7 @@ export default () => {
           <Modal.Description>{modalData ? modalData.programme : ''}</Modal.Description>
           <h3
             style={{
-              color: backgroundColorMap[modalData ? modalData.color : 'green']
+              color: backgroundColorMap[modalData ? modalData.color : 'green'],
             }}
           >
             {modalData ? modalData.header : ''}
@@ -75,7 +75,7 @@ export default () => {
           </div>
         </>
       ) : (
-        <Header style={{ textAlign: 'center' }} as="h2" disabled>
+        <Header style={{ textAlign: 'center', paddingTop: '5em' }} as="h2" disabled>
           {translations.noPermissions[languageCode]}
         </Header>
       )}
