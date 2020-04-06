@@ -1,6 +1,30 @@
 [
   {
     "title": {
+      "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
+      "se": "",
+      "en": "REVIEW OF PREVIOUS YEARS' STATUS REPORT"
+    },
+    "parts": [
+      {
+        "id": "review_of_last_years_situation_report",
+        "type": "ENTITY",
+        "label": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Näkyvätkö toimenpidelistan asiat tiedekunnan toimenpidesuunnitelmassa ja / tai henkilöstösuunnitelmassa? Mitkä asiat ovat toteutuneet? Mitä muutoksia suunnittelussa on tarve tehdä tällä kertaa?",
+          "se": "",
+          "en": "Are the items on the list of measures visible in the implementation and/or HR plans? Which items have been achieved? Which have been put back? What will be done differently this time around?"
+        },
+        "required": true
+      }
+    ]
+  },
+  {
+    "title": {
       "fi": "KOULUTUSOHJELMAN YLEISTILANNE",
       "se": "DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET",
       "en": "OVERALL STATUS OF THE DEGREE PROGRAMME"
@@ -31,21 +55,6 @@
           "en": "What information would you have needed?"
         },
         "required": false
-      },
-      {
-        "id": "review_of_last_years_situation_report",
-        "type": "ENTITY",
-        "label": {
-          "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
-          "se": "",
-          "en": "REVIEW OF PREVIOUS YEARS' STATUS REPORT"
-        },
-        "description": {
-          "fi": "Näkyvätkö toimenpidelistan asiat tiedekunnan toimenpidesuunnitelmassa ja / tai henkilöstösuunnitelmassa? Mitkä asiat ovat toteutuneet? Mitä muutoksia suunnittelussa on tarve tehdä tällä kertaa?",
-          "se": "",
-          "en": "Are the items on the list of measures visible in the implementation and/or HR plans? Which items have been achieved? Which have been put back? What will be done differently this time around?"
-        },
-        "required": true
       },
       {
         "id": "student_admissions",
