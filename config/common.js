@@ -161,6 +161,7 @@ const requiredFormIds = [
   'faculty',
   'degree_level',
   'programme',
+  'review_of_last_years_situation_report',
   'student_admissions_light',
   'student_admissions_text',
   'language_environment_light',
@@ -194,6 +195,7 @@ const requiredFormIds = [
 ]
 
 const allLightIds = [
+  'review_of_last_years_situation_report_light',
   'student_admissions_light',
   'language_environment_light',
   'programme_identity_light',
