@@ -29,7 +29,7 @@ describe('Core tests', function () {
 
 describe('Form tests', function () {
   this.beforeEach(function () {
-    cy.visit("http://localhost:8000/form/Bachelor's%20Programme%20in%20Computer%20Science")
+    cy.visit("http://localhost:8000/form/Bachelor's_Programme_in_Computer_Science")
   })
 
   it('Can open a question, click on smily face, and the result it saved.', () => {
@@ -41,12 +41,6 @@ describe('Form tests', function () {
     // Check that the changes have been saved:
     cy.visit('http://localhost:8000')
     cy.get('[data-cy="5-0"]').should('have.css', 'background-color').and('eq', 'rgb(255, 255, 177)')
-
-    cy.get('[data-cy="5-1"]').should('have.css', 'background-color').and('eq', 'rgb(245, 245, 245)')
-    cy.get('[data-cy="5-15"]')
-      .should('have.css', 'background-color')
-      .and('eq', 'rgb(245, 245, 245)')
-
     cy.get('[data-cy="5-9"]').should('have.css', 'background-color').and('eq', 'rgb(157, 255, 157)')
   })
 
