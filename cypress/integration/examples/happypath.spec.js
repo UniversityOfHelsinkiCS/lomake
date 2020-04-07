@@ -1,6 +1,16 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+function makeid(length) {
+  var result = ''
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  var charactersLength = characters.length
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
+}
+
 describe('Core tests', function () {
   this.beforeEach(function () {
     cy.visit('localhost:8000')
@@ -22,18 +32,47 @@ describe('Form tests', function () {
     cy.visit("http://localhost:8000/form/Bachelor's%20Programme%20in%20Computer%20Science")
   })
 
-  it('Can open a question, select a face and type in the textfield', function () {
+  it('Can open a question, click on smily face, and the result it saved.', () => {
     cy.get('[data-cy=form-section-I]').click()
     cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=form-section-III]').click()
+    cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
+
+    // Check that the changes have been saved:
+    cy.visit('http://localhost:8000')
+    cy.get('[data-cy="5-0"]').should('have.css', 'background-color').and('eq', 'rgb(255, 255, 177)')
+
+    cy.get('[data-cy="5-1"]').should('have.css', 'background-color').and('eq', 'rgb(245, 245, 245)')
+    cy.get('[data-cy="5-15"]')
+      .should('have.css', 'background-color')
+      .and('eq', 'rgb(245, 245, 245)')
+
+    cy.get('[data-cy="5-9"]').should('have.css', 'background-color').and('eq', 'rgb(157, 255, 157)')
+  })
+
+  it('Can write to a textfield and the answer is saved.', function () {
+    const testString1 = makeid(10)
+    const testString2 = makeid(10)
+
+    cy.get('[data-cy=form-section-I]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
-      .type('Yes. Last year went very well.')
+      .type(testString1)
+
+    cy.get('[data-cy=form-section-III]').click()
+    cy.get('[data-cy=textarea-wellbeing_information_used]').find('.editor-class').type(testString2)
+
+    cy.reload(true)
+
+    // Then check that answers have been changed:
+    cy.get('[data-cy=form-section-I]').click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
+      .find('.editor-class')
+      .should('contain.text', testString1)
 
     cy.get('[data-cy=form-section-III]').click()
     cy.get('[data-cy=textarea-wellbeing_information_used]')
       .find('.editor-class')
-      .type('Google was a good source.')
-
-    cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
+      .should('contain.text', testString2)
   })
 })
