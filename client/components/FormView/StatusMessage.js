@@ -5,7 +5,7 @@ import { Message, Progress } from 'semantic-ui-react'
 const translations = {
   EMPTY: {
     header: {
-      fi: 'Kysymykset tallentuvat automaattisesti',
+      fi: 'Vastaukset tallentuvat automaattisesti',
       en: 'Answers are saved automatically',
       se: '',
     },
@@ -17,7 +17,7 @@ const translations = {
   },
   INPROGRESS: {
     header: {
-      fi: 'Kysymykset tallentuvat automaattisesti',
+      fi: 'Vastaukset tallentuvat automaattisesti',
       en: 'Answers are saved automatically',
       se: '',
     },
