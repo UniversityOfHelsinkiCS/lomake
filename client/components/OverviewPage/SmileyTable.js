@@ -117,11 +117,14 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
       <tbody>
         {filteredProgrammes.map((p, pi) => {
           const programme = answers.data.find((a) => a.programme === p)
+          const targetURL = `/form/${encodeURIComponent(p)
+            .replace(/%20/g, '_')
+            .replace(/%2C/g, '')}`
           return (
             <React.Fragment key={p}>
               <tr>
                 <th colSpan="2">
-                  <Link data-cy="smileytable-link-to-form" to={`/form/${encodeURIComponent(p)}`}>
+                  <Link data-cy="smileytable-link-to-form" to={targetURL}>
                     {p}
                   </Link>
                 </th>
