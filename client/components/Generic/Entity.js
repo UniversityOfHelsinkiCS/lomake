@@ -11,30 +11,29 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 const streetLightsLabel = {
   fi: 'Yleisarvio',
   en: 'General assessment',
-  se: 'Allmänn bedömning'
+  se: 'Allmänn bedömning',
 }
 
 const textAreaLabel = {
   fi: 'Keskustelun pääkohdat olivat',
   en: 'Main points of discussion',
-  se: 'Diskussionens huvudpunkter'
+  se: 'Diskussionens huvudpunkter',
 }
 
 const mapLightToValid = {
   VIHREÄ: 'green',
   KELTAINEN: 'yellow',
-  PUNAINEN: 'red'
+  PUNAINEN: 'red',
 }
 
 const mapLightToImage = {
   green: positiveEmoji,
   yellow: neutralEmoji,
-  red: negativeEmoji
+  red: negativeEmoji,
 }
 
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
   const languageCode = useSelector((state) => state.language)
-
 
   let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
@@ -47,7 +46,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
       <h3>
         {number}. {label}
       </h3>
-      <p>{description}</p>
+      <p style={{ lineHeight: 2, backgroundColor: '#ffcd4c2e', padding: '1em' }}>{description}</p>
       {(previousAnswerText || previousAnswerLight) && (
         <LastYearsAnswersAccordion>
           {previousAnswerLight && (
