@@ -29,7 +29,7 @@ describe('Core tests', function () {
 
 describe('Form tests', function () {
   this.beforeEach(function () {
-    cy.visit("http://localhost:8000/form/Bachelor's_Programme_in_Computer_Science")
+    cy.visit("http://localhost:8000/form/Bachelor's%20Programme%20in%20Computer%20Science")
   })
 
   it('Can open a question, click on smily face, and the result it saved.', () => {
