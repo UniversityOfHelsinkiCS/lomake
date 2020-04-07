@@ -119,7 +119,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
           const programme = answers.data.find((a) => a.programme === p)
           const targetURL = `/form/${encodeURIComponent(p)
             .replace(/%20/g, '_')
-            .replace(/%2C/g, '')}`
+            .replace(/%2C/g, '__')}`
           return (
             <React.Fragment key={p}>
               <tr>
