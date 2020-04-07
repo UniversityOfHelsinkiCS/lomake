@@ -55,7 +55,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
   }, [filteredProgrammes])
 
   const transformIdToTitle = (id) => {
-    const formatted = id.substring(0, id.length - 6).replace('_', ' ')
+    const formatted = id.substring(0, id.length - 6).replace(/_/g, ' ')
 
     return (
       <span
@@ -115,7 +115,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
         </tr>
       </thead>
       <tbody>
-        {filteredProgrammes.map((p) => {
+        {filteredProgrammes.map((p, pi) => {
           const programme = answers.data.find((a) => a.programme === p)
           return (
             <React.Fragment key={p}>
@@ -125,10 +125,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                     {p}
                   </Link>
                 </th>
-                {allLightIds.map((q) => {
+                {allLightIds.map((q, qi) => {
                   return programme && programme.data[q] ? (
                     <td key={`${p}-${q}`}>
                       <div
+                        data-cy={`${pi}-${qi}`}
                         className="square"
                         style={{ background: backgroundColorMap[programme.data[q]] }}
                       >
@@ -149,7 +150,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                     </td>
                   ) : (
                     <td key={`${p}-${q}`}>
-                      <div className="square" style={{ background: 'whitesmoke' }} />
+                      <div
+                        data-cy={`${pi}-${qi}`}
+                        className="square"
+                        style={{ background: 'whitesmoke' }}
+                      />
                     </td>
                   )
                 })}
