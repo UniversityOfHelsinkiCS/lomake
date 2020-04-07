@@ -7,6 +7,7 @@ import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
+import { Divider } from 'semantic-ui-react'
 
 const streetLightsLabel = {
   fi: 'Yleisarvio',
@@ -43,6 +44,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
 
   return (
     <>
+      <Divider />
       <h3>
         {number}. {label}
       </h3>
