@@ -75,7 +75,7 @@ const FormView = ({ room }) => {
           {translations.title[languageCode]} {new Date().getFullYear()}
         </h1>
         <p style={{ color: colors.theme_blue }}>
-          <b>{room.replace(/__/g, ',').replace(/_/g, ' ')}</b>
+          <b>{decodeURIComponent(room)}</b>
         </p>
         <StatusMessage />
         <p>{translations.p1[languageCode]}</p>
