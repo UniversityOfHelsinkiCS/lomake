@@ -85,6 +85,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
 
 
   const hasManagementAccess = (program) => {
+    if (currentUser.admin) return true
     return (Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true))
 
   }
@@ -177,7 +178,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                       </td>
                     )
                 })}
-                {hasManagementAccess(p) || currentUser.admin && <ManageCell program={p} />}
+                {hasManagementAccess(p) && <ManageCell program={p} />}
               </tr>
               {programExpanded === p && <OwnerAccordionContent program={p} />}
             </React.Fragment>
