@@ -37,6 +37,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
   const languageCode = useSelector((state) => state.language)
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [programExpanded, setProgramExpanded] = useState(null)
 
   useEffect(() => {
@@ -76,6 +77,12 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
         {translations.noResultsText[languageCode]}
       </Header>
     )
+
+
+  const hasManagementAccess = (program) => {
+    return (Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true))
+
+  }
 
   const ManageCell = ({ program }) => (
     <td
@@ -150,16 +157,16 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                       </div>
                     </td>
                   ) : (
-                    <td key={`${p}-${q}`}>
-                      <div
-                        data-cy={`${pi}-${qi}`}
-                        className="square"
-                        style={{ background: 'whitesmoke' }}
-                      />
-                    </td>
-                  )
+                      <td key={`${p}-${q}`}>
+                        <div
+                          data-cy={`${pi}-${qi}`}
+                          className="square"
+                          style={{ background: 'whitesmoke' }}
+                        />
+                      </td>
+                    )
                 })}
-                <ManageCell program={p} />
+                {hasManagementAccess(p) && <ManageCell program={p} />}
               </tr>
               {programExpanded === p && <OwnerAccordionContent program={p} />}
             </React.Fragment>
