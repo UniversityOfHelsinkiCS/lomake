@@ -5,6 +5,12 @@ orbs:
 workflows:
   test-build-deploy:
     jobs:
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
       - cypress/run:
           start: npm run dev
           wait-on: http://localhost:8000
