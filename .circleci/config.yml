@@ -1,19 +1,9 @@
 version: 2.1
 orbs:
   dockerhub: circleci/docker@0.5.1
-  cypress: cypress-io/cypress@1
 workflows:
   test-build-deploy:
     jobs:
-      - run:
-          name: Install Docker Compose
-          command: |
-            set -x
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
-      - cypress/run:
-          start: npm run dev
-          wait-on: http://localhost:8000
       - dockerhub/publish:
           image: toska/$CIRCLE_PROJECT_REPONAME
           tag: 'production'
