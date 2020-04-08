@@ -60,24 +60,25 @@ const Section = ({ title, number, children }) => {
           <div style={{ marginTop: '2em' }}>
             {textValuesOverLimit() ? (
               <>
-                <Button primary style={{ width: '150px' }} disabled={textValuesOverLimit()}>
+                <Button data-cy={`form-section-${number}-nextbutton`} primary style={{ width: '150px' }} disabled={textValuesOverLimit()}>
                   Next
                 </Button>{' '}
                 <span style={{ color: 'red' }}>One or more answers that are too long</span>
               </>
             ) : (
-              <Button
-                primary
-                style={{ width: '150px' }}
-                disabled={textValuesOverLimit()}
-                onClick={() => {
-                  setHasBeenClosed(true)
-                  setCollapsed(true)
-                }}
-              >
-                Next
-              </Button>
-            )}
+                <Button
+                  data-cy={`form-section-${number}-nextbutton`}
+                  primary
+                  style={{ width: '150px' }}
+                  disabled={textValuesOverLimit()}
+                  onClick={() => {
+                    setHasBeenClosed(true)
+                    setCollapsed(true)
+                  }}
+                >
+                  Next
+                </Button>
+              )}
           </div>
         </>
       )}
