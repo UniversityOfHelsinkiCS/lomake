@@ -98,21 +98,21 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            currentAccess={user.access[programme].read}
+            currentAccess={user.access[programme] ? user.access[programme].read : false}
             grant={() => grantView()}
             remove={() => removeView()}
           />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            currentAccess={user.access[programme].write}
+            currentAccess={user.access[programme] ? user.access[programme].write : false}
             grant={() => grantEdit()}
             remove={() => removeEdit()}
           />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            currentAccess={user.access[programme].admin}
+            currentAccess={user.access[programme] ? user.access[programme].admin : false}
             grant={() => grantOwner()}
             remove={() => removeOwner()}
           />
@@ -166,10 +166,10 @@ const OwnerAccordionUsers = ({ programme }) => {
                   </Grid.Column>
                 </Grid.Row>
               ) : (
-                filteredUsers.map((user) => (
-                  <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />
-                ))
-              )}
+                  filteredUsers.map((user) => (
+                    <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />
+                  ))
+                )}
             </Grid>
           </Segment>
         </td>
