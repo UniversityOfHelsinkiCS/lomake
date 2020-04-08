@@ -9,9 +9,14 @@ import './OverviewPage.scss'
 import { Link } from 'react-router-dom'
 
 const translations = {
-  manageText: {
+  openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
+    se: '',
+  },
+  closeManageText: {
+    fi: 'Piilota',
+    en: 'Hide',
     se: '',
   },
   noResultsText: {
@@ -92,11 +97,17 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
         textDecoration: 'underline',
       }}
     >
-      {program !== programExpanded && (
+      {program !== programExpanded ? (
         <span onClick={() => setProgramExpanded(program)}>
-          {translations.manageText[languageCode]}
+          {translations.openManageText[languageCode]}
         </span>
-      )}
+      ) : (
+          (
+            <span onClick={() => setProgramExpanded(null)}>
+              {translations.closeManageText[languageCode]}
+            </span>
+          )
+        )}
     </td>
   )
 
