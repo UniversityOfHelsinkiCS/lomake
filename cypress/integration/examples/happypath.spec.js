@@ -15,7 +15,7 @@ function makeid(length) {
 
 describe('Core tests', function () {
   this.beforeEach(function () {
-    cy.visit('localhost:8000')
+    cy.visit('http://localhost:8000')
   })
 
   it('Frontpage loads', function () {
