@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Input } from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
+import { useSelector } from 'react-redux'
 
 const translations = {
   editPrompt: {
@@ -22,16 +21,11 @@ const translations = {
 }
 
 const OwnerAccordionLinks = ({ programme }) => {
-  const dispatch = useDispatch()
   const languageCode = useSelector((state) => state.language)
   const tokens = useSelector((state) => state.programmesTokens)
   const [copied, setCopied] = useState(false)
   const viewLinkRef = useRef(null)
   const editLinkRef = useRef(null)
-
-  useEffect(() => {
-    dispatch(getProgrammesTokensAction(programme))
-  }, [])
 
   //https://stackoverflow.com/a/42844911
   function copyToClipboard(editOrView) {

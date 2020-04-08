@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  getProgrammesUsersAction,
-  editUserAccessAction,
-} from 'Utilities/redux/programmesUsersReducer'
+import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
 
 const translations = {
   nameHeader: {
@@ -123,14 +120,9 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
 }
 
 const OwnerAccordionUsers = ({ programme }) => {
-  const dispatch = useDispatch()
   const languageCode = useSelector((state) => state.language)
-  const users = useSelector((state) => state.programmesUsers)
   const currentUser = useSelector((state) => state.currentUser)
-
-  useEffect(() => {
-    dispatch(getProgrammesUsersAction(programme))
-  }, [])
+  const users = useSelector((state) => state.programmesUsers)
 
   if (!users.data || users.pending) return null
 
