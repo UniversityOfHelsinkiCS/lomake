@@ -177,7 +177,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                       </td>
                     )
                 })}
-                {hasManagementAccess(p) && <ManageCell program={p} />}
+                {hasManagementAccess(p) || currentUser.admin && <ManageCell program={p} />}
               </tr>
               {programExpanded === p && <OwnerAccordionContent program={p} />}
             </React.Fragment>
