@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open",
+    "cypress:headless": "cypress run --headless --config video=false *.spec.js",
     "stats": "webpack --mode production --json --optimize-minimize > stats.json"
   },
   "engines": {
@@ -79,6 +80,7 @@
   "devDependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "cypress": "^4.3.0",
+    "husky": "^4.2.3",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1",
     "webpack-dev-middleware": "^3.7.2",
@@ -98,5 +100,10 @@
     "@middleware": "server/middleware",
     "@models": "server/models",
     "@util": "server/util"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run cypress:headless"
+    }
   }
 }
