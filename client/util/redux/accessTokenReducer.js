@@ -24,41 +24,41 @@ export default (state = { data: null }, action) => {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     case 'GET_TOKEN_ATTEMPT':
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'GET_TOKEN_FAILURE':
       return {
         ...state,
         data: null,
         pending: false,
-        error: true
+        error: true,
       }
     case 'CLAIM_TOKEN_SUCCESS':
-      window.location = '/'
+      console.log(process.env)
       return {
         ...state,
         data: null,
         pending: false,
-        error: false
+        error: false,
       }
     case 'CLAIM_TOKEN_ATTEMPT':
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'CLAIM_TOKEN_FAILURE':
       return {
         ...state,
         data: null,
         pending: false,
-        error: true
+        error: true,
       }
 
     default:
