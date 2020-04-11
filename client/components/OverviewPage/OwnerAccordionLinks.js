@@ -6,18 +6,18 @@ const translations = {
   editPrompt: {
     fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
     en: 'Link grants edit access, share to editors only:',
-    se: ''
+    se: '',
   },
   viewPrompt: {
     fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
     en: 'Link grants read access, share e.g. to student members',
-    se: ''
+    se: '',
   },
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
     en: 'Reset the current link, and generate a new one',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const OwnerAccordionLinks = ({ programme }) => {
@@ -53,7 +53,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               {translations.viewPrompt[languageCode]}
             </div>
             <Input
-              style={{ width: '300px' }}
+              style={{ width: '500px' }}
               icon={
                 <Icon
                   name={copied === 'VIEW' ? 'checkmark' : 'copy'}
@@ -73,7 +73,7 @@ const OwnerAccordionLinks = ({ programme }) => {
                 color: 'red',
                 textDecoration: 'underline',
                 marginLeft: '2em',
-                width: '300px'
+                width: '300px',
               }}
             >
               {translations.resetPrompt[languageCode]}
@@ -88,7 +88,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               {translations.editPrompt[languageCode]}
             </div>
             <Input
-              style={{ width: '300px' }}
+              style={{ width: '500px' }}
               icon={
                 <Icon
                   name={copied === 'EDIT' ? 'checkmark' : 'copy'}
@@ -108,7 +108,7 @@ const OwnerAccordionLinks = ({ programme }) => {
                 color: 'red',
                 textDecoration: 'underline',
                 marginLeft: '2em',
-                width: '300px'
+                width: '300px',
               }}
             >
               {translations.resetPrompt[languageCode]}
