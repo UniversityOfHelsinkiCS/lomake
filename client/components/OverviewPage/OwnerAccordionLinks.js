@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Input } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { resetTokenAction } from 'Utilities/redux/accessTokenReducer'
+import { inProduction } from '../../../config/common'
 
 const translations = {
   editPrompt: {
@@ -26,6 +28,7 @@ const OwnerAccordionLinks = ({ programme }) => {
   const [copied, setCopied] = useState(false)
   const viewLinkRef = useRef(null)
   const editLinkRef = useRef(null)
+  const dispatch = useDispatch()
 
   //https://stackoverflow.com/a/42844911
   function copyToClipboard(editOrView) {
@@ -43,6 +46,19 @@ const OwnerAccordionLinks = ({ programme }) => {
 
   const viewToken = tokens.data.find((t) => t.type === 'READ')
   const editToken = tokens.data.find((t) => t.type === 'WRITE')
+
+  const handleTokenReset = (token) => {
+    if (!token) {
+      // Should probably create a token here if theres no token available?
+    } else {
+      const { url } = token
+      dispatch(resetTokenAction(programme, url))
+    }
+  }
+
+  const urlPrefix = inProduction
+    ? 'https://study.cs.helsinki.fi/lomake/access/'
+    : 'http://localhost:8000/access/'
 
   return (
     <>
@@ -63,11 +79,12 @@ const OwnerAccordionLinks = ({ programme }) => {
                   onClick={() => copyToClipboard('VIEW')}
                 />
               }
-              value={viewToken ? `https://study.cs.helsinki.fi/lomake/access/${viewToken.url}` : ''}
+              value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
               onChange={null}
               ref={viewLinkRef}
             />
             <div
+              onClick={() => handleTokenReset(viewToken)}
               style={{
                 cursor: 'pointer',
                 color: 'red',
@@ -98,11 +115,12 @@ const OwnerAccordionLinks = ({ programme }) => {
                   onClick={() => copyToClipboard('EDIT')}
                 />
               }
-              value={editToken ? `https://study.cs.helsinki.fi/lomake/access/${editToken.url}` : ''}
+              value={editToken ? `${urlPrefix}${editToken.url}` : ''}
               onChange={null}
               ref={editLinkRef}
             />
             <div
+              onClick={() => handleTokenReset(editToken)}
               style={{
                 cursor: 'pointer',
                 color: 'red',
