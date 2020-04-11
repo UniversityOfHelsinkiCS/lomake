@@ -29,8 +29,8 @@ const translations = {
   },
   COMPLETE: {
     header: {
-      fi: 'Lomake lähetetty onnistuneesti',
-      en: 'The form saved succesfully',
+      fi: 'Lomake täytetty onnistuneesti',
+      en: 'The form has been filled succesfully',
       se: '',
     },
     subtitle: {
