@@ -18,20 +18,28 @@ export default (state = { data: null }, action) => {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     case 'GET_PROGRAMMES_TOKENS_ATTEMPT':
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'GET_PROGRAMMES_TOKENS_FAILURE':
       return {
         ...state,
         data: null,
         pending: false,
-        error: true
+        error: true,
+      }
+    case 'RESET_TOKEN_SUCCESS':
+      return {
+        ...state,
+        data: state.data.map((element) => {
+          if (element.id === action.response.id) return action.response
+          return element
+        }),
       }
     default:
       return state
