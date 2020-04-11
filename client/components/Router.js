@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import FormView from 'Components/FormView'
 import UsersPage from 'Components/UsersPage'
@@ -21,7 +21,7 @@ export default () => (
         path="/access/:url"
         render={(props) => <ClaimAccessPage url={props.match.params.url} />}
       />
-      <Route path="*" render={() => <div>Page not found!</div>} />
+      <Redirect to="/" />
     </Switch>
   </div>
 )
