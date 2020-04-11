@@ -45,9 +45,15 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
   return (
     <>
       <Divider />
-      <h3>
-        {number}. {label}
-      </h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ maxWidth: '400px' }}>
+          <h3>
+            {number}. {label}{' '}
+            {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+          </h3>
+        </div>
+        {!noLight && <Streetlights id={id} label={streetLightsLabel[languageCode]} />}
+      </div>
       <p style={{ lineHeight: 2, backgroundColor: '#ffcd4c2e', padding: '1em' }}>{description}</p>
       {(previousAnswerText || previousAnswerLight) && (
         <LastYearsAnswersAccordion>
@@ -60,10 +66,8 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
           <ReactMarkdown source={previousAnswerText} />
         </LastYearsAnswersAccordion>
       )}
-      {!noLight && (
-        <Streetlights id={id} label={streetLightsLabel[languageCode]} required={required} />
-      )}
-      <Textarea id={id} label={textAreaLabel[languageCode]} required={required} />
+
+      <Textarea id={id} label={textAreaLabel[languageCode]} />
     </>
   )
 }

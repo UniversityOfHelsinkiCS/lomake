@@ -13,11 +13,7 @@ const Streetlights = ({ label, id, required }) => {
   const value = useSelector(({ form }) => form.data[fieldName])
 
   return (
-    <div className="form-streetlights">
-      <label>
-        {label}
-        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
-      </label>
+    <div style={{ margin: '1em 0' }}>
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
         <div title="No issues">
           <img
@@ -45,6 +41,7 @@ const Streetlights = ({ label, id, required }) => {
             onClick={() => choose(fieldName, 'red')}
           />
         </div>
+        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </div>
     </div>
   )
