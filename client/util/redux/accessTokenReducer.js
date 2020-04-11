@@ -1,4 +1,6 @@
 import callBuilder from '../apiConnection'
+import { basePath } from '../../../config/common'
+
 /**
  * Actions and reducers are in the same file for readability
  */
@@ -40,7 +42,7 @@ export default (state = { data: null }, action) => {
         error: true,
       }
     case 'CLAIM_TOKEN_SUCCESS':
-      console.log(process.env)
+      window.location = basePath
       return {
         ...state,
         data: null,
