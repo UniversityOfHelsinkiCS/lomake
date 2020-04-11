@@ -35,7 +35,12 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
 
   return (
     <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
-      <label style={{ fontStyle: 'bold' }}>
+      <label
+        style={{
+          fontStyle: 'bolder',
+          fontSize: '1.1em',
+        }}
+      >
         {label}
         {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </label>
@@ -44,20 +49,22 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
           <ReactMarkdown source={previousAnswerText} />
         </LastYearsAnswersAccordion>
       )}
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={handleChange}
-        editorClassName="editor-class"
-        toolbar={{
-          options: ['inline', 'list', 'link', 'embedded', 'history'],
-          inline: {
-            options: ['bold', 'italic', 'underline'],
-          },
-          list: {
-            options: ['unordered', 'ordered'],
-          },
-        }}
-      />
+      <div style={{ marginTop: '1em' }}>
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={handleChange}
+          editorClassName="editor-class"
+          toolbar={{
+            options: ['inline', 'list', 'link', 'embedded', 'history'],
+            inline: {
+              options: ['bold', 'italic', 'underline'],
+            },
+            list: {
+              options: ['unordered', 'ordered'],
+            },
+          }}
+        />
+      </div>
       <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
     </div>
   )

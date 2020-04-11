@@ -41,7 +41,6 @@ const Streetlights = ({ label, id, required }) => {
             onClick={() => choose(fieldName, 'red')}
           />
         </div>
-        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </div>
     </div>
   )

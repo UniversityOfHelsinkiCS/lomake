@@ -6,9 +6,9 @@ import { Button } from 'semantic-ui-react'
 import SimpleTextarea from './SimpleTextarea'
 
 const measureLabel = {
-  fi: 'TOIMENPIDELISTA (1-5 toimenpidettä)',
-  en: 'MEASURES (1-5)',
-  se: 'ÄTGÄRDER (1-5)'
+  fi: 'Lisää 1-5 toimenpidettä',
+  en: 'Add 1-5 measures',
+  se: '',
 }
 
 const Measures = ({ label, id, required, number }) => {
@@ -37,12 +37,11 @@ const Measures = ({ label, id, required, number }) => {
   return (
     <>
       <h3>
-        {number}. {label}
+        {number}. {label} {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </h3>
-      <label>
-        {number}. {measureLabel[languageCode]}
-        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
-      </label>
+      <p style={{ lineHeight: 2, backgroundColor: '#daedf4', padding: '1em' }}>
+        {measureLabel[languageCode]}
+      </p>
       {['', '', '', '', ''].reduce((acc, cur, index) => {
         if (index + 1 > amountOfMeasures) return acc
         acc.push(
