@@ -17,6 +17,12 @@ export const claimTokenAction = (url) => {
   return callBuilder(route, prefix, 'post')
 }
 
+export const resetTokenAction = (programme, url) => {
+  const route = `/programmes/${programme}/tokens/${url}`
+  const prefix = 'RESET_TOKEN'
+  return callBuilder(route, prefix, 'post')
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -56,6 +62,29 @@ export default (state = { data: null }, action) => {
         error: false,
       }
     case 'CLAIM_TOKEN_FAILURE':
+      return {
+        ...state,
+        data: null,
+        pending: false,
+        error: true,
+      }
+    case 'RESET_TOKEN_SUCCESS':
+      return {
+        ...state,
+        data: null,
+        pending: false,
+        error: false,
+      }
+
+    case 'RESET_TOKEN_ATTEMPT':
+      return {
+        ...state,
+        data: null,
+        pending: true,
+        error: false,
+      }
+
+    case 'RESET_TOKEN_FAILURE':
       return {
         ...state,
         data: null,
