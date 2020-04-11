@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
-import Textarea from './Textarea'
+import ReactMarkdown from 'react-markdown'
 import { Button } from 'semantic-ui-react'
 import SimpleTextarea from './SimpleTextarea'
+import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
 const measureLabel = {
   fi: 'Lisää 1-5 toimenpidettä',
@@ -11,7 +12,7 @@ const measureLabel = {
   se: '',
 }
 
-const Measures = ({ label, id, required, number }) => {
+const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const dispatch = useDispatch()
   const clearMeasure = (number) => dispatch(updateFormField(`${id}_${number}_text`, ''))
   const formData = useSelector((state) => state.form.data)
@@ -32,6 +33,30 @@ const Measures = ({ label, id, required, number }) => {
     return measureNumber - 1
   }
 
+  const getPreviousMeasureAnswers = () => {
+    if (!previousYearsAnswers) return null
+    if (!!previousYearsAnswers[id]) return previousYearsAnswers[id]
+    if (!!previousYearsAnswers[`${id}_text`]) return previousYearsAnswers[`${id}_text`]
+
+    if (!!previousYearsAnswers[`${id}_1_text`]) {
+      let measures = ''
+      let i = 1
+      while (i < 6) {
+        if (!!previousYearsAnswers[`${id}_${i}_text`])
+          measures += `${i}) ${previousYearsAnswers[`${id}_${i}_text`]}  \n`
+        i++
+      }
+
+      return measures
+    }
+
+    return null
+  }
+
+  const previousAnswerText = getPreviousMeasureAnswers()
+
+  console.log('previousAnswerText', previousAnswerText)
+
   const [amountOfMeasures, setAmountOfMeasures] = useState(getInitialAmount())
 
   return (
@@ -42,6 +67,11 @@ const Measures = ({ label, id, required, number }) => {
       <p style={{ lineHeight: 2, backgroundColor: '#daedf4', padding: '1em' }}>
         {measureLabel[languageCode]}
       </p>
+      {previousAnswerText && (
+        <LastYearsAnswersAccordion>
+          <ReactMarkdown source={previousAnswerText} />
+        </LastYearsAnswersAccordion>
+      )}
       {['', '', '', '', ''].reduce((acc, cur, index) => {
         if (index + 1 > amountOfMeasures) return acc
         acc.push(

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import Form from 'Components/FormView/Form'
-import meri_image from 'Assets/meri.jpg'
+import rypsi_image from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
@@ -69,7 +69,7 @@ const FormView = ({ room }) => {
       <div style={{ marginBottom: '2em' }}>
         <Button onClick={() => history.push('/')} icon="arrow left" />
       </div>
-      <img className="img-responsive" src={meri_image} />
+      <img className="img-responsive" src={rypsi_image} />
       <div>
         <h1 data-cy="formview-title">
           {translations.title[languageCode]} {new Date().getFullYear()}
