@@ -40,7 +40,7 @@ export default (state = { data: null }, action) => {
         error: true,
       }
     case 'CLAIM_TOKEN_SUCCESS':
-      console.log(process.env)
+      window.location = '/'
       return {
         ...state,
         data: null,
