@@ -104,8 +104,26 @@ const programmesTokens = async (req, res) => {
   }
 }
 
+const resetToken = async (req, res) => {
+  try {
+    const { url } = req.params
+    const token = await db.token.findOne({ where: { url } })
+
+    token.url = uuid()
+    await token.save()
+
+    logger.info(`User ${req.user.uid} changed token url from: ${url} to ${token.url}`)
+
+    return res.status(200).json(token)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   claimToken,
   checkToken,
-  programmesTokens
+  programmesTokens,
+  resetToken,
 }
