@@ -23,6 +23,12 @@ export const resetTokenAction = (programme, url) => {
   return callBuilder(route, prefix, 'post')
 }
 
+export const createTokenAction = (programme, type) => {
+  const route = `/programmes/${programme}/tokens/create/${type}`
+  const prefix = 'CREATE_TOKEN'
+  return callBuilder(route, prefix, 'post')
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
