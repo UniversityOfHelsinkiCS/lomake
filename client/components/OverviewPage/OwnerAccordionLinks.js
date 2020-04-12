@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Input } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { resetTokenAction } from 'Utilities/redux/accessTokenReducer'
+import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
 import { inProduction } from '../../../config/common'
 
 const translations = {
@@ -18,6 +18,11 @@ const translations = {
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
     en: 'Reset the current link, and generate a new one',
+    se: '',
+  },
+  createPrompt: {
+    fi: 'Luo linkki',
+    en: 'Create link',
     se: '',
   },
 }
@@ -47,9 +52,9 @@ const OwnerAccordionLinks = ({ programme }) => {
   const viewToken = tokens.data.find((t) => t.type === 'READ')
   const editToken = tokens.data.find((t) => t.type === 'WRITE')
 
-  const handleTokenReset = (token) => {
+  const createOrResetToken = (token, type) => {
     if (!token) {
-      // Should probably create a token here if theres no token available?
+      dispatch(createTokenAction(programme, type))
     } else {
       const { url } = token
       dispatch(resetTokenAction(programme, url))
@@ -84,7 +89,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               ref={viewLinkRef}
             />
             <div
-              onClick={() => handleTokenReset(viewToken)}
+              onClick={() => createOrResetToken(viewToken, 'READ')}
               style={{
                 cursor: 'pointer',
                 color: 'red',
@@ -93,7 +98,9 @@ const OwnerAccordionLinks = ({ programme }) => {
                 width: '300px',
               }}
             >
-              {translations.resetPrompt[languageCode]}
+              {viewToken
+                ? translations.resetPrompt[languageCode]
+                : translations.createPrompt[languageCode]}
             </div>
           </div>
         </td>
@@ -120,7 +127,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               ref={editLinkRef}
             />
             <div
-              onClick={() => handleTokenReset(editToken)}
+              onClick={() => createOrResetToken(editToken, 'WRITE')}
               style={{
                 cursor: 'pointer',
                 color: 'red',
@@ -129,7 +136,9 @@ const OwnerAccordionLinks = ({ programme }) => {
                 width: '300px',
               }}
             >
-              {translations.resetPrompt[languageCode]}
+              {editToken
+                ? translations.resetPrompt[languageCode]
+                : translations.createPrompt[languageCode]}
             </div>
           </div>
         </td>
