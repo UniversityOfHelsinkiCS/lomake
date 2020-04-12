@@ -36,6 +36,11 @@ const translations = {
       se: '',
     },
   },
+  invalidToken: {
+    fi: 'Virhe: Virheellinen tai vanhentunut token',
+    en: 'Error: Malformed or expired token',
+    se: '',
+  },
 }
 
 const labelIcon = {
@@ -73,6 +78,9 @@ export default ({ url }) => {
     return normalizedProgrammeName !== normalizedInput
   }
 
+  if (!token.data && token.error)
+    return <span style={{ color: 'red' }}>{translations.invalidToken[languageCode]}</span>
+
   if (!token.data) return <Loader active inline />
 
   return (
@@ -92,7 +100,7 @@ export default ({ url }) => {
             value={value}
             onChange={(e, { value }) => setValue(value)}
           />
-          <div className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? "error" : "valid"}`}>
+          <div className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? 'error' : 'valid'}`}>
             {translations.confirmPrompt[languageCode]}
           </div>
         </div>
