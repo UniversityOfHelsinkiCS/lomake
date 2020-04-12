@@ -33,13 +33,19 @@ export default (state = { data: null }, action) => {
         pending: false,
         error: true,
       }
-    case 'RESET_TOKEN_SUCCESS':
+    case 'RESET_TOKEN_SUCCESS': // Update existing token
       return {
         ...state,
         data: state.data.map((element) => {
           if (element.id === action.response.id) return action.response
           return element
         }),
+      }
+    case 'CREATE_TOKEN_SUCCESS': // Append newly created token
+      console.log(action.response)
+      return {
+        ...state,
+        data: state.data.concat(action.response),
       }
     default:
       return state
