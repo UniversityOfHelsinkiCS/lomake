@@ -121,9 +121,31 @@ const resetToken = async (req, res) => {
   }
 }
 
+const createToken = async (req, res) => {
+  try {
+    const { type, programme } = req.params
+
+    const newToken = await db.token.create({
+      url: uuid(),
+      programme,
+      type,
+      valid: true,
+      usageCounter: 0,
+    })
+
+    logger.info(`User ${req.user.uid} initialized ${type}-token for ${programme}`)
+
+    return res.status(200).json(newToken)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   claimToken,
   checkToken,
   programmesTokens,
   resetToken,
+  createToken,
 }

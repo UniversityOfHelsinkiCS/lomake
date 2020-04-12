@@ -20,6 +20,7 @@ router.post('/bulkanswers', answers.bulkCreate)
 
 router.get('/programmes/:programme/tokens', requireProgrammeOwner, tokens.programmesTokens)
 router.post('/programmes/:programme/tokens/:url', requireProgrammeOwner, tokens.resetToken)
+router.post('/programmes/:programme/tokens/create/:type', requireProgrammeOwner, tokens.createToken)
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.put('/programmes/:programme/users/:id/access', requireProgrammeOwner, users.editUserAccess)
 
