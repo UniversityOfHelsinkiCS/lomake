@@ -126,7 +126,12 @@ const OwnerAccordionUsers = ({ programme }) => {
 
   if (!users.data || users.pending) return null
 
-  const filteredUsers = users.data.filter((u) => u.id !== currentUser.data.id)
+  // Show admins at the top of the list (including self)
+  const sortedUsers = users.data.sort((a, b) => {
+    const aAdmin = a.access[programme].admin
+    const bAdmin = b.access[programme].admin
+    return bAdmin - aAdmin
+  })
 
   return (
     <>
@@ -151,17 +156,17 @@ const OwnerAccordionUsers = ({ programme }) => {
                   <Header as="h4">{translations.ownerHeader[languageCode]}</Header>
                 </Grid.Column>
               </Grid.Row>
-              {filteredUsers.length === 0 ? (
+              {sortedUsers.length === 0 ? (
                 <Grid.Row>
                   <Grid.Column width={13} style={{ textAlign: 'center' }}>
                     {translations.noUsers[languageCode]}
                   </Grid.Column>
                 </Grid.Row>
               ) : (
-                  filteredUsers.map((user) => (
-                    <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />
-                  ))
-                )}
+                sortedUsers.map((user) => (
+                  <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />
+                ))
+              )}
             </Grid>
           </Segment>
         </td>
