@@ -92,12 +92,14 @@ export default ({ url }) => {
             value={value}
             onChange={(e, { value }) => setValue(value)}
           />
+          <div className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? "error" : "valid"}`}>
+            {translations.confirmPrompt[languageCode]}
+          </div>
         </div>
       )}
       <Button disabled={buttonIsDisabled()} onClick={() => handleClaim()}>
         {translations.buttonText[languageCode]}
       </Button>{' '}
-      {buttonIsDisabled() && <>{translations.confirmPrompt[languageCode]}</>}
     </div>
   )
 }
