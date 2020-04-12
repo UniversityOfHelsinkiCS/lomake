@@ -46,7 +46,7 @@ const SwitchableBadge = ({ currentAccess, grant, remove }) => {
   if (currentAccess)
     return (
       <Popup
-        trigger={<Icon name="check" color="users-green" size="large" />}
+        trigger={<Icon name="check" className="users-green" size="large" />}
         content={
           <Button
             color="red"
@@ -60,7 +60,7 @@ const SwitchableBadge = ({ currentAccess, grant, remove }) => {
     )
   return (
     <Popup
-      trigger={<Icon name="close" color="users-red" size="large" />}
+      trigger={<Icon name="close" className="users-red" size="large" />}
       content={
         <Button
           color="green"
