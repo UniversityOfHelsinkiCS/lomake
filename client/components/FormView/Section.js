@@ -7,6 +7,7 @@ import { Button } from 'semantic-ui-react'
 const Section = ({ title, number, children }) => {
   const [collapsed, setCollapsed] = useState(true)
   const [hasBeenClosed, setHasBeenClosed] = useState(false)
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const ids = []
     .concat(...children)
@@ -49,23 +50,31 @@ const Section = ({ title, number, children }) => {
         <h2 style={{ margin: '0', maxWidth: '650px' }}>
           <span style={{ color: colors.theme_blue }}>{number}</span> - {title}
         </h2>
-        <div>
-          <i className={collapsed ? 'icon plus' : 'icon minus'} style={{ color: '#007290' }} />
-          {getProgressIcon()}
-        </div>
+        {!viewOnly && (
+          <div>
+            <i className={collapsed ? 'icon plus' : 'icon minus'} style={{ color: '#007290' }} />
+            {getProgressIcon()}
+          </div>
+        )}
       </div>
-      {!collapsed && (
+      {(!collapsed || viewOnly) && (
         <>
           {children}
-          <div style={{ marginTop: '2em' }}>
-            {textValuesOverLimit() ? (
-              <>
-                <Button data-cy={`form-section-${number}-nextbutton`} primary style={{ width: '150px' }} disabled={textValuesOverLimit()}>
-                  Next
-                </Button>{' '}
-                <span style={{ color: 'red' }}>One or more answers that are too long</span>
-              </>
-            ) : (
+          {!viewOnly && (
+            <div style={{ marginTop: '2em' }}>
+              {textValuesOverLimit() ? (
+                <>
+                  <Button
+                    data-cy={`form-section-${number}-nextbutton`}
+                    primary
+                    style={{ width: '150px' }}
+                    disabled={textValuesOverLimit()}
+                  >
+                    Next
+                  </Button>{' '}
+                  <span style={{ color: 'red' }}>One or more answers that are too long</span>
+                </>
+              ) : (
                 <Button
                   data-cy={`form-section-${number}-nextbutton`}
                   primary
@@ -79,7 +88,8 @@ const Section = ({ title, number, children }) => {
                   Next
                 </Button>
               )}
-          </div>
+            </div>
+          )}
         </>
       )}
     </>

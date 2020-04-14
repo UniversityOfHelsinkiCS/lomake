@@ -52,7 +52,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
             {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
           </h3>
         </div>
-        {!noLight && <Streetlights id={id} label={streetLightsLabel[languageCode]} />}
+        {!noLight && <Streetlights id={id} />}
       </div>
       <p style={{ lineHeight: 2, backgroundColor: '#ffcd4c2e', padding: '1em' }}>{description}</p>
       {(previousAnswerText || previousAnswerLight) && (

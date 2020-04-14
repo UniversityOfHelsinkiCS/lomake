@@ -7,7 +7,7 @@ export const updateFormField = (field, value, host) => ({
   type: 'UPDATE_FORM_FIELD',
   field,
   value,
-  host
+  host,
 })
 
 export const getFormAction = () => {
@@ -24,29 +24,29 @@ export const postFormAction = (message) => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: {} }, action) => {
+export default (state = { data: {}, viewOnly: false }, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
       return {
         ...state,
         data: {
           ...state.data,
-          [action.field]: action.value
-        }
+          [action.field]: action.value,
+        },
       }
     case 'SAVE_FORM_SUCCESS':
       return {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     case 'GET_FORM_SUCCESS':
       return {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     default:
       return state

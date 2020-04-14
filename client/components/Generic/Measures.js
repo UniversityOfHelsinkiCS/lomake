@@ -17,6 +17,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const clearMeasure = (number) => dispatch(updateFormField(`${id}_${number}_text`, ''))
   const formData = useSelector((state) => state.form.data)
   const languageCode = useSelector((state) => state.language)
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const getInitialAmount = () => {
     let measureNumber = 1
@@ -74,32 +75,34 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
         if (index + 1 > amountOfMeasures) return acc
         acc.push(
           <div style={{ paddingTop: '0' }} key={index}>
-            <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} />
+            <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} viewOnly={viewOnly} />
           </div>
         )
         return acc
       }, [])}
-      <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-        <Button
-          className="ui button"
-          disabled={amountOfMeasures === 5 || !formData[`${id}_${amountOfMeasures}_text`]}
-          onClick={() => setAmountOfMeasures(amountOfMeasures + 1)}
-        >
-          Add measure
-        </Button>
-        <span style={{ marginLeft: '5px' }}>
+      {!viewOnly && (
+        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Button
             className="ui button"
-            disabled={amountOfMeasures === 1}
-            onClick={() => {
-              setAmountOfMeasures(amountOfMeasures - 1)
-              clearMeasure(amountOfMeasures)
-            }}
+            disabled={amountOfMeasures === 5 || !formData[`${id}_${amountOfMeasures}_text`]}
+            onClick={() => setAmountOfMeasures(amountOfMeasures + 1)}
           >
-            Remove measure
+            Add measure
           </Button>
-        </span>
-      </div>
+          <span style={{ marginLeft: '5px' }}>
+            <Button
+              className="ui button"
+              disabled={amountOfMeasures === 1}
+              onClick={() => {
+                setAmountOfMeasures(amountOfMeasures - 1)
+                clearMeasure(amountOfMeasures)
+              }}
+            >
+              Remove measure
+            </Button>
+          </span>
+        </div>
+      )}
     </>
   )
 }

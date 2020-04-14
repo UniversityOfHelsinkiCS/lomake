@@ -13,6 +13,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const handleChange = (value) => {
     setEditorState(value)
@@ -49,23 +50,29 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
           <ReactMarkdown source={previousAnswerText} />
         </LastYearsAnswersAccordion>
       )}
-      <div style={{ marginTop: '1em' }}>
-        <Editor
-          editorState={editorState}
-          onEditorStateChange={handleChange}
-          editorClassName="editor-class"
-          toolbar={{
-            options: ['inline', 'list', 'link', 'embedded', 'history'],
-            inline: {
-              options: ['bold', 'italic', 'underline'],
-            },
-            list: {
-              options: ['unordered', 'ordered'],
-            },
-          }}
-        />
-      </div>
-      <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
+      {viewOnly ? (
+        <ReactMarkdown source={dataFromRedux} />
+      ) : (
+        <>
+          <div style={{ marginTop: '1em' }}>
+            <Editor
+              editorState={editorState}
+              onEditorStateChange={handleChange}
+              editorClassName="editor-class"
+              toolbar={{
+                options: ['inline', 'list', 'link', 'embedded', 'history'],
+                inline: {
+                  options: ['bold', 'italic', 'underline'],
+                },
+                list: {
+                  options: ['unordered', 'ordered'],
+                },
+              }}
+            />
+          </div>
+          <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
+        </>
+      )}
     </div>
   )
 }

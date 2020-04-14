@@ -3,15 +3,15 @@
   height: auto;
   margin: 0 7px;
   filter: grayscale(100%);
+}
+
+.emoji-button {
+  cursor: pointer;
   transition-duration: 300ms;
   &:hover {
     filter: grayscale(0%);
     width: 50px;
   }
-}
-
-.emoji-button {
-  cursor: pointer;
 }
 
 .active-emoji {
