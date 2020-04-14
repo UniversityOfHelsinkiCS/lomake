@@ -55,8 +55,6 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
 
   const previousAnswerText = getPreviousMeasureAnswers()
 
-  console.log('previousAnswerText', previousAnswerText)
-
   const [amountOfMeasures, setAmountOfMeasures] = useState(getInitialAmount())
 
   return (
