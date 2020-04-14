@@ -42,7 +42,6 @@ export default (state = { data: null }, action) => {
         }),
       }
     case 'CREATE_TOKEN_SUCCESS': // Append newly created token
-      console.log(action.response)
       return {
         ...state,
         data: state.data.concat(action.response),
