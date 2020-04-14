@@ -7,6 +7,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import OwnerAccordionContent from './OwnerAccordionContent'
 import './OverviewPage.scss'
 import { Link } from 'react-router-dom'
+import questions from '../../questions.json'
 
 const translations = {
   openManageText: {
@@ -44,6 +45,8 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [programExpanded, setProgramExpanded] = useState(null)
+
+  console.log('questions', questions)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -83,11 +86,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
       </Header>
     )
 
-
   const hasManagementAccess = (program) => {
     if (currentUser.admin) return true
-    return (Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true))
-
+    return Object.entries(currentUser.access).find(
+      (access) => access[0] === program && access[1].admin === true
+    )
   }
 
   const ManageCell = ({ program }) => (
@@ -103,12 +106,10 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
           {translations.openManageText[languageCode]}
         </span>
       ) : (
-          (
-            <span onClick={() => setProgramExpanded(null)}>
-              {translations.closeManageText[languageCode]}
-            </span>
-          )
-        )}
+        <span onClick={() => setProgramExpanded(null)}>
+          {translations.closeManageText[languageCode]}
+        </span>
+      )}
     </td>
   )
 
@@ -159,9 +160,23 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                           size="big"
                           onClick={() =>
                             setModalData({
-                              header: programme.data[q.replace('light', 'text')],
+                              header: questions.reduce((acc, cur) => {
+                                if (acc) return acc
+                                const header = cur.parts.reduce((acc, cur) => {
+                                  if (acc) return acc
+
+                                  if (cur.id === q.replace('_light', ''))
+                                    return cur.description[languageCode]
+
+                                  return acc
+                                }, '')
+
+                                if (header) return header
+
+                                return acc
+                              }, ''),
                               programme: p,
-                              content: q,
+                              content: programme.data[q.replace('light', 'text')],
                               color: programme.data[q],
                             })
                           }
@@ -169,14 +184,14 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                       </div>
                     </td>
                   ) : (
-                      <td key={`${p}-${q}`}>
-                        <div
-                          data-cy={`${pi}-${qi}`}
-                          className="square"
-                          style={{ background: 'whitesmoke' }}
-                        />
-                      </td>
-                    )
+                    <td key={`${p}-${q}`}>
+                      <div
+                        data-cy={`${pi}-${qi}`}
+                        className="square"
+                        style={{ background: 'whitesmoke' }}
+                      />
+                    </td>
+                  )
                 })}
                 {hasManagementAccess(p) && <ManageCell program={p} />}
               </tr>

@@ -4,6 +4,7 @@ import { Modal, Header, Input } from 'semantic-ui-react'
 import { programmes } from 'Utilities/common'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
 
 export default () => {
   const [filter, setFilter] = useState('')
@@ -47,16 +48,20 @@ export default () => {
     <>
       <Modal open={!!modalData} onClose={() => setModalData(null)} basic size="small" closeIcon>
         {/* Right now header is showing the question id but in the final version the full question is shown */}
-        <Header icon="question" content={modalData ? modalData.content : ''} />
+        <Header icon="question" content={modalData ? modalData.header : ''} />
         <Modal.Content>
-          <Modal.Description>{modalData ? modalData.programme : ''}</Modal.Description>
-          <h3
+          <Modal.Description>
+            <span style={{ fontSize: '1.2em', fontWeight: 'bold' }}>
+              {modalData ? modalData.programme : ''}
+            </span>
+          </Modal.Description>
+          <span
             style={{
               color: backgroundColorMap[modalData ? modalData.color : 'green'],
             }}
           >
-            {modalData ? modalData.header : ''}
-          </h3>
+            <ReactMarkdown source={modalData ? modalData.content : ''} />
+          </span>
         </Modal.Content>
       </Modal>
 
