@@ -3,11 +3,12 @@ module.exports = (sequelize, DataTypes) => {
     'tempAnswer',
     {
       programme: DataTypes.STRING,
-      data: DataTypes.JSONB
+      data: DataTypes.JSONB,
+      locked: DataTypes.BOOLEAN,
     },
     {
       underscored: true,
-      tableName: 'temp_answers'
+      tableName: 'temp_answers',
     }
   )
 
