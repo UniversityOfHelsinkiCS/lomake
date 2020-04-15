@@ -67,7 +67,8 @@ describe('Form tests', function () {
     cy.get('[data-cy=form-section-III]').click()
     cy.get('[data-cy=textarea-wellbeing_information_used]').find('.editor-class').type(testString2)
 
-    cy.reload(true)
+    cy.wait(2000) // Bad practice. Need to find a way on how to wait for websocket POST to be done, then reload.
+    cy.reload()
 
     // Then check that answers have been changed:
     cy.get('[data-cy=form-section-I]').click()
