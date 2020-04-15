@@ -15,6 +15,7 @@ const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogram
 
 initializeDatabaseConnection()
   .then(() => {
+    // Scripts that can be ran manually
     if (process.argv[2]) {
       switch (process.argv[2]) {
         case 'reset_tokens':
@@ -26,6 +27,11 @@ initializeDatabaseConnection()
         default:
           return
       }
+    }
+
+    // Scripts that will run if env variable TESTING=true (in github actions)
+    if (process.env.TESTING) {
+      resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
     }
 
     const app = express()
