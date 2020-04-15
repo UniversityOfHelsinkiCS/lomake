@@ -2,6 +2,7 @@ const Router = require('express')
 const users = require('@controllers/usersController')
 const answers = require('@controllers/answersController')
 const tokens = require('@controllers/tokensController')
+const studyprogrammes = require('@controllers/studyprogrammesController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -23,6 +24,7 @@ router.post('/programmes/:programme/tokens/:url', requireProgrammeOwner, tokens.
 router.post('/programmes/:programme/tokens/create/:type', requireProgrammeOwner, tokens.createToken)
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.put('/programmes/:programme/users/:id/access', requireProgrammeOwner, users.editUserAccess)
+router.get('/programmes', studyprogrammes.getAll)
 
 router.post('/login', users.getCurrentUser)
 router.post('/logout', users.getLogoutUrl)
