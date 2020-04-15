@@ -19,6 +19,14 @@ jobs:
 
       - name: Run cypress tests
         run: npm run cypress:headless
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          # Artifact name
+          name: cypress
+          # Directory containing files to upload
+          path: /home/runner/work/lomake/lomake/cypress/
 
       - uses: actions/checkout@master
       - name: Publish to DockerHub
