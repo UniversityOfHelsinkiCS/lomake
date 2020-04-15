@@ -31,7 +31,7 @@ describe('Core tests', function () {
 
 describe('Form tests', function () {
   this.beforeEach(function () {
-    cy.visit("http://localhost:8000/form/Bachelor's%20Programme%20in%20Computer%20Science")
+    cy.visit('http://localhost:8000/form/bsc_computer_science')
   })
 
   // This function just clears the forms' input fields
