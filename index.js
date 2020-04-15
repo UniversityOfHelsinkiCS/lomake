@@ -29,8 +29,8 @@ initializeDatabaseConnection()
       }
     }
 
-    // If running in CI (github actions), init studyprogrammes to DB
-    if (process.env.CI) {
+    // Scripts that will run if env variable TESTING=true (in github actions)
+    if (process.env.TESTING) {
       resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
     }
 
