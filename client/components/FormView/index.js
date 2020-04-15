@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import Form from 'Components/FormView/Form'
@@ -53,16 +53,26 @@ const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const languageCode = useSelector((state) => state.language)
+  const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const [programme, setProgramme] = useState(null)
 
   useEffect(() => {
-    if (!room) return
+    const tempProgramme = studyProgrammes.find((programme) => programme.key === room)
+    if (!room || !tempProgramme) return
 
-    dispatch(wsJoinRoom(decodeURIComponent(room)))
+    setProgramme(tempProgramme)
+    dispatch(wsJoinRoom(room))
 
-    return () => dispatch(wsLeaveRoom(decodeURIComponent(room)))
+    return () => dispatch(wsLeaveRoom(room))
   }, [room])
 
   if (!room) return <Redirect to="/" />
+
+  if (!programme) return 'Error: Invalid url.'
+
+  const localizedProgramName = programme.name[languageCode]
+    ? programme.name[languageCode]
+    : programme.name['en']
 
   return (
     <div className="the-form">
@@ -75,7 +85,7 @@ const FormView = ({ room }) => {
           {translations.title[languageCode]} {new Date().getFullYear()}
         </h1>
         <p style={{ color: colors.theme_blue }}>
-          <b>{decodeURIComponent(room)}</b>
+          <b>{localizedProgramName}</b>
         </p>
         <StatusMessage />
         <p>{translations.p1[languageCode]}</p>
