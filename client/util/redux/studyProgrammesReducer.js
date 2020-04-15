@@ -16,7 +16,7 @@ export default (state = { data: null }, action) => {
     case 'GET_STUDYPROGRAMMES_SUCCESS':
       return {
         ...state,
-        data: action.response,
+        data: action.response.sort((a, b) => a.name['en'].localeCompare(b.name['en'])),
         pending: false,
         error: false,
       }
