@@ -11,6 +11,7 @@ import accessToken from './accessTokenReducer'
 import previousAnswers from './previousAnswersReducer'
 import programmesTokens from './programmesTokensReducer'
 import programmesUsers from './programmesUsersReducer'
+import studyProgrammes from './studyProgrammesReducer'
 
 export default combineReducers({
   form,
@@ -23,5 +24,6 @@ export default combineReducers({
   accessToken,
   previousAnswers,
   programmesTokens,
-  programmesUsers
+  programmesUsers,
+  studyProgrammes,
 })
