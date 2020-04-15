@@ -29,3 +29,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           buildargs: BASE_PATH=/lomake/
           tags: 'production'
+          cache: true
