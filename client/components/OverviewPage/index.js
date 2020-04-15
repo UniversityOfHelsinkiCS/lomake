@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './OverviewPage.scss'
 import { Modal, Header, Input } from 'semantic-ui-react'
-import { programmes } from 'Utilities/common'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -11,6 +10,7 @@ export default () => {
   const [modalData, setModalData] = useState(null)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
+  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   const handleChange = ({ target }) => {
     const { value } = target
@@ -41,7 +41,8 @@ export default () => {
   const usersProgrammes = currentUser.data.admin ? programmes : Object.keys(currentUser.data.access)
 
   const filteredProgrammes = usersProgrammes.filter((prog) => {
-    return prog.toLowerCase().includes(filter.toLowerCase())
+    const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
+    return searchTarget.toLowerCase().includes(filter.toLowerCase())
   })
 
   return (

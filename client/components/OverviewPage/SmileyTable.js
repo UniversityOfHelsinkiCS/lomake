@@ -46,15 +46,13 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [programExpanded, setProgramExpanded] = useState(null)
 
-  console.log('questions', questions)
-
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
   }, [])
 
   useEffect(() => {
     if (filteredProgrammes.length === 1) {
-      setProgramExpanded(filteredProgrammes[0])
+      setProgramExpanded(filteredProgrammes[0].key)
       return
     }
 
@@ -136,19 +134,19 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
       </thead>
       <tbody>
         {filteredProgrammes.map((p, pi) => {
-          const programme = answers.data.find((a) => a.programme === p)
-          const targetURL = `/form/${encodeURIComponent(p)}`
+          const programme = answers.data.find((a) => a.programme === p.key)
+          const targetURL = `/form/${p.key}`
           return (
-            <React.Fragment key={p}>
+            <React.Fragment key={p.key}>
               <tr>
                 <th colSpan="2">
                   <Link data-cy="smileytable-link-to-form" to={targetURL}>
-                    {p}
+                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                   </Link>
                 </th>
                 {allLightIds.map((q, qi) => {
                   return programme && programme.data[q] ? (
-                    <td key={`${p}-${q}`}>
+                    <td key={`${p.key}-${q}`}>
                       <div
                         data-cy={`${pi}-${qi}`}
                         className="square"
@@ -175,7 +173,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
 
                                 return acc
                               }, ''),
-                              programme: p,
+                              programme: p.key,
                               content: programme.data[q.replace('light', 'text')],
                               color: programme.data[q],
                             })
@@ -184,7 +182,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                       </div>
                     </td>
                   ) : (
-                    <td key={`${p}-${q}`}>
+                    <td key={`${p.key}-${q}`}>
                       <div
                         data-cy={`${pi}-${qi}`}
                         className="square"
@@ -193,9 +191,9 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                     </td>
                   )
                 })}
-                {hasManagementAccess(p) && <ManageCell program={p} />}
+                {hasManagementAccess(p.key) && <ManageCell program={p} />}
               </tr>
-              {programExpanded === p && <OwnerAccordionContent program={p} />}
+              {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
             </React.Fragment>
           )
         })}
