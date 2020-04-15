@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/checkout@master
       - name: Publish to DockerHub
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
           name: toska/lomake
           username: ${{ secrets.DOCKER_USERNAME }}
