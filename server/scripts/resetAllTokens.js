@@ -9,26 +9,27 @@ const resetAllTokens = async () => {
     await db.token.destroy({ where: {} })
 
     programmes.forEach(async (programme) => {
+      const { key } = programme
       await db.token.create({
         url: uuid(),
-        programme: programme,
+        programme: key,
         type: 'ADMIN',
         valid: true,
-        usageCounter: 0
+        usageCounter: 0,
       })
       await db.token.create({
         url: uuid(),
-        programme: programme,
+        programme: key,
         type: 'READ',
         valid: true,
-        usageCounter: 0
+        usageCounter: 0,
       })
       await db.token.create({
         url: uuid(),
-        programme: programme,
+        programme: key,
         type: 'WRITE',
         valid: true,
-        usageCounter: 0
+        usageCounter: 0,
       })
     })
   } catch (error) {
@@ -36,5 +37,5 @@ const resetAllTokens = async () => {
   }
 }
 module.exports = {
-  resetAllTokens
+  resetAllTokens,
 }
