@@ -18,8 +18,8 @@ jobs:
         run: docker-compose up -d
 
       - name: Run cypress tests
-        run: npm run cypress:headless
-        
+        run: ./node_modules/.bin/cypress run --headless *.spec.js
+
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
