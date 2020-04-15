@@ -11,13 +11,23 @@ const logger = require('@util/logger')
 const { initializeDatabaseConnection } = require('@root/server/database/connection')
 
 const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
+const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
 
 initializeDatabaseConnection()
   .then(() => {
-    if (process.argv[2] && process.argv[2] === 'reset_tokens') {
-      resetAllTokens().then(() => logger.info('Token reset done.'))
-      return
+    if (process.argv[2]) {
+      switch (process.argv[2]) {
+        case 'reset_tokens':
+          resetAllTokens().then(() => logger.info('Token reset done.'))
+          return
+        case 'reset_studyprogrammes':
+          resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
+          return
+        default:
+          return
+      }
     }
+
     const app = express()
     const server = require('http').Server(app)
     const io = require('socket.io')(server)
