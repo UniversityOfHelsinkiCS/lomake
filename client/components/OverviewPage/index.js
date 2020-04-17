@@ -38,7 +38,10 @@ export default () => {
     },
   }
 
-  const usersProgrammes = currentUser.data.admin ? programmes : Object.keys(currentUser.data.access)
+  const usersPermissionsKeys = Object.keys(currentUser.data.access)
+  const usersProgrammes = currentUser.data.admin
+    ? programmes
+    : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
 
   const filteredProgrammes = usersProgrammes.filter((prog) => {
     const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
