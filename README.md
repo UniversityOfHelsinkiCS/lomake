@@ -1,6 +1,6 @@
 ## Short tutorial
 
-The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts.
+The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts. 
 
 ### ApiConnection
 
