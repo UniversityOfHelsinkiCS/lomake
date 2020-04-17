@@ -15,8 +15,15 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
-    dispatch(getStudyProgrammes())
   }, [])
+
+  // Do this after user.data is ready, so that there wont be dupe users in db.
+  // Because of accessControlMiddleware
+  useEffect(() => {
+    if (currentUser.data) {
+      dispatch(getStudyProgrammes())
+    }
+  }, [currentUser])
 
   if (!currentUser.data || !studyProgrammes) return null
 
