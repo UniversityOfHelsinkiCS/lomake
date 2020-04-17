@@ -62,6 +62,7 @@ The current questions of the form can be found in [questions.json](https://githu
 _Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
 
 ### How to start development:
+
 - git clone
 - npm install
 - npm run dev
