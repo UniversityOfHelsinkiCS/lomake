@@ -2,9 +2,16 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Streetlights.scss'
+import { Icon } from 'semantic-ui-react'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
+
+const lightEmojiMap = {
+  green: 'smile outline',
+  yellow: 'meh outline',
+  red: 'frown outline',
+}
 
 const Streetlights = ({ id }) => {
   const dispatch = useDispatch()
@@ -17,6 +24,18 @@ const Streetlights = ({ id }) => {
     if (value === color) return `emoji${viewOnly ? '' : ' emoji-button'} active-emoji`
 
     return `emoji${viewOnly ? '' : ' emoji-button'}`
+  }
+
+  if (viewOnly) {
+    return (
+      <>
+        {value && (
+          <div style={{ margin: '1em 0' }}>
+            <Icon name={lightEmojiMap[value]} size="huge" />
+          </div>
+        )}
+      </>
+    )
   }
 
   return (

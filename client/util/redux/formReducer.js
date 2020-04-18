@@ -10,6 +10,11 @@ export const updateFormField = (field, value, host) => ({
   host,
 })
 
+export const setViewOnly = (value) => ({
+  type: 'SET_VIEW_ONLY',
+  value,
+})
+
 export const getFormAction = () => {
   const route = '/form'
   const prefix = 'GET_FORM'
@@ -47,6 +52,11 @@ export default (state = { data: {}, viewOnly: false }, action) => {
         data: action.response,
         pending: false,
         error: false,
+      }
+    case 'SET_VIEW_ONLY':
+      return {
+        ...state,
+        viewOnly: action.value,
       }
     default:
       return state

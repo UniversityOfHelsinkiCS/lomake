@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { romanize } from 'Utilities/common'
 import CSVDownload from './CSVDownload'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
+import PDFDownload from './PDFDownload'
 
 const Form = ({ questions }) => {
   const previousYearsAnswers = useSelector((state) => state.previousAnswers)
@@ -57,7 +58,11 @@ const Form = ({ questions }) => {
 
   return (
     <>
-      <CSVDownload questions={questions} />
+      <div style={{ display: 'flex' }}>
+        <CSVDownload questions={questions} />
+        <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
+        <PDFDownload />
+      </div>
       {questions.map((section, index) => {
         return (
           <Section
