@@ -11,6 +11,9 @@ import { colors } from 'Utilities/common'
 import { Button } from 'semantic-ui-react'
 import StatusMessage from './StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
+import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
+import { setViewOnly } from 'Utilities/redux/formReducer'
+import { Loader } from 'semantic-ui-react'
 
 const translations = {
   title: {
@@ -54,21 +57,56 @@ const FormView = ({ room }) => {
   const history = useHistory()
   const languageCode = useSelector((state) => state.language)
   const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const [programme, setProgramme] = useState(null)
+  const programme = useSelector((state) => state.studyProgrammes.singleProgram)
+  const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
+  const user = useSelector((state) => state.currentUser.data)
+
+  const userHasWriteAccess = user.access[room] && user.access[room].write
+  const userHasReadAccess = user.access[room] && user.access[room].read
+
+  const [loadObj, setLoadObj] = useState({
+    loaded: false,
+    loading: false,
+  })
 
   useEffect(() => {
-    const tempProgramme = studyProgrammes.find((programme) => programme.key === room)
-    if (!room || !tempProgramme) return
+    dispatch(getProgramme(room))
+    setLoadObj({
+      loading: true,
+      loaded: false,
+    })
+  }, [])
 
-    setProgramme(tempProgramme)
+  useEffect(() => {
+    if (loadObj.loading && !pending) {
+      setLoadObj({
+        loading: false,
+        loaded: true,
+      })
+      if (programme) {
+        if (programme.locked || !userHasWriteAccess) {
+          dispatch(setViewOnly(true))
+        } else {
+          dispatch(setViewOnly(false)) // Clear this incase old value is wrong
+        }
+      }
+    }
+  }, [loadObj, pending])
+
+  useEffect(() => {
+    if (!programme) return
+    if (programme.locked || !userHasWriteAccess) return
     dispatch(wsJoinRoom(room))
-
     return () => dispatch(wsLeaveRoom(room))
-  }, [room])
+  }, [programme])
+
+  if (!loadObj.loaded) return <Loader active />
 
   if (!room) return <Redirect to="/" />
 
   if (!programme) return 'Error: Invalid url.'
+
+  if (!userHasReadAccess && !userHasWriteAccess) return 'Error: No permissions.'
 
   const localizedProgramName = programme.name[languageCode]
     ? programme.name[languageCode]
