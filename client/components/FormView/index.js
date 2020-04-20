@@ -62,8 +62,8 @@ const FormView = ({ room }) => {
   const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
 
-  const userHasWriteAccess = user.access[room] && user.access[room].write
-  const userHasReadAccess = user.access[room] && user.access[room].read
+  const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
+  const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,
