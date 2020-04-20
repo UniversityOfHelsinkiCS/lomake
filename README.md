@@ -1,3 +1,5 @@
+![CI](https://github.com/UniversityOfHelsinkiCS/lomake/workflows/CI/badge.svg)
+
 ## Short tutorial
 
 The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts. 
