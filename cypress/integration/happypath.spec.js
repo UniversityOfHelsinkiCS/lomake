@@ -123,14 +123,4 @@ describe('Form tests', function () {
     cy.get('[data-cy=form-section-II-nextbutton]').click()
     cy.get('[data-cy=form-section-II]').find('.close')
   })
-
-  it('Cant click next and error is shown if text is too long', function () {
-    cy.get('[data-cy=form-section-II]').click()
-    cy.get('[data-cy=textarea-overall_status_information_used]').find('.editor-class').click()
-    cy.focused().clear()
-    cy.focused().type('aaaaaaaaaa'.repeat(101), { delay: 0 })
-
-    cy.get('[data-cy=form-section-II-nextbutton]').should('be.disabled')
-    cy.contains('One or more answers that are too long')
-  })
 })
