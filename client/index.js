@@ -24,7 +24,7 @@ const refresh = () =>
   )
 
 if (process.env.NODE_ENV === 'development') {
-  const newUser = 'user'
+  const newUser = 'admin'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
   if (currentFakeUser) {
     const parsedFakeCurrentUser = JSON.parse(currentFakeUser)
