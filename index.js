@@ -12,6 +12,7 @@ const { initializeDatabaseConnection } = require('@root/server/database/connecti
 
 const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
 const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
+const { createCypressUser } = require('@root/server/scripts/createCypressUser')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -32,6 +33,7 @@ initializeDatabaseConnection()
     // Scripts that will run if env variable TESTING=true (in github actions)
     if (process.env.TESTING) {
       resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
+      createCypressUser().then(() => logger.info('CypressUser created'))
     }
 
     const app = express()
