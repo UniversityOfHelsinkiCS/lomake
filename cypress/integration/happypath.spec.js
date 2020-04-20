@@ -125,7 +125,7 @@ describe('Form tests', function () {
   })
 })
 
-describe.only('Permission tests', function () {
+describe('Permission tests', function () {
   it('Invalid url shows error', function () {
     cy.visit('http://localhost:8000/form/lmao')
     cy.contains('Error: Invalid url.')
