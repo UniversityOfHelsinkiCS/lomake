@@ -25,9 +25,11 @@ const PDFDownload = () => {
   const dispatch = useDispatch()
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const handleViewOnlyChange = (value) => dispatch(setViewOnly(value))
+  const programme = useSelector((state) => state.studyProgrammes.singleProgram)
+  const user = useSelector((state) => state.currentUser.data)
 
-  // TODO: check if user can edit the form that is currently being viewed - if not -> set to false
-  const showGoBackToEditButton = true
+  const userHasWriteAccess = user.access[programme.key] && user.access[programme.key].write
+  const showGoBackToEditButton = userHasWriteAccess && !programme.locked ? true : false
 
   return (
     <>
@@ -36,6 +38,7 @@ const PDFDownload = () => {
           {showGoBackToEditButton && (
             <>
               <span
+                data-cy="pdfdownload-go-back-button"
                 style={{ cursor: 'pointer', color: '#4183C4' }}
                 onClick={() => {
                   handleViewOnlyChange(false)
@@ -58,6 +61,7 @@ const PDFDownload = () => {
       ) : (
         <>
           <span
+            data-cy="pdfdownload-go-to-readmode"
             style={{ cursor: 'pointer', color: '#4183C4' }}
             onClick={() => {
               handleViewOnlyChange(true)
