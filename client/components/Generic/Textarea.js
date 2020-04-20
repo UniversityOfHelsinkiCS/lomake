@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { Editor } from 'react-draft-wysiwyg'
@@ -14,8 +14,16 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
+  // this is a hack before the real fix comes with https://github.com/UniversityOfHelsinkiCS/lomake/issues/118
+  const [hasTyped, setHasTyped] = useState(false)
+
+  useEffect(() => {
+    if (hasTyped) return
+    setEditorState(editorStateFromRedux())
+  }, [dataFromRedux])
 
   const handleChange = (value) => {
+    setHasTyped(true)
     setEditorState(value)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)

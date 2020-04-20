@@ -68,10 +68,8 @@ describe('Form tests', function () {
     })
   })
 
-  it('Can open a question, click on smily face, and the result it saved.', () => {
-    cy.get('[data-cy=form-section-I]').click()
+  it('Can open a question, click on smiley face, and the result it saved.', () => {
     cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
-    cy.get('[data-cy=form-section-III]').click()
     cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
 
     // Check that the changes have been saved:
@@ -86,7 +84,7 @@ describe('Form tests', function () {
       .and('eq', 'rgb(157, 255, 157)')
   })
 
-  it.only('Can write to a textfield and the answer is saved.', function () {
+  it('Can write to a textfield and the answer is saved.', function () {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
     cy.focused().type('kissa')
@@ -96,24 +94,6 @@ describe('Form tests', function () {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
       .should('contain.text', 'kissa')
-  })
-
-  it('Can click next and see a checkmark if answer is valid', function () {
-    cy.get('[data-cy=form-section-I]').click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.focused().clear()
-    cy.focused().type(
-      'This text is long enough, but not too long. Therefore I want a green checkmark.'
-    )
-    cy.get('[data-cy=form-section-I-nextbutton]').click()
-
-    cy.get('[data-cy=form-section-I]').find('.check')
-  })
-
-  it('Can click next and see an error mark if required answers are missing', function () {
-    cy.get('[data-cy=form-section-II]').click()
-    cy.get('[data-cy=form-section-II-nextbutton]').click()
-    cy.get('[data-cy=form-section-II]').find('.close')
   })
 })
 
