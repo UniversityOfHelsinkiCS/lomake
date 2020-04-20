@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import * as _ from "lodash"
+import * as _ from 'lodash'
 
 function makeid(length) {
   var result = ''
@@ -13,13 +13,37 @@ function makeid(length) {
   return result
 }
 
+/**
+ * ::Start localstorage config
+ * Required because cypress automatically clears localstorage to prevent state from building up.
+ * https://github.com/cypress-io/cypress/issues/461
+ */
+let cachedLocalStorageAuth = JSON.stringify({
+  uid: 'cypressUser',
+})
+
+function restoreLocalStorageAuth() {
+  if (cachedLocalStorageAuth) {
+    localStorage.setItem('fakeUser', cachedLocalStorageAuth)
+  }
+}
+
+function cacheLocalStorageAuth() {
+  cachedLocalStorageAuth = localStorage.getItem('fakeUser')
+}
+
+Cypress.on('window:before:load', restoreLocalStorageAuth)
+beforeEach(restoreLocalStorageAuth)
+afterEach(cacheLocalStorageAuth)
+// ::End localstorage config
+
 describe('Core tests', function () {
   this.beforeEach(function () {
     cy.visit('http://localhost:8000')
   })
 
   it('Frontpage loads', function () {
-    cy.contains("Bachelor's Programme for Teachers of Mathematics, Physics and Chemistry")
+    cy.contains("Bachelor's Programme in Computer Science")
   })
 
   it('Filter works and form can be opened', function () {
@@ -36,8 +60,8 @@ describe('Form tests', function () {
 
   // This function just clears the forms' input fields
   this.beforeAll(function () {
-    cy.get("[data-cy^=form-section").click({ multiple: true })
-    cy.get(".editor-class").each(function (el, index, list) {
+    cy.get('[data-cy^=form-section').click({ multiple: true })
+    cy.get('.editor-class').each(function (el, index, list) {
       cy.get(el).click()
       cy.focused().clear()
     })
@@ -51,8 +75,8 @@ describe('Form tests', function () {
 
     // Check that the changes have been saved:
     cy.visit('http://localhost:8000')
-    cy.get('[data-cy="5-0"]').should('have.css', 'background-color').and('eq', 'rgb(255, 255, 177)')
-    cy.get('[data-cy="5-9"]').should('have.css', 'background-color').and('eq', 'rgb(157, 255, 157)')
+    cy.get('[data-cy="0-0"]').should('have.css', 'background-color').and('eq', 'rgb(255, 255, 177)')
+    cy.get('[data-cy="0-9"]').should('have.css', 'background-color').and('eq', 'rgb(157, 255, 157)')
   })
 
   it('Can write to a textfield and the answer is saved.', function () {
@@ -82,32 +106,31 @@ describe('Form tests', function () {
       .should('contain.text', testString2)
   })
 
-  it("Can click next and see a checkmark if answer is valid", function () {
+  it('Can click next and see a checkmark if answer is valid', function () {
     cy.get('[data-cy=form-section-I]').click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find(".editor-class").click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.focused().clear()
-    cy.focused().type("This text is long enough, but not too long. Therefore I want a green checkmark.")
+    cy.focused().type(
+      'This text is long enough, but not too long. Therefore I want a green checkmark.'
+    )
     cy.get('[data-cy=form-section-I-nextbutton]').click()
 
-    cy.get('[data-cy=form-section-I]').find(".check")
+    cy.get('[data-cy=form-section-I]').find('.check')
   })
 
-  it("Can click next and see an error mark if required answers are missing", function () {
+  it('Can click next and see an error mark if required answers are missing', function () {
     cy.get('[data-cy=form-section-II]').click()
     cy.get('[data-cy=form-section-II-nextbutton]').click()
-    cy.get('[data-cy=form-section-II]').find(".close")
+    cy.get('[data-cy=form-section-II]').find('.close')
   })
 
-
-  it("Cant click next and error is shown if text is too long", function () {
+  it('Cant click next and error is shown if text is too long', function () {
     cy.get('[data-cy=form-section-II]').click()
-    cy.get('[data-cy=textarea-overall_status_information_used]').find(".editor-class").click()
+    cy.get('[data-cy=textarea-overall_status_information_used]').find('.editor-class').click()
     cy.focused().clear()
-    cy.focused().type("aaaaaaaaaa".repeat(101), { delay: 0 })
+    cy.focused().type('aaaaaaaaaa'.repeat(101), { delay: 0 })
 
-    cy.get('[data-cy=form-section-II-nextbutton]').should("be.disabled")
-    cy.contains("One or more answers that are too long")
-
+    cy.get('[data-cy=form-section-II-nextbutton]').should('be.disabled')
+    cy.contains('One or more answers that are too long')
   })
-
 })
