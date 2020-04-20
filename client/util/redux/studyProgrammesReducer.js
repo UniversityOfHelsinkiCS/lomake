@@ -9,6 +9,18 @@ export const getStudyProgrammes = () => {
   return callBuilder(route, prefix)
 }
 
+export const toggleLock = (programmeKey) => {
+  const route = `/programmes/${programmeKey}/toggleLock`
+  const prefix = 'TOGGLE_LOCK'
+  return callBuilder(route, prefix, 'post')
+}
+
+export const getProgramme = (key) => {
+  const route = `/programmes/${key}`
+  const prefix = 'GET_STUDYPROGRAM'
+  return callBuilder(route, prefix)
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -31,6 +43,24 @@ export default (state = { data: null }, action) => {
         ...state,
         data: null,
         pending: false,
+        error: true,
+      }
+    case 'GET_STUDYPROGRAM_ATTEMPT':
+      return {
+        ...state,
+        singleProgramPending: true,
+        singleProgram: undefined,
+      }
+    case 'GET_STUDYPROGRAM_SUCCESS':
+      return {
+        ...state,
+        singleProgramPending: false,
+        singleProgram: action.response,
+      }
+    case 'GET_STUDYPROGRAM_FAILURE':
+      return {
+        ...state,
+        singleProgram: false,
         error: true,
       }
 

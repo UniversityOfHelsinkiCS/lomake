@@ -4,6 +4,7 @@ import OwnerAccordionLinks from './OwnerAccordionLinks'
 import OwnerAccordionUsers from './OwnerAccordionUsers'
 import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
 import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
+import FormLocker from './FormLocker'
 
 const OwnerAccordionContent = ({ programKey }) => {
   const dispatch = useDispatch()
@@ -29,6 +30,7 @@ const OwnerAccordionContent = ({ programKey }) => {
 
   return (
     <>
+      <FormLocker programme={programKey} />
       <OwnerAccordionLinks programme={programKey} />
       <OwnerAccordionUsers programme={programKey} />
     </>
