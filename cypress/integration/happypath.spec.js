@@ -48,7 +48,7 @@ describe('Core tests', function () {
 
   it('Filter works and form can be opened', function () {
     cy.get('[data-cy=overviewpage-filter]').type("bachelor's programme in computer science")
-    cy.get('[data-cy=smileytable-link-to-form]').should('have.length', 1).click()
+    cy.get('[data-cy^=smileytable-link-to]').should('have.length', 1).click()
     cy.get('[data-cy=formview-title]')
   })
 })
@@ -60,6 +60,7 @@ describe('Form tests', function () {
 
   // This function just clears the forms' input fields
   this.beforeAll(function () {
+    cy.visit('http://localhost:8000/form/bsc_computer_science')
     cy.get('[data-cy^=form-section').click({ multiple: true })
     cy.get('.editor-class').each(function (el, index, list) {
       cy.get(el).click()
@@ -75,35 +76,26 @@ describe('Form tests', function () {
 
     // Check that the changes have been saved:
     cy.visit('http://localhost:8000')
-    cy.get('[data-cy="0-0"]').should('have.css', 'background-color').and('eq', 'rgb(255, 255, 177)')
-    cy.get('[data-cy="0-9"]').should('have.css', 'background-color').and('eq', 'rgb(157, 255, 157)')
+
+    cy.get('[data-cy=bsc_computer_science-0]')
+      .should('have.css', 'background-color')
+      .and('eq', 'rgb(255, 255, 177)')
+
+    cy.get('[data-cy=bsc_computer_science-9]')
+      .should('have.css', 'background-color')
+      .and('eq', 'rgb(157, 255, 157)')
   })
 
-  it('Can write to a textfield and the answer is saved.', function () {
-    const testString1 = makeid(10)
-    const testString2 = makeid(10)
+  it.only('Can write to a textfield and the answer is saved.', function () {
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.get('[data-cy=form-section-I]').click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
-      .find('.editor-class')
-      .type(testString1)
-
-    cy.get('[data-cy=form-section-III]').click()
-    cy.get('[data-cy=textarea-wellbeing_information_used]').find('.editor-class').type(testString2)
-
-    cy.wait(2000) // Bad practice. Need to find a way on how to wait for websocket POST to be done, then reload.
+    cy.focused().type('kissa')
+    cy.wait(2000) // Bad practice, but it works :)
     cy.reload()
 
-    // Then check that answers have been changed:
-    cy.get('[data-cy=form-section-I]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
-      .should('contain.text', testString1)
-
-    cy.get('[data-cy=form-section-III]').click()
-    cy.get('[data-cy=textarea-wellbeing_information_used]')
-      .find('.editor-class')
-      .should('contain.text', testString2)
+      .should('contain.text', 'kissa')
   })
 
   it('Can click next and see a checkmark if answer is valid', function () {
