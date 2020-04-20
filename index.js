@@ -30,8 +30,8 @@ initializeDatabaseConnection()
       }
     }
 
-    // Scripts that will run if env variable TESTING=true (in github actions)
-    if (process.env.TESTING) {
+    // Scripts that will run if env variable TESTING=true (in github actions AND locally when in dev-mode)
+    if (process.env.TESTING || process.env.NODE_ENV === 'development') {
       resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
       createCypressUser().then(() => logger.info('CypressUser created'))
     }
