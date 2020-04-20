@@ -140,7 +140,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
             <React.Fragment key={p.key}>
               <tr>
                 <th colSpan="2">
-                  <Link data-cy="smileytable-link-to-form" to={targetURL}>
+                  <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
                     {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                   </Link>
                 </th>
@@ -148,7 +148,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                   return programme && programme.data[q] ? (
                     <td key={`${p.key}-${q}`}>
                       <div
-                        data-cy={`${pi}-${qi}`}
+                        data-cy={`${p.key}-${qi}`}
                         className="square"
                         style={{ background: backgroundColorMap[programme.data[q]] }}
                       >
@@ -184,7 +184,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
                   ) : (
                     <td key={`${p.key}-${q}`}>
                       <div
-                        data-cy={`${pi}-${qi}`}
+                        data-cy={`${p.key}-${qi}`}
                         className="square"
                         style={{ background: 'whitesmoke' }}
                       />
