@@ -23,6 +23,7 @@ const createCypressUser = async () => {
         },
         bsc_agricultural_sciences: {
           write: true,
+          read: true,
         },
       },
       irrelevant: false,
