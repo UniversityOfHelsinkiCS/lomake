@@ -8,7 +8,7 @@ export const possibleUsers = [
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     schacPersonalUniqueCode: undefined,
-    sn: 'admin'
+    sn: 'admin',
   },
   {
     uid: 'student',
@@ -17,7 +17,7 @@ export const possibleUsers = [
     mail: 'grp-toska+mockstudent@helsinki.fi',
     schacDateOfBirth: 19770501,
     schacPersonalUniqueCode: 'urn:schac:personalUniqueCode:int:studentID:helsinki.fi:fuksi',
-    sn: 'fuksi'
+    sn: 'fuksi',
   },
   {
     uid: 'staff',
@@ -26,8 +26,11 @@ export const possibleUsers = [
     mail: 'grp-toska+mockstaff@helsinki.fi',
     schacDateOfBirth: undefined,
     schacPersonalUniqueCode: undefined,
-    sn: 'staff'
-  }
+    sn: 'staff',
+  },
+  {
+    uid: 'cypressUser',
+  },
 ]
 
 export const setHeaders = (uid) => {
