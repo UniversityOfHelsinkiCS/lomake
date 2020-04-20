@@ -23,8 +23,19 @@ const refresh = () =>
     document.getElementById('root')
   )
 
-setHeaders('admin')
+if (process.env.NODE_ENV === 'development') {
+  const newUser = 'user'
+  const currentFakeUser = window.localStorage.getItem('fakeUser')
+  if (currentFakeUser) {
+    const parsedFakeCurrentUser = JSON.parse(currentFakeUser)
 
+    if (parsedFakeCurrentUser.uid !== 'cypressUser') {
+      setHeaders(newUser)
+    }
+  } else {
+    setHeaders(newUser)
+  }
+}
 refresh()
 
 if (module.hot) {
