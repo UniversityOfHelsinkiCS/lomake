@@ -14,6 +14,7 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
+import NavigationSidebar from './NavigationSidebar'
 
 const translations = {
   title: {
@@ -113,44 +114,53 @@ const FormView = ({ room }) => {
     : programme.name['en']
 
   return (
-    <div className="the-form">
-      <div style={{ marginBottom: '2em' }}>
-        <Button onClick={() => history.push('/')} icon="arrow left" />
+    <div className="form-container">
+      <NavigationSidebar programmeKey={programme.key} />
+      <div className="the-form">
+        <div style={{ marginBottom: '2em' }}>
+          <Button onClick={() => history.push('/')} icon="arrow left" />
+        </div>
+        <img className="img-responsive" src={rypsi_image} />
+        <div>
+          <h1 data-cy="formview-title">
+            {translations.title[languageCode]} {new Date().getFullYear()}
+          </h1>
+          <p style={{ color: colors.theme_blue }}>
+            <b>{localizedProgramName}</b>
+          </p>
+          <StatusMessage />
+          <p>{translations.p1[languageCode]}</p>
+          <p>{translations.p2[languageCode]}</p>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={positiveEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {translations.positive[languageCode]}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
+            <img
+              src={neutralEmoji}
+              style={{
+                width: '40px',
+                height: 'auto',
+                marginRight: '5px',
+                marginTop: '5px',
+                marginBottom: '5px',
+              }}
+            />{' '}
+            {translations.neutral[languageCode]}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
+            <img
+              src={negativeEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {translations.negative[languageCode]}
+          </div>
+        </div>
+        <Form programmeKey={programme.key} questions={questions} />
       </div>
-      <img className="img-responsive" src={rypsi_image} />
-      <div>
-        <h1 data-cy="formview-title">
-          {translations.title[languageCode]} {new Date().getFullYear()}
-        </h1>
-        <p style={{ color: colors.theme_blue }}>
-          <b>{localizedProgramName}</b>
-        </p>
-        <StatusMessage />
-        <p>{translations.p1[languageCode]}</p>
-        <p>{translations.p2[languageCode]}</p>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={positiveEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} />{' '}
-          {translations.positive[languageCode]}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
-          <img
-            src={neutralEmoji}
-            style={{
-              width: '40px',
-              height: 'auto',
-              marginRight: '5px',
-              marginTop: '5px',
-              marginBottom: '5px',
-            }}
-          />{' '}
-          {translations.neutral[languageCode]}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-          <img src={negativeEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} />{' '}
-          {translations.negative[languageCode]}
-        </div>
-      </div>
-      <Form questions={questions} />
     </div>
   )
 }
