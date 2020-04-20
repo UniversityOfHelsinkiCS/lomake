@@ -11,6 +11,33 @@ const getAll = async (req, res) => {
   }
 }
 
+const getOne = async (req, res) => {
+  try {
+    const { programme } = req.params
+    const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
+    res.status(200).json(programEntity)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const toggleLock = async (req, res) => {
+  try {
+    const { programme } = req.params
+    const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
+    programEntity.locked = !programEntity.locked
+    await programEntity.save()
+    logger.info(`User ${req.user.uid} toggled edit-lock of ${programme}`)
+    res.status(200).json(programEntity)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
+  getOne,
+  toggleLock,
 }
