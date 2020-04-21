@@ -62,7 +62,6 @@ const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const languageCode = useSelector((state) => state.language)
-  const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
