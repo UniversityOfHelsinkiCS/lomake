@@ -10,6 +10,9 @@ COPY . .
 RUN echo "Europe/Helsinki" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
+# The commands above dont seem to do the trick, this works locally atleast:
+ENV TZ=Europe/Helsinki 
+
 ARG BASE_PATH
 ENV BASE_PATH=$BASE_PATH
 
