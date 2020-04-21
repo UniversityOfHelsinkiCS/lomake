@@ -105,7 +105,7 @@ describe('Permission tests', function () {
 
   it("Can't access form without permissions", function () {
     cy.visit('http://localhost:8000/form/bsc_languages')
-    cy.contains('Error: No permissions.')
+    cy.get('[data-cy=no-permissions-message]')
   })
 
   it("Can't WRITE with READ permissions and cant go to edit mode", function () {

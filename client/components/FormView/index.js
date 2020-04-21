@@ -111,7 +111,8 @@ const FormView = ({ room }) => {
 
   if (!programme) return 'Error: Invalid url.'
 
-  if (!userHasReadAccess && !userHasWriteAccess) return translations.noPermissions[languageCode]
+  if (!userHasReadAccess && !userHasWriteAccess)
+    return <span data-cy="no-permissions-message">{translations.noPermissions[languageCode]}</span>
 
   const localizedProgramName = programme.name[languageCode]
     ? programme.name[languageCode]
