@@ -51,6 +51,11 @@ const translations = {
     fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
     se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
   },
+  noPermissions: {
+    en: 'No permissions. To get permissions, contact your study programmer leader.',
+    fi: 'Ei oikeuksia. Saadaksesi oikeudet, ota yhteyttä koulutusohjelmasi johtajaan.',
+    se: '',
+  },
 }
 
 const FormView = ({ room }) => {
@@ -107,7 +112,7 @@ const FormView = ({ room }) => {
 
   if (!programme) return 'Error: Invalid url.'
 
-  if (!userHasReadAccess && !userHasWriteAccess) return 'Error: No permissions.'
+  if (!userHasReadAccess && !userHasWriteAccess) return translations.noPermissions[languageCode]
 
   const localizedProgramName = programme.name[languageCode]
     ? programme.name[languageCode]
