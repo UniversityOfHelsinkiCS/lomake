@@ -14,7 +14,6 @@ const startBackupJob = () => {
  * Creates new backup to backup_answers table, but only if the data has changed.
  */
 const createBackups = async () => {
-  logger.info(`${loggerPrefix}Checking for changes and creating backups if necessary...`)
   const currentAnswers = await db.tempAnswer.findAll({})
 
   currentAnswers.forEach(async (answer) => {
