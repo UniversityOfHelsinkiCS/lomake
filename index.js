@@ -13,6 +13,7 @@ const { initializeDatabaseConnection } = require('@root/server/database/connecti
 const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
 const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
 const { createCypressUser } = require('@root/server/scripts/createCypressUser')
+const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -99,6 +100,7 @@ initializeDatabaseConnection()
 
     server.listen(PORT, () => {
       logger.info(`Started on port ${PORT}`)
+      startBackupJob()
     })
   })
   .catch((e) => {
