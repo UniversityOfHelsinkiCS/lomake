@@ -127,5 +127,7 @@ describe('Permission tests', function () {
 
   it('Can do management with ADMIN permissions', function () {
     cy.visit('http://localhost:8000')
+    cy.get('[data-cy=bsc_computer_science-manage]').click()
+    cy.get('[data-cy^=formLocker-button]')
   })
 })
