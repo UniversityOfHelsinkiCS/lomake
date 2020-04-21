@@ -56,6 +56,7 @@ export default function FormLocker({ programme }) {
       <td colSpan={100}>
         <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
           <Button
+            data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
             color={locked ? 'green' : 'red'}
             disabled={!loadObj.loaded || programmeDetailsPending}
             onClick={handleLock}

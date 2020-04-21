@@ -100,7 +100,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
       }}
     >
       {program !== programExpanded ? (
-        <span onClick={() => setProgramExpanded(program)}>
+        <span data-cy={`${program.key}-manage`} onClick={() => setProgramExpanded(program)}>
           {translations.openManageText[languageCode]}
         </span>
       ) : (
