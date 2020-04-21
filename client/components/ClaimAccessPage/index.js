@@ -37,8 +37,10 @@ const translations = {
     },
   },
   invalidToken: {
-    fi: 'Virhe: Virheellinen tai vanhentunut token',
-    en: 'Error: Malformed or expired token',
+    fi:
+      'Virhe: Käyttämäsi linkki ei ole enää voimassa. Ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
+    en:
+      'Error: The url you tried to access in no longer valid. Please contact your study programme leader for a new one.',
     se: '',
   },
 }
