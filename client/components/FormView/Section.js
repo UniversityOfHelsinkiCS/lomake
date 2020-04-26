@@ -21,8 +21,9 @@ const Section = ({ title, number, children, programmeKey }) => {
               fontSize: '2em',
               padding: '1.5em 0.5em',
               margin: '1em 0',
-              background: '#e0e0e0',
+              background: '#141414',
               borderRadius: '5px',
+              color: 'white',
             }}
           >
             <span style={{ color: colors.theme_blue }}>{number}</span> - {title}
