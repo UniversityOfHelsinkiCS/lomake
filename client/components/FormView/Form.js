@@ -25,7 +25,7 @@ const Form = ({ questions, programmeKey }) => {
     MEASURES: Measures,
   }
 
-  let number = 0
+  let number = -1
 
   const partMap = (part) => {
     if (!partComponentMap.hasOwnProperty(part.type)) {

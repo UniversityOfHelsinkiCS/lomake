@@ -64,13 +64,15 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
         <>
           <div style={{ marginTop: '1em' }}>
             <Editor
+              wrapperClassName="wrapper-class"
+              editorClassName="editor-class"
+              toolbarClassName="toolbar-class"
               editorState={editorState}
               onEditorStateChange={handleChange}
-              editorClassName="editor-class"
               toolbar={{
-                options: ['inline', 'list', 'link', 'embedded', 'history'],
+                options: ['inline', 'list', 'history'],
                 inline: {
-                  options: ['bold', 'italic', 'underline'],
+                  options: ['bold', 'underline'],
                 },
                 list: {
                   options: ['unordered', 'ordered'],
