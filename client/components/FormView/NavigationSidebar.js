@@ -1,6 +1,6 @@
 import React from 'react'
 import questions from '../../questions.json'
-import { Message } from 'semantic-ui-react'
+import { Message, Icon } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
@@ -10,7 +10,7 @@ import { colors } from 'Utilities/common'
 const replaceTitle = {
   'KOULUTUSOHJELMAN YLEISTILANNE': 'KOULUTUS-\nOHJELMAN YLEISTILANNE',
   'ONNISTUMISIA JA KEHITTÄMISTOIMENPITEITÄ': 'ONNISTUMISIA JA KEHITTÄMIS-\nTOIMENPITEITÄ',
-  TOIMENPIDELISTA: 'TOIMENPIDE-\nLISTA',
+  TOIMENPIDELISTA: 'TOIMENPIDELISTA',
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET':
     'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
   'PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET':
@@ -19,9 +19,10 @@ const replaceTitle = {
   'FRAMGÅNGAR OCH UTVECKLINGSÅTGÄRDER': 'FRAMGÅNGAR OCH UTVECKLING-\nSÅTGÄRDER',
 }
 
-const NavigationSidebar = ({ programmeKey }) => {
+const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
   const languageCode = useSelector((state) => state.language)
   const location = useLocation()
+  let partNumber = -1
   return (
     <div className="navigation-sidebar">
       <Message>
@@ -32,7 +33,13 @@ const NavigationSidebar = ({ programmeKey }) => {
             const romanNumeral = romanize(index + 1)
             const active = location.hash === `#${romanNumeral}`
             return (
-              <div key={title} style={{ fontWeight: active ? 'bold' : undefined }}>
+              <div
+                key={title}
+                style={{
+                  fontWeight: active ? 'bold' : undefined,
+                  margin: '1em 0',
+                }}
+              >
                 <span style={{ color: active ? colors.theme_blue : undefined }}>
                   {romanize(index + 1)}
                 </span>
@@ -40,6 +47,16 @@ const NavigationSidebar = ({ programmeKey }) => {
                   <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: 'black' }}>
                     {title}
                   </Link>
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {section.parts.map((part) => {
+                    partNumber++
+                    return (
+                      <div>
+                        {partNumber}. <Icon name="check" />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )
