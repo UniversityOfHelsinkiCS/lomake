@@ -37,7 +37,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                 key={title}
                 style={{
                   fontWeight: active ? 'bold' : undefined,
-                  padding: '1em 0.5em',
+                  padding: '1em',
                   background: active ? '#e0e0e0' : undefined,
                   borderRadius: '5px',
                   margin: '1px',
