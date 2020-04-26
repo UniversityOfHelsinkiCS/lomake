@@ -42,6 +42,19 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
+  const EntityLastYearsAccordion = () =>
+    (previousAnswerText || previousAnswerLight) && (
+      <LastYearsAnswersAccordion>
+        {previousAnswerLight && (
+          <img
+            style={{ width: '40px', height: 'auto' }}
+            src={mapLightToImage[previousAnswerLight]}
+          />
+        )}
+        <ReactMarkdown source={previousAnswerText} />
+      </LastYearsAnswersAccordion>
+    )
+
   return (
     <>
       <Divider />
@@ -65,19 +78,12 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
       >
         {description}
       </p>
-      {(previousAnswerText || previousAnswerLight) && (
-        <LastYearsAnswersAccordion>
-          {previousAnswerLight && (
-            <img
-              style={{ width: '40px', height: 'auto' }}
-              src={mapLightToImage[previousAnswerLight]}
-            />
-          )}
-          <ReactMarkdown source={previousAnswerText} />
-        </LastYearsAnswersAccordion>
-      )}
 
-      <Textarea id={id} label={textAreaLabel[languageCode]} />
+      <Textarea
+        id={id}
+        label={textAreaLabel[languageCode]}
+        EntityLastYearsAccordion={EntityLastYearsAccordion}
+      />
     </>
   )
 }

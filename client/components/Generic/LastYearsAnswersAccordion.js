@@ -17,29 +17,19 @@ const LastYearsAnswersAccordion = ({ children }) => {
   const [expanded, setExpanded] = useState(false)
   const languageCode = useSelector((state) => state.language)
   return (
-    <>
+    <div>
+      {expanded && <blockquote>{children}</blockquote>}
       <span
         style={{
           cursor: 'pointer',
           color: '#4183C4',
+          float: 'right',
         }}
         onClick={() => setExpanded(!expanded)}
       >
         {expanded ? collapseText[languageCode] : expandText[languageCode]}
       </span>
-      {expanded && (
-        <div
-          style={{
-            marginTop: '1em',
-            backgroundColor: '#F4F4F4',
-            borderRadius: '5px',
-            padding: '1em',
-          }}
-        >
-          {children}
-        </div>
-      )}
-    </>
+    </div>
   )
 }
 

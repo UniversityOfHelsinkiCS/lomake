@@ -9,7 +9,20 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
-const Textarea = ({ label, id, required, previousYearsAnswers }) => {
+const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion }) => {
+  if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
+
+  if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
+    return (
+      <LastYearsAnswersAccordion>
+        <ReactMarkdown source={previousYearsAnswers[`${id}_text`]} />
+      </LastYearsAnswersAccordion>
+    )
+
+  return null
+}
+
+const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
@@ -40,24 +53,26 @@ const Textarea = ({ label, id, required, previousYearsAnswers }) => {
 
   const length = dataFromRedux.length
 
-  const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
-
   return (
     <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
-      <label
-        style={{
-          fontStyle: 'bolder',
-          fontSize: '1.1em',
-        }}
-      >
-        {label}
-        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
-      </label>
-      {previousAnswerText && (
-        <LastYearsAnswersAccordion>
-          <ReactMarkdown source={previousAnswerText} />
-        </LastYearsAnswersAccordion>
-      )}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <label
+          style={{
+            fontStyle: 'bolder',
+            fontSize: '1.1em',
+            minWidth: '50%',
+          }}
+        >
+          {label}
+          {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+        </label>
+        {
+          <Accordion
+            previousYearsAnswers={previousYearsAnswers}
+            EntityLastYearsAccordion={EntityLastYearsAccordion}
+          />
+        }
+      </div>
       {viewOnly ? (
         <ReactMarkdown source={dataFromRedux} />
       ) : (
