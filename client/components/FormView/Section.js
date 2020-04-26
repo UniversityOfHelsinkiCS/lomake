@@ -26,7 +26,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               color: 'white',
             }}
           >
-            <span style={{ color: colors.theme_blue }}>{number}</span> - {title}
+            <span style={{ color: colors.theme_blue }}>{number || '0'}</span> - {title}
           </h2>
         </InView>
       </div>

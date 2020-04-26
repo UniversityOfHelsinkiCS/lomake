@@ -67,7 +67,7 @@ const Form = ({ questions, programmeKey }) => {
         return (
           <Section
             title={section.title[languageCode]}
-            number={romanize(index + 1)}
+            number={romanize(index)}
             key={section.title[languageCode]}
             programmeKey={programmeKey}
           >

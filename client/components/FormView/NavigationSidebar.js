@@ -61,7 +61,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
           {questions.map((section, index) => {
             const titleFromJson = section.title[languageCode]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
-            const romanNumeral = romanize(index + 1)
+            const romanNumeral = romanize(index) || '0'
             const active = location.hash === `#${romanNumeral}`
             return (
               <div
@@ -75,7 +75,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                 }}
               >
                 <span style={{ color: active ? colors.theme_blue : undefined }}>
-                  {romanize(index + 1)}
+                  {romanNumeral}
                 </span>
                 <div style={{ margin: '1em 0' }}>
                   <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: 'black' }}>
