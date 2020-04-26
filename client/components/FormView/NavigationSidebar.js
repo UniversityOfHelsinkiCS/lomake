@@ -23,6 +23,11 @@ const translations = {
     en: 'Too long answer',
     se: '',
   },
+  mandatory_field: {
+    fi: 'pakollinen kenttä',
+    en: 'required field',
+    se: '',
+  },
 }
 
 const replaceTitle = {
@@ -121,7 +126,9 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                         <Icon
                           name={iconMap[status]}
                           style={{ color: getColor() }}
-                          title={translations[status][languageCode]}
+                          title={`${translations[status][languageCode]}${
+                            required ? ` (${translations.mandatory_field[languageCode]})` : ''
+                          }`}
                         />
                       </div>
                     )
