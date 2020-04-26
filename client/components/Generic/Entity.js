@@ -54,7 +54,17 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         </div>
         {!noLight && <Streetlights id={id} />}
       </div>
-      <p style={{ lineHeight: 2, backgroundColor: '#ffcd4c2e', padding: '1em' }}>{description}</p>
+      <p
+        style={{
+          lineHeight: 2,
+          backgroundColor: '#ffcd4c2e',
+          padding: '1em',
+          borderRadius: '5px',
+          margin: '1em 0',
+        }}
+      >
+        {description}
+      </p>
       {(previousAnswerText || previousAnswerLight) && (
         <LastYearsAnswersAccordion>
           {previousAnswerLight && (
