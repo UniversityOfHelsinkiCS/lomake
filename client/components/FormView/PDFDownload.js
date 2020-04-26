@@ -28,9 +28,6 @@ const PDFDownload = () => {
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const user = useSelector((state) => state.currentUser.data)
 
-  console.log('user', user)
-  console.log('programme', programme)
-
   const userHasWriteAccess =
     user.admin || (user.access[programme.key] && user.access[programme.key].write)
   const showGoBackToEditButton = userHasWriteAccess && !programme.locked ? true : false

@@ -84,9 +84,9 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map((part) => {
-                    partNumber++
-
                     const { id, type, required, no_light } = part
+                    if (type === 'ENTITY') partNumber++
+
                     const idsToCheck = []
 
                     if (type === 'TEXTAREA' || type === 'ENTITY') {
@@ -122,7 +122,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
 
                     return (
                       <div key={id}>
-                        {partNumber}.{' '}
+                        {type === 'ENTITY' && <>{partNumber}.</>}{' '}
                         <Icon
                           name={iconMap[status]}
                           style={{ color: getColor() }}
