@@ -25,7 +25,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
   let partNumber = -1
   return (
     <div className="navigation-sidebar">
-      <Message>
+      <Message style={{ padding: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {questions.map((section, index) => {
             const titleFromJson = section.title[languageCode]
@@ -37,7 +37,10 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                 key={title}
                 style={{
                   fontWeight: active ? 'bold' : undefined,
-                  margin: '1em 0',
+                  padding: '1em 0.5em',
+                  background: active ? '#e0e0e0' : undefined,
+                  borderRadius: '5px',
+                  margin: '1px',
                 }}
               >
                 <span style={{ color: active ? colors.theme_blue : undefined }}>
