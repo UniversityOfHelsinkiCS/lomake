@@ -121,7 +121,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                     }
 
                     return (
-                      <div>
+                      <div key={id}>
                         {partNumber}.{' '}
                         <Icon
                           name={iconMap[status]}

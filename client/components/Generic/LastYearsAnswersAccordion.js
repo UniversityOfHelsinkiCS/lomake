@@ -21,9 +21,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
       <span
         style={{
           cursor: 'pointer',
-          color: 'blue',
-          textDecoration: 'underline',
-          marginLeft: '0.5em',
+          color: '#4183C4',
         }}
         onClick={() => setExpanded(!expanded)}
       >
