@@ -42,8 +42,9 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
-  const EntityLastYearsAccordion = () =>
-    (previousAnswerText || previousAnswerLight) && (
+  const EntityLastYearsAccordion = () => {
+    if (!previousAnswerText && !previousAnswerLight) return null
+    return (
       <LastYearsAnswersAccordion>
         {previousAnswerLight && (
           <img
@@ -54,6 +55,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         <ReactMarkdown source={previousAnswerText} />
       </LastYearsAnswersAccordion>
     )
+  }
 
   return (
     <>
