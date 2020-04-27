@@ -9,7 +9,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
-const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion }) => {
+const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
 
   if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
@@ -70,6 +70,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           <Accordion
             previousYearsAnswers={previousYearsAnswers}
             EntityLastYearsAccordion={EntityLastYearsAccordion}
+            id={id}
           />
         }
       </div>
