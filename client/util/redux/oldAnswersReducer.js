@@ -4,7 +4,7 @@ import callBuilder from '../apiConnection'
  */
 
 export const getAnswersAction = () => {
-  const route = '/answers'
+  const route = '/answers/foruser'
   const prefix = 'GET_ANSWERS'
   return callBuilder(route, prefix)
 }
@@ -17,21 +17,21 @@ export default (state = { data: null }, action) => {
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       }
     case 'GET_ANSWERS_SUCCESS':
       return {
         ...state,
         data: action.response,
         pending: false,
-        error: false
+        error: false,
       }
     case 'GET_ANSWERS_FAILURE':
       return {
         ...state,
         data: [],
         pending: false,
-        error: true
+        error: true,
       }
     default:
       return state

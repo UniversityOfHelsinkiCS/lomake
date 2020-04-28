@@ -9,28 +9,28 @@ import negativeEmoji from 'Assets/persevering.png'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import { Divider } from 'semantic-ui-react'
 
-const streetLightsLabel = {
-  fi: 'Yleisarvio',
-  en: 'General assessment',
-  se: 'Allmänn bedömning',
+const translations = {
+  streetLightsLabel: {
+    fi: 'Yleisarvio',
+    en: 'General assessment',
+    se: 'Allmänn bedömning'
+  },
+  textAreaLabel: {
+    fi: 'Keskustelun pääkohdat olivat',
+    en: 'Main points of discussion',
+    se: 'Diskussionens huvudpunkter'
+  }
 }
-
-const textAreaLabel = {
-  fi: 'Keskustelun pääkohdat olivat',
-  en: 'Main points of discussion',
-  se: 'Diskussionens huvudpunkter',
-}
-
-const mapLightToValid = {
-  VIHREÄ: 'green',
-  KELTAINEN: 'yellow',
-  PUNAINEN: 'red',
-}
+ const mapLightToValid = {
+    VIHREÄ: 'green',
+    KELTAINEN: 'yellow',
+    PUNAINEN: 'red'
+  }
 
 const mapLightToImage = {
   green: positiveEmoji,
   yellow: neutralEmoji,
-  red: negativeEmoji,
+  red: negativeEmoji
 }
 
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
@@ -41,6 +41,21 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
     previousAnswerLight = mapLightToValid[previousAnswerLight]
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
+
+  const EntityLastYearsAccordion = () => {
+    if (!previousAnswerText && !previousAnswerLight) return null
+    return (
+      <LastYearsAnswersAccordion>
+        {previousAnswerLight && (
+          <img
+            style={{ width: '40px', height: 'auto' }}
+            src={mapLightToImage[previousAnswerLight]}
+          />
+        )}
+        <ReactMarkdown source={previousAnswerText} />
+      </LastYearsAnswersAccordion>
+    )
+  }
 
   return (
     <>
@@ -54,20 +69,23 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         </div>
         {!noLight && <Streetlights id={id} />}
       </div>
-      <p style={{ lineHeight: 2, backgroundColor: '#ffcd4c2e', padding: '1em' }}>{description}</p>
-      {(previousAnswerText || previousAnswerLight) && (
-        <LastYearsAnswersAccordion>
-          {previousAnswerLight && (
-            <img
-              style={{ width: '40px', height: 'auto' }}
-              src={mapLightToImage[previousAnswerLight]}
-            />
-          )}
-          <ReactMarkdown source={previousAnswerText} />
-        </LastYearsAnswersAccordion>
-      )}
+      <p
+        style={{
+          lineHeight: 2,
+          backgroundColor: '#ffcd4c2e',
+          padding: '1em',
+          borderRadius: '5px',
+          margin: '1em 0',
+        }}
+      >
+        {description}
+      </p>
 
-      <Textarea id={id} label={textAreaLabel[languageCode]} />
+      <Textarea
+        id={id}
+        label={translations.textAreaLabel[languageCode]}
+        EntityLastYearsAccordion={EntityLastYearsAccordion}
+      />
     </>
   )
 }

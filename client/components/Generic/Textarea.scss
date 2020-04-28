@@ -1,4 +1,19 @@
 .editor-class {
-	background-color: #f8f8f8;
-	padding: 0.5em;
+  background-color: #f8f8f8;
+  padding: 1em;
+  min-height: 200px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.wrapper-class {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.toolbar-class {
+  display: flex;
+  flex-direction: column;
+  max-width: 50px;
+  border: 0;
 }

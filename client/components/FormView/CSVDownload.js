@@ -2,10 +2,12 @@ import React from 'react'
 import { CSVLink } from 'react-csv'
 import { useSelector } from 'react-redux'
 
-const downloadText = {
-  fi: 'Lataa vastaukset CSV tiedostona',
-  en: 'Download answers as CSV file',
-  se: ''
+const translations = {
+  downloadText: {
+    fi: 'Lataa vastaukset CSV tiedostona',
+    en: 'Download answers as CSV file',
+    se: ''
+  }
 }
 
 const CSVDownload = ({ questions }) => {
@@ -63,7 +65,7 @@ const CSVDownload = ({ questions }) => {
 
   return (
     <CSVLink filename="hy_ospa_lomake_answers.csv" data={csvDataFormatted + '\n'} separator=";">
-      {downloadText[languageCode]}
+      {translations.downloadText[languageCode]}
     </CSVLink>
   )
 }

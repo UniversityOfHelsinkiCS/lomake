@@ -25,7 +25,7 @@ const Form = ({ questions, programmeKey }) => {
     MEASURES: Measures,
   }
 
-  let number = 0
+  let number = -1
 
   const partMap = (part) => {
     if (!partComponentMap.hasOwnProperty(part.type)) {
@@ -67,7 +67,7 @@ const Form = ({ questions, programmeKey }) => {
         return (
           <Section
             title={section.title[languageCode]}
-            number={romanize(index + 1)}
+            number={romanize(index)}
             key={section.title[languageCode]}
             programmeKey={programmeKey}
           >

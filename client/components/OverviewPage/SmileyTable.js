@@ -4,6 +4,7 @@ import { colors } from 'Utilities/common'
 import { Icon, Loader, Header } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import OwnerAccordionContent from './OwnerAccordionContent'
 import './OverviewPage.scss'
 import { Link } from 'react-router-dom'
@@ -13,41 +14,43 @@ const translations = {
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
-    se: '',
+    se: ''
   },
   closeManageText: {
     fi: 'Piilota',
     en: 'Hide',
-    se: '',
+    se: ''
   },
   noResultsText: {
-    fi: 'Ohjelmia ei löytynyt. Kokeile toista filtteriä',
-    en: 'No matching programmes found. Please try another filter',
-    se: '',
-  },
+    fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
+    en: 'No matching programmes were found. Please try a different filter.',
+    se: ''
+  }
 }
 
 const lightEmojiMap = {
   green: 'smile outline',
   yellow: 'meh outline',
-  red: 'frown outline',
+  red: 'frown outline'
 }
 
 const backgroundColorMap = {
   green: '#9dff9d',
   yellow: '#ffffb1',
-  red: '#ff7f7f',
+  red: '#ff7f7f'
 }
 
-const SmileyTable = ({ setModalData, filteredProgrammes }) => {
+const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
+  const oldAnswers = useSelector((state) => state.oldAnswers)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [programExpanded, setProgramExpanded] = useState(null)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
+    dispatch(getAnswersAction())
   }, [])
 
   useEffect(() => {
@@ -76,6 +79,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
   }
 
   if (answers.pending || !answers.data) return <Loader active inline="centered" />
+
+  const selectedAnswers =
+    year === new Date().getFullYear()
+      ? answers.data
+      : oldAnswers.data.filter((a) => a.year === year)
 
   if (filteredProgrammes.length === 0)
     return (
@@ -134,7 +142,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes }) => {
       </thead>
       <tbody>
         {filteredProgrammes.map((p, pi) => {
-          const programme = answers.data.find((a) => a.programme === p.key)
+          const programme = selectedAnswers.find((a) => a.programme === p.key)
           const targetURL = `/form/${p.key}`
           return (
             <React.Fragment key={p.key}>

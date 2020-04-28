@@ -69,6 +69,9 @@ const FormView = ({ room }) => {
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
 
+  const deadlineTimestamp = 1602763200000
+  const lastSavedTimestamp = new Date().getTime()
+
   const [loadObj, setLoadObj] = useState({
     loaded: false,
     loading: false,
@@ -133,7 +136,10 @@ const FormView = ({ room }) => {
           <p style={{ color: colors.theme_blue }}>
             <b>{localizedProgramName}</b>
           </p>
-          <StatusMessage />
+          <StatusMessage
+            deadlineTimestamp={deadlineTimestamp}
+            lastSavedTimeStamp={lastSavedTimestamp}
+          />
           <p>{translations.p1[languageCode]}</p>
           <p>{translations.p2[languageCode]}</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>

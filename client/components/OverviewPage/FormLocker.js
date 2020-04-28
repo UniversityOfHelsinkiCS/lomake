@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Popup } from 'semantic-ui-react'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 
 export default function FormLocker({ programme }) {
@@ -44,6 +44,16 @@ export default function FormLocker({ programme }) {
       fi: 'Poista lukitus',
       se: '',
     },
+    lockedTriggerButtonText: {
+      en: 'Form is locked',
+      fi: 'Lomake on lukittu',
+      se: '',
+    },
+    unlockedTriggerButtonText: {
+      en: 'Form can be edited',
+      fi: 'Lomaketta voi muokata',
+      se: '',
+    },
   }
 
   const handleLock = () => {
@@ -55,17 +65,35 @@ export default function FormLocker({ programme }) {
     <tr>
       <td colSpan={100}>
         <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
-          <Button
-            data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
-            color={locked ? 'green' : 'red'}
-            disabled={!loadObj.loaded || programmeDetailsPending}
-            onClick={handleLock}
-            icon
-            labelPosition="left"
-          >
-            <Icon name={locked ? 'lock open' : 'lock'} />
-            {locked ? translations.unLockForm[languageCode] : translations.lockForm[languageCode]}
-          </Button>
+          <Popup
+            trigger={
+              <Button
+                data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
+                disabled={!loadObj.loaded || programmeDetailsPending}
+                icon
+                labelPosition="left"
+              >
+                <Icon name={locked ? 'lock' : 'lock open'} />
+                {locked
+                  ? translations.lockedTriggerButtonText[languageCode]
+                  : translations.unlockedTriggerButtonText[languageCode]}
+              </Button>
+            }
+            content={
+              <Button
+                color="red"
+                secondary
+                content={
+                  locked
+                    ? translations.unLockForm[languageCode]
+                    : translations.lockForm[languageCode]
+                }
+                onClick={handleLock}
+              />
+            }
+            on="click"
+            position="top center"
+          />
         </div>
       </td>
     </tr>

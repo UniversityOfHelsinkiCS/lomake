@@ -1,8 +1,23 @@
-import { basePath } from 'Utilities/common'
+import { basePath, inProduction } from 'Utilities/common'
+import { getHeaders } from 'Utilities/mockHeaders'
 import io from 'socket.io-client'
 
 const connect = () => {
-  return io(window.origin, { path: `${basePath}socket.io` })
+  const defaultHeaders = !inProduction ? getHeaders() : {}
+  const headers = { ...defaultHeaders }
+
+  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs') // uid
+  if (adminLoggedInAs) headers['x-admin-logged-in-as'] = adminLoggedInAs
+
+  return io(window.origin, {
+    path: `${basePath}socket.io`,
+    transports: ['polling'],
+    transportOptions: {
+      polling: {
+        extraHeaders: headers,
+      },
+    },
+  })
 }
 
 const socketMiddleware = () => {
@@ -43,7 +58,7 @@ const socketMiddleware = () => {
 
         socket.emit('update_field', {
           data: { [action.field]: action.value },
-          room
+          room,
         })
         break
       default:

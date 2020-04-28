@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import './OverviewPage.scss'
-import { Modal, Header, Input } from 'semantic-ui-react'
+import { Modal, Header, Input, Select } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
 export default () => {
   const [filter, setFilter] = useState('')
+  const [year, setYear] = useState(2020)
   const [modalData, setModalData] = useState(null)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
@@ -15,6 +16,10 @@ export default () => {
   const handleChange = ({ target }) => {
     const { value } = target
     setFilter(value)
+  }
+
+  const handleYearChange = (e, { value }) => {
+    setYear(value)
   }
 
   const backgroundColorMap = {
@@ -37,6 +42,11 @@ export default () => {
       se: '',
     },
   }
+
+  const years = [
+    { key: '2019', value: 2019, text: '2019' },
+    { key: '2020', value: 2020, text: '2020' },
+  ]
 
   const usersPermissionsKeys = Object.keys(currentUser.data.access)
   const usersProgrammes = currentUser.data.admin
@@ -80,8 +90,22 @@ export default () => {
             value={filter}
             size="huge"
           />
+          <div style={{ marginTop: '1em' }}>
+            <Select
+              data-cy="overviewpage-year"
+              name="year"
+              options={years}
+              onChange={handleYearChange}
+              value={year}
+              size="huge"
+            />
+          </div>
           <div style={{ marginTop: '2em' }}>
-            <SmileyTable filteredProgrammes={filteredProgrammes} setModalData={setModalData} />
+            <SmileyTable
+              filteredProgrammes={filteredProgrammes}
+              setModalData={setModalData}
+              year={year}
+            />
           </div>
         </>
       ) : (

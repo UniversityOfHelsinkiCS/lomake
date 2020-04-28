@@ -4,20 +4,20 @@ import { setViewOnly } from 'Utilities/redux/formReducer'
 
 const translations = {
   downloadText: {
-    fi: 'Tulosta / Lataa vastaukset PDF tiedostona',
+    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
     en: 'Print / Download answers as PDF file',
-    se: '',
+    se: ''
   },
   setViewOnlyTrueText: {
     fi: 'Tulostus/PDF -näkymä',
     en: 'Print/Download as PDF view',
-    se: '',
+    se: ''
   },
   setViewOnlyFalseText: {
     fi: 'Palaa täyttämään lomaketta',
-    en: 'Go back to edit the form',
-    se: '',
-  },
+    en: 'Back to edit view',
+    se: ''
+  }
 }
 
 const PDFDownload = () => {
@@ -28,7 +28,8 @@ const PDFDownload = () => {
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const user = useSelector((state) => state.currentUser.data)
 
-  const userHasWriteAccess = user.access[programme.key] && user.access[programme.key].write
+  const userHasWriteAccess =
+    user.admin || (user.access[programme.key] && user.access[programme.key].write)
   const showGoBackToEditButton = userHasWriteAccess && !programme.locked ? true : false
 
   return (

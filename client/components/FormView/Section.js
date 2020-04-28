@@ -7,7 +7,7 @@ const Section = ({ title, number, children, programmeKey }) => {
   const history = useHistory()
   return (
     <>
-      <div data-cy={`form-section-${number}`} className="section-flex" id={number}>
+      <div data-cy={`form-section-${number}`} id={number}>
         <InView
           as="div"
           onChange={(inView, entry) => {
@@ -16,8 +16,17 @@ const Section = ({ title, number, children, programmeKey }) => {
             }
           }}
         >
-          <h2 style={{ fontSize: '2em' }}>
-            <span style={{ color: colors.theme_blue }}>{number}</span> - {title}
+          <h2
+            style={{
+              fontSize: '2em',
+              padding: '1.5em 0.5em',
+              margin: '1em 0',
+              background: '#1B1C1D',
+              borderRadius: '5px',
+              color: 'white',
+            }}
+          >
+            <span style={{ color: colors.theme_blue }}>{number || '0'}</span> - {title}
           </h2>
         </InView>
       </div>

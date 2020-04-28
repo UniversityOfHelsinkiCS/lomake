@@ -7,38 +7,38 @@ const translations = {
   nameHeader: {
     fi: 'Nimi',
     en: 'Name',
-    se: '',
+    se: ''
   },
   viewHeader: {
     fi: 'Luku',
     en: 'Read',
-    se: '',
+    se: ''
   },
   editHeader: {
     fi: 'Vastaus',
     en: 'Edit',
-    se: '',
+    se: ''
   },
   ownerHeader: {
     fi: 'Omistaja',
     en: 'Owner',
-    se: '',
+    se: ''
   },
   grantAccess: {
     fi: 'Anna oikeus',
     en: 'Grant access right',
-    se: '',
+    se: ''
   },
   removeAccess: {
     fi: 'Poista oikeus',
     en: 'Remove access right',
-    se: '',
+    se: ''
   },
   noUsers: {
     fi: 'Ei käyttäjiä, käytä ylläolevia linkkejä kutsumiseen',
-    en: 'No users, use links above to invite',
-    se: '',
-  },
+    en: 'No users, use the links above to invite',
+    se: ''
+  }
 }
 
 const SwitchableBadge = ({ currentAccess, grant, remove }) => {
