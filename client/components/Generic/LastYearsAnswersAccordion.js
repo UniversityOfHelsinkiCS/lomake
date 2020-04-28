@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-const expandText = {
-  fi: 'Näytä viime vuoden vastaukset',
-  en: 'Show answers from last year',
-  se: '',
-}
-
-const collapseText = {
-  fi: 'Piilota viime vuoden vastaukset',
-  en: 'Hide answers from last year',
-  se: '',
+const translations = {
+  expandText: {
+    fi: 'Näytä viime vuoden vastaukset',
+    en: 'Show answers from last year',
+    se: ''
+  },
+  collapseText: {
+    fi: 'Piilota viime vuoden vastaukset',
+    en: 'Hide answers from last year',
+    se: ''
+  }
 }
 
 const LastYearsAnswersAccordion = ({ children }) => {
@@ -27,7 +28,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
         }}
         onClick={() => setExpanded(!expanded)}
       >
-        {expanded ? collapseText[languageCode] : expandText[languageCode]}
+        {expanded ? translations.collapseText[languageCode] : translations.expandText[languageCode]}
       </span>
     </div>
   )

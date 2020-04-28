@@ -9,28 +9,28 @@ import negativeEmoji from 'Assets/persevering.png'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import { Divider } from 'semantic-ui-react'
 
-const streetLightsLabel = {
-  fi: 'Yleisarvio',
-  en: 'General assessment',
-  se: 'Allmänn bedömning',
+const translations = {
+  streetLightsLabel: {
+    fi: 'Yleisarvio',
+    en: 'General assessment',
+    se: 'Allmänn bedömning'
+  },
+  textAreaLabel: {
+    fi: 'Keskustelun pääkohdat olivat',
+    en: 'Main points of discussion',
+    se: 'Diskussionens huvudpunkter'
+  }
 }
-
-const textAreaLabel = {
-  fi: 'Keskustelun pääkohdat olivat',
-  en: 'Main points of discussion',
-  se: 'Diskussionens huvudpunkter',
-}
-
-const mapLightToValid = {
-  VIHREÄ: 'green',
-  KELTAINEN: 'yellow',
-  PUNAINEN: 'red',
-}
+ const mapLightToValid = {
+    VIHREÄ: 'green',
+    KELTAINEN: 'yellow',
+    PUNAINEN: 'red'
+  }
 
 const mapLightToImage = {
   green: positiveEmoji,
   yellow: neutralEmoji,
-  red: negativeEmoji,
+  red: negativeEmoji
 }
 
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
@@ -83,7 +83,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
 
       <Textarea
         id={id}
-        label={textAreaLabel[languageCode]}
+        label={translations.textAreaLabel[languageCode]}
         EntityLastYearsAccordion={EntityLastYearsAccordion}
       />
     </>

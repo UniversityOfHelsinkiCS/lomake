@@ -6,10 +6,12 @@ import { Button } from 'semantic-ui-react'
 import SimpleTextarea from './SimpleTextarea'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 
-const measureLabel = {
-  fi: 'Lisää 1-5 toimenpidettä',
-  en: 'Add 1-5 measures',
-  se: '',
+const translations = {
+  measureLabel: {
+    fi: 'Lisää 1-5 toimenpidettä',
+    en: 'Add 1-5 measures',
+    se: ''
+  }
 }
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
@@ -69,10 +71,10 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
           backgroundColor: '#daedf4',
           padding: '1em',
           borderRadius: '5px',
-          margin: '1em 0',
+          margin: '1em 0'
         }}
       >
-        {measureLabel[languageCode]}
+        {translations.measureLabel[languageCode]}
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>

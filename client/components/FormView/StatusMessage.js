@@ -4,15 +4,15 @@ import { Message } from 'semantic-ui-react'
 
 const translations = {
   header: {
-    fi: 'Vastaukset tallentuvat automaattisesti DL:',
-    en: 'Answers are saved automatically DL:',
-    se: '',
+    fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
+    en: 'Answers are saved automatically. Deadline:',
+    se: ''
   },
   subtitle: {
     fi: 'Viimeksi tallennettu',
     en: 'Last saved',
-    se: '',
-  },
+    se: ''
+  }
 }
 
 const StatusMessage = ({ deadlineTimestamp, lastSavedTimeStamp }) => {

@@ -14,30 +14,30 @@ const translations = {
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
-    se: '',
+    se: ''
   },
   closeManageText: {
     fi: 'Piilota',
     en: 'Hide',
-    se: '',
+    se: ''
   },
   noResultsText: {
-    fi: 'Ohjelmia ei löytynyt. Kokeile toista filtteriä',
-    en: 'No matching programmes found. Please try another filter',
-    se: '',
-  },
+    fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
+    en: 'No matching programmes were found. Please try a different filter.',
+    se: ''
+  }
 }
 
 const lightEmojiMap = {
   green: 'smile outline',
   yellow: 'meh outline',
-  red: 'frown outline',
+  red: 'frown outline'
 }
 
 const backgroundColorMap = {
   green: '#9dff9d',
   yellow: '#ffffb1',
-  red: '#ff7f7f',
+  red: '#ff7f7f'
 }
 
 const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {

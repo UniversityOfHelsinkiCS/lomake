@@ -9,25 +9,25 @@ import { colors } from 'Utilities/common'
 
 const translations = {
   OK: {
-    fi: 'Vastaus ok',
-    en: 'Answer ok',
-    se: '',
+    fi: 'Vastattu',
+    en: 'Answer given',
+    se: ''
   },
   EMPTY: {
     fi: 'Ei vastausta',
-    en: 'No answer',
-    se: '',
+    en: "There's no answer",
+    se: ''
   },
   ERROR: {
     fi: 'Liian pitkä vastaus',
-    en: 'Too long answer',
-    se: '',
+    en: 'Answer is too long',
+    se: ''
   },
   mandatory_field: {
     fi: 'pakollinen kenttä',
     en: 'required field',
-    se: '',
-  },
+    se: ''
+  }
 }
 
 const replaceTitle = {
@@ -45,7 +45,7 @@ const replaceTitle = {
 const iconMap = {
   ERROR: 'close',
   OK: 'check',
-  EMPTY: 'exclamation',
+  EMPTY: 'exclamation'
 }
 
 const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
