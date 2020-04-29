@@ -5,7 +5,6 @@ import { romanize } from 'Utilities/common'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
-import { colors } from 'Utilities/common'
 
 const translations = {
   OK: {
@@ -16,11 +15,6 @@ const translations = {
   EMPTY: {
     fi: 'Ei vastausta',
     en: "There's no answer",
-    se: '',
-  },
-  ERROR: {
-    fi: 'Liian pitkä vastaus',
-    en: 'Answer is too long',
     se: '',
   },
   mandatory_field: {
@@ -40,7 +34,6 @@ const replaceTitle = {
 }
 
 const iconMap = {
-  ERROR: 'close',
   OK: 'check',
   EMPTY: 'exclamation',
 }
@@ -94,13 +87,6 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                     }
 
                     const status = idsToCheck.reduce((acc, cur) => {
-                      //ERROR is the most important status
-                      if (acc === 'ERROR') return acc
-                      if (formData[cur] && formData[cur].length > 1000) {
-                        return 'ERROR'
-                      }
-
-                      //EMPTY is the second most important status
                       if (acc === 'EMPTY') return acc
                       if (!formData[cur]) return 'EMPTY'
 
@@ -116,15 +102,17 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
 
                     return (
                       <div key={id}>
-                        {type === 'ENTITY' && <>{partNumber}.</>}{' '}
-                        {(type === 'ENTITY' || status === 'ERROR') && (
-                          <Icon
-                            name={iconMap[status]}
-                            style={{ color: getColor() }}
-                            title={`${translations[status][languageCode]}${
-                              required ? ` (${translations.mandatory_field[languageCode]})` : ''
-                            }`}
-                          />
+                        {type === 'ENTITY' && (
+                          <>
+                            {partNumber}.{' '}
+                            <Icon
+                              name={iconMap[status]}
+                              style={{ color: getColor() }}
+                              title={`${translations[status][languageCode]}${
+                                required ? ` (${translations.mandatory_field[languageCode]})` : ''
+                              }`}
+                            />
+                          </>
                         )}
                       </div>
                     )
