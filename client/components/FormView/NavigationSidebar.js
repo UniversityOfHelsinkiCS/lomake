@@ -79,7 +79,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map((part) => {
                     const { id, type, required, no_light } = part
-                    if (type === 'ENTITY') partNumber++
+                    if (type === 'ENTITY' || type === 'MEASURES') partNumber++
 
                     const idsToCheck = []
 
