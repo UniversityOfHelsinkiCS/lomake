@@ -11,41 +11,38 @@ const translations = {
   OK: {
     fi: 'Vastattu',
     en: 'Answer given',
-    se: ''
+    se: '',
   },
   EMPTY: {
     fi: 'Ei vastausta',
     en: "There's no answer",
-    se: ''
+    se: '',
   },
   ERROR: {
     fi: 'Liian pitkä vastaus',
     en: 'Answer is too long',
-    se: ''
+    se: '',
   },
   mandatory_field: {
     fi: 'pakollinen kenttä',
     en: 'required field',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const replaceTitle = {
-  //'KOULUTUSOHJELMAN YLEISTILANNE': 'KOULUTUS-\nOHJELMAN YLEISTILANNE',
-  'ONNISTUMISIA JA KEHITTÄMISTOIMENPITEITÄ': 'ONNISTUMISIA JA KEHITTÄMIS-\nTOIMENPITEITÄ',
-  TOIMENPIDELISTA: 'TOIMENPIDELISTA',
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET':
     'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
-  'PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET':
-    'PERSONAL-\nRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSEN-\nLIGHET',
-  'FAKULTETSÖVERSKRIDANDE PROGRAM': 'FAKULTET-\nSÖVER-\nSKRIDANDE PROGRAM',
+  'FAKULTETSÖVERSKRIDANDE PROGRAM': 'FAKULTET-\nSÖVERSKRIDANDE PROGRAM',
   'FRAMGÅNGAR OCH UTVECKLINGSÅTGÄRDER': 'FRAMGÅNGAR OCH UTVECKLING-\nSÅTGÄRDER',
+  'PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET':
+    'PERSONAL-\nRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET',
 }
 
 const iconMap = {
   ERROR: 'close',
   OK: 'check',
-  EMPTY: 'exclamation'
+  EMPTY: 'exclamation',
 }
 
 const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
@@ -74,12 +71,9 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                   margin: '1px',
                 }}
               >
-                <span style={{ color: active ? colors.theme_blue : undefined }}>
-                  {romanNumeral}
-                </span>
                 <div style={{ margin: '1em 0' }}>
                   <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: 'black' }}>
-                    {title}
+                    {romanNumeral} - {title}
                   </Link>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -123,13 +117,15 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
                     return (
                       <div key={id}>
                         {type === 'ENTITY' && <>{partNumber}.</>}{' '}
-                        <Icon
-                          name={iconMap[status]}
-                          style={{ color: getColor() }}
-                          title={`${translations[status][languageCode]}${
-                            required ? ` (${translations.mandatory_field[languageCode]})` : ''
-                          }`}
-                        />
+                        {(type === 'ENTITY' || status === 'ERROR') && (
+                          <Icon
+                            name={iconMap[status]}
+                            style={{ color: getColor() }}
+                            title={`${translations[status][languageCode]}${
+                              required ? ` (${translations.mandatory_field[languageCode]})` : ''
+                            }`}
+                          />
+                        )}
                       </div>
                     )
                   })}
