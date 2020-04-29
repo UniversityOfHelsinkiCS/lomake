@@ -434,8 +434,7 @@
           "se": "Hur gick ledningsgruppens diskussion om lägesbeskrivningen? Hur lång tid tog diskussionen och anteckningarna om lägesbeskrivningen? Vad var det bästa? Vad behöver utvecklas ytterligare?",
           "en": "How did the steering group’s discussion on the current status of the degree programme go? How long did it take to complete the discussion and record the current status of the degree programme? What went well? What requires further development?"
         },
-        "required": false,
-        "no_light": true
+        "required": false
       }
     ]
   }
