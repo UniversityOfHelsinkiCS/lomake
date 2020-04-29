@@ -7,7 +7,7 @@ const Section = ({ title, number, children, programmeKey }) => {
   const history = useHistory()
   return (
     <>
-      <div data-cy={`form-section-${number}`} id={number}>
+      <div data-cy={`form-section-${number}`} id={number || '0'}>
         <InView
           as="div"
           onChange={(inView, entry) => {
