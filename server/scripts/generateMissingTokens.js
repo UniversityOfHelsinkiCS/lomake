@@ -1,0 +1,37 @@
+const db = require('@models/index')
+const logger = require('@util/logger')
+const { uuid } = require('uuidv4')
+const { programmes } = require('@util/common')
+
+const generateMissingTokens = async () => {
+  try {
+    logger.info(`Making sure that all programmes have pre-made tokens ready`)
+
+    const types = ['ADMIN', 'READ', 'WRITE']
+    const existingTokens = await db.token.findAll({})
+
+    programmes.forEach(async (programme) => {
+      const { key } = programme
+
+      types.forEach(async (type) => {
+        const exists = existingTokens.find(
+          (token) => token.type === type && token.programme === key
+        )
+        if (!exists) {
+          await db.token.create({
+            url: uuid(),
+            programme: key,
+            type: type,
+            valid: true,
+            usageCounter: 0,
+          })
+        }
+      })
+    })
+  } catch (error) {
+    logger.error(`Failed to generate missing tokens: ${error}`)
+  }
+}
+module.exports = {
+  generateMissingTokens,
+}

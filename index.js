@@ -16,6 +16,7 @@ const { createCypressUser } = require('@root/server/scripts/createCypressUser')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
+const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -105,6 +106,7 @@ initializeDatabaseConnection()
       logger.info(`Started on port ${PORT}`)
       startBackupJob()
       startDeadlineWatcher()
+      generateMissingTokens()
     })
   })
   .catch((e) => {
