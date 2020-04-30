@@ -4,7 +4,7 @@ const { programmes } = require('@util/common')
 
 const resetStudyprogrammes = async () => {
   try {
-    logger.info('Resetting study programmes table.')
+    logger.info('Resetting study programmes table')
     await db.studyprogramme.destroy({ where: {} })
 
     programmes.forEach(async (programme) => {
