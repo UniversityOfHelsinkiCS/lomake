@@ -3,6 +3,7 @@ const users = require('@controllers/usersController')
 const answers = require('@controllers/answersController')
 const tokens = require('@controllers/tokensController')
 const studyprogrammes = require('@controllers/studyprogrammesController')
+const deadlines = require('@controllers/deadlineController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -37,5 +38,10 @@ router.put('/users/:id', checkAdmin, users.editUser)
 
 router.post('/access/:url', tokens.claimToken)
 router.get('/access/:url', tokens.checkToken)
+
+router.get('/deadlines', checkAdmin, deadlines.getAll)
+router.get('/deadlines/next', deadlines.getNextDeadline)
+router.post('/deadlines', checkAdmin, deadlines.createOne)
+router.delete('/deadlines/:id', checkAdmin, deadlines.deleteOne)
 
 module.exports = router
