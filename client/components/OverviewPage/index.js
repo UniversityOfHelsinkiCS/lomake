@@ -4,6 +4,7 @@ import { Modal, Header, Input, Select } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
+import OspaModule from './OspaModule'
 
 export default () => {
   const [filter, setFilter] = useState('')
@@ -100,6 +101,7 @@ export default () => {
               size="huge"
             />
           </div>
+          <OspaModule />
           <div style={{ marginTop: '2em' }}>
             <SmileyTable
               filteredProgrammes={filteredProgrammes}

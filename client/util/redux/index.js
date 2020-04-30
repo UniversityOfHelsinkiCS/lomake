@@ -12,6 +12,7 @@ import previousAnswers from './previousAnswersReducer'
 import programmesTokens from './programmesTokensReducer'
 import programmesUsers from './programmesUsersReducer'
 import studyProgrammes from './studyProgrammesReducer'
+import deadlines from './deadlineReducer'
 
 export default combineReducers({
   form,
@@ -26,4 +27,5 @@ export default combineReducers({
   programmesTokens,
   programmesUsers,
   studyProgrammes,
+  deadlines,
 })
