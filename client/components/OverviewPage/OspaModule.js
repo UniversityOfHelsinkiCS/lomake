@@ -3,14 +3,18 @@ import DatePicker from 'react-datepicker'
 import { Header, Button, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllDeadlines, createDeadline, deleteDeadline } from 'Utilities/redux/deadlineReducer'
+import {
+  createOrUpdateDeadline,
+  deleteDeadline,
+  getDeadline,
+} from 'Utilities/redux/deadlineReducer'
 import { registerLocale } from 'react-datepicker'
 import { fi, enGB, sv } from 'date-fns/locale'
 
 export default function OspaModule() {
   const [newDate, setNewDate] = useState(null)
-  const existingDeadlines = useSelector(({ deadlines }) => deadlines.existingDeadlines)
   const languageCode = useSelector((state) => state.language)
+  const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
   const dispatch = useDispatch()
   registerLocale('fi', fi)
@@ -18,7 +22,7 @@ export default function OspaModule() {
   registerLocale('se', sv)
 
   useEffect(() => {
-    dispatch(getAllDeadlines())
+    dispatch(getDeadline())
   }, [])
 
   const translations = {
@@ -37,14 +41,14 @@ export default function OspaModule() {
       fi: 'Lisää valittu määräaika',
       se: '',
     },
-    upcomingDeadlines: {
-      en: 'Upcoming deadlines:',
-      fi: 'Seuraavat määräajat:',
+    nextDeadline: {
+      en: 'Next deadline:',
+      fi: 'Seuraava määräaika:',
       se: '',
     },
-    noUpcomingDeadlines: {
-      en: 'No upcoming deadlines.',
-      fi: 'Ei tulevia määräaikoja',
+    noDeadlineSet: {
+      en: 'No deadline set.',
+      fi: 'Määräaikaa ei ole asetettu.',
       se: '',
     },
     deleteThisDeadline: {
@@ -55,15 +59,22 @@ export default function OspaModule() {
   }
 
   const handleDeadlineSave = () => {
-    dispatch(createDeadline(newDate.toLocaleDateString()))
+    dispatch(createOrUpdateDeadline(newDate.toLocaleDateString()))
     setNewDate(null)
   }
 
-  const handleDelete = (id) => {
-    dispatch(deleteDeadline(id))
+  const handleDelete = () => {
+    dispatch(deleteDeadline())
   }
 
   if (!isAdmin) return null
+
+  const existingDeadlines = []
+
+  const formatDate = (date) => {
+    const temp = new Date(date)
+    return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
+  }
 
   return (
     <Segment style={{ width: '500px', zIndex: '3', margin: '1em' }}>
@@ -83,44 +94,16 @@ export default function OspaModule() {
         {translations['addSelectedDeadline'][languageCode]}
       </Button>
 
-      <div style={{ marginTop: '1em' }} className="existingDeadlines">
-        <Header as="h5">{translations['upcomingDeadlines'][languageCode]}</Header>
-        {existingDeadlines.length === 0 && (
-          <span>{translations['noUpcomingDeadlines'][languageCode]}</span>
-        )}
-
-        <div style={{ display: 'flex', flexDirection: 'column' }} className="upcoming-deadlines">
-          {existingDeadlines
-            .filter((dl) => !dl.passed)
-            .sort((a, b) => new Date(a.date) - new Date(b.date))
-            .map((deadline, index) => {
-              const { date, id } = deadline
-              const dateObj = new Date(date)
-              const day = dateObj.getDate()
-              const month = dateObj.getMonth() + 1
-              const year = dateObj.getFullYear()
-
-              return (
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between', margin: '2px 0' }}
-                  key={id}
-                >
-                  <span style={index === 0 ? { color: 'red' } : {}}>
-                    {`${day}.${month}.${year}`}
-                  </span>
-                  <Button
-                    negative={true}
-                    compact={true}
-                    size="mini"
-                    onClick={() => handleDelete(id)}
-                  >
-                    {translations['deleteThisDeadline'][languageCode]}
-                  </Button>
-                </div>
-              )
-            })}
+      <Header as="h5">{translations['nextDeadline'][languageCode]}</Header>
+      {!nextDeadline && <div>{translations['noDeadlineSet'][languageCode]}</div>}
+      {nextDeadline && (
+        <div>
+          {formatDate(nextDeadline.date)}
+          <Button onClick={handleDelete} negative compact size="mini">
+            {translations['deleteThisDeadline'][languageCode]}
+          </Button>
         </div>
-      </div>
+      )}
     </Segment>
   )
 }

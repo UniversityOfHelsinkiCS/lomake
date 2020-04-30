@@ -1,48 +1,36 @@
 import callBuilder from '../apiConnection'
 
-export const getAllDeadlines = () => {
-  const route = `/deadlines`
-  const prefix = 'GET_ALL_DEADLINES'
-  return callBuilder(route, prefix)
-}
-
-export const createDeadline = (date) => {
+export const createOrUpdateDeadline = (date) => {
   const route = '/deadlines'
-  const prefix = 'CREATE_DEADLINE'
+  const prefix = 'CREATE_OR_UPDATE_DEADLINE'
   return callBuilder(route, prefix, 'post', { date })
 }
 
-export const getNextDeadline = () => {
-  const route = '/deadlines/next'
-  const prefix = 'GET_NEXT_DEADLINE'
+export const getDeadline = () => {
+  const route = '/deadlines'
+  const prefix = 'GET_DEADLINE'
   return callBuilder(route, prefix)
 }
 
-export const deleteDeadline = (id) => {
-  const route = `/deadlines/${id}`
+export const deleteDeadline = () => {
+  const route = `/deadlines`
   const prefix = 'DELETE_DEADLINE'
   return callBuilder(route, prefix, 'delete')
 }
 
 const initialState = {
-  existingDeadlines: [],
   nextDeadline: undefined,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_ALL_DEADLINES_SUCCESS':
+    case 'CREATE_OR_UPDATE_DEADLINE_SUCCESS': {
       return {
         ...state,
-        existingDeadlines: action.response,
-      }
-    case 'CREATE_DEADLINE_SUCCESS': {
-      return {
-        ...state,
-        existingDeadlines: state.existingDeadlines.concat(action.response),
+        nextDeadline: action.response,
       }
     }
-    case 'GET_NEXT_DEADLINE_SUCCESS': {
+    case 'GET_DEADLINE_SUCCESS': {
       return {
         ...state,
         nextDeadline: action.response,
@@ -51,13 +39,7 @@ export default (state = initialState, action) => {
     case 'DELETE_DEADLINE_SUCCESS':
       return {
         ...state,
-        existingDeadlines: state.existingDeadlines.filter(
-          (deadline) => deadline.id !== action.response.id
-        ),
-        nextDeadline:
-          state.nextDeadline && state.nextDeadline.id === action.response.id
-            ? null
-            : state.nextDeadline,
+        nextDeadline: null,
       }
     default:
       return state

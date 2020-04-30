@@ -46,23 +46,17 @@ const startDeadlineWatcher = async () => {
             submittedBy: 'cronJob',
           })
 
-          /***
-           * If: there exists deadlines after the one that is currently being passed, the form should be reset and left open.
-           * Else: If there's no deadlines coming after this one, lock the programmes and dont clear the answers.
-           */
-          if (upcomingDeadlines.length > 1) {
+          // If some programme has not answered at all, there are no tempAnswers for that programme.
+          if (tempAnswers) {
             tempAnswers.data = {}
             await tempAnswers.save()
-            // 2.
-          } else {
-            // Lock form (programme), dont clear temp_answers
-            programme.locked = true
-            await programme.save()
           }
-        })
 
-        upcomingDeadlines[0].passed = true
-        await upcomingDeadlines[0].save()
+          programme.locked = true
+
+          await programme.save()
+        })
+        await upcomingDeadlines[0].destroy()
       }
     }
   })

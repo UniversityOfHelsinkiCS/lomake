@@ -39,9 +39,8 @@ router.put('/users/:id', checkAdmin, users.editUser)
 router.post('/access/:url', tokens.claimToken)
 router.get('/access/:url', tokens.checkToken)
 
-router.get('/deadlines', checkAdmin, deadlines.getAll)
-router.get('/deadlines/next', deadlines.getNextDeadline)
-router.post('/deadlines', checkAdmin, deadlines.createOne)
-router.delete('/deadlines/:id', checkAdmin, deadlines.deleteOne)
+router.get('/deadlines', deadlines.get)
+router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)
+router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 module.exports = router
