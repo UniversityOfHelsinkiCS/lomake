@@ -14,30 +14,30 @@ const translations = {
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
-    se: ''
+    se: '',
   },
   closeManageText: {
     fi: 'Piilota',
     en: 'Hide',
-    se: ''
+    se: '',
   },
   noResultsText: {
     fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
     en: 'No matching programmes were found. Please try a different filter.',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const lightEmojiMap = {
   green: 'smile outline',
   yellow: 'meh outline',
-  red: 'frown outline'
+  red: 'frown outline',
 }
 
 const backgroundColorMap = {
   green: '#9dff9d',
   yellow: '#ffffb1',
-  red: '#ff7f7f'
+  red: '#ff7f7f',
 }
 
 const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
@@ -123,7 +123,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     <table style={{ tableLayout: 'fixed' }}>
       <thead>
         <tr>
-          <th colSpan="2" />
+          <th colSpan="2" style={{ background: 'white', position: 'sticky' }} />
           {allLightIds.map((id) => (
             <th
               key={id}
@@ -137,11 +137,16 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
               {transformIdToTitle(id)}
             </th>
           ))}
-          <th />
+          <th
+            style={{
+              position: 'sticky',
+              background: 'white',
+            }}
+          />
         </tr>
       </thead>
       <tbody>
-        {filteredProgrammes.map((p, pi) => {
+        {filteredProgrammes.map((p) => {
           const programme = selectedAnswers.find((a) => a.programme === p.key)
           const targetURL = `/form/${p.key}`
           return (

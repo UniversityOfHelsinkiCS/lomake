@@ -7,7 +7,7 @@ const Section = ({ title, number, children, programmeKey }) => {
   const history = useHistory()
   return (
     <>
-      <div data-cy={`form-section-${number}`} id={number}>
+      <div data-cy={`form-section-${number}`} id={number || '0'}>
         <InView
           as="div"
           onChange={(inView, entry) => {
@@ -26,7 +26,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               color: 'white',
             }}
           >
-            <span style={{ color: colors.theme_blue }}>{number || '0'}</span> - {title}
+            {number || '0'} - {title}
           </h2>
         </InView>
       </div>
