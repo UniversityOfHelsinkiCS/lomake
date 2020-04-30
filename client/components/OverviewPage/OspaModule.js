@@ -26,8 +26,8 @@ export default function OspaModule() {
   }, [])
 
   const translations = {
-    deadlineControls: {
-      en: 'Deadline controls',
+    deadlineSettings: {
+      en: 'Deadline settings',
       fi: 'Määräaika asetukset',
       se: '',
     },
@@ -36,9 +36,9 @@ export default function OspaModule() {
       fi: 'Valitse uusi määräaika',
       se: '',
     },
-    addSelectedDeadline: {
-      en: 'Add selected deadline',
-      fi: 'Lisää valittu määräaika',
+    updateDeadline: {
+      en: 'Update deadline',
+      fi: 'Päivitä määräaika',
       se: '',
     },
     nextDeadline: {
@@ -79,7 +79,7 @@ export default function OspaModule() {
   return (
     <Segment style={{ width: '500px', zIndex: '3', margin: '1em' }}>
       <Header as="h4" style={{ textAlign: 'center' }}>
-        {translations['deadlineControls'][languageCode]}
+        {translations['deadlineSettings'][languageCode]}
       </Header>
       <DatePicker
         dateFormat="dd.MM.yyyy"
@@ -91,19 +91,17 @@ export default function OspaModule() {
         locale={languageCode}
       />
       <Button primary compact size="mini" disabled={!newDate} onClick={handleDeadlineSave}>
-        {translations['addSelectedDeadline'][languageCode]}
+        {translations['updateDeadline'][languageCode]}
       </Button>
+      {nextDeadline && (
+        <Button onClick={handleDelete} negative compact size="mini">
+          {translations['deleteThisDeadline'][languageCode]}
+        </Button>
+      )}
 
       <Header as="h5">{translations['nextDeadline'][languageCode]}</Header>
       {!nextDeadline && <div>{translations['noDeadlineSet'][languageCode]}</div>}
-      {nextDeadline && (
-        <div>
-          {formatDate(nextDeadline.date)}
-          <Button onClick={handleDelete} negative compact size="mini">
-            {translations['deleteThisDeadline'][languageCode]}
-          </Button>
-        </div>
-      )}
+      {nextDeadline && <div>{formatDate(nextDeadline.date)}</div>}
     </Segment>
   )
 }
