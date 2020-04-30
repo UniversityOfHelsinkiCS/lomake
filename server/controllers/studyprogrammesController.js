@@ -24,6 +24,17 @@ const getOne = async (req, res) => {
 
 const toggleLock = async (req, res) => {
   try {
+    // First check if theres unpassed deadlines, if there are, only then lock can be toggled.
+    const upcomingDeadlinesCount = await db.deadline.count({
+      where: {
+        passed: false,
+      },
+    })
+
+    if (upcomingDeadlinesCount === 0) {
+      return res.status(200).json({ message: 'Cant toggle.' })
+    }
+
     const { programme } = req.params
     const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
     programEntity.locked = !programEntity.locked
