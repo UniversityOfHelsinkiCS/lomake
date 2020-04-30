@@ -63,6 +63,11 @@ export default (state = { data: null }, action) => {
         singleProgram: false,
         error: true,
       }
+    case 'TOGGLE_LOCK_SUCCESS':
+      return {
+        ...state,
+        singleProgram: action.response,
+      }
 
     default:
       return state
