@@ -6,6 +6,7 @@ import { loginAction } from 'Utilities/redux/currentUserReducer'
 import NavBar from 'Components/NavBar'
 import Router from 'Components/Router'
 import { getStudyProgrammes } from 'Utilities/redux/studyProgrammesReducer'
+import { getNextDeadline } from 'Utilities/redux/deadlineReducer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
+    dispatch(getNextDeadline())
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
