@@ -105,15 +105,13 @@ const deleteOne = async (req, res) => {
 
     await deadline.destroy()
 
-    // Check if theres any open deadlines remaining, incase this was the last one that was supposed to upcoming
-    // If thats the case, need to lock all the forms.
-    const currentUnpassedDeadlines = await db.deadline.findAll({
+    const upcomingDeadlinesCount = await db.deadline.count({
       where: {
         passed: false,
       },
     })
 
-    if (currentUnpassedDeadlines.length === 0) {
+    if (upcomingDeadlinesCount === 0) {
       const programmes = await db.studyprogramme.findAll()
       programmes.forEach(async (programme) => {
         programme.locked = true

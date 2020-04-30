@@ -25,9 +25,7 @@ const startDeadlineWatcher = async () => {
       const deadlineIsToday = moment().isSame(moment(deadlinedate), 'day')
 
       if (deadlineIsToday) {
-        logger.info(
-          `${loggerPrefix} Today is the deadline, starting to take backups and locking forms...`
-        )
+        logger.info(`${loggerPrefix} Today is the deadline, taking backups...`)
 
         const programmes = await db.studyprogramme.findAll({})
 
