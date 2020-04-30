@@ -15,6 +15,7 @@ const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogram
 const { createCypressUser } = require('@root/server/scripts/createCypressUser')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
+const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -34,8 +35,9 @@ initializeDatabaseConnection()
 
     // Scripts that will run if env variable TESTING=true (in github actions AND locally when in dev-mode)
     if (process.env.TESTING || process.env.NODE_ENV === 'development') {
-      resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
-      createCypressUser().then(() => logger.info('CypressUser created'))
+      resetStudyprogrammes()
+      createCypressUser()
+      createDeadlineIfNoneExist()
     }
 
     const app = express()
