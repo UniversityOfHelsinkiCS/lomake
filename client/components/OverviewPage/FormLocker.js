@@ -8,8 +8,8 @@ export default function FormLocker({ programme }) {
   const dispatch = useDispatch()
   const programmeDetails = useSelector((state) => state.studyProgrammes.singleProgram)
   const programmeDetailsPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
+  const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
 
-  const [locked, setLocked] = useState(undefined)
   const [loadObj, setLoadObj] = useState({
     loading: false,
     loaded: false,
@@ -29,7 +29,6 @@ export default function FormLocker({ programme }) {
         loading: false,
         loaded: true,
       })
-      setLocked(programmeDetails.locked)
     }
   }, [programmeDetails, loadObj])
 
@@ -58,8 +57,11 @@ export default function FormLocker({ programme }) {
 
   const handleLock = () => {
     dispatch(toggleLock(programme))
-    setLocked(!locked)
   }
+
+  if (!nextDeadline || !programmeDetails) return null
+
+  const { locked } = programmeDetails
 
   return (
     <tr>
