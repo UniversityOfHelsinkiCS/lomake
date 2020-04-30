@@ -14,6 +14,7 @@ const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
 const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
 const { createCypressUser } = require('@root/server/scripts/createCypressUser')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
+const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -101,6 +102,7 @@ initializeDatabaseConnection()
     server.listen(PORT, () => {
       logger.info(`Started on port ${PORT}`)
       startBackupJob()
+      startDeadlineWatcher()
     })
   })
   .catch((e) => {
