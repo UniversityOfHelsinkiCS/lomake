@@ -47,11 +47,11 @@ const createOne = async (req, res) => {
         await programme.save()
       })
 
-      // Clear answers
-      await db.tempAnswer.destroy({
-        where: {},
-        truncate: true,
-      })
+      // Clear answers ?
+      // await db.tempAnswer.destroy({
+      //   where: {},
+      //   truncate: true,
+      // })
     }
 
     const newDeadline = await db.deadline.create({
