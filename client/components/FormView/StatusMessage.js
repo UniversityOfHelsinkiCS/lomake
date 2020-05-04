@@ -6,27 +6,32 @@ const translations = {
   header: {
     fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
     en: 'Answers are saved automatically. Deadline:',
-    se: ''
+    se: '',
   },
   subtitle: {
     fi: 'Viimeksi tallennettu',
     en: 'Last saved',
-    se: ''
-  }
+    se: '',
+  },
 }
 
-const StatusMessage = ({ deadlineTimestamp, lastSavedTimeStamp }) => {
+const StatusMessage = () => {
   const languageCode = useSelector((state) => state.language)
+  const deadline = useSelector((state) => state.deadlines.nextDeadline)
+  const lastSaved = useSelector((state) => state.form.lastSaved)
 
-  const deadline = new Date(deadlineTimestamp)
-  const lastSaved = new Date(lastSavedTimeStamp)
+  const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
+
+  if (!deadlineObj) return null
+
+  const locale = languageCode != 'se' ? languageCode : 'sv'
 
   return (
     <>
       <Message
         icon="info"
-        header={`${translations.header[languageCode]} ${deadline.toLocaleString()}`}
-        content={`${translations.subtitle[languageCode]} ${lastSaved.toLocaleString()}`}
+        header={`${translations.header[languageCode]} ${deadlineObj.toLocaleDateString(locale)}`}
+        content={`${translations.subtitle[languageCode]} ${lastSaved.toLocaleString(locale)}`}
       />
     </>
   )

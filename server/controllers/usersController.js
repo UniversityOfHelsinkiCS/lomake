@@ -54,7 +54,7 @@ const editUser = async (req, res) => {
 
     const [rows, [updatedUser]] = await db.user.update(user, {
       returning: true,
-      where: { id: req.params.id }
+      where: { id: req.params.id },
     })
     if (rows) return res.status(200).json(updatedUser)
     return res.status(400).json({ error: 'id not found.' })
@@ -69,12 +69,29 @@ const editUserAccess = async (req, res) => {
     const programmeAccess = req.body
 
     const user = await db.user.findOne({ where: { id: req.params.id } })
-
     if (!user) return res.status(400).json({ error: 'id not found.' })
+
+    /**
+     * Trying to remove admin rights from given program...
+     * Need to check that user is not the last admin for this programme.
+     */
+    if (req.body.admin === false) {
+      const currentAdminCount = await db.user.count({
+        where: {
+          access: {
+            [req.params.programme]: { admin: 'true' },
+          },
+        },
+      })
+
+      if (currentAdminCount <= 1) {
+        return res.status(200).json(user)
+      }
+    }
 
     user.access = {
       ...user.access,
-      [req.params.programme]: { ...user.access[req.params.programme], ...programmeAccess }
+      [req.params.programme]: { ...user.access[req.params.programme], ...programmeAccess },
     }
 
     await user.save()
@@ -92,5 +109,5 @@ module.exports = {
   getAllUsers,
   editUser,
   getProgrammesUsers,
-  editUserAccess
+  editUserAccess,
 }

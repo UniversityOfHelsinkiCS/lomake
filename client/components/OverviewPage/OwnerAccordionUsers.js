@@ -7,41 +7,41 @@ const translations = {
   nameHeader: {
     fi: 'Nimi',
     en: 'Name',
-    se: ''
+    se: '',
   },
   viewHeader: {
     fi: 'Luku',
     en: 'Read',
-    se: ''
+    se: '',
   },
   editHeader: {
     fi: 'Vastaus',
     en: 'Edit',
-    se: ''
+    se: '',
   },
   ownerHeader: {
     fi: 'Omistaja',
     en: 'Owner',
-    se: ''
+    se: '',
   },
   grantAccess: {
     fi: 'Anna oikeus',
     en: 'Grant access right',
-    se: ''
+    se: '',
   },
   removeAccess: {
     fi: 'Poista oikeus',
     en: 'Remove access right',
-    se: ''
+    se: '',
   },
   noUsers: {
     fi: 'Ei käyttäjiä, käytä ylläolevia linkkejä kutsumiseen',
     en: 'No users, use the links above to invite',
-    se: ''
-  }
+    se: '',
+  },
 }
 
-const SwitchableBadge = ({ currentAccess, grant, remove }) => {
+const SwitchableBadge = ({ currentAccess, grant, remove, disabled = false }) => {
   const languageCode = useSelector((state) => state.language)
   if (currentAccess)
     return (
@@ -49,6 +49,7 @@ const SwitchableBadge = ({ currentAccess, grant, remove }) => {
         trigger={<Icon name="check" className="users-green" size="large" />}
         content={
           <Button
+            disabled={disabled}
             color="red"
             content={translations.removeAccess[languageCode]}
             onClick={() => remove()}
@@ -74,7 +75,7 @@ const SwitchableBadge = ({ currentAccess, grant, remove }) => {
   )
 }
 
-const OwnerAccordionUserRow = ({ user, programme }) => {
+const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
   const dispatch = useDispatch()
 
   const grantOwner = () => dispatch(editUserAccessAction(user.id, programme, { admin: true }))
@@ -112,6 +113,7 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
             currentAccess={user.access[programme] ? user.access[programme].admin : false}
             grant={() => grantOwner()}
             remove={() => removeOwner()}
+            disabled={currentOwnerCount <= 1}
           />
         </Grid.Column>
       </Grid.Row>
@@ -132,6 +134,11 @@ const OwnerAccordionUsers = ({ programme }) => {
     const bAdmin = b.access[programme].admin
     return bAdmin - aAdmin
   })
+
+  const currentOwnerCount = users.data.reduce((pre, cur) => {
+    if (cur.access[programme].admin) return pre + 1
+    return pre
+  }, 0)
 
   return (
     <>
@@ -164,7 +171,12 @@ const OwnerAccordionUsers = ({ programme }) => {
                 </Grid.Row>
               ) : (
                 sortedUsers.map((user) => (
-                  <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />
+                  <OwnerAccordionUserRow
+                    currentOwnerCount={currentOwnerCount}
+                    user={user}
+                    programme={programme}
+                    key={user.id}
+                  />
                 ))
               )}
             </Grid>
