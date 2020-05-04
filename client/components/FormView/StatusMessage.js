@@ -17,10 +17,13 @@ const translations = {
 
 const StatusMessage = () => {
   const languageCode = useSelector((state) => state.language)
-  const deadline = useSelector((state) => state.deadlines.nextDeadline.date)
+  const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const lastSaved = useSelector((state) => state.form.lastSaved)
 
-  const deadlineObj = new Date(deadline)
+  const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
+
+  if (!deadlineObj) return null
+
   const locale = languageCode != 'se' ? languageCode : 'sv'
 
   return (
