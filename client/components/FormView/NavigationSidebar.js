@@ -38,7 +38,7 @@ const iconMap = {
   EMPTY: 'exclamation',
 }
 
-const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
+const NavigationSidebar = ({ programmeKey }) => {
   const languageCode = useSelector((state) => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
@@ -47,7 +47,7 @@ const NavigationSidebar = ({ programmeKey, lastSaved, deadline }) => {
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
           {questions.map((section, index) => {
             const titleFromJson = section.title[languageCode]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
