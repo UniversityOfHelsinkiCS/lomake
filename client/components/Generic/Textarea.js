@@ -15,7 +15,7 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
     return (
       <LastYearsAnswersAccordion>
-        <ReactMarkdown source={previousYearsAnswers[`${id}_text`]} />
+        <ReactMarkdown source={previousYearsAnswers[`${id}_text`].replace('•', '\n\n•')} />
       </LastYearsAnswersAccordion>
     )
 

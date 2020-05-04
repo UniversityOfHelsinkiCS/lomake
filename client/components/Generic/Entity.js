@@ -13,24 +13,24 @@ const translations = {
   streetLightsLabel: {
     fi: 'Yleisarvio',
     en: 'General assessment',
-    se: 'Allmänn bedömning'
+    se: 'Allmänn bedömning',
   },
   textAreaLabel: {
     fi: 'Keskustelun pääkohdat olivat',
     en: 'Main points of discussion',
-    se: 'Diskussionens huvudpunkter'
-  }
+    se: 'Diskussionens huvudpunkter',
+  },
 }
- const mapLightToValid = {
-    VIHREÄ: 'green',
-    KELTAINEN: 'yellow',
-    PUNAINEN: 'red'
-  }
+const mapLightToValid = {
+  VIHREÄ: 'green',
+  KELTAINEN: 'yellow',
+  PUNAINEN: 'red',
+}
 
 const mapLightToImage = {
   green: positiveEmoji,
   yellow: neutralEmoji,
-  red: negativeEmoji
+  red: negativeEmoji,
 }
 
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
@@ -52,7 +52,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
             src={mapLightToImage[previousAnswerLight]}
           />
         )}
-        <ReactMarkdown source={previousAnswerText} />
+        <ReactMarkdown source={previousAnswerText.replace('•', '\n\n•')} />
       </LastYearsAnswersAccordion>
     )
   }
