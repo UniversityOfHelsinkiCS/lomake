@@ -53,9 +53,23 @@ const labelIcon = {
 
 export default ({ url }) => {
   const dispatch = useDispatch()
+  const [localizedProgramname, setLocalizedProgramname] = useState('')
   const token = useSelector((store) => store.accessToken)
   const languageCode = useSelector((state) => state.language)
+  const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
   const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (studyProgrammes && token.data) {
+      const program = studyProgrammes.find((p) => p.key === token.data.programme)
+
+      const temp = program['name'][languageCode]
+        ? program['name'][languageCode]
+        : program['name']['en']
+
+      setLocalizedProgramname(temp)
+    }
+  }, [languageCode, token, studyProgrammes])
 
   useEffect(() => {
     dispatch(getTokenAction(url))
@@ -70,7 +84,7 @@ export default ({ url }) => {
       return false
     }
 
-    const normalizedProgrammeName = token.data.programme
+    const normalizedProgrammeName = localizedProgramname
       .toLowerCase()
       .replace(',', '')
       .replace("'", '')
@@ -88,7 +102,7 @@ export default ({ url }) => {
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
       <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
-      <div style={{ fontWeight: 'bold' }}>{token.data.programme}</div>
+      <div style={{ fontWeight: 'bold' }}>{localizedProgramname}</div>
       <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>
         <Icon color="blue" name={labelIcon[token.data.type]} size="small" />{' '}
         {translations.rights[token.data.type][languageCode]}
@@ -98,7 +112,7 @@ export default ({ url }) => {
           <Input
             style={{ width: '700px' }}
             size="large"
-            placeholder={token.data.programme}
+            placeholder={localizedProgramname}
             value={value}
             onChange={(e, { value }) => setValue(value)}
           />
