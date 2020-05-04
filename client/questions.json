@@ -37,26 +37,6 @@
     "link_url": "https://oodikone.cs.helsinki.fi/",
     "parts": [
       {
-        "id": "overall_status_information_used",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä muita tietoja ja tietolähteitä käytitte koulutusohjelman yleistilanteesta keskusteltaessa?",
-          "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
-          "en": "What other information did you use?"
-        },
-        "required": false
-      },
-      {
-        "id": "overall_status_information_needed",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä tietoja jäitte kaipaamaan?",
-          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
-          "en": "What information would you have needed?"
-        },
-        "required": false
-      },
-      {
         "id": "student_admissions",
         "type": "ENTITY",
         "label": {
@@ -175,6 +155,26 @@
           "en": "What types of feedback does the programme use and how? How has the feedback collected been processed in the degree programme? Who has participated in processing the feedback? What changes have been made based on the feedback?"
         },
         "required": true
+      },
+      {
+        "id": "overall_status_information_used",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä muita tietoja ja tietolähteitä käytitte koulutusohjelman yleistilanteesta keskusteltaessa?",
+          "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
+          "en": "What other information did you use?"
+        },
+        "required": false
+      },
+      {
+        "id": "overall_status_information_needed",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja jäitte kaipaamaan?",
+          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
+          "en": "What information would you have needed?"
+        },
+        "required": false
       }
     ]
   },
@@ -185,26 +185,6 @@
       "en": "WELLBEING"
     },
     "parts": [
-      {
-        "id": "wellbeing_information_used",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä tietoja ja tietolähteitä käytitte?",
-          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
-          "en": "What other information and sources of information did you use?"
-        },
-        "required": false
-      },
-      {
-        "id": "wellbeing_information_needed",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä tietoja jäitte kaipaamaan?",
-          "se": "Vilka uppgifter skulle ni ha behövt?",
-          "en": "What information would you have needed?"
-        },
-        "required": false
-      },
       {
         "id": "community_wellbeing",
         "type": "ENTITY",
@@ -249,6 +229,26 @@
           "en": "Has the steering group worked successfully? What challenges have been identified in the steering group’s work and management? How does internal information distribution/communication/interaction function between the programme teachers, students and leadership (director and steering group)? What development measures have been taken?"
         },
         "required": true
+      },
+      {
+        "id": "wellbeing_information_used",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja ja tietolähteitä käytitte?",
+          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
+          "en": "What other information and sources of information did you use?"
+        },
+        "required": false
+      },
+      {
+        "id": "wellbeing_information_needed",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja jäitte kaipaamaan?",
+          "se": "Vilka uppgifter skulle ni ha behövt?",
+          "en": "What information would you have needed?"
+        },
+        "required": false
       }
     ]
   },
@@ -259,26 +259,6 @@
       "en": "SUFFICIENT AND APPROPRIATE HUMAN AND OTHER RESOURCES"
     },
     "parts": [
-      {
-        "id": "sufficient_resources_information_used",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä muita tietoja ja tietolähteitä käytitte?",
-          "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
-          "en": "What other information and sources of information did you use?"
-        },
-        "required": false
-      },
-      {
-        "id": "sufficient_resources_information_needed",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Mitä tietoja kaipaatte näistä asioista?",
-          "se": "Vilka uppgifter behöver ni om detta tema?",
-          "en": "What information would you need?"
-        },
-        "required": false
-      },
       {
         "id": "teaching_resources",
         "type": "ENTITY",
@@ -323,6 +303,26 @@
           "en": "How would you describe the degree programme resources relating to facilities, equipment and learning environments?"
         },
         "required": true
+      },
+      {
+        "id": "sufficient_resources_information_used",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä muita tietoja ja tietolähteitä käytitte?",
+          "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
+          "en": "What other information and sources of information did you use?"
+        },
+        "required": false
+      },
+      {
+        "id": "sufficient_resources_information_needed",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja kaipaatte näistä asioista?",
+          "se": "Vilka uppgifter behöver ni om detta tema?",
+          "en": "What information would you need?"
+        },
+        "required": false
       }
     ]
   },
@@ -333,6 +333,21 @@
       "en": "JOINT PROGRAMME WITH SEVERAL FACULTIES"
     },
     "parts": [
+      {
+        "id": "cooperation_success",
+        "type": "ENTITY",
+        "label": {
+          "fi": "YHTEISTYÖN SUJUVUUS",
+          "se": "SAMARBETE",
+          "en": "COOPERATION"
+        },
+        "description": {
+          "fi": "Miten yhteistyö on sujunut? Mitkä ovat tiedekuntarajat ylittävän toiminnan isoimmat ansiot ja haasteet?",
+          "se": "Hur har samarbetet gått? Vilka är de främsta meriterna och utmaningarna i fråga om fakultetsöverskridande verksamhet?",
+          "en": "How successfully have the partners cooperated? What are the major merits and challenges of cross-faculty operations?"
+        },
+        "required": false
+      },
       {
         "id": "joint_programme_information_used",
         "type": "TEXTAREA",
@@ -350,21 +365,6 @@
           "fi": "Mitä tietoja kaipaatte?",
           "se": "Vilka uppgifter behöver ni om detta tema?",
           "en": "What information would you have needed?"
-        },
-        "required": false
-      },
-      {
-        "id": "cooperation_success",
-        "type": "ENTITY",
-        "label": {
-          "fi": "YHTEISTYÖN SUJUVUUS",
-          "se": "SAMARBETE",
-          "en": "COOPERATION"
-        },
-        "description": {
-          "fi": "Miten yhteistyö on sujunut? Mitkä ovat tiedekuntarajat ylittävän toiminnan isoimmat ansiot ja haasteet?",
-          "se": "Hur har samarbetet gått? Vilka är de främsta meriterna och utmaningarna i fråga om fakultetsöverskridande verksamhet?",
-          "en": "How successfully have the partners cooperated? What are the major merits and challenges of cross-faculty operations?"
         },
         "required": false
       }
