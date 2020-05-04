@@ -21,6 +21,12 @@ export const getProgramme = (key) => {
   return callBuilder(route, prefix)
 }
 
+export const getProgrammeOwners = () => {
+  const route = `/programmes/getOwners`
+  const prefix = 'GET_PROGRAMME_OWNERS'
+  return callBuilder(route, prefix)
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -67,6 +73,11 @@ export default (state = { data: null }, action) => {
       return {
         ...state,
         singleProgram: action.response,
+      }
+    case 'GET_PROGRAMME_OWNERS_SUCCESS':
+      return {
+        ...state,
+        programmeOwners: action.response,
       }
 
     default:
