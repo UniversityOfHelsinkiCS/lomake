@@ -47,8 +47,37 @@ const toggleLock = async (req, res) => {
   }
 }
 
+/**
+ * Only returns email-addresses for safety.
+ */
+const getOwners = async (req, res) => {
+  try {
+    const programmes = await db.studyprogramme.findAll()
+    let results = {}
+
+    for (const p of programmes) {
+      const owners = await db.user.findAll({
+        where: {
+          access: {
+            [p.key]: { admin: 'true' },
+          },
+        },
+      })
+      results = {
+        ...results,
+        [p.key]: owners.map((o) => o.email),
+      }
+    }
+    res.status(200).json(results)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   getOne,
   toggleLock,
+  getOwners,
 }

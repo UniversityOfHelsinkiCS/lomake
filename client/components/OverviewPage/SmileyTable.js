@@ -9,6 +9,7 @@ import OwnerAccordionContent from './OwnerAccordionContent'
 import './OverviewPage.scss'
 import { Link } from 'react-router-dom'
 import questions from '../../questions.json'
+import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 
 const translations = {
   openManageText: {
@@ -56,11 +57,13 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
   const [programExpanded, setProgramExpanded] = useState(null)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     dispatch(getAnswersAction())
+    if (currentUser.admin) dispatch(getProgrammeOwners())
   }, [])
 
   useEffect(() => {
@@ -168,7 +171,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                   </Link>
                   {p.claimed ? (
                     <Icon
-                      title={translations['programmeClaimed'][languageCode]}
+                      title={
+                        programmeOwners
+                          ? programmeOwners[p.key]
+                          : translations['programmeClaimed'][languageCode]
+                      }
                       color="green"
                       name="thumbs up"
                     />
