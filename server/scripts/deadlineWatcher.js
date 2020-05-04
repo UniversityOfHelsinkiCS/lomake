@@ -6,8 +6,6 @@ const moment = require('moment')
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
 
 const startDeadlineWatcher = async () => {
-  logger.info('Starting deadlineWatcher.')
-
   // 1 min before midnight: 59 23 * * *
   cron.schedule('59 23 * * *', async () => {
     logger.info(`${loggerPrefix} Checking if there's a deadline that closes today...`)
@@ -60,6 +58,7 @@ const startDeadlineWatcher = async () => {
       }
     }
   })
+  logger.info('Deadline job started')
 }
 
 module.exports = {
