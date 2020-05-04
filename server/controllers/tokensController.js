@@ -18,7 +18,19 @@ const claimToken = async (req, res) => {
     if (token.type === 'ADMIN') {
       req.user.access = {
         ...req.user.access,
-        [token.programme]: { admin: true, write: true, read: true }
+        [token.programme]: { admin: true, write: true, read: true },
+      }
+
+      // Also set this programme as claimed, if it has not been marked as claimed already:
+      const programme = await db.studyprogramme.findOne({
+        where: {
+          key: token.programme,
+        },
+      })
+
+      if (!programme.claimed) {
+        programme.claimed = true
+        await programme.save()
       }
     }
 
@@ -28,15 +40,15 @@ const claimToken = async (req, res) => {
         [token.programme]: {
           ...req.user.access[token.programme],
           write: true,
-          read: true
-        }
+          read: true,
+        },
       }
     }
 
     if (token.type === 'READ') {
       req.user.access = {
         ...req.user.access,
-        [token.programme]: { ...req.user.access[token.programme], read: true }
+        [token.programme]: { ...req.user.access[token.programme], read: true },
       }
     }
 
@@ -49,14 +61,14 @@ const claimToken = async (req, res) => {
         programme: token.programme,
         type: 'READ',
         valid: true,
-        usageCounter: 0
+        usageCounter: 0,
       })
       await db.token.create({
         url: uuid(),
         programme: token.programme,
         type: 'WRITE',
         valid: true,
-        usageCounter: 0
+        usageCounter: 0,
       })
     }
     await token.save()
@@ -94,7 +106,7 @@ const checkToken = async (req, res) => {
 const programmesTokens = async (req, res) => {
   try {
     const tokens = await db.token.findAll({
-      where: { programme: req.params.programme, valid: true }
+      where: { programme: req.params.programme, valid: true },
     })
 
     return res.status(200).json(tokens)
