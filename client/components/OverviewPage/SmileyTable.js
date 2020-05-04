@@ -133,115 +133,117 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   )
 
   return (
-    <table style={{ tableLayout: 'fixed' }}>
-      <thead>
-        <tr>
-          <th colSpan="2" style={{ background: 'white', position: 'sticky' }} />
-          {allLightIds.map((id) => (
+    <div style={{ overflowX: 'auto', width: '100vw', display: 'flex', justifyContent: 'center' }}>
+      <table style={{ tableLayout: 'fixed', maxWidth: '1100px' }}>
+        <thead>
+          <tr>
+            <th colSpan="2" style={{ background: 'white', position: 'sticky' }} />
+            {allLightIds.map((id) => (
+              <th
+                key={id}
+                style={{
+                  wordWrap: 'break-word',
+                  textAlign: 'center',
+                  position: 'sticky',
+                  background: 'white',
+                }}
+              >
+                {transformIdToTitle(id)}
+              </th>
+            ))}
             <th
-              key={id}
               style={{
-                wordWrap: 'break-word',
-                textAlign: 'center',
                 position: 'sticky',
                 background: 'white',
               }}
-            >
-              {transformIdToTitle(id)}
-            </th>
-          ))}
-          <th
-            style={{
-              position: 'sticky',
-              background: 'white',
-            }}
-          />
-        </tr>
-      </thead>
-      <tbody>
-        {filteredProgrammes.map((p) => {
-          const programme = selectedAnswers.find((a) => a.programme === p.key)
-          const targetURL = `/form/${p.key}`
-          return (
-            <React.Fragment key={p.key}>
-              <tr>
-                <th colSpan="2">
-                  <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
-                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
-                  </Link>
-                  {p.claimed ? (
-                    <Icon
-                      title={
-                        programmeOwners
-                          ? programmeOwners[p.key]
-                          : translations['programmeClaimed'][languageCode]
-                      }
-                      color="green"
-                      name="thumbs up"
-                    />
-                  ) : (
-                    <Icon
-                      title={translations['programmeNotClaimed'][languageCode]}
-                      color="red"
-                      name="thumbs down"
-                    />
-                  )}
-                </th>
-                {allLightIds.map((q, qi) => {
-                  return programme && programme.data[q] ? (
-                    <td key={`${p.key}-${q}`}>
-                      <div
-                        data-cy={`${p.key}-${qi}`}
-                        className="square"
-                        style={{ background: backgroundColorMap[programme.data[q]] }}
-                      >
-                        <Icon
-                          name={lightEmojiMap[programme.data[q]]}
-                          style={{ cursor: 'pointer' }}
-                          size="big"
-                          onClick={() =>
-                            setModalData({
-                              header: questions.reduce((acc, cur) => {
-                                if (acc) return acc
-                                const header = cur.parts.reduce((acc, cur) => {
+            />
+          </tr>
+        </thead>
+        <tbody>
+          {filteredProgrammes.map((p) => {
+            const programme = selectedAnswers.find((a) => a.programme === p.key)
+            const targetURL = `/form/${p.key}`
+            return (
+              <React.Fragment key={p.key}>
+                <tr>
+                  <th colSpan="2">
+                    <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
+                      {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                    </Link>
+                    {p.claimed ? (
+                      <Icon
+                        title={
+                          programmeOwners
+                            ? programmeOwners[p.key]
+                            : translations['programmeClaimed'][languageCode]
+                        }
+                        color="green"
+                        name="thumbs up"
+                      />
+                    ) : (
+                      <Icon
+                        title={translations['programmeNotClaimed'][languageCode]}
+                        color="red"
+                        name="thumbs down"
+                      />
+                    )}
+                  </th>
+                  {allLightIds.map((q, qi) => {
+                    return programme && programme.data[q] ? (
+                      <td key={`${p.key}-${q}`}>
+                        <div
+                          data-cy={`${p.key}-${qi}`}
+                          className="square"
+                          style={{ background: backgroundColorMap[programme.data[q]] }}
+                        >
+                          <Icon
+                            name={lightEmojiMap[programme.data[q]]}
+                            style={{ cursor: 'pointer' }}
+                            size="big"
+                            onClick={() =>
+                              setModalData({
+                                header: questions.reduce((acc, cur) => {
                                   if (acc) return acc
+                                  const header = cur.parts.reduce((acc, cur) => {
+                                    if (acc) return acc
 
-                                  if (cur.id === q.replace('_light', ''))
-                                    return cur.description[languageCode]
+                                    if (cur.id === q.replace('_light', ''))
+                                      return cur.description[languageCode]
+
+                                    return acc
+                                  }, '')
+
+                                  if (header) return header
 
                                   return acc
-                                }, '')
-
-                                if (header) return header
-
-                                return acc
-                              }, ''),
-                              programme: p.key,
-                              content: programme.data[q.replace('light', 'text')],
-                              color: programme.data[q],
-                            })
-                          }
+                                }, ''),
+                                programme: p.key,
+                                content: programme.data[q.replace('light', 'text')],
+                                color: programme.data[q],
+                              })
+                            }
+                          />
+                        </div>
+                      </td>
+                    ) : (
+                      <td key={`${p.key}-${q}`}>
+                        <div
+                          data-cy={`${p.key}-${qi}`}
+                          className="square"
+                          style={{ background: 'whitesmoke' }}
                         />
-                      </div>
-                    </td>
-                  ) : (
-                    <td key={`${p.key}-${q}`}>
-                      <div
-                        data-cy={`${p.key}-${qi}`}
-                        className="square"
-                        style={{ background: 'whitesmoke' }}
-                      />
-                    </td>
-                  )
-                })}
-                {hasManagementAccess(p.key) && <ManageCell program={p} />}
-              </tr>
-              {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
-            </React.Fragment>
-          )
-        })}
-      </tbody>
-    </table>
+                      </td>
+                    )
+                  })}
+                  {hasManagementAccess(p.key) && <ManageCell program={p} />}
+                </tr>
+                {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
+              </React.Fragment>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
