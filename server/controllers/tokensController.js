@@ -20,6 +20,7 @@ const claimToken = async (req, res) => {
         ...req.user.access,
         [token.programme]: { admin: true, write: true, read: true },
       }
+      token.valid = false
 
       // Also set this programme as claimed, if it has not been marked as claimed already:
       const programme = await db.studyprogramme.findOne({
@@ -54,23 +55,6 @@ const claimToken = async (req, res) => {
 
     await req.user.save()
     await token.increment('usageCounter')
-    if (token.type === 'ADMIN') {
-      token.valid = false
-      await db.token.create({
-        url: uuid(),
-        programme: token.programme,
-        type: 'READ',
-        valid: true,
-        usageCounter: 0,
-      })
-      await db.token.create({
-        url: uuid(),
-        programme: token.programme,
-        type: 'WRITE',
-        valid: true,
-        usageCounter: 0,
-      })
-    }
     await token.save()
 
     logger.info(
