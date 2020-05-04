@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       key: DataTypes.STRING,
       name: DataTypes.JSONB,
       locked: DataTypes.BOOLEAN,
+      claimed: DataTypes.BOOLEAN,
     },
     {
       underscored: true,
