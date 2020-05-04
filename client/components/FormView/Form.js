@@ -37,22 +37,33 @@ const Form = ({ questions, programmeKey }) => {
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[languageCode] : undefined
+    const isSummaryQuestion =
+      part.id.includes('information_needed') || part.id.includes('information_used')
+
+    const divStyle = isSummaryQuestion
+      ? {
+          paddingLeft: '1.5em',
+          borderLeft: '5px solid',
+          borderColor: '#1B1C1D',
+        }
+      : {}
 
     return (
-      <Component
-        key={part.id}
-        id={part.id}
-        label={part.label[languageCode]}
-        description={description}
-        required={part.required}
-        noLight={part.no_light}
-        number={number}
-        previousYearsAnswers={
-          previousYearsAnswers.data && previousYearsAnswers.data.data
-            ? previousYearsAnswers.data.data
-            : null
-        }
-      />
+      <div key={part.id} style={divStyle}>
+        <Component
+          id={part.id}
+          label={part.label[languageCode]}
+          description={description}
+          required={part.required}
+          noLight={part.no_light}
+          number={number}
+          previousYearsAnswers={
+            previousYearsAnswers.data && previousYearsAnswers.data.data
+              ? previousYearsAnswers.data.data
+              : null
+          }
+        />
+      </div>
     )
   }
 
