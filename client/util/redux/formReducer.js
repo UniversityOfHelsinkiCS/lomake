@@ -29,11 +29,12 @@ export const postFormAction = (message) => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: {}, viewOnly: false }, action) => {
+export default (state = { data: {}, viewOnly: false, lastSaved: new Date() }, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
       return {
         ...state,
+        lastSaved: new Date(),
         data: {
           ...state.data,
           [action.field]: action.value,
