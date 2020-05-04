@@ -26,6 +26,7 @@ router.post('/programmes/:programme/tokens/:url', requireProgrammeOwner, tokens.
 router.post('/programmes/:programme/tokens/create/:type', requireProgrammeOwner, tokens.createToken)
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.put('/programmes/:programme/users/:id/access', requireProgrammeOwner, users.editUserAccess)
+router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)
 router.get('/programmes/:programme', studyprogrammes.getOne)
 router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
