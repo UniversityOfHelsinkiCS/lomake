@@ -16,7 +16,6 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
-    dispatch(getDeadline())
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
@@ -24,6 +23,7 @@ export default () => {
   useEffect(() => {
     if (currentUser.data) {
       dispatch(getStudyProgrammes())
+      dispatch(getDeadline())
     }
   }, [currentUser])
 
