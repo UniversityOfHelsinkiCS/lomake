@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './OverviewPage.scss'
-import { Modal, Header, Input, Select } from 'semantic-ui-react'
+import { Modal, Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -10,6 +10,7 @@ export default () => {
   const [filter, setFilter] = useState('')
   const [year, setYear] = useState(2020)
   const [modalData, setModalData] = useState(null)
+  const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -42,6 +43,11 @@ export default () => {
       en: 'Filter',
       se: '',
     },
+    showUnclaimedOnly: {
+      en: 'Show only unclaimed programmes',
+      fi: 'Näytä vain lunastamattomat koulutusohjelmat',
+      se: '',
+    },
   }
 
   const years = [
@@ -55,6 +61,7 @@ export default () => {
     : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
 
   const filteredProgrammes = usersProgrammes.filter((prog) => {
+    if (showUnclaimedOnly && prog.claimed) return
     const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
     return searchTarget.toLowerCase().includes(filter.toLowerCase())
   })
@@ -82,23 +89,30 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <Input
-            data-cy="overviewpage-filter"
-            name="filter"
-            icon="filter"
-            placeholder={translations.filter[languageCode]}
-            onChange={handleChange}
-            value={filter}
-            size="huge"
-          />
-          <div style={{ marginTop: '1em' }}>
+          <div
+            style={{ display: 'flex', alignItems: 'center', padding: '1em' }}
+            className="overviewpage-controls"
+          >
+            <Input
+              data-cy="overviewpage-filter"
+              name="filter"
+              icon="filter"
+              placeholder={translations.filter[languageCode]}
+              onChange={handleChange}
+              value={filter}
+            />
             <Select
               data-cy="overviewpage-year"
               name="year"
               options={years}
               onChange={handleYearChange}
               value={year}
-              size="huge"
+            />
+            <Radio
+              checked={showUnclaimedOnly}
+              onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
+              label={translations['showUnclaimedOnly'][languageCode]}
+              toggle
             />
           </div>
           <OspaModule />
