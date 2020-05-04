@@ -26,6 +26,16 @@ const translations = {
     en: 'No matching programmes were found. Please try a different filter.',
     se: '',
   },
+  programmeClaimed: {
+    fi: 'Tämä ohjelma on vastaanotettu',
+    en: 'This programme has been claimed',
+    se: '',
+  },
+  programmeNotClaimed: {
+    fi: 'Tätä ohjelmaa ei ole vastaanotettu',
+    en: 'This programme has not been claimed',
+    se: '',
+  },
 }
 
 const lightEmojiMap = {
@@ -156,6 +166,19 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                   <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
                     {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                   </Link>
+                  {p.claimed ? (
+                    <Icon
+                      title={translations['programmeClaimed'][languageCode]}
+                      color="green"
+                      name="thumbs up"
+                    />
+                  ) : (
+                    <Icon
+                      title={translations['programmeNotClaimed'][languageCode]}
+                      color="red"
+                      name="thumbs down"
+                    />
+                  )}
                 </th>
                 {allLightIds.map((q, qi) => {
                   return programme && programme.data[q] ? (
