@@ -132,6 +132,31 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     </td>
   )
 
+  const ClaimedIcon = ({ claimed }) => {
+    if (!currentUser.admin) return null
+
+    if (claimed) {
+      return (
+        <Icon
+          title={
+            programmeOwners
+              ? programmeOwners[p.key]
+              : translations['programmeClaimed'][languageCode]
+          }
+          color="green"
+          name="thumbs up"
+        />
+      )
+    }
+    return (
+      <Icon
+        title={translations['programmeNotClaimed'][languageCode]}
+        color="red"
+        name="thumbs down"
+      />
+    )
+  }
+
   return (
     <div style={{ overflowX: 'auto', width: '100vw', display: 'flex', justifyContent: 'center' }}>
       <table style={{ tableLayout: 'fixed', maxWidth: '1100px' }}>
@@ -170,23 +195,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                     <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
                       {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                     </Link>
-                    {p.claimed ? (
-                      <Icon
-                        title={
-                          programmeOwners
-                            ? programmeOwners[p.key]
-                            : translations['programmeClaimed'][languageCode]
-                        }
-                        color="green"
-                        name="thumbs up"
-                      />
-                    ) : (
-                      <Icon
-                        title={translations['programmeNotClaimed'][languageCode]}
-                        color="red"
-                        name="thumbs down"
-                      />
-                    )}
+                    <ClaimedIcon claimed={p.claimed} />
                   </th>
                   {allLightIds.map((q, qi) => {
                     return programme && programme.data[q] ? (
