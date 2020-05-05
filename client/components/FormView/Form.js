@@ -83,7 +83,9 @@ const Form = ({ questions, programmeKey }) => {
             programmeKey={programmeKey}
           >
             {section.link_title && section.link_url && (
-              <a href={section.link_url}>{section.link_title[languageCode]}</a>
+              <a target="_blank" href={section.link_url}>
+                {section.link_title[languageCode]}
+              </a>
             )}
             {section.parts.map(partMap)}
           </Section>
