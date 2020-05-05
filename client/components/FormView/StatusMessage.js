@@ -29,6 +29,7 @@ const StatusMessage = () => {
   return (
     <>
       <Message
+        data-cy="statusMessage"
         icon="info"
         header={`${translations.header[languageCode]} ${deadlineObj.toLocaleDateString(locale)}`}
         content={`${translations.subtitle[languageCode]} ${lastSaved.toLocaleString(locale)}`}

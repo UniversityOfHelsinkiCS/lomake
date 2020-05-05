@@ -44,4 +44,8 @@ describe('Form tests', function () {
       .find('.editor-class')
       .should('contain.text', 'kissa')
   })
+
+  it('Can see upcoming deadline date', function () {
+    cy.get('[data-cy=statusMessage]').contains('Deadline: ')
+  })
 })

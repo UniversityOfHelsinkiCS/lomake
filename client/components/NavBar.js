@@ -78,15 +78,27 @@ export default () => {
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
       <Menu.Menu>
-        <Dropdown item icon="globe" simple>
+        <Dropdown data-cy="navBar-localeDropdown" item icon="globe" simple>
           <Dropdown.Menu>
-            <Dropdown.Item value="fi" onClick={() => setLanguageCode('fi')}>
+            <Dropdown.Item
+              data-cy="navBar-localeOption-fi"
+              value="fi"
+              onClick={() => setLanguageCode('fi')}
+            >
               Suomi
             </Dropdown.Item>
-            <Dropdown.Item value="se" onClick={() => setLanguageCode('se')}>
+            <Dropdown.Item
+              data-cy="navBar-localeOption-se"
+              value="se"
+              onClick={() => setLanguageCode('se')}
+            >
               Svenska
             </Dropdown.Item>
-            <Dropdown.Item value="en" onClick={() => setLanguageCode('en')}>
+            <Dropdown.Item
+              data-cy="navBar-localeOption-en"
+              value="en"
+              onClick={() => setLanguageCode('en')}
+            >
               English
             </Dropdown.Item>
           </Dropdown.Menu>
