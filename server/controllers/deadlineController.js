@@ -3,30 +3,27 @@ const logger = require('@util/logger')
 
 const createOrUpdate = async (req, res) => {
   try {
-    const deadlineDate = new Date(req.body.date + 'UTC')
-    const existingDeadlines = await db.deadline.findAll({})
-
     // Unlock all programmes
     const programmes = await db.studyprogramme.findAll({})
-    programmes.forEach(async (programme) => {
+    for (let programme of programmes) {
       programme.locked = false
       await programme.save()
-    })
+    }
 
+    const existingDeadlines = await db.deadline.findAll({})
+    // Create new deadline entity
     if (existingDeadlines.length === 0) {
-      // Create new deadline entity
       const newDeadline = await db.deadline.create({
-        date: deadlineDate,
+        date: req.body.date,
         passed: false,
       })
-
       return res.status(200).json(newDeadline)
-    } else {
-      // Update existing deadline entity
-      existingDeadlines[0].date = deadlineDate
-      await existingDeadlines[0].save()
-      return res.status(200).json(existingDeadlines[0])
     }
+
+    // Update existing deadline entity
+    existingDeadlines[0].date = req.body.date
+    await existingDeadlines[0].save()
+    return res.status(200).json(existingDeadlines[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })

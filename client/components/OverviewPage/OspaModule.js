@@ -59,7 +59,11 @@ export default function OspaModule() {
   }
 
   const handleDeadlineSave = () => {
-    dispatch(createOrUpdateDeadline(newDate.toLocaleDateString()))
+    const acualDate = new Date(
+      Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
+    )
+
+    dispatch(createOrUpdateDeadline(acualDate.toISOString()))
     setNewDate(null)
   }
 
