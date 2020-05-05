@@ -28,7 +28,7 @@ export default function OspaModule() {
   const translations = {
     deadlineSettings: {
       en: 'Deadline settings',
-      fi: 'Määräaika asetukset',
+      fi: 'Määräaika-asetukset',
       se: '',
     },
     selectNewDeadline: {
@@ -52,8 +52,8 @@ export default function OspaModule() {
       se: '',
     },
     deleteThisDeadline: {
-      en: 'Delete this deadline',
-      fi: 'Poista tämä määräaika',
+      en: 'Freeze the form',
+      fi: 'Lukitse lomake',
       se: '',
     },
   }
