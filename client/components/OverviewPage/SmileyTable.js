@@ -132,15 +132,15 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     </td>
   )
 
-  const ClaimedIcon = ({ claimed }) => {
+  const ClaimedIcon = ({ programme }) => {
     if (!currentUser.admin) return null
 
-    if (claimed) {
+    if (programme.claimed) {
       return (
         <Icon
           title={
             programmeOwners
-              ? programmeOwners[p.key]
+              ? programmeOwners[programme.key]
               : translations['programmeClaimed'][languageCode]
           }
           color="green"
@@ -195,7 +195,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                     <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
                       {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                     </Link>
-                    <ClaimedIcon claimed={p.claimed} />
+                    <ClaimedIcon programme={p} />
                   </th>
                   {allLightIds.map((q, qi) => {
                     return programme && programme.data[q] ? (
