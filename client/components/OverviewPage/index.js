@@ -108,12 +108,14 @@ export default () => {
               onChange={handleYearChange}
               value={year}
             />
-            <Radio
-              checked={showUnclaimedOnly}
-              onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
-              label={translations['showUnclaimedOnly'][languageCode]}
-              toggle
-            />
+            {currentUser.data.admin && (
+              <Radio
+                checked={showUnclaimedOnly}
+                onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
+                label={translations['showUnclaimedOnly'][languageCode]}
+                toggle
+              />
+            )}
           </div>
           <OspaModule />
           <div style={{ marginTop: '2em' }}>
