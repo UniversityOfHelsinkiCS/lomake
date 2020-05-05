@@ -14,6 +14,15 @@ export default () => {
   const [activeItem, setActiveItem] = useState('currentLomake')
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
+  const languageCode = useSelector((state) => state.language)
+
+  const translations = {
+    logOut: {
+      en: 'Log out',
+      fi: 'Kirjaudu ulos',
+      se: 'Logga ut',
+    },
+  }
 
   const setLanguageCode = (code) => dispatch(setLanguage(code))
 
@@ -109,7 +118,7 @@ export default () => {
         {user.admin ? getAdminButton() : null}
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`Log out (${user.uid})`}
+          {`${translations['logOut'][languageCode]} (${user.uid})`}
         </Menu.Item>
       </Menu.Menu>
     </Menu>
