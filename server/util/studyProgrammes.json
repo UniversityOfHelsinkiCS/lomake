@@ -1,0 +1,3007 @@
+{
+  "320105": {
+    "en": "Studies for the Degree of Licentiate in Health Care",
+    "fi": "Terveydenhuollon lisensiaatin tutkinnon opinnot",
+    "sv": "Studier för licentiatexamen i hälsovård"
+  },
+  "320051": {
+    "en": "Specific Training Programme in Postgraduate Specialization in Medicine, 4 years",
+    "fi": "Erikoislääkärien lisäkoulutusohjelma, 4v",
+    "sv": "Tillägsutbildningsprogrammet för specialists läkarna, 4 årig"
+  },
+  "320001": {
+    "en": "Degree Programme in Medicine",
+    "fi": "Lääketieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för medicin"
+  },
+  "520091": {
+    "en": "Diploma Course in Pharmacy",
+    "fi": "Farmaseutin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för farmaceutexamen"
+  },
+  "120009": {
+    "en": "Degree Programme in Theological Functions in Churches and Society",
+    "fi": "Kirkkojen ja yhteiskunnan teologisiin tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för kyrkliga och samhälleliga teologiska uppgifter"
+  },
+  "KH20_001": {
+    "en": "Bachelor's Programme in Law",
+    "fi": "Oikeusnotaarin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för rättsnotarie"
+  },
+  "720702": {
+    "en": "Bachelor of Social Science, Swedish School of Social Science",
+    "fi": "Valtiotieteiden kandidaatti (alempi), Svenska social- och kommunalhögskolanissa",
+    "sv": "Politices kandidat (lägre), Svenska social- och kommunalhögskolan"
+  },
+  "620032": {
+    "en": "Studies in Early Education",
+    "fi": "Varhaiskasvatuksen maisteriopinnot",
+    "sv": "Studier för förskolepedagogik"
+  },
+  "KH70_001": {
+    "en": "Bachelor's Programme in Politics, Media and Communication",
+    "fi": "Politiikan ja viestinnän kandiohjelma",
+    "sv": "Kandidatprogrammet i politik, medier och kommunikation"
+  },
+  "520080": {
+    "en": "Degree Programme in Computer Science",
+    "fi": "Tietojenkäsittelytieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för datavetenskap"
+  },
+  "KH50_005": {
+    "en": "Bachelor's Programme in Computer Science",
+    "fi": "Tietojenkäsittelytieteen kandiohjelma",
+    "sv": "Kandidatprogrammet i datavetenskap"
+  },
+  "220006": {
+    "en": "Bachelor of Laws Degree Programme",
+    "fi": "Oikeusnotaarin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för rättsnotarie"
+  },
+  "320003": {
+    "en": "Further Education in Basic Health Care",
+    "fi": "Perusterveydenhuollon lisäkoulutus",
+    "sv": "Komplementär utbildning i primärhälsovård"
+  },
+  "920010": {
+    "en": "Degree Programme in Veterinary Medicine",
+    "fi": "Eläinlääketieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för veterinärmedicine"
+  },
+  "520102": {
+    "en": "Doctorate of Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "820006": {
+    "en": "The Degree Programme in Agriculture",
+    "fi": "Maatalouden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för lantbruk"
+  },
+  "KH90_001": {
+    "en": "Bachelor's Programme in Veterinary Medicine",
+    "fi": "Eläinlääketieteen kandiohjelma",
+    "sv": "Kandidatsprogrammet i veterinärmedicin"
+  },
+  "V410008": {
+    "en": "Comparative Literature, Aesthetics and Theatre Research",
+    "fi": "Yleinen kirjallisuustiede ja estetiikka sekä teatteritiede",
+    "sv": "Allmän litteraturvetenskap och estetik samt teatervetenskap"
+  },
+  "KH60_001": {
+    "en": "Bachelor's Programme in Education",
+    "fi": "Kasvatustieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i pedagogik"
+  },
+  "320019": {
+    "en": "Degree Programme in Postgraduate Specialization in Medicine, 6 Years",
+    "fi": "Erikoislääkärikoulutuksen koulutusohjelma, 6v",
+    "sv": "Utbildningsprogrammet för specialläkarutbildningen, 6 årig"
+  },
+  "220001": {
+    "en": "Degree Programme in Law",
+    "fi": "Oikeustieteen kandidaatin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för studier för juris kandidatexamen"
+  },
+  "V410006": {
+    "en": "Education",
+    "fi": "Kasvatustiede",
+    "sv": "Pedagogik"
+  },
+  "420422": {
+    "en": "Degree Programme in Linguistic Theory and Cognitive Science",
+    "fi": "Kieliteorian ja kognitiotieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för språkteori och kognitionslära"
+  },
+  "V410004": {
+    "en": "Romance Philology",
+    "fi": "Romaaninen filologia",
+    "sv": "Romansk filologi"
+  },
+  "V810004": {
+    "en": "Food Sciences",
+    "fi": "Elintarvikeopinnot",
+    "sv": "Livsmedelsstudier"
+  },
+  "KOULOHJ-lisensiaatti": {
+    "en": "Unknown Degree Programme, Licentiate",
+    "fi": "Tuntematon koulutusohjelma, lisensiaatti",
+    "sv": "Okänd utbildningsprogrammet, licentiat"
+  },
+  "V810002": {
+    "en": "Forestry Studies",
+    "fi": "Metsäopinnot",
+    "sv": "Forstvetenskapliga studier"
+  },
+  "MH30_003": {
+    "en": "Degree Programme in Dentistry",
+    "fi": "Hammaslääketieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet i odontologi"
+  },
+  "MH70_005": {
+    "en": "Master's Programme in Contemporary Societies",
+    "fi": "Nyky-yhteiskunnan tutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i moderna samhällen"
+  },
+  "V510001": {
+    "en": "Mathematics",
+    "fi": "Matematiikka",
+    "sv": "Matematik"
+  },
+  "920100": {
+    "en": "Studies for the Doctorate Degree in Veterinary",
+    "fi": "Eläinlääketieteen tohtorin opinnot",
+    "sv": "Studier för veterinär doktorsexamen"
+  },
+  "620022": {
+    "en": "Extended Special Teacher Education",
+    "fi": "Erilliset erityisopettajan opinnot",
+    "sv": "Fristående studier för speciallärare"
+  },
+  "420079": {
+    "en": "Baltic Philology",
+    "fi": "Balttilainen filologia",
+    "sv": "Baltisk filologi"
+  },
+  "420144": {
+    "en": "Slavonic Studies",
+    "fi": "Slaavilaiset kielet ja kulttuurit (Aio)",
+    "sv": "Slaviska språk och kulturer (Ämneslärare)"
+  },
+  "520060": {
+    "en": "Degree Programme in Physical Sciences",
+    "fi": "Fysikaalisten tieteiden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för de fysikaliska vetenskaperna"
+  },
+  "V510005": {
+    "en": "Geophysics",
+    "fi": "Geofysiikka",
+    "sv": "Geofysik"
+  },
+  "220002": {
+    "en": "Diploma Course in Law",
+    "fi": "Varanotaarin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för studier för vicenotarieexamen"
+  },
+  "KH74_001": {
+    "en": "Bachelor's Programme in Social Sciences",
+    "fi": "Kandidatprogrammet i samhällsvetenskaper",
+    "sv": "Kandidatprogrammet i samhällsvetenskaper"
+  },
+  "V410007": {
+    "en": "History",
+    "fi": "Historia",
+    "sv": "Historia"
+  },
+  "520100": {
+    "en": "Licentiate of Philosophy",
+    "fi": "Filosofian lisensiaatin opinnot",
+    "sv": "Studier för filosofie licentiatexamen"
+  },
+  "420069": {
+    "en": "Germanic Philology",
+    "fi": "Germaaninen filologia (Aio)",
+    "sv": "Germansk filologi (Ämneslärare)"
+  },
+  "120013I": {
+    "en": "Degree Programme in Religion Teacher Education",
+    "fi": "Koulun uskonnonopettajan tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för skolornas religionslärare"
+  },
+  "420418": {
+    "en": "Degree Programme in Foreign Languages, General Line",
+    "fi": "Vieraiden kielten koulutusohjelma, yleinen suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för främmande språk, det allmänna inriktningsalternativet"
+  },
+  "620090": {
+    "en": "Further Education in Teacher Training Department",
+    "fi": "Opettajankoulutuslaitoksen täydennyskoulutus",
+    "sv": "Lärautbildningsinstitutionens kompletterande studier"
+  },
+  "420197": {
+    "en": "Asian and African Languages and Cultures",
+    "fi": "Aasian ja Afrikan kielet ja kulttuurit",
+    "sv": "Asiatiska och afrikanska språk och kulturer"
+  },
+  "420027": {
+    "en": "Finnish History",
+    "fi": "Suomen historia (Aio)",
+    "sv": "Finlands historia (Ämneslärare)"
+  },
+  "V410001": {
+    "en": "English Philology",
+    "fi": "Englantilainen filologia",
+    "sv": "Engelsk filologi"
+  },
+  "820010": {
+    "en": "Biotechnology (HEBIOT)",
+    "fi": "Biotekniikka (HEBIOT)",
+    "sv": "Bioteknik (HEBIOT)"
+  },
+  "920101": {
+    "en": "Doctoral Programme in Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "720701": {
+    "en": "Degree Programme in Social Work",
+    "fi": "Sosionomikoulutus Svenska social- och kommunalhögskolanissa",
+    "sv": "Socionomexamen (Svenska social- och kommunalhögskolan)"
+  },
+  "420105": {
+    "en": "Classical Archaeology",
+    "fi": "Klassillinen arkeologia",
+    "sv": "Klassisk arkeologi"
+  },
+  "KH57_002": {
+    "en": "Bachelor's Programme in Molecular Biosciences",
+    "fi": "Molekyylibiotieteiden kandiohjelma",
+    "sv": "Kandidatsprogrammet i molekylära biovetenskaper"
+  },
+  "MH60_001": {
+    "en": "Master´s Programme in Education",
+    "fi": "Kasvatustieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i pedagogik"
+  },
+  "420072": {
+    "en": "Finnish Language (as Second domestic Language)",
+    "fi": "Suomen kieli (toinen kotimainen kieli,Aio)",
+    "sv": "Finska språket (andra inhemska språket)"
+  },
+  "520108": {
+    "en": "Doctorate of Philosophy",
+    "fi": "Filosofian tohtorin opinnot (farmasia)",
+    "sv": "Studier för filosofie doktorsexamen (farmaci)"
+  },
+  "KH10_001": {
+    "en": "Bachelor's Programme in Theology and Religious Studies",
+    "fi": "Teologian ja uskonnontutkimuksen kandiohjelma",
+    "sv": "Kandidatsprogrammet i religionsforskning"
+  },
+  "820040": {
+    "en": "Marketing",
+    "fi": "Markkinointi",
+    "sv": "Marknadsföring"
+  },
+  "420198": {
+    "en": "Additional Studies (Psychology)",
+    "fi": "Tutkintoa täydentävät opinnot, psykologia",
+    "sv": "Studier som komplementerar examen (psyk)"
+  },
+  "V110001": {
+    "en": "Basic Studies",
+    "fi": "Peruskurssiopinnot",
+    "sv": "Studier på grundkursnivå"
+  },
+  "420118": {
+    "en": "Hebrew Language and Semitic Studies",
+    "fi": "Heprean kieli ja semistiikka",
+    "sv": "Hebreiska språket och semitistik"
+  },
+  "520020": {
+    "en": "Degree Programme in Biology",
+    "fi": "Biologian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för biologi"
+  },
+  "420109": {
+    "en": "Modern Greek Language and Literature",
+    "fi": "Nykykreikan kieli ja kirjallisuus",
+    "sv": "Nygrekiska språket och litteraturen"
+  },
+  "V610008": {
+    "en": "Adult Education",
+    "fi": "Aikuiskasvatus",
+    "sv": "Vuxenpedagogik"
+  },
+  "MH80_002": {
+    "en": "Master´s Programme in Agricultural, Environmental and Resource Economics",
+    "fi": "Maatalous-, ympäristö- ja luonnonvaraekonomian maisteriohjelma",
+    "sv": "Magisterprogrammet i lantbruks -, miljö- och naturresursekonomi"
+  },
+  "MH70_010": {
+    "en": "International Masters in Economy, State & Society",
+    "fi": "International Masters in Economy, State & Society",
+    "sv": "International Masters in Economy, State & Society"
+  },
+  "220101": {
+    "en": "Licentiate Programme in Law",
+    "fi": "Oikeustieteen lisensiaatin opinnot",
+    "sv": "Studier för juris licentiatexamen"
+  },
+  "320010": {
+    "en": "Specific training in General Medical Practice",
+    "fi": "Yleislääketieteen erityiskoulutus",
+    "sv": "Särskild allmänläkarutbildning"
+  },
+  "KH80_001": {
+    "en": "Bachelor's Programme in Agricultural Sciences",
+    "fi": "Maataloustieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i lantbruksvetenskaper"
+  },
+  "820199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "720101": {
+    "en": "Doctorate of Social Sciences",
+    "fi": "Valtiotieteiden tohtorin opinnot",
+    "sv": "Studier för politices doktorsexamen"
+  },
+  "820031": {
+    "en": "Food Economics",
+    "fi": "Elintarvike-ekonomia",
+    "sv": "Livsmedelsekonomi"
+  },
+  "720024": {
+    "en": "Political Science",
+    "fi": "Valtio-oppi",
+    "sv": "Statslära"
+  },
+  "520094": {
+    "en": "Qualification Education for Institutelevel Pharmacists",
+    "fi": "Opistoasteisen farmaseutin pätevöitymiskoulutus",
+    "sv": "Behörighetsutbildning för farmaceuter på institutnivå"
+  },
+  "320018": {
+    "en": "Degree Programme in Postgraduate Specialization in Medicine, 5 Years",
+    "fi": "Erikoislääkärikoulutuksen koulutusohjelma, 5v",
+    "sv": "Utbildningsprogrammet för specialläkarutbildningen, 5 årig"
+  },
+  "KH40_003": {
+    "en": "Bachelor's Programme in Languages",
+    "fi": "Kielten kandiohjelma",
+    "sv": "Kandidatprogrammet i språk"
+  },
+  "320011": {
+    "en": "Degree Programme in Medicine (In Swedish)",
+    "fi": "Lääketieteen koulutusohjelma (ruotsinkielinen)",
+    "sv": "Utbildningsprogammet för medicin (svenskspråkig)"
+  },
+  "MH80_006": {
+    "en": "Master 's Programme in Food Economy and Consumption",
+    "fi": "Elintarviketalouden ja kulutuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i livsmedelsekonomi och konsumtion"
+  },
+  "T921102": {
+    "en": "Doctoral programme in clinical research",
+    "fi": "Kliininen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i klinisk forskning"
+  },
+  "420103": {
+    "en": "Doctorate of Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "V510015": {
+    "en": "Geography",
+    "fi": "Maantiede",
+    "sv": "Geografi"
+  },
+  "620000": {
+    "en": "Not Enrolled in the Degree Programme",
+    "fi": "Ei opiskele koulutusohjelmassa",
+    "sv": "Studerar icke i utbildningsprogrammet"
+  },
+  "420147": {
+    "en": "Gender Studies",
+    "fi": "Sukupuolentutkimus",
+    "sv": "Genusforskning"
+  },
+  "520106": {
+    "en": "Licentiate of Agriculture and Forestry",
+    "fi": "Maatalous-metsätieteiden lisensiaatin opinnot",
+    "sv": "Studier för agronomie- och forstlicentiatexamen"
+  },
+  "420074": {
+    "en": "Psychology",
+    "fi": "Psykologia",
+    "sv": "Psykologi"
+  },
+  "720198": {
+    "en": "Additional Studies (Social Work)",
+    "fi": "Alempaa korkeakoulututkintoa täydentävät opinnot (Sosionomi)",
+    "sv": "Studier som komplementerar lägre examen (Socionom)"
+  },
+  "420137": {
+    "en": "Translation and Interpretation of Russian",
+    "fi": "Venäjän kääntäminen ja tulkkaus (Aio)",
+    "sv": "Översättning och tolkning i ryska (Ämneslärare)"
+  },
+  "KH70_003": {
+    "en": "Bachelor's Programme in Social Research",
+    "fi": "Sosiaalitieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i sociala vetenskaper"
+  },
+  "V110006": {
+    "en": "Study of Religions",
+    "fi": "Uskontotiede",
+    "sv": "Religionsvetenskap"
+  },
+  "320002": {
+    "en": "Degree Programme in Dentistry",
+    "fi": "Hammaslääketieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för odontologi"
+  },
+  "820025": {
+    "en": "Master's Degree Programme in Food Sciences (MScFood)",
+    "fi": "Master's Degree Programme in Food Sciences (MScFood)",
+    "sv": "Master's Degree Programme in Food Sciences (MScFood)"
+  },
+  "KOULOHJ-maisteri": {
+    "en": "Unknown Degree Programme, Bachelor's and Master's degree",
+    "fi": "Tuntematon koulutusohjelma, alempi ja ylempi korkeakoulututkinto",
+    "sv": "Okänd utbildningsprogrammet, lägre och högre högskoleexamen"
+  },
+  "320102": {
+    "en": "Studies for the Degree of Doctorate in Health Care",
+    "fi": "Terveydenhuollon tohtorin tutkinnon opinnot",
+    "sv": "Studier för doktorsexamen i hälsovård"
+  },
+  "420026": {
+    "en": "General History (Teaching Language Swedish)",
+    "fi": "Yleinen historia (ruotsinkielinen)",
+    "sv": "Allmän historia (svenskspråkig undervisning)"
+  },
+  "320012": {
+    "en": "Other Medical Sciences",
+    "fi": "Other Medical Sciences",
+    "sv": "Other Medical Sciences"
+  },
+  "620099": {
+    "en": "Master's Degree Programme in Intercultural Encounters",
+    "fi": "Master's Degree Programme in Intercultural Encounters",
+    "sv": "Master's Degree Programme in Intercultural Encounters"
+  },
+  "520041": {
+    "en": "Degree Programme in Chemistry",
+    "fi": "Kemian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för kemi"
+  },
+  "920199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "420031": {
+    "en": "General History (Teachong Language Swedish)",
+    "fi": "Yleinen historia, ruotsinkielinen (Aio)",
+    "sv": "Allmän historia, svenskspråkig undervisning (Ämnelärare)"
+  },
+  "420081": {
+    "en": "English Translation",
+    "fi": "Englannin kääntäminen",
+    "sv": "Engelsk översättning"
+  },
+  "V710008": {
+    "en": "Social Phsychology",
+    "fi": "Sosiaalipsykologia",
+    "sv": "Socialpsykologi"
+  },
+  "420166": {
+    "en": "Degree Programme on Translation Studies and Multilingual Communication",
+    "fi": "Kääntämisen ja monikielisen viestinnän koulutusohjelma",
+    "sv": "Utbildningsprogrammet för översättning och flerspråkig kommunikation"
+  },
+  "420066": {
+    "en": "Russian Language and Literature (Russian as Foreign Language)",
+    "fi": "Venäjän kieli ja kirjallisuus (venäjä vieraana kielenä)",
+    "sv": "Ryska språket och litteraturen (ryska som främmande språk)"
+  },
+  "MH30_001": {
+    "en": "Degree Programme in Medicine",
+    "fi": "Lääketieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet i medicin"
+  },
+  "920011": {
+    "en": "Specialist's Degree Programmes in Veterinary",
+    "fi": "Erikoiseläinlääkärin koulutus",
+    "sv": "Specialveterinärutbildning"
+  },
+  "720019": {
+    "en": "Sociology",
+    "fi": "Sosiologia",
+    "sv": "Sociologi"
+  },
+  "420025": {
+    "en": "General History",
+    "fi": "Yleinen historia",
+    "sv": "Allmän historia"
+  },
+  "620025": {
+    "en": "Experimental Degree Programme in Textile Handicrafts",
+    "fi": "Käsityöalan kokeilukoulutusohjelma",
+    "sv": "Käsityöalan kokeilukoulutusohjelma"
+  },
+  "320033": {
+    "en": "International Programmes, Master of Science Orthodontics",
+    "fi": "Kansainväliset ohjelmat, Master of Science Orthodontics",
+    "sv": "Internationella program, Master of Science Orthodontics"
+  },
+  "420134": {
+    "en": "Finnish Language and Culture",
+    "fi": "Suomen kieli ja kulttuuri (Aio)",
+    "sv": "Finska språket och kulturen (Ämneslärare)"
+  },
+  "420136": {
+    "en": "Translation and Interpretation of Swedish",
+    "fi": "Ruotsin kääntäminen ja tulkkaus (Aio)",
+    "sv": "Översättning och tolkning i svenska (Ämneslärare)"
+  },
+  "T921101": {
+    "en": "Doctoral Programme in Biomedicine",
+    "fi": "Biolääketieteellinen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i biomedicin"
+  },
+  "7200100": {
+    "en": "European Master in Higher Education (HEEM)",
+    "fi": "European Master in Higher Education (HEEM)",
+    "sv": "European Master in Higher Education (HEEM)"
+  },
+  "T923102": {
+    "en": "Doctoral Programme in Geosciences",
+    "fi": "Geotieteiden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i geovetenskap"
+  },
+  "420141": {
+    "en": "General Linguistics",
+    "fi": "Yleinen kielitiede (Aio)",
+    "sv": "Allmän språkvetenskap (Ämnäslärare)"
+  },
+  "420063": {
+    "en": "Romance Philology",
+    "fi": "Romaaninen filologia",
+    "sv": "Romansk filologi"
+  },
+  "820021": {
+    "en": "The Degree Programme in Environmental Sciences",
+    "fi": "Ympäristönhoidon koulutusohjelma",
+    "sv": "Utbildningsprogrammet för miljövård"
+  },
+  "V610002": {
+    "en": "Basic Studies in Class Teacher Education",
+    "fi": "Luokanopettajan peruskoulutus",
+    "sv": "Klasslärares grundutbildning"
+  },
+  "720099": {
+    "en": "Master's Degree Programme in Intercultural Encounters, Social Psychology",
+    "fi": "Kulttuurienvälisen vuorovaikutuksen maisteriohjelma, sosiaalipsykologia",
+    "sv": "Magisterprogrammet för kulturöverskridande kommunikation, socialpsykologi"
+  },
+  "520197": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "720031": {
+    "en": "Economic and Social History",
+    "fi": "Talous- ja sosiaalihistoria",
+    "sv": "Ekonomisk och social historia"
+  },
+  "420037": {
+    "en": "South-Asian and Indo-European Studies",
+    "fi": "Etelä-Aasian tutkimus ja indoeuropeistiikka",
+    "sv": "Sydasienforskning och indoeuropeistik"
+  },
+  "420051": {
+    "en": "Finnish Language",
+    "fi": "Suomen kieli (Aio)",
+    "sv": "Finska språket (Ämneslärare)"
+  },
+  "KH57_001": {
+    "en": "Bachelor's Programme in Biology",
+    "fi": "Biologian kandiohjelma",
+    "sv": "Kandidatsprogrammet i biologi"
+  },
+  "420420": {
+    "en": "Degree Programme in Psychology",
+    "fi": "Psykologian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för psykologi"
+  },
+  "520081": {
+    "en": "Master's Degree Programme in European Studies",
+    "fi": "Master's Degree Programme in European Studies",
+    "sv": "Master's Degree Programme in European Studies"
+  },
+  "420114": {
+    "en": "German Studies",
+    "fi": "Saksankielisten maiden tutkimus",
+    "sv": "Forskning rörande tyskspråkiga länder"
+  },
+  "820013": {
+    "en": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Economy",
+    "fi": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Economy",
+    "sv": "Master's Degree Programme in Forest Sciences and Business (MScFB),Forest Economy"
+  },
+  "620009": {
+    "en": "Degree Programme in Class Teacher Education",
+    "fi": "Luokanopettajan koulutus",
+    "sv": "Utbildning för klasslärare"
+  },
+  "MH70_007": {
+    "en": "Master's Programme in Social Sciences",
+    "fi": "Yhteiskuntatieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i samhällsvetenskaper"
+  },
+  "720110": {
+    "en": "Master's Degree Programme in Intercultural Encounters, Social Psychology",
+    "fi": "Master's Degree Programme in Intercultural Encounters, Social Psychology",
+    "sv": "Master's Degree Programme in Intercultural Encounters, Social Psychology"
+  },
+  "420124": {
+    "en": "Italian Philology",
+    "fi": "Italialainen filologia (Aio)",
+    "sv": "Italiensk filologi (Ämneslärare)"
+  },
+  "520070": {
+    "en": "Degree Programme in Mathematics",
+    "fi": "Matematiikan koulutusohjelma",
+    "sv": "Utbildningsprogrammet för matematik"
+  },
+  "620005": {
+    "en": "Extended Studies in Education for Subject Teachers",
+    "fi": "Erilliset opettajan pedagogiset opinnot",
+    "sv": "Fristående pedagogiska studier för lärare"
+  },
+  "420080": {
+    "en": "Film and Tv Research",
+    "fi": "Elokuva- ja televisiotutkimus",
+    "sv": "Film- och tv-forskning"
+  },
+  "620098": {
+    "en": "Master's Degree Programme in Language, Speech and Translation Technology (MKPK)",
+    "fi": "Kieli-, puhe- ja käännösteknologian maisteriohjelma (MKPK)",
+    "sv": "Magisterprogram i språk-, tal- och översättningsteknologi (MKPK)"
+  },
+  "620013": {
+    "en": "Education (General and Adult Education)",
+    "fi": "Kasvatustieteet (yleinen ja aikuiskasvatustiede)",
+    "sv": "Pedagogik (Det allmänna och vuxenpedagogik)"
+  },
+  "620030": {
+    "en": "Early Education Teacher",
+    "fi": "Varhaiskasvatuksen opettajan koulutus",
+    "sv": "Utbildningen för lärare inom småbarnspedagogik"
+  },
+  "V810003": {
+    "en": "Household Economics and Nutrition",
+    "fi": "Kotitalous- ja ravitsemusopinnot",
+    "sv": "Studier i huslig ekonomi och läroämnesgruppen kost och näring"
+  },
+  "620101": {
+    "en": "Doctorate of Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "420416": {
+    "en": "Degree Programme in Fine Arts Studies",
+    "fi": "Taiteiden tutkimuksen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för konstforskning"
+  },
+  "820100": {
+    "en": "Licentiate of Agriculture and Forestry",
+    "fi": "Maatalous-metsätieteiden lisensiaatin tutkinnon opinnot",
+    "sv": "Studier för agronomie- och forstlicentiatexamen"
+  },
+  "320026": {
+    "en": "Psychoanalyst-psychotherapist-psychotherapist trainers training program",
+    "fi": "Psykoanalyytikko-psykoterapeutti sekä psykoterapeuttikouluttajakoulutus",
+    "sv": "Psykoanalytiker-psykoterapeut-psykoterapeututbildareutbildning"
+  },
+  "420099": {
+    "en": "Egyptology",
+    "fi": "Egyptologia",
+    "sv": "Egyptologi"
+  },
+  "820030": {
+    "en": "Food Economics and Entrepreneurship",
+    "fi": "Elintarvike-ekonomia ja yrittäjyys",
+    "sv": "Livsmedelsekonomi och företagande"
+  },
+  "420077": {
+    "en": "Theoretical Philosophy (Teacher line)",
+    "fi": "Teoreettinen filosofia (Aio)",
+    "sv": "Teoretisk filosofi (Ämneslärare)"
+  },
+  "520052": {
+    "en": "The Degree Programme in Fishery Science and Limnology",
+    "fi": "Limnologian ja kalataloustieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för fiskerivetenskap och limnologi"
+  },
+  "420020": {
+    "en": "Theoretical Philosophy",
+    "fi": "Teoreettinen filosofia",
+    "sv": "Teoretisk filosofi"
+  },
+  "420029": {
+    "en": "Finnish and Scandinavian History (Teachin Language Swedish)",
+    "fi": "Suomen ja Skandinavian historia (ruotsinkielinen opetus, (Aio)",
+    "sv": "Finlands och Skandinaviens historia (svenskspråkig underivisning, ämneslärare)"
+  },
+  "420033": {
+    "en": "Latin Language and Roman Literature",
+    "fi": "Latinan kieli ja Rooman kirjallisuus",
+    "sv": "Latin och romersk litteratur"
+  },
+  "520054": {
+    "en": "The Degree Programme in Environmental Sciences",
+    "fi": "Ympäristönhoidon koulutusohjelma",
+    "sv": "Utbildningsprogrammet för miljövård"
+  },
+  "V210004": {
+    "en": "Students Granted Extension Time for Master's or Licentiate Degree in Law",
+    "fi": "Lisäaikaa oikeustieteen kandidaatin tai lisensiaatin tutkintoon saaneet",
+    "sv": "Studerande som beviljats tilläggsfrist för avläggande av juris kandidatexamen eller licentiatexamen"
+  },
+  "V410005": {
+    "en": "Finnish and Related Languages",
+    "fi": "Suomen kieli ja sukukielet",
+    "sv": "Finska språket och besläktade språk"
+  },
+  "820035": {
+    "en": "Animal Science",
+    "fi": "Kotieläintiede",
+    "sv": "Husdjursvetenskap"
+  },
+  "V410003": {
+    "en": "Nordic Languages and Swedish Literature",
+    "fi": "Pohjoismaiset kielet ja ruotsalainen kirjallisuus",
+    "sv": "Nordiska språk och svensk litteratur"
+  },
+  "820012": {
+    "en": "The Degree Programme in Forest Ecology and Forest Resource Management",
+    "fi": "Metsäekologian ja metsävarojen käytön koulutusohjelma",
+    "sv": "Utbildningsprogrammet för skogsekologi och utnyttjandet av skogstillgångar"
+  },
+  "620031": {
+    "en": "Master's Degree Programme in Early Education",
+    "fi": "Varhaiskasvatuksen maisteriohjelma",
+    "sv": "Magisterprogrammet för förskolepedagogik"
+  },
+  "520023": {
+    "en": "Degree Programme in Environmental Sciences",
+    "fi": "Ympäristötieteiden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för miljövetenskaper"
+  },
+  "420414": {
+    "en": "Degree Programme in Finnish and Related Languages, General Line",
+    "fi": "Suomen kielen ja sen sukukielten koulutusohjelma, yleinen suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för finska språket och därmed besläktade språk, det allmänna inriktningsalternativet"
+  },
+  "420047": {
+    "en": "Baltic-Finnic Languages",
+    "fi": "Itämerensuomalaiset kielet",
+    "sv": "Östersjöfinska språk"
+  },
+  "620012": {
+    "en": "Education",
+    "fi": "Kasvatustiede",
+    "sv": "Pedagogik"
+  },
+  "520900": {
+    "en": "Further Education for Chemistry Teacher",
+    "fi": "Kemian opettajien täydennyskoulutus",
+    "sv": "Fortbildning för lärare i kemi"
+  },
+  "420085": {
+    "en": "Linguistic Theory and Translation Technology",
+    "fi": "Kieliteoria ja käännösteknologia",
+    "sv": "Språkteori och översättningsteknologi"
+  },
+  "420196": {
+    "en": "Master's Degree Programme in Art Theory, Criticism and Management",
+    "fi": "Master's Degree Programme in Art Theory, Criticism and Management",
+    "sv": "Master's Degree Programme in Art Theory, Criticism and Management"
+  },
+  "T922104": {
+    "en": "Doctoral programme in sustainable use of renewable natural resources",
+    "fi": "Uusiutuvien luonnonvarojen kestävän käytön tohtoriohjelma",
+    "sv": "Doktorandprogrammet i hållbart utnyttjande av förnybara naturresurser"
+  },
+  "620100": {
+    "en": "Licentiate in Education",
+    "fi": "Kasvatustieteen lisensiaatin opinnot",
+    "sv": "Studier för pedagogie licentiatexamen"
+  },
+  "820038": {
+    "en": "Agricultural and Environmental Engineering",
+    "fi": "Maatalous- ja ympäristöteknologia",
+    "sv": "Lantbruks- och miljöteknologi"
+  },
+  "420065": {
+    "en": "Finnnish Language (as Second Domestic Language)",
+    "fi": "Suomen kieli (toinen kotimainen kieli)",
+    "sv": "Finska språket (andra inhemska språket)"
+  },
+  "V510002": {
+    "en": "Computer Science",
+    "fi": "Tietojenkäsittelytiede",
+    "sv": "Datalogi"
+  },
+  "420076": {
+    "en": "Philosophy (Teaching Language Swedish, Teacher Line)",
+    "fi": "Filosofia (ruotsinkielinen opetus, Aio)",
+    "sv": "Filosofi (svenskspråkig underivisning, ämneslärare)"
+  },
+  "820028": {
+    "en": "The Degree Programme in Food Sciences",
+    "fi": "Elintarvikealan koulutusohjelma",
+    "sv": "Utbildningsprogrammet för livsmedelsvetenskaper"
+  },
+  "V110005": {
+    "en": "Practical Theology",
+    "fi": "Käytännöllinen teologia",
+    "sv": "Praktisk teologi"
+  },
+  "KH40_004": {
+    "en": "Bachelor's Programme in the Languages and Literatures of Finland",
+    "fi": "Kotimaisten kielten ja kirjallisuuksien kandiohjelma",
+    "sv": "Kandidatprogrammet i finskugriska och nordiska språk och litteraturer"
+  },
+  "V410014": {
+    "en": "Archaeology and Ethnology",
+    "fi": "Arkeologia ja kansatiede",
+    "sv": "Arkeologi och etnografi"
+  },
+  "KH40_005": {
+    "en": "Bachelor's Programme in Cultural Studies",
+    "fi": "Kulttuurien tutkimuksen kandiohjelma",
+    "sv": "Kandidatprogrammet i kulturforskning"
+  },
+  "720017": {
+    "en": "Social and Public Policy",
+    "fi": "Yhteiskuntapolitiikka",
+    "sv": "Samhällspolitik"
+  },
+  "620015": {
+    "en": "Education/Adult Education (Taught in Swedish)",
+    "fi": "Utbildning för pedagogik (allmän och vuxenpedagogik)",
+    "sv": "Utbildning för pedagogik/vuxenpedagogik (svenskspråkig)"
+  },
+  "320008": {
+    "en": "Specialist's Degree Programmes in Medicine",
+    "fi": "Erikoislääkärikoulutus (6v)",
+    "sv": "Specialläkarutbildning (6år)"
+  },
+  "520071": {
+    "en": "Degree Programme in Statistics",
+    "fi": "Tilastotieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för statistik"
+  },
+  "220100": {
+    "en": "Doctoral Programme in Law",
+    "fi": "Oikeustieteen tohtorin opinnot",
+    "sv": "Studier för juris doktorsexamen"
+  },
+  "T920109": {
+    "en": "Doctoral Programme in School, Education, Society and Culture",
+    "fi": "Koulun, kasvatuksen, yhteiskunnan ja kulttuurin tohtoriohjelma",
+    "sv": "Doktorandprogrammet i skola, fostran, samhälle och kultur"
+  },
+  "220007": {
+    "en": "Degree Programme in Master of Law, Helsinki",
+    "fi": "Oikeustieteen maisterin koulutusohjelma, Helsinki",
+    "sv": "Utbildningsprogrammet för studier för jurismagister, Helsingfors"
+  },
+  "420123": {
+    "en": "History",
+    "fi": "Historia-aineet, suomenkielinen (Aio)",
+    "sv": "Historia-ämnen, finskspråkig (Ämneslärare)"
+  },
+  "820017": {
+    "en": "The Degree Programme in Household Sciences",
+    "fi": "Kotitalousalan koulutusohjelma",
+    "sv": "Utbildningsprogrammet för hushållsvetenskaper"
+  },
+  "320301": {
+    "en": "Degree Programme in Health Care",
+    "fi": "Terveydenhuollon koulutusohjelma",
+    "sv": "Utbildningsprogrammet för hälsovård"
+  },
+  "V410016": {
+    "en": "Philosophy",
+    "fi": "Filosofia",
+    "sv": "Filosofi"
+  },
+  "820016": {
+    "en": "Forest Economics and Marketing",
+    "fi": "Metsäekonomia ja markkinointi",
+    "sv": "Skogsekonomi och marknadsföring"
+  },
+  "V810001": {
+    "en": "Agriculture",
+    "fi": "Maatalousopinnot",
+    "sv": "Agrikultura studier"
+  },
+  "V510007": {
+    "en": "Astronomy",
+    "fi": "Tähtitiede",
+    "sv": "Astronomi"
+  },
+  "320032": {
+    "en": "International Programmes, Master of Science in Restorative Dentistry",
+    "fi": "Kansainväliset ohjelmat, Master of Science in Restorative Dentistry",
+    "sv": "Internationella program, Master of Science in Restorative Dentistry"
+  },
+  "720084": {
+    "en": "Master's Programme for Urban research",
+    "fi": "Kaupunkitutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet för stadsforskning"
+  },
+  "720028": {
+    "en": "Communication",
+    "fi": "Viestintä",
+    "sv": "Kommunikationslära"
+  },
+  "820050": {
+    "en": "Biotechnology",
+    "fi": "Biotekniikka",
+    "sv": "Bioteknik"
+  },
+  "420128": {
+    "en": "History (Swedish)",
+    "fi": "Historia, ruotsinkielinen (Aio)",
+    "sv": "Historia, svenskspråkig (Ämneslärare)"
+  },
+  "V710009": {
+    "en": "Economic and Social History",
+    "fi": "Talous- ja sosiaalihistoria",
+    "sv": "Ekonomisk och social historia"
+  },
+  "520199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "V510008": {
+    "en": "Chemistry",
+    "fi": "Kemia",
+    "sv": "Kemi"
+  },
+  "620010": {
+    "en": "Degree Programme in Home Economics Teacher Education",
+    "fi": "Kotitalousopettajan koulutus",
+    "sv": "Utbildning för lärare i huslig ekonomi"
+  },
+  "KH50_001": {
+    "en": "Bachelor's Programme in Mathematical Sciences",
+    "fi": "Matemaattisten tieteiden kandiohjelma",
+    "sv": "Kandidatsprogrammet i matematiska vetenskaper"
+  },
+  "420052": {
+    "en": "Comparative Literature",
+    "fi": "Yleinen kirjallisuustiede (Aio)",
+    "sv": "Allmän litteraturvetenskap (Ämneslärare)"
+  },
+  "V610001": {
+    "en": "Education",
+    "fi": "Kasvatustiede",
+    "sv": "Pedagogik"
+  },
+  "MH80_008": {
+    "en": "Erasmus-Mundus Master's Programme in Plant Breeding (EMPLANT)",
+    "fi": "Erasmus-Mundus Master's Programme in Plant Breeding (EMPLANT)",
+    "sv": "Erasmus-Mundus Master's Programme in Plant Breeding (EMPLANT)"
+  },
+  "V510010": {
+    "en": "Geology and Mineralogy; Geology and Paleontology",
+    "fi": "Geologia ja mineralogia sekä geologia ja paleontologia",
+    "sv": "Geologi och mineralogi samt geologi och paleontologi"
+  },
+  "T920101": {
+    "en": "Doctoral Programme in Theology and Religious Studies",
+    "fi": "Teologian ja uskonnontutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i teologi och religionsforskning"
+  },
+  "V410013": {
+    "en": "Russian Language and Literature, Slavonic Philology",
+    "fi": "Venäjän kieli ja kirjallisuus sekä slaavilainen filologia",
+    "sv": "Ryska språket och litteraturen samt slavisk filologi"
+  },
+  "T922103": {
+    "en": "Doctoral Programme in Interdisciplinary Environmental Sciences",
+    "fi": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i tvärvetenskaplig miljöforskning"
+  },
+  "420059": {
+    "en": "English Philology",
+    "fi": "Englantilainen filologia",
+    "sv": "Engelsk filologi"
+  },
+  "120019": {
+    "en": "Master of Theology with specialisation in the Religious Roots of Europe",
+    "fi": "Master of Theology with specialisation in the Religious Roots of Europe",
+    "sv": "Master of Theology with specialisation in the Religious Roots of Europe"
+  },
+  "V110003": {
+    "en": "Church History",
+    "fi": "Kirkkohistoria",
+    "sv": "Kyrkohistoria"
+  },
+  "320199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "820022": {
+    "en": "Master's Degree Programme (CBU) in Forestry and Environmental Engineering",
+    "fi": "Master's Degree Programme (CBU) in Forestry and Environmental Engineering",
+    "sv": "Master's Degree Programme (CBU) in Forestry and Environmental Engineering"
+  },
+  "KH80_004": {
+    "en": "Bachelor's Programme in Enviromental and Food Economics",
+    "fi": "Ympäristö- ja elintarviketalouden kandiohjelma",
+    "sv": "Kandidatprogrammet i miljö- och livsmedelsekonomi"
+  },
+  "KH50_003": {
+    "en": "Bachelor's Programme in Chemistry",
+    "fi": "Kemian kandiohjelma",
+    "sv": "Kandidatprogrammet i kemi"
+  },
+  "V410015": {
+    "en": "Phonetics, Musicology and General Linguistics",
+    "fi": "Fonetiikka, musiikkitiede ja yleinen kielitiede",
+    "sv": "Fonetik, musikvetenskap och allmän språkvetenskap"
+  },
+  "420067": {
+    "en": "General Linguistics",
+    "fi": "Yleinen kielitiede",
+    "sv": "Allmän språkvetenskap"
+  },
+  "V610007": {
+    "en": "Basic Education for Teachers of Textile Handicrafts",
+    "fi": "Käsityönopettajan peruskoulutus",
+    "sv": "Grundutbildning för handarbetslärare"
+  },
+  "420199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "420419": {
+    "en": "Degree Programme in Foreign Languages, Foreign Language Teacher Line",
+    "fi": "Vieraiden kielten koulutusohjelma, aineenopettajan suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för främmande språk, inriktningsalternativet för ämneslärare"
+  },
+  "820000": {
+    "en": "Not Enrolled in the Degree Programme",
+    "fi": "Ei opiskele koulutusohjelmassa",
+    "sv": "Studerar icke i utbildningsprogrammet"
+  },
+  "720090": {
+    "en": "Master's Degree Programme in Practical Philosophy",
+    "fi": "Master's Degree Programme in Practical Philosophy",
+    "sv": "Master's Degree Programme in Practical Philosophy"
+  },
+  "420133": {
+    "en": "Cognitive Science",
+    "fi": "Kognitiotiede (Aio)",
+    "sv": "Kognitionsvetenskap (Ämnäslarare)"
+  },
+  "120013": {
+    "en": "Degree Programme in Religion Teacher Education",
+    "fi": "Koulun uskonnonopettajan tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för skolornas religionslärare"
+  },
+  "820041": {
+    "en": "Forest Ecology",
+    "fi": "Metsäekologia",
+    "sv": "Skogsekologi"
+  },
+  "320103": {
+    "en": "Doctoral Programme in Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "720030": {
+    "en": "Political History",
+    "fi": "Poliittinen historia",
+    "sv": "Politisk historia"
+  },
+  "KH55_001": {
+    "en": "Bachelor's Programme in Pharmacy",
+    "fi": "Farmaseutin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för farmaceutexamen"
+  },
+  "420117": {
+    "en": "Russian and East European Studies",
+    "fi": "Venäjän ja Itä-Euroopan tutkimus",
+    "sv": "Ryssland- och Östeuropastudier"
+  },
+  "420053": {
+    "en": "Finnish Literature",
+    "fi": "Kotimainen kirjallisuus",
+    "sv": "Inhemsk litteratur"
+  },
+  "120102": {
+    "en": "Doctoral Programme in Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "420050": {
+    "en": "Finnish Literature",
+    "fi": "Kotimainen kirjallisuus (Aio)",
+    "sv": "Inhemsk litteratur (Ämneslärare)"
+  },
+  "KH70_004": {
+    "en": "Bachelor's Programme in Economics",
+    "fi": "Taloustieteen kandiohjelma",
+    "sv": "Kandidatprogrammet i ekonomi"
+  },
+  "420034": {
+    "en": "Latin Language and Roman Literature",
+    "fi": "Latinan kieli ja Rooman kirjallisuus (Aio)",
+    "sv": "Latin och romersk litteratur (Ämneslärare)"
+  },
+  "820018": {
+    "en": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Resource Science and Technology",
+    "fi": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Resource Science and Technology",
+    "sv": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Resource Science and Technology"
+  },
+  "V710010": {
+    "en": "Communication",
+    "fi": "Tiedotusoppi",
+    "sv": "Kommunikationslära"
+  },
+  "220199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "KH40_001": {
+    "en": "Bachelor's Programme in Philosophy",
+    "fi": "Filosofian kandiohjelma",
+    "sv": "Kandidatprogrammet i filosofi"
+  },
+  "V110002": {
+    "en": "Exegetics",
+    "fi": "Eksegetiikka",
+    "sv": "Exegetik"
+  },
+  "720029": {
+    "en": "Social Science History",
+    "fi": "Yhteiskuntahistoria",
+    "sv": "Samhällshistoria"
+  },
+  "820026": {
+    "en": "Master's Degree Programme in Environment and Natural Resources (MENVI)",
+    "fi": "Master's Degree Programme in Environment and Natural Resources (MENVI)",
+    "sv": "Master's Degree Programme in Environment and Natural Resources (MENVI)"
+  },
+  "520095": {
+    "en": "Master's Degree Programme (CBU) in Information and Communication Technology",
+    "fi": "Master's Degree Programme (CBU) in Information and Communication Technology",
+    "sv": "Master's Degree Programme (CBU) in Information and Communication Technology"
+  },
+  "620107": {
+    "en": "Children psychoanalytic psychotherapist program",
+    "fi": "Lasten psykoterapeuttikoulutusohjelma, Psykoanalyyttinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning psykoanalytisk terapi med barn"
+  },
+  "V610004": {
+    "en": "Specialized Studies for Class Teacher",
+    "fi": "Luokanopettajan erikoistumisopinnot",
+    "sv": "Specialiseringsstudier för klasslärare"
+  },
+  "KH50_002": {
+    "en": "Bachelor's Programme in Physical Sciences",
+    "fi": "Fysikaalisten tieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i fysikaliska vetenskaper"
+  },
+  "520089": {
+    "en": "Master's Degree Programme in Advanced Spectroscopy in Chemistry",
+    "fi": "Master's Degree Programme in Advanced Spectroscopy in Chemistry",
+    "sv": "Master's Degree Programme in Advanced Spectroscopy in Chemistry"
+  },
+  "420129": {
+    "en": "Art History",
+    "fi": "Taidehistoria (Aio)",
+    "sv": "Konsthistoria (Ämneslärare)"
+  },
+  "MH10_001": {
+    "en": "Master 's Programme in Theology and Religious Studies",
+    "fi": "Teologian ja uskonnontutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i teologi och religionsforskning"
+  },
+  "520083": {
+    "en": "Specialist training in hospital pharmacy",
+    "fi": "Sairaala- ja terveyskeskusfarmasian erikoistumiskoulutus",
+    "sv": "Specialiseringsutbildning i sjukhus- och hälsocentralsfarmaci (OM 568/2005)"
+  },
+  "420194": {
+    "en": "Master's Degree Programme in Semiotics",
+    "fi": "Master's Degree Programme in Semiotics",
+    "sv": "Master's Degree Programme in Semiotics"
+  },
+  "KH70_002": {
+    "en": "Bachelor's Programme in Society and Change",
+    "fi": "Yhteiskunnallisen muutoksen kandiohjelma",
+    "sv": "Kandidatsprogrammet i samhälle förändrig"
+  },
+  "V510004": {
+    "en": "Theoretical Physics",
+    "fi": "Teoreettinen fysiikka",
+    "sv": "Teoretisk fysik"
+  },
+  "MH40_008": {
+    "en": "Master's Programme in Scandinavian Languages and Literatures",
+    "fi": "Pohjoismaisten kielten ja kirjallisuuksien maisteriohjelma",
+    "sv": "Magisterprogrammet i nordiska språk och litteraturer"
+  },
+  "924101": {
+    "en": "Finnish National Master's Programme in Russian and East-European Studies",
+    "fi": "Venäjän ja Itä-Euroopan tutkimuksen maisterikoulu",
+    "sv": "null"
+  },
+  "420146": {
+    "en": "Master's Degree Programme in Language, Speech and Translation Technology",
+    "fi": "Kieli-, puhe- ja käännösteknologian maisteriohjelma",
+    "sv": "Magisterprogram i språk-, tal- och översättningsteknologi"
+  },
+  "520131": {
+    "en": "Master's Programme for Urban research",
+    "fi": "Kaupunkitutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet för stadsforskning"
+  },
+  "MH40_007": {
+    "en": "Master's Programme in Finnish and Finno-Ugrian Languages and Cultures",
+    "fi": "Suomen kielen ja suomalais-ugrilaisten kielten ja kulttuurien maisteriohjelma",
+    "sv": "Magisterprogrammet i finska och finskugriska språk och kulturer"
+  },
+  "420064": {
+    "en": "Slavonic Philology",
+    "fi": "Slaavilainen filologia",
+    "sv": "Slavisk filologi"
+  },
+  "420148": {
+    "en": "Altaic Studies",
+    "fi": "Altaistiikka",
+    "sv": "Altaistik"
+  },
+  "620020": {
+    "en": "Adult Education",
+    "fi": "Aikuiskasvatustiede",
+    "sv": "Vuxenutbildning"
+  },
+  "720000": {
+    "en": "Not Enrolled in the Degree Programme",
+    "fi": "Ei opiskele koulutusohjelmassa",
+    "sv": "Studerar icke i utbildningsrummet"
+  },
+  "420121": {
+    "en": "History (Swedish)",
+    "fi": "Historia-aineet (ruotsinkielinen opetus)",
+    "sv": "Historia-ämnen (svenskspråkig underivisning)"
+  },
+  "620106": {
+    "en": "Children and adolescents cognitive psychotherapist program",
+    "fi": "Nuorten ja lasten psykoterapeuttikoulutusohjelma, Kognitiivinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning kognitiv terapi med barn och ungdomar"
+  },
+  "520209": {
+    "en": "Master's Degree Programme in Multidisciplinary Studies on Urban Environmental Issues (MURE)",
+    "fi": "Master's Degree Programme in Multidisciplinary Studies on Urban Environmental Issues (MURE)",
+    "sv": "Master's Degree Programme in Multidisciplinary Studies on Urban Environmental Issues (MURE)"
+  },
+  "320101": {
+    "en": "Studies for the Doctorate Degree in Dentistry",
+    "fi": "Hammaslääketieteen tohtorin opinnot",
+    "sv": "Studier för odontologie doktorsexamen"
+  },
+  "V510009": {
+    "en": "Biochemistry",
+    "fi": "Biokemia",
+    "sv": "Biokemi"
+  },
+  "420062": {
+    "en": "Scandinavian Languages, Swedish as Second Domestic Language",
+    "fi": "Pohjoismaiset kielet, ruotsi toisena kotimaisena kielenä",
+    "sv": "Nordiska språk, svenska som andra inhemska språk"
+  },
+  "520085": {
+    "en": "Master's Degree Programme in Bayesian Statistics and Decision Analysis (EuroBayes)",
+    "fi": "Master's Degree Programme in Bayesian Statistics and Decision Analysis (EuroBayes)",
+    "sv": "Master's Degree Programme in Bayesian Statistics and Decision Analysis (EuroBayes)"
+  },
+  "820052": {
+    "en": "Transatlantic Master's Degree Program in Forest Resources (Atlantis)",
+    "fi": "Transatlantic Master's Degree Program in Forest Resources (Atlantis)",
+    "sv": "Transatlantic Master's Degree Program in Forest Resources (Atlantis)"
+  },
+  "820043": {
+    "en": "Forest Resource Science and Technology",
+    "fi": "Metsävaratiede ja -teknologia",
+    "sv": "Skogresursvetenskap och teknologi"
+  },
+  "420028": {
+    "en": "History of Finland and Nordic Countries",
+    "fi": "Suomen ja Pohjoismaiden historia (Aio)",
+    "sv": "Finlands och Nordens historia (Ämneslärare)"
+  },
+  "MH50_006": {
+    "en": "Master's Programme in Atmospheric Sciences",
+    "fi": "Ilmakehätieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i atmosfärsvetenskaper"
+  },
+  "420023": {
+    "en": "Finnish and Nordic History",
+    "fi": "Suomen ja Pohjoismaiden historia",
+    "sv": "Finlands och Nordens historia"
+  },
+  "420406": {
+    "en": "Degree Program in Classical Philology, General Line",
+    "fi": "Klassillisen filologian koulutusohjelma, yleinen suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för klassisk filologi, det allmänna inriktningsalternativet"
+  },
+  "620110": {
+    "en": "Master's Degree Programme in Intercultural Encounters",
+    "fi": "Master's Degree Programme in Intercultural Encounters",
+    "sv": "Master's Degree Programme in Intercultural Encounters"
+  },
+  "KH30_001": {
+    "en": "Bachelor's Programme in Psychology",
+    "fi": "Psykologian kandiohjelma",
+    "sv": "Kandidatprogrammet i psykologi"
+  },
+  "MH57_005": {
+    "en": "Master's Programme in Environmental Change and Global Sustainability",
+    "fi": "Ympäristömuutoksen ja globaalin kestävyyden maisteriohjelma",
+    "sv": "Magisterprogrammet i miljöförändringar och global hållbarhet"
+  },
+  "420048": {
+    "en": "Finno-Ugric Linguistics",
+    "fi": "Suomalais-ugrilainen kielentutkimus",
+    "sv": "Finsk-ugrisk språkvetenskap"
+  },
+  "720102": {
+    "en": "Doctoral Programme in Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "T923107": {
+    "en": "Doctoral Programme in Computer Science",
+    "fi": "Tietojenkäsittelytieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i datavetenskap"
+  },
+  "420035": {
+    "en": "Central and North-Asian Studies",
+    "fi": "Keski- ja Pohjois-Aasian tutkimus",
+    "sv": "Central- och Nordasienforskning"
+  },
+  "KH80_003": {
+    "en": "Bachelor's Programme in Food Sciences",
+    "fi": "Elintarviketieteiden kandiohjelma",
+    "sv": "Kandidatsprogrammet i livsmedelsvetenskaper"
+  },
+  "520087": {
+    "en": "Master's Degree Programme in Geoinformatics",
+    "fi": "Master's Degree Programme in Geoinformatics",
+    "sv": "Master's Degree Programme in Geoinformatics"
+  },
+  "KH40_002": {
+    "en": "Bachelor's Programme in Art Studies",
+    "fi": "Taiteiden tutkimuksen kandiohjelma",
+    "sv": "Kandidatprogrammet i konstforskning"
+  },
+  "V710007": {
+    "en": "Philosophy",
+    "fi": "Käytännöllinen filosofia",
+    "sv": "Praktisk filosofi"
+  },
+  "420041": {
+    "en": "Study of Religions",
+    "fi": "Uskontotiede",
+    "sv": "Religionsvetenskap"
+  },
+  "420119": {
+    "en": "Psychology",
+    "fi": "Psykologia (Aio)",
+    "sv": "Psykologi"
+  },
+  "620024": {
+    "en": "Mercantile Subjects Teacher Education",
+    "fi": "Kaupallisten aineiden opettajan koulutus",
+    "sv": "Utbildning av lärare i merkantila ämnen"
+  },
+  "120100": {
+    "en": "Licentiate of Theology",
+    "fi": "Teologian lisensiaatin opinnot",
+    "sv": "Studier för teologie licentiatexamen"
+  },
+  "T920106": {
+    "en": "Doctoral programme in Social Sciences",
+    "fi": "Sosiaalitieteiden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i socialvetenskap"
+  },
+  "620109": {
+    "en": "Adult cognitive psychotherapist training program",
+    "fi": "Aikuisten psykoterapeuttikoulutusohjelma, Kognitiivinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning kognitiv terapi med med vuxen"
+  },
+  "720091": {
+    "en": "Master's Degree Programme in Democracy and Global Transformations",
+    "fi": "Master's Degree Programme in Democracy and Global Transformations",
+    "sv": "Master's Degree Programme in Democracy and Global Transformations"
+  },
+  "420190": {
+    "en": "Aasia-Pacific Studies",
+    "fi": "Aasian ja Tyynenmeren alueen tutkimus",
+    "sv": "Asien- och Stillahavsstudier"
+  },
+  "T920107": {
+    "en": "Doctoral Programme in Political, Societal and Regional Changes",
+    "fi": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma",
+    "sv": "Doktorandprogrammet i politisk, samhällelig och regional förändring"
+  },
+  "320007": {
+    "en": "Degree Programme in College-Level Health Care Education",
+    "fi": "Terveydenhuollon opettajan koulutusohjelma",
+    "sv": "Utbildninsprogrammet för lärare i hälsovård"
+  },
+  "720013": {
+    "en": "Economics",
+    "fi": "Taloustiede",
+    "sv": "Ekonomi"
+  },
+  "520107": {
+    "en": "Doctorate of Agriculture and Forestry",
+    "fi": "Maatalous-metsätieteiden tohtorin opinnot",
+    "sv": "Studier för agronomie- och forstdoktorsexamen"
+  },
+  "V110007": {
+    "en": "General Theology",
+    "fi": "Yleinen teologia",
+    "sv": "Allmän teologi"
+  },
+  "620105": {
+    "en": "Adult cognitive analytic psychotherapist program",
+    "fi": "Aikuisten psykoterapeuttikoulutusohjelma, kognitiivis-analyyttinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning kognitiv-analytisk terapi med vuxen"
+  },
+  "420111": {
+    "en": "Portuguese Philology",
+    "fi": "Portugalilainen filologia",
+    "sv": "Portugisisk filologi"
+  },
+  "MH40_012": {
+    "en": "Master's Programme in Area and Cultural Studies",
+    "fi": "Alue- ja kulttuurintutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i region- och kulturstudier"
+  },
+  "V510014": {
+    "en": "General Microbiology",
+    "fi": "Yleinen mikrobiologia",
+    "sv": "Allmän mikrobiologi"
+  },
+  "420160": {
+    "en": "Finno-Ugric Languages and Cultures",
+    "fi": "Suomalais-ugrilaiset kielet ja kulttuurit",
+    "sv": "Finsk-ugriska språk och kulturer"
+  },
+  "520084": {
+    "en": "Master's Degree Programme in Modeling Molecules and Nanosystems",
+    "fi": "Master's Degree Programme in Modeling Molecules and Nanosystems",
+    "sv": "Master's Degree Programme in Modeling Molecules and Nanosystems"
+  },
+  "420098": {
+    "en": "Hungarian Language and Culture",
+    "fi": "Unkarin kieli ja kulttuuri",
+    "sv": "Ungerska språket och kulturen"
+  },
+  "V710005": {
+    "en": "Statistics",
+    "fi": "Tilastotiede",
+    "sv": "Statistik"
+  },
+  "320005": {
+    "en": "TRANSMED - Master's Degree Programme in Translational Medicine",
+    "fi": "TRANSMED - Master's Degree Programme in Translational Medicine",
+    "sv": "TRANSMED - Master's Degree Programme in Translational Medicine"
+  },
+  "420030": {
+    "en": "General History",
+    "fi": "Yleinen historia (Aio)",
+    "sv": "Allmän historia (Ämneslärare)"
+  },
+  "MH20_002": {
+    "en": "Master's Programme in International Business Law",
+    "fi": "Kansainvälisen liikejuridiikan maisteriohjelma (International Business Law)",
+    "sv": "Magisterprogrammet i internationell affärsjuridik"
+  },
+  "820014": {
+    "en": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Products Marketing",
+    "fi": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Products Marketing",
+    "sv": "Master's Degree Programme in Forest Sciences and Business (MScFB), Forest Products Marketing"
+  },
+  "420043": {
+    "en": "Scandinavian Languages, Swedish as Native Language",
+    "fi": "Pohjoismaiset kielet, ruotsi äidinkielenä",
+    "sv": "Nordiska språk, svenska som modersmål"
+  },
+  "320100": {
+    "en": "Studies for the Doctorate Degree in Medicine",
+    "fi": "Lääketieteen tohtorin opinnot",
+    "sv": "Studier för medicine doktorsexamen"
+  },
+  "T920105": {
+    "en": "Doctoral programme in gender, culture and society",
+    "fi": "Sukupuolen, kulttuurin ja yhteiskunnan tutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i genus, kultur och samhällsforskning"
+  },
+  "420151": {
+    "en": "CBU Master's Degree Programme in History",
+    "fi": "CBU Master's Degree Programme in History",
+    "sv": "CBU Master's Degree Programme in History"
+  },
+  "KH50_004": {
+    "en": "Bachelor's Programme for Teachers of Mathematics, Physics and Chemistry",
+    "fi": "Matematiikan, fysiikan ja kemian opettajan kandiohjelma",
+    "sv": "Kandidatprogrammet för ämneslärare i matematik, fysik och kemi"
+  },
+  "420108": {
+    "en": "Nordic Studies",
+    "fi": "Norden-opintokokonaisuus",
+    "sv": "Studiehelheten Norden"
+  },
+  "V610019": {
+    "en": "null",
+    "fi": "Voimavaroja opiskeluun",
+    "sv": "null"
+  },
+  "420195": {
+    "en": "Master's Degree Programme in European Studies",
+    "fi": "Master's Degree Programme in European Studies",
+    "sv": "Master's Degree Programme in European Studies"
+  },
+  "T920102": {
+    "en": "Doctoral programme in law",
+    "fi": "Oikeustieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i juridik"
+  },
+  "420163": {
+    "en": "Master's Degree Programme Master of Arts in International Performance Research",
+    "fi": "Master's Degree Programme Master of Arts in International Performance Research",
+    "sv": "Master's Degree Programme Master of Arts in International Performance Research"
+  },
+  "420044": {
+    "en": "Nordic Languages (Swedish as Mother Tongue)",
+    "fi": "Pohjoismaiset kielet (äidinkielen linja, Aio)",
+    "sv": "Nordiska språk (modersmålslinjen)"
+  },
+  "320021": {
+    "en": "Degree Programme for Hospital Microbiologist",
+    "fi": "Sairaalamikrobiologin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för sjukhusmikrobiolog"
+  },
+  "420401": {
+    "en": "Degree Programme in Philosophy",
+    "fi": "Filosofian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för filosofi"
+  },
+  "T923103": {
+    "en": "Doctoral Programme in Atmospheric Sciences",
+    "fi": "Ilmakehätieteiden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i atmosfärvetenskap"
+  },
+  "420090": {
+    "en": "Central Asian Studies",
+    "fi": "Keski-Aasian tutkimus",
+    "sv": "Centralasienforskning"
+  },
+  "220003": {
+    "en": "Degree Programme in Law, Vaasa",
+    "fi": "Oikeustieteen kandidaatin koulutusohjelma, Vaasa",
+    "sv": "Utbildningsprogrammet för studier för juris kandidatexamen, Vasa"
+  },
+  "420024": {
+    "en": "Finnish and Scandinavian History (Teachin Language Swedish)",
+    "fi": "Suomen ja Skandinavian historia (ruotsinkielinen opetus)",
+    "sv": "Finlands och Skandinaviens historia (svenskspråkig underivisning)"
+  },
+  "520103": {
+    "en": "Doctorate of Philosophy (Pharmacy)",
+    "fi": "Farmasian tohtorin opinnot",
+    "sv": "Studier för farmacie doktorsexamen"
+  },
+  "420036": {
+    "en": "Assyriology",
+    "fi": "Assyriologia",
+    "sv": "Assyriologi"
+  },
+  "520105": {
+    "en": "Doctorate of Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "220009": {
+    "en": "Bachelor of Laws Degree Programme, Vaasa",
+    "fi": "Oikeusnotaarin koulutusohjelma, Vaasa",
+    "sv": "Utbildningsprogrammet för rättsnotarie, Vasa"
+  },
+  "520097": {
+    "en": "Master's Degree Programme in Neuroscience (MNEURO)",
+    "fi": "Master's Degree Programme in Neuroscience (MNEURO)",
+    "sv": "Master's Degree Programme in Neuroscience (MNEURO)"
+  },
+  "220012": {
+    "en": "Degree Programme in Master of Law, Vaasa",
+    "fi": "Oikeustieteen maisterin koulutusohjelma, Vaasa",
+    "sv": "Utbildningsprogrammet för studier för jurismagister, Vasa"
+  },
+  "820008": {
+    "en": "null",
+    "fi": "Elintarvike- ja ympäristötieteet",
+    "sv": "Livsmedels- och miljövetenskaper"
+  },
+  "420421": {
+    "en": "Degree Programme in Translation and Interpretation",
+    "fi": "Kääntämisen ja tulkkauksen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för översättning och tolkning"
+  },
+  "MH70_008": {
+    "en": "Master 's Programme in Social Research",
+    "fi": "Sosiaalitieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i sociala vetenskaper"
+  },
+  "520999": {
+    "en": "Not Enrolled in the Degree Programme",
+    "fi": "Ei opiskele koulutusohjelmassa",
+    "sv": "Studerar icke i utbildningsprogrammet"
+  },
+  "620028": {
+    "en": "Special Education",
+    "fi": "Erityispedagogiikka",
+    "sv": "Specialpedagogok"
+  },
+  "V810005": {
+    "en": "Environmental Studies",
+    "fi": "Ympäristöopinnot",
+    "sv": "Miljöstudier"
+  },
+  "520099": {
+    "en": "Master's Degree Programme in Biotechnology (MBIOT)",
+    "fi": "Master's Degree Programme in Biotechnology (MBIOT)",
+    "sv": "Master's Degree Programme in Biotechnology (MBIOT)"
+  },
+  "V510006": {
+    "en": "Metereology",
+    "fi": "Meteorologia",
+    "sv": "Meteorologi"
+  },
+  "120009I": {
+    "en": "Degree Programme in Theological Functions in Churches and Society",
+    "fi": "Kirkkojen ja yhteiskunnan teologisiin tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för kyrkliga och samhälleliga teologiska uppgifter"
+  },
+  "V710002": {
+    "en": "Sociology",
+    "fi": "Sosiologia",
+    "sv": "Sociologi"
+  },
+  "V410017": {
+    "en": "Greek Language and Literature,Latin Language and Roman Literature",
+    "fi": "Kreikan kieli ja kirjallisuus sekä latinan kieli ja Rooman kirjallisuus",
+    "sv": "Grekiska och grekisk litteratur samt latin och romersk litteratur"
+  },
+  "820104": {
+    "en": "Doctorate in Food Sciences",
+    "fi": "Elintarviketieteiden tohtorin opinnot",
+    "sv": "Studier för doktorsexamen i livsmedelsvetenskaper"
+  },
+  "820054": {
+    "en": "Environmental and Natural Resource Economics",
+    "fi": "Ympäristö- ja luonnonvaraekonomia",
+    "sv": "Miljö- och naturresursekonomi"
+  },
+  "620034": {
+    "en": "null",
+    "fi": "Koulutussosiologian ja -politiikan maisteriohjelma",
+    "sv": "null"
+  },
+  "V410012": {
+    "en": "Finnish Literature and Folklore",
+    "fi": "Kotimainen kirjallisuus ja kansanrunoudentutkimus",
+    "sv": "Inhemsk litteratur och folkdiktsforskning"
+  },
+  "520096": {
+    "en": "Master's Degree Programme in Space Sciences",
+    "fi": "Master's Degree Programme in Space Sciences",
+    "sv": "Master's Degree Programme in Space Sciences"
+  },
+  "MH57_001": {
+    "en": "Master's Programme in Ecology and Evolutionary Biology",
+    "fi": "Ekologian ja evoluutiobiologian maisteriohjelma",
+    "sv": "Magisterprogrammet i ekologi och evolutionsbiologi"
+  },
+  "420408": {
+    "en": "Degree Programme in Comparative Culture Studies",
+    "fi": "Kulttuurien tutkimuksen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för kulturforskning"
+  },
+  "420092": {
+    "en": "Spanish Philology",
+    "fi": "Espanjalainen filologia",
+    "sv": "Spansk filologi"
+  },
+  "420022": {
+    "en": "Finnish History",
+    "fi": "Suomen historia",
+    "sv": "Finlands historia"
+  },
+  "420412": {
+    "en": "Degree Programme in Swedish Language and Literature, Swedish Teacher Line",
+    "fi": "Ruotsin kielen ja kirjallisuuden koulutusohjelma, aineenopettajan suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för svenska språket och litteraturen, inriktningsalternativet för ämneslärare"
+  },
+  "420000": {
+    "en": "Not Enrolled in the Degree Programme",
+    "fi": "Ei opiskele koulutusohjelmassa",
+    "sv": "Studerar icke i utbildningsprogrammet"
+  },
+  "V110004": {
+    "en": "Systematic Theology",
+    "fi": "Systemaattinen teologia",
+    "sv": "Systematisk teologi"
+  },
+  "620050": {
+    "en": "Early Education Teacher (in Swedish)",
+    "fi": "Varhaiskasvatuksen opettajan koulutus (ruotsinkielinen)",
+    "sv": "Utbildningen för lärare inom småbarnspedagogik"
+  },
+  "420075": {
+    "en": "Spanish Philology",
+    "fi": "Espanjalainen filologia (Aio)",
+    "sv": "Spansk filologi (Ämneslärare)"
+  },
+  "420125": {
+    "en": "French Philology",
+    "fi": "Ranskalainen filologia",
+    "sv": "Fransk filologi"
+  },
+  "V710006": {
+    "en": "Political History",
+    "fi": "Poliittinen historia",
+    "sv": "Politisk historia"
+  },
+  "420409": {
+    "en": "Degree Programme in Logopedics",
+    "fi": "Logopedian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för logopedi"
+  },
+  "420161": {
+    "en": "Translation Studies",
+    "fi": "Käännöstiede",
+    "sv": "Översättningsvetenskap"
+  },
+  "720085": {
+    "en": "Master's Degree Programme in Economy, State and Society",
+    "fi": "Master's Degree Programme in Economy, State and Society",
+    "sv": "Master's Degree Programme in Economy, State and Society"
+  },
+  "420135": {
+    "en": "Russian Language and Literature (Russian as Mother Tongue)",
+    "fi": "Venäjän kieli ja kirjallisuus (venäjä äidinkielenä)",
+    "sv": "Ryska språket och litteraturen (ryska som modersmål)"
+  },
+  "Y00010": {
+    "en": "Degree Programme in Molecular Biosciences",
+    "fi": "Molekyylibiotieteiden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för molekylära biovetenskaper"
+  },
+  "420073": {
+    "en": "Russian Language and Literature",
+    "fi": "Venäjän kieli ja kirjallisuus (Aio)",
+    "sv": "Ryska språket och litteraturen (Ämneslärare)"
+  },
+  "420019": {
+    "en": "Philosophy",
+    "fi": "Filosofia",
+    "sv": "Filosofi"
+  },
+  "520030": {
+    "en": "Degree Programme in Geography",
+    "fi": "Maantieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för geografi"
+  },
+  "220010": {
+    "en": "Master's degree programme in International Business Law and Public International Law",
+    "fi": "Master's degree programme in International Business Law and Public International Law",
+    "sv": "Master's degree programme in International Business Law and Public International Law"
+  },
+  "MH90_001": {
+    "en": "Degree Programme in Veterinary Medicine",
+    "fi": "Eläinlääketieteen lisensiaatin koulutusohjelma",
+    "sv": "Utbildningsprogrammet i veterinärmedicin"
+  },
+  "T923105": {
+    "en": "Doctoral Programme in Mathematics and Statistics",
+    "fi": "Matematiikan ja tilastotieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i matematik och statistik"
+  },
+  "420115": {
+    "en": "Semiotics",
+    "fi": "Semiotiikka",
+    "sv": "Semiotik"
+  },
+  "MH70_006": {
+    "en": "Master's Programme in European and Nordic Studies",
+    "fi": "Euroopan ja pohjoismaiden tutkimuksen maisteriohjelma (European and Nordic Studies)",
+    "sv": "Magisterprogrammet i Europa- och Nordenstudier"
+  },
+  "V610006": {
+    "en": "Basic Education for Teachers of Home Economics",
+    "fi": "Kotitalousopettajan peruskoulutus",
+    "sv": "Grundutbildning för lärare i husligekonomi"
+  },
+  "572199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "420068": {
+    "en": "English Philology",
+    "fi": "Englantilainen filologia (Aio)",
+    "sv": "Engelsk filologi (Ämneslärare)"
+  },
+  "120008": {
+    "en": "Common General and Subject-Related Studies",
+    "fi": "Yhteiset yleis- ja aineopinnot",
+    "sv": "Gemensamma allmänna studier och ämnesstudier"
+  },
+  "520022": {
+    "en": "Degree Programme in Aquatic Sciences",
+    "fi": "Akvaattisten tieteiden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för akvatiska vetenskaper"
+  },
+  "V710004": {
+    "en": "Political Science",
+    "fi": "Yleinen valtio-oppi",
+    "sv": "Allmän statslära"
+  },
+  "820044": {
+    "en": "Microbiology",
+    "fi": "Mikrobiologia",
+    "sv": "Mikrobiologi"
+  },
+  "520053": {
+    "en": "The Degree Programme in Biotechnology (HEBIOT)",
+    "fi": "Biotekniikan koulutusohjelma (HEBIOT)",
+    "sv": "Utbildningsprogrammet för bioteknik (HEBIOT)"
+  },
+  "MH40_009": {
+    "en": "Master's Programme in Literary Studies",
+    "fi": "Kirjallisuudentutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i litteraturvetenskap"
+  },
+  "KOULOHJ-tohtori": {
+    "en": "Unknown Degree Programme, Doctor",
+    "fi": "Tuntematon koulutusohjelma, tohtori",
+    "sv": "Okänd utbildningsprogrammet, doktor"
+  },
+  "120009M": {
+    "en": "Degree Programme in Theological Functions in Churches and Society",
+    "fi": "Kirkkojen ja yhteiskunnan teologisiin tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för kyrkliga och samhälleliga teologiska uppgifter"
+  },
+  "MH50_004": {
+    "en": "Master's Programme in Particle Physics and Astrophysical Sciences",
+    "fi": "Alkeishiukkasfysiikan ja astrofysikaalisten tieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i elementarpartikelfysik och astrofysikaliska vetenskaper"
+  },
+  "320020": {
+    "en": "Degree Programme for Hospital Chemist",
+    "fi": "Sairaalakemistin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för sjukhuskemisten"
+  },
+  "320006": {
+    "en": "Specialist's Degree Programmes in Dentistry",
+    "fi": "Erikoishammaslääkärikoulutus",
+    "sv": "Specialtandläkarutbildning"
+  },
+  "Y00025": {
+    "en": "Degree Programme in Environmental Sciences (Lahti)",
+    "fi": "Ympäristötieteiden koulutusohjelma (Lahti)",
+    "sv": "Utbildningsprogrammet för miljövetenskaper (Lahtis)"
+  },
+  "320302": {
+    "en": "Degree Programme in Health Care and Health Care Education (TEACHING LANGUAGE SWEDISH)",
+    "fi": "Terveydenhuollon ja terveydenhuollon opettajankoulutuksen koulutusohjelma (RUOTSINK.)",
+    "sv": "Det svenskspråkiga utbildningsprogrammet för hälsovård och för lärare i hälsovård"
+  },
+  "520092": {
+    "en": "Special Education in Pharmacy",
+    "fi": "Farmaseutin poikkeuskoulutus",
+    "sv": "Undantagsutbildning av farmaceut"
+  },
+  "220005": {
+    "en": "International Programmes, Master of Laws",
+    "fi": "Kansainväliset ohjelmat, Master of Laws",
+    "sv": "Internationella program, Master of Laws"
+  },
+  "V410018": {
+    "en": "Other Major Subject Studies",
+    "fi": "Muun pääaineen opinnot",
+    "sv": "Något annat läroämne som huvudämne"
+  },
+  "MH70_004": {
+    "en": "Master 's Programme in Society and Change",
+    "fi": "Yhteiskunnallisen muutoksen maisteriohjelma",
+    "sv": "Magisterprogrammet för samhälle i förändring"
+  },
+  "720086": {
+    "en": "Master's Degree Programme in Ethnic Relations, Cultural Diversity and Integration (ERI)",
+    "fi": "Master's Degree Programme in Ethnic Relations, Cultural Diversity and Integration (ERI)",
+    "sv": "Master's Degree Programme in Ethnic Relations, Cultural Diversity and Integration (ERI)"
+  },
+  "420095": {
+    "en": "Computational Linguistics",
+    "fi": "Tietokonelingvistiikka",
+    "sv": "Datalingvistik"
+  },
+  "320022": {
+    "en": "Adult cognitive-integrative psychotherapist program",
+    "fi": "Aikuisten psykoterapeuttikoulutusohjelma, kognitiivis-integratiivinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning kognitiv-integrativ terapi med vuxen"
+  },
+  "520088": {
+    "en": "Master's Degree Programme in Atmosphere-Biosphere Studies",
+    "fi": "Master's Degree Programme in Atmosphere-Biosphere Studies",
+    "sv": "Master's Degree Programme in Atmosphere-Biosphere Studies"
+  },
+  "V710003": {
+    "en": "Social Policy",
+    "fi": "Sosiaalipolitiikka",
+    "sv": "Socialpolitik"
+  },
+  "420071": {
+    "en": "Romance Philology",
+    "fi": "Romaaninen filologia (Aio)",
+    "sv": "Romansk filologi (Ämneslärare)"
+  },
+  "MH57_004": {
+    "en": "Master's Programme in Neuroscience",
+    "fi": "Neurotieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i neurovetenskap"
+  },
+  "420057": {
+    "en": "Theatre Research",
+    "fi": "Teatteritiede",
+    "sv": "Teatervetenskap"
+  },
+  "420097": {
+    "en": "African Studies",
+    "fi": "Afrikan tutkimus",
+    "sv": "Afrikaforskning"
+  },
+  "MH50_009": {
+    "en": "Master's Programme in Computer Science",
+    "fi": "Tietojenkäsittelytieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i datavetenskap"
+  },
+  "420088": {
+    "en": "Italian Philology",
+    "fi": "Italialainen filologia",
+    "sv": "Italiensk filologi"
+  },
+  "820101": {
+    "en": "Licentiate in Food Sciences",
+    "fi": "Elintarviketieteiden lisensiaatin tutkinnon opinnot",
+    "sv": "Studier för licentiatexamen i livsmedelsvetenskaper"
+  },
+  "420140": {
+    "en": "Master's Degree Programme in Intercultural Encounters",
+    "fi": "Kulttuurienvälisen vuorovaikutuksen maisteriohjelma",
+    "sv": "Magisterprogrammet för interkulturell växelverkan"
+  },
+  "420045": {
+    "en": "Nordic Literature",
+    "fi": "Pohjoismainen kirjallisuus (Aio)",
+    "sv": "Nordisk litteratur (Ämneslärare)"
+  },
+  "420040": {
+    "en": "Ethnology",
+    "fi": "Kansatiede",
+    "sv": "Etnologi"
+  },
+  "720199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "MH55_001": {
+    "en": "Master 's Programme in Pharmacy",
+    "fi": "Proviisorin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för provisorsexamen"
+  },
+  "V410002": {
+    "en": "German Philology",
+    "fi": "Germaaninen filologia",
+    "sv": "Germansk filologi"
+  },
+  "820011": {
+    "en": "Master's Degree Programme in Biotechnology (MBIOT)",
+    "fi": "Master's Degree Programme in Biotechnology (MBIOT)",
+    "sv": "Master's Degree Programme in Biotechnology (MBIOT)"
+  },
+  "820045": {
+    "en": "Forest Products Marketing",
+    "fi": "Puumarkkinatiede",
+    "sv": "Marknadsföring av skogsprodukter"
+  },
+  "620111": {
+    "en": "Master's Degree Programme in Adult Education and Developmental Work Research (ATMO)",
+    "fi": "Master's Degree Programme in Adult Education and Developmental Work Research (ATMO)",
+    "sv": "Master's Degree Programme in Adult Education and Developmental Work Research (ATMO)"
+  },
+  "520021": {
+    "en": "Degree Programme in Molecular Biosciences",
+    "fi": "Molekyylibiotieteiden koulutusohjelma",
+    "sv": "Utbildningsprogrammet för molekylära biovetenskaper"
+  },
+  "T923101": {
+    "en": "Doctoral Programme in Particle Physics and Universe Sciences",
+    "fi": "Alkeishiukkasfysiikan ja maailmankaikkeuden tutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i elementarpartikelfysik och kosmologi"
+  },
+  "120013M": {
+    "en": "Degree Programme in Religion Teacher Education",
+    "fi": "Koulun uskonnonopettajan tehtäviin valmistava koulutusohjelma",
+    "sv": "Utbildningsprogrammet för skolornas religionslärare"
+  },
+  "T921104": {
+    "en": "Doctoral Programme in Oral Sciences",
+    "fi": "Suun terveystieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i oral hälsovetenskap"
+  },
+  "320009": {
+    "en": "Odontologiska utbildingsprogrammet",
+    "fi": "Odontologiska utbildingsprogrammet",
+    "sv": "Odontologiska utbildningsprogrammet"
+  },
+  "V410010": {
+    "en": "History of Art",
+    "fi": "Taidehistoria",
+    "sv": "Konsthistoria"
+  },
+  "V410009": {
+    "en": "Psychology",
+    "fi": "Psykologia",
+    "sv": "Psykologi"
+  },
+  "620014": {
+    "en": "Home Economics Science",
+    "fi": "Kotitaloustieteen koulutus",
+    "sv": "Huslig ekonomi -vetenskap"
+  },
+  "420032": {
+    "en": "Greek Language and Literature",
+    "fi": "Kreikan kieli ja kirjallisuus",
+    "sv": "Grekiska språket och litteraturen"
+  },
+  "V510012": {
+    "en": "Botany",
+    "fi": "Kasvitiede",
+    "sv": "Botanik"
+  },
+  "620102": {
+    "en": "Doctorate in Education",
+    "fi": "Kasvatustieteen tohtorin opinnot",
+    "sv": "Studier för pedagogie doktorsexamen"
+  },
+  "420423": {
+    "en": "Individual Degree Programme",
+    "fi": "Yksilöllinen koulutusohjelma",
+    "sv": "Individuellt utbildningsprogram"
+  },
+  "420165": {
+    "en": "General Linguistics and Language Technology",
+    "fi": "Yleinen kielitiede ja kieliteknologia",
+    "sv": "Allmän språkvetenskap och språkteknologi"
+  },
+  "120199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "620199": {
+    "en": "Additional Studies",
+    "fi": "Tutkintoa täydentävät opinnot",
+    "sv": "Studier som komplementerar examen"
+  },
+  "820037": {
+    "en": "Environmental Soil Science",
+    "fi": "Maaperä- ja ympäristötiede",
+    "sv": "Mark- och miljövetenskap"
+  },
+  "820005": {
+    "en": "Microbiology, Environmental Soil Science",
+    "fi": "Mikrobiologia, maaperä- ja ympäristötiede",
+    "sv": "Mikrobiologi, mark- och miljövetenskap"
+  },
+  "820042": {
+    "en": "Forest Economics",
+    "fi": "Metsäekonomia",
+    "sv": "Skogsekonomi"
+  },
+  "420054": {
+    "en": "Musicology",
+    "fi": "Musiikkitiede",
+    "sv": "Musikvetenskap"
+  },
+  "420102": {
+    "en": "Indo-European Studies",
+    "fi": "Indoeuropeistiikka",
+    "sv": "Indoeuropeistik"
+  },
+  "720018": {
+    "en": "Social Psychology",
+    "fi": "Sosiaalipsykologia",
+    "sv": "Socialpsykologi"
+  },
+  "720100": {
+    "en": "Licentiate of Social Sciences",
+    "fi": "Valtiotieteiden lisensiaatin opinnot",
+    "sv": "Studier för politices licentiatexamen"
+  },
+  "420126": {
+    "en": "French Philology",
+    "fi": "Ranskalainen filologia (Aio)",
+    "sv": "Fransk filologi (Ämneslärare)"
+  },
+  "820102": {
+    "en": "Studies for the Doctorate Degree in Philosophy",
+    "fi": "Filosofian tohtorin opinnot",
+    "sv": "Studier för filosofie doktorsexamen"
+  },
+  "820027": {
+    "en": "Master's Degree Programme in Food of Life (Erasmus Mundus)",
+    "fi": "Master's Degree Programme in Food of Life (Erasmus Mundus)",
+    "sv": "Master's Degree Programme in Food of Life (Erasmus Mundus)"
+  },
+  "420415": {
+    "en": "Degree Programme in Finnish and Related Languages, Finnish Teacher Line",
+    "fi": "Suomen kielen ja sen sukukielten koulutusohjelma, aineenopettajan suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för finska språket och därmed besläktade språk, inriktningsalternativet för ämneslärare"
+  },
+  "620103": {
+    "en": "Licentiate of Philosphy",
+    "fi": "Filosofian lisensiaatin opinnot",
+    "sv": "Studier för filosofie licentiatexamen"
+  },
+  "420100": {
+    "en": "Licentiate of Philosphy",
+    "fi": "Filosofian lisensiaatin opinnot",
+    "sv": "Studier för filosofie licentiatexamen"
+  },
+  "520090": {
+    "en": "Degree Programme in Pharmacy",
+    "fi": "Proviisorin koulutusohjelma",
+    "sv": "Utbildningsprogrammet för provisorsexamen"
+  },
+  "720087": {
+    "en": "Research Master's Programme in Social Sciences",
+    "fi": "Research Master's Programme in Social Sciences",
+    "sv": "Research Master's Programme in Social Sciences"
+  },
+  "V710001": {
+    "en": "Economics",
+    "fi": "Kansantaloustiede",
+    "sv": "Nationalekonomi"
+  },
+  "820015": {
+    "en": "Master's Degree Programme in Forest Sciences and Business (MScFB)",
+    "fi": "Master's Degree Programme in Forest Sciences and Business (MScFB)",
+    "sv": "Master's Degree Programme in Forest Sciences and Business (MScFB)"
+  },
+  "MH50_011": {
+    "en": "Master's Programme in Geology and Geophysics",
+    "fi": "Geologian ja geofysiikan maisteriohjelma",
+    "sv": "Magisterprogrammet i geologi och geofysik"
+  },
+  "T920110": {
+    "en": "Doctoral Programme in Psychology, Learning and Communication",
+    "fi": "Psykologian, oppimisen ja kommunikaation tohtoriohjelma",
+    "sv": "Doktorandprogrammet i psykologi, lärande och kommunikation"
+  },
+  "820049": {
+    "en": "Microbiology and Food Chemistry",
+    "fi": "Mikrobiologia ja elintarvikekemia",
+    "sv": "Mikrobiologi och livsmedelskemi"
+  },
+  "420010": {
+    "en": "Asian Studies",
+    "fi": "Aasian tutkimus",
+    "sv": "Asienforskning"
+  },
+  "420094": {
+    "en": "East Asian Studies",
+    "fi": "Itä-Aasian tutkimus",
+    "sv": "Östasienforskning"
+  },
+  "420107": {
+    "en": "Master's Degree Programme in Gender Studies",
+    "fi": "Sukupuolentutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i genusforskning"
+  },
+  "620116": {
+    "en": "Further Class Teacher Education",
+    "fi": "Luokanopettajan lisäkoulutus",
+    "sv": "Komplementär utbildning för klasslärare"
+  },
+  "520093": {
+    "en": "Specialization in Industrial Pharmacy",
+    "fi": "Teollisuusfarmasian erikoistumiskoulutus",
+    "sv": "Specialiseringsutbildning i industrifarmaci"
+  },
+  "420411": {
+    "en": "Degree Programme in Swedish Language and Literature, General Line",
+    "fi": "Ruotsin kielen ja kirjallisuuden koulutusohjelma, yleinen suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för svenska språket och litteraturen, det allmänna inriktningsalternativet"
+  },
+  "420070": {
+    "en": "Nordic Languages (Swedish as second domestic language)",
+    "fi": "Pohjoismaiset kielet (Aio, toinen kotimainen kieli)",
+    "sv": "Nordiska språk (Linjen för andra inhemska språket)"
+  },
+  "420132": {
+    "en": "West and South Slavonic Languages and Cultures",
+    "fi": "Länsi- ja eteläslaavilaiset kielet ja kulttuurit",
+    "sv": "Väst- och sydslaviska språk och kulturer"
+  },
+  "MH30_004": {
+    "en": "Master's Programme in Psychology",
+    "fi": "Psykologian maisteriohjelma",
+    "sv": "Magisterprogrammet i psykologi"
+  },
+  "620033": {
+    "en": "Master's Degree Programme in Adult Education and Developmental Work Research",
+    "fi": "Aikuiskasvatustieteen ja työn kehittämisen maisteriohjelma",
+    "sv": "Magisterprogrammet"
+  },
+  "420127": {
+    "en": "History (Teaching in Swedish)",
+    "fi": "Historia (opetus ruotsiksi)",
+    "sv": "Historia (undervisning på svenska)"
+  },
+  "T920103": {
+    "en": "Doctoral programme in history and cultural heritage",
+    "fi": "Historian ja kulttuuriperinnön tohtoriohjelma",
+    "sv": "Doktorandprogrammet i historia och kulturarv"
+  },
+  "MH30_005": {
+    "en": "Master 's Programme in Logopedics",
+    "fi": "Logopedian maisteriohjelma",
+    "sv": "Magistgerprogrammet i logopedi"
+  },
+  "320015": {
+    "en": "Specialist's Degree Programme in Medicine",
+    "fi": "Erikoislääkäri (8v), suppea erikoisala",
+    "sv": "Specialläkare (8år), begränsat specialområde"
+  },
+  "420039": {
+    "en": "Folklore Studies",
+    "fi": "Folkloristiikka",
+    "sv": "Folkloristik"
+  },
+  "420110": {
+    "en": "North American Studies",
+    "fi": "Pohjois-Amerikan tutkimus",
+    "sv": "Nordamerikastudier"
+  },
+  "620021": {
+    "en": "Exclusive Class Teacher Education",
+    "fi": "Luokanopettajan poikkeuskoulutus",
+    "sv": "Undantagsutbildning av klasslärare"
+  },
+  "820046": {
+    "en": "Nutrition",
+    "fi": "Ravitsemustiede",
+    "sv": "Näringslära"
+  },
+  "520049": {
+    "en": "Degree Programme in Biochemistry",
+    "fi": "Biokemian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för biokemi"
+  },
+  "MH80_001": {
+    "en": "Master 's Programme in Agricultural Sciences",
+    "fi": "Maataloustieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i lantbruksvetenskaper"
+  },
+  "320024": {
+    "en": "Adolescent psychodynamic psychotherapist program",
+    "fi": "Nuorten psykoterapeuttikoulutusohjelma, Psykodynaaminen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning psykodynamisk terapi med ungdomar"
+  },
+  "520098": {
+    "en": "Master's Degree Programme in Atmospheric Sciences",
+    "fi": "Master's Degree Programme in Atmospheric Sciences",
+    "sv": "Master's Degree Programme in Atmospheric Sciences"
+  },
+  "820033": {
+    "en": "Food Technology",
+    "fi": "Elintarviketeknologia",
+    "sv": "Livsmedelsteknologi"
+  },
+  "420038": {
+    "en": "Middle Eastern Studies",
+    "fi": "Lähi-idän tutkimus",
+    "sv": "Mellanösternstudier"
+  },
+  "820034": {
+    "en": "Plant Production Biology",
+    "fi": "Kasvintuotannon biologia",
+    "sv": "Växtproduktionsbiologi"
+  },
+  "420403": {
+    "en": "Degree Programme in History, General Line",
+    "fi": "Historian koulutusohjelma, yleinen suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för historia, det allmänna inriktningsalternativet"
+  },
+  "620108": {
+    "en": "Psychotherapist training program with early childhood framework",
+    "fi": "Varhaislapsuuden vuorovaikutuspsykoterapian psykoterapeuttikoulutusohjelma",
+    "sv": "Psykoterapeututbildning med inriktning på tidig barndoms växelverkan psykoterapi"
+  },
+  "820032": {
+    "en": "Food Chemistry",
+    "fi": "Elintarvikekemia",
+    "sv": "Livsmedelskemi"
+  },
+  "520040": {
+    "en": "Degree Programme Group in Chemistry, Biochemistry and Geology",
+    "fi": "Kemian, biokemian ja geologian koulutusohjelmien muodostama koulutusohjelmaryhmä",
+    "sv": "Utbildningsprogramgruppen kemi, biokemi och geologi"
+  },
+  "420078": {
+    "en": "Arabic and Islamic Studies",
+    "fi": "Arabian kielen ja islamin tutkimus",
+    "sv": "Arabiska språket och islamstudier"
+  },
+  "720089": {
+    "en": "Master's Degree Programme in Media and Global Communication",
+    "fi": "Master's Degree Programme in Media and Global Communication",
+    "sv": "Master's Degree Programme in Media and Global Communication"
+  },
+  "520104": {
+    "en": "Licentiate of Philosophy",
+    "fi": "Filosofian lisensiaatin opinnot",
+    "sv": "Studier för filosofie licentiatexamen"
+  },
+  "V510011": {
+    "en": "Zoology",
+    "fi": "Eläintiede",
+    "sv": "Zoologi"
+  },
+  "420116": {
+    "en": "Finnish Language and Culture",
+    "fi": "Suomen kieli ja kulttuuri",
+    "sv": "Finska språket och kulturen"
+  },
+  "620104": {
+    "en": "Adult psychoanalytic psychotherapist program",
+    "fi": "Aikuisten psykoterapeuttikoulutusohjelma, psykoanalyyttinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning psykoanalytisk terapi med vuxen"
+  },
+  "MH50_005": {
+    "en": "Master's Programme in Materials Research",
+    "fi": "Materiaalitutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i materialforskning"
+  },
+  "V510003": {
+    "en": "Physics",
+    "fi": "Fysiikka",
+    "sv": "Fysik"
+  },
+  "T922106": {
+    "en": "Doctoral programme in food chain and health",
+    "fi": "Ruokaketjun ja terveyden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i livsmedelskedjan och hälsa"
+  },
+  "520198": {
+    "en": "Additional Studies (Pharmacy)",
+    "fi": "Tutkintoa täydentävät opinnot, farmasia",
+    "sv": "Studier som komplementerar examen (farm)"
+  },
+  "520101": {
+    "en": "Licentiate of Philosophy (Pharmacy)",
+    "fi": "Farmasian lisensiaatin opinnot",
+    "sv": "Studier för farmacie licentiatexamen"
+  },
+  "520130": {
+    "en": "Degree Programme in Environmental Ecology",
+    "fi": "Ympäristöekologian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för miljöekologi"
+  },
+  "T921108": {
+    "en": "Doctoral Programme in Clinical Veterinary Medicine",
+    "fi": "Kliinisen eläinlääketieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i klinisk veterinärmedicin"
+  },
+  "MH40_014": {
+    "en": "Master's Programme in Gender Studies",
+    "fi": "Sukupuolentutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i genusvetenskap"
+  },
+  "420106": {
+    "en": "Latin American Studies",
+    "fi": "Latinalaisen Amerikan tutkimus",
+    "sv": "Latinamerikastudier"
+  },
+  "420162": {
+    "en": "Area and Cultural Studies",
+    "fi": "Alue- ja kulttuurintutkimus",
+    "sv": "Region- och kulturstudier"
+  },
+  "420060": {
+    "en": "Phonetics",
+    "fi": "Fonetiikka",
+    "sv": "Fonetik"
+  },
+  "120101": {
+    "en": "Doctoral Programme in Theology",
+    "fi": "Teologian tohtorin opinnot",
+    "sv": "Studier för teologie doktorsexamen"
+  },
+  "MH50_007": {
+    "en": "Master's Programme in Chemistry and Molecular Sciences",
+    "fi": "Kemian ja molekyylitieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i kemi och molekylära vetenskaper"
+  },
+  "MH20_001": {
+    "en": "Master's Programme in Law",
+    "fi": "Oikeustieteen maisterin koulutusohjelma",
+    "sv": "Magisterprogrammet i rättsvetenskap"
+  },
+  "720042": {
+    "en": "Development Studies",
+    "fi": "Kehitysmaatutkimus",
+    "sv": "U-landsforskning"
+  },
+  "420131": {
+    "en": "Baltic Studies",
+    "fi": "Balttilaiset kielet ja kulttuurit",
+    "sv": "Baltiska språk och kulturer"
+  },
+  "320027": {
+    "en": "Adult and and adolescent integrative psychotherapist training program",
+    "fi": "Aikuisten ja nuorten psykoterapeuttikoulutusohjelma, integratiivinen viitekehys",
+    "sv": "Psykoterapeututbildning med inriktning integrativ terapi med vuxen och ungdomar"
+  },
+  "620011": {
+    "en": "Craft teacher education",
+    "fi": "Käsityönopettajan koulutus",
+    "sv": "Slöjdlärarutbildning"
+  },
+  "420087": {
+    "en": "British and Irish Studies",
+    "fi": "Britannian ja Irlannin tutkimus",
+    "sv": "Britannien- och Irlandsstudier"
+  },
+  "MH40_005": {
+    "en": "Master's Programme Linguistic Diversity in the Digital Age",
+    "fi": "Kielellisen diversiteetin ja digitaalisten menetelmien maisteriohjelma",
+    "sv": "Magisterprogrammet i språklig diversitet och digitala metoder"
+  },
+  "420083": {
+    "en": "Russian Translation",
+    "fi": "Venäjän kääntäminen",
+    "sv": "Rysk översättning"
+  },
+  "820024": {
+    "en": "Master's Degree Programme in Plant Production Science (MScPPS)",
+    "fi": "Master's Degree Programme in Plant Production Science (MScPPS)",
+    "sv": "Master's Degree Programme in Plant Production Science (MScPPS)"
+  },
+  "420150": {
+    "en": "European Cultural and Area Studies",
+    "fi": "Eurooppalaisten kulttuurien ja alueiden tutkimus",
+    "sv": "Europeiska kultur- och regionstudier"
+  },
+  "820047": {
+    "en": "Environmental Economics",
+    "fi": "Ympäristöekonomia",
+    "sv": "Miljöekonomi"
+  },
+  "420101": {
+    "en": "Licentiate in Psychology",
+    "fi": "Psykologian lisensiaatin opinnot",
+    "sv": "Studier för psykologie licentiatexamen doktorsexamen"
+  },
+  "820004": {
+    "en": "Food Science",
+    "fi": "Elintarviketieteet",
+    "sv": "Livsmedelsvetenskaper"
+  },
+  "MH40_015": {
+    "en": "Master's Programme in History",
+    "fi": "Historian maisteriohjelma",
+    "sv": "Magisterprogrammet i historia"
+  },
+  "MH57_002": {
+    "en": "Master 's Programme in Integrative Plant Sciences",
+    "fi": "Kasvitieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i botanik"
+  },
+  "420056": {
+    "en": "Art History",
+    "fi": "Taidehistoria",
+    "sv": "Konsthistoria"
+  },
+  "MH50_008": {
+    "en": "Master's Programme for Teachers of Mathematics, Physics and Chemistry",
+    "fi": "Matematiikan, fysiikan ja kemian opettajan maisteriohjelma",
+    "sv": "Magisterprogrammet för ämneslärare i matematik, fysik och kemi"
+  },
+  "MH57_003": {
+    "en": "Master's Programme in Genetics and Molecular Biosciences",
+    "fi": "Genetiikan ja molekulaaristen biotieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i genetik och molekylära biovetenskaper"
+  },
+  "420082": {
+    "en": "Swedish Translation Studies",
+    "fi": "Ruotsin kääntäminen",
+    "sv": "Svensk översättning"
+  },
+  "MH40_011": {
+    "en": "Master's Programme in Intercultural Encounters",
+    "fi": "Kulttuurienvälisen vuorovaikutuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i interkulturell växelverkan"
+  },
+  "820051": {
+    "en": "Plant Production Sciences",
+    "fi": "Kasvintuotantotieteet",
+    "sv": "Växtproduktionsvetenskaper"
+  },
+  "820036": {
+    "en": "Consumer Economics",
+    "fi": "Kuluttajaekonomia",
+    "sv": "Konsumentekonomi"
+  },
+  "520910": {
+    "en": "Further Education for Physics Teacher",
+    "fi": "Fysiikan opettajien täydennyskoulutus",
+    "sv": "Fortbildning för lärare i fysik"
+  },
+  "MH40_010": {
+    "en": "Master's Programme in Cultural Heritage",
+    "fi": "Kulttuuriperinnön maisteriohjelma",
+    "sv": "Magisterprogrammet i kulturarv"
+  },
+  "MH70_011": {
+    "en": "Master's Programme in Social- and Health Research and Management",
+    "fi": "Sosiaali- ja terveystutkimuksen ja -johtamisen maisteriohjelma",
+    "sv": "Magisterprogrammet i social- och hälsoforskning och ledning"
+  },
+  "520086": {
+    "en": "Master's Degree Programme in Bioinformatics",
+    "fi": "Master's Degree Programme in Bioinformatics",
+    "sv": "Master's Degree Programme in Bioinformatics"
+  },
+  "420055": {
+    "en": "Nordic Literature",
+    "fi": "Pohjoismainen kirjallisuus",
+    "sv": "Nordisk litteratur"
+  },
+  "720088": {
+    "en": "Master's Degree Programme in European Studies",
+    "fi": "Master's Degree Programme in European Studies",
+    "sv": "Master's Degree Programme in European Studies"
+  },
+  "T920108": {
+    "en": "Doctoral programme in Economics",
+    "fi": "Taloustieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i ekonomi"
+  },
+  "420061": {
+    "en": "Germanic Philology",
+    "fi": "Germaaninen filologia",
+    "sv": "Germansk filologi"
+  },
+  "420159": {
+    "en": "Master's Degree Programme in Culture and Communication",
+    "fi": "Magisterprogrammet Kultur och kommunikation",
+    "sv": "Magisterprogrammet Kultur och kommunikation"
+  },
+  "820053": {
+    "en": "Agricultural Sciences",
+    "fi": "Maataloustieteet",
+    "sv": "Lantbruksvetenskaper"
+  },
+  "420122": {
+    "en": "History (Teaching in Finnish)",
+    "fi": "Historia (opetus suomeksi)",
+    "sv": "Historia (undervisning på finska)"
+  },
+  "820103": {
+    "en": "Doctorate of Agriculture and Forestry",
+    "fi": "Maatalous-metsätieteiden tohtorin opinnot",
+    "sv": "Studier för agronomie- och forstdoktorsexamen"
+  },
+  "T923104": {
+    "en": "Doctoral Programme in Chemistry and Molecular Research",
+    "fi": "Kemian ja molekyylitutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i kemi och molekylära vetenskaper"
+  },
+  "MH70_002": {
+    "en": "Master 's Programme in Politics, Media and Communication",
+    "fi": "Politiikan ja viestinnän maisteriohjelma",
+    "sv": "Magisterprogrammet i politik, medier och kommunikation"
+  },
+  "720034": {
+    "en": "Social Work",
+    "fi": "Sosiaalityö",
+    "sv": "Socialarbete"
+  },
+  "MH40_013": {
+    "en": "Master's Programme in Culture and Communication",
+    "fi": "Kulttuurin ja kommunikaation maisteriohjelma",
+    "sv": "Magisterprogrammet i kultur och kommunikation"
+  },
+  "Y00020": {
+    "en": "Degree Programme in Environmental Sciences (Helsinki)",
+    "fi": "Ympäristötieteiden koulutusohjelma (Helsinki)",
+    "sv": "Utbildningsprogrammet för miljövetenskaper (Helsingfors"
+  },
+  "320031": {
+    "en": "International Programmes, Diploma in Health Care Quality Improvement",
+    "fi": "Kansainväliset ohjelmat, Diploma in Health Care Quality Improvement",
+    "sv": "Internationella program, Diploma in Health Care Quality Improvement"
+  },
+  "320030": {
+    "en": "International Programmes, Master in Health Care Quality Improvement",
+    "fi": "Kansainväliset ohjelmat, Master in Health Care Quality Improvement",
+    "sv": "Internationella program, Master in Health Care Quality Improvement"
+  },
+  "120020": {
+    "en": "Master of Theology with specialization in Religion, Conflict and Dialogue",
+    "fi": "Master of Theology with specialization in Religion, Conflict and Dialogue",
+    "sv": "Master of Theology with specialization in Religion, Conflict and Dialogue"
+  },
+  "420130": {
+    "en": "Language Technology",
+    "fi": "Kieliteknologia",
+    "sv": "Språkteknologi"
+  },
+  "420049": {
+    "en": "Finnish Language",
+    "fi": "Suomen kieli",
+    "sv": "Finska språket"
+  },
+  "320050": {
+    "en": "Spesific Training Programme in Postgraduate Specialization in Medicine, 2 years",
+    "fi": "Erikoislääkärien lisäkoulutusohjelma, 2v",
+    "sv": "Tillägsutbildningsprogrammet för specialist läkarna, 2 årig"
+  },
+  "420164": {
+    "en": "South-Asian Studies",
+    "fi": "Etelä-Aasian tutkimus",
+    "sv": "Sydasienforskning"
+  },
+  "820007": {
+    "en": "Agrotechnology",
+    "fi": "Agroteknologia",
+    "sv": "Agroteknologi"
+  },
+  "620040": {
+    "en": "Textiles, Clothing and Craft Design Studies",
+    "fi": "Käsityötieteen koulutus",
+    "sv": "Slöjdvetenskap"
+  },
+  "420104": {
+    "en": "Doctorate in Psychology",
+    "fi": "Psykologian tohtorin opinnot",
+    "sv": "Studier för psykologie doktorsexamen"
+  },
+  "420089": {
+    "en": "Japanese Studies",
+    "fi": "Japanin tutkimus",
+    "sv": "Japanforskning"
+  },
+  "MH50_002": {
+    "en": "Master's Programme in Life Science Informatics",
+    "fi": "Life Science Informatics -maisteriohjelma",
+    "sv": "Magisterprogrammet i Life Science Informatics"
+  },
+  "MH40_006": {
+    "en": "Master's Programme in Translation and Interpreting",
+    "fi": "Kääntämisen ja tulkkauksen maisteriohjelma",
+    "sv": "Magisterprogrammet i översättning och tolkning"
+  },
+  "MH50_003": {
+    "en": "Master's Programme in Theoretical and Computational Methods",
+    "fi": "Teoreettisten ja laskennallisten menetelmien maisteriohjelma",
+    "sv": "Magisterprogrammet i teoretiska och beräkningsmetoder"
+  },
+  "420021": {
+    "en": "Archaeology",
+    "fi": "Arkeologia",
+    "sv": "Arkeologi"
+  },
+  "V510016": {
+    "en": "Pharmacy",
+    "fi": "Farmasia",
+    "sv": "Farmaci"
+  },
+  "820009": {
+    "en": "Forest Ecology and Management",
+    "fi": "Metsien ekologia ja käyttö",
+    "sv": "Skoglig ekologi och resurshushållning"
+  },
+  "420042": {
+    "en": "Logopedics",
+    "fi": "Logopedia",
+    "sv": "Logopedi"
+  },
+  "420093": {
+    "en": "Cultural Anthropology",
+    "fi": "Kulttuuriantropologia",
+    "sv": "Kulturantropologi"
+  },
+  "720021": {
+    "en": "Social and Cultural Anthropology",
+    "fi": "Sosiaali- ja kulttuuriantropologia",
+    "sv": "Social- och kulturantropologi"
+  },
+  "520050": {
+    "en": "Degree Programme in Geology",
+    "fi": "Geologian koulutusohjelma",
+    "sv": "Utbildningsprogrammet för geologi"
+  },
+  "MH70_001": {
+    "en": "Master's Programme in Philosophy",
+    "fi": "Filosofian maisteriohjelma",
+    "sv": "Magisterprogrammet i filosofi"
+  },
+  "720011": {
+    "en": "Practical Philosophy",
+    "fi": "Käytännöllinen filosofia",
+    "sv": "Praktisk filosofi"
+  },
+  "MH50_001": {
+    "en": "Master's Programme in Mathematics and Statistics",
+    "fi": "Matematiikan ja tilastotieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i matematik och statistik"
+  },
+  "620008": {
+    "en": "Class teacher education (swedish)",
+    "fi": "Luokanopettajan koulutus (ruotsinkielinen)",
+    "sv": "Klasslärarutbildning"
+  },
+  "420084": {
+    "en": "German Translation",
+    "fi": "Saksan kääntäminen",
+    "sv": "Tysk översättning"
+  },
+  "MH40_002": {
+    "en": "Master's Programme in Languages",
+    "fi": "Kielten maisteriohjelma",
+    "sv": "Magisterprogrammet i språk"
+  },
+  "820029": {
+    "en": "Agricultural Economics",
+    "fi": "Maatalousekonomia",
+    "sv": "Lantbruksekonomi"
+  },
+  "820039": {
+    "en": "Agricultural Economics and entrepreneurship",
+    "fi": "Maatalousekonomia ja yrittäjyys",
+    "sv": "Lantbruksekonomi och företatagande"
+  },
+  "720023": {
+    "en": "Statistics",
+    "fi": "Tilastotiede",
+    "sv": "Statistik"
+  },
+  "420091": {
+    "en": "Aesthetics",
+    "fi": "Estetiikka",
+    "sv": "Estetik"
+  },
+  "420058": {
+    "en": "Comparative Literature",
+    "fi": "Yleinen kirjallisuustiede",
+    "sv": "Allmän litteraturvetenskap"
+  },
+  "V510013": {
+    "en": "Genetics",
+    "fi": "Perinnöllisyystiede",
+    "sv": "Genetik"
+  },
+  "MH40_004": {
+    "en": "Master's Programme in Russian Studies",
+    "fi": "Venäjän tutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i ryska studier"
+  },
+  "KH50_006": {
+    "en": "Bachelor's Programme in Geosciences",
+    "fi": "Geotieteiden kandiohjelma",
+    "sv": "Kandidatsprogrammet i geovetenskap"
+  },
+  "KH40_006": {
+    "en": "Bachelor's Programme in History",
+    "fi": "Historian kandiohjelma",
+    "sv": "Kandidatprogrammet i historia"
+  },
+  "KH30_002": {
+    "en": "Bachelor's Programme in Logopedics",
+    "fi": "Logopedian kandiohjelma",
+    "sv": "Kandidatprogrammet i logopedi"
+  },
+  "MH40_003": {
+    "en": "Master's Programme in English Studies",
+    "fi": "Englannin kielen ja kirjallisuuden maisteriohjelma",
+    "sv": "Magisterprogrammet i engelska språket och litteraturen"
+  },
+  "420404": {
+    "en": "Degree Programme in History, History Teacher Line",
+    "fi": "Historian koulutusohjelma, aineenopettajan suuntautumisvaihtoehto",
+    "sv": "Utbildningsprogrammet för historia, inriktningsalternativet för ämneslärare"
+  },
+  "420096": {
+    "en": "Cognitive Science",
+    "fi": "Kognitiotiede",
+    "sv": "Kognitionsvetenskap"
+  },
+  "KH57_003": {
+    "en": "Bachelor's Programme in Enviromental Sciences",
+    "fi": "Ympäristötieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i miljövetenskaper"
+  },
+  "KH50_007": {
+    "en": "Bachelor's Programme in Geography",
+    "fi": "Maantieteen kandiohjelma",
+    "sv": "Kandidatprogrammet i geografi"
+  },
+  "420139": {
+    "en": "Mother-Tongue and Literature",
+    "fi": "Äidinkieli ja kirjallisuus",
+    "sv": "Modersmålet och litteraturen"
+  },
+  "KH80_002": {
+    "en": "Bachelor's Programme in Forest Sciences",
+    "fi": "Metsätieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i skogsvetenskaper"
+  },
+  "MH80_004": {
+    "en": "Master's Programme in Food Sciences",
+    "fi": "Elintarviketieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i livsmedelsvetenskaper"
+  },
+  "520051": {
+    "en": "The Degree Programme in Environmental Science and Policy",
+    "fi": "Ympäristönsuojelutieteen koulutusohjelma",
+    "sv": "Utbildningsprogrammet för miljövårdsvetenskap"
+  },
+  "MH80_005": {
+    "en": "Master´s Programme in Human Nutrition and Food-Related Behaviour",
+    "fi": "Ihmisen ravitsemuksen ja ruokakäyttäytymisen maisteriohjelma",
+    "sv": "Magisterprogrammet i human nutrition och matbeteende"
+  },
+  "MH30_002": {
+    "en": "Master's Programme in Translational Medicine",
+    "fi": "Translationaalisen lääketieteen maisteriohjelma (Translational Medicine)",
+    "sv": "Magisterprogrammet i translationell medicin"
+  },
+  "420200": {
+    "en": "Master's Degree Programme in Intercultural Encounters",
+    "fi": "Master's Degree Programme in Intercultural Encounters",
+    "sv": "Master's Degree Programme in Intercultural Encounters"
+  },
+  "MH50_013": {
+    "en": "Master's Programme in Urban Studies and Planning",
+    "fi": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma",
+    "sv": "Magisterprogrammet i urbana studier och planering"
+  },
+  "MH40_001": {
+    "en": "Master's Programme in Art Studies",
+    "fi": "Taiteiden tutkimuksen maisteriohjelma",
+    "sv": "Magisterprogrammet i konstforskning"
+  },
+  "MH70_003": {
+    "en": "Master's Programme in Global Politics and Communication",
+    "fi": "Globaalin politiikan ja kommunikaation maisteriohjelma",
+    "sv": "Magisterprogrammet i global politik och kommunikation"
+  },
+  "MH50_012": {
+    "en": "Master's Programme in Geography",
+    "fi": "Maantieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i geografi"
+  },
+  "KH50_008": {
+    "en": "Bachelor’s Programme in Science",
+    "fi": "Luonnontieteiden kandiohjelma",
+    "sv": "Kandidatprogrammet i naturvetenskaper"
+  },
+  "MH70_009": {
+    "en": "Master 's Programme in Economics",
+    "fi": "Taloustieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i ekonomi"
+  },
+  "MH50_010": {
+    "en": "Master's Programme in Data Science",
+    "fi": "Datatieteen maisteriohjelma",
+    "sv": "Magisterprogrammet i data science"
+  },
+  "MH80_007": {
+    "en": "Master 's Programme in Microbiology and Microbial Biotechnology",
+    "fi": "Mikrobiologian ja mikrobibiotekniikan maisteriohjelma",
+    "sv": "Magisterprogrammet i mikrobiologi och mikrobiell bioteknik"
+  },
+  "MH80_003": {
+    "en": "Master 's Programme in Forest Sciences",
+    "fi": "Metsätieteiden maisteriohjelma",
+    "sv": "Magisterprogrammet i skogsvetenskaper"
+  },
+  "T922105": {
+    "en": "Doctoral Programme in Microbiology and Biotechnology",
+    "fi": "Mikrobiologian ja biotekniikan tohtoriohjelma",
+    "sv": "Doktorandprogrammet i mikrobiologi och bioteknik"
+  },
+  "T923106": {
+    "en": "Doctoral Programme in Materials Research and Nanoscience",
+    "fi": "Materiaalitutkimuksen ja nanotieteiden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i materialforskning och nanovetenskap"
+  },
+  "T920111": {
+    "en": "Doctoral programme in philosophy, arts and society",
+    "fi": "Filosofian, taiteiden ja yhteiskunnan tutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i filosofi, konstforskning och samhället"
+  },
+  "T921105": {
+    "en": "Doctoral programme in drug research",
+    "fi": "Lääketutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i läkemedelsforskning"
+  },
+  "T921107": {
+    "en": "Doctoral Programme in Brain and Mind",
+    "fi": "Aivot ja mieli tohtoriohjelma",
+    "sv": "Doktorandprogrammet i hjärn- och medvetandeforskning"
+  },
+  "T922101": {
+    "en": "Doctoral Programme in Wildlife Biology",
+    "fi": "Luonnonvaraisten eliöiden tutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i forskning om vilda organismer"
+  },
+  "T922102": {
+    "en": "Doctoral Programme in Plant Sciences",
+    "fi": "Kasvitieteen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i botanik"
+  },
+  "T920104": {
+    "en": "Doctoral programme in language studies",
+    "fi": "Kielentutkimuksen tohtoriohjelma",
+    "sv": "Doktorandprogrammet i språkforskning"
+  },
+  "T921106": {
+    "en": "Doctoral Programme in Integrative Life Science",
+    "fi": "Integroivien biotieteiden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i integrerande biovetenskap"
+  },
+  "T921103": {
+    "en": "Doctoral programme in population health",
+    "fi": "Väestön terveyden tohtoriohjelma",
+    "sv": "Doktorandprogrammet i befolkningshälsan"
+  }
+}
