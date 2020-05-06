@@ -14,6 +14,7 @@ const resetStudyprogrammes = async () => {
         key,
         name,
         locked: false,
+        claimed: false,
       })
     })
   } catch (error) {
