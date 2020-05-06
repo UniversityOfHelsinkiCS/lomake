@@ -22,8 +22,8 @@ export default (state = { data: null }, action) => {
     case 'GET_PREVIOUS_ANSWERS_SUCCESS': {
       const formattedStrings = action.response.data
         ? Object.entries(action.response.data).reduce((prev, curr) => {
-            let temp = curr[1].replace(/_x000D_\n/g, '\n')
-            temp = temp.replace(/\n/g, '\n\n') // markdown requires two linebreaks
+            let temp = curr[1].replace(/_x000D_\n/g, '\n\n') // for example in bsc comp science
+            temp = temp.replace(/\n•/g, '\n\n•') // for example in master of arts
 
             return (prev = {
               ...prev,
