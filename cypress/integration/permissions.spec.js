@@ -8,12 +8,12 @@ describe('Permission tests', function () {
   })
 
   it("Can't access form without permissions", function () {
-    cy.visit('http://localhost:8000/form/bsc_languages')
+    cy.visit('http://localhost:8000/form/KH40_003')
     cy.get('[data-cy=no-permissions-message]')
   })
 
   it("Can't WRITE with READ permissions and cant go to edit mode", function () {
-    cy.visit('http://localhost:8000/form/bsc_teachers_of_mathematics_physics_and_chemistry')
+    cy.visit('http://localhost:8000/form/KH50_004')
 
     //Check that cant edit stuff:
     cy.get('[data-cy=form-section-I]').click() // Simulate open attept even though does not do anything
@@ -22,7 +22,7 @@ describe('Permission tests', function () {
   })
 
   it('Can WRITE form with WRITE permissions and switch to readmode', function () {
-    cy.visit('http://localhost:8000/form/bsc_agricultural_sciences')
+    cy.visit('http://localhost:8000/form/KH50_005')
     cy.get('[data-cy=form-section-I]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.focused().type('EDITING')
@@ -31,7 +31,7 @@ describe('Permission tests', function () {
 
   it('Can do management with ADMIN permissions', function () {
     cy.visit('http://localhost:8000')
-    cy.get('[data-cy=bsc_computer_science-manage]').click()
+    cy.get('[data-cy=KH80_001-manage]').click()
     cy.get('[data-cy^=formLocker-button]')
   })
 })

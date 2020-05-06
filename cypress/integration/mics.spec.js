@@ -3,7 +3,7 @@
 
 describe('Misc tests', function () {
   this.beforeEach(function () {
-    cy.visit('http://localhost:8000/form/bsc_computer_science')
+    cy.visit('http://localhost:8000/form/KH50_005')
   })
 
   it('Locale can be changed and translations work', function () {

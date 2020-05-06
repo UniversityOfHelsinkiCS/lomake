@@ -13,15 +13,15 @@ const createCypressUser = async () => {
       email: 'cypressUser',
       admin: false,
       access: {
-        bsc_computer_science: {
+        KH80_001: {
           read: true,
           admin: true,
           write: true,
         },
-        bsc_teachers_of_mathematics_physics_and_chemistry: {
+        KH50_004: {
           read: true,
         },
-        bsc_agricultural_sciences: {
+        KH50_005: {
           write: true,
           read: true,
         },
