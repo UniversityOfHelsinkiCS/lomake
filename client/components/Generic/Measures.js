@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import ReactMarkdown from 'react-markdown'
@@ -10,8 +10,8 @@ const translations = {
   measureLabel: {
     fi: 'Lisää 1-5 toimenpidettä',
     en: 'Add 1-5 measures',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
@@ -21,7 +21,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const languageCode = useSelector((state) => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
-  const getInitialAmount = () => {
+  useEffect(() => {
     let measureNumber = 1
     while (measureNumber <= 5) {
       if (formData[`${id}_${measureNumber}_text`]) {
@@ -31,10 +31,14 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
       }
     }
 
-    if (measureNumber === 1) return 1
+    // even if no text always at least one text field shown
+    if (measureNumber === 1) {
+      setAmountOfMeasures(1)
+      return
+    }
 
-    return measureNumber - 1
-  }
+    setAmountOfMeasures(measureNumber - 1)
+  }, [formData])
 
   const getPreviousMeasureAnswers = () => {
     if (!previousYearsAnswers) return null
@@ -58,7 +62,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
 
   const previousAnswerText = getPreviousMeasureAnswers()
 
-  const [amountOfMeasures, setAmountOfMeasures] = useState(getInitialAmount())
+  const [amountOfMeasures, setAmountOfMeasures] = useState(1)
 
   return (
     <>
@@ -71,7 +75,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
           backgroundColor: '#daedf4',
           padding: '1em',
           borderRadius: '5px',
-          margin: '1em 0'
+          margin: '1em 0',
         }}
       >
         {translations.measureLabel[languageCode]}
@@ -104,8 +108,8 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
               className="ui button"
               disabled={amountOfMeasures === 1}
               onClick={() => {
-                setAmountOfMeasures(amountOfMeasures - 1)
                 clearMeasure(amountOfMeasures)
+                setAmountOfMeasures(amountOfMeasures - 1)
               }}
             >
               Remove measure
