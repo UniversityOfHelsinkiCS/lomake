@@ -52,7 +52,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
             src={mapLightToImage[previousAnswerLight]}
           />
         )}
-        <ReactMarkdown source={previousAnswerText.replace('•', '\n\n•')} />
+        <ReactMarkdown source={previousAnswerText} />
       </LastYearsAnswersAccordion>
     )
   }
