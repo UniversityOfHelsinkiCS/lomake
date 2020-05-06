@@ -91,7 +91,8 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     )
   }
 
-  if (answers.pending || !answers.data) return <Loader active inline="centered" />
+  if (answers.pending || !answers.data || !oldAnswers.data)
+    return <Loader active inline="centered" />
 
   const selectedAnswers =
     year === new Date().getFullYear()
