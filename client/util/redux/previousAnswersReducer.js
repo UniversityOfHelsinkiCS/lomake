@@ -22,9 +22,12 @@ export default (state = { data: null }, action) => {
     case 'GET_PREVIOUS_ANSWERS_SUCCESS': {
       const formattedStrings = action.response.data
         ? Object.entries(action.response.data).reduce((prev, curr) => {
+            let temp = curr[1].replace(/_x000D_\n/g, '\n')
+            temp = temp.replace(/\n/g, '\n\n') // markdown requires two linebreaks
+
             return (prev = {
               ...prev,
-              [curr[0]]: curr[1].replace(/_x000D_/g, '\n'),
+              [curr[0]]: temp,
             })
           }, {})
         : undefined
