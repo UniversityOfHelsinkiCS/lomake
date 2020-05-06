@@ -87,20 +87,20 @@ const programmes = [
   },
   {
     id: 9,
-    key: 'bsc_environmental_and_food_economics',
+    key: 'KH80_004',
     name: {
-      fi: '',
-      en: "Bachelor's Programme in Environmental and Food Economics",
-      se: '',
+      en: "Bachelor's Programme in Enviromental and Food Economics",
+      fi: 'Ympäristö- ja elintarviketalouden kandiohjelma',
+      se: 'Kandidatprogrammet i miljö- och livsmedelsekonomi',
     },
   },
   {
     id: 10,
-    key: 'bsc_environmental_sciences',
+    key: 'KH57_003',
     name: {
-      fi: '',
-      en: "Bachelor's Programme in Environmental Sciences",
-      se: '',
+      en: "Bachelor's Programme in Enviromental Sciences",
+      fi: 'Ympäristötieteiden kandiohjelma',
+      se: 'Kandidatprogrammet i miljövetenskaper',
     },
   },
   {
@@ -285,11 +285,11 @@ const programmes = [
   },
   {
     id: 31,
-    key: 'bsc_science',
+    key: 'KH50_008',
     name: {
-      fi: '',
-      en: 'Bachelor´s Programme in Science (since 2019)',
-      se: '',
+      en: 'Bachelor’s Programme in Science',
+      fi: 'Luonnontieteiden kandiohjelma',
+      se: 'Kandidatprogrammet i naturvetenskaper',
     },
   },
   {
@@ -321,8 +321,12 @@ const programmes = [
   },
   {
     id: 35,
-    key: 'dp_brain_mind',
-    name: { fi: '', en: 'Doctoral Programme Brain & Mind', se: '' },
+    key: 'T921107',
+    name: {
+      en: 'Doctoral Programme in Brain and Mind',
+      fi: 'Aivot ja mieli tohtoriohjelma',
+      se: 'Doktorandprogrammet i hjärn- och medvetandeforskning',
+    },
   },
   {
     id: 36,
@@ -524,7 +528,7 @@ const programmes = [
   },
   {
     id: 58,
-    key: 'T922102',
+    key: 'MH57_002',
     name: {
       fi: 'Kasvitieteen tohtoriohjelma',
       en: 'Doctoral Programme in Plant Sciences',
@@ -605,8 +609,12 @@ const programmes = [
   },
   {
     id: 67,
-    key: 'phd_samhallvetenskaper',
-    name: { fi: '', en: 'Kandidatprogrammet i samhällsvetenskaper', se: '' },
+    key: 'KH74_001',
+    name: {
+      en: "Bachelor's Programme in Social Sciences",
+      fi: 'Kandidatprogrammet i samhällsvetenskaper',
+      se: 'Kandidatprogrammet i samhällsvetenskaper',
+    },
   },
   {
     id: 68,
@@ -619,11 +627,11 @@ const programmes = [
   },
   {
     id: 69,
-    key: 'msc_agricultural_sciences',
+    key: 'MH80_001',
     name: {
-      fi: '',
       en: "Master's Programme in Agricultural Sciences",
-      se: '',
+      fi: 'Maataloustieteiden maisteriohjelma',
+      se: 'Magisterprogrammet i lantbruksvetenskaper',
     },
   },
   {
@@ -727,8 +735,12 @@ const programmes = [
   },
   {
     id: 81,
-    key: 'msc_economics',
-    name: { fi: '', en: "Master's Programme in Economics", se: '' },
+    key: 'MH70_009',
+    name: {
+      en: "Master's Programme in Economics",
+      fi: 'Taloustieteen maisteriohjelma',
+      se: 'Magisterprogrammet i ekonomi',
+    },
   },
   {
     id: 82,
@@ -831,11 +843,11 @@ const programmes = [
   },
   {
     id: 93,
-    key: 'msc_human_nutrition_and_food_behaviour',
+    key: 'MH80_005',
     name: {
-      fi: '',
-      en: "Master's Programme in Human Nutrition and Food Behaviour",
-      se: '',
+      en: "Master's Programme in Human Nutrition and Food-Related Behaviour",
+      fi: 'Ihmisen ravitsemuksen ja ruokakäyttäytymisen maisteriohjelma',
+      se: 'Magisterprogrammet i human nutrition och matbeteende',
     },
   },
   {
@@ -894,8 +906,12 @@ const programmes = [
   },
   {
     id: 100,
-    key: 'msc_logopedics',
-    name: { fi: '', en: "Master's Programme in Logopedics", se: '' },
+    key: 'MH30_005',
+    name: {
+      en: "Master's Programme in Logopedics",
+      fi: 'Logopedian maisteriohjelma',
+      se: 'Magistgerprogrammet i logopedi',
+    },
   },
   {
     id: 101,
@@ -935,8 +951,12 @@ const programmes = [
   },
   {
     id: 105,
-    key: 'msc_pharmacy',
-    name: { fi: '', en: "Master's Programme in Pharmacy", se: '' },
+    key: 'MH55_001',
+    name: {
+      en: "Master's Programme in Pharmacy",
+      fi: 'Proviisorin koulutusohjelma',
+      se: 'Utbildningsprogrammet för provisorsexamen',
+    },
   },
   {
     id: 106,
@@ -945,11 +965,11 @@ const programmes = [
   },
   {
     id: 107,
-    key: 'msc_politics_media_and_communication',
+    key: 'T922102',
     name: {
-      fi: '',
       en: "Master's Programme in Politics, Media and Communication",
-      se: '',
+      fi: 'Politiikan ja viestinnän maisteriohjelma',
+      se: 'Magisterprogrammet i politik, medier och kommunikation',
     },
   },
   {
@@ -972,17 +992,21 @@ const programmes = [
   },
   {
     id: 110,
-    key: 'msc_scandinavian_languages_and_literature',
+    key: 'MH40_008',
     name: {
-      fi: '',
-      en: "Master's Programme in Scandinavian Languages and Literature",
-      se: '',
+      en: "Master's Programme in Scandinavian Languages and Literatures",
+      fi: 'Pohjoismaisten kielten ja kirjallisuuksien maisteriohjelma',
+      se: 'Magisterprogrammet i nordiska språk och litteraturer',
     },
   },
   {
     id: 111,
-    key: 'msc_social_research',
-    name: { fi: '', en: "Master's Programme in Social Research", se: '' },
+    key: 'MH70_008',
+    name: {
+      en: "Master's Programme in Social Research",
+      fi: 'Sosiaalitieteiden maisteriohjelma',
+      se: 'Magisterprogrammet i sociala vetenskaper',
+    },
   },
   {
     id: 112,
@@ -995,16 +1019,20 @@ const programmes = [
   },
   {
     id: 113,
-    key: 'msc_society_and_change',
-    name: { fi: '', en: "Master's Programme in Society and Change", se: '' },
+    key: 'MH70_004',
+    name: {
+      en: "Master's Programme in Society and Change",
+      fi: 'Yhteiskunnallisen muutoksen maisteriohjelma',
+      se: 'Magisterprogrammet för samhälle i förändring',
+    },
   },
   {
     id: 114,
-    key: 'msc_theology_and_religious_studies',
+    key: 'MH10_001',
     name: {
-      fi: '',
       en: "Master's Programme in Theology and Religious Studies",
-      se: '',
+      fi: 'Teologian ja uskonnontutkimuksen maisteriohjelma',
+      se: 'Magisterprogrammet i teologi och religionsforskning',
     },
   },
   {
@@ -1045,20 +1073,20 @@ const programmes = [
   },
   {
     id: 119,
-    key: 'msc_food_economy_and_consumption',
+    key: 'MH80_006',
     name: {
-      fi: '',
-      en: 'Master’s Program in Food Economy and Consumption',
-      se: '',
+      en: "Master's Programme in Food Economy and Consumption",
+      fi: 'Elintarviketalouden ja kulutuksen maisteriohjelma',
+      se: 'Magisterprogrammet i livsmedelsekonomi och konsumtion',
     },
   },
   {
     id: 120,
-    key: 'msc_linguistic_diversity_in_the_digital_age',
+    key: 'MH40_005',
     name: {
-      fi: '',
-      en: 'Master’s programme Linguistic Diversity in the Digital Age',
-      se: '',
+      en: "Master's Programme Linguistic Diversity in the Digital Age",
+      fi: 'Kielellisen diversiteetin ja digitaalisten menetelmien maisteriohjelma',
+      se: 'Magisterprogrammet i språklig diversitet och digitala metoder',
     },
   },
   {
@@ -1081,8 +1109,12 @@ const programmes = [
   },
   {
     id: 123,
-    key: 'msc_forest_sciences',
-    name: { fi: '', en: 'Master´s Programme in Forest Sciences', se: '' },
+    key: 'MH80_003',
+    name: {
+      fi: 'Metsätieteiden maisteriohjelma',
+      en: 'Master´s Programme in Forest Sciences',
+      se: 'Magisterprogrammet i skogsvetenskaper',
+    },
   },
   {
     id: 124,
@@ -1095,11 +1127,11 @@ const programmes = [
   },
   {
     id: 125,
-    key: 'msc_microbiology_and_microbial_biotechnology',
+    key: 'MH80_007',
     name: {
-      fi: '',
+      fi: 'Mikrobiologian ja mikrobibiotekniikan maisteriohjelma',
       en: 'Master´s Programme in Microbiology and Microbial Biotechnology',
-      se: '',
+      se: 'Magisterprogrammet i mikrobiologi och mikrobiell bioteknik',
     },
   },
   {
