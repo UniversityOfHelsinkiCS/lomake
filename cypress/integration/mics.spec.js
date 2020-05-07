@@ -28,11 +28,16 @@ describe('Misc tests', function () {
       .then((text) => {
         const initialLink = text
 
-        cy.get('[data-cy=KH80_001-viewlink-reset]').click()
-
-        cy.get('[data-cy=KH80_001-viewlink] > input')
-          .invoke('val')
-          .then((text) => expect(text).not.equal(initialLink))
+        cy.get('[data-cy=KH80_001-viewlink-reset]')
+          .click()
+          .then(() => {
+            cy.get('[data-cy=KH80_001-viewlink] > input')
+              .invoke('val')
+              .then((text) => {
+                const newLink = text
+                expect(initialLink).to.not.equal(newLink)
+              })
+          })
       })
   })
 })
