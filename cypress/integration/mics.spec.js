@@ -23,21 +23,21 @@ describe('Misc tests', function () {
 
   it('Access link can be reset/updated', function () {
     cy.get('[data-cy=KH80_001-manage]').click()
+    cy.server()
 
     cy.get('[data-cy=KH80_001-viewlink] > input')
       .invoke('val')
       .then((text) => {
         const initialLink = text
+        cy.route('POST', '/api/programmes/KH80_001/tokens/*').as('reset')
+        cy.get('[data-cy=KH80_001-viewlink-reset]').click()
+        cy.wait('@reset')
 
-        cy.get('[data-cy=KH80_001-viewlink-reset]')
-          .click()
-          .then(() => {
-            cy.get('[data-cy=KH80_001-viewlink] > input')
-              .invoke('val')
-              .then((text) => {
-                const newLink = text
-                expect(initialLink).to.not.equal(newLink)
-              })
+        cy.get('[data-cy=KH80_001-viewlink] > input')
+          .invoke('val')
+          .then((text) => {
+            const newLink = text
+            expect(initialLink).to.not.equal(newLink)
           })
       })
   })
