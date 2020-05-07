@@ -53,7 +53,7 @@ const SmileyTableCell = ({
     return (
       <td key={`${programmesKey}-${questionId}`}>
         <div
-          data-cy={`${programmesKey}-${questionIndex}`}
+          data-cy={`${programmesKey}-${questionId}`}
           className="square"
           style={{ background: backgroundColorMap[lightAnswer] }}
         >
@@ -92,7 +92,7 @@ const SmileyTableCell = ({
     return (
       <td key={`${programmesKey}-${questionId}`}>
         <div
-          data-cy={`${programmesKey}-${questionIndex}`}
+          data-cy={`${programmesKey}-${questionId}`}
           className="square"
           style={{ background: '#daedf4' }}
         >
@@ -133,7 +133,7 @@ const SmileyTableCell = ({
   return (
     <td key={`${programmesKey}-${questionId}`}>
       <div
-        data-cy={`${programmesKey}-${questionIndex}`}
+        data-cy={`${programmesKey}-${questionId}`}
         className="square"
         style={{ background: 'whitesmoke' }}
       />

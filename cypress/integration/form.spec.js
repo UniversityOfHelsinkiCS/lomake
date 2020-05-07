@@ -24,11 +24,11 @@ describe('Form tests', function () {
     // Check that the changes have been saved:
     cy.visit('/')
 
-    cy.get('[data-cy=KH50_005-0]')
+    cy.get('[data-cy=KH50_005-review_of_last_years_situation_report]')
       .should('have.css', 'background-color')
       .and('eq', 'rgb(255, 255, 177)')
 
-    cy.get('[data-cy=KH50_005-9]')
+    cy.get('[data-cy=KH50_005-community_wellbeing]')
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
   })
