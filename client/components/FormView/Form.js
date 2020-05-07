@@ -29,7 +29,7 @@ const Form = ({ questions, programmeKey }) => {
 
   const partMap = (part) => {
     if (part.type === 'TITLE') {
-      return <h2 id={part.id}>{part.label[languageCode]}</h2>
+      return <h2 key={part.id}>{part.label[languageCode]}</h2>
     }
 
     if (!partComponentMap.hasOwnProperty(part.type)) {
