@@ -28,6 +28,10 @@ const Form = ({ questions, programmeKey }) => {
   let number = -1
 
   const partMap = (part) => {
+    if (part.type === 'TITLE') {
+      return <h2 id={part.id}>{part.label[languageCode]}</h2>
+    }
+
     if (!partComponentMap.hasOwnProperty(part.type)) {
       console.error(`No component matching '${part.type}'`)
       return null
