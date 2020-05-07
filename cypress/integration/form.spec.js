@@ -3,6 +3,7 @@
 
 describe('Form tests', function () {
   this.beforeEach(function () {
+    cy.login('cypressUser')
     cy.visit('http://localhost:8000/form/KH50_005')
   })
 

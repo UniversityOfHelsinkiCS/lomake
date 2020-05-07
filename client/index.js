@@ -29,7 +29,10 @@ if (process.env.NODE_ENV === 'development') {
   if (currentFakeUser) {
     const parsedFakeCurrentUser = JSON.parse(currentFakeUser)
 
-    if (parsedFakeCurrentUser.uid !== 'cypressUser') {
+    if (
+      parsedFakeCurrentUser.uid !== 'cypressUser' &&
+      parsedFakeCurrentUser.uid !== 'cypressAdminUser'
+    ) {
       setHeaders(newUser)
     }
   } else {

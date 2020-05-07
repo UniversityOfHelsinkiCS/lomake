@@ -2,6 +2,10 @@
 /// <reference types="cypress" />
 
 describe('Permission tests', function () {
+  this.beforeEach(function () {
+    cy.login('cypressUser')
+  })
+
   it('Invalid url shows error', function () {
     cy.visit('http://localhost:8000/form/lmao')
     cy.contains('Error: Invalid url.')

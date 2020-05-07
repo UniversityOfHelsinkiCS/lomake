@@ -31,6 +31,9 @@ export const possibleUsers = [
   {
     uid: 'cypressUser',
   },
+  {
+    uid: 'cypressAdminUser',
+  },
 ]
 
 export const setHeaders = (uid) => {
