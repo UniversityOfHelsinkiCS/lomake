@@ -94,18 +94,27 @@ export default function OspaModule() {
         onChange={setNewDate}
         locale={languageCode}
       />
-      <Button primary compact size="mini" disabled={!newDate} onClick={handleDeadlineSave}>
+      <Button
+        data-cy="updateDeadline"
+        primary
+        compact
+        size="mini"
+        disabled={!newDate}
+        onClick={handleDeadlineSave}
+      >
         {translations['updateDeadline'][languageCode]}
       </Button>
       {nextDeadline && (
-        <Button onClick={handleDelete} negative compact size="mini">
+        <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
           {translations['deleteThisDeadline'][languageCode]}
         </Button>
       )}
 
       <Header as="h5">{translations['nextDeadline'][languageCode]}</Header>
-      {!nextDeadline && <div>{translations['noDeadlineSet'][languageCode]}</div>}
-      {nextDeadline && <div>{formatDate(nextDeadline.date)}</div>}
+      {!nextDeadline && (
+        <div data-cy="noNextDeadline">{translations['noDeadlineSet'][languageCode]}</div>
+      )}
+      {nextDeadline && <div data-cy="nextDeadline">{formatDate(nextDeadline.date)}</div>}
     </Segment>
   )
 }
