@@ -93,7 +93,8 @@
     "ignore": [
       "dist/*",
       "client/*",
-      "server/*"
+      "server/*",
+      "cypress/*"
     ]
   },
   "_moduleAliases": {
