@@ -1,11 +1,12 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 
-const createCypressUser = async () => {
+const createCypressUsers = async () => {
   try {
-    logger.info('Creating cypressUser for tests')
+    logger.info('Creating users for Cypress tests')
 
-    await db.user.destroy({ where: { uid: 'cypressUser' } }) //Delete old one if exists
+    await db.user.destroy({ where: { uid: 'cypressUser' } })
+    await db.user.destroy({ where: { uid: 'cypressAdminUser' } })
 
     await db.user.create({
       uid: 'cypressUser',
@@ -28,10 +29,18 @@ const createCypressUser = async () => {
       },
       irrelevant: false,
     })
+
+    await db.user.create({
+      uid: 'cypressAdminUser',
+      name: 'cypressAdminUser',
+      email: 'cypressAdminUser',
+      admin: true,
+      irrelevant: false,
+    })
   } catch (error) {
-    logger.error(`Failed to create cypressUser: ${error}`)
+    logger.error(`Failed to create users for Cypress tests: ${error}`)
   }
 }
 module.exports = {
-  createCypressUser,
+  createCypressUsers,
 }

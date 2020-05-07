@@ -12,7 +12,7 @@ const { initializeDatabaseConnection } = require('@root/server/database/connecti
 
 const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
 const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
-const { createCypressUser } = require('@root/server/scripts/createCypressUser')
+const { createCypressUsers } = require('@root/server/scripts/createCypressUsers')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
@@ -41,7 +41,7 @@ initializeDatabaseConnection()
     // Scripts that will run if env variable TESTING=true (in github actions AND locally when in dev-mode)
     if (process.env.TESTING || process.env.NODE_ENV === 'development') {
       resetStudyprogrammes()
-      createCypressUser()
+      createCypressUsers()
       createDeadlineIfNoneExist()
     }
 
