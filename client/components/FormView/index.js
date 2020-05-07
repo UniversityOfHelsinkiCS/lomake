@@ -15,6 +15,7 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
 import NavigationSidebar from './NavigationSidebar'
+import SaveIndicator from './SaveIndicator'
 
 const translations = {
   title: {
@@ -122,6 +123,7 @@ const FormView = ({ room }) => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
+        <SaveIndicator />
         <div style={{ marginBottom: '2em' }}>
           <Button onClick={() => history.push('/')} icon="arrow left" />
         </div>
