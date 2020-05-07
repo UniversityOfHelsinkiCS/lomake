@@ -28,6 +28,10 @@ const Form = ({ questions, programmeKey }) => {
   let number = -1
 
   const partMap = (part) => {
+    if (part.type === 'TITLE') {
+      return <h2 key={part.id}>{part.label[languageCode]}</h2>
+    }
+
     if (!partComponentMap.hasOwnProperty(part.type)) {
       console.error(`No component matching '${part.type}'`)
       return null
@@ -83,7 +87,9 @@ const Form = ({ questions, programmeKey }) => {
             programmeKey={programmeKey}
           >
             {section.link_title && section.link_url && (
-              <a href={section.link_url}>{section.link_title[languageCode]}</a>
+              <a target="_blank" href={section.link_url}>
+                {section.link_title[languageCode]}
+              </a>
             )}
             {section.parts.map(partMap)}
           </Section>

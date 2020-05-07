@@ -1,9 +1,8 @@
 .editor-class {
   background-color: #f8f8f8;
   padding: 1em;
-  min-height: 200px;
   width: 100%;
-  border-radius: 5px;
+  height: auto;
 }
 
 .wrapper-class {
@@ -16,4 +15,6 @@
   flex-direction: column;
   max-width: 50px;
   border: 0;
+  background-color: #f8f8f8;
+  margin: 0;
 }

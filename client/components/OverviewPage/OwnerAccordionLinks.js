@@ -74,6 +74,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               {translations.viewPrompt[languageCode]}
             </div>
             <Input
+              data-cy={`${programme}-viewlink`}
               style={{ width: '500px' }}
               icon={
                 <Icon
@@ -90,6 +91,7 @@ const OwnerAccordionLinks = ({ programme }) => {
             />
             <div
               onClick={() => createOrResetToken(viewToken, 'READ')}
+              data-cy={`${programme}-viewlink-reset`}
               style={{
                 cursor: 'pointer',
                 color: 'red',
@@ -113,6 +115,7 @@ const OwnerAccordionLinks = ({ programme }) => {
             </div>
             <Input
               style={{ width: '500px' }}
+              data-cy={`${programme}-editlink`}
               icon={
                 <Icon
                   name={copied === 'EDIT' ? 'checkmark' : 'copy'}
@@ -127,6 +130,7 @@ const OwnerAccordionLinks = ({ programme }) => {
               ref={editLinkRef}
             />
             <div
+              data-cy={`${programme}-editlink-reset`}
               onClick={() => createOrResetToken(editToken, 'WRITE')}
               style={{
                 cursor: 'pointer',

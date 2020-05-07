@@ -157,6 +157,15 @@
         "required": true
       },
       {
+        "id": "meta1",
+        "type": "TITLE",
+        "label": {
+          "fi": "KOULUTUSOHJELMAN YLEISTILANNE",
+          "se": "DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME"
+        }
+      },
+      {
         "id": "overall_status_information_used",
         "type": "TEXTAREA",
         "label": {
@@ -229,6 +238,15 @@
           "en": "Has the steering group worked successfully? What challenges have been identified in the steering group’s work and management? How does internal information distribution/communication/interaction function between the programme teachers, students and leadership (director and steering group)? What development measures have been taken?"
         },
         "required": true
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "HYVINVOINTI",
+          "se": "VÄLBEFINNANDE",
+          "en": "WELLBEING"
+        }
       },
       {
         "id": "wellbeing_information_used",
@@ -305,6 +323,15 @@
         "required": true
       },
       {
+        "id": "meta3",
+        "type": "TITLE",
+        "label": {
+          "fi": "HENKILÖSTÖ- JA MUIDEN RESURSSIEN RIITTÄVYYS JA TOIMIVUUS",
+          "se": "PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET",
+          "en": "SUFFICIENT AND APPROPRIATE HUMAN AND OTHER RESOURCES"
+        }
+      },
+      {
         "id": "sufficient_resources_information_used",
         "type": "TEXTAREA",
         "label": {
@@ -347,6 +374,15 @@
           "en": "How successfully have the partners cooperated? What are the major merits and challenges of cross-faculty operations?"
         },
         "required": false
+      },
+      {
+        "id": "meta4",
+        "type": "TITLE",
+        "label": {
+          "fi": "USEAN TIEDEKUNNAN YHTEISEN OHJELMAN TOIMIVUUS",
+          "se": "FAKULTETSÖVERSKRIDANDE PROGRAM",
+          "en": "JOINT PROGRAMME WITH SEVERAL FACULTIES"
+        }
       },
       {
         "id": "joint_programme_information_used",

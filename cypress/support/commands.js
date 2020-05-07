@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/**
+ * Logs in as specified user.
+ * @param {string} uid Uid of user to login as
+ */
+Cypress.Commands.add('login', (uid) => {
+  window.localStorage.setItem('fakeUser', JSON.stringify({ uid }))
+  cy.log('Logged in as', uid)
+})
