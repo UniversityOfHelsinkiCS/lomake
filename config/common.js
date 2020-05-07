@@ -64,25 +64,6 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const allLightIds = [
-  'review_of_last_years_situation_report_light',
-  'student_admissions_light',
-  'language_environment_light',
-  'programme_identity_light',
-  'employability_light',
-  'learning_outcomes_light',
-  'curriculum_light',
-  'guidance_light',
-  'student_feedback_light',
-  'community_wellbeing_light',
-  'teacher_skills_light',
-  'management_light',
-  'teaching_resources_light',
-  'recruitment_influence_light',
-  'resourcing_light',
-  'cooperation_success_light',
-]
-
 const SUPERADMINS = ['markokos', 'tgtapio', 'jehelen', 'mluukkai', 'admin']
 
 const isSuperAdmin = (uid) => {
@@ -95,6 +76,5 @@ module.exports = {
   faculties,
   degreeLevels,
   requiredFormIds,
-  allLightIds,
   isSuperAdmin,
 }

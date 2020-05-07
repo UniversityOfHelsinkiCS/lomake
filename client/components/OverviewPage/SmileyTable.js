@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { allLightIds } from 'Utilities/common'
-import { colors } from 'Utilities/common'
-import { Icon, Loader, Header } from 'semantic-ui-react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
-import OwnerAccordionContent from './OwnerAccordionContent'
-import './OverviewPage.scss'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import questions from '../../questions.json'
+import { Header, Icon, Loader } from 'semantic-ui-react'
+import { colors } from 'Utilities/common'
+import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import questions from '../../questions.json'
+import './OverviewPage.scss'
+import OwnerAccordionContent from './OwnerAccordionContent'
+import SmileyTableCell from './SmileyTableCell'
 
 const translations = {
   openManageText: {
@@ -39,18 +39,6 @@ const translations = {
   },
 }
 
-const lightEmojiMap = {
-  green: 'smile outline',
-  yellow: 'meh outline',
-  red: 'frown outline',
-}
-
-const backgroundColorMap = {
-  green: '#9dff9d',
-  yellow: '#ffffb1',
-  red: '#ff7f7f',
-}
-
 const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
@@ -78,7 +66,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   }, [filteredProgrammes])
 
   const transformIdToTitle = (id) => {
-    const formatted = id.substring(0, id.length - 6).replace(/_/g, ' ')
+    const formatted = id.replace(/_/g, ' ')
 
     return (
       <span
@@ -158,15 +146,27 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     )
   }
 
+  const tableIds = questions.reduce((acc, cur) => {
+    const questionObjects = cur.parts.reduce((acc, cur) => {
+      if (cur.id.includes('information_needed') || cur.id.includes('information_used')) {
+        return acc
+      }
+
+      return [...acc, { id: cur.id, type: cur.no_light ? 'ENTITY_NOLIGHT' : cur.type }]
+    }, [])
+
+    return [...acc, ...questionObjects]
+  }, [])
+
   return (
     <div style={{ overflowX: 'auto', width: '100vw', display: 'flex', justifyContent: 'center' }}>
       <table style={{ tableLayout: 'fixed', maxWidth: '1100px' }}>
         <thead>
           <tr>
             <th colSpan="2" style={{ background: 'white', position: 'sticky' }} />
-            {allLightIds.map((id) => (
+            {tableIds.map((idObject) => (
               <th
-                key={id}
+                key={idObject.id}
                 style={{
                   wordWrap: 'break-word',
                   textAlign: 'center',
@@ -174,7 +174,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                   background: 'white',
                 }}
               >
-                {transformIdToTitle(id)}
+                {transformIdToTitle(idObject.id)}
               </th>
             ))}
             <th
@@ -198,53 +198,17 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
                     </Link>
                     <ClaimedIcon programme={p} />
                   </th>
-                  {allLightIds.map((q, qi) => {
-                    return programme && programme.data[q] ? (
-                      <td key={`${p.key}-${q}`}>
-                        <div
-                          data-cy={`${p.key}-${qi}`}
-                          className="square"
-                          style={{ background: backgroundColorMap[programme.data[q]] }}
-                        >
-                          <Icon
-                            name={lightEmojiMap[programme.data[q]]}
-                            style={{ cursor: 'pointer' }}
-                            size="big"
-                            onClick={() =>
-                              setModalData({
-                                header: questions.reduce((acc, cur) => {
-                                  if (acc) return acc
-                                  const header = cur.parts.reduce((acc, cur) => {
-                                    if (acc) return acc
-
-                                    if (cur.id === q.replace('_light', ''))
-                                      return cur.description[languageCode]
-
-                                    return acc
-                                  }, '')
-
-                                  if (header) return header
-
-                                  return acc
-                                }, ''),
-                                programme: p.key,
-                                content: programme.data[q.replace('light', 'text')],
-                                color: programme.data[q],
-                              })
-                            }
-                          />
-                        </div>
-                      </td>
-                    ) : (
-                      <td key={`${p.key}-${q}`}>
-                        <div
-                          data-cy={`${p.key}-${qi}`}
-                          className="square"
-                          style={{ background: 'whitesmoke' }}
-                        />
-                      </td>
-                    )
-                  })}
+                  {tableIds.map((idObject, qi) => (
+                    <SmileyTableCell
+                      key={idObject.id}
+                      programmesKey={p.key}
+                      programmesAnswers={programme && programme.data ? programme.data : {}}
+                      questionId={idObject.id}
+                      questionType={idObject.type}
+                      questionIndex={qi}
+                      setModalData={setModalData}
+                    />
+                  ))}
                   {hasManagementAccess(p.key) && <ManageCell program={p} />}
                 </tr>
                 {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}

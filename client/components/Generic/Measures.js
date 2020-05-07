@@ -42,7 +42,6 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
 
   const getPreviousMeasureAnswers = () => {
     if (!previousYearsAnswers) return null
-    if (!!previousYearsAnswers[id]) return previousYearsAnswers[id]
     if (!!previousYearsAnswers[`${id}_text`]) return previousYearsAnswers[`${id}_text`]
 
     if (!!previousYearsAnswers[`${id}_1_text`]) {
