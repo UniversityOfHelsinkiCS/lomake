@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu, Label, Dropdown } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -24,7 +24,19 @@ export default () => {
     },
   }
 
+  const warning =
+    'The Swedish localization is a work in progress. Some of the content ' +
+    'may not be displayed correctly and some of the features may not work at all.\n\n' +
+    'In order to get the best experience, for the time being, please consider using the English or Finnish versions instead.\n\n ' +
+    'We apologize for the inconvenience!'
+
   const setLanguageCode = (code) => dispatch(setLanguage(code))
+
+  useEffect(() => {
+    if (languageCode === 'se') {
+      alert(warning)
+    }
+  }, [languageCode])
 
   const handleLogout = () => {
     dispatch(logoutAction())
