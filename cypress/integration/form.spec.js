@@ -4,12 +4,12 @@
 describe('Form tests', function () {
   this.beforeEach(function () {
     cy.login('cypressUser')
-    cy.visit('http://localhost:8000/form/KH50_005')
+    cy.visit('/form/KH50_005')
   })
 
   // This function just clears the forms' input fields
   //   this.beforeAll(function () {
-  //     cy.visit('http://localhost:8000/form/KH50_005')
+  //     cy.visit('/form/KH50_005')
   //     cy.get('[data-cy^=form-section').click({ multiple: true })
   //     cy.get('.editor-class').each(function (el, index, list) {
   //       cy.get(el).click()
@@ -22,7 +22,7 @@ describe('Form tests', function () {
     cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
 
     // Check that the changes have been saved:
-    cy.visit('http://localhost:8000')
+    cy.visit('/')
 
     cy.get('[data-cy=KH50_005-0]')
       .should('have.css', 'background-color')

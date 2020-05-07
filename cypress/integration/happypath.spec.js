@@ -6,7 +6,7 @@ import * as _ from 'lodash'
 describe('Core tests', function () {
   this.beforeEach(function () {
     cy.login('cypressUser')
-    cy.visit('http://localhost:8000')
+    cy.visit('/')
   })
 
   it('Frontpage loads', function () {

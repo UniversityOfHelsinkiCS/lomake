@@ -4,7 +4,7 @@
 describe('OSPA user tests', function () {
   this.beforeEach(function () {
     cy.login('cypressAdminUser')
-    cy.visit('http://localhost:8000')
+    cy.visit('/')
   })
 
   it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', function () {
@@ -17,9 +17,9 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=noNextDeadline]')
 
     // Check that form is locked as it should be
-    cy.visit('http://localhost:8000/form/KH50_004')
+    cy.visit('/form/KH50_004')
     cy.get('.editor-class').should('not.exist')
-    cy.visit('http://localhost:8000')
+    cy.visit('/')
 
     // Create new deadline
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked

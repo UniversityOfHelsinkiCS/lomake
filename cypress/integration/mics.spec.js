@@ -4,11 +4,11 @@
 describe('Misc tests', function () {
   this.beforeEach(function () {
     cy.login('cypressUser')
-    cy.visit('http://localhost:8000')
+    cy.visit('/')
   })
 
   it('Locale can be changed and translations work', function () {
-    cy.visit('http://localhost:8000/form/KH50_005')
+    cy.visit('/form/KH50_005')
     cy.contains('Answers are saved automatically. ')
     cy.get('[data-cy=navBar-localeDropdown]').click()
     cy.get('[data-cy=navBar-localeOption-fi]').click()
