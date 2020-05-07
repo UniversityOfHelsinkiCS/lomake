@@ -17,6 +17,7 @@ const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
+const { fixProgrammeKeys } = require('@root/server/scripts/fixProgrammeKeys')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -28,6 +29,9 @@ initializeDatabaseConnection()
           return
         case 'reset_studyprogrammes':
           resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
+          return
+        case 'fix_programmes':
+          fixProgrammeKeys()
           return
         default:
           return
