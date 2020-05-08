@@ -105,17 +105,14 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div
-            style={{ display: 'flex', alignItems: 'center', padding: '1em' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '1em',
+              flexDirection: 'column',
+            }}
             className="overviewpage-controls"
           >
-            <Input
-              data-cy="overviewpage-filter"
-              name="filter"
-              icon="filter"
-              placeholder={translations.filter[languageCode]}
-              onChange={handleChange}
-              value={filter}
-            />
             <Select
               data-cy="overviewpage-year"
               name="year"
@@ -123,17 +120,40 @@ export default () => {
               onChange={handleYearChange}
               value={year}
             />
-            {currentUser.data.admin && (
-              <Radio
-                checked={showUnclaimedOnly}
-                onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
-                label={translations['showUnclaimedOnly'][languageCode]}
-                toggle
-              />
-            )}
           </div>
           <OspaModule />
           <div style={{ marginTop: '2em' }}>
+            {usersProgrammes.length > 10 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  margin: '1em 0',
+                  alignItems: 'center',
+                }}
+              >
+                <Input
+                  style={{ width: '200px' }}
+                  data-cy="overviewpage-filter"
+                  name="filter"
+                  icon="filter"
+                  placeholder={translations.filter[languageCode]}
+                  onChange={handleChange}
+                  value={filter}
+                />
+                {currentUser.data.admin && (
+                  <div>
+                    <Radio
+                      style={{ marginTop: '1em' }}
+                      checked={showUnclaimedOnly}
+                      onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
+                      label={translations['showUnclaimedOnly'][languageCode]}
+                      toggle
+                    />
+                  </div>
+                )}
+              </div>
+            )}
             <SmileyTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
