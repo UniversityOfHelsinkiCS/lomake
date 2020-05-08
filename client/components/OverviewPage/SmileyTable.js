@@ -190,7 +190,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <ClaimedIcon programme={p} />
             </div>
-            {hasManagementAccess(p.key) && <ManageCell program={p} />}
+            {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
           </React.Fragment>
         )
       })}
