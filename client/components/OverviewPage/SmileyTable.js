@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header, Icon, Loader } from 'semantic-ui-react'
+import { Header, Icon, Loader, Grid } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import './OverviewPage.scss'
 import OwnerAccordionContent from './OwnerAccordionContent'
 import SmileyTableCell from './SmileyTableCell'
+import './SmileyTable.scss'
 
 const translations = {
   openManageText: {
@@ -39,6 +39,11 @@ const translations = {
   },
 }
 
+const replaceTitle = {
+  successes_and_development_needs: 'successes_and_needs',
+  review_of_last_years_situation_report: 'review_of_last_year',
+}
+
 const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
@@ -66,7 +71,8 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   }, [filteredProgrammes])
 
   const transformIdToTitle = (id) => {
-    const formatted = id.replace(/_/g, ' ')
+    const idToUse = replaceTitle[id] || id
+    const formatted = idToUse.replace(/_/g, ' ')
 
     return (
       <span
@@ -102,7 +108,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   }
 
   const ManageCell = ({ program }) => (
-    <td
+    <div
       style={{
         cursor: 'pointer',
         color: colors.theme_blue,
@@ -118,7 +124,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
           {translations.closeManageText[languageCode]}
         </span>
       )}
-    </td>
+    </div>
   )
 
   const ClaimedIcon = ({ programme }) => {
@@ -148,7 +154,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
 
   const tableIds = questions.reduce((acc, cur) => {
     const questionObjects = cur.parts.reduce((acc, cur) => {
-      if (cur.id.includes('information_needed') || cur.id.includes('information_used')) {
+      if (
+        cur.id.includes('information_needed') ||
+        cur.id.includes('information_used') ||
+        cur.type === 'TITLE'
+      ) {
         return acc
       }
 
@@ -159,64 +169,49 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
   }, [])
 
   return (
-    <div style={{ overflowX: 'auto', width: '100vw', display: 'flex', justifyContent: 'center' }}>
-      <table style={{ tableLayout: 'fixed', maxWidth: '1100px' }}>
-        <thead>
-          <tr>
-            <th colSpan="2" style={{ background: 'white', position: 'sticky' }} />
-            {tableIds.map((idObject) => (
-              <th
-                key={idObject.id}
-                style={{
-                  wordWrap: 'break-word',
-                  textAlign: 'center',
-                  position: 'sticky',
-                  background: 'white',
-                }}
-              >
-                {transformIdToTitle(idObject.id)}
-              </th>
+    <div className="smiley-grid">
+      <div className="sticky-header" />
+      {tableIds.map((idObject) => (
+        <div
+          key={idObject.id}
+          className="sticky-header"
+          style={{
+            wordWrap: 'break-word',
+            textAlign: 'center',
+            fontWeight: 'bold',
+          }}
+        >
+          {transformIdToTitle(idObject.id)}
+        </div>
+      ))}
+      <div className="sticky-header" />
+      {filteredProgrammes.map((p) => {
+        const programme = selectedAnswers.find((a) => a.programme === p.key)
+        const targetURL = `/form/${p.key}`
+        return (
+          <React.Fragment key={p.key}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
+                {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+              </Link>
+              {/*<ClaimedIcon programme={p} />*/}
+            </div>
+            {tableIds.map((idObject, qi) => (
+              <SmileyTableCell
+                key={`${p.key}-${idObject.id}`}
+                programmesKey={p.key}
+                programmesAnswers={programme && programme.data ? programme.data : {}}
+                questionId={idObject.id}
+                questionType={idObject.type}
+                questionIndex={qi}
+                setModalData={setModalData}
+              />
             ))}
-            <th
-              style={{
-                position: 'sticky',
-                background: 'white',
-              }}
-            />
-          </tr>
-        </thead>
-        <tbody>
-          {filteredProgrammes.map((p) => {
-            const programme = selectedAnswers.find((a) => a.programme === p.key)
-            const targetURL = `/form/${p.key}`
-            return (
-              <React.Fragment key={p.key}>
-                <tr>
-                  <th colSpan="2">
-                    <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
-                      {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
-                    </Link>
-                    <ClaimedIcon programme={p} />
-                  </th>
-                  {tableIds.map((idObject, qi) => (
-                    <SmileyTableCell
-                      key={idObject.id}
-                      programmesKey={p.key}
-                      programmesAnswers={programme && programme.data ? programme.data : {}}
-                      questionId={idObject.id}
-                      questionType={idObject.type}
-                      questionIndex={qi}
-                      setModalData={setModalData}
-                    />
-                  ))}
-                  {hasManagementAccess(p.key) && <ManageCell program={p} />}
-                </tr>
-                {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
-              </React.Fragment>
-            )
-          })}
-        </tbody>
-      </table>
+            {hasManagementAccess(p.key) && <ManageCell program={p} />}
+            {/*programExpanded === p && <OwnerAccordionContent programKey={p.key} />*/}
+          </React.Fragment>
+        )
+      })}
     </div>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './OverviewPage.scss'
 import { Modal, Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'

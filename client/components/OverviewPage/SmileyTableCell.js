@@ -51,93 +51,87 @@ const SmileyTableCell = ({
 
   if (lightAnswer) {
     return (
-      <td key={`${programmesKey}-${questionId}`}>
-        <div
-          data-cy={`${programmesKey}-${questionId}`}
-          className="square"
-          style={{ background: backgroundColorMap[lightAnswer] }}
-        >
-          <Icon
-            name={lightEmojiMap[lightAnswer]}
-            style={{ cursor: 'pointer' }}
-            size="big"
-            onClick={() =>
-              setModalData({
-                header: questions.reduce((acc, cur) => {
+      <div
+        data-cy={`${programmesKey}-${questionId}`}
+        className="square"
+        style={{ background: backgroundColorMap[lightAnswer] }}
+      >
+        <Icon
+          name={lightEmojiMap[lightAnswer]}
+          style={{ cursor: 'pointer' }}
+          size="big"
+          onClick={() =>
+            setModalData({
+              header: questions.reduce((acc, cur) => {
+                if (acc) return acc
+                const header = cur.parts.reduce((acc, cur) => {
                   if (acc) return acc
-                  const header = cur.parts.reduce((acc, cur) => {
-                    if (acc) return acc
 
-                    if (cur.id === questionId) return cur.description[languageCode]
-
-                    return acc
-                  }, '')
-
-                  if (header) return header
+                  if (cur.id === questionId) return cur.description[languageCode]
 
                   return acc
-                }, ''),
-                programme: programmesKey,
-                content: textAnswer,
-                color: lightAnswer,
-              })
-            }
-          />
-        </div>
-      </td>
+                }, '')
+
+                if (header) return header
+
+                return acc
+              }, ''),
+              programme: programmesKey,
+              content: textAnswer,
+              color: lightAnswer,
+            })
+          }
+        />
+      </div>
     )
   }
 
   if (textAnswer && questionType !== 'ENTITY') {
     return (
-      <td key={`${programmesKey}-${questionId}`}>
-        <div
-          data-cy={`${programmesKey}-${questionId}`}
-          className="square"
-          style={{ background: '#daedf4' }}
-        >
-          <Icon
-            name="discussions"
-            style={{ cursor: 'pointer' }}
-            size="big"
-            onClick={() =>
-              setModalData({
-                header: questions.reduce((acc, cur) => {
+      <div
+        data-cy={`${programmesKey}-${questionId}`}
+        className="square"
+        style={{ background: '#daedf4' }}
+      >
+        <Icon
+          name="discussions"
+          style={{ cursor: 'pointer' }}
+          size="big"
+          onClick={() =>
+            setModalData({
+              header: questions.reduce((acc, cur) => {
+                if (acc) return acc
+                const header = cur.parts.reduce((acc, cur) => {
                   if (acc) return acc
-                  const header = cur.parts.reduce((acc, cur) => {
-                    if (acc) return acc
 
-                    if (cur.id === questionId) {
-                      if (cur.description) return cur.description[languageCode]
-                      return cur.label[languageCode]
-                    }
-
-                    return acc
-                  }, '')
-
-                  if (header) return header
+                  if (cur.id === questionId) {
+                    if (cur.description) return cur.description[languageCode]
+                    return cur.label[languageCode]
+                  }
 
                   return acc
-                }, ''),
-                programme: programmesKey,
-                content: textAnswer,
-                color: lightAnswer,
-              })
-            }
-          />
-        </div>
-      </td>
+                }, '')
+
+                if (header) return header
+
+                return acc
+              }, ''),
+              programme: programmesKey,
+              content: textAnswer,
+              color: lightAnswer,
+            })
+          }
+        />
+      </div>
     )
   }
 
   return (
-    <td key={`${programmesKey}-${questionId}`}>
-      <div
-        data-cy={`${programmesKey}-${questionId}`}
-        className="square"
-        style={{ background: 'whitesmoke' }}
-      />
-    </td>
+    <div
+      data-cy={`${programmesKey}-${questionId}`}
+      className="square"
+      style={{ background: 'whitesmoke' }}
+    />
   )
 }
 
