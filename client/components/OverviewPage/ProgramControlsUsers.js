@@ -142,7 +142,7 @@ const OwnerAccordionUsers = ({ programme }) => {
 
   return (
     <>
-      <Segment style={{ margin: '1em 5em' }}>
+      <Segment style={{ margin: '1em 3em' }}>
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column width={3} style={{ textAlign: 'center' }}>

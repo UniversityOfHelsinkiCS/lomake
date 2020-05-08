@@ -66,11 +66,11 @@ const OwnerAccordionLinks = ({ programme }) => {
     : 'http://localhost:8000/access/'
 
   return (
-    <>
+    <div style={{ margin: '2em 0em' }}>
+      <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
+        {translations.viewPrompt[languageCode]}
+      </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
-        <div style={{ marginRight: '2em', width: '375px' }}>
-          {translations.viewPrompt[languageCode]}
-        </div>
         <Input
           data-cy={`${programme}-viewlink`}
           style={{ width: '500px' }}
@@ -103,10 +103,10 @@ const OwnerAccordionLinks = ({ programme }) => {
             : translations.createPrompt[languageCode]}
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', margin: '0 3em' }}>
-        <div style={{ marginRight: '2em', width: '375px' }}>
-          {translations.editPrompt[languageCode]}
-        </div>
+      <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em' }}>
+        {translations.editPrompt[languageCode]}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em' }}>
         <Input
           style={{ width: '500px' }}
           data-cy={`${programme}-editlink`}
@@ -139,7 +139,7 @@ const OwnerAccordionLinks = ({ programme }) => {
             : translations.createPrompt[languageCode]}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
