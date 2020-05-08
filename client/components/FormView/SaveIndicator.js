@@ -37,7 +37,6 @@ export default function SaveIndicator() {
           zIndex: 100,
         }}
         loading={saving}
-        positive
       >
         {translations['lastSaved'][languageCode]}{' '}
         {lastSaved.toLocaleTimeString(languageCode !== 'se' ? languageCode : 'sv')}
