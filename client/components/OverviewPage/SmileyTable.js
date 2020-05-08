@@ -7,7 +7,7 @@ import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import OwnerAccordionContent from './OwnerAccordionContent'
+import OwnerAccordionContent from './ProgramControlsContent'
 import SmileyTableCell from './SmileyTableCell'
 import './SmileyTable.scss'
 

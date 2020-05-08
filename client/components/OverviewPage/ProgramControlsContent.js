@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import OwnerAccordionLinks from './OwnerAccordionLinks'
-import OwnerAccordionUsers from './OwnerAccordionUsers'
+import ProgramControlsLinks from './ProgramControlsLinks'
+import ProgramControlsUsers from './ProgramControlsUsers'
 import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
 import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
 import FormLocker from './FormLocker'
@@ -31,8 +31,8 @@ const OwnerAccordionContent = ({ programKey }) => {
   return (
     <>
       <FormLocker programme={programKey} />
-      <OwnerAccordionLinks programme={programKey} />
-      <OwnerAccordionUsers programme={programKey} />
+      <ProgramControlsLinks programme={programKey} />
+      <ProgramControlsUsers programme={programKey} />
     </>
   )
 }

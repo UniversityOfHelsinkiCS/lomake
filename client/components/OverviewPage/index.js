@@ -4,7 +4,7 @@ import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import OspaModule from './OspaModule'
-import OwnerAccordionContent from './OwnerAccordionContent'
+import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
 
 export default () => {
@@ -98,7 +98,7 @@ export default () => {
           }
           closeModal={() => setProgramControlsToShow(null)}
         >
-          <OwnerAccordionContent programKey={programControlsToShow.key} />
+          <ProgramControlsContent programKey={programControlsToShow.key} />
         </CustomModal>
       )}
 
