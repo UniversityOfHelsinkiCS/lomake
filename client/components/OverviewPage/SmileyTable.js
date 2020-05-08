@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header, Icon, Loader, Grid } from 'semantic-ui-react'
+import { Header, Icon, Loader, Button } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
@@ -51,7 +51,6 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
-  const [programExpanded, setProgramExpanded] = useState(null)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -99,20 +98,12 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
   const ManageCell = ({ program }) => (
     <div
       style={{
-        cursor: 'pointer',
-        color: colors.theme_blue,
-        textDecoration: 'underline',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      {program !== programExpanded ? (
-        <span data-cy={`${program.key}-manage`} onClick={() => setProgramControlsToShow(program)}>
-          {translations.openManageText[languageCode]}
-        </span>
-      ) : (
-        <span onClick={() => setShowProgramModalByKey(null)}>
-          {translations.closeManageText[languageCode]}
-        </span>
-      )}
+      <Button icon="settings" circular onClick={() => setProgramControlsToShow(program)} />
     </div>
   )
 
@@ -127,16 +118,16 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
               ? programmeOwners[programme.key]
               : translations['programmeClaimed'][languageCode]
           }
-          color="green"
           name="thumbs up"
+          size="large"
         />
       )
     }
     return (
       <Icon
         title={translations['programmeNotClaimed'][languageCode]}
-        color="red"
-        name="thumbs down"
+        name="exclamation"
+        size="large"
       />
     )
   }
@@ -174,6 +165,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
         </div>
       ))}
       <div className="sticky-header" />
+      <div />
       {filteredProgrammes.map((p) => {
         const programme = selectedAnswers.find((a) => a.programme === p.key)
         const targetURL = `/form/${p.key}`
@@ -183,7 +175,6 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
               <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
                 {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
               </Link>
-              {/*<ClaimedIcon programme={p} />*/}
             </div>
             {tableIds.map((idObject, qi) => (
               <SmileyTableCell
@@ -196,8 +187,10 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
                 setModalData={setModalData}
               />
             ))}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <ClaimedIcon programme={p} />
+            </div>
             {hasManagementAccess(p.key) && <ManageCell program={p} />}
-            {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
           </React.Fragment>
         )
       })}
