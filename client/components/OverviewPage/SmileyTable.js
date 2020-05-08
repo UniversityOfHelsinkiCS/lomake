@@ -44,7 +44,7 @@ const replaceTitle = {
   review_of_last_years_situation_report: 'review_of_last_year',
 }
 
-const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
+const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControlsToShow }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -58,17 +58,6 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
     dispatch(getAnswersAction())
     if (currentUser.admin) dispatch(getProgrammeOwners())
   }, [])
-
-  useEffect(() => {
-    if (filteredProgrammes.length === 1) {
-      setProgramExpanded(filteredProgrammes[0].key)
-      return
-    }
-
-    if (!programExpanded) return
-
-    setProgramExpanded(null)
-  }, [filteredProgrammes])
 
   const transformIdToTitle = (id) => {
     const idToUse = replaceTitle[id] || id
@@ -116,11 +105,11 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
       }}
     >
       {program !== programExpanded ? (
-        <span data-cy={`${program.key}-manage`} onClick={() => setProgramExpanded(program)}>
+        <span data-cy={`${program.key}-manage`} onClick={() => setProgramControlsToShow(program)}>
           {translations.openManageText[languageCode]}
         </span>
       ) : (
-        <span onClick={() => setProgramExpanded(null)}>
+        <span onClick={() => setShowProgramModalByKey(null)}>
           {translations.closeManageText[languageCode]}
         </span>
       )}
@@ -208,7 +197,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year }) => {
               />
             ))}
             {hasManagementAccess(p.key) && <ManageCell program={p} />}
-            {/*programExpanded === p && <OwnerAccordionContent programKey={p.key} />*/}
+            {programExpanded === p && <OwnerAccordionContent programKey={p.key} />}
           </React.Fragment>
         )
       })}

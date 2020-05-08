@@ -64,40 +64,34 @@ export default function FormLocker({ programme }) {
   const { locked } = programmeDetails
 
   return (
-    <tr>
-      <td colSpan={100}>
-        <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
-          <Popup
-            trigger={
-              <Button
-                data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
-                disabled={!loadObj.loaded || programmeDetailsPending}
-                icon
-                labelPosition="left"
-              >
-                <Icon name={locked ? 'lock' : 'lock open'} />
-                {locked
-                  ? translations.lockedTriggerButtonText[languageCode]
-                  : translations.unlockedTriggerButtonText[languageCode]}
-              </Button>
-            }
+    <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
+      <Popup
+        trigger={
+          <Button
+            data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}
+            disabled={!loadObj.loaded || programmeDetailsPending}
+            icon
+            labelPosition="left"
+          >
+            <Icon name={locked ? 'lock' : 'lock open'} />
+            {locked
+              ? translations.lockedTriggerButtonText[languageCode]
+              : translations.unlockedTriggerButtonText[languageCode]}
+          </Button>
+        }
+        content={
+          <Button
+            color="red"
+            secondary
             content={
-              <Button
-                color="red"
-                secondary
-                content={
-                  locked
-                    ? translations.unLockForm[languageCode]
-                    : translations.lockForm[languageCode]
-                }
-                onClick={handleLock}
-              />
+              locked ? translations.unLockForm[languageCode] : translations.lockForm[languageCode]
             }
-            on="click"
-            position="top center"
+            onClick={handleLock}
           />
-        </div>
-      </td>
-    </tr>
+        }
+        on="click"
+        position="top center"
+      />
+    </div>
   )
 }

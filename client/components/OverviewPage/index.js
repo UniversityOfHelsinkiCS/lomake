@@ -4,12 +4,15 @@ import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import OspaModule from './OspaModule'
+import OwnerAccordionContent from './OwnerAccordionContent'
+import CustomModal from 'Components/Generic/CustomModal'
 
 export default () => {
   const [filter, setFilter] = useState('')
   const [year, setYear] = useState(2020)
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
+  const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -86,6 +89,19 @@ export default () => {
         </Modal.Content>
       </Modal>
 
+      {programControlsToShow && (
+        <CustomModal
+          title={
+            programControlsToShow.name[languageCode]
+              ? programControlsToShow.name[languageCode]
+              : programControlsToShow.name['en']
+          }
+          closeModal={() => setProgramControlsToShow(null)}
+        >
+          <OwnerAccordionContent programKey={programControlsToShow.key} />
+        </CustomModal>
+      )}
+
       {usersProgrammes.length > 0 ? (
         <>
           <div
@@ -122,6 +138,7 @@ export default () => {
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
               year={year}
+              setProgramControlsToShow={setProgramControlsToShow}
             />
           </div>
         </>

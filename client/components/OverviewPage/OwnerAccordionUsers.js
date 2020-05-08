@@ -142,47 +142,43 @@ const OwnerAccordionUsers = ({ programme }) => {
 
   return (
     <>
-      <tr>
-        <td colSpan={18}>
-          <Segment style={{ margin: '1em 5em' }}>
-            <Grid celled="internally">
-              <Grid.Row>
-                <Grid.Column width={3} style={{ textAlign: 'center' }}>
-                  <Header as="h4">{translations.nameHeader[languageCode]}</Header>
-                </Grid.Column>
-                <Grid.Column width={4} style={{ textAlign: 'center' }}>
-                  <Header as="h4">Email</Header>
-                </Grid.Column>
-                <Grid.Column width={2} style={{ textAlign: 'center' }}>
-                  <Header as="h4">{translations.viewHeader[languageCode]}</Header>
-                </Grid.Column>
-                <Grid.Column width={2} style={{ textAlign: 'center' }}>
-                  <Header as="h4">{translations.editHeader[languageCode]}</Header>
-                </Grid.Column>
-                <Grid.Column width={2} style={{ textAlign: 'center' }}>
-                  <Header as="h4">{translations.ownerHeader[languageCode]}</Header>
-                </Grid.Column>
-              </Grid.Row>
-              {sortedUsers.length === 0 ? (
-                <Grid.Row>
-                  <Grid.Column width={13} style={{ textAlign: 'center' }}>
-                    {translations.noUsers[languageCode]}
-                  </Grid.Column>
-                </Grid.Row>
-              ) : (
-                sortedUsers.map((user) => (
-                  <OwnerAccordionUserRow
-                    currentOwnerCount={currentOwnerCount}
-                    user={user}
-                    programme={programme}
-                    key={user.id}
-                  />
-                ))
-              )}
-            </Grid>
-          </Segment>
-        </td>
-      </tr>
+      <Segment style={{ margin: '1em 5em' }}>
+        <Grid celled="internally">
+          <Grid.Row>
+            <Grid.Column width={3} style={{ textAlign: 'center' }}>
+              <Header as="h4">{translations.nameHeader[languageCode]}</Header>
+            </Grid.Column>
+            <Grid.Column width={4} style={{ textAlign: 'center' }}>
+              <Header as="h4">Email</Header>
+            </Grid.Column>
+            <Grid.Column width={2} style={{ textAlign: 'center' }}>
+              <Header as="h4">{translations.viewHeader[languageCode]}</Header>
+            </Grid.Column>
+            <Grid.Column width={2} style={{ textAlign: 'center' }}>
+              <Header as="h4">{translations.editHeader[languageCode]}</Header>
+            </Grid.Column>
+            <Grid.Column width={2} style={{ textAlign: 'center' }}>
+              <Header as="h4">{translations.ownerHeader[languageCode]}</Header>
+            </Grid.Column>
+          </Grid.Row>
+          {sortedUsers.length === 0 ? (
+            <Grid.Row>
+              <Grid.Column width={13} style={{ textAlign: 'center' }}>
+                {translations.noUsers[languageCode]}
+              </Grid.Column>
+            </Grid.Row>
+          ) : (
+            sortedUsers.map((user) => (
+              <OwnerAccordionUserRow
+                currentOwnerCount={currentOwnerCount}
+                user={user}
+                programme={programme}
+                key={user.id}
+              />
+            ))
+          )}
+        </Grid>
+      </Segment>
     </>
   )
 }

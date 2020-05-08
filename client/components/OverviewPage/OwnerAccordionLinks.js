@@ -67,86 +67,78 @@ const OwnerAccordionLinks = ({ programme }) => {
 
   return (
     <>
-      <tr>
-        <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
-            <div style={{ marginRight: '2em', width: '375px' }}>
-              {translations.viewPrompt[languageCode]}
-            </div>
-            <Input
-              data-cy={`${programme}-viewlink`}
-              style={{ width: '500px' }}
-              icon={
-                <Icon
-                  name={copied === 'VIEW' ? 'checkmark' : 'copy'}
-                  inverted
-                  circular
-                  link
-                  onClick={() => copyToClipboard('VIEW')}
-                />
-              }
-              value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
-              onChange={null}
-              ref={viewLinkRef}
+      <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
+        <div style={{ marginRight: '2em', width: '375px' }}>
+          {translations.viewPrompt[languageCode]}
+        </div>
+        <Input
+          data-cy={`${programme}-viewlink`}
+          style={{ width: '500px' }}
+          icon={
+            <Icon
+              name={copied === 'VIEW' ? 'checkmark' : 'copy'}
+              inverted
+              circular
+              link
+              onClick={() => copyToClipboard('VIEW')}
             />
-            <div
-              onClick={() => createOrResetToken(viewToken, 'READ')}
-              data-cy={`${programme}-viewlink-reset`}
-              style={{
-                cursor: 'pointer',
-                color: 'red',
-                textDecoration: 'underline',
-                marginLeft: '2em',
-                width: '300px',
-              }}
-            >
-              {viewToken
-                ? translations.resetPrompt[languageCode]
-                : translations.createPrompt[languageCode]}
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={18}>
-          <div style={{ display: 'flex', alignItems: 'center', margin: '0 3em' }}>
-            <div style={{ marginRight: '2em', width: '375px' }}>
-              {translations.editPrompt[languageCode]}
-            </div>
-            <Input
-              style={{ width: '500px' }}
-              data-cy={`${programme}-editlink`}
-              icon={
-                <Icon
-                  name={copied === 'EDIT' ? 'checkmark' : 'copy'}
-                  inverted
-                  circular
-                  link
-                  onClick={() => copyToClipboard('EDIT')}
-                />
-              }
-              value={editToken ? `${urlPrefix}${editToken.url}` : ''}
-              onChange={null}
-              ref={editLinkRef}
+          }
+          value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
+          onChange={null}
+          ref={viewLinkRef}
+        />
+        <div
+          onClick={() => createOrResetToken(viewToken, 'READ')}
+          data-cy={`${programme}-viewlink-reset`}
+          style={{
+            cursor: 'pointer',
+            color: 'red',
+            textDecoration: 'underline',
+            marginLeft: '2em',
+            width: '300px',
+          }}
+        >
+          {viewToken
+            ? translations.resetPrompt[languageCode]
+            : translations.createPrompt[languageCode]}
+        </div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', margin: '0 3em' }}>
+        <div style={{ marginRight: '2em', width: '375px' }}>
+          {translations.editPrompt[languageCode]}
+        </div>
+        <Input
+          style={{ width: '500px' }}
+          data-cy={`${programme}-editlink`}
+          icon={
+            <Icon
+              name={copied === 'EDIT' ? 'checkmark' : 'copy'}
+              inverted
+              circular
+              link
+              onClick={() => copyToClipboard('EDIT')}
             />
-            <div
-              data-cy={`${programme}-editlink-reset`}
-              onClick={() => createOrResetToken(editToken, 'WRITE')}
-              style={{
-                cursor: 'pointer',
-                color: 'red',
-                textDecoration: 'underline',
-                marginLeft: '2em',
-                width: '300px',
-              }}
-            >
-              {editToken
-                ? translations.resetPrompt[languageCode]
-                : translations.createPrompt[languageCode]}
-            </div>
-          </div>
-        </td>
-      </tr>
+          }
+          value={editToken ? `${urlPrefix}${editToken.url}` : ''}
+          onChange={null}
+          ref={editLinkRef}
+        />
+        <div
+          data-cy={`${programme}-editlink-reset`}
+          onClick={() => createOrResetToken(editToken, 'WRITE')}
+          style={{
+            cursor: 'pointer',
+            color: 'red',
+            textDecoration: 'underline',
+            marginLeft: '2em',
+            width: '300px',
+          }}
+        >
+          {editToken
+            ? translations.resetPrompt[languageCode]
+            : translations.createPrompt[languageCode]}
+        </div>
+      </div>
     </>
   )
 }
