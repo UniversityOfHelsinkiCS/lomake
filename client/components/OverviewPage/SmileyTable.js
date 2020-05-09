@@ -103,7 +103,12 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
         alignItems: 'center',
       }}
     >
-      <Button icon="settings" circular onClick={() => setProgramControlsToShow(program)} />
+      <Button
+        data-cy={`${program.key}-manage`}
+        icon="settings"
+        circular
+        onClick={() => setProgramControlsToShow(program)}
+      />
     </div>
   )
 
