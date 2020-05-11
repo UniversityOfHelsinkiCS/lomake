@@ -1,0 +1,47 @@
+name: Test and build production-image
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: set env-variable TESTING=true
+        run: echo "TESTING=TRUE" > .env
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless *.spec.js
+
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/checkout@master
+      - name: Publish to DockerHub
+        uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: toska/lomake
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          buildargs: BASE_PATH=/lomake/
+          tags: 'production'
+          cache: true

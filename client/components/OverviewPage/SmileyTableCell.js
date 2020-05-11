@@ -16,11 +16,11 @@ const backgroundColorMap = {
 }
 
 const SmileyTableCell = ({
+  programmesName,
   programmesKey,
   programmesAnswers,
   questionId,
   questionType,
-  questionIndex,
   setModalData,
 }) => {
   const languageCode = useSelector((state) => state.language)
@@ -76,7 +76,7 @@ const SmileyTableCell = ({
 
                 return acc
               }, ''),
-              programme: programmesKey,
+              programme: programmesName,
               content: textAnswer,
               color: lightAnswer,
             })
@@ -116,7 +116,7 @@ const SmileyTableCell = ({
 
                 return acc
               }, ''),
-              programme: programmesKey,
+              programme: programmesName,
               content: textAnswer,
               color: lightAnswer,
             })
