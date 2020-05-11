@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Header, Input, Select, Radio } from 'semantic-ui-react'
+import { Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -24,12 +24,6 @@ export default () => {
 
   const handleYearChange = (e, { value }) => {
     setYear(value)
-  }
-
-  const backgroundColorMap = {
-    green: '#9dff9d',
-    yellow: '#ffffb1',
-    red: '#ff7f7f',
   }
 
   const translations = {
@@ -70,24 +64,20 @@ export default () => {
 
   return (
     <>
-      <Modal open={!!modalData} onClose={() => setModalData(null)} basic size="small" closeIcon>
-        {/* Right now header is showing the question id but in the final version the full question is shown */}
-        <Header icon="question" content={modalData ? modalData.header : ''} />
-        <Modal.Content>
-          <Modal.Description>
-            <span style={{ fontSize: '1.2em', fontWeight: 'bold' }}>
-              {modalData ? modalData.programme : ''}
-            </span>
-          </Modal.Description>
-          <span
-            style={{
-              color: backgroundColorMap[modalData ? modalData.color : 'green'],
-            }}
-          >
-            <ReactMarkdown source={modalData ? modalData.content : ''} />
-          </span>
-        </Modal.Content>
-      </Modal>
+      {modalData && (
+        <CustomModal
+          title={modalData.header}
+          closeModal={() => setModalData(null)}
+          borderColor={modalData.color}
+        >
+          <>
+            <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
+            <div style={{ fontSize: '1.2em' }}>
+              <ReactMarkdown source={modalData.content} />
+            </div>
+          </>
+        </CustomModal>
+      )}
 
       {programControlsToShow && (
         <CustomModal
