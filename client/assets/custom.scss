@@ -128,3 +128,25 @@ label {
     border: 3px solid green;
   }
 }
+
+// These css styles are applied, when user opens the print dialogue in browser.
+@media print {
+  #navBar-wrapper,
+  .navigation-sidebar,
+  .form-instructions {
+    display: none;
+  }
+
+  .form-section-header {
+    margin: 0 !important;
+    padding: 1em 0 !important;
+  }
+
+  .entity-description {
+    padding-left: 0 !important;
+    font-style: italic;
+  }
+  .measures-label {
+    visibility: hidden;
+  }
+}

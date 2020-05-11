@@ -69,6 +69,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
         {number}. {label} {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </h3>
       <p
+        className="measures-label"
         style={{
           lineHeight: 2,
           backgroundColor: '#daedf4',

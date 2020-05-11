@@ -70,6 +70,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         {!noLight && <Streetlights id={id} />}
       </div>
       <p
+        className="entity-description"
         style={{
           lineHeight: 2,
           backgroundColor: '#ffcd4c2e',

@@ -17,6 +17,7 @@ const Section = ({ title, number, children, programmeKey }) => {
           }}
         >
           <h2
+            className="form-section-header"
             style={{
               fontSize: '2em',
               padding: '1.5em 0.5em',
