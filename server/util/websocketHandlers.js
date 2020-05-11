@@ -12,14 +12,19 @@ const stripTimeouts = (room) => {
   }, {})
 }
 
-const clearCurrentUser = (room, user) => {
-  if (!room) return {}
-  return Object.keys(room).reduce((acc, key) => {
-    if (!room[key]) return acc
-    if (room[key].uid === user.uid) {
-      return acc
-    }
-    return { ...acc, [key]: room[key] }
+const clearCurrentUser = (user) => {
+  if (!currentEditors) return {}
+  return Object.keys(currentEditors).reduce((editorAcc, room) => {
+    if (!currentEditors[room]) return editorAcc
+    const currentRoom = currentEditors[room]
+    const newRoom = Object.keys(currentRoom).reduce((acc, key) => {
+      if (!currentRoom[key]) return acc
+      if (currentRoom[key].uid === user.uid) {
+        return acc
+      }
+      return { ...acc, [key]: currentRoom[key] }
+    }, {})
+    return { ...editorAcc, [room]: newRoom }
   }, {})
 }
 
@@ -49,8 +54,7 @@ const joinRoom = async (socket, room, io) => {
           data: {},
         },
       })
-      currentEditors = clearCurrentUser(currentEditors[room], currentUser)
-      console.log(currentEditors)
+      currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
       socket.emit('new_form_data', answer.data || {})
