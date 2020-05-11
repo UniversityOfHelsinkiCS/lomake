@@ -31,6 +31,15 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   // this is a hack before the real fix comes with https://github.com/UniversityOfHelsinkiCS/lomake/issues/118
   const [hasTyped, setHasTyped] = useState(false)
 
+  // check if current user is the editor
+  const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const readOnly =
+    currentEditors &&
+    currentUser &&
+    currentEditors[fieldName] &&
+    currentEditors[fieldName].uid !== currentUser.uid
+
   useEffect(() => {
     if (hasTyped) return
     setEditorState(editorStateFromRedux())
@@ -95,6 +104,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
                   options: ['unordered', 'ordered'],
                 },
               }}
+              readOnly={readOnly}
             />
           </div>
           <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
