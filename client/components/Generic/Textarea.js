@@ -39,8 +39,9 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     currentEditors[fieldName].uid !== currentUser.uid
 
   useEffect(() => {
-    if (!readOnly) return
-    setEditorState(editorStateFromRedux())
+    if (readOnly || (currentEditors && !currentEditors[fieldName])) {
+      setEditorState(editorStateFromRedux())
+    }
   }, [dataFromRedux])
 
   const handleChange = (value) => {

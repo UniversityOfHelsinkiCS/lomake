@@ -52,7 +52,7 @@ initializeDatabaseConnection()
       socket.on('update_field', (room) =>
         require('@util/websocketHandlers').updateField(socket, room, io)
       )
-      socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room))
+      socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room, io))
       socket.on('leave', (room) => require('@util/websocketHandlers').leaveRoom(socket, room))
     })
     // Require is here so we can delete it from cache when files change (*)

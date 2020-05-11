@@ -12,6 +12,17 @@ const stripTimeouts = (room) => {
   }, {})
 }
 
+const clearCurrentUser = (room, user) => {
+  if (!room) return {}
+  return Object.keys(room).reduce((acc, key) => {
+    if (!room[key]) return acc
+    if (room[key].uid === user.uid) {
+      return acc
+    }
+    return { ...acc, [key]: room[key] }
+  }, {})
+}
+
 const getCurrentUser = async (socket) => {
   const uid = socket.request.headers.uid
 
@@ -26,7 +37,7 @@ const getCurrentUser = async (socket) => {
   return await db.user.findOne({ where: { uid: uid } })
 }
 
-const joinRoom = async (socket, room) => {
+const joinRoom = async (socket, room, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
     if (currentUser.admin || (currentUser.access[room] && currentUser.access[room].read)) {
@@ -38,8 +49,10 @@ const joinRoom = async (socket, room) => {
           data: {},
         },
       })
+      currentEditors = clearCurrentUser(currentEditors[room], currentUser)
+      console.log(currentEditors)
       socket.join(room)
-      socket.emit('update_editors', stripTimeouts(currentEditors[room]))
+      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
       socket.emit('new_form_data', answer.data || {})
     }
   } catch (error) {
@@ -47,7 +60,7 @@ const joinRoom = async (socket, room) => {
   }
 }
 
-const leaveRoom = (socket, room) => {
+const leaveRoom = async (socket, room) => {
   socket.leave(room)
   socket.emit('left_success', 'ok')
 }
