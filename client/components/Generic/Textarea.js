@@ -28,8 +28,6 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  // this is a hack before the real fix comes with https://github.com/UniversityOfHelsinkiCS/lomake/issues/118
-  const [hasTyped, setHasTyped] = useState(false)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
@@ -41,12 +39,11 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     currentEditors[fieldName].uid !== currentUser.uid
 
   useEffect(() => {
-    if (hasTyped) return
+    if (!readOnly) return
     setEditorState(editorStateFromRedux())
   }, [dataFromRedux])
 
   const handleChange = (value) => {
-    setHasTyped(true)
     setEditorState(value)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
