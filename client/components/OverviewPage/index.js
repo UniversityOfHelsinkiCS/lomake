@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
@@ -44,7 +44,16 @@ export default () => {
       fi: 'Näytä vain lunastamattomat koulutusohjelmat',
       se: '',
     },
+    overviewPage: {
+      en: 'Form - Overview',
+      fi: 'Lomake - Yleisnäkymä ',
+      se: '',
+    },
   }
+
+  useEffect(() => {
+    document.title = `${translations['overviewPage'][languageCode]}`
+  }, [languageCode])
 
   const years = [
     { key: '2019', value: 2019, text: '2019' },

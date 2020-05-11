@@ -43,6 +43,11 @@ const translations = {
       'Error: The url you tried to access in no longer valid. Please contact your study programme leader for a new one.',
     se: '',
   },
+  claimPermissions: {
+    en: 'Form - Claim permissions',
+    fi: 'Lomake - Vastaanota oikeuksia',
+    se: '',
+  },
 }
 
 const labelIcon = {
@@ -58,6 +63,10 @@ export default ({ url }) => {
   const languageCode = useSelector((state) => state.language)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
   const [value, setValue] = useState('')
+
+  useEffect(() => {
+    document.title = `${translations['claimPermissions'][languageCode]}`
+  }, [languageCode])
 
   useEffect(() => {
     if (studyProgrammes && token.data) {

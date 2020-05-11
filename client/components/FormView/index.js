@@ -59,6 +59,11 @@ const translations = {
     fi: 'Ei oikeuksia. Saadaksesi oikeudet, ota yhteyttä koulutusohjelmasi johtajaan.',
     se: '',
   },
+  form: {
+    en: 'Form',
+    fi: 'Lomake',
+    se: '',
+  },
 }
 
 const FormView = ({ room }) => {
@@ -84,6 +89,10 @@ const FormView = ({ room }) => {
       loaded: false,
     })
   }, [])
+
+  useEffect(() => {
+    document.title = `${translations['form'][languageCode]} - ${room}`
+  }, [languageCode, room])
 
   useEffect(() => {
     if (loadObj.loading && !pending) {
