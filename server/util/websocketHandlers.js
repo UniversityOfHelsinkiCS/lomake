@@ -2,6 +2,16 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const { isSuperAdmin } = require('@root/config/common')
 
+let currentEditors = {}
+
+const stripTimeouts = (room) => {
+  if (!room) return {}
+  return Object.keys(room).reduce((acc, key) => {
+    if (!room[key]) return acc
+    return { ...acc, [key]: { uid: room[key].uid, name: room[key].name } }
+  }, {})
+}
+
 const getCurrentUser = async (socket) => {
   const uid = socket.request.headers.uid
 
@@ -29,6 +39,7 @@ const joinRoom = async (socket, room) => {
         },
       })
       socket.join(room)
+      socket.emit('update_editors', stripTimeouts(currentEditors[room]))
       socket.emit('new_form_data', answer.data || {})
     }
   } catch (error) {
@@ -41,12 +52,39 @@ const leaveRoom = (socket, room) => {
   socket.emit('left_success', 'ok')
 }
 
-const updateField = async (socket, payload) => {
+const updateField = async (socket, payload, io) => {
   try {
     const { room, data } = payload
 
     const currentUser = await getCurrentUser(socket)
+
     if (currentUser.admin || (currentUser.access[room] && currentUser.access[room].write)) {
+      const field = Object.keys(data)[0]
+      const currentEditor = currentEditors[room] ? currentEditors[room][field] : undefined
+
+      if (currentEditor && currentEditor.uid !== currentUser.uid) return
+      if (currentEditor) {
+        clearTimeout(currentEditor.timeoutId)
+      }
+
+      const timeoutId = setTimeout(() => {
+        currentEditors = {
+          ...currentEditors,
+          [room]: { ...currentEditors[room], [field]: undefined },
+        }
+        io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+      }, 15000)
+
+      currentEditors = {
+        ...currentEditors,
+        [room]: {
+          ...currentEditors[room],
+          [field]: { uid: currentUser.uid, name: currentUser.name, timeoutId },
+        },
+      }
+
+      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+
       const currentAnswer = await db.tempAnswer.findOne({
         where: { programme: room },
       })

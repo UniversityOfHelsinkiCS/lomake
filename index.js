@@ -50,7 +50,7 @@ initializeDatabaseConnection()
     const io = require('socket.io')(server)
     io.on('connection', (socket) => {
       socket.on('update_field', (room) =>
-        require('@util/websocketHandlers').updateField(socket, room)
+        require('@util/websocketHandlers').updateField(socket, room, io)
       )
       socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room))
       socket.on('leave', (room) => require('@util/websocketHandlers').leaveRoom(socket, room))

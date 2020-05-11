@@ -26,6 +26,9 @@ const socketMiddleware = () => {
   const updateForm = (store) => (event) => {
     store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
   }
+  const updateEditors = (store) => (event) => {
+    store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
+  }
 
   // the middleware part of this function
   return (store) => (next) => (action) => {
@@ -37,6 +40,7 @@ const socketMiddleware = () => {
         socket = connect()
         // websocket handlers
         socket.on('new_form_data', updateForm(store))
+        socket.on('update_editors', updateEditors(store))
         break
       case 'WS_LEAVE_ROOM':
         if (!socket) socket = connect() // This really only happens when developing.

@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
+import CurrentEditor from './CurrentEditor'
 
 const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
@@ -97,6 +98,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
             />
           </div>
           <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
+          <CurrentEditor fieldName={fieldName} />
         </>
       )}
     </div>
