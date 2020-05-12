@@ -66,7 +66,7 @@ const editUser = async (req, res) => {
 
 const editUserAccess = async (req, res) => {
   try {
-    const programmeAccess = req.body
+    let newProgrammeAccess = req.body
 
     const user = await db.user.findOne({ where: { id: req.params.id } })
     if (!user) return res.status(400).json({ error: 'id not found.' })
@@ -75,7 +75,7 @@ const editUserAccess = async (req, res) => {
      * Trying to remove admin rights from given program...
      * Need to check that user is not the last admin for this programme.
      */
-    if (req.body.admin === false) {
+    if (newProgrammeAccess.admin === false) {
       const currentAdminCount = await db.user.count({
         where: {
           access: {
@@ -89,9 +89,28 @@ const editUserAccess = async (req, res) => {
       }
     }
 
+    // Toggling write permissions always removes/grants read access.
+    if (newProgrammeAccess['write'] !== undefined) {
+      const val = newProgrammeAccess['write']
+      newProgrammeAccess = {
+        read: val,
+        write: val,
+      }
+    }
+
+    // Enabling admin permissions always grants all rights.
+    if (newProgrammeAccess['admin'] === true) {
+      const val = newProgrammeAccess['admin']
+      newProgrammeAccess = {
+        read: val,
+        write: val,
+        admin: val,
+      }
+    }
+
     user.access = {
       ...user.access,
-      [req.params.programme]: { ...user.access[req.params.programme], ...programmeAccess },
+      [req.params.programme]: { ...user.access[req.params.programme], ...newProgrammeAccess },
     }
 
     await user.save()
