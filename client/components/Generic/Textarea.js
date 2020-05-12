@@ -10,6 +10,8 @@ import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 
+const MAX_LENGTH = 1100
+
 const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
 
@@ -40,6 +42,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
 
   useEffect(() => {
     if (readOnly || (currentEditors && !currentEditors[fieldName])) {
+      console.log('jaha')
       setEditorState(editorStateFromRedux())
     }
   }, [dataFromRedux])
@@ -48,7 +51,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     setEditorState(value)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
-    const markdownStr = draftToMarkdown(rawObject)
+    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
     dispatch(updateFormField(fieldName, markdownStr))
   }
 
@@ -59,7 +62,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }
   const [editorState, setEditorState] = useState(editorStateFromRedux())
 
-  const length = dataFromRedux.length
+  const length = editorState.getCurrentContent().getPlainText().length
 
   return (
     <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
@@ -93,6 +96,17 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               toolbarClassName="toolbar-class"
               editorState={editorState}
               onEditorStateChange={handleChange}
+              handleBeforeInput={(val) => {
+                const textLength = editorState.getCurrentContent().getPlainText().length
+                if (val && textLength >= MAX_LENGTH) {
+                  return 'handled'
+                }
+                return 'not-handled'
+              }}
+              handlePastedText={(val) => {
+                const textLength = editorState.getCurrentContent().getPlainText().length
+                return val.length + textLength > MAX_LENGTH
+              }}
               toolbar={{
                 options: ['inline', 'list', 'history'],
                 inline: {
@@ -105,7 +119,9 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               readOnly={readOnly}
             />
           </div>
-          <span style={{ color: length > 1000 ? 'red' : undefined }}>{length}/1000</span>
+          <span style={{ color: length > MAX_LENGTH - 100 ? 'red' : undefined }}>
+            {length}/{MAX_LENGTH - 100}
+          </span>
           <CurrentEditor fieldName={fieldName} />
         </>
       )}
