@@ -40,6 +40,23 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   }
 }
 
+const getSingleTempAnswers = async (req, res) => {
+  try {
+    const data = await db.tempAnswer.findOne({
+      where: {
+        programme: req.params.programme,
+      },
+    })
+
+    const result = data ? data.data : {}
+
+    return res.status(200).json(result)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getAllUserHasAccessTo = async (req, res) => {
   try {
     if (req.user.admin) {
@@ -131,4 +148,5 @@ module.exports = {
   bulkCreate,
   getAllTempUserHasAccessTo,
   getAllUserHasAccessTo,
+  getSingleTempAnswers,
 }

@@ -12,7 +12,7 @@ import { Button } from 'semantic-ui-react'
 import StatusMessage from './StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { setViewOnly } from 'Utilities/redux/formReducer'
+import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
 import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
@@ -112,7 +112,12 @@ const FormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-    if (programme.locked || !userHasWriteAccess) return
+    if (programme.locked || !userHasWriteAccess) {
+      // Dont join websocket because no write permissions,
+      // get the temp answers for readmode instead:
+      dispatch(getTempAnswers(room))
+      return
+    }
     dispatch(wsJoinRoom(room))
     return () => dispatch(wsLeaveRoom(room))
   }, [programme])

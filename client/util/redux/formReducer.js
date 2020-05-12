@@ -21,6 +21,12 @@ export const getFormAction = () => {
   return callBuilder(route, prefix)
 }
 
+export const getTempAnswers = (room) => {
+  const route = `/answers/temp/${room}`
+  const prefix = 'GET_TEMP_ANSWERS'
+  return callBuilder(route, prefix)
+}
+
 export const postFormAction = (message) => {
   const route = '/form'
   const prefix = 'SAVE_FORM'
@@ -48,6 +54,13 @@ export default (state = { data: {}, viewOnly: false, lastSaved: new Date() }, ac
         error: false,
       }
     case 'GET_FORM_SUCCESS':
+      return {
+        ...state,
+        data: action.response,
+        pending: false,
+        error: false,
+      }
+    case 'GET_TEMP_ANSWERS_SUCCESS':
       return {
         ...state,
         data: action.response,
