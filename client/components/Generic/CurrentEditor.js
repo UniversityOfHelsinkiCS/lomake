@@ -4,8 +4,10 @@ import { Icon } from 'semantic-ui-react'
 
 export default ({ fieldName }) => {
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
+  const currentUserUid = useSelector((state) => state.currentUser.data.uid)
 
   if (!currentEditors || !currentEditors[fieldName]) return null
+  if (currentEditors[fieldName].uid === currentUserUid) return null
 
   return (
     <span style={{ marginLeft: '2em' }}>
