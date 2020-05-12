@@ -89,12 +89,18 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    // Toggling write permissions always removes/grants read access.
+    // Toggling write on adds also read permissions.
     if (newProgrammeAccess['write'] !== undefined) {
-      const val = newProgrammeAccess['write']
-      newProgrammeAccess = {
-        read: val,
-        write: val,
+      if (newProgrammeAccess['write']) {
+        newProgrammeAccess = {
+          read: true,
+          write: true,
+        }
+      } else {
+        newProgrammeAccess = {
+          read: true,
+          write: false,
+        }
       }
     }
 
