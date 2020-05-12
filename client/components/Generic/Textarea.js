@@ -42,7 +42,6 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
 
   useEffect(() => {
     if (readOnly || (currentEditors && !currentEditors[fieldName])) {
-      console.log('jaha')
       setEditorState(editorStateFromRedux())
     }
   }, [dataFromRedux])
