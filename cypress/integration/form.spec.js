@@ -39,7 +39,7 @@ describe('Form tests', function () {
     cy.focused().clear()
 
     cy.route('POST', '/socket.io/*').as('update')
-    cy.focused().type('kissa')
+    cy.focused().type('kissa', { delay: 500 })
 
     // There should be 5 post requests to socket.io, because kissa is a 5 letter word.
     cy.wait('@update').wait('@update').wait('@update').wait('@update').wait('@update')
