@@ -8,9 +8,7 @@ const currentUser = async (req, res, next) => {
   if (isSuperAdmin(uid)) {
     const loggedInAs = req.headers['x-admin-logged-in-as']
     if (loggedInAs) {
-      let fakeUser = await db.user
-        .findOne({ where: { uid: loggedInAs } })
-        .then((res) => res.dataValues)
+      let fakeUser = await db.user.findOne({ where: { uid: loggedInAs } })
 
       req.user = fakeUser
     }
