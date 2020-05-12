@@ -181,7 +181,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
                 {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
               </Link>
             </div>
-            {tableIds.map((idObject, qi) => (
+            {tableIds.map((idObject) => (
               <SmileyTableCell
                 key={`${p.key}-${idObject.id}`}
                 programmesName={p.name[languageCode] ? p.name[languageCode] : p.name['en']}
