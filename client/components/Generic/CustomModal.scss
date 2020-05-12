@@ -1,4 +1,4 @@
-.outer {
+.customModal-dimmer {
   display: flex;
   align-items: center;
   position: fixed;
@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.inner {
+.customModal-content {
   margin: 2% auto;
   padding: 20px;
   //border: 1px solid black;

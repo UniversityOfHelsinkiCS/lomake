@@ -6,11 +6,10 @@ import useOnClickOutside from '../../util/useOnClickOutside'
 const CustomModal = ({ children, title, closeModal, borderColor }) => {
   const ref = useRef()
   useOnClickOutside(ref, closeModal)
-  console.log('borderColor', borderColor)
   return (
-    <div className="outer">
+    <div className="customModal-dimmer">
       <div
-        className="inner"
+        className="customModal-content"
         style={borderColor ? { border: '3px solid', borderColor } : {}}
         ref={ref}
       >

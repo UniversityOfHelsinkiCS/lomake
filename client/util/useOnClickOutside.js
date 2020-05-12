@@ -6,11 +6,8 @@ export default function useOnClickOutside(ref, handler) {
   useEffect(
     () => {
       const listener = (event) => {
-        // Do nothing if clicking ref's element or descendent elements
-        if (!ref.current || ref.current.contains(event.target)) {
-          return
-        }
-
+        // Only close when dimmer is clicked.
+        if (!event.target.className.includes('customModal-dimmer')) return
         handler(event)
       }
 
