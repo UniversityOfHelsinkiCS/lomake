@@ -170,7 +170,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
         </div>
       ))}
       <div className="sticky-header" />
-      <div />
+      <div className="sticky-header" />
       {filteredProgrammes.map((p) => {
         const programme = selectedAnswers.find((a) => a.programme === p.key)
         const targetURL = `/form/${p.key}`
