@@ -148,4 +148,16 @@ label {
   .measures-label {
     visibility: hidden;
   }
+
+  // These are required for firefox:
+  // https://stackoverflow.com/questions/43492724/firefox-prints-first-page-only-but-other-browsers-doing-fine/43494490
+  .content {
+    display: block;
+  }
+  .form-container {
+    display: block;
+  }
+  .the-form {
+    display: block;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 
@@ -6,18 +6,18 @@ const translations = {
   downloadText: {
     fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
     en: 'Print / Download answers as PDF file',
-    se: ''
+    se: '',
   },
   setViewOnlyTrueText: {
     fi: 'Tulostus/PDF -näkymä',
     en: 'Print/Download as PDF view',
-    se: ''
+    se: '',
   },
   setViewOnlyFalseText: {
     fi: 'Palaa täyttämään lomaketta',
     en: 'Back to edit view',
-    se: ''
-  }
+    se: '',
+  },
 }
 
 const PDFDownload = () => {
@@ -27,52 +27,29 @@ const PDFDownload = () => {
   const handleViewOnlyChange = (value) => dispatch(setViewOnly(value))
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const user = useSelector((state) => state.currentUser.data)
+  const [takingPDF, setTakingPDF] = useState(false)
 
   const userHasWriteAccess =
     user.admin || (user.access[programme.key] && user.access[programme.key].write)
-  const showGoBackToEditButton = userHasWriteAccess && !programme.locked ? true : false
+  const userCanEdit = userHasWriteAccess && !programme.locked ? true : false
+
+  const openViewModeAndPrintPdf = () => {
+    handleViewOnlyChange(true)
+    setTakingPDF(true)
+  }
+
+  useEffect(() => {
+    if (takingPDF) {
+      window.print()
+      setTakingPDF(false)
+      if (userCanEdit) handleViewOnlyChange(false)
+    }
+  }, [takingPDF])
 
   return (
-    <>
-      {viewOnly ? (
-        <>
-          {showGoBackToEditButton && (
-            <>
-              <span
-                data-cy="pdfdownload-go-back-button"
-                style={{ cursor: 'pointer', color: '#4183C4' }}
-                onClick={() => {
-                  handleViewOnlyChange(false)
-                }}
-              >
-                {translations.setViewOnlyFalseText[languageCode]}
-              </span>
-              <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
-            </>
-          )}
-          <span
-            style={{ cursor: 'pointer', color: '#4183C4' }}
-            onClick={() => {
-              window.print()
-            }}
-          >
-            {translations.downloadText[languageCode]}
-          </span>
-        </>
-      ) : (
-        <>
-          <span
-            data-cy="pdfdownload-go-to-readmode"
-            style={{ cursor: 'pointer', color: '#4183C4' }}
-            onClick={() => {
-              handleViewOnlyChange(true)
-            }}
-          >
-            {translations.setViewOnlyTrueText[languageCode]}
-          </span>
-        </>
-      )}
-    </>
+    <span style={{ cursor: 'pointer', color: '#4183C4' }} onClick={openViewModeAndPrintPdf}>
+      {translations.downloadText[languageCode]}
+    </span>
   )
 }
 

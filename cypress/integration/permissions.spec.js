@@ -25,14 +25,6 @@ describe('Permission tests', function () {
     cy.get('[data-cy=pdfdownload-go-back-button]').should('not.exist')
   })
 
-  it('Can WRITE form with WRITE permissions and switch to readmode', function () {
-    cy.visit('/form/KH50_005')
-    cy.get('[data-cy=form-section-I]').click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.focused().type('EDITING')
-    cy.get('[data-cy=pdfdownload-go-to-readmode]').click()
-  })
-
   it('Can do management with ADMIN permissions', function () {
     cy.visit('/')
     cy.get('[data-cy=KH80_001-manage]').click()
