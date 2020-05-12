@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Menu, Label, Dropdown } from 'semantic-ui-react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
+import { images } from 'Utilities/common'
 import {
-  logoutAction,
   activateAdminModeAction,
   disableAdminModeAction,
+  logoutAction,
 } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
-import { images } from 'Utilities/common'
-import { Link } from 'react-router-dom'
 
 export default () => {
   const [activeItem, setActiveItem] = useState('currentLomake')
@@ -97,6 +97,12 @@ export default () => {
     <Menu id="navBar-wrapper" stackable compact fluid inverted>
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+      </Menu.Item>
+      <Menu.Item>
+        <a href="mailto:grp-toska@helsinki.fi">
+          <Icon name="mail outline" />
+          grp-toska@helsinki.fi
+        </a>
       </Menu.Item>
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item icon="globe" simple>
