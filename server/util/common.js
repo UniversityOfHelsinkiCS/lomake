@@ -348,11 +348,11 @@ const programmes = [
   },
   {
     id: 38,
-    key: 'phd_chemistry_and_molecular_sciences',
+    key: 'T923104',
     name: {
-      fi: '',
-      en: 'Doctoral Programme in Chemistry and Molecular Sciences',
-      se: '',
+      fi: 'Kemian ja molekyylitutkimuksen tohtoriohjelma',
+      en: 'Doctoral Programme in Chemistry and Molecular Research',
+      se: 'Doktorandprogrammet i kemi och molekylära vetenskaper',
     },
   },
   {
@@ -708,11 +708,11 @@ const programmes = [
   },
   {
     id: 78,
-    key: 'msc_culture_and_communication_(in_swedish)',
+    key: 'MH40_013',
     name: {
-      fi: '',
-      en: "Master's Programme in Culture and Communication (in Swedish)",
-      se: '',
+      fi: 'Kulttuurin ja kommunikaation maisteriohjelma',
+      en: "Master's Programme in Culture and Communication",
+      se: 'Magisterprogrammet i kultur och kommunikation',
     },
   },
   {
@@ -960,8 +960,12 @@ const programmes = [
   },
   {
     id: 106,
-    key: 'msc_plant_biology',
-    name: { fi: '', en: "Master's Programme in Plant Biology", se: '' },
+    key: 'MH57_002',
+    name: { 
+      fi: 'Kasvitieteen maisteriohjelma', 
+      en: "Master's Programme in Integrative Plant Sciences", 
+      se: 'Magisterprogrammet i botanik' 
+    },
   },
   {
     id: 107,
@@ -1010,11 +1014,11 @@ const programmes = [
   },
   {
     id: 112,
-    key: 'msc_social_sciences_(in_swedish)',
+    key: 'MH70_007',
     name: {
-      fi: '',
-      en: "Master's Programme in Social Sciences (in Swedish)",
-      se: '',
+      fi: 'Yhteiskuntatieteiden maisteriohjelma',
+      en: "Master's Programme in Social Sciences",
+      se: 'Magisterprogrammet i samhällsvetenskaper',
     },
   },
   {
