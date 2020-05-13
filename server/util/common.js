@@ -294,7 +294,7 @@ const programmes = [
   },
   {
     id: 32,
-    key: '320002',
+    key: 'MH30_003',
     name: {
       fi: 'Hammaslääketieteen koulutusohjelma',
       en: 'Degree Programme in Dentistry',
