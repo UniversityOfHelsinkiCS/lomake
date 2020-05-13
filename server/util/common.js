@@ -528,7 +528,7 @@ const programmes = [
   },
   {
     id: 58,
-    key: 'MH57_002',
+    key: 'T922102',
     name: {
       fi: 'Kasvitieteen tohtoriohjelma',
       en: 'Doctoral Programme in Plant Sciences',
