@@ -33,7 +33,7 @@ export default function OwnerLinks() {
             ]
             const content = `${programmeKey},\t(${localizedProgName}),\t${shareUrl}`
 
-            return <pre>{content}</pre>
+            return <pre key={code}>{content}</pre>
           })}
     </div>
   )
