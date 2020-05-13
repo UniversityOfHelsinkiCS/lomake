@@ -8,17 +8,18 @@ const userMiddleware = async (req, res, next) => {
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {
-        uid: req.headers.uid
+        uid: req.headers.uid,
       },
       defaults: {
-        name: `${req.headers.givenname} ${req.headers.sn}`,
+        firstname: req.headers.givenname,
+        lastname: req.headers.sn,
         email: req.headers.mail,
         admin: !inProduction && req.headers.uid === 'admin' ? true : false, // Give admin bit by default in dev mode
         access: {},
-        irrelevant: false
-      }
+        irrelevant: false,
+      },
     })
-    if (created) logger.info(`New user: ${user.name}, ${user.email}`)
+    if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
     req.user = user
 
     next()

@@ -10,7 +10,8 @@ const createCypressUsers = async () => {
 
     await db.user.create({
       uid: 'cypressUser',
-      name: 'cypressUser',
+      firstname: 'cyp',
+      lastname: 'res',
       email: 'cypressUser',
       admin: false,
       access: {
@@ -32,7 +33,8 @@ const createCypressUsers = async () => {
 
     await db.user.create({
       uid: 'cypressAdminUser',
-      name: 'cypressAdminUser',
+      firstname: 'cypress',
+      lastname: 'admin',
       email: 'cypressAdminUser',
       admin: true,
       irrelevant: false,
