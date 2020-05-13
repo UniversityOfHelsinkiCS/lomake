@@ -89,7 +89,7 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
     <>
       <Grid.Row key={user.id}>
         <Grid.Column width={3} style={{ textAlign: 'center' }}>
-          {user.name}
+          {`${user.lastname}, ${user.firstname}`}
         </Grid.Column>
         <Grid.Column width={4} style={{ textAlign: 'center' }}>
           {user.email}

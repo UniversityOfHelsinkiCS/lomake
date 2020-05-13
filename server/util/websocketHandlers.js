@@ -8,7 +8,14 @@ const stripTimeouts = (room) => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
     if (!room[key]) return acc
-    return { ...acc, [key]: { uid: room[key].uid, name: room[key].name } }
+    return {
+      ...acc,
+      [key]: {
+        uid: room[key].uid,
+        firstname: room[key].firstname,
+        lastname: room[key].lastname,
+      },
+    }
   }, {})
 }
 
@@ -96,7 +103,12 @@ const updateField = async (socket, payload, io) => {
         ...currentEditors,
         [room]: {
           ...currentEditors[room],
-          [field]: { uid: currentUser.uid, name: currentUser.name, timeoutId },
+          [field]: {
+            uid: currentUser.uid,
+            firstname: currentUser.firstname,
+            lastname: currentUser.lastname,
+            timeoutId,
+          },
         },
       }
 

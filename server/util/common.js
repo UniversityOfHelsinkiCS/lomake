@@ -528,7 +528,7 @@ const programmes = [
   },
   {
     id: 58,
-    key: 'MH57_002',
+    key: 'T922102',
     name: {
       fi: 'Kasvitieteen tohtoriohjelma',
       en: 'Doctoral Programme in Plant Sciences',
@@ -961,15 +961,15 @@ const programmes = [
   {
     id: 106,
     key: 'MH57_002',
-    name: { 
-      fi: 'Kasvitieteen maisteriohjelma', 
-      en: "Master's Programme in Integrative Plant Sciences", 
-      se: 'Magisterprogrammet i botanik' 
+    name: {
+      fi: 'Kasvitieteen maisteriohjelma',
+      en: "Master's Programme in Integrative Plant Sciences",
+      se: 'Magisterprogrammet i botanik',
     },
   },
   {
     id: 107,
-    key: 'T922102',
+    key: 'MH70_002',
     name: {
       en: "Master's Programme in Politics, Media and Communication",
       fi: 'Politiikan ja viestinnän maisteriohjelma',
