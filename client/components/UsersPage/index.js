@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import UserTable from 'Components/UsersPage/UserTable'
+import OwnerLinks from './OwnerLinks'
 
 export default () => {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ export default () => {
 
   return (
     <>
+      <OwnerLinks />
       <UserTable />
     </>
   )

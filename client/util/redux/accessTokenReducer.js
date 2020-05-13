@@ -29,6 +29,12 @@ export const createTokenAction = (programme, type) => {
   return callBuilder(route, prefix, 'post')
 }
 
+export const getAllTokens = () => {
+  const route = `/tokens`
+  const prefix = 'GET_ALL_TOKENS'
+  return callBuilder(route, prefix)
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -96,6 +102,11 @@ export default (state = { data: null }, action) => {
         data: null,
         pending: false,
         error: true,
+      }
+    case 'GET_ALL_TOKENS_SUCCESS':
+      return {
+        ...state,
+        allTokens: action.response,
       }
 
     default:

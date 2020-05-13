@@ -13,6 +13,7 @@ const {
 
 const router = Router()
 
+router.get('/tokens', checkAdmin, tokens.getAll)
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/temp/:programme', requireProgrammeRead, answers.getSingleTempAnswers)

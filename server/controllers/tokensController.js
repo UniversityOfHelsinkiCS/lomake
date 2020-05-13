@@ -138,10 +138,21 @@ const createToken = async (req, res) => {
   }
 }
 
+const getAll = async (req, res) => {
+  try {
+    const tokens = await db.token.findAll({})
+    return res.status(200).json(tokens)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   claimToken,
   checkToken,
   programmesTokens,
   resetToken,
   createToken,
+  getAll,
 }
