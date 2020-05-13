@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Input } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
-import { inProduction } from '../../../config/common'
+import { basePath } from '../../../config/common'
 
 const translations = {
   editPrompt: {
@@ -61,9 +61,7 @@ const OwnerAccordionLinks = ({ programme }) => {
     }
   }
 
-  const urlPrefix = inProduction
-    ? 'https://study.cs.helsinki.fi/lomake/access/'
-    : 'http://localhost:8000/access/'
+  const urlPrefix = `${window.location.origin}${basePath}access/`
 
   return (
     <div style={{ margin: '2em 0em' }}>
