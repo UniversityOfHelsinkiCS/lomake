@@ -19,7 +19,7 @@ export default ({ fieldName }) => {
   if (currentEditors[fieldName].uid === currentUserUid) return null
 
   return (
-    <span style={{ color: 'red', fontStyle: 'italic', marginLeft: '1em' }}>
+    <span style={{ color: '#2494FF', fontStyle: 'italic', marginLeft: '1em' }}>
       {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${translations['isWriting'][languageCode]}`}
       <Icon style={{ marginLeft: '5px' }} name={'pencil'} />
     </span>
