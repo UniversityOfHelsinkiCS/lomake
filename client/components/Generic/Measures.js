@@ -12,6 +12,16 @@ const translations = {
     en: 'Add 1-5 measures',
     se: '',
   },
+  addButtonLabel: {
+    fi: 'Lisää toimenpide',
+    en: 'Add measure',
+    se: '',
+  },
+  removeButtonLabel: {
+    fi: 'Poista toimenpide',
+    en: 'Remove measure',
+    se: '',
+  },
 }
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
@@ -101,7 +111,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
             disabled={amountOfMeasures === 5 || !formData[`${id}_${amountOfMeasures}_text`]}
             onClick={() => setAmountOfMeasures(amountOfMeasures + 1)}
           >
-            Add measure
+            {translations.addButtonLabel[languageCode]}
           </Button>
           <span style={{ marginLeft: '5px' }}>
             <Button
@@ -112,7 +122,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
                 setAmountOfMeasures(amountOfMeasures - 1)
               }}
             >
-              Remove measure
+              {translations.removeButtonLabel[languageCode]}
             </Button>
           </span>
         </div>
