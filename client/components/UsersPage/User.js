@@ -35,7 +35,7 @@ export default ({ user }) => {
       <Popup
         trigger={
           <Icon
-            data-cy={`${user.name}-is-irrelevant`}
+            data-cy={`${user.uid}-is-irrelevant`}
             name="check"
             className="users-green"
             size="large"
@@ -56,7 +56,7 @@ export default ({ user }) => {
       <Popup
         trigger={
           <Icon
-            data-cy={`${user.name}-not-irrelevant`}
+            data-cy={`${user.uid}-not-irrelevant`}
             name="close"
             className="users-red"
             size="large"
@@ -81,7 +81,7 @@ export default ({ user }) => {
       <Popup
         trigger={
           <Icon
-            data-cy={`${user.name}-is-admin`}
+            data-cy={`${user.uid}-is-admin`}
             name="check"
             className="users-green"
             size="large"
@@ -101,12 +101,7 @@ export default ({ user }) => {
     ) : (
       <Popup
         trigger={
-          <Icon
-            data-cy={`${user.name}-not-admin`}
-            name="close"
-            className="users-red"
-            size="large"
-          />
+          <Icon data-cy={`${user.uid}-not-admin`} name="close" className="users-red" size="large" />
         }
         content={
           <Button
@@ -142,7 +137,7 @@ export default ({ user }) => {
   }
   return (
     <Grid.Row>
-      <Grid.Column width={2}>{user.name}</Grid.Column>
+      <Grid.Column width={2}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
       <Grid.Column>{user.uid}</Grid.Column>
       <Grid.Column width={3}>{user.email}</Grid.Column>
       <Grid.Column width={4}>

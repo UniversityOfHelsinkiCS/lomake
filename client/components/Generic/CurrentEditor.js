@@ -20,7 +20,7 @@ export default ({ fieldName }) => {
 
   return (
     <span style={{ color: 'red', fontStyle: 'italic', marginLeft: '1em' }}>
-      {`${currentEditors[fieldName].name} ${translations['isWriting'][languageCode]}`}
+      {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${translations['isWriting'][languageCode]}`}
       <Icon style={{ marginLeft: '5px' }} name={'pencil'} />
     </span>
   )

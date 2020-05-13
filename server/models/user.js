@@ -3,15 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     'user',
     {
       uid: DataTypes.STRING,
-      name: DataTypes.STRING,
+      firstname: DataTypes.STRING,
+      lastname: DataTypes.STRING,
       email: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
       access: DataTypes.JSONB,
-      irrelevant: DataTypes.BOOLEAN
+      irrelevant: DataTypes.BOOLEAN,
     },
     {
       underscored: true,
-      tableName: 'users'
+      tableName: 'users',
     }
   )
 
