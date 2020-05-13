@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Button } from 'semantic-ui-react'
-import SimpleTextarea from './SimpleTextarea'
+import { useSelector } from 'react-redux'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
+import SimpleTextarea from './SimpleTextarea'
 
 const translations = {
   measureLabel: {
@@ -25,29 +23,21 @@ const translations = {
 }
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
-  const dispatch = useDispatch()
-  const clearMeasure = (number) => dispatch(updateFormField(`${id}_${number}_text`, ''))
   const formData = useSelector((state) => state.form.data)
   const languageCode = useSelector((state) => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   useEffect(() => {
-    let measureNumber = 1
-    while (measureNumber <= 5) {
-      if (formData[`${id}_${measureNumber}_text`]) {
-        measureNumber++
+    let measureNumber = 5
+    while (measureNumber >= 1) {
+      if (!formData[`${id}_${measureNumber}_text`]) {
+        measureNumber--
       } else {
         break
       }
     }
 
-    // even if no text always at least one text field shown
-    if (measureNumber === 1) {
-      setAmountOfMeasures(1)
-      return
-    }
-
-    setAmountOfMeasures(measureNumber - 1)
+    setAmountOfMeasures(measureNumber + 1)
   }, [formData])
 
   const getPreviousMeasureAnswers = () => {
@@ -104,29 +94,6 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
         )
         return acc
       }, [])}
-      {!viewOnly && (
-        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Button
-            className="ui button"
-            disabled={amountOfMeasures === 5 || !formData[`${id}_${amountOfMeasures}_text`]}
-            onClick={() => setAmountOfMeasures(amountOfMeasures + 1)}
-          >
-            {translations.addButtonLabel[languageCode]}
-          </Button>
-          <span style={{ marginLeft: '5px' }}>
-            <Button
-              className="ui button"
-              disabled={amountOfMeasures === 1}
-              onClick={() => {
-                clearMeasure(amountOfMeasures)
-                setAmountOfMeasures(amountOfMeasures - 1)
-              }}
-            >
-              {translations.removeButtonLabel[languageCode]}
-            </Button>
-          </span>
-        </div>
-      )}
     </>
   )
 }
