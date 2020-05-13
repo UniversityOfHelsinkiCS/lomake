@@ -21,7 +21,7 @@ const Section = ({ title, number, children, programmeKey }) => {
             style={{
               fontSize: '2em',
               padding: '1.5em 0.5em',
-              margin: '3em 0',
+              margin: '7em 0em 1em 0em',
               background: '#1B1C1D',
               borderRadius: '5px',
               color: 'white',
