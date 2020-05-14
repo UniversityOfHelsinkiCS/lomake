@@ -1149,9 +1149,56 @@ const programmes = [
   },
 ]
 
+const cypressUsers = [
+  {
+    uid: 'cypressUser',
+    firstname: 'cyp',
+    lastname: 'res',
+    email: 'cypressUser',
+    admin: false,
+    access: {
+      KH80_001: {
+        read: true,
+        admin: true,
+        write: true,
+      },
+      KH50_004: {
+        read: true,
+      },
+      KH50_005: {
+        write: true,
+        read: true,
+      },
+    },
+    irrelevant: false,
+  },
+  {
+    uid: 'cypressUser2',
+    firstname: 'cyp2',
+    lastname: 'res2',
+    email: 'cypressUser2',
+    admin: false,
+    access: {
+      KH80_001: {
+        read: true,
+      },
+    },
+    irrelevant: false,
+  },
+  {
+    uid: 'cypressAdminUser',
+    firstname: 'cypress',
+    lastname: 'admin',
+    email: 'cypressAdminUser',
+    admin: true,
+    irrelevant: false,
+  },
+]
+
 module.exports = {
   ...common,
   DB_URL,
   PORT,
   programmes,
+  cypressUsers,
 }
