@@ -41,14 +41,15 @@ const translations = {
   },
 }
 
-const SwitchableBadge = ({ currentAccess, grant, remove, disabled = false }) => {
+const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
   const languageCode = useSelector((state) => state.language)
   if (currentAccess)
     return (
       <Popup
-        trigger={<Icon name="check" className="users-green" size="large" />}
+        trigger={<Icon data-cy={cyTag} name="check" className="users-green" size="large" />}
         content={
           <Button
+            data-cy="removePermissions-button"
             disabled={disabled}
             color="red"
             content={translations.removeAccess[languageCode]}
@@ -61,9 +62,10 @@ const SwitchableBadge = ({ currentAccess, grant, remove, disabled = false }) => 
     )
   return (
     <Popup
-      trigger={<Icon name="close" className="users-red" size="large" />}
+      trigger={<Icon data-cy={cyTag} name="close" className="users-red" size="large" />}
       content={
         <Button
+          data-cy="grantPermissions-button"
           color="green"
           content={translations.grantAccess[languageCode]}
           onClick={() => grant()}
@@ -96,6 +98,8 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
+            cyTag={`read-${user.uid}`}
+            disabled={user.access[programme].admin}
             currentAccess={user.access[programme] ? user.access[programme].read : false}
             grant={() => grantView()}
             remove={() => removeView()}
@@ -103,6 +107,8 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
+            cyTag={`write-${user.uid}`}
+            disabled={user.access[programme].admin}
             currentAccess={user.access[programme] ? user.access[programme].write : false}
             grant={() => grantEdit()}
             remove={() => removeEdit()}
@@ -110,6 +116,7 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
+            cyTag={`admin-${user.uid}`}
             currentAccess={user.access[programme] ? user.access[programme].admin : false}
             grant={() => grantOwner()}
             remove={() => removeOwner()}
@@ -127,13 +134,6 @@ const OwnerAccordionUsers = ({ programme }) => {
   const users = useSelector((state) => state.programmesUsers)
 
   if (!users.data || users.pending) return null
-
-  // Show admins at the top of the list (including self)
-  const sortedUsers = users.data.sort((a, b) => {
-    const aAdmin = a.access[programme].admin
-    const bAdmin = b.access[programme].admin
-    return bAdmin - aAdmin
-  })
 
   const currentOwnerCount = users.data.reduce((pre, cur) => {
     if (cur.access[programme].admin) return pre + 1
@@ -161,14 +161,14 @@ const OwnerAccordionUsers = ({ programme }) => {
               <Header as="h4">{translations.ownerHeader[languageCode]}</Header>
             </Grid.Column>
           </Grid.Row>
-          {sortedUsers.length === 0 ? (
+          {users.data.length === 0 ? (
             <Grid.Row>
               <Grid.Column width={13} style={{ textAlign: 'center' }}>
                 {translations.noUsers[languageCode]}
               </Grid.Column>
             </Grid.Row>
           ) : (
-            sortedUsers.map((user) => (
+            users.data.map((user) => (
               <OwnerAccordionUserRow
                 currentOwnerCount={currentOwnerCount}
                 user={user}
