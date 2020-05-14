@@ -5,7 +5,7 @@ import { basePath } from '../../../config/common'
 
 export default function OwnerLinks() {
   const dispatch = useDispatch()
-  const [showLinks, setShowLinks] = useState(true)
+  const [showLinks, setShowLinks] = useState(false)
   const allTokens = useSelector((state) => state.accessToken.allTokens)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
   const language = useSelector((state) => state.language)
