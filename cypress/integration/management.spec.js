@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-describe('Form tests', function () {
+describe('Management tests', function () {
   this.beforeEach(function () {
     cy.request('/api/cypress/resetUsers')
     cy.login('cypressUser')
