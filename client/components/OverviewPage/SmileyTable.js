@@ -8,6 +8,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
 import './SmileyTable.scss'
 import SmileyTableCell from './SmileyTableCell'
+import { PieChart } from 'react-minimal-pie-chart'
 
 const translations = {
   openManageText: {
@@ -85,6 +86,34 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
         {translations.noResultsText[languageCode]}
       </Header>
     )
+
+  // {learning_outcomes: {green: 1, yellow: 1, red: 1}}
+  let renderStatsRow = false
+  const stats = filteredProgrammes.reduce((statObject, { key }) => {
+    const programme = selectedAnswers.find((a) => a.programme === key)
+    const answers = programme && programme.data ? programme.data : {}
+
+    Object.keys(answers).forEach((answerKey) => {
+      const answerText = answers[answerKey]
+      if (answerKey.includes('_light')) {
+        renderStatsRow = true
+        const baseKey = answerKey.replace('_light', '')
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+        statObject[baseKey][answerText] = statObject[baseKey][answerText]
+          ? statObject[baseKey][answerText] + 1
+          : 1
+      }
+
+      /*if (answerKey.includes('_text')) {
+        const baseKey = answerKey.replace('_text', '')
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+        const words = answerText.toLowerCase().split(' ')
+        const existingArray = statObject[baseKey][answerText] ? statObject[baseKey][answerText] : []
+        statObject[baseKey][answerText] = [...existingArray, ...words]
+      }*/
+    })
+    return statObject
+  }, {})
 
   const hasManagementAccess = (program) => {
     if (currentUser.admin) return true
@@ -169,6 +198,47 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
       ))}
       <div className="sticky-header" />
       <div className="sticky-header" />
+      {renderStatsRow && (
+        <>
+          <div className="sticky-header" />
+          {tableIds.map((idObject) =>
+            stats.hasOwnProperty(idObject.id) ? (
+              <div>
+                <PieChart
+                  animationDuration={500}
+                  animationEasing="ease-out"
+                  center={[50, 50]}
+                  data={[
+                    {
+                      color: '#9dff9d',
+                      value: stats[idObject.id].green || 0,
+                    },
+                    {
+                      color: '#ffffb1',
+                      value: stats[idObject.id].yellow || 0,
+                    },
+                    {
+                      color: '#ff7f7f',
+                      value: stats[idObject.id].red || 0,
+                    },
+                  ]}
+                  labelPosition={50}
+                  lengthAngle={360}
+                  lineWidth={100}
+                  paddingAngle={0}
+                  radius={50}
+                  startAngle={0}
+                  viewBoxSize={[100, 100]}
+                />
+              </div>
+            ) : (
+              <div />
+            )
+          )}
+          <div className="sticky-header" />
+          <div className="sticky-header" />
+        </>
+      )}
       {filteredProgrammes.map((p) => {
         const programme = selectedAnswers.find((a) => a.programme === p.key)
         const targetURL = `/form/${p.key}`
