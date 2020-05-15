@@ -8,12 +8,13 @@ module.exports = (sequelize, DataTypes) => {
       valid: DataTypes.BOOLEAN,
       usageCounter: {
         type: DataTypes.INTEGER,
-        field: 'usage_counter'
-      }
+        field: 'usage_counter',
+      },
+      faculty: DataTypes.STRING,
     },
     {
       underscored: true,
-      tableName: 'tokens'
+      tableName: 'tokens',
     }
   )
 
