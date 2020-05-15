@@ -9,6 +9,11 @@ const translations = {
     en: 'You are claiming permissions',
     se: '',
   },
+  promptFaculty: {
+    fi: 'Olet vastaanottamassa lukuoikeudet seuraaviin koulutusohjelmiin: ',
+    en: 'You are claiming read-permissions for the following studyprogrammes: ',
+    se: '',
+  },
   buttonText: {
     fi: 'Vastaanota',
     en: 'Claim',
@@ -62,6 +67,7 @@ export default ({ url }) => {
   const token = useSelector((store) => store.accessToken)
   const languageCode = useSelector((state) => state.language)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
+  const faculties = useSelector((state) => state.faculties.data)
   const [value, setValue] = useState('')
 
   useEffect(() => {
@@ -70,13 +76,17 @@ export default ({ url }) => {
 
   useEffect(() => {
     if (studyProgrammes && token.data) {
-      const program = studyProgrammes.find((p) => p.key === token.data.programme)
+      if (token.data.programme) {
+        const program = studyProgrammes.find((p) => p.key === token.data.programme)
 
-      const temp = program['name'][languageCode]
-        ? program['name'][languageCode]
-        : program['name']['en']
+        const temp = program['name'][languageCode]
+          ? program['name'][languageCode]
+          : program['name']['en']
 
-      setLocalizedProgramname(temp)
+        setLocalizedProgramname(temp)
+      } else {
+        setLocalizedProgramname(token.data.faculty)
+      }
     }
   }, [languageCode, token, studyProgrammes])
 
@@ -84,8 +94,12 @@ export default ({ url }) => {
     dispatch(getTokenAction(url))
   }, [])
 
-  const handleClaim = () => {
-    dispatch(claimTokenAction(url))
+  const handleClaim = (token) => {
+    if (token.programme) {
+      dispatch(claimTokenAction(url, false))
+    } else {
+      dispatch(claimTokenAction(url, true))
+    }
   }
 
   const buttonIsDisabled = () => {
@@ -106,12 +120,33 @@ export default ({ url }) => {
   if (!token.data && token.error)
     return <span style={{ color: 'red' }}>{translations.invalidToken[languageCode]}</span>
 
-  if (!token.data) return <Loader active inline />
+  if (!token.data || !faculties) return <Loader active inline />
+
+  const getFacultyMessageContent = () => {
+    const programeCodes = faculties.find((f) => f.code === token.data.faculty).programmes
+    const localizedProgrammeCodes = programeCodes.map((pCode) => {
+      const prog = studyProgrammes.find((p) => p.key === pCode)
+      return prog.name[languageCode]
+    })
+    return translations.promptFaculty[languageCode] + localizedProgrammeCodes.join(', ')
+  }
 
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
-      <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
-      <div style={{ fontWeight: 'bold' }}>{localizedProgramname}</div>
+      <Message
+        color="blue"
+        icon="exclamation"
+        content={
+          token.data.programme ? translations.prompt[languageCode] : getFacultyMessageContent()
+        }
+      />
+      {token.data.programme ? (
+        <div style={{ fontWeight: 'bold' }}>{localizedProgramname}</div>
+      ) : (
+        <div style={{ fontWeight: 'bold' }}>
+          {faculties.find((f) => f.code === token.data.faculty).name}
+        </div>
+      )}
       <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>
         <Icon color="blue" name={labelIcon[token.data.type]} size="small" />{' '}
         {translations.rights[token.data.type][languageCode]}
@@ -130,7 +165,7 @@ export default ({ url }) => {
           </div>
         </div>
       )}
-      <Button disabled={buttonIsDisabled()} onClick={() => handleClaim()}>
+      <Button disabled={buttonIsDisabled()} onClick={() => handleClaim(token.data)}>
         {translations.buttonText[languageCode]}
       </Button>{' '}
     </div>
