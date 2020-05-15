@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header, Icon, Loader, Button } from 'semantic-ui-react'
-import { colors } from 'Utilities/common'
+import { Button, Header, Icon, Loader } from 'semantic-ui-react'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import OwnerAccordionContent from './ProgramControlsContent'
-import SmileyTableCell from './SmileyTableCell'
 import './SmileyTable.scss'
+import SmileyTableCell from './SmileyTableCell'
 
 const translations = {
   openManageText: {
