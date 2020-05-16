@@ -58,7 +58,7 @@ const SmileyTableCell = ({
       >
         <Icon
           name={lightEmojiMap[lightAnswer]}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer', margin: '0 auto' }}
           size="big"
           onClick={() =>
             setModalData({
