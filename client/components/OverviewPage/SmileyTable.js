@@ -43,7 +43,13 @@ const replaceTitle = {
   review_of_last_years_situation_report: 'review_of_last_year',
 }
 
-const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControlsToShow }) => {
+const SmileyTable = ({
+  setModalData,
+  filteredProgrammes,
+  year,
+  setProgramControlsToShow,
+  setStatsToShow,
+}) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -57,15 +63,19 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
     if (currentUser.admin) dispatch(getProgrammeOwners())
   }, [])
 
-  const transformIdToTitle = (id) => {
+  const transformIdToTitle = (id, vertical = true) => {
     const idToUse = replaceTitle[id] || id
     const formatted = idToUse.replace(/_/g, ' ')
 
     return (
       <span
-        style={{
-          writingMode: 'vertical-lr',
-        }}
+        style={
+          vertical
+            ? {
+                writingMode: 'vertical-lr',
+              }
+            : {}
+        }
       >
         {formatted.charAt(0).toUpperCase() + formatted.slice(1)}
       </span>
@@ -203,7 +213,15 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
           <div className="sticky-header" />
           {tableIds.map((idObject) =>
             stats.hasOwnProperty(idObject.id) ? (
-              <div>
+              <div
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  setStatsToShow({
+                    stats: stats[idObject.id],
+                    title: transformIdToTitle(idObject.id, false),
+                  })
+                }
+              >
                 <PieChart
                   animationDuration={500}
                   animationEasing="ease-out"

@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import OspaModule from './OspaModule'
 import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
+import StatsContent from './StatsContent'
 
 export default () => {
   const [filter, setFilter] = useState('')
@@ -13,6 +14,7 @@ export default () => {
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  const [statsToShow, setStatsToShow] = useState(null)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -101,6 +103,12 @@ export default () => {
         </CustomModal>
       )}
 
+      {statsToShow && (
+        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+          <StatsContent stats={statsToShow.stats} />
+        </CustomModal>
+      )}
+
       {usersProgrammes.length > 0 ? (
         <>
           <div
@@ -158,6 +166,7 @@ export default () => {
               setModalData={setModalData}
               year={year}
               setProgramControlsToShow={setProgramControlsToShow}
+              setStatsToShow={setStatsToShow}
             />
           </div>
         </>
