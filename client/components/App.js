@@ -7,6 +7,7 @@ import NavBar from 'Components/NavBar'
 import Router from 'Components/Router'
 import { getStudyProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
+import { getFaculties } from 'Utilities/redux/facultyReducer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -24,6 +25,7 @@ export default () => {
     if (currentUser.data) {
       dispatch(getStudyProgrammes())
       dispatch(getDeadline())
+      dispatch(getFaculties())
     }
   }, [currentUser])
 

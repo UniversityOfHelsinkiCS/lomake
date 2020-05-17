@@ -71,3 +71,4 @@ _Example of the ENTITY type containing title, description, text area and light f
 - npm run dev
 - localhost:8000
 - use setHeaders() to select user for development purposes
+

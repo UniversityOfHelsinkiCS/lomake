@@ -66,7 +66,8 @@ const editUser = async (req, res) => {
 
 const editUserAccess = async (req, res) => {
   try {
-    let newProgrammeAccess = req.body
+    let body = req.body
+    let newProgrammeAccess
 
     const user = await db.user.findOne({ where: { id: req.params.id } })
     if (!user) return res.status(400).json({ error: 'id not found.' })
@@ -75,7 +76,7 @@ const editUserAccess = async (req, res) => {
      * Trying to remove admin rights from given program...
      * Need to check that user is not the last admin for this programme.
      */
-    if (newProgrammeAccess.admin === false) {
+    if (body.admin === false) {
       const currentAdminCount = await db.user.count({
         where: {
           access: {
@@ -89,28 +90,53 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    // Toggling write on adds also read permissions.
-    if (newProgrammeAccess['write'] !== undefined) {
-      if (newProgrammeAccess['write']) {
-        newProgrammeAccess = {
-          read: true,
-          write: true,
-        }
-      } else {
-        newProgrammeAccess = {
-          read: true,
-          write: false,
-        }
+    /**
+     * Dont allow adjusting read/write permissions of admin user:
+     */
+    if (user.access[req.params.programme].admin && body.admin !== false) {
+      return res.status(200).json(user)
+    }
+
+    if (body['admin'] === true) {
+      newProgrammeAccess = {
+        read: true,
+        write: true,
+        admin: true,
       }
     }
 
-    // Enabling admin permissions always grants all rights.
-    if (newProgrammeAccess['admin'] === true) {
-      const val = newProgrammeAccess['admin']
+    if (body['admin'] === false) {
       newProgrammeAccess = {
-        read: val,
-        write: val,
-        admin: val,
+        read: true,
+        write: true,
+        admin: false,
+      }
+    }
+
+    if (body['write'] === true) {
+      newProgrammeAccess = {
+        read: true,
+        write: true,
+      }
+    }
+
+    if (body['write'] === false) {
+      newProgrammeAccess = {
+        read: true,
+        write: false,
+      }
+    }
+
+    if (body['read'] === true) {
+      newProgrammeAccess = {
+        read: true,
+      }
+    }
+
+    if (body['read'] === false) {
+      newProgrammeAccess = {
+        read: false,
+        write: false,
       }
     }
 

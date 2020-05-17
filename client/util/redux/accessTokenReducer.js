@@ -11,8 +11,9 @@ export const getTokenAction = (url) => {
   return callBuilder(route, prefix, 'get')
 }
 
-export const claimTokenAction = (url) => {
-  const route = `/access/${url}`
+export const claimTokenAction = (url, isFaculty) => {
+  const route = isFaculty ? `/access/${url}/faculty` : `/access/${url}`
+
   const prefix = 'CLAIM_TOKEN'
   return callBuilder(route, prefix, 'post')
 }

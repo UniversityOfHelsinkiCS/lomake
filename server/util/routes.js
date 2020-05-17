@@ -4,11 +4,14 @@ const answers = require('@controllers/answersController')
 const tokens = require('@controllers/tokensController')
 const studyprogrammes = require('@controllers/studyprogrammesController')
 const deadlines = require('@controllers/deadlineController')
+const cypress = require('@controllers/cypressController')
+const faculties = require('@controllers/facultyController')
 const {
   checkAdmin,
   requireProgrammeRead,
   requireProgrammeWrite,
   requireProgrammeOwner,
+  notInProduction,
 } = require('@middleware/accessControlMiddleware')
 
 const router = Router()
@@ -40,10 +43,15 @@ router.get('/users', checkAdmin, users.getAllUsers)
 router.put('/users/:id', checkAdmin, users.editUser)
 
 router.post('/access/:url', tokens.claimToken)
+router.post('/access/:url/faculty', tokens.claimFacultyToken)
 router.get('/access/:url', tokens.checkToken)
 
 router.get('/deadlines', deadlines.get)
 router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)
 router.delete('/deadlines', checkAdmin, deadlines.remove)
+
+router.get('/faculties', faculties.getAll)
+
+router.get('/cypress/resetUsers', notInProduction, cypress.resetUsers)
 
 module.exports = router

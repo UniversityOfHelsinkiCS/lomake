@@ -8,7 +8,7 @@ const resetAllTokens = async () => {
     logger.info(`Performing full token reset.`)
     await db.token.destroy({ where: {} })
 
-    programmes.forEach(async (programme) => {
+    for (const programme of programmes) {
       const { key } = programme
       await db.token.create({
         url: uuid(),
@@ -31,7 +31,19 @@ const resetAllTokens = async () => {
         valid: true,
         usageCounter: 0,
       })
-    })
+    }
+
+    // Create tokens for faculty wide read-links:
+    const faculties = await db.faculty.findAll()
+    for (const faculty of faculties) {
+      await db.token.create({
+        url: uuid(),
+        faculty: faculty.code,
+        type: 'READ',
+        valid: true,
+        usageCounter: 0,
+      })
+    }
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }

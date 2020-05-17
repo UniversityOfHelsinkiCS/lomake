@@ -18,6 +18,7 @@ const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 const { fixProgrammeKeys } = require('@root/server/scripts/fixProgrammeKeys')
+const { initFaculties } = require('@root/server/scripts/initFaculties')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -33,6 +34,9 @@ initializeDatabaseConnection()
         case 'fix_programmes':
           fixProgrammeKeys()
           return
+        case 'create_faculties':
+          initFaculties().then(() => logger.info('Faculties created.'))
+          return
         default:
           return
       }
@@ -43,6 +47,7 @@ initializeDatabaseConnection()
       resetStudyprogrammes()
       createCypressUsers()
       createDeadlineIfNoneExist()
+      initFaculties()
     }
 
     const app = express()
