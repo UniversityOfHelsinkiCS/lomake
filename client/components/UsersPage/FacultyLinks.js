@@ -10,6 +10,8 @@ export default function FacultyLinks() {
 
   if (!allTokens || !faculties || !language) return null
 
+  const sortedFaculties = faculties.sort((a, b) => a.code.localeCompare(b.code))
+
   const temp = faculties.map((faculty) => {
     const token = allTokens.find((t) => t.faculty === faculty.code)
     const shareUrl = `${window.location.origin}${basePath}access/${token.url}`
