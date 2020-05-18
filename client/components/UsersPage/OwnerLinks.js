@@ -16,7 +16,8 @@ export default function OwnerLinks() {
 
   if (!allTokens || !studyProgrammes) return null
 
-  const sortedTokens = allTokens.sort((a, b) => a.programme.localeCompare(b.programme))
+  const filteredTokens = allTokens.filter((token) => token.programme)
+  const sortedTokens = filteredTokens.sort((a, b) => a.programme.localeCompare(b.programme))
 
   return (
     <div>
