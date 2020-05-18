@@ -10,7 +10,7 @@ export default function OwnerLinks() {
 
   if (!allTokens || !studyProgrammes) return null
 
-  const filteredTokens = allTokens.filter((token) => token.programme)
+  const filteredTokens = allTokens.filter((token) => token.programme && token.valid)
   const sortedTokens = filteredTokens.sort((a, b) => a.programme.localeCompare(b.programme))
 
   return (
@@ -18,7 +18,9 @@ export default function OwnerLinks() {
       <Message
         color="blue"
         icon="exclamation"
-        content={'The links listed here give ADMIN-permissions and can be used one time only.'}
+        content={
+          'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.'
+        }
       />
       <table>
         <thead>
