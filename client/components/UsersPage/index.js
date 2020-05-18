@@ -46,7 +46,7 @@ export default () => {
       ),
     },
     {
-      menuItem: 'Faculty wide links',
+      menuItem: 'Links for faculties',
       render: () => (
         <Tab.Pane>
           <FacultyLinks />
