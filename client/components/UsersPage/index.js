@@ -12,15 +12,15 @@ export default () => {
   const languageCode = useSelector((state) => state.language)
 
   const translations = {
-    usersPage: {
-      en: 'Form - User-page',
-      fi: 'Lomake - Käyttäjä-sivu',
+    adminPage: {
+      en: 'Form - Admin-page',
+      fi: 'Lomake - Ylläpito-sivu',
       se: '',
     },
   }
 
   useEffect(() => {
-    document.title = translations['usersPage'][languageCode]
+    document.title = translations['adminPage'][languageCode]
   }, [languageCode])
 
   useEffect(() => {

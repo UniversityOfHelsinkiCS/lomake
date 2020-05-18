@@ -15,16 +15,6 @@ export const logoutAction = () => {
   return callBuilder(route, prefix, 'post')
 }
 
-export const activateAdminModeAction = () => {
-  window.localStorage.setItem('lomake_adminmode', 'true')
-  return { type: 'ACTIVATE_ADMINMODE' }
-}
-
-export const disableAdminModeAction = () => {
-  window.localStorage.setItem('lomake_adminmode', 'false')
-  return { type: 'DISABLE_ADMINMODE' }
-}
-
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: undefined }, action) => {
@@ -34,21 +24,20 @@ export default (state = { data: undefined }, action) => {
         ...state,
         data: {
           ...action.response,
-          adminMode: window.localStorage.getItem('lomake_adminmode') === 'true'
         },
         pending: false,
-        error: false
+        error: false,
       }
     case 'LOGIN_ATTEMPT':
       return {
         ...state,
-        pending: true
+        pending: true,
       }
     case 'LOGIN_FAILURE':
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       }
     case 'LOGOUT_SUCCESS':
       window.location = action.response.logoutUrl
@@ -56,38 +45,28 @@ export default (state = { data: undefined }, action) => {
         ...state,
         data: null,
         pending: false,
-        error: false
+        error: false,
       }
     case 'LOGOUT_ATTEMPT':
       return {
         ...state,
-        pending: true
+        pending: true,
       }
     case 'LOGOUT_FAILURE':
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       }
-    case 'ACTIVATE_ADMINMODE':
-      return {
-        ...state,
-        data: { ...state.data, adminMode: true }
-      }
-    case 'DISABLE_ADMINMODE':
-      return {
-        ...state,
-        data: { ...state.data, adminMode: false }
-      }
+
     case 'CLAIM_TOKEN_SUCCESS':
       return {
         ...state,
         data: {
           ...action.response,
-          adminMode: window.localStorage.getItem('lomake_adminmode') === 'true'
         },
         pending: false,
-        error: false
+        error: false,
       }
     default:
       return state
