@@ -118,6 +118,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
     if (programme.claimed) {
       return (
         <Icon
+          data-cy={`${programme.key}-claimed`}
           title={
             programmeOwners
               ? programmeOwners[programme.key]
@@ -130,6 +131,7 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
     }
     return (
       <Icon
+        data-cy={`${programme.key}-notClaimed`}
         title={translations['programmeNotClaimed'][languageCode]}
         name="exclamation"
         size="large"

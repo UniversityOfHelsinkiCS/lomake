@@ -20,7 +20,7 @@ describe('Link tests', function () {
     cy.get('[data-cy=smileytable-link-to-TOSKA101]')
   })
 
-  it('Can claim admin (owner) access after typing confirmation', function () {
+  it.only('Can claim admin (owner) access after typing confirmation, and claimed status is updated', function () {
     cy.visit('/access/adminTest')
     cy.get('[data-cy=claim-button]').should('be.disabled')
     cy.get('[data-cy=claimAccessPage-confirmation-input]').type('TOSKA-en')
@@ -29,6 +29,10 @@ describe('Link tests', function () {
     cy.get('[data-cy=read-cypressUser]').should('have.class', 'check')
     cy.get('[data-cy=write-cypressUser]').should('have.class', 'check')
     cy.get('[data-cy=admin-cypressUser]').should('have.class', 'check')
+
+    cy.login('cypressAdminUser')
+    cy.reload()
+    cy.get('[data-cy=TOSKA101-claimed]')
   })
 
   it("Can't use admin link more than once", function () {
