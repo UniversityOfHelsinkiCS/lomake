@@ -17,39 +17,37 @@ export default () => {
   if (!users) return null
 
   return (
-    <Segment>
-      <Grid celled="internally">
-        <Grid.Row>
-          <Grid.Column width={2}>
-            <Header as="h4">Name</Header>
-          </Grid.Column>
+    <Grid celled="internally">
+      <Grid.Row>
+        <Grid.Column width={2}>
+          <Header as="h4">Name</Header>
+        </Grid.Column>
+        <Grid.Column width={1}>
+          <Header as="h4">User id</Header>
+        </Grid.Column>
+        <Grid.Column width={3}>
+          <Header as="h4">Email</Header>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <Header as="h4">Access</Header>
+        </Grid.Column>
+        <Grid.Column width={1}>
+          <Header as="h4">Admin</Header>
+        </Grid.Column>
+        <Grid.Column width={1}>
+          <Header as="h4">Hide</Header>
+        </Grid.Column>
+        {isSuperAdmin(user.uid) && (
           <Grid.Column width={1}>
-            <Header as="h4">User id</Header>
+            <Header as="h4">Hijack</Header>
           </Grid.Column>
-          <Grid.Column width={3}>
-            <Header as="h4">Email</Header>
-          </Grid.Column>
-          <Grid.Column width={4}>
-            <Header as="h4">Access</Header>
-          </Grid.Column>
-          <Grid.Column width={1}>
-            <Header as="h4">Admin</Header>
-          </Grid.Column>
-          <Grid.Column width={1}>
-            <Header as="h4">Hide</Header>
-          </Grid.Column>
-          {isSuperAdmin(user.uid) && (
-            <Grid.Column width={1}>
-              <Header as="h4">Hijack</Header>
-            </Grid.Column>
-          )}
+        )}
 
-          <Grid.Column width={2} />
-        </Grid.Row>
-        {users.map((u) => (
-          <User user={u} key={u.id} />
-        ))}
-      </Grid>
-    </Segment>
+        <Grid.Column width={2} />
+      </Grid.Row>
+      {users.map((u) => (
+        <User user={u} key={u.id} />
+      ))}
+    </Grid>
   )
 }

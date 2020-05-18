@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import UserTable from 'Components/UsersPage/UserTable'
 import OwnerLinks from './OwnerLinks'
+import { Tab } from 'semantic-ui-react'
+import FacultyLinks from './FacultyLinks'
+import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -21,13 +24,36 @@ export default () => {
   }, [languageCode])
 
   useEffect(() => {
+    dispatch(getAllTokens())
     dispatch(getAllUsersAction())
   }, [])
 
-  return (
-    <>
-      <OwnerLinks />
-      <UserTable />
-    </>
-  )
+  const panes = [
+    {
+      menuItem: 'Users',
+      render: () => (
+        <Tab.Pane>
+          <UserTable />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: 'Links for owners',
+      render: () => (
+        <Tab.Pane>
+          <OwnerLinks />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: 'Faculty wide links',
+      render: () => (
+        <Tab.Pane>
+          <FacultyLinks />
+        </Tab.Pane>
+      ),
+    },
+  ]
+
+  return <Tab style={{ width: '90%' }} panes={panes} />
 }
