@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { basePath } from '../../../config/common'
+import { Message } from 'semantic-ui-react'
 
 export default function FacultyLinks() {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
@@ -20,26 +21,35 @@ export default function FacultyLinks() {
   })
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Faculty</th>
-          <th>Share-URL</th>
-        </tr>
-      </thead>
-      <tbody>
-        {temp.map((t) => {
-          const { code, facultyName, shareUrl } = t
-          return (
-            <tr key={facultyName}>
-              <td>{code}</td>
-              <td>{facultyName}</td>
-              <td>{shareUrl}</td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    <>
+      <Message
+        color="blue"
+        icon="exclamation"
+        content={
+          'The links listed here give READ-permissions to all studyprogrammes under each faculty.'
+        }
+      />
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Faculty</th>
+            <th>Share-URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {temp.map((t) => {
+            const { code, facultyName, shareUrl } = t
+            return (
+              <tr key={facultyName}>
+                <td>{code}</td>
+                <td>{facultyName}</td>
+                <td>{shareUrl}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </>
   )
 }
