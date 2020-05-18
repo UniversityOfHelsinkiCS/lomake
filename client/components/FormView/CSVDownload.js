@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 const translations = {
   downloadText: {
     fi: 'Lataa vastaukset CSV tiedostona',
-    en: 'Download answers as CSV file',
-    se: '',
+    en: 'Download answers as a CSV file',
+    se: 'Ladda ner svaren i en csv-fil',
   },
 }
 

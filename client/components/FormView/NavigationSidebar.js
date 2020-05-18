@@ -10,17 +10,17 @@ const translations = {
   OK: {
     fi: 'Vastattu',
     en: 'Answer given',
-    se: '',
+    se: 'Svaret lämnat',
   },
   EMPTY: {
     fi: 'Ei vastausta',
     en: "There's no answer",
-    se: '',
+    se: 'Inget svar',
   },
   mandatory_field: {
     fi: 'pakollinen kenttä',
     en: 'required field',
-    se: '',
+    se: 'obligatoriskt fält',
   },
 }
 

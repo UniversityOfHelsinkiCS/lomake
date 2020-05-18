@@ -6,17 +6,17 @@ const translations = {
   downloadText: {
     fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
     en: 'Print / Download answers as PDF file',
-    se: '',
+    se: 'Skriv ut / Ladda ner svaren i en pdf-fil',
   },
   setViewOnlyTrueText: {
     fi: 'Tulostus/PDF -näkymä',
     en: 'Print/Download as PDF view',
-    se: '',
+    se: 'Utskriftsläge/Pdf-vy',
   },
   setViewOnlyFalseText: {
     fi: 'Palaa täyttämään lomaketta',
     en: 'Back to edit view',
-    se: '',
+    se: 'Återgå till redigeringsläge',
   },
 }
 

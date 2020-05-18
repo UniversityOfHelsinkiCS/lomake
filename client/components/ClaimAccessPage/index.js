@@ -7,7 +7,7 @@ const translations = {
   prompt: {
     fi: 'Olet vastaanottamassa oikeuksia',
     en: 'You are claiming permissions',
-    se: '',
+    se: 'Du håller på att ta emot åtkomst',
   },
   promptFaculty: {
     fi: 'Olet vastaanottamassa lukuoikeudet seuraaviin koulutusohjelmiin: ',
@@ -17,28 +17,28 @@ const translations = {
   buttonText: {
     fi: 'Vastaanota',
     en: 'Claim',
-    se: '',
+    se: 'Ta emot',
   },
   confirmPrompt: {
     fi: 'Ole hyvä ja kirjoita ohjelman nimi yllä olevaan laatikkoon varmistusta varten',
     en: "Please write the programme's name to the input above to confirm",
-    se: '',
+    se: 'Vänligen skriv programmets namn i fältet ovan för verifiering.',
   },
   rights: {
     ADMIN: {
       fi: 'Ylläpitäjän oikeudet',
       en: 'Admin access',
-      se: '',
+      se: 'Administrativ åtkomst',
     },
     WRITE: {
       fi: 'Vastausoikeudet',
       en: 'Edit access',
-      se: '',
+      se: 'Redigeringsåtkomst',
     },
     READ: {
       fi: 'Lukuoikeudet',
       en: 'Read access',
-      se: '',
+      se: 'Skrivskyddad åtkomst',
     },
   },
   invalidToken: {
@@ -46,7 +46,7 @@ const translations = {
       'Virhe: Käyttämäsi linkki ei ole enää voimassa. Ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
     en:
       'Error: The url you tried to access in no longer valid. Please contact your study programme leader for a new one.',
-    se: '',
+    se: 'Fel: Länken du använde gäller inte längre. Vänligen kontakta ledaren för ditt utbildningsprogram för att få en ny länk.',
   },
   claimPermissions: {
     en: 'Form - Claim permissions',

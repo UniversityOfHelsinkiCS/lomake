@@ -15,17 +15,17 @@ const translations = {
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
-    se: '',
+    se: 'Administrera',
   },
   closeManageText: {
     fi: 'Piilota',
     en: 'Hide',
-    se: '',
+    se: 'Dölj',
   },
   noResultsText: {
     fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
     en: 'No matching programmes were found. Please try a different filter.',
-    se: '',
+    se: 'Inga program hittades. Prova att söka med andra kriterier.',
   },
   programmeClaimed: {
     fi: 'Tämä ohjelma on vastaanotettu',
