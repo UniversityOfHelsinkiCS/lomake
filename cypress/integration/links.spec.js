@@ -20,7 +20,7 @@ describe('Link tests', function () {
     cy.get('[data-cy=smileytable-link-to-TOSKA101]')
   })
 
-  it.only('Can claim admin (owner) access after typing confirmation, and claimed status is updated', function () {
+  it('Can claim admin (owner) access after typing confirmation, and claimed status is updated', function () {
     cy.visit('/access/adminTest')
     cy.get('[data-cy=claim-button]').should('be.disabled')
     cy.get('[data-cy=claimAccessPage-confirmation-input]').type('TOSKA-en')
