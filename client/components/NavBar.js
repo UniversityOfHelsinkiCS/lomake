@@ -65,7 +65,7 @@ export default () => {
         // active={activeItem === 'adminControls'}
         onClick={handleItemClick}
       >
-        Go to admin page
+        Admin page
       </Menu.Item>
     )
   }
@@ -76,6 +76,7 @@ export default () => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
+      {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:grp-toska@helsinki.fi">
           <Icon name="mail outline" />
@@ -110,7 +111,6 @@ export default () => {
         </Dropdown>
       </Menu.Menu>
       <Menu.Menu position="right">
-        {user.admin ? <GoToAdminPageButton /> : null}
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${translations['logOut'][languageCode]} (${user.uid})`}
