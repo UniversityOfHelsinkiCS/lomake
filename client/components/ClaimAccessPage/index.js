@@ -114,7 +114,11 @@ export default ({ url }) => {
   }
 
   if (!token.data && token.error)
-    return <span style={{ color: 'red' }}>{translations.invalidToken[languageCode]}</span>
+    return (
+      <span data-cy="invalidTokenError" style={{ color: 'red' }}>
+        {translations.invalidToken[languageCode]}
+      </span>
+    )
 
   if (!token.data || !faculties) return <Loader active inline />
 
@@ -142,6 +146,7 @@ export default ({ url }) => {
         {token.data.type === 'ADMIN' && (
           <div style={{ margin: '1.2em 0' }}>
             <Input
+              data-cy="claimAccessPage-confirmation-input"
               style={{ width: '700px' }}
               size="large"
               placeholder={localizedProgramname}
@@ -155,7 +160,11 @@ export default ({ url }) => {
             </div>
           </div>
         )}
-        <Button disabled={buttonIsDisabled()} onClick={() => handleClaim(token.data)}>
+        <Button
+          data-cy="claim-button"
+          disabled={buttonIsDisabled()}
+          onClick={() => handleClaim(token.data)}
+        >
           {translations.buttonText[languageCode]}
         </Button>{' '}
       </div>
@@ -189,7 +198,11 @@ export default ({ url }) => {
           </div>
         </div>
       )}
-      <Button disabled={buttonIsDisabled()} onClick={() => handleClaim(token.data)}>
+      <Button
+        data-cy="claim-button"
+        disabled={buttonIsDisabled()}
+        onClick={() => handleClaim(token.data)}
+      >
         {translations.buttonText[languageCode]}
       </Button>{' '}
     </div>

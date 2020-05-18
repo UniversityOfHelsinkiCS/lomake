@@ -19,6 +19,7 @@ const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadli
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 const { fixProgrammeKeys } = require('@root/server/scripts/fixProgrammeKeys')
 const { initFaculties } = require('@root/server/scripts/initFaculties')
+const { createTestProgramme } = require('@root/server/scripts/createTestProgramme')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -37,6 +38,9 @@ initializeDatabaseConnection()
         case 'create_faculties':
           initFaculties().then(() => logger.info('Faculties created.'))
           return
+        case 'create_testprogramme':
+          createTestProgramme().then(() => logger.info('Testprogramme created'))
+          return
         default:
           return
       }
@@ -44,7 +48,7 @@ initializeDatabaseConnection()
 
     // Scripts that will run if env variable TESTING=true (in github actions AND locally when in dev-mode)
     if (process.env.TESTING || process.env.NODE_ENV === 'development') {
-      resetStudyprogrammes()
+      resetStudyprogrammes().then(() => createTestProgramme())
       createCypressUsers()
       createDeadlineIfNoneExist()
       initFaculties()
