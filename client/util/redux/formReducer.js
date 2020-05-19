@@ -33,14 +33,21 @@ export const postFormAction = (message) => {
   return callBuilder(route, prefix, 'post', message)
 }
 
+const initialState = {
+  data: {},
+  viewOnly: false,
+  lastSaveAttempt: new Date(),
+  lastSaveSuccess: new Date(),
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: {}, viewOnly: false, lastSaved: new Date() }, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
       return {
         ...state,
-        lastSaved: new Date(),
+        lastSaveAttempt: new Date(),
         data: {
           ...state.data,
           [action.field]: action.value,
@@ -72,6 +79,12 @@ export default (state = { data: {}, viewOnly: false, lastSaved: new Date() }, ac
         ...state,
         viewOnly: action.value,
       }
+    case 'UPDATE_CURRENT_EDITORS': {
+      return {
+        ...state,
+        lastSaveSuccess: new Date(),
+      }
+    }
     default:
       return state
   }

@@ -18,7 +18,7 @@ const translations = {
 const StatusMessage = () => {
   const languageCode = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
-  const lastSaved = useSelector((state) => state.form.lastSaved)
+  const lastSaved = useSelector((state) => state.form.lastSaveSuccess)
 
   const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
 
