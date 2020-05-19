@@ -3,7 +3,6 @@
 
 describe('Management tests', function () {
   this.beforeEach(function () {
-    cy.request('/api/cypress/resetUsers')
     cy.login('cypressUser')
     cy.visit('/')
     cy.get('[data-cy=KH80_001-manage]').click()

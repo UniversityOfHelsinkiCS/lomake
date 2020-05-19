@@ -4,8 +4,6 @@
 describe('OSPA user tests', function () {
   this.beforeEach(function () {
     cy.login('cypressAdminUser')
-    cy.request('/api/cypress/resetTokens')
-    cy.request('/api/cypress/resetUsers')
     cy.visit('/')
   })
 

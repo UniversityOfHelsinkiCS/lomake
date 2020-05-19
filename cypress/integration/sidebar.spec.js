@@ -3,13 +3,12 @@
 
 import * as _ from 'lodash'
 import { editorTextHelper, getEditorInputLength } from '../support/helpers'
+import { testProgrammeName } from '../../config/common'
 
 describe('Sidebar tests', function () {
   this.beforeEach(function () {
-    cy.request('/api/cypress/resetUsers')
-    cy.request('/api/cypress/resetForm')
     cy.login('cypressUser')
-    cy.visit('/form/TOSKA101')
+    cy.visit(`/form/${testProgrammeName}`)
   })
 
   it('Answer length of 1 is OK', function () {

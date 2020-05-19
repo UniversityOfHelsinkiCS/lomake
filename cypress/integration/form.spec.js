@@ -1,21 +1,13 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+import { testProgrammeName } from '../../config/common'
+
 describe('Form tests', function () {
   this.beforeEach(function () {
     cy.login('cypressUser')
-    cy.visit('/form/KH50_005')
+    cy.visit(`/form/${testProgrammeName}`)
   })
-
-  // This function just clears the forms' input fields
-  //   this.beforeAll(function () {
-  //     cy.visit('/form/KH50_005')
-  //     cy.get('[data-cy^=form-section').click({ multiple: true })
-  //     cy.get('.editor-class').each(function (el, index, list) {
-  //       cy.get(el).click()
-  //       cy.focused().clear()
-  //     })
-  //   })
 
   it('Can open a question, click on smiley face, and the result it saved.', () => {
     cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
@@ -24,11 +16,11 @@ describe('Form tests', function () {
     // Check that the changes have been saved:
     cy.visit('/')
 
-    cy.get('[data-cy=KH50_005-review_of_last_years_situation_report]')
+    cy.get(`[data-cy=${testProgrammeName}-review_of_last_years_situation_report]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(255, 255, 177)')
 
-    cy.get('[data-cy=KH50_005-community_wellbeing]')
+    cy.get(`[data-cy=${testProgrammeName}-community_wellbeing]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
   })
@@ -54,4 +46,6 @@ describe('Form tests', function () {
   it('Can see upcoming deadline date', function () {
     cy.get('[data-cy=statusMessage]').contains('Deadline: ')
   })
+
+  it('Measurements are created dynamically', function () {})
 })

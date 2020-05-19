@@ -1,8 +1,6 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { cypressUsers } = require('@util/common')
-
-const testProgramme = 'TOSKA101'
+const { cypressUsers, testProgrammeName } = require('@util/common')
 
 const resetUsers = async (req, res) => {
   try {
@@ -12,10 +10,8 @@ const resetUsers = async (req, res) => {
     }
 
     logger.info('Cypress::resetUsers')
-    return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -23,28 +19,28 @@ const resetTokens = async (req, res) => {
   try {
     await db.token.destroy({
       where: {
-        programme: testProgramme,
+        programme: testProgrammeName,
       },
     })
 
     const tokens = [
       {
         url: 'readTest',
-        programme: testProgramme,
+        programme: testProgrammeName,
         type: 'READ',
         valid: true,
         usageCounter: 0,
       },
       {
         url: 'writeTest',
-        programme: testProgramme,
+        programme: testProgrammeName,
         type: 'WRITE',
         valid: true,
         usageCounter: 0,
       },
       {
         url: 'adminTest',
-        programme: testProgramme,
+        programme: testProgrammeName,
         type: 'ADMIN',
         valid: true,
         usageCounter: 0,
@@ -56,10 +52,8 @@ const resetTokens = async (req, res) => {
     }
 
     logger.info('Cypress::resetTokens')
-    return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -69,9 +63,21 @@ const resetForm = async (req, res) => {
 
     await db.tempAnswer.destroy({
       where: {
-        programme: testProgramme,
+        programme: testProgrammeName,
       },
     })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+  }
+}
+
+const seed = async (req, res) => {
+  try {
+    logger.info('Cypress::seeding database')
+
+    await resetUsers()
+    await resetTokens()
+    await resetForm()
 
     return res.status(200).send('OK')
   } catch (error) {
@@ -81,7 +87,5 @@ const resetForm = async (req, res) => {
 }
 
 module.exports = {
-  resetUsers,
-  resetTokens,
-  resetForm,
+  seed,
 }

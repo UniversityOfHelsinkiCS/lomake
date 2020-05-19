@@ -1,16 +1,15 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
+const { testProgrammeName } = require('@util/common')
 
 const createTestProgramme = async () => {
   try {
     logger.info('Creating testprogramme')
 
-    const testprogrammeKey = 'TOSKA101'
-
-    await db.studyprogramme.destroy({ where: { key: testprogrammeKey } })
+    await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
 
     await db.studyprogramme.create({
-      key: testprogrammeKey,
+      key: testProgrammeName,
       name: {
         en: 'TOSKA-en',
         fi: 'TOSKA-fi',

@@ -52,8 +52,6 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculties.getAll)
 
-router.get('/cypress/resetUsers', notInProduction, cypress.resetUsers)
-router.get('/cypress/resetTokens', notInProduction, cypress.resetTokens)
-router.get('/cypress/resetForm', notInProduction, cypress.resetForm)
+router.get('/cypress/seed', notInProduction, cypress.seed)
 
 module.exports = router
