@@ -2,6 +2,8 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const { cypressUsers } = require('@util/common')
 
+const testProgramme = 'TOSKA101'
+
 const resetUsers = async (req, res) => {
   try {
     for (const user of cypressUsers) {
@@ -19,8 +21,6 @@ const resetUsers = async (req, res) => {
 
 const resetTokens = async (req, res) => {
   try {
-    const testProgramme = 'TOSKA101'
-
     await db.token.destroy({
       where: {
         programme: testProgramme,
@@ -63,7 +63,25 @@ const resetTokens = async (req, res) => {
   }
 }
 
+const resetForm = async (req, res) => {
+  try {
+    logger.info('Cypress::resetForm')
+
+    await db.tempAnswer.destroy({
+      where: {
+        programme: testProgramme,
+      },
+    })
+
+    return res.status(200).send('OK')
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   resetUsers,
   resetTokens,
+  resetForm,
 }

@@ -54,5 +54,6 @@ router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/resetUsers', notInProduction, cypress.resetUsers)
 router.get('/cypress/resetTokens', notInProduction, cypress.resetTokens)
+router.get('/cypress/resetForm', notInProduction, cypress.resetForm)
 
 module.exports = router

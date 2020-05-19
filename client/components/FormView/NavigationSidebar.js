@@ -106,6 +106,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                           <>
                             {partNumber}.{' '}
                             <Icon
+                              data-cy={`${id}-${status}`}
                               name={iconMap[status]}
                               style={{ color: getColor() }}
                               title={`${translations[status][languageCode]}${

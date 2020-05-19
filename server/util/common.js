@@ -1169,6 +1169,10 @@ const cypressUsers = [
         write: true,
         read: true,
       },
+      TOSKA101: {
+        write: true,
+        read: true,
+      },
     },
     irrelevant: false,
   },

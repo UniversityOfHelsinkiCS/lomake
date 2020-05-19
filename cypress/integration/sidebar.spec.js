@@ -1,0 +1,53 @@
+/* eslint-disable no-undef */
+/// <reference types="cypress" />
+
+import * as _ from 'lodash'
+import { editorTextHelper, getEditorInputLength } from '../support/helpers'
+
+describe('Sidebar tests', function () {
+  this.beforeEach(function () {
+    cy.request('/api/cypress/resetUsers')
+    cy.request('/api/cypress/resetForm')
+    cy.login('cypressUser')
+    cy.visit('/form/TOSKA101')
+  })
+
+  it('Answer length of 1 is OK', function () {
+    cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
+    cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
+    editorTextHelper('[data-cy=textarea-review_of_last_years_situation_report]', _.repeat('A', 1))
+    cy.get('[data-cy=review_of_last_years_situation_report-OK]')
+  })
+
+  it('Answer length 1000 of is OK', function () {
+    cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
+    cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
+    editorTextHelper(
+      '[data-cy=textarea-review_of_last_years_situation_report]',
+      _.repeat('A', 1000)
+    )
+    cy.get('[data-cy=review_of_last_years_situation_report-OK]')
+  })
+
+  it('Answer length 1100 is also ok, but answer cant be longer than that.', function () {
+    cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
+    cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
+
+    editorTextHelper(
+      '[data-cy=textarea-review_of_last_years_situation_report]',
+      _.repeat('A', 1500)
+    )
+
+    getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then((res) =>
+      expect(res).to.be.eq(1100)
+    )
+
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: red;"]').then(
+      (el) => {
+        expect(el.text()).to.be.eq('1100/1000')
+      }
+    )
+
+    cy.get('[data-cy=review_of_last_years_situation_report-OK]')
+  })
+})
