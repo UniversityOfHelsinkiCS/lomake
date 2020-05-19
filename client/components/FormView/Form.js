@@ -26,8 +26,22 @@ const Form = ({ questions, programmeKey }) => {
   let number = -1
 
   const partMap = (part) => {
+    const summary =
+      part.id.includes('meta')
+      || part.id.includes('information_needed')
+      || part.id.includes('information_used')
+
+    const divStyle = summary
+      ? {
+          paddingLeft: '1.5em',
+          borderLeft: '5px solid',
+          borderColor: '#1B1C1D',
+          marginBottom: '0',
+        }
+      : {}
+
     if (part.type === 'TITLE') {
-      return <h2 key={part.id}>{part.label[languageCode]}</h2>
+      return <h2 key={part.id} style={divStyle}>{part.label[languageCode]}</h2>
     }
 
     if (!partComponentMap.hasOwnProperty(part.type)) {
@@ -39,17 +53,6 @@ const Form = ({ questions, programmeKey }) => {
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[languageCode] : undefined
-    const isSummaryQuestion =
-      part.id.includes('information_needed') || part.id.includes('information_used')
-
-    const divStyle = isSummaryQuestion
-      ? {
-          paddingLeft: '1.5em',
-          borderLeft: '5px solid',
-          borderColor: '#1B1C1D',
-        }
-      : {}
-
     return (
       <div key={part.id} style={divStyle}>
         <Component
