@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import OspaModule from './OspaModule'
 import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
+import StatsContent from './StatsContent'
 
 export default () => {
   const [filter, setFilter] = useState('')
@@ -13,6 +14,7 @@ export default () => {
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  const [statsToShow, setStatsToShow] = useState(null)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -47,6 +49,11 @@ export default () => {
     overviewPage: {
       en: 'Form - Overview',
       fi: 'Lomake - Yleisnäkymä ',
+      se: '',
+    },
+    accessControl: {
+      en: 'Access Control',
+      fi: 'Käytönhallinta',
       se: '',
     },
   }
@@ -91,13 +98,23 @@ export default () => {
       {programControlsToShow && (
         <CustomModal
           title={
-            programControlsToShow.name[languageCode]
+            `${translations.accessControl[languageCode]} - ${programControlsToShow.name[languageCode]
               ? programControlsToShow.name[languageCode]
-              : programControlsToShow.name['en']
+              : programControlsToShow.name['en']}`
           }
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />
+        </CustomModal>
+      )}
+
+      {statsToShow && (
+        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+          <StatsContent
+            stats={statsToShow.stats}
+            answers={statsToShow.answers}
+            questionId={statsToShow.questionId}
+          />
         </CustomModal>
       )}
 
@@ -158,6 +175,8 @@ export default () => {
               setModalData={setModalData}
               year={year}
               setProgramControlsToShow={setProgramControlsToShow}
+              setStatsToShow={setStatsToShow}
+              isBeingFiltered={filter !== ''}
             />
           </div>
         </>

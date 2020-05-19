@@ -3,7 +3,7 @@
 
 ## Short tutorial
 
-The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts. 
+The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts.
 
 ### ApiConnection
 
@@ -47,9 +47,9 @@ The current questions of the form can be found in [questions.json](https://githu
 | Property    | Type      | Required | Description                                                               |
 | ----------- | --------- | -------- | ------------------------------------------------------------------------- |
 | id          | string    | Yes      |
-| type        | enum      | Yes      | TEXTAREA, ENTITY or MEASURES                                              |
+| type        | enum      | Yes      | TEXTAREA, ENTITY, MEASURES or TITLE                                       |
 | label       | Localized | Yes      | Label of the form field                                                   |
-| required    | boolean   | Yes      | Is the form field required to be filled to submit the form                |
+| required    | boolean   | No       | Is the form field required to be filled to submit the form                |
 | description | Localized | No       | (ENTITY only) More detailed explanation                                   |
 | no_light    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a light (emoji) form field |
 
@@ -71,4 +71,3 @@ _Example of the ENTITY type containing title, description, text area and light f
 - npm run dev
 - localhost:8000
 - use setHeaders() to select user for development purposes
-

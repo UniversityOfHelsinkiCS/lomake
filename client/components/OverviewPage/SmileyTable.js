@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header, Icon, Loader, Button } from 'semantic-ui-react'
-import { colors } from 'Utilities/common'
+import { Button, Header, Icon, Loader } from 'semantic-ui-react'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import OwnerAccordionContent from './ProgramControlsContent'
-import SmileyTableCell from './SmileyTableCell'
 import './SmileyTable.scss'
+import SmileyTableCell from './SmileyTableCell'
+import { PieChart } from 'react-minimal-pie-chart'
 
 const translations = {
   openManageText: {
@@ -44,7 +43,14 @@ const replaceTitle = {
   review_of_last_years_situation_report: 'review_of_last_year',
 }
 
-const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControlsToShow }) => {
+const SmileyTable = ({
+  setModalData,
+  filteredProgrammes,
+  year,
+  setProgramControlsToShow,
+  setStatsToShow,
+  isBeingFiltered,
+}) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -58,15 +64,19 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
     if (currentUser.admin) dispatch(getProgrammeOwners())
   }, [])
 
-  const transformIdToTitle = (id) => {
+  const transformIdToTitle = (id, vertical = true) => {
     const idToUse = replaceTitle[id] || id
     const formatted = idToUse.replace(/_/g, ' ')
 
     return (
       <span
-        style={{
-          writingMode: 'vertical-lr',
-        }}
+        style={
+          vertical
+            ? {
+                writingMode: 'vertical-lr',
+              }
+            : {}
+        }
       >
         {formatted.charAt(0).toUpperCase() + formatted.slice(1)}
       </span>
@@ -87,6 +97,29 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
         {translations.noResultsText[languageCode]}
       </Header>
     )
+
+  let renderStatsRow = false
+  const stats = isBeingFiltered
+    ? {}
+    : filteredProgrammes.reduce((statObject, { key }) => {
+        const programme = selectedAnswers.find((a) => a.programme === key)
+        const answers = programme && programme.data ? programme.data : {}
+
+        Object.keys(answers).forEach((answerKey) => {
+          if (answerKey.includes('_light')) {
+            const light = answers[answerKey] // "red", "yellow", "green" or ""
+            const baseKey = answerKey.replace('_light', '')
+            if (!statObject[baseKey]) statObject[baseKey] = {}
+            if (statObject[baseKey][light] === 4 && light !== '') {
+              renderStatsRow = true
+            }
+            statObject[baseKey][light] = statObject[baseKey][light]
+              ? statObject[baseKey][light] + 1
+              : 1
+          }
+        })
+        return statObject
+      }, {})
 
   const hasManagementAccess = (program) => {
     if (currentUser.admin) return true
@@ -173,6 +206,58 @@ const SmileyTable = ({ setModalData, filteredProgrammes, year, setProgramControl
       ))}
       <div className="sticky-header" />
       <div className="sticky-header" />
+      {renderStatsRow && (
+        <>
+          <div className="sticky-header" />
+          {tableIds.map((idObject) =>
+            stats.hasOwnProperty(idObject.id) ? (
+              <div
+                key={idObject.id}
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  setStatsToShow({
+                    stats: stats[idObject.id],
+                    title: transformIdToTitle(idObject.id, false),
+                    answers: selectedAnswers,
+                    questionId: idObject.id,
+                  })
+                }
+              >
+                <PieChart
+                  animationDuration={500}
+                  animationEasing="ease-out"
+                  center={[50, 50]}
+                  data={[
+                    {
+                      color: '#9dff9d',
+                      value: stats[idObject.id].green || 0,
+                    },
+                    {
+                      color: '#ffffb1',
+                      value: stats[idObject.id].yellow || 0,
+                    },
+                    {
+                      color: '#ff7f7f',
+                      value: stats[idObject.id].red || 0,
+                    },
+                  ]}
+                  labelPosition={50}
+                  lengthAngle={360}
+                  lineWidth={100}
+                  paddingAngle={0}
+                  radius={50}
+                  startAngle={0}
+                  viewBoxSize={[100, 100]}
+                />
+              </div>
+            ) : (
+              <div key={idObject.id} />
+            )
+          )}
+          <div className="sticky-header" />
+          <div className="sticky-header" />
+        </>
+      )}
       {filteredProgrammes.map((p) => {
         const programme = selectedAnswers.find((a) => a.programme === p.key)
         const targetURL = `/form/${p.key}`

@@ -1,5 +1,6 @@
 node_modules
 dist
 stats.json
+mock.json
 .DS_Store
 cypress/screenshots/

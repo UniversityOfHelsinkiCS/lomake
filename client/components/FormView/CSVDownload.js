@@ -19,6 +19,7 @@ const CSVDownload = ({ questions }) => {
     (acc, cur) => {
       const newArray = cur.parts.reduce(
         (acc, cur) => {
+          if (cur.type === 'TITLE') return acc
           const questionText = cur.description
             ? cur.description[languageCode]
             : cur.label[languageCode]
