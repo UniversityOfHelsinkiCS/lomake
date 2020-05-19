@@ -5,12 +5,12 @@ const translations = {
   expandText: {
     fi: 'Näytä viime vuoden vastaukset',
     en: 'Show answers from last year',
-    se: ''
+    se: 'Visa fjolårets svar'
   },
   collapseText: {
     fi: 'Piilota viime vuoden vastaukset',
     en: 'Hide answers from last year',
-    se: ''
+    se: 'Dölj fjolårets svar'
   }
 }
 

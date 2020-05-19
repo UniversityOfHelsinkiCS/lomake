@@ -6,12 +6,12 @@ const translations = {
   header: {
     fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
     en: 'Answers are saved automatically. Deadline:',
-    se: '',
+    se: 'Svaren sparas automatiskt.',
   },
   subtitle: {
     fi: 'Viimeksi tallennettu',
     en: 'Last saved',
-    se: '',
+    se: 'Senast sparat',
   },
 }
 

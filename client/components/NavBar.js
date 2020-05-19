@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
 import { images } from 'Utilities/common'
-import {
-  activateAdminModeAction,
-  disableAdminModeAction,
-  logoutAction,
-} from 'Utilities/redux/currentUserReducer'
+import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 
 export default () => {
@@ -41,26 +37,8 @@ export default () => {
   const handleLogout = () => {
     dispatch(logoutAction())
   }
-  const handleAdminModeToggle = () => {
-    user.adminMode ? dispatch(disableAdminModeAction()) : dispatch(activateAdminModeAction())
-  }
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
-
-  const getAdminButton = () => {
-    return user.adminMode ? (
-      <Menu.Item data-cy="adminmode-disable" onClick={handleAdminModeToggle}>
-        AdminMode{' '}
-        <Label color="red" horizontal>
-          Engaged
-        </Label>
-      </Menu.Item>
-    ) : (
-      <Menu.Item data-cy="adminmode-enable" onClick={handleAdminModeToggle}>
-        AdminMode off
-      </Menu.Item>
-    )
-  }
 
   const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
@@ -77,17 +55,17 @@ export default () => {
     )
   }
 
-  const UsersButton = () => {
+  const GoToAdminPageButton = () => {
     return (
       <Menu.Item
-        data-cy="nav-users"
+        data-cy="nav-admin"
         as={Link}
-        to={'/users'}
-        name="editUsers"
-        active={activeItem === 'editUsers'}
+        to={'/admin'}
+        name="adminControls"
+        // active={activeItem === 'adminControls'}
         onClick={handleItemClick}
       >
-        Edit users
+        Admin page
       </Menu.Item>
     )
   }
@@ -98,6 +76,7 @@ export default () => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
+      {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:grp-toska@helsinki.fi">
           <Icon name="mail outline" />
@@ -132,8 +111,6 @@ export default () => {
         </Dropdown>
       </Menu.Menu>
       <Menu.Menu position="right">
-        {user.adminMode && user.admin ? <UsersButton /> : null}
-        {user.admin ? getAdminButton() : null}
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${translations['logOut'][languageCode]} (${user.uid})`}

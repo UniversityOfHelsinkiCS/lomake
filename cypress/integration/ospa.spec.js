@@ -4,6 +4,8 @@
 describe('OSPA user tests', function () {
   this.beforeEach(function () {
     cy.login('cypressAdminUser')
+    cy.request('/api/cypress/resetTokens')
+    cy.request('/api/cypress/resetUsers')
     cy.visit('/')
   })
 
@@ -38,5 +40,30 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=updateDeadline]').click()
     cy.wait('@update').should('have.property', 'status', 200)
     cy.get('[data-cy=nextDeadline]').contains('24.')
+  })
+
+  it('Can give admin permissions', function () {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.get('[data-cy=cypressUser-not-admin]').click()
+    cy.get('[data-cy=grant-admin-confirm]').click()
+    cy.reload()
+    cy.get('[data-cy=cypressAdminUser-is-admin]').should('have.class', 'check')
+  })
+
+  it('Can mark users as irrelevant', function () {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.get('[data-cy=cypressAdminUser-not-irrelevant]').click()
+    cy.get('[data-cy=mark-irrelevant-confirm]').click()
+    cy.reload()
+    cy.get('[data-cy=cypressAdminUser-is-irrelevant]').should('have.class', 'check')
+  })
+
+  it('Can navigate between tabs and the tables render', function () {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Links for owners').click()
+    cy.get('tr').should('have.length.gt', 50)
+
+    cy.contains('Links for faculties').click()
+    cy.get('tr').should('have.length', 13)
   })
 })

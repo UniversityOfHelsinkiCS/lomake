@@ -53,5 +53,6 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/resetUsers', notInProduction, cypress.resetUsers)
+router.get('/cypress/resetTokens', notInProduction, cypress.resetTokens)
 
 module.exports = router

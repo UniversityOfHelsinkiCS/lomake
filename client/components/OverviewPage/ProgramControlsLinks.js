@@ -8,22 +8,22 @@ const translations = {
   editPrompt: {
     fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
     en: 'Link grants edit access, share to editors only:',
-    se: '',
+    se: 'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
     fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
     en: 'Link grants read access, share e.g. to student members',
-    se: '',
+    se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
   },
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
     en: 'Reset the current link, and generate a new one',
-    se: '',
+    se: 'Återställ länken och skapa en ny',
   },
   createPrompt: {
     fi: 'Luo linkki',
     en: 'Create link',
-    se: '',
+    se: 'Skapa länk',
   },
 }
 

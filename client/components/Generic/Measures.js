@@ -8,7 +8,7 @@ const translations = {
   measureLabel: {
     fi: 'Lisää 1-5 toimenpidettä',
     en: 'Add 1-5 measures',
-    se: '',
+    se: 'Lägg till 1–5 åtgärder',
   },
   addButtonLabel: {
     fi: 'Lisää toimenpide',

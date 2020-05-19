@@ -7,37 +7,37 @@ const translations = {
   nameHeader: {
     fi: 'Nimi',
     en: 'Name',
-    se: '',
+    se: 'Namn',
   },
   viewHeader: {
     fi: 'Luku',
     en: 'Read',
-    se: '',
+    se: 'Läs',
   },
   editHeader: {
     fi: 'Vastaus',
     en: 'Edit',
-    se: '',
+    se: 'Redigera',
   },
   ownerHeader: {
     fi: 'Omistaja',
     en: 'Owner',
-    se: '',
+    se: 'Ägare',
   },
   grantAccess: {
     fi: 'Anna oikeus',
     en: 'Grant access right',
-    se: '',
+    se: 'Ge åtkomst',
   },
   removeAccess: {
     fi: 'Poista oikeus',
     en: 'Remove access right',
-    se: '',
+    se: 'Ta bort åtkomst',
   },
   noUsers: {
     fi: 'Ei käyttäjiä, käytä ylläolevia linkkejä kutsumiseen',
     en: 'No users, use the links above to invite',
-    se: '',
+    se: 'Inga användare. Använd ovanstående länkar för att bjuda in användare.',
   },
 }
 
