@@ -51,6 +51,11 @@ export default () => {
       fi: 'Lomake - Yleisnäkymä ',
       se: '',
     },
+    accessControl: {
+      en: 'Access Control',
+      fi: 'Käytönhallinta',
+      se: '',
+    },
   }
 
   useEffect(() => {
@@ -93,9 +98,9 @@ export default () => {
       {programControlsToShow && (
         <CustomModal
           title={
-            programControlsToShow.name[languageCode]
+            `${translations.accessControl[languageCode]} - ${programControlsToShow.name[languageCode]
               ? programControlsToShow.name[languageCode]
-              : programControlsToShow.name['en']
+              : programControlsToShow.name['en']}`
           }
           closeModal={() => setProgramControlsToShow(null)}
         >
