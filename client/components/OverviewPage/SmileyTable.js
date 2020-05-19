@@ -49,6 +49,7 @@ const SmileyTable = ({
   year,
   setProgramControlsToShow,
   setStatsToShow,
+  isBeingFiltered,
 }) => {
   const dispatch = useDispatch()
   const answers = useSelector((state) => state.tempAnswers)
@@ -97,33 +98,28 @@ const SmileyTable = ({
       </Header>
     )
 
-  // {learning_outcomes: {green: 1, yellow: 1, red: 1}}
   let renderStatsRow = false
-  const stats = filteredProgrammes.reduce((statObject, { key }) => {
-    const programme = selectedAnswers.find((a) => a.programme === key)
-    const answers = programme && programme.data ? programme.data : {}
+  const stats = isBeingFiltered
+    ? {}
+    : filteredProgrammes.reduce((statObject, { key }) => {
+        const programme = selectedAnswers.find((a) => a.programme === key)
+        const answers = programme && programme.data ? programme.data : {}
 
-    Object.keys(answers).forEach((answerKey) => {
-      const answerText = answers[answerKey]
-      if (answerKey.includes('_light')) {
-        renderStatsRow = true
-        const baseKey = answerKey.replace('_light', '')
-        if (!statObject[baseKey]) statObject[baseKey] = {}
-        statObject[baseKey][answerText] = statObject[baseKey][answerText]
-          ? statObject[baseKey][answerText] + 1
-          : 1
-      }
-
-      /*if (answerKey.includes('_text')) {
-        const baseKey = answerKey.replace('_text', '')
-        if (!statObject[baseKey]) statObject[baseKey] = {}
-        const words = answerText.toLowerCase().split(' ')
-        const existingArray = statObject[baseKey][answerText] ? statObject[baseKey][answerText] : []
-        statObject[baseKey][answerText] = [...existingArray, ...words]
-      }*/
-    })
-    return statObject
-  }, {})
+        Object.keys(answers).forEach((answerKey) => {
+          if (answerKey.includes('_light')) {
+            const light = answers[answerKey] // "red", "yellow", "green" or ""
+            const baseKey = answerKey.replace('_light', '')
+            if (!statObject[baseKey]) statObject[baseKey] = {}
+            if (statObject[baseKey][light] === 4 && light !== '') {
+              renderStatsRow = true
+            }
+            statObject[baseKey][light] = statObject[baseKey][light]
+              ? statObject[baseKey][light] + 1
+              : 1
+          }
+        })
+        return statObject
+      }, {})
 
   const hasManagementAccess = (program) => {
     if (currentUser.admin) return true
@@ -214,11 +210,14 @@ const SmileyTable = ({
           {tableIds.map((idObject) =>
             stats.hasOwnProperty(idObject.id) ? (
               <div
+                key={idObject.id}
                 style={{ cursor: 'pointer' }}
                 onClick={() =>
                   setStatsToShow({
                     stats: stats[idObject.id],
                     title: transformIdToTitle(idObject.id, false),
+                    answers: selectedAnswers,
+                    questionId: idObject.id,
                   })
                 }
               >
@@ -250,7 +249,7 @@ const SmileyTable = ({
                 />
               </div>
             ) : (
-              <div />
+              <div key={idObject.id} />
             )
           )}
           <div className="sticky-header" />

@@ -105,7 +105,11 @@ export default () => {
 
       {statsToShow && (
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
-          <StatsContent stats={statsToShow.stats} />
+          <StatsContent
+            stats={statsToShow.stats}
+            answers={statsToShow.answers}
+            questionId={statsToShow.questionId}
+          />
         </CustomModal>
       )}
 
@@ -167,6 +171,7 @@ export default () => {
               year={year}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
+              isBeingFiltered={filter !== ''}
             />
           </div>
         </>
