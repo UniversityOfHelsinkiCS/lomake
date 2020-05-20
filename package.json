@@ -85,6 +85,7 @@
   "devDependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "cypress": "^4.3.0",
+    "husky": "^4.2.5",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1",
     "webpack-dev-middleware": "^3.7.2",
@@ -105,5 +106,10 @@
     "@middleware": "server/middleware",
     "@models": "server/models",
     "@util": "server/util"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./grep_is.sh"
+    }
   }
 }
