@@ -43,6 +43,13 @@ const resetAllTokens = async () => {
         valid: true,
         usageCounter: 0,
       })
+      await db.token.create({
+        url: uuid(),
+        faculty: faculty.code,
+        type: 'READ_DOCTOR',
+        valid: true,
+        usageCounter: 0,
+      })
     }
   } catch (error) {
     logger.error(`Database error: ${error}`)

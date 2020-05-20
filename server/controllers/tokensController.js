@@ -167,7 +167,13 @@ const claimFacultyToken = async (req, res) => {
       },
     })
 
+    // Special type of token, where read permissions are given only for doctor-programmes:
+    const doctorOnly = token.type === 'READ_DOCTOR'
     for (const programCode of faculty.programmes) {
+      if (doctorOnly) {
+        if (programCode[0] !== 'T') continue
+      }
+
       req.user.access = {
         ...req.user.access,
         [programCode]: { ...req.user.access[programCode], read: true },

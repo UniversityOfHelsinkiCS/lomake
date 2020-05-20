@@ -39,6 +39,7 @@ const initFaculties = async () => {
     // Then create keys for faculty wide links:
     const data = await db.faculty.findAll()
 
+    // Remove existing faculty wide tokens:
     await db.token.destroy({
       where: {
         faculty: {
@@ -47,6 +48,7 @@ const initFaculties = async () => {
       },
     })
 
+    // Create special faculty wide read and read-doctor tokens:
     for (const fac of data) {
       await db.token.create({
         url: uuid(),
@@ -54,7 +56,14 @@ const initFaculties = async () => {
         type: 'READ',
         valid: true,
         usageCounter: 0,
-      })
+      }),
+        await db.token.create({
+          url: uuid(),
+          faculty: fac.code,
+          type: 'READ_DOCTOR',
+          valid: true,
+          usageCounter: 0,
+        })
     }
   } catch (error) {
     logger.error(`Failed to create faculties: ${error}`)

@@ -122,9 +122,14 @@ export default ({ url }) => {
 
   if (!token.data || !faculties) return <Loader active inline />
 
-  const getProgrammeNames = () => {
-    const programeCodes = faculties.find((f) => f.code === token.data.faculty).programmes
-    const localizedProgrammeCodes = programeCodes.map((pCode) => {
+  const getProgrammeNames = (onlyDoctorProgrammes = false) => {
+    let programmeCodes = faculties.find((f) => f.code === token.data.faculty).programmes
+
+    if (onlyDoctorProgrammes) {
+      programmeCodes = programmeCodes.filter((code) => code[0] === 'T')
+    }
+
+    const localizedProgrammeCodes = programmeCodes.map((pCode) => {
       const prog = studyProgrammes.find((p) => p.key === pCode)
       return prog.name[languageCode]
     })
@@ -171,13 +176,40 @@ export default ({ url }) => {
     )
   }
 
+  if (token.data.type === 'READ_DOCTOR') {
+    return (
+      <div style={{ width: '50em', margin: '1em auto' }}>
+        <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
+        <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
+        <List bulleted>
+          {getProgrammeNames(true).map((name) => (
+            <List.Item data-cy="programmeList-item" key={name}>
+              {name}
+            </List.Item>
+          ))}
+        </List>
+        <div
+          style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}
+        >
+          <Icon color="blue" name={labelIcon['READ']} size="small" />{' '}
+          {translations.rights['READ'][languageCode]}
+        </div>
+        <Button data-cy="claim-button" onClick={() => handleClaim(token.data)}>
+          {translations.buttonText[languageCode]}
+        </Button>{' '}
+      </div>
+    )
+  }
+
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
       <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
       <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
       <List bulleted>
         {getProgrammeNames().map((name) => (
-          <List.Item key={name}>{name}</List.Item>
+          <List.Item data-cy="programmeList-item" key={name}>
+            {name}
+          </List.Item>
         ))}
       </List>
       <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>

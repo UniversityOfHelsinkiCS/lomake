@@ -5,6 +5,7 @@ import UserTable from 'Components/UsersPage/UserTable'
 import OwnerLinks from './OwnerLinks'
 import { Tab } from 'semantic-ui-react'
 import FacultyLinks from './FacultyLinks'
+import DoctorLinks from './DoctorLinks'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 
 export default () => {
@@ -50,6 +51,14 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <FacultyLinks />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: 'Links for doctoral programmes',
+      render: () => (
+        <Tab.Pane>
+          <DoctorLinks />
         </Tab.Pane>
       ),
     },
