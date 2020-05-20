@@ -1,14 +1,18 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+import { testProgrammeName } from '../../config/common'
+
 describe('Misc tests', function () {
   this.beforeEach(function () {
-    cy.login('cypressUser')
+    const user = 'cypressUser'
+    cy.givePermissions(user, testProgrammeName, 'admin')
+    cy.login(user)
     cy.visit('/')
   })
 
   it('Locale can be changed and translations work', function () {
-    cy.visit('/form/KH50_005')
+    cy.visit(`/form/${testProgrammeName}`)
     cy.contains('Answers are saved automatically. ')
     cy.get('[data-cy=navBar-localeDropdown]').click()
     cy.get('[data-cy=navBar-localeOption-fi]').click()
@@ -16,24 +20,28 @@ describe('Misc tests', function () {
   })
 
   it('Access keys are pre-generated', function () {
-    cy.get('[data-cy=KH80_001-manage]').click()
-    cy.get('[data-cy=KH80_001-viewlink] > input').invoke('val').should('contain', '/access/')
-    cy.get('[data-cy=KH80_001-editlink] > input').invoke('val').should('contain', '/access/')
+    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
+    cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
+      .invoke('val')
+      .should('contain', '/access/')
+    cy.get(`[data-cy=${testProgrammeName}-editlink] > input`)
+      .invoke('val')
+      .should('contain', '/access/')
   })
 
   it('Access link can be reset/updated', function () {
-    cy.get('[data-cy=KH80_001-manage]').click()
+    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
     cy.server()
 
-    cy.get('[data-cy=KH80_001-viewlink] > input')
+    cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
       .invoke('val')
       .then((text) => {
         const initialLink = text
-        cy.route('POST', '/api/programmes/KH80_001/tokens/*').as('reset')
-        cy.get('[data-cy=KH80_001-viewlink-reset]').click()
+        cy.route('POST', `/api/programmes/${testProgrammeName}/tokens/*`).as('reset')
+        cy.get(`[data-cy=${testProgrammeName}-viewlink-reset]`).click()
         cy.wait('@reset')
 
-        cy.get('[data-cy=KH80_001-viewlink] > input')
+        cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
           .invoke('val')
           .then((text) => {
             const newLink = text

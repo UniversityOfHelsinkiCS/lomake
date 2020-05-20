@@ -32,3 +32,14 @@ Cypress.Commands.add('login', (uid) => {
   window.localStorage.setItem('fakeUser', JSON.stringify({ uid }))
   cy.log('Logged in as', uid)
 })
+
+/**
+ * Gives permissions to user.
+ * @param {string} uid Uid of user to grant permissions
+ * @param {string} programme Name of programme to give rights for
+ * @param {string} level Level of permissions to give (read,write,admin)
+ */
+Cypress.Commands.add('givePermissions', (uid, programme, level) => {
+  cy.request(`/api/cypress/givePermissions/${uid}/${programme}/${level}`)
+  cy.log(`Gave ${level}-permissions for ${programme} to ${uid}`)
+})

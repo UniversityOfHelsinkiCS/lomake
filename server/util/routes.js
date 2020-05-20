@@ -53,5 +53,10 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
+router.get(
+  '/cypress/givePermissions/:uid/:programme/:level',
+  notInProduction,
+  cypress.givePermissions
+)
 
 module.exports = router

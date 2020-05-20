@@ -97,11 +97,11 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={
-            `${translations.accessControl[languageCode]} - ${programControlsToShow.name[languageCode]
+          title={`${translations.accessControl[languageCode]} - ${
+            programControlsToShow.name[languageCode]
               ? programControlsToShow.name[languageCode]
-              : programControlsToShow.name['en']}`
-          }
+              : programControlsToShow.name['en']
+          }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} />
@@ -181,7 +181,12 @@ export default () => {
           </div>
         </>
       ) : (
-        <Header style={{ textAlign: 'center', paddingTop: '5em' }} as="h2" disabled>
+        <Header
+          data-cy="noPermissions-message"
+          style={{ textAlign: 'center', paddingTop: '5em' }}
+          as="h2"
+          disabled
+        >
           {translations.noPermissions[languageCode]}
         </Header>
       )}

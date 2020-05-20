@@ -4,10 +4,12 @@
 import * as _ from 'lodash'
 import { editorTextHelper, getEditorInputLength } from '../support/helpers'
 import { testProgrammeName } from '../../config/common'
+const user = 'cypressUser'
 
 describe('Sidebar tests', function () {
   this.beforeEach(function () {
-    cy.login('cypressUser')
+    cy.givePermissions(user, testProgrammeName, 'write')
+    cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
   })
 

@@ -77,24 +77,7 @@ const cypressUsers = [
     lastname: 'res',
     email: 'cypressUser',
     admin: false,
-    access: {
-      KH80_001: {
-        read: true,
-        admin: true,
-        write: true,
-      },
-      KH50_004: {
-        read: true,
-      },
-      KH50_005: {
-        write: true,
-        read: true,
-      },
-      TOSKA101: {
-        write: true,
-        read: true,
-      },
-    },
+    access: {},
     irrelevant: false,
   },
   {
@@ -103,11 +86,7 @@ const cypressUsers = [
     lastname: 'res2',
     email: 'cypressUser2',
     admin: false,
-    access: {
-      KH80_001: {
-        read: true,
-      },
-    },
+    access: {},
     irrelevant: false,
   },
   {

@@ -5,7 +5,9 @@ import { testProgrammeName } from '../../config/common'
 
 describe('Form tests', function () {
   this.beforeEach(function () {
-    cy.login('cypressUser')
+    const user = 'cypressUser'
+    cy.givePermissions(user, testProgrammeName, 'write')
+    cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
   })
 

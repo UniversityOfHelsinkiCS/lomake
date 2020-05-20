@@ -1,11 +1,16 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+import { testProgrammeName } from '../../config/common'
+
 describe('Management tests', function () {
   this.beforeEach(function () {
-    cy.login('cypressUser')
+    const user = 'cypressUser'
+    cy.login(user)
+    cy.givePermissions(user, testProgrammeName, 'admin')
+    cy.givePermissions('cypressUser2', testProgrammeName, 'read')
     cy.visit('/')
-    cy.get('[data-cy=KH80_001-manage]').click()
+    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
   })
 
   it('Giving admin permissions enables all permissions', function () {
