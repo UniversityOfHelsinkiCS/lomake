@@ -47,7 +47,7 @@ describe('Form tests', function () {
     cy.get('[data-cy=statusMessage]').contains('Deadline: ')
   })
 
-  it.only('Measurements are created dynamically and saved correctly', function () {
+  it('Measurements are created dynamically and saved correctly', function () {
     cy.server()
     cy.route('POST', '/socket.io/*').as('update')
     cy.get('#measures_1_text').type('1')
