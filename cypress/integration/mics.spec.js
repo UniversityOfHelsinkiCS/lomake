@@ -39,6 +39,7 @@ describe('Misc tests', function () {
         const initialLink = text
         cy.route('POST', `/api/programmes/${testProgrammeName}/tokens/*`).as('reset')
         cy.get(`[data-cy=${testProgrammeName}-viewlink-reset]`).click()
+        cy.get('[data-cy=confirm-reset]').click()
         cy.wait('@reset')
 
         cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)

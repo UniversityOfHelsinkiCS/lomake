@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Icon, Input } from 'semantic-ui-react'
+import { Icon, Input, Popup, Button, Message } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
 import { basePath } from '../../../config/common'
@@ -8,7 +8,8 @@ const translations = {
   editPrompt: {
     fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
     en: 'Link grants edit access, share to editors only:',
-    se: 'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
+    se:
+      'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
     fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
@@ -24,6 +25,13 @@ const translations = {
     fi: 'Luo linkki',
     en: 'Create link',
     se: 'Skapa länk',
+  },
+  resetWarning: {
+    fi:
+      'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
+    en:
+      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    se: '',
   },
 }
 
@@ -63,6 +71,45 @@ const OwnerAccordionLinks = ({ programme }) => {
 
   const urlPrefix = `${window.location.origin}${basePath}access/`
 
+  const ResetConfirmation = ({ token, type }) => {
+    return (
+      <Popup
+        trigger={
+          <div
+            data-cy={`${programme}-${type === 'READ' ? 'viewlink' : 'editlink'}-reset`}
+            style={{
+              cursor: 'pointer',
+              color: 'red',
+              textDecoration: 'underline',
+              marginLeft: '2em',
+              width: '300px',
+            }}
+          >
+            {token
+              ? translations.resetPrompt[languageCode]
+              : translations.createPrompt[languageCode]}
+          </div>
+        }
+        content={
+          <>
+            <Message negative>
+              <Message.Header> {translations.resetWarning[languageCode]}</Message.Header>
+            </Message>
+            <Button
+              data-cy="confirm-reset"
+              fluid
+              negative
+              content={'OK'}
+              onClick={() => createOrResetToken(token, type)}
+            />
+          </>
+        }
+        on="click"
+        position="top left"
+      />
+    )
+  }
+
   return (
     <div style={{ margin: '2em 0em' }}>
       <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
@@ -85,21 +132,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={viewLinkRef}
         />
-        <div
-          onClick={() => createOrResetToken(viewToken, 'READ')}
-          data-cy={`${programme}-viewlink-reset`}
-          style={{
-            cursor: 'pointer',
-            color: 'red',
-            textDecoration: 'underline',
-            marginLeft: '2em',
-            width: '300px',
-          }}
-        >
-          {viewToken
-            ? translations.resetPrompt[languageCode]
-            : translations.createPrompt[languageCode]}
-        </div>
+        <ResetConfirmation token={viewToken} type="READ" />
       </div>
       <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em' }}>
         {translations.editPrompt[languageCode]}
@@ -121,21 +154,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={editLinkRef}
         />
-        <div
-          data-cy={`${programme}-editlink-reset`}
-          onClick={() => createOrResetToken(editToken, 'WRITE')}
-          style={{
-            cursor: 'pointer',
-            color: 'red',
-            textDecoration: 'underline',
-            marginLeft: '2em',
-            width: '300px',
-          }}
-        >
-          {editToken
-            ? translations.resetPrompt[languageCode]
-            : translations.createPrompt[languageCode]}
-        </div>
+        <ResetConfirmation token={editToken} type="WRITE" />
       </div>
     </div>
   )
