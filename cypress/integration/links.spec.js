@@ -56,7 +56,7 @@ describe('Link tests', function () {
     cy.get('[data-cy^=smileytable-link-to]').should('have.have.length', 30)
   })
 
-  it.only('Claiming read token for facultys doctor programmes gives correct permissions', function () {
+  it('Claiming read token for facultys doctor programmes gives correct permissions', function () {
     cy.visit('/access/facultyReadDoctorTest')
     cy.get('[data-cy=programmeList-item]').should('have.length', 9)
     cy.get('[data-cy=claim-button]').click()
