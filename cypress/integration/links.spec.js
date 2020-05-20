@@ -47,4 +47,20 @@ describe('Link tests', function () {
     cy.visit('/access/kdaskdaskadsk')
     cy.get('[data-cy=invalidTokenError]')
   })
+
+  it('Claiming programme wide read-permissions grants correct permissions', function () {
+    cy.visit('/access/facultyReadTest')
+    cy.get('[data-cy=programmeList-item]').should('have.length', 30)
+    cy.get('[data-cy=claim-button]').click()
+
+    cy.get('[data-cy^=smileytable-link-to]').should('have.have.length', 30)
+  })
+
+  it.only('Claiming read token for facultys doctor programmes gives correct permissions', function () {
+    cy.visit('/access/facultyReadDoctorTest')
+    cy.get('[data-cy=programmeList-item]').should('have.length', 9)
+    cy.get('[data-cy=claim-button]').click()
+
+    cy.get('[data-cy^=smileytable-link-to]').should('have.have.length', 9)
+  })
 })
