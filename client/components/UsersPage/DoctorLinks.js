@@ -10,10 +10,6 @@ export default function DoctorLinks() {
 
   if (!allTokens || !faculties || !language) return null
 
-  const sortedFaculties = faculties.sort((a, b) => a.code.localeCompare(b.code))
-
-  console.log(allTokens)
-
   const temp = faculties.map((faculty) => {
     const token = allTokens.find((t) => t.faculty === faculty.code && t.type === 'READ_DOCTOR')
     const shareUrl = `${window.location.origin}${basePath}access/${token.url}`
