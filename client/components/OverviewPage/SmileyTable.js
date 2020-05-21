@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Loader } from 'semantic-ui-react'
@@ -65,6 +65,36 @@ const SmileyTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
+    let renderStatsRow = false
+    const selectedAnswers =
+      year === new Date().getFullYear()
+        ? answers.data
+        : oldAnswers.data.filter((a) => a.year === year)
+
+    const stats = useMemo(() => {
+      if (!selectedAnswers || isBeingFiltered) return {}
+
+      return filteredProgrammes.reduce((statObject, { key }) => {
+        const programme = selectedAnswers.find((a) => a.programme === key)
+        const answers = programme && programme.data ? programme.data : {}
+
+        Object.keys(answers).forEach((answerKey) => {
+          if (answerKey.includes('_light')) {
+            const light = answers[answerKey] // "red", "yellow", "green" or ""
+            const baseKey = answerKey.replace('_light', '')
+            if (!statObject[baseKey]) statObject[baseKey] = {}
+            if (statObject[baseKey][light] === 4 && light !== '') {
+              renderStatsRow = true
+            }
+            statObject[baseKey][light] = statObject[baseKey][light]
+              ? statObject[baseKey][light] + 1
+              : 1
+          }
+        })
+        return statObject
+      }, {})
+    }, [filteredProgrammes, selectedAnswers, answers, isBeingFiltered])
+
     const transformIdToTitle = (id, vertical = true) => {
       const idToUse = replaceTitle[id] || id
       const formatted = idToUse.replace(/_/g, ' ')
@@ -92,38 +122,12 @@ const SmileyTable = React.memo(
     )
       return <Loader active inline="centered" />
 
-    const selectedAnswers =
-      year === new Date().getFullYear()
-        ? answers.data
-        : oldAnswers.data.filter((a) => a.year === year)
-
     if (filteredProgrammes.length === 0)
       return (
         <Header as="h2" disabled>
           {translations.noResultsText[languageCode]}
         </Header>
       )
-
-    let renderStatsRow = false
-    const stats = filteredProgrammes.reduce((statObject, { key }) => {
-      const programme = selectedAnswers.find((a) => a.programme === key)
-      const answers = programme && programme.data ? programme.data : {}
-
-      Object.keys(answers).forEach((answerKey) => {
-        if (answerKey.includes('_light')) {
-          const light = answers[answerKey] // "red", "yellow", "green" or ""
-          const baseKey = answerKey.replace('_light', '')
-          if (!statObject[baseKey]) statObject[baseKey] = {}
-          if (statObject[baseKey][light] === 4 && light !== '') {
-            renderStatsRow = true
-          }
-          statObject[baseKey][light] = statObject[baseKey][light]
-            ? statObject[baseKey][light] + 1
-            : 1
-        }
-      })
-      return statObject
-    }, {})
 
     const hasManagementAccess = (program) => {
       if (currentUser.admin) return true

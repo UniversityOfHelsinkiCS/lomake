@@ -41,7 +41,7 @@ const translations = {
 
 export default () => {
   const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter, 500)
+  const debouncedFilter = useDebounce(filter, 200)
   const [year, setYear] = useState(2020)
   const [yearOptions, setYearOptions] = useState([])
   const [modalData, setModalData] = useState(null)
@@ -192,6 +192,7 @@ export default () => {
               year={year}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
+              isBeingFiltered={debouncedFilter !== ''}
             />
           </div>
         </>
