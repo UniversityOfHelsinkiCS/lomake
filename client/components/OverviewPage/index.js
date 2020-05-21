@@ -77,10 +77,12 @@ export default () => {
     setYear(value)
   }
 
-  const usersPermissionsKeys = Object.keys(currentUser.data.access)
-  const usersProgrammes = currentUser.data.admin
-    ? programmes
-    : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
+  const usersProgrammes = useMemo(() => {
+    const usersPermissionsKeys = Object.keys(currentUser.data.access)
+    return currentUser.data.admin
+      ? programmes
+      : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
+  }, [currentUser.data])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter((prog) => {
