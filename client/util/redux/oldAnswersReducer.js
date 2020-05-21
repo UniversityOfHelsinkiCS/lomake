@@ -9,9 +9,12 @@ export const getAnswersAction = () => {
   return callBuilder(route, prefix)
 }
 
-// Reducer
-// You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: null }, action) => {
+const initialState = {
+  data: null,
+  years: [],
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'GET_ANSWERS_ATTEMPT':
       return {
@@ -23,6 +26,10 @@ export default (state = { data: null }, action) => {
       return {
         ...state,
         data: action.response,
+        years: action.response.reduce((pre, cur) => {
+          if (!pre.includes(cur.year)) pre.push(cur.year)
+          return pre
+        }, []),
         pending: false,
         error: false,
       }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
@@ -8,16 +8,65 @@ import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
 
+const translations = {
+  noPermissions: {
+    fi:
+      'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
+    en:
+      'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
+    se: '',
+  },
+  filter: {
+    fi: 'Filtteröi',
+    en: 'Filter',
+    se: '',
+  },
+  showUnclaimedOnly: {
+    en: 'Show only unclaimed programmes',
+    fi: 'Näytä vain lunastamattomat koulutusohjelmat',
+    se: '',
+  },
+  overviewPage: {
+    en: 'Form - Overview',
+    fi: 'Lomake - Yleisnäkymä ',
+    se: '',
+  },
+  accessControl: {
+    en: 'Access Control',
+    fi: 'Käytönhallinta',
+    se: '',
+  },
+}
+
 export default () => {
   const [filter, setFilter] = useState('')
   const [year, setYear] = useState(2020)
+  const [yearOptions, setYearOptions] = useState([])
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
+
+  const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+
+  useEffect(() => {
+    let temp = [...previousYearsWithAnswers, new Date().getFullYear()]
+    const options = temp.map((y) => {
+      return {
+        key: y,
+        value: y,
+        text: y,
+      }
+    })
+    setYearOptions(options)
+  }, [previousYearsWithAnswers])
+
+  useEffect(() => {
+    document.title = `${translations['overviewPage'][languageCode]}`
+  }, [languageCode])
 
   const handleChange = ({ target }) => {
     const { value } = target
@@ -28,55 +77,18 @@ export default () => {
     setYear(value)
   }
 
-  const translations = {
-    noPermissions: {
-      fi:
-        'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
-      en:
-        'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
-      se: '',
-    },
-    filter: {
-      fi: 'Filtteröi',
-      en: 'Filter',
-      se: '',
-    },
-    showUnclaimedOnly: {
-      en: 'Show only unclaimed programmes',
-      fi: 'Näytä vain lunastamattomat koulutusohjelmat',
-      se: '',
-    },
-    overviewPage: {
-      en: 'Form - Overview',
-      fi: 'Lomake - Yleisnäkymä ',
-      se: '',
-    },
-    accessControl: {
-      en: 'Access Control',
-      fi: 'Käytönhallinta',
-      se: '',
-    },
-  }
-
-  useEffect(() => {
-    document.title = `${translations['overviewPage'][languageCode]}`
-  }, [languageCode])
-
-  const years = [
-    { key: '2019', value: 2019, text: '2019' },
-    { key: '2020', value: 2020, text: '2020' },
-  ]
-
   const usersPermissionsKeys = Object.keys(currentUser.data.access)
   const usersProgrammes = currentUser.data.admin
     ? programmes
     : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
 
-  const filteredProgrammes = usersProgrammes.filter((prog) => {
-    if (showUnclaimedOnly && prog.claimed) return
-    const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
-    return searchTarget.toLowerCase().includes(filter.toLowerCase())
-  })
+  const filteredProgrammes = useMemo(() => {
+    return usersProgrammes.filter((prog) => {
+      if (showUnclaimedOnly && prog.claimed) return
+      const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
+      return searchTarget.toLowerCase().includes(filter.toLowerCase())
+    })
+  }, [usersProgrammes, showUnclaimedOnly, languageCode, filter])
 
   return (
     <>
@@ -132,7 +144,7 @@ export default () => {
             <Select
               data-cy="overviewpage-year"
               name="year"
-              options={years}
+              options={yearOptions}
               onChange={handleYearChange}
               value={year}
             />
