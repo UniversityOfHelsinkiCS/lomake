@@ -7,6 +7,7 @@ import OspaModule from './OspaModule'
 import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
+import useDebounce from '../../util/useDebounce'
 
 const translations = {
   noPermissions: {
@@ -40,6 +41,7 @@ const translations = {
 
 export default () => {
   const [filter, setFilter] = useState('')
+  const debouncedFilter = useDebounce(filter, 500)
   const [year, setYear] = useState(2020)
   const [yearOptions, setYearOptions] = useState([])
   const [modalData, setModalData] = useState(null)
@@ -88,9 +90,9 @@ export default () => {
     return usersProgrammes.filter((prog) => {
       if (showUnclaimedOnly && prog.claimed) return
       const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
-      return searchTarget.toLowerCase().includes(filter.toLowerCase())
+      return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
-  }, [usersProgrammes, showUnclaimedOnly, languageCode, filter])
+  }, [usersProgrammes, showUnclaimedOnly, languageCode, debouncedFilter])
 
   return (
     <>
@@ -190,7 +192,6 @@ export default () => {
               year={year}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
-              isBeingFiltered={filter !== ''}
             />
           </div>
         </>

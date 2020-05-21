@@ -105,27 +105,25 @@ const SmileyTable = React.memo(
       )
 
     let renderStatsRow = false
-    const stats = isBeingFiltered
-      ? {}
-      : filteredProgrammes.reduce((statObject, { key }) => {
-          const programme = selectedAnswers.find((a) => a.programme === key)
-          const answers = programme && programme.data ? programme.data : {}
+    const stats = filteredProgrammes.reduce((statObject, { key }) => {
+      const programme = selectedAnswers.find((a) => a.programme === key)
+      const answers = programme && programme.data ? programme.data : {}
 
-          Object.keys(answers).forEach((answerKey) => {
-            if (answerKey.includes('_light')) {
-              const light = answers[answerKey] // "red", "yellow", "green" or ""
-              const baseKey = answerKey.replace('_light', '')
-              if (!statObject[baseKey]) statObject[baseKey] = {}
-              if (statObject[baseKey][light] === 4 && light !== '') {
-                renderStatsRow = true
-              }
-              statObject[baseKey][light] = statObject[baseKey][light]
-                ? statObject[baseKey][light] + 1
-                : 1
-            }
-          })
-          return statObject
-        }, {})
+      Object.keys(answers).forEach((answerKey) => {
+        if (answerKey.includes('_light')) {
+          const light = answers[answerKey] // "red", "yellow", "green" or ""
+          const baseKey = answerKey.replace('_light', '')
+          if (!statObject[baseKey]) statObject[baseKey] = {}
+          if (statObject[baseKey][light] === 4 && light !== '') {
+            renderStatsRow = true
+          }
+          statObject[baseKey][light] = statObject[baseKey][light]
+            ? statObject[baseKey][light] + 1
+            : 1
+        }
+      })
+      return statObject
+    }, {})
 
     const hasManagementAccess = (program) => {
       if (currentUser.admin) return true
