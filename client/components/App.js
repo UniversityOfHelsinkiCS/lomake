@@ -8,6 +8,7 @@ import Router from 'Components/Router'
 import { getStudyProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
 import { getFaculties } from 'Utilities/redux/facultyReducer'
+import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ export default () => {
       dispatch(getStudyProgrammes())
       dispatch(getDeadline())
       dispatch(getFaculties())
+      dispatch(getAnswersAction())
     }
   }, [currentUser])
 

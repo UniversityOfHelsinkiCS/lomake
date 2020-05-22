@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Loader } from 'semantic-ui-react'
-import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
@@ -61,7 +60,6 @@ const SmileyTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
-      dispatch(getAnswersAction())
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 

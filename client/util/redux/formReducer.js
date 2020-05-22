@@ -73,6 +73,11 @@ export default (state = initialState, action) => {
         pending: false,
         error: false,
       }
+    case 'SET_OLD_FORM_ANSWERS': // Used when viewing old answers in the Form.
+      return {
+        ...state,
+        data: action.answers,
+      }
     case 'GET_TEMP_ANSWERS_SUCCESS':
       return {
         ...state,

@@ -18,6 +18,7 @@ import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
 import CSVDownload from './CSVDownload'
 import PDFDownload from './PDFDownload'
+import YearSelector from 'Components/OverviewPage/YearSelector'
 
 const translations = {
   title: {
@@ -73,6 +74,8 @@ const FormView = ({ room }) => {
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
+  const selectedYear = useSelector((state) => state.form.selectedYear)
+  const oldAnswers = useSelector((state) => state.oldAnswers.data)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
@@ -122,6 +125,37 @@ const FormView = ({ room }) => {
     return () => dispatch(wsLeaveRoom(room))
   }, [programme])
 
+  useEffect(() => {
+    if (!programme) return
+
+    if (selectedYear !== new Date().getFullYear()) {
+      // Show answers from selectedYear and set the form to viewMode.
+      dispatch({
+        type: 'WS_LEAVE_ROOM',
+        room,
+      })
+      dispatch(setViewOnly(true))
+
+      const answersFromSelectedYear = oldAnswers.find(
+        (answers) => answers.programme === programme.key && answers.year === selectedYear
+      ).data
+
+      dispatch({
+        type: 'SET_OLD_FORM_ANSWERS',
+        answers: answersFromSelectedYear,
+      })
+    } else {
+      // When switching back to current year, join go back to edit mode (If form is open and user has permissions)
+      if (!programme.locked && userHasWriteAccess) {
+        dispatch({
+          type: 'WS_JOIN_ROOM',
+          room,
+        })
+        dispatch(setViewOnly(false))
+      }
+    }
+  }, [selectedYear])
+
   if (!loadObj.loaded) return <Loader active />
 
   if (!room) return <Redirect to="/" />
@@ -152,6 +186,7 @@ const FormView = ({ room }) => {
             <p style={{ color: colors.theme_blue }}>
               <b>{localizedProgramName}</b>
             </p>
+            <YearSelector />
             <StatusMessage />
             <p>{translations.p1[languageCode]}</p>
             <p>{translations.p2[languageCode]}</p>

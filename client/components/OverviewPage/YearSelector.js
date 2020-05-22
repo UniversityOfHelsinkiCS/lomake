@@ -3,9 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedYear } from 'Utilities/redux/formReducer'
 
+const translations = {
+  selectYear: {
+    en: 'Select the year you would like to inspect',
+    fi: 'Valitse vuosi jota haluat tarkastella',
+    se: '',
+  },
+}
+
 export default function YearSelector() {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
   const selectedYear = useSelector((state) => state.form.selectedYear)
+  const languageCode = useSelector((state) => state.language)
   const [yearOptions, setYearOptions] = useState([])
 
   const dispatch = useDispatch()
@@ -30,15 +39,21 @@ export default function YearSelector() {
   if (!previousYearsWithAnswers) return null
 
   return (
-    <>
-      <span>Select year</span>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: 'fit-content',
+      }}
+    >
+      <span>{translations.selectYear[languageCode]}</span>
       <Select
-        data-cy="overviewpage-year"
+        data-cy="yearSelector"
         name="year"
         options={yearOptions}
         onChange={handleYearChange}
         value={selectedYear}
       />
-    </>
+    </div>
   )
 }

@@ -12,22 +12,22 @@ describe("Previous year's answers", function () {
   })
 
   it('If no answers for previousyears, cant change year', function () {
-    cy.get('[data-cy=overviewpage-year]').then((el) => {
+    cy.get('[data-cy=yearSelector]').then((el) => {
       el.click()
       expect(el.find('.item')).to.have.length(1)
     })
   })
 
-  it('If answers for several years exist, can select old one and see old answers', function () {
+  it("Can switch which year's answers to see in OverViewpPage", function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.get('[data-cy=overviewpage-year]').click()
+    cy.get('[data-cy=yearSelector]').click()
 
-    cy.get('[data-cy=overviewpage-year]').then((newEl) => {
+    cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
 
-    cy.get('[data-cy=overviewpage-year]').contains(2019).click()
+    cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]')
       .find('i')
       .should('have.class', 'smile')
@@ -36,10 +36,44 @@ describe("Previous year's answers", function () {
     cy.get('.customModal-content').contains('Hello from 2019')
 
     cy.get('.customModal-content').find('.close').click()
-    cy.get('[data-cy=overviewpage-year]').click()
-    cy.get('[data-cy=overviewpage-year]').contains(2018).click()
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').contains(2018).click()
 
     cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').click()
     cy.get('.customModal-content').contains('Hello from 2018')
+  })
+
+  it('Can view old answers in Form-page and switch back to editMode to continue working.', function () {
+    cy.request('/api/cypress/createAnswers')
+    cy.visit(`/form/${testProgrammeName}`)
+
+    cy.get('[data-cy=yearSelector]').then((newEl) => {
+      expect(newEl.find('.item')).to.have.length(3)
+    })
+
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').contains(2019).click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains('Hello from 2019')
+
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').contains(2018).click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains('Hello from 2018')
+
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').contains(2020).click()
+
+    cy.server()
+    cy.route('POST', '/socket.io/*').as('update')
+
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+    cy.focused().clear().type('koira', { delay: 500 })
+
+    // There should be 5 post requests to socket.io, because koira is a 5 letter word.
+    cy.wait('@update').wait('@update').wait('@update').wait('@update').wait('@update')
+
+    cy.reload()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
+      .find('.editor-class')
+      .should('contain.text', 'koira')
   })
 })
