@@ -43,7 +43,6 @@ const translations = {
 export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const selectedYear = useSelector((state) => state.form.selectedYear)
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
