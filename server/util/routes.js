@@ -58,5 +58,6 @@ router.get(
   notInProduction,
   cypress.givePermissions
 )
+router.get('/cypress/createAnswers', notInProduction, cypress.createAnswers)
 
 module.exports = router
