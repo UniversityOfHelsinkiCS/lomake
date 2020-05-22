@@ -33,9 +33,15 @@ export const postFormAction = (message) => {
   return callBuilder(route, prefix, 'post', message)
 }
 
+export const setSelectedYear = (year) => ({
+  type: 'SET_SELECTED_YEAR',
+  year,
+})
+
 const initialState = {
   data: {},
   viewOnly: false,
+  selectedYear: new Date().getFullYear(),
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
 }
@@ -83,6 +89,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lastSaveSuccess: new Date(),
+      }
+    }
+    case 'SET_SELECTED_YEAR': {
+      return {
+        ...state,
+        selectedYear: action.year,
       }
     }
     default:

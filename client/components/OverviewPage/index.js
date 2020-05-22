@@ -8,6 +8,7 @@ import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
+import YearSelector from './YearSelector'
 
 const translations = {
   noPermissions: {
@@ -42,30 +43,15 @@ const translations = {
 export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const [year, setYear] = useState(2020)
-  const [yearOptions, setYearOptions] = useState([])
+  const selectedYear = useSelector((state) => state.form.selectedYear)
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
 
-  const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-
-  useEffect(() => {
-    if (!previousYearsWithAnswers) return
-    let temp = [...previousYearsWithAnswers, new Date().getFullYear()]
-    const options = temp.map((y) => {
-      return {
-        key: y,
-        value: y,
-        text: y,
-      }
-    })
-    setYearOptions(options)
-  }, [previousYearsWithAnswers])
 
   useEffect(() => {
     document.title = `${translations['overviewPage'][languageCode]}`
@@ -74,10 +60,6 @@ export default () => {
   const handleChange = ({ target }) => {
     const { value } = target
     setFilter(value)
-  }
-
-  const handleYearChange = (e, { value }) => {
-    setYear(value)
   }
 
   const usersProgrammes = useMemo(() => {
@@ -137,25 +119,7 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '1em',
-              flexDirection: 'column',
-            }}
-            className="overviewpage-controls"
-          >
-            {previousYearsWithAnswers && (
-              <Select
-                data-cy="overviewpage-year"
-                name="year"
-                options={yearOptions}
-                onChange={handleYearChange}
-                value={year}
-              />
-            )}
-          </div>
+          <YearSelector />
           <OspaModule />
           <div style={{ marginTop: '2em' }}>
             {usersProgrammes.length > 10 && (
@@ -192,7 +156,6 @@ export default () => {
             <SmileyTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
-              year={year}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
               isBeingFiltered={debouncedFilter !== ''}

@@ -47,7 +47,6 @@ const SmileyTable = React.memo(
   ({
     setModalData,
     filteredProgrammes,
-    year,
     setProgramControlsToShow,
     setStatsToShow,
     isBeingFiltered,
@@ -58,6 +57,7 @@ const SmileyTable = React.memo(
     const languageCode = useSelector((state) => state.language)
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
+    const selectedYear = useSelector((state) => state.form.selectedYear)
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
@@ -67,9 +67,9 @@ const SmileyTable = React.memo(
 
     let renderStatsRow = false
     const selectedAnswers =
-      year === new Date().getFullYear()
+      selectedYear === new Date().getFullYear()
         ? answers.data
-        : oldAnswers.data.filter((a) => a.year === year)
+        : oldAnswers.data.filter((a) => a.year === selectedYear)
 
     const stats = useMemo(() => {
       if (!selectedAnswers || isBeingFiltered) return {}
