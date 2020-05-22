@@ -180,12 +180,10 @@ const FormView = ({ room }) => {
           </div>
           <img className="img-responsive" src={rypsi_image} />
           <div>
-            <h1 data-cy="formview-title">
-              {translations.title[languageCode]} {new Date().getFullYear()}
-            </h1>
-            <p style={{ color: colors.theme_blue }}>
-              <b>{localizedProgramName}</b>
-            </p>
+            <h1 style={{ color: colors.theme_blue }}>{localizedProgramName}</h1>
+            <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+              {translations.title[languageCode]} {selectedYear}
+            </h3>
             <YearSelector />
             <StatusMessage />
             <p>{translations.p1[languageCode]}</p>
