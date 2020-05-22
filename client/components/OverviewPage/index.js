@@ -55,6 +55,7 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
+    if (!previousYearsWithAnswers) return
     let temp = [...previousYearsWithAnswers, new Date().getFullYear()]
     const options = temp.map((y) => {
       return {
@@ -145,13 +146,15 @@ export default () => {
             }}
             className="overviewpage-controls"
           >
-            <Select
-              data-cy="overviewpage-year"
-              name="year"
-              options={yearOptions}
-              onChange={handleYearChange}
-              value={year}
-            />
+            {previousYearsWithAnswers && (
+              <Select
+                data-cy="overviewpage-year"
+                name="year"
+                options={yearOptions}
+                onChange={handleYearChange}
+                value={year}
+              />
+            )}
           </div>
           <OspaModule />
           <div style={{ marginTop: '2em' }}>

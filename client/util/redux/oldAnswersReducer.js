@@ -11,7 +11,7 @@ export const getAnswersAction = () => {
 
 const initialState = {
   data: null,
-  years: [],
+  years: null,
 }
 
 export default (state = initialState, action) => {
