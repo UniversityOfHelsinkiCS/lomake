@@ -19,10 +19,11 @@ const StatusMessage = () => {
   const languageCode = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const lastSaved = useSelector((state) => state.form.lastSaveSuccess)
+  const viewOnly = useSelector((state) => state.form.viewOnly)
 
   const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
 
-  if (!deadlineObj) return null
+  if (!deadlineObj || viewOnly) return null
 
   const locale = languageCode != 'se' ? languageCode : 'sv'
 
