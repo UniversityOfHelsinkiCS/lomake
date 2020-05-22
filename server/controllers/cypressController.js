@@ -177,8 +177,6 @@ const givePermissions = async (req, res) => {
 
     const { uid, programme, level } = req.params
 
-    console.log(uid, programme, level)
-
     const user = await db.user.findOne({ where: { uid } })
 
     let permissions = {}
@@ -213,8 +211,6 @@ const givePermissions = async (req, res) => {
     }
 
     await user.save()
-
-    console.log(user.access.TOSKA101)
 
     return res.status(200).send('OK')
   } catch (error) {
