@@ -62,14 +62,7 @@ describe("Previous year's answers", function () {
     cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').contains(2020).click()
 
-    cy.server()
-    cy.route('POST', '/socket.io/*').as('update')
-
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.focused().clear().type('koira', { delay: 500 })
-
-    // There should be 5 post requests to socket.io, because koira is a 5 letter word.
-    cy.wait('@update').wait('@update').wait('@update').wait('@update').wait('@update')
+    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'koira')
 
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')

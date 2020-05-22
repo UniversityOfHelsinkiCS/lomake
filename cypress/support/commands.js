@@ -43,3 +43,28 @@ Cypress.Commands.add('givePermissions', (uid, programme, level) => {
   cy.request(`/api/cypress/givePermissions/${uid}/${programme}/${level}`)
   cy.log(`Gave ${level}-permissions for ${programme} to ${uid}`)
 })
+
+/**
+ * Writes text to custom editor used in form.
+ * Can be used to "paste" long texts.
+ */
+Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
+  cy.server()
+  cy.route('POST', '/socket.io/*').as('update')
+  cy.get(editorName)
+    .find('.editor-class')
+    .find('.DraftEditor-root')
+    .find('.DraftEditor-editorContainer')
+    .find('.public-DraftEditor-content')
+    .then((input) => {
+      var textarea = input.get(0)
+      textarea.dispatchEvent(new Event('focus'))
+
+      var textEvent = document.createEvent('TextEvent')
+      textEvent.initTextEvent('textInput', true, true, null, textToBeTyped)
+      textarea.dispatchEvent(textEvent)
+
+      textarea.dispatchEvent(new Event('blur'))
+    })
+  cy.wait('@update')
+})

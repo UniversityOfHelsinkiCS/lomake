@@ -2,7 +2,7 @@
 /// <reference types="cypress" />
 
 import * as _ from 'lodash'
-import { editorTextHelper, getEditorInputLength } from '../support/helpers'
+import { getEditorInputLength } from '../support/helpers'
 import { testProgrammeName } from '../../config/common'
 const user = 'cypressUser'
 
@@ -16,14 +16,17 @@ describe('Sidebar tests', function () {
   it('Answer length of 1 is OK', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
-    editorTextHelper('[data-cy=textarea-review_of_last_years_situation_report]', _.repeat('A', 1))
+    cy.writeToTextField(
+      '[data-cy=textarea-review_of_last_years_situation_report]',
+      _.repeat('A', 1)
+    )
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 
   it('Answer length 1000 of is OK', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
-    editorTextHelper(
+    cy.writeToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
       _.repeat('A', 1000)
     )
@@ -34,7 +37,7 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=street-light-positive-review_of_last_years_situation_report]').click()
 
-    editorTextHelper(
+    cy.writeToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
       _.repeat('A', 1500)
     )
