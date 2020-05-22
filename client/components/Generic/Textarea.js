@@ -91,8 +91,8 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           <div style={{ marginTop: '1em' }}>
             <Editor
               wrapperClassName="wrapper-class"
-              editorClassName="editor-class"
-              toolbarClassName="toolbar-class"
+              editorClassName={!readOnly ? 'editor-class' : 'editor-class disabled'}
+              toolbarClassName={!readOnly ? 'toolbar-class' : 'toolbar-class disabled'}
               editorState={editorState}
               onEditorStateChange={handleChange}
               handleBeforeInput={(val) => {
