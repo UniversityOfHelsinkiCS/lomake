@@ -29,7 +29,10 @@ describe('Misc tests', function () {
       .should('contain', '/access/')
   })
 
-  it('Access link can be reset/updated', function () {
+  /**
+   * This feature only works for "superadmins".
+   */
+  it.skip('Access link can be reset/updated', function () {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
     cy.server()
 
