@@ -9,6 +9,8 @@ describe('OSPA user tests', function () {
 
   it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', function () {
     cy.server()
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline').click()
 
     // Delete pre-generated deadline
     cy.route('DELETE', '/api/deadlines').as('delete')
@@ -22,6 +24,8 @@ describe('OSPA user tests', function () {
     cy.visit('/')
 
     // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline').click()
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
