@@ -118,7 +118,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <YearSelector />
-          <div style={{ marginTop: '0em' }}>
+          <div style={{ marginTop: '1em' }}>
             {usersProgrammes.length > 10 && (
               <div
                 style={{
