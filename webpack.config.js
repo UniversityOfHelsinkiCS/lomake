@@ -25,6 +25,19 @@ module.exports = (env, argv) => {
 
   const BASE_PATH = process.env.BASE_PATH || '/'
 
+  const googleAnalyticsScript =
+    mode === 'production'
+      ? `<!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166770070-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-166770070-1');
+        </script>`
+      : ``
+
   return {
     mode,
     output: {
@@ -100,8 +113,7 @@ module.exports = (env, argv) => {
         inject: false,
         template: htmlTemplate,
         appMountId: 'root',
-        headHtmlSnippet:
-          '<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />'
+        headHtmlSnippet: `<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />${googleAnalyticsScript}`,
       }),
       // Extract css
       new MiniCssExtractPlugin({
