@@ -155,6 +155,21 @@ const resetAnswers = async (req, res) => {
   }
 }
 
+const createDeadlineIfNoneExist = async () => {
+  const count = await db.deadline.count({
+    where: {
+      passed: false,
+    },
+  })
+
+  if (count === 0) {
+    await db.deadline.create({
+      date: new Date(),
+      passed: false,
+    })
+  }
+}
+
 const seed = async (req, res) => {
   try {
     logger.info('Cypress::seeding database')
@@ -163,6 +178,7 @@ const seed = async (req, res) => {
     await resetUsers()
     await resetTokens()
     await resetForm()
+    await createDeadlineIfNoneExist()
 
     return res.status(200).send('OK')
   } catch (error) {

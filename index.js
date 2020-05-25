@@ -12,20 +12,36 @@ const { initializeDatabaseConnection } = require('@root/server/database/connecti
 
 const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
 const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
-const { createCypressUsers } = require('@root/server/scripts/createCypressUsers')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
-const { createDeadlineIfNoneExist } = require('@root/server/scripts/createDeadlineIfNoneExist')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 const { fixProgrammeKeys } = require('@root/server/scripts/fixProgrammeKeys')
 const { initFaculties } = require('@root/server/scripts/initFaculties')
 const { createTestProgramme } = require('@root/server/scripts/createTestProgramme')
+
+/**
+ * Creates studyprogrammes, faculties and accesstokens.
+ * Should only be executed once.
+ */
+const seedDatabase = async () => {
+  logger.warn('Starting to seed database')
+  try {
+    await resetStudyprogrammes()
+    await initFaculties()
+    await resetAllTokens()
+  } catch (e) {
+    logger.error('Database seeding failed', e)
+  }
+}
 
 initializeDatabaseConnection()
   .then(() => {
     // Scripts that can be ran manually
     if (process.argv[2]) {
       switch (process.argv[2]) {
+        case 'seed':
+          seedDatabase().then(() => logger.warn('Database seeding completed.'))
+          return
         case 'reset_tokens':
           resetAllTokens().then(() => logger.info('Token reset done.'))
           return
@@ -46,13 +62,8 @@ initializeDatabaseConnection()
       }
     }
 
-    // Scripts that will run if env variable TESTING=true (in github actions AND locally when in dev-mode)
-    if (process.env.TESTING || process.env.NODE_ENV === 'development') {
-      resetStudyprogrammes().then(() => createTestProgramme())
-      createCypressUsers()
-      createDeadlineIfNoneExist()
-      initFaculties()
-    }
+    // Scripts that will run if env variable TESTING=true (in GitHub actions).
+    if (process.env.TESTING) seedDatabase()
 
     const app = express()
     const server = require('http').Server(app)

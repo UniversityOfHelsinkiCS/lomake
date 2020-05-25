@@ -7,7 +7,7 @@ const resetStudyprogrammes = async () => {
     logger.info('Resetting study programmes table')
     await db.studyprogramme.destroy({ where: {} })
 
-    programmes.forEach(async (programme) => {
+    for (const programme of programmes) {
       const { key, name } = programme
 
       await db.studyprogramme.create({
@@ -16,7 +16,7 @@ const resetStudyprogrammes = async () => {
         locked: false,
         claimed: false,
       })
-    })
+    }
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
