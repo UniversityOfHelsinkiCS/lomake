@@ -19,16 +19,16 @@ export default () => {
   return (
     <Grid celled="internally">
       <Grid.Row>
-        <Grid.Column width={2}>
+        <Grid.Column width={3}>
           <Header as="h4">Name</Header>
         </Grid.Column>
-        <Grid.Column width={1}>
+        <Grid.Column width={2}>
           <Header as="h4">User id</Header>
         </Grid.Column>
         <Grid.Column width={3}>
           <Header as="h4">Email</Header>
         </Grid.Column>
-        <Grid.Column width={4}>
+        <Grid.Column width={5}>
           <Header as="h4">Access</Header>
         </Grid.Column>
         <Grid.Column width={1}>
@@ -42,8 +42,6 @@ export default () => {
             <Header as="h4">Hijack</Header>
           </Grid.Column>
         )}
-
-        <Grid.Column width={2} />
       </Grid.Row>
       {users.map((u) => (
         <User user={u} key={u.id} />

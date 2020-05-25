@@ -137,10 +137,10 @@ export default ({ user }) => {
   }
   return (
     <Grid.Row>
-      <Grid.Column width={2}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
-      <Grid.Column>{user.uid}</Grid.Column>
+      <Grid.Column width={3}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
+      <Grid.Column width={2}>{user.uid}</Grid.Column>
       <Grid.Column width={3}>{user.email}</Grid.Column>
-      <Grid.Column width={4}>
+      <Grid.Column width={5}>
         <FormattedAccess />
       </Grid.Column>
       <Grid.Column textAlign="center">
@@ -155,8 +155,6 @@ export default ({ user }) => {
           <Icon onClick={logInAs} size="large" name="sign-in" />
         </Grid.Column>
       )}
-
-      <Grid.Column />
     </Grid.Row>
   )
 }
