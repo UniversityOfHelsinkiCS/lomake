@@ -46,6 +46,16 @@ const translations = {
     en: 'Copy link',
     se: 'Kopiera länk',
   },
+  readAccess: {
+    fi: 'Lukuoikeus',
+    en: 'Read Access',
+    se: 'Skrivskyddad åtkomst',
+  },
+  writeAccess: {
+    fi: 'Kirjoitusoikeus',
+    en: 'Write Access',
+    se: 'Redigeringsåtkomst',
+  },
 }
 
 const OwnerAccordionLinks = ({ programme }) => {
@@ -127,7 +137,7 @@ const OwnerAccordionLinks = ({ programme }) => {
   return (
     <div style={{ margin: '2em 0em', padding: '1em' }}>
       <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
-        <h2>Lukuoikeus</h2>
+        <h2>{translations.readAccess[languageCode]}</h2>
         {translations.viewPrompt[languageCode]}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em', paddingBottom: '1em'}}>
@@ -146,7 +156,7 @@ const OwnerAccordionLinks = ({ programme }) => {
         {isSuperAdmin(user.uid) && <ResetConfirmation token={viewToken} type="READ" />}
       </div>
       <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em', padding: '0.2em 0'}}>
-        <h2>Kirjoitusoikeus</h2>
+        <h2>{translations.writeAccess[languageCode]}</h2>
         {translations.editPrompt[languageCode]}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em' }}>
