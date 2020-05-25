@@ -6,15 +6,20 @@ import { basePath } from '../../../config/common'
 
 const translations = {
   editPrompt: {
-    fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
     en: 'Link grants edit access, share to editors only:',
     se:
       'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
+  },
+  copyPrompt: {
+    fi: 'Kopioi linkki',
+    en: 'Copy link',
+    se: '',
   },
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
