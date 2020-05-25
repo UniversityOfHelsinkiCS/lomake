@@ -39,6 +39,11 @@ const translations = {
     en: 'No users, use the links above to invite',
     se: 'Inga användare. Använd ovanstående länkar för att bjuda in användare.',
   },
+  userList: {
+    fi: 'Käyttäjät',
+    en: 'Users',
+    se: '',
+  },
 }
 
 const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
@@ -141,8 +146,9 @@ const OwnerAccordionUsers = ({ programme }) => {
   }, 0)
 
   return (
-    <>
-      <Segment style={{ margin: '1em 3em' }}>
+    <div style={{ margin: '3em'}}>
+      <h2>{translations.userList[languageCode]}</h2>
+      <Segment style={{ margin: '1em 0' }}>
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column width={3} style={{ textAlign: 'center' }}>
@@ -179,7 +185,7 @@ const OwnerAccordionUsers = ({ programme }) => {
           )}
         </Grid>
       </Segment>
-    </>
+    </div>
   )
 }
 
