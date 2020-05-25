@@ -21,7 +21,9 @@ export default function YearSelector() {
 
   useEffect(() => {
     if (!previousYearsWithAnswers) return
-    let temp = [...previousYearsWithAnswers, new Date().getFullYear()]
+    const currentYear = new Date().getFullYear()
+    let temp = previousYearsWithAnswers
+    if (!temp.includes(currentYear)) temp.push(currentYear)
     const options = temp.map((y) => {
       return {
         key: y,
@@ -48,6 +50,7 @@ export default function YearSelector() {
     >
       <span>{translations.selectYear[languageCode]}</span>
       <Select
+        disabled={yearOptions.length <= 1}
         data-cy="yearSelector"
         name="year"
         options={yearOptions}
