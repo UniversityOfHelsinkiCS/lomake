@@ -38,7 +38,7 @@ export default function SaveIndicator() {
 
   useEffect(() => {
     setSaving(true)
-    if (timeoutId) return
+    if (timeoutId || viewOnly) return
 
     const temp = setTimeout(() => {
       errorHandler()
