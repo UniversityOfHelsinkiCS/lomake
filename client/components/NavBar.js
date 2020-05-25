@@ -83,9 +83,9 @@ export default () => {
       </Menu.Item>
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
-        <a href="mailto:ko-laadunhallinta@helsinki.fi">
+        <a href="mailto:ospa@helsinki.fi">
           <Icon name="mail outline" />
-          ko-laadunhallinta@helsinki.fi
+          ospa@helsinki.fi
         </a>
       </Menu.Item>
       <Menu.Menu>

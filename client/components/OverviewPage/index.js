@@ -12,9 +12,9 @@ import YearSelector from './YearSelector'
 const translations = {
   noPermissions: {
     fi:
-      'Sinulla ei ole oikeuksia millekkään koulutusohjelmalle. Ole hyvä ja ota yhteys Opetuksen Strategisiin Palveluihin tai koulutusohjelman johtajaan.',
+      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
     en:
-      'You have no permissions for any programmes. Please contact The Strategic Services for Teaching or your programme leader.',
+      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     se: '',
   },
   filter: {
