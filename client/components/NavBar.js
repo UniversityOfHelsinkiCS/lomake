@@ -18,6 +18,11 @@ export default () => {
       fi: 'Kirjaudu ulos',
       se: 'Logga ut',
     },
+    adminPage: {
+      en: 'OSPA',
+      fi: 'OSPA',
+      se: 'OSPA',
+    },
   }
 
   const warning =
@@ -65,7 +70,7 @@ export default () => {
         // active={activeItem === 'adminControls'}
         onClick={handleItemClick}
       >
-        Admin page
+        {translations.adminPage[languageCode]}
       </Menu.Item>
     )
   }
