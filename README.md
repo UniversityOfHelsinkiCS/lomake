@@ -5,29 +5,35 @@
 
 The project is split into 2 parts: client and server while index.js in root works as the main file. The project contains no database dependant parts.
 
+### How to start development
+
+1. git clone
+2. run `npm install`
+3. run `npm run dev`
+4. run `docker exec -it lomake_dev bash -c "node index.js seed"`
+5. go to http://localhost:8000
+
+### Changing logged in user while developing
+
+Use setHeaders() to select user for development purposes.
+
+### Seeding the database for production
+
+When deploying Lomake to a production server for the first time, the database should be seeded.
+
+The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "node index.js seed"`
+
+### Running Cypress tests
+
+There's quite a lot of end-to-end tests in the cypress/integration folder.
+
+To run these tests, simply execute `npm run cypress:open` and select _Run all specs_ from the GUI.
+
 ### ApiConnection
 
 ApiConnection is a custom redux middleware that is used in most toska software. It is used to simplify redux usage by wrapping axios.
 
 You can see redux example using apiConnection in client/components/MessageComponent.
-
-## How users can get started with Toskaboiler
-
-Clone the repo, install node and run `npm install` to get started!
-
-`npm start`
-To start the project in production mode use this command. It builds the client and then the server.
-
-`npm run dev`
-To start the project in development mode use this command. It will start the server in hotloading mode.
-
-`npm run lint`
-To clean all the little style flaws around your code.
-
-`npm run stats`
-To create statistics on how big your project is.
-
-Please note that npm test doesn't do anything, this is intentional: testing framework is all up to you. I recommend looking into jest, ava and/or superbara.
 
 ## questions.json
 
@@ -63,11 +69,3 @@ The current questions of the form can be found in [questions.json](https://githu
 
 ![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
 _Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
-
-### How to start development:
-
-- git clone
-- npm install
-- npm run dev
-- localhost:8000
-- use setHeaders() to select user for development purposes
