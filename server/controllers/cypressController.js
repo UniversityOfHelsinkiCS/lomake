@@ -170,6 +170,27 @@ const createDeadlineIfNoneExist = async () => {
   }
 }
 
+const createTestProgramme = async () => {
+  try {
+    logger.info('Creating testprogramme')
+
+    await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
+
+    await db.studyprogramme.create({
+      key: testProgrammeName,
+      name: {
+        en: 'TOSKA-en',
+        fi: 'TOSKA-fi',
+        se: 'TOSKA-se',
+      },
+      locked: false,
+      claimed: false,
+    })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+  }
+}
+
 const seed = async (req, res) => {
   try {
     logger.info('Cypress::seeding database')
@@ -179,6 +200,7 @@ const seed = async (req, res) => {
     await resetTokens()
     await resetForm()
     await createDeadlineIfNoneExist()
+    await createTestProgramme()
 
     return res.status(200).send('OK')
   } catch (error) {
