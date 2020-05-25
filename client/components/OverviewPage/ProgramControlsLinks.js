@@ -135,7 +135,7 @@ const OwnerAccordionLinks = ({ programme }) => {
   }
 
   return (
-    <div style={{ margin: '2em 0em', padding: '1em' }}>
+    <div style={{ margin: '2em 0em' }}>
       <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
         <h2>{translations.readAccess[languageCode]}</h2>
         {translations.viewPrompt[languageCode]}
