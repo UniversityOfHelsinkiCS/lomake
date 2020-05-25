@@ -3,7 +3,6 @@ import { Header, Input, Select, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import OspaModule from './OspaModule'
 import ProgramControlsContent from './ProgramControlsContent'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
@@ -119,8 +118,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <YearSelector />
-          <OspaModule />
-          <div style={{ marginTop: '2em' }}>
+          <div style={{ marginTop: '0em' }}>
             {usersProgrammes.length > 10 && (
               <div
                 style={{

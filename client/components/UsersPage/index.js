@@ -6,6 +6,7 @@ import OwnerLinks from './OwnerLinks'
 import { Tab } from 'semantic-ui-react'
 import FacultyLinks from './FacultyLinks'
 import DoctorLinks from './DoctorLinks'
+import OspaModule from './OspaModule'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 
 export default () => {
@@ -35,6 +36,14 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <UserTable />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: 'Deadline',
+      render: () => (
+        <Tab.Pane>
+          <OspaModule />
         </Tab.Pane>
       ),
     },
