@@ -42,6 +42,6 @@ jobs:
           name: toska/lomake
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          buildargs: BASE_PATH=/tilannekuvalomake/
+          buildargs: BASE_PATH=/tilannekuva/
           tags: 'production'
           cache: true
