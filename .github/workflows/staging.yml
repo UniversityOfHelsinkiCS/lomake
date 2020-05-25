@@ -14,11 +14,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose up -d
-        run: docker-compose up -d
-
       - name: set env-variable TESTING=true
         run: echo "TESTING=TRUE" > .env
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless *.spec.js
