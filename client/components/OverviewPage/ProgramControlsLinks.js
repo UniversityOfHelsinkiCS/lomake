@@ -7,13 +7,15 @@ import { isSuperAdmin } from '@root/config/common'
 
 const translations = {
   editPrompt: {
-    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
+    fi:
+      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
     en: 'Link grants edit access, share to editors only:',
     se:
       'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
+    fi:
+      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
   },
@@ -38,6 +40,11 @@ const translations = {
     en:
       'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
     se: '',
+  },
+  copyLink: {
+    fi: 'Kopioi linkki',
+    en: 'Copy link',
+    se: 'Kopiera länk',
   },
 }
 
@@ -125,16 +132,12 @@ const OwnerAccordionLinks = ({ programme }) => {
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
         <Input
           data-cy={`${programme}-viewlink`}
-          style={{ width: '500px' }}
-          icon={
-            <Icon
-              name={copied === 'VIEW' ? 'checkmark' : 'copy'}
-              inverted
-              circular
-              link
-              onClick={() => copyToClipboard('VIEW')}
-            />
-          }
+          style={{ width: '600px' }}
+          action={{
+            icon: <Icon name={copied === 'VIEW' ? 'checkmark' : 'copy'} link />,
+            content: translations.copyLink[languageCode],
+            onClick: () => copyToClipboard('VIEW'),
+          }}
           value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
           onChange={null}
           ref={viewLinkRef}
@@ -146,17 +149,13 @@ const OwnerAccordionLinks = ({ programme }) => {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em' }}>
         <Input
-          style={{ width: '500px' }}
+          style={{ width: '600px' }}
           data-cy={`${programme}-editlink`}
-          icon={
-            <Icon
-              name={copied === 'EDIT' ? 'checkmark' : 'copy'}
-              inverted
-              circular
-              link
-              onClick={() => copyToClipboard('EDIT')}
-            />
-          }
+          action={{
+            icon: <Icon name={copied === 'EDIT' ? 'checkmark' : 'copy'} link />,
+            content: translations.copyLink[languageCode],
+            onClick: () => copyToClipboard('EDIT'),
+          }}
           value={editToken ? `${urlPrefix}${editToken.url}` : ''}
           onChange={null}
           ref={editLinkRef}
