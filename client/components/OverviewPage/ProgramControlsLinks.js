@@ -2,19 +2,25 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Icon, Input, Popup, Button, Message } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
-import { basePath } from '../../../config/common'
+import { basePath } from '@root/config/common'
+import { isSuperAdmin } from '@root/config/common'
 
 const translations = {
   editPrompt: {
-    fi: 'Linkillä saa vastausoikeuden, jaa vain lomakkeen täyttäjille:',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
     en: 'Link grants edit access, share to editors only:',
     se:
       'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi: 'Linkillä saa lukuoikeuden, jaa esim. johtoryhmälle:',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
+  },
+  copyPrompt: {
+    fi: 'Kopioi linkki',
+    en: 'Copy link',
+    se: '',
   },
   resetPrompt: {
     fi: 'Nollaa ja luo uusi jakolinkki',
@@ -38,6 +44,7 @@ const translations = {
 const OwnerAccordionLinks = ({ programme }) => {
   const languageCode = useSelector((state) => state.language)
   const tokens = useSelector((state) => state.programmesTokens)
+  const user = useSelector(({ currentUser }) => currentUser.data)
   const [copied, setCopied] = useState(false)
   const viewLinkRef = useRef(null)
   const editLinkRef = useRef(null)
@@ -132,7 +139,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={viewLinkRef}
         />
-        <ResetConfirmation token={viewToken} type="READ" />
+        {isSuperAdmin(user.uid) && <ResetConfirmation token={viewToken} type="READ" />}
       </div>
       <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em' }}>
         {translations.editPrompt[languageCode]}
@@ -154,7 +161,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={editLinkRef}
         />
-        <ResetConfirmation token={editToken} type="WRITE" />
+        {isSuperAdmin(user.uid) && <ResetConfirmation token={editToken} type="WRITE" />}
       </div>
     </div>
   )
