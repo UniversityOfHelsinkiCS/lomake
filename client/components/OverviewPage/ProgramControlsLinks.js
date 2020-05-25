@@ -125,11 +125,12 @@ const OwnerAccordionLinks = ({ programme }) => {
   }
 
   return (
-    <div style={{ margin: '2em 0em' }}>
+    <div style={{ margin: '2em 0em', padding: '1em' }}>
       <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
+        <h2>Lukuoikeus</h2>
         {translations.viewPrompt[languageCode]}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em' }}>
+      <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em', paddingBottom: '1em'}}>
         <Input
           data-cy={`${programme}-viewlink`}
           style={{ width: '600px' }}
@@ -141,10 +142,11 @@ const OwnerAccordionLinks = ({ programme }) => {
           value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
           onChange={null}
           ref={viewLinkRef}
-        />
+          />
         {isSuperAdmin(user.uid) && <ResetConfirmation token={viewToken} type="READ" />}
       </div>
-      <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em' }}>
+      <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em', padding: '0.2em 0'}}>
+        <h2>Kirjoitusoikeus</h2>
         {translations.editPrompt[languageCode]}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em' }}>
