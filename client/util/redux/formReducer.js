@@ -42,6 +42,7 @@ const initialState = {
   data: {},
   viewOnly: false,
   selectedYear: new Date().getFullYear(),
+  viewingOldAnswers: false,
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
 }
@@ -100,6 +101,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedYear: action.year,
+        viewingOldAnswers: action.year !== new Date().getFullYear(),
       }
     }
     default:
