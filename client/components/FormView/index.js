@@ -79,6 +79,7 @@ const FormView = ({ room }) => {
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
+  const viewingOldAnswers = selectedYear !== new Date().getFullYear()
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,
@@ -100,40 +101,44 @@ const FormView = ({ room }) => {
   useEffect(() => {
     if (loadObj.loading && !pending) {
       setLoadObj({
-        loading: false,
         loaded: true,
       })
       if (programme) {
-        if (programme.locked || !userHasWriteAccess) {
+        // Determine initial viewMode
+        if (programme.locked || !userHasWriteAccess || viewingOldAnswers) {
           dispatch(setViewOnly(true))
         } else {
-          dispatch(setViewOnly(false)) // Clear this incase old value is wrong
+          dispatch(setViewOnly(false))
+        }
+
+        if (viewingOldAnswers) {
+          // Replace answers with oldAnswers
+
+          const answersFromSelectedYear = oldAnswers.find(
+            (answers) => answers.programme === programme.key && answers.year === selectedYear
+          ).data
+
+          dispatch({
+            type: 'SET_OLD_FORM_ANSWERS',
+            answers: answersFromSelectedYear,
+          })
+        }
+
+        // Join websocket if necessary
+        if (!programme.locked && userHasWriteAccess && !viewingOldAnswers) {
+          dispatch(wsJoinRoom(room))
         }
       }
     }
+    return () => dispatch(wsLeaveRoom(room))
   }, [loadObj, pending])
 
   useEffect(() => {
     if (!programme) return
-    if (programme.locked || !userHasWriteAccess) {
-      // Dont join websocket because no write permissions,
-      // get the temp answers for readmode instead:
-      dispatch(getTempAnswers(room))
-      return
-    }
-    dispatch(wsJoinRoom(room))
-    return () => dispatch(wsLeaveRoom(room))
-  }, [programme])
 
-  useEffect(() => {
-    if (!programme) return
-
-    if (selectedYear !== new Date().getFullYear()) {
+    if (viewingOldAnswers) {
       // Show answers from selectedYear and set the form to viewMode.
-      dispatch({
-        type: 'WS_LEAVE_ROOM',
-        room,
-      })
+      dispatch(wsLeaveRoom(room))
       dispatch(setViewOnly(true))
 
       const answersFromSelectedYear = oldAnswers.find(
@@ -144,15 +149,10 @@ const FormView = ({ room }) => {
         type: 'SET_OLD_FORM_ANSWERS',
         answers: answersFromSelectedYear,
       })
-    } else {
-      // When switching back to current year, join go back to edit mode (If form is open and user has permissions)
-      if (!programme.locked && userHasWriteAccess) {
-        dispatch({
-          type: 'WS_JOIN_ROOM',
-          room,
-        })
-        dispatch(setViewOnly(false))
-      }
+    } else if (!programme.locked && userHasWriteAccess) {
+      // When switching back to the current year, rejoin to the WebSocket.
+      dispatch(wsJoinRoom(room))
+      dispatch(setViewOnly(false))
     }
   }, [selectedYear])
 
