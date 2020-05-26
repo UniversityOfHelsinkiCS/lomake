@@ -75,11 +75,11 @@ const FormView = ({ room }) => {
   const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
   const selectedYear = useSelector((state) => state.form.selectedYear)
+  const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
-  const viewingOldAnswers = selectedYear !== new Date().getFullYear()
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,
@@ -130,7 +130,6 @@ const FormView = ({ room }) => {
         }
       }
     }
-    return () => dispatch(wsLeaveRoom(room))
   }, [loadObj, pending])
 
   useEffect(() => {
@@ -155,6 +154,12 @@ const FormView = ({ room }) => {
       dispatch(setViewOnly(false))
     }
   }, [selectedYear])
+
+  useEffect(() => {
+    return () => {
+      dispatch(wsLeaveRoom(room))
+    }
+  }, [])
 
   if (!loadObj.loaded) return <Loader active />
 
