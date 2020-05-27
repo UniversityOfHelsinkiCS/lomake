@@ -24,25 +24,19 @@ const developmentRequestLogger = (req, res, next) => {
 /**
  * Hard to read JSON logs.
  */
-const productionRequestLogger = (req, res, next) => {
-  morgan((tokens, req, res) => {
-    const mockingAs = req.headers['x-admin-logged-in-as']
+const productionRequestLogger = morgan((tokens, req, res) => {
+  const mockingAs = req.headers['x-admin-logged-in-as']
+  const final = {
+    userId: req.headers.uid,
+    method: tokens.method(req, res),
+    url: tokens.url(req, res),
+    status: tokens.status(req, res),
+    responseTime: tokens['response-time'](req, res),
+  }
 
-    const final = {
-      userId: req.headers.uid,
-      method: tokens.method(req, res),
-      url: tokens.url(req, res),
-      status: tokens.status(req, res),
-      responseTime: tokens['response-time'](req, res),
-    }
-
-    if (mockingAs) final['mockingAs'] = mockingAs
-
-    console.log(JSON.stringify(final))
-  })
-
-  next()
-}
+  if (mockingAs) final['mockingAs'] = mockingAs
+  console.log(JSON.stringify(final))
+})
 
 module.exports = {
   developmentRequestLogger,
