@@ -1098,7 +1098,7 @@ const programmes = [
     key: 'msc_changing_education_(2020_lähtien)',
     name: {
       fi: '',
-      en: 'Master´s Programme in Changing Education (2020 lähtien)',
+      en: "Master's Programme in Changing Education (2020 lähtien)",
       se: '',
     },
   },
@@ -1107,7 +1107,7 @@ const programmes = [
     key: 'MH60_001',
     name: {
       fi: 'Kasvatustieteiden maisteriohjelma',
-      en: 'Master´s Programme in Education',
+      en: "Master's Programme in Education",
       se: 'Magisterprogrammet i pedagogik',
     },
   },
@@ -1116,7 +1116,7 @@ const programmes = [
     key: 'MH80_003',
     name: {
       fi: 'Metsätieteiden maisteriohjelma',
-      en: 'Master´s Programme in Forest Sciences',
+      en: "Master's Programme in Forest Sciences",
       se: 'Magisterprogrammet i skogsvetenskaper',
     },
   },
@@ -1125,7 +1125,7 @@ const programmes = [
     key: 'msc_global_governance_law_(2020_lähtien)',
     name: {
       fi: '',
-      en: 'Master´s Programme in Global Governance Law (2020 lähtien)',
+      en: "Master's Programme in Global Governance Law (2020 lähtien)",
       se: '',
     },
   },
@@ -1134,7 +1134,7 @@ const programmes = [
     key: 'MH80_007',
     name: {
       fi: 'Mikrobiologian ja mikrobibiotekniikan maisteriohjelma',
-      en: 'Master´s Programme in Microbiology and Microbial Biotechnology',
+      en: "Master's Programme in Microbiology and Microbial Biotechnology",
       se: 'Magisterprogrammet i mikrobiologi och mikrobiell bioteknik',
     },
   },
@@ -1143,7 +1143,7 @@ const programmes = [
     key: 'MH70_001',
     name: {
       fi: 'Filosofian maisteriohjelma',
-      en: 'Master´s Programme in Philosophy',
+      en: "Master's Programme in Philosophy",
       se: 'Magisterprogrammet i filosofi',
     },
   },
