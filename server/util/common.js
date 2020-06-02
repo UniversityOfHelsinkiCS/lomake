@@ -1147,6 +1147,15 @@ const programmes = [
       se: 'Magisterprogrammet i filosofi',
     },
   },
+  {
+    id: 127,
+    key: 'MH70_011',
+    name: {
+      fi: 'Sosiaali- ja terveystutkimuksen ja johtamisen maisteriohjelma',
+      en: "Master's programme in Social and Health Research and Management",
+      se: 'Magisterprogrammet i social- och hälsoforskning och ledning',
+    },
+  },
 ]
 
 module.exports = {
