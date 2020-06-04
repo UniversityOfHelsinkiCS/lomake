@@ -32,6 +32,7 @@ export default () => {
           if (sorter === field) {
             setReverse(!reverse)
           } else {
+            setReverse(false)
             setSorter(field)
           }
         }
@@ -39,10 +40,12 @@ export default () => {
     const style = sortable ? { cursor: 'pointer' } : {}
 
     return (
-      <Grid.Column style={{ display: 'flex', alignItems: 'baseline' }} width={width}>
-        <Header onClick={sortHandler} style={style} as="h4">
-          {name}
-        </Header>
+      <Grid.Column
+        onClick={sortHandler}
+        style={{ display: 'flex', alignItems: 'baseline', ...style }}
+        width={width}
+      >
+        <Header as="h4">{name}</Header>
         {sortable && <Icon name="sort" />}
       </Grid.Column>
     )
