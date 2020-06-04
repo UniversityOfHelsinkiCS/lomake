@@ -4,10 +4,12 @@ import { Grid, Header, Icon } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import User from 'Components/UsersPage/User'
 import { isSuperAdmin } from '../../../config/common'
+import { Input } from 'semantic-ui-react'
 
 export default () => {
   const [sorter, setSorter] = useState('email')
   const [reverse, setReverse] = useState(false)
+  const [filter, setFilter] = useState('')
 
   const users = useSelector((state) => state.users.data)
   const user = useSelector(({ currentUser }) => currentUser.data)
@@ -19,12 +21,19 @@ export default () => {
 
   if (!users) return null
 
-  let sortedUsers = users.sort((a, b) => {
+  let sortedUsersToShow = users.sort((a, b) => {
     if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
   })
 
-  if (reverse) sortedUsers.reverse()
+  if (reverse) sortedUsersToShow.reverse()
+  sortedUsersToShow = sortedUsersToShow.filter((user) =>
+    Object.keys(user.access)
+      .join(', ')
+      .toString()
+      .toLocaleLowerCase()
+      .includes(filter.toLocaleLowerCase())
+  )
 
   const CustomHeader = ({ width, name, field, sortable = true }) => {
     const sortHandler = sortable
@@ -52,19 +61,29 @@ export default () => {
   }
 
   return (
-    <Grid celled="internally">
-      <Grid.Row>
-        <CustomHeader width={3} name="Name" field="lastname" />
-        <CustomHeader width={2} name="User id" field="uid" />
-        <CustomHeader width={3} name="Email" field="email" />
-        <CustomHeader width={5} name="Access" field="access" sortable={false} />
-        <CustomHeader width={1} name="Admin" field="admin" />
-        <CustomHeader width={1} name="Hide" field="irrelevant" />
-        {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
-      </Grid.Row>
-      {sortedUsers.map((u) => (
-        <User user={u} key={u.id} />
-      ))}
-    </Grid>
+    <>
+      <Input
+        value={filter}
+        onChange={(e, { value }) => setFilter(value)}
+        icon="users"
+        iconPosition="left"
+        placeholder="Filter users by access"
+      />
+
+      <Grid celled="internally">
+        <Grid.Row>
+          <CustomHeader width={3} name="Name" field="lastname" />
+          <CustomHeader width={2} name="User id" field="uid" />
+          <CustomHeader width={3} name="Email" field="email" />
+          <CustomHeader width={5} name="Access" field="access" sortable={false} />
+          <CustomHeader width={1} name="Admin" field="admin" />
+          <CustomHeader width={1} name="Hide" field="irrelevant" />
+          {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
+        </Grid.Row>
+        {sortedUsersToShow.map((u) => (
+          <User user={u} key={u.id} />
+        ))}
+      </Grid>
+    </>
   )
 }
