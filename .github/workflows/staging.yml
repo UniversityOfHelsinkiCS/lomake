@@ -5,7 +5,8 @@ on:
     branches: [master]
 
 jobs:
-  build-test-deploy:
+  test:
+    name: Run Cypress tests
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout
@@ -35,6 +36,13 @@ jobs:
           name: cypress-videos
           path: /home/runner/work/lomake/lomake/cypress/videos
 
+  build:
+    name: 'Build and publish staging image'
+    needs: test
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Publish to DockerHub
         uses: docker/build-push-action@v1.1.0
         with:
