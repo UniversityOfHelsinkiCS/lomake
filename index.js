@@ -126,7 +126,6 @@ initializeDatabaseConnection()
       logger.info(`Started on port ${PORT}`)
       startBackupJob()
       startDeadlineWatcher()
-      generateMissingTokens()
     })
   })
   .catch((e) => {
