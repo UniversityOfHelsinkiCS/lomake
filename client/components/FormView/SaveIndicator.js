@@ -19,7 +19,7 @@ export default function SaveIndicator() {
     lastSaved: {
       en: 'Last saved at:',
       fi: 'Viimeksi tallennettu kello:',
-      se: '',
+      se: 'Senast sparad kl.',
     },
     saveFailed: {
       en:

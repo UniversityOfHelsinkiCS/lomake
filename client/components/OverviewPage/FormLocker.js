@@ -36,22 +36,22 @@ export default function FormLocker({ programme }) {
     lockForm: {
       en: 'Lock form (prevents editing)',
       fi: 'Lukitse lomake',
-      se: '',
+      se: 'Lås blanketten (hindrar redigering)',
     },
     unLockForm: {
       en: 'Unlock form',
       fi: 'Poista lukitus',
-      se: '',
+      se: 'Tillåt redigering',
     },
     lockedTriggerButtonText: {
       en: 'Form is locked',
       fi: 'Lomake on lukittu',
-      se: '',
+      se: 'Blanketten är låst',
     },
     unlockedTriggerButtonText: {
       en: 'Form can be edited',
       fi: 'Lomaketta voi muokata',
-      se: '',
+      se: 'Blanketten kan redigeras',
     },
   }
 

@@ -29,32 +29,32 @@ export default function OspaModule() {
     deadlineSettings: {
       en: 'Deadline settings',
       fi: 'Määräaika-asetukset',
-      se: '',
+      se: 'Hantera deadline',
     },
     selectNewDeadline: {
       en: 'Select new deadline',
       fi: 'Valitse uusi määräaika',
-      se: '',
+      se: 'Välj ny deadline',
     },
     updateDeadline: {
       en: 'Update deadline',
       fi: 'Päivitä määräaika',
-      se: '',
+      se: 'Uppdatera deadline',
     },
     nextDeadline: {
       en: 'Next deadline:',
       fi: 'Seuraava määräaika:',
-      se: '',
+      se: 'Nästa deadline:',
     },
     noDeadlineSet: {
       en: 'No deadline set.',
       fi: 'Määräaikaa ei ole asetettu.',
-      se: '',
+      se: 'Ingen deadline vald.',
     },
     deleteThisDeadline: {
       en: 'Freeze the form',
       fi: 'Lukitse lomake',
-      se: '',
+      se: 'Ta bort deadline',
     },
   }
 

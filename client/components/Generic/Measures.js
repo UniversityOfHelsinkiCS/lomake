@@ -13,12 +13,12 @@ const translations = {
   addButtonLabel: {
     fi: 'Lisää toimenpide',
     en: 'Add measure',
-    se: '',
+    se: 'Lägg till åtgärd',
   },
   removeButtonLabel: {
     fi: 'Poista toimenpide',
     en: 'Remove measure',
-    se: '',
+    se: 'Ta bort åtgärd',
   },
 }
 

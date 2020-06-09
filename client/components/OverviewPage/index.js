@@ -15,22 +15,22 @@ const translations = {
       'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
     en:
       "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
-    se: '',
+    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
   },
   filter: {
     fi: 'Filtteröi',
     en: 'Filter',
-    se: '',
+    se: 'Filtrera',
   },
   showUnclaimedOnly: {
     en: 'Show only unclaimed programmes',
     fi: 'Näytä vain lunastamattomat koulutusohjelmat',
-    se: '',
+    se: 'Visa enbart program som inte tagits emot',
   },
   overviewPage: {
     en: 'Form - Overview',
     fi: 'Lomake - Yleisnäkymä ',
-    se: '',
+    se: 'Blankett - översikt',
   },
   accessControl: {
     en: 'Access Control',

@@ -17,7 +17,7 @@ export default () => {
     adminPage: {
       en: 'Form - Admin-page',
       fi: 'Lomake - Ylläpito-sivu',
-      se: '',
+      se: 'Blankett - administrationssida',
     },
   }
 

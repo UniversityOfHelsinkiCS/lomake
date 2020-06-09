@@ -47,7 +47,7 @@ const translations = {
   claimPermissions: {
     en: 'Form - Claim permissions',
     fi: 'Lomake - Vastaanota oikeuksia',
-    se: '',
+    se: 'Blankett - ta emot åtkomster',
   },
 }
 

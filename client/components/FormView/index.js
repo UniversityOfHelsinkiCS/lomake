@@ -58,12 +58,12 @@ const translations = {
   noPermissions: {
     en: 'No permissions. To get permissions, contact your study programmer leader.',
     fi: 'Ei oikeuksia. Saadaksesi oikeudet, ota yhteyttä koulutusohjelmasi johtajaan.',
-    se: '',
+    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
   },
   form: {
     en: 'Form',
     fi: 'Lomake',
-    se: '',
+    se: 'Blankett',
   },
 }
 

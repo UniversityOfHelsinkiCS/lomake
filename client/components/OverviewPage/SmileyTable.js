@@ -28,12 +28,12 @@ const translations = {
   programmeClaimed: {
     fi: 'Tämä ohjelma on vastaanotettu',
     en: 'This programme has been claimed',
-    se: '',
+    se: 'Programmet har tagits emot',
   },
   programmeNotClaimed: {
     fi: 'Tätä ohjelmaa ei ole vastaanotettu',
     en: 'This programme has not been claimed',
-    se: '',
+    se: 'Programmet har inte tagits emot',
   },
 }
 

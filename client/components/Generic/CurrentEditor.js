@@ -10,7 +10,7 @@ export default ({ fieldName }) => {
   const translations = {
     isWriting: {
       fi: 'kirjoittaa',
-      se: '',
+      se: 'skriver',
       en: 'is writing',
     },
   }
