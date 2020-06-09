@@ -63,14 +63,13 @@ const SmileyTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    let renderStatsRow = false
     const selectedAnswers =
       selectedYear === new Date().getFullYear()
         ? answers.data
         : oldAnswers.data.filter((a) => a.year === selectedYear)
 
     const stats = useMemo(() => {
-      if (!selectedAnswers || isBeingFiltered) return {}
+      if (!selectedAnswers) return {}
 
       return filteredProgrammes.reduce((statObject, { key }) => {
         const programme = selectedAnswers.find((a) => a.programme === key)
@@ -81,9 +80,7 @@ const SmileyTable = React.memo(
             const light = answers[answerKey] // "red", "yellow", "green" or ""
             const baseKey = answerKey.replace('_light', '')
             if (!statObject[baseKey]) statObject[baseKey] = {}
-            if (statObject[baseKey][light] === 4 && light !== '') {
-              renderStatsRow = true
-            }
+
             statObject[baseKey][light] = statObject[baseKey][light]
               ? statObject[baseKey][light] + 1
               : 1
@@ -92,6 +89,9 @@ const SmileyTable = React.memo(
         return statObject
       }, {})
     }, [filteredProgrammes, selectedAnswers, answers, isBeingFiltered])
+
+    const renderStatsRow =
+      filteredProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
 
     const transformIdToTitle = (id, vertical = true) => {
       const idToUse = replaceTitle[id] || id
