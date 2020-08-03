@@ -221,7 +221,11 @@ const FormView = ({ room }) => {
               {translations.negative[languageCode]}
             </div>
             <div style={{ display: 'flex' }}>
-              <CSVDownload questions={questions} />
+              <CSVDownload
+                questions={questions}
+                programmeName={localizedProgramName}
+                year={selectedYear}
+              />
               <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
               <PDFDownload />
             </div>

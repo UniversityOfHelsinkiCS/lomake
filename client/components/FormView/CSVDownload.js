@@ -10,9 +10,11 @@ const translations = {
   },
 }
 
-const CSVDownload = ({ questions }) => {
+const CSVDownload = ({ questions, programmeName, year }) => {
   const languageCode = useSelector((state) => state.language)
   const formData = useSelector(({ form }) => form.data)
+
+  const formattedProgrammeName = programmeName.replace(/ /g, "_").replace(/'|,/g, "")
 
   // generating array of arrays where 0 index is question text and 1 index the question id
   const csvData = questions.reduce(
@@ -87,7 +89,7 @@ const CSVDownload = ({ questions }) => {
   csvDataFormatted = csvDataFormatted.join('\n')
 
   return (
-    <CSVLink filename="hy_ospa_lomake_answers.csv" data={csvDataFormatted + '\n'} separator=";">
+    <CSVLink filename={`${year}_Tilannekuvalomake_${formattedProgrammeName}.csv`} data={csvDataFormatted + '\n'} separator=";">
       {translations.downloadText[languageCode]}
     </CSVLink>
   )
