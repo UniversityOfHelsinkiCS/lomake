@@ -3,15 +3,35 @@ import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 
 const translations = {
-  header: {
+  savingAnswersNotice: {
     fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
     en: 'Answers are saved automatically. Deadline:',
     se: 'Svaren sparas automatiskt.',
   },
-  subtitle: {
+  savingAnswersSubtitle: {
     fi: 'Viimeksi tallennettu',
     en: 'Last saved',
     se: 'Senast sparat',
+  },
+  lockedFormNotice: {
+    fi: 'Lomake on lukittu, eikä sitä voi muokata.',
+    en: 'The form has been locked and it cannot be edited.',
+    se: 'The form has been locked and it cannot be edited.',
+  },
+  lockedFormSubtitle: {
+    fi: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
+    en: 'The owner of the form may still unlock the form before its deadline',
+    se: 'The owner of the form may still unlock the form before its deadline.',
+  },
+  deadlinePassedNotice: {
+    fi: 'Lomakeen täyttöaika on päättynyt.',
+    en: 'The deadline to edit form has passed.',
+    se: 'The deadline to edit form has passed.',
+  },
+  deadlinePassedSubtitle: {
+    fi: 'OSPA käsittelee vastaukset.',
+    en: 'OSPA will process the answers.',
+    se: 'OSPA will process the answers.',
   },
 }
 
@@ -23,19 +43,39 @@ const StatusMessage = () => {
 
   const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
 
-  if (!deadlineObj || viewOnly) return null
-
   const locale = languageCode != 'se' ? languageCode : 'sv'
 
-  return (
-    <>
-      <Message
+  if (!deadlineObj)
+    return (
+      <>
+        <Message
         data-cy="statusMessage"
-        icon="info"
-        header={`${translations.header[languageCode]} ${deadlineObj.toLocaleDateString(locale)}`}
-        content={`${translations.subtitle[languageCode]} ${lastSaved.toLocaleString(locale)}`}
-      />
-    </>
+        icon="clock"
+        header={`${translations.deadlinePassedNotice[languageCode]}`}
+        content={`${translations.deadlinePassedSubtitle[languageCode]}`}
+        />
+      </>
+    )
+
+  if (viewOnly)
+    return (
+      <>
+        <Message
+        data-cy="statusMessage"
+        icon="lock"
+        header={`${translations.lockedFormNotice[languageCode]}`}
+        content={`${translations.lockedFormSubtitle[languageCode]} ${deadlineObj.toLocaleDateString(locale)}.`}
+        />
+      </>
+    )
+
+  return (
+    <Message
+      data-cy="statusMessage"
+      icon="info"
+      header={`${translations.savingAnswersNotice[languageCode]} ${deadlineObj.toLocaleDateString(locale)}.`}
+      content={`${translations.savingAnswersSubtitle[languageCode]} ${lastSaved.toLocaleString(locale)}.`}
+    />
   )
 }
 
