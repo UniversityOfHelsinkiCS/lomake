@@ -65,7 +65,7 @@ export default () => {
     return currentUser.data.admin
       ? programmes
       : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
-  }, [currentUser.data])
+  }, [programmes, currentUser.data])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter((prog) => {

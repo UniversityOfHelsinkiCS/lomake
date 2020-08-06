@@ -35,6 +35,11 @@ const translations = {
     en: 'This programme has not been claimed',
     se: 'Programmet har inte tagits emot',
   },
+  programmeLocked: {
+    fi: 'Tämän ohjelman muokkaus on estetty.',
+    en: 'This programme has been locked.',
+    se: 'This programme has been locked.',
+  },
 }
 
 const replaceTitle = {
@@ -178,6 +183,26 @@ const SmileyTable = React.memo(
       )
     }
 
+    const LockedIcon = ({ programme }) => {
+      return hasManagementAccess(programme.key) ?
+        (<Icon
+          data-cy={`${programme.key}-locked`}
+          title={translations['programmeLocked'][languageCode]}
+          name="lock"
+          size="large"
+          color="grey"
+          onClick={() => setProgramControlsToShow(programme)}
+        />)
+        :
+        (<Icon
+          data-cy={`${programme.key}-locked`}
+          title={translations['programmeLocked'][languageCode]}
+          name="lock"
+          size="large"
+          color="grey"
+        />)
+    }
+
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (
@@ -287,6 +312,7 @@ const SmileyTable = React.memo(
               ))}
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ClaimedIcon programme={p} />
+                {!p.locked ? null : <LockedIcon programme={p} />}
               </div>
               {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
             </React.Fragment>

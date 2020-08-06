@@ -72,6 +72,12 @@ export default (state = { data: null }, action) => {
     case 'TOGGLE_LOCK_SUCCESS':
       return {
         ...state,
+        data: state.data.map((programme) => {
+          if (programme.id === action.response.id) {
+            return { ...programme, locked: action.response.locked }
+          }
+          return programme
+        }),
         singleProgram: action.response,
       }
     case 'GET_PROGRAMME_OWNERS_SUCCESS':
