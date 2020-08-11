@@ -86,4 +86,15 @@ describe('Management tests', function () {
     cy.get('[data-cy=write-cypressUser2]').should('have.class', 'check')
     cy.get('[data-cy=admin-cypressUser2]').should('have.class', 'close')
   })
+
+  it('Locking the form updates the display and prevents editing the form', () => {
+    cy.get(`[data-cy=formLocker-button-close]`).click()
+    cy.get(`[data-cy=formLocker-verify-close-button]`).click()
+    cy.get(`[data-cy=formLocker-button-open]`)
+    cy.get(`[data-cy=formLocker-verify-open-button]`)
+
+    cy.login('cypressUser')
+    cy.visit(`/form/${testProgrammeName}`)
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').should('not.exist')
+  })
 })
