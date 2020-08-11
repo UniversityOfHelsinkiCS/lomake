@@ -81,6 +81,7 @@ export default function FormLocker({ programme }) {
         }
         content={
           <Button
+            data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
             color="red"
             secondary
             content={

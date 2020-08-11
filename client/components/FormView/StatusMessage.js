@@ -49,7 +49,7 @@ const StatusMessage = () => {
     return (
       <>
         <Message
-        data-cy="statusMessage"
+        data-cy="deadline-passed-notice"
         icon="clock"
         header={`${translations.deadlinePassedNotice[languageCode]}`}
         content={`${translations.deadlinePassedSubtitle[languageCode]}`}
@@ -61,7 +61,7 @@ const StatusMessage = () => {
     return (
       <>
         <Message
-        data-cy="statusMessage"
+        data-cy="locked-form-notice"
         icon="lock"
         header={`${translations.lockedFormNotice[languageCode]}`}
         content={`${translations.lockedFormSubtitle[languageCode]} ${deadlineObj.toLocaleDateString(locale)}.`}
@@ -71,7 +71,7 @@ const StatusMessage = () => {
 
   return (
     <Message
-      data-cy="statusMessage"
+      data-cy="saving-answers-notice"
       icon="info"
       header={`${translations.savingAnswersNotice[languageCode]} ${deadlineObj.toLocaleDateString(locale)}.`}
       content={`${translations.savingAnswersSubtitle[languageCode]} ${lastSaved.toLocaleString(locale)}.`}

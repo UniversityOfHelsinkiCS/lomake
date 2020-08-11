@@ -39,7 +39,7 @@ describe('Form tests', function () {
   })
 
   it('Can see upcoming deadline date', function () {
-    cy.get('[data-cy=statusMessage]').contains('Deadline: ')
+    cy.get('[data-cy=saving-answers-notice]').contains('Deadline: ')
   })
 
   it('Measurements are created dynamically and saved correctly', function () {
