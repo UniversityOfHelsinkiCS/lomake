@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Loader } from 'semantic-ui-react'
+import { Button, Message, Icon } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 
@@ -22,11 +22,24 @@ export default function SaveIndicator() {
       se: 'Senast sparad kl.',
     },
     saveFailed: {
-      en:
-        'The changes you have made in the last 10 seconds have not been saved! Please backup your work and reload the page to continue.',
-      fi:
-        'Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti! Ota muutoksesi talteen ja päivitä sivu.',
-      se: '',
+      header: {
+        en: 'Error: The changes you have made in the last 10 seconds have not been saved!',
+        fi:
+          'Virhe: Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti!',
+        se: '',
+      },
+      content: {
+        en:
+          'In order to continue filling the form, please backup any recent changes you have made. Then click the button to reload the page.',
+        fi:
+          'Jatkaaksesi lomakkeen täyttämistä, ole hyvä ja ota viimeiset muutoksesi talteen. Klikkaa sen jälkeen allaolevaa näppäintä ladataksesi sivu uudelleen.',
+        se: '',
+      },
+      button: {
+        en: 'Reload the page',
+        fi: 'Lataa sivu uudelleen',
+        se: '',
+      },
     },
   }
 
@@ -59,19 +72,32 @@ export default function SaveIndicator() {
   if (saveError) {
     return (
       <>
-        <Button
+        <Message
           negative
+          icon={<Icon color="red" name="exclamation" />}
           style={{
             position: 'fixed',
-            right: '25%',
-            top: '50px',
-            height: '100px',
+            left: '50%',
+            transform: 'translate(-50%)',
+            top: '5em',
             zIndex: 100,
-            width: '50%',
+            width: '75%',
+            maxWidth: '50em',
           }}
-        >
-          {translations.saveFailed[languageCode]}
-        </Button>
+          header={`${translations.saveFailed.header[languageCode]}`}
+          content={
+            <div style={{ paddingTop: '1em' }}>
+              <span>{translations.saveFailed.content[languageCode]}</span>
+              <Button
+                style={{ marginTop: '2em', float: 'right' }}
+                color="blue"
+                onClick={() => window.location.reload()}
+              >
+                {translations.saveFailed.button[languageCode]}
+              </Button>
+            </div>
+          }
+        ></Message>
       </>
     )
   }
