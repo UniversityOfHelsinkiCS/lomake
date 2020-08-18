@@ -19,7 +19,6 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
-    initShibbolethPinger()
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
