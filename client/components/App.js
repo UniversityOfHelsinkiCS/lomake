@@ -19,7 +19,7 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
-    initShibbolethPinger(5000, null, true) // Errors are handled in lomake
+    initShibbolethPinger(60000, null, true) // Errors are handled in lomake
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
