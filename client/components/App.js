@@ -9,6 +9,7 @@ import { getStudyProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
 import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
+import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 
 export default () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     dispatch(wsConnect())
+    initShibbolethPinger(5000, null, true) // Errors are handled in lomake
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
