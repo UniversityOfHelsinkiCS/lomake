@@ -14,10 +14,10 @@ const app = express()
 
 app.use(express.json({ limit: '50mb' }))
 
+app.use(inProduction ? productionRequestLogger : developmentRequestLogger)
 app.use(shibbolethCharsetMiddleware)
 app.use(userMiddleware)
 app.use(currentUserMiddleware)
-app.use(inProduction ? productionRequestLogger : developmentRequestLogger)
 
 app.use(routes)
 

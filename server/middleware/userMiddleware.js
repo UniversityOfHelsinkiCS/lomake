@@ -5,7 +5,10 @@ const { inProduction } = require('@util/common')
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) next()
   if (req.path.includes('/cypress/')) return next()
-  if (!req.headers.uid) return res.status(400).json({ error: 'missing uid' })
+  if (!req.headers.uid) {
+    logger.error('missing uid')
+    return res.status(400).json({ error: 'missing uid' })
+  }
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {
