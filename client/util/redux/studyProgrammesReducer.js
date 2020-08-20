@@ -69,6 +69,14 @@ export default (state = { data: null }, action) => {
         singleProgram: false,
         error: true,
       }
+    case 'RESET_STUDYPROGRAM_SUCCESS': {
+      return {
+        ...state,
+        singleProgramPending: false,
+        error: false,
+        singleProgram: null,
+      }
+    }
     case 'TOGGLE_LOCK_SUCCESS':
       return {
         ...state,

@@ -12,7 +12,7 @@ import { Button } from 'semantic-ui-react'
 import StatusMessage from './StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly } from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
 import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
@@ -72,11 +72,12 @@ const FormView = ({ room }) => {
   const history = useHistory()
   const languageCode = useSelector((state) => state.language)
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
-  const pending = useSelector((state) => state.studyProgrammes.singleProgramPending)
+  const singleProgramPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
   const selectedYear = useSelector((state) => state.form.selectedYear)
   const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
+  const currentRoom = useSelector((state) => state.room)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
@@ -99,69 +100,43 @@ const FormView = ({ room }) => {
   }, [languageCode, room])
 
   useEffect(() => {
-    if (loadObj.loading && !pending) {
+    if (loadObj.loading && !singleProgramPending) {
       setLoadObj({
         loaded: true,
+        loading: false,
       })
-      if (programme) {
-        // Determine initial viewMode
-        if (programme.locked || !userHasWriteAccess || viewingOldAnswers) {
-          dispatch(setViewOnly(true))
-        } else {
-          dispatch(setViewOnly(false))
-        }
-
-        if (viewingOldAnswers) {
-          // Replace answers with oldAnswers
-
-          const answersFromSelectedYear = oldAnswers.find(
-            (answers) => answers.programme === programme.key && answers.year === selectedYear
-          ).data
-
-          dispatch({
-            type: 'SET_OLD_FORM_ANSWERS',
-            answers: answersFromSelectedYear,
-          })
-        }
-
-        // Join websocket if necessary
-        if (!programme.locked && userHasWriteAccess && !viewingOldAnswers) {
-          dispatch(wsJoinRoom(room))
-        }
-      }
     }
-  }, [loadObj, pending])
 
-  useEffect(() => {
     if (!programme) return
 
-    if (viewingOldAnswers) {
-      // Show answers from selectedYear and set the form to viewMode.
-      dispatch(wsLeaveRoom(room))
+    if (programme.locked || !userHasWriteAccess || viewingOldAnswers) {
       dispatch(setViewOnly(true))
+      if (currentRoom) dispatch(wsLeaveRoom(room))
+    } else {
+      dispatch(wsJoinRoom(room))
+      dispatch(setViewOnly(false))
+    }
 
+    if (viewingOldAnswers) {
       const answersFromSelectedYear = oldAnswers.find(
-        (answers) => answers.programme === programme.key && answers.year === selectedYear
+        (answer) => answer.programme === programme.key && answer.year === selectedYear
       ).data
 
       dispatch({
         type: 'SET_OLD_FORM_ANSWERS',
         answers: answersFromSelectedYear,
       })
-    } else if (!programme.locked && userHasWriteAccess) {
-      // When switching back to the current year, rejoin to the WebSocket.
-      dispatch(wsJoinRoom(room))
-      dispatch(setViewOnly(false))
     }
-  }, [selectedYear])
+  }, [singleProgramPending, viewingOldAnswers, selectedYear])
 
   useEffect(() => {
     return () => {
       dispatch(wsLeaveRoom(room))
+      dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
     }
   }, [])
 
-  if (!loadObj.loaded) return <Loader active />
+  if (!loadObj.loaded || loadObj.loading) return <Loader active />
 
   if (!room) return <Redirect to="/" />
 
