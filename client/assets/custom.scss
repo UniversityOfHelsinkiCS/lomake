@@ -131,6 +131,7 @@ label {
 
 // These css styles are applied, when user opens the print dialogue in browser.
 @media print {
+  .hide-in-print-mode,
   #navBar-wrapper,
   .navigation-sidebar,
   .form-instructions {

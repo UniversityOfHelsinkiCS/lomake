@@ -83,7 +83,7 @@ const Form = ({ questions, programmeKey }) => {
             programmeKey={programmeKey}
           >
             {section.link_title && section.link_url && (
-              <a target="_blank" href={section.link_url}>
+              <a className="hide-in-print-mode" target="_blank" href={section.link_url}>
                 {section.link_title[languageCode]}
               </a>
             )}

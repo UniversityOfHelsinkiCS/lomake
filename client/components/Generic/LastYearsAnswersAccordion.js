@@ -23,7 +23,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
   if (viewingOldAnswers) return null
 
   return (
-    <div>
+    <div className="hide-in-print-mode">
       {expanded && <blockquote>{children}</blockquote>}
       <span
         style={{
