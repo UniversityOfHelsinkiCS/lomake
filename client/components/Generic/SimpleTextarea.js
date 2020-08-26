@@ -15,7 +15,7 @@ const SimpleTextarea = ({ label, id, required }) => {
         {label}
         {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
       </label>
-      {viewOnly ? <>value</> : <textarea id={fieldName} value={value} onChange={handleChange} />}
+      {viewOnly ? <>{value}</> : <textarea id={fieldName} value={value} onChange={handleChange} />}
       {/* Is limited answers even needed for measures? */}
       {/*<span style={{ color: value.length > 500 ? 'red' : undefined }}>{value.length}/500</span>*/}
     </div>
