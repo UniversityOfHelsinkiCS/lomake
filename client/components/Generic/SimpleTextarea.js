@@ -9,6 +9,8 @@ const SimpleTextarea = ({ label, id, required }) => {
   const value = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
+  if (viewOnly && (!value || !value.trim().length)) return null // Dont render non-existing measures
+
   return (
     <div className="form-textarea">
       <label>
