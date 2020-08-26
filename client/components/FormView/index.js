@@ -155,16 +155,20 @@ const FormView = ({ room }) => {
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
         <div className="form-instructions">
-          <SaveIndicator />
-          <div style={{ marginBottom: '2em' }}>
-            <Button onClick={() => history.push('/')} icon="arrow left" />
+          <div className="hide-in-print-mode">
+            <SaveIndicator />
+            <div style={{ marginBottom: '2em' }}>
+              <Button onClick={() => history.push('/')} icon="arrow left" />
+            </div>
+            <img className="img-responsive" src={rypsi_image} />
           </div>
-          <img className="img-responsive" src={rypsi_image} />
-          <div>
-            <h1 style={{ color: colors.theme_blue }}>{localizedProgramName}</h1>
-            <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-              {translations.title[languageCode]} {selectedYear}
-            </h3>
+
+          <h1 style={{ color: colors.theme_blue }}>{localizedProgramName}</h1>
+          <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+            {translations.title[languageCode]} {selectedYear}
+          </h3>
+
+          <div className="hide-in-print-mode">
             <YearSelector />
             <StatusMessage />
             <p>{translations.p1[languageCode]}</p>

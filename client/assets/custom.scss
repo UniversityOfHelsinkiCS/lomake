@@ -133,8 +133,7 @@ label {
 @media print {
   .hide-in-print-mode,
   #navBar-wrapper,
-  .navigation-sidebar,
-  .form-instructions {
+  .navigation-sidebar {
     display: none;
   }
 
