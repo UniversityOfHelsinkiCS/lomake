@@ -12,7 +12,7 @@ import { Button } from 'semantic-ui-react'
 import StatusMessage from './StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { setViewOnly } from 'Utilities/redux/formReducer'
+import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
 import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
@@ -112,6 +112,7 @@ const FormView = ({ room }) => {
     if (programme.locked || !userHasWriteAccess || viewingOldAnswers) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
+      if (!viewingOldAnswers) dispatch(getTempAnswers(room))
     } else {
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
