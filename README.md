@@ -17,6 +17,11 @@ The project is split into 2 parts: client and server while index.js in root work
 
 Use setHeaders() to select user for development purposes.
 
+### Accessing the database while developing
+
+1. run `docker exec -it lomake_db bash`
+2. enter with `psql -U postgres`
+
 ### Seeding the database for production
 
 When deploying Lomake to a production server for the first time, the database should be seeded.
