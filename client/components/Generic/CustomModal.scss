@@ -1,6 +1,4 @@
 .customModal-dimmer {
-  display: flex;
-  align-items: center;
   position: fixed;
   z-index: 5;
   left: 0;
@@ -12,7 +10,7 @@
 }
 
 .customModal-content {
-  margin: 2% auto;
+  margin: 4% auto;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
