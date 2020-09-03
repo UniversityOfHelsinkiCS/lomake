@@ -15,9 +15,9 @@ const translations = {
     se: 'Ta emot',
   },
   confirmPrompt: {
-    fi: 'Ole hyvä ja kirjoita ohjelman nimi yllä olevaan laatikkoon varmistusta varten',
-    en: "Please write the programme's name to the input above to confirm",
-    se: 'Vänligen skriv programmets namn i fältet ovan för verifiering.',
+    fi: 'Ole hyvä ja kirjoita ohjelman nimi suomeksi yllä olevaan laatikkoon varmistusta varten',
+    en: "Please write the programme's name in English to the input above to confirm",
+    se: 'Vänligen skriv programmets namn på svenska i fältet ovanför verifiering',
   },
   rights: {
     ADMIN: {
@@ -108,7 +108,16 @@ export default ({ url }) => {
       .replace(',', '')
       .replace("'", '')
       .replace('’', '')
-    const normalizedInput = value.toLowerCase().replace(',', '').replace("'", '').replace('’', '')
+      .replace('`', '')
+      .replace('¨', '')
+
+    const normalizedInput = value
+      .toLowerCase()
+      .replace(',', '')
+      .replace("'", '')
+      .replace('’', '')
+      .replace('`', '')
+      .replace('¨', '')
 
     return normalizedProgrammeName !== normalizedInput
   }
