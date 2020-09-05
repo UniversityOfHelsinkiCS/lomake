@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Loader } from 'semantic-ui-react'
+import { sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
@@ -40,6 +41,11 @@ const translations = {
     en: 'This programme has been locked.',
     se: 'This programme has been locked.',
   },
+  programmeHeader: {
+    fi: 'Koulutusohjelma',
+    en: 'Programme',
+    se: 'Program',
+  }
 }
 
 const replaceTitle = {
@@ -62,6 +68,8 @@ const SmileyTable = React.memo(
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
     const selectedYear = useSelector((state) => state.form.selectedYear)
+    const [reverse, setReverse] = useState(false)
+    const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
@@ -73,10 +81,14 @@ const SmileyTable = React.memo(
         ? answers.data
         : oldAnswers.data.filter((a) => a.year === selectedYear)
 
+    let sortedProgrammes = sortedItems(filteredProgrammes, sorter, languageCode)
+
+    if (reverse) sortedProgrammes.reverse()
+
     const stats = useMemo(() => {
       if (!selectedAnswers) return {}
 
-      return filteredProgrammes.reduce((statObject, { key }) => {
+      return sortedProgrammes.reduce((statObject, { key }) => {
         const programme = selectedAnswers.find((a) => a.programme === key)
         const answers = programme && programme.data ? programme.data : {}
 
@@ -93,10 +105,10 @@ const SmileyTable = React.memo(
         })
         return statObject
       }, {})
-    }, [filteredProgrammes, selectedAnswers, answers, isBeingFiltered])
+    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
 
     const renderStatsRow =
-      filteredProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
+      sortedProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
 
     const transformIdToTitle = (id, vertical = true) => {
       const idToUse = replaceTitle[id] || id
@@ -239,7 +251,14 @@ const SmileyTable = React.memo(
         <div className="sticky-header" />
         {renderStatsRow && (
           <>
-            <div className="sticky-header" />
+            <div
+              className="sticky-header"
+              style={{ fontWeight: 'bold', cursor: 'pointer'}}
+              onClick={() => setReverse(!reverse)}
+            >
+              {translations.programmeHeader[languageCode]}
+              {<Icon name="sort" />}
+            </div>
             {tableIds.map((idObject) =>
               stats.hasOwnProperty(idObject.id) ? (
                 <div
@@ -289,7 +308,7 @@ const SmileyTable = React.memo(
             <div className="sticky-header" />
           </>
         )}
-        {filteredProgrammes.map((p) => {
+        {sortedProgrammes.map((p) => {
           const programme = selectedAnswers.find((a) => a.programme === p.key)
           const targetURL = `/form/${p.key}`
           return (

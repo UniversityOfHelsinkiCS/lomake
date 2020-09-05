@@ -13,6 +13,16 @@ export const colors = {
   theme_blue: '#007290'
 }
 
+export const sortedItems = (items, sorter, languageCode) => {
+  if (!items) return []
+  const sorted = items.sort((a, b) => {
+    if (sorter == 'name') return a[sorter][languageCode].localeCompare(b[sorter][languageCode])
+    if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
+    if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
+  })
+  return sorted
+}
+
 //https://stackoverflow.com/a/9083076
 export function romanize(num) {
   if (isNaN(num)) return NaN
