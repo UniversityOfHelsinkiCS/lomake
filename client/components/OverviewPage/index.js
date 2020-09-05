@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Header, Input, Select, Radio } from 'semantic-ui-react'
+import { Header, Input, Radio } from 'semantic-ui-react'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
