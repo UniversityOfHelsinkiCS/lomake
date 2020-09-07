@@ -15,8 +15,13 @@ export const colors = {
 
 export const sortedItems = (items, sorter, languageCode) => {
   if (!items) return []
+
   const sorted = items.sort((a, b) => {
-    if (sorter == 'name') return a[sorter][languageCode].localeCompare(b[sorter][languageCode])
+    if (sorter == 'name') {
+      const aName = a.name[languageCode] ? a.name[languageCode] : a.name['en']
+      const bName = b.name[languageCode] ? b.name[languageCode] : b.name['en']
+      return aName.localeCompare(bName)
+    }
     if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
   })
