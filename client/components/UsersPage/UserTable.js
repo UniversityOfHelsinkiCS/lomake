@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Grid, Header, Icon } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import User from 'Components/UsersPage/User'
+import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
 import { Input } from 'semantic-ui-react'
 
@@ -21,10 +22,7 @@ export default () => {
 
   if (!users) return null
 
-  let sortedUsersToShow = users.sort((a, b) => {
-    if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
-    if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
-  })
+  let sortedUsersToShow = sortedItems(users, sorter)
 
   if (reverse) sortedUsersToShow.reverse()
   sortedUsersToShow = sortedUsersToShow.filter((user) =>
