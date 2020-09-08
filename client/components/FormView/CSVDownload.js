@@ -67,29 +67,34 @@ const CSVDownload = ({ questions, programmeName, year }) => {
 
   const answersArray = csvData[1].map((questionId) => {
     const questionText = formData[`${questionId}_text`]
-    const lightText = formData[`${questionId}_light`]
-
     const validValues = []
-    if (lightText) validValues.push(lightText)
-    if (questionText) validValues.push(questionText.replace('\n', ' ').replace(';', ''))
+    if (questionText) {
+      const cleanedText = questionText
+        .replace(/"/g, '\'')
+        .replace(/\n\n/g, '\n')
+        .replace(/. +\n/g, '.\n')
+        .replace(/ {4}- /g, '')
+        .replace(/^- /g, '')
+        .replace(/\n- /g, '\n')
+        .replace(/ +- +/g, '\n')
+        .replace(/\r/g, ' ')
+        .replace(/;/g, ',')
+        .replace(/\*\*/g, '')
+        .replace(/&#8259;/g, ' ')
+        .replace(/ *• */g, '')
+        .replace(/_x000D_/g, '\n')
 
+        validValues.push(cleanedText)
+      }
     if (questionId === 'measures') validValues.push(getMeasuresAnswer())
 
-    return validValues.join(' // ')
+    return validValues.join('\n')
   })
 
   csvData.push(answersArray)
 
-  let csvDataFormatted = []
-
-  csvDataFormatted[0] = csvData[0].join(';')
-  csvDataFormatted[1] = csvData[1].join(';')
-  csvDataFormatted[2] = csvData[2].join(';')
-
-  csvDataFormatted = csvDataFormatted.join('\n')
-
   return (
-    <CSVLink filename={`${year}_Tilannekuvalomake_${formattedProgrammeName}.csv`} data={csvDataFormatted + '\n'} separator=";">
+    <CSVLink filename={`${year}_Tilannekuvalomake_${formattedProgrammeName}.csv`} data={csvData} separator=";">
       {translations.downloadText[languageCode]}
     </CSVLink>
   )
