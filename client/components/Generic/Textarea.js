@@ -12,6 +12,10 @@ import CurrentEditor from './CurrentEditor'
 
 const MAX_LENGTH = 1100
 
+const deepCheck = (a, b) => {
+  return JSON.stringify(a) === JSON.stringify(b)
+}
+
 const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
 
@@ -32,7 +36,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   // check if current user is the editor
-  const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
+  const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const readOnly =
     currentEditors &&
