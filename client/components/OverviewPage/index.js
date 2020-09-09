@@ -9,42 +9,9 @@ import CsvDownload from './CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
+import {translations} from '../../util/translations'
 import YearSelector from './YearSelector'
 
-const translations = {
-  noPermissions: {
-    fi:
-      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    en:
-      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
-    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
-  },
-  filter: {
-    fi: 'Filtteröi',
-    en: 'Filter',
-    se: 'Filtrera',
-  },
-  showUnclaimedOnly: {
-    en: 'Show only unclaimed programmes',
-    fi: 'Näytä vain lunastamattomat koulutusohjelmat',
-    se: 'Visa enbart program som inte tagits emot',
-  },
-  overviewPage: {
-    en: 'Form - Overview',
-    fi: 'Lomake - Yleisnäkymä ',
-    se: 'Blankett - översikt',
-  },
-  accessControl: {
-    en: 'Access Control',
-    fi: 'Käytönhallinta',
-    se: '',
-  },
-  csvDownload: {
-    en: 'Download all data as a CSV file',
-    fi: 'Lataa vastaukset csv-tiedostona',
-    se: 'Ladda ner svaren i en csv-fil',
-  },
-}
 
 export default () => {
   const [filter, setFilter] = useState('')
