@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Header, Input, Radio } from 'semantic-ui-react'
+import { Dropdown, Header, Input, Radio } from 'semantic-ui-react'
+import './OverviewPage.scss'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import ProgramControlsContent from './ProgramControlsContent'
+import CsvDownload from './CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
@@ -37,6 +39,11 @@ const translations = {
     fi: 'Käytönhallinta',
     se: '',
   },
+  csvDownload: {
+    en: 'Download all data as a CSV file',
+    fi: 'Lataa vastaukset csv-tiedostona',
+    se: 'Ladda ner svaren i en csv-fil',
+  },
 }
 
 export default () => {
@@ -46,6 +53,7 @@ export default () => {
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
+  const [showCsv, setShowCsv] = useState(false)
 
   const languageCode = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
@@ -117,6 +125,24 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
+          <div className="wide-header">
+            <Dropdown
+              className="button basic gray"
+              direction="left"
+              text={translations.csvDownload[languageCode]}
+              onClick={() => setShowCsv(!showCsv)}>
+              {showCsv ?
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <CsvDownload programmes={usersProgrammes} wantedData="written"/>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <CsvDownload programmes={usersProgrammes} wantedData="smileys"/>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              : null}
+            </Dropdown>
+          </div>
           <YearSelector />
           <div style={{ marginTop: '1em' }}>
             {usersProgrammes.length > 10 && (
