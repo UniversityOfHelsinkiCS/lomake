@@ -1,5 +1,9 @@
 $QUESTION_COUNT: 19;
 
+$lomake-background-red: #ff7f7f;
+$lomake-background-yellow: #ffffb1;
+$lomake-background-green: #9dff9d;
+
 .smiley-grid {
   display: grid;
   grid-template-columns: 5fr repeat($QUESTION_COUNT, 1fr) 0.5fr 1fr;
@@ -11,13 +15,39 @@ $QUESTION_COUNT: 19;
   width: 95vw;
 }
 
-.square {
+@mixin square-basics {
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   word-wrap: break-word;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.square {
+  @include square-basics;
+
+  &-red {
+    @include square-basics;
+    background-color: $lomake-background-red;
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+  &-yellow {
+    @include square-basics;
+    background-color: $lomake-background-yellow;
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+  &-green {
+    @include square-basics();
+    background-color: $lomake-background-green;
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 .sticky-header {

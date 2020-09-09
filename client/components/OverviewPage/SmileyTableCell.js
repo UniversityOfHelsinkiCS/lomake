@@ -9,12 +9,6 @@ const lightEmojiMap = {
   red: 'frown outline',
 }
 
-const backgroundColorMap = {
-  green: '#9dff9d',
-  yellow: '#ffffb1',
-  red: '#ff7f7f',
-}
-
 const SmileyTableCell = ({
   programmesName,
   programmesKey,
@@ -53,8 +47,7 @@ const SmileyTableCell = ({
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
-        className="square"
-        style={{ background: backgroundColorMap[lightAnswer] }}
+        className={`square-${lightAnswer}`}
       >
         <Icon
           name={lightEmojiMap[lightAnswer]}
