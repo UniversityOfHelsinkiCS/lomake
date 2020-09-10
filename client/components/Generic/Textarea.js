@@ -80,13 +80,11 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           {label}
           {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
         </label>
-        {
-          <Accordion
-            previousYearsAnswers={previousYearsAnswers}
-            EntityLastYearsAccordion={EntityLastYearsAccordion}
-            id={id}
-          />
-        }
+        <Accordion
+          previousYearsAnswers={previousYearsAnswers}
+          EntityLastYearsAccordion={EntityLastYearsAccordion}
+          id={id}
+        />
       </div>
       {viewOnly ? (
         <ReactMarkdown source={dataFromRedux} />
