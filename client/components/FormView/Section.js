@@ -1,5 +1,6 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
+import { basePath } from 'Utilities/common'
 
 const Section = ({ title, number, children, programmeKey }) => {
   return (
@@ -9,7 +10,11 @@ const Section = ({ title, number, children, programmeKey }) => {
           as="div"
           onChange={(inView) => {
             if (inView) {
-              window.history.pushState({}, '', `/tilannekuva/form/${programmeKey}#${number}`)
+              window.history.pushState(
+                {},
+                '',
+                `${window.location.origin}${basePath}form/${programmeKey}#${number}`
+              )
             }
           }}
         >
