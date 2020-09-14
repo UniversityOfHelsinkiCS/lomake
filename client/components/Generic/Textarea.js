@@ -21,7 +21,7 @@ const translations = {
   loading: {
     fi: 'Valmistellaan tekstieditoria, odota hetki...',
     se: '',
-    en: 'Preparing the texteditor, please want a moment...',
+    en: 'Preparing the texteditor, please wait a moment...',
   },
 }
 
