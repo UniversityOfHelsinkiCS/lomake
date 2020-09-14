@@ -138,6 +138,14 @@ const getLock = async (socket, payload, io) => {
 
   if (currentEditors[room] && currentEditors[room][field]) return
 
+  const timeoutId = setTimeout(() => {
+    currentEditors = {
+      ...currentEditors,
+      [room]: { ...currentEditors[room], [field]: undefined },
+    }
+    io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+  }, 15000)
+
   currentEditors = {
     ...currentEditors,
     [room]: {
@@ -146,7 +154,7 @@ const getLock = async (socket, payload, io) => {
         uid: currentUser.uid,
         firstname: currentUser.firstname,
         lastname: currentUser.lastname,
-        // timeoutId,
+        timeoutId,
       },
     },
   }
