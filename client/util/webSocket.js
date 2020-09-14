@@ -65,9 +65,18 @@ const socketMiddleware = () => {
           room,
         })
         break
+      case 'GET_LOCK':
+        if (!socket) socket = connect() // This really only happens when developing.
+
+        socket.emit('get_lock', {
+          field: action.field,
+          room,
+        })
+        break
       default:
         break
     }
+
     next(action)
   }
 }

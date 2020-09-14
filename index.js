@@ -70,6 +70,7 @@ initializeDatabaseConnection()
       )
       socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room, io))
       socket.on('leave', (room) => require('@util/websocketHandlers').leaveRoom(socket, room))
+      socket.on('get_lock', (room) => require('@util/websocketHandlers').getLock(socket, room, io))
     })
     // Require is here so we can delete it from cache when files change (*)
 

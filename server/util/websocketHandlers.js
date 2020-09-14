@@ -132,8 +132,31 @@ const updateField = async (socket, payload, io) => {
   }
 }
 
+const getLock = async (socket, payload, io) => {
+  const { field, room } = payload
+  const currentUser = await getCurrentUser(socket)
+
+  if (currentEditors[room] && currentEditors[room][field]) return
+
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: {
+        uid: currentUser.uid,
+        firstname: currentUser.firstname,
+        lastname: currentUser.lastname,
+        // timeoutId,
+      },
+    },
+  }
+
+  io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+}
+
 module.exports = {
   joinRoom,
   leaveRoom,
   updateField,
+  getLock,
 }

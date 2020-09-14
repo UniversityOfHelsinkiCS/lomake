@@ -10,6 +10,11 @@ export const updateFormField = (field, value, host) => ({
   host,
 })
 
+export const getLock = (field) => ({
+  type: 'GET_LOCK',
+  field,
+})
+
 export const setViewOnly = (value) => ({
   type: 'SET_VIEW_ONLY',
   value,

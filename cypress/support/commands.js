@@ -51,6 +51,12 @@ Cypress.Commands.add('givePermissions', (uid, programme, level) => {
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
   cy.server()
   cy.route('POST', '/socket.io/*').as('update')
+
+  // Get "edit-lock" for the textfield
+  cy.route('GET', '/socket.io/*').as('getLock')
+  cy.get(editorName).click()
+  cy.wait('@getLock')
+
   cy.get(editorName)
     .find('.editor-class')
     .find('.DraftEditor-root')

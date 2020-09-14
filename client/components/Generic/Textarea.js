@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField, getLock } from 'Utilities/redux/formReducer'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
@@ -9,11 +9,20 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
+import { Loader } from 'semantic-ui-react'
 
 const MAX_LENGTH = 1100
 
 const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
+}
+
+const translations = {
+  loading: {
+    fi: 'Valmistellaan tekstieditoria, odota hetki...',
+    se: '',
+    en: 'Preparing the texteditor, please want a moment...',
+  },
 }
 
 const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
@@ -34,18 +43,35 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const ref = useRef(null)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const readOnly =
+  const languageCode = useSelector((state) => state.language)
+  const [hasLock, setHasLock] = useState(true)
+  const [gettingLock, setGettingLock] = useState(false)
+  const someoneElseHasTheLock =
     currentEditors &&
     currentUser &&
     currentEditors[fieldName] &&
     currentEditors[fieldName].uid !== currentUser.uid
 
   useEffect(() => {
-    if (readOnly || (currentEditors && !currentEditors[fieldName])) {
+    const gotTheLock =
+      currentEditors &&
+      currentEditors[fieldName] &&
+      currentEditors[fieldName].uid === currentUser.uid
+
+    setHasLock(gotTheLock)
+    if (gettingLock && currentEditors[fieldName]) {
+      setGettingLock(false)
+      if (gotTheLock) ref.current.focusEditor()
+    }
+  }, [currentEditors])
+
+  useEffect(() => {
+    if (someoneElseHasTheLock || (currentEditors && !currentEditors[fieldName])) {
       setEditorState(editorStateFromRedux())
     }
   }, [dataFromRedux])
@@ -66,6 +92,13 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const [editorState, setEditorState] = useState(editorStateFromRedux())
 
   const length = editorState.getCurrentContent().getPlainText().length
+
+  const askForLock = () => {
+    if (!hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
+      setGettingLock(true)
+      dispatch(getLock(fieldName))
+    }
+  }
 
   return (
     <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
@@ -92,11 +125,18 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
         <ReactMarkdown source={dataFromRedux} />
       ) : (
         <>
-          <div style={{ marginTop: '1em' }}>
+          <div onClick={askForLock} style={{ marginTop: '1em' }}>
+            {!hasLock && gettingLock && (
+              <div style={{ marginBottom: '0.5em' }}>
+                <Loader size="small" active inline />
+                <span style={{ marginLeft: '1em' }}>{translations.loading[languageCode]}</span>
+              </div>
+            )}
             <Editor
+              ref={ref}
               wrapperClassName="wrapper-class"
-              editorClassName={!readOnly ? 'editor-class' : 'editor-class disabled'}
-              toolbarClassName={!readOnly ? 'toolbar-class' : 'toolbar-class disabled'}
+              editorClassName={!someoneElseHasTheLock ? 'editor-class' : 'editor-class disabled'}
+              toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
               editorState={editorState}
               onEditorStateChange={handleChange}
               handleBeforeInput={(val) => {
@@ -119,7 +159,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
                   options: ['unordered', 'ordered'],
                 },
               }}
-              readOnly={readOnly}
+              readOnly={!hasLock}
             />
           </div>
           <span style={{ color: length > MAX_LENGTH - 100 ? 'red' : undefined }}>

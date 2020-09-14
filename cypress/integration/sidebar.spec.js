@@ -39,9 +39,10 @@ describe('Sidebar tests', function () {
 
     cy.writeToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
-      _.repeat('A', 1500)
+      _.repeat('A', 1100)
     )
 
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').type('more more')
     getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then((res) =>
       expect(res).to.be.eq(1100)
     )
