@@ -9,7 +9,7 @@ const Section = ({ title, number, children, programmeKey }) => {
           as="div"
           onChange={(inView) => {
             if (inView) {
-              window.history.pushState({}, '', `/form/${programmeKey}#${number}`)
+              window.history.pushState({}, '', `/tilannekuva/form/${programmeKey}#${number}`)
             }
           }}
         >
