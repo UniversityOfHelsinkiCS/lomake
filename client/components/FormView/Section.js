@@ -1,18 +1,15 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
-import { colors } from 'Utilities/common'
-import { useHistory } from 'react-router'
 
 const Section = ({ title, number, children, programmeKey }) => {
-  const history = useHistory()
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
         <InView
           as="div"
-          onChange={(inView, entry) => {
+          onChange={(inView) => {
             if (inView) {
-              history.replace(`/form/${programmeKey}#${number}`)
+              window.history.pushState({}, '', `/form/${programmeKey}#${number}`)
             }
           }}
         >

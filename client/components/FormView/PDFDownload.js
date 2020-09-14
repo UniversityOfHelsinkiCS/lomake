@@ -4,9 +4,9 @@ import { setViewOnly } from 'Utilities/redux/formReducer'
 
 const translations = {
   downloadText: {
-    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona (Tuetut selaimet: Chrome ja Firefox)',
-    en: 'Print / Download answers as a PDF-file (Supported browsers: Chrome and Firefox)',
-    se: 'Skriv ut / Ladda ner svaren i en PDF-fil (Webbläsare som stöds: Chrome och Firefox) ',
+    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
+    en: 'Print / Download answers as a PDF-file',
+    se: 'Skriv ut / Ladda ner svaren i en PDF-fil',
   },
   setViewOnlyTrueText: {
     fi: 'Tulostus/PDF -näkymä',
@@ -39,7 +39,11 @@ const PDFDownload = () => {
 
   useEffect(() => {
     if (takingPDF) {
-      window.print()
+      try {
+        document.execCommand('print', false, null)
+      } catch (e) {
+        window.print()
+      }
       setTakingPDF(false)
       if (userCanEdit) handleViewOnlyChange(false)
     }

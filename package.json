@@ -1,7 +1,7 @@
 {
-  "name": "toskaboiler",
+  "name": "tilku",
   "version": "1.0.0",
-  "description": "Boilerplate for future toska frontend projects",
+  "description": "Opetushallinnon tilannekuvalomake",
   "main": "index.js",
   "scripts": {
     "dev": "docker-compose up",
