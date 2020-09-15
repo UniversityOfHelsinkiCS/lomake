@@ -11,6 +11,9 @@ export const images = {
 
 export const colors = {
   theme_blue: '#007290',
+  theme_background_red: '#ff7f7f',
+  theme_background_yellow: '#ffffb1',
+  theme_background_green: '#9dff9d',
 }
 
 export const sortedItems = (items, sorter, languageCode) => {

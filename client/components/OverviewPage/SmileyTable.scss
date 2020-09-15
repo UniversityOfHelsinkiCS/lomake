@@ -1,8 +1,8 @@
 $QUESTION_COUNT: 19;
 
-$lomake-background-red: #ff7f7f;
-$lomake-background-yellow: #ffffb1;
-$lomake-background-green: #9dff9d;
+$theme-background-red: #ff7f7f;
+$theme-background-yellow: #ffffb1;
+$theme-background-green: #9dff9d;
 
 .smiley-grid {
   display: grid;
@@ -29,21 +29,21 @@ $lomake-background-green: #9dff9d;
 
   &-red {
     @include square-basics;
-    background-color: $lomake-background-red;
+    background-color: $theme-background-red;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-yellow {
     @include square-basics;
-    background-color: $lomake-background-yellow;
+    background-color: $theme-background-yellow;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-green {
     @include square-basics();
-    background-color: $lomake-background-green;
+    background-color: $theme-background-green;
     &:hover {
       filter: brightness(0.8);
     }
