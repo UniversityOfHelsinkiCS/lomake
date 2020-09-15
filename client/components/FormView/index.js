@@ -8,64 +8,19 @@ import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import questions from '../../questions'
 import { colors } from 'Utilities/common'
-import { Button } from 'semantic-ui-react'
+import { Button, Dropdown } from 'semantic-ui-react'
 import StatusMessage from './StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
+import { translations } from 'Utilities/translations'
 import { Loader } from 'semantic-ui-react'
 import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
-import CSVDownload from './CSVDownload'
+import CsvDownload from '../Generic/CsvDownload'
 import PDFDownload from './PDFDownload'
 import YearSelector from 'Components/OverviewPage/YearSelector'
 
-const translations = {
-  title: {
-    en: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
-    fi: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
-    se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
-  },
-  p1: {
-    en:
-      'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
-    fi:
-      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
-    se:
-      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
-  },
-  p2: {
-    en:
-      'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
-    fi: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
-    se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
-  },
-  positive: {
-    en: 'No issues',
-    fi: 'Kunnossa',
-    se: 'I sin ordning',
-  },
-  neutral: {
-    en: 'Challenges identified and development underway',
-    fi: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
-    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
-  },
-  negative: {
-    en: 'Significant measures required/development areas not yet specified',
-    fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
-    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
-  },
-  noPermissions: {
-    en: 'No permissions. To get permissions, contact your study programmer leader.',
-    fi: 'Ei oikeuksia. Saadaksesi oikeudet, ota yhteyttä koulutusohjelmasi johtajaan.',
-    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
-  },
-  form: {
-    en: 'Form',
-    fi: 'Lomake',
-    se: 'Blankett',
-  },
-}
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -78,6 +33,8 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
   const currentRoom = useSelector((state) => state.room)
+  const programmeData = useSelector(({ form }) => form.data)
+  const [showCsv, setShowCsv] = useState(false)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
@@ -200,16 +157,23 @@ const FormView = ({ room }) => {
               />{' '}
               {translations.negative[languageCode]}
             </div>
-            <div style={{ display: 'flex' }}>
-              <CSVDownload
-                questions={questions}
-                programmeName={localizedProgramName}
-                year={selectedYear}
-              />
-              <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
-              <PDFDownload />
-            </div>
           </div>
+        </div>
+        <div style={{ marginTop: '2em' }}>
+          <Dropdown
+            className="button basic gray"
+            direction="left"
+            text={translations.csvDownload[languageCode]}
+            onClick={() => setShowCsv(!showCsv)}>
+            {showCsv ?
+              <Dropdown.Menu>
+                <Dropdown.Item content={<CsvDownload programme={programme} programmeData={programmeData} view="form" wantedData="written"/>} />
+                <Dropdown.Item content={<CsvDownload programme={programme} programmeData={programmeData} view="form" wantedData="smileys"/>} />
+              </Dropdown.Menu>
+            : null}
+          </Dropdown>
+          <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
+          <PDFDownload />
         </div>
         <Form programmeKey={programme.key} questions={questions} />
       </div>

@@ -5,7 +5,7 @@ import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import ProgramControlsContent from './ProgramControlsContent'
-import CsvDownload from './CsvDownload'
+import CsvDownload from '../Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
@@ -97,14 +97,14 @@ export default () => {
               className="button basic gray"
               direction="left"
               text={translations.csvDownload[languageCode]}
-              onClick={() => setShowCsv(!showCsv)}>
+              onClick={() => setShowCsv(true)}>
               {showCsv ?
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <CsvDownload programmes={usersProgrammes} wantedData="written"/>
+                    <CsvDownload programmeData={usersProgrammes} wantedData="written" view="overview"/>
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <CsvDownload programmes={usersProgrammes} wantedData="smileys"/>
+                    <CsvDownload programmeData={usersProgrammes} wantedData="smileys" view="overview"/>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               : null}
