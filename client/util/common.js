@@ -10,7 +10,10 @@ export const images = {
 }
 
 export const colors = {
-  theme_blue: '#007290'
+  theme_blue: '#007290',
+  theme_background_red: '#ff7f7f',
+  theme_background_yellow: '#ffffb1',
+  theme_background_green: '#9dff9d',
 }
 
 export const sortedItems = (items, sorter, languageCode) => {
@@ -26,6 +29,13 @@ export const sortedItems = (items, sorter, languageCode) => {
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
   })
   return sorted
+}
+
+export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCode) => {
+  let prog = ""
+  if (studyProgrammes) prog = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
+  else prog = programmeWithKey
+  return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
 }
 
 //https://stackoverflow.com/a/9083076

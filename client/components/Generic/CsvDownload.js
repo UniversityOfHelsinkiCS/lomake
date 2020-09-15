@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { translations } from '../../util/translations'
+import { programmeNameByKey as programmeName } from '../../util/common'
 import questions from '../../questions'
 
 
-const CsvDownload = React.memo(
-  ({ programmes, wantedData }) => {
+const CsvDownload =
+  ({ programmeData, wantedData, view, programme }) => {
   const languageCode = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
-  const [linkText, setLinkText] = useState([])
-
-  useEffect(() => {
-    if (wantedData === 'written') setLinkText(translations.writtenAnswers[languageCode])
-    if (wantedData === 'smileys') setLinkText(translations.smileys[languageCode])
-  }, [])
   
-  const handleData = (answers, oldAnswers, year, programmes) => {
+  const handleData = (answers, oldAnswers, year, programmeData) => {
 
-    const selectedAnswers = year === new Date().getFullYear()
-      ? answers.data
-      : oldAnswers.data.filter((a) => a.year === year)
-   
-    if (!selectedAnswers) return [[],[]]
-    
+    // Create an array of arrays, with questions at index 0, and question_ids at index 1
     let csvData = questions.reduce(
       (acc, cur) => {
         const newArray = cur.parts.reduce(
@@ -54,19 +44,21 @@ const CsvDownload = React.memo(
     csvData[0].reverse()
     csvData[1].reverse()
 
+    // written answers for the "Measures"-question
     const getMeasuresAnswer = (data) => {
       const questionId = 'measures'
       if (!data) return ''
-      if (!!data[`${questionId}_text`]) return selectedAnswers[`${id}_text`]
+      if (!!data[`${questionId}_text`]) return data[`${id}_text`]
   
       if (!!data[`${questionId}_1_text`]) {
         let measures = ''
         let i = 1
         while (i < 6) {
           if (!!data[`${questionId}_${i}_text`])
-            measures += `${i}) ${data[`${questionId}_${i}_text`]}  `
+            measures += `${i}) ${data[`${questionId}_${i}_text`]}  \n`
           i++
         }
+
         return measures
       }
 
@@ -81,6 +73,7 @@ const CsvDownload = React.memo(
         const questionText = rawData[`${questionId}_text`]
         if (questionText) {
           const cleanedText = questionText
+            .replace(/,/g, '\,')
             .replace(/"/g, '\'')
             .replace(/\n\n/g, '\n')
             .replace(/. +\n/g, '.\n')
@@ -116,32 +109,42 @@ const CsvDownload = React.memo(
       return answerArray
     }
 
-    selectedAnswers.forEach((programme) => {
-      let cleanedData = []
+    if (view == "form") {
       let answersArray = []
-      const rawData = programme.data
-      const prog = programmes.find((a) => a.key === programme.programme)
-      if (prog) cleanedData = [...cleanedData, prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']]
-      
-      if (wantedData === 'written') answersArray = getWrittenAnswers(rawData)
-      else if (wantedData === 'smileys') answersArray = getSmileyAnswers(rawData)
-      
-      cleanedData = [...cleanedData, ...answersArray]
-      csvData = [...csvData, cleanedData]
-    })
+      if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
+      else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)      
+      const dataRow = [programmeName(null, programme, languageCode), ...answersArray]
+      csvData = [...csvData, dataRow]
+
+    } else if (view == "overview") {
+
+      const selectedAnswers = year === new Date().getFullYear()
+        ? answers.data
+        : oldAnswers.data.filter((a) => a.year === year)
+
+      if (!selectedAnswers) return [[],[]]
+
+      selectedAnswers.forEach((programme) => {
+        let answersArray = []
+        if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
+        else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
+        const dataRow = [programmeName(programmeData, programme, languageCode), ...answersArray]
+        csvData = [...csvData, dataRow]
+      })  
+    }
 
     return csvData
   }
 
   return (
     <CSVLink
-      filename={`${year}_${translations.allData[wantedData][languageCode]}_.csv`} 
-      data={handleData(answers, oldAnswers, year, programmes)} 
-      separator=";"
+      filename={`${year}_${translations.csvFile[view][wantedData][languageCode]}_.csv`} 
+      data={handleData(answers, oldAnswers, year, programmeData)} 
+      separator=","
     >        
-      {linkText}
+      {translations.csvLink[wantedData][languageCode]}
     </CSVLink>
   )
-})
+}
 
 export default CsvDownload
