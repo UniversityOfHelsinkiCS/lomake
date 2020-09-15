@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { translations } from '../../util/translations'
@@ -7,11 +7,21 @@ import questions from '../../questions'
 
 
 const CsvDownload =
-  ({ programmeData, wantedData, view, programme }) => {
+  ({ wantedData, view, programme }) => {
   const languageCode = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
+  const currentUser = useSelector((state) => state.currentUser)
+  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const programmeData = useSelector(({ form }) => form.data)
+
+  const usersProgrammes = useMemo(() => {
+    const usersPermissionsKeys = Object.keys(currentUser.data.access)
+    return currentUser.data.admin
+      ? programmes
+      : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
+  }, [programmes, currentUser.data])
   
   const handleData = (answers, oldAnswers, year, programmeData) => {
 
@@ -128,7 +138,7 @@ const CsvDownload =
         let answersArray = []
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
         else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
-        const dataRow = [programmeName(programmeData, programme, languageCode), ...answersArray]
+        const dataRow = [programmeName(usersProgrammes, programme, languageCode), ...answersArray]
         csvData = [...csvData, dataRow]
       })  
     }

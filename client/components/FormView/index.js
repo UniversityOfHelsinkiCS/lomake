@@ -33,7 +33,6 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
   const currentRoom = useSelector((state) => state.room)
-  const programmeData = useSelector(({ form }) => form.data)
   const [showCsv, setShowCsv] = useState(false)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
@@ -167,8 +166,8 @@ const FormView = ({ room }) => {
             onClick={() => setShowCsv(!showCsv)}>
             {showCsv ?
               <Dropdown.Menu>
-                <Dropdown.Item content={<CsvDownload programme={programme} programmeData={programmeData} view="form" wantedData="written"/>} />
-                <Dropdown.Item content={<CsvDownload programme={programme} programmeData={programmeData} view="form" wantedData="smileys"/>} />
+                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written"/>} />
+                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="smileys"/>} />
               </Dropdown.Menu>
             : null}
           </Dropdown>
