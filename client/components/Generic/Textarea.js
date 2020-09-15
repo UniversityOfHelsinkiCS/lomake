@@ -71,10 +71,10 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }, [currentEditors])
 
   useEffect(() => {
-    if (someoneElseHasTheLock || (currentEditors && !currentEditors[fieldName])) {
+    if (!hasLock) {
       setEditorState(editorStateFromRedux())
     }
-  }, [dataFromRedux])
+  }, [dataFromRedux, hasLock])
 
   const handleChange = (value) => {
     setEditorState(value)
