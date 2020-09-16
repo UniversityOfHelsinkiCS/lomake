@@ -153,7 +153,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               toolbar={{
                 options: ['inline', 'list', 'history'],
                 inline: {
-                  options: ['bold', 'underline'],
+                  options: ['bold'],
                 },
                 list: {
                   options: ['unordered', 'ordered'],
