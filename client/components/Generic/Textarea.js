@@ -105,6 +105,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <label
           style={{
+            margin: '1em 0',
             fontStyle: 'bolder',
             fontSize: '1.1em',
             minWidth: '50%',
