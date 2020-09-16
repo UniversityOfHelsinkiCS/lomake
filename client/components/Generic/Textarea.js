@@ -131,6 +131,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               </div>
             )}
             <Editor
+              editorStyle={{ wordBreak: 'break-word', width: '100%' }}
               ref={ref}
               wrapperClassName="wrapper-class"
               editorClassName={!someoneElseHasTheLock ? 'editor-class' : 'editor-class disabled'}
