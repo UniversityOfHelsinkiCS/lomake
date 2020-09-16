@@ -54,6 +54,26 @@ const CsvDownload =
     csvData[0].reverse()
     csvData[1].reverse()
 
+    const cleanText = (string) => {
+      const cleanedText = string
+      .replace(/,/g, '\,')
+      .replace(/"/g, '\'')
+      .replace(/\n\n/g, '\n')
+      .replace(/. +\n/g, '.\n')
+      .replace(/ {4}- /g, '')
+      .replace(/^- /g, '')
+      .replace(/\n- /g, '\n')
+      .replace(/ +- +/g, '\n')
+      .replace(/\r/g, ' ')
+      .replace(/;/g, ',')
+      .replace(/\*\*/g, '')
+      .replace(/&#8259;/g, ' ')
+      .replace(/ *• */g, '')
+      .replace(/_x000D_/g, '\n')
+
+      return cleanedText
+    }
+
     // written answers for the "Measures"-question
     const getMeasuresAnswer = (data) => {
       const questionId = 'measures'
@@ -65,7 +85,7 @@ const CsvDownload =
         let i = 1
         while (i < 6) {
           if (!!data[`${questionId}_${i}_text`])
-            measures += `${i}) ${data[`${questionId}_${i}_text`]}  \n`
+            measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
           i++
         }
 
@@ -82,21 +102,7 @@ const CsvDownload =
 
         const questionText = rawData[`${questionId}_text`]
         if (questionText) {
-          const cleanedText = questionText
-            .replace(/,/g, '\,')
-            .replace(/"/g, '\'')
-            .replace(/\n\n/g, '\n')
-            .replace(/. +\n/g, '.\n')
-            .replace(/ {4}- /g, '')
-            .replace(/^- /g, '')
-            .replace(/\n- /g, '\n')
-            .replace(/ +- +/g, '\n')
-            .replace(/\r/g, ' ')
-            .replace(/;/g, ',')
-            .replace(/\*\*/g, '')
-            .replace(/&#8259;/g, ' ')
-            .replace(/ *• */g, '')
-            .replace(/_x000D_/g, '\n')
+          const cleanedText = cleanText(questionText)
     
             validValues = [...validValues, cleanedText]
           }
