@@ -23,6 +23,11 @@ export default () => {
       fi: 'OSPA',
       se: 'OSPA',
     },
+    language: {
+      en: 'English',
+      fi: 'Suomi',
+      se: 'Svenska',
+    },
   }
 
   const warning =
@@ -89,7 +94,12 @@ export default () => {
         </a>
       </Menu.Item>
       <Menu.Menu>
-        <Dropdown data-cy="navBar-localeDropdown" item icon="globe" simple>
+        <Dropdown
+          data-cy="navBar-localeDropdown"
+          item
+          text={`${translations.language[languageCode]} (${languageCode.toUpperCase()}) `}
+          simple
+        >
           <Dropdown.Menu>
             <Dropdown.Item
               data-cy="navBar-localeOption-fi"
