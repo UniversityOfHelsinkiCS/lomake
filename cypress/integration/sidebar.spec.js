@@ -47,7 +47,7 @@ describe('Sidebar tests', function () {
       expect(res).to.be.eq(1100)
     )
 
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: red;"]').then(
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: rgb(230, 78, 64);"]').then(
       (el) => {
         expect(el.text()).to.be.eq('1100/1000')
       }
