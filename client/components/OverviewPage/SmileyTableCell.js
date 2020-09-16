@@ -49,32 +49,32 @@ const SmileyTableCell = ({
       <div
         data-cy={`${programmesKey}-${questionId}`}
         className={`square-${lightAnswer}`}
+        onClick={() =>
+          setModalData({
+            header: questions.reduce((acc, cur) => {
+              if (acc) return acc
+              const header = cur.parts.reduce((acc, cur) => {
+                if (acc) return acc
+
+                if (cur.id === questionId) return cur.description[languageCode]
+
+                return acc
+              }, '')
+
+              if (header) return header
+
+              return acc
+            }, ''),
+            programme: programmesName,
+            content: textAnswer,
+            color: lightAnswer,
+          })
+        }
       >
         <Icon
           name={lightEmojiMap[lightAnswer]}
-          style={{ cursor: 'pointer', margin: '0 auto' }}
+          style={{ margin: '0 auto' }}
           size="big"
-          onClick={() =>
-            setModalData({
-              header: questions.reduce((acc, cur) => {
-                if (acc) return acc
-                const header = cur.parts.reduce((acc, cur) => {
-                  if (acc) return acc
-
-                  if (cur.id === questionId) return cur.description[languageCode]
-
-                  return acc
-                }, '')
-
-                if (header) return header
-
-                return acc
-              }, ''),
-              programme: programmesName,
-              content: textAnswer,
-              color: lightAnswer,
-            })
-          }
         />
       </div>
     )
@@ -86,35 +86,34 @@ const SmileyTableCell = ({
         data-cy={`${programmesKey}-${questionId}`}
         className="square"
         style={{ background: colors.background_blue }}
+        onClick={() =>
+          setModalData({
+            header: questions.reduce((acc, cur) => {
+              if (acc) return acc
+              const header = cur.parts.reduce((acc, cur) => {
+                if (acc) return acc
+
+                if (cur.id === questionId) {
+                  if (cur.description) return cur.description[languageCode]
+                  return cur.label[languageCode]
+                }
+
+                return acc
+              }, '')
+
+              if (header) return header
+
+              return acc
+            }, ''),
+            programme: programmesName,
+            content: textAnswer,
+            color: lightAnswer,
+          })
+        }
       >
         <Icon
           name="discussions"
-          style={{ cursor: 'pointer' }}
           size="big"
-          onClick={() =>
-            setModalData({
-              header: questions.reduce((acc, cur) => {
-                if (acc) return acc
-                const header = cur.parts.reduce((acc, cur) => {
-                  if (acc) return acc
-
-                  if (cur.id === questionId) {
-                    if (cur.description) return cur.description[languageCode]
-                    return cur.label[languageCode]
-                  }
-
-                  return acc
-                }, '')
-
-                if (header) return header
-
-                return acc
-              }, ''),
-              programme: programmesName,
-              content: textAnswer,
-              color: lightAnswer,
-            })
-          }
         />
       </div>
     )
