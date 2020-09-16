@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { Icon, Input, Popup, Button, Message } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
