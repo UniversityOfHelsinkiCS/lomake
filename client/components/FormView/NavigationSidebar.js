@@ -1,10 +1,11 @@
 import React from 'react'
-import questions from '../../questions.json'
 import { Message, Icon } from 'semantic-ui-react'
-import { romanize } from 'Utilities/common'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
+import { romanize, colors } from 'Utilities/common'
+import questions from '../../questions.json'
+
 
 const translations = {
   OK: {
@@ -59,7 +60,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                 style={{
                   fontWeight: active ? 'bold' : undefined,
                   padding: '1em',
-                  background: active ? '#e0e0e0' : undefined,
+                  background: active ? colors.background_gray : undefined,
                   borderRadius: '5px',
                   margin: '1px',
                 }}

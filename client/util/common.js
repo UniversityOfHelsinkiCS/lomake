@@ -11,9 +11,14 @@ export const images = {
 
 export const colors = {
   theme_blue: '#007290',
-  theme_background_red: '#ff7f7f',
-  theme_background_yellow: '#ffffb1',
-  theme_background_green: '#9dff9d',
+  background_beige: 'rgba(255, 205, 76, 0.18)',
+  background_white: '#FFFFFF',
+  background_blue: '#daedf4',
+  background_gray: '#f5f5f5',
+  background_black: '#1B1C1D',
+  background_red: '#ff7f7f',
+  background_yellow: '#ffffb1',
+  background_green: '#9dff9d',
 }
 
 export const sortedItems = (items, sorter, languageCode) => {

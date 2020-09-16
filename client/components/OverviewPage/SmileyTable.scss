@@ -1,8 +1,9 @@
 $QUESTION_COUNT: 19;
 
-$theme-background-red: #ff7f7f;
-$theme-background-yellow: #ffffb1;
-$theme-background-green: #9dff9d;
+$background-red: #ff7f7f;
+$background-yellow: #ffffb1;
+$background-green: #9dff9d;
+$background-white: #FFFFFF;
 
 .smiley-grid {
   display: grid;
@@ -29,21 +30,21 @@ $theme-background-green: #9dff9d;
 
   &-red {
     @include square-basics;
-    background-color: $theme-background-red;
+    background-color: $background-red;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-yellow {
     @include square-basics;
-    background-color: $theme-background-yellow;
+    background-color: $background-yellow;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-green {
     @include square-basics();
-    background-color: $theme-background-green;
+    background-color: $background-green;
     &:hover {
       filter: brightness(0.8);
     }
@@ -53,8 +54,8 @@ $theme-background-green: #9dff9d;
 .sticky-header {
   position: sticky;
   top: 0;
-  background-color: white;
-  box-shadow: 0px 0px 2px 2px white; //little white shadow to cover the shadow of the .square
+  background-color: $background-white;
+  box-shadow: 0px 0px 2px 2px $background-white; //little white shadow to cover the shadow of the .square
   padding-top: 10px;
   z-index: 4;
 }

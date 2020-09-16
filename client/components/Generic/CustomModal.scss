@@ -1,3 +1,5 @@
+$background-white: #FFFFFF;
+
 .customModal-dimmer {
   position: fixed;
   z-index: 5;
@@ -15,7 +17,7 @@
   border-radius: 5px;
   width: 80%;
   max-width: 1100px;
-  background: white;
+  background: $background-white;
 }
 
 .title-and-close {

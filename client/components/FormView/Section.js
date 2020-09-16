@@ -1,6 +1,7 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
-import { basePath } from 'Utilities/common'
+import { basePath, colors } from 'Utilities/common'
+
 
 const Section = ({ title, number, children, programmeKey }) => {
   return (
@@ -24,7 +25,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               fontSize: '2em',
               padding: '1.5em 0.5em',
               margin: '7em 0em 1em 0em',
-              background: '#1B1C1D',
+              background: colors.background_black,
               borderRadius: '5px',
               color: 'white',
             }}

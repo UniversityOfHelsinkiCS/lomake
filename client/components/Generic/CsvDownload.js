@@ -1,8 +1,8 @@
 import React, {useMemo} from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { translations } from '../../util/translations'
-import { programmeNameByKey as programmeName } from '../../util/common'
+import { translations } from 'Utilities/translations'
+import { programmeNameByKey as programmeName } from 'Utilities/common'
 import questions from '../../questions'
 
 

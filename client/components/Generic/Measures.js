@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
+import { colors } from 'Utilities/common'
 
 const translations = {
   measureLabel: {
@@ -72,7 +73,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
         className="measures-label"
         style={{
           lineHeight: 2,
-          backgroundColor: '#daedf4',
+          backgroundColor: colors.background_blue,
           padding: '1em',
           borderRadius: '5px',
           margin: '1em 0',

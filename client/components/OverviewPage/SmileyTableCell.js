@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import questions from '../../questions.json'
+import { colors } from 'Utilities/common'
 
 const lightEmojiMap = {
   green: 'smile outline',
@@ -84,7 +85,7 @@ const SmileyTableCell = ({
       <div
         data-cy={`${programmesKey}-${questionId}`}
         className="square"
-        style={{ background: '#daedf4' }}
+        style={{ background: colors.background_blue }}
       >
         <Icon
           name="discussions"
@@ -123,7 +124,7 @@ const SmileyTableCell = ({
     <div
       data-cy={`${programmesKey}-${questionId}`}
       className="square"
-      style={{ background: 'whitesmoke' }}
+      style={{ background: colors.background_gray }}
     />
   )
 }

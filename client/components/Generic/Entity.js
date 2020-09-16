@@ -1,13 +1,14 @@
 import React from 'react'
-import Streetlights from './Streetlights'
-import Textarea from './Textarea'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
+import { Divider } from 'semantic-ui-react'
+import Streetlights from './Streetlights'
+import Textarea from './Textarea'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
-import { Divider } from 'semantic-ui-react'
+import { colors } from 'Utilities/common'
 
 const translations = {
   streetLightsLabel: {
@@ -73,7 +74,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         className="entity-description"
         style={{
           lineHeight: 2,
-          backgroundColor: '#ffcd4c2e',
+          backgroundColor: colors.background_beige,
           padding: '1em',
           borderRadius: '5px',
           margin: '1em 0',
