@@ -65,7 +65,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
         <div style={{ maxWidth: '400px' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+            {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
           </h3>
         </div>
         {!noLight && <Streetlights id={id} />}

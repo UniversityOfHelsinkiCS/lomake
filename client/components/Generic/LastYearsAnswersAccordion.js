@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { colors } from 'Utilities/common'
 
 const translations = {
   expandText: {
@@ -28,7 +29,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
       <span
         style={{
           cursor: 'pointer',
-          color: '#4183C4',
+          color: colors.blue,
           float: 'right',
         }}
         onClick={() => setExpanded(!expanded)}

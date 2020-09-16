@@ -27,7 +27,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               margin: '7em 0em 1em 0em',
               background: colors.background_black,
               borderRadius: '5px',
-              color: 'white',
+              color: colors.white,
             }}
           >
             {number || '0'} - {title}

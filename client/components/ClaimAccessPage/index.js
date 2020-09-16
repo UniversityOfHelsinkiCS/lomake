@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTokenAction, claimTokenAction } from 'Utilities/redux/accessTokenReducer'
 import { Button, Message, Icon, Input, Loader, List } from 'semantic-ui-react'
+import { colors } from 'Utilities/common'
 
 const translations = {
   prompt: {
@@ -124,7 +125,7 @@ export default ({ url }) => {
 
   if (!token.data && token.error)
     return (
-      <span data-cy="invalidTokenError" style={{ color: 'red' }}>
+      <span data-cy="invalidTokenError" style={{ color: colors.red }}>
         {translations.invalidToken[languageCode]}
       </span>
     )

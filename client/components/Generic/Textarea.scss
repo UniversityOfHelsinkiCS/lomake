@@ -1,5 +1,8 @@
+$background-light-gray: #f8f8f8;
+$background-blue: #dff0ff;
+
 .editor-class {
-  background-color: #f8f8f8;
+  background-color: $background-light-gray;
   padding: 1em;
   width: 100%;
   height: auto;
@@ -22,11 +25,11 @@
   min-width: 10px;
   min-height: 220px;
   border: 0;
-  background-color: #f8f8f8;
+  background-color: $background-light-gray;
   margin: 0;
 
   &.disabled {
-    background-color: rgb(36, 148, 255);
+    background-color: $background-blue;
 
     div {
       // Hides the actual buttons (like bold,underline and so on)

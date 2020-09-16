@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
+import { colors } from 'Utilities/common'
 
 const translations = {
   downloadText: {
@@ -50,7 +51,7 @@ const PDFDownload = () => {
   }, [takingPDF])
 
   return (
-    <span style={{ cursor: 'pointer', color: '#4183C4' }} onClick={openViewModeAndPrintPdf}>
+    <span style={{ cursor: 'pointer', color: colors.blue }} onClick={openViewModeAndPrintPdf}>
       {translations.downloadText[languageCode]}
     </span>
   )

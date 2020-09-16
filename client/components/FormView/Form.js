@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Section from './Section'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
-import { useSelector, useDispatch } from 'react-redux'
-import { romanize } from 'Utilities/common'
+import { colors, romanize } from 'Utilities/common'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 
 const Form = ({ questions, programmeKey }) => {
@@ -35,7 +35,7 @@ const Form = ({ questions, programmeKey }) => {
       ? {
           paddingLeft: '1.5em',
           borderLeft: '5px solid',
-          borderColor: '#1B1C1D',
+          borderColor: colors.background_black,
           marginBottom: '0',
         }
       : {}

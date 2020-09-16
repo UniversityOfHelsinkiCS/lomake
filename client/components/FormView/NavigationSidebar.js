@@ -66,7 +66,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                 }}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: 'black' }}>
+                  <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
                     {romanNumeral} - {title}
                   </Link>
                 </div>
@@ -95,10 +95,10 @@ const NavigationSidebar = ({ programmeKey }) => {
                     }, null)
 
                     const getColor = () => {
-                      if (status === 'OK') return 'green'
-                      if (status === 'EMPTY' && !required) return 'black'
+                      if (status === 'OK') return colors.green
+                      if (status === 'EMPTY' && !required) return colors.black
 
-                      return 'red'
+                      return colors.red
                     }
 
                     return (

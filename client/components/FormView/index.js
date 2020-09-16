@@ -119,7 +119,7 @@ const FormView = ({ room }) => {
             <img className="img-responsive" src={rypsi_image} />
           </div>
 
-          <h1 style={{ color: colors.theme_blue }}>{localizedProgramName}</h1>
+          <h1 style={{ color: colors.blue }}>{localizedProgramName}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {translations.title[languageCode]} {selectedYear}
           </h3>
@@ -171,7 +171,7 @@ const FormView = ({ room }) => {
               </Dropdown.Menu>
             : null}
           </Dropdown>
-          <span style={{ margin: '0 0.5em', color: 'grey' }}>|</span>
+          <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
           <PDFDownload />
         </div>
         <Form programmeKey={programme.key} questions={questions} />

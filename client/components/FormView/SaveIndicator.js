@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Message, Icon } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
+import { colors } from 'Utilities/common'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 
 export default function SaveIndicator() {
@@ -74,7 +75,7 @@ export default function SaveIndicator() {
       <>
         <Message
           negative
-          icon={<Icon color="red" name="exclamation" />}
+          icon={<Icon color={colors.red} name="exclamation" />}
           style={{
             position: 'fixed',
             left: '50%',

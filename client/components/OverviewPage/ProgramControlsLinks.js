@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessTokenReducer'
 import { basePath } from '@root/config/common'
 import { isSuperAdmin } from '@root/config/common'
+import { colors } from 'Utilities/common'
 
 const translations = {
   editPrompt: {
@@ -103,7 +104,7 @@ const OwnerAccordionLinks = ({ programme }) => {
             data-cy={`${programme}-${type === 'READ' ? 'viewlink' : 'editlink'}-reset`}
             style={{
               cursor: 'pointer',
-              color: 'red',
+              color: colors.red,
               textDecoration: 'underline',
               marginLeft: '2em',
               width: '300px',

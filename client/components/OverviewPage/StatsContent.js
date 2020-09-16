@@ -4,6 +4,7 @@ import positiveEmoji from 'Assets/sunglasses.png'
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import ReactWordcloud from 'react-wordcloud'
+import { colors } from 'Utilities/common'
 
 const TO_REPLACE = ['.', ':', '"', '’', '(', ')', '/', '-', ';', '?', '_x000d_', '•']
 const MIN_COUNT = 5
@@ -70,17 +71,17 @@ const StatsContent = ({ stats, answers, questionId }) => {
             center={[50, 50]}
             data={[
               {
-                color: '#9dff9d',
+                color: colors.background_green,
                 title: 'Green',
                 value: stats.green || 0,
               },
               {
-                color: '#ffffb1',
+                color: colors.background_yellow,
                 title: 'Yellow',
                 value: stats.yellow || 0,
               },
               {
-                color: '#ff7f7f',
+                color: colors.background_red,
                 title: 'Red',
                 value: stats.red || 0,
               },

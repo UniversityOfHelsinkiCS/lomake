@@ -10,15 +10,23 @@ export const images = {
 }
 
 export const colors = {
-  theme_blue: '#007290',
-  background_beige: 'rgba(255, 205, 76, 0.18)',
-  background_white: '#FFFFFF',
-  background_blue: '#daedf4',
-  background_gray: '#f5f5f5',
-  background_black: '#1B1C1D',
+  background_blue: '#dff0ff',
   background_red: '#ff7f7f',
   background_yellow: '#ffffb1',
   background_green: '#9dff9d',
+  background_white: '#FFFFFF',
+  background_beige: 'rgba(255, 205, 76, 0.18)',
+  background_light_gray: '#f8f8f8',
+  background_gray: '#f5f5f5',
+  background_black: '#1B1C1D',
+  blue: '#0E6EB8',
+  red: '#e64e40',
+  yellow: '#FFD700',
+  green: '#00944b',
+  white: '#FFFFFF',
+  gray: '#A0A0A0',
+  black: '#1B1C1D',
+  dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
 
 export const sortedItems = (items, sorter, languageCode) => {

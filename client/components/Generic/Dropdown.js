@@ -1,6 +1,7 @@
 import React from 'react'
 import { requiredFormIds } from 'Utilities/common'
 import { Dropdown as SemanticDropdown } from 'semantic-ui-react'
+import { colors } from 'Utilities/common'
 
 const Dropdown = ({ id, value, onChange, label, options, search }) => {
   const required = requiredFormIds.indexOf(id) !== -1
@@ -8,7 +9,7 @@ const Dropdown = ({ id, value, onChange, label, options, search }) => {
     <div className="form-dropdown">
       <label>
         {label}
-        {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+        {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
       </label>
       <SemanticDropdown
         id={id}

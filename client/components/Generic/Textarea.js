@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField, getLock } from 'Utilities/redux/formReducer'
+import { Loader } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
@@ -9,7 +10,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
-import { Loader } from 'semantic-ui-react'
+import { colors } from 'Utilities/common'
 
 const MAX_LENGTH = 1100
 
@@ -112,7 +113,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           }}
         >
           {label}
-          {required && <span style={{ color: 'red', marginLeft: '0.2em' }}>*</span>}
+          {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
         </label>
         <Accordion
           previousYearsAnswers={previousYearsAnswers}
@@ -162,7 +163,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               readOnly={!hasLock}
             />
           </div>
-          <span style={{ color: length > MAX_LENGTH - 100 ? 'red' : undefined }}>
+          <span style={{ color: length > MAX_LENGTH - 100 ? colors.red : undefined }}>
             {length}/{MAX_LENGTH - 100}
           </span>
           <CurrentEditor fieldName={fieldName} />
