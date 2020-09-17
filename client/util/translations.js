@@ -23,6 +23,16 @@ export const translations = {
     en: 'Question id',
     se: 'Question id',
   },
+  programmeHeader: {
+    fi: 'Koulutusohjelma',
+    en: 'Programme',
+    se: 'Program',
+  },
+  faculty: {
+    fi: 'Tiedekunta',
+    en: 'Faculty',
+    se: 'Fakultet',
+  },
   csvFile: {
     form: {
       written: {

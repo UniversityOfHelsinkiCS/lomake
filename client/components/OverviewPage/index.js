@@ -35,6 +35,7 @@ export default () => {
     setFilter(value)
   }
 
+
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
     return currentUser.data.admin

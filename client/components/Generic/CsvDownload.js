@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { translations } from 'Utilities/translations'
 import { programmeNameByKey as programmeName } from 'Utilities/common'
+import { keysWithFaculties } from 'Utilities/common'
 import questions from '../../questions'
 
 
@@ -15,6 +16,8 @@ const CsvDownload =
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const programmeData = useSelector(({ form }) => form.data)
+  const facultiesData = useSelector(({ faculties }) => faculties.data)
+
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
@@ -49,8 +52,10 @@ const CsvDownload =
       },
       [[], []]
     )
-    csvData[0].push(translations.questions[languageCode])
-    csvData[1].push(translations.questionIds[languageCode])
+    csvData[0].push(translations.faculty[languageCode])
+    csvData[0].push(translations.programmeHeader[languageCode])
+    csvData[1].push("//")
+    csvData[1].push("//")
     csvData[0].reverse()
     csvData[1].reverse()
 
@@ -69,6 +74,7 @@ const CsvDownload =
       .replace(/\*\*/g, '')
       .replace(/&#8259;/g, ' ')
       .replace(/ *• */g, '')
+      .replace(/· /g, '')
       .replace(/_x000D_/g, '\n')
 
       return cleanedText
@@ -97,39 +103,43 @@ const CsvDownload =
 
     const getWrittenAnswers = (rawData) => {
 
-      const answersArray = csvData[1].map((questionId) => {
+      const answersArray = csvData[1].slice(2).map((questionId) => {
         let validValues = []
 
         const questionText = rawData[`${questionId}_text`]
         if (questionText) {
           const cleanedText = cleanText(questionText)
-    
             validValues = [...validValues, cleanedText]
           }
-        if (questionId === 'measures') validValues = [...validValues, getMeasuresAnswer(rawData)]  
+        if (questionId === 'measures') validValues = [...validValues, getMeasuresAnswer(rawData)]
         return validValues.join('\n')
       })
-      answersArray.shift()
+
       return answersArray
     }
 
     const getSmileyAnswers = (rawData) => {
-      const answerArray = csvData[1].map((questionId) => {
+      const answerArray = csvData[1].slice(2).map((questionId) => {
         const smileyText = rawData[`${questionId}_light`]
         if (smileyText == 'green') return translations.green[languageCode]
         if (smileyText == 'yellow') return translations.yellow[languageCode]
         if (smileyText == 'red') return translations.red[languageCode]
         return ''
       })
-      answerArray.shift()
+
       return answerArray
     }
+
+    const faculties = keysWithFaculties(facultiesData)
 
     if (view == "form") {
       let answersArray = []
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
-      else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)      
-      const dataRow = [programmeName(null, programme, languageCode), ...answersArray]
+      else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)
+
+      const name = programmeName(null, programme, languageCode)
+      const faculty = faculties.get(programme.key)
+      const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]
 
     } else if (view == "overview") {
@@ -144,7 +154,10 @@ const CsvDownload =
         let answersArray = []
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
         else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
-        const dataRow = [programmeName(usersProgrammes, programme, languageCode), ...answersArray]
+
+        const name = programmeName(usersProgrammes, programme, languageCode)
+        const faculty = faculties.get(programme.programme)
+        const dataRow = [name, faculty, ...answersArray]
         csvData = [...csvData, dataRow]
       })  
     }

@@ -51,6 +51,22 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCo
   return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
 }
 
+export const keysWithFaculties = (faculties) => {
+  let programmesWithFaculties = new Map()
+  faculties.forEach((faculty) => {
+    faculty.programmes.forEach((programmeKey) => programmesWithFaculties.set(programmeKey, faculty.name))
+  })
+  return programmesWithFaculties
+}
+
+export const facultiesWithKeys = (faculties) => {
+  let facultiesWithProgrammes = new Map()
+  faculties.forEach((faculty) => {
+    faculty.programmes.forEach((programmeKey) => facultiesWithProgrammes.set(faculty.name, programmeKey))
+  })
+  return facultiesWithProgrammes
+}
+
 //https://stackoverflow.com/a/9083076
 export function romanize(num) {
   if (isNaN(num)) return NaN
