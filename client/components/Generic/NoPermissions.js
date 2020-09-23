@@ -4,7 +4,7 @@ import { translations } from 'Utilities/translations'
 
 const NoPermissions = ({ languageCode }) => (
   <Header
-    data-cy="noPermissions-message"
+    data-cy="no-permissions-message"
     style={{ textAlign: 'center', paddingTop: '5em' }}
     as="h2"
     disabled
