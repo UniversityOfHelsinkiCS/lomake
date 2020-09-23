@@ -105,7 +105,7 @@ export default () => {
       <Accordion fluid styled className="question-accordion">
         <Accordion.Title active>
           <Grid>
-            <Grid.Column width={1} className="question-caret"/>
+            <Grid.Column width={1} className="left-header"/>
             <Grid.Column width={6}>
               {translations.questions[languageCode]}
             </Grid.Column>
@@ -123,6 +123,7 @@ export default () => {
           <Question
             key={question.id}
             answers={allAnswers ? allAnswers.get(question.id) : ''}
+            disabled={allAnswers.get(question.id) ? 'enabled' : 'disabled'}
             question={question}
             usersProgrammes={usersProgrammes}
             year={year}

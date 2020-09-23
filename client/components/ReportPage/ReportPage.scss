@@ -16,33 +16,64 @@ $gray: #A0A0A0;
   right: 15px;
 }
 
+.left-header {
+  max-width: 25px;
+}
+
+@mixin question-caret-basics {
+  max-width: 25px;
+  padding: 0em 0.5em !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin question-label-basics {
+  font-weight: bold;
+  margin-top: 0.4em;
+}
+
 .question {
   &-accordion {
     width: 90% !important;
   }
-  &-caret {
-    max-width: 25px;
-    padding: 0em 0.5em !important;
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
+  &-caret-enabled {
+    @include question-caret-basics;
+  }
+  &-caret-disabled {
+    @include question-caret-basics;
+    color: $gray !important;
+    cursor: default;
   }
   &-header {
     min-height: 140px;
+    &-disabled {
+      cursor: default !important;
+    }
   }
-  &-label {
+  &-label-enabled {
+    @include question-label-basics;
     color: $black;
-    font-weight: bold;
-    margin-top: 0.4em;
   }
+  &-label-disabled {
+    @include question-label-basics;
+    color: $gray;
+    cursor: default;
+    &:hover {
+      color: $gray!important;
+    }
+  }
+
   &-description {
     font-style: italic;
     color: $dark_gray;
     font-weight: 300;
     margin-top: 1em;
   }
-  &-title {
+
+  &-title-disabled {
     color: $gray !important;
+    cursor: default;
   }
 }
 
@@ -61,7 +92,7 @@ $gray: #A0A0A0;
   }
 }
 
-@mixin label-basics {
+@mixin answered-label-basics {
   min-width: 85px;
   position: absolute; 
   top: 20px;
@@ -69,12 +100,13 @@ $gray: #A0A0A0;
   color: $white!important;
 }
 
-.not-answered-label {
-  @include label-basics;
-  background-color: $gray!important;
-}
-
 .answered-label {
-  @include label-basics;
-  background-color: $blue!important;
+  &-disabled {
+    @include answered-label-basics;
+    background-color: $gray!important;
+  }
+  &-enabled {
+    @include answered-label-basics;
+    background-color: $blue!important;
+  }
 }
