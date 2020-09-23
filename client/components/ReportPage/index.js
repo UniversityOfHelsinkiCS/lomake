@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import Question from './Question'
+import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/OverviewPage/YearSelector'
 import { 
   answersByYear, 
@@ -93,6 +94,8 @@ export default () => {
   }
 
   const allAnswers = answersByQuestions()
+
+  if (usersProgrammes.length < 1) return <NoPermissions languageCode={languageCode} />
 
   return (
     <>
