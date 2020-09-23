@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Grid, Label } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 
 
@@ -18,15 +18,18 @@ const Question = ({
       className="question-header"
     >
       <Grid>
-        <Grid.Column width={10}>
-          <p className="question-label">{question.label}</p>
-          <span><small className="question-title-label">
+        <Grid.Column width={1} className="question-caret">
+          <Icon name={`caret ${showing === question.id ? "down" : "right"}`} />
+        </Grid.Column>
+        <Grid.Column width={11}>
+          <span><small className="question-title">
             {romanize(question.titleIndex)} - {question.title}
           </small></span>
+          <p className="question-label">{question.label}</p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>
-        <Grid.Column width={4} />
-        <Grid.Column width={2}>
+        <Grid.Column width={2}/>
+        <Grid.Column width={2} floated="right">
           <Label className={answers ? "answered-label" : "not-answered-label"} size="large">
             {answers ? answers.length : 0} / {usersProgrammes.length}
           </Label>

@@ -18,7 +18,14 @@ $gray: #A0A0A0;
 
 .question {
   &-accordion {
-    width: 90%!important;
+    width: 90% !important;
+  }
+  &-caret {
+    max-width: 25px;
+    padding: 0em 0.5em !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
   }
   &-header {
     min-height: 140px;
@@ -26,7 +33,7 @@ $gray: #A0A0A0;
   &-label {
     color: $black;
     font-weight: bold;
-    margin-bottom: 0.4em;
+    margin-top: 0.4em;
   }
   &-description {
     font-style: italic;
@@ -34,8 +41,8 @@ $gray: #A0A0A0;
     font-weight: 300;
     margin-top: 1em;
   }
-  &-title-label {
-    margin: 0.5em 0 2em 0!important;
+  &-title {
+    color: $gray !important;
   }
 }
 

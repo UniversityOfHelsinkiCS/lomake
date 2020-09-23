@@ -12,7 +12,6 @@ import {
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
 import questions from '../../questions'
-
 import './ReportPage.scss'
 
 
@@ -103,13 +102,14 @@ export default () => {
       <Accordion fluid styled className="question-accordion">
         <Accordion.Title active>
           <Grid>
-            <Grid.Column width={7}>
+            <Grid.Column width={1} className="question-caret"/>
+            <Grid.Column width={6}>
               {translations.questions[languageCode]}
             </Grid.Column>
             <Grid.Column width={4}>
               {year} - {translations.reportHeader[languageCode]}
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={5} floated="right">
               <p className="right-header">
                 {translations.answered[languageCode]} / {translations.allProgrammes[languageCode]}
               </p>
