@@ -1,0 +1,73 @@
+$black: #1B1C1D;
+$blue: #0E6EB8;
+$white: #FFFFFF;
+$dark_gray: #4e4c4c;
+$gray: #A0A0A0;
+
+.filter-container {
+  padding: 30px 0px;
+  width: 90%;
+}
+
+.right-header {
+  min-width: 80px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.question {
+  &-accordion {
+    width: 90%!important;
+  }
+  &-header {
+    min-height: 140px;
+  }
+  &-label {
+    color: $black;
+    font-weight: bold;
+    margin-bottom: 0.4em;
+  }
+  &-description {
+    font-style: italic;
+    color: $dark_gray;
+    font-weight: 300;
+    margin-top: 1em;
+  }
+  &-title-label {
+    margin: 0.5em 0 2em 0!important;
+  }
+}
+
+.answer {
+  &-header{
+    font-style: bold;
+  }
+  &-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.6em;
+    margin-bottom: 2em;
+  }
+  &-row {
+    padding-top: 0.3em;
+  }
+}
+
+@mixin label-basics {
+  min-width: 85px;
+  position: absolute; 
+  top: 20px;
+  right: 15px;
+  color: $white!important;
+}
+
+.not-answered-label {
+  @include label-basics;
+  background-color: $gray!important;
+}
+
+.answered-label {
+  @include label-basics;
+  background-color: $blue!important;
+}

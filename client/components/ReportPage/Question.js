@@ -1,0 +1,53 @@
+import React from 'react'
+import { Accordion, Grid, Label } from 'semantic-ui-react'
+import { romanize } from 'Utilities/common'
+
+
+const Question = ({
+  answers,
+  question,
+  usersProgrammes,
+  handleClick,
+  showing
+}) => (
+  <>
+    <Accordion.Title
+      index={question.id}
+      active={showing === question.id}
+      onClick={handleClick}
+      className="question-header"
+    >
+      <Grid>
+        <Grid.Column width={10}>
+          <p className="question-label">{question.label}</p>
+          <span><small className="question-title-label">
+            {romanize(question.titleIndex)} - {question.title}
+          </small></span>
+          <p className="question-description">{question.description}</p>
+        </Grid.Column>
+        <Grid.Column width={4} />
+        <Grid.Column width={2}>
+          <Label className={answers ? "answered-label" : "not-answered-label"} size="large">
+            {answers ? answers.length : 0} / {usersProgrammes.length}
+          </Label>
+        </Grid.Column>
+      </Grid>
+    </Accordion.Title>
+    <Accordion.Content active={showing === question.id}>
+      {usersProgrammes.length > 1 && <div className="ui divider" />}
+      {answers && (
+        answers.map((programme, index) => 
+          <div key={index}>
+            <label className="answer-title">{programme.name}</label>
+            <ul className="answer-list">{programme.answer.split('\n').map((row, index) => 
+              <li key={index} className="answer-row">{row}</li>
+            )}
+            </ul>
+          </div>
+        )
+      )}
+    </Accordion.Content>
+  </>
+)
+
+export default Question

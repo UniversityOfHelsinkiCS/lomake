@@ -5,12 +5,14 @@ import FormView from 'Components/FormView'
 import AdminPage from 'Components/UsersPage'
 import OverviewPage from 'Components/OverviewPage'
 import ClaimAccessPage from 'Components/ClaimAccessPage'
+import ReportPage from 'Components/ReportPage'
 
 export default () => (
   <div className="content">
     <Switch>
       <Route exact path="/" component={OverviewPage} />
       <Route exact path="/admin" component={AdminPage} />
+      <Route exact path="/report" component={ReportPage} />
       <Route
         exact
         path="/form/:room"

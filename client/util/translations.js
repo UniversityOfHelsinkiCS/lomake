@@ -1,6 +1,7 @@
 
 export const translations = {
   // Generic/CsvDownload.js
+  // ReportPage/index.js
   csvLink: {
     written: {
       fi: 'Kirjalliset vastaukset',
@@ -16,7 +17,7 @@ export const translations = {
   questions: {
     fi: 'Kysymys',
     en: 'Question',
-    se: 'Question',
+    se: 'Fråga',
   },
   questionIds: {
     fi: 'Kysymyksen id',
@@ -146,4 +147,20 @@ export const translations = {
     fi: 'Lomake',
     se: 'Blankett',
   },
+  // ReportPage/index.js
+  reportHeader: {
+    en: 'Written answers',
+    fi: 'Kirjalliset vastaukset',
+    se: 'Written answers',
+  },
+  answered: {
+    en: 'Answered',
+    fi: 'Vastattu',
+    se: 'Svarat',
+  },
+  allProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'Alla program',
+  }
 }

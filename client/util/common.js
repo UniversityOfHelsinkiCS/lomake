@@ -25,6 +25,7 @@ export const colors = {
   green: '#00944b',
   white: '#FFFFFF',
   gray: '#A0A0A0',
+  dark_gray: '#4e4c4c',
   black: '#1B1C1D',
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
@@ -52,6 +53,7 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCo
 }
 
 export const keysWithFaculties = (faculties) => {
+  if (!faculties) return []
   let programmesWithFaculties = new Map()
   faculties.forEach((faculty) => {
     faculty.programmes.forEach((programmeKey) => programmesWithFaculties.set(programmeKey, faculty.name))
@@ -67,9 +69,50 @@ export const facultiesWithKeys = (faculties) => {
   return facultiesWithProgrammes
 }
 
+export const cleanText = (string) => {
+  if (!string) return
+  if (string === '') return
+  const cleanedText = string
+    .replace(/&#8259;/g, '\n')
+    .replace(/ *• */g, '\n')
+    .replace(/· /g, '\n')
+    .replace(/\*\*/g, '')
+    .replace(/  •/g, '\n')
+    .replace(/ - /g, '\n')
+
+  return cleanedText
+}
+
+export const getMeasuresAnswer = (data) => {
+  const questionId = 'measures'
+  if (!data) return ''
+  if (!!data[`${questionId}_text`]) return data[`${id}_text`]
+
+  if (!!data[`${questionId}_1_text`]) {
+    let measures = ''
+    let i = 1
+    while (i < 6) {
+      if (!!data[`${questionId}_${i}_text`])
+        measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      i++
+    }
+
+    return measures
+  }
+
+  return null
+}
+
+export const answersByYear = (year, answers, oldAnswers) => {
+  return year === new Date().getFullYear()
+    ? answers.data
+    : oldAnswers.data.filter((a) => a.year === year)
+}
+
 //https://stackoverflow.com/a/9083076
 export function romanize(num) {
   if (isNaN(num)) return NaN
+  if (num === 0) return 0
   var digits = String(+num).split(''),
     key = [
       '',
