@@ -11,6 +11,17 @@ describe('Form tests', function () {
     cy.visit(`/form/${testProgrammeName}`)
   })
 
+  it('Can write to a textfield and the answer is saved.', function () {
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+
+    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'kissa')
+    cy.reload()
+
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
+      .find('.editor-class')
+      .should('contain.text', 'kissa')
+  })
+
   it('Can open a question, click on smiley face, and the result it saved.', () => {
     cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
@@ -25,17 +36,6 @@ describe('Form tests', function () {
     cy.get(`[data-cy=${testProgrammeName}-community_wellbeing]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
-  })
-
-  it('Can write to a textfield and the answer is saved.', function () {
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-
-    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'kissa')
-    cy.reload()
-
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
-      .find('.editor-class')
-      .should('contain.text', 'kissa')
   })
 
   it('Can see upcoming deadline date', function () {
