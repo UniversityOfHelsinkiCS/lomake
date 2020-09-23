@@ -2,128 +2,40 @@
   "H10": {
     "code": "H10",
     "name": "Teologinen tiedekunta",
-    "totalStudents": 520,
-    "students3y": 85,
-    "students4y": 133,
-    "currentlyCancelled": 20,
     "programmes": [
       {
         "code": "KH10_001",
-        "name": "Teologian ja uskonnontutkimuksen kandiohjelma",
-        "totalStudents": 454,
-        "students3y": 81,
-        "students4y": 126,
-        "currentlyCancelled": 12,
-        "studytracks": [
-          {
-            "code": "SH10_119",
-            "name": "Kirkkojen ja uskonnollisten yhteisöjen asiantuntijatyön opintosuunta",
-            "totalStudents": 44,
-            "students3y": 13,
-            "students4y": 9,
-            "currentlyCancelled": 5
-          },
-          {
-            "code": "SH10_120",
-            "name": "Opetuksen ja kasvatuksen asiantuntijatyön opintosuunta",
-            "totalStudents": 10,
-            "students3y": 5,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Teologian ja uskonnontutkimuksen kandiohjelma"
       },
       {
         "code": "MH10_001",
-        "name": "Teologian ja uskonnontutkimuksen maisteriohjelma",
-        "totalStudents": 50,
-        "students3y": 4,
-        "students4y": 7,
-        "currentlyCancelled": 8
+        "name": "Teologian ja uskonnontutkimuksen maisteriohjelma"
       },
       {
         "code": "T920101",
-        "name": "Teologian ja uskonnontutkimuksen tohtoriohjelma",
-        "totalStudents": 16,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Teologian ja uskonnontutkimuksen tohtoriohjelma"
       }
     ]
   },
   "H20": {
     "code": "H20",
     "name": "Oikeustieteellinen tiedekunta",
-    "totalStudents": 975,
-    "students3y": 224,
-    "students4y": 318,
-    "currentlyCancelled": 10,
     "programmes": [
       {
-        "code": "220007",
-        "name": "Oikeustieteen maisterin koulutusohjelma, Helsinki",
-        "totalStudents": 24,
-        "students3y": 1,
-        "students4y": 4,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "220012",
-        "name": "Oikeustieteen maisterin koulutusohjelma, Vaasa",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH20_001",
-        "name": "Oikeusnotaarin koulutusohjelma",
-        "totalStudents": 767,
-        "students3y": 195,
-        "students4y": 285,
-        "currentlyCancelled": 2,
-        "studytracks": [
-          {
-            "code": "SH20_121",
-            "name": "Oikeustieteen koulutus, Helsinki",
-            "totalStudents": 692,
-            "students3y": 144,
-            "students4y": 242,
-            "currentlyCancelled": 5
-          },
-          {
-            "code": "SH20_122",
-            "name": "Oikeustieteen koulutus, Vaasa",
-            "totalStudents": 117,
-            "students3y": 52,
-            "students4y": 47,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Oikeusnotaarin koulutusohjelma"
       },
       {
         "code": "MH20_001",
-        "name": "Oikeustieteen maisterin koulutusohjelma",
-        "totalStudents": 88,
-        "students3y": 8,
-        "students4y": 11,
-        "currentlyCancelled": 4
+        "name": "Oikeustieteen maisterin koulutusohjelma"
       },
       {
         "code": "MH20_002",
-        "name": "Kansainvälisen liikejuridiikan maisteriohjelma (International Business Law)",
-        "totalStudents": 70,
-        "students3y": 19,
-        "students4y": 17,
-        "currentlyCancelled": 2
+        "name": "Kansainvälisen liikejuridiikan maisteriohjelma (International Business Law)"
       },
       {
         "code": "T920102",
-        "name": "Oikeustieteen tohtoriohjelma",
-        "totalStudents": 24,
-        "students3y": 1,
-        "students4y": 0,
-        "currentlyCancelled": 1
+        "name": "Oikeustieteen tohtoriohjelma"
       },
       {
         "code": "msc_global_governance_law_(2020_lähtien)",
@@ -134,52 +46,10 @@
   "H30": {
     "code": "H30",
     "name": "Lääketieteellinen tiedekunta",
-    "totalStudents": 894,
-    "students3y": 174,
-    "students4y": 536,
-    "currentlyCancelled": 6,
     "programmes": [
       {
-        "code": "420074",
-        "name": "Psykologia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH30_001",
-        "name": "Psykologian kandiohjelma",
-        "totalStudents": 146,
-        "students3y": 28,
-        "students4y": 91,
-        "currentlyCancelled": 0,
-        "studytracks": [
-          {
-            "code": "SH70_067",
-            "name": "Yhteiskuntapolitiikka",
-            "totalStudents": 56,
-            "students3y": 20,
-            "students4y": 17,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_068",
-            "name": "Sosiaalipsykologia",
-            "totalStudents": 66,
-            "students3y": 15,
-            "students4y": 25,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_070",
-            "name": "Sosiologia",
-            "totalStudents": 85,
-            "students3y": 17,
-            "students4y": 35,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Psykologian kandiohjelma"
       },
       {
         "code": "T921101",
@@ -195,52 +65,27 @@
       },
       {
         "code": "KH30_002",
-        "name": "Logopedian kandiohjelma",
-        "totalStudents": 77,
-        "students3y": 16,
-        "students4y": 38,
-        "currentlyCancelled": 0,
-        "studytracks": []
+        "name": "Logopedian kandiohjelma"
       },
       {
         "code": "MH30_001",
-        "name": "Lääketieteen koulutusohjelma",
-        "totalStudents": 442,
-        "students3y": 95,
-        "students4y": 270,
-        "currentlyCancelled": 3
+        "name": "Lääketieteen koulutusohjelma"
       },
       {
         "code": "MH30_002",
-        "name": "Translationaalisen lääketieteen maisteriohjelma (Translational Medicine)",
-        "totalStudents": 50,
-        "students3y": 14,
-        "students4y": 12,
-        "currentlyCancelled": 2
+        "name": "Translationaalisen lääketieteen maisteriohjelma (Translational Medicine)"
       },
       {
         "code": "MH30_003",
-        "name": "Hammaslääketieteen koulutusohjelma",
-        "totalStudents": 146,
-        "students3y": 14,
-        "students4y": 110,
-        "currentlyCancelled": 1
+        "name": "Hammaslääketieteen koulutusohjelma"
       },
       {
         "code": "MH30_004",
-        "name": "Psykologian maisteriohjelma",
-        "totalStudents": 30,
-        "students3y": 7,
-        "students4y": 14,
-        "currentlyCancelled": 0
+        "name": "Psykologian maisteriohjelma"
       },
       {
         "code": "MH30_005",
-        "name": "Logopedian maisteriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Logopedian maisteriohjelma"
       },
       {
         "code": "T921103",
@@ -251,1140 +96,244 @@
   "H40": {
     "code": "H40",
     "name": "Humanistinen tiedekunta",
-    "totalStudents": 2072,
-    "students3y": 230,
-    "students4y": 639,
-    "currentlyCancelled": 56,
     "programmes": [
       {
-        "code": "420020",
-        "name": "Teoreettinen filosofia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "420041",
-        "name": "Uskontotiede",
-        "totalStudents": 1,
-        "students3y": 1,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420049",
-        "name": "Suomen kieli",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420053",
-        "name": "Kotimainen kirjallisuus",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420059",
-        "name": "Englantilainen filologia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420060",
-        "name": "Fonetiikka",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420061",
-        "name": "Germaaninen filologia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420062",
-        "name": "Pohjoismaiset kielet, ruotsi toisena kotimaisena kielenä",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420091",
-        "name": "Estetiikka",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420092",
-        "name": "Espanjalainen filologia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420116",
-        "name": "Suomen kieli ja kulttuuri",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420125",
-        "name": "Ranskalainen filologia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "420135",
-        "name": "Venäjän kieli ja kirjallisuus (venäjä äidinkielenä)",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH40_001",
-        "name": "Filosofian kandiohjelma",
-        "totalStudents": 86,
-        "students3y": 7,
-        "students4y": 25,
-        "currentlyCancelled": 1,
-        "studytracks": [
-          {
-            "code": "SH40_001",
-            "name": "Filosofia (ruotsinkielinen opetus)",
-            "totalStudents": 12,
-            "students3y": 0,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_004",
-            "name": "Teoreettinen filosofia",
-            "totalStudents": 24,
-            "students3y": 4,
-            "students4y": 8,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH70_005",
-            "name": "Käytännöllinen filosofia",
-            "totalStudents": 39,
-            "students3y": 2,
-            "students4y": 12,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_004",
-            "name": "Teoreettinen filosofia",
-            "totalStudents": 10,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_005",
-            "name": "Käytännöllinen filosofia",
-            "totalStudents": 12,
-            "students3y": 1,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Filosofian kandiohjelma"
       },
       {
         "code": "KH40_002",
-        "name": "Taiteiden tutkimuksen kandiohjelma",
-        "totalStudents": 127,
-        "students3y": 27,
-        "students4y": 54,
-        "currentlyCancelled": 1,
-        "studytracks": [
-          {
-            "code": "SH40_090",
-            "name": "Estetiikka",
-            "totalStudents": 5,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_091",
-            "name": "Elokuva- ja televisiotutkimus",
-            "totalStudents": 7,
-            "students3y": 0,
-            "students4y": 3,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_092",
-            "name": "Musiikkitiede",
-            "totalStudents": 5,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_093",
-            "name": "Teatteritiede",
-            "totalStudents": 1,
-            "students3y": 1,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_094",
-            "name": "Yleinen kirjallisuustiede",
-            "totalStudents": 14,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Taiteiden tutkimuksen kandiohjelma"
       },
       {
         "code": "KH40_003",
-        "name": "Kielten kandiohjelma",
-        "totalStudents": 667,
-        "students3y": 54,
-        "students4y": 222,
-        "currentlyCancelled": 18,
-        "studytracks": [
-          {
-            "code": "SH40_006",
-            "name": "Englanti",
-            "totalStudents": 229,
-            "students3y": 19,
-            "students4y": 77,
-            "currentlyCancelled": 3
-          },
-          {
-            "code": "SH40_007",
-            "name": "Espanja",
-            "totalStudents": 57,
-            "students3y": 6,
-            "students4y": 31,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_008",
-            "name": "Italia",
-            "totalStudents": 18,
-            "students3y": 0,
-            "students4y": 6,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_009",
-            "name": "Lingvistiikka",
-            "totalStudents": 56,
-            "students3y": 13,
-            "students4y": 22,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_010",
-            "name": "Somali",
-            "totalStudents": 1,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_011",
-            "name": "Antiikin kreikka",
-            "totalStudents": 10,
-            "students3y": 1,
-            "students4y": 4,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_012",
-            "name": "Japani",
-            "totalStudents": 30,
-            "students3y": 0,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_013",
-            "name": "Arabia",
-            "totalStudents": 15,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH40_014",
-            "name": "Tšekki",
-            "totalStudents": 5,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_015",
-            "name": "Portugali",
-            "totalStudents": 12,
-            "students3y": 1,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_016",
-            "name": "Ranska",
-            "totalStudents": 61,
-            "students3y": 6,
-            "students4y": 27,
-            "currentlyCancelled": 3
-          },
-          {
-            "code": "SH40_017",
-            "name": "Saksa",
-            "totalStudents": 62,
-            "students3y": 3,
-            "students4y": 20,
-            "currentlyCancelled": 3
-          },
-          {
-            "code": "SH40_018",
-            "name": "Venäjä vieraana kielenä",
-            "totalStudents": 50,
-            "students3y": 3,
-            "students4y": 12,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_019",
-            "name": "Venäjä (äidinkieli)",
-            "totalStudents": 21,
-            "students3y": 0,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_038",
-            "name": "Eteläslaavilaiset kielet",
-            "totalStudents": 2,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_040",
-            "name": "Latina",
-            "totalStudents": 9,
-            "students3y": 1,
-            "students4y": 3,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH40_041",
-            "name": "Hindi",
-            "totalStudents": 4,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_042",
-            "name": "Latvia",
-            "totalStudents": 2,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_043",
-            "name": "Korea",
-            "totalStudents": 7,
-            "students3y": 0,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_044",
-            "name": "Heprea",
-            "totalStudents": 3,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_045",
-            "name": "Kiina",
-            "totalStudents": 7,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_046",
-            "name": "Puola",
-            "totalStudents": 3,
-            "students3y": 1,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_047",
-            "name": "Swahili",
-            "totalStudents": 1,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Kielten kandiohjelma"
       },
       {
         "code": "KH40_004",
-        "name": "Kotimaisten kielten ja kirjallisuuksien kandiohjelma",
-        "totalStudents": 347,
-        "students3y": 34,
-        "students4y": 125,
-        "currentlyCancelled": 11,
-        "studytracks": [
-          {
-            "code": "SH40_002",
-            "name": "Pohjoismaiset kielet (ruotsi äidinkielenä)",
-            "totalStudents": 7,
-            "students3y": 0,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_020",
-            "name": "Pohjoismaiset kielet (ruotsi toisena kotimaisena kielenä)",
-            "totalStudents": 107,
-            "students3y": 12,
-            "students4y": 34,
-            "currentlyCancelled": 6
-          },
-          {
-            "code": "SH40_021",
-            "name": "Suomen kieli ja kulttuuri",
-            "totalStudents": 23,
-            "students3y": 1,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_022",
-            "name": "Suomen kieli",
-            "totalStudents": 66,
-            "students3y": 11,
-            "students4y": 27,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_023",
-            "name": "Suomalais-ugrilaiset kielet ja kulttuurit",
-            "totalStudents": 9,
-            "students3y": 1,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_024",
-            "name": "Kotimainen kirjallisuus",
-            "totalStudents": 32,
-            "students3y": 3,
-            "students4y": 9,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH40_087",
-            "name": "Pohjoismaiset kielet",
-            "totalStudents": 6,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_088",
-            "name": "Pohjoismainen kirjallisuus",
-            "totalStudents": 12,
-            "students3y": 0,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Kotimaisten kielten ja kirjallisuuksien kandiohjelma"
       },
       {
         "code": "KH40_005",
-        "name": "Kulttuurien tutkimuksen kandiohjelma",
-        "totalStudents": 212,
-        "students3y": 45,
-        "students4y": 103,
-        "currentlyCancelled": 2,
-        "studytracks": [
-          {
-            "code": "SH40_025",
-            "name": "Taidehistoria",
-            "totalStudents": 43,
-            "students3y": 6,
-            "students4y": 15,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_026",
-            "name": "Arkeologia",
-            "totalStudents": 17,
-            "students3y": 5,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_027",
-            "name": "Uskontotiede",
-            "totalStudents": 17,
-            "students3y": 6,
-            "students4y": 5,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_028",
-            "name": "Folkloristiikka",
-            "totalStudents": 12,
-            "students3y": 0,
-            "students4y": 6,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_029",
-            "name": "Kansatiede",
-            "totalStudents": 4,
-            "students3y": 0,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_030",
-            "name": "Alue- ja kulttuurintutkimus",
-            "totalStudents": 23,
-            "students3y": 5,
-            "students4y": 15,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_031",
-            "name": "Aasian tutkimus",
-            "totalStudents": 42,
-            "students3y": 6,
-            "students4y": 17,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_032",
-            "name": "Afrikan ja Lähi-idän tutkimus",
-            "totalStudents": 22,
-            "students3y": 5,
-            "students4y": 6,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Kulttuurien tutkimuksen kandiohjelma"
       },
       {
         "code": "KH40_006",
-        "name": "Historian kandiohjelma",
-        "totalStudents": 123,
-        "students3y": 23,
-        "students4y": 44,
-        "currentlyCancelled": 1,
-        "studytracks": [
-          {
-            "code": "SH40_062",
-            "name": "Ruotsinkielinen opintosuunta",
-            "totalStudents": 21,
-            "students3y": 3,
-            "students4y": 6,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_063",
-            "name": "Suomenkielinen opintosuunta",
-            "totalStudents": 44,
-            "students3y": 6,
-            "students4y": 15,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_116",
-            "name": "Historia",
-            "totalStudents": 5,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Historian kandiohjelma"
       },
       {
         "code": "MH40_001",
-        "name": "Taiteiden tutkimuksen maisteriohjelma",
-        "totalStudents": 14,
-        "students3y": 1,
-        "students4y": 2,
-        "currentlyCancelled": 2
+        "name": "Taiteiden tutkimuksen maisteriohjelma"
       },
       {
         "code": "MH40_002",
-        "name": "Kielten maisteriohjelma",
-        "totalStudents": 31,
-        "students3y": 1,
-        "students4y": 3,
-        "currentlyCancelled": 0
+        "name": "Kielten maisteriohjelma"
       },
       {
         "code": "MH40_003",
-        "name": "Englannin kielen ja kirjallisuuden maisteriohjelma",
-        "totalStudents": 41,
-        "students3y": 5,
-        "students4y": 9,
-        "currentlyCancelled": 1
+        "name": "Englannin kielen ja kirjallisuuden maisteriohjelma"
       },
       {
         "code": "MH40_004",
-        "name": "Venäjän tutkimuksen maisteriohjelma",
-        "totalStudents": 22,
-        "students3y": 4,
-        "students4y": 6,
-        "currentlyCancelled": 2
+        "name": "Venäjän tutkimuksen maisteriohjelma"
       },
       {
         "code": "MH40_005",
-        "name": "Kielellisen diversiteetin ja digitaalisten menetelmien maisteriohjelma",
-        "totalStudents": 32,
-        "students3y": 10,
-        "students4y": 10,
-        "currentlyCancelled": 2
+        "name": "Kielellisen diversiteetin ja digitaalisten menetelmien maisteriohjelma"
       },
       {
         "code": "MH40_006",
-        "name": "Kääntämisen ja tulkkauksen maisteriohjelma",
-        "totalStudents": 35,
-        "students3y": 4,
-        "students4y": 7,
-        "currentlyCancelled": 0
+        "name": "Kääntämisen ja tulkkauksen maisteriohjelma"
       },
       {
         "code": "MH40_007",
-        "name": "Suomen kielen ja suomalais-ugrilaisten kielten ja kulttuurien maisteriohjelma",
-        "totalStudents": 22,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Suomen kielen ja suomalais-ugrilaisten kielten ja kulttuurien maisteriohjelma"
       },
       {
         "code": "MH40_008",
-        "name": "Pohjoismaisten kielten ja kirjallisuuksien maisteriohjelma",
-        "totalStudents": 10,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 1
+        "name": "Pohjoismaisten kielten ja kirjallisuuksien maisteriohjelma"
       },
       {
         "code": "MH40_009",
-        "name": "Kirjallisuudentutkimuksen maisteriohjelma",
-        "totalStudents": 21,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 4
+        "name": "Kirjallisuudentutkimuksen maisteriohjelma"
       },
       {
         "code": "MH40_010",
-        "name": "Kulttuuriperinnön maisteriohjelma",
-        "totalStudents": 26,
-        "students3y": 1,
-        "students4y": 4,
-        "currentlyCancelled": 0
+        "name": "Kulttuuriperinnön maisteriohjelma"
       },
       {
         "code": "MH40_011",
-        "name": "Kulttuurienvälisen vuorovaikutuksen maisteriohjelma",
-        "totalStudents": 45,
-        "students3y": 6,
-        "students4y": 13,
-        "currentlyCancelled": 2
+        "name": "Kulttuurienvälisen vuorovaikutuksen maisteriohjelma"
       },
       {
         "code": "MH40_012",
-        "name": "Alue- ja kulttuurintutkimuksen maisteriohjelma",
-        "totalStudents": 36,
-        "students3y": 3,
-        "students4y": 4,
-        "currentlyCancelled": 1
+        "name": "Alue- ja kulttuurintutkimuksen maisteriohjelma"
       },
       {
         "code": "MH40_013",
-        "name": "Kulttuurin ja kommunikaation maisteriohjelma",
-        "totalStudents": 13,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 3
+        "name": "Kulttuurin ja kommunikaation maisteriohjelma"
       },
       {
         "code": "MH40_014",
-        "name": "Sukupuolentutkimuksen maisteriohjelma",
-        "totalStudents": 44,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 1
+        "name": "Sukupuolentutkimuksen maisteriohjelma"
       },
       {
         "code": "MH40_015",
-        "name": "Historian maisteriohjelma",
-        "totalStudents": 26,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Historian maisteriohjelma"
       },
       {
         "code": "MH50_013",
-        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma"
       },
       {
         "code": "T920103",
-        "name": "Historian ja kulttuuriperinnön tohtoriohjelma",
-        "totalStudents": 19,
-        "students3y": 1,
-        "students4y": 0,
-        "currentlyCancelled": 1
+        "name": "Historian ja kulttuuriperinnön tohtoriohjelma"
       },
       {
         "code": "T920104",
-        "name": "Kielentutkimuksen tohtoriohjelma",
-        "totalStudents": 28,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
+        "name": "Kielentutkimuksen tohtoriohjelma"
       },
       {
         "code": "T920105",
-        "name": "Sukupuolen, kulttuurin ja yhteiskunnan tutkimuksen tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Sukupuolen, kulttuurin ja yhteiskunnan tutkimuksen tohtoriohjelma"
       },
       {
         "code": "T920107",
-        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma"
       },
       {
         "code": "T920111",
-        "name": "Filosofian, taiteiden ja yhteiskunnan tutkimuksen tohtoriohjelma",
-        "totalStudents": 17,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Filosofian, taiteiden ja yhteiskunnan tutkimuksen tohtoriohjelma"
       },
       {
         "code": "T922103",
-        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma"
       },
       {
         "code": "T923102",
-        "name": "Geotieteiden tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Geotieteiden tohtoriohjelma"
       }
     ]
   },
   "H50": {
     "code": "H50",
     "name": "Matemaattis-luonnontieteellinen tiedekunta",
-    "totalStudents": 2306,
-    "students3y": 298,
-    "students4y": 528,
-    "currentlyCancelled": 165,
     "programmes": [
       {
-        "code": "520030",
-        "name": "Maantieteen koulutusohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "520041",
-        "name": "Kemian koulutusohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "520060",
-        "name": "Fysikaalisten tieteiden koulutusohjelma",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "520070",
-        "name": "Matematiikan koulutusohjelma",
-        "totalStudents": 11,
-        "students3y": 1,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "520080",
-        "name": "Tietojenkäsittelytieteen koulutusohjelma",
-        "totalStudents": 10,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
         "code": "KH50_001",
-        "name": "Matemaattisten tieteiden kandiohjelma",
-        "totalStudents": 397,
-        "students3y": 56,
-        "students4y": 74,
-        "currentlyCancelled": 53,
-        "studytracks": [
-          {
-            "code": "SH50_050",
-            "name": "Matematiikka",
-            "totalStudents": 15,
-            "students3y": 6,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH50_051",
-            "name": "Tilastotiede",
-            "totalStudents": 4,
-            "students3y": 2,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Matemaattisten tieteiden kandiohjelma"
       },
       {
         "code": "KH50_002",
-        "name": "Fysikaalisten tieteiden kandiohjelma",
-        "totalStudents": 287,
-        "students3y": 50,
-        "students4y": 88,
-        "currentlyCancelled": 21,
-        "studytracks": [
-          {
-            "code": "SH50_043",
-            "name": "Fysiikka",
-            "totalStudents": 1,
-            "students3y": 1,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH50_044",
-            "name": "Fysiikan laaja-alainen kandi",
-            "totalStudents": 2,
-            "students3y": 2,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH50_046",
-            "name": "Teoreettinen fysiikka",
-            "totalStudents": 2,
-            "students3y": 2,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Fysikaalisten tieteiden kandiohjelma"
       },
       {
         "code": "KH50_003",
-        "name": "Kemian kandiohjelma",
-        "totalStudents": 208,
-        "students3y": 11,
-        "students4y": 49,
-        "currentlyCancelled": 20,
-        "studytracks": []
+        "name": "Kemian kandiohjelma"
       },
       {
         "code": "KH50_004",
-        "name": "Matematiikan, fysiikan ja kemian opettajan kandiohjelma",
-        "totalStudents": 116,
-        "students3y": 23,
-        "students4y": 35,
-        "currentlyCancelled": 4,
-        "studytracks": [
-          {
-            "code": "SH50_054",
-            "name": "Matematiikan opettaja",
-            "totalStudents": 47,
-            "students3y": 10,
-            "students4y": 17,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH50_055",
-            "name": "Fysiikan opettaja",
-            "totalStudents": 11,
-            "students3y": 3,
-            "students4y": 6,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH50_056",
-            "name": "Kemian opettaja",
-            "totalStudents": 14,
-            "students3y": 3,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Matematiikan, fysiikan ja kemian opettajan kandiohjelma"
       },
       {
         "code": "KH50_005",
-        "name": "Tietojenkäsittelytieteen kandiohjelma",
-        "totalStudents": 678,
-        "students3y": 94,
-        "students4y": 138,
-        "currentlyCancelled": 37,
-        "studytracks": []
+        "name": "Tietojenkäsittelytieteen kandiohjelma"
       },
       {
         "code": "KH50_006",
-        "name": "Geotieteiden kandiohjelma",
-        "totalStudents": 83,
-        "students3y": 2,
-        "students4y": 18,
-        "currentlyCancelled": 4,
-        "studytracks": []
+        "name": "Geotieteiden kandiohjelma"
       },
       {
         "code": "KH50_007",
-        "name": "Maantieteen kandiohjelma",
-        "totalStudents": 165,
-        "students3y": 24,
-        "students4y": 64,
-        "currentlyCancelled": 1,
-        "studytracks": [
-          {
-            "code": "SH50_130",
-            "name": "Maantieteen opettaja",
-            "totalStudents": 3,
-            "students3y": 1,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Maantieteen kandiohjelma"
       },
       {
         "code": "KH50_008",
-        "name": "Luonnontieteiden kandiohjelma",
-        "totalStudents": 22,
-        "students3y": 7,
-        "students4y": 3,
-        "currentlyCancelled": 3,
-        "studytracks": []
+        "name": "Luonnontieteiden kandiohjelma"
       },
       {
         "code": "MH50_001",
-        "name": "Matematiikan ja tilastotieteen maisteriohjelma",
-        "totalStudents": 18,
-        "students3y": 3,
-        "students4y": 2,
-        "currentlyCancelled": 0
+        "name": "Matematiikan ja tilastotieteen maisteriohjelma"
       },
       {
         "code": "MH50_002",
-        "name": "Life Science Informatics -maisteriohjelma",
-        "totalStudents": 14,
-        "students3y": 3,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Life Science Informatics -maisteriohjelma"
       },
       {
         "code": "MH50_003",
-        "name": "Teoreettisten ja laskennallisten menetelmien maisteriohjelma",
-        "totalStudents": 14,
-        "students3y": 1,
-        "students4y": 3,
-        "currentlyCancelled": 0
+        "name": "Teoreettisten ja laskennallisten menetelmien maisteriohjelma"
       },
       {
         "code": "MH50_004",
-        "name": "Alkeishiukkasfysiikan ja astrofysikaalisten tieteiden maisteriohjelma",
-        "totalStudents": 16,
-        "students3y": 1,
-        "students4y": 5,
-        "currentlyCancelled": 2
+        "name": "Alkeishiukkasfysiikan ja astrofysikaalisten tieteiden maisteriohjelma"
       },
       {
         "code": "MH50_005",
-        "name": "Materiaalitutkimuksen maisteriohjelma",
-        "totalStudents": 7,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 1
+        "name": "Materiaalitutkimuksen maisteriohjelma"
       },
       {
         "code": "MH50_006",
-        "name": "Ilmakehätieteiden maisteriohjelma",
-        "totalStudents": 17,
-        "students3y": 4,
-        "students4y": 5,
-        "currentlyCancelled": 0
+        "name": "Ilmakehätieteiden maisteriohjelma"
       },
       {
         "code": "MH50_007",
-        "name": "Kemian ja molekyylitieteiden maisteriohjelma",
-        "totalStudents": 25,
-        "students3y": 9,
-        "students4y": 3,
-        "currentlyCancelled": 0
+        "name": "Kemian ja molekyylitieteiden maisteriohjelma"
       },
       {
         "code": "MH50_008",
-        "name": "Matematiikan, fysiikan ja kemian opettajan maisteriohjelma",
-        "totalStudents": 10,
-        "students3y": 0,
-        "students4y": 2,
-        "currentlyCancelled": 0
+        "name": "Matematiikan, fysiikan ja kemian opettajan maisteriohjelma"
       },
       {
         "code": "MH50_009",
-        "name": "Tietojenkäsittelytieteen maisteriohjelma",
-        "totalStudents": 53,
-        "students3y": 5,
-        "students4y": 8,
-        "currentlyCancelled": 9
+        "name": "Tietojenkäsittelytieteen maisteriohjelma"
       },
       {
         "code": "MH50_010",
-        "name": "Datatieteen maisteriohjelma",
-        "totalStudents": 48,
-        "students3y": 1,
-        "students4y": 10,
-        "currentlyCancelled": 3
+        "name": "Datatieteen maisteriohjelma"
       },
       {
         "code": "MH50_011",
-        "name": "Geologian ja geofysiikan maisteriohjelma",
-        "totalStudents": 15,
-        "students3y": 0,
-        "students4y": 5,
-        "currentlyCancelled": 1
+        "name": "Geologian ja geofysiikan maisteriohjelma"
       },
       {
         "code": "MH50_012",
-        "name": "Maantieteen maisteriohjelma",
-        "totalStudents": 18,
-        "students3y": 2,
-        "students4y": 4,
-        "currentlyCancelled": 2
+        "name": "Maantieteen maisteriohjelma"
       },
       {
         "code": "MH50_013",
-        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma",
-        "totalStudents": 46,
-        "students3y": 1,
-        "students4y": 11,
-        "currentlyCancelled": 2
+        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma"
       },
       {
         "code": "T920107",
-        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma"
       },
       {
         "code": "T922103",
-        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma"
       },
       {
         "code": "T923102",
-        "name": "Geotieteiden tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Geotieteiden tohtoriohjelma"
       },
       {
         "code": "T923103",
-        "name": "Ilmakehätieteiden tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ilmakehätieteiden tohtoriohjelma"
       },
       {
         "code": "T923104",
-        "name": "Kemian ja molekyylitutkimuksen tohtoriohjelma",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Kemian ja molekyylitutkimuksen tohtoriohjelma"
       },
       {
         "code": "T923105",
-        "name": "Matematiikan ja tilastotieteen tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Matematiikan ja tilastotieteen tohtoriohjelma"
       },
       {
         "code": "T923106",
-        "name": "Materiaalitutkimuksen ja nanotieteiden tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Materiaalitutkimuksen ja nanotieteiden tohtoriohjelma"
       },
       {
         "code": "T923107",
-        "name": "Tietojenkäsittelytieteen tohtoriohjelma",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Tietojenkäsittelytieteen tohtoriohjelma"
       },
       {
         "code": "T923101",
@@ -1395,428 +344,106 @@
   "H55": {
     "code": "H55",
     "name": "Farmasian tiedekunta",
-    "totalStudents": 565,
-    "students3y": 218,
-    "students4y": 159,
-    "currentlyCancelled": 12,
     "programmes": [
       {
         "code": "KH55_001",
-        "name": "Farmaseutin koulutusohjelma",
-        "totalStudents": 495,
-        "students3y": 216,
-        "students4y": 144,
-        "currentlyCancelled": 12,
-        "studytracks": []
+        "name": "Farmaseutin koulutusohjelma"
       },
       {
         "code": "MH55_001",
-        "name": "Proviisorin koulutusohjelma",
-        "totalStudents": 67,
-        "students3y": 2,
-        "students4y": 15,
-        "currentlyCancelled": 0
+        "name": "Proviisorin koulutusohjelma"
       },
       {
         "code": "T921105",
-        "name": "Lääketutkimuksen tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Lääketutkimuksen tohtoriohjelma"
       },
       {
         "code": "T923104",
-        "name": "Kemian ja molekyylitutkimuksen tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Kemian ja molekyylitutkimuksen tohtoriohjelma"
       }
     ]
   },
   "H57": {
     "code": "H57",
     "name": "Bio- ja ympäristötieteellinen tiedekunta",
-    "totalStudents": 713,
-    "students3y": 207,
-    "students4y": 252,
-    "currentlyCancelled": 27,
     "programmes": [
       {
-        "code": "520020",
-        "name": "Biologian koulutusohjelma",
-        "totalStudents": 7,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "520023",
-        "name": "Ympäristötieteiden koulutusohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH57_001",
-        "name": "Biologian kandiohjelma",
-        "totalStudents": 191,
-        "students3y": 80,
-        "students4y": 66,
-        "currentlyCancelled": 3,
-        "studytracks": [
-          {
-            "code": "SH57_057",
-            "name": "Biologian opettaja",
-            "totalStudents": 11,
-            "students3y": 4,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Biologian kandiohjelma"
       },
       {
         "code": "KH57_002",
-        "name": "Molekyylibiotieteiden kandiohjelma",
-        "totalStudents": 187,
-        "students3y": 69,
-        "students4y": 56,
-        "currentlyCancelled": 19,
-        "studytracks": [
-          {
-            "code": "530023",
-            "name": "Biologian opettajan suuntautumisvaihtoehto",
-            "totalStudents": 2,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH57_057",
-            "name": "Biologian opettaja",
-            "totalStudents": 11,
-            "students3y": 4,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Molekyylibiotieteiden kandiohjelma"
       },
       {
         "code": "KH57_003",
-        "name": "Ympäristötieteiden kandiohjelma",
-        "totalStudents": 175,
-        "students3y": 43,
-        "students4y": 86,
-        "currentlyCancelled": 3,
-        "studytracks": [
-          {
-            "code": "SH57_057",
-            "name": "Biologian opettaja",
-            "totalStudents": 11,
-            "students3y": 4,
-            "students4y": 3,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Ympäristötieteiden kandiohjelma"
       },
       {
         "code": "MH50_013",
-        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma"
       },
       {
         "code": "MH57_001",
-        "name": "Ekologian ja evoluutiobiologian maisteriohjelma",
-        "totalStudents": 21,
-        "students3y": 3,
-        "students4y": 5,
-        "currentlyCancelled": 0
+        "name": "Ekologian ja evoluutiobiologian maisteriohjelma"
       },
       {
         "code": "MH57_002",
-        "name": "Kasvitieteen maisteriohjelma",
-        "totalStudents": 9,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Kasvitieteen maisteriohjelma"
       },
       {
         "code": "MH57_003",
-        "name": "Genetiikan ja molekulaaristen biotieteiden maisteriohjelma",
-        "totalStudents": 30,
-        "students3y": 3,
-        "students4y": 13,
-        "currentlyCancelled": 1
+        "name": "Genetiikan ja molekulaaristen biotieteiden maisteriohjelma"
       },
       {
         "code": "MH57_004",
-        "name": "Neurotieteen maisteriohjelma",
-        "totalStudents": 48,
-        "students3y": 7,
-        "students4y": 14,
-        "currentlyCancelled": 0
+        "name": "Neurotieteen maisteriohjelma"
       },
       {
         "code": "MH57_005",
-        "name": "Ympäristömuutoksen ja globaalin kestävyyden maisteriohjelma",
-        "totalStudents": 32,
-        "students3y": 1,
-        "students4y": 10,
-        "currentlyCancelled": 1
+        "name": "Ympäristömuutoksen ja globaalin kestävyyden maisteriohjelma"
       },
       {
         "code": "T922101",
-        "name": "Luonnonvaraisten eliöiden tutkimuksen tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Luonnonvaraisten eliöiden tutkimuksen tohtoriohjelma"
       },
       {
         "code": "T922103",
-        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
-        "totalStudents": 6,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma"
       },
       {
         "code": "T922105",
-        "name": "Mikrobiologian ja biotekniikan tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Mikrobiologian ja biotekniikan tohtoriohjelma"
       },
       {
         "code": "T921107",
         "name": "Doctoral Programme in Brain and Mind"
       },
-      { "code": "T921106", "name": "Integroivien biotieteiden tohtoriohjelma" }
+      {
+        "code": "T921106",
+        "name": "Integroivien biotieteiden tohtoriohjelma"
+      }
     ]
   },
   "H60": {
     "code": "H60",
     "name": "Kasvatustieteellinen tiedekunta",
-    "totalStudents": 1696,
-    "students3y": 279,
-    "students4y": 716,
-    "currentlyCancelled": 19,
     "programmes": [
       {
-        "code": "620009",
-        "name": "Luokanopettajan koulutus",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620010",
-        "name": "Kotitalousopettajan koulutus",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620011",
-        "name": "Käsityönopettajan koulutus",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620013",
-        "name": "Kasvatustieteet (yleinen ja aikuiskasvatustiede)",
-        "totalStudents": 10,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620015",
-        "name": "Utbildning för pedagogik (allmän och vuxenpedagogik)",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620028",
-        "name": "Erityispedagogiikka",
-        "totalStudents": 5,
-        "students3y": 1,
-        "students4y": 2,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620032",
-        "name": "Varhaiskasvatuksen maisteriopinnot",
-        "totalStudents": 20,
-        "students3y": 0,
-        "students4y": 2,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620040",
-        "name": "Käsityötieteen koulutus",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "620050",
-        "name": "Varhaiskasvatuksen opettajan koulutus (ruotsinkielinen)",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH60_001",
-        "name": "Kasvatustieteiden kandiohjelma",
-        "totalStudents": 1500,
-        "students3y": 269,
-        "students4y": 695,
-        "currentlyCancelled": 17,
-        "studytracks": [
-          {
-            "code": "SH60_033",
-            "name": "Allmän- och vuxenpedagogik",
-            "totalStudents": 43,
-            "students3y": 5,
-            "students4y": 13,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH60_034",
-            "name": "Varhaiskasvatuksen opettaja (ruotsinkielinen)",
-            "totalStudents": 67,
-            "students3y": 18,
-            "students4y": 17,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH60_035",
-            "name": "Klasslärare",
-            "totalStudents": 110,
-            "students3y": 34,
-            "students4y": 44,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH60_036",
-            "name": "Erityispedagogiikka",
-            "totalStudents": 77,
-            "students3y": 23,
-            "students4y": 34,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH60_037",
-            "name": "Kotitalousopettaja",
-            "totalStudents": 99,
-            "students3y": 7,
-            "students4y": 61,
-            "currentlyCancelled": 2
-          },
-          {
-            "code": "SH60_038",
-            "name": "Käsityönopettaja",
-            "totalStudents": 98,
-            "students3y": 10,
-            "students4y": 36,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH60_039",
-            "name": "Varhaiskasvatuksen opettaja",
-            "totalStudents": 440,
-            "students3y": 79,
-            "students4y": 246,
-            "currentlyCancelled": 5
-          },
-          {
-            "code": "SH60_040",
-            "name": "Luokanopettaja (kasvatustiede)",
-            "totalStudents": 308,
-            "students3y": 37,
-            "students4y": 130,
-            "currentlyCancelled": 4
-          },
-          {
-            "code": "SH60_041",
-            "name": "Luokanopettaja (kasvatuspsykologia)",
-            "totalStudents": 44,
-            "students3y": 4,
-            "students4y": 19,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH60_042",
-            "name": "Yleinen ja aikuiskasvatustiede",
-            "totalStudents": 208,
-            "students3y": 34,
-            "students4y": 78,
-            "currentlyCancelled": 3
-          },
-          {
-            "code": "SH60_043",
-            "name": "Luokanopettaja (kasvatuspsykologia) + erityisopettajan suuntautumisopinnot",
-            "totalStudents": 14,
-            "students3y": 6,
-            "students4y": 4,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH60_044",
-            "name": "Luokanopettaja (kasvatustiede) + erityisopettajan suuntautumisopinnot",
-            "totalStudents": 10,
-            "students3y": 2,
-            "students4y": 4,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH60_047",
-            "name": "Varhaiskasvatuksen opettaja + varhaiserityisopettajan suuntautumisopinnot",
-            "totalStudents": 40,
-            "students3y": 15,
-            "students4y": 19,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Kasvatustieteiden kandiohjelma"
       },
       {
         "code": "MH60_001",
-        "name": "Kasvatustieteiden maisteriohjelma",
-        "totalStudents": 113,
-        "students3y": 9,
-        "students4y": 16,
-        "currentlyCancelled": 2
+        "name": "Kasvatustieteiden maisteriohjelma"
       },
       {
         "code": "T920109",
-        "name": "Koulun, kasvatuksen, yhteiskunnan ja kulttuurin tohtoriohjelma",
-        "totalStudents": 30,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Koulun, kasvatuksen, yhteiskunnan ja kulttuurin tohtoriohjelma"
       },
       {
         "code": "T920110",
-        "name": "Psykologian, oppimisen ja kommunikaation tohtoriohjelma",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Psykologian, oppimisen ja kommunikaation tohtoriohjelma"
       },
       {
         "code": "msc_changing_education_(2020_lähtien)",
@@ -1827,859 +454,196 @@
   "H70": {
     "code": "H70",
     "name": "Valtiotieteellinen tiedekunta",
-    "totalStudents": 1609,
-    "students3y": 270,
-    "students4y": 512,
-    "currentlyCancelled": 36,
     "programmes": [
       {
-        "code": "720011",
-        "name": "Käytännöllinen filosofia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720013",
-        "name": "Taloustiede",
-        "totalStudents": 8,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 2
-      },
-      {
-        "code": "720017",
-        "name": "Yhteiskuntapolitiikka",
-        "totalStudents": 9,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720018",
-        "name": "Sosiaalipsykologia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720019",
-        "name": "Sosiologia",
-        "totalStudents": 7,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720021",
-        "name": "Sosiaali- ja kulttuuriantropologia",
-        "totalStudents": 8,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720023",
-        "name": "Tilastotiede",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720024",
-        "name": "Valtio-oppi",
-        "totalStudents": 8,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720028",
-        "name": "Viestintä",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720030",
-        "name": "Poliittinen historia",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "720034",
-        "name": "Sosiaalityö",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "720042",
-        "name": "Kehitysmaatutkimus",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "720085",
-        "name": "Master's Degree Programme in Economy, State and Society",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH40_001",
-        "name": "Filosofian kandiohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0,
-        "studytracks": [
-          {
-            "code": "SH40_001",
-            "name": "Filosofia (ruotsinkielinen opetus)",
-            "totalStudents": 12,
-            "students3y": 0,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH40_004",
-            "name": "Teoreettinen filosofia",
-            "totalStudents": 24,
-            "students3y": 4,
-            "students4y": 8,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH70_005",
-            "name": "Käytännöllinen filosofia",
-            "totalStudents": 39,
-            "students3y": 2,
-            "students4y": 12,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH40_004",
-            "name": "Teoreettinen filosofia",
-            "totalStudents": 10,
-            "students3y": 0,
-            "students4y": 1,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_005",
-            "name": "Käytännöllinen filosofia",
-            "totalStudents": 12,
-            "students3y": 1,
-            "students4y": 2,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Filosofian kandiohjelma"
       },
       {
         "code": "KH70_001",
-        "name": "Politiikan ja viestinnän kandiohjelma",
-        "totalStudents": 214,
-        "students3y": 45,
-        "students4y": 114,
-        "currentlyCancelled": 0,
-        "studytracks": [
-          {
-            "code": "SH70_064",
-            "name": "Politiikka ja organisaatiot",
-            "totalStudents": 73,
-            "students3y": 12,
-            "students4y": 29,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH70_065",
-            "name": "Maailmanpolitiikka",
-            "totalStudents": 32,
-            "students3y": 11,
-            "students4y": 13,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH70_066",
-            "name": "Viestintä",
-            "totalStudents": 70,
-            "students3y": 10,
-            "students4y": 34,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Politiikan ja viestinnän kandiohjelma"
       },
       {
         "code": "KH70_002",
-        "name": "Yhteiskunnallisen muutoksen kandiohjelma",
-        "totalStudents": 205,
-        "students3y": 50,
-        "students4y": 109,
-        "currentlyCancelled": 0,
-        "studytracks": [
-          {
-            "code": "SH70_071",
-            "name": "Antropologia",
-            "totalStudents": 30,
-            "students3y": 2,
-            "students4y": 8,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_072",
-            "name": "Kehitysmaatutkimus",
-            "totalStudents": 45,
-            "students3y": 5,
-            "students4y": 14,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH70_073",
-            "name": "Poliittinen historia",
-            "totalStudents": 40,
-            "students3y": 8,
-            "students4y": 12,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_074",
-            "name": "Talous- ja sosiaalihistoria",
-            "totalStudents": 38,
-            "students3y": 12,
-            "students4y": 15,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Yhteiskunnallisen muutoksen kandiohjelma"
       },
       {
         "code": "KH70_003",
-        "name": "Sosiaalitieteiden kandiohjelma",
-        "totalStudents": 280,
-        "students3y": 74,
-        "students4y": 138,
-        "currentlyCancelled": 3,
-        "studytracks": [
-          {
-            "code": "SH70_067",
-            "name": "Yhteiskuntapolitiikka",
-            "totalStudents": 56,
-            "students3y": 20,
-            "students4y": 17,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_068",
-            "name": "Sosiaalipsykologia",
-            "totalStudents": 66,
-            "students3y": 15,
-            "students4y": 25,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_069",
-            "name": "Sosiaalityö",
-            "totalStudents": 98,
-            "students3y": 27,
-            "students4y": 36,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH70_070",
-            "name": "Sosiologia",
-            "totalStudents": 85,
-            "students3y": 17,
-            "students4y": 35,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Sosiaalitieteiden kandiohjelma"
       },
       {
         "code": "KH70_004",
-        "name": "Taloustieteen kandiohjelma",
-        "totalStudents": 149,
-        "students3y": 22,
-        "students4y": 35,
-        "currentlyCancelled": 6,
-        "studytracks": [
-          {
-            "code": "SH70_113",
-            "name": "Taloustieteen yleinen opintosuunta",
-            "totalStudents": 31,
-            "students3y": 3,
-            "students4y": 2,
-            "currentlyCancelled": 1
-          }
-        ]
+        "name": "Taloustieteen kandiohjelma"
       },
       {
         "code": "MH50_013",
-        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Kaupunkitutkimuksen ja suunnittelun maisteriohjelma"
       },
       {
         "code": "MH70_001",
-        "name": "Filosofian maisteriohjelma",
-        "totalStudents": 21,
-        "students3y": 1,
-        "students4y": 3,
-        "currentlyCancelled": 1
+        "name": "Filosofian maisteriohjelma"
       },
       {
         "code": "MH70_002",
-        "name": "Politiikan ja viestinnän maisteriohjelma",
-        "totalStudents": 53,
-        "students3y": 1,
-        "students4y": 8,
-        "currentlyCancelled": 1
+        "name": "Politiikan ja viestinnän maisteriohjelma"
       },
       {
         "code": "MH70_003",
-        "name": "Globaalin politiikan ja kommunikaation maisteriohjelma",
-        "totalStudents": 88,
-        "students3y": 10,
-        "students4y": 16,
-        "currentlyCancelled": 5
+        "name": "Globaalin politiikan ja kommunikaation maisteriohjelma"
       },
       {
         "code": "MH70_004",
-        "name": "Yhteiskunnallisen muutoksen maisteriohjelma",
-        "totalStudents": 79,
-        "students3y": 6,
-        "students4y": 13,
-        "currentlyCancelled": 2
+        "name": "Yhteiskunnallisen muutoksen maisteriohjelma"
       },
       {
         "code": "MH70_005",
-        "name": "Nyky-yhteiskunnan tutkimuksen maisteriohjelma",
-        "totalStudents": 32,
-        "students3y": 3,
-        "students4y": 12,
-        "currentlyCancelled": 2
+        "name": "Nyky-yhteiskunnan tutkimuksen maisteriohjelma"
       },
       {
         "code": "MH70_006",
-        "name": "Euroopan ja pohjoismaiden tutkimuksen maisteriohjelma (European and Nordic Studies)",
-        "totalStudents": 53,
-        "students3y": 8,
-        "students4y": 12,
-        "currentlyCancelled": 4
+        "name": "Euroopan ja pohjoismaiden tutkimuksen maisteriohjelma (European and Nordic Studies)"
       },
       {
         "code": "MH70_007",
-        "name": "Yhteiskuntatieteiden maisteriohjelma",
-        "totalStudents": 72,
-        "students3y": 5,
-        "students4y": 4,
-        "currentlyCancelled": 1
+        "name": "Yhteiskuntatieteiden maisteriohjelma"
       },
       {
         "code": "MH70_008",
-        "name": "Sosiaalitieteiden maisteriohjelma",
-        "totalStudents": 132,
-        "students3y": 24,
-        "students4y": 28,
-        "currentlyCancelled": 2
+        "name": "Sosiaalitieteiden maisteriohjelma"
       },
       {
         "code": "MH70_009",
-        "name": "Taloustieteen maisteriohjelma",
-        "totalStudents": 47,
-        "students3y": 3,
-        "students4y": 6,
-        "currentlyCancelled": 4
-      },
-      {
-        "code": "MH70_010",
-        "name": "International Masters in Economy, State & Society",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Taloustieteen maisteriohjelma"
       },
       {
         "code": "MH70_011",
-        "name": "Sosiaali- ja terveystutkimuksen ja -johtamisen maisteriohjelma",
-        "totalStudents": 38,
-        "students3y": 16,
-        "students4y": 11,
-        "currentlyCancelled": 0
+        "name": "Sosiaali- ja terveystutkimuksen ja -johtamisen maisteriohjelma"
       },
       {
         "code": "T920105",
-        "name": "Sukupuolen, kulttuurin ja yhteiskunnan tutkimuksen tohtoriohjelma",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Sukupuolen, kulttuurin ja yhteiskunnan tutkimuksen tohtoriohjelma"
       },
       {
         "code": "T920106",
-        "name": "Sosiaalitieteiden tohtoriohjelma",
-        "totalStudents": 50,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
+        "name": "Sosiaalitieteiden tohtoriohjelma"
       },
       {
         "code": "T920107",
-        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma",
-        "totalStudents": 13,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma"
       },
       {
         "code": "T920108",
-        "name": "Taloustieteen tohtoriohjelma",
-        "totalStudents": 8,
-        "students3y": 1,
-        "students4y": 1,
-        "currentlyCancelled": 0
+        "name": "Taloustieteen tohtoriohjelma"
       },
       {
         "code": "T920111",
-        "name": "Filosofian, taiteiden ja yhteiskunnan tutkimuksen tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Filosofian, taiteiden ja yhteiskunnan tutkimuksen tohtoriohjelma"
       },
       {
         "code": "T922103",
-        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma"
       }
     ]
   },
   "H74": {
     "code": "H74",
     "name": "Svenska social- och kommunalhögskolan",
-    "totalStudents": 314,
-    "students3y": 61,
-    "students4y": 153,
-    "currentlyCancelled": 18,
     "programmes": [
       {
         "code": "KH74_001",
-        "name": "Kandidatprogrammet i samhällsvetenskaper",
-        "totalStudents": 314,
-        "students3y": 61,
-        "students4y": 153,
-        "currentlyCancelled": 18,
-        "studytracks": [
-          {
-            "code": "SH74_062",
-            "name": "Socialt arbete",
-            "totalStudents": 37,
-            "students3y": 3,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_063",
-            "name": "Journalistik och kommunikation",
-            "totalStudents": 6,
-            "students3y": 1,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_065",
-            "name": "Socialpsykologi",
-            "totalStudents": 8,
-            "students3y": 2,
-            "students4y": 1,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_066",
-            "name": "Sociologi",
-            "totalStudents": 6,
-            "students3y": 0,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_067",
-            "name": "Statskunskap med förvaltning",
-            "totalStudents": 16,
-            "students3y": 0,
-            "students4y": 2,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH74_061",
-            "name": "Samhällsvetenskaper",
-            "totalStudents": 76,
-            "students3y": 13,
-            "students4y": 25,
-            "currentlyCancelled": 10
-          },
-          {
-            "code": "SH74_062",
-            "name": "Socialt arbete",
-            "totalStudents": 78,
-            "students3y": 17,
-            "students4y": 39,
-            "currentlyCancelled": 5
-          },
-          {
-            "code": "SH74_064",
-            "name": "Rättsvetenskap",
-            "totalStudents": 1,
-            "students3y": 1,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_065",
-            "name": "Socialpsykologi",
-            "totalStudents": 26,
-            "students3y": 9,
-            "students4y": 9,
-            "currentlyCancelled": 1
-          },
-          {
-            "code": "SH74_066",
-            "name": "Sociologi",
-            "totalStudents": 2,
-            "students3y": 2,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH74_067",
-            "name": "Statskunskap med förvaltning",
-            "totalStudents": 1,
-            "students3y": 1,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Kandidatprogrammet i samhällsvetenskaper"
       }
     ]
   },
   "H80": {
     "code": "H80",
     "name": "Maatalous-metsätieteellinen tiedekunta",
-    "totalStudents": 1086,
-    "students3y": 228,
-    "students4y": 334,
-    "currentlyCancelled": 34,
     "programmes": [
       {
-        "code": "820004",
-        "name": "Elintarviketieteet",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "820007",
-        "name": "Agroteknologia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820009",
-        "name": "Metsien ekologia ja käyttö",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820016",
-        "name": "Metsäekonomia ja markkinointi",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820031",
-        "name": "Elintarvike-ekonomia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 1,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820040",
-        "name": "Markkinointi",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820044",
-        "name": "Mikrobiologia",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "820046",
-        "name": "Ravitsemustiede",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820047",
-        "name": "Ympäristöekonomia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820051",
-        "name": "Kasvintuotantotieteet",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
-        "code": "820054",
-        "name": "Ympäristö- ja luonnonvaraekonomia",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
-      },
-      {
         "code": "KH80_001",
-        "name": "Maataloustieteiden kandiohjelma",
-        "totalStudents": 214,
-        "students3y": 43,
-        "students4y": 73,
-        "currentlyCancelled": 4,
-        "studytracks": []
+        "name": "Maataloustieteiden kandiohjelma"
       },
       {
         "code": "KH80_002",
-        "name": "Metsätieteiden kandiohjelma",
-        "totalStudents": 168,
-        "students3y": 53,
-        "students4y": 53,
-        "currentlyCancelled": 4,
-        "studytracks": [
-          {
-            "code": "SH80_057",
-            "name": "Metsien ekologia ja käyttö",
-            "totalStudents": 21,
-            "students3y": 4,
-            "students4y": 3,
-            "currentlyCancelled": 4
-          }
-        ]
+        "name": "Metsätieteiden kandiohjelma"
       },
       {
         "code": "KH80_003",
-        "name": "Elintarviketieteiden kandiohjelma",
-        "totalStudents": 174,
-        "students3y": 41,
-        "students4y": 72,
-        "currentlyCancelled": 6,
-        "studytracks": []
+        "name": "Elintarviketieteiden kandiohjelma"
       },
       {
         "code": "KH80_004",
-        "name": "Ympäristö- ja elintarviketalouden kandiohjelma",
-        "totalStudents": 226,
-        "students3y": 81,
-        "students4y": 80,
-        "currentlyCancelled": 2,
-        "studytracks": [
-          {
-            "code": "SH80_059",
-            "name": "Maatalous-, ympäristö- ja luonnonvaraekonomia",
-            "totalStudents": 3,
-            "students3y": 3,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          },
-          {
-            "code": "SH80_060",
-            "name": "Elintarviketalous ja kulutus",
-            "totalStudents": 7,
-            "students3y": 7,
-            "students4y": 0,
-            "currentlyCancelled": 0
-          }
-        ]
+        "name": "Ympäristö- ja elintarviketalouden kandiohjelma"
       },
       {
         "code": "MH80_001",
-        "name": "Maataloustieteiden maisteriohjelma",
-        "totalStudents": 63,
-        "students3y": 0,
-        "students4y": 11,
-        "currentlyCancelled": 5
+        "name": "Maataloustieteiden maisteriohjelma"
       },
       {
         "code": "MH80_002",
-        "name": "Maatalous-, ympäristö- ja luonnonvaraekonomian maisteriohjelma",
-        "totalStudents": 36,
-        "students3y": 3,
-        "students4y": 7,
-        "currentlyCancelled": 1
+        "name": "Maatalous-, ympäristö- ja luonnonvaraekonomian maisteriohjelma"
       },
       {
         "code": "MH80_003",
-        "name": "Metsätieteiden maisteriohjelma",
-        "totalStudents": 46,
-        "students3y": 0,
-        "students4y": 9,
-        "currentlyCancelled": 8
+        "name": "Metsätieteiden maisteriohjelma"
       },
       {
         "code": "MH80_004",
-        "name": "Elintarviketieteiden maisteriohjelma",
-        "totalStudents": 43,
-        "students3y": 2,
-        "students4y": 12,
-        "currentlyCancelled": 1
+        "name": "Elintarviketieteiden maisteriohjelma"
       },
       {
         "code": "MH80_005",
-        "name": "Ihmisen ravitsemuksen ja ruokakäyttäytymisen maisteriohjelma",
-        "totalStudents": 24,
-        "students3y": 2,
-        "students4y": 5,
-        "currentlyCancelled": 0
+        "name": "Ihmisen ravitsemuksen ja ruokakäyttäytymisen maisteriohjelma"
       },
       {
         "code": "MH80_006",
-        "name": "Elintarviketalouden ja kulutuksen maisteriohjelma",
-        "totalStudents": 16,
-        "students3y": 1,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Elintarviketalouden ja kulutuksen maisteriohjelma"
       },
       {
         "code": "MH80_007",
-        "name": "Mikrobiologian ja mikrobibiotekniikan maisteriohjelma",
-        "totalStudents": 32,
-        "students3y": 2,
-        "students4y": 11,
-        "currentlyCancelled": 1
-      },
-      {
-        "code": "MH80_008",
-        "name": "Erasmus-Mundus Master's Programme in Plant Breeding (EMPLANT)",
-        "totalStudents": 7,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Mikrobiologian ja mikrobibiotekniikan maisteriohjelma"
       },
       {
         "code": "T920107",
-        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Poliittisten, yhteiskunnallisten ja alueellisten muutosten tohtoriohjelma"
       },
       {
         "code": "T922102",
-        "name": "Kasvitieteen tohtoriohjelma",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Kasvitieteen tohtoriohjelma"
       },
       {
         "code": "T922103",
-        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma",
-        "totalStudents": 4,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ympäristöalan tieteidenvälinen tohtoriohjelma"
       },
       {
         "code": "T922104",
-        "name": "Uusiutuvien luonnonvarojen kestävän käytön tohtoriohjelma",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Uusiutuvien luonnonvarojen kestävän käytön tohtoriohjelma"
       },
       {
         "code": "T922105",
-        "name": "Mikrobiologian ja biotekniikan tohtoriohjelma",
-        "totalStudents": 3,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Mikrobiologian ja biotekniikan tohtoriohjelma"
       },
       {
         "code": "T922106",
-        "name": "Ruokaketjun ja terveyden tohtoriohjelma",
-        "totalStudents": 2,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ruokaketjun ja terveyden tohtoriohjelma"
       }
     ]
   },
   "H90": {
     "code": "H90",
     "name": "Eläinlääketieteellinen tiedekunta",
-    "totalStudents": 215,
-    "students3y": 12,
-    "students4y": 119,
-    "currentlyCancelled": 0,
     "programmes": [
       {
         "code": "KH90_001",
-        "name": "Eläinlääketieteen kandiohjelma",
-        "totalStudents": 209,
-        "students3y": 12,
-        "students4y": 119,
-        "currentlyCancelled": 0,
-        "studytracks": []
+        "name": "Eläinlääketieteen kandiohjelma"
       },
       {
         "code": "T921108",
-        "name": "Kliinisen eläinlääketieteen tohtoriohjelma",
-        "totalStudents": 5,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Kliinisen eläinlääketieteen tohtoriohjelma"
       },
       {
         "code": "T922106",
-        "name": "Ruokaketjun ja terveyden tohtoriohjelma",
-        "totalStudents": 1,
-        "students3y": 0,
-        "students4y": 0,
-        "currentlyCancelled": 0
+        "name": "Ruokaketjun ja terveyden tohtoriohjelma"
       },
       {
         "code": "MH90_001",

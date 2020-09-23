@@ -1,7 +1,6 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { uuid } = require('uuidv4')
-const { programmes } = require('@util/common')
 const faculties = require('@util/faculties.json')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
@@ -26,12 +25,9 @@ const initFaculties = async () => {
     for (const faculty of facultyObjects) {
       const { code, name, programmes: progs } = faculty
 
-      // Filter out old programmes, they arent used in Lomake.
-      const acualProgrammes = progs.filter((p) => programmes.find((d) => d.key === p))
-
       await db.faculty.create({
         code,
-        programmes: acualProgrammes,
+        programmes: progs,
         name,
       })
     }
