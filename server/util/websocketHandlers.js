@@ -20,13 +20,13 @@ const stripTimeouts = (room) => {
 }
 
 const clearCurrentUser = (user) => {
-  if (!currentEditors) return {}
   return Object.keys(currentEditors).reduce((editorAcc, room) => {
     if (!currentEditors[room]) return editorAcc
     const currentRoom = currentEditors[room]
     const newRoom = Object.keys(currentRoom).reduce((acc, key) => {
       if (!currentRoom[key]) return acc
       if (currentRoom[key].uid === user.uid) {
+        clearTimeout(currentRoom[key].timeoutId)
         return acc
       }
       return { ...acc, [key]: currentRoom[key] }
@@ -90,7 +90,7 @@ const updateField = async (socket, payload, io) => {
       if (currentEditor) {
         clearTimeout(currentEditor.timeoutId)
       }
-
+      
       const timeoutId = setTimeout(() => {
         currentEditors = {
           ...currentEditors,
