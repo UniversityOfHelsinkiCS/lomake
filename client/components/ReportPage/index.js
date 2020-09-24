@@ -19,8 +19,8 @@ import './ReportPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
-  const currentUser = useSelector((state) => state.currentUser)
-  const languageCode = useSelector((state) => state.language)
+  const user = useSelector((state) => state.currentUser)
+  const lang = useSelector((state) => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -40,11 +40,11 @@ export default () => {
   }
 
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return currentUser.data.admin
+    const usersPermissionsKeys = Object.keys(user.data.access)
+    return user.data.admin
       ? programmes
       : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
-  }, [programmes, currentUser.data])
+  }, [programmes, user.data])
 
   const filteredProgrammes = useMemo(() => {
     if (level === 'allProgrammes') return usersProgrammes.map((p) => p.key)
@@ -61,7 +61,7 @@ export default () => {
       return searched.toLowerCase().includes(levels[level].toString())
     })
     return filtered.map((p) => p.key)
-  }, [usersProgrammes, languageCode, level])
+  }, [usersProgrammes, lang, level])
 
   const selectedAnswers = answersByYear(year, answers, oldAnswers)
 
@@ -78,6 +78,7 @@ export default () => {
     let titleIndex = -1
     questions.forEach((question) => {
       titleIndex = titleIndex + 1
+      
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
           let label = part.label['en'] ? part.label : question.title
@@ -86,9 +87,9 @@ export default () => {
           attributes = [...attributes, { 
             "id": id,
             "color": `${part.id}_light`,
-            "label": label[languageCode] ? label[languageCode] : label['en'], 
-            "description": description[languageCode] ? description[languageCode] : description['en'],
-            "title": question.title[languageCode] ? question.title[languageCode] : question.title['en'], 
+            "label": label[lang] ? label[lang] : label['en'], 
+            "description": description[lang] ? description[lang] : description['en'],
+            "title": question.title[lang] ? question.title[lang] : question.title['en'], 
             "titleIndex": titleIndex
           }]  
         }
@@ -108,7 +109,7 @@ export default () => {
         questionsList.forEach((question) => {
           let answer = ''
           let questionData = answerMap.get(question.id) ? answerMap.get(question.id) : []
-          const name = programmeName(usersProgrammes, programme, languageCode)
+          const name = programmeName(usersProgrammes, programme, lang)
           if (question.id === "measures_text") answer = getMeasuresAnswer(data)
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
@@ -123,7 +124,7 @@ export default () => {
 
   const allAnswers = answersByQuestions()
 
-  if (usersProgrammes.length < 1) return <NoPermissions languageCode={languageCode} />
+  if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
   return (
     <>
@@ -136,15 +137,15 @@ export default () => {
           <Grid>
             <Grid.Column width={1} className="left-header"/>
             <Grid.Column width={4}>
-              {translations.questions[languageCode]}
+              {translations.questions[lang]}
             </Grid.Column>
             <Grid.Column width={6} className="center-header">
-              <p>{year} - {translations.reportHeader[languageCode]}</p>
-              <p> {translations[level][languageCode]}</p>
+              <p>{year} - {translations.reportHeader[lang]}</p>
+              <p> {translations[level][lang]}</p>
             </Grid.Column>
             <Grid.Column width={3} floated="right">
               <p className="right-header">
-                {translations.answered[languageCode]} / {translations.allProgrammes[languageCode]}
+                {translations.answered[lang]} / {translations.allProgrammes[lang]}
               </p>
             </Grid.Column>
           </Grid>
