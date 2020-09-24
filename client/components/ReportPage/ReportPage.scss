@@ -49,7 +49,7 @@ $background-green: #9dff9d;
   &-accordion {
     width: 90% !important;
   }
-  &-caret-enabled {
+  &-caret {
     @include question-caret-basics;
   }
   &-caret-disabled {
@@ -63,7 +63,8 @@ $background-green: #9dff9d;
       cursor: default !important;
     }
   }
-  &-label-enabled {
+
+  &-label {
     @include question-label-basics;
     color: $black;
   }
@@ -81,6 +82,10 @@ $background-green: #9dff9d;
     color: $dark_gray;
     font-weight: 300;
     margin-top: 1em;
+  }
+  &-description-disabled {
+    color: $gray;
+    cursor: default;
   }
 
   &-title-disabled {
@@ -136,12 +141,11 @@ $background-green: #9dff9d;
 }
 
 .answered-label {
+  @include answered-label-basics;
+  background-color: $blue!important;
   &-disabled {
     @include answered-label-basics;
     background-color: $gray!important;
   }
-  &-enabled {
-    @include answered-label-basics;
-    background-color: $blue!important;
-  }
+
 }

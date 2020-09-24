@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
@@ -151,16 +152,23 @@ export default () => {
           </Grid>
         </Accordion.Title>
         {questionsList.map((question) =>
-          <Question
-            key={question.id}
-            answers={allAnswers ? allAnswers.get(question.id) : ''}
-            disabled={allAnswers.get(question.id) ? 'enabled' : 'disabled'}
-            question={question}
-            filteredProgrammes={filteredProgrammes}
-            year={year}
-            handleClick={handleClick}
-            showing={filteredProgrammes.length < 2 ? question.id : showing}
-          />
+          (allAnswers.get(question.id) ?
+            <Question
+              key={question.id}
+              answers={allAnswers ? allAnswers.get(question.id) : ''}
+              question={question}
+              filteredProgrammes={filteredProgrammes}
+              year={year}
+              handleClick={handleClick}
+              showing={filteredProgrammes.length < 2 ? question.id : showing}
+            />
+            :
+            <DisabledQuestion
+              key={question.id}
+              question={question}
+              filteredProgrammes={filteredProgrammes}
+            />
+          )
         )}
       </Accordion>
     </>
