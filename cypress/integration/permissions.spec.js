@@ -21,7 +21,7 @@ describe('Permission tests', function () {
 
   it("Can't access report page without permissions", function () {
     cy.visit(`/report}`)
-    cy.get('[data-cy=noPermissions-message]')
+    cy.get('[data-cy=no-permissions-message]')
   })
 
   it("Can't WRITE with READ permissions and cant go to edit mode", function () {

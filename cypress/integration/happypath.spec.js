@@ -10,7 +10,7 @@ describe('Core tests', function () {
   })
 
   it('Frontpage loads', function () {
-    cy.get('[data-cy=noPermissions-message]')
+    cy.get('[data-cy=no-permissions-message]')
   })
 
   /* changed filter so that it only shows up when >10 programs to view - add more programs the test user can see

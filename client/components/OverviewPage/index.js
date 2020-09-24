@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import ProgramControlsContent from './ProgramControlsContent'
 import CsvDownload from '../Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
+import NoPermissions from 'Components/Generic/NoPermissions'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
 import {translations} from '../../util/translations'
@@ -153,16 +154,7 @@ export default () => {
             />
           </div>
         </>
-      ) : (
-        <Header
-          data-cy="noPermissions-message"
-          style={{ textAlign: 'center', paddingTop: '5em' }}
-          as="h2"
-          disabled
-        >
-          {translations.noPermissions[languageCode]}
-        </Header>
-      )}
+      ) : <NoPermissions />}
     </>
   )
 }
