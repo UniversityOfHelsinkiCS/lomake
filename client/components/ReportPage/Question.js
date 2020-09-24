@@ -31,8 +31,7 @@ const Question = ({
           <p className="question-label">{question.label}</p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>
-        <Grid.Column width={2}/>
-        <Grid.Column width={2} floated="right">
+        <Grid.Column width={4} floated="right">
           <Label className="answered-label" size="large">
             {answers.length} / {filteredProgrammes.length}
           </Label>
