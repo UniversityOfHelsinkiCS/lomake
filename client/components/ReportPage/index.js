@@ -100,7 +100,7 @@ export default () => {
   return (
     <>
       <div className="filter-container">
-        <YearSelector />    
+        <YearSelector />
       </div>
       <Accordion fluid styled className="question-accordion">
         <Accordion.Title active>
@@ -122,7 +122,7 @@ export default () => {
         {questionsList.map((question) =>
           <Question
             key={question.id}
-            answers={allAnswers ? allAnswers.get(question.id) : ''}
+            answers={allAnswers ? allAnswers.get(question.id).sort((a,b) => a['name'].localeCompare(b['name'])) : ''}
             disabled={allAnswers.get(question.id) ? 'enabled' : 'disabled'}
             question={question}
             usersProgrammes={usersProgrammes}
