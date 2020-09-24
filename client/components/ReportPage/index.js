@@ -4,6 +4,7 @@ import { Accordion, Grid } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import Question from './Question'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import LevelFilter from 'Components/Generic/LevelFilter'
 import YearSelector from 'Components/OverviewPage/YearSelector'
 import { 
   answersByYear, 
@@ -24,11 +25,19 @@ export default () => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
+  const level = useSelector((state) => state.programmeLevel)
   const [showing, setShowing] = useState(-1)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
   }, [])
+
+  const levels = {
+    allProgrammes : '',
+    master : 'master',
+    bachelor : 'bachelor',
+    doctoral : 'doctor',
+  }
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
@@ -36,6 +45,23 @@ export default () => {
       ? programmes
       : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser.data])
+
+  const filteredProgrammes = useMemo(() => {
+    if (level === 'allProgrammes') return usersProgrammes.map((p) => p.key)
+    const filtered = usersProgrammes.filter((prog) => {
+      const searched = prog.name['en'] // Because se and fi don't always have values.
+      if (level === 'otherProgrammes') {
+        const p = searched.toLowerCase()
+        return !(
+          p.includes("master")
+          || p.includes("bachelor")
+          || p.includes("doctor")
+        )
+      }
+      return searched.toLowerCase().includes(levels[level].toString())
+    })
+    return filtered.map((p) => p.key)
+  }, [usersProgrammes, languageCode, level])
 
   const selectedAnswers = answersByYear(year, answers, oldAnswers)
 
@@ -59,6 +85,7 @@ export default () => {
           const id = `${part.id}_text`
           attributes = [...attributes, { 
             "id": id,
+            "color": `${part.id}_light`,
             "label": label[languageCode] ? label[languageCode] : label['en'], 
             "description": description[languageCode] ? description[languageCode] : description['en'],
             "title": question.title[languageCode] ? question.title[languageCode] : question.title['en'], 
@@ -76,18 +103,19 @@ export default () => {
   const answersByQuestions = () => {
     let answerMap = new Map()
     selectedAnswers.forEach((programme) => {
-      const data = programme.data
-      questionsList.forEach((question) => {
-        let name = ''
-        let answer = ''
-        let questionData = answerMap.get(question.id) ? answerMap.get(question.id) : []
+      if (filteredProgrammes.includes(programme.programme)) {
+        const data = programme.data
+        questionsList.forEach((question) => {
+          let answer = ''
+          let questionData = answerMap.get(question.id) ? answerMap.get(question.id) : []
+          const name = programmeName(usersProgrammes, programme, languageCode)
+          if (question.id === "measures_text") answer = getMeasuresAnswer(data)
+          else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-        if (usersProgrammes.length > 1) name = programmeName(usersProgrammes, programme, languageCode)
-        if (question.id === "measures_text") answer = getMeasuresAnswer(data)
-        else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
-        questionData = [...questionData, {name: name, answer: answer}]        
-        if (answer) answerMap.set(question.id, questionData)
-      })  
+          questionData = [...questionData, {name: name, color: data[question.color], answer: answer}]  
+          if (answer) answerMap.set(question.id, questionData)
+        })
+      }
     })
 
     return answerMap
@@ -101,18 +129,20 @@ export default () => {
     <>
       <div className="filter-container">
         <YearSelector />
+        {usersProgrammes.length > 1 && <LevelFilter usersProgrammes={usersProgrammes}/>}
       </div>
       <Accordion fluid styled className="question-accordion">
         <Accordion.Title active>
           <Grid>
             <Grid.Column width={1} className="left-header"/>
-            <Grid.Column width={6}>
+            <Grid.Column width={4}>
               {translations.questions[languageCode]}
             </Grid.Column>
-            <Grid.Column width={4}>
-              {year} - {translations.reportHeader[languageCode]}
+            <Grid.Column width={6} className="center-header">
+              <p>{year} - {translations.reportHeader[languageCode]}</p>
+              <p> {translations[level][languageCode]}</p>
             </Grid.Column>
-            <Grid.Column width={5} floated="right">
+            <Grid.Column width={3} floated="right">
               <p className="right-header">
                 {translations.answered[languageCode]} / {translations.allProgrammes[languageCode]}
               </p>
@@ -122,13 +152,13 @@ export default () => {
         {questionsList.map((question) =>
           <Question
             key={question.id}
-            answers={allAnswers ? allAnswers.get(question.id).sort((a,b) => a['name'].localeCompare(b['name'])) : ''}
+            answers={allAnswers ? allAnswers.get(question.id) : ''}
             disabled={allAnswers.get(question.id) ? 'enabled' : 'disabled'}
             question={question}
-            usersProgrammes={usersProgrammes}
+            filteredProgrammes={filteredProgrammes}
             year={year}
             handleClick={handleClick}
-            showing={showing}
+            showing={filteredProgrammes.length < 2 ? question.id : showing}
           />
         )}
       </Accordion>

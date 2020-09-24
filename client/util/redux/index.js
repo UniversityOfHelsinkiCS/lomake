@@ -9,6 +9,7 @@ import oldAnswers from './oldAnswersReducer'
 import language from './languageReducer'
 import accessToken from './accessTokenReducer'
 import previousAnswers from './previousAnswersReducer'
+import programmeLevel from './programmeLevelReducer'
 import programmesTokens from './programmesTokensReducer'
 import programmesUsers from './programmesUsersReducer'
 import studyProgrammes from './studyProgrammesReducer'
@@ -26,6 +27,7 @@ export default combineReducers({
   language,
   accessToken,
   previousAnswers,
+  programmeLevel,
   programmesTokens,
   programmesUsers,
   studyProgrammes,

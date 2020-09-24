@@ -6,7 +6,7 @@ import { romanize } from 'Utilities/common'
 const Question = ({
   answers,
   question,
-  usersProgrammes,
+  filteredProgrammes,
   handleClick,
   disabled,
   showing
@@ -21,7 +21,9 @@ const Question = ({
     >
       <Grid>
         <Grid.Column width={1} className={`question-caret-${disabled}`}>
-          <Icon name={`caret ${showing === question.id ? "down" : "right"}`} />
+          {filteredProgrammes.length > 1 &&  
+            <Icon name={`caret ${showing === question.id ? "down" : "right"}`} />
+          }
         </Grid.Column>
         <Grid.Column width={11}>
           <span><small className={`question-title-${disabled}`}>
@@ -33,18 +35,19 @@ const Question = ({
         <Grid.Column width={2}/>
         <Grid.Column width={2} floated="right">
           <Label className={`answered-label-${disabled}`} size="large">
-            {answers ? answers.length : 0} / {usersProgrammes.length}
+            {answers ? answers.length : 0} / {filteredProgrammes.length}
           </Label>
         </Grid.Column>
       </Grid>
     </Accordion.Title>
     {answers && (
-      <Accordion.Content active={showing === question.id}>
-        {usersProgrammes.length > 1 && <div className="ui divider" />}
+      <Accordion.Content active={showing === question.id} className="question-content">
+        {filteredProgrammes.length > 1 && <div className="ui divider" />}
         {answers && (
-          answers.map((programme, index) => 
+          answers.sort((a,b) => a['name'].localeCompare(b['name'])).map((programme, index) =>
             <div key={index}>
               <label className="answer-title">{programme.name}</label>
+              <span className={`answer-circle-${programme.color}`} />
               <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                 {programme.answer.split('\n').map((row, index) =>
                   <li key={index} className="answer-row">{row}</li>

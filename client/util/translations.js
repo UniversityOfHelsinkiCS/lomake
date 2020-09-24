@@ -75,6 +75,27 @@ export const translations = {
     en: 'Red',
     se: 'Röd',
   },
+  // Generic/LevelFilter.js
+  bachelor: {
+    fi: 'Kandiohjelmat',
+    en: 'Bachelor\'s programmes',
+    se: 'Kandidatsprogram',
+  },
+  master: {
+    fi: 'Maisteriohjelmat',
+    en: 'Master\'s programmes',
+    se: 'Magisterprogram',
+  },
+  doctoral: {
+    fi: 'Tohtoriohjelmat',
+    en: 'Doctoral programmes',
+    se: 'Doktorandprogram',
+  },
+  otherProgrammes: {
+    fi: 'Muut koulutusohjelmat',
+    en: 'Other Programmes',
+    se: 'Andra program'
+  },
   // OverviewPage/index.js
   // FormView/index.js
   noPermissions: {
