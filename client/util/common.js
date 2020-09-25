@@ -74,6 +74,7 @@ export const cleanText = (string) => {
   if (!string) return
   if (string === '') return
   const cleanedText = string
+    .replace(/_x000D_/g, '')
     .replace(/&#8259;/g, '\n')
     .replace(/ *• */g, '\n')
     .replace(/· /g, '\n')
