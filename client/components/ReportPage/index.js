@@ -7,11 +7,13 @@ import Question from './Question'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
+import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/OverviewPage/YearSelector'
 import { 
   answersByYear, 
   cleanText,
   getMeasuresAnswer,
+  facultiesWithKeys,
   programmeNameByKey as programmeName, 
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
@@ -27,6 +29,8 @@ export default () => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
+  const facultiesData = useSelector(({ faculties }) => faculties.data)
+  const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const [showing, setShowing] = useState(-1)
 
@@ -45,25 +49,37 @@ export default () => {
     const usersPermissionsKeys = Object.keys(user.data.access)
     return user.data.admin
       ? programmes
-      : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
+      : programmes.filter((p) => usersPermissionsKeys.includes(p.key))
   }, [programmes, user.data])
 
-  const filteredProgrammes = useMemo(() => {
+  const faculties = facultiesWithKeys(facultiesData)
+
+  const filteredByLevel = useMemo(() => {
     if (level === 'allProgrammes') return usersProgrammes.map((p) => p.key)
-    const filtered = usersProgrammes.filter((prog) => {
-      const searched = prog.name['en'] // Because se and fi don't always have values.
+    const filtered = usersProgrammes.filter((p) => {
+      const searched = p.name['en'].toLowerCase() // Because se and fi don't always have values.
       if (level === 'otherProgrammes') {
-        const p = searched.toLowerCase()
         return !(
-          p.includes("master")
-          || p.includes("bachelor")
-          || p.includes("doctor")
+          searched.includes("master")
+          || searched.includes("bachelor")
+          || searched.includes("doctor")
         )
       }
-      return searched.toLowerCase().includes(levels[level].toString())
+      return searched.includes(levels[level].toString())
     })
+
     return filtered.map((p) => p.key)
   }, [usersProgrammes, lang, level])
+
+  const filteredProgrammes = useMemo(() => {
+    if (selectedFaculty === 'allFaculties') return filteredByLevel
+    const filtered = filteredByLevel.filter((p) => {
+      const faculty = faculties.get(p)
+      return (faculty === selectedFaculty)
+    })
+
+    return filtered
+  }, [filteredByLevel, faculties, selectedFaculty])
 
   const selectedAnswers = answersByYear(year, answers, oldAnswers)
 
@@ -132,7 +148,11 @@ export default () => {
     <>
       <div className="filter-container">
         <YearSelector />
-        {usersProgrammes.length > 1 && <LevelFilter usersProgrammes={usersProgrammes}/>}
+        {usersProgrammes.length > 1 &&
+          <>
+            <FacultyFilter />
+            <LevelFilter usersProgrammes={usersProgrammes}/>
+          </>}
       </div>
       <Accordion fluid styled className="question-accordion">
         <Accordion.Title active>

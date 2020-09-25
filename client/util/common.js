@@ -62,9 +62,10 @@ export const keysWithFaculties = (faculties) => {
 }
 
 export const facultiesWithKeys = (faculties) => {
+  if (!faculties) return
   let facultiesWithProgrammes = new Map()
   faculties.forEach((faculty) => {
-    faculty.programmes.forEach((programmeKey) => facultiesWithProgrammes.set(faculty.name, programmeKey))
+    faculty.programmes.forEach((programmeKey) => facultiesWithProgrammes.set(programmeKey, faculty.code))
   })
   return facultiesWithProgrammes
 }

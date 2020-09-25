@@ -183,5 +183,11 @@ export const translations = {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
-  }
+  },
+  // Generic/FacultyFilter.js
+  facultyFilter: {
+    en: 'Filter by faculty',
+    fi: 'Valitse raportille tuleva tiedekunta',
+    se: 'Filter by faculty',
+  },
 }
