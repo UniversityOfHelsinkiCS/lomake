@@ -9,7 +9,7 @@ import './LevelFilter.scss'
 const LevelFilter = () => {
   const dispatch = useDispatch()
   const level = useSelector((state) => state.programmeLevel)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   const handleChange = (e, { value }) => {
     dispatch(setProgrammeLevel(value))
@@ -17,10 +17,11 @@ const LevelFilter = () => {
 
   return (
     <div className="level-form">
+      <label>{translations.levelFilter[lang]}</label>
       <Form>
         <Form.Field>
           <Radio
-            label={translations.allProgrammes[languageCode]}
+            label={translations.allProgrammes[lang]}
             name='allProgrammes'
             value='allProgrammes'
             checked={level === 'allProgrammes'}
@@ -29,7 +30,7 @@ const LevelFilter = () => {
         </Form.Field>
         <Form.Field>
           <Radio
-            label={translations.bachelor[languageCode]}
+            label={translations.bachelor[lang]}
             name='bachelor'
             value='bachelor'
             checked={level === 'bachelor'}
@@ -38,7 +39,7 @@ const LevelFilter = () => {
         </Form.Field>
         <Form.Field>
           <Radio
-            label={translations.master[languageCode]}
+            label={translations.master[lang]}
             name='master'
             value='master'
             checked={level === 'master'}
@@ -47,7 +48,7 @@ const LevelFilter = () => {
         </Form.Field>
         <Form.Field>
           <Radio
-            label={translations.doctoral[languageCode]}
+            label={translations.doctoral[lang]}
             name='doctoral'
             value='doctoral'
             checked={level === 'doctoral'}
@@ -56,7 +57,7 @@ const LevelFilter = () => {
         </Form.Field>
         <Form.Field>
           <Radio
-            label={translations.otherProgrammes[languageCode]}
+            label={translations.otherProgrammes[lang]}
             name='otherProgrammes'
             value='otherProgrammes'
             checked={level === 'otherProgrammes'}

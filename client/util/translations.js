@@ -185,9 +185,15 @@ export const translations = {
     se: 'Alla program',
   },
   // Generic/FacultyFilter.js
+  levelFilter: {
+    en: 'Filter by programme level',
+    fi: 'Valitse vastaukset koulutusasteittain',
+    se: 'Filter by programme level',
+  },
+  // Generic/FacultyFilter.js
   facultyFilter: {
     en: 'Filter by faculty',
-    fi: 'Valitse raportille tuleva tiedekunta',
+    fi: 'Valitse vastaukset tiedekunnittain',
     se: 'Filter by faculty',
   },
 }

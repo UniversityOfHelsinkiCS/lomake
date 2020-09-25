@@ -48,7 +48,7 @@ export default function YearSelector() {
         width: 'fit-content',
       }}
     >
-      <span>{translations.selectYear[languageCode]}</span>
+      <label>{translations.selectYear[languageCode]}</label>
       <Select
         disabled={yearOptions.length <= 1}
         data-cy="yearSelector"
