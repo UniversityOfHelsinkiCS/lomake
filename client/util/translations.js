@@ -103,9 +103,14 @@ export const translations = {
     en: "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
   },
+  findProgramme: {
+    fi: 'Etsi koulutusohjelmia',
+    en: 'Search for study programmes',
+    se: ''
+  },
   filter: {
-    fi: 'Filtteröi',
-    en: 'Filter',
+    fi: 'Etsi koulutusohjelmia',
+    en: 'Search for study programmes',
     se: 'Filtrera',
   },
   showUnclaimedOnly: {
@@ -169,6 +174,11 @@ export const translations = {
     se: 'Blankett',
   },
   // ReportPage/index.js
+  reportPage: {
+    fi: 'Tilannekuvalomakkeen vastaukset',
+    en: 'Answers',
+    se: 'Answers',
+  },
   reportHeader: {
     en: 'Written answers',
     fi: 'Kirjalliset vastaukset',
@@ -187,13 +197,13 @@ export const translations = {
   // Generic/FacultyFilter.js
   levelFilter: {
     en: 'Filter by programme level',
-    fi: 'Valitse vastaukset koulutusasteittain',
+    fi: 'Vastaukset koulutusasteittain',
     se: 'Filter by programme level',
   },
   // Generic/FacultyFilter.js
   facultyFilter: {
     en: 'Filter by faculty',
-    fi: 'Valitse vastaukset tiedekunnittain',
+    fi: 'Vastaukset tiedekunnittain',
     se: 'Filter by faculty',
   },
 }

@@ -19,51 +19,53 @@ const LevelFilter = () => {
     <div className="level-form">
       <label>{translations.levelFilter[lang]}</label>
       <Form>
-        <Form.Field>
-          <Radio
-            label={translations.allProgrammes[lang]}
-            name='allProgrammes'
-            value='allProgrammes'
-            checked={level === 'allProgrammes'}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label={translations.bachelor[lang]}
-            name='bachelor'
-            value='bachelor'
-            checked={level === 'bachelor'}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label={translations.master[lang]}
-            name='master'
-            value='master'
-            checked={level === 'master'}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label={translations.doctoral[lang]}
-            name='doctoral'
-            value='doctoral'
-            checked={level === 'doctoral'}
-            onChange={handleChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label={translations.otherProgrammes[lang]}
-            name='otherProgrammes'
-            value='otherProgrammes'
-            checked={level === 'otherProgrammes'}
-            onChange={handleChange}
-          />
-        </Form.Field>
+        <Form.Group inline>
+          <Form.Field>
+            <Radio
+              label={translations.allProgrammes[lang]}
+              name='allProgrammes'
+              value='allProgrammes'
+              checked={level === 'allProgrammes'}
+              onChange={handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label={translations.bachelor[lang]}
+              name='bachelor'
+              value='bachelor'
+              checked={level === 'bachelor'}
+              onChange={handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label={translations.master[lang]}
+              name='master'
+              value='master'
+              checked={level === 'master'}
+              onChange={handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label={translations.doctoral[lang]}
+              name='doctoral'
+              value='doctoral'
+              checked={level === 'doctoral'}
+              onChange={handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label={translations.otherProgrammes[lang]}
+              name='otherProgrammes'
+              value='otherProgrammes'
+              checked={level === 'otherProgrammes'}
+              onChange={handleChange}
+            />
+          </Form.Field>
+        </Form.Group>
       </Form>
     </div>
   )

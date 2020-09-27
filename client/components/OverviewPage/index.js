@@ -124,10 +124,10 @@ export default () => {
                 }}
               >
                 <Input
-                  style={{ width: '200px' }}
+                  style={{ width: '280px', marginBottom: '15px'}}
                   data-cy="overviewpage-filter"
                   name="filter"
-                  icon="filter"
+                  icon="search"
                   placeholder={translations.filter[languageCode]}
                   onChange={handleChange}
                   value={filter}

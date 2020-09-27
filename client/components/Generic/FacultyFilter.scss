@@ -1,4 +1,8 @@
 .faculty-filter {
   margin: 2em 0em 1em 0em;
-  width: 250px;
+  width: 300px;
+  > label {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+  }
 }

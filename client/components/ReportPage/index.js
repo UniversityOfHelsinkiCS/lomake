@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Accordion, Grid, Segment } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
@@ -147,26 +147,26 @@ export default () => {
   return (
     <>
       <div className="filter-container">
+        <h1>{translations.reportPage[lang]}</h1>
         <YearSelector />
         {usersProgrammes.length > 1 &&
           <>
             <FacultyFilter />
             <LevelFilter usersProgrammes={usersProgrammes}/>
-          </>}
+          </>
+        }
       </div>
       <Accordion fluid styled className="question-accordion">
-        <Accordion.Title active>
+        <Accordion.Title className="question-accordion-header" active>
           <Grid>
-            <Grid.Column width={1} className="left-header"/>
-            <Grid.Column width={4}>
-              {translations.questions[lang]}
+            <Grid.Column width={4} className="left-header">
+              <p>{translations.questions[lang]}</p>
             </Grid.Column>
             <Grid.Column width={6} className="center-header">
-              <p>{year} - {translations.reportHeader[lang]}</p>
-              <p> {translations[level][lang]}</p>
+              <p>{year} - {translations.reportHeader[lang]} - {translations[level][lang]}</p>
             </Grid.Column>
-            <Grid.Column width={3} floated="right">
-              <p className="right-header">
+            <Grid.Column width={5} className="right-header" floated="right">
+              <p >
                 {translations.answered[lang]} / {translations.allProgrammes[lang]}
               </p>
             </Grid.Column>

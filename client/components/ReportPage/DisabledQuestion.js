@@ -9,7 +9,7 @@ const DisabledQuestion = ({ question, filteredProgrammes }) => (
       className="question-header-disabled"
     >
       <Grid>
-        <Grid.Column width={1} className="left-header" />
+        <Grid.Column width={1} className="question-caret" />
         <Grid.Column width={11}>
           <span><small className="question-title-disabled">
             {romanize(question.titleIndex)} - {question.title}

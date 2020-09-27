@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedYear } from 'Utilities/redux/formReducer'
+import './YearSelector.scss'
 
 const translations = {
   selectYear: {
@@ -41,13 +42,7 @@ export default function YearSelector() {
   if (!previousYearsWithAnswers) return null
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: 'fit-content',
-      }}
-    >
+    <div className="year-filter">
       <label>{translations.selectYear[languageCode]}</label>
       <Select
         disabled={yearOptions.length <= 1}
