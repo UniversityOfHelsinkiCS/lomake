@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Grid, Segment } from 'semantic-ui-react'
+import { Accordion, Grid } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
@@ -8,7 +8,7 @@ import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
-import YearSelector from 'Components/OverviewPage/YearSelector'
+import YearSelector from 'Components/Generic/YearSelector'
 import { 
   answersByYear, 
   cleanText,

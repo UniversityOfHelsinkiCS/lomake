@@ -19,7 +19,7 @@ import NavigationSidebar from './NavigationSidebar'
 import SaveIndicator from './SaveIndicator'
 import CsvDownload from '../Generic/CsvDownload'
 import PDFDownload from './PDFDownload'
-import YearSelector from 'Components/OverviewPage/YearSelector'
+import YearSelector from 'Components/Generic/YearSelector'
 
 
 const FormView = ({ room }) => {

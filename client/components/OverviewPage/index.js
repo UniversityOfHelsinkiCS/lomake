@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Dropdown, Header, Input, Radio } from 'semantic-ui-react'
+import { Dropdown, Input, Radio } from 'semantic-ui-react'
 import './OverviewPage.scss'
 import SmileyTable from './SmileyTable'
 import { useSelector } from 'react-redux'
@@ -8,10 +8,10 @@ import ProgramControlsContent from './ProgramControlsContent'
 import CsvDownload from '../Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import YearSelector from 'Components/Generic/YearSelector'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
 import {translations} from '../../util/translations'
-import YearSelector from './YearSelector'
 
 
 export default () => {
