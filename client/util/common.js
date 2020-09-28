@@ -11,9 +11,9 @@ export const images = {
 
 export const colors = {
   background_blue: '#dff0ff',
-  background_red: '#ff7f7f',
-  background_yellow: '#ffffb1',
-  background_green: '#9dff9d',
+  background_red: '#F37778',
+  background_yellow: '#F9D03B',
+  background_green: '#1DB954',
   background_white: '#FFFFFF',
   background_beige: 'rgba(255, 205, 76, 0.18)',
   background_light_gray: '#f8f8f8',

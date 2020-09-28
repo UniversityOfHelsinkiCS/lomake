@@ -180,9 +180,16 @@ export const translations = {
     se: 'Answers',
   },
   reportHeader: {
-    en: 'Written answers',
-    fi: 'Kirjalliset vastaukset',
-    se: 'Written answers',
+    written: {
+      en: 'Written answers',
+      fi: 'Kirjalliset vastaukset',
+      se: 'Written answers',  
+    },
+    smileys: {
+      en: 'Smiley colors',
+      fi: 'Hymiöiden värit',
+      se: 'Smiley colors',
+    },
   },
   answered: {
     en: 'Answered',
@@ -193,6 +200,17 @@ export const translations = {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
+  },
+  // ReportPage/SmileyAnswers.js 
+  responses: {
+    en: 'Responses: ',
+    fi: 'Vastauksia: ',
+    se: 'Responses: ',
+  },
+  emptyAnswers: {
+    en: 'Include programmes without answers',
+    fi: 'Näytä myös tyhjät vastaukset',
+    se: 'Include programmes without answers',
   },
   // Generic/FacultyFilter.js
   levelFilter: {

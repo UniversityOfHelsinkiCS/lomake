@@ -1,15 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import DisabledQuestion from './DisabledQuestion'
-import Question from './Question'
-import SingleProgramQuestion from './SingleProgramQuestion'
+import WrittenAnswers from './WrittenAnswers'
+import SmileyAnswers from './SmileyAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
-import { 
+import {
   answersByYear, 
   cleanText,
   getMeasuresAnswer,
@@ -32,7 +31,6 @@ export default () => {
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
-  const [showing, setShowing] = useState(-1)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -85,20 +83,16 @@ export default () => {
 
   if (!selectedAnswers) return <></>
   
-  const handleClick = (e, titleProps) => {
-    const { index } = titleProps
-    const newIndex = showing === index ? -1 : index
-    setShowing(newIndex)
-  }
-
   const modifiedQuestions = () => {
     let attributes = []
     let titleIndex = -1
+    let labelIndex = -1
     questions.forEach((question) => {
       titleIndex = titleIndex + 1
       
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
+          if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
           let label = part.label['en'] ? part.label : question.title
           const description = part.description ? part.description : { 'fi': '', 'en': '', 'se': '' }
           const id = `${part.id}_text`
@@ -108,7 +102,9 @@ export default () => {
             "label": label[lang] ? label[lang] : label['en'], 
             "description": description[lang] ? description[lang] : description['en'],
             "title": question.title[lang] ? question.title[lang] : question.title['en'], 
-            "titleIndex": titleIndex
+            "titleIndex": titleIndex,
+            "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? labelIndex : '',
+            "no_light": (part.type === "MEASURES" || part.no_light || part.id.includes("information_needed") || part.id.includes("information_used")) ? true : false
           }]  
         }
       })
@@ -127,11 +123,12 @@ export default () => {
         questionsList.forEach((question) => {
           let answer = ''
           let questionData = answerMap.get(question.id) ? answerMap.get(question.id) : []
+          let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
           if (question.id === "measures_text") answer = getMeasuresAnswer(data)
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-          questionData = [...questionData, {name: name, color: data[question.color], answer: answer}]  
+          questionData = [...questionData, {name: name, color: color, answer: answer}]  
           if (answer) answerMap.set(question.id, questionData)
         })
       }
@@ -141,6 +138,34 @@ export default () => {
   }
 
   const allAnswers = answersByQuestions()
+
+  const panes = [
+    { menuItem: translations.reportHeader['written'][lang], render: () =>
+      <Tab.Pane className="report-page-tab">
+        <WrittenAnswers
+          year={year}
+          level={level}
+          lang={lang}
+          filteredProgrammes={filteredProgrammes}
+          usersProgrammes={usersProgrammes}
+          questionsList={questionsList}
+          allAnswers={allAnswers}
+        />
+      </Tab.Pane> 
+    },
+    { menuItem: translations.reportHeader['smileys'][lang], render: () => 
+      <Tab.Pane>
+        <SmileyAnswers
+          year={year}
+          level={level}
+          lang={lang}
+          allAnswers={allAnswers}
+          filteredProgrammes={filteredProgrammes}
+          questionsList={questionsList}
+        />
+      </Tab.Pane> 
+    },
+  ]
 
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
@@ -156,50 +181,7 @@ export default () => {
           </>
         }
       </div>
-      <Accordion fluid styled className="question-accordion">
-        <Accordion.Title className="question-accordion-header" active>
-          <Grid>
-            <Grid.Column width={4} className="left-header">
-              <p>{translations.questions[lang]}</p>
-            </Grid.Column>
-            <Grid.Column width={6} className="center-header">
-              <p>{year} - {translations.reportHeader[lang]} - {translations[level][lang]}</p>
-            </Grid.Column>
-            <Grid.Column width={5} className="right-header" floated="right">
-              <p >
-                {translations.answered[lang]} / {translations.allProgrammes[lang]}
-              </p>
-            </Grid.Column>
-          </Grid>
-        </Accordion.Title>
-        {questionsList.map((question) =>
-          (allAnswers.get(question.id) ? (
-            filteredProgrammes.length === 1 ?
-              <SingleProgramQuestion 
-                key={question.id}
-                answers={allAnswers.get(question.id)}
-                question={question}
-              />
-              :
-              <Question
-                key={question.id}
-                answers={allAnswers.get(question.id)}
-                question={question}
-                filteredProgrammes={filteredProgrammes}
-                year={year}
-                handleClick={handleClick}
-                showing={filteredProgrammes.length < 2 ? question.id : showing}
-              />
-            )
-            :
-            <DisabledQuestion
-              key={question.id}
-              question={question}
-              filteredProgrammes={filteredProgrammes}
-            />
-          )
-        )}
-      </Accordion>
+      <Tab className="report-page-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </>
   )
 }

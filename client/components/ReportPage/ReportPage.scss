@@ -3,16 +3,26 @@ $blue: #0E6EB8;
 $white: #FFFFFF;
 $dark_gray: #4e4c4c;
 $gray: #A0A0A0;
-$background-red: #ff7f7f;
-$background-yellow: #ffffb1;
-$background-green: #9dff9d;
+$background-red: #F37778;
+$background-yellow: #F9D03B;
+$background-green: #1DB954;
 
 .filter-container {
   margin: 40px 0px 20px 0px !important;
   width: 90%;
+  max-width: 1400px;
+  align-self: center;
   > h1 {
     margin-bottom: 1.3em;
   } 
+}
+
+.report-page {
+  &-tab {
+    width: 90%;
+    max-width: 1400px;
+    align-self: center;
+  }
 }
 
 .left-header {
@@ -52,8 +62,11 @@ $background-green: #9dff9d;
 
 .question {
   &-accordion {
-    width: 90% !important;
-    margin-top: 40px;
+    margin-top: 1em;
+    padding: 10px;
+  }
+  &-accordion-header {
+    margin-bottom: 1em;
   }
   &-caret {
     @include question-caret-basics;
@@ -99,6 +112,7 @@ $background-green: #9dff9d;
   }
   &-content {
     margin-left: 25px !important;
+    max-width: 1200px;
   }
 }
 
@@ -122,7 +136,7 @@ $background-green: #9dff9d;
     @include answer-circle-basics;
     background: $background-yellow;
   }
-  &-circle-yellow {
+  &-circle-red {
     @include answer-circle-basics;
     background: $background-red;
   }
