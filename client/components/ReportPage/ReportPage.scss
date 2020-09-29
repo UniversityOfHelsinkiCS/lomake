@@ -2,7 +2,7 @@ $black: #1B1C1D;
 $blue: #0E6EB8;
 $white: #FFFFFF;
 $dark_gray: #4e4c4c;
-$gray: #A0A0A0;
+$gray: #747474;
 $background-red: #F37778;
 $background-yellow: #F9D03B;
 $background-green: #1DB954;
@@ -79,6 +79,10 @@ $background-green: #1DB954;
   > p {
     font-size: 1.1em;
   }
+}
+
+.report-side-note {
+  color: $gray;
 }
 
 @mixin question-caret-basics {
@@ -197,17 +201,12 @@ $background-green: #1DB954;
 }
 
 .report-smiley {
-  &-wide-header {
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    margin: 1em;  
-  }
   &-grid {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    width: 100%;  
+    width: 100%;
+    margin: 4em 0em;  
   }
   &-chart-area {
     width: 425px;

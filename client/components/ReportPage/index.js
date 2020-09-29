@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input, Segment, Tab } from 'semantic-ui-react'
+import { Segment, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
@@ -96,7 +96,7 @@ export default () => {
     setFilter(value)
   }
 
-  const selectedAnswers = answersByYear(year, answers, oldAnswers)
+  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
 
   if (!selectedAnswers) return <></>
   
@@ -122,7 +122,11 @@ export default () => {
             "title": question.title[lang] ? question.title[lang] : question.title['en'], 
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
-            "no_light": (part.type === "MEASURES" || part.no_light || part.id.includes("information_needed") || part.id.includes("information_used")) ? true : false
+            "no_light": (
+              part.type === "MEASURES" 
+              || part.no_light
+              || part.id.includes("information_needed") 
+              || part.id.includes("information_used")) ? true : false
           }]  
         }
       })
@@ -210,7 +214,11 @@ export default () => {
               <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
               <Segment className="report-programmes-list">
                 {filteredProgrammes.map((p) => 
-                  <p className="report-programme" onClick={() => setFilter(p.name[lang])}>
+                  <p 
+                    className="report-programme" 
+                    onClick={() => setFilter(p.name[lang])}
+                    key={p.key}
+                  >
                     {p.name[lang] ? p.name[lang] : p.name['en']}
                   </p>
                 )}

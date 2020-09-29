@@ -218,14 +218,19 @@ export const translations = {
     se: 'Responses:',
   },
   emptyAnswers: {
-    en: 'Include programmes without answers',
-    fi: 'Näytä myös tyhjät vastaukset',
-    se: 'Include programmes without answers',
+    en: 'Include programmes without answers to the graphs',
+    fi: 'Näytä myös tyhjät vastaukset osana graafia',
+    se: 'Include programmes without answers to the graphs',
   },
   noData: {
     fi: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     en: 'No data available for these choices',
     se: 'No data available for these choices',
+  },
+  noColors: {
+    fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 15 ja 16)',
+    en: 'Questions, without smileys are not shown here',
+    se: 'Questions, without smileys are not shown here',
   },
   // Generic/LevelFilter.js
   levelFilter: {

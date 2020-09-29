@@ -42,16 +42,14 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
       <div className="ui divider"/>
       {questionsList.map((question) =>
         (allAnswers.get(question.id) ? (
-          <>
+          <div key={question.id}>
           {filteredProgrammes.length === 1 ?
-            <SingleProgramQuestion 
-              key={question.id}
+            <SingleProgramQuestion
               answers={allAnswers.get(question.id)}
               question={question}
             />
             :
             <Question
-              key={question.id}
               answers={allAnswers.get(question.id)}
               question={question}
               filteredProgrammes={filteredProgrammes}
@@ -61,7 +59,7 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
             />
           }
           <div className="ui divider"/>
-          </>)
+          </div>)
           :
           <>
           <DisabledQuestion

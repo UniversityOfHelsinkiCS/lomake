@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Icon, Grid, Popup, Radio } from 'semantic-ui-react'
+import { Grid, Radio, Segment } from 'semantic-ui-react'
 import { translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
@@ -17,39 +17,34 @@ const SmileyAnswers = ({
 
   return (
     <div className="report-container">
-      <Grid>
-        <Grid.Column width={4} className="report-left-header" />
-        <Grid.Column width={6} className="report-center-header">
+      <Grid >
+        <Grid.Column className="report-center-header" width={16}>
           {year} - {translations.reportHeader['smileys'][lang]}
-        </Grid.Column>
-        <Grid.Column width={5} className="report-right-header" floated="right">
-          <Popup
-            size="large"
-            position="left center"
-            trigger={<Icon name="question circle outline" size="large"/>}
-            content={
-              <>
-                <p><span className="answer-circle-green" />  {translations.positive[lang]}</p>
-                <p><span className="answer-circle-yellow" />  {translations.neutral[lang]}</p>
-                <p><span className="answer-circle-red" />  {translations.negative[lang]}</p>
-                <p><span className="answer-circle-gray" /> {translations.empty[lang]}</p>
-              </>
-            }
-          />
         </Grid.Column>
       </Grid>
       <div className="ui divider"/>
-      <div className="report-smiley-wide-header">
-        <Radio
-          checked={showEmptyAnswers}
-          onChange={() => setShowEmptyAnswers(!showEmptyAnswers)}
-          label={translations.emptyAnswers[lang]}
-          toggle
-        />
-      </div>
+      <Grid centered>
+        <Grid.Row textAlign="left">
+          <Segment compact textAlign="left">
+            <p><span className="answer-circle-green" />  {translations.positive[lang]}</p>
+            <p><span className="answer-circle-yellow" />  {translations.neutral[lang]}</p>
+            <p><span className="answer-circle-red" />  {translations.negative[lang]}</p>
+            <p><span className="answer-circle-gray" /> {translations.empty[lang]}</p>
+            <p className="report-side-note">{translations.noColors[lang]}</p>
+          </Segment>
+        </Grid.Row>
+        <Grid.Row>
+          <Radio
+            checked={showEmptyAnswers}
+            onChange={() => setShowEmptyAnswers(!showEmptyAnswers)}
+            label={translations.emptyAnswers[lang]}
+            toggle
+          />
+        </Grid.Row>
+      </Grid>
       <div className="report-smiley-grid">
         {questionsList.map((question) =>
-          (allAnswers.get(question.id) && !question.no_light ?
+          (question.labelIndex && allAnswers.get(question.id) && !(question.no_light) ?
             <PieChart
               key={question.id}
               question={question}
@@ -58,7 +53,7 @@ const SmileyAnswers = ({
               showEmptyAnswers={showEmptyAnswers}
             />
             :
-            null
+            null          
           )
         )}
       </div>

@@ -4,7 +4,7 @@ import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
 
-const PieChart = ({ question,lang,allAnswers, showEmptyAnswers }) => {
+const PieChart = ({ question, lang, allAnswers, showEmptyAnswers }) => {
 
   const colorsTotal = (question) => {
     if (!question || !allAnswers.get(question.id)) return null
@@ -35,7 +35,7 @@ const PieChart = ({ question,lang,allAnswers, showEmptyAnswers }) => {
         value: total.red || 0,
       },
       {
-        color: colors.background_light_gray,
+        color: colors.light_gray,
         value: total.emptyAnswer && showEmptyAnswers ? total.emptyAnswer : 0,
       },
     ]
