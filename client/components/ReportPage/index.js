@@ -53,7 +53,7 @@ export default () => {
 
   const filteredByName = useMemo(() => {
     return usersProgrammes.filter((prog) => {
-      const searchTarget = prog.name[lang] ? prog.name[lang] : prog.name['en'] // Because sw and fi dont always have values.
+      const searchTarget = prog.name[lang] ? prog.name[lang] : prog.name['en']
       return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
   }, [usersProgrammes, lang, debouncedFilter])
@@ -61,7 +61,7 @@ export default () => {
   const filteredByLevel = useMemo(() => {
     if (level === 'allProgrammes') return filteredByName
     const filtered = filteredByName.filter((p) => {
-      const searched = p.name['en'].toLowerCase() // Because se and fi don't always have values.
+      const searched = p.name['en'].toLowerCase()
       if (level === 'otherProgrammes') {
         return !(
           searched.includes('master')
@@ -109,9 +109,9 @@ export default () => {
           attributes = [...attributes, { 
             "id": id,
             "color": `${part.id}_light`,
-            "label": label[lang] ? label[lang] : label['en'], 
-            "description": description[lang] ? description[lang] : description['en'],
-            "title": question.title[lang] ? question.title[lang] : question.title['en'], 
+            "label": label[lang],
+            "description": description[lang],
+            "title": question.title[lang],
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
             "no_light": part.no_light

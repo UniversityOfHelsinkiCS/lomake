@@ -44,16 +44,14 @@ const SmileyAnswers = ({
       </Grid>
       <div className="report-smiley-grid">
         {questionsList.map((question) =>
-          (question.labelIndex && allAnswers.get(question.id) && !(question.no_light) ?
+          (allAnswers.get(question.id) && !(question.no_light) &&
             <PieChart
               key={question.id}
               question={question}
               lang={lang}
-              allAnswers={allAnswers}
+              answers={allAnswers.get(question.id)}
               showEmptyAnswers={showEmptyAnswers}
             />
-            :
-            null          
           )
         )}
       </div>

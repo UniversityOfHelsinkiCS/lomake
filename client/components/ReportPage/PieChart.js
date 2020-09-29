@@ -4,13 +4,13 @@ import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
 
-const PieChart = ({ question, lang, allAnswers, showEmptyAnswers }) => {
+const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
 
   const colorsTotal = (question) => {
-    if (!question || !allAnswers.get(question.id)) return null
+    if (!question || !answers) return null
 
     let colors = {'green' : 0, 'yellow': 0, 'red': 0, 'emptyAnswer': 0, 'total': 0}
-    allAnswers.get(question.id).forEach((q) => {
+    answers.forEach((q) => {
       colors[q.color] = colors[q.color] + 1
       if (showEmptyAnswers) colors.total = colors.total + 1
       else if (!showEmptyAnswers && q.color !== 'emptyAnswer') colors.total = colors.total + 1
@@ -46,7 +46,7 @@ const PieChart = ({ question, lang, allAnswers, showEmptyAnswers }) => {
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
-        <p>{translations.responses[lang]} {allAnswers.get(question.id) ? colorsTotal(question).total : 0}</p>
+        <p>{translations.responses[lang]} {answers ? colorsTotal(question).total : 0}</p>
       </div>
       <div className="report-smiley-pie-chart">
         <Chart

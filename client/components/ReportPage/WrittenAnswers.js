@@ -50,31 +50,31 @@ const WrittenAnswers = ({
       {questionsList.map((question) =>
         (allAnswers.get(question.id) ? (
           <div key={question.id}>
-          {filteredProgrammes.length === 1 ?
-            <SingleProgramQuestion
-              answers={allAnswers.get(question.id)}
-              question={question}
-            />
-            :
-            <Question
-              answers={allAnswers.get(question.id)}
-              question={question}
-              filteredProgrammes={filteredProgrammes}
-              year={year}
-              handleClick={handleClick}
-              showing={filteredProgrammes.length < 2 ? question.id : showing}
-            />
-          }
-          <div className="ui divider"/>
+            {filteredProgrammes.length === 1 ?
+              <SingleProgramQuestion
+                answers={allAnswers.get(question.id)}
+                question={question}
+              />
+              :
+              <Question
+                answers={allAnswers.get(question.id)}
+                question={question}
+                filteredProgrammes={filteredProgrammes}
+                year={year}
+                handleClick={handleClick}
+                showing={filteredProgrammes.length < 2 ? question.id : showing}
+              />
+            }
+            <div className="ui divider"/>
           </div>)
           :
           <>
-          <DisabledQuestion
-            key={question.id}
-            question={question}
-            filteredProgrammes={filteredProgrammes}
-          />
-          <div className="ui divider"/>
+            <DisabledQuestion
+              key={question.id}
+              question={question}
+              filteredProgrammes={filteredProgrammes}
+            />
+            <div className="ui divider"/>
           </>
         )
       )}
