@@ -28,7 +28,7 @@ const Question = ({
           <span><small className="question-title">
             {romanize(question.titleIndex)} - {question.title}
           </small></span>
-          <p className="question-label">{question.label}</p>
+          <p className="question-label">{question.labelIndex} {question.label}</p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">

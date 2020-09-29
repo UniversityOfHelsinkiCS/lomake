@@ -204,13 +204,17 @@ export default () => {
             />
           </>}
           <div className="report-programmes-container">
-            <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
             {filteredProgrammes.length > 0 ?
-              <Segment className="report-programmes-list">
-                {filteredProgrammes.map((p) => <p className="report-programme" onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}</p>)}
-              </Segment>
+              (
+              <>
+                <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
+                <Segment className="report-programmes-list">
+                  {filteredProgrammes.map((p) => <p className="report-programme" onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}</p>)}
+                </Segment>
+              </>
+              )
               : 
-              <div><h3>{translations.noData[lang]}</h3></div>
+              <h3>{translations.noData[lang]}</h3>
             }
           </div>
       </div>

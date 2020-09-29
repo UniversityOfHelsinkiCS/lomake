@@ -14,7 +14,7 @@ const DisabledQuestion = ({ question, filteredProgrammes }) => (
           <span><small className="question-title-disabled">
             {romanize(question.titleIndex)} - {question.title}
           </small></span>
-          <p className="question-label-disabled">{question.label}</p>
+          <p className="question-label-disabled">{question.labelIndex} {question.label}</p>
           <p className="question-description-disabled">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">
