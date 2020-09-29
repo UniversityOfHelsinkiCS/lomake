@@ -173,7 +173,8 @@
           "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
           "en": "What other information did you use?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       },
       {
         "id": "overall_status_information_needed",
@@ -183,7 +184,8 @@
           "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
           "en": "What information would you have needed?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       }
     ]
   },
@@ -256,7 +258,8 @@
           "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
           "en": "What other information and sources of information did you use?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       },
       {
         "id": "wellbeing_information_needed",
@@ -266,7 +269,8 @@
           "se": "Vilka uppgifter skulle ni ha behövt?",
           "en": "What information would you have needed?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       }
     ]
   },
@@ -339,7 +343,8 @@
           "se": "Vilka andra uppgifter och uppgiftskällor använde ni?",
           "en": "What other information and sources of information did you use?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       },
       {
         "id": "sufficient_resources_information_needed",
@@ -349,7 +354,8 @@
           "se": "Vilka uppgifter behöver ni om detta tema?",
           "en": "What information would you need?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       }
     ]
   },
@@ -392,7 +398,8 @@
           "se": "Vilka uppgifter och uppgiftskällor använde ni?",
           "en": "What information and sources of information did you use?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       },
       {
         "id": "joint_programme_information_needed",
@@ -402,7 +409,8 @@
           "se": "Vilka uppgifter behöver ni om detta tema?",
           "en": "What information would you have needed?"
         },
-        "required": false
+        "required": false,
+        "no_light": true
       }
     ]
   },
@@ -446,7 +454,8 @@
           "se": "ÅTGÄRDER OCH NÖDVÄNDIGA RESURSER SOM FÖRESLÅS INGÅ I FAKULTETENS GENOMFÖRANDEPLAN OCH PERSONALPLAN",
           "en": "MEASURES AND THE REQUIRED RESOURCES FOR THE FACULTY’S IMPLEMENTATION PLAN AND HR PLAN"
         },
-        "required": true
+        "required": true,
+        "no_light": true
       }
     ]
   },

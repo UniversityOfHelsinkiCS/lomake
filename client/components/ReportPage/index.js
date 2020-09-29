@@ -114,11 +114,7 @@ export default () => {
             "title": question.title[lang] ? question.title[lang] : question.title['en'], 
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
-            "no_light": (
-              part.type === "MEASURES" 
-              || part.no_light
-              || part.id.includes("information_needed") 
-              || part.id.includes("information_used")) ? true : false
+            "no_light": part.no_light
           }]  
         }
       })
