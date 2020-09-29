@@ -76,6 +76,11 @@ export const translations = {
     se: 'Röd',
   },
   // Generic/LevelFilter.js
+  levelFilter: {
+    en: 'Filter by programme level',
+    fi: 'Vastaukset koulutusasteittain',
+    se: 'Filter by programme level',
+  },
   bachelor: {
     fi: 'Kandiohjelmat',
     en: 'Bachelor\'s programmes',
@@ -95,6 +100,18 @@ export const translations = {
     fi: 'Muut koulutusohjelmat',
     en: 'Other Programmes',
     se: 'Andra program'
+  },
+  // Generic/FacultyFilter.js
+  facultyFilter: {
+    en: 'Filter by faculty',
+    fi: 'Vastaukset tiedekunnittain',
+    se: 'Filter by faculty',
+  },
+  // Generic/ProgrammeFilter.js
+  programmeFilter: {
+    en: 'Search for specific programmes',
+    fi: 'Etsi koulutusohjelmia',
+    se: 'Search for specific programmes',
   },
   // OverviewPage/index.js
   // FormView/index.js
@@ -219,7 +236,7 @@ export const translations = {
   },
   emptyAnswers: {
     en: 'Include programmes without answers to the graphs',
-    fi: 'Näytä myös tyhjät vastaukset osana graafia',
+    fi: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
     se: 'Include programmes without answers to the graphs',
   },
   noData: {
@@ -231,23 +248,5 @@ export const translations = {
     fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 15 ja 16)',
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
-  },
-  // Generic/LevelFilter.js
-  levelFilter: {
-    en: 'Filter by programme level',
-    fi: 'Vastaukset koulutusasteittain',
-    se: 'Filter by programme level',
-  },
-  // Generic/FacultyFilter.js
-  facultyFilter: {
-    en: 'Filter by faculty',
-    fi: 'Vastaukset tiedekunnittain',
-    se: 'Filter by faculty',
-  },
-  // Generic/SearchBar.js
-  searchBar: {
-    en: 'Search for specific programmes',
-    fi: 'Etsi koulutusohjelmia',
-    se: 'Search for specific programmes',
   },
 }
