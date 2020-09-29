@@ -10,7 +10,14 @@ import { translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
 
-const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAnswers, questionsList }) => {
+const WrittenAnswers = ({ 
+  lang, 
+  year, 
+  usersProgrammes, 
+  filteredProgrammes, 
+  allAnswers, 
+  questionsList 
+}) => {
   const dispatch = useDispatch()
   const [showing, setShowing] = useState(-1)
 
@@ -28,17 +35,17 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
 
   return (
     <Accordion fluid className="report-container">
-        <Grid>
-          <Grid.Column width={4} className="report-left-header">
-            {translations.questions[lang]}
-          </Grid.Column>
-          <Grid.Column width={6} className="report-center-header">
-            {year} - {translations.reportHeader['written'][lang]}
-          </Grid.Column>
-          <Grid.Column width={5} className="report-right-header" floated="right">
-            {translations.answered[lang]} / {translations.allProgrammes[lang]}            
-          </Grid.Column>
-        </Grid>
+      <Grid>
+        <Grid.Column width={4} className="report-left-header">
+          {translations.questions[lang]}
+        </Grid.Column>
+        <Grid.Column width={6} className="report-center-header">
+          {year} - {translations.reportHeader['written'][lang]}
+        </Grid.Column>
+        <Grid.Column width={5} className="report-right-header" floated="right">
+          {translations.answered[lang]} / {translations.allProgrammes[lang]}            
+        </Grid.Column>
+      </Grid>
       <div className="ui divider"/>
       {questionsList.map((question) =>
         (allAnswers.get(question.id) ? (

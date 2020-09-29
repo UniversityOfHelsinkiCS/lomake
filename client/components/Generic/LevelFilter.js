@@ -50,9 +50,9 @@ const LevelFilter = () => {
           <Form.Field>
             <Radio
               label={translations.doctoral[lang]}
-              name='doctoral'
-              value='doctoral'
-              checked={level === 'doctoral'}
+              name='doctor'
+              value='doctor'
+              checked={level === 'doctor'}
               onChange={handleChange}
             />
           </Form.Field>

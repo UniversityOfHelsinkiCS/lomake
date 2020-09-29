@@ -36,17 +36,13 @@ export default () => {
   const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
 
+  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
+  const faculties = facultiesWithKeys(facultiesData)
+
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
-
-  const levels = {
-    allProgrammes : '',
-    master : 'master',
-    bachelor : 'bachelor',
-    doctoral : 'doctor',
-  }
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(user.data.access)
@@ -54,8 +50,6 @@ export default () => {
       ? programmes
       : programmes.filter((p) => usersPermissionsKeys.includes(p.key))
   }, [programmes, user.data])
-
-  const faculties = facultiesWithKeys(facultiesData)
 
   const filteredByName = useMemo(() => {
     return usersProgrammes.filter((prog) => {
@@ -70,12 +64,12 @@ export default () => {
       const searched = p.name['en'].toLowerCase() // Because se and fi don't always have values.
       if (level === 'otherProgrammes') {
         return !(
-          searched.includes("master")
-          || searched.includes("bachelor")
-          || searched.includes("doctor")
+          searched.includes('master')
+          || searched.includes('bachelor')
+          || searched.includes('doctor')
         )
       }
-      return searched.includes(levels[level].toString())
+      return searched.includes(level.toString())
     })
 
     return filtered
@@ -95,9 +89,7 @@ export default () => {
     const { value } = target
     setFilter(value)
   }
-
-  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
-
+  
   if (!selectedAnswers) return <></>
   
   const modifiedQuestions = () => {

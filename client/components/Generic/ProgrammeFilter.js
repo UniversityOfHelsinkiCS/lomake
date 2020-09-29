@@ -5,7 +5,6 @@ import './Filters.scss'
 
 const ProgrammeFilter = ({ handleChange, filter, lang }) => (
 
-
   <div className="programme-filter">
     <label>{translations.searchBar[lang]}</label>
     <Input
