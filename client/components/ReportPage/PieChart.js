@@ -43,12 +43,12 @@ const PieChart = ({ question,lang,allAnswers, showEmptyAnswers }) => {
   }
 
   return (
-    <div className="report-chart-area">
-      <div className="report-pie-header">
-        <p>{question.labelIndex}. {question.label}</p>
+    <div className="report-smiley-chart-area">
+      <div className="report-smiley-pie-header">
+        <p>{question.labelIndex} {question.label}</p>
         <p>{translations.responses[lang]} {allAnswers.get(question.id) ? colorsTotal(question).total : 0}</p>
       </div>
-      <div className="report-pie-chart">
+      <div className="report-smiley-pie-chart">
         <Chart
           animationDuration={500}
           animationEasing="ease-out"

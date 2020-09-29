@@ -18,44 +18,37 @@ const SmileyAnswers = ({
 
   return (
     <div className="report-smiley-container">
-      <div className="report-smiley-header">
-        <Grid>
-          <Grid.Column width={4} className="left-header" />
-          <Grid.Column width={6} className="center-header">
-            <p>{year} - {translations.reportHeader['smileys'][lang]}</p>
-          </Grid.Column>
-          <Grid.Column width={5} className="right-header" floated="right">
-            <Popup
-              size="large"
-              trigger={
-                <Icon
-                  name="question circle outline"
-                  size="large"
-                />}
-                content={
-                  <>
-                    <p><span className="answer-circle-green" />  {translations.positive[lang]}</p>
-                    <p><span className="answer-circle-yellow" />  {translations.neutral[lang]}</p>
-                    <p><span className="answer-circle-red" />  {translations.negative[lang]}</p>
-                    <p><span className="answer-circle-gray" /> {translations.empty[lang]}</p>
-                  </>
-                }
-                on="click"
-                position="left center"
-              />
-          </Grid.Column>
-        </Grid>
-      </div>
-      <div className="ui divider"/>
-        <div className="report-wide-header">
-          <Radio
-            checked={showEmptyAnswers}
-            onChange={() => setShowEmptyAnswers(!showEmptyAnswers)}
-            label={translations.emptyAnswers[lang]}
-            toggle
+      <Grid>
+        <Grid.Column width={4} className="report-left-header" />
+        <Grid.Column width={6} className="report-center-header">
+          <p>{year} - {translations.reportHeader['smileys'][lang]}</p>
+        </Grid.Column>
+        <Grid.Column width={5} className="report-right-header" floated="right">
+          <Popup
+            size="large"
+            position="left center"
+            trigger={<Icon name="question circle outline" size="large"/>}
+            content={
+              <>
+                <p><span className="answer-circle-green" />  {translations.positive[lang]}</p>
+                <p><span className="answer-circle-yellow" />  {translations.neutral[lang]}</p>
+                <p><span className="answer-circle-red" />  {translations.negative[lang]}</p>
+                <p><span className="answer-circle-gray" /> {translations.empty[lang]}</p>
+              </>
+            }
           />
-        </div>
-        <div className="report-smiley-grid">
+        </Grid.Column>
+      </Grid>
+      <div className="ui divider"/>
+      <div className="report-smiley-wide-header">
+        <Radio
+          checked={showEmptyAnswers}
+          onChange={() => setShowEmptyAnswers(!showEmptyAnswers)}
+          label={translations.emptyAnswers[lang]}
+          toggle
+        />
+      </div>
+      <div className="report-smiley-grid">
         {questionsList.map((question) =>
           (allAnswers.get(question.id) && !question.no_light ?
             <PieChart

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
@@ -28,35 +28,30 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
 
   return (
     <Accordion fluid className="question-accordion">
-      <div className="question-accordion-header">
         <Grid>
-          <Grid.Column width={4} className="left-header">
+          <Grid.Column width={4} className="report-left-header">
             <p>{translations.questions[lang]}</p>
           </Grid.Column>
-          <Grid.Column width={6} className="center-header">
+          <Grid.Column width={6} className="report-center-header">
             <p>{year} - {translations.reportHeader['written'][lang]}</p>
           </Grid.Column>
-          <Grid.Column width={5} className="right-header" floated="right">
+          <Grid.Column width={5} className="report-right-header" floated="right">
             <p >
               {translations.answered[lang]} / {translations.allProgrammes[lang]}
             </p>
           </Grid.Column>
         </Grid>
-      </div>
       <div className="ui divider"/>
       {questionsList.map((question) =>
         (allAnswers.get(question.id) ? (
-          filteredProgrammes.length === 1 ?
-            <>
+          <>
+          {filteredProgrammes.length === 1 ?
             <SingleProgramQuestion 
               key={question.id}
               answers={allAnswers.get(question.id)}
               question={question}
             />
-            <div className="ui divider"/>
-            </>
             :
-            <>
             <Question
               key={question.id}
               answers={allAnswers.get(question.id)}
@@ -66,9 +61,9 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
               handleClick={handleClick}
               showing={filteredProgrammes.length < 2 ? question.id : showing}
             />
-            <div className="ui divider"/>
-            </>
-          )
+          }
+          <div className="ui divider"/>
+          </>)
           :
           <>
           <DisabledQuestion

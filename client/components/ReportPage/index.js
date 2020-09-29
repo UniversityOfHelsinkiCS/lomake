@@ -104,15 +104,16 @@ export default () => {
     let attributes = []
     let titleIndex = -1
     let labelIndex = -1
+
     questions.forEach((question) => {
-      titleIndex = titleIndex + 1
-      
+      titleIndex = titleIndex + 1  
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
           if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
           let label = part.label['en'] ? part.label : question.title
           const description = part.description ? part.description : { 'fi': '', 'en': '', 'se': '' }
           const id = `${part.id}_text`
+
           attributes = [...attributes, { 
             "id": id,
             "color": `${part.id}_light`,
@@ -120,7 +121,7 @@ export default () => {
             "description": description[lang] ? description[lang] : description['en'],
             "title": question.title[lang] ? question.title[lang] : question.title['en'], 
             "titleIndex": titleIndex,
-            "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? labelIndex : '',
+            "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
             "no_light": (part.type === "MEASURES" || part.no_light || part.id.includes("information_needed") || part.id.includes("information_used")) ? true : false
           }]  
         }
@@ -190,7 +191,7 @@ export default () => {
   return (
     <>
       
-      <div className="filter-container">
+      <div className="report-filter-container">
         <h1>{translations.reportPage[lang]}</h1>
         <YearSelector />
         {usersProgrammes.length > 1 &&
@@ -202,23 +203,33 @@ export default () => {
               filter={filter}
               lang={lang}
             />
-          </>}
-          <div className="report-programmes-container">
-            {filteredProgrammes.length > 0 ?
-              (
-              <>
-                <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
-                <Segment className="report-programmes-list">
-                  {filteredProgrammes.map((p) => <p className="report-programme" onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}</p>)}
-                </Segment>
-              </>
-              )
-              : 
-              <h3>{translations.noData[lang]}</h3>
-            }
-          </div>
+          </>
+        }
+        <div className="report-programmes-container">
+          {filteredProgrammes.length > 0 ?
+            (
+            <>
+              <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
+              <Segment className="report-programmes-list">
+                {filteredProgrammes.map((p) => 
+                  <p
+                    className="report-programme"
+                    onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}
+                  </p>
+                )}
+              </Segment>
+            </>
+            )
+            : 
+            <h3>{translations.noData[lang]}</h3>
+          }
+        </div>
       </div>
-      <Tab className="report-page-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab
+        className="report-page-tab"
+        menu={{ secondary: true, pointing: true }}
+        panes={panes}
+      />
     </>
   )
 }

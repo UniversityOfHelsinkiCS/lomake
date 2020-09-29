@@ -7,8 +7,16 @@ $background-red: #F37778;
 $background-yellow: #F9D03B;
 $background-green: #1DB954;
 
-.filter-container {
-  margin: 40px 0px 20px 0px !important;
+.report-page {
+  &-tab {
+    width: 90%;
+    max-width: 1400px;
+    align-self: center;
+  }
+}
+
+.report-filter-container {
+  margin: 4em 0em 2em 0em;
   width: 90%;
   max-width: 1400px;
   align-self: center;
@@ -46,22 +54,14 @@ $background-green: #1DB954;
   }
 }
 
-.report-page {
-  &-tab {
-    width: 90%;
-    max-width: 1400px;
-    align-self: center;
-  }
-}
-
-.left-header {
+.report-left-header {
   margin-left: 25px;
   > p {
     font-size: 1.1em;
   }
 }
 
-.center-header {
+.report-center-header {
   font-size: 1.1em;
   text-align: center;
   > p {
@@ -69,7 +69,7 @@ $background-green: #1DB954;
   }
 }
 
-.right-header {
+.report-right-header {
   text-align: end;
   > p {
     font-size: 1.1em;
@@ -94,9 +94,6 @@ $background-green: #1DB954;
     margin-top: 1em;
     padding: 10px;
   }
-  &-accordion-header {
-    margin-bottom: 1em;
-  }
   &-caret {
     @include question-caret-basics;
   }
@@ -119,7 +116,7 @@ $background-green: #1DB954;
     color: $gray;
     cursor: default;
     &:hover {
-      color: $gray!important;
+      color: $gray !important;
     }
   }
   &-description {
@@ -132,7 +129,6 @@ $background-green: #1DB954;
     color: $gray;
     cursor: default;
   }
-
   &-title-disabled {
     color: $gray !important;
     cursor: default;
@@ -155,6 +151,15 @@ $background-green: #1DB954;
   &-header{
     font-style: bold;
   }
+  &-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.6em;
+    margin-bottom: 2em;
+  }
+  &-row {
+    padding-top: 0.3em;
+  }
   &-circle-green {
     @include answer-circle-basics;
     background: $background-green;
@@ -171,15 +176,6 @@ $background-green: #1DB954;
     @include answer-circle-basics;
     background: $gray;
   }
-  &-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 0.6em;
-    margin-bottom: 2em;
-  }
-  &-row {
-    padding-top: 0.3em;
-  }
 }
 
 @mixin answered-label-basics {
@@ -187,14 +183,14 @@ $background-green: #1DB954;
   position: absolute; 
   top: 20px;
   right: 15px;
-  color: $white!important;
+  color: $white !important;
 }
 
 .answered-label {
   @include answered-label-basics;
-  background-color: $blue!important;
+  background-color: $blue !important;
   &-disabled {
     @include answered-label-basics;
-    background-color: $gray!important;
+    background-color: $gray !important;
   }
 }
