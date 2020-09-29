@@ -54,6 +54,11 @@ $background-green: #1DB954;
   }
 }
 
+.report-container {
+  margin-top: 1em;
+  padding: 10px;
+}
+
 .report-left-header {
   margin-left: 25px;
   > p {
@@ -90,10 +95,6 @@ $background-green: #1DB954;
 }
 
 .question {
-  &-accordion {
-    margin-top: 1em;
-    padding: 10px;
-  }
   &-caret {
     @include question-caret-basics;
   }
@@ -192,5 +193,41 @@ $background-green: #1DB954;
   &-disabled {
     @include answered-label-basics;
     background-color: $gray !important;
+  }
+}
+
+.report-smiley {
+  &-wide-header {
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 1em;  
+  }
+  &-grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 100%;  
+  }
+  &-chart-area {
+    width: 425px;
+    margin: 10px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-direction: column;  
+  }
+  &-pie-header {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+    > p {
+      margin-bottom: 3px;
+      font-weight: 400;
+    }  
+  }
+  &-pie-chart {
+    flex-shrink: 1;
+    width: 100%;  
   }
 }

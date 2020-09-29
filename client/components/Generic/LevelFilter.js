@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
-import { translations } from 'Utilities/translations' 
+import { translations } from 'Utilities/translations'
 import { setProgrammeLevel } from 'Utilities/redux/programmeLevelReducer'
-import './LevelFilter.scss'
+import './Filters.scss'
 
 
 const LevelFilter = () => {
@@ -16,7 +16,7 @@ const LevelFilter = () => {
   }
 
   return (
-    <div className="level-form">
+    <div className="level-filter">
       <label>{translations.levelFilter[lang]}</label>
       <Form>
         <Form.Group inline>

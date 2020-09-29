@@ -20,7 +20,7 @@ const Question = ({
     >
       <Grid>
         <Grid.Column width={1} className="question-caret">
-          {filteredProgrammes.length > 1 &&  
+          {filteredProgrammes.length > 1 &&
             <Icon name={`caret ${showing === question.id ? "down" : "right"}`} />
           }
         </Grid.Column>
@@ -41,18 +41,16 @@ const Question = ({
     {answers && (
       <Accordion.Content active={showing === question.id} className="question-content">
         {filteredProgrammes.length > 1 && <div className="ui divider"/>}
-        {answers && (
-          answers.sort((a,b) => a['name'].localeCompare(b['name'])).map((programme, index) =>
-            <div key={index}>
-              <label className="answer-title">{programme.name}</label>
-              <span className={`answer-circle-${programme.color}`} />
-              <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-                {programme.answer.split('\n').map((row, index) =>
-                  <li key={index} className="answer-row">{row}</li>
-                )}
-              </ul>
-            </div>
-          )
+        {answers.sort((a,b) => a['name'].localeCompare(b['name'])).map((programme, index) =>
+          <div key={index}>
+            <label className="answer-title">{programme.name}</label>
+            <span className={`answer-circle-${programme.color}`} />
+            <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
+              {programme.answer.split('\n').map((row, index) =>
+                <li key={index} className="answer-row">{row}</li>
+              )}
+            </ul>
+          </div>
         )}
       </Accordion.Content>
     )}

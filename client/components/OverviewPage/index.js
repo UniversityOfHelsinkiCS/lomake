@@ -119,7 +119,7 @@ export default () => {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  margin: '1em 0',
+                  margin: '0em 0em 1em 0em',
                   alignItems: 'center',
                 }}
               >
@@ -154,7 +154,7 @@ export default () => {
             />
           </div>
         </>
-      ) : <NoPermissions />}
+      ) : <NoPermissions languageCode={languageCode}/>}
     </>
   )
 }

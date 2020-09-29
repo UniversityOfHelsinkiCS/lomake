@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Icon, Grid, Popup, Radio } from 'semantic-ui-react'
 import { translations } from 'Utilities/translations'
 import PieChart from './PieChart'
-import './SmileyAnswers.scss'
 
 
 const SmileyAnswers = ({ 
@@ -17,11 +16,11 @@ const SmileyAnswers = ({
   if (filteredProgrammes.length < 1 || allAnswers.size < 1) return <div><h3>{translations.noData[lang]}</h3></div>
 
   return (
-    <div className="report-smiley-container">
+    <div className="report-container">
       <Grid>
         <Grid.Column width={4} className="report-left-header" />
         <Grid.Column width={6} className="report-center-header">
-          <p>{year} - {translations.reportHeader['smileys'][lang]}</p>
+          {year} - {translations.reportHeader['smileys'][lang]}
         </Grid.Column>
         <Grid.Column width={5} className="report-right-header" floated="right">
           <Popup

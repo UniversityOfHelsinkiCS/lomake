@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedYear } from 'Utilities/redux/formReducer'
-import './YearSelector.scss'
+import './Filters.scss'
 
 const translations = {
   selectYear: {

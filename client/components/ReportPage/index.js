@@ -7,7 +7,7 @@ import SmileyAnswers from './SmileyAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
-import SearchBar from 'Components/Generic/SearchBar'
+import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear, 
@@ -190,7 +190,6 @@ export default () => {
 
   return (
     <>
-      
       <div className="report-filter-container">
         <h1>{translations.reportPage[lang]}</h1>
         <YearSelector />
@@ -198,7 +197,7 @@ export default () => {
           <>
             <FacultyFilter />
             <LevelFilter usersProgrammes={usersProgrammes}/>
-            <SearchBar 
+            <ProgrammeFilter
               handleChange={handleChange}
               filter={filter}
               lang={lang}
@@ -207,19 +206,16 @@ export default () => {
         }
         <div className="report-programmes-container">
           {filteredProgrammes.length > 0 ?
-            (
             <>
               <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
               <Segment className="report-programmes-list">
                 {filteredProgrammes.map((p) => 
-                  <p
-                    className="report-programme"
-                    onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}
+                  <p className="report-programme" onClick={() => setFilter(p.name[lang])}>
+                    {p.name[lang] ? p.name[lang] : p.name['en']}
                   </p>
                 )}
               </Segment>
             </>
-            )
             : 
             <h3>{translations.noData[lang]}</h3>
           }

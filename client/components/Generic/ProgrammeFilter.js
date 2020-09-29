@@ -1,15 +1,17 @@
 import React from 'react'
 import { Input } from 'semantic-ui-react'
 import { translations } from 'Utilities/translations'
-import './SearchBar.scss'
+import './Filters.scss'
 
-const SearchBar = ({handleChange, filter, lang}) => (
-  <div className="search-bar">
+const ProgrammeFilter = ({ handleChange, filter, lang }) => (
+
+
+  <div className="programme-filter">
     <label>{translations.searchBar[lang]}</label>
     <Input
       data-cy="overviewpage-filter"
       name="filter"
-      className="search-bar-input"
+      className="programme-filter-input"
       icon="search"
       placeholder={translations.filter[lang]}
       onChange={handleChange}
@@ -18,4 +20,4 @@ const SearchBar = ({handleChange, filter, lang}) => (
   </div>
 )
 
-export default SearchBar
+export default ProgrammeFilter

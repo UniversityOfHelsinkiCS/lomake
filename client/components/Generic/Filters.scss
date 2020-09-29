@@ -1,0 +1,41 @@
+
+
+
+@mixin filter-basics {
+  margin: 2em 0em 1em 0em;
+  > label {
+    font-size: 1.05em;
+    margin-bottom: 0.5em;
+    display: block;
+  }
+}
+
+.faculty-filter {
+  @include filter-basics;
+  width: 280px;
+}
+
+.level-filter {
+  @include filter-basics;
+  > form {
+    margin-top: 1em;
+  }
+}
+
+.programme-filter {
+  @include filter-basics;
+  &-input {
+    width: 400px;
+  }
+  &-empty {
+    margin-left: 5px;
+  }
+}
+
+.year-filter {
+  @include filter-basics;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

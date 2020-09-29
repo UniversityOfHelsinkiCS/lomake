@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedFaculty } from 'Utilities/redux/facultyReducer'
 import { translations } from 'Utilities/translations'
-import './FacultyFilter.scss'
+import './Filters.scss'
 
 
 // To be moved to faculties.json

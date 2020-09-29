@@ -27,18 +27,16 @@ const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAn
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
   return (
-    <Accordion fluid className="question-accordion">
+    <Accordion fluid className="report-container">
         <Grid>
           <Grid.Column width={4} className="report-left-header">
-            <p>{translations.questions[lang]}</p>
+            {translations.questions[lang]}
           </Grid.Column>
           <Grid.Column width={6} className="report-center-header">
-            <p>{year} - {translations.reportHeader['written'][lang]}</p>
+            {year} - {translations.reportHeader['written'][lang]}
           </Grid.Column>
           <Grid.Column width={5} className="report-right-header" floated="right">
-            <p >
-              {translations.answered[lang]} / {translations.allProgrammes[lang]}
-            </p>
+            {translations.answered[lang]} / {translations.allProgrammes[lang]}            
           </Grid.Column>
         </Grid>
       <div className="ui divider"/>
