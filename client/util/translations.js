@@ -168,6 +168,11 @@ export const translations = {
     fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
     se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
   },
+  empty: {
+    en: 'No answer provided',
+    fi: 'Ei vastausta',
+    se: 'Inget svar',
+  },
   form: {
     en: 'Form',
     fi: 'Lomake',
@@ -178,6 +183,11 @@ export const translations = {
     fi: 'Tilannekuvalomakkeen vastaukset',
     en: 'Answers',
     se: 'Answers',
+  },
+  nowShowing: {
+    fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT',
+    en: 'NOW SHOWING THE ANSWERS OF',
+    se: 'NOW SHOWING THE ANSWERS OF',
   },
   reportHeader: {
     written: {
@@ -203,16 +213,21 @@ export const translations = {
   },
   // ReportPage/SmileyAnswers.js 
   responses: {
-    en: 'Responses: ',
-    fi: 'Vastauksia: ',
-    se: 'Responses: ',
+    en: 'Responses:',
+    fi: 'Vastauksia:',
+    se: 'Responses:',
   },
   emptyAnswers: {
     en: 'Include programmes without answers',
     fi: 'Näytä myös tyhjät vastaukset',
     se: 'Include programmes without answers',
   },
-  // Generic/FacultyFilter.js
+  noData: {
+    fi: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    en: 'No data available for these choices',
+    se: 'No data available for these choices',
+  },
+  // Generic/LevelFilter.js
   levelFilter: {
     en: 'Filter by programme level',
     fi: 'Vastaukset koulutusasteittain',
@@ -223,5 +238,11 @@ export const translations = {
     en: 'Filter by faculty',
     fi: 'Vastaukset tiedekunnittain',
     se: 'Filter by faculty',
+  },
+  // Generic/SearchBar.js
+  searchBar: {
+    en: 'Search for specific programmes',
+    fi: 'Etsi koulutusohjelmia',
+    se: 'Search for specific programmes',
   },
 }

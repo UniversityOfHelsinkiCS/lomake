@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Tab } from 'semantic-ui-react'
+import { Input, Segment, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
+import SearchBar from 'Components/Generic/SearchBar'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear, 
@@ -16,12 +17,15 @@ import {
   programmeNameByKey as programmeName, 
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
+import useDebounce from 'Utilities/useDebounce'
 import questions from '../../questions'
 import './ReportPage.scss'
 
 
 export default () => {
   const dispatch = useDispatch()
+  const [filter, setFilter] = useState('')
+  const debouncedFilter = useDebounce(filter, 200)
   const user = useSelector((state) => state.currentUser)
   const lang = useSelector((state) => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -34,7 +38,8 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-  }, [])
+    document.title = `${translations['reportPage'][lang]}`
+  }, [lang])
 
   const levels = {
     allProgrammes : '',
@@ -52,9 +57,16 @@ export default () => {
 
   const faculties = facultiesWithKeys(facultiesData)
 
+  const filteredByName = useMemo(() => {
+    return usersProgrammes.filter((prog) => {
+      const searchTarget = prog.name[lang] ? prog.name[lang] : prog.name['en'] // Because sw and fi dont always have values.
+      return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
+    })
+  }, [usersProgrammes, lang, debouncedFilter])
+
   const filteredByLevel = useMemo(() => {
-    if (level === 'allProgrammes') return usersProgrammes.map((p) => p.key)
-    const filtered = usersProgrammes.filter((p) => {
+    if (level === 'allProgrammes') return filteredByName
+    const filtered = filteredByName.filter((p) => {
       const searched = p.name['en'].toLowerCase() // Because se and fi don't always have values.
       if (level === 'otherProgrammes') {
         return !(
@@ -66,18 +78,23 @@ export default () => {
       return searched.includes(levels[level].toString())
     })
 
-    return filtered.map((p) => p.key)
-  }, [usersProgrammes, lang, level])
+    return filtered
+  }, [filteredByName, lang, level])
 
   const filteredProgrammes = useMemo(() => {
     if (selectedFaculty === 'allFaculties') return filteredByLevel
     const filtered = filteredByLevel.filter((p) => {
-      const faculty = faculties.get(p)
+      const faculty = faculties.get(p.key)
       return (faculty === selectedFaculty)
     })
 
     return filtered
   }, [filteredByLevel, faculties, selectedFaculty])
+
+  const handleChange = ({ target }) => {
+    const { value } = target
+    setFilter(value)
+  }
 
   const selectedAnswers = answersByYear(year, answers, oldAnswers)
 
@@ -117,8 +134,9 @@ export default () => {
 
   const answersByQuestions = () => {
     let answerMap = new Map()
+    const filteredKeys = filteredProgrammes.map((p) => p.key)
     selectedAnswers.forEach((programme) => {
-      if (filteredProgrammes.includes(programme.programme)) {
+      if (filteredKeys.includes(programme.programme)) {
         const data = programme.data
         questionsList.forEach((question) => {
           let answer = ''
@@ -138,7 +156,7 @@ export default () => {
   }
 
   const allAnswers = answersByQuestions()
-
+  
   const panes = [
     { menuItem: translations.reportHeader['written'][lang], render: () =>
       <Tab.Pane className="report-page-tab">
@@ -171,6 +189,7 @@ export default () => {
 
   return (
     <>
+      
       <div className="filter-container">
         <h1>{translations.reportPage[lang]}</h1>
         <YearSelector />
@@ -178,8 +197,22 @@ export default () => {
           <>
             <FacultyFilter />
             <LevelFilter usersProgrammes={usersProgrammes}/>
-          </>
-        }
+            <SearchBar 
+              handleChange={handleChange}
+              filter={filter}
+              lang={lang}
+            />
+          </>}
+          <div className="report-programmes-container">
+            <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
+            {filteredProgrammes.length > 0 ?
+              <Segment className="report-programmes-list">
+                {filteredProgrammes.map((p) => <p className="report-programme" onClick={() => setFilter(p.name[lang])}>{p.name[lang] ? p.name[lang] : p.name['en']}</p>)}
+              </Segment>
+              : 
+              <div><h3>{translations.noData[lang]}</h3></div>
+            }
+          </div>
       </div>
       <Tab className="report-page-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </>

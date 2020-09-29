@@ -10,7 +10,7 @@ import { translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
 
-const WrittenAnswers = ({ level, lang, year, usersProgrammes, filteredProgrammes, allAnswers, questionsList }) => {
+const WrittenAnswers = ({ lang, year, usersProgrammes, filteredProgrammes, allAnswers, questionsList }) => {
   const dispatch = useDispatch()
   const [showing, setShowing] = useState(-1)
 
@@ -34,7 +34,7 @@ const WrittenAnswers = ({ level, lang, year, usersProgrammes, filteredProgrammes
             <p>{translations.questions[lang]}</p>
           </Grid.Column>
           <Grid.Column width={6} className="center-header">
-            <p>{year} - {translations.reportHeader['written'][lang]} - {translations[level][lang]}</p>
+            <p>{year} - {translations.reportHeader['written'][lang]}</p>
           </Grid.Column>
           <Grid.Column width={5} className="right-header" floated="right">
             <p >

@@ -14,7 +14,36 @@ $background-green: #1DB954;
   align-self: center;
   > h1 {
     margin-bottom: 1.3em;
-  } 
+  }
+  > label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 1.1em;
+    margin-top: 0.2em;
+  }
+}
+
+.report-programmes {
+  &-container {
+    margin: 4em 0em 2em 0em;
+  }
+  &-list {
+    background: $gray;
+    max-height: 300px;
+    width: 450px;
+    display: flex;
+    flex-flow: column;
+    overflow: auto;
+    > p:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  > p {
+    margin-bottom: 0.5em;
+    font-size: 1.1em;
+    font-weight: 200;
+  }
 }
 
 .report-page {
@@ -81,7 +110,6 @@ $background-green: #1DB954;
       cursor: default !important;
     }
   }
-
   &-label {
     @include question-label-basics;
     color: $black;
@@ -94,7 +122,6 @@ $background-green: #1DB954;
       color: $gray!important;
     }
   }
-
   &-description {
     font-style: italic;
     color: $dark_gray;
@@ -140,6 +167,10 @@ $background-green: #1DB954;
     @include answer-circle-basics;
     background: $background-red;
   }
+  &-circle-gray {
+    @include answer-circle-basics;
+    background: $gray;
+  }
   &-list {
     list-style: none;
     padding-left: 0;
@@ -166,5 +197,4 @@ $background-green: #1DB954;
     @include answered-label-basics;
     background-color: $gray!important;
   }
-
 }
