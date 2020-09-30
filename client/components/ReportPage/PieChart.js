@@ -19,34 +19,37 @@ const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
     return colors  
   }
 
-  const data = (question) => {
-    const total = colorsTotal(question)
+  const colorSums = colorsTotal(question)
+
+  const data = () => {
     const data = [
       {
         color: colors.background_green,
-        value: total.green || 0,
+        value: colorSums.green || 0,
       },
       {
         color: colors.background_yellow,
-        value: total.yellow || 0,
+        value: colorSums.yellow || 0,
       },
       {
         color: colors.background_red,
-        value: total.red || 0,
+        value: colorSums.red || 0,
       },
       {
         color: colors.light_gray,
-        value: total.emptyAnswer && showEmptyAnswers ? total.emptyAnswer : 0,
+        value: colorSums.emptyAnswer && showEmptyAnswers ? colorSums.emptyAnswer : 0,
       },
     ]
     return data.sort((a,b) => b.value - a.value)
   }
 
+  if (colorSums.total == 0) return <></>
+
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
-        <p>{translations.responses[lang]} {answers ? colorsTotal(question).total : 0}</p>
+        <p>{translations.responses[lang]} {answers ? colorSums.total : 0}</p>
       </div>
       <div className="report-smiley-pie-chart">
         <Chart
