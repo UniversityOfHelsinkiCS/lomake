@@ -65,7 +65,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.visit('/report')
-    cy.get('[data-cy=answered-label-language_environment_text]').contains(129)    
+    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains(129)    
   })
 
   it('Filtering works for programme level', function () {
@@ -90,7 +90,7 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
+    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('/ 5')
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {
