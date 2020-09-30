@@ -1,9 +1,9 @@
 import React from 'react'
-import { Input } from 'semantic-ui-react'
+import { Button, Input } from 'semantic-ui-react'
 import { translations } from 'Utilities/translations'
 import './Filters.scss'
 
-const ProgrammeFilter = ({ handleChange, filter, lang }) => (
+const ProgrammeFilter = ({ onEmpty, handleChange, filter, lang }) => (
 
   <div className="programme-filter">
     <label>{translations.programmeFilter[lang]}</label>
@@ -15,6 +15,12 @@ const ProgrammeFilter = ({ handleChange, filter, lang }) => (
       placeholder={translations.filter[lang]}
       onChange={handleChange}
       value={filter}
+    />
+    <Button
+      onClick={onEmpty}
+      className="empty-answer"
+      basic color="red"
+      icon="close"
     />
   </div>
 )

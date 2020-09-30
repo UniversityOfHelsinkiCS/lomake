@@ -197,6 +197,7 @@ export default () => {
               <ProgrammeFilter
                 handleChange={handleChange}
                 filter={filter}
+                onEmpty={() => setFilter('')}
                 lang={lang}
               />
             </>
