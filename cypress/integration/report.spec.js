@@ -14,7 +14,7 @@ describe('ReportPage tests', function () {
     cy.login(user)
     cy.visit('/report')
     cy.get('div').contains('colors').click()
-    cy.get('[data-cy=report-no-data]')
+    cy.get('[data-cy=report-no-data]')    
   })
 
   it('User should be able to see the just written answers in the report', function () {
@@ -32,7 +32,7 @@ describe('ReportPage tests', function () {
 
   it('User should be able to see answers from only one programme, when they have rights for only one', function() {
     cy.login(user)
-    cy.get('[data-cy=nav-report]').click()
+    cy.visit('/report')
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
@@ -65,7 +65,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.visit('/report')
-    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains(129)    
+    cy.get('[data-cy=answered-label-language_environment_text]').contains(130)    
   })
 
   it('Filtering works for programme level', function () {
@@ -80,7 +80,7 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('60 / 60')
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('60 / 60')    
   })
 
   it('Filtering works for faculty level', function () {
@@ -90,19 +90,19 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
-    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('/ 5')
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')    
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=street-light-negative-review_of_last_years_situation_report]').click()
-    
     cy.visit('/report')
+  
     cy.get('div').contains('colors').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path')
       .should('have.css', 'stroke')
-      .and('eq', 'rgb(243, 119, 120)')
+      .and('eq', 'rgb(29, 185, 84)')
   })
 })

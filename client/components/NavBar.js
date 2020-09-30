@@ -91,15 +91,17 @@ export default () => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
-      <Menu.Item
-        data-cy="nav-report"
-        as={Link}
-        to={'/report'}
-        name="reportControls"
-        onClick={handleItemClick}
-      >
-        {translations.answersReport[languageCode]}
-      </Menu.Item>
+      {user.admin ? 
+        <Menu.Item
+          data-cy="nav-report"
+          as={Link}
+          to={'/report'}
+          name="reportControls"
+          onClick={handleItemClick}
+        >
+          {translations.answersReport[languageCode]}
+        </Menu.Item> : null
+      }
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
