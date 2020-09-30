@@ -23,6 +23,11 @@ export default () => {
       fi: 'OSPA',
       se: 'OSPA',
     },
+    answersReport: {
+      en: 'Report of answers',
+      fi: 'Lomakkeen vastaukset',
+      se: 'Svar',
+    },
     language: {
       en: 'English',
       fi: 'Suomi',
@@ -85,6 +90,15 @@ export default () => {
     <Menu id="navBar-wrapper" stackable compact fluid inverted>
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+      </Menu.Item>
+      <Menu.Item
+        data-cy="nav-report"
+        as={Link}
+        to={'/report'}
+        name="reportControls"
+        onClick={handleItemClick}
+      >
+        {translations.answersReport[languageCode]}
       </Menu.Item>
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
