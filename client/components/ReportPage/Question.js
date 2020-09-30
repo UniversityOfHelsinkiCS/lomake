@@ -32,7 +32,7 @@ const Question = ({
           <p className="question-description">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">
-          <Label className="answered-label" size="large">
+          <Label data-cy={`answered-label-${question.id}`} className="answered-label" size="large">
             {answers.length} / {filteredProgrammes.length}
           </Label>
         </Grid.Column>
@@ -46,8 +46,10 @@ const Question = ({
             <label className="answer-title">{programme.name}</label>
             <span className={`answer-circle-${programme.color}`} />
             <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-              {programme.answer.split('\n').map((row, index) =>
+              {programme.answer && (
+                programme.answer.split('\n').map((row, index) =>
                 <li key={index} className="answer-row">{row}</li>
+                )
               )}
             </ul>
           </div>

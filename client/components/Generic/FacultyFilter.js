@@ -225,6 +225,7 @@ const LevelFilter = () => {
     <div className="faculty-filter">
       <label>{translations.facultyFilter[lang]}</label>
       <Select
+        data-cy="faculty-filter"
         placeholder={options[lang]["allFaculties"]}
         fluid
         selection

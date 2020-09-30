@@ -51,7 +51,10 @@ const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
         <p>{question.labelIndex} {question.label}</p>
         <p>{translations.responses[lang]} {answers ? colorSums.total : 0}</p>
       </div>
-      <div className="report-smiley-pie-chart">
+      <div
+        className="report-smiley-pie-chart"
+        data-cy={`report-chart-${question.id}`}
+      >
         <Chart
           animationDuration={500}
           animationEasing="ease-out"
@@ -70,7 +73,6 @@ const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
       </div>
     </div>
   )
-
 }
 
 export default PieChart

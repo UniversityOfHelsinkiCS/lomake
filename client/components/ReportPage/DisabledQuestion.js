@@ -5,7 +5,7 @@ import { romanize } from 'Utilities/common'
 const DisabledQuestion = ({ question, filteredProgrammes }) => (
     <Accordion.Title
       index={question.id}
-      data-cy={`report-question-${question.id}`}
+      data-cy={`report-question-disabled-${question.id}`}
       className="question-header-disabled"
     >
       <Grid>

@@ -141,7 +141,7 @@ export default () => {
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
           questionData = [...questionData, {name: name, color: color, answer: answer}]  
-          if (answer) answerMap.set(question.id, questionData)
+          if (answer || color) answerMap.set(question.id, questionData)
         })
       }
     })
@@ -205,7 +205,7 @@ export default () => {
         </Grid.Column>
         <Grid.Column width={6}>
           <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
-          <Segment className="report-programmes-list">
+          <Segment className="report-programmes-list" data-cy="report-programmes-list">
             {filteredProgrammes.length > 0 ?
               <>
                 {sortedItems(filteredProgrammes, 'name', lang).map((p) =>

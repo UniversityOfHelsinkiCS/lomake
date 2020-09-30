@@ -31,6 +31,14 @@ const WrittenAnswers = ({
     setShowing(newIndex)
   }
 
+  const check = (question) => {
+    const answer = allAnswers.get(question.id)
+    if (!answer) return false
+    const t = answer.find((a) => a.answer)
+    if (t) return true
+    return false
+  }
+
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
   return (
@@ -48,7 +56,7 @@ const WrittenAnswers = ({
       </Grid>
       <div className="ui divider"/>
       {questionsList.map((question) =>
-        (allAnswers.get(question.id) ? (
+        (check(question) ? (
           <div key={question.id}>
             {filteredProgrammes.length === 1 ?
               <SingleProgramQuestion

@@ -40,6 +40,7 @@ const LevelFilter = () => {
           </Form.Field>
           <Form.Field>
             <Radio
+              data-cy='master-filter'
               label={translations.master[lang]}
               name='master'
               value='master'

@@ -13,7 +13,7 @@ const SmileyAnswers = ({
   }) => {
   const [showEmptyAnswers, setShowEmptyAnswers] = useState(true)
 
-  if (filteredProgrammes.length < 1 || allAnswers.size < 1) return <div><h3>{translations.noData[lang]}</h3></div>
+  if (filteredProgrammes.length < 1 || allAnswers.size < 1) return <div><h3 data-cy="report-no-data">{translations.noData[lang]}</h3></div>
 
   return (
     <div className="report-container">
