@@ -68,14 +68,13 @@ const WrittenAnswers = ({
             <div className="ui divider"/>
           </div>)
           :
-          <>
+          <div key={question.id}>
             <DisabledQuestion
-              key={question.id}
               question={question}
               filteredProgrammes={filteredProgrammes}
             />
             <div className="ui divider"/>
-          </>
+          </div>
         )
       )}
     </Accordion>
