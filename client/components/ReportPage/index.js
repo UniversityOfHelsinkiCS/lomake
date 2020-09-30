@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Segment, Tab } from 'semantic-ui-react'
+import { Grid, Segment, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
@@ -10,11 +10,12 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
-  answersByYear, 
+  answersByYear,
   cleanText,
   getMeasuresAnswer,
   facultiesWithKeys,
-  programmeNameByKey as programmeName, 
+  programmeNameByKey as programmeName,
+  sortedItems,
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
@@ -182,41 +183,46 @@ export default () => {
 
   return (
     <>
-      <div className="report-filter-container">
-        <h1>{translations.reportPage[lang]}</h1>
-        <YearSelector />
-        {usersProgrammes.length > 1 &&
-          <>
-            <FacultyFilter />
-            <LevelFilter usersProgrammes={usersProgrammes}/>
-            <ProgrammeFilter
-              handleChange={handleChange}
-              filter={filter}
-              lang={lang}
-            />
-          </>
-        }
-        <div className="report-programmes-container">
-          {filteredProgrammes.length > 0 ?
+      <div className="report-info-header">
+
+      </div>
+      <Grid doubling columns={2} padded='vertically' className="report-filter-container">
+        <Grid.Column width={10}>
+          <h1>{translations.reportPage[lang]}</h1>
+          <YearSelector />
+          {usersProgrammes.length > 1 &&
             <>
-              <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
-              <Segment className="report-programmes-list">
-                {filteredProgrammes.map((p) => 
+              <FacultyFilter />
+              <LevelFilter usersProgrammes={usersProgrammes}/>
+              <ProgrammeFilter
+                handleChange={handleChange}
+                filter={filter}
+                lang={lang}
+              />
+            </>
+          }
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
+          <Segment className="report-programmes-list">
+            {filteredProgrammes.length > 0 ?
+              <>
+                {sortedItems(filteredProgrammes, 'name', lang).map((p) =>
                   <p 
                     className="report-programme" 
                     onClick={() => setFilter(p.name[lang])}
                     key={p.key}
                   >
-                    {p.name[lang] ? p.name[lang] : p.name['en']}
+                  {p.name[lang] ? p.name[lang] : p.name['en']}
                   </p>
                 )}
-              </Segment>
-            </>
-            : 
-            <h3>{translations.noData[lang]}</h3>
-          }
-        </div>
-      </div>
+              </>
+              :
+              <h4>{translations.noData[lang]}</h4>
+            }
+          </Segment>
+        </Grid.Column>
+      </Grid>
       <Tab
         className="report-page-tab"
         menu={{ secondary: true, pointing: true }}

@@ -15,30 +15,24 @@ $background-green: #1DB954;
   }
 }
 
+.report-info-header {
+  height: 50px;
+}
+
 .report-filter-container {
-  margin: 4em 0em 2em 0em;
   width: 90%;
   max-width: 1400px;
   align-self: center;
   > h1 {
     margin-bottom: 1.3em;
-  }
-  > label {
-    display: block;
-    margin-bottom: 0.5em;
-    font-size: 1.1em;
-    margin-top: 0.2em;
+    margin-top: 1em !important;
   }
 }
 
 .report-programmes {
-  &-container {
-    margin: 4em 0em 2em 0em;
-  }
   &-list {
-    background: $gray;
-    max-height: 300px;
-    width: 450px;
+    min-height: 100px;
+    max-height: 370px;
     display: flex;
     flex-flow: column;
     overflow: auto;
@@ -46,11 +40,6 @@ $background-green: #1DB954;
       font-weight: bold;
       cursor: pointer;
     }
-  }
-  > p {
-    margin-bottom: 0.5em;
-    font-size: 1.1em;
-    font-weight: 200;
   }
 }
 

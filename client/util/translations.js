@@ -245,7 +245,7 @@ export const translations = {
     se: 'No data available for these choices',
   },
   noColors: {
-    fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 15 ja 16)',
+    fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
   },
