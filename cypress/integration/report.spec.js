@@ -80,7 +80,7 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').click()
-    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('60 / 60')    
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('60 / 60')
   })
 
   it('Filtering works for faculty level', function () {
