@@ -65,7 +65,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.visit('/report')
-    cy.get('[data-cy=answered-label-language_environment_text]').contains(130)    
+    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains(129)    
   })
 
   it('Filtering works for programme level', function () {
@@ -80,7 +80,7 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('60 / 60')    
+    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('60 / 60')    
   })
 
   it('Filtering works for faculty level', function () {
@@ -90,7 +90,7 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')    
+    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('/ 5')    
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {
@@ -103,6 +103,6 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path')
       .should('have.css', 'stroke')
-      .and('eq', 'rgb(29, 185, 84)')
+      .and('eq', 'rgb(243, 119, 120)')
   })
 })
