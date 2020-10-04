@@ -72,7 +72,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.get('/report')
+    cy.visit('/report')
     cy.get('[data-cy=yearSelector]').click()
 
     cy.get('[data-cy=yearSelector]').then((newEl) => {
@@ -87,7 +87,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/report')
+    cy.get('[data-cy=nav-report]')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
