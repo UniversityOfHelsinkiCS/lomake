@@ -10,7 +10,7 @@ const PieChart = ({ question, lang, answers, showEmptyAnswers, filteredProgramme
     if (!question || !answers) return null
     let colors = { 'green' : 0, 'yellow': 0, 'red': 0, 'emptyAnswer': 0, 'withoutEmpty': 0 }
     answers.forEach((q) => colors[q.color] = colors[q.color] + 1)
-    colors.withoutEmpty = filteredProgrammes.length - colors.emptyAnswer
+    colors.withoutEmpty = colors.red + colors.green + colors.yellow
     return colors
   }
 
