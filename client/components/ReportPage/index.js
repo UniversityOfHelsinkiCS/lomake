@@ -63,14 +63,6 @@ export default () => {
     if (level === 'allProgrammes') return filteredByName
     const filtered = filteredByName.filter((p) => {
       const searched = p.name['en'].toLowerCase()
-      if (level === 'otherProgrammes') {
-        return !(
-          searched.includes('master')
-          || searched.includes('bachelor')
-          || searched.includes('doctor')
-          || searched.includes('degree programme')
-        )
-      }
       if (level === 'master') {
         return searched.includes(level.toString())
         || searched.includes('degree programme')
@@ -78,7 +70,6 @@ export default () => {
       }
       return searched.includes(level.toString())
     })
-
     return filtered
   }, [filteredByName, lang, level])
 

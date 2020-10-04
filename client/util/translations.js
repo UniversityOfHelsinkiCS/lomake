@@ -96,11 +96,6 @@ export const translations = {
     en: 'Doctoral programmes',
     se: 'Doktorandprogram',
   },
-  otherProgrammes: {
-    fi: 'Muut koulutusohjelmat',
-    en: 'Other Programmes',
-    se: 'Andra program'
-  },
   // Generic/FacultyFilter.js
   facultyFilter: {
     en: 'Filter by faculty',

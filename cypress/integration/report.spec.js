@@ -44,7 +44,7 @@ describe('ReportPage tests', function () {
     cy.reload()
 
     cy.visit('/report')  
-    cy.get('[data-cy=report-question-disabled-language_environment_text]')
+    cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
   })
 
   it('User should be able to see answers from previous years', function() {
@@ -65,14 +65,14 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.visit('/report')
-    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains(129)    
+    cy.get('[data-cy=answered-label-language_environment_text]').contains(129)
   })
 
   it('Filtering works for programme level', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/report')
+    cy.get('/report')
     cy.get('[data-cy=yearSelector]').click()
 
     cy.get('[data-cy=yearSelector]').then((newEl) => {
@@ -90,7 +90,7 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
-    cy.get('[data-cy=answered-label-disabled-language_environment_text]').contains('/ 5')    
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {

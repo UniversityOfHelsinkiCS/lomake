@@ -57,15 +57,6 @@ const LevelFilter = () => {
               onChange={handleChange}
             />
           </Form.Field>
-          <Form.Field>
-            <Radio
-              label={translations.otherProgrammes[lang]}
-              name='otherProgrammes'
-              value='otherProgrammes'
-              checked={level === 'otherProgrammes'}
-              onChange={handleChange}
-            />
-          </Form.Field>
         </Form.Group>
       </Form>
     </div>

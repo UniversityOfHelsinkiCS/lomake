@@ -18,7 +18,7 @@ const DisabledQuestion = ({ question, filteredProgrammes }) => (
           <p className="question-description-disabled">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">
-          <Label data-cy={`answered-label-disabled-${question.id}`} className="answered-label-disabled" size="large">
+          <Label data-cy={`answered-label-${question.id}`} className="answered-label-disabled" size="large">
              0 / {filteredProgrammes.length}
           </Label>
         </Grid.Column>
