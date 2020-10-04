@@ -51,6 +51,7 @@ const SmileyAnswers = ({
               lang={lang}
               answers={allAnswers.get(question.id)}
               showEmptyAnswers={showEmptyAnswers}
+              filteredProgrammes={filteredProgrammes}
             />
           )
         )}

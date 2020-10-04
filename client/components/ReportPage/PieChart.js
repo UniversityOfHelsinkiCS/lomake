@@ -4,19 +4,14 @@ import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
 
-const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
+const PieChart = ({ question, lang, answers, showEmptyAnswers, filteredProgrammes }) => {
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
-
-    let colors = {'green' : 0, 'yellow': 0, 'red': 0, 'emptyAnswer': 0, 'total': 0}
-    answers.forEach((q) => {
-      colors[q.color] = colors[q.color] + 1
-      if (showEmptyAnswers) colors.total = colors.total + 1
-      else if (!showEmptyAnswers && q.color !== 'emptyAnswer') colors.total = colors.total + 1
-    })
-
-    return colors  
+    let colors = { 'green' : 0, 'yellow': 0, 'red': 0, 'emptyAnswer': 0, 'withoutEmpty': 0 }
+    answers.forEach((q) => colors[q.color] = colors[q.color] + 1)
+    colors.withoutEmpty = filteredProgrammes.length - colors.emptyAnswer
+    return colors
   }
 
   const colorSums = colorsTotal(question)
@@ -43,13 +38,19 @@ const PieChart = ({ question, lang, answers, showEmptyAnswers }) => {
     return data.sort((a,b) => b.value - a.value)
   }
 
-  if (colorSums.total == 0) return <></>
+  if (colorSums.yellow + colorSums.emptyAnswer + colorSums.green + colorSums.red == 0) return <></>
 
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
-        <p>{translations.responses[lang]} {answers ? colorSums.total : 0}</p>
+        <p>{translations.responses[lang]}
+          {answers ?
+            (showEmptyAnswers ? filteredProgrammes.length : colorSums.withoutEmpty)
+            :
+            0
+          }
+          </p>
       </div>
       <div
         className="report-smiley-pie-chart"
