@@ -103,14 +103,13 @@ export default () => {
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
           if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
-          let label = part.label['en'] ? part.label : question.title
           const description = part.description ? part.description : { 'fi': '', 'en': '', 'se': '' }
           const id = `${part.id}_text`
 
           attributes = [...attributes, { 
             "id": id,
             "color": `${part.id}_light`,
-            "label": label[lang],
+            "label": part.label[lang] ? part.label[lang] : '',
             "description": description[lang],
             "title": question.title[lang],
             "titleIndex": titleIndex,

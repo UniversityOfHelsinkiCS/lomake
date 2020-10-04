@@ -10,9 +10,9 @@
         "id": "review_of_last_years_situation_report",
         "type": "ENTITY",
         "label": {
-          "fi": "",
+          "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
           "se": "",
-          "en": ""
+          "en": "REVIEW OF PREVIOUS YEARS' STATUS REPORT"
         },
         "description": {
           "fi": "Näkyvätkö toimenpidelistan asiat tiedekunnan toimenpidesuunnitelmassa ja / tai henkilöstösuunnitelmassa? Mitkä asiat ovat toteutuneet? Mitä muutoksia suunnittelussa on tarve tehdä tällä kertaa?",
