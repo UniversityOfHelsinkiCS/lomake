@@ -32,7 +32,11 @@ const Question = ({
           <p className="question-description">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">
-          <Label data-cy={`answered-label-${question.id}`} className="answered-label" size="large">
+          <Label
+            data-cy={`answered-label-${question.id}`}
+            className="answered-label"
+            size="large"
+          >
             {answers.length} / {filteredProgrammes.length}
           </Label>
         </Grid.Column>

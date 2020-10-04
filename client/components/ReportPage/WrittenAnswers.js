@@ -65,7 +65,7 @@ const WrittenAnswers = ({
               />
               :
               <Question
-                answers={allAnswers.get(question.id)}
+                answers={allAnswers.get(question.id).filter((p) => p.answer)}
                 question={question}
                 filteredProgrammes={filteredProgrammes}
                 year={year}
