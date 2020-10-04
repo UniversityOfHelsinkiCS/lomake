@@ -68,7 +68,13 @@ export default () => {
           searched.includes('master')
           || searched.includes('bachelor')
           || searched.includes('doctor')
+          || searched.includes('degree programme')
         )
+      }
+      if (level === 'master') {
+        return searched.includes(level.toString())
+        || searched.includes('degree programme')
+        // There are 3 degree programmes included in the masters prorammes
       }
       return searched.includes(level.toString())
     })
