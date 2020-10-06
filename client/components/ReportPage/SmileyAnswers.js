@@ -4,16 +4,18 @@ import { translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
 
-const SmileyAnswers = ({ 
+const SmileyAnswers = ({
     allAnswers,
     questionsList,
     filteredProgrammes,
     lang,
     year,
   }) => {
-  const [showEmptyAnswers, setShowEmptyAnswers] = useState(true)
+  const [showEmpty, setShowEmpty] = useState(true)
 
-  if (filteredProgrammes.length < 1 || allAnswers.size < 1) return <div><h3 data-cy="report-no-data">{translations.noData[lang]}</h3></div>
+  if (filteredProgrammes.length < 1 || allAnswers.size < 1) {
+    return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
+  }
 
   return (
     <div className="report-container">
@@ -35,8 +37,8 @@ const SmileyAnswers = ({
         </Grid.Row>
         <Grid.Row>
           <Radio
-            checked={showEmptyAnswers}
-            onChange={() => setShowEmptyAnswers(!showEmptyAnswers)}
+            checked={showEmpty}
+            onChange={() => setShowEmpty(!showEmpty)}
             label={translations.emptyAnswers[lang]}
             toggle
           />
@@ -50,7 +52,7 @@ const SmileyAnswers = ({
               question={question}
               lang={lang}
               answers={allAnswers.get(question.id)}
-              showEmptyAnswers={showEmptyAnswers}
+              showEmpty={showEmpty}
               filteredProgrammes={filteredProgrammes}
             />
           )

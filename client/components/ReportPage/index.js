@@ -100,7 +100,7 @@ export default () => {
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
           if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
-          
+
           attributes = [...attributes, { 
             "id": `${part.id}_text`,
             "color": `${part.id}_light`,
@@ -178,7 +178,12 @@ export default () => {
   return (
     <>
       <div className="report-info-header" />
-      <Grid doubling columns={2} padded='vertically' className="report-filter-container">
+      <Grid
+        doubling
+        columns={2}
+        padded='vertically'
+        className="report-filter-container"
+      >
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector />
