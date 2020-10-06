@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
-import Form from 'Components/FormView/Form'
+import { Button, Dropdown, Loader } from 'semantic-ui-react'
 import rypsi_image from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
-import questions from '../../questions'
-import { colors } from 'Utilities/common'
-import { Button, Dropdown } from 'semantic-ui-react'
+import Form from './Form'
+import NavigationSidebar from './NavigationSidebar'
+import PDFDownload from './PDFDownload'
+import SaveIndicator from './SaveIndicator'
 import StatusMessage from './StatusMessage'
+import CsvDownload from 'Components/Generic/CsvDownload'
+import NoPermissions from 'Components/Generic/NoPermissions'
+import YearSelector from 'Components/Generic/YearSelector'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
 import { translations } from 'Utilities/translations'
-import { Loader } from 'semantic-ui-react'
-import NavigationSidebar from './NavigationSidebar'
-import SaveIndicator from './SaveIndicator'
-import CsvDownload from '../Generic/CsvDownload'
-import PDFDownload from './PDFDownload'
-import YearSelector from 'Components/Generic/YearSelector'
+import { colors } from 'Utilities/common'
+import questions from '../../questions'
 
 
 const FormView = ({ room }) => {
@@ -100,7 +100,7 @@ const FormView = ({ room }) => {
   if (!programme) return 'Error: Invalid url.'
 
   if (!userHasReadAccess && !userHasWriteAccess)
-    return <span data-cy="no-permissions-message">{translations.noPermissions[languageCode]}</span>
+    return <NoPermissions languageCode={languageCode} />
 
   const localizedProgramName = programme.name[languageCode]
     ? programme.name[languageCode]
