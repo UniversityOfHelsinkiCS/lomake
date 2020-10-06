@@ -100,14 +100,12 @@ export default () => {
       question.parts.forEach((part) => {
         if (part.type !== "TITLE") {
           if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
-          const description = part.description ? part.description : { 'fi': '', 'en': '', 'se': '' }
-          const id = `${part.id}_text`
-
+          
           attributes = [...attributes, { 
-            "id": id,
+            "id": `${part.id}_text`,
             "color": `${part.id}_light`,
             "label": part.label[lang] ? part.label[lang] : '',
-            "description": description[lang],
+            "description": part.description ? part.description[lang] : '',
             "title": question.title[lang],
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
@@ -136,7 +134,7 @@ export default () => {
           if (question.id === "measures_text") answer = getMeasuresAnswer(data)
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-          questionData = [...questionData, {name: name, color: color, answer: answer}]  
+          questionData = [...questionData, { name: name, color: color, answer: answer }]
           if (answer || color) answerMap.set(question.id, questionData)
         })
       }
@@ -179,9 +177,7 @@ export default () => {
 
   return (
     <>
-      <div className="report-info-header">
-
-      </div>
+      <div className="report-info-header" />
       <Grid doubling columns={2} padded='vertically' className="report-filter-container">
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>

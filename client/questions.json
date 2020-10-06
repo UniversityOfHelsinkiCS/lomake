@@ -454,6 +454,11 @@
           "se": "ÅTGÄRDER OCH NÖDVÄNDIGA RESURSER SOM FÖRESLÅS INGÅ I FAKULTETENS GENOMFÖRANDEPLAN OCH PERSONALPLAN",
           "en": "MEASURES AND THE REQUIRED RESOURCES FOR THE FACULTY’S IMPLEMENTATION PLAN AND HR PLAN"
         },
+        "description": {
+          "fi": "Toimenpiteet ja niiden vaatimat resurssit tiedekunnan toimenpidesuunnitelmaa ja henkilöstösuunnitelmaa varten",
+          "se": "Åtgärder och nödvändiga resurser som föreslås ingå i fakultetens genomförandeplan och personalplan",
+          "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
+        },
         "required": true,
         "no_light": true
       }

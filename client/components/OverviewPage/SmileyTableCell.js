@@ -94,8 +94,7 @@ const SmileyTableCell = ({
                 if (acc) return acc
 
                 if (cur.id === questionId) {
-                  if (cur.description) return cur.description[languageCode]
-                  return cur.label[languageCode]
+                  return cur.description[languageCode]
                 }
 
                 return acc
