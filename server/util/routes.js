@@ -33,6 +33,7 @@ router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgr
 router.put('/programmes/:programme/users/:id/access', requireProgrammeOwner, users.editUserAccess)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)
+router.get('/programmes/foruser', studyprogrammes.getUsersProgrammes)
 router.get('/programmes/:programme', studyprogrammes.getOne)
 router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
 

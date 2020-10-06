@@ -11,6 +11,25 @@ const getAll = async (req, res) => {
   }
 }
 
+const getUsersProgrammes = async (req, res) => {
+  try {
+    if (req.user.admin) {
+      const data = await db.studyprogramme.findAll({})
+      return res.status(200).json(data)
+    } else {
+      const data = await db.studyprogramme.findAll({
+        where: {
+          key: Object.keys(req.user.access)
+        }
+      })
+      return res.status(200).json(data)
+    }
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getOne = async (req, res) => {
   try {
     const { programme } = req.params
@@ -77,6 +96,7 @@ const getOwners = async (req, res) => {
 
 module.exports = {
   getAll,
+  getUsersProgrammes,
   getOne,
   toggleLock,
   getOwners,

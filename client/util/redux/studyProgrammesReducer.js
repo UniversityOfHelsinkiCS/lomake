@@ -9,6 +9,12 @@ export const getStudyProgrammes = () => {
   return callBuilder(route, prefix)
 }
 
+export const getUsersProgrammes = () => {
+  const route = `/programmes/foruser`
+  const prefix = 'GET_USERS_PROGRAMMES'
+  return callBuilder(route, prefix)
+}
+
 export const toggleLock = (programmeKey) => {
   const route = `/programmes/${programmeKey}/toggleLock`
   const prefix = 'TOGGLE_LOCK'
@@ -48,6 +54,26 @@ export default (state = { data: null }, action) => {
       return {
         ...state,
         data: null,
+        pending: false,
+        error: true,
+      }
+    case 'GET_USERS_PROGRAMMES_SUCCESS':
+      return {
+        ...state,
+        usersProgrammes: action.response,
+        pending: false,
+        error: false,
+      }
+    case 'GET_USERS_PROGRAMMES_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'GET_USERS_PROGRAMMES_FAILURE':
+      return {
+        ...state,
+        usersProgrammes: null,
         pending: false,
         error: true,
       }

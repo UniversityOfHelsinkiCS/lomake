@@ -27,15 +27,14 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const user = useSelector((state) => state.currentUser)
   const lang = useSelector((state) => state.language)
-  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
+  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
 
   const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
   const faculties = facultiesWithKeys(facultiesData)
@@ -44,13 +43,6 @@ export default () => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
-
-  const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(user.data.access)
-    return user.data.admin
-      ? programmes
-      : programmes.filter((p) => usersPermissionsKeys.includes(p.key))
-  }, [programmes, user.data])
 
   const filteredByName = useMemo(() => {
     return usersProgrammes.filter((prog) => {
@@ -135,7 +127,7 @@ export default () => {
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
           questionData = [...questionData, { name: name, color: color, answer: answer }]
-          if (answer || color) answerMap.set(question.id, questionData)
+          answerMap.set(question.id, questionData)
         })
       }
     })

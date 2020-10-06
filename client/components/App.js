@@ -5,7 +5,7 @@ import { wsConnect } from 'Utilities/redux/websocketReducer'
 import { loginAction } from 'Utilities/redux/currentUserReducer'
 import NavBar from 'Components/NavBar'
 import Router from 'Components/Router'
-import { getStudyProgrammes } from 'Utilities/redux/studyProgrammesReducer'
+import { getStudyProgrammes, getUsersProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
 import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
@@ -26,6 +26,7 @@ export default () => {
   // Because of accessControlMiddleware
   useEffect(() => {
     if (currentUser.data) {
+      dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
       dispatch(getDeadline())
       dispatch(getFaculties())
