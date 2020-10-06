@@ -25,7 +25,7 @@ export const colors = {
   green: '#00944b',
   white: '#FFFFFF',
   light_gray: '#e6e6e6',
-  gray: '#A0A0A0',
+  gray: '#747474',
   dark_gray: '#4e4c4c',
   black: '#1B1C1D',
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
