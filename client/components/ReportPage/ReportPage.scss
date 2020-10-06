@@ -30,14 +30,23 @@ $background-green: #1DB954;
   }
 }
 
-.report-programmes {
-  &-list {
+.report-list {
+  &-container {
     min-height: 50px;
     max-height: 370px;
     display: flex;
     flex-flow: column;
     overflow: auto;
-    > p:hover {
+  }
+  &-included {
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  &-excluded {
+    color: $gray;
+    &:hover {
       font-weight: bold;
       cursor: pointer;
     }

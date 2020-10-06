@@ -197,9 +197,19 @@ export const translations = {
     se: 'Answers',
   },
   nowShowing: {
-    fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT',
+    fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
     en: 'NOW SHOWING THE ANSWERS OF',
     se: 'NOW SHOWING THE ANSWERS OF',
+  },
+  chooseMore: {
+    fi: 'VALITSE OHJELMIA:',
+    se: 'CHOOSE MORE PROGRAMMES:',
+    en: 'CHOOSE MORE PROGRAMMES:',
+  },
+  clear: {
+    fi: 'Valitse kaikki mahdolliset',
+    se: 'Select all',
+    en: 'Select all',
   },
   reportHeader: {
     written: {

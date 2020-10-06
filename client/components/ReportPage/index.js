@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, Segment, Tab } from 'semantic-ui-react'
+import * as _ from 'lodash'
+import { Button, Grid, Icon, Segment, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
@@ -26,6 +27,8 @@ import './ReportPage.scss'
 export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
+  const [list, setList] = useState([])
+  const [selectAll, setSelectAll] = useState(true)
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -41,8 +44,25 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
+    setList(() => filteredProgrammes)
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
+
+  const addToList = (programme) => {
+    if (list.length == filteredProgrammes.length) {
+      setList(() => ([programme]))
+    } else if (!list.includes(programme)) {
+      setList(() => ([...list, programme]))
+    } else {
+      setList(list.filter((p) => p !== programme))
+    }
+    setSelectAll(false)
+
+    if (list.length < 1) {
+      setSelectAll(true)
+      setList(filteredProgrammes)
+    }
+  }
 
   const filteredByName = useMemo(() => {
     return usersProgrammes.filter((prog) => {
@@ -75,9 +95,23 @@ export default () => {
     return filtered
   }, [filteredByLevel, faculties, selectedFaculty])
 
+  const reportProgrammes = useMemo(() => {
+    if (list.length < 1 || selectAll) return filteredProgrammes
+    const listed = filteredProgrammes.filter((p) => {
+      return list.includes(p)
+    })
+
+    return listed
+  }, [filteredProgrammes, list, selectAll])
+  
   const handleChange = ({ target }) => {
     const { value } = target
     setFilter(value)
+  }
+
+  const toggleAll = () => {
+    setSelectAll(true)
+    setList(filteredProgrammes)
   }
   
   if (!selectedAnswers) return <></>
@@ -114,7 +148,7 @@ export default () => {
 
   const answersByQuestions = () => {
     let answerMap = new Map()
-    const filteredKeys = filteredProgrammes.map((p) => p.key)
+    const filteredKeys = reportProgrammes.map((p) => p.key)
     selectedAnswers.forEach((programme) => {
       if (filteredKeys.includes(programme.programme)) {
         const data = programme.data
@@ -136,7 +170,7 @@ export default () => {
   }
 
   const allAnswers = answersByQuestions()
-  
+
   const panes = [
     { menuItem: translations.reportHeader['written'][lang], render: () =>
       <Tab.Pane className="report-page-tab">
@@ -144,7 +178,7 @@ export default () => {
           year={year}
           level={level}
           lang={lang}
-          filteredProgrammes={filteredProgrammes}
+          filteredProgrammes={reportProgrammes}
           usersProgrammes={usersProgrammes}
           questionsList={questionsList}
           allAnswers={allAnswers}
@@ -158,7 +192,7 @@ export default () => {
           level={level}
           lang={lang}
           allAnswers={allAnswers}
-          filteredProgrammes={filteredProgrammes}
+          filteredProgrammes={reportProgrammes}
           questionsList={questionsList}
         />
       </Tab.Pane> 
@@ -193,23 +227,40 @@ export default () => {
           }
         </Grid.Column>
         <Grid.Column width={6}>
-          <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
-          <Segment className="report-programmes-list" data-cy="report-programmes-list">
+          <Button onClick={toggleAll}>{translations.clear[lang]}</Button>
+          <Segment className="report-list-container" data-cy="report-programmes-list">
+            <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
             {filteredProgrammes.length > 0 ?
               <>
                 {sortedItems(filteredProgrammes, 'name', lang).map((p) =>
-                  <p 
-                    className="report-programme" 
-                    onClick={() => setFilter(p.name[lang])}
+                  reportProgrammes.includes(p) &&
+                  <p
+                    className="report-list-included"
+                    onClick={() => addToList(p)}
+                    key={p.key}
+                  >
+                    {p.name[lang] ? p.name[lang] : p.name['en']}
+                  </p>
+
+                )}
+                <div className="ui divider" />
+                <p className="report-programmes-header">{translations.chooseMore[lang]}</p>
+                {sortedItems(filteredProgrammes, 'name', lang).map((p) =>
+                !reportProgrammes.includes(p) &&
+                (
+                  <p
+                    className="report-list-excluded"
+                    onClick={() => addToList(p)}
                     key={p.key}
                   >
                   {p.name[lang] ? p.name[lang] : p.name['en']}
                   </p>
+                )
                 )}
               </>
-              :
-              <h4>{translations.noData[lang]}</h4>
-            }
+            :
+            <h4>{translations.noData[lang]}</h4>
+          }
           </Segment>
         </Grid.Column>
       </Grid>
