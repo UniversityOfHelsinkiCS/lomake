@@ -24,7 +24,8 @@ describe('ReportPage tests', function () {
     cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'kissa')
     cy.reload()
 
-    cy.visit('/report')  
+    cy.visit('/report')
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]')
       .should('contain.text', 'kissa')
@@ -43,7 +44,8 @@ describe('ReportPage tests', function () {
     cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'kissa')
     cy.reload()
 
-    cy.visit('/report')  
+    cy.visit('/report')
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
   })
 
@@ -58,6 +60,7 @@ describe('ReportPage tests', function () {
     })
 
     cy.get('[data-cy=yearSelector]').contains(2019).click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains('Hello from 2019')
   })
 
@@ -80,6 +83,7 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 63')
   })
 
@@ -90,6 +94,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=nav-report]')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
   })
 
@@ -98,6 +103,7 @@ describe('ReportPage tests', function () {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=street-light-negative-review_of_last_years_situation_report]').click()
     cy.visit('/report')
+    cy.get('[data-cy=report-select-all]').click()
   
     cy.get('div').contains('colors').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')

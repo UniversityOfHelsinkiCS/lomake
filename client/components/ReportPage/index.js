@@ -47,8 +47,9 @@ export default () => {
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
 
+  // Handles all filtering
   const programmes = useMemo(() => {
-    // Handles all filtering
+
     if (!usersProgrammes) return { chosen: [], filtered: []}
 
     const filteredByName = usersProgrammes.filter((p) => {
@@ -201,7 +202,11 @@ export default () => {
             setPicked={setPicked}
             picked={picked}
           /> 
-          <Button color="blue" onClick={() => setPicked(programmes.all)}>
+          <Button 
+            color="blue" 
+            onClick={() => setPicked(programmes.all)}
+            data-cy="report-select-all"
+          >
             {translations.selectAll[lang]}
           </Button>
           <Button onClick={() => setPicked([])}>
