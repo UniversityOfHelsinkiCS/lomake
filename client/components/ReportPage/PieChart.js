@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
@@ -6,12 +7,13 @@ import { colors } from 'Utilities/common'
 
 const PieChart = ({
   question,
-  lang,
   answers,
   showEmpty,
   chosenProgrammes
 }) => {
+  const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
+
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null

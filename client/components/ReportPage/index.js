@@ -36,7 +36,7 @@ export default () => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
+  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers), [year, answers, oldAnswers])
   const faculties = facultiesWithKeys(facultiesData)
 
 
@@ -148,7 +148,6 @@ export default () => {
         <WrittenAnswers
           year={year}
           level={level}
-          lang={lang}
           chosenProgrammes={programmes.chosen}
           usersProgrammes={usersProgrammes}
           questionsList={questionsList}
@@ -161,7 +160,6 @@ export default () => {
         <SmileyAnswers
           year={year}
           level={level}
-          lang={lang}
           allAnswers={allAnswers}
           chosenProgrammes={programmes.chosen}
           questionsList={questionsList}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
@@ -11,14 +11,14 @@ import './ReportPage.scss'
 
 
 const WrittenAnswers = ({ 
-  lang, 
-  year, 
-  usersProgrammes, 
-  chosenProgrammes, 
-  allAnswers, 
-  questionsList 
+  year,
+  usersProgrammes,
+  chosenProgrammes,
+  allAnswers,
+  questionsList
 }) => {
   const dispatch = useDispatch()
+  const lang = useSelector((state) => state.language)
   const [showing, setShowing] = useState(-1)
 
   useEffect(() => {

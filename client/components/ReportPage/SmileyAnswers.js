@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Grid, Radio, Segment } from 'semantic-ui-react'
 import { translations } from 'Utilities/translations'
 import PieChart from './PieChart'
@@ -8,9 +9,9 @@ const SmileyAnswers = ({
     allAnswers,
     questionsList,
     chosenProgrammes,
-    lang,
     year,
   }) => {
+  const lang = useSelector((state) => state.language)
   const [showEmpty, setShowEmpty] = useState(true)
 
   if (chosenProgrammes.length < 1 || allAnswers.size < 1) {
@@ -50,7 +51,6 @@ const SmileyAnswers = ({
             <PieChart
               key={question.id}
               question={question}
-              lang={lang}
               answers={allAnswers.get(question.id)}
               showEmpty={showEmpty}
               chosenProgrammes={chosenProgrammes}
