@@ -34,7 +34,7 @@ export default () => {
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
-  const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
+  const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
@@ -48,6 +48,59 @@ export default () => {
     setList(() => programmes.filtered)
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
+
+  const programmes = useMemo(() => {
+
+    const filteredByName = () => {
+      return usersProgrammes.filter((p) => {
+        const prog = p.name[lang] ? p.name[lang] : p.name['en']
+        return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
+      })
+    }
+  
+    const filteredByLevel = () => {
+      if (level === 'allProgrammes') return filteredByName()
+  
+      const filtered = filteredByName().filter((p) => {
+        const prog = p.name['en'].toLowerCase()
+        if (level === 'master') {
+          return prog.includes('master') || prog.includes('degree programme')
+        }
+        return prog.includes(level.toString())
+      })
+  
+      return filtered
+    }
+  
+    const filteredByFaculty = () => {
+      if (faculty === 'allFaculties') return filteredByLevel()
+      const filtered = filteredByLevel().filter((p) => faculties.get(p.key) === faculty)
+      
+      return filtered
+    }
+
+    const filteredByPick = () => {
+      if (list.length < 1 || selectAll) {
+        return { chosen: filteredByFaculty(), filtered: filteredByFaculty() }
+      }
+      const chosen = filteredByFaculty().filter((p) => list.includes(p))
+
+      return { chosen : chosen, filtered: filteredByFaculty() }
+    }
+
+    return filteredByPick()
+  }, [usersProgrammes, list, selectAll, level, lang, faculty, debouncedFilter])
+  
+
+  const handleSearch = ({ target }) => {
+    const { value } = target
+    setFilter(value)
+  }
+
+  const toggleAll = () => {
+    setSelectAll(true)
+    setList(programmes.filtered)
+  }
 
   const addToList = (programme) => {
     if (list.length == programmes.filtered.length) {
@@ -63,58 +116,6 @@ export default () => {
       setSelectAll(true)
       setList(programmes.filtered)
     }
-  }
-
-  const filteredByName = useMemo(() => {
-    return usersProgrammes.filter((prog) => {
-      const searchTarget = prog.name[lang] ? prog.name[lang] : prog.name['en']
-      return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
-    })
-  }, [usersProgrammes, lang, debouncedFilter])
-
-  const filteredByLevel = useMemo(() => {
-    if (level === 'allProgrammes') return filteredByName
-
-    const filtered = filteredByName.filter((p) => {
-      const prog = p.name['en'].toLowerCase()
-      if (level === 'master') {
-        return prog.includes('master')
-        || prog.includes('degree programme')
-      } 
-      
-      return prog.includes(level.toString())
-    })
-
-    return filtered
-  }, [filteredByName, lang, level])
-
-  const filteredByFaculty = useMemo(() => {
-    if (selectedFaculty === 'allFaculties') return filteredByLevel
-    const filtered = filteredByLevel.filter((p) => {
-      const faculty = faculties.get(p.key)
-      return (faculty === selectedFaculty)
-    })
-
-    return filtered
-  }, [filteredByLevel, faculties, selectedFaculty])
-
-  const programmes = useMemo(() => {
-    if (list.length < 1 || selectAll) {
-      return { chosen: filteredByFaculty, filtered: filteredByFaculty }
-    } else {
-      const chosen = filteredByFaculty.filter((p) => list.includes(p))
-      return { chosen : chosen, filtered: filteredByFaculty }   
-    }
-  }, [filteredByFaculty, list, selectAll])
-  
-  const handleChange = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
-
-  const toggleAll = () => {
-    setSelectAll(true)
-    setList(programmes.filtered)
   }
   
   if (!selectedAnswers) return <></>
@@ -222,7 +223,7 @@ export default () => {
               <FacultyFilter />
               <LevelFilter usersProgrammes={usersProgrammes}/>
               <ProgrammeFilter
-                handleChange={handleChange}
+                handleChange={handleSearch}
                 filter={filter}
                 onEmpty={() => setFilter('')}
                 lang={lang}
@@ -245,21 +246,18 @@ export default () => {
                   >
                     {p.name[lang] ? p.name[lang] : p.name['en']}
                   </p>
-
                 )}
                 <div className="ui divider" />
                 <p className="report-programmes-header">{translations.chooseMore[lang]}</p>
                 {sortedItems(programmes.filtered, 'name', lang).map((p) =>
-                !programmes.chosen.includes(p) &&
-                (
-                  <p
-                    className="report-list-excluded"
-                    onClick={() => addToList(p)}
-                    key={p.key}
-                  >
-                  {p.name[lang] ? p.name[lang] : p.name['en']}
-                  </p>
-                )
+                  !programmes.chosen.includes(p) &&
+                    <p
+                      className="report-list-excluded"
+                      onClick={() => addToList(p)}
+                      key={p.key}
+                    >
+                    {p.name[lang] ? p.name[lang] : p.name['en']}
+                    </p>
                 )}
               </>
             :
