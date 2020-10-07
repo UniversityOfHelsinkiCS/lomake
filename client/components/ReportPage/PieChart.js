@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Accordion } from 'semantic-ui-react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
@@ -11,13 +12,26 @@ const PieChart = ({
   showEmpty,
   filteredProgrammes
 }) => {
+  const [accordionData, setAccordionData] = useState(null)
+
+  console.log(accordionData)
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
-    let colors = { 'green' : 0, 'yellow': 0, 'red': 0, 'emptyAnswer': 0, 'withoutEmpty': 0 }
-    answers.forEach((q) => colors[q.color] = colors[q.color] + 1)
-    colors.withoutEmpty = colors.red + colors.green + colors.yellow
-    colors.total = colors.withoutEmpty + colors.emptyAnswer
+    let colors = { 
+      green : { 'value' : 0, 'programmes': [] },
+      yellow : { 'value' : 0, 'programmes': [] },
+      red : { 'value' : 0, 'programmes': [] },
+      emptyAnswer : { 'value' : 0, 'programmes': [] },
+      withoutEmpty : { 'value' : 0, 'programmes': [] },
+      total: { 'value': 0 }
+    }
+    answers.forEach((a) => {
+      colors[a.color]['value'] = colors[a.color]['value'] + 1
+      colors[a.color]['programmes'] = [...colors[a.color]['programmes'], a.name]
+    })
+    colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
+    colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
     return colors
   }
 
@@ -27,19 +41,24 @@ const PieChart = ({
     const data = [
       {
         color: colors.background_green,
-        value: colorSums.green || 0,
+        value: colorSums.green.value || 0,
+        programmes: colorSums.green.programmes,
       },
       {
         color: colors.background_yellow,
-        value: colorSums.yellow || 0,
+        value: colorSums.yellow.value || 0,
+        programmes: colorSums.yellow.programmes,
       },
       {
         color: colors.background_red,
-        value: colorSums.red || 0,
+        value: colorSums.red.value || 0,
+        programmes: colorSums.red.programmes,
       },
       {
         color: colors.light_gray,
-        value: colorSums.emptyAnswer && showEmpty ? colorSums.emptyAnswer : 0,
+        value: colorSums.emptyAnswer.value && showEmpty ? colorSums.emptyAnswer.value : 0,
+        programmes: colorSums.emptyAnswer.programmes,
+
       },
     ]
     return data.sort((a,b) => b.value - a.value)
@@ -52,16 +71,19 @@ const PieChart = ({
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p>{translations.responses[lang]} {answers ?
-            (showEmpty ? filteredProgrammes.length : colorSums.withoutEmpty) : 0}
+            (showEmpty ? filteredProgrammes.length : colorSums.withoutEmpty.value) : 0}
           </p>
       </div>
       <div
         className="report-smiley-pie-chart"
         data-cy={`report-chart-${question.id}`}
       >
+        {accordionData && 
+          <span className="report-smiley-pie-tip"> 
+            {accordionData.map((p) => <p key={p}>{p}</p>)}
+          </span>
+        }
         <Chart
-          animationDuration={500}
-          animationEasing="ease-out"
           center={[72, 65]}
           data={data(question)}
           lengthAngle={360}
@@ -73,7 +95,9 @@ const PieChart = ({
           viewBoxSize={[145, 145]}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold'}}
           labelPosition={112}
-        />
+          onMouseOver={(e, segmentIndex) =>setAccordionData(data(question)[segmentIndex]['programmes'])}
+          onMouseOut={() =>setAccordionData(null)}
+       />
       </div>
     </div>
   )
