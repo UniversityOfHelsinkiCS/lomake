@@ -11,11 +11,11 @@ const PieChart = ({
   showEmpty,
   chosenProgrammes
 }) => {
-  const [accordionData, setAccordionData] = useState(null)
+  const [toolTipData, setToolTipData] = useState(null)
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
-    let colors = { 
+    let colors = {
       green : { 'value' : 0, 'programmes': [] },
       yellow : { 'value' : 0, 'programmes': [] },
       red : { 'value' : 0, 'programmes': [] },
@@ -55,7 +55,6 @@ const PieChart = ({
         color: colors.light_gray,
         value: colorSums.emptyAnswer.value && showEmpty ? colorSums.emptyAnswer.value : 0,
         programmes: colorSums.emptyAnswer.programmes,
-
       },
     ]
     return data.sort((a,b) => b.value - a.value)
@@ -75,9 +74,9 @@ const PieChart = ({
         className="report-smiley-pie-chart"
         data-cy={`report-chart-${question.id}`}
       >
-        {accordionData && 
+        {toolTipData &&
           <span className="report-smiley-pie-tip"> 
-            {accordionData.map((p) => <p key={p}>{p}</p>)}
+            {toolTipData.map((p) => <p key={p}>{p}</p>)}
           </span>
         }
         <Chart
@@ -92,8 +91,8 @@ const PieChart = ({
           viewBoxSize={[145, 145]}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold'}}
           labelPosition={112}
-          onMouseOver={(e, segmentIndex) =>setAccordionData(data(question)[segmentIndex]['programmes'])}
-          onMouseOut={() =>setAccordionData(null)}
+          onMouseOver={(e, segmentIndex) => setToolTipData(data(question)[segmentIndex]['programmes'])}
+          onMouseOut={() => setToolTipData(null)}
        />
       </div>
     </div>
