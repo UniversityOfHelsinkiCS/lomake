@@ -183,7 +183,7 @@ export default () => {
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector />
-          {usersProgrammes.length > 1 &&
+          {usersProgrammes.length > 5 &&
             <>
               <FacultyFilter />
               <LevelFilter usersProgrammes={usersProgrammes}/>
