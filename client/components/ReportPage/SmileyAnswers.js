@@ -7,13 +7,13 @@ import PieChart from './PieChart'
 const SmileyAnswers = ({
     allAnswers,
     questionsList,
-    filteredProgrammes,
+    chosenProgrammes,
     lang,
     year,
   }) => {
   const [showEmpty, setShowEmpty] = useState(true)
 
-  if (filteredProgrammes.length < 1 || allAnswers.size < 1) {
+  if (chosenProgrammes.length < 1 || allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
   }
 
@@ -53,7 +53,7 @@ const SmileyAnswers = ({
               lang={lang}
               answers={allAnswers.get(question.id)}
               showEmpty={showEmpty}
-              filteredProgrammes={filteredProgrammes}
+              chosenProgrammes={chosenProgrammes}
             />
           )
         )}

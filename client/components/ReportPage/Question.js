@@ -6,7 +6,7 @@ import { romanize } from 'Utilities/common'
 const Question = ({
   answers,
   question,
-  filteredProgrammes,
+  chosenProgrammes,
   handleClick,
   showing
 }) => (
@@ -20,7 +20,7 @@ const Question = ({
     >
       <Grid>
         <Grid.Column width={1} className="question-caret">
-          {filteredProgrammes.length > 1 &&
+          {chosenProgrammes.length > 1 &&
             <Icon name={`caret ${showing === question.id ? "down" : "right"}`} />
           }
         </Grid.Column>
@@ -37,14 +37,14 @@ const Question = ({
             className="answered-label"
             size="large"
           >
-            {answers.length} / {filteredProgrammes.length}
+            {answers.length} / {chosenProgrammes.length}
           </Label>
         </Grid.Column>
       </Grid>
     </Accordion.Title>
     {answers && (
       <Accordion.Content active={showing === question.id} className="question-content">
-        {filteredProgrammes.length > 1 && <div className="ui divider"/>}
+        {chosenProgrammes.length > 1 && <div className="ui divider"/>}
         {answers.sort((a,b) => a['name'].localeCompare(b['name'])).map((programme, index) =>
           <div key={index}>
             <label className="answer-title">{programme.name}</label>

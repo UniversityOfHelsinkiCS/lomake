@@ -14,7 +14,7 @@ const WrittenAnswers = ({
   lang, 
   year, 
   usersProgrammes, 
-  filteredProgrammes, 
+  chosenProgrammes, 
   allAnswers, 
   questionsList 
 }) => {
@@ -58,7 +58,7 @@ const WrittenAnswers = ({
       {questionsList.map((question) =>
         (check(question) ? (
           <div key={question.id}>
-            {filteredProgrammes.length === 1 ?
+            {chosenProgrammes.length === 1 ?
               <SingleProgramQuestion
                 answers={allAnswers.get(question.id)}
                 question={question}
@@ -67,10 +67,10 @@ const WrittenAnswers = ({
               <Question
                 answers={allAnswers.get(question.id).filter((p) => p.answer)}
                 question={question}
-                filteredProgrammes={filteredProgrammes}
+                chosenProgrammes={chosenProgrammes}
                 year={year}
                 handleClick={handleClick}
-                showing={filteredProgrammes.length < 2 ? question.id : showing}
+                showing={chosenProgrammes.length < 2 ? question.id : showing}
               />
             }
             <div className="ui divider"/>
@@ -79,7 +79,7 @@ const WrittenAnswers = ({
           <div key={question.id}>
             <DisabledQuestion
               question={question}
-              filteredProgrammes={filteredProgrammes}
+              chosenProgrammes={chosenProgrammes}
             />
             <div className="ui divider"/>
           </div>

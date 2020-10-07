@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Accordion } from 'semantic-ui-react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
@@ -10,11 +9,9 @@ const PieChart = ({
   lang,
   answers,
   showEmpty,
-  filteredProgrammes
+  chosenProgrammes
 }) => {
   const [accordionData, setAccordionData] = useState(null)
-
-  console.log(accordionData)
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
@@ -71,7 +68,7 @@ const PieChart = ({
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p>{translations.responses[lang]} {answers ?
-            (showEmpty ? filteredProgrammes.length : colorSums.withoutEmpty.value) : 0}
+            (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0}
           </p>
       </div>
       <div

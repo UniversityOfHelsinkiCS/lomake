@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as _ from 'lodash'
-import { Button, Grid, Icon, Segment, Tab } from 'semantic-ui-react'
+import { Button, Grid, Segment, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
@@ -38,18 +37,20 @@ export default () => {
   const selectedFaculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-
   const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
   const faculties = facultiesWithKeys(facultiesData)
 
+
+  if (!usersProgrammes) return null
+
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-    setList(() => filteredProgrammes)
+    setList(() => programmes.filtered)
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
 
   const addToList = (programme) => {
-    if (list.length == filteredProgrammes.length) {
+    if (list.length == programmes.filtered.length) {
       setList(() => ([programme]))
     } else if (!list.includes(programme)) {
       setList(() => ([...list, programme]))
@@ -60,7 +61,7 @@ export default () => {
 
     if (list.length < 1) {
       setSelectAll(true)
-      setList(filteredProgrammes)
+      setList(programmes.filtered)
     }
   }
 
@@ -73,19 +74,21 @@ export default () => {
 
   const filteredByLevel = useMemo(() => {
     if (level === 'allProgrammes') return filteredByName
+
     const filtered = filteredByName.filter((p) => {
-      const searched = p.name['en'].toLowerCase()
+      const prog = p.name['en'].toLowerCase()
       if (level === 'master') {
-        return searched.includes(level.toString())
-        || searched.includes('degree programme')
-        // There are 3 degree programmes included in the masters prorammes
-      }
-      return searched.includes(level.toString())
+        return prog.includes('master')
+        || prog.includes('degree programme')
+      } 
+      
+      return prog.includes(level.toString())
     })
+
     return filtered
   }, [filteredByName, lang, level])
 
-  const filteredProgrammes = useMemo(() => {
+  const filteredByFaculty = useMemo(() => {
     if (selectedFaculty === 'allFaculties') return filteredByLevel
     const filtered = filteredByLevel.filter((p) => {
       const faculty = faculties.get(p.key)
@@ -95,14 +98,14 @@ export default () => {
     return filtered
   }, [filteredByLevel, faculties, selectedFaculty])
 
-  const reportProgrammes = useMemo(() => {
-    if (list.length < 1 || selectAll) return filteredProgrammes
-    const listed = filteredProgrammes.filter((p) => {
-      return list.includes(p)
-    })
-
-    return listed
-  }, [filteredProgrammes, list, selectAll])
+  const programmes = useMemo(() => {
+    if (list.length < 1 || selectAll) {
+      return { chosen: filteredByFaculty, filtered: filteredByFaculty }
+    } else {
+      const chosen = filteredByFaculty.filter((p) => list.includes(p))
+      return { chosen : chosen, filtered: filteredByFaculty }   
+    }
+  }, [filteredByFaculty, list, selectAll])
   
   const handleChange = ({ target }) => {
     const { value } = target
@@ -111,7 +114,7 @@ export default () => {
 
   const toggleAll = () => {
     setSelectAll(true)
-    setList(filteredProgrammes)
+    setList(programmes.filtered)
   }
   
   if (!selectedAnswers) return <></>
@@ -148,20 +151,21 @@ export default () => {
 
   const answersByQuestions = () => {
     let answerMap = new Map()
-    const filteredKeys = reportProgrammes.map((p) => p.key)
+    const chosenKeys = programmes.chosen.map((p) => p.key)
     selectedAnswers.forEach((programme) => {
-      if (filteredKeys.includes(programme.programme)) {
+      if (chosenKeys.includes(programme.programme)) {
         const data = programme.data
         questionsList.forEach((question) => {
-          let answer = ''
-          let questionData = answerMap.get(question.id) ? answerMap.get(question.id) : []
+          let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
+          
+          let answer = ''
           if (question.id === "measures_text") answer = getMeasuresAnswer(data)
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-          questionData = [...questionData, { name: name, color: color, answer: answer }]
-          answerMap.set(question.id, questionData)
+          answersByProgramme = [...answersByProgramme, { name: name, color: color, answer: answer }]
+          answerMap.set(question.id, answersByProgramme)
         })
       }
     })
@@ -178,7 +182,7 @@ export default () => {
           year={year}
           level={level}
           lang={lang}
-          filteredProgrammes={reportProgrammes}
+          chosenProgrammes={programmes.chosen}
           usersProgrammes={usersProgrammes}
           questionsList={questionsList}
           allAnswers={allAnswers}
@@ -192,7 +196,7 @@ export default () => {
           level={level}
           lang={lang}
           allAnswers={allAnswers}
-          filteredProgrammes={reportProgrammes}
+          chosenProgrammes={programmes.chosen}
           questionsList={questionsList}
         />
       </Tab.Pane> 
@@ -230,10 +234,10 @@ export default () => {
           <Button onClick={toggleAll}>{translations.clear[lang]}</Button>
           <Segment className="report-list-container" data-cy="report-programmes-list">
             <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
-            {filteredProgrammes.length > 0 ?
+            {programmes.filtered.length > 0 ?
               <>
-                {sortedItems(filteredProgrammes, 'name', lang).map((p) =>
-                  reportProgrammes.includes(p) &&
+                {sortedItems(programmes.filtered, 'name', lang).map((p) =>
+                  programmes.chosen.includes(p) &&
                   <p
                     className="report-list-included"
                     onClick={() => addToList(p)}
@@ -245,8 +249,8 @@ export default () => {
                 )}
                 <div className="ui divider" />
                 <p className="report-programmes-header">{translations.chooseMore[lang]}</p>
-                {sortedItems(filteredProgrammes, 'name', lang).map((p) =>
-                !reportProgrammes.includes(p) &&
+                {sortedItems(programmes.filtered, 'name', lang).map((p) =>
+                !programmes.chosen.includes(p) &&
                 (
                   <p
                     className="report-list-excluded"

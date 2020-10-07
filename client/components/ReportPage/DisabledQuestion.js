@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 
-const DisabledQuestion = ({ question, filteredProgrammes }) => (
+const DisabledQuestion = ({ question, chosenProgrammes }) => (
     <Accordion.Title
       index={question.id}
       data-cy={`report-question-disabled-${question.id}`}
@@ -19,7 +19,7 @@ const DisabledQuestion = ({ question, filteredProgrammes }) => (
         </Grid.Column>
         <Grid.Column width={4} floated="right">
           <Label data-cy={`answered-label-${question.id}`} className="answered-label-disabled" size="large">
-             0 / {filteredProgrammes.length}
+             0 / {chosenProgrammes.length}
           </Label>
         </Grid.Column>
       </Grid>
