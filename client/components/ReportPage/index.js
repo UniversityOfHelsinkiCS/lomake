@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -36,7 +36,7 @@ export default () => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
+  const selectedAnswers = answersByYear(year, answers, oldAnswers)
   const faculties = facultiesWithKeys(facultiesData)
 
 
