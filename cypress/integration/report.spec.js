@@ -68,6 +68,7 @@ describe('ReportPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.visit('/report')
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains(129)
   })
 

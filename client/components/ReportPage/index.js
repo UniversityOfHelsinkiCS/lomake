@@ -48,7 +48,7 @@ export default () => {
   }, [lang])
 
   // Handles all filtering
-  const programmes = useMemo(() => {
+  const filteredProgrammes = () => {
 
     if (!usersProgrammes) return { chosen: [], filtered: []}
 
@@ -77,9 +77,10 @@ export default () => {
 
     return { chosen: filteredByPick, all: filteredByFaculty }
 
-  }, [usersProgrammes, picked, level, lang, faculty, debouncedFilter])
-  
+  }
 
+  const programmes = filteredProgrammes()
+  
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
