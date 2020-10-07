@@ -40,8 +40,6 @@ export default () => {
   const faculties = facultiesWithKeys(facultiesData)
 
 
-  if (!usersProgrammes) return null
-
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['reportPage'][lang]}`
