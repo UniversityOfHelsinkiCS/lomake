@@ -36,7 +36,7 @@ export default () => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers), [year, answers, oldAnswers])
+  const selectedAnswers = useMemo(() => answersByYear(year, answers, oldAnswers))
   const faculties = facultiesWithKeys(facultiesData)
 
 
