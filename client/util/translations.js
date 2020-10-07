@@ -202,14 +202,19 @@ export const translations = {
     se: 'NOW SHOWING THE ANSWERS OF',
   },
   chooseMore: {
-    fi: 'VALITSE OHJELMIA:',
+    fi: 'VALITSE OHJELMAT RAPORTILLE:',
     se: 'CHOOSE MORE PROGRAMMES:',
     en: 'CHOOSE MORE PROGRAMMES:',
   },
-  clear: {
-    fi: 'Valitse kaikki mahdolliset',
+  selectAll: {
+    fi: 'Valitse kaikki',
     se: 'Select all',
     en: 'Select all',
+  },
+  clearSelection: {
+    fi: 'Tyhjennä valinta',
+    se: 'Clear selection',
+    en: 'Clear selection',
   },
   reportHeader: {
     written: {
