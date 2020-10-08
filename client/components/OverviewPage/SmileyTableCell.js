@@ -24,6 +24,7 @@ const SmileyTableCell = ({
   questionType,
   setModalData,
   programmesOldAnswers,
+  showProgress,
 }) => {
   const languageCode = useSelector((state) => state.language)
 
@@ -53,7 +54,8 @@ const SmileyTableCell = ({
 
   if (lightAnswer) {
     const getIconAndColor = () => {
-      if (!programmesOldAnswers) return [lightEmojiMap[lightAnswer], lightAnswer]
+      if (!programmesOldAnswers)
+        return showProgress ? ['minus', lightAnswer] : [lightEmojiMap[lightAnswer], lightAnswer]
 
       const oldLightAnswer = programmesOldAnswers[lightId]
       if (!oldLightAnswer || oldLightAnswer === lightAnswer) return ['minus', lightAnswer]
