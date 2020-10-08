@@ -137,6 +137,7 @@ export default () => {
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <Radio
                       style={{ margin: '1rem' }}
+                      data-cy="overviewpage-showprogress"
                       checked={showProgressFromLastYear}
                       onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
                       label={translations['showProgressFromLastYear'][languageCode]}

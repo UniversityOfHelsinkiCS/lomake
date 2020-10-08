@@ -68,4 +68,12 @@ describe('OSPA user tests', function () {
     cy.contains('Links for faculties').click()
     cy.get('tr').should('have.length', 13)
   })
+
+  it('Can change from smiley table to trends view', function () {
+    cy.get('i').should('have.class', 'smile outline big icon')
+
+    cy.get('[data-cy=overviewpage-showprogress] > label').click()
+
+    cy.get('i').should('have.class', 'minus big icon')
+  })
 })
