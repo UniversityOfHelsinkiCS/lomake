@@ -10,6 +10,12 @@ const lightEmojiMap = {
   red: 'frown outline',
 }
 
+const lightScoreMap = {
+  green: 1,
+  yellow: 0,
+  red: -1,
+}
+
 const SmileyTableCell = ({
   programmesName,
   programmesKey,
@@ -17,6 +23,7 @@ const SmileyTableCell = ({
   questionId,
   questionType,
   setModalData,
+  programmesOldAnswers,
 }) => {
   const languageCode = useSelector((state) => state.language)
 
@@ -40,15 +47,31 @@ const SmileyTableCell = ({
   }
 
   const textId = `${questionId}_text`
-  const lighId = `${questionId}_light`
+  const lightId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
-  const lightAnswer = programmesAnswers[lighId]
+  const lightAnswer = programmesAnswers[lightId]
 
   if (lightAnswer) {
+    const getIconAndColor = () => {
+      if (!programmesOldAnswers) return [lightEmojiMap[lightAnswer], lightAnswer]
+
+      const oldLightAnswer = programmesOldAnswers[lightId]
+      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return ['minus', lightAnswer]
+
+      const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
+
+      if (difference > 0) return ['angle up', 'green']
+      if (difference < 0) return ['angle down', 'red']
+
+      return ['minus', lightAnswer]
+    }
+
+    const [icon, color] = getIconAndColor()
+
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
-        className={`square-${lightAnswer}`}
+        className={`square-${color}`}
         onClick={() =>
           setModalData({
             header: questions.reduce((acc, cur) => {
@@ -71,11 +94,7 @@ const SmileyTableCell = ({
           })
         }
       >
-        <Icon
-          name={lightEmojiMap[lightAnswer]}
-          style={{ margin: '0 auto' }}
-          size="big"
-        />
+        <Icon name={icon} style={{ margin: '0 auto' }} size="big" />
       </div>
     )
   }
@@ -110,10 +129,7 @@ const SmileyTableCell = ({
           })
         }
       >
-        <Icon
-          name="discussions"
-          size="big"
-        />
+        <Icon name="discussions" size="big" />
       </div>
     )
   }

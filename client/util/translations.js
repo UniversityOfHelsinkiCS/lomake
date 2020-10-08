@@ -1,4 +1,3 @@
-
 export const translations = {
   // Generic/CsvDownload.js
   // ReportPage/index.js
@@ -12,7 +11,7 @@ export const translations = {
       fi: 'Hymiöiden värit',
       en: 'Emoji colors',
       se: 'Emoji colors',
-    },  
+    },
   },
   questions: {
     fi: 'Kysymys',
@@ -40,7 +39,7 @@ export const translations = {
         fi: 'Tilannekuvalomake_kirjalliset_vastaukset',
         en: 'Written_answers',
         se: 'Written_answers',
-      }, 
+      },
       smileys: {
         fi: 'Tilannekuvalomake_liikennevalot',
         en: 'Colored_smileys',
@@ -52,7 +51,7 @@ export const translations = {
         fi: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
         en: 'All_the_programmes_written_answers',
         se: 'All_the_programmes_written_answers',
-      }, 
+      },
       smileys: {
         fi: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalot',
         en: 'All_the_programmes_colored_smileys',
@@ -64,7 +63,7 @@ export const translations = {
     fi: 'Vihreä',
     en: 'Green',
     se: 'Grön',
-  }, 
+  },
   yellow: {
     fi: 'Keltainen',
     en: 'Yellow',
@@ -83,12 +82,12 @@ export const translations = {
   },
   bachelor: {
     fi: 'Kandiohjelmat',
-    en: 'Bachelor\'s programmes',
+    en: "Bachelor's programmes",
     se: 'Kandidatsprogram',
   },
   master: {
     fi: 'Maisteriohjelmat',
-    en: 'Master\'s programmes',
+    en: "Master's programmes",
     se: 'Magisterprogram',
   },
   doctoral: {
@@ -111,14 +110,16 @@ export const translations = {
   // OverviewPage/index.js
   // FormView/index.js
   noPermissions: {
-    fi: 'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    en: "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
+    fi:
+      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
+    en:
+      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
   },
   findProgramme: {
     fi: 'Etsi koulutusohjelmia',
     en: 'Search for study programmes',
-    se: ''
+    se: '',
   },
   filter: {
     fi: 'Etsi koulutusohjelmia',
@@ -129,6 +130,11 @@ export const translations = {
     fi: 'Näytä vain lunastamattomat koulutusohjelmat',
     en: 'Show only unclaimed programmes',
     se: 'Visa enbart program som inte tagits emot',
+  },
+  showProgressFromLastYear: {
+    fi: 'Näytä kehitys viime vuodesta',
+    en: 'Show progress from last year',
+    se: '',
   },
   overviewPage: {
     fi: 'Lomake - Yleisnäkymä ',
@@ -220,7 +226,7 @@ export const translations = {
     written: {
       en: 'Written answers',
       fi: 'Kirjalliset vastaukset',
-      se: 'Written answers',  
+      se: 'Written answers',
     },
     smileys: {
       en: 'Smiley colors',
@@ -238,7 +244,7 @@ export const translations = {
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
   },
-  // ReportPage/SmileyAnswers.js 
+  // ReportPage/SmileyAnswers.js
   responses: {
     en: 'Responses:',
     fi: 'Vastauksia:',

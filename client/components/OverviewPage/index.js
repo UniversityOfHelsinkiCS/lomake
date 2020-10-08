@@ -11,14 +11,14 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import StatsContent from './StatsContent'
 import useDebounce from '../../util/useDebounce'
-import {translations} from '../../util/translations'
-
+import { translations } from '../../util/translations'
 
 export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const [modalData, setModalData] = useState(null)
   const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
+  const [showProgressFromLastYear, setShowProgressFromLastYear] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
@@ -36,7 +36,6 @@ export default () => {
     setFilter(value)
   }
 
-
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
     return currentUser.data.admin
@@ -47,7 +46,7 @@ export default () => {
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter((prog) => {
       if (showUnclaimedOnly && prog.claimed) return
-      const searchTarget = prog.name[languageCode] ? prog.name[languageCode] : prog.name['en'] // Because sw and fi dont always have values.
+      const searchTarget = prog.name[languageCode] || prog.name['en']
       return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
   }, [usersProgrammes, showUnclaimedOnly, languageCode, debouncedFilter])
@@ -99,17 +98,18 @@ export default () => {
               className="button basic gray"
               direction="left"
               text={translations.csvDownload[languageCode]}
-              onClick={() => setShowCsv(true)}>
-              {showCsv ?
+              onClick={() => setShowCsv(true)}
+            >
+              {showCsv ? (
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview"/>
+                    <CsvDownload wantedData="written" view="overview" />
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <CsvDownload wantedData="smileys" view="overview"/>
+                    <CsvDownload wantedData="smileys" view="overview" />
                   </Dropdown.Item>
                 </Dropdown.Menu>
-              : null}
+              ) : null}
             </Dropdown>
           </div>
           <YearSelector />
@@ -124,7 +124,7 @@ export default () => {
                 }}
               >
                 <Input
-                  style={{ width: '280px', marginBottom: '15px'}}
+                  style={{ width: '280px', marginBottom: '15px' }}
                   data-cy="overviewpage-filter"
                   name="filter"
                   icon="search"
@@ -132,10 +132,18 @@ export default () => {
                   onChange={handleChange}
                   value={filter}
                 />
+
                 {currentUser.data.admin && (
-                  <div>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <Radio
-                      style={{ marginTop: '1em' }}
+                      style={{ margin: '1rem' }}
+                      checked={showProgressFromLastYear}
+                      onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
+                      label={translations['showProgressFromLastYear'][languageCode]}
+                      toggle
+                    />
+                    <Radio
+                      style={{ margin: '1rem' }}
                       checked={showUnclaimedOnly}
                       onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
                       label={translations['showUnclaimedOnly'][languageCode]}
@@ -151,10 +159,13 @@ export default () => {
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
               isBeingFiltered={debouncedFilter !== ''}
+              showProgress={showProgressFromLastYear}
             />
           </div>
         </>
-      ) : <NoPermissions languageCode={languageCode}/>}
+      ) : (
+        <NoPermissions languageCode={languageCode} />
+      )}
     </>
   )
 }

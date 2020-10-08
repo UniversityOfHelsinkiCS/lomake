@@ -45,7 +45,7 @@ const translations = {
     fi: 'Koulutusohjelma',
     en: 'Programme',
     se: 'Program',
-  }
+  },
 }
 
 const replaceTitle = {
@@ -60,6 +60,7 @@ const SmileyTable = React.memo(
     setProgramControlsToShow,
     setStatsToShow,
     isBeingFiltered,
+    showProgress,
   }) => {
     const dispatch = useDispatch()
     const answers = useSelector((state) => state.tempAnswers)
@@ -80,6 +81,11 @@ const SmileyTable = React.memo(
       selectedYear === new Date().getFullYear()
         ? answers.data
         : oldAnswers.data.filter((a) => a.year === selectedYear)
+
+    const lastYearsAnswers =
+      oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1) && showProgress
+        ? oldAnswers.data.filter((a) => a.year === selectedYear - 1)
+        : null
 
     let sortedProgrammes = sortedItems(filteredProgrammes, sorter, languageCode)
 
@@ -196,23 +202,24 @@ const SmileyTable = React.memo(
     }
 
     const LockedIcon = ({ programme }) => {
-      return hasManagementAccess(programme.key) ?
-        (<Icon
+      return hasManagementAccess(programme.key) ? (
+        <Icon
           data-cy={`${programme.key}-locked`}
           title={translations['programmeLocked'][languageCode]}
           name="lock"
           size="large"
           color="grey"
           onClick={() => setProgramControlsToShow(programme)}
-        />)
-        :
-        (<Icon
+        />
+      ) : (
+        <Icon
           data-cy={`${programme.key}-locked`}
           title={translations['programmeLocked'][languageCode]}
           name="lock"
           size="large"
           color="grey"
-        />)
+        />
+      )
     }
 
     const tableIds = questions.reduce((acc, cur) => {
@@ -253,7 +260,7 @@ const SmileyTable = React.memo(
           <>
             <div
               className="sticky-header"
-              style={{ fontWeight: 'bold', cursor: 'pointer'}}
+              style={{ fontWeight: 'bold', cursor: 'pointer' }}
               onClick={() => setReverse(!reverse)}
             >
               {translations.programmeHeader[languageCode]}
@@ -310,6 +317,9 @@ const SmileyTable = React.memo(
         )}
         {sortedProgrammes.map((p) => {
           const programme = selectedAnswers.find((a) => a.programme === p.key)
+          const programmeLastYear = lastYearsAnswers
+            ? lastYearsAnswers.find((a) => a.programme === p.key)
+            : null
           const targetURL = `/form/${p.key}`
           return (
             <React.Fragment key={p.key}>
@@ -324,9 +334,13 @@ const SmileyTable = React.memo(
                   programmesName={p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                   programmesKey={p.key}
                   programmesAnswers={programme && programme.data ? programme.data : {}}
+                  programmesOldAnswers={
+                    programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null
+                  }
                   questionId={idObject.id}
                   questionType={idObject.type}
                   setModalData={setModalData}
+                  showProgress={showProgress}
                 />
               ))}
               <div style={{ display: 'flex', alignItems: 'center' }}>
