@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+import { testProgrammeName } from '../../config/common'
+
 describe('OSPA user tests', function () {
   this.beforeEach(function () {
     cy.login('cypressAdminUser')
@@ -69,11 +71,14 @@ describe('OSPA user tests', function () {
     cy.get('tr').should('have.length', 13)
   })
 
-  it('Can change from smiley table to trends view', function () {
+  it('Can write to form and change from smiley table to trends view', function () {
+    cy.visit(`/form/${testProgrammeName}`)
+    cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
+
+    cy.visit('/')
+
     cy.get('i').should('have.class', 'smile outline big icon')
-
     cy.get('[data-cy=overviewpage-showprogress] > label').click()
-
     cy.get('i').should('have.class', 'minus big icon')
   })
 })
