@@ -16,6 +16,7 @@
   @include filter-basics;
   > form {
     margin-top: 1em;
+    word-wrap: break-word;
   }
 }
 

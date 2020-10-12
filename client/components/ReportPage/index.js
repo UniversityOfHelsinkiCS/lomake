@@ -15,6 +15,7 @@ import {
   cleanText,
   getMeasuresAnswer,
   facultiesWithKeys,
+  internationalProgrammes as international,
   programmeNameByKey as programmeName,
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
@@ -58,6 +59,9 @@ export default () => {
     const filteredByLevel = filteredByName.filter((p) => {
       if (level === 'allProgrammes') return true
       const prog = p.name['en'].toLowerCase()
+      if (level === 'international') {
+        return international.includes(p.key)
+      }
       if (level === 'master') {
         return prog.includes('master') || prog.includes('degree programme')
       }

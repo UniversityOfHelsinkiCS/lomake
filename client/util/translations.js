@@ -95,6 +95,11 @@ export const translations = {
     en: 'Doctoral programmes',
     se: 'Doktorandprogram',
   },
+  international: {
+    fi: 'Kansainväliset maisteriohjelmat',
+    en: "International Master's programmes",
+    se: 'Internationella Magisterprogram',
+  },
   // Generic/FacultyFilter.js
   facultyFilter: {
     en: 'Filter by faculty',
