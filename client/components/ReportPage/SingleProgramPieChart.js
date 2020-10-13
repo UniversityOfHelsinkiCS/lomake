@@ -13,7 +13,6 @@ export default ({
 }) => {
   const lang = useSelector((state) => state.language)
 
-  console.log(showEmpty)
   const colorsTotal = (question) => {
     if (!question || !answers) return null
     let colors = {
