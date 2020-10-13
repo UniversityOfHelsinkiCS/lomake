@@ -19,6 +19,9 @@
     word-wrap: break-word;
     & .fields {
       flex-flow: wrap;
+      > div {
+        margin-top: 0.3em !important;
+      }
     }
   }
 }
