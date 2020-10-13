@@ -6,6 +6,7 @@ import PieChart from './PieChart'
 import { translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
 
+
 const Comparison = ({ 
   questionsList,
   usersProgrammes,
@@ -27,6 +28,14 @@ const Comparison = ({
     setCompared(value)
   }
 
+  const programmeFaculty = (programmeName) => {
+    if (!programmeName) return ''
+    const programme = usersProgrammes.find((p) => p.name[lang] == programmeName)
+    const facultyCode = facultiesByKey.get(programme.key)
+    const faculty = faculties[lang].find((f) => f.key == facultyCode)
+    return faculty.text
+  }
+
   const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
 
   const chosenAnswers = (question) => {
@@ -35,7 +44,6 @@ const Comparison = ({
   } 
 
   const filteredByFaculty = usersProgrammes.filter((p) => {
-    if (compared === 'allFaculties') return true
     return facultiesByKey.get(p.key) === compared
   })
 
@@ -109,6 +117,7 @@ const Comparison = ({
                     question={question}
                     answers={chosenAnswers(question)}
                     programmeName={chosen}
+                    programmeFaculty={programmeFaculty(chosen)}
                     showEmpty={showEmpty}
                   />
                 )

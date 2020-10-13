@@ -1,8 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
-import { translations } from 'Utilities/translations'
 
 
 export default ({
@@ -10,8 +8,8 @@ export default ({
   answers,
   showEmpty,
   programmeName,
+  programmeFaculty,
 }) => {
-  const lang = useSelector((state) => state.language)
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
@@ -60,10 +58,7 @@ export default ({
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{programmeName}</b></p>
-        <p><b>
-          {`${translations.responses[lang]}
-          ${answers ? (showEmpty ? 1 : colorSums.withoutEmpty) : 0}`} / 1
-        </b></p>
+        <p><b>{programmeFaculty}</b></p>
       </div>
       <div
         className="report-smiley-pie-chart"
