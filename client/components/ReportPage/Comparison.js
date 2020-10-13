@@ -86,7 +86,7 @@ const Comparison = ({
               selection
               value={compared}
               onChange={handleComparedChange}
-              options={faculties[lang]}
+              options={faculties[lang].slice(1, faculties[lang].length)}
             />
             <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
