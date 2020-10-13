@@ -10,8 +10,6 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const addToList = (programme) => {
     if (!picked.includes(programme)) {
       setPicked(() => ([...picked, programme]))
-    } else {
-      setPicked(picked.filter((p) => p !== programme))
     }
   }
 
