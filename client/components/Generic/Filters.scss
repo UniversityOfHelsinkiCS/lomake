@@ -17,6 +17,9 @@
   > form {
     margin-top: 1em;
     word-wrap: break-word;
+    & .fields {
+      flex-flow: wrap;
+    }
   }
 }
 
