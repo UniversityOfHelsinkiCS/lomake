@@ -71,8 +71,6 @@ export default ({
     return answered + all
   }
 
-  if (colorSums.total == 0) return <></>
-
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
