@@ -45,6 +45,13 @@ const Comparison = ({
     return answers.filter((a) => filteredKeys.includes(a.key))
   }
 
+  const options = usersProgrammes.map((p) =>
+    ({ key: p.key,
+      value: p.name[lang] ? p.name[lang] : p.name['en'],
+      text: p.name[lang] ? p.name[lang] : p.name['en']
+    })
+  )
+
   return (
     <div className="report-container">
       <Grid >
@@ -69,7 +76,7 @@ const Comparison = ({
               placeholder={translations.chooseProgramme[lang]}
               value={chosen}
               onChange={handleChosenChange}
-              options={usersProgrammes.map((p) => ({ key: p.key, value: p.name[lang], text: p.name[lang]}))}
+              options={options}
             />
           </Grid.Column>
           <Grid.Column className="report-comparison-header">
