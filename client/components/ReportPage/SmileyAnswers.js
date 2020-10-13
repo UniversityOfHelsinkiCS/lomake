@@ -6,10 +6,10 @@ import PieChart from './PieChart'
 
 
 const SmileyAnswers = ({
+    year,
     allAnswers,
     questionsList,
     chosenProgrammes,
-    year,
   }) => {
   const lang = useSelector((state) => state.language)
   const [showEmpty, setShowEmpty] = useState(true)

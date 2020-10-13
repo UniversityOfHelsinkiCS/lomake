@@ -5,6 +5,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import ProgrammeList from './ProgrammeList'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
+import Comparison from './Comparison'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
@@ -17,6 +18,7 @@ import {
   facultiesWithKeys,
   internationalProgrammes as international,
   programmeNameByKey as programmeName,
+  sortedItems
 } from 'Utilities/common'
 import { translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
@@ -28,6 +30,7 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
+  const [disabled, setDisabled] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -120,22 +123,23 @@ export default () => {
 
   const questionsList = modifiedQuestions()
 
-  const answersByQuestions = () => {
+  const answersByQuestions = (chosenProgrammes) => {
     let answerMap = new Map()
-    const chosenKeys = programmes.chosen.map((p) => p.key)
+    const chosenKeys = chosenProgrammes.map((p) => p.key)
     selectedAnswers.forEach((programme) => {
-      if (chosenKeys.includes(programme.programme)) {
+      const key = programme.programme
+
+      if (chosenKeys.includes(key)) {
         const data = programme.data
         questionsList.forEach((question) => {
           let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
-          
           let answer = ''
           if (question.id === "measures_text") answer = getMeasuresAnswer(data)
           else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-          answersByProgramme = [...answersByProgramme, { name: name, color: color, answer: answer }]
+          answersByProgramme = [...answersByProgramme, { name: name, key: key, color: color, answer: answer }]
           answerMap.set(question.id, answersByProgramme)
         })
       }
@@ -144,32 +148,45 @@ export default () => {
     return answerMap
   }
 
-  const allAnswers = answersByQuestions()
+  const handleTabChange = (e, { activeIndex }) => {
+    if (activeIndex === 2) setDisabled('disabled')
+    else setDisabled('')
+  }
 
   const panes = [
     { menuItem: translations.reportHeader['written'][lang], render: () =>
       <Tab.Pane className="report-page-tab">
         <WrittenAnswers
           year={year}
-          level={level}
+          questionsList={questionsList}
           chosenProgrammes={programmes.chosen}
           usersProgrammes={usersProgrammes}
-          questionsList={questionsList}
-          allAnswers={allAnswers}
+          allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
         />
       </Tab.Pane> 
     },
-    { menuItem: translations.reportHeader['smileys'][lang], render: () => 
+    { menuItem: translations.reportHeader['smileys'][lang], render: () =>
       <Tab.Pane>
         <SmileyAnswers
           year={year}
-          level={level}
-          allAnswers={allAnswers}
-          chosenProgrammes={programmes.chosen}
           questionsList={questionsList}
+          chosenProgrammes={programmes.chosen}
+          allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
         />
       </Tab.Pane> 
     },
+    usersProgrammes.length > 5 &&
+    { menuItem: translations.reportHeader['comparison'][lang], render: () =>
+      <Tab.Pane>
+        <Comparison
+          year={year}
+          questionsList={questionsList}
+          usersProgrammes={sortedItems(usersProgrammes, 'name', lang)}
+          allAnswers={usersProgrammes ? answersByQuestions(usersProgrammes) : []}
+          facultiesByKey={faculties}
+        />
+      </Tab.Pane>
+    }
   ]
 
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
@@ -181,7 +198,7 @@ export default () => {
         doubling
         columns={2}
         padded='vertically'
-        className="report-filter-container"
+        className={`report-filter-container-${disabled}`}
       >
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
@@ -221,6 +238,7 @@ export default () => {
         className="report-page-tab"
         menu={{ secondary: true, pointing: true }}
         panes={panes}
+        onTabChange={handleTabChange}
       />
     </>
   )

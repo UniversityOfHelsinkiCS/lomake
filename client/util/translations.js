@@ -238,6 +238,11 @@ export const translations = {
       fi: 'Hymiöiden värit',
       se: 'Smiley colors',
     },
+    comparison: {
+      en: 'Comparison to the faculty',
+      fi: 'Vertailu tiedekuntaan',
+      se: 'Comparison to the faculty',
+    }
   },
   answered: {
     en: 'Answered',
@@ -269,5 +274,36 @@ export const translations = {
     fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
+  },
+  // ReportPage/Comparison.js
+  chosenProgrammes: {
+    fi: 'Valittu ohjelma',
+    en: 'Chosen programme',
+    se: 'Chosen programme',
+  },
+  comparedProgrammes: {
+    fi: 'Vertaile tiedekuntaan',
+    en: 'Compare to a faculty',
+    se: 'Compare to a faculty',
+  },
+  chooseProgramme: {
+    fi: 'Valitse vertailtava ohjelma',
+    en: 'Choose a programme for comparison',
+    se: 'Choose a programme for comparison',
+  },
+  noChosenProgrammes: {
+    fi: 'Ei yhtään ohjelmaa vielä valittuna',
+    en: 'No programmes have yet been chosen',
+    se: 'No programmes have yet been chosen',
+  },
+  noAccessToAll: {
+    fi: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
+    en: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+    se: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+  },
+  university: {
+    fi: 'Koko yliopisto',
+    en: 'Entire university',
+    se: 'Entire university',
   },
 }

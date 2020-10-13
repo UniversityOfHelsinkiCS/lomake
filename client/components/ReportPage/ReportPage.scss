@@ -20,7 +20,7 @@ $background-green: #1DB954;
   height: 50px;
 }
 
-.report-filter-container {
+@mixin report-filter-container-basics {
   width: 90%;
   max-width: 1400px;
   align-self: center;
@@ -30,6 +30,16 @@ $background-green: #1DB954;
   > h1 {
     margin-bottom: 1.3em;
     margin-top: 1em !important;
+  }
+}
+
+.report-filter-container {
+  &- {
+    @include report-filter-container-basics;
+  }
+  &-disabled {
+    @include report-filter-container-basics;
+    opacity: 0.4;
   }
 }
 
@@ -225,7 +235,13 @@ $background-green: #1DB954;
     > p {
       margin-bottom: 3px;
       font-weight: 400;
-    }  
+    }
+  }
+  &-pie-headline {
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &-pie-chart {
     position: relative;
@@ -254,5 +270,27 @@ $background-green: #1DB954;
          -o-transform: all .3s;
             transform: all .3s;
     pointer-events: none;
+  }
+}
+
+.report-comparison {
+  &-filter-container {
+    margin: 2em 1em 0em 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center!important;
+  }
+  &-container-left {
+    margin-left: 2em;
+    padding: 1em 0em 0em 0em !important;
+  }
+  &-container-center {
+    display: flex;
+    justify-content: center!important;
+  }
+  &-header {
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
   }
 }

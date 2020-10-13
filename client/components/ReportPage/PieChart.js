@@ -5,11 +5,13 @@ import { translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
 
-const PieChart = ({
+export default ({
   question,
   answers,
   showEmpty,
-  chosenProgrammes
+  chosenProgrammes,
+  faculty,
+  allProgrammes
 }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
@@ -62,15 +64,21 @@ const PieChart = ({
     return data.sort((a,b) => b.value - a.value)
   }
 
+  const amountOfResponses = () => {
+    const answered = `${translations.responses[lang]} ${answers ?
+      (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0}`
+    const all = allProgrammes ? ` / ${allProgrammes.length}` : ''
+    return answered + all
+  }
+
   if (colorSums.total == 0) return <></>
 
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
-        <p>{translations.responses[lang]} {answers ?
-            (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0}
-          </p>
+        <p><b>{faculty}</b></p>
+        <p><b>{amountOfResponses()}</b></p>
       </div>
       <div
         className="report-smiley-pie-chart"
@@ -100,5 +108,3 @@ const PieChart = ({
     </div>
   )
 }
-
-export default PieChart
