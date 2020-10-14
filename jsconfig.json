@@ -5,6 +5,7 @@
     "baseUrl": "./",
     "paths": {
       "@controllers/*": ["server/controllers/*"],
+      "@models/*": ["server/models/*"],
       "@middleware/*": ["server/middleware/*"],
       "@util/*": ["server/util/*"],
       "Utilities/*": ["client/util/*"],
