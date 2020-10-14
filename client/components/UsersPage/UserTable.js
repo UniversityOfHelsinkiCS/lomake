@@ -87,29 +87,29 @@ export default () => {
             onChange={(e, { value }) => setNameFilter(value)}
             icon="search"
             iconPosition="left"
-            placeholder="Search users by name"
+            placeholder={translations.searchByName[lang]}
           />
         </Grid.Column>
-        <Grid.Column width={5}/>
-        <Grid.Column width={5}>
+        <Grid.Column width={6}/>
+        <Grid.Column width={4}>
           <Input
             value={accessFilter}
             onChange={(e, { value }) => setAccessFilter(value)}
             icon="users"
             iconPosition="left"
-            placeholder="Filter users by access"
+            placeholder={translations.filterByAccess[lang]}
           />
         </Grid.Column>
         <Grid.Column width={2}/>
       </Grid>
       <Grid celled="internally">
         <Grid.Row>
-          <CustomHeader width={3} name="Name" field="lastname" />
-          <CustomHeader width={2} name="User id" field="uid" />
-          <CustomHeader width={3} name="Email" field="email" />
-          <CustomHeader width={5} name="Access" field="access" sortable={false} />
-          <CustomHeader width={1} name="Admin" field="admin" />
-          <CustomHeader width={1} name="Hide" field="irrelevant" />
+          <CustomHeader width={3} name={translations.name[lang]} field="lastname" />
+          <CustomHeader width={3} name={translations.userId[lang]} field="uid" />
+          <CustomHeader width={3} name={translations.email[lang]} field="email" />
+          <CustomHeader width={4} name={translations.access[lang]} field="access" sortable={false} />
+          <CustomHeader width={1} name={translations.admin[lang]} field="admin" />
+          <CustomHeader width={1} name={translations.hide[lang]} field="irrelevant" />
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
         {filteredUsers().map((u) => (

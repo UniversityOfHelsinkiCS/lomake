@@ -140,9 +140,9 @@ export default ({ user, lang }) => {
   return (
     <Grid.Row>
       <Grid.Column width={3}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
-      <Grid.Column width={2}>{user.uid}</Grid.Column>
+      <Grid.Column width={3}>{user.uid}</Grid.Column>
       <Grid.Column width={3}>{user.email}</Grid.Column>
-      <Grid.Column width={5}>
+      <Grid.Column width={4}>
         <FormattedAccess />
       </Grid.Column>
       <Grid.Column textAlign="center">

@@ -394,4 +394,44 @@ export const usersPageTranslations = {
     fi: 'Poista piilottaminen',
     se: 'Mark as irrelevant',
   },
+  searchByName: {
+    en: 'Search users by name',
+    fi: 'Etsi käyttäjiä',
+    se: 'Search users by name',
+  },
+  filterByAccess: {
+    en: 'Filter users by access',
+    fi: 'Etsi oikeuksien perusteella',
+    se: 'Filter users by access',
+  },
+  name: {
+    en: 'Name',
+    fi: 'Nimi',
+    se: 'Name',
+  },
+  userId: {
+    en: 'User id',
+    fi: 'Käyttäjätunnus',
+    se: 'User id',
+  },
+  email: {
+    en: 'Email',
+    fi: 'Sähköposti',
+    se: 'Email',
+  },
+  access: {
+    en: 'Access',
+    fi: 'Oikeudet',
+    se: 'Access',
+  },
+  admin: {
+    en: 'Admin',
+    fi: 'Admin',
+    se: 'Admin',
+  },
+  hide: {
+    en: 'Hide',
+    fi: 'Piilota',
+    se: 'Hide',
+  },
 }
