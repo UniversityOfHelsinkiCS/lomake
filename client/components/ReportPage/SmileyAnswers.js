@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Radio, Segment } from 'semantic-ui-react'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
 

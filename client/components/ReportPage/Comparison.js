@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
 
 

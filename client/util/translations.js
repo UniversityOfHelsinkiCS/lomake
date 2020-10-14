@@ -1,6 +1,5 @@
 export const translations = {
   // Generic/CsvDownload.js
-  // ReportPage/index.js
   csvLink: {
     written: {
       fi: 'Kirjalliset vastaukset',
@@ -75,6 +74,11 @@ export const translations = {
     se: 'Röd',
   },
   // Generic/LevelFilter.js
+  allProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'Alla program',
+  },
   levelFilter: {
     en: 'Filter by programme level',
     fi: 'Vastaukset koulutusasteittain',
@@ -201,6 +205,10 @@ export const translations = {
     fi: 'Lomake',
     se: 'Blankett',
   },
+}
+
+
+export const reportPageTranslations = {
   // ReportPage/index.js
   reportPage: {
     fi: 'Tilannekuvalomakkeen vastaukset',
@@ -253,6 +261,12 @@ export const translations = {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
+  },
+  // ReportPage/WrittenAnswers.js
+  questions: {
+    fi: 'Kysymys',
+    en: 'Question',
+    se: 'Fråga',
   },
   // ReportPage/SmileyAnswers.js
   responses: {

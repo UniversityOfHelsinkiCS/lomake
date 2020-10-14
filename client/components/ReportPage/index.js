@@ -20,7 +20,7 @@ import {
   programmeNameByKey as programmeName,
   sortedItems
 } from 'Utilities/common'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import questions from '../../questions'
 import './ReportPage.scss'

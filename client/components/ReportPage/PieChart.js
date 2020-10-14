@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
 
