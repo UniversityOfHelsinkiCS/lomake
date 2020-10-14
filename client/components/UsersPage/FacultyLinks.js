@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { basePath } from '../../../config/common'
 import { Message } from 'semantic-ui-react'
+import { usersPageTranslations as translations } from 'Utilities/translations'
+
 
 export default function FacultyLinks() {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
@@ -25,16 +27,14 @@ export default function FacultyLinks() {
       <Message
         color="blue"
         icon="exclamation"
-        content={
-          'The links listed here give READ-permissions to all studyprogrammes under each faculty.'
-        }
+        content={translations.facultyMessage[language]}
       />
       <table>
         <thead>
           <tr>
-            <th>Code</th>
-            <th>Faculty</th>
-            <th>Share-URL</th>
+            <th>{translations.code[language]}</th>
+            <th>{translations.faculty[language]}</th>
+            <th>{translations.shareUrl[language]}</th>
           </tr>
         </thead>
         <tbody>

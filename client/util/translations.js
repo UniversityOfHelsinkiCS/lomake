@@ -315,9 +315,14 @@ export const usersPageTranslations = {
     se: 'Blankett - administrationssida',
   },
   doctorMessage: {
-    en: 'The links listed here give READ-permissions all DOCTOR-programmes under each faculty.',
-    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN tiedekunnan tohtoriohjelmiin',
-    se: 'The links listed here give READ-permissions all DOCTOR-programmes under each faculty.',
+    en: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
+    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin',
+    se: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
+  },
+  facultyMessage: {
+    en: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
+    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin',
+    se: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
   },
   code: {
     en: 'Code',
