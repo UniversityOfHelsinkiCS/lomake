@@ -1,4 +1,52 @@
 
+export const claimAccessTranslations = {
+  prompt: {
+    fi: 'Olet vastaanottamassa oikeuksia',
+    en: 'You are claiming permissions',
+    se: 'Du håller på att ta emot åtkomst',
+  },
+  buttonText: {
+    fi: 'Vastaanota',
+    en: 'Claim',
+    se: 'Ta emot',
+  },
+  confirmPrompt: {
+    fi: 'Ole hyvä ja kirjoita ohjelman nimi suomeksi yllä olevaan laatikkoon varmistusta varten',
+    en: "Please write the programme's name in English to the input above to confirm",
+    se: 'Vänligen skriv programmets namn på svenska i fältet ovanför verifiering',
+  },
+  rights: {
+    ADMIN: {
+      fi: 'Ylläpitäjän oikeudet',
+      en: 'Admin access',
+      se: 'Administrativ åtkomst',
+    },
+    WRITE: {
+      fi: 'Vastausoikeudet',
+      en: 'Edit access',
+      se: 'Redigeringsåtkomst',
+    },
+    READ: {
+      fi: 'Lukuoikeudet',
+      en: 'Read access',
+      se: 'Skrivskyddad åtkomst',
+    },
+  },
+  invalidToken: {
+    fi:
+      'Virhe: Käyttämäsi linkki ei ole enää voimassa. Ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
+    en:
+      'Error: The url you tried to access in no longer valid. Please contact your study programme leader for a new one.',
+    se:
+      'Fel: Länken du använde gäller inte längre. Vänligen kontakta ledaren för ditt utbildningsprogram för att få en ny länk.',
+  },
+  claimPermissions: {
+    en: 'Form - Claim permissions',
+    fi: 'Lomake - Vastaanota oikeuksia',
+    se: 'Blankett - ta emot åtkomster',
+  },
+}
+
 export const formViewTranslations = {
   // FormView/index.js
   title: {
