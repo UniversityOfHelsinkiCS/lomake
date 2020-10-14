@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Header, Icon } from 'semantic-ui-react'
+import { Grid, Header, Input, Icon, Loader } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import User from 'Components/UsersPage/User'
+import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
-import { Input } from 'semantic-ui-react'
+
 
 export default () => {
-  const [sorter, setSorter] = useState('email')
+  const [sorter, setSorter] = useState('')
   const [reverse, setReverse] = useState(false)
-  const [filter, setFilter] = useState('')
+  const [nameFilter, setNameFilter] = useState('')
+  const [accessFilter, setAccessFilter] = useState('')
+  const debouncedName = useDebounce(nameFilter, 200)
 
   const users = useSelector((state) => state.users.data)
   const user = useSelector(({ currentUser }) => currentUser.data)
@@ -25,15 +28,30 @@ export default () => {
   let sortedUsersToShow = sortedItems(users, sorter)
 
   if (reverse) sortedUsersToShow.reverse()
-  sortedUsersToShow = sortedUsersToShow.filter((user) =>
+
+  const filteredUsers = () => {
+
+    if (!nameFilter && !accessFilter) return sortedUsersToShow
+
+    const byName = sortedUsersToShow.filter((user) => {
+      if (!nameFilter) return true
+      const firstname = user.firstname.toLowerCase()
+      const lastname = user.lastname.toLowerCase()
+      return (firstname.includes(debouncedName.toLowerCase() || lastname.includes(debouncedName.toLowerCase())))
+    })
+
+    const byAccess = byName.filter((user) =>
     Object.keys(user.access)
       .join(', ')
       .toString()
       .toLocaleLowerCase()
-      .includes(filter.toLocaleLowerCase())
-  )
+      .includes(accessFilter.toLocaleLowerCase())
+    )
+    return byAccess
+  }
 
   const CustomHeader = ({ width, name, field, sortable = true }) => {
+
     const sortHandler = sortable
       ? () => {
           if (sorter === field) {
@@ -60,14 +78,28 @@ export default () => {
 
   return (
     <>
-      <Input
-        value={filter}
-        onChange={(e, { value }) => setFilter(value)}
-        icon="users"
-        iconPosition="left"
-        placeholder="Filter users by access"
-      />
-
+      <Grid className="user-filter-container">
+        <Grid.Column width={3}>
+          <Input
+            value={nameFilter}
+            onChange={(e, { value }) => setNameFilter(value)}
+            icon="search"
+            iconPosition="left"
+            placeholder="Search users by name"
+          />
+        </Grid.Column>
+        <Grid.Column width={5}/>
+        <Grid.Column width={5}>
+          <Input
+            value={accessFilter}
+            onChange={(e, { value }) => setAccessFilter(value)}
+            icon="users"
+            iconPosition="left"
+            placeholder="Filter users by access"
+          />
+        </Grid.Column>
+        <Grid.Column width={2}/>
+      </Grid>
       <Grid celled="internally">
         <Grid.Row>
           <CustomHeader width={3} name="Name" field="lastname" />
@@ -78,7 +110,7 @@ export default () => {
           <CustomHeader width={1} name="Hide" field="irrelevant" />
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
-        {sortedUsersToShow.map((u) => (
+        {filteredUsers().map((u) => (
           <User user={u} key={u.id} />
         ))}
       </Grid>

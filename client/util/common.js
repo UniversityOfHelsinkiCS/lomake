@@ -74,7 +74,7 @@ export const internationalProgrammes = [
 
 export const sortedItems = (items, sorter, languageCode) => {
   if (!items) return []
-
+  if (!sorter) return items
   const sorted = items.sort((a, b) => {
     if (sorter == 'name') {
       const aName = a.name[languageCode] ? a.name[languageCode] : a.name['en']
