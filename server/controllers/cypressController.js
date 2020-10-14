@@ -156,16 +156,11 @@ const resetAnswers = async (req, res) => {
 }
 
 const createDeadlineIfNoneExist = async () => {
-  const count = await db.deadline.count({
-    where: {
-      passed: false,
-    },
-  })
+  const count = await db.deadline.count()
 
   if (count === 0) {
     await db.deadline.create({
       date: new Date(),
-      passed: false,
     })
   }
 }

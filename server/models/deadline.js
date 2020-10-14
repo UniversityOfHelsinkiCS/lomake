@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     'deadline',
     {
       date: DataTypes.DATE,
-      passed: DataTypes.BOOLEAN,
     },
     {
       underscored: true,

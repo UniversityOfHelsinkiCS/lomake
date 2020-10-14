@@ -11,9 +11,6 @@ const startDeadlineWatcher = async () => {
     logger.info(`${loggerPrefix} Checking if there's a deadline that closes today...`)
 
     const upcomingDeadlines = await db.deadline.findAll({
-      where: {
-        passed: false,
-      },
       order: [['date', 'ASC']],
     })
 

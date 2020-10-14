@@ -15,7 +15,6 @@ const createOrUpdate = async (req, res) => {
     if (existingDeadlines.length === 0) {
       const newDeadline = await db.deadline.create({
         date: req.body.date,
-        passed: false,
       })
       return res.status(200).json(newDeadline)
     }
