@@ -314,6 +314,31 @@ export const usersPageTranslations = {
     fi: 'Lomake - Ylläpito-sivu',
     se: 'Blankett - administrationssida',
   },
+  users: {
+    en: 'Users',
+    fi: 'Käyttäjät',
+    se: 'Users',
+  },
+  deadline: {
+    en: 'Deadline',
+    fi: 'Määräaika',
+    se: 'Deadline'
+  },
+  linksForOwners: {
+    en: 'Links for owners',
+    fi: 'Ylläpitäjien linkit',
+    se: 'Links for owners',
+  },
+  linksForFaculties: {
+    en: 'Links for faculties',
+    fi: 'Tiedekuntien linkit',
+    se: 'Links for faculties',
+  },
+  linksForDoctoral: {
+    en: 'Links for doctoral programmes',
+    fi: 'Tohtoriohjelmien linkit',
+    se: 'Links for doctoral programmes',
+  },
   doctorMessage: {
     en: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin',

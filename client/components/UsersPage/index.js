@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsersAction } from 'Utilities/redux/usersReducer'
-import UserTable from 'Components/UsersPage/UserTable'
-import OwnerLinks from './OwnerLinks'
 import { Tab } from 'semantic-ui-react'
+import UserTable from './UserTable'
+import OspaModule from './OspaModule'
+import OwnerLinks from './OwnerLinks'
 import FacultyLinks from './FacultyLinks'
 import DoctorLinks from './DoctorLinks'
-import OspaModule from './OspaModule'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
+import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+
 
 export default () => {
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export default () => {
 
   const panes = [
     {
-      menuItem: 'Users',
+      menuItem: translations.users[languageCode],
       render: () => (
         <Tab.Pane>
           <UserTable />
@@ -33,7 +34,7 @@ export default () => {
       ),
     },
     {
-      menuItem: 'Deadline',
+      menuItem: translations.deadline[languageCode],
       render: () => (
         <Tab.Pane>
           <OspaModule />
@@ -41,7 +42,7 @@ export default () => {
       ),
     },
     {
-      menuItem: 'Links for owners',
+      menuItem: translations.linksForOwners[languageCode],
       render: () => (
         <Tab.Pane>
           <OwnerLinks />
@@ -49,7 +50,7 @@ export default () => {
       ),
     },
     {
-      menuItem: 'Links for faculties',
+      menuItem: translations.linksForFaculties[languageCode],
       render: () => (
         <Tab.Pane>
           <FacultyLinks />
@@ -57,7 +58,7 @@ export default () => {
       ),
     },
     {
-      menuItem: 'Links for doctoral programmes',
+      menuItem: translations.linksForDoctoral[languageCode],
       render: () => (
         <Tab.Pane>
           <DoctorLinks />
