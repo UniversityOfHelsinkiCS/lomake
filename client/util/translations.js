@@ -1,47 +1,5 @@
-export const translations = {
-  // FormView/index.js
-  noPermissions: {
-    fi:
-      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    en:
-      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
-    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
-  },
-  findProgramme: {
-    fi: 'Etsi koulutusohjelmia',
-    en: 'Search for study programmes',
-    se: '',
-  },
-  filter: {
-    fi: 'Etsi koulutusohjelmia',
-    en: 'Search for study programmes',
-    se: 'Filtrera',
-  },
-  showUnclaimedOnly: {
-    fi: 'Näytä vain lunastamattomat koulutusohjelmat',
-    en: 'Show only unclaimed programmes',
-    se: 'Visa enbart program som inte tagits emot',
-  },
-  showProgressFromLastYear: {
-    fi: 'Näytä kehitys viime vuodesta',
-    en: 'Show progress from last year',
-    se: '',
-  },
-  overviewPage: {
-    fi: 'Lomake - Yleisnäkymä ',
-    en: 'Form - Overview',
-    se: 'Blankett - översikt',
-  },
-  accessControl: {
-    fi: 'Käytönhallinta',
-    en: 'Access Control',
-    se: '',
-  },
-  csvDownload: {
-    fi: 'Lataa vastaukset csv-tiedostona',
-    en: 'Download all data as a CSV file',
-    se: 'Ladda ner svaren i en csv-fil',
-  },
+
+export const formViewTranslations = {
   // FormView/index.js
   title: {
     en: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
@@ -49,16 +7,12 @@ export const translations = {
     se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
   },
   p1: {
-    en:
-      'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
-    fi:
-      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
-    se:
-      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
+    en: 'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
+    fi: 'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
+    se: 'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
   },
   p2: {
-    en:
-      'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
+    en: 'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
     fi: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
     se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
   },
@@ -86,6 +40,74 @@ export const translations = {
     en: 'Form',
     fi: 'Lomake',
     se: 'Blankett',
+  },
+  csvDownload: {
+    fi: 'Lataa vastaukset csv-tiedostona',
+    en: 'Download all data as a CSV file',
+    se: 'Ladda ner svaren i en csv-fil',
+  },
+  // FormView/NavigationSidebar.js
+  OK: {
+    fi: 'Vastattu',
+    en: 'Answer given',
+    se: 'Svaret lämnat',
+  },
+  EMPTY: {
+    fi: 'Ei vastausta',
+    en: "There's no answer",
+    se: 'Inget svar',
+  },
+  mandatory_field: {
+    fi: 'pakollinen kenttä',
+    en: 'required field',
+    se: 'obligatoriskt fält',
+  },
+  // Formview/PDFDownload.js
+  downloadText: {
+    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
+    en: 'Print / Download answers as a PDF-file',
+    se: 'Skriv ut / Ladda ner svaren i en PDF-fil',
+  },
+  setViewOnlyTrueText: {
+    fi: 'Tulostus/PDF -näkymä',
+    en: 'Print/Download as PDF view',
+    se: 'Utskriftsläge/Pdf-vy',
+  },
+  setViewOnlyFalseText: {
+    fi: 'Palaa täyttämään lomaketta',
+    en: 'Back to edit view',
+    se: 'Återgå till redigeringsläge',
+  },
+  // Formview/StatusMessage.js
+  savingAnswersNotice: {
+    fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
+    en: 'Answers are saved automatically. Deadline:',
+    se: 'Svaren sparas automatiskt.',
+  },
+  savingAnswersSubtitle: {
+    fi: 'Viimeksi tallennettu',
+    en: 'Last saved',
+    se: 'Senast sparat',
+  },
+  lockedFormNotice: {
+    fi: 'Lomake on lukittu, eikä sitä voi muokata.',
+    en: 'The form has been locked and it cannot be edited.',
+    se: 'The form has been locked and it cannot be edited.',
+  },
+  lockedFormSubtitle: {
+    fi: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
+    en: 'The owner of the form may still unlock the form before its deadline',
+    se: 'The owner of the form may still unlock the form before its deadline.',
+  },
+  deadlinePassedNotice: {
+    fi: 'Lomakeen täyttöaika on päättynyt.',
+    en: 'The deadline to edit form has passed.',
+    se: 'The deadline to edit form has passed.',
+  },
+  deadlinePassedSubtitle: {
+    fi: 'OSPA käsittelee vastaukset.',
+    en: 'OSPA will process the answers.',
+    se: 'OSPA will process the answers.',
   },
 }
 

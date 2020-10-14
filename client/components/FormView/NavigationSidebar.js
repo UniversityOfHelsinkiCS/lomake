@@ -5,25 +5,8 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
+import { formViewTranslations as translations } from 'Utilities/translations'
 
-
-const translations = {
-  OK: {
-    fi: 'Vastattu',
-    en: 'Answer given',
-    se: 'Svaret lämnat',
-  },
-  EMPTY: {
-    fi: 'Ei vastausta',
-    en: "There's no answer",
-    se: 'Inget svar',
-  },
-  mandatory_field: {
-    fi: 'pakollinen kenttä',
-    en: 'required field',
-    se: 'obligatoriskt fält',
-  },
-}
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET':
