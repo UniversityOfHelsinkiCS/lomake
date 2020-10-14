@@ -1,50 +1,9 @@
 import React from 'react'
-import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
+import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  nameHeader: {
-    fi: 'Nimi',
-    en: 'Name',
-    se: 'Namn',
-  },
-  viewHeader: {
-    fi: 'Luku',
-    en: 'Read',
-    se: 'Läs',
-  },
-  editHeader: {
-    fi: 'Vastaus',
-    en: 'Edit',
-    se: 'Redigera',
-  },
-  ownerHeader: {
-    fi: 'Omistaja',
-    en: 'Owner',
-    se: 'Ägare',
-  },
-  grantAccess: {
-    fi: 'Anna oikeus',
-    en: 'Grant access right',
-    se: 'Ge åtkomst',
-  },
-  removeAccess: {
-    fi: 'Poista oikeus',
-    en: 'Remove access right',
-    se: 'Ta bort åtkomst',
-  },
-  noUsers: {
-    fi: 'Ei käyttäjiä, käytä ylläolevia linkkejä kutsumiseen',
-    en: 'No users, use the links above to invite',
-    se: 'Inga användare. Använd ovanstående länkar för att bjuda in användare.',
-  },
-  userList: {
-    fi: 'Käyttäjät',
-    en: 'Users',
-    se: '',
-  },
-}
 
 const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
   const languageCode = useSelector((state) => state.language)

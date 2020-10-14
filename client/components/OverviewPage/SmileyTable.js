@@ -9,44 +9,8 @@ import questions from '../../questions.json'
 import './SmileyTable.scss'
 import SmileyTableCell from './SmileyTableCell'
 import { PieChart } from 'react-minimal-pie-chart'
+import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  openManageText: {
-    fi: 'Hallitse',
-    en: 'Manage',
-    se: 'Administrera',
-  },
-  closeManageText: {
-    fi: 'Piilota',
-    en: 'Hide',
-    se: 'Dölj',
-  },
-  noResultsText: {
-    fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
-    en: 'No matching programmes were found. Please try a different filter.',
-    se: 'Inga program hittades. Prova att söka med andra kriterier.',
-  },
-  programmeClaimed: {
-    fi: 'Tämä ohjelma on vastaanotettu',
-    en: 'This programme has been claimed',
-    se: 'Programmet har tagits emot',
-  },
-  programmeNotClaimed: {
-    fi: 'Tätä ohjelmaa ei ole vastaanotettu',
-    en: 'This programme has not been claimed',
-    se: 'Programmet har inte tagits emot',
-  },
-  programmeLocked: {
-    fi: 'Tämän ohjelman muokkaus on estetty.',
-    en: 'This programme has been locked.',
-    se: 'This programme has been locked.',
-  },
-  programmeHeader: {
-    fi: 'Koulutusohjelma',
-    en: 'Programme',
-    se: 'Program',
-  },
-}
 
 const replaceTitle = {
   successes_and_development_needs: 'successes_and_needs',

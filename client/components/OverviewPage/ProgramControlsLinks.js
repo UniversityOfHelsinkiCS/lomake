@@ -5,59 +5,8 @@ import { resetTokenAction, createTokenAction } from 'Utilities/redux/accessToken
 import { basePath } from '@root/config/common'
 import { isSuperAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
+import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  editPrompt: {
-    fi:
-      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
-    en: 'Link grants edit access, share to editors only:',
-    se:
-      'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
-  },
-  viewPrompt: {
-    fi:
-      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
-    en: 'Link grants read access, share e.g. to student members',
-    se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
-  },
-  copyPrompt: {
-    fi: 'Kopioi linkki',
-    en: 'Copy link',
-    se: '',
-  },
-  resetPrompt: {
-    fi: 'Nollaa ja luo uusi jakolinkki',
-    en: 'Reset the current link, and generate a new one',
-    se: 'Återställ länken och skapa en ny',
-  },
-  createPrompt: {
-    fi: 'Luo linkki',
-    en: 'Create link',
-    se: 'Skapa länk',
-  },
-  resetWarning: {
-    fi:
-      'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
-    en:
-      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
-    se: '',
-  },
-  copyLink: {
-    fi: 'Kopioi linkki',
-    en: 'Copy link',
-    se: 'Kopiera länk',
-  },
-  readAccess: {
-    fi: 'Lukuoikeus',
-    en: 'Read Access',
-    se: 'Skrivskyddad åtkomst',
-  },
-  writeAccess: {
-    fi: 'Kirjoitusoikeus',
-    en: 'Write Access',
-    se: 'Redigeringsåtkomst',
-  },
-}
 
 const OwnerAccordionLinks = ({ programme }) => {
   const languageCode = useSelector((state) => state.language)

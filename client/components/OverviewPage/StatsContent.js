@@ -1,7 +1,7 @@
+import React from 'react'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import positiveEmoji from 'Assets/sunglasses.png'
-import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import ReactWordcloud from 'react-wordcloud'
 import { colors } from 'Utilities/common'
@@ -10,12 +10,6 @@ const TO_REPLACE = ['.', ':', '"', '’', '(', ')', '/', '-', ';', '?', '_x000d_
 const MIN_COUNT = 5
 const MIN_WORD_LENGTH = 4
 
-/*const dropdownOptions = [
-  { key: 1, text: 'All', value: 'total' },
-  { key: 2, text: 'Positive', value: 'green' },
-  { key: 3, text: 'Neutral', value: 'yellow' },
-  { key: 4, text: 'Negative', value: 'red' },
-]*/
 
 const replaceAllAndLower = (word) => {
   let lowerWord = word.toLowerCase()
