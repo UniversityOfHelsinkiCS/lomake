@@ -307,3 +307,31 @@ export const translations = {
     se: 'Entire university',
   },
 }
+
+export const usersPageTranslations = {
+  adminPage: {
+    en: 'Form - Admin-page',
+    fi: 'Lomake - Ylläpito-sivu',
+    se: 'Blankett - administrationssida',
+  },
+  doctorMessage: {
+    en: 'The links listed here give READ-permissions all DOCTOR-programmes under each faculty.',
+    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN tiedekunnan tohtoriohjelmiin',
+    se: 'The links listed here give READ-permissions all DOCTOR-programmes under each faculty.',
+  },
+  code: {
+    en: 'Code',
+    fi: 'Ohjelmakoodi',
+    se: 'Code',
+  },
+  faculty: {
+    en: 'Faculty',
+    fi: 'Tiedekunta',
+    se: 'Faculty',
+  },
+  shareUrl: {
+    en: 'Share-URL',
+    fi: 'Linkki',
+    se: 'Share-URL',
+  },
+}
