@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
 import { colors } from 'Utilities/common'
+import { genericTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  measureLabel: {
-    fi: 'Lisää 1-5 toimenpidettä',
-    en: 'Add 1-5 measures',
-    se: 'Lägg till 1–5 åtgärder',
-  },
-  addButtonLabel: {
-    fi: 'Lisää toimenpide',
-    en: 'Add measure',
-    se: 'Lägg till åtgärd',
-  },
-  removeButtonLabel: {
-    fi: 'Poista toimenpide',
-    en: 'Remove measure',
-    se: 'Ta bort åtgärd',
-  },
-}
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const formData = useSelector((state) => state.form.data)

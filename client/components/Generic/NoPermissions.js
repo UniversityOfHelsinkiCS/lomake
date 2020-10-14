@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
-import { translations } from 'Utilities/translations'
+import { genericTranslations as translations } from 'Utilities/translations'
 
 const NoPermissions = ({ languageCode }) => (
   <Header

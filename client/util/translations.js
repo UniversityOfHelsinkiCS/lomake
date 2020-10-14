@@ -1,122 +1,4 @@
 export const translations = {
-  // Generic/CsvDownload.js
-  csvLink: {
-    written: {
-      fi: 'Kirjalliset vastaukset',
-      en: 'Written answers',
-      se: 'Written answers',
-    },
-    smileys: {
-      fi: 'Hymiöiden värit',
-      en: 'Emoji colors',
-      se: 'Emoji colors',
-    },
-  },
-  questions: {
-    fi: 'Kysymys',
-    en: 'Question',
-    se: 'Fråga',
-  },
-  questionIds: {
-    fi: 'Kysymyksen id',
-    en: 'Question id',
-    se: 'Question id',
-  },
-  programmeHeader: {
-    fi: 'Koulutusohjelma',
-    en: 'Programme',
-    se: 'Program',
-  },
-  faculty: {
-    fi: 'Tiedekunta',
-    en: 'Faculty',
-    se: 'Fakultet',
-  },
-  csvFile: {
-    form: {
-      written: {
-        fi: 'Tilannekuvalomake_kirjalliset_vastaukset',
-        en: 'Written_answers',
-        se: 'Written_answers',
-      },
-      smileys: {
-        fi: 'Tilannekuvalomake_liikennevalot',
-        en: 'Colored_smileys',
-        se: 'Colored_smileys',
-      },
-    },
-    overview: {
-      written: {
-        fi: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
-        en: 'All_the_programmes_written_answers',
-        se: 'All_the_programmes_written_answers',
-      },
-      smileys: {
-        fi: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalot',
-        en: 'All_the_programmes_colored_smileys',
-        se: 'All_the_programmes_colored_smileys',
-      },
-    },
-  },
-  green: {
-    fi: 'Vihreä',
-    en: 'Green',
-    se: 'Grön',
-  },
-  yellow: {
-    fi: 'Keltainen',
-    en: 'Yellow',
-    se: 'Gul',
-  },
-  red: {
-    fi: 'Punainen',
-    en: 'Red',
-    se: 'Röd',
-  },
-  // Generic/LevelFilter.js
-  allProgrammes: {
-    en: 'All programmes',
-    fi: 'Kaikki ohjelmat',
-    se: 'Alla program',
-  },
-  levelFilter: {
-    en: 'Filter by programme level',
-    fi: 'Vastaukset koulutusasteittain',
-    se: 'Filter by programme level',
-  },
-  bachelor: {
-    fi: 'Kandiohjelmat',
-    en: "Bachelor's programmes",
-    se: 'Kandidatsprogram',
-  },
-  master: {
-    fi: 'Maisteriohjelmat',
-    en: "Master's programmes",
-    se: 'Magisterprogram',
-  },
-  doctoral: {
-    fi: 'Tohtoriohjelmat',
-    en: 'Doctoral programmes',
-    se: 'Doktorandprogram',
-  },
-  international: {
-    fi: 'Kansainväliset maisteriohjelmat',
-    en: "International Master's programmes",
-    se: 'Internationella Magisterprogram',
-  },
-  // Generic/FacultyFilter.js
-  facultyFilter: {
-    en: 'Filter by faculty',
-    fi: 'Vastaukset tiedekunnittain',
-    se: 'Filter by faculty',
-  },
-  // Generic/ProgrammeFilter.js
-  programmeFilter: {
-    en: 'Search for specific programmes',
-    fi: 'Etsi koulutusohjelmia',
-    se: 'Search for specific programmes',
-  },
-  // OverviewPage/index.js
   // FormView/index.js
   noPermissions: {
     fi:
@@ -206,6 +88,174 @@ export const translations = {
     se: 'Blankett',
   },
 }
+
+export const genericTranslations = {
+  programmeHeader: {
+    fi: 'Koulutusohjelma',
+    en: 'Programme',
+    se: 'Program',
+  },
+  faculty: {
+    fi: 'Tiedekunta',
+    en: 'Faculty',
+    se: 'Fakultet',
+  },
+  csvFile: {
+    form: {
+      written: {
+        fi: 'Tilannekuvalomake_kirjalliset_vastaukset',
+        en: 'Written_answers',
+        se: 'Written_answers',
+      },
+      smileys: {
+        fi: 'Tilannekuvalomake_liikennevalot',
+        en: 'Colored_smileys',
+        se: 'Colored_smileys',
+      },
+    },
+    overview: {
+      written: {
+        fi: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
+        en: 'All_the_programmes_written_answers',
+        se: 'All_the_programmes_written_answers',
+      },
+      smileys: {
+        fi: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalot',
+        en: 'All_the_programmes_colored_smileys',
+        se: 'All_the_programmes_colored_smileys',
+      },
+    },
+  },
+  green: {
+    fi: 'Vihreä',
+    en: 'Green',
+    se: 'Grön',
+  },
+  yellow: {
+    fi: 'Keltainen',
+    en: 'Yellow',
+    se: 'Gul',
+  },
+  red: {
+    fi: 'Punainen',
+    en: 'Red',
+    se: 'Röd',
+  },
+  csvLink: {
+    written: {
+      fi: 'Kirjalliset vastaukset',
+      en: 'Written answers',
+      se: 'Written answers',
+    },
+    smileys: {
+      fi: 'Hymiöiden värit',
+      en: 'Emoji colors',
+      se: 'Emoji colors',
+    },
+  },
+  // Generic/Entity.js
+  streetLightsLabel: {
+    fi: 'Yleisarvio',
+    en: 'General assessment',
+    se: 'Allmänn bedömning',
+  },
+  textAreaLabel: {
+    fi: 'Keskustelun pääkohdat olivat',
+    en: 'Main points of discussion',
+    se: 'Diskussionens huvudpunkter',
+  },
+  // Generic/FacultyFilter.js
+  facultyFilter: {
+    en: 'Filter by faculty',
+    fi: 'Vastaukset tiedekunnittain',
+    se: 'Filter by faculty',
+  },
+  // Generic/LastYearsAnswersAccordion.js
+  expandText: {
+    fi: 'Näytä viime vuoden vastaukset',
+    en: 'Show answers from last year',
+    se: 'Visa fjolårets svar',
+  },
+  collapseText: {
+    fi: 'Piilota viime vuoden vastaukset',
+    en: 'Hide answers from last year',
+    se: 'Dölj fjolårets svar',
+  },
+  // Generic/LevelFilter.js
+  allProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'Alla program',
+  },
+  levelFilter: {
+    en: 'Filter by programme level',
+    fi: 'Vastaukset koulutusasteittain',
+    se: 'Filter by programme level',
+  },
+  bachelor: {
+    fi: 'Kandiohjelmat',
+    en: "Bachelor's programmes",
+    se: 'Kandidatsprogram',
+  },
+  master: {
+    fi: 'Maisteriohjelmat',
+    en: "Master's programmes",
+    se: 'Magisterprogram',
+  },
+  doctoral: {
+    fi: 'Tohtoriohjelmat',
+    en: 'Doctoral programmes',
+    se: 'Doktorandprogram',
+  },
+  international: {
+    fi: 'Kansainväliset maisteriohjelmat',
+    en: "International Master's programmes",
+    se: 'Internationella Magisterprogram',
+  },
+  // Generic/Measures.js
+  measureLabel: {
+    fi: 'Lisää 1-5 toimenpidettä',
+    en: 'Add 1-5 measures',
+    se: 'Lägg till 1–5 åtgärder',
+  },
+  addButtonLabel: {
+    fi: 'Lisää toimenpide',
+    en: 'Add measure',
+    se: 'Lägg till åtgärd',
+  },
+  removeButtonLabel: {
+    fi: 'Poista toimenpide',
+    en: 'Remove measure',
+    se: 'Ta bort åtgärd',
+  },
+  // Generic/NoPermissions.js
+  noPermissions: {
+    fi:
+      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
+    en:
+      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
+    se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
+  },
+  // Generic/ProgrammeFilter.js
+  programmeFilter: {
+    en: 'Search for specific programmes',
+    fi: 'Etsi koulutusohjelmia',
+    se: 'Search for specific programmes',
+  },
+  // Generic/TextArea.js
+  loading: {
+    fi: 'Valmistellaan tekstieditoria, odota hetki...',
+    se: '',
+    en: 'Preparing the texteditor, please wait a moment...',
+  },
+  // Generic/YearSelector.js
+  selectYear: {
+    en: 'Select the year you would like to inspect',
+    fi: 'Valitse vuosi jota haluat tarkastella',
+    se: '',
+  },
+}
+
 
 export const overviewPageTranslations = {
   // OverviewPage/index.js
