@@ -8,18 +8,11 @@ import FacultyLinks from './FacultyLinks'
 import DoctorLinks from './DoctorLinks'
 import OspaModule from './OspaModule'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
+import { usersPageTranslations as translations } from 'Utilities/translations'
 
 export default () => {
   const dispatch = useDispatch()
   const languageCode = useSelector((state) => state.language)
-
-  const translations = {
-    adminPage: {
-      en: 'Form - Admin-page',
-      fi: 'Lomake - Ylläpito-sivu',
-      se: 'Blankett - administrationssida',
-    },
-  }
 
   useEffect(() => {
     document.title = translations['adminPage'][languageCode]
