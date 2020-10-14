@@ -1,16 +1,22 @@
+$red: #e64e40;
+$green: #00944b;
+
 .users-red {
-  color: #b60000;
+  color: $red;
+  filter: brightness(0.9);
 }
 
 .users-red:hover {
-  color: #f00;
+  filter: brightness(1.4);
 }
 
 .users-green {
-  color: #34be49;
+  color: $green;
+  filter: brightness(0.9)
 }
+
 .users-green:hover {
-  color: #47ff62;
+  filter: brightness(1.4);
 }
 
 .user-filter-container {
