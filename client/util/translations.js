@@ -339,4 +339,34 @@ export const usersPageTranslations = {
     fi: 'Linkki',
     se: 'Share-URL',
   },
+  deadlineSettings: {
+    en: 'Deadline settings',
+    fi: 'Määräaika-asetukset',
+    se: 'Hantera deadline',
+  },
+  selectNewDeadline: {
+    en: 'Select new deadline',
+    fi: 'Valitse uusi määräaika',
+    se: 'Välj ny deadline',
+  },
+  updateDeadline: {
+    en: 'Update deadline',
+    fi: 'Päivitä määräaika',
+    se: 'Uppdatera deadline',
+  },
+  nextDeadline: {
+    en: 'Next deadline:',
+    fi: 'Seuraava määräaika:',
+    se: 'Nästa deadline:',
+  },
+  noDeadlineSet: {
+    en: 'No deadline set.',
+    fi: 'Määräaikaa ei ole asetettu.',
+    se: 'Ingen deadline vald.',
+  },
+  deleteThisDeadline: {
+    en: 'Freeze the form',
+    fi: 'Lukitse lomake',
+    se: 'Ta bort deadline',
+  },
 }
