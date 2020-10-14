@@ -324,6 +324,11 @@ export const usersPageTranslations = {
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin',
     se: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
   },
+  ownerMessage: {
+    en: 'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+    fi: 'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja listalla näkyy ainoastaan ne ohjelmat, joita ei vielä ole lunastettu.',
+    se: 'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+  },
   code: {
     en: 'Code',
     fi: 'Ohjelmakoodi',
@@ -368,5 +373,25 @@ export const usersPageTranslations = {
     en: 'Freeze the form',
     fi: 'Lukitse lomake',
     se: 'Ta bort deadline',
+  },
+  grantAdmin: {
+    en: 'Grant admin rights',
+    fi: 'Myönnä admin-oikeudet',
+    se: 'Grant admin rights',
+  },
+  removeAdmin: {
+    en: 'Remove admin rights',
+    fi: 'Poista admin-oikeudet',
+    se: 'Remove admin rights',
+  },
+  markIrrelevant: {
+    en: 'Mark as irrelevant',
+    fi: 'Merkitse tarpeettomaksi',
+    se: 'Mark as irrelevant',
+  },
+  markRelevant: {
+    en: 'Mark as relevant',
+    fi: 'Poista piilottaminen',
+    se: 'Mark as irrelevant',
   },
 }

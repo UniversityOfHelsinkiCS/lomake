@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { basePath } from '../../../config/common'
 import { Message } from 'semantic-ui-react'
+import { usersPageTranslations as translations } from 'Utilities/translations'
+
 
 export default function OwnerLinks() {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
@@ -18,16 +20,14 @@ export default function OwnerLinks() {
       <Message
         color="blue"
         icon="exclamation"
-        content={
-          'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.'
-        }
+        content={translations.ownerMessage[language]}
       />
       <table>
         <thead>
           <tr>
-            <th>Code</th>
-            <th>Programme</th>
-            <th>Share-URL</th>
+            <th>{translations.code[language]}</th>
+            <th>{translations.faculty[language]}</th>
+            <th>{translations.shareUrl[language]}</th>
           </tr>
         </thead>
         <tbody>

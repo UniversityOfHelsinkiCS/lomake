@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Header, Input, Icon, Loader } from 'semantic-ui-react'
+import { Grid, Header, Input, Icon } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
+import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
   const [accessFilter, setAccessFilter] = useState('')
   const debouncedName = useDebounce(nameFilter, 200)
 
+  const lang = useSelector((state) => state.language)
   const users = useSelector((state) => state.users.data)
   const user = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
@@ -111,7 +113,7 @@ export default () => {
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
         {filteredUsers().map((u) => (
-          <User user={u} key={u.id} />
+          <User lang={lang} user={u} key={u.id} />
         ))}
       </Grid>
     </>

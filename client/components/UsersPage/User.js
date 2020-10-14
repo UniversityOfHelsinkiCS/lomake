@@ -4,8 +4,10 @@ import { Button, Grid, Icon, Popup } from 'semantic-ui-react'
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
+import { usersPageTranslations as translations } from 'Utilities/translations'
 
-export default ({ user }) => {
+
+export default ({ user, lang }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -45,7 +47,7 @@ export default ({ user }) => {
           <Button
             data-cy="remove-irrelevant-confirm"
             color="red"
-            content="Mark as relevant"
+            content={translations.markRelevant[lang]}
             onClick={() => removeIrrelevant()}
           />
         }
@@ -66,7 +68,7 @@ export default ({ user }) => {
           <Button
             data-cy="mark-irrelevant-confirm"
             color="green"
-            content="Mark as irrelevant"
+            content={translations.markIrrelevant[lang]}
             onClick={() => markIrrelevant()}
           />
         }
@@ -91,7 +93,7 @@ export default ({ user }) => {
           <Button
             data-cy="remove-admin-confirm"
             color="red"
-            content="Remove admin role"
+            content={translations.removeAdmin[lang]}
             onClick={() => removeAdmin()}
           />
         }
@@ -107,7 +109,7 @@ export default ({ user }) => {
           <Button
             data-cy="grant-admin-confirm"
             color="green"
-            content="Grant admin role"
+            content={translations.grantAdmin[lang]}
             onClick={() => grantAdmin()}
           />
         }
