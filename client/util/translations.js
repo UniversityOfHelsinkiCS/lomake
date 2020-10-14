@@ -356,7 +356,7 @@ export const usersPageTranslations = {
   },
   code: {
     en: 'Code',
-    fi: 'Ohjelmakoodi',
+    fi: 'Koodi',
     se: 'Code',
   },
   faculty: {
