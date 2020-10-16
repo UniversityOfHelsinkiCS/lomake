@@ -40,8 +40,15 @@ const PDFDownload = () => {
 
   useEffect(() => {
     if (takingPDF) {
+      //  ¯\_(ツ)_/¯ seems to work
+      // inspiration taken from this answer https://stackoverflow.com/a/50473614
+      // but it seems like adding the isSuccessful check to window.print() was a necessary addition
+      // for Firefox support
       try {
-        document.execCommand('print', false, null)
+        const isSuccessful = document.execCommand('print', false, null)
+        if (isSuccessful === false) {
+          window.print()
+        }
       } catch (e) {
         window.print()
       }
