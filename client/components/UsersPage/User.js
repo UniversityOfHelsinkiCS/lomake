@@ -6,7 +6,6 @@ import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-
 export default ({ user, lang }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -17,14 +16,6 @@ export default ({ user, lang }) => {
 
   const removeAdmin = () => {
     dispatch(editUserAction({ ...user, admin: false }))
-  }
-
-  const markIrrelevant = () => {
-    dispatch(editUserAction({ ...user, irrelevant: true }))
-  }
-
-  const removeIrrelevant = () => {
-    dispatch(editUserAction({ ...user, irrelevant: false }))
   }
 
   const logInAs = () => {
@@ -145,11 +136,8 @@ export default ({ user, lang }) => {
       <Grid.Column width={4}>
         <FormattedAccess />
       </Grid.Column>
-      <Grid.Column textAlign="center">
+      <Grid.Column width={2} textAlign="center">
         <AdminBadge />
-      </Grid.Column>
-      <Grid.Column textAlign="center">
-        <IrrelevantBadge />
       </Grid.Column>
 
       {isSuperAdmin(currentUser.uid) && (

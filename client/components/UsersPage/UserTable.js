@@ -8,7 +8,6 @@ import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-
 export default () => {
   const [sorter, setSorter] = useState('')
   const [reverse, setReverse] = useState(false)
@@ -32,28 +31,28 @@ export default () => {
   if (reverse) sortedUsersToShow.reverse()
 
   const filteredUsers = () => {
-
     if (!nameFilter && !accessFilter) return sortedUsersToShow
 
     const byName = sortedUsersToShow.filter((user) => {
       if (!nameFilter) return true
       const firstname = user.firstname.toLowerCase()
       const lastname = user.lastname.toLowerCase()
-      return (firstname.includes(debouncedName.toLowerCase() || lastname.includes(debouncedName.toLowerCase())))
+      return firstname.includes(
+        debouncedName.toLowerCase() || lastname.includes(debouncedName.toLowerCase())
+      )
     })
 
     const byAccess = byName.filter((user) =>
-    Object.keys(user.access)
-      .join(', ')
-      .toString()
-      .toLocaleLowerCase()
-      .includes(accessFilter.toLocaleLowerCase())
+      Object.keys(user.access)
+        .join(', ')
+        .toString()
+        .toLocaleLowerCase()
+        .includes(accessFilter.toLocaleLowerCase())
     )
     return byAccess
   }
 
   const CustomHeader = ({ width, name, field, sortable = true }) => {
-
     const sortHandler = sortable
       ? () => {
           if (sorter === field) {
@@ -90,7 +89,7 @@ export default () => {
             placeholder={translations.searchByName[lang]}
           />
         </Grid.Column>
-        <Grid.Column width={6}/>
+        <Grid.Column width={6} />
         <Grid.Column width={4}>
           <Input
             value={accessFilter}
@@ -100,16 +99,20 @@ export default () => {
             placeholder={translations.filterByAccess[lang]}
           />
         </Grid.Column>
-        <Grid.Column width={2}/>
+        <Grid.Column width={2} />
       </Grid>
       <Grid celled="internally">
         <Grid.Row>
           <CustomHeader width={3} name={translations.name[lang]} field="lastname" />
           <CustomHeader width={3} name={translations.userId[lang]} field="uid" />
           <CustomHeader width={3} name={translations.email[lang]} field="email" />
-          <CustomHeader width={4} name={translations.access[lang]} field="access" sortable={false} />
-          <CustomHeader width={1} name={translations.admin[lang]} field="admin" />
-          <CustomHeader width={1} name={translations.hide[lang]} field="irrelevant" />
+          <CustomHeader
+            width={4}
+            name={translations.access[lang]}
+            field="access"
+            sortable={false}
+          />
+          <CustomHeader width={2} name={translations.admin[lang]} field="admin" />
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
         {filteredUsers().map((u) => (
