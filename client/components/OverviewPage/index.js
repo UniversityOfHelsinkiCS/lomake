@@ -133,25 +133,23 @@ export default () => {
                   value={filter}
                 />
 
-                {currentUser.data.admin && (
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Radio
-                      style={{ margin: '1rem' }}
-                      data-cy="overviewpage-showprogress"
-                      checked={showProgressFromLastYear}
-                      onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
-                      label={translations['showProgressFromLastYear'][languageCode]}
-                      toggle
-                    />
-                    <Radio
-                      style={{ margin: '1rem' }}
-                      checked={showUnclaimedOnly}
-                      onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
-                      label={translations['showUnclaimedOnly'][languageCode]}
-                      toggle
-                    />
-                  </div>
-                )}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <Radio
+                    style={{ margin: '1rem' }}
+                    data-cy="overviewpage-showprogress"
+                    checked={showProgressFromLastYear}
+                    onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
+                    label={translations['showProgressFromLastYear'][languageCode]}
+                    toggle
+                  />
+                  <Radio
+                    style={{ margin: '1rem' }}
+                    checked={showUnclaimedOnly}
+                    onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
+                    label={translations['showUnclaimedOnly'][languageCode]}
+                    toggle
+                  />
+                </div>
               </div>
             )}
             <SmileyTable
