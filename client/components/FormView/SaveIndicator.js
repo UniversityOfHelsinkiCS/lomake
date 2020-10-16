@@ -58,6 +58,10 @@ export default function SaveIndicator() {
       errorHandler()
     }, 10000)
     setTimeoutId(temp)
+
+    return () => {
+      clearTimeout(temp)
+    }
   }, [lastSaveAttempt])
 
   useEffect(() => {
