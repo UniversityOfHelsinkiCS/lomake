@@ -11,6 +11,7 @@ export default () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
   const languageCode = useSelector((state) => state.language)
+  const usersProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.usersProgrammes )
 
   const translations = {
     logOut: {
@@ -24,9 +25,14 @@ export default () => {
       se: 'OSPA',
     },
     answersReport: {
-      en: 'Report of answers',
-      fi: 'Lomakkeen vastaukset',
+      en: 'Answers by the year',
+      fi: 'Vastaukset vuosittain',
       se: 'Svar',
+    },
+    comparisonReport: {
+      en: 'Compare answers',
+      fi: 'Vastausten vertailu ja kehitys',
+      se: 'Compare answers',
     },
     language: {
       en: 'English',
@@ -100,6 +106,16 @@ export default () => {
       >
         {translations.answersReport[languageCode]}
       </Menu.Item>
+      {usersProgrammes.length > 5 &&
+        <Menu.Item
+          as={Link}
+          to={'/comparison'}
+          name="comparisonControls"
+          onClick={handleItemClick}
+        >
+          {translations.comparisonReport[languageCode]}
+        </Menu.Item>    
+      }
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
