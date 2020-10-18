@@ -1,4 +1,19 @@
 
+export const comparisonPageTranslations = {
+  comparisonPage: {
+    fi: 'Vertaile vastauksia',
+    en: 'Compare answers',
+    se: 'Compare answers',
+  },
+  reportHeader: {
+    faculty: {
+      fi: 'Vertaile tiedekuntaan',
+      en: 'Compare to the faculty',
+      se: 'Compare to the faculty',
+    }
+  },
+}
+
 export const claimAccessTranslations = {
   // ClaimAccessPage/index.js
   prompt: {
