@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -15,12 +15,11 @@ import {
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
-import './ReportPage.scss'
+import './ComparisonPage.scss'
 
 
 export default () => {
   const dispatch = useDispatch()
-  const [disabled, setDisabled] = useState('')
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -93,11 +92,6 @@ export default () => {
     return answerMap
   }
 
-  const handleTabChange = (e, { activeIndex }) => {
-    if (activeIndex === 2) setDisabled('disabled')
-    else setDisabled('')
-  }
-
   const panes = [
     usersProgrammes.length > 5 &&
     { menuItem: translations.reportHeader['faculty'][lang], render: () =>
@@ -122,7 +116,7 @@ export default () => {
         doubling
         columns={2}
         padded='vertically'
-        className={`report-filter-container-${disabled}`}
+        className="report-filter-container"
       >
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>
@@ -133,7 +127,6 @@ export default () => {
         className="report-page-tab"
         menu={{ secondary: true, pointing: true }}
         panes={panes}
-        onTabChange={handleTabChange}
       />
   </>
   )
