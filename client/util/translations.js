@@ -1,5 +1,6 @@
 
 export const claimAccessTranslations = {
+  // ClaimAccessPage/index.js
   prompt: {
     fi: 'Olet vastaanottamassa oikeuksia',
     en: 'You are claiming permissions',
@@ -312,6 +313,11 @@ export const genericTranslations = {
     fi: 'Etsi koulutusohjelmia',
     se: 'Search for specific programmes',
   },
+  filter: {
+    fi: 'Etsi koulutusohjelmia',
+    en: 'Search for study programmes',
+    se: 'Filtrera',
+  },
   // Generic/TextArea.js
   loading: {
     fi: 'Valmistellaan tekstieditoria, odota hetki...',
@@ -325,7 +331,6 @@ export const genericTranslations = {
     se: '',
   },
 }
-
 
 export const overviewPageTranslations = {
   // OverviewPage/index.js
@@ -389,8 +394,7 @@ export const overviewPageTranslations = {
       'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi:
-      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
   },
@@ -410,11 +414,9 @@ export const overviewPageTranslations = {
     se: 'Skapa länk',
   },
   resetWarning: {
-    fi:
-      'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
-    en:
-      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
-    se: '',
+    fi: 'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
+    en: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    se: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
   },
   copyLink: {
     fi: 'Kopioi linkki',
@@ -470,7 +472,7 @@ export const overviewPageTranslations = {
   userList: {
     fi: 'Käyttäjät',
     en: 'Users',
-    se: '',
+    se: 'Users',
   },
   //OverviewPage/SmileyTable.js
   openManageText: {
@@ -585,6 +587,26 @@ export const reportPageTranslations = {
     fi: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     en: 'No data available for these choices',
     se: 'No data available for these choices',
+  },
+  positive: {
+    en: 'No issues',
+    fi: 'Kunnossa',
+    se: 'I sin ordning',
+  },
+  neutral: {
+    en: 'Challenges identified and development underway',
+    fi: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
+    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
+  },
+  negative: {
+    en: 'Significant measures required/development areas not yet specified',
+    fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
+  },
+  empty: {
+    en: 'No answer provided',
+    fi: 'Ei vastausta',
+    se: 'Inget svar',
   },
   noColors: {
     fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
