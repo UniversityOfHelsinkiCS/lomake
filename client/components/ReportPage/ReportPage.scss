@@ -34,9 +34,7 @@ $background-green: #1DB954;
 }
 
 .report-filter-container {
-  &- {
-    @include report-filter-container-basics;
-  }
+  @include report-filter-container-basics;
   &-disabled {
     @include report-filter-container-basics;
     opacity: 0.4;
