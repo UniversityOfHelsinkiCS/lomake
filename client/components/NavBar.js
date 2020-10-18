@@ -11,7 +11,6 @@ export default () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
   const languageCode = useSelector((state) => state.language)
-  const usersProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.usersProgrammes )
 
   const translations = {
     logOut: {
@@ -106,7 +105,7 @@ export default () => {
       >
         {translations.answersReport[languageCode]}
       </Menu.Item>
-      {usersProgrammes.length > 5 &&
+      {user.admin &&
         <Menu.Item
           as={Link}
           to={'/comparison'}
