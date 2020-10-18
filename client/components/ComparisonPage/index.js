@@ -7,8 +7,6 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear,
-  cleanText,
-  getMeasuresAnswer,
   facultiesWithKeys,
   programmeNameByKey as programmeName,
   sortedItems
@@ -52,7 +50,6 @@ export default () => {
             "id": `${part.id}_text`,
             "color": `${part.id}_light`,
             "label": part.label[lang] ? part.label[lang] : '',
-            "description": part.description ? part.description[lang] : '',
             "title": question.title[lang],
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
@@ -67,24 +64,21 @@ export default () => {
 
   const questionsList = modifiedQuestions()
 
-  const answersByQuestions = (chosenProgrammes) => {
+  const answersByQuestions = () => {
     let answerMap = new Map()
-    const chosenKeys = chosenProgrammes.map((p) => p.key)
+    const chosenKeys = usersProgrammes.map((p) => p.key)
     selectedAnswers.forEach((programme) => {
       const key = programme.programme
 
       if (chosenKeys.includes(key)) {
         const data = programme.data
         questionsList.forEach((question) => {
-          let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+          let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
-          let answer = ''
-          if (question.id === "measures_text") answer = getMeasuresAnswer(data)
-          else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
 
-          answersByProgramme = [...answersByProgramme, { name: name, key: key, color: color, answer: answer }]
-          answerMap.set(question.id, answersByProgramme)
+          colorsByProgramme = [...colorsByProgramme, { name: name, key: key, color: color }]
+          answerMap.set(question.id, colorsByProgramme)
         })
       }
     })
@@ -100,7 +94,7 @@ export default () => {
           year={year}
           questionsList={questionsList}
           usersProgrammes={sortedItems(usersProgrammes, 'name', lang)}
-          allAnswers={usersProgrammes ? answersByQuestions(usersProgrammes) : []}
+          allAnswers={usersProgrammes ? answersByQuestions() : []}
           facultiesByKey={faculties}
         />
       </Tab.Pane>

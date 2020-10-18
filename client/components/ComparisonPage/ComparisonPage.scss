@@ -1,7 +1,5 @@
 $black: #1B1C1D;
-$blue: #0E6EB8;
 $white: #FFFFFF;
-$dark_gray: #4e4c4c;
 $gray: #747474;
 $background-red: #F37778;
 $background-yellow: #F9D03B;
@@ -11,7 +9,7 @@ $background-green: #1DB954;
   &-tab {
     margin-top: 2em;
     width: 90%;
-    max-width: 1400px;
+    max-width: 1600px;
     align-self: center;
   }
 }
@@ -22,7 +20,7 @@ $background-green: #1DB954;
 
 .report-filter-container {
   width: 90%;
-  max-width: 1400px;
+  max-width: 1600px;
   align-self: center;
   @media only screen and (max-width: 991px) and (min-width: 768px) {
     max-width: 90%;
@@ -72,9 +70,6 @@ $background-green: #1DB954;
 }
 
 .answer {
-  &-title {
-    white-space: pre;
-  }
   &-circle-green {
     @include answer-circle-basics;
     background: $background-green;
