@@ -566,6 +566,12 @@ export const reportPageTranslations = {
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
   },
+  // ReportPage/PieChart.js
+  responses: {
+    en: 'Responses:',
+    fi: 'Vastauksia:',
+    se: 'Responses:',
+  },
   // ReportPage/WrittenAnswers.js
   questions: {
     fi: 'Kysymys',
@@ -573,11 +579,7 @@ export const reportPageTranslations = {
     se: 'Fråga',
   },
   // ReportPage/SmileyAnswers.js
-  responses: {
-    en: 'Responses:',
-    fi: 'Vastauksia:',
-    se: 'Responses:',
-  },
+  // ReportPage/PieChart.js
   emptyAnswers: {
     en: 'Include programmes without answers to the graphs',
     fi: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',

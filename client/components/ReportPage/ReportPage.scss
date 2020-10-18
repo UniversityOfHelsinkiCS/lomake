@@ -161,12 +161,14 @@ $background-green: #1DB954;
   border-radius: 50%;
   height: 10px;
   width: 10px;
-  margin-left: 10px;
 }
 
 .answer {
   &-header{
     font-style: bold;
+  }
+  &-title {
+    white-space: pre;
   }
   &-list {
     list-style: none;

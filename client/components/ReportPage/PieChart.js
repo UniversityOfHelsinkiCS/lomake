@@ -42,21 +42,29 @@ export default ({
     const data = [
       {
         color: colors.background_green,
+        toolTipColor: 'green',
+        toolTipHeader: translations.positive[lang],
         value: colorSums.green.value || 0,
         programmes: colorSums.green.programmes,
       },
       {
         color: colors.background_yellow,
+        toolTipColor: 'yellow',
+        toolTipHeader: translations.neutral[lang],
         value: colorSums.yellow.value || 0,
         programmes: colorSums.yellow.programmes,
       },
       {
         color: colors.background_red,
+        toolTipColor: 'red',
+        toolTipHeader: translations.negative[lang],
         value: colorSums.red.value || 0,
         programmes: colorSums.red.programmes,
       },
       {
         color: colors.light_gray,
+        toolTipColor: 'gray',
+        toolTipHeader: translations.empty[lang],
         value: colorSums.emptyAnswer.value && showEmpty ? colorSums.emptyAnswer.value : 0,
         programmes: colorSums.emptyAnswer.programmes,
       },
@@ -71,6 +79,16 @@ export default ({
     return answered + all
   }
 
+  const toolTipText = (segmentIndex) => {
+    const segmentData = data()[segmentIndex]
+    const toolTip = { 
+      color: segmentData.toolTipColor,
+      header: segmentData.toolTipHeader,
+      programmes: segmentData.programmes
+    }
+    setToolTipData(toolTip)
+  }
+
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
@@ -83,13 +101,15 @@ export default ({
         data-cy={`report-chart-${question.id}`}
       >
         {toolTipData &&
-          <span className="report-smiley-pie-tip"> 
-            {toolTipData.map((p) => <p key={p}>{p}</p>)}
+          <span className="report-smiley-pie-tip">
+            <p><b>{question.labelIndex} - {question.label}</b></p>
+            <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
+            {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}
           </span>
         }
         <Chart
           center={[72, 65]}
-          data={data(question)}
+          data={data()}
           lengthAngle={360}
           lineWidth={100}
           label={({ dataEntry }) => dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null}
@@ -99,7 +119,7 @@ export default ({
           viewBoxSize={[145, 145]}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold'}}
           labelPosition={112}
-          onMouseOver={(e, segmentIndex) => setToolTipData(data(question)[segmentIndex]['programmes'])}
+          onMouseOver={(e, segmentIndex) => toolTipText(segmentIndex)}
           onMouseOut={() => setToolTipData(null)}
        />
       </div>
