@@ -6,11 +6,83 @@ export const comparisonPageTranslations = {
     se: 'Compare answers',
   },
   reportHeader: {
-    faculty: {
+    comparison: {
       fi: 'Vertaile tiedekuntaan',
       en: 'Compare to the faculty',
       se: 'Compare to the faculty',
     }
+  },
+  // ReportPage/Comparison.js
+  chosenProgrammes: {
+    fi: 'Valittu ohjelma',
+    en: 'Chosen programme',
+    se: 'Chosen programme',
+  },
+  comparedProgrammes: {
+    fi: 'Vertaile tiedekuntaan',
+    en: 'Compare to a faculty',
+    se: 'Compare to a faculty',
+  },
+  chooseProgramme: {
+    fi: 'Valitse vertailtava ohjelma',
+    en: 'Choose a programme for comparison',
+    se: 'Choose a programme for comparison',
+  },
+  noChosenProgrammes: {
+    fi: 'Ei yhtään ohjelmaa vielä valittuna',
+    en: 'No programmes have yet been chosen',
+    se: 'No programmes have yet been chosen',
+  },
+  noAccessToAll: {
+    fi: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
+    en: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+    se: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+  },
+  university: {
+    fi: 'Koko yliopisto',
+    en: 'Entire university',
+    se: 'Entire university',
+  },
+  emptyAnswers: {
+    en: 'Include programmes without answers to the graphs',
+    fi: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
+    se: 'Include programmes without answers to the graphs',
+  },
+  // ComparisonPage/PieChart.js
+  responses: {
+    en: 'Responses:',
+    fi: 'Vastauksia:',
+    se: 'Responses:',
+  },
+  noData: {
+    fi: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    en: 'No data available for these choices',
+    se: 'No data available for these choices',
+  },
+  positive: {
+    en: 'No issues',
+    fi: 'Kunnossa',
+    se: 'I sin ordning',
+  },
+  neutral: {
+    en: 'Challenges identified and development underway',
+    fi: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
+    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
+  },
+  negative: {
+    en: 'Significant measures required/development areas not yet specified',
+    fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
+  },
+  empty: {
+    en: 'No answer provided',
+    fi: 'Ei vastausta',
+    se: 'Inget svar',
+  },
+  noColors: {
+    fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
+    en: 'Questions, without smileys are not shown here',
+    se: 'Questions, without smileys are not shown here',
   },
 }
 
@@ -565,11 +637,6 @@ export const reportPageTranslations = {
       fi: 'Hymiöiden värit',
       se: 'Smiley colors',
     },
-    comparison: {
-      en: 'Comparison to the faculty',
-      fi: 'Vertailu tiedekuntaan',
-      se: 'Comparison to the faculty',
-    }
   },
   answered: {
     en: 'Answered',
@@ -629,37 +696,6 @@ export const reportPageTranslations = {
     fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
-  },
-  // ReportPage/Comparison.js
-  chosenProgrammes: {
-    fi: 'Valittu ohjelma',
-    en: 'Chosen programme',
-    se: 'Chosen programme',
-  },
-  comparedProgrammes: {
-    fi: 'Vertaile tiedekuntaan',
-    en: 'Compare to a faculty',
-    se: 'Compare to a faculty',
-  },
-  chooseProgramme: {
-    fi: 'Valitse vertailtava ohjelma',
-    en: 'Choose a programme for comparison',
-    se: 'Choose a programme for comparison',
-  },
-  noChosenProgrammes: {
-    fi: 'Ei yhtään ohjelmaa vielä valittuna',
-    en: 'No programmes have yet been chosen',
-    se: 'No programmes have yet been chosen',
-  },
-  noAccessToAll: {
-    fi: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
-    en: 'Please note, that you can only see comparison with the programmes you have reading rights to',
-    se: 'Please note, that you can only see comparison with the programmes you have reading rights to',
-  },
-  university: {
-    fi: 'Koko yliopisto',
-    en: 'Entire university',
-    se: 'Entire university',
   },
 }
 

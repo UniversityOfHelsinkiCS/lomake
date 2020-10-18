@@ -87,8 +87,7 @@ export default () => {
   }
 
   const panes = [
-    usersProgrammes.length > 5 &&
-    { menuItem: translations.reportHeader['faculty'][lang], render: () =>
+    { menuItem: translations.reportHeader['comparison'][lang], render: () =>
       <Tab.Pane>
         <Comparison
           year={year}
