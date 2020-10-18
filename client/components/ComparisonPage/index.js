@@ -82,6 +82,18 @@ export default () => {
         })
       }
     })
+        // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+    // So empty answers need to be added.
+    answerMap.forEach((value, key) => {
+      const answeredProgrammes = value.map((p) => p.key)
+      const programmesMissing = usersProgrammes.filter((p) => !answeredProgrammes.includes(p.key))
+      if (programmesMissing) {
+        for (const p of programmesMissing) {
+          const earlierAnswers = answerMap.get(key)
+          answerMap.set(key, [...earlierAnswers, { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer'}])
+        }
+      }
+    })
 
     return answerMap
   }
