@@ -113,6 +113,7 @@ export default () => {
       </Menu.Item>
       {moreThanFiveProgrammes() &&
         <Menu.Item
+          data-cy="nav-comparison"
           as={Link}
           to={'/comparison'}
           name="comparisonControls"

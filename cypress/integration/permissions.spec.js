@@ -20,7 +20,12 @@ describe('Permission tests', function () {
   })
 
   it("Can't access report page without permissions", function () {
-    cy.visit(`/report}`)
+    cy.visit(`/report`)
+    cy.get('[data-cy=no-permissions-message]')
+  })
+
+  it("Can't access comparison page without permissions", function () {
+    cy.visit(`/comparison`)
     cy.get('[data-cy=no-permissions-message]')
   })
 

@@ -48,6 +48,11 @@ export const comparisonPageTranslations = {
     fi: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
     se: 'Include programmes without answers to the graphs',
   },
+  noFaculty: {
+    fi: 'Ei määriteltyä tiedekuntaa',
+    en: 'No faculty defined',
+    se: 'No faculty defined',
+  },
   // ComparisonPage/PieChart.js
   responses: {
     en: 'Responses:',

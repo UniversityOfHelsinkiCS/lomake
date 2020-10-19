@@ -55,6 +55,7 @@ const LevelFilter = ({ comparison }) => {
           </Form.Field>
           <Form.Field>
             <Radio
+              data-cy='doctor-filter'
               label={translations.doctoral[lang]}
               name='doctor'
               value='doctor'

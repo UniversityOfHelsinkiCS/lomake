@@ -46,7 +46,8 @@ const Comparison = ({
     const programme = usersProgrammes.find((p) => (p.name[lang] ? p.name[lang] : p.name['en']) == programmeName)
     const facultyCode = facultiesByKey.get(programme.key)
     const faculty = faculties[lang].find((f) => f.key == facultyCode)
-    return faculty.text
+    if (faculty) return faculty.text
+    return translations.noFaculty[lang]
   }
 
   const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
@@ -126,6 +127,7 @@ const Comparison = ({
                 value={chosen}
                 onChange={handleChosenChange}
                 options={options}
+                data-cy="programme-filter"
               />
             </div>
           </Grid.Column>
@@ -138,6 +140,7 @@ const Comparison = ({
                 value={compared}
                 onChange={handleComparedChange}
                 options={faculties[lang]}
+                data-cy="faculty-filter"
               />
               <small>{translations.noAccessToAll[lang]}</small>
             </div>

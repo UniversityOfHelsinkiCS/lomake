@@ -91,6 +91,7 @@ export default ({
     setToolTipData(toolTip)
   }
 
+
   return (
     <div className="comparison-smiley-chart-area">
       <div className="comparison-smiley-pie-header">
@@ -99,14 +100,19 @@ export default ({
         <p><b>
           {university ? translations['allProgrammes'][lang] : translations[level][lang]}
         </b></p>
-        <p><b>{amountOfResponses()}</b></p>
+        <p data-cy={`comparison-responses-${university}-${question.id}`}>
+          <b>{amountOfResponses()}</b>
+        </p>
       </div>
       <div
         className="comparison-smiley-pie-chart"
-        data-cy={`comparison-chart-${question.id}`}
+        data-cy={`comparison-chart-${faculty.slice(0,7)}-${question.id}`}
       >
         {toolTipData &&
-          <span className="comparison-smiley-pie-tip">
+          <span
+            className="comparison-smiley-pie-tip"
+            data-cy={`comparison-tip-${question.id}`}
+          >
             <p><b>{question.labelIndex} - {question.label}</b></p>
             <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
             {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}
