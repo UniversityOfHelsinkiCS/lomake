@@ -94,8 +94,6 @@ const Comparison = ({
     })
   )
 
-  console.log(faculties[lang])
-
   return (
     <div className="comparison-container">
       <Grid >
