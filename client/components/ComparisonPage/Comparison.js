@@ -29,7 +29,7 @@ const Comparison = ({
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()
 
-  if (!usersProgrammes) return <></>
+  if (!usersProgrammes || !allAnswers) return <></>
 
   if (!user.admin && usersProgrammes.length <= 5) {
     history.push('/')
