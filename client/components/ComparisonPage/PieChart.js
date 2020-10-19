@@ -15,6 +15,7 @@ export default ({
 }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
+  const level = useSelector((state) => state.programmeLevel)
 
 
   const colorsTotal = (question) => {
@@ -94,6 +95,7 @@ export default ({
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{faculty}</b></p>
+        <p><b>{translations[level][lang]}</b></p>
         <p><b>{amountOfResponses()}</b></p>
       </div>
       <div

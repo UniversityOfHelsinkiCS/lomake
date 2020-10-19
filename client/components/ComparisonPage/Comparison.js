@@ -7,12 +7,7 @@ import PieChart from './PieChart'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
-  answersByYear,
-  cleanText,
-  getMeasuresAnswer,
-  facultiesWithKeys,
   internationalProgrammes as international,
-  programmeNameByKey as programmeName,
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
@@ -23,11 +18,11 @@ const Comparison = ({
   usersProgrammes,
   allAnswers,
   facultiesByKey,
-  year
 }) => {
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
   const level = useSelector((state) => state.programmeLevel)
+  const year = useSelector((state) => state.form.selectedYear)
   const [compared, setCompared] = useState(faculties[lang][1].value)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
@@ -47,7 +42,7 @@ const Comparison = ({
 
   const programmeFaculty = (programmeName) => {
     if (!programmeName) return ''
-    const programme = usersProgrammes.find((p) => p.name[lang] == programmeName)
+    const programme = usersProgrammes.find((p) => p.name[lang] ? p.name[lang] : p.name['en']== programmeName)
     const facultyCode = facultiesByKey.get(programme.key)
     const faculty = faculties[lang].find((f) => f.key == facultyCode)
     return faculty.text
@@ -80,7 +75,6 @@ const Comparison = ({
 
     return filteredByLevel
   
-    
   }
 
   const programmes = filteredProgrammes()
@@ -119,7 +113,17 @@ const Comparison = ({
             <LevelFilter />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row >
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Radio
+              checked={showEmpty}
+              onChange={() => setShowEmpty(!showEmpty)}
+              label={translations.emptyAnswers[lang]}
+              toggle
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row className="comparison-row">
           <Grid.Column>
             <h4>{translations.chosenProgrammes[lang]}</h4>
             <Dropdown
@@ -144,27 +148,14 @@ const Comparison = ({
             <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={16}>
-          <Radio
-            checked={showEmpty}
-            onChange={() => setShowEmpty(!showEmpty)}
-            label={translations.emptyAnswers[lang]}
-            toggle
-            
-          />
-
-          </Grid.Column>
-        </Grid.Row>
-          
-        </Grid>
-        <Grid
-          centered 
-          stackable 
-          doubling
-          columns={user.admin ? 3 : 2}
-        >
-
+        
+      </Grid>
+      <Grid
+        centered
+        stackable
+        doubling
+        columns={3}
+      >
         <Grid.Row>
           <Grid.Column>
             <div className="report-smiley-grid">
@@ -199,25 +190,23 @@ const Comparison = ({
               )}
             </div>
           </Grid.Column>
-          {user.admin && 
-            <Grid.Column>
-              <div className="report-smiley-grid">
-                {questionsList.map((question) =>
-                  (allAnswers.get(question.id) && !(question.no_light) &&
-                    <PieChart
-                      key={question.id}
-                      question={question}
-                      showEmpty={showEmpty}
-                      answers={allAnswers.get(question.id)}
-                      chosenProgrammes={usersProgrammes}
-                      faculty={translations.university[lang]}
-                      allProgrammes={usersProgrammes}
-                    />
-                  )
-                )}
-              </div>
-            </Grid.Column>
-          }
+          <Grid.Column>
+            <div className="report-smiley-grid">
+              {questionsList.map((question) =>
+                (allAnswers.get(question.id) && !(question.no_light) &&
+                  <PieChart
+                    key={question.id}
+                    question={question}
+                    showEmpty={showEmpty}
+                    answers={allAnswers.get(question.id)}
+                    chosenProgrammes={usersProgrammes}
+                    faculty={translations.university[lang]}
+                    allProgrammes={usersProgrammes}
+                  />
+                )
+              )}
+            </div>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </div>

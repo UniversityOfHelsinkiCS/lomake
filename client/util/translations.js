@@ -84,6 +84,31 @@ export const comparisonPageTranslations = {
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
   },
+  allProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'Alla program',
+  },
+  bachelor: {
+    fi: 'Kandiohjelmat',
+    en: "Bachelor's programmes",
+    se: 'Kandidatsprogram',
+  },
+  master: {
+    fi: 'Maisteriohjelmat',
+    en: "Master's programmes",
+    se: 'Magisterprogram',
+  },
+  doctoral: {
+    fi: 'Tohtoriohjelmat',
+    en: 'Doctoral programmes',
+    se: 'Doktorandprogram',
+  },
+  international: {
+    fi: 'Kansainväliset maisteriohjelmat',
+    en: "International Master's programmes",
+    se: 'Internationella Magisterprogram',
+  },
 }
 
 export const claimAccessTranslations = {
