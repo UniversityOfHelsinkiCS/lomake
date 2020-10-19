@@ -42,13 +42,15 @@ const Comparison = ({
 
   const programmeFaculty = (programmeName) => {
     if (!programmeName) return ''
-    const programme = usersProgrammes.find((p) => p.name[lang] ? p.name[lang] : p.name['en']== programmeName)
+    const programme = usersProgrammes.find((p) => (p.name[lang] ? p.name[lang] : p.name['en']) == programmeName)
     const facultyCode = facultiesByKey.get(programme.key)
     const faculty = faculties[lang].find((f) => f.key == facultyCode)
     return faculty.text
   }
 
   const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
+
+
 
   const chosenAnswers = (question) => {
     const answers = allAnswers.get(question.id)
