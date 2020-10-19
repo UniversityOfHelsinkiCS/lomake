@@ -99,7 +99,7 @@ export const comparisonPageTranslations = {
     en: "Master's programmes",
     se: 'Magisterprogram',
   },
-  doctoral: {
+  doctor: {
     fi: 'Tohtoriohjelmat',
     en: 'Doctoral programmes',
     se: 'Doktorandprogram',

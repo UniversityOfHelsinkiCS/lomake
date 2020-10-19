@@ -11,7 +11,8 @@ export default ({
   showEmpty,
   chosenProgrammes,
   faculty,
-  allProgrammes
+  allProgrammes,
+  university
 }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
@@ -95,7 +96,9 @@ export default ({
       <div className="report-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{faculty}</b></p>
-        <p><b>{translations[level][lang]}</b></p>
+        <p><b>
+          {university ? translations['allProgrammes'][lang] : translations[level][lang]}
+        </b></p>
         <p><b>{amountOfResponses()}</b></p>
       </div>
       <div

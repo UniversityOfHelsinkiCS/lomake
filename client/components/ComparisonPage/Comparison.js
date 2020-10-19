@@ -202,6 +202,7 @@ const Comparison = ({
                     chosenProgrammes={usersProgrammes}
                     faculty={translations.university[lang]}
                     allProgrammes={usersProgrammes}
+                    university
                   />
                 )
               )}
