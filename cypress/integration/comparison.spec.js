@@ -14,12 +14,13 @@ describe('ComparisonPage tests', function () {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains(130)
+    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains(129)
   })
 
   it('Filtering of comparison programmes works by programme level', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/comparison')
     cy.get('[data-cy=yearSelector]').click()
 
@@ -36,6 +37,7 @@ describe('ComparisonPage tests', function () {
   it('Tooltips work for compared programmes filtered by faculty', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/comparison')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
@@ -46,6 +48,7 @@ describe('ComparisonPage tests', function () {
   it('Admin should be able to see answers from previous years', function() {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/comparison')
     cy.get('[data-cy=yearSelector]').click()
 
