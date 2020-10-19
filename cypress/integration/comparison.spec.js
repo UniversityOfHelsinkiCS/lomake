@@ -21,9 +21,10 @@ describe('ComparisonPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/comparison')
-    cy.get('[data-cy=yearSelector]').click()
+    cy.visit('/')
+    cy.get('[data-cy=nav-comparison]').click()
 
+    cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
@@ -38,7 +39,9 @@ describe('ComparisonPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/comparison')
+    cy.visit('/')
+    cy.get('[data-cy=nav-comparison]').click()
+
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-Faculty-programme_identity_text]').trigger('mouseover', 200, 200)
@@ -49,9 +52,10 @@ describe('ComparisonPage tests', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/comparison')
-    cy.get('[data-cy=yearSelector]').click()
+    cy.visit('/')
+    cy.get('[data-cy=nav-comparison]').click()
 
+    cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
@@ -64,7 +68,6 @@ describe('ComparisonPage tests', function () {
     cy.login(adminUser)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
-    cy.reload()
     cy.visit('/comparison')
   
     cy.get('[data-cy=programme-filter]').click()
