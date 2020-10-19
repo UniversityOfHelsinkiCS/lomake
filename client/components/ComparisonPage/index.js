@@ -31,7 +31,7 @@ export default () => {
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!selectedAnswers) return <></>
+  if (!selectedAnswers || !usersProgrammes || !faculties) return <></>
   
   const modifiedQuestions = () => {
     let attributes = []
