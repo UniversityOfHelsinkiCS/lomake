@@ -51,8 +51,6 @@ const Comparison = ({
 
   const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
 
-
-
   const chosenAnswers = (question) => {
     const answers = allAnswers.get(question.id)
     return answers.filter((a) => a.name == chosen)
@@ -95,6 +93,7 @@ const Comparison = ({
     })
   )
 
+  console.log(faculties[lang])
 
   return (
     <div className="comparison-container">
@@ -146,7 +145,10 @@ const Comparison = ({
               selection
               value={compared}
               onChange={handleComparedChange}
-              options={faculties[lang].slice(1, faculties[lang].length)}
+              options={faculties[lang]
+                .slice(1, faculties[lang].length)
+                .sort((a, b) => a.text.localeCompare(b.text))
+              }
             />
             <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
