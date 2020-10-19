@@ -4,7 +4,6 @@ import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import Comparison from './Comparison'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear,
   facultiesWithKeys,
@@ -125,7 +124,6 @@ export default () => {
       >
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>
-          <YearSelector />
         </Grid.Column>
       </Grid>
       <Tab

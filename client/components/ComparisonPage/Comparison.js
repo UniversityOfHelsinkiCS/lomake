@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
+import YearSelector from 'Components/Generic/YearSelector'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
 
@@ -68,14 +69,15 @@ const Comparison = ({
         </Grid.Column>
       </Grid>
       <div className="ui divider"/>
-      <Grid 
-        centered 
-        stackable 
+      <Grid
+        stackable
         doubling
+        padded
         columns={user.admin ? 3 : 2}
       >
-        <Grid.Row className="report-comparison-filter-container">
-          <Grid.Column className="report-comparison-header">
+        <YearSelector />
+        <Grid.Row >
+          <Grid.Column>
             <h4>{translations.chosenProgrammes[lang]}</h4>
             <Dropdown
               fluid
@@ -87,7 +89,7 @@ const Comparison = ({
               options={options}
             />
           </Grid.Column>
-          <Grid.Column className="report-comparison-header">
+          <Grid.Column >
             <h4>{translations.comparedProgrammes[lang]}</h4>
             <Dropdown
               fluid
@@ -99,14 +101,24 @@ const Comparison = ({
             <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row className="report-comparison-container">
+        <Grid.Row>
           <Radio
             checked={showEmpty}
             onChange={() => setShowEmpty(!showEmpty)}
             label={translations.emptyAnswers[lang]}
             toggle
+            className="comparison-toggle"
           />
         </Grid.Row>
+          
+        </Grid>
+        <Grid
+          centered 
+          stackable 
+          doubling
+          columns={user.admin ? 3 : 2}
+        >
+
         <Grid.Row>
           <Grid.Column>
             <div className="report-smiley-grid">

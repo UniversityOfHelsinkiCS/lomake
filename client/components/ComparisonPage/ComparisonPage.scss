@@ -149,24 +149,6 @@ $background-green: #1DB954;
   }
 }
 
-.report-comparison {
-  &-filter-container {
-    margin: 2em 1em 0em 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: center!important;
-  }
-  &-container-left {
-    margin-left: 2em;
-    padding: 1em 0em 0em 0em !important;
-  }
-  &-container-center {
-    display: flex;
-    justify-content: center!important;
-  }
-  &-header {
-    display: flex;
-    justify-content: space-around;
-    max-width: 500px;
-  }
+.comparison-toggle {
+  padding-left: 15px;
 }
