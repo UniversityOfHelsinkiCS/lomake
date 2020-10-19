@@ -90,6 +90,12 @@ export default () => {
     )
   }
 
+  const moreThanFiveProgrammes = () => {
+    if (user.admin) return true
+    if (user.access && Object.keys(user.access).length > 5) return true
+    return false
+  }
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid inverted>
@@ -105,7 +111,7 @@ export default () => {
       >
         {translations.answersReport[languageCode]}
       </Menu.Item>
-      {user.admin &&
+      {moreThanFiveProgrammes() &&
         <Menu.Item
           as={Link}
           to={'/comparison'}

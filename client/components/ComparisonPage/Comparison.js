@@ -29,7 +29,7 @@ const Comparison = ({
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()
 
-  if (!user.admin) {
+  if (!user.admin && usersProgrammes.length <= 5) {
     history.push('/')
   }
 
@@ -158,7 +158,7 @@ const Comparison = ({
         centered
         stackable
         doubling
-        columns={3}
+        columns={user.admin ? 3 : 2}
       >
         <Grid.Row>
           <Grid.Column>
@@ -194,24 +194,26 @@ const Comparison = ({
               )}
             </div>
           </Grid.Column>
-          <Grid.Column>
-            <div className="comparison-smiley-grid">
-              {questionsList.map((question) =>
-                (allAnswers.get(question.id) && !(question.no_light) &&
-                  <PieChart
-                    key={question.id}
-                    question={question}
-                    showEmpty={showEmpty}
-                    answers={allAnswers.get(question.id)}
-                    chosenProgrammes={usersProgrammes}
-                    faculty={translations.university[lang]}
-                    allProgrammes={usersProgrammes}
-                    university
-                  />
-                )
-              )}
-            </div>
-          </Grid.Column>
+          {user.admin && 
+            <Grid.Column>
+              <div className="comparison-smiley-grid">
+                {questionsList.map((question) =>
+                  (allAnswers.get(question.id) && !(question.no_light) &&
+                    <PieChart
+                      key={question.id}
+                      question={question}
+                      showEmpty={showEmpty}
+                      answers={allAnswers.get(question.id)}
+                      chosenProgrammes={usersProgrammes}
+                      faculty={translations.university[lang]}
+                      allProgrammes={usersProgrammes}
+                      university
+                    />
+                  )
+                )}
+              </div>
+            </Grid.Column>
+          }
         </Grid.Row>
       </Grid>
     </div>

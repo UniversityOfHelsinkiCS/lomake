@@ -26,7 +26,6 @@ export default () => {
   const selectedAnswers = answersByYear(year, answers, oldAnswers)
   const faculties = facultiesWithKeys(facultiesData)
 
-
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['comparisonPage'][lang]}`
