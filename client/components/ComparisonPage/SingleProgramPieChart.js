@@ -58,16 +58,16 @@ export default ({
   }
 
   return (
-    <div className="report-smiley-chart-area">
-      <div className="report-smiley-pie-header">
+    <div className="comparison-smiley-chart-area">
+      <div className="comparison-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{programmeName}</b></p>
         <p><b>{programmeFaculty}</b></p>
         <p><b>{translations.responses[lang]} {showEmpty ? colorSums.total : colorSums.withoutEmpty}/1</b></p>
       </div>
       <div
-        className="report-smiley-pie-chart"
-        data-cy={`report-chart-${question.id}`}
+        className="comparison-smiley-pie-chart"
+        data-cy={`comparison-chart-${question.id}`}
       >
         <Chart
           center={[72, 65]}

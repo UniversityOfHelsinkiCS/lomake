@@ -5,7 +5,7 @@ $background-red: #F37778;
 $background-yellow: #F9D03B;
 $background-green: #1DB954;
 
-.report-page {
+.comparison-page {
   &-tab {
     margin-top: 2em;
     width: 90%;
@@ -14,11 +14,11 @@ $background-green: #1DB954;
   }
 }
 
-.report-info-header {
+.comparison-info-header {
   height: 50px;
 }
 
-.report-filter-container {
+.comparison-filter-container {
   width: 90%;
   max-width: 1600px;
   align-self: center;
@@ -31,19 +31,19 @@ $background-green: #1DB954;
   }
 }
 
-.report-container {
+.comparison-container {
   margin-top: 1em;
   padding: 10px;
 }
 
-.report-left-header {
+.comparison-left-header {
   margin-left: 25px;
   > p {
     font-size: 1.1em;
   }
 }
 
-.report-center-header {
+.comparison-center-header {
   font-size: 1.1em;
   text-align: center;
   > p {
@@ -51,14 +51,14 @@ $background-green: #1DB954;
   }
 }
 
-.report-right-header {
+.comparison-right-header {
   text-align: end;
   > p {
     font-size: 1.1em;
   }
 }
 
-.report-side-note {
+.comparison-side-note {
   color: $gray;
 }
 
@@ -88,13 +88,13 @@ $background-green: #1DB954;
   }
 }
 
-.report-smiley {
+.comparison-smiley {
   &-grid {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
     width: 100%;
-    margin: 0em 0em 4em 0em;
+    margin: 1em 0em 4em 0em;  
   }
   &-chart-area {
     width: 425px;

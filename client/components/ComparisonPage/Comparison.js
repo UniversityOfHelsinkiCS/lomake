@@ -11,6 +11,7 @@ import {
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
+import './ComparisonPage.scss'
 
 
 const Comparison = ({ 
@@ -96,9 +97,9 @@ const Comparison = ({
 
 
   return (
-    <div className="report-container">
+    <div className="comparison-container">
       <Grid >
-        <Grid.Column className="report-center-header" width={16}>
+        <Grid.Column className="comparison-center-header" width={16}>
           {year} - {translations.reportHeader['comparison'][lang]}
         </Grid.Column>
       </Grid>
@@ -160,7 +161,7 @@ const Comparison = ({
       >
         <Grid.Row>
           <Grid.Column>
-            <div className="report-smiley-grid">
+            <div className="comparison-smiley-grid">
               {questionsList.map((question) =>
                 (chosenAnswers(question) && !(question.no_light) &&
                   <SingleProgramPieChart
@@ -176,7 +177,7 @@ const Comparison = ({
             </div>
           </Grid.Column>
           <Grid.Column>
-            <div className="report-smiley-grid">
+            <div className="comparison-smiley-grid">
               {questionsList.map((question) =>
                 (comparisonAnswers(question) && !(question.no_light) &&
                   <PieChart
@@ -193,7 +194,7 @@ const Comparison = ({
             </div>
           </Grid.Column>
           <Grid.Column>
-            <div className="report-smiley-grid">
+            <div className="comparison-smiley-grid">
               {questionsList.map((question) =>
                 (allAnswers.get(question.id) && !(question.no_light) &&
                   <PieChart

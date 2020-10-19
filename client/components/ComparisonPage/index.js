@@ -115,19 +115,19 @@ export default () => {
 
   return (
     <>
-      <div className="report-info-header" />
+      <div className="comparison-info-header" />
       <Grid
         doubling
         columns={2}
         padded='vertically'
-        className="report-filter-container"
+        className="comparison-filter-container"
       >
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>
       </Grid>
       <Tab
-        className="report-page-tab"
+        className="comparison-page-tab"
         menu={{ secondary: true, pointing: true }}
         panes={panes}
       />

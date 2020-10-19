@@ -92,8 +92,8 @@ export default ({
   }
 
   return (
-    <div className="report-smiley-chart-area">
-      <div className="report-smiley-pie-header">
+    <div className="comparison-smiley-chart-area">
+      <div className="comparison-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{faculty}</b></p>
         <p><b>
@@ -102,11 +102,11 @@ export default ({
         <p><b>{amountOfResponses()}</b></p>
       </div>
       <div
-        className="report-smiley-pie-chart"
-        data-cy={`report-chart-${question.id}`}
+        className="comparison-smiley-pie-chart"
+        data-cy={`comparison-chart-${question.id}`}
       >
         {toolTipData &&
-          <span className="report-smiley-pie-tip">
+          <span className="comparison-smiley-pie-tip">
             <p><b>{question.labelIndex} - {question.label}</b></p>
             <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
             {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}
