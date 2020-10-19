@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import { colors } from 'Utilities/common'
+import { colors, sortedItems } from 'Utilities/common'
 
 
 export default ({
@@ -86,7 +86,7 @@ export default ({
     const toolTip = {
       color: segmentData.toolTipColor,
       header: segmentData.toolTipHeader,
-      programmes: segmentData.programmes
+      programmes: segmentData.programmes.sort((a, b) => a.localeCompare(b)),
     }
     setToolTipData(toolTip)
   }

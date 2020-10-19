@@ -6,7 +6,7 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
 
-const LevelFilter = () => {
+const LevelFilter = ({ comparison }) => {
   const dispatch = useDispatch()
   const level = useSelector((state) => state.programmeLevel)
   const lang = useSelector((state) => state.language)
@@ -17,7 +17,12 @@ const LevelFilter = () => {
 
   return (
     <div className="level-filter">
-      <label>{translations.levelFilter[lang]}</label>
+      <label>
+        {comparison ?
+          translations.compareLevel[lang]
+          :
+          translations.levelFilter[lang]}
+      </label>
       <Form>
         <Form.Group inline>
           <Form.Field>

@@ -84,7 +84,7 @@ export default ({
     const toolTip = {
       color: segmentData.toolTipColor,
       header: segmentData.toolTipHeader,
-      programmes: segmentData.programmes
+      programmes: segmentData.programmes.sort((a, b) => a.localeCompare(b)),
     }
     setToolTipData(toolTip)
   }

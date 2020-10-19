@@ -59,6 +59,7 @@ const Comparison = ({
   const filteredProgrammes = () => {
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
+      if (compared === 'allFaculties') return usersProgrammes
       return facultiesByKey.get(p.key) === compared
     })  
 
@@ -112,48 +113,48 @@ const Comparison = ({
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector />
-            <LevelFilter />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            <Radio
-              checked={showEmpty}
-              onChange={() => setShowEmpty(!showEmpty)}
-              label={translations.emptyAnswers[lang]}
-              toggle
-            />
+            <LevelFilter comparison />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row className="comparison-row">
           <Grid.Column>
-            <h4>{translations.chosenProgrammes[lang]}</h4>
-            <Dropdown
-              fluid
-              selection
-              search
-              placeholder={translations.chooseProgramme[lang]}
-              value={chosen}
-              onChange={handleChosenChange}
-              options={options}
-            />
+            <div className="comparison-filter">
+              <label>{translations.chosenProgrammes[lang]}</label>
+              <Dropdown
+                fluid
+                selection
+                search
+                placeholder={translations.chooseProgramme[lang]}
+                value={chosen}
+                onChange={handleChosenChange}
+                options={options}
+              />
+            </div>
           </Grid.Column>
-          <Grid.Column >
-            <h4>{translations.comparedProgrammes[lang]}</h4>
-            <Dropdown
-              fluid
-              selection
-              value={compared}
-              onChange={handleComparedChange}
-              options={faculties[lang]
-                .slice(1, faculties[lang].length)
-                .sort((a, b) => a.text.localeCompare(b.text))
-              }
-            />
-            <small>{translations.noAccessToAll[lang]}</small>
+          <Grid.Column>
+            <div className="comparison-filter">
+              <label>{translations.comparedProgrammes[lang]}</label>
+              <Dropdown
+                fluid
+                selection
+                value={compared}
+                onChange={handleComparedChange}
+                options={faculties[lang]}
+              />
+              <small>{translations.noAccessToAll[lang]}</small>
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            <div className="comparison-toggle">
+              <Radio
+                checked={showEmpty}
+                onChange={() => setShowEmpty(!showEmpty)}
+                label={translations.emptyAnswers[lang]}
+                toggle
+              />
+            </div>
           </Grid.Column>
         </Grid.Row>
-        
       </Grid>
       <Grid
         centered

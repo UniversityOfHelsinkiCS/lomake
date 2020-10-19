@@ -7,9 +7,9 @@ export const comparisonPageTranslations = {
   },
   reportHeader: {
     comparison: {
-      fi: 'Vertaile tiedekuntaan',
-      en: 'Compare to the faculty',
-      se: 'Compare to the faculty',
+      fi: 'Ohjelman vertailu',
+      en: 'Compare a programme',
+      se: 'Compare a programme',
     }
   },
   // ReportPage/Comparison.js
@@ -19,9 +19,9 @@ export const comparisonPageTranslations = {
     se: 'Chosen programme',
   },
   comparedProgrammes: {
-    fi: 'Vertaile tiedekuntaan',
-    en: 'Compare to a faculty',
-    se: 'Compare to a faculty',
+    fi: 'Vertaile tiedekunnittain',
+    en: 'Compare by faculty',
+    se: 'Compare by faculty',
   },
   chooseProgramme: {
     fi: 'Valitse vertailtava ohjelma',
@@ -374,6 +374,11 @@ export const genericTranslations = {
     en: 'Filter by programme level',
     fi: 'Vastaukset koulutusasteittain',
     se: 'Filter by programme level',
+  },
+  compareLevel: {
+    en: 'Compare by programme level',
+    fi: 'Vertaile koulutusasteittain',
+    se: 'Compare by programme level',
   },
   bachelor: {
     fi: 'Kandiohjelmat',

@@ -58,6 +58,25 @@ $background-green: #1DB954;
   }
 }
 
+.comparison {
+  &-row {
+    margin-top: 1.5em !important;
+    padding-bottom: 0px !important;
+  }
+  &-filter {
+    margin: 0em 0em 1em 0em;
+    > label {
+      font-size: 1.05em;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+  }
+  &-toggle {
+    margin: 2.5em 0em 0em 0em;
+    padding-left: 1em;
+  }
+}
+
 .comparison-side-note {
   color: $gray;
 }
@@ -147,9 +166,4 @@ $background-green: #1DB954;
             transform: all .3s;
     pointer-events: none;
   }
-}
-
-.comparison-row {
-  margin-top: 4em !important;
-  padding-bottom: 0px !important;
 }
