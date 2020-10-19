@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
+import { useHistory } from 'react-router'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
 import LevelFilter from 'Components/Generic/LevelFilter'
@@ -30,6 +31,11 @@ const Comparison = ({
   const [compared, setCompared] = useState(faculties[lang][1].value)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
+  const history = useHistory()
+
+  if (!user.admin) {
+    history.push('/')
+  }
 
   const handleChosenChange = (e, { value }) => {
     setChosen(value)
@@ -92,6 +98,7 @@ const Comparison = ({
     })
   )
 
+
   return (
     <div className="report-container">
       <Grid >
@@ -111,7 +118,6 @@ const Comparison = ({
             <YearSelector />
             <LevelFilter />
           </Grid.Column>
-
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>
