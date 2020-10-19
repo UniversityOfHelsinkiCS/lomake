@@ -94,7 +94,7 @@ $background-green: #1DB954;
     flex-flow: row wrap;
     justify-content: space-evenly;
     width: 100%;
-    margin: 4em 0em;  
+    margin: 3em 0em 4em 0em;  
   }
   &-chart-area {
     width: 425px;
@@ -147,8 +147,4 @@ $background-green: #1DB954;
             transform: all .3s;
     pointer-events: none;
   }
-}
-
-.comparison-toggle {
-  padding-left: 15px;
 }

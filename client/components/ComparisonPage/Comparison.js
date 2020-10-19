@@ -3,7 +3,16 @@ import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
+import LevelFilter from 'Components/Generic/LevelFilter'
 import YearSelector from 'Components/Generic/YearSelector'
+import {
+  answersByYear,
+  cleanText,
+  getMeasuresAnswer,
+  facultiesWithKeys,
+  internationalProgrammes as international,
+  programmeNameByKey as programmeName,
+} from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
 
@@ -17,6 +26,7 @@ const Comparison = ({
 }) => {
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
+  const level = useSelector((state) => state.programmeLevel)
   const [compared, setCompared] = useState(faculties[lang][1].value)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
@@ -42,14 +52,35 @@ const Comparison = ({
   const chosenAnswers = (question) => {
     const answers = allAnswers.get(question.id)
     return answers.filter((a) => a.name == chosen)
-  } 
+  }
 
-  const filteredByFaculty = usersProgrammes.filter((p) => {
-    return facultiesByKey.get(p.key) === compared
-  })
+  const filteredProgrammes = () => {
 
+    const filteredByFaculty = usersProgrammes.filter((p) => {
+      return facultiesByKey.get(p.key) === compared
+    })  
+
+    const filteredByLevel = filteredByFaculty.filter((p) => {
+      if (level === 'allProgrammes') return true
+      const prog = p.name['en'].toLowerCase()
+      if (level === 'international') {
+        return international.includes(p.key)
+      }
+      if (level === 'master') {
+        return prog.includes('master') || prog.includes('degree programme')
+      }
+      return prog.includes(level.toString())
+    })
+
+    return filteredByLevel
+  
+    
+  }
+
+  const programmes = filteredProgrammes()
+  
   const comparisonAnswers = (question) => {
-    const filteredKeys = filteredByFaculty.map((p) => p.key)
+    const filteredKeys = programmes.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     return answers.filter((a) => filteredKeys.includes(a.key))
   }
@@ -75,7 +106,13 @@ const Comparison = ({
         padded
         columns={user.admin ? 3 : 2}
       >
-        <YearSelector />
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <YearSelector />
+            <LevelFilter />
+          </Grid.Column>
+
+        </Grid.Row>
         <Grid.Row >
           <Grid.Column>
             <h4>{translations.chosenProgrammes[lang]}</h4>
@@ -102,13 +139,16 @@ const Comparison = ({
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
+          <Grid.Column width={16}>
           <Radio
             checked={showEmpty}
             onChange={() => setShowEmpty(!showEmpty)}
             label={translations.emptyAnswers[lang]}
             toggle
-            className="comparison-toggle"
+            
           />
+
+          </Grid.Column>
         </Grid.Row>
           
         </Grid>
@@ -145,9 +185,9 @@ const Comparison = ({
                     question={question}
                     showEmpty={showEmpty}
                     answers={comparisonAnswers(question)}
-                    chosenProgrammes={filteredByFaculty}
+                    chosenProgrammes={programmes}
                     faculty={comparisonFaculty.text}
-                    allProgrammes={filteredByFaculty}
+                    allProgrammes={programmes}
                   />
                 )
               )}
