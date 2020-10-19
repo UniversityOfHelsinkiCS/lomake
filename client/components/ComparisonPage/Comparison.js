@@ -29,6 +29,8 @@ const Comparison = ({
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()
 
+  if (!usersProgrammes) return <></>
+
   if (!user.admin && usersProgrammes.length <= 5) {
     history.push('/')
   }
@@ -58,6 +60,8 @@ const Comparison = ({
   }
 
   const filteredProgrammes = () => {
+
+    if (!usersProgrammes) return []
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
       if (compared === 'allFaculties') return usersProgrammes
