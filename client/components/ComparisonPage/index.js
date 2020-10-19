@@ -31,7 +31,7 @@ export default () => {
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!selectedAnswers || !usersProgrammes ||!faculties) return <></>
+  if (!selectedAnswers || !usersProgrammes || !faculties) return <></>
   
   const modifiedQuestions = () => {
     let attributes = []
@@ -102,7 +102,7 @@ export default () => {
         <Comparison
           year={year}
           questionsList={questionsList}
-          usersProgrammes={usersProgrammes}
+          usersProgrammes={sortedItems(usersProgrammes, 'name', lang)}
           allAnswers={usersProgrammes ? answersByQuestions() : []}
           facultiesByKey={faculties}
         />
