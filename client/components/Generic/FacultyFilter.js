@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedFaculty } from 'Utilities/redux/facultyReducer'
 import faculties from '../../facultyTranslations'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
 
-const LevelFilter = () => {
+const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
   const selectedFaculty = useSelector(({ faculties }) => faculties.selectedFaculty)
@@ -17,8 +16,8 @@ const LevelFilter = () => {
   }
 
   return (
-    <div className="faculty-filter">
-      <label>{translations.facultyFilter[lang]}</label>
+    <div className={`faculty-filter-${size}`}>
+      <label>{label}</label>
       <Select
         data-cy="faculty-filter"
         placeholder={faculties[lang]["allFaculties"]}
@@ -32,4 +31,4 @@ const LevelFilter = () => {
   )
 }
 
-export default LevelFilter
+export default FacultyFilter

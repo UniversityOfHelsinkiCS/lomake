@@ -1,5 +1,5 @@
 @mixin filter-basics {
-  margin: 2em 0em 1em 0em;
+  margin: 2em 0em 0.5em 0em;
   > label {
     font-size: 1.05em;
     margin-bottom: 0.5em;
@@ -8,8 +8,14 @@
 }
 
 .faculty-filter {
-  @include filter-basics;
-  width: 280px;
+  &-small {
+    @include filter-basics;
+    width: 280px;
+  }
+  &-large {
+    @include filter-basics;
+    width: 100%;
+  }
 }
 
 .level-filter {

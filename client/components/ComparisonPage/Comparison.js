@@ -5,6 +5,7 @@ import { useHistory } from 'react-router'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
 import LevelFilter from 'Components/Generic/LevelFilter'
+import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
   internationalProgrammes as international,
@@ -21,11 +22,11 @@ const Comparison = ({
   allAnswers,
   facultiesByKey,
 }) => {
+  const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const lang = useSelector((state) => state.language)
-  const user = useSelector((state) => state.currentUser.data)
   const level = useSelector((state) => state.programmeLevel)
+  const user = useSelector((state) => state.currentUser.data)
   const year = useSelector((state) => state.form.selectedYear)
-  const [compared, setCompared] = useState(faculties[lang][1].value)
   const [chosen, setChosen] = useState('')
   const debouncedChosen = useDebounce(chosen, 200)
   const [showEmpty, setShowEmpty] = useState(true)
@@ -39,10 +40,6 @@ const Comparison = ({
 
   const handleChosenChange = (e, { value }) => {
     setChosen(value)
-  }
-
-  const handleComparedChange = (e, { value }) => {
-    setCompared(value)
   }
 
   const programmeFaculty = () => {
@@ -60,7 +57,7 @@ const Comparison = ({
     return faculty.text
   }
 
-  const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
+  const comparisonFaculty = faculties[lang].find((f) => f.value === faculty)
 
   const chosenAnswers = (question) => {
     if (!allAnswers || !chosen) return []
@@ -74,8 +71,8 @@ const Comparison = ({
     if (!usersProgrammes) return []
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
-      if (compared === 'allFaculties') return usersProgrammes
-      return facultiesByKey.get(p.key) === compared
+      if (faculty === 'allFaculties') return usersProgrammes
+      return facultiesByKey.get(p.key) === faculty
     })  
 
     const filteredByLevel = filteredByFaculty.filter((p) => {
@@ -148,18 +145,8 @@ const Comparison = ({
             </div>
           </Grid.Column>
           <Grid.Column>
-            <div className="comparison-filter">
-              <label>{translations.comparedProgrammes[lang]}</label>
-              <Dropdown
-                fluid
-                selection
-                value={compared}
-                onChange={handleComparedChange}
-                options={faculties ? faculties[lang] : []}
-                data-cy="faculty-filter"
-              />
-              <small>{translations.noAccessToAll[lang]}</small>
-            </div>
+            <FacultyFilter size="large" label={translations.facultyFilter[lang]} />
+            <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
           <Grid.Column>
             <div className="comparison-toggle">

@@ -198,7 +198,7 @@ export default () => {
           <YearSelector />
           {usersProgrammes.length > 5 &&
             <>
-              <FacultyFilter />
+              <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
               <LevelFilter usersProgrammes={usersProgrammes}/>
               <ProgrammeFilter
                 handleChange={handleSearch}

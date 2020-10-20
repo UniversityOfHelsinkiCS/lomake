@@ -11,13 +11,13 @@ export const comparisonPageTranslations = {
       se: 'Compare a programme',
     },
   },
-  // ReportPage/Comparison.js
+  // ComparisonPage/Comparison.js
   chosenProgrammes: {
     fi: 'Valittu ohjelma',
     en: 'Chosen programme',
     se: 'Chosen programme',
   },
-  comparedProgrammes: {
+  facultyFilter: {
     fi: 'Vertaile tiedekunnittain',
     en: 'Compare by faculty',
     se: 'Compare by faculty',
@@ -358,12 +358,6 @@ export const genericTranslations = {
     en: 'Main points of discussion',
     se: 'Diskussionens huvudpunkter',
   },
-  // Generic/FacultyFilter.js
-  facultyFilter: {
-    en: 'Filter by faculty',
-    fi: 'Vastaukset tiedekunnittain',
-    se: 'Filter by faculty',
-  },
   // Generic/LastYearsAnswersAccordion.js
   expandText: {
     fi: 'Näytä viime vuoden vastaukset',
@@ -670,6 +664,11 @@ export const reportPageTranslations = {
     fi: 'Tyhjennä valinta',
     se: 'Clear selection',
     en: 'Clear selection',
+  },
+  facultyFilter: {
+    fi: 'Vastaukset tiedekunnittain',
+    en: 'Filter by faculty',
+    se: 'Filter by faculty',
   },
   reportHeader: {
     written: {
