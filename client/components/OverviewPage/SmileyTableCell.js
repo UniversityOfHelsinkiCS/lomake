@@ -47,6 +47,19 @@ const SmileyTableCell = ({
     return null
   }
 
+  const getMeasuresCount = () => {
+    let i = 1
+    while (i < 6) {
+      if (!!programmesAnswers[`${questionId}_${i}_text`]) {
+        i++
+      } else {
+        break
+      }
+    }
+
+    return i - 1
+  }
+
   const textId = `${questionId}_text`
   const lightId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
@@ -131,7 +144,11 @@ const SmileyTableCell = ({
           })
         }
       >
-        <Icon name="discussions" size="big" />
+        {questionId === 'measures' ? (
+          <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{getMeasuresCount()}</span>
+        ) : (
+          <Icon name="discussions" size="big" />
+        )}
       </div>
     )
   }
