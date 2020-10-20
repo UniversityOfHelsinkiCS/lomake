@@ -33,7 +33,7 @@ describe('ComparisonPage tests', function () {
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains(129)
+    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains('129')
   })
 
   it('Filtering of comparison programmes works by programme level', function () {
