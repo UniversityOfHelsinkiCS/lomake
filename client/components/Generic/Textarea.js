@@ -96,18 +96,36 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
 
   return (
     <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <label
-          style={{
-            margin: '1em 0',
-            fontStyle: 'bolder',
-            fontSize: '1.1em',
-            minWidth: '50%',
-          }}
-        >
-          {label}
-          {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
-        </label>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          margin: '2rem 0',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <label
+            style={{
+              fontStyle: 'bolder',
+              fontSize: '1.1em',
+              minWidth: '50%',
+              height: '1.5rem',
+            }}
+          >
+            {label}
+            {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+            <Loader
+              style={{
+                marginLeft: '1em',
+                visibility: !hasLock && gettingLock ? undefined : 'hidden',
+              }}
+              size="small"
+              active
+              inline
+            />
+          </label>
+        </div>
         <Accordion
           previousYearsAnswers={previousYearsAnswers}
           EntityLastYearsAccordion={EntityLastYearsAccordion}
@@ -119,12 +137,6 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
       ) : (
         <>
           <div onClick={askForLock} style={{ marginTop: '1em' }}>
-            {!hasLock && gettingLock && (
-              <div style={{ marginBottom: '0.5em' }}>
-                <Loader size="small" active inline />
-                <span style={{ marginLeft: '1em' }}>{translations.loading[languageCode]}</span>
-              </div>
-            )}
             <Editor
               editorStyle={{ wordBreak: 'break-word', width: '100%' }}
               ref={ref}
