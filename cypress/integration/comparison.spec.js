@@ -40,8 +40,7 @@ describe('ComparisonPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
 
-    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains('120')
-    
+    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains('129')
   })
 
   it('Filtering of comparison programmes works by programme level', function () {
