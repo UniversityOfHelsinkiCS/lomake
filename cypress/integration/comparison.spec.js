@@ -33,7 +33,15 @@ describe('ComparisonPage tests', function () {
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains('129')
+
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').then((newEl) => {
+      expect(newEl.find('.item')).to.have.length(3)
+    })
+    cy.get('[data-cy=yearSelector]').contains(2019).click()
+
+    cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains('120')
+    
   })
 
   it('Filtering of comparison programmes works by programme level', function () {
