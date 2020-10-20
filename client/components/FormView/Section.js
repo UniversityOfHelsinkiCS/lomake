@@ -2,7 +2,6 @@ import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
-
 const Section = ({ title, number, children, programmeKey }) => {
   return (
     <>
@@ -24,7 +23,7 @@ const Section = ({ title, number, children, programmeKey }) => {
             style={{
               fontSize: '2em',
               padding: '1.5em 0.5em',
-              margin: '7em 0em 1em 0em',
+              margin: '4em 0em 1em 0em',
               background: colors.background_black,
               borderRadius: '5px',
               color: colors.white,
