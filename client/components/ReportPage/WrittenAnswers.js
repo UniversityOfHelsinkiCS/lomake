@@ -6,7 +6,7 @@ import Question from './Question'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
 

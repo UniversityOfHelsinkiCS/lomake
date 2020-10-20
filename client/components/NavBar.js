@@ -24,9 +24,14 @@ export default () => {
       se: 'OSPA',
     },
     answersReport: {
-      en: 'Report of answers',
-      fi: 'Lomakkeen vastaukset',
+      en: 'Answers by the year',
+      fi: 'Vastaukset vuosittain',
       se: 'Svar',
+    },
+    comparisonReport: {
+      en: 'Compare answers',
+      fi: 'Vastausten vertailu ja kehitys',
+      se: 'Compare answers',
     },
     language: {
       en: 'English',
@@ -85,6 +90,12 @@ export default () => {
     )
   }
 
+  const moreThanFiveProgrammes = () => {
+    if (user.admin) return true
+    if (user.access && Object.keys(user.access).length > 5) return true
+    return false
+  }
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid inverted>
@@ -100,6 +111,17 @@ export default () => {
       >
         {translations.answersReport[languageCode]}
       </Menu.Item>
+      {moreThanFiveProgrammes() &&
+        <Menu.Item
+          data-cy="nav-comparison"
+          as={Link}
+          to={'/comparison'}
+          name="comparisonControls"
+          onClick={handleItemClick}
+        >
+          {translations.comparisonReport[languageCode]}
+        </Menu.Item>    
+      }
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

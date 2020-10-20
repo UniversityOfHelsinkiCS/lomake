@@ -11,19 +11,12 @@ import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import { colors } from 'Utilities/common'
+import { genericTranslations as translations } from 'Utilities/translations'
 
 const MAX_LENGTH = 1100
 
 const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
-}
-
-const translations = {
-  loading: {
-    fi: 'Valmistellaan tekstieditoria, odota hetki...',
-    se: '',
-    en: 'Preparing the texteditor, please wait a moment...',
-  },
 }
 
 const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {

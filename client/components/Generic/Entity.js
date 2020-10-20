@@ -9,19 +9,8 @@ import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import { colors } from 'Utilities/common'
+import { genericTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  streetLightsLabel: {
-    fi: 'Yleisarvio',
-    en: 'General assessment',
-    se: 'Allmänn bedömning',
-  },
-  textAreaLabel: {
-    fi: 'Keskustelun pääkohdat olivat',
-    en: 'Main points of discussion',
-    se: 'Diskussionens huvudpunkter',
-  },
-}
 const mapLightToValid = {
   VIHREÄ: 'green',
   KELTAINEN: 'yellow',

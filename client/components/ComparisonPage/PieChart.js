@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
-import { reportPageTranslations as translations } from 'Utilities/translations'
-import { colors } from 'Utilities/common'
+import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { colors, sortedItems } from 'Utilities/common'
 
 
 export default ({
@@ -11,10 +11,12 @@ export default ({
   showEmpty,
   chosenProgrammes,
   faculty,
-  allProgrammes
+  allProgrammes,
+  university
 }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
+  const level = useSelector((state) => state.programmeLevel)
 
 
   const colorsTotal = (question) => {
@@ -89,19 +91,28 @@ export default ({
     setToolTipData(toolTip)
   }
 
+
   return (
-    <div className="report-smiley-chart-area">
-      <div className="report-smiley-pie-header">
+    <div className="comparison-smiley-chart-area">
+      <div className="comparison-smiley-pie-header">
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{faculty}</b></p>
-        <p><b>{amountOfResponses()}</b></p>
+        <p><b>
+          {university ? translations['allProgrammes'][lang] : translations[level][lang]}
+        </b></p>
+        <p data-cy={`comparison-responses-${university}-${question.id}`}>
+          <b>{amountOfResponses()}</b>
+        </p>
       </div>
       <div
-        className="report-smiley-pie-chart"
-        data-cy={`report-chart-${question.id}`}
+        className="comparison-smiley-pie-chart"
+        data-cy={`comparison-chart-${faculty.slice(0,7)}-${question.id}`}
       >
         {toolTipData &&
-          <span className="report-smiley-pie-tip">
+          <span
+            className="comparison-smiley-pie-tip"
+            data-cy={`comparison-tip-${question.id}`}
+          >
             <p><b>{question.labelIndex} - {question.label}</b></p>
             <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
             {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}

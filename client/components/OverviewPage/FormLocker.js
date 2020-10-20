@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Icon, Popup } from 'semantic-ui-react'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
+import { overviewPageTranslations as translations } from 'Utilities/translations'
+
 
 export default function FormLocker({ programme }) {
   const languageCode = useSelector((state) => state.language)
@@ -31,29 +33,6 @@ export default function FormLocker({ programme }) {
       })
     }
   }, [programmeDetails, loadObj])
-
-  const translations = {
-    lockForm: {
-      en: 'Lock form (prevents editing)',
-      fi: 'Lukitse lomake',
-      se: 'Lås blanketten (hindrar redigering)',
-    },
-    unLockForm: {
-      en: 'Unlock form',
-      fi: 'Poista lukitus',
-      se: 'Tillåt redigering',
-    },
-    lockedTriggerButtonText: {
-      en: 'Form is locked',
-      fi: 'Lomake on lukittu',
-      se: 'Blanketten är låst',
-    },
-    unlockedTriggerButtonText: {
-      en: 'Form can be edited',
-      fi: 'Lomaketta voi muokata',
-      se: 'Blanketten kan redigeras',
-    },
-  }
 
   const handleLock = () => {
     dispatch(toggleLock(programme))

@@ -1,19 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { colors } from 'Utilities/common'
+import { genericTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  expandText: {
-    fi: 'Näytä viime vuoden vastaukset',
-    en: 'Show answers from last year',
-    se: 'Visa fjolårets svar',
-  },
-  collapseText: {
-    fi: 'Piilota viime vuoden vastaukset',
-    en: 'Hide answers from last year',
-    se: 'Dölj fjolårets svar',
-  },
-}
 
 const LastYearsAnswersAccordion = ({ children }) => {
   const [expanded, setExpanded] = useState(false)

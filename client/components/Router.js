@@ -6,6 +6,7 @@ import AdminPage from 'Components/UsersPage'
 import OverviewPage from 'Components/OverviewPage'
 import ClaimAccessPage from 'Components/ClaimAccessPage'
 import ReportPage from 'Components/ReportPage'
+import ComparisonPage from 'Components/ComparisonPage'
 
 export default () => (
   <div className="content">
@@ -13,6 +14,7 @@ export default () => (
       <Route exact path="/" component={OverviewPage} />
       <Route exact path="/admin" component={AdminPage} />
       <Route exact path="/report" component={ReportPage} />
+      <Route exact path="/comparison" component={ComparisonPage} />
       <Route
         exact
         path="/form/:room"

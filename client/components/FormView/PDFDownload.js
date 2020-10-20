@@ -2,24 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
+import { formViewTranslations as translations } from 'Utilities/translations'
 
-const translations = {
-  downloadText: {
-    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
-    en: 'Print / Download answers as a PDF-file',
-    se: 'Skriv ut / Ladda ner svaren i en PDF-fil',
-  },
-  setViewOnlyTrueText: {
-    fi: 'Tulostus/PDF -näkymä',
-    en: 'Print/Download as PDF view',
-    se: 'Utskriftsläge/Pdf-vy',
-  },
-  setViewOnlyFalseText: {
-    fi: 'Palaa täyttämään lomaketta',
-    en: 'Back to edit view',
-    se: 'Återgå till redigeringsläge',
-  },
-}
 
 const PDFDownload = () => {
   const languageCode = useSelector((state) => state.language)

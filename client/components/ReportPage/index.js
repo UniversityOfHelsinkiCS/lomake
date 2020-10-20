@@ -5,7 +5,6 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import ProgrammeList from './ProgrammeList'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
-import Comparison from './Comparison'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
@@ -18,9 +17,8 @@ import {
   facultiesWithKeys,
   internationalProgrammes as international,
   programmeNameByKey as programmeName,
-  sortedItems
 } from 'Utilities/common'
-import { translations } from 'Utilities/translations'
+import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import questions from '../../questions'
 import './ReportPage.scss'
@@ -30,7 +28,6 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
-  const [disabled, setDisabled] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -52,7 +49,7 @@ export default () => {
   // Handles all filtering
   const filteredProgrammes = () => {
 
-    if (!usersProgrammes) return { chosen: [], filtered: []}
+    if (!usersProgrammes) return { chosen: [], filtered: [] }
 
     const filteredByName = usersProgrammes.filter((p) => {
       const prog = p.name[lang] ? p.name[lang] : p.name['en']
@@ -145,12 +142,20 @@ export default () => {
       }
     })
 
-    return answerMap
-  }
+    // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+    // So empty answers need to be added.
+    answerMap.forEach((value, key) => {
+      const answeredProgrammes = value.map((p) => p.key)
+      const programmesMissing = chosenProgrammes.filter((p) => !answeredProgrammes.includes(p.key))
+      if (programmesMissing) {
+        for (const p of programmesMissing) {
+          const earlierAnswers = answerMap.get(key)
+          answerMap.set(key, [...earlierAnswers, { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer'}])
+        }
+      }
+    })
 
-  const handleTabChange = (e, { activeIndex }) => {
-    if (activeIndex === 2) setDisabled('disabled')
-    else setDisabled('')
+    return answerMap
   }
 
   const panes = [
@@ -175,18 +180,6 @@ export default () => {
         />
       </Tab.Pane> 
     },
-    usersProgrammes.length > 5 &&
-    { menuItem: translations.reportHeader['comparison'][lang], render: () =>
-      <Tab.Pane>
-        <Comparison
-          year={year}
-          questionsList={questionsList}
-          usersProgrammes={sortedItems(usersProgrammes, 'name', lang)}
-          allAnswers={usersProgrammes ? answersByQuestions(usersProgrammes) : []}
-          facultiesByKey={faculties}
-        />
-      </Tab.Pane>
-    }
   ]
 
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
@@ -198,7 +191,7 @@ export default () => {
         doubling
         columns={2}
         padded='vertically'
-        className={`report-filter-container-${disabled}`}
+        className="report-filter-container"
       >
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
@@ -238,7 +231,6 @@ export default () => {
         className="report-page-tab"
         menu={{ secondary: true, pointing: true }}
         panes={panes}
-        onTabChange={handleTabChange}
       />
     </>
   )

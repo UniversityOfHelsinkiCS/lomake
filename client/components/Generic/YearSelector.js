@@ -2,15 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setSelectedYear } from 'Utilities/redux/formReducer'
+import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
-const translations = {
-  selectYear: {
-    en: 'Select the year you would like to inspect',
-    fi: 'Valitse vuosi jota haluat tarkastella',
-    se: '',
-  },
-}
 
 export default function YearSelector() {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)

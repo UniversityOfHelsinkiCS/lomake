@@ -17,7 +17,7 @@ import YearSelector from 'Components/Generic/YearSelector'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
-import { translations } from 'Utilities/translations'
+import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 import questions from '../../questions'
 
