@@ -146,15 +146,14 @@ const Comparison = ({
             <FacultyFilter size="large" label={translations.facultyFilter[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
           </Grid.Column>
-          <Grid.Column>
-            <div className="comparison-toggle">
-              <Radio
-                checked={showEmpty}
-                onChange={() => setShowEmpty(!showEmpty)}
-                label={translations.emptyAnswers[lang]}
-                toggle
-              />
-            </div>
+          <Grid.Column verticalAlign="bottom">
+            <Radio
+              className="comparison-toggle"
+              checked={showEmpty}
+              onChange={() => setShowEmpty(!showEmpty)}
+              label={translations.emptyAnswers[lang]}
+              toggle
+            />
           </Grid.Column>
         </Grid.Row>
       </Grid>
