@@ -11,7 +11,6 @@ import {
   internationalProgrammes as international,
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import useDebounce from 'Utilities/useDebounce'
 import faculties from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
@@ -28,7 +27,6 @@ const Comparison = ({
   const user = useSelector((state) => state.currentUser.data)
   const year = useSelector((state) => state.form.selectedYear)
   const [chosen, setChosen] = useState('')
-  const debouncedChosen = useDebounce(chosen, 200)
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()
 
@@ -42,13 +40,13 @@ const Comparison = ({
     setChosen(value)
   }
 
-  const programmeFaculty = () => {
+  const chosenProgrammeFaculty = () => {
 
     if (!usersProgrammes) return ''
 
     const filtered = usersProgrammes.find((p) => {
       const prog = p.name[lang] ? p.name[lang] : p.name['en']
-      return prog.toLowerCase().includes(debouncedChosen.toLowerCase())
+      return prog === chosen
     })
     if (!filtered) return ''
     const facultyCode = facultiesByKey.get(filtered.key)
@@ -57,7 +55,7 @@ const Comparison = ({
     return faculty.text
   }
 
-  const comparisonFaculty = faculties[lang].find((f) => f.value === faculty)
+  const comparedFaculty = faculties[lang].find((f) => f.value === faculty)
 
   const chosenAnswers = (question) => {
     if (!allAnswers || !chosen) return []
@@ -91,11 +89,11 @@ const Comparison = ({
   
   }
 
-  const programmes = filteredProgrammes()
+  const comparedProgrammes = filteredProgrammes()
   
-  const comparisonAnswers = (question) => {
-    if (!programmes || !allAnswers) return []
-    const filteredKeys = programmes.map((p) => p.key)
+  const comparedAnswers = (question) => {
+    if (!comparedProgrammes || !allAnswers) return []
+    const filteredKeys = comparedProgrammes.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     if (answers) return answers.filter((a) => filteredKeys.includes(a.key))
     return []
@@ -176,7 +174,7 @@ const Comparison = ({
                     question={question}
                     answers={chosenAnswers(question)}
                     programmeName={chosen ? chosen : ''}
-                    programmeFaculty={programmeFaculty()}
+                    programmeFaculty={chosenProgrammeFaculty()}
                     showEmpty={showEmpty}
                   />
                 )
@@ -186,15 +184,14 @@ const Comparison = ({
           <Grid.Column>
             <div className="comparison-smiley-grid">
               {questionsList.map((question) =>
-                (comparisonAnswers(question) && !(question.no_light) &&
+                (comparedAnswers(question) && !(question.no_light) &&
                   <PieChart
                     key={question.id}
                     question={question}
                     showEmpty={showEmpty}
-                    answers={comparisonAnswers(question)}
-                    chosenProgrammes={programmes ? programmes : []}
-                    faculty={comparisonFaculty ? comparisonFaculty.text : ''}
-                    allProgrammes={programmes ? programmes : ''}
+                    answers={comparedAnswers(question)}
+                    faculty={comparedFaculty ? comparedFaculty.text : ''}
+                    programmes={comparedProgrammes ? comparedProgrammes : ''}
                   />
                 )
               )}
@@ -210,9 +207,8 @@ const Comparison = ({
                       question={question}
                       showEmpty={showEmpty}
                       answers={allAnswers.get(question.id)}
-                      chosenProgrammes={usersProgrammes ? usersProgrammes : []}
+                      programmes={usersProgrammes ? usersProgrammes : []}
                       faculty={translations.university[lang]}
-                      allProgrammes={usersProgrammes ? usersProgrammes : []}
                       university
                     />
                   )

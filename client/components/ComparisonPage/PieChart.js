@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import { colors, sortedItems } from 'Utilities/common'
+import { colors } from 'Utilities/common'
 
 
 export default ({
   question,
   answers,
   showEmpty,
-  chosenProgrammes,
+  programmes,
   faculty,
-  allProgrammes,
   university
 }) => {
   const lang = useSelector((state) => state.language)
@@ -76,8 +75,8 @@ export default ({
 
   const amountOfResponses = () => {
     const answered = `${translations.responses[lang]} ${answers ?
-      (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0}`
-    const all = allProgrammes ? ` / ${allProgrammes.length}` : ''
+      (showEmpty ? programmes.length : colorSums.withoutEmpty.value) : 0}`
+    const all = programmes ? ` / ${programmes.length}` : ''
     return answered + all
   }
 
