@@ -10,6 +10,7 @@ import {
   internationalProgrammes as international,
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import useDebounce from 'Utilities/useDebounce'
 import faculties from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
@@ -26,10 +27,11 @@ const Comparison = ({
   const year = useSelector((state) => state.form.selectedYear)
   const [compared, setCompared] = useState(faculties[lang][1].value)
   const [chosen, setChosen] = useState('')
+  const debouncedChosen = useDebounce(chosen, 200)
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()
 
-  if (!usersProgrammes) return <></>
+  if (!usersProgrammes || !allAnswers) return <></>
 
   if (!user.admin && usersProgrammes.length <= 5) {
     history.push('/')
@@ -43,18 +45,25 @@ const Comparison = ({
     setCompared(value)
   }
 
-  const programmeFaculty = (programmeName) => {
-    if (!programmeName) return ''
-    const programme = usersProgrammes.find((p) => (p.name[lang] ? p.name[lang] : p.name['en']) == programmeName)
-    const facultyCode = facultiesByKey.get(programme.key)
+  const programmeFaculty = () => {
+
+    if (!usersProgrammes) return ''
+
+    const filtered = usersProgrammes.find((p) => {
+      const prog = p.name[lang] ? p.name[lang] : p.name['en']
+      return prog.toLowerCase().includes(debouncedChosen.toLowerCase())
+    })
+    if (!filtered) return ''
+    const facultyCode = facultiesByKey.get(filtered.key)
     const faculty = faculties[lang].find((f) => f.key == facultyCode)
-    if (faculty) return faculty.text
-    return translations.noFaculty[lang]
+    if (!faculty) return translations.noFaculty[lang] 
+    return faculty.text
   }
 
   const comparisonFaculty = faculties[lang].find((f) => f.value === compared)
 
   const chosenAnswers = (question) => {
+    if (!allAnswers || !chosen) return []
     const answers = allAnswers.get(question.id)
     return answers.filter((a) => a.name == chosen)
   }
@@ -87,6 +96,7 @@ const Comparison = ({
   const programmes = filteredProgrammes()
   
   const comparisonAnswers = (question) => {
+    if (!programmes || !allAnswers) return []
     const filteredKeys = programmes.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     return answers.filter((a) => filteredKeys.includes(a.key))
@@ -130,7 +140,7 @@ const Comparison = ({
                 placeholder={translations.chooseProgramme[lang]}
                 value={chosen}
                 onChange={handleChosenChange}
-                options={options}
+                options={usersProgrammes ? options : []}
                 data-cy="programme-filter"
               />
             </div>
@@ -143,7 +153,7 @@ const Comparison = ({
                 selection
                 value={compared}
                 onChange={handleComparedChange}
-                options={faculties[lang]}
+                options={faculties ? faculties[lang] : []}
                 data-cy="faculty-filter"
               />
               <small>{translations.noAccessToAll[lang]}</small>
@@ -176,8 +186,8 @@ const Comparison = ({
                     key={question.id}
                     question={question}
                     answers={chosenAnswers(question)}
-                    programmeName={chosen}
-                    programmeFaculty={programmeFaculty(chosen)}
+                    programmeName={chosen ? chosen : ''}
+                    programmeFaculty={programmeFaculty()}
                     showEmpty={showEmpty}
                   />
                 )
@@ -193,9 +203,9 @@ const Comparison = ({
                     question={question}
                     showEmpty={showEmpty}
                     answers={comparisonAnswers(question)}
-                    chosenProgrammes={programmes}
-                    faculty={comparisonFaculty.text}
-                    allProgrammes={programmes}
+                    chosenProgrammes={programmes ? programmes : []}
+                    faculty={comparisonFaculty ? comparisonFaculty.text : ''}
+                    allProgrammes={programmes ? programmes : ''}
                   />
                 )
               )}
@@ -211,9 +221,9 @@ const Comparison = ({
                       question={question}
                       showEmpty={showEmpty}
                       answers={allAnswers.get(question.id)}
-                      chosenProgrammes={usersProgrammes}
+                      chosenProgrammes={usersProgrammes ? usersProgrammes : []}
                       faculty={translations.university[lang]}
-                      allProgrammes={usersProgrammes}
+                      allProgrammes={usersProgrammes ? usersProgrammes : []}
                       university
                     />
                   )
