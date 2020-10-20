@@ -29,6 +29,8 @@ describe('ComparisonPage tests', function () {
 
   it('Admin should be able to see all the programmes on the comparison page', function () {
     cy.login(adminUser)
+    cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
     cy.get('[data-cy=comparison-responses-true-language_environment_text]').contains(129)
@@ -58,7 +60,11 @@ describe('ComparisonPage tests', function () {
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-  
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').then((newEl) => {
+      expect(newEl.find('.item')).to.have.length(3)
+    })
+    cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-Faculty-programme_identity_text]').trigger('mouseover', 200, 200)
