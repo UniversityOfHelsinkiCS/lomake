@@ -54,14 +54,6 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=cypressAdminUser-is-admin]').should('have.class', 'check')
   })
 
-  it('Can mark users as irrelevant', function () {
-    cy.get('[data-cy=nav-admin]').click()
-    cy.get('[data-cy=cypressAdminUser-not-irrelevant]').click()
-    cy.get('[data-cy=mark-irrelevant-confirm]').click()
-    cy.reload()
-    cy.get('[data-cy=cypressAdminUser-is-irrelevant]').should('have.class', 'check')
-  })
-
   it('Can navigate between tabs and the tables render', function () {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Links for owners').click()

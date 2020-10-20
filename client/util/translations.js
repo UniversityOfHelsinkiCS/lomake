@@ -1,4 +1,3 @@
-
 export const comparisonPageTranslations = {
   comparisonPage: {
     fi: 'Vastausten vertailu ja kehitys',
@@ -10,7 +9,7 @@ export const comparisonPageTranslations = {
       fi: 'Ohjelman vertailu',
       en: 'Compare a programme',
       se: 'Compare a programme',
-    }
+    },
   },
   // ReportPage/Comparison.js
   chosenProgrammes: {
@@ -34,9 +33,12 @@ export const comparisonPageTranslations = {
     se: 'No programmes have yet been chosen',
   },
   noAccessToAll: {
-    fi: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
-    en: 'Please note, that you can only see comparison with the programmes you have reading rights to',
-    se: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+    fi:
+      'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
+    en:
+      'Please note, that you can only see comparison with the programmes you have reading rights to',
+    se:
+      'Please note, that you can only see comparison with the programmes you have reading rights to',
   },
   university: {
     fi: 'Koko yliopisto',
@@ -173,12 +175,16 @@ export const formViewTranslations = {
     se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
   },
   p1: {
-    en: 'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
-    fi: 'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
-    se: 'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
+    en:
+      'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
+    fi:
+      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
+    se:
+      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
   },
   p2: {
-    en: 'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
+    en:
+      'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
     fi: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
     se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
   },
@@ -516,7 +522,8 @@ export const overviewPageTranslations = {
       'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
+    fi:
+      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
   },
@@ -536,9 +543,12 @@ export const overviewPageTranslations = {
     se: 'Skapa länk',
   },
   resetWarning: {
-    fi: 'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
-    en: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
-    se: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    fi:
+      'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
+    en:
+      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    se:
+      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
   },
   copyLink: {
     fi: 'Kopioi linkki',
@@ -748,7 +758,7 @@ export const usersPageTranslations = {
   deadline: {
     en: 'Deadline',
     fi: 'Määräaika',
-    se: 'Deadline'
+    se: 'Deadline',
   },
   linksForOwners: {
     en: 'Links for owners',
@@ -766,19 +776,26 @@ export const usersPageTranslations = {
     se: 'Links for doctoral programmes',
   },
   doctorMessage: {
-    en: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
+    en:
+      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin',
-    se: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
+    se:
+      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
   },
   facultyMessage: {
-    en: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
+    en:
+      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin',
-    se: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
+    se:
+      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
   },
   ownerMessage: {
-    en: 'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
-    fi: 'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja listalla näkyy ainoastaan ne ohjelmat, joita ei vielä ole lunastettu.',
-    se: 'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+    en:
+      'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+    fi:
+      'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja listalla näkyy ainoastaan ne ohjelmat, joita ei vielä ole lunastettu.',
+    se:
+      'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
   },
   code: {
     en: 'Code',
@@ -834,16 +851,6 @@ export const usersPageTranslations = {
     en: 'Remove admin rights',
     fi: 'Poista admin-oikeudet',
     se: 'Remove admin rights',
-  },
-  markIrrelevant: {
-    en: 'Mark as irrelevant',
-    fi: 'Merkitse tarpeettomaksi',
-    se: 'Mark as irrelevant',
-  },
-  markRelevant: {
-    en: 'Mark as relevant',
-    fi: 'Poista piilottaminen',
-    se: 'Mark as irrelevant',
   },
   searchByName: {
     en: 'Search users by name',

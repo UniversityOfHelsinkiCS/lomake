@@ -1233,7 +1233,6 @@ const cypressUsers = [
     email: 'cypressUser',
     admin: false,
     access: {},
-    irrelevant: false,
   },
   {
     uid: 'cypressUser2',
@@ -1242,7 +1241,6 @@ const cypressUsers = [
     email: 'cypressUser2',
     admin: false,
     access: {},
-    irrelevant: false,
   },
   {
     uid: 'cypressAdminUser',
@@ -1250,7 +1248,6 @@ const cypressUsers = [
     lastname: 'admin',
     email: 'cypressAdminUser',
     admin: true,
-    irrelevant: false,
   },
 ]
 

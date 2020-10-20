@@ -23,52 +23,6 @@ export default ({ user, lang }) => {
     window.location.reload()
   }
 
-  const IrrelevantBadge = () => {
-    return user.irrelevant ? (
-      <Popup
-        trigger={
-          <Icon
-            data-cy={`${user.uid}-is-irrelevant`}
-            name="check"
-            className="users-green"
-            size="large"
-          />
-        }
-        content={
-          <Button
-            data-cy="remove-irrelevant-confirm"
-            color="red"
-            content={translations.markRelevant[lang]}
-            onClick={() => removeIrrelevant()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
-    ) : (
-      <Popup
-        trigger={
-          <Icon
-            data-cy={`${user.uid}-not-irrelevant`}
-            name="close"
-            className="users-red"
-            size="large"
-          />
-        }
-        content={
-          <Button
-            data-cy="mark-irrelevant-confirm"
-            color="green"
-            content={translations.markIrrelevant[lang]}
-            onClick={() => markIrrelevant()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
-    )
-  }
-
   const AdminBadge = () => {
     return user.admin ? (
       <Popup
