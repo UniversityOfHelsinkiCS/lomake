@@ -144,9 +144,7 @@ const CsvDownload =
 
     } else if (view == "overview") {
 
-      const selectedAnswers = year === new Date().getFullYear()
-        ? answers.data
-        : oldAnswers.data.filter((a) => a.year === year)
+      const selectedAnswers = (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === year) : []
 
       if (!selectedAnswers) return [[],[]]
 

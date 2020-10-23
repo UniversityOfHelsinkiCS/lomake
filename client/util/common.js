@@ -148,9 +148,7 @@ export const getMeasuresAnswer = (data) => {
 }
 
 export const answersByYear = (year, answers, oldAnswers) => {
-  return year === new Date().getFullYear()
-    ? answers.data
-    : oldAnswers.data.filter((a) => a.year === year)
+  return (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === year) : []
 }
 
 //https://stackoverflow.com/a/9083076

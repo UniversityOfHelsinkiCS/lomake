@@ -41,10 +41,7 @@ const SmileyTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    const selectedAnswers =
-      selectedYear === new Date().getFullYear()
-        ? answers.data
-        : oldAnswers.data.filter((a) => a.year === selectedYear)
+    const selectedAnswers = (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === selectedYear) : []
 
     const lastYearsAnswers =
       oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1) && showProgress
