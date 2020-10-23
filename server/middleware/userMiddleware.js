@@ -2,6 +2,12 @@ const logger = require('@util/logger')
 const db = require('@models/index')
 const { inProduction } = require('@util/common')
 
+// Some people have been pre-authorized:
+const shouldBeAdmin = (uid) => {
+  const eligibleAdmins = ['lindblom', 'suniinis', 'markokos']
+  return (!inProduction && uid === 'admin') || eligibleAdmins.includes(uid)
+}
+
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) next()
   if (req.path.includes('/cypress/')) return next()
@@ -18,7 +24,7 @@ const userMiddleware = async (req, res, next) => {
         firstname: req.headers.givenname,
         lastname: req.headers.sn,
         email: req.headers.mail,
-        admin: !inProduction && req.headers.uid === 'admin' ? true : false, // Give admin bit by default in dev mode
+        admin: shouldBeAdmin(req.headers.uid),
         access: {},
         irrelevant: false,
       },
