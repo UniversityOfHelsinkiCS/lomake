@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Header, Icon, Loader } from 'semantic-ui-react'
-import { sortedItems } from 'Utilities/common'
+import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
@@ -41,7 +41,7 @@ const SmileyTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    const selectedAnswers = (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === selectedYear) : []
+    const selectedAnswers = answersByYear(selectedYear, answers, oldAnswers)
 
     const lastYearsAnswers =
       oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1) && showProgress

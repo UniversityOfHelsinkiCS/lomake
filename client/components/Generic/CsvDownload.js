@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { programmeNameByKey as programmeName } from 'Utilities/common'
+import { answersByYear, programmeNameByKey as programmeName } from 'Utilities/common'
 import { keysWithFaculties } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
@@ -144,7 +144,7 @@ const CsvDownload =
 
     } else if (view == "overview") {
 
-      const selectedAnswers = (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === year) : []
+      const selectedAnswers = answersByYear(year, answers, oldAnswers)
 
       if (!selectedAnswers) return [[],[]]
 
