@@ -182,6 +182,7 @@ export default () => {
     },
   ]
 
+  if (!usersProgrammes) return <></>
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
   return (
@@ -196,7 +197,7 @@ export default () => {
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector />
-          {usersProgrammes.length > 5 &&
+          {usersProgrammes && usersProgrammes.length > 5 &&
             <>
               <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
               <LevelFilter usersProgrammes={usersProgrammes}/>
