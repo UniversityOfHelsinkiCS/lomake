@@ -15,6 +15,7 @@ import CsvDownload from 'Components/Generic/CsvDownload'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
+import { hasTheDeadlinePassed } from 'Utilities/redux/deadlineReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
 import { formViewTranslations as translations } from 'Utilities/translations'
@@ -26,6 +27,8 @@ const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const languageCode = useSelector((state) => state.language)
+  const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
+
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
@@ -44,6 +47,7 @@ const FormView = ({ room }) => {
   })
 
   useEffect(() => {
+    dispatch(hasTheDeadlinePassed())
     dispatch(getProgramme(room))
     setLoadObj({
       loading: true,
@@ -65,10 +69,22 @@ const FormView = ({ room }) => {
 
     if (!programme) return
 
-    if (programme.locked || !userHasWriteAccess || viewingOldAnswers) {
+    if (programme.locked || !userHasWriteAccess || viewingOldAnswers || deadlinePassed) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
-      if (!viewingOldAnswers) dispatch(getTempAnswers(room))
+      if (!viewingOldAnswers && !deadlinePassed) {
+        dispatch(getTempAnswers(room))
+      }
+      if (!viewingOldAnswers && deadlinePassed) {
+        const answersFromSelectedYear = oldAnswers.find(
+          (answer) => answer.programme === programme.key && answer.year === selectedYear
+        ).data
+  
+        dispatch({
+          type: 'SET_OLD_FORM_ANSWERS',
+          answers: answersFromSelectedYear,
+        })
+      }
     } else {
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
