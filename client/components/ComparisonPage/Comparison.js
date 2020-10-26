@@ -191,6 +191,7 @@ const Comparison = ({
                     answers={comparedAnswers(question)}
                     faculty={comparedFaculty ? comparedFaculty.text : ''}
                     programmes={comparedProgrammes ? comparedProgrammes : ''}
+                    name="faculty"
                   />
                 )
               )}
@@ -208,7 +209,7 @@ const Comparison = ({
                       answers={allAnswers.get(question.id)}
                       programmes={usersProgrammes ? usersProgrammes : []}
                       faculty={translations.university[lang]}
-                      university
+                      name="university"
                     />
                   )
                 )}

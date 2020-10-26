@@ -48,7 +48,7 @@ export default () => {
           attributes = [...attributes, {
             "id": `${part.id}_text`,
             "color": `${part.id}_light`,
-            "label": part.label[lang] ? part.label[lang] : '',
+            "label": part.label[lang],
             "title": question.title[lang],
             "titleIndex": titleIndex,
             "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',

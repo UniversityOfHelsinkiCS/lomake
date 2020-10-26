@@ -11,7 +11,7 @@ export default ({
   showEmpty,
   programmes,
   faculty,
-  university
+  name
 }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
@@ -97,15 +97,15 @@ export default ({
         <p>{question.labelIndex} {question.label}</p>
         <p><b>{faculty}</b></p>
         <p><b>
-          {university ? translations['allProgrammes'][lang] : translations[level][lang]}
+          {name === "university" ? translations['allProgrammes'][lang] : translations[level][lang]}
         </b></p>
-        <p data-cy={`comparison-responses-${university}-${question.id}`}>
+        <p data-cy={`comparison-responses-${name}-${question.id}`}>
           <b>{amountOfResponses()}</b>
         </p>
       </div>
       <div
         className="comparison-smiley-pie-chart"
-        data-cy={`comparison-chart-${faculty.slice(0,7)}-${question.id}`}
+        data-cy={`comparison-chart-${name}-${question.id}`}
       >
         {toolTipData &&
           <span
