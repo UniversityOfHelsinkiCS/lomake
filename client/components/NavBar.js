@@ -30,7 +30,7 @@ export default () => {
     },
     comparisonReport: {
       en: 'Compare answers',
-      fi: 'Vastausten vertailu ja kehitys',
+      fi: 'Vastausten vertailu',
       se: 'Compare answers',
     },
     language: {

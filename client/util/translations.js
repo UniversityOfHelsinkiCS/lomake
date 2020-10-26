@@ -1,6 +1,6 @@
 export const comparisonPageTranslations = {
   comparisonPage: {
-    fi: 'Vastausten vertailu ja kehitys',
+    fi: 'Vastausten vertailu',
     en: 'Compare answers',
     se: 'Compare answers',
   },
