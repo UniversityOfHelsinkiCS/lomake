@@ -23,7 +23,8 @@ export default () => {
   const year = useSelector((state) => state.form.selectedYear)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = answersByYear(year, answers, oldAnswers)
+  const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
+  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
   const faculties = facultiesWithKeys(facultiesData)
 
   useEffect(() => {

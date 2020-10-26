@@ -17,6 +17,7 @@ const CsvDownload =
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const programmeData = useSelector(({ form }) => form.data)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
+  const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
 
 
   const usersProgrammes = useMemo(() => {
@@ -144,7 +145,7 @@ const CsvDownload =
 
     } else if (view == "overview") {
 
-      const selectedAnswers = answersByYear(year, answers, oldAnswers)
+      const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
 
       if (!selectedAnswers) return [[],[]]
 

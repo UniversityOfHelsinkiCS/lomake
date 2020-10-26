@@ -147,8 +147,20 @@ export const getMeasuresAnswer = (data) => {
   return null
 }
 
-export const answersByYear = (year, answers, oldAnswers) => {
-  return (oldAnswers && oldAnswers.data) ? oldAnswers.data.filter((a) => a.year === year) : []
+export const answersByYear = (year, answers, oldAnswers, deadlinePassed) => {
+  if (year < new Date().getFullYear() && oldAnswers && oldAnswers.data) {
+    return oldAnswers.data.filter((a) => a.year === year)
+  }
+  if (!deadlinePassed && answers) {
+    return answers.data
+  }
+  if (!deadlinePassed && !answers && oldAnswers && oldAnswers.data) {
+    return oldAnswers.data.filter((a) => a.year === year)
+  }
+  if (deadlinePassed && oldAnswers && oldAnswers.data) {
+    return oldAnswers.data.filter((a) => a.year === year)
+  }
+  return []
 }
 
 //https://stackoverflow.com/a/9083076
