@@ -1,9 +1,4 @@
-$black: #1B1C1D;
-$white: #FFFFFF;
-$gray: #747474;
-$background-red: #F37778;
-$background-yellow: #F9D03B;
-$background-green: #1DB954;
+@import 'Assets/colors.scss';
 
 .comparison-page {
   &-tab {

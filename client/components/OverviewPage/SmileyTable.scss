@@ -1,9 +1,5 @@
 $QUESTION_COUNT: 19;
-
-$background-red: #ff7f7f;
-$background-yellow: #ffffb1;
-$background-green: #9dff9d;
-$background-white: #FFFFFF;
+@import 'Assets/colors';
 
 .smiley-grid {
   display: grid;
@@ -31,21 +27,21 @@ $background-white: #FFFFFF;
 
   &-red {
     @include square-basics;
-    background-color: $background-red;
+    background-color: $light-red;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-yellow {
     @include square-basics;
-    background-color: $background-yellow;
+    background-color: $light-yellow;
     &:hover {
       filter: brightness(0.8);
     }
   }
   &-green {
     @include square-basics();
-    background-color: $background-green;
+    background-color: $light-green;
     &:hover {
       filter: brightness(0.8);
     }

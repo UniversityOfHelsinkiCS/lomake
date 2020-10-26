@@ -1,5 +1,4 @@
-$background-white: #FFFFFF;
-$dimmer-dark: rgba(0, 0, 0, 0.75);
+@import 'Assets/colors.scss';
 
 .customModal-dimmer {
   position: fixed;

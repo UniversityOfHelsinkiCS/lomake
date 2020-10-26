@@ -1,11 +1,4 @@
-$black: #1B1C1D;
-$blue: #0E6EB8;
-$white: #FFFFFF;
-$dark_gray: #4e4c4c;
-$gray: #747474;
-$background-red: #F37778;
-$background-yellow: #F9D03B;
-$background-green: #1DB954;
+@import 'Assets/colors.scss';
 
 .report-page {
   &-tab {
@@ -128,7 +121,7 @@ $background-green: #1DB954;
   }
   &-description {
     font-style: italic;
-    color: $dark_gray;
+    color: $dark-gray;
     font-weight: 300;
     margin-top: 1em;
   }
