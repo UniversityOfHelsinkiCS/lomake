@@ -37,8 +37,8 @@ export default () => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
-  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
+  const deadline = useSelector((state) => state.deadlines.nextDeadline)
+  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
   const faculties = facultiesWithKeys(facultiesData)
 
 

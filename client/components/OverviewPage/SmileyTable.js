@@ -41,8 +41,8 @@ const SmileyTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
-    const selectedAnswers = answersByYear(selectedYear, answers, oldAnswers, deadlinePassed)
+    const deadline = useSelector((state) => state.deadlines.nextDeadline)
+    const selectedAnswers = answersByYear(selectedYear, answers, oldAnswers, deadline)
 
     const lastYearsAnswers =
       oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1) && showProgress

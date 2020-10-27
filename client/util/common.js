@@ -147,19 +147,24 @@ export const getMeasuresAnswer = (data) => {
   return null
 }
 
-export const answersByYear = (year, answers, oldAnswers, deadlinePassed) => {
+export const answersByYear = (year, tempAnswers, oldAnswers, deadline) => {
+  // if viewing past years' answers
   if (year < new Date().getFullYear() && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter((a) => a.year === year)
   }
-  if (!deadlinePassed && answers) {
-    return answers.data
-  }
-  if (!deadlinePassed && !answers && oldAnswers && oldAnswers.data) {
+  // if the form is not open, and the cronjob has already moved everything to oldAnswers
+  if (!deadline && oldAnswers && oldAnswers.data && oldAnswers.years.includes(year)) {
     return oldAnswers.data.filter((a) => a.year === year)
   }
-  if (deadlinePassed && oldAnswers && oldAnswers.data) {
+  // if there is a deadline (the form is open) and tempAnswers exist
+  if (deadline && tempAnswers) {
+    return tempAnswers.data
+  }
+  // if there is no deadline and no tempAnswers, choose oldAnswers instead
+  if (!deadline && !tempAnswers && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter((a) => a.year === year)
   }
+
   return []
 }
 
