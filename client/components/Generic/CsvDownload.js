@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { answersByYear, programmeNameByKey as programmeName } from 'Utilities/common'
@@ -7,9 +7,8 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 
 
-const CsvDownload =
-  ({ wantedData, view, programme }) => {
-  const languageCode = useSelector((state) => state.language)
+const CsvDownload = ({ wantedData, view, programme }) => {
+  const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
@@ -17,8 +16,8 @@ const CsvDownload =
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const programmeData = useSelector(({ form }) => form.data)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
-  const deadlinePassed = useSelector((state) => state.deadlines.hasTheDeadlinePassed)
-
+  const deadline = useSelector((state) => state.deadlines.nextDeadline)
+  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
@@ -27,7 +26,7 @@ const CsvDownload =
       : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser.data])
   
-  const handleData = (answers, oldAnswers, year, programmeData) => {
+  const handleData = () => {
 
     // Create an array of arrays, with questions at index 0, and question_ids at index 1
     let csvData = questions.reduce(
@@ -36,8 +35,8 @@ const CsvDownload =
           (acc, cur) => {
             if (cur.type === 'TITLE') return acc
             const questionText = cur.label
-              ? cur.label[languageCode]
-              : cur.title[languageCode]
+              ? cur.label[lang]
+              : cur.title[lang]
             const questionId = cur.id
             return [
               [questionText, ...acc[0]],
@@ -53,8 +52,8 @@ const CsvDownload =
       },
       [[], []]
     )
-    csvData[0].push(translations.faculty[languageCode])
-    csvData[0].push(translations.programmeHeader[languageCode])
+    csvData[0].push(translations.faculty[lang])
+    csvData[0].push(translations.programmeHeader[lang])
     csvData[1].push("//")
     csvData[1].push("//")
     csvData[0].reverse()
@@ -121,10 +120,8 @@ const CsvDownload =
 
     const getSmileyAnswers = (rawData) => {
       const answerArray = csvData[1].slice(2).map((questionId) => {
-        const smileyText = rawData[`${questionId}_light`]
-        if (smileyText == 'green') return translations.green[languageCode]
-        if (smileyText == 'yellow') return translations.yellow[languageCode]
-        if (smileyText == 'red') return translations.red[languageCode]
+        const color = rawData[`${questionId}_light`]
+        if (color) return translations[color][lang]
         return ''
       })
 
@@ -138,14 +135,12 @@ const CsvDownload =
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
       else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)
 
-      const name = programmeName(null, programme, languageCode)
+      const name = programmeName(null, programme, lang)
       const faculty = faculties.get(programme.key)
       const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]
 
     } else if (view == "overview") {
-
-      const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
 
       if (!selectedAnswers) return [[],[]]
 
@@ -154,7 +149,7 @@ const CsvDownload =
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
         else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
 
-        const name = programmeName(usersProgrammes, programme, languageCode)
+        const name = programmeName(usersProgrammes, programme, lang)
         const faculty = faculties.get(programme.programme)
         const dataRow = [name, faculty, ...answersArray]
         csvData = [...csvData, dataRow]
@@ -164,13 +159,15 @@ const CsvDownload =
     return csvData
   }
 
+  const data = handleData()
+
   return (
     <CSVLink
-      filename={`${year}_${translations.csvFile[view][wantedData][languageCode]}_.csv`} 
-      data={handleData(answers, oldAnswers, year, programmeData)} 
+      filename={`${year}_${translations.csvFile[view][wantedData][lang]}_.csv`} 
+      data={data}
       separator=","
     >        
-      {translations.csvLink[wantedData][languageCode]}
+      {translations.csvLink[wantedData][lang]}
     </CSVLink>
   )
 }
