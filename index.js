@@ -10,28 +10,10 @@ const logger = require('@util/logger')
 
 const { initializeDatabaseConnection } = require('@root/server/database/connection')
 
-const { resetAllTokens } = require('@root/server/scripts/resetAllTokens')
-const { resetStudyprogrammes } = require('@root/server/scripts/resetStudyprogrammes')
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
-const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
-const { fixProgrammeKeys } = require('@root/server/scripts/fixProgrammeKeys')
-const { initFaculties } = require('@root/server/scripts/initFaculties')
+const { seed } = require('@root/server/scripts/seed')
 
-/**
- * Creates studyprogrammes, faculties and accesstokens.
- * Should only be executed once.
- */
-const seedDatabase = async () => {
-  logger.warn('Starting to seed database')
-  try {
-    await resetStudyprogrammes()
-    await initFaculties()
-    await resetAllTokens()
-  } catch (e) {
-    logger.error('Database seeding failed', e)
-  }
-}
 
 initializeDatabaseConnection()
   .then(() => {
@@ -39,19 +21,7 @@ initializeDatabaseConnection()
     if (process.argv[2]) {
       switch (process.argv[2]) {
         case 'seed':
-          seedDatabase().then(() => logger.warn('Database seeding completed.'))
-          return
-        case 'reset_tokens':
-          resetAllTokens().then(() => logger.info('Token reset done.'))
-          return
-        case 'reset_studyprogrammes':
-          resetStudyprogrammes().then(() => logger.info('Studyprogram reset done.'))
-          return
-        case 'fix_programmes':
-          fixProgrammeKeys()
-          return
-        case 'create_faculties':
-          initFaculties().then(() => logger.info('Faculties created.'))
+          seed()
           return
         default:
           return
@@ -59,7 +29,7 @@ initializeDatabaseConnection()
     }
 
     // Scripts that will run if env variable TESTING=true (in GitHub actions).
-    if (process.env.TESTING) seedDatabase()
+    if (process.env.TESTING) seed()
 
     const app = express()
     const server = require('http').Server(app)
