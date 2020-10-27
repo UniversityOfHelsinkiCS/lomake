@@ -8,7 +8,7 @@ const ProgrammeFilter = ({ onEmpty, handleChange, filter, lang }) => (
   <div className="programme-filter">
     <label>{translations.programmeFilter[lang]}</label>
     <Input
-      data-cy="overviewpage-filter"
+      data-cy="programme-filter"
       name="filter"
       className="programme-filter-input"
       icon="search"
