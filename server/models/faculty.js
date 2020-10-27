@@ -4,13 +4,27 @@ module.exports = (sequelize, DataTypes) => {
     {
       code: DataTypes.STRING,
       name: DataTypes.STRING,
-      programmes: DataTypes.JSONB,
     },
     {
       underscored: true,
       tableName: 'faculties',
     }
   )
+
+  faculty.associate = function (models) {
+    // companionStudyprogrammes indicate that this faculty is working in colloboration with the programme,
+    // but is not its owner. aka. "kumppanuusohjelma"
+    faculty.belongsToMany(models.studyprogramme, {
+      through: 'companionFaculty',
+      foreignKey: 'facultyId',
+      as: 'companionStudyprogrammes',
+    }),
+    // ownedProgrammes are owned by the faculty. "vastuutiedekunta"
+    faculty.hasMany(models.studyprogramme, {
+      as : "ownedProgrammes",
+      foreignKey:"primaryFacultyId"
+    })
+  }
 
   return faculty
 }

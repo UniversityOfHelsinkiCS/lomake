@@ -171,6 +171,8 @@ const createTestProgramme = async () => {
 
     await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
 
+    const matluId = (await db.faculty.findOne({where: {code: "H50"}})).id
+
     await db.studyprogramme.create({
       key: testProgrammeName,
       name: {
@@ -180,6 +182,7 @@ const createTestProgramme = async () => {
       },
       locked: false,
       claimed: false,
+      primaryFacultyId: matluId
     })
   } catch (error) {
     logger.error(`Database error: ${error}`)

@@ -3,7 +3,11 @@ const logger = require('@util/logger')
 
 const getAll = async (req, res) => {
   try {
-    const data = await db.faculty.findAll({})
+    const data = await db.faculty.findAll({
+      include:["ownedProgrammes","companionStudyprogrammes"],
+      order:[["code","ASC"]]
+    })
+
     res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
