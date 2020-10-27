@@ -11,7 +11,6 @@ import SmileyTableCell from './SmileyTableCell'
 import { PieChart } from 'react-minimal-pie-chart'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-
 const replaceTitle = {
   successes_and_development_needs: 'successes_and_needs',
   review_of_last_years_situation_report: 'review_of_last_year',
@@ -135,33 +134,6 @@ const SmileyTable = React.memo(
         />
       </div>
     )
-
-    const ClaimedIcon = ({ programme }) => {
-      if (!currentUser.admin) return null
-
-      if (programme.claimed) {
-        return (
-          <Icon
-            data-cy={`${programme.key}-claimed`}
-            title={
-              programmeOwners
-                ? programmeOwners[programme.key]
-                : translations['programmeClaimed'][languageCode]
-            }
-            name="thumbs up"
-            size="large"
-          />
-        )
-      }
-      return (
-        <Icon
-          data-cy={`${programme.key}-notClaimed`}
-          title={translations['programmeNotClaimed'][languageCode]}
-          name="exclamation"
-          size="large"
-        />
-      )
-    }
 
     const LockedIcon = ({ programme }) => {
       return hasManagementAccess(programme.key) ? (
@@ -305,10 +277,7 @@ const SmileyTable = React.memo(
                   showProgress={showProgress}
                 />
               ))}
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <ClaimedIcon programme={p} />
-                {!p.locked ? null : <LockedIcon programme={p} />}
-              </div>
+              {!p.locked ? <div /> : <LockedIcon programme={p} />}
               {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
             </React.Fragment>
           )

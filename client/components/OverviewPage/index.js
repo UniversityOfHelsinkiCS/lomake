@@ -13,13 +13,10 @@ import useDebounce from 'Utilities/useDebounce'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 import './OverviewPage.scss'
 
-
-
 export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const [modalData, setModalData] = useState(null)
-  const [showUnclaimedOnly, setShowUnclaimedOnly] = useState(false)
   const [showProgressFromLastYear, setShowProgressFromLastYear] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
@@ -47,11 +44,10 @@ export default () => {
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter((prog) => {
-      if (showUnclaimedOnly && prog.claimed) return
       const searchTarget = prog.name[languageCode] || prog.name['en']
       return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
-  }, [usersProgrammes, showUnclaimedOnly, languageCode, debouncedFilter])
+  }, [usersProgrammes, languageCode, debouncedFilter])
 
   return (
     <>
@@ -135,23 +131,14 @@ export default () => {
                   value={filter}
                 />
 
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <Radio
-                    style={{ margin: '1rem' }}
-                    data-cy="overviewpage-showprogress"
-                    checked={showProgressFromLastYear}
-                    onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
-                    label={translations['showProgressFromLastYear'][languageCode]}
-                    toggle
-                  />
-                  <Radio
-                    style={{ margin: '1rem' }}
-                    checked={showUnclaimedOnly}
-                    onChange={() => setShowUnclaimedOnly(!showUnclaimedOnly)}
-                    label={translations['showUnclaimedOnly'][languageCode]}
-                    toggle
-                  />
-                </div>
+                <Radio
+                  style={{ margin: '1rem' }}
+                  data-cy="overviewpage-showprogress"
+                  checked={showProgressFromLastYear}
+                  onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
+                  label={translations['showProgressFromLastYear'][languageCode]}
+                  toggle
+                />
               </div>
             )}
             <SmileyTable
