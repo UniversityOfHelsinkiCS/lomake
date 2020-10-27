@@ -165,18 +165,19 @@ const claimFacultyToken = async (req, res) => {
       where: {
         code: token.faculty,
       },
+      include:["ownedProgrammes"],
     })
 
     // Special type of token, where read permissions are given only for doctor-programmes:
     const doctorOnly = token.type === 'READ_DOCTOR'
-    for (const programCode of faculty.programmes) {
+    for (const {key} of faculty.ownedProgrammes) {
       if (doctorOnly) {
-        if (programCode[0] !== 'T') continue
+        if (key[0] !== 'T') continue
       }
 
       req.user.access = {
         ...req.user.access,
-        [programCode]: { ...req.user.access[programCode], read: true },
+        [key]: { ...req.user.access[key], read: true },
       }
     }
 

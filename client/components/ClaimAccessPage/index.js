@@ -87,14 +87,14 @@ export default ({ url }) => {
   if (!token.data || !faculties) return <Loader active inline />
 
   const getProgrammeNames = (onlyDoctorProgrammes = false) => {
-    let programmeCodes = faculties.find((f) => f.code === token.data.faculty).programmes
+    let ownedProgrammes = faculties.find((f) => f.code === token.data.faculty).ownedProgrammes
 
     if (onlyDoctorProgrammes) {
-      programmeCodes = programmeCodes.filter((code) => code[0] === 'T')
+      ownedProgrammes = ownedProgrammes.filter(({key}) => key[0] === 'T')
     }
 
-    const localizedProgrammeCodes = programmeCodes.map((pCode) => {
-      const prog = studyProgrammes.find((p) => p.key === pCode)
+    const localizedProgrammeCodes = ownedProgrammes.map(({key}) => {
+      const prog = studyProgrammes.find((p) => p.key === key)
       return prog.name[languageCode]
     })
 
