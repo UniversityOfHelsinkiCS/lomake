@@ -35,6 +35,7 @@ export default function YearSelector() {
 
   return (
     <Select
+      className="button basic gray"
       disabled={yearOptions.length <= 1}
       data-cy="yearSelector"
       name="year"
