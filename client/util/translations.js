@@ -467,9 +467,9 @@ export const overviewPageTranslations = {
     se: '',
   },
   csvDownload: {
-    fi: 'Lataa vastaukset CSV-tiedostona',
-    en: 'Download all data as a CSV file',
-    se: 'Ladda ner svaren i en CSV-fil',
+    fi: 'Lataa CSV',
+    en: 'Download CSV',
+    se: 'Ladda CSV',
   },
   filter: {
     fi: 'Etsi koulutusohjelmia',

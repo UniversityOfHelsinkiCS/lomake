@@ -7,7 +7,6 @@ import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 
 export default () => {
-  const [activeItem, setActiveItem] = useState('currentLomake')
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
   const languageCode = useSelector((state) => state.language)
@@ -22,16 +21,6 @@ export default () => {
       en: 'OSPA',
       fi: 'OSPA',
       se: 'OSPA',
-    },
-    answersReport: {
-      en: 'Answers by the year',
-      fi: 'Vastaukset vuosittain',
-      se: 'Svar',
-    },
-    comparisonReport: {
-      en: 'Compare answers',
-      fi: 'Vastausten vertailu',
-      se: 'Compare answers',
     },
     language: {
       en: 'English',
@@ -58,8 +47,6 @@ export default () => {
     dispatch(logoutAction())
   }
 
-  const handleItemClick = (e, { name }) => setActiveItem(name)
-
   const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
     window.location.reload()
@@ -77,23 +64,10 @@ export default () => {
 
   const GoToAdminPageButton = () => {
     return (
-      <Menu.Item
-        data-cy="nav-admin"
-        as={Link}
-        to={'/admin'}
-        name="adminControls"
-        // active={activeItem === 'adminControls'}
-        onClick={handleItemClick}
-      >
+      <Menu.Item data-cy="nav-admin" as={Link} to={'/admin'} name="adminControls">
         {translations.adminPage[languageCode]}
       </Menu.Item>
     )
-  }
-
-  const moreThanFiveProgrammes = () => {
-    if (user.admin) return true
-    if (user.access && Object.keys(user.access).length > 5) return true
-    return false
   }
 
   if (!user) return null
@@ -102,26 +76,6 @@ export default () => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
-      <Menu.Item
-        data-cy="nav-report"
-        as={Link}
-        to={'/report'}
-        name="reportControls"
-        onClick={handleItemClick}
-      >
-        {translations.answersReport[languageCode]}
-      </Menu.Item>
-      {moreThanFiveProgrammes() &&
-        <Menu.Item
-          data-cy="nav-comparison"
-          as={Link}
-          to={'/comparison'}
-          name="comparisonControls"
-          onClick={handleItemClick}
-        >
-          {translations.comparisonReport[languageCode]}
-        </Menu.Item>    
-      }
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

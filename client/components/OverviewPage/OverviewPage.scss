@@ -1,8 +1,8 @@
 .wide-header {
-  width: 97%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  align-items: center;
+  column-gap: 2rem;
   margin: 2rem 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }

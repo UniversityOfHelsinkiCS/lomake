@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Input, Radio } from 'semantic-ui-react'
+import { Dropdown, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import ProgramControlsContent from './ProgramControlsContent'
 import SmileyTable from './SmileyTable'
@@ -17,7 +18,6 @@ export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const [modalData, setModalData] = useState(null)
-  const [showProgressFromLastYear, setShowProgressFromLastYear] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
@@ -93,6 +93,12 @@ export default () => {
         <>
           <div className="wide-header">
             <YearSelector />
+            <Button as={Link} to="/report" secondary size="big">
+              Lue vastauksia
+            </Button>
+            <Button as={Link} to="/comparison" size="big">
+              Vertaile vastauksia
+            </Button>
             <Dropdown
               className="button basic gray"
               direction="left"
@@ -112,25 +118,6 @@ export default () => {
             </Dropdown>
           </div>
           <div style={{ marginTop: '1em' }}>
-            {/*usersProgrammes.length > 10 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  margin: '0em 0em 1em 0em',
-                  alignItems: 'center',
-                }}
-              >
-                <Radio
-                  style={{ margin: '1rem' }}
-                  data-cy="overviewpage-showprogress"
-                  checked={showProgressFromLastYear}
-                  onChange={() => setShowProgressFromLastYear(!showProgressFromLastYear)}
-                  label={translations['showProgressFromLastYear'][languageCode]}
-                  toggle
-                />
-              </div>
-            )*/}
             <SmileyTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
