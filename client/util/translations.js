@@ -471,6 +471,16 @@ export const overviewPageTranslations = {
     en: 'Download CSV',
     se: 'Ladda CSV',
   },
+  readAnswersButton: {
+    fi: 'Lue vastauksia',
+    en: 'Read answers',
+    se: '',
+  },
+  compareAnswersButton: {
+    fi: 'Vertaile vastauksia',
+    en: 'Compare answers',
+    se: '',
+  },
   filter: {
     fi: 'Etsi koulutusohjelmia',
     en: 'Search for study programmes',

@@ -177,13 +177,14 @@ const SmileyTable = React.memo(
 
     return (
       <div className="smiley-grid">
-        <div
-          className="sticky-header"
-          style={{ fontWeight: 'bold', cursor: 'pointer' }}
-          onClick={() => setReverse(!reverse)}
-        >
-          {translations.programmeHeader[languageCode]}
-          <Icon name="sort" />
+        <div className="sticky-header">
+          <div
+            style={{ fontWeight: 'bold', cursor: 'pointer' }}
+            onClick={() => setReverse(!reverse)}
+          >
+            {translations.programmeHeader[languageCode]}
+            <Icon name="sort" />
+          </div>
         </div>
         {tableIds.map((idObject) => (
           <div
@@ -201,7 +202,7 @@ const SmileyTable = React.memo(
         <div className="sticky-header" />
         {renderStatsRow && (
           <>
-            <div className="sticky-header">
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <Input
                 data-cy="overviewpage-filter"
                 size="small"

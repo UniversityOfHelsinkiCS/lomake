@@ -30,7 +30,7 @@ export default () => {
     document.title = `${translations['overviewPage'][languageCode]}`
   }, [languageCode])
 
-  const handleChange = ({ target }) => {
+  const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)
   }
@@ -94,10 +94,10 @@ export default () => {
           <div className="wide-header">
             <YearSelector />
             <Button as={Link} to="/report" secondary size="big">
-              Lue vastauksia
+              {translations.readAnswersButton[languageCode]}
             </Button>
             <Button as={Link} to="/comparison" size="big">
-              Vertaile vastauksia
+              {translations.compareAnswersButton[languageCode]}
             </Button>
             <Dropdown
               className="button basic gray"
@@ -124,7 +124,7 @@ export default () => {
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
               isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleChange}
+              handleFilterChange={handleFilterChange}
               filterValue={filter}
             />
           </div>
