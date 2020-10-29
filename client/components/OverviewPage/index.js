@@ -137,7 +137,6 @@ export default () => {
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
               isBeingFiltered={debouncedFilter !== ''}
-              showProgress={showProgressFromLastYear}
               handleFilterChange={handleChange}
               filterValue={filter}
             />

@@ -25,7 +25,6 @@ const SmileyTable = React.memo(
     setProgramControlsToShow,
     setStatsToShow,
     isBeingFiltered,
-    showProgress,
     filterValue,
     handleFilterChange,
   }) => {
@@ -47,7 +46,7 @@ const SmileyTable = React.memo(
     const selectedAnswers = answersByYear(selectedYear, answers, oldAnswers, deadline)
 
     const lastYearsAnswers =
-      oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1) && showProgress
+      oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1)
         ? oldAnswers.data.filter((a) => a.year === selectedYear - 1)
         : null
 
@@ -292,7 +291,6 @@ const SmileyTable = React.memo(
                   questionId={idObject.id}
                   questionType={idObject.type}
                   setModalData={setModalData}
-                  showProgress={showProgress}
                 />
               ))}
               {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}

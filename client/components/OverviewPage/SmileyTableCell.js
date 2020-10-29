@@ -24,7 +24,6 @@ const SmileyTableCell = ({
   questionType,
   setModalData,
   programmesOldAnswers,
-  showProgress,
 }) => {
   const languageCode = useSelector((state) => state.language)
 
@@ -67,18 +66,17 @@ const SmileyTableCell = ({
 
   if (lightAnswer) {
     const getIconAndColor = () => {
-      if (!programmesOldAnswers)
-        return showProgress ? ['minus', lightAnswer] : [lightEmojiMap[lightAnswer], lightAnswer]
+      if (!programmesOldAnswers) return [null, lightAnswer]
 
       const oldLightAnswer = programmesOldAnswers[lightId]
-      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return ['minus', lightAnswer]
+      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return [null, lightAnswer]
 
       const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
 
       if (difference > 0) return ['angle up', 'green']
       if (difference < 0) return ['angle down', 'red']
 
-      return ['minus', lightAnswer]
+      return [null, lightAnswer]
     }
 
     const [icon, color] = getIconAndColor()
@@ -109,7 +107,7 @@ const SmileyTableCell = ({
           })
         }
       >
-        <Icon name={icon} style={{ margin: '0 auto' }} size="big" />
+        {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
       </div>
     )
   }
@@ -147,7 +145,7 @@ const SmileyTableCell = ({
         {questionId === 'measures' ? (
           <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{getMeasuresCount()}</span>
         ) : (
-          <Icon name="discussions" size="big" />
+          <Icon name="discussions" size="large" />
         )}
       </div>
     )
