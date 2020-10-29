@@ -92,6 +92,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className="wide-header">
+            <YearSelector />
             <Dropdown
               className="button basic gray"
               direction="left"
@@ -110,9 +111,8 @@ export default () => {
               ) : null}
             </Dropdown>
           </div>
-          <YearSelector />
           <div style={{ marginTop: '1em' }}>
-            {usersProgrammes.length > 10 && (
+            {/*usersProgrammes.length > 10 && (
               <div
                 style={{
                   display: 'flex',
@@ -121,16 +121,6 @@ export default () => {
                   alignItems: 'center',
                 }}
               >
-                <Input
-                  style={{ width: '280px', marginBottom: '15px' }}
-                  data-cy="overviewpage-filter"
-                  name="filter"
-                  icon="search"
-                  placeholder={translations.filter[languageCode]}
-                  onChange={handleChange}
-                  value={filter}
-                />
-
                 <Radio
                   style={{ margin: '1rem' }}
                   data-cy="overviewpage-showprogress"
@@ -140,7 +130,7 @@ export default () => {
                   toggle
                 />
               </div>
-            )}
+            )*/}
             <SmileyTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
@@ -148,6 +138,8 @@ export default () => {
               setStatsToShow={setStatsToShow}
               isBeingFiltered={debouncedFilter !== ''}
               showProgress={showProgressFromLastYear}
+              handleFilterChange={handleChange}
+              filterValue={filter}
             />
           </div>
         </>

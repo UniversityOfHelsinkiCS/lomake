@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button, Header, Icon, Loader } from 'semantic-ui-react'
+import { Button, Header, Icon, Loader, Input } from 'semantic-ui-react'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -16,6 +16,8 @@ const replaceTitle = {
   review_of_last_years_situation_report: 'review_of_last_year',
 }
 
+const SORTER = 'name'
+
 const SmileyTable = React.memo(
   ({
     setModalData,
@@ -24,6 +26,8 @@ const SmileyTable = React.memo(
     setStatsToShow,
     isBeingFiltered,
     showProgress,
+    filterValue,
+    handleFilterChange,
   }) => {
     const dispatch = useDispatch()
     const answers = useSelector((state) => state.tempAnswers)
@@ -33,7 +37,6 @@ const SmileyTable = React.memo(
     const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
     const selectedYear = useSelector((state) => state.form.selectedYear)
     const [reverse, setReverse] = useState(false)
-    const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
@@ -48,7 +51,7 @@ const SmileyTable = React.memo(
         ? oldAnswers.data.filter((a) => a.year === selectedYear - 1)
         : null
 
-    let sortedProgrammes = sortedItems(filteredProgrammes, sorter, languageCode)
+    let sortedProgrammes = sortedItems(filteredProgrammes, SORTER, languageCode)
 
     if (reverse) sortedProgrammes.reverse()
 
@@ -74,8 +77,9 @@ const SmileyTable = React.memo(
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
 
-    const renderStatsRow =
-      sortedProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
+    // const renderStatsRow =
+    //   sortedProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
+    const renderStatsRow = true
 
     const transformIdToTitle = (id, vertical = true) => {
       const idToUse = replaceTitle[id] || id
@@ -174,7 +178,14 @@ const SmileyTable = React.memo(
 
     return (
       <div className="smiley-grid">
-        <div className="sticky-header" />
+        <div
+          className="sticky-header"
+          style={{ fontWeight: 'bold', cursor: 'pointer' }}
+          onClick={() => setReverse(!reverse)}
+        >
+          {translations.programmeHeader[languageCode]}
+          <Icon name="sort" />
+        </div>
         {tableIds.map((idObject) => (
           <div
             key={idObject.id}
@@ -189,16 +200,17 @@ const SmileyTable = React.memo(
           </div>
         ))}
         <div className="sticky-header" />
-        <div className="sticky-header" />
         {renderStatsRow && (
           <>
-            <div
-              className="sticky-header"
-              style={{ fontWeight: 'bold', cursor: 'pointer' }}
-              onClick={() => setReverse(!reverse)}
-            >
-              {translations.programmeHeader[languageCode]}
-              {<Icon name="sort" />}
+            <div className="sticky-header">
+              <Input
+                data-cy="overviewpage-filter"
+                size="small"
+                icon="filter"
+                placeholder={translations.filter[languageCode]}
+                onChange={handleFilterChange}
+                value={filterValue}
+              />
             </div>
             {tableIds.map((idObject) =>
               stats.hasOwnProperty(idObject.id) ? (
@@ -246,7 +258,6 @@ const SmileyTable = React.memo(
               )
             )}
             <div className="sticky-header" />
-            <div className="sticky-header" />
           </>
         )}
         {sortedProgrammes.map((p) => {
@@ -258,9 +269,16 @@ const SmileyTable = React.memo(
           return (
             <React.Fragment key={p.key}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
-                  {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
-                </Link>
+                {p.locked ? (
+                  <div style={{ fontWeight: 'bold' }}>
+                    <Icon name="lock" />{' '}
+                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                  </div>
+                ) : (
+                  <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
+                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                  </Link>
+                )}
               </div>
               {tableIds.map((idObject) => (
                 <SmileyTableCell
@@ -277,7 +295,6 @@ const SmileyTable = React.memo(
                   showProgress={showProgress}
                 />
               ))}
-              {!p.locked ? <div /> : <LockedIcon programme={p} />}
               {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
             </React.Fragment>
           )
