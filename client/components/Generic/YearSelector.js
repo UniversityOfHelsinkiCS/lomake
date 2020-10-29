@@ -7,7 +7,6 @@ import './Filters.scss'
 export default function YearSelector() {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
   const selectedYear = useSelector((state) => state.form.selectedYear)
-  const languageCode = useSelector((state) => state.language)
   const [yearOptions, setYearOptions] = useState([])
 
   const dispatch = useDispatch()
@@ -16,7 +15,7 @@ export default function YearSelector() {
     if (!previousYearsWithAnswers) return
     const currentYear = new Date().getFullYear()
     let temp = previousYearsWithAnswers
-    if (!temp.includes(currentYear)) temp.push(currentYear)
+    if (!temp.includes(currentYear)) temp.unshift(currentYear)
     const options = temp.map((y) => {
       return {
         key: y,
@@ -27,7 +26,7 @@ export default function YearSelector() {
     setYearOptions(options)
   }, [previousYearsWithAnswers])
 
-  const handleYearChange = (e, { value }) => {
+  const handleYearChange = (_, { value }) => {
     dispatch(setSelectedYear(value))
   }
 
