@@ -29,10 +29,6 @@ describe('Link tests', function () {
     cy.get('[data-cy=read-cypressUser]').should('have.class', 'check')
     cy.get('[data-cy=write-cypressUser]').should('have.class', 'check')
     cy.get('[data-cy=admin-cypressUser]').should('have.class', 'check')
-
-    cy.login('cypressAdminUser')
-    cy.reload()
-    cy.get(`[data-cy=${testProgrammeName}-claimed]`)
   })
 
   it("Can't use admin link more than once", function () {

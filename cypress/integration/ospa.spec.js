@@ -69,8 +69,6 @@ describe('OSPA user tests', function () {
 
     cy.visit('/')
 
-    cy.get('i').should('have.class', 'smile outline big icon')
-    cy.get('[data-cy=overviewpage-showprogress] > label').click()
-    cy.get('i').should('have.class', 'minus big icon')
+    cy.get('[data-cy=TOSKA101-community_wellbeing]').should('have.class', 'square-green')
   })
 })

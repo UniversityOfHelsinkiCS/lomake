@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-
 import { testProgrammeName } from '../../config/common'
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
@@ -21,11 +20,8 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=programme-filter]').click()
     cy.get('span').contains('TOSKA-en').click()
     cy.get('[data-cy=comparison-chart-review_of_last_years_situation_report_text')
-    cy.get('path')
-      .should('have.css', 'stroke')
-      .and('eq', 'rgb(249, 208, 59)')
+    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(249, 208, 59)')
   })
-
 
   it('Admin should be able to see all the programmes on the comparison page', function () {
     cy.login(adminUser)
@@ -74,11 +70,15 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
-    cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger('mouseover', 200, 200)
+    cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger(
+      'mouseover',
+      200,
+      200
+    )
     cy.get('[data-cy=comparison-tip-programme_identity_text]').should('contain', 'Changing')
   })
 
-  it('Admin should be able to see answers from previous years', function() {
+  it('Admin should be able to see answers from previous years', function () {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -91,14 +91,6 @@ describe('ComparisonPage tests', function () {
     })
 
     cy.get('[data-cy=comparison-chart-faculty-employability_text')
-    cy.get('path')
-      .should('have.css', 'stroke')
-      .and('eq', 'rgb(29, 185, 84)')
-  })
-
-  it('User should not be able to see the comparison page if they have rights for only one programme', function () {
-    cy.login(user)
-    cy.visit('/comparison')
-    cy.get('[data-cy=smileytable-link-to-TOSKA101]')
+    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(29, 185, 84)')
   })
 })

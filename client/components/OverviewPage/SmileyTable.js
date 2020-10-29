@@ -270,7 +270,7 @@ const SmileyTable = React.memo(
             <React.Fragment key={p.key}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {p.locked ? (
-                  <div style={{ fontWeight: 'bold' }}>
+                  <div data-cy={`smileytable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
                     <Icon name="lock" />{' '}
                     {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
                   </div>

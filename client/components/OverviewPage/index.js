@@ -93,10 +93,10 @@ export default () => {
         <>
           <div className="wide-header">
             <YearSelector />
-            <Button as={Link} to="/report" secondary size="big">
+            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
               {translations.readAnswersButton[languageCode]}
             </Button>
-            <Button as={Link} to="/comparison" size="big">
+            <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
               {translations.compareAnswersButton[languageCode]}
             </Button>
             <Dropdown
