@@ -44,7 +44,8 @@ describe("Previous year's answers", function () {
     cy.get('.customModal-content').contains('Hello from 2018')
   })
 
-  it('Can view old answers in Form-page and switch back to editMode to continue working.', function () {
+  // FIXME: flaky
+  it.skip('Can view old answers in Form-page and switch back to editMode to continue working.', function () {
     cy.request('/api/cypress/createAnswers')
     cy.visit(`/form/${testProgrammeName}`)
 
