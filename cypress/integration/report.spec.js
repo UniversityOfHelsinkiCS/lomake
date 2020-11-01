@@ -13,6 +13,7 @@ describe('ReportPage tests', function () {
   it('Piecharts are not shown if there are no answers', function () {
     cy.login(user)
     cy.visit('/report')
+    cy.get('div').contains('colors').should('contain', 'Smiley')
     cy.get('div').contains('colors').click()
     cy.get('[data-cy=report-no-data]')
   })
@@ -90,7 +91,7 @@ describe('ReportPage tests', function () {
     cy.reload()
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
-    cy.get('span').contains('Faculty of Law').click()
+    cy.get('span').contains('Faculty of Law').should('be.visible').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
   })
@@ -100,6 +101,7 @@ describe('ReportPage tests', function () {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=street-light-negative-review_of_last_years_situation_report]').click()
     cy.visit('/report')
+    cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
 
     cy.get('div').contains('colors').click()
