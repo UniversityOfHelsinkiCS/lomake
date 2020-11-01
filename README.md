@@ -32,7 +32,7 @@ The seeding should be performed only **once** by executing `docker exec -it loma
 
 There's quite a lot of end-to-end tests in the cypress/integration folder.
 
-To run these tests, simply execute `npm run cypress:open` and select _Run all specs_ from the GUI.
+To run these tests, simply execute `npm run e2e` and select _Run all specs_ from the GUI.
 
 ### ApiConnection
 
