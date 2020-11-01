@@ -5,10 +5,24 @@ const { data, facultyMap } = require('@root/config/data')
 
 const seed = async () => {
   logger.info("Seeding ...")
+  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === "tokens"
+
+  seedFacultiesAndStudyprogrammes()
+
+  // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
+  if(seedTokensAswell){
+    logger.info('Seeding tokens aswell')
+    seedTokens()
+  }
+
+  logger.info('Seeding completed')
+}
+
+const seedFacultiesAndStudyprogrammes = async () => {
+
   await db.companionFaculty.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
   await db.faculty.destroy({ where: {} })
-  await db.token.destroy({ where: {} })
 
   /**
    * Create faculties
@@ -70,9 +84,10 @@ const seed = async () => {
     }
   }
 
-  /**
-   * Create tokens
-   */
+
+}
+
+const seedTokens = async () => {
 
   const studyprogrammes = await db.studyprogramme.findAll()
   for (const { key } of studyprogrammes) {
@@ -118,8 +133,9 @@ const seed = async () => {
     })
   }
 
-  logger.info('Seeding completed')
 }
+
+
 module.exports = {
   seed,
 }
