@@ -28,9 +28,6 @@ initializeDatabaseConnection()
       }
     }
 
-    // Scripts that will run if env variable TESTING=true (in GitHub actions).
-    if (process.env.TESTING) seed()
-
     const app = express()
     const server = require('http').Server(app)
     const io = require('socket.io')(server)

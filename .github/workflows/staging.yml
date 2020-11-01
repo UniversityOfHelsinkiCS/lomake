@@ -15,11 +15,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: set env-variable TESTING=true
-        run: echo "TESTING=TRUE" > .env
-
       - name: docker-compose up -d
         run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec -it lomake_dev bash -c "node index.js seed --tokens"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless *.spec.js
