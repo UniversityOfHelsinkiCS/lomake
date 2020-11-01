@@ -7,12 +7,12 @@ const seed = async () => {
   logger.info("Seeding ...")
   const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === "tokens"
 
-  seedFacultiesAndStudyprogrammes()
+  await seedFacultiesAndStudyprogrammes()
 
   // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
   if(seedTokensAswell){
     logger.info('Seeding tokens aswell')
-    seedTokens()
+    await seedTokens()
   }
 
   logger.info('Seeding completed')
@@ -89,7 +89,9 @@ const seedFacultiesAndStudyprogrammes = async () => {
 
 const seedTokens = async () => {
 
+  await db.token.destroy({ where: {} })
   const studyprogrammes = await db.studyprogramme.findAll()
+
   for (const { key } of studyprogrammes) {
     await db.token.create({
       url: uuid(),
