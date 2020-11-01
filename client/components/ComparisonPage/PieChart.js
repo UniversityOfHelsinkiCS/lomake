@@ -4,29 +4,20 @@ import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-
-export default ({
-  question,
-  answers,
-  showEmpty,
-  programmes,
-  faculty,
-  name
-}) => {
+export default ({ question, answers, showEmpty, programmes, faculty, name }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
   const level = useSelector((state) => state.programmeLevel)
 
-
   const colorsTotal = (question) => {
     if (!question || !answers) return null
     let colors = {
-      green : { 'value' : 0, 'programmes': [] },
-      yellow : { 'value' : 0, 'programmes': [] },
-      red : { 'value' : 0, 'programmes': [] },
-      emptyAnswer : { 'value' : 0, 'programmes': [] },
-      withoutEmpty : { 'value' : 0, 'programmes': [] },
-      total: { 'value': 0 }
+      green: { value: 0, programmes: [] },
+      yellow: { value: 0, programmes: [] },
+      red: { value: 0, programmes: [] },
+      emptyAnswer: { value: 0, programmes: [] },
+      withoutEmpty: { value: 0, programmes: [] },
+      total: { value: 0 },
     }
     answers.forEach((a) => {
       colors[a.color]['value'] = colors[a.color]['value'] + 1
@@ -70,12 +61,13 @@ export default ({
         programmes: colorSums.emptyAnswer.programmes,
       },
     ]
-    return data.sort((a,b) => b.value - a.value)
+    return data.sort((a, b) => b.value - a.value)
   }
 
   const amountOfResponses = () => {
-    const answered = `${translations.responses[lang]} ${answers ?
-      (showEmpty ? programmes.length : colorSums.withoutEmpty.value) : 0}`
+    const answered = `${translations.responses[lang]} ${
+      answers ? (showEmpty ? programmes.length : colorSums.withoutEmpty.value) : 0
+    }`
     const all = programmes ? ` / ${programmes.length}` : ''
     return answered + all
   }
@@ -90,15 +82,22 @@ export default ({
     setToolTipData(toolTip)
   }
 
-
   return (
     <div className="comparison-smiley-chart-area">
       <div className="comparison-smiley-pie-header">
-        <p>{question.labelIndex} {question.label}</p>
-        <p><b>{faculty}</b></p>
-        <p><b>
-          {name === "university" ? translations['allProgrammes'][lang] : translations[level][lang]}
-        </b></p>
+        <p>
+          {question.labelIndex} {question.label}
+        </p>
+        <p>
+          <b>{faculty}</b>
+        </p>
+        <p>
+          <b>
+            {name === 'university'
+              ? translations['allProgrammes'][lang]
+              : translations[level][lang]}
+          </b>
+        </p>
         <p data-cy={`comparison-responses-${name}-${question.id}`}>
           <b>{amountOfResponses()}</b>
         </p>
@@ -107,31 +106,40 @@ export default ({
         className="comparison-smiley-pie-chart"
         data-cy={`comparison-chart-${name}-${question.id}`}
       >
-        {toolTipData &&
-          <span
-            className="comparison-smiley-pie-tip"
-            data-cy={`comparison-tip-${question.id}`}
-          >
-            <p><b>{question.labelIndex} - {question.label}</b></p>
-            <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
-            {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}
+        {toolTipData && (
+          <span className="comparison-smiley-pie-tip" data-cy={`comparison-tip-${question.id}`}>
+            <p>
+              <b>
+                {question.labelIndex} - {question.label}
+              </b>
+            </p>
+            <p>
+              <b>
+                <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
+              </b>
+            </p>
+            {toolTipData.programmes.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </span>
-        }
+        )}
         <Chart
-          center={[72, 65]}
+          center={[72, 68]}
           data={data()}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) => dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null}
+          label={({ dataEntry }) =>
+            dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null
+          }
           paddingAngle={0}
           radius={50}
           startAngle={270}
-          viewBoxSize={[145, 145]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold'}}
+          viewBoxSize={[143, 143]}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           labelPosition={112}
           onMouseOver={(e, segmentIndex) => toolTipText(segmentIndex)}
           onMouseOut={() => setToolTipData(null)}
-       />
+        />
       </div>
     </div>
   )

@@ -7,20 +7,12 @@ import PieChart from './PieChart'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
-import {
-  internationalProgrammes as international,
-} from 'Utilities/common'
+import { internationalProgrammes as international } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import faculties from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
-
-const Comparison = ({ 
-  questionsList,
-  usersProgrammes,
-  allAnswers,
-  facultiesByKey,
-}) => {
+const Comparison = ({ questionsList, usersProgrammes, allAnswers, facultiesByKey }) => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const lang = useSelector((state) => state.language)
   const level = useSelector((state) => state.programmeLevel)
@@ -41,7 +33,6 @@ const Comparison = ({
   }
 
   const chosenProgrammeFaculty = () => {
-
     if (!usersProgrammes) return ''
 
     const filtered = usersProgrammes.find((p) => {
@@ -51,7 +42,7 @@ const Comparison = ({
     if (!filtered) return ''
     const facultyCode = facultiesByKey.get(filtered.key)
     const faculty = faculties[lang].find((f) => f.key == facultyCode)
-    if (!faculty) return translations.noFaculty[lang] 
+    if (!faculty) return translations.noFaculty[lang]
     return faculty.text
   }
 
@@ -65,13 +56,12 @@ const Comparison = ({
   }
 
   const filteredProgrammes = () => {
-
     if (!usersProgrammes) return []
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
       if (faculty === 'allFaculties') return usersProgrammes
       return facultiesByKey.get(p.key) === faculty
-    })  
+    })
 
     const filteredByLevel = filteredByFaculty.filter((p) => {
       if (level === 'allProgrammes') return true
@@ -86,11 +76,10 @@ const Comparison = ({
     })
 
     return filteredByLevel
-  
   }
 
   const comparedProgrammes = filteredProgrammes()
-  
+
   const comparedAnswers = (question) => {
     if (!comparedProgrammes || !allAnswers) return []
     const filteredKeys = comparedProgrammes.map((p) => p.key)
@@ -99,27 +88,21 @@ const Comparison = ({
     return []
   }
 
-  const options = usersProgrammes.map((p) =>
-    ({ key: p.key,
-      value: p.name[lang] ? p.name[lang] : p.name['en'],
-      text: p.name[lang] ? p.name[lang] : p.name['en']
-    })
-  )
+  const options = usersProgrammes.map((p) => ({
+    key: p.key,
+    value: p.name[lang] ? p.name[lang] : p.name['en'],
+    text: p.name[lang] ? p.name[lang] : p.name['en'],
+  }))
 
   return (
     <div className="comparison-container">
-      <Grid >
+      <Grid>
         <Grid.Column className="comparison-center-header" width={16}>
           {year} - {translations.reportHeader['comparison'][lang]}
         </Grid.Column>
       </Grid>
-      <div className="ui divider"/>
-      <Grid
-        stackable
-        doubling
-        padded
-        columns={user.admin ? 3 : 2}
-      >
+      <div className="ui divider" />
+      <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector />
@@ -158,65 +141,65 @@ const Comparison = ({
         </Grid.Row>
       </Grid>
       <Grid
+        className="comparison-smiley-grid"
         centered
         stackable
         doubling
+        relaxed
         columns={user.admin ? 3 : 2}
       >
-        <Grid.Row>
+        <Grid.Column>
+          {questionsList.map(
+            (question) =>
+              chosenAnswers(question) &&
+              !question.no_light && (
+                <SingleProgramPieChart
+                  key={question.id}
+                  question={question}
+                  answers={chosenAnswers(question)}
+                  programmeName={chosen ? chosen : ''}
+                  programmeFaculty={chosenProgrammeFaculty()}
+                  showEmpty={showEmpty}
+                />
+              )
+          )}
+        </Grid.Column>
+        <Grid.Column>
+          {questionsList.map(
+            (question) =>
+              comparedAnswers(question) &&
+              !question.no_light && (
+                <PieChart
+                  key={question.id}
+                  question={question}
+                  showEmpty={showEmpty}
+                  answers={comparedAnswers(question)}
+                  faculty={comparedFaculty ? comparedFaculty.text : ''}
+                  programmes={comparedProgrammes ? comparedProgrammes : ''}
+                  name="faculty"
+                />
+              )
+          )}
+        </Grid.Column>
+        {user.admin && (
           <Grid.Column>
-            <div className="comparison-smiley-grid">
-              {questionsList.map((question) =>
-                (chosenAnswers(question) && !(question.no_light) &&
-                  <SingleProgramPieChart
-                    key={question.id}
-                    question={question}
-                    answers={chosenAnswers(question)}
-                    programmeName={chosen ? chosen : ''}
-                    programmeFaculty={chosenProgrammeFaculty()}
-                    showEmpty={showEmpty}
-                  />
-                )
-              )}
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div className="comparison-smiley-grid">
-              {questionsList.map((question) =>
-                (comparedAnswers(question) && !(question.no_light) &&
+            {questionsList.map(
+              (question) =>
+                allAnswers.get(question.id) &&
+                !question.no_light && (
                   <PieChart
                     key={question.id}
                     question={question}
                     showEmpty={showEmpty}
-                    answers={comparedAnswers(question)}
-                    faculty={comparedFaculty ? comparedFaculty.text : ''}
-                    programmes={comparedProgrammes ? comparedProgrammes : ''}
-                    name="faculty"
+                    answers={allAnswers.get(question.id)}
+                    programmes={usersProgrammes ? usersProgrammes : []}
+                    faculty={translations.university[lang]}
+                    name="university"
                   />
                 )
-              )}
-            </div>
+            )}
           </Grid.Column>
-          {user.admin && 
-            <Grid.Column>
-              <div className="comparison-smiley-grid">
-                {questionsList.map((question) =>
-                  (allAnswers.get(question.id) && !(question.no_light) &&
-                    <PieChart
-                      key={question.id}
-                      question={question}
-                      showEmpty={showEmpty}
-                      answers={allAnswers.get(question.id)}
-                      programmes={usersProgrammes ? usersProgrammes : []}
-                      faculty={translations.university[lang]}
-                      name="university"
-                    />
-                  )
-                )}
-              </div>
-            </Grid.Column>
-          }
-        </Grid.Row>
+        )}
       </Grid>
     </div>
   )

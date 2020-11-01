@@ -8,12 +8,11 @@ import {
   answersByYear,
   facultiesWithKeys,
   programmeNameByKey as programmeName,
-  sortedItems
+  sortedItems,
 } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 import './ComparisonPage.scss'
-
 
 export default () => {
   const dispatch = useDispatch()
@@ -33,31 +32,35 @@ export default () => {
   }, [lang])
 
   if (!selectedAnswers || !usersProgrammes || !faculties) return <></>
-  
+
   const modifiedQuestions = () => {
     let attributes = []
     let titleIndex = -1
     let labelIndex = -1
 
     questions.forEach((question) => {
-      titleIndex = titleIndex + 1  
+      titleIndex = titleIndex + 1
       question.parts.forEach((part) => {
-        if (part.type !== "TITLE") {
-          if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
+        if (part.type !== 'TITLE') {
+          if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
 
-          attributes = [...attributes, {
-            "id": `${part.id}_text`,
-            "color": `${part.id}_light`,
-            "label": part.label[lang],
-            "title": question.title[lang],
-            "titleIndex": titleIndex,
-            "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
-            "no_light": part.no_light
-          }]
+          attributes = [
+            ...attributes,
+            {
+              id: `${part.id}_text`,
+              color: `${part.id}_light`,
+              label: part.label[lang],
+              title: question.title[lang],
+              titleIndex: titleIndex,
+              labelIndex:
+                part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
+              no_light: part.no_light,
+            },
+          ]
         }
       })
     })
-    
+
     return attributes
   }
 
@@ -81,7 +84,7 @@ export default () => {
         })
       }
     })
-        // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+    // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
     // So empty answers need to be added.
     answerMap.forEach((value, key) => {
       const answeredProgrammes = value.map((p) => p.key)
@@ -89,7 +92,10 @@ export default () => {
       if (programmesMissing) {
         for (const p of programmesMissing) {
           const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [...earlierAnswers, { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer'}])
+          answerMap.set(key, [
+            ...earlierAnswers,
+            { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer' },
+          ])
         }
       }
     })
@@ -98,17 +104,20 @@ export default () => {
   }
 
   const panes = [
-    { menuItem: translations.reportHeader['comparison'][lang], render: () =>
-      <Tab.Pane>
-        <Comparison
-          year={year}
-          questionsList={questionsList}
-          usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-          allAnswers={usersProgrammes ? answersByQuestions() : []}
-          facultiesByKey={faculties}
-        />
-      </Tab.Pane>
-    }
+    {
+      menuItem: translations.reportHeader['comparison'][lang],
+      render: () => (
+        <Tab.Pane>
+          <Comparison
+            year={year}
+            questionsList={questionsList}
+            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
+            allAnswers={usersProgrammes ? answersByQuestions() : []}
+            facultiesByKey={faculties}
+          />
+        </Tab.Pane>
+      ),
+    },
   ]
 
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
@@ -116,12 +125,7 @@ export default () => {
   return (
     <>
       <div className="comparison-info-header" />
-      <Grid
-        doubling
-        columns={2}
-        padded='vertically'
-        className="comparison-filter-container"
-      >
+      <Grid doubling columns={2} padded="vertically" className="comparison-filter-container">
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>
@@ -131,6 +135,6 @@ export default () => {
         menu={{ secondary: true, pointing: true }}
         panes={panes}
       />
-  </>
+    </>
   )
 }
