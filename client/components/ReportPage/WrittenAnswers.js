@@ -41,6 +41,10 @@ const WrittenAnswers = ({
 
   if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
 
+  if (allAnswers.size < 1) {
+    return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
+  }
+
   return (
     <Accordion fluid className="report-container">
       <Grid>
