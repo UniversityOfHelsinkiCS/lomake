@@ -43,13 +43,14 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
+    setPicked(programmes.all)
     document.title = `${translations['reportPage'][lang]}`
   }, [lang])
 
   // Handles all filtering
   const filteredProgrammes = () => {
 
-    if (!usersProgrammes) return { chosen: [], filtered: [] }
+    if (!usersProgrammes) return { chosen: [], all: [] }
 
     const filteredByName = usersProgrammes.filter((p) => {
       const prog = p.name[lang] ? p.name[lang] : p.name['en']
@@ -81,7 +82,7 @@ export default () => {
 
     const filteredByPick = filteredByFaculty.filter((p) => {
       return picked.includes(p)
-    })
+    })    
 
     return { chosen: filteredByPick, all: filteredByFaculty }
   }
