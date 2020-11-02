@@ -6,6 +6,7 @@ import ProgrammeList from './ProgrammeList'
 import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
@@ -27,6 +28,7 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
+  const [showCompanion, setShowCompanion] = useState(false)
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -68,6 +70,12 @@ export default () => {
   
     const filteredByFaculty = filteredByLevel.filter((p) => {
       if (faculty === 'allFaculties') return true
+
+      if (showCompanion) {
+        const companionFaculties = p.companionFaculties.map((f) => f.code)
+        if (companionFaculties.includes(faculty)) return true
+        else return p.primaryFaculty.code === faculty
+      }
       return p.primaryFaculty.code === faculty
     })
 
@@ -76,7 +84,6 @@ export default () => {
     })
 
     return { chosen: filteredByPick, all: filteredByFaculty }
-
   }
 
   const programmes = filteredProgrammes()
@@ -199,6 +206,12 @@ export default () => {
             <>
               <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
               <LevelFilter usersProgrammes={usersProgrammes}/>
+              {faculty !== 'allFaculties' &&
+                <CompanionFilter
+                  showCompanion={showCompanion}
+                  setShowCompanion={setShowCompanion}
+                />
+              }
               <ProgrammeFilter
                 handleChange={handleSearch}
                 filter={filter}

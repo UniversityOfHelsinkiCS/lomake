@@ -284,6 +284,13 @@ export const formViewTranslations = {
 }
 
 export const genericTranslations = {
+  // Generic/CompanionFilter.js
+  companionFilter: {
+    en: "Include faculty's doctoral partnership programmes to the answers",
+    fi: 'Ota vastauksiin mukaan tiedekunnan yhteistyötohtoriohjelmat',
+    se: "Include faculty's doctoral partnership programmes to the answers",
+  },
+  // Generic/CsvDownload.js
   programmeHeader: {
     fi: 'Koulutusohjelma',
     en: 'Programme',

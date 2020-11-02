@@ -7,6 +7,10 @@
   }
 }
 
+.companion-filter {
+  @include filter-basics;
+}
+
 .faculty-filter {
   &-small {
     @include filter-basics;
