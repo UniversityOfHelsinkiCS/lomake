@@ -22,13 +22,13 @@ export default () => {
   const [statsToShow, setStatsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
 
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${translations['overviewPage'][languageCode]}`
-  }, [languageCode])
+    document.title = `${translations['overviewPage'][lang]}`
+  }, [lang])
 
   const handleFilterChange = ({ target }) => {
     const { value } = target
@@ -44,10 +44,10 @@ export default () => {
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter((prog) => {
-      const searchTarget = prog.name[languageCode] || prog.name['en']
+      const searchTarget = prog.name[lang] || prog.name['en']
       return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
-  }, [usersProgrammes, languageCode, debouncedFilter])
+  }, [usersProgrammes, lang, debouncedFilter])
 
   return (
     <>
@@ -68,9 +68,9 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${translations.accessControl[languageCode]} - ${
-            programControlsToShow.name[languageCode]
-              ? programControlsToShow.name[languageCode]
+          title={`${translations.accessControl[lang]} - ${
+            programControlsToShow.name[lang]
+              ? programControlsToShow.name[lang]
               : programControlsToShow.name['en']
           }`}
           closeModal={() => setProgramControlsToShow(null)}
@@ -94,16 +94,16 @@ export default () => {
           <div className="wide-header">
             <YearSelector />
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
-              {translations.readAnswersButton[languageCode]}
+              {translations.readAnswersButton[lang]}
             </Button>
             <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-              {translations.compareAnswersButton[languageCode]}
+              {translations.compareAnswersButton[lang]}
             </Button>
             <Dropdown
               data-cy="csv-download"
               className="button basic gray"
               direction="left"
-              text={translations.csvDownload[languageCode]}
+              text={translations.csvDownload[lang]}
               onClick={() => setShowCsv(true)}
             >
               {showCsv ? (
@@ -131,7 +131,7 @@ export default () => {
           </div>
         </>
       ) : (
-        <NoPermissions languageCode={languageCode} />
+        <NoPermissions lang={lang} />
       )}
     </>
   )

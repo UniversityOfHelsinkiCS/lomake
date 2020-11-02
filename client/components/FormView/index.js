@@ -25,7 +25,7 @@ import questions from '../../questions'
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
 
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
@@ -54,8 +54,8 @@ const FormView = ({ room }) => {
   }, [])
 
   useEffect(() => {
-    document.title = `${translations['form'][languageCode]} - ${room}`
-  }, [languageCode, room])
+    document.title = `${translations['form'][lang]} - ${room}`
+  }, [lang, room])
 
   useEffect(() => {
     if (loadObj.loading && !singleProgramPending) {
@@ -114,10 +114,10 @@ const FormView = ({ room }) => {
   if (!programme) return 'Error: Invalid url.'
 
   if (!userHasReadAccess && !userHasWriteAccess)
-    return <NoPermissions languageCode={languageCode} />
+    return <NoPermissions lang={lang} />
 
-  const localizedProgramName = programme.name[languageCode]
-    ? programme.name[languageCode]
+  const localizedProgramName = programme.name[lang]
+    ? programme.name[lang]
     : programme.name['en']
 
   return (
@@ -135,20 +135,20 @@ const FormView = ({ room }) => {
 
           <h1 style={{ color: colors.blue }}>{localizedProgramName}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {translations.title[languageCode]} {selectedYear}
+            {translations.title[lang]} {selectedYear}
           </h3>
 
           <div className="hide-in-print-mode">
             <YearSelector />
             <StatusMessage />
-            <p>{translations.p1[languageCode]}</p>
-            <p>{translations.p2[languageCode]}</p>
+            <p>{translations.p1[lang]}</p>
+            <p>{translations.p2[lang]}</p>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={positiveEmoji}
                 style={{ width: '40px', height: 'auto', marginRight: '5px' }}
               />{' '}
-              {translations.positive[languageCode]}
+              {translations.positive[lang]}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
               <img
@@ -161,14 +161,14 @@ const FormView = ({ room }) => {
                   marginBottom: '5px',
                 }}
               />{' '}
-              {translations.neutral[languageCode]}
+              {translations.neutral[lang]}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
               <img
                 src={negativeEmoji}
                 style={{ width: '40px', height: 'auto', marginRight: '5px' }}
               />{' '}
-              {translations.negative[languageCode]}
+              {translations.negative[lang]}
             </div>
           </div>
         </div>
@@ -176,7 +176,7 @@ const FormView = ({ room }) => {
           <Dropdown
             className="button basic gray"
             direction="left"
-            text={translations.csvDownload[languageCode]}
+            text={translations.csvDownload[lang]}
             onClick={() => setShowCsv(!showCsv)}
             data-cy="csv-download"
           >

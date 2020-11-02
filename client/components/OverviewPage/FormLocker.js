@@ -6,7 +6,7 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 
 
 export default function FormLocker({ programme }) {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const dispatch = useDispatch()
   const programmeDetails = useSelector((state) => state.studyProgrammes.singleProgram)
   const programmeDetailsPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
@@ -54,8 +54,8 @@ export default function FormLocker({ programme }) {
           >
             <Icon name={locked ? 'lock' : 'lock open'} />
             {locked
-              ? translations.lockedTriggerButtonText[languageCode]
-              : translations.unlockedTriggerButtonText[languageCode]}
+              ? translations.lockedTriggerButtonText[lang]
+              : translations.unlockedTriggerButtonText[lang]}
           </Button>
         }
         content={
@@ -64,7 +64,7 @@ export default function FormLocker({ programme }) {
             color="red"
             secondary
             content={
-              locked ? translations.unLockForm[languageCode] : translations.lockForm[languageCode]
+              locked ? translations.unLockForm[lang] : translations.lockForm[lang]
             }
             onClick={handleLock}
           />

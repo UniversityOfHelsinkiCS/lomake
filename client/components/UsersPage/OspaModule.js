@@ -15,7 +15,7 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
 
 export default function OspaModule() {
   const [newDate, setNewDate] = useState(null)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
   const dispatch = useDispatch()
@@ -52,16 +52,16 @@ export default function OspaModule() {
   return (
     <Segment style={{ width: '500px', zIndex: '3', margin: '1em' }}>
       <Header as="h4" style={{ textAlign: 'center' }}>
-        {translations['deadlineSettings'][languageCode]}
+        {translations['deadlineSettings'][lang]}
       </Header>
       <DatePicker
         dateFormat="dd.MM.yyyy"
         excludeDates={existingDeadlines.map((dl) => new Date(dl.date))}
-        placeholderText={translations['selectNewDeadline'][languageCode]}
+        placeholderText={translations['selectNewDeadline'][lang]}
         minDate={new Date()}
         selected={newDate}
         onChange={setNewDate}
-        locale={languageCode}
+        locale={lang}
       />
       <Button
         data-cy="updateDeadline"
@@ -71,17 +71,17 @@ export default function OspaModule() {
         disabled={!newDate}
         onClick={handleDeadlineSave}
       >
-        {translations['updateDeadline'][languageCode]}
+        {translations['updateDeadline'][lang]}
       </Button>
       {nextDeadline && (
         <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
-          {translations['deleteThisDeadline'][languageCode]}
+          {translations['deleteThisDeadline'][lang]}
         </Button>
       )}
 
-      <Header as="h5">{translations['nextDeadline'][languageCode]}</Header>
+      <Header as="h5">{translations['nextDeadline'][lang]}</Header>
       {!nextDeadline && (
-        <div data-cy="noNextDeadline">{translations['noDeadlineSet'][languageCode]}</div>
+        <div data-cy="noNextDeadline">{translations['noDeadlineSet'][lang]}</div>
       )}
       {nextDeadline && <div data-cy="nextDeadline">{formatDate(nextDeadline.date)}</div>}
     </Segment>

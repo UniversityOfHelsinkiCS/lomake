@@ -9,7 +9,7 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 
 
 const OwnerAccordionLinks = ({ programme }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const tokens = useSelector((state) => state.programmesTokens)
   const user = useSelector(({ currentUser }) => currentUser.data)
   const [copied, setCopied] = useState(false)
@@ -60,14 +60,14 @@ const OwnerAccordionLinks = ({ programme }) => {
             }}
           >
             {token
-              ? translations.resetPrompt[languageCode]
-              : translations.createPrompt[languageCode]}
+              ? translations.resetPrompt[lang]
+              : translations.createPrompt[lang]}
           </div>
         }
         content={
           <>
             <Message negative>
-              <Message.Header> {translations.resetWarning[languageCode]}</Message.Header>
+              <Message.Header> {translations.resetWarning[lang]}</Message.Header>
             </Message>
             <Button
               data-cy="confirm-reset"
@@ -87,8 +87,8 @@ const OwnerAccordionLinks = ({ programme }) => {
   return (
     <div style={{ margin: '2em 0em' }}>
       <div style={{ fontWeight: 'bold', marginLeft: '3em' }}>
-        <h2>{translations.readAccess[languageCode]}</h2>
-        {translations.viewPrompt[languageCode]}
+        <h2>{translations.readAccess[lang]}</h2>
+        {translations.viewPrompt[lang]}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em 0 3em', paddingBottom: '1em'}}>
         <Input
@@ -96,7 +96,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           style={{ width: '600px' }}
           action={{
             icon: <Icon name={copied === 'VIEW' ? 'checkmark' : 'copy'} link />,
-            content: translations.copyLink[languageCode],
+            content: translations.copyLink[lang],
             onClick: () => copyToClipboard('VIEW'),
           }}
           value={viewToken ? `${urlPrefix}${viewToken.url}` : ''}
@@ -106,8 +106,8 @@ const OwnerAccordionLinks = ({ programme }) => {
         {isSuperAdmin(user.uid) && <ResetConfirmation token={viewToken} type="READ" />}
       </div>
       <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em', padding: '0.2em 0'}}>
-        <h2>{translations.writeAccess[languageCode]}</h2>
-        {translations.editPrompt[languageCode]}
+        <h2>{translations.writeAccess[lang]}</h2>
+        {translations.editPrompt[lang]}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', margin: '1em 3em' }}>
         <Input
@@ -115,7 +115,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           data-cy={`${programme}-editlink`}
           action={{
             icon: <Icon name={copied === 'EDIT' ? 'checkmark' : 'copy'} link />,
-            content: translations.copyLink[languageCode],
+            content: translations.copyLink[lang],
             onClick: () => copyToClipboard('EDIT'),
           }}
           value={editToken ? `${urlPrefix}${editToken.url}` : ''}

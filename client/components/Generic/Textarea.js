@@ -42,7 +42,6 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const languageCode = useSelector((state) => state.language)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
   const someoneElseHasTheLock =

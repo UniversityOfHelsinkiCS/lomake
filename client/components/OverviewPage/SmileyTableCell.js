@@ -25,7 +25,7 @@ const SmileyTableCell = ({
   setModalData,
   programmesOldAnswers,
 }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   const getMeasuresAnswer = () => {
     if (!programmesAnswers) return null
@@ -92,7 +92,7 @@ const SmileyTableCell = ({
               const header = cur.parts.reduce((acc, cur) => {
                 if (acc) return acc
 
-                if (cur.id === questionId) return cur.description[languageCode]
+                if (cur.id === questionId) return cur.description[lang]
 
                 return acc
               }, '')
@@ -126,7 +126,7 @@ const SmileyTableCell = ({
                 if (acc) return acc
 
                 if (cur.id === questionId) {
-                  return cur.description[languageCode]
+                  return cur.description[lang]
                 }
 
                 return acc

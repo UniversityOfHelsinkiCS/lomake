@@ -6,7 +6,7 @@ import { formViewTranslations as translations } from 'Utilities/translations'
 
 
 const PDFDownload = () => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const dispatch = useDispatch()
   const handleViewOnlyChange = (value) => dispatch(setViewOnly(value))
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
@@ -43,7 +43,7 @@ const PDFDownload = () => {
 
   return (
     <span style={{ cursor: 'pointer', color: colors.blue }} onClick={openViewModeAndPrintPdf}>
-      {translations.downloadText[languageCode]}
+      {translations.downloadText[lang]}
     </span>
   )
 }

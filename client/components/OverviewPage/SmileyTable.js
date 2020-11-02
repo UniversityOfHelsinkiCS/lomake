@@ -31,7 +31,7 @@ const SmileyTable = React.memo(
     const dispatch = useDispatch()
     const answers = useSelector((state) => state.tempAnswers)
     const oldAnswers = useSelector((state) => state.oldAnswers)
-    const languageCode = useSelector((state) => state.language)
+    const lang = useSelector((state) => state.language)
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
     const selectedYear = useSelector((state) => state.form.selectedYear)
@@ -50,7 +50,7 @@ const SmileyTable = React.memo(
         ? oldAnswers.data.filter((a) => a.year === selectedYear - 1)
         : null
 
-    let sortedProgrammes = sortedItems(filteredProgrammes, SORTER, languageCode)
+    let sortedProgrammes = sortedItems(filteredProgrammes, SORTER, lang)
 
     if (reverse) sortedProgrammes.reverse()
 
@@ -110,7 +110,7 @@ const SmileyTable = React.memo(
     if (filteredProgrammes.length === 0)
       return (
         <Header as="h2" disabled>
-          {translations.noResultsText[languageCode]}
+          {translations.noResultsText[lang]}
         </Header>
       )
 
@@ -142,7 +142,7 @@ const SmileyTable = React.memo(
       return hasManagementAccess(programme.key) ? (
         <Icon
           data-cy={`${programme.key}-locked`}
-          title={translations['programmeLocked'][languageCode]}
+          title={translations['programmeLocked'][lang]}
           name="lock"
           size="large"
           color="grey"
@@ -151,7 +151,7 @@ const SmileyTable = React.memo(
       ) : (
         <Icon
           data-cy={`${programme.key}-locked`}
-          title={translations['programmeLocked'][languageCode]}
+          title={translations['programmeLocked'][lang]}
           name="lock"
           size="large"
           color="grey"
@@ -182,7 +182,7 @@ const SmileyTable = React.memo(
             style={{ fontWeight: 'bold', cursor: 'pointer' }}
             onClick={() => setReverse(!reverse)}
           >
-            {translations.programmeHeader[languageCode]}
+            {translations.programmeHeader[lang]}
             <Icon name="sort" />
           </div>
         </div>
@@ -207,7 +207,7 @@ const SmileyTable = React.memo(
                 data-cy="overviewpage-filter"
                 size="small"
                 icon="filter"
-                placeholder={translations.filter[languageCode]}
+                placeholder={translations.filter[lang]}
                 onChange={handleFilterChange}
                 value={filterValue}
               />
@@ -272,18 +272,18 @@ const SmileyTable = React.memo(
                 {p.locked ? (
                   <div data-cy={`smileytable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
                     <Icon name="lock" />{' '}
-                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                    {p.name[lang] ? p.name[lang] : p.name['en']}
                   </div>
                 ) : (
                   <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
-                    {p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                    {p.name[lang] ? p.name[lang] : p.name['en']}
                   </Link>
                 )}
               </div>
               {tableIds.map((idObject) => (
                 <SmileyTableCell
                   key={`${p.key}-${idObject.id}`}
-                  programmesName={p.name[languageCode] ? p.name[languageCode] : p.name['en']}
+                  programmesName={p.name[lang] ? p.name[lang] : p.name['en']}
                   programmesKey={p.key}
                   programmesAnswers={programme && programme.data ? programme.data : {}}
                   programmesOldAnswers={

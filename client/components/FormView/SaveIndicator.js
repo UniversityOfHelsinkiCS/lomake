@@ -13,7 +13,7 @@ export default function SaveIndicator() {
   const lastSaveSuccess = useSelector((state) => state.form.lastSaveSuccess)
   const lastSaveAttempt = useSelector((state) => state.form.lastSaveAttempt)
 
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const viewOnly = useSelector((state) => state.form.viewOnly)
   const dispatch = useDispatch()
 
@@ -90,16 +90,16 @@ export default function SaveIndicator() {
             width: '75%',
             maxWidth: '50em',
           }}
-          header={`${translations.saveFailed.header[languageCode]}`}
+          header={`${translations.saveFailed.header[lang]}`}
           content={
             <div style={{ paddingTop: '1em' }}>
-              <span>{translations.saveFailed.content[languageCode]}</span>
+              <span>{translations.saveFailed.content[lang]}</span>
               <Button
                 style={{ marginTop: '2em', float: 'right' }}
                 color="blue"
                 onClick={() => window.location.reload()}
               >
-                {translations.saveFailed.button[languageCode]}
+                {translations.saveFailed.button[lang]}
               </Button>
             </div>
           }
@@ -118,8 +118,8 @@ export default function SaveIndicator() {
         }}
         //loading={saving}
       >
-        {translations['lastSaved'][languageCode]}{' '}
-        {lastSaveSuccess.toLocaleTimeString(languageCode !== 'se' ? languageCode : 'sv')}
+        {translations['lastSaved'][lang]}{' '}
+        {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
       </Button>
     </>
   )

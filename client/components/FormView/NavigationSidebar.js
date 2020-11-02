@@ -23,7 +23,7 @@ const iconMap = {
 }
 
 const NavigationSidebar = ({ programmeKey }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
 
@@ -33,7 +33,7 @@ const NavigationSidebar = ({ programmeKey }) => {
       <Message style={{ padding: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
           {questions.map((section, index) => {
-            const titleFromJson = section.title[languageCode]
+            const titleFromJson = section.title[lang]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
             const active = location.hash === `#${romanNumeral}`
@@ -93,8 +93,8 @@ const NavigationSidebar = ({ programmeKey }) => {
                               data-cy={`${id}-${status}`}
                               name={iconMap[status]}
                               style={{ color: getColor() }}
-                              title={`${translations[status][languageCode]}${
-                                required ? ` (${translations.mandatory_field[languageCode]})` : ''
+                              title={`${translations[status][lang]}${
+                                required ? ` (${translations.mandatory_field[lang]})` : ''
                               }`}
                             />
                           </>

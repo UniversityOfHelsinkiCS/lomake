@@ -188,7 +188,7 @@ export default () => {
   ]
 
   if (!usersProgrammes) return <></>
-  if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
     <>

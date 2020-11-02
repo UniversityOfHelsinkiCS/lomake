@@ -72,13 +72,13 @@ export const internationalProgrammes = [
   'MH20_003',
 ]
 
-export const sortedItems = (items, sorter, languageCode) => {
+export const sortedItems = (items, sorter, lang) => {
   if (!items) return []
   if (!sorter) return items
   const sorted = items.sort((a, b) => {
     if (sorter == 'name') {
-      const aName = a.name[languageCode] ? a.name[languageCode] : a.name['en']
-      const bName = b.name[languageCode] ? b.name[languageCode] : b.name['en']
+      const aName = a.name[lang] ? a.name[lang] : a.name['en']
+      const bName = b.name[lang] ? b.name[lang] : b.name['en']
       return aName.localeCompare(bName)
     }
     if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
@@ -87,20 +87,20 @@ export const sortedItems = (items, sorter, languageCode) => {
   return sorted
 }
 
-export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCode) => {
+export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
   let prog = ""
   if (!studyProgrammes) return ''
   if (studyProgrammes && programmeWithKey.programme === "msc_global_governance_law_(2020_lähtien)") {
     prog = studyProgrammes.find((a) => a.key === "MH20_003")
-    return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
+    return prog.name[lang] ? prog.name[lang] : prog.name['en']
   }
   else if (studyProgrammes && programmeWithKey.programme === "msc_changing_education_(2020_lähtien)") {
     prog = studyProgrammes.find((a) => a.key === "MH60_002")
-    return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
+    return prog.name[lang] ? prog.name[lang] : prog.name['en']
   }
   if (studyProgrammes) prog = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
   if (!prog) return ''
-  return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
+  return prog.name[lang] ? prog.name[lang] : prog.name['en']
 }
 
 export const cleanText = (string) => {

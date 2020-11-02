@@ -39,7 +39,7 @@ const WrittenAnswers = ({
     return false
   }
 
-  if (usersProgrammes.length < 1) return <NoPermissions languageCode={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>

@@ -16,22 +16,22 @@ export default ({ url }) => {
   const dispatch = useDispatch()
   const [localizedProgramname, setLocalizedProgramname] = useState('')
   const token = useSelector((store) => store.accessToken)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
   const faculties = useSelector((state) => state.faculties.data)
   const [value, setValue] = useState('')
 
   useEffect(() => {
-    document.title = `${translations['claimPermissions'][languageCode]}`
-  }, [languageCode])
+    document.title = `${translations['claimPermissions'][lang]}`
+  }, [lang])
 
   useEffect(() => {
     if (studyProgrammes && token.data) {
       if (token.data.programme) {
         const program = studyProgrammes.find((p) => p.key === token.data.programme)
 
-        const temp = program['name'][languageCode]
-          ? program['name'][languageCode]
+        const temp = program['name'][lang]
+          ? program['name'][lang]
           : program['name']['en']
 
         setLocalizedProgramname(temp)
@@ -39,7 +39,7 @@ export default ({ url }) => {
         setLocalizedProgramname(token.data.faculty)
       }
     }
-  }, [languageCode, token, studyProgrammes])
+  }, [lang, token, studyProgrammes])
 
   useEffect(() => {
     dispatch(getTokenAction(url))
@@ -80,7 +80,7 @@ export default ({ url }) => {
   if (!token.data && token.error)
     return (
       <span data-cy="invalidTokenError" style={{ color: colors.red }}>
-        {translations.invalidToken[languageCode]}
+        {translations.invalidToken[lang]}
       </span>
     )
 
@@ -95,7 +95,7 @@ export default ({ url }) => {
 
     const localizedProgrammeCodes = ownedProgrammes.map(({key}) => {
       const prog = studyProgrammes.find((p) => p.key === key)
-      return prog.name[languageCode]
+      return prog.name[lang]
     })
 
     return localizedProgrammeCodes
@@ -104,13 +104,13 @@ export default ({ url }) => {
   if (token.data.programme) {
     return (
       <div style={{ width: '50em', margin: '1em auto' }}>
-        <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
+        <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
         <div style={{ fontWeight: 'bold' }}>{localizedProgramname}</div>
         <div
           style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}
         >
           <Icon color="blue" name={labelIcon[token.data.type]} size="small" />{' '}
-          {translations.rights[token.data.type][languageCode]}
+          {translations.rights[token.data.type][lang]}
         </div>
         {token.data.type === 'ADMIN' && (
           <div style={{ margin: '1.2em 0' }}>
@@ -125,7 +125,7 @@ export default ({ url }) => {
             <div
               className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? 'error' : 'valid'}`}
             >
-              {translations.confirmPrompt[languageCode]}
+              {translations.confirmPrompt[lang]}
             </div>
           </div>
         )}
@@ -134,7 +134,7 @@ export default ({ url }) => {
           disabled={buttonIsDisabled()}
           onClick={() => handleClaim(token.data)}
         >
-          {translations.buttonText[languageCode]}
+          {translations.buttonText[lang]}
         </Button>{' '}
       </div>
     )
@@ -143,7 +143,7 @@ export default ({ url }) => {
   if (token.data.type === 'READ_DOCTOR') {
     return (
       <div style={{ width: '50em', margin: '1em auto' }}>
-        <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
+        <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
         <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
         <List bulleted>
           {getProgrammeNames(true).map((name) => (
@@ -156,10 +156,10 @@ export default ({ url }) => {
           style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}
         >
           <Icon color="blue" name={labelIcon['READ']} size="small" />{' '}
-          {translations.rights['READ'][languageCode]}
+          {translations.rights['READ'][lang]}
         </div>
         <Button data-cy="claim-button" onClick={() => handleClaim(token.data)}>
-          {translations.buttonText[languageCode]}
+          {translations.buttonText[lang]}
         </Button>{' '}
       </div>
     )
@@ -167,7 +167,7 @@ export default ({ url }) => {
 
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
-      <Message color="blue" icon="exclamation" content={translations.prompt[languageCode]} />
+      <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
       <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
       <List bulleted>
         {getProgrammeNames().map((name) => (
@@ -178,7 +178,7 @@ export default ({ url }) => {
       </List>
       <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>
         <Icon color="blue" name={labelIcon[token.data.type]} size="small" />{' '}
-        {translations.rights[token.data.type][languageCode]}
+        {translations.rights[token.data.type][lang]}
       </div>
       {token.data.type === 'ADMIN' && (
         <div style={{ margin: '1.2em 0' }}>
@@ -190,7 +190,7 @@ export default ({ url }) => {
             onChange={(e, { value }) => setValue(value)}
           />
           <div className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? 'error' : 'valid'}`}>
-            {translations.confirmPrompt[languageCode]}
+            {translations.confirmPrompt[lang]}
           </div>
         </div>
       )}
@@ -199,7 +199,7 @@ export default ({ url }) => {
         disabled={buttonIsDisabled()}
         onClick={() => handleClaim(token.data)}
       >
-        {translations.buttonText[languageCode]}
+        {translations.buttonText[lang]}
       </Button>{' '}
     </div>
   )

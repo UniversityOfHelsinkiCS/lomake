@@ -24,7 +24,7 @@ const mapLightToImage = {
 }
 
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
@@ -74,7 +74,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
 
       <Textarea
         id={id}
-        label={translations.textAreaLabel[languageCode]}
+        label={translations.textAreaLabel[lang]}
         EntityLastYearsAccordion={EntityLastYearsAccordion}
       />
     </>

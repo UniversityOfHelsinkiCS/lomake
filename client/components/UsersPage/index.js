@@ -13,11 +13,11 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
 
 export default () => {
   const dispatch = useDispatch()
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   useEffect(() => {
-    document.title = translations['adminPage'][languageCode]
-  }, [languageCode])
+    document.title = translations['adminPage'][lang]
+  }, [lang])
 
   useEffect(() => {
     dispatch(getAllTokens())
@@ -26,7 +26,7 @@ export default () => {
 
   const panes = [
     {
-      menuItem: translations.users[languageCode],
+      menuItem: translations.users[lang],
       render: () => (
         <Tab.Pane>
           <UserTable />
@@ -34,7 +34,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.deadline[languageCode],
+      menuItem: translations.deadline[lang],
       render: () => (
         <Tab.Pane>
           <OspaModule />
@@ -42,7 +42,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.linksForOwners[languageCode],
+      menuItem: translations.linksForOwners[lang],
       render: () => (
         <Tab.Pane>
           <OwnerLinks />
@@ -50,7 +50,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.linksForFaculties[languageCode],
+      menuItem: translations.linksForFaculties[lang],
       render: () => (
         <Tab.Pane>
           <FacultyLinks />
@@ -58,7 +58,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.linksForDoctoral[languageCode],
+      menuItem: translations.linksForDoctoral[lang],
       render: () => (
         <Tab.Pane>
           <DoctorLinks />

@@ -11,7 +11,7 @@ import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer
 const Form = ({ questions, programmeKey }) => {
   const previousYearsAnswers = useSelector((state) => state.previousAnswers)
   const dispatch = useDispatch()
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const room = useSelector(({ room }) => room)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Form = ({ questions, programmeKey }) => {
       : {}
 
     if (part.type === 'TITLE') {
-      return <h2 key={part.id} style={divStyle}>{part.label[languageCode]}</h2>
+      return <h2 key={part.id} style={divStyle}>{part.label[lang]}</h2>
     }
 
     if (!partComponentMap.hasOwnProperty(part.type)) {
@@ -53,12 +53,12 @@ const Form = ({ questions, programmeKey }) => {
     if (part.type === 'ENTITY' || part.type === 'MEASURES') number++
 
     const Component = partComponentMap[part.type]
-    const description = part.description ? part.description[languageCode] : undefined
+    const description = part.description ? part.description[lang] : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
           id={part.id}
-          label={part.label[languageCode]}
+          label={part.label[lang]}
           description={description}
           required={part.required}
           noLight={part.no_light}
@@ -78,14 +78,14 @@ const Form = ({ questions, programmeKey }) => {
       {questions.map((section, index) => {
         return (
           <Section
-            title={section.title[languageCode]}
+            title={section.title[lang]}
             number={romanize(index)}
-            key={section.title[languageCode]}
+            key={section.title[lang]}
             programmeKey={programmeKey}
           >
             {section.link_title && section.link_url && (
               <a className="hide-in-print-mode" target="_blank" href={section.link_url}>
-                {section.link_title[languageCode]}
+                {section.link_title[lang]}
               </a>
             )}
             {section.parts.map(partMap)}

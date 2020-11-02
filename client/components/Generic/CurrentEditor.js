@@ -6,7 +6,7 @@ import { colors } from 'Utilities/common'
 export default ({ fieldName }) => {
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)
   const currentUserUid = useSelector((state) => state.currentUser.data.uid)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   const translations = {
     isWriting: {
@@ -21,7 +21,7 @@ export default ({ fieldName }) => {
 
   return (
     <span style={{ color: colors.blue, fontStyle: 'italic', marginLeft: '1em' }}>
-      {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${translations['isWriting'][languageCode]}`}
+      {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${translations['isWriting'][lang]}`}
       <Icon style={{ marginLeft: '5px' }} name={'pencil'} />
     </span>
   )

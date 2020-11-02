@@ -6,7 +6,7 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 
 
 const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   if (currentAccess)
     return (
       <Popup
@@ -16,7 +16,7 @@ const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false
             data-cy="removePermissions-button"
             disabled={disabled}
             color="red"
-            content={translations.removeAccess[languageCode]}
+            content={translations.removeAccess[lang]}
             onClick={() => remove()}
           />
         }
@@ -31,7 +31,7 @@ const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false
         <Button
           data-cy="grantPermissions-button"
           color="green"
-          content={translations.grantAccess[languageCode]}
+          content={translations.grantAccess[lang]}
           onClick={() => grant()}
         />
       }
@@ -93,7 +93,7 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
 }
 
 const OwnerAccordionUsers = ({ programme }) => {
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const currentUser = useSelector((state) => state.currentUser)
   const users = useSelector((state) => state.programmesUsers)
 
@@ -106,30 +106,30 @@ const OwnerAccordionUsers = ({ programme }) => {
 
   return (
     <div style={{ margin: '3em'}}>
-      <h2>{translations.userList[languageCode]}</h2>
+      <h2>{translations.userList[lang]}</h2>
       <Segment style={{ margin: '1em 0' }}>
         <Grid celled="internally">
           <Grid.Row>
             <Grid.Column width={3} style={{ textAlign: 'center' }}>
-              <Header as="h4">{translations.nameHeader[languageCode]}</Header>
+              <Header as="h4">{translations.nameHeader[lang]}</Header>
             </Grid.Column>
             <Grid.Column width={4} style={{ textAlign: 'center' }}>
               <Header as="h4">Email</Header>
             </Grid.Column>
             <Grid.Column width={2} style={{ textAlign: 'center' }}>
-              <Header as="h4">{translations.viewHeader[languageCode]}</Header>
+              <Header as="h4">{translations.viewHeader[lang]}</Header>
             </Grid.Column>
             <Grid.Column width={2} style={{ textAlign: 'center' }}>
-              <Header as="h4">{translations.editHeader[languageCode]}</Header>
+              <Header as="h4">{translations.editHeader[lang]}</Header>
             </Grid.Column>
             <Grid.Column width={2} style={{ textAlign: 'center' }}>
-              <Header as="h4">{translations.ownerHeader[languageCode]}</Header>
+              <Header as="h4">{translations.ownerHeader[lang]}</Header>
             </Grid.Column>
           </Grid.Row>
           {users.data.length === 0 ? (
             <Grid.Row>
               <Grid.Column width={13} style={{ textAlign: 'center' }}>
-                {translations.noUsers[languageCode]}
+                {translations.noUsers[lang]}
               </Grid.Column>
             </Grid.Row>
           ) : (

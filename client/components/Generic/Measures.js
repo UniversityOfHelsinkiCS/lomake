@@ -9,7 +9,7 @@ import { genericTranslations as translations } from 'Utilities/translations'
 
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const formData = useSelector((state) => state.form.data)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
           margin: '1em 0',
         }}
       >
-        {translations.measureLabel[languageCode]}
+        {translations.measureLabel[lang]}
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>

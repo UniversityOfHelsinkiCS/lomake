@@ -9,7 +9,7 @@ import { setLanguage } from 'Utilities/redux/languageReducer'
 export default () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.currentUser.data)
-  const languageCode = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   const translations = {
     logOut: {
@@ -38,10 +38,10 @@ export default () => {
   const setLanguageCode = (code) => dispatch(setLanguage(code))
 
   useEffect(() => {
-    if (languageCode === 'se') {
+    if (lang === 'se') {
       alert(warning)
     }
-  }, [languageCode])
+  }, [lang])
 
   const handleLogout = () => {
     dispatch(logoutAction())
@@ -65,7 +65,7 @@ export default () => {
   const GoToAdminPageButton = () => {
     return (
       <Menu.Item data-cy="nav-admin" as={Link} to={'/admin'} name="adminControls">
-        {translations.adminPage[languageCode]}
+        {translations.adminPage[lang]}
       </Menu.Item>
     )
   }
@@ -87,7 +87,7 @@ export default () => {
         <Dropdown
           data-cy="navBar-localeDropdown"
           item
-          text={`${translations.language[languageCode]} (${languageCode.toUpperCase()}) `}
+          text={`${translations.language[lang]} (${lang.toUpperCase()}) `}
           simple
         >
           <Dropdown.Menu>
@@ -118,7 +118,7 @@ export default () => {
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`${translations['logOut'][languageCode]} (${user.uid})`}
+          {`${translations['logOut'][lang]} (${user.uid})`}
         </Menu.Item>
       </Menu.Menu>
     </Menu>
