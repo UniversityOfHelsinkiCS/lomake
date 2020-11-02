@@ -9,10 +9,10 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import { internationalProgrammes as international } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import faculties from '../../facultyTranslations'
+import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
-const Comparison = ({ questionsList, usersProgrammes, allAnswers, facultiesByKey }) => {
+const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const lang = useSelector((state) => state.language)
   const level = useSelector((state) => state.programmeLevel)
@@ -40,13 +40,13 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers, facultiesByKey
       return prog === chosen
     })
     if (!filtered) return ''
-    const facultyCode = facultiesByKey.get(filtered.key)
-    const faculty = faculties[lang].find((f) => f.key == facultyCode)
+    const facultyCode = filtered.primaryFaculty.code
+    const faculty = facultyNames[lang].find((f) => f.key == facultyCode)
     if (!faculty) return translations.noFaculty[lang]
     return faculty.text
   }
 
-  const comparedFaculty = faculties[lang].find((f) => f.value === faculty)
+  const comparedFaculty = facultyNames[lang].find((f) => f.value === faculty)
 
   const chosenAnswers = (question) => {
     if (!allAnswers || !chosen) return []
@@ -59,8 +59,8 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers, facultiesByKey
     if (!usersProgrammes) return []
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
-      if (faculty === 'allFaculties') return usersProgrammes
-      return facultiesByKey.get(p.key) === faculty
+      if (faculty === 'allFaculties') return true
+      return p.primaryFaculty.code === faculty
     })
 
     const filteredByLevel = filteredByFaculty.filter((p) => {

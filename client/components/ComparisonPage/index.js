@@ -6,7 +6,6 @@ import Comparison from './Comparison'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import {
   answersByYear,
-  facultiesWithKeys,
   programmeNameByKey as programmeName,
   sortedItems,
 } from 'Utilities/common'
@@ -24,14 +23,13 @@ export default () => {
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
-  const faculties = facultiesWithKeys(facultiesData)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!selectedAnswers || !usersProgrammes || !faculties) return <></>
+  if (!selectedAnswers || !usersProgrammes || !facultiesData) return <></>
 
   const modifiedQuestions = () => {
     let attributes = []
@@ -113,7 +111,6 @@ export default () => {
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersByQuestions() : []}
-            facultiesByKey={faculties}
           />
         </Tab.Pane>
       ),
