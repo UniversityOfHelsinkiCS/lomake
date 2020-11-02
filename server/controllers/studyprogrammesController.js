@@ -47,7 +47,12 @@ const getUsersProgrammes = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const { programme } = req.params
-    const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
+    const programEntity = await db.studyprogramme.findOne({ 
+      where: { 
+        key: programme 
+      },
+      include: ["primaryFaculty","companionFaculties"],
+    })
     res.status(200).json(programEntity)
   } catch (error) {
     logger.error(`Database error: ${error}`)

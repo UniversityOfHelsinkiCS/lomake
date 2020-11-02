@@ -35,16 +35,15 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
 
   const chosenProgrammeFaculty = () => {
-    if (!usersProgrammes) return ''
-
-    const filtered = usersProgrammes.find((p) => {
+    const searched = usersProgrammes.find((p) => {
       const prog = p.name[lang] ? p.name[lang] : p.name['en']
       return prog === chosen
     })
-    if (!filtered) return ''
-    const facultyCode = filtered.primaryFaculty.code
-    const faculty = facultyNames[lang].find((f) => f.key == facultyCode)
-    if (!faculty) return translations.noFaculty[lang]
+    if (!searched) return ''
+
+    const faculty = facultyNames[lang].find((f) => f.key == searched.primaryFaculty.code)
+    if (!faculty) return ''
+
     return faculty.text
   }
 
@@ -176,7 +175,8 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                   showEmpty={showEmpty}
                 />
               )
-          )}
+            )
+          }
         </Grid.Column>
         <Grid.Column>
           {questionsList.map(
@@ -193,7 +193,8 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                   name="faculty"
                 />
               )
-          )}
+            )
+          }
         </Grid.Column>
         {user.admin && (
           <Grid.Column>
@@ -211,7 +212,8 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                     name="university"
                   />
                 )
-            )}
+              )
+            }
           </Grid.Column>
         )}
       </Grid>
