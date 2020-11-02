@@ -103,24 +103,6 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCo
   return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
 }
 
-export const keysWithFaculties = (faculties) => {
-  if (!faculties) return []
-  let programmesWithFaculties = new Map()
-  faculties.forEach((faculty) => {
-    faculty.ownedProgrammes.forEach(({key}) => programmesWithFaculties.set(key, faculty.name))
-  })
-  return programmesWithFaculties
-}
-
-export const facultiesWithKeys = (faculties) => {
-  if (!faculties) return
-  let facultiesWithProgrammes = new Map()
-  faculties.forEach((faculty) => {
-    faculty.ownedProgrammes.forEach(({key}) => facultiesWithProgrammes.set(key, faculty.code))
-  })
-  return facultiesWithProgrammes
-}
-
 export const cleanText = (string) => {
   if (!string) return
   if (string === '') return
