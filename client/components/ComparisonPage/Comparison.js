@@ -4,6 +4,7 @@ import { Dropdown, Grid, Radio } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
+import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
@@ -13,6 +14,7 @@ import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
 const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
+  const [showCompanion, setShowCompanion] = useState(false)
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const lang = useSelector((state) => state.language)
   const level = useSelector((state) => state.programmeLevel)
@@ -60,6 +62,11 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
       if (faculty === 'allFaculties') return true
+      if (showCompanion) {
+        const companionFaculties = p.companionFaculties.map((f) => f.code)
+        if (companionFaculties.includes(faculty)) return true
+        else return p.primaryFaculty.code === faculty
+      }
       return p.primaryFaculty.code === faculty
     })
 
@@ -128,8 +135,15 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
           <Grid.Column>
             <FacultyFilter size="large" label={translations.facultyFilter[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
+            {faculty !== 'allFaculties' &&
+              <CompanionFilter
+                showCompanion={showCompanion}
+                setShowCompanion={setShowCompanion}
+                comparison
+              />
+            }
           </Grid.Column>
-          <Grid.Column verticalAlign="bottom">
+          <Grid.Column>
             <Radio
               className="comparison-toggle"
               checked={showEmpty}
