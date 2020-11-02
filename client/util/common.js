@@ -68,8 +68,8 @@ export const internationalProgrammes = [
   'MH30_002',
   'MH40_004',
   'MH57_005',
-  'msc_changing_education_(2020_lähtien)',
-  'msc_global_governance_law_(2020_lähtien)',
+  'MH60_002',
+  'MH20_003',
 ]
 
 export const sortedItems = (items, sorter, languageCode) => {
