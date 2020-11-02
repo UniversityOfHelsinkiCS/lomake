@@ -19,6 +19,17 @@ describe('Misc tests', function () {
     cy.contains('Vastaukset tallentuvat automaattisesti.')
   })
 
+  it('CSV-download can be started on OverviewPage', function () {
+    cy.get('[data-cy=csv-download]').should('contain', 'Download')
+    cy.get('[data-cy=csv-download]').click()
+  })
+
+  it('CSV-download can be started on FormPage', function () {
+    cy.visit(`/form/${testProgrammeName}`)
+    cy.get('[data-cy=csv-download]').should('contain', 'Download')
+    cy.get('[data-cy=csv-download]').click()
+  })
+
   it('Access keys are pre-generated', function () {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
     cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)

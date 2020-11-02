@@ -100,6 +100,7 @@ export default () => {
               {translations.compareAnswersButton[languageCode]}
             </Button>
             <Dropdown
+              data-cy="csv-download"
               className="button basic gray"
               direction="left"
               text={translations.csvDownload[languageCode]}

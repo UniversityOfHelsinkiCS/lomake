@@ -177,7 +177,9 @@ const FormView = ({ room }) => {
             className="button basic gray"
             direction="left"
             text={translations.csvDownload[languageCode]}
-            onClick={() => setShowCsv(!showCsv)}>
+            onClick={() => setShowCsv(!showCsv)}
+            data-cy="csv-download"
+          >
             {showCsv ?
               <Dropdown.Menu>
                 <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written"/>} />
