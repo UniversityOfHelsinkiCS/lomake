@@ -134,7 +134,9 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
           <Grid.Column>
             <FacultyFilter size="large" label={translations.facultyFilter[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
-            {faculty !== 'allFaculties' &&
+            {
+              faculty !== 'allFaculties' &&
+              level === 'doctor' &&
               <CompanionFilter
                 showCompanion={showCompanion}
                 setShowCompanion={setShowCompanion}
