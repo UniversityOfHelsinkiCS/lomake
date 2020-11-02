@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { answersByYear, programmeNameByKey as programmeName } from 'Utilities/common'
@@ -12,19 +12,12 @@ const CsvDownload = ({ wantedData, view, programme }) => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
-  const currentUser = useSelector((state) => state.currentUser)
-  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const programmeData = useSelector(({ form }) => form.data)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
+  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
 
-  const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return currentUser.data.admin
-      ? programmes
-      : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
-  }, [programmes, currentUser.data])
   
   const handleData = () => {
 
@@ -134,8 +127,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       let answersArray = []
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
       else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)
-
-      const name = programmeName(null, programme, lang)
+      const name = programme.name[lang] ? programme.name[lang] : programme.name['en']
       const faculty = faculties.get(programme.key)
       const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]
@@ -143,12 +135,12 @@ const CsvDownload = ({ wantedData, view, programme }) => {
     } else if (view == "overview") {
 
       if (!selectedAnswers) return [[],[]]
+      if (!usersProgrammes) return [[],[]]
 
       selectedAnswers.forEach((programme) => {
         let answersArray = []
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
         else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
-
         const name = programmeName(usersProgrammes, programme, lang)
         const faculty = faculties.get(programme.programme)
         const dataRow = [name, faculty, ...answersArray]

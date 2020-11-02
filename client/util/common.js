@@ -89,8 +89,17 @@ export const sortedItems = (items, sorter, languageCode) => {
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, languageCode) => {
   let prog = ""
+  if (!studyProgrammes) return ''
+  if (studyProgrammes && programmeWithKey.programme === "msc_global_governance_law_(2020_lähtien)") {
+    prog = studyProgrammes.find((a) => a.key === "MH20_003")
+    return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
+  }
+  else if (studyProgrammes && programmeWithKey.programme === "msc_changing_education_(2020_lähtien)") {
+    prog = studyProgrammes.find((a) => a.key === "MH60_002")
+    return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
+  }
   if (studyProgrammes) prog = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
-  else prog = programmeWithKey
+  if (!prog) return ''
   return prog.name[languageCode] ? prog.name[languageCode] : prog.name['en']
 }
 
