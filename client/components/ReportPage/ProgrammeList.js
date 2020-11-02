@@ -1,18 +1,31 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Segment } from 'semantic-ui-react'
+import { Icon, Segment } from 'semantic-ui-react'
 import { sortedItems } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const lang = useSelector((state) => state.language)
+  const faculty = useSelector((state) => state.faculties.selectedFaculty)
 
   const addToList = (programme) => {
     if (!picked.includes(programme)) {
       setPicked(() => ([...picked, programme]))
     }
   }
+
+  const Programme = ({ p }) => (
+    <>
+      {p.name[lang] ? p.name[lang] : p.name['en']}
+      {p.primaryFaculty.code !== faculty &&
+        faculty !== 'allFaculties' &&
+        <span className="report-list-companion-icon">
+          <Icon name="handshake outline" />
+        </span>
+      }
+    </>
+  )
 
   return (
     <Segment className="report-list-container" data-cy="report-programmes-list">
@@ -27,7 +40,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               onClick={() => addToList(p)}
               key={p.key}
             >
-              {p.name[lang] ? p.name[lang] : p.name['en']}
+              <Programme p={p} />
             </p>
           )}
           <div className="ui divider" />
@@ -39,7 +52,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               onClick={() => addToList(p)}
               key={p.key}
             >
-              {p.name[lang] ? p.name[lang] : p.name['en']}
+              <Programme p={p} />
             </p>
           )}
         </>

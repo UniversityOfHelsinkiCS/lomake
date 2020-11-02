@@ -71,7 +71,7 @@ export default () => {
   
     const filteredByFaculty = filteredByLevel.filter((p) => {
       if (faculty === 'allFaculties') return true
-
+      console.log(p)
       if (showCompanion) {
         const companionFaculties = p.companionFaculties.map((f) => f.code)
         if (companionFaculties.includes(faculty)) return true
@@ -208,6 +208,7 @@ export default () => {
               <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
               <LevelFilter usersProgrammes={usersProgrammes}/>
               {faculty !== 'allFaculties' &&
+                level === 'doctor' &&
                 <CompanionFilter
                   showCompanion={showCompanion}
                   setShowCompanion={setShowCompanion}
