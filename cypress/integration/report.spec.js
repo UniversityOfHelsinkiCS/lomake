@@ -92,8 +92,10 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Law').should('be.visible').click()
-    cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 5')
+    cy.get('[data-cy=report-list-programme-KH20_001]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-MH20_003]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-MH20_001]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-MH57_001]').should('not.be.visible')
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {

@@ -23,6 +23,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
             programmes.chosen.includes(p) &&
             <p
               className="report-list-included"
+              data-cy={`report-list-programme-${p.key}`}
               onClick={() => addToList(p)}
               key={p.key}
             >
