@@ -14,7 +14,6 @@ import {
   answersByYear,
   cleanText,
   getMeasuresAnswer,
-  facultiesWithKeys,
   internationalProgrammes as international,
   programmeNameByKey as programmeName,
 } from 'Utilities/common'
@@ -33,13 +32,11 @@ export default () => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector((state) => state.form.selectedYear)
-  const facultiesData = useSelector(({ faculties }) => faculties.data)
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
-  const faculties = facultiesWithKeys(facultiesData)
 
 
   useEffect(() => {
@@ -71,7 +68,7 @@ export default () => {
   
     const filteredByFaculty = filteredByLevel.filter((p) => {
       if (faculty === 'allFaculties') return true
-      return faculties.get(p.key) === faculty
+      return p.primaryFaculty.code === faculty
     })
 
     const filteredByPick = filteredByFaculty.filter((p) => {

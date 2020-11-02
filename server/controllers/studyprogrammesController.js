@@ -19,13 +19,22 @@ const getAll = async (req, res) => {
 const getUsersProgrammes = async (req, res) => {
   try {
     if (req.user.admin) {
-      const data = await db.studyprogramme.findAll({})
+      const data = await db.studyprogramme.findAll({
+        attributes: {
+          exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
+        },
+        include: ["primaryFaculty","companionFaculties"],
+      })
       return res.status(200).json(data)
     } else {
       const data = await db.studyprogramme.findAll({
         where: {
           key: Object.keys(req.user.access)
-        }
+        },
+        attributes: {
+          exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
+        },
+        include: ["primaryFaculty","companionFaculties"],
       })
       return res.status(200).json(data)
     }
