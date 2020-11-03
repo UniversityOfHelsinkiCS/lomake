@@ -22,6 +22,7 @@ const CompanionFilter = () => {
         <Form.Group inline>
           <Form.Field>
             <Radio
+              data-cy="companion-filter"
               label={translations.companionFilter[lang]}
               name='companion'
               value={companion}

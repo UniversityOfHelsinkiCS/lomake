@@ -98,6 +98,38 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-MH57_001]').should('not.be.visible')
   })
 
+  it('Filtering works for doctoral schools', function () {
+    cy.login(adminUser)
+    cy.request('/api/cypress/createAnswers')
+    cy.reload()
+    cy.visit('/report')
+    cy.get('[data-cy=doctoral-school-filter]').should('not.be.visible')
+    cy.get('[data-cy=doctor-filter]').click()
+    cy.get('[data-cy=doctoral-school-filter]').should('be.visible')
+    cy.get('[data-cy=doctoral-school-filter]').click()
+    cy.get('span').contains('Doctoral school in natural sciences').should('be.visible').click()
+    cy.get('[data-cy=report-list-programme-T923104]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-T923107]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-T922104]').should('not.be.visible')
+  })
+
+  it('Filtering works for companion programmes', function () {
+    cy.login(adminUser)
+    cy.request('/api/cypress/createAnswers')
+    cy.reload()
+    cy.visit('/report')
+    cy.get('[data-cy=companion-filter]').should('not.be.visible')
+    cy.get('[data-cy=faculty-filter]').click()
+    cy.get('span').contains('Veterinary Medicine').should('be.visible').click()
+    cy.get('[data-cy=doctor-filter]').click()
+    cy.get('[data-cy=companion-filter]').should('be.visible')
+    cy.get('[data-cy=companion-filter]').click()
+    cy.get('[data-cy=report-select-all]').click()
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 6')
+    cy.get('[data-cy=master-filter').click()
+    cy.get('[data-cy=report-list-programme-MH90_001]').should('be.visible')
+  })
+
   it('Changes in smileys are reflected to the piecharts', function () {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
