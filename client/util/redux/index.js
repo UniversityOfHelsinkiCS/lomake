@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import form from './formReducer'
 import room from './roomReducer'
 import currentUser from './currentUserReducer'
+import filter from './filterReducer'
 import users from './usersReducer'
 import tempAnswers from './tempAnswersReducer'
 import oldAnswers from './oldAnswersReducer'
@@ -21,6 +22,7 @@ export default combineReducers({
   form,
   room,
   currentUser,
+  filter,
   users,
   tempAnswers,
   oldAnswers,

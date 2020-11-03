@@ -7,6 +7,7 @@ import WrittenAnswers from './WrittenAnswers'
 import SmileyAnswers from './SmileyAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
+import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
@@ -17,6 +18,7 @@ import {
   getMeasuresAnswer,
   internationalProgrammes as international,
   programmeNameByKey as programmeName,
+  doctoralSchools,
 } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
@@ -28,7 +30,6 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
-  const [showCompanion, setShowCompanion] = useState(false)
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -36,10 +37,11 @@ export default () => {
   const year = useSelector((state) => state.form.selectedYear)
   const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const level = useSelector((state) => state.programmeLevel)
+  const companion = useSelector((state) => state.filter.companion)
+  const doctoralSchool = useSelector((state) => state.filter.doctoralSchool)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
-
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -71,7 +73,7 @@ export default () => {
   
     const filteredByFaculty = filteredByLevel.filter((p) => {
       if (faculty === 'allFaculties') return true
-      if (showCompanion) {
+      if (companion) {
         const companionFaculties = p.companionFaculties.map((f) => f.code)
         if (companionFaculties.includes(faculty)) return true
         else return p.primaryFaculty.code === faculty
@@ -79,11 +81,16 @@ export default () => {
       return p.primaryFaculty.code === faculty
     })
 
-    const filteredByPick = filteredByFaculty.filter((p) => {
+    const filteredBySchool = filteredByFaculty.filter((p) => {
+      if (doctoralSchool === 'allSchools') return true
+      return doctoralSchools[doctoralSchool].includes(p.key)
+    })
+
+    const filteredByPick = filteredBySchool.filter((p) => {
       return picked.includes(p)
     })    
 
-    return { chosen: filteredByPick, all: filteredByFaculty }
+    return { chosen: filteredByPick, all: filteredBySchool }
   }
 
   const programmes = filteredProgrammes()
@@ -205,13 +212,14 @@ export default () => {
           {usersProgrammes && usersProgrammes.length > 5 &&
             <>
               <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
-              <LevelFilter usersProgrammes={usersProgrammes}/>
+              <LevelFilter />
               {faculty !== 'allFaculties' &&
                 level === 'doctor' &&
-                <CompanionFilter
-                  showCompanion={showCompanion}
-                  setShowCompanion={setShowCompanion}
-                />
+                <CompanionFilter />
+              }
+              {faculty === 'allFaculties' &&
+                level === 'doctor' &&
+                <DoctoralSchoolFilter />
               }
               <ProgrammeFilter
                 handleChange={handleSearch}

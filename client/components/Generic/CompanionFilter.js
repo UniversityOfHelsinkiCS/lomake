@@ -1,12 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
+import { clearDoctorFilters, setCompanion } from 'Utilities/redux/filterReducer'
 import './Filters.scss'
 
 
-const CompanionFilter = ({ showCompanion, setShowCompanion }) => {
+const CompanionFilter = () => {
+  const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const companion = useSelector((state) => state.filter.companion)
+
+  const handleChange = () => {
+    dispatch(clearDoctorFilters())
+    dispatch(setCompanion(!companion))
+  }
 
   return (
     <div className="companion-filter">
@@ -16,9 +24,9 @@ const CompanionFilter = ({ showCompanion, setShowCompanion }) => {
             <Radio
               label={translations.companionFilter[lang]}
               name='companion'
-              value='companion'
-              checked={showCompanion}
-              onChange={() => setShowCompanion(!showCompanion)}
+              value={companion}
+              checked={companion}
+              onChange={handleChange}
               toggle
             />
           </Form.Field>

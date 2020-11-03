@@ -14,7 +14,7 @@
 .faculty-filter {
   &-small {
     @include filter-basics;
-    width: 280px;
+    width: 300px;
   }
   &-large {
     @include filter-basics;
@@ -44,6 +44,11 @@
   .empty-answer {
     margin-left: 5px;
   }
+}
+
+.doctoral-school-filter {
+  @include filter-basics;
+  width: 300px;
 }
 
 .year-filter {
