@@ -49,6 +49,12 @@ export default () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
+  const moreThanFiveProgrammes = useMemo(() => {
+    if (currentUser.data.admin) return true
+    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
+    return false
+  }, [])
+
   return (
     <>
       {modalData && (
@@ -96,12 +102,14 @@ export default () => {
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
               {translations.readAnswersButton[lang]}
             </Button>
-            <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-              {translations.compareAnswersButton[lang]}
-            </Button>
+            {moreThanFiveProgrammes &&
+              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+                {translations.compareAnswersButton[lang]}
+              </Button>
+            }
             <Dropdown
               data-cy="csv-download"
-              className="button basic gray"
+              className="button basic gray csv-download"
               direction="left"
               text={translations.csvDownload[lang]}
               onClick={() => setShowCsv(true)}
