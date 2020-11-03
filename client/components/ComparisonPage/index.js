@@ -18,7 +18,7 @@ export default () => {
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
-  const year = useSelector((state) => state.form.selectedYear)
+  const year = useSelector(({ filters }) => filters.year)
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)

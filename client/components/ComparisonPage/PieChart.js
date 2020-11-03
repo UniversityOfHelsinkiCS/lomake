@@ -7,7 +7,7 @@ import { colors } from 'Utilities/common'
 export default ({ question, answers, showEmpty, programmes, faculty, name }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
-  const level = useSelector((state) => state.programmeLevel)
+  const level = useSelector(({ filters }) => filters.level)
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null

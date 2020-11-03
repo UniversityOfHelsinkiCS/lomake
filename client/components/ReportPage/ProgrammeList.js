@@ -7,7 +7,7 @@ import { reportPageTranslations as translations } from 'Utilities/translations'
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const lang = useSelector((state) => state.language)
-  const faculty = useSelector((state) => state.faculties.selectedFaculty)
+  const faculty = useSelector(({ filters }) => filters.faculty)
 
   const addToList = (programme) => {
     if (!picked.includes(programme)) {

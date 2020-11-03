@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
-import { setSelectedFaculty } from 'Utilities/redux/facultyReducer'
-import { clearDoctorFilters } from 'Utilities/redux/filterReducer'
+import { clearDoctorFilters, setFaculty } from 'Utilities/redux/filterReducer'
 import faculties from '../../facultyTranslations'
 import './Filters.scss'
 
@@ -10,11 +9,11 @@ import './Filters.scss'
 const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
-  const selectedFaculty = useSelector(({ faculties }) => faculties.selectedFaculty)
+  const faculty = useSelector(({ filters }) => filters.faculty)
 
   const handleChange = (e, { value }) => {
     dispatch(clearDoctorFilters())
-    dispatch(setSelectedFaculty(value))
+    dispatch(setFaculty(value))
   }
 
   return (
@@ -26,7 +25,7 @@ const FacultyFilter = ({ size, label }) => {
         selection
         options={faculties[lang]}
         onChange={handleChange}
-        value={selectedFaculty}
+        value={faculty}
       />
     </div>
   )

@@ -9,7 +9,7 @@ import './Filters.scss'
 const CompanionFilter = () => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
-  const companion = useSelector((state) => state.filter.companion)
+  const companion = useSelector(({ filters }) => filters.companion)
 
   const handleChange = () => {
     dispatch(clearDoctorFilters())

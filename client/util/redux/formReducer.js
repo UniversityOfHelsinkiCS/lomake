@@ -20,6 +20,11 @@ export const setViewOnly = (value) => ({
   value,
 })
 
+export const setViewingOldAnswers = (value) => ({
+  type: 'SET_VIEWING_OLD_ANSWERS',
+  value,
+})
+
 export const getFormAction = () => {
   const route = '/form'
   const prefix = 'GET_FORM'
@@ -38,15 +43,9 @@ export const postFormAction = (message) => {
   return callBuilder(route, prefix, 'post', message)
 }
 
-export const setSelectedYear = (year) => ({
-  type: 'SET_SELECTED_YEAR',
-  year,
-})
-
 const initialState = {
   data: {},
   viewOnly: false,
-  selectedYear: new Date().getFullYear(),
   viewingOldAnswers: false,
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
@@ -96,19 +95,18 @@ export default (state = initialState, action) => {
         ...state,
         viewOnly: action.value,
       }
+    case 'SET_VIEWING_OLD_ANSWERS':
+      return {
+        ...state,
+        viewingOldAnswers: action.value,
+      }
     case 'UPDATE_CURRENT_EDITORS': {
       return {
         ...state,
         lastSaveSuccess: new Date(),
       }
     }
-    case 'SET_SELECTED_YEAR': {
-      return {
-        ...state,
-        selectedYear: action.year,
-        viewingOldAnswers: action.year !== new Date().getFullYear(),
-      }
-    }
+
     default:
       return state
   }

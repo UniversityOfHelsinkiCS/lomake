@@ -34,7 +34,7 @@ const SmileyTable = React.memo(
     const lang = useSelector((state) => state.language)
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
-    const selectedYear = useSelector((state) => state.form.selectedYear)
+    const year = useSelector(({ filters }) => filters.year)
     const [reverse, setReverse] = useState(false)
 
     useEffect(() => {
@@ -43,11 +43,11 @@ const SmileyTable = React.memo(
     }, [])
 
     const deadline = useSelector((state) => state.deadlines.nextDeadline)
-    const selectedAnswers = answersByYear(selectedYear, answers, oldAnswers, deadline)
+    const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
 
     const lastYearsAnswers =
-      oldAnswers && oldAnswers.years && oldAnswers.years.includes(selectedYear - 1)
-        ? oldAnswers.data.filter((a) => a.year === selectedYear - 1)
+      oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
+        ? oldAnswers.data.filter((a) => a.year === year - 1)
         : null
 
     let sortedProgrammes = sortedItems(filteredProgrammes, SORTER, lang)

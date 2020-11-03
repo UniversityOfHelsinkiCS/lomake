@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
-import { setSelectedYear } from 'Utilities/redux/formReducer'
+import { setYear } from 'Utilities/redux/filterReducer'
+import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
 import './Filters.scss'
 
 export default function YearSelector() {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
-  const selectedYear = useSelector((state) => state.form.selectedYear)
+  const year = useSelector(({ filters }) => filters.year)
   const [yearOptions, setYearOptions] = useState([])
 
   const dispatch = useDispatch()
@@ -27,7 +28,14 @@ export default function YearSelector() {
   }, [previousYearsWithAnswers])
 
   const handleYearChange = (_, { value }) => {
-    dispatch(setSelectedYear(value))
+    if (value !== new Date().getFullYear()) {
+      dispatch(setViewOnly(true))
+      dispatch(setViewingOldAnswers(true))
+    } else {
+      dispatch(setViewOnly(false))
+      dispatch(setViewingOldAnswers(false))
+    }
+    dispatch(setYear(value))
   }
 
   if (!previousYearsWithAnswers) return null
@@ -40,7 +48,7 @@ export default function YearSelector() {
       name="year"
       options={yearOptions}
       onChange={handleYearChange}
-      value={selectedYear}
+      value={year}
     />
   )
 }

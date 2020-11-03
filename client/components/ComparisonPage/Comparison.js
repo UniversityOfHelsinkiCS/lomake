@@ -15,11 +15,9 @@ import './ComparisonPage.scss'
 
 const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [showCompanion, setShowCompanion] = useState(false)
-  const faculty = useSelector((state) => state.faculties.selectedFaculty)
   const lang = useSelector((state) => state.language)
-  const level = useSelector((state) => state.programmeLevel)
+  const { level, year, faculty } = useSelector(({ filters }) => filters)
   const user = useSelector((state) => state.currentUser.data)
-  const year = useSelector((state) => state.form.selectedYear)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
   const history = useHistory()

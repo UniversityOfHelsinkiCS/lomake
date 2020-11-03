@@ -11,7 +11,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
-  const year = useSelector((state) => state.form.selectedYear)
+  const year = useSelector(({ filters }) => filters.year)
   const programmeData = useSelector(({ form }) => form.data)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)

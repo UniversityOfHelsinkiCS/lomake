@@ -31,7 +31,7 @@ const FormView = ({ room }) => {
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
-  const selectedYear = useSelector((state) => state.form.selectedYear)
+  const year = useSelector(({ filters }) => filters.year)
   const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
   const currentRoom = useSelector((state) => state.room)
@@ -75,7 +75,7 @@ const FormView = ({ room }) => {
       }
       if (!viewingOldAnswers && !deadline && oldAnswers) {
         const programmesData = oldAnswers.find(
-          (answer) => answer.programme === programme.key && answer.year === selectedYear)
+          (answer) => answer.programme === programme.key && answer.year === year)
         const answersFromSelectedYear = programmesData ? programmesData.data : []
   
         dispatch({
@@ -90,7 +90,7 @@ const FormView = ({ room }) => {
 
     if (viewingOldAnswers && oldAnswers) {
       const programmesData = oldAnswers.find(
-        (answer) => answer.programme === programme.key && answer.year === selectedYear)
+        (answer) => answer.programme === programme.key && answer.year === year)
       const answersFromSelectedYear = programmesData ? programmesData.data : []
 
       dispatch({
@@ -98,7 +98,7 @@ const FormView = ({ room }) => {
         answers: answersFromSelectedYear,
       })
     }
-  }, [singleProgramPending, viewingOldAnswers, selectedYear, deadline, oldAnswers])
+  }, [singleProgramPending, viewingOldAnswers, year, deadline, oldAnswers])
 
   useEffect(() => {
     return () => {
@@ -135,7 +135,7 @@ const FormView = ({ room }) => {
 
           <h1 style={{ color: colors.blue }}>{localizedProgramName}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {translations.title[lang]} {selectedYear}
+            {translations.title[lang]} {year}
           </h3>
 
           <div className="hide-in-print-mode">
