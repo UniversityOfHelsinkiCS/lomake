@@ -48,7 +48,7 @@ Cypress.Commands.add('givePermissions', (uid, programme, level) => {
  * Writes text to custom editor used in form.
  * Can be used to "paste" long texts.
  */
-Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
+Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
   cy.server()
   cy.route('POST', '/socket.io/*').as('update')
 
@@ -73,4 +73,22 @@ Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
       textarea.dispatchEvent(new Event('blur'))
     })
   cy.wait('@update')
+})
+
+Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
+  cy.server()
+  cy.route('POST', '/socket.io/*').as('update')
+
+  // Get "edit-lock" for the textfield
+  cy.route('GET', '/socket.io/*').as('getLock')
+  cy.get(editorName).click()
+  cy.wait('@getLock')
+
+  cy.get(editorName)
+    .find('.editor-class')
+    .find('.DraftEditor-root')
+    .find('.DraftEditor-editorContainer')
+    .find('.public-DraftEditor-content')
+    .type(textToBeTyped)
+    .wait('@update')
 })

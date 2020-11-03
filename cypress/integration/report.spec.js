@@ -18,8 +18,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-no-data]')
   })
 
-  //FIXME: flaky
-  it.skip('User should be able to see the just written answers in the report', function () {
+  it('User should be able to see the just written answers in the report', function () {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
@@ -41,8 +40,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
-  //FIXME: flaky
-  it.skip('User should not be able to see answers in fields where there are none', function () {
+  it('User should not be able to see answers in fields where there are none', function () {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()

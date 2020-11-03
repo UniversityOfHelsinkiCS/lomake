@@ -6,7 +6,7 @@ export const getEditorInputLength = (editorName) => {
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
     .then((input) => {
-      var textarea = input.get(0)
+      const textarea = input.get(0)
       return textarea.textContent.length
     })
 }
