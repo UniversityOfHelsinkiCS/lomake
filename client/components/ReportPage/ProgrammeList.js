@@ -49,6 +49,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
             !programmes.chosen.includes(p) &&
             <p
               className="report-list-excluded"
+              data-cy={`report-list-programme-${p.key}`}
               onClick={() => addToList(p)}
               key={p.key}
             >
