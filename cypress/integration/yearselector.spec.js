@@ -44,6 +44,24 @@ describe("Previous year's answers", function () {
     cy.get('.customModal-content').contains('Hello from 2018')
   })
 
+  it("Can't write answers if viewing old answers", function () {
+    cy.request('/api/cypress/createAnswers')
+    cy.visit(`/form/${testProgrammeName}`)
+    cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
+
+
+    cy.get('[data-cy=yearSelector]').then((newEl) => {
+      expect(newEl.find('.item')).to.have.length(3)
+    })
+
+    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').contains(2019).click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains('Hello from 2019')
+
+    cy.reload()
+    cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('not.be.visible')
+  })
+
   // FIXME: flaky
   it.skip('Can view old answers in Form-page and switch back to editMode to continue working.', function () {
     cy.request('/api/cypress/createAnswers')

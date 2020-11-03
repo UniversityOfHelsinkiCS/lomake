@@ -135,7 +135,9 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
         <ReactMarkdown source={dataFromRedux} />
       ) : (
         <>
-          <div onClick={askForLock} style={{ marginTop: '1em' }}>
+          <div
+            data-cy={`editing-area-${id}`}
+            onClick={askForLock} style={{ marginTop: '1em' }}>
             <Editor
               editorStyle={{ wordBreak: 'break-word', width: '100%' }}
               ref={ref}
