@@ -53,7 +53,7 @@ export default () => {
     if (currentUser.data.admin) return true
     if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
-  }, [])
+  }, [currentUser])
 
   return (
     <>
