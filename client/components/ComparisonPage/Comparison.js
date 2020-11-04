@@ -14,9 +14,8 @@ import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
 const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
-  const [showCompanion, setShowCompanion] = useState(false)
   const lang = useSelector((state) => state.language)
-  const { level, year, faculty } = useSelector(({ filters }) => filters)
+  const { companion, level, year, faculty } = useSelector(({ filters }) => filters)
   const user = useSelector((state) => state.currentUser.data)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
@@ -59,7 +58,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
 
     const filteredByFaculty = usersProgrammes.filter((p) => {
       if (faculty === 'allFaculties') return true
-      if (showCompanion) {
+      if (companion) {
         const companionFaculties = p.companionFaculties.map((f) => f.code)
         if (companionFaculties.includes(faculty)) return true
         else return p.primaryFaculty.code === faculty
@@ -135,11 +134,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
             {
               faculty !== 'allFaculties' &&
               level === 'doctor' &&
-              <CompanionFilter
-                showCompanion={showCompanion}
-                setShowCompanion={setShowCompanion}
-                comparison
-              />
+              <CompanionFilter />
             }
           </Grid.Column>
           <Grid.Column>

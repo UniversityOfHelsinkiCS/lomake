@@ -25,7 +25,6 @@ const CompanionFilter = () => {
               data-cy="companion-filter"
               label={translations.companionFilter[lang]}
               name='companion'
-              value={companion}
               checked={companion}
               onChange={handleChange}
               toggle
