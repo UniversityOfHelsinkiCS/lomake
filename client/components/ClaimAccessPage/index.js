@@ -5,7 +5,6 @@ import { Button, Message, Icon, Input, Loader, List } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import { claimAccessTranslations as translations } from 'Utilities/translations'
 
-
 const labelIcon = {
   ADMIN: 'key',
   WRITE: 'write',
@@ -30,9 +29,7 @@ export default ({ url }) => {
       if (token.data.programme) {
         const program = studyProgrammes.find((p) => p.key === token.data.programme)
 
-        const temp = program['name'][lang]
-          ? program['name'][lang]
-          : program['name']['en']
+        const temp = program['name'][lang] ? program['name'][lang] : program['name']['en']
 
         setLocalizedProgramname(temp)
       } else {
@@ -90,10 +87,10 @@ export default ({ url }) => {
     let ownedProgrammes = faculties.find((f) => f.code === token.data.faculty).ownedProgrammes
 
     if (onlyDoctorProgrammes) {
-      ownedProgrammes = ownedProgrammes.filter(({key}) => key[0] === 'T')
+      ownedProgrammes = ownedProgrammes.filter(({ key }) => key[0] === 'T')
     }
 
-    const localizedProgrammeCodes = ownedProgrammes.map(({key}) => {
+    const localizedProgrammeCodes = ownedProgrammes.map(({ key }) => {
       const prog = studyProgrammes.find((p) => p.key === key)
       return prog.name[lang]
     })

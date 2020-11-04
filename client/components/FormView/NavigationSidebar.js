@@ -7,7 +7,6 @@ import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
 import { formViewTranslations as translations } from 'Utilities/translations'
 
-
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET':
     'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -49,7 +48,10 @@ const NavigationSidebar = ({ programmeKey }) => {
                 }}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
+                  <Link
+                    to={`/form/${programmeKey}#${romanNumeral}`}
+                    style={{ color: colors.black }}
+                  >
                     {romanNumeral} - {title}
                   </Link>
                 </div>

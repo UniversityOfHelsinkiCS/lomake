@@ -4,11 +4,7 @@ import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import Comparison from './Comparison'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import {
-  answersByYear,
-  programmeNameByKey as programmeName,
-  sortedItems,
-} from 'Utilities/common'
+import { answersByYear, programmeNameByKey as programmeName, sortedItems } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 import './ComparisonPage.scss'

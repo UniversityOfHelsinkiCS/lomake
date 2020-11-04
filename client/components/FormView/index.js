@@ -21,7 +21,6 @@ import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 import questions from '../../questions'
 
-
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -75,9 +74,10 @@ const FormView = ({ room }) => {
       }
       if (!viewingOldAnswers && !deadline && oldAnswers) {
         const programmesData = oldAnswers.find(
-          (answer) => answer.programme === programme.key && answer.year === year)
+          (answer) => answer.programme === programme.key && answer.year === year
+        )
         const answersFromSelectedYear = programmesData ? programmesData.data : []
-  
+
         dispatch({
           type: 'SET_OLD_FORM_ANSWERS',
           answers: answersFromSelectedYear,
@@ -90,7 +90,8 @@ const FormView = ({ room }) => {
 
     if (viewingOldAnswers && oldAnswers) {
       const programmesData = oldAnswers.find(
-        (answer) => answer.programme === programme.key && answer.year === year)
+        (answer) => answer.programme === programme.key && answer.year === year
+      )
       const answersFromSelectedYear = programmesData ? programmesData.data : []
 
       dispatch({
@@ -113,12 +114,9 @@ const FormView = ({ room }) => {
 
   if (!programme) return 'Error: Invalid url.'
 
-  if (!userHasReadAccess && !userHasWriteAccess)
-    return <NoPermissions lang={lang} />
+  if (!userHasReadAccess && !userHasWriteAccess) return <NoPermissions lang={lang} />
 
-  const localizedProgramName = programme.name[lang]
-    ? programme.name[lang]
-    : programme.name['en']
+  const localizedProgramName = programme.name[lang] ? programme.name[lang] : programme.name['en']
 
   return (
     <div className="form-container">
@@ -180,12 +178,16 @@ const FormView = ({ room }) => {
             onClick={() => setShowCsv(!showCsv)}
             data-cy="csv-download"
           >
-            {showCsv ?
+            {showCsv ? (
               <Dropdown.Menu>
-                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written"/>} />
-                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="smileys"/>} />
+                <Dropdown.Item
+                  content={<CsvDownload programme={programme} view="form" wantedData="written" />}
+                />
+                <Dropdown.Item
+                  content={<CsvDownload programme={programme} view="form" wantedData="smileys" />}
+                />
               </Dropdown.Menu>
-            : null}
+            ) : null}
           </Dropdown>
           <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
           <PDFDownload />

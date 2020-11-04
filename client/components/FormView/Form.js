@@ -7,7 +7,6 @@ import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 
-
 const Form = ({ questions, programmeKey }) => {
   const previousYearsAnswers = useSelector((state) => state.previousAnswers)
   const dispatch = useDispatch()
@@ -28,9 +27,9 @@ const Form = ({ questions, programmeKey }) => {
 
   const partMap = (part) => {
     const summary =
-      part.id.includes('meta')
-      || part.id.includes('information_needed')
-      || part.id.includes('information_used')
+      part.id.includes('meta') ||
+      part.id.includes('information_needed') ||
+      part.id.includes('information_used')
 
     const divStyle = summary
       ? {
@@ -42,7 +41,11 @@ const Form = ({ questions, programmeKey }) => {
       : {}
 
     if (part.type === 'TITLE') {
-      return <h2 key={part.id} style={divStyle}>{part.label[lang]}</h2>
+      return (
+        <h2 key={part.id} style={divStyle}>
+          {part.label[lang]}
+        </h2>
+      )
     }
 
     if (!partComponentMap.hasOwnProperty(part.type)) {

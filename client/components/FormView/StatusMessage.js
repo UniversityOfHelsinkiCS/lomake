@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 import { formViewTranslations as translations } from 'Utilities/translations'
 
-
 const StatusMessage = () => {
   const lang = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
@@ -18,10 +17,10 @@ const StatusMessage = () => {
     return (
       <>
         <Message
-        data-cy="deadline-passed-notice"
-        icon="clock"
-        header={`${translations.deadlinePassedNotice[lang]}`}
-        content={`${translations.deadlinePassedSubtitle[lang]}`}
+          data-cy="deadline-passed-notice"
+          icon="clock"
+          header={`${translations.deadlinePassedNotice[lang]}`}
+          content={`${translations.deadlinePassedSubtitle[lang]}`}
         />
       </>
     )
@@ -30,10 +29,12 @@ const StatusMessage = () => {
     return (
       <>
         <Message
-        data-cy="locked-form-notice"
-        icon="lock"
-        header={`${translations.lockedFormNotice[lang]}`}
-        content={`${translations.lockedFormSubtitle[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
+          data-cy="locked-form-notice"
+          icon="lock"
+          header={`${translations.lockedFormNotice[lang]}`}
+          content={`${translations.lockedFormSubtitle[lang]} ${deadlineObj.toLocaleDateString(
+            locale
+          )}.`}
         />
       </>
     )
@@ -42,7 +43,9 @@ const StatusMessage = () => {
     <Message
       data-cy="saving-answers-notice"
       icon="info"
-      header={`${translations.savingAnswersNotice[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
+      header={`${translations.savingAnswersNotice[lang]} ${deadlineObj.toLocaleDateString(
+        locale
+      )}.`}
       content={`${translations.savingAnswersSubtitle[lang]} ${lastSaved.toLocaleString(locale)}.`}
     />
   )

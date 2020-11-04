@@ -25,7 +25,6 @@ import useDebounce from 'Utilities/useDebounce'
 import questions from '../../questions'
 import './ReportPage.scss'
 
-
 export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
@@ -47,7 +46,6 @@ export default () => {
 
   // Handles all filtering
   const filteredProgrammes = () => {
-
     if (!usersProgrammes) return { chosen: [], all: [] }
 
     const filteredByName = usersProgrammes.filter((p) => {
@@ -66,7 +64,7 @@ export default () => {
       }
       return prog.includes(level.toString())
     })
-  
+
     const filteredByFaculty = filteredByLevel.filter((p) => {
       if (faculty === 'allFaculties') return true
       if (companion) {
@@ -84,45 +82,49 @@ export default () => {
 
     const filteredByPick = filteredBySchool.filter((p) => {
       return picked.includes(p)
-    })    
+    })
 
     return { chosen: filteredByPick, all: filteredBySchool }
   }
 
   const programmes = filteredProgrammes()
-  
+
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
   }
 
   if (!selectedAnswers) return <></>
-  
+
   const modifiedQuestions = () => {
     let attributes = []
     let titleIndex = -1
     let labelIndex = -1
 
     questions.forEach((question) => {
-      titleIndex = titleIndex + 1  
+      titleIndex = titleIndex + 1
       question.parts.forEach((part) => {
-        if (part.type !== "TITLE") {
-          if (part.type === "ENTITY" || part.type === "MEASURES") labelIndex = labelIndex + 1
+        if (part.type !== 'TITLE') {
+          if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
 
-          attributes = [...attributes, {
-            "id": `${part.id}_text`,
-            "color": `${part.id}_light`,
-            "label": part.label[lang] ? part.label[lang] : '',
-            "description": part.description ? part.description[lang] : '',
-            "title": question.title[lang],
-            "titleIndex": titleIndex,
-            "labelIndex": (part.type === "ENTITY" || part.type === "MEASURES") ? `${labelIndex}.` : '',
-            "no_light": part.no_light
-          }]
+          attributes = [
+            ...attributes,
+            {
+              id: `${part.id}_text`,
+              color: `${part.id}_light`,
+              label: part.label[lang] ? part.label[lang] : '',
+              description: part.description ? part.description[lang] : '',
+              title: question.title[lang],
+              titleIndex: titleIndex,
+              labelIndex:
+                part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
+              no_light: part.no_light,
+            },
+          ]
         }
       })
     })
-    
+
     return attributes
   }
 
@@ -141,10 +143,13 @@ export default () => {
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
           let answer = ''
-          if (question.id === "measures_text") answer = getMeasuresAnswer(data)
-          else if (!question.id.startsWith("meta")) answer = cleanText(data[question.id])
+          if (question.id === 'measures_text') answer = getMeasuresAnswer(data)
+          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
-          answersByProgramme = [...answersByProgramme, { name: name, key: key, color: color, answer: answer }]
+          answersByProgramme = [
+            ...answersByProgramme,
+            { name: name, key: key, color: color, answer: answer },
+          ]
           answerMap.set(question.id, answersByProgramme)
         })
       }
@@ -158,7 +163,10 @@ export default () => {
       if (programmesMissing) {
         for (const p of programmesMissing) {
           const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [...earlierAnswers, { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer'}])
+          answerMap.set(key, [
+            ...earlierAnswers,
+            { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer' },
+          ])
         }
       }
     })
@@ -167,26 +175,32 @@ export default () => {
   }
 
   const panes = [
-    { menuItem: translations.reportHeader['written'][lang], render: () =>
-      <Tab.Pane className="report-page-tab">
-        <WrittenAnswers
-          year={year}
-          questionsList={questionsList}
-          chosenProgrammes={programmes.chosen}
-          usersProgrammes={usersProgrammes}
-          allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
-        />
-      </Tab.Pane> 
+    {
+      menuItem: translations.reportHeader['written'][lang],
+      render: () => (
+        <Tab.Pane className="report-page-tab">
+          <WrittenAnswers
+            year={year}
+            questionsList={questionsList}
+            chosenProgrammes={programmes.chosen}
+            usersProgrammes={usersProgrammes}
+            allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+          />
+        </Tab.Pane>
+      ),
     },
-    { menuItem: translations.reportHeader['smileys'][lang], render: () =>
-      <Tab.Pane>
-        <SmileyAnswers
-          year={year}
-          questionsList={questionsList}
-          chosenProgrammes={programmes.chosen}
-          allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
-        />
-      </Tab.Pane> 
+    {
+      menuItem: translations.reportHeader['smileys'][lang],
+      render: () => (
+        <Tab.Pane>
+          <SmileyAnswers
+            year={year}
+            questionsList={questionsList}
+            chosenProgrammes={programmes.chosen}
+            allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+          />
+        </Tab.Pane>
+      ),
     },
   ]
 
@@ -196,27 +210,16 @@ export default () => {
   return (
     <>
       <div className="report-info-header" />
-      <Grid
-        doubling
-        columns={2}
-        padded='vertically'
-        className="report-filter-container"
-      >
+      <Grid doubling columns={2} padded="vertically" className="report-filter-container">
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector />
-          {usersProgrammes && usersProgrammes.length > 5 &&
+          {usersProgrammes && usersProgrammes.length > 5 && (
             <>
-              <FacultyFilter size="small" label={translations.facultyFilter[lang]}/>
+              <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
               <LevelFilter />
-              {faculty !== 'allFaculties' &&
-                level === 'doctor' &&
-                <CompanionFilter />
-              }
-              {faculty === 'allFaculties' &&
-                level === 'doctor' &&
-                <DoctoralSchoolFilter />
-              }
+              {faculty !== 'allFaculties' && level === 'doctor' && <CompanionFilter />}
+              {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
               <ProgrammeFilter
                 handleChange={handleSearch}
                 filter={filter}
@@ -224,31 +227,21 @@ export default () => {
                 lang={lang}
               />
             </>
-          }
+          )}
         </Grid.Column>
         <Grid.Column width={6}>
-          <ProgrammeList
-            programmes={programmes}
-            setPicked={setPicked}
-            picked={picked}
-          /> 
-          <Button 
-            color="blue" 
+          <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+          <Button
+            color="blue"
             onClick={() => setPicked(programmes.all)}
             data-cy="report-select-all"
           >
             {translations.selectAll[lang]}
           </Button>
-          <Button onClick={() => setPicked([])}>
-            {translations.clearSelection[lang]}
-          </Button>
+          <Button onClick={() => setPicked([])}>{translations.clearSelection[lang]}</Button>
         </Grid.Column>
       </Grid>
-      <Tab
-        className="report-page-tab"
-        menu={{ secondary: true, pointing: true }}
-        panes={panes}
-      />
+      <Tab className="report-page-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </>
   )
 }

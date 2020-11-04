@@ -4,7 +4,6 @@ import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import { formViewTranslations as translations } from 'Utilities/translations'
 
-
 const PDFDownload = () => {
   const lang = useSelector((state) => state.language)
   const dispatch = useDispatch()

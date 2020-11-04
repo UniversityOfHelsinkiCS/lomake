@@ -9,14 +9,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
-
-const WrittenAnswers = ({ 
-  year,
-  usersProgrammes,
-  chosenProgrammes,
-  allAnswers,
-  questionsList
-}) => {
+const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, questionsList }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
   const [showing, setShowing] = useState(-1)
@@ -24,7 +17,7 @@ const WrittenAnswers = ({
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
   }, [])
-  
+
   const handleClick = (e, titleProps) => {
     const { index } = titleProps
     const newIndex = showing === index ? -1 : index
@@ -55,19 +48,16 @@ const WrittenAnswers = ({
           {year} - {translations.reportHeader['written'][lang]}
         </Grid.Column>
         <Grid.Column width={5} className="report-right-header" floated="right">
-          {translations.answered[lang]} / {translations.allProgrammes[lang]}            
+          {translations.answered[lang]} / {translations.allProgrammes[lang]}
         </Grid.Column>
       </Grid>
-      <div className="ui divider"/>
+      <div className="ui divider" />
       {questionsList.map((question) =>
-        (check(question) ? (
+        check(question) ? (
           <div key={question.id}>
-            {chosenProgrammes.length === 1 ?
-              <SingleProgramQuestion
-                answers={allAnswers.get(question.id)}
-                question={question}
-              />
-              :
+            {chosenProgrammes.length === 1 ? (
+              <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
+            ) : (
               <Question
                 answers={allAnswers.get(question.id).filter((p) => p.answer)}
                 question={question}
@@ -76,16 +66,13 @@ const WrittenAnswers = ({
                 handleClick={handleClick}
                 showing={chosenProgrammes.length < 2 ? question.id : showing}
               />
-            }
-            <div className="ui divider"/>
-          </div>)
-          :
+            )}
+            <div className="ui divider" />
+          </div>
+        ) : (
           <div key={question.id}>
-            <DisabledQuestion
-              question={question}
-              chosenProgrammes={chosenProgrammes}
-            />
-            <div className="ui divider"/>
+            <DisabledQuestion question={question} chosenProgrammes={chosenProgrammes} />
+            <div className="ui divider" />
           </div>
         )
       )}

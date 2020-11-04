@@ -131,11 +131,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
           <Grid.Column>
             <FacultyFilter size="large" label={translations.facultyFilter[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
-            {
-              faculty !== 'allFaculties' &&
-              level === 'doctor' &&
-              <CompanionFilter />
-            }
+            {faculty !== 'allFaculties' && level === 'doctor' && <CompanionFilter />}
           </Grid.Column>
           <Grid.Column>
             <Radio
@@ -170,8 +166,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                   showEmpty={showEmpty}
                 />
               )
-            )
-          }
+          )}
         </Grid.Column>
         <Grid.Column>
           {questionsList.map(
@@ -188,8 +183,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                   name="faculty"
                 />
               )
-            )
-          }
+          )}
         </Grid.Column>
         {user.admin && (
           <Grid.Column>
@@ -207,8 +201,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
                     name="university"
                   />
                 )
-              )
-            }
+            )}
           </Grid.Column>
         )}
       </Grid>

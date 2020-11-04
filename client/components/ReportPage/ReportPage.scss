@@ -150,7 +150,7 @@
 }
 
 .answer {
-  &-header{
+  &-header {
     font-style: bold;
   }
   &-title {
@@ -185,7 +185,7 @@
 
 @mixin answered-label-basics {
   min-width: 85px;
-  position: absolute; 
+  position: absolute;
   top: 20px;
   right: 15px;
   color: $white !important;
@@ -206,7 +206,7 @@
     flex-flow: row wrap;
     justify-content: space-evenly;
     width: 100%;
-    margin: 4em 0em;  
+    margin: 4em 0em;
   }
   &-chart-area {
     width: 425px;
@@ -214,7 +214,7 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
-    -ms-flex-direction: column;  
+    -ms-flex-direction: column;
   }
   &-pie-header {
     flex-grow: 1;
@@ -235,7 +235,7 @@
     position: relative;
     display: inline-block;
     flex-shrink: 1;
-    width: 100%;  
+    width: 100%;
   }
   &-pie-tip {
     position: absolute;
@@ -250,13 +250,13 @@
     font-size: 12px;
     text-shadow: 0 1px 0 #fff;
     line-height: 1.1;
-    letter-spacing: .06em;
-    box-shadow: 0 0 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.5);
-    -webkit-transform: all .3s;
-       -moz-transform: all .3s;
-        -ms-transform: all .3s;
-         -o-transform: all .3s;
-            transform: all .3s;
+    letter-spacing: 0.06em;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-transform: all 0.3s;
+    -moz-transform: all 0.3s;
+    -ms-transform: all 0.3s;
+    -o-transform: all 0.3s;
+    transform: all 0.3s;
     pointer-events: none;
   }
 }

@@ -4,28 +4,19 @@ import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-
-export default ({
-  question,
-  answers,
-  showEmpty,
-  chosenProgrammes,
-  faculty,
-  allProgrammes
-}) => {
+export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
-
 
   const colorsTotal = (question) => {
     if (!question || !answers) return null
     let colors = {
-      green : { 'value' : 0, 'programmes': [] },
-      yellow : { 'value' : 0, 'programmes': [] },
-      red : { 'value' : 0, 'programmes': [] },
-      emptyAnswer : { 'value' : 0, 'programmes': [] },
-      withoutEmpty : { 'value' : 0, 'programmes': [] },
-      total: { 'value': 0 }
+      green: { value: 0, programmes: [] },
+      yellow: { value: 0, programmes: [] },
+      red: { value: 0, programmes: [] },
+      emptyAnswer: { value: 0, programmes: [] },
+      withoutEmpty: { value: 0, programmes: [] },
+      total: { value: 0 },
     }
     answers.forEach((a) => {
       colors[a.color]['value'] = colors[a.color]['value'] + 1
@@ -69,12 +60,13 @@ export default ({
         programmes: colorSums.emptyAnswer.programmes,
       },
     ]
-    return data.sort((a,b) => b.value - a.value)
+    return data.sort((a, b) => b.value - a.value)
   }
 
   const amountOfResponses = () => {
-    const answered = `${translations.responses[lang]} ${answers ?
-      (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0}`
+    const answered = `${translations.responses[lang]} ${
+      answers ? (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0
+    }`
     const all = allProgrammes ? ` / ${allProgrammes.length}` : ''
     return answered + all
   }
@@ -92,36 +84,51 @@ export default ({
   return (
     <div className="report-smiley-chart-area">
       <div className="report-smiley-pie-header">
-        <p>{question.labelIndex} {question.label}</p>
-        <p><b>{faculty}</b></p>
-        <p><b>{amountOfResponses()}</b></p>
+        <p>
+          {question.labelIndex} {question.label}
+        </p>
+        <p>
+          <b>{faculty}</b>
+        </p>
+        <p>
+          <b>{amountOfResponses()}</b>
+        </p>
       </div>
-      <div
-        className="report-smiley-pie-chart"
-        data-cy={`report-chart-${question.id}`}
-      >
-        {toolTipData &&
+      <div className="report-smiley-pie-chart" data-cy={`report-chart-${question.id}`}>
+        {toolTipData && (
           <span className="report-smiley-pie-tip">
-            <p><b>{question.labelIndex} - {question.label}</b></p>
-            <p><b><span className={`answer-circle-${toolTipData.color}`} />  {toolTipData.header}</b></p>
-            {toolTipData.programmes.map((p) => <p key={p}>{p}</p>)}
+            <p>
+              <b>
+                {question.labelIndex} - {question.label}
+              </b>
+            </p>
+            <p>
+              <b>
+                <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
+              </b>
+            </p>
+            {toolTipData.programmes.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </span>
-        }
+        )}
         <Chart
           center={[72, 65]}
           data={data()}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) => dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null}
+          label={({ dataEntry }) =>
+            dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null
+          }
           paddingAngle={0}
           radius={50}
           startAngle={270}
           viewBoxSize={[145, 145]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold'}}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           labelPosition={112}
           onMouseOver={(e, segmentIndex) => toolTipText(segmentIndex)}
           onMouseOut={() => setToolTipData(null)}
-       />
+        />
       </div>
     </div>
   )
