@@ -7,6 +7,7 @@ import { formViewTranslations as translations } from 'Utilities/translations'
 const PDFDownload = () => {
   const lang = useSelector((state) => state.language)
   const dispatch = useDispatch()
+  const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const handleViewOnlyChange = (value) => dispatch(setViewOnly(value))
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const user = useSelector((state) => state.currentUser.data)
@@ -14,7 +15,7 @@ const PDFDownload = () => {
 
   const userHasWriteAccess =
     user.admin || (user.access[programme.key] && user.access[programme.key].write)
-  const userCanEdit = userHasWriteAccess && !programme.locked ? true : false
+  const userCanEdit = (userHasWriteAccess && !programme.locked && deadline) ? true : false
 
   const openViewModeAndPrintPdf = () => {
     handleViewOnlyChange(true)
