@@ -680,6 +680,17 @@ export const overviewPageTranslations = {
     en: 'Programme',
     se: 'Program',
   },
+  //OverviewPage/SmileyTableCell.js
+  betterThanLastYear: {
+    fi: 'Parempi kuin viime vuonna',
+    en: 'Better than last year',
+    se: '',
+  },
+  worseThanLastYear: {
+    fi: 'Huonompi kuin viime vuonna',
+    en: 'Worse than last year',
+    se: '',
+  },
 }
 
 export const reportPageTranslations = {

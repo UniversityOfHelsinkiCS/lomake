@@ -1,14 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 import questions from '../../questions.json'
 import { colors } from 'Utilities/common'
-
-const lightEmojiMap = {
-  green: 'smile outline',
-  yellow: 'meh outline',
-  red: 'frown outline',
-}
+import { overviewPageTranslations as translations } from 'Utilities/translations'
 
 const lightScoreMap = {
   green: 1,
@@ -64,53 +59,10 @@ const SmileyTableCell = ({
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
   const lightAnswer = programmesAnswers[lightId]
 
-  if (lightAnswer) {
-    const getIcon = () => {
-      if (!programmesOldAnswers) return null
+  // below is a bit 🍝 but the basic idea is that we only want to show the
+  // dialog to explain the icon arrows when they are shown
 
-      const oldLightAnswer = programmesOldAnswers[lightId]
-      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return null
-
-      const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
-
-      if (difference > 0) return 'angle up'
-      if (difference < 0) return 'angle down'
-
-      return [null, lightAnswer]
-    }
-
-    const icon = getIcon()
-
-    return (
-      <div
-        data-cy={`${programmesKey}-${questionId}`}
-        className={`square-${lightAnswer}`}
-        onClick={() =>
-          setModalData({
-            header: questions.reduce((acc, cur) => {
-              if (acc) return acc
-              const header = cur.parts.reduce((acc, cur) => {
-                if (acc) return acc
-
-                if (cur.id === questionId) return cur.description[lang]
-
-                return acc
-              }, '')
-
-              if (header) return header
-
-              return acc
-            }, ''),
-            programme: programmesName,
-            content: textAnswer,
-            color: lightAnswer,
-          })
-        }
-      >
-        {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-      </div>
-    )
-  }
+  let IconElement = null
 
   if (textAnswer && questionType !== 'ENTITY') {
     return (
@@ -151,12 +103,71 @@ const SmileyTableCell = ({
     )
   }
 
-  return (
+  if (!lightAnswer) {
+    return (
+      <div
+        data-cy={`${programmesKey}-${questionId}`}
+        className="square"
+        style={{ background: colors.background_gray }}
+      />
+    )
+  }
+
+  const getIcon = () => {
+    if (!programmesOldAnswers) return null
+
+    const oldLightAnswer = programmesOldAnswers[lightId]
+    if (!oldLightAnswer || oldLightAnswer === lightAnswer) return null
+
+    const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
+
+    if (difference > 0) return 'angle up'
+    if (difference < 0) return 'angle down'
+
+    return [null, lightAnswer]
+  }
+
+  const icon = getIcon()
+
+  IconElement = (
     <div
       data-cy={`${programmesKey}-${questionId}`}
-      className="square"
-      style={{ background: colors.background_gray }}
-    />
+      className={`square-${lightAnswer}`}
+      onClick={() =>
+        setModalData({
+          header: questions.reduce((acc, cur) => {
+            if (acc) return acc
+            const header = cur.parts.reduce((acc, cur) => {
+              if (acc) return acc
+
+              if (cur.id === questionId) return cur.description[lang]
+
+              return acc
+            }, '')
+
+            if (header) return header
+
+            return acc
+          }, ''),
+          programme: programmesName,
+          content: textAnswer,
+          color: lightAnswer,
+        })
+      }
+    >
+      {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+    </div>
+  )
+
+  if (!icon) return IconElement
+
+  return (
+    <Popup trigger={IconElement}>
+      <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}
+      {icon === 'angle up'
+        ? translations.betterThanLastYear[lang]
+        : translations.worseThanLastYear[lang]}
+    </Popup>
   )
 }
 
