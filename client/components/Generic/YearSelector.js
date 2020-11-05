@@ -38,12 +38,10 @@ export default function YearSelector() {
     dispatch(setYear(value))
   }
 
-  if (!previousYearsWithAnswers) return null
-
   return (
     <Select
       className="button basic gray"
-      disabled={yearOptions.length <= 1}
+      disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
       data-cy="yearSelector"
       name="year"
       options={yearOptions}
