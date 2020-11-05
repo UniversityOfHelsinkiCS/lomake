@@ -76,10 +76,6 @@ const SmileyTable = React.memo(
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
 
-    // const renderStatsRow =
-    //   sortedProgrammes.length > 1 && Object.entries(stats).length > 0 ? true : false
-    const renderStatsRow = true
-
     const transformIdToTitle = (id, vertical = true) => {
       const idToUse = replaceTitle[id] || id
       const formatted = idToUse.replace(/_/g, ' ')
@@ -138,27 +134,6 @@ const SmileyTable = React.memo(
       </div>
     )
 
-    const LockedIcon = ({ programme }) => {
-      return hasManagementAccess(programme.key) ? (
-        <Icon
-          data-cy={`${programme.key}-locked`}
-          title={translations['programmeLocked'][lang]}
-          name="lock"
-          size="large"
-          color="grey"
-          onClick={() => setProgramControlsToShow(programme)}
-        />
-      ) : (
-        <Icon
-          data-cy={`${programme.key}-locked`}
-          title={translations['programmeLocked'][lang]}
-          name="lock"
-          size="large"
-          color="grey"
-        />
-      )
-    }
-
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (
@@ -200,8 +175,6 @@ const SmileyTable = React.memo(
           </div>
         ))}
         <div className="sticky-header" />
-        {renderStatsRow && (
-          <>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Input
                 data-cy="overviewpage-filter"
@@ -258,8 +231,6 @@ const SmileyTable = React.memo(
               )
             )}
             <div className="sticky-header" />
-          </>
-        )}
         {sortedProgrammes.map((p) => {
           const programme = selectedAnswers.find((a) => a.programme === p.key)
           const programmeLastYear = lastYearsAnswers
