@@ -103,13 +103,6 @@ const SmileyTable = React.memo(
     )
       return <Loader active inline="centered" />
 
-    if (filteredProgrammes.length === 0)
-      return (
-        <Header as="h2" disabled>
-          {translations.noResultsText[lang]}
-        </Header>
-      )
-
     const hasManagementAccess = (program) => {
       if (currentUser.admin) return true
       return Object.entries(currentUser.access).find(

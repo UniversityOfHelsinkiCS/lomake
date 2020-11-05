@@ -660,11 +660,6 @@ export const overviewPageTranslations = {
     en: 'Hide',
     se: 'Dölj',
   },
-  noResultsText: {
-    fi: 'Yhtään ohjelmaa ei löytynyt. Kokeile muuttaa hakua.',
-    en: 'No matching programmes were found. Please try a different filter.',
-    se: 'Inga program hittades. Prova att söka med andra kriterier.',
-  },
   programmeClaimed: {
     fi: 'Tämä ohjelma on vastaanotettu',
     en: 'This programme has been claimed',
