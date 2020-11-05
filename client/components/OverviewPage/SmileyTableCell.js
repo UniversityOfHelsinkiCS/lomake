@@ -65,26 +65,26 @@ const SmileyTableCell = ({
   const lightAnswer = programmesAnswers[lightId]
 
   if (lightAnswer) {
-    const getIconAndColor = () => {
-      if (!programmesOldAnswers) return [null, lightAnswer]
+    const getIcon = () => {
+      if (!programmesOldAnswers) return null
 
       const oldLightAnswer = programmesOldAnswers[lightId]
-      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return [null, lightAnswer]
+      if (!oldLightAnswer || oldLightAnswer === lightAnswer) return null
 
       const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
 
-      if (difference > 0) return ['angle up', 'green']
-      if (difference < 0) return ['angle down', 'red']
+      if (difference > 0) return 'angle up'
+      if (difference < 0) return 'angle down'
 
       return [null, lightAnswer]
     }
 
-    const [icon, color] = getIconAndColor()
+    const icon = getIcon()
 
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
-        className={`square-${color}`}
+        className={`square-${lightAnswer}`}
         onClick={() =>
           setModalData({
             header: questions.reduce((acc, cur) => {
