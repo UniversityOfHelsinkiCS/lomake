@@ -12,6 +12,7 @@ describe("Previous year's answers", function () {
   })
 
   it('If no answers for previousyears, cant change year', function () {
+    cy.get('[data-cy=yearSelector]').should('be.visible')
     cy.get('[data-cy=yearSelector]').then((el) => {
       el.click()
       expect(el.find('.item')).to.have.length(1)
