@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 import { setLevel } from 'Utilities/redux/filterReducer'
-import { clearDoctorFilters } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
@@ -14,7 +14,7 @@ const LevelFilter = ({ comparison }) => {
 
   const handleChange = (e, { value }) => {
     dispatch(setLevel(value))
-    dispatch(clearDoctorFilters())
+    dispatch(clearLevelSpecificFilters())
   }
 
   return (

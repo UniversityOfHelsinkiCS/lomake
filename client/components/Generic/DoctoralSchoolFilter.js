@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
-import { clearDoctorFilters, setDoctoralSchool } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters, setDoctoralSchool } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
@@ -12,7 +12,7 @@ const DoctoralSchoolFilter = () => {
   const lang = useSelector((state) => state.language)
 
   const handleChange = (e, { value }) => {
-    dispatch(clearDoctorFilters())
+    dispatch(clearLevelSpecificFilters())
     dispatch(setDoctoralSchool(value))
   }
 

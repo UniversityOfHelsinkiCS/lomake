@@ -3,8 +3,8 @@ export const setFaculty = (faculty) => ({
   faculty,
 })
 
-export const clearDoctorFilters = () => ({
-  type: 'CLEAR_DOCTOR_FILTERS'
+export const clearLevelSpecificFilters = () => ({
+  type: 'CLEAR_LEVEL_SPECIFIC_FILTERS'
 })
 
 export const setCompanion = (companion) => ({
@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
         level: action.level
       }
     }
-    case 'CLEAR_DOCTOR_FILTERS': {
+    case 'CLEAR_LEVEL_SPECIFIC_FILTERS': {
       return {
         ...state,
         companion: false,

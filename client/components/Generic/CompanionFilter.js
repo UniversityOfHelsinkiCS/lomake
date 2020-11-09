@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
-import { clearDoctorFilters, setCompanion } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters, setCompanion } from 'Utilities/redux/filterReducer'
 import './Filters.scss'
 
 
@@ -12,7 +12,7 @@ const CompanionFilter = () => {
   const companion = useSelector(({ filters }) => filters.companion)
 
   const handleChange = () => {
-    dispatch(clearDoctorFilters())
+    dispatch(clearLevelSpecificFilters())
     dispatch(setCompanion(!companion))
   }
 
