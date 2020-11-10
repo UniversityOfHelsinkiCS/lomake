@@ -1073,7 +1073,12 @@ const data = [
           en: 'Doctoral Programme in Political, Societal and Regional Changes',
           se: 'Doktorandprogrammet i politisk, samhällelig och regional förändring',
         },
-        companionFaculties: ['maatalous-metsätieteellinen', 'kasvatustieteellinen', 'humanistinen'],
+        companionFaculties: [
+          'maatalous-metsätieteellinen',
+          'kasvatustieteellinen',
+          'humanistinen',
+          'matemaattis-luonnontieteellinen',
+        ],
       },
       {
         key: 'T920108',
@@ -1211,7 +1216,7 @@ const data = [
           en: 'Doctoral Programme in Sustainable Use of Renewable Natural Resources',
           se: 'Doktorandprogrammet i hållbart utnyttjande av förnybara naturresurser',
         },
-        companionFaculties: [],
+        companionFaculties: ['bio- ja ympäristötieteellinen'],
       },
       {
         key: 'T922105',
