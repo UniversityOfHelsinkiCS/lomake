@@ -11,35 +11,35 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 
-const mapLightToValid = {
+const mapColorToValid = {
   VIHREÄ: 'green',
   KELTAINEN: 'yellow',
   PUNAINEN: 'red',
 }
 
-const mapLightToImage = {
+const mapColorToImage = {
   green: positiveEmoji,
   yellow: neutralEmoji,
   red: negativeEmoji,
 }
 
-const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
+const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers }) => {
   const lang = useSelector((state) => state.language)
 
-  let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_color`] : null
-  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
-    previousAnswerLight = mapLightToValid[previousAnswerLight]
+  let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_color`] : null
+  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
+    previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
   const EntityLastYearsAccordion = () => {
-    if (!previousAnswerText && !previousAnswerLight) return null
+    if (!previousAnswerText && !previousAnswerColor) return null
     return (
       <LastYearsAnswersAccordion>
-        {previousAnswerLight && (
+        {previousAnswerColor && (
           <img
             style={{ width: '40px', height: 'auto' }}
-            src={mapLightToImage[previousAnswerLight]}
+            src={mapColorToImage[previousAnswerColor]}
           />
         )}
         <ReactMarkdown source={previousAnswerText} />
@@ -57,7 +57,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
             {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
           </h3>
         </div>
-        {!noLight && <SmileyColors id={id} />}
+        {!noColor && <SmileyColors id={id} />}
       </div>
       <p
         className="entity-description"

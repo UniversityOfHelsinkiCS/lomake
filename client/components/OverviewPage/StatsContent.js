@@ -36,8 +36,8 @@ const StatsContent = ({ stats, answers, questionId }) => {
           const existingTotal = obj.total[word] || 0
           obj.total[word] = existingTotal + 1
 
-          const existingLight = obj[color][word] || 0
-          obj[color][word] = existingLight + 1
+          const existingColor = obj[color][word] || 0
+          obj[color][word] = existingColor + 1
         })
       }
 

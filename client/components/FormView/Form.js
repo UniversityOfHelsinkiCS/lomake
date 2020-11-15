@@ -64,7 +64,7 @@ const Form = ({ questions, programmeKey }) => {
           label={part.label[lang]}
           description={description}
           required={part.required}
-          noLight={part.no_color}
+          noColor={part.no_color}
           number={number}
           previousYearsAnswers={
             previousYearsAnswers.data && previousYearsAnswers.data.data

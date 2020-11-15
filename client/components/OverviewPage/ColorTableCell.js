@@ -116,10 +116,10 @@ const ColorTableCell = ({
   const getIcon = () => {
     if (!programmesOldAnswers) return null
 
-    const oldLightAnswer = programmesOldAnswers[colorId]
-    if (!oldLightAnswer || oldLightAnswer === colorAnswer) return null
+    const oldColorAnswer = programmesOldAnswers[colorId]
+    if (!oldColorAnswer || oldColorAnswer === colorAnswer) return null
 
-    const difference = colorScoreMap[colorAnswer] - colorScoreMap[oldLightAnswer]
+    const difference = colorScoreMap[colorAnswer] - colorScoreMap[oldColorAnswer]
 
     if (difference > 0) return 'angle up'
     if (difference < 0) return 'angle down'

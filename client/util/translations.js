@@ -356,11 +356,6 @@ export const genericTranslations = {
   },
 
   // Generic/Entity.js
-  streetLightsLabel: {
-    fi: 'Yleisarvio',
-    en: 'General assessment',
-    se: 'Allmänn bedömning',
-  },
   textAreaLabel: {
     fi: 'Keskustelun pääkohdat olivat',
     en: 'Main points of discussion',
