@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button, Header, Icon, Loader, Input } from 'semantic-ui-react'
+import { Button, Icon, Loader, Input } from 'semantic-ui-react'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -62,13 +62,13 @@ const SmileyTable = React.memo(
         const answers = programme && programme.data ? programme.data : {}
 
         Object.keys(answers).forEach((answerKey) => {
-          if (answerKey.includes('_light')) {
-            const light = answers[answerKey] // "red", "yellow", "green" or ""
-            const baseKey = answerKey.replace('_light', '')
+          if (answerKey.includes('_color')) {
+            const color = answers[answerKey] // "red", "yellow", "green" or ""
+            const baseKey = answerKey.replace('_color', '')
             if (!statObject[baseKey]) statObject[baseKey] = {}
 
-            statObject[baseKey][light] = statObject[baseKey][light]
-              ? statObject[baseKey][light] + 1
+            statObject[baseKey][color] = statObject[baseKey][color]
+              ? statObject[baseKey][color] + 1
               : 1
           }
         })
@@ -137,7 +137,7 @@ const SmileyTable = React.memo(
           return acc
         }
 
-        return [...acc, { id: cur.id, type: cur.no_light ? 'ENTITY_NOLIGHT' : cur.type }]
+        return [...acc, { id: cur.id, type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type }]
       }, [])
 
       return [...acc, ...questionObjects]

@@ -51,7 +51,7 @@ const SmileyAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) =>
         {questionsList.map(
           (question) =>
             allAnswers.get(question.id) &&
-            !question.no_light && (
+            !question.no_color && (
               <PieChart
                 key={question.id}
                 question={question}

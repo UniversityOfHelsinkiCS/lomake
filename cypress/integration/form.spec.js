@@ -23,8 +23,8 @@ describe('Form tests', function () {
   })
 
   it('Can open a question, click on smiley face, and the result it saved.', () => {
-    cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
-    cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
+    cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     // Check that the changes have been saved:
     cy.visit('/')

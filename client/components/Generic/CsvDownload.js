@@ -112,7 +112,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
 
     const getSmileyAnswers = (rawData) => {
       const answerArray = csvData[1].slice(2).map((questionId) => {
-        const color = rawData[`${questionId}_light`]
+        const color = rawData[`${questionId}_color`]
         if (color) return translations[color][lang]
         return ''
       })

@@ -160,7 +160,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
           {questionsList.map(
             (question) =>
               chosenAnswers(question) &&
-              !question.no_light && (
+              !question.no_color && (
                 <SingleProgramPieChart
                   key={question.id}
                   question={question}
@@ -176,7 +176,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
           {questionsList.map(
             (question) =>
               comparedAnswers(question) &&
-              !question.no_light && (
+              !question.no_color && (
                 <PieChart
                   key={question.id}
                   question={question}
@@ -194,7 +194,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
             {questionsList.map(
               (question) =>
                 allAnswers.get(question.id) &&
-                !question.no_light && (
+                !question.no_color && (
                   <PieChart
                     key={question.id}
                     question={question}

@@ -134,7 +134,7 @@ describe('ReportPage tests', function () {
   it('Changes in smileys are reflected to the piecharts', function () {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
-    cy.get('[data-cy=street-light-negative-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/report')
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()

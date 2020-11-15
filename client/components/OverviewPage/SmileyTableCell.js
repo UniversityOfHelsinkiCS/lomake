@@ -5,7 +5,7 @@ import questions from '../../questions.json'
 import { colors } from 'Utilities/common'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const lightScoreMap = {
+const colorScoreMap = {
   green: 1,
   yellow: 0,
   red: -1,
@@ -55,9 +55,9 @@ const SmileyTableCell = ({
   }
 
   const textId = `${questionId}_text`
-  const lightId = `${questionId}_light`
+  const colorId = `${questionId}_color`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
-  const lightAnswer = programmesAnswers[lightId]
+  const colorAnswer = programmesAnswers[colorId]
 
   // below is a bit 🍝 but the basic idea is that we only want to show the
   // dialog to explain the icon arrows when they are shown
@@ -90,7 +90,7 @@ const SmileyTableCell = ({
             }, ''),
             programme: programmesName,
             content: textAnswer,
-            color: lightAnswer,
+            color: colorAnswer,
           })
         }
       >
@@ -103,7 +103,7 @@ const SmileyTableCell = ({
     )
   }
 
-  if (!lightAnswer) {
+  if (!colorAnswer) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
@@ -116,15 +116,15 @@ const SmileyTableCell = ({
   const getIcon = () => {
     if (!programmesOldAnswers) return null
 
-    const oldLightAnswer = programmesOldAnswers[lightId]
-    if (!oldLightAnswer || oldLightAnswer === lightAnswer) return null
+    const oldLightAnswer = programmesOldAnswers[colorId]
+    if (!oldLightAnswer || oldLightAnswer === colorAnswer) return null
 
-    const difference = lightScoreMap[lightAnswer] - lightScoreMap[oldLightAnswer]
+    const difference = colorScoreMap[colorAnswer] - colorScoreMap[oldLightAnswer]
 
     if (difference > 0) return 'angle up'
     if (difference < 0) return 'angle down'
 
-    return [null, lightAnswer]
+    return [null, colorAnswer]
   }
 
   const icon = getIcon()
@@ -132,7 +132,7 @@ const SmileyTableCell = ({
   IconElement = (
     <div
       data-cy={`${programmesKey}-${questionId}`}
-      className={`square-${lightAnswer}`}
+      className={`square-${colorAnswer}`}
       onClick={() =>
         setModalData({
           header: questions.reduce((acc, cur) => {
@@ -151,7 +151,7 @@ const SmileyTableCell = ({
           }, ''),
           programme: programmesName,
           content: textAnswer,
-          color: lightAnswer,
+          color: colorAnswer,
         })
       }
     >

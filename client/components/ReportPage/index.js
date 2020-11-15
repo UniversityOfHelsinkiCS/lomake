@@ -111,14 +111,14 @@ export default () => {
             ...attributes,
             {
               id: `${part.id}_text`,
-              color: `${part.id}_light`,
+              color: `${part.id}_color`,
               label: part.label[lang] ? part.label[lang] : '',
               description: part.description ? part.description[lang] : '',
               title: question.title[lang],
               titleIndex: titleIndex,
               labelIndex:
                 part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
-              no_light: part.no_light,
+              no_color: part.no_color,
             },
           ]
         }

@@ -174,7 +174,7 @@
           "en": "What other information did you use?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       },
       {
         "id": "overall_status_information_needed",
@@ -185,7 +185,7 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       }
     ]
   },
@@ -259,7 +259,7 @@
           "en": "What other information and sources of information did you use?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       },
       {
         "id": "wellbeing_information_needed",
@@ -270,7 +270,7 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       }
     ]
   },
@@ -344,7 +344,7 @@
           "en": "What other information and sources of information did you use?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       },
       {
         "id": "sufficient_resources_information_needed",
@@ -355,7 +355,7 @@
           "en": "What information would you need?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       }
     ]
   },
@@ -399,7 +399,7 @@
           "en": "What information and sources of information did you use?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       },
       {
         "id": "joint_programme_information_needed",
@@ -410,7 +410,7 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_light": true
+        "no_color": true
       }
     ]
   },
@@ -435,7 +435,7 @@
           "en": "Please review the main points you have recorded, trying to pinpoint areas where the programme has succeeded particularly well, and write them down. Please also consider the development needs you have identified and the measures required. You should select the three to five most important measures and record them for the purpose of the faculty’s implementation plan together with the resources required for each measure."
         },
         "required": true,
-        "no_light": true
+        "no_color": true
       }
     ]
   },
@@ -460,7 +460,7 @@
           "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
         },
         "required": true,
-        "no_light": true
+        "no_color": true
       }
     ]
   },

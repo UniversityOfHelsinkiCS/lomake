@@ -65,7 +65,7 @@ describe('OSPA user tests', function () {
 
   it('Can write to form and change from smiley table to trends view', function () {
     cy.visit(`/form/${testProgrammeName}`)
-    cy.get('[data-cy=street-light-positive-community_wellbeing]').click()
+    cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     cy.visit('/')
 

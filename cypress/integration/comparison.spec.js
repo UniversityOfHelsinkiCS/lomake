@@ -13,7 +13,7 @@ describe('ComparisonPage tests', function () {
   it('Changes in smileys are reflected to the single programme piecharts', function () {
     cy.login(adminUser)
     cy.visit(`/form/${testProgrammeName}`)
-    cy.get('[data-cy=street-light-neutral-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
     cy.reload()
     cy.visit('/comparison')
 

@@ -62,7 +62,7 @@ The current questions of the form can be found in [questions.json](https://githu
 | label       | Localized | Yes      | Label of the form field                                                   |
 | required    | boolean   | No       | Is the form field required to be filled to submit the form                |
 | description | Localized | No       | (ENTITY only) More detailed explanation                                   |
-| no_light    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a light (emoji) form field |
+| no_color    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a color (emoji) form field |
 
 **Localized**
 
@@ -73,4 +73,4 @@ The current questions of the form can be found in [questions.json](https://githu
 | en       | string | Yes      | English text |
 
 ![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
-_Example of the ENTITY type containing title, description, text area and light form field (emoji selector)_
+_Example of the ENTITY type containing title, description, text area and color form field (emoji selector)_

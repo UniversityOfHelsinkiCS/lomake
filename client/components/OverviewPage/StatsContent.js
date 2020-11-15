@@ -28,16 +28,16 @@ const StatsContent = ({ stats, answers, questionId }) => {
   const worldCloudObject = answers.reduce(
     (obj, { data }) => {
       const textId = `${questionId}_text`
-      const lightId = `${questionId}_light`
-      if (data[textId] && data[lightId]) {
+      const colorId = `${questionId}_color`
+      if (data[textId] && data[colorId]) {
         const words = data[textId].split(/,| |\n/).map((word) => replaceAllAndLower(word))
-        const light = data[lightId]
+        const color = data[colorId]
         words.forEach((word) => {
           const existingTotal = obj.total[word] || 0
           obj.total[word] = existingTotal + 1
 
-          const existingLight = obj[light][word] || 0
-          obj[light][word] = existingLight + 1
+          const existingLight = obj[color][word] || 0
+          obj[color][word] = existingLight + 1
         })
       }
 

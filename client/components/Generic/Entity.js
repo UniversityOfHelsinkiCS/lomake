@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
-import Streetlights from './Streetlights'
+import SmileyColors from './SmileyColors'
 import Textarea from './Textarea'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
@@ -26,7 +26,7 @@ const mapLightToImage = {
 const Entity = ({ id, label, description, required, noLight, number, previousYearsAnswers }) => {
   const lang = useSelector((state) => state.language)
 
-  let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
+  let previousAnswerLight = previousYearsAnswers ? previousYearsAnswers[`${id}_color`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerLight) !== -1) {
     previousAnswerLight = mapLightToValid[previousAnswerLight]
   }
@@ -57,7 +57,7 @@ const Entity = ({ id, label, description, required, noLight, number, previousYea
             {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
           </h3>
         </div>
-        {!noLight && <Streetlights id={id} />}
+        {!noLight && <SmileyColors id={id} />}
       </div>
       <p
         className="entity-description"
