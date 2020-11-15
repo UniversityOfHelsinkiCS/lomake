@@ -50,8 +50,8 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty 
   }
 
   return (
-    <div className="comparison-smiley-chart-area">
-      <div className="comparison-smiley-pie-header">
+    <div className="comparison-color-chart-area">
+      <div className="comparison-color-pie-header">
         <p>
           {question.labelIndex} {question.label}
         </p>
@@ -67,7 +67,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty 
           </b>
         </p>
       </div>
-      <div className="comparison-smiley-pie-chart" data-cy={`comparison-chart-${question.id}`}>
+      <div className="comparison-color-pie-chart" data-cy={`comparison-chart-${question.id}`}>
         <Chart
           center={[72, 65]}
           data={data(question)}

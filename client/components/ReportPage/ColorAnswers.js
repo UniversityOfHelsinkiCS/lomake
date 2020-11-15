@@ -4,7 +4,7 @@ import { Grid, Radio, Segment } from 'semantic-ui-react'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
-const SmileyAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) => {
+const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) => {
   const lang = useSelector((state) => state.language)
   const [showEmpty, setShowEmpty] = useState(true)
 
@@ -16,7 +16,7 @@ const SmileyAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) =>
     <div className="report-container">
       <Grid>
         <Grid.Column className="report-center-header" width={16}>
-          {year} - {translations.reportHeader['smileys'][lang]}
+          {year} - {translations.reportHeader['colors'][lang]}
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
@@ -47,7 +47,7 @@ const SmileyAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) =>
           />
         </Grid.Row>
       </Grid>
-      <div className="report-smiley-grid">
+      <div className="report-color-grid">
         {questionsList.map(
           (question) =>
             allAnswers.get(question.id) &&
@@ -66,4 +66,4 @@ const SmileyAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) =>
   )
 }
 
-export default SmileyAnswers
+export default ColorAnswers

@@ -4,7 +4,7 @@ import { Button, Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import ProgrammeList from './ProgrammeList'
 import WrittenAnswers from './WrittenAnswers'
-import SmileyAnswers from './SmileyAnswers'
+import ColorAnswers from './ColorAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -190,10 +190,10 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.reportHeader['smileys'][lang],
+      menuItem: translations.reportHeader['colors'][lang],
       render: () => (
         <Tab.Pane>
-          <SmileyAnswers
+          <ColorAnswers
             year={year}
             questionsList={questionsList}
             chosenProgrammes={programmes.chosen}

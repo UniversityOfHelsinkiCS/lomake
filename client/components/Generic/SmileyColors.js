@@ -7,7 +7,7 @@ import negativeEmoji from 'Assets/persevering.png'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './SmileyColors.scss'
 
-const smileyMap = {
+const colorMap = {
   green: 'smile outline',
   yellow: 'meh outline',
   red: 'frown outline',
@@ -31,7 +31,7 @@ const SmileyColors = ({ id }) => {
       <>
         {value && (
           <div style={{ margin: '1em 0' }}>
-            <Icon name={smileyMap[value]} size="huge" />
+            <Icon name={colorMap[value]} size="huge" />
           </div>
         )}
       </>

@@ -11,13 +11,13 @@ describe('Link tests', function () {
   it('Can claim read access', function () {
     cy.visit('/access/readTest')
     cy.get('[data-cy=claim-button]').click()
-    cy.get(`[data-cy=smileytable-link-to-${testProgrammeName}]`)
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`)
   })
 
   it('Can claim write access', function () {
     cy.visit('/access/writeTest')
     cy.get('[data-cy=claim-button]').click()
-    cy.get(`[data-cy=smileytable-link-to-${testProgrammeName}]`)
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`)
   })
 
   it('Can claim admin (owner) access after typing confirmation, and claimed status is updated', function () {
@@ -49,7 +49,7 @@ describe('Link tests', function () {
     cy.get('[data-cy=programmeList-item]').should('have.length', 29)
     cy.get('[data-cy=claim-button]').click()
 
-    cy.get('[data-cy^=smileytable-link-to]').should('have.have.length', 29)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 29)
   })
 
   it('Claiming read token for facultys doctor programmes gives correct permissions', function () {
@@ -57,6 +57,6 @@ describe('Link tests', function () {
     cy.get('[data-cy=programmeList-item]').should('have.length', 8)
     cy.get('[data-cy=claim-button]').click()
 
-    cy.get('[data-cy^=smileytable-link-to]').should('have.have.length', 8)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 8)
   })
 })

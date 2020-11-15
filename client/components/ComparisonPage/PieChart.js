@@ -83,8 +83,8 @@ export default ({ question, answers, showEmpty, programmes, faculty, name }) => 
   }
 
   return (
-    <div className="comparison-smiley-chart-area">
-      <div className="comparison-smiley-pie-header">
+    <div className="comparison-color-chart-area">
+      <div className="comparison-color-pie-header">
         <p>
           {question.labelIndex} {question.label}
         </p>
@@ -103,11 +103,11 @@ export default ({ question, answers, showEmpty, programmes, faculty, name }) => 
         </p>
       </div>
       <div
-        className="comparison-smiley-pie-chart"
+        className="comparison-color-pie-chart"
         data-cy={`comparison-chart-${name}-${question.id}`}
       >
         {toolTipData && (
-          <span className="comparison-smiley-pie-tip" data-cy={`comparison-tip-${question.id}`}>
+          <span className="comparison-color-pie-tip" data-cy={`comparison-tip-${question.id}`}>
             <p>
               <b>
                 {question.labelIndex} - {question.label}

@@ -4,7 +4,7 @@ import { Dropdown, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import ProgramControlsContent from './ProgramControlsContent'
-import SmileyTable from './SmileyTable'
+import ColorTable from './ColorTable'
 import StatsContent from './StatsContent'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -120,14 +120,14 @@ export default () => {
                     <CsvDownload wantedData="written" view="overview" />
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <CsvDownload wantedData="smileys" view="overview" />
+                    <CsvDownload wantedData="colors" view="overview" />
                   </Dropdown.Item>
                 </Dropdown.Menu>
               ) : null}
             </Dropdown>
           </div>
           <div style={{ marginTop: '1em' }}>
-            <SmileyTable
+            <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}

@@ -82,8 +82,8 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
   }
 
   return (
-    <div className="report-smiley-chart-area">
-      <div className="report-smiley-pie-header">
+    <div className="report-color-chart-area">
+      <div className="report-color-pie-header">
         <p>
           {question.labelIndex} {question.label}
         </p>
@@ -94,9 +94,9 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
           <b>{amountOfResponses()}</b>
         </p>
       </div>
-      <div className="report-smiley-pie-chart" data-cy={`report-chart-${question.id}`}>
+      <div className="report-color-pie-chart" data-cy={`report-chart-${question.id}`}>
         {toolTipData && (
-          <span className="report-smiley-pie-tip">
+          <span className="report-color-pie-tip">
             <p>
               <b>
                 {question.labelIndex} - {question.label}

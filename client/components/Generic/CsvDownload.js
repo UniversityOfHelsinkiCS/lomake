@@ -110,7 +110,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       return answersArray
     }
 
-    const getSmileyAnswers = (rawData) => {
+    const getColorAnswers = (rawData) => {
       const answerArray = csvData[1].slice(2).map((questionId) => {
         const color = rawData[`${questionId}_color`]
         if (color) return translations[color][lang]
@@ -131,7 +131,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
     if (view == "form") {
       let answersArray = []
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
-      else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programmeData)
+      else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
       const name = programme.name[lang] ? programme.name[lang] : programme.name['en']
       const faculty = programme.primaryFaculty.name
       const dataRow = [name, faculty, ...answersArray]
@@ -145,7 +145,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       selectedAnswers.forEach((programme) => {
         let answersArray = []
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
-        else if (wantedData === 'smileys') answersArray = getSmileyAnswers(programme.data)
+        else if (wantedData === 'colors') answersArray = getColorAnswers(programme.data)
         const name = programmeName(usersProgrammes, programme, lang)
         const faculty = programmeFaculty(programme)
         const dataRow = [name, faculty, ...answersArray]

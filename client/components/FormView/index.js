@@ -184,7 +184,7 @@ const FormView = ({ room }) => {
                   content={<CsvDownload programme={programme} view="form" wantedData="written" />}
                 />
                 <Dropdown.Item
-                  content={<CsvDownload programme={programme} view="form" wantedData="smileys" />}
+                  content={<CsvDownload programme={programme} view="form" wantedData="colors" />}
                 />
               </Dropdown.Menu>
             ) : null}

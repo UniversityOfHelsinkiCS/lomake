@@ -308,8 +308,8 @@ export const genericTranslations = {
         en: 'Written_answers',
         se: 'Written_answers',
       },
-      smileys: {
-        fi: 'Tilannekuvalomake_liikennevalot',
+      colors: {
+        fi: 'Tilannekuvalomake_hymiöiden_värit',
         en: 'Colored_smileys',
         se: 'Colored_smileys',
       },
@@ -320,8 +320,8 @@ export const genericTranslations = {
         en: 'All_the_programmes_written_answers',
         se: 'All_the_programmes_written_answers',
       },
-      smileys: {
-        fi: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalot',
+      colors: {
+        fi: 'Tilannekuvalomake_kaikki_ohjelmat_hymiöiden_värit',
         en: 'All_the_programmes_colored_smileys',
         se: 'All_the_programmes_colored_smileys',
       },
@@ -348,7 +348,7 @@ export const genericTranslations = {
       en: 'Written answers',
       se: 'Written answers',
     },
-    smileys: {
+    colors: {
       fi: 'Hymiöiden värit',
       en: 'Emoji colors',
       se: 'Emoji colors',
@@ -649,7 +649,7 @@ export const overviewPageTranslations = {
     en: 'Users',
     se: 'Users',
   },
-  //OverviewPage/SmileyTable.js
+  //OverviewPage/ColorTable.js
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
@@ -680,7 +680,7 @@ export const overviewPageTranslations = {
     en: 'Programme',
     se: 'Program',
   },
-  //OverviewPage/SmileyTableCell.js
+  //OverviewPage/ColorTableCell.js
   betterThanLastYear: {
     fi: 'Parempi kuin viime vuonna',
     en: 'Better than last year',
@@ -731,7 +731,7 @@ export const reportPageTranslations = {
       fi: 'Kirjalliset vastaukset',
       se: 'Written answers',
     },
-    smileys: {
+    colors: {
       en: 'Smiley colors',
       fi: 'Hymiöiden värit',
       se: 'Smiley colors',
@@ -759,7 +759,7 @@ export const reportPageTranslations = {
     en: 'Question',
     se: 'Fråga',
   },
-  // ReportPage/SmileyAnswers.js
+  // ReportPage/ColorAnswers.js
   // ReportPage/PieChart.js
   emptyAnswers: {
     en: 'Include programmes without answers to the graphs',

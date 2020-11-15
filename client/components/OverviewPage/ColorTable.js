@@ -6,8 +6,8 @@ import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import './SmileyTable.scss'
-import SmileyTableCell from './SmileyTableCell'
+import './ColorTable.scss'
+import ColorTableCell from './ColorTableCell'
 import { PieChart } from 'react-minimal-pie-chart'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
@@ -18,7 +18,7 @@ const replaceTitle = {
 
 const SORTER = 'name'
 
-const SmileyTable = React.memo(
+const ColorTable = React.memo(
   ({
     setModalData,
     filteredProgrammes,
@@ -144,7 +144,7 @@ const SmileyTable = React.memo(
     }, [])
 
     return (
-      <div className="smiley-grid">
+      <div className="color-grid">
         <div className="sticky-header">
           <div
             style={{ fontWeight: 'bold', cursor: 'pointer' }}
@@ -234,18 +234,18 @@ const SmileyTable = React.memo(
             <React.Fragment key={p.key}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {p.locked ? (
-                  <div data-cy={`smileytable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
+                  <div data-cy={`colortable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
                     <Icon name="lock" />{' '}
                     {p.name[lang] ? p.name[lang] : p.name['en']}
                   </div>
                 ) : (
-                  <Link data-cy={`smileytable-link-to-${p.key}`} to={targetURL}>
+                  <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
                     {p.name[lang] ? p.name[lang] : p.name['en']}
                   </Link>
                 )}
               </div>
               {tableIds.map((idObject) => (
-                <SmileyTableCell
+                <ColorTableCell
                   key={`${p.key}-${idObject.id}`}
                   programmesName={p.name[lang] ? p.name[lang] : p.name['en']}
                   programmesKey={p.key}
@@ -267,4 +267,4 @@ const SmileyTable = React.memo(
   }
 )
 
-export default SmileyTable
+export default ColorTable

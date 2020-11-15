@@ -11,7 +11,7 @@ const colorScoreMap = {
   red: -1,
 }
 
-const SmileyTableCell = ({
+const ColorTableCell = ({
   programmesName,
   programmesKey,
   programmesAnswers,
@@ -171,4 +171,4 @@ const SmileyTableCell = ({
   )
 }
 
-export default SmileyTableCell
+export default ColorTableCell

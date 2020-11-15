@@ -149,7 +149,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Row>
       </Grid>
       <Grid
-        className="comparison-smiley-grid"
+        className="comparison-color-grid"
         centered
         stackable
         doubling

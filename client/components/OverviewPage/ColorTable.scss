@@ -1,7 +1,7 @@
 $QUESTION_COUNT: 19;
 @import 'Assets/colors';
 
-.smiley-grid {
+.color-grid {
   display: grid;
   grid-template-columns: 5fr repeat($QUESTION_COUNT, 1fr) 1fr;
   grid-auto-columns: 50px;
