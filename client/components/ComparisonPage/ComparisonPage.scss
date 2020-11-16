@@ -159,3 +159,26 @@
     pointer-events: none;
   }
 }
+
+.question-list {
+  &-container {
+    min-height: 50px;
+    max-height: 370px;
+    display: flex;
+    flex-flow: column;
+    overflow: auto;
+  }
+  &-included {
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  &-excluded {
+    color: $gray;
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

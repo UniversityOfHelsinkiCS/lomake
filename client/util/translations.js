@@ -86,7 +86,29 @@ export const comparisonPageTranslations = {
     en: 'Programmes',
     se: 'Programmes',
   },
+  // ComparisonPage/QuestionList.js
+  nowShowing: {
+    fi: 'VASTAUKSISSA MUKANA OLEVAT KYSYMYKSET:',
+    en: 'NOW SHOWING THE ANSWERS OF',
+    se: 'NOW SHOWING THE ANSWERS OF',
+  },
+  chooseMore: {
+    fi: 'VALITSE KYSYMYKSIÄ RAPORTILLE:',
+    se: 'CHOOSE MORE QUESTIONS:',
+    en: 'CHOOSE MORE QUESTIONS:',
+  },
+  selectAll: {
+    fi: 'Valitse kaikki',
+    se: 'Select all',
+    en: 'Select all',
+  },
+  clearSelection: {
+    fi: 'Tyhjennä valinta',
+    se: 'Clear selection',
+    en: 'Clear selection',
+  },
   // ComparisonPage/ComparisonByYear.js
+  // ComparisonPage/QuestionList.js
   // ComparisonPage/PieChart.js
   responses: {
     en: 'Responses:',

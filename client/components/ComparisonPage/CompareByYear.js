@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
+import { Grid, Radio } from 'semantic-ui-react'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
-import { Grid, Radio } from 'semantic-ui-react'
-import { useHistory } from 'react-router'
+import QuestionList from './QuestionList'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common.js'
 import './ComparisonPage.scss'
@@ -22,27 +23,22 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
     history.push('/')
   }
 
-  useEffect(() => {
-    setPicked(questionsList.map((q) => q.label))
-  }, [])
-
-  const addToChosen = (questionLabel) => {
-    if (picked.includes(questionLabel)) {
-      setPicked(() => picked.filter((label) => label !== questionLabel))
-    }
+  const questionLabels = () => {
+    return questionsList.map((q) => q.label.charAt(0) + q.label.slice(1).toLowerCase()) 
   }
+
+  useEffect(() => {
+    setPicked(questionLabels())
+  }, [])
 
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
-    allAnswers.forEach((year) => {
-      let green = []
-      let yellow = []
-      let red = []
-      let emptyAnswer = []
-      year.answers.forEach((answerSet, key) => {
+    allAnswers.forEach((rawData) => {
+      let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
+      rawData.answers.forEach((answerSet, key) => {
         const questionWithColor = questionsList.find((q) => q.id === key)
-        if (questionWithColor && picked.includes(questionWithColor.label)) {
+        if (questionWithColor && picked.includes(questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase())) {
           let colors = {
             green: 0,
             yellow: 0,
@@ -50,19 +46,19 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
             emptyAnswer: 0,
           }  
           answerSet.forEach((a) => colors[a.color] = colors[a.color] + 1)
-          green = [...green, colors.green]
-          yellow = [...yellow, colors.yellow]
-          red = [...red, colors.red]
-          emptyAnswer = [...emptyAnswer, colors.emptyAnswer]
+          yearsColors.green = [...yearsColors.green, colors.green]
+          yearsColors.yellow = [...yearsColors.yellow, colors.yellow]
+          yearsColors.red = [...yearsColors.red, colors.red]
+          yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, colors.emptyAnswer]
         }
       })
       total = [...total,
-        { year: year.year, name: 'positive', color: 'green', data: green },
-        { year: year.year, name: 'neutral', color: 'yellow', data: yellow },
-        { year: year.year, name: 'negative', color: 'red', data: red },
+        { year: rawData.year, name: 'positive', color: 'green', data: yearsColors.green },
+        { year: rawData.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
+        { year: rawData.year, name: 'negative', color: 'red', data: yearsColors.red },
       ]
       if (showEmpty) {
-        total = [...total, { year: year.year, name: 'emptyAnswer', color: 'gray', data: emptyAnswer }]
+        total = [...total, { year: rawData.year, name: 'emptyAnswer', color: 'gray', data: yearsColors.emptyAnswer }]
       }
     })
       
@@ -70,20 +66,14 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
   }
   const colorSums = colorsTotal()
   
-  const series = colorSums.map((sum) => {
+  const seriesData = colorSums.map((series) => {
     return {
-      name: `${sum.year} ${translations[sum.color][lang]}`,
-      data: sum.data,
-      color: colors[sum.color],
+      name: `${series.year} ${translations[series.color][lang]}`,
+      data: series.data,
+      color: colors[series.color],
       dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
-      stack: sum.year,
-      point: {
-        events: {
-          click: function (event) {
-            addToChosen(event.point.category)
-          },
-        },
-      },
+      stack: series.year,
+      enableMouseTracking: false,
       label: [{ enabled: true }] ,
     }
   })
@@ -103,11 +93,15 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
     },
     xAxis: {
       categories: picked,
+      reserveSpace: true,
       labels: {
-        rotation: -45,
+        autoRotationLimit: 40,
         style: {
-            fontSize: '8px',
-        }
+            fontSize: '10px',
+            minWidth: '200px',
+            textOverflow: 'none',
+        },
+        overflow: 'allow',
       }
     },
     yAxis: {
@@ -115,6 +109,12 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
       title: {
         text: '%',
       },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+        }
+      }
     },
     tooltip: {
       enabled: false,
@@ -122,12 +122,15 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
     plotOptions: {
       column: {
         stacking: 'percent',
+        dataLabels: {
+          enabled: true,
+        }
       }
     },
     legend: {
       enabled: false,
     },
-    series: series
+    series: seriesData
   }
 
   return (
@@ -138,19 +141,37 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
-      <HighchartsReact
-        highcharts={Highcharts}
-        constructorType="chart"
-        options={options}
-      />
-          <div className="companion-filter">
-          <Radio
-            checked={showEmpty}
-            onChange={() => setShowEmpty(!showEmpty)}
-            label={translations.emptyAnswers[lang]}
-            toggle
-          />
-    </div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <HighchartsReact
+              highcharts={Highcharts}
+              constructorType="chart"
+              options={options}
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={12}>
+            <QuestionList 
+              questions={questionLabels()}
+              picked={picked}
+              setPicked={setPicked}
+            /> 
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Radio
+              checked={showEmpty}
+              onChange={() => setShowEmpty(!showEmpty)}
+              label={translations.emptyAnswers[lang]}
+              toggle
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </div>
   )
 }
