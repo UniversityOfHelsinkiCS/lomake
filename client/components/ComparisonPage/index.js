@@ -25,7 +25,7 @@ export default () => {
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!answers || oldAnswers.pending || !oldAnswers || !deadlinePassed || !usersProgrammes || !facultiesData) return <></>
+  if (!usersProgrammes || !facultiesData) return <></>
 
   const years = allYears(oldAnswers)
   

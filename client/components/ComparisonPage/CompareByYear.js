@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Radio } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common.js'
@@ -10,6 +10,8 @@ import './ComparisonPage.scss'
 
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears }) => {
+  const [showEmpty, setShowEmpty] = useState(true)
+  const [picked, setPicked] = useState([])
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
   const history = useHistory()
@@ -20,6 +22,16 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
     history.push('/')
   }
 
+  useEffect(() => {
+    setPicked(questionsList.map((q) => q.label))
+  }, [])
+
+  const addToChosen = (questionLabel) => {
+    if (picked.includes(questionLabel)) {
+      setPicked(() => picked.filter((label) => label !== questionLabel))
+    }
+  }
+
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
@@ -28,41 +40,51 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
       let yellow = []
       let red = []
       let emptyAnswer = []
-      year.answers.forEach((q, key) => {
-        const color = questionsList.find((q) => q.id === key)
-        if (color) {
+      year.answers.forEach((answerSet, key) => {
+        const questionWithColor = questionsList.find((q) => q.id === key)
+        if (questionWithColor && picked.includes(questionWithColor.label)) {
           let colors = {
             green: 0,
             yellow: 0,
             red: 0,
             emptyAnswer: 0,
           }  
-          q.forEach((a) => colors[a.color] = colors[a.color] + 1)
+          answerSet.forEach((a) => colors[a.color] = colors[a.color] + 1)
           green = [...green, colors.green]
           yellow = [...yellow, colors.yellow]
           red = [...red, colors.red]
           emptyAnswer = [...emptyAnswer, colors.emptyAnswer]
         }
       })
-      total = [...total, 
-        { year: year.year, name: 'positive', color: 'green', data: green}, 
-        { year: year.year, name: 'neutral', color: 'yellow', data: yellow }, 
-        { year: year.year, name: 'negative', color: 'red', data: red }, 
-        { year: year.year, name: 'empty', color: 'gray', data: emptyAnswer } 
+      total = [...total,
+        { year: year.year, name: 'positive', color: 'green', data: green },
+        { year: year.year, name: 'neutral', color: 'yellow', data: yellow },
+        { year: year.year, name: 'negative', color: 'red', data: red },
       ]
+      if (showEmpty) {
+        total = [...total, { year: year.year, name: 'emptyAnswer', color: 'gray', data: emptyAnswer }]
+      }
     })
       
     return total
   }
   const colorSums = colorsTotal()
   
-  const data = colorSums.map((sum) => {
+  const series = colorSums.map((sum) => {
     return {
-      name: `${sum.year} ${translations[sum.name][lang]}`,
+      name: `${sum.year} ${translations[sum.color][lang]}`,
       data: sum.data,
       color: colors[sum.color],
-      dataLabels: [{ enabled: true }],
+      dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
       stack: sum.year,
+      point: {
+        events: {
+          click: function (event) {
+            addToChosen(event.point.category)
+          },
+        },
+      },
+      label: [{ enabled: true }] ,
     }
   })
 
@@ -80,7 +102,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
       text: '',
     },
     xAxis: {
-      categories: questionsList.map((q) => q.label),
+      categories: picked,
       labels: {
         rotation: -45,
         style: {
@@ -95,22 +117,17 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
       },
     },
     tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style=color:{series.color};padding:0">{series.name}: </td>'
-          + '<td style="padding:0"><b>{point.y:.0f} ohjelmaa</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true,
+      enabled: false,
     },
     plotOptions: {
       column: {
-          stacking: 'percent'
+        stacking: 'percent',
       }
     },
     legend: {
       enabled: false,
     },
-    series: data
+    series: series
   }
 
   return (
@@ -126,6 +143,14 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
         constructorType="chart"
         options={options}
       />
+          <div className="companion-filter">
+          <Radio
+            checked={showEmpty}
+            onChange={() => setShowEmpty(!showEmpty)}
+            label={translations.emptyAnswers[lang]}
+            toggle
+          />
+    </div>
     </div>
   )
 }

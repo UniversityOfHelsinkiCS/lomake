@@ -81,6 +81,11 @@ export const comparisonPageTranslations = {
     en: 'No answer',
     se: 'No answer',
   },
+  programmes: {
+    fi: 'Ohjelmaa',
+    en: 'Programmes',
+    se: 'Programmes',
+  },
   // ComparisonPage/ComparisonByYear.js
   // ComparisonPage/PieChart.js
   responses: {

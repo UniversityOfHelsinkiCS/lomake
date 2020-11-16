@@ -183,7 +183,7 @@ export const getMeasuresAnswer = (data) => {
 }
 
 export const allYears = (oldAnswers) => {
-  let years = [...oldAnswers.years]
+  let years = (oldAnswers && oldAnswers.years) ? [...oldAnswers.years] : []
   const currentYear = new Date().getFullYear()
   if (!years.includes(currentYear)) years = [...years, currentYear]
   return years
