@@ -13,7 +13,7 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
-const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
+const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const lang = useSelector((state) => state.language)
   const { companion, level, year, faculty } = useSelector(({ filters }) => filters)
   const user = useSelector((state) => state.currentUser.data)
@@ -83,6 +83,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const comparedProgrammes = filteredProgrammes()
 
+  console.log(allAnswers)
   const comparedAnswers = (question) => {
     if (!comparedProgrammes || !allAnswers) return []
     const filteredKeys = comparedProgrammes.map((p) => p.key)
@@ -101,7 +102,7 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
     <div className="comparison-container">
       <Grid>
         <Grid.Column className="comparison-center-header" width={16}>
-          {year} - {translations.reportHeader['comparison'][lang]}
+          {year} - {translations.reportHeader['byFaculty'][lang]}
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
@@ -213,4 +214,4 @@ const Comparison = ({ questionsList, usersProgrammes, allAnswers }) => {
   )
 }
 
-export default Comparison
+export default CompareByFaculty

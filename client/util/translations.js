@@ -5,13 +5,18 @@ export const comparisonPageTranslations = {
     se: 'Compare answers',
   },
   reportHeader: {
-    comparison: {
-      fi: 'Ohjelman vertailu',
-      en: 'Compare a programme',
-      se: 'Compare a programme',
+    byFaculty: {
+      fi: 'Vertaile ohjelmaa tiedekuntaan',
+      en: 'Compare programme to a faculty',
+      se: 'Compare programme to a faculty',
+    },
+    byYear: {
+      fi: 'Vertaile vastauksia vuosittain',
+      en: 'Compare answers by year',
+      se: 'Compare answers by year',
     },
   },
-  // ComparisonPage/Comparison.js
+  // ComparisonPage/ComparisonBYFaculty.js
   chosenProgrammes: {
     fi: 'Valittu ohjelma',
     en: 'Chosen programme',
@@ -54,6 +59,22 @@ export const comparisonPageTranslations = {
     fi: 'Ei määriteltyä tiedekuntaa',
     en: 'No faculty defined',
     se: 'No faculty defined',
+  },
+  // ComparisonPage/ComparisonByYear.js
+  green: {
+    fi: 'Vihreä',
+    en: 'Green',
+    se: 'Grön',
+  },
+  yellow: {
+    fi: 'Keltainen',
+    en: 'Yellow',
+    se: 'Gul',
+  },
+  red: {
+    fi: 'Punainen',
+    en: 'Red',
+    se: 'Röd',
   },
   // ComparisonPage/PieChart.js
   responses: {

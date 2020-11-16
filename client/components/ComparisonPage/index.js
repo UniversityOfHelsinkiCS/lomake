@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import Comparison from './Comparison'
+import CompareByFaculty from './CompareByFaculty'
+import CompareByYear from './CompareByYear'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { answersByYear, programmeNameByKey as programmeName, sortedItems } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
@@ -18,14 +19,13 @@ export default () => {
   const facultiesData = useSelector(({ faculties }) => faculties.data)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)
-  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadlinePassed)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!selectedAnswers || !usersProgrammes || !facultiesData) return <></>
+  if (!answers || !oldAnswers || !deadlinePassed || !usersProgrammes || !facultiesData) return <></>
 
   const modifiedQuestions = () => {
     let attributes = []
@@ -60,9 +60,11 @@ export default () => {
 
   const questionsList = modifiedQuestions()
 
-  const answersByQuestions = () => {
+  const answersByQuestions = (chosenYear) => {
     let answerMap = new Map()
     const chosenKeys = usersProgrammes.map((p) => p.key)
+    const selectedAnswers = answersByYear(chosenYear, answers, oldAnswers, deadlinePassed)
+    if (!selectedAnswers) return new Map()
     selectedAnswers.forEach((programme) => {
       const key = programme.programme
 
@@ -72,7 +74,6 @@ export default () => {
           let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
-
           colorsByProgramme = [...colorsByProgramme, { name: name, key: key, color: color }]
           answerMap.set(question.id, colorsByProgramme)
         })
@@ -99,14 +100,26 @@ export default () => {
 
   const panes = [
     {
-      menuItem: translations.reportHeader['comparison'][lang],
+      menuItem: translations.reportHeader['byFaculty'][lang],
       render: () => (
         <Tab.Pane>
-          <Comparison
+          <CompareByFaculty
             year={year}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={usersProgrammes ? answersByQuestions() : []}
+            allAnswers={usersProgrammes ? answersByQuestions(year) : []}
+          />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: translations.reportHeader['byYear'][lang],
+      render: () => (
+        <Tab.Pane>
+          <CompareByYear
+            questionsList={questionsList.filter((q) => !q.no_color)}
+            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
+            allAnswers={usersProgrammes ? answersByQuestions(year) : []}
           />
         </Tab.Pane>
       ),
