@@ -62,9 +62,9 @@ const ColorTable = React.memo(
         const answers = programme && programme.data ? programme.data : {}
 
         Object.keys(answers).forEach((answerKey) => {
-          if (answerKey.includes('_color')) {
+          if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
-            const baseKey = answerKey.replace('_color', '')
+            const baseKey = answerKey.replace('_light', '')
             if (!statObject[baseKey]) statObject[baseKey] = {}
 
             statObject[baseKey][color] = statObject[baseKey][color]

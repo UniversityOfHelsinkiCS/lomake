@@ -55,7 +55,7 @@ const ColorTableCell = ({
   }
 
   const textId = `${questionId}_text`
-  const colorId = `${questionId}_color`
+  const colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
   const colorAnswer = programmesAnswers[colorId]
 

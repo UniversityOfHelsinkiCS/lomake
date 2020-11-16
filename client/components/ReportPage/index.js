@@ -111,7 +111,7 @@ export default () => {
             ...attributes,
             {
               id: `${part.id}_text`,
-              color: `${part.id}_color`,
+              color: `${part.id}_light`,
               label: part.label[lang] ? part.label[lang] : '',
               description: part.description ? part.description[lang] : '',
               title: question.title[lang],

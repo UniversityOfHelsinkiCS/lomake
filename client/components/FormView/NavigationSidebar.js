@@ -69,7 +69,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                     }
 
                     if (type === 'ENTITY' && !no_color) {
-                      idsToCheck.push(`${id}_color`)
+                      idsToCheck.push(`${id}_light`)
                     }
 
                     const status = idsToCheck.reduce((acc, cur) => {

@@ -28,7 +28,7 @@ const StatsContent = ({ stats, answers, questionId }) => {
   const worldCloudObject = answers.reduce(
     (obj, { data }) => {
       const textId = `${questionId}_text`
-      const colorId = `${questionId}_color`
+      const colorId = `${questionId}_light`
       if (data[textId] && data[colorId]) {
         const words = data[textId].split(/,| |\n/).map((word) => replaceAllAndLower(word))
         const color = data[colorId]

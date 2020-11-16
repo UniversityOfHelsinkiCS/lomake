@@ -15,7 +15,7 @@ const colorMap = {
 
 const SmileyColors = ({ id }) => {
   const dispatch = useDispatch()
-  const fieldName = `${id}_color`
+  const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id))
   const value = useSelector(({ form }) => form.data[fieldName])
   const viewOnly = useSelector(({ form }) => form.viewOnly)

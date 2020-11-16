@@ -26,7 +26,7 @@ const mapColorToImage = {
 const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers }) => {
   const lang = useSelector((state) => state.language)
 
-  let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_color`] : null
+  let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
