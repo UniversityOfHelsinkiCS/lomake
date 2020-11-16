@@ -5,7 +5,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import CompareByFaculty from './CompareByFaculty'
 import CompareByYear from './CompareByYear'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { answersByYear, programmeNameByKey as programmeName, sortedItems } from 'Utilities/common'
+import { allYears, answersByYear, programmeNameByKey as programmeName, sortedItems } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 import './ComparisonPage.scss'
@@ -25,8 +25,10 @@ export default () => {
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
-  if (!answers || !oldAnswers || !deadlinePassed || !usersProgrammes || !facultiesData) return <></>
+  if (!answers || oldAnswers.pending || !oldAnswers || !deadlinePassed || !usersProgrammes || !facultiesData) return <></>
 
+  const years = allYears(oldAnswers)
+  
   const modifiedQuestions = () => {
     let attributes = []
     let titleIndex = -1
@@ -59,6 +61,8 @@ export default () => {
   }
 
   const questionsList = modifiedQuestions()
+
+
 
   const answersByQuestions = (chosenYear) => {
     let answerMap = new Map()
@@ -98,6 +102,13 @@ export default () => {
     return answerMap
   }
 
+  const answersForYears = () => {
+    const all = years.map((year) => {
+      let data = { year, answers: answersByQuestions(year)}
+      return data
+    })
+    return all
+  }
   const panes = [
     {
       menuItem: translations.reportHeader['byFaculty'][lang],
@@ -119,7 +130,8 @@ export default () => {
           <CompareByYear
             questionsList={questionsList.filter((q) => !q.no_color)}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={usersProgrammes ? answersByQuestions(year) : []}
+            allAnswers={usersProgrammes ? answersForYears() : []}
+            years={years}
           />
         </Tab.Pane>
       ),

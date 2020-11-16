@@ -83,7 +83,6 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const comparedProgrammes = filteredProgrammes()
 
-  console.log(allAnswers)
   const comparedAnswers = (question) => {
     if (!comparedProgrammes || !allAnswers) return []
     const filteredKeys = comparedProgrammes.map((p) => p.key)

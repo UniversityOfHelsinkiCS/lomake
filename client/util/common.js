@@ -3,6 +3,7 @@
  */
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
+import oldAnswersReducer from './redux/oldAnswersReducer'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -179,6 +180,13 @@ export const getMeasuresAnswer = (data) => {
   }
 
   return null
+}
+
+export const allYears = (oldAnswers) => {
+  let years = [...oldAnswers.years]
+  const currentYear = new Date().getFullYear()
+  if (!years.includes(currentYear)) years = [...years, currentYear]
+  return years
 }
 
 export const answersByYear = (year, tempAnswers, oldAnswers, deadline) => {

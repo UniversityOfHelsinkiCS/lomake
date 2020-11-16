@@ -76,6 +76,12 @@ export const comparisonPageTranslations = {
     en: 'Red',
     se: 'Röd',
   },
+  gray: {
+    fi: 'Ei vastausta',
+    en: 'No answer',
+    se: 'No answer',
+  },
+  // ComparisonPage/ComparisonByYear.js
   // ComparisonPage/PieChart.js
   responses: {
     en: 'Responses:',

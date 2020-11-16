@@ -8,7 +8,8 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 import { colors } from 'Utilities/common.js'
 import './ComparisonPage.scss'
 
-const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
+
+const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears }) => {
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
   const history = useHistory()
@@ -22,25 +23,48 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
-    allAnswers.forEach((q, key) => {
-      const color = questionsList.find(o => o.id === key)
-      if (color) {
-        let colors = {
-          green: 0,
-          yellow: 0,
-          red: 0,
-        }  
-        q.forEach((a) => colors[a.color] = colors[a.color] + 1)
-
-        const question = questionsList.find((k) => k.id === key)
-        const name = question ? question.label : ''
-        total = [...total, {name: name, colors}]  
-      }
-    })  
+    allAnswers.forEach((year) => {
+      let green = []
+      let yellow = []
+      let red = []
+      let emptyAnswer = []
+      year.answers.forEach((q, key) => {
+        const color = questionsList.find((q) => q.id === key)
+        if (color) {
+          let colors = {
+            green: 0,
+            yellow: 0,
+            red: 0,
+            emptyAnswer: 0,
+          }  
+          q.forEach((a) => colors[a.color] = colors[a.color] + 1)
+          green = [...green, colors.green]
+          yellow = [...yellow, colors.yellow]
+          red = [...red, colors.red]
+          emptyAnswer = [...emptyAnswer, colors.emptyAnswer]
+        }
+      })
+      total = [...total, 
+        { year: year.year, name: 'positive', color: 'green', data: green}, 
+        { year: year.year, name: 'neutral', color: 'yellow', data: yellow }, 
+        { year: year.year, name: 'negative', color: 'red', data: red }, 
+        { year: year.year, name: 'empty', color: 'gray', data: emptyAnswer } 
+      ]
+    })
       
     return total
   }
   const colorSums = colorsTotal()
+  
+  const data = colorSums.map((sum) => {
+    return {
+      name: `${sum.year} ${translations[sum.name][lang]}`,
+      data: sum.data,
+      color: colors[sum.color],
+      dataLabels: [{ enabled: true }],
+      stack: sum.year,
+    }
+  })
 
   const options = {
     chart: {
@@ -56,7 +80,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       text: '',
     },
     xAxis: {
-      categories: questionsList.map((q) => q.label)
+      categories: questionsList.map((q) => q.label),
+      labels: {
+        rotation: -45,
+        style: {
+            fontSize: '8px',
+        }
+      }
     },
     yAxis: {
       min: 0,
@@ -80,61 +110,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     legend: {
       enabled: false,
     },
-    series: [
-    {
-      name: translations.green[lang],
-      data: colorSums.map((question) => question.colors.green),
-      color: colors.green,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2018,
-    }, 
-    {
-      name: translations.yellow[lang],
-      data: colorSums.map((question) => question.colors.yellow),
-      color: colors.yellow,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2018,
-    }, 
-    {
-      name: translations.red[lang],
-      data: colorSums.map((question) => question.colors.red),
-      color: colors.red,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2018,
-    },
-/*    {
-      name: 'Green2019',
-      data: [15, 14, 3, 7, 3, 7, 4, 3, 3, 4, 6, 7, 7, 8, 4, 8],
-      color: colors.green,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2019,
-    }, {
-      name: 'Yellow2019',
-      data: [2, 2, 3, 2, 1, 0, 15, 14, 3, 7, 3, 7, 4, 3, 3, 2],
-      color: colors.yellow,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2019,
-    }, {
-      name: 'Red2019',
-      data: [0, 2, 3, 2, 11, 7, 4, 3, 3, 14, 4, 2, 5, 3, 4, 0],
-      color: colors.red,
-      dataLabels: [{
-        enabled: true,
-      }],
-      stack: 2019,
-    }
-    */
-  ]
+    series: data
   }
 
   return (
