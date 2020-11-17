@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
-import { useHistory } from 'react-router'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import PieChart from './PieChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
@@ -19,13 +18,8 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const user = useSelector((state) => state.currentUser.data)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
-  const history = useHistory()
 
   if (!usersProgrammes || !allAnswers) return <></>
-
-  if (!user.admin && usersProgrammes.length <= 5) {
-    history.push('/')
-  }
 
   const handleChosenChange = (e, { value }) => {
     setChosen(value)

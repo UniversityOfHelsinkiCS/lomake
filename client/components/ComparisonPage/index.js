@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import CompareByFaculty from './CompareByFaculty'
@@ -12,6 +13,8 @@ import './ComparisonPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const user = useSelector((state) => state.currentUser.data)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
@@ -24,6 +27,10 @@ export default () => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
+
+  if (!user.admin && usersProgrammes.length <= 5) {
+    history.push('/')
+  }
 
   if (!usersProgrammes || !facultiesData) return <></>
 

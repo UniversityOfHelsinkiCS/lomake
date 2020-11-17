@@ -30,10 +30,6 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   if (!usersProgrammes || !allAnswers) return <></>
 
-  if (!user.admin && usersProgrammes.length <= 5) {
-    history.push('/')
-  }
-
   const questionLabels = () => {
     return questionsList.map((q) => q.label.charAt(0) + q.label.slice(1).toLowerCase()) 
   }
