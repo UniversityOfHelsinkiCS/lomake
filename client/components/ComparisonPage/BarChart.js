@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
@@ -7,6 +7,18 @@ import { colors } from 'Utilities/common'
 
 const BarChart = ({ colorSums, questions }) => {
   const lang = useSelector((state) => state.language)
+
+  const seriesData = colorSums.map((series) => {
+    return {
+      name: `${series.year} ${translations[series.color][lang]}`,
+      data: series.data,
+      color: colors[series.color],
+      dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
+      stack: series.year,
+      enableMouseTracking: false,
+      label: [{ enabled: true }] ,
+    }
+  })
 
   const options = {
     chart: {
@@ -62,20 +74,6 @@ const BarChart = ({ colorSums, questions }) => {
     },
     series: seriesData
   }
-
-  const seriesData = colorSums.map((series) => {
-    return {
-      name: `${series.year} ${translations[series.color][lang]}`,
-      data: series.data,
-      color: colors[series.color],
-      dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
-      stack: series.year,
-      enableMouseTracking: false,
-      label: [{ enabled: true }] ,
-    }
-  })
-
-
 
   return (
     <HighchartsReact
