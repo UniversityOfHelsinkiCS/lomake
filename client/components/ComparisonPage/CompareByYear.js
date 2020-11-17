@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Button, Grid, Radio } from 'semantic-ui-react'
-import HighchartsReact from 'highcharts-react-official'
-import Highcharts from 'highcharts'
+import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
@@ -13,11 +12,7 @@ import QuestionList from './QuestionList'
 import YearSelector from 'Components/Generic/YearSelector'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
-import {
-  colors,
-  internationalProgrammes as international,
-  doctoralSchools,
-} from 'Utilities/common'
+import { internationalProgrammes as international, doctoralSchools } from 'Utilities/common'
 import './ComparisonPage.scss'
 
 
@@ -132,79 +127,12 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
   const colorSums = colorsTotal()
   
-  const seriesData = colorSums.map((series) => {
-    return {
-      name: `${series.year} ${translations[series.color][lang]}`,
-      data: series.data,
-      color: colors[series.color],
-      dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
-      stack: series.year,
-      enableMouseTracking: false,
-      label: [{ enabled: true }] ,
-    }
-  })
-
-
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
   }
 
-  const options = {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: '',
-    },
-    subtitle: {
-      text: '',
-    },
-    credits: {
-      text: '',
-    },
-    xAxis: {
-      categories: questions,
-      reserveSpace: true,
-      labels: {
-        autoRotationLimit: 40,
-        style: {
-            fontSize: '10px',
-            minWidth: '200px',
-            textOverflow: 'none',
-        },
-        overflow: 'allow',
-      }
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: '%',
-      },
-      stackLabels: {
-        enabled: true,
-        style: {
-          fontWeight: 'bold',
-        }
-      }
-    },
-    tooltip: {
-      enabled: false,
-    },
-    plotOptions: {
-      column: {
-        stacking: 'percent',
-        dataLabels: {
-          enabled: true,
-        }
-      }
-    },
-    legend: {
-      enabled: false,
-    },
-    series: seriesData
-  }
-
+ 
   return (
     <div className="comparison-container">
       <Grid>
@@ -252,15 +180,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
-            <HighchartsReact
-              highcharts={Highcharts}
-              constructorType="chart"
-              options={options}
-            />
+            <BarChart colorSums={colorSums} questions={questions} />
           </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={12}>
