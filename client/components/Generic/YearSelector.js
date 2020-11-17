@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
-import { setYear } from 'Utilities/redux/filterReducer'
+import { setYear, setReportYears } from 'Utilities/redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
 import './Filters.scss'
 
-export default function YearSelector() {
+export default function YearSelector({ reportSelector }) {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
   const year = useSelector(({ filters }) => filters.year)
+  const reportYears = useSelector(({ filters }) => filters.reportYears)
   const [yearOptions, setYearOptions] = useState([])
 
   const dispatch = useDispatch()
@@ -38,15 +39,35 @@ export default function YearSelector() {
     dispatch(setYear(value))
   }
 
+  const handleReportYearChange = (_, { value }) => {
+    dispatch(setReportYears(value))
+  }
+
   return (
-    <Select
-      className="button basic gray"
-      disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
-      data-cy="yearSelector"
-      name="year"
-      options={yearOptions}
-      onChange={handleYearChange}
-      value={year}
-    />
+    reportSelector 
+      ? 
+      <Select
+        className="button basic gray year-filter"
+        disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
+        data-cy="reportSelector"
+        name="year"
+        fluid
+        placeholder="Select years"
+        options={yearOptions}
+        onChange={handleReportYearChange}
+        value={reportYears}
+        multiple
+        selection
+      />
+      : 
+      <Select
+        className="button basic gray"
+        disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
+        data-cy="yearSelector"
+        name="year"
+        options={yearOptions}
+        onChange={handleYearChange}
+        value={year}
+      />
   )
 }

@@ -5,16 +5,18 @@ import { Grid, Radio } from 'semantic-ui-react'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import QuestionList from './QuestionList'
+import YearSelector from 'Components/Generic/YearSelector'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common.js'
 import './ComparisonPage.scss'
 
 
-const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears }) => {
+const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [showEmpty, setShowEmpty] = useState(true)
   const [picked, setPicked] = useState([])
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
+  const years = useSelector(({ filters }) => filters.reportYears)
   const history = useHistory()
 
   if (!usersProgrammes || !allAnswers) return <></>
@@ -35,33 +37,34 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
     if (!allAnswers) return null
     let total = []
     allAnswers.forEach((rawData) => {
-      let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
-      rawData.answers.forEach((answerSet, key) => {
-        const questionWithColor = questionsList.find((q) => q.id === key)
-        if (questionWithColor && picked.includes(questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase())) {
-          let colors = {
-            green: 0,
-            yellow: 0,
-            red: 0,
-            emptyAnswer: 0,
-          }  
-          answerSet.forEach((a) => colors[a.color] = colors[a.color] + 1)
-          yearsColors.green = [...yearsColors.green, colors.green]
-          yearsColors.yellow = [...yearsColors.yellow, colors.yellow]
-          yearsColors.red = [...yearsColors.red, colors.red]
-          yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, colors.emptyAnswer]
+      if (years.includes(rawData.year)) {
+        let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
+        rawData.answers.forEach((answerSet, key) => {
+          const questionWithColor = questionsList.find((q) => q.id === key)
+          if (questionWithColor && picked.includes(questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase())) {
+            let colors = {
+              green: 0,
+              yellow: 0,
+              red: 0,
+              emptyAnswer: 0,
+            }  
+            answerSet.forEach((a) => colors[a.color] = colors[a.color] + 1)
+            yearsColors.green = [...yearsColors.green, colors.green]
+            yearsColors.yellow = [...yearsColors.yellow, colors.yellow]
+            yearsColors.red = [...yearsColors.red, colors.red]
+            yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, colors.emptyAnswer]
+          }
+        })
+        total = [...total,
+          { year: rawData.year, name: 'positive', color: 'green', data: yearsColors.green },
+          { year: rawData.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
+          { year: rawData.year, name: 'negative', color: 'red', data: yearsColors.red },
+        ]
+        if (showEmpty) {
+          total = [...total, { year: rawData.year, name: 'emptyAnswer', color: 'gray', data: yearsColors.emptyAnswer }]
         }
-      })
-      total = [...total,
-        { year: rawData.year, name: 'positive', color: 'green', data: yearsColors.green },
-        { year: rawData.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
-        { year: rawData.year, name: 'negative', color: 'red', data: yearsColors.red },
-      ]
-      if (showEmpty) {
-        total = [...total, { year: rawData.year, name: 'emptyAnswer', color: 'gray', data: yearsColors.emptyAnswer }]
       }
     })
-      
     return total
   }
   const colorSums = colorsTotal()
@@ -142,6 +145,14 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers, allYears })
       </Grid>
       <div className="ui divider" />
       <Grid>
+        <Grid.Row>
+          <Grid.Column width={10}>
+            <YearSelector reportSelector />
+          </Grid.Column>
+          <Grid.Column width={6}>
+
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
             <HighchartsReact
