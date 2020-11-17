@@ -38,7 +38,7 @@ const initialState = {
   faculty: 'allFaculties',
   level: 'allProgrammes',
   year: new Date().getFullYear(),
-  reportYears: [],
+  reportYears: [new Date().getFullYear()],
 }
 
 export default (state = initialState, action) => {
