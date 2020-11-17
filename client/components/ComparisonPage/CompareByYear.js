@@ -132,7 +132,6 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     setFilter(value)
   }
 
- 
   return (
     <div className="comparison-container">
       <Grid>
@@ -152,7 +151,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             <>
               <FacultyFilter
                 size="small"
-                label={translations.facultyFilter[lang]}
+                label={translations.facultyFilter.filter[lang]}
               />
               <LevelFilter />
               {faculty !== 'allFaculties' &&

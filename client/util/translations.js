@@ -23,9 +23,16 @@ export const comparisonPageTranslations = {
     se: 'Chosen programme',
   },
   facultyFilter: {
-    fi: 'Vertaile tiedekunnittain',
-    en: 'Compare by faculty',
-    se: 'Compare by faculty',
+    compare: {
+      fi: 'Vertaile tiedekunnittain',
+      en: 'Compare by faculty',
+      se: 'Compare by faculty',
+    },
+    filter: {
+      fi: 'Vastaukset tiedekunnittain',
+      en: 'Filter by faculty',
+      se: 'Filter by faculty',
+    },
   },
   chooseProgramme: {
     fi: 'Valitse vertailtava ohjelma',
