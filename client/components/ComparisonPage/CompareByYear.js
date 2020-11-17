@@ -167,14 +167,6 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Column>
         <Grid.Column width={6}>
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
-          <Button
-            color="blue"
-            onClick={() => setPicked(programmes.all)}
-            data-cy="report-select-all"
-          >
-            {translations.selectAll[lang]}
-          </Button>
-          <Button onClick={() => setPicked([])}>{translations.clearSelection[lang]}</Button>
         </Grid.Column>
       </Grid>
       <Grid>
