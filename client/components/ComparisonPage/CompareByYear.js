@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
 import { Grid, Radio } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
@@ -23,10 +22,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
-  const user = useSelector((state) => state.currentUser.data)
   const years = useSelector(({ filters }) => filters.multipleYears)
   const { faculty, level, companion, doctoralSchool } = useSelector((state) => state.filters)
-  const history = useHistory()
 
   if (!usersProgrammes || !allAnswers) return <></>
 
