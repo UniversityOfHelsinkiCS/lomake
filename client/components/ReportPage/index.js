@@ -213,7 +213,7 @@ export default () => {
       <Grid doubling columns={2} padded="vertically" className="report-filter-container">
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
-          <YearSelector />
+          <YearSelector size="small" />
           {usersProgrammes && usersProgrammes.length > 5 && (
             <>
               <FacultyFilter size="small" label={translations.facultyFilter[lang]} />

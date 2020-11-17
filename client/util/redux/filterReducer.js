@@ -27,9 +27,9 @@ export const setYear = (year) => ({
   year,
 })
 
-export const setReportYears = (reportYears) => ({
-  type: 'SET_REPORT_YEARS',
-  reportYears,
+export const setMultipleYears = (multipleYears) => ({
+  type: 'SET_MULTIPLE_YEARS',
+  multipleYears,
 })
 
 const initialState = {
@@ -38,7 +38,7 @@ const initialState = {
   faculty: 'allFaculties',
   level: 'allProgrammes',
   year: new Date().getFullYear(),
-  reportYears: [new Date().getFullYear()],
+  multipleYears: [new Date().getFullYear()],
 }
 
 export default (state = initialState, action) => {
@@ -80,10 +80,10 @@ export default (state = initialState, action) => {
         year: action.year,
       }
     }
-    case 'SET_REPORT_YEARS': {
+    case 'SET_MULTIPLE_YEARS': {
       return {
         ...state,
-        reportYears: action.reportYears,
+        multipleYears: action.multipleYears,
       }
     }
     default:

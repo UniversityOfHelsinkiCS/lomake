@@ -108,7 +108,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
-            <YearSelector />
+            <YearSelector size="small" />
             <LevelFilter comparison />
           </Grid.Column>
         </Grid.Row>

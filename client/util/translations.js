@@ -86,6 +86,11 @@ export const comparisonPageTranslations = {
     en: 'Programmes',
     se: 'Programmes',
   },
+  selectYears: {
+    en: 'Select the year(s) you would like to inspect',
+    fi: 'Valitse vuodet, joita haluat tarkastella',
+    se: 'Select the year(s) you would like to inspect',
+  },
   // ComparisonPage/QuestionList.js
   nowShowing: {
     fi: 'VASTAUKSISSA MUKANA OLEVAT KYSYMYKSET:',

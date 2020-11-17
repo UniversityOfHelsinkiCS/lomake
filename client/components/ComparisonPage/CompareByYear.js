@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { Button, Grid, Radio } from 'semantic-ui-react'
+import { Grid, Radio } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
@@ -24,7 +24,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const user = useSelector((state) => state.currentUser.data)
-  const years = useSelector(({ filters }) => filters.reportYears)
+  const years = useSelector(({ filters }) => filters.multipleYears)
   const { faculty, level, companion, doctoralSchool } = useSelector((state) => state.filters)
   const history = useHistory()
 
@@ -143,19 +143,29 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <div className="ui divider" />
       <Grid doubling columns={2} padded="vertically" className="report-filter-container">
         <Grid.Column width={10}>
-          <YearSelector reportSelector />
+          <YearSelector
+            multiple 
+            size="small"
+            label={translations.selectYears[lang]} 
+          />
           {usersProgrammes && usersProgrammes.length > 5 && (
             <>
-              <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
+              <FacultyFilter
+                size="small"
+                label={translations.facultyFilter[lang]}
+              />
               <LevelFilter />
               {faculty !== 'allFaculties' &&
-                (level === 'doctor' 
-                  || level === 'master' 
+                (level === 'doctor'
+                  || level === 'master'
                   || level === 'bachelor'
                 ) && (
                   <CompanionFilter />
                 )}
-              {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
+              {faculty === 'allFaculties'
+                && level === 'doctor'
+                && <DoctoralSchoolFilter />
+              }
               <ProgrammeFilter
                 handleChange={handleSearch}
                 filter={filter}
@@ -166,7 +176,11 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           )}
         </Grid.Column>
         <Grid.Column width={6}>
-          <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+          <ProgrammeList
+            programmes={programmes}
+            setPicked={setPicked}
+            picked={picked}
+          />
         </Grid.Column>
       </Grid>
       <Grid>

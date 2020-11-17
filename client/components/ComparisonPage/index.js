@@ -62,8 +62,6 @@ export default () => {
 
   const questionsList = modifiedQuestions()
 
-
-
   const answersByQuestions = (chosenYear) => {
     let answerMap = new Map()
     const chosenKeys = usersProgrammes.map((p) => p.key)
