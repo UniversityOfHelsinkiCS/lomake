@@ -160,25 +160,22 @@
   }
 }
 
-.question-list {
-  &-container {
-    min-height: 50px;
-    max-height: 370px;
-    display: flex;
-    flex-flow: column;
-    overflow: auto;
+.empty-toggle {
+  margin: 2em 0em 0.5em 0em;
+}
+
+.questions-list {
+  &-button {
+    margin-top: 0.5em !important;
   }
-  &-included {
-    &:hover {
-      font-weight: bold;
-      cursor: pointer;
-    }
+}
+
+.comparison {
+  &-chart-row {
+    height: 600px !important;
   }
-  &-excluded {
-    color: $gray;
-    &:hover {
-      font-weight: bold;
-      cursor: pointer;
-    }
+  &-questions-row {
+    height: 500px !important;
+    margin-top: 20px !important;
   }
 }

@@ -1,65 +1,47 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Segment } from 'semantic-ui-react'
+import { Button, Dropdown } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
-const QuestionList = ({ questions, setPicked, picked }) => {
+const QuestionList = ({ questions, setPicked, picked, label }) => {
   const lang = useSelector((state) => state.language)
 
-  const addToList = (question) => {
-    if (!picked.includes(question)) {
-      setPicked(() => [...picked, question])
-    }
+  const addToList = (_,{ value }) => {
+    setPicked(value)
   }
 
+  const options = questions.map((q) => Object({ key: q, text: q, value: q}))
+
   return (
-    <>
-    <Segment className="question-list-container" data-cy="comparison-question-list">
-      <p>{translations.nowShowing[lang]}</p>
-      {questions.length > 0 ? (
-        <>
-          {questions.map(
-            (p) =>
-              picked.includes(p) && (
-                <p
-                  className="question-list-included"
-                  data-cy={`question-list-${p}`}
-                  onClick={() => addToList(p)}
-                  key={p}
-                >
-                  {p}
-                </p>
-              )
-          )}
-          <div className="ui divider" />
-          <p>{translations.chooseMore[lang]}</p>
-          {questions.map(
-            (p) =>
-              !picked.includes(p) && (
-                <p
-                  className="question-list-excluded"
-                  data-cy={`question-list-${p.key}`}
-                  onClick={() => addToList(p)}
-                  key={p.key}
-                >
-                  {p}
-                </p>
-              )
-          )}
-        </>
-      ) : (
-        <h4>{translations.noData[lang]}</h4>
-      )}
-    </Segment>
-    <Button
-      color="blue"
-      onClick={() => setPicked(questions)}
-      data-cy="question-list-select-all"
-    >
-      {translations.selectAll[lang]}
-    </Button>
-    <Button onClick={() => setPicked([])}>{translations.clearSelection[lang]}</Button>
-    </>
+    <div className="questions-list-container" data-cy="comparison-question-list">
+      <label>{label}</label>
+      <Dropdown
+        className="button basic gray"
+        data-cy="questions-list"
+        name="questions-list"
+        fluid
+        placeholder="Select questions"
+        options={options}
+        onChange={addToList}
+        value={picked}
+        multiple
+        selection
+      />
+      <Button
+        className="questions-list-button"
+        color="blue"
+        onClick={() => setPicked(questions)}
+        data-cy="questions-list-select-all"
+      >
+        {translations.selectAll[lang]}
+      </Button>
+      <Button 
+        onClick={() => setPicked([])}
+        className="questions-list-button"
+      >
+        {translations.clearSelection[lang]}
+      </Button>
+    </div>
   )
 }
 

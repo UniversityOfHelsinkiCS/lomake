@@ -22,7 +22,10 @@ const BarChart = ({ colorSums, questions }) => {
 
   const options = {
     chart: {
-      type: 'column'
+      type: 'column',
+      height: '600px',
+      marginTop: 50,
+      marginRight: 30,
     },
     title: {
       text: '',
@@ -37,11 +40,12 @@ const BarChart = ({ colorSums, questions }) => {
       categories: questions,
       reserveSpace: true,
       labels: {
-        autoRotationLimit: 40,
+        autoRotationLimit: 90,
         style: {
-            fontSize: '10px',
+            color: '#000000',
             minWidth: '200px',
             textOverflow: 'none',
+            wordBreak: 'break-all',
         },
         overflow: 'allow',
       }
@@ -77,6 +81,7 @@ const BarChart = ({ colorSums, questions }) => {
 
   return (
     <HighchartsReact
+      className="comparison-bar-chart"
       highcharts={Highcharts}
       constructorType="chart"
       options={options}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio } from 'semantic-ui-react'
+import { Grid, Radio, Segment } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
+import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
@@ -133,7 +134,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
-      <Grid doubling columns={2} padded="vertically" className="report-filter-container">
+      <Grid doubling columns={2} padded>
         <Grid.Column width={10}>
           <YearSelector
             multiple 
@@ -164,6 +165,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 onEmpty={() => setFilter('')}
                 lang={lang}
               />
+              <Radio
+                className="empty-toggle"
+                checked={showEmpty}
+                onChange={() => setShowEmpty(!showEmpty)}
+                label={translations.emptyAnswers[lang]}
+                toggle
+              />
             </>
           )}
         </Grid.Column>
@@ -175,27 +183,36 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           />
         </Grid.Column>
       </Grid>
-      <Grid>
+      <Grid padded>
         <Grid.Row>
           <Grid.Column width={16}>
             <BarChart colorSums={colorSums} questions={questions} />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={12}>
+        <Grid.Row className="comparison-questions-row">
+          <Grid.Column width={11}>
             <QuestionList 
               questions={questionLabels()}
               picked={questions}
               setPicked={setQuestions}
             /> 
           </Grid.Column>
-          <Grid.Column width={4}>
-            <Radio
-              checked={showEmpty}
-              onChange={() => setShowEmpty(!showEmpty)}
-              label={translations.emptyAnswers[lang]}
-              toggle
-            />
+          <Grid.Column width={5}>
+            <Segment compact textAlign="left">
+              <p>
+                <span className="answer-circle-green" /> {translations.positive[lang]}
+              </p>
+              <p>
+                <span className="answer-circle-yellow" /> {translations.neutral[lang]}
+              </p>
+              <p>
+                <span className="answer-circle-red" /> {translations.negative[lang]}
+              </p>
+              <p>
+                <span className="answer-circle-gray" /> {translations.empty[lang]}
+              </p>
+              <p className="report-side-note">{translations.noColors[lang]}</p>
+            </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>
