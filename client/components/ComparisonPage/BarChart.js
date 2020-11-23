@@ -34,6 +34,8 @@ const BarChart = ({ data, questions, unit }) => {
     }
   })
 
+  const checkSize = () => (seriesData && seriesData[0].data.length > 5) ? '10px' : '15px'
+
   const options = {
     chart: {
       type: 'column',
@@ -88,14 +90,13 @@ const BarChart = ({ data, questions, unit }) => {
           crop: false,
           inside: true,
           pointPadding: 0.1,
-          style: { textOverflow: 'clip' },
+          style: { textOverflow: 'clip', fontSize: checkSize()},
           formatter: function () {
-            if (this.point.y == 0) return ''
-            if (unit === 'programmeAmountWithChanges') {
+            if (unit === 'programmeAmountWithChange') {
               const changes = this.series.userOptions.changes
               if (changes) return this.y + '<br>' + changes[this.point.index]
               return this.y
-            } else if (unit === 'programmeAmountWithoutChanges' || unit === 'programmeAmount') {
+            } else if (unit === 'programmeAmountWithoutChange' || unit === 'programmeAmount') {
               return this.y
             } else {
               return `${this.point.percentage.toFixed(1)} %`
