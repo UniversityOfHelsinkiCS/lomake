@@ -3,7 +3,6 @@
  */
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
-import oldAnswersReducer from './redux/oldAnswersReducer'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -132,19 +131,10 @@ export const sortedItems = (items, sorter, lang) => {
 }
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
-  let prog = ""
   if (!studyProgrammes) return ''
-  if (studyProgrammes && programmeWithKey.programme === "msc_global_governance_law_(2020_lähtien)") {
-    prog = studyProgrammes.find((a) => a.key === "MH20_003")
-    return prog.name[lang] ? prog.name[lang] : prog.name['en']
-  }
-  else if (studyProgrammes && programmeWithKey.programme === "msc_changing_education_(2020_lähtien)") {
-    prog = studyProgrammes.find((a) => a.key === "MH60_002")
-    return prog.name[lang] ? prog.name[lang] : prog.name['en']
-  }
-  if (studyProgrammes) prog = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
-  if (!prog) return ''
-  return prog.name[lang] ? prog.name[lang] : prog.name['en']
+  const programme = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
+  if (!programme) return ''
+  return programme.name[lang] ? programme.name[lang] : programme.name['en']
 }
 
 export const cleanText = (string) => {

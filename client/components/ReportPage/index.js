@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Grid, Tab } from 'semantic-ui-react'
+import { Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import ProgrammeList from './ProgrammeList'
 import WrittenAnswers from './WrittenAnswers'

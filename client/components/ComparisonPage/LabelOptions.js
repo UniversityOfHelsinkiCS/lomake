@@ -7,7 +7,6 @@ const LabelOptions = ({ unit, setUnit }) => {
   const years = useSelector(({ filters }) => filters.multipleYears)
   const lang = useSelector((state) => state.language)
 
-  console.log(unit)
   const handleChange = (e, { value }) => {
     setUnit(value)
   }

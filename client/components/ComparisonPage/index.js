@@ -24,7 +24,6 @@ export default () => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
-  const facultiesData = useSelector(({ faculties }) => faculties.data)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)
 
@@ -37,7 +36,7 @@ export default () => {
     history.push('/')
   }
 
-  if (!usersProgrammes || !facultiesData) return <></>
+  if (!usersProgrammes) return <></>
 
   const years = allYears(oldAnswers)
 
