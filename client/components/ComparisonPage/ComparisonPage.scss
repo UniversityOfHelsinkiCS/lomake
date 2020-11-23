@@ -169,13 +169,18 @@
     margin-top: 0.5em !important;
   }
 }
+.highcharts-text-outline {
+  white-space: pre-wrap;
+}
 
 .comparison {
   &-chart-row {
     height: 600px !important;
   }
+  &-chart-settings {
+    margin-top: 20px !important;
+  }
   &-questions-row {
     height: 500px !important;
-    margin-top: 20px !important;
   }
 }

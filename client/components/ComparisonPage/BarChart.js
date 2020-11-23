@@ -1,22 +1,36 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-const BarChart = ({ colorSums, questions }) => {
-  const lang = useSelector((state) => state.language)
+const BarChart = ({ data, questions, unit }) => {
+  if (!data) return <></>
 
-  const seriesData = colorSums.map((series) => {
+  const calculateChange = () => {
+    if (!data) return []
+    data.forEach((series) => {
+      const previousYear = data.find((y) => series.year - 1 === y.year && series.color === y.color)
+      if (previousYear) {
+        series.changes = series.data.map((d, index) => {
+          let change = d - previousYear.data[index]
+          if (change >= 0) change = `(+${change})`
+          else if (change < 0) change = `(${change})`
+          return change
+        })
+      }
+    })
+  }
+
+  calculateChange()
+
+  const seriesData = data.map((series) => {
     return {
-      name: `${series.year} ${translations[series.color][lang]}`,
+      name: Number(series.year),
       data: series.data,
+      changes: series.changes,
       color: colors[series.color],
-      dataLabels: [{ enabled: true, crop: false, format: '{percentage:.1f} %', style: { fontSize: '10px' }}],
       stack: series.year,
-      enableMouseTracking: false,
-      label: [{ enabled: true }] ,
+      label: [{ enabled: true }],
     }
   })
 
@@ -42,13 +56,13 @@ const BarChart = ({ colorSums, questions }) => {
       labels: {
         autoRotationLimit: 90,
         style: {
-            color: '#000000',
-            minWidth: '200px',
-            textOverflow: 'none',
-            wordBreak: 'break-all',
+          color: '#000000',
+          minWidth: '200px',
+          textOverflow: 'none',
+          wordBreak: 'break-all',
         },
         overflow: 'allow',
-      }
+      },
     },
     yAxis: {
       min: 0,
@@ -59,24 +73,43 @@ const BarChart = ({ colorSums, questions }) => {
         enabled: true,
         style: {
           fontWeight: 'bold',
-        }
-      }
+        },
+      },
     },
     tooltip: {
       enabled: false,
     },
     plotOptions: {
-      column: {
-        stacking: 'percent',
+      series: {
+        groupPadding: 0.13,
+        enableMouseTracking: false,
         dataLabels: {
           enabled: true,
-        }
-      }
+          crop: false,
+          inside: true,
+          pointPadding: 0.1,
+          style: { textOverflow: 'clip' },
+          formatter: function () {
+            if (unit === 'programmeAmountWithChanges') {
+              const changes = this.series.userOptions.changes
+              if (changes) return this.y + '<br>' + changes[this.point.index]
+              return this.y
+            } else if (unit === 'programmeAmountWithoutChanges' || unit === 'programmeAmount') {
+              return this.y
+            } else {
+              return `${this.point.percentage.toFixed(1)} %`
+            }
+          },
+        },
+      },
+      column: {
+        stacking: 'percent',
+      },
     },
     legend: {
       enabled: false,
     },
-    series: seriesData
+    series: seriesData,
   }
 
   return (

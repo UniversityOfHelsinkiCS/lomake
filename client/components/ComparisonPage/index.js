@@ -6,7 +6,12 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import CompareByFaculty from './CompareByFaculty'
 import CompareByYear from './CompareByYear'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { allYears, answersByYear, programmeNameByKey as programmeName, sortedItems } from 'Utilities/common'
+import {
+  allYears,
+  answersByYear,
+  programmeNameByKey as programmeName,
+  sortedItems,
+} from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 import './ComparisonPage.scss'
@@ -35,7 +40,7 @@ export default () => {
   if (!usersProgrammes || !facultiesData) return <></>
 
   const years = allYears(oldAnswers)
-  
+
   const modifiedQuestions = () => {
     let attributes = []
     let titleIndex = -1
@@ -109,7 +114,7 @@ export default () => {
 
   const answersForYears = () => {
     const all = years.map((year) => {
-      let data = { year, answers: answersByQuestions(year)}
+      let data = { year, answers: answersByQuestions(year) }
       return data
     })
     return all

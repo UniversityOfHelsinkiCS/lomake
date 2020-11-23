@@ -98,6 +98,32 @@ export const comparisonPageTranslations = {
     fi: 'Valitse vuodet, joita haluat tarkastella',
     se: 'Select the year(s) you would like to inspect',
   },
+  // ComparisonPage/LabelOptions.js
+  labelOptions: {
+    fi: 'Valitse graafissa näytettävä yksikkö',
+    en: 'Choose the unit for the graph',
+    se: 'Choose the unit for the graph',
+  },
+  percentage: {
+    fi: 'Prosenttiosuudet',
+    en: 'Percentages',
+    se: 'Percentages',
+  },
+  programmeAmount: {
+    fi: 'Ohjelmien lukumäärä',
+    en: 'Amount of programmes',
+    se: 'Amount of programmes',
+  },
+  programmeAmountWithChange: {
+    fi: 'Ohjelmien lukumäärä, ml. muutos edelliseen vuoteen',
+    en: 'Amount of programmes, with the change to previous year',
+    se: 'Amount of programmes, with the change to previous year',
+  },
+  programmeAmountWithoutChange: {
+    fi: 'Ohjelmien lukumäärä, piilota muutos edelliseen vuoteen',
+    en: 'Amount of programmes, without the change to previous year',
+    se: 'Amount of programmes, without the change to previous year',
+  },
   // ComparisonPage/QuestionList.js
   nowShowing: {
     fi: 'VASTAUKSISSA MUKANA OLEVAT KYSYMYKSET:',

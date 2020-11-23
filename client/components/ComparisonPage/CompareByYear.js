@@ -8,6 +8,7 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import ProgrammeList from '../ReportPage/ProgrammeList'
+import LabelOptions from './LabelOptions'
 import QuestionList from './QuestionList'
 import YearSelector from 'Components/Generic/YearSelector'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
@@ -15,8 +16,8 @@ import useDebounce from 'Utilities/useDebounce'
 import { internationalProgrammes as international, doctoralSchools } from 'Utilities/common'
 import './ComparisonPage.scss'
 
-
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
+  const [unit, setUnit] = useState('programmeAmount')
   const [showEmpty, setShowEmpty] = useState(true)
   const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
@@ -29,11 +30,12 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   if (!usersProgrammes || !allAnswers) return <></>
 
   const questionLabels = () => {
-    return questionsList.map((q) => q.label.charAt(0) + q.label.slice(1).toLowerCase()) 
+    return questionsList.map((q) => q.label.charAt(0) + q.label.slice(1).toLowerCase())
   }
 
   useEffect(() => {
     setQuestions(questionLabels())
+    setPicked(programmes.all)
   }, [])
 
   const filteredProgrammes = () => {
@@ -89,17 +91,22 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
         rawData.answers.forEach((answerSet, key) => {
           const questionWithColor = questionsList.find((q) => q.id === key)
-          if (questionWithColor && questions.includes(questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase())) {
+          if (
+            questionWithColor &&
+            questions.includes(
+              questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase()
+            )
+          ) {
             let colors = {
               green: 0,
               yellow: 0,
               red: 0,
               emptyAnswer: 0,
-            }  
+            }
             answerSet.forEach((a) => {
               if (chosenKeys.includes(a.key)) {
                 colors[a.color] = colors[a.color] + 1
-              } 
+              }
             })
             yearsColors.green = [...yearsColors.green, colors.green]
             yearsColors.yellow = [...yearsColors.yellow, colors.yellow]
@@ -107,20 +114,30 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, colors.emptyAnswer]
           }
         })
-        total = [...total,
+        total = [
+          ...total,
           { year: rawData.year, name: 'positive', color: 'green', data: yearsColors.green },
           { year: rawData.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
           { year: rawData.year, name: 'negative', color: 'red', data: yearsColors.red },
         ]
         if (showEmpty) {
-          total = [...total, { year: rawData.year, name: 'emptyAnswer', color: 'gray', data: yearsColors.emptyAnswer }]
+          total = [
+            ...total,
+            {
+              year: rawData.year,
+              name: 'emptyAnswer',
+              color: 'gray',
+              data: yearsColors.emptyAnswer,
+            },
+          ]
         }
       }
     })
     return total
   }
-  const colorSums = colorsTotal()
-  
+
+  const data = colorsTotal()
+
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
@@ -135,67 +152,55 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       </Grid>
       <div className="ui divider" />
       <Grid doubling columns={2} padded>
-        <Grid.Column width={10}>
-          <YearSelector
-            multiple 
-            size="small"
-            label={translations.selectYears[lang]} 
-          />
-          {usersProgrammes && usersProgrammes.length > 5 && (
-            <>
-              <FacultyFilter
-                size="small"
-                label={translations.facultyFilter.filter[lang]}
-              />
-              <LevelFilter />
-              {faculty !== 'allFaculties' &&
-                (level === 'doctor'
-                  || level === 'master'
-                  || level === 'bachelor'
-                ) && (
-                  <CompanionFilter />
-                )}
-              {faculty === 'allFaculties'
-                && level === 'doctor'
-                && <DoctoralSchoolFilter />
-              }
-              <ProgrammeFilter
-                handleChange={handleSearch}
-                filter={filter}
-                onEmpty={() => setFilter('')}
-                lang={lang}
-              />
-              <Radio
-                className="empty-toggle"
-                checked={showEmpty}
-                onChange={() => setShowEmpty(!showEmpty)}
-                label={translations.emptyAnswers[lang]}
-                toggle
-              />
-            </>
-          )}
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <ProgrammeList
-            programmes={programmes}
-            setPicked={setPicked}
-            picked={picked}
-          />
-        </Grid.Column>
-      </Grid>
-      <Grid padded>
+        <Grid.Row>
+          <Grid.Column width={10}>
+            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
+            {usersProgrammes && usersProgrammes.length > 5 && (
+              <>
+                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
+                <LevelFilter />
+                {faculty !== 'allFaculties' &&
+                  (level === 'doctor' || level === 'master' || level === 'bachelor') && (
+                    <CompanionFilter />
+                  )}
+                {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
+                <ProgrammeFilter
+                  handleChange={handleSearch}
+                  filter={filter}
+                  onEmpty={() => setFilter('')}
+                  lang={lang}
+                />
+                <Radio
+                  className="empty-toggle"
+                  checked={showEmpty}
+                  onChange={() => setShowEmpty(!showEmpty)}
+                  label={translations.emptyAnswers[lang]}
+                  toggle
+                />
+              </>
+            )}
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            <BarChart colorSums={colorSums} questions={questions} />
+            <BarChart data={data} questions={questions} unit={unit} />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row className="comparison-chart-settings-row">
+          <Grid.Column>
+            <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row className="comparison-questions-row">
           <Grid.Column width={11}>
-            <QuestionList 
-              questions={questionLabels()}
-              picked={questions}
-              setPicked={setQuestions}
-            /> 
+            <QuestionList
+              questionLabels={questionLabels()}
+              questions={questions}
+              setQuestions={setQuestions}
+            />
           </Grid.Column>
           <Grid.Column width={5}>
             <Segment compact textAlign="left">
