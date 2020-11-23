@@ -9,6 +9,7 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import {
   allYears,
   answersByYear,
+  modifiedQuestions,
   programmeNameByKey as programmeName,
   sortedItems,
 } from 'Utilities/common'
@@ -40,38 +41,7 @@ export default () => {
 
   const years = allYears(oldAnswers)
 
-  const modifiedQuestions = () => {
-    let attributes = []
-    let titleIndex = -1
-    let labelIndex = -1
-
-    questions.forEach((question) => {
-      titleIndex = titleIndex + 1
-      question.parts.forEach((part) => {
-        if (part.type !== 'TITLE') {
-          if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
-
-          attributes = [
-            ...attributes,
-            {
-              id: `${part.id}_text`,
-              color: `${part.id}_light`,
-              label: part.label[lang],
-              title: question.title[lang],
-              titleIndex: titleIndex,
-              labelIndex:
-                part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
-              no_color: part.no_color,
-            },
-          ]
-        }
-      })
-    })
-
-    return attributes
-  }
-
-  const questionsList = modifiedQuestions()
+  const questionsList = modifiedQuestions(questions, lang)
 
   const answersByQuestions = (chosenYear) => {
     let answerMap = new Map()

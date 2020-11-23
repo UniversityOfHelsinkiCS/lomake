@@ -130,6 +130,38 @@ export const sortedItems = (items, sorter, lang) => {
   return sorted
 }
 
+export const modifiedQuestions = (questions, lang) => {
+
+  let attributes = []
+  let titleIndex = -1
+  let labelIndex = -1
+
+  questions.forEach((question) => {
+    titleIndex = titleIndex + 1
+    question.parts.forEach((part) => {
+      if (part.type !== 'TITLE') {
+        if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
+
+        attributes = [
+          ...attributes,
+          {
+            id: `${part.id}_text`,
+            color: `${part.id}_light`,
+            label: part.label[lang],
+            title: question.title[lang],
+            titleIndex: titleIndex,
+            labelIndex:
+              part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
+            no_color: part.no_color,
+          },
+        ]
+      }
+    })
+  })
+
+  return attributes
+}
+
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
   if (!studyProgrammes) return ''
   const programme = studyProgrammes.find((a) => a.key === programmeWithKey.programme)

@@ -17,6 +17,7 @@ import {
   cleanText,
   getMeasuresAnswer,
   internationalProgrammes as international,
+  modifiedQuestions,
   programmeNameByKey as programmeName,
   doctoralSchools,
 } from 'Utilities/common'
@@ -96,39 +97,7 @@ export default () => {
 
   if (!selectedAnswers) return <></>
 
-  const modifiedQuestions = () => {
-    let attributes = []
-    let titleIndex = -1
-    let labelIndex = -1
-
-    questions.forEach((question) => {
-      titleIndex = titleIndex + 1
-      question.parts.forEach((part) => {
-        if (part.type !== 'TITLE') {
-          if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
-
-          attributes = [
-            ...attributes,
-            {
-              id: `${part.id}_text`,
-              color: `${part.id}_light`,
-              label: part.label[lang] ? part.label[lang] : '',
-              description: part.description ? part.description[lang] : '',
-              title: question.title[lang],
-              titleIndex: titleIndex,
-              labelIndex:
-                part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
-              no_color: part.no_color,
-            },
-          ]
-        }
-      })
-    })
-
-    return attributes
-  }
-
-  const questionsList = modifiedQuestions()
+  const questionsList = modifiedQuestions(questions, lang)
 
   const answersByQuestions = (chosenProgrammes) => {
     let answerMap = new Map()
