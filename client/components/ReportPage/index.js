@@ -34,7 +34,7 @@ export default () => {
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
   const filters = useSelector((state) => state.filters)
-  const { year, faculty, level } = useSelector((state) => state.filters)
+  const { year, faculty, level } = filters
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)

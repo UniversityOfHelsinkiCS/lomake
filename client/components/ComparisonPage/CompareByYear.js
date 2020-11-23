@@ -26,7 +26,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const filters = useSelector((state) => state.filters)
-  const { faculty, level, multipleYears } = useSelector((state) => state.filters)
+  const { faculty, level, multipleYears } = filters
 
   if (!usersProgrammes || !allAnswers) return <></>
 
@@ -45,42 +45,41 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     if (!allAnswers) return null
     let total = []
     const chosenKeys = programmes.chosen.map((p) => p.key)
-    allAnswers.forEach((rawData) => {
-      if (multipleYears.includes(rawData.year)) {
+    allAnswers.forEach((yearsAnswers) => {
+      if (multipleYears.includes(yearsAnswers.year)) {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
-        rawData.answers.forEach((answerSet, key) => {
-          const questionWithColor = questionsList.find((q) => q.id === key)
-          const label = questionWithColor ? questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase() : ''
-
+        yearsAnswers.answers.forEach((answerSet, key) => {
+          const question = questionsList.find((q) => q.id === key)
+          const label = question ? question.label.charAt(0) + question.label.slice(1).toLowerCase() : ''
           if (questions.includes(label)) {
-            let colors = {
+            let questionColors = {
               green: 0,
               yellow: 0,
               red: 0,
               emptyAnswer: 0,
             }
-            answerSet.forEach((a) => {
-              if (chosenKeys.includes(a.key)) {
-                colors[a.color] = colors[a.color] + 1
+            answerSet.forEach((answer) => {
+              if (chosenKeys.includes(answer.key)) {
+                questionColors[answer.color] = questionColors[answer.color] + 1
               }
             })
-            yearsColors.green = [...yearsColors.green, colors.green]
-            yearsColors.yellow = [...yearsColors.yellow, colors.yellow]
-            yearsColors.red = [...yearsColors.red, colors.red]
-            yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, colors.emptyAnswer]
+            yearsColors.green = [...yearsColors.green, questionColors.green]
+            yearsColors.yellow = [...yearsColors.yellow, questionColors.yellow]
+            yearsColors.red = [...yearsColors.red, questionColors.red]
+            yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, questionColors.emptyAnswer]
           }
         })
         total = [
           ...total,
-          { year: rawData.year, name: 'positive', color: 'green', data: yearsColors.green },
-          { year: rawData.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
-          { year: rawData.year, name: 'negative', color: 'red', data: yearsColors.red },
+          { year: yearsAnswers.year, name: 'positive', color: 'green', data: yearsColors.green },
+          { year: yearsAnswers.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
+          { year: yearsAnswers.year, name: 'negative', color: 'red', data: yearsColors.red },
         ]
         if (showEmpty) {
           total = [
             ...total,
             {
-              year: rawData.year,
+              year: yearsAnswers.year,
               name: 'emptyAnswer',
               color: 'gray',
               data: yearsColors.emptyAnswer,
@@ -110,16 +109,24 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
+            <YearSelector
+              multiple size="small"
+              label={translations.selectYears[lang]}
+            />
             {usersProgrammes && usersProgrammes.length > 5 && (
               <>
-                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
+                <FacultyFilter
+                  size="small"
+                  label={translations.facultyFilter.filter[lang]}
+                />
                 <LevelFilter />
                 {faculty !== 'allFaculties' &&
                   (level === 'doctor' || level === 'master' || level === 'bachelor') && (
                     <CompanionFilter />
                   )}
-                {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
+                {faculty === 'allFaculties' && 
+                  level === 'doctor' && 
+                  <DoctoralSchoolFilter />}
                 <ProgrammeFilter
                   handleChange={handleSearch}
                   filter={filter}
@@ -137,17 +144,28 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             )}
           </Grid.Column>
           <Grid.Column width={6}>
-            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+            <ProgrammeList 
+              programmes={programmes}
+              setPicked={setPicked}
+              picked={picked}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            <BarChart data={data} questions={questions} unit={unit} />
+            <BarChart
+              data={data}
+              questions={questions}
+              unit={unit}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row className="comparison-chart-settings-row">
           <Grid.Column>
-            <LabelOptions unit={unit} setUnit={setUnit} />
+            <LabelOptions 
+              unit={unit}
+              setUnit={setUnit}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row className="comparison-questions-row">
