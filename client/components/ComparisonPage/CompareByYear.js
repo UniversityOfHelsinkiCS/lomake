@@ -40,7 +40,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   }, [])
 
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
-
+  
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
@@ -157,6 +157,16 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
               unit={unit}
             />
           </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <WrittenAnswers 
+              questions={questionsList}
+              chosenProgrammes={programmes.chosen}
+              usersProgrammes={usersProgrammes}
+              allAnswers={programmes.chosen ? allAnswers : []}
+            />
+          </Grid.Column>        
         </Grid.Row>
       </Grid>
     </div>

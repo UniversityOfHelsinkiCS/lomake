@@ -149,12 +149,20 @@
   width: 10px;
 }
 
+@mixin answer-circle-big-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin: 4px;
+}
+
 .answer {
   &-header {
     font-style: bold;
   }
   &-title {
-    white-space: pre;
+    word-break: break-word;
   }
   &-list {
     list-style: none;
@@ -179,6 +187,22 @@
   }
   &-circle-gray {
     @include answer-circle-basics;
+    background: $gray;
+  }
+  &-circle-big-green {
+    @include answer-circle-big-basics;
+    background: $background-green;
+  }
+  &-circle-big-yellow {
+    @include answer-circle-big-basics;
+    background: $background-yellow;
+  }
+  &-circle-big-red {
+    @include answer-circle-big-basics;
+    background: $background-red;
+  }
+  &-circle-big-gray {
+    @include answer-circle-big-basics;
     background: $gray;
   }
 }
@@ -259,4 +283,9 @@
     transform: all 0.3s;
     pointer-events: none;
   }
+}
+
+.color-button {
+  background-color: transparent;
+  border: none;
 }
