@@ -98,6 +98,11 @@ export const comparisonPageTranslations = {
     fi: 'Valitse vuodet, joita haluat tarkastella',
     se: 'Select the year(s) you would like to inspect',
   },
+  selectQuestions: {
+    en: 'Select the question(s) you would like to inspect',
+    fi: 'Valitse kysymykset, joita haluat tarkastella',
+    se: 'Select the question(s) you would like to inspect',
+  },
   // ComparisonPage/LabelOptions.js
   labelOptions: {
     fi: 'Valitse graafissa näytettävä yksikkö',

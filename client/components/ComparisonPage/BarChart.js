@@ -1,9 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { colors } from 'Utilities/common'
+import { comparisonPageTranslations as translations } from 'Utilities/translations'
+require('highcharts/modules/exporting')(Highcharts)
 
 const BarChart = ({ data, questions, unit }) => {
+  const lang = useSelector((state) => state.language)
   if (!data) return <></>
 
   const calculateChange = () => {
@@ -23,18 +27,44 @@ const BarChart = ({ data, questions, unit }) => {
 
   calculateChange()
 
-  const seriesData = data.map((series) => {
+
+  const seriesData = data.map((series, index) => {
     return {
-      name: Number(series.year),
+      name: translations[series.name][lang],
       data: series.data,
       changes: series.changes,
       color: colors[series.color],
       stack: series.year,
       label: [{ enabled: true }],
+      showInLegend: index < 4 ? true : false,
     }
   })
 
-  const checkSize = () => (seriesData && seriesData[0].data.length > 5) ? '10px' : '15px'
+  const checkSize = () => (seriesData && seriesData[0].data.length > 6) ? '10px' : '15px'
+
+  const graphImages = {
+    menuItemDefinitions: {
+      viewFullscreen: {
+        text: 'Koko näyttö',
+      },
+      downloadPNG: {
+        text: 'Lataa PNG-kuvana',
+      },
+      downloadSVG: {
+        text: 'Lataa SVG-kuvana',
+      },
+      downloadPDF: {
+        text: 'Lataa PDF:nä',
+      },
+    },
+    width: 1400,
+    height: 1400,
+    buttons: {
+      contextButton: {
+        menuItems: ['viewFullscreen', 'downloadPNG', 'downloadSVG', 'downloadPDF'],
+      },
+    },
+  }
 
   const options = {
     chart: {
@@ -78,6 +108,7 @@ const BarChart = ({ data, questions, unit }) => {
         },
       },
     },
+    exporting: graphImages,
     tooltip: {
       enabled: false,
     },
@@ -92,6 +123,7 @@ const BarChart = ({ data, questions, unit }) => {
           pointPadding: 0.1,
           style: { textOverflow: 'clip', fontSize: checkSize()},
           formatter: function () {
+            if (this.y === 0) return ''
             if (unit === 'programmeAmountWithChange') {
               const changes = this.series.userOptions.changes
               if (changes) return this.y + '<br>' + changes[this.point.index]
@@ -109,7 +141,9 @@ const BarChart = ({ data, questions, unit }) => {
       },
     },
     legend: {
-      enabled: false,
+      useHTML: true,
+      padding: 10,
+      itemMarginTop: 10,
     },
     series: seriesData,
   }

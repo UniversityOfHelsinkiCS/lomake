@@ -9,6 +9,8 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import {
   allYears,
   answersByYear,
+  cleanText,
+  getMeasuresAnswer,
   modifiedQuestions,
   programmeNameByKey as programmeName,
   sortedItems,
@@ -57,7 +59,12 @@ export default () => {
           let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
-          colorsByProgramme = [...colorsByProgramme, { name: name, key: key, color: color }]
+          let answer = ''
+          if (question.id === 'measures_text') answer = getMeasuresAnswer(data)
+          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+          colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
+
           answerMap.set(question.id, colorsByProgramme)
         })
       }
@@ -89,6 +96,19 @@ export default () => {
     return all
   }
   const panes = [
+
+    {
+      menuItem: translations.reportHeader['byYear'][lang],
+      render: () => (
+        <Tab.Pane>
+          <CompareByYear
+            questionsList={questionsList.filter((q) => !q.no_color)}
+            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
+            allAnswers={usersProgrammes ? answersForYears() : []}
+          />
+        </Tab.Pane>
+      ),
+    },
     {
       menuItem: translations.reportHeader['byFaculty'][lang],
       render: () => (
@@ -98,18 +118,6 @@ export default () => {
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersByQuestions(year) : []}
-          />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: translations.reportHeader['byYear'][lang],
-      render: () => (
-        <Tab.Pane>
-          <CompareByYear
-            questionsList={questionsList.filter((q) => !q.no_color)}
-            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={usersProgrammes ? answersForYears() : []}
           />
         </Tab.Pane>
       ),

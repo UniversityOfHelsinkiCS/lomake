@@ -14,9 +14,9 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
 
   return (
     <div className="questions-list-container" data-cy="comparison-question-list">
-      <label>{label}</label>
+      <label className="questions-list-label">{label}</label>
       <Dropdown
-        className="button basic gray"
+        className="button basic gray questions-list-selector"
         data-cy="questions-list"
         name="questions-list"
         fluid

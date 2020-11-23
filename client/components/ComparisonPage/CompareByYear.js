@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import BarChart from './BarChart'
-import ColorLegend from 'Components/Generic/ColorLegend'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import ProgrammeList from '../ReportPage/ProgrammeList'
+import YearSelector from 'Components/Generic/YearSelector'
 import LabelOptions from './LabelOptions'
 import QuestionList from './QuestionList'
-import YearSelector from 'Components/Generic/YearSelector'
+import WrittenAnswers from './WrittenAnswers'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
 import './ComparisonPage.scss'
 
+
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('programmeAmount')
-  const [showEmpty, setShowEmpty] = useState(true)
   const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
   const [filter, setFilter] = useState('')
@@ -74,20 +74,10 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           { year: yearsAnswers.year, name: 'positive', color: 'green', data: yearsColors.green },
           { year: yearsAnswers.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
           { year: yearsAnswers.year, name: 'negative', color: 'red', data: yearsColors.red },
-        ]
-        if (showEmpty) {
-          total = [
-            ...total,
-            {
-              year: yearsAnswers.year,
-              name: 'emptyAnswer',
-              color: 'gray',
-              data: yearsColors.emptyAnswer,
-            },
+          { year: yearsAnswers.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
           ]
         }
-      }
-    })
+      })
     return total
   }
 
@@ -133,13 +123,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                   onEmpty={() => setFilter('')}
                   lang={lang}
                 />
-                <Radio
-                  className="empty-toggle"
-                  checked={showEmpty}
-                  onChange={() => setShowEmpty(!showEmpty)}
-                  label={translations.emptyAnswers[lang]}
-                  toggle
-                />
+
               </>
             )}
           </Grid.Column>
@@ -152,32 +136,26 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column width={16}>
-            <BarChart
-              data={data}
+          <Grid.Column width={8}>
+          <QuestionList
+              label={translations.selectQuestions[lang]}
+              questionLabels={questionLabels()}
               questions={questions}
-              unit={unit}
+              setQuestions={setQuestions}
             />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row className="comparison-chart-settings-row">
-          <Grid.Column>
             <LabelOptions 
               unit={unit}
               setUnit={setUnit}
             />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row className="comparison-questions-row">
-          <Grid.Column width={11}>
-            <QuestionList
-              questionLabels={questionLabels()}
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <BarChart
+              data={data}
               questions={questions}
-              setQuestions={setQuestions}
+              unit={unit}
             />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <ColorLegend />
           </Grid.Column>
         </Grid.Row>
       </Grid>

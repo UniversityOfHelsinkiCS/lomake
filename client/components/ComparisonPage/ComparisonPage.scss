@@ -168,8 +168,14 @@
   &-button {
     margin-top: 0.5em !important;
   }
+  &-label {
+    margin-top: 2em !important;
+    font-size: 1.05em;
+  }
+  &-selector {
+    margin-top: 1em !important;
+  }
 }
-
 .comparison {
   &-chart-row {
     height: 600px !important;
