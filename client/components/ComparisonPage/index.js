@@ -141,7 +141,6 @@ export default () => {
             questionsList={questionsList.filter((q) => !q.no_color)}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersForYears() : []}
-            years={years}
           />
         </Tab.Pane>
       ),

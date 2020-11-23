@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio, Segment } from 'semantic-ui-react'
+import { Grid, Radio } from 'semantic-ui-react'
 import BarChart from './BarChart'
+import ColorLegend from 'Components/Generic/ColorLegend'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
@@ -91,12 +92,9 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
         rawData.answers.forEach((answerSet, key) => {
           const questionWithColor = questionsList.find((q) => q.id === key)
-          if (
-            questionWithColor &&
-            questions.includes(
-              questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase()
-            )
-          ) {
+          const label = questionWithColor ? questionWithColor.label.charAt(0) + questionWithColor.label.slice(1).toLowerCase() : ''
+
+          if (questions.includes(label)) {
             let colors = {
               green: 0,
               yellow: 0,
@@ -203,21 +201,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             />
           </Grid.Column>
           <Grid.Column width={5}>
-            <Segment compact textAlign="left">
-              <p>
-                <span className="answer-circle-green" /> {translations.positive[lang]}
-              </p>
-              <p>
-                <span className="answer-circle-yellow" /> {translations.neutral[lang]}
-              </p>
-              <p>
-                <span className="answer-circle-red" /> {translations.negative[lang]}
-              </p>
-              <p>
-                <span className="answer-circle-gray" /> {translations.empty[lang]}
-              </p>
-              <p className="report-side-note">{translations.noColors[lang]}</p>
-            </Segment>
+            <ColorLegend />
           </Grid.Column>
         </Grid.Row>
       </Grid>

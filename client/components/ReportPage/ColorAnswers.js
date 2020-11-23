@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio, Segment } from 'semantic-ui-react'
+import { Grid, Radio } from 'semantic-ui-react'
+import ColorLegend from 'Components/Generic/ColorLegend'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
@@ -22,21 +23,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) => 
       <div className="ui divider" />
       <Grid centered>
         <Grid.Row textAlign="left">
-          <Segment compact textAlign="left">
-            <p>
-              <span className="answer-circle-green" /> {translations.positive[lang]}
-            </p>
-            <p>
-              <span className="answer-circle-yellow" /> {translations.neutral[lang]}
-            </p>
-            <p>
-              <span className="answer-circle-red" /> {translations.negative[lang]}
-            </p>
-            <p>
-              <span className="answer-circle-gray" /> {translations.empty[lang]}
-            </p>
-            <p className="report-side-note">{translations.noColors[lang]}</p>
-          </Segment>
+          <ColorLegend />
         </Grid.Row>
         <Grid.Row>
           <Radio

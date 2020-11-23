@@ -376,6 +376,32 @@ export const formViewTranslations = {
 }
 
 export const genericTranslations = {
+  // Generic/ColorLegend.js
+    positive: {
+    en: 'No issues',
+    fi: 'Kunnossa',
+    se: 'I sin ordning',
+  },
+  neutral: {
+    en: 'Challenges identified and development underway',
+    fi: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
+    se: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
+  },
+  negative: {
+    en: 'Significant measures required/development areas not yet specified',
+    fi: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    se: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
+  },
+  empty: {
+    en: 'No answer provided',
+    fi: 'Ei vastausta',
+    se: 'Inget svar',
+  },
+  noColors: {
+    fi: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
+    en: 'Questions, without smileys are not shown here',
+    se: 'Questions, without smileys are not shown here',
+  },
   // Generic/CompanionFilter.js
   companionFilter: {
     en: "Include faculty's partnership programmes to the answers",
