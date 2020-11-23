@@ -14,7 +14,7 @@ import QuestionList from './QuestionList'
 import YearSelector from 'Components/Generic/YearSelector'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
-import { internationalProgrammes as international, doctoralSchools } from 'Utilities/common'
+import { filteredProgrammes } from 'Utilities/common'
 import './ComparisonPage.scss'
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
@@ -25,8 +25,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
-  const years = useSelector(({ filters }) => filters.multipleYears)
-  const { faculty, level, companion, doctoralSchool } = useSelector((state) => state.filters)
+  const filters = useSelector((state) => state.filters)
+  const { faculty, level, multipleYears } = useSelector((state) => state.filters)
 
   if (!usersProgrammes || !allAnswers) return <></>
 
@@ -39,56 +39,14 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     setPicked(programmes.all)
   }, [])
 
-  const filteredProgrammes = () => {
-    if (!usersProgrammes) return { chosen: [], all: [] }
-
-    const filteredByName = usersProgrammes.filter((p) => {
-      const prog = p.name[lang] ? p.name[lang] : p.name['en']
-      return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
-    })
-
-    const filteredByLevel = filteredByName.filter((p) => {
-      if (level === 'allProgrammes') return true
-      const prog = p.name['en'].toLowerCase()
-      if (level === 'international') {
-        return international.includes(p.key)
-      }
-      if (level === 'master') {
-        return prog.includes('master') || prog.includes('degree programme')
-      }
-      return prog.includes(level.toString())
-    })
-
-    const filteredByFaculty = filteredByLevel.filter((p) => {
-      if (faculty === 'allFaculties') return true
-      if (companion) {
-        const companionFaculties = p.companionFaculties.map((f) => f.code)
-        if (companionFaculties.includes(faculty)) return true
-        else return p.primaryFaculty.code === faculty
-      }
-      return p.primaryFaculty.code === faculty
-    })
-
-    const filteredBySchool = filteredByFaculty.filter((p) => {
-      if (doctoralSchool === 'allSchools') return true
-      return doctoralSchools[doctoralSchool].includes(p.key)
-    })
-
-    const filteredByPick = filteredBySchool.filter((p) => {
-      return picked.includes(p)
-    })
-
-    return { chosen: filteredByPick, all: filteredBySchool }
-  }
-
-  const programmes = filteredProgrammes()
+  const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
     const chosenKeys = programmes.chosen.map((p) => p.key)
     allAnswers.forEach((rawData) => {
-      if (years.includes(rawData.year)) {
+      if (multipleYears.includes(rawData.year)) {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
         rawData.answers.forEach((answerSet, key) => {
           const questionWithColor = questionsList.find((q) => q.id === key)

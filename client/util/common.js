@@ -31,7 +31,56 @@ export const colors = {
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
 
-export const internationalProgrammes = [
+
+
+export const sortedItems = (items, sorter, lang) => {
+  if (!items) return []
+  if (!sorter) return items
+  const sorted = items.sort((a, b) => {
+    if (sorter == 'name') {
+      const aName = a.name[lang] ? a.name[lang] : a.name['en']
+      const bName = b.name[lang] ? b.name[lang] : b.name['en']
+      return aName.localeCompare(bName)
+    }
+    if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
+    if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
+  })
+  return sorted
+}
+
+export const modifiedQuestions = (questions, lang) => {
+  // Gives a localized list of questions with 
+  // text_id, color_id, label, section, title and question nr.
+  let attributes = []
+  let titleIndex = -1
+  let labelIndex = -1
+
+  questions.forEach((question) => {
+    titleIndex = titleIndex + 1
+    question.parts.forEach((part) => {
+      if (part.type !== 'TITLE') {
+        if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
+        attributes = [
+          ...attributes,
+          {
+            id: `${part.id}_text`,
+            color: `${part.id}_light`,
+            label: part.label[lang],
+            title: question.title[lang],
+            titleIndex: titleIndex,
+            labelIndex:
+              part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
+            no_color: part.no_color,
+          },
+        ]
+      }
+    })
+  })
+
+  return attributes
+}
+
+const international = [
   'MH50_004',
   'MH50_010',
   'MH40_005',
@@ -71,7 +120,7 @@ export const internationalProgrammes = [
   'MH20_003',
 ]
 
-export const doctoralSchools = {
+const doctoralSchools = {
   social: [
     'T920101',
     'T920102',
@@ -114,52 +163,47 @@ export const doctoralSchools = {
   ],
 }
 
+export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilter, filters) => {
+  if (!usersProgrammes) return { chosen: [], all: [] }
+  const { faculty, level, companion, doctoralSchool } = filters
 
-export const sortedItems = (items, sorter, lang) => {
-  if (!items) return []
-  if (!sorter) return items
-  const sorted = items.sort((a, b) => {
-    if (sorter == 'name') {
-      const aName = a.name[lang] ? a.name[lang] : a.name['en']
-      const bName = b.name[lang] ? b.name[lang] : b.name['en']
-      return aName.localeCompare(bName)
+  const filteredByName = usersProgrammes.filter((p) => {
+    const prog = p.name[lang] ? p.name[lang] : p.name['en']
+    return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
+  })
+
+  const filteredByLevel = filteredByName.filter((p) => {
+    if (level === 'allProgrammes') return true
+    const prog = p.name['en'].toLowerCase()
+    if (level === 'international') {
+      return international.includes(p.key)
     }
-    if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
-    if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
-  })
-  return sorted
-}
-
-export const modifiedQuestions = (questions, lang) => {
-
-  let attributes = []
-  let titleIndex = -1
-  let labelIndex = -1
-
-  questions.forEach((question) => {
-    titleIndex = titleIndex + 1
-    question.parts.forEach((part) => {
-      if (part.type !== 'TITLE') {
-        if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
-
-        attributes = [
-          ...attributes,
-          {
-            id: `${part.id}_text`,
-            color: `${part.id}_light`,
-            label: part.label[lang],
-            title: question.title[lang],
-            titleIndex: titleIndex,
-            labelIndex:
-              part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
-            no_color: part.no_color,
-          },
-        ]
-      }
-    })
+    if (level === 'master') {
+      return prog.includes('master') || prog.includes('degree programme')
+    }
+    return prog.includes(level.toString())
   })
 
-  return attributes
+  const filteredByFaculty = filteredByLevel.filter((p) => {
+    if (faculty === 'allFaculties') return true
+    if (companion) {
+      const companionFaculties = p.companionFaculties.map((f) => f.code)
+      if (companionFaculties.includes(faculty)) return true
+      else return p.primaryFaculty.code === faculty
+    }
+    return p.primaryFaculty.code === faculty
+  })
+
+  const filteredBySchool = filteredByFaculty.filter((p) => {
+    if (doctoralSchool === 'allSchools') return true
+    return doctoralSchools[doctoralSchool].includes(p.key)
+  })
+
+  const filteredByPick = filteredBySchool.filter((p) => {
+    return picked.includes(p)
+  })
+
+  return { chosen: filteredByPick, all: filteredBySchool }
 }
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {

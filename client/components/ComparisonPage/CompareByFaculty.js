@@ -7,14 +7,16 @@ import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
-import { internationalProgrammes as international } from 'Utilities/common'
+import { filteredProgrammes } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const lang = useSelector((state) => state.language)
-  const { companion, level, year, faculty } = useSelector(({ filters }) => filters)
+  const filters = useSelector((state) => state.filters)
+  const { faculty, level, year } = useSelector((state) => state.filters)
+
   const user = useSelector((state) => state.currentUser.data)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
@@ -47,39 +49,11 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
     return []
   }
 
-  const filteredProgrammes = () => {
-    if (!usersProgrammes) return []
-
-    const filteredByFaculty = usersProgrammes.filter((p) => {
-      if (faculty === 'allFaculties') return true
-      if (companion) {
-        const companionFaculties = p.companionFaculties.map((f) => f.code)
-        if (companionFaculties.includes(faculty)) return true
-        else return p.primaryFaculty.code === faculty
-      }
-      return p.primaryFaculty.code === faculty
-    })
-
-    const filteredByLevel = filteredByFaculty.filter((p) => {
-      if (level === 'allProgrammes') return true
-      const prog = p.name['en'].toLowerCase()
-      if (level === 'international') {
-        return international.includes(p.key)
-      }
-      if (level === 'master') {
-        return prog.includes('master') || prog.includes('degree programme')
-      }
-      return prog.includes(level.toString())
-    })
-
-    return filteredByLevel
-  }
-
-  const comparedProgrammes = filteredProgrammes()
+  const comparedProgrammes = filteredProgrammes(lang, usersProgrammes, [], '', filters)
 
   const comparedAnswers = (question) => {
     if (!comparedProgrammes || !allAnswers) return []
-    const filteredKeys = comparedProgrammes.map((p) => p.key)
+    const filteredKeys = comparedProgrammes.all.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     if (answers) return answers.filter((a) => filteredKeys.includes(a.key))
     return []
@@ -181,7 +155,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   showEmpty={showEmpty}
                   answers={comparedAnswers(question)}
                   faculty={comparedFaculty ? comparedFaculty.text : ''}
-                  programmes={comparedProgrammes ? comparedProgrammes : ''}
+                  programmes={comparedProgrammes ? comparedProgrammes.all : ''}
                   name="faculty"
                 />
               )

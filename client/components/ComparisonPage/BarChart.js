@@ -90,6 +90,7 @@ const BarChart = ({ data, questions, unit }) => {
           pointPadding: 0.1,
           style: { textOverflow: 'clip' },
           formatter: function () {
+            if (this.point.y == 0) return ''
             if (unit === 'programmeAmountWithChanges') {
               const changes = this.series.userOptions.changes
               if (changes) return this.y + '<br>' + changes[this.point.index]

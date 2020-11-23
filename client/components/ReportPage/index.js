@@ -15,11 +15,10 @@ import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear,
   cleanText,
+  filteredProgrammes,
   getMeasuresAnswer,
-  internationalProgrammes as international,
   modifiedQuestions,
   programmeNameByKey as programmeName,
-  doctoralSchools,
 } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
@@ -34,7 +33,8 @@ export default () => {
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers)
-  const { year, faculty, level, companion, doctoralSchool } = useSelector((state) => state.filters)
+  const filters = useSelector((state) => state.filters)
+  const { year, faculty, level } = useSelector((state) => state.filters)
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
@@ -46,49 +46,7 @@ export default () => {
   }, [lang])
 
   // Handles all filtering
-  const filteredProgrammes = () => {
-    if (!usersProgrammes) return { chosen: [], all: [] }
-
-    const filteredByName = usersProgrammes.filter((p) => {
-      const prog = p.name[lang] ? p.name[lang] : p.name['en']
-      return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
-    })
-
-    const filteredByLevel = filteredByName.filter((p) => {
-      if (level === 'allProgrammes') return true
-      const prog = p.name['en'].toLowerCase()
-      if (level === 'international') {
-        return international.includes(p.key)
-      }
-      if (level === 'master') {
-        return prog.includes('master') || prog.includes('degree programme')
-      }
-      return prog.includes(level.toString())
-    })
-
-    const filteredByFaculty = filteredByLevel.filter((p) => {
-      if (faculty === 'allFaculties') return true
-      if (companion) {
-        const companionFaculties = p.companionFaculties.map((f) => f.code)
-        if (companionFaculties.includes(faculty)) return true
-        else return p.primaryFaculty.code === faculty
-      }
-      return p.primaryFaculty.code === faculty
-    })
-
-    const filteredBySchool = filteredByFaculty.filter((p) => {
-      if (doctoralSchool === 'allSchools') return true
-      return doctoralSchools[doctoralSchool].includes(p.key)
-    })
-
-    const filteredByPick = filteredBySchool.filter((p) => {
-      return picked.includes(p)
-    })
-
-    return { chosen: filteredByPick, all: filteredBySchool }
-  }
-
-  const programmes = filteredProgrammes()
+  const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
   const handleSearch = ({ target }) => {
     const { value } = target
