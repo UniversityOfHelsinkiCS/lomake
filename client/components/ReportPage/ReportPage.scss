@@ -205,6 +205,15 @@
     @include answer-circle-big-basics;
     background: $gray;
   }
+  &-circle-big-empty {
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid black;
+    height: 25px;
+    width: 25px;
+    margin: 4px;
+    background: transparent;
+  }
 }
 
 @mixin answered-label-basics {
@@ -286,6 +295,13 @@
 }
 
 .color-button {
-  background-color: transparent;
-  border: none;
+  &-active {
+    background-color: transparent;
+    border: 2px solid black !important;
+    border-radius: 6%;
+  }
+  &-non-active {
+    background-color: transparent;
+    border: none;  
+  }
 }

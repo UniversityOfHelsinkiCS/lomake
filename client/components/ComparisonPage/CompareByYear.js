@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid } from 'semantic-ui-react'
+import { Accordion, Grid } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -10,8 +10,8 @@ import LevelFilter from 'Components/Generic/LevelFilter'
 import ProgrammeList from '../ReportPage/ProgrammeList'
 import YearSelector from 'Components/Generic/YearSelector'
 import LabelOptions from './LabelOptions'
+import Question from './Question'
 import QuestionList from './QuestionList'
-import WrittenAnswers from './WrittenAnswers'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
@@ -20,6 +20,7 @@ import './ComparisonPage.scss'
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('programmeAmount')
+  const [showing, setShowing] = useState(-1)
   const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
   const [filter, setFilter] = useState('')
@@ -39,12 +40,19 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     setPicked(programmes.all)
   }, [])
 
+  const handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const newIndex = showing === index ? -1 : index
+    setShowing(newIndex)
+  }
+
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
   
+  const chosenKeys = programmes.chosen.map((p) => p.key)
+
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
-    const chosenKeys = programmes.chosen.map((p) => p.key)
     allAnswers.forEach((yearsAnswers) => {
       if (multipleYears.includes(yearsAnswers.year)) {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
@@ -86,6 +94,16 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
+  }
+
+  const writtenTotal = (question) => {
+    const mapped = allAnswers.map((year) => {
+      const answers = year.answers.get(question.id)
+      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key)) : null
+      if (filteredAnswers) return ({year: year.year, answers: filteredAnswers.sort((a, b) => a['name'].localeCompare(b['name']))})
+      return {year: year.year, answers: []}
+    })
+    return mapped
   }
 
   return (
@@ -160,12 +178,18 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            <WrittenAnswers 
-              questions={questionsList}
-              chosenProgrammes={programmes.chosen}
-              usersProgrammes={usersProgrammes}
-              allAnswers={programmes.chosen ? allAnswers : []}
-            />
+            <Accordion fluid className="report-container">
+              {questionsList.map((question) =>
+                questions.includes(question.label.charAt(0) + question.label.slice(1).toLowerCase()) &&
+                <Question
+                  answers={writtenTotal(question)}
+                  question={question}
+                  chosenProgrammes={programmes.chosen.map((p) => p.key)}
+                  showing={showing}
+                  handleClick={handleClick}
+                />
+              )}
+            </Accordion>
           </Grid.Column>        
         </Grid.Row>
       </Grid>

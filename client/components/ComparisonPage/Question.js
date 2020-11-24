@@ -2,21 +2,28 @@ import React, { useState } from 'react'
 import { Accordion, Grid, Icon } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 
-const Question = ({ answers, question, chosenProgrammes, handleClick, showing }) => {
+const Question = ({ answers, question, handleClick, showing }) => {
   const [filteredColor, setFilteredColor] = useState(['all','all','all'])
+  const [activeButtons, setActiveButtons] = useState([-1, -1, -1])
 
-  const setColor = (yearsIndex, color) => {
+  const setColor = (yearsIndex, color, colorKey) => {
     const newColors = filteredColor.map((c, index) => (index == yearsIndex && filteredColor[yearsIndex] != color) ? color : filteredColor[index])
+    const newButtons = activeButtons.map((b, index) => (index == yearsIndex && activeButtons[yearsIndex] != colorKey) ? colorKey: activeButtons[index])
     setFilteredColor(newColors)
+    setActiveButtons(newButtons)
   }
+
+  const buttonColors = ["green", "yellow", "red", "gray", "empty"]
+
+  if (!answers) return <></>
 
   return (
     <>
       <Accordion.Title
         index={question.id}
         active={showing === question.id}
-        data-cy={`report-question-${question.id}`}
-        className="question-header sticky-header"
+        data-cy={`comparison-question-${question.id}`}
+        className={`question-header ${showing === question.id && "sticky-header"}`}
         onClick={handleClick}
       >
         <Grid>
@@ -36,29 +43,36 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           </Grid.Column>
         </Grid>
       </Accordion.Title>
-      {answers && (
         <Accordion.Content active={showing === question.id}>
           <Grid>
             <Grid.Row columns={answers.length}>
               {answers.map((year, yearsIndex) => 
                 <Grid.Column className="comparison-question-content">
-                  <div className="sticky-header">
-                  <label>{year.year}</label>
-                    <button className="color-button" onClick={() => setColor(yearsIndex, 'green')}><span className="answer-circle-big-green" /></button>
-                    <button className="color-button" onClick={() => setColor(yearsIndex, 'yellow')}><span className="answer-circle-big-yellow" /></button>
-                    <button className="color-button" onClick={() => setColor(yearsIndex, 'red')}><span className="answer-circle-big-red" /></button>
-                    <button className="color-button" onClick={() => setColor(yearsIndex, 'emptyAnswer')}><span className="answer-circle-big-gray" /></button>
-                    </div>
-                  {year.answers && year.answers.length > 1 && year.answers
-                    .sort((a, b) => a['name'].localeCompare(b['name']))
+                  <div className="color-buttons sticky-header">
+                    <label>{year.year}</label>
+                    {buttonColors.map((color, index) => 
+                      <button
+                        key={index}
+                        name={color}
+                        active={activeButtons[yearsIndex] === index}
+                        type="button"
+                        className={`color-button-${activeButtons[yearsIndex] === index ? 'active' : 'non-active'}`}
+                        onClick={() => setColor(yearsIndex, color, index)}
+                      >
+                        <span className={`answer-circle-big-${color}`} />
+                      </button>)}
+                  </div>
+                  {year.answers && year.answers
                     .map((programme, index) => {
-                      if (filteredColor[yearsIndex] === 'all' || programme.color === filteredColor[yearsIndex]) {
+                      if ((filteredColor[yearsIndex] === 'all'
+                        || programme.color === filteredColor[yearsIndex])
+                        && programme.answer) {
                         return (
                           <div key={index}>
                             <label className="answer-title">
                               {programme.name} <span className={`answer-circle-${programme.color}`} />
                             </label>
-                            <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
+                            <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
                               {programme.answer &&
                                 programme.answer.split('\n').map((row, index) => (
                                   <li key={index} className="answer-row">
@@ -78,7 +92,6 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           </Grid>
 
         </Accordion.Content>
-      )}
     </>
   )
 
