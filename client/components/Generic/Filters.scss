@@ -57,6 +57,14 @@
   &-label-alert {
     color: $red;
   }
+  &-extra-small {
+    > label {
+      font-size: 1.05em;
+      margin-bottom: 0.5em;
+      display: block;
+    }
+    width: 200px;
+  }
   &-small {
     > label {
       font-size: 1.05em;

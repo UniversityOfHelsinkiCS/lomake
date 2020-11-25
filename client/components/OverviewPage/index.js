@@ -98,7 +98,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? "wide-header" : "wideish-header"}>
-            <YearSelector />
+            <YearSelector size="extra-small" />
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
               {translations.readAnswersButton[lang]}
             </Button>

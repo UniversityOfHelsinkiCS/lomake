@@ -137,7 +137,7 @@ const FormView = ({ room }) => {
           </h3>
 
           <div className="hide-in-print-mode">
-            <YearSelector />
+            <YearSelector size="extra-small" />
             <StatusMessage />
             <p>{translations.p1[lang]}</p>
             <p>{translations.p2[lang]}</p>
