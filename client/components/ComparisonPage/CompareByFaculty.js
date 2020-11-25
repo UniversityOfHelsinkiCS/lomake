@@ -15,7 +15,7 @@ import './ComparisonPage.scss'
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const lang = useSelector((state) => state.language)
   const filters = useSelector((state) => state.filters)
-  const { faculty, level, year } = filters
+  const { faculty, level } = filters
   const user = useSelector((state) => state.currentUser.data)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)

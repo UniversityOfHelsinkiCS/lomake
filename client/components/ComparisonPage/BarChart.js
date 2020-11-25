@@ -98,7 +98,7 @@ const BarChart = ({ data, questions, unit }) => {
     yAxis: {
       min: 0,
       title: {
-        text: '%',
+        text: unit === 'percentage' ? '%' : translations.programmes[lang],
       },
       stackLabels: {
         enabled: true,

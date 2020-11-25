@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Accordion, Grid, Segment } from 'semantic-ui-react'
+import { Accordion, Grid } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -114,7 +114,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Row>
           <Grid.Column width={10}>
               <YearSelector multiple size="small" label={translations.selectYears[lang]} />
-              {usersProgrammes && usersProgrammes.length > 5 && (
+              {usersProgrammes && (
                 <>
                   <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
                   <LevelFilter />
