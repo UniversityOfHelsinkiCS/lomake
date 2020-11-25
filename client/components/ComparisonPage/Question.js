@@ -5,20 +5,42 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 import { romanize } from 'Utilities/common'
 
 const Question = ({ answers, question, handleClick, showing }) => {
-  const [filteredColor, setFilteredColor] = useState(['all', 'all', 'all'])
-  const [activeButtons, setActiveButtons] = useState([0, 0, 0])
+  const [colors, setColors] = useState(['all', 'all', 'all'])
+  const [buttons, setButtons] = useState([0, 0, 0])
   const lang = useSelector((state) => state.language)
 
-  const setColor = (yearsIndex, color, colorKey) => {
-    const newColors = filteredColor.map((c, index) =>
-      index == yearsIndex && filteredColor[yearsIndex] != color ? color : filteredColor[index]
+  const filterColor = (yearsIndex, color, colorKey) => {
+    const newColors = colors.map((c, index) =>
+      index == yearsIndex && colors[yearsIndex] != color ? color : colors[index]
     )
-    const newButtons = activeButtons.map((b, index) =>
-      index == yearsIndex && activeButtons[yearsIndex] != colorKey ? colorKey : activeButtons[index]
+    const newButtons = buttons.map((b, index) =>
+      index == yearsIndex && buttons[yearsIndex] != colorKey ? colorKey : buttons[index]
     )
-    setFilteredColor(newColors)
-    setActiveButtons(newButtons)
+    setColors(newColors)
+    setButtons(newButtons)
   }
+
+  const ButtonPopup = ({ color, index, yearsIndex }) => (
+    <Popup
+      content={`${translations.choose[lang]} ${
+        translations[`${color}Ones`][lang]
+      } ${translations.answers[lang]}`}
+      trigger={
+        <button
+          key={index}
+          name={color}
+          active={buttons[yearsIndex] === index}
+          type="button"
+          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
+          onClick={() => filterColor(yearsIndex, color, index)}
+        >
+          <span className={`answer-circle-big-${color}`} />
+        </button>
+      }
+    ></Popup>
+  )
+
+  console.log({answers})
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
@@ -57,36 +79,16 @@ const Question = ({ answers, question, handleClick, showing }) => {
                 <div className="color-buttons sticky-header">
                   <label>{year.year}</label>
                   {buttonColors.map((color, index) => (
-                    <>
-                      <Popup
-                        content={`${translations.choose[lang]} ${
-                          translations[`${color}Ones`][lang]
-                        } ${translations.answers[lang]}`}
-                        trigger={
-                          <button
-                            key={index}
-                            name={color}
-                            active={activeButtons[yearsIndex] === index}
-                            type="button"
-                            className={`color-button-${
-                              activeButtons[yearsIndex] === index ? 'active' : 'non-active'
-                            }`}
-                            onClick={() => setColor(yearsIndex, color, index)}
-                          >
-                            <span className={`answer-circle-big-${color}`} />
-                          </button>
-                        }
-                      ></Popup>
-                    </>
+                    <ButtonPopup 
+                      color={color}
+                      index={index}
+                      yearsIndex={yearsIndex}
+                    />
                   ))}
                 </div>
-                {year.answers &&
+                {year.answers.length > 0 ?
                   year.answers.map((programme, index) => {
-                    if (
-                      (filteredColor[yearsIndex] === 'all' ||
-                        programme.color === filteredColor[yearsIndex]) &&
-                      programme.answer
-                    ) {
+                    if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
                       return (
                         <div key={index}>
                           <label className="answer-title">
@@ -106,7 +108,9 @@ const Question = ({ answers, question, handleClick, showing }) => {
                         </div>
                       )
                     }
-                  })}
+                  })
+                  : <h4>{translations.noData[lang]}</h4>
+                }
               </Grid.Column>
             ))}
           </Grid.Row>

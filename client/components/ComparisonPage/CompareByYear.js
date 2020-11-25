@@ -97,7 +97,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const writtenTotal = (question) => {
     const mapped = allAnswers.map((year) => {
       const answers = year.answers.get(question.id)
-      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key)) : null
+      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key) && a.answer) : null
       if (filteredAnswers)
         return {
           year: year.year,
