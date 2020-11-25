@@ -5,7 +5,6 @@ import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterRed
 import faculties from '../../facultyTranslations'
 import './Filters.scss'
 
-
 const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)

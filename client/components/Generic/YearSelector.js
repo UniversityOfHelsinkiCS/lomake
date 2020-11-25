@@ -42,13 +42,17 @@ export default function YearSelector({ multiple, size, label }) {
   }
 
   const handleMultipleYearChange = (_, { value }) => {
-    if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length)) 
+    if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length))
     else dispatch(setMultipleYears(value))
   }
 
   return (
     <div className={`year-filter-${size}`}>
-      {multiple && <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>}
+      {multiple && (
+        <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>
+          {label}
+        </label>
+      )}
       <Select
         className="button basic gray"
         disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
@@ -62,6 +66,6 @@ export default function YearSelector({ multiple, size, label }) {
         multiple={multiple}
         selection={multiple}
       />
-  </div>
+    </div>
   )
 }

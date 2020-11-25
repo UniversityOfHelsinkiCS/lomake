@@ -45,7 +45,9 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                 )
             )}
             <div className="ui divider" />
-            <p className={`report-list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{translations.chooseMore[lang]}</p>
+            <p className={`report-list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
+              {translations.chooseMore[lang]}
+            </p>
             {sortedItems(programmes.all, 'name', lang).map(
               (p) =>
                 !programmes.chosen.includes(p) && (
@@ -64,11 +66,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
           <h4>{translations.noData[lang]}</h4>
         )}
       </Segment>
-      <Button
-        color="blue"
-        onClick={() => setPicked(programmes.all)}
-        data-cy="report-select-all"
-      >
+      <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
         {translations.selectAll[lang]}
       </Button>
       <Button onClick={() => setPicked([])}>{translations.clearSelection[lang]}</Button>

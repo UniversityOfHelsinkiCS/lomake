@@ -5,7 +5,6 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import { clearLevelSpecificFilters, setCompanion } from 'Utilities/redux/filterReducer'
 import './Filters.scss'
 
-
 const CompanionFilter = () => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
@@ -24,7 +23,7 @@ const CompanionFilter = () => {
             <Radio
               data-cy="companion-filter"
               label={translations.companionFilter[lang]}
-              name='companion'
+              name="companion"
               checked={companion}
               onChange={handleChange}
               toggle

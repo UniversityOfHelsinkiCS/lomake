@@ -146,10 +146,7 @@ export default () => {
               <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
               <LevelFilter />
               {faculty !== 'allFaculties' &&
-                (level === 'doctor' 
-                  || level === 'master' 
-                  || level === 'bachelor'
-                ) && (
+                (level === 'doctor' || level === 'master' || level === 'bachelor') && (
                   <CompanionFilter />
                 )}
               {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}

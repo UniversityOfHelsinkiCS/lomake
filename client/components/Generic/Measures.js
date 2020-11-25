@@ -6,7 +6,6 @@ import SimpleTextarea from './SimpleTextarea'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 
-
 const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   const formData = useSelector((state) => state.form.data)
   const lang = useSelector((state) => state.language)
@@ -51,7 +50,8 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
   return (
     <>
       <h3>
-        {number}. {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+        {number}. {label}{' '}
+        {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
       </h3>
       <p
         className="measures-label"

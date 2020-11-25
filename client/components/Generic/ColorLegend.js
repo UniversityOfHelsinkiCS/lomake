@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Segment } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
 
-
 const ColorLegend = () => {
   const lang = useSelector((state) => state.language)
 

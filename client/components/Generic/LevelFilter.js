@@ -6,7 +6,6 @@ import { clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
-
 const LevelFilter = ({ comparison }) => {
   const dispatch = useDispatch()
   const level = useSelector(({ filters }) => filters.level)
@@ -19,19 +18,14 @@ const LevelFilter = ({ comparison }) => {
 
   return (
     <div className="level-filter">
-      <label>
-        {comparison ?
-          translations.compareLevel[lang]
-          :
-          translations.levelFilter[lang]}
-      </label>
+      <label>{comparison ? translations.compareLevel[lang] : translations.levelFilter[lang]}</label>
       <Form>
         <Form.Group inline>
           <Form.Field>
             <Radio
               label={translations.allProgrammes[lang]}
-              name='allProgrammes'
-              value='allProgrammes'
+              name="allProgrammes"
+              value="allProgrammes"
               checked={level === 'allProgrammes'}
               onChange={handleChange}
             />
@@ -39,28 +33,28 @@ const LevelFilter = ({ comparison }) => {
           <Form.Field>
             <Radio
               label={translations.bachelor[lang]}
-              name='bachelor'
-              value='bachelor'
+              name="bachelor"
+              value="bachelor"
               checked={level === 'bachelor'}
               onChange={handleChange}
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              data-cy='master-filter'
+              data-cy="master-filter"
               label={translations.master[lang]}
-              name='master'
-              value='master'
+              name="master"
+              value="master"
               checked={level === 'master'}
               onChange={handleChange}
             />
           </Form.Field>
           <Form.Field>
             <Radio
-              data-cy='doctor-filter'
+              data-cy="doctor-filter"
               label={translations.doctoral[lang]}
-              name='doctor'
-              value='doctor'
+              name="doctor"
+              value="doctor"
               checked={level === 'doctor'}
               onChange={handleChange}
             />
@@ -68,8 +62,8 @@ const LevelFilter = ({ comparison }) => {
           <Form.Field>
             <Radio
               label={translations.international[lang]}
-              name='international'
-              value='international'
+              name="international"
+              value="international"
               checked={level === 'international'}
               onChange={handleChange}
             />

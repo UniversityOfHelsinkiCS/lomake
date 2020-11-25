@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 
-
 const LastYearsAnswersAccordion = ({ children }) => {
   const [expanded, setExpanded] = useState(false)
   const lang = useSelector((state) => state.language)

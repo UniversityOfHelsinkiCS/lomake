@@ -14,7 +14,9 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
 
   return (
     <div className="questions-list-container" data-cy="comparison-question-list">
-      <label className={`questions-list-label${questions.length === 0 ? "-bolded" : ""}`}>{label}</label>
+      <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>
+        {label}
+      </label>
       <Dropdown
         className="questions-list-selector"
         data-cy="questions-list"
