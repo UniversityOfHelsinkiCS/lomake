@@ -113,31 +113,31 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-              <YearSelector multiple size="small" label={translations.selectYears[lang]} />
-              {usersProgrammes && (
-                <>
-                  <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
-                  <LevelFilter />
-                  {faculty !== 'allFaculties' &&
-                    (level === 'doctor' || level === 'master' || level === 'bachelor') && (
-                      <CompanionFilter />
-                    )}
-                  {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
-                  <ProgrammeFilter
-                    handleChange={handleSearch}
-                    filter={filter}
-                    onEmpty={() => setFilter('')}
-                    lang={lang}
-                  />
-                </>
-              )}
-              <QuestionList
-                label={translations.selectQuestions[lang]}
-                questionLabels={questionLabels()}
-                questions={questions}
-                setQuestions={setQuestions}
-              />
-              <LabelOptions unit={unit} setUnit={setUnit} />
+            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
+            {usersProgrammes && (
+              <>
+                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
+                <LevelFilter />
+                {faculty !== 'allFaculties' &&
+                  (level === 'doctor' || level === 'master' || level === 'bachelor') && (
+                    <CompanionFilter />
+                  )}
+                {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
+                <ProgrammeFilter
+                  handleChange={handleSearch}
+                  filter={filter}
+                  onEmpty={() => setFilter('')}
+                  lang={lang}
+                />
+              </>
+            )}
+            <QuestionList
+              label={translations.selectQuestions[lang]}
+              questionLabels={questionLabels()}
+              questions={questions}
+              setQuestions={setQuestions}
+            />
+            <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
           <Grid.Column width={6}>
             <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
@@ -152,6 +152,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column width={16}>
+                <h3>{translations.writtenAnswers[lang]}</h3>
+                <div className="ui divider" />
                 <Accordion fluid className="report-container">
                   {questionsList.map(
                     (question) =>

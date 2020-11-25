@@ -1,4 +1,5 @@
 export const comparisonPageTranslations = {
+  // ComparisonPage/index.js
   comparisonPage: {
     fi: 'Vastausten vertailu',
     en: 'Compare answers',
@@ -15,6 +16,11 @@ export const comparisonPageTranslations = {
       en: 'Compare answers by year',
       se: 'Compare answers by year',
     },
+  },
+  writtenAnswers: {
+    fi: 'Kirjalliset vastaukset vuosittain',
+    en: 'Written answers by year',
+    se: 'Written answers by year',
   },
   // ComparisonPage/ComparisonByFaculty.js
   chosenProgrammes: {
@@ -68,16 +74,6 @@ export const comparisonPageTranslations = {
     se: 'No faculty defined',
   },
   // ComparisonPage/ComparisonByYear.js
-  setProgrammes: {
-    fi: '',
-    en: 'Choose studyprogrammes',
-    se: 'Choose studyprogrammes',
-  },
-  setQuestions: {
-    fi: 'Valitse vertailun kysymykset',
-    en: 'Choose questions for comparison',
-    se: 'Choose questions for comparison',
-  },
   green: {
     fi: 'Vihreä',
     en: 'Green',

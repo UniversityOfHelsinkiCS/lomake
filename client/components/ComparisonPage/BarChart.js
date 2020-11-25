@@ -68,7 +68,7 @@ const BarChart = ({ data, questions, unit }) => {
   const options = {
     chart: {
       type: 'column',
-      height: '600px',
+      height: '700px',
       marginTop: 50,
       marginRight: 30,
     },
