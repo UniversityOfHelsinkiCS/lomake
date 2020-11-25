@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
+import * as _ from 'lodash'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -31,7 +32,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   if (!usersProgrammes || !allAnswers) return <></>
 
   const questionLabels = () => {
-    return questionsList.map((q) => q.label.charAt(0) + q.label.slice(1).toLowerCase())
+    return questionsList.map((q) => _.capitalize(q.label))
   }
 
   useEffect(() => {
@@ -47,25 +48,29 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     if (!allAnswers) return null
     let total = []
     let checkForData = false
-    allAnswers.forEach((yearsAnswers) => {
-      if (multipleYears.includes(yearsAnswers.year)) {
-        let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
-        yearsAnswers.answers.forEach((answerSet, key) => {
+    allAnswers.forEach((data) => {
+      if (multipleYears.includes(data.year)) {
+        let yearsColors = { 
+          green: [],
+          yellow: [],
+          red: [],
+          emptyAnswer: []
+        }
+        data.answers.forEach((questionsAnswers, key) => {
           const question = questionsList.find((q) => q.id === key)
-          const label = question
-            ? question.label.charAt(0) + question.label.slice(1).toLowerCase()
-            : ''
+          const label = question ? _.capitalize(question.label) : ''
+
           if (questions.includes(label)) {
-            let questionColors = {
+            let questionColors = { 
               green: 0,
               yellow: 0,
               red: 0,
-              emptyAnswer: 0,
+              emptyAnswer: 0
             }
-            answerSet.forEach((answer) => {
-              if (chosenKeys.includes(answer.key)) {
+            questionsAnswers.forEach((a) => {
+              if (chosenKeys.includes(a.key)) {
                 checkForData = true
-                questionColors[answer.color] = questionColors[answer.color] + 1
+                questionColors[a.color] = questionColors[a.color] + 1
               }
             })
             for (const [color] of Object.entries(yearsColors)) {
@@ -73,12 +78,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             }
           }
         })
+
         total = [
           ...total,
-          { year: yearsAnswers.year, name: 'positive', color: 'green', data: yearsColors.green },
-          { year: yearsAnswers.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
-          { year: yearsAnswers.year, name: 'negative', color: 'red', data: yearsColors.red },
-          { year: yearsAnswers.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
+          { year: data.year, name: 'positive', color: 'green', data: yearsColors.green },
+          { year: data.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
+          { year: data.year, name: 'negative', color: 'red', data: yearsColors.red },
+          { year: data.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
         ]
       }
     })
@@ -95,15 +101,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
 
   const writtenTotal = (question) => {
-    const mapped = allAnswers.map((year) => {
-      const answers = year.answers.get(question.id)
-      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key) && a.answer) : null
-      if (filteredAnswers)
-        return {
-          year: year.year,
-          answers: filteredAnswers.sort((a, b) => a['name'].localeCompare(b['name'])),
-        }
-      return { year: year.year, answers: [] }
+    const mapped = allAnswers.map((data) => {
+      const answers = data.answers.get(question.id)
+      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key) && a.answer) : []
+      return {
+        year: data.year,
+        answers: _.sortBy(filteredAnswers, 'name'),
+      }
     })
     return mapped
   }
@@ -157,10 +161,9 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 <Accordion fluid className="report-container">
                   {questionsList.map(
                     (question) =>
-                      questions.includes(
-                        question.label.charAt(0) + question.label.slice(1).toLowerCase()
-                      ) && (
+                      questions.includes(_.capitalize(question.label)) && (
                         <Question
+                          key={question.id}
                           answers={writtenTotal(question)}
                           question={question}
                           chosenProgrammes={programmes.chosen.map((p) => p.key)}

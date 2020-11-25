@@ -29,7 +29,6 @@ const Question = ({ answers, question, handleClick, showing }) => {
         <button
           key={index}
           name={color}
-          active={buttons[yearsIndex] === index}
           type="button"
           className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
           onClick={() => filterColor(yearsIndex, color, index)}
@@ -39,8 +38,6 @@ const Question = ({ answers, question, handleClick, showing }) => {
       }
     ></Popup>
   )
-
-  console.log({answers})
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
@@ -75,11 +72,14 @@ const Question = ({ answers, question, handleClick, showing }) => {
         <Grid>
           <Grid.Row columns={answers.length}>
             {answers.map((year, yearsIndex) => (
-              <Grid.Column className="comparison-question-content">
+              <Grid.Column
+                key={yearsIndex} 
+                className="comparison-question-content">
                 <div className="color-buttons sticky-header">
                   <label>{year.year}</label>
                   {buttonColors.map((color, index) => (
-                    <ButtonPopup 
+                    <ButtonPopup
+                      key={index}
                       color={color}
                       index={index}
                       yearsIndex={yearsIndex}
