@@ -65,6 +65,7 @@ export const modifiedQuestions = (questions, lang) => {
           {
             id: `${part.id}_text`,
             color: `${part.id}_light`,
+            description: part.description ? part.description[lang] : '',
             label: part.label[lang],
             title: question.title[lang],
             titleIndex: titleIndex,

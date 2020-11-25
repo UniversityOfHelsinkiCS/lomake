@@ -46,7 +46,6 @@ const Question = ({ answers, question, handleClick, showing }) => {
             <p className="question-label">
               {question.labelIndex} {question.label}
             </p>
-            <p className="question-description">{question.description}</p>
           </Grid.Column>
         </Grid>
       </Accordion.Title>
