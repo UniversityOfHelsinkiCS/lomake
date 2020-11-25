@@ -96,7 +96,6 @@ export default () => {
     return all
   }
   const panes = [
-
     {
       menuItem: translations.reportHeader['byYear'][lang],
       render: () => (

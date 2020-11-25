@@ -72,12 +72,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
-      <Grid
-        stackable
-        doubling
-        padded
-        columns={user.admin ? 3 : 2}
-      >
+      <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />

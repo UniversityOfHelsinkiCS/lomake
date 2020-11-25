@@ -16,7 +16,7 @@ export const comparisonPageTranslations = {
       se: 'Compare answers by year',
     },
   },
-  // ComparisonPage/ComparisonBYFaculty.js
+  // ComparisonPage/ComparisonByFaculty.js
   chosenProgrammes: {
     fi: 'Valittu ohjelma',
     en: 'Chosen programme',
@@ -68,6 +68,16 @@ export const comparisonPageTranslations = {
     se: 'No faculty defined',
   },
   // ComparisonPage/ComparisonByYear.js
+  setProgrammes: {
+    fi: '',
+    en: 'Choose studyprogrammes',
+    se: 'Choose studyprogrammes',
+  },
+  setQuestions: {
+    fi: 'Valitse vertailun kysymykset',
+    en: 'Choose questions for comparison',
+    se: 'Choose questions for comparison',
+  },
   green: {
     fi: 'Vihreä',
     en: 'Green',
@@ -99,15 +109,15 @@ export const comparisonPageTranslations = {
     se: 'Select the year(s) you would like to inspect',
   },
   selectQuestions: {
-    en: 'Select the question(s) you would like to inspect',
-    fi: 'Valitse kysymykset, joita haluat tarkastella',
-    se: 'Select the question(s) you would like to inspect',
+    en: 'Questions for comparison',
+    fi: 'Vertailun kysymykset',
+    se: 'Questions for comparison',
   },
   // ComparisonPage/LabelOptions.js
   labelOptions: {
-    fi: 'Valitse graafissa näytettävä yksikkö',
-    en: 'Choose the unit for the graph',
-    se: 'Choose the unit for the graph',
+    fi: 'Graafin yksikkö',
+    en: 'Unit in the graph',
+    se: 'Unit in the graph',
   },
   percentage: {
     fi: 'Prosenttiosuudet',
@@ -213,6 +223,36 @@ export const comparisonPageTranslations = {
     en: "International Master's programmes",
     se: 'Internationella Magisterprogram',
   },
+  choose: {
+    fi: 'Valitse',
+    en: 'Choose',
+    se: 'Choose',
+  },
+  answers: {
+    fi: 'vastaukset',
+    en: 'answers',
+    se: 'answers',
+  },
+  greenOnes: {
+    fi: 'vain vihreät',
+    en: 'only green',
+    se: 'only green',
+  },
+  yellowOnes: {
+    fi: 'vain keltaiset',
+    en: 'only yellow',
+    se: 'only yellow',
+  },
+  redOnes: {
+    fi: 'vain punaiset',
+    en: 'only red',
+    se: 'only red',
+  },
+  allOnes: {
+    fi: 'kaikki',
+    en: 'all',
+    se: 'all',
+  }
 }
 
 export const claimAccessTranslations = {
@@ -604,11 +644,11 @@ export const genericTranslations = {
     en: 'Preparing the texteditor, please wait a moment...',
   },
   // Generic/YearSelector.js
-  selectYear: {
-    en: 'Select the year you would like to inspect',
-    fi: 'Valitse vuosi jota haluat tarkastella',
-    se: '',
-  },
+  year: {
+    fi: 'Valitse vuodet',
+    en: 'Year(s)',
+    se: 'Year(s)',
+  }
 }
 
 export const overviewPageTranslations = {

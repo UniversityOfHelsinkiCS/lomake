@@ -20,7 +20,7 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
         data-cy="questions-list"
         name="questions-list"
         fluid
-        placeholder="Select questions"
+        placeholder={translations.selectQuestions[lang]}
         options={options}
         onChange={addToList}
         value={questions}
@@ -30,7 +30,7 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
       <Button
         className="questions-list-button"
         color="blue"
-        onClick={() => setQuestions(questions)}
+        onClick={() => setQuestions(questionLabels)}
         data-cy="questions-list-select-all"
       >
         {translations.selectAll[lang]}

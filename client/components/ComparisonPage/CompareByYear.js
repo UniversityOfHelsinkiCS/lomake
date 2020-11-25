@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Accordion, Grid, Segment } from 'semantic-ui-react'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -17,10 +17,9 @@ import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
 import './ComparisonPage.scss'
 
-
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('programmeAmount')
-  const [showing, setShowing] = useState(-1)
+  const [showingQuestion, setShowingQuestion] = useState(-1)
   const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
   const [filter, setFilter] = useState('')
@@ -40,25 +39,22 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     setPicked(programmes.all)
   }, [])
 
-  const handleClick = (e, titleProps) => {
-    const { index } = titleProps
-    const newIndex = showing === index ? -1 : index
-    setShowing(newIndex)
-  }
-
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
-  
+
   const chosenKeys = programmes.chosen.map((p) => p.key)
 
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
+    let checkForData = false
     allAnswers.forEach((yearsAnswers) => {
       if (multipleYears.includes(yearsAnswers.year)) {
         let yearsColors = { green: [], yellow: [], red: [], emptyAnswer: [] }
         yearsAnswers.answers.forEach((answerSet, key) => {
           const question = questionsList.find((q) => q.id === key)
-          const label = question ? question.label.charAt(0) + question.label.slice(1).toLowerCase() : ''
+          const label = question
+            ? question.label.charAt(0) + question.label.slice(1).toLowerCase()
+            : ''
           if (questions.includes(label)) {
             let questionColors = {
               green: 0,
@@ -68,13 +64,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             }
             answerSet.forEach((answer) => {
               if (chosenKeys.includes(answer.key)) {
+                checkForData = true
                 questionColors[answer.color] = questionColors[answer.color] + 1
               }
             })
-            yearsColors.green = [...yearsColors.green, questionColors.green]
-            yearsColors.yellow = [...yearsColors.yellow, questionColors.yellow]
-            yearsColors.red = [...yearsColors.red, questionColors.red]
-            yearsColors.emptyAnswer = [...yearsColors.emptyAnswer, questionColors.emptyAnswer]
+            for (const [color] of Object.entries(yearsColors)) {
+              yearsColors[color] = [...yearsColors[color], questionColors[color]]
+            }
           }
         })
         total = [
@@ -83,10 +79,12 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           { year: yearsAnswers.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
           { year: yearsAnswers.year, name: 'negative', color: 'red', data: yearsColors.red },
           { year: yearsAnswers.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
-          ]
-        }
-      })
-    return total
+        ]
+      }
+    })
+
+    if (checkForData) return total
+    return []
   }
 
   const data = colorsTotal()
@@ -100,8 +98,12 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     const mapped = allAnswers.map((year) => {
       const answers = year.answers.get(question.id)
       const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key)) : null
-      if (filteredAnswers) return ({year: year.year, answers: filteredAnswers.sort((a, b) => a['name'].localeCompare(b['name']))})
-      return {year: year.year, answers: []}
+      if (filteredAnswers)
+        return {
+          year: year.year,
+          answers: filteredAnswers.sort((a, b) => a['name'].localeCompare(b['name'])),
+        }
+      return { year: year.year, answers: [] }
     })
     return mapped
   }
@@ -114,84 +116,73 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
+
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-            <YearSelector
-              multiple size="small"
-              label={translations.selectYears[lang]}
-            />
-            {usersProgrammes && usersProgrammes.length > 5 && (
-              <>
-                <FacultyFilter
-                  size="small"
-                  label={translations.facultyFilter.filter[lang]}
-                />
-                <LevelFilter />
-                {faculty !== 'allFaculties' &&
-                  (level === 'doctor' || level === 'master' || level === 'bachelor') && (
-                    <CompanionFilter />
-                  )}
-                {faculty === 'allFaculties' && 
-                  level === 'doctor' && 
-                  <DoctoralSchoolFilter />}
-                <ProgrammeFilter
-                  handleChange={handleSearch}
-                  filter={filter}
-                  onEmpty={() => setFilter('')}
-                  lang={lang}
-                />
-
-              </>
-            )}
+              <YearSelector multiple size="small" label={translations.selectYears[lang]} />
+              {usersProgrammes && usersProgrammes.length > 5 && (
+                <>
+                  <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
+                  <LevelFilter />
+                  {faculty !== 'allFaculties' &&
+                    (level === 'doctor' || level === 'master' || level === 'bachelor') && (
+                      <CompanionFilter />
+                    )}
+                  {faculty === 'allFaculties' && level === 'doctor' && <DoctoralSchoolFilter />}
+                  <ProgrammeFilter
+                    handleChange={handleSearch}
+                    filter={filter}
+                    onEmpty={() => setFilter('')}
+                    lang={lang}
+                  />
+                </>
+              )}
+              <QuestionList
+                label={translations.selectQuestions[lang]}
+                questionLabels={questionLabels()}
+                questions={questions}
+                setQuestions={setQuestions}
+              />
+              <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
           <Grid.Column width={6}>
-            <ProgrammeList 
-              programmes={programmes}
-              setPicked={setPicked}
-              picked={picked}
-            />
+            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={8}>
-          <QuestionList
-              label={translations.selectQuestions[lang]}
-              questionLabels={questionLabels()}
-              questions={questions}
-              setQuestions={setQuestions}
-            />
-            <LabelOptions 
-              unit={unit}
-              setUnit={setUnit}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            <BarChart
-              data={data}
-              questions={questions}
-              unit={unit}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            <Accordion fluid className="report-container">
-              {questionsList.map((question) =>
-                questions.includes(question.label.charAt(0) + question.label.slice(1).toLowerCase()) &&
-                <Question
-                  answers={writtenTotal(question)}
-                  question={question}
-                  chosenProgrammes={programmes.chosen.map((p) => p.key)}
-                  showing={showing}
-                  handleClick={handleClick}
-                />
-              )}
-            </Accordion>
-          </Grid.Column>        
-        </Grid.Row>
+        {data.length > 0 ? (
+          <>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <BarChart data={data} questions={questions} unit={unit} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Accordion fluid className="report-container">
+                  {questionsList.map(
+                    (question) =>
+                      questions.includes(
+                        question.label.charAt(0) + question.label.slice(1).toLowerCase()
+                      ) && (
+                        <Question
+                          answers={writtenTotal(question)}
+                          question={question}
+                          chosenProgrammes={programmes.chosen.map((p) => p.key)}
+                          showing={showingQuestion === question.id}
+                          handleClick={() =>
+                            setShowingQuestion(showingQuestion === question.id ? -1 : question.id)
+                          }
+                        />
+                      )
+                  )}
+                </Accordion>
+              </Grid.Column>
+            </Grid.Row>
+          </>
+        ) : (
+          <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
+        )}
       </Grid>
     </div>
   )

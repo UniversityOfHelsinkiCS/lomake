@@ -152,9 +152,9 @@
 @mixin answer-circle-big-basics {
   display: inline-block;
   border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  margin: 4px;
+  height: 26px;
+  width: 26px;
+  margin: 5px;
 }
 
 .answer {
@@ -205,14 +205,14 @@
     @include answer-circle-big-basics;
     background: $gray;
   }
-  &-circle-big-empty {
-    display: inline-block;
+  &-circle-big-all {
     border-radius: 50%;
-    border: 2px solid black;
-    height: 25px;
-    width: 25px;
-    margin: 4px;
-    background: transparent;
+    box-sizing: border-box;
+    border: 2px solid $black;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+    margin: 5px;
   }
 }
 

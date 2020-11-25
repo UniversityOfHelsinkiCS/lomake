@@ -27,7 +27,6 @@ const BarChart = ({ data, questions, unit }) => {
 
   calculateChange()
 
-
   const seriesData = data.map((series, index) => {
     return {
       name: translations[series.name][lang],
@@ -40,7 +39,7 @@ const BarChart = ({ data, questions, unit }) => {
     }
   })
 
-  const checkSize = () => (seriesData && seriesData[0].data.length > 6) ? '10px' : '15px'
+  const checkSize = () => (seriesData[0] && seriesData[0].data.length > 6 ? '10px' : '15px')
 
   const graphImages = {
     menuItemDefinitions: {
@@ -57,7 +56,7 @@ const BarChart = ({ data, questions, unit }) => {
         text: 'Lataa PDF:nä',
       },
     },
-    width: 1400,
+    width: 1800,
     height: 1400,
     buttons: {
       contextButton: {
@@ -121,7 +120,7 @@ const BarChart = ({ data, questions, unit }) => {
           crop: false,
           inside: true,
           pointPadding: 0.1,
-          style: { textOverflow: 'clip', fontSize: checkSize()},
+          style: { textOverflow: 'clip', fontSize: checkSize() },
           formatter: function () {
             if (this.y === 0) return ''
             if (unit === 'programmeAmountWithChange') {
@@ -145,7 +144,7 @@ const BarChart = ({ data, questions, unit }) => {
       padding: 10,
       itemMarginTop: 10,
     },
-    series: seriesData,
+    series: data ? seriesData : [],
   }
 
   return (
