@@ -26,7 +26,6 @@ describe('ReportPage tests', function () {
     cy.reload()
 
     cy.visit('/report')
-    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
