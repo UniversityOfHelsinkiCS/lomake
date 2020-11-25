@@ -63,7 +63,6 @@ describe('ReportPage tests', function () {
     })
 
     cy.get('[data-cy=yearSelector]').contains(2019).click()
-    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains('Hello from 2019')
   })
 
@@ -79,7 +78,6 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').click()
-    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 63')
   })
 
@@ -122,7 +120,6 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=doctor-filter]').click()
     cy.get('[data-cy=companion-filter]').should('be.visible')
     cy.get('[data-cy=companion-filter]').click()
-    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-list-programme-T922105]').should('be.visible')
     cy.get('[data-cy=report-list-programme-T921107]').should('be.visible')
     cy.get('[data-cy=report-list-programme-T921108]').should('be.visible')
@@ -136,9 +133,6 @@ describe('ReportPage tests', function () {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/report')
-    cy.get('[data-cy=report-select-all]').should('contain', 'all')
-    cy.get('[data-cy=report-select-all]').click()
-
     cy.get('div').contains('colors').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
