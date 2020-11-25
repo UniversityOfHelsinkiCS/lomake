@@ -519,7 +519,37 @@ export const genericTranslations = {
       se: 'Emoji colors',
     },
   },
-
+  // Generic/DoctoralSchoolFilter.js
+  allDoctoralSchools: {
+    en: 'All doctoral programmes',
+    fi: 'Kaikki tohtoriohjelmat',
+    se: 'All doctoral programmes',
+  },
+  doctoralSchoolFilter: {
+    en: 'Filter by doctoral schools',
+    fi: 'Tohtoriohjelmien vastaukset tutkijakouluittain',
+    se: 'Filter by doctoral schools',
+  },
+  socialSchool: {
+    en: 'Doctoral school in humanities and social sciences',
+    fi: 'Humanistis-yhteiskuntatieteellinen tutkijakoulu',
+    se: 'Doctoral school in humanities and social sciences',
+  },
+  sciencesSchool: {
+    fi: 'Luonnontieteellinen tutkijakoulu',
+    en: 'Doctoral school in natural sciences',
+    se: 'Doctoral school in natural sciences',
+  },
+  healthSchool: {
+    fi: 'Terveyden tutkimuksen tutkijakoulu',
+    en: 'Doctoral school in health sciences',
+    se: 'Doctoral school in health sciences',
+  },
+  environmentalSchool: {
+    fi: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
+    en: 'Doctoral school in environmental, food and biological sciences',
+    se: 'Doctoral school in environmental, food and biological sciences',
+  },
   // Generic/Entity.js
   textAreaLabel: {
     fi: 'Keskustelun pääkohdat olivat',
@@ -608,36 +638,31 @@ export const genericTranslations = {
     en: 'Search for study programmes',
     se: 'Filtrera',
   },
-  // Generic/DoctoralSchoolFilter.js
-  allDoctoralSchools: {
-    en: 'All doctoral programmes',
-    fi: 'Kaikki tohtoriohjelmat',
-    se: 'All doctoral programmes',
+  // Generic/ProgrammeList.js 
+  nowShowing: {
+    fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
+    en: 'NOW SHOWING THE ANSWERS OF',
+    se: 'NOW SHOWING THE ANSWERS OF',
   },
-  doctoralSchoolFilter: {
-    en: 'Filter by doctoral schools',
-    fi: 'Tohtoriohjelmien vastaukset tutkijakouluittain',
-    se: 'Filter by doctoral schools',
+  chooseMore: {
+    fi: 'VALITSE OHJELMAT RAPORTILLE:',
+    se: 'CHOOSE MORE PROGRAMMES:',
+    en: 'CHOOSE MORE PROGRAMMES:',
   },
-  socialSchool: {
-    en: 'Doctoral school in humanities and social sciences',
-    fi: 'Humanistis-yhteiskuntatieteellinen tutkijakoulu',
-    se: 'Doctoral school in humanities and social sciences',
+  selectAll: {
+    fi: 'Valitse kaikki',
+    se: 'Select all',
+    en: 'Select all',
   },
-  sciencesSchool: {
-    fi: 'Luonnontieteellinen tutkijakoulu',
-    en: 'Doctoral school in natural sciences',
-    se: 'Doctoral school in natural sciences',
+  clearSelection: {
+    fi: 'Tyhjennä valinta',
+    se: 'Clear selection',
+    en: 'Clear selection',
   },
-  healthSchool: {
-    fi: 'Terveyden tutkimuksen tutkijakoulu',
-    en: 'Doctoral school in health sciences',
-    se: 'Doctoral school in health sciences',
-  },
-  environmentalSchool: {
-    fi: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
-    en: 'Doctoral school in environmental, food and biological sciences',
-    se: 'Doctoral school in environmental, food and biological sciences',
+  noData: {
+    fi: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    en: 'No data available for these choices',
+    se: 'No data available for these choices',
   },
   // Generic/TextArea.js
   loading: {
@@ -859,26 +884,6 @@ export const reportPageTranslations = {
     fi: 'Tilannekuvalomakkeen vastaukset',
     en: 'Answers',
     se: 'Answers',
-  },
-  nowShowing: {
-    fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
-    en: 'NOW SHOWING THE ANSWERS OF',
-    se: 'NOW SHOWING THE ANSWERS OF',
-  },
-  chooseMore: {
-    fi: 'VALITSE OHJELMAT RAPORTILLE:',
-    se: 'CHOOSE MORE PROGRAMMES:',
-    en: 'CHOOSE MORE PROGRAMMES:',
-  },
-  selectAll: {
-    fi: 'Valitse kaikki',
-    se: 'Select all',
-    en: 'Select all',
-  },
-  clearSelection: {
-    fi: 'Tyhjennä valinta',
-    se: 'Clear selection',
-    en: 'Clear selection',
   },
   facultyFilter: {
     fi: 'Vastaukset tiedekunnittain',

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Icon, Segment } from 'semantic-ui-react'
 import { sortedItems } from 'Utilities/common'
-import { reportPageTranslations as translations } from 'Utilities/translations'
+import { genericTranslations as translations } from 'Utilities/translations'
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const lang = useSelector((state) => state.language)
