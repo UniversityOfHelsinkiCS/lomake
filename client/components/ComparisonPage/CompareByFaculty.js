@@ -66,12 +66,6 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="comparison-container">
-      <Grid>
-        <Grid.Column className="comparison-center-header" width={16}>
-          {year} - {translations.reportHeader['byFaculty'][lang]}
-        </Grid.Column>
-      </Grid>
-      <div className="ui divider" />
       <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>

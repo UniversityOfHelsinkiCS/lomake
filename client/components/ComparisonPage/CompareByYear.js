@@ -110,13 +110,6 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="comparison-container">
-      <Grid>
-        <Grid.Column className="comparison-center-header" width={16}>
-          {translations.reportHeader['byYear'][lang]}
-        </Grid.Column>
-      </Grid>
-      <div className="ui divider" />
-
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
