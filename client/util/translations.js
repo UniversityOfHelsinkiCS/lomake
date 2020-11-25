@@ -1,4 +1,10 @@
 export const comparisonPageTranslations = {
+  // Comparison/BarChart.js
+  chartExport: {
+    fi: 'Tilannekuvalomake_hymiöiden_värit',
+    en: 'Colored_smileys',
+    se: 'Colored_smileys',
+  },
   // ComparisonPage/index.js
   comparisonPage: {
     fi: 'Vastausten vertailu',

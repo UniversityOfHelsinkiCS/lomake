@@ -39,7 +39,7 @@ const BarChart = ({ data, questions, unit }) => {
     }
   })
 
-  const checkSize = () => (seriesData[0] && seriesData[0].data.length > 6 ? '10px' : '15px')
+  const checkSize = () => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
 
   const graphImages = {
     menuItemDefinitions: {
@@ -56,8 +56,11 @@ const BarChart = ({ data, questions, unit }) => {
         text: 'Lataa PDF:nä',
       },
     },
-    width: 1800,
+    width: 2200,
     height: 1400,
+    filename: translations.chartExport[lang],
+    sourceWidth: 1200,
+    sourceHeight: 600,
     buttons: {
       contextButton: {
         menuItems: ['viewFullscreen', 'downloadPNG', 'downloadSVG', 'downloadPDF'],
@@ -102,8 +105,12 @@ const BarChart = ({ data, questions, unit }) => {
       },
       stackLabels: {
         enabled: true,
+        formatter: function() {
+          return this.stack
+        },
         style: {
           fontWeight: 'bold',
+          fontSize: checkSize(),
         },
       },
     },
@@ -136,13 +143,14 @@ const BarChart = ({ data, questions, unit }) => {
         },
       },
       column: {
-        stacking: 'percent',
+        stacking: unit === 'percent' ? 'percent' : 'normal',
       },
     },
     legend: {
       useHTML: true,
       padding: 10,
       itemMarginTop: 10,
+      itemDistance: 45,
     },
     series: data ? seriesData : [],
   }
