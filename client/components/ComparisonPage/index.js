@@ -97,18 +97,6 @@ export default () => {
   }
   const panes = [
     {
-      menuItem: translations.reportHeader['byYear'][lang],
-      render: () => (
-        <Tab.Pane>
-          <CompareByYear
-            questionsList={questionsList.filter((q) => !q.no_color)}
-            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={usersProgrammes ? answersForYears() : []}
-          />
-        </Tab.Pane>
-      ),
-    },
-    {
       menuItem: translations.reportHeader['byFaculty'][lang],
       render: () => (
         <Tab.Pane>
@@ -117,6 +105,18 @@ export default () => {
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersByQuestions(year) : []}
+          />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: translations.reportHeader['byYear'][lang],
+      render: () => (
+        <Tab.Pane>
+          <CompareByYear
+            questionsList={questionsList.filter((q) => !q.no_color)}
+            usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
+            allAnswers={usersProgrammes ? answersForYears() : []}
           />
         </Tab.Pane>
       ),
