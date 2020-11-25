@@ -42,7 +42,8 @@ export default function YearSelector({ multiple, size, label }) {
   }
 
   const handleMultipleYearChange = (_, { value }) => {
-    dispatch(setMultipleYears(value))
+    if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length)) 
+    else dispatch(setMultipleYears(value))
   }
 
   return (
