@@ -28,7 +28,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
   return (
     <>
       <Segment className="report-list-container" data-cy="report-programmes-list">
-        <p className="report-programmes-header">{translations.nowShowing[lang]}</p>
+        <p className="report-list-header">{translations.nowShowing[lang]}</p>
         {programmes.all.length > 0 ? (
           <>
             {sortedItems(programmes.all, 'name', lang).map(
@@ -45,7 +45,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                 )
             )}
             <div className="ui divider" />
-            <p className="report-programmes-header">{translations.chooseMore[lang]}</p>
+            <p className={`report-list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{translations.chooseMore[lang]}</p>
             {sortedItems(programmes.all, 'name', lang).map(
               (p) =>
                 !programmes.chosen.includes(p) && (

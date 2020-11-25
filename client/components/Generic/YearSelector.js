@@ -47,7 +47,7 @@ export default function YearSelector({ multiple, size, label }) {
 
   return (
     <div className={`year-filter-${size}`}>
-      {multiple && <label>{label}</label>}
+      {multiple && <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>}
       <Select
         className="button basic gray"
         disabled={!previousYearsWithAnswers || yearOptions.length <= 1}

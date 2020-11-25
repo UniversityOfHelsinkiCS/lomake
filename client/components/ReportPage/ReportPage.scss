@@ -50,6 +50,10 @@
   &-companion-icon {
     margin-left: 6px;
   }
+  &-header-alert {
+    color: $red;
+    font-weight: bold;
+  }
 }
 
 .report-container {
