@@ -120,6 +120,17 @@ const BarChart = ({ data, questions, unit }) => {
     },
     plotOptions: {
       series: {
+        events: {
+          legendItemClick: function() {
+            const name = this.name.substring(this.name.length - 4, this.name.length)
+            const _i = this._i
+            Highcharts.each(this.chart.series, function(p, i) {
+              if (name === p.name.substring(p.name.length - 4, p.name.length) && _i !== p._i) {
+                (!p.visible) ? p.show(): p.hide()
+              }
+            })
+          }
+        },
         groupPadding: 0.13,
         enableMouseTracking: false,
         dataLabels: {
