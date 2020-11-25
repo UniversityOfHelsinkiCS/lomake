@@ -31,7 +31,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
       </Grid>
     </Accordion.Title>
     <Accordion.Content active className="question-content">
-      {answers
+      {answers && answers
         .sort((a, b) => a['name'].localeCompare(b['name']))
         .map((programme, index) => (
           <div key={index}>
@@ -39,7 +39,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
               {programme.name} <span className={`answer-circle-${programme.color}`} />
             </label>
             <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-              {programme.answer.split('\n').map((row, index) => (
+              {programme.answer && programme.answer.split('\n').map((row, index) => (
                 <li key={index} className="answer-row">
                   {row}
                 </li>
