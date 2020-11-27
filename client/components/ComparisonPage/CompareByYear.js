@@ -19,7 +19,7 @@ import { filteredProgrammes } from 'Utilities/common'
 import './ComparisonPage.scss'
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
-  const [unit, setUnit] = useState('programmeAmount')
+  const [unit, setUnit] = useState('percentage')
   const [showingQuestion, setShowingQuestion] = useState(-1)
   const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
