@@ -5,6 +5,26 @@ export const comparisonPageTranslations = {
     en: 'Colored_smileys',
     se: 'Colored_smileys',
   },
+  viewFullscreen: {
+    fi: 'Koko näyttö',
+    en: 'Full screen',
+    se: 'Full screen',
+  },
+  downloadPNG: {
+    fi: 'Lataa PNG-kuvana',
+    en: 'Download as a PNG-image',
+    se: 'Download as a PNG-image',
+  },
+  downloadSVG: {
+    fi: 'Lataa SVG-kuvana',
+    en: 'Download as a SVG-image',
+    se: 'Download as a SVG-image',
+  },
+  downloadPDF: {
+    fi: 'Lataa PDF:nä',
+    en: 'Download as a PDF',
+    se: 'Download as a PDF'
+  },
   // ComparisonPage/index.js
   comparisonPage: {
     fi: 'Vastausten vertailu',

@@ -30,6 +30,7 @@ const BarChart = ({ data, questions, unit }) => {
   const seriesData = data.map((series, index) => {
     return {
       name: translations[series.name][lang],
+      id: Math.random(),
       data: series.data,
       changes: series.changes,
       color: colors[series.color],
@@ -44,16 +45,16 @@ const BarChart = ({ data, questions, unit }) => {
   const graphImages = {
     menuItemDefinitions: {
       viewFullscreen: {
-        text: 'Koko näyttö',
+        text: translations.viewFullscreen[lang],
       },
       downloadPNG: {
-        text: 'Lataa PNG-kuvana',
+        text: translations.downloadPNG[lang],
       },
       downloadSVG: {
-        text: 'Lataa SVG-kuvana',
+        text: translations.downloadSVG[lang],
       },
       downloadPDF: {
-        text: 'Lataa PDF:nä',
+        text: translations.downloadPDF[lang],
       },
     },
     width: 2200,
@@ -122,11 +123,12 @@ const BarChart = ({ data, questions, unit }) => {
       series: {
         events: {
           legendItemClick: function () {
-            const name = this.name.substring(this.name.length - 4, this.name.length)
-            const _i = this._i
-            Highcharts.each(this.chart.series, function (p, i) {
-              if (name === p.name.substring(p.name.length - 4, p.name.length) && _i !== p._i) {
-                !p.visible ? p.show() : p.hide()
+
+            const name = this.name
+            const id = this.userOptions.id
+            this.chart.series.forEach((series) => {
+              if (series.name == name && series.userOptions.id !== id) {
+                series.visible ? series.hide() : series.show()
               }
             })
           },
