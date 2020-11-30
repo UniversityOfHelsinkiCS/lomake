@@ -7,6 +7,7 @@ import { romanize } from 'Utilities/common'
 const Question = ({ answers, question, handleClick, showing }) => {
   const [colors, setColors] = useState(['all', 'all', 'all'])
   const [buttons, setButtons] = useState([0, 0, 0])
+  const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const lang = useSelector((state) => state.language)
 
   const filterColor = (yearsIndex, color, colorKey) => {
@@ -71,7 +72,8 @@ const Question = ({ answers, question, handleClick, showing }) => {
       <Accordion.Content active={showing}>
         <Grid>
           <Grid.Row columns={answers.length}>
-            {answers.map((year, yearsIndex) => (
+            {answers.map((year, yearsIndex) =>
+              multipleYears.includes(year.year) && (
               <Grid.Column
                 key={yearsIndex} 
                 className="comparison-question-content">
