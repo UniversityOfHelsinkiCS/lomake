@@ -10,7 +10,10 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
     setQuestions(value)
   }
 
-  const options = questionLabels.map((q) => Object({ key: q, text: q, value: q }))
+  const options = questionLabels.map((q) => {
+    const sliced = q.slice(2, q.length)
+    return Object({ key: sliced, text: sliced, value: q })
+  })
 
   return (
     <div className="questions-list-container" data-cy="comparison-question-list">

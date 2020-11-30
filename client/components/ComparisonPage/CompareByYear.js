@@ -31,9 +31,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   if (!usersProgrammes || !allAnswers) return <></>
 
-  const questionLabels = () => {
-    return questionsList.map((q) => _.capitalize(q.label))
-  }
+  const questionLabels = () => questionsList.map((q) => getLabel(q))
 
   useEffect(() => {
     setQuestions(questionLabels())
@@ -43,6 +41,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
   const chosenKeys = programmes.chosen.map((p) => p.key)
+
+  const getLabel = (question) => {
+    if (!question) return ''
+    const label = _.capitalize(question.label)
+    const index = question.labelIndex < 10 ? `0${question.labelIndex.slice(0,1)}` : question.labelIndex.slice(0,2)
+    return `${index}${label}`
+  } 
 
   const colorsTotal = () => {
     if (!allAnswers) return null
@@ -58,9 +63,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         }
         data.answers.forEach((questionsAnswers, key) => {
           const question = questionsList.find((q) => q.id === key)
-          const label = question ? _.capitalize(question.label) : ''
-
-          if (questions.includes(label)) {
+          const questionLabel = getLabel(question)
+          if (questions.includes(questionLabel)) {
             let questionColors = { 
               green: 0,
               yellow: 0,
@@ -151,7 +155,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           <>
             <Grid.Row>
               <Grid.Column width={16}>
-                <BarChart data={data} questions={questions} unit={unit} />
+                <BarChart data={data} questions={questions.sort((a,b) => a.localeCompare(b))} unit={unit} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -161,7 +165,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 <Accordion fluid className="report-container">
                   {questionsList.map(
                     (question) =>
-                      questions.includes(_.capitalize(question.label)) && (
+                      questions.includes(getLabel(question)) && (
                         <Question
                           key={question.id}
                           answers={writtenTotal(question)}

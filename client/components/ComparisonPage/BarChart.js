@@ -86,7 +86,7 @@ const BarChart = ({ data, questions, unit }) => {
       text: '',
     },
     xAxis: {
-      categories: questions,
+      categories: questions.map((q) => q.slice(2,q.length)),
       reserveSpace: true,
       labels: {
         autoRotationLimit: 90,
