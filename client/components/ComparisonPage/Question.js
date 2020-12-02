@@ -77,7 +77,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
               <Grid.Column
                 key={yearsIndex} 
                 className="comparison-question-content">
-                <div className="color-buttons sticky-header">
+                <div className="color-buttons-sticky sticky-header">
                   <label>{year.year}</label>
                   {buttonColors.map((color, index) => (
                     <ButtonPopup

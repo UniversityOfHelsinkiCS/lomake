@@ -171,7 +171,13 @@ export default () => {
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
         </Grid.Column>
       </Grid>
-      <Tab className="report-page-tab" onTabChange={handleTabChange} activeIndex={activeTab} menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab 
+        className="report-page-tab"
+        onTabChange={handleTabChange}
+        activeIndex={activeTab}
+        menu={{ secondary: true, pointing: true }}
+        panes={panes}
+      />
     </>
   )
 }

@@ -986,6 +986,37 @@ export const reportPageTranslations = {
     en: 'Questions, without smileys are not shown here',
     se: 'Questions, without smileys are not shown here',
   },
+  // ReportPage/Question.js
+  choose: {
+    fi: 'Valitse',
+    en: 'Choose',
+    se: 'Choose',
+  },
+  answers: {
+    fi: 'vastaukset',
+    en: 'answers',
+    se: 'answers',
+  },
+  greenOnes: {
+    fi: 'vain vihreät',
+    en: 'only green',
+    se: 'only green',
+  },
+  yellowOnes: {
+    fi: 'vain keltaiset',
+    en: 'only yellow',
+    se: 'only yellow',
+  },
+  redOnes: {
+    fi: 'vain punaiset',
+    en: 'only red',
+    se: 'only red',
+  },
+  allOnes: {
+    fi: 'kaikki',
+    en: 'all',
+    se: 'all',
+  }
 }
 
 export const usersPageTranslations = {

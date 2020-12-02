@@ -206,16 +206,23 @@
   }
 }
 
-.color-buttons {
-  margin-bottom: 15px;
+@mixin color-buttons-basics {
+  margin-bottom: 25px;
   display: flex;
   align-items: center;
   padding: 3px;
-  position: sticky;
-  top: 60px;
-  z-index: 4;
-  > label {
-    font-size: 20px;
-    margin-right: 5px;
+}
+
+.color-buttons {
+  @include color-buttons-basics;
+  &-sticky {
+    position: sticky;
+    z-index: 4;
+    @include color-buttons-basics;
+    top: 60px;
+    > label {
+      font-size: 20px;
+      margin-right: 5px;
+    }
   }
 }
