@@ -9,6 +9,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
       active
       data-cy={`report-question-${question.id}`}
       className="question-header"
+      id={question.labelIndex}
     >
       <Grid>
         <Grid.Column width={1} className="question-caret" />

@@ -7,6 +7,7 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
     index={question.id}
     data-cy={`report-question-disabled-${question.id}`}
     className="question-header-disabled"
+    id={question.labelIndex}
   >
     <Grid>
       <Grid.Column width={1} className="question-caret" />
