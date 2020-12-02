@@ -67,7 +67,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   }))
 
   return (
-    <div className="comparison-container">
+    <div className="comparison-tab-pane">
       <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>

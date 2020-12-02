@@ -24,7 +24,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
           <p className="question-description">{question.description}</p>
         </Grid.Column>
         <Grid.Column width={4} floated="right">
-          <Label className="answered-label" size="large">
+          <Label className="question-answered-label" size="large">
             1 / 1
           </Label>
         </Grid.Column>

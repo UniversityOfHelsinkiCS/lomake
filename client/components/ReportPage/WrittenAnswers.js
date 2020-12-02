@@ -38,15 +38,15 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
   }
 
   return (
-    <Accordion fluid className="report-container">
-      <Grid>
-        <Grid.Column width={4} className="report-left-header">
+    <Accordion fluid className="report-tab-pane">
+      <Grid className="report-header">
+        <Grid.Column width={4} className="left">
           {translations.questions[lang]}
         </Grid.Column>
-        <Grid.Column width={6} className="report-center-header">
+        <Grid.Column width={6} className="center">
           {year} - {translations.reportHeader['written'][lang]}
         </Grid.Column>
-        <Grid.Column width={5} className="report-right-header" floated="right">
+        <Grid.Column width={5} className="right" floated="right">
           {translations.answered[lang]} / {translations.allProgrammes[lang]}
         </Grid.Column>
       </Grid>

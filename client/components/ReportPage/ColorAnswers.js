@@ -14,9 +14,9 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
   }
 
   return (
-    <div className="report-container">
-      <Grid>
-        <Grid.Column className="report-center-header" width={16}>
+    <div className="report-tab-pane">
+      <Grid className="report-header">
+        <Grid.Column className="center" width={16}>
           {year} - {translations.reportHeader['colors'][lang]}
         </Grid.Column>
       </Grid>

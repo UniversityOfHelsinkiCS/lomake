@@ -134,7 +134,7 @@ export default () => {
         </Grid.Column>
       </Grid>
       <Tab
-        className="comparison-page-tab"
+        className="comparison-tab"
         menu={{ secondary: true, pointing: true }}
         panes={panes}
       />

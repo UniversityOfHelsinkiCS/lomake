@@ -1,28 +1,47 @@
 @import 'Assets/colors.scss';
 
-.report-page {
+.report {
+  &-info-header {
+    height: 50px;
+  }
+  &-filter-container {
+    width: 90%;
+    max-width: 1400px;
+    align-self: center;
+    @media only screen and (max-width: 991px) and (min-width: 768px) {
+      max-width: 90%;
+    }
+    > h1 {
+      margin-bottom: 1.3em;
+      margin-top: 1em !important;
+    }
+  }
   &-tab {
+    padding: 10px;
     margin-top: 2em;
     width: 90%;
     max-width: 1400px;
     align-self: center;
   }
-}
-
-.report-info-header {
-  height: 50px;
-}
-
-.report-filter-container {
-  width: 90%;
-  max-width: 1400px;
-  align-self: center;
-  @media only screen and (max-width: 991px) and (min-width: 768px) {
-    max-width: 90%;
+  &-tab-pane {
+    margin-top: 1em;
+    padding: 10px;
   }
-  > h1 {
-    margin-bottom: 1.3em;
-    margin-top: 1em !important;
+  &-side-note {
+    color: $gray;
+  }
+}
+
+.report-header {
+  font-size: 1.1em;
+  & .center {
+    text-align: center;
+  }
+  & .left {
+    margin-left: 25px;
+  }
+  & .right {
+    text-align: end;
   }
 }
 
@@ -56,36 +75,6 @@
   }
 }
 
-.report-container {
-  margin-top: 1em;
-  padding: 10px;
-}
-
-.report-left-header {
-  margin-left: 25px;
-  > p {
-    font-size: 1.1em;
-  }
-}
-
-.report-center-header {
-  font-size: 1.1em;
-  text-align: center;
-  > p {
-    margin-bottom: 3px;
-  }
-}
-
-.report-right-header {
-  text-align: end;
-  > p {
-    font-size: 1.1em;
-  }
-}
-
-.report-side-note {
-  color: $gray;
-}
 
 @mixin question-caret-basics {
   max-width: 25px;
@@ -98,6 +87,14 @@
 @mixin question-label-basics {
   font-weight: bold;
   margin-top: 0.4em;
+}
+
+@mixin answered-label-basics {
+  min-width: 85px;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  color: $white !important;
 }
 
 .question {
@@ -144,6 +141,14 @@
     margin-left: 25px !important;
     max-width: 1200px;
   }
+  &-answered-label {
+    @include answered-label-basics;
+    background-color: $blue !important;
+    &-disabled {
+      @include answered-label-basics;
+      background-color: $gray !important;
+    }
+  }
 }
 
 @mixin answer-circle-basics {
@@ -177,9 +182,14 @@
   &-row {
     padding-top: 0.3em;
   }
-  &-circle-green {
+  &-circle {
     @include answer-circle-basics;
-    background: $background-green;
+
+    & .green-color {
+      @include answer-circle-basics;
+
+      background: $background-green;
+    }
   }
   &-circle-yellow {
     @include answer-circle-basics;
@@ -217,23 +227,6 @@
     height: 26px;
     width: 26px;
     margin: 5px;
-  }
-}
-
-@mixin answered-label-basics {
-  min-width: 85px;
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  color: $white !important;
-}
-
-.answered-label {
-  @include answered-label-basics;
-  background-color: $blue !important;
-  &-disabled {
-    @include answered-label-basics;
-    background-color: $gray !important;
   }
 }
 

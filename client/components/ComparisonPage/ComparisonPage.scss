@@ -1,55 +1,27 @@
 @import 'Assets/colors.scss';
 
-.comparison-page {
+.comparison {
+  &-filter-container {
+    width: 90%;
+    max-width: 1600px;
+    align-self: center;
+    @media only screen and (max-width: 991px) and (min-width: 768px) {
+      max-width: 90%;
+    }
+    > h1 {
+      margin-bottom: 1.3em;
+      margin-top: 1em !important;
+    }
+  }
   &-tab {
     margin-top: 2em;
     width: 90%;
     max-width: 1600px;
     align-self: center;
   }
-}
-
-.comparison-info-header {
-  height: 50px;
-}
-
-.comparison-filter-container {
-  width: 90%;
-  max-width: 1600px;
-  align-self: center;
-  @media only screen and (max-width: 991px) and (min-width: 768px) {
-    max-width: 90%;
-  }
-  > h1 {
-    margin-bottom: 1.3em;
-    margin-top: 1em !important;
-  }
-}
-
-.comparison-container {
-  margin-top: 1em;
-  padding: 10px;
-}
-
-.comparison-left-header {
-  margin-left: 25px;
-  > p {
-    font-size: 1.1em;
-  }
-}
-
-.comparison-center-header {
-  font-size: 1.1em;
-  text-align: center;
-  > p {
-    margin-bottom: 3px;
-  }
-}
-
-.comparison-right-header {
-  text-align: end;
-  > p {
-    font-size: 1.1em;
+  &-tab-pane {
+    margin-top: 1em;
+    padding: 10px;
   }
 }
 
@@ -70,10 +42,9 @@
     margin: 4em 0em 2em 0em;
     padding-left: 1em;
   }
-}
-
-.comparison-side-note {
-  color: $gray;
+  &-side-note {
+    color: $gray;
+  }
 }
 
 @mixin answer-circle-basics {

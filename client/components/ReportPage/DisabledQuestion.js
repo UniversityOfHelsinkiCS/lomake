@@ -24,7 +24,7 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
       <Grid.Column width={4} floated="right">
         <Label
           data-cy={`answered-label-${question.id}`}
-          className="answered-label-disabled"
+          className="question-answered-label-disabled"
           size="large"
         >
           0 / {chosenProgrammes.length}

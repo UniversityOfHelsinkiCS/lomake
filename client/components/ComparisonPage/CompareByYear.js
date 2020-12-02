@@ -117,7 +117,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
 
   return (
-    <div className="comparison-container">
+    <div className="comparison-tab-pane">
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>

@@ -172,7 +172,7 @@ export default () => {
         </Grid.Column>
       </Grid>
       <Tab 
-        className="report-page-tab"
+        className="report-tab"
         onTabChange={handleTabChange}
         activeIndex={activeTab}
         menu={{ secondary: true, pointing: true }}
