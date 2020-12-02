@@ -9,10 +9,9 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
-const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, questionsList }) => {
+const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, questionsList, showing, setShowing }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
-  const [showing, setShowing] = useState(-1)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())

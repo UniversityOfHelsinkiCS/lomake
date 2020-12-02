@@ -5,7 +5,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes, setActiveTab }) => {
+export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes, setActiveTab, setShowing }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
 
@@ -82,6 +82,11 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
     setToolTipData(toolTip)
   }
 
+  const showWritten = (id) => {
+    setShowing(id)
+    setActiveTab(0)
+  }
+
   return (
     <div className="report-color-chart-area">
       <div className="report-color-pie-header">
@@ -97,7 +102,7 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
         <p>
           <Link
             to={`/report#${question.labelIndex}`}
-            onClick={() => setActiveTab(0)}
+            onClick={() => showWritten(question.id)}
           >
             {translations.clickToCheck[lang]}
           </Link>

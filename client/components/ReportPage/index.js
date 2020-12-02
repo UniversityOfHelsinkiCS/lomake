@@ -29,6 +29,7 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
+  const [showing, setShowing] = useState(-1)
   const [activeTab, setActiveTab] = useState(0)
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
@@ -115,6 +116,8 @@ export default () => {
             chosenProgrammes={programmes.chosen}
             usersProgrammes={usersProgrammes}
             allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+            showing={showing}
+            setShowing={setShowing}
           />
         </Tab.Pane>
       ),
@@ -129,6 +132,7 @@ export default () => {
             chosenProgrammes={programmes.chosen}
             allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
             setActiveTab={setActiveTab}
+            setShowing={setShowing}
           />
         </Tab.Pane>
       ),
