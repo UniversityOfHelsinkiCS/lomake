@@ -5,7 +5,7 @@ import ColorLegend from 'Components/Generic/ColorLegend'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
-const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) => {
+const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setActiveTab }) => {
   const lang = useSelector((state) => state.language)
   const [showEmpty, setShowEmpty] = useState(true)
 
@@ -45,6 +45,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes }) => 
                 answers={allAnswers.get(question.id)}
                 showEmpty={showEmpty}
                 chosenProgrammes={chosenProgrammes}
+                setActiveTab={setActiveTab}
               />
             )
         )}

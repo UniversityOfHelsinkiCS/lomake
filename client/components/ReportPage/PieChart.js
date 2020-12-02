@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
+import { HashLink as Link } from 'react-router-hash-link'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes }) => {
+export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes, setActiveTab }) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
 
@@ -92,6 +93,14 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
         </p>
         <p>
           <b>{amountOfResponses()}</b>
+        </p>
+        <p>
+          <Link
+            to={`/report#${question.labelIndex}`}
+            onClick={() => setActiveTab(0)}
+          >
+            {translations.clickToCheck[lang]}
+          </Link>
         </p>
       </div>
       <div className="report-color-pie-chart" data-cy={`report-chart-${question.id}`}>

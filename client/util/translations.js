@@ -938,6 +938,11 @@ export const reportPageTranslations = {
     fi: 'Vastauksia:',
     se: 'Responses:',
   },
+  clickToCheck: {
+    en: 'Check the written answers',
+    fi: 'Katso kirjalliset vastaukset',
+    se: 'Check the written answers',
+  },
   // ReportPage/WrittenAnswers.js
   questions: {
     fi: 'Kysymys',

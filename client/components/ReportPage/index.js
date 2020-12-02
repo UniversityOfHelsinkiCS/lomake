@@ -29,6 +29,7 @@ export default () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
+  const [activeTab, setActiveTab] = useState(0)
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const answers = useSelector((state) => state.tempAnswers)
@@ -101,6 +102,8 @@ export default () => {
     return answerMap
   }
 
+  const handleTabChange = (e, { activeIndex }) => setActiveTab(activeIndex)
+
   const panes = [
     {
       menuItem: translations.reportHeader['written'][lang],
@@ -125,6 +128,7 @@ export default () => {
             questionsList={questionsList}
             chosenProgrammes={programmes.chosen}
             allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+            setActiveTab={setActiveTab}
           />
         </Tab.Pane>
       ),
@@ -163,7 +167,7 @@ export default () => {
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
         </Grid.Column>
       </Grid>
-      <Tab className="report-page-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab className="report-page-tab" onTabChange={handleTabChange} activeIndex={activeTab} menu={{ secondary: true, pointing: true }} panes={panes} />
     </>
   )
 }
