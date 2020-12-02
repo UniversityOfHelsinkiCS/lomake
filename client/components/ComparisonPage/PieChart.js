@@ -93,9 +93,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name }) => 
         </p>
         <p>
           <b>
-            {name === 'university'
-              ? translations['allProgrammes'][lang]
-              : translations[level][lang]}
+            {translations[level][lang]}
           </b>
         </p>
         <p data-cy={`comparison-responses-${name}-${question.id}`}>

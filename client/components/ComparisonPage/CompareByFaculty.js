@@ -7,7 +7,7 @@ import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
-import { filteredProgrammes } from 'Utilities/common'
+import { filteredProgrammes, filterByLevel } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
@@ -48,11 +48,13 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
     return []
   }
 
-  const comparedProgrammes = filteredProgrammes(lang, usersProgrammes, [], '', filters)
+  const facultyProgrammes = filteredProgrammes(lang, usersProgrammes, [], '', filters)
 
-  const comparedAnswers = (question) => {
-    if (!comparedProgrammes || !allAnswers) return []
-    const filteredKeys = comparedProgrammes.all.map((p) => p.key)
+  const universityProgrammes = filterByLevel(usersProgrammes, level)
+
+  const comparedAnswers = (question, programmes) => {
+    if (!programmes || !allAnswers) return []
+    const filteredKeys = programmes.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     if (answers) return answers.filter((a) => filteredKeys.includes(a.key))
     return []
@@ -141,9 +143,9 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   key={question.id}
                   question={question}
                   showEmpty={showEmpty}
-                  answers={comparedAnswers(question)}
+                  answers={comparedAnswers(question, facultyProgrammes.all)}
                   faculty={comparedFaculty ? comparedFaculty.text : ''}
-                  programmes={comparedProgrammes ? comparedProgrammes.all : ''}
+                  programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   name="faculty"
                 />
               )
@@ -159,8 +161,8 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     key={question.id}
                     question={question}
                     showEmpty={showEmpty}
-                    answers={allAnswers.get(question.id)}
-                    programmes={usersProgrammes ? usersProgrammes : []}
+                    answers={comparedAnswers(question, universityProgrammes)}
+                    programmes={usersProgrammes ? universityProgrammes : []}
                     faculty={translations.university[lang]}
                     name="university"
                   />

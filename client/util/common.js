@@ -164,6 +164,22 @@ const doctoralSchools = {
   ],
 }
 
+export const filterByLevel = (usersProgrammes, level) => {
+  const programmes = usersProgrammes.filter((p) => {
+    if (level === 'allProgrammes') return true
+    const prog = p.name['en'].toLowerCase()
+    if (level === 'international') {
+      return international.includes(p.key)
+    }
+    if (level === 'master') {
+      return prog.includes('master') || prog.includes('degree programme')
+    }
+    return prog.includes(level.toString())
+  })
+
+  return programmes
+}
+
 export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilter, filters) => {
   if (!usersProgrammes) return { chosen: [], all: [] }
   const { faculty, level, companion, doctoralSchool } = filters
