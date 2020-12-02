@@ -26,7 +26,7 @@ describe('ReportPage tests', function () {
     cy.reload()
 
     cy.visit('/report')
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
+    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
       'kissa'
@@ -54,7 +54,7 @@ describe('ReportPage tests', function () {
     cy.login(user)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.get('[data-cy=yearSelector]').click()
+    cy.get('[data-cy=yearSelector]').should('be.visible').click()
 
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
@@ -131,7 +131,7 @@ describe('ReportPage tests', function () {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/report')
-    cy.get('div').contains('colors').click()
+    cy.get('div').contains('colors').should('be.visible').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
   })
