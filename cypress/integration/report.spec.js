@@ -76,6 +76,8 @@ describe('ReportPage tests', function () {
     })
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=master-filter]').should('be.visible').click()
+    cy.get('[data-cy=report-select-all]').should('contain', 'all')
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 63')
   })
 
