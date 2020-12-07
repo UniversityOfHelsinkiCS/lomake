@@ -52,7 +52,7 @@ const LevelFilter = ({ comparison }) => {
           <Form.Field>
             <Radio
               data-cy="doctor-filter"
-              label={translations.doctoral[lang]}
+              label={translations.doctor[lang]}
               name="doctor"
               value="doctor"
               checked={level === 'doctor'}

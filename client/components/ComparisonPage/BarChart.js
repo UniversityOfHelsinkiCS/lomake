@@ -4,9 +4,11 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { colors } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import facultyNames from '../../facultyTranslations'
 require('highcharts/modules/exporting')(Highcharts)
 
 const BarChart = ({ data, questions, unit }) => {
+  const { faculty, level, multipleYears } = useSelector((state) => state.filters)
   const lang = useSelector((state) => state.language)
   if (!data) return <></>
 
@@ -42,6 +44,14 @@ const BarChart = ({ data, questions, unit }) => {
 
   const checkSize = () => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
 
+  const getExportText = () => {
+    const formText = translations.chartExport[lang]
+    const time = multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length-1]}` : multipleYears[0]
+    const facultyText = facultyNames[lang].find((f) => f.value === faculty).text
+    const levelText = translations[level][lang]
+    return `${formText}_${time}_${facultyText}_${levelText}`
+  }
+
   const graphImages = {
     menuItemDefinitions: {
       viewFullscreen: {
@@ -59,7 +69,7 @@ const BarChart = ({ data, questions, unit }) => {
     },
     width: 2200,
     height: 1400,
-    filename: translations.chartExport[lang],
+    filename: getExportText(),
     sourceWidth: 1200,
     sourceHeight: 600,
     buttons: {

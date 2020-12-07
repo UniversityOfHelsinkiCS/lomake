@@ -1,9 +1,9 @@
 export const comparisonPageTranslations = {
   // Comparison/BarChart.js
   chartExport: {
-    fi: 'Tilannekuvalomake_hymiöiden_värit',
-    en: 'Colored_smileys',
-    se: 'Colored_smileys',
+    fi: 'Tilannekuvalomakkeen_vuosivertailu',
+    en: 'Comparison_of_self-assessment_answers',
+    se: 'Comparison_of_self-assessment_answers',
   },
   viewFullscreen: {
     fi: 'Koko näyttö',
@@ -613,7 +613,7 @@ export const genericTranslations = {
     en: "Master's programmes",
     se: 'Magisterprogram',
   },
-  doctoral: {
+  doctor: {
     fi: 'Tohtoriohjelmat',
     en: 'Doctoral programmes',
     se: 'Doktorandprogram',
