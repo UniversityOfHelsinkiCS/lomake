@@ -75,7 +75,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
               />
             ))}
           </div>
-          {answers
+          {answers.length > 0 ? answers
             .sort((a, b) => a['name'].localeCompare(b['name']))
             .map((programme, index) => {
               if (chosenColor === 'all' || programme.color === chosenColor) {
@@ -96,6 +96,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                 )
               }
             })
+          : <h4>{translations.noData[lang]}</h4>
           }
         </Accordion.Content>
       )}
