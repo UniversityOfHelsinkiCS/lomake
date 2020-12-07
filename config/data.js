@@ -25,6 +25,7 @@ const data = [
           en: "Bachelor's Programme in Theology and Religious Studies",
           se: 'Kandidatsprogrammet i religionsforskning',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -34,6 +35,7 @@ const data = [
           fi: 'Teologian ja uskonnontutkimuksen maisteriohjelma',
           se: 'Magisterprogrammet i teologi och religionsforskning',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -43,6 +45,7 @@ const data = [
           en: 'Doctoral Programme in Theology and Religious Studies',
           se: 'Doktorandprogrammet i teologi och religionsforskning',
         },
+        level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'humanistinen'],
       },
     ],
@@ -58,6 +61,7 @@ const data = [
           en: "Bachelor's Programme in Law",
           se: 'Utbildningsprogrammet för rättsnotarie',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -67,6 +71,7 @@ const data = [
           en: "Master's Programme in Law",
           se: 'Magisterprogrammet i rättsvetenskap',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -76,6 +81,7 @@ const data = [
           en: "Master's Programme in International Business Law",
           se: 'Magisterprogrammet i internationell affärsjuridik',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -85,6 +91,7 @@ const data = [
           en: "Master's Programme in Global Governance Law",
           se: '',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -94,6 +101,7 @@ const data = [
           en: 'Doctoral Programme in Law',
           se: 'Doktorandprogrammet i juridik',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
     ],
@@ -109,6 +117,7 @@ const data = [
           en: "Bachelor's Programme in Psychology",
           se: 'Kandidatprogrammet i psykologi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -118,6 +127,7 @@ const data = [
           en: "Bachelor's Programme in Logopedics",
           se: 'Kandidatprogrammet i logopedi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -127,6 +137,7 @@ const data = [
           en: 'Degree Programme in Medicine',
           se: 'Utbildningsprogrammet i medicin',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -136,6 +147,7 @@ const data = [
           en: 'Degree Programme in Dentistry',
           se: 'Utbildningsprogrammet för odontologi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -145,6 +157,7 @@ const data = [
           en: "Master's Programme in Psychology",
           se: 'Magisterprogrammet i psykologi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -154,6 +167,7 @@ const data = [
           fi: 'Logopedian maisteriohjelma',
           se: 'Magistgerprogrammet i logopedi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -163,6 +177,7 @@ const data = [
           en: "Master's Programme in Translational Medicine",
           se: 'Magisterprogrammet i translationell medicin',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -172,6 +187,7 @@ const data = [
           en: 'Doctoral Programme in Biomedicine',
           se: 'Doktorandprogrammet i biomedicin',
         },
+        level: 'doctoral',
         companionFaculties: ['farmasia'],
       },
       {
@@ -181,6 +197,7 @@ const data = [
           en: 'Doctoral Programme in Clinical Research',
           se: 'Doktorandprogrammet i klinisk forskning',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
       {
@@ -190,6 +207,7 @@ const data = [
           en: 'Doctoral Programme in Oral Sciences',
           se: 'Doktorandprogrammet i oral hälsovetenskap',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
       {
@@ -199,6 +217,7 @@ const data = [
           en: 'Doctoral Programme in Population Health',
           se: 'Doktorandprogrammet i befolkningshälsan',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'farmasia', 'kasvatustieteellinen'],
       },
     ],
@@ -214,6 +233,7 @@ const data = [
           en: "Bachelor's Programme in Philosophy",
           se: 'Kandidatprogrammet i filosofi',
         },
+        level: 'bachelor',
         companionFaculties: ['valtiotieteellinen'],
       },
       {
@@ -223,6 +243,7 @@ const data = [
           en: "Bachelor's Programme in Art Studies",
           se: 'Kandidatprogrammet i konstforskning',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -232,6 +253,7 @@ const data = [
           en: "Bachelor's Programme in Languages",
           se: 'Kandidatprogrammet i språk',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -241,6 +263,7 @@ const data = [
           en: "Bachelor's Programme in the Languages and Literatures of Finland",
           se: 'Kandidatprogrammet i finskugriska och nordiska språk och litteraturer',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -250,6 +273,7 @@ const data = [
           en: "Bachelor's Programme in Cultural Studies",
           se: 'Kandidatprogrammet i kulturforskning',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -259,6 +283,7 @@ const data = [
           en: "Bachelor's Programme in History",
           se: 'Kandidatprogrammet i historia',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -268,6 +293,7 @@ const data = [
           en: "Master's Programme in Art Studies",
           se: 'Magisterprogrammet i konstforskning',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -277,6 +303,7 @@ const data = [
           en: "Master's Programme in Languages",
           se: 'Magisterprogrammet i språk',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -286,6 +313,7 @@ const data = [
           en: "Master's Programme in English Studies",
           se: 'Magisterprogrammet i engelska språket och litteraturen',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -295,6 +323,7 @@ const data = [
           en: "Master's Programme in Russian Studies",
           se: 'Magisterprogrammet i ryska studier',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -304,6 +333,7 @@ const data = [
           fi: 'Kielellisen diversiteetin ja digitaalisten ihmistieteiden maisteriohjelma',
           se: 'Magisterprogrammet i språklig diversitet och digitala metoder',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -313,6 +343,7 @@ const data = [
           en: "Master's Programme in Translation and Interpreting",
           se: 'Magisterprogrammet i översättning och tolkning',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -322,6 +353,7 @@ const data = [
           en: "Master's Programme in Finnish and Finno-Ugrian Languages and Cultures",
           se: 'Magisterprogrammet i finska och finskugriska språk och kulturer',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -331,6 +363,7 @@ const data = [
           fi: 'Pohjoismaisten kielten ja kirjallisuuksien maisteriohjelma',
           se: 'Magisterprogrammet i nordiska språk och litteraturer',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -340,6 +373,7 @@ const data = [
           en: "Master's Programme in Literary Studies",
           se: 'Magisterprogrammet i litteraturvetenskap',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -349,6 +383,7 @@ const data = [
           en: "Master's Programme in Cultural Heritage",
           se: 'Magisterprogrammet i kulturarv',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -358,6 +393,7 @@ const data = [
           en: "Master's Programme in Intercultural Encounters",
           se: 'Magisterprogrammet i interkulturell växelverkan',
         },
+        level: 'master',
         companionFaculties: ['teologinen'],
       },
       {
@@ -367,6 +403,7 @@ const data = [
           en: "Master's Programme in Area and Cultural Studies",
           se: 'Magisterprogrammet i region- och kulturstudier',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -376,6 +413,7 @@ const data = [
           en: "Master's Programme in History",
           se: 'Magisterprogrammet i historia',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -385,6 +423,7 @@ const data = [
           en: "Master's Programme in Gender Studies",
           se: 'Magisterprogrammet i genusvetenskap',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -394,6 +433,7 @@ const data = [
           en: "Master's Programme in Culture and Communication",
           se: 'Magisterprogrammet i kultur och kommunikation',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -403,6 +443,7 @@ const data = [
           en: 'Doctoral Programme in History and Cultural Heritage',
           se: 'Doktorandprogrammet i historia och kulturarv',
         },
+        level: 'doctoral',
         companionFaculties: ['teologinen', 'kasvatustieteellinen', 'oikeustieteellinen'],
       },
       {
@@ -412,6 +453,7 @@ const data = [
           en: 'Doctoral Programme in Language Studies',
           se: 'Doktorandprogrammet i språkforskning',
         },
+        level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'valtiotieteellinen'],
       },
       {
@@ -421,6 +463,7 @@ const data = [
           en: 'Doctoral Programme in Gender, Culture and Society',
           se: 'Doktorandprogrammet i genus, kultur och samhällsforskning',
         },
+        level: 'doctoral',
         companionFaculties: [
           'teologinen',
           'kasvatustieteellinen',
@@ -435,6 +478,7 @@ const data = [
           en: 'Doctoral Programme in Philosophy, Arts and Society',
           se: 'Doktorandprogrammet i filosofi, konstforskning och samhället',
         },
+        level: 'doctoral',
         companionFaculties: ['valtiotieteellinen'],
       },
     ],
@@ -450,6 +494,7 @@ const data = [
           en: "Bachelor's Programme in Mathematical Sciences",
           se: 'Kandidatsprogrammet i matematiska vetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -459,6 +504,7 @@ const data = [
           en: "Bachelor's Programme in Physical Sciences",
           se: 'Kandidatprogrammet i fysikaliska vetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -468,6 +514,7 @@ const data = [
           en: "Bachelor's Programme in Chemistry",
           se: 'Kandidatprogrammet i kemi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -477,6 +524,7 @@ const data = [
           en: "Bachelor's Programme for Teachers of Mathematics, Physics and Chemistry",
           se: 'Kandidatprogrammet för ämneslärare i matematik, fysik och kemi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -486,6 +534,7 @@ const data = [
           en: "Bachelor's Programme in Computer Science",
           se: 'Kandidatprogrammet i datavetenskap',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -495,6 +544,7 @@ const data = [
           en: "Bachelor's Programme in Geography",
           se: 'Kandidatprogrammet i geografi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -504,6 +554,7 @@ const data = [
           fi: 'Luonnontieteiden kandiohjelma',
           se: 'Kandidatprogrammet i naturvetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -513,6 +564,7 @@ const data = [
           en: "Bachelor's Programme in Geosciences",
           se: 'Kandidatsprogrammet i geovetenskap',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -522,6 +574,7 @@ const data = [
           en: "Master's Programme in Mathematics and Statistics",
           se: 'Magisterprogrammet i matematik och statistik',
         },
+        level: 'master',
         companionFaculties: ['valtiotieteellinen'],
       },
       {
@@ -531,6 +584,7 @@ const data = [
           en: "Master's Programme in Life Science Informatics",
           se: 'Magisterprogrammet i Life Science Informatics',
         },
+        level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
       },
       {
@@ -540,6 +594,7 @@ const data = [
           en: "Master's Programme in Theoretical and Computational Methods",
           se: 'Magisterprogrammet i teoretiska och beräkningsmetoder',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -549,6 +604,7 @@ const data = [
           en: "Master's Programme in Particle Physics and Astrophysical Sciences",
           se: 'Magisterprogrammet i elementarpartikelfysik och astrofysikaliska vetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -558,6 +614,7 @@ const data = [
           en: "Master's Programme in Materials Research",
           se: 'Magisterprogrammet i materialforskning',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -567,6 +624,7 @@ const data = [
           en: "Master's Programme in Atmospheric Sciences",
           se: 'Magisterprogrammet i atmosfärsvetenskaper',
         },
+        level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -576,6 +634,7 @@ const data = [
           en: "Master's Programme in Chemistry and Molecular Sciences",
           se: 'Magisterprogrammet i kemi och molekylära vetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -585,6 +644,7 @@ const data = [
           en: "Master's Programme for Teachers of Mathematics, Physics and Chemistry",
           se: 'Magisterprogrammet för ämneslärare i matematik, fysik och kemi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -594,6 +654,7 @@ const data = [
           en: "Master's Programme in Computer Science",
           se: 'Magisterprogrammet i datavetenskap',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -603,6 +664,7 @@ const data = [
           en: "Master's Programme in Data Science",
           se: 'Magisterprogrammet i data science',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -612,6 +674,7 @@ const data = [
           en: "Master's Programme in Geology and Geophysics",
           se: 'Magisterprogrammet i geologi och geofysik',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -621,6 +684,7 @@ const data = [
           en: "Master's Programme in Geography",
           se: 'Magisterprogrammet i geografi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -630,6 +694,7 @@ const data = [
           en: "Master's Programme in Urban Studies and Planning",
           se: 'Magisterprogrammet i urbana studier och planering',
         },
+        level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen', 'valtiotieteellinen', 'humanistinen'],
       },
       {
@@ -639,6 +704,7 @@ const data = [
           en: 'Doctoral Programme in Geosciences',
           se: 'Doktorandprogrammet i geovetenskap',
         },
+        level: 'doctoral',
         companionFaculties: ['humanistinen'],
       },
       {
@@ -648,6 +714,7 @@ const data = [
           en: 'Doctoral Programme in Atmospheric Sciences',
           se: 'Doktorandprogrammet i atmosfärvetenskap',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -657,6 +724,7 @@ const data = [
           en: 'Doctoral Programme in Chemistry and Molecular Research',
           se: 'Doktorandprogrammet i kemi och molekylära vetenskaper',
         },
+        level: 'doctoral',
         companionFaculties: ['farmasia'],
       },
       {
@@ -666,6 +734,7 @@ const data = [
           en: 'Doctoral Programme in Mathematics and Statistics',
           se: 'Doktorandprogrammet i matematik och statistik',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
       {
@@ -675,6 +744,7 @@ const data = [
           en: 'Doctoral Programme in Materials Research and Nanoscience',
           se: 'Doktorandprogrammet i materialforskning och nanovetenskap',
         },
+        level: 'doctoral',
         companionFaculties: ['farmasia'],
       },
       {
@@ -684,6 +754,7 @@ const data = [
           en: 'Doctoral Programme in Computer Science',
           se: 'Doktorandprogrammet i datavetenskap',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
       {
@@ -693,6 +764,7 @@ const data = [
           en: 'Doctoral Programme in Particle Physics and Universe Sciences',
           se: 'Doktorandprogrammet i elementarpartikelfysik och kosmologi',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
     ],
@@ -708,6 +780,7 @@ const data = [
           en: "Bachelor's Programme in Pharmacy",
           se: 'Utbildningsprogrammet för farmaceutexamen',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -717,6 +790,7 @@ const data = [
           fi: 'Proviisorin koulutusohjelma',
           se: 'Utbildningsprogrammet för provisorsexamen',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -726,6 +800,7 @@ const data = [
           en: 'Doctoral Programme in Drug Research',
           se: 'Doktorandprogrammet i läkemedelsforskning',
         },
+        level: 'doctoral',
         companionFaculties: [
           'eläinlääketieteellinen',
           'lääketieteellinen',
@@ -745,6 +820,7 @@ const data = [
           en: "Bachelor's Programme in Biology",
           se: 'Kandidatsprogrammet i biologi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -754,6 +830,7 @@ const data = [
           en: "Bachelor's Programme in Molecular Biosciences",
           se: 'Kandidatsprogrammet i molekylära biovetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -763,6 +840,7 @@ const data = [
           fi: 'Ympäristötieteiden kandiohjelma',
           se: 'Kandidatprogrammet i miljövetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -772,6 +850,7 @@ const data = [
           en: "Master's Programme in Ecology and Evolutionary Biology",
           se: 'Magisterprogrammet i ekologi och evolutionsbiologi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -781,6 +860,7 @@ const data = [
           en: "Master's Programme in Integrative Plant Sciences",
           se: 'Magisterprogrammet i botanik',
         },
+        level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -790,6 +870,7 @@ const data = [
           en: "Master's Programme in Genetics and Molecular Biosciences",
           se: 'Magisterprogrammet i genetik och molekylära biovetenskaper',
         },
+        level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -799,6 +880,7 @@ const data = [
           en: "Master's Programme in Neuroscience",
           se: 'Magisterprogrammet i neurovetenskap',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -808,6 +890,7 @@ const data = [
           en: "Master's Programme in Environmental Change and Global Sustainability",
           se: 'Magisterprogrammet i miljöförändringar och global hållbarhet',
         },
+        level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen', 'valtiotieteellinen'],
       },
       {
@@ -817,6 +900,7 @@ const data = [
           en: 'Doctoral Programme in Wildlife Biology',
           se: 'Doktorandprogrammet i forskning om vilda organismer',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'matemaattis-luonnontieteellinen'],
       },
       {
@@ -826,6 +910,7 @@ const data = [
           en: 'Doctoral Programme in Interdisciplinary Environmental Sciences',
           se: 'Doktorandprogrammet i tvärvetenskaplig miljöforskning',
         },
+        level: 'doctoral',
         companionFaculties: [
           'maatalous-metsätieteellinen',
           'matemaattis-luonnontieteellinen',
@@ -842,6 +927,7 @@ const data = [
           fi: 'Aivot ja mieli tohtoriohjelma',
           se: 'Doktorandprogrammet i hjärn- och medvetandeforskning',
         },
+        level: 'doctoral',
         companionFaculties: [
           'eläinlääketieteellinen',
           'lääketieteellinen',
@@ -858,6 +944,7 @@ const data = [
           en: 'Doctoral Programme in Integrative Life Science',
           se: 'Doktorandprogrammet i integrerande biovetenskap',
         },
+        level: 'doctoral',
         companionFaculties: [
           'eläinlääketieteellinen',
           'maatalous-metsätieteellinen',
@@ -872,6 +959,7 @@ const data = [
           en: 'Doctoral Programme in Plant Sciences',
           se: 'Doktorandprogrammet i botanik',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
     ],
@@ -887,6 +975,7 @@ const data = [
           en: "Bachelor's Programme in Education",
           se: 'Kandidatprogrammet i pedagogik',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -896,6 +985,7 @@ const data = [
           en: "Master's Programme in Education",
           se: 'Magisterprogrammet i pedagogik',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -905,6 +995,7 @@ const data = [
           en: "Master's Programme in Changing Education",
           se: '',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -914,6 +1005,7 @@ const data = [
           en: 'Doctoral Programme in School, Education, Society and Culture',
           se: 'Doktorandprogrammet i skola, fostran, samhälle och kultur',
         },
+        level: 'doctoral',
         companionFaculties: ['teologinen', 'humanistinen'],
       },
       {
@@ -923,6 +1015,7 @@ const data = [
           en: 'Doctoral Programme in Psychology, Learning and Communication',
           se: 'Doktorandprogrammet i psykologi, lärande och kommunikation',
         },
+        level: 'doctoral',
         companionFaculties: [],
       },
     ],
@@ -938,6 +1031,7 @@ const data = [
           en: "Bachelor's Programme in Politics, Media and Communication",
           se: 'Kandidatprogrammet i politik, medier och kommunikation',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -947,6 +1041,7 @@ const data = [
           en: "Bachelor's Programme in Society and Change",
           se: 'Kandidatsprogrammet i samhälle förändrig',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -956,6 +1051,7 @@ const data = [
           en: "Bachelor's Programme in Social Research",
           se: 'Kandidatprogrammet i sociala vetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -965,6 +1061,7 @@ const data = [
           en: "Bachelor's Programme in Economics",
           se: 'Kandidatprogrammet i ekonomi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -974,6 +1071,7 @@ const data = [
           en: "Master's Programme in Philosophy",
           se: 'Magisterprogrammet i filosofi',
         },
+        level: 'master',
         companionFaculties: ['humanistinen'],
       },
       {
@@ -983,6 +1081,7 @@ const data = [
           fi: 'Politiikan ja viestinnän maisteriohjelma',
           se: 'Magisterprogrammet i politik, medier och kommunikation',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -992,6 +1091,7 @@ const data = [
           en: "Master's Programme in Global Politics and Communication",
           se: 'Magisterprogrammet i global politik och kommunikation',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1001,6 +1101,7 @@ const data = [
           fi: 'Yhteiskunnallisen muutoksen maisteriohjelma',
           se: 'Magisterprogrammet för samhälle i förändring',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1010,6 +1111,7 @@ const data = [
           en: "Master's Programme in Contemporary Societies",
           se: 'Magisterprogrammet i moderna samhällen',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1019,6 +1121,7 @@ const data = [
           en: "Master's Programme in European and Nordic Studies",
           se: 'Magisterprogrammet i Europa- och Nordenstudier',
         },
+        level: 'master',
         companionFaculties: ['humanistinen'],
       },
       {
@@ -1028,6 +1131,7 @@ const data = [
           en: "Master's Programme in Social Sciences",
           se: 'Magisterprogrammet i samhällsvetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1037,6 +1141,7 @@ const data = [
           en: "Master's Programme in Social Research",
           se: 'Magisterprogrammet i sociala vetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1046,6 +1151,7 @@ const data = [
           en: "Master's Programme in Economics",
           se: 'Magisterprogrammet i ekonomi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1055,6 +1161,7 @@ const data = [
           en: "Master's programme in Social and Health Research and Management",
           se: 'Magisterprogrammet i social- och hälsoforskning och ledning',
         },
+        level: 'master',
         companionFaculties: ['lääketieteellinen'],
       },
       {
@@ -1064,6 +1171,7 @@ const data = [
           en: 'Doctoral Programme in Social Sciences',
           se: 'Doktorandprogrammet i socialvetenskap',
         },
+        level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'matemaattis-luonnontieteellinen', 'teologinen'],
       },
       {
@@ -1073,6 +1181,7 @@ const data = [
           en: 'Doctoral Programme in Political, Societal and Regional Changes',
           se: 'Doktorandprogrammet i politisk, samhällelig och regional förändring',
         },
+        level: 'doctoral',
         companionFaculties: [
           'maatalous-metsätieteellinen',
           'kasvatustieteellinen',
@@ -1087,6 +1196,7 @@ const data = [
           en: 'Doctoral Programme in Economics',
           se: 'Doktorandprogrammet i ekonomi',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'matemaattis-luonnontieteellinen'],
       },
     ],
@@ -1102,6 +1212,7 @@ const data = [
           fi: 'Kandidatprogrammet i samhällsvetenskaper',
           se: 'Kandidatprogrammet i samhällsvetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
     ],
@@ -1117,6 +1228,7 @@ const data = [
           en: "Bachelor's Programme in Agricultural Sciences",
           se: 'Kandidatprogrammet i lantbruksvetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -1126,6 +1238,7 @@ const data = [
           en: "Bachelor's Programme in Forest Sciences",
           se: 'Kandidatprogrammet i skogsvetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -1135,6 +1248,7 @@ const data = [
           en: "Bachelor's Programme in Food Sciences",
           se: 'Kandidatsprogrammet i livsmedelsvetenskaper',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -1144,6 +1258,7 @@ const data = [
           fi: 'Ympäristö- ja elintarviketalouden kandiohjelma',
           se: 'Kandidatprogrammet i miljö- och livsmedelsekonomi',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -1153,6 +1268,7 @@ const data = [
           fi: 'Maataloustieteiden maisteriohjelma',
           se: 'Magisterprogrammet i lantbruksvetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1162,6 +1278,7 @@ const data = [
           en: "Master's Programme in Agricultural, Environmental and Resource Economics",
           se: 'Magisterprogrammet i lantbruks -, miljö- och naturresursekonomi',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1171,6 +1288,7 @@ const data = [
           en: "Master's Programme in Forest Sciences",
           se: 'Magisterprogrammet i skogsvetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1180,6 +1298,7 @@ const data = [
           en: "Master's Programme in Food Sciences",
           se: 'Magisterprogrammet i livsmedelsvetenskaper',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1189,6 +1308,7 @@ const data = [
           fi: 'Ihmisen ravitsemuksen ja ruokakäyttäytymisen maisteriohjelma',
           se: 'Magisterprogrammet i human nutrition och matbeteende',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1198,6 +1318,7 @@ const data = [
           fi: 'Elintarviketalouden ja kulutuksen maisteriohjelma',
           se: 'Magisterprogrammet i livsmedelsekonomi och konsumtion',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1207,6 +1328,7 @@ const data = [
           en: "Master's Programme in Microbiology and Microbial Biotechnology",
           se: 'Magisterprogrammet i mikrobiologi och mikrobiell bioteknik',
         },
+        level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
       },
       {
@@ -1216,6 +1338,7 @@ const data = [
           en: 'Doctoral Programme in Sustainable Use of Renewable Natural Resources',
           se: 'Doktorandprogrammet i hållbart utnyttjande av förnybara naturresurser',
         },
+        level: 'doctoral',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
       },
       {
@@ -1225,6 +1348,7 @@ const data = [
           en: 'Doctoral Programme in Microbiology and Biotechnology',
           se: 'Doktorandprogrammet i mikrobiologi och bioteknik',
         },
+        level: 'doctoral',
         companionFaculties: ['eläinlääketieteellinen', 'bio- ja ympäristötieteellinen'],
       },
     ],
@@ -1240,6 +1364,7 @@ const data = [
           en: "Bachelor's Programme in Veterinary Medicine",
           se: 'Kandidatsprogrammet i veterinärmedicin',
         },
+        level: 'bachelor',
         companionFaculties: [],
       },
       {
@@ -1249,6 +1374,7 @@ const data = [
           en: 'Degree Programme in Veterinary Medicine',
           se: 'Utbildningsprogrammet i veterinärmedicin',
         },
+        level: 'master',
         companionFaculties: [],
       },
       {
@@ -1258,6 +1384,7 @@ const data = [
           en: 'Doctoral Programme in Clinical Veterinary Medicine',
           se: 'Doktorandprogrammet i klinisk veterinärmedicin',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
       {
@@ -1267,6 +1394,7 @@ const data = [
           en: 'Doctoral Programme in Food Chain and Health',
           se: 'Doktorandprogrammet i livsmedelskedjan och hälsa',
         },
+        level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
       },
     ],
