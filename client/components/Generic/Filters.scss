@@ -13,6 +13,11 @@
   @include filter-basics;
 }
 
+.doctoral-school-filter {
+  @include filter-basics;
+  width: 300px;
+}
+
 .faculty-filter {
   &-small {
     @include filter-basics;
@@ -48,10 +53,12 @@
   }
 }
 
-.doctoral-school-filter {
+.question-filter {
   @include filter-basics;
-  width: 300px;
+  width: 560px !important;
 }
+
+
 
 .year-filter {
   &-label-alert {

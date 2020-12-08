@@ -939,9 +939,9 @@ export const reportPageTranslations = {
     se: 'Alla program',
   },
   pdfNotification: {
-    en: 'Only the answers here will be printed on the PDF-report',
-    fi: 'Vain tässä näkyvät vastaukset tulevat PDF-tulosteelle',
-    se: 'Only the answers here will be printed on the PDF-report',
+    en: 'Only the questions and answers chosen here will be printed on the PDF-report',
+    fi: 'Vain tähän valitut kysymykset ja vastaukset tulevat PDF-tulosteelle',
+    se: 'Only the questions and answers chosen here will be printed on the PDF-report',
   },
   selectQuestions: {
     en: 'Filter out questions',

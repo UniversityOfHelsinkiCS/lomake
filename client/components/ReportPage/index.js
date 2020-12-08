@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Grid, Tab } from 'semantic-ui-react'
+import { Accordion, Icon, Grid, Tab } from 'semantic-ui-react'
 import * as _ from 'lodash'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
@@ -169,9 +169,9 @@ export default () => {
               />
             </>
           )}
-          <Accordion fluid styled>
+          <Accordion fluid styled className="question-filter">
             <Accordion.Title className="noprint" active onClick={() => setOpenPdf(!openPdf)}>
-              {translations.selectQuestions[lang]}
+              {translations.selectQuestions[lang]} <span><Icon name={`caret ${openPdf ? 'down' : 'right'} noprint`} /></span>
             </Accordion.Title>
             <Accordion.Content active={openPdf}>
               <QuestionList

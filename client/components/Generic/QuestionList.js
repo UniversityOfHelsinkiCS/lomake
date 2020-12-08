@@ -65,7 +65,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
       >
         {translations.selectAll[lang]}
       </Button>
-      <Button onClick={() => dispatch(setQuestions([]))} className="questions-list-button">
+      <Button onClick={() => dispatch(setQuestions({ selected: [], open: [] }))} className="questions-list-button">
         {translations.clearSelection[lang]}
       </Button>
     </div>
