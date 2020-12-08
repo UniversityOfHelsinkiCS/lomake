@@ -8,6 +8,7 @@
     "parts": [
       {
         "id": "review_of_last_years_situation_report",
+        "index": 0,
         "type": "ENTITY",
         "label": {
           "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
@@ -38,6 +39,7 @@
     "parts": [
       {
         "id": "student_admissions",
+        "index": 1,
         "type": "ENTITY",
         "label": {
           "fi": "OPISKELIJAVALINTA",
@@ -53,6 +55,7 @@
       },
       {
         "id": "language_environment",
+        "index": 2,
         "type": "ENTITY",
         "label": {
           "fi": "KIELIYMPÄRISTÖ",
@@ -68,6 +71,7 @@
       },
       {
         "id": "programme_identity",
+        "index": 3,
         "type": "ENTITY",
         "label": {
           "fi": "KOULUTUSOHJELMAN PROFIILI JA EROTTUVUUS YLIOPISTON SISÄLLÄ, KANSALLISESTI JA KANSAINVÄLISESTI",
@@ -83,6 +87,7 @@
       },
       {
         "id": "employability",
+        "index": 4,
         "type": "ENTITY",
         "label": {
           "fi": "TYÖELÄMÄRELEVANSSI",
@@ -98,6 +103,7 @@
       },
       {
         "id": "learning_outcomes",
+        "index": 5,
         "type": "ENTITY",
         "label": {
           "fi": "KOULUTUSOHJELMAN OSAAMISTAVOITTEET",
@@ -113,6 +119,7 @@
       },
       {
         "id": "curriculum",
+        "index": 6,
         "type": "ENTITY",
         "label": {
           "fi": "OPETUSSUUNNITELMAN TOIMIVUUS JA KEHITTÄMINEN",
@@ -128,6 +135,7 @@
       },
       {
         "id": "guidance",
+        "index": 7,
         "type": "ENTITY",
         "label": {
           "fi": "OPINTOJEN OHJAUKSEN TOIMIVUUS",
@@ -143,6 +151,7 @@
       },
       {
         "id": "student_feedback",
+        "index": 8,
         "type": "ENTITY",
         "label": {
           "fi": "OPISKELIJAPALAUTTEEN HYÖDYNTÄMINEN",
@@ -198,6 +207,7 @@
     "parts": [
       {
         "id": "community_wellbeing",
+        "index": 9,
         "type": "ENTITY",
         "label": {
           "fi": "YHTEISÖN HYVINVOINTI",
@@ -213,6 +223,7 @@
       },
       {
         "id": "teacher_skills",
+        "index": 10,
         "type": "ENTITY",
         "label": {
           "fi": "OPETTAJIEN OSAAMINEN JA OSAAMISEN KEHITTÄMINEN",
@@ -228,6 +239,7 @@
       },
       {
         "id": "management",
+        "index": 11,
         "type": "ENTITY",
         "label": {
           "fi": "JOHTAMINEN JA VIESTINTÄ",
@@ -283,6 +295,7 @@
     "parts": [
       {
         "id": "teaching_resources",
+        "index": 12,
         "type": "ENTITY",
         "label": {
           "fi": "OPETUSRESURSSIT",
@@ -298,6 +311,7 @@
       },
       {
         "id": "recruitment_influence",
+        "index": 13,
         "type": "ENTITY",
         "label": {
           "fi": "OHJELMAN MAHDOLLISUUDET VAIKUTTAA UUDEN HENKILÖSTÖN REKRYTOINTIIN",
@@ -313,6 +327,7 @@
       },
       {
         "id": "resourcing",
+        "index": 14,
         "type": "ENTITY",
         "label": {
           "fi": "TILA- JA LAITERESURSSIT SEKÄ OPPIMISYMPÄRISTÖJEN RESURSSIT",
@@ -368,6 +383,7 @@
     "parts": [
       {
         "id": "cooperation_success",
+        "index": 15,
         "type": "ENTITY",
         "label": {
           "fi": "YHTEISTYÖN SUJUVUUS",
@@ -423,6 +439,7 @@
     "parts": [
       {
         "id": "successes_and_development_needs",
+        "index": 16,
         "type": "ENTITY",
         "label": {
           "fi": "MISSÄ ASIOISSA KOULUTUSOHJELMA ON ONNISTUNUT ERITYISEN HYVIN?",
@@ -448,6 +465,7 @@
     "parts": [
       {
         "id": "measures",
+        "index": 17,
         "type": "MEASURES",
         "label": {
           "fi": "TOIMENPITEET JA NIIDEN VAATIMAT RESURSSIT TIEDEKUNNAN TOIMENPIDESUUNNITELMAA JA HENKILÖSTÖSUUNNITELMAA VARTEN",
@@ -473,6 +491,7 @@
     "parts": [
       {
         "id": "feedback",
+        "index": 18,
         "type": "ENTITY",
         "label": {
           "fi": "MITEN MENI?",
