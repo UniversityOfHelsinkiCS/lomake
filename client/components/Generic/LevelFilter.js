@@ -51,11 +51,11 @@ const LevelFilter = ({ comparison }) => {
           </Form.Field>
           <Form.Field>
             <Radio
-              data-cy="doctor-filter"
-              label={translations.doctor[lang]}
-              name="doctor"
-              value="doctor"
-              checked={level === 'doctor'}
+              data-cy="doctoral-filter"
+              label={translations.doctoral[lang]}
+              name="doctoral"
+              value="doctoral"
+              checked={level === 'doctoral'}
               onChange={handleChange}
             />
           </Form.Field>

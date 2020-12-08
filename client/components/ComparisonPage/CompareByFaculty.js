@@ -95,7 +95,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             <FacultyFilter size="large" label={translations.facultyFilter.compare[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
             {faculty !== 'allFaculties' &&
-              (level === 'doctor' || level === 'master' || level === 'bachelor') && (
+              (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
                 <CompanionFilter />
               )}
           </Grid.Column>
