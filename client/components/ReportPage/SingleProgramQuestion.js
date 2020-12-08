@@ -12,7 +12,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
       id={question.labelIndex}
     >
       <Grid>
-        <Grid.Column width={1} className="question-caret" />
+        <Grid.Column width={1} className="question-caret noprint" />
         <Grid.Column width={11}>
           <span>
             <small className="question-title">
@@ -20,7 +20,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
             </small>
           </span>
           <p className="question-label">
-            {question.labelIndex} {question.label}
+            {question.labelIndex}. {question.label}
           </p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>

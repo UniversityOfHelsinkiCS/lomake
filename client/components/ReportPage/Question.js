@@ -40,9 +40,9 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
         id={question.labelIndex}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret">
+          <Grid.Column width={1} className="question-caret noprint">
             {chosenProgrammes.length > 1 && (
-              <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />
+              <Icon name={`caret ${showing === question.id ? 'down' : 'right'} noprint`} />
             )}
           </Grid.Column>
           <Grid.Column width={11}>
@@ -52,7 +52,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
               </small>
             </span>
             <p className="question-label">
-              {question.labelIndex} {question.label}
+              {question.labelIndex}. {question.label}
             </p>
             <p className="question-description">{question.description}</p>
           </Grid.Column>
@@ -66,7 +66,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
       {answers && (
         <Accordion.Content active={showing === question.id} className="question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
-          <div className="color-buttons">
+          <div className="color-buttons noprint">
             {buttonColors.map((color, index) => (
               <ButtonPopup
                 key={index}

@@ -10,7 +10,7 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
     id={question.labelIndex}
   >
     <Grid>
-      <Grid.Column width={1} className="question-caret" />
+      <Grid.Column width={1} className="question-caret noprint" />
       <Grid.Column width={11}>
         <span>
           <small className="question-title-disabled">
@@ -18,7 +18,7 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
           </small>
         </span>
         <p className="question-label-disabled">
-          {question.labelIndex} {question.label}
+          {question.labelIndex}. {question.label}
         </p>
         <p className="question-description-disabled">{question.description}</p>
       </Grid.Column>

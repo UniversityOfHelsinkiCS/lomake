@@ -1,5 +1,19 @@
 @import 'Assets/colors.scss';
 
+// Hiding any element when printing PDFs
+@media print {
+  .noprint {
+    display: none !important;
+  }
+}
+
+// Hide the tab-headers when printing PDFs
+.item {
+  @media print {
+    display: none !important;
+  }
+}
+
 .report {
   &-info-header {
     height: 50px;
@@ -20,6 +34,9 @@
     padding: 10px;
     margin-top: 2em;
     width: 90%;
+    @media print {
+      width: 100% !important;
+    }
     max-width: 1400px;
     align-self: center;
   }
@@ -29,6 +46,10 @@
   }
   &-side-note {
     color: $gray;
+    &-small {
+      font-size: 0.8em;
+      color: $gray;
+    }
   }
 }
 

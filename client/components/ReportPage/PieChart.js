@@ -99,7 +99,7 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
         <p>
           <b>{amountOfResponses()}</b>
         </p>
-        <p>
+        <p className="noprint">
           <Link
             to={`/report#${question.labelIndex}`}
             onClick={() => showWritten(question.id)}

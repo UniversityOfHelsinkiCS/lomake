@@ -5,6 +5,7 @@ import DisabledQuestion from './DisabledQuestion'
 import Question from './Question'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import PDFDownload from 'Components/Generic/PDFDownload'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import './ReportPage.scss'
@@ -12,10 +13,19 @@ import './ReportPage.scss'
 const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, questionsList, showing, setShowing }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const questions = useSelector(({ filters }) => filters.questions)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
   }, [])
+
+  const getLabel = (question) => {
+    if (!question) return ''
+    const label = _.capitalize(question.label)
+    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+    return `${index}${label}`
+  } 
+
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps
@@ -24,6 +34,7 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
   }
 
   const check = (question) => {
+    if (!questions.selected.includes(getLabel(question))) return false
     const answer = allAnswers.get(question.id)
     if (!answer) return false
     const t = answer.find((a) => a.answer)
@@ -40,6 +51,12 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
   return (
     <Accordion fluid className="report-tab-pane">
       <Grid className="report-header">
+        <Grid.Row className="noprint">
+          <Grid.Column floated="right">
+            <PDFDownload />
+            <p className="report-side-note-small">{translations.pdfNotification[lang]}</p>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Column width={4} className="left">
           {translations.questions[lang]}
         </Grid.Column>
@@ -63,7 +80,7 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
                 chosenProgrammes={chosenProgrammes}
                 year={year}
                 handleClick={handleClick}
-                showing={chosenProgrammes.length < 2 ? question.id : showing}
+                showing={(chosenProgrammes.length < 2 || questions.open.includes(getLabel(question))) ? question.id : showing}
               />
             )}
             <div className="ui divider" />

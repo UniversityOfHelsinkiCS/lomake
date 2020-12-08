@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, Tab } from 'semantic-ui-react'
+import { Accordion, Grid, Tab } from 'semantic-ui-react'
+import * as _ from 'lodash'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import ColorAnswers from './ColorAnswers'
@@ -11,6 +12,7 @@ import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
+import QuestionList from 'Components/Generic/QuestionList'
 import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear,
@@ -22,11 +24,12 @@ import {
 } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
-import questions from '../../questions'
+import rawQuestions from '../../questions'
 import './ReportPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
+  const [openPdf, setOpenPdf] = useState(false)
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
   const [showing, setShowing] = useState(-1)
@@ -57,7 +60,7 @@ export default () => {
 
   if (!selectedAnswers) return <></>
 
-  const questionsList = modifiedQuestions(questions, lang)
+  const questionsList = modifiedQuestions(rawQuestions, lang)
 
   const answersByQuestions = (chosenProgrammes) => {
     let answerMap = new Map()
@@ -144,8 +147,8 @@ export default () => {
 
   return (
     <>
-      <div className="report-info-header" />
-      <Grid doubling columns={2} padded="vertically" className="report-filter-container">
+      <div className="report-info-header noprint" />
+      <Grid doubling columns={2} padded="vertically" className="report-filter-container noprint">
         <Grid.Column width={10}>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector size="small" />
@@ -166,6 +169,18 @@ export default () => {
               />
             </>
           )}
+          <Accordion fluid styled>
+            <Accordion.Title className="noprint" active onClick={() => setOpenPdf(!openPdf)}>
+              {translations.selectQuestions[lang]}
+            </Accordion.Title>
+            <Accordion.Content active={openPdf}>
+              <QuestionList
+                label=""
+                questionsList={questionsList}
+              />
+            </Accordion.Content>
+          </Accordion>
+
         </Grid.Column>
         <Grid.Column width={6}>
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
