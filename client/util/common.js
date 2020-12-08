@@ -53,13 +53,11 @@ export const modifiedQuestions = (questions, lang) => {
   // text_id, color_id, label, section, title and question nr.
   let attributes = []
   let titleIndex = -1
-  let labelIndex = -1
 
   questions.forEach((question) => {
     titleIndex = titleIndex + 1
     question.parts.forEach((part) => {
       if (part.type !== 'TITLE') {
-        if (part.type === 'ENTITY' || part.type === 'MEASURES') labelIndex = labelIndex + 1
         attributes = [
           ...attributes,
           {
@@ -69,8 +67,7 @@ export const modifiedQuestions = (questions, lang) => {
             label: part.label[lang],
             title: question.title[lang],
             titleIndex: titleIndex,
-            labelIndex:
-              part.type === 'ENTITY' || part.type === 'MEASURES' ? `${labelIndex}.` : '',
+            labelIndex: part.index,
             no_color: part.no_color,
           },
         ]

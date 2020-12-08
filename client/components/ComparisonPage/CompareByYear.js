@@ -21,20 +21,16 @@ import './ComparisonPage.scss'
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')
   const [showingQuestion, setShowingQuestion] = useState(-1)
-  const [questions, setQuestions] = useState([])
   const [picked, setPicked] = useState([])
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector((state) => state.language)
   const filters = useSelector((state) => state.filters)
-  const { faculty, level, multipleYears } = filters
+  const { faculty, level, multipleYears, questions } = filters
 
   if (!usersProgrammes || !allAnswers) return <></>
 
-  const questionLabels = () => questionsList.map((q) => getLabel(q))
-
   useEffect(() => {
-    setQuestions(questionLabels())
     setPicked(programmes.all)
   }, [])
 
@@ -45,7 +41,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const getLabel = (question) => {
     if (!question) return ''
     const label = _.capitalize(question.label)
-    const index = question.labelIndex < 10 ? `0${question.labelIndex.slice(0,1)}` : question.labelIndex.slice(0,2)
+    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${label}`
   } 
 
@@ -64,7 +60,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         data.answers.forEach((questionsAnswers, key) => {
           const question = questionsList.find((q) => q.id === key)
           const questionLabel = getLabel(question)
-          if (questions.includes(questionLabel)) {
+          if (questions && questions.includes(questionLabel)) {
             let questionColors = { 
               green: 0,
               yellow: 0,
@@ -141,9 +137,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             )}
             <QuestionList
               label={translations.selectQuestions[lang]}
-              questionLabels={questionLabels()}
-              questions={questions}
-              setQuestions={setQuestions}
+              questionsList={questionsList}
             />
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>

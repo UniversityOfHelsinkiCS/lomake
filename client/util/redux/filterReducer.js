@@ -32,6 +32,11 @@ export const setMultipleYears = (multipleYears) => ({
   multipleYears,
 })
 
+export const setQuestions = (questions) => ({
+  type: 'SET_QUESTIONS',
+  questions,
+})
+
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
@@ -39,6 +44,7 @@ const initialState = {
   level: 'allProgrammes',
   year: new Date().getFullYear(),
   multipleYears: [new Date().getFullYear() - 1, new Date().getFullYear()],
+  questions: [],
 }
 
 export default (state = initialState, action) => {
@@ -84,6 +90,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         multipleYears: action.multipleYears,
+      }
+    }
+    case 'SET_QUESTIONS': {
+      return {
+        ...state,
+        questions: action.questions,
       }
     }
     default:

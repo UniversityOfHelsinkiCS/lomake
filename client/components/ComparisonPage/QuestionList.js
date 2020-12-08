@@ -1,18 +1,37 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { setQuestions } from 'Utilities/redux/filterReducer'
 
-const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
+
+const QuestionList = ({ label, questionsList }) => {
+  const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const questions = useSelector(({ filters }) => filters.questions)
+
+  const getLabel = (question) => {
+    if (!question) return ''
+    const label = _.capitalize(question.label)
+    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+    return `${index}${label}`
+  } 
+
+  const questionLabels = questionsList.map((q) => getLabel(q))
+
+  useEffect(() => {
+    dispatch(setQuestions(questionLabels))
+  }, [])
+
 
   const addToList = (_, { value }) => {
-    setQuestions(value)
+    dispatch(setQuestions(value))
   }
 
-  const options = questionLabels.map((q) => {
-    const sliced = q.slice(2, q.length)
-    return Object({ key: sliced, text: sliced, value: q })
+  const options = questionsList.map((q) => {
+    if (!q.noColor) {
+      return Object({ key: q.index, text: _.capitalize(q.label), value: getLabel(q) })
+    }
   })
 
   return (
@@ -35,12 +54,12 @@ const QuestionList = ({ questions, setQuestions, questionLabels, label }) => {
       <Button
         className="questions-list-button"
         color="blue"
-        onClick={() => setQuestions(questionLabels)}
+        onClick={() => dispatch(setQuestions(questionLabels))}
         data-cy="questions-list-select-all"
       >
         {translations.selectAll[lang]}
       </Button>
-      <Button onClick={() => setQuestions([])} className="questions-list-button">
+      <Button onClick={() => dispatch(setQuestions([]))} className="questions-list-button">
         {translations.clearSelection[lang]}
       </Button>
     </div>
