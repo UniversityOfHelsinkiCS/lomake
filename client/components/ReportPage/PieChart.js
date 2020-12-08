@@ -100,7 +100,7 @@ export default ({
     <div className="report-color-chart-area">
       <div className="report-color-pie-header">
         <p>
-          {question.labelIndex} {question.label}
+          {question.labelIndex}. {(question.label).toUpperCase()}
         </p>
         <p>
           <b>{faculty}</b>

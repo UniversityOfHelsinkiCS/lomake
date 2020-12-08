@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
-import * as _ from 'lodash'
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -40,9 +39,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const getLabel = (question) => {
     if (!question) return ''
-    const label = _.capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${label}`
+    return `${index}${question.label}`
   } 
 
   const colorsTotal = () => {

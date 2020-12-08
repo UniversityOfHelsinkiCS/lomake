@@ -42,7 +42,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
         <Grid>
           <Grid.Column width={1} className="question-caret noprint">
             {chosenProgrammes.length > 1 && (
-              <Icon name={`caret ${showing === question.id ? 'down' : 'right'} noprint`} />
+              <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />
             )}
           </Grid.Column>
           <Grid.Column width={11}>
@@ -52,7 +52,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
               </small>
             </span>
             <p className="question-label">
-              {question.labelIndex}. {question.label}
+              {question.labelIndex}. {(question.label).toUpperCase()}
             </p>
             <p className="question-description">{question.description}</p>
           </Grid.Column>

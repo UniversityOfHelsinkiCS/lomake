@@ -29,9 +29,8 @@ const WrittenAnswers = ({
 
   const getLabel = (question) => {
     if (!question) return ''
-    const label = _.capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${label}`
+    return `${index}${question.label}`
   }
 
   const handleClick = (e, titleProps) => {

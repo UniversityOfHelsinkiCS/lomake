@@ -12,9 +12,8 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
 
   const getLabel = (question) => {
     if (!question) return ''
-    const label = _.capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${label}`
+    return `${index}${question.label}`
   } 
 
   const questionLabels = questionsList.map((q) => getLabel(q))
@@ -30,12 +29,12 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
 
   const options = questionsList.map((q) => {
     if (onlyColoredQuestions && !q.noColor) {
-      return Object({ key: q.index, text: _.capitalize(q.label), value: getLabel(q) })
+      return Object({ key: q.index, text: q.label, value: getLabel(q) })
     } else if (!onlyColoredQuestions) {
       if (q.type === 'ENTITY' || q.type === 'MEASUREMENTS') {
-        return Object({ key: q.labelIndex, text: `${q.labelIndex}. ${_.capitalize(q.label)}`, value: getLabel(q) })
+        return Object({ key: q.labelIndex, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
       } else {
-        return Object({ key: `${q.labelIndex}. ${_.capitalize(q.label)}`, text: `${q.labelIndex}. ${_.capitalize(q.label)}`, value: getLabel(q) })
+        return Object({ key: `${q.labelIndex}. ${q.label}`, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
       }
     }
   })

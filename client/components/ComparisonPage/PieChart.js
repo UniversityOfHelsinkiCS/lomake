@@ -86,7 +86,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name }) => 
     <div className="comparison-color-chart-area">
       <div className="comparison-color-pie-header">
         <p>
-          {question.labelIndex} {question.label}
+          {question.labelIndex}. {(question.label).toUpperCase()}
         </p>
         <p>
           <b>{faculty}</b>

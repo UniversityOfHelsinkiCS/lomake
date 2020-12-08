@@ -53,7 +53,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty 
     <div className="comparison-color-chart-area">
       <div className="comparison-color-pie-header">
         <p>
-          {question.labelIndex} {question.label}
+          {question.labelIndex}. {(question.label).toUpperCase()}
         </p>
         <p>
           <b>{programmeName}</b>

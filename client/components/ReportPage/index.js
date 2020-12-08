@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Icon, Grid, Tab } from 'semantic-ui-react'
-import * as _ from 'lodash'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import ColorAnswers from './ColorAnswers'

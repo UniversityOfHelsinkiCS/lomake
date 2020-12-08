@@ -64,7 +64,7 @@ export const modifiedQuestions = (questions, lang) => {
             id: `${part.id}_text`,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: part.label[lang],
+            label: _.capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex: titleIndex,
             labelIndex: part.index,
@@ -170,7 +170,7 @@ export const filterByLevel = (usersProgrammes, level) => {
     } 
     return p.level === level
   })
-  
+
   return programmes
 }
 
@@ -188,7 +188,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
       return true
     } else if (level === 'international') {
       return international.includes(p.key)
-    } 
+    }
     return p.level === level
   })
 
