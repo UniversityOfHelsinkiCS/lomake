@@ -44,7 +44,7 @@ const initialState = {
   level: 'allProgrammes',
   year: new Date().getFullYear(),
   multipleYears: [new Date().getFullYear() - 1, new Date().getFullYear()],
-  questions: [],
+  questions: { selected: [], open: []},
 }
 
 export default (state = initialState, action) => {

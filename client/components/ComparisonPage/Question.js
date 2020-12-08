@@ -64,7 +64,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
               </small>
             </span>
             <p className="question-label">
-              {question.labelIndex} {question.label}
+              {question.labelIndex}. {question.label}
             </p>
           </Grid.Column>
         </Grid>

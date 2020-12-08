@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { genericTranslations as translations } from 'Utilities/translations'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 
 
-const QuestionList = ({ label, questionsList }) => {
+const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
@@ -20,17 +20,23 @@ const QuestionList = ({ label, questionsList }) => {
   const questionLabels = questionsList.map((q) => getLabel(q))
 
   useEffect(() => {
-    dispatch(setQuestions(questionLabels))
+    dispatch(setQuestions({ selected: questionLabels, open: []}))
   }, [])
 
 
   const addToList = (_, { value }) => {
-    dispatch(setQuestions(value))
+    dispatch(setQuestions({ selected: value, open: []} ))
   }
 
   const options = questionsList.map((q) => {
-    if (!q.noColor) {
+    if (onlyColoredQuestions && !q.noColor) {
       return Object({ key: q.index, text: _.capitalize(q.label), value: getLabel(q) })
+    } else if (!onlyColoredQuestions) {
+      if (q.type === 'ENTITY' || q.type === 'MEASUREMENTS') {
+        return Object({ key: q.labelIndex, text: `${q.labelIndex}. ${_.capitalize(q.label)}`, value: getLabel(q) })
+      } else {
+        return Object({ key: `${q.labelIndex}. ${_.capitalize(q.label)}`, text: `${q.labelIndex}. ${_.capitalize(q.label)}`, value: getLabel(q) })
+      }
     }
   })
 
@@ -44,17 +50,17 @@ const QuestionList = ({ label, questionsList }) => {
         data-cy="questions-list"
         name="questions-list"
         fluid
-        placeholder={translations.selectQuestions[lang]}
+        placeholder={label}
         options={options}
         onChange={addToList}
-        value={questions}
+        value={questions.selected}
         multiple
         selection
       />
       <Button
         className="questions-list-button"
         color="blue"
-        onClick={() => dispatch(setQuestions(questionLabels))}
+        onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
         data-cy="questions-list-select-all"
       >
         {translations.selectAll[lang]}

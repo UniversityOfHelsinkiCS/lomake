@@ -162,16 +162,6 @@ export const comparisonPageTranslations = {
     se: 'Amount of programmes, without the change to previous year',
   },
   // ComparisonPage/QuestionList.js
-  nowShowing: {
-    fi: 'VASTAUKSISSA MUKANA OLEVAT KYSYMYKSET:',
-    en: 'NOW SHOWING THE ANSWERS OF',
-    se: 'NOW SHOWING THE ANSWERS OF',
-  },
-  chooseMore: {
-    fi: 'VALITSE KYSYMYKSIÄ RAPORTILLE:',
-    se: 'CHOOSE MORE QUESTIONS:',
-    en: 'CHOOSE MORE QUESTIONS:',
-  },
   selectAll: {
     fi: 'Valitse kaikki',
     se: 'Select all',
@@ -377,6 +367,22 @@ export const formViewTranslations = {
     en: 'Download all data as a CSV file',
     se: 'Ladda ner svaren i en csv-fil',
   },
+  // Generic/PDFDownload.js
+  downloadText: {
+    fi: 'Tulosta vastaukset PDF-tiedostona',
+    en: 'Print / Download answers as a PDF-file',
+    se: 'Skriv ut / Ladda ner svaren i en PDF-fil',
+  },
+  setViewOnlyTrueText: {
+    fi: 'Tulostus/PDF -näkymä',
+    en: 'Print/Download as PDF view',
+    se: 'Utskriftsläge/Pdf-vy',
+  },
+  setViewOnlyFalseText: {
+    fi: 'Palaa täyttämään lomaketta',
+    en: 'Back to edit view',
+    se: 'Återgå till redigeringsläge',
+  },
   // FormView/NavigationSidebar.js
   OK: {
     fi: 'Vastattu',
@@ -392,22 +398,6 @@ export const formViewTranslations = {
     fi: 'pakollinen kenttä',
     en: 'required field',
     se: 'obligatoriskt fält',
-  },
-  // Formview/PDFDownload.js
-  downloadText: {
-    fi: 'Tulosta / Lataa vastaukset PDF-tiedostona',
-    en: 'Print / Download answers as a PDF-file',
-    se: 'Skriv ut / Ladda ner svaren i en PDF-fil',
-  },
-  setViewOnlyTrueText: {
-    fi: 'Tulostus/PDF -näkymä',
-    en: 'Print/Download as PDF view',
-    se: 'Utskriftsläge/Pdf-vy',
-  },
-  setViewOnlyFalseText: {
-    fi: 'Palaa täyttämään lomaketta',
-    en: 'Back to edit view',
-    se: 'Återgå till redigeringsläge',
   },
   // Formview/StatusMessage.js
   savingAnswersNotice: {
@@ -646,6 +636,22 @@ export const genericTranslations = {
     en:
       "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
+  },
+  // Generic/PDFDownload.js
+  downloadText: {
+    fi: 'Lataa vastaukset PDF-tiedostona',
+    en: 'Download answers as a PDF-file',
+    se: 'Ladda ner svaren i en PDF-fil',
+  },
+  setViewOnlyTrueText: {
+    fi: 'Tulostus/PDF -näkymä',
+    en: 'Print/Download as PDF view',
+    se: 'Utskriftsläge/Pdf-vy',
+  },
+  setViewOnlyFalseText: {
+    fi: 'Palaa täyttämään lomaketta',
+    en: 'Back to edit view',
+    se: 'Återgå till redigeringsläge',
   },
   // Generic/ProgrammeFilter.js
   programmeFilter: {
@@ -931,6 +937,16 @@ export const reportPageTranslations = {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
     se: 'Alla program',
+  },
+  pdfNotification: {
+    en: 'Only the answers here will be printed on the PDF-report',
+    fi: 'Vain tässä näkyvät vastaukset tulevat PDF-tulosteelle',
+    se: 'Only the answers here will be printed on the PDF-report',
+  },
+  selectQuestions: {
+    en: 'Filter out questions',
+    fi: 'Suodata kysymyksiä',
+    se: 'Filter out questions',
   },
   // ReportPage/PieChart.js
   responses: {

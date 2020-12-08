@@ -127,7 +127,7 @@ export default () => {
 
   return (
     <>
-      <div className="comparison-info-header" />
+      <div className="comparison-info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="comparison-filter-container">
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>

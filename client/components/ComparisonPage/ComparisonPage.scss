@@ -1,6 +1,9 @@
 @import 'Assets/colors.scss';
 
 .comparison {
+  &-info-header {
+    height: 50px;
+  }
   &-filter-container {
     width: 90%;
     max-width: 1600px;

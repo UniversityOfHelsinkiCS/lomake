@@ -12,7 +12,7 @@ import ProgrammeList from 'Components/Generic/ProgrammeList'
 import YearSelector from 'Components/Generic/YearSelector'
 import LabelOptions from './LabelOptions'
 import Question from './Question'
-import QuestionList from './QuestionList'
+import QuestionList from 'Components/Generic/QuestionList'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
@@ -60,7 +60,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         data.answers.forEach((questionsAnswers, key) => {
           const question = questionsList.find((q) => q.id === key)
           const questionLabel = getLabel(question)
-          if (questions && questions.includes(questionLabel)) {
+          if (questions && questions.selected.includes(questionLabel)) {
             let questionColors = { 
               green: 0,
               yellow: 0,
@@ -138,6 +138,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             <QuestionList
               label={translations.selectQuestions[lang]}
               questionsList={questionsList}
+              onlyColoredQuestions
             />
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
@@ -149,7 +150,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
           <>
             <Grid.Row>
               <Grid.Column width={16}>
-                <BarChart data={data} questions={questions.sort((a,b) => a.localeCompare(b))} unit={unit} />
+                <BarChart data={data} questions={questions.selected.sort((a,b) => a.localeCompare(b))} unit={unit} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -159,7 +160,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 <Accordion fluid className="report-container">
                   {questionsList.map(
                     (question) =>
-                      questions.includes(getLabel(question)) && (
+                      questions.selected.includes(getLabel(question)) && (
                         <Question
                           key={question.id}
                           answers={writtenTotal(question)}
