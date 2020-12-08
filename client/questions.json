@@ -176,6 +176,7 @@
       },
       {
         "id": "overall_status_information_used",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä muita tietoja ja tietolähteitä käytitte koulutusohjelman yleistilanteesta keskusteltaessa?",
@@ -187,6 +188,7 @@
       },
       {
         "id": "overall_status_information_needed",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja jäitte kaipaamaan?",
@@ -264,6 +266,7 @@
       },
       {
         "id": "wellbeing_information_used",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja ja tietolähteitä käytitte?",
@@ -275,6 +278,7 @@
       },
       {
         "id": "wellbeing_information_needed",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja jäitte kaipaamaan?",
@@ -352,6 +356,7 @@
       },
       {
         "id": "sufficient_resources_information_used",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä muita tietoja ja tietolähteitä käytitte?",
@@ -363,6 +368,7 @@
       },
       {
         "id": "sufficient_resources_information_needed",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja kaipaatte näistä asioista?",
@@ -408,6 +414,7 @@
       },
       {
         "id": "joint_programme_information_used",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja ja tietolähteitä käytitte?",
@@ -419,6 +426,7 @@
       },
       {
         "id": "joint_programme_information_needed",
+        "index": "",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitä tietoja kaipaatte?",
