@@ -89,7 +89,7 @@ const data = [
         name: {
           fi: 'Globaalia hallintoa koskevan oikeuden maisteriohjelma',
           en: "Master's Programme in Global Governance Law",
-          se: '',
+          se: "Master's Programme in Global Governance Law",
         },
         level: 'master',
         companionFaculties: [],
@@ -993,7 +993,7 @@ const data = [
         name: {
           fi: 'Muuttuvan kasvatuksen ja koulutuksen maisteriohjelma',
           en: "Master's Programme in Changing Education",
-          se: '',
+          se: "Master's Programme in Changing Education",
         },
         level: 'master',
         companionFaculties: [],
