@@ -40,8 +40,7 @@ const WrittenAnswers = ({
     setShowing(newIndex)
   }
 
-  const check = (question) => {
-    if (!questions.selected.includes(getLabel(question))) return false
+  const checkIfAnswers = (question) => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
     const t = answer.find((a) => a.answer)
@@ -76,7 +75,8 @@ const WrittenAnswers = ({
       </Grid>
       <div className="ui divider" />
       {questionsList.map((question) =>
-        check(question) ? (
+        questions.selected.includes(getLabel(question)) && (
+        checkIfAnswers(question) ? (
           <div key={question.id}>
             {chosenProgrammes.length === 1 ? (
               <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
@@ -102,7 +102,7 @@ const WrittenAnswers = ({
             <div className="ui divider" />
           </div>
         )
-      )}
+      ))}
     </Accordion>
   )
 }
