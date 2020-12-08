@@ -5,7 +5,16 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allProgrammes, setActiveTab, setShowing }) => {
+export default ({
+  question,
+  answers,
+  showEmpty,
+  chosenProgrammes,
+  faculty,
+  allProgrammes,
+  setActiveTab,
+  setShowing,
+}) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
 
@@ -100,10 +109,7 @@ export default ({ question, answers, showEmpty, chosenProgrammes, faculty, allPr
           <b>{amountOfResponses()}</b>
         </p>
         <p className="noprint">
-          <Link
-            to={`/report#${question.labelIndex}`}
-            onClick={() => showWritten(question.id)}
-          >
+          <Link to={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
             {translations.clickToCheck[lang]}
           </Link>
         </p>

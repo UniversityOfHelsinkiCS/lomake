@@ -6,11 +6,17 @@ import ColorLegend from 'Components/Generic/ColorLegend'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
-const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setActiveTab, setShowing }) => {
+const ColorAnswers = ({
+  year,
+  allAnswers,
+  questionsList,
+  chosenProgrammes,
+  setActiveTab,
+  setShowing,
+}) => {
   const lang = useSelector((state) => state.language)
   const [showEmpty, setShowEmpty] = useState(true)
   const questions = useSelector(({ filters }) => filters.questions)
-
 
   if (chosenProgrammes.length < 1 || allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
@@ -53,18 +59,18 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
         {questionsList.map(
           (question) =>
             allAnswers.get(question.id) &&
-            !question.no_color && 
-              questions.selected.includes(getLabel(question)) && (
-                <PieChart
-                  key={question.id}
-                  question={question}
-                  answers={allAnswers.get(question.id)}
-                  showEmpty={showEmpty}
-                  chosenProgrammes={chosenProgrammes}
-                  setActiveTab={setActiveTab}
-                  setShowing={setShowing}
-                />
-              )
+            !question.no_color &&
+            questions.selected.includes(getLabel(question)) && (
+              <PieChart
+                key={question.id}
+                question={question}
+                answers={allAnswers.get(question.id)}
+                showEmpty={showEmpty}
+                chosenProgrammes={chosenProgrammes}
+                setActiveTab={setActiveTab}
+                setShowing={setShowing}
+              />
+            )
         )}
       </div>
     </div>

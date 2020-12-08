@@ -29,7 +29,7 @@ import './ReportPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
-  const [openPdf, setOpenPdf] = useState(false)
+  const [openQuestions, setOpenQuestions] = useState(false)
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
   const [showing, setShowing] = useState(-1)
@@ -170,23 +170,26 @@ export default () => {
             </>
           )}
           <Accordion fluid styled className="question-filter">
-            <Accordion.Title className="noprint" active onClick={() => setOpenPdf(!openPdf)}>
-              {translations.selectQuestions[lang]} <span><Icon name={`caret ${openPdf ? 'down' : 'right'} noprint`} /></span>
+            <Accordion.Title
+              className={`question-filter-title${openQuestions ? '-active' : ''} noprint`}
+              active
+              onClick={() => setOpenQuestions(!openQuestions)}
+            >
+              {translations.selectQuestions[lang]}{' '}
+              <span className="noprint">
+                <Icon name={`caret ${openQuestions ? 'down' : 'right'}`} />
+              </span>
             </Accordion.Title>
-            <Accordion.Content active={openPdf}>
-              <QuestionList
-                label=""
-                questionsList={questionsList}
-              />
+            <Accordion.Content active={openQuestions}>
+              <QuestionList label="" questionsList={questionsList} />
             </Accordion.Content>
           </Accordion>
-
         </Grid.Column>
         <Grid.Column width={6}>
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
         </Grid.Column>
       </Grid>
-      <Tab 
+      <Tab
         className="report-tab"
         onTabChange={handleTabChange}
         activeIndex={activeTab}

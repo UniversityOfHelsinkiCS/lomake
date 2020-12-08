@@ -10,7 +10,15 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import './ReportPage.scss'
 
-const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, questionsList, showing, setShowing }) => {
+const WrittenAnswers = ({
+  year,
+  usersProgrammes,
+  chosenProgrammes,
+  allAnswers,
+  questionsList,
+  showing,
+  setShowing,
+}) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
@@ -24,8 +32,7 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
     const label = _.capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${label}`
-  } 
-
+  }
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps
@@ -80,7 +87,11 @@ const WrittenAnswers = ({ year, usersProgrammes, chosenProgrammes, allAnswers, q
                 chosenProgrammes={chosenProgrammes}
                 year={year}
                 handleClick={handleClick}
-                showing={(chosenProgrammes.length < 2 || questions.open.includes(getLabel(question))) ? question.id : showing}
+                showing={
+                  chosenProgrammes.length < 2 || questions.open.includes(getLabel(question))
+                    ? question.id
+                    : showing
+                }
               />
             )}
             <div className="ui divider" />

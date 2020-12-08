@@ -12,9 +12,9 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
 
   const ButtonPopup = ({ color, index }) => (
     <Popup
-      content={`${translations.choose[lang]} ${
-        translations[`${color}Ones`][lang]
-      } ${translations.answers[lang]}`}
+      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${
+        translations.answers[lang]
+      }`}
       trigger={
         <button
           key={index}
@@ -57,7 +57,11 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
             <p className="question-description">{question.description}</p>
           </Grid.Column>
           <Grid.Column width={4} floated="right">
-            <Label data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
+            <Label
+              data-cy={`answered-label-${question.id}`}
+              className="question-answered-label"
+              size="large"
+            >
               {answers.length} / {chosenProgrammes.length}
             </Label>
           </Grid.Column>
@@ -68,36 +72,37 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
           <div className="color-buttons noprint">
             {buttonColors.map((color, index) => (
-              <ButtonPopup
-                key={index}
-                color={color}
-                index={index}
-              />
+              <ButtonPopup key={index} color={color} index={index} />
             ))}
           </div>
-          {answers.length > 0 ? answers
-            .sort((a, b) => a['name'].localeCompare(b['name']))
-            .map((programme, index) => {
-              if (chosenColor === 'all' || programme.color === chosenColor) {
-                return (
-                  <div key={index}>
-                    <label className="answer-title">
-                      {programme.name} <span className={`answer-circle-${programme.color}`} />
-                    </label>
-                    <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
-                      {programme.answer &&
-                        programme.answer.split('\n').map((row, index) => (
-                          <li key={index} className="answer-row">
-                            {row}
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                )
-              }
-            })
-          : <h4>{translations.noData[lang]}</h4>
-          }
+          {answers.length > 0 ? (
+            answers
+              .sort((a, b) => a['name'].localeCompare(b['name']))
+              .map((programme, index) => {
+                if (chosenColor === 'all' || programme.color === chosenColor) {
+                  return (
+                    <div key={index}>
+                      <label className="answer-title">
+                        {programme.name} <span className={`answer-circle-${programme.color}`} />
+                      </label>
+                      <ul
+                        className="answer-list"
+                        data-cy={`report-question-content-${question.id}`}
+                      >
+                        {programme.answer &&
+                          programme.answer.split('\n').map((row, index) => (
+                            <li key={index} className="answer-row">
+                              {row}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  )
+                }
+              })
+          ) : (
+            <h4>{translations.noData[lang]}</h4>
+          )}
         </Accordion.Content>
       )}
     </>
