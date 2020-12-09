@@ -5,22 +5,44 @@ export const aboutPageTranslations = {
     en: 'What is the Form?',
     se: 'What is the Form?',
   },
-  presentationText: {
-    fi: `
-    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
+  whatIsIt: {
+    fi: 'Mikä tilannekuvalomake on?',
+    en: 'What is the self-assessment form?',
+    se: 'What is the self-assessment form?',
+  },
+  whatIsItReply: {
+    fi: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
+    en: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
+    se: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
+  },
+  howShouldItBeFilled: {
+    fi: 'Miten tilannekuvalomake täytetään?',
+    en: 'How should we fill in the form?',
+    se: 'How should we fill in the form?',
+  },
+  howShouldItBeFilledReply: {
+    fi: ` 
     Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
     Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
     Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
     en: `
-    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
     Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
     Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
     Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
     se: `
-    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
     Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
     Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
     Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`
+  },
+  whatElseIsThere: {
+    fi: 'Mitä muuta lomakkeella voi tehdä?',
+    en: 'What else can I do with the form?',
+    se: 'What else can I do with the form?',
+  },
+  whatElseIsThereReply: {
+    fi: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
+    en: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
+    se: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
   },
   contactInfo: {
     fi: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',

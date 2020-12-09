@@ -16,8 +16,23 @@ export default () => {
       <div className="about-container">
         <h1>{translations.title[lang]}</h1>
         <div className="about-header-line"/>
+        <h3>
+          {translations.whatIsIt[lang]}
+        </h3>
         <p>
-          {translations.presentationText[lang]}
+          {translations.whatIsItReply[lang]}
+        </p>
+        <h3>
+          {translations.howShouldItBeFilled[lang]}
+        </h3>
+        <p>
+          {translations.howShouldItBeFilledReply[lang]}
+        </p>
+        <h3>
+          {translations.whatElseIsThere[lang]}
+        </h3>
+        <p>
+          {translations.whatElseIsThereReply[lang]}
         </p>
         <p>
           {translations.contactInfo[lang]}
