@@ -20,7 +20,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
             </small>
           </span>
           <p className="question-label">
-            {question.labelIndex}. {question.label}
+            {question.labelIndex}. {(question.label).toUpperCase()}
           </p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>

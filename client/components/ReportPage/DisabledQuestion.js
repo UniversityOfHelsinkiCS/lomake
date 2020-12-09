@@ -18,7 +18,7 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
           </small>
         </span>
         <p className="question-label-disabled">
-          {question.labelIndex}. {question.label}
+          {question.labelIndex}. {(question.label).toUpperCase()}
         </p>
         <p className="question-description-disabled">{question.description}</p>
       </Grid.Column>
