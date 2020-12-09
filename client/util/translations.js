@@ -1,3 +1,39 @@
+
+export const aboutPageTranslations = {
+  title: {
+    fi: 'Tietoa lomakkeesta',
+    en: 'What is the Form?',
+    se: 'What is the Form?',
+  },
+  presentationText: {
+    fi: `
+    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
+    Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
+    Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
+    Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
+    en: `
+    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
+    Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
+    Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
+    Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
+    se: `
+    Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. 
+    Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
+    Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
+    Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`
+  },
+  contactInfo: {
+    fi: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
+    en: 'Questions? Contact ospa@helsinki.fi',
+    se: 'Questions? Contact ospa@helsink.fi',
+  },
+  broughtToYouBy: {
+    fi: 'Toteutus:',
+    en: 'Brought to you by:',
+    se: 'Brought to you by:'
+  }
+}
+
 export const comparisonPageTranslations = {
   // Comparison/BarChart.js
   chartExport: {

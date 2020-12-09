@@ -27,6 +27,11 @@ export default () => {
       fi: 'Suomi',
       se: 'Svenska',
     },
+    about: {
+      en: 'About',
+      fi: 'About',
+      se: 'About',
+    }
   }
 
   const warning =
@@ -117,6 +122,9 @@ export default () => {
       </Menu.Menu>
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
+        <Menu.Item as={Link} to="/about">
+          {translations['about'][lang]}
+        </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${translations['logOut'][lang]} (${user.uid})`}
         </Menu.Item>

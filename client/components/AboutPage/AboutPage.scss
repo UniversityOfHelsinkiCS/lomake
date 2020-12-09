@@ -1,0 +1,48 @@
+@import 'Assets/colors.scss';
+
+.about-header-line {
+  background: linear-gradient(
+    to bottom,
+    $toska-red,
+    $toska-red 50%,
+    $toska-orange 50%,
+    $toska-orange,
+  );
+  width: 100%;
+  height: 4px;
+  margin-bottom: 30px;
+}
+
+.about-container {
+  margin-top: 70px;
+  max-width: 1000px;
+  padding: 20px;
+  align-self: center;
+  > p {
+    font-size: 1.3em;
+  }
+}
+
+.footer {
+  background-color: $toska-black;
+  color: $white;
+  height: 120px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  .text {
+    position: absolute;
+    top: 30px;
+    > p, .logo {
+      color: $toska-orange;
+      font-weight: 200;
+      text-align: center;
+      font-size: 1.2em;
+    }
+  }
+  .logo {
+    position: absolute;
+    top: 64px;
+  }
+}

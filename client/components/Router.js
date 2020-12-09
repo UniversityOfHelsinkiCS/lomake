@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
+import AboutPage from 'Components/AboutPage'
 import FormView from 'Components/FormView'
 import AdminPage from 'Components/UsersPage'
 import OverviewPage from 'Components/OverviewPage'
@@ -15,6 +16,7 @@ export default () => (
       <Route exact path="/admin" component={AdminPage} />
       <Route exact path="/report" component={ReportPage} />
       <Route exact path="/comparison" component={ComparisonPage} />
+      <Route exact path="/about" component={AboutPage} />
       <Route
         exact
         path="/form/:room"
