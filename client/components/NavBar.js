@@ -122,7 +122,7 @@ export default () => {
       </Menu.Menu>
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
-        <Menu.Item as={Link} to="/about">
+        <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)'}} as={Link} to="/about">
           {translations['about'][lang]}
         </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
