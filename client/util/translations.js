@@ -12,8 +12,8 @@ export const aboutPageTranslations = {
   },
   whatIsItReply: {
     fi: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
-    en: 'The form is meant to be the basis of the self-assessment discussion done by the management groups of each study programme. The Form is also used to document these disscussions.',
-    se: 'The form is meant to be the basis of the self-assessment discussion done by the management groups of each study programme. The Form is also used to document these disscussions.',
+    en: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    se: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
   },
   howShouldItBeFilled: {
     fi: 'Miten tilannekuvalomake täytetään?',
@@ -23,18 +23,18 @@ export const aboutPageTranslations = {
   howShouldItBeFilledReply: {
     fi: ` 
     Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
-    Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja  erillinen toimenpidelista tiedekunnan suunnitelmia varten.
-    Kustakin aihealueesta annetaan yleisarvio (liikennevalot) ”Missä mennään?” Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
+    Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja erillinen toimenpidelista tiedekunnan suunnitelmia varten.
+    Kustakin aihealueesta annetaan yleisarvio (liikennevalot). ”Missä mennään?” -liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
     en: `
-    The questions within each section is meant to arouse discussion around that topic. Each programme is suppose to jolt down the main points of the conversation on the Form. 
-    Additionally a separate list of measures is created for the programme itself, as well as reagrding the measures for the faculty-wide planning.
-    Along with the written answers, the programmes give a general assessment of the situation via the colored smileys / traffic lights. They are supposed to answer the question "Where are we now?" in relation
-    to the subject at hand. The color answers are meant only as a conversation starter. No judgements or conclusions are drawn about the quality of the actions of the programme based on them. `,
+    The questions are meant to arouse discussion around the respective topic, and each programme is suppose to write down the main points of that conversation. 
+    Additionally, a separate list of measures is created for the programme itself, and another list regarding the measures for the faculty-wide planning.
+    The programmes give also a general assessment of the situation via the colored smileys / traffic lights. These color answers are supposed to answer the question "Where are we now?" in relation
+    to the subject at hand. The color answers are meant only as a conversation starter, thus no judgements or conclusions are drawn about the quality of the programme based on them. `,
     se: `
-    The questions within each section is meant to arouse discussion around that topic. Each programme is suppose to jolt down the main points of the conversation on the Form. 
-    Additionally a separate list of measures is created for the programme itself, as well as reagrding the measures for the faculty-wide planning.
-    Along with the written answers, the programmes give a general assessment of the situation via the colored smileys / traffic lights. They are supposed to answer the question "Where are we now?" in relation
-    to the subject at hand. The color answers are meant only as a conversation starter. No judgements or conclusions are drawn about the quality of the actions of the programme based on them. `
+    The questions are meant to arouse discussion around the respective topic, and each programme is suppose to write down the main points of that conversation. 
+    Additionally, a separate list of measures is created for the programme itself, and another list regarding the measures for the faculty-wide planning.
+    The programmes give also a general assessment of the situation via the colored smileys / traffic lights. These color answers are supposed to answer the question "Where are we now?" in relation
+    to the subject at hand. The color answers are meant only as a conversation starter, thus no judgements or conclusions are drawn about the quality of the programme based on them. `,
   },
   whatElseIsThere: {
     fi: 'Mitä muuta lomakkeella voi tehdä?',
@@ -43,8 +43,8 @@ export const aboutPageTranslations = {
   },
   whatElseIsThereReply: {
     fi: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
-    en: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can compare your information with the other programmes' information.",
-    se: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can compare your information with the other programmes' information.",
+    en: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
+    se: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
   },
   contactInfo: {
     fi: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
