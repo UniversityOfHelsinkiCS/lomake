@@ -2,6 +2,8 @@
  * Insert application wide common items here
  */
 
+const _ = require('lodash')
+
 const inProduction = process.env.NODE_ENV === 'production'
 
 const basePath = process.env.BASE_PATH || '/'
