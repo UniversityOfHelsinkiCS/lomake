@@ -713,6 +713,16 @@ export const genericTranslations = {
     en: 'Back to edit view',
     se: 'Återgå till redigeringsläge',
   },
+  reportPage: {
+    fi: 'Tilannekuvalomakkeen vastaukset',
+    en: 'Answers to the Form',
+    se: 'Answers to the Form',
+  },
+  pdfExportText: {
+    fi: 'Tilannekuvalomakkeen_vastaukset',
+    en: 'Answers_to_the_self-assessment_form',
+    se: 'Answers_to_the_self-assessment_form',
+  },
   // Generic/ProgrammeFilter.js
   programmeFilter: {
     en: 'Search for specific programmes',
