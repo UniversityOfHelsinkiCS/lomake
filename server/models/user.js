@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
       access: DataTypes.JSONB,
+      wideReadAccess: DataTypes.BOOLEAN,
     },
     {
       underscored: true,
