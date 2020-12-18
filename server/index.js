@@ -9,6 +9,7 @@ const {
 } = require('@middleware/requestLoggerMiddleware')
 const userMiddleware = require('@middleware/userMiddleware')
 const currentUserMiddleware = require('@middleware/currentUserMiddleware')
+const IAMmiddleware = require("@middleware/IAMmiddleware")
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(express.json({ limit: '50mb' }))
 app.use(inProduction ? productionRequestLogger : developmentRequestLogger)
 app.use(shibbolethCharsetMiddleware)
 app.use(userMiddleware)
+app.use(IAMmiddleware)
 app.use(currentUserMiddleware)
 
 app.use(routes)
