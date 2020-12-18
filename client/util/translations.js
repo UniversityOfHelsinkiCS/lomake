@@ -1,4 +1,3 @@
-
 export const aboutPageTranslations = {
   title: {
     fi: 'Tietoa lomakkeesta',
@@ -11,9 +10,12 @@ export const aboutPageTranslations = {
     se: 'What is the self-assessment form?',
   },
   whatIsItReply: {
-    fi: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
-    en: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
-    se: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    fi:
+      'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
+    en:
+      'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    se:
+      'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
   },
   howShouldItBeFilled: {
     fi: 'Miten tilannekuvalomake täytetään?',
@@ -42,9 +44,12 @@ export const aboutPageTranslations = {
     se: 'What else can I do with the form?',
   },
   whatElseIsThereReply: {
-    fi: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
-    en: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
-    se: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
+    fi:
+      'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
+    en:
+      "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
+    se:
+      "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
   },
   contactInfo: {
     fi: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
@@ -54,8 +59,8 @@ export const aboutPageTranslations = {
   broughtToYouBy: {
     fi: 'Toteutus:',
     en: 'Brought to you by:',
-    se: 'Brought to you by:'
-  }
+    se: 'Brought to you by:',
+  },
 }
 
 export const comparisonPageTranslations = {
@@ -83,7 +88,7 @@ export const comparisonPageTranslations = {
   downloadPDF: {
     fi: 'Lataa PDF:nä',
     en: 'Download as a PDF',
-    se: 'Download as a PDF'
+    se: 'Download as a PDF',
   },
   // ComparisonPage/index.js
   comparisonPage: {
@@ -324,7 +329,7 @@ export const comparisonPageTranslations = {
     fi: 'kaikki',
     en: 'all',
     se: 'all',
-  }
+  },
 }
 
 export const claimAccessTranslations = {
@@ -494,7 +499,7 @@ export const formViewTranslations = {
 
 export const genericTranslations = {
   // Generic/ColorLegend.js
-    positive: {
+  positive: {
     en: 'No issues',
     fi: 'Kunnossa',
     se: 'I sin ordning',
@@ -734,7 +739,7 @@ export const genericTranslations = {
     en: 'Search for study programmes',
     se: 'Filtrera',
   },
-  // Generic/ProgrammeList.js 
+  // Generic/ProgrammeList.js
   nowShowing: {
     fi: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
     en: 'NOW SHOWING THE ANSWERS OF',
@@ -771,7 +776,7 @@ export const genericTranslations = {
     fi: 'Valitse vuodet',
     en: 'Year(s)',
     se: 'Year(s)',
-  }
+  },
 }
 
 export const overviewPageTranslations = {
@@ -1102,7 +1107,7 @@ export const reportPageTranslations = {
     fi: 'kaikki',
     en: 'all',
     se: 'all',
-  }
+  },
 }
 
 export const usersPageTranslations = {
@@ -1247,6 +1252,36 @@ export const usersPageTranslations = {
     en: 'Admin',
     fi: 'Admin',
     se: 'Admin',
+  },
+  accessBasic: {
+    en: 'Basic user',
+    fi: 'Peruskäyttäjä',
+    se: 'Basic user',
+  },
+  accessWideRead: {
+    en: 'Wide read access',
+    fi: 'Laajat lukuoikeudet',
+    se: 'Wide read access',
+  },
+  accessAdmin: {
+    en: 'Admin',
+    fi: 'Ylläpitäjä',
+    se: 'Admin',
+  },
+  makeAdminPrompt: {
+    en: 'Make the user an administrator?',
+    fi: 'Tee käyttäjästä ylläpitäjä?',
+    se: 'Make the user an administrator?',
+  },
+  makeBasicPrompt: {
+    en: 'Make the user a basic user?',
+    fi: 'Tehdäänkö käyttäjästä peruskäyttäjä?',
+    se: 'Make the user a basic user?',
+  },
+  userGroup: {
+    en: 'User group',
+    fi: 'Käyttäjäryhmä',
+    se: 'User group',
   },
   hide: {
     en: 'Hide',

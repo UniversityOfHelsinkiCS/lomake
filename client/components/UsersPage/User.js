@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Grid, Icon, Popup } from 'semantic-ui-react'
+import { Button, Grid, Icon, Popup, Form, Radio } from 'semantic-ui-react'
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
@@ -11,7 +11,8 @@ export default ({ user, lang }) => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
   const grantAdmin = () => {
-    dispatch(editUserAction({ ...user, admin: true }))
+    // Removed wideReadAccess, because we dont want users to have two usergroups. (admin and wideReadAccess)
+    dispatch(editUserAction({ ...user, admin: true, wideReadAccess: false }))
   }
 
   const removeAdmin = () => {
@@ -23,44 +24,69 @@ export default ({ user, lang }) => {
     window.location.reload()
   }
 
-  const AdminBadge = () => {
-    return user.admin ? (
+  const CustomRadioWithConfirmTrigger = ({
+    checked,
+    label,
+    disabled,
+    confirmPrompt,
+    onConfirm,
+    dataCy,
+  }) => {
+    return (
       <Popup
         trigger={
-          <Icon
-            data-cy={`${user.uid}-is-admin`}
-            name="check"
-            className="users-green"
-            size="large"
+          <Radio
+            data-cy={dataCy}
+            disabled={disabled}
+            label={label}
+            name="radioGroup"
+            checked={checked}
           />
         }
         content={
           <Button
-            data-cy="remove-admin-confirm"
+            data-cy={`${dataCy}-confirm`}
+            disabled={disabled || checked}
             color="red"
-            content={translations.removeAdmin[lang]}
-            onClick={() => removeAdmin()}
+            content={
+              disabled ? 'Please use the IAM group for managing  wide read access' : confirmPrompt
+            }
+            onClick={onConfirm}
           />
         }
         on="click"
-        position="top center"
+        position="top left"
       />
-    ) : (
-      <Popup
-        trigger={
-          <Icon data-cy={`${user.uid}-not-admin`} name="close" className="users-red" size="large" />
-        }
-        content={
-          <Button
-            data-cy="grant-admin-confirm"
-            color="green"
-            content={translations.grantAdmin[lang]}
-            onClick={() => grantAdmin()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
+    )
+  }
+
+  const UserGroupSelector = () => {
+    return (
+      <Form style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <CustomRadioWithConfirmTrigger
+          label={translations.accessBasic[lang]}
+          checked={!user.wideReadAccess && !user.admin}
+          onConfirm={removeAdmin}
+          disabled={user.wideReadAccess}
+          confirmPrompt={translations.makeBasicPrompt[lang]}
+          dataCy="accessBasic"
+        />
+
+        <CustomRadioWithConfirmTrigger
+          label={translations.accessWideRead[lang]}
+          checked={user.wideReadAccess}
+          disabled={true}
+          dataCy="accessWideRead"
+        />
+
+        <CustomRadioWithConfirmTrigger
+          label={translations.accessAdmin[lang]}
+          checked={user.admin}
+          onConfirm={grantAdmin}
+          confirmPrompt={translations.makeAdminPrompt[lang]}
+          dataCy="accessAdmin"
+        />
+      </Form>
     )
   }
 
@@ -82,23 +108,26 @@ export default ({ user, lang }) => {
       </>
     )
   }
-  return (
-    <Grid.Row>
-      <Grid.Column width={3}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
-      <Grid.Column width={3}>{user.uid}</Grid.Column>
-      <Grid.Column width={3}>{user.email}</Grid.Column>
-      <Grid.Column width={4}>
-        <FormattedAccess />
-      </Grid.Column>
-      <Grid.Column width={2} textAlign="center">
-        <AdminBadge />
-      </Grid.Column>
 
-      {isSuperAdmin(currentUser.uid) && (
-        <Grid.Column>
-          <Icon onClick={logInAs} size="large" name="sign-in" />
+  return useMemo(
+    () => (
+      <Grid.Row>
+        <Grid.Column width={2}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
+        <Grid.Column width={3}>{user.uid}</Grid.Column>
+        <Grid.Column width={3}>{user.email}</Grid.Column>
+        <Grid.Column width={3}>
+          <FormattedAccess />
         </Grid.Column>
-      )}
-    </Grid.Row>
+        <Grid.Column width={4}>
+          <UserGroupSelector />
+        </Grid.Column>
+        {isSuperAdmin(currentUser.uid) && (
+          <Grid.Column>
+            <Icon onClick={logInAs} size="large" name="sign-in" />
+          </Grid.Column>
+        )}
+      </Grid.Row>
+    ),
+    [user]
   )
 }

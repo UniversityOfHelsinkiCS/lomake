@@ -89,7 +89,7 @@ export default () => {
             placeholder={translations.searchByName[lang]}
           />
         </Grid.Column>
-        <Grid.Column width={6} />
+        <Grid.Column width={5} />
         <Grid.Column width={4}>
           <Input
             value={accessFilter}
@@ -103,16 +103,16 @@ export default () => {
       </Grid>
       <Grid celled="internally">
         <Grid.Row>
-          <CustomHeader width={3} name={translations.name[lang]} field="lastname" />
+          <CustomHeader width={2} name={translations.name[lang]} field="lastname" />
           <CustomHeader width={3} name={translations.userId[lang]} field="uid" />
           <CustomHeader width={3} name={translations.email[lang]} field="email" />
           <CustomHeader
-            width={4}
+            width={3}
             name={translations.access[lang]}
             field="access"
             sortable={false}
           />
-          <CustomHeader width={2} name={translations.admin[lang]} field="admin" />
+          <CustomHeader width={4} name={translations.userGroup[lang]} field="userGroup" />
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
         {filteredUsers().map((u) => (

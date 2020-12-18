@@ -31,6 +31,11 @@ export const colors = {
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
 
+const getUserGroupSortValue = ({ admin, wideReadAccess }) => {
+  if (admin) return 2
+  if (wideReadAccess) return 1
+  return 0
+}
 
 
 export const sortedItems = (items, sorter, lang) => {
@@ -41,6 +46,14 @@ export const sortedItems = (items, sorter, lang) => {
       const aName = a.name[lang] ? a.name[lang] : a.name['en']
       const bName = b.name[lang] ? b.name[lang] : b.name['en']
       return aName.localeCompare(bName)
+    }
+    if (sorter == 'userGroup') {
+      const aval = getUserGroupSortValue(a)
+      const bval = getUserGroupSortValue(b)
+
+      if (aval > bval) return -1
+      if (bval < aval) return 1
+      return 0
     }
     if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
