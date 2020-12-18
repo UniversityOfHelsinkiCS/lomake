@@ -23,7 +23,7 @@ const getAllTemp = async (req, res) => {
 
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.admin) {
+    if (req.user.hasWideReadAccess) {
       const data = await db.tempAnswer.findAll({})
       return res.status(200).json(data)
     } else {
@@ -59,7 +59,7 @@ const getSingleTempAnswers = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.admin) {
+    if (req.user.hasWideReadAccess) {
       const data = await db.answer.findAll({})
       return res.status(200).json(data)
     } else {
