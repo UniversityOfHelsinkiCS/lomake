@@ -12,11 +12,11 @@ export default ({ user, lang }) => {
 
   const grantAdmin = () => {
     // Removed wideReadAccess, because we dont want users to have two usergroups. (admin and wideReadAccess)
-    dispatch(editUserAction({ ...user, admin: true, wideReadAccess: false }))
+    dispatch(editUserAction({ id: user.id, admin: true, wideReadAccess: false }))
   }
 
   const removeAdmin = () => {
-    dispatch(editUserAction({ ...user, admin: false }))
+    dispatch(editUserAction({ id: user.id, admin: false }))
   }
 
   const logInAs = () => {
