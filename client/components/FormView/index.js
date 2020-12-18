@@ -37,7 +37,7 @@ const FormView = ({ room }) => {
   const [showCsv, setShowCsv] = useState(false)
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
-  const userHasReadAccess = (user.access[room] && user.access[room].read) || user.admin
+  const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,

@@ -37,7 +37,7 @@ export default () => {
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return currentUser.data.admin
+    return currentUser.data.hasWideReadAccess
       ? programmes
       : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser.data])
@@ -50,7 +50,7 @@ export default () => {
   }, [usersProgrammes, lang, debouncedFilter])
 
   const moreThanFiveProgrammes = useMemo(() => {
-    if (currentUser.data.admin) return true
+    if (currentUser.data.hasWideReadAccess) return true
     if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])

@@ -68,7 +68,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="comparison-tab-pane">
-      <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
+      <Grid stackable doubling padded columns={user.hasWideReadAccess ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />
@@ -116,7 +116,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         stackable
         doubling
         relaxed
-        columns={user.admin ? 3 : 2}
+        columns={user.hasWideReadAccess ? 3 : 2}
       >
         <Grid.Column>
           {questionsList.map(
@@ -151,7 +151,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
               )
           )}
         </Grid.Column>
-        {user.admin && (
+        {user.hasWideReadAccess && (
           <Grid.Column>
             {questionsList.map(
               (question) =>
