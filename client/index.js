@@ -26,16 +26,12 @@ const refresh = () =>
 if (process.env.NODE_ENV === 'development') {
   const newUser = 'admin'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
-  if (currentFakeUser) {
-    const parsedFakeCurrentUser = JSON.parse(currentFakeUser)
-
-    if (
-      parsedFakeCurrentUser.uid !== 'cypressUser' &&
-      parsedFakeCurrentUser.uid !== 'cypressAdminUser'
-    ) {
-      setHeaders(newUser)
-    }
-  } else {
+  if (
+    !currentFakeUser ||
+    !['cypressUser', 'cypressAdminUser', 'cypressReadGroupMember'].includes(
+      JSON.parse(currentFakeUser).uid
+    )
+  ) {
     setHeaders(newUser)
   }
 }
