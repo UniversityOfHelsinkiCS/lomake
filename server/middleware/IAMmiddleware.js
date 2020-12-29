@@ -1,4 +1,4 @@
-const { inProduction } = require('@util/common')
+const { inProduction, requiredGroupForWideReadAccess } = require('@util/common')
 const logger = require('@util/logger')
 
 const parseHyGroups = (hyGroups) => {
@@ -9,14 +9,13 @@ const parseHyGroups = (hyGroups) => {
   return parsedHyGroups
 }
 
-const hasRequiredGroup = (hyGroups) => {
-  const requiredGroup = inProduction ? 'grp-lomake-production-read' : 'grp-lomake-staging-read'
-  return hyGroups.some((e) => e === requiredGroup)
+const hasRequiredGroupForWideReadAccess = (hyGroups) => {
+  return hyGroups.some((e) => e === requiredGroupForWideReadAccess)
 }
 
 const shouldHaveWideReadAccess = (headers) => {
   const hyGroups = parseHyGroups(headers['hygroupcn'])
-  return hasRequiredGroup(hyGroups)
+  return hasRequiredGroupForWideReadAccess(hyGroups)
 }
 
 const IAMmiddleware = async (req, res, next) => {

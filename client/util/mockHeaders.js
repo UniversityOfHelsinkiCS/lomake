@@ -17,7 +17,7 @@ export const possibleUsers = [
     mail: 'read-group-member@helsinki.fi',
     schacDateOfBirth: 19770501,
     schacPersonalUniqueCode: 'urn:schac:personalUniqueCode:int:studentID:helsinki.fi:0123456789',
-    hyGroupCn: 'grp-lomake-staging-read',
+    hyGroupCn: 'grp-lomake-testing-read',
     sn: 'readGroupMember',
   },
   {

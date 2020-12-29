@@ -5,6 +5,7 @@
 const _ = require('lodash')
 
 const inProduction = process.env.NODE_ENV === 'production'
+const requiredGroupForWideReadAccess = inProduction ? "grp-lomake-production-read" : "grp-lomake-testing-read"
 
 const basePath = process.env.BASE_PATH || '/'
 
@@ -93,4 +94,5 @@ module.exports = {
   isSuperAdmin,
   cypressUsers,
   testProgrammeName,
+  requiredGroupForWideReadAccess
 }
