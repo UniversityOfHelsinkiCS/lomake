@@ -1,16 +1,24 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
+import { removeLoggedInUsersGroups } from '../../client/util/mockHeaders'
+
 const user = 'cypressReadGroupMember'
 
 describe('IAM permission tests', function () {
-  this.beforeEach(function () {
+  beforeEach(() => {
     cy.login(user)
   })
 
-  it('Automatically gets read permissions for all studyprogrammes', function () {
+  it('Permission is granted and revoked automatically based on IAM group', function () {
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 129)
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 129)
+      .then(() => {
+        removeLoggedInUsersGroups()
+        cy.reload()
+        cy.get('[data-cy=no-permissions-message]')
+      })
   })
 
   it('Report works', function () {
@@ -25,7 +33,6 @@ describe('IAM permission tests', function () {
 
   it('Comparison works', function () {
     cy.request('/api/cypress/createAnswers')
-    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 

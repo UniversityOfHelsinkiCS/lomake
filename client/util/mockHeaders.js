@@ -35,6 +35,18 @@ export const setHeaders = (uid) => {
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))
 }
 
+export const removeLoggedInUsersGroups = () => {
+  const user = JSON.parse(localStorage.getItem(ITEM_NAME))
+
+  localStorage.setItem(
+    ITEM_NAME,
+    JSON.stringify({
+      ...user,
+      hyGroupCn: '',
+    })
+  )
+}
+
 export const getHeaders = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
   return user
