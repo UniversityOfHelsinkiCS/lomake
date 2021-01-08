@@ -12,17 +12,13 @@ describe("Previous year's answers", function () {
   })
 
   it('If no answers for previousyears, cant change year', function () {
-    cy.get('[data-cy=yearSelector]').should(
-      'have.class',
-      'disabled'
-    )
+    cy.get('[data-cy=yearSelector]').should('have.class', 'disabled')
   })
 
   it("Can switch which year's answers to see in OverViewPage", function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
     cy.get('[data-cy=yearSelector]').click()
-
 
     cy.get('[data-cy=yearSelector]').contains(2019).click()
     cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').should(
@@ -68,7 +64,7 @@ describe("Previous year's answers", function () {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains('Hello from 2018')
 
     cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(new Date().getFullYear()).click() // select current year
 
     cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'koira')
 
