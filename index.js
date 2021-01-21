@@ -13,6 +13,7 @@ const { initializeDatabaseConnection } = require('@root/server/database/connecti
 const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
+const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 
 
 initializeDatabaseConnection()
@@ -22,6 +23,9 @@ initializeDatabaseConnection()
       switch (process.argv[2]) {
         case 'seed':
           seed()
+          return
+        case 'generateMissingTokens':
+          generateMissingTokens()
           return
         default:
           return
