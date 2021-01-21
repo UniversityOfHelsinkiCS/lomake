@@ -10,6 +10,7 @@ services:
       - ./:/usr/src/app
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+      - AUTOMATIC_IAM_PERMISSIONS_ENABLED=true
     ports:
       - 8000:8000
     container_name: lomake_dev
