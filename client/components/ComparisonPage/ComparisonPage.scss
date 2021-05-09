@@ -124,6 +124,7 @@
     float: right;
     top: 75%;
     width: 425px;
+    max-height: 600px;
     z-index: 5;
     padding: 6px 10px;
     border-radius: 2px;
@@ -139,7 +140,10 @@
     -ms-transform: all 0.3s;
     -o-transform: all 0.3s;
     transform: all 0.3s;
-    pointer-events: none;
+    overflow-y: auto;
+  }
+  &-pie-tip-close {
+    float: right;
   }
 }
 
