@@ -71,7 +71,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger(
-      'mouseover',
+      'click',
       200,
       200
     )
