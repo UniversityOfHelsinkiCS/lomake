@@ -575,9 +575,9 @@
           "en": "IN WHAT AREAS HAS THE DEGREE PROGRAMME SUCCEEDED PARTICULARLY WELL?"
         },
         "description": {
-          "fi": "Käykää läpi kirjaamanne pääkohdat ja pohtikaa, mitkä asiat ovat ohjelman toiminnassa onnistuneet erityisen hienosti. Kirjatkaa onnistumiset. Pohtikaa, mitä kehittämistä vaativia asioita olette havainneet ja mitä toimenpiteitä ne edellyttävät. Valitkaa 3-5 tärkeintä toimenpidettä ja kirjatkaa ne tiedekunnan toimenpidesuunnitelmaa varten. Kirjatkaa samalla kunkin toimenpiteen resurssitarpeet.",
-          "se": "Gå igenom de centrala punkter som ni har antecknat och fundera över vad som har varit speciellt lyckat i utbildningsprogrammets verksamhet. Anteckna framgångarna. Fundera över de saker ni har observerat att behöver utvecklas och vilka åtgärder som krävs. Välj ut de 3–5 viktigaste åtgärderna och anteckna dem för fakultetens genomförandeplan. Anteckna också de resurser som varje åtgärd kräver.",
-          "en": "Please review the main points you have recorded, trying to pinpoint areas where the programme has succeeded particularly well, and write them down. Please also consider the development needs you have identified and the measures required. You should select the three to five most important measures and record them for the purpose of the faculty’s implementation plan together with the resources required for each measure."
+          "fi": "Käykää läpi kirjaamanne pääkohdat ja pohtikaa, mitkä asiat ovat ohjelman toiminnassa onnistuneet erityisen hienosti. Kirjatkaa onnistumiset.",
+          "se": "Gå igenom de centrala punkter som ni har antecknat och fundera över vad som har varit speciellt lyckat i utbildningsprogrammets verksamhet. Anteckna framgångarna.",
+          "en": "Please review the main points you have recorded, trying to pinpoint areas where the programme has succeeded particularly well, and write them down."
         },
         "required": true,
         "no_color": true,
