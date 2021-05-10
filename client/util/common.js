@@ -82,6 +82,7 @@ export const modifiedQuestions = (questions, lang) => {
             titleIndex: titleIndex,
             labelIndex: part.index,
             no_color: part.no_color,
+            extrainfo: part.extrainfo ? part.extrainfo[lang] : ''
           },
         ]
       }

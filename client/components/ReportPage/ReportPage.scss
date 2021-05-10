@@ -169,6 +169,11 @@
       background-color: $gray !important;
     }
   }
+  &-extrainfo {
+    color: $gray;
+    font-weight: 300;
+    font-style: italic;
+  }
 }
 
 @mixin answer-circle-basics {

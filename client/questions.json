@@ -20,7 +20,12 @@
           "se": "",
           "en": "Are the items on the list of measures visible in the implementation and/or HR plans? Which items have been achieved? Which have been put back? What will be done differently this time around?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -51,7 +56,12 @@
           "se": "Hurdant söktryck har programmet? Finns det tillräckligt många sökande? Är antalet nybörjarplatser lämpligt? Är de sökande lämpliga för programmet? Är programmets marknadsföring lyckad? Hur fungerar studentantagningen? Hur många internationella studenter är det meningen att rekrytera till programmet? Vilken är deras andel av det totala antalet nya studenter?",
           "en": "Is the number of places available to new students in the programme suitable? Is the number of applicants sufficient and are the applicants suitable for the programme? How well do the admissions procedures function? What is the ratio of international students to the total number of students? How many students who have completed a lower-level degree at the University of Helsinki continue in the programme, and how many students are recruited from other Finnish institutions of higher education? In the case of a doctoral programme, how well do student admissions (procedure for granting the right to complete a degree) and the allocation of salaried doctoral student positions function?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "language_environment",
@@ -67,7 +77,12 @@
           "se": "Har det uppstått en engelskspråkig studiemiljö i utbildningsprogrammet? Har man lyckats med att erbjuda undervisning, handledning och studentservice på engelska? Hur bedömer ni att utbildningsprogrammet profilerar sig på den internationella utbildningsmarknaden?",
           "en": "How successfully have teaching, guidance, supervision and student services been provided in various languages (Finnish, Swedish and English)? In the case of an English-language or multilingual degree programme, has the programme created a language environment that is suitable for everyone? In the case of a multilingual degree programme, does the programme function well from the perspective of the various languages (Finnish, Swedish and English)? Do international students have the opportunity to study the national languages of Finland (Finnish and Swedish)?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "programme_identity",
@@ -83,7 +98,12 @@
           "se": "Har utbildningen en tydlig profil och identitet som erkänns av lärarna, handledare samt doktorander? Hur skiljer sig programprofilen från andra utbildningsprogram inom samma område och nivå?",
           "en": "Does the degree programme have a clear profile and identity recognised by its teachers, those providing guidance and supervision as well as (doctoral) students? How does the programme profile stand out from other degree programmes in the same field and of the same level?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "employability",
@@ -99,7 +119,12 @@
           "se": "Hur följer utbildningsprogrammet sysselsättningsläget inom branschen och den inhemska och internationella efterfrågan på den kompetens som utbildningsprogrammet ger? Vilken är utbildningsprogrammets bedömning av läget? Hur stöder programmet studenternas karriärplanering och utveckling av arbetslivskontakter?",
           "en": "How are the results of national career tracking used in the programme? In what other ways does the programme steering group monitor relevant employment figures and the demand for the expertise it provides in the (Finnish and international) job market? How does the programme support students in career planning and the establishment of employer connections? How does the programme take the special employment needs and challenges of international students into account?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "learning_outcomes",
@@ -115,7 +140,12 @@
           "se": "Är utbildningsprogrammets kunskapsmål realistiska? Når studenterna målen? Är kunskapsmålen lämpligt preciserade? Hur borde kunskapsmålen utvecklas?",
           "en": "Are the learning outcomes set for the degree programme clear and realistic? How should the learning outcomes be developed?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "curriculum",
@@ -131,7 +161,12 @@
           "se": "Är undervisningsutbudet tillräckligt och ändamålsenligt? På vilket sätt säkerställer man i undervisningsplanen och undervisningsprogrammet att studenterna kan slutföra och slutför utbildningsprogrammet inom den målsatta tiden?",
           "en": "How do the curriculum and the teaching programme ensure that all students can and do complete the degree programme within the target duration? Does the programme offer sufficient and appropriate teaching? Does the programme offer sufficient teaching in various languages (Finnish, Swedish and English)? How does Swedish-language education function, particularly if the programme offers applicants a Swedish-language option?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "guidance",
@@ -147,7 +182,12 @@
           "se": "Hur har studiehandledningen fungerat? Hur borde utbildningsprogrammets studiehandledning utvecklas? Hur fungerar handledningen av examensarbeten (kandidat-, magister- och doktorsavhandlingar)?",
           "en": "How does the programme offer guidance and supervision associated with personal study plans and other studies, and how have such guidance and supervision functioned? How should the guidance and supervision be developed? How does the supervision of theses and dissertations function?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "student_feedback",
@@ -163,7 +203,12 @@
           "se": "Hur fungerar användningen av respons? Hur har responsen som insamlats på olika sätt behandlats vid utbildningsprogrammet? Av vem har responsen behandlats? Vilka ändringar har responsen gett upphov till?",
           "en": "What types of feedback does the programme use and how? How has the feedback collected been processed in the degree programme? Who has participated in processing the feedback? What changes have been made based on the feedback?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "meta1",
@@ -184,7 +229,12 @@
           "en": "What other information did you use?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "overall_status_information_needed",
@@ -196,7 +246,12 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -221,7 +276,12 @@
           "se": "Hur följs lärarnas och studenternas välbefinnande? Har det gjorts en bedömning av hur betungande undervisningen och studierna är? Vilka åtgärder har vidtagits?",
           "en": "How is the wellbeing of teachers and students monitored? Has the workload of teachers and students been assessed? What measures have been taken?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "teacher_skills",
@@ -237,7 +297,12 @@
           "se": "Utnyttjas lärarnas kompetens och styrkor till fullo vid utbildningsprogrammet? Uppmuntras lärarna till att utveckla sina undervisningsfärdigheter? Är programmets lärare i behov av språkligt stöd och stöd för mångkulturell pedagogik?",
           "en": "Are the skills and strengths of the degree programme teachers known and used? Are the teachers encouraged to enhance their teaching skills? Do the teachers need support for multilingual and multicultural education or digital skills?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "management",
@@ -253,7 +318,12 @@
           "se": "Hur har ledningsgruppens verksamhet fungerat? Vilka utmaningar har framkommit i fråga om ledningsgruppens verksamhet och ledningen av programmet? Hur fungerar den interna informationsgången mellan utbildningsprogrammets lärare, studenter och ledning (ledaren och ledningsgruppen)? Informationsgången till fakulteten? Vilka utvecklingsåtgärder har vidtagits?",
           "en": "Has the steering group worked successfully? What challenges have been identified in the steering group’s work and management? How does internal information distribution/communication/interaction function between the programme teachers, students and leadership (director and steering group)? What development measures have been taken?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "meta2",
@@ -274,7 +344,12 @@
           "en": "What other information and sources of information did you use?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "wellbeing_information_needed",
@@ -286,7 +361,12 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -311,7 +391,12 @@
           "se": "Har utbildningsprogrammets undervisning och handledningsresurser varit tillräckliga? Hur har förhandlingarna mellan utbildningsprogrammet och fakulteten/avdelningen om lärarnas arbetsinsats gått? Vilka utvecklingsbehov anser ni att finns?",
           "en": "Have the teaching, guidance and supervision resources of the degree programme been sufficient? How successfully have the degree programme and the faculty/department negotiated on the contributions of teachers? Have changes been made to the teaching resources to such a degree that they have affected the programme operations? What areas should be developed?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "recruitment_influence",
@@ -327,7 +412,12 @@
           "se": "På vilket sätt har utbildningsprogrammet kunnat påverka rekryteringen av ny personal? Vad behöver utvecklas i det?",
           "en": "How has the degree programme been able to influence the recruitment of new staff? What areas should be developed?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "resourcing",
@@ -343,7 +433,12 @@
           "se": "Hur fungerar utbildningsprogrammets resurser för lokaler, utrustning och studiemiljöer?",
           "en": "How would you describe the degree programme resources relating to facilities, equipment and learning environments?"
         },
-        "required": true
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "meta3",
@@ -364,7 +459,12 @@
           "en": "What other information and sources of information did you use?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "sufficient_resources_information_needed",
@@ -376,7 +476,12 @@
           "en": "What information would you need?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -401,7 +506,12 @@
           "se": "Hur har samarbetet gått? Vilka är de främsta meriterna och utmaningarna i fråga om fakultetsöverskridande verksamhet?",
           "en": "How successfully have the partners cooperated? What are the major merits and challenges of cross-faculty operations?"
         },
-        "required": false
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "meta4",
@@ -422,7 +532,12 @@
           "en": "What information and sources of information did you use?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "joint_programme_information_needed",
@@ -434,7 +549,12 @@
           "en": "What information would you have needed?"
         },
         "required": false,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -460,7 +580,12 @@
           "en": "Please review the main points you have recorded, trying to pinpoint areas where the programme has succeeded particularly well, and write them down. Please also consider the development needs you have identified and the measures required. You should select the three to five most important measures and record them for the purpose of the faculty’s implementation plan together with the resources required for each measure."
         },
         "required": true,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -486,7 +611,12 @@
           "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
         },
         "required": true,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       },
       {
         "id": "measures_faculty",
@@ -503,7 +633,12 @@
           "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
         },
         "required": true,
-        "no_color": true
+        "no_color": true,
+        "extrainfo": {
+          "fi": "(Kysymys on lisätty vuonna 2021)",
+          "se": "(Question has been added on 2021)",
+          "en": "(Question has been added on 2021)"
+        }
       }
     ]
   },
@@ -528,7 +663,12 @@
           "se": "Hur gick ledningsgruppens diskussion om lägesbeskrivningen? Hur lång tid tog diskussionen och anteckningarna om lägesbeskrivningen? Vad var det bästa? Vad behöver utvecklas ytterligare?",
           "en": "How did the steering group’s discussion on the current status of the degree programme go? How long did it take to complete the discussion and record the current status of the degree programme? What went well? What requires further development?"
         },
-        "required": false
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   }

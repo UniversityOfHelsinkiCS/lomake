@@ -55,6 +55,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
               {question.labelIndex}. {(question.label).toUpperCase()}
             </p>
             <p className="question-description">{question.description}</p>
+            <p className="question-extrainfo">{question.extrainfo}</p>
           </Grid.Column>
           <Grid.Column width={4} floated="right">
             <Label
