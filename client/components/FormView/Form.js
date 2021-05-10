@@ -57,6 +57,7 @@ const Form = ({ questions, programmeKey }) => {
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
+    const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -66,6 +67,7 @@ const Form = ({ questions, programmeKey }) => {
           required={part.required}
           noColor={part.no_color}
           number={number}
+          extrainfo={extrainfo}
           previousYearsAnswers={
             previousYearsAnswers.data && previousYearsAnswers.data.data
               ? previousYearsAnswers.data.data

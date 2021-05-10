@@ -74,6 +74,11 @@ html {
   }
 }
 
+.form-question-extrainfo {
+  font-style: italic;
+  font-weight: 300;  
+}
+
 blockquote {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -136,7 +141,6 @@ label {
   .measures-label {
     visibility: hidden;
   }
-
   // These are required for firefox:
   // https://stackoverflow.com/questions/43492724/firefox-prints-first-page-only-but-other-browsers-doing-fine/43494490
   .content {

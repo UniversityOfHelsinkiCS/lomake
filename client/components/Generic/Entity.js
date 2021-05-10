@@ -23,7 +23,7 @@ const mapColorToImage = {
   red: negativeEmoji,
 }
 
-const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers }) => {
+const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
   const lang = useSelector((state) => state.language)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -70,6 +70,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         }}
       >
         {description}
+        <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
 
       <Textarea

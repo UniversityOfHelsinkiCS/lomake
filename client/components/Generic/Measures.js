@@ -6,7 +6,7 @@ import SimpleTextarea from './SimpleTextarea'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 
-const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
+const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo }) => {
   const formData = useSelector((state) => state.form.data)
   const lang = useSelector((state) => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -64,6 +64,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers }) => {
         }}
       >
         {translations.measureLabel[lang]}
+        <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>
