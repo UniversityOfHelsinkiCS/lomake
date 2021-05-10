@@ -94,7 +94,7 @@ const ColorTableCell = ({
           })
         }
       >
-        {questionId === 'measures' ? (
+        {questionId === 'measures' || questionId === 'measures_faculty' ? (
           <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{getMeasuresCount()}</span>
         ) : (
           <Icon name="discussions" size="large" />

@@ -249,8 +249,8 @@ export const cleanText = (string) => {
   return cleanedText
 }
 
-export const getMeasuresAnswer = (data) => {
-  const questionId = 'measures'
+export const getMeasuresAnswer = (data, rawId) => {
+  const questionId = rawId.substring(0, rawId.length - 5)
   if (!data) return ''
   if (!!data[`${questionId}_text`]) return data[`${id}_text`]
 

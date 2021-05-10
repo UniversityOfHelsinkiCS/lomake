@@ -73,8 +73,8 @@ const CsvDownload = ({ wantedData, view, programme }) => {
     }
 
     // written answers for the "Measures"-question
-    const getMeasuresAnswer = (data) => {
-      const questionId = 'measures'
+    const getMeasuresAnswer = (data, id) => {
+      const questionId = id
       if (!data) return ''
       if (!!data[`${questionId}_text`]) return data[`${id}_text`]
   
@@ -103,7 +103,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
           const cleanedText = cleanText(questionText)
             validValues = [...validValues, cleanedText]
           }
-        if (questionId === 'measures') validValues = [...validValues, getMeasuresAnswer(rawData)]
+        if (questionId.startsWith('measures')) validValues = [...validValues, getMeasuresAnswer(rawData, questionId)]
         return validValues.join('\n')
       })
 

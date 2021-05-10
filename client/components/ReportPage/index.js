@@ -74,7 +74,7 @@ export default () => {
           let color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
           let answer = ''
-          if (question.id === 'measures_text') answer = getMeasuresAnswer(data)
+          if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
           else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
           answersByProgramme = [
