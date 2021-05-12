@@ -591,7 +591,7 @@
   },
   {
     "title": {
-      "fi": "TOIMENPIDELISTA",
+      "fi": "TOIMENPITEET",
       "se": "ÅTGÄRDER",
       "en": "LIST OF MEASURES"
     },
@@ -601,21 +601,21 @@
         "index": 17,
         "type": "MEASURES",
         "label": {
-          "fi": "TOIMENPITEET JA NIIDEN VAATIMAT RESURSSIT KOULUTUSOHJELMAN TOIMENPIDESUUNNITELMAA JA HENKILÖSTÖSUUNNITELMAA VARTEN",
-          "se": "ÅTGÄRDER OCH NÖDVÄNDIGA RESURSER SOM FÖRESLÅS INGÅ I FAKULTETENS GENOMFÖRANDEPLAN OCH PERSONALPLAN",
-          "en": "MEASURES AND THE REQUIRED RESOURCES FOR THE FACULTY’S IMPLEMENTATION PLAN AND HR PLAN"
+          "fi": "KOULUTUSOHJELMALLE",
+          "se": "UTBILDNINGSPROGRAMMETS",
+          "en": "FOR THE STUDYPROGRAMME"
         },
         "description": {
-          "fi": "Toimenpiteet ja niiden vaatimat resurssit tiedekunnan toimenpidesuunnitelmaa ja henkilöstösuunnitelmaa varten",
-          "se": "Åtgärder och nödvändiga resurser som föreslås ingå i fakultetens genomförandeplan och personalplan",
-          "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
+          "fi": "Koulutusohjelman toimenpiteet ja niiden vaatimat resurssit",
+          "se": "Utbildningsprogrammets åtgärder och nödvändiga resurser",
+          "en": "Studyprogramme's measures and the required resources"
         },
         "required": true,
         "no_color": true,
         "extrainfo": {
-          "fi": "",
+          "fi": "Kysymys on jaettu koulutusohjelman ja tiedekunnan osuuteen vuonna 2021",
           "se": "",
-          "en": ""
+          "en": "This question has been divided into two separate sections in 2021. One section for the studyprogramme and one section for the faculty."
         }
       },
       {
@@ -623,21 +623,21 @@
         "index": 18,
         "type": "MEASURES",
         "label": {
-          "fi": "TOIMENPITEET JA NIIDEN VAATIMAT RESURSSIT TIEDEKUNNAN TOIMENPIDESUUNNITELMAA JA HENKILÖSTÖSUUNNITELMAA VARTEN",
-          "se": "ÅTGÄRDER OCH NÖDVÄNDIGA RESURSER SOM FÖRESLÅS INGÅ I FAKULTETENS GENOMFÖRANDEPLAN OCH PERSONALPLAN",
-          "en": "MEASURES AND THE REQUIRED RESOURCES FOR THE FACULTY’S IMPLEMENTATION PLAN AND HR PLAN"
+          "fi": "TIEDEKUNNALLE",
+          "se": "FAKULTETENS",
+          "en": "FOR THE FACULTY"
         },
         "description": {
-          "fi": "Toimenpiteet ja niiden vaatimat resurssit tiedekunnan toimenpidesuunnitelmaa ja henkilöstösuunnitelmaa varten",
-          "se": "Åtgärder och nödvändiga resurser som föreslås ingå i fakultetens genomförandeplan och personalplan",
-          "en": "Measures and the required resources for the faculty’s implementation plan and HR plan"
+          "fi": "Tiedekunnan toimenpiteet ja niiden vaatimat resurssit",
+          "se": "Utbildningsprogrammets åtgärder och nödvändiga resurser",
+          "en": "Faculty's measures and the required resources"
         },
         "required": true,
         "no_color": true,
         "extrainfo": {
-          "fi": "(Kysymys on lisätty vuonna 2021)",
-          "se": "(Question has been added on 2021)",
-          "en": "(Question has been added on 2021)"
+          "fi": "Kysymys on lisätty vuonna 2021",
+          "se": "",
+          "en": "Question has been added in 2021"
         }
       }
     ]
