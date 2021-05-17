@@ -156,9 +156,9 @@ const editUserAccess = async (req, res) => {
 
 const getUserOrganizations = async (req, res) => {
   try {
-    const user = req.user
+    const params = req.params
 
-    const userInfo = await db.user.findOne({ where: { uid: user.uid } })
+    const userInfo = await db.user.findOne({ where: { uid: params.username } })
 
     res.send(userInfo.access)
   } catch (e) {
