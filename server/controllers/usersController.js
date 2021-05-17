@@ -154,6 +154,18 @@ const editUserAccess = async (req, res) => {
   }
 }
 
+const getUserOrganizations = async (req, res) => {
+  try {
+    const user = req.user
+
+    const userInfo = await db.user.findOne({ where: { uid: user.uid } })
+
+    res.send(userInfo.access)
+  } catch (e) {
+    res.status(500).json({ error: 'Database error ' })
+  }
+}
+
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
@@ -161,4 +173,5 @@ module.exports = {
   editUser,
   getProgrammesUsers,
   editUserAccess,
+  getUserOrganizations,
 }
