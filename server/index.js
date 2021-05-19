@@ -1,5 +1,6 @@
 const express = require('express')
 const routes = require('@util/routes')
+const externalRouter = require('@util/externalRoutes')
 const { inProduction, AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const logger = require('@util/logger')
 
@@ -11,13 +12,16 @@ const {
 } = require('@middleware/requestLoggerMiddleware')
 const userMiddleware = require('@middleware/userMiddleware')
 const currentUserMiddleware = require('@middleware/currentUserMiddleware')
-const IAMmiddleware = require("@middleware/IAMmiddleware")
+const IAMmiddleware = require('@middleware/IAMmiddleware')
 
 const app = express()
 
 app.use(express.json({ limit: '50mb' }))
 
 app.use(inProduction ? productionRequestLogger : developmentRequestLogger)
+
+app.use('/external', externalRouter)
+
 app.use(shibbolethCharsetMiddleware)
 app.use(userMiddleware)
 
