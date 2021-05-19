@@ -20,7 +20,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use(inProduction ? productionRequestLogger : developmentRequestLogger)
 
-app.use(externalRouter)
+app.use('/external', externalRouter)
 
 app.use(shibbolethCharsetMiddleware)
 app.use(userMiddleware)
