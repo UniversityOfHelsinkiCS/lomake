@@ -160,7 +160,11 @@ const getUserOrganizations = async (req, res) => {
 
     const userInfo = await db.user.findOne({ where: { uid: params.username } })
 
-    res.send(userInfo.access)
+    if (!userInfo) {
+      res.send({})
+    } else {
+      res.send(userInfo.access)
+    }
   } catch (e) {
     res.status(500).json({ error: 'Database error ' })
   }
