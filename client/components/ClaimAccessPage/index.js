@@ -29,7 +29,7 @@ export default ({ url }) => {
       if (token.data.programme) {
         const program = studyProgrammes.find((p) => p.key === token.data.programme)
 
-        const temp = program['name'][lang] ? program['name'][lang] : program['name']['en']
+        const temp = program['name'][lang]
 
         setLocalizedProgramname(temp)
       } else {

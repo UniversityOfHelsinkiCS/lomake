@@ -116,8 +116,6 @@ const FormView = ({ room }) => {
 
   if (!userHasReadAccess && !userHasWriteAccess) return <NoPermissions lang={lang} />
 
-  const localizedProgramName = programme.name[lang] ? programme.name[lang] : programme.name['en']
-
   return (
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
@@ -131,7 +129,7 @@ const FormView = ({ room }) => {
             <img className="img-responsive" src={rypsi_image} />
           </div>
 
-          <h1 style={{ color: colors.blue }}>{localizedProgramName}</h1>
+          <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {translations.title[lang]} {year}
           </h3>

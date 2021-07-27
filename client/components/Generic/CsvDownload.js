@@ -132,7 +132,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       let answersArray = []
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
       else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-      const name = programme.name[lang] ? programme.name[lang] : programme.name['en']
+      const name = programme.name[lang]
       const faculty = programme.primaryFaculty.name
       const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]

@@ -96,7 +96,7 @@ export default () => {
           const earlierAnswers = answerMap.get(key)
           answerMap.set(key, [
             ...earlierAnswers,
-            { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer' },
+            { name: p.name[lang], key: p.key, color: 'emptyAnswer' },
           ])
         }
       }

@@ -8,7 +8,7 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
 export default function OwnerLinks() {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
-  const language = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
   if (!allTokens || !studyProgrammes) return null
 
@@ -20,14 +20,14 @@ export default function OwnerLinks() {
       <Message
         color="blue"
         icon="exclamation"
-        content={translations.ownerMessage[language]}
+        content={translations.ownerMessage[lang]}
       />
       <table>
         <thead>
           <tr>
-            <th>{translations.code[language]}</th>
-            <th>{translations.faculty[language]}</th>
-            <th>{translations.shareUrl[language]}</th>
+            <th>{translations.code[lang]}</th>
+            <th>{translations.faculty[lang]}</th>
+            <th>{translations.shareUrl[lang]}</th>
           </tr>
         </thead>
         <tbody>
@@ -37,14 +37,12 @@ export default function OwnerLinks() {
               const code = token.url
               const programmeKey = token.programme
               const shareUrl = `${window.location.origin}${basePath}access/${code}`
-              const localizedProgName = studyProgrammes.find((p) => p.key === programmeKey).name[
-                language
-              ]
+              const programmeName = studyProgrammes.find((p) => p.key === programmeKey).name[lang]
 
               return (
                 <tr key={token.url}>
                   <td>{programmeKey}</td>
-                  <td>{localizedProgName}</td>
+                  <td>{programmeName}</td>
                   <td>{shareUrl}</td>
                 </tr>
               )

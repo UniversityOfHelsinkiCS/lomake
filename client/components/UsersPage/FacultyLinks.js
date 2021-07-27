@@ -8,9 +8,9 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
 export default function FacultyLinks() {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
   const faculties = useSelector((state) => state.faculties.data)
-  const language = useSelector((state) => state.language)
+  const lang = useSelector((state) => state.language)
 
-  if (!allTokens || !faculties || !language) return null
+  if (!allTokens || !faculties || !lang) return null
 
   const temp = faculties.map((faculty) => {
     const token = allTokens.find((t) => t.faculty === faculty.code && t.type === 'READ')
@@ -27,14 +27,14 @@ export default function FacultyLinks() {
       <Message
         color="blue"
         icon="exclamation"
-        content={translations.facultyMessage[language]}
+        content={translations.facultyMessage[lang]}
       />
       <table>
         <thead>
           <tr>
-            <th>{translations.code[language]}</th>
-            <th>{translations.faculty[language]}</th>
-            <th>{translations.shareUrl[language]}</th>
+            <th>{translations.code[lang]}</th>
+            <th>{translations.faculty[lang]}</th>
+            <th>{translations.shareUrl[lang]}</th>
           </tr>
         </thead>
         <tbody>

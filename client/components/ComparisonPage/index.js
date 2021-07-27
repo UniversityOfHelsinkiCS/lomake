@@ -79,7 +79,7 @@ export default () => {
           const earlierAnswers = answerMap.get(key)
           answerMap.set(key, [
             ...earlierAnswers,
-            { name: p.name[lang] ? p.name[lang] : p.name['en'], key: p.key, color: 'emptyAnswer' },
+            { name: p.name[lang], key: p.key, color: 'emptyAnswer' },
           ])
         }
       }
@@ -128,7 +128,12 @@ export default () => {
   return (
     <>
       <div className="comparison-info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="comparison-filter-container">
+      <Grid
+        doubling
+        columns={2}
+        padded="vertically"
+        className="comparison-filter-container"
+      >
         <Grid.Column width={10}>
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>

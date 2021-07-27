@@ -236,18 +236,18 @@ const ColorTable = React.memo(
                 {p.locked ? (
                   <div data-cy={`colortable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
                     <Icon name="lock" />{' '}
-                    {p.name[lang] ? p.name[lang] : p.name['en']}
+                    {p.name[lang]}
                   </div>
                 ) : (
                   <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
-                    {p.name[lang] ? p.name[lang] : p.name['en']}
+                    {p.name[lang]}
                   </Link>
                 )}
               </div>
               {tableIds.map((idObject) => (
                 <ColorTableCell
                   key={`${p.key}-${idObject.id}`}
-                  programmesName={p.name[lang] ? p.name[lang] : p.name['en']}
+                  programmesName={p.name[lang]}
                   programmesKey={p.key}
                   programmesAnswers={programme && programme.data ? programme.data : {}}
                   programmesOldAnswers={

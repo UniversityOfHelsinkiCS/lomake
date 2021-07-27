@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
+import * as _ from 'lodash'
+
 import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -16,6 +18,7 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
 import './ComparisonPage.scss'
+
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')
@@ -115,15 +118,19 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
+            <YearSelector
+              multiple size="small"
+              label={translations.selectYears[lang]}
+            />
             {usersProgrammes && (
               <>
-                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
+                <FacultyFilter
+                  size="small"
+                  label={translations.facultyFilter.filter[lang]}
+                />
                 <LevelFilter />
-                {faculty !== 'allFaculties' &&
-                  (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-                    <CompanionFilter />
-                  )}
+                {faculty !== 'allFaculties'
+                && (level === 'doctoral' || level === 'master' || level === 'bachelor') && <CompanionFilter />}
                 {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
                 <ProgrammeFilter
                   handleChange={handleSearch}
@@ -141,14 +148,22 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
           <Grid.Column width={6}>
-            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+            <ProgrammeList
+              programmes={programmes}
+              setPicked={setPicked}
+              picked={picked}
+            />
           </Grid.Column>
         </Grid.Row>
         {data.length > 0 ? (
           <>
             <Grid.Row>
               <Grid.Column width={16}>
-                <BarChart data={data} questions={questions.selected.sort((a,b) => a.localeCompare(b))} unit={unit} />
+                <BarChart
+                  data={data}
+                  questions={questions.selected.sort((a,b) => a.localeCompare(b))}
+                  unit={unit}
+                />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>

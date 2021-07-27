@@ -16,7 +16,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
 
   const Programme = ({ p }) => (
     <>
-      {p.name[lang] ? p.name[lang] : p.name['en']}
+      {p.name[lang]}
       {p.primaryFaculty.code !== faculty && faculty !== 'allFaculties' && (
         <span className="report-list-companion-icon">
           <Icon name="handshake outline" />

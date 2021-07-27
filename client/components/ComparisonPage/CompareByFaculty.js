@@ -27,10 +27,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
 
   const chosenProgrammeFaculty = () => {
-    const searched = usersProgrammes.find((p) => {
-      const prog = p.name[lang] ? p.name[lang] : p.name['en']
-      return prog === chosen
-    })
+    const searched = usersProgrammes.find((p) => p.name[lang] === chosen)
     if (!searched) return ''
 
     const faculty = facultyNames[lang].find((f) => f.key == searched.primaryFaculty.code)
@@ -62,8 +59,8 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const options = usersProgrammes.map((p) => ({
     key: p.key,
-    value: p.name[lang] ? p.name[lang] : p.name['en'],
-    text: p.name[lang] ? p.name[lang] : p.name['en'],
+    value: p.name[lang],
+    text: p.name[lang],
   }))
 
   return (

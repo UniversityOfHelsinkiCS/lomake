@@ -94,7 +94,6 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
 
 const OwnerAccordionUsers = ({ programme }) => {
   const lang = useSelector((state) => state.language)
-  const currentUser = useSelector((state) => state.currentUser)
   const users = useSelector((state) => state.programmesUsers)
 
   if (!users.data || users.pending) return null
