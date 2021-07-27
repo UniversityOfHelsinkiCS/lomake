@@ -37,9 +37,8 @@ export default () => {
       if (!nameFilter) return true
       const firstname = user.firstname.toLowerCase()
       const lastname = user.lastname.toLowerCase()
-      return firstname.includes(
-        debouncedName.toLowerCase() || lastname.includes(debouncedName.toLowerCase())
-      )
+      
+      return firstname.includes(debouncedName.toLowerCase()) || lastname.includes(debouncedName.toLowerCase())
     })
 
     const byAccess = byName.filter((user) =>
