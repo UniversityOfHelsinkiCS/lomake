@@ -56,8 +56,8 @@ const Form = ({ questions, programmeKey }) => {
     if (part.type === 'ENTITY' || part.type === 'MEASURES') number++
 
     const Component = partComponentMap[part.type]
-    const description = part.description[lang] || undefined
-    const extrainfo = part.extrainfo[lang] || undefined
+    const description = part.description ? part.description[lang] : undefined
+    const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
