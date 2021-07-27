@@ -193,7 +193,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
   const { faculty, level, companion, doctoralSchool } = filters
 
   const filteredByName = usersProgrammes.filter((p) => {
-    const prog = p.name[lang] ? p.name[lang] : p.name['en']
+    const prog = p.name[lang]
     return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
   })
 

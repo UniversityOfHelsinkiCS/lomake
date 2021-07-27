@@ -70,7 +70,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         }}
       >
         {description}
-        <p className="form-question-extrainfo">{extrainfo}</p>
+        <p className="form-question-extrainfo">{extrainfo[lang]}</p>
       </p>
 
       <Textarea
