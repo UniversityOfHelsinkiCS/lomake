@@ -2,8 +2,6 @@
  * Insert application wide common items here
  */
 
-const _ = require('lodash')
-
 const inProduction = process.env.NODE_ENV === 'production'
 const requiredGroupForWideReadAccess = inProduction ? "grp-lomake-production-read" : "grp-lomake-testing-read"
 

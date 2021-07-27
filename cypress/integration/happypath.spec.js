@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import * as _ from 'lodash'
-
 describe('Core tests', function () {
   this.beforeEach(function () {
     cy.login('cypressUser')

@@ -1,6 +1,4 @@
 const morgan = require('morgan')
-const winston = require('winston')
-const { inProduction } = require('@util/common')
 const logger = require('@util/logger')
 
 /**
