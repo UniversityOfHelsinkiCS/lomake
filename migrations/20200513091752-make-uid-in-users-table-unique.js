@@ -2,7 +2,8 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint('users', ['uid'], {
+    return queryInterface.addConstraint('users', {
+      fields: ['uid'],
       type: 'unique',
       name: 'uidUnique',
     })

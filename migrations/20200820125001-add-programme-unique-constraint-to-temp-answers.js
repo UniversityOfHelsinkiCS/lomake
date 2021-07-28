@@ -2,7 +2,8 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint('temp_answers', ['programme'], {
+    return queryInterface.addConstraint('temp_answers', {
+      fields: ['programme'],
       type: 'unique',
       name: 'programmeUnique',
     })

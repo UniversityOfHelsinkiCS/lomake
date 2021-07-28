@@ -2,7 +2,8 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint('studyprogrammes', ['key'], {
+    return queryInterface.addConstraint('studyprogrammes', {
+      fields: ['key'],
       type: 'unique',
       name: 'keyUnique',
     })
