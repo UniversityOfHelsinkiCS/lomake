@@ -42,7 +42,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
             src={mapColorToImage[previousAnswerColor]}
           />
         )}
-        <ReactMarkdown source={previousAnswerText} />
+        <ReactMarkdown children={previousAnswerText} />
       </LastYearsAnswersAccordion>
     )
   }

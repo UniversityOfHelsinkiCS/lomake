@@ -11,7 +11,7 @@ import './Textarea.scss'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import { colors } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
+
 
 const MAX_LENGTH = 1100
 
@@ -25,7 +25,7 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
     return (
       <LastYearsAnswersAccordion>
-        <ReactMarkdown source={previousYearsAnswers[`${id}_text`]} />
+        <ReactMarkdown children={previousYearsAnswers[`${id}_text`]} />
       </LastYearsAnswersAccordion>
     )
 
@@ -132,7 +132,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
         />
       </div>
       {viewOnly ? (
-        <ReactMarkdown source={dataFromRedux} />
+        <ReactMarkdown children={dataFromRedux} />
       ) : (
         <>
           <div data-cy={`editing-area-${id}`} onClick={askForLock} style={{ marginTop: '1em' }}>

@@ -55,6 +55,7 @@ export default () => {
     return false
   }, [currentUser])
 
+  console.log(modalData)
   return (
     <>
       {modalData && (
@@ -66,7 +67,7 @@ export default () => {
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
-              <ReactMarkdown source={modalData.content} />
+              <ReactMarkdown children={modalData.content} />
             </div>
           </>
         </CustomModal>
