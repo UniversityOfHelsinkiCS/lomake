@@ -47,7 +47,7 @@ describe("Previous year's answers", function () {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains('Hello from 2019')
 
     cy.reload()
-    cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('not.be.visible')
+    cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('not.exist')
   })
 
   // FIXME: flaky

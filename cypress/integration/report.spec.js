@@ -91,7 +91,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-KH20_001]').should('be.visible')
     cy.get('[data-cy=report-list-programme-MH20_003]').should('be.visible')
     cy.get('[data-cy=report-list-programme-MH20_001]').should('be.visible')
-    cy.get('[data-cy=report-list-programme-MH57_001]').should('not.be.visible')
+    cy.get('[data-cy=report-list-programme-MH57_001]').should('not.exist')
   })
 
   it('Filtering works for doctoral schools', function () {
@@ -99,14 +99,14 @@ describe('ReportPage tests', function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
     cy.visit('/report')
-    cy.get('[data-cy=doctoral-school-filter]').should('not.be.visible')
+    cy.get('[data-cy=doctoral-school-filter]').should('not.exist')
     cy.get('[data-cy=doctoral-filter]').should('be.visible').click()
     cy.get('[data-cy=doctoral-school-filter]').should('be.visible')
     cy.get('[data-cy=doctoral-school-filter]').click()
     cy.get('span').contains('Doctoral school in natural sciences').should('be.visible').click()
     cy.get('[data-cy=report-list-programme-T923104]').should('be.visible')
     cy.get('[data-cy=report-list-programme-T923107]').should('be.visible')
-    cy.get('[data-cy=report-list-programme-T922104]').should('not.be.visible')
+    cy.get('[data-cy=report-list-programme-T922104]').should('not.exist')
   })
 
   it('Filtering works for companion programmes', function () {
@@ -114,7 +114,7 @@ describe('ReportPage tests', function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
     cy.visit('/report')
-    cy.get('[data-cy=companion-filter]').should('not.be.visible')
+    cy.get('[data-cy=companion-filter]').should('not.exist')
     cy.get('[data-cy=faculty-filter]').should('be.visible').click()
     cy.get('span').contains('Veterinary Medicine').should('be.visible').click()
     cy.get('[data-cy=doctoral-filter]').should('be.visible').click()
@@ -123,7 +123,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-T922105]').should('be.visible')
     cy.get('[data-cy=report-list-programme-T921107]').should('be.visible')
     cy.get('[data-cy=report-list-programme-T921108]').should('be.visible')
-    cy.get('[data-cy=report-list-programme-T923103]').should('not.be.visible')
+    cy.get('[data-cy=report-list-programme-T923103]').should('not.exist')
     cy.get('[data-cy=master-filter').click()
     cy.get('[data-cy=report-list-programme-MH90_001]').should('be.visible')
   })
