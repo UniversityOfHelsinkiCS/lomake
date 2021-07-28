@@ -2,7 +2,6 @@
 /// <reference types="cypress" />
 
 import * as _ from 'lodash'
-import { getEditorInputLength } from '../support/helpers'
 import { testProgrammeName } from '../../config/common'
 const user = 'cypressUser'
 
@@ -45,7 +44,7 @@ describe('Sidebar tests', function () {
     )
 
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').type('more more')
-    getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then((res) =>
+    cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then((res) =>
       expect(res).to.be.eq(1100)
     )
 
