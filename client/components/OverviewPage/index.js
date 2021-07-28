@@ -87,11 +87,7 @@ export default () => {
 
       {statsToShow && (
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
-          <StatsContent
-            stats={statsToShow.stats}
-            answers={statsToShow.answers}
-            questionId={statsToShow.questionId}
-          />
+          <StatsContent stats={statsToShow.stats} />
         </CustomModal>
       )}
 
