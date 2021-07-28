@@ -43,8 +43,7 @@ describe('Form tests', function () {
   })
 
   it('Measurements are created dynamically and saved correctly', function () {
-    cy.server()
-    cy.route('POST', '/socket.io/*').as('update')
+    cy.intercept('POST', '/socket.io/*').as('update')
     cy.get('#measures_1_text').type('1')
     cy.get('#measures_2_text').type('2')
     cy.get('#measures_4_text').should('not.exist')
