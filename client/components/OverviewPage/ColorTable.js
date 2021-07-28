@@ -11,11 +11,6 @@ import ColorTableCell from './ColorTableCell'
 import { PieChart } from 'react-minimal-pie-chart'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const replaceTitle = {
-  successes_and_development_needs: 'successes_and_needs',
-  review_of_last_years_situation_report: 'review_of_last_year',
-}
-
 const SORTER = 'name'
 
 const ColorTable = React.memo(
@@ -76,21 +71,12 @@ const ColorTable = React.memo(
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
 
-    const transformIdToTitle = (id, vertical = true) => {
-      const idToUse = replaceTitle[id] || id
-      const formatted = idToUse.replace(/_/g, ' ')
-
+    const transformIdToTitle = (shortLabel, vertical = true) => {
       return (
         <span
-          style={
-            vertical
-              ? {
-                  writingMode: 'vertical-lr',
-                }
-              : {}
-          }
+          style={vertical ? { writingMode: 'vertical-lr'} : {}}
         >
-          {formatted.charAt(0).toUpperCase() + formatted.slice(1)}
+          {shortLabel}
         </span>
       )
     }
@@ -136,8 +122,7 @@ const ColorTable = React.memo(
         ) {
           return acc
         }
-
-        return [...acc, { id: cur.id, type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type }]
+        return [...acc, { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type }]
       }, [])
 
       return [...acc, ...questionObjects]
@@ -164,7 +149,7 @@ const ColorTable = React.memo(
               fontWeight: 'bold',
             }}
           >
-            {transformIdToTitle(idObject.id)}
+            {transformIdToTitle(idObject.shortLabel)}
           </div>
         ))}
         <div className="sticky-header" />
@@ -186,7 +171,7 @@ const ColorTable = React.memo(
                   onClick={() =>
                     setStatsToShow({
                       stats: stats[idObject.id],
-                      title: transformIdToTitle(idObject.id, false),
+                      title: transformIdToTitle(idObject.shortLabel, false),
                       answers: selectedAnswers,
                       questionId: idObject.id,
                     })

@@ -10,6 +10,11 @@
         "id": "review_of_last_years_situation_report",
         "index": 0,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Edellinen läpikäynti",
+          "se": "Review of last year",
+          "en": "Review of last year"
+        },
         "label": {
           "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
           "se": "",
@@ -46,6 +51,11 @@
         "id": "student_admissions",
         "index": 1,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opiskelijavalinta",
+          "se": "Studentantagning",
+          "en": "Student admissions"
+        },
         "label": {
           "fi": "OPISKELIJAVALINTA",
           "se": "STUDENTREKRYTERING OCH STUDENTANTAGNING",
@@ -67,6 +77,11 @@
         "id": "language_environment",
         "index": 2,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Kieliympäristö",
+          "se": "Språkmiljö",
+          "en": "Language environment"
+        },
         "label": {
           "fi": "KIELIYMPÄRISTÖ",
           "se": "SPRÅKMILJÖ",
@@ -88,6 +103,11 @@
         "id": "programme_identity",
         "index": 3,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Ohjelman identiteetti",
+          "se": "Programmets profil",
+          "en": "Programme identity"
+        },
         "label": {
           "fi": "KOULUTUSOHJELMAN PROFIILI JA EROTTUVUUS YLIOPISTON SISÄLLÄ, KANSALLISESTI JA KANSAINVÄLISESTI",
           "se": "UTBILDNINGSPROGRAMMETS PROFIL OCH SÄRDRAG",
@@ -109,6 +129,11 @@
         "id": "employability",
         "index": 4,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Työelämärelevanssi",
+          "se": "Arbetslivsrelevans",
+          "en": "Employability"
+        },
         "label": {
           "fi": "TYÖELÄMÄRELEVANSSI",
           "se": "ARBETSLIVSRELEVANS",
@@ -130,6 +155,11 @@
         "id": "learning_outcomes",
         "index": 5,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Osaamistavoitteet",
+          "se": "Kunskapsmål",
+          "en": "Learning outcomes"
+        },
         "label": {
           "fi": "KOULUTUSOHJELMAN OSAAMISTAVOITTEET",
           "se": "UTBILDNINGSPROGRAMMETS KUNSKAPSMÅL",
@@ -151,6 +181,11 @@
         "id": "curriculum",
         "index": 6,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opetussuunnitelma",
+          "se": "Undervisningsplan",
+          "en": "Curriculum"
+        },
         "label": {
           "fi": "OPETUSSUUNNITELMAN TOIMIVUUS JA KEHITTÄMINEN",
           "se": "UNDERVISNINGSPLANENS ÄNDAMÅLSENLIGHET OCH UTVECKLINGSBEHOV",
@@ -172,6 +207,11 @@
         "id": "guidance",
         "index": 7,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opintojen ohjaus",
+          "se": "Studiehandledningen",
+          "en": "Student guidance"
+        },
         "label": {
           "fi": "OPINTOJEN OHJAUKSEN TOIMIVUUS",
           "se": "STUDIEHANDLEDNINGENS ÄNDAMÅLSENLIGHET",
@@ -193,6 +233,11 @@
         "id": "student_feedback",
         "index": 8,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opiskelijapalaute",
+          "se": "Respons",
+          "en": "Student feedback"
+        },
         "label": {
           "fi": "OPISKELIJAPALAUTTEEN HYÖDYNTÄMINEN",
           "se": "ANVÄNDNING AV RESPONS",
@@ -266,6 +311,11 @@
         "id": "community_wellbeing",
         "index": 9,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Yhteisön hyvinvointi",
+          "se": "Välbefinnandet",
+          "en": "Community wellbeing"
+        },
         "label": {
           "fi": "YHTEISÖN HYVINVOINTI",
           "se": "VÄLBEFINNANDET I UTBILDNINGSPROGRAMMET",
@@ -287,6 +337,11 @@
         "id": "teacher_skills",
         "index": 10,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opettajien osaaminen",
+          "se": "Lärarnas kompetens",
+          "en": "Teacher skills"
+        },
         "label": {
           "fi": "OPETTAJIEN OSAAMINEN JA OSAAMISEN KEHITTÄMINEN",
           "se": "LÄRARNAS OCH HANDLEDARNAS KOMPETENS OCH KOMPETENSUTVECKLING",
@@ -308,6 +363,11 @@
         "id": "management",
         "index": 11,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Johtaminen",
+          "se": "Ledarskap",
+          "en": "Management"
+        },
         "label": {
           "fi": "JOHTAMINEN JA VIESTINTÄ",
           "se": "LEDARSKAP OCH KOMMUNIKATION",
@@ -381,6 +441,11 @@
         "id": "teaching_resources",
         "index": 12,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opetusresurssit",
+          "se": "Undervisningsresurser",
+          "en": "Teaching resources"
+        },
         "label": {
           "fi": "OPETUSRESURSSIT",
           "se": "UNDERVISNINGSRESURSER",
@@ -402,6 +467,11 @@
         "id": "recruitment_influence",
         "index": 13,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Rekrytointi",
+          "se": "Rekryteringen",
+          "en": "Recruitment influence"
+        },
         "label": {
           "fi": "OHJELMAN MAHDOLLISUUDET VAIKUTTAA UUDEN HENKILÖSTÖN REKRYTOINTIIN",
           "se": "UTBILDNINGSPROGRAMMETS MÖJLIGHETER ATT PÅVERKA REKRYTERINGEN AV NYA ANSTÄLLDA",
@@ -423,6 +493,11 @@
         "id": "resourcing",
         "index": 14,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Tila- ja laiteresurssit",
+          "se": "Resurser",
+          "en": "Equipment resources"
+        },
         "label": {
           "fi": "TILA- JA LAITERESURSSIT SEKÄ OPPIMISYMPÄRISTÖJEN RESURSSIT",
           "se": "RESURSER FÖR LOKALER, UTRUSTNING OCH STUDIEMILJÖER",
@@ -496,6 +571,11 @@
         "id": "cooperation_success",
         "index": 15,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Yhteistyön sujuvuus",
+          "se": "Samarbete",
+          "en": "Cooperation"
+        },
         "label": {
           "fi": "YHTEISTYÖN SUJUVUUS",
           "se": "SAMARBETE",
@@ -569,6 +649,11 @@
         "id": "successes_and_development_needs",
         "index": 16,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Onnistumiset",
+          "se": "Framgånger",
+          "en": "Successes"
+        },
         "label": {
           "fi": "MISSÄ ASIOISSA KOULUTUSOHJELMA ON ONNISTUNUT ERITYISEN HYVIN?",
           "se": "I VILKA AVSEENDEN HAR UTBILDNINGSPROGRAMMET LYCKATS SÄRSKILT BRA?",
@@ -600,6 +685,11 @@
         "id": "measures",
         "index": 17,
         "type": "MEASURES",
+        "shortLabel": {
+          "fi": "Ohjelman toimenpiteet",
+          "se": "Programmets åtgärder",
+          "en": "Programme's measures"
+        },
         "label": {
           "fi": "KOULUTUSOHJELMALLE",
           "se": "UTBILDNINGSPROGRAMMETS",
@@ -622,6 +712,11 @@
         "id": "measures_faculty",
         "index": 18,
         "type": "MEASURES",
+        "shortLabel": {
+          "fi": "Tiedekunnan toimet",
+          "se": "Fakultetens åtgärder",
+          "en": "Faculty's measures"
+        },
         "label": {
           "fi": "TIEDEKUNNALLE",
           "se": "FAKULTETENS",
@@ -653,6 +748,11 @@
         "id": "feedback",
         "index": 19,
         "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Miten meni?",
+          "se": "Hur gick det?",
+          "en": "How did it go?"
+        },
         "label": {
           "fi": "MITEN MENI?",
           "se": "HUR GICK DET?",
