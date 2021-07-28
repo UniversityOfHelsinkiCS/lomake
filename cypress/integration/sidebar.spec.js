@@ -15,6 +15,8 @@ describe('Sidebar tests', function () {
   it('Answer length of 1 is OK', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+
     cy.writeToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
       _.repeat('A', 1)
@@ -26,6 +28,8 @@ describe('Sidebar tests', function () {
   it('Answer length 1000 of is OK', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+
     cy.copyToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
       _.repeat('A', 1000)
@@ -37,7 +41,7 @@ describe('Sidebar tests', function () {
   it('Answer length 1100 is also ok, but answer cant be longer than that.', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
-
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.copyToTextField(
       '[data-cy=textarea-review_of_last_years_situation_report]',
       _.repeat('A', 1100)

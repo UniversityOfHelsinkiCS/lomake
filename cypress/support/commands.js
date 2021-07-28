@@ -31,8 +31,8 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
   // cy.intercept('POST', '/socket.io/*').as('update')
   // cy.intercept('GET', '/socket.io/*').as('getLock')
 
-  cy.get(editorName).click()
-  cy.wait('@getLock')
+  // cy.get(editorName).click()
+  // cy.wait('@getLock')
 
   cy.get(editorName)
     .find('.editor-class')
@@ -65,7 +65,7 @@ Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
     .type(textToBeTyped)
-    // .wait('@update')
+    .wait('@update')
 })
 
 Cypress.Commands.add('getEditorInputLength', (editorName) => {
