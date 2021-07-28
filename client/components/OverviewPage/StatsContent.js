@@ -3,58 +3,10 @@ import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import positiveEmoji from 'Assets/sunglasses.png'
 import { PieChart } from 'react-minimal-pie-chart'
-import ReactWordcloud from 'react-wordcloud'
 import { colors } from 'Utilities/common'
 
-const TO_REPLACE = ['.', ':', '"', '’', '(', ')', '/', '-', ';', '?', '_x000d_', '•']
-const MIN_COUNT = 5
-const MIN_WORD_LENGTH = 4
 
-
-const replaceAllAndLower = (word) => {
-  let lowerWord = word.toLowerCase()
-  //should be replaced with one regex replace
-  TO_REPLACE.forEach((replacer) => {
-    lowerWord = lowerWord.replace(replacer, '')
-  })
-
-  return lowerWord
-}
-
-const StatsContent = ({ stats, answers, questionId }) => {
-  //const [viewedCloud, setViewedCloud] = useState('total')
-  const viewedCloud = 'total'
-
-  const worldCloudObject = answers.reduce(
-    (obj, { data }) => {
-      const textId = `${questionId}_text`
-      const colorId = `${questionId}_light`
-      if (data[textId] && data[colorId]) {
-        const words = data[textId].split(/,| |\n/).map((word) => replaceAllAndLower(word))
-        const color = data[colorId]
-        words.forEach((word) => {
-          const existingTotal = obj.total[word] || 0
-          obj.total[word] = existingTotal + 1
-
-          const existingColor = obj[color][word] || 0
-          obj[color][word] = existingColor + 1
-        })
-      }
-
-      return obj
-    },
-    { green: {}, yellow: {}, red: {}, total: {} }
-  )
-
-  const worldCloudWords = Object.keys(worldCloudObject[viewedCloud]).reduce((acc, key) => {
-    const wordCount = worldCloudObject[viewedCloud][key]
-
-    if (wordCount <= MIN_COUNT) return acc
-    if (key.length < MIN_WORD_LENGTH) return acc
-
-    return [...acc, { text: key, value: wordCount }]
-  }, [])
-
+const StatsContent = ({ stats }) => {
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -139,31 +91,6 @@ const StatsContent = ({ stats, answers, questionId }) => {
           </div>
         </div>
       </div>
-      {/*<Dropdown
-        onChange={(_e, { value }) => setViewedCloud(value)}
-        options={dropdownOptions}
-        selection
-        value={viewedCloud}
-      />*/}
-      <ReactWordcloud
-        words={worldCloudWords}
-        options={{
-          colors: ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b'],
-          enableTooltip: true,
-          deterministic: false,
-          fontFamily: 'impact',
-          fontSizes: [5, 60],
-          fontStyle: 'normal',
-          fontWeight: 'normal',
-          padding: 1,
-          randomSeed: null,
-          rotations: 3,
-          rotationAngles: [0, 90],
-          scale: 'sqrt',
-          spiral: 'archimedean',
-          transitionDuration: 1000,
-        }}
-      />
     </>
   )
 }
