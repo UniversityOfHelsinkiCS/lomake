@@ -65,7 +65,7 @@ Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
     .type(textToBeTyped)
-    .wait('@update')
+  //  .wait('@update')
 })
 
 Cypress.Commands.add('getEditorInputLength', (editorName) => {

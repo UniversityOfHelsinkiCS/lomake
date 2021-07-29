@@ -24,7 +24,6 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 
-  //FIXME: add copy-paste method
   it('Answer length 1000 of is OK', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
@@ -37,7 +36,6 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 
-  //FIXME: add copy-paste method
   it('Answer length 1100 is also ok, but answer cant be longer than that.', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
