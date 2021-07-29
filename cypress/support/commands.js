@@ -28,12 +28,6 @@ Cypress.Commands.add('givePermissions', (uid, programme, level) => {
  * Can be used to "paste" long texts.
  */
 Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
-  // cy.intercept('POST', '/socket.io/*').as('update')
-  // cy.intercept('GET', '/socket.io/*').as('getLock')
-
-  // cy.get(editorName).click()
-  // cy.wait('@getLock')
-
   cy.get(editorName)
     .find('.editor-class')
     .find('.DraftEditor-root')
@@ -49,23 +43,15 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 
       textarea.dispatchEvent(new Event('blur'))
     })
-  // cy.wait('@update')
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  // cy.intercept('POST', '/socket.io/*').as('update')
-  // cy.intercept('GET', '/socket.io/*').as('getLock')
-  
-  // cy.get(editorName).click()
-  // cy.wait('@getLock')
-
   cy.get(editorName)
     .find('.editor-class')
     .find('.DraftEditor-root')
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
     .type(textToBeTyped)
-  //  .wait('@update')
 })
 
 Cypress.Commands.add('getEditorInputLength', (editorName) => {
