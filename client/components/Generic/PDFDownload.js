@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { colors } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
-import facultyNames from '../../facultyTranslations'
 
 
 const PDFDownload = () => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const faculties = useSelector((state) => state.faculties.data)
   const [takingPDF, setTakingPDF] = useState(false)
   const { questions, level, faculty, year } = useSelector((state) => state.filters)
   
@@ -21,7 +21,7 @@ const PDFDownload = () => {
 
   const getExportText = () => {
     const formText = translations.pdfExportText[lang]
-    const facultyText = facultyNames[lang].find((f) => f.value === faculty).text
+    const facultyText = faculty === 'allFaculties' ? '' : faculties.find((f) => f.code === faculty).name[lang]
     const levelText = translations[level][lang]
     return `${formText}_${year}_${facultyText}_${levelText}`
   }

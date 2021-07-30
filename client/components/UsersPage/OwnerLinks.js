@@ -5,7 +5,7 @@ import { Message } from 'semantic-ui-react'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
-export default function OwnerLinks() {
+export default () => {
   const allTokens = useSelector((state) => state.accessToken.allTokens)
   const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
   const lang = useSelector((state) => state.language)

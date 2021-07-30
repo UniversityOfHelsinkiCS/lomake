@@ -17,7 +17,7 @@ export default function DoctorLinks() {
     const shareUrl = `${window.location.origin}${basePath}access/${token.url}`
     return {
       code: faculty.code,
-      facultyName: faculty.name,
+      facultyName: faculty.name[lang],
       shareUrl,
     }
   })

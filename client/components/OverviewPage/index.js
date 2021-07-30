@@ -55,7 +55,6 @@ export default () => {
     return false
   }, [currentUser])
 
-  console.log(modalData)
   return (
     <>
       {modalData && (

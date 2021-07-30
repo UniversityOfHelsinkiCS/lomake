@@ -4,11 +4,11 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { colors } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import facultyNames from '../../facultyTranslations'
 require('highcharts/modules/exporting')(Highcharts)
 
 const BarChart = ({ data, questions, unit }) => {
   const { faculty, level, multipleYears } = useSelector((state) => state.filters)
+  const faculties = useSelector((state) => state.faculties.data)
   const lang = useSelector((state) => state.language)
   if (!data) return <></>
 
@@ -47,7 +47,7 @@ const BarChart = ({ data, questions, unit }) => {
   const getExportText = () => {
     const formText = translations.chartExport[lang]
     const time = multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length-1]}` : multipleYears[0]
-    const facultyText = facultyNames[lang].find((f) => f.value === faculty).text
+    const facultyText = faculty === 'allFaculties' ? '' : faculties.find((f) => f.code === faculty).name[lang]
     const levelText = translations[level][lang]
     return `${formText}_${time}_${facultyText}_${levelText}`
   }

@@ -6,7 +6,6 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 
 export default ({ question, answers, showEmpty, programmeName, programmeFaculty }) => {
   const lang = useSelector((state) => state.language)
-
   const colorsTotal = (question) => {
     if (!question || !answers) return null
     let colors = {

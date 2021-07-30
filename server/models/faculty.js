@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'faculty',
     {
       code: DataTypes.STRING,
-      name: DataTypes.STRING,
+      name: DataTypes.JSONB,
     },
     {
       underscored: true,

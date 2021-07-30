@@ -141,7 +141,7 @@ export default ({ url }) => {
     return (
       <div style={{ width: '50em', margin: '1em auto' }}>
         <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
-        <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
+        <h2>{faculties.find((f) => f.code === token.data.faculty).name[lang]}</h2>
         <List bulleted>
           {getProgrammeNames(true).map((name) => (
             <List.Item data-cy="programmeList-item" key={name}>
@@ -165,7 +165,7 @@ export default ({ url }) => {
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
       <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
-      <h2>{faculties.find((f) => f.code === token.data.faculty).name}</h2>
+      <h2>{faculties.find((f) => f.code === token.data.faculty).name[lang]}</h2>
       <List bulleted>
         {getProgrammeNames().map((name) => (
           <List.Item data-cy="programmeList-item" key={name}>

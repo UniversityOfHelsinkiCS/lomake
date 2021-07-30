@@ -9,12 +9,12 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import { filteredProgrammes, filterByLevel } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
-import facultyNames from '../../facultyTranslations'
 import './ComparisonPage.scss'
 
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const lang = useSelector((state) => state.language)
   const filters = useSelector((state) => state.filters)
+  const faculties = useSelector((state) => state.faculties.data)
   const { faculty, level } = filters
   const user = useSelector((state) => state.currentUser.data)
   const [chosen, setChosen] = useState('')
@@ -26,36 +26,42 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
     setChosen(value)
   }
 
-  const chosenProgrammeFaculty = () => {
+  const getChosenProgrammeFaculty = () => {
     const searched = usersProgrammes.find((p) => p.name[lang] === chosen)
     if (!searched) return ''
 
-    const faculty = facultyNames[lang].find((f) => f.key == searched.primaryFaculty.code)
-    if (!faculty) return ''
+    const facultyName = searched.primaryFaculty.name[lang]
+    if (!facultyName) return ''
 
-    return faculty.text
+    return facultyName
   }
 
-  const comparedFaculty = facultyNames[lang].find((f) => f.value === faculty)
+  const getComparedFaculty = () => {
+    if (!faculties) return ''
+    const comparedFaculty = faculties.find((f) => f.name[lang] === faculty)
+    if (!comparedFaculty) return ''
 
-  const chosenAnswers = (question) => {
+    return comparedFaculty.name[lang]
+  } 
+
+  const getChosenAnswers = (question) => {
     if (!allAnswers || !chosen) return []
     const answers = allAnswers.get(question.id)
     if (answers) return answers.filter((a) => a.name == chosen)
     return []
   }
 
-  const facultyProgrammes = filteredProgrammes(lang, usersProgrammes, [], '', filters)
-
-  const universityProgrammes = filterByLevel(usersProgrammes, level)
-
-  const comparedAnswers = (question, programmes) => {
+  const getComparedAnswers = (question, programmes) => {
     if (!programmes || !allAnswers) return []
     const filteredKeys = programmes.map((p) => p.key)
     const answers = allAnswers.get(question.id)
     if (answers) return answers.filter((a) => filteredKeys.includes(a.key))
     return []
   }
+
+  const facultyProgrammes = filteredProgrammes(lang, usersProgrammes, [], '', filters)
+
+  const universityProgrammes = filterByLevel(usersProgrammes, level)
 
   const options = usersProgrammes.map((p) => ({
     key: p.key,
@@ -118,14 +124,14 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Column>
           {questionsList.map(
             (question) =>
-              chosenAnswers(question) &&
+              getChosenAnswers(question) &&
               !question.no_color && (
                 <SingleProgramPieChart
                   key={question.id}
                   question={question}
-                  answers={chosenAnswers(question)}
+                  answers={getChosenAnswers(question)}
                   programmeName={chosen ? chosen : ''}
-                  programmeFaculty={chosenProgrammeFaculty()}
+                  programmeFaculty={getChosenProgrammeFaculty()}
                   showEmpty={showEmpty}
                 />
               )
@@ -134,14 +140,14 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Column>
           {questionsList.map(
             (question) =>
-              comparedAnswers(question) &&
+              getComparedAnswers(question) &&
               !question.no_color && (
                 <PieChart
                   key={question.id}
                   question={question}
                   showEmpty={showEmpty}
-                  answers={comparedAnswers(question, facultyProgrammes.all)}
-                  faculty={comparedFaculty ? comparedFaculty.text : ''}
+                  answers={getComparedAnswers(question, facultyProgrammes.all)}
+                  faculty={getComparedFaculty()}
                   programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   name="faculty"
                 />
@@ -158,7 +164,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     key={question.id}
                     question={question}
                     showEmpty={showEmpty}
-                    answers={comparedAnswers(question, universityProgrammes)}
+                    answers={getComparedAnswers(question, universityProgrammes)}
                     programmes={usersProgrammes ? universityProgrammes : []}
                     faculty={translations.university[lang]}
                     name="university"

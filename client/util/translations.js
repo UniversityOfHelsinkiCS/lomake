@@ -631,6 +631,12 @@ export const genericTranslations = {
     en: 'Main points of discussion',
     se: 'Diskussionens huvudpunkter',
   },
+  // Generic/Entity.js
+  allFaculties: {
+    fi: 'Kaikki tiedekunnat',
+    en: 'All faculties',
+    se: 'All faculties',
+  },
   // Generic/LastYearsAnswersAccordion.js
   expandText: {
     fi: 'Näytä viime vuoden vastaukset',

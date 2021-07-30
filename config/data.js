@@ -16,7 +16,11 @@ const facultyMap = {
 const data = [
   {
     code: 'H10',
-    name: 'Teologinen tiedekunta',
+    name: {
+      fi: 'Teologinen tiedekunta',
+      en: 'Faculty of Theology',
+      se: 'Faculty of Theology',
+    },
     programmes: [
       {
         key: 'KH10_001',
@@ -55,7 +59,11 @@ const data = [
   },
   {
     code: 'H20',
-    name: 'Oikeustieteellinen tiedekunta',
+    name: {
+      fi: 'Oikeustieteellinen tiedekunta',
+      en: 'Faculty of Law',
+      se: 'Faculty of Law',
+    },
     programmes: [
       {
         key: 'KH20_001',
@@ -116,7 +124,11 @@ const data = [
   },
   {
     code: 'H30',
-    name: 'Lääketieteellinen tiedekunta',
+    name: {
+      fi: 'Lääketieteellinen tiedekunta',
+      en: 'Faculty of Medicine',
+      se: 'Faculty of Medicine',
+    },
     programmes: [
       {
         key: 'KH30_001',
@@ -243,7 +255,11 @@ const data = [
   },
   {
     code: 'H40',
-    name: 'Humanistinen tiedekunta',
+    name: { 
+      fi: 'Humanistinen tiedekunta',
+      en: 'Faculty of Arts',
+      se: 'Faculty of Arts'
+    },
     programmes: [
       {
         key: 'KH40_001',
@@ -529,7 +545,11 @@ const data = [
   },
   {
     code: 'H50',
-    name: 'Matemaattis-luonnontieteellinen tiedekunta',
+    name: { 
+      fi: 'Matemaattis-luonnontieteellinen tiedekunta',
+      en: 'Faculty of Science',
+      se: 'Faculty of Science'
+    },
     programmes: [
       {
         key: 'KH50_001',
@@ -843,7 +863,11 @@ const data = [
   },
   {
     code: 'H55',
-    name: 'Farmasian tiedekunta',
+    name: { 
+      fi: 'Farmasian tiedekunta',
+      en: 'Faculty of Pharmacy',
+      se: 'Faculty of Pharmacy'
+    },
     programmes: [
       {
         key: 'KH55_001',
@@ -886,7 +910,11 @@ const data = [
   },
   {
     code: 'H57',
-    name: 'Bio- ja ympäristötieteellinen tiedekunta',
+    name: { 
+      fi: 'Bio- ja ympäristötieteellinen tiedekunta',
+      en: 'Faculty of Biological and Environmental Sciences',
+      se: 'Faculty of Biological and Environmental Sciences'
+    },
     programmes: [
       {
         key: 'KH57_001',
@@ -1054,7 +1082,11 @@ const data = [
   },
   {
     code: 'H60',
-    name: 'Kasvatustieteellinen tiedekunta',
+    name: { 
+      fi: 'Kasvatustieteellinen tiedekunta',
+      en: 'Faculty of Educational Sciences',
+      se: 'Faculty of Educational Sciences'
+    },
     programmes: [
       {
         key: 'KH60_001',
@@ -1115,7 +1147,11 @@ const data = [
   },
   {
     code: 'H70',
-    name: 'Valtiotieteellinen tiedekunta',
+    name: { 
+      fi: 'Valtiotieteellinen tiedekunta',
+      en: 'Faculty of Social Sciences',
+      se: 'Faculty of Social Sciences'
+    },
     programmes: [
       {
         key: 'KH70_001',
@@ -1313,7 +1349,11 @@ const data = [
   },
   {
     code: 'H74',
-    name: 'Svenska social- och kommunalhögskolan',
+    name: { 
+      fi: 'Svenska social- och kommunalhögskolan',
+      en: 'Swedish School of Social Science',
+      se: 'Svenska social- och kommunalhögskolan'
+    },
     programmes: [
       {
         key: 'KH74_001',
@@ -1330,7 +1370,11 @@ const data = [
   },
   {
     code: 'H80',
-    name: 'Maatalous-metsätieteellinen tiedekunta',
+    name: { 
+      fi: 'Maatalous-metsätieteellinen tiedekunta',
+      en: 'Faculty of Agriculture and Forestry',
+      se: 'Faculty of Agriculture and Forestry'
+    },
     programmes: [
       {
         key: 'KH80_001',
@@ -1479,7 +1523,11 @@ const data = [
   },
   {
     code: 'H90',
-    name: 'Eläinlääketieteellinen tiedekunta',
+    name: { 
+      fi: 'Eläinlääketieteellinen tiedekunta',
+      en: 'Faculty of Veterinary Medicine',
+      se: 'Faculty of Veterinary Medicine'
+    },
     programmes: [
       {
         key: 'KH90_001',

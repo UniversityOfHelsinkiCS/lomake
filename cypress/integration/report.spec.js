@@ -87,7 +87,7 @@ describe('ReportPage tests', function () {
     cy.reload()
     cy.visit('/report')
     cy.get('[data-cy=faculty-filter]').should('be.visible').click()
-    cy.get('span').contains('Faculty of Law').should('be.visible').click()
+    cy.get('[data-cy=faculty-filter]').contains('Faculty of Law').should('be.visible').click()
     cy.get('[data-cy=report-list-programme-KH20_001]').should('be.visible')
     cy.get('[data-cy=report-list-programme-MH20_003]').should('be.visible')
     cy.get('[data-cy=report-list-programme-MH20_001]').should('be.visible')
@@ -116,16 +116,22 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('[data-cy=companion-filter]').should('not.exist')
     cy.get('[data-cy=faculty-filter]').should('be.visible').click()
-    cy.get('span').contains('Veterinary Medicine').should('be.visible').click()
+    cy.get('span').contains('Faculty of Arts').should('be.visible').click()
     cy.get('[data-cy=doctoral-filter]').should('be.visible').click()
     cy.get('[data-cy=companion-filter]').should('be.visible')
     cy.get('[data-cy=companion-filter]').click()
-    cy.get('[data-cy=report-list-programme-T922105]').should('be.visible')
+    // Companion programmes
     cy.get('[data-cy=report-list-programme-T921107]').should('be.visible')
-    cy.get('[data-cy=report-list-programme-T921108]').should('be.visible')
-    cy.get('[data-cy=report-list-programme-T923103]').should('not.exist')
+    cy.get('[data-cy=report-list-programme-T923102]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-T922103]').should('be.visible')
+    // Original programmes
+    cy.get('[data-cy=report-list-programme-T920103]').should('be.visible')
+    // Other level and faculty
+    cy.get('[data-cy=report-list-programme-MH40_003]').should('not.exist')
+    cy.get('[data-cy=report-list-programme-T922105]').should('not.exist')
+
     cy.get('[data-cy=master-filter').click()
-    cy.get('[data-cy=report-list-programme-MH90_001]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-MH40_003]').should('be.visible')
   })
 
   it('Changes in smileys are reflected to the piecharts', function () {

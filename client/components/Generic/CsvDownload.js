@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { answersByYear, programmeNameByKey as programmeName } from 'Utilities/common'
+import { answersByYear, programmeNameByKey as getProgrammeName } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
-import facultyNames from '../../facultyTranslations'
 import questions from '../../questions'
 
 
@@ -120,12 +119,10 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       return answerArray
     }
 
-    const programmeFaculty = (programme) => {
+    const getProgrammeFaculty = (programme) => {
       const searched = usersProgrammes.find((p) => p.key === programme.programme)
       if (!searched) return ''
-      const faculty = facultyNames[lang].find((f) => f.key == searched.primaryFaculty.code)
-      if (!faculty) return ''
-      return faculty.text
+      return searched.primaryFaculty.name[lang]
     }
 
     if (view == "form") {
@@ -133,7 +130,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
       else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
       const name = programme.name[lang]
-      const faculty = programme.primaryFaculty.name
+      const faculty = programme.primaryFaculty.name[lang]
       const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]
 
@@ -146,8 +143,8 @@ const CsvDownload = ({ wantedData, view, programme }) => {
         let answersArray = []
         if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
         else if (wantedData === 'colors') answersArray = getColorAnswers(programme.data)
-        const name = programmeName(usersProgrammes, programme, lang)
-        const faculty = programmeFaculty(programme)
+        const name = getProgrammeName(usersProgrammes, programme, lang)
+        const faculty = getProgrammeFaculty(programme)
         const dataRow = [name, faculty, ...answersArray]
         csvData = [...csvData, dataRow]
       })  
