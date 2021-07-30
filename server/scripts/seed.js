@@ -40,11 +40,12 @@ const seedFacultiesAndStudyprogrammes = async () => {
   for (const { code, programmes } of data) {
     const primaryFaculty = await db.faculty.findOne({ where: { code } })
 
-    for (const { key, name, level } of programmes) {
+    for (const { key, name, level, international } of programmes) {
       await db.studyprogramme.create({
         key,
         name,
         level,
+        international,
         locked: false,
         claimed: false,
         primaryFacultyId: primaryFaculty.id,
