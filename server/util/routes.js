@@ -36,6 +36,7 @@ router.get('/programmes', studyprogrammes.getAll)
 router.get('/programmes/foruser', studyprogrammes.getUsersProgrammes)
 router.get('/programmes/:programme', studyprogrammes.getOne)
 router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
+router.post('/programmes/update', checkAdmin, studyprogrammes.updateAll)
 
 router.post('/login', users.getCurrentUser)
 router.post('/logout', users.getLogoutUrl)

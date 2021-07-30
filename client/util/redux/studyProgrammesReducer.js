@@ -9,6 +9,12 @@ export const getStudyProgrammes = () => {
   return callBuilder(route, prefix)
 }
 
+export const updateStudyprogrammes = () => {
+  const route = `/programmes/update`
+  const prefix = 'UPDATE_STUDYPROGRAMMES'
+  return callBuilder(route, prefix, 'post')
+}
+
 export const getUsersProgrammes = () => {
   const route = `/programmes/foruser`
   const prefix = 'GET_USERS_PROGRAMMES'
@@ -35,7 +41,7 @@ export const getProgrammeOwners = () => {
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
-export default (state = { data: null }, action) => {
+export default (state = { data: null, updateStatus: null }, action) => {
   switch (action.type) {
     case 'GET_STUDYPROGRAMMES_SUCCESS':
       return {
@@ -94,6 +100,26 @@ export default (state = { data: null }, action) => {
         ...state,
         singleProgram: false,
         error: true,
+      }
+    case 'UPDATE_STUDYPROGRAMMES_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'UPDATE_STUDYPROGRAMMES_FAILURE':
+      return {
+        ...state,
+        updateStatus: `Error in updating studyprogrammes: ${action.response.error}`,
+        pending: false,
+        error: true,
+      }
+    case 'UPDATE_STUDYPROGRAMMES_SUCCESS':
+      return {
+        ...state,
+        updateStatus: action.response.status,
+        pending: false,
+        error: false,
       }
     case 'RESET_STUDYPROGRAM_SUCCESS': {
       return {

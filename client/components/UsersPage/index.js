@@ -6,9 +6,11 @@ import OspaModule from './OspaModule'
 import OwnerLinks from './OwnerLinks'
 import FacultyLinks from './FacultyLinks'
 import DoctorLinks from './DoctorLinks'
+import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import { isSuperAdmin } from '@root/config/common'
 
 
 export default () => {
@@ -24,7 +26,7 @@ export default () => {
     dispatch(getAllUsersAction())
   }, [])
 
-  const panes = [
+  let panes = [
     {
       menuItem: translations.users[lang],
       render: () => (
@@ -66,6 +68,19 @@ export default () => {
       ),
     },
   ]
+  
+  if (isSuperAdmin) {
+    panes = 
+      [...panes, {
+        menuItem: translations.updateStudyprogrammes[lang],
+        render: () => (
+          <Tab.Pane>
+            <UpdateStudyprogrammes />
+          </Tab.Pane>
+        ),
+      }
+    ]
+  }
 
   return <Tab style={{ width: '90%' }} panes={panes} />
 }

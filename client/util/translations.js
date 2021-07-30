@@ -1141,6 +1141,16 @@ export const usersPageTranslations = {
     fi: 'Tohtoriohjelmien linkit',
     se: 'Links for doctoral programmes',
   },
+  updateStudyprogrammes: {
+    en: 'Update studyprogrammes',
+    fi: 'Koulutusohjelmien päivittäminen',
+    se: 'Update studyprogrammes',
+  },
+  update: {
+    en: 'Update',
+    fi: 'Päivitä',
+    se: 'Update',
+  },
   doctorMessage: {
     en:
       'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',

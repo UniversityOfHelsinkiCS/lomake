@@ -1,5 +1,7 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
+const { seed } = require('../scripts/seed')
+const moment = require('moment')
 
 const getAll = async (req, res) => {
   try {
@@ -60,6 +62,20 @@ const getOne = async (req, res) => {
   }
 }
 
+const updateAll = async (req, res) => {
+  try {
+    await seed()
+    res.status(200).json({
+      status: `
+        Studyprogrammes successfully updated at: ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}.
+        Refresh the page to see the results.
+      `})
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error })
+  }
+}
+
 const toggleLock = async (req, res) => {
   try {
     const upcomingDeadlinesCount = await db.deadline.count()
@@ -112,6 +128,7 @@ module.exports = {
   getAll,
   getUsersProgrammes,
   getOne,
+  updateAll,
   toggleLock,
   getOwners,
 }
