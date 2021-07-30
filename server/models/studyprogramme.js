@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       locked: DataTypes.BOOLEAN,
       claimed: DataTypes.BOOLEAN,
       level: DataTypes.STRING,
+      international: DataTypes.BOOLEAN,
       primaryFacultyId: DataTypes.INTEGER,
     },
     {
