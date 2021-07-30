@@ -50,7 +50,7 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const SUPERADMINS = ['markokos', 'jehelen', 'mluukkai', 'saarasat', 'kopaakko', 'admin']
+const SUPERADMINS = ['mluukkai', 'saarasat', 'admin']
 
 const isSuperAdmin = (uid) => {
   return SUPERADMINS.includes(uid)
