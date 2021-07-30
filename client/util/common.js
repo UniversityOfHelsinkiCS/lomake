@@ -92,46 +92,6 @@ export const modifiedQuestions = (questions, lang) => {
   return attributes
 }
 
-const international = [
-  'MH50_004',
-  'MH50_010',
-  'MH40_005',
-  'MH57_001',
-  'MH80_004',
-  'MH50_002',
-  'MH40_003',
-  'MH40_011',
-  'MH70_006',
-  'MH57_003',
-  'MH50_011',
-  'MH70_003',
-  'MH80_005',
-  'MH50_006',
-  '720099',
-  '420140',
-  'MH20_002',
-  'MH57_002',
-  'MH50_013',
-  'MH50_007',
-  'MH50_012',
-  'MH80_002',
-  'MH80_001',
-  'MH50_001',
-  'MH50_005',
-  'MH80_003',
-  'MH80_007',
-  'MH57_004',
-  'MH70_005',
-  'MH70_009',
-  'MH50_003',
-  'MH50_009',
-  'MH30_002',
-  'MH40_004',
-  'MH57_005',
-  'MH60_002',
-  'MH20_003',
-]
-
 const doctoralSchools = {
   social: [
     'T920101',
@@ -180,7 +140,7 @@ export const filterByLevel = (usersProgrammes, level) => {
     if (level === 'allProgrammes') {
       return true
     } else if (level === 'international') {
-      return international.includes(p.key)
+      return p.international
     } 
     return p.level === level
   })
@@ -201,7 +161,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
     if (level === 'allProgrammes') {
       return true
     } else if (level === 'international') {
-      return international.includes(p.key)
+      return p.international
     }
     return p.level === level
   })
