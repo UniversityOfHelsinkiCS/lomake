@@ -27,6 +27,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH10_001',
@@ -37,6 +38,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T920101',
@@ -47,6 +49,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'humanistinen'],
+        international: false
       },
     ],
   },
@@ -63,6 +66,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH20_001',
@@ -73,6 +77,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH20_002',
@@ -83,6 +88,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH20_003',
@@ -93,6 +99,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'T920102',
@@ -103,6 +110,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
     ],
   },
@@ -119,6 +127,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH30_002',
@@ -129,6 +138,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH30_001',
@@ -139,6 +149,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH30_003',
@@ -149,6 +160,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH30_004',
@@ -159,6 +171,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH30_005',
@@ -169,6 +182,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH30_002',
@@ -179,6 +193,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'T921101',
@@ -189,6 +204,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['farmasia'],
+        international: false
       },
       {
         key: 'T921102',
@@ -199,6 +215,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T921104',
@@ -209,6 +226,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T921103',
@@ -219,6 +237,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'farmasia', 'kasvatustieteellinen'],
+        international: false
       },
     ],
   },
@@ -235,6 +254,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: ['valtiotieteellinen'],
+        international: false
       },
       {
         key: 'KH40_002',
@@ -245,6 +265,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH40_003',
@@ -255,6 +276,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH40_004',
@@ -265,6 +287,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH40_005',
@@ -275,6 +298,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH40_006',
@@ -285,6 +309,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_001',
@@ -295,6 +320,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_002',
@@ -305,6 +331,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_003',
@@ -315,6 +342,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH40_004',
@@ -325,6 +353,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH40_005',
@@ -335,6 +364,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH40_006',
@@ -345,6 +375,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_007',
@@ -355,6 +386,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_008',
@@ -365,6 +397,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_009',
@@ -375,6 +408,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_010',
@@ -385,6 +419,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_011',
@@ -395,6 +430,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['teologinen'],
+        international: true
       },
       {
         key: 'MH40_012',
@@ -405,6 +441,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_015',
@@ -415,6 +452,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_014',
@@ -425,6 +463,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH40_013',
@@ -435,6 +474,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T920103',
@@ -445,6 +485,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['teologinen', 'kasvatustieteellinen', 'oikeustieteellinen'],
+        international: false
       },
       {
         key: 'T920104',
@@ -455,6 +496,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'valtiotieteellinen'],
+        international: false
       },
       {
         key: 'T920105',
@@ -470,6 +512,7 @@ const data = [
           'valtiotieteellinen',
           'oikeustieteellinen',
         ],
+        international: false
       },
       {
         key: 'T920111',
@@ -480,6 +523,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['valtiotieteellinen'],
+        international: false
       },
     ],
   },
@@ -496,6 +540,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_002',
@@ -506,6 +551,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_003',
@@ -516,6 +562,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_004',
@@ -526,6 +573,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_005',
@@ -536,6 +584,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_007',
@@ -546,6 +595,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_008',
@@ -556,6 +606,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH50_006',
@@ -566,6 +617,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH50_001',
@@ -576,6 +628,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['valtiotieteellinen'],
+        international: true
       },
       {
         key: 'MH50_002',
@@ -586,6 +639,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
+        international: true
       },
       {
         key: 'MH50_003',
@@ -596,6 +650,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_004',
@@ -606,6 +661,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_005',
@@ -616,6 +672,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_006',
@@ -626,6 +683,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: true
       },
       {
         key: 'MH50_007',
@@ -636,6 +694,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_008',
@@ -646,6 +705,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH50_009',
@@ -656,6 +716,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_010',
@@ -666,6 +727,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_011',
@@ -676,6 +738,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_012',
@@ -686,6 +749,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH50_013',
@@ -696,6 +760,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen', 'valtiotieteellinen', 'humanistinen'],
+        international: true
       },
       {
         key: 'T923102',
@@ -706,6 +771,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['humanistinen'],
+        international: false
       },
       {
         key: 'T923103',
@@ -716,6 +782,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
       {
         key: 'T923104',
@@ -726,6 +793,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['farmasia'],
+        international: false
       },
       {
         key: 'T923105',
@@ -736,6 +804,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T923106',
@@ -746,6 +815,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['farmasia'],
+        international: false
       },
       {
         key: 'T923107',
@@ -756,6 +826,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T923101',
@@ -766,6 +837,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
     ],
   },
@@ -782,6 +854,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH55_001',
@@ -792,6 +865,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T921105',
@@ -806,6 +880,7 @@ const data = [
           'lääketieteellinen',
           'matemaattis-luonnontieteellinen',
         ],
+        international: false
       },
     ],
   },
@@ -822,6 +897,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH57_002',
@@ -832,6 +908,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
       {
         key: 'KH57_003',
@@ -842,6 +919,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
       {
         key: 'MH57_001',
@@ -852,6 +930,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH57_002',
@@ -862,6 +941,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: true
       },
       {
         key: 'MH57_003',
@@ -872,6 +952,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: true
       },
       {
         key: 'MH57_004',
@@ -882,6 +963,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH57_005',
@@ -892,6 +974,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['maatalous-metsätieteellinen', 'valtiotieteellinen'],
+        international: true
       },
       {
         key: 'T922101',
@@ -902,6 +985,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'matemaattis-luonnontieteellinen'],
+        international: false
       },
       {
         key: 'T922103',
@@ -919,6 +1003,7 @@ const data = [
           'oikeustieteellinen',
           'humanistinen',
         ],
+        international: false
       },
       {
         key: 'T921107',
@@ -936,6 +1021,7 @@ const data = [
           'kasvatustieteellinen',
           'humanistinen',
         ],
+        international: false
       },
       {
         key: 'T921106',
@@ -951,6 +1037,7 @@ const data = [
           'lääketieteellinen',
           'matemaattis-luonnontieteellinen',
         ],
+        international: false
       },
       {
         key: 'T922102',
@@ -961,6 +1048,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
     ],
   },
@@ -977,6 +1065,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH60_001',
@@ -987,6 +1076,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH60_002',
@@ -997,6 +1087,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'T920109',
@@ -1007,6 +1098,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['teologinen', 'humanistinen'],
+        international: false
       },
       {
         key: 'T920110',
@@ -1017,6 +1109,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: [],
+        international: false
       },
     ],
   },
@@ -1033,6 +1126,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH70_002',
@@ -1043,6 +1137,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH70_003',
@@ -1053,6 +1148,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH70_004',
@@ -1063,6 +1159,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH70_001',
@@ -1073,6 +1170,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['humanistinen'],
+        international: false
       },
       {
         key: 'MH70_002',
@@ -1083,6 +1181,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH70_003',
@@ -1093,6 +1192,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH70_004',
@@ -1103,6 +1203,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH70_005',
@@ -1113,6 +1214,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH70_006',
@@ -1123,6 +1225,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['humanistinen'],
+        international: true
       },
       {
         key: 'MH70_007',
@@ -1133,6 +1236,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH70_008',
@@ -1143,6 +1247,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH70_009',
@@ -1153,6 +1258,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH70_011',
@@ -1163,6 +1269,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['lääketieteellinen'],
+        international: false
       },
       {
         key: 'T920106',
@@ -1173,6 +1280,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['kasvatustieteellinen', 'matemaattis-luonnontieteellinen', 'teologinen'],
+        international: false
       },
       {
         key: 'T920107',
@@ -1188,6 +1296,7 @@ const data = [
           'humanistinen',
           'matemaattis-luonnontieteellinen',
         ],
+        international: false
       },
       {
         key: 'T920108',
@@ -1198,6 +1307,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen', 'matemaattis-luonnontieteellinen'],
+        international: false
       },
     ],
   },
@@ -1214,6 +1324,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
     ],
   },
@@ -1230,6 +1341,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH80_002',
@@ -1240,6 +1352,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH80_003',
@@ -1250,6 +1363,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'KH80_004',
@@ -1260,6 +1374,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH80_001',
@@ -1270,6 +1385,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH80_002',
@@ -1280,6 +1396,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH80_003',
@@ -1290,6 +1407,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH80_004',
@@ -1300,6 +1418,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH80_005',
@@ -1310,6 +1429,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: true
       },
       {
         key: 'MH80_006',
@@ -1320,6 +1440,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH80_007',
@@ -1330,6 +1451,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
+        international: true
       },
       {
         key: 'T922104',
@@ -1340,6 +1462,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['bio- ja ympäristötieteellinen'],
+        international: false
       },
       {
         key: 'T922105',
@@ -1350,6 +1473,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['eläinlääketieteellinen', 'bio- ja ympäristötieteellinen'],
+        international: false
       },
     ],
   },
@@ -1366,6 +1490,7 @@ const data = [
         },
         level: 'bachelor',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'MH90_001',
@@ -1376,6 +1501,7 @@ const data = [
         },
         level: 'master',
         companionFaculties: [],
+        international: false
       },
       {
         key: 'T921108',
@@ -1386,6 +1512,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
       {
         key: 'T922106',
@@ -1396,6 +1523,7 @@ const data = [
         },
         level: 'doctoral',
         companionFaculties: ['maatalous-metsätieteellinen'],
+        international: false
       },
     ],
   },
