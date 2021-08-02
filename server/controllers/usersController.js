@@ -154,6 +154,29 @@ const editUserAccess = async (req, res) => {
   }
 }
 
+const deleteUser = async (req, res) => {
+  try {
+    const { lastname, firstname } = await db.user.findOne({
+      where: {
+        id: req.params.id
+      }, 
+      raw: true
+    })
+
+    await db.user.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+
+    logger.info(`User ${firstname} ${lastname} deleted by ${req.user.firstname} ${req.user.lastname}`)
+    return res.status(200).send(req.params.id)
+  } catch (e) {
+    logger.error(e.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getUserOrganizations = async (req, res) => {
   try {
     const params = req.params
@@ -177,5 +200,6 @@ module.exports = {
   editUser,
   getProgrammesUsers,
   editUserAccess,
+  deleteUser,
   getUserOrganizations,
 }

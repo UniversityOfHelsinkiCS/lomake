@@ -15,6 +15,13 @@ export const editUserAction = (user) => {
   return callBuilder(route, prefix, 'put', user)
 }
 
+export const deleteUserAction = (id) => {
+  const route = `/users/delete/${id}`
+  const prefix = 'DELETE_USER'
+  return callBuilder(route, prefix, 'delete')
+}
+
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: [] }, action) => {
@@ -56,6 +63,25 @@ export default (state = { data: [] }, action) => {
       return {
         ...state,
         data: [],
+        pending: false,
+        error: true
+      }
+    case 'DELETE_USER_SUCCESS':
+      return {
+        ...state,
+        data: state.data.filter((u) => u.id !== action.response),
+        pending: false,
+        error: false
+      }
+    case 'DELETE_USER_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false
+      }
+    case 'DELETE_USER_FAILURE':
+      return {
+        ...state,
         pending: false,
         error: true
       }

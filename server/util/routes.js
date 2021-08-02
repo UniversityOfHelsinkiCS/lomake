@@ -43,6 +43,7 @@ router.post('/logout', users.getLogoutUrl)
 
 router.get('/users', checkAdmin, users.getAllUsers)
 router.put('/users/:id', checkAdmin, users.editUser)
+router.delete('/users/delete/:id', checkAdmin, users.deleteUser)
 
 router.post('/access/:url', tokens.claimToken)
 router.post('/access/:url/faculty', tokens.claimFacultyToken)

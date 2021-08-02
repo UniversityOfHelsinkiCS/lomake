@@ -103,8 +103,8 @@ export default () => {
       <Grid celled="internally">
         <Grid.Row>
           <CustomHeader width={2} name={translations.name[lang]} field="lastname" />
-          <CustomHeader width={3} name={translations.userId[lang]} field="uid" />
-          <CustomHeader width={3} name={translations.email[lang]} field="email" />
+          <CustomHeader width={2} name={translations.userId[lang]} field="uid" />
+          <CustomHeader width={2} name={translations.email[lang]} field="email" />
           <CustomHeader
             width={3}
             name={translations.access[lang]}
@@ -112,6 +112,7 @@ export default () => {
             sortable={false}
           />
           <CustomHeader width={4} name={translations.userGroup[lang]} field="userGroup" />
+          <CustomHeader width={2} name={translations.deleteUser[lang]} field="deleteUser" />
           {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
         </Grid.Row>
         {filteredUsers().map((u) => (

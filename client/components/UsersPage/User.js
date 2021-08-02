@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Icon, Popup, Form, Radio } from 'semantic-ui-react'
-import { editUserAction } from 'Utilities/redux/usersReducer'
+import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
@@ -17,6 +17,10 @@ export default ({ user, lang }) => {
 
   const removeAdmin = () => {
     dispatch(editUserAction({ id: user.id, admin: false }))
+  }
+
+  const deleteUser = () => {
+    dispatch(deleteUserAction(user.id))
   }
 
   const logInAs = () => {
@@ -109,17 +113,44 @@ export default ({ user, lang }) => {
     )
   }
 
+  const DeleteButton = () => {
+    return (
+      <Popup
+        content={
+          <Button
+            color="red"
+            onClick={deleteUser}
+          >
+            {translations.deleteConfirmation[lang]}
+          </Button>
+        }
+        trigger={
+          <Button 
+            color={isSuperAdmin(user.uid) ? "gray" : "red"}
+            disabled={isSuperAdmin(user.uid)}
+          >
+            {translations.deleteUser[lang]}
+          </Button>
+        }
+        on="click"
+      />
+    )
+  }
+
   return useMemo(
     () => (
       <Grid.Row>
         <Grid.Column width={2}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
-        <Grid.Column width={3}>{user.uid}</Grid.Column>
-        <Grid.Column width={3}>{user.email}</Grid.Column>
+        <Grid.Column width={2}>{user.uid}</Grid.Column>
+        <Grid.Column width={2}>{user.email}</Grid.Column>
         <Grid.Column width={3}>
           <FormattedAccess />
         </Grid.Column>
         <Grid.Column width={4}>
           <UserGroupSelector />
+        </Grid.Column>
+        <Grid.Column width={2}>
+          <DeleteButton />
         </Grid.Column>
         {isSuperAdmin(currentUser.uid) && (
           <Grid.Column>

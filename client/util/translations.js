@@ -1304,4 +1304,15 @@ export const usersPageTranslations = {
     fi: 'Piilota',
     se: 'Hide',
   },
+  deleteUser: {
+    en: 'Delete',
+    fi: 'Poista',
+    se: 'Delete',
+  },
+  deleteConfirmation: {
+    en: 'Yes, permanently delete user',
+    fi: 'Poista käyttäjä pysyvästi',
+    se: 'Yes, permanently delete user',
+  },
+
 }
