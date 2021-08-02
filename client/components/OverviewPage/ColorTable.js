@@ -106,7 +106,7 @@ const ColorTable = React.memo(
       >
         <Button
           data-cy={`${program.key}-manage`}
-          icon="settings"
+          icon="user"
           circular
           onClick={() => setProgramControlsToShow(program)}
         />
