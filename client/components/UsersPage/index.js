@@ -16,6 +16,7 @@ import { isSuperAdmin } from '@root/config/common'
 export default () => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const user = useSelector(({ currentUser }) => currentUser.data)
 
   useEffect(() => {
     document.title = translations['adminPage'][lang]
@@ -69,7 +70,7 @@ export default () => {
     },
   ]
   
-  if (isSuperAdmin) {
+  if (isSuperAdmin(user.uid)) {
     panes = 
       [...panes, {
         menuItem: translations.updateStudyprogrammes[lang],
