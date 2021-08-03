@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Header, Input, Icon } from 'semantic-ui-react'
+import { Header, Input, Icon, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
@@ -51,7 +51,7 @@ export default () => {
     return byAccess
   }
 
-  const CustomHeader = ({ width, name, field, sortable = true }) => {
+  const getCustomHeader = ({ name, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
           if (sorter === field) {
@@ -62,63 +62,61 @@ export default () => {
           }
         }
       : undefined
-    const style = sortable ? { cursor: 'pointer' } : {}
 
     return (
-      <Grid.Column
+      <Table.HeaderCell
         onClick={sortHandler}
-        style={{ display: 'flex', alignItems: 'baseline', ...style }}
-        width={width}
+        style={sortable ? { cursor: 'pointer' } : {} }
       >
-        <Header as="h4">{name}</Header>
-        {sortable && <Icon name="sort" />}
-      </Grid.Column>
+        {name} {sortable && <Icon name="sort" />}
+      </Table.HeaderCell>
     )
   }
 
   return (
     <>
-      <Grid className="user-filter-container">
-        <Grid.Column width={3}>
-          <Input
-            value={nameFilter}
-            onChange={(e, { value }) => setNameFilter(value)}
-            icon="search"
-            iconPosition="left"
-            placeholder={translations.searchByName[lang]}
-          />
-        </Grid.Column>
-        <Grid.Column width={5} />
-        <Grid.Column width={4}>
-          <Input
-            value={accessFilter}
-            onChange={(e, { value }) => setAccessFilter(value)}
-            icon="users"
-            iconPosition="left"
-            placeholder={translations.filterByAccess[lang]}
-          />
-        </Grid.Column>
-        <Grid.Column width={2} />
-      </Grid>
-      <Grid celled="internally">
-        <Grid.Row>
-          <CustomHeader width={2} name={translations.name[lang]} field="lastname" />
-          <CustomHeader width={2} name={translations.userId[lang]} field="uid" />
-          <CustomHeader width={2} name={translations.email[lang]} field="email" />
-          <CustomHeader
-            width={3}
-            name={translations.access[lang]}
-            field="access"
-            sortable={false}
-          />
-          <CustomHeader width={4} name={translations.userGroup[lang]} field="userGroup" />
-          <CustomHeader width={2} name={translations.deleteUser[lang]} field="deleteUser" />
-          {isSuperAdmin(user.uid) && <CustomHeader width={1} name="Hijack" sortable={false} />}
-        </Grid.Row>
+      <Table className="user-filter-container">
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell width={3}>
+              <Input
+                value={nameFilter}
+                onChange={(e, { value }) => setNameFilter(value)}
+                icon="search"
+                iconPosition="left"
+                placeholder={translations.searchByName[lang]}
+              />
+            </Table.Cell>
+            <Table.Cell width={4} />
+            <Table.Cell width={4}>
+              <Input
+                value={accessFilter}
+                onChange={(e, { value }) => setAccessFilter(value)}
+                icon="users"
+                iconPosition="left"
+                placeholder={translations.filterByAccess[lang]}
+              />
+            </Table.Cell>
+            <Table.Cell width={4} />
+          </Table.Row>
+        </Table.Body>
+      </Table>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            {getCustomHeader({ name: translations.name[lang], field: "lastname" })}
+            {getCustomHeader({ name: translations.userId[lang], field: "uid" })}
+            {getCustomHeader({ name: translations.email[lang], field: "email" })}
+            {getCustomHeader({ name: translations.access[lang], field: "access", sortable: false })}
+            {getCustomHeader({ name: translations.userGroup[lang], field: "userGroup" })}
+            {getCustomHeader({ name: translations.deleteUser[lang], field: "deleteUser", sortable: false})}
+            {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", field: "deleteUser", sortable: false })}
+          </Table.Row>
+        </Table.Header>
         {filteredUsers().map((u) => (
           <User lang={lang} user={u} key={u.id} />
         ))}
-      </Grid>
+      </Table>
     </>
   )
 }

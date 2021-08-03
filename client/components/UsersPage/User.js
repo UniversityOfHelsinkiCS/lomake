@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Grid, Icon, Popup, Form, Radio } from 'semantic-ui-react'
+import { Button, Table, Icon, Popup, Form, Radio } from 'semantic-ui-react'
 import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import './UsersPage.scss'
@@ -139,25 +139,25 @@ export default ({ user, lang }) => {
 
   return useMemo(
     () => (
-      <Grid.Row>
-        <Grid.Column width={2}>{`${user.lastname}, ${user.firstname}`}</Grid.Column>
-        <Grid.Column width={2}>{user.uid}</Grid.Column>
-        <Grid.Column width={2}>{user.email}</Grid.Column>
-        <Grid.Column width={3}>
+      <Table.Row>
+        <Table.Cell>{`${user.lastname}, ${user.firstname}`}</Table.Cell>
+        <Table.Cell>{user.uid}</Table.Cell>
+        <Table.Cell>{user.email}</Table.Cell>
+        <Table.Cell>
           <FormattedAccess />
-        </Grid.Column>
-        <Grid.Column width={4}>
+        </Table.Cell>
+        <Table.Cell>
           <UserGroupSelector />
-        </Grid.Column>
-        <Grid.Column width={2}>
+        </Table.Cell>
+        <Table.Cell>
           <DeleteButton />
-        </Grid.Column>
+        </Table.Cell>
         {isSuperAdmin(currentUser.uid) && (
-          <Grid.Column>
+          <Table.Cell>
             <Icon onClick={logInAs} size="large" name="sign-in" />
-          </Grid.Column>
+          </Table.Cell>
         )}
-      </Grid.Row>
+      </Table.Row>
     ),
     [user]
   )
