@@ -95,7 +95,7 @@ export default () => {
           placeholder={translations.filterByAccess[lang]}
         />
       </div>
-      <Table celled>
+      <Table celled compact stackable>
         <Table.Header>
           <Table.Row>
             {getCustomHeader({ name: translations.name[lang], field: "lastname" })}
