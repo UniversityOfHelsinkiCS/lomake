@@ -1236,7 +1236,7 @@ export const usersPageTranslations = {
   },
   searchByName: {
     en: 'Search users by name',
-    fi: 'Etsi käyttäjiä',
+    fi: 'Etsi käyttäjiä nimellä',
     se: 'Search users by name',
   },
   filterByAccess: {

@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Header, Input, Icon, Table } from 'semantic-ui-react'
+import { Input, Icon, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
+
 import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import './UsersPage.scss'
+
 
 export default () => {
   const [sorter, setSorter] = useState('')
@@ -75,32 +78,23 @@ export default () => {
 
   return (
     <>
-      <Table className="user-filter-container">
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell width={3}>
-              <Input
-                value={nameFilter}
-                onChange={(e, { value }) => setNameFilter(value)}
-                icon="search"
-                iconPosition="left"
-                placeholder={translations.searchByName[lang]}
-              />
-            </Table.Cell>
-            <Table.Cell width={4} />
-            <Table.Cell width={4}>
-              <Input
-                value={accessFilter}
-                onChange={(e, { value }) => setAccessFilter(value)}
-                icon="users"
-                iconPosition="left"
-                placeholder={translations.filterByAccess[lang]}
-              />
-            </Table.Cell>
-            <Table.Cell width={4} />
-          </Table.Row>
-        </Table.Body>
-      </Table>
+      <div className="user-filter-container">
+        <Input
+          value={nameFilter}
+          onChange={(e, { value }) => setNameFilter(value)}
+          icon="search"
+          iconPosition="left"
+          placeholder={translations.searchByName[lang]}
+        />
+        <Input
+          className="user-filter"
+          value={accessFilter}
+          onChange={(e, { value }) => setAccessFilter(value)}
+          icon="users"
+          iconPosition="left"
+          placeholder={translations.filterByAccess[lang]}
+        />
+      </div>
       <Table celled>
         <Table.Header>
           <Table.Row>
