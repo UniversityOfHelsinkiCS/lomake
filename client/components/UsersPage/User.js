@@ -142,7 +142,6 @@ export default ({ user, lang }) => {
       <Table.Row>
         <Table.Cell>{`${user.lastname}, ${user.firstname}`}</Table.Cell>
         <Table.Cell>{user.uid}</Table.Cell>
-        <Table.Cell>{user.email}</Table.Cell>
         <Table.Cell>
           <FormattedAccess />
         </Table.Cell>

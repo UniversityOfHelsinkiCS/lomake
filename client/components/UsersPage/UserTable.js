@@ -54,7 +54,7 @@ export default () => {
     return byAccess
   }
 
-  const getCustomHeader = ({ name, field, sortable = true }) => {
+  const getCustomHeader = ({ name, width, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
           if (sorter === field) {
@@ -70,6 +70,7 @@ export default () => {
       <Table.HeaderCell
         onClick={sortHandler}
         style={sortable ? { cursor: 'pointer' } : {} }
+        width={width}
       >
         {name} {sortable && <Icon name="sort" />}
       </Table.HeaderCell>
@@ -98,13 +99,12 @@ export default () => {
       <Table celled compact stackable>
         <Table.Header>
           <Table.Row>
-            {getCustomHeader({ name: translations.name[lang], field: "lastname" })}
-            {getCustomHeader({ name: translations.userId[lang], field: "uid" })}
-            {getCustomHeader({ name: translations.email[lang], field: "email" })}
-            {getCustomHeader({ name: translations.access[lang], field: "access", sortable: false })}
-            {getCustomHeader({ name: translations.userGroup[lang], field: "userGroup" })}
-            {getCustomHeader({ name: translations.deleteUser[lang], field: "deleteUser", sortable: false})}
-            {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", field: "deleteUser", sortable: false })}
+            {getCustomHeader({ name: translations.name[lang], width: 2, field: "lastname" })}
+            {getCustomHeader({ name: translations.userId[lang], width: 2, field: "uid" })}
+            {getCustomHeader({ name: translations.access[lang], width: 5, field: "access", sortable: false })}
+            {getCustomHeader({ name: translations.userGroup[lang], width: 6, field: "userGroup" })}
+            {getCustomHeader({ name: translations.deleteUser[lang], width: 1, field: "deleteUser", sortable: false})}
+            {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", width: 1, field: "deleteUser", sortable: false })}
           </Table.Row>
         </Table.Header>
         {filteredUsers().map((u) => (
