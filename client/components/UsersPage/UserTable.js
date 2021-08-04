@@ -27,10 +27,7 @@ export default () => {
     history.push('/')
   }
 
-  if (
-    users.pending ||
-    !users.data
-  ) return <Loader active inline="centered" />
+  if (users.pending || !users.data) return <Loader active inline="centered" />
 
   if (!users) return null
 

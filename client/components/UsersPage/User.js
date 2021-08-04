@@ -126,7 +126,7 @@ export default ({ user, lang }) => {
         }
         trigger={
           <Button 
-            color={isSuperAdmin(user.uid) ? "gray" : "red"}
+            color={isSuperAdmin(user.uid) ? "grey" : "red"}
             disabled={isSuperAdmin(user.uid)}
           >
             {translations.deleteUser[lang]}
