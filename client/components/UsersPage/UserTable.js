@@ -109,9 +109,11 @@ export default () => {
             {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", width: 1, field: "deleteUser", sortable: false })}
           </Table.Row>
         </Table.Header>
-        {filteredUsers().map((u) => (
-          <User lang={lang} user={u} key={u.id} />
-        ))}
+        <Table.Body>
+          {filteredUsers().map((u) => (
+            <User lang={lang} user={u} key={u.id} />
+          ))}
+        </Table.Body>
       </Table>
     </>
   )
