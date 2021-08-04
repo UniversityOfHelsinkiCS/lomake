@@ -1135,9 +1135,9 @@ const data = [
       {
         key: 'T920110',
         name: {
-          fi: 'Psykologian, oppimisen ja kommunikaation tohtoriohjelma',
-          en: 'Doctoral Programme in Psychology, Learning and Communication',
-          se: 'Doktorandprogrammet i psykologi, lärande och kommunikation',
+          fi: 'Kognition, oppimisen, opetuksen ja kommunikaation tohtoriohjelma',
+          en: 'Doctoral Programme in Cognition, Learning, Instruction and Communication',
+          se: 'Doktorandprogrammet i kognition, inlärning, undervisning och kommunikation',
         },
         level: 'doctoral',
         companionFaculties: [],
