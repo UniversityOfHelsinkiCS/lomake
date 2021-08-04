@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Input, Icon, Table } from 'semantic-ui-react'
+import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
 import User from 'Components/UsersPage/User'
@@ -19,7 +19,7 @@ export default () => {
   const debouncedName = useDebounce(nameFilter, 200)
 
   const lang = useSelector((state) => state.language)
-  const users = useSelector((state) => state.users.data)
+  const users = useSelector((state) => state.users)
   const user = useSelector(({ currentUser }) => currentUser.data)
   const history = useHistory()
 
@@ -27,9 +27,14 @@ export default () => {
     history.push('/')
   }
 
+  if (
+    users.pending ||
+    !users.data
+  ) return <Loader active inline="centered" />
+
   if (!users) return null
 
-  let sortedUsersToShow = sortedItems(users, sorter)
+  let sortedUsersToShow = sortedItems(users.data, sorter)
 
   if (reverse) sortedUsersToShow.reverse()
 
