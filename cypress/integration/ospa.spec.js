@@ -48,10 +48,10 @@ describe('OSPA user tests', function () {
 
   it('Can give admin permissions', function () {
     cy.get('[data-cy=nav-admin]').click()
-    cy.contains('res, cyp').parent().find('[data-cy=accessAdmin]').click()
+    cy.contains('cyp res').parent().find('[data-cy=accessAdmin]').click()
     cy.get('[data-cy=accessAdmin-confirm]').click()
     cy.reload()
-    cy.contains('res, cyp').parent().find('[data-cy=accessAdmin]').should('have.class', 'checked')
+    cy.contains('cyp res').parent().find('[data-cy=accessAdmin]').should('have.class', 'checked')
   })
 
   it('Can navigate between tabs and the tables render', function () {
