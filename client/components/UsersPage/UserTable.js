@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
+import AccessModal from './AccessModal'
 import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
@@ -16,18 +17,23 @@ export default () => {
   const [reverse, setReverse] = useState(false)
   const [nameFilter, setNameFilter] = useState('')
   const [accessFilter, setAccessFilter] = useState('')
+  const [programmeFilter, setFilter] = useState('')
+  const [modalData, setModalData] = useState(null)
+
   const debouncedName = useDebounce(nameFilter, 200)
+  const debouncedProgramme = useDebounce(programmeFilter, 200)
 
   const lang = useSelector((state) => state.language)
   const users = useSelector((state) => state.users)
   const user = useSelector(({ currentUser }) => currentUser.data)
+  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const history = useHistory()
 
   if (!user.admin) {
     history.push('/')
   }
 
-  if (users.pending || !users.data) return <Loader active inline="centered" />
+  if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />
 
   if (!users) return null
 
@@ -56,6 +62,18 @@ export default () => {
     return byAccess
   }
 
+  const filteredProgrammes = usersProgrammes.filter((p) => {
+    if (programmeFilter === '') return false
+    const prog = p.name[lang]
+    return prog.toLowerCase().includes(debouncedProgramme.toLowerCase())
+  })
+
+
+  const handleSearch = ({ target }) => {
+    const { value } = target
+    setFilter(value)
+  }
+
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
@@ -81,6 +99,17 @@ export default () => {
 
   return (
     <>
+      {modalData && (
+        <AccessModal
+          user={sortedUsersToShow.find((u) => u.id === modalData.id)}
+          setModalData={setModalData}
+          handleSearch={handleSearch}
+          programmeFilter={programmeFilter}
+          onEmpty={() => setFilter('')}
+          lang={lang}
+          filteredProgrammes={filteredProgrammes}
+        />
+      )}
       <div className="user-filter-container">
         <Input
           value={nameFilter}
@@ -102,8 +131,8 @@ export default () => {
         <Table.Header>
           <Table.Row>
             {getCustomHeader({ name: translations.name[lang], width: 2, field: "lastname" })}
-            {getCustomHeader({ name: translations.userId[lang], width: 2, field: "uid" })}
-            {getCustomHeader({ name: translations.access[lang], width: 5, field: "access", sortable: false })}
+            {getCustomHeader({ name: translations.userId[lang], width: 1, field: "uid" })}
+            {getCustomHeader({ name: translations.access[lang], width: 6, field: "access", sortable: false })}
             {getCustomHeader({ name: translations.userGroup[lang], width: 6, field: "userGroup" })}
             {getCustomHeader({ name: translations.deleteUser[lang], width: 1, field: "deleteUser", sortable: false})}
             {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", width: 1, field: "deleteUser", sortable: false })}
@@ -111,7 +140,7 @@ export default () => {
         </Table.Header>
         <Table.Body>
           {filteredUsers().map((u) => (
-            <User lang={lang} user={u} key={u.id} />
+            <User lang={lang} user={u} key={u.id} setModalData={setModalData} />
           ))}
         </Table.Body>
       </Table>

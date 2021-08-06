@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Table, Icon, Popup, Form, Radio } from 'semantic-ui-react'
+
 import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
+import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-export default ({ user, lang }) => {
+export default ({ user, lang, setModalData }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -103,13 +105,29 @@ export default ({ user, lang }) => {
   const FormattedAccess = () => {
     if (!user.access || Object.keys(user.access).length === 0) return <>None</>
     return (
-      <>
+      <div>
         {Object.keys(user.access).map((programme) => (
           <div key={`${user.uid}-${programme}`}>{`${programme}: ${formatRights(
             user.access[programme]
           )}`}</div>
         ))}
-      </>
+      </div>
+    )
+  }
+
+  const EditIcon = () => {
+    return (
+      <Button 
+        icon
+        onClick={() => setModalData({ id: user.id })} 
+        style={{
+          marginLeft: 'auto',
+          backgroundColor: 'transparent',
+          color: colors.black
+        }}
+      >
+        <Icon size="large" name="edit" />
+      </Button>
     )
   }
 
@@ -142,8 +160,9 @@ export default ({ user, lang }) => {
       <Table.Row>
         <Table.Cell>{user.firstname} {user.lastname}</Table.Cell>
         <Table.Cell>{user.uid}</Table.Cell>
-        <Table.Cell>
+        <Table.Cell style={{ display: "flex" }}>
           <FormattedAccess />
+          <EditIcon />
         </Table.Cell>
         <Table.Cell>
           <UserGroupSelector />
