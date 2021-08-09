@@ -1324,6 +1324,11 @@ export const usersPageTranslations = {
     fi: 'Muokkaa',
     se: 'Edit'
   },
+  accessRights: {
+    en: 'Programme access',
+    fi: 'Oikeudet ohjelmiin',
+    se: 'Programme access'
+  },
   programme: {
     en: 'Programme',
     fi: 'Ohjelma',
