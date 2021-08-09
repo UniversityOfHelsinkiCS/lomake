@@ -67,9 +67,9 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
           <FormattedAccess />
         </Table.Cell>
         <Table.Cell>
-          {!user.wideReadAccess && !user.admin && 'Basic user'}
-          {user.wideReadAccess && !user.admin && 'Wide read access'}
-          {user.admin && 'Admin'}
+          {!user.wideReadAccess && !user.admin && translations.accessBasic[lang]}
+          {user.wideReadAccess && !user.admin && translations.accessWideRead[lang]}
+          {user.admin && translations.accessAdmin[lang]}
         </Table.Cell>
         <Table.Cell>
           <EditIcon />
