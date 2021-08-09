@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'

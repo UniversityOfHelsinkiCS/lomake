@@ -165,6 +165,7 @@ export default () => {
                 filter={filter}
                 onEmpty={() => setFilter('')}
                 lang={lang}
+                label={translations.programmeFilter[lang]}
               />
             </>
           )}

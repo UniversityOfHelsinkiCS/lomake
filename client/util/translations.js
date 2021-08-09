@@ -165,6 +165,11 @@ export const comparisonPageTranslations = {
     se: 'No faculty defined',
   },
   // ComparisonPage/ComparisonByYear.js
+  programmeFilter: {
+    en: 'Search for specific programmes',
+    fi: 'Etsi koulutusohjelmia',
+    se: 'Search for specific programmes',
+  },
   green: {
     fi: 'Vihreä',
     en: 'Green',
@@ -1029,6 +1034,11 @@ export const reportPageTranslations = {
     fi: 'Suodata kysymyksiä',
     se: 'Filter out questions',
   },
+  programmeFilter: {
+    en: 'Search for specific programmes',
+    fi: 'Etsi koulutusohjelmia',
+    se: 'Search for specific programmes',
+  },
   // ReportPage/PieChart.js
   responses: {
     en: 'Responses:',
@@ -1329,5 +1339,9 @@ export const usersPageTranslations = {
     fi: 'Poista käyttäjä pysyvästi',
     se: 'Yes, permanently delete user',
   },
-
+  programmeFilter: {
+    en: 'Give rights to other programmes',
+    fi: 'Anna oikeuksia muihin koulutusohjelmiin',
+    se: 'Give rights to other programmes',
+  }
 }

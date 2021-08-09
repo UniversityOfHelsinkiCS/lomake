@@ -186,6 +186,7 @@ const AccessModal = ({
       </Table>
       <div className="user-access-modal-delete-container">
         <ProgrammeFilter
+          label={translations.programmeFilter[lang]}
           handleChange={handleSearch}
           filter={programmeFilter}
           onEmpty={onEmpty}

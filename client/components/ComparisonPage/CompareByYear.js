@@ -134,6 +134,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
                 <ProgrammeFilter
                   handleChange={handleSearch}
+                  label={translations.programmeFilter[lang]}
                   filter={filter}
                   onEmpty={() => setFilter('')}
                   lang={lang}

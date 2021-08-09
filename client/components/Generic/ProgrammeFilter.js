@@ -3,9 +3,9 @@ import { Button, Input } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
-const ProgrammeFilter = ({ onEmpty, handleChange, filter, lang }) => (
+const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, lang }) => (
   <div className="programme-filter">
-    <label>{translations.programmeFilter[lang]}</label>
+    <label>{label}</label>
     <Input
       data-cy="programme-filter"
       name="filter"
