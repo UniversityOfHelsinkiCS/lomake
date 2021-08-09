@@ -44,7 +44,12 @@
 }
 
 .programme-filter {
-  @include filter-basics;
+  &-normal {
+    @include filter-basics;
+  }
+  &-large {
+    @include filter-basics;
+  }
   &-input {
     width: 400px;
   }

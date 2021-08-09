@@ -1250,9 +1250,9 @@ export const usersPageTranslations = {
     se: 'Search users by name',
   },
   filterByAccess: {
-    en: 'Filter users by access',
-    fi: 'Etsi oikeuksien perusteella',
-    se: 'Filter users by access',
+    en: 'Filter users by study programmes',
+    fi: 'Etsi koulutusohjelmien perusteella',
+    se: 'Filter users by study programmes',
   },
   name: {
     en: 'Name',
@@ -1289,6 +1289,11 @@ export const usersPageTranslations = {
     fi: 'Laajat lukuoikeudet',
     se: 'Wide read access',
   },
+  accessInternational: {
+    en: 'International masters programmes',
+    fi: 'Kansainväliset maisteriohjelmat',
+    se: 'International masters programmes',
+  },
   accessAdmin: {
     en: 'Admin',
     fi: 'Ylläpitäjä',
@@ -1319,29 +1324,64 @@ export const usersPageTranslations = {
     fi: 'Muokkaa',
     se: 'Edit'
   },
+  programme: {
+    en: 'Programme',
+    fi: 'Ohjelma',
+    se: 'Programme'
+  },
+  readAccess: {
+    en: 'Read Access',
+    fi: 'Lukuoikeus',
+    se: 'Read Access',
+  },
+  writeAccess: {
+    en: 'Write Access',
+    fi: 'Kirjoitusoikeus',
+    se: 'Write Access',
+  },
+  ownerAccess: {
+    en: 'Programme Owner',
+    fi: 'Omistusoikeudet',
+    se: 'Programme Owner',
+  },
   deleteUser: {
     en: 'Delete user',
     fi: 'Poista käyttäjä',
     se: 'Delete user',
   },
   grantAccess: {
-    fi: 'Anna oikeus',
-    en: 'Grant access right',
-    se: 'Ge åtkomst',
+    fi: 'Klikkaaminen antaa kyseisen oikeuden ohjelmaan',
+    en: 'Click to grant the access right',
+    se: 'Click to grant the access right',
   },
   removeAccess: {
     fi: 'Poista oikeus',
     en: 'Remove access right',
     se: 'Ta bort åtkomst',
   },
+  removeAllAccess: {
+    fi: 'Poista kaikki oikeudet ohjelmaan',
+    en: 'Remove all access to this programme',
+    se: 'Remove all access to this programme'
+  },
+  addRights: {
+    fi: 'Lisää oikeuksia',
+    en: 'Add rights',
+    se: 'Add rights'
+  },
   deleteConfirmation: {
     en: 'Yes, permanently delete user',
     fi: 'Poista käyttäjä pysyvästi',
     se: 'Yes, permanently delete user',
   },
+  removeAccessToProgramme: {
+    en: 'Remove all access',
+    fi: 'Poista oikeudet',
+    se: 'Remove all access',
+  },
   programmeFilter: {
-    en: 'Give rights to other programmes',
-    fi: 'Anna oikeuksia muihin koulutusohjelmiin',
-    se: 'Give rights to other programmes',
+    en: 'Grant viewing rights to studyprogrammes',
+    fi: 'Anna lukuoikeuksia koulutusohjelmiin',
+    se: 'Grant viewing rights to studyprogrammes',
   }
 }

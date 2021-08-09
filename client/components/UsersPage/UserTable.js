@@ -55,6 +55,7 @@ export default () => {
 
     const byAccess = byName.filter((user) =>
       Object.keys(user.access)
+        .map((p) => programmeCodesAndNames.get(p))
         .join(', ')
         .toString()
         .toLocaleLowerCase()

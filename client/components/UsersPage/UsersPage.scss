@@ -27,10 +27,49 @@
   margin-left: 1em;
 }
 
-.user-access-modal-delete-container {
-  display: flex;
+.user-access-modal {
+  &-segment {
+    margin-top: 1.7em !important;
+  }
+  &-delete-container {
+    display: flex;
+    justify-content: center;
+  }
+  &-radio {
+    display: flex;
+    justify-content: flex-start;
+  }
+  &-details {
+    color: $gray;
+    margin-bottom: 0.3em;
+  }
+  > h2 {
+    margin-bottom: 0.8em;
+    margin-top: 1em !important;
+  }
+}
+
+.user-delete-button {
+  width: 90%;
+}
+
+.user-programme-list {
+  width: 400px;
+}
+
+.user-programme-list-item {
+  background-color: $light-gray !important;
+  color: $black !important;
+  margin: 0.2em !important;
+  min-width: 200px;
+}
+
+.user-programme-list-item:hover {
+  filter: brightness(0.8);
 }
 
 .user-access-links {
   cursor: pointer;
+  margin-top: 0.2em !important;
+  margin-bottom: 0.2em !important;
 }
