@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Button, Table, Icon, Popup, Form, Radio } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
+import { Button, Table, Icon } from 'semantic-ui-react'
 
-import { editUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
-  const dispatch = useDispatch()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
   const logInAs = () => {
@@ -69,6 +67,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell>
           {!user.wideReadAccess && !user.admin && translations.accessBasic[lang]}
           {user.wideReadAccess && !user.admin && translations.accessWideRead[lang]}
+          {user.specialGroup === 'international' && translations.accessInternational[lang]}
           {user.admin && translations.accessAdmin[lang]}
         </Table.Cell>
         <Table.Cell>
