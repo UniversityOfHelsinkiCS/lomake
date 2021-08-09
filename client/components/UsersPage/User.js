@@ -2,13 +2,13 @@ import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Table, Icon, Popup, Form, Radio } from 'semantic-ui-react'
 
-import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
+import { editUserAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-export default ({ user, lang, setModalData }) => {
+export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -19,10 +19,6 @@ export default ({ user, lang, setModalData }) => {
 
   const removeAdmin = () => {
     dispatch(editUserAction({ id: user.id, admin: false }))
-  }
-
-  const deleteUser = () => {
-    dispatch(deleteUserAction(user.id))
   }
 
   const logInAs = () => {
@@ -96,20 +92,27 @@ export default ({ user, lang, setModalData }) => {
     )
   }
 
-  const formatRights = (programme) => {
-    return Object.keys(programme)
-      .filter((e) => programme[e])
-      .join(', ')
-  }
-
   const FormattedAccess = () => {
-    if (!user.access || Object.keys(user.access).length === 0) return <>None</>
+    if (!user.access || Object.keys(user.access).length === 0) {
+      return (
+      <a
+        onClick={() => setModalData({ id: user.id })}
+        className="user-access-links"
+      >
+        None
+      </a>
+      )
+    }
     return (
       <div>
         {Object.keys(user.access).map((programme) => (
-          <div key={`${user.uid}-${programme}`}>{`${programme}: ${formatRights(
-            user.access[programme]
-          )}`}</div>
+          <a
+            onClick={() => setModalData({ id: user.id })}
+            className="user-access-links"
+            key={`${user.uid}-${programme}`}
+          >
+            <div>{programmeCodesAndNames.get(programme)}</div>
+          </a>
         ))}
       </div>
     )
@@ -131,30 +134,6 @@ export default ({ user, lang, setModalData }) => {
     )
   }
 
-  const DeleteButton = () => {
-    return (
-      <Popup
-        content={
-          <Button
-            color="red"
-            onClick={deleteUser}
-          >
-            {translations.deleteConfirmation[lang]}
-          </Button>
-        }
-        trigger={
-          <Button 
-            color={isSuperAdmin(user.uid) ? "grey" : "red"}
-            disabled={isSuperAdmin(user.uid)}
-          >
-            {translations.deleteUser[lang]}
-          </Button>
-        }
-        on="click"
-      />
-    )
-  }
-
   return useMemo(
     () => (
       <Table.Row>
@@ -162,13 +141,12 @@ export default ({ user, lang, setModalData }) => {
         <Table.Cell>{user.uid}</Table.Cell>
         <Table.Cell style={{ display: "flex" }}>
           <FormattedAccess />
-          <EditIcon />
         </Table.Cell>
         <Table.Cell>
           <UserGroupSelector />
         </Table.Cell>
         <Table.Cell>
-          <DeleteButton />
+          <EditIcon />
         </Table.Cell>
         {isSuperAdmin(currentUser.uid) && (
           <Table.Cell>

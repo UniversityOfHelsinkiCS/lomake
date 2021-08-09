@@ -4,8 +4,9 @@ import { Button, Icon, Popup, Table } from 'semantic-ui-react'
 
 import CustomModal from '../Generic/CustomModal'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
-import { editUserAction } from 'Utilities/redux/usersReducer'
-import { overviewPageTranslations as translations } from 'Utilities/translations'
+import { isSuperAdmin } from '../../../config/common'
+import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
+import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
 const AccessModal = ({
@@ -15,10 +16,16 @@ const AccessModal = ({
   programmeFilter,
   onEmpty,
   lang,
-  filteredProgrammes
+  filteredProgrammes,
+  programmeCodesAndNames
 }) => {
   const dispatch = useDispatch()
   if (!user || user.pending) return null
+
+
+  const deleteUser = () => {
+    dispatch(deleteUserAction(user.id))
+  }
 
   const grantOwner = (programme) => {
     const updatedUser = { id: user.id, access: { ...user.access, [programme]: { admin: true, read: true, write: true }}}
@@ -87,6 +94,32 @@ const AccessModal = ({
     )
   }
 
+  const DeleteButton = () => {
+    return (
+      <Popup
+        content={
+          <Button
+            color="red"
+            onClick={deleteUser}
+          >
+            {translations.deleteConfirmation[lang]}
+          </Button>
+        }
+        trigger={
+          <Button 
+            compact
+            style={{ marginLeft: 'auto', marginTop: 'auto' }}
+            color={isSuperAdmin(user.uid) ? "grey" : "red"}
+            disabled={isSuperAdmin(user.uid)}
+          >
+            {translations.deleteUser[lang]}
+          </Button>
+        }
+        on="click"
+      />
+    )
+  }
+
   return (
     <CustomModal
     title={`${user.firstname} ${user.lastname}`}
@@ -116,7 +149,7 @@ const AccessModal = ({
           {Object.keys(user.access).map((programme) => (
             <Table.Row key={`${user.lastname}-${programme}`}>
               <Table.Cell>
-                {programme}
+                {programmeCodesAndNames.get(programme)}
               </Table.Cell>
               <Table.Cell>
               {getSwitchableBadge({
@@ -151,12 +184,15 @@ const AccessModal = ({
           ))}
         </Table.Body>
       </Table>
-      <ProgrammeFilter
-        handleChange={handleSearch}
-        filter={programmeFilter}
-        onEmpty={onEmpty}
-        lang={lang}            
-      />
+      <div className="user-access-modal-delete-container">
+        <ProgrammeFilter
+          handleChange={handleSearch}
+          filter={programmeFilter}
+          onEmpty={onEmpty}
+          lang={lang}            
+        />
+        <DeleteButton/>
+      </div>
       <div>
         {filteredProgrammes.map((p) => (
           <div

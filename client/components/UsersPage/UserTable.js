@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
@@ -36,6 +36,7 @@ export default () => {
   if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />
 
   if (!users) return null
+
 
   let sortedUsersToShow = sortedItems(users.data, sorter)
 
@@ -97,6 +98,15 @@ export default () => {
     )
   }
 
+
+  const mapProgrammes = (programmes) => {
+    let programmeMap = new Map()
+    programmes.forEach((p) => programmeMap.set(p.key, p.name[lang]))
+    return programmeMap
+  }
+
+  let programmeCodesAndNames = mapProgrammes(usersProgrammes)
+
   return (
     <>
       {modalData && (
@@ -108,6 +118,7 @@ export default () => {
           onEmpty={() => setFilter('')}
           lang={lang}
           filteredProgrammes={filteredProgrammes}
+          programmeCodesAndNames={programmeCodesAndNames}
         />
       )}
       <div className="user-filter-container">
@@ -134,13 +145,19 @@ export default () => {
             {getCustomHeader({ name: translations.userId[lang], width: 1, field: "uid" })}
             {getCustomHeader({ name: translations.access[lang], width: 6, field: "access", sortable: false })}
             {getCustomHeader({ name: translations.userGroup[lang], width: 6, field: "userGroup" })}
-            {getCustomHeader({ name: translations.deleteUser[lang], width: 1, field: "deleteUser", sortable: false})}
+            {getCustomHeader({ name: translations.editUser[lang], width: 1, field: "editUser", sortable: false})}
             {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", width: 1, field: "deleteUser", sortable: false })}
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {filteredUsers().map((u) => (
-            <User lang={lang} user={u} key={u.id} setModalData={setModalData} />
+            <User
+              lang={lang}
+              user={u}
+              key={u.id}
+              setModalData={setModalData}
+              programmeCodesAndNames={programmeCodesAndNames}
+            />
           ))}
         </Table.Body>
       </Table>

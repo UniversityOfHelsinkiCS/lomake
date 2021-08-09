@@ -1304,10 +1304,25 @@ export const usersPageTranslations = {
     fi: 'Piilota',
     se: 'Hide',
   },
+  editUser: {
+    en: 'Edit',
+    fi: 'Muokkaa',
+    se: 'Edit'
+  },
   deleteUser: {
-    en: 'Delete',
-    fi: 'Poista',
-    se: 'Delete',
+    en: 'Delete user',
+    fi: 'Poista käyttäjä',
+    se: 'Delete user',
+  },
+  grantAccess: {
+    fi: 'Anna oikeus',
+    en: 'Grant access right',
+    se: 'Ge åtkomst',
+  },
+  removeAccess: {
+    fi: 'Poista oikeus',
+    en: 'Remove access right',
+    se: 'Ta bort åtkomst',
   },
   deleteConfirmation: {
     en: 'Yes, permanently delete user',
