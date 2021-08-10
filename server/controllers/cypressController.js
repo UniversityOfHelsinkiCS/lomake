@@ -261,7 +261,7 @@ const createAnswers = async (req, res) => {
 
     await db.answer.destroy({ where: {} })
 
-    const years = [2018, 2019]
+    const years = [2019, 2020]
 
     const programmes = await db.studyprogramme.findAll({})
 
