@@ -60,6 +60,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     return (
       <Button 
         icon
+        data-cy="editUser"
         onClick={() => setModalData({ id: user.id })} 
         style={{
           marginLeft: 'auto',
@@ -80,7 +81,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell style={{ display: "flex" }}>
           <FormattedAccess />
         </Table.Cell>
-        <Table.Cell>
+        <Table.Cell data-cy="userGroup">
           {isBasicUser(user) && translations.accessBasic[lang]}
           {isWideReadAccessUser(user) && translations.accessWideRead[lang]}
           {isInternationalUser(user) && translations.accessInternational[lang]}
