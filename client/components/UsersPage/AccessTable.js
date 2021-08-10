@@ -78,13 +78,13 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
           <Table.HeaderCell width={5}>
             {translations.programme[lang]}
           </Table.HeaderCell>
-          <Table.HeaderCell width={3}>
+          <Table.HeaderCell textAlign="center" width={3}>
             {translations.readAccess[lang]}
           </Table.HeaderCell>
-          <Table.HeaderCell width={3}>
+          <Table.HeaderCell textAlign="center" width={3}>
             {translations.writeAccess[lang]}
           </Table.HeaderCell>
-          <Table.HeaderCell width={3}>
+          <Table.HeaderCell textAlign="center" width={3}>
             {translations.ownerAccess[lang]}
           </Table.HeaderCell>
           <Table.HeaderCell />
@@ -96,29 +96,29 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
             <Table.Cell>
               {programmeCodesAndNames.get(programme)} {access.year && <Label size='tiny'>{access.year}</Label>}
             </Table.Cell>
-            <Table.Cell>
-            {getSwitchableBadge({
-              cyTag: `read-${user.uid}`,
-              currentAccess: user.access[programme] ? user.access[programme].read : false,
-              grant: () => grantView(programme),
-              remove: () => removeView(programme)
-            })}
+            <Table.Cell textAlign="center">
+              {getSwitchableBadge({
+                cyTag: `read-${user.uid}`,
+                currentAccess: user.access[programme] ? user.access[programme].read : false,
+                grant: () => grantView(programme),
+                remove: () => removeView(programme)
+              })}
             </Table.Cell>
-            <Table.Cell>
-            {getSwitchableBadge({
-              cyTag: `write-${user.uid}`,
-              currentAccess: user.access[programme] ? user.access[programme].write : false,
-              grant: () => grantEdit(programme),
-              remove: () => removeEdit(programme)
-            })}
+            <Table.Cell textAlign="center">
+              {getSwitchableBadge({
+                cyTag: `write-${user.uid}`,
+                currentAccess: user.access[programme] ? user.access[programme].write : false,
+                grant: () => grantEdit(programme),
+                remove: () => removeEdit(programme)
+              })}
             </Table.Cell>
-            <Table.Cell>
-            {getSwitchableBadge({
-              cyTag: `read-${user.uid}`,
-              currentAccess: user.access[programme] ? user.access[programme].admin : false,
-              grant: () => grantOwner(programme),
-              remove: () => removeOwner(programme)
-            })}
+            <Table.Cell textAlign="center">
+              {getSwitchableBadge({
+                cyTag: `read-${user.uid}`,
+                currentAccess: user.access[programme] ? user.access[programme].admin : false,
+                grant: () => grantOwner(programme),
+                remove: () => removeOwner(programme)
+              })}
             </Table.Cell>
             <Table.Cell>
             <Popup
