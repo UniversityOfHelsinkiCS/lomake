@@ -6,7 +6,7 @@ import AccessTable from './AccessTable'
 import UserGroupSelector from './UserGroupSelector'
 import CustomModal from '../Generic/CustomModal'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
-import { isSuperAdmin } from '../../../config/common'
+import { isInternationalUser, isSuperAdmin } from '../../../config/common'
 import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
@@ -35,43 +35,29 @@ const AccessModal = ({
     dispatch(editUserAction(updatedUser))
   }
 
-  const getAccessTable = () => {
-    if (user.admin) {
-      return (
-        <>
-          <h4 style={{ color: colors.blue }}>{translations.userHasAdminRights[lang]}</h4>
-          {user.access && Object.keys(user.access).length > 0 && 
-            <AccessTable
-              user={user}
-              programmeCodesAndNames={programmeCodesAndNames}
-            />
-          }
-        </>
-      )
-    }
-    if (user.wideReadAccess) {
-      return (
-        <>
-          <h4 style={{ color: colors.blue }}>{translations.userHasWideReadingRights[lang]}</h4>
-          {user.access && Object.keys(user.access).length > 0 && 
-            <AccessTable
-              user={user}
-              programmeCodesAndNames={programmeCodesAndNames}
-            />
-          }
-        </>
-      )
-    }
-    if (user.access && Object.keys(user.access).length > 0) {
-      return (
+  const getAccessTable = () => (
+    <>
+      {
+        user.admin 
+        && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>
+      }
+      {
+        user.wideReadAccess 
+        && <h4 style={{ color: colors.blue }}>{translations.hasWideReadingRights[lang]}</h4>
+      }
+      {
+        isInternationalUser(user.specialGroup) 
+        && <h4 style={{ color: colors.blue }}>{translations.hasInternationalRights[lang]}</h4>
+      }
+      {user.access && Object.keys(user.access).length > 0 && 
         <AccessTable
           user={user}
           programmeCodesAndNames={programmeCodesAndNames}
         />
-      )
-    }
-    return null
-  }
+      }
+    </>
+  )
+  
 
   const DeleteButton = () => {
     return (

@@ -1339,15 +1339,20 @@ export const usersPageTranslations = {
     fi: 'Oikeudet ohjelmiin',
     se: 'Programme access'
   },
-  userHasAdminRights: {
+  hasAdminRights: {
     en: 'User is admin and already has rights to all programmes', 
     fi: 'Käyttäjä on ylläpitäjä, ja siten hänellä on oikeudet kaikkiin ohjelmiin',
     se: 'User is admin and already has rights to all programmes'
   },
-  userHasWideReadingRights: {
+  hasWideReadingRights: {
     en: 'User has Wide Read Access and therefore has viewing rights to all programmes', 
     fi: 'Käyttäjällä on laajat lukuoikeudet kaikkiin ohjelmiin',
     se: 'User has Wide Read Access and therefore has viewing rights to all programmes'
+  },
+  hasInternationalRights: {
+    en: "User has view access to international Master's programmes and their data after 2020",
+    fi: "Käyttäjällä on oikeus katsoa kansainvälisten maisteriohjelmien vastauksia vuodesta 2020 eteenpäin",
+    se: "User has view access to international Master's programmes and their data after 2020"
   },
   programme: {
     en: 'Programme',

@@ -50,7 +50,7 @@ const UserGroupSelector = ({ user }) => {
     if (group === 'international') {
       allProgrammes.forEach((p) => {
         if (p.international) {
-          newAccess = { ...newAccess, [p.key]: { ...newAccess[p.key], read: true }}
+          newAccess = { ...newAccess, [p.key]: { ...newAccess[p.key], read: true, year: 2020 }}
         }
       })
     }
