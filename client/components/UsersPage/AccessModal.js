@@ -100,7 +100,7 @@ const AccessModal = ({
       <Segment className="user-access-modal-segment">
         <h3>{translations.userGroup[lang]}</h3>
         <UserGroupSelector user={user}/>
-        <h3>{translations.userGroup[lang]}</h3>
+        <h3>{translations.accessGroups[lang]}</h3>
         <AccessGroupSelector user={user} />
       </Segment>
       <Segment className="user-access-modal-segment">

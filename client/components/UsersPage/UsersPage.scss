@@ -43,6 +43,10 @@
     color: $gray;
     margin-bottom: 0.3em;
   }
+  &-save-button {
+    color: $blue;
+    margin-top: 0.5em !important; 
+  }
   > h2 {
     margin-bottom: 0.8em;
     margin-top: 1em !important;

@@ -1294,6 +1294,11 @@ export const usersPageTranslations = {
     fi: 'Laajat lukuoikeudet',
     se: 'Wide read access',
   },
+  accessGroups: {
+    en: 'Viewing rights',
+    fi: 'Lukuoikeudet ryhmittäin',
+    se: 'Viewing rights'
+  },
   accessInternational2020: {
     en: "International Master's programmes 2020 ->",
     fi: 'Kansainväliset maisteriohjelmat 2020 ->',

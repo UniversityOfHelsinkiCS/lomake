@@ -44,11 +44,10 @@ const AccessGroupSelector = ({ user }) => {
 
     let updatedAccess = {}
 
-    // Remove all access to programmes that are not included in the new special groups
-    Object.keys(user.access).forEach((programmeKey) => {
-      const programme = allProgrammes.find((p) => p.key === programmeKey)
-      if (accessGroups.includes(programme.primaryFaculty.code)) {
-        updatedAccess = { ...updatedAccess, [programmeKey]: { ...user.access[programmeKey] }}
+    // Retain the programmes that the user has writing or admin access to
+    Object.entries(user.access).forEach(([programmeKey, access]) => {
+      if (access.write || access.admin) {
+        updatedAccess = { ...updatedAccess, [programmeKey]: user.access[programmeKey] }
       }
     })
     
@@ -91,7 +90,7 @@ const AccessGroupSelector = ({ user }) => {
   return (
     <div>
       <Dropdown
-        className="access-group-selector"
+        className="user-access-modal-group-selector"
         data-cy="access-group-selector"
         name="access-group-selector"
         fluid
@@ -102,7 +101,7 @@ const AccessGroupSelector = ({ user }) => {
         selection
       />
       <Button
-        className="access-group-edit-button"
+        className="user-access-modal-save-button"
         color="blue"
         onClick={() => editAccess()}
         data-cy="access-group-edit-button"
