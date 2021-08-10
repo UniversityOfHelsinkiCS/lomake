@@ -9,14 +9,40 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
 const UserGroupSelector = ({ user }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
+  const allProgrammes = useSelector((state) => state.studyProgrammes.data)
 
-  const grantAdmin = () => {
-    // Removed wideReadAccess, because we dont want users to have two usergroups. (admin and wideReadAccess)
-    dispatch(editUserAction({ id: user.id, admin: true, wideReadAccess: false }))
+
+  const makeAdminUser = () => {
+    // Removed wideReadAccess, because we dont want users to have multiple usergroups. (admin and wideReadAccess or special group)
+    dispatch(editUserAction({ id: user.id, admin: true, wideReadAccess: false, specialGroup: null }))
   }
 
-  const removeAdmin = () => {
-    dispatch(editUserAction({ id: user.id, admin: false }))
+  const makeBasicUser = () => {
+    let userObject = user
+    if (userObject.specialGroup === 'international' || user.admin) {
+      allProgrammes.forEach((p) => {
+        if (p.international) {
+          delete userObject.access[p.key]
+        }
+      })
+    }
+    const updatedUser = { id: user.id, specialGroup: null, wideReadAccess: false, admin: false, access: userObject.access }
+    dispatch(editUserAction(updatedUser))
+  }
+
+  const makeSpecialGroupUser = (group) => {
+    let newAccess = user.access
+    // If the chosen special group is "international" add access to international
+    // programmes and mark the user as "international"
+    if (group === 'international') {
+      allProgrammes.forEach((p) => {
+        if (p.international) {
+          newAccess = { ...newAccess, [p.key]: { ...newAccess[p.key], read: true }}
+        }
+      })
+    }
+    const updatedUser = { id: user.id, specialGroup: group, access: newAccess, admin: false, wideReadAccess: false }
+    dispatch(editUserAction(updatedUser))
   }
 
   const CustomRadioWithConfirmTrigger = ({
@@ -61,34 +87,34 @@ const UserGroupSelector = ({ user }) => {
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessBasic[lang]}
-            checked={!user.wideReadAccess && !user.admin}
-            onConfirm={removeAdmin}
+            checked={!user.wideReadAccess && !user.specialGroup && !user.admin}
+            onConfirm={makeBasicUser}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeBasicPrompt[lang]}
             dataCy="accessBasic"
           />
-        </Form.Field>
-        <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessInternational[lang]}
             checked={user.specialGroup === 'international'}
-            dataCy="accessInternational"
+            onConfirm={() => makeSpecialGroupUser('international')}
+            disabled={user.wideReadAccess}
+            confirmPrompt={translations.makeInternationalPrompt[lang]}
+            dataCy="accessInternationalGroup"
           />
-        </Form.Field>
-        {/* Comment the wide reading access out until it is being used 
-          <Form.Field>
-          <CustomRadioWithConfirmTrigger
-            label={translations.accessWideRead[lang]}
-            checked={user.wideReadAccess}
-            disabled={true}
-            dataCy="accessWideRead"
-          />
-        </Form.Field> */}
-        <Form.Field>
+          {/* Comment the wide reading access out until it is being used 
+            <Form.Field>
+            <CustomRadioWithConfirmTrigger
+              label={translations.accessWideRead[lang]}
+              checked={user.wideReadAccess}
+              disabled={true}
+              dataCy="accessWideRead"
+            />
+          </Form.Field> */}
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
             checked={user.admin}
-            onConfirm={grantAdmin}
+            onConfirm={makeAdminUser}
+            disabled={user.wideReadAccess}
             confirmPrompt={translations.makeAdminPrompt[lang]}
             dataCy="accessAdmin"
           />

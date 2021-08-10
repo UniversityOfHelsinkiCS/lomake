@@ -1290,9 +1290,9 @@ export const usersPageTranslations = {
     se: 'Wide read access',
   },
   accessInternational: {
-    en: 'International masters programmes',
+    en: "International Master's programmes",
     fi: 'Kansainväliset maisteriohjelmat',
-    se: 'International masters programmes',
+    se: "International Master's programmes",
   },
   accessAdmin: {
     en: 'Admin',
@@ -1308,6 +1308,11 @@ export const usersPageTranslations = {
     en: 'Make the user a basic user?',
     fi: 'Tehdäänkö käyttäjästä peruskäyttäjä?',
     se: 'Make the user a basic user?',
+  },
+  makeInternationalPrompt: {
+    en: "Give the user view access to all international Master's programmes?",
+    fi: 'Annetaanko käyttäjälle lukuoikeudet kansainvälisiin maisteriohjelmiin?',
+    se: "Give the user view access to all international Master's programmes?",
   },
   userGroup: {
     en: 'User group',
