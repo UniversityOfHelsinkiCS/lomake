@@ -9,6 +9,7 @@ import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import { isSuperAdmin } from '../../../config/common'
 import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import { colors } from 'Utilities/common'
 
 
 const AccessModal = ({
@@ -32,6 +33,44 @@ const AccessModal = ({
   const grantView = (programme) => {
     const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], read: true }}}
     dispatch(editUserAction(updatedUser))
+  }
+
+  const getAccessTable = () => {
+    if (user.admin) {
+      return (
+        <>
+          <h4 style={{ color: colors.blue }}>{translations.userHasAdminRights[lang]}</h4>
+          {user.access && Object.keys(user.access).length > 0 && 
+            <AccessTable
+              user={user}
+              programmeCodesAndNames={programmeCodesAndNames}
+            />
+          }
+        </>
+      )
+    }
+    if (user.wideReadAccess) {
+      return (
+        <>
+          <h4 style={{ color: colors.blue }}>{translations.userHasWideReadingRights[lang]}</h4>
+          {user.access && Object.keys(user.access).length > 0 && 
+            <AccessTable
+              user={user}
+              programmeCodesAndNames={programmeCodesAndNames}
+            />
+          }
+        </>
+      )
+    }
+    if (user.access && Object.keys(user.access).length > 0) {
+      return (
+        <AccessTable
+          user={user}
+          programmeCodesAndNames={programmeCodesAndNames}
+        />
+      )
+    }
+    return null
   }
 
   const DeleteButton = () => {
@@ -74,12 +113,7 @@ const AccessModal = ({
       </Segment>
       <Segment className="user-access-modal-segment">
         <h3>{translations.accessRights[lang]}</h3>
-        {user.access && Object.keys(user.access).length > 0 && (
-          <AccessTable
-            user={user}
-            programmeCodesAndNames={programmeCodesAndNames}
-          />
-        )}
+        {getAccessTable()}
         <ProgrammeFilter
           label={translations.programmeFilter[lang]}
           handleChange={handleSearch}

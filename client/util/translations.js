@@ -1334,6 +1334,16 @@ export const usersPageTranslations = {
     fi: 'Oikeudet ohjelmiin',
     se: 'Programme access'
   },
+  userHasAdminRights: {
+    en: 'User is admin and already has rights to all programmes', 
+    fi: 'Käyttäjä on ylläpitäjä, ja siten hänellä on oikeudet kaikkiin ohjelmiin',
+    se: 'User is admin and already has rights to all programmes'
+  },
+  userHasWideReadingRights: {
+    en: 'User has Wide Read Access and therefore has viewing rights to all programmes', 
+    fi: 'Käyttäjällä on laajat lukuoikeudet kaikkiin ohjelmiin',
+    se: 'User has Wide Read Access and therefore has viewing rights to all programmes'
+  },
   programme: {
     en: 'Programme',
     fi: 'Ohjelma',
