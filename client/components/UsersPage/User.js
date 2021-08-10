@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Table, Icon } from 'semantic-ui-react'
 
-import { isSuperAdmin } from '../../../config/common'
+import { isSuperAdmin, isSpecialGroupUser, isInternationalUser } from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
@@ -65,9 +65,9 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
           <FormattedAccess />
         </Table.Cell>
         <Table.Cell>
-          {!user.wideReadAccess && !user.admin && !user.specialGroup && translations.accessBasic[lang]}
+          {!user.wideReadAccess && !user.admin && !isSpecialGroupUser(user.specialGroup) && translations.accessBasic[lang]}
           {user.wideReadAccess && translations.accessWideRead[lang]}
-          {user.specialGroup === 'international' && translations.accessInternational[lang]}
+          {isInternationalUser(user.specialGroup) && translations.accessInternational[lang]}
           {user.admin && translations.accessAdmin[lang]}
         </Table.Cell>
         <Table.Cell>

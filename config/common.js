@@ -56,6 +56,15 @@ const isSuperAdmin = (uid) => {
   return SUPERADMINS.includes(uid)
 }
 
+const isSpecialGroupUser = (specialGroup) => {
+  return specialGroup && Object.keys(specialGroup) && Object.keys(specialGroup).length > 0
+}
+
+const isInternationalUser = (specialGroup) => {
+  if (specialGroup && Object.keys(specialGroup) && specialGroup['international']) return true
+  return false
+}
+
 const cypressUsers = [
   {
     uid: 'cypressUser',
@@ -90,6 +99,8 @@ module.exports = {
   degreeLevels,
   requiredFormIds,
   isSuperAdmin,
+  isSpecialGroupUser,
+  isInternationalUser,
   cypressUsers,
   testProgrammeName,
   requiredGroupForWideReadAccess

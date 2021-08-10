@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form, Popup, Radio } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
+import { isSuperAdmin, isSpecialGroupUser, isInternationalUser } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
@@ -14,19 +15,31 @@ const UserGroupSelector = ({ user }) => {
 
   const makeAdminUser = () => {
     // Removed wideReadAccess, because we dont want users to have multiple usergroups. (admin and wideReadAccess or special group)
-    dispatch(editUserAction({ id: user.id, admin: true, wideReadAccess: false, specialGroup: null }))
+    const updatedUser = {
+      id: user.id,
+      specialGroup: {},
+      wideReadAccess: false,
+      admin: true,
+    }
+    dispatch(editUserAction(updatedUser))
   }
 
   const makeBasicUser = () => {
     let userObject = user
-    if (userObject.specialGroup === 'international' || user.admin) {
+    if (isInternationalUser(user.specialGroup) || user.admin) {
       allProgrammes.forEach((p) => {
         if (p.international) {
           delete userObject.access[p.key]
         }
       })
     }
-    const updatedUser = { id: user.id, specialGroup: null, wideReadAccess: false, admin: false, access: userObject.access }
+    const updatedUser = {
+      id: user.id,
+      specialGroup: {},
+      wideReadAccess: false,
+      admin: false,
+      access: userObject.access
+    }
     dispatch(editUserAction(updatedUser))
   }
 
@@ -41,7 +54,13 @@ const UserGroupSelector = ({ user }) => {
         }
       })
     }
-    const updatedUser = { id: user.id, specialGroup: group, access: newAccess, admin: false, wideReadAccess: false }
+    const updatedUser = {
+      id: user.id,
+      specialGroup: { ...user.specialGroup, [group]: true },
+      access: newAccess,
+      admin: false,
+      wideReadAccess: false
+    }
     dispatch(editUserAction(updatedUser))
   }
 
@@ -87,7 +106,7 @@ const UserGroupSelector = ({ user }) => {
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessBasic[lang]}
-            checked={!user.wideReadAccess && !user.specialGroup && !user.admin}
+            checked={!user.wideReadAccess && !isSpecialGroupUser(user.specialGroup) && !user.admin}
             onConfirm={makeBasicUser}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeBasicPrompt[lang]}
@@ -95,7 +114,7 @@ const UserGroupSelector = ({ user }) => {
           />
           <CustomRadioWithConfirmTrigger
             label={translations.accessInternational[lang]}
-            checked={user.specialGroup === 'international'}
+            checked={isInternationalUser(user.specialGroup)}
             onConfirm={() => makeSpecialGroupUser('international')}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeInternationalPrompt[lang]}

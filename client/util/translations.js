@@ -1290,9 +1290,9 @@ export const usersPageTranslations = {
     se: 'Wide read access',
   },
   accessInternational: {
-    en: "International Master's programmes",
-    fi: 'Kansainväliset maisteriohjelmat',
-    se: "International Master's programmes",
+    en: "International Master's programmes 2020 ->",
+    fi: 'Kansainväliset maisteriohjelmat 2020 ->',
+    se: "International Master's programmes 2020 ->",
   },
   accessAdmin: {
     en: 'Admin',

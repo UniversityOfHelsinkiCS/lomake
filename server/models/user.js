@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
       access: DataTypes.JSONB,
-      specialGroup: DataTypes.STRING,
+      specialGroup: DataTypes.JSONB,
       wideReadAccess: DataTypes.BOOLEAN,
       hasWideReadAccess: {
         type: DataTypes.VIRTUAL,

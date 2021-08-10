@@ -37,7 +37,6 @@ const getUserGroupSortValue = ({ admin, wideReadAccess }) => {
   return 0
 }
 
-
 export const sortedItems = (items, sorter, lang) => {
   if (!items) return []
   if (!sorter) return items
