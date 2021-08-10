@@ -57,9 +57,8 @@ const AccessModal = ({
       }
     </>
   )
-  
 
-  const DeleteButton = () => {
+  const getDeleteButton = () => {
     return (
       <Popup
         content={
@@ -90,8 +89,12 @@ const AccessModal = ({
     <CustomModal closeModal={() => setModalData(null)}>
       <Segment className="user-access-modal-segment">
         <h2>{user.firstname} {user.lastname}</h2>
-        <p className="user-access-modal-details">{translations.userId[lang]}: {user.uid}</p>
-        <p className="user-access-modal-details">{translations.email[lang]}: {user.email}</p>
+        <p className="user-access-modal-details">
+          {translations.userId[lang]}: {user.uid}
+        </p>
+        <p className="user-access-modal-details">
+          {translations.email[lang]}: {user.email}
+        </p>
       </Segment>
       <Segment className="user-access-modal-segment">
         <h3>{translations.userGroup[lang]}</h3>
@@ -122,7 +125,7 @@ const AccessModal = ({
         </div>
       </Segment>
       <Segment className="user-access-modal-delete-container">
-        <DeleteButton/>
+        {getDeleteButton()}
       </Segment>
     </CustomModal>
   )

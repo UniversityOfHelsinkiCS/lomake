@@ -56,12 +56,22 @@ const isSuperAdmin = (uid) => {
   return SUPERADMINS.includes(uid)
 }
 
-const isSpecialGroupUser = (specialGroup) => {
-  return specialGroup && Object.keys(specialGroup) && Object.keys(specialGroup).length > 0
+const isAdmin = (user) => user.admin 
+
+const isBasicUser = (user) => {
+  if (!user.admin && !user.wideReadAccess && !isSpecialGroupUser(user)) return true
+  return false
 }
 
-const isInternationalUser = (specialGroup) => {
-  if (specialGroup && Object.keys(specialGroup) && specialGroup['international']) return true
+const isWideReadAccessUser = (user) => user.isWideReadAccess
+
+const isSpecialGroupUser = (user) => {
+  if (user.specialGroup && Object.keys(user.specialGroup) && Object.keys(user.specialGroup).length > 0) return true
+  return false
+}
+
+const isInternationalUser = (user) => {
+  if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup['international']) return true
   return false
 }
 
@@ -99,6 +109,9 @@ module.exports = {
   degreeLevels,
   requiredFormIds,
   isSuperAdmin,
+  isAdmin,
+  isWideReadAccessUser,
+  isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
   cypressUsers,

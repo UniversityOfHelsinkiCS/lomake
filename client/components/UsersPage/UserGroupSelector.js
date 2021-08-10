@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form, Popup, Radio } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
-import { isSuperAdmin, isSpecialGroupUser, isInternationalUser } from '../../../config/common'
+import { isBasicUser, isInternationalUser, isAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
@@ -106,7 +106,7 @@ const UserGroupSelector = ({ user }) => {
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessBasic[lang]}
-            checked={!user.wideReadAccess && !isSpecialGroupUser(user.specialGroup) && !user.admin}
+            checked={isBasicUser(user)}
             onConfirm={makeBasicUser}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeBasicPrompt[lang]}
@@ -114,7 +114,7 @@ const UserGroupSelector = ({ user }) => {
           />
           <CustomRadioWithConfirmTrigger
             label={translations.accessInternational[lang]}
-            checked={isInternationalUser(user.specialGroup)}
+            checked={isInternationalUser(user)}
             onConfirm={() => makeSpecialGroupUser('international')}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeInternationalPrompt[lang]}
@@ -131,7 +131,7 @@ const UserGroupSelector = ({ user }) => {
           </Form.Field> */}
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
-            checked={user.admin}
+            checked={isAdmin(user)}
             onConfirm={makeAdminUser}
             disabled={user.wideReadAccess}
             confirmPrompt={translations.makeAdminPrompt[lang]}

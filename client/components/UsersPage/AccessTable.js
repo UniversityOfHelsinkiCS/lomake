@@ -4,7 +4,6 @@ import { Button, Icon, Label, Popup, Table } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { colors } from 'Utilities/common'
 
 
 const AccessTable = ({ user, programmeCodesAndNames}) => {
@@ -95,8 +94,7 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
         {Object.entries(user.access).map(([programme, access] ) => (
           <Table.Row key={`${user.lastname}-${programme}`}>
             <Table.Cell>
-              {programmeCodesAndNames.get(programme)} {access.year 
-              && <Label size='tiny' color='gray'>{access.year}</Label>}
+              {programmeCodesAndNames.get(programme)} {access.year && <Label size='tiny'>{access.year}</Label>}
             </Table.Cell>
             <Table.Cell>
             {getSwitchableBadge({

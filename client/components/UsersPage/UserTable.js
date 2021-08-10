@@ -37,7 +37,6 @@ export default () => {
 
   if (!users) return null
 
-
   let sortedUsersToShow = sortedItems(users.data, sorter)
 
   if (reverse) sortedUsersToShow.reverse()

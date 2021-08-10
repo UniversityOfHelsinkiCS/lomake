@@ -2,7 +2,13 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Table, Icon } from 'semantic-ui-react'
 
-import { isSuperAdmin, isSpecialGroupUser, isInternationalUser } from '../../../config/common'
+import {
+  isSuperAdmin,
+  isBasicUser,
+  isWideReadAccessUser,
+  isAdmin,
+  isInternationalUser
+} from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
@@ -27,7 +33,6 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
       </a>
       )
     }
-
     if (programmeKeys.length > 1) {
       return (
         <div>
@@ -40,7 +45,6 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         </div>
       )  
     }
-
     return (
       <div>
         {programmeKeys.map((p) => (
@@ -77,10 +81,10 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
           <FormattedAccess />
         </Table.Cell>
         <Table.Cell>
-          {!user.wideReadAccess && !user.admin && !isSpecialGroupUser(user.specialGroup) && translations.accessBasic[lang]}
-          {user.wideReadAccess && translations.accessWideRead[lang]}
-          {isInternationalUser(user.specialGroup) && translations.accessInternational[lang]}
-          {user.admin && translations.accessAdmin[lang]}
+          {isBasicUser(user) && translations.accessBasic[lang]}
+          {isWideReadAccessUser(user) && translations.accessWideRead[lang]}
+          {isInternationalUser(user) && translations.accessInternational[lang]}
+          {isAdmin(user) && translations.accessAdmin[lang]}
         </Table.Cell>
         <Table.Cell>
           <EditIcon />
