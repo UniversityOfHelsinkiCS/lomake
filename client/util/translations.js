@@ -1279,6 +1279,11 @@ export const usersPageTranslations = {
     fi: 'Admin',
     se: 'Admin',
   },
+  moreProgrammes: {
+    en: 'more programmes',
+    fi: 'muuta ohjelmaa',
+    se: 'more programmes',
+  },
   accessBasic: {
     en: 'Basic user',
     fi: 'Peruskäyttäjä',

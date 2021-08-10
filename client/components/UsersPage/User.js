@@ -16,7 +16,8 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
   }
 
   const FormattedAccess = () => {
-    if (!user.access || Object.keys(user.access).length === 0) {
+    const programmeKeys = user.access ? Object.keys(user.access) : []
+    if (!programmeKeys.length > 0) {
       return (
       <a
         onClick={() => setModalData({ id: user.id })}
@@ -26,14 +27,25 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
       </a>
       )
     }
+
+    if (programmeKeys.length > 1) {
+      return (
+        <div>
+          <a onClick={() => setModalData({ id: user.id })}>
+            <div className="user-access-links">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+          </a>
+          <a>
+            <div>+{programmeKeys.length - 1} {translations.moreProgrammes[lang]}</div>
+          </a>
+        </div>
+      )  
+    }
+
     return (
       <div>
-        {Object.keys(user.access).map((programme) => (
-          <a
-            onClick={() => setModalData({ id: user.id })}
-            key={`${user.uid}-${programme}`}
-          >
-            <div className="user-access-links">{programmeCodesAndNames.get(programme)}</div>
+        {programmeKeys.map((p) => (
+          <a onClick={() => setModalData({ id: user.id })} key={`${user.uid}-${p}`}>
+            <div className="user-access-links">{programmeCodesAndNames.get(p)}</div>
           </a>
         ))}
       </div>
