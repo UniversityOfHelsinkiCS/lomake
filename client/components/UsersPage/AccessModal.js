@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Label, Popup, Segment } from 'semantic-ui-react'
 
+import AccessGroupSelector from './AccessGroupSelector'
 import AccessTable from './AccessTable'
 import UserGroupSelector from './UserGroupSelector'
 import CustomModal from '../Generic/CustomModal'
@@ -99,6 +100,8 @@ const AccessModal = ({
       <Segment className="user-access-modal-segment">
         <h3>{translations.userGroup[lang]}</h3>
         <UserGroupSelector user={user}/>
+        <h3>{translations.userGroup[lang]}</h3>
+        <AccessGroupSelector user={user} />
       </Segment>
       <Segment className="user-access-modal-segment">
         <h3>{translations.accessRights[lang]}</h3>

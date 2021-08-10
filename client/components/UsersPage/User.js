@@ -7,7 +7,6 @@ import {
   isBasicUser,
   isWideReadAccessUser,
   isAdmin,
-  isInternationalUser
 } from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
@@ -84,7 +83,6 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell data-cy="userGroup">
           {isBasicUser(user) && translations.accessBasic[lang]}
           {isWideReadAccessUser(user) && translations.accessWideRead[lang]}
-          {isInternationalUser(user) && translations.accessInternational[lang]}
           {isAdmin(user) && translations.accessAdmin[lang]}
         </Table.Cell>
         <Table.Cell>

@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form, Popup, Radio } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
-import { isBasicUser, isInternationalUser, isAdmin } from '../../../config/common'
+import { isBasicUser, isAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
 const UserGroupSelector = ({ user }) => {
   const dispatch = useDispatch()
   const lang = useSelector((state) => state.language)
-  const allProgrammes = useSelector((state) => state.studyProgrammes.data)
-
 
   const makeAdminUser = () => {
     // Removed wideReadAccess, because we dont want users to have multiple usergroups. (admin and wideReadAccess or special group)
@@ -26,40 +24,11 @@ const UserGroupSelector = ({ user }) => {
 
   const makeBasicUser = () => {
     let userObject = user
-    if (isInternationalUser(user.specialGroup) || user.admin) {
-      allProgrammes.forEach((p) => {
-        if (p.international) {
-          delete userObject.access[p.key]
-        }
-      })
-    }
     const updatedUser = {
       id: user.id,
-      specialGroup: {},
       wideReadAccess: false,
       admin: false,
       access: userObject.access
-    }
-    dispatch(editUserAction(updatedUser))
-  }
-
-  const makeSpecialGroupUser = (group) => {
-    let newAccess = user.access
-    // If the chosen special group is "international" add access to international
-    // programmes and mark the user as "international"
-    if (group === 'international') {
-      allProgrammes.forEach((p) => {
-        if (p.international) {
-          newAccess = { ...newAccess, [p.key]: { ...newAccess[p.key], read: true, year: 2020 }}
-        }
-      })
-    }
-    const updatedUser = {
-      id: user.id,
-      specialGroup: { ...user.specialGroup, [group]: true },
-      access: newAccess,
-      admin: false,
-      wideReadAccess: false
     }
     dispatch(editUserAction(updatedUser))
   }
@@ -112,14 +81,7 @@ const UserGroupSelector = ({ user }) => {
             confirmPrompt={translations.makeBasicPrompt[lang]}
             dataCy="accessBasic"
           />
-          <CustomRadioWithConfirmTrigger
-            label={translations.accessInternational[lang]}
-            checked={isInternationalUser(user)}
-            onConfirm={() => makeSpecialGroupUser('international')}
-            disabled={user.wideReadAccess}
-            confirmPrompt={translations.makeInternationalPrompt[lang]}
-            dataCy="accessInternationalGroup"
-          />
+        </Form.Field>
           {/* Comment the wide reading access out until it is being used 
             <Form.Field>
             <CustomRadioWithConfirmTrigger
@@ -129,6 +91,7 @@ const UserGroupSelector = ({ user }) => {
               dataCy="accessWideRead"
             />
           </Form.Field> */}
+        <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
             checked={isAdmin(user)}

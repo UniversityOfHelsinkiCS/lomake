@@ -59,7 +59,7 @@ const isSuperAdmin = (uid) => {
 const isAdmin = (user) => user.admin 
 
 const isBasicUser = (user) => {
-  if (!user.admin && !user.wideReadAccess && !isSpecialGroupUser(user)) return true
+  if (!user.admin && !user.wideReadAccess) return true
   return false
 }
 

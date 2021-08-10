@@ -1294,15 +1294,30 @@ export const usersPageTranslations = {
     fi: 'Laajat lukuoikeudet',
     se: 'Wide read access',
   },
-  accessInternational: {
+  accessInternational2020: {
     en: "International Master's programmes 2020 ->",
     fi: 'Kansainväliset maisteriohjelmat 2020 ->',
     se: "International Master's programmes 2020 ->",
+  },
+  accessInternational: {
+    en: "International Master's programmes",
+    fi: 'Kansainväliset maisteriohjelmat',
+    se: "International Master's programmes",
   },
   accessAdmin: {
     en: 'Admin',
     fi: 'Ylläpitäjä',
     se: 'Admin',
+  },
+  allProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'All programmes'
+  },
+  save: {
+    en: 'Save',
+    fi: 'Tallenna',
+    se: 'Save'
   },
   makeAdminPrompt: {
     en: 'Make the user an administrator?',
