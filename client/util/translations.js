@@ -1349,6 +1349,26 @@ export const usersPageTranslations = {
     fi: 'Piilota',
     se: 'Hide',
   },
+  addUser: {
+    en: 'Add user',
+    fi: 'Lisää käyttäjä',
+    se: 'Add user'
+  },
+  firstname: {
+    en: 'First name',
+    fi: 'Etunimi',
+    se: 'First name'
+  },
+  lastname: {
+    en: 'Last name',
+    fi: 'Sukunimi',
+    se: 'Last name'
+  },
+  checkUserData: {
+    en: 'Check that you have submitted all fields and that the user does not already exist!',
+    fi: 'Tarkista, että olet täyttänyt kaikki kentät ja käyttäjää ei ole jo olemassa (käyttäjätunnus jo käytössä)',
+    se: 'Check that you have submitted all fields and that the user does not already exist!'
+  },
   editUser: {
     en: 'Edit',
     fi: 'Muokkaa',

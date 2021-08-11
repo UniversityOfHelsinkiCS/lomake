@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Input, Icon, Loader, Table } from 'semantic-ui-react'
+import { Button, Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
 import AccessModal from './AccessModal'
 import User from 'Components/UsersPage/User'
+import NewUserForm from 'Components/UsersPage/NewUserForm'
+import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
-import { sortedItems } from 'Utilities/common'
+import { colors, sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import './UsersPage.scss'
@@ -18,7 +20,8 @@ export default () => {
   const [nameFilter, setNameFilter] = useState('')
   const [accessFilter, setAccessFilter] = useState('')
   const [programmeFilter, setFilter] = useState('')
-  const [modalData, setModalData] = useState(null)
+  const [editUserFormData, setEditUserFormData] = useState(null)
+  const [showNewUserForm, setShowNewUserForm] = useState(false)
 
   const debouncedName = useDebounce(nameFilter, 200)
   const debouncedProgramme = useDebounce(programmeFilter, 200)
@@ -109,10 +112,16 @@ export default () => {
 
   return (
     <>
-      {modalData && (
+      {showNewUserForm && 
+        <CustomModal
+          closeModal={() => setShowNewUserForm(false)}
+          children={<NewUserForm/>}
+        />
+      }
+      {editUserFormData && (
         <AccessModal
-          user={sortedUsersToShow.find((u) => u.id === modalData.id)}
-          setModalData={setModalData}
+          user={sortedUsersToShow.find((u) => u.id === editUserFormData.id)}
+          setModalData={setEditUserFormData}
           handleSearch={handleSearch}
           programmeFilter={programmeFilter}
           onEmpty={() => setFilter('')}
@@ -123,6 +132,7 @@ export default () => {
       )}
       <div className="user-filter-container">
         <Input
+          className="user-filter"
           value={nameFilter}
           onChange={(e, { value }) => setNameFilter(value)}
           icon="search"
@@ -137,6 +147,13 @@ export default () => {
           iconPosition="left"
           placeholder={translations.filterByAccess[lang]}
         />
+        <Button
+          style={{ alignSelf: 'right', marginLeft: 'auto' }}
+          onClick={() => setShowNewUserForm(true)}
+          color="blue"
+        >
+          {translations.addUser[lang]}
+        </Button>
       </div>
       <Table celled compact stackable>
         <Table.Header>
@@ -155,7 +172,7 @@ export default () => {
               lang={lang}
               user={u}
               key={u.id}
-              setModalData={setModalData}
+              setModalData={setEditUserFormData}
               programmeCodesAndNames={programmeCodesAndNames}
             />
           ))}

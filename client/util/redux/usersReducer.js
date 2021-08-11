@@ -20,7 +20,11 @@ export const deleteUserAction = (id) => {
   const prefix = 'DELETE_USER'
   return callBuilder(route, prefix, 'delete')
 }
-
+ export const createUserAction = (data) => {
+   const route = `/users`
+   const prefix = 'ADD_USER'
+   return callBuilder(route, prefix, 'post', data)
+ }
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
@@ -65,6 +69,24 @@ export default (state = { data: [] }, action) => {
         data: [],
         pending: false,
         error: true
+      }
+    case 'ADD_USER_SUCCESS':
+      return {
+        data: state.data.concat(action.response),
+        pending: false,
+        error: false
+      }
+    case 'ADD_USER_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false
+      }
+    case 'ADD_USER_FAILURE':
+      return {
+        ...state,
+        pending: false,
+        error: true,
       }
     case 'DELETE_USER_SUCCESS':
       return {

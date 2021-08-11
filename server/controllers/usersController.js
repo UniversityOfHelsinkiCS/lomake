@@ -64,6 +64,26 @@ const editUser = async (req, res) => {
   }
 }
 
+const createUser = async (req, res) => {
+  try {
+    const user = req.body
+    const newUser = await db.user.create({
+      uid: user.uid,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      admin: user.admin,
+      wideReadAccess: false,
+      specialGroups: {}
+    })
+
+    if (newUser) return res.status(200).json(newUser)
+  } catch (e) {
+    logger.error(e.message)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const editUserAccess = async (req, res) => {
   try {
     let body = req.body
@@ -198,6 +218,7 @@ module.exports = {
   getLogoutUrl,
   getAllUsers,
   editUser,
+  createUser,
   getProgrammesUsers,
   editUserAccess,
   deleteUser,

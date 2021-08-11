@@ -19,12 +19,15 @@
 }
 
 .user-filter-container {
+  display: flex;
+  justify-content: left;
   margin-top: 0.5em !important;
   margin-bottom: 1em !important;
 }
 
 .user-filter {
   margin-left: 1em;
+  width: 300px;
 }
 
 .user-access-modal {
