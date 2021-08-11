@@ -1,7 +1,19 @@
 const db = require('@models')
 const logger = require('@util/logger')
 
-const getCurrentUser = (req, res) => {
+const getCurrentUser = async (req, res) => {
+  if (req.user) {
+    try {
+      const now = new Date()
+      await db.user.update({ lastLogin: now }, {
+        where: {
+          uid: req.user.uid
+        }
+      })
+    } catch (error) {
+      logger.error(`Failed to update the last login for user: ${req.user.uid}`)
+    }
+  }
   res.send(req.user)
 }
 
