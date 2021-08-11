@@ -1344,6 +1344,11 @@ export const usersPageTranslations = {
     fi: 'Käyttäjäryhmä',
     se: 'User group',
   },
+  lastLogin: {
+    en: 'Last login',
+    fi: 'Kirjautunut viimeksi',
+    se: 'Last login'
+  },
   hide: {
     en: 'Hide',
     fi: 'Piilota',

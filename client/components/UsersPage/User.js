@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
 import { Button, Table, Icon } from 'semantic-ui-react'
 
 import {
@@ -84,6 +85,12 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
           {isBasicUser(user) && translations.accessBasic[lang]}
           {isWideReadAccessUser(user) && translations.accessWideRead[lang]}
           {isAdmin(user) && translations.accessAdmin[lang]}
+        </Table.Cell>
+        <Table.Cell>
+          {user.lastLogin
+            ? moment(user.lastLogin).format("DD.MM.YYYY")
+            : <span style={{ color: colors.gray }}>Ei tallennettu</span>
+          }
         </Table.Cell>
         <Table.Cell>
           <EditIcon />
