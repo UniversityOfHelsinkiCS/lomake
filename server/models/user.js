@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       access: DataTypes.JSONB,
       specialGroup: DataTypes.JSONB,
       wideReadAccess: DataTypes.BOOLEAN,
+      lastLogin: DataTypes.DATE,
       hasWideReadAccess: {
         type: DataTypes.VIRTUAL,
         get() {
