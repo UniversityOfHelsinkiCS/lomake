@@ -93,10 +93,10 @@ const cypressUsers = [
     access: {},
   },
   {
-    uid: 'cypressFacultyUser',
-    firstname: 'cypress',
-    lastname: 'faculty',
-    email: 'cypress-faculty-user@helsinki.fi',
+    uid: 'cypressUser3',
+    firstname: 'cyp3',
+    lastname: 'res3',
+    email: 'cypress-user-3@helsinki.fi',
     admin: false,
     specialGroup: {},
     access: {
