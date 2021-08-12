@@ -46,13 +46,49 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=nextDeadline]').contains('24.')
   })
 
-  it('Can add a valid user', () => {
+  it('Can add and remove a valid user', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.get('[data-cy=add-user-button').click()
     cy.get('[data-cy=user-form-add-email').type('testemail@test.com')
     cy.get('[data-cy=user-form-add-user-id]').type('testuid')
     cy.get('[data-cy=user-form-add-firstname]').type('testfirstname')
     cy.get('[data-cy=user-form-add-lastname]').type('testlastname')
+    cy.get('[data-cy=user-form-add-user-button]').click()
+    cy.contains('testfirstname testlastname').parent().find('[data-cy=editUser]').click()
+    cy.get('[data-cy=user-delete-button]').click()
+    cy.get('[data-cy=user-confirm-delete-button]').click()
+  })
+
+  it('Can not add an invalid user ', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.get('[data-cy=add-user-button').click()
+
+    // Missing uid
+    cy.get('[data-cy=user-form-add-email').type('testemail@test.com')
+    cy.get('[data-cy=user-form-add-firstname]').type('testfirstname')
+    cy.get('[data-cy=user-form-add-lastname]').type('testlastname')
+    cy.get('[data-cy=user-form-add-user-button]').should('be.disabled')
+
+    // Duplicate uid
+    cy.get('[data-cy=user-form-add-user-id]').type('cypressUser')
+    cy.get('[data-cy=user-form-add-user-button]').should('be.disabled')
+
+    // Missing email
+    cy.get('[data-cy=user-form-add-email').clear()
+    cy.get('[data-cy=user-form-add-user-id]').clear().type('validUid')
+
+    // Missing first name
+    cy.get('[data-cy=user-form-add-firstname]').clear()
+    cy.get('[data-cy=user-form-add-email').type('testemail@test.com')
+    cy.get('[data-cy=user-form-add-user-button]').should('be.disabled')
+
+    // Missing last name
+    cy.get('[data-cy=user-form-add-lastname]').clear()
+    cy.get('[data-cy=user-form-add-firstname').type('testfirstname')
+    cy.get('[data-cy=user-form-add-user-button]').should('be.disabled')
+
+    // Once everything correct, can still add the user
+    cy.get('[data-cy=user-form-add-lastname').type('testlastname')
     cy.get('[data-cy=user-form-add-user-button]').click()
     cy.contains('testfirstname testlastname').parent().find('[data-cy=editUser]').click()
     cy.get('[data-cy=user-delete-button]').click()
