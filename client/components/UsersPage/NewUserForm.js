@@ -24,7 +24,7 @@ const styles = {
   field: { margin: '.5rem 0rem' }
 }
 
-export default ({ close }) => {
+export default ({ closeModal }) => {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA })
   const users = useSelector((state) => state.users.data)
@@ -63,7 +63,7 @@ export default ({ close }) => {
 
   const handleSubmit = () => {
     dispatch(createUserAction(formData))
-    close()
+    closeModal()
   }
 
   return (
@@ -96,7 +96,7 @@ export default ({ close }) => {
         />
         <Form.Field
           style={styles.field}
-          data-cy="user-add-firstname"
+          data-cy="user-form-add-firstname"
           control={Input}
           label={translations.firstname[lang]}
           placeholder={translations.firstname[lang]}

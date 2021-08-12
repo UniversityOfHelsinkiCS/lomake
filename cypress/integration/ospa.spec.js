@@ -46,6 +46,19 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=nextDeadline]').contains('24.')
   })
 
+  it('Can add a valid user', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.get('[data-cy=add-user-button').click()
+    cy.get('[data-cy=user-form-add-email').type('testemail@test.com')
+    cy.get('[data-cy=user-form-add-user-id]').type('testuid')
+    cy.get('[data-cy=user-form-add-firstname]').type('testfirstname')
+    cy.get('[data-cy=user-form-add-lastname]').type('testlastname')
+    cy.get('[data-cy=user-form-add-user-button]').click()
+    cy.contains('testfirstname testlastname').parent().find('[data-cy=editUser]').click()
+    cy.get('[data-cy=user-delete-button]').click()
+    cy.get('[data-cy=user-confirm-delete-button]').click()
+  })
+
   it('Can give admin permissions', function () {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('cyp res').parent().find('[data-cy=editUser]').click()

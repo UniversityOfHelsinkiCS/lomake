@@ -64,6 +64,7 @@ const AccessModal = ({
       <Popup
         content={
           <Button
+            data-cy="user-confirm-delete-button"
             color="red"
             onClick={deleteUser}
           >
@@ -72,6 +73,7 @@ const AccessModal = ({
         }
         trigger={
           <Button
+            data-cy="user-delete-button"
             className="user-delete-button"
             size="large"
             color="red"

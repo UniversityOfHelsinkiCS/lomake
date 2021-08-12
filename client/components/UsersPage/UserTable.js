@@ -115,7 +115,9 @@ export default () => {
       {showNewUserForm && 
         <CustomModal
           closeModal={() => setShowNewUserForm(false)}
-          children={<NewUserForm/>}
+          children={
+            <NewUserForm closeModal={() => setShowNewUserForm(false)}/>
+          }
         />
       }
       {editUserFormData && (
@@ -148,6 +150,7 @@ export default () => {
           placeholder={translations.filterByAccess[lang]}
         />
         <Button
+          data-cy="add-user-button"
           style={{ alignSelf: 'right', marginLeft: 'auto' }}
           onClick={() => setShowNewUserForm(true)}
           color="blue"
@@ -170,6 +173,7 @@ export default () => {
         <Table.Body>
           {filteredUsers().map((u) => (
             <User
+              data-cy={`user-${u.uid}`}
               lang={lang}
               user={u}
               key={u.id}
