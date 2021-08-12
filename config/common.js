@@ -93,6 +93,19 @@ const cypressUsers = [
     access: {},
   },
   {
+    uid: 'cypressFacultyUser',
+    firstname: 'cypress',
+    lastname: 'faculty',
+    email: 'cypress-faculty-user@helsinki.fi',
+    admin: false,
+    specialGroup: {},
+    access: {
+      KH50_004: { 'read': true, 'write': true },
+      KH80_001: { 'read': true, 'write': true, 'admin': true },
+      KH50_003: { 'read': true }
+    }
+  },
+  {
     uid: 'cypressAdminUser',
     firstname: 'cypress',
     lastname: 'admin',

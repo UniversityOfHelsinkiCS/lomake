@@ -92,13 +92,13 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
       </Table.Header>
       <Table.Body>
         {Object.entries(user.access).map(([programme, access] ) => (
-          <Table.Row key={`${user.lastname}-${programme}`}>
+          <Table.Row key={`${programme}-${user.uid}`}>
             <Table.Cell>
               {programmeCodesAndNames.get(programme)} {access.year && <Label size='tiny'>{access.year}</Label>}
             </Table.Cell>
             <Table.Cell textAlign="center">
               {getSwitchableBadge({
-                cyTag: `read-${user.uid}`,
+                cyTag: `read-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].read : false,
                 grant: () => grantView(programme),
                 remove: () => removeView(programme)
@@ -106,7 +106,7 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
             </Table.Cell>
             <Table.Cell textAlign="center">
               {getSwitchableBadge({
-                cyTag: `write-${user.uid}`,
+                cyTag: `write-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].write : false,
                 grant: () => grantEdit(programme),
                 remove: () => removeEdit(programme)
@@ -114,7 +114,7 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
             </Table.Cell>
             <Table.Cell textAlign="center">
               {getSwitchableBadge({
-                cyTag: `read-${user.uid}`,
+                cyTag: `admin-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].admin : false,
                 grant: () => grantOwner(programme),
                 remove: () => removeOwner(programme)

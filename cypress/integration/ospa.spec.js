@@ -9,7 +9,7 @@ describe('OSPA user tests', function () {
     cy.visit('/')
   })
 
-  it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', function () {
+  it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', () => {
     cy.server()
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline').click()
@@ -95,7 +95,7 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=user-confirm-delete-button]').click()
   })
 
-  it('Can give admin permissions', function () {
+  it('Can give admin permissions', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('cyp res').parent().find('[data-cy=editUser]').click()
     cy.get('[data-cy=accessAdmin').click()
@@ -104,7 +104,61 @@ describe('OSPA user tests', function () {
     cy.contains('cyp res').parent().find('[data-cy=userGroup]').should('contain', 'Admin')
   })
 
-  it('Can navigate between tabs and the tables render', function () {
+  it('Can give and remove faculty read permissions', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('cypress faculty').parent().find('[data-cy=editUser]').click()
+
+    // Give access to the programmes in Faculty of Theology
+    cy.get('[data-cy=user-access-group-selector]').click().contains('Faculty of Theology').should('be.visible').click()
+    cy.get('[data-cy=user-access-group-selector]').click()
+    cy.get('[data-cy=access-group-save-button]').click()
+  
+    // Check that all programmes are given only reading rights
+    cy.get('[data-cy=read-T920101]').should('have.class', 'check')
+    cy.get('[data-cy=write-T920101]').should('have.class', 'close')
+    cy.get('[data-cy=admin-T920101]').should('have.class', 'close')
+
+    cy.get('[data-cy=read-MH10_001]').should('have.class', 'check')
+    cy.get('[data-cy=write-MH10_001]').should('have.class', 'close')
+    cy.get('[data-cy=admin-MH10_001]').should('have.class', 'close')
+
+    cy.get('[data-cy=read-KH10_001]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH10_001]').should('have.class', 'close')
+    cy.get('[data-cy=admin-KH10_001]').should('have.class', 'close')
+
+    cy.reload()
+
+    // Check that earlier rights have been unaffected
+    cy.contains('cypress faculty').parent().find('[data-cy=userAccess]').should('contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cypress faculty').parent().find('[data-cy=userAccess]').should('contain', '+5 more programmes')
+
+    // Remove access to the Faculty of Theology
+    cy.contains('cypress faculty').parent().find('[data-cy=editUser]').click()
+    cy.get('[data-cy=user-access-group-selector] > a > i').click()
+    cy.get('[data-cy=access-group-save-button]').click()
+
+    // Check that all earlier rights are unaffected
+    cy.get('[data-cy=read-KH50_004]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH50_004]').should('have.class', 'check')
+    cy.get('[data-cy=admin-KH50_004]').should('have.class', 'close')
+
+    cy.get('[data-cy=read-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=admin-KH80_001]').should('have.class', 'check')
+
+    cy.get('[data-cy=read-KH50_003]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH50_003]').should('have.class', 'close')
+    cy.get('[data-cy=admin-KH50_003]').should('have.class', 'close')
+
+    cy.reload()
+    // Check that the user has the correct amount of rights afterwards
+    cy.contains('cypress faculty').parent().find('[data-cy=userAccess]').should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cypress faculty').parent().find('[data-cy=userAccess]').should('contain', 'Chemistry')
+    cy.contains('cypress faculty').parent().find('[data-cy=userAccess]').should('contain', '+2 more programmes')
+  })
+
+
+  it('Can navigate between tabs and the tables render', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Links for owners').click()
     cy.get('tr').should('have.length.gt', 50)
@@ -113,7 +167,7 @@ describe('OSPA user tests', function () {
     cy.get('tr').should('have.length', 13)
   })
 
-  it('Can write to form and change from smiley table to trends view', function () {
+  it('Can write to form and change from smiley table to trends view', () => {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 

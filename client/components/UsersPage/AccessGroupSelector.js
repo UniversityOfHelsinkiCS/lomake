@@ -8,12 +8,14 @@ import { usersPageTranslations as translations } from 'Utilities/translations'
   
 const AccessGroupSelector = ({ user }) => {
   const dispatch = useDispatch()
+  const [initialAccessGroups, setInitialAccessGroups] = useState([])
   const [accessGroups, setAccessGroups] = useState([])
   const lang = useSelector((state) => state.language)
   const faculties = useSelector((state) => state.faculties.data)
   const allProgrammes = useSelector((state) => state.studyProgrammes.data)
 
   useEffect(() => {
+    setInitialAccessGroups(Object.keys(user.specialGroup))
     setAccessGroups(Object.keys(user.specialGroup))
   }, [])
 
@@ -42,41 +44,60 @@ const AccessGroupSelector = ({ user }) => {
     let updatedGroup = {}
     accessGroups.forEach((group) => updatedGroup = { ...updatedGroup, [group]: true })
 
-    let updatedAccess = {}
+    let updatedAccess = user.access
 
-    // Retain the programmes that the user has writing or admin access to
-    Object.entries(user.access).forEach(([programmeKey, access]) => {
-      if (access.write || access.admin) {
-        updatedAccess = { ...updatedAccess, [programmeKey]: user.access[programmeKey] }
+    // If the new groups does not have some access group which originally was there
+    // remove access for that group 
+    initialAccessGroups.forEach((group) => {
+      if (!accessGroups.includes(group)) {
+        if (group === 'international2020' || group === 'international') {
+          allProgrammes.forEach((programme) => {
+            if (programme.international) {
+              delete updatedAccess[programme.key]
+            }
+          })
+        } else if (group === 'allProgrammes') {
+          allProgrammes.forEach((programme) => {
+            delete updatedAccess[programme.key]
+          })
+        } else {
+          const faculty = faculties.find((f) => f.code === group)
+          faculty.ownedProgrammes.forEach((programme) => {
+            delete updatedAccess[programme.key]
+          })
+        }
+
       }
     })
-    
-    // Add access to all programmes that belong to the chosen special groups
-    accessGroups.forEach((group) => {
-      if (group === 'international2020') {
-        allProgrammes.forEach((programme) => {
-          if (programme.international) {
-            updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true, year: 2020 }}
-          }
-        })
-      } else if (group === 'international') {
-        allProgrammes.forEach((programme) => {
-          if (programme.international) {
+
+    if (accessGroups.length) {
+    // And add access to all programmes that belong to the chosen special groups
+      accessGroups.forEach((group) => {
+        if (group === 'international2020') {
+          allProgrammes.forEach((programme) => {
+            if (programme.international) {
+              updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true, year: 2020 }}
+            }
+          })
+        } else if (group === 'international') {
+          allProgrammes.forEach((programme) => {
+            if (programme.international) {
+              updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
+            }
+          })
+        } else if (group === 'allProgrammes') {
+          allProgrammes.forEach((programme) => {
             updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
-          }
-        })
-      } else if (group === 'allProgrammes') {
-        allProgrammes.forEach((programme) => {
-          updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
-        })
-      } else {
-        const faculty = faculties.find((f) => f.code === group)
-        faculty.ownedProgrammes.forEach((programme) => {
-          updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
-        })
-      }
-    })
-
+          })
+        } else {
+          const faculty = faculties.find((f) => f.code === group)
+          faculty.ownedProgrammes.forEach((programme) => {
+            updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
+          })
+        }
+      })
+    }
+    
     const updatedUser = {
       id: user.id,
       admin: false,
@@ -91,7 +112,7 @@ const AccessGroupSelector = ({ user }) => {
     <div>
       <Dropdown
         className="user-access-modal-group-selector"
-        data-cy="access-group-selector"
+        data-cy="user-access-group-selector"
         name="access-group-selector"
         fluid
         options={getOptions()}
@@ -104,7 +125,7 @@ const AccessGroupSelector = ({ user }) => {
         className="user-access-modal-save-button"
         color="blue"
         onClick={() => editAccess()}
-        data-cy="access-group-edit-button"
+        data-cy="access-group-save-button"
       >
         {translations.save[lang]}
       </Button>

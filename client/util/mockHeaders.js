@@ -7,7 +7,7 @@ export const possibleUsers = [
     givenName: 'adminEtunimi',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    schacPersonalUniqueCode: undefined,
+    hypersonstudentid: undefined,
     sn: 'admin',
   },
   {
@@ -16,9 +16,17 @@ export const possibleUsers = [
     givenName: 'readGroupMember',
     mail: 'read-group-member@helsinki.fi',
     schacDateOfBirth: 19770501,
-    schacPersonalUniqueCode: 'urn:schac:personalUniqueCode:int:studentID:helsinki.fi:0123456789',
+    hypersonstudentid: '0123456789',
     hyGroupCn: 'grp-lomake-testing-read',
     sn: 'readGroupMember',
+  },
+  {
+    uid: 'cypressFacultyUser',
+    employeeNumber: 456,
+    givenName: 'faculty',
+    mail: 'cypress-faculty-user@helsinki.fi',
+    schacDateOfBirth: 19890101,
+    hypersonstudentid: '1234567890',
   },
   {
     uid: 'cypressUser',

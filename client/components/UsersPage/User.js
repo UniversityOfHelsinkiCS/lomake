@@ -78,7 +78,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
       <Table.Row>
         <Table.Cell width={2}>{user.firstname} {user.lastname}</Table.Cell>
         <Table.Cell width={1}>{user.uid}</Table.Cell>
-        <Table.Cell style={{ display: "flex" }}>
+        <Table.Cell data-cy="userAccess" style={{ display: "flex" }}>
           <FormattedAccess />
         </Table.Cell>
         <Table.Cell data-cy="userGroup">
