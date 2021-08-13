@@ -129,6 +129,13 @@
     flex-shrink: 1;
     width: 100%;
   }
+  &-pie-chart {
+    > svg {
+      > path:hover {
+        filter: brightness(0.8); 
+      }
+    }
+  }
   &-pie-tip {
     position: absolute;
     float: right;
