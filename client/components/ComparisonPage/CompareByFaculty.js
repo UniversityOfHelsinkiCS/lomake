@@ -104,7 +104,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
           <Grid.Column>
             <Radio
-              className="comparison-toggle"
+              className={`comparison-toggle${user.hasWideReadAccess ? '' : '-marginless'}`}
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
               label={translations.emptyAnswers[lang]}
@@ -133,6 +133,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   programmeName={chosen ? chosen : ''}
                   programmeFaculty={getChosenProgrammeFaculty()}
                   showEmpty={showEmpty}
+                  columns={user.hasWideReadAccess ? 3 : 2}
                 />
               )
           )}
@@ -150,6 +151,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   faculty={getComparedFaculty()}
                   programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   name="faculty"
+                  columns={user.hasWideReadAccess ? 3 : 2}
                 />
               )
           )}
@@ -168,6 +170,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     programmes={usersProgrammes ? universityProgrammes : []}
                     faculty={translations.university[lang]}
                     name="university"
+                    columns={user.hasWideReadAccess ? 3 : 2}
                   />
                 )
             )}

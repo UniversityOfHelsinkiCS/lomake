@@ -4,7 +4,14 @@ import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
-export default ({ question, answers, showEmpty, programmeName, programmeFaculty }) => {
+export default ({
+  question,
+  answers,
+  showEmpty,
+  programmeName,
+  programmeFaculty,
+  columns
+}) => {
   const lang = useSelector((state) => state.language)
   const colorsTotal = (question) => {
     if (!question || !answers) return null
@@ -49,7 +56,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty 
   }
 
   return (
-    <div className="comparison-color-chart-area">
+    <div className={`comparison-color-chart-area-${columns}`}>
       <div className="comparison-color-pie-header">
         <p>
           {question.labelIndex}. {(question.label).toUpperCase()}

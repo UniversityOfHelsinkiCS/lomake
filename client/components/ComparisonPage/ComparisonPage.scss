@@ -42,6 +42,9 @@
     margin: 4em 0em 2em 0em;
     padding-left: 1em;
   }
+  &-toggle-marginless {
+    padding-left: 1em;
+  }
   &-side-note {
     color: $gray;
   }
@@ -90,7 +93,7 @@
     width: 100%;
     margin: 1em 0em 4em 0em;
   }
-  &-chart-area {
+  &-chart-area-3 {
     max-width: 425px;
     @media only screen and (max-width: 1250px) and (min-width: 768px) {
       height: 400px;
@@ -98,8 +101,15 @@
     height: 550px;
     margin: 10px;
   }
+  &-chart-area-2 {
+    max-width: 575px;
+    @media only screen and (max-width: 1250px) and (min-width: 768px) {
+      height: 400px;
+    }
+    height: 650px;
+    margin: 20px;
+  }
   &-pie-header {
-    flex-grow: 1;
     text-align: center;
     font-weight: 600;
     > p {

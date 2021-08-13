@@ -5,7 +5,15 @@ import { Button } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 
-export default ({ question, answers, showEmpty, programmes, faculty, name }) => {
+export default ({
+  question,
+  answers,
+  showEmpty,
+  programmes,
+  faculty,
+  name,
+  columns
+}) => {
   const lang = useSelector((state) => state.language)
   const [toolTipData, setToolTipData] = useState(null)
   const level = useSelector(({ filters }) => filters.level)
@@ -88,7 +96,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name }) => 
   }
 
   return (
-    <div className="comparison-color-chart-area">
+    <div className={`comparison-color-chart-area-${columns}`}>
       <div className="comparison-color-pie-header">
         <p>
           {question.labelIndex}. {(question.label).toUpperCase()}
