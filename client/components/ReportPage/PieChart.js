@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
+import { Button } from 'semantic-ui-react'
 import { HashLink as Link } from 'react-router-hash-link'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
@@ -82,6 +83,9 @@ export default ({
   }
 
   const toolTipText = (segmentIndex) => {
+    if (!segmentIndex) {
+      setToolTipData(null)
+    }
     const segmentData = data()[segmentIndex]
     const toolTip = {
       color: segmentData.toolTipColor,
@@ -121,6 +125,16 @@ export default ({
               <b>
                 {question.labelIndex} - {question.label}
               </b>
+              <Button
+                color="red"
+                size="mini"
+                className="comparison-color-pie-tip-close"
+                onClick={() => setToolTipData(null)}
+              >
+                <b>
+                  X
+                </b>
+              </Button>
             </p>
             <p>
               <b>
@@ -146,8 +160,7 @@ export default ({
           viewBoxSize={[145, 145]}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           labelPosition={112}
-          onMouseOver={(e, segmentIndex) => toolTipText(segmentIndex)}
-          onMouseOut={() => setToolTipData(null)}
+          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
         />
       </div>
     </div>

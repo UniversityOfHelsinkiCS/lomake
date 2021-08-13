@@ -91,7 +91,6 @@ export default ({
       header: segmentData.toolTipHeader,
       programmes: segmentData.programmes.sort((a, b) => a.localeCompare(b)),
     }
-
     setToolTipData(toolTip)
   }
 
@@ -158,7 +157,7 @@ export default ({
           viewBoxSize={[143, 143]}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
           labelPosition={112}
-          onClick={(e, segmentIndex) => toolTipText(toolTipData ? null : segmentIndex)}
+          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
         />
       </div>
     </div>
