@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://localhost:8000",
   "viewportWidth": 1280,
-  "viewportHeight": 768
+  "viewportHeight": 768,
+  "waitForAnimations": false 
 }

@@ -157,6 +157,46 @@ describe('OSPA user tests', function () {
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', '+2 more programmes')
   })
 
+  it('Can give and remove single programme read permissions', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('cyp3 res3').parent().find('[data-cy=editUser]').click()
+
+    // Give access to one Doctoral Programme
+    cy.get('[data-cy=programme-filter]').type('Doctoral Programme in Computer Science')
+    cy.get('[data-cy=T923107-item]').click()
+
+    // Check that the programme is given only reading rights
+    cy.get('[data-cy=read-T923107]').should('have.class', 'check')
+    cy.get('[data-cy=write-T923107]').should('have.class', 'close')
+    cy.get('[data-cy=admin-T923107]').should('have.class', 'close')
+
+    // Remove access to the Faculty of Theology
+    cy.get('[data-cy=remove-access-T923107]').click()
+    cy.get('[data-cy=remove-access-confirmation-T923107]').click()
+
+    // Check that all earlier rights are unaffected
+    cy.get('[data-cy=read-KH50_004]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH50_004]').should('have.class', 'check')
+    cy.get('[data-cy=admin-KH50_004]').should('have.class', 'close')
+
+    cy.get('[data-cy=read-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=admin-KH80_001]').should('have.class', 'check')
+
+    cy.get('[data-cy=read-KH50_003]').should('have.class', 'check')
+    cy.get('[data-cy=write-KH50_003]').should('have.class', 'close')
+    cy.get('[data-cy=admin-KH50_003]').should('have.class', 'close')
+
+    // Check that the access has been removed
+    cy.get('[data-cy=read-T923107]').should('not.exist')
+
+    cy.reload()
+    // Check that the user has the correct amount of rights afterwards
+    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', 'Chemistry')
+    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', '+2 more programmes')
+  })
+
 
   it('Can navigate between tabs and the tables render', () => {
     cy.get('[data-cy=nav-admin]').click()

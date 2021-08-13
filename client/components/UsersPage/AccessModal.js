@@ -119,6 +119,7 @@ const AccessModal = ({
         <div className="user-programme-list">
           {filteredProgrammes.map((p) => (
             <Label
+              data-cy={`${p.key}-item`}
               className="user-programme-list-item"
               key={p.key}
               onClick={() => grantView(p.key)}

@@ -122,10 +122,14 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
             </Table.Cell>
             <Table.Cell>
             <Popup
-              trigger={<Button>{translations.removeAccessToProgramme[lang]}</Button>}
+              trigger={
+                <Button data-cy={`remove-access-${programme}`}>
+                  {translations.removeAccessToProgramme[lang]}
+                </Button>
+              }
               content={
                 <Button
-                  data-cy="removePermissions-button"
+                  data-cy={`remove-access-confirmation-${programme}`}
                   color="red"
                   content={translations.removeAllAccess[lang]}
                   onClick={() => removeView(programme)}

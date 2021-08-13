@@ -21,12 +21,7 @@ export const possibleUsers = [
     sn: 'readGroupMember',
   },
   {
-    uid: 'cypressFacultyUser',
-    employeeNumber: 456,
-    givenName: 'faculty',
-    mail: 'cypress-faculty-user@helsinki.fi',
-    schacDateOfBirth: 19890101,
-    hypersonstudentid: '1234567890',
+    uid: 'cypressInternationalUser',
   },
   {
     uid: 'cypressUser',

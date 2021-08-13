@@ -188,7 +188,7 @@ const editUserAccess = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { lastname, firstname } = await db.user.findOne({
+    const { lastname = '-', firstname } = await db.user.findOne({
       where: {
         id: req.params.id
       }, 

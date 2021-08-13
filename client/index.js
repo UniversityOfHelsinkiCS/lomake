@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
   const currentFakeUser = window.localStorage.getItem('fakeUser')
   if (
     !currentFakeUser ||
-    !['cypressUser', 'cypressAdminUser', 'cypressReadGroupMember'].includes(
+    !['cypressUser', 'cypressInternationalUser', 'cypressAdminUser', 'cypressReadGroupMember'].includes(
       JSON.parse(currentFakeUser).uid
     )
   ) {
