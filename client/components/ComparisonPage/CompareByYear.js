@@ -129,9 +129,16 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                   label={translations.facultyFilter.filter[lang]}
                 />
                 <LevelFilter />
-                {faculty !== 'allFaculties'
-                && (level === 'doctoral' || level === 'master' || level === 'bachelor') && <CompanionFilter />}
-                {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
+                {
+                  faculty !== 'allFaculties'
+                  && (level === 'doctoral' || level === 'master' || level === 'bachelor')
+                  && <CompanionFilter />
+                }
+                {
+                  faculty === 'allFaculties'
+                  && level === 'doctoral'
+                  && <DoctoralSchoolFilter />
+                }
                 <ProgrammeFilter
                   handleChange={handleSearch}
                   label={translations.programmeFilter[lang]}
