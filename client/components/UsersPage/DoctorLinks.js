@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { basePath } from '../../../config/common'
-import { Message } from 'semantic-ui-react'
+import { Message, Table } from 'semantic-ui-react'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
@@ -29,27 +29,27 @@ export default function DoctorLinks() {
         icon="exclamation"
         content={translations.doctorMessage[lang]}
       />
-      <table>
-        <thead>
-          <tr>
-            <th>{translations.code[lang]}</th>
-            <th>{translations.faculty[lang]}</th>
-            <th>{translations.shareUrl[lang]}</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table compact>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>{translations.code[lang]}</Table.HeaderCell>
+            <Table.HeaderCell>{translations.faculty[lang]}</Table.HeaderCell>
+            <Table.HeaderCell>{translations.shareUrl[lang]}</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {temp.map((t) => {
             const { code, facultyName, shareUrl } = t
             return (
-              <tr key={facultyName}>
-                <td>{code}</td>
-                <td>{facultyName}</td>
-                <td>{shareUrl}</td>
-              </tr>
+              <Table.Row key={facultyName}>
+                <Table.Cell>{code}</Table.Cell>
+                <Table.Cell>{facultyName}</Table.Cell>
+                <Table.Cell>{shareUrl}</Table.Cell>
+              </Table.Row>
             )
           })}
-        </tbody>
-      </table>
+        </Table.Body>
+      </Table>
     </>
   )
 }
