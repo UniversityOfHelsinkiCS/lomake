@@ -1169,17 +1169,17 @@ export const usersPageTranslations = {
   },
   doctorMessage: {
     en:
-      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
-    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin',
+      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
+    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin. Linkkiä voi käyttää monta kertaa.',
     se:
-      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty.',
+      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
   },
   facultyMessage: {
     en:
-      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
-    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin',
+      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
+    fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin. Linkkiä voi käyttää monta kertaa.',
     se:
-      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty.',
+      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
   },
   ownerMessage: {
     en:
