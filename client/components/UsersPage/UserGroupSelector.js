@@ -12,10 +12,9 @@ const UserGroupSelector = ({ user }) => {
   const lang = useSelector((state) => state.language)
 
   const makeAdminUser = () => {
-    // Removed wideReadAccess, because we dont want users to have multiple usergroups. (admin and wideReadAccess or special group)
+    // Removed wideReadAccess, because we dont want users to have multiple usergroups.
     const updatedUser = {
       id: user.id,
-      specialGroup: {},
       wideReadAccess: false,
       admin: true,
     }
@@ -23,12 +22,10 @@ const UserGroupSelector = ({ user }) => {
   }
 
   const makeBasicUser = () => {
-    let userObject = user
     const updatedUser = {
       id: user.id,
       wideReadAccess: false,
       admin: false,
-      access: userObject.access
     }
     dispatch(editUserAction(updatedUser))
   }
