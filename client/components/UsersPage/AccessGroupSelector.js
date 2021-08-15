@@ -100,7 +100,6 @@ const AccessGroupSelector = ({ user }) => {
     
     const updatedUser = {
       id: user.id,
-      admin: false,
       wideReadAccess: false,
       specialGroup: updatedGroup,
       access: updatedAccess
