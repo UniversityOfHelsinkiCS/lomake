@@ -15,6 +15,7 @@ describe('ReportPage tests', function () {
     cy.visit('/report')
     cy.get('div').contains('colors').should('contain', 'Smiley')
     cy.get('div').contains('colors').click()
+    cy.get('div').contains('colors')
     cy.get('[data-cy=report-no-data]')
   })
 
