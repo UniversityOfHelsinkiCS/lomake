@@ -1183,11 +1183,11 @@ export const usersPageTranslations = {
   },
   ownerMessage: {
     en:
-      'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+      'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
     fi:
-      'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja listalla näkyy ainoastaan ne ohjelmat, joita ei vielä ole lunastettu.',
+      'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja käytettävissä ovat vain linkit, joita ei vielä ole lunastettu.',
     se:
-      'The links listed here give ADMIN-permissions and can be used one time only. Only programmes that have yet not been claimed are listed here.',
+      'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
   },
   code: {
     en: 'Code',
@@ -1203,6 +1203,26 @@ export const usersPageTranslations = {
     en: 'Share-URL',
     fi: 'Linkki',
     se: 'Share-URL',
+  },
+  valid: {
+    en: 'Valid',
+    fi: 'Käytettävissä',
+    se: 'Valid'
+  },
+  reset: {
+    en: 'Reset',
+    fi: 'Resetoi',
+    se: 'Reset'
+  },
+  resetConfirmationText: {
+    en: 'Please note, that resetting the link means the old one will stop working!',
+    fi: 'Huomaathan, että linkin resetoinnin myötä vanha linkki lakkaa toimimasta',
+    se: 'Please note, that resetting the link means the old one will stop working!',
+  },
+  confirmReset: {
+    en: 'Reset link',
+    fi: 'Resetoi linkki',
+    se: 'Reset link'
   },
   deadlineSettings: {
     en: 'Deadline settings',

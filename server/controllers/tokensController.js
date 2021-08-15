@@ -100,6 +100,25 @@ const programmesTokens = async (req, res) => {
   }
 }
 
+const resetAdminToken = async (req, res) => {
+  try {
+    const { url } = req.params
+    const token = await db.token.findOne({ where: { url } })
+
+    token.url = uuid()
+    token.valid = true
+    token.usageCounter = 0
+    await token.save()
+
+    logger.info(`User ${req.user.uid} resetted admin token for programme: ${token.programme} from ${url} to ${token.url}`)
+
+    return res.status(200).json(token)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const resetToken = async (req, res) => {
   try {
     const { url } = req.params
@@ -200,6 +219,7 @@ module.exports = {
   checkToken,
   programmesTokens,
   resetToken,
+  resetAdminToken,
   createToken,
   getAll,
   claimFacultyToken,

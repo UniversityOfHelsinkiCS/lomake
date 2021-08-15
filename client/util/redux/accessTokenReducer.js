@@ -24,6 +24,14 @@ export const resetTokenAction = (programme, url) => {
   return callBuilder(route, prefix, 'post')
 }
 
+export const resetAdminTokenAction = (programme, url) => {
+
+  console.log(url)
+  const route = `/programmes/${programme}/tokens/admin/${url}`
+  const prefix = 'RESET_ADMIN_TOKEN'
+  return callBuilder(route, prefix, 'post')
+}
+
 export const createTokenAction = (programme, type) => {
   const route = `/programmes/${programme}/tokens/create/${type}`
   const prefix = 'CREATE_TOKEN'
@@ -98,6 +106,32 @@ export default (state = { data: null }, action) => {
       }
 
     case 'RESET_TOKEN_FAILURE':
+      return {
+        ...state,
+        data: null,
+        pending: false,
+        error: true,
+      }
+    case 'RESET_ADMIN_TOKEN_SUCCESS':
+      console.log(action.response)
+      return {
+        ...state,
+        allTokens: state.allTokens.map((t) => {
+          if (t.id === action.response.id) return action.response
+          return t
+        }),
+        pending: false,
+        error: false,
+      }
+    case 'RESET_ADMIN_TOKEN_ATTEMPT':
+      return {
+        ...state,
+        data: null,
+        pending: true,
+        error: false,
+      }
+
+    case 'RESET_ADMIN_TOKEN_FAILURE':
       return {
         ...state,
         data: null,
