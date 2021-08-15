@@ -371,13 +371,15 @@ export const claimAccessTranslations = {
       se: 'Skrivskyddad åtkomst',
     },
   },
-  invalidToken: {
-    fi:
-      'Virhe: Käyttämäsi linkki ei ole enää voimassa. Ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
-    en:
-      'Error: The url you tried to access in no longer valid. Please contact your study programme leader for a new one.',
-    se:
-      'Fel: Länken du använde gäller inte längre. Vänligen kontakta ledaren för ditt utbildningsprogram för att få en ny länk.',
+  invalidToken1of2: {
+    fi: 'Virhe: Käyttämäsi linkki ei ole enää voimassa. Mikäli olet aiemmin lunastanut oikeuksia ohjelmiin, näet lunastamasi ohjelmat Tilannekuvalomakkeen etusivulla osoitteessa: ',
+    en: 'Error: The url you tried to access in no longer valid. If you have already earlier gained access to some programmes, you can see the programmes on the front page of the Form at: ',
+    se: 'Fel: Länken du använde gäller inte längre. Vänligen kontakta ledaren för ditt utbildningsprogram för att få en ny länk.',
+  },
+  invalidToken2of2: {
+    fi: ' Muussa tapauksessa ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
+    en: ' If you have never received access to the programme(s) in question, please contact your study programme leader to receive a valid link',
+    se: ''
   },
   claimPermissions: {
     en: 'Form - Claim permissions',

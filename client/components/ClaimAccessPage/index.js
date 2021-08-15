@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTokenAction, claimTokenAction } from 'Utilities/redux/accessTokenReducer'
 import { Button, Message, Icon, Input, Loader, List } from 'semantic-ui-react'
-import { colors } from 'Utilities/common'
+import { basePath, colors } from 'Utilities/common'
 import { claimAccessTranslations as translations } from 'Utilities/translations'
 
 const labelIcon = {
@@ -76,9 +76,19 @@ export default ({ url }) => {
 
   if (!token.data && token.error)
     return (
-      <span data-cy="invalidTokenError" style={{ color: colors.red }}>
-        {translations.invalidToken[lang]}
-      </span>
+      <>
+        <p data-cy="invalidTokenError" style={{ color: colors.red }}>
+          <strong>
+            {translations.invalidToken1of2[lang]}
+            {lang !== 'se' && <a href={basePath}>study.cs.helsinki.fi/tilannekuvalomake</a>}
+          </strong>
+        </p> 
+        <p style={{ color: colors.red }}>
+          <strong>
+            {translations.invalidToken2of2[lang]}
+          </strong>
+        </p>
+      </>
     )
 
   if (!token.data || !faculties) return <Loader active inline />
