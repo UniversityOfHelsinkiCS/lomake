@@ -11,10 +11,6 @@ describe("Previous year's answers", function () {
     cy.visit('/')
   })
 
-  it('If no answers for previousyears, cant change year', function () {
-    cy.get('[data-cy=yearSelector]').should('have.class', 'disabled')
-  })
-
   it("Can switch which year's answers to see in OverViewPage", function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
