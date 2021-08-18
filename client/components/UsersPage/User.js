@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { Button, Table, Icon } from 'semantic-ui-react'
+import { Button, Table, Icon, Popup } from 'semantic-ui-react'
 
 import {
   isSuperAdmin,
@@ -21,6 +21,8 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     window.location.reload()
   }
 
+
+
   const FormattedAccess = () => {
     const programmeKeys = user.access ? Object.keys(user.access) : []
     if (!programmeKeys.length > 0) {
@@ -35,14 +37,24 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     }
     if (programmeKeys.length > 1) {
       return (
-        <div>
-          <a onClick={() => setModalData({ id: user.id })}>
-            <div className="user-access-links">{programmeCodesAndNames.get(programmeKeys[0])}</div>
-          </a>
-          <a>
-            <div>+{programmeKeys.length - 1} {translations.moreProgrammes[lang]}</div>
-          </a>
-        </div>
+        <Popup
+          position="right center"
+          trigger={
+            <div>
+              <a onClick={() => setModalData({ id: user.id })}>
+                <div className="user-access-links">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+              </a>
+              <a>
+                <div>+{programmeKeys.length - 1} {translations.moreProgrammes[lang]}</div>
+              </a>
+            </div>  
+          }
+          content={
+            <div className="user-programme-list-popup">
+              {programmeKeys.map((p) => <p>{programmeCodesAndNames.get(p)}</p>)}
+            </div>
+          }
+        />
       )  
     }
     return (
