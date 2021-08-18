@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeName, defaultYears } from '../../config/common'
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
@@ -61,8 +61,8 @@ describe('ReportPage tests', function () {
       expect(newEl.find('.item')).to.have.length(3)
     })
 
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
-    cy.get('[data-cy=report-question-content-teacher_skills_text]').contains('Hello from 2020')
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
 
   it('Filtering works for programme level', function () {
@@ -75,7 +75,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=master-filter]').should('be.visible').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()

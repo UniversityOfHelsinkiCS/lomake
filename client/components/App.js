@@ -26,14 +26,16 @@ export default () => {
   // Do this after user.data is ready, so that there wont be dupe users in db.
   // Because of accessControlMiddleware
   useEffect(() => {
-    if (currentUser.data) {
+    const user = currentUser.data
+    if (user) {
+      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : new Date().getFullYear()
       dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
       dispatch(getDeadline())
       dispatch(getFaculties())
       dispatch(getAnswersAction())
-      dispatch(setYear(currentUser.data.yearsUserHasAccessTo[0]))
-      dispatch(setMultipleYears([currentUser.data.yearsUserHasAccessTo[0]]))
+      dispatch(setYear(defaultYear))
+      dispatch(setMultipleYears([defaultYear]))
     }
   }, [currentUser])
 

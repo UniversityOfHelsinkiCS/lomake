@@ -10,7 +10,7 @@
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "e2e": "cypress open",
+    "cypress:open": "cypress open",
     "stats": "webpack --mode production --json --optimize-minimize > stats.json"
   },
   "engines": {

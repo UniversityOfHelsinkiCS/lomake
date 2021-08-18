@@ -1,4 +1,5 @@
 import callBuilder from '../apiConnection'
+import { defaultYears } from 'Utilities/common'
 /**
  * Actions and reducers are in the same file for readability
  */
@@ -20,7 +21,7 @@ export const getYearsUserHasAccessToAction = (user) => {
   let usersYears = []
 
   // Set all the three answered years to be the options by default
-  let allYears = [2021, 2020, 2019]
+  let allYears = defaultYears
   const currentYear = new Date().getFullYear()
 
   // Add current year as the first one, if it does not exist

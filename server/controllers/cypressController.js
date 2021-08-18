@@ -1,6 +1,6 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { cypressUsers, testProgrammeName } = require('@util/common')
+const { cypressUsers, testProgrammeName, defaultYears } = require('@util/common')
 
 const getFakeAnswers = (year) => {
   const fields = [
@@ -261,7 +261,7 @@ const createAnswers = async (req, res) => {
 
     await db.answer.destroy({ where: {} })
 
-    const years = [2019, 2020]
+    const years = [defaultYears[2], defaultYears[1]]
 
     const programmes = await db.studyprogramme.findAll({})
 

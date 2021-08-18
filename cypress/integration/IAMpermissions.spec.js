@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { removeLoggedInUsersGroups } from '../../client/util/mockHeaders'
+import { defaultYears } from '../../config/common'
 
 const user = 'cypressReadGroupMember'
 
@@ -26,9 +27,9 @@ describe('IAM permission tests', function () {
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
-    cy.contains('Hello from 2020')
+    cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
   it('Comparison works', function () {
@@ -40,7 +41,7 @@ describe('IAM permission tests', function () {
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')
   })

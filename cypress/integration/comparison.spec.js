@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeName, defaultYears } from '../../config/common'
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
@@ -34,7 +34,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')
   })
@@ -50,7 +50,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('All faculties').click()
@@ -67,7 +67,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=yearSelector]').then((newEl) => {
       expect(newEl.find('.item')).to.have.length(3)
     })
-    cy.get('[data-cy=yearSelector]').contains(2020).click()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger(

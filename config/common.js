@@ -7,6 +7,9 @@ const requiredGroupForWideReadAccess = inProduction ? "grp-lomake-production-rea
 
 const basePath = process.env.BASE_PATH || '/'
 
+// First one is the current year, after that all the years that have answers
+const defaultYears = [2021, 2020, 2019]
+
 const degreeLevels = [
   'Bachelor´s level (1. cycle)',
   'Master´s level (2. cycle)',
@@ -167,6 +170,7 @@ const testProgrammeName = 'TOSKA101'
 module.exports = {
   inProduction,
   basePath,
+  defaultYears,
   degreeLevels,
   requiredFormIds,
   isSuperAdmin,
