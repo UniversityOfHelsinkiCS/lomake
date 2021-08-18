@@ -33,7 +33,7 @@ export default (state = { data: [] }, action) => {
     case 'GET_ALL_USERS_SUCCESS':
       return {
         ...state,
-        data: action.response,
+        data: action.response.sort((a, b) => (a.lastname.localeCompare(b.lastname))),
         pending: false,
         error: false
       }
