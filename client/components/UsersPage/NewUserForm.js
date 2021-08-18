@@ -67,7 +67,7 @@ export default ({ closeModal }) => {
   }
 
   return (
-    <Segment style={{ width: '50em' }}>
+    <Segment>
       <Form width={4}>
         <Form.Field
           style={styles.field}
