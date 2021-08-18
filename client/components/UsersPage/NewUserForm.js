@@ -20,10 +20,6 @@ const INITIAL_FORM_DATA = {
   admin: false
 }
 
-const styles = {
-  field: { margin: '.5rem 0rem' }
-}
-
 export default ({ closeModal }) => {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA })
@@ -70,7 +66,7 @@ export default ({ closeModal }) => {
     <Segment>
       <Form width={4}>
         <Form.Field
-          style={styles.field}
+          className="user-form-field"
           data-cy="user-form-add-email"
           control={Input}
           label={translations.email[lang]}
@@ -83,7 +79,7 @@ export default ({ closeModal }) => {
           required
         />
         <Form.Field
-          style={styles.field}
+          className="user-form-field"
           data-cy="user-form-add-user-id"
           control={Input}
           label={translations.userId[lang]}
@@ -95,7 +91,7 @@ export default ({ closeModal }) => {
           required
         />
         <Form.Field
-          style={styles.field}
+          className="user-form-field"
           data-cy="user-form-add-firstname"
           control={Input}
           label={translations.firstname[lang]}
@@ -107,7 +103,7 @@ export default ({ closeModal }) => {
           required
         />
         <Form.Field
-          style={styles.field}
+          className="user-form-field"
           data-cy="user-form-add-lastname"
           control={Input}
           label={translations.lastname[lang]}
@@ -119,6 +115,7 @@ export default ({ closeModal }) => {
           required
         />
         <Form.Field
+          className="user-form-field"
           control={Checkbox}
           data-cy="user-form-add-admin"
           label={translations.admin[lang]}
@@ -128,24 +125,18 @@ export default ({ closeModal }) => {
           }}
         />
         <Form.Group>
-          <Form.Field
-            negative
-            control={Button}
-            content="Cancel"
-            onClick={close}
-          />
           <Popup
             trigger={
-              <div>
-              <Button
-                data-cy="user-form-add-user-button"
-                positive
-                disabled={!validate(formData)}
-                content={translations.addUser[lang]}
-                onClick={handleSubmit}
-                name="add-user-button"
-              />
-            </div>
+              <div className="user-form-field">
+                <Button
+                  data-cy="user-form-add-user-button"
+                  positive
+                  disabled={!validate(formData)}
+                  content={translations.addUser[lang]}
+                  onClick={handleSubmit}
+                  name="add-user-button"
+                />
+              </div>
             }
             position='top center'
             on='hover'
