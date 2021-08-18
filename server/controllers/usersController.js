@@ -10,6 +10,7 @@ const getCurrentUser = async (req, res) => {
           uid: req.user.uid
         }
       })
+      
     } catch (error) {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
     }

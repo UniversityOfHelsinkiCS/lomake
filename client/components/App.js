@@ -9,6 +9,7 @@ import { getStudyProgrammes, getUsersProgrammes } from 'Utilities/redux/studyPro
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
 import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
+import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 
 export default () => {
@@ -31,6 +32,8 @@ export default () => {
       dispatch(getDeadline())
       dispatch(getFaculties())
       dispatch(getAnswersAction())
+      dispatch(setYear(currentUser.data.yearsUserHasAccessTo[0]))
+      dispatch(setMultipleYears([currentUser.data.yearsUserHasAccessTo[0]]))
     }
   }, [currentUser])
 

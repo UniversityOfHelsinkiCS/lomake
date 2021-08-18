@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Grid, Tab } from 'semantic-ui-react'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+
 import CompareByFaculty from './CompareByFaculty'
 import CompareByYear from './CompareByYear'
 import NoPermissions from 'Components/Generic/NoPermissions'
@@ -15,6 +15,7 @@ import {
   programmeNameByKey as programmeName,
   sortedItems,
 } from 'Utilities/common'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions'
 import './ComparisonPage.scss'
@@ -30,16 +31,18 @@ export default () => {
   const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
   const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)
 
+  if (!user) return <></>
+
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations['comparisonPage'][lang]}`
   }, [lang])
 
+  if (!usersProgrammes) return <></>
+
   if (!user.admin && usersProgrammes.length <= 5) {
     history.push('/')
   }
-
-  if (!usersProgrammes) return <></>
 
   const years = allYears(oldAnswers)
 

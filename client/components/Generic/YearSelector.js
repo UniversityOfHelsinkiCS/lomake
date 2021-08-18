@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
+import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
 export default function YearSelector({ multiple, size, label }) {
   const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
+  const currentUser = useSelector((state) => state.currentUser.data)
   const lang = useSelector((state) => state.language)
   const year = useSelector(({ filters }) => filters.year)
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
@@ -15,12 +17,12 @@ export default function YearSelector({ multiple, size, label }) {
 
   const dispatch = useDispatch()
 
+  if (!currentUser) return null
+
   useEffect(() => {
     if (!previousYearsWithAnswers) return
-    const currentYear = new Date().getFullYear()
-    let temp = previousYearsWithAnswers
-    if (!temp.includes(currentYear)) temp.unshift(currentYear)
-    const options = temp.map((y) => {
+    const years = getYearsUserHasAccessToAction(currentUser)
+    const options = years.map((y) => {
       return {
         key: y,
         value: y,

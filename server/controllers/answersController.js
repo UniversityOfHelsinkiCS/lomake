@@ -27,12 +27,21 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       const data = await db.tempAnswer.findAll({})
       return res.status(200).json(data)
     } else {
+      const access = req.user.access
+      const now = new Date()
       const data = await db.tempAnswer.findAll({
         where: {
           programme: Object.keys(req.user.access),
         },
       })
-      return res.status(200).json(data)
+      // If the programme access has a year-limit on answers
+      // filter out the ones, that are before that time
+      const yearFilter = (answer, access) => access[answer.programme].year 
+        ? now.getFullYear() === access[answer.programme].year 
+        : true
+
+      const filteredAnswers = data.filter((answer) => yearFilter(answer, access))
+      return res.status(200).json(filteredAnswers)
     }
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -73,7 +82,7 @@ const getAllUserHasAccessTo = async (req, res) => {
       // If the programme access has a year-limit on answers
       // filter out the ones, that are before that time
       const yearFilter = (answer, access) => access[answer.programme].year 
-        ? answer.year >= access[answer.programme].year 
+        ? answer.year = access[answer.programme].year 
         : true
 
       const filteredAnswers = data.filter((answer) => yearFilter(answer, access))

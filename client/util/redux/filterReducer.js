@@ -42,8 +42,8 @@ const initialState = {
   doctoralSchool: 'allSchools',
   faculty: 'allFaculties',
   level: 'allProgrammes',
-  year: new Date().getFullYear(),
-  multipleYears: [new Date().getFullYear() - 1, new Date().getFullYear()],
+  year: '',
+  multipleYears: [],
   questions: { selected: [], open: []},
 }
 
