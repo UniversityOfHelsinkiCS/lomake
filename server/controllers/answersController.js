@@ -82,7 +82,7 @@ const getAllUserHasAccessTo = async (req, res) => {
       // If the programme access has a year-limit on answers
       // filter out the ones, that are before that time
       const yearFilter = (answer, access) => access[answer.programme].year 
-        ? answer.year = access[answer.programme].year 
+        ? answer.year === access[answer.programme].year 
         : true
 
       const filteredAnswers = data.filter((answer) => yearFilter(answer, access))
