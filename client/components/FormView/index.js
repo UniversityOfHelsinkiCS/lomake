@@ -38,6 +38,7 @@ const FormView = ({ room }) => {
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
+  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(new Date().getFullYear())
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,
@@ -66,7 +67,18 @@ const FormView = ({ room }) => {
 
     if (!programme) return
 
-    if (programme.locked || !userHasWriteAccess || viewingOldAnswers || !deadline) {
+    if (!userHasAccessToTempAnswers) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) dispatch(wsLeaveRoom(room))
+      const programmesData = oldAnswers.find(
+        (answer) => answer.programme === programme.key && answer.year === year
+      )
+      const answersFromSelectedYear = programmesData ? programmesData.data : []
+      dispatch({
+        type: 'SET_OLD_FORM_ANSWERS',
+        answers: answersFromSelectedYear,
+      })
+    } else if (programme.locked || !userHasWriteAccess || viewingOldAnswers || !deadline) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
       if (!viewingOldAnswers && deadline) {
@@ -99,7 +111,7 @@ const FormView = ({ room }) => {
         answers: answersFromSelectedYear,
       })
     }
-  }, [singleProgramPending, viewingOldAnswers, year, deadline, oldAnswers])
+  }, [singleProgramPending, viewingOldAnswers, year, deadline, oldAnswers, userHasAccessToTempAnswers])
 
   useEffect(() => {
     return () => {
