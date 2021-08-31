@@ -23,6 +23,7 @@ import questions from '../../questions'
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
+  const [showCsv, setShowCsv] = useState(false)
   const history = useHistory()
   const lang = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
@@ -34,11 +35,11 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
   const oldAnswers = useSelector((state) => state.oldAnswers.data)
   const currentRoom = useSelector((state) => state.room)
-  const [showCsv, setShowCsv] = useState(false)
+  const currentYear = new Date().getFullYear()
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
-  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(new Date().getFullYear())
+  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(currentYear)
 
   const [loadObj, setLoadObj] = useState({
     loaded: false,
@@ -46,15 +47,12 @@ const FormView = ({ room }) => {
   })
 
   useEffect(() => {
+    document.title = `${translations['form'][lang]} - ${room}`
     dispatch(getProgramme(room))
     setLoadObj({
       loading: true,
       loaded: false,
     })
-  }, [])
-
-  useEffect(() => {
-    document.title = `${translations['form'][lang]} - ${room}`
   }, [lang, room])
 
   useEffect(() => {
