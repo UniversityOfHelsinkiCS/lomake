@@ -41,26 +41,17 @@ const FormView = ({ room }) => {
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
   const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(currentYear)
 
-  const [loadObj, setLoadObj] = useState({
-    loaded: false,
-    loading: false,
-  })
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     document.title = `${translations['form'][lang]} - ${room}`
     dispatch(getProgramme(room))
-    setLoadObj({
-      loading: true,
-      loaded: false,
-    })
+    setLoading(true)
   }, [lang, room])
 
   useEffect(() => {
-    if (loadObj.loading && !singleProgramPending) {
-      setLoadObj({
-        loaded: true,
-        loading: false,
-      })
+    if (loading && !singleProgramPending) {
+      setLoading(false)
     }
 
     if (!programme) return
@@ -118,7 +109,7 @@ const FormView = ({ room }) => {
     }
   }, [])
 
-  if (!loadObj.loaded || loadObj.loading) return <Loader active />
+  if (loading) return <Loader active />
 
   if (!room) return <Redirect to="/" />
 
