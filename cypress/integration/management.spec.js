@@ -46,9 +46,9 @@ describe('Management tests', function () {
     cy.get('[data-cy=read-cypressUser2]').click()
     cy.get('[data-cy=removePermissions-button]').click()
 
-    cy.get('[data-cy=read-cypressUser2]').should('have.class', 'close')
-    cy.get('[data-cy=write-cypressUser2]').should('have.class', 'close')
-    cy.get('[data-cy=admin-cypressUser2]').should('have.class', 'close')
+    cy.get('[data-cy=read-cypressUser2]').should('not.exist')
+    cy.get('[data-cy=write-cypressUser2]').should('not.exist')
+    cy.get('[data-cy=admin-cypressUser2]').should('not.exist')
   })
 
   it('Cant remove permissions of last admin user remaining', function () {
@@ -62,17 +62,6 @@ describe('Management tests', function () {
 
     cy.get('[data-cy=admin-cypressUser]').click()
     cy.get('[data-cy=removePermissions-button]').click()
-  })
-
-  it('Adding write permissions also grants read permission', function () {
-    cy.get('[data-cy=read-cypressUser2]').click()
-    cy.get('[data-cy=removePermissions-button]').click()
-
-    cy.get('[data-cy=write-cypressUser2]').click()
-    cy.get('[data-cy=grantPermissions-button]').click()
-
-    cy.get('[data-cy=read-cypressUser2]').should('have.class', 'check')
-    cy.get('[data-cy=write-cypressUser2]').should('have.class', 'check')
   })
 
   it('Removing admin permissions only removes admin permissions', function () {
