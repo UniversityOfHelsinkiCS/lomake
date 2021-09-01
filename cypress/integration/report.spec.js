@@ -102,6 +102,7 @@ describe('ReportPage tests', function () {
     cy.reload()
     cy.visit('/report')
     cy.get('[data-cy=doctoral-school-filter]').should('not.exist')
+    cy.get('[data-cy=doctora-filter]')
     cy.get('[data-cy=doctoral-filter]').click()
     cy.wait(1000)
     cy.get('[data-cy=doctoral-school-filter]').click()
