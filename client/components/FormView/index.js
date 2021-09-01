@@ -21,13 +21,15 @@ import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 import questions from '../../questions'
 
+
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const [showCsv, setShowCsv] = useState(false)
+  const [loading, setLoading] = useState(false)
   const history = useHistory()
+
   const lang = useSelector((state) => state.language)
   const deadline = useSelector((state) => state.deadlines.nextDeadline)
-
   const programme = useSelector((state) => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
   const user = useSelector((state) => state.currentUser.data)
@@ -41,7 +43,17 @@ const FormView = ({ room }) => {
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
   const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(currentYear)
 
-  const [loading, setLoading] = useState(false)
+
+  const setOldAnswers = () => {
+    dispatch(setViewOnly(true))
+    if (currentRoom) dispatch(wsLeaveRoom(room))
+    const programmesData = oldAnswers ? oldAnswers.find((a) => a.programme === programme.key && a.year === year) : null
+    const answersFromSelectedYear = programmesData ? programmesData.data : []
+    dispatch({
+      type: 'SET_OLD_FORM_ANSWERS',
+      answers: answersFromSelectedYear
+    })
+  }
 
   useEffect(() => {
     document.title = `${translations['form'][lang]} - ${room}`
@@ -56,49 +68,29 @@ const FormView = ({ room }) => {
 
     if (!programme) return
 
+    // if the user has no access to tempAnswers, show the answers of the most recent year user has access to
     if (!userHasAccessToTempAnswers) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
-      const programmesData = oldAnswers.find(
-        (answer) => answer.programme === programme.key && answer.year === year
-      )
-      const answersFromSelectedYear = programmesData ? programmesData.data : []
-      dispatch({
-        type: 'SET_OLD_FORM_ANSWERS',
-        answers: answersFromSelectedYear,
-      })
+      setOldAnswers()
+    // if one of these conditions is true, the answers should be read-only
     } else if (programme.locked || !userHasWriteAccess || viewingOldAnswers || !deadline) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
+      
+      // if the selected year is this year, and there is a deadline, the user should see the tempAnswers 
       if (!viewingOldAnswers && deadline) {
         dispatch(getTempAnswers(room))
       }
+      // if the selected year is this year, and there is no deadline, the newest answers have been moved to old answers and should be found from there
       if (!viewingOldAnswers && !deadline && oldAnswers) {
-        const programmesData = oldAnswers.find(
-          (answer) => answer.programme === programme.key && answer.year === year
-        )
-        const answersFromSelectedYear = programmesData ? programmesData.data : []
-
-        dispatch({
-          type: 'SET_OLD_FORM_ANSWERS',
-          answers: answersFromSelectedYear,
-        })
+        setOldAnswers()
       }
-    } else {
+      // if the selected year is older than this year and there are old answers, shows them in the form
+      if (viewingOldAnswers && oldAnswers) {
+        setOldAnswers()
+      }
+    } else { // if none of these conditions is true, the user should be able to write to tempanswers
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
-    }
-
-    if (viewingOldAnswers && oldAnswers) {
-      const programmesData = oldAnswers.find(
-        (answer) => answer.programme === programme.key && answer.year === year
-      )
-      const answersFromSelectedYear = programmesData ? programmesData.data : []
-
-      dispatch({
-        type: 'SET_OLD_FORM_ANSWERS',
-        answers: answersFromSelectedYear,
-      })
     }
   }, [singleProgramPending, viewingOldAnswers, year, deadline, oldAnswers, userHasAccessToTempAnswers])
 
