@@ -131,15 +131,34 @@ label {
   }
 
   .form-section-header {
-    margin: 0 !important;
-    padding: 1em 0 !important;
+    font-size: 1.5em !important;
+    padding: 0 !important;
+    margin: 1.5em 0em 1em 0em !important;
+    background: transparent !important;
+    color: $black !important;
+  }
+
+  .form-entity-area {
+    margin-top: 0.5em !important;
   }
 
   .entity-description {
-    padding-left: 0 !important;
+    padding-left: 0.5em !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.5 !important;
   }
-  .measures-label {
-    visibility: hidden;
+  
+  .form-text-area {
+    margin: 1rem 0!important;
+  }
+
+  .form-textarea {
+    padding: 0.5em 0 !important;
+  }
+
+  .form-view-only-smiley {
+    max-height: 30px !important;
   }
   // These are required for firefox:
   // https://stackoverflow.com/questions/43492724/firefox-prints-first-page-only-but-other-browsers-doing-fine/43494490

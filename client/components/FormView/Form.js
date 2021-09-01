@@ -33,7 +33,8 @@ const Form = ({ questions, programmeKey }) => {
 
     const divStyle = summary
       ? {
-          paddingLeft: '1.5em',
+          marginTop: '1em !important',
+          paddingLeft: '0.5em',
           borderLeft: '5px solid',
           borderColor: colors.background_black,
           marginBottom: '0',

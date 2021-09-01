@@ -94,8 +94,9 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }
 
   return (
-    <div data-cy={`textarea-${id}`} style={{ margin: '1em 0' }}>
+    <div data-cy={`textarea-${id}`} >
       <div
+        className="form-text-area"
         style={{
           display: 'flex',
           justifyContent: 'space-between',

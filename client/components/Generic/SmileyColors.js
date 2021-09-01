@@ -30,8 +30,8 @@ const SmileyColors = ({ id }) => {
     return (
       <>
         {value && (
-          <div style={{ margin: '1em 0' }}>
-            <Icon name={colorMap[value]} size="huge" />
+          <div className="form-view-only-smiley">
+            <Icon name={colorMap[value]} size={viewOnly ? "big" : "huge"} className="form-view-only-smiley" />
           </div>
         )}
       </>

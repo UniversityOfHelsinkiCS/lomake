@@ -48,13 +48,13 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
   }
 
   return (
-    <>
+    <div className="form-entity-area">
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '400px' }}>
+        <div style={{ maxWidth: '500px' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
         {!noColor && <SmileyColors id={id} />}
@@ -78,7 +78,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         label={translations.textAreaLabel[lang]}
         EntityLastYearsAccordion={EntityLastYearsAccordion}
       />
-    </>
+    </div>
   )
 }
 

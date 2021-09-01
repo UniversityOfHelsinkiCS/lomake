@@ -161,7 +161,7 @@ const FormView = ({ room }) => {
             </div>
           </div>
         </div>
-        <div style={{ marginTop: '2em' }}>
+        <div className="hide-in-print-mode" style={{ marginTop: '2em' }}>
           <Dropdown
             className="button basic gray"
             direction="left"

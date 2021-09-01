@@ -54,7 +54,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
         {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
       </h3>
       <p
-        className="measures-label"
+        className="hide-in-print-mode"
         style={{
           lineHeight: 2,
           backgroundColor: colors.background_blue,
