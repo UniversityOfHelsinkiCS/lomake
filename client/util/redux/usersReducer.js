@@ -107,6 +107,13 @@ export default (state = { data: [] }, action) => {
         pending: false,
         error: true
       }
+    case 'EDIT_PROGRAMMES_USER_SUCCESS':
+      return {
+        ...state,
+        data: state.data.map((u) => (u.id === action.response.user.id ? action.response.user : u)),
+        pending: false,
+        error: false
+      }
     default:
       return state
   }

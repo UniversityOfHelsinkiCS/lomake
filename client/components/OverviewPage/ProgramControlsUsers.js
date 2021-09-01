@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
+import { editUserAction } from 'Utilities/redux/usersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
 
@@ -99,6 +100,7 @@ const OwnerAccordionUsers = ({ programme }) => {
   if (!users.data || users.pending) return null
 
   const currentOwnerCount = users.data.reduce((pre, cur) => {
+    if (!cur.access[programme]) return pre
     if (cur.access[programme].admin) return pre + 1
     return pre
   }, 0)

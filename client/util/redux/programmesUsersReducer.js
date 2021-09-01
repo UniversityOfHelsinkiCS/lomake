@@ -42,7 +42,9 @@ export default (state = { data: null }, action) => {
     case 'EDIT_PROGRAMMES_USER_SUCCESS':
       return {
         ...state,
-        data: state.data.map((u) => (u.id === action.response.id ? action.response : u)),
+        data: state.data
+          .filter((u) => (u.id !== action.response.user.id || (u.id === action.response.user.id && action.response.stillAccess)))
+          .map((u) => (u.id === action.response.user.id ? action.response.user : u)),
         pending: false,
         error: false
       }

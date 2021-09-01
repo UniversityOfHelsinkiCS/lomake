@@ -101,6 +101,7 @@ const editUserAccess = async (req, res) => {
   try {
     let body = req.body
     let newProgrammeAccess
+    const programme = req.params.programme
 
     const user = await db.user.findOne({ where: { id: req.params.id } })
     if (!user) return res.status(400).json({ error: 'id not found.' })
@@ -109,11 +110,11 @@ const editUserAccess = async (req, res) => {
      * Trying to remove admin rights from given program...
      * Need to check that user is not the last admin for this programme.
      */
-    if (body.admin === false) {
+    if (body.admin && body.admin === false) {
       const currentAdminCount = await db.user.count({
         where: {
           access: {
-            [req.params.programme]: { admin: 'true' },
+            [programme]: { admin: 'true' },
           },
         },
       })
@@ -126,7 +127,7 @@ const editUserAccess = async (req, res) => {
     /**
      * Dont allow adjusting read/write permissions of admin user:
      */
-    if (user.access[req.params.programme].admin && body.admin !== false) {
+    if (user.access[programme].admin && body.admin !== false) {
       return res.status(200).json(user)
     }
 
@@ -167,20 +168,25 @@ const editUserAccess = async (req, res) => {
     }
 
     if (body['read'] === false) {
-      newProgrammeAccess = {
-        read: false,
-        write: false,
+      let userObject = user
+      delete userObject.access[programme]
+      user.access = { ...userObject.access }  
+    } else {
+      user.access = {
+        ...user.access,
+        [programme]: { ...user.access[programme], ...newProgrammeAccess },
       }
     }
 
-    user.access = {
-      ...user.access,
-      [req.params.programme]: { ...user.access[req.params.programme], ...newProgrammeAccess },
-    }
-
-    await user.save()
-
-    return res.status(200).json(user)
+    const [rows, updatedUser] = await db.user.update({ access: { ...user.access }},
+      {
+          where: { id: req.params.id },
+          returning: true,
+          plain: true
+      }
+    )
+    
+    return res.status(200).json({ user: updatedUser, stillAccess: body['read'] === false ? false : true })
   } catch (e) {
     logger.error(e.message)
     res.status(500).json({ error: 'Database error' })
