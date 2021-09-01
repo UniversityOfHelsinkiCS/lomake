@@ -13,6 +13,12 @@ import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
+const formatRights = (programme) => {
+  return Object.keys(programme)
+    .filter((e) => programme[e])
+    .join(', ')
+}
+
 export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -20,8 +26,6 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     localStorage.setItem('adminLoggedInAs', user.uid)
     window.location.reload()
   }
-
-
 
   const FormattedAccess = () => {
     const programmeKeys = user.access ? Object.keys(user.access) : []
@@ -35,37 +39,28 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
       </a>
       )
     }
-    if (programmeKeys.length > 1) {
-      return (
-        <Popup
-          position="right center"
-          trigger={
-            <div>
-              <a onClick={() => setModalData({ id: user.id })}>
-                <div className="user-access-links">{programmeCodesAndNames.get(programmeKeys[0])}</div>
-              </a>
+    return (
+      <Popup
+        position="right center"
+        trigger={
+          <div>
+            <a onClick={() => setModalData({ id: user.id })}>
+              <div className="user-access-links">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+            </a>
+            {programmeKeys.length > 1 &&
               <a>
                 <div>+{programmeKeys.length - 1} {translations.moreProgrammes[lang]}</div>
               </a>
-            </div>  
-          }
-          content={
-            <div className="user-programme-list-popup">
-              {programmeKeys.map((p) => <p>{programmeCodesAndNames.get(p)}</p>)}
-            </div>
-          }
-        />
-      )  
-    }
-    return (
-      <div>
-        {programmeKeys.map((p) => (
-          <a onClick={() => setModalData({ id: user.id })} key={`${user.uid}-${p}`}>
-            <div className="user-access-links">{programmeCodesAndNames.get(p)}</div>
-          </a>
-        ))}
-      </div>
-    )
+            }
+          </div>  
+        }
+        content={
+          <div className="user-programme-list-popup">
+            {programmeKeys.map((p) => <p>{programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}</p>)}
+          </div>
+        }
+      />
+    )  
   }
 
   const EditIcon = () => {
