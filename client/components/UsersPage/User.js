@@ -41,7 +41,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     }
     return (
       <Popup
-        position="right center"
+        position="bottom center"
         trigger={
           <div>
             <a onClick={() => setModalData({ id: user.id })}>
