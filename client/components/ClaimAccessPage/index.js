@@ -80,7 +80,7 @@ export default ({ url }) => {
         <p data-cy="invalidTokenError" style={{ color: colors.red }}>
           <strong>
             {translations.invalidToken1of2[lang]}
-            {lang !== 'se' && <a href={basePath}>study.cs.helsinki.fi/tilannekuvalomake</a>}
+            {lang !== 'se' && <a href={basePath}>opetushallinto.cs.helsinki.fi/tilannekuva</a>}
           </strong>
         </p> 
         <p style={{ color: colors.red }}>
