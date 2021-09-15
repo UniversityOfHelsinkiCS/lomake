@@ -7,12 +7,6 @@ import negativeEmoji from 'Assets/persevering.png'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './SmileyColors.scss'
 
-const colorMap = {
-  green: 'smile outline',
-  yellow: 'meh outline',
-  red: 'frown outline',
-}
-
 const SmileyColors = ({ id }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_light`
@@ -24,18 +18,6 @@ const SmileyColors = ({ id }) => {
     if (value === color) return `emoji${viewOnly ? '' : ' emoji-button'} active-emoji`
 
     return `emoji${viewOnly ? '' : ' emoji-button'}`
-  }
-
-  if (viewOnly) {
-    return (
-      <>
-        {value && (
-          <div className="form-view-only-smiley">
-            <Icon name={colorMap[value]} size={viewOnly ? "big" : "huge"} className="form-view-only-smiley" />
-          </div>
-        )}
-      </>
-    )
   }
 
   return (

@@ -130,35 +130,36 @@ const FormView = ({ room }) => {
           <div className="hide-in-print-mode">
             <YearSelector size="extra-small" />
             <StatusMessage />
+
             <p>{translations.p1[lang]}</p>
             <p>{translations.p2[lang]}</p>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img
-                src={positiveEmoji}
-                style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-              />{' '}
-              {translations.positive[lang]}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
-              <img
-                src={neutralEmoji}
-                style={{
-                  width: '40px',
-                  height: 'auto',
-                  marginRight: '5px',
-                  marginTop: '5px',
-                  marginBottom: '5px',
-                }}
-              />{' '}
-              {translations.neutral[lang]}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-              <img
-                src={negativeEmoji}
-                style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-              />{' '}
-              {translations.negative[lang]}
-            </div>
+          </div >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={positiveEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {translations.positive[lang]}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
+            <img
+              src={neutralEmoji}
+              style={{
+                width: '40px',
+                height: 'auto',
+                marginRight: '5px',
+                marginTop: '5px',
+                marginBottom: '5px',
+              }}
+            />{' '}
+            {translations.neutral[lang]}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
+            <img
+              src={negativeEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {translations.negative[lang]}
           </div>
         </div>
         <div className="hide-in-print-mode" style={{ marginTop: '2em' }}>
