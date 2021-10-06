@@ -473,8 +473,8 @@ export const formViewTranslations = {
   },
   // Formview/StatusMessage.js
   savingAnswersNotice: {
-    fi: 'Vastaukset tallentuvat automaattisesti. Eräpäivä:',
-    en: 'Answers are saved automatically. Deadline:',
+    fi: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
+    en: 'Answers are saved automatically. Final day for answering the form:',
     se: 'Svaren sparas automatiskt.',
   },
   savingAnswersSubtitle: {
