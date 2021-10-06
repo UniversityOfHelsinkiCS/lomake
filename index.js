@@ -14,7 +14,7 @@ const { startBackupJob } = require('@root/server/scripts/backupAnswers')
 const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
-
+const { getUserList } = require('@root/server/scripts/getUserList')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -26,6 +26,9 @@ initializeDatabaseConnection()
           return
         case 'generateMissingTokens':
           generateMissingTokens()
+          return
+        case 'getUserList':
+          getUserList()
           return
         default:
           return
