@@ -8,7 +8,7 @@ import User from 'Components/UsersPage/User'
 import NewUserForm from 'Components/UsersPage/NewUserForm'
 import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
-import { colors, sortedItems } from 'Utilities/common'
+import { sortedItems } from 'Utilities/common'
 import { isSuperAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import './UsersPage.scss'
@@ -163,7 +163,7 @@ export default () => {
           <Table.Row>
             {getCustomHeader({ name: translations.name[lang], width: 2, field: "lastname" })}
             {getCustomHeader({ name: translations.userId[lang], width: 1, field: "uid" })}
-            {getCustomHeader({ name: translations.access[lang], width: 6, field: "access", sortable: false })}
+            {getCustomHeader({ name: translations.access[lang], width: 6, field: "access", sortable: true })}
             {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: "userGroup" })}
             {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: "lastLogin", sortable: true })}
             {getCustomHeader({ name: translations.editUser[lang], width: 1, field: "editUser", sortable: false })}

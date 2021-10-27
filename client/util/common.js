@@ -58,6 +58,10 @@ export const sortedItems = (items, sorter, lang) => {
       if (new Date(a.lastLogin) < new Date(b.lastLogin)) return -1
       if (new Date(a.lastLogin) > new Date(b.lastLogin)) return 1
     }
+    if (sorter == 'access') {
+      if (Object.entries(a.access).length > Object.entries(b.access).length) return -1
+      if (Object.entries(a.access).length < Object.entries(b.access).length) return 1
+    }
     if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
   })
