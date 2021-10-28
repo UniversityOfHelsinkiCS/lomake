@@ -1222,7 +1222,7 @@ const data = [
       {
         key: 'MH70_003',
         name: {
-          fi: 'Globaalin politiikan ja kommunikaation maisteriohjelma',
+          fi: 'Globaalin politiikan ja viestinnän maisteriohjelma',
           en: "Master's Programme in Global Politics and Communication",
           se: 'Magisterprogrammet i global politik och kommunikation',
         },
