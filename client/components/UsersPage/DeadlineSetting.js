@@ -13,7 +13,7 @@ import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 
-export default function OspaModule() {
+const DeadlineSetting = () => {
   const [newDate, setNewDate] = useState(null)
   const lang = useSelector((state) => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
@@ -87,3 +87,5 @@ export default function OspaModule() {
     </Segment>
   )
 }
+
+export default DeadlineSetting

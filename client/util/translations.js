@@ -1141,7 +1141,7 @@ export const usersPageTranslations = {
   },
   deadline: {
     en: 'Deadline',
-    fi: 'Määräaika',
+    fi: 'Lomakkeen aukioloaika',
     se: 'Deadline',
   },
   linksForOwners: {
@@ -1228,28 +1228,33 @@ export const usersPageTranslations = {
   },
   deadlineSettings: {
     en: 'Deadline settings',
-    fi: 'Määräaika-asetukset',
+    fi: 'Lomakkeen aukiolon määritys',
     se: 'Hantera deadline',
   },
   selectNewDeadline: {
     en: 'Select new deadline',
-    fi: 'Valitse uusi määräaika',
+    fi: 'Valitse viimeinen aukiolopäivä',
     se: 'Välj ny deadline',
   },
   updateDeadline: {
     en: 'Update deadline',
-    fi: 'Päivitä määräaika',
+    fi: 'Päivitä viimeinen aukiolopäivä',
     se: 'Uppdatera deadline',
   },
   nextDeadline: {
-    en: 'Next deadline:',
-    fi: 'Seuraava määräaika:',
-    se: 'Nästa deadline:',
+    en: 'Next deadline: ',
+    fi: 'Lomakkeen viimeinen täyttöpäivä on: ',
+    se: 'Nästa deadline: ',
   },
   noDeadlineSet: {
-    en: 'No deadline set. Please note, that if the Form has already been closed for that year, setting a new deadline is not possible!',
-    fi: 'Määräaikaa ei ole asetettu. HUOM! Jos Lomake on jo kerran mennyt kiinni kalenterivuoden aikana, uuden määräajan määrittäminen ei ole mahdollista.',
-    se: 'Ingen deadline vald.',
+    en: 'No deadline has yet been set for this year or the deadline has already passed. ',
+    fi: 'Viimeistä aukiolopäivää ei tälle vuodelle ole vielä asetettu tai se on jo umpeutunut. ',
+    se: 'No deadline has yet been set for this year or the deadline has already passed. ',
+  },
+  contactToska: {
+    en: 'If you wish to change the deadline, please contact Toska (grp-toska@helsinki.fi).',
+    fi: 'Jos viimeiseen aukiolopäivään tulee muutoksia, otathan yhteyden Toskaan (grp-toska@helsinki.fi).',
+    se: 'If you with to change the deadline, please contact Toska (grp-toska@helsinki.fi).'
   },
   deleteThisDeadline: {
     en: 'Freeze the form',
