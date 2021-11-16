@@ -31,7 +31,7 @@ describe('Form Notification tests', function () {
     cy.login('cypressSuperAdminUser')
     cy.visit('/')
     cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline').click()
+    cy.contains('Deadline settings').click()
     cy.route('DELETE', '/api/deadlines').as('delete')
     cy.get('[data-cy=deleteDeadline]').click()
     cy.wait('@delete')
