@@ -53,7 +53,7 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const SUPERADMINS = ['mluukkai', 'saarasat', 'admin']
+const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser']
 
 const isSuperAdmin = (uid) => {
   return SUPERADMINS.includes(uid)

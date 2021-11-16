@@ -27,8 +27,8 @@ describe('Form Notification tests', function () {
     cy.get('[data-cy=locked-form-notice]')
   })
 
-  it('After OSPA locks all forms, message matches the state', () => {
-    cy.login('cypressAdminUser')
+  it('After Toska locks all forms, message matches the state', () => {
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline').click()

@@ -5,7 +5,7 @@ import { testProgrammeName } from '../../config/common'
 
 describe('OSPA user tests', function () {
   this.beforeEach(function () {
-    cy.login('cypressAdminUser')
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
   })
 

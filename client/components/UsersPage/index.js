@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import UserTable from './UserTable'
-import OspaModule from './OspaModule'
+import Deadline from './Deadline'
 import OwnerLinks from './OwnerLinks'
 import FacultyLinks from './FacultyLinks'
 import DoctorLinks from './DoctorLinks'
@@ -33,14 +33,6 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <UserTable />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: translations.deadline[lang],
-      render: () => (
-        <Tab.Pane>
-          <OspaModule />
         </Tab.Pane>
       ),
     },
@@ -77,6 +69,14 @@ export default () => {
         render: () => (
           <Tab.Pane>
             <UpdateStudyprogrammes />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: translations.deadline[lang],
+        render: () => (
+          <Tab.Pane>
+            <Deadline />
           </Tab.Pane>
         ),
       }

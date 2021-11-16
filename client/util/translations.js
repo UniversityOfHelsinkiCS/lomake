@@ -1247,8 +1247,8 @@ export const usersPageTranslations = {
     se: 'Nästa deadline:',
   },
   noDeadlineSet: {
-    en: 'No deadline set.',
-    fi: 'Määräaikaa ei ole asetettu.',
+    en: 'No deadline set. Please note, that if the Form has already been closed for that year, setting a new deadline is not possible!',
+    fi: 'Määräaikaa ei ole asetettu. HUOM! Jos Lomake on jo kerran mennyt kiinni kalenterivuoden aikana, uuden määräajan määrittäminen ei ole mahdollista.',
     se: 'Ingen deadline vald.',
   },
   deleteThisDeadline: {
