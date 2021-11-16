@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { Grid, Tab } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
 
 import CompareByFaculty from './CompareByFaculty'
 import CompareByYear from './CompareByYear'
@@ -138,6 +139,10 @@ export default () => {
         className="comparison-filter-container"
       >
         <Grid.Column width={10}>
+          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: "3em" }}>
+            <Icon name="arrow left"/>
+            {translations.backToFrontPage[lang]}
+          </Button>
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>
       </Grid>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Icon, Grid, Tab } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import WrittenAnswers from './WrittenAnswers'
 import ColorAnswers from './ColorAnswers'
@@ -149,6 +150,10 @@ export default () => {
       <div className="report-info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="report-filter-container noprint">
         <Grid.Column width={10}>
+          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: "3em" }}>
+            <Icon name="arrow left"/>
+            {translations.backToFrontPage[lang]}
+          </Button>
           <h1>{translations.reportPage[lang]}</h1>
           <YearSelector size="small" />
           {usersProgrammes && usersProgrammes.length > 5 && (

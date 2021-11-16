@@ -91,6 +91,11 @@ export const comparisonPageTranslations = {
     se: 'Download as a PDF',
   },
   // ComparisonPage/index.js
+  backToFrontPage: {
+    fi: 'Etusivulle',
+    en: 'Back to frontpage',
+    se: 'Back to frontpage'
+  }, 
   comparisonPage: {
     fi: 'Vastausten vertailu',
     en: 'Compare answers',
@@ -994,6 +999,11 @@ export const overviewPageTranslations = {
 
 export const reportPageTranslations = {
   // ReportPage/index.js
+  backToFrontPage: {
+    fi: 'Etusivulle',
+    en: 'Back to frontpage',
+    se: 'Back to frontpage'
+  }, 
   reportPage: {
     fi: 'Tilannekuvalomakkeen vastaukset',
     en: 'Answers',
