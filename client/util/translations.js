@@ -1346,6 +1346,11 @@ export const usersPageTranslations = {
     fi: 'Kansainväliset maisteriohjelmat',
     se: "International Master's programmes",
   },
+  accessDoctoral: {
+    fi: 'Kaikki tohtoriohjelmat',
+    en: 'All doctoral programmes',
+    se: 'All doctoral programmes',
+  },
   accessAdmin: {
     en: 'Admin',
     fi: 'Ylläpitäjä',

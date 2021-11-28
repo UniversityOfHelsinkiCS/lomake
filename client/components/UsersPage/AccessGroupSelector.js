@@ -24,7 +24,8 @@ const AccessGroupSelector = ({ user }) => {
     let options = [
       { key: 'allProgrammes', value: 'allProgrammes', text: translations.allProgrammes[lang] },
       { key: 'international2020', value: 'international2020', text: translations.accessInternational2020[lang]},
-      { key: 'international', value: 'international', text: translations.accessInternational[lang]}
+      { key: 'international', value: 'international', text: translations.accessInternational[lang]},
+      { key: 'doctoral', value: 'doctoral', text: translations.accessDoctoral[lang]}
     ]
     // Add faculties as options
     return options.concat(faculties.map((f) => ({
@@ -56,6 +57,13 @@ const AccessGroupSelector = ({ user }) => {
               delete updatedAccess[programme.key]
             }
           })
+        } else if (group === 'doctoral') {
+          allProgrammes.forEach((programme) => {
+            if (programme.level === 'doctoral') {
+              console.log({ programme })
+              delete updatedAccess[programme.key]
+            }
+          })
         } else if (group === 'allProgrammes') {
           allProgrammes.forEach((programme) => {
             delete updatedAccess[programme.key]
@@ -82,6 +90,12 @@ const AccessGroupSelector = ({ user }) => {
         } else if (group === 'international') {
           allProgrammes.forEach((programme) => {
             if (programme.international) {
+              updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
+            }
+          })
+        } else if (group === 'doctoral') {
+          allProgrammes.forEach((programme) => {
+            if (programme.level === 'doctoral') {
               updatedAccess = { ...updatedAccess, [programme.key]: { ...user.access[programme.key], read: true }}
             }
           })
