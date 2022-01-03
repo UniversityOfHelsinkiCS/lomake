@@ -12,12 +12,13 @@ import { registerLocale } from 'react-datepicker'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
-import { getDraftYear, setDraftYear } from 'Utilities/redux/draftYearReducer'
+import { deleteDraftYear, getDraftYear, setDraftYear } from 'Utilities/redux/draftYearReducer'
 import { colors } from 'Utilities/common'
 
 
 const DeadlineSetting = () => {
   const [newDate, setNewDate] = useState(null)
+  const [newDraftYear, setNewDraftYear] = useState(null)
   const [yearOptions, setYearOptions] = useState([])
   const lang = useSelector((state) => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
@@ -49,10 +50,15 @@ const DeadlineSetting = () => {
       Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
     )
     dispatch(createOrUpdateDeadline(acualDate.toISOString()))
+    setNewDate(null)
+    setNewDraftYear(null)
   }
 
   const handleDelete = () => {
     dispatch(deleteDeadline())
+    dispatch(deleteDraftYear())
+    setNewDate(null)
+    setNewDraftYear(null)
   }
 
   if (!isAdmin) return null
@@ -109,11 +115,22 @@ const DeadlineSetting = () => {
         <Select
           placeholder='Select year'
           options={yearOptions}
-          value={draftYear}
-          onChange={(e, { value }) => dispatch(setDraftYear(value))}
+          value={newDraftYear}
+          disabled={!nextDeadline}
+          onChange={(e, { value }) => setNewDraftYear(value)}
         />
+        <Button
+          data-cy="updateDraftYear"
+          primary
+          compact
+          size="mini"
+          disabled={!newDraftYear}
+          onClick={() => dispatch(setDraftYear(newDraftYear))}
+        >
+          {translations.updateDraftYear[lang]}
+        </Button>
         <Header as="h4">{translations.answersSavedForYear[lang]} 
-        {draftYear
+        {draftYear && nextDeadline
           ? <span style={{ color: colors.blue }} data-cy="draftYear">{draftYear}</span>
           : <span style={{ color: colors.red }} data-cy="noDraftYear">{translations.noDraftYear[lang]}</span>
         }

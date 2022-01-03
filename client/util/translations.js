@@ -1276,6 +1276,16 @@ export const usersPageTranslations = {
     fi: 'Valitse vuosi, jolle vastaukset tallennetaan: ',
     se: 'Set the year for which new are saved: ', 
   },
+  draftYearWarning: {
+    en: 'Answers of that year, will be opened for draft mode and could be overwritten by users!',
+    fi: 'Valitun vuoden vastaukset avautuvat käyttäjien muokattavaksi!',
+    se: 'Answers of that year, will be opened for draft mode and could be overwritten by users!',
+  },
+  updateDraftYear: {
+    en: 'Update year',
+    fi: 'Tallenna vastausvuosi',
+    se: 'Update year',
+  },
   answersSavedForYear: {
     en: 'Answers will be saved for the year: ',
     fi: 'Vastaukset tallennetaan vuodelle: ',
