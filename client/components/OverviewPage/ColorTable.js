@@ -218,16 +218,9 @@ const ColorTable = React.memo(
           return (
             <React.Fragment key={p.key}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                {p.locked ? (
-                  <div data-cy={`colortable-link-to-${p.key}`} style={{ fontWeight: 'bold' }}>
-                    <Icon name="lock" />{' '}
-                    {p.name[lang]}
-                  </div>
-                ) : (
-                  <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
-                    {p.name[lang]}
-                  </Link>
-                )}
+                <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
+                  {p.name[lang]}
+                </Link>
               </div>
               {tableIds.map((idObject) => (
                 <ColorTableCell
