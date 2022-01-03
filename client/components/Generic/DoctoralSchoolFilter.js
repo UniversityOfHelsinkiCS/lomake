@@ -8,7 +8,7 @@ import './Filters.scss'
 const DoctoralSchoolFilter = () => {
   const dispatch = useDispatch()
   const doctoralSchool = useSelector(({ filters }) => filters.doctoralSchool)
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   const handleChange = (e, { value }) => {
     dispatch(clearLevelSpecificFilters())

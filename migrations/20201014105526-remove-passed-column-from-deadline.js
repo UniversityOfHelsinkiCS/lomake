@@ -1,17 +1,8 @@
-'use strict'
-
 module.exports = {
-  up: function(queryInterface) {
-    return queryInterface.removeColumn(
-      'deadlines',
-      'passed'
-    )
+  up(queryInterface) {
+    return queryInterface.removeColumn('deadlines', 'passed')
   },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.addColumn(
-      'deadlines',
-      'passed',
-     Sequelize.BOOLEAN
-    )
-  }
+  down(queryInterface, Sequelize) {
+    return queryInterface.addColumn('deadlines', 'passed', Sequelize.BOOLEAN)
+  },
 }

@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getDeadline } from 'Utilities/redux/deadlineReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-
 const DeadlineInfo = () => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const dispatch = useDispatch()
 
@@ -15,20 +14,19 @@ const DeadlineInfo = () => {
     dispatch(getDeadline())
   }, [])
 
-  const formatDate = (date) => {
+  const formatDate = date => {
     const temp = new Date(date)
     return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
   }
 
   const getDeadlineText = () => {
-    if (nextDeadline) return (
-      <>
-        {translations.nextDeadline[lang]} {formatDate(nextDeadline.date)}
-        <p>
-          {translations.contactToska[lang]}
-        </p>
-      </>
-    )
+    if (nextDeadline)
+      return (
+        <>
+          {translations.nextDeadline[lang]} {formatDate(nextDeadline.date)}
+          <p>{translations.contactToska[lang]}</p>
+        </>
+      )
     return (
       <>
         {translations.noDeadlineSet[lang]}

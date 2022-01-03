@@ -112,7 +112,7 @@ describe('OSPA user tests', function () {
     cy.get('[data-cy=user-access-group-selector]').click().contains('Faculty of Theology').should('be.visible').click()
     cy.get('[data-cy=user-access-group-selector]').click()
     cy.get('[data-cy=access-group-save-button]').click()
-  
+
     // Check that all programmes are given only reading rights
     cy.get('[data-cy=read-T920101]').should('have.class', 'check')
     cy.get('[data-cy=write-T920101]').should('have.class', 'close')
@@ -129,7 +129,10 @@ describe('OSPA user tests', function () {
     cy.reload()
 
     // Check that earlier rights have been unaffected
-    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cyp3 res3')
+      .parent()
+      .find('[data-cy=userAccess]')
+      .should('contain', 'Doctoral Programme in Theology and Religious Studies')
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', '+5 more programmes')
 
     // Remove access to the Faculty of Theology
@@ -152,7 +155,10 @@ describe('OSPA user tests', function () {
 
     cy.reload()
     // Check that the user has the correct amount of rights afterwards
-    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cyp3 res3')
+      .parent()
+      .find('[data-cy=userAccess]')
+      .should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', 'Chemistry')
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', '+2 more programmes')
   })
@@ -192,11 +198,13 @@ describe('OSPA user tests', function () {
 
     cy.reload()
     // Check that the user has the correct amount of rights afterwards
-    cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.contains('cyp3 res3')
+      .parent()
+      .find('[data-cy=userAccess]')
+      .should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', 'Chemistry')
     cy.contains('cyp3 res3').parent().find('[data-cy=userAccess]').should('contain', '+2 more programmes')
   })
-
 
   it('Can navigate between tabs and the tables render', () => {
     cy.get('[data-cy=nav-admin]').click()

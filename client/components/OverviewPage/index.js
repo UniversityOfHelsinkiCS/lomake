@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux'
 import { Dropdown, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import ProgramControlsContent from './ProgramControlsContent'
-import ColorTable from './ColorTable'
-import StatsContent from './StatsContent'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import useDebounce from 'Utilities/useDebounce'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
+import StatsContent from './StatsContent'
+import ColorTable from './ColorTable'
+import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
 
 export default () => {
@@ -22,12 +22,12 @@ export default () => {
   const [statsToShow, setStatsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
 
-  const lang = useSelector((state) => state.language)
-  const currentUser = useSelector((state) => state.currentUser)
+  const lang = useSelector(state => state.language)
+  const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${translations['overviewPage'][lang]}`
+    document.title = `${translations.overviewPage[lang]}`
   }, [lang])
 
   const handleFilterChange = ({ target }) => {
@@ -39,11 +39,11 @@ export default () => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
     return currentUser.data.hasWideReadAccess
       ? programmes
-      : programmes.filter((program) => usersPermissionsKeys.includes(program.key))
+      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser.data])
 
   const filteredProgrammes = useMemo(() => {
-    return usersProgrammes.filter((prog) => {
+    return usersProgrammes.filter(prog => {
       const searchTarget = prog.name[lang]
       return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
     })
@@ -58,11 +58,7 @@ export default () => {
   return (
     <>
       {modalData && (
-        <CustomModal
-          title={modalData.header}
-          closeModal={() => setModalData(null)}
-          borderColor={modalData.color}
-        >
+        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
@@ -75,9 +71,7 @@ export default () => {
       {programControlsToShow && (
         <CustomModal
           title={`${translations.accessControl[lang]} - ${
-            programControlsToShow.name[lang]
-              ? programControlsToShow.name[lang]
-              : programControlsToShow.name['en']
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
           }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
@@ -93,16 +87,16 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className={moreThanFiveProgrammes ? "wide-header" : "wideish-header"}>
+          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <YearSelector size="extra-small" />
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
               {translations.readAnswersButton[lang]}
             </Button>
-            {moreThanFiveProgrammes &&
+            {moreThanFiveProgrammes && (
               <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
                 {translations.compareAnswersButton[lang]}
               </Button>
-            }
+            )}
             <Dropdown
               data-cy="csv-download"
               className="button basic gray csv-download"

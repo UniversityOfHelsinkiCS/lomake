@@ -1,10 +1,8 @@
-'use strict'
-
 module.exports = {
-  up: function (queryInterface) {
+  up(queryInterface) {
     return queryInterface.removeColumn('faculties', 'programmes')
   },
-  down: function (queryInterface, Sequelize) {
+  down(queryInterface, Sequelize) {
     return queryInterface.addColumn('faculties', 'programmes', Sequelize.JSONB)
   },
 }

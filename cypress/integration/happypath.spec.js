@@ -17,5 +17,5 @@ describe('Core tests', function () {
     cy.get('[data-cy=overviewpage-filter]').type("bachelor's programme in computer science")
     cy.get('[data-cy^=colortable-link-to]').should('have.length', 1).click()
     cy.get('[data-cy=formview-title]')
-  })*/
+  }) */
 })

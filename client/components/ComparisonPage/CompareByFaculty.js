@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
-import SingleProgramPieChart from './SingleProgramPieChart'
-import PieChart from './PieChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import { filteredProgrammes, filterByLevel } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import PieChart from './PieChart'
+import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
 
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
-  const lang = useSelector((state) => state.language)
-  const filters = useSelector((state) => state.filters)
-  const faculties = useSelector((state) => state.faculties.data)
+  const lang = useSelector(state => state.language)
+  const filters = useSelector(state => state.filters)
+  const faculties = useSelector(state => state.faculties.data)
   const { faculty, level } = filters
-  const user = useSelector((state) => state.currentUser.data)
+  const user = useSelector(state => state.currentUser.data)
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
 
@@ -27,7 +27,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   }
 
   const getChosenProgrammeFaculty = () => {
-    const searched = usersProgrammes.find((p) => p.name[lang] === chosen)
+    const searched = usersProgrammes.find(p => p.name[lang] === chosen)
     if (!searched) return ''
 
     const facultyName = searched.primaryFaculty.name[lang]
@@ -38,24 +38,24 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const getComparedFaculty = () => {
     if (!faculties) return ''
-    const comparedFaculty = faculties.find((f) => f.name[lang] === faculty)
+    const comparedFaculty = faculties.find(f => f.name[lang] === faculty)
     if (!comparedFaculty) return ''
 
     return comparedFaculty.name[lang]
-  } 
+  }
 
-  const getChosenAnswers = (question) => {
+  const getChosenAnswers = question => {
     if (!allAnswers || !chosen) return []
     const answers = allAnswers.get(question.id)
-    if (answers) return answers.filter((a) => a.name == chosen)
+    if (answers) return answers.filter(a => a.name == chosen)
     return []
   }
 
   const getComparedAnswers = (question, programmes) => {
     if (!programmes || !allAnswers) return []
-    const filteredKeys = programmes.map((p) => p.key)
+    const filteredKeys = programmes.map(p => p.key)
     const answers = allAnswers.get(question.id)
-    if (answers) return answers.filter((a) => filteredKeys.includes(a.key))
+    if (answers) return answers.filter(a => filteredKeys.includes(a.key))
     return []
   }
 
@@ -63,7 +63,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const universityProgrammes = filterByLevel(usersProgrammes, level)
 
-  const options = usersProgrammes.map((p) => ({
+  const options = usersProgrammes.map(p => ({
     key: p.key,
     value: p.name[lang],
     text: p.name[lang],
@@ -97,10 +97,9 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           <Grid.Column>
             <FacultyFilter size="large" label={translations.facultyFilter.compare[lang]} />
             <small>{translations.noAccessToAll[lang]}</small>
-            {faculty !== 'allFaculties' &&
-              (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-                <CompanionFilter />
-              )}
+            {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
+              <CompanionFilter />
+            )}
           </Grid.Column>
           <Grid.Column>
             <Radio
@@ -123,14 +122,14 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
       >
         <Grid.Column>
           {questionsList.map(
-            (question) =>
+            question =>
               getChosenAnswers(question) &&
               !question.no_color && (
                 <SingleProgramPieChart
                   key={question.id}
                   question={question}
                   answers={getChosenAnswers(question)}
-                  programmeName={chosen ? chosen : ''}
+                  programmeName={chosen || ''}
                   programmeFaculty={getChosenProgrammeFaculty()}
                   showEmpty={showEmpty}
                   columns={user.hasWideReadAccess ? 3 : 2}
@@ -140,7 +139,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         </Grid.Column>
         <Grid.Column>
           {questionsList.map(
-            (question) =>
+            question =>
               getComparedAnswers(question) &&
               !question.no_color && (
                 <PieChart
@@ -159,7 +158,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         {user.hasWideReadAccess && (
           <Grid.Column>
             {questionsList.map(
-              (question) =>
+              question =>
                 allAnswers.get(question.id) &&
                 !question.no_color && (
                   <PieChart

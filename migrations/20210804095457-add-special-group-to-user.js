@@ -1,9 +1,7 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn('users', 'special_group', {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     })
   },
 

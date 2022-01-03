@@ -5,28 +5,28 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       programme: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       type: {
-        type: Sequelize.ENUM('ADMIN', 'WRITE', 'READ')
+        type: Sequelize.ENUM('ADMIN', 'WRITE', 'READ'),
       },
       usage_counter: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     }),
-  down: (queryInterface) => queryInterface.dropTable('tokens')
+  down: queryInterface => queryInterface.dropTable('tokens'),
 }

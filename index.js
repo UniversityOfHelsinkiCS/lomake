@@ -38,13 +38,11 @@ initializeDatabaseConnection()
     const app = express()
     const server = require('http').Server(app)
     const io = require('socket.io')(server)
-    io.on('connection', (socket) => {
-      socket.on('update_field', (room) =>
-        require('@util/websocketHandlers').updateField(socket, room, io)
-      )
-      socket.on('join', (room) => require('@util/websocketHandlers').joinRoom(socket, room, io))
-      socket.on('leave', (room) => require('@util/websocketHandlers').leaveRoom(socket, room))
-      socket.on('get_lock', (room) => require('@util/websocketHandlers').getLock(socket, room, io))
+    io.on('connection', socket => {
+      socket.on('update_field', room => require('@util/websocketHandlers').updateField(socket, room, io))
+      socket.on('join', room => require('@util/websocketHandlers').joinRoom(socket, room, io))
+      socket.on('leave', room => require('@util/websocketHandlers').leaveRoom(socket, room))
+      socket.on('get_lock', room => require('@util/websocketHandlers').getLock(socket, room, io))
     })
     // Require is here so we can delete it from cache when files change (*)
 
@@ -57,7 +55,7 @@ initializeDatabaseConnection()
     watcher.on('ready', () => {
       watcher.on('all', () => {
         logger.info('Hot reloaded.')
-        Object.keys(require.cache).forEach((id) => {
+        Object.keys(require.cache).forEach(id => {
           if (id.includes('server')) delete require.cache[id] // Delete all require caches that point to server folder (*)
         })
       })
@@ -103,7 +101,7 @@ initializeDatabaseConnection()
       startDeadlineWatcher()
     })
   })
-  .catch((e) => {
+  .catch(e => {
     process.exitCode = 1
     logger.error(e)
   })

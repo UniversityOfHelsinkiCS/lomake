@@ -6,15 +6,8 @@ import ColorLegend from 'Components/Generic/ColorLegend'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import PieChart from './PieChart'
 
-const ColorAnswers = ({
-  year,
-  allAnswers,
-  questionsList,
-  chosenProgrammes,
-  setActiveTab,
-  setShowing,
-}) => {
-  const lang = useSelector((state) => state.language)
+const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setActiveTab, setShowing }) => {
+  const lang = useSelector(state => state.language)
   const [showEmpty, setShowEmpty] = useState(true)
   const questions = useSelector(({ filters }) => filters.questions)
 
@@ -22,7 +15,7 @@ const ColorAnswers = ({
     return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
   }
 
-  const getLabel = (question) => {
+  const getLabel = question => {
     if (!question) return ''
     const label = _.capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
@@ -34,7 +27,7 @@ const ColorAnswers = ({
       <Grid className="report-header">
         <Grid.Column className="left" width={4} />
         <Grid.Column className="center" width={6}>
-          {year} - {translations.reportHeader['colors'][lang]}
+          {year} - {translations.reportHeader.colors[lang]}
         </Grid.Column>
         <Grid.Column width={5} className="right noprint" floated="right">
           <PDFDownload />
@@ -57,7 +50,7 @@ const ColorAnswers = ({
       </Grid>
       <div className="report-color-grid">
         {questionsList.map(
-          (question) =>
+          question =>
             allAnswers.get(question.id) &&
             !question.no_color &&
             questions.selected.includes(getLabel(question)) && (

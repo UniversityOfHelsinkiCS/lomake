@@ -10,12 +10,9 @@ export const aboutPageTranslations = {
     se: 'What is the self-assessment form?',
   },
   whatIsItReply: {
-    fi:
-      'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
-    en:
-      'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
-    se:
-      'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    fi: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
+    en: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    se: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
   },
   howShouldItBeFilled: {
     fi: 'Miten tilannekuvalomake täytetään?',
@@ -44,12 +41,9 @@ export const aboutPageTranslations = {
     se: 'What else can I do with the form?',
   },
   whatElseIsThereReply: {
-    fi:
-      'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
-    en:
-      "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
-    se:
-      "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
+    fi: 'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
+    en: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
+    se: "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
   },
   contactInfo: {
     fi: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
@@ -94,8 +88,8 @@ export const comparisonPageTranslations = {
   backToFrontPage: {
     fi: 'Etusivulle',
     en: 'Back to frontpage',
-    se: 'Back to frontpage'
-  }, 
+    se: 'Back to frontpage',
+  },
   comparisonPage: {
     fi: 'Vastausten vertailu',
     en: 'Compare answers',
@@ -147,12 +141,9 @@ export const comparisonPageTranslations = {
     se: 'No programmes have yet been chosen',
   },
   noAccessToAll: {
-    fi:
-      'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
-    en:
-      'Please note, that you can only see comparison with the programmes you have reading rights to',
-    se:
-      'Please note, that you can only see comparison with the programmes you have reading rights to',
+    fi: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
+    en: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+    se: 'Please note, that you can only see comparison with the programmes you have reading rights to',
   },
   university: {
     fi: 'Koko yliopisto',
@@ -384,7 +375,7 @@ export const claimAccessTranslations = {
   invalidToken2of2: {
     fi: ' Muussa tapauksessa ole hyvä ja ota yhteys koulutusohjelmasi johtajaan uutta linkkiä varten.',
     en: ' If you have never received access to the programme(s) in question, please contact your study programme leader to receive a valid link',
-    se: ''
+    se: '',
   },
   claimPermissions: {
     en: 'Form - Claim permissions',
@@ -401,16 +392,12 @@ export const formViewTranslations = {
     se: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
   },
   p1: {
-    en:
-      'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
-    fi:
-      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
-    se:
-      'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
+    en: 'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
+    fi: 'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
+    se: 'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
   },
   p2: {
-    en:
-      'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
+    en: 'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
     fi: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
     se: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
   },
@@ -714,10 +701,8 @@ export const genericTranslations = {
   },
   // Generic/NoPermissions.js
   noPermissions: {
-    fi:
-      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    en:
-      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
+    fi: 'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
+    en: "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     se: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
   },
   // Generic/PDFDownload.js
@@ -862,15 +847,12 @@ export const overviewPageTranslations = {
   },
   // OverviewPage/ProgramControlLinks.js
   editPrompt: {
-    fi:
-      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa kirjoitusoikeuden (jaa vain lomakkeen täyttäjille).',
     en: 'Link grants edit access, share to editors only:',
-    se:
-      'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
+    se: 'Med länken får man redigerinsåtkomst. Dela endast till personer som ska fylla i blanketten:',
   },
   viewPrompt: {
-    fi:
-      'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
+    fi: 'Linkin kautta kirjautumalla (HY-tunnukset) käyttäjä saa lukuoikeuden (jaa esim. johtoryhmän jäsenille).',
     en: 'Link grants read access, share e.g. to student members',
     se: 'Med länken får man skrivskyddad åtkomst. Dela exempelvis till ledningsgruppen:',
   },
@@ -890,12 +872,9 @@ export const overviewPageTranslations = {
     se: 'Skapa länk',
   },
   resetWarning: {
-    fi:
-      'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
-    en:
-      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
-    se:
-      'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    fi: 'Linkin nollaaminen estää vanhan linkin käyttämisen välittömästi. Oletko varma että haluat tehdä tämän?',
+    en: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
+    se: 'Resetting the link deactivates the old link immediately. Are you sure you with to do this?',
   },
   copyLink: {
     fi: 'Kopioi linkki',
@@ -953,7 +932,7 @@ export const overviewPageTranslations = {
     en: 'Users',
     se: 'Users',
   },
-  //OverviewPage/ColorTable.js
+  // OverviewPage/ColorTable.js
   openManageText: {
     fi: 'Hallitse',
     en: 'Manage',
@@ -984,7 +963,7 @@ export const overviewPageTranslations = {
     en: 'Programme',
     se: 'Program',
   },
-  //OverviewPage/ColorTableCell.js
+  // OverviewPage/ColorTableCell.js
   betterThanLastYear: {
     fi: 'Parempi kuin viime vuonna',
     en: 'Better than last year',
@@ -1002,8 +981,8 @@ export const reportPageTranslations = {
   backToFrontPage: {
     fi: 'Etusivulle',
     en: 'Back to frontpage',
-    se: 'Back to frontpage'
-  }, 
+    se: 'Back to frontpage',
+  },
   reportPage: {
     fi: 'Tilannekuvalomakkeen vastaukset',
     en: 'Answers',
@@ -1180,26 +1159,19 @@ export const usersPageTranslations = {
     se: 'Update',
   },
   doctorMessage: {
-    en:
-      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
+    en: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan tohtoriohjelmiin. Linkkiä voi käyttää monta kertaa.',
-    se:
-      'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
+    se: 'The links listed here give READ-permissions all DOCTOR-programmes under the respective faculty. The link is re-usable.',
   },
   facultyMessage: {
-    en:
-      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
+    en: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
     fi: 'Tässä olevat linkit antavat lukuoikeudet KAIKKIIN kyseisen tiedekunnan ohjelmiin. Linkkiä voi käyttää monta kertaa.',
-    se:
-      'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
+    se: 'The links listed here give READ-permissions to all studyprogrammes under the respective faculty. The link is re-usable.',
   },
   ownerMessage: {
-    en:
-      'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
-    fi:
-      'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja käytettävissä ovat vain linkit, joita ei vielä ole lunastettu.',
-    se:
-      'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
+    en: 'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
+    fi: 'Tässä olevat linkit antavat ADMIN-oikeudet kyseiseen ohjelmaan. Linkkiä voi käyttää vain kerran, ja käytettävissä ovat vain linkit, joita ei vielä ole lunastettu.',
+    se: 'The links listed here give ADMIN-permissions and can be used one time only. The link can be reset by clicking the reset button.',
   },
   code: {
     en: 'Code',
@@ -1219,12 +1191,12 @@ export const usersPageTranslations = {
   valid: {
     en: 'Valid',
     fi: 'Käytettävissä',
-    se: 'Valid'
+    se: 'Valid',
   },
   reset: {
     en: 'Reset',
     fi: 'Resetoi',
-    se: 'Reset'
+    se: 'Reset',
   },
   resetConfirmationText: {
     en: 'Please note, that resetting the link means the old one will stop working!',
@@ -1234,7 +1206,7 @@ export const usersPageTranslations = {
   confirmReset: {
     en: 'Reset link',
     fi: 'Resetoi linkki',
-    se: 'Reset link'
+    se: 'Reset link',
   },
   deadlineSettings: {
     en: 'Deadline settings',
@@ -1264,7 +1236,7 @@ export const usersPageTranslations = {
   contactToska: {
     en: 'If you wish to change the deadline, please contact Toska (grp-toska@helsinki.fi).',
     fi: 'Jos viimeiseen aukiolopäivään tulee muutoksia, otathan yhteyden Toskaan (grp-toska@helsinki.fi).',
-    se: 'If you with to change the deadline, please contact Toska (grp-toska@helsinki.fi).'
+    se: 'If you with to change the deadline, please contact Toska (grp-toska@helsinki.fi).',
   },
   deleteThisDeadline: {
     en: 'Freeze the form',
@@ -1274,7 +1246,7 @@ export const usersPageTranslations = {
   selectDraftYear: {
     en: 'Set the year for which new answers are saved: ',
     fi: 'Valitse vuosi, jolle vastaukset tallennetaan: ',
-    se: 'Set the year for which new are saved: ', 
+    se: 'Set the year for which new are saved: ',
   },
   draftYearWarning: {
     en: 'Answers of that year, will be opened for draft mode and could be overwritten by users!',
@@ -1359,7 +1331,7 @@ export const usersPageTranslations = {
   accessGroups: {
     en: 'Viewing rights',
     fi: 'Lukuoikeudet ryhmittäin',
-    se: 'Viewing rights'
+    se: 'Viewing rights',
   },
   accessInternational2020: {
     en: "International Master's programmes 2020 ->",
@@ -1384,12 +1356,12 @@ export const usersPageTranslations = {
   allProgrammes: {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
-    se: 'All programmes'
+    se: 'All programmes',
   },
   save: {
     en: 'Save',
     fi: 'Tallenna',
-    se: 'Save'
+    se: 'Save',
   },
   makeAdminPrompt: {
     en: 'Make the user an administrator?',
@@ -1414,7 +1386,7 @@ export const usersPageTranslations = {
   lastLogin: {
     en: 'Last login',
     fi: 'Kirjautunut viimeksi',
-    se: 'Last login'
+    se: 'Last login',
   },
   hide: {
     en: 'Hide',
@@ -1424,52 +1396,52 @@ export const usersPageTranslations = {
   addUser: {
     en: 'Add user',
     fi: 'Lisää käyttäjä',
-    se: 'Add user'
+    se: 'Add user',
   },
   firstname: {
     en: 'First name',
     fi: 'Etunimi',
-    se: 'First name'
+    se: 'First name',
   },
   lastname: {
     en: 'Last name',
     fi: 'Sukunimi',
-    se: 'Last name'
+    se: 'Last name',
   },
   checkUserData: {
     en: 'Check that you have submitted all fields and that the user does not already exist!',
     fi: 'Tarkista, että olet täyttänyt kaikki kentät ja käyttäjää ei ole jo olemassa (käyttäjätunnus jo käytössä)',
-    se: 'Check that you have submitted all fields and that the user does not already exist!'
+    se: 'Check that you have submitted all fields and that the user does not already exist!',
   },
   editUser: {
     en: 'Edit',
     fi: 'Muokkaa',
-    se: 'Edit'
+    se: 'Edit',
   },
   accessRights: {
     en: 'Programme access',
     fi: 'Oikeudet ohjelmiin',
-    se: 'Programme access'
+    se: 'Programme access',
   },
   hasAdminRights: {
-    en: 'User is admin and already has rights to all programmes', 
+    en: 'User is admin and already has rights to all programmes',
     fi: 'Käyttäjä on ylläpitäjä, ja siten hänellä on oikeudet kaikkiin ohjelmiin',
-    se: 'User is admin and already has rights to all programmes'
+    se: 'User is admin and already has rights to all programmes',
   },
   hasWideReadingRights: {
-    en: 'User has Wide Read Access and therefore has viewing rights to all programmes', 
+    en: 'User has Wide Read Access and therefore has viewing rights to all programmes',
     fi: 'Käyttäjällä on laajat lukuoikeudet kaikkiin ohjelmiin',
-    se: 'User has Wide Read Access and therefore has viewing rights to all programmes'
+    se: 'User has Wide Read Access and therefore has viewing rights to all programmes',
   },
   hasInternationalRights: {
     en: "User has view access to international Master's programmes and their data after 2020",
-    fi: "Käyttäjällä on oikeus katsoa kansainvälisten maisteriohjelmien vastauksia vuodesta 2020 eteenpäin",
-    se: "User has view access to international Master's programmes and their data after 2020"
+    fi: 'Käyttäjällä on oikeus katsoa kansainvälisten maisteriohjelmien vastauksia vuodesta 2020 eteenpäin',
+    se: "User has view access to international Master's programmes and their data after 2020",
   },
   programme: {
     en: 'Programme',
     fi: 'Ohjelma',
-    se: 'Programme'
+    se: 'Programme',
   },
   readAccess: {
     en: 'Read Access',
@@ -1504,12 +1476,12 @@ export const usersPageTranslations = {
   removeAllAccess: {
     fi: 'Poista kaikki oikeudet ohjelmaan',
     en: 'Remove all access to this programme',
-    se: 'Remove all access to this programme'
+    se: 'Remove all access to this programme',
   },
   addRights: {
     fi: 'Lisää oikeuksia',
     en: 'Add rights',
-    se: 'Add rights'
+    se: 'Add rights',
   },
   deleteConfirmation: {
     en: 'Yes, permanently delete user',
@@ -1525,5 +1497,5 @@ export const usersPageTranslations = {
     en: 'Grant viewing rights to studyprogrammes',
     fi: 'Anna lukuoikeuksia koulutusohjelmiin',
     se: 'Grant viewing rights to studyprogrammes',
-  }
+  },
 }

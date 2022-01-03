@@ -4,18 +4,19 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { colors } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+
 require('highcharts/modules/exporting')(Highcharts)
 
 const BarChart = ({ data, questions, unit }) => {
-  const { faculty, level, multipleYears } = useSelector((state) => state.filters)
-  const faculties = useSelector((state) => state.faculties.data)
-  const lang = useSelector((state) => state.language)
+  const { faculty, level, multipleYears } = useSelector(state => state.filters)
+  const faculties = useSelector(state => state.faculties.data)
+  const lang = useSelector(state => state.language)
   if (!data) return <></>
 
   const calculateChange = () => {
     if (!data) return []
-    data.forEach((series) => {
-      const previousYear = data.find((y) => series.year - 1 === y.year && series.color === y.color)
+    data.forEach(series => {
+      const previousYear = data.find(y => series.year - 1 === y.year && series.color === y.color)
       if (previousYear) {
         series.changes = series.data.map((d, index) => {
           let change = d - previousYear.data[index]
@@ -38,7 +39,7 @@ const BarChart = ({ data, questions, unit }) => {
       color: colors[series.color],
       stack: series.year,
       label: [{ enabled: true }],
-      showInLegend: index < 4 ? true : false,
+      showInLegend: index < 4,
     }
   })
 
@@ -46,8 +47,9 @@ const BarChart = ({ data, questions, unit }) => {
 
   const getExportText = () => {
     const formText = translations.chartExport[lang]
-    const time = multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length-1]}` : multipleYears[0]
-    const facultyText = faculty === 'allFaculties' ? '' : faculties.find((f) => f.code === faculty).name[lang]
+    const time =
+      multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length - 1]}` : multipleYears[0]
+    const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
     const levelText = translations[level][lang]
     return `${formText}_${time}_${facultyText}_${levelText}`
   }
@@ -96,7 +98,7 @@ const BarChart = ({ data, questions, unit }) => {
       text: '',
     },
     xAxis: {
-      categories: questions.map((q) => q.slice(2,q.length)),
+      categories: questions.map(q => q.slice(2, q.length)),
       reserveSpace: true,
       labels: {
         autoRotationLimit: 90,
@@ -116,7 +118,7 @@ const BarChart = ({ data, questions, unit }) => {
       },
       stackLabels: {
         enabled: true,
-        formatter: function () {
+        formatter() {
           return this.stack
         },
         style: {
@@ -132,11 +134,10 @@ const BarChart = ({ data, questions, unit }) => {
     plotOptions: {
       series: {
         events: {
-          legendItemClick: function () {
-
-            const name = this.name
-            const id = this.userOptions.id
-            this.chart.series.forEach((series) => {
+          legendItemClick() {
+            const { name } = this
+            const { id } = this.userOptions
+            this.chart.series.forEach(series => {
               if (series.name == name && series.userOptions.id !== id) {
                 series.visible ? series.hide() : series.show()
               }
@@ -151,17 +152,17 @@ const BarChart = ({ data, questions, unit }) => {
           inside: true,
           pointPadding: 0.1,
           style: { textOverflow: 'clip', fontSize: checkSize() },
-          formatter: function () {
+          formatter() {
             if (this.y === 0) return ''
             if (unit === 'programmeAmountWithChange') {
-              const changes = this.series.userOptions.changes
-              if (changes) return this.y + '<br>' + changes[this.point.index]
+              const { changes } = this.series.userOptions
+              if (changes) return `${this.y}<br>${changes[this.point.index]}`
               return this.y
-            } else if (unit === 'programmeAmountWithoutChange' || unit === 'programmeAmount') {
-              return this.y
-            } else {
-              return `${this.point.percentage.toFixed(1)} %`
             }
+            if (unit === 'programmeAmountWithoutChange' || unit === 'programmeAmount') {
+              return this.y
+            }
+            return `${this.point.percentage.toFixed(1)} %`
           },
         },
       },

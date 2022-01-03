@@ -1,38 +1,38 @@
-export const setFaculty = (faculty) => ({
+export const setFaculty = faculty => ({
   type: 'SET_FACULTY',
   faculty,
 })
 
 export const clearLevelSpecificFilters = () => ({
-  type: 'CLEAR_LEVEL_SPECIFIC_FILTERS'
+  type: 'CLEAR_LEVEL_SPECIFIC_FILTERS',
 })
 
-export const setCompanion = (companion) => ({
+export const setCompanion = companion => ({
   type: 'SET_COMPANION',
-  companion
+  companion,
 })
 
-export const setDoctoralSchool = (doctoralSchool) => ({
+export const setDoctoralSchool = doctoralSchool => ({
   type: 'SET_DOCTORAL_SCHOOL',
-  doctoralSchool
+  doctoralSchool,
 })
 
-export const setLevel = (level) => ({
+export const setLevel = level => ({
   type: 'SET_LEVEL',
   level,
 })
 
-export const setYear = (year) => ({
+export const setYear = year => ({
   type: 'SET_YEAR',
   year,
 })
 
-export const setMultipleYears = (multipleYears) => ({
+export const setMultipleYears = multipleYears => ({
   type: 'SET_MULTIPLE_YEARS',
   multipleYears,
 })
 
-export const setQuestions = (questions) => ({
+export const setQuestions = questions => ({
   type: 'SET_QUESTIONS',
   questions,
 })
@@ -44,7 +44,7 @@ const initialState = {
   level: 'allProgrammes',
   year: '',
   multipleYears: [],
-  questions: { selected: [], open: []},
+  questions: { selected: [], open: [] },
 }
 
 export default (state = initialState, action) => {
@@ -52,13 +52,13 @@ export default (state = initialState, action) => {
     case 'SET_FACULTY': {
       return {
         ...state,
-        faculty: action.faculty
+        faculty: action.faculty,
       }
     }
     case 'SET_LEVEL': {
       return {
         ...state,
-        level: action.level
+        level: action.level,
       }
     }
     case 'CLEAR_LEVEL_SPECIFIC_FILTERS': {

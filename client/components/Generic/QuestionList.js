@@ -4,46 +4,42 @@ import { Button, Dropdown } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 
-
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
 
-  const getLabel = (question) => {
+  const getLabel = question => {
     if (!question) return ''
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${question.label}`
-  } 
-
-  const questionLabels = questionsList.map((q) => getLabel(q))
-
-  useEffect(() => {
-    dispatch(setQuestions({ selected: questionLabels, open: []}))
-  }, [])
-
-
-  const addToList = (_, { value }) => {
-    dispatch(setQuestions({ selected: value, open: []} ))
   }
 
-  const options = questionsList.map((q) => {
+  const questionLabels = questionsList.map(q => getLabel(q))
+
+  useEffect(() => {
+    dispatch(setQuestions({ selected: questionLabels, open: [] }))
+  }, [])
+
+  const addToList = (_, { value }) => {
+    dispatch(setQuestions({ selected: value, open: [] }))
+  }
+
+  const options = questionsList.map(q => {
     if (onlyColoredQuestions && !q.noColor) {
       return Object({ key: q.index, text: q.label, value: getLabel(q) })
-    } else if (!onlyColoredQuestions) {
+    }
+    if (!onlyColoredQuestions) {
       if (q.type === 'ENTITY' || q.type === 'MEASUREMENTS') {
         return Object({ key: q.labelIndex, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
-      } else {
-        return Object({ key: `${q.labelIndex}. ${q.label}`, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
       }
+      return Object({ key: `${q.labelIndex}. ${q.label}`, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
     }
   })
 
   return (
     <div className="questions-list-container" data-cy="comparison-question-list">
-      <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>
-        {label}
-      </label>
+      <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
       <Dropdown
         className="questions-list-selector"
         data-cy="questions-list"

@@ -3,7 +3,7 @@ module.exports = {
     return queryInterface.addColumn('tokens', 'valid', Sequelize.BOOLEAN)
   },
 
-  down: (queryInterface) => {
+  down: queryInterface => {
     return queryInterface.removeColumn('tokens', 'valid')
-  }
+  },
 }

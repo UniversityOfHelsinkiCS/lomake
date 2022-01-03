@@ -8,13 +8,9 @@ const Section = ({ title, number, children, programmeKey }) => {
       <div data-cy={`form-section-${number}`} id={number || '0'}>
         <InView
           as="div"
-          onChange={(inView) => {
+          onChange={inView => {
             if (inView) {
-              window.history.pushState(
-                {},
-                '',
-                `${window.location.origin}${basePath}form/${programmeKey}#${number}`
-              )
+              window.history.pushState({}, '', `${window.location.origin}${basePath}form/${programmeKey}#${number}`)
             }
           }}
         >

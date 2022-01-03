@@ -38,7 +38,7 @@ export default (route, prefix, method = 'get', data, query) => ({
  * This is a redux middleware used for tracking api calls
  */
 
-export const handleRequest = (store) => (next) => async (action) => {
+export const handleRequest = store => next => async action => {
   next(action)
   const { requestSettings } = action
   if (requestSettings) {

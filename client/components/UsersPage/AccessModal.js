@@ -2,16 +2,15 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Label, Popup, Segment } from 'semantic-ui-react'
 
+import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
+import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
+import { usersPageTranslations as translations } from 'Utilities/translations'
+import { colors } from 'Utilities/common'
 import AccessGroupSelector from './AccessGroupSelector'
 import AccessTable from './AccessTable'
 import UserGroupSelector from './UserGroupSelector'
 import CustomModal from '../Generic/CustomModal'
-import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import { isInternationalUser, isSuperAdmin } from '../../../config/common'
-import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
-import { usersPageTranslations as translations } from 'Utilities/translations'
-import { colors } from 'Utilities/common'
-
 
 const AccessModal = ({
   user,
@@ -20,10 +19,10 @@ const AccessModal = ({
   programmeFilter,
   onEmpty,
   filteredProgrammes,
-  programmeCodesAndNames
+  programmeCodesAndNames,
 }) => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   if (!user || user.pending) return null
 
@@ -31,31 +30,24 @@ const AccessModal = ({
     dispatch(deleteUserAction(user.id))
   }
 
-  const grantView = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], read: true }}}
+  const grantView = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { ...user.access[programme], read: true } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
   const getAccessTable = () => (
     <>
-      {
-        user.admin 
-        && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>
-      }
-      {
-        user.wideReadAccess 
-        && <h4 style={{ color: colors.blue }}>{translations.hasWideReadingRights[lang]}</h4>
-      }
-      {
-        isInternationalUser(user.specialGroup) 
-        && <h4 style={{ color: colors.blue }}>{translations.hasInternationalRights[lang]}</h4>
-      }
-      {user.access && Object.keys(user.access).length > 0 && 
-        <AccessTable
-          user={user}
-          programmeCodesAndNames={programmeCodesAndNames}
-        />
-      }
+      {user.admin && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>}
+      {user.wideReadAccess && <h4 style={{ color: colors.blue }}>{translations.hasWideReadingRights[lang]}</h4>}
+      {isInternationalUser(user.specialGroup) && (
+        <h4 style={{ color: colors.blue }}>{translations.hasInternationalRights[lang]}</h4>
+      )}
+      {user.access && Object.keys(user.access).length > 0 && (
+        <AccessTable user={user} programmeCodesAndNames={programmeCodesAndNames} />
+      )}
     </>
   )
 
@@ -63,11 +55,7 @@ const AccessModal = ({
     return (
       <Popup
         content={
-          <Button
-            data-cy="user-confirm-delete-button"
-            color="red"
-            onClick={deleteUser}
-          >
+          <Button data-cy="user-confirm-delete-button" color="red" onClick={deleteUser}>
             {translations.deleteConfirmation[lang]}
           </Button>
         }
@@ -83,7 +71,7 @@ const AccessModal = ({
           </Button>
         }
         on="click"
-        position='top center'
+        position="top center"
       />
     )
   }
@@ -91,7 +79,9 @@ const AccessModal = ({
   return (
     <CustomModal closeModal={() => setModalData(null)}>
       <Segment className="user-access-modal-segment">
-        <h2>{user.firstname} {user.lastname}</h2>
+        <h2>
+          {user.firstname} {user.lastname}
+        </h2>
         <p className="user-access-modal-details">
           {translations.userId[lang]}: {user.uid}
         </p>
@@ -101,7 +91,7 @@ const AccessModal = ({
       </Segment>
       <Segment className="user-access-modal-segment">
         <h3>{translations.userGroup[lang]}</h3>
-        <UserGroupSelector user={user}/>
+        <UserGroupSelector user={user} />
         <h3>{translations.accessGroups[lang]}</h3>
         <AccessGroupSelector user={user} />
       </Segment>
@@ -114,25 +104,23 @@ const AccessModal = ({
           filter={programmeFilter}
           onEmpty={onEmpty}
           lang={lang}
-          size="large"      
+          size="large"
         />
         <div className="user-programme-list">
-          {filteredProgrammes.map((p) => (
+          {filteredProgrammes.map(p => (
             <Label
               data-cy={`${p.key}-item`}
               className="user-programme-list-item"
               key={p.key}
               onClick={() => grantView(p.key)}
-            > <p>
-              {p.name[lang]}
-            </p>
+            >
+              {' '}
+              <p>{p.name[lang]}</p>
             </Label>
           ))}
         </div>
       </Segment>
-      <Segment className="user-access-modal-delete-container">
-        {getDeleteButton()}
-      </Segment>
+      <Segment className="user-access-modal-delete-container">{getDeleteButton()}</Segment>
     </CustomModal>
   )
 }

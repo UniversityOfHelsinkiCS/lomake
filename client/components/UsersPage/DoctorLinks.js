@@ -1,19 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { basePath } from '../../../config/common'
 import { Message, Table } from 'semantic-ui-react'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-
+import { basePath } from '../../../config/common'
 
 export default function DoctorLinks() {
-  const allTokens = useSelector((state) => state.accessToken.allTokens)
-  const faculties = useSelector((state) => state.faculties.data)
-  const lang = useSelector((state) => state.language)
+  const allTokens = useSelector(state => state.accessToken.allTokens)
+  const faculties = useSelector(state => state.faculties.data)
+  const lang = useSelector(state => state.language)
 
   if (!allTokens || !faculties || !lang) return null
 
-  const temp = faculties.map((faculty) => {
-    const token = allTokens.find((t) => t.faculty === faculty.code && t.type === 'READ_DOCTOR')
+  const temp = faculties.map(faculty => {
+    const token = allTokens.find(t => t.faculty === faculty.code && t.type === 'READ_DOCTOR')
     const shareUrl = `${window.location.origin}${basePath}access/${token.url}`
     return {
       code: faculty.code,
@@ -24,11 +23,7 @@ export default function DoctorLinks() {
 
   return (
     <>
-      <Message
-        color="blue"
-        icon="exclamation"
-        content={translations.doctorMessage[lang]}
-      />
+      <Message color="blue" icon="exclamation" content={translations.doctorMessage[lang]} />
       <Table compact>
         <Table.Header>
           <Table.Row>
@@ -38,7 +33,7 @@ export default function DoctorLinks() {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {temp.map((t) => {
+          {temp.map(t => {
             const { code, facultyName, shareUrl } = t
             return (
               <Table.Row key={facultyName}>

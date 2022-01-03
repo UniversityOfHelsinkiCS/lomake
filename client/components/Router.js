@@ -17,16 +17,8 @@ export default () => (
       <Route exact path="/report" component={ReportPage} />
       <Route exact path="/comparison" component={ComparisonPage} />
       <Route exact path="/about" component={AboutPage} />
-      <Route
-        exact
-        path="/form/:room"
-        render={(props) => <FormView room={props.match.params.room} />}
-      />
-      <Route
-        exact
-        path="/access/:url"
-        render={(props) => <ClaimAccessPage url={props.match.params.url} />}
-      />
+      <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
+      <Route exact path="/access/:url" render={props => <ClaimAccessPage url={props.match.params.url} />} />
       <Redirect to="/" />
     </Switch>
   </div>

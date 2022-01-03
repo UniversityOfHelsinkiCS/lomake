@@ -5,7 +5,7 @@ import { basePath } from '../../../config/common'
  * Actions and reducers are in the same file for readability
  */
 
-export const getTokenAction = (url) => {
+export const getTokenAction = url => {
   const route = `/access/${url}`
   const prefix = 'GET_TOKEN'
   return callBuilder(route, prefix, 'get')
@@ -25,7 +25,6 @@ export const resetTokenAction = (programme, url) => {
 }
 
 export const resetAdminTokenAction = (programme, url) => {
-
   console.log(url)
   const route = `/programmes/${programme}/tokens/admin/${url}`
   const prefix = 'RESET_ADMIN_TOKEN'
@@ -116,7 +115,7 @@ export default (state = { data: null }, action) => {
       console.log(action.response)
       return {
         ...state,
-        allTokens: state.allTokens.map((t) => {
+        allTokens: state.allTokens.map(t => {
           if (t.id === action.response.id) return action.response
           return t
         }),

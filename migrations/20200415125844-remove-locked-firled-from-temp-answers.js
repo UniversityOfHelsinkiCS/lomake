@@ -1,7 +1,5 @@
-'use strict'
-
 module.exports = {
-  up: (queryInterface) => {
+  up: queryInterface => {
     return queryInterface.removeColumn('temp_answers', 'locked')
   },
 

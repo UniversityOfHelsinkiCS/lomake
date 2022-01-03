@@ -3,6 +3,7 @@
 
 import * as _ from 'lodash'
 import { testProgrammeName } from '../../config/common'
+
 const user = 'cypressUser'
 
 describe('Sidebar tests', function () {
@@ -18,10 +19,7 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.writeToTextField(
-      '[data-cy=textarea-review_of_last_years_situation_report]',
-      _.repeat('A', 1)
-    )
+    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', _.repeat('A', 1))
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 
@@ -32,10 +30,7 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.copyToTextField(
-      '[data-cy=textarea-review_of_last_years_situation_report]',
-      _.repeat('A', 1000)
-    )
+    cy.copyToTextField('[data-cy=textarea-review_of_last_years_situation_report]', _.repeat('A', 1000))
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 
@@ -45,21 +40,16 @@ describe('Sidebar tests', function () {
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.copyToTextField(
-      '[data-cy=textarea-review_of_last_years_situation_report]',
-      _.repeat('A', 1100)
-    )
+    cy.copyToTextField('[data-cy=textarea-review_of_last_years_situation_report]', _.repeat('A', 1100))
 
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').type('more more')
-    cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then((res) =>
+    cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then(res =>
       expect(res).to.be.eq(1100)
     )
 
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: rgb(230, 78, 64);"]').then(
-      (el) => {
-        expect(el.text()).to.be.eq('1100/1000')
-      }
-    )
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: rgb(230, 78, 64);"]').then(el => {
+      expect(el.text()).to.be.eq('1100/1000')
+    })
 
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })

@@ -1,11 +1,11 @@
-//https://usehooks.com/useOnClickOutside/
+// https://usehooks.com/useOnClickOutside/
 
 import { useEffect } from 'react'
 
 export default function useOnClickOutside(ref, handler) {
   useEffect(
     () => {
-      const listener = (event) => {
+      const listener = event => {
         // Only close when dimmer is clicked.
         if (!event.target.className.includes('customModal-dimmer')) return
         handler(event)

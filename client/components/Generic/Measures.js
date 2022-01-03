@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
-import SimpleTextarea from './SimpleTextarea'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
+import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
+import SimpleTextarea from './SimpleTextarea'
 
 const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo }) => {
-  const formData = useSelector((state) => state.form.data)
-  const lang = useSelector((state) => state.language)
+  const formData = useSelector(state => state.form.data)
+  const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   useEffect(() => {
@@ -26,14 +26,13 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
 
   const getPreviousMeasureAnswers = () => {
     if (!previousYearsAnswers) return null
-    if (!!previousYearsAnswers[`${id}_text`]) return previousYearsAnswers[`${id}_text`]
+    if (previousYearsAnswers[`${id}_text`]) return previousYearsAnswers[`${id}_text`]
 
-    if (!!previousYearsAnswers[`${id}_1_text`]) {
+    if (previousYearsAnswers[`${id}_1_text`]) {
       let measures = ''
       let i = 1
       while (i < 6) {
-        if (!!previousYearsAnswers[`${id}_${i}_text`])
-          measures += `${i}) ${previousYearsAnswers[`${id}_${i}_text`]}  \n`
+        if (previousYearsAnswers[`${id}_${i}_text`]) measures += `${i}) ${previousYearsAnswers[`${id}_${i}_text`]}  \n`
         i++
       }
 
@@ -50,8 +49,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
   return (
     <>
       <h3>
-        {number}. {label}{' '}
-        {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+        {number}. {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
       </h3>
       <p
         className="hide-in-print-mode"

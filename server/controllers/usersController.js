@@ -5,12 +5,14 @@ const getCurrentUser = async (req, res) => {
   if (req.user) {
     try {
       const now = new Date()
-      await db.user.update({ lastLogin: now }, {
-        where: {
-          uid: req.user.uid
+      await db.user.update(
+        { lastLogin: now },
+        {
+          where: {
+            uid: req.user.uid,
+          },
         }
-      })
-      
+      )
     } catch (error) {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
     }
@@ -50,9 +52,9 @@ const getAllUsers = async (req, res) => {
 const getProgrammesUsers = async (req, res) => {
   try {
     const users = await db.user.findAll({})
-    const programme = req.params.programme
+    const { programme } = req.params
 
-    const filteredUsers = users.filter((u) => u.access[programme])
+    const filteredUsers = users.filter(u => u.access[programme])
 
     res.json(filteredUsers)
   } catch (e) {
@@ -87,7 +89,7 @@ const createUser = async (req, res) => {
       lastname: user.lastname,
       admin: user.admin,
       wideReadAccess: false,
-      specialGroups: {}
+      specialGroups: {},
     })
 
     if (newUser) return res.status(200).json(newUser)
@@ -99,9 +101,9 @@ const createUser = async (req, res) => {
 
 const editUserAccess = async (req, res) => {
   try {
-    let body = req.body
+    const { body } = req
     let newProgrammeAccess
-    const programme = req.params.programme
+    const { programme } = req.params
 
     const user = await db.user.findOne({ where: { id: req.params.id } })
     if (!user) return res.status(400).json({ error: 'id not found.' })
@@ -131,7 +133,7 @@ const editUserAccess = async (req, res) => {
       return res.status(200).json(user)
     }
 
-    if (body['admin'] === true) {
+    if (body.admin === true) {
       newProgrammeAccess = {
         read: true,
         write: true,
@@ -139,7 +141,7 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    if (body['admin'] === false) {
+    if (body.admin === false) {
       newProgrammeAccess = {
         read: true,
         write: true,
@@ -147,30 +149,30 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    if (body['write'] === true) {
+    if (body.write === true) {
       newProgrammeAccess = {
         read: true,
         write: true,
       }
     }
 
-    if (body['write'] === false) {
+    if (body.write === false) {
       newProgrammeAccess = {
         read: true,
         write: false,
       }
     }
 
-    if (body['read'] === true) {
+    if (body.read === true) {
       newProgrammeAccess = {
         read: true,
       }
     }
 
-    if (body['read'] === false) {
-      let userObject = user
+    if (body.read === false) {
+      const userObject = user
       delete userObject.access[programme]
-      user.access = { ...userObject.access }  
+      user.access = { ...userObject.access }
     } else {
       user.access = {
         ...user.access,
@@ -178,15 +180,16 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    const [rows, updatedUser] = await db.user.update({ access: { ...user.access }},
+    const [rows, updatedUser] = await db.user.update(
+      { access: { ...user.access } },
       {
-          where: { id: req.params.id },
-          returning: true,
-          plain: true
+        where: { id: req.params.id },
+        returning: true,
+        plain: true,
       }
     )
-    
-    return res.status(200).json({ user: updatedUser, stillAccess: body['read'] === false ? false : true })
+
+    return res.status(200).json({ user: updatedUser, stillAccess: body.read !== false })
   } catch (e) {
     logger.error(e.message)
     res.status(500).json({ error: 'Database error' })
@@ -197,15 +200,15 @@ const deleteUser = async (req, res) => {
   try {
     const { lastname = '-', firstname } = await db.user.findOne({
       where: {
-        id: req.params.id
-      }, 
-      raw: true
+        id: req.params.id,
+      },
+      raw: true,
     })
 
     await db.user.destroy({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
 
     logger.info(`User ${firstname} ${lastname} deleted by ${req.user.firstname} ${req.user.lastname}`)
@@ -218,7 +221,7 @@ const deleteUser = async (req, res) => {
 
 const getUserOrganizations = async (req, res) => {
   try {
-    const params = req.params
+    const { params } = req
 
     const userInfo = await db.user.findOne({ where: { uid: params.username } })
 

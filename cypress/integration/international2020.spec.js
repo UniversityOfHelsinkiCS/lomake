@@ -11,8 +11,7 @@ describe('IAM permission tests', function () {
 
   it("User with access to International Master's programmes, should see 35 programmes on first page", function () {
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 35)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 35)
   })
 
   it('Report works for 35 international programmes', function () {

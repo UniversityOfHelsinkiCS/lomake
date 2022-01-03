@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeName } from '../../config/common'
+
 const user = 'cypressUser'
 
 describe('Permission tests', function () {
@@ -33,7 +34,7 @@ describe('Permission tests', function () {
     cy.givePermissions(user, testProgrammeName, 'read')
     cy.visit(`/form/${testProgrammeName}`)
 
-    //Check that cant edit stuff:
+    // Check that cant edit stuff:
     cy.get('[data-cy=form-section-I]').click() // Simulate open attept even though does not do anything
     cy.get('.editor-class').should('not.exist')
     cy.get('[data-cy=pdfdownload-go-back-button]').should('not.exist')

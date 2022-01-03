@@ -23,15 +23,15 @@ const connect = () => {
 const socketMiddleware = () => {
   let socket = null
 
-  const updateForm = (store) => (event) => {
+  const updateForm = store => event => {
     store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
   }
-  const updateEditors = (store) => (event) => {
+  const updateEditors = store => event => {
     store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
   }
 
   // the middleware part of this function
-  return (store) => (next) => (action) => {
+  return store => next => action => {
     const { room } = store.getState()
     switch (action.type) {
       case 'WS_CONNECT':

@@ -4,8 +4,6 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
 
-import CompareByFaculty from './CompareByFaculty'
-import CompareByYear from './CompareByYear'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import {
   allYears,
@@ -18,25 +16,27 @@ import {
 } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import CompareByYear from './CompareByYear'
+import CompareByFaculty from './CompareByFaculty'
 import questions from '../../questions'
 import './ComparisonPage.scss'
 
 export default () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = useSelector((state) => state.currentUser.data)
-  const lang = useSelector((state) => state.language)
-  const answers = useSelector((state) => state.tempAnswers)
-  const oldAnswers = useSelector((state) => state.oldAnswers)
+  const user = useSelector(state => state.currentUser.data)
+  const lang = useSelector(state => state.language)
+  const answers = useSelector(state => state.tempAnswers)
+  const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
-  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const deadlinePassed = useSelector((state) => state.deadlines.nextDeadline)
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
+  const deadlinePassed = useSelector(state => state.deadlines.nextDeadline)
 
   if (!user) return <></>
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-    document.title = `${translations['comparisonPage'][lang]}`
+    document.title = `${translations.comparisonPage[lang]}`
   }, [lang])
 
   if (!usersProgrammes) return <></>
@@ -49,19 +49,19 @@ export default () => {
 
   const questionsList = modifiedQuestions(questions, lang)
 
-  const answersByQuestions = (chosenYear) => {
-    let answerMap = new Map()
-    const chosenKeys = usersProgrammes.map((p) => p.key)
+  const answersByQuestions = chosenYear => {
+    const answerMap = new Map()
+    const chosenKeys = usersProgrammes.map(p => p.key)
     const selectedAnswers = answersByYear(chosenYear, answers, oldAnswers, deadlinePassed)
     if (!selectedAnswers) return new Map()
-    selectedAnswers.forEach((programme) => {
+    selectedAnswers.forEach(programme => {
       const key = programme.programme
 
       if (chosenKeys.includes(key)) {
-        const data = programme.data
-        questionsList.forEach((question) => {
+        const { data } = programme
+        questionsList.forEach(question => {
           let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-          let color = data[question.color] ? data[question.color] : 'emptyAnswer'
+          const color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
           let answer = ''
           if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
@@ -76,15 +76,12 @@ export default () => {
     // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
     // So empty answers need to be added.
     answerMap.forEach((value, key) => {
-      const answeredProgrammes = value.map((p) => p.key)
-      const programmesMissing = usersProgrammes.filter((p) => !answeredProgrammes.includes(p.key))
+      const answeredProgrammes = value.map(p => p.key)
+      const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
       if (programmesMissing) {
         for (const p of programmesMissing) {
           const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [
-            ...earlierAnswers,
-            { name: p.name[lang], key: p.key, color: 'emptyAnswer' },
-          ])
+          answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
         }
       }
     })
@@ -93,15 +90,15 @@ export default () => {
   }
 
   const answersForYears = () => {
-    const all = years.map((year) => {
-      let data = { year, answers: answersByQuestions(year) }
+    const all = years.map(year => {
+      const data = { year, answers: answersByQuestions(year) }
       return data
     })
     return all
   }
   const panes = [
     {
-      menuItem: translations.reportHeader['byFaculty'][lang],
+      menuItem: translations.reportHeader.byFaculty[lang],
       render: () => (
         <Tab.Pane>
           <CompareByFaculty
@@ -114,11 +111,11 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.reportHeader['byYear'][lang],
+      menuItem: translations.reportHeader.byYear[lang],
       render: () => (
         <Tab.Pane>
           <CompareByYear
-            questionsList={questionsList.filter((q) => !q.no_color)}
+            questionsList={questionsList.filter(q => !q.no_color)}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={usersProgrammes ? answersForYears() : []}
           />
@@ -132,25 +129,16 @@ export default () => {
   return (
     <>
       <div className="comparison-info-header noprint" />
-      <Grid
-        doubling
-        columns={2}
-        padded="vertically"
-        className="comparison-filter-container"
-      >
+      <Grid doubling columns={2} padded="vertically" className="comparison-filter-container">
         <Grid.Column width={10}>
-          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: "3em" }}>
-            <Icon name="arrow left"/>
+          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
+            <Icon name="arrow left" />
             {translations.backToFrontPage[lang]}
           </Button>
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>
       </Grid>
-      <Tab
-        className="comparison-tab"
-        menu={{ secondary: true, pointing: true }}
-        panes={panes}
-      />
+      <Tab className="comparison-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </>
   )
 }

@@ -26,23 +26,21 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     if (req.user.hasWideReadAccess) {
       const data = await db.tempAnswer.findAll({})
       return res.status(200).json(data)
-    } else {
-      const access = req.user.access
-      const now = new Date()
-      const data = await db.tempAnswer.findAll({
-        where: {
-          programme: Object.keys(req.user.access),
-        },
-      })
-      // If the programme access has a year-limit on answers
-      // filter out the ones, that are before that time
-      const yearFilter = (answer, access) => access[answer.programme].year 
-        ? now.getFullYear() === access[answer.programme].year 
-        : true
-
-      const filteredAnswers = data.filter((answer) => yearFilter(answer, access))
-      return res.status(200).json(filteredAnswers)
     }
+    const { access } = req.user
+    const now = new Date()
+    const data = await db.tempAnswer.findAll({
+      where: {
+        programme: Object.keys(req.user.access),
+      },
+    })
+    // If the programme access has a year-limit on answers
+    // filter out the ones, that are before that time
+    const yearFilter = (answer, access) =>
+      access[answer.programme].year ? now.getFullYear() === access[answer.programme].year : true
+
+    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
+    return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })
@@ -71,23 +69,21 @@ const getAllUserHasAccessTo = async (req, res) => {
     if (req.user.hasWideReadAccess) {
       const data = await db.answer.findAll({})
       return res.status(200).json(data)
-    } else {
-      const access = req.user.access
-      const data = await db.answer.findAll({
-        where: {
-          programme: Object.keys(access),
-        },
-      })
-
-      // If the programme access has a year-limit on answers
-      // filter out the ones, that are before that time
-      const yearFilter = (answer, access) => access[answer.programme].year 
-        ? answer.year === access[answer.programme].year 
-        : true
-
-      const filteredAnswers = data.filter((answer) => yearFilter(answer, access))
-      return res.status(200).json(filteredAnswers)
     }
+    const { access } = req.user
+    const data = await db.answer.findAll({
+      where: {
+        programme: Object.keys(access),
+      },
+    })
+
+    // If the programme access has a year-limit on answers
+    // filter out the ones, that are before that time
+    const yearFilter = (answer, access) =>
+      access[answer.programme].year ? answer.year === access[answer.programme].year : true
+
+    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
+    return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })
@@ -149,7 +145,7 @@ const bulkCreate = async (req, res) => {
     return res.status(404).send('Not found.').end()
   try {
     const answers = req.body
-    answers.forEach((answer) => db.answer.create(answer))
+    answers.forEach(answer => db.answer.create(answer))
     return res.status(200).send('ok').end()
   } catch (error) {
     logger.error(`Database error: ${error}`)

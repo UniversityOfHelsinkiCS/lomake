@@ -4,13 +4,13 @@ const { uuid } = require('uuidv4')
 const { data, facultyMap } = require('@root/config/data')
 
 const seed = async () => {
-  logger.info("Seeding ...")
-  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === "tokens"
+  logger.info('Seeding ...')
+  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === 'tokens'
 
   await seedFacultiesAndStudyprogrammes()
 
   // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
-  if(seedTokensAswell){
+  if (seedTokensAswell) {
     logger.info('Seeding tokens aswell')
     await seedTokens()
   }
@@ -19,7 +19,6 @@ const seed = async () => {
 }
 
 const seedFacultiesAndStudyprogrammes = async () => {
-
   await db.companionFaculty.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
   await db.faculty.destroy({ where: {} })
@@ -73,24 +72,21 @@ const seedFacultiesAndStudyprogrammes = async () => {
         const studyprogrammeId = (
           await db.studyprogramme.findOne({
             where: {
-              key: key,
+              key,
             },
           })
         ).id
 
         await db.companionFaculty.create({
-          facultyId: facultyId,
-          studyprogrammeId: studyprogrammeId,
+          facultyId,
+          studyprogrammeId,
         })
       }
     }
   }
-
-
 }
 
 const seedTokens = async () => {
-
   await db.token.destroy({ where: {} })
   const studyprogrammes = await db.studyprogramme.findAll()
 
@@ -136,9 +132,7 @@ const seedTokens = async () => {
       usageCounter: 0,
     })
   }
-
 }
-
 
 module.exports = {
   seed,

@@ -5,11 +5,11 @@ import { Button, Icon, Loader, Input } from 'semantic-ui-react'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { PieChart } from 'react-minimal-pie-chart'
+import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
 import './ColorTable.scss'
 import ColorTableCell from './ColorTableCell'
-import { PieChart } from 'react-minimal-pie-chart'
-import { overviewPageTranslations as translations } from 'Utilities/translations'
 
 const SORTER = 'name'
 
@@ -24,11 +24,11 @@ const ColorTable = React.memo(
     handleFilterChange,
   }) => {
     const dispatch = useDispatch()
-    const answers = useSelector((state) => state.tempAnswers)
-    const oldAnswers = useSelector((state) => state.oldAnswers)
-    const lang = useSelector((state) => state.language)
+    const answers = useSelector(state => state.tempAnswers)
+    const oldAnswers = useSelector(state => state.oldAnswers)
+    const lang = useSelector(state => state.language)
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
-    const programmeOwners = useSelector((state) => state.studyProgrammes.programmeOwners)
+    const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const [reverse, setReverse] = useState(false)
 
@@ -37,15 +37,15 @@ const ColorTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    const deadline = useSelector((state) => state.deadlines.nextDeadline)
+    const deadline = useSelector(state => state.deadlines.nextDeadline)
     const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
 
     const lastYearsAnswers =
       oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
-        ? oldAnswers.data.filter((a) => a.year === year - 1)
+        ? oldAnswers.data.filter(a => a.year === year - 1)
         : null
 
-    let sortedProgrammes = sortedItems(filteredProgrammes, SORTER, lang)
+    const sortedProgrammes = sortedItems(filteredProgrammes, SORTER, lang)
 
     if (reverse) sortedProgrammes.reverse()
 
@@ -53,18 +53,16 @@ const ColorTable = React.memo(
       if (!selectedAnswers) return {}
 
       return sortedProgrammes.reduce((statObject, { key }) => {
-        const programme = selectedAnswers.find((a) => a.programme === key)
+        const programme = selectedAnswers.find(a => a.programme === key)
         const answers = programme && programme.data ? programme.data : {}
 
-        Object.keys(answers).forEach((answerKey) => {
+        Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
             const baseKey = answerKey.replace('_light', '')
             if (!statObject[baseKey]) statObject[baseKey] = {}
 
-            statObject[baseKey][color] = statObject[baseKey][color]
-              ? statObject[baseKey][color] + 1
-              : 1
+            statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
           }
         })
         return statObject
@@ -72,28 +70,15 @@ const ColorTable = React.memo(
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
 
     const transformIdToTitle = (shortLabel, vertical = true) => {
-      return (
-        <span
-          style={vertical ? { writingMode: 'vertical-lr'} : {}}
-        >
-          {shortLabel}
-        </span>
-      )
+      return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
     }
 
-    if (
-      answers.pending ||
-      !answers.data ||
-      !oldAnswers.data ||
-      (currentUser.admin && !programmeOwners)
-    )
+    if (answers.pending || !answers.data || !oldAnswers.data || (currentUser.admin && !programmeOwners))
       return <Loader active inline="centered" />
 
-    const hasManagementAccess = (program) => {
+    const hasManagementAccess = program => {
       if (currentUser.admin) return true
-      return Object.entries(currentUser.access).find(
-        (access) => access[0] === program && access[1].admin === true
-      )
+      return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
     }
 
     const ManageCell = ({ program }) => (
@@ -115,14 +100,13 @@ const ColorTable = React.memo(
 
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (
-          cur.id.includes('information_needed') ||
-          cur.id.includes('information_used') ||
-          cur.type === 'TITLE'
-        ) {
+        if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
           return acc
         }
-        return [...acc, { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type }]
+        return [
+          ...acc,
+          { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+        ]
       }, [])
 
       return [...acc, ...questionObjects]
@@ -131,15 +115,12 @@ const ColorTable = React.memo(
     return (
       <div className="color-grid">
         <div className="sticky-header">
-          <div
-            style={{ fontWeight: 'bold', cursor: 'pointer' }}
-            onClick={() => setReverse(!reverse)}
-          >
+          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setReverse(!reverse)}>
             {translations.programmeHeader[lang]}
             <Icon name="sort" />
           </div>
         </div>
-        {tableIds.map((idObject) => (
+        {tableIds.map(idObject => (
           <div
             key={idObject.id}
             className="sticky-header"
@@ -153,67 +134,65 @@ const ColorTable = React.memo(
           </div>
         ))}
         <div className="sticky-header" />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Input
-                data-cy="overviewpage-filter"
-                size="small"
-                icon="filter"
-                placeholder={translations.filter[lang]}
-                onChange={handleFilterChange}
-                value={filterValue}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Input
+            data-cy="overviewpage-filter"
+            size="small"
+            icon="filter"
+            placeholder={translations.filter[lang]}
+            onChange={handleFilterChange}
+            value={filterValue}
+          />
+        </div>
+        {tableIds.map(idObject =>
+          stats.hasOwnProperty(idObject.id) ? (
+            <div
+              key={idObject.id}
+              style={{ cursor: 'pointer' }}
+              onClick={() =>
+                setStatsToShow({
+                  stats: stats[idObject.id],
+                  title: transformIdToTitle(idObject.shortLabel, false),
+                  answers: selectedAnswers,
+                  questionId: idObject.id,
+                })
+              }
+            >
+              <PieChart
+                animationDuration={500}
+                animationEasing="ease-out"
+                center={[50, 50]}
+                data={[
+                  {
+                    color: '#9dff9d',
+                    value: stats[idObject.id].green || 0,
+                  },
+                  {
+                    color: '#ffffb1',
+                    value: stats[idObject.id].yellow || 0,
+                  },
+                  {
+                    color: '#ff7f7f',
+                    value: stats[idObject.id].red || 0,
+                  },
+                ]}
+                labelPosition={50}
+                lengthAngle={360}
+                lineWidth={100}
+                paddingAngle={0}
+                radius={50}
+                startAngle={0}
+                viewBoxSize={[100, 100]}
               />
             </div>
-            {tableIds.map((idObject) =>
-              stats.hasOwnProperty(idObject.id) ? (
-                <div
-                  key={idObject.id}
-                  style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    setStatsToShow({
-                      stats: stats[idObject.id],
-                      title: transformIdToTitle(idObject.shortLabel, false),
-                      answers: selectedAnswers,
-                      questionId: idObject.id,
-                    })
-                  }
-                >
-                  <PieChart
-                    animationDuration={500}
-                    animationEasing="ease-out"
-                    center={[50, 50]}
-                    data={[
-                      {
-                        color: '#9dff9d',
-                        value: stats[idObject.id].green || 0,
-                      },
-                      {
-                        color: '#ffffb1',
-                        value: stats[idObject.id].yellow || 0,
-                      },
-                      {
-                        color: '#ff7f7f',
-                        value: stats[idObject.id].red || 0,
-                      },
-                    ]}
-                    labelPosition={50}
-                    lengthAngle={360}
-                    lineWidth={100}
-                    paddingAngle={0}
-                    radius={50}
-                    startAngle={0}
-                    viewBoxSize={[100, 100]}
-                  />
-                </div>
-              ) : (
-                <div key={idObject.id} />
-              )
-            )}
-            <div className="sticky-header" />
-        {sortedProgrammes.map((p) => {
-          const programme = selectedAnswers.find((a) => a.programme === p.key)
-          const programmeLastYear = lastYearsAnswers
-            ? lastYearsAnswers.find((a) => a.programme === p.key)
-            : null
+          ) : (
+            <div key={idObject.id} />
+          )
+        )}
+        <div className="sticky-header" />
+        {sortedProgrammes.map(p => {
+          const programme = selectedAnswers.find(a => a.programme === p.key)
+          const programmeLastYear = lastYearsAnswers ? lastYearsAnswers.find(a => a.programme === p.key) : null
           const targetURL = `/form/${p.key}`
           return (
             <React.Fragment key={p.key}>
@@ -222,15 +201,13 @@ const ColorTable = React.memo(
                   {p.name[lang]}
                 </Link>
               </div>
-              {tableIds.map((idObject) => (
+              {tableIds.map(idObject => (
                 <ColorTableCell
                   key={`${p.key}-${idObject.id}`}
                   programmesName={p.name[lang]}
                   programmesKey={p.key}
                   programmesAnswers={programme && programme.data ? programme.data : {}}
-                  programmesOldAnswers={
-                    programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null
-                  }
+                  programmesOldAnswers={programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null}
                   questionId={idObject.id}
                   questionType={idObject.type}
                   setModalData={setModalData}

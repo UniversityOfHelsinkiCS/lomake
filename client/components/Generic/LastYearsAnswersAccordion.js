@@ -5,8 +5,8 @@ import { genericTranslations as translations } from 'Utilities/translations'
 
 const LastYearsAnswersAccordion = ({ children }) => {
   const [expanded, setExpanded] = useState(false)
-  const lang = useSelector((state) => state.language)
-  const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
+  const lang = useSelector(state => state.language)
+  const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
 
   // When viewing old answers, theres really no need to show even "older" answers.
   if (viewingOldAnswers) return null

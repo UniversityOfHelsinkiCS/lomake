@@ -6,7 +6,6 @@ import negativeEmoji from 'Assets/persevering.png'
 import positiveEmoji from 'Assets/sunglasses.png'
 import { colors } from 'Utilities/common'
 
-
 const StatsContent = ({ stats }) => {
   return (
     <>
@@ -45,14 +44,8 @@ const StatsContent = ({ stats }) => {
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div
-            style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em', fontWeight: 'bold' }}
-          >
-            <img
-              src={positiveEmoji}
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
-            {stats.green || 0}
+          <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em', fontWeight: 'bold' }}>
+            <img src={positiveEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} /> {stats.green || 0}
           </div>
           <div
             style={{
@@ -84,11 +77,7 @@ const StatsContent = ({ stats }) => {
               fontWeight: 'bold',
             }}
           >
-            <img
-              src={negativeEmoji}
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
-            {stats.red || 0}
+            <img src={negativeEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} /> {stats.red || 0}
           </div>
         </div>
       </div>

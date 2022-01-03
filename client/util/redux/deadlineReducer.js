@@ -1,6 +1,6 @@
 import callBuilder from '../apiConnection'
 
-export const createOrUpdateDeadline = (date) => {
+export const createOrUpdateDeadline = date => {
   const route = '/deadlines'
   const prefix = 'CREATE_OR_UPDATE_DEADLINE'
   return callBuilder(route, prefix, 'post', { date })

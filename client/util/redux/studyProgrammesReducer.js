@@ -21,13 +21,13 @@ export const getUsersProgrammes = () => {
   return callBuilder(route, prefix)
 }
 
-export const toggleLock = (programmeKey) => {
+export const toggleLock = programmeKey => {
   const route = `/programmes/${programmeKey}/toggleLock`
   const prefix = 'TOGGLE_LOCK'
   return callBuilder(route, prefix, 'post')
 }
 
-export const getProgramme = (key) => {
+export const getProgramme = key => {
   const route = `/programmes/${key}`
   const prefix = 'GET_STUDYPROGRAM'
   return callBuilder(route, prefix)
@@ -132,7 +132,7 @@ export default (state = { data: null, updateStatus: null }, action) => {
     case 'TOGGLE_LOCK_SUCCESS':
       return {
         ...state,
-        data: state.data.map((programme) => {
+        data: state.data.map(programme => {
           if (programme.id === action.response.id) {
             return { ...programme, locked: action.response.locked }
           }

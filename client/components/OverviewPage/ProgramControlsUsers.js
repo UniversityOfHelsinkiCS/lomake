@@ -4,9 +4,8 @@ import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-
 const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   if (currentAccess)
     return (
       <Popup
@@ -93,8 +92,8 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
 }
 
 const OwnerAccordionUsers = ({ programme }) => {
-  const lang = useSelector((state) => state.language)
-  const users = useSelector((state) => state.programmesUsers)
+  const lang = useSelector(state => state.language)
+  const users = useSelector(state => state.programmesUsers)
 
   if (!users.data || users.pending) return null
 
@@ -105,7 +104,7 @@ const OwnerAccordionUsers = ({ programme }) => {
   }, 0)
 
   return (
-    <div style={{ margin: '3em'}}>
+    <div style={{ margin: '3em' }}>
       <h2>{translations.userList[lang]}</h2>
       <Segment style={{ margin: '1em 0' }}>
         <Grid celled="internally">
@@ -133,7 +132,7 @@ const OwnerAccordionUsers = ({ programme }) => {
               </Grid.Column>
             </Grid.Row>
           ) : (
-            users.data.map((user) => (
+            users.data.map(user => (
               <OwnerAccordionUserRow
                 currentOwnerCount={currentOwnerCount}
                 user={user}

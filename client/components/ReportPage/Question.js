@@ -5,16 +5,14 @@ import { reportPageTranslations as translations } from 'Utilities/translations'
 import { romanize } from 'Utilities/common'
 
 const Question = ({ answers, question, chosenProgrammes, handleClick, showing }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const [chosenColor, setChosenColor] = useState('all')
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
   const ButtonPopup = ({ color, index }) => (
     <Popup
-      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${
-        translations.answers[lang]
-      }`}
+      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
       trigger={
         <button
           key={index}
@@ -26,7 +24,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           <span className={`answer-circle-big-${color}`} />
         </button>
       }
-    ></Popup>
+    />
   )
 
   return (
@@ -41,9 +39,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
       >
         <Grid>
           <Grid.Column width={1} className="question-caret noprint">
-            {chosenProgrammes.length > 1 && (
-              <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />
-            )}
+            {chosenProgrammes.length > 1 && <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />}
           </Grid.Column>
           <Grid.Column width={11}>
             <span>
@@ -52,17 +48,13 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
               </small>
             </span>
             <p className="question-label">
-              {question.labelIndex}. {(question.label).toUpperCase()}
+              {question.labelIndex}. {question.label.toUpperCase()}
             </p>
             <p className="question-description">{question.description}</p>
             <p className="question-extrainfo">{question.extrainfo}</p>
           </Grid.Column>
           <Grid.Column width={4} floated="right">
-            <Label
-              data-cy={`answered-label-${question.id}`}
-              className="question-answered-label"
-              size="large"
-            >
+            <Label data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
               {answers.length} / {chosenProgrammes.length}
             </Label>
           </Grid.Column>
@@ -78,7 +70,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           </div>
           {answers.length > 0 ? (
             answers
-              .sort((a, b) => a['name'].localeCompare(b['name']))
+              .sort((a, b) => a.name.localeCompare(b.name))
               .map((programme, index) => {
                 if (chosenColor === 'all' || programme.color === chosenColor) {
                   return (
@@ -86,10 +78,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                       <label className="answer-title">
                         {programme.name} <span className={`answer-circle-${programme.color}`} />
                       </label>
-                      <ul
-                        className="answer-list"
-                        data-cy={`report-question-content-${question.id}`}
-                      >
+                      <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                         {programme.answer &&
                           programme.answer.split('\n').map((row, index) => (
                             <li key={index} className="answer-row">

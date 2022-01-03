@@ -5,8 +5,8 @@ module.exports = {
       await queryInterface.addColumn('users', 'access', {
         type: Sequelize.JSONB,
         allowNull: true,
-        defaultValue: {}
-      })
+        defaultValue: {},
+      }),
     ]
   },
 
@@ -16,8 +16,8 @@ module.exports = {
       await queryInterface.addColumn('users', 'access', {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false
-      })
+        defaultValue: false,
+      }),
     ]
-  }
+  },
 }

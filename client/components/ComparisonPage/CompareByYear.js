@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import * as _ from 'lodash'
 
-import BarChart from './BarChart'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
@@ -11,14 +10,14 @@ import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import YearSelector from 'Components/Generic/YearSelector'
-import LabelOptions from './LabelOptions'
-import Question from './Question'
 import QuestionList from 'Components/Generic/QuestionList'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
+import Question from './Question'
+import LabelOptions from './LabelOptions'
+import BarChart from './BarChart'
 import './ComparisonPage.scss'
-
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')
@@ -26,8 +25,8 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [picked, setPicked] = useState([])
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const lang = useSelector((state) => state.language)
-  const filters = useSelector((state) => state.filters)
+  const lang = useSelector(state => state.language)
+  const filters = useSelector(state => state.filters)
   const { faculty, level, multipleYears, questions } = filters
 
   if (!usersProgrammes || !allAnswers) return <></>
@@ -38,37 +37,37 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
-  const chosenKeys = programmes.chosen.map((p) => p.key)
+  const chosenKeys = programmes.chosen.map(p => p.key)
 
-  const getLabel = (question) => {
+  const getLabel = question => {
     if (!question) return ''
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${question.label}`
-  } 
+  }
 
   const colorsTotal = () => {
     if (!allAnswers) return null
     let total = []
     let checkForData = false
-    allAnswers.forEach((data) => {
+    allAnswers.forEach(data => {
       if (multipleYears.includes(data.year)) {
-        let yearsColors = { 
+        const yearsColors = {
           green: [],
           yellow: [],
           red: [],
-          emptyAnswer: []
+          emptyAnswer: [],
         }
         data.answers.forEach((questionsAnswers, key) => {
-          const question = questionsList.find((q) => q.id === key)
+          const question = questionsList.find(q => q.id === key)
           const questionLabel = getLabel(question)
           if (questions && questions.selected.includes(questionLabel)) {
-            let questionColors = { 
+            const questionColors = {
               green: 0,
               yellow: 0,
               red: 0,
-              emptyAnswer: 0
+              emptyAnswer: 0,
             }
-            questionsAnswers.forEach((a) => {
+            questionsAnswers.forEach(a => {
               if (chosenKeys.includes(a.key)) {
                 checkForData = true
                 questionColors[a.color] = questionColors[a.color] + 1
@@ -101,10 +100,10 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     setFilter(value)
   }
 
-  const writtenTotal = (question) => {
-    const mapped = allAnswers.map((data) => {
+  const writtenTotal = question => {
+    const mapped = allAnswers.map(data => {
       const answers = data.answers.get(question.id)
-      const filteredAnswers = answers ? answers.filter((a) => chosenKeys.includes(a.key) && a.answer) : []
+      const filteredAnswers = answers ? answers.filter(a => chosenKeys.includes(a.key) && a.answer) : []
       return {
         year: data.year,
         answers: _.sortBy(filteredAnswers, 'name'),
@@ -118,27 +117,15 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-            <YearSelector
-              multiple size="small"
-              label={translations.selectYears[lang]}
-            />
+            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
             {usersProgrammes && (
               <>
-                <FacultyFilter
-                  size="small"
-                  label={translations.facultyFilter.filter[lang]}
-                />
+                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
                 <LevelFilter />
-                {
-                  faculty !== 'allFaculties'
-                  && (level === 'doctoral' || level === 'master' || level === 'bachelor')
-                  && <CompanionFilter />
-                }
-                {
-                  faculty === 'allFaculties'
-                  && level === 'doctoral'
-                  && <DoctoralSchoolFilter />
-                }
+                {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
+                  <CompanionFilter />
+                )}
+                {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
                 <ProgrammeFilter
                   handleChange={handleSearch}
                   label={translations.programmeFilter[lang]}
@@ -156,22 +143,14 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
           <Grid.Column width={6}>
-            <ProgrammeList
-              programmes={programmes}
-              setPicked={setPicked}
-              picked={picked}
-            />
+            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
           </Grid.Column>
         </Grid.Row>
         {data.length > 0 ? (
           <>
             <Grid.Row>
               <Grid.Column width={16}>
-                <BarChart
-                  data={data}
-                  questions={questions.selected.sort((a,b) => a.localeCompare(b))}
-                  unit={unit}
-                />
+                <BarChart data={data} questions={questions.selected.sort((a, b) => a.localeCompare(b))} unit={unit} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -180,17 +159,15 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 <div className="ui divider" />
                 <Accordion fluid className="report-container">
                   {questionsList.map(
-                    (question) =>
+                    question =>
                       questions.selected.includes(getLabel(question)) && (
                         <Question
                           key={question.id}
                           answers={writtenTotal(question)}
                           question={question}
-                          chosenProgrammes={programmes.chosen.map((p) => p.key)}
+                          chosenProgrammes={programmes.chosen.map(p => p.key)}
                           showing={showingQuestion === question.id}
-                          handleClick={() =>
-                            setShowingQuestion(showingQuestion === question.id ? -1 : question.id)
-                          }
+                          handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
                         />
                       )
                   )}

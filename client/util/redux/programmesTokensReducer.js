@@ -3,7 +3,7 @@ import callBuilder from '../apiConnection'
  * Actions and reducers are in the same file for readability
  */
 
-export const getProgrammesTokensAction = (programme) => {
+export const getProgrammesTokensAction = programme => {
   const route = `/programmes/${programme}/tokens`
   const prefix = 'GET_PROGRAMMES_TOKENS'
   return callBuilder(route, prefix)
@@ -36,7 +36,7 @@ export default (state = { data: null }, action) => {
     case 'RESET_TOKEN_SUCCESS': // Update existing token
       return {
         ...state,
-        data: state.data.map((element) => {
+        data: state.data.map(element => {
           if (element.id === action.response.id) return action.response
           return element
         }),

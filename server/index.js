@@ -6,10 +6,7 @@ const logger = require('@util/logger')
 
 const errorMiddleware = require('@middleware/errorMiddleware')
 const shibbolethCharsetMiddleware = require('@middleware/shibbolethCharsetMiddleware')
-const {
-  productionRequestLogger,
-  developmentRequestLogger,
-} = require('@middleware/requestLoggerMiddleware')
+const { productionRequestLogger, developmentRequestLogger } = require('@middleware/requestLoggerMiddleware')
 const userMiddleware = require('@middleware/userMiddleware')
 const currentUserMiddleware = require('@middleware/currentUserMiddleware')
 const IAMmiddleware = require('@middleware/IAMmiddleware')

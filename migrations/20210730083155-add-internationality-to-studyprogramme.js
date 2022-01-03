@@ -1,9 +1,7 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn('studyprogrammes', 'international', {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.BOOLEAN,
     })
   },
 

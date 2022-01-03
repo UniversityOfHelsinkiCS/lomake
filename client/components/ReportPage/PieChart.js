@@ -16,12 +16,12 @@ export default ({
   setActiveTab,
   setShowing,
 }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const [toolTipData, setToolTipData] = useState(null)
 
-  const colorsTotal = (question) => {
+  const colorsTotal = question => {
     if (!question || !answers) return null
-    let colors = {
+    const colors = {
       green: { value: 0, programmes: [] },
       yellow: { value: 0, programmes: [] },
       red: { value: 0, programmes: [] },
@@ -29,9 +29,9 @@ export default ({
       withoutEmpty: { value: 0, programmes: [] },
       total: { value: 0 },
     }
-    answers.forEach((a) => {
-      colors[a.color]['value'] = colors[a.color]['value'] + 1
-      colors[a.color]['programmes'] = [...colors[a.color]['programmes'], a.name]
+    answers.forEach(a => {
+      colors[a.color].value = colors[a.color].value + 1
+      colors[a.color].programmes = [...colors[a.color].programmes, a.name]
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
     colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
@@ -82,7 +82,7 @@ export default ({
     return answered + all
   }
 
-  const toolTipText = (segmentIndex) => {
+  const toolTipText = segmentIndex => {
     if (!segmentIndex) {
       setToolTipData(null)
     }
@@ -95,7 +95,7 @@ export default ({
     setToolTipData(toolTip)
   }
 
-  const showWritten = (id) => {
+  const showWritten = id => {
     setShowing(id)
     setActiveTab(0)
   }
@@ -104,7 +104,7 @@ export default ({
     <div className="report-color-chart-area">
       <div className="report-color-pie-header">
         <p>
-          {question.labelIndex}. {(question.label).toUpperCase()}
+          {question.labelIndex}. {question.label.toUpperCase()}
         </p>
         <p>
           <b>{faculty}</b>
@@ -131,9 +131,7 @@ export default ({
                 className="comparison-color-pie-tip-close"
                 onClick={() => setToolTipData(null)}
               >
-                <b>
-                  X
-                </b>
+                <b>X</b>
               </Button>
             </p>
             <p>
@@ -141,7 +139,7 @@ export default ({
                 <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
               </b>
             </p>
-            {toolTipData.programmes.map((p) => (
+            {toolTipData.programmes.map(p => (
               <p key={p}>{p}</p>
             ))}
           </span>
@@ -151,9 +149,7 @@ export default ({
           data={data()}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) =>
-            dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null
-          }
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
           paddingAngle={0}
           radius={50}
           startAngle={270}

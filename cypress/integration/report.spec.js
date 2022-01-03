@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeName, defaultYears } from '../../config/common'
+
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 

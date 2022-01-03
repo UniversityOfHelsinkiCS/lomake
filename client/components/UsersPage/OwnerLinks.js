@@ -1,21 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Icon, Popup, Table } from 'semantic-ui-react'
-import { basePath } from '../../../config/common'
-import { Message } from 'semantic-ui-react'
+import { Button, Icon, Popup, Table, Message } from 'semantic-ui-react'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { resetAdminTokenAction  } from 'Utilities/redux/accessTokenReducer'
-
+import { resetAdminTokenAction } from 'Utilities/redux/accessTokenReducer'
+import { basePath } from '../../../config/common'
 
 export default () => {
   const dispatch = useDispatch()
-  const allTokens = useSelector((state) => state.accessToken.allTokens)
-  const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
-  const lang = useSelector((state) => state.language)
+  const allTokens = useSelector(state => state.accessToken.allTokens)
+  const studyProgrammes = useSelector(state => state.studyProgrammes.data)
+  const lang = useSelector(state => state.language)
 
   if (!allTokens || !studyProgrammes) return null
 
-  const filteredTokens = allTokens.filter((token) => token.programme)
+  const filteredTokens = allTokens.filter(token => token.programme)
   const sortedTokens = filteredTokens.sort((a, b) => a.programme.localeCompare(b.programme))
 
   const handleReset = (programmeKey, url) => {
@@ -24,11 +22,7 @@ export default () => {
 
   return (
     <>
-      <Message
-        color="blue"
-        icon="exclamation"
-        content={translations.ownerMessage[lang]}
-      />
+      <Message color="blue" icon="exclamation" content={translations.ownerMessage[lang]} />
       <Table compact>
         <Table.Header>
           <Table.Row>
@@ -41,46 +35,39 @@ export default () => {
         </Table.Header>
         <Table.Body>
           {sortedTokens
-            .filter((token) => token.type === 'ADMIN')
-            .map((token) => {
+            .filter(token => token.type === 'ADMIN')
+            .map(token => {
               const code = token.url
               const programmeKey = token.programme
-              const valid = token.valid
+              const { valid } = token
               const shareUrl = `${window.location.origin}${basePath}access/${code}`
-              const programmeName = studyProgrammes.find((p) => p.key === programmeKey).name[lang]
+              const programmeName = studyProgrammes.find(p => p.key === programmeKey).name[lang]
 
               return (
                 <Table.Row key={token.url}>
                   <Table.Cell>{programmeKey}</Table.Cell>
                   <Table.Cell>{programmeName}</Table.Cell>
                   <Table.Cell>{shareUrl}</Table.Cell>
-                  <Table.Cell><Icon color={valid ? "green" : "red"} name={valid ? "check" : "close"} /></Table.Cell>
                   <Table.Cell>
-                    {!valid &&
+                    <Icon color={valid ? 'green' : 'red'} name={valid ? 'check' : 'close'} />
+                  </Table.Cell>
+                  <Table.Cell>
+                    {!valid && (
                       <Popup
                         on="click"
-                        trigger={
-                          <Button color="grey">
-                            {translations.reset[lang]}
-                          </Button>  
-                        }
+                        trigger={<Button color="grey">{translations.reset[lang]}</Button>}
                         content={
                           <>
                             <p>
-                              <strong>
-                                {translations.resetConfirmationText[lang]}
-                              </strong>
+                              <strong>{translations.resetConfirmationText[lang]}</strong>
                             </p>
-                            <Button
-                              color="blue"
-                              onClick={() => handleReset(programmeKey, code)}
-                            >
+                            <Button color="blue" onClick={() => handleReset(programmeKey, code)}>
                               {translations.confirmReset[lang]}
                             </Button>
                           </>
                         }
                       />
-                    }
+                    )}
                   </Table.Cell>
                 </Table.Row>
               )

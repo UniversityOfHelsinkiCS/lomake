@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
-import questions from '../../questions.json'
 import { colors } from 'Utilities/common'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
+import questions from '../../questions.json'
 
 const colorScoreMap = {
   green: 1,
@@ -20,17 +20,17 @@ const ColorTableCell = ({
   setModalData,
   programmesOldAnswers,
 }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   const getMeasuresAnswer = () => {
     if (!programmesAnswers) return null
-    if (!!programmesAnswers[`${questionId}_text`]) return programmesAnswers[`${id}_text`]
+    if (programmesAnswers[`${questionId}_text`]) return programmesAnswers[`${id}_text`]
 
-    if (!!programmesAnswers[`${questionId}_1_text`]) {
+    if (programmesAnswers[`${questionId}_1_text`]) {
       let measures = ''
       let i = 1
       while (i < 6) {
-        if (!!programmesAnswers[`${questionId}_${i}_text`])
+        if (programmesAnswers[`${questionId}_${i}_text`])
           measures += `${i}) ${programmesAnswers[`${questionId}_${i}_text`]}  \n`
         i++
       }
@@ -44,7 +44,7 @@ const ColorTableCell = ({
   const getMeasuresCount = () => {
     let i = 1
     while (i < 6) {
-      if (!!programmesAnswers[`${questionId}_${i}_text`]) {
+      if (programmesAnswers[`${questionId}_${i}_text`]) {
         i++
       } else {
         break
@@ -164,9 +164,7 @@ const ColorTableCell = ({
   return (
     <Popup trigger={IconElement}>
       <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}
-      {icon === 'angle up'
-        ? translations.betterThanLastYear[lang]
-        : translations.worseThanLastYear[lang]}
+      {icon === 'angle up' ? translations.betterThanLastYear[lang] : translations.worseThanLastYear[lang]}
     </Popup>
   )
 }

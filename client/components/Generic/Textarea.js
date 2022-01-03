@@ -9,10 +9,9 @@ import ReactMarkdown from 'react-markdown'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 import './Textarea.scss'
+import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
-import { colors } from 'Utilities/common'
-
 
 const MAX_LENGTH = 1100
 
@@ -46,16 +45,10 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
   const someoneElseHasTheLock =
-    currentEditors &&
-    currentUser &&
-    currentEditors[fieldName] &&
-    currentEditors[fieldName].uid !== currentUser.uid
+    currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
   useEffect(() => {
-    const gotTheLock =
-      currentEditors &&
-      currentEditors[fieldName] &&
-      currentEditors[fieldName].uid === currentUser.uid
+    const gotTheLock = currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid
 
     setHasLock(gotTheLock)
     if (gettingLock && currentEditors[fieldName]) {
@@ -70,7 +63,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     }
   }, [dataFromRedux, hasLock])
 
-  const handleChange = (value) => {
+  const handleChange = value => {
     setEditorState(value)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
@@ -85,7 +78,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }
   const [editorState, setEditorState] = useState(editorStateFromRedux())
 
-  const length = editorState.getCurrentContent().getPlainText().length
+  const { length } = editorState.getCurrentContent().getPlainText()
 
   const askForLock = () => {
     if (!hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
@@ -95,7 +88,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }
 
   return (
-    <div data-cy={`textarea-${id}`} >
+    <div data-cy={`textarea-${id}`}>
       <div
         className="form-text-area"
         style={{
@@ -146,14 +139,14 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
               toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
               editorState={editorState}
               onEditorStateChange={handleChange}
-              handleBeforeInput={(val) => {
+              handleBeforeInput={val => {
                 const textLength = editorState.getCurrentContent().getPlainText().length
                 if (val && textLength >= MAX_LENGTH) {
                   return 'handled'
                 }
                 return 'not-handled'
               }}
-              handlePastedText={(val) => {
+              handlePastedText={val => {
                 const textLength = editorState.getCurrentContent().getPlainText().length
                 return val.length + textLength > MAX_LENGTH
               }}

@@ -9,11 +9,11 @@ export default function SaveIndicator() {
   const [saveError, setSaveError] = useState(false)
   const [timeoutId, setTimeoutId] = useState(undefined)
 
-  const lastSaveSuccess = useSelector((state) => state.form.lastSaveSuccess)
-  const lastSaveAttempt = useSelector((state) => state.form.lastSaveAttempt)
+  const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
+  const lastSaveAttempt = useSelector(state => state.form.lastSaveAttempt)
 
-  const lang = useSelector((state) => state.language)
-  const viewOnly = useSelector((state) => state.form.viewOnly)
+  const lang = useSelector(state => state.language)
+  const viewOnly = useSelector(state => state.form.viewOnly)
   const dispatch = useDispatch()
 
   const translations = {
@@ -25,15 +25,12 @@ export default function SaveIndicator() {
     saveFailed: {
       header: {
         en: 'Error: The changes you have made in the last 10 seconds have not been saved!',
-        fi:
-          'Virhe: Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti!',
+        fi: 'Virhe: Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti!',
         se: '',
       },
       content: {
-        en:
-          'In order to continue filling the form, please backup any recent changes you have made. Then click the button to reload the page.',
-        fi:
-          'Jatkaaksesi lomakkeen täyttämistä, ole hyvä ja ota viimeiset muutoksesi talteen. Klikkaa sen jälkeen allaolevaa näppäintä ladataksesi sivu uudelleen.',
+        en: 'In order to continue filling the form, please backup any recent changes you have made. Then click the button to reload the page.',
+        fi: 'Jatkaaksesi lomakkeen täyttämistä, ole hyvä ja ota viimeiset muutoksesi talteen. Klikkaa sen jälkeen allaolevaa näppäintä ladataksesi sivu uudelleen.',
         se: '',
       },
       button: {
@@ -102,7 +99,7 @@ export default function SaveIndicator() {
               </Button>
             </div>
           }
-        ></Message>
+        />
       </>
     )
   }
@@ -115,10 +112,9 @@ export default function SaveIndicator() {
           bottom: '5px',
           zIndex: 100,
         }}
-        //loading={saving}
+        // loading={saving}
       >
-        {translations['lastSaved'][lang]}{' '}
-        {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+        {translations.lastSaved[lang]} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
       </Button>
     </>
   )

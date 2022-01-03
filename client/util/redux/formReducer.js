@@ -10,17 +10,17 @@ export const updateFormField = (field, value, host) => ({
   host,
 })
 
-export const getLock = (field) => ({
+export const getLock = field => ({
   type: 'GET_LOCK',
   field,
 })
 
-export const setViewOnly = (value) => ({
+export const setViewOnly = value => ({
   type: 'SET_VIEW_ONLY',
   value,
 })
 
-export const setViewingOldAnswers = (value) => ({
+export const setViewingOldAnswers = value => ({
   type: 'SET_VIEWING_OLD_ANSWERS',
   value,
 })
@@ -31,13 +31,13 @@ export const getFormAction = () => {
   return callBuilder(route, prefix)
 }
 
-export const getTempAnswers = (room) => {
+export const getTempAnswers = room => {
   const route = `/answers/temp/${room}`
   const prefix = 'GET_TEMP_ANSWERS'
   return callBuilder(route, prefix)
 }
 
-export const postFormAction = (message) => {
+export const postFormAction = message => {
   const route = '/form'
   const prefix = 'SAVE_FORM'
   return callBuilder(route, prefix, 'post', message)

@@ -5,34 +5,34 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       uid: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       admin: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       access: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       irrelevant: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     }),
-  down: (queryInterface) => queryInterface.dropTable('users')
+  down: queryInterface => queryInterface.dropTable('users'),
 }

@@ -3,18 +3,14 @@
  */
 
 const inProduction = process.env.NODE_ENV === 'production'
-const requiredGroupForWideReadAccess = inProduction ? "grp-lomake-production-read" : "grp-lomake-testing-read"
+const requiredGroupForWideReadAccess = inProduction ? 'grp-lomake-production-read' : 'grp-lomake-testing-read'
 
 const basePath = process.env.BASE_PATH || '/'
 
 // First one is the current year, after that all the years that have answers
 const defaultYears = [2021, 2020, 2019]
 
-const degreeLevels = [
-  'Bachelor´s level (1. cycle)',
-  'Master´s level (2. cycle)',
-  'Doctoral level (3. cycle)',
-]
+const degreeLevels = ['Bachelor´s level (1. cycle)', 'Master´s level (2. cycle)', 'Doctoral level (3. cycle)']
 
 const requiredFormIds = [
   'faculty',
@@ -55,66 +51,65 @@ const requiredFormIds = [
 
 const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser']
 
-const isSuperAdmin = (uid) => {
+const isSuperAdmin = uid => {
   return SUPERADMINS.includes(uid)
 }
 
-const isAdmin = (user) => user.admin 
+const isAdmin = user => user.admin
 
-const isBasicUser = (user) => {
+const isBasicUser = user => {
   if (!user.admin && !user.wideReadAccess) return true
   return false
 }
 
-const isWideReadAccessUser = (user) => user.isWideReadAccess
+const isWideReadAccessUser = user => user.isWideReadAccess
 
-const isSpecialGroupUser = (user) => {
+const isSpecialGroupUser = user => {
   if (user.specialGroup && Object.keys(user.specialGroup) && Object.keys(user.specialGroup).length > 0) return true
   return false
 }
 
-const isInternationalUser = (user) => {
-  if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup['international']) return true
+const isInternationalUser = user => {
+  if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.international) return true
   return false
 }
 
-
 const internationalAccess = {
-  MH50_004: { 'read': true, 'year':2020 },
-  MH50_010: { 'read': true, 'year':2020 },
-  MH40_005: { 'read': true, 'year':2020 },
-  MH57_001: { 'read': true, 'year':2020 },
-  MH80_004: { 'read': true, 'year':2020 },
-  MH50_002: { 'read': true, 'year':2020 },
-  MH40_003: { 'read': true, 'year':2020 },
-  MH40_011: { 'read': true, 'year':2020 },
-  MH70_006: { 'read': true, 'year':2020 },
-  MH57_003: { 'read': true, 'year':2020 },
-  MH50_011: { 'read': true, 'year':2020 },
-  MH70_003: { 'read': true, 'year':2020 },
-  MH80_005: { 'read': true, 'year':2020 },
-  MH50_006: { 'read': true, 'year':2020 },
-  MH20_002: { 'read': true, 'year':2020 },
-  MH57_002: { 'read': true, 'year':2020 },
-  MH50_013: { 'read': true, 'year':2020 },
-  MH50_007: { 'read': true, 'year':2020 },
-  MH50_012: { 'read': true, 'year':2020 },
-  MH80_002: { 'read': true, 'year':2020 },
-  MH80_001: { 'read': true, 'year':2020 },
-  MH50_001: { 'read': true, 'year':2020 },
-  MH50_005: { 'read': true, 'year':2020 },
-  MH80_003: { 'read': true, 'year':2020 },
-  MH80_007: { 'read': true, 'year':2020 },
-  MH57_004: { 'read': true, 'year':2020 },
-  MH70_005: { 'read': true, 'year':2020 },
-  MH70_009: { 'read': true, 'year':2020 },
-  MH50_003: { 'read': true, 'year':2020 },
-  MH50_009: { 'read': true, 'year':2020 },
-  MH30_002: { 'read': true, 'year':2020 },
-  MH40_004: { 'read': true, 'year':2020 },
-  MH57_005: { 'read': true, 'year':2020 },
-  MH60_002: { 'read': true, 'year':2020 },
-  MH20_003: { 'read': true, 'year':2020 },
+  MH50_004: { read: true, year: 2020 },
+  MH50_010: { read: true, year: 2020 },
+  MH40_005: { read: true, year: 2020 },
+  MH57_001: { read: true, year: 2020 },
+  MH80_004: { read: true, year: 2020 },
+  MH50_002: { read: true, year: 2020 },
+  MH40_003: { read: true, year: 2020 },
+  MH40_011: { read: true, year: 2020 },
+  MH70_006: { read: true, year: 2020 },
+  MH57_003: { read: true, year: 2020 },
+  MH50_011: { read: true, year: 2020 },
+  MH70_003: { read: true, year: 2020 },
+  MH80_005: { read: true, year: 2020 },
+  MH50_006: { read: true, year: 2020 },
+  MH20_002: { read: true, year: 2020 },
+  MH57_002: { read: true, year: 2020 },
+  MH50_013: { read: true, year: 2020 },
+  MH50_007: { read: true, year: 2020 },
+  MH50_012: { read: true, year: 2020 },
+  MH80_002: { read: true, year: 2020 },
+  MH80_001: { read: true, year: 2020 },
+  MH50_001: { read: true, year: 2020 },
+  MH50_005: { read: true, year: 2020 },
+  MH80_003: { read: true, year: 2020 },
+  MH80_007: { read: true, year: 2020 },
+  MH57_004: { read: true, year: 2020 },
+  MH70_005: { read: true, year: 2020 },
+  MH70_009: { read: true, year: 2020 },
+  MH50_003: { read: true, year: 2020 },
+  MH50_009: { read: true, year: 2020 },
+  MH30_002: { read: true, year: 2020 },
+  MH40_004: { read: true, year: 2020 },
+  MH57_005: { read: true, year: 2020 },
+  MH60_002: { read: true, year: 2020 },
+  MH20_003: { read: true, year: 2020 },
 }
 
 const cypressUsers = [
@@ -142,10 +137,10 @@ const cypressUsers = [
     admin: false,
     specialGroup: {},
     access: {
-      KH50_004: { 'read': true, 'write': true },
-      KH80_001: { 'read': true, 'write': true, 'admin': true },
-      KH50_003: { 'read': true }
-    }
+      KH50_004: { read: true, write: true },
+      KH80_001: { read: true, write: true, admin: true },
+      KH50_003: { read: true },
+    },
   },
   {
     uid: 'cypressInternationalUser',
@@ -153,8 +148,8 @@ const cypressUsers = [
     lastname: 'res4',
     email: 'cypress-international-user@helsinki.fi',
     admin: false,
-    specialGroup: { 'international2020': true },
-    access: internationalAccess
+    specialGroup: { international2020: true },
+    access: internationalAccess,
   },
   {
     uid: 'cypressAdminUser',
@@ -181,5 +176,5 @@ module.exports = {
   isInternationalUser,
   cypressUsers,
   testProgrammeName,
-  requiredGroupForWideReadAccess
+  requiredGroupForWideReadAccess,
 }

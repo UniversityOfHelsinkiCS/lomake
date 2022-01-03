@@ -14,22 +14,22 @@ const labelIcon = {
 export default ({ url }) => {
   const dispatch = useDispatch()
   const [localizedProgramname, setLocalizedProgramname] = useState('')
-  const token = useSelector((store) => store.accessToken)
-  const lang = useSelector((state) => state.language)
-  const studyProgrammes = useSelector((state) => state.studyProgrammes.data)
-  const faculties = useSelector((state) => state.faculties.data)
+  const token = useSelector(store => store.accessToken)
+  const lang = useSelector(state => state.language)
+  const studyProgrammes = useSelector(state => state.studyProgrammes.data)
+  const faculties = useSelector(state => state.faculties.data)
   const [value, setValue] = useState('')
 
   useEffect(() => {
-    document.title = `${translations['claimPermissions'][lang]}`
+    document.title = `${translations.claimPermissions[lang]}`
   }, [lang])
 
   useEffect(() => {
     if (studyProgrammes && token.data) {
       if (token.data.programme) {
-        const program = studyProgrammes.find((p) => p.key === token.data.programme)
+        const program = studyProgrammes.find(p => p.key === token.data.programme)
 
-        const temp = program['name'][lang]
+        const temp = program.name[lang]
 
         setLocalizedProgramname(temp)
       } else {
@@ -42,7 +42,7 @@ export default ({ url }) => {
     dispatch(getTokenAction(url))
   }, [])
 
-  const handleClaim = (token) => {
+  const handleClaim = token => {
     if (token.programme) {
       dispatch(claimTokenAction(url, false))
     } else {
@@ -82,11 +82,9 @@ export default ({ url }) => {
             {translations.invalidToken1of2[lang]}
             {lang !== 'se' && <a href={basePath}>opetushallinto.cs.helsinki.fi/tilannekuva</a>}
           </strong>
-        </p> 
+        </p>
         <p style={{ color: colors.red }}>
-          <strong>
-            {translations.invalidToken2of2[lang]}
-          </strong>
+          <strong>{translations.invalidToken2of2[lang]}</strong>
         </p>
       </>
     )
@@ -94,14 +92,14 @@ export default ({ url }) => {
   if (!token.data || !faculties) return <Loader active inline />
 
   const getProgrammeNames = (onlyDoctorProgrammes = false) => {
-    let ownedProgrammes = faculties.find((f) => f.code === token.data.faculty).ownedProgrammes
+    let { ownedProgrammes } = faculties.find(f => f.code === token.data.faculty)
 
     if (onlyDoctorProgrammes) {
       ownedProgrammes = ownedProgrammes.filter(({ key }) => key[0] === 'T')
     }
 
     const localizedProgrammeCodes = ownedProgrammes.map(({ key }) => {
-      const prog = studyProgrammes.find((p) => p.key === key)
+      const prog = studyProgrammes.find(p => p.key === key)
       return prog.name[lang]
     })
 
@@ -113,9 +111,7 @@ export default ({ url }) => {
       <div style={{ width: '50em', margin: '1em auto' }}>
         <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
         <div style={{ fontWeight: 'bold' }}>{localizedProgramname}</div>
-        <div
-          style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}
-        >
+        <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>
           <Icon color="blue" name={labelIcon[token.data.type]} size="small" />{' '}
           {translations.rights[token.data.type][lang]}
         </div>
@@ -129,18 +125,12 @@ export default ({ url }) => {
               value={value}
               onChange={(e, { value }) => setValue(value)}
             />
-            <div
-              className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? 'error' : 'valid'}`}
-            >
+            <div className={`claimAccesspage-adminMessage ${buttonIsDisabled() ? 'error' : 'valid'}`}>
               {translations.confirmPrompt[lang]}
             </div>
           </div>
         )}
-        <Button
-          data-cy="claim-button"
-          disabled={buttonIsDisabled()}
-          onClick={() => handleClaim(token.data)}
-        >
+        <Button data-cy="claim-button" disabled={buttonIsDisabled()} onClick={() => handleClaim(token.data)}>
           {translations.buttonText[lang]}
         </Button>{' '}
       </div>
@@ -151,19 +141,16 @@ export default ({ url }) => {
     return (
       <div style={{ width: '50em', margin: '1em auto' }}>
         <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
-        <h2>{faculties.find((f) => f.code === token.data.faculty).name[lang]}</h2>
+        <h2>{faculties.find(f => f.code === token.data.faculty).name[lang]}</h2>
         <List bulleted>
-          {getProgrammeNames(true).map((name) => (
+          {getProgrammeNames(true).map(name => (
             <List.Item data-cy="programmeList-item" key={name}>
               {name}
             </List.Item>
           ))}
         </List>
-        <div
-          style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}
-        >
-          <Icon color="blue" name={labelIcon['READ']} size="small" />{' '}
-          {translations.rights['READ'][lang]}
+        <div style={{ fontSize: '1.5em', fontWeight: 'bolder', height: '1.25em', margin: '0.5em 0' }}>
+          <Icon color="blue" name={labelIcon.READ} size="small" /> {translations.rights.READ[lang]}
         </div>
         <Button data-cy="claim-button" onClick={() => handleClaim(token.data)}>
           {translations.buttonText[lang]}
@@ -175,9 +162,9 @@ export default ({ url }) => {
   return (
     <div style={{ width: '50em', margin: '1em auto' }}>
       <Message color="blue" icon="exclamation" content={translations.prompt[lang]} />
-      <h2>{faculties.find((f) => f.code === token.data.faculty).name[lang]}</h2>
+      <h2>{faculties.find(f => f.code === token.data.faculty).name[lang]}</h2>
       <List bulleted>
-        {getProgrammeNames().map((name) => (
+        {getProgrammeNames().map(name => (
           <List.Item data-cy="programmeList-item" key={name}>
             {name}
           </List.Item>
@@ -201,11 +188,7 @@ export default ({ url }) => {
           </div>
         </div>
       )}
-      <Button
-        data-cy="claim-button"
-        disabled={buttonIsDisabled()}
-        onClick={() => handleClaim(token.data)}
-      >
+      <Button data-cy="claim-button" disabled={buttonIsDisabled()} onClick={() => handleClaim(token.data)}>
         {translations.buttonText[lang]}
       </Button>{' '}
     </div>

@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn('users', 'wide_read_access', {
@@ -9,7 +7,7 @@ module.exports = {
     })
   },
 
-  down: (queryInterface) => {
+  down: queryInterface => {
     return queryInterface.removeColumn('users', 'wide_read_access')
   },
 }

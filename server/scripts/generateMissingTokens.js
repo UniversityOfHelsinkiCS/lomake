@@ -11,19 +11,17 @@ const generateMissingTokens = async () => {
     const programmes = await db.studyprogramme.findAll({})
     let newCreated = 0
 
-    programmes.forEach(async (programme) => {
+    programmes.forEach(async programme => {
       const { key } = programme
 
-      types.forEach(async (type) => {
-        const exists = existingTokens.find(
-          (token) => token.type === type && token.programme === key
-        )
+      types.forEach(async type => {
+        const exists = existingTokens.find(token => token.type === type && token.programme === key)
         if (!exists) {
           newCreated++
           await db.token.create({
             url: uuid(),
             programme: key,
-            type: type,
+            type,
             valid: true,
             usageCounter: 0,
           })
@@ -31,7 +29,6 @@ const generateMissingTokens = async () => {
       })
     })
     logger.info(`${newCreated} new tokens created`)
-
   } catch (error) {
     logger.error(`Failed to generate missing tokens: ${error}`)
   }

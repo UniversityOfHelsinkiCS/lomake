@@ -5,7 +5,7 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 
 const LabelOptions = ({ unit, setUnit }) => {
   const years = useSelector(({ filters }) => filters.multipleYears)
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   const handleChange = (e, { value }) => {
     setUnit(value)

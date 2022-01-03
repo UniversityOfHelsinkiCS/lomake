@@ -1,6 +1,6 @@
 import callBuilder from '../apiConnection'
 
-export const setDraftYear = (draftYear) => {
+export const setDraftYear = draftYear => {
   const route = '/draftyears'
   const prefix = 'SET_DRAFT_YEAR'
   return callBuilder(route, prefix, 'post', { draftYear })

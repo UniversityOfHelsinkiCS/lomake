@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
-import DisabledQuestion from './DisabledQuestion'
-import Question from './Question'
-import SingleProgramQuestion from './SingleProgramQuestion'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { reportPageTranslations as translations } from 'Utilities/translations'
+import SingleProgramQuestion from './SingleProgramQuestion'
+import Question from './Question'
+import DisabledQuestion from './DisabledQuestion'
 import './ReportPage.scss'
 
 const WrittenAnswers = ({
@@ -20,14 +20,14 @@ const WrittenAnswers = ({
   setShowing,
 }) => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
   }, [])
 
-  const getLabel = (question) => {
+  const getLabel = question => {
     if (!question) return ''
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${question.label}`
@@ -39,10 +39,10 @@ const WrittenAnswers = ({
     setShowing(newIndex)
   }
 
-  const checkIfAnswers = (question) => {
+  const checkIfAnswers = question => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
-    const t = answer.find((a) => a.answer)
+    const t = answer.find(a => a.answer)
     if (t) return true
     return false
   }
@@ -66,42 +66,41 @@ const WrittenAnswers = ({
           {translations.questions[lang]}
         </Grid.Column>
         <Grid.Column width={6} className="center">
-          {year} - {translations.reportHeader['written'][lang]}
+          {year} - {translations.reportHeader.written[lang]}
         </Grid.Column>
         <Grid.Column width={5} className="right" floated="right">
           {translations.answered[lang]} / {translations.allProgrammes[lang]}
         </Grid.Column>
       </Grid>
       <div className="ui divider" />
-      {questionsList.map((question) =>
-        questions.selected.includes(getLabel(question)) && (
-        checkIfAnswers(question) ? (
-          <div key={question.id}>
-            {chosenProgrammes.length === 1 ? (
-              <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
-            ) : (
-              <Question
-                answers={allAnswers.get(question.id).filter((p) => p.answer)}
-                question={question}
-                chosenProgrammes={chosenProgrammes}
-                year={year}
-                handleClick={handleClick}
-                showing={
-                  chosenProgrammes.length < 2 || questions.open.includes(getLabel(question))
-                    ? question.id
-                    : showing
-                }
-              />
-            )}
-            <div className="ui divider" />
-          </div>
-        ) : (
-          <div key={question.id}>
-            <DisabledQuestion question={question} chosenProgrammes={chosenProgrammes} />
-            <div className="ui divider" />
-          </div>
-        )
-      ))}
+      {questionsList.map(
+        question =>
+          questions.selected.includes(getLabel(question)) &&
+          (checkIfAnswers(question) ? (
+            <div key={question.id}>
+              {chosenProgrammes.length === 1 ? (
+                <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
+              ) : (
+                <Question
+                  answers={allAnswers.get(question.id).filter(p => p.answer)}
+                  question={question}
+                  chosenProgrammes={chosenProgrammes}
+                  year={year}
+                  handleClick={handleClick}
+                  showing={
+                    chosenProgrammes.length < 2 || questions.open.includes(getLabel(question)) ? question.id : showing
+                  }
+                />
+              )}
+              <div className="ui divider" />
+            </div>
+          ) : (
+            <div key={question.id}>
+              <DisabledQuestion question={question} chosenProgrammes={chosenProgrammes} />
+              <div className="ui divider" />
+            </div>
+          ))
+      )}
     </Accordion>
   )
 }

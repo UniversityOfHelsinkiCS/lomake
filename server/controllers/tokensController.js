@@ -57,9 +57,7 @@ const claimToken = async (req, res) => {
     if (token.type === 'ADMIN') token.valid = false
     await token.save()
 
-    logger.info(
-      `User ${req.user.uid} claimed token : ${req.params.url}, ${token.programme}: ${token.type}`
-    )
+    logger.info(`User ${req.user.uid} claimed token : ${req.params.url}, ${token.programme}: ${token.type}`)
     return res.status(200).json(req.user)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -110,7 +108,9 @@ const resetAdminToken = async (req, res) => {
     token.usageCounter = 0
     await token.save()
 
-    logger.info(`User ${req.user.uid} resetted admin token for programme: ${token.programme} from ${url} to ${token.url}`)
+    logger.info(
+      `User ${req.user.uid} resetted admin token for programme: ${token.programme} from ${url} to ${token.url}`
+    )
 
     return res.status(200).json(token)
   } catch (error) {
@@ -184,12 +184,12 @@ const claimFacultyToken = async (req, res) => {
       where: {
         code: token.faculty,
       },
-      include:["ownedProgrammes"],
+      include: ['ownedProgrammes'],
     })
 
     // Special type of token, where read permissions are given only for doctor-programmes:
     const doctorOnly = token.type === 'READ_DOCTOR'
-    for (const {key} of faculty.ownedProgrammes) {
+    for (const { key } of faculty.ownedProgrammes) {
       if (doctorOnly) {
         if (key[0] !== 'T') continue
       }
@@ -204,9 +204,7 @@ const claimFacultyToken = async (req, res) => {
     await token.increment('usageCounter')
     await token.save()
 
-    logger.info(
-      `User ${req.user.uid} claimed token : ${req.params.url}, ${token.programme}: ${token.type}`
-    )
+    logger.info(`User ${req.user.uid} claimed token : ${req.params.url}, ${token.programme}: ${token.type}`)
     return res.status(200).json(req.user)
   } catch (error) {
     logger.error(`Database error: ${error}`)

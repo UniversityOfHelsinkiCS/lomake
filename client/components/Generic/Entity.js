@@ -2,14 +2,14 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
-import SmileyColors from './SmileyColors'
-import Textarea from './Textarea'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
+import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
+import Textarea from './Textarea'
+import SmileyColors from './SmileyColors'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -24,7 +24,7 @@ const mapColorToImage = {
 }
 
 const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
@@ -37,10 +37,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
     return (
       <LastYearsAnswersAccordion>
         {previousAnswerColor && (
-          <img
-            style={{ width: '40px', height: 'auto' }}
-            src={mapColorToImage[previousAnswerColor]}
-          />
+          <img style={{ width: '40px', height: 'auto' }} src={mapColorToImage[previousAnswerColor]} />
         )}
         <ReactMarkdown children={previousAnswerText} />
       </LastYearsAnswersAccordion>
@@ -73,11 +70,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
 
-      <Textarea
-        id={id}
-        label={translations.textAreaLabel[lang]}
-        EntityLastYearsAccordion={EntityLastYearsAccordion}
-      />
+      <Textarea id={id} label={translations.textAreaLabel[lang]} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
 }

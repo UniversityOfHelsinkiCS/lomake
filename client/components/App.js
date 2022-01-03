@@ -14,7 +14,7 @@ import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 
 export default () => {
   const dispatch = useDispatch()
-  const currentUser = useSelector((state) => state.currentUser)
+  const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {

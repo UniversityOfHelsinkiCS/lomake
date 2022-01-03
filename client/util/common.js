@@ -6,7 +6,7 @@ import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 
 export const images = {
   toska_color: toscalogoColor,
-  toska_grayscale: toscalogoGrayscale
+  toska_grayscale: toscalogoGrayscale,
 }
 
 export const colors = {
@@ -42,8 +42,8 @@ export const sortedItems = (items, sorter, lang) => {
   if (!sorter) return items
   const sorted = items.sort((a, b) => {
     if (sorter == 'name') {
-      const aName = a.name[lang] ? a.name[lang] : a.name['en']
-      const bName = b.name[lang] ? b.name[lang] : b.name['en']
+      const aName = a.name[lang] ? a.name[lang] : a.name.en
+      const bName = b.name[lang] ? b.name[lang] : b.name.en
       return aName.localeCompare(bName)
     }
     if (sorter == 'userGroup') {
@@ -69,14 +69,14 @@ export const sortedItems = (items, sorter, lang) => {
 }
 
 export const modifiedQuestions = (questions, lang) => {
-  // Gives a localized list of questions with 
+  // Gives a localized list of questions with
   // text_id, color_id, label, section, title and question nr.
   let attributes = []
   let titleIndex = -1
 
-  questions.forEach((question) => {
-    titleIndex = titleIndex + 1
-    question.parts.forEach((part) => {
+  questions.forEach(question => {
+    titleIndex += 1
+    question.parts.forEach(part => {
       if (part.type !== 'TITLE') {
         attributes = [
           ...attributes,
@@ -86,10 +86,10 @@ export const modifiedQuestions = (questions, lang) => {
             description: part.description ? part.description[lang] : '',
             label: _.capitalize(part.label[lang]),
             title: question.title[lang],
-            titleIndex: titleIndex,
+            titleIndex,
             labelIndex: part.index,
             no_color: part.no_color,
-            extrainfo: part.extrainfo ? part.extrainfo[lang] : ''
+            extrainfo: part.extrainfo ? part.extrainfo[lang] : '',
           },
         ]
       }
@@ -113,42 +113,19 @@ const doctoralSchools = {
     'T920110',
     'T920111',
   ],
-  health: [
-    'T921101',
-    'T921102',
-    'T921103',
-    'T921104',
-    'T921105',
-    'T921106',
-    'T921107',
-    'T921108',
-  ],
-  environmental: [
-    'T922101',
-    'T922102',
-    'T922103',
-    'T922104',
-    'T922105',
-    'T922106',
-  ],
-  sciences: [
-    'T923101',
-    'T923102',
-    'T923103',
-    'T923104',
-    'T923105',
-    'T923106',
-    'T923107',
-  ],
+  health: ['T921101', 'T921102', 'T921103', 'T921104', 'T921105', 'T921106', 'T921107', 'T921108'],
+  environmental: ['T922101', 'T922102', 'T922103', 'T922104', 'T922105', 'T922106'],
+  sciences: ['T923101', 'T923102', 'T923103', 'T923104', 'T923105', 'T923106', 'T923107'],
 }
 
 export const filterByLevel = (usersProgrammes, level) => {
-  const programmes = usersProgrammes.filter((p) => {
+  const programmes = usersProgrammes.filter(p => {
     if (level === 'allProgrammes') {
       return true
-    } else if (level === 'international') {
+    }
+    if (level === 'international') {
       return p.international
-    } 
+    }
     return p.level === level
   })
 
@@ -159,36 +136,37 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
   if (!usersProgrammes) return { chosen: [], all: [] }
   const { faculty, level, companion, doctoralSchool } = filters
 
-  const filteredByName = usersProgrammes.filter((p) => {
+  const filteredByName = usersProgrammes.filter(p => {
     const prog = p.name[lang]
     return prog.toLowerCase().includes(debouncedFilter.toLowerCase())
   })
 
-  const filteredByLevel = filteredByName.filter((p) => {
+  const filteredByLevel = filteredByName.filter(p => {
     if (level === 'allProgrammes') {
       return true
-    } else if (level === 'international') {
+    }
+    if (level === 'international') {
       return p.international
     }
     return p.level === level
   })
 
-  const filteredByFaculty = filteredByLevel.filter((p) => {
+  const filteredByFaculty = filteredByLevel.filter(p => {
     if (faculty === 'allFaculties') return true
     if (companion) {
-      const companionFaculties = p.companionFaculties.map((f) => f.code)
+      const companionFaculties = p.companionFaculties.map(f => f.code)
       if (companionFaculties.includes(faculty)) return true
-      else return p.primaryFaculty.code === faculty
+      return p.primaryFaculty.code === faculty
     }
     return p.primaryFaculty.code === faculty
   })
 
-  const filteredBySchool = filteredByFaculty.filter((p) => {
+  const filteredBySchool = filteredByFaculty.filter(p => {
     if (doctoralSchool === 'allSchools') return true
     return doctoralSchools[doctoralSchool].includes(p.key)
   })
 
-  const filteredByPick = filteredBySchool.filter((p) => {
+  const filteredByPick = filteredBySchool.filter(p => {
     return picked.includes(p)
   })
 
@@ -197,12 +175,12 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
   if (!studyProgrammes) return ''
-  const programme = studyProgrammes.find((a) => a.key === programmeWithKey.programme)
+  const programme = studyProgrammes.find(a => a.key === programmeWithKey.programme)
   if (!programme) return ''
-  return programme.name[lang] ? programme.name[lang] : programme.name['en']
+  return programme.name[lang] ? programme.name[lang] : programme.name.en
 }
 
-export const cleanText = (string) => {
+export const cleanText = string => {
   if (!string) return
   if (string === '') return
   const cleanedText = string
@@ -211,7 +189,7 @@ export const cleanText = (string) => {
     .replace(/ *• */g, '\n')
     .replace(/· /g, '\n')
     .replace(/\*\*/g, '')
-    .replace(/  •/g, '\n')
+    .replace(/ {2}•/g, '\n')
     .replace(/ - /g, '\n')
 
   return cleanedText
@@ -220,14 +198,13 @@ export const cleanText = (string) => {
 export const getMeasuresAnswer = (data, rawId) => {
   const questionId = rawId.substring(0, rawId.length - 5)
   if (!data) return ''
-  if (!!data[`${questionId}_text`]) return data[`${id}_text`]
+  if (data[`${questionId}_text`]) return data[`${id}_text`]
 
-  if (!!data[`${questionId}_1_text`]) {
+  if (data[`${questionId}_1_text`]) {
     let measures = ''
     let i = 1
     while (i < 6) {
-      if (!!data[`${questionId}_${i}_text`])
-        measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      if (data[`${questionId}_${i}_text`]) measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
       i++
     }
 
@@ -237,8 +214,8 @@ export const getMeasuresAnswer = (data, rawId) => {
   return null
 }
 
-export const allYears = (oldAnswers) => {
-  let years = (oldAnswers && oldAnswers.years) ? [...oldAnswers.years] : []
+export const allYears = oldAnswers => {
+  let years = oldAnswers && oldAnswers.years ? [...oldAnswers.years] : []
   const currentYear = new Date().getFullYear()
   if (!years.includes(currentYear)) years = [...years, currentYear]
   return years
@@ -247,11 +224,11 @@ export const allYears = (oldAnswers) => {
 export const answersByYear = (year, tempAnswers, oldAnswers, deadline) => {
   // if viewing past years' answers
   if (year < new Date().getFullYear() && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter((a) => a.year === year)
+    return oldAnswers.data.filter(a => a.year === year)
   }
   // if the form is not open, and the cronjob has already moved everything to oldAnswers
   if (!deadline && oldAnswers && oldAnswers.data && oldAnswers.years.includes(year)) {
-    return oldAnswers.data.filter((a) => a.year === year)
+    return oldAnswers.data.filter(a => a.year === year)
   }
   // if there is a deadline (the form is open) and tempAnswers exist
   if (deadline && tempAnswers) {
@@ -259,51 +236,51 @@ export const answersByYear = (year, tempAnswers, oldAnswers, deadline) => {
   }
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
   if (!deadline && !tempAnswers && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter((a) => a.year === year)
+    return oldAnswers.data.filter(a => a.year === year)
   }
 
   return []
 }
 
-//https://stackoverflow.com/a/9083076
+// https://stackoverflow.com/a/9083076
 export function romanize(num) {
   if (isNaN(num)) return NaN
   if (num === 0) return 0
-  var digits = String(+num).split(''),
-    key = [
-      '',
-      'C',
-      'CC',
-      'CCC',
-      'CD',
-      'D',
-      'DC',
-      'DCC',
-      'DCCC',
-      'CM',
-      '',
-      'X',
-      'XX',
-      'XXX',
-      'XL',
-      'L',
-      'LX',
-      'LXX',
-      'LXXX',
-      'XC',
-      '',
-      'I',
-      'II',
-      'III',
-      'IV',
-      'V',
-      'VI',
-      'VII',
-      'VIII',
-      'IX'
-    ],
-    roman = '',
-    i = 3
+  const digits = String(+num).split('')
+  const key = [
+    '',
+    'C',
+    'CC',
+    'CCC',
+    'CD',
+    'D',
+    'DC',
+    'DCC',
+    'DCCC',
+    'CM',
+    '',
+    'X',
+    'XX',
+    'XXX',
+    'XL',
+    'L',
+    'LX',
+    'LXX',
+    'LXXX',
+    'XC',
+    '',
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+  ]
+  let roman = ''
+  let i = 3
   while (i--) roman = (key[+digits.pop() + i * 10] || '') + roman
   return Array(+digits.join('') + 1).join('M') + roman
 }

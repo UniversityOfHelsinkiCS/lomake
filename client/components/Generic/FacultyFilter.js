@@ -7,8 +7,8 @@ import './Filters.scss'
 
 const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
-  const faculties = useSelector((state) => state.faculties.data)
+  const lang = useSelector(state => state.language)
+  const faculties = useSelector(state => state.faculties.data)
   const faculty = useSelector(({ filters }) => filters.faculty)
 
   const handleChange = (e, { value }) => {
@@ -17,13 +17,15 @@ const FacultyFilter = ({ size, label }) => {
   }
 
   const getOptions = () => {
-    let facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: translations.allFaculties[lang]}]
-    return facultiesWithAll.concat(faculties.map((f) => ({
-      key: f.code,
-      value: f.code,
-      text: f.name[lang],
-    }))
-  )}
+    const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: translations.allFaculties[lang] }]
+    return facultiesWithAll.concat(
+      faculties.map(f => ({
+        key: f.code,
+        value: f.code,
+        text: f.name[lang],
+      }))
+    )
+  }
 
   return (
     <div className={`faculty-filter-${size}`}>

@@ -2,7 +2,7 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const { cypressUsers, testProgrammeName, defaultYears } = require('@util/common')
 
-const getFakeAnswers = (year) => {
+const getFakeAnswers = year => {
   const fields = [
     'feedback_text',
     'guidance_text',
@@ -171,7 +171,7 @@ const createTestProgramme = async () => {
 
     await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
 
-    const matluId = (await db.faculty.findOne({where: {code: "H50"}})).id
+    const matluId = (await db.faculty.findOne({ where: { code: 'H50' } })).id
 
     await db.studyprogramme.create({
       key: testProgrammeName,
@@ -182,7 +182,7 @@ const createTestProgramme = async () => {
       },
       locked: false,
       claimed: false,
-      primaryFacultyId: matluId
+      primaryFacultyId: matluId,
     })
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -272,7 +272,7 @@ const createAnswers = async (req, res) => {
         await db.answer.create({
           programme: prog.key,
           data: fakeanswers,
-          year: year,
+          year,
           submittedBy: 'cypressFakeTest',
         })
       }

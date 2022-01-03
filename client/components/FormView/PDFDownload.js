@@ -7,17 +7,16 @@ import { formViewTranslations as translations } from 'Utilities/translations'
 const PDFDownload = () => {
   const dispatch = useDispatch()
   const [takingPDF, setTakingPDF] = useState(false)
-  const lang = useSelector((state) => state.language)
-  const deadline = useSelector((state) => state.deadlines.nextDeadline)
-  const viewingOldAnswers = useSelector((state) => state.form.viewingOldAnswers)
-  const programme = useSelector((state) => state.studyProgrammes.singleProgram)
-  const user = useSelector((state) => state.currentUser.data)
+  const lang = useSelector(state => state.language)
+  const deadline = useSelector(state => state.deadlines.nextDeadline)
+  const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
+  const programme = useSelector(state => state.studyProgrammes.singleProgram)
+  const user = useSelector(state => state.currentUser.data)
 
-  const handleViewOnlyChange = (value) => dispatch(setViewOnly(value))
+  const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
-  const userHasWriteAccess =
-    user.admin || (user.access[programme.key] && user.access[programme.key].write)
-  const userCanEdit = (userHasWriteAccess && !programme.locked && deadline && !viewingOldAnswers) ? true : false
+  const userHasWriteAccess = user.admin || (user.access[programme.key] && user.access[programme.key].write)
+  const userCanEdit = !!(userHasWriteAccess && !programme.locked && deadline && !viewingOldAnswers)
 
   const openViewModeAndPrintPdf = () => {
     handleViewOnlyChange(true)

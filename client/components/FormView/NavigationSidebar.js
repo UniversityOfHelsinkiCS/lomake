@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { romanize, colors } from 'Utilities/common'
-import questions from '../../questions.json'
 import { formViewTranslations as translations } from 'Utilities/translations'
+import questions from '../../questions.json'
 
 const replaceTitle = {
-  'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET':
-    'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
+  'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
   'FAKULTETSÖVERSKRIDANDE PROGRAM': 'FAKULTET-\nSÖVERSKRIDANDE PROGRAM',
   'FRAMGÅNGAR OCH UTVECKLINGSÅTGÄRDER': 'FRAMGÅNGAR OCH UTVECKLING-\nSÅTGÄRDER',
   'PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET':
@@ -22,7 +21,7 @@ const iconMap = {
 }
 
 const NavigationSidebar = ({ programmeKey }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
 
@@ -48,15 +47,12 @@ const NavigationSidebar = ({ programmeKey }) => {
                 }}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link
-                    to={`/form/${programmeKey}#${romanNumeral}`}
-                    style={{ color: colors.black }}
-                  >
+                  <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
                     {romanNumeral} - {title}
                   </Link>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {section.parts.map((part) => {
+                  {section.parts.map(part => {
                     const { id, type, required, no_color } = part
                     if (type === 'ENTITY' || type === 'MEASURES') partNumber++
 

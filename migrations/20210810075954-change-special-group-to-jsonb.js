@@ -4,8 +4,8 @@ module.exports = {
       await queryInterface.removeColumn('users', 'special_group'),
       await queryInterface.addColumn('users', 'special_group', {
         type: Sequelize.JSONB,
-        defaultValue: {}
-      })
+        defaultValue: {},
+      }),
     ]
   },
 
@@ -14,7 +14,7 @@ module.exports = {
       await queryInterface.removeColumn('users', 'special_group'),
       await queryInterface.addColumn('users', 'special_group', {
         type: Sequelize.JSONB,
-      })
+      }),
     ]
-  }
+  },
 }

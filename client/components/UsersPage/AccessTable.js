@@ -5,38 +5,52 @@ import { Button, Icon, Label, Popup, Table } from 'semantic-ui-react'
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
-
-const AccessTable = ({ user, programmeCodesAndNames}) => {
+const AccessTable = ({ user, programmeCodesAndNames }) => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
-  const grantOwner = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { admin: true, read: true, write: true }}}
+  const grantOwner = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { admin: true, read: true, write: true } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
-  const removeOwner = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], admin: false }}}
+  const removeOwner = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { ...user.access[programme], admin: false } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
-  const grantEdit = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], write: true }}}
+  const grantEdit = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { ...user.access[programme], write: true } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
-  const removeEdit = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], write: false, admin: false }}}
+  const removeEdit = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { ...user.access[programme], write: false, admin: false } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
-  const grantView = (programme) => {
-    const updatedUser = { id: user.id, access: { ...user.access, [programme]: { ...user.access[programme], read: true }}}
+  const grantView = programme => {
+    const updatedUser = {
+      id: user.id,
+      access: { ...user.access, [programme]: { ...user.access[programme], read: true } },
+    }
     dispatch(editUserAction(updatedUser))
   }
 
-  const removeView = (programme) => {
-    let userObject = user
+  const removeView = programme => {
+    const userObject = user
     delete userObject.access[programme]
     const updatedUser = { id: user.id, access: userObject.access }
     dispatch(editUserAction(updatedUser))
@@ -60,24 +74,14 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
           position="top center"
         />
       )
-    return (
-      <Icon
-        data-cy={cyTag}
-        name="close"
-        className="users-red"
-        size="large"
-        onClick={() => grant()}
-      />
-    )
+    return <Icon data-cy={cyTag} name="close" className="users-red" size="large" onClick={() => grant()} />
   }
 
   return (
     <Table className="user-access-modal-segment">
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell width={5}>
-            {translations.programme[lang]}
-          </Table.HeaderCell>
+          <Table.HeaderCell width={5}>{translations.programme[lang]}</Table.HeaderCell>
           <Table.HeaderCell textAlign="center" width={3}>
             {translations.readAccess[lang]}
           </Table.HeaderCell>
@@ -91,17 +95,17 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {Object.entries(user.access).map(([programme, access] ) => (
+        {Object.entries(user.access).map(([programme, access]) => (
           <Table.Row key={`${programme}-${user.uid}`}>
             <Table.Cell>
-              {programmeCodesAndNames.get(programme)} {access.year && <Label size='tiny'>{access.year}</Label>}
+              {programmeCodesAndNames.get(programme)} {access.year && <Label size="tiny">{access.year}</Label>}
             </Table.Cell>
             <Table.Cell textAlign="center">
               {getSwitchableBadge({
                 cyTag: `read-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].read : false,
                 grant: () => grantView(programme),
-                remove: () => removeView(programme)
+                remove: () => removeView(programme),
               })}
             </Table.Cell>
             <Table.Cell textAlign="center">
@@ -109,7 +113,7 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
                 cyTag: `write-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].write : false,
                 grant: () => grantEdit(programme),
-                remove: () => removeEdit(programme)
+                remove: () => removeEdit(programme),
               })}
             </Table.Cell>
             <Table.Cell textAlign="center">
@@ -117,33 +121,31 @@ const AccessTable = ({ user, programmeCodesAndNames}) => {
                 cyTag: `admin-${programme}`,
                 currentAccess: user.access[programme] ? user.access[programme].admin : false,
                 grant: () => grantOwner(programme),
-                remove: () => removeOwner(programme)
+                remove: () => removeOwner(programme),
               })}
             </Table.Cell>
             <Table.Cell>
-            <Popup
-              trigger={
-                <Button data-cy={`remove-access-${programme}`}>
-                  {translations.removeAccessToProgramme[lang]}
-                </Button>
-              }
-              content={
-                <Button
-                  data-cy={`remove-access-confirmation-${programme}`}
-                  color="red"
-                  content={translations.removeAllAccess[lang]}
-                  onClick={() => removeView(programme)}
-                />
-              }
-              on="click"
-              position="top center"
-            />
+              <Popup
+                trigger={
+                  <Button data-cy={`remove-access-${programme}`}>{translations.removeAccessToProgramme[lang]}</Button>
+                }
+                content={
+                  <Button
+                    data-cy={`remove-access-confirmation-${programme}`}
+                    color="red"
+                    content={translations.removeAllAccess[lang]}
+                    onClick={() => removeView(programme)}
+                  />
+                }
+                on="click"
+                position="top center"
+              />
             </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
     </Table>
-  )  
+  )
 }
 
 export default AccessTable

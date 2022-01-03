@@ -1,7 +1,7 @@
 const { inProduction, requiredGroupForWideReadAccess } = require('@util/common')
 const logger = require('@util/logger')
 
-const parseHyGroups = (hyGroups) => {
+const parseHyGroups = hyGroups => {
   let parsedHyGroups = []
   if (!(hyGroups === undefined || hyGroups === '')) {
     parsedHyGroups = hyGroups.split(';')
@@ -9,12 +9,12 @@ const parseHyGroups = (hyGroups) => {
   return parsedHyGroups
 }
 
-const hasRequiredGroupForWideReadAccess = (hyGroups) => {
-  return hyGroups.some((e) => e === requiredGroupForWideReadAccess)
+const hasRequiredGroupForWideReadAccess = hyGroups => {
+  return hyGroups.some(e => e === requiredGroupForWideReadAccess)
 }
 
-const shouldHaveWideReadAccess = (headers) => {
-  const hyGroups = parseHyGroups(headers['hygroupcn'])
+const shouldHaveWideReadAccess = headers => {
+  const hyGroups = parseHyGroups(headers.hygroupcn)
   return hasRequiredGroupForWideReadAccess(hyGroups)
 }
 
@@ -22,7 +22,7 @@ const IAMmiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) return next()
   if (!inProduction && req.path.includes('/cypress/')) return next()
 
-  const user = req.user
+  const { user } = req
 
   const userShouldHaveWideReadAccess = shouldHaveWideReadAccess(req.headers)
 

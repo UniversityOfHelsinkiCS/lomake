@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('backup_answers', {
@@ -24,5 +22,5 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }),
-  down: (queryInterface) => queryInterface.dropTable('backup_answers'),
+  down: queryInterface => queryInterface.dropTable('backup_answers'),
 }

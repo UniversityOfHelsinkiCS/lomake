@@ -7,7 +7,7 @@ import './Filters.scss'
 
 const CompanionFilter = () => {
   const dispatch = useDispatch()
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const companion = useSelector(({ filters }) => filters.companion)
 
   const handleChange = () => {

@@ -3,16 +3,15 @@ import { useSelector } from 'react-redux'
 import { Button, Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
-import AccessModal from './AccessModal'
 import User from 'Components/UsersPage/User'
 import NewUserForm from 'Components/UsersPage/NewUserForm'
 import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
-import { isSuperAdmin } from '../../../config/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import { isSuperAdmin } from '../../../config/common'
+import AccessModal from './AccessModal'
 import './UsersPage.scss'
-
 
 export default () => {
   const [sorter, setSorter] = useState('')
@@ -26,10 +25,10 @@ export default () => {
   const debouncedName = useDebounce(nameFilter, 200)
   const debouncedProgramme = useDebounce(programmeFilter, 200)
 
-  const lang = useSelector((state) => state.language)
-  const users = useSelector((state) => state.users)
+  const lang = useSelector(state => state.language)
+  const users = useSelector(state => state.users)
   const user = useSelector(({ currentUser }) => currentUser.data)
-  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const history = useHistory()
 
   if (!user.admin) {
@@ -40,24 +39,24 @@ export default () => {
 
   if (!users) return null
 
-  let sortedUsersToShow = sortedItems(users.data, sorter)
+  const sortedUsersToShow = sortedItems(users.data, sorter)
 
   if (reverse) sortedUsersToShow.reverse()
 
   const filteredUsers = () => {
     if (!nameFilter && !accessFilter) return sortedUsersToShow
 
-    const byName = sortedUsersToShow.filter((user) => {
+    const byName = sortedUsersToShow.filter(user => {
       if (!nameFilter) return true
       const firstname = user.firstname.toLowerCase()
       const lastname = user.lastname.toLowerCase()
-      
+
       return firstname.includes(debouncedName.toLowerCase()) || lastname.includes(debouncedName.toLowerCase())
     })
 
-    const byAccess = byName.filter((user) =>
+    const byAccess = byName.filter(user =>
       Object.keys(user.access)
-        .map((p) => programmeCodesAndNames.get(p))
+        .map(p => programmeCodesAndNames.get(p))
         .join(', ')
         .toString()
         .toLocaleLowerCase()
@@ -66,12 +65,11 @@ export default () => {
     return byAccess
   }
 
-  const filteredProgrammes = usersProgrammes.filter((p) => {
+  const filteredProgrammes = usersProgrammes.filter(p => {
     if (programmeFilter === '') return false
     const prog = p.name[lang]
     return prog.toLowerCase().includes(debouncedProgramme.toLowerCase())
   })
-
 
   const handleSearch = ({ target }) => {
     const { value } = target
@@ -91,20 +89,15 @@ export default () => {
       : undefined
 
     return (
-      <Table.HeaderCell
-        onClick={sortHandler}
-        style={sortable ? { cursor: 'pointer' } : {} }
-        width={width}
-      >
+      <Table.HeaderCell onClick={sortHandler} style={sortable ? { cursor: 'pointer' } : {}} width={width}>
         {name} {sortable && <Icon name="sort" />}
       </Table.HeaderCell>
     )
   }
 
-
-  const mapProgrammes = (programmes) => {
-    let programmeMap = new Map()
-    programmes.forEach((p) => programmeMap.set(p.key, p.name[lang]))
+  const mapProgrammes = programmes => {
+    const programmeMap = new Map()
+    programmes.forEach(p => programmeMap.set(p.key, p.name[lang]))
     return programmeMap
   }
 
@@ -112,17 +105,15 @@ export default () => {
 
   return (
     <>
-      {showNewUserForm && 
+      {showNewUserForm && (
         <CustomModal
           closeModal={() => setShowNewUserForm(false)}
-          children={
-            <NewUserForm closeModal={() => setShowNewUserForm(false)}/>
-          }
+          children={<NewUserForm closeModal={() => setShowNewUserForm(false)} />}
         />
-      }
+      )}
       {editUserFormData && (
         <AccessModal
-          user={sortedUsersToShow.find((u) => u.id === editUserFormData.id)}
+          user={sortedUsersToShow.find(u => u.id === editUserFormData.id)}
           setModalData={setEditUserFormData}
           handleSearch={handleSearch}
           programmeFilter={programmeFilter}
@@ -161,17 +152,18 @@ export default () => {
       <Table celled compact stackable>
         <Table.Header>
           <Table.Row>
-            {getCustomHeader({ name: translations.name[lang], width: 2, field: "lastname" })}
-            {getCustomHeader({ name: translations.userId[lang], width: 1, field: "uid" })}
-            {getCustomHeader({ name: translations.access[lang], width: 6, field: "access", sortable: true })}
-            {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: "userGroup" })}
-            {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: "lastLogin", sortable: true })}
-            {getCustomHeader({ name: translations.editUser[lang], width: 1, field: "editUser", sortable: false })}
-            {isSuperAdmin(user.uid) && getCustomHeader({ name: "Hijack", width: 1, field: "deleteUser", sortable: false })}
+            {getCustomHeader({ name: translations.name[lang], width: 2, field: 'lastname' })}
+            {getCustomHeader({ name: translations.userId[lang], width: 1, field: 'uid' })}
+            {getCustomHeader({ name: translations.access[lang], width: 6, field: 'access', sortable: true })}
+            {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: 'userGroup' })}
+            {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'lastLogin', sortable: true })}
+            {getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
+            {isSuperAdmin(user.uid) &&
+              getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {filteredUsers().map((u) => (
+          {filteredUsers().map(u => (
             <User
               data-cy={`user-${u.uid}`}
               lang={lang}

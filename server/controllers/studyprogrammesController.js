@@ -1,7 +1,7 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { seed } = require('../scripts/seed')
 const moment = require('moment')
+const { seed } = require('../scripts/seed')
 
 const getAll = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
       attributes: {
         exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
       },
-      include: ["primaryFaculty","companionFaculties"],
+      include: ['primaryFaculty', 'companionFaculties'],
     })
     res.status(200).json(data)
   } catch (error) {
@@ -25,21 +25,20 @@ const getUsersProgrammes = async (req, res) => {
         attributes: {
           exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
         },
-        include: ["primaryFaculty","companionFaculties"],
-      })
-      return res.status(200).json(data)
-    } else {
-      const data = await db.studyprogramme.findAll({
-        where: {
-          key: Object.keys(req.user.access)
-        },
-        attributes: {
-          exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
-        },
-        include: ["primaryFaculty","companionFaculties"],
+        include: ['primaryFaculty', 'companionFaculties'],
       })
       return res.status(200).json(data)
     }
+    const data = await db.studyprogramme.findAll({
+      where: {
+        key: Object.keys(req.user.access),
+      },
+      attributes: {
+        exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
+      },
+      include: ['primaryFaculty', 'companionFaculties'],
+    })
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })
@@ -49,11 +48,11 @@ const getUsersProgrammes = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const { programme } = req.params
-    const programEntity = await db.studyprogramme.findOne({ 
-      where: { 
-        key: programme 
+    const programEntity = await db.studyprogramme.findOne({
+      where: {
+        key: programme,
       },
-      include: ["primaryFaculty","companionFaculties"],
+      include: ['primaryFaculty', 'companionFaculties'],
     })
     res.status(200).json(programEntity)
   } catch (error) {
@@ -69,7 +68,8 @@ const updateAll = async (req, res) => {
       status: `
         Studyprogrammes successfully updated at: ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}.
         Refresh the page to see the results.
-      `})
+      `,
+    })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error })
@@ -114,7 +114,7 @@ const getOwners = async (req, res) => {
       })
       results = {
         ...results,
-        [p.key]: owners.map((o) => o.email),
+        [p.key]: owners.map(o => o.email),
       }
     }
     res.status(200).json(results)

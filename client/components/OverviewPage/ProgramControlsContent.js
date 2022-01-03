@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import ProgramControlsLinks from './ProgramControlsLinks'
-import ProgramControlsUsers from './ProgramControlsUsers'
 import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
 import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
+import ProgramControlsLinks from './ProgramControlsLinks'
+import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
-
 
 const OwnerAccordionContent = ({ programKey }) => {
   const dispatch = useDispatch()

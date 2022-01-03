@@ -8,7 +8,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
   const [colors, setColors] = useState(['all', 'all', 'all'])
   const [buttons, setButtons] = useState([0, 0, 0])
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
@@ -23,9 +23,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
 
   const ButtonPopup = ({ color, index, yearsIndex }) => (
     <Popup
-      content={`${translations.choose[lang]} ${
-        translations[`${color}Ones`][lang]
-      } ${translations.answers[lang]}`}
+      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
       trigger={
         <button
           key={index}
@@ -37,7 +35,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
           <span className={`answer-circle-big-${color}`} />
         </button>
       }
-    ></Popup>
+    />
   )
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
@@ -64,7 +62,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
               </small>
             </span>
             <p className="question-label">
-              {question.labelIndex}. {(question.label).toUpperCase()}
+              {question.labelIndex}. {question.label.toUpperCase()}
             </p>
           </Grid.Column>
         </Grid>
@@ -72,49 +70,42 @@ const Question = ({ answers, question, handleClick, showing }) => {
       <Accordion.Content active={showing}>
         <Grid>
           <Grid.Row columns={answers.length}>
-            {answers.map((year, yearsIndex) =>
-              multipleYears.includes(year.year) && (
-              <Grid.Column
-                key={yearsIndex} 
-                className="comparison-question-content">
-                <div className="color-buttons-sticky sticky-header">
-                  <label>{year.year}</label>
-                  {buttonColors.map((color, index) => (
-                    <ButtonPopup
-                      key={index}
-                      color={color}
-                      index={index}
-                      yearsIndex={yearsIndex}
-                    />
-                  ))}
-                </div>
-                {year.answers.length > 0 ?
-                  year.answers.map((programme, index) => {
-                    if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
-                      return (
-                        <div key={index}>
-                          <label className="answer-title">
-                            {programme.name} <span className={`answer-circle-${programme.color}`} />
-                          </label>
-                          <ul
-                            className="answer-list"
-                            data-cy={`compare-question-content-${question.id}`}
-                          >
-                            {programme.answer &&
-                              programme.answer.split('\n').map((row, index) => (
-                                <li key={index} className="answer-row">
-                                  {row}
-                                </li>
-                              ))}
-                          </ul>
-                        </div>
-                      )
-                    }
-                  })
-                  : <h4>{translations.noData[lang]}</h4>
-                }
-              </Grid.Column>
-            ))}
+            {answers.map(
+              (year, yearsIndex) =>
+                multipleYears.includes(year.year) && (
+                  <Grid.Column key={yearsIndex} className="comparison-question-content">
+                    <div className="color-buttons-sticky sticky-header">
+                      <label>{year.year}</label>
+                      {buttonColors.map((color, index) => (
+                        <ButtonPopup key={index} color={color} index={index} yearsIndex={yearsIndex} />
+                      ))}
+                    </div>
+                    {year.answers.length > 0 ? (
+                      year.answers.map((programme, index) => {
+                        if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
+                          return (
+                            <div key={index}>
+                              <label className="answer-title">
+                                {programme.name} <span className={`answer-circle-${programme.color}`} />
+                              </label>
+                              <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
+                                {programme.answer &&
+                                  programme.answer.split('\n').map((row, index) => (
+                                    <li key={index} className="answer-row">
+                                      {row}
+                                    </li>
+                                  ))}
+                              </ul>
+                            </div>
+                          )
+                        }
+                      })
+                    ) : (
+                      <h4>{translations.noData[lang]}</h4>
+                    )}
+                  </Grid.Column>
+                )
+            )}
           </Grid.Row>
         </Grid>
       </Accordion.Content>

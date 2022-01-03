@@ -6,9 +6,7 @@ const logger = require('@util/logger')
  */
 const developmentRequestLogger = (req, res, next) => {
   const loggedInAs = req.headers['x-admin-logged-in-as']
-  const userString = loggedInAs
-    ? `User: ${req.headers.uid} mocking as ${loggedInAs}`
-    : `User: ${req.headers.uid}`
+  const userString = loggedInAs ? `User: ${req.headers.uid} mocking as ${loggedInAs}` : `User: ${req.headers.uid}`
 
   logger.info(`Method: ${req.method}`)
   logger.info(`Path: ${req.path}`)
@@ -32,7 +30,7 @@ const productionRequestLogger = morgan((tokens, req, res) => {
     responseTime: tokens['response-time'](req, res),
   }
 
-  if (mockingAs) final['mockingAs'] = mockingAs
+  if (mockingAs) final.mockingAs = mockingAs
   console.log(JSON.stringify(final))
 })
 

@@ -4,18 +4,11 @@ import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
-export default ({
-  question,
-  answers,
-  showEmpty,
-  programmeName,
-  programmeFaculty,
-  columns
-}) => {
-  const lang = useSelector((state) => state.language)
-  const colorsTotal = (question) => {
+export default ({ question, answers, showEmpty, programmeName, programmeFaculty, columns }) => {
+  const lang = useSelector(state => state.language)
+  const colorsTotal = question => {
     if (!question || !answers) return null
-    let colors = {
+    const colors = {
       green: 0,
       yellow: 0,
       red: 0,
@@ -23,7 +16,7 @@ export default ({
       withoutEmpty: 0,
       total: 0,
     }
-    answers.forEach((a) => {
+    answers.forEach(a => {
       colors[a.color] = colors[a.color] + 1
     })
     colors.withoutEmpty = colors.red + colors.green + colors.yellow
@@ -59,7 +52,7 @@ export default ({
     <div className={`comparison-color-chart-area-${columns}`}>
       <div className="comparison-color-pie-header">
         <p>
-          {question.labelIndex}. {(question.label).toUpperCase()}
+          {question.labelIndex}. {question.label.toUpperCase()}
         </p>
         <p>
           <b>{programmeName}</b>
@@ -79,9 +72,7 @@ export default ({
           data={data(question)}
           lengthAngle={360}
           lineWidth={100}
-          label={({ dataEntry }) =>
-            dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null
-          }
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
           paddingAngle={0}
           radius={50}
           startAngle={270}

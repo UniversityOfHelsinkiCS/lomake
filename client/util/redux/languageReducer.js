@@ -1,4 +1,4 @@
-export const setLanguage = (code) => {
+export const setLanguage = code => {
   window.localStorage.setItem('language_preference', code)
   return { type: 'SET_LANGUAGE', code }
 }

@@ -2,7 +2,7 @@
  * Actions and reducers are in the same file for readability
  */
 
-export const updateCurrentEditors = (value) => ({
+export const updateCurrentEditors = value => ({
   type: 'UPDATE_CURRENT_EDITORS',
   value,
 })

@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import { Button, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  createOrUpdateDeadline,
-  deleteDeadline,
-  getDeadline,
-} from 'Utilities/redux/deadlineReducer'
-import { registerLocale } from 'react-datepicker'
+import { createOrUpdateDeadline, deleteDeadline, getDeadline } from 'Utilities/redux/deadlineReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import { deleteDraftYear, getDraftYear, setDraftYear } from 'Utilities/redux/draftYearReducer'
 import { colors } from 'Utilities/common'
 
-
 const DeadlineSetting = () => {
   const [newDate, setNewDate] = useState(null)
   const [newDraftYear, setNewDraftYear] = useState(null)
   const [yearOptions, setYearOptions] = useState([])
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -35,7 +29,7 @@ const DeadlineSetting = () => {
     dispatch(getDeadline())
     dispatch(getDraftYear())
     const years = getYearsUserHasAccessToAction(currentUser)
-    const options = years.map((y) => {
+    const options = years.map(y => {
       return {
         key: y,
         value: y,
@@ -46,9 +40,7 @@ const DeadlineSetting = () => {
   }, [currentUser])
 
   const handleDeadlineSave = () => {
-    const acualDate = new Date(
-      Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
-    )
+    const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
     dispatch(createOrUpdateDeadline(acualDate.toISOString()))
     setNewDate(null)
     setNewDraftYear(null)
@@ -65,77 +57,78 @@ const DeadlineSetting = () => {
 
   const existingDeadlines = []
 
-  const formatDate = (date) => {
+  const formatDate = date => {
     const temp = new Date(date)
     return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
   }
 
   return (
-      <Segment>
-        <div style={{ margin: '1em 0em 3em 0em'}}>
-          <Header as="h3">
-            {translations.selectNewDeadline[lang]}
-          </Header>
-          <DatePicker
-            dateFormat="dd.MM.yyyy"
-            excludeDates={existingDeadlines.map((dl) => new Date(dl.date))}
-            placeholderText={translations['selectNewDeadline'][lang]}
-            minDate={new Date()}
-            selected={newDate}
-            onChange={setNewDate}
-            locale={lang}
-          />
-          <Button
-            data-cy="updateDeadline"
-            primary
-            compact
-            size="mini"
-            disabled={!newDate}
-            onClick={handleDeadlineSave}
-          >
-            {translations['updateDeadline'][lang]}
+    <Segment>
+      <div style={{ margin: '1em 0em 3em 0em' }}>
+        <Header as="h3">{translations.selectNewDeadline[lang]}</Header>
+        <DatePicker
+          dateFormat="dd.MM.yyyy"
+          excludeDates={existingDeadlines.map(dl => new Date(dl.date))}
+          placeholderText={translations.selectNewDeadline[lang]}
+          minDate={new Date()}
+          selected={newDate}
+          onChange={setNewDate}
+          locale={lang}
+        />
+        <Button data-cy="updateDeadline" primary compact size="mini" disabled={!newDate} onClick={handleDeadlineSave}>
+          {translations.updateDeadline[lang]}
+        </Button>
+        {nextDeadline && (
+          <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
+            {translations.deleteThisDeadline[lang]}
           </Button>
-          {nextDeadline && (
-            <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
-              {translations['deleteThisDeadline'][lang]}
-            </Button>
+        )}
+        <Header as="h4">
+          {translations.nextDeadline[lang]}
+          {nextDeadline ? (
+            <span style={{ color: colors.blue }} data-cy="nextDeadline">
+              {formatDate(nextDeadline.date)}
+            </span>
+          ) : (
+            <span style={{ color: colors.red }} data-cy="noNextDeadline">
+              {translations.noDeadlineSet[lang]}
+            </span>
           )}
-          <Header as="h4">{translations['nextDeadline'][lang]}
-            {nextDeadline
-              ? <span style={{ color: colors.blue }} data-cy="nextDeadline">{formatDate(nextDeadline.date)}</span>
-              : <span style={{ color: colors.red }} data-cy="noNextDeadline">{translations['noDeadlineSet'][lang]}</span>
-            }        
-          </Header>
-        </div>
-        <div style={{ margin: '1em 0em' }}>
-          <Header as="h3">
-            {translations.selectDraftYear[lang]}
-          </Header>
-          <Select
-            placeholder='Select year'
-            options={yearOptions}
-            value={newDraftYear}
-            disabled={!nextDeadline}
-            onChange={(e, { value }) => setNewDraftYear(value)}
-          />
-          <Button
-            data-cy="updateDraftYear"
-            primary
-            compact
-            size="mini"
-            disabled={!newDraftYear}
-            onClick={() => dispatch(setDraftYear(newDraftYear))}
-          >
-            {translations.updateDraftYear[lang]}
-          </Button>
-          <Header as="h4">{translations.answersSavedForYear[lang]} 
-          {draftYear && nextDeadline
-            ? <span style={{ color: colors.blue }} data-cy="draftYear">{draftYear}</span>
-            : <span style={{ color: colors.red }} data-cy="noDraftYear">{translations.noDraftYear[lang]}</span>
-          }
-          </Header>
-        </div>
-      </Segment>
+        </Header>
+      </div>
+      <div style={{ margin: '1em 0em' }}>
+        <Header as="h3">{translations.selectDraftYear[lang]}</Header>
+        <Select
+          placeholder="Select year"
+          options={yearOptions}
+          value={newDraftYear}
+          disabled={!nextDeadline}
+          onChange={(e, { value }) => setNewDraftYear(value)}
+        />
+        <Button
+          data-cy="updateDraftYear"
+          primary
+          compact
+          size="mini"
+          disabled={!newDraftYear}
+          onClick={() => dispatch(setDraftYear(newDraftYear))}
+        >
+          {translations.updateDraftYear[lang]}
+        </Button>
+        <Header as="h4">
+          {translations.answersSavedForYear[lang]}
+          {draftYear && nextDeadline ? (
+            <span style={{ color: colors.blue }} data-cy="draftYear">
+              {draftYear}
+            </span>
+          ) : (
+            <span style={{ color: colors.red }} data-cy="noDraftYear">
+              {translations.noDraftYear[lang]}
+            </span>
+          )}
+        </Header>
+      </div>
+    </Segment>
   )
 }
 

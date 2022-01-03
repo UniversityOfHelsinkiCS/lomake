@@ -3,7 +3,7 @@ const db = require('@models/index')
 const { inProduction } = require('@util/common')
 
 // Some people have been pre-authorized:
-const shouldBeAdmin = (uid) => {
+const shouldBeAdmin = uid => {
   const eligibleAdmins = ['lindblom', 'suniinis']
   return (!inProduction && uid === 'admin') || eligibleAdmins.includes(uid)
 }

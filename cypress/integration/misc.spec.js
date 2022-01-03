@@ -32,12 +32,8 @@ describe('Misc tests', function () {
 
   it('Access keys are pre-generated', function () {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
-    cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
-      .invoke('val')
-      .should('contain', '/access/')
-    cy.get(`[data-cy=${testProgrammeName}-editlink] > input`)
-      .invoke('val')
-      .should('contain', '/access/')
+    cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`).invoke('val').should('contain', '/access/')
+    cy.get(`[data-cy=${testProgrammeName}-editlink] > input`).invoke('val').should('contain', '/access/')
   })
 
   /**
@@ -49,7 +45,7 @@ describe('Misc tests', function () {
 
     cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
       .invoke('val')
-      .then((text) => {
+      .then(text => {
         const initialLink = text
         cy.route('POST', `/api/programmes/${testProgrammeName}/tokens/*`).as('reset')
         cy.get(`[data-cy=${testProgrammeName}-viewlink-reset]`).click()
@@ -58,7 +54,7 @@ describe('Misc tests', function () {
 
         cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`)
           .invoke('val')
-          .then((text) => {
+          .then(text => {
             const newLink = text
             expect(initialLink).to.not.equal(newLink)
           })

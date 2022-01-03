@@ -2,7 +2,7 @@
 /// <reference types="cypress" />
 
 import { removeLoggedInUsersGroups } from '../../client/util/mockHeaders'
-import { defaultYears } from '../../config/common'
+import { defaultYears } from '../../config/common'
 
 const user = 'cypressReadGroupMember'
 

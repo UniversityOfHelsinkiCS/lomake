@@ -5,7 +5,7 @@ const createOrUpdate = async (req, res) => {
   try {
     // Unlock all programmes
     const programmes = await db.studyprogramme.findAll({})
-    for (let programme of programmes) {
+    for (const programme of programmes) {
       programme.locked = false
       await programme.save()
     }
@@ -38,7 +38,7 @@ const remove = async (req, res) => {
 
     // Then lock all programmes.
     const programmes = await db.studyprogramme.findAll({})
-    programmes.forEach(async (programme) => {
+    programmes.forEach(async programme => {
       programme.locked = true
       await programme.save()
     })

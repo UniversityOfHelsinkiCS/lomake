@@ -5,25 +5,25 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       programme: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       data: {
-        type: Sequelize.JSONB
+        type: Sequelize.JSONB,
       },
       year: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     }),
-  down: (queryInterface) => queryInterface.dropTable('answers')
+  down: queryInterface => queryInterface.dropTable('answers'),
 }

@@ -17,10 +17,7 @@ describe("Previous year's answers", function () {
     cy.get('[data-cy=yearSelector]').click()
 
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
-    cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').should(
-      'have.class',
-      'square-green'
-    )
+    cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').should('have.class', 'square-green')
 
     cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)

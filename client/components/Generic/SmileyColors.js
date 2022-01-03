@@ -13,7 +13,7 @@ const SmileyColors = ({ id }) => {
   const value = useSelector(({ form }) => form.data[fieldName])
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
-  const getClassName = (color) => {
+  const getClassName = color => {
     if (value === color) return `emoji${viewOnly ? '' : ' emoji-button'} active-emoji`
 
     return `emoji${viewOnly ? '' : ' emoji-button'}`

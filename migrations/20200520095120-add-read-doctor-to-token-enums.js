@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.sequelize.query(`
@@ -9,6 +7,5 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     // https://stackoverflow.com/questions/25811017/how-to-delete-an-enum-type-value-in-postgres
-    return
   },
 }

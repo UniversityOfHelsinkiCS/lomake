@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn('studyprogrammes', 'primary_faculty_id', {

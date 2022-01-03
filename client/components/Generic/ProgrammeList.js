@@ -5,10 +5,10 @@ import { sortedItems } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const faculty = useSelector(({ filters }) => filters.faculty)
 
-  const addToList = (programme) => {
+  const addToList = programme => {
     if (!picked.includes(programme)) {
       setPicked(() => [...picked, programme])
     }
@@ -32,7 +32,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
         {programmes.all.length > 0 ? (
           <>
             {sortedItems(programmes.all, 'name', lang).map(
-              (p) =>
+              p =>
                 programmes.chosen.includes(p) && (
                   <p
                     className="report-list-included"
@@ -49,7 +49,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               {translations.chooseMore[lang]}
             </p>
             {sortedItems(programmes.all, 'name', lang).map(
-              (p) =>
+              p =>
                 !programmes.chosen.includes(p) && (
                   <p
                     className="report-list-excluded"

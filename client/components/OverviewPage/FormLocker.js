@@ -4,12 +4,11 @@ import { Button, Icon, Popup } from 'semantic-ui-react'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-
 export default function FormLocker({ programme }) {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
-  const programmeDetails = useSelector((state) => state.studyProgrammes.singleProgram)
-  const programmeDetailsPending = useSelector((state) => state.studyProgrammes.singleProgramPending)
+  const programmeDetails = useSelector(state => state.studyProgrammes.singleProgram)
+  const programmeDetailsPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
 
   const [loadObj, setLoadObj] = useState({
@@ -53,9 +52,7 @@ export default function FormLocker({ programme }) {
             labelPosition="left"
           >
             <Icon name={locked ? 'lock' : 'lock open'} />
-            {locked
-              ? translations.lockedTriggerButtonText[lang]
-              : translations.unlockedTriggerButtonText[lang]}
+            {locked ? translations.lockedTriggerButtonText[lang] : translations.unlockedTriggerButtonText[lang]}
           </Button>
         }
         content={
@@ -63,9 +60,7 @@ export default function FormLocker({ programme }) {
             data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
             color="red"
             secondary
-            content={
-              locked ? translations.unLockForm[lang] : translations.lockForm[lang]
-            }
+            content={locked ? translations.unLockForm[lang] : translations.lockForm[lang]}
             onClick={handleLock}
           />
         }

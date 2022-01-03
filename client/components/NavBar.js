@@ -8,8 +8,8 @@ import { setLanguage } from 'Utilities/redux/languageReducer'
 
 export default () => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.currentUser.data)
-  const lang = useSelector((state) => state.language)
+  const user = useSelector(state => state.currentUser.data)
+  const lang = useSelector(state => state.language)
 
   const translations = {
     logOut: {
@@ -31,7 +31,7 @@ export default () => {
       en: 'About',
       fi: 'About',
       se: 'About',
-    }
+    },
   }
 
   const warning =
@@ -40,7 +40,7 @@ export default () => {
     'In order to get the best experience, for the time being, please consider using the English or Finnish versions instead.\n\n ' +
     'We apologize for the inconvenience!'
 
-  const setLanguageCode = (code) => dispatch(setLanguage(code))
+  const setLanguageCode = code => dispatch(setLanguage(code))
 
   useEffect(() => {
     if (lang === 'se') {
@@ -69,7 +69,7 @@ export default () => {
 
   const GoToAdminPageButton = () => {
     return (
-      <Menu.Item data-cy="nav-admin" as={Link} to={'/admin'} name="adminControls">
+      <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
         {translations.adminPage[lang]}
       </Menu.Item>
     )
@@ -96,25 +96,13 @@ export default () => {
           simple
         >
           <Dropdown.Menu>
-            <Dropdown.Item
-              data-cy="navBar-localeOption-fi"
-              value="fi"
-              onClick={() => setLanguageCode('fi')}
-            >
+            <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
               Suomi
             </Dropdown.Item>
-            <Dropdown.Item
-              data-cy="navBar-localeOption-se"
-              value="se"
-              onClick={() => setLanguageCode('se')}
-            >
+            <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={() => setLanguageCode('se')}>
               Svenska
             </Dropdown.Item>
-            <Dropdown.Item
-              data-cy="navBar-localeOption-en"
-              value="en"
-              onClick={() => setLanguageCode('en')}
-            >
+            <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={() => setLanguageCode('en')}>
               English
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -122,11 +110,11 @@ export default () => {
       </Menu.Menu>
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
-        <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)'}} as={Link} to="/about">
-          {translations['about'][lang]}
+        <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
+          {translations.about[lang]}
         </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`${translations['logOut'][lang]} (${user.uid})`}
+          {`${translations.logOut[lang]} (${user.uid})`}
         </Menu.Item>
       </Menu.Menu>
     </Menu>

@@ -2,15 +2,15 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const fs = require('fs')
 
-const mapProgrammes = (programmes) => {
-  let programmeMap = new Map()
-  programmes.forEach((p) => programmeMap.set(p.key, p.name["fi"]))
+const mapProgrammes = programmes => {
+  const programmeMap = new Map()
+  programmes.forEach(p => programmeMap.set(p.key, p.name.fi))
   return programmeMap
 }
 
-const formatRights = (programme) => {
+const formatRights = programme => {
   return Object.keys(programme)
-    .filter((e) => programme[e])
+    .filter(e => programme[e])
     .join('&')
 }
 
@@ -22,19 +22,19 @@ const getUserList = async () => {
     const programmes = await db.studyprogramme.findAll({})
     const programmeKeyMap = mapProgrammes(programmes)
 
-
-    let data = ""
-    users.forEach(async (user) => {
+    let data = ''
+    users.forEach(async user => {
       const { firstname, lastname, access } = user
 
       const programmeKeys = access ? Object.keys(access) : null
 
       if (programmeKeys) {
-        programmeKeys.forEach((key) => {
-          data = data.concat(`${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`)          
+        programmeKeys.forEach(key => {
+          data = data.concat(
+            `${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`
+          )
         })
       }
-
     })
     logger.info(`${users.length} users listed`)
 

@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import WrittenAnswers from './WrittenAnswers'
-import ColorAnswers from './ColorAnswers'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -24,6 +22,8 @@ import {
 } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
+import ColorAnswers from './ColorAnswers'
+import WrittenAnswers from './WrittenAnswers'
 import rawQuestions from '../../questions'
 import './ReportPage.scss'
 
@@ -35,19 +35,19 @@ export default () => {
   const [showing, setShowing] = useState(-1)
   const [activeTab, setActiveTab] = useState(0)
   const debouncedFilter = useDebounce(filter, 200)
-  const lang = useSelector((state) => state.language)
-  const answers = useSelector((state) => state.tempAnswers)
-  const oldAnswers = useSelector((state) => state.oldAnswers)
-  const filters = useSelector((state) => state.filters)
+  const lang = useSelector(state => state.language)
+  const answers = useSelector(state => state.tempAnswers)
+  const oldAnswers = useSelector(state => state.oldAnswers)
+  const filters = useSelector(state => state.filters)
   const { year, faculty, level } = filters
-  const usersProgrammes = useSelector((state) => state.studyProgrammes.usersProgrammes)
-  const deadline = useSelector((state) => state.deadlines.nextDeadline)
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
+  const deadline = useSelector(state => state.deadlines.nextDeadline)
   const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     setPicked(programmes.all)
-    document.title = `${translations['reportPage'][lang]}`
+    document.title = `${translations.reportPage[lang]}`
   }, [lang])
 
   // Handles all filtering
@@ -62,26 +62,23 @@ export default () => {
 
   const questionsList = modifiedQuestions(rawQuestions, lang)
 
-  const answersByQuestions = (chosenProgrammes) => {
-    let answerMap = new Map()
-    const chosenKeys = chosenProgrammes.map((p) => p.key)
-    selectedAnswers.forEach((programme) => {
+  const answersByQuestions = chosenProgrammes => {
+    const answerMap = new Map()
+    const chosenKeys = chosenProgrammes.map(p => p.key)
+    selectedAnswers.forEach(programme => {
       const key = programme.programme
 
       if (chosenKeys.includes(key)) {
-        const data = programme.data
-        questionsList.forEach((question) => {
+        const { data } = programme
+        questionsList.forEach(question => {
           let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-          let color = data[question.color] ? data[question.color] : 'emptyAnswer'
+          const color = data[question.color] ? data[question.color] : 'emptyAnswer'
           const name = programmeName(usersProgrammes, programme, lang)
           let answer = ''
           if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
           else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
-          answersByProgramme = [
-            ...answersByProgramme,
-            { name: name, key: key, color: color, answer: answer },
-          ]
+          answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
           answerMap.set(question.id, answersByProgramme)
         })
       }
@@ -90,15 +87,12 @@ export default () => {
     // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
     // So empty answers need to be added.
     answerMap.forEach((value, key) => {
-      const answeredProgrammes = value.map((p) => p.key)
-      const programmesMissing = chosenProgrammes.filter((p) => !answeredProgrammes.includes(p.key))
+      const answeredProgrammes = value.map(p => p.key)
+      const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
       if (programmesMissing) {
         for (const p of programmesMissing) {
           const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [
-            ...earlierAnswers,
-            { name: p.name[lang], key: p.key, color: 'emptyAnswer' },
-          ])
+          answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
         }
       }
     })
@@ -110,7 +104,7 @@ export default () => {
 
   const panes = [
     {
-      menuItem: translations.reportHeader['written'][lang],
+      menuItem: translations.reportHeader.written[lang],
       render: () => (
         <Tab.Pane className="report-page-tab">
           <WrittenAnswers
@@ -126,7 +120,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.reportHeader['colors'][lang],
+      menuItem: translations.reportHeader.colors[lang],
       render: () => (
         <Tab.Pane>
           <ColorAnswers
@@ -150,8 +144,8 @@ export default () => {
       <div className="report-info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="report-filter-container noprint">
         <Grid.Column width={10}>
-          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: "3em" }}>
-            <Icon name="arrow left"/>
+          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
+            <Icon name="arrow left" />
             {translations.backToFrontPage[lang]}
           </Button>
           <h1>{translations.reportPage[lang]}</h1>
@@ -160,10 +154,9 @@ export default () => {
             <>
               <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
               <LevelFilter />
-              {faculty !== 'allFaculties' &&
-                (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-                  <CompanionFilter />
-                )}
+              {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
+                <CompanionFilter />
+              )}
               {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
               <ProgrammeFilter
                 handleChange={handleSearch}

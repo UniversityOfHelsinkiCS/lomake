@@ -7,12 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER,
       submittedBy: {
         type: DataTypes.STRING,
-        field: 'submitted_by'
-      }
+        field: 'submitted_by',
+      },
     },
     {
       underscored: true,
-      tableName: 'answers'
+      tableName: 'answers',
     }
   )
 

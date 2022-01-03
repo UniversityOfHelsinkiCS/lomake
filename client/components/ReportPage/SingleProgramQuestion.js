@@ -20,7 +20,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
             </small>
           </span>
           <p className="question-label">
-            {question.labelIndex}. {(question.label).toUpperCase()}
+            {question.labelIndex}. {question.label.toUpperCase()}
           </p>
           <p className="question-description">{question.description}</p>
         </Grid.Column>
@@ -34,7 +34,7 @@ const SingleProgramQuestion = ({ answers, question }) => (
     <Accordion.Content active className="question-content">
       {answers &&
         answers
-          .sort((a, b) => a['name'].localeCompare(b['name']))
+          .sort((a, b) => a.name.localeCompare(b.name))
           .map((programme, index) => (
             <div key={index}>
               <label className="answer-title">

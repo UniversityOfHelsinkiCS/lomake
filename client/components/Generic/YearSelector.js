@@ -8,9 +8,9 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
 export default function YearSelector({ multiple, size, label }) {
-  const previousYearsWithAnswers = useSelector((state) => state.oldAnswers.years)
-  const currentUser = useSelector((state) => state.currentUser.data)
-  const lang = useSelector((state) => state.language)
+  const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)
+  const currentUser = useSelector(state => state.currentUser.data)
+  const lang = useSelector(state => state.language)
   const year = useSelector(({ filters }) => filters.year)
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const [yearOptions, setYearOptions] = useState([])
@@ -22,7 +22,7 @@ export default function YearSelector({ multiple, size, label }) {
   useEffect(() => {
     if (!previousYearsWithAnswers) return
     const years = getYearsUserHasAccessToAction(currentUser)
-    const options = years.map((y) => {
+    const options = years.map(y => {
       return {
         key: y,
         value: y,
@@ -50,11 +50,7 @@ export default function YearSelector({ multiple, size, label }) {
 
   return (
     <div className={`year-filter-${size}`}>
-      {multiple && (
-        <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>
-          {label}
-        </label>
-      )}
+      {multiple && <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>}
       <Select
         className="button basic gray"
         disabled={!previousYearsWithAnswers || yearOptions.length <= 1}

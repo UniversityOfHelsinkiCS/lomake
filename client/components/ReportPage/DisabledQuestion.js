@@ -18,17 +18,13 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
           </small>
         </span>
         <p className="question-label-disabled">
-          {question.labelIndex}. {(question.label).toUpperCase()}
+          {question.labelIndex}. {question.label.toUpperCase()}
         </p>
         <p className="question-description-disabled">{question.description}</p>
         <p className="question-extrainfo">{question.extrainfo}</p>
       </Grid.Column>
       <Grid.Column width={4} floated="right">
-        <Label
-          data-cy={`answered-label-${question.id}`}
-          className="question-answered-label-disabled"
-          size="large"
-        >
+        <Label data-cy={`answered-label-${question.id}`} className="question-answered-label-disabled" size="large">
           0 / {chosenProgrammes.length}
         </Label>
       </Grid.Column>

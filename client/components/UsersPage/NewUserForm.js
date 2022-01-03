@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Form,
-  Checkbox,
-  Input,
-  Segment,
-  Popup,
-  Button,
-} from 'semantic-ui-react'
+import { Form, Checkbox, Input, Segment, Popup, Button } from 'semantic-ui-react'
 
 import { createUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
@@ -17,43 +10,44 @@ const INITIAL_FORM_DATA = {
   uid: '',
   firstname: '',
   lastname: '',
-  admin: false
+  admin: false,
 }
 
 export default ({ closeModal }) => {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA })
-  const users = useSelector((state) => state.users.data)
-  const lang = useSelector((state) => state.language)
+  const users = useSelector(state => state.users.data)
+  const lang = useSelector(state => state.language)
 
   if (!users || !lang) return null
 
-  const handleFieldChange = (event) => {
+  const handleFieldChange = event => {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })
   }
 
-  const isValidEmailAddress = (address) =>
+  const isValidEmailAddress = address =>
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
-    address
-  )
+      address
+    )
 
-  const isUidUnique = (uid) => {
-    if (users.find((user) => user.uid === uid)) {
+  const isUidUnique = uid => {
+    if (users.find(user => user.uid === uid)) {
       return false
-    } 
+    }
     return true
   }
 
-  const validate = (formData) => {
+  const validate = formData => {
     if (
-      formData.email
-      && isValidEmailAddress(formData.email)
-      && formData.uid
-      && isUidUnique(formData.uid)
-      && formData.lastname
-      && formData.firstname  
-    ) return true
+      formData.email &&
+      isValidEmailAddress(formData.email) &&
+      formData.uid &&
+      isUidUnique(formData.uid) &&
+      formData.lastname &&
+      formData.firstname
+    )
+      return true
     return false
   }
 
@@ -138,8 +132,8 @@ export default ({ closeModal }) => {
                 />
               </div>
             }
-            position='top center'
-            on='hover'
+            position="top center"
+            on="hover"
             disabled={validate(formData)}
             content={translations.checkUserData[lang]}
           />

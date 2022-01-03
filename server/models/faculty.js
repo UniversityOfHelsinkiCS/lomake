@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'facultyId',
       as: 'companionStudyprogrammes',
     }),
-    // ownedProgrammes are owned by the faculty. "vastuutiedekunta"
-    faculty.hasMany(models.studyprogramme, {
-      as : "ownedProgrammes",
-      foreignKey:"primaryFacultyId"
-    })
+      // ownedProgrammes are owned by the faculty. "vastuutiedekunta"
+      faculty.hasMany(models.studyprogramme, {
+        as: 'ownedProgrammes',
+        foreignKey: 'primaryFacultyId',
+      })
   }
 
   return faculty

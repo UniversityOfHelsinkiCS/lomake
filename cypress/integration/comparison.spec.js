@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeName, defaultYears } from '../../config/common'
+
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
@@ -31,7 +32,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=nav-comparison]').click()
 
     cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
+    cy.get('[data-cy=yearSelector]').then(newEl => {
       expect(newEl.find('.item')).to.have.length(4)
     })
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
@@ -65,11 +66,7 @@ describe('ComparisonPage tests', function () {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
-    cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger(
-      'click',
-      200,
-      200
-    )
+    cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger('click', 200, 200)
     cy.get('[data-cy=comparison-tip-programme_identity_text]').should('contain', 'Changing')
   })
 

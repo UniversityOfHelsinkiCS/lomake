@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { setHeaders } from "../../client/util/mockHeaders"
+import { setHeaders } from '../../client/util/mockHeaders'
 
 /**
  * Logs in as specified user.
  * @param {string} uid Uid of user to login as
  */
-Cypress.Commands.add('login', (uid) => {
+Cypress.Commands.add('login', uid => {
   setHeaders(uid)
   cy.log('Logged in as', uid)
 })
@@ -33,11 +33,11 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
     .find('.DraftEditor-root')
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
-    .then((input) => {
-      var textarea = input.get(0)
+    .then(input => {
+      const textarea = input.get(0)
       textarea.dispatchEvent(new Event('focus'))
 
-      var textEvent = document.createEvent('TextEvent')
+      const textEvent = document.createEvent('TextEvent')
       textEvent.initTextEvent('textInput', true, true, null, textToBeTyped)
       textarea.dispatchEvent(textEvent)
 
@@ -46,18 +46,16 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  cy.get(editorName)
-    .click()
-    .type(textToBeTyped)
+  cy.get(editorName).click().type(textToBeTyped)
 })
 
-Cypress.Commands.add('getEditorInputLength', (editorName) => {
+Cypress.Commands.add('getEditorInputLength', editorName => {
   cy.get(editorName)
     .find('.editor-class')
     .find('.DraftEditor-root')
     .find('.DraftEditor-editorContainer')
     .find('.public-DraftEditor-content')
-    .then((input) => {
+    .then(input => {
       const textarea = input.get(0)
       return textarea.textContent.length
     })
@@ -66,7 +64,7 @@ Cypress.Commands.add('getEditorInputLength', (editorName) => {
 Cypress.Commands.add('getYearSelector', () => {
   const currentDate = new Date()
   cy.get('[data-cy=yearSelector]').click()
-  cy.get('[data-cy=yearSelector]').then((newEl) => {
+  cy.get('[data-cy=yearSelector]').then(newEl => {
     expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
   })
 })

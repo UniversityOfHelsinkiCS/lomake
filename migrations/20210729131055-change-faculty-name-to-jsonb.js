@@ -4,8 +4,8 @@ module.exports = {
       await queryInterface.removeColumn('faculties', 'name'),
       await queryInterface.addColumn('faculties', 'name', {
         type: Sequelize.JSONB,
-        defaultValue: { fi: '', en: '', se: '' }
-      })
+        defaultValue: { fi: '', en: '', se: '' },
+      }),
     ]
   },
 
@@ -14,7 +14,7 @@ module.exports = {
       await queryInterface.removeColumn('faculties', 'name'),
       await queryInterface.addColumn('faculties', 'name', {
         type: Sequelize.STRING,
-      })
+      }),
     ]
-  }
+  },
 }

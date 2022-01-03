@@ -4,7 +4,7 @@ const { isSuperAdmin } = require('@root/config/common')
 
 let currentEditors = {}
 
-const stripTimeouts = (room) => {
+const stripTimeouts = room => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
     if (!room[key]) return acc
@@ -19,7 +19,7 @@ const stripTimeouts = (room) => {
   }, {})
 }
 
-const clearCurrentUser = (user) => {
+const clearCurrentUser = user => {
   return Object.keys(currentEditors).reduce((editorAcc, room) => {
     if (!currentEditors[room]) return editorAcc
     const currentRoom = currentEditors[room]
@@ -35,8 +35,8 @@ const clearCurrentUser = (user) => {
   }, {})
 }
 
-const getCurrentUser = async (socket) => {
-  const uid = socket.request.headers.uid
+const getCurrentUser = async socket => {
+  const { uid } = socket.request.headers
 
   if (!uid) return null
 
@@ -46,7 +46,7 @@ const getCurrentUser = async (socket) => {
     return await db.user.findOne({ where: { uid: loggedInAs } })
   }
 
-  return await db.user.findOne({ where: { uid: uid } })
+  return await db.user.findOne({ where: { uid } })
 }
 
 const joinRoom = async (socket, room, io) => {
@@ -90,7 +90,7 @@ const updateField = async (socket, payload, io) => {
       if (currentEditor) {
         clearTimeout(currentEditor.timeoutId)
       }
-      
+
       const timeoutId = setTimeout(() => {
         currentEditors = {
           ...currentEditors,

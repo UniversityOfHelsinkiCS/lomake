@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
-import { setLevel } from 'Utilities/redux/filterReducer'
-import { clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
+import { setLevel, clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Filters.scss'
 
@@ -10,7 +9,7 @@ const LevelFilter = ({ comparison }) => {
   const dispatch = useDispatch()
   const usersProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.usersProgrammes)
   const level = useSelector(({ filters }) => filters.level)
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   if (!usersProgrammes) return null
 
@@ -18,11 +17,11 @@ const LevelFilter = ({ comparison }) => {
     bachelor: false,
     master: false,
     doctoral: false,
-    international: false
+    international: false,
   }
-  // Disable levels from the filter that the user has no access to 
-  usersProgrammes.forEach((p) => {
-    if (p.level === 'master' && p.international) levels['international'] = true
+  // Disable levels from the filter that the user has no access to
+  usersProgrammes.forEach(p => {
+    if (p.level === 'master' && p.international) levels.international = true
     levels[p.level] = true
   })
 

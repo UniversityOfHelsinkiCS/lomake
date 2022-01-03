@@ -4,7 +4,7 @@ import { Segment } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
 
 const ColorLegend = () => {
-  const lang = useSelector((state) => state.language)
+  const lang = useSelector(state => state.language)
 
   return (
     <Segment compact textAlign="left">

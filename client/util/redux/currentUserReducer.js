@@ -1,5 +1,5 @@
-import callBuilder from '../apiConnection'
 import { defaultYears } from 'Utilities/common'
+import callBuilder from '../apiConnection'
 /**
  * Actions and reducers are in the same file for readability
  */
@@ -16,16 +16,16 @@ export const logoutAction = () => {
   return callBuilder(route, prefix, 'post')
 }
 
-export const getYearsUserHasAccessToAction = (user) => {
+export const getYearsUserHasAccessToAction = user => {
   const access = Object.values(user.access)
   let usersYears = []
 
   // Set all the three answered years to be the options by default
-  let allYears = defaultYears
+  const allYears = defaultYears
   const currentYear = new Date().getFullYear()
 
   // Add current year as the first one, if it does not exist
-  if (!allYears.includes(currentYear)) allYears.unshift(currentYear)  
+  if (!allYears.includes(currentYear)) allYears.unshift(currentYear)
 
   for (const p of access) {
     // If user only has access to one year of data, show only that year in the filters and front page
@@ -34,12 +34,11 @@ export const getYearsUserHasAccessToAction = (user) => {
     } else if (!p.year) {
       usersYears = allYears
       break
-    } 
+    }
   }
   if (usersYears.length) return usersYears
-  return allYears 
+  return allYears
 }
-
 
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state

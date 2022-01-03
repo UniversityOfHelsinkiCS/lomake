@@ -16,13 +16,13 @@ const startBackupJob = () => {
 const createBackups = async () => {
   const currentAnswers = await db.tempAnswer.findAll({})
 
-  currentAnswers.forEach(async (answer) => {
+  currentAnswers.forEach(async answer => {
     const { programme, data } = answer
 
     const oldestBackup = await db.backupAnswer.findAll({
       limit: 1,
       where: {
-        programme: programme,
+        programme,
       },
       order: [['createdAt', 'DESC']],
     })
@@ -32,8 +32,8 @@ const createBackups = async () => {
     if (lodash.isEqual(data, oldestBackUpData)) return
 
     await db.backupAnswer.create({
-      programme: programme,
-      data: data,
+      programme,
+      data,
     })
 
     logger.info(`${loggerPrefix}Created new backup for ${programme}`)
