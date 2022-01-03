@@ -1,8 +1,9 @@
 import React from 'react'
+import { PieChart } from 'react-minimal-pie-chart'
+
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import positiveEmoji from 'Assets/sunglasses.png'
-import { PieChart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
 
 

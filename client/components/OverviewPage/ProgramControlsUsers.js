@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
 import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
-import { editUserAction } from 'Utilities/redux/usersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
 
