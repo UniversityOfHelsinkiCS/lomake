@@ -12,7 +12,7 @@ import { registerLocale } from 'react-datepicker'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
-import { setDraftYear } from 'Utilities/redux/draftYearReducer'
+import { getDraftYear, setDraftYear } from 'Utilities/redux/draftYearReducer'
 import { colors } from 'Utilities/common'
 
 
@@ -32,6 +32,7 @@ const DeadlineSetting = () => {
 
   useEffect(() => {
     dispatch(getDeadline())
+    dispatch(getDraftYear())
     const years = getYearsUserHasAccessToAction(currentUser)
     const options = years.map((y) => {
       return {
@@ -41,14 +42,13 @@ const DeadlineSetting = () => {
       }
     })
     setYearOptions(options)
-  }, [])
+  }, [currentUser])
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(
       Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
     )
     dispatch(createOrUpdateDeadline(acualDate.toISOString()))
-    setNewDate(null)
   }
 
   const handleDelete = () => {
@@ -114,7 +114,7 @@ const DeadlineSetting = () => {
         />
         <Header as="h4">{translations.answersSavedForYear[lang]} 
         {draftYear
-          ? <span style={{ color: colors.blue }} data-cy="draftYear">{formatDate(draftYear)}</span>
+          ? <span style={{ color: colors.blue }} data-cy="draftYear">{draftYear}</span>
           : <span style={{ color: colors.red }} data-cy="noDraftYear">{translations.noDraftYear[lang]}</span>
         }
         </Header>

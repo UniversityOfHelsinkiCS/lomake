@@ -6,6 +6,7 @@ const studyprogrammes = require('@controllers/studyprogrammesController')
 const deadlines = require('@controllers/deadlineController')
 const cypress = require('@controllers/cypressController')
 const faculties = require('@controllers/facultyController')
+const draftYears = require('@controllers/draftYearController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -55,6 +56,10 @@ router.get('/access/:url', tokens.checkToken)
 router.get('/deadlines', deadlines.get)
 router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)
 router.delete('/deadlines', checkAdmin, deadlines.remove)
+
+router.get('/draftyears', draftYears.get)
+router.post('/draftyears', checkAdmin, draftYears.createOrUpdate)
+router.delete('/draftyears', checkAdmin, draftYears.remove)
 
 router.get('/faculties', faculties.getAll)
 
