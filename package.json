@@ -87,7 +87,7 @@
   },
   "devDependencies": {
     "babel-preset-stage-2": "^6.24.1",
-    "cypress": "^8.0.0",
+    "cypress": "^9.2.0",
     "husky": "^4.2.5",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1",
