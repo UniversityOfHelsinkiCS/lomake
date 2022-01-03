@@ -32,7 +32,7 @@ describe('ComparisonPage tests', function () {
 
     cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
+      expect(newEl.find('.item')).to.have.length(4)
     })
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
@@ -46,10 +46,7 @@ describe('ComparisonPage tests', function () {
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
+    cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
@@ -63,10 +60,8 @@ describe('ComparisonPage tests', function () {
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
+
+    cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
@@ -85,11 +80,7 @@ describe('ComparisonPage tests', function () {
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
-
+    cy.getYearSelector()
     cy.get('[data-cy=comparison-chart-faculty-employability_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(29, 185, 84)')
   })

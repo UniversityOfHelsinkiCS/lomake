@@ -37,10 +37,7 @@ describe('IAM permission tests', function () {
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
+    cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')

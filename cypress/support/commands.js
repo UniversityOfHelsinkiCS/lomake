@@ -65,3 +65,11 @@ Cypress.Commands.add('getEditorInputLength', (editorName) => {
       return textarea.textContent.length
     })
 })
+
+Cypress.Commands.add('getYearSelector', () => {
+  const currentDate = new Date()
+  cy.get('[data-cy=yearSelector]').click()
+  cy.get('[data-cy=yearSelector]').then((newEl) => {
+    expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
+  })
+})

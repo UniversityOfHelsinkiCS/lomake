@@ -55,12 +55,8 @@ describe('ReportPage tests', function () {
     cy.login(user)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.get('[data-cy=yearSelector]').should('be.visible').click()
 
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
-
+    cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
@@ -70,11 +66,8 @@ describe('ReportPage tests', function () {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
     cy.visit('/report')
-    cy.get('[data-cy=yearSelector]').click()
 
-    cy.get('[data-cy=yearSelector]').then((newEl) => {
-      expect(newEl.find('.item')).to.have.length(3)
-    })
+    cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=master-filter]').should('be.visible').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
