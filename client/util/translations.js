@@ -1271,6 +1271,21 @@ export const usersPageTranslations = {
     fi: 'Lukitse lomake',
     se: 'Ta bort deadline',
   },
+  selectDraftYear: {
+    en: 'Set the year for which new answers are saved: ',
+    fi: 'Valitse vuosi, jolle vastaukset tallennetaan: ',
+    se: 'Set the year for which new are saved: ', 
+  },
+  answersSavedForYear: {
+    en: 'Answers will be saved for the year: ',
+    fi: 'Vastaukset tallennetaan vuodelle: ',
+    se: 'Answers will be saved for the year: ',
+  },
+  noDraftYear: {
+    en: 'No year has been selected',
+    fi: 'Ei valittua vastausvuotta',
+    se: 'No year has been selecter',
+  },
   grantAdmin: {
     en: 'Grant admin rights',
     fi: 'Myönnä admin-oikeudet',

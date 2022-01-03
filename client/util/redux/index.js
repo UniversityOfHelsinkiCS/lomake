@@ -16,6 +16,7 @@ import studyProgrammes from './studyProgrammesReducer'
 import deadlines from './deadlineReducer'
 import currentEditors from './currentEditorsReducer'
 import faculties from './facultyReducer'
+import draftYear from './draftYearReducer'
 
 export default combineReducers({
   form,
@@ -34,4 +35,5 @@ export default combineReducers({
   deadlines,
   currentEditors,
   faculties,
+  draftYear,
 })
