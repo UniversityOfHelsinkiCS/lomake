@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const deadline = sequelize.define(
+  const draftYears = sequelize.define(
     'draftYear',
     {
       year: DataTypes.INTEGER,
@@ -10,5 +10,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  return deadline
+  return draftYears
 }
