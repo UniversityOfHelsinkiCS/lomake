@@ -106,35 +106,34 @@ const DeadlineSetting = () => {
               : <span style={{ color: colors.red }} data-cy="noNextDeadline">{translations['noDeadlineSet'][lang]}</span>
             }        
           </Header>
-
         </div>
-        <div style={{ margin: '1em 0em'}}>
-        <Header as="h3">
-          {translations.selectDraftYear[lang]}
-        </Header>
-        <Select
-          placeholder='Select year'
-          options={yearOptions}
-          value={newDraftYear}
-          disabled={!nextDeadline}
-          onChange={(e, { value }) => setNewDraftYear(value)}
-        />
-        <Button
-          data-cy="updateDraftYear"
-          primary
-          compact
-          size="mini"
-          disabled={!newDraftYear}
-          onClick={() => dispatch(setDraftYear(newDraftYear))}
-        >
-          {translations.updateDraftYear[lang]}
-        </Button>
-        <Header as="h4">{translations.answersSavedForYear[lang]} 
-        {draftYear && nextDeadline
-          ? <span style={{ color: colors.blue }} data-cy="draftYear">{draftYear}</span>
-          : <span style={{ color: colors.red }} data-cy="noDraftYear">{translations.noDraftYear[lang]}</span>
-        }
-        </Header>
+        <div style={{ margin: '1em 0em' }}>
+          <Header as="h3">
+            {translations.selectDraftYear[lang]}
+          </Header>
+          <Select
+            placeholder='Select year'
+            options={yearOptions}
+            value={newDraftYear}
+            disabled={!nextDeadline}
+            onChange={(e, { value }) => setNewDraftYear(value)}
+          />
+          <Button
+            data-cy="updateDraftYear"
+            primary
+            compact
+            size="mini"
+            disabled={!newDraftYear}
+            onClick={() => dispatch(setDraftYear(newDraftYear))}
+          >
+            {translations.updateDraftYear[lang]}
+          </Button>
+          <Header as="h4">{translations.answersSavedForYear[lang]} 
+          {draftYear && nextDeadline
+            ? <span style={{ color: colors.blue }} data-cy="draftYear">{draftYear}</span>
+            : <span style={{ color: colors.red }} data-cy="noDraftYear">{translations.noDraftYear[lang]}</span>
+          }
+          </Header>
         </div>
       </Segment>
   )
