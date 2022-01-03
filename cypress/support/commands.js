@@ -47,10 +47,7 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
   cy.get(editorName)
-    .find('.editor-class')
-    .find('.DraftEditor-root')
-    .find('.DraftEditor-editorContainer')
-    .find('.public-DraftEditor-content')
+    .click()
     .type(textToBeTyped)
 })
 

@@ -62,7 +62,7 @@ describe("Previous year's answers", function () {
     cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').contains(new Date().getFullYear()).click() // select current year
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'koira')
+    cy.writeToTextField('[contenteditable="true"]', 'koira')
 
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')

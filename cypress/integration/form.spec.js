@@ -14,7 +14,7 @@ describe('Form tests', function () {
   it('Can write to a textfield and the answer is saved.', function () {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.writeToTextField('[data-cy=textarea-review_of_last_years_situation_report]', 'kissa')
+    cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
 
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
