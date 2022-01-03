@@ -23,6 +23,14 @@ services:
     volumes:
       - pg_data:/data
     container_name: lomake_db
+  adminer:
+    container_name: adminer
+    environment:
+      - ADMINER_DESIGN=pepa-linha
+      - ADMINER_DEFAULT_SERVER=db
+    image: adminer:4.7.5
+    ports:
+      - 8080:8080 # localhost:8080/?pgsql=db&username=postgres&db=postgres&ns=public
 
 volumes:
   pg_data:
