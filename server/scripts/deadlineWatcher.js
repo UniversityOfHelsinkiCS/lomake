@@ -25,7 +25,7 @@ const startDeadlineWatcher = async () => {
         const programmes = await db.studyprogramme.findAll({})
 
         programmes.forEach(async programme => {
-          const { key, name, locked } = programme
+          const { key } = programme
 
           const tempAnswers = await db.tempAnswer.findOne({
             where: {
