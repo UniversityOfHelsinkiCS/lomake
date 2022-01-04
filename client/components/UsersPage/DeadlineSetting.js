@@ -3,11 +3,10 @@ import DatePicker, { registerLocale } from 'react-datepicker'
 import { Button, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { createOrUpdateDeadline, deleteDeadline, getDeadline } from 'Utilities/redux/deadlineReducer'
+import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
-import { deleteDraftYear, getDraftYear, setDraftYear } from 'Utilities/redux/draftYearReducer'
 import { colors } from 'Utilities/common'
 
 const DeadlineSetting = () => {
@@ -16,9 +15,9 @@ const DeadlineSetting = () => {
   const [yearOptions, setYearOptions] = useState([])
   const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
+  const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const draftYear = useSelector(({ draftYear }) => draftYear.data)
   const dispatch = useDispatch()
 
   registerLocale('fi', fi)
@@ -26,8 +25,6 @@ const DeadlineSetting = () => {
   registerLocale('se', sv)
 
   useEffect(() => {
-    dispatch(getDeadline())
-    dispatch(getDraftYear())
     const years = getYearsUserHasAccessToAction(currentUser)
     const options = years.map(y => {
       return {
@@ -41,14 +38,13 @@ const DeadlineSetting = () => {
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
-    dispatch(createOrUpdateDeadline(acualDate.toISOString()))
+    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear }))
     setNewDate(null)
     setNewDraftYear(null)
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadline())
-    dispatch(deleteDraftYear())
+    dispatch(deleteDeadlineAndDraftYear())
     setNewDate(null)
     setNewDraftYear(null)
   }
@@ -65,7 +61,7 @@ const DeadlineSetting = () => {
   return (
     <Segment>
       <div style={{ margin: '1em 0em 3em 0em' }}>
-        <Header as="h3">{translations.selectNewDeadline[lang]}</Header>
+        <Header as="h4">{translations.selectNewDeadline[lang]}</Header>
         <DatePicker
           dateFormat="dd.MM.yyyy"
           excludeDates={existingDeadlines.map(dl => new Date(dl.date))}
@@ -75,58 +71,50 @@ const DeadlineSetting = () => {
           onChange={setNewDate}
           locale={lang}
         />
-        <Button data-cy="updateDeadline" primary compact size="mini" disabled={!newDate} onClick={handleDeadlineSave}>
-          {translations.updateDeadline[lang]}
-        </Button>
-        {nextDeadline && (
-          <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
-            {translations.deleteThisDeadline[lang]}
-          </Button>
-        )}
-        <Header as="h4">
-          {translations.nextDeadline[lang]}
-          {nextDeadline ? (
-            <span style={{ color: colors.blue }} data-cy="nextDeadline">
-              {formatDate(nextDeadline.date)}
-            </span>
-          ) : (
-            <span style={{ color: colors.red }} data-cy="noNextDeadline">
-              {translations.noDeadlineSet[lang]}
-            </span>
-          )}
-        </Header>
-      </div>
-      <div style={{ margin: '1em 0em' }}>
-        <Header as="h3">{translations.selectDraftYear[lang]}</Header>
+        <Header as="h4">{translations.selectDraftYear[lang]}</Header>
         <Select
           placeholder="Select year"
           options={yearOptions}
           value={newDraftYear}
-          disabled={!nextDeadline}
+          disabled={!newDate}
           onChange={(e, { value }) => setNewDraftYear(value)}
         />
-        <Button
-          data-cy="updateDraftYear"
-          primary
-          compact
-          size="mini"
-          disabled={!newDraftYear}
-          onClick={() => dispatch(setDraftYear(newDraftYear))}
-        >
-          {translations.updateDraftYear[lang]}
+      </div>
+      <Button
+        data-cy="updateDeadline"
+        primary
+        compact
+        size="mini"
+        disabled={!newDate || !newDraftYear}
+        onClick={handleDeadlineSave}
+      >
+        {translations.updateDeadline[lang]} and draft year
+      </Button>
+      {nextDeadline && (
+        <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
+          {translations.deleteThisDeadline[lang]}
         </Button>
-        <Header as="h4">
-          {translations.answersSavedForYear[lang]}
-          {draftYear && nextDeadline ? (
-            <span style={{ color: colors.blue }} data-cy="draftYear">
-              {draftYear}
+      )}
+      <Button data-cy="discardDrafts" compact size="mini" disabled={!draftYear || !nextDeadline}>
+        Scratch that
+      </Button>
+      <div style={{ margin: '1em 0em' }}>
+        <p>
+          <b>
+            {translations.nextDeadline[lang]}
+            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
+              {nextDeadline ? formatDate(nextDeadline.date) : translations.noDeadlineSet[lang]}
             </span>
-          ) : (
-            <span style={{ color: colors.red }} data-cy="noDraftYear">
-              {translations.noDraftYear[lang]}
+          </b>
+        </p>
+        <p>
+          <b>
+            {translations.answersSavedForYear[lang]}
+            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="draftYear">
+              {draftYear ? draftYear.year : translations.noDraftYear[lang]}
             </span>
-          )}
-        </Header>
+          </b>
+        </p>
       </div>
     </Segment>
   )

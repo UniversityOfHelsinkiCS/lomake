@@ -1244,24 +1244,19 @@ export const usersPageTranslations = {
     se: 'Ta bort deadline',
   },
   selectDraftYear: {
-    en: 'Set the year for which new answers are saved: ',
-    fi: 'Valitse vuosi, jolle vastaukset tallennetaan: ',
-    se: 'Set the year for which new are saved: ',
+    en: 'Set which years answers will be opened: ',
+    fi: 'Valitse muokkausvuosi: ',
+    se: 'Set which years answers will be opened: ',
   },
   draftYearWarning: {
     en: 'Answers of that year, will be opened for draft mode and could be overwritten by users!',
     fi: 'Valitun vuoden vastaukset avautuvat käyttäjien muokattavaksi!',
     se: 'Answers of that year, will be opened for draft mode and could be overwritten by users!',
   },
-  updateDraftYear: {
-    en: 'Update year',
-    fi: 'Tallenna vastausvuosi',
-    se: 'Update year',
-  },
   answersSavedForYear: {
-    en: 'Answers will be saved for the year: ',
+    en: 'Current draft answers will be saved for the year: ',
     fi: 'Vastaukset tallennetaan vuodelle: ',
-    se: 'Answers will be saved for the year: ',
+    se: 'Current draft answers will be saved for the year: ',
   },
   noDraftYear: {
     en: 'No year has been selected',

@@ -1,45 +1,48 @@
 import callBuilder from '../apiConnection'
 
-export const createOrUpdateDeadline = date => {
+export const setDeadlineAndDraftYear = ({ deadline, draftYear }) => {
   const route = '/deadlines'
-  const prefix = 'CREATE_OR_UPDATE_DEADLINE'
-  return callBuilder(route, prefix, 'post', { date })
+  const prefix = 'SET_DEADLINE_AND_DRAFT_YEAR'
+  return callBuilder(route, prefix, 'post', { deadline, draftYear })
 }
 
-export const getDeadline = () => {
+export const getDeadlineAndDraftYear = () => {
   const route = '/deadlines'
-  const prefix = 'GET_DEADLINE'
+  const prefix = 'GET_DEADLINE_AND_DRAFT_YEAR'
   return callBuilder(route, prefix)
 }
 
-export const deleteDeadline = () => {
+export const deleteDeadlineAndDraftYear = () => {
   const route = `/deadlines`
-  const prefix = 'DELETE_DEADLINE'
+  const prefix = 'DELETE_DEADLINE_AND_DRAFT_YEAR'
   return callBuilder(route, prefix, 'delete')
 }
 
 const initialState = {
-  nextDeadline: undefined,
+  nextDeadline: null,
+  draftYear: null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_OR_UPDATE_DEADLINE_SUCCESS': {
+    case 'SET_DEADLINE_AND_DRAFT_YEAR_SUCCESS': {
       return {
-        ...state,
-        nextDeadline: action.response,
+        nextDeadline: action.response.deadline,
+        draftYear: action.response.draftYear,
       }
     }
-    case 'GET_DEADLINE_SUCCESS': {
+    case 'GET_DEADLINE_AND_DRAFT_YEAR_SUCCESS': {
       return {
         ...state,
-        nextDeadline: action.response,
+        nextDeadline: action.response.deadline,
+        draftYear: action.response.draftYear,
       }
     }
-    case 'DELETE_DEADLINE_SUCCESS':
+    case 'DELETE_DEADLINE_AND_DRAFT_YEAR_SUCCESS':
       return {
         ...state,
         nextDeadline: null,
+        draftYear: null,
       }
     default:
       return state

@@ -1,28 +1,45 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 
+const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
+
 const createOrUpdate = async (req, res) => {
+  const { deadline, draftYear } = req.body
+
+  if (!deadline || !draftYear) {
+    throw new Error('No deadline or draft year defined')
+  }
+
   try {
     // Unlock all programmes
-    const programmes = await db.studyprogramme.findAll({})
-    for (const programme of programmes) {
-      programme.locked = false
-      await programme.save()
-    }
+    await db.studyprogramme.update({ locked: false }, { where: {} })
 
+    // Create new or update old deadline
+    let newDeadline = null
     const existingDeadlines = await db.deadline.findAll({})
-    // Create new deadline entity
     if (existingDeadlines.length === 0) {
-      const newDeadline = await db.deadline.create({
-        date: req.body.date,
+      newDeadline = await db.deadline.create({
+        date: deadline,
       })
-      return res.status(200).json(newDeadline)
+    } else {
+      existingDeadlines[0].date = deadline
+      newDeadline = await existingDeadlines[0].save()
     }
 
-    // Update existing deadline entity
-    existingDeadlines[0].date = req.body.date
-    await existingDeadlines[0].save()
-    return res.status(200).json(existingDeadlines[0])
+    // Create new or update old draft year
+    let newDraftYear = null
+    const existingDraftYears = await db.draftYear.findAll({})
+    if (existingDraftYears.length === 0) {
+      newDraftYear = await db.draftYear.create({
+        year: draftYear,
+      })
+    } else {
+      existingDraftYears[0].year = draftYear
+      newDraftYear = await existingDraftYears[0].save()
+    }
+
+    await createDraftAnswers(draftYear)
+    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })
@@ -36,14 +53,16 @@ const remove = async (req, res) => {
       truncate: true,
     })
 
-    // Then lock all programmes.
-    const programmes = await db.studyprogramme.findAll({})
-    programmes.forEach(async programme => {
-      programme.locked = true
-      await programme.save()
+    // Unlock all programmes
+    await db.studyprogramme.update({ locked: true }, { where: {} })
+
+    const draftYears = await db.draftYear.findAll({})
+    await db.draftYear.destroy({
+      truncate: true,
     })
 
-    return res.status(200).json({ message: 'OK' })
+    await createFinalAnswers(draftYears[0].year)
+    return res.status(200).json({ deadline: null, draftYear: null })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })
@@ -52,13 +71,12 @@ const remove = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    const deadline = await db.deadline.findAll({})
+    const deadlines = await db.deadline.findAll({})
+    const draftYears = await db.draftYear.findAll({})
+    const deadline = deadlines.length ? deadlines[0] : null
+    const draftYear = draftYears.length ? draftYears[0] : null
 
-    if (deadline.length === 0) {
-      return res.status(200).json(null)
-    }
-
-    return res.status(200).json(deadline[0])
+    return res.status(200).json({ deadline, draftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     res.status(500).json({ error: 'Database error' })

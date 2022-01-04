@@ -6,7 +6,7 @@ import { loginAction } from 'Utilities/redux/currentUserReducer'
 import NavBar from 'Components/NavBar'
 import Router from 'Components/Router'
 import { getStudyProgrammes, getUsersProgrammes } from 'Utilities/redux/studyProgrammesReducer'
-import { getDeadline } from 'Utilities/redux/deadlineReducer'
+import { getDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
 import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
@@ -31,7 +31,7 @@ export default () => {
       const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : new Date().getFullYear()
       dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
-      dispatch(getDeadline())
+      dispatch(getDeadlineAndDraftYear())
       dispatch(getFaculties())
       dispatch(getAnswersAction())
       dispatch(setYear(defaultYear))
