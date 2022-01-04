@@ -21,7 +21,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
       total: { value: 0 },
     }
     answers.forEach(a => {
-      colors[a.color].value = colors[a.color].value + 1
+      colors[a.color].value += + 1
       colors[a.color].programmes = [...colors[a.color].programmes, a.name]
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value

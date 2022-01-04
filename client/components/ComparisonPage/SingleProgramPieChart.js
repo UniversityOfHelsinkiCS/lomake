@@ -17,7 +17,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty,
       total: 0,
     }
     answers.forEach(a => {
-      colors[a.color] = colors[a.color] + 1
+      colors[a.color] += 1
     })
     colors.withoutEmpty = colors.red + colors.green + colors.yellow
     colors.total = colors.withoutEmpty + colors.emptyAnswer

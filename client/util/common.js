@@ -41,12 +41,12 @@ export const sortedItems = (items, sorter, lang) => {
   if (!items) return []
   if (!sorter) return items
   const sorted = items.sort((a, b) => {
-    if (sorter == 'name') {
+    if (sorter === 'name') {
       const aName = a.name[lang] ? a.name[lang] : a.name.en
       const bName = b.name[lang] ? b.name[lang] : b.name.en
       return aName.localeCompare(bName)
     }
-    if (sorter == 'userGroup') {
+    if (sorter === 'userGroup') {
       const aval = getUserGroupSortValue(a)
       const bval = getUserGroupSortValue(b)
 
@@ -54,11 +54,11 @@ export const sortedItems = (items, sorter, lang) => {
       if (bval < aval) return 1
       return 0
     }
-    if (sorter == 'lastLogin') {
+    if (sorter === 'lastLogin') {
       if (new Date(a.lastLogin) < new Date(b.lastLogin)) return -1
       if (new Date(a.lastLogin) > new Date(b.lastLogin)) return 1
     }
-    if (sorter == 'access') {
+    if (sorter === 'access') {
       if (Object.entries(a.access).length > Object.entries(b.access).length) return -1
       if (Object.entries(a.access).length < Object.entries(b.access).length) return 1
     }

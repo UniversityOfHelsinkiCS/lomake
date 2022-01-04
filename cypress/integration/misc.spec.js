@@ -3,15 +3,15 @@
 
 import { testProgrammeName } from '../../config/common'
 
-describe('Misc tests', function () {
-  this.beforeEach(function () {
+describe('Misc tests', () => {
+  beforeEach(() => {
     const user = 'cypressUser'
     cy.givePermissions(user, testProgrammeName, 'admin')
     cy.login(user)
     cy.visit('/')
   })
 
-  it('Locale can be changed and translations work', function () {
+  it('Locale can be changed and translations work', () => {
     cy.visit(`/form/${testProgrammeName}`)
     cy.contains('Answers are saved automatically. ')
     cy.get('[data-cy=navBar-localeDropdown]').click()
@@ -19,18 +19,18 @@ describe('Misc tests', function () {
     cy.contains('Vastaukset tallentuvat automaattisesti.')
   })
 
-  it('CSV-download can be started on OverviewPage', function () {
+  it('CSV-download can be started on OverviewPage', () => {
     cy.get('[data-cy=csv-download]').should('contain', 'Download')
     cy.get('[data-cy=csv-download]').click()
   })
 
-  it('CSV-download can be started on FormPage', function () {
+  it('CSV-download can be started on FormPage', () => {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=csv-download]').should('contain', 'Download')
     cy.get('[data-cy=csv-download]').click()
   })
 
-  it('Access keys are pre-generated', function () {
+  it('Access keys are pre-generated', () => {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
     cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`).invoke('val').should('contain', '/access/')
     cy.get(`[data-cy=${testProgrammeName}-editlink] > input`).invoke('val').should('contain', '/access/')
@@ -39,7 +39,7 @@ describe('Misc tests', function () {
   /**
    * This feature only works for "superadmins".
    */
-  it.skip('Access link can be reset/updated', function () {
+  it.skip('Access link can be reset/updated', () => {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
     cy.server()
 

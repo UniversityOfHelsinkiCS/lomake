@@ -138,7 +138,7 @@ const BarChart = ({ data, questions, unit }) => {
             const { name } = this
             const { id } = this.userOptions
             this.chart.series.forEach(series => {
-              if (series.name == name && series.userOptions.id !== id) {
+              if (series.name === name && series.userOptions.id !== id) {
                 series.visible ? series.hide() : series.show()
               }
             })

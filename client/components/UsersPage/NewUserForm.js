@@ -67,7 +67,6 @@ export default ({ closeModal }) => {
           placeholder="Email"
           value={formData.email}
           onChange={handleFieldChange}
-          error={false}
           name="email"
           error={Boolean(formData.email && !isValidEmailAddress(formData.email))}
           required

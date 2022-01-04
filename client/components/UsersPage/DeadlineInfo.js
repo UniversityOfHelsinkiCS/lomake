@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { getDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
+import {  useSelector } from 'react-redux'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 const DeadlineInfo = () => {
   const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getDeadline())
-  }, [])
 
   const formatDate = date => {
     const temp = new Date(date)

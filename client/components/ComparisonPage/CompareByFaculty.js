@@ -47,7 +47,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const getChosenAnswers = question => {
     if (!allAnswers || !chosen) return []
     const answers = allAnswers.get(question.id)
-    if (answers) return answers.filter(a => a.name == chosen)
+    if (answers) return answers.filter(a => a.name === chosen)
     return []
   }
 

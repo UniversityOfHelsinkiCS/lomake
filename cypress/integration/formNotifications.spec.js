@@ -3,8 +3,8 @@
 
 import { testProgrammeName } from '../../config/common'
 
-describe('Form Notification tests', function () {
-  this.beforeEach(() => {
+describe('Form Notification tests', () => {
+  beforeEach(() => {
     cy.server()
     cy.givePermissions('cypressUser', testProgrammeName, 'write')
   })

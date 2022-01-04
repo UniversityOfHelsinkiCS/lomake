@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: queryInterface => {
     return queryInterface.addConstraint('temp_answers', {
       fields: ['programme'],
       type: 'unique',
@@ -7,7 +7,7 @@ module.exports = {
     })
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.removeConstraint('temp_answers', 'programmeUnique')
   },
 }

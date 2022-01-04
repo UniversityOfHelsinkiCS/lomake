@@ -3,15 +3,15 @@
 
 import { defaultYears, testProgrammeName } from '../../config/common'
 
-describe("Previous year's answers", function () {
-  this.beforeEach(function () {
+describe("Previous year's answers", () => {
+  beforeEach(() => {
     const user = 'cypressUser'
     cy.givePermissions(user, testProgrammeName, 'admin')
     cy.login(user)
     cy.visit('/')
   })
 
-  it("Can switch which year's answers to see in OverViewPage", function () {
+  it("Can switch which year's answers to see in OverViewPage", () => {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
     cy.get('[data-cy=yearSelector]').click()
@@ -30,7 +30,7 @@ describe("Previous year's answers", function () {
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[2]}`)
   })
 
-  it("Can't write answers if viewing old answers", function () {
+  it("Can't write answers if viewing old answers", () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
@@ -44,7 +44,7 @@ describe("Previous year's answers", function () {
   })
 
   // FIXME: flaky
-  it('Can view old answers in Form-page and switch back to editMode to continue working.', function () {
+  it('Can view old answers in Form-page and switch back to editMode to continue working.', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit(`/form/${testProgrammeName}`)
 

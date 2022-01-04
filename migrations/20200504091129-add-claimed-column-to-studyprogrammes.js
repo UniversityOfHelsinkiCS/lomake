@@ -3,7 +3,7 @@ module.exports = {
     return queryInterface.addColumn('studyprogrammes', 'claimed', Sequelize.BOOLEAN)
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.removeColumn('studyprogrammes', 'claimed')
   },
 }

@@ -70,7 +70,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             questionsAnswers.forEach(a => {
               if (chosenKeys.includes(a.key)) {
                 checkForData = true
-                questionColors[a.color] = questionColors[a.color] + 1
+                questionColors[a.color] += 1
               }
             })
             for (const [color] of Object.entries(yearsColors)) {

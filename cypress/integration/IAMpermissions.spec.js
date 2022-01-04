@@ -6,12 +6,12 @@ import { defaultYears } from '../../config/common'
 
 const user = 'cypressReadGroupMember'
 
-describe('IAM permission tests', function () {
+describe('IAM permission tests', () => {
   beforeEach(() => {
     cy.login(user)
   })
 
-  it('Permission is granted and revoked automatically based on IAM group', function () {
+  it('Permission is granted and revoked automatically based on IAM group', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]')
       .should('have.have.length', 129)
@@ -22,7 +22,7 @@ describe('IAM permission tests', function () {
       })
   })
 
-  it('Report works', function () {
+  it('Report works', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -32,7 +32,7 @@ describe('IAM permission tests', function () {
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
-  it('Comparison works', function () {
+  it('Comparison works', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()

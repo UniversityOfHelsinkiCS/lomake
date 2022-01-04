@@ -3,8 +3,8 @@
 
 import { testProgrammeName } from '../../config/common'
 
-describe('Management tests', function () {
-  this.beforeEach(function () {
+describe('Management tests', () => {
+  beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
     cy.givePermissions(user, testProgrammeName, 'admin')
@@ -13,7 +13,7 @@ describe('Management tests', function () {
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
   })
 
-  it('Giving admin permissions enables all permissions', function () {
+  it('Giving admin permissions enables all permissions', () => {
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
@@ -22,7 +22,7 @@ describe('Management tests', function () {
     cy.get('[data-cy=admin-cypressUser2]').should('have.class', 'check')
   })
 
-  it('Cant remove read/edit permissions if targetuser is admin, but can remove admin permissions.', function () {
+  it('Cant remove read/edit permissions if targetuser is admin, but can remove admin permissions.', () => {
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
@@ -36,7 +36,7 @@ describe('Management tests', function () {
     cy.get('[data-cy=removePermissions-button]').click()
   })
 
-  it('Removing read permissions removed write permissions too', function () {
+  it('Removing read permissions removed write permissions too', () => {
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
@@ -51,12 +51,12 @@ describe('Management tests', function () {
     cy.get('[data-cy=admin-cypressUser2]').should('not.exist')
   })
 
-  it('Cant remove permissions of last admin user remaining', function () {
+  it('Cant remove permissions of last admin user remaining', () => {
     cy.get('[data-cy=admin-cypressUser]').click()
     cy.get('[data-cy=removePermissions-button]').should('be.disabled')
   })
 
-  it('Can remove admin from self, once other user has admin permissions', function () {
+  it('Can remove admin from self, once other user has admin permissions', () => {
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
@@ -64,7 +64,7 @@ describe('Management tests', function () {
     cy.get('[data-cy=removePermissions-button]').click()
   })
 
-  it('Removing admin permissions only removes admin permissions', function () {
+  it('Removing admin permissions only removes admin permissions', () => {
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 

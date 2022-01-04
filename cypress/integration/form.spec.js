@@ -3,15 +3,15 @@
 
 import { testProgrammeName } from '../../config/common'
 
-describe('Form tests', function () {
-  this.beforeEach(function () {
+describe('Form tests', () => {
+  beforeEach(() => {
     const user = 'cypressUser'
     cy.givePermissions(user, testProgrammeName, 'write')
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
   })
 
-  it('Can write to a textfield and the answer is saved.', function () {
+  it('Can write to a textfield and the answer is saved.', () => {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
@@ -38,11 +38,11 @@ describe('Form tests', function () {
       .and('eq', 'rgb(157, 255, 157)')
   })
 
-  it('Can see upcoming deadline date', function () {
+  it('Can see upcoming deadline date', () => {
     cy.get('[data-cy=saving-answers-notice]').contains('Final day')
   })
 
-  it('Measurements are created dynamically and saved correctly', function () {
+  it('Measurements are created dynamically and saved correctly', () => {
     cy.intercept('POST', '/socket.io/*').as('update')
     cy.get('#measures_1_text').type('1')
     cy.get('#measures_2_text').type('2')

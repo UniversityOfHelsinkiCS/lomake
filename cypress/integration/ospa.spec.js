@@ -3,8 +3,8 @@
 
 import { testProgrammeName } from '../../config/common'
 
-describe('OSPA user tests', function () {
-  this.beforeEach(function () {
+describe('OSPA user tests', () => {
+  beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.visit('/')
   })

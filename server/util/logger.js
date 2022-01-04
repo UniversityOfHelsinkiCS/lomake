@@ -1,5 +1,4 @@
 const winston = require('winston')
-const morgan = require('morgan')
 const { inProduction } = require('@util/common')
 
 /**

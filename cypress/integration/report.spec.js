@@ -6,12 +6,12 @@ import { testProgrammeName, defaultYears } from '../../config/common'
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
-describe('ReportPage tests', function () {
-  this.beforeEach(function () {
+describe('ReportPage tests', () => {
+  beforeEach(() => {
     cy.givePermissions(user, testProgrammeName, 'write')
   })
 
-  it('Piecharts are not shown if there are no answers', function () {
+  it('Piecharts are not shown if there are no answers', () => {
     cy.login(user)
     cy.visit('/report')
     cy.get('div').contains('colors').should('contain', 'Smiley')
@@ -20,7 +20,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-no-data]')
   })
 
-  it('User should be able to see the just written answers in the report', function () {
+  it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
@@ -36,13 +36,13 @@ describe('ReportPage tests', function () {
     )
   })
 
-  it('User should be able to see answers from only one programme, when they have rights for only one', function () {
+  it('User should be able to see answers from only one programme, when they have rights for only one', () => {
     cy.login(user)
     cy.visit('/report')
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
-  it('User should not be able to see answers in fields where there are none', function () {
+  it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
@@ -54,7 +54,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
   })
 
-  it('User should be able to see answers from previous years', function () {
+  it('User should be able to see answers from previous years', () => {
     cy.login(user)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -64,7 +64,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
 
-  it('Filtering works for programme level', function () {
+  it('Filtering works for programme level', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -78,7 +78,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 63')
   })
 
-  it('Filtering works for faculty level', function () {
+  it('Filtering works for faculty level', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -92,7 +92,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-MH57_001]').should('not.exist')
   })
 
-  it('Filtering works for doctoral schools', function () {
+  it('Filtering works for doctoral schools', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -108,7 +108,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-T922104]').should('not.exist')
   })
 
-  it('Filtering works for companion programmes', function () {
+  it('Filtering works for companion programmes', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
@@ -133,7 +133,7 @@ describe('ReportPage tests', function () {
     cy.get('[data-cy=report-list-programme-MH40_003]').should('be.visible')
   })
 
-  it('Changes in smileys are reflected to the piecharts', function () {
+  it('Changes in smileys are reflected to the piecharts', () => {
     cy.login(user)
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')

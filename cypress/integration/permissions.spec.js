@@ -5,32 +5,32 @@ import { testProgrammeName } from '../../config/common'
 
 const user = 'cypressUser'
 
-describe('Permission tests', function () {
-  this.beforeEach(function () {
+describe('Permission tests', () => {
+  beforeEach(() => {
     cy.login(user)
   })
 
-  it('Invalid url shows error', function () {
+  it('Invalid url shows error', () => {
     cy.visit('/form/lmao')
     cy.contains('Error: Invalid url.')
   })
 
-  it("Can't access form without permissions", function () {
+  it("Can't access form without permissions", () => {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=no-permissions-message]')
   })
 
-  it("Can't access report page without permissions", function () {
+  it("Can't access report page without permissions", () => {
     cy.visit(`/report`)
     cy.get('[data-cy=no-permissions-message]')
   })
 
-  it("Can't access comparison page without permissions", function () {
+  it("Can't access comparison page without permissions", () => {
     cy.visit(`/comparison`)
     cy.get('[data-cy=no-permissions-message]')
   })
 
-  it("Can't WRITE with READ permissions and cant go to edit mode", function () {
+  it("Can't WRITE with READ permissions and cant go to edit mode", () => {
     cy.givePermissions(user, testProgrammeName, 'read')
     cy.visit(`/form/${testProgrammeName}`)
 
@@ -40,7 +40,7 @@ describe('Permission tests', function () {
     cy.get('[data-cy=pdfdownload-go-back-button]').should('not.exist')
   })
 
-  it('Can do management with ADMIN permissions', function () {
+  it('Can do management with ADMIN permissions', () => {
     cy.givePermissions(user, testProgrammeName, 'admin')
     cy.visit('/')
     cy.get(`[data-cy=${testProgrammeName}-manage]`).click()

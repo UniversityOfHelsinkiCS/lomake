@@ -25,7 +25,6 @@ export const resetTokenAction = (programme, url) => {
 }
 
 export const resetAdminTokenAction = (programme, url) => {
-  console.log(url)
   const route = `/programmes/${programme}/tokens/admin/${url}`
   const prefix = 'RESET_ADMIN_TOKEN'
   return callBuilder(route, prefix, 'post')
@@ -112,7 +111,6 @@ export default (state = { data: null }, action) => {
         error: true,
       }
     case 'RESET_ADMIN_TOKEN_SUCCESS':
-      console.log(action.response)
       return {
         ...state,
         allTokens: state.allTokens.map(t => {

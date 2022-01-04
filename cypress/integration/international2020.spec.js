@@ -4,17 +4,17 @@ import { defaultYears } from '../../config/common'
 
 const user = 'cypressInternationalUser'
 
-describe('IAM permission tests', function () {
+describe('IAM permission tests', () => {
   beforeEach(() => {
     cy.login(user)
   })
 
-  it("User with access to International Master's programmes, should see 35 programmes on first page", function () {
+  it("User with access to International Master's programmes, should see 35 programmes on first page", () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 35)
   })
 
-  it('Report works for 35 international programmes', function () {
+  it('Report works for 35 international programmes', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -24,7 +24,7 @@ describe('IAM permission tests', function () {
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
 
-  it('Comparison works for 35 international programmes', function () {
+  it('Comparison works for 35 international programmes', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
