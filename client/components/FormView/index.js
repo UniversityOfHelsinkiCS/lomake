@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Dropdown, Loader } from 'semantic-ui-react'
-import rypsi_image from 'Assets/rypsi.jpg'
+import rypsiImage from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
@@ -19,7 +19,7 @@ import SaveIndicator from './SaveIndicator'
 import PDFDownload from './PDFDownload'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
-import questions from '../../questions'
+import questions from '../../questions.json'
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -118,7 +118,7 @@ const FormView = ({ room }) => {
             <div style={{ marginBottom: '2em' }}>
               <Button onClick={() => history.push('/')} icon="arrow left" />
             </div>
-            <img className="img-responsive" src={rypsi_image} />
+            <img alt="form-header-rypsi" className="img-responsive" src={rypsiImage} />
           </div>
 
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
@@ -134,12 +134,17 @@ const FormView = ({ room }) => {
             <p>{translations.p2[lang]}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={positiveEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} />{' '}
+            <img
+              alt="positive-emoji"
+              src={positiveEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
             {translations.positive[lang]}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
             <img
               src={neutralEmoji}
+              alt="neutral-emoji"
               style={{
                 width: '40px',
                 height: 'auto',
@@ -151,7 +156,11 @@ const FormView = ({ room }) => {
             {translations.neutral[lang]}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-            <img src={negativeEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} />{' '}
+            <img
+              src={negativeEmoji}
+              alt="negative-emoji"
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
             {translations.negative[lang]}
           </div>
         </div>
