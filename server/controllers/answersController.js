@@ -11,16 +11,6 @@ const getAll = async (req, res) => {
   }
 }
 
-const getAllTemp = async (req, res) => {
-  try {
-    const data = await db.tempAnswer.findAll({})
-    res.status(200).json(data)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     if (req.user.hasWideReadAccess) {
@@ -155,7 +145,6 @@ const bulkCreate = async (req, res) => {
 
 module.exports = {
   getAll,
-  getAllTemp,
   create,
   getOne,
   getPreviousYear,
