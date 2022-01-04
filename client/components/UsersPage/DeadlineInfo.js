@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDeadline } from 'Utilities/redux/deadlineReducer'
+import { getDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 const DeadlineInfo = () => {
