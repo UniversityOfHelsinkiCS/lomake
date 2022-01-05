@@ -11,7 +11,7 @@ describe('ReportPage tests', () => {
     cy.givePermissions(user, testProgrammeName, 'write')
   })
 
-  it('Piecharts are empty if there are no answers', () => {
+  it('Piecharts are not shown if there are no answers', () => {
     cy.login(user)
     cy.visit('/report')
     cy.get('div').contains('colors').should('contain', 'Smiley')
