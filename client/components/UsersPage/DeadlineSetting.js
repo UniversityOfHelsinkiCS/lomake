@@ -104,7 +104,11 @@ const DeadlineSetting = () => {
           <b>
             {translations.nextDeadline[lang]}
             <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {nextDeadline ? formatDate(nextDeadline.date) : <span data-cy="noNextDeadline">{translations.noDeadlineSet[lang]}</span>}
+              {nextDeadline ? (
+                formatDate(nextDeadline.date)
+              ) : (
+                <span data-cy="noNextDeadline">{translations.noDeadlineSet[lang]}</span>
+              )}
             </span>
           </b>
         </p>

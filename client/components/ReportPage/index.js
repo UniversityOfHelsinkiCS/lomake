@@ -24,7 +24,7 @@ import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
-import rawQuestions from '../../questions'
+import rawQuestions from '../../questions.json'
 import './ReportPage.scss'
 
 export default () => {
