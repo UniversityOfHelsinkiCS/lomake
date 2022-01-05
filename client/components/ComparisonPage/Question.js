@@ -4,6 +4,8 @@ import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { romanize } from 'Utilities/common'
 
+const generateRandomKey = value => `${value}-${Math.Random()}`
+
 const Question = ({ answers, question, handleClick, showing }) => {
   const [colors, setColors] = useState(['all', 'all', 'all'])
   const [buttons, setButtons] = useState([0, 0, 0])
@@ -26,7 +28,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
       content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
       trigger={
         <button
-          key={index}
+          key={color}
           name={color}
           type="button"
           className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
@@ -73,25 +75,25 @@ const Question = ({ answers, question, handleClick, showing }) => {
             {answers.map(
               (year, yearsIndex) =>
                 multipleYears.includes(year.year) && (
-                  <Grid.Column key={yearsIndex} className="comparison-question-content">
+                  <Grid.Column key={generateRandomKey(year)} className="comparison-question-content">
                     <div className="color-buttons-sticky sticky-header">
                       <label>{year.year}</label>
                       {buttonColors.map((color, index) => (
-                        <ButtonPopup key={index} color={color} index={index} yearsIndex={yearsIndex} />
+                        <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
                       ))}
                     </div>
                     {year.answers.length > 0 ? (
-                      year.answers.map((programme, index) => {
+                      year.answers.map(programme => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
                           return (
-                            <div key={index}>
+                            <div key={generateRandomKey(`${programme}-${year}`)}>
                               <label className="answer-title">
                                 {programme.name} <span className={`answer-circle-${programme.color}`} />
                               </label>
                               <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
                                 {programme.answer &&
-                                  programme.answer.split('\n').map((row, index) => (
-                                    <li key={index} className="answer-row">
+                                  programme.answer.split('\n').map((row) => (
+                                    <li key={generateRandomKey(programme)} className="answer-row">
                                       {row}
                                     </li>
                                   ))}
