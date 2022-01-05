@@ -23,7 +23,6 @@ import questions from '../../questions.json'
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
   const history = useHistory()
 
   const lang = useSelector(state => state.language)
@@ -55,14 +54,9 @@ const FormView = ({ room }) => {
   useEffect(() => {
     document.title = `${translations.form[lang]} - ${room}`
     dispatch(getProgramme(room))
-    setLoading(true)
   }, [lang, room])
 
   useEffect(() => {
-    if (loading && !singleProgramPending) {
-      setLoading(false)
-    }
-
     if (!programme) return
 
     // if the user has no access to tempAnswers, show the answers of the most recent year user has access to
@@ -99,15 +93,15 @@ const FormView = ({ room }) => {
     }
   }, [])
 
-  if (loading) return <Loader active />
-
   if (!room) return <Redirect to="/" />
 
   if (!programme) return 'Error: Invalid url.'
 
   if (!userHasReadAccess && !userHasWriteAccess) return <NoPermissions lang={lang} />
 
-  return (
+  return singleProgramPending ? (
+    <Loader active />
+  ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
