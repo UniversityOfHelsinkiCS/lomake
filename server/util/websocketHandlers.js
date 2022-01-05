@@ -1,6 +1,8 @@
+const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { isSuperAdmin } = require('@root/config/common')
+const { whereDraftYear } = require('@util/common')
 
 let currentEditors = {}
 
@@ -43,10 +45,12 @@ const getCurrentUser = async socket => {
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
   if (isSuperAdmin(uid) && loggedInAs) {
-    return await db.user.findOne({ where: { uid: loggedInAs } })
+    const user = await await db.user.findOne({ where: { uid: loggedInAs } })
+    return user
   }
 
-  return await db.user.findOne({ where: { uid } })
+  const user = await db.user.findOne({ where: { uid } })
+  return user
 }
 
 const joinRoom = async (socket, room, io) => {
@@ -55,7 +59,7 @@ const joinRoom = async (socket, room, io) => {
     if (currentUser.admin || (currentUser.access[room] && currentUser.access[room].read)) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
-          programme: room,
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
         },
         defaults: {
           data: {},
@@ -115,14 +119,18 @@ const updateField = async (socket, payload, io) => {
       io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
 
       const currentAnswer = await db.tempAnswer.findOne({
-        where: { programme: room },
+        where: {
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+        },
       })
 
       const [rows, [updatedAnswer]] = await db.tempAnswer.update(
         { data: { ...currentAnswer.data, ...data } },
         {
           returning: true,
-          where: { programme: room },
+          where: {
+            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+          },
         }
       )
       socket.to(room).emit('new_form_data', updatedAnswer.data)

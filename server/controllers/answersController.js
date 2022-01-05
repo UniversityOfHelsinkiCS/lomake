@@ -1,5 +1,7 @@
+const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
+const { whereDraftYear } = require('@util/common')
 
 const getAll = async (req, res) => {
   try {
@@ -14,14 +16,18 @@ const getAll = async (req, res) => {
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     if (req.user.hasWideReadAccess) {
-      const data = await db.tempAnswer.findAll({})
+      const data = await db.tempAnswer.findAll({
+        where: {
+          year: await whereDraftYear(),
+        },
+      })
       return res.status(200).json(data)
     }
     const { access } = req.user
     const now = new Date()
     const data = await db.tempAnswer.findAll({
       where: {
-        programme: Object.keys(req.user.access),
+        [Op.and]: [{ programme: Object.keys(req.user.access) }, { year: await whereDraftYear() }],
       },
     })
     // If the programme access has a year-limit on answers
@@ -41,7 +47,7 @@ const getSingleTempAnswers = async (req, res) => {
   try {
     const data = await db.tempAnswer.findOne({
       where: {
-        programme: req.params.programme,
+        [Op.and]: [{ programme: req.params.programme, year: await whereDraftYear() }],
       },
     })
 

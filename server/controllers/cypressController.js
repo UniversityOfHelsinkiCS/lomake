@@ -275,6 +275,11 @@ const createAnswers = async (req, res) => {
           year,
           submittedBy: 'cypressFakeTest',
         })
+        await db.tempAnswer.create({
+          data: {},
+          programme: prog.key,
+          year: year,
+        })
       }
     }
 
