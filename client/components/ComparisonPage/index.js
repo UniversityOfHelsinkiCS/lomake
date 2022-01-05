@@ -30,7 +30,7 @@ export default () => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const deadlinePassed = useSelector(state => state.deadlines.nextDeadline)
+  const draftYear = useSelector(state => state.deadlines.draftYear)
 
   if (!user) return <></>
 
@@ -52,7 +52,12 @@ export default () => {
   const answersByQuestions = chosenYear => {
     const answerMap = new Map()
     const chosenKeys = usersProgrammes.map(p => p.key)
-    const selectedAnswers = answersByYear(chosenYear, answers, oldAnswers, deadlinePassed)
+    const selectedAnswers = answersByYear({
+      year: chosenYear,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
     if (!selectedAnswers) return new Map()
     selectedAnswers.forEach(programme => {
       const key = programme.programme
