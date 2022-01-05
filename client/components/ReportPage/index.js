@@ -41,8 +41,8 @@ export default () => {
   const filters = useSelector(state => state.filters)
   const { year, faculty, level } = filters
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const deadline = useSelector(state => state.deadlines.nextDeadline)
-  const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
+  const draftYear = useSelector(state => state.deadlines.nextDeadline)
+  const selectedAnswers = answersByYear({ year, answers, oldAnswers, draftYear: draftYear && draftYear.year })
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
