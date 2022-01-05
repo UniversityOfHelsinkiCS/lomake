@@ -221,21 +221,17 @@ export const allYears = oldAnswers => {
   return years
 }
 
-export const answersByYear = (year, tempAnswers, oldAnswers, deadline) => {
+export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear }) => {
   // if viewing past years' answers
-  if (year < new Date().getFullYear() && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter(a => a.year === year)
-  }
-  // if the form is not open, and the cronjob has already moved everything to oldAnswers
-  if (!deadline && oldAnswers && oldAnswers.data && oldAnswers.years.includes(year)) {
+  if (draftYear !== year && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year)
   }
   // if there is a deadline (the form is open) and tempAnswers exist
-  if (deadline && tempAnswers) {
+  if (draftYear && tempAnswers) {
     return tempAnswers.data
   }
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
-  if (!deadline && !tempAnswers && oldAnswers && oldAnswers.data) {
+  if (!draftYear && !tempAnswers && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year)
   }
 

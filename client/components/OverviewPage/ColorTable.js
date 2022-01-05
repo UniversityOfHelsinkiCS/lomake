@@ -24,6 +24,7 @@ const ColorTable = React.memo(
     handleFilterChange,
   }) => {
     const dispatch = useDispatch()
+    const draftYear = useSelector(state => state.deadlines.draftYear)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
@@ -37,8 +38,12 @@ const ColorTable = React.memo(
       if (currentUser.admin) dispatch(getProgrammeOwners())
     }, [])
 
-    const deadline = useSelector(state => state.deadlines.nextDeadline)
-    const selectedAnswers = answersByYear(year, answers, oldAnswers, deadline)
+    const selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
 
     const lastYearsAnswers =
       oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
@@ -67,7 +72,7 @@ const ColorTable = React.memo(
         })
         return statObject
       }, {})
-    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered])
+    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
     const transformIdToTitle = (shortLabel, vertical = true) => {
       return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
