@@ -15,6 +15,7 @@ const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 const { getUserList } = require('@root/server/scripts/getUserList')
+const { createTempAnswers } = require('@root/server/scripts/createTempAnswers')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -29,6 +30,9 @@ initializeDatabaseConnection()
           return
         case 'getUserList':
           getUserList()
+          return
+        case 'generateMissingTempAnswers':
+          createTempAnswers()
           return
         default:
           return
