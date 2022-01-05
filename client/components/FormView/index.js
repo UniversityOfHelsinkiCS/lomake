@@ -23,7 +23,6 @@ import questions from '../../questions.json'
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
-  const [showCsv, setShowCsv] = useState(false)
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
@@ -169,15 +168,12 @@ const FormView = ({ room }) => {
             className="button basic gray"
             direction="left"
             text={translations.csvDownload[lang]}
-            onClick={() => setShowCsv(!showCsv)}
             data-cy="csv-download"
           >
-            {showCsv ? (
-              <Dropdown.Menu>
-                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written" />} />
-                <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="colors" />} />
-              </Dropdown.Menu>
-            ) : null}
+            <Dropdown.Menu>
+              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written" />} />
+              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="colors" />} />
+            </Dropdown.Menu>
           </Dropdown>
           <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
           <PDFDownload />
