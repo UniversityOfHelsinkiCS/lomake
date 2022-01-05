@@ -1,12 +1,12 @@
 import React from 'react'
 import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 
 const DeadlineInfo = () => {
   const lang = useSelector(state => state.language)
-  const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
+  const { draftYear, nextDeadline } = useSelector(({ deadlines }) => deadlines)
 
   const formatDate = date => {
     const temp = new Date(date)
@@ -18,6 +18,9 @@ const DeadlineInfo = () => {
       return (
         <>
           {translations.nextDeadline[lang]} {formatDate(nextDeadline.date)}
+          <p>
+            {translations.answersSavedForYear[lang]} {draftYear.year}
+          </p>
           <p>{translations.contactToska[lang]}</p>
         </>
       )
