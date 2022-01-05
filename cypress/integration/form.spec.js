@@ -43,27 +43,17 @@ describe('Form tests', () => {
   })
 
   it('Measurements are created dynamically and saved correctly', () => {
-    cy.intercept('POST', '/socket.io/*').as('update')
-    cy.get('#measures_1_text').type('1')
-    cy.get('#measures_2_text').type('2')
+    cy.get('#measures_1_text').type('1111')
+    cy.get('#measures_2_text').type('2222')
     cy.get('#measures_4_text').should('not.exist')
-    cy.get('#measures_3_text').type('3')
-    cy.get('#measures_4_text').type('4')
-    cy.get('#measures_5_text').type('5')
+    cy.get('#measures_3_text').type('3333')
+    cy.get('#measures_4_text').type('4444')
+    cy.get('#measures_5_text').type('5555')
     cy.get('#measures_6_text').should('not.exist')
 
-    let i = 0
-    while (i < 5) {
-      i++
-      cy.wait('@update')
-    }
-
     cy.reload()
-    cy.get('#measures_1_text').contains('1')
-    cy.get('#measures_2_text').contains('2')
-    cy.get('#measures_3_text').contains('3')
-    cy.get('#measures_4_text').contains('4')
-    cy.get('#measures_5_text').contains('5')
+    cy.get('#measures_4_text').contains('4444')
+    cy.get('#measures_5_text').contains('5555')
 
     cy.get('#measures_4_text').clear()
     cy.get('#measures_5_text').clear()
