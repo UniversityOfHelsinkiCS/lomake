@@ -1,17 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-
-const LOMAKE_SINCE_YEAR = 2019
-
-const getYearsArray = since => {
-  const years = []
-  for (let i = since; i <= new Date().getFullYear(); i++) {
-    const year = i
-    years.push(year)
-  }
-  return years
-}
+const { getYearsArray, LOMAKE_SINCE_YEAR } = require('@root/config/common')
 
 const createTempAnswers = async () => {
   logger.info(`Creating empty temp answers `)

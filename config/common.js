@@ -7,8 +7,19 @@ const requiredGroupForWideReadAccess = inProduction ? 'grp-lomake-production-rea
 
 const basePath = process.env.BASE_PATH || '/'
 
+const LOMAKE_SINCE_YEAR = 2019
+
+const getYearsArray = since => {
+  const years = []
+  for (let i = new Date().getFullYear(); i >= since; i--) {
+    const year = i
+    years.push(year)
+  }
+  return years
+}
+
 // First one is the current year, after that all the years that have answers
-const defaultYears = [2021, 2020, 2019]
+const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
 
 const degreeLevels = ['Bachelor´s level (1. cycle)', 'Master´s level (2. cycle)', 'Doctoral level (3. cycle)']
 
@@ -177,4 +188,6 @@ module.exports = {
   cypressUsers,
   testProgrammeName,
   requiredGroupForWideReadAccess,
+  LOMAKE_SINCE_YEAR,
+  getYearsArray,
 }

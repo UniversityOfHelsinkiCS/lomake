@@ -21,7 +21,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=yearSelector]').should('have.class', 'disabled').contains(2020)
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
     cy.contains("Master's Programme in Agricultural Sciences")
-    cy.contains(`Hello from ${defaultYears[1]}`)
+    cy.contains(`Hello from 2020`)
   })
 
   it('Comparison works for 35 international programmes', () => {

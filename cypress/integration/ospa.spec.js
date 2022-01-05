@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeName, defaultYears } from '../../config/common'
 
 describe('OSPA user tests', () => {
   beforeEach(() => {
@@ -10,14 +10,11 @@ describe('OSPA user tests', () => {
   })
 
   it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', () => {
-    cy.server()
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
     // Delete pre-generated deadline
-    cy.route('DELETE', '/api/deadlines').as('delete')
     cy.get('[data-cy=deleteDeadline]').click()
-    cy.wait('@delete')
     cy.get('[data-cy=noNextDeadline]')
 
     // Check that form is locked as it should be
@@ -31,19 +28,24 @@ describe('OSPA user tests', () => {
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation').click() // Go to next month
     cy.get('.react-datepicker__day--014').click() // Select 14th day
-    cy.route('POST', '/api/deadlines').as('update')
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+
     cy.get('[data-cy=updateDeadline]').click()
-    cy.wait('@update').should('have.property', 'status', 200)
     cy.get('[data-cy=nextDeadline]').contains('14.')
 
     // Update deadline
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation').click() // Go to next month
     cy.get('.react-datepicker__day--024').click() // Select 24th day
-    cy.route('POST', '/api/deadlines').as('update')
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+
     cy.get('[data-cy=updateDeadline]').click()
-    cy.wait('@update').should('have.property', 'status', 200)
     cy.get('[data-cy=nextDeadline]').contains('24.')
+    //
   })
 
   it('Can add and remove a valid user', () => {

@@ -162,6 +162,9 @@ const createDeadlineIfNoneExist = async () => {
     await db.deadline.create({
       date: new Date(),
     })
+    await db.draftYear.create({
+      year: new Date().getFullYear(),
+    })
   }
 }
 
@@ -189,6 +192,23 @@ const createTestProgramme = async () => {
   }
 }
 
+const createTempAnswersForTestProgramme = async () => {
+  try {
+    logger.info('Creating tempAnswers for test programme')
+    await db.tempAnswer.destroy({ where: { programme: testProgrammeName }})
+
+    defaultYears.forEach(async year => {
+      await db.tempAnswer.create({
+        programme: testProgrammeName,
+        data: {},
+        year,
+      })
+    })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+  }
+}
+
 const seed = async (req, res) => {
   try {
     logger.info('Cypress::seeding database')
@@ -199,6 +219,7 @@ const seed = async (req, res) => {
     await resetForm()
     await createDeadlineIfNoneExist()
     await createTestProgramme()
+    await createTempAnswersForTestProgramme()
 
     return res.status(200).send('OK')
   } catch (error) {
@@ -260,28 +281,30 @@ const createAnswers = async (req, res) => {
     logger.info('Cypress::creating answers')
 
     await db.answer.destroy({ where: {} })
-
-    const years = [defaultYears[2], defaultYears[1]]
+    await db.tempAnswer.destroy({ where: {} })
 
     const programmes = await db.studyprogramme.findAll({})
 
-    for (const year of years) {
+    defaultYears.forEach(async year => {
       const fakeanswers = getFakeAnswers(year)
+      const currentYear = new Date().getFullYear()
 
-      for (const prog of programmes) {
-        await db.answer.create({
-          programme: prog.key,
-          data: fakeanswers,
-          year,
-          submittedBy: 'cypressFakeTest',
-        })
+      programmes.forEach(async prog => {
+        if (year !== currentYear) {
+          await db.answer.create({
+            programme: prog.key,
+            data: fakeanswers,
+            year,
+            submittedBy: 'cypressFakeTest',
+          })
+        }
         await db.tempAnswer.create({
           data: {},
           programme: prog.key,
-          year: year,
+          year,
         })
-      }
-    }
+      })
+    })
 
     return res.status(200).send('OK')
   } catch (error) {

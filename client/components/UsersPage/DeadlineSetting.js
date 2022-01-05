@@ -73,6 +73,7 @@ const DeadlineSetting = () => {
         />
         <Header as="h4">{translations.selectDraftYear[lang]}</Header>
         <Select
+          data-cy="draft-year-selector"
           placeholder="Select year"
           options={yearOptions}
           value={newDraftYear}
@@ -103,7 +104,7 @@ const DeadlineSetting = () => {
           <b>
             {translations.nextDeadline[lang]}
             <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {nextDeadline ? formatDate(nextDeadline.date) : translations.noDeadlineSet[lang]}
+              {nextDeadline ? formatDate(nextDeadline.date) : <span data-cy="noNextDeadline">{translations.noDeadlineSet[lang]}</span>}
             </span>
           </b>
         </p>
