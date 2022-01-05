@@ -64,7 +64,7 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
     "react": "^16.14.0",
-    "react-csv": "^2.0.1",
+    "react-csv": "^2.2.1",
     "react-datepicker": "^2.16.0",
     "react-dom": "^16.12.0",
     "react-draft-wysiwyg": "^1.14.7",
