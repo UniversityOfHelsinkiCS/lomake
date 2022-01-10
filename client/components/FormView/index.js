@@ -34,11 +34,10 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers.data)
   const currentRoom = useSelector(state => state.room)
-  const currentYear = new Date().getFullYear()
 
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
-  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(currentYear)
+  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   const setOldAnswers = () => {
     dispatch(setViewOnly(true))
