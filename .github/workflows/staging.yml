@@ -21,10 +21,8 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed --tokens"
 
-      - name: 'Run cypress'
-        uses: cypress-io/github-action@v2
-        with:
-          browser: firefox
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox *.spec.js
 
       - uses: actions/upload-artifact@v1
         if: failure()
