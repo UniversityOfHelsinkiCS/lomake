@@ -6,7 +6,7 @@ const lodash = require('lodash')
 const loggerPrefix = 'Cronjob::backup | '
 
 const startBackupJob = () => {
-  cron.schedule('* * * * *', () => createBackups())
+  cron.schedule('0 3 * * *', () => createBackups())
   logger.info('Backup job started')
 }
 
@@ -14,6 +14,9 @@ const startBackupJob = () => {
  * Creates new backup to backup_answers table, but only if the data has changed.
  */
 const createBackups = async () => {
+  const draftYear = await db.draftYear.findAll({})
+
+  if (!draftYear.length) return
   const currentAnswers = await db.tempAnswer.findAll({})
 
   currentAnswers.forEach(async answer => {
@@ -24,7 +27,7 @@ const createBackups = async () => {
       where: {
         programme,
       },
-      order: [['createdAt', 'DESC']],
+      order: [['createdAt', 'ASC']],
     })
 
     const oldestBackUpData = oldestBackup.length === 0 ? {} : oldestBackup[0].data
