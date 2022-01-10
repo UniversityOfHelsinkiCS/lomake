@@ -29,7 +29,8 @@ jobs:
         with:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
-      - uses: actions/upload-artifact@v2
+
+      - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
