@@ -31,6 +31,7 @@ module.exports = (env, argv) => {
     },
     devtool: 'source-map',
     entry: [
+      '@babel/polyfill', // so we don't need to import it anywhere
       './client',
       ...additionalEntries,
     ],
