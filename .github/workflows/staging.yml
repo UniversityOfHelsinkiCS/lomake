@@ -21,8 +21,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed --tokens"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless *.spec.js
+      - name: 'Run cypress'
+        uses: cypress-io/github-action@v2
+        with:
+          browser: firefox
+        env:
+          CYPRESS_baseUrl: http://localhost:8000
 
       - uses: actions/upload-artifact@v1
         if: failure()
