@@ -29,9 +29,8 @@ jobs:
         with:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
-      # Test run video was always captured, so this action uses "always()" condition
       - uses: actions/upload-artifact@v1
-        if: always()
+        if: failure()
         with:
           name: cypress-videos
           path: /home/runner/work/lomake/lomake/cypress/videos
