@@ -30,12 +30,6 @@ jobs:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: /home/runner/work/lomake/lomake/cypress/videos
-
   build:
     name: 'Build and publish staging image'
     needs: test
