@@ -30,7 +30,7 @@ jobs:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
       - uses: actions/upload-artifact@v2
-        if: failure()
+        if: always()
         with:
           name: cypress-videos
           path: /home/runner/work/lomake/lomake/cypress/videos
