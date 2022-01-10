@@ -60,9 +60,11 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
+const STAGING_ADMIN = process.env.SUPER_ADMIN
 const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser']
 
 const isSuperAdmin = uid => {
+  if (!inProduction && STAGING_ADMIN && STAGING_ADMIN === uid) return true
   return SUPERADMINS.includes(uid)
 }
 
