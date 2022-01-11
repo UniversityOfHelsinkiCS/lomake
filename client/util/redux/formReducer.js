@@ -31,8 +31,8 @@ export const getFormAction = () => {
   return callBuilder(route, prefix)
 }
 
-export const getTempAnswers = ({ room, year }) => {
-  const route = `/answers/temp/${room}/${year}`
+export const getSingleProgrammesAnswers = ({ room, year }) => {
+  const route = `/answers/single/${room}/${year}`
   const prefix = 'GET_TEMP_ANSWERS'
   return callBuilder(route, prefix)
 }

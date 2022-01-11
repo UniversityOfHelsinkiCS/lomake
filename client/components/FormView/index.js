@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Dropdown, Loader } from 'semantic-ui-react'
@@ -11,7 +11,7 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { setViewOnly, getTempAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 import StatusMessage from './StatusMessage'
@@ -38,18 +38,6 @@ const FormView = ({ room }) => {
   const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
   const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
   const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
-
-  console.log({
-    nextDeadline,
-    draftYear,
-    programme,
-    singleProgramPending,
-    year,
-    viewingOldAnswers,
-    userHasWriteAccess,
-    userHasReadAccess,
-    userHasAccessToTempAnswers,
-  })
 
   const setOldAnswers = () => {
     dispatch(setViewOnly(true))
@@ -80,7 +68,7 @@ const FormView = ({ room }) => {
 
       // if the selected year is this year, and there is a deadline, the user should see the tempAnswers
       if (!viewingOldAnswers && nextDeadline) {
-        dispatch(getTempAnswers({ room, year }))
+        dispatch(getSingleProgrammesAnswers({ room, year }))
       }
       // if the selected year is this year, and there is no deadline, the newest answers have been moved to old answers and should be found from there
       if (!viewingOldAnswers && !nextDeadline && oldAnswers) {
