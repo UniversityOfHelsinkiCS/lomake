@@ -54,7 +54,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
     if (draftYear === year) {
       data = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme, year: await whereDraftYear() }],
+          [Op.and]: [{ programme, year: draftYear }],
         },
       })
     } else {
@@ -121,8 +121,7 @@ const getPreviousYear = async (req, res) => {
     const data = await db.answer.findAll({
       limit: 1,
       where: {
-        programme: req.params.programme, // Might have to switch to some kind of id, not sure how well full string works with urls.
-        year: new Date().getFullYear() - 1,
+        [Op.and]: [{ programme: req.params.programme, year: (await whereDraftYear()) - 1 }],
       },
       order: [['createdAt', 'DESC']],
     })
