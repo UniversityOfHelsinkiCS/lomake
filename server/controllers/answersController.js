@@ -43,13 +43,29 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   }
 }
 
-const getSingleTempAnswers = async (req, res) => {
+const getSingleProgrammesAnswers = async (req, res) => {
   try {
-    const data = await db.tempAnswer.findOne({
-      where: {
-        [Op.and]: [{ programme: req.params.programme, year: await whereDraftYear() }],
-      },
-    })
+    const { programme, year } = req.params
+    const draftYears = await db.draftYear.findAll({})
+    const draftYear = draftYears.length ? draftYears[0].year : null
+
+    let data = null
+
+    if (draftYear === year) {
+      data = await db.tempAnswer.findOne({
+        where: {
+          [Op.and]: [{ programme, year: await whereDraftYear() }],
+        },
+      })
+    } else {
+      data = await db.answer.findAll({
+        limit: 1,
+        where: {
+          programme,
+        },
+        order: [['createdAt', 'DESC']],
+      })
+    }
 
     const result = data ? data.data : {}
 
@@ -157,5 +173,5 @@ module.exports = {
   bulkCreate,
   getAllTempUserHasAccessTo,
   getAllUserHasAccessTo,
-  getSingleTempAnswers,
+  getSingleProgrammesAnswers,
 }
