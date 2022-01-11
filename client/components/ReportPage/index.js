@@ -95,10 +95,10 @@ export default () => {
       const answeredProgrammes = value.map(p => p.key)
       const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
       if (programmesMissing) {
-        for (const p of programmesMissing) {
+        programmesMissing.forEach(p => {
           const earlierAnswers = answerMap.get(key)
           answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-        }
+        })
       }
     })
 
