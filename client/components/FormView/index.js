@@ -26,7 +26,7 @@ const FormView = ({ room }) => {
   const history = useHistory()
 
   const lang = useSelector(state => state.language)
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const { draftYear } = useSelector(state => state.deadlines)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const user = useSelector(state => state.currentUser.data)
@@ -57,16 +57,16 @@ const FormView = ({ room }) => {
     if (!userHasAccessToTempAnswers) {
       setOldAnswers()
       // if one of these conditions is true, the answers should be read-only
-    } else if (programme.locked || !userHasWriteAccess || viewingOldAnswers || (draftYear && draftYear.year !== year) || !nextDeadline) {
+    } else if (programme.locked || !userHasWriteAccess || viewingOldAnswers || (draftYear && draftYear.year !== year) || !draftYear) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
 
       // if the selected year is this year, and there is a deadline, the user should see the tempAnswers
-      if (!viewingOldAnswers && nextDeadline) {
+      if (!viewingOldAnswers && draftYear) {
         dispatch(getSingleProgrammesAnswers({ room, year }))
       }
       // if the selected year is this year, and there is no deadline, the newest answers have been moved to old answers and should be found from there
-      if (!viewingOldAnswers && !nextDeadline && oldAnswers) {
+      if (!viewingOldAnswers && !draftYear && oldAnswers) {
         setOldAnswers()
       }
       // if the selected year is older than this year and there are old answers, shows them in the form
@@ -78,7 +78,7 @@ const FormView = ({ room }) => {
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
     }
-  }, [singleProgramPending, viewingOldAnswers, year, nextDeadline, oldAnswers, userHasAccessToTempAnswers])
+  }, [singleProgramPending, viewingOldAnswers, year, draftYear, oldAnswers, userHasAccessToTempAnswers])
 
   useEffect(() => {
     return () => {
