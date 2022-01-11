@@ -58,12 +58,10 @@ const getSingleProgrammesAnswers = async (req, res) => {
         },
       })
     } else {
-      data = await db.answer.findAll({
-        limit: 1,
+      data = await db.answer.findOne({
         where: {
-          programme,
+          [Op.and]: [{ programme, year }],
         },
-        order: [['createdAt', 'DESC']],
       })
     }
 

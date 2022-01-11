@@ -42,12 +42,7 @@ const FormView = ({ room }) => {
   const setOldAnswers = () => {
     dispatch(setViewOnly(true))
     if (currentRoom) dispatch(wsLeaveRoom(room))
-    const programmesData = oldAnswers ? oldAnswers.find(a => a.programme === programme.key && a.year === year) : null
-    const answersFromSelectedYear = programmesData ? programmesData.data : []
-    dispatch({
-      type: 'SET_OLD_FORM_ANSWERS',
-      answers: answersFromSelectedYear,
-    })
+    dispatch(getSingleProgrammesAnswers({ room, year }))
   }
 
   useEffect(() => {
