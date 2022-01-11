@@ -21,29 +21,32 @@ import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
 import questions from '../../questions.json'
 
+const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year }) => {
+  if (!accessToTempAnswers) return true
+  if (programme.locked) return true
+  if (!writeAccess) return true
+  if (viewingOldAnswers) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  return false
+}
+
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
   const lang = useSelector(state => state.language)
-  const { draftYear } = useSelector(state => state.deadlines)
+  const draftYear = useSelector(state => state.deadlines.draftYear)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const user = useSelector(state => state.currentUser.data)
-  const year = useSelector(({ filters }) => filters.year)
+  const year = useSelector(state => state.filters.year)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-  const oldAnswers = useSelector(state => state.oldAnswers.data)
   const currentRoom = useSelector(state => state.room)
 
-  const userHasWriteAccess = (user.access[room] && user.access[room].write) || user.admin
-  const userHasReadAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
-  const userHasAccessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
-
-  const setOldAnswers = () => {
-    dispatch(setViewOnly(true))
-    if (currentRoom) dispatch(wsLeaveRoom(room))
-    dispatch(getSingleProgrammesAnswers({ room, year }))
-  }
+  const writeAccess = (user.access[room] && user.access[room].write) || user.admin
+  const readAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
+  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
     document.title = `${translations.form[lang]} - ${room}`
@@ -52,33 +55,16 @@ const FormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-
-    // if the user has no access to tempAnswers, show the answers of the most recent year user has access to
-    if (!userHasAccessToTempAnswers) {
-      setOldAnswers()
-      // if one of these conditions is true, the answers should be read-only
-    } else if (programme.locked || !userHasWriteAccess || viewingOldAnswers || (draftYear && draftYear.year !== year) || !draftYear) {
+    dispatch(getSingleProgrammesAnswers({ room, year }))
+    if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
-
-      // if the selected year is this year, and there is a deadline, the user should see the tempAnswers
-      if (!viewingOldAnswers && draftYear) {
-        dispatch(getSingleProgrammesAnswers({ room, year }))
-      }
-      // if the selected year is this year, and there is no deadline, the newest answers have been moved to old answers and should be found from there
-      if (!viewingOldAnswers && !draftYear && oldAnswers) {
-        setOldAnswers()
-      }
-      // if the selected year is older than this year and there are old answers, shows them in the form
-      if (viewingOldAnswers && oldAnswers) {
-        setOldAnswers()
-      }
     } else {
-      // if none of these conditions is true, the user should be able to write to tempanswers
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
+      dispatch(getSingleProgrammesAnswers({ room, year }))
     }
-  }, [singleProgramPending, viewingOldAnswers, year, draftYear, oldAnswers, userHasAccessToTempAnswers])
+  }, [programme, singleProgramPending, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers])
 
   useEffect(() => {
     return () => {
@@ -89,9 +75,9 @@ const FormView = ({ room }) => {
 
   if (!room) return <Redirect to="/" />
 
-  if (!programme) return 'Error: Invalid url.'
+  if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
-  if (!userHasReadAccess && !userHasWriteAccess) return <NoPermissions lang={lang} />
+  if (!readAccess && !writeAccess) return <NoPermissions lang={lang} />
 
   return singleProgramPending ? (
     <Loader active />
