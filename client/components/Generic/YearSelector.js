@@ -12,6 +12,7 @@ export default function YearSelector({ multiple, size, label }) {
   const currentUser = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
   const year = useSelector(({ filters }) => filters.year)
+  const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const [yearOptions, setYearOptions] = useState([])
 
@@ -33,7 +34,7 @@ export default function YearSelector({ multiple, size, label }) {
   }, [previousYearsWithAnswers])
 
   const handleYearChange = (_, { value }) => {
-    if (value !== new Date().getFullYear()) {
+    if (!draftYear || (draftYear && draftYear.year !== value)) {
       dispatch(setViewOnly(true))
       dispatch(setViewingOldAnswers(true))
     } else {
