@@ -42,6 +42,7 @@ export default function SaveIndicator() {
   }
 
   const errorHandler = () => {
+    if (viewOnly) return
     setSaveError(true)
     setTimeoutId(undefined)
     dispatch(setViewOnly(true))
@@ -59,7 +60,7 @@ export default function SaveIndicator() {
     return () => {
       clearTimeout(temp)
     }
-  }, [lastSaveAttempt])
+  }, [lastSaveAttempt, viewOnly])
 
   useEffect(() => {
     if (saving) {
