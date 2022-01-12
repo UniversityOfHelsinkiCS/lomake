@@ -77,8 +77,9 @@ jobs:
     name: 'Report deployment success to Tilku-channel'
     runs-on: ubuntu-latest
     needs:
-    - test
-    - build
+      - test_comparison
+      - test_form
+      - build
     if: success()
     steps:
       - name: "Send notification to Slack"
@@ -93,8 +94,9 @@ jobs:
     name: 'Report test failure to Tilku-channel'
     runs-on: ubuntu-latest
     needs:
-    - test
-    - build
+      - test_comparison
+      - test_form
+      - build
     if: failure()
     steps:
       - name: "Send notification to Slack"
