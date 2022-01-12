@@ -280,7 +280,7 @@ jobs:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
-  test_report_page:
+  test_report:
     name: Test Report Page
     runs-on: ubuntu-latest
     steps:
