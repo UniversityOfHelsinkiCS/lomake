@@ -44,6 +44,7 @@ export const sortedItems = (items, sorter, lang) => {
     if (sorter === 'name') {
       const aName = a.name[lang] ? a.name[lang] : a.name.en
       const bName = b.name[lang] ? b.name[lang] : b.name.en
+      if (!aName || !bName) return a
       return aName.localeCompare(bName)
     }
     if (sorter === 'userGroup') {
@@ -62,7 +63,10 @@ export const sortedItems = (items, sorter, lang) => {
       if (Object.entries(a.access).length > Object.entries(b.access).length) return -1
       if (Object.entries(a.access).length < Object.entries(b.access).length) return 1
     }
-    if (typeof a[sorter] === 'string') return a[sorter].localeCompare(b[sorter])
+    if (typeof a[sorter] === 'string') {
+      if (!a[sorter] || !b[sorter]) return a
+      return a[sorter].localeCompare(b[sorter])
+    }
     if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
   })
   return sorted

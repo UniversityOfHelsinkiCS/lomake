@@ -1,3 +1,4 @@
+import { sortedItems } from 'Utilities/common'
 import callBuilder from '../apiConnection'
 /**
  * Actions and reducers are in the same file for readability
@@ -33,7 +34,7 @@ export default (state = { data: [] }, action) => {
     case 'GET_ALL_USERS_SUCCESS':
       return {
         ...state,
-        data: action.response.sort((a, b) => a.lastname.localeCompare(b.lastname)),
+        data: sortedItems(action.response, 'lastname'),
         pending: false,
         error: false,
       }
