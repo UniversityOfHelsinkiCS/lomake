@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeName, defaultYears } from '../../config/common'
 
 describe('Form tests', () => {
   beforeEach(() => {
@@ -58,5 +58,12 @@ describe('Form tests', () => {
     cy.get('#measures_4_text').clear()
     cy.get('#measures_5_text').clear()
     cy.get('#measures_5_text').should('not.exist')
+  })
+
+  it(`Other years' form pages are locked`, () => {
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=locked-form-notice]')
+    cy.get('.editor-class').should('not.exist')
   })
 })
