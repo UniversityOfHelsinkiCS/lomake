@@ -51,7 +51,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
 
     let data = null
 
-    if (draftYear === year) {
+    if (draftYear && draftYear === year) {
       data = await db.tempAnswer.findOne({
         where: {
           [Op.and]: [{ programme, year: draftYear }],
