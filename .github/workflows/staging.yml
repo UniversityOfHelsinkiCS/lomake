@@ -72,7 +72,7 @@ jobs:
         run: docker exec lomake_dev bash -c "node index.js seed --tokens"
 
       - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNofifications.spec.js"
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNotifications.spec.js.spec.js"
 
       - uses: actions/upload-artifact@v2
         if: failure()
@@ -280,6 +280,31 @@ jobs:
           name: cypress-screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
+  test_report_page:
+    name: Test Report Page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/report.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_year_selector:
     name: Test year selector
     runs-on: ubuntu-latest
@@ -319,6 +344,7 @@ jobs:
       - test_misc
       - test_ospa
       - test_permissions
+      - test_report
       - test_year_selector
     runs-on: ubuntu-latest
     steps:
@@ -348,6 +374,7 @@ jobs:
       - test_misc
       - test_ospa
       - test_permissions
+      - test_report
       - test_year_selector
       - build
     if: success()
@@ -375,6 +402,7 @@ jobs:
       - test_misc
       - test_ospa
       - test_permissions
+      - test_report
       - test_year_selector
       - build
     if: failure()

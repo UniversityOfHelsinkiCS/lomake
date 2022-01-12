@@ -14,6 +14,7 @@ describe('IAM permission tests', () => {
   })
 
   it('User should not see only the data of 2020 in the form page', () => {
+    cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     // Master's programme in Data Science
     cy.visit(`/form/MH50_010#0`)

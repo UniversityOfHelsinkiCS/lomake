@@ -13,7 +13,9 @@ describe('ReportPage tests', () => {
 
   it('Piecharts are not shown if there are no answers', () => {
     cy.login(user)
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('contain', 'Smiley')
     cy.get('div').contains('colors').click()
     cy.get('div').contains('colors')
@@ -29,7 +31,9 @@ describe('ReportPage tests', () => {
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
 
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
@@ -39,7 +43,8 @@ describe('ReportPage tests', () => {
 
   it('User should be able to see answers from only one programme, when they have rights for only one', () => {
     cy.login(user)
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
@@ -50,7 +55,8 @@ describe('ReportPage tests', () => {
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
 
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
   })
@@ -62,14 +68,15 @@ describe('ReportPage tests', () => {
 
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
 
   it('Filtering works for programme level', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
-    cy.reload()
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
 
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
@@ -83,7 +90,8 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.wait(1000)
     cy.get('[data-cy=faculty-filter]').contains('Faculty of Law').should('be.visible').click()
@@ -97,7 +105,8 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=doctoral-school-filter]').should('not.exist')
     cy.get('[data-cy=doctoral-filter]')
     cy.get('[data-cy=doctoral-filter]').click()
@@ -112,8 +121,8 @@ describe('ReportPage tests', () => {
   it('Filtering works for companion programmes', () => {
     cy.login(adminUser)
     cy.request('/api/cypress/createAnswers')
-    cy.reload()
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=companion-filter]').should('not.exist')
     cy.get('[data-cy=faculty-filter]').should('be.visible').click()
     cy.get('span').contains('Faculty of Arts').should('be.visible').click()
@@ -139,7 +148,9 @@ describe('ReportPage tests', () => {
     cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
-    cy.visit('/report')
+    cy.visit('/')
+    cy.get('[data-cy=nav-report]').click()
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('be.visible').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
