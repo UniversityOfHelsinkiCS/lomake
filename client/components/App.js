@@ -28,7 +28,7 @@ export default () => {
   useEffect(() => {
     const user = currentUser.data
     if (user) {
-      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : new Date().getFullYear()
+      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : 2021
       dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
       dispatch(getDeadlineAndDraftYear())
