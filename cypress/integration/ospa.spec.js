@@ -37,6 +37,8 @@ describe('OSPA user tests', () => {
   })
 
   it('Deadline for a past year can be created, the form of that year can be edited and the form can be then again closed', () => {
+    cy.request('/api/cypress/createAnswers')
+
     // Delete pre-generated deadline
     cy.visit('/')
     cy.get('[data-cy=nav-admin]').click()

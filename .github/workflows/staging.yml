@@ -72,7 +72,7 @@ jobs:
         run: docker exec lomake_dev bash -c "node index.js seed --tokens"
 
       - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNotifications.spec.js.spec.js"
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNotifications.spec.js"
 
       - uses: actions/upload-artifact@v2
         if: failure()
