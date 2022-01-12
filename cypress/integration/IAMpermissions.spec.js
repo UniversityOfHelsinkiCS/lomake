@@ -28,6 +28,8 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=report-select-all]').should('contain', 'all')
+    cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
     cy.contains(`Hello from ${defaultYears[1]}`)
   })
