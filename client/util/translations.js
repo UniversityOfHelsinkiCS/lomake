@@ -474,10 +474,15 @@ export const formViewTranslations = {
     en: 'Last saved',
     se: 'Senast sparat',
   },
-  lockedFormNotice: {
-    fi: 'Lomake on lukittu, eikä sitä voi muokata.',
-    en: 'The form has been locked and it cannot be edited.',
-    se: 'The form has been locked and it cannot be edited.',
+  lockedFormNoticePart1: {
+    fi: 'Lomake on valitulta vuodelta lukittu, eikä sitä voi muokata.',
+    en: 'The form has been locked for the selected year and it cannot be edited.',
+    se: 'The form has been locked for the selected year and it cannot be edited.',
+  },
+  lockedFormNoticePart2: {
+    fi: ' vastaukset ovat avoinna muokattavaksi.',
+    en: ' form is open for editing.',
+    se: ' form is open for editing.',
   },
   lockedFormSubtitle: {
     fi: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',

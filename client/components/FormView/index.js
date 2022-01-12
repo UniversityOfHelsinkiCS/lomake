@@ -101,7 +101,7 @@ const FormView = ({ room }) => {
 
           <div className="hide-in-print-mode">
             <YearSelector size="extra-small" />
-            <StatusMessage />
+            <StatusMessage programme={room} />
 
             <p>{translations.p1[lang]}</p>
             <p>{translations.p2[lang]}</p>
