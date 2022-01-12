@@ -1,12 +1,14 @@
+const { Op } = require('sequelize')
 const cron = require('node-cron')
 const db = require('@models/index')
 const logger = require('@util/logger')
 const lodash = require('lodash')
+const { whereDraftYear } = require('@util/common')
 
 const loggerPrefix = 'Cronjob::backup | '
 
 const startBackupJob = () => {
-  cron.schedule('0 3 * * *', () => createBackups())
+  cron.schedule('* * * * *', () => createBackups())
   logger.info('Backup job started')
 }
 
@@ -17,22 +19,26 @@ const createBackups = async () => {
   const draftYear = await db.draftYear.findAll({})
 
   if (!draftYear.length) return
-  const currentAnswers = await db.tempAnswer.findAll({})
+  const currentAnswers = await db.tempAnswer.findAll({
+    where: {
+      year: await whereDraftYear(),
+    },
+  })
 
   currentAnswers.forEach(async answer => {
     const { programme, data } = answer
 
-    const oldestBackup = await db.backupAnswer.findAll({
+    const newestBackup = await db.backupAnswer.findAll({
       limit: 1,
       where: {
         programme,
       },
-      order: [['createdAt', 'ASC']],
+      order: [['createdAt', 'DESC']],
     })
 
-    const oldestBackUpData = oldestBackup.length === 0 ? {} : oldestBackup[0].data
+    const newestBackupData = newestBackup.length === 0 ? {} : newestBackup[0].data
 
-    if (lodash.isEqual(data, oldestBackUpData)) return
+    if (lodash.isEqual(data, newestBackupData)) return
 
     await db.backupAnswer.create({
       programme,
