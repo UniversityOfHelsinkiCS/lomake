@@ -9,7 +9,7 @@ describe('OSPA user tests', () => {
     cy.visit('/')
   })
 
-  it('Deadline can be deleted, created and updated & deleting a deadline locks forms.', () => {
+  it('Deadline can be deleted and created and deleting a deadline locks forms.', () => {
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -38,6 +38,7 @@ describe('OSPA user tests', () => {
 
   it('Deadline for a past year can be created, the form of that year can be edited and the form can be then again closed', () => {
     // Delete pre-generated deadline
+    cy.visit('/')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
     cy.get('[data-cy=deleteDeadline]').click()
