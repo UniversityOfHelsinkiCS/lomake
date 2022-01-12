@@ -51,7 +51,6 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-    setPicked(programmes.all)
     document.title = `${translations.reportPage[lang]}`
   }, [lang])
 
