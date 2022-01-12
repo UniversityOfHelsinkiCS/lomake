@@ -1,6 +1,7 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { cypressUsers, testProgrammeName, defaultYears } = require('@util/common')
+const moment = require('moment')
 
 const getFakeAnswers = year => {
   const fields = [
@@ -313,8 +314,32 @@ const createAnswers = async (req, res) => {
   }
 }
 
+const createDeadline = async (req, res) => {
+  try {
+    logger.info(`Cypress::creating a new deadline`)
+
+    await db.deadline.destroy({ where: {} })
+    await db.draftYear.destroy({ where: {} })
+
+    const deadline = await db.deadline.create({
+      date: moment().add(7, 'days'),
+    })
+
+    const draftYear = await db.draftYear.create({
+      year: req.params.year,
+    })
+
+    logger.info(`Cypress::deadline created: ${deadline}, draftYear created: ${draftYear}`)
+    return res.status(200).send('OK')
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   seed,
   givePermissions,
   createAnswers,
+  createDeadline,
 }

@@ -34,18 +34,58 @@ describe('OSPA user tests', () => {
 
     cy.get('[data-cy=updateDeadline]').click()
     cy.get('[data-cy=nextDeadline]').contains('14.')
+  })
 
-    // Update deadline
+  it('Deadline for a past year can be created, the form of that year can be edited and the form can be then again closed', () => {
+    // Delete pre-generated deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+    cy.get('[data-cy=deleteDeadline]').click()
+    cy.get('[data-cy=noNextDeadline]')
+
+    // Create new deadline for the past year
     cy.get('.react-datepicker__input-container > input').click() // Open datepicked
     cy.get('.react-datepicker__navigation').click() // Go to next month
-    cy.get('.react-datepicker__day--024').click() // Select 24th day
+    cy.get('.react-datepicker__day--014').click() // Select 14th day
 
     cy.get('[data-cy=draft-year-selector]').click()
-    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get('.item').contains(defaultYears[1]).click()
 
     cy.get('[data-cy=updateDeadline]').click()
-    cy.get('[data-cy=nextDeadline]').contains('24.')
-    //
+    cy.get('[data-cy=nextDeadline]').contains('14.')
+
+    // Visit the form page
+    cy.visit('/form/KH50_004')
+    cy.get('[data-cy=textarea-learning_outcomes]')
+    cy.get('.editor-class').should('not.exist')
+
+    // Select the editable year
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+
+    // Edit text
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
+    cy.writeToTextField('[contenteditable="true"]', ' and editing old year')
+    cy.reload()
+
+    // Check that edits have been added
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').should('contain.text', `Hello from 2021 and editing old year`)
+
+    // Close the form
+    cy.visit('/admin')
+    cy.contains('Deadline settings').click()
+    cy.get('[data-cy=deleteDeadline]').click()
+
+    // Check that changes persisted and fields with no changes stay the same
+    cy.visit('/form/KH50_004')
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.get('[data-cy=textarea-learning_outcomes]').should('contain.text', `Hello from 2021 and editing old year`)
+    cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2021`)
+
+    cy.request(`/api/cypress/createDeadline/${defaultYears[0]}`)
   })
 
   it('Can add and remove a valid user', () => {
