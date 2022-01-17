@@ -1,0 +1,9 @@
+.form-status-message {
+  margin: 1em;
+  &-sticky {
+    margin: 1em 0em;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+  }
+}

@@ -641,6 +641,22 @@ export const genericTranslations = {
     en: 'All faculties',
     se: 'All faculties',
   },
+  // Generic/FormStatusMessage.js
+  formStatusMessagePart1: {
+    fi: 'Vuoden',
+    en: 'Answers of the year',
+    se: 'Answers of the year',
+  },
+  formStatusMessagePart2: {
+    fi: ' vastaukset ovat avoinna muokattaviksi.',
+    en: 'can be modified',
+    se: 'can be modified',
+  },
+  formStatusMessagePart3: {
+    fi: 'Valitse haluamasi vuosi valikosta. Viimeinen vastauspäivä: ',
+    en: 'Year can be selected from the dropdown. Final day for answering the form is: ',
+    se: 'Year can be selected from the dropdown. Final day for answering the form is: ',
+  },
   // Generic/LastYearsAnswersAccordion.js
   expandText: {
     fi: 'Näytä viime vuoden vastaukset',

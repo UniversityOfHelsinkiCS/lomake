@@ -36,14 +36,12 @@ const StatusMessage = ({ programme }) => {
 
   if (viewOnly)
     return (
-      <>
-        <Message
-          data-cy="locked-form-notice"
-          icon="lock"
-          header={`${translations.lockedFormNoticePart1[lang]} ${showMessageForOpenYear(draftYear, writeAccess, lang)}`}
-          content={`${translations.lockedFormSubtitle[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
-        />
-      </>
+      <Message
+        data-cy="locked-form-notice"
+        icon="lock"
+        header={`${translations.lockedFormNoticePart1[lang]} ${showMessageForOpenYear(draftYear, writeAccess, lang)}`}
+        content={`${translations.lockedFormSubtitle[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
+      />
     )
 
   return (

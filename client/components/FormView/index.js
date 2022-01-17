@@ -9,6 +9,7 @@ import negativeEmoji from 'Assets/persevering.png'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
+import FormStatusMessage from 'Components/Generic/FormStatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
@@ -95,6 +96,7 @@ const FormView = ({ room }) => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
+        <FormStatusMessage writeAccess />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
@@ -110,7 +112,7 @@ const FormView = ({ room }) => {
           </h3>
 
           <div className="hide-in-print-mode">
-            <YearSelector size="extra-small" />
+            <YearSelector size="small" />
             <StatusMessage programme={room} />
 
             <p>{translations.p1[lang]}</p>
