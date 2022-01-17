@@ -62,9 +62,19 @@ const FormView = ({ room }) => {
     } else {
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
-      dispatch(getSingleProgrammesAnswers({ room, year }))
     }
-  }, [programme, singleProgramPending, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers])
+  }, [
+    programme,
+    singleProgramPending,
+    writeAccess,
+    viewingOldAnswers,
+    year,
+    draftYear,
+    accessToTempAnswers,
+    readAccess,
+    room,
+    user,
+  ])
 
   useEffect(() => {
     return () => {
