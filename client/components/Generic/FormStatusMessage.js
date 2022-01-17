@@ -4,27 +4,29 @@ import { Message } from 'semantic-ui-react'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
-const FormStatusMessage = ({ writeAccess }) => {
+const FormStatusMessage = ({ programme }) => {
   const [visible, setVisible] = useState(false)
+  const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
+  const year = useSelector(state => state.filters.year)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const currentYear = new Date().getFullYear()
 
   const deadlineDate = nextDeadline && nextDeadline.date ? new Date(nextDeadline.date) : undefined
   const locale = lang !== 'se' ? lang : 'sv'
+  const writeAccess = (user.access[programme] && user.access[programme].write) || user.admin
 
   useEffect(() => {
-    if (nextDeadline && draftYear && draftYear.year !== currentYear && writeAccess) {
+    if (nextDeadline && draftYear && draftYear.year !== year && writeAccess) {
       setVisible(true)
     } else {
       setVisible(false)
     }
-  }, [nextDeadline, draftYear])
+  }, [nextDeadline, draftYear, year, writeAccess, user])
 
   if (!draftYear || !nextDeadline || !visible) return null
 
   return (
-    <div className="form-status-message-sticky">
+    <div className="form-status-message-sticky hide-in-print-mode">
       <Message
         onDismiss={() => setVisible(false)}
         color="teal"

@@ -653,7 +653,7 @@ export const genericTranslations = {
     se: 'can be modified',
   },
   formStatusMessagePart3: {
-    fi: 'Valitse haluamasi vuosi valikosta. Viimeinen vastauspäivä: ',
+    fi: 'Voit vaihtaa otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
     en: 'Year can be selected from the dropdown. Final day for answering the form is: ',
     se: 'Year can be selected from the dropdown. Final day for answering the form is: ',
   },

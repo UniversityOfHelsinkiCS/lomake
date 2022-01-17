@@ -96,7 +96,7 @@ const FormView = ({ room }) => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
-        <FormStatusMessage writeAccess />
+        <FormStatusMessage programme={room} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
