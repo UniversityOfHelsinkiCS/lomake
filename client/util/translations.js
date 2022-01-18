@@ -653,9 +653,9 @@ export const genericTranslations = {
     se: 'can be modified',
   },
   formStatusMessagePart3: {
-    fi: 'Voit vaihtaa otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
-    en: 'Year can be selected from the dropdown. Final day for answering the form is: ',
-    se: 'Year can be selected from the dropdown. Final day for answering the form is: ',
+    fi: 'Voit vaihtaa vuoden otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
+    en: 'Year can be selected from the dropdown below the headline. Final day for answering the form is: ',
+    se: 'Year can be selected from the dropdown below the headline. Final day for answering the form is: ',
   },
   // Generic/LastYearsAnswersAccordion.js
   expandText: {
