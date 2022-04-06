@@ -4,7 +4,7 @@ import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { romanize } from 'Utilities/common'
 
-const generateRandomKey = value => `${value}-${Math.Random()}`
+const generateRandomKey = value => `${value}-${Math.random()}`
 
 const Question = ({ answers, question, handleClick, showing }) => {
   const [colors, setColors] = useState(['all', 'all', 'all'])
