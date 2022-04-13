@@ -795,6 +795,12 @@ export const genericTranslations = {
     se: '',
     en: 'Preparing the texteditor, please wait a moment...',
   },
+  // Generic/TextArea.js
+  tooLongPaste: {
+    fi: (newLength, maxLength) => `Teksti jota yrität liittää (yhteensä ${newLength} merkkiä) ei mahdu maksimimerkkimäärään (${maxLength} merkkiä)`,
+    se: (newLength, maxLength) => `The text you are trying to paste (${newLength} characters in total) does not fit in the maximum character limit (${maxLength} characters)`,
+    en: (newLength, maxLength) => `The text you are trying to paste (${newLength} characters in total) does not fit in the maximum character limit (${maxLength} characters)`
+  },
   // Generic/YearSelector.js
   year: {
     fi: 'Valitse vuodet',

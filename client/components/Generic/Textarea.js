@@ -12,6 +12,7 @@ import './Textarea.scss'
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
+import { genericTranslations } from 'Utilities/translations'
 
 const MAX_LENGTH = 1100
 
@@ -37,6 +38,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const lang = useSelector(state => state.language)
   const ref = useRef(null)
 
   // check if current user is the editor
@@ -85,6 +87,14 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
       setGettingLock(true)
       dispatch(getLock(fieldName))
     }
+  }
+
+  const handlePaste = value => {
+    const textLength = editorState.getCurrentContent().getPlainText().length
+    const newLength = value.length + textLength
+    const isTooLong = newLength > MAX_LENGTH
+    if (isTooLong) window.alert(genericTranslations.tooLongPaste[lang](newLength, MAX_LENGTH))
+    return isTooLong
   }
 
   return (
@@ -146,10 +156,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
                 }
                 return 'not-handled'
               }}
-              handlePastedText={val => {
-                const textLength = editorState.getCurrentContent().getPlainText().length
-                return val.length + textLength > MAX_LENGTH
-              }}
+              handlePastedText={handlePaste}
               toolbar={{
                 options: ['inline', 'list', 'history'],
                 inline: {
