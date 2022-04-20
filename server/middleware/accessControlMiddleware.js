@@ -3,7 +3,7 @@ const logger = require('@util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
   const { programme } = req.params
-  if (req.user.hasWideReadAccess) next()
+  if (req.user.admin) next()
   else if (req.user.access[programme] && req.user.access[programme].read) next()
   else return res.status(401).json({ error: 'Unauthorized access.' }).end()
 }

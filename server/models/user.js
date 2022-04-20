@@ -9,17 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       admin: DataTypes.BOOLEAN,
       access: DataTypes.JSONB,
       specialGroup: DataTypes.JSONB,
-      wideReadAccess: DataTypes.BOOLEAN,
       lastLogin: DataTypes.DATE,
-      hasWideReadAccess: {
-        type: DataTypes.VIRTUAL,
-        get() {
-          return this.admin || this.wideReadAccess
-        },
-        set() {
-          throw new Error('Do not try to set the `hasWideReadAccess` value!')
-        },
-      },
     },
     {
       underscored: true,

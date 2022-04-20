@@ -20,7 +20,7 @@ const getAll = async (req, res) => {
 
 const getUsersProgrammes = async (req, res) => {
   try {
-    if (req.user.hasWideReadAccess) {
+    if (req.user.admin) {
       const data = await db.studyprogramme.findAll({
         attributes: {
           exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],

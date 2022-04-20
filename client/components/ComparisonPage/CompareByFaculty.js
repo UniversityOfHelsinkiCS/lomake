@@ -71,7 +71,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="comparison-tab-pane">
-      <Grid stackable doubling padded columns={user.hasWideReadAccess ? 3 : 2}>
+      <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />
@@ -103,7 +103,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
           <Grid.Column>
             <Radio
-              className={`comparison-toggle${user.hasWideReadAccess ? '' : '-marginless'}`}
+              className={`comparison-toggle${user.admin ? '' : '-marginless'}`}
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
               label={translations.emptyAnswers[lang]}
@@ -118,7 +118,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         stackable
         doubling
         relaxed
-        columns={user.hasWideReadAccess ? 3 : 2}
+        columns={user.admin ? 3 : 2}
       >
         <Grid.Column>
           {questionsList.map(
@@ -132,7 +132,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   programmeName={chosen || ''}
                   programmeFaculty={getChosenProgrammeFaculty()}
                   showEmpty={showEmpty}
-                  columns={user.hasWideReadAccess ? 3 : 2}
+                  columns={user.admin ? 3 : 2}
                 />
               )
           )}
@@ -150,12 +150,12 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   faculty={getComparedFaculty()}
                   programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   name="faculty"
-                  columns={user.hasWideReadAccess ? 3 : 2}
+                  columns={user.admin ? 3 : 2}
                 />
               )
           )}
         </Grid.Column>
-        {user.hasWideReadAccess && (
+        {user.admin && (
           <Grid.Column>
             {questionsList.map(
               question =>
@@ -169,7 +169,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     programmes={usersProgrammes ? universityProgrammes : []}
                     faculty={translations.university[lang]}
                     name="university"
-                    columns={user.hasWideReadAccess ? 3 : 2}
+                    columns={user.admin ? 3 : 2}
                   />
                 )
             )}

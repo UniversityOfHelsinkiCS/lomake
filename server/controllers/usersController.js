@@ -88,7 +88,6 @@ const createUser = async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       admin: user.admin,
-      wideReadAccess: false,
       specialGroups: {},
     })
 

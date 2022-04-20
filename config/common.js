@@ -3,7 +3,6 @@
  */
 
 const inProduction = process.env.NODE_ENV === 'production'
-const requiredGroupForWideReadAccess = inProduction ? 'grp-lomake-production-read' : 'grp-lomake-testing-read'
 
 const basePath = process.env.BASE_PATH || '/'
 
@@ -69,11 +68,9 @@ const isSuperAdmin = uid => {
 const isAdmin = user => user.admin
 
 const isBasicUser = user => {
-  if (!user.admin && !user.wideReadAccess) return true
+  if (!user.admin) return true
   return false
 }
-
-const isWideReadAccessUser = user => user.isWideReadAccess
 
 const isSpecialGroupUser = user => {
   if (user.specialGroup && Object.keys(user.specialGroup) && Object.keys(user.specialGroup).length > 0) return true
@@ -181,13 +178,11 @@ module.exports = {
   requiredFormIds,
   isSuperAdmin,
   isAdmin,
-  isWideReadAccessUser,
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
   cypressUsers,
   testProgrammeName,
-  requiredGroupForWideReadAccess,
   LOMAKE_SINCE_YEAR,
   getYearsArray,
 }

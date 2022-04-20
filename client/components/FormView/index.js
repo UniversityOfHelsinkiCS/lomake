@@ -46,7 +46,7 @@ const FormView = ({ room }) => {
   const currentRoom = useSelector(state => state.room)
 
   const writeAccess = (user.access[room] && user.access[room].write) || user.admin
-  const readAccess = (user.access[room] && user.access[room].read) || user.hasWideReadAccess
+  const readAccess = (user.access[room] && user.access[room].read) || user.admin
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {

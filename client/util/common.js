@@ -31,9 +31,8 @@ export const colors = {
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
 
-const getUserGroupSortValue = ({ admin, wideReadAccess }) => {
-  if (admin) return 2
-  if (wideReadAccess) return 1
+const getUserGroupSortValue = ({ admin }) => {
+  if (admin) return 1
   return 0
 }
 

@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.hasWideReadAccess) {
+    if (req.user.admin) {
       const data = await db.tempAnswer.findAll({
         where: {
           year: await whereDraftYear(),
@@ -76,7 +76,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.hasWideReadAccess) {
+    if (req.user.admin) {
       const data = await db.answer.findAll({})
       return res.status(200).json(data)
     }

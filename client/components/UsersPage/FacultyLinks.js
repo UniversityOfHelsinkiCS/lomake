@@ -13,7 +13,7 @@ export default function FacultyLinks() {
 
   const temp = faculties.map(faculty => {
     const token = allTokens.find(t => t.faculty === faculty.code && t.type === 'READ')
-    const shareUrl = `${window.location.origin}${basePath}access/${token.url}`
+    const shareUrl = token ? `${window.location.origin}${basePath}access/${token.url}` : 'token missing!'
     return {
       code: faculty.code,
       facultyName: faculty.name[lang],

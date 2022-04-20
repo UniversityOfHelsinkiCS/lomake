@@ -41,7 +41,6 @@ const AccessModal = ({
   const getAccessTable = () => (
     <>
       {user.admin && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>}
-      {user.wideReadAccess && <h4 style={{ color: colors.blue }}>{translations.hasWideReadingRights[lang]}</h4>}
       {isInternationalUser(user.specialGroup) && (
         <h4 style={{ color: colors.blue }}>{translations.hasInternationalRights[lang]}</h4>
       )}

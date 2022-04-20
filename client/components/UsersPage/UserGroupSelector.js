@@ -11,10 +11,8 @@ const UserGroupSelector = ({ user }) => {
   const lang = useSelector(state => state.language)
 
   const makeAdminUser = () => {
-    // Removed wideReadAccess, because we dont want users to have multiple usergroups.
     const updatedUser = {
       id: user.id,
-      wideReadAccess: false,
       admin: true,
     }
     dispatch(editUserAction(updatedUser))
@@ -23,7 +21,6 @@ const UserGroupSelector = ({ user }) => {
   const makeBasicUser = () => {
     const updatedUser = {
       id: user.id,
-      wideReadAccess: false,
       admin: false,
     }
     dispatch(editUserAction(updatedUser))
@@ -56,7 +53,6 @@ const UserGroupSelector = ({ user }) => {
             label={translations.accessBasic[lang]}
             checked={isBasicUser(user)}
             onConfirm={makeBasicUser}
-            disabled={user.wideReadAccess}
             confirmPrompt={translations.makeBasicPrompt[lang]}
             dataCy="accessBasic"
           />
@@ -65,7 +61,6 @@ const UserGroupSelector = ({ user }) => {
             <Form.Field>
             <CustomRadioWithConfirmTrigger
               label={translations.accessWideRead[lang]}
-              checked={user.wideReadAccess}
               disabled={true}
               dataCy="accessWideRead"
             />
@@ -75,7 +70,6 @@ const UserGroupSelector = ({ user }) => {
             label={translations.accessAdmin[lang]}
             checked={isAdmin(user)}
             onConfirm={makeAdminUser}
-            disabled={user.wideReadAccess}
             confirmPrompt={translations.makeAdminPrompt[lang]}
             dataCy="accessAdmin"
           />
