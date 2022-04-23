@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { whereDraftYear } = require('@util/common')
+const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
 
 const getAll = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.admin) {
+    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.tempAnswer.findAll({
         where: {
           year: await whereDraftYear(),
@@ -76,7 +76,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    if (req.user.admin) {
+    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.answer.findAll({})
       return res.status(200).json(data)
     }
