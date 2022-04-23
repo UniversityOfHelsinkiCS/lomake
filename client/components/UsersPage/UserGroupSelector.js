@@ -70,6 +70,7 @@ const UserGroupSelector = ({ user }) => {
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessBasic[lang]}
+            disabled={isSuperAdmin(user) && !isSuperAdmin(currentUser)}
             checked={isBasicUser(user)}
             onConfirm={makeBasicUser}
             confirmPrompt={translations.makeBasicPrompt[lang]}
@@ -79,6 +80,7 @@ const UserGroupSelector = ({ user }) => {
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
+            disabled={isSuperAdmin(user) && !isSuperAdmin(currentUser)}
             checked={isAdmin(user)}
             onConfirm={makeAdminUser}
             confirmPrompt={translations.makeAdminPrompt[lang]}
