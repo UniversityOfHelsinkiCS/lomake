@@ -2,6 +2,8 @@
  * Insert application wide common items here
  */
 
+const { data } = require("./data")
+
 const inProduction = process.env.NODE_ENV === 'production'
 
 const basePath = process.env.BASE_PATH || '/'
@@ -16,6 +18,16 @@ const getYearsArray = since => {
   }
   return years
 }
+
+const specialGroups = [
+  // { group: 'admin', translationTag: 'accessAdmin' },
+  // { group: 'superadmin', translationTag: 'accessSuperAdmin' },
+  { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
+  { group: 'international2020', translationTag: 'accessInternational2020' },
+  { group: 'international', translationTag: 'accessInternational' },
+  { group: 'doctoral', translationTag: 'accessDoctoral' },
+  ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
+]
 
 // First one is the current year, after that all the years that have answers
 const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
@@ -175,6 +187,7 @@ module.exports = {
   basePath,
   defaultYears,
   degreeLevels,
+  specialGroups,
   requiredFormIds,
   isSuperAdmin,
   isAdmin,

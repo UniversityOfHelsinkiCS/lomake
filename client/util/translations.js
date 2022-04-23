@@ -1355,6 +1355,21 @@ export const usersPageTranslations = {
     fi: 'Lukuoikeudet ryhmittäin',
     se: 'Viewing rights',
   },
+  accessSuperAdmin: {
+    en: 'Super admin',
+    fi: 'Super-admin',
+    se: 'Super admin',
+  },
+  accessAdmin: {
+    en: 'Admin',
+    fi: 'Admin',
+    se: 'Admin',
+  },
+  accessAllProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'All programmes',
+  },
   accessInternational2020: {
     en: "International Master's programmes 2020 ->",
     fi: 'Kansainväliset maisteriohjelmat 2020 ->',
@@ -1369,11 +1384,6 @@ export const usersPageTranslations = {
     fi: 'Kaikki tohtoriohjelmat',
     en: 'All doctoral programmes',
     se: 'All doctoral programmes',
-  },
-  accessAdmin: {
-    en: 'Admin',
-    fi: 'Ylläpitäjä',
-    se: 'Admin',
   },
   allProgrammes: {
     en: 'All programmes',
