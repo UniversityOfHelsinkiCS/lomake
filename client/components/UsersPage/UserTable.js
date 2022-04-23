@@ -158,8 +158,7 @@ export default () => {
             {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: 'userGroup' })}
             {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'lastLogin', sortable: true })}
             {getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
-            {isSuperAdmin(user.uid) &&
-              getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}
+            {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}
           </Table.Row>
         </Table.Header>
         <Table.Body>

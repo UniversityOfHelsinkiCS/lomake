@@ -4,24 +4,43 @@ import { Button, Form, Popup, Radio } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isBasicUser, isAdmin } from '../../../config/common'
+import { isBasicUser, isAdmin, isSuperAdmin } from '../../../config/common'
 
 const UserGroupSelector = ({ user }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
+  const currentUser = useSelector(state => state.currentUser.data)
+
+  const makeSuperAdminUser = () => {
+    const updatedSpecialGroups = { ...user.specialGroups, superAdmin: true }
+    delete updatedSpecialGroups.admin
+    const updatedUser = {
+      id: user.id,
+      admin: false,
+      specialGroup: updatedSpecialGroups,
+    }
+    dispatch(editUserAction(updatedUser))
+  }
 
   const makeAdminUser = () => {
+    const updatedSpecialGroups = { ...user.specialGroups, admin: true }
+    delete updatedSpecialGroups.superAdmin
     const updatedUser = {
       id: user.id,
       admin: true,
+      specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))
   }
 
   const makeBasicUser = () => {
+    const updatedSpecialGroups = { ...user.specialGroups }
+    delete updatedSpecialGroups.superAdmin
+    delete updatedSpecialGroups.admin
     const updatedUser = {
       id: user.id,
       admin: false,
+      specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))
   }
@@ -35,7 +54,7 @@ const UserGroupSelector = ({ user }) => {
             data-cy={`${dataCy}-confirm`}
             disabled={disabled || checked}
             color="red"
-            content={disabled ? 'Please use the IAM group for managing  wide read access' : confirmPrompt}
+            content={disabled ? "You don't have the necessary rights to change to this user group" : confirmPrompt}
             onClick={onConfirm}
           />
         }
@@ -57,14 +76,6 @@ const UserGroupSelector = ({ user }) => {
             dataCy="accessBasic"
           />
         </Form.Field>
-        {/* Comment the wide reading access out until it is being used 
-            <Form.Field>
-            <CustomRadioWithConfirmTrigger
-              label={translations.accessWideRead[lang]}
-              disabled={true}
-              dataCy="accessWideRead"
-            />
-          </Form.Field> */}
         <Form.Field>
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
@@ -72,6 +83,16 @@ const UserGroupSelector = ({ user }) => {
             onConfirm={makeAdminUser}
             confirmPrompt={translations.makeAdminPrompt[lang]}
             dataCy="accessAdmin"
+          />
+        </Form.Field>
+        <Form.Field>
+          <CustomRadioWithConfirmTrigger
+            label={translations.accessSuperAdmin[lang]}
+            disabled={!isSuperAdmin(currentUser)}
+            checked={isSuperAdmin(user)}
+            onConfirm={makeSuperAdminUser}
+            confirmPrompt={translations.makeSuperAdminPrompt[lang]}
+            dataCy="accessSuperAdmin"
           />
         </Form.Field>
       </Form.Group>

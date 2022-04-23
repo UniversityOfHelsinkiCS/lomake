@@ -19,9 +19,13 @@ const getYearsArray = since => {
   return years
 }
 
+const userGroups = [
+  { group: 'basic user', translationTag: 'accessBasicUser' },
+  { group: 'admin', translationTag: 'accessAdmin' },
+  { group: 'superadmin', translationTag: 'accessSuperAdmin' },
+]
+
 const specialGroups = [
-  // { group: 'admin', translationTag: 'accessAdmin' },
-  // { group: 'superadmin', translationTag: 'accessSuperAdmin' },
   { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
   { group: 'international2020', translationTag: 'accessInternational2020' },
   { group: 'international', translationTag: 'accessInternational' },
@@ -73,14 +77,28 @@ const requiredFormIds = [
 
 const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser', 'lomake-admin']
 
-const isSuperAdmin = uid => {
+const hasSpecialGroup = (user, group) => {
+  if (user.specialGroup) {
+    const groups = Object.keys(user.specialGroup)
+    return groups.includes(group)
+  }
+  return false
+}
+
+const isSuperAdminUid = uid => {
   return SUPERADMINS.includes(uid)
 }
 
-const isAdmin = user => user.admin
+const isSuperAdmin = user => {
+  return SUPERADMINS.includes(user.uid) || hasSpecialGroup(user, 'superAdmin')
+}
+
+const isAdmin = user => {
+  return user.admin || hasSpecialGroup(user, 'admin')
+}
 
 const isBasicUser = user => {
-  if (!user.admin) return true
+  if (!user.admin && !hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
   return false
 }
 
@@ -187,9 +205,11 @@ module.exports = {
   basePath,
   defaultYears,
   degreeLevels,
+  userGroups,
   specialGroups,
   requiredFormIds,
   isSuperAdmin,
+  isSuperAdminUid,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,

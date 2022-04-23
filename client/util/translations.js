@@ -1395,6 +1395,11 @@ export const usersPageTranslations = {
     fi: 'Tallenna',
     se: 'Save',
   },
+  makeSuperAdminPrompt: {
+    en: 'Make the user an super administrator?',
+    fi: 'Tee käyttäjästä super-admin?',
+    se: 'Make the user an super administrator?',
+  },
   makeAdminPrompt: {
     en: 'Make the user an administrator?',
     fi: 'Tee käyttäjästä ylläpitäjä?',
