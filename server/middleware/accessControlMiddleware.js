@@ -1,4 +1,4 @@
-const { inProduction } = require('@util/common')
+const { inProduction, isAdmin, isSuperAdmin } = require('@util/common')
 const logger = require('@util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
@@ -23,7 +23,7 @@ const requireProgrammeOwner = (req, res, next) => {
 }
 
 const checkAdmin = (req, res, next) => {
-  if (req.user.admin) {
+  if (isAdmin(req.user) || isSuperAdmin(req.user)) {
     next()
   } else {
     res.status(401).json({ error: 'Unauthorized access.' }).end()
