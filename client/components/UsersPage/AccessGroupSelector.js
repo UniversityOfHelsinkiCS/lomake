@@ -4,6 +4,7 @@ import { Button, Dropdown } from 'semantic-ui-react'
 
 import { editUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import { specialGroups } from '../../../config/common'
 
 const AccessGroupSelector = ({ user }) => {
   const dispatch = useDispatch()
@@ -19,21 +20,11 @@ const AccessGroupSelector = ({ user }) => {
   }, [])
 
   const getOptions = () => {
-    // Add special groups as options
-    const options = [
-      { key: 'allProgrammes', value: 'allProgrammes', text: translations.allProgrammes[lang] },
-      { key: 'international2020', value: 'international2020', text: translations.accessInternational2020[lang] },
-      { key: 'international', value: 'international', text: translations.accessInternational[lang] },
-      { key: 'doctoral', value: 'doctoral', text: translations.accessDoctoral[lang] },
-    ]
-    // Add faculties as options
-    return options.concat(
-      faculties.map(f => ({
-        key: f.code,
-        value: f.code,
-        text: f.name[lang],
-      }))
-    )
+    return specialGroups.map(g => ({
+      key: g.group,
+      value: g.group,
+      text: g.faculty ? g.translationTag[lang] : translations[g.translationTag][lang],
+    }))
   }
 
   const onChange = (_, { value }) => {
@@ -47,7 +38,7 @@ const AccessGroupSelector = ({ user }) => {
 
     let updatedAccess = user.access
 
-    // If the new groups does not have some access group which originally was there
+    // If the new groups do not have some access group which originally was there
     // remove access for that group
     initialAccessGroups.forEach(group => {
       if (!accessGroups.includes(group)) {
@@ -60,7 +51,6 @@ const AccessGroupSelector = ({ user }) => {
         } else if (group === 'doctoral') {
           allProgrammes.forEach(programme => {
             if (programme.level === 'doctoral') {
-              console.log({ programme })
               delete updatedAccess[programme.key]
             }
           })

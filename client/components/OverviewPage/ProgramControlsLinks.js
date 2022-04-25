@@ -99,7 +99,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={viewLinkRef}
         />
-        {isSuperAdmin(user.uid) && <ResetConfirmation token={viewToken} type="READ" />}
+        {isSuperAdmin(user) && <ResetConfirmation token={viewToken} type="READ" />}
       </div>
       <div style={{ fontWeight: 'bold', marginLeft: '3em', marginTop: '1em', padding: '0.2em 0' }}>
         <h2>{translations.writeAccess[lang]}</h2>
@@ -118,7 +118,7 @@ const OwnerAccordionLinks = ({ programme }) => {
           onChange={null}
           ref={editLinkRef}
         />
-        {isSuperAdmin(user.uid) && <ResetConfirmation token={editToken} type="WRITE" />}
+        {isSuperAdmin(user) && <ResetConfirmation token={editToken} type="WRITE" />}
       </div>
     </div>
   )

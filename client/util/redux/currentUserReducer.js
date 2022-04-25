@@ -1,3 +1,4 @@
+import { isAdmin, isSuperAdmin } from '@root/config/common'
 import { defaultYears } from 'Utilities/common'
 import callBuilder from '../apiConnection'
 /**
@@ -49,6 +50,8 @@ export default (state = { data: undefined }, action) => {
         ...state,
         data: {
           ...action.response,
+          admin: isAdmin(action.response) || isSuperAdmin(action.response),
+          superAdmin: isSuperAdmin(action.response),
           yearsUserHasAccessTo: getYearsUserHasAccessToAction(action.response),
         },
         pending: false,

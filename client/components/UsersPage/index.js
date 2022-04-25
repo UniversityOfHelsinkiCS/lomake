@@ -70,7 +70,7 @@ export default () => {
     },
   ]
 
-  if (isSuperAdmin(user.uid)) {
+  if (isSuperAdmin(user)) {
     panes = [
       ...panes,
       {

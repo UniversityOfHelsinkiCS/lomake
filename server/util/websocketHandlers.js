@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { isSuperAdmin } = require('@root/config/common')
+const { isAdmin, isSuperAdmin, isSuperAdminUid } = require('@root/config/common')
 const { whereDraftYear } = require('@util/common')
 
 let currentEditors = {}
@@ -44,7 +44,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if (isSuperAdmin(uid) && loggedInAs) {
+  if (isSuperAdminUid(uid) && loggedInAs) {
     const user = await await db.user.findOne({ where: { uid: loggedInAs } })
     return user
   }
@@ -56,7 +56,11 @@ const getCurrentUser = async socket => {
 const joinRoom = async (socket, room, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
-    if (currentUser.admin || (currentUser.access[room] && currentUser.access[room].read)) {
+    if (
+      isAdmin(currentUser) ||
+      isSuperAdmin(currentUser) ||
+      (currentUser.access[room] && currentUser.access[room].read)
+    ) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
@@ -86,7 +90,11 @@ const updateField = async (socket, payload, io) => {
 
     const currentUser = await getCurrentUser(socket)
 
-    if (currentUser.admin || (currentUser.access[room] && currentUser.access[room].write)) {
+    if (
+      isAdmin(currentUser) ||
+      isSuperAdmin(currentUser) ||
+      (currentUser.access[room] && currentUser.access[room].write)
+    ) {
       const field = Object.keys(data)[0]
       const currentEditor = currentEditors[room] ? currentEditors[room][field] : undefined
 

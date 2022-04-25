@@ -64,7 +64,7 @@ const AccessModal = ({
             className="user-delete-button"
             size="large"
             color="red"
-            disabled={isSuperAdmin(user.uid)}
+            disabled={isSuperAdmin(user)}
           >
             {translations.deleteUser[lang]}
           </Button>

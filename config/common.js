@@ -2,6 +2,8 @@
  * Insert application wide common items here
  */
 
+const { data } = require("./data")
+
 const inProduction = process.env.NODE_ENV === 'production'
 
 const basePath = process.env.BASE_PATH || '/'
@@ -17,8 +19,6 @@ const getYearsArray = since => {
   return years
 }
 
-// 500-K005 => KH50_005
-// 500-M009 => MH50_009
 const mapToDegreeCode = (organisationCode) => {
   if (!organisationCode) return ""
   if (organisationCode.length < 7) return ""
@@ -34,7 +34,20 @@ const mapToDegreeCode = (organisationCode) => {
   const code = `${masters ? 'M' : 'K'}H${start.substr(0, 2)}_${end.substr(-3)}`
   return code
 }
-// console.log(mapToDegreeCode('a-123456'))
+
+const userGroups = [
+  { group: 'basic user', translationTag: 'accessBasicUser' },
+  { group: 'admin', translationTag: 'accessAdmin' },
+  { group: 'superadmin', translationTag: 'accessSuperAdmin' },
+]
+
+const specialGroups = [
+  { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
+  { group: 'international2020', translationTag: 'accessInternational2020' },
+  { group: 'international', translationTag: 'accessInternational' },
+  { group: 'doctoral', translationTag: 'accessDoctoral' },
+  ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
+]
 
 // First one is the current year, after that all the years that have answers
 const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
@@ -80,14 +93,28 @@ const requiredFormIds = [
 
 const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser', 'lomake-admin']
 
-const isSuperAdmin = uid => {
+const hasSpecialGroup = (user, group) => {
+  if (user.specialGroup) {
+    const groups = Object.keys(user.specialGroup)
+    return groups.includes(group)
+  }
+  return false
+}
+
+const isSuperAdminUid = uid => {
   return SUPERADMINS.includes(uid)
 }
 
-const isAdmin = user => user.admin
+const isSuperAdmin = user => {
+  return SUPERADMINS.includes(user.uid) || hasSpecialGroup(user, 'superAdmin')
+}
+
+const isAdmin = user => {
+  return user.admin || hasSpecialGroup(user, 'admin')
+}
 
 const isBasicUser = user => {
-  if (!user.admin) return true
+  if (!user.admin && !hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
   return false
 }
 
@@ -194,8 +221,11 @@ module.exports = {
   basePath,
   defaultYears,
   degreeLevels,
+  userGroups,
+  specialGroups,
   requiredFormIds,
   isSuperAdmin,
+  isSuperAdminUid,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,

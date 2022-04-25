@@ -1,4 +1,5 @@
 const db = require('@models/index')
+const { isAdmin, isSuperAdmin } = require('@util/common')
 const logger = require('@util/logger')
 const moment = require('moment')
 const { seed } = require('../scripts/seed')
@@ -20,7 +21,7 @@ const getAll = async (req, res) => {
 
 const getUsersProgrammes = async (req, res) => {
   try {
-    if (req.user.admin) {
+    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.studyprogramme.findAll({
         attributes: {
           exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],

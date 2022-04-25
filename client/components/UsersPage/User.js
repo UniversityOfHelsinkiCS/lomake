@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { Button, Table, Icon, Popup } from 'semantic-ui-react'
 
-import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
+import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
 
 const formatRights = programme => {
   return Object.keys(programme)
@@ -91,6 +91,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell data-cy="userGroup">
           {isBasicUser(user) && translations.accessBasic[lang]}
           {isAdmin(user) && translations.accessAdmin[lang]}
+          {isSuperAdmin(user) && translations.accessSuperAdmin[lang]}
         </Table.Cell>
         <Table.Cell>
           {user.lastLogin ? (
@@ -102,7 +103,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell>
           <EditIcon />
         </Table.Cell>
-        {isSuperAdmin(currentUser.uid) && (
+        {isSuperAdmin(currentUser) && (
           <Table.Cell>
             <Icon onClick={logInAs} size="large" name="sign-in" />
           </Table.Cell>

@@ -26,6 +26,7 @@ const userMiddleware = async (req, res, next) => {
         email: req.headers.mail,
         admin: shouldBeAdmin(req.headers.uid),
         access: {},
+        specialGroup: {},
       },
     })
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)

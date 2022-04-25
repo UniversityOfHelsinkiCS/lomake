@@ -1355,6 +1355,21 @@ export const usersPageTranslations = {
     fi: 'Lukuoikeudet ryhmittäin',
     se: 'Viewing rights',
   },
+  accessSuperAdmin: {
+    en: 'Super admin',
+    fi: 'Super-admin',
+    se: 'Super admin',
+  },
+  accessAdmin: {
+    en: 'Admin',
+    fi: 'Admin',
+    se: 'Admin',
+  },
+  accessAllProgrammes: {
+    en: 'All programmes',
+    fi: 'Kaikki ohjelmat',
+    se: 'All programmes',
+  },
   accessInternational2020: {
     en: "International Master's programmes 2020 ->",
     fi: 'Kansainväliset maisteriohjelmat 2020 ->',
@@ -1370,11 +1385,6 @@ export const usersPageTranslations = {
     en: 'All doctoral programmes',
     se: 'All doctoral programmes',
   },
-  accessAdmin: {
-    en: 'Admin',
-    fi: 'Ylläpitäjä',
-    se: 'Admin',
-  },
   allProgrammes: {
     en: 'All programmes',
     fi: 'Kaikki ohjelmat',
@@ -1384,6 +1394,11 @@ export const usersPageTranslations = {
     en: 'Save',
     fi: 'Tallenna',
     se: 'Save',
+  },
+  makeSuperAdminPrompt: {
+    en: 'Make the user an super administrator?',
+    fi: 'Tee käyttäjästä super-admin?',
+    se: 'Make the user an super administrator?',
   },
   makeAdminPrompt: {
     en: 'Make the user an administrator?',

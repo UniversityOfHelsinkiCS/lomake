@@ -8,6 +8,7 @@ import { fi, enGB, sv } from 'date-fns/locale'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import { colors } from 'Utilities/common'
+import { isSuperAdmin } from '@root/config/common'
 
 const DeadlineSetting = () => {
   const [newDate, setNewDate] = useState(null)
@@ -16,7 +17,6 @@ const DeadlineSetting = () => {
   const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
-  const isAdmin = useSelector(({ currentUser }) => currentUser.data.admin)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
 
@@ -49,7 +49,7 @@ const DeadlineSetting = () => {
     setNewDraftYear(null)
   }
 
-  if (!isAdmin) return null
+  if (!isSuperAdmin(currentUser)) return null
 
   const existingDeadlines = []
 
