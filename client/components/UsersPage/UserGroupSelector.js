@@ -78,7 +78,7 @@ const UserGroupSelector = ({ user }) => {
           <CustomRadioWithConfirmTrigger
             label={translations.accessAdmin[lang]}
             disabled={isSuperAdmin(user) && !isSuperAdmin(currentUser)}
-            checked={isAdmin(user)}
+            checked={!isSuperAdmin(user) && isAdmin(user)}
             onConfirm={makeAdminUser}
             confirmPrompt={translations.makeAdminPrompt[lang]}
             dataCy="accessAdmin"

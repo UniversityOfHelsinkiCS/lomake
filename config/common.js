@@ -105,7 +105,7 @@ const isSuperAdmin = user => {
 }
 
 const isAdmin = user => {
-  return hasSpecialGroup(user, 'admin')
+  return hasSpecialGroup(user, 'admin') || hasSpecialGroup(user, 'superAdmin')
 }
 
 const isBasicUser = user => {

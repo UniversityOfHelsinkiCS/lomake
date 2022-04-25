@@ -14,6 +14,13 @@ const formatRights = programme => {
     .join(', ')
 }
 
+const getUserType = (user, lang) => {
+  if (isBasicUser(user)) return translations.accessBasic[lang]
+  if (isSuperAdmin(user)) return translations.accessSuperAdmin[lang]
+  if (isAdmin(user)) return translations.accessAdmin[lang]
+  return ''
+}
+
 export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -88,11 +95,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         <Table.Cell data-cy="userAccess" style={{ display: 'flex' }}>
           <FormattedAccess />
         </Table.Cell>
-        <Table.Cell data-cy="userGroup">
-          {isBasicUser(user) && translations.accessBasic[lang]}
-          {isAdmin(user) && translations.accessAdmin[lang]}
-          {isSuperAdmin(user) && translations.accessSuperAdmin[lang]}
-        </Table.Cell>
+        <Table.Cell data-cy="userGroup">{getUserType(user, lang)}</Table.Cell>
         <Table.Cell>
           {user.lastLogin ? (
             moment(user.lastLogin).format('DD.MM.YYYY')
