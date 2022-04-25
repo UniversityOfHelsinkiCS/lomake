@@ -91,7 +91,7 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser', 'lomake-admin']
+const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser', 'admini']
 
 const hasSpecialGroup = (user, group) => {
   if (user.specialGroup) {
