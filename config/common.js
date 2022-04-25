@@ -35,12 +35,7 @@ const mapToDegreeCode = (organisationCode) => {
   return code
 }
 
-const userGroups = [
-  { group: 'basic user', translationTag: 'accessBasicUser' },
-  { group: 'admin', translationTag: 'accessAdmin' },
-  { group: 'superadmin', translationTag: 'accessSuperAdmin' },
-]
-
+// admin- and superAdmin-rights are also defined as special groups
 const specialGroups = [
   { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
   { group: 'international2020', translationTag: 'accessInternational2020' },
@@ -221,7 +216,6 @@ module.exports = {
   basePath,
   defaultYears,
   degreeLevels,
-  userGroups,
   specialGroups,
   requiredFormIds,
   isSuperAdmin,
