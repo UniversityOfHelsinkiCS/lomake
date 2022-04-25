@@ -74,7 +74,9 @@ describe('OSPA user tests', () => {
     // Check that edits have been added
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
-    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').should('contain.text', `Hello from 2021 and editing old year`)
+    cy.get('[data-cy=textarea-learning_outcomes]')
+      .find('.editor-class')
+      .should('contain.text', `Hello from 2021 and editing old year`)
 
     // Close the form
     cy.visit('/admin')

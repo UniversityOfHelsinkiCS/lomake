@@ -2,7 +2,7 @@
  * Insert application wide common items here
  */
 
-const { data } = require("./data")
+const { data } = require('./data')
 
 const inProduction = process.env.NODE_ENV === 'production'
 
