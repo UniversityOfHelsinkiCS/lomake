@@ -27,7 +27,7 @@ const UserGroupSelector = ({ user }) => {
     delete updatedSpecialGroups.superAdmin
     const updatedUser = {
       id: user.id,
-      admin: true,
+      admin: false,
       specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))
@@ -52,7 +52,7 @@ const UserGroupSelector = ({ user }) => {
         content={
           <Button
             data-cy={`${dataCy}-confirm`}
-            disabled={disabled || checked}
+            disabled={disabled}
             color="red"
             content={disabled ? "You don't have the necessary rights to change to this user group" : confirmPrompt}
             onClick={onConfirm}

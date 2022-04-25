@@ -1,8 +1,8 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { isAdmin, isSuperAdmin, isSuperAdminUid } = require('@root/config/common')
-const { whereDraftYear } = require('@util/common')
+const { isAdmin, isSuperAdmin, isTestSuperAdminUid } = require('@root/config/common')
+const { whereDraftYear, inProduction } = require('@util/common')
 
 let currentEditors = {}
 
@@ -44,7 +44,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if (isSuperAdminUid(uid) && loggedInAs) {
+  if (!inProduction && loggedInAs && isTestSuperAdminUid(uid)) {
     const user = await await db.user.findOne({ where: { uid: loggedInAs } })
     return user
   }

@@ -91,7 +91,7 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const SUPERADMINS = ['mluukkai', 'saarasat', 'admin', 'cypressSuperAdminUser', 'admini']
+const TEST_SUPERADMINS = ['admin', 'cypressSuperAdminUser', 'admini']
 
 const hasSpecialGroup = (user, group) => {
   if (user.specialGroup) {
@@ -101,12 +101,12 @@ const hasSpecialGroup = (user, group) => {
   return false
 }
 
-const isSuperAdminUid = uid => {
-  return SUPERADMINS.includes(uid)
+const isTestSuperAdminUid = uid => {
+  return TEST_SUPERADMINS.includes(uid)
 }
 
 const isSuperAdmin = user => {
-  return SUPERADMINS.includes(user.uid) || hasSpecialGroup(user, 'superAdmin')
+  return hasSpecialGroup(user, 'superAdmin')
 }
 
 const isAdmin = user => {
@@ -225,7 +225,7 @@ module.exports = {
   specialGroups,
   requiredFormIds,
   isSuperAdmin,
-  isSuperAdminUid,
+  isTestSuperAdminUid,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,

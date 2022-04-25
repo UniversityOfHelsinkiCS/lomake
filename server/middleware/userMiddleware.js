@@ -1,10 +1,11 @@
 const logger = require('@util/logger')
 const db = require('@models/index')
-const { inProduction } = require('@util/common')
+const { inProduction, isTestSuperAdminUid } = require('@util/common')
 
-// Some users have been pre-authorized:
-const shouldBeAdmin = uid => {
-  return !inProduction && uid === 'admin'
+// Some test-users have been pre-authorized:
+const shouldBeSuperAdmin = uid => {
+  const shouldBeSuper = !inProduction && isTestSuperAdminUid(uid)
+  return shouldBeSuper ? { superAdmin: true } : {}
 }
 
 const userMiddleware = async (req, res, next) => {
@@ -23,9 +24,9 @@ const userMiddleware = async (req, res, next) => {
         firstname: req.headers.givenname,
         lastname: req.headers.sn,
         email: req.headers.mail,
-        admin: shouldBeAdmin(req.headers.uid),
+        admin: false,
         access: {},
-        specialGroup: {},
+        specialGroup: shouldBeSuperAdmin(req.headers.uid),
       },
     })
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
