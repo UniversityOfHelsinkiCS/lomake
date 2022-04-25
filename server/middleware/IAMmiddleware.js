@@ -84,8 +84,8 @@ const grantUserRights = async (user, hyGroups) => {
 
   const specialGroup = { 
     ...user.specialGroup, 
-    ...getAdmin(user, hyGroups),
-    ...getSuperAdmin(user, hyGroups)
+    ...getAdmin(hyGroups),
+    ...getSuperAdmin(hyGroups)
   }
   user.specialGroup = specialGroup
 
