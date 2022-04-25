@@ -105,11 +105,11 @@ const isSuperAdmin = user => {
 }
 
 const isAdmin = user => {
-  return user.admin || hasSpecialGroup(user, 'admin')
+  return hasSpecialGroup(user, 'admin')
 }
 
 const isBasicUser = user => {
-  if (!user.admin && !hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
+  if (!hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
   return false
 }
 
@@ -167,7 +167,6 @@ const cypressUsers = [
     firstname: 'cyp',
     lastname: 'res',
     email: 'cypressUser',
-    admin: false,
     access: {},
   },
   {
@@ -175,7 +174,6 @@ const cypressUsers = [
     firstname: 'cyp2',
     lastname: 'res2',
     email: 'cypressUser2',
-    admin: false,
     access: {},
   },
   {
@@ -183,7 +181,6 @@ const cypressUsers = [
     firstname: 'cyp3',
     lastname: 'res3',
     email: 'cypress-user-3@helsinki.fi',
-    admin: false,
     specialGroup: {},
     access: {
       KH50_004: { read: true, write: true },
@@ -196,7 +193,6 @@ const cypressUsers = [
     firstname: 'cyp4',
     lastname: 'res4',
     email: 'cypress-international-user@helsinki.fi',
-    admin: false,
     specialGroup: { international2020: true },
     access: internationalAccess,
   },
@@ -205,7 +201,7 @@ const cypressUsers = [
     firstname: 'cypress',
     lastname: 'admin',
     email: 'cypressAdminUser',
-    admin: true,
+    specialGroup: { admin: true },
   },
 ]
 

@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Loader, Input } from 'semantic-ui-react'
+
+import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -35,7 +37,7 @@ const ColorTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
-      if (currentUser.admin) dispatch(getProgrammeOwners())
+      if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
     const selectedAnswers = answersByYear({
@@ -78,11 +80,11 @@ const ColorTable = React.memo(
       return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
     }
 
-    if (answers.pending || !answers.data || !oldAnswers.data || (currentUser.admin && !programmeOwners))
+    if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
     const hasManagementAccess = program => {
-      if (currentUser.admin) return true
+      if (isAdmin(currentUser)) return true
       return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
     }
 

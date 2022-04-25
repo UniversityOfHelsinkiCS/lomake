@@ -1,6 +1,8 @@
+
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
+import { isAdmin } from '@root/config/common'
 import { formViewTranslations as translations } from 'Utilities/translations'
 
 const showMessageForOpenYear = (draftYear, writeAccess, lang) => {
@@ -17,7 +19,7 @@ const StatusMessage = ({ programme }) => {
   const lastSaved = useSelector(state => state.form.lastSaveSuccess)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const user = useSelector(state => state.currentUser.data)
-  const writeAccess = (user.access[programme] && user.access[programme].write) || user.admin
+  const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
   const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
 
   const locale = lang !== 'se' ? lang : 'sv'

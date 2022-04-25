@@ -87,7 +87,6 @@ const createUser = async (req, res) => {
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
-      admin: user.admin,
       specialGroups: {},
     })
 

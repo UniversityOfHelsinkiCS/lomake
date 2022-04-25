@@ -6,11 +6,11 @@ import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import { editUserAction, deleteUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
+import { isAdmin, isInternationalUser, isSuperAdmin } from '@root/config/common'
 import AccessGroupSelector from './AccessGroupSelector'
 import AccessTable from './AccessTable'
 import UserGroupSelector from './UserGroupSelector'
 import CustomModal from '../Generic/CustomModal'
-import { isInternationalUser, isSuperAdmin } from '../../../config/common'
 
 const AccessModal = ({
   user,
@@ -40,7 +40,7 @@ const AccessModal = ({
 
   const getAccessTable = () => (
     <>
-      {user.admin && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>}
+      {isAdmin(user) && <h4 style={{ color: colors.blue }}>{translations.hasAdminRights[lang]}</h4>}
       {isInternationalUser(user.specialGroup) && (
         <h4 style={{ color: colors.blue }}>{translations.hasInternationalRights[lang]}</h4>
       )}

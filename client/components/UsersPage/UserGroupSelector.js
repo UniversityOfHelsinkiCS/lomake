@@ -16,7 +16,6 @@ const UserGroupSelector = ({ user }) => {
     delete updatedSpecialGroups.admin
     const updatedUser = {
       id: user.id,
-      admin: false,
       specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))
@@ -27,7 +26,6 @@ const UserGroupSelector = ({ user }) => {
     delete updatedSpecialGroups.superAdmin
     const updatedUser = {
       id: user.id,
-      admin: false,
       specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))
@@ -39,7 +37,6 @@ const UserGroupSelector = ({ user }) => {
     delete updatedSpecialGroups.admin
     const updatedUser = {
       id: user.id,
-      admin: false,
       specialGroup: updatedSpecialGroups,
     }
     dispatch(editUserAction(updatedUser))

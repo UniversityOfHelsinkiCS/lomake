@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
+
+import { isAdmin } from '@root/config/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
@@ -13,7 +15,7 @@ const FormStatusMessage = ({ programme }) => {
 
   const deadlineDate = nextDeadline && nextDeadline.date ? new Date(nextDeadline.date) : undefined
   const locale = lang !== 'se' ? lang : 'sv'
-  const writeAccess = (user.access[programme] && user.access[programme].write) || user.admin
+  const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
 
   useEffect(() => {
     if (nextDeadline && draftYear && draftYear.year !== year && writeAccess) {

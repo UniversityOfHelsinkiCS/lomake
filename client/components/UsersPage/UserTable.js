@@ -9,7 +9,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isSuperAdmin } from '../../../config/common'
+import { isAdmin, isSuperAdmin } from '@root/config/common'
 import AccessModal from './AccessModal'
 import './UsersPage.scss'
 
@@ -31,7 +31,7 @@ export default () => {
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const history = useHistory()
 
-  if (!user.admin) {
+  if (!isAdmin(user)) {
     history.push('/')
   }
 

@@ -31,9 +31,11 @@ export const colors = {
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
 }
 
-const getUserGroupSortValue = ({ admin }) => {
-  if (admin) return 1
-  return 0
+const getUserGroupSortValue = ({ specialGroup }) => {
+  if (!specialGroup) return 'basicUser'
+  if (specialGroup.admin) return 'admin'
+  if (specialGroup.superAdmin) return 'superAdmin'
+  return 'basicUser'
 }
 
 export const sortedItems = (items, sorter, lang) => {

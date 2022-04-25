@@ -4,6 +4,7 @@ import { Dropdown, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
+import { isAdmin } from '@root/config/common'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
@@ -38,7 +39,7 @@ export default () => {
 
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return currentUser.data.admin
+    return isAdmin(currentUser.data)
       ? programmes
       : programmes.filter(program => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser.data])
@@ -51,7 +52,7 @@ export default () => {
   }, [usersProgrammes, lang, debouncedFilter])
 
   const moreThanFiveProgrammes = useMemo(() => {
-    if (currentUser.data.admin) return true
+    if (isAdmin(currentUser.data)) return true
     if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
     return false
   }, [currentUser])

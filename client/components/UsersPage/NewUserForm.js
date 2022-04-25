@@ -10,7 +10,6 @@ const INITIAL_FORM_DATA = {
   uid: '',
   firstname: '',
   lastname: '',
-  admin: false,
 }
 
 export default ({ closeModal }) => {
@@ -106,16 +105,6 @@ export default ({ closeModal }) => {
           error={false}
           name="lastname"
           required
-        />
-        <Form.Field
-          className="user-form-field"
-          control={Checkbox}
-          data-cy="user-form-add-admin"
-          label={translations.admin[lang]}
-          checked={formData.admin}
-          onChange={(e, d) => {
-            setFormData({ ...formData, admin: d.checked })
-          }}
         />
         <Form.Group>
           <Popup

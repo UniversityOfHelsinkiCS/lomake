@@ -15,6 +15,7 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
+import { isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
 import PDFDownload from './PDFDownload'
@@ -45,8 +46,8 @@ const FormView = ({ room }) => {
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const currentRoom = useSelector(state => state.room)
 
-  const writeAccess = (user.access[room] && user.access[room].write) || user.admin
-  const readAccess = (user.access[room] && user.access[room].read) || user.admin
+  const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
+  const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {

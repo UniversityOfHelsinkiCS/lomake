@@ -16,6 +16,7 @@ import {
 } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { isAdmin } from '@root/config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import questions from '../../questions'
@@ -41,7 +42,7 @@ export default () => {
 
   if (!usersProgrammes) return <></>
 
-  if (!user.admin && usersProgrammes.length <= 5) {
+  if (!isAdmin(user) && usersProgrammes.length <= 5) {
     history.push('/')
   }
 

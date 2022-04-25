@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import { formViewTranslations as translations } from 'Utilities/translations'
+import { isAdmin } from '@root/config/common'
 
 const PDFDownload = () => {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const PDFDownload = () => {
 
   const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
-  const userHasWriteAccess = user.admin || (user.access[programme.key] && user.access[programme.key].write)
+  const userHasWriteAccess = isAdmin(user) || (user.access[programme.key] && user.access[programme.key].write)
   const userCanEdit = !!(userHasWriteAccess && !programme.locked && deadline && !viewingOldAnswers)
 
   const openViewModeAndPrintPdf = () => {

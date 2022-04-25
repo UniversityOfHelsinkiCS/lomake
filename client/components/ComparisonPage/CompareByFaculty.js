@@ -7,6 +7,7 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import { filteredProgrammes, filterByLevel } from 'Utilities/common'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { isAdmin } from '@root/config/common'
 import PieChart from './PieChart'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
@@ -71,7 +72,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   return (
     <div className="comparison-tab-pane">
-      <Grid stackable doubling padded columns={user.admin ? 3 : 2}>
+      <Grid stackable doubling padded columns={isAdmin(user) ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />
@@ -103,7 +104,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
           <Grid.Column>
             <Radio
-              className={`comparison-toggle${user.admin ? '' : '-marginless'}`}
+              className={`comparison-toggle${isAdmin(user) ? '' : '-marginless'}`}
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
               label={translations.emptyAnswers[lang]}
@@ -112,14 +113,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Grid
-        className="comparison-color-grid"
-        centered
-        stackable
-        doubling
-        relaxed
-        columns={user.admin ? 3 : 2}
-      >
+      <Grid className="comparison-color-grid" centered stackable doubling relaxed columns={isAdmin(user) ? 3 : 2}>
         <Grid.Column>
           {questionsList.map(
             question =>
@@ -132,7 +126,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   programmeName={chosen || ''}
                   programmeFaculty={getChosenProgrammeFaculty()}
                   showEmpty={showEmpty}
-                  columns={user.admin ? 3 : 2}
+                  columns={isAdmin(user) ? 3 : 2}
                 />
               )
           )}
@@ -150,12 +144,12 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   faculty={getComparedFaculty()}
                   programmes={facultyProgrammes ? facultyProgrammes.all : ''}
                   name="faculty"
-                  columns={user.admin ? 3 : 2}
+                  columns={isAdmin(user) ? 3 : 2}
                 />
               )
           )}
         </Grid.Column>
-        {user.admin && (
+        {isAdmin(user) && (
           <Grid.Column>
             {questionsList.map(
               question =>
@@ -169,7 +163,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     programmes={usersProgrammes ? universityProgrammes : []}
                     faculty={translations.university[lang]}
                     name="university"
-                    columns={user.admin ? 3 : 2}
+                    columns={isAdmin(user) ? 3 : 2}
                   />
                 )
             )}
