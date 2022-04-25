@@ -17,6 +17,25 @@ const getYearsArray = since => {
   return years
 }
 
+// 500-K005 => KH50_005
+// 500-M009 => MH50_009
+const mapToDegreeCode = (organisationCode) => {
+  if (!organisationCode) return ""
+  if (organisationCode.length < 7) return ""
+  const doctoral = organisationCode[0] === 'T'
+  if (doctoral) {
+    return organisationCode
+  }
+
+  const [start, end] = organisationCode.split('-')
+  if (end && end.length < 3) return ""
+  if (start.length < 2) return ""
+  const masters = end[0] === 'M'
+  const code = `${masters ? 'M' : 'K'}H${start.substr(0, 2)}_${end.substr(-3)}`
+  return code
+}
+// console.log(mapToDegreeCode('a-123456'))
+
 // First one is the current year, after that all the years that have answers
 const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
 
@@ -185,4 +204,5 @@ module.exports = {
   testProgrammeName,
   LOMAKE_SINCE_YEAR,
   getYearsArray,
+  mapToDegreeCode
 }
