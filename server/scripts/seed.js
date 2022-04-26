@@ -3,6 +3,21 @@ const logger = require('@util/logger')
 const { v4: uuid } = require('uuid')
 const { data, facultyMap } = require('@root/config/data')
 
+const seed = async () => {
+  logger.info('Seeding ...')
+  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === 'tokens'
+
+  await seedFacultiesAndStudyprogrammes()
+
+  // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
+  if (seedTokensAswell) {
+    logger.info('Seeding tokens aswell')
+    await seedTokens()
+  }
+
+  logger.info('Seeding completed')
+}
+
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
@@ -11,23 +26,20 @@ const seedFacultiesAndStudyprogrammes = async () => {
   /**
    * Create faculties
    */
-  data.forEach(async faculty => {
-    const { code, name } = faculty
+  for (const { code, name } of data) {
     await db.faculty.create({
       code,
       name,
     })
-  })
+  }
 
   /**
    * Create studyprogrammes
    */
-  data.forEach(async faculty => {
-    const { code, programmes } = faculty
+  for (const { code, programmes } of data) {
     const primaryFaculty = await db.faculty.findOne({ where: { code } })
 
-    programmes.forEach(async programme => {
-      const { key, name, level, international } = programme
+    for (const { key, name, level, international } of programmes) {
       await db.studyprogramme.create({
         key,
         name,
@@ -37,21 +49,17 @@ const seedFacultiesAndStudyprogrammes = async () => {
         claimed: false,
         primaryFacultyId: primaryFaculty.id,
       })
-    })
-  })
+    }
+  }
 
   /**
    * Create companionFaculties "kumppanuusohjelma"
    */
 
-  data.forEach(async faculty => {
-    const { programmes } = faculty
-
-    programmes.forEach(async programme => {
-      const { key, companionFaculties } = programme
-
-      companionFaculties.forEach(async companion => {
-        const facultyCode = facultyMap[companion]
+  for (const { code, programmes } of data) {
+    for (const { key, name, companionFaculties } of programmes) {
+      for (const faculty of companionFaculties) {
+        const facultyCode = facultyMap[faculty]
 
         const facultyId = (
           await db.faculty.findOne({
@@ -73,17 +81,16 @@ const seedFacultiesAndStudyprogrammes = async () => {
           facultyId,
           studyprogrammeId,
         })
-      })
-    })
-  })
+      }
+    }
+  }
 }
 
 const seedTokens = async () => {
   await db.token.destroy({ where: {} })
   const studyprogrammes = await db.studyprogramme.findAll()
 
-  studyprogrammes.forEach(async programme => {
-    const { key } = programme
+  for (const { key } of studyprogrammes) {
     await db.token.create({
       url: uuid(),
       programme: key,
@@ -105,11 +112,11 @@ const seedTokens = async () => {
       valid: true,
       usageCounter: 0,
     })
-  })
+  }
 
   // Create tokens for faculty wide read-links:
   const faculties = await db.faculty.findAll()
-  faculties.forEach(async faculty => {
+  for (const faculty of faculties) {
     await db.token.create({
       url: uuid(),
       faculty: faculty.code,
@@ -124,22 +131,7 @@ const seedTokens = async () => {
       valid: true,
       usageCounter: 0,
     })
-  })
-}
-
-const seed = async () => {
-  logger.info('Seeding ...')
-  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === 'tokens'
-
-  await seedFacultiesAndStudyprogrammes()
-
-  // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
-  if (seedTokensAswell) {
-    logger.info('Seeding tokens aswell')
-    await seedTokens()
   }
-
-  logger.info('Seeding completed')
 }
 
 module.exports = { seed }
