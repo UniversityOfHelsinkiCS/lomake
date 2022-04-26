@@ -24,7 +24,6 @@ const userMiddleware = async (req, res, next) => {
         firstname: req.headers.givenname,
         lastname: req.headers.sn,
         email: req.headers.mail,
-        admin: false,
         access: {},
         specialGroup: shouldBeSuperAdmin(req.headers.uid),
       },
