@@ -1,4 +1,5 @@
-const { iamToOrganisationCode } = require('@root/config/iamToOrganisationCode')
+const { iamToOrganisationCode, iamToFacultyCode } = require('@root/config/iamToCodes')
+const { data } = require('@root/config/data')
 const { inProduction, mapToDegreeCode } = require('@util/common')
 const logger = require('@util/logger')
 
@@ -22,6 +23,25 @@ const getAdmin = hyGroups => {
   if (isOspa) {
     return { admin: true }
   }
+}
+
+/**
+ * Grant reading rights to all programmes in the faculty, if the user is a dean of the faculty
+ * @param {string[]} hyGroups
+ */
+const getFacultyReadingRights = hyGroups => {
+  const facultyCodes = hyGroups.map(iam => iamToFacultyCode(iam)).filter(Boolean)
+  const newAccess = {}
+  const newSpecialGroups = {}
+  facultyCodes.forEach(code => {
+    newSpecialGroups[code] = true
+    const faculty = data.find(f => f.code === code)
+    faculty.programmes.forEach(p => {
+      newAccess[p.key] = { read: true }
+    })
+  })
+
+  return { newSpecialGroups, newAccess }
 }
 
 /**
@@ -74,16 +94,18 @@ const getReadAccess = hyGroups => {
 const grantUserRights = async (user, hyGroups) => {
   const updatedAccess = {
     ...user.access,
+    ...getFacultyReadingRights(hyGroups).newAccess,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
-    ...getProgramAdminAccess(hyGroups) // order matters here: last overwrites previous keys
+    ...getProgramAdminAccess(hyGroups), // order matters here: last overwrites previous keys
   }
   user.access = updatedAccess
 
   const specialGroup = {
     ...user.specialGroup,
+    ...getFacultyReadingRights(hyGroups).newSpecialGroups,
     ...getAdmin(hyGroups),
-    ...getSuperAdmin(hyGroups)
+    ...getSuperAdmin(hyGroups),
   }
   user.specialGroup = specialGroup
 

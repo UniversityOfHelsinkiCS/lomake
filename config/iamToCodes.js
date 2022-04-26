@@ -1,4 +1,4 @@
-const map = {
+const joryMap = {
   'hy-ttdk-tuk-jory': '100-K001',
   'hy-ttdk-tum-jory': '100-M001',
   'hy-oiktdk-on-jory': '200-K001',
@@ -154,6 +154,23 @@ const kojot = [
   'hy-tohtoriohjelma-johtaja',
 ]
 
-const iamToOrganisationCode = iam => map[iam]
+const facultyMap = {
+  'hy-ttdk-dekanaatti': 'H10',
+  'hy-oiktdk-dekanaatti': 'H20',
+  'hy-ltdk-dekanaatti': 'H30',
+  'hy-humtdk-dekanaatti': 'H40',
+  'hy-mltdk-dekanaatti': 'H50',
+  'hy-ftdk-dekanaatti': 'H55',
+  'hy-bytdk-dekanaatti': 'H57',
+  'hy-ktdk-dekanaatti': 'H60',
+  'hy-valttdk-dekanaatti': 'H70',
+  'hy-sskh-rehtoraatti': 'H74',
+  'hy-mmtdk-dekanaatti': 'H80',
+  'hy-eltdk-dekanaatti': 'H90',
+}
 
-module.exports = { iamToOrganisationCode }
+const iamToOrganisationCode = iam => joryMap[iam]
+
+const iamToFacultyCode = iam => facultyMap[iam]
+
+module.exports = { iamToOrganisationCode, iamToFacultyCode }
