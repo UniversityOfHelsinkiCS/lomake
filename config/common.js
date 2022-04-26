@@ -100,6 +100,10 @@ const isTestSuperAdminUid = uid => {
   return TEST_SUPERADMINS.includes(uid)
 }
 
+const isStagingSuperAdmin = uid => {
+  return process.env.TEST_SUPERADMIN === uid
+}
+
 const isSuperAdmin = user => {
   return hasSpecialGroup(user, 'superAdmin')
 }
@@ -216,6 +220,7 @@ module.exports = {
   requiredFormIds,
   isSuperAdmin,
   isTestSuperAdminUid,
+  isStagingSuperAdmin,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,
@@ -224,5 +229,5 @@ module.exports = {
   testProgrammeName,
   LOMAKE_SINCE_YEAR,
   getYearsArray,
-  mapToDegreeCode
+  mapToDegreeCode,
 }

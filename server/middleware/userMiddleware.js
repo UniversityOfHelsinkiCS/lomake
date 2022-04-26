@@ -1,10 +1,10 @@
 const logger = require('@util/logger')
 const db = require('@models/index')
-const { inProduction, isTestSuperAdminUid } = require('@util/common')
+const { inProduction, isTestSuperAdminUid, isStagingSuperAdmin } = require('@util/common')
 
 // Some test-users have been pre-authorized:
 const shouldBeSuperAdmin = uid => {
-  const shouldBeSuper = !inProduction && isTestSuperAdminUid(uid)
+  const shouldBeSuper = (!inProduction && isTestSuperAdminUid(uid)) || isStagingSuperAdmin(uid)
   return shouldBeSuper ? { superAdmin: true } : {}
 }
 
