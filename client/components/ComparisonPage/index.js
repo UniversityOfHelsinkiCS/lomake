@@ -19,7 +19,7 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 import { isAdmin } from '@root/config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
-import questions from '../../questions'
+import questions from '../../questions.json'
 import './ComparisonPage.scss'
 
 export default () => {
@@ -85,10 +85,10 @@ export default () => {
       const answeredProgrammes = value.map(p => p.key)
       const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
       if (programmesMissing) {
-        for (const p of programmesMissing) {
+        programmesMissing.forEach(p => {
           const earlierAnswers = answerMap.get(key)
           answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-        }
+        })
       }
     })
 

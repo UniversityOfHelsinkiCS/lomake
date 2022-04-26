@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { answersByYear, programmeNameByKey as getProgrammeName } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
-import questions from '../../questions'
+import questions from '../../questions.json'
 
 const CsvDownload = ({ wantedData, view, programme }) => {
   const lang = useSelector(state => state.language)
@@ -118,7 +118,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       return searched.primaryFaculty.name[lang]
     }
 
-    if (view == 'form') {
+    if (view === 'form') {
       let answersArray = []
       if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
       else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
@@ -126,7 +126,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       const faculty = programme.primaryFaculty.name[lang]
       const dataRow = [name, faculty, ...answersArray]
       csvData = [...csvData, dataRow]
-    } else if (view == 'overview') {
+    } else if (view === 'overview') {
       if (!selectedAnswers) return [[], []]
       if (!usersProgrammes) return [[], []]
 
