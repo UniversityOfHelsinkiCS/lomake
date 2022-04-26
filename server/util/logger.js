@@ -1,58 +1,44 @@
 const winston = require('winston')
-const { inProduction } = require('@util/common')
+const { inProduction } = require('../../config/common')
 
-/**
- * Levels from Winston's documentation
- * https://github.com/winstonjs/winston
- */
-const levels = {
-  error: 0,
-  warn: 1,
-  info: 2,
-  http: 3,
-  verbose: 4,
-  debug: 5,
-  silly: 6,
+const { combine, timestamp, printf, splat } = winston.format
+
+const transports = []
+
+if (!inProduction) {
+  const devFormat = printf(
+    ({ level, message, timestamp, ...rest }) => `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`
+  )
+
+  transports.push(
+    new winston.transports.Console({
+      level: 'debug',
+      format: combine(splat(), timestamp(), devFormat),
+    })
+  )
 }
 
-/**
- * Production logger.
- */
-const myFormat = winston.format.printf(({ message, level }) => {
-  const temp = {
-    level: levels[level], // Send integer value. Graylog does not accept strings i.e. "info"
-    message,
+if (inProduction) {
+  const levels = {
+    error: 0,
+    warn: 1,
+    info: 2,
+    http: 3,
+    verbose: 4,
+    debug: 5,
+    silly: 6,
   }
 
-  return JSON.stringify(temp)
-})
+  const prodFormat = winston.format.printf(({ level, ...rest }) =>
+    JSON.stringify({
+      level: levels[level],
+      ...rest,
+    })
+  )
 
-const productionLogger = winston.createLogger({
-  format: myFormat,
-  transports: new winston.transports.Console(),
-})
-
-/**
- * Development logger.
- */
-const developmentLogger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), winston.format.json()),
-  transports: [
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        winston.format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
-      ),
-    }),
-  ],
-})
-
-const getLogger = () => {
-  return inProduction ? productionLogger : developmentLogger
+  transports.push(new winston.transports.Console({ format: prodFormat }))
 }
 
-const logger = getLogger()
+const logger = winston.createLogger({ transports })
 
 module.exports = logger

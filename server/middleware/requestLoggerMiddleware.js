@@ -1,40 +1,33 @@
 const morgan = require('morgan')
 const logger = require('@util/logger')
+const { inProduction } = require('../../config/common')
 
-/**
- * Easy to read non-JSON logs for development.
- */
-const developmentRequestLogger = (req, res, next) => {
-  const loggedInAs = req.headers['x-admin-logged-in-as']
-  const userString = loggedInAs ? `User: ${req.headers.uid} mocking as ${loggedInAs}` : `User: ${req.headers.uid}`
-
-  logger.info(`Method: ${req.method}`)
-  logger.info(`Path: ${req.path}`)
-  logger.info(`Body: ${JSON.stringify(req.body)}`)
-  logger.info(userString)
-  logger.info('---')
-
-  next()
-}
-
-/**
- * Hard to read JSON logs.
- */
-const productionRequestLogger = morgan((tokens, req, res) => {
+const accessLogger = morgan((tokens, req, res) => {
   const mockingAs = req.headers['x-admin-logged-in-as']
-  const final = {
-    userId: req.headers.uid,
-    method: tokens.method(req, res),
-    url: tokens.url(req, res),
-    status: tokens.status(req, res),
-    responseTime: tokens['response-time'](req, res),
-  }
+  const { uid } = req.headers
 
-  if (mockingAs) final.mockingAs = mockingAs
-  console.log(JSON.stringify(final))
+  const method = tokens.method(req, res)
+  const url = tokens.url(req, res)
+  const status = tokens.status(req, res)
+  const responseTime = tokens['response-time'](req, res)
+  const userAgent = tokens['user-agent'](req, res)
+
+  const message = `${method} ${url} ${status} - ${responseTime} ms`
+
+  const additionalInfo = inProduction
+    ? {
+        userId: uid,
+        method,
+        url,
+        status,
+        responseTime,
+        userAgent,
+      }
+    : {}
+
+  if (mockingAs) additionalInfo.mockingAs = mockingAs
+
+  logger.info(message, additionalInfo)
 })
 
-module.exports = {
-  developmentRequestLogger,
-  productionRequestLogger,
-}
+module.exports = { accessLogger }
