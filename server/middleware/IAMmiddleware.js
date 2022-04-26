@@ -10,14 +10,14 @@ const parseHyGroups = hyGroups => {
   return parsedHyGroups
 }
 
-const getSuperAdmin = (hyGroups) => {
+const getSuperAdmin = hyGroups => {
   const isToska = hyGroups.includes('grp-toska')
   if (isToska) {
     return { superAdmin: true }
   }
 }
 
-const getAdmin = (hyGroups) => {
+const getAdmin = hyGroups => {
   const isOspa = hyGroups.includes('grp-ospa')
   if (isOspa) {
     return { admin: true }
@@ -26,27 +26,25 @@ const getAdmin = (hyGroups) => {
 
 /**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  */
-const getProgramAdminAccess = (hyGroups) => {
-  hyGroups.includes('grp-toska')
+const getProgramAdminAccess = hyGroups => {
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.map(mapToDegreeCode)
   const newAccess = {}
   degreeCodes.forEach(code => {
     newAccess[code] = { read: true }
   })
-  // console.log(newAccess)
+
   return newAccess
 }
 
-const isEmployee = (hyGroups) => hyGroups.includes('hy-employees')
-
+const isEmployee = hyGroups => hyGroups.includes('hy-employees')
 /**
  * Grant write access if the user belongs to employees group and studyprogramme's manager group
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  */
-const getWriteAccess = (hyGroups) => {
+const getWriteAccess = hyGroups => {
   if (!isEmployee(hyGroups)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.map(mapToDegreeCode)
@@ -60,9 +58,9 @@ const getWriteAccess = (hyGroups) => {
 
 /**
  * Grant read access if the user belongs to studyprogramme's manager group
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  */
-const getReadAccess = (hyGroups) => {
+const getReadAccess = hyGroups => {
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.map(mapToDegreeCode)
   const newAccess = {}
@@ -82,8 +80,8 @@ const grantUserRights = async (user, hyGroups) => {
   }
   user.access = updatedAccess
 
-  const specialGroup = { 
-    ...user.specialGroup, 
+  const specialGroup = {
+    ...user.specialGroup,
     ...getAdmin(hyGroups),
     ...getSuperAdmin(hyGroups)
   }
