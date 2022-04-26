@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { setHeaders } from 'Utilities/mockHeaders'
+import { cypressUids, setHeaders } from 'Utilities/mockHeaders'
 
 import 'Assets/custom.scss'
 
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
   const currentFakeUser = window.localStorage.getItem('fakeUser')
   if (
     !currentFakeUser ||
-    !['cypressUser', 'cypressInternationalUser', 'cypressAdminUser', 'cypressReadGroupMember'].includes(
+    !cypressUids.includes(
       JSON.parse(currentFakeUser).uid
     )
   ) {

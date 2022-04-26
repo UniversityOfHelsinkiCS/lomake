@@ -92,10 +92,10 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
           {user.firstname} {user.lastname}
         </Table.Cell>
         <Table.Cell width={1}>{user.uid}</Table.Cell>
-        <Table.Cell data-cy="userAccess" style={{ display: 'flex' }}>
+        <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
           <FormattedAccess />
         </Table.Cell>
-        <Table.Cell data-cy="userGroup">{getUserType(user, lang)}</Table.Cell>
+        <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, lang)}</Table.Cell>
         <Table.Cell>
           {user.lastLogin ? (
             moment(user.lastLogin).format('DD.MM.YYYY')

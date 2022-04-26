@@ -4,28 +4,30 @@
 import { removeLoggedInUsersGroups } from '../../client/util/mockHeaders'
 import { defaultYears } from '../../config/common'
 
-const user = 'cypressReadGroupMember'
 
 describe('IAM permission tests', () => {
-  beforeEach(() => {
-    cy.login(user)
-  })
 
-  /* TODO: fix with new IAM groups
-
-  it('Permission is granted and revoked automatically based on IAM group', () => {
+  it('Ospa group grants admin access', () => {
+    cy.login('cypressOspaUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]')
       .should('have.have.length', 129)
-      .then(() => {
-        removeLoggedInUsersGroups()
-        cy.reload()
-        cy.get('[data-cy=no-permissions-message]')
-      })
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressOspaUser-userGroup]')
+      .contains('Admin')
   })
-  
+
+  it('Toska group grants superAdmin access', () => {
+    cy.login('cypressToskaUser')
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressToskaUser-userGroup]')
+      .contains('Super admin')
+  })
+
+  /* TODO: fix with new IAM groups */
 
   it('Report works', () => {
+    cy.login('cypressOspaUser')
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -38,6 +40,7 @@ describe('IAM permission tests', () => {
   })
 
   it('Comparison works', () => {
+    cy.login('cypressOspaUser')
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
@@ -47,6 +50,4 @@ describe('IAM permission tests', () => {
 
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')
   })
-
-  */
 })

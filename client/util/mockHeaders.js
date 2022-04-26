@@ -19,6 +19,24 @@ export const possibleUsers = [
     sn: 'readGroupMember',
   },
   {
+    uid: 'cypressOspaUser',
+    employeeNumber: 124,
+    givenName: 'ospaUser',
+    mail: 'cypress-ospa-user@helsinki.fi',
+    schacDateOfBirth: 19990101,
+    hyGroupCn: 'grp-ospa',
+    sn: 'nah'
+  },
+  {
+    uid: 'cypressToskaUser',
+    employeeNumber: 125,
+    givenName: 'toskaUser',
+    mail: 'cypress-toska-user@helsinki.fi',
+    schacDateOfBirth: 19990102,
+    hyGroupCn: 'grp-toska',
+    sn: 'nah'
+  },
+  {
     uid: 'cypressInternationalUser',
   },
   {
@@ -31,6 +49,8 @@ export const possibleUsers = [
     uid: 'cypressSuperAdminUser',
   },
 ]
+
+export const cypressUids = possibleUsers.map(u => u.uid).filter(uid => uid.startsWith('cypress'))
 
 export const setHeaders = uid => {
   const user = possibleUsers.find(u => u.uid === uid)
