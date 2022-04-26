@@ -61,7 +61,7 @@ const claimToken = async (req, res) => {
     return res.status(200).json(req.user)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -81,7 +81,7 @@ const checkToken = async (req, res) => {
     return res.status(200).json(token)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -94,7 +94,7 @@ const programmesTokens = async (req, res) => {
     return res.status(200).json(tokens)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -115,7 +115,7 @@ const resetAdminToken = async (req, res) => {
     return res.status(200).json(token)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -132,7 +132,7 @@ const resetToken = async (req, res) => {
     return res.status(200).json(token)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -153,7 +153,7 @@ const createToken = async (req, res) => {
     return res.status(200).json(newToken)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -163,7 +163,7 @@ const getAll = async (req, res) => {
     return res.status(200).json(tokens)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

@@ -17,7 +17,7 @@ const getCurrentUser = async (req, res) => {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
     }
   }
-  res.send(req.user)
+  return res.send(req.user)
 }
 
 const getLogoutUrl = async (req, res) => {
@@ -56,10 +56,10 @@ const getProgrammesUsers = async (req, res) => {
 
     const filteredUsers = users.filter(u => u.access[programme])
 
-    res.json(filteredUsers)
+    return res.json(filteredUsers)
   } catch (e) {
     logger.error(e)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -75,7 +75,7 @@ const editUser = async (req, res) => {
     return res.status(400).json({ error: 'id not found.' })
   } catch (e) {
     logger.error(e.message)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -93,7 +93,7 @@ const createUser = async (req, res) => {
     if (newUser) return res.status(200).json(newUser)
   } catch (e) {
     logger.error(e.message)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -190,7 +190,7 @@ const editUserAccess = async (req, res) => {
     return res.status(200).json({ user: updatedUser, stillAccess: body.read !== false })
   } catch (e) {
     logger.error(e.message)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -213,7 +213,7 @@ const deleteUser = async (req, res) => {
     return res.status(200).send(req.params.id)
   } catch (e) {
     logger.error(e.message)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -224,12 +224,11 @@ const getUserOrganizations = async (req, res) => {
     const userInfo = await db.user.findOne({ where: { uid: params.username } })
 
     if (!userInfo) {
-      res.send({})
-    } else {
-      res.send(userInfo.access)
+      return res.send({})
     }
+    return res.send(userInfo.access)
   } catch (e) {
-    res.status(500).json({ error: 'Database error ' })
+    return res.status(500).json({ error: 'Database error ' })
   }
 }
 

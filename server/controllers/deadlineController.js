@@ -42,7 +42,7 @@ const createOrUpdate = async (req, res) => {
     return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -65,7 +65,7 @@ const remove = async (req, res) => {
     return res.status(200).json({ deadline: null, draftYear: null })
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -79,7 +79,7 @@ const get = async (req, res) => {
     return res.status(200).json({ deadline, draftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

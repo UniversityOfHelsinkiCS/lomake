@@ -39,7 +39,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -70,7 +70,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
     return res.status(200).json(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -96,7 +96,7 @@ const getAllUserHasAccessTo = async (req, res) => {
     return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -109,10 +109,10 @@ const getOne = async (req, res) => {
       },
       order: [['createdAt', 'DESC']],
     })
-    res.status(200).json(data[0])
+    return res.status(200).json(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -126,10 +126,10 @@ const getPreviousYear = async (req, res) => {
       order: [['createdAt', 'DESC']],
     })
     if (data.length === 0) return res.status(204).end()
-    res.status(200).json(data[0])
+    return res.status(200).json(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -142,10 +142,10 @@ const create = async (req, res) => {
       submittedBy: req.user.uid,
     }
     const savedAnswer = await db.answer.create(answer)
-    res.status(200).json(savedAnswer)
+    return res.status(200).json(savedAnswer)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -158,7 +158,7 @@ const bulkCreate = async (req, res) => {
     return res.status(200).send('ok').end()
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

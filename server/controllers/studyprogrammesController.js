@@ -12,10 +12,10 @@ const getAll = async (req, res) => {
       },
       include: ['primaryFaculty', 'companionFaculties'],
     })
-    res.status(200).json(data)
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -42,7 +42,7 @@ const getUsersProgrammes = async (req, res) => {
     return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -55,17 +55,17 @@ const getOne = async (req, res) => {
       },
       include: ['primaryFaculty', 'companionFaculties'],
     })
-    res.status(200).json(programEntity)
+    return res.status(200).json(programEntity)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
 const updateAll = async (req, res) => {
   try {
     await seed()
-    res.status(200).json({
+    return res.status(200).json({
       status: `
         Studyprogrammes successfully updated at: ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}.
         Refresh the page to see the results.
@@ -73,7 +73,7 @@ const updateAll = async (req, res) => {
     })
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error })
+    return res.status(500).json({ error })
   }
 }
 
@@ -90,10 +90,10 @@ const toggleLock = async (req, res) => {
     programEntity.locked = !programEntity.locked
     await programEntity.save()
     logger.info(`User ${req.user.uid} toggled edit-lock of ${programme}`)
-    res.status(200).json(programEntity)
+    return res.status(200).json(programEntity)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -118,10 +118,10 @@ const getOwners = async (req, res) => {
         [p.key]: owners.map(o => o.email),
       }
     }
-    res.status(200).json(results)
+    return res.status(200).json(results)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

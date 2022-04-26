@@ -225,7 +225,7 @@ const seed = async (req, res) => {
     return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -310,7 +310,7 @@ const createAnswers = async (req, res) => {
     return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -333,7 +333,7 @@ const createDeadline = async (req, res) => {
     return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

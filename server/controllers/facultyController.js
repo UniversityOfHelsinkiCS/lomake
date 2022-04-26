@@ -8,10 +8,10 @@ const getAll = async (req, res) => {
       order: [['code', 'ASC']],
     })
 
-    res.status(200).json(data)
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
