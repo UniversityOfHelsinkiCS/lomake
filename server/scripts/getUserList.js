@@ -39,7 +39,7 @@ const getUserList = async () => {
     logger.info(`${users.length} users listed`)
 
     try {
-      const written = await fs.writeFileSync(`${__dirname}/userlist.csv`, data)
+      fs.writeFileSync(`${__dirname}/userlist.csv`, data)
     } catch (error) {
       logger.error(error)
     }
