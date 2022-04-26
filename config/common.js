@@ -86,7 +86,7 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
-const TEST_SUPERADMINS = ['admin', 'cypressSuperAdminUser', 'admini']
+const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
 
 const hasSpecialGroup = (user, group) => {
   if (user.specialGroup) {
@@ -96,16 +96,20 @@ const hasSpecialGroup = (user, group) => {
   return false
 }
 
-const isTestSuperAdminUid = uid => {
-  return TEST_SUPERADMINS.includes(uid)
+const isDevSuperAdminUid = uid => {
+  return DEV_SUPERADMINS.includes(uid)
 }
 
-const isStagingSuperAdmin = uid => {
-  return process.env.TEST_SUPERADMIN === uid
+const isStagingSuperAdminUid = uid => {
+  return process.env.ENVIRONMENT === 'staging' && process.env.TEST_SUPERADMIN === uid
 }
 
 const isSuperAdmin = user => {
-  return hasSpecialGroup(user, 'superAdmin')
+  return (
+    hasSpecialGroup(user, 'superAdmin') ||
+    isStagingSuperAdminUid(user.uid) ||
+    (!inProduction && isDevSuperAdminUid(user.uid))
+  )
 }
 
 const isAdmin = user => {
@@ -219,8 +223,8 @@ module.exports = {
   specialGroups,
   requiredFormIds,
   isSuperAdmin,
-  isTestSuperAdminUid,
-  isStagingSuperAdmin,
+  isDevSuperAdminUid,
+  isStagingSuperAdminUid,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,
