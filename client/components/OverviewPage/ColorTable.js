@@ -13,8 +13,6 @@ import questions from '../../questions.json'
 import './ColorTable.scss'
 import ColorTableCell from './ColorTableCell'
 
-const SORTER = 'name'
-
 const ColorTable = React.memo(
   ({
     setModalData,
@@ -34,6 +32,7 @@ const ColorTable = React.memo(
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const [reverse, setReverse] = useState(false)
+    const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
@@ -52,9 +51,14 @@ const ColorTable = React.memo(
         ? oldAnswers.data.filter(a => a.year === year - 1)
         : null
 
-    const sortedProgrammes = sortedItems(filteredProgrammes, SORTER, lang)
+    const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
     if (reverse) sortedProgrammes.reverse()
+
+    const sort = sortValue => {
+      setSorter(sortValue)
+      setReverse(!reverse)
+    }
 
     const stats = useMemo(() => {
       if (!selectedAnswers) return {}
@@ -122,8 +126,14 @@ const ColorTable = React.memo(
     return (
       <div className="color-grid">
         <div className="sticky-header">
-          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setReverse(!reverse)}>
-            {translations.programmeHeader[lang]}
+          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('name')}>
+            {translations.programmeNameHeader[lang]}
+            <Icon name="sort" />
+          </div>
+        </div>
+        <div className="sticky-header">
+          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('key')}>
+            {translations.programmeCodeHeader[lang]}
             <Icon name="sort" />
           </div>
         </div>
@@ -141,16 +151,18 @@ const ColorTable = React.memo(
           </div>
         ))}
         <div className="sticky-header" />
+
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Input
             data-cy="overviewpage-filter"
-            size="small"
             icon="filter"
+            size="small"
             placeholder={translations.filter[lang]}
             onChange={handleFilterChange}
             value={filterValue}
           />
         </div>
+        <div />
         {tableIds.map(idObject =>
           stats.hasOwnProperty(idObject.id) ? (
             <div
@@ -206,6 +218,11 @@ const ColorTable = React.memo(
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
                   {p.name[lang]}
+                </Link>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
+                  {p.key}
                 </Link>
               </div>
               {tableIds.map(idObject => (

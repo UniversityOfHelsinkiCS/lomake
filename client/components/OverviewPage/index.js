@@ -46,8 +46,12 @@ export default () => {
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
-      const searchTarget = prog.name[lang]
-      return searchTarget.toLowerCase().includes(debouncedFilter.toLowerCase())
+      const name = prog.name[lang]
+      const code = prog.key
+      return (
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        code.toLowerCase().includes(debouncedFilter.toLowerCase())
+      )
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
