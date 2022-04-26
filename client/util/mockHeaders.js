@@ -7,7 +7,6 @@ export const possibleUsers = [
     givenName: 'adminEtunimi',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hypersonstudentid: undefined,
     sn: 'admin',
   },
   {
@@ -16,7 +15,6 @@ export const possibleUsers = [
     givenName: 'readGroupMember',
     mail: 'read-group-member@helsinki.fi',
     schacDateOfBirth: 19770501,
-    hypersonstudentid: '0123456789',
     hyGroupCn: 'grp-lomake-testing-read',
     sn: 'readGroupMember',
   },
