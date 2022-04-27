@@ -7,6 +7,7 @@ export const possibleUsers = [
     givenName: 'adminEtunimi',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
+    hyGroupCn: 'grp-toska',
     sn: 'admin',
   },
   {
@@ -34,6 +35,15 @@ export const possibleUsers = [
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
     hyGroupCn: 'grp-toska',
+    sn: 'nah'
+  },
+  {
+    uid: 'cypressJoryUser',
+    employeeNumber: 126,
+    givenName: 'joryUser',
+    mail: 'cypress-jory-user@helsinki.fi',
+    schacDateOfBirth: 19990103,
+    hyGroupCn: 'hy-ttdk-tuk-jory',
     sn: 'nah'
   },
   {
