@@ -221,9 +221,7 @@ const ColorTable = React.memo(
                 </Link>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
-                  {p.key}
-                </Link>
+                <Link to={targetURL}>{p.key}</Link>
               </div>
               {tableIds.map(idObject => (
                 <ColorTableCell
