@@ -24,6 +24,14 @@ describe('IAM permission tests', () => {
       .contains('Super admin')
   })
 
+  it('Jory iam grants read access to organisation', () => {
+    cy.login('cypressJoryUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 1)
+    // How to check that they also have write access?
+  })
+
   /* TODO: fix with new IAM groups */
 
   it('Report works', () => {
