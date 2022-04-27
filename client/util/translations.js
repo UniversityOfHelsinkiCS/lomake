@@ -985,10 +985,15 @@ export const overviewPageTranslations = {
     en: 'This programme has been locked.',
     se: 'This programme has been locked.',
   },
-  programmeHeader: {
+  programmeNameHeader: {
     fi: 'Koulutusohjelma',
     en: 'Programme',
     se: 'Program',
+  },
+  programmeCodeHeader: {
+    fi: 'Koodi',
+    en: 'Code',
+    se: 'Code',
   },
   // OverviewPage/ColorTableCell.js
   betterThanLastYear: {
