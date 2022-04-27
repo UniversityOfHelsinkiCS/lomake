@@ -44,16 +44,19 @@ const getFacultyReadingRights = hyGroups => {
   return { newSpecialGroups, newAccess }
 }
 
+const isStudyProgramLeader = (hyGroups) => false
+
 /**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
  * @param {string[]} hyGroups
  */
 const getProgramAdminAccess = hyGroups => {
+  if (!isStudyProgramLeader(hyGroups)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.map(mapToDegreeCode)
   const newAccess = {}
   degreeCodes.forEach(code => {
-    newAccess[code] = { read: true }
+    newAccess[code] = { read: true, write: true, admin: true }
   })
 
   return newAccess
