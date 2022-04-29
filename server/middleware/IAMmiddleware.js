@@ -31,17 +31,17 @@ const getAdmin = hyGroups => {
  */
 const getFacultyReadingRights = hyGroups => {
   const facultyCodes = hyGroups.map(iam => iamToFacultyCode(iam)).filter(Boolean)
-  const newAccess = {}
-  const newSpecialGroups = {}
+  const newFacultyReadAccess = {}
+  const newFacultySpecialGroups = {}
   facultyCodes.forEach(code => {
-    newSpecialGroups[code] = true
+    newFacultySpecialGroups[code] = true
     const faculty = data.find(f => f.code === code)
     faculty.programmes.forEach(p => {
-      newAccess[p.key] = { read: true }
+      newFacultyReadAccess[p.key] = { read: true }
     })
   })
 
-  return { newSpecialGroups, newAccess }
+  return { newFacultyReadAccess, newFacultySpecialGroups }
 }
 
 const isStudyProgramLeader = (hyGroups) => false
@@ -64,7 +64,7 @@ const getProgramAdminAccess = hyGroups => {
 
 const isEmployee = hyGroups => hyGroups.includes('hy-employees')
 /**
- * Grant write access if the user belongs to employees group and studyprogramme's manager group
+ * Grant write and read access if the user belongs to employees group and studyprogramme's manager group
  * @param {string[]} hyGroups
  */
 const getWriteAccess = hyGroups => {
@@ -95,22 +95,25 @@ const getReadAccess = hyGroups => {
 }
 
 const grantUserRights = async (user, hyGroups) => {
-  const updatedAccess = {
+  const { 
+    newFacultyReadAccess, 
+    newFacultySpecialGroups
+  } = getFacultyReadingRights(hyGroups)
+
+  user.access = {
     ...user.access,
-    ...getFacultyReadingRights(hyGroups).newAccess,
+    ...newFacultyReadAccess,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
     ...getProgramAdminAccess(hyGroups), // order matters here: last overwrites previous keys
   }
-  user.access = updatedAccess
 
-  const specialGroup = {
+  user.specialGroup = {
     ...user.specialGroup,
-    ...getFacultyReadingRights(hyGroups).newSpecialGroups,
+    ...newFacultySpecialGroups,
     ...getAdmin(hyGroups),
     ...getSuperAdmin(hyGroups),
   }
-  user.specialGroup = specialGroup
 
   await user.save()
 }

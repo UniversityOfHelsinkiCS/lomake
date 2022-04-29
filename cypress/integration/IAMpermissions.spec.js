@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { removeLoggedInUsersGroups } from '../../client/util/mockHeaders'
 import { defaultYears } from '../../config/common'
 
 
@@ -33,10 +32,10 @@ describe('IAM permission tests', () => {
     cy.login('cypressToskaUser')
     cy.visit('/')
     cy.get(`[data-cy=KH10_001-manage]`).click()
-    // cy.get('[data-cy=admin-cypressJoryUser]').click()
 
     cy.get('[data-cy=read-cypressJoryUser]')
     cy.get('[data-cy=write-cypressJoryUser]')
+    cy.get('[data-cy=admin-cypressJoryUser-false]') // <-- thats the tag when the icon is a red X
 
     // How to check that they also have write access?
   })
@@ -50,10 +49,10 @@ describe('IAM permission tests', () => {
     cy.login('cypressToskaUser')
     cy.visit('/')
     cy.get(`[data-cy=KH10_001-manage]`).click()
-    // cy.get('[data-cy=admin-cypressJoryUser]').click()
 
     cy.get('[data-cy=read-cypressJoryReadUser]')
     cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
+    cy.get('[data-cy=admin-cypressJoryUser-false]')
   })
 
   /* TODO: fix with new IAM groups */
