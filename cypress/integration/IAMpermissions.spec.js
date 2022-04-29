@@ -24,12 +24,36 @@ describe('IAM permission tests', () => {
       .contains('Super admin')
   })
 
-  it('Jory iam grants read access to organisation', () => {
+  it('Jory && employee iams grant read and write access to organisation', () => {
     cy.login('cypressJoryUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]')
       .should('have.have.length', 1)
+    
+    cy.login('cypressToskaUser')
+    cy.visit('/')
+    cy.get(`[data-cy=KH10_001-manage]`).click()
+    // cy.get('[data-cy=admin-cypressJoryUser]').click()
+
+    cy.get('[data-cy=read-cypressJoryUser]')
+    cy.get('[data-cy=write-cypressJoryUser]')
+
     // How to check that they also have write access?
+  })
+
+  it('Non-employee jory user only gets read access to organisation', () => {
+    cy.login('cypressJoryReadUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 1)
+
+    cy.login('cypressToskaUser')
+    cy.visit('/')
+    cy.get(`[data-cy=KH10_001-manage]`).click()
+    // cy.get('[data-cy=admin-cypressJoryUser]').click()
+
+    cy.get('[data-cy=read-cypressJoryReadUser]')
+    cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
   })
 
   /* TODO: fix with new IAM groups */
