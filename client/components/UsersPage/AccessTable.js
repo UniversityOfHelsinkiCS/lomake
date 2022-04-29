@@ -95,54 +95,59 @@ const AccessTable = ({ user, programmeCodesAndNames }) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {Object.entries(user.access).map(([programme, access]) => (
-          <Table.Row key={`${programme}-${user.uid}`}>
-            <Table.Cell>
-              {programmeCodesAndNames.get(programme)} {access.year && <Label size="tiny">{access.year}</Label>}
-            </Table.Cell>
-            <Table.Cell textAlign="center">
-              {getSwitchableBadge({
-                cyTag: `read-${programme}`,
-                currentAccess: user.access[programme] ? user.access[programme].read : false,
-                grant: () => grantView(programme),
-                remove: () => removeView(programme),
-              })}
-            </Table.Cell>
-            <Table.Cell textAlign="center">
-              {getSwitchableBadge({
-                cyTag: `write-${programme}`,
-                currentAccess: user.access[programme] ? user.access[programme].write : false,
-                grant: () => grantEdit(programme),
-                remove: () => removeEdit(programme),
-              })}
-            </Table.Cell>
-            <Table.Cell textAlign="center">
-              {getSwitchableBadge({
-                cyTag: `admin-${programme}`,
-                currentAccess: user.access[programme] ? user.access[programme].admin : false,
-                grant: () => grantOwner(programme),
-                remove: () => removeOwner(programme),
-              })}
-            </Table.Cell>
-            <Table.Cell>
-              <Popup
-                trigger={
-                  <Button data-cy={`remove-access-${programme}`}>{translations.removeAccessToProgramme[lang]}</Button>
-                }
-                content={
-                  <Button
-                    data-cy={`remove-access-confirmation-${programme}`}
-                    color="red"
-                    content={translations.removeAllAccess[lang]}
-                    onClick={() => removeView(programme)}
-                  />
-                }
-                on="click"
-                position="top center"
-              />
-            </Table.Cell>
-          </Table.Row>
-        ))}
+        {Object.entries(user.access).map(([programme, access]) => {
+          const read = user.access[programme] ? user.access[programme].read : false
+          const write = user.access[programme] ? user.access[programme].write : false
+          const admin = user.access[programme] ? user.access[programme].admin : false
+          return (
+            <Table.Row key={`${programme}-${user.uid}`}>
+              <Table.Cell>
+                {programmeCodesAndNames.get(programme)} {access.year && <Label size="tiny">{access.year}</Label>}
+              </Table.Cell>
+              <Table.Cell textAlign="center">
+                {getSwitchableBadge({
+                  cyTag: `read-${programme}${read ? '' : '-false'}`,
+                  currentAccess: read,
+                  grant: () => grantView(programme),
+                  remove: () => removeView(programme),
+                })}
+              </Table.Cell>
+              <Table.Cell textAlign="center">
+                {getSwitchableBadge({
+                  cyTag: `write-${programme}${write ? '' : '-false'}`,
+                  currentAccess: write,
+                  grant: () => grantEdit(programme),
+                  remove: () => removeEdit(programme),
+                })}
+              </Table.Cell>
+              <Table.Cell textAlign="center">
+                {getSwitchableBadge({
+                  cyTag: `admin-${programme}${admin ? '' : '-false'}`,
+                  currentAccess: admin,
+                  grant: () => grantOwner(programme),
+                  remove: () => removeOwner(programme),
+                })}
+              </Table.Cell>
+              <Table.Cell>
+                <Popup
+                  trigger={
+                    <Button data-cy={`remove-access-${programme}`}>{translations.removeAccessToProgramme[lang]}</Button>
+                  }
+                  content={
+                    <Button
+                      data-cy={`remove-access-confirmation-${programme}`}
+                      color="red"
+                      content={translations.removeAllAccess[lang]}
+                      onClick={() => removeView(programme)}
+                    />
+                  }
+                  on="click"
+                  position="top center"
+                />
+              </Table.Cell>
+            </Table.Row>
+          )
+        })}
       </Table.Body>
     </Table>
   )

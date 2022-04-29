@@ -14,16 +14,16 @@ describe('Management tests', () => {
   })
 
   it('Giving admin permissions enables all permissions', () => {
-    cy.get('[data-cy=admin-cypressUser2]').click()
+    cy.get('[data-cy=admin-cypressUser2-false]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
-    cy.get('[data-cy=read-cypressUser2]').should('have.class', 'check')
-    cy.get('[data-cy=write-cypressUser2]').should('have.class', 'check')
-    cy.get('[data-cy=admin-cypressUser2]').should('have.class', 'check')
+    cy.get('[data-cy=read-cypressUser2]')
+    cy.get('[data-cy=write-cypressUser2]')
+    cy.get('[data-cy=admin-cypressUser2]')
   })
 
   it('Cant remove read/edit permissions if targetuser is admin, but can remove admin permissions.', () => {
-    cy.get('[data-cy=admin-cypressUser2]').click()
+    cy.get('[data-cy=admin-cypressUser2-false]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
     cy.get('[data-cy=read-cypressUser2]').click()
@@ -37,7 +37,7 @@ describe('Management tests', () => {
   })
 
   it('Removing read permissions removed write permissions too', () => {
-    cy.get('[data-cy=admin-cypressUser2]').click()
+    cy.get('[data-cy=admin-cypressUser2-false]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
     cy.get('[data-cy=admin-cypressUser2]').click()
@@ -57,7 +57,7 @@ describe('Management tests', () => {
   })
 
   it('Can remove admin from self, once other user has admin permissions', () => {
-    cy.get('[data-cy=admin-cypressUser2]').click()
+    cy.get('[data-cy=admin-cypressUser2-false]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
     cy.get('[data-cy=admin-cypressUser]').click()
@@ -65,15 +65,15 @@ describe('Management tests', () => {
   })
 
   it('Removing admin permissions only removes admin permissions', () => {
-    cy.get('[data-cy=admin-cypressUser2]').click()
+    cy.get('[data-cy=admin-cypressUser2-false]').click()
     cy.get('[data-cy=grantPermissions-button]').click()
 
     cy.get('[data-cy=admin-cypressUser2]').click()
     cy.get('[data-cy=removePermissions-button]').click()
 
-    cy.get('[data-cy=read-cypressUser2]').should('have.class', 'check')
-    cy.get('[data-cy=write-cypressUser2]').should('have.class', 'check')
-    cy.get('[data-cy=admin-cypressUser2]').should('have.class', 'close')
+    cy.get('[data-cy=read-cypressUser2]')
+    cy.get('[data-cy=write-cypressUser2]')
+    cy.get('[data-cy=admin-cypressUser2-false]')
   })
 
   it('Locking the form updates the display and prevents editing the form', () => {

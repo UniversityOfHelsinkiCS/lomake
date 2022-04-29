@@ -161,17 +161,17 @@ describe('OSPA user tests', () => {
     cy.get('[data-cy=access-group-save-button]').click()
 
     // Check that all programmes are given only reading rights
-    cy.get('[data-cy=read-T920101]').should('have.class', 'check')
-    cy.get('[data-cy=write-T920101]').should('have.class', 'close')
-    cy.get('[data-cy=admin-T920101]').should('have.class', 'close')
+    cy.get('[data-cy=read-T920101]')
+    cy.get('[data-cy=write-T920101-false]')
+    cy.get('[data-cy=admin-T920101-false]')
 
-    cy.get('[data-cy=read-MH10_001]').should('have.class', 'check')
-    cy.get('[data-cy=write-MH10_001]').should('have.class', 'close')
-    cy.get('[data-cy=admin-MH10_001]').should('have.class', 'close')
+    cy.get('[data-cy=read-MH10_001]')
+    cy.get('[data-cy=write-MH10_001-false]')
+    cy.get('[data-cy=admin-MH10_001-false]')
 
-    cy.get('[data-cy=read-KH10_001]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH10_001]').should('have.class', 'close')
-    cy.get('[data-cy=admin-KH10_001]').should('have.class', 'close')
+    cy.get('[data-cy=read-KH10_001]')
+    cy.get('[data-cy=write-KH10_001-false]')
+    cy.get('[data-cy=admin-KH10_001-false]')
 
     cy.reload()
 
@@ -186,17 +186,17 @@ describe('OSPA user tests', () => {
     cy.get('[data-cy=access-group-save-button]').click()
 
     // Check that all earlier rights are unaffected
-    cy.get('[data-cy=read-KH50_004]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH50_004]').should('have.class', 'check')
-    cy.get('[data-cy=admin-KH50_004]').should('have.class', 'close')
+    cy.get('[data-cy=read-KH50_004]')
+    cy.get('[data-cy=write-KH50_004]')
+    cy.get('[data-cy=admin-KH50_004-false]')
 
-    cy.get('[data-cy=read-KH80_001]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH80_001]').should('have.class', 'check')
-    cy.get('[data-cy=admin-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=read-KH80_001]')
+    cy.get('[data-cy=write-KH80_001]')
+    cy.get('[data-cy=admin-KH80_001]')
 
-    cy.get('[data-cy=read-KH50_003]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH50_003]').should('have.class', 'close')
-    cy.get('[data-cy=admin-KH50_003]').should('have.class', 'close')
+    cy.get('[data-cy=read-KH50_003]')
+    cy.get('[data-cy=write-KH50_003-false]')
+    cy.get('[data-cy=admin-KH50_003-false]')
 
     cy.reload()
     // Check that the user has the correct amount of rights afterwards
@@ -215,26 +215,26 @@ describe('OSPA user tests', () => {
     cy.get('[data-cy=T923107-item]').click()
 
     // Check that the programme is given only reading rights
-    cy.get('[data-cy=read-T923107]').should('have.class', 'check')
-    cy.get('[data-cy=write-T923107]').should('have.class', 'close')
-    cy.get('[data-cy=admin-T923107]').should('have.class', 'close')
+    cy.get('[data-cy=read-T923107]')
+    cy.get('[data-cy=write-T923107-false]')
+    cy.get('[data-cy=admin-T923107-false]')
 
     // Remove access to the Faculty of Theology
     cy.get('[data-cy=remove-access-T923107]').click()
     cy.get('[data-cy=remove-access-confirmation-T923107]').click()
 
     // Check that all earlier rights are unaffected
-    cy.get('[data-cy=read-KH50_004]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH50_004]').should('have.class', 'check')
-    cy.get('[data-cy=admin-KH50_004]').should('have.class', 'close')
+    cy.get('[data-cy=read-KH50_004]')
+    cy.get('[data-cy=write-KH50_004]')
+    cy.get('[data-cy=admin-KH50_004-false]')
 
-    cy.get('[data-cy=read-KH80_001]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH80_001]').should('have.class', 'check')
-    cy.get('[data-cy=admin-KH80_001]').should('have.class', 'check')
+    cy.get('[data-cy=read-KH80_001]')
+    cy.get('[data-cy=write-KH80_001]')
+    cy.get('[data-cy=admin-KH80_001]')
 
-    cy.get('[data-cy=read-KH50_003]').should('have.class', 'check')
-    cy.get('[data-cy=write-KH50_003]').should('have.class', 'close')
-    cy.get('[data-cy=admin-KH50_003]').should('have.class', 'close')
+    cy.get('[data-cy=read-KH50_003]')
+    cy.get('[data-cy=write-KH50_003-false]')
+    cy.get('[data-cy=admin-KH50_003-false]')
 
     // Check that the access has been removed
     cy.get('[data-cy=read-T923107]').should('not.exist')

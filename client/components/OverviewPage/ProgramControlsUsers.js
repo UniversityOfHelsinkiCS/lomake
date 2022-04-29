@@ -50,6 +50,10 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
   const grantView = () => dispatch(editUserAccessAction(user.id, programme, { read: true }))
   const removeView = () => dispatch(editUserAccessAction(user.id, programme, { read: false }))
 
+  const read = user.access[programme] ? user.access[programme].read : false
+  const write = user.access[programme] ? user.access[programme].write : false
+  const admin = user.access[programme] ? user.access[programme].admin : false
+
   return (
     <>
       <Grid.Row key={user.id}>
@@ -61,26 +65,26 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            cyTag={`read-${user.uid}`}
+            cyTag={`read-${user.uid}${read ? '' : '-false'}`}
             disabled={user.access[programme].admin}
-            currentAccess={user.access[programme] ? user.access[programme].read : false}
+            currentAccess={read}
             grant={() => grantView()}
             remove={() => removeView()}
           />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            cyTag={`write-${user.uid}`}
+            cyTag={`write-${user.uid}${write ? '' : '-false'}`}
             disabled={user.access[programme].admin}
-            currentAccess={user.access[programme] ? user.access[programme].write : false}
+            currentAccess={write}
             grant={() => grantEdit()}
             remove={() => removeEdit()}
           />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
           <SwitchableBadge
-            cyTag={`admin-${user.uid}`}
-            currentAccess={user.access[programme] ? user.access[programme].admin : false}
+            cyTag={`admin-${user.uid}${admin ? '' : '-false'}`}
+            currentAccess={admin}
             grant={() => grantOwner()}
             remove={() => removeOwner()}
             disabled={currentOwnerCount <= 1}
