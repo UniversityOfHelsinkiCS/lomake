@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
+import _ from 'lodash'
+
 import PDFDownload from 'Components/Generic/PDFDownload'
 import ColorLegend from 'Components/Generic/ColorLegend'
 import { reportPageTranslations as translations } from 'Utilities/translations'

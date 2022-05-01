@@ -1,6 +1,7 @@
 /**
  * Insert common items here
  */
+import _ from 'lodash'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { cypressUids, setHeaders } from 'Utilities/mockHeaders'
 
-import 'Assets/custom.scss'
+import '../client/assets/custom.scss'
 
 import store from 'Utilities/store'
 import { basePath } from 'Utilities/common'
@@ -26,17 +26,9 @@ const refresh = () =>
 if (process.env.NODE_ENV === 'development') {
   const newUser = 'admin'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
-  if (
-    !currentFakeUser ||
-    !cypressUids.includes(
-      JSON.parse(currentFakeUser).uid
-    )
-  ) {
+
+  if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
     setHeaders(newUser)
   }
 }
 refresh()
-
-if (module.hot) {
-  module.hot.accept()
-}

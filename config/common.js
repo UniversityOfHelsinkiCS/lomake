@@ -101,7 +101,7 @@ const isDevSuperAdminUid = uid => {
 }
 
 const isStagingSuperAdminUid = uid => {
-  return process.env.ENVIRONMENT === 'staging' && process.env.TEST_SUPERADMIN === uid
+  return process.env.NODE_ENV === 'staging' && process.env.TEST_SUPERADMIN === uid
 }
 
 const isSuperAdmin = user => {

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import _ from 'lodash'
+
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
