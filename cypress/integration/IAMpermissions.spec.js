@@ -36,8 +36,6 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=read-cypressJoryUser]')
     cy.get('[data-cy=write-cypressJoryUser]')
     cy.get('[data-cy=admin-cypressJoryUser-false]') // <-- thats the tag when the icon is a red X
-
-    // How to check that they also have write access?
   })
 
   it('Non-employee jory user only gets read access to organisation', () => {
@@ -61,13 +59,13 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy^=colortable-link-to]')
       .should('have.have.length', 32)
 
-    /*cy.login('cypressToskaUser')
+    cy.login('cypressToskaUser')
     cy.visit('/')
     cy.get(`[data-cy=KH10_001-manage]`).click()
 
     cy.get('[data-cy=read-cypressJoryReadUser]')
     cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
-    cy.get('[data-cy=admin-cypressJoryUser-false]')*/
+    cy.get('[data-cy=admin-cypressJoryUser-false]')
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
@@ -75,6 +73,13 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]')
       .should('have.have.length', 2)
+  })
+
+  it('Rehtoraatti gets university wide read access', () => {
+    cy.login('cypressRehtoriUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 128)
   })
 
   /* TODO: fix with new IAM groups */

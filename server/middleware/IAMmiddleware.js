@@ -1,4 +1,4 @@
-const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes } = require('@root/config/iamToCodes')
+const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes, isUniversityWideIam } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { inProduction, mapToDegreeCode } = require('@util/common')
 const logger = require('@util/logger')
@@ -27,6 +27,21 @@ const getAdmin = hyGroups => {
   }
 }
 
+const getUniversityReadingRights = hyGroups => {
+  const hasUniversityReadingRights = hyGroups.some(isUniversityWideIam)
+  const newUniversityWideReadAccess = {}
+  const newUniversityWideSpecialGroups = {}
+  if (hasUniversityReadingRights) {
+    newUniversityWideSpecialGroups['allProgrammes'] = true
+    data.forEach(faculty => {
+      faculty.programmes.forEach(program => {
+        newUniversityWideReadAccess[program.key] = { read: true }
+      })
+    })
+  }
+  return { newUniversityWideReadAccess, newUniversityWideSpecialGroups }
+}
+
 /**
  * Grant reading rights to all doctoral programmes if the user belongs to doctoral IAM
  * @param {string[]} hyGroups
@@ -43,6 +58,15 @@ const getDoctoralReadingRights = hyGroups => {
   }
 
   return { newDoctoralReadAccess, newDoctoralSpecialGroups }
+}
+
+const getDoctoralSchoolReadingRights = hyGroups => {
+  const doctoralProgrammeCodes = hyGroups.map(group => getDoctoralSchoolReadingRights(group)).flatMap()
+  const newDoctoralProgramAccess = {}
+  doctoralProgrammeCodes.forEach(code => {
+    newDoctoralProgramAccess[code] = { read: true }
+  })
+  return newDoctoralProgramAccess
 }
 
 /**
@@ -125,10 +149,17 @@ const grantUserRights = async (user, hyGroups) => {
     newDoctoralSpecialGroups
   } = getDoctoralReadingRights(hyGroups)
 
+  const {
+    newUniversityWideReadAccess,
+    newUniversityWideSpecialGroups
+  } = getUniversityReadingRights(hyGroups)
+
   user.access = {
     ...user.access,
+    ...newUniversityWideReadAccess,
     ...newDoctoralReadAccess,
     ...newFacultyReadAccess,
+    ...getDoctoralSchoolReadingRights,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
     ...getProgramAdminAccess(hyGroups), // order matters here: last overwrites previous keys
@@ -136,6 +167,7 @@ const grantUserRights = async (user, hyGroups) => {
 
   user.specialGroup = {
     ...user.specialGroup,
+    ...newUniversityWideSpecialGroups,
     ...newDoctoralSpecialGroups,
     ...newFacultySpecialGroups,
     ...getAdmin(hyGroups),
