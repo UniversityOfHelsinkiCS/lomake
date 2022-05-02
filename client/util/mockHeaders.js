@@ -56,6 +56,24 @@ export const possibleUsers = [
     sn: 'nah'
   },
   {
+    uid: 'cypressDoctoralUser',
+    employeeNumber: 127,
+    givenName: 'doctoralUser',
+    mail: 'cypress-doctoral-user@helsinki.fi',
+    schacDateOfBirth: 19990104,
+    hyGroupCn: 'hy-tohtorikoulutus-johtoryhma',
+    sn: 'nah'
+  },
+  {
+    uid: 'cypressPsykoUser',
+    employeeNumber: 128,
+    givenName: 'psykoUser',
+    mail: 'cypress-psyko-user@helsinki.fi',
+    schacDateOfBirth: 19990105,
+    hyGroupCn: 'hy-ltdk-psyk-jory',
+    sn: 'nah'
+  },
+  {
     uid: 'cypressInternationalUser',
   },
   {

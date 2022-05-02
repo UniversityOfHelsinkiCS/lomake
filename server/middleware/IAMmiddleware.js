@@ -1,7 +1,9 @@
-const { iamToOrganisationCode, iamToFacultyCode } = require('@root/config/iamToCodes')
+const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { inProduction, mapToDegreeCode } = require('@util/common')
 const logger = require('@util/logger')
+
+const iamForKandiAndMasters = ['hy-ltdk-psyk-jory', 'hy-ltdk-logo-jory']
 
 const parseHyGroups = hyGroups => {
   let parsedHyGroups = []
@@ -23,6 +25,24 @@ const getAdmin = hyGroups => {
   if (isOspa) {
     return { admin: true }
   }
+}
+
+/**
+ * Grant reading rights to all doctoral programmes if the user belongs to doctoral IAM
+ * @param {string[]} hyGroups
+ */
+const getDoctoralReadingRights = hyGroups => {
+  const hasDoctoralReadingRights = hyGroups.some(group => isDoctoralIam(group))
+  const newDoctoralReadAccess = {}
+  const newDoctoralSpecialGroups = {}
+  if (hasDoctoralReadingRights) {
+    newDoctoralSpecialGroups['doctoral'] = true
+    doctoralProgrammeCodes.forEach(code => {
+      newDoctoralReadAccess[code] = { read: true }
+    })
+  }
+
+  return { newDoctoralReadAccess, newDoctoralSpecialGroups }
 }
 
 /**
@@ -53,7 +73,7 @@ const isStudyProgramLeader = (hyGroups) => false
 const getProgramAdminAccess = hyGroups => {
   if (!isStudyProgramLeader(hyGroups)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
-  const degreeCodes = orgCodes.map(mapToDegreeCode)
+  const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
     newAccess[code] = { read: true, write: true, admin: true }
@@ -70,7 +90,7 @@ const isEmployee = hyGroups => hyGroups.includes('hy-employees')
 const getWriteAccess = hyGroups => {
   if (!isEmployee(hyGroups)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
-  const degreeCodes = orgCodes.map(mapToDegreeCode)
+  const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
     newAccess[code] = { read: true, write: true }
@@ -85,7 +105,7 @@ const getWriteAccess = hyGroups => {
  */
 const getReadAccess = hyGroups => {
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
-  const degreeCodes = orgCodes.map(mapToDegreeCode)
+  const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
     newAccess[code] = { read: true }
@@ -100,8 +120,14 @@ const grantUserRights = async (user, hyGroups) => {
     newFacultySpecialGroups
   } = getFacultyReadingRights(hyGroups)
 
+  const {
+    newDoctoralReadAccess, 
+    newDoctoralSpecialGroups
+  } = getDoctoralReadingRights(hyGroups)
+
   user.access = {
     ...user.access,
+    ...newDoctoralReadAccess,
     ...newFacultyReadAccess,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
@@ -110,6 +136,7 @@ const grantUserRights = async (user, hyGroups) => {
 
   user.specialGroup = {
     ...user.specialGroup,
+    ...newDoctoralSpecialGroups,
     ...newFacultySpecialGroups,
     ...getAdmin(hyGroups),
     ...getSuperAdmin(hyGroups),

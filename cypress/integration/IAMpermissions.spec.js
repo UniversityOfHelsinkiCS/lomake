@@ -55,6 +55,28 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=admin-cypressJoryUser-false]')
   })
 
+  it('Doctoral user has reading rights to all doctoral programmes', () => {
+    cy.login('cypressDoctoralUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 32)
+
+    /*cy.login('cypressToskaUser')
+    cy.visit('/')
+    cy.get(`[data-cy=KH10_001-manage]`).click()
+
+    cy.get('[data-cy=read-cypressJoryReadUser]')
+    cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
+    cy.get('[data-cy=admin-cypressJoryUser-false]')*/
+  })
+
+  it('Psyk and logo groups grant access to two programmes', () => {
+    cy.login('cypressPsykoUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]')
+      .should('have.have.length', 2)
+  })
+
   /* TODO: fix with new IAM groups */
 
   it('Report works', () => {

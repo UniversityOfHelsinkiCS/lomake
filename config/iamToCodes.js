@@ -5,13 +5,11 @@ const joryMap = {
   'hy-oiktdk-otm-jory': '200-M001',
   'hy-oiktdk-ibl-jory': '200-M002',
   'hy-oiktdk-ggl-jory': '200-M003',
-  'hy-ltdk-psyko-jory': '300-K001',
-  'hy-ltdk-logo-jory': '300-K002',
+  'hy-ltdk-psyk-jory': ['300-K001', '300-M004'],
+  'hy-ltdk-logo-jory': ['300-K002', '300-M005'],
   'hy-ltdk-ll-jory': '300-M001',
   'hy-ltdk-tmed-jory': '300-M002',
   'hy-ltdk-hll-jory': '300-M003',
-  'hy-ltdk-psyk-jory': '300-M004',
-  'hy-ltdk-logo-jory': '300-M005',
   'hy-humtdk-filk-jory': '400-K001',
   'hy-humtdk--jory': '400-K002',
   'hy-humtdk-kik-jory': '400-K003',
@@ -130,6 +128,42 @@ const joryMap = {
   'hy-dp-docs-jory': 'T923107',
 }
 
+const doctoralProgrammeCodes = [
+  'T920101',
+  'T920102',
+  'T920103',
+  'T920104',
+  'T920105',
+  'T920106',
+  'T920107',
+  'T920108',
+  'T920109',
+  'T920110',
+  'T920111',
+  'T921101',
+  'T921102',
+  'T921103',
+  'T921104',
+  'T921105',
+  'T921106',
+  'T921107',
+  'T921108',
+  'T921109',
+  'T922101',
+  'T922102',
+  'T922103',
+  'T922104',
+  'T922105',
+  'T922106',
+  'T923101',
+  'T923102',
+  'T923103',
+  'T923104',
+  'T923105',
+  'T923106',
+  'T923107',
+]
+
 const kojot = [
   'hy-ttdk-kandi-kojot',
   'hy-ttdk-maisteri-kojot',
@@ -169,8 +203,21 @@ const facultyMap = {
   'hy-eltdk-dekanaatti': 'H90',
 }
 
-const iamToOrganisationCode = iam => joryMap[iam]
+const doctoralIams = [
+  'hy-tohtorikoulutus-johtoryhma',
+  'hy-tine'
+]
+
+const iamToOrganisationCode = iam => {
+  const organisationCodes = joryMap[iam]
+  if (Array.isArray(organisationCodes)) {
+    return organisationCodes
+  } else
+    return [organisationCodes]
+}
 
 const iamToFacultyCode = iam => facultyMap[iam]
 
-module.exports = { iamToOrganisationCode, iamToFacultyCode }
+const isDoctoralIam = iam => doctoralIams.includes(iam)
+
+module.exports = { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes }
