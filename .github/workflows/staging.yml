@@ -46,6 +46,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -70,6 +79,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -96,6 +114,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -120,6 +147,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -146,6 +182,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -171,6 +216,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -195,6 +249,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+    
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -220,6 +283,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+    
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -245,6 +317,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+    
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -271,6 +352,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -296,6 +386,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: npm ci
         run: npm ci
 
@@ -320,6 +419,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set up cache
+        uses: actions/cache@v2
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
