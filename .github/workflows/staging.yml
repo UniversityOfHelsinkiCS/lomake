@@ -17,9 +17,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -51,9 +48,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -85,9 +79,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -119,9 +110,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -153,9 +141,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -187,9 +172,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -221,9 +203,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -255,9 +234,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -289,9 +265,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -323,9 +296,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -357,9 +327,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -391,9 +358,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
@@ -425,9 +389,6 @@ jobs:
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: npm ci
         run: npm ci
