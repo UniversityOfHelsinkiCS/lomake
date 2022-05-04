@@ -4,10 +4,6 @@
     "node": true,
     "jest": true
   },
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false
-  },
   "extends": ["airbnb", "eslint:recommended", "plugin:prettier/recommended", "plugin:cypress/recommended"],
   "plugins": ["prettier", "cypress", "react", "import", "prefer-object-spread", "babel", "react-hooks"],
   "rules": {
