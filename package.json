@@ -31,7 +31,6 @@
     "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",
     "lodash": "^4.17.21",
-    "lorem-ipsum": "^2.0.3",
     "markdown-draft-js": "^2.2.0",
     "module-alias": "^2.2.2",
     "moment": "^2.29.1",
