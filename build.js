@@ -5,7 +5,7 @@ require('esbuild').build({
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   bundle: true,
   minify: true,
-  outdir: 'dist',
+  outdir: 'dist/prod',
   define: { 'process.env.NODE_ENV': "'production'", 'process.env.ENVIRONMENT': "'production'", global: 'window' },
   plugins: [sassPlugin()],
   color: true,
