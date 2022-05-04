@@ -92,7 +92,7 @@ initializeDatabaseConnection()
         bundle: true,
         minify: true,
         outdir: 'dist/prod',
-        define: { 'process.env.NODE_ENV': "'production'", 'process.env.ENVIRONMENT': "'production'", global: 'window' },
+        define: { 'process.env.BASE_PATH': "'/tilannekuva/'", 'process.env.NODE_ENV': "'production'", 'process.env.ENVIRONMENT': "'production'", global: 'window' },
         plugins: [sassPlugin()],
         color: true,
       }).then(s => logger.info("Build successful"))
