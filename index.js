@@ -79,7 +79,7 @@ initializeDatabaseConnection()
         loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
         sourcemap: 'external',
         bundle: true,
-        outdir: 'dist',
+        outdir: 'dist/dev',
         define: { 'process.env.BASE_PATH': "'/'", 'process.env.NODE_ENV': "'development'", 'process.env.ENVIRONMENT': "'development'", global: 'window' },
         plugins: [sassPlugin()],
         color: true,
@@ -91,14 +91,16 @@ initializeDatabaseConnection()
         loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
         bundle: true,
         minify: true,
-        outdir: 'dist',
+        outdir: 'dist/prod',
         define: { 'process.env.NODE_ENV': "'production'", 'process.env.ENVIRONMENT': "'production'", global: 'window' },
         plugins: [sassPlugin()],
         color: true,
       }).then(s => logger.info("Build successful"))
     }
 
-    const DIST_PATH = path.resolve(__dirname, './dist')
+    const DIST_PATH = inProduction
+      ? path.resolve(__dirname, './dist/prod')
+      : path.resolve(__dirname, './dist/dev')
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
 
     app.use(express.static(DIST_PATH))
