@@ -3,32 +3,26 @@
 
 import { defaultYears } from '../../config/common'
 
-
 describe('IAM permission tests', () => {
-
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 129)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 129)
     cy.visit('/admin')
-    cy.get('[data-cy^=cypressOspaUser-userGroup]')
-      .contains('Admin')
+    cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
   })
 
   it('Toska group grants superAdmin access', () => {
     cy.login('cypressToskaUser')
     cy.visit('/admin')
-    cy.get('[data-cy^=cypressToskaUser-userGroup]')
-      .contains('Super admin')
+    cy.get('[data-cy^=cypressToskaUser-userGroup]').contains('Super admin')
   })
 
   it('Jory && employee iams grant read and write access to organisation', () => {
     cy.login('cypressJoryUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 1)
-    
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+
     cy.login('cypressToskaUser')
     cy.visit('/')
     cy.get(`[data-cy=KH10_001-manage]`).click()
@@ -41,8 +35,7 @@ describe('IAM permission tests', () => {
   it('Non-employee jory user only gets read access to organisation', () => {
     cy.login('cypressJoryReadUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
 
     cy.login('cypressToskaUser')
     cy.visit('/')
@@ -56,8 +49,7 @@ describe('IAM permission tests', () => {
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 32)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
 
     cy.login('cypressToskaUser')
     cy.visit('/')
@@ -71,15 +63,13 @@ describe('IAM permission tests', () => {
   it('Psyk and logo groups grant access to two programmes', () => {
     cy.login('cypressPsykoUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 2)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
   })
 
   it('Rehtoraatti gets university wide read access', () => {
     cy.login('cypressRehtoriUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]')
-      .should('have.have.length', 128)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 128)
   })
 
   /* TODO: fix with new IAM groups */

@@ -176,8 +176,10 @@ describe('OSPA user tests', () => {
     cy.reload()
 
     // Check that earlier rights have been unaffected
-    cy.get('[data-cy=cypressUser3-userAccess]')
-      .should('contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.get('[data-cy=cypressUser3-userAccess]').should(
+      'contain',
+      'Doctoral Programme in Theology and Religious Studies'
+    )
     cy.get('[data-cy=cypressUser3-userAccess]').should('contain', '+5 more programmes')
 
     // Remove access to the Faculty of Theology
@@ -200,8 +202,10 @@ describe('OSPA user tests', () => {
 
     cy.reload()
     // Check that the user has the correct amount of rights afterwards
-    cy.get('[data-cy=cypressUser3-userAccess]')
-      .should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.get('[data-cy=cypressUser3-userAccess]').should(
+      'not.contain',
+      'Doctoral Programme in Theology and Religious Studies'
+    )
     cy.get('[data-cy=cypressUser3-userAccess]').should('contain', 'Chemistry')
     cy.get('[data-cy=cypressUser3-userAccess]').should('contain', '+2 more programmes')
   })
@@ -241,8 +245,10 @@ describe('OSPA user tests', () => {
 
     cy.reload()
     // Check that the user has the correct amount of rights afterwards
-    cy.get('[data-cy=cypressUser3-userAccess]')
-      .should('not.contain', 'Doctoral Programme in Theology and Religious Studies')
+    cy.get('[data-cy=cypressUser3-userAccess]').should(
+      'not.contain',
+      'Doctoral Programme in Theology and Religious Studies'
+    )
     cy.get('[data-cy=cypressUser3-userAccess]').should('contain', 'Chemistry')
     cy.get('[data-cy=cypressUser3-userAccess]').should('contain', '+2 more programmes')
   })

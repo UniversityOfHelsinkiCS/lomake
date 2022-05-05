@@ -26,7 +26,7 @@ export const possibleUsers = [
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
     hyGroupCn: 'grp-ospa',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressToskaUser',
@@ -35,7 +35,7 @@ export const possibleUsers = [
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
     hyGroupCn: 'grp-toska',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressJoryUser',
@@ -44,7 +44,7 @@ export const possibleUsers = [
     mail: 'cypress-jory-user@helsinki.fi',
     schacDateOfBirth: 19990103,
     hyGroupCn: 'hy-ttdk-tuk-jory;hy-employees',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressJoryReadUser',
@@ -53,7 +53,7 @@ export const possibleUsers = [
     mail: 'cypress-joryRead-user@helsinki.fi',
     schacDateOfBirth: 19990103,
     hyGroupCn: 'hy-ttdk-tuk-jory',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressDoctoralUser',
@@ -62,7 +62,7 @@ export const possibleUsers = [
     mail: 'cypress-doctoral-user@helsinki.fi',
     schacDateOfBirth: 19990104,
     hyGroupCn: 'hy-tohtorikoulutus-johtoryhma',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressPsykoUser',
@@ -71,7 +71,7 @@ export const possibleUsers = [
     mail: 'cypress-psyko-user@helsinki.fi',
     schacDateOfBirth: 19990105,
     hyGroupCn: 'hy-ltdk-psyk-jory',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressRehtoriUser',
@@ -80,7 +80,7 @@ export const possibleUsers = [
     mail: 'cypress-psyko-user@helsinki.fi',
     schacDateOfBirth: 19990106,
     hyGroupCn: 'hy-rehtoraatti',
-    sn: 'nah'
+    sn: 'nah',
   },
   {
     uid: 'cypressInternationalUser',
