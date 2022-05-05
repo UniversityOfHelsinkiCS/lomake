@@ -1,7 +1,6 @@
 /* eslint-disable */
 require('dotenv').config()
 require('module-alias/register')
-const chokidar = require('chokidar')
 const express = require('express')
 const path = require('path')
 const { sassPlugin } = require('esbuild-sass-plugin')
@@ -54,20 +53,6 @@ initializeDatabaseConnection()
 
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
-
-    /**
-     *  Use "hot loading" in backend
-     */
-    const watcher = chokidar.watch('server, client') // Watch server folder
-    watcher.on('ready', () => {
-      watcher.on('server, client', () => {
-        logger.info('Hot reloaded.')
-        Object.keys(require.cache).forEach(id => {
-          if (id.includes('server')) delete require.cache[id] // Delete all require caches that point to server folder (*)
-          if (id.includes('client')) delete require.cache[id] // Delete all require caches that point to server folder (*)
-        })
-      })
-    })
 
     /**
      * For frontend use hot loading when in development, else serve the static content
