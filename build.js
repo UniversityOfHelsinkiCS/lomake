@@ -1,17 +1,3 @@
-const { sassPlugin } = require('esbuild-sass-plugin')
+const { prodConfig } = require('./esbuild_config')
 
-require('esbuild').build({
-  entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
-  bundle: true,
-  minify: true,
-  outdir: 'dist/prod',
-  define: {
-    'process.env.BASE_PATH': "'/tilannekuva/'",
-    'process.env.NODE_ENV': "'production'",
-    'process.env.ENVIRONMENT': "'production'",
-    global: 'window',
-  },
-  plugins: [sassPlugin()],
-  color: true,
-})
+require('esbuild').build(prodConfig)

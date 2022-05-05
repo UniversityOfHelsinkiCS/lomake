@@ -3,7 +3,6 @@ require('dotenv').config()
 require('module-alias/register')
 const express = require('express')
 const path = require('path')
-const { sassPlugin } = require('esbuild-sass-plugin')
 
 require('express-async-errors')
 
@@ -17,7 +16,8 @@ const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
 const { generateMissingTokens } = require('@root/server/scripts/generateMissingTokens')
 const { getUserList } = require('@root/server/scripts/getUserList')
-const { createTempAnswers } = require('@root/server/scripts/createTempAnswers')
+const { createTempAnswers } = require('@root/server/scripts/createTempAnswers');
+const { devConfig, prodConfig } = require('./esbuild_config');
 
 initializeDatabaseConnection()
   .then(() => {
@@ -49,38 +49,15 @@ initializeDatabaseConnection()
       socket.on('join', room => require('@util/websocketHandlers').joinRoom(socket, room, io))
       socket.on('leave', room => require('@util/websocketHandlers').leaveRoom(socket, room))
       socket.on('get_lock', room => require('@util/websocketHandlers').getLock(socket, room, io))
-    })
+    })  
 
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
-    /**
-     * For frontend use hot loading when in development, else serve the static content
-     */
-
     if (!inProduction) {
-      require('esbuild').build({
-        entryPoints: ['client/index.js'],
-        loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
-        sourcemap: 'external',
-        bundle: true,
-        outdir: 'dist/dev',
-        define: { 'process.env.BASE_PATH': "'/'", 'process.env.NODE_ENV': "'development'", 'process.env.ENVIRONMENT': "'development'", global: 'window' },
-        plugins: [sassPlugin()],
-        color: true,
-        watch: true,
-      }).then(s => logger.info("Build successful"))
+      require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } else {
-      require('esbuild').build({
-        entryPoints: ['client/index.js'],
-        loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
-        bundle: true,
-        minify: true,
-        outdir: 'dist/prod',
-        define: { 'process.env.BASE_PATH': "'/tilannekuva/'", 'process.env.NODE_ENV': "'production'", 'process.env.ENVIRONMENT': "'production'", global: 'window' },
-        plugins: [sassPlugin()],
-        color: true,
-      }).then(s => logger.info("Build successful"))
+      require('esbuild').build(prodConfig).then(s => logger.info("Build successful"))
     }
 
     const DIST_PATH = inProduction
