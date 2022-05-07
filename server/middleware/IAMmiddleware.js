@@ -1,6 +1,5 @@
 const { inProduction } = require('@util/common')
 const { grantUserRights } = require('@util/IAMrights')
-const logger = require('@util/logger')
 
 const IAMmiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) return next()
@@ -12,7 +11,6 @@ const IAMmiddleware = async (req, res, next) => {
   if (!inProduction) {
     // testing iam group based access granting
     await grantUserRights(user, headers?.hygroupcn)
-    logger.info(`User ${user.uid} logged in with groups ${hyGroups}`)
   }
 
   next()

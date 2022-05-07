@@ -1,6 +1,7 @@
 const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes, isUniversityWideIam } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
+const logger = require('./logger')
 
 
 const parseHyGroupsFromHeader = hyGroups => {
@@ -194,8 +195,10 @@ const grantUserRights = async (user, hyGroupsHeader) => {
   }
 
   await user.save()
+
+  logger.info(`User ${user.uid} logged in with groups ${hyGroups}`)
 }
 
-export {
+module.exports = {
   grantUserRights
 }
