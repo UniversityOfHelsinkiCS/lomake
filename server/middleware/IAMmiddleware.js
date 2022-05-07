@@ -3,8 +3,6 @@ const { data } = require('@root/config/data')
 const { inProduction, mapToDegreeCode } = require('@util/common')
 const logger = require('@util/logger')
 
-const iamForKandiAndMasters = ['hy-ltdk-psyk-jory', 'hy-ltdk-logo-jory']
-
 const parseHyGroups = hyGroups => {
   let parsedHyGroups = []
   if (!(hyGroups === undefined || hyGroups === '' || hyGroups === null)) {

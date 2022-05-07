@@ -230,6 +230,17 @@ const data = [
         international: false,
       },
       {
+        key: 'T921103',
+        name: {
+          fi: 'Väestön terveyden tohtoriohjelma',
+          en: 'Doctoral Programme in Population Health',
+          se: 'Doktorandprogrammet i befolkningshälsan',
+        },
+        level: 'doctoral',
+        companionFaculties: ['maatalous-metsätieteellinen', 'farmasia', 'kasvatustieteellinen'],
+        international: false,
+      },
+      {
         key: 'T921104',
         name: {
           fi: 'Suun terveystieteen tohtoriohjelma',
@@ -241,16 +252,16 @@ const data = [
         international: false,
       },
       {
-        key: 'T921103',
+        key: 'T921109',
         name: {
-          fi: 'Väestön terveyden tohtoriohjelma',
-          en: 'Doctoral Programme in Population Health',
-          se: 'Doktorandprogrammet i befolkningshälsan',
+          fi: 'Ihmisen käyttäytymisen tohtoriohjelma',
+          en: 'Doctoral Programme in Human Behaviour',
+          se: 'Doktorandprogrammet i mänskligt beteende'
         },
         level: 'doctoral',
-        companionFaculties: ['maatalous-metsätieteellinen', 'farmasia', 'kasvatustieteellinen'],
+        companionFaculties: [],
         international: false,
-      },
+      }
     ],
   },
   {

@@ -228,6 +228,7 @@ const doctoralSchoolMap = {
     'T921106',
     'T921107',
     'T921108',
+    'T921109',
   ],
   'hy-tutkijakoulut-yeb-jory': ['T922101', 'T922102', 'T922103', 'T922104', 'T922105', 'T922106'],
   'hy-tutkijakoulut-donasci-jory': ['T923101', 'T923102', 'T923103', 'T923104', 'T923105', 'T923106', 'T923107'],
