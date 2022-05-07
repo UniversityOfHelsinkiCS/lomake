@@ -154,7 +154,7 @@ const getReadAccess = hyGroups => {
  * based on IAM-groups in IAM header string
  * @param {string} hyGroupsHeader 
  */
-const getAccessRights = async (hyGroupsHeader) => {
+const getAccessRights = (hyGroupsHeader) => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
   const { 
