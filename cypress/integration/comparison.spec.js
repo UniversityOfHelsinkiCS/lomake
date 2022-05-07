@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeName, defaultYears } from '../../config/common'
+import helpers from '../support/helpers'
 
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
@@ -37,7 +38,7 @@ describe('ComparisonPage tests', () => {
     })
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(helpers.getTotalProgrammeCount() + 1)
   })
 
   it('Filtering of comparison programmes works by programme level', () => {
@@ -52,7 +53,7 @@ describe('ComparisonPage tests', () => {
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('All faculties').click()
-    cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains('/ 32')
+    cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains(`/ ${helpers.getDoctoralProgrammeCount()}`)
   })
 
   it('Tooltips work for compared programmes filtered by faculty', () => {

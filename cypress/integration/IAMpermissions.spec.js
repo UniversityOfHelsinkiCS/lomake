@@ -2,12 +2,13 @@
 /// <reference types="cypress" />
 
 import { defaultYears } from '../../config/common'
+import helpers from '../support/helpers'
 
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 129)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount() + 1)
     cy.visit('/admin')
     cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
   })
@@ -49,7 +50,7 @@ describe('IAM permission tests', () => {
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 32)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.login('cypressToskaUser')
     cy.visit('/')
@@ -69,7 +70,7 @@ describe('IAM permission tests', () => {
   it('Rehtoraatti gets university wide read access', () => {
     cy.login('cypressRehtoriUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 128)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
   })
 
   /* TODO: fix with new IAM groups */
@@ -96,6 +97,6 @@ describe('IAM permission tests', () => {
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains('129')
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(helpers.getTotalProgrammeCount() + 1)
   })
 })
