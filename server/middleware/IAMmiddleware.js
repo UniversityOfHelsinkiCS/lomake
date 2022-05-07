@@ -1,5 +1,5 @@
 const { inProduction } = require('@util/common')
-const { grantUserRights } = require('@util/IAMrights')
+const { getAccessRights } = require('@util/IAMrights')
 
 const IAMmiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) return next()
@@ -10,7 +10,16 @@ const IAMmiddleware = async (req, res, next) => {
 
   if (!inProduction) {
     // testing iam group based access granting
-    await grantUserRights(user, headers?.hygroupcn)
+    const { newAccess, newSpecialGroup } = getAccessRights(headers?.hygroupcn)
+    user.access = {
+      ...user.access, 
+      ...newAccess
+    }
+    user.specialGroup = {
+      ...user.specialGroup,
+      ...newSpecialGroup
+    }
+    await user.save()
   }
 
   next()

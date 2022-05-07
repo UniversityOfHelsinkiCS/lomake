@@ -1,7 +1,6 @@
 const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes, isUniversityWideIam } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
-const logger = require('./logger')
 
 
 const parseHyGroupsFromHeader = hyGroups => {
@@ -151,12 +150,11 @@ const getReadAccess = hyGroups => {
 }
 
 /**
- * Saves user organisation access rights and special groups, 
+ * Gets access rights and special groups, 
  * based on IAM-groups in IAM header string
- * @param {User} user 
  * @param {string} hyGroupsHeader 
  */
-const grantUserRights = async (user, hyGroupsHeader) => {
+const getAccessRights = async (hyGroupsHeader) => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
   const { 
@@ -174,8 +172,7 @@ const grantUserRights = async (user, hyGroupsHeader) => {
     newUniversityWideSpecialGroups
   } = getUniversityReadingRights(hyGroups)
 
-  user.access = {
-    ...user.access,
+  const newAccess = {
     ...newUniversityWideReadAccess,
     ...newDoctoralReadAccess,
     ...newFacultyReadAccess,
@@ -185,8 +182,7 @@ const grantUserRights = async (user, hyGroupsHeader) => {
     ...getProgramAdminAccess(hyGroups), // order matters here: last overwrites previous keys
   }
 
-  user.specialGroup = {
-    ...user.specialGroup,
+  const newSpecialGroup = {
     ...newUniversityWideSpecialGroups,
     ...newDoctoralSpecialGroups,
     ...newFacultySpecialGroups,
@@ -194,11 +190,9 @@ const grantUserRights = async (user, hyGroupsHeader) => {
     ...getSuperAdmin(hyGroups),
   }
 
-  await user.save()
-
-  logger.info(`User ${user.uid} logged in with groups ${hyGroups}`)
+  return { newAccess, newSpecialGroup }
 }
 
 module.exports = {
-  grantUserRights
+  getAccessRights
 }
