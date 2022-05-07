@@ -62,9 +62,11 @@ describe('IAM permission tests', () => {
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
-    cy.login('cypressPsykoUser')
-    cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
+    ['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
+      cy.login(user)
+      cy.visit('/')
+      cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
+    })
   })
 
   it('Rehtoraatti gets university wide read access', () => {
@@ -73,7 +75,14 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
   })
 
-  /* TODO: fix with new IAM groups */
+  it('Faculty iam group gives reading rights to all programmes of faculty', () => {
+    cy.login('cypressTheologyFacultyUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getFacultyProgrammeCount('H10'))
+  })
+
+
+  /* Maybe wrong spec file for these tests? */
 
   it('Report works', () => {
     cy.login('cypressOspaUser')
