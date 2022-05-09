@@ -124,12 +124,11 @@ const getFacultyReadingRights = hyGroups => {
  * @param {string[]} hyGroups
  */
 const getProgramAdminAccess = hyGroups => {
-  if (!isStudyProgramLeader(hyGroups)) return
   const orgCodes = hyGroups
     .filter(iam => hyGroups.includes(getStudyLeaderGroup(iam)))
     .map(iam => iamToOrganisationCode(iam))
     .filter(Boolean)
-    
+
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
