@@ -350,6 +350,8 @@ const kosuMap = {
   'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
 }
 
+const universityWideGroups = ['hy-ypa-opa-opintoasiainpaallikot', 'hy-rehtoraatti']
+
 const iamToOrganisationCode = iam => {
   const organisationCodes = joryMap[iam]
   if (Array.isArray(organisationCodes)) {
@@ -362,7 +364,7 @@ const iamToFacultyCode = iam => facultyMap[iam]
 
 const isDoctoralIam = iam => doctoralIams.includes(iam)
 
-const isUniversityWideIam = iam => ['hy-ypa-opa-opintoasiainpaallikot', 'hy-rehtoraatti'].includes(iam)
+const isUniversityWideIam = iam => universityWideGroups.includes(iam)
 
 const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
 
