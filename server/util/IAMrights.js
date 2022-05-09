@@ -1,7 +1,14 @@
-const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes, isUniversityWideIam, iamToKosu, getStudyLeaderGroup } = require('@root/config/iamToCodes')
+const {
+  iamToOrganisationCode,
+  iamToFacultyCode,
+  isDoctoralIam,
+  doctoralProgrammeCodes,
+  isUniversityWideIam,
+  iamToKosu,
+  getStudyLeaderGroup,
+} = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
-
 
 const parseHyGroupsFromHeader = hyGroups => {
   let parsedHyGroups = []
@@ -27,7 +34,7 @@ const getAdmin = hyGroups => {
 
 /**
  * Grant reading rights to all programmes if user has uni wide IAM (eg. hy-rehtoraatti)
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  * @returns read access to ALL programmes
  */
 const getUniversityReadingRights = hyGroups => {
@@ -65,9 +72,9 @@ const getDoctoralReadingRights = hyGroups => {
 }
 
 /**
- * Grants reading rights to all doctoral programmes that belong to user's 
+ * Grants reading rights to all doctoral programmes that belong to user's
  * doctoral school IAMs
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  * @returns read access to doctoral programs
  */
 const getDoctoralSchoolReadingRights = hyGroups => {
@@ -102,7 +109,7 @@ const getFacultyReadingRights = hyGroups => {
  * Grant reading rights to all programmes in the faculties of the campus, if the user belongs to corresponding kosu group
  * @param {string[]} hyGroups
  */
- const getKosuReadingRights = hyGroups => {
+const getKosuReadingRights = hyGroups => {
   const facultyCodes = hyGroups.flatMap(iam => iamToKosu(iam)).filter(Boolean)
   const newFacultyReadAccess = {}
   const newFacultySpecialGroups = {}
@@ -116,8 +123,6 @@ const getFacultyReadingRights = hyGroups => {
 
   return { newFacultyReadAccess, newFacultySpecialGroups }
 }
-
-
 
 /**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
@@ -172,32 +177,20 @@ const getReadAccess = hyGroups => {
 }
 
 /**
- * Gets access rights and special groups, 
+ * Gets access rights and special groups,
  * based on IAM-groups in IAM header string
- * @param {string} hyGroupsHeader 
+ * @param {string} hyGroupsHeader
  */
-const getAccessRights = (hyGroupsHeader) => {
+const getAccessRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
-  const { 
-    newFacultyReadAccess, 
-    newFacultySpecialGroups
-  } = getFacultyReadingRights(hyGroups)
+  const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
 
-  const {
-    newKosuReadAccess,
-    newKosuSpecialGroups
-  } = getKosuReadingRights(hyGroups)
+  const { newKosuReadAccess, newKosuSpecialGroups } = getKosuReadingRights(hyGroups)
 
-  const {
-    newDoctoralReadAccess, 
-    newDoctoralSpecialGroups
-  } = getDoctoralReadingRights(hyGroups)
+  const { newDoctoralReadAccess, newDoctoralSpecialGroups } = getDoctoralReadingRights(hyGroups)
 
-  const {
-    newUniversityWideReadAccess,
-    newUniversityWideSpecialGroups
-  } = getUniversityReadingRights(hyGroups)
+  const { newUniversityWideReadAccess, newUniversityWideSpecialGroups } = getUniversityReadingRights(hyGroups)
 
   const newAccess = {
     ...newUniversityWideReadAccess,
@@ -223,5 +216,5 @@ const getAccessRights = (hyGroupsHeader) => {
 }
 
 module.exports = {
-  getAccessRights
+  getAccessRights,
 }
