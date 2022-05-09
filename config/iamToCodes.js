@@ -356,6 +356,8 @@ const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['grp-ospa']
 
+const employeeGroups = ['hy-employees']
+
 const isSuperAdminIam = iam => superAdminGroups.includes(iam)
 
 const isAdminIam = iam => adminGroups.includes(iam)
@@ -363,6 +365,8 @@ const isAdminIam = iam => adminGroups.includes(iam)
 const isUniversityWideIam = iam => universityWideGroups.includes(iam)
 
 const isDoctoralIam = iam => doctoralIams.includes(iam)
+
+const isEmployeeIam = iam => employeeGroups.includes(iam)
 
 const iamToFacultyCode = iam => facultyMap[iam]
 
@@ -385,6 +389,7 @@ module.exports = {
   isAdminIam,
   isUniversityWideIam,
   isDoctoralIam,
+  isEmployeeIam,
   iamToFacultyCode,
   iamToDoctoralSchool,
   iamToKosu,

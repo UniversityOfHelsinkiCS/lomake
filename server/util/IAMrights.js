@@ -1,13 +1,14 @@
 const {
-  iamToOrganisationCode,
-  iamToFacultyCode,
-  isDoctoralIam,
-  doctoralProgrammeCodes,
-  isUniversityWideIam,
-  iamToKosu,
-  getStudyLeaderGroup,
   isSuperAdminIam,
   isAdminIam,
+  isUniversityWideIam,
+  isDoctoralIam,
+  iamToFacultyCode,
+  iamToKosu,
+  getStudyLeaderGroup,
+  iamToOrganisationCode,
+  doctoralProgrammeCodes,
+  isEmployeeIam,
 } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -70,7 +71,7 @@ const getUniversityReadingRights = hyGroups => {
  * @returns read access to ALL doctoral programs
  */
 const getDoctoralReadingRights = hyGroups => {
-  const hasDoctoralReadingRights = hyGroups.some(group => isDoctoralIam(group))
+  const hasDoctoralReadingRights = hyGroups.some(isDoctoralIam)
   const newDoctoralReadAccess = {}
   const newDoctoralSpecialGroups = {}
   if (hasDoctoralReadingRights) {
@@ -155,14 +156,12 @@ const getProgramAdminAccess = hyGroups => {
   return newAccess
 }
 
-const isEmployee = hyGroups => hyGroups.includes('hy-employees')
-
 /**
  * Grant write and read access if the user belongs to employees group and studyprogramme's manager group
  * @param {string[]} hyGroups
  */
 const getWriteAccess = hyGroups => {
-  if (!isEmployee(hyGroups)) return
+  if (!hyGroups.some(isEmployeeIam)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
