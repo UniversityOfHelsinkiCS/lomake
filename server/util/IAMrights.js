@@ -1,7 +1,16 @@
-const { iamToOrganisationCode, iamToFacultyCode, isDoctoralIam, doctoralProgrammeCodes, isUniversityWideIam, iamToKosu, getStudyLeaderGroup } = require('@root/config/iamToCodes')
+const {
+  isSuperAdminIam,
+  isAdminIam,
+  isUniversityWideIam,
+  isDoctoralIam,
+  iamToFacultyCode,
+  iamToKosu,
+  getStudyLeaderGroup,
+  iamToOrganisationCode,
+  isEmployeeIam,
+} = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
-
 
 const parseHyGroupsFromHeader = hyGroups => {
   let parsedHyGroups = []
@@ -11,15 +20,25 @@ const parseHyGroupsFromHeader = hyGroups => {
   return parsedHyGroups
 }
 
+/**
+ * Grant super-admin rights to the Form if the user has correct iams (eg. grp-toska)
+ * @param {string[]} hyGroups
+ * @returns superAdmin special group
+ */
 const getSuperAdmin = hyGroups => {
-  const isToska = hyGroups.includes('grp-toska')
+  const isToska = hyGroups.some(isSuperAdminIam)
   if (isToska) {
     return { superAdmin: true }
   }
 }
 
+/**
+ * Grant admin rights to the Form if the user has correct iams (eg. grp-ospa)
+ * @param {string[]} hyGroups
+ * @returns admin special group
+ */
 const getAdmin = hyGroups => {
-  const isOspa = hyGroups.includes('grp-ospa')
+  const isOspa = hyGroups.some(isAdminIam)
   if (isOspa) {
     return { admin: true }
   }
@@ -27,7 +46,7 @@ const getAdmin = hyGroups => {
 
 /**
  * Grant reading rights to all programmes if user has uni wide IAM (eg. hy-rehtoraatti)
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  * @returns read access to ALL programmes
  */
 const getUniversityReadingRights = hyGroups => {
@@ -35,7 +54,7 @@ const getUniversityReadingRights = hyGroups => {
   const newUniversityWideReadAccess = {}
   const newUniversityWideSpecialGroups = {}
   if (hasUniversityReadingRights) {
-    newUniversityWideSpecialGroups['allProgrammes'] = true
+    newUniversityWideSpecialGroups.allProgrammes = true
     data.forEach(faculty => {
       faculty.programmes.forEach(program => {
         newUniversityWideReadAccess[program.key] = { read: true }
@@ -51,13 +70,17 @@ const getUniversityReadingRights = hyGroups => {
  * @returns read access to ALL doctoral programs
  */
 const getDoctoralReadingRights = hyGroups => {
-  const hasDoctoralReadingRights = hyGroups.some(group => isDoctoralIam(group))
+  const hasDoctoralReadingRights = hyGroups.some(isDoctoralIam)
   const newDoctoralReadAccess = {}
   const newDoctoralSpecialGroups = {}
   if (hasDoctoralReadingRights) {
-    newDoctoralSpecialGroups['doctoral'] = true
-    doctoralProgrammeCodes.forEach(code => {
-      newDoctoralReadAccess[code] = { read: true }
+    newDoctoralSpecialGroups.allProgrammes = true
+    data.forEach(faculty => {
+      faculty.programmes.forEach(program => {
+        if (program.level === 'doctoral') {
+          newDoctoralReadAccess[program.key] = { read: true }
+        }
+      })
     })
   }
 
@@ -65,9 +88,9 @@ const getDoctoralReadingRights = hyGroups => {
 }
 
 /**
- * Grants reading rights to all doctoral programmes that belong to user's 
+ * Grants reading rights to all doctoral programmes that belong to user's
  * doctoral school IAMs
- * @param {string[]} hyGroups 
+ * @param {string[]} hyGroups
  * @returns read access to doctoral programs
  */
 const getDoctoralSchoolReadingRights = hyGroups => {
@@ -102,7 +125,7 @@ const getFacultyReadingRights = hyGroups => {
  * Grant reading rights to all programmes in the faculties of the campus, if the user belongs to corresponding kosu group
  * @param {string[]} hyGroups
  */
- const getKosuReadingRights = hyGroups => {
+const getKosuReadingRights = hyGroups => {
   const facultyCodes = hyGroups.flatMap(iam => iamToKosu(iam)).filter(Boolean)
   const newKosuReadAccess = {}
   const newKosuSpecialGroups = {}
@@ -116,8 +139,6 @@ const getFacultyReadingRights = hyGroups => {
 
   return { newKosuReadAccess, newKosuSpecialGroups }
 }
-
-
 
 /**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
@@ -138,14 +159,12 @@ const getProgramAdminAccess = hyGroups => {
   return newAccess
 }
 
-const isEmployee = hyGroups => hyGroups.includes('hy-employees')
-
 /**
  * Grant write and read access if the user belongs to employees group and studyprogramme's manager group
  * @param {string[]} hyGroups
  */
 const getWriteAccess = hyGroups => {
-  if (!isEmployee(hyGroups)) return
+  if (!hyGroups.some(isEmployeeIam)) return
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
@@ -172,32 +191,20 @@ const getReadAccess = hyGroups => {
 }
 
 /**
- * Gets access rights and special groups, 
+ * Gets access rights and special groups,
  * based on IAM-groups in IAM header string
- * @param {string} hyGroupsHeader 
+ * @param {string} hyGroupsHeader
  */
-const getAccessRights = (hyGroupsHeader) => {
+const getAccessRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
-  const { 
-    newFacultyReadAccess, 
-    newFacultySpecialGroups
-  } = getFacultyReadingRights(hyGroups)
+  const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
 
-  const {
-    newKosuReadAccess,
-    newKosuSpecialGroups
-  } = getKosuReadingRights(hyGroups)
+  const { newKosuReadAccess, newKosuSpecialGroups } = getKosuReadingRights(hyGroups)
 
-  const {
-    newDoctoralReadAccess, 
-    newDoctoralSpecialGroups
-  } = getDoctoralReadingRights(hyGroups)
+  const { newDoctoralReadAccess, newDoctoralSpecialGroups } = getDoctoralReadingRights(hyGroups)
 
-  const {
-    newUniversityWideReadAccess,
-    newUniversityWideSpecialGroups
-  } = getUniversityReadingRights(hyGroups)
+  const { newUniversityWideReadAccess, newUniversityWideSpecialGroups } = getUniversityReadingRights(hyGroups)
 
   const newAccess = {
     ...newUniversityWideReadAccess,
@@ -223,5 +230,5 @@ const getAccessRights = (hyGroupsHeader) => {
 }
 
 module.exports = {
-  getAccessRights
+  getAccessRights,
 }

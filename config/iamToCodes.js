@@ -258,42 +258,6 @@ const kojoMap = {
   'hy-dp-docs-jory': 'hy-tohtoriohjelma-johtajat',
 }
 
-const doctoralProgrammeCodes = [
-  'T920101',
-  'T920102',
-  'T920103',
-  'T920104',
-  'T920105',
-  'T920106',
-  'T920107',
-  'T920108',
-  'T920109',
-  'T920110',
-  'T920111',
-  'T921101',
-  'T921102',
-  'T921103',
-  'T921104',
-  'T921105',
-  'T921106',
-  'T921107',
-  'T921108',
-  'T921109',
-  'T922101',
-  'T922102',
-  'T922103',
-  'T922104',
-  'T922105',
-  'T922106',
-  'T923101',
-  'T923102',
-  'T923103',
-  'T923104',
-  'T923105',
-  'T923106',
-  'T923107',
-]
-
 const facultyMap = {
   'hy-ttdk-dekanaatti': 'H10',
   'hy-oiktdk-dekanaatti': 'H20',
@@ -350,6 +314,32 @@ const kosuMap = {
   'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
 }
 
+const universityWideGroups = ['hy-ypa-opa-opintoasiainpaallikot', 'hy-rehtoraatti']
+
+const superAdminGroups = ['grp-toska']
+
+const adminGroups = ['grp-ospa']
+
+const employeeGroups = ['hy-employees']
+
+const isSuperAdminIam = iam => superAdminGroups.includes(iam)
+
+const isAdminIam = iam => adminGroups.includes(iam)
+
+const isUniversityWideIam = iam => universityWideGroups.includes(iam)
+
+const isDoctoralIam = iam => doctoralIams.includes(iam)
+
+const isEmployeeIam = iam => employeeGroups.includes(iam)
+
+const iamToFacultyCode = iam => facultyMap[iam]
+
+const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
+
+const iamToKosu = iam => kosuMap[iam]
+
+const getStudyLeaderGroup = iam => kojoMap[iam]
+
 const iamToOrganisationCode = iam => {
   const organisationCodes = joryMap[iam]
   if (Array.isArray(organisationCodes)) {
@@ -358,25 +348,15 @@ const iamToOrganisationCode = iam => {
   return [organisationCodes]
 }
 
-const iamToFacultyCode = iam => facultyMap[iam]
-
-const isDoctoralIam = iam => doctoralIams.includes(iam)
-
-const isUniversityWideIam = iam => ['hy-ypa-opa-opintoasiainpaallikot', 'hy-rehtoraatti'].includes(iam)
-
-const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
-
-const iamToKosu = iam => kosuMap[iam]
-
-const getStudyLeaderGroup = iam => kojoMap[iam]
-
 module.exports = {
-  iamToOrganisationCode,
-  iamToFacultyCode,
-  isDoctoralIam,
+  isSuperAdminIam,
+  isAdminIam,
   isUniversityWideIam,
-  doctoralProgrammeCodes,
+  isDoctoralIam,
+  isEmployeeIam,
+  iamToFacultyCode,
   iamToDoctoralSchool,
   iamToKosu,
+  iamToOrganisationCode,
   getStudyLeaderGroup,
 }
