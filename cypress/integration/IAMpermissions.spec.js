@@ -47,6 +47,19 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=admin-cypressJoryUser-false]')
   })
 
+  it('Jory and corresponding kojo give admin access to programme', () => {
+    cy.login('cypressKojoUser')
+    cy.visit('/')
+
+    cy.login('cypressToskaUser')
+    cy.visit('/')
+    cy.get(`[data-cy=KH10_001-manage]`).click()
+
+    cy.get('[data-cy=read-cypressKojoUser]')
+    cy.get('[data-cy=write-cypressKojoUser]')
+    cy.get('[data-cy=admin-cypressKojoUser]') 
+  })
+
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
@@ -58,7 +71,7 @@ describe('IAM permission tests', () => {
 
     cy.get('[data-cy=read-cypressJoryReadUser]')
     cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
-    cy.get('[data-cy=admin-cypressJoryUser-false]')
+    cy.get('[data-cy=admin-cypressJoryReadUser-false]')
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
