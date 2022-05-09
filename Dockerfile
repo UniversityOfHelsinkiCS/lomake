@@ -1,5 +1,4 @@
-FROM node:16.15-stretch
-
+FROM node:16.15
 
 WORKDIR /usr/src/app
 COPY package* ./ 

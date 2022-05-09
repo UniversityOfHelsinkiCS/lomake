@@ -428,8 +428,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Publish to DockerHub
-        uses: docker/build-push-action@v1.1.0
+        uses: docker/build-push-action@v3
         with:
           repository: toska/lomake
           username: ${{ secrets.DOCKER_USERNAME }}
