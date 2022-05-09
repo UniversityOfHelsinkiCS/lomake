@@ -3,7 +3,7 @@ const { sassPlugin } = require('esbuild-sass-plugin')
 const devConfig = {
   entryPoints: ['client/index.js'],
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
-  sourcemap: 'external',
+  sourcemap: true,
   bundle: true,
   outdir: 'dist/dev',
   define: {
