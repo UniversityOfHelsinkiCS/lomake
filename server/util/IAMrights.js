@@ -6,6 +6,8 @@ const {
   isUniversityWideIam,
   iamToKosu,
   getStudyLeaderGroup,
+  isSuperAdminIam,
+  isAdminIam,
 } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -18,15 +20,25 @@ const parseHyGroupsFromHeader = hyGroups => {
   return parsedHyGroups
 }
 
+/**
+ * Grant super-admin rights to the Form if the user has correct iams (eg. grp-toska)
+ * @param {string[]} hyGroups
+ * @returns superAdmin special group
+ */
 const getSuperAdmin = hyGroups => {
-  const isToska = hyGroups.includes('grp-toska')
+  const isToska = hyGroups.some(isSuperAdminIam)
   if (isToska) {
     return { superAdmin: true }
   }
 }
 
+/**
+ * Grant admin rights to the Form if the user has correct iams (eg. grp-ospa)
+ * @param {string[]} hyGroups
+ * @returns admin special group
+ */
 const getAdmin = hyGroups => {
-  const isOspa = hyGroups.includes('grp-ospa')
+  const isOspa = hyGroups.some(isAdminIam)
   if (isOspa) {
     return { admin: true }
   }

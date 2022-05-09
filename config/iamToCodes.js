@@ -352,6 +352,26 @@ const kosuMap = {
 
 const universityWideGroups = ['hy-ypa-opa-opintoasiainpaallikot', 'hy-rehtoraatti']
 
+const superAdminGroups = ['grp-toska']
+
+const adminGroups = ['grp-ospa']
+
+const isSuperAdminIam = iam => superAdminGroups.includes(iam)
+
+const isAdminIam = iam => adminGroups.includes(iam)
+
+const isUniversityWideIam = iam => universityWideGroups.includes(iam)
+
+const isDoctoralIam = iam => doctoralIams.includes(iam)
+
+const iamToFacultyCode = iam => facultyMap[iam]
+
+const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
+
+const iamToKosu = iam => kosuMap[iam]
+
+const getStudyLeaderGroup = iam => kojoMap[iam]
+
 const iamToOrganisationCode = iam => {
   const organisationCodes = joryMap[iam]
   if (Array.isArray(organisationCodes)) {
@@ -360,25 +380,15 @@ const iamToOrganisationCode = iam => {
   return [organisationCodes]
 }
 
-const iamToFacultyCode = iam => facultyMap[iam]
-
-const isDoctoralIam = iam => doctoralIams.includes(iam)
-
-const isUniversityWideIam = iam => universityWideGroups.includes(iam)
-
-const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
-
-const iamToKosu = iam => kosuMap[iam]
-
-const getStudyLeaderGroup = iam => kojoMap[iam]
-
 module.exports = {
-  iamToOrganisationCode,
-  iamToFacultyCode,
-  isDoctoralIam,
+  isSuperAdminIam,
+  isAdminIam,
   isUniversityWideIam,
-  doctoralProgrammeCodes,
+  isDoctoralIam,
+  iamToFacultyCode,
   iamToDoctoralSchool,
   iamToKosu,
+  iamToOrganisationCode,
+  doctoralProgrammeCodes,
   getStudyLeaderGroup,
 }
