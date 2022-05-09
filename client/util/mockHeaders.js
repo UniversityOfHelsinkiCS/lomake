@@ -105,8 +105,17 @@ export const possibleUsers = [
     employeeNumber: 132,
     givenName: 'kojoUser',
     mail: 'cypress-kojo-user@helsinki.fi',
-    schacDateOfBirth: 19990106,
+    schacDateOfBirth: 19990107,
     hyGroupCn: 'hy-ttdk-tuk-jory;hy-ttdk-kandi-kojot',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressKosuUser',
+    employeeNumber: 133,
+    givenName: 'kosuUser',
+    mail: 'cypress-kosu-user@helsinki.fi',
+    schacDateOfBirth: 19990108,
+    hyGroupCn: 'hy-ypa-opa-kosu-viikki', // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
     sn: 'nah',
   },
   {

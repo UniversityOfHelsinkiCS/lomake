@@ -60,6 +60,19 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=admin-cypressKojoUser]') 
   })
 
+  it('Kosu user gets read access to all programmes of campus', () => {
+    // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
+    const programmeCount = 
+      helpers.getFacultyProgrammeCount('H57')
+    + helpers.getFacultyProgrammeCount('H55')
+    + helpers.getFacultyProgrammeCount('H80')
+    + helpers.getFacultyProgrammeCount('H90')
+
+    cy.login('cypressKosuUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', programmeCount)
+  })
+
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')

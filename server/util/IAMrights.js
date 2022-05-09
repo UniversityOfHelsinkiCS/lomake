@@ -104,17 +104,17 @@ const getFacultyReadingRights = hyGroups => {
  */
  const getKosuReadingRights = hyGroups => {
   const facultyCodes = hyGroups.flatMap(iam => iamToKosu(iam)).filter(Boolean)
-  const newFacultyReadAccess = {}
-  const newFacultySpecialGroups = {}
+  const newKosuReadAccess = {}
+  const newKosuSpecialGroups = {}
   facultyCodes.forEach(code => {
-    newFacultySpecialGroups[code] = true
+    newKosuSpecialGroups[code] = true
     const faculty = data.find(f => f.code === code)
     faculty.programmes.forEach(p => {
-      newFacultyReadAccess[p.key] = { read: true }
+      newKosuReadAccess[p.key] = { read: true }
     })
   })
 
-  return { newFacultyReadAccess, newFacultySpecialGroups }
+  return { newKosuReadAccess, newKosuSpecialGroups }
 }
 
 
