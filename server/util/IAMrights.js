@@ -7,7 +7,6 @@ const {
   iamToKosu,
   getStudyLeaderGroup,
   iamToOrganisationCode,
-  doctoralProgrammeCodes,
   isEmployeeIam,
 } = require('@root/config/iamToCodes')
 const { data } = require('@root/config/data')
@@ -55,7 +54,7 @@ const getUniversityReadingRights = hyGroups => {
   const newUniversityWideReadAccess = {}
   const newUniversityWideSpecialGroups = {}
   if (hasUniversityReadingRights) {
-    newUniversityWideSpecialGroups['allProgrammes'] = true
+    newUniversityWideSpecialGroups.allProgrammes = true
     data.forEach(faculty => {
       faculty.programmes.forEach(program => {
         newUniversityWideReadAccess[program.key] = { read: true }
@@ -75,9 +74,13 @@ const getDoctoralReadingRights = hyGroups => {
   const newDoctoralReadAccess = {}
   const newDoctoralSpecialGroups = {}
   if (hasDoctoralReadingRights) {
-    newDoctoralSpecialGroups['doctoral'] = true
-    doctoralProgrammeCodes.forEach(code => {
-      newDoctoralReadAccess[code] = { read: true }
+    newDoctoralSpecialGroups.allProgrammes = true
+    data.forEach(faculty => {
+      faculty.programmes.forEach(program => {
+        if (program.level === 'doctoral') {
+          newDoctoralReadAccess[program.key] = { read: true }
+        }
+      })
     })
   }
 
