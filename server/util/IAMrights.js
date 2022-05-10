@@ -8,10 +8,15 @@ const {
   getStudyLeaderGroup,
   iamToOrganisationCode,
   isEmployeeIam,
-} = require('@root/config/iamToCodes')
+} = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
 
+/**
+ * Parses the header string with IAM groups separated by semicolons
+ * @param {string} hyGroups 
+ * @returns {string[]}
+ */
 const parseHyGroupsFromHeader = hyGroups => {
   let parsedHyGroups = []
   if (!(hyGroups === undefined || hyGroups === '' || hyGroups === null)) {
@@ -195,7 +200,7 @@ const getReadAccess = hyGroups => {
  * based on IAM-groups in IAM header string
  * @param {string} hyGroupsHeader
  */
-const getAccessRights = hyGroupsHeader => {
+const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
   const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
@@ -230,5 +235,5 @@ const getAccessRights = hyGroupsHeader => {
 }
 
 module.exports = {
-  getAccessRights,
+  getIAMRights,
 }
