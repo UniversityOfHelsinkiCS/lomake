@@ -22,6 +22,51 @@ import CompareByFaculty from './CompareByFaculty'
 import questions from '../../questions.json'
 import './ComparisonPage.scss'
 
+const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang }) => {
+  const answerMap = new Map()
+  const chosenKeys = usersProgrammes.map(p => p.key)
+  const selectedAnswers = answersByYear({
+    year,
+    tempAnswers: answers,
+    oldAnswers,
+    draftYear: draftYear && draftYear.year,
+  })
+  if (!selectedAnswers) return new Map()
+  selectedAnswers.forEach(programme => {
+    const key = programme.programme
+
+    if (chosenKeys.includes(key)) {
+      const { data } = programme
+      questionsList.forEach(question => {
+        let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        const name = programmeName(usersProgrammes, programme, lang)
+        let answer = ''
+        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+        colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
+
+        answerMap.set(question.id, colorsByProgramme)
+      })
+    }
+  })
+  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+  // So empty answers need to be added.
+  answerMap.forEach((value, key) => {
+    const answeredProgrammes = value.map(p => p.key)
+    const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
+    if (programmesMissing) {
+      programmesMissing.forEach(p => {
+        const earlierAnswers = answerMap.get(key)
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
+      })
+    }
+  })
+
+  return answerMap
+}
+
 export default () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -33,75 +78,34 @@ export default () => {
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const draftYear = useSelector(state => state.deadlines.draftYear)
 
-  if (!user) return <></>
-
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
     document.title = `${translations.comparisonPage[lang]}`
   }, [lang])
 
-  if (!usersProgrammes) return <></>
-
-  if (!isAdmin(user) && usersProgrammes.length <= 5) {
-    history.push('/')
-  }
-
   const years = allYears(oldAnswers)
 
   const questionsList = modifiedQuestions(questions, lang)
 
-  const answersByQuestions = chosenYear => {
-    const answerMap = new Map()
-    const chosenKeys = usersProgrammes.map(p => p.key)
-    const selectedAnswers = answersByYear({
-      year: chosenYear,
-      tempAnswers: answers,
-      oldAnswers,
-      draftYear: draftYear && draftYear.year,
-    })
-    if (!selectedAnswers) return new Map()
-    selectedAnswers.forEach(programme => {
-      const key = programme.programme
-
-      if (chosenKeys.includes(key)) {
-        const { data } = programme
-        questionsList.forEach(question => {
-          let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-          const color = data[question.color] ? data[question.color] : 'emptyAnswer'
-          const name = programmeName(usersProgrammes, programme, lang)
-          let answer = ''
-          if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-          colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
-
-          answerMap.set(question.id, colorsByProgramme)
-        })
-      }
-    })
-    // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-    // So empty answers need to be added.
-    answerMap.forEach((value, key) => {
-      const answeredProgrammes = value.map(p => p.key)
-      const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-      if (programmesMissing) {
-        programmesMissing.forEach(p => {
-          const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-        })
-      }
-    })
-
-    return answerMap
-  }
-
   const answersForYears = () => {
     const all = years.map(year => {
-      const data = { year, answers: answersByQuestions(year) }
+      const data = {
+        year,
+        answers: answersByQuestions({
+          usersProgrammes,
+          year,
+          answers,
+          oldAnswers,
+          draftYear,
+          questionsList,
+          lang,
+        }),
+      }
       return data
     })
     return all
   }
+
   const panes = [
     {
       menuItem: translations.reportHeader.byFaculty[lang],
@@ -111,7 +115,11 @@ export default () => {
             year={year}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            allAnswers={usersProgrammes ? answersByQuestions(year) : []}
+            allAnswers={
+              usersProgrammes
+                ? answersByQuestions({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang })
+                : []
+            }
           />
         </Tab.Pane>
       ),
@@ -130,6 +138,8 @@ export default () => {
     },
   ]
 
+  if (!user || ! usersProgrammes) return <></>
+  if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
