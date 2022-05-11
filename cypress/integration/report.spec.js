@@ -61,7 +61,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
   })
 
-  it.skip('User should be able to see answers from previous years', () => {
+  it('User should be able to see answers from previous years', () => {
     cy.login(user)
     cy.request('/api/cypress/createAnswers')
     cy.reload()
