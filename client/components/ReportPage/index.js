@@ -63,8 +63,6 @@ export default () => {
     setFilter(value)
   }
 
-  if (!selectedAnswers) return <></>
-
   const questionsList = modifiedQuestions(rawQuestions, lang)
 
   const answersByQuestions = chosenProgrammes => {
@@ -141,7 +139,7 @@ export default () => {
     },
   ]
 
-  if (!usersProgrammes) return <></>
+  if (!usersProgrammes || !selectedAnswers) return <></>
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
