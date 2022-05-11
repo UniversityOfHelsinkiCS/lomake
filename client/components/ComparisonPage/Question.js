@@ -92,7 +92,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
                               </label>
                               <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
                                 {programme.answer &&
-                                  programme.answer.split('\n').map((row) => (
+                                  programme.answer.split('\n').map(row => (
                                     <li key={generateRandomKey(programme)} className="answer-row">
                                       {row}
                                     </li>

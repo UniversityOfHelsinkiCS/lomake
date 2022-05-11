@@ -48,7 +48,6 @@ const Form = ({ questions, programmeKey }) => {
     }
 
     if (!partComponentMap.hasOwnProperty(part.type)) {
-      console.error(`No component matching '${part.type}'`)
       return null
     }
 
