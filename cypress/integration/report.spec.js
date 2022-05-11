@@ -147,15 +147,15 @@ describe('ReportPage tests', () => {
   })
 
   it('Changes in smileys are reflected to the piecharts', () => {
-    cy.visit('/')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`).click()
+    cy.login(user)
+    cy.visit(`/form/${testProgrammeName}`)
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('be.visible').click()
-    cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
+    cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text]')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
   })
 })
