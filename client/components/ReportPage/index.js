@@ -28,6 +28,44 @@ import WrittenAnswers from './WrittenAnswers'
 import rawQuestions from '../../questions.json'
 import './ReportPage.scss'
 
+const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang }) => {
+  const answerMap = new Map()
+  const chosenKeys = chosenProgrammes.map(p => p.key)
+  selectedAnswers.forEach(programme => {
+    const key = programme.programme
+
+    if (chosenKeys.includes(key)) {
+      const { data } = programme
+      questionsList.forEach(question => {
+        let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        const name = programmeName(usersProgrammes, programme, lang)
+        let answer = ''
+        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+        answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
+        answerMap.set(question.id, answersByProgramme)
+      })
+    }
+  })
+
+  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+  // So empty answers need to be added.
+  answerMap.forEach((value, key) => {
+    const answeredProgrammes = value.map(p => p.key)
+    const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
+    if (programmesMissing) {
+      programmesMissing.forEach(p => {
+        const earlierAnswers = answerMap.get(key)
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
+      })
+    }
+  })
+
+  return answerMap
+}
+
 export default () => {
   const dispatch = useDispatch()
   const [openQuestions, setOpenQuestions] = useState(false)
@@ -65,44 +103,6 @@ export default () => {
 
   const questionsList = modifiedQuestions(rawQuestions, lang)
 
-  const answersByQuestions = chosenProgrammes => {
-    const answerMap = new Map()
-    const chosenKeys = chosenProgrammes.map(p => p.key)
-    selectedAnswers.forEach(programme => {
-      const key = programme.programme
-
-      if (chosenKeys.includes(key)) {
-        const { data } = programme
-        questionsList.forEach(question => {
-          let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-          const color = data[question.color] ? data[question.color] : 'emptyAnswer'
-          const name = programmeName(usersProgrammes, programme, lang)
-          let answer = ''
-          if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-          answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
-          answerMap.set(question.id, answersByProgramme)
-        })
-      }
-    })
-
-    // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-    // So empty answers need to be added.
-    answerMap.forEach((value, key) => {
-      const answeredProgrammes = value.map(p => p.key)
-      const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-      if (programmesMissing) {
-        programmesMissing.forEach(p => {
-          const earlierAnswers = answerMap.get(key)
-          answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-        })
-      }
-    })
-
-    return answerMap
-  }
-
   const handleTabChange = (e, { activeIndex }) => setActiveTab(activeIndex)
 
   const panes = [
@@ -115,7 +115,17 @@ export default () => {
             questionsList={questionsList}
             chosenProgrammes={programmes.chosen}
             usersProgrammes={usersProgrammes}
-            allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+            allAnswers={
+              programmes.chosen
+                ? getAnswersByQuestions({
+                    chosenProgrammes: programmes.chosen,
+                    selectedAnswers,
+                    questionsList,
+                    usersProgrammes,
+                    lang,
+                  })
+                : []
+            }
             showing={showing}
             setShowing={setShowing}
           />
@@ -130,7 +140,17 @@ export default () => {
             year={year}
             questionsList={questionsList}
             chosenProgrammes={programmes.chosen}
-            allAnswers={programmes.chosen ? answersByQuestions(programmes.chosen) : []}
+            allAnswers={
+              programmes.chosen
+                ? getAnswersByQuestions({
+                    chosenProgrammes: programmes.chosen,
+                    selectedAnswers,
+                    questionsList,
+                    usersProgrammes,
+                    lang,
+                  })
+                : []
+            }
             setActiveTab={setActiveTab}
             setShowing={setShowing}
           />
