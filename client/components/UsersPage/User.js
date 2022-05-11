@@ -6,7 +6,7 @@ import { Button, Table, Icon, Popup } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isSuperAdmin, isBasicUser, isAdmin } from '../../../config/common'
+import { isSuperAdmin, isBasicUser, isAdmin, iamsInUse } from '../../../config/common'
 
 const formatRights = programme => {
   return Object.keys(programme)
@@ -68,6 +68,37 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     )
   }
 
+  const IAMFormattedAccess = () => {
+    const programmeKeys = user.access ? Object.keys(user.access) : []
+    if (!programmeKeys.length > 0) {
+      return <div>None</div>
+    }
+    return (
+      <Popup
+        position="bottom center"
+        trigger={
+          <div>
+            <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
+            {programmeKeys.length > 1 && (
+              <div>
+                +{programmeKeys.length - 1} {translations.moreProgrammes[lang]}
+              </div>
+            )}
+          </div>
+        }
+        content={
+          <div className="user-programme-list-popup">
+            {programmeKeys.map(p => (
+              <p>
+                {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
+              </p>
+            ))}
+          </div>
+        }
+      />
+    )
+  }
+
   const EditIcon = () => {
     return (
       <Button
@@ -93,7 +124,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
         </Table.Cell>
         <Table.Cell width={1}>{user.uid}</Table.Cell>
         <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
-          <FormattedAccess />
+          {iamsInUse ? <IAMFormattedAccess /> : <FormattedAccess />}
         </Table.Cell>
         <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, lang)}</Table.Cell>
         <Table.Cell>
@@ -103,9 +134,11 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
             <span style={{ color: colors.gray }}>Ei tallennettu</span>
           )}
         </Table.Cell>
-        <Table.Cell>
-          <EditIcon />
-        </Table.Cell>
+        {iamsInUse ? null : (
+          <Table.Cell>
+            <EditIcon />
+          </Table.Cell>
+        )}
         {isSuperAdmin(currentUser) && (
           <Table.Cell>
             <Icon onClick={logInAs} size="large" name="sign-in" />

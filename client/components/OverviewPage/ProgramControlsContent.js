@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
 import { getProgrammesTokensAction } from 'Utilities/redux/programmesTokensReducer'
+import { iamsInUse } from '@root/config/common'
 import ProgramControlsLinks from './ProgramControlsLinks'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
@@ -31,7 +32,11 @@ const OwnerAccordionContent = ({ programKey }) => {
   return (
     <>
       <FormLocker programme={programKey} />
-      <ProgramControlsLinks programme={programKey} />
+      {!iamsInUse && (
+        <>
+          <ProgramControlsLinks programme={programKey} />
+        </>
+      )}
       <ProgramControlsUsers programme={programKey} />
     </>
   )

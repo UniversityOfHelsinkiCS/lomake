@@ -6,6 +6,10 @@ const { data } = require('./data')
 
 const inProduction = process.env.NODE_ENV === 'production'
 
+// Once the iams are in use, turn this to true
+// And later on, once everything is ok, remove the features behind this flag
+const iamsInUse = false
+
 const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
@@ -216,6 +220,7 @@ const cypressUsers = [
 const testProgrammeName = 'TOSKA101'
 
 module.exports = {
+  iamsInUse,
   inProduction,
   basePath,
   defaultYears,

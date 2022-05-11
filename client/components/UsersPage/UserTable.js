@@ -9,7 +9,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin, isSuperAdmin, iamsInUse } from '@root/config/common'
 import AccessModal from './AccessModal'
 import './UsersPage.scss'
 
@@ -140,14 +140,16 @@ export default () => {
           iconPosition="left"
           placeholder={translations.filterByAccess[lang]}
         />
-        <Button
-          data-cy="add-user-button"
-          style={{ alignSelf: 'right', marginLeft: 'auto' }}
-          onClick={() => setShowNewUserForm(true)}
-          color="blue"
-        >
-          {translations.addUser[lang]}
-        </Button>
+        {!iamsInUse && (
+          <Button
+            data-cy="add-user-button"
+            style={{ alignSelf: 'right', marginLeft: 'auto' }}
+            onClick={() => setShowNewUserForm(true)}
+            color="blue"
+          >
+            {translations.addUser[lang]}
+          </Button>
+        )}
       </div>
       <Table celled compact stackable>
         <Table.Header>
@@ -157,7 +159,8 @@ export default () => {
             {getCustomHeader({ name: translations.access[lang], width: 6, field: 'access', sortable: true })}
             {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: 'userGroup' })}
             {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'lastLogin', sortable: true })}
-            {getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
+            {!iamsInUse &&
+              getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
             {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}
           </Table.Row>
         </Table.Header>

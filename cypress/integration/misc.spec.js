@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { iamsInUse, testProgrammeName } from '../../config/common'
 
 describe('Misc tests', () => {
   beforeEach(() => {
@@ -30,11 +30,13 @@ describe('Misc tests', () => {
     cy.get('[data-cy=csv-download]').click()
   })
 
-  it('Access keys are pre-generated', () => {
-    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
-    cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`).invoke('val').should('contain', '/access/')
-    cy.get(`[data-cy=${testProgrammeName}-editlink] > input`).invoke('val').should('contain', '/access/')
-  })
+  // eslint-disable-next-line no-unused-expressions
+  !iamsInUse &&
+    it('Access keys are pre-generated', () => {
+      cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
+      cy.get(`[data-cy=${testProgrammeName}-viewlink] > input`).invoke('val').should('contain', '/access/')
+      cy.get(`[data-cy=${testProgrammeName}-editlink] > input`).invoke('val').should('contain', '/access/')
+    })
 
   /**
    * This feature only works for "superadmins".

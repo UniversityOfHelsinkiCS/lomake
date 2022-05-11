@@ -4,7 +4,7 @@ import { Tab } from 'semantic-ui-react'
 import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isSuperAdmin } from '@root/config/common'
+import { isSuperAdmin, iamsInUse } from '@root/config/common'
 import UserTable from './UserTable'
 import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
@@ -44,31 +44,37 @@ export default () => {
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: translations.linksForOwners[lang],
-      render: () => (
-        <Tab.Pane>
-          <OwnerLinks />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: translations.linksForFaculties[lang],
-      render: () => (
-        <Tab.Pane>
-          <FacultyLinks />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: translations.linksForDoctoral[lang],
-      render: () => (
-        <Tab.Pane>
-          <DoctorLinks />
-        </Tab.Pane>
-      ),
-    },
   ]
+
+  if (!iamsInUse) {
+    panes = [
+      ...panes,
+      {
+        menuItem: translations.linksForOwners[lang],
+        render: () => (
+          <Tab.Pane>
+            <OwnerLinks />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: translations.linksForFaculties[lang],
+        render: () => (
+          <Tab.Pane>
+            <FacultyLinks />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: translations.linksForDoctoral[lang],
+        render: () => (
+          <Tab.Pane>
+            <DoctorLinks />
+          </Tab.Pane>
+        ),
+      },
+    ]
+  }
 
   if (isSuperAdmin(user)) {
     panes = [

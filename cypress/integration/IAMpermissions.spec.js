@@ -57,16 +57,16 @@ describe('IAM permission tests', () => {
 
     cy.get('[data-cy=read-cypressKojoUser]')
     cy.get('[data-cy=write-cypressKojoUser]')
-    cy.get('[data-cy=admin-cypressKojoUser]') 
+    cy.get('[data-cy=admin-cypressKojoUser]')
   })
 
   it('Kosu user gets read access to all programmes of campus', () => {
     // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
-    const programmeCount = 
-      helpers.getFacultyProgrammeCount('H57')
-    + helpers.getFacultyProgrammeCount('H55')
-    + helpers.getFacultyProgrammeCount('H80')
-    + helpers.getFacultyProgrammeCount('H90')
+    const programmeCount =
+      helpers.getFacultyProgrammeCount('H57') +
+      helpers.getFacultyProgrammeCount('H55') +
+      helpers.getFacultyProgrammeCount('H80') +
+      helpers.getFacultyProgrammeCount('H90')
 
     cy.login('cypressKosuUser')
     cy.visit('/')
@@ -88,7 +88,7 @@ describe('IAM permission tests', () => {
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
-    ['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
+    ;['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
       cy.login(user)
       cy.visit('/')
       cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
@@ -106,7 +106,6 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getFacultyProgrammeCount('H10'))
   })
-
 
   /* Maybe wrong spec file for these tests? */
 
@@ -132,6 +131,8 @@ describe('IAM permission tests', () => {
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(helpers.getTotalProgrammeCount() + 1)
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
+      helpers.getTotalProgrammeCount() + 1
+    )
   })
 })

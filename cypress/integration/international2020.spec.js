@@ -3,7 +3,7 @@
 
 const user = 'cypressInternationalUser'
 
-describe('IAM permission tests', () => {
+describe('International user tests', () => {
   beforeEach(() => {
     cy.login(user)
   })
