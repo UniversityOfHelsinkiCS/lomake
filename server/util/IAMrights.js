@@ -14,7 +14,7 @@ const { mapToDegreeCode } = require('@util/common')
 
 /**
  * Parses the header string with IAM groups separated by semicolons
- * @param {string} hyGroups 
+ * @param {string} hyGroups
  * @returns {string[]}
  */
 const parseHyGroupsFromHeader = hyGroups => {

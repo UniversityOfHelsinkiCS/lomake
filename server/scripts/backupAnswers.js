@@ -1,4 +1,3 @@
-const { Op } = require('sequelize')
 const cron = require('node-cron')
 const db = require('@models/index')
 const logger = require('@util/logger')
@@ -6,11 +5,6 @@ const lodash = require('lodash')
 const { whereDraftYear } = require('@util/common')
 
 const loggerPrefix = 'Cronjob::backup | '
-
-const startBackupJob = () => {
-  cron.schedule('* * * * *', () => createBackups())
-  logger.info('Backup job started')
-}
 
 /**
  * Creates new backup to backup_answers table, but only if the data has changed.
@@ -47,6 +41,11 @@ const createBackups = async () => {
 
     logger.info(`${loggerPrefix}Created new backup for ${programme}`)
   })
+}
+
+const startBackupJob = () => {
+  cron.schedule('* * * * *', () => createBackups())
+  logger.info('Backup job started')
 }
 
 module.exports = {

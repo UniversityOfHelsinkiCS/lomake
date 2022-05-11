@@ -73,9 +73,9 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 questionColors[a.color] += 1
               }
             })
-            for (const [color] of Object.entries(yearsColors)) {
-              yearsColors[color] = [...yearsColors[color], questionColors[color]]
-            }
+            Object.entries(yearsColors).forEach(
+              ({ color }) => (yearsColors[color] = [...yearsColors[color], questionColors[color]])
+            )
           }
         })
 

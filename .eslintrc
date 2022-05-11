@@ -26,6 +26,7 @@
     "react/static-property-placement": "off",
     "react/no-deprecated": "off",
     "react/no-unescaped-entities": "off",
+    "no-return-assign": "off",
     "react/prop-types": "off",
     "react/prefer-stateless-function": "error",
     "import/no-unresolved": "off",

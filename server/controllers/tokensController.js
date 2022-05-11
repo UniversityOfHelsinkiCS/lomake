@@ -208,7 +208,7 @@ const claimFacultyToken = async (req, res) => {
     return res.status(200).json(req.user)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

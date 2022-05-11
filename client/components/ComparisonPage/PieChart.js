@@ -66,9 +66,12 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
   }
 
   const amountOfResponses = () => {
-    const answered = `${translations.responses[lang]} ${
-      answers ? (showEmpty ? programmes.length : colorSums.withoutEmpty.value) : 0
-    }`
+    let answered = ''
+    if (answers) {
+      answered = `${translations.responses[lang]} ${showEmpty ? programmes.length : colorSums.withoutEmpty.value}`
+    } else {
+      answered = 0
+    }
     const all = programmes ? ` / ${programmes.length}` : ''
     return answered + all
   }
