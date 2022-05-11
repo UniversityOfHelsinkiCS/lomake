@@ -4,7 +4,6 @@ import { Form, Radio } from 'semantic-ui-react'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
 const LabelOptions = ({ unit, setUnit }) => {
-  const years = useSelector(({ filters }) => filters.multipleYears)
   const lang = useSelector(state => state.language)
 
   const handleChange = (e, { value }) => {
@@ -25,38 +24,15 @@ const LabelOptions = ({ unit, setUnit }) => {
               onChange={handleChange}
             />
           </Form.Field>
-          {years.length < 2 ? (
-            <Form.Field>
-              <Radio
-                label={translations.programmeAmount[lang]}
-                name="chart-unit"
-                value="programmeAmount"
-                checked={unit === 'programmeAmount'}
-                onChange={handleChange}
-              />
-            </Form.Field>
-          ) : (
-            <>
-              <Form.Field>
-                <Radio
-                  label={translations.programmeAmountWithChange[lang]}
-                  name="chart-unit"
-                  value="programmeAmountWithChange"
-                  checked={unit === 'programmeAmountWithChange'}
-                  onChange={handleChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Radio
-                  label={translations.programmeAmountWithoutChange[lang]}
-                  name="chart-unit"
-                  value="programmeAmountWithoutChange"
-                  checked={unit === 'programmeAmountWithoutChange'}
-                  onChange={handleChange}
-                />
-              </Form.Field>
-            </>
-          )}
+          <Form.Field>
+            <Radio
+              label={translations.programmeAmount[lang]}
+              name="chart-unit"
+              value="programmeAmount"
+              checked={unit === 'programmeAmount'}
+              onChange={handleChange}
+            />
+          </Form.Field>
         </Form.Group>
       </Form>
     </div>

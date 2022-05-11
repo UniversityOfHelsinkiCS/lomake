@@ -7,28 +7,22 @@ import { comparisonPageTranslations as translations } from 'Utilities/translatio
 
 require('highcharts/modules/exporting')(Highcharts)
 
+const checkSize = seriesData => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
+
+const getExportText = ({ lang, multipleYears, faculties, faculty, level }) => {
+  const formText = translations.chartExport[lang]
+  const time =
+    multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length - 1]}` : multipleYears[0]
+  const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
+  const levelText = translations[level][lang]
+  return `${formText}_${time}_${facultyText}_${levelText}`
+}
+
 const BarChart = ({ data, questions, unit }) => {
   const { faculty, level, multipleYears } = useSelector(state => state.filters)
   const faculties = useSelector(state => state.faculties.data)
   const lang = useSelector(state => state.language)
   if (!data) return <></>
-
-  const calculateChange = () => {
-    if (!data) return []
-    data.forEach(series => {
-      const previousYear = data.find(y => series.year - 1 === y.year && series.color === y.color)
-      if (previousYear) {
-        series.changes = series.data.map((d, index) => {
-          let change = d - previousYear.data[index]
-          if (change >= 0) change = `(+${change})`
-          else if (change < 0) change = `(${change})`
-          return change
-        })
-      }
-    })
-  }
-
-  calculateChange()
 
   const seriesData = data.map((series, index) => {
     return {
@@ -42,17 +36,6 @@ const BarChart = ({ data, questions, unit }) => {
       showInLegend: index < 4,
     }
   })
-
-  const checkSize = () => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
-
-  const getExportText = () => {
-    const formText = translations.chartExport[lang]
-    const time =
-      multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length - 1]}` : multipleYears[0]
-    const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
-    const levelText = translations[level][lang]
-    return `${formText}_${time}_${facultyText}_${levelText}`
-  }
 
   const graphImages = {
     menuItemDefinitions: {
@@ -71,7 +54,7 @@ const BarChart = ({ data, questions, unit }) => {
     },
     width: 2200,
     height: 1400,
-    filename: getExportText(),
+    filename: getExportText({ lang, multipleYears, faculties, faculty, level }),
     sourceWidth: 1200,
     sourceHeight: 600,
     buttons: {
@@ -120,7 +103,7 @@ const BarChart = ({ data, questions, unit }) => {
         enabled: false,
         style: {
           fontWeight: 'bold',
-          fontSize: checkSize(),
+          fontSize: checkSize(seriesData),
         },
       },
     },
@@ -137,7 +120,7 @@ const BarChart = ({ data, questions, unit }) => {
           crop: false,
           inside: true,
           pointPadding: 0.1,
-          style: { textOverflow: 'clip', fontSize: checkSize() },
+          style: { textOverflow: 'clip', fontSize: checkSize(seriesData) },
           format: '{point.percentage:.1f}%',
         },
       },
@@ -193,7 +176,7 @@ const BarChart = ({ data, questions, unit }) => {
         enabled: true,
         style: {
           fontWeight: 'bold',
-          fontSize: checkSize(),
+          fontSize: checkSize(seriesData),
         },
       },
     },
@@ -210,7 +193,7 @@ const BarChart = ({ data, questions, unit }) => {
           crop: false,
           inside: true,
           pointPadding: 0.1,
-          style: { textOverflow: 'clip', fontSize: checkSize() },
+          style: { textOverflow: 'clip', fontSize: checkSize(seriesData) },
           format: '{point.y}',
         },
       },
