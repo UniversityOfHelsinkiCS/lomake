@@ -81,7 +81,7 @@ const BarChart = ({ data, questions, unit }) => {
     },
   }
 
-  const options = {
+  const percentageOptions = {
     chart: {
       type: 'column',
       height: '700px',
@@ -114,13 +114,10 @@ const BarChart = ({ data, questions, unit }) => {
     yAxis: {
       min: 0,
       title: {
-        text: unit === 'percentage' ? '%' : translations.programmes[lang],
+        text: '%',
       },
       stackLabels: {
-        enabled: true,
-        formatter() {
-          return this.stack
-        },
+        enabled: false,
         style: {
           fontWeight: 'bold',
           fontSize: checkSize(),
@@ -133,17 +130,6 @@ const BarChart = ({ data, questions, unit }) => {
     },
     plotOptions: {
       series: {
-        events: {
-          legendItemClick() {
-            const { name } = this
-            const { id } = this.userOptions
-            this.chart.series.forEach(series => {
-              if (series.name === name && series.userOptions.id !== id) {
-                series.visible ? series.hide() : series.show()
-              }
-            })
-          },
-        },
         groupPadding: 0.13,
         enableMouseTracking: false,
         dataLabels: {
@@ -152,22 +138,84 @@ const BarChart = ({ data, questions, unit }) => {
           inside: true,
           pointPadding: 0.1,
           style: { textOverflow: 'clip', fontSize: checkSize() },
-          formatter() {
-            if (this.y === 0) return ''
-            if (unit === 'programmeAmountWithChange') {
-              const { changes } = this.series.userOptions
-              if (changes) return `${this.y}<br>${changes[this.point.index]}`
-              return this.y
-            }
-            if (unit === 'programmeAmountWithoutChange' || unit === 'programmeAmount') {
-              return this.y
-            }
-            return `${this.point.percentage.toFixed(1)} %`
-          },
+          format: '{point.percentage:.1f}%',
         },
       },
       column: {
-        stacking: unit === 'percent' ? 'percent' : 'normal',
+        stacking: 'percent',
+      },
+    },
+    legend: {
+      useHTML: true,
+      padding: 10,
+      itemMarginTop: 10,
+      itemDistance: 45,
+    },
+    series: data ? seriesData : [],
+  }
+
+  const normalOptions = {
+    chart: {
+      type: 'column',
+      height: '700px',
+      marginTop: 50,
+      marginRight: 30,
+    },
+    title: {
+      text: '',
+    },
+    subtitle: {
+      text: '',
+    },
+    credits: {
+      text: '',
+    },
+    xAxis: {
+      categories: questions.map(q => q.slice(2, q.length)),
+      reserveSpace: true,
+      labels: {
+        autoRotationLimit: 90,
+        style: {
+          color: '#000000',
+          minWidth: '200px',
+          textOverflow: 'none',
+          wordBreak: 'break-all',
+        },
+        overflow: 'allow',
+      },
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: translations.programmes[lang],
+      },
+      stackLabels: {
+        enabled: true,
+        style: {
+          fontWeight: 'bold',
+          fontSize: checkSize(),
+        },
+      },
+    },
+    exporting: graphImages,
+    tooltip: {
+      enabled: false,
+    },
+    plotOptions: {
+      series: {
+        groupPadding: 0.13,
+        enableMouseTracking: false,
+        dataLabels: {
+          enabled: true,
+          crop: false,
+          inside: true,
+          pointPadding: 0.1,
+          style: { textOverflow: 'clip', fontSize: checkSize() },
+          format: '{point.y}',
+        },
+      },
+      column: {
+        stacking: 'normal',
       },
     },
     legend: {
@@ -184,7 +232,7 @@ const BarChart = ({ data, questions, unit }) => {
       className="comparison-bar-chart"
       highcharts={Highcharts}
       constructorType="chart"
-      options={options}
+      options={unit === 'percentage' ? percentageOptions : normalOptions}
     />
   )
 }
