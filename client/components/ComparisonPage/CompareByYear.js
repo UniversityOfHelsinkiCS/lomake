@@ -3,13 +3,7 @@ import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import * as _ from 'lodash'
 
-import CompanionFilter from 'Components/Generic/CompanionFilter'
-import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
-import FacultyFilter from 'Components/Generic/FacultyFilter'
-import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
-import LevelFilter from 'Components/Generic/LevelFilter'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
-import YearSelector from 'Components/Generic/YearSelector'
 import QuestionList from 'Components/Generic/QuestionList'
 import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
@@ -18,6 +12,7 @@ import Question from './Question'
 import LabelOptions from './LabelOptions'
 import BarChart from './BarChart'
 import './ComparisonPage.scss'
+import FilterTray from './FilterTray'
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')
@@ -27,7 +22,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const debouncedFilter = useDebounce(filter, 200)
   const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
-  const { faculty, level, multipleYears, questions } = filters
+  const { multipleYears, questions } = filters
 
   if (!usersProgrammes || !allAnswers) return <></>
 
@@ -73,9 +68,9 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                 questionColors[a.color] += 1
               }
             })
-            Object.entries(yearsColors).forEach(
-              ({ color }) => (yearsColors[color] = [...yearsColors[color], questionColors[color]])
-            )
+            for (const [color] of Object.entries(yearsColors)) {
+              yearsColors[color] = [...yearsColors[color], questionColors[color]]
+            }
           }
         })
 
@@ -95,11 +90,6 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const data = colorsTotal()
 
-  const handleSearch = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
-
   const writtenTotal = question => {
     const mapped = allAnswers.map(data => {
       const answers = data.answers.get(question.id)
@@ -117,24 +107,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
       <Grid doubling columns={2} padded>
         <Grid.Row>
           <Grid.Column width={10}>
-            <YearSelector multiple size="small" label={translations.selectYears[lang]} />
-            {usersProgrammes && (
-              <>
-                <FacultyFilter size="small" label={translations.facultyFilter.filter[lang]} />
-                <LevelFilter />
-                {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-                  <CompanionFilter />
-                )}
-                {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
-                <ProgrammeFilter
-                  handleChange={handleSearch}
-                  label={translations.programmeFilter[lang]}
-                  filter={filter}
-                  onEmpty={() => setFilter('')}
-                  lang={lang}
-                />
-              </>
-            )}
+            <FilterTray filter={filter} setFilter={setFilter} />
             <QuestionList
               label={translations.selectQuestions[lang]}
               questionsList={questionsList}

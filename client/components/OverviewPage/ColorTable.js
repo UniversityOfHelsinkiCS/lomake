@@ -4,7 +4,7 @@ import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Loader, Input } from 'semantic-ui-react'
 
-import { isAdmin, iamsInUse } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
