@@ -74,7 +74,7 @@ describe('IAM permission tests', () => {
 
     cy.login('cypressToskaUser')
     cy.visit('/admin')
-    cy.get('[data-cy^=cypressRehtoriUser-editUser]').click()
+    cy.get('[data-cy^=cypressKosuUser-editUser]').click()
     cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Pharmacy')
     cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Biological and Environmental Sciences')
     cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Agriculture and Forestry')
