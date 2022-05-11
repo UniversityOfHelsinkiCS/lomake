@@ -5,14 +5,8 @@ import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import CompanionFilter from 'Components/Generic/CompanionFilter'
-import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
-import LevelFilter from 'Components/Generic/LevelFilter'
-import FacultyFilter from 'Components/Generic/FacultyFilter'
-import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import QuestionList from 'Components/Generic/QuestionList'
-import YearSelector from 'Components/Generic/YearSelector'
 import {
   answersByYear,
   cleanText,
@@ -23,6 +17,7 @@ import {
 } from 'Utilities/common'
 import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
+import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
 import rawQuestions from '../../questions.json'
@@ -78,7 +73,7 @@ export default () => {
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
   const filters = useSelector(state => state.filters)
-  const { year, faculty, level } = filters
+  const { year } = filters
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const draftYear = useSelector(state => state.deadlines.draftYear)
   const selectedAnswers = answersByYear({
@@ -95,11 +90,6 @@ export default () => {
 
   // Handles all filtering
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
-
-  const handleSearch = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
 
   const questionsList = modifiedQuestions(rawQuestions, lang)
 
@@ -172,24 +162,7 @@ export default () => {
             {translations.backToFrontPage[lang]}
           </Button>
           <h1>{translations.reportPage[lang]}</h1>
-          <YearSelector size="small" />
-          {usersProgrammes && usersProgrammes.length > 5 && (
-            <>
-              <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
-              <LevelFilter />
-              {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-                <CompanionFilter />
-              )}
-              {faculty === 'allFaculties' && level === 'doctoral' && <DoctoralSchoolFilter />}
-              <ProgrammeFilter
-                handleChange={handleSearch}
-                filter={filter}
-                onEmpty={() => setFilter('')}
-                lang={lang}
-                label={translations.programmeFilter[lang]}
-              />
-            </>
-          )}
+          <FilterTray filter={filter} setFilter={setFilter} />
           <Accordion fluid styled className="question-filter">
             <Accordion.Title
               className={`question-filter-title${openQuestions ? '-active' : ''} noprint`}
