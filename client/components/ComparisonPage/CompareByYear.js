@@ -11,8 +11,8 @@ import { filteredProgrammes } from 'Utilities/common'
 import Question from './Question'
 import LabelOptions from './LabelOptions'
 import BarChart from './BarChart'
-import './ComparisonPage.scss'
 import FilterTray from './FilterTray'
+import './ComparisonPage.scss'
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')

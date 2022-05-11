@@ -6,25 +6,29 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
   <Accordion.Title
     index={question.id}
     data-cy={`report-question-disabled-${question.id}`}
-    className="question-header-disabled"
+    className="report-question-header-disabled"
     id={question.labelIndex}
   >
     <Grid>
-      <Grid.Column width={1} className="question-caret noprint" />
+      <Grid.Column width={1} className="report-question-caret noprint" />
       <Grid.Column width={11}>
         <span>
-          <small className="question-title-disabled">
+          <small className="report-question-title-disabled">
             {romanize(question.titleIndex)} - {question.title}
           </small>
         </span>
-        <p className="question-label-disabled">
+        <p className="report-question-label-disabled">
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
-        <p className="question-description-disabled">{question.description}</p>
-        <p className="question-extrainfo">{question.extrainfo}</p>
+        <p className="report-question-description-disabled">{question.description}</p>
+        <p className="report-question-extrainfo">{question.extrainfo}</p>
       </Grid.Column>
       <Grid.Column width={4} floated="right">
-        <Label data-cy={`answered-label-${question.id}`} className="question-answered-label-disabled" size="large">
+        <Label
+          data-cy={`answered-label-${question.id}`}
+          className="report-question-answered-label-disabled"
+          size="large"
+        >
           0 / {chosenProgrammes.length}
         </Label>
       </Grid.Column>

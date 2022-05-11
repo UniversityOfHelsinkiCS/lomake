@@ -18,10 +18,10 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           key={index}
           name={color}
           type="button"
-          className={`color-button-${chosenColor === color ? 'active' : ''}`}
+          className={`report-color-button-${chosenColor === color ? 'active' : ''}`}
           onClick={() => setChosenColor(color)}
         >
-          <span className={`answer-circle-big-${color}`} />
+          <span className={`report-answer-circle-big-${color}`} />
         </button>
       }
     />
@@ -34,36 +34,36 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
         active={showing === question.id}
         onClick={handleClick}
         data-cy={`report-question-${question.id}`}
-        className="question-header"
+        className="report-question-header"
         id={question.labelIndex}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret noprint">
+          <Grid.Column width={1} className="report-question-caret noprint">
             {chosenProgrammes.length > 1 && <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />}
           </Grid.Column>
           <Grid.Column width={11}>
             <span>
-              <small className="question-title">
+              <small className="report-question-title">
                 {romanize(question.titleIndex)} - {question.title}
               </small>
             </span>
-            <p className="question-label">
+            <p className="report-question-label">
               {question.labelIndex}. {question.label.toUpperCase()}
             </p>
-            <p className="question-description">{question.description}</p>
-            <p className="question-extrainfo">{question.extrainfo}</p>
+            <p className="report-question-description">{question.description}</p>
+            <p className="report-question-extrainfo">{question.extrainfo}</p>
           </Grid.Column>
           <Grid.Column width={4} floated="right">
-            <Label data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
+            <Label data-cy={`answered-label-${question.id}`} className="report-question-answered-label" size="large">
               {answers.length} / {chosenProgrammes.length}
             </Label>
           </Grid.Column>
         </Grid>
       </Accordion.Title>
       {answers && (
-        <Accordion.Content active={showing === question.id} className="question-content">
+        <Accordion.Content active={showing === question.id} className="report-question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
-          <div className="color-buttons noprint">
+          <div className="report-color-buttons noprint">
             {buttonColors.map((color, index) => (
               <ButtonPopup key={index} color={color} index={index} />
             ))}
@@ -75,13 +75,13 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                 if (chosenColor === 'all' || programme.color === chosenColor) {
                   return (
                     <div key={index}>
-                      <label className="answer-title">
-                        {programme.name} <span className={`answer-circle-${programme.color}`} />
+                      <label className="report-answer-title">
+                        {programme.name} <span className={`report-answer-circle-${programme.color}`} />
                       </label>
-                      <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
+                      <ul className="report-answer-list" data-cy={`report-question-content-${question.id}`}>
                         {programme.answer &&
                           programme.answer.split('\n').map((row, index) => (
-                            <li key={index} className="answer-row">
+                            <li key={index} className="report-answer-row">
                               {row}
                             </li>
                           ))}

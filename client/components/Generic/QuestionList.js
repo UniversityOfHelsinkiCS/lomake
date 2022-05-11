@@ -38,10 +38,10 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   })
 
   return (
-    <div className="questions-list-container" data-cy="comparison-question-list">
-      <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
+    <div className="comparison-questions-list-container" data-cy="comparison-question-list">
+      <label className={`comparison-questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
       <Dropdown
-        className="questions-list-selector"
+        className="comparison-questions-list-selector"
         data-cy="questions-list"
         name="questions-list"
         fluid
@@ -53,14 +53,14 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
         selection
       />
       <Button
-        className="questions-list-button"
+        className="comparison-questions-list-button"
         color="blue"
         onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
         data-cy="questions-list-select-all"
       >
         {translations.selectAll[lang]}
       </Button>
-      <Button onClick={() => dispatch(setQuestions({ selected: [], open: [] }))} className="questions-list-button">
+      <Button onClick={() => dispatch(setQuestions({ selected: [], open: [] }))} className="comparison-questions-list-button">
         {translations.clearSelection[lang]}
       </Button>
     </div>

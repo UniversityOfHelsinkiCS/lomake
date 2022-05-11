@@ -123,7 +123,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
             </p>
             <p>
               <b>
-                <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
+                <span className={`comparison-answer-circle-${toolTipData.color}`} /> {toolTipData.header}
               </b>
             </p>
             {toolTipData.programmes.map(p => (

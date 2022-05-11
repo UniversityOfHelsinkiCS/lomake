@@ -31,10 +31,10 @@ const Question = ({ answers, question, handleClick, showing }) => {
           key={color}
           name={color}
           type="button"
-          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
+          className={`comparison-color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
           onClick={() => filterColor(yearsIndex, color, index)}
         >
-          <span className={`answer-circle-big-${color}`} />
+          <span className={`comparison-answer-circle-big-${color}`} />
         </button>
       }
     />
@@ -50,20 +50,20 @@ const Question = ({ answers, question, handleClick, showing }) => {
         index={question.id}
         active={showing}
         data-cy={`comparison-question-${question.id}`}
-        className={`question-header ${showing && 'sticky-header'}`}
+        className={`comparison-question-header ${showing && 'sticky-header'}`}
         onClick={handleClick}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret">
+          <Grid.Column width={1} className="comparison-question-caret">
             <Icon name={`caret ${showing ? 'down' : 'right'}`} />
           </Grid.Column>
           <Grid.Column width={15}>
             <span>
-              <small className="question-title">
+              <small className="comparison-question-title">
                 {romanize(question.titleIndex)} - {question.title}
               </small>
             </span>
-            <p className="question-label">
+            <p className="comparison-question-label">
               {question.labelIndex}. {question.label.toUpperCase()}
             </p>
           </Grid.Column>
@@ -76,7 +76,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
               (year, yearsIndex) =>
                 multipleYears.includes(year.year) && (
                   <Grid.Column key={generateRandomKey(year)} className="comparison-question-content">
-                    <div className="color-buttons-sticky sticky-header">
+                    <div className="comparison-color-buttons-sticky sticky-header">
                       <label>{year.year}</label>
                       {buttonColors.map((color, index) => (
                         <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
@@ -87,13 +87,16 @@ const Question = ({ answers, question, handleClick, showing }) => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
                           return (
                             <div key={generateRandomKey(`${programme}-${year}`)}>
-                              <label className="answer-title">
-                                {programme.name} <span className={`answer-circle-${programme.color}`} />
+                              <label className="comparison-answer-title">
+                                {programme.name} <span className={`comparison-answer-circle-${programme.color}`} />
                               </label>
-                              <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
+                              <ul
+                                className="comparison-answer-list"
+                                data-cy={`compare-question-content-${question.id}`}
+                              >
                                 {programme.answer &&
                                   programme.answer.split('\n').map(row => (
-                                    <li key={generateRandomKey(programme)} className="answer-row">
+                                    <li key={generateRandomKey(programme)} className="comparison-answer-row">
                                       {row}
                                     </li>
                                   ))}
@@ -101,6 +104,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
                             </div>
                           )
                         }
+                        return null
                       })
                     ) : (
                       <h4>{translations.noData[lang]}</h4>

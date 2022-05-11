@@ -1,5 +1,13 @@
 @import '../../assets/colors.scss';
 
+
+@mixin color-buttons-basics {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+
 .comparison {
   &-info-header {
     height: 50px;
@@ -60,6 +68,110 @@
   &-question-content {
     padding-left: 35px !important;
   }
+  &-color-button {
+    &-active {
+      background-color: transparent;
+      border: 2px solid black !important;
+      border-radius: 6%;
+    }
+    &- {
+      background-color: transparent;
+      border: none;
+    }
+  }
+  &-color-buttons {
+    @include color-buttons-basics;
+    &-sticky {
+      position: sticky;
+      z-index: 4;
+      @include color-buttons-basics;
+      top: 60px;
+      > label {
+        font-size: 20px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+@mixin question-caret-basics {
+  max-width: 25px;
+  padding: 0em 0.5em !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin question-label-basics {
+  font-weight: bold;
+  margin-top: 0.4em;
+}
+
+@mixin answered-label-basics {
+  min-width: 85px;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  color: $white !important;
+}
+
+.comparison-question {
+  &-caret {
+    @include question-caret-basics;
+  }
+  &-caret-disabled {
+    @include question-caret-basics;
+    color: $gray !important;
+    cursor: default;
+  }
+  &-header {
+    &-disabled {
+      cursor: default !important;
+    }
+  }
+  &-label {
+    @include question-label-basics;
+    color: $black;
+  }
+  &-label-disabled {
+    @include question-label-basics;
+    color: $gray;
+    cursor: default;
+    &:hover {
+      color: $gray !important;
+    }
+  }
+  &-description {
+    font-style: italic;
+    color: $dark-gray;
+    font-weight: 300;
+    margin-top: 1em;
+  }
+  &-description-disabled {
+    color: $gray;
+    cursor: default;
+  }
+  &-title-disabled {
+    color: $gray !important;
+    cursor: default;
+  }
+  &-content {
+    margin-left: 25px !important;
+    max-width: 1200px;
+  }
+  &-answered-label {
+    @include answered-label-basics;
+    background-color: $blue !important;
+    &-disabled {
+      @include answered-label-basics;
+      background-color: $gray !important;
+    }
+  }
+  &-extrainfo {
+    color: $gray;
+    font-weight: 300;
+    font-style: italic;
+  }
 }
 
 @mixin answer-circle-basics {
@@ -69,10 +181,38 @@
   width: 10px;
 }
 
-.answer {
-  &-circle-green {
+@mixin answer-circle-big-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 26px;
+  width: 26px;
+  margin: 5px;
+}
+
+.comparison-answer {
+  &-header {
+    font-style: bold;
+  }
+  &-title {
+    word-break: break-word;
+  }
+  &-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.6em;
+    margin-bottom: 2em;
+  }
+  &-row {
+    padding-top: 0.3em;
+  }
+  &-circle {
     @include answer-circle-basics;
-    background: $background-green;
+
+    & .green-color {
+      @include answer-circle-basics;
+
+      background: $background-green;
+    }
   }
   &-circle-yellow {
     @include answer-circle-basics;
@@ -85,6 +225,31 @@
   &-circle-gray {
     @include answer-circle-basics;
     background: $gray;
+  }
+  &-circle-big-green {
+    @include answer-circle-big-basics;
+    background: $background-green;
+  }
+  &-circle-big-yellow {
+    @include answer-circle-big-basics;
+    background: $background-yellow;
+  }
+  &-circle-big-red {
+    @include answer-circle-big-basics;
+    background: $background-red;
+  }
+  &-circle-big-gray {
+    @include answer-circle-big-basics;
+    background: $gray;
+  }
+  &-circle-big-all {
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid $black;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+    margin: 5px;
   }
 }
 
@@ -164,11 +329,9 @@
   }
 }
 
-.empty-toggle {
-  margin: 2em 0em 0.5em 0em;
-}
 
-.questions-list {
+
+.comparison-questions-list {
   &-container {
     margin-top: 1.5em !important;
   }
@@ -192,27 +355,6 @@
       max-width: 90%;
       border: 2px solid $black;
       font-weight: bold;
-    }
-  }
-}
-
-@mixin color-buttons-basics {
-  margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  padding: 3px;
-}
-
-.color-buttons {
-  @include color-buttons-basics;
-  &-sticky {
-    position: sticky;
-    z-index: 4;
-    @include color-buttons-basics;
-    top: 60px;
-    > label {
-      font-size: 20px;
-      margin-right: 5px;
     }
   }
 }
