@@ -25,7 +25,7 @@ export const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'grp-ospa',
+    hyGroupCn: 'grp-ospa;test-iam-group',
     sn: 'nah',
   },
   {
@@ -34,7 +34,7 @@ export const possibleUsers = [
     givenName: 'toskaUser',
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
-    hyGroupCn: 'grp-toska',
+    hyGroupCn: 'test-iam-group;grp-toska',
     sn: 'nah',
   },
   {

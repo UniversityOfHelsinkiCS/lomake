@@ -71,6 +71,14 @@ describe('IAM permission tests', () => {
     cy.login('cypressKosuUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', programmeCount)
+
+    cy.login('cypressToskaUser')
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressRehtoriUser-editUser]').click()
+    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Pharmacy')
+    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Biological and Environmental Sciences')
+    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Agriculture and Forestry')
+    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Veterinary Medicine')
   })
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
@@ -85,6 +93,10 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=read-cypressJoryReadUser]')
     cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
     cy.get('[data-cy=admin-cypressJoryReadUser-false]')
+
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressDoctoralUser-editUser]').click()
+    // cy.get('[data-cy^=user-access-group-selector]').contains('All programmes') <--- Which one is this, all or doctoral?
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
@@ -99,12 +111,22 @@ describe('IAM permission tests', () => {
     cy.login('cypressRehtoriUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+
+    cy.login('cypressToskaUser')
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressRehtoriUser-editUser]').click()
+    cy.get('[data-cy^=user-access-group-selector]').contains('All programmes')
   })
 
   it('Faculty iam group gives reading rights to all programmes of faculty', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getFacultyProgrammeCount('H10'))
+
+    cy.login('cypressToskaUser')
+    cy.visit('/admin')
+    cy.get('[data-cy^=cypressTheologyFacultyUser-editUser]').click()
+    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Theology')
   })
 
   /* Maybe wrong spec file for these tests? */

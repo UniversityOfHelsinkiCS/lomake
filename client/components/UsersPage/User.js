@@ -103,7 +103,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
     return (
       <Button
         icon
-        data-cy="editUser"
+        data-cy={`${user.uid}-editUser`}
         onClick={() => setModalData({ id: user.id })}
         style={{
           marginLeft: 'auto',

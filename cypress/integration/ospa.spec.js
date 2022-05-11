@@ -104,7 +104,7 @@ describe('OSPA user tests', () => {
       cy.get('[data-cy=user-form-add-firstname]').type('testfirstname')
       cy.get('[data-cy=user-form-add-lastname]').type('testlastname')
       cy.get('[data-cy=user-form-add-user-button]').click()
-      cy.contains('testfirstname testlastname').parent().find('[data-cy=editUser]').click()
+      cy.contains('testfirstname testlastname').parent().find('[data-cy=testuid-editUser]').click()
       cy.get('[data-cy=user-delete-button]').click()
       cy.get('[data-cy=user-confirm-delete-button]').click()
     })
@@ -141,7 +141,7 @@ describe('OSPA user tests', () => {
       // Once everything correct, can still add the user
       cy.get('[data-cy=user-form-add-lastname').type('testlastname')
       cy.get('[data-cy=user-form-add-user-button]').click()
-      cy.contains('testfirstname testlastname').parent().find('[data-cy=editUser]').click()
+      cy.contains('testfirstname testlastname').parent().find('[data-cy=validUid-editUser]').click()
       cy.get('[data-cy=user-delete-button]').click()
       cy.get('[data-cy=user-confirm-delete-button]').click()
     })
@@ -149,7 +149,7 @@ describe('OSPA user tests', () => {
   !iamsInUse &&
     it('Can give admin permissions', () => {
       cy.get('[data-cy=nav-admin]').click()
-      cy.contains('cyp res').parent().find('[data-cy=editUser]').click()
+      cy.contains('cyp res').parent().find('[data-cy=cypressUser-editUser]').click()
       cy.get('[data-cy=accessAdmin').click()
       cy.get('[data-cy=accessAdmin-confirm]').click()
       cy.reload()
@@ -159,7 +159,7 @@ describe('OSPA user tests', () => {
   !iamsInUse &&
     it('Can give and remove faculty read permissions', () => {
       cy.get('[data-cy=nav-admin]').click()
-      cy.contains('cyp3 res3').parent().find('[data-cy=editUser]').click()
+      cy.contains('cyp3 res3').parent().find('[data-cy=cypressUser3-editUser]').click()
 
       // Give access to the programmes in Faculty of Theology
       cy.get('[data-cy=user-access-group-selector]')
@@ -193,7 +193,7 @@ describe('OSPA user tests', () => {
       cy.get('[data-cy=cypressUser3-userAccess]').should('contain', '+5 more programmes')
 
       // Remove access to the Faculty of Theology
-      cy.contains('cyp3 res3').parent().find('[data-cy=editUser]').click()
+      cy.contains('cyp3 res3').parent().find('[data-cy=cypressUser3-editUser]').click()
       cy.get('[data-cy=user-access-group-selector] > a > i').click()
       cy.get('[data-cy=access-group-save-button]').click()
 
@@ -223,7 +223,7 @@ describe('OSPA user tests', () => {
   !iamsInUse &&
     it('Can give and remove single programme read permissions', () => {
       cy.get('[data-cy=nav-admin]').click()
-      cy.contains('cyp3 res3').parent().find('[data-cy=editUser]').click()
+      cy.contains('cyp3 res3').parent().find('[data-cy=cypressUser3-editUser]').click()
 
       // Give access to one Doctoral Programme
       cy.get('[data-cy=programme-filter]').type('Doctoral Programme in Computer Science')
