@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Select } from 'semantic-ui-react' 
+import { Select } from 'semantic-ui-react'
 
 import { clearLevelSpecificFilters, setDoctoralSchool } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'

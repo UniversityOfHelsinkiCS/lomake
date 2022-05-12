@@ -25,6 +25,7 @@ const SmileyColors = ({ id }) => {
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
         <div title="No issues">
           <img
+            alt="positive-emoji"
             data-cy={`color-positive-${id}`}
             src={positiveEmoji}
             className={getClassName('green')}
@@ -33,6 +34,7 @@ const SmileyColors = ({ id }) => {
         </div>
         <div title="Challenges identified and development underway">
           <img
+            alt="neutral-emoji"
             data-cy={`color-neutral-${id}`}
             src={neutralEmoji}
             className={getClassName('yellow')}
@@ -41,6 +43,7 @@ const SmileyColors = ({ id }) => {
         </div>
         <div title="Significant measures required/development areas not yet specified">
           <img
+            alt="negative-emoji"
             data-cy={`color-negative-${id}`}
             src={negativeEmoji}
             className={getClassName('red')}

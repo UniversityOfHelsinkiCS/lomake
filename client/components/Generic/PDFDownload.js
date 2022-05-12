@@ -13,17 +13,17 @@ const PDFDownload = () => {
   const [takingPDF, setTakingPDF] = useState(false)
   const { questions, level, faculty, year } = useSelector(state => state.filters)
 
-  const openQuestionsAndPrintPdf = () => {
-    dispatch(setQuestions({ selected: questions.selected, open: questions.selected }))
-    setTakingPDF(true)
-    document.title = getExportText()
-  }
-
   const getExportText = () => {
     const formText = translations.pdfExportText[lang]
     const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
     const levelText = translations[level][lang]
     return `${formText}_${year}_${facultyText}_${levelText}`
+  }
+
+  const openQuestionsAndPrintPdf = () => {
+    dispatch(setQuestions({ selected: questions.selected, open: questions.selected }))
+    setTakingPDF(true)
+    document.title = getExportText()
   }
 
   useEffect(() => {

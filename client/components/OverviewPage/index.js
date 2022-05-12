@@ -68,7 +68,7 @@ export default () => {
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
-              <ReactMarkdown children={modalData.content} />
+              <ReactMarkdown>{modalData.content}</ReactMarkdown>
             </div>
           </>
         </CustomModal>

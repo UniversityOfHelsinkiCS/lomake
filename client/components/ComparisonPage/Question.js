@@ -77,7 +77,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
                 multipleYears.includes(year.year) && (
                   <Grid.Column key={generateRandomKey(year)} className="question-content">
                     <div className="comparison color-buttons noprint">
-                      <label>{year.year}  </label>
+                      <label>{year.year}</label>
                       {buttonColors.map((color, index) => (
                         <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
                       ))}

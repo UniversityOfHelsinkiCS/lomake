@@ -9,6 +9,7 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 export default function YearSelector({ multiple, size, label }) {
+  const dispatch = useDispatch()
   const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)
   const currentUser = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
@@ -17,12 +18,8 @@ export default function YearSelector({ multiple, size, label }) {
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const [yearOptions, setYearOptions] = useState([])
 
-  const dispatch = useDispatch()
-
-  if (!currentUser) return null
-
   useEffect(() => {
-    if (!previousYearsWithAnswers) return
+    if (!previousYearsWithAnswers || !currentUser) return
     const years = getYearsUserHasAccessToAction(currentUser)
     const options = years.map(y => {
       return {
@@ -32,7 +29,7 @@ export default function YearSelector({ multiple, size, label }) {
       }
     })
     setYearOptions(options)
-  }, [previousYearsWithAnswers])
+  }, [previousYearsWithAnswers, currentUser])
 
   const handleYearChange = (_, { value }) => {
     if (!draftYear || (draftYear && draftYear.year !== value)) {
@@ -49,6 +46,8 @@ export default function YearSelector({ multiple, size, label }) {
     if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length))
     else dispatch(setMultipleYears(value))
   }
+
+  if (!currentUser) return null
 
   return (
     <div className={`year-filter-${size}`}>

@@ -10,7 +10,7 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
-import './Generic.scss' 
+import './Generic.scss'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -38,9 +38,13 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
     return (
       <LastYearsAnswersAccordion>
         {previousAnswerColor && (
-          <img style={{ width: '40px', height: 'auto' }} src={mapColorToImage[previousAnswerColor]} />
+          <img
+            alt="previous-answer-color"
+            style={{ width: '40px', height: 'auto' }}
+            src={mapColorToImage[previousAnswerColor]}
+          />
         )}
-        <ReactMarkdown children={previousAnswerText} />
+        <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
       </LastYearsAnswersAccordion>
     )
   }

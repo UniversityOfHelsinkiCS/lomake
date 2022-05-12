@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import * as _ from 'lodash'
@@ -14,6 +14,72 @@ import BarChart from './BarChart'
 import FilterTray from './FilterTray'
 import './ComparisonPage.scss'
 
+const getLabel = question => {
+  if (!question) return ''
+  const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+  return `${index}${question.label}`
+}
+
+const getTotalColors = ({ allAnswers, multipleYears, questionsList, questions, chosenKeys }) => {
+  if (!allAnswers) return null
+  let total = []
+  let checkForData = false
+  allAnswers.forEach(data => {
+    if (multipleYears.includes(data.year)) {
+      const yearsColors = {
+        green: [],
+        yellow: [],
+        red: [],
+        emptyAnswer: [],
+      }
+      data.answers.forEach((questionsAnswers, key) => {
+        const question = questionsList.find(q => q.id === key)
+        const questionLabel = getLabel(question)
+        if (questions && questions.selected.includes(questionLabel)) {
+          const questionColors = {
+            green: 0,
+            yellow: 0,
+            red: 0,
+            emptyAnswer: 0,
+          }
+          questionsAnswers.forEach(a => {
+            if (chosenKeys.includes(a.key)) {
+              checkForData = true
+              questionColors[a.color] += 1
+            }
+          })
+          Object.keys(yearsColors).forEach(key => {
+            yearsColors[key] = [...yearsColors[key], questionColors[key]]
+          })
+        }
+      })
+
+      total = [
+        ...total,
+        { year: data.year, name: 'positive', color: 'green', data: yearsColors.green },
+        { year: data.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
+        { year: data.year, name: 'negative', color: 'red', data: yearsColors.red },
+        { year: data.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
+      ]
+    }
+  })
+
+  if (checkForData) return total
+  return []
+}
+
+const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
+  const mapped = allAnswers.map(data => {
+    const answers = data.answers.get(question.id)
+    const filteredAnswers = answers ? answers.filter(a => chosenKeys.includes(a.key) && a.answer) : []
+    return {
+      year: data.year,
+      answers: _.sortBy(filteredAnswers, 'name'),
+    }
+  })
+  return mapped
+}
+
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [unit, setUnit] = useState('percentage')
   const [showingQuestion, setShowingQuestion] = useState(-1)
@@ -24,83 +90,13 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
   const filters = useSelector(state => state.filters)
   const { multipleYears, questions } = filters
 
-  if (!usersProgrammes || !allAnswers) return <></>
-
-  useEffect(() => {
-    setPicked(programmes.all)
-  }, [])
-
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
   const chosenKeys = programmes.chosen.map(p => p.key)
 
-  const getLabel = question => {
-    if (!question) return ''
-    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${question.label}`
-  }
+  const data = getTotalColors({ allAnswers, multipleYears, questionsList, questions, chosenKeys })
 
-  const colorsTotal = () => {
-    if (!allAnswers) return null
-    let total = []
-    let checkForData = false
-    allAnswers.forEach(data => {
-      if (multipleYears.includes(data.year)) {
-        const yearsColors = {
-          green: [],
-          yellow: [],
-          red: [],
-          emptyAnswer: [],
-        }
-        data.answers.forEach((questionsAnswers, key) => {
-          const question = questionsList.find(q => q.id === key)
-          const questionLabel = getLabel(question)
-          if (questions && questions.selected.includes(questionLabel)) {
-            const questionColors = {
-              green: 0,
-              yellow: 0,
-              red: 0,
-              emptyAnswer: 0,
-            }
-            questionsAnswers.forEach(a => {
-              if (chosenKeys.includes(a.key)) {
-                checkForData = true
-                questionColors[a.color] += 1
-              }
-            })
-            for (const [color] of Object.entries(yearsColors)) {
-              yearsColors[color] = [...yearsColors[color], questionColors[color]]
-            }
-          }
-        })
-
-        total = [
-          ...total,
-          { year: data.year, name: 'positive', color: 'green', data: yearsColors.green },
-          { year: data.year, name: 'neutral', color: 'yellow', data: yearsColors.yellow },
-          { year: data.year, name: 'negative', color: 'red', data: yearsColors.red },
-          { year: data.year, name: 'empty', color: 'gray', data: yearsColors.emptyAnswer },
-        ]
-      }
-    })
-
-    if (checkForData) return total
-    return []
-  }
-
-  const data = colorsTotal()
-
-  const writtenTotal = question => {
-    const mapped = allAnswers.map(data => {
-      const answers = data.answers.get(question.id)
-      const filteredAnswers = answers ? answers.filter(a => chosenKeys.includes(a.key) && a.answer) : []
-      return {
-        year: data.year,
-        answers: _.sortBy(filteredAnswers, 'name'),
-      }
-    })
-    return mapped
-  }
+  if (!usersProgrammes || !allAnswers) return <></>
 
   return (
     <div className="tab-pane">
@@ -136,7 +132,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                       questions.selected.includes(getLabel(question)) && (
                         <Question
                           key={question.id}
-                          answers={writtenTotal(question)}
+                          answers={getTotalWritten({ question, allAnswers, chosenKeys })}
                           question={question}
                           chosenProgrammes={programmes.chosen.map(p => p.key)}
                           showing={showingQuestion === question.id}

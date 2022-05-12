@@ -26,7 +26,7 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
     return (
       <LastYearsAnswersAccordion>
-        <ReactMarkdown children={previousYearsAnswers[`${id}_text`]} />
+        <ReactMarkdown>{previousYearsAnswers[`${id}_text`]}</ReactMarkdown>
       </LastYearsAnswersAccordion>
     )
 
@@ -137,7 +137,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
         />
       </div>
       {viewOnly ? (
-        <ReactMarkdown children={dataFromRedux} />
+        <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (
         <>
           <div data-cy={`editing-area-${id}`} onClick={askForLock} style={{ marginTop: '1em' }}>

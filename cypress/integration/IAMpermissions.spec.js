@@ -2,13 +2,13 @@
 /// <reference types="cypress" />
 
 import { defaultYears } from '../../config/common'
-import helpers from '../support/helpers'
+import { getDoctoralProgrammeCount, getFacultyProgrammeCount, getTotalProgrammeCount } from '../support/helpers'
 
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount() + 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount() + 1)
     cy.visit('/admin')
     cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
   })
@@ -45,27 +45,28 @@ describe('IAM permission tests', () => {
   it('Kosu user gets read access to all programmes of campus', () => {
     // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
     const programmeCount =
-      helpers.getFacultyProgrammeCount('H57') +
-      helpers.getFacultyProgrammeCount('H55') +
-      helpers.getFacultyProgrammeCount('H80') +
-      helpers.getFacultyProgrammeCount('H90')
+      getFacultyProgrammeCount('H57') +
+      getFacultyProgrammeCount('H55') +
+      getFacultyProgrammeCount('H80') +
+      getFacultyProgrammeCount('H90')
 
     cy.login('cypressKosuUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', programmeCount)
 
-    cy.hasSpecialGroups('cypressKosuUser', 
-      'Faculty of Pharmacy', 
+    cy.hasSpecialGroups(
+      'cypressKosuUser',
+      'Faculty of Pharmacy',
       'Faculty of Biological and Environmental Sciences',
       'Faculty of Agriculture and Forestry',
-      'Faculty of Veterinary Medicine',
+      'Faculty of Veterinary Medicine'
     )
   })
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralUser', 'T920103', { read: true })
 
@@ -83,7 +84,7 @@ describe('IAM permission tests', () => {
   it('Rehtoraatti gets university wide read access', () => {
     cy.login('cypressRehtoriUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressRehtoriUser', 'All programmes')
   })
@@ -91,7 +92,7 @@ describe('IAM permission tests', () => {
   it('Faculty iam group gives reading rights to all programmes of faculty', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getFacultyProgrammeCount('H10'))
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getFacultyProgrammeCount('H10'))
 
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'Faculty of Theology')
   })
@@ -120,8 +121,6 @@ describe('IAM permission tests', () => {
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount() + 1
-    )
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(getTotalProgrammeCount() + 1)
   })
 })
