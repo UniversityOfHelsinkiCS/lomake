@@ -67,7 +67,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>
-          <ReactMarkdown children={previousAnswerText} />
+          <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
         </LastYearsAnswersAccordion>
       )}
       {['', '', '', '', ''].reduce((acc, cur, index) => {

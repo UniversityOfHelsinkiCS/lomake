@@ -24,7 +24,7 @@ const ColorTableCell = ({
 
   const getMeasuresAnswer = () => {
     if (!programmesAnswers) return null
-    if (programmesAnswers[`${questionId}_text`]) return programmesAnswers[`${id}_text`]
+    if (programmesAnswers[`${questionId}_text`]) return programmesAnswers[`${questionId}_text`]
 
     if (programmesAnswers[`${questionId}_1_text`]) {
       let measures = ''

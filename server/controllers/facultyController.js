@@ -1,7 +1,7 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 
-const getAll = async (req, res) => {
+const getAll = async (_, res) => {
   try {
     const data = await db.faculty.findAll({
       include: ['ownedProgrammes', 'companionStudyprogrammes'],

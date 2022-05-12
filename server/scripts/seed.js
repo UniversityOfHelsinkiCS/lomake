@@ -3,21 +3,6 @@ const logger = require('@util/logger')
 const { v4: uuid } = require('uuid')
 const { data, facultyMap } = require('@root/config/data')
 
-const seed = async () => {
-  logger.info('Seeding ...')
-  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === 'tokens'
-
-  await seedFacultiesAndStudyprogrammes()
-
-  // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
-  if (seedTokensAswell) {
-    logger.info('Seeding tokens aswell')
-    await seedTokens()
-  }
-
-  logger.info('Seeding completed')
-}
-
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
@@ -56,8 +41,8 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create companionFaculties "kumppanuusohjelma"
    */
 
-  for (const { code, programmes } of data) {
-    for (const { key, name, companionFaculties } of programmes) {
+  for (const { programmes } of data) {
+    for (const { key, companionFaculties } of programmes) {
       for (const faculty of companionFaculties) {
         const facultyCode = facultyMap[faculty]
 
@@ -132,6 +117,21 @@ const seedTokens = async () => {
       usageCounter: 0,
     })
   }
+}
+
+const seed = async () => {
+  logger.info('Seeding ...')
+  const seedTokensAswell = process.argv[3] && process.argv[3].substr(2) === 'tokens'
+
+  await seedFacultiesAndStudyprogrammes()
+
+  // Sometimes we might want to seed faculties and studyprogrammes, but leave tokens untouched
+  if (seedTokensAswell) {
+    logger.info('Seeding tokens aswell')
+    await seedTokens()
+  }
+
+  logger.info('Seeding completed')
 }
 
 module.exports = { seed }

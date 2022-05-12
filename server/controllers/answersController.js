@@ -3,7 +3,7 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
 
-const getAll = async (req, res) => {
+const getAll = async (_, res) => {
   try {
     const data = await db.answer.findAll({})
     res.status(200).json(data)

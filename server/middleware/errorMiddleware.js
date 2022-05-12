@@ -1,6 +1,6 @@
 const logger = require('@util/logger')
 
-const errorHandler = (error, req, res, next) => {
+const errorHandler = (error, _, res, next) => {
   logger.error(error.message, error.name, error.extra)
 
   if (error.name === 'ApplicationError') {

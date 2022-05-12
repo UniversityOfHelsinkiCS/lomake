@@ -2,7 +2,7 @@ const db = require('@models/index')
 
 const { isSuperAdmin } = require('@root/config/common')
 
-const currentUser = async (req, res, next) => {
+const currentUser = async (req, _, next) => {
   if (req.path.includes('/cypress/')) return next()
 
   if (isSuperAdmin(req.user)) {

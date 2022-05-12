@@ -59,12 +59,12 @@ const getFakeAnswers = year => {
   }, {})
 }
 
-const resetUsers = async (req, res) => {
+const resetUsers = async () => {
   try {
-    for (const user of cypressUsers) {
+    cypressUsers.forEach(async user => {
       await db.user.destroy({ where: { uid: user.uid } })
       await db.user.create(user)
-    }
+    })
 
     logger.info('Cypress::resetUsers')
   } catch (error) {
@@ -72,7 +72,7 @@ const resetUsers = async (req, res) => {
   }
 }
 
-const resetTokens = async (req, res) => {
+const resetTokens = async () => {
   try {
     await db.token.destroy({
       where: {
@@ -118,9 +118,9 @@ const resetTokens = async (req, res) => {
       },
     ]
 
-    for (const token of tokens) {
+    tokens.forEach(async token => {
       await db.token.create(token)
-    }
+    })
 
     logger.info('Cypress::resetTokens')
   } catch (error) {
@@ -128,7 +128,7 @@ const resetTokens = async (req, res) => {
   }
 }
 
-const resetForm = async (req, res) => {
+const resetForm = async () => {
   try {
     logger.info('Cypress::resetForm')
 
@@ -142,7 +142,7 @@ const resetForm = async (req, res) => {
   }
 }
 
-const resetAnswers = async (req, res) => {
+const resetAnswers = async () => {
   try {
     logger.info('Cypress::clearAnswers')
 
@@ -210,7 +210,7 @@ const createTempAnswersForTestProgramme = async () => {
   }
 }
 
-const seed = async (req, res) => {
+const seed = async (_, res) => {
   try {
     logger.info('Cypress::seeding database')
 

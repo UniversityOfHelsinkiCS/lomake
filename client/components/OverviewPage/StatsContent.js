@@ -32,9 +32,6 @@ const StatsContent = ({ stats }) => {
                 value: stats.red || 0,
               },
             ]}
-            label={function noRefCheck() {}}
-            labelPosition={112}
-            labelStyle={function noRefCheck() {}}
             lengthAngle={360}
             lineWidth={100}
             paddingAngle={0}
@@ -45,7 +42,12 @@ const StatsContent = ({ stats }) => {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em', fontWeight: 'bold' }}>
-            <img src={positiveEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} /> {stats.green || 0}
+            <img
+              alt="positive-emoji"
+              src={positiveEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {stats.green || 0}
           </div>
           <div
             style={{
@@ -57,6 +59,7 @@ const StatsContent = ({ stats }) => {
             }}
           >
             <img
+              alt="neutral-emoji"
               src={neutralEmoji}
               style={{
                 width: '40px',
@@ -77,7 +80,12 @@ const StatsContent = ({ stats }) => {
               fontWeight: 'bold',
             }}
           >
-            <img src={negativeEmoji} style={{ width: '40px', height: 'auto', marginRight: '5px' }} /> {stats.red || 0}
+            <img
+              alt="negative-emoji"
+              src={negativeEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {stats.red || 0}
           </div>
         </div>
       </div>

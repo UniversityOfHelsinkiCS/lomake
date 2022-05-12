@@ -4,7 +4,7 @@ const logger = require('@util/logger')
 const moment = require('moment')
 const { seed } = require('../scripts/seed')
 
-const getAll = async (req, res) => {
+const getAll = async (_, res) => {
   try {
     const data = await db.studyprogramme.findAll({
       attributes: {
@@ -62,7 +62,7 @@ const getOne = async (req, res) => {
   }
 }
 
-const updateAll = async (req, res) => {
+const updateAll = async (_, res) => {
   try {
     await seed()
     return res.status(200).json({
@@ -100,12 +100,12 @@ const toggleLock = async (req, res) => {
 /**
  * Only returns email-addresses for safety.
  */
-const getOwners = async (req, res) => {
+const getOwners = async (_, res) => {
   try {
     const programmes = await db.studyprogramme.findAll()
     let results = {}
 
-    for (const p of programmes) {
+    programmes.forEach(async p => {
       const owners = await db.user.findAll({
         where: {
           access: {
@@ -117,7 +117,7 @@ const getOwners = async (req, res) => {
         ...results,
         [p.key]: owners.map(o => o.email),
       }
-    }
+    })
     return res.status(200).json(results)
   } catch (error) {
     logger.error(`Database error: ${error}`)

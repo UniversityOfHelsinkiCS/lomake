@@ -46,7 +46,7 @@ const createOrUpdate = async (req, res) => {
   }
 }
 
-const remove = async (req, res) => {
+const remove = async (_, res) => {
   try {
     // Just delete all deadlines, there should be only 1 anyway.
     await db.deadline.destroy({
@@ -69,7 +69,7 @@ const remove = async (req, res) => {
   }
 }
 
-const get = async (req, res) => {
+const get = async (_, res) => {
   try {
     const deadlines = await db.deadline.findAll({})
     const draftYears = await db.draftYear.findAll({})

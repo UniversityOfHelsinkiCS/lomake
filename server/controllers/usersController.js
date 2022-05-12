@@ -39,7 +39,7 @@ const getLogoutUrl = async (req, res) => {
   }
 }
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_, res) => {
   try {
     const users = await db.user.findAll({})
     res.json(users)
@@ -91,6 +91,7 @@ const createUser = async (req, res) => {
     })
 
     if (newUser) return res.status(200).json(newUser)
+    return res.status({})
   } catch (e) {
     logger.error(e.message)
     return res.status(500).json({ error: 'Database error' })
