@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import { updateFormField } from 'Utilities/redux/formReducer'
-import './SmileyColors.scss'
+import './Generic.scss'
 
 const SmileyColors = ({ id }) => {
   const dispatch = useDispatch()

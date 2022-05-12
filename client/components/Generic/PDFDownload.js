@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { colors } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
+import './Generic.scss'
 
 const PDFDownload = () => {
   const dispatch = useDispatch()

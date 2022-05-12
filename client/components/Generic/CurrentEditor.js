@@ -1,7 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
+
 import { colors } from 'Utilities/common'
+import './Generic.scss'
 
 export default ({ fieldName }) => {
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data)

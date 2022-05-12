@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
-import './Filters.scss'
+import './Generic.scss'
 
 const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()

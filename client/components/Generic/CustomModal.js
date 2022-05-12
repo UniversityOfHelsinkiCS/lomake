@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
-import './CustomModal.scss'
 import { Icon } from 'semantic-ui-react'
+
 import useOnClickOutside from '../../util/useOnClickOutside'
+import './Generic.scss'
 
 const CustomModal = ({ children, title, closeModal, borderColor }) => {
   const ref = useRef()

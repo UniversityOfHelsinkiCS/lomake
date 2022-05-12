@@ -10,6 +10,7 @@ import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
+import './Generic.scss' 
 
 const mapColorToValid = {
   VIHREÄ: 'green',

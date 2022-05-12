@@ -4,6 +4,7 @@ import { CSVLink } from 'react-csv'
 import { answersByYear, programmeNameByKey as getProgrammeName } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
+import './Generic.scss'
 
 const CsvDownload = ({ wantedData, view, programme }) => {
   const lang = useSelector(state => state.language)

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 import { setLevel, clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
-import './Filters.scss'
+import './Generic.scss'
 
 const LevelFilter = ({ comparison }) => {
   const dispatch = useDispatch()

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button, Input } from 'semantic-ui-react'
+
 import { genericTranslations as translations } from 'Utilities/translations'
-import './Filters.scss'
+import './Generic.scss'
 
 const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, size = 'normal', lang }) => (
   <div className={`programme-filter-${size}`}>

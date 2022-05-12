@@ -10,7 +10,6 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
-import './ColorTable.scss'
 import ColorTableCell from './ColorTableCell'
 
 const ColorTable = React.memo(

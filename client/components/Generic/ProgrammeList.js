@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Icon, Segment } from 'semantic-ui-react'
+
 import { sortedItems } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'

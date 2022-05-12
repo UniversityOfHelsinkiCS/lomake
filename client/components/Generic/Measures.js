@@ -5,6 +5,7 @@ import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
+import './Generic.scss'
 
 const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo }) => {
   const formData = useSelector(state => state.form.data)

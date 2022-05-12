@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
+
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import { genericTranslations as translations } from 'Utilities/translations'
-import './Filters.scss'
+import './Generic.scss'
 
 export default function YearSelector({ multiple, size, label }) {
   const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)

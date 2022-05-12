@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { colors } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
+import './Generic.scss'
 
 const LastYearsAnswersAccordion = ({ children }) => {
   const [expanded, setExpanded] = useState(false)

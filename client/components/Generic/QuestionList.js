@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
+
 import { genericTranslations as translations } from 'Utilities/translations'
 import { setQuestions } from 'Utilities/redux/filterReducer'
+import './Generic.scss'
 
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   const dispatch = useDispatch()

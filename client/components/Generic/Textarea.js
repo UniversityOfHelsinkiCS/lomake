@@ -8,11 +8,11 @@ import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-import './Textarea.scss'
 import { colors } from 'Utilities/common'
+import { genericTranslations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
-import { genericTranslations } from 'Utilities/translations'
+import './Generic.scss'
 
 const MAX_LENGTH = 1100
 
