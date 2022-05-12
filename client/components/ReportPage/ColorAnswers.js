@@ -25,16 +25,21 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
   }
 
   return (
-    <div className="report-tab-pane">
-      <Grid className="report-header">
-        <Grid.Column className="left" width={4} />
-        <Grid.Column className="center" width={6}>
+    <div className="tab-pane">
+      <Grid className="header">
+        <Grid.Row className="noprint">
+          <Grid.Column floated="right">
+            <div className="side-note-large">
+              <PDFDownload />
+            </div>
+            <p className="report side-note-small">{translations.pdfNotification[lang]}</p>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Column width={4} className="left" />
+        <Grid.Column width={6} className="center">
           {year} - {translations.reportHeader.colors[lang]}
         </Grid.Column>
-        <Grid.Column width={5} className="right noprint" floated="right">
-          <PDFDownload />
-          <p className="report-side-note-small">{translations.pdfNotification[lang]}</p>
-        </Grid.Column>
+        <Grid.Column width={5} className="right" floated="right" />
       </Grid>
       <div className="ui divider" />
       <Grid centered>
@@ -50,7 +55,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
           />
         </Grid.Row>
       </Grid>
-      <div className="report-color-grid">
+      <div className="color-grid">
         {questionsList.map(
           question =>
             allAnswers.get(question.id) &&

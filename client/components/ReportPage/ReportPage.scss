@@ -21,11 +21,22 @@
   padding: 3px;
 }
 
+.report .report-tab {
+  padding: 10px;
+  margin-top: 2em;
+  width: 90%;
+  @media print {
+    width: 100% !important;
+  }
+  max-width: 1400px;
+  align-self: center;
+}
+
 .report {
-  &-info-header {
+  & .info-header {
     height: 50px;
   }
-  &-header {
+  & .header {
     font-size: 1.1em;
     & .center {
       text-align: center;
@@ -37,7 +48,7 @@
       text-align: end;
     }
   }
-  &-filter-container {
+  & .filter-container {
     width: 90%;
     max-width: 1400px;
     align-self: center;
@@ -49,7 +60,7 @@
       margin-top: 1em !important;
     }
   }
-  &-tab {
+  & .report-tab {
     padding: 10px;
     margin-top: 2em;
     width: 90%;
@@ -59,18 +70,23 @@
     max-width: 1400px;
     align-self: center;
   }
-  &-tab-pane {
+  & .tab-pane {
     margin-top: 1em;
     padding: 10px;
   }
-  &-side-note {
-    color: $gray;
+  & .side-note {
     &-small {
+      font-weight: 300;
       font-size: 0.8em;
       color: $gray;
     }
+    &-large {
+      font-weight: 400;
+      font-size: 1em;
+      color: $blue;
+    }
   }
-  &-color-button {
+  & .color-button {
     &-active {
       background-color: transparent;
       border: 2px solid black !important;
@@ -81,7 +97,7 @@
       border: none;
     }
   }
-  &-color-buttons {
+  & .color-buttons {
     @include color-buttons-basics;
     &-sticky {
       position: sticky;
@@ -117,62 +133,64 @@
   color: $white !important;
 }
 
-.report-question {
-  &-caret {
-    @include question-caret-basics;
-  }
-  &-caret-disabled {
-    @include question-caret-basics;
-    color: $gray !important;
-    cursor: default;
-  }
-  &-header {
-    &-disabled {
-      cursor: default !important;
+.report {
+  & .question {
+    &-caret {
+      @include question-caret-basics;
     }
-  }
-  &-label {
-    @include question-label-basics;
-    color: $black;
-  }
-  &-label-disabled {
-    @include question-label-basics;
-    color: $gray;
-    cursor: default;
-    &:hover {
+    &-caret-disabled {
+      @include question-caret-basics;
       color: $gray !important;
+      cursor: default;
     }
-  }
-  &-description {
-    font-style: italic;
-    color: $dark-gray;
-    font-weight: 300;
-    margin-top: 1em;
-  }
-  &-description-disabled {
-    color: $gray;
-    cursor: default;
-  }
-  &-title-disabled {
-    color: $gray !important;
-    cursor: default;
-  }
-  &-content {
-    margin-left: 25px !important;
-    max-width: 1200px;
-  }
-  &-answered-label {
-    @include answered-label-basics;
-    background-color: $blue !important;
-    &-disabled {
+    &-header {
+      &-disabled {
+        cursor: default !important;
+      }
+    }
+    &-label {
+      @include question-label-basics;
+      color: $black;
+    }
+    &-label-disabled {
+      @include question-label-basics;
+      color: $gray;
+      cursor: default;
+      &:hover {
+        color: $gray !important;
+      }
+    }
+    &-description {
+      font-style: italic;
+      color: $dark-gray;
+      font-weight: 300;
+      margin-top: 1em;
+    }
+    &-description-disabled {
+      color: $gray;
+      cursor: default;
+    }
+    &-title-disabled {
+      color: $gray !important;
+      cursor: default;
+    }
+    &-content {
+      margin-left: 25px !important;
+      max-width: 1200px;
+    }
+    &-answered-label {
       @include answered-label-basics;
-      background-color: $gray !important;
+      background-color: $blue !important;
+      &-disabled {
+        @include answered-label-basics;
+        background-color: $gray !important;
+      }
     }
-  }
-  &-extrainfo {
-    color: $gray;
-    font-weight: 300;
-    font-style: italic;
+    &-extrainfo {
+      color: $gray;
+      font-weight: 300;
+      font-style: italic;
+    }
   }
 }
 
@@ -191,7 +209,7 @@
   margin: 5px;
 }
 
-.report-answer {
+.report .answer {
   &-header {
     font-style: bold;
   }
@@ -253,7 +271,7 @@
   }
 }
 
-.report-color {
+.color {
   &-grid {
     display: flex;
     flex-flow: row wrap;

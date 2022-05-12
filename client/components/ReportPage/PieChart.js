@@ -101,8 +101,8 @@ export default ({
   }
 
   return (
-    <div className="report-color-chart-area">
-      <div className="report-color-pie-header">
+    <div className="color-chart-area">
+      <div className="color-pie-header">
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
@@ -118,19 +118,14 @@ export default ({
           </Link>
         </p>
       </div>
-      <div className="report-color-pie-chart" data-cy={`report-chart-${question.id}`}>
+      <div className="color-pie-chart" data-cy={`report-chart-${question.id}`}>
         {toolTipData && (
-          <span className="report-color-pie-tip">
+          <span className="color-pie-tip">
             <p>
               <b>
                 {question.labelIndex} - {question.label}
               </b>
-              <Button
-                color="red"
-                size="mini"
-                className="comparison-color-pie-tip-close"
-                onClick={() => setToolTipData(null)}
-              >
+              <Button color="red" size="mini" onClick={() => setToolTipData(null)}>
                 <b>X</b>
               </Button>
             </p>

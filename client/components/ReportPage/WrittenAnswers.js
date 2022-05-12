@@ -54,12 +54,14 @@ const WrittenAnswers = ({
   }
 
   return (
-    <Accordion fluid className="report-tab-pane">
-      <Grid className="report-header">
+    <Accordion fluid className="tab-pane">
+      <Grid className="header">
         <Grid.Row className="noprint">
           <Grid.Column floated="right">
-            <PDFDownload />
-            <p className="report-side-note-small">{translations.pdfNotification[lang]}</p>
+            <div className="side-note-large">
+              <PDFDownload />
+            </div>
+            <p className="report side-note-small">{translations.pdfNotification[lang]}</p>
           </Grid.Column>
         </Grid.Row>
         <Grid.Column width={4} className="left">

@@ -99,7 +99,7 @@ export default () => {
     {
       menuItem: translations.reportHeader.written[lang],
       render: () => (
-        <Tab.Pane className="report-page-tab">
+        <Tab.Pane className="tab-pane">
           <WrittenAnswers
             year={year}
             questionsList={questionsList}
@@ -125,7 +125,7 @@ export default () => {
     {
       menuItem: translations.reportHeader.colors[lang],
       render: () => (
-        <Tab.Pane>
+        <Tab.Pane className="tab-pane">
           <ColorAnswers
             year={year}
             questionsList={questionsList}
@@ -153,9 +153,9 @@ export default () => {
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
-    <>
-      <div className="report-info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="report report-filter-container noprint">
+    <div className="report" >
+      <div className="info-header noprint" />
+      <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
         <Grid.Column width={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
@@ -186,6 +186,6 @@ export default () => {
         menu={{ secondary: true, pointing: true }}
         panes={panes}
       />
-    </>
+    </div>
   )
 }
