@@ -79,7 +79,7 @@ const getDoctoralReadingRights = hyGroups => {
   const newDoctoralReadAccess = {}
   const newDoctoralSpecialGroups = {}
   if (hasDoctoralReadingRights) {
-    newDoctoralSpecialGroups.allProgrammes = true
+    newDoctoralSpecialGroups.doctoral = true
     data.forEach(faculty => {
       faculty.programmes.forEach(program => {
         if (program.level === 'doctoral') {

@@ -96,7 +96,7 @@ describe('IAM permission tests', () => {
 
     cy.visit('/admin')
     cy.get('[data-cy^=cypressDoctoralUser-editUser]').click()
-    // cy.get('[data-cy^=user-access-group-selector]').contains('All programmes') <--- Which one is this, all or doctoral?
+    cy.get('[data-cy^=user-access-group-selector]').contains('All doctoral programmes')
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
