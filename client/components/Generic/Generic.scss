@@ -1,3 +1,5 @@
+@import '../../assets/colors.scss';
+
 .form-status-message {
   margin: 1em;
   &-sticky {
@@ -5,5 +7,37 @@
     position: sticky;
     top: 0;
     z-index: 900;
+  }
+}
+
+.comparison .list,
+.report .list {
+  &-container {
+    margin-top: 60px !important;
+    min-height: 50px;
+    max-height: 370px;
+    display: flex;
+    flex-flow: column;
+    overflow: auto;
+  }
+  &-included {
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  &-excluded {
+    color: $gray;
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  &-companion-icon {
+    margin-left: 6px;
+  }
+  &-header-alert {
+    color: $red;
+    font-weight: bold;
   }
 }

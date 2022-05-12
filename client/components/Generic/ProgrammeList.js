@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Button, Icon, Segment } from 'semantic-ui-react'
 import { sortedItems } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
+import './Generic.scss'
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const lang = useSelector(state => state.language)
@@ -18,7 +19,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
     <>
       {p.name[lang]}
       {p.primaryFaculty.code !== faculty && faculty !== 'allFaculties' && (
-        <span className="report-list-companion-icon">
+        <span className="list-companion-icon">
           <Icon name="handshake outline" />
         </span>
       )}
@@ -27,15 +28,15 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
 
   return (
     <>
-      <Segment className="report-list-container" data-cy="report-programmes-list">
-        <p className="report-list-header">{translations.nowShowing[lang]}</p>
+      <Segment className="list-container" data-cy="report-programmes-list">
+        <p className="list-header">{translations.nowShowing[lang]}</p>
         {programmes.all.length > 0 ? (
           <>
             {sortedItems(programmes.all, 'name', lang).map(
               p =>
                 programmes.chosen.includes(p) && (
                   <p
-                    className="report-list-included"
+                    className="list-included"
                     data-cy={`report-list-programme-${p.key}`}
                     onClick={() => addToList(p)}
                     key={p.key}
@@ -45,14 +46,14 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                 )
             )}
             <div className="ui divider" />
-            <p className={`report-list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
               {translations.chooseMore[lang]}
             </p>
             {sortedItems(programmes.all, 'name', lang).map(
               p =>
                 !programmes.chosen.includes(p) && (
                   <p
-                    className="report-list-excluded"
+                    className="list-excluded"
                     data-cy={`report-list-programme-${p.key}`}
                     onClick={() => addToList(p)}
                     key={p.key}

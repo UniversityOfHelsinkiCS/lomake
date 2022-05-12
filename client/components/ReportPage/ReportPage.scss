@@ -96,37 +96,6 @@
   }
 }
 
-.report-list {
-  &-container {
-    margin-top: 60px !important;
-    min-height: 50px;
-    max-height: 370px;
-    display: flex;
-    flex-flow: column;
-    overflow: auto;
-  }
-  &-included {
-    &:hover {
-      font-weight: bold;
-      cursor: pointer;
-    }
-  }
-  &-excluded {
-    color: $gray;
-    &:hover {
-      font-weight: bold;
-      cursor: pointer;
-    }
-  }
-  &-companion-icon {
-    margin-left: 6px;
-  }
-  &-header-alert {
-    color: $red;
-    font-weight: bold;
-  }
-}
-
 @mixin question-caret-basics {
   max-width: 25px;
   padding: 0em 0.5em !important;
@@ -240,12 +209,10 @@
   }
   &-circle {
     @include answer-circle-basics;
-
-    & .green-color {
-      @include answer-circle-basics;
-
-      background: $background-green;
-    }
+  }
+  &-circle-green {
+    @include answer-circle-basics;
+    background: $background-green;
   }
   &-circle-yellow {
     @include answer-circle-basics;

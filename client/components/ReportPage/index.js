@@ -155,7 +155,7 @@ export default () => {
   return (
     <>
       <div className="report-info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="report-filter-container noprint">
+      <Grid doubling columns={2} padded="vertically" className="report report-filter-container noprint">
         <Grid.Column width={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
@@ -164,11 +164,7 @@ export default () => {
           <h1>{translations.reportPage[lang]}</h1>
           <FilterTray filter={filter} setFilter={setFilter} />
           <Accordion fluid styled className="question-filter">
-            <Accordion.Title
-              className={`question-filter-title${openQuestions ? '-active' : ''} noprint`}
-              active
-              onClick={() => setOpenQuestions(!openQuestions)}
-            >
+            <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
               {translations.selectQuestions[lang]}{' '}
               <span className="noprint">
                 <Icon name={`caret ${openQuestions ? 'down' : 'right'}`} />

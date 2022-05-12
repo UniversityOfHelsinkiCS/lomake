@@ -138,14 +138,14 @@ export default () => {
     },
   ]
 
-  if (!user || ! usersProgrammes) return <></>
+  if (!user || !usersProgrammes) return <></>
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
     <>
       <div className="comparison-info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="comparison-filter-container">
+      <Grid doubling columns={2} padded="vertically" className="comparison comparison-filter-container">
         <Grid.Column width={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
@@ -154,7 +154,7 @@ export default () => {
           <h1>{translations.comparisonPage[lang]}</h1>
         </Grid.Column>
       </Grid>
-      <Tab className="comparison-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab className="comparison comparison-tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </>
   )
 }
