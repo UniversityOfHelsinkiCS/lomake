@@ -68,3 +68,21 @@ Cypress.Commands.add('getYearSelector', () => {
     expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
   })
 })
+
+Cypress.Commands.add('hasAccess', (uid, programCode, access) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/')
+  cy.get(`[data-cy=${programCode}-manage]`).click()
+  cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
+  cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
+  cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
+})
+
+Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/admin')
+  cy.get(`[data-cy^=${uid}-editUser]`).click()
+  specialGroup.forEach(sg => {
+    cy.get('[data-cy^=user-access-group-selector]').contains(sg)
+  })
+})

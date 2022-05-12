@@ -24,13 +24,7 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
 
-    cy.login('cypressToskaUser')
-    cy.visit('/')
-    cy.get(`[data-cy=KH10_001-manage]`).click()
-
-    cy.get('[data-cy=read-cypressJoryUser]')
-    cy.get('[data-cy=write-cypressJoryUser]')
-    cy.get('[data-cy=admin-cypressJoryUser-false]') // <-- thats the tag when the icon is a red X
+    cy.hasAccess('cypressJoryUser', 'KH10_001', { read: true, write: true })
   })
 
   it('Non-employee jory user only gets read access to organisation', () => {
@@ -38,26 +32,14 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
 
-    cy.login('cypressToskaUser')
-    cy.visit('/')
-    cy.get(`[data-cy=KH10_001-manage]`).click()
-
-    cy.get('[data-cy=read-cypressJoryReadUser]')
-    cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
-    cy.get('[data-cy=admin-cypressJoryUser-false]')
+    cy.hasAccess('cypressJoryReadUser', 'KH10_001', { read: true })
   })
 
   it('Jory and corresponding kojo give admin access to programme', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
 
-    cy.login('cypressToskaUser')
-    cy.visit('/')
-    cy.get(`[data-cy=KH10_001-manage]`).click()
-
-    cy.get('[data-cy=read-cypressKojoUser]')
-    cy.get('[data-cy=write-cypressKojoUser]')
-    cy.get('[data-cy=admin-cypressKojoUser]')
+    cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
   it('Kosu user gets read access to all programmes of campus', () => {
@@ -72,13 +54,12 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', programmeCount)
 
-    cy.login('cypressToskaUser')
-    cy.visit('/admin')
-    cy.get('[data-cy^=cypressKosuUser-editUser]').click()
-    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Pharmacy')
-    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Biological and Environmental Sciences')
-    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Agriculture and Forestry')
-    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Veterinary Medicine')
+    cy.hasSpecialGroups('cypressKosuUser', 
+      'Faculty of Pharmacy', 
+      'Faculty of Biological and Environmental Sciences',
+      'Faculty of Agriculture and Forestry',
+      'Faculty of Veterinary Medicine',
+    )
   })
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
@@ -86,17 +67,9 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
-    cy.login('cypressToskaUser')
-    cy.visit('/')
-    cy.get(`[data-cy=KH10_001-manage]`).click()
+    cy.hasAccess('cypressDoctoralUser', 'T920103', { read: true })
 
-    cy.get('[data-cy=read-cypressJoryReadUser]')
-    cy.get('[data-cy=write-cypressJoryReadUser-false]') // <-- thats the tag when the icon is a red X
-    cy.get('[data-cy=admin-cypressJoryReadUser-false]')
-
-    cy.visit('/admin')
-    cy.get('[data-cy^=cypressDoctoralUser-editUser]').click()
-    cy.get('[data-cy^=user-access-group-selector]').contains('All doctoral programmes')
+    cy.hasSpecialGroups('cypressDoctoralUser', 'All doctoral programmes')
   })
 
   it('Psyk and logo groups grant access to two programmes', () => {
@@ -112,10 +85,7 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
-    cy.login('cypressToskaUser')
-    cy.visit('/admin')
-    cy.get('[data-cy^=cypressRehtoriUser-editUser]').click()
-    cy.get('[data-cy^=user-access-group-selector]').contains('All programmes')
+    cy.hasSpecialGroups('cypressRehtoriUser', 'All programmes')
   })
 
   it('Faculty iam group gives reading rights to all programmes of faculty', () => {
@@ -123,10 +93,7 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getFacultyProgrammeCount('H10'))
 
-    cy.login('cypressToskaUser')
-    cy.visit('/admin')
-    cy.get('[data-cy^=cypressTheologyFacultyUser-editUser]').click()
-    cy.get('[data-cy^=user-access-group-selector]').contains('Faculty of Theology')
+    cy.hasSpecialGroups('cypressTheologyFacultyUser', 'Faculty of Theology')
   })
 
   /* Maybe wrong spec file for these tests? */
