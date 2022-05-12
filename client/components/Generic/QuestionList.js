@@ -38,8 +38,8 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   })
 
   return (
-    <div className="comparison-questions-list-container" data-cy="comparison-question-list">
-      <label className={`comparison-questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
+    <div className="questions-list-container" data-cy="comparison-question-list">
+      <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
       <Dropdown
         className="comparison-questions-list-selector"
         data-cy="questions-list"
@@ -53,7 +53,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
         selection
       />
       <Button
-        className="comparison-questions-list-button"
+        className="questions-list-button"
         color="blue"
         onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
         data-cy="questions-list-select-all"

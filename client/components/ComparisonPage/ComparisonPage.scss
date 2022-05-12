@@ -73,10 +73,12 @@
       background-color: transparent;
       border: 2px solid black !important;
       border-radius: 6%;
+      margin-left: 4px;
     }
-    &- {
+    &-{
       background-color: transparent;
       border: none;
+      margin-left: 4px;
     }
   }
   & .color-buttons {
@@ -205,14 +207,9 @@
   &-row {
     padding-top: 0.3em;
   }
-  &-circle {
+  &-circle-green {
     @include answer-circle-basics;
-
-    & .green-color {
-      @include answer-circle-basics;
-
-      background: $background-green;
-    }
+    background: $background-green;
   }
   &-circle-yellow {
     @include answer-circle-basics;
@@ -326,35 +323,5 @@
   }
   &-pie-tip-close {
     float: right;
-  }
-}
-
-
-
-.questions-list {
-  &-container {
-    margin-top: 1.5em !important;
-  }
-  &-button {
-    margin-top: 1em !important;
-  }
-  &-label {
-    margin-top: 2em !important;
-    font-size: 1.05em;
-    &-bolded {
-      margin-top: 2em !important;
-      font-size: 1.05em;
-      color: $red;
-    }
-  }
-  &-selector {
-    margin-top: 0.5em !important;
-    max-width: 90%;
-    &-bolded {
-      margin-top: 0.5em !important;
-      max-width: 90%;
-      border: 2px solid $black;
-      font-weight: bold;
-    }
   }
 }

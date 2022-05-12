@@ -41,3 +41,33 @@
     font-weight: bold;
   }
 }
+
+
+.comparison .questions-list,
+.report .questions-list {
+  &-container {
+    margin-top: 1.5em !important;
+  }
+  &-button {
+    margin-top: 1em !important;
+  }
+  &-label {
+    margin-top: 2em !important;
+    font-size: 1.05em;
+    &-bolded {
+      margin-top: 2em !important;
+      font-size: 1.05em;
+      color: $red;
+    }
+  }
+  &-selector {
+    margin-top: 0.5em !important;
+    max-width: 90%;
+    &-bolded {
+      margin-top: 0.5em !important;
+      max-width: 90%;
+      border: 2px solid $black;
+      font-weight: bold;
+    }
+  }
+}

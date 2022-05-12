@@ -130,7 +130,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
               <Grid.Column width={16}>
                 <h3>{translations.writtenAnswers[lang]}</h3>
                 <div className="ui divider" />
-                <Accordion fluid className="report-container">
+                <Accordion fluid className="comparison-container">
                   {questionsList.map(
                     question =>
                       questions.selected.includes(getLabel(question)) && (
