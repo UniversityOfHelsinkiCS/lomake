@@ -71,7 +71,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   }))
 
   return (
-    <div className="comparison-tab-pane">
+    <div className="tab-pane">
       <Grid stackable doubling padded columns={isAdmin(user) ? 3 : 2}>
         <Grid.Row>
           <Grid.Column width={16}>
@@ -79,9 +79,9 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             <LevelFilter comparison />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row className="comparison-row">
+        <Grid.Row className="row">
           <Grid.Column>
-            <div className="comparison-filter">
+            <div className="filter">
               <label>{translations.chosenProgrammes[lang]}</label>
               <Dropdown
                 fluid
@@ -104,7 +104,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
           <Grid.Column>
             <Radio
-              className={`comparison-toggle${isAdmin(user) ? '' : '-marginless'}`}
+              className={`toggle${isAdmin(user) ? '' : '-marginless'}`}
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
               label={translations.emptyAnswers[lang]}
@@ -113,7 +113,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Grid className="comparison-color-grid" centered stackable doubling relaxed columns={isAdmin(user) ? 3 : 2}>
+      <Grid className="color-grid" centered stackable doubling relaxed columns={isAdmin(user) ? 3 : 2}>
         <Grid.Column>
           {questionsList.map(
             question =>

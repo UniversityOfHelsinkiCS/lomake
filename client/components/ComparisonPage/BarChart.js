@@ -212,7 +212,7 @@ const BarChart = ({ data, questions, unit }) => {
 
   return (
     <HighchartsReact
-      className="comparison-bar-chart"
+      className="bar-chart"
       highcharts={Highcharts}
       constructorType="chart"
       options={unit === 'percentage' ? percentageOptions : normalOptions}

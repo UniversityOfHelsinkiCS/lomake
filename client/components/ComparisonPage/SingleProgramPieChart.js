@@ -49,8 +49,8 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty,
   }
 
   return (
-    <div className={`comparison-color-chart-area-${columns}`}>
-      <div className="comparison-color-pie-header">
+    <div className={`color-chart-area-${columns}`}>
+      <div className="color-pie-header">
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
@@ -66,7 +66,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty,
           </b>
         </p>
       </div>
-      <div className="comparison-color-pie-chart" data-cy={`comparison-chart-${question.id}`}>
+      <div className="color-pie-chart" data-cy={`comparison-chart-${question.id}`}>
         <Chart
           center={[72, 65]}
           data={data(question)}

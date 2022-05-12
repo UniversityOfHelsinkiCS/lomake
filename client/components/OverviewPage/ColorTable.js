@@ -124,7 +124,7 @@ const ColorTable = React.memo(
     }, [])
 
     return (
-      <div className="color-grid">
+      <div className="overview-color-grid">
         <div className="sticky-header">
           <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('name')}>
             {translations.programmeNameHeader[lang]}

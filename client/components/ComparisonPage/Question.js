@@ -31,10 +31,10 @@ const Question = ({ answers, question, handleClick, showing }) => {
           key={color}
           name={color}
           type="button"
-          className={`comparison-color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
+          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
           onClick={() => filterColor(yearsIndex, color, index)}
         >
-          <span className={`comparison-answer-circle-big-${color}`} />
+          <span className={`answer-circle-big-${color}`} />
         </button>
       }
     />
@@ -50,20 +50,20 @@ const Question = ({ answers, question, handleClick, showing }) => {
         index={question.id}
         active={showing}
         data-cy={`comparison-question-${question.id}`}
-        className={`comparison-question-header ${showing && 'sticky-header'}`}
+        className={`question-header ${showing && 'sticky-header'}`}
         onClick={handleClick}
       >
         <Grid>
-          <Grid.Column width={1} className="comparison-question-caret">
+          <Grid.Column width={1} className="question-caret">
             <Icon name={`caret ${showing ? 'down' : 'right'}`} />
           </Grid.Column>
           <Grid.Column width={15}>
             <span>
-              <small className="comparison-question-title">
+              <small className="question-title">
                 {romanize(question.titleIndex)} - {question.title}
               </small>
             </span>
-            <p className="comparison-question-label">
+            <p className="question-label">
               {question.labelIndex}. {question.label.toUpperCase()}
             </p>
           </Grid.Column>
@@ -75,8 +75,8 @@ const Question = ({ answers, question, handleClick, showing }) => {
             {answers.map(
               (year, yearsIndex) =>
                 multipleYears.includes(year.year) && (
-                  <Grid.Column key={generateRandomKey(year)} className="comparison-question-content">
-                    <div className="comparison-color-buttons-sticky sticky-header">
+                  <Grid.Column key={generateRandomKey(year)} className="question-content">
+                    <div className="color-buttons-sticky sticky-header">
                       <label>{year.year}</label>
                       {buttonColors.map((color, index) => (
                         <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
@@ -87,16 +87,13 @@ const Question = ({ answers, question, handleClick, showing }) => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
                           return (
                             <div key={generateRandomKey(`${programme}-${year}`)}>
-                              <label className="comparison-answer-title">
-                                {programme.name} <span className={`comparison-answer-circle-${programme.color}`} />
+                              <label className="answer-title">
+                                {programme.name} <span className={`answer-circle-${programme.color}`} />
                               </label>
-                              <ul
-                                className="comparison-answer-list"
-                                data-cy={`compare-question-content-${question.id}`}
-                              >
+                              <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
                                 {programme.answer &&
                                   programme.answer.split('\n').map(row => (
-                                    <li key={generateRandomKey(programme)} className="comparison-answer-row">
+                                    <li key={generateRandomKey(programme)} className="answer-row">
                                       {row}
                                     </li>
                                   ))}

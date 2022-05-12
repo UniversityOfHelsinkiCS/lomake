@@ -90,8 +90,8 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
   }
 
   return (
-    <div className={`comparison-color-chart-area-${columns}`}>
-      <div className="comparison-color-pie-header">
+    <div className={`color-chart-area-${columns}`}>
+      <div className="color-pie-header">
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
@@ -105,25 +105,20 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
           <b>{amountOfResponses()}</b>
         </p>
       </div>
-      <div className="comparison-color-pie-chart" data-cy={`comparison-chart-${name}-${question.id}`}>
+      <div className="color-pie-chart" data-cy={`comparison-chart-${name}-${question.id}`}>
         {toolTipData && (
-          <div className="comparison-color-pie-tip" data-cy={`comparison-tip-${question.id}`}>
+          <div className="color-pie-tip" data-cy={`comparison-tip-${question.id}`}>
             <p>
               <b>
                 {question.labelIndex} - {question.label}
               </b>
-              <Button
-                color="red"
-                size="mini"
-                className="comparison-color-pie-tip-close"
-                onClick={() => setToolTipData(null)}
-              >
+              <Button color="red" size="mini" className="color-pie-tip-close" onClick={() => setToolTipData(null)}>
                 <b>X</b>
               </Button>
             </p>
             <p>
               <b>
-                <span className={`comparison-answer-circle-${toolTipData.color}`} /> {toolTipData.header}
+                <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
               </b>
             </p>
             {toolTipData.programmes.map(p => (

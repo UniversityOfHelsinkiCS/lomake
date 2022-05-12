@@ -9,10 +9,10 @@
 }
 
 .comparison {
-  &-info-header {
+  & .info-header {
     height: 50px;
   }
-  &-filter-container {
+  & .filter-container {
     width: 90%;
     max-width: 1600px;
     align-self: center;
@@ -24,21 +24,21 @@
       margin-top: 1em !important;
     }
   }
-  &-tab {
+  & .tab {
     margin-top: 2em;
     width: 90%;
     max-width: 1600px;
     align-self: center;
   }
-  &-tab-pane {
+  & .tab-pane {
     margin-top: 1em;
     padding: 10px;
   }
-  &-row {
+  & .row {
     margin-top: 1.5em !important;
     padding-bottom: 0px !important;
   }
-  &-filter {
+  & .filter {
     margin: 2em 0em 1em 0em;
     > label {
       font-size: 1.05em;
@@ -46,29 +46,29 @@
       display: block;
     }
   }
-  &-toggle {
+  & .toggle {
     margin: 4em 0em 2em 0em;
     padding-left: 1em;
   }
-  &-toggle-marginless {
+  & .toggle-marginless {
     padding-left: 1em;
   }
-  &-side-note {
+  & .side-note {
     color: $gray;
   }
-  &-chart-row {
+  & .chart-row {
     height: 600px !important;
   }
-  &-chart-settings {
+  & .chart-settings {
     margin-top: 20px !important;
   }
-  &-questions-row {
+  & .questions-row {
     height: 500px !important;
   }
-  &-question-content {
+  & .question-content {
     padding-left: 35px !important;
   }
-  &-color-button {
+  & .color-button {
     &-active {
       background-color: transparent;
       border: 2px solid black !important;
@@ -79,7 +79,7 @@
       border: none;
     }
   }
-  &-color-buttons {
+  & .color-buttons {
     @include color-buttons-basics;
     &-sticky {
       position: sticky;
@@ -115,7 +115,7 @@
   color: $white !important;
 }
 
-.comparison-question {
+.question {
   &-caret {
     @include question-caret-basics;
   }
@@ -189,7 +189,7 @@
   margin: 5px;
 }
 
-.comparison-answer {
+.answer {
   &-header {
     font-style: bold;
   }
@@ -253,7 +253,7 @@
   }
 }
 
-.comparison-color {
+.color {
   &-grid {
     width: 100%;
     margin: 1em 0em 4em 0em;
@@ -331,7 +331,7 @@
 
 
 
-.comparison-questions-list {
+.questions-list {
   &-container {
     margin-top: 1.5em !important;
   }
