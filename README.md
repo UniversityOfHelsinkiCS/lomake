@@ -20,7 +20,7 @@ Use setHeaders() to select user for development purposes.
 ### Accessing the database while developing
 
 1. run `docker exec -it lomake_db bash`
-2. enter with `psql -U postgres`
+2. enter with `psql -U postgres` 
 
 ### Seeding the database for production
 
