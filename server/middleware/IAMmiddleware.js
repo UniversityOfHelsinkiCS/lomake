@@ -1,4 +1,4 @@
-const { inProduction } = require('@util/common')
+const { inProduction, AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const { getIAMRights } = require('@util/IAMrights')
 
 const IAMmiddleware = async (req, _, next) => {
@@ -8,7 +8,7 @@ const IAMmiddleware = async (req, _, next) => {
   const { user } = req
   const { headers } = req
 
-  if (!inProduction) {
+  if (!inProduction || AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     // testing iam group based access granting
     const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
     user.access = {
