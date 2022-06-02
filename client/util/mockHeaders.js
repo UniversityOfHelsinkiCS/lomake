@@ -119,6 +119,16 @@ export const possibleUsers = [
     sn: 'nah',
   },
   {
+    uid: 'cypressKojoDeanUser',
+    employeeNumber: 135,
+    givenName: 'kojoDeanUser',
+    mail: 'cypress-kojo-dean-user@helsinki.fi',
+    schacDateOfBirth: 19990109,
+    hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti',
+    sn: 'nah',
+  },
+
+  {
     uid: 'cypressInternationalUser',
   },
   {
