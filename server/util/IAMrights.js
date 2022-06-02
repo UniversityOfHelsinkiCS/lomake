@@ -203,9 +203,9 @@ const getReadAccess = hyGroups => {
 const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
-  const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
+  // const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
 
-  const { newKosuReadAccess, newKosuSpecialGroups } = getKosuReadingRights(hyGroups)
+  // const { newKosuReadAccess, newKosuSpecialGroups } = getKosuReadingRights(hyGroups)
 
   const { newDoctoralReadAccess, newDoctoralSpecialGroups } = getDoctoralReadingRights(hyGroups)
 
@@ -214,8 +214,8 @@ const getIAMRights = hyGroupsHeader => {
   const newAccess = {
     ...newUniversityWideReadAccess,
     ...newDoctoralReadAccess,
-    ...newFacultyReadAccess,
-    ...newKosuReadAccess,
+    // ...newFacultyReadAccess,
+    // ...newKosuReadAccess,
     ...getDoctoralSchoolReadingRights,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
@@ -225,8 +225,8 @@ const getIAMRights = hyGroupsHeader => {
   const newSpecialGroup = {
     ...newUniversityWideSpecialGroups,
     ...newDoctoralSpecialGroups,
-    ...newFacultySpecialGroups,
-    ...newKosuSpecialGroups,
+    // ...newFacultySpecialGroups,
+    // ...newKosuSpecialGroups,
     ...getAdmin(hyGroups),
     ...getSuperAdmin(hyGroups),
   }
