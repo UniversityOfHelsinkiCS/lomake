@@ -258,21 +258,6 @@ const kojoMap = {
   'hy-dp-docs-jory': 'hy-tohtoriohjelma-johtajat',
 }
 
-// const facultyMap = {
-//   'hy-ttdk-dekanaatti': 'H10',
-//   'hy-oiktdk-dekanaatti': 'H20',
-//   'hy-ltdk-dekanaatti': 'H30',
-//   'hy-humtdk-dekanaatti': 'H40',
-//   'hy-mltdk-dekanaatti': 'H50',
-//   'hy-ftdk-dekanaatti': 'H55',
-//   'hy-bytdk-dekanaatti': 'H57',
-//   'hy-ktdk-dekanaatti': 'H60',
-//   'hy-valttdk-dekanaatti': 'H70',
-//   'hy-sskh-rehtoraatti': 'H74',
-//   'hy-mmtdk-dekanaatti': 'H80',
-//   'hy-eltdk-dekanaatti': 'H90',
-// }
-
 const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
 
 const doctoralSchoolMap = {
@@ -303,16 +288,6 @@ const doctoralSchoolMap = {
   'hy-tutkijakoulut-yeb-jory': ['T922101', 'T922102', 'T922103', 'T922104', 'T922105', 'T922106'],
   'hy-tutkijakoulut-donasci-jory': ['T923101', 'T923102', 'T923103', 'T923104', 'T923105', 'T923106', 'T923107'],
 }
-
-// const kosuMap = {
-//   'hy-ypa-opa-kosu-kumpula': ['H50'],
-//   'hy-ypa-opa-kosu-meilahti': ['H30'],
-//   'hy-ypa-kosu-kruununhaka': ['H60', 'H40', 'H10', 'H20', 'H70', 'H74'],
-//   'hy-ypa-opa-kosu-metsatalo': ['H60', 'H40', 'H10', 'H20', 'H70', 'H74'],
-//   'hy-ypa-opa-kosu-porthania': ['H60', 'H40', 'H10', 'H20', 'H70', 'H74'],
-//   'hy-ypa-opa-kosu-siltavuori': ['H60', 'H40', 'H10', 'H20', 'H70', 'H74'],
-//   'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
-// }
 
 const universityWideGroups = [
   'hy-ypa-opa-opintoasiainpaallikot',
@@ -354,11 +329,7 @@ const isDoctoralIam = iam => doctoralIams.includes(iam)
 
 const isEmployeeIam = iam => employeeGroups.includes(iam)
 
-// const iamToFacultyCode = iam => facultyMap[iam]
-
 const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
-
-// const iamToKosu = iam => kosuMap[iam]
 
 const getStudyLeaderGroup = iam => kojoMap[iam]
 
@@ -376,9 +347,7 @@ module.exports = {
   isUniversityWideIam,
   isDoctoralIam,
   isEmployeeIam,
-  // iamToFacultyCode,
   iamToDoctoralSchool,
-  // iamToKosu,
   iamToOrganisationCode,
   getStudyLeaderGroup,
 }

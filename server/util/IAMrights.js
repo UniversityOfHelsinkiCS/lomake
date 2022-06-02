@@ -3,8 +3,6 @@ const {
   isAdminIam,
   isUniversityWideIam,
   isDoctoralIam,
-  iamToFacultyCode,
-  iamToKosu,
   getStudyLeaderGroup,
   iamToOrganisationCode,
   isEmployeeIam,
@@ -108,44 +106,6 @@ const getDoctoralSchoolReadingRights = hyGroups => {
 }
 
 /**
- * Grant reading rights to all programmes in the faculty, if the user is a dean of the faculty
- * @param {string[]} hyGroups
- */
-const getFacultyReadingRights = hyGroups => {
-  const facultyCodes = hyGroups.map(iam => iamToFacultyCode(iam)).filter(Boolean)
-  const newFacultyReadAccess = {}
-  const newFacultySpecialGroups = {}
-  facultyCodes.forEach(code => {
-    newFacultySpecialGroups[code] = true
-    const faculty = data.find(f => f.code === code)
-    faculty.programmes.forEach(p => {
-      newFacultyReadAccess[p.key] = { read: true }
-    })
-  })
-
-  return { newFacultyReadAccess, newFacultySpecialGroups }
-}
-
-/**
- * Grant reading rights to all programmes in the faculties of the campus, if the user belongs to corresponding kosu group
- * @param {string[]} hyGroups
- */
-const getKosuReadingRights = hyGroups => {
-  const facultyCodes = hyGroups.flatMap(iam => iamToKosu(iam)).filter(Boolean)
-  const newKosuReadAccess = {}
-  const newKosuSpecialGroups = {}
-  facultyCodes.forEach(code => {
-    newKosuSpecialGroups[code] = true
-    const faculty = data.find(f => f.code === code)
-    faculty.programmes.forEach(p => {
-      newKosuReadAccess[p.key] = { read: true }
-    })
-  })
-
-  return { newKosuReadAccess, newKosuSpecialGroups }
-}
-
-/**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
  * @param {string[]} hyGroups
  */
@@ -203,10 +163,6 @@ const getReadAccess = hyGroups => {
 const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
 
-  // const { newFacultyReadAccess, newFacultySpecialGroups } = getFacultyReadingRights(hyGroups)
-
-  // const { newKosuReadAccess, newKosuSpecialGroups } = getKosuReadingRights(hyGroups)
-
   const { newDoctoralReadAccess, newDoctoralSpecialGroups } = getDoctoralReadingRights(hyGroups)
 
   const { newUniversityWideReadAccess, newUniversityWideSpecialGroups } = getUniversityReadingRights(hyGroups)
@@ -214,8 +170,6 @@ const getIAMRights = hyGroupsHeader => {
   const newAccess = {
     ...newUniversityWideReadAccess,
     ...newDoctoralReadAccess,
-    // ...newFacultyReadAccess,
-    // ...newKosuReadAccess,
     ...getDoctoralSchoolReadingRights,
     ...getReadAccess(hyGroups),
     ...getWriteAccess(hyGroups),
@@ -225,8 +179,6 @@ const getIAMRights = hyGroupsHeader => {
   const newSpecialGroup = {
     ...newUniversityWideSpecialGroups,
     ...newDoctoralSpecialGroups,
-    // ...newFacultySpecialGroups,
-    // ...newKosuSpecialGroups,
     ...getAdmin(hyGroups),
     ...getSuperAdmin(hyGroups),
   }

@@ -73,7 +73,7 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
 
-    cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All Programmes')
+    cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
 
   it('Kosu user gets wide read access', () => {
@@ -81,7 +81,7 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
 
-    cy.hasSpecialGroups('cypressKosuUser', 'All Programmes')
+    cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
   })
 
   /* Maybe wrong spec file for these tests? */
