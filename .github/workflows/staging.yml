@@ -43,11 +43,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up cache
-        uses: actions/cache@v2
-        with:
-          path: ~/node_modules
-          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+      # - name: Set up cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/node_modules
+      #     key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
 
       - name: npm ci
         run: npm ci
