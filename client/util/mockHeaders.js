@@ -127,6 +127,15 @@ export const possibleUsers = [
     hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti',
     sn: 'nah',
   },
+  {
+    uid: 'cypressKosuJoryUser',
+    employeeNumber: 136,
+    givenName: 'kosuJoryUser',
+    mail: 'cypress-kosu-jory-user@helsinki.fi',
+    schacDateOfBirth: 19990110,
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
+    sn: 'nah',
+  },
 
   {
     uid: 'cypressInternationalUser',
