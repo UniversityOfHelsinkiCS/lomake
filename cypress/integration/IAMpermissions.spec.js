@@ -2,7 +2,7 @@
 /// <reference types="cypress" />
 
 import { defaultYears } from '../../config/common'
-import { getDoctoralProgrammeCount, getFacultyProgrammeCount, getTotalProgrammeCount } from '../support/helpers'
+import { getDoctoralProgrammeCount, getTotalProgrammeCount } from '../support/helpers'
 
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
@@ -42,27 +42,6 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
-  it('Kosu user gets read access to all programmes of campus', () => {
-    // 'hy-ypa-opa-kosu-viikki': ['H57', 'H55', 'H80', 'H90'],
-    const programmeCount =
-      getFacultyProgrammeCount('H57') +
-      getFacultyProgrammeCount('H55') +
-      getFacultyProgrammeCount('H80') +
-      getFacultyProgrammeCount('H90')
-
-    cy.login('cypressKosuUser')
-    cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', programmeCount)
-
-    cy.hasSpecialGroups(
-      'cypressKosuUser',
-      'Faculty of Pharmacy',
-      'Faculty of Biological and Environmental Sciences',
-      'Faculty of Agriculture and Forestry',
-      'Faculty of Veterinary Medicine'
-    )
-  })
-
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
@@ -92,9 +71,17 @@ describe('IAM permission tests', () => {
   it('Faculty iam group gives reading rights to all programmes of faculty', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getFacultyProgrammeCount('H10'))
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
 
-    cy.hasSpecialGroups('cypressTheologyFacultyUser', 'Faculty of Theology')
+    cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All Programmes')
+  })
+
+  it('Kosu user gets wide read access', () => {
+    cy.login('cypressKosuUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+
+    cy.hasSpecialGroups('cypressKosuUser', 'All Programmes')
   })
 
   /* Maybe wrong spec file for these tests? */
