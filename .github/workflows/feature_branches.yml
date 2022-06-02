@@ -1,0 +1,331 @@
+name: Test feature branch
+
+on:
+  push:
+    branches-ignore: 'master'
+
+jobs:
+  test_comparison:
+    name: Test Comparison Page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/comparison.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_form:
+    name: Test Form Page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/form.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_form_notifications:
+    name: Test Form notifications
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNotifications.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_happy_path:
+    name: Test happy path
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/happypath.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_iam_permissions:
+    name: Test IAM-permissions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/IAMpermissions.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_international_2020:
+    name: Test International2020-group
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/international2020.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_links:
+    name: Test links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/links.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_management:
+    name: Test rights management
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+    
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/management.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_misc:
+    name: Test miscellaneous
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+    
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/misc.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_ospa:
+    name: Test OSPA features
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/ospa.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_permissions:
+    name: Test permissions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/permissions.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_report:
+    name: Test Report Page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/report.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+  test_year_selector:
+    name: Test year selector
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/yearselector.spec.js"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
