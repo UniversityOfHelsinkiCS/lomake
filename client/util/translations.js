@@ -854,6 +854,11 @@ export const overviewPageTranslations = {
     en: 'Show only unclaimed programmes',
     se: 'Visa enbart program som inte tagits emot',
   },
+  selectYear: {
+    en: 'Select year to inspect',
+    fi: 'Valitse tarkasteltava vuosi',
+    se: 'Select year to inspect',
+  },
   // OverviewPage/FormLocker.js
   lockForm: {
     en: 'Lock form (prevents editing)',
