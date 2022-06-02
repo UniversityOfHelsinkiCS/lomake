@@ -5,7 +5,7 @@ const externalRouter = Router()
 
 externalRouter.get('/organizations/:username', users.getUserOrganizations)
 
-externalRouter.all('*', function (req, res) {
+externalRouter.all('*', (req, res) => {
   res.send('400')
 })
 
