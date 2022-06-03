@@ -8,7 +8,7 @@ const inProduction = process.env.NODE_ENV === 'production'
 
 // Once the iams are in use, turn this to true
 // And later on, once everything is ok, remove the features behind this flag
-const iamsInUse = false
+const iamsInUse = true
 
 const basePath = process.env.BASE_PATH || '/'
 
@@ -217,7 +217,9 @@ const cypressUsers = [
   },
 ]
 
-const testProgrammeName = 'TOSKA101'
+const testProgrammeCode = 'KH50_005'
+
+const testProgrammeName = `Bachelor's Programme in Computer Science`
 
 module.exports = {
   iamsInUse,
@@ -235,6 +237,7 @@ module.exports = {
   isSpecialGroupUser,
   isInternationalUser,
   cypressUsers,
+  testProgrammeCode,
   testProgrammeName,
   LOMAKE_SINCE_YEAR,
   getYearsArray,

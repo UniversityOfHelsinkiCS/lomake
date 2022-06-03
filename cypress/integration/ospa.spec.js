@@ -3,15 +3,16 @@
 
 /// <reference types="cypress" />
 
-import { testProgrammeName, defaultYears, iamsInUse } from '../../config/common'
+import { testProgrammeCode, defaultYears, iamsInUse } from '../../config/common'
 
-describe('OSPA user tests', () => {
+describe('SuperAdmin user tests', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.visit('/')
   })
 
   it('Deadline can be deleted and created and deleting a deadline locks forms.', () => {
+    cy.login('cypressSuperAdminUser')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -39,6 +40,7 @@ describe('OSPA user tests', () => {
   })
 
   it('Deadline for a past year can be created, the form of that year can be edited and the form can be then again closed', () => {
+    cy.login('cypressSuperAdminUser')
     cy.request('/api/cypress/createAnswers')
 
     // Delete pre-generated deadline
@@ -275,11 +277,12 @@ describe('OSPA user tests', () => {
     })
 
   it('Can write to form and change from smiley table to trends view', () => {
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.login('cypressAdminUser')
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     cy.visit('/')
 
-    cy.get('[data-cy=TOSKA101-community_wellbeing]').should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`).should('have.class', 'square-green')
   })
 })

@@ -2,16 +2,15 @@
 /// <reference types="cypress" />
 
 import * as _ from 'lodash'
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeCode } from '../../config/common'
 
 const user = 'cypressUser'
 
 describe('Sidebar tests', () => {
   beforeEach(() => {
-    cy.givePermissions(user, testProgrammeName, 'write')
     cy.login(user)
     cy.visit('/')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`).click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
   // Skip for now, figure out later why this does not work in CI-pipeline when it works locally

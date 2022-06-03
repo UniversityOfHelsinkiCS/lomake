@@ -11,13 +11,31 @@ export const possibleUsers = [
     sn: 'admin',
   },
   {
-    uid: 'cypressReadGroupMember',
-    employeeNumber: 123,
-    givenName: 'readGroupMember',
-    mail: 'read-group-member@helsinki.fi',
-    schacDateOfBirth: 19770501,
-    hyGroupCn: 'grp-lomake-testing-read',
-    sn: 'readGroupMember',
+    uid: 'cypressReadingRightsUser',
+    employeeNumber: undefined,
+    givenName: 'no rights',
+    mail: 'no-rights@fake.helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-mltdk-tkt-jory',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressNoRightsUser',
+    employeeNumber: undefined,
+    givenName: 'no rights',
+    mail: 'no-rights@fake.helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: '',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressUser',
+    employeeNumber: 124,
+    givenName: 'user',
+    mail: 'cypress-user@helsinki.fi',
+    schacDateOfBirth: 19990100,
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees;',
+    sn: 'nah',
   },
   {
     uid: 'cypressOspaUser',
@@ -25,7 +43,7 @@ export const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'grp-ospa;test-iam-group',
+    hyGroupCn: 'grp-ospa',
     sn: 'nah',
   },
   {
@@ -34,7 +52,7 @@ export const possibleUsers = [
     givenName: 'toskaUser',
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
-    hyGroupCn: 'test-iam-group;grp-toska',
+    hyGroupCn: 'grp-toska',
     sn: 'nah',
   },
   {
@@ -135,19 +153,6 @@ export const possibleUsers = [
     schacDateOfBirth: 19990110,
     hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
     sn: 'nah',
-  },
-
-  {
-    uid: 'cypressInternationalUser',
-  },
-  {
-    uid: 'cypressUser',
-  },
-  {
-    uid: 'cypressAdminUser',
-  },
-  {
-    uid: 'cypressSuperAdminUser',
   },
 ]
 

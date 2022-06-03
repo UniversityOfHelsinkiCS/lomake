@@ -1,29 +1,28 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName } from '../../config/common'
+import { testProgrammeCode } from '../../config/common'
 
 describe('Form Notification tests', () => {
   beforeEach(() => {
     cy.server()
-    cy.givePermissions('cypressUser', testProgrammeName, 'write')
   })
 
   it('Save message is shown by default', () => {
     cy.login('cypressUser')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=saving-answers-notice]')
   })
 
   it('After being locked by admin, message matches the state', () => {
     cy.login('cypressAdminUser')
     cy.visit(`/`)
-    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get(`[data-cy=formLocker-button-close]`).click()
     cy.get(`[data-cy=formLocker-verify-close-button]`).click()
 
     cy.login('cypressUser')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=locked-form-notice]')
   })
 
@@ -37,7 +36,7 @@ describe('Form Notification tests', () => {
     cy.wait('@delete')
 
     cy.login('cypressUser')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=deadline-passed-notice]')
   })
 })

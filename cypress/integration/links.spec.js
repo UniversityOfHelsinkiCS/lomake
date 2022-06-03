@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName, iamsInUse } from '../../config/common'
+import { testProgrammeCode, iamsInUse } from '../../config/common'
 
 !iamsInUse &&
   describe('Link tests', () => {
@@ -13,13 +13,13 @@ import { testProgrammeName, iamsInUse } from '../../config/common'
     it('Can claim read access', () => {
       cy.visit('/access/readTest')
       cy.get('[data-cy=claim-button]').click()
-      cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`)
+      cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     })
 
     it('Can claim write access', () => {
       cy.visit('/access/writeTest')
       cy.get('[data-cy=claim-button]').click()
-      cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`)
+      cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     })
 
     it('Can claim admin (owner) access after typing confirmation, and claimed status is updated', () => {
@@ -27,7 +27,7 @@ import { testProgrammeName, iamsInUse } from '../../config/common'
       cy.get('[data-cy=claim-button]').should('be.disabled')
       cy.get('[data-cy=claimAccessPage-confirmation-input]').type('TOSKA-en')
       cy.get('[data-cy=claim-button]').click()
-      cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
+      cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
       cy.get('[data-cy=read-cypressUser]').should('have.class', 'check')
       cy.get('[data-cy=write-cypressUser]').should('have.class', 'check')
       cy.get('[data-cy=admin-cypressUser]').should('have.class', 'check')

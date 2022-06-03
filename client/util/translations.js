@@ -1433,6 +1433,11 @@ export const usersPageTranslations = {
     fi: 'Käyttäjäryhmä',
     se: 'User group',
   },
+  specialGroup: {
+    en: 'Access groups',
+    fi: 'Käyttöoikeusryhmät',
+    se: 'Access groups',
+  },
   lastLogin: {
     en: 'Last login',
     fi: 'Kirjautunut viimeksi',

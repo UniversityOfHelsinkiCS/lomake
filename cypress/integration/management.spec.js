@@ -2,16 +2,14 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName, iamsInUse } from '../../config/common'
+import { testProgrammeCode, iamsInUse } from '../../config/common'
 
 describe('Management tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.givePermissions(user, testProgrammeName, 'admin')
-    cy.givePermissions('cypressUser2', testProgrammeName, 'read')
     cy.visit('/')
-    cy.get(`[data-cy=${testProgrammeName}-manage]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
   })
 
   !iamsInUse &&
@@ -90,7 +88,7 @@ describe('Management tests', () => {
     cy.get(`[data-cy=formLocker-verify-open-button]`)
 
     cy.login('cypressUser')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').should('not.exist')
   })
 })

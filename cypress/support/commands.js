@@ -81,8 +81,7 @@ Cypress.Commands.add('hasAccess', (uid, programCode, access) => {
 Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
   cy.login('cypressToskaUser')
   cy.visit('/admin')
-  cy.get(`[data-cy^=${uid}-editUser]`).click()
   specialGroup.forEach(sg => {
-    cy.get('[data-cy^=user-access-group-selector]').contains(sg)
+    cy.get('[data-cy^=user-access-groups]').contains(sg)
   })
 })

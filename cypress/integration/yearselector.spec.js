@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { defaultYears, testProgrammeName } from '../../config/common'
+import { defaultYears, testProgrammeCode } from '../../config/common'
 
 describe("Previous year's answers", () => {
   beforeEach(() => {
     const user = 'cypressUser'
-    cy.givePermissions(user, testProgrammeName, 'admin')
+    cy.givePermissions(user, testProgrammeCode, 'admin')
     cy.login(user)
     cy.visit('/')
   })
@@ -17,22 +17,22 @@ describe("Previous year's answers", () => {
     cy.get('[data-cy=yearSelector]').click()
 
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
-    cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).should('have.class', 'square-green')
 
-    cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)
 
     cy.get('.customModal-content').find('.close').click()
     cy.get('[data-cy=yearSelector]').click()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[2]).click()
 
-    cy.get('[data-cy=TOSKA101-review_of_last_years_situation_report]').click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[2]}`)
   })
 
   it("Can't write answers if viewing old answers", () => {
     cy.request('/api/cypress/createAnswers')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
 
     cy.get('[data-cy=yearSelector]').click()
@@ -46,7 +46,7 @@ describe("Previous year's answers", () => {
   // FIXME: flaky
   it('Can view old answers in Form-page and switch back to editMode to continue working.', () => {
     cy.request('/api/cypress/createAnswers')
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
 
     cy.get('[data-cy=yearSelector]').click()
     cy.get('span').contains(defaultYears[1]).should('be.visible').click()

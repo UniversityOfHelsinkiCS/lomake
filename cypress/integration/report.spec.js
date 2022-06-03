@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName, defaultYears } from '../../config/common'
+import { testProgrammeCode, defaultYears } from '../../config/common'
 
 const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
 describe('ReportPage tests', () => {
   beforeEach(() => {
-    cy.givePermissions(user, testProgrammeName, 'write')
+    cy.givePermissions(user, testProgrammeCode, 'write')
   })
 
   it('Piecharts are not shown if there are no answers', () => {
@@ -26,7 +26,7 @@ describe('ReportPage tests', () => {
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`).click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
@@ -52,7 +52,7 @@ describe('ReportPage tests', () => {
   it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit('/')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeName}]`).click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
@@ -148,7 +148,7 @@ describe('ReportPage tests', () => {
 
   it('Changes in smileys are reflected to the piecharts', () => {
     cy.login(user)
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/')
