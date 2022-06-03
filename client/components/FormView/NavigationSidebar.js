@@ -53,7 +53,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
-                    const { id, type, required, no_color } = part
+                    const { id, type, required, noColor } = part
                     if (type === 'ENTITY' || type === 'MEASURES') partNumber++
 
                     const idsToCheck = []
@@ -64,7 +64,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                       idsToCheck.push(`${id}_1_text`)
                     }
 
-                    if (type === 'ENTITY' && !no_color) {
+                    if (type === 'ENTITY' && !noColor) {
                       idsToCheck.push(`${id}_light`)
                     }
 
