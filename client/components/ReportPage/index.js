@@ -153,7 +153,7 @@ export default () => {
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   return (
-    <div className="report" >
+    <div className="report">
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
         <Grid.Column width={10}>
