@@ -69,7 +69,10 @@ export const sortedItems = (items, sorter, lang) => {
       if (!a[sorter] || !b[sorter]) return a
       return a[sorter].localeCompare(b[sorter])
     }
-    if (typeof a[sorter] === 'boolean') return a[sorter] - b[sorter]
+    if (typeof a[sorter] === 'boolean') {
+      return a[sorter] - b[sorter]
+    }
+    return undefined
   })
   return sorted
 }
@@ -187,8 +190,8 @@ export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
 }
 
 export const cleanText = string => {
-  if (!string) return
-  if (string === '') return
+  if (!string) return undefined
+  if (string === '') return undefined
   const cleanedText = string
     .replace(/_x000D_/g, '')
     .replace(/&#8259;/g, '\n')

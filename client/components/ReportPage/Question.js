@@ -89,6 +89,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                     </div>
                   )
                 }
+                return undefined
               })
           ) : (
             <h4>{translations.noData[lang]}</h4>
