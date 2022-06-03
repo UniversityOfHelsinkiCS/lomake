@@ -7,7 +7,8 @@ describe('Form tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
   it('Can write to a textfield and the answer is saved.', () => {

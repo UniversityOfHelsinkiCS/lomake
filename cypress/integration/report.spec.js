@@ -7,10 +7,6 @@ const user = 'cypressUser'
 const adminUser = 'cypressAdminUser'
 
 describe('ReportPage tests', () => {
-  beforeEach(() => {
-    cy.givePermissions(user, testProgrammeCode, 'write')
-  })
-
   it('Piecharts are not shown if there are no answers', () => {
     cy.login(user)
     cy.visit('/')

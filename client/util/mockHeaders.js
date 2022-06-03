@@ -34,7 +34,7 @@ export const possibleUsers = [
     givenName: 'user',
     mail: 'cypress-user@helsinki.fi',
     schacDateOfBirth: 19990100,
-    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees;',
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees',
     sn: 'nah',
   },
   {
