@@ -278,7 +278,8 @@ describe('SuperAdmin user tests', () => {
 
   it('Can write to form and change from smiley table to trends view', () => {
     cy.login('cypressAdminUser')
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     cy.visit('/')

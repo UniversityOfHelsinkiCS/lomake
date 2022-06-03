@@ -4,11 +4,11 @@
 import { testProgrammeCode, defaultYears } from '../../config/common'
 
 const user = 'cypressUser'
-const adminUser = 'cypressAdminUser'
+const adminUser = 'cypressOspaUser'
 
 describe('ReportPage tests', () => {
   it('Piecharts are not shown if there are no answers', () => {
-    cy.login(user)
+    cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
@@ -144,7 +144,8 @@ describe('ReportPage tests', () => {
 
   it('Changes in smileys are reflected to the piecharts', () => {
     cy.login(user)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
     cy.visit('/')
