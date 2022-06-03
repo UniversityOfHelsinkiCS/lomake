@@ -37,6 +37,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
       }
       return Object({ key: `${q.labelIndex}. ${q.label}`, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
     }
+    return undefined
   })
 
   return (
