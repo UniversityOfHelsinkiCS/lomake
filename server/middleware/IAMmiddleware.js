@@ -12,7 +12,7 @@ const IAMmiddleware = async (req, _, next) => {
     // testing iam group based access granting
     const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
     user.access = {
-      ...user.access, 
+      ...user.access,
       ...newAccess
     }
     user.specialGroup = {

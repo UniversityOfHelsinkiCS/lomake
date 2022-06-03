@@ -84,6 +84,23 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
   })
 
+  /* Special cases with multiple rights groups */
+  it('Dean who is also a kojo gets reading rights to all programmes and admin rights to one programme', () => {
+    cy.login('cypressKojoDeanUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.hasAccess('cypressKojoDeanUser', 'MH50_001', { read: true, write: true, admin: true })
+    cy.hasAccess('cypressKojoDeanUser', 'KH50_001', { read: true, write: false, admin: false })
+  })
+
+  it('Kosu who is also a jory-member gets reading rights to all programmes and writing rights to one programme', () => {
+    cy.login('cypressKosuJoryUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
+    cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: false, admin: false })
+  })
+
   /* Maybe wrong spec file for these tests? */
 
   it('Report works', () => {

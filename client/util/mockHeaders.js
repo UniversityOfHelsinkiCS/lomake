@@ -119,6 +119,25 @@ export const possibleUsers = [
     sn: 'nah',
   },
   {
+    uid: 'cypressKojoDeanUser',
+    employeeNumber: 135,
+    givenName: 'kojoDeanUser',
+    mail: 'cypress-kojo-dean-user@helsinki.fi',
+    schacDateOfBirth: 19990109,
+    hyGroupCn: 'hy-mltdk-mast-jory;hy-mltdk-maisteri-kojot;hy-mltdk-dekanaatti',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressKosuJoryUser',
+    employeeNumber: 136,
+    givenName: 'kosuJoryUser',
+    mail: 'cypress-kosu-jory-user@helsinki.fi',
+    schacDateOfBirth: 19990110,
+    hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
+    sn: 'nah',
+  },
+
+  {
     uid: 'cypressInternationalUser',
   },
   {
