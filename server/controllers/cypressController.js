@@ -1,7 +1,8 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { cypressUsers, testProgrammeCode, defaultYears } = require('@util/common')
+const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
+const { cypressUids } = require('@root/config/mockHeaders')
 
 const getFakeAnswers = year => {
   const fields = [
@@ -61,11 +62,11 @@ const getFakeAnswers = year => {
 
 const resetUsers = async () => {
   try {
-    cypressUsers.forEach(async user => {
-      await db.user.destroy({ where: { uid: user.uid } })
-      await db.user.create(user)
+    await db.users.destroy({
+      where: {
+        uid: cypressUids,
+      },
     })
-
     logger.info('Cypress::resetUsers')
   } catch (error) {
     logger.error(`Database error: ${error}`)
