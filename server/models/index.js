@@ -10,10 +10,8 @@ const db = {}
 
 let sequelize
 if (config.use_env_variable) {
-  console.log("1: ", process.env[config.use_env_variable])
   sequelize = new Sequelize(process.env[config.use_env_variable], config)
 } else {
-  console.log("2: ", config.database_url)
   sequelize = new Sequelize(config.database_url, config)
 }
 

@@ -70,8 +70,8 @@ initializeDatabaseConnection()
 
     server.listen(PORT, () => {
       logger.info(`Started on port ${PORT}`)
-      // startBackupJob()
-      // startDeadlineWatcher()
+      startBackupJob()
+      startDeadlineWatcher()
     })
   })
   .catch(e => {
