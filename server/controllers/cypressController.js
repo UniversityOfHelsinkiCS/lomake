@@ -188,54 +188,6 @@ const seed = async (_, res) => {
   }
 }
 
-const givePermissions = async (req, res) => {
-  try {
-    logger.info('Cypress::giving permissions')
-
-    const { uid, programme, level } = req.params
-
-    const user = await db.user.findOne({ where: { uid } })
-
-    let permissions = {}
-    switch (level) {
-      case 'read':
-        permissions = {
-          read: true,
-        }
-        break
-
-      case 'write':
-        permissions = {
-          read: true,
-          write: true,
-        }
-        break
-
-      case 'admin':
-        permissions = {
-          read: true,
-          write: true,
-          admin: true,
-        }
-        break
-
-      default:
-        break
-    }
-
-    user.access = {
-      [programme]: permissions,
-    }
-
-    await user.save()
-
-    return res.status(200).send('OK')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const createAnswers = async (req, res) => {
   try {
     logger.info('Cypress::creating answers')
@@ -298,7 +250,6 @@ const createDeadline = async (req, res) => {
 
 module.exports = {
   seed,
-  givePermissions,
   createAnswers,
   createDeadline,
 }
