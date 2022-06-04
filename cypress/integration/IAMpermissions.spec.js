@@ -8,7 +8,7 @@ describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount() + 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
     cy.visit('/admin')
     cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
   })
@@ -38,7 +38,7 @@ describe('IAM permission tests', () => {
   it('Jory and corresponding kojo give admin access to programme', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
-
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
@@ -125,6 +125,6 @@ describe('IAM permission tests', () => {
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(getTotalProgrammeCount() + 1)
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(getTotalProgrammeCount())
   })
 })

@@ -61,11 +61,10 @@ const getFakeAnswers = year => {
 }
 
 const resetUsers = async () => {
+  console.log(cypressUids)
   try {
     await db.users.destroy({
-      where: {
-        uid: cypressUids,
-      },
+      where: { uid: cypressUids },
     })
     logger.info('Cypress::resetUsers')
   } catch (error) {
