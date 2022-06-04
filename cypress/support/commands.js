@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { setHeaders } from '../../client/util/mockHeaders'
+import { setHeaders } from '../../config/mockHeaders'
 
 /**
  * Logs in as specified user.

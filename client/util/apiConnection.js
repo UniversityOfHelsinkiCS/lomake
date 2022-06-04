@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getHeaders } from 'Utilities/mockHeaders'
+import { getHeaders } from '@root/config/mockHeaders'
 import { basePath, inProduction } from 'Utilities/common'
 
 /**

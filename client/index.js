@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { cypressUids, setHeaders } from 'Utilities/mockHeaders'
+import { cypressUids, setHeaders } from '@root/config/mockHeaders'
 
 import '../client/assets/custom.scss'
 
