@@ -288,8 +288,6 @@ jobs:
       - test_form_notifications
       - test_happy_path
       - test_iam_permissions
-      - test_international_2020
-      - test_links
       - test_management
       - test_misc
       - test_ospa
