@@ -156,7 +156,9 @@ const resetAnswers = async () => {
   }
 }
 
-const createDeadlineIfNoneExist = async () => {
+const resetDeadline = async () => {
+  await db.deadline.destroy({ where: {} })
+  await db.draftYear.destroy({ where: {} })
   const count = await db.deadline.count()
 
   if (count === 0) {
@@ -218,7 +220,7 @@ const seed = async (_, res) => {
     await resetUsers()
     await resetTokens()
     await resetForm()
-    await createDeadlineIfNoneExist()
+    await resetDeadline()
     await createTestProgramme()
     await createTempAnswersForTestProgramme()
 
