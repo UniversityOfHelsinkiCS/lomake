@@ -10,10 +10,10 @@ const IAMmiddleware = async (req, _, next) => {
 
   if (!inProduction || AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     // testing iam group based access granting
-    const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
-    user.access = newAccess
-    user.specialGroup = newSpecialGroup
-    await user.save()
+    // const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
+    // user.access = newAccess
+    // user.specialGroup = newSpecialGroup
+    // await user.save()
   }
 
   next()
