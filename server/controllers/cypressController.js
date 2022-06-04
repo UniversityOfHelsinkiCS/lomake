@@ -1,6 +1,6 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { cypressUsers, testProgrammeName, defaultYears } = require('@util/common')
+const { cypressUsers, testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
 
 const getFakeAnswers = year => {
@@ -72,69 +72,13 @@ const resetUsers = async () => {
   }
 }
 
-const resetTokens = async () => {
-  try {
-    await db.token.destroy({
-      where: {
-        programme: testProgrammeName,
-      },
-    })
-
-    const tokens = [
-      {
-        url: 'readTest',
-        programme: testProgrammeName,
-        type: 'READ',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'writeTest',
-        programme: testProgrammeName,
-        type: 'WRITE',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'adminTest',
-        programme: testProgrammeName,
-        type: 'ADMIN',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'facultyReadTest',
-        faculty: 'H50', // MatLu
-        type: 'READ',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'facultyReadDoctorTest',
-        faculty: 'H50', // MatLu
-        type: 'READ_DOCTOR',
-        valid: true,
-        usageCounter: 0,
-      },
-    ]
-
-    tokens.forEach(async token => {
-      await db.token.create(token)
-    })
-
-    logger.info('Cypress::resetTokens')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
 const resetForm = async () => {
   try {
     logger.info('Cypress::resetForm')
 
     await db.tempAnswer.destroy({
       where: {
-        programme: testProgrammeName,
+        programme: testProgrammeCode,
       },
     })
   } catch (error) {
@@ -148,7 +92,7 @@ const resetAnswers = async () => {
 
     await db.answer.destroy({
       where: {
-        programme: testProgrammeName,
+        programme: testProgrammeCode,
       },
     })
   } catch (error) {
@@ -177,7 +121,6 @@ const seed = async (_, res) => {
 
     await resetAnswers()
     await resetUsers()
-    await resetTokens()
     await resetForm()
     await resetDeadline()
 
