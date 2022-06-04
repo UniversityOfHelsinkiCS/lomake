@@ -1,31 +1,31 @@
-/* eslint-disable no-undef */
-/// <reference types="cypress" />
+// /* eslint-disable no-undef */
+// /// <reference types="cypress" />
 
-import { testProgrammeCode } from '../../config/common'
+// import { testProgrammeCode } from '../../config/common'
 
-describe('Misc tests', () => {
-  beforeEach(() => {
-    const user = 'cypressUser'
-    cy.login(user)
-    cy.visit('/')
-  })
+// describe('Misc tests', () => {
+//   beforeEach(() => {
+//     const user = 'cypressUser'
+//     cy.login(user)
+//     cy.visit('/')
+//   })
 
-  it('Locale can be changed and translations work', () => {
-    cy.visit(`/form/${testProgrammeCode}`)
-    cy.contains('Answers are saved automatically. ')
-    cy.get('[data-cy=navBar-localeDropdown]').click()
-    cy.get('[data-cy=navBar-localeOption-fi]').click()
-    cy.contains('Vastaukset tallentuvat automaattisesti.')
-  })
+//   it('Locale can be changed and translations work', () => {
+//     cy.visit(`/form/${testProgrammeCode}`)
+//     cy.contains('Answers are saved automatically. ')
+//     cy.get('[data-cy=navBar-localeDropdown]').click()
+//     cy.get('[data-cy=navBar-localeOption-fi]').click()
+//     cy.contains('Vastaukset tallentuvat automaattisesti.')
+//   })
 
-  it('CSV-download can be started on OverviewPage', () => {
-    cy.get('[data-cy=csv-download]').should('contain', 'Download')
-    cy.get('[data-cy=csv-download]').click()
-  })
+//   it('CSV-download can be started on OverviewPage', () => {
+//     cy.get('[data-cy=csv-download]').should('contain', 'Download')
+//     cy.get('[data-cy=csv-download]').click()
+//   })
 
-  it('CSV-download can be started on FormPage', () => {
-    cy.visit(`/form/${testProgrammeCode}`)
-    cy.get('[data-cy=csv-download]').should('contain', 'Download')
-    cy.get('[data-cy=csv-download]').click()
-  })
-})
+//   it('CSV-download can be started on FormPage', () => {
+//     cy.visit(`/form/${testProgrammeCode}`)
+//     cy.get('[data-cy=csv-download]').should('contain', 'Download')
+//     cy.get('[data-cy=csv-download]').click()
+//   })
+// })

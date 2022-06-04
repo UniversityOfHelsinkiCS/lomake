@@ -1,13 +1,13 @@
-/* eslint-disable no-undef */
-/// <reference types="cypress" />
+// /* eslint-disable no-undef */
+// /// <reference types="cypress" />
 
-describe('Core tests', () => {
-  beforeEach(() => {
-    cy.login('cypressNoRightsUser')
-    cy.visit('/')
-  })
+// describe('Core tests', () => {
+//   beforeEach(() => {
+//     cy.login('cypressNoRightsUser')
+//     cy.visit('/')
+//   })
 
-  it('Frontpage loads', () => {
-    cy.get('[data-cy=no-permissions-message]')
-  })
-})
+//   it('Frontpage loads', () => {
+//     cy.get('[data-cy=no-permissions-message]')
+//   })
+// })
