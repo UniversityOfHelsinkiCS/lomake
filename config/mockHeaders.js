@@ -154,6 +154,16 @@ const possibleUsers = [
     hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
     sn: 'nah',
   },
+  {
+    uid: 'cypressRandomRightsUser',
+    employeeNumber: 137,
+    givenName: 'randomRightsUser',
+    mail: 'cypress-random-rights-user@helsinki.fi',
+    schacDateOfBirth: 19990111,
+    hyGroupCn:
+      'hy-mltdk-geok-jory;random-iam-group-should-have-no-effect;hy-employees;random-iam-group-should-have-no-effect',
+    sn: 'nah',
+  },
 ]
 
 const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))

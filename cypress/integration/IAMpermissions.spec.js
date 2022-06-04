@@ -101,6 +101,26 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: false, admin: false })
   })
 
+  it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
+    cy.login('cypressRandomRightsUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+    cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+    cy.writeToTextField('[contenteditable="true"]', 'random')
+
+    cy.visit('/')
+    cy.reload()
+    cy.get('[data-cy=nav-report]').click()
+    cy.get('[data-cy=report-select-all]').click()
+    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
+    cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
+      'contain.text',
+      'random'
+    )
+    cy.hasAccess('cypressRandomRightsUser', 'KH50_006', { read: true, write: true, admin: false })
+  })
+
   /* Maybe wrong spec file for these tests? */
 
   it('Report works', () => {
