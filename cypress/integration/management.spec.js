@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeCode, iamsInUse } from '../../config/common'
+import { testProgrammeCode } from '../../config/common'
 
 describe('Management tests', () => {
   beforeEach(() => {
@@ -11,75 +11,6 @@ describe('Management tests', () => {
     cy.visit('/')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
   })
-
-  !iamsInUse &&
-    it('Giving admin permissions enables all permissions', () => {
-      cy.get('[data-cy=admin-cypressUser2-false]').click()
-      cy.get('[data-cy=grantPermissions-button]').click()
-
-      cy.get('[data-cy=read-cypressUser2]')
-      cy.get('[data-cy=write-cypressUser2]')
-      cy.get('[data-cy=admin-cypressUser2]')
-    })
-
-  !iamsInUse &&
-    it('Cant remove read/edit permissions if targetuser is admin, but can remove admin permissions.', () => {
-      cy.get('[data-cy=admin-cypressUser2-false]').click()
-      cy.get('[data-cy=grantPermissions-button]').click()
-
-      cy.get('[data-cy=read-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').should('be.disabled')
-
-      cy.get('[data-cy=write-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').should('be.disabled')
-
-      cy.get('[data-cy=admin-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').click()
-    })
-
-  !iamsInUse &&
-    it('Removing read permissions removed write permissions too', () => {
-      cy.get('[data-cy=admin-cypressUser2-false]').click()
-      cy.get('[data-cy=grantPermissions-button]').click()
-
-      cy.get('[data-cy=admin-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').click()
-
-      cy.get('[data-cy=read-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').click()
-
-      cy.get('[data-cy=read-cypressUser2]').should('not.exist')
-      cy.get('[data-cy=write-cypressUser2]').should('not.exist')
-      cy.get('[data-cy=admin-cypressUser2]').should('not.exist')
-    })
-
-  !iamsInUse &&
-    it('Cant remove permissions of last admin user remaining', () => {
-      cy.get('[data-cy=admin-cypressUser]').click()
-      cy.get('[data-cy=removePermissions-button]').should('be.disabled')
-    })
-
-  !iamsInUse &&
-    it('Can remove admin from self, once other user has admin permissions', () => {
-      cy.get('[data-cy=admin-cypressUser2-false]').click()
-      cy.get('[data-cy=grantPermissions-button]').click()
-
-      cy.get('[data-cy=admin-cypressUser]').click()
-      cy.get('[data-cy=removePermissions-button]').click()
-    })
-
-  !iamsInUse &&
-    it('Removing admin permissions only removes admin permissions', () => {
-      cy.get('[data-cy=admin-cypressUser2-false]').click()
-      cy.get('[data-cy=grantPermissions-button]').click()
-
-      cy.get('[data-cy=admin-cypressUser2]').click()
-      cy.get('[data-cy=removePermissions-button]').click()
-
-      cy.get('[data-cy=read-cypressUser2]')
-      cy.get('[data-cy=write-cypressUser2]')
-      cy.get('[data-cy=admin-cypressUser2-false]')
-    })
 
   it('Locking the form updates the display and prevents editing the form', () => {
     cy.get(`[data-cy=formLocker-button-close]`).click()
