@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { iamsInUse, testProgrammeCode } from '../../config/common'
+import { testProgrammeCode } from '../../config/common'
 
 describe('Misc tests', () => {
   beforeEach(() => {
@@ -28,12 +28,4 @@ describe('Misc tests', () => {
     cy.get('[data-cy=csv-download]').should('contain', 'Download')
     cy.get('[data-cy=csv-download]').click()
   })
-
-  // eslint-disable-next-line no-unused-expressions
-  !iamsInUse &&
-    it('Access keys are pre-generated', () => {
-      cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
-      cy.get(`[data-cy=${testProgrammeCode}-viewlink] > input`).invoke('val').should('contain', '/access/')
-      cy.get(`[data-cy=${testProgrammeCode}-editlink] > input`).invoke('val').should('contain', '/access/')
-    })
 })

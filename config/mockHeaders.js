@@ -1,6 +1,6 @@
 const ITEM_NAME = 'fakeUser'
 
-export const possibleUsers = [
+const possibleUsers = [
   {
     uid: 'admin',
     employeeNumber: undefined,
@@ -154,18 +154,28 @@ export const possibleUsers = [
     hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
     sn: 'nah',
   },
+  {
+    uid: 'cypressRandomRightsUser',
+    employeeNumber: 137,
+    givenName: 'randomRightsUser',
+    mail: 'cypress-random-rights-user@helsinki.fi',
+    schacDateOfBirth: 19990111,
+    hyGroupCn:
+      'hy-mltdk-geok-jory;random-iam-group-should-have-no-effect;hy-employees;random-iam-group-should-have-no-effect',
+    sn: 'nah',
+  },
 ]
 
-export const cypressUids = possibleUsers.map(u => u.uid).filter(uid => uid.startsWith('cypress'))
+const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
 
-export const setHeaders = uid => {
+const setHeaders = uid => {
   const user = possibleUsers.find(u => u.uid === uid)
   if (!user) return
 
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))
 }
 
-export const removeLoggedInUsersGroups = () => {
+const removeLoggedInUsersGroups = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME))
 
   localStorage.setItem(
@@ -177,11 +187,20 @@ export const removeLoggedInUsersGroups = () => {
   )
 }
 
-export const getHeaders = () => {
+const getHeaders = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
   return user
 }
 
-export const clearHeaders = () => {
+const clearHeaders = () => {
   localStorage.removeItem(ITEM_NAME)
+}
+
+module.exports = {
+  possibleUsers,
+  cypressUids,
+  setHeaders,
+  removeLoggedInUsersGroups,
+  getHeaders,
+  clearHeaders,
 }

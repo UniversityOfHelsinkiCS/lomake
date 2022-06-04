@@ -3,6 +3,7 @@
  */
 
 const { data } = require('./data')
+const { possibleUsers } = require('./mockHeaders')
 
 const inProduction = process.env.NODE_ENV === 'production'
 
@@ -173,50 +174,6 @@ const internationalAccess = {
   MH20_003: { read: true, year: 2020 },
 }
 
-const cypressUsers = [
-  {
-    uid: 'cypressUser',
-    firstname: 'cyp',
-    lastname: 'res',
-    email: 'cypressUser',
-    access: {},
-  },
-  {
-    uid: 'cypressUser2',
-    firstname: 'cyp2',
-    lastname: 'res2',
-    email: 'cypressUser2',
-    access: {},
-  },
-  {
-    uid: 'cypressUser3',
-    firstname: 'cyp3',
-    lastname: 'res3',
-    email: 'cypress-user-3@helsinki.fi',
-    specialGroup: {},
-    access: {
-      KH50_004: { read: true, write: true },
-      KH80_001: { read: true, write: true, admin: true },
-      KH50_003: { read: true },
-    },
-  },
-  {
-    uid: 'cypressInternationalUser',
-    firstname: 'cyp4',
-    lastname: 'res4',
-    email: 'cypress-international-user@helsinki.fi',
-    specialGroup: { international2020: true },
-    access: internationalAccess,
-  },
-  {
-    uid: 'cypressAdminUser',
-    firstname: 'cypress',
-    lastname: 'admin',
-    email: 'cypressAdminUser',
-    specialGroup: { admin: true },
-  },
-]
-
 const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
@@ -236,7 +193,6 @@ module.exports = {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
-  cypressUsers,
   testProgrammeCode,
   testProgrammeName,
   LOMAKE_SINCE_YEAR,

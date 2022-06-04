@@ -277,7 +277,26 @@ describe('SuperAdmin user tests', () => {
     })
 
   it('Can write to form and change from smiley table to trends view', () => {
-    cy.login('cypressAdminUser')
+    cy.login('cypressSuperAdminUser')
+
+    // Create a new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+    cy.get('.react-datepicker__input-container > input').click() // Open datepicked
+    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__day--014').click() // Select 14th day
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+
+    cy.get('[data-cy=updateDeadline]').click()
+    cy.get('[data-cy=nextDeadline]').contains('14.')
+
+    // Login as another user to see if answers can be created
+    cy.login('cypressUser')
     cy.visit('/')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-positive-community_wellbeing]').click()

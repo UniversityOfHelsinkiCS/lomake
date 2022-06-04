@@ -9,7 +9,8 @@ const adminUser = 'cypressOspaUser'
 describe('ComparisonPage tests', () => {
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
     cy.reload()
     cy.visit('/comparison')
@@ -34,7 +35,7 @@ describe('ComparisonPage tests', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount() + 1
+      helpers.getTotalProgrammeCount()
     )
   })
 

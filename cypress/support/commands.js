@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { setHeaders } from '../../client/util/mockHeaders'
+import { setHeaders } from '../../config/mockHeaders'
 
 /**
  * Logs in as specified user.
@@ -10,17 +10,6 @@ import { setHeaders } from '../../client/util/mockHeaders'
 Cypress.Commands.add('login', uid => {
   setHeaders(uid)
   cy.log('Logged in as', uid)
-})
-
-/**
- * Gives permissions to user.
- * @param {string} uid Uid of user to grant permissions
- * @param {string} programme Name of programme to give rights for
- * @param {string} level Level of permissions to give (read,write,admin)
- */
-Cypress.Commands.add('givePermissions', (uid, programme, level) => {
-  cy.request(`/api/cypress/givePermissions/${uid}/${programme}/${level}`)
-  cy.log(`Gave ${level}-permissions for ${programme} to ${uid}`)
 })
 
 /**

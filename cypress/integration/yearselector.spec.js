@@ -6,7 +6,6 @@ import { defaultYears, testProgrammeCode } from '../../config/common'
 describe("Previous year's answers", () => {
   beforeEach(() => {
     const user = 'cypressUser'
-    cy.givePermissions(user, testProgrammeCode, 'admin')
     cy.login(user)
     cy.visit('/')
   })
