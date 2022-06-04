@@ -171,47 +171,6 @@ const resetDeadline = async () => {
   }
 }
 
-const createTestProgramme = async () => {
-  try {
-    logger.info('Creating testprogramme')
-
-    await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
-
-    const matluId = (await db.faculty.findOne({ where: { code: 'H50' } })).id
-
-    await db.studyprogramme.create({
-      key: testProgrammeName,
-      name: {
-        en: 'TOSKA-en',
-        fi: 'TOSKA-fi',
-        se: 'TOSKA-se',
-      },
-      locked: false,
-      claimed: false,
-      primaryFacultyId: matluId,
-    })
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
-const createTempAnswersForTestProgramme = async () => {
-  try {
-    logger.info('Creating tempAnswers for test programme')
-    await db.tempAnswer.destroy({ where: { programme: testProgrammeName }})
-
-    defaultYears.forEach(async year => {
-      await db.tempAnswer.create({
-        programme: testProgrammeName,
-        data: {},
-        year,
-      })
-    })
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
 const seed = async (_, res) => {
   try {
     logger.info('Cypress::seeding database')
@@ -221,8 +180,6 @@ const seed = async (_, res) => {
     await resetTokens()
     await resetForm()
     await resetDeadline()
-    await createTestProgramme()
-    await createTempAnswersForTestProgramme()
 
     return res.status(200).send('OK')
   } catch (error) {
