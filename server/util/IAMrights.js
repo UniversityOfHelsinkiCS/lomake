@@ -100,6 +100,7 @@ const getDoctoralSchoolReadingRights = hyGroups => {
   const doctoralProgrammeCodes = hyGroups.map(group => getDoctoralSchoolReadingRights(group)).flatMap()
   const newDoctoralProgramAccess = {}
   doctoralProgrammeCodes.forEach(code => {
+    if (!code.length) return
     newDoctoralProgramAccess[code] = { read: true }
   })
   return newDoctoralProgramAccess
@@ -118,6 +119,7 @@ const getProgramAdminAccess = hyGroups => {
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
+    if (!code.length) return
     newAccess[code] = { read: true, write: true, admin: true }
   })
 
@@ -134,6 +136,7 @@ const getWriteAccess = hyGroups => {
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
+    if (!code.length) return
     newAccess[code] = { read: true, write: true }
   })
 
@@ -149,9 +152,9 @@ const getReadAccess = hyGroups => {
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const newAccess = {}
   degreeCodes.forEach(code => {
+    if (!code.length) return
     newAccess[code] = { read: true }
   })
-
   return newAccess
 }
 
