@@ -3,6 +3,7 @@ const logger = require('@util/logger')
 const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
 const { cypressUids } = require('@root/config/mockHeaders')
+const { createDraftAnswers } = require('./../scripts/draftAndFinalAnswers')
 
 const getFakeAnswers = year => {
   const fields = [
@@ -101,17 +102,38 @@ const resetAnswers = async () => {
 }
 
 const resetDeadline = async () => {
-  await db.deadline.destroy({ where: {} })
-  await db.draftYear.destroy({ where: {} })
-  const count = await db.deadline.count()
+  const deadline = moment().add(7, 'days')
+  const draftYear = defaultYears[0]
 
-  if (count === 0) {
-    await db.deadline.create({
-      date: new Date(),
-    })
-    await db.draftYear.create({
-      year: new Date().getFullYear(),
-    })
+  try {
+    // Unlock all programmes
+    await db.studyprogramme.update({ locked: false }, { where: {} })
+
+    // Create new or update old deadline
+    const existingDeadlines = await db.deadline.findAll({})
+    if (existingDeadlines.length === 0) {
+      await db.deadline.create({
+        date: deadline,
+      })
+    } else {
+      existingDeadlines[0].date = deadline
+      await existingDeadlines[0].save()
+    }
+
+    // Create new or update old draft year
+    const existingDraftYears = await db.draftYear.findAll({})
+    if (existingDraftYears.length === 0) {
+      await db.draftYear.create({
+        year: draftYear,
+      })
+    } else {
+      existingDraftYears[0].year = draftYear
+      await existingDraftYears[0].save()
+    }
+
+    await createDraftAnswers(draftYear)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
   }
 }
 
@@ -168,31 +190,7 @@ const createAnswers = async (req, res) => {
   }
 }
 
-const createDeadline = async (req, res) => {
-  try {
-    logger.info(`Cypress::creating a new deadline`)
-
-    await db.deadline.destroy({ where: {} })
-    await db.draftYear.destroy({ where: {} })
-
-    const deadline = await db.deadline.create({
-      date: moment().add(7, 'days'),
-    })
-
-    const draftYear = await db.draftYear.create({
-      year: req.params.year,
-    })
-
-    logger.info(`Cypress::deadline created: ${deadline}, draftYear created: ${draftYear}`)
-    return res.status(200).send('OK')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 module.exports = {
   seed,
   createAnswers,
-  createDeadline,
 }

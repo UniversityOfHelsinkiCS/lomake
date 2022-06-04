@@ -278,6 +278,8 @@ describe('SuperAdmin user tests', () => {
 
   it('Can write to form and change from smiley table to trends view', () => {
     cy.login('cypressSuperAdminUser')
+
+    // Create a new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 

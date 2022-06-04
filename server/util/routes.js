@@ -60,6 +60,5 @@ router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers', notInProduction, cypress.createAnswers)
-router.get('/cypress/createDeadline/:year', notInProduction, cypress.createDeadline)
 
 module.exports = router
