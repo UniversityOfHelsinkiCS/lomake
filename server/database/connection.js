@@ -25,7 +25,9 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const initializeDatabaseConnection = async (attempt = 1) => {
   try {
     await sequelize.authenticate()
+    console.log("Authentication succeeded")
     await runMigrations()
+    console.log("Migrations succeeded")
     return true
   } catch (e) {
     if (attempt === DB_CONNECTION_RETRY_LIMIT) {
