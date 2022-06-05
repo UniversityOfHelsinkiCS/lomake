@@ -9,21 +9,23 @@ const shouldBeSuperAdmin = uid => {
 }
 
 const userMiddleware = async (req, res, next) => {
-  if (req.path.includes('socket.io')) next()
-  if (req.path.includes('/cypress/')) return next()
-  if (!req.headers.uid) {
+  const { headers, path } = req
+  if (path.includes('socket.io')) next()
+  if (path.includes('/cypress/')) return next()
+  const { uid, givenname, sn, mail } = headers
+  if (!uid) {
     logger.error('missing uid')
     return res.status(400).json({ error: 'missing uid' })
   }
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {
-        uid: req.headers.uid,
+        uid,
       },
       defaults: {
-        firstname: req.headers.givenname,
-        lastname: req.headers.sn,
-        email: req.headers.mail,
+        firstname: givenname,
+        lastname: sn,
+        email: mail,
         access: {},
         specialGroup: shouldBeSuperAdmin(req.headers.uid),
       },

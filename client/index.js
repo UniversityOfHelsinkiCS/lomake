@@ -7,7 +7,7 @@ import { cypressUids, setHeaders } from '@root/config/mockHeaders'
 import '../client/assets/custom.scss'
 
 import store from 'Utilities/store'
-import { basePath } from 'Utilities/common'
+import { basePath, iamsInUse } from 'Utilities/common'
 import App from 'Components/App'
 import ErrorBoundary from 'Components/ErrorBoundary'
 
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
   const newUser = 'admin'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
 
-  if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
+  if (!currentFakeUser || (!iamsInUse && !cypressUids.includes(JSON.parse(currentFakeUser).uid))) {
     setHeaders(newUser)
   }
 }
