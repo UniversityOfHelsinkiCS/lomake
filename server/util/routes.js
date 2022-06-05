@@ -40,7 +40,7 @@ router.get('/programmes/:programme', studyprogrammes.getOne)
 router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
 router.post('/programmes/update', checkAdmin, studyprogrammes.updateAll)
 
-router.post('/login', users.getCurrentUser)
+router.post('/login', users.getCurrentUser) // IAM-middleware checks this path
 router.post('/logout', users.getLogoutUrl)
 
 router.get('/users', checkAdmin, users.getAllUsers)

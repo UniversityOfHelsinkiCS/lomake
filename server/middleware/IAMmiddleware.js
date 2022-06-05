@@ -8,7 +8,7 @@ const IAMmiddleware = async (req, _, next) => {
   const { user } = req
   const { headers } = req
 
-  if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
+  if (req.path.includes('login') && AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
     user.access = newAccess
     user.specialGroup = newSpecialGroup
