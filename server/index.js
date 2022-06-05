@@ -1,7 +1,7 @@
 const express = require('express')
 const routes = require('@util/routes')
 const externalRouter = require('@util/externalRoutes')
-const { iamsInUse } = require('@util/common')
+const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const logger = require('@util/logger')
 
 const errorMiddleware = require('@middleware/errorMiddleware')
@@ -22,7 +22,7 @@ app.use('/external', externalRouter)
 app.use(shibbolethCharsetMiddleware)
 app.use(userMiddleware)
 
-if (iamsInUse) {
+if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
   logger.info('Automatic IAM permissions enabled')
   app.use(IAMmiddleware)
 }

@@ -1,4 +1,4 @@
-const { iamsInUse } = require('../../config/common')
+const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const { getIAMRights } = require('@util/IAMrights')
 
 const IAMmiddleware = async (req, _, next) => {
@@ -8,7 +8,7 @@ const IAMmiddleware = async (req, _, next) => {
   const { user } = req
   const { headers } = req
 
-  if (iamsInUse) {
+  if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
     const { newAccess, newSpecialGroup } = getIAMRights(headers?.hygroupcn)
     user.access = newAccess
     user.specialGroup = newSpecialGroup

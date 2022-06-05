@@ -3,12 +3,13 @@
  */
 
 const { data } = require('./data')
+const { possibleUsers } = require('./mockHeaders')
 
 const inProduction = process.env.NODE_ENV === 'production'
 
 // Once the iams are in use, turn this to true
 // And later on, once everything is ok, remove the features behind this flag
-const iamsInUse = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === true
+const iamsInUse = true
 
 const basePath = process.env.BASE_PATH || '/'
 
