@@ -136,6 +136,44 @@ const isInternationalUser = user => {
   return false
 }
 
+const internationalAccess = {
+  MH50_004: { read: true, year: 2020 },
+  MH50_010: { read: true, year: 2020 },
+  MH40_005: { read: true, year: 2020 },
+  MH57_001: { read: true, year: 2020 },
+  MH80_004: { read: true, year: 2020 },
+  MH50_002: { read: true, year: 2020 },
+  MH40_003: { read: true, year: 2020 },
+  MH40_011: { read: true, year: 2020 },
+  MH70_006: { read: true, year: 2020 },
+  MH57_003: { read: true, year: 2020 },
+  MH50_011: { read: true, year: 2020 },
+  MH70_003: { read: true, year: 2020 },
+  MH80_005: { read: true, year: 2020 },
+  MH50_006: { read: true, year: 2020 },
+  MH20_002: { read: true, year: 2020 },
+  MH57_002: { read: true, year: 2020 },
+  MH50_013: { read: true, year: 2020 },
+  MH50_007: { read: true, year: 2020 },
+  MH50_012: { read: true, year: 2020 },
+  MH80_002: { read: true, year: 2020 },
+  MH80_001: { read: true, year: 2020 },
+  MH50_001: { read: true, year: 2020 },
+  MH50_005: { read: true, year: 2020 },
+  MH80_003: { read: true, year: 2020 },
+  MH80_007: { read: true, year: 2020 },
+  MH57_004: { read: true, year: 2020 },
+  MH70_005: { read: true, year: 2020 },
+  MH70_009: { read: true, year: 2020 },
+  MH50_003: { read: true, year: 2020 },
+  MH50_009: { read: true, year: 2020 },
+  MH30_002: { read: true, year: 2020 },
+  MH40_004: { read: true, year: 2020 },
+  MH57_005: { read: true, year: 2020 },
+  MH60_002: { read: true, year: 2020 },
+  MH20_003: { read: true, year: 2020 },
+}
+
 const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
@@ -143,6 +181,7 @@ const testProgrammeName = `Bachelor's Programme in Computer Science`
 module.exports = {
   iamsInUse,
   inProduction,
+  internationalAccess,
   basePath,
   defaultYears,
   degreeLevels,
