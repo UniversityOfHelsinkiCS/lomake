@@ -34,7 +34,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
-      'kissa'
+      'kiss'
     )
   })
 
@@ -153,6 +153,6 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('be.visible').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text]')
-    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
+    cy.get('path').eq(1).should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
   })
 })

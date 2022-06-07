@@ -14,7 +14,7 @@ describe('Management tests', () => {
 
   it('Locking the form updates the display and prevents editing the form', () => {
     cy.get(`[data-cy=formLocker-button-close]`).click()
-    cy.get(`[data-cy=formLocker-verify-close-button]`).click()
+    cy.get(`[data-cy=formLocker-verify-close-button]`).click({ waitForAnimations: false })
     cy.get(`[data-cy=formLocker-button-open]`)
     cy.get(`[data-cy=formLocker-verify-open-button]`)
 
