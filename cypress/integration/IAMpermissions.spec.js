@@ -35,10 +35,10 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressJoryReadUser', 'KH10_001', { read: true })
   })
 
-  it('Jory and corresponding kojo give admin access to programme', () => {
+  it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 

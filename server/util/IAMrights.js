@@ -6,6 +6,7 @@ const {
   getStudyLeaderGroup,
   iamToOrganisationCode,
   isEmployeeIam,
+  iamToDoctoralSchool,
 } = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -24,6 +25,24 @@ const parseHyGroupsFromHeader = hyGroups => {
 }
 
 /**
+ * Return given access to all programmes where predicate is true
+ * (all if no predicate defined)
+ * @param {object} accessLevel 
+ * @param {(program: object) => boolean} where 
+ * @returns {object} access to programmes
+ */
+const getAllProgrammeAccess = (accessLevel, where) => {
+  const access = {}
+  data.forEach(faculty => {
+    faculty.programmes.forEach(program => {
+      if (where?.(program) === false) return
+      access[program.key] = { ...accessLevel }
+    })
+  })
+  return access
+}
+
+/**
  * Grant super-admin rights to the Form if the user has correct iams (eg. grp-toska)
  * @param {string[]} hyGroups
  * @returns superAdmin special group
@@ -31,8 +50,9 @@ const parseHyGroupsFromHeader = hyGroups => {
 const getSuperAdmin = hyGroups => {
   const isToska = hyGroups.some(isSuperAdminIam)
   if (isToska) {
-    return { superAdmin: true }
+    return { specialGroup: { superAdmin: true } }
   }
+  return {}
 }
 
 /**
@@ -43,8 +63,9 @@ const getSuperAdmin = hyGroups => {
 const getAdmin = hyGroups => {
   const isOspa = hyGroups.some(isAdminIam)
   if (isOspa) {
-    return { admin: true }
+    return { specialGroup: { admin: true } }
   }
+  return {}
 }
 
 /**
@@ -54,17 +75,14 @@ const getAdmin = hyGroups => {
  */
 const getUniversityReadingRights = hyGroups => {
   const hasUniversityReadingRights = hyGroups.some(isUniversityWideIam)
-  const newUniversityWideReadAccess = {}
-  const newUniversityWideSpecialGroups = {}
-  if (hasUniversityReadingRights) {
-    newUniversityWideSpecialGroups.allProgrammes = true
-    data.forEach(faculty => {
-      faculty.programmes.forEach(program => {
-        newUniversityWideReadAccess[program.key] = { read: true }
-      })
-    })
+  if (!hasUniversityReadingRights) {
+    return {}
   }
-  return { newUniversityWideReadAccess, newUniversityWideSpecialGroups }
+
+  const access = getAllProgrammeAccess({ read: true })
+  const specialGroup = { allProgrammes: true }
+
+  return { access, specialGroup }
 }
 
 /**
@@ -72,22 +90,13 @@ const getUniversityReadingRights = hyGroups => {
  * @param {string[]} hyGroups
  * @returns read access to ALL doctoral programs
  */
-const getDoctoralReadingRights = hyGroups => {
+const getDoctoralAccess = hyGroups => {
   const hasDoctoralReadingRights = hyGroups.some(isDoctoralIam)
-  const newDoctoralReadAccess = {}
-  const newDoctoralSpecialGroups = {}
-  if (hasDoctoralReadingRights) {
-    newDoctoralSpecialGroups.doctoral = true
-    data.forEach(faculty => {
-      faculty.programmes.forEach(program => {
-        if (program.level === 'doctoral') {
-          newDoctoralReadAccess[program.key] = { read: true }
-        }
-      })
-    })
-  }
+  if (!hasDoctoralReadingRights) return {}
+  const access = getAllProgrammeAccess({ read: true}, (program) => program.level === 'doctoral')
+  const specialGroup = { doctoral: true }
 
-  return { newDoctoralReadAccess, newDoctoralSpecialGroups }
+  return { access, specialGroup }
 }
 
 /**
@@ -96,66 +105,70 @@ const getDoctoralReadingRights = hyGroups => {
  * @param {string[]} hyGroups
  * @returns read access to doctoral programs
  */
-const getDoctoralSchoolReadingRights = hyGroups => {
-  const doctoralProgrammeCodes = hyGroups.map(group => getDoctoralSchoolReadingRights(group)).flatMap()
-  const newDoctoralProgramAccess = {}
+const getDoctoralSchoolAccess = hyGroups => {
+  const doctoralProgrammeCodes = hyGroups.flatMap(iamToDoctoralSchool)
+  const access = {}
   doctoralProgrammeCodes.forEach(code => {
-    if (!code.length) return
-    newDoctoralProgramAccess[code] = { read: true }
+    if (!code) return
+    access[code] = { read: true }
   })
-  return newDoctoralProgramAccess
+  return { access }
 }
 
 /**
  * Grant admin access if the user belongs to studyprogramme's manager group and is a study program leader
  * @param {string[]} hyGroups
  */
-const getProgramAdminAccess = hyGroups => {
+const getProgrammeAdminAccess = hyGroups => {
   const orgCodes = hyGroups
     .filter(iam => hyGroups.includes(getStudyLeaderGroup(iam)))
     .map(iam => iamToOrganisationCode(iam))
     .filter(Boolean)
 
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
-  const newAccess = {}
-  degreeCodes.forEach(code => {
-    if (!code.length) return
-    newAccess[code] = { read: true, write: true, admin: true }
-  })
+  
+  if (!degreeCodes?.length > 0) {
+    return {}
+  }
 
-  return newAccess
+  const access = {}
+  degreeCodes.forEach(code => {
+    access[code] = { read: true, write: true, admin: true }
+  })
+  return { access }
 }
 
 /**
  * Grant write and read access if the user belongs to employees group and studyprogramme's manager group
  * @param {string[]} hyGroups
  */
-const getWriteAccess = hyGroups => {
-  if (!hyGroups.some(isEmployeeIam)) return
+const getProgrammeWriteAccess = hyGroups => {
+  if (!hyGroups.some(isEmployeeIam)) return {}
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
-  const newAccess = {}
+  const access = {}
   degreeCodes.forEach(code => {
-    if (!code.length) return
-    newAccess[code] = { read: true, write: true }
+    if (!code) return
+    access[code] = { read: true, write: true }
   })
 
-  return newAccess
+  return { access }
 }
 
 /**
  * Grant read access if the user belongs to studyprogramme's manager group
  * @param {string[]} hyGroups
  */
-const getReadAccess = hyGroups => {
+const getProgrammeReadAccess = hyGroups => {
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
-  const newAccess = {}
+  const access = {}
   degreeCodes.forEach(code => {
-    if (!code.length) return
-    newAccess[code] = { read: true }
+    if (!code) return
+    access[code] = { read: true }
   })
-  return newAccess
+
+  return { access }
 }
 
 /**
@@ -165,28 +178,25 @@ const getReadAccess = hyGroups => {
  */
 const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
+  let access = {}
+  let specialGroup = {}
 
-  const { newDoctoralReadAccess, newDoctoralSpecialGroups } = getDoctoralReadingRights(hyGroups)
-
-  const { newUniversityWideReadAccess, newUniversityWideSpecialGroups } = getUniversityReadingRights(hyGroups)
-
-  const newAccess = {
-    ...newUniversityWideReadAccess,
-    ...newDoctoralReadAccess,
-    ...getDoctoralSchoolReadingRights,
-    ...getReadAccess(hyGroups),
-    ...getWriteAccess(hyGroups),
-    ...getProgramAdminAccess(hyGroups), // order matters here: last overwrites previous keys
-  }
-
-  const newSpecialGroup = {
-    ...newUniversityWideSpecialGroups,
-    ...newDoctoralSpecialGroups,
-    ...getAdmin(hyGroups),
-    ...getSuperAdmin(hyGroups),
-  }
-
-  return { newAccess, newSpecialGroup }
+  ;[
+    getUniversityReadingRights,
+    getDoctoralAccess,
+    getDoctoralSchoolAccess,
+    getProgrammeReadAccess,
+    getProgrammeWriteAccess,
+    getProgrammeAdminAccess,
+    getAdmin,
+    getSuperAdmin
+  ].map(f => f(hyGroups))
+    .forEach(({ access: newAccess, specialGroup: newSpecialGroup }) => {
+      access = { ...access, ...newAccess }
+      specialGroup = { ...specialGroup, ...newSpecialGroup }
+    })
+  
+  return { access, specialGroup } 
 }
 
 module.exports = {
