@@ -20,7 +20,7 @@ describe('Form Notification tests', () => {
     cy.visit(`/`)
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get(`[data-cy=formLocker-button-close]`).click()
-    cy.get(`[data-cy=formLocker-verify-close-button]`).click()
+    cy.get(`[data-cy=formLocker-verify-close-button]`).click({ waitForAnimations: false })
 
     cy.login('cypressUser')
     cy.visit('/')
