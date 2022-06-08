@@ -290,15 +290,7 @@ const doctoralSchoolMap = {
 }
 
 const universityWideGroups = [
-  'hy-ypa-opa-opintoasiainpaallikot',
   'hy-rehtoraatti',
-  'hy-ypa-opa-kosu-kumpula',
-  'hy-ypa-opa-kosu-meilahti',
-  'hy-ypa-opa-kosu-kruununhaka',
-  'hy-ypa-opa-kosu-metsatalo',
-  'hy-ypa-opa-kosu-porthania',
-  'hy-ypa-opa-kosu-siltavuori',
-  'hy-ypa-opa-kosu-viikki',
   'hy-ttdk-dekanaatti',
   'hy-oiktdk-dekanaatti',
   'hy-ltdk-dekanaatti',
@@ -313,6 +305,17 @@ const universityWideGroups = [
   'hy-eltdk-dekanaatti',
 ].concat(Object.values(kojoMap))
 
+const isUniversityWideWritingGroups = [
+  'hy-ypa-opa-opintoasiainpaallikot',
+  'hy-ypa-opa-kosu-kumpula',
+  'hy-ypa-opa-kosu-meilahti',
+  'hy-ypa-opa-kosu-kruununhaka',
+  'hy-ypa-opa-kosu-metsatalo',
+  'hy-ypa-opa-kosu-porthania',
+  'hy-ypa-opa-kosu-siltavuori',
+  'hy-ypa-opa-kosu-viikki',
+]
+
 const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['grp-ospa']
@@ -324,6 +327,8 @@ const isSuperAdminIam = iam => superAdminGroups.includes(iam)
 const isAdminIam = iam => adminGroups.includes(iam)
 
 const isUniversityWideIam = iam => universityWideGroups.includes(iam)
+
+const isUniversityWideWritingIam = iam => isUniversityWideWritingGroups.includes(iam)
 
 const isDoctoralIam = iam => doctoralIams.includes(iam)
 
@@ -345,6 +350,7 @@ module.exports = {
   isSuperAdminIam,
   isAdminIam,
   isUniversityWideIam,
+  isUniversityWideWritingIam,
   isDoctoralIam,
   isEmployeeIam,
   iamToDoctoralSchool,

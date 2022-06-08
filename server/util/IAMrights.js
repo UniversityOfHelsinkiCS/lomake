@@ -2,6 +2,7 @@ const {
   isSuperAdminIam,
   isAdminIam,
   isUniversityWideIam,
+  isUniversityWideWritingIam,
   isDoctoralIam,
   getStudyLeaderGroup,
   iamToOrganisationCode,
@@ -86,6 +87,23 @@ const getUniversityReadingRights = hyGroups => {
 }
 
 /**
+ * Grant writing rights to all programmes if user has kosu rights
+ * @param {string[]} hyGroups
+ * @returns read access to ALL programmes
+ */
+const getUniversityWriteAccess = hyGroups => {
+  const hasUniversityWritingRights = hyGroups.some(isUniversityWideWritingIam)
+  if (!hasUniversityWritingRights) {
+    return {}
+  }
+
+  const access = getAllProgrammeAccess({ read: true, write: true })
+  const specialGroup = { allProgrammes: true }
+
+  return { access, specialGroup }
+}
+
+/**
  * Grant reading rights to all doctoral programmes if the user belongs to doctoral IAM
  * @param {string[]} hyGroups
  * @returns read access to ALL doctoral programs
@@ -93,7 +111,7 @@ const getUniversityReadingRights = hyGroups => {
 const getDoctoralAccess = hyGroups => {
   const hasDoctoralReadingRights = hyGroups.some(isDoctoralIam)
   if (!hasDoctoralReadingRights) return {}
-  const access = getAllProgrammeAccess({ read: true}, (program) => program.level === 'doctoral')
+  const access = getAllProgrammeAccess({ read: true }, program => program.level === 'doctoral')
   const specialGroup = { doctoral: true }
 
   return { access, specialGroup }
@@ -126,7 +144,7 @@ const getProgrammeAdminAccess = hyGroups => {
     .filter(Boolean)
 
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
-  
+
   if (!degreeCodes?.length > 0) {
     return {}
   }
@@ -187,16 +205,18 @@ const getIAMRights = hyGroupsHeader => {
     getDoctoralSchoolAccess,
     getProgrammeReadAccess,
     getProgrammeWriteAccess,
+    getUniversityWriteAccess,
     getProgrammeAdminAccess,
     getAdmin,
     getSuperAdmin
-  ].map(f => f(hyGroups))
+  ]
+    .map(f => f(hyGroups))
     .forEach(({ access: newAccess, specialGroup: newSpecialGroup }) => {
       access = { ...access, ...newAccess }
       specialGroup = { ...specialGroup, ...newSpecialGroup }
     })
-  
-  return { access, specialGroup } 
+
+  return { access, specialGroup }
 }
 
 module.exports = {
