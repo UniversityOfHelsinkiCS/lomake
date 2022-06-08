@@ -12,6 +12,8 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
+  const [amountOfMeasures, setAmountOfMeasures] = useState(1)
+
   useEffect(() => {
     let measureNumber = 5
     while (measureNumber >= 1) {
@@ -44,8 +46,6 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
   }
 
   const previousAnswerText = getPreviousMeasureAnswers()
-
-  const [amountOfMeasures, setAmountOfMeasures] = useState(1)
 
   return (
     <>

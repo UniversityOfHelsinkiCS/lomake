@@ -59,6 +59,13 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     }
   }, [currentEditors])
 
+  const editorStateFromRedux = () => {
+    const rawData = markdownToDraft(dataFromRedux)
+    const contentState = convertFromRaw(rawData)
+    return EditorState.createWithContent(contentState)
+  }
+  const [editorState, setEditorState] = useState(editorStateFromRedux())
+
   useEffect(() => {
     if (!hasLock) {
       setEditorState(editorStateFromRedux())
@@ -72,13 +79,6 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
     dispatch(updateFormField(fieldName, markdownStr))
   }
-
-  const editorStateFromRedux = () => {
-    const rawData = markdownToDraft(dataFromRedux)
-    const contentState = convertFromRaw(rawData)
-    return EditorState.createWithContent(contentState)
-  }
-  const [editorState, setEditorState] = useState(editorStateFromRedux())
 
   const { length } = editorState.getCurrentContent().getPlainText()
 

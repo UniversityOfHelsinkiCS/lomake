@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { cypressUids, setHeaders } from '@root/config/mockHeaders'
 
-import '../client/assets/custom.scss'
+import './assets/custom.scss'
 
 import store from 'Utilities/store'
 import { basePath } from 'Utilities/common'
