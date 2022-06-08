@@ -4,6 +4,7 @@ const {
   isUniversityWideIam,
   isUniversityWideWritingIam,
   isDoctoralIam,
+  isDoctoralWritingIam,
   getStudyLeaderGroup,
   iamToOrganisationCode,
   isEmployeeIam,
@@ -87,9 +88,9 @@ const getUniversityReadingRights = hyGroups => {
 }
 
 /**
- * Grant writing rights to all programmes if user has kosu rights
+ * Grant writing rights to all programmes if user has uni wide writing IAM (eg. is a kosu)
  * @param {string[]} hyGroups
- * @returns read access to ALL programmes
+ * @returns write access to ALL programmes
  */
 const getUniversityWriteAccess = hyGroups => {
   const hasUniversityWritingRights = hyGroups.some(isUniversityWideWritingIam)
@@ -112,6 +113,20 @@ const getDoctoralAccess = hyGroups => {
   const hasDoctoralReadingRights = hyGroups.some(isDoctoralIam)
   if (!hasDoctoralReadingRights) return {}
   const access = getAllProgrammeAccess({ read: true }, program => program.level === 'doctoral')
+  const specialGroup = { doctoral: true }
+
+  return { access, specialGroup }
+}
+
+/**
+ * Grant writing rights to all doctoral programmes if the user belongs to doctoral writing IAM (eg. doctoral kosu)
+ * @param {string[]} hyGroups
+ * @returns write access to ALL doctoral programs
+ */
+const getDoctoralWriteAccess = hyGroups => {
+  const hasDoctoralWritingRights = hyGroups.some(isDoctoralWritingIam)
+  if (!hasDoctoralWritingRights) return {}
+  const access = getAllProgrammeAccess({ read: true, write: true }, program => program.level === 'doctoral')
   const specialGroup = { doctoral: true }
 
   return { access, specialGroup }
@@ -205,6 +220,7 @@ const getIAMRights = hyGroupsHeader => {
     getDoctoralSchoolAccess,
     getProgrammeReadAccess,
     getProgrammeWriteAccess,
+    getDoctoralWriteAccess,
     getUniversityWriteAccess,
     getProgrammeAdminAccess,
     getAdmin,

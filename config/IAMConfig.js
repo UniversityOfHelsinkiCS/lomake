@@ -260,6 +260,8 @@ const kojoMap = {
 
 const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
 
+const doctoralWritingIams = ['hy-ypa-tutto-toht']
+
 const doctoralSchoolMap = {
   'hy-tutkijakoulut-hymy-jory': [
     'T920101',
@@ -332,6 +334,8 @@ const isUniversityWideWritingIam = iam => isUniversityWideWritingGroups.includes
 
 const isDoctoralIam = iam => doctoralIams.includes(iam)
 
+const isDoctoralWritingIam = iam => doctoralWritingIams.includes(iam)
+
 const isEmployeeIam = iam => employeeGroups.includes(iam)
 
 const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
@@ -352,6 +356,7 @@ module.exports = {
   isUniversityWideIam,
   isUniversityWideWritingIam,
   isDoctoralIam,
+  isDoctoralWritingIam,
   isEmployeeIam,
   iamToDoctoralSchool,
   iamToOrganisationCode,
