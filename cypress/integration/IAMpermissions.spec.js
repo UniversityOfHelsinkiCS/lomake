@@ -68,7 +68,7 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressRehtoriUser', 'All programmes')
   })
 
-  it('Faculty iam group gives reading rights to all programmes of faculty', () => {
+  it('Faculty iam group gives reading rights to all programmes', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
@@ -76,12 +76,14 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
 
-  it('Kosu user gets wide read access', () => {
+  it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
+    cy.hasAccess('cypressKosuUser', 'KH50_001', { read: true, write: true, admin: false })
+    cy.hasAccess('cypressKosuUser', 'MH50_003', { read: true, write: true, admin: false })
   })
 
   /* Special cases with multiple rights groups */
@@ -93,12 +95,12 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressKojoDeanUser', 'KH50_001', { read: true, write: false, admin: false })
   })
 
-  it('Kosu who is also a jory-member gets reading rights to all programmes and writing rights to one programme', () => {
+  it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
-    cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: false, admin: false })
+    cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
 
   it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
