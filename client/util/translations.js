@@ -1168,6 +1168,11 @@ export const usersPageTranslations = {
     fi: 'Käyttäjät',
     se: 'Users',
   },
+  iams: {
+    en: 'IAM-groups',
+    fi: 'IAM-ryhmät',
+    se: 'IAM-groups',
+  },
   deadline: {
     en: 'Deadline',
     fi: 'Lomakkeen aukioloaika',

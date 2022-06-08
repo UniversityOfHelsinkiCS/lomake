@@ -351,6 +351,14 @@ const iamToOrganisationCode = iam => {
 }
 
 module.exports = {
+  doctoralIams,
+  doctoralWritingIams,
+  doctoralSchoolMap,
+  universityWideGroups,
+  isUniversityWideWritingGroups,
+  superAdminGroups,
+  adminGroups,
+  employeeGroups,
   isSuperAdminIam,
   isAdminIam,
   isUniversityWideIam,

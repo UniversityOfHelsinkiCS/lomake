@@ -6,6 +6,7 @@ import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { isSuperAdmin, iamsInUse } from '@root/config/common'
 import UserTable from './UserTable'
+import IamTable from './IamTable'
 import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
 import OwnerLinks from './OwnerLinks'
@@ -33,6 +34,14 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <UserTable />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: translations.iams[lang],
+      render: () => (
+        <Tab.Pane>
+          <IamTable />
         </Tab.Pane>
       ),
     },
