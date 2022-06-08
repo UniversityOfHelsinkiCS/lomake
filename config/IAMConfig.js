@@ -11,7 +11,7 @@ const joryMap = {
   'hy-ltdk-tmed-jory': '300-M002',
   'hy-ltdk-hll-jory': '300-M003',
   'hy-humtdk-filk-jory': '400-K001',
-  'hy-humtdk--jory': '400-K002',
+  'hy-humtdk-ttk-jory': '400-K002',
   'hy-humtdk-kik-jory': '400-K003',
   'hy-humtdk-kok-jory': '400-K004',
   'hy-humtdk-kuka-jory': '400-K005',
@@ -68,7 +68,7 @@ const joryMap = {
   'hy-valttdk-pvk-jory': '700-K001',
   'hy-valttdk-yk-jory': '700-K002',
   'hy-valttdk-sosk-jory': '700-K003',
-  'hy-mmtdk-ecok-jory': '700-K004',
+  'hy-valttdk-ecok-jory': '700-K004',
   'hy-valttdk-film-jory': '700-M001',
   'hy-valttdk-pvm-jory': '700-M002',
   'hy-valttdk-gpc-jory': '700-M003',
@@ -141,7 +141,7 @@ const kojoMap = {
   'hy-ltdk-tmed-jory': 'hy-ltdk-maisteri-kojot',
   'hy-ltdk-hll-jory': 'hy-ltdk-maisteri-kojot',
   'hy-humtdk-filk-jory': 'hy-humtdk-kandi-kojot',
-  'hy-humtdk--jory': 'hy-humtdk-kandi-kojot',
+  'hy-humtdk-ttk-jory': 'hy-humtdk-kandi-kojot',
   'hy-humtdk-kik-jory': 'hy-humtdk-kandi-kojot',
   'hy-humtdk-kok-jory': 'hy-humtdk-kandi-kojot',
   'hy-humtdk-kuka-jory': 'hy-humtdk-kandi-kojot',
@@ -198,7 +198,7 @@ const kojoMap = {
   'hy-valttdk-pvk-jory': 'hy-valttdk-kandi-kojot',
   'hy-valttdk-yk-jory': 'hy-valttdk-kandi-kojot',
   'hy-valttdk-sosk-jory': 'hy-valttdk-kandi-kojot',
-  'hy-mmtdk-ecok-jory': 'hy-mmtdk-kandi-kojot',
+  'hy-valttdk-ecok-jory': 'hy-valttdk-kandi-kojot',
   'hy-valttdk-film-jory': 'hy-valttdk-maisteri-kojot',
   'hy-valttdk-pvm-jory': 'hy-valttdk-maisteri-kojot',
   'hy-valttdk-gpc-jory': 'hy-valttdk-maisteri-kojot',
@@ -294,7 +294,7 @@ const universityWideGroups = [
   'hy-rehtoraatti',
   'hy-ypa-opa-kosu-kumpula',
   'hy-ypa-opa-kosu-meilahti',
-  'hy-ypa-kosu-kruununhaka',
+  'hy-ypa-opa-kosu-kruununhaka',
   'hy-ypa-opa-kosu-metsatalo',
   'hy-ypa-opa-kosu-porthania',
   'hy-ypa-opa-kosu-siltavuori',
@@ -311,7 +311,7 @@ const universityWideGroups = [
   'hy-sskh-rehtoraatti',
   'hy-mmtdk-dekanaatti',
   'hy-eltdk-dekanaatti',
-]
+].concat(Object.values(kojoMap))
 
 const superAdminGroups = ['grp-toska']
 

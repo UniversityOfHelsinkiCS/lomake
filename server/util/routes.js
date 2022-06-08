@@ -40,7 +40,7 @@ router.get('/programmes/:programme', studyprogrammes.getOne)
 router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
 router.post('/programmes/update', checkAdmin, studyprogrammes.updateAll)
 
-router.post('/login', users.getCurrentUser)
+router.post('/login', users.getCurrentUser) // IAM-middleware checks this path
 router.post('/logout', users.getLogoutUrl)
 
 router.get('/users', checkAdmin, users.getAllUsers)
@@ -59,8 +59,6 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
-router.get('/cypress/givePermissions/:uid/:programme/:level', notInProduction, cypress.givePermissions)
 router.get('/cypress/createAnswers', notInProduction, cypress.createAnswers)
-router.get('/cypress/createDeadline/:year', notInProduction, cypress.createDeadline)
 
 module.exports = router

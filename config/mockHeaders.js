@@ -1,6 +1,6 @@
 const ITEM_NAME = 'fakeUser'
 
-export const possibleUsers = [
+const possibleUsers = [
   {
     uid: 'admin',
     employeeNumber: undefined,
@@ -11,13 +11,31 @@ export const possibleUsers = [
     sn: 'admin',
   },
   {
-    uid: 'cypressReadGroupMember',
-    employeeNumber: 123,
-    givenName: 'readGroupMember',
-    mail: 'read-group-member@helsinki.fi',
-    schacDateOfBirth: 19770501,
-    hyGroupCn: 'grp-lomake-testing-read',
-    sn: 'readGroupMember',
+    uid: 'cypressReadingRightsUser',
+    employeeNumber: undefined,
+    givenName: 'no rights',
+    mail: 'no-rights@fake.helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-mltdk-tkt-jory',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressNoRightsUser',
+    employeeNumber: undefined,
+    givenName: 'no rights',
+    mail: 'no-rights@fake.helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: '',
+    sn: 'nah',
+  },
+  {
+    uid: 'cypressUser',
+    employeeNumber: 124,
+    givenName: 'user',
+    mail: 'cypress-user@helsinki.fi',
+    schacDateOfBirth: 19990100,
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees',
+    sn: 'nah',
   },
   {
     uid: 'cypressOspaUser',
@@ -25,7 +43,7 @@ export const possibleUsers = [
     givenName: 'ospaUser',
     mail: 'cypress-ospa-user@helsinki.fi',
     schacDateOfBirth: 19990101,
-    hyGroupCn: 'grp-ospa;test-iam-group',
+    hyGroupCn: 'grp-ospa',
     sn: 'nah',
   },
   {
@@ -34,7 +52,7 @@ export const possibleUsers = [
     givenName: 'toskaUser',
     mail: 'cypress-toska-user@helsinki.fi',
     schacDateOfBirth: 19990102,
-    hyGroupCn: 'test-iam-group;grp-toska',
+    hyGroupCn: 'grp-toska',
     sn: 'nah',
   },
   {
@@ -136,31 +154,28 @@ export const possibleUsers = [
     hyGroupCn: 'hy-mltdk-lsi-jory;hy-employees;hy-ypa-opa-kosu-kumpula',
     sn: 'nah',
   },
-
   {
-    uid: 'cypressInternationalUser',
-  },
-  {
-    uid: 'cypressUser',
-  },
-  {
-    uid: 'cypressAdminUser',
-  },
-  {
-    uid: 'cypressSuperAdminUser',
+    uid: 'cypressRandomRightsUser',
+    employeeNumber: 137,
+    givenName: 'randomRightsUser',
+    mail: 'cypress-random-rights-user@helsinki.fi',
+    schacDateOfBirth: 19990111,
+    hyGroupCn:
+      'hy-mltdk-geok-jory;random-iam-group-should-have-no-effect;hy-employees;random-iam-group-should-have-no-effect',
+    sn: 'nah',
   },
 ]
 
-export const cypressUids = possibleUsers.map(u => u.uid).filter(uid => uid.startsWith('cypress'))
+const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
 
-export const setHeaders = uid => {
+const setHeaders = uid => {
   const user = possibleUsers.find(u => u.uid === uid)
   if (!user) return
 
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))
 }
 
-export const removeLoggedInUsersGroups = () => {
+const removeLoggedInUsersGroups = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME))
 
   localStorage.setItem(
@@ -172,11 +187,20 @@ export const removeLoggedInUsersGroups = () => {
   )
 }
 
-export const getHeaders = () => {
+const getHeaders = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
   return user
 }
 
-export const clearHeaders = () => {
+const clearHeaders = () => {
   localStorage.removeItem(ITEM_NAME)
+}
+
+module.exports = {
+  possibleUsers,
+  cypressUids,
+  setHeaders,
+  removeLoggedInUsersGroups,
+  getHeaders,
+  clearHeaders,
 }

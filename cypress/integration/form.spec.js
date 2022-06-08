@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeName, defaultYears } from '../../config/common'
+import { testProgrammeCode, defaultYears } from '../../config/common'
 
 describe('Form tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
-    cy.givePermissions(user, testProgrammeName, 'write')
     cy.login(user)
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
   it('Can write to a textfield and the answer is saved.', () => {
@@ -29,11 +29,11 @@ describe('Form tests', () => {
     // Check that the changes have been saved:
     cy.visit('/')
 
-    cy.get(`[data-cy=${testProgrammeName}-review_of_last_years_situation_report]`)
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(255, 255, 177)')
 
-    cy.get(`[data-cy=${testProgrammeName}-community_wellbeing]`)
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
   })

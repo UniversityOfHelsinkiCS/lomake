@@ -1,7 +1,9 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { cypressUsers, testProgrammeName, defaultYears } = require('@util/common')
+const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
+const { cypressUids } = require('@root/config/mockHeaders')
+const { createDraftAnswers } = require('./../scripts/draftAndFinalAnswers')
 
 const getFakeAnswers = year => {
   const fields = [
@@ -61,68 +63,10 @@ const getFakeAnswers = year => {
 
 const resetUsers = async () => {
   try {
-    cypressUsers.forEach(async user => {
-      await db.user.destroy({ where: { uid: user.uid } })
-      await db.user.create(user)
+    await db.users.destroy({
+      where: { uid: cypressUids },
     })
-
     logger.info('Cypress::resetUsers')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
-const resetTokens = async () => {
-  try {
-    await db.token.destroy({
-      where: {
-        programme: testProgrammeName,
-      },
-    })
-
-    const tokens = [
-      {
-        url: 'readTest',
-        programme: testProgrammeName,
-        type: 'READ',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'writeTest',
-        programme: testProgrammeName,
-        type: 'WRITE',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'adminTest',
-        programme: testProgrammeName,
-        type: 'ADMIN',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'facultyReadTest',
-        faculty: 'H50', // MatLu
-        type: 'READ',
-        valid: true,
-        usageCounter: 0,
-      },
-      {
-        url: 'facultyReadDoctorTest',
-        faculty: 'H50', // MatLu
-        type: 'READ_DOCTOR',
-        valid: true,
-        usageCounter: 0,
-      },
-    ]
-
-    tokens.forEach(async token => {
-      await db.token.create(token)
-    })
-
-    logger.info('Cypress::resetTokens')
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
@@ -134,7 +78,7 @@ const resetForm = async () => {
 
     await db.tempAnswer.destroy({
       where: {
-        programme: testProgrammeName,
+        programme: testProgrammeCode,
       },
     })
   } catch (error) {
@@ -148,7 +92,7 @@ const resetAnswers = async () => {
 
     await db.answer.destroy({
       where: {
-        programme: testProgrammeName,
+        programme: testProgrammeCode,
       },
     })
   } catch (error) {
@@ -156,55 +100,37 @@ const resetAnswers = async () => {
   }
 }
 
-const createDeadlineIfNoneExist = async () => {
-  const count = await db.deadline.count()
+const resetDeadline = async () => {
+  const deadline = moment().add(7, 'days')
+  const draftYear = defaultYears[0]
 
-  if (count === 0) {
-    await db.deadline.create({
-      date: new Date(),
-    })
-    await db.draftYear.create({
-      year: new Date().getFullYear(),
-    })
-  }
-}
-
-const createTestProgramme = async () => {
   try {
-    logger.info('Creating testprogramme')
+    // Unlock all programmes
+    await db.studyprogramme.update({ locked: false }, { where: {} })
 
-    await db.studyprogramme.destroy({ where: { key: testProgrammeName } })
-
-    const matluId = (await db.faculty.findOne({ where: { code: 'H50' } })).id
-
-    await db.studyprogramme.create({
-      key: testProgrammeName,
-      name: {
-        en: 'TOSKA-en',
-        fi: 'TOSKA-fi',
-        se: 'TOSKA-se',
-      },
-      locked: false,
-      claimed: false,
-      primaryFacultyId: matluId,
-    })
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
-const createTempAnswersForTestProgramme = async () => {
-  try {
-    logger.info('Creating tempAnswers for test programme')
-    await db.tempAnswer.destroy({ where: { programme: testProgrammeName }})
-
-    defaultYears.forEach(async year => {
-      await db.tempAnswer.create({
-        programme: testProgrammeName,
-        data: {},
-        year,
+    // Create new or update old deadline
+    const existingDeadlines = await db.deadline.findAll({})
+    if (existingDeadlines.length === 0) {
+      await db.deadline.create({
+        date: deadline,
       })
-    })
+    } else {
+      existingDeadlines[0].date = deadline
+      await existingDeadlines[0].save()
+    }
+
+    // Create new or update old draft year
+    const existingDraftYears = await db.draftYear.findAll({})
+    if (existingDraftYears.length === 0) {
+      await db.draftYear.create({
+        year: draftYear,
+      })
+    } else {
+      existingDraftYears[0].year = draftYear
+      await existingDraftYears[0].save()
+    }
+
+    await createDraftAnswers(draftYear)
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
@@ -216,64 +142,13 @@ const seed = async (_, res) => {
 
     await resetAnswers()
     await resetUsers()
-    await resetTokens()
     await resetForm()
-    await createDeadlineIfNoneExist()
-    await createTestProgramme()
-    await createTempAnswersForTestProgramme()
+    await resetDeadline()
 
     return res.status(200).send('OK')
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const givePermissions = async (req, res) => {
-  try {
-    logger.info('Cypress::giving permissions')
-
-    const { uid, programme, level } = req.params
-
-    const user = await db.user.findOne({ where: { uid } })
-
-    let permissions = {}
-    switch (level) {
-      case 'read':
-        permissions = {
-          read: true,
-        }
-        break
-
-      case 'write':
-        permissions = {
-          read: true,
-          write: true,
-        }
-        break
-
-      case 'admin':
-        permissions = {
-          read: true,
-          write: true,
-          admin: true,
-        }
-        break
-
-      default:
-        break
-    }
-
-    user.access = {
-      [programme]: permissions,
-    }
-
-    await user.save()
-
-    return res.status(200).send('OK')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -314,32 +189,7 @@ const createAnswers = async (req, res) => {
   }
 }
 
-const createDeadline = async (req, res) => {
-  try {
-    logger.info(`Cypress::creating a new deadline`)
-
-    await db.deadline.destroy({ where: {} })
-    await db.draftYear.destroy({ where: {} })
-
-    const deadline = await db.deadline.create({
-      date: moment().add(7, 'days'),
-    })
-
-    const draftYear = await db.draftYear.create({
-      year: req.params.year,
-    })
-
-    logger.info(`Cypress::deadline created: ${deadline}, draftYear created: ${draftYear}`)
-    return res.status(200).send('OK')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 module.exports = {
   seed,
-  givePermissions,
   createAnswers,
-  createDeadline,
 }

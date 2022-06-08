@@ -3,15 +3,16 @@
 
 /// <reference types="cypress" />
 
-import { testProgrammeName, defaultYears, iamsInUse } from '../../config/common'
+import { testProgrammeCode, defaultYears, iamsInUse } from '../../config/common'
 
-describe('OSPA user tests', () => {
+describe('SuperAdmin user tests', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.visit('/')
   })
 
   it('Deadline can be deleted and created and deleting a deadline locks forms.', () => {
+    cy.login('cypressSuperAdminUser')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -39,6 +40,7 @@ describe('OSPA user tests', () => {
   })
 
   it('Deadline for a past year can be created, the form of that year can be edited and the form can be then again closed', () => {
+    cy.login('cypressSuperAdminUser')
     cy.request('/api/cypress/createAnswers')
 
     // Delete pre-generated deadline
@@ -275,11 +277,32 @@ describe('OSPA user tests', () => {
     })
 
   it('Can write to form and change from smiley table to trends view', () => {
-    cy.visit(`/form/${testProgrammeName}`)
+    cy.login('cypressSuperAdminUser')
+
+    // Create a new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+    cy.get('.react-datepicker__input-container > input').click() // Open datepicked
+    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__day--014').click() // Select 14th day
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+
+    cy.get('[data-cy=updateDeadline]').click()
+    cy.get('[data-cy=nextDeadline]').contains('14.')
+
+    // Login as another user to see if answers can be created
+    cy.login('cypressUser')
+    cy.visit('/')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     cy.visit('/')
 
-    cy.get('[data-cy=TOSKA101-community_wellbeing]').should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`).should('have.class', 'square-green')
   })
 })

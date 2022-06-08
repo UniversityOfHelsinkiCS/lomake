@@ -157,8 +157,9 @@ export default () => {
             {getCustomHeader({ name: translations.name[lang], width: 2, field: 'lastname' })}
             {getCustomHeader({ name: translations.userId[lang], width: 1, field: 'uid' })}
             {getCustomHeader({ name: translations.access[lang], width: 6, field: 'access', sortable: true })}
-            {getCustomHeader({ name: translations.userGroup[lang], width: 4, field: 'userGroup' })}
-            {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'lastLogin', sortable: true })}
+            {getCustomHeader({ name: translations.userGroup[lang], width: 2, field: 'userGroup' })}
+            {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'specialGroup', sortable: true })}
+            {getCustomHeader({ name: translations.specialGroup[lang], width: 2, field: 'lastLogin', sortable: true })}
             {!iamsInUse &&
               getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
             {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}

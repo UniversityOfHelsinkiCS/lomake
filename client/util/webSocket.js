@@ -1,5 +1,5 @@
 import { basePath, inProduction } from 'Utilities/common'
-import { getHeaders } from 'Utilities/mockHeaders'
+import { getHeaders } from '@root/config/mockHeaders'
 import io from 'socket.io-client'
 
 const connect = () => {

@@ -1,12 +1,18 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { Button, Table, Icon, Popup } from 'semantic-ui-react'
+import { Button, Table, Icon, Label, Popup } from 'semantic-ui-react'
 
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isSuperAdmin, isBasicUser, isAdmin, iamsInUse } from '../../../config/common'
+import { isSuperAdmin, isBasicUser, isAdmin, iamsInUse, specialGroups } from '../../../config/common'
+
+const getSpecialGroup = (group, lang) => {
+  const special = specialGroups.find(s => s.group === group)
+  if (!special) return null
+  return <Label>{special.faculty ? special.translationTag[lang] : translations[special.translationTag][lang]}</Label>
+}
 
 const formatRights = programme => {
   return Object.keys(programme)
@@ -70,7 +76,7 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
 
   const IAMFormattedAccess = () => {
     const programmeKeys = user.access ? Object.keys(user.access) : []
-    if (!programmeKeys.length > 0) {
+    if (!programmeKeys.length > 0 || programmeKeys.every(key => key === '')) {
       return <div>None</div>
     }
     return (
@@ -134,6 +140,11 @@ export default ({ user, lang, setModalData, programmeCodesAndNames }) => {
             <span style={{ color: colors.gray }}>Ei tallennettu</span>
           )}
         </Table.Cell>
+        {iamsInUse ? (
+          <Table.Cell data-cy="user-access-groups">
+            {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang))}
+          </Table.Cell>
+        ) : null}
         {iamsInUse ? null : (
           <Table.Cell>
             <EditIcon />
