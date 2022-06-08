@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Loader, Input } from 'semantic-ui-react'
+import { Button, Loader, Input } from 'semantic-ui-react'
 
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
@@ -11,6 +11,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
 import ColorTableCell from './ColorTableCell'
+import TableHeader from './TableHeader'
 
 const ColorTable = React.memo(
   ({
@@ -124,33 +125,7 @@ const ColorTable = React.memo(
 
     return (
       <div className="overview-color-grid">
-        <div className="sticky-header">
-          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('name')}>
-            {translations.programmeNameHeader[lang]}
-            <Icon name="sort" />
-          </div>
-        </div>
-        <div className="sticky-header">
-          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('key')}>
-            {translations.programmeCodeHeader[lang]}
-            <Icon name="sort" />
-          </div>
-        </div>
-        {tableIds.map(idObject => (
-          <div
-            key={idObject.id}
-            className="sticky-header"
-            style={{
-              wordWrap: 'break-word',
-              textAlign: 'center',
-              fontWeight: 'bold',
-            }}
-          >
-            {transformIdToTitle(idObject.shortLabel)}
-          </div>
-        ))}
-        <div className="sticky-header" />
-
+        <TableHeader sort={sort} tableIds={tableIds} />
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Input
             data-cy="overviewpage-filter"
