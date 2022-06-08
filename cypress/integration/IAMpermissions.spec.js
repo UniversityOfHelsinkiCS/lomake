@@ -113,6 +113,18 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
 
+  it('Doctoral kosu who is also a regular kosu gets writing rights to all programmes', () => {
+    cy.login('cypressDoctoralKosuAndRegularKosuUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+
+    cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'T920103', { read: true, write: true, admin: false })
+    cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'KH50_004', { read: true, write: true, admin: false })
+
+    cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All doctoral programmes')
+    cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All programmes')
+  })
+
   it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
     cy.login('cypressRandomRightsUser')
     cy.visit('/')
