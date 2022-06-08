@@ -12,6 +12,7 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 import questions from '../../questions.json'
 import ColorTableCell from './ColorTableCell'
 import TableHeader from './TableHeader'
+import './OverviewPage.scss'
 
 const ColorTable = React.memo(
   ({
@@ -93,13 +94,7 @@ const ColorTable = React.memo(
     }
 
     const ManageCell = ({ program }) => (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className="table-container-manage-cell">
         <Button
           data-cy={`${program.key}-manage`}
           icon="user"
@@ -126,7 +121,7 @@ const ColorTable = React.memo(
     return (
       <div className="overview-color-grid">
         <TableHeader sort={sort} tableIds={tableIds} />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
             icon="filter"
@@ -189,12 +184,12 @@ const ColorTable = React.memo(
           const targetURL = `/form/${p.key}`
           return (
             <React.Fragment key={p.key}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="table-container">
                 <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
                   {p.name[lang]}
                 </Link>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="table-container">
                 <Link to={targetURL}>{p.key}</Link>
               </div>
               {tableIds.map(idObject => (

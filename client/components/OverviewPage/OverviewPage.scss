@@ -82,3 +82,17 @@ $QUESTION_COUNT: 20;
 .year-filter-label {
   font-size: 17px;
 }
+
+@mixin container-basics {
+  display: flex;
+  align-items: center;
+}
+
+.table-container {
+  @include container-basics;
+
+  &-manage-cell {
+    @include container-basics;
+    justify-content: center;
+  }
+}
