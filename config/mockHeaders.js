@@ -83,6 +83,15 @@ const possibleUsers = [
     sn: 'nah',
   },
   {
+    uid: 'cypressDoctoralWritingUser',
+    employeeNumber: 127,
+    givenName: 'doctoralUser',
+    mail: 'cypress-doctoral-user@helsinki.fi',
+    schacDateOfBirth: 19990104,
+    hyGroupCn: 'hy-ypa-tutto-toht',
+    sn: 'nah',
+  },
+  {
     uid: 'cypressPsykoUser',
     employeeNumber: 128,
     givenName: 'psykoUser',

@@ -52,6 +52,16 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressDoctoralUser', 'All doctoral programmes')
   })
 
+  it('Doctoral writing user has writing rights to all doctoral programmes', () => {
+    cy.login('cypressDoctoralWritingUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getDoctoralProgrammeCount())
+
+    cy.hasAccess('cypressDoctoralWritingUser', 'T920103', { read: true, write: true, admin: false })
+
+    cy.hasSpecialGroups('cypressDoctoralWritingUser', 'All doctoral programmes')
+  })
+
   it('Psyk and logo groups grant access to two programmes', () => {
     ;['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
       cy.login(user)
