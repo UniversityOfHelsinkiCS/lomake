@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { PieChart } from 'react-minimal-pie-chart'
 import { Loader, Input } from 'semantic-ui-react'
 
 import { isAdmin } from '@root/config/common'
@@ -11,6 +10,7 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 import questions from '../../questions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
+import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
 
 const ColorTable = React.memo(
@@ -75,10 +75,6 @@ const ColorTable = React.memo(
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
-    const transformIdToTitle = (shortLabel, vertical = true) => {
-      return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
-    }
-
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
@@ -112,45 +108,13 @@ const ColorTable = React.memo(
         <div />
         {tableIds.map(idObject =>
           stats.hasOwnProperty(idObject.id) ? (
-            <div
+            <SummaryRow
+              idObject={idObject}
+              setStatsToShow={setStatsToShow}
+              stats={stats}
+              selectedAnswers={selectedAnswers}
               key={idObject.id}
-              style={{ cursor: 'pointer' }}
-              onClick={() =>
-                setStatsToShow({
-                  stats: stats[idObject.id],
-                  title: transformIdToTitle(idObject.shortLabel, false),
-                  answers: selectedAnswers,
-                  questionId: idObject.id,
-                })
-              }
-            >
-              <PieChart
-                animationDuration={500}
-                animationEasing="ease-out"
-                center={[50, 50]}
-                data={[
-                  {
-                    color: '#9dff9d',
-                    value: stats[idObject.id].green || 0,
-                  },
-                  {
-                    color: '#ffffb1',
-                    value: stats[idObject.id].yellow || 0,
-                  },
-                  {
-                    color: '#ff7f7f',
-                    value: stats[idObject.id].red || 0,
-                  },
-                ]}
-                labelPosition={50}
-                lengthAngle={360}
-                lineWidth={100}
-                paddingAngle={0}
-                radius={50}
-                startAngle={0}
-                viewBoxSize={[100, 100]}
-              />
-            </div>
+            />
           ) : (
             <div key={idObject.id} />
           )
@@ -164,6 +128,7 @@ const ColorTable = React.memo(
               tableIds={tableIds}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
+              key={p.key}
             />
           )
         })}
