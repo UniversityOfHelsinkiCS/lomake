@@ -5,7 +5,7 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds }) => {
   return (
     <>
       {tableIds.map(idObject =>
-        stats.hasOwnProperty(idObject.id) ? (
+        Object.prototype.hasOwnProperty.call(stats, idObject.id) ? (
           <div
             key={idObject.id}
             style={{ cursor: 'pointer' }}
