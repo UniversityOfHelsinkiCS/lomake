@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Icon, Label, Segment } from 'semantic-ui-react'
+import { Button, Icon, Segment } from 'semantic-ui-react'
 
 import { sortedItems } from 'Utilities/common'
 import { genericTranslations as translations } from 'Utilities/translations'
@@ -36,14 +36,14 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
             {sortedItems(programmes.all, 'name', lang).map(
               p =>
                 programmes.chosen.includes(p) && (
-                  <Label
+                  <p
                     className="list-included"
                     data-cy={`report-list-programme-${p.key}`}
                     onClick={() => addToList(p)}
                     key={p.key}
                   >
                     <Programme p={p} />
-                  </Label>
+                  </p>
                 )
             )}
             <div className="ui divider" />
