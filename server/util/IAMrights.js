@@ -58,7 +58,7 @@ const getSuperAdmin = hyGroups => {
 }
 
 /**
- * Grant admin rights to the Form if the user has correct iams (eg. grp-ospa)
+ * Grant admin rights to the Form if the user has correct iams (eg. hy-ypa-opa-ospa)
  * @param {string[]} hyGroups
  * @returns admin special group
  */

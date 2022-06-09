@@ -320,7 +320,7 @@ const isUniversityWideWritingGroups = [
 
 const superAdminGroups = ['grp-toska']
 
-const adminGroups = ['grp-ospa']
+const adminGroups = ['hy-ypa-opa-ospa']
 
 const employeeGroups = ['hy-employees']
 
