@@ -70,13 +70,24 @@ $QUESTION_COUNT: 20;
   }
 }
 
-.sticky-header {
+@mixin sticky-header-basics {
   position: sticky;
   top: 0;
   background-color: $background-white;
   box-shadow: 0px 0px 2px 2px $background-white; //little white shadow to cover the shadow of the .square
   padding-top: 10px;
   z-index: 4;
+}
+
+.sticky-header {
+  @include sticky-header-basics();
+
+  &-categories {
+    @include sticky-header-basics();
+    word-wrap: break-word;
+    text-align: center;
+    font-weight: bold;
+  }
 }
 
 .year-filter-label {
@@ -95,4 +106,13 @@ $QUESTION_COUNT: 20;
     @include container-basics;
     justify-content: center;
   }
+}
+
+.sorter {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
 }

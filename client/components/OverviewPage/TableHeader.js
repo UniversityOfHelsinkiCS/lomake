@@ -7,38 +7,26 @@ import { overviewPageTranslations as translations } from 'Utilities/translations
 const TableHeader = ({ tableIds, sort }) => {
   const lang = useSelector(state => state.language)
 
-  const transformIdToTitle = (shortLabel, vertical = true) => {
-    return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
-  }
-
   return (
     <>
       <div className="sticky-header">
-        <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('name')}>
+        <div className="sorter" onClick={() => sort('name')}>
           {translations.programmeNameHeader[lang]}
           <Icon name="sort" />
         </div>
       </div>
       <div className="sticky-header">
-        <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('key')}>
+        <div className="sorter" onClick={() => sort('key')}>
           {translations.programmeCodeHeader[lang]}
           <Icon name="sort" />
         </div>
       </div>
       {tableIds.map(idObject => (
-        <div
-          key={idObject.id}
-          className="sticky-header"
-          style={{
-            wordWrap: 'break-word',
-            textAlign: 'center',
-            fontWeight: 'bold',
-          }}
-        >
-          {transformIdToTitle(idObject.shortLabel)}
+        <div key={idObject.id} className="sticky-header-categories">
+          <span className="vertical-text">{idObject.shortLabel}</span>
         </div>
       ))}
-      <div className="sticky-header" />
+      <div />
     </>
   )
 }
