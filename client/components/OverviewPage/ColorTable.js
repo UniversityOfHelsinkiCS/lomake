@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
-import { Link } from 'react-router-dom'
-import { Button, Loader, Input } from 'semantic-ui-react'
+import { Loader, Input } from 'semantic-ui-react'
 
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
@@ -10,8 +9,8 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
-import ColorTableCell from './ColorTableCell'
 import TableHeader from './TableHeader'
+import TableRow from './TableRow'
 import './OverviewPage.scss'
 
 const ColorTable = React.memo(
@@ -46,11 +45,6 @@ const ColorTable = React.memo(
       oldAnswers,
       draftYear: draftYear && draftYear.year,
     })
-
-    const lastYearsAnswers =
-      oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
-        ? oldAnswers.data.filter(a => a.year === year - 1)
-        : null
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -87,22 +81,6 @@ const ColorTable = React.memo(
 
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
-
-    const hasManagementAccess = program => {
-      if (isAdmin(currentUser)) return true
-      return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
-    }
-
-    const ManageCell = ({ program }) => (
-      <div className="table-container-manage-cell">
-        <Button
-          data-cy={`${program.key}-manage`}
-          icon="user"
-          circular
-          onClick={() => setProgramControlsToShow(program)}
-        />
-      </div>
-    )
 
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
@@ -179,33 +157,14 @@ const ColorTable = React.memo(
         )}
         <div className="sticky-header" />
         {sortedProgrammes.map(p => {
-          const programme = selectedAnswers.find(a => a.programme === p.key)
-          const programmeLastYear = lastYearsAnswers ? lastYearsAnswers.find(a => a.programme === p.key) : null
-          const targetURL = `/form/${p.key}`
           return (
-            <React.Fragment key={p.key}>
-              <div className="table-container">
-                <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
-                  {p.name[lang]}
-                </Link>
-              </div>
-              <div className="table-container">
-                <Link to={targetURL}>{p.key}</Link>
-              </div>
-              {tableIds.map(idObject => (
-                <ColorTableCell
-                  key={`${p.key}-${idObject.id}`}
-                  programmesName={p.name[lang]}
-                  programmesKey={p.key}
-                  programmesAnswers={programme && programme.data ? programme.data : {}}
-                  programmesOldAnswers={programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null}
-                  questionId={idObject.id}
-                  questionType={idObject.type}
-                  setModalData={setModalData}
-                />
-              ))}
-              {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
-            </React.Fragment>
+            <TableRow
+              p={p}
+              selectedAnswers={selectedAnswers}
+              tableIds={tableIds}
+              setModalData={setModalData}
+              setProgramControlsToShow={setProgramControlsToShow}
+            />
           )
         })}
       </div>

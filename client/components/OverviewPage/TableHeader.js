@@ -26,7 +26,7 @@ const TableHeader = ({ tableIds, sort }) => {
           <span className="vertical-text">{idObject.shortLabel}</span>
         </div>
       ))}
-      <div />
+      <div className="sticky-header" />
     </>
   )
 }
