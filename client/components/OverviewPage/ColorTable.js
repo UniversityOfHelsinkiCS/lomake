@@ -106,19 +106,12 @@ const ColorTable = React.memo(
           />
         </div>
         <div />
-        {tableIds.map(idObject =>
-          stats.hasOwnProperty(idObject.id) ? (
-            <SummaryRow
-              idObject={idObject}
-              setStatsToShow={setStatsToShow}
-              stats={stats}
-              selectedAnswers={selectedAnswers}
-              key={idObject.id}
-            />
-          ) : (
-            <div key={idObject.id} />
-          )
-        )}
+        <SummaryRow
+          setStatsToShow={setStatsToShow}
+          stats={stats}
+          selectedAnswers={selectedAnswers}
+          tableIds={tableIds}
+        />
         <div className="sticky-header" />
         {sortedProgrammes.map(p => {
           return (
