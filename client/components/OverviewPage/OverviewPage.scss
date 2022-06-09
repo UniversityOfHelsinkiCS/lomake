@@ -70,7 +70,7 @@ $QUESTION_COUNT: 20;
   }
 }
 
-.sticky-header {
+@mixin sticky-header-basics {
   position: sticky;
   top: 0;
   background-color: $background-white;
@@ -79,6 +79,40 @@ $QUESTION_COUNT: 20;
   z-index: 4;
 }
 
+.sticky-header {
+  @include sticky-header-basics();
+
+  &-categories {
+    @include sticky-header-basics();
+    word-wrap: break-word;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
 .year-filter-label {
   font-size: 17px;
+}
+
+@mixin container-basics {
+  display: flex;
+  align-items: center;
+}
+
+.table-container {
+  @include container-basics;
+
+  &-manage-cell {
+    @include container-basics;
+    justify-content: center;
+  }
+}
+
+.sorter {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
 }

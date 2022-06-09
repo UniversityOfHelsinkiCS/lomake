@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { PieChart } from 'react-minimal-pie-chart'
-import { Link } from 'react-router-dom'
-import { Button, Icon, Loader, Input } from 'semantic-ui-react'
+import { Loader, Input } from 'semantic-ui-react'
 
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
@@ -10,7 +8,10 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
-import ColorTableCell from './ColorTableCell'
+import TableHeader from './TableHeader'
+import TableRow from './TableRow'
+import SummaryRow from './SummaryRow'
+import './OverviewPage.scss'
 
 const ColorTable = React.memo(
   ({
@@ -45,11 +46,6 @@ const ColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
-    const lastYearsAnswers =
-      oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)
-        ? oldAnswers.data.filter(a => a.year === year - 1)
-        : null
-
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
     if (reverse) sortedProgrammes.reverse()
@@ -79,34 +75,8 @@ const ColorTable = React.memo(
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
-    const transformIdToTitle = (shortLabel, vertical = true) => {
-      return <span style={vertical ? { writingMode: 'vertical-lr' } : {}}>{shortLabel}</span>
-    }
-
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
-
-    const hasManagementAccess = program => {
-      if (isAdmin(currentUser)) return true
-      return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
-    }
-
-    const ManageCell = ({ program }) => (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Button
-          data-cy={`${program.key}-manage`}
-          icon="user"
-          circular
-          onClick={() => setProgramControlsToShow(program)}
-        />
-      </div>
-    )
 
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
@@ -124,34 +94,8 @@ const ColorTable = React.memo(
 
     return (
       <div className="overview-color-grid">
-        <div className="sticky-header">
-          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('name')}>
-            {translations.programmeNameHeader[lang]}
-            <Icon name="sort" />
-          </div>
-        </div>
-        <div className="sticky-header">
-          <div style={{ fontWeight: 'bold', cursor: 'pointer' }} onClick={() => sort('key')}>
-            {translations.programmeCodeHeader[lang]}
-            <Icon name="sort" />
-          </div>
-        </div>
-        {tableIds.map(idObject => (
-          <div
-            key={idObject.id}
-            className="sticky-header"
-            style={{
-              wordWrap: 'break-word',
-              textAlign: 'center',
-              fontWeight: 'bold',
-            }}
-          >
-            {transformIdToTitle(idObject.shortLabel)}
-          </div>
-        ))}
-        <div className="sticky-header" />
-
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <TableHeader sort={sort} tableIds={tableIds} />
+        <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
             icon="filter"
@@ -162,80 +106,23 @@ const ColorTable = React.memo(
           />
         </div>
         <div />
-        {tableIds.map(idObject =>
-          stats.hasOwnProperty(idObject.id) ? (
-            <div
-              key={idObject.id}
-              style={{ cursor: 'pointer' }}
-              onClick={() =>
-                setStatsToShow({
-                  stats: stats[idObject.id],
-                  title: transformIdToTitle(idObject.shortLabel, false),
-                  answers: selectedAnswers,
-                  questionId: idObject.id,
-                })
-              }
-            >
-              <PieChart
-                animationDuration={500}
-                animationEasing="ease-out"
-                center={[50, 50]}
-                data={[
-                  {
-                    color: '#9dff9d',
-                    value: stats[idObject.id].green || 0,
-                  },
-                  {
-                    color: '#ffffb1',
-                    value: stats[idObject.id].yellow || 0,
-                  },
-                  {
-                    color: '#ff7f7f',
-                    value: stats[idObject.id].red || 0,
-                  },
-                ]}
-                labelPosition={50}
-                lengthAngle={360}
-                lineWidth={100}
-                paddingAngle={0}
-                radius={50}
-                startAngle={0}
-                viewBoxSize={[100, 100]}
-              />
-            </div>
-          ) : (
-            <div key={idObject.id} />
-          )
-        )}
+        <SummaryRow
+          setStatsToShow={setStatsToShow}
+          stats={stats}
+          selectedAnswers={selectedAnswers}
+          tableIds={tableIds}
+        />
         <div className="sticky-header" />
         {sortedProgrammes.map(p => {
-          const programme = selectedAnswers.find(a => a.programme === p.key)
-          const programmeLastYear = lastYearsAnswers ? lastYearsAnswers.find(a => a.programme === p.key) : null
-          const targetURL = `/form/${p.key}`
           return (
-            <React.Fragment key={p.key}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
-                  {p.name[lang]}
-                </Link>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Link to={targetURL}>{p.key}</Link>
-              </div>
-              {tableIds.map(idObject => (
-                <ColorTableCell
-                  key={`${p.key}-${idObject.id}`}
-                  programmesName={p.name[lang]}
-                  programmesKey={p.key}
-                  programmesAnswers={programme && programme.data ? programme.data : {}}
-                  programmesOldAnswers={programmeLastYear && programmeLastYear.data ? programmeLastYear.data : null}
-                  questionId={idObject.id}
-                  questionType={idObject.type}
-                  setModalData={setModalData}
-                />
-              ))}
-              {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
-            </React.Fragment>
+            <TableRow
+              p={p}
+              selectedAnswers={selectedAnswers}
+              tableIds={tableIds}
+              setModalData={setModalData}
+              setProgramControlsToShow={setProgramControlsToShow}
+              key={p.key}
+            />
           )
         })}
       </div>
