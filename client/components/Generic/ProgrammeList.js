@@ -41,6 +41,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     data-cy={`report-list-programme-${p.key}`}
                     onClick={() => addToList(p)}
                     key={p.key}
+                    role="presentation"
                   >
                     <Programme p={p} />
                   </p>
@@ -58,6 +59,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     data-cy={`report-list-programme-${p.key}`}
                     onClick={() => addToList(p)}
                     key={p.key}
+                    role="presentation"
                   >
                     <Programme p={p} />
                   </p>

@@ -75,9 +75,12 @@ export default ({
   }
 
   const amountOfResponses = () => {
-    const answered = `${translations.responses[lang]} ${
-      answers ? (showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value) : 0
-    }`
+    let answered = `${translations.responses[lang]} `
+    if (answers) {
+      answered = answered.concat(`${showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value}`)
+    } else {
+      answered = answered.concat('0')
+    }
     const all = allProgrammes ? ` / ${allProgrammes.length}` : ''
     return answered + all
   }

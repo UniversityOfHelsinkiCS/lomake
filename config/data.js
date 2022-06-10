@@ -256,12 +256,12 @@ const data = [
         name: {
           fi: 'Ihmisen käyttäytymisen tohtoriohjelma',
           en: 'Doctoral Programme in Human Behaviour',
-          se: 'Doktorandprogrammet i mänskligt beteende'
+          se: 'Doktorandprogrammet i mänskligt beteende',
         },
         level: 'doctoral',
         companionFaculties: [],
         international: false,
-      }
+      },
     ],
   },
   {

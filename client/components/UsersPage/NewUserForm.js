@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Form, Checkbox, Input, Segment, Popup, Button } from 'semantic-ui-react'
+import { Form, Input, Segment, Popup, Button } from 'semantic-ui-react'
 
 import { createUserAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
