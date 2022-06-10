@@ -47,7 +47,7 @@ const Form = ({ questions, programmeKey }) => {
       )
     }
 
-    if (!partComponentMap.hasOwnProperty(part.type)) {
+    if (!Object.prototype.hasOwnProperty.call(partComponentMap, part.type)) {
       return null
     }
 

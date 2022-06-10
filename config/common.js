@@ -3,7 +3,6 @@
  */
 
 const { data } = require('./data')
-const { possibleUsers } = require('./mockHeaders')
 
 const inProduction = process.env.NODE_ENV === 'production'
 

@@ -10,12 +10,12 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
-  const ButtonPopup = ({ color, index }) => (
+  const ButtonPopup = ({ color }) => (
     <Popup
       content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
       trigger={
         <button
-          key={index}
+          key={color}
           name={color}
           type="button"
           className={`color-button-${chosenColor === color ? 'active' : ''}`}
@@ -64,8 +64,8 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
         <Accordion.Content active={showing === question.id} className="question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
           <div className="color-buttons noprint">
-            {buttonColors.map((color, index) => (
-              <ButtonPopup key={index} color={color} index={index} />
+            {buttonColors.map(color => (
+              <ButtonPopup key={color} color={color} />
             ))}
           </div>
           {answers.length > 0 ? (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import * as _ from 'lodash'
 import {
   doctoralIams,

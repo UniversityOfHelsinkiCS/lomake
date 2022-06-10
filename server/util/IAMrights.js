@@ -29,8 +29,8 @@ const parseHyGroupsFromHeader = hyGroups => {
 /**
  * Return given access to all programmes where predicate is true
  * (all if no predicate defined)
- * @param {object} accessLevel 
- * @param {(program: object) => boolean} where 
+ * @param {object} accessLevel
+ * @param {(program: object) => boolean} where
  * @returns {object} access to programmes
  */
 const getAllProgrammeAccess = (accessLevel, where) => {
@@ -224,7 +224,7 @@ const getIAMRights = hyGroupsHeader => {
     getUniversityWriteAccess,
     getProgrammeAdminAccess,
     getAdmin,
-    getSuperAdmin
+    getSuperAdmin,
   ]
     .map(f => f(hyGroups))
     .forEach(({ access: newAccess, specialGroup: newSpecialGroup }) => {
