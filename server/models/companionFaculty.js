@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  companionFaculty.associate = function (models) {
+  companionFaculty.associate = models => {
     companionFaculty.belongsTo(models.faculty, { foreignKey: 'facultyId' })
     companionFaculty.belongsTo(models.studyprogramme, { foreignKey: 'studyprogrammeId' })
   }
