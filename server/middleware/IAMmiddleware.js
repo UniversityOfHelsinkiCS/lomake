@@ -17,7 +17,7 @@ const IAMmiddleware = async (req, _, next) => {
     await user.save()
   }
 
-  next()
+  return next()
 }
 
 module.exports = IAMmiddleware
