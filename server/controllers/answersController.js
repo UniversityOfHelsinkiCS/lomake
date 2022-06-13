@@ -39,7 +39,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error'})
   }
 }
 
