@@ -9,7 +9,7 @@ const shouldBeSuperAdmin = uid => {
 }
 
 const userMiddleware = async (req, res, next) => {
-  if (req.path.includes('socket.io')) next()
+  if (req.path.includes('socket.io')) return next()
   if (req.path.includes('/cypress/')) return next()
   if (!req.headers.uid) {
     logger.error('missing uid')
@@ -31,9 +31,10 @@ const userMiddleware = async (req, res, next) => {
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
     req.user = user
 
-    next()
+    return next()
   } catch (error) {
     logger.error('Database error:', error)
+    return undefined
   }
 }
 

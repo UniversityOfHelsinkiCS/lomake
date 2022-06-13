@@ -3,7 +3,7 @@ const logger = require('@util/logger')
 const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
 const { cypressUids } = require('@root/config/mockHeaders')
-const { createDraftAnswers } = require('./../scripts/draftAndFinalAnswers')
+const { createDraftAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const getFakeAnswers = year => {
   const fields = [
