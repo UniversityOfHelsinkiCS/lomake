@@ -207,7 +207,7 @@ export const cleanText = string => {
 export const getMeasuresAnswer = (data, rawId) => {
   const questionId = rawId.substring(0, rawId.length - 5)
   if (!data) return ''
-  if (data[`${questionId}_text`]) return data[`${rawId}_text`]
+  if (data[`${questionId}_text`]) return data[`${id}_text`]
 
   if (data[`${questionId}_1_text`]) {
     let measures = ''
@@ -249,7 +249,7 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear }) => {
 
 // https://stackoverflow.com/a/9083076
 export function romanize(num) {
-  if (Number.isNaN(num)) return NaN
+  if (isNaN(num)) return NaN
   if (num === 0) return 0
   const digits = String(+num).split('')
   const key = [
