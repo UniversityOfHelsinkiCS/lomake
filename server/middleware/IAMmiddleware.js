@@ -3,8 +3,8 @@ const { getIAMRights } = require('@util/IAMrights')
 const logger = require('@util/logger')
 
 const IAMmiddleware = async (req, _, next) => {
-  if (req.path.includes('socket.io')) next()
-  if (req.path.includes('/cypress/')) next()
+  if (req.path.includes('socket.io')) return next()
+  if (req.path.includes('/cypress/')) return next()
 
   const { user } = req
   const { headers } = req
