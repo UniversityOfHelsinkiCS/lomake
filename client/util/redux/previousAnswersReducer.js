@@ -25,10 +25,10 @@ export default (state = { data: null }, action) => {
             let temp = curr[1].replace(/_x000D_\n/g, '\n\n') // for example in bsc comp science
             temp = temp.replace(/\n•/g, '\n\n•') // for example in master of arts
 
-            return (prev = {
+            return {
               ...prev,
               [curr[0]]: temp,
-            })
+            }
           }, {})
         : undefined
 
