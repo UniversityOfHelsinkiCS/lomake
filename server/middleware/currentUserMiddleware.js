@@ -13,7 +13,7 @@ const currentUser = async (req, _, next) => {
       req.user = fakeUser
     }
   }
-  next()
+  return next()
 }
 
 module.exports = currentUser
