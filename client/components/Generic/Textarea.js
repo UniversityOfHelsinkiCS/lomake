@@ -93,6 +93,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     const textLength = editorState.getCurrentContent().getPlainText().length
     const newLength = value.length + textLength
     const isTooLong = newLength > MAX_LENGTH
+    // eslint-disable-next-line no-alert
     if (isTooLong) window.alert(genericTranslations.tooLongPaste[lang](newLength, MAX_LENGTH))
     return isTooLong
   }

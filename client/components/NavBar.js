@@ -44,6 +44,8 @@ export default () => {
 
   useEffect(() => {
     if (lang === 'se') {
+      // alert will be removed once swedish translations have been completed
+      // eslint-disable-next-line no-alert
       alert(warning)
     }
   }, [lang])

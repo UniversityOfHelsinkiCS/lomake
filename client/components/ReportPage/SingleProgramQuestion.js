@@ -35,14 +35,15 @@ const SingleProgramQuestion = ({ answers, question }) => (
       {answers &&
         answers
           .sort((a, b) => a.name.localeCompare(b.name))
-          .map((programme, index) => (
-            <div key={index}>
+          .map(programme => (
+            <div key={`${question.id}-${programme.key}`}>
               <label className="answer-title">
                 {programme.name} <span className={`answer-circle-${programme.color}`} />
               </label>
               <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                 {programme.answer &&
                   programme.answer.split('\n').map((row, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <li key={index} className="answer-row">
                       {row}
                     </li>
