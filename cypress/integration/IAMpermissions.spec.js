@@ -1,14 +1,13 @@
-/* eslint-disable no-undef */
 /// <reference types="cypress" />
 
 import { defaultYears } from '../../config/common'
-import { getDoctoralProgrammeCount, getTotalProgrammeCount } from '../support/helpers'
+import helpers from '../support/helpers'
 
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/admin')
     cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
   })
@@ -38,14 +37,14 @@ describe('IAM permission tests', () => {
   it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getDoctoralProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralUser', 'T920103', { read: true })
 
@@ -55,7 +54,7 @@ describe('IAM permission tests', () => {
   it('Doctoral writing user has writing rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralWritingUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getDoctoralProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralWritingUser', 'T920103', { read: true, write: true, admin: false })
 
@@ -73,7 +72,7 @@ describe('IAM permission tests', () => {
   it('Rehtoraatti gets university wide read access', () => {
     cy.login('cypressRehtoriUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressRehtoriUser', 'All programmes')
   })
@@ -81,7 +80,7 @@ describe('IAM permission tests', () => {
   it('Faculty iam group gives reading rights to all programmes', () => {
     cy.login('cypressTheologyFacultyUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
   })
@@ -89,7 +88,7 @@ describe('IAM permission tests', () => {
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
     cy.hasAccess('cypressKosuUser', 'KH50_001', { read: true, write: true, admin: false })
@@ -100,7 +99,7 @@ describe('IAM permission tests', () => {
   it('Dean who is also a kojo gets reading rights to all programmes and admin rights to one programme', () => {
     cy.login('cypressKojoDeanUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoDeanUser', 'MH50_001', { read: true, write: true, admin: true })
     cy.hasAccess('cypressKojoDeanUser', 'KH50_001', { read: true, write: false, admin: false })
   })
@@ -108,7 +107,7 @@ describe('IAM permission tests', () => {
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
   })
@@ -116,7 +115,7 @@ describe('IAM permission tests', () => {
   it('Doctoral kosu who is also a regular kosu gets writing rights to all programmes', () => {
     cy.login('cypressDoctoralKosuAndRegularKosuUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', getTotalProgrammeCount())
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'T920103', { read: true, write: true, admin: false })
     cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'KH50_004', { read: true, write: true, admin: false })
@@ -169,6 +168,8 @@ describe('IAM permission tests', () => {
     cy.getYearSelector()
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
-    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(getTotalProgrammeCount())
+    cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
+      helpers.getTotalProgrammeCount()
+    )
   })
 })
