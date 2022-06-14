@@ -37,14 +37,14 @@ describe('IAM permission tests', () => {
   it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount() - 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
     cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount() - 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralUser', 'T920103', { read: true })
 
