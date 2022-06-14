@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
-import { getAllTokens } from 'Utilities/redux/accessTokenReducer'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { usersPageTranslations as translations } from 'Utilities/translations'
 import { isSuperAdmin } from '@root/config/common'
@@ -21,7 +20,6 @@ export default () => {
   }, [lang])
 
   useEffect(() => {
-    dispatch(getAllTokens())
     dispatch(getAllUsersAction())
   }, [])
 
