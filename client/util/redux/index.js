@@ -10,7 +10,6 @@ import oldAnswers from './oldAnswersReducer'
 import language from './languageReducer'
 import accessToken from './accessTokenReducer'
 import previousAnswers from './previousAnswersReducer'
-import programmesTokens from './programmesTokensReducer'
 import programmesUsers from './programmesUsersReducer'
 import studyProgrammes from './studyProgrammesReducer'
 import deadlines from './deadlineReducer'
@@ -28,7 +27,6 @@ export default combineReducers({
   language,
   accessToken,
   previousAnswers,
-  programmesTokens,
   programmesUsers,
   studyProgrammes,
   deadlines,
