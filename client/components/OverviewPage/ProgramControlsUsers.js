@@ -1,62 +1,15 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Icon, Header, Grid, Segment, Button, Popup } from 'semantic-ui-react'
+import { useSelector } from 'react-redux'
+import { Icon, Header, Grid, Segment } from 'semantic-ui-react'
 
-import { editUserAccessAction } from 'Utilities/redux/programmesUsersReducer'
-import { iamsInUse } from '@root/config/common'
 import { overviewPageTranslations as translations } from 'Utilities/translations'
 
-const SwitchableBadge = ({ cyTag, currentAccess, grant, remove, disabled = false }) => {
-  const lang = useSelector(state => state.language)
-  if (currentAccess)
-    return (
-      <Popup
-        trigger={<Icon data-cy={cyTag} name="check" className="users-green" size="large" />}
-        content={
-          <Button
-            data-cy="removePermissions-button"
-            disabled={disabled}
-            color="red"
-            content={translations.removeAccess[lang]}
-            onClick={() => remove()}
-          />
-        }
-        on="click"
-        position="top center"
-      />
-    )
-  return (
-    <Popup
-      trigger={<Icon data-cy={cyTag} name="close" className="users-red" size="large" />}
-      content={
-        <Button
-          data-cy="grantPermissions-button"
-          color="green"
-          content={translations.grantAccess[lang]}
-          onClick={() => grant()}
-        />
-      }
-      on="click"
-      position="top center"
-    />
-  )
-}
-
-const IAMSwitchableBadge = ({ cyTag, currentAccess }) => {
+const SwitchableBadge = ({ cyTag, currentAccess }) => {
   if (currentAccess) return <Icon data-cy={cyTag} name="check" className="users-green" size="large" />
   return <Icon data-cy={cyTag} name="close" className="users-red" size="large" />
 }
 
-const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
-  const dispatch = useDispatch()
-
-  const grantOwner = () => dispatch(editUserAccessAction(user.id, programme, { admin: true }))
-  const removeOwner = () => dispatch(editUserAccessAction(user.id, programme, { admin: false }))
-  const grantEdit = () => dispatch(editUserAccessAction(user.id, programme, { write: true }))
-  const removeEdit = () => dispatch(editUserAccessAction(user.id, programme, { write: false }))
-  const grantView = () => dispatch(editUserAccessAction(user.id, programme, { read: true }))
-  const removeView = () => dispatch(editUserAccessAction(user.id, programme, { read: false }))
-
+const OwnerAccordionUserRow = ({ user, programme }) => {
   const read = user.access[programme] ? user.access[programme].read : false
   const write = user.access[programme] ? user.access[programme].write : false
   const admin = user.access[programme] ? user.access[programme].admin : false
@@ -71,43 +24,13 @@ const OwnerAccordionUserRow = ({ currentOwnerCount, user, programme }) => {
           {user.email}
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
-          {iamsInUse ? (
-            <IAMSwitchableBadge cyTag={`read-${user.uid}${read ? '' : '-false'}`} currentAccess={read} />
-          ) : (
-            <SwitchableBadge
-              cyTag={`read-${user.uid}${read ? '' : '-false'}`}
-              disabled={user.access[programme].admin}
-              currentAccess={read}
-              grant={() => grantView()}
-              remove={() => removeView()}
-            />
-          )}
+          <SwitchableBadge cyTag={`read-${user.uid}${read ? '' : '-false'}`} currentAccess={read} />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
-          {iamsInUse ? (
-            <IAMSwitchableBadge cyTag={`write-${user.uid}${write ? '' : '-false'}`} currentAccess={write} />
-          ) : (
-            <SwitchableBadge
-              cyTag={`write-${user.uid}${write ? '' : '-false'}`}
-              disabled={user.access[programme].admin}
-              currentAccess={write}
-              grant={() => grantEdit()}
-              remove={() => removeEdit()}
-            />
-          )}
+          <SwitchableBadge cyTag={`write-${user.uid}${write ? '' : '-false'}`} currentAccess={write} />
         </Grid.Column>
         <Grid.Column textAlign="center" width={2}>
-          {iamsInUse ? (
-            <IAMSwitchableBadge cyTag={`admin-${user.uid}${admin ? '' : '-false'}`} currentAccess={admin} />
-          ) : (
-            <SwitchableBadge
-              cyTag={`admin-${user.uid}${admin ? '' : '-false'}`}
-              currentAccess={admin}
-              grant={() => grantOwner()}
-              remove={() => removeOwner()}
-              disabled={currentOwnerCount <= 1}
-            />
-          )}
+          <SwitchableBadge cyTag={`admin-${user.uid}${admin ? '' : '-false'}`} currentAccess={admin} />
         </Grid.Column>
       </Grid.Row>
     </>
@@ -119,12 +42,6 @@ const OwnerAccordionUsers = ({ programme }) => {
   const users = useSelector(state => state.programmesUsers)
 
   if (!users.data || users.pending) return null
-
-  const currentOwnerCount = users.data.reduce((pre, cur) => {
-    if (!cur.access[programme]) return pre
-    if (cur.access[programme].admin) return pre + 1
-    return pre
-  }, 0)
 
   return (
     <div style={{ margin: '3em' }}>
@@ -155,14 +72,7 @@ const OwnerAccordionUsers = ({ programme }) => {
               </Grid.Column>
             </Grid.Row>
           ) : (
-            users.data.map(user => (
-              <OwnerAccordionUserRow
-                currentOwnerCount={currentOwnerCount}
-                user={user}
-                programme={programme}
-                key={user.id}
-              />
-            ))
+            users.data.map(user => <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />)
           )}
         </Grid>
       </Segment>
