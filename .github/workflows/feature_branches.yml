@@ -19,7 +19,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/comparison.spec.js"
@@ -44,7 +44,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/form.spec.js"
@@ -69,7 +69,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/formNotifications.spec.js"
@@ -94,7 +94,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/happypath.spec.js"
@@ -119,7 +119,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/IAMpermissions.spec.js"
@@ -144,7 +144,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/management.spec.js"
@@ -169,7 +169,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/misc.spec.js"
@@ -194,7 +194,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/ospa.spec.js"
@@ -219,7 +219,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/permissions.spec.js"
@@ -244,7 +244,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/report.spec.js"
@@ -269,7 +269,7 @@ jobs:
         run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed --tokens"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser firefox --spec "cypress/integration/yearselector.spec.js"

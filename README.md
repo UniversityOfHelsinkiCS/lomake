@@ -10,7 +10,7 @@ The project is split into 2 parts: client and server while index.js in root work
 1. git clone
 2. run `npm install`
 3. run `npm run dev`
-4. run `docker exec -it lomake_dev bash -c "node index.js seed --tokens"` OR obtain a database dump and use that while developing (see [this page](https://www.postgresqltutorial.com/postgresql-restore-database/))
+4. run `docker exec -it lomake_dev bash -c "node index.js seed"` OR obtain a database dump and use that while developing (see [this page](https://www.postgresqltutorial.com/postgresql-restore-database/))
 5. go to http://localhost:8000
 
 ### Changing logged in user while developing
@@ -26,7 +26,7 @@ Use setHeaders() to select user for development purposes.
 
 When deploying Lomake to a production server for the first time, the database should be seeded.
 
-The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "node index.js seed --tokens"`
+The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "node index.js seed"`
 
 ### Running Cypress tests
 

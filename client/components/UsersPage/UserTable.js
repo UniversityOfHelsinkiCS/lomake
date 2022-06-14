@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Input, Icon, Loader, Table } from 'semantic-ui-react'
+import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
 import User from 'Components/UsersPage/User'
-import NewUserForm from 'Components/UsersPage/NewUserForm'
-import CustomModal from 'Components/Generic/CustomModal'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isAdmin, isSuperAdmin, iamsInUse } from '@root/config/common'
-import AccessModal from './AccessModal'
+import { isAdmin, isSuperAdmin } from '@root/config/common'
 import './UsersPage.scss'
 
 export default () => {
@@ -18,12 +15,8 @@ export default () => {
   const [reverse, setReverse] = useState(false)
   const [nameFilter, setNameFilter] = useState('')
   const [accessFilter, setAccessFilter] = useState('')
-  const [programmeFilter, setFilter] = useState('')
-  const [editUserFormData, setEditUserFormData] = useState(null)
-  const [showNewUserForm, setShowNewUserForm] = useState(false)
 
   const debouncedName = useDebounce(nameFilter, 200)
-  const debouncedProgramme = useDebounce(programmeFilter, 200)
 
   const lang = useSelector(state => state.language)
   const users = useSelector(state => state.users)
@@ -65,17 +58,6 @@ export default () => {
     return byAccess
   }
 
-  const filteredProgrammes = usersProgrammes.filter(p => {
-    if (programmeFilter === '') return false
-    const prog = p.name[lang]
-    return prog.toLowerCase().includes(debouncedProgramme.toLowerCase())
-  })
-
-  const handleSearch = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
-
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
     const sortHandler = sortable
       ? () => {
@@ -105,24 +87,6 @@ export default () => {
 
   return (
     <>
-      {showNewUserForm && (
-        <CustomModal
-          closeModal={() => setShowNewUserForm(false)}
-          children={<NewUserForm closeModal={() => setShowNewUserForm(false)} />}
-        />
-      )}
-      {editUserFormData && (
-        <AccessModal
-          user={sortedUsersToShow.find(u => u.id === editUserFormData.id)}
-          setModalData={setEditUserFormData}
-          handleSearch={handleSearch}
-          programmeFilter={programmeFilter}
-          onEmpty={() => setFilter('')}
-          lang={lang}
-          filteredProgrammes={filteredProgrammes}
-          programmeCodesAndNames={programmeCodesAndNames}
-        />
-      )}
       <div className="user-filter-container">
         <Input
           className="user-filter"
@@ -140,16 +104,6 @@ export default () => {
           iconPosition="left"
           placeholder={translations.filterByAccess[lang]}
         />
-        {!iamsInUse && (
-          <Button
-            data-cy="add-user-button"
-            style={{ alignSelf: 'right', marginLeft: 'auto' }}
-            onClick={() => setShowNewUserForm(true)}
-            color="blue"
-          >
-            {translations.addUser[lang]}
-          </Button>
-        )}
       </div>
       <Table celled compact stackable>
         <Table.Header>
@@ -165,9 +119,7 @@ export default () => {
               field: 'specialGroup',
               sortable: true,
             })}
-            {!iamsInUse &&
-              getCustomHeader({ name: translations.editUser[lang], width: 1, field: 'editUser', sortable: false })}
-            {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'deleteUser', sortable: false })}
+            {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -177,7 +129,6 @@ export default () => {
               lang={lang}
               user={u}
               key={u.id}
-              setModalData={setEditUserFormData}
               programmeCodesAndNames={programmeCodesAndNames}
             />
           ))}
