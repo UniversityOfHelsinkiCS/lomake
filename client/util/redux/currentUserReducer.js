@@ -28,6 +28,8 @@ export const getYearsUserHasAccessToAction = user => {
   // Add current year as the first one, if it does not exist
   if (!allYears.includes(currentYear)) allYears.unshift(currentYear)
 
+  // eslint disabled as using for-loop is reasonable here
+  // eslint-disable-next-line no-restricted-syntax
   for (const p of access) {
     // If user only has access to one year of data, show only that year in the filters and front page
     if (p.year && !usersYears.includes(p.year)) {
