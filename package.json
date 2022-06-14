@@ -94,7 +94,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "./grep_is.sh"
+      "pre-commit": "./grep_is.sh && npm run lint"
     }
   },
   "browserslist": {
