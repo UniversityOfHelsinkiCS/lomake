@@ -42,7 +42,6 @@ describe("Previous year's answers", () => {
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('not.exist')
   })
 
-  // FIXME: flaky
   it('Can view old answers in Form-page and switch back to editMode to continue working.', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit(`/form/${testProgrammeCode}`)

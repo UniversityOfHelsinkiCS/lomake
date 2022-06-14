@@ -218,21 +218,6 @@ const deleteUser = async (req, res) => {
   }
 }
 
-const getUserOrganizations = async (req, res) => {
-  try {
-    const { params } = req
-
-    const userInfo = await db.user.findOne({ where: { uid: params.username } })
-
-    if (!userInfo) {
-      return res.send({})
-    }
-    return res.send(userInfo.access)
-  } catch (e) {
-    return res.status(500).json({ error: 'Database error ' })
-  }
-}
-
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
@@ -242,5 +227,4 @@ module.exports = {
   getProgrammesUsers,
   editUserAccess,
   deleteUser,
-  getUserOrganizations,
 }

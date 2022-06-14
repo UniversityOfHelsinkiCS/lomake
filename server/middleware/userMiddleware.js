@@ -1,12 +1,5 @@
 const logger = require('@util/logger')
 const db = require('@models/index')
-const { inProduction, isDevSuperAdminUid, isStagingSuperAdminUid } = require('@util/common')
-
-// Some test-users have been pre-authorized:
-const shouldBeSuperAdmin = uid => {
-  const shouldBeSuper = (!inProduction && isDevSuperAdminUid(uid)) || isStagingSuperAdminUid(uid)
-  return shouldBeSuper ? { superAdmin: true } : {}
-}
 
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) next()
@@ -25,7 +18,7 @@ const userMiddleware = async (req, res, next) => {
         lastname: req.headers.sn,
         email: req.headers.mail,
         access: {},
-        specialGroup: shouldBeSuperAdmin(req.headers.uid),
+        specialGroup: {},
       },
     })
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)

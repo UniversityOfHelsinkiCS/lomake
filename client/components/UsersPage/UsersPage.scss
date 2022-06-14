@@ -30,40 +30,6 @@
   width: 300px;
 }
 
-.user-access-modal {
-  &-segment {
-    margin-top: 1.7em !important;
-  }
-  &-delete-container {
-    display: flex;
-    justify-content: center;
-  }
-  &-radio {
-    display: flex;
-    justify-content: flex-start;
-  }
-  &-details {
-    color: $gray;
-    margin-bottom: 0.3em;
-  }
-  &-save-button {
-    color: $blue;
-    margin-top: 0.5em !important; 
-  }
-  > h2 {
-    margin-bottom: 0.8em;
-    margin-top: 1em !important;
-  }
-}
-
-.user-form-field {
-  margin: 0.5em 1em;
-}
-
-.user-delete-button {
-  width: 90%;
-}
-
 .user-programme-list {
   width: 400px;
 }

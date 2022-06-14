@@ -5,7 +5,6 @@ import AboutPage from 'Components/AboutPage'
 import FormView from 'Components/FormView'
 import AdminPage from 'Components/UsersPage'
 import OverviewPage from 'Components/OverviewPage'
-import ClaimAccessPage from 'Components/ClaimAccessPage'
 import ReportPage from 'Components/ReportPage'
 import ComparisonPage from 'Components/ComparisonPage'
 
@@ -18,7 +17,6 @@ export default () => (
       <Route exact path="/comparison" component={ComparisonPage} />
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
-      <Route exact path="/access/:url" render={props => <ClaimAccessPage url={props.match.params.url} />} />
       <Redirect to="/" />
     </Switch>
   </div>
