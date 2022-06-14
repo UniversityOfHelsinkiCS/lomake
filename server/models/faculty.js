@@ -11,19 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  faculty.associate = function (models) {
+  faculty.associate = models => {
     // companionStudyprogrammes indicate that this faculty is working in colloboration with the programme,
     // but is not its owner. aka. "kumppanuusohjelma"
     faculty.belongsToMany(models.studyprogramme, {
       through: 'companionFaculty',
       foreignKey: 'facultyId',
       as: 'companionStudyprogrammes',
-    }),
-      // ownedProgrammes are owned by the faculty. "vastuutiedekunta"
-      faculty.hasMany(models.studyprogramme, {
-        as: 'ownedProgrammes',
-        foreignKey: 'primaryFacultyId',
-      })
+    })
+    // ownedProgrammes are owned by the faculty. "vastuutiedekunta"
+    faculty.hasMany(models.studyprogramme, {
+      as: 'ownedProgrammes',
+      foreignKey: 'primaryFacultyId',
+    })
   }
 
   return faculty
