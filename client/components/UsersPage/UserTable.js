@@ -36,6 +36,14 @@ export default () => {
 
   if (reverse) sortedUsersToShow.reverse()
 
+  const mapProgrammes = programmes => {
+    const programmeMap = new Map()
+    programmes.forEach(p => programmeMap.set(p.key, p.name[lang]))
+    return programmeMap
+  }
+
+  const programmeCodesAndNames = mapProgrammes(usersProgrammes)
+
   const filteredUsers = () => {
     if (!nameFilter && !accessFilter) return sortedUsersToShow
 
@@ -76,14 +84,6 @@ export default () => {
       </Table.HeaderCell>
     )
   }
-
-  const mapProgrammes = programmes => {
-    const programmeMap = new Map()
-    programmes.forEach(p => programmeMap.set(p.key, p.name[lang]))
-    return programmeMap
-  }
-
-  let programmeCodesAndNames = mapProgrammes(usersProgrammes)
 
   return (
     <>

@@ -132,7 +132,7 @@ const updateField = async (socket, payload, io) => {
         },
       })
 
-      const [rows, [updatedAnswer]] = await db.tempAnswer.update(
+      const [, [updatedAnswer]] = await db.tempAnswer.update(
         { data: { ...currentAnswer.data, ...data } },
         {
           returning: true,

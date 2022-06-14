@@ -71,16 +71,17 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
           {answers.length > 0 ? (
             answers
               .sort((a, b) => a.name.localeCompare(b.name))
-              .map((programme, index) => {
+              .map(programme => {
                 if (chosenColor === 'all' || programme.color === chosenColor) {
                   return (
-                    <div key={index}>
+                    <div key={`${question.id}-${programme.key}`}>
                       <label className="answer-title">
                         {programme.name} <span className={`answer-circle-${programme.color}`} />
                       </label>
                       <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                         {programme.answer &&
                           programme.answer.split('\n').map((row, index) => (
+                            // eslint-disable-next-line react/no-array-index-key
                             <li key={index} className="answer-row">
                               {row}
                             </li>

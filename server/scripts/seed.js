@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { data, facultyMap } = require('@root/config/data')

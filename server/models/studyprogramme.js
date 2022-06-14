@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  studyprogramme.associate = function (models) {
+  studyprogramme.associate = models => {
     // primaryFaculty is the owner of this studyprogram
     studyprogramme.belongsTo(models.faculty, {
       foreignKey: 'primaryFacultyId',
