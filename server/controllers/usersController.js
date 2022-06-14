@@ -179,7 +179,7 @@ const editUserAccess = async (req, res) => {
       }
     }
 
-    const [rows, updatedUser] = await db.user.update(
+    const [, updatedUser] = await db.user.update(
       { access: { ...user.access } },
       {
         where: { id: req.params.id },
