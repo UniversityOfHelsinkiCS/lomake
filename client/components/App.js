@@ -16,6 +16,8 @@ export default () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const deadlines = useSelector(state => state.deadlines)
+  const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
 
   useEffect(() => {
     dispatch(loginAction())
@@ -28,7 +30,7 @@ export default () => {
   useEffect(() => {
     const user = currentUser.data
     if (user) {
-      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : 2021
+      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : 2022
       dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
       dispatch(getDeadlineAndDraftYear())
@@ -38,6 +40,27 @@ export default () => {
       dispatch(setMultipleYears([defaultYear]))
     }
   }, [currentUser])
+
+  // When oldAnswers are ready, check if default year should be something else
+  useEffect(() => {
+    if (oldAnswers.data) {
+      if (
+        deadlines.nextDeadline &&
+        new Date(deadlines.nextDeadline.date) >= new Date() &&
+        currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
+      ) {
+        dispatch(setYear(deadlines.draftYear.year))
+        dispatch(setMultipleYears([deadlines.draftYear.year]))
+      } else {
+        const yearWithAnswers = oldAnswers.data.reduce((acc, answer) => {
+          if (Object.entries(answer.data).length > 0 && answer.year > acc) return answer.year
+          return acc
+        }, 2019)
+        dispatch(setYear(yearWithAnswers))
+        dispatch(setMultipleYears([yearWithAnswers]))
+      }
+    }
+  }, [oldAnswers])
 
   if (!currentUser.data || !studyProgrammes) return null
 
