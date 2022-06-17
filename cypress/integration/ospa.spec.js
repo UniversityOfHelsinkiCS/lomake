@@ -63,12 +63,12 @@ describe('SuperAdmin user tests', () => {
 
     // Visit the form page
     cy.visit('/form/KH50_004')
-    cy.get('[data-cy=textarea-learning_outcomes]')
-    cy.get('.editor-class').should('not.exist')
+    // cy.get('[data-cy=textarea-learning_outcomes]')
+    // cy.get('.editor-class').should('not.exist')
 
-    // Select the editable year
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    // // Select the editable year
+    // cy.getYearSelector()
+    // cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     // Edit text
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
