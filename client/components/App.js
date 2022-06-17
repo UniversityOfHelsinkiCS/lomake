@@ -30,34 +30,33 @@ export default () => {
   useEffect(() => {
     const user = currentUser.data
     if (user) {
-      const defaultYear = user.yearsUserHasAccessTo ? user.yearsUserHasAccessTo[0] : 2022
       dispatch(getUsersProgrammes())
       dispatch(getStudyProgrammes())
       dispatch(getDeadlineAndDraftYear())
       dispatch(getFaculties())
       dispatch(getAnswersAction())
-      dispatch(setYear(defaultYear))
-      dispatch(setMultipleYears([defaultYear]))
     }
   }, [currentUser])
 
-  // When oldAnswers are ready, check if default year should be something else
+  // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
+    let year = 2019
     if (oldAnswers.data) {
       if (
         deadlines.nextDeadline &&
         new Date(deadlines.nextDeadline.date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
-        dispatch(setYear(deadlines.draftYear.year))
-        dispatch(setMultipleYears([deadlines.draftYear.year]))
+        year = deadlines.draftYear.year
       } else {
-        const yearWithAnswers = oldAnswers.data.reduce((acc, answer) => {
+        year = oldAnswers.data.reduce((acc, answer) => {
           if (Object.entries(answer.data).length > 0 && answer.year > acc) return answer.year
           return acc
         }, 2019)
-        dispatch(setYear(yearWithAnswers))
-        dispatch(setMultipleYears([yearWithAnswers]))
+      }
+      if (currentUser.data.yearsUserHasAccessTo.includes(year)) {
+        dispatch(setYear(year))
+        dispatch(setMultipleYears([year]))
       }
     }
   }, [oldAnswers])

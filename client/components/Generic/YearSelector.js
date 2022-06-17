@@ -54,7 +54,7 @@ export default function YearSelector({ multiple, size, label }) {
       {multiple && <label className={`year-filter-label${multipleYears.length === 0 ? '-alert' : ''}`}>{label}</label>}
       <Select
         className="button basic gray"
-        disabled={!previousYearsWithAnswers || yearOptions.length <= 1}
+        disabled={!year || !previousYearsWithAnswers || yearOptions.length <= 1}
         data-cy="yearSelector"
         name="year"
         fluid
