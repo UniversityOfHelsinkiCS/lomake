@@ -63,12 +63,6 @@ describe('SuperAdmin user tests', () => {
 
     // Visit the form page
     cy.visit('/form/KH50_004')
-    // cy.get('[data-cy=textarea-learning_outcomes]')
-    // cy.get('.editor-class').should('not.exist')
-
-    // // Select the editable year
-    // cy.getYearSelector()
-    // cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
 
     // Edit text
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
@@ -99,6 +93,8 @@ describe('SuperAdmin user tests', () => {
 
   it('Can write to form and change from smiley table to trends view', () => {
     cy.login('cypressSuperAdminUser')
+    // check that page is ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
     // Create a new deadline
     cy.get('[data-cy=nav-admin]').click()
