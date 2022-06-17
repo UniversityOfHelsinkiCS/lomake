@@ -13,6 +13,10 @@ describe('SuperAdmin user tests', () => {
 
   it('Deadline can be deleted and created and deleting a deadline locks forms.', () => {
     cy.login('cypressSuperAdminUser')
+
+    // check that page is ready
+    cy.get('[data-cy=nav-admin]')
+
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -64,7 +68,7 @@ describe('SuperAdmin user tests', () => {
     // Visit the form page
     cy.visit('/form/KH50_004')
 
-    // Edit text
+    // Edit text, year should have automatically switched to editable year
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', ' and editing old year')
     cy.reload()
