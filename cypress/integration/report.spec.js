@@ -58,8 +58,8 @@ describe('ReportPage tests', () => {
   it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit('/')
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.wait(1000)
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
