@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
@@ -8,6 +9,7 @@ describe('Form tests', () => {
     const user = 'cypressUser'
     cy.login(user)
     cy.visit('/')
+    cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
