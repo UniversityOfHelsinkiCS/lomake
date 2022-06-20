@@ -15,7 +15,7 @@ describe('SuperAdmin user tests', () => {
     cy.login('cypressSuperAdminUser')
 
     // check that page is ready
-    cy.get('[data-cy=nav-admin]')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -28,6 +28,8 @@ describe('SuperAdmin user tests', () => {
     cy.visit('/form/KH50_004')
     cy.get('.editor-class').should('not.exist')
     cy.visit('/')
+    // check that page is ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
@@ -49,6 +51,8 @@ describe('SuperAdmin user tests', () => {
 
     // Delete pre-generated deadline
     cy.visit('/')
+    // check that page is ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
     cy.get('[data-cy=deleteDeadline]').click()

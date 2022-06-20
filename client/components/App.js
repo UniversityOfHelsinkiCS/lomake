@@ -59,7 +59,7 @@ export default () => {
         dispatch(setMultipleYears([year]))
       }
     }
-  }, [oldAnswers])
+  }, [oldAnswers, deadlines])
 
   if (!currentUser.data || !studyProgrammes) return null
 

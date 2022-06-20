@@ -9,7 +9,6 @@ describe('Form tests', () => {
     const user = 'cypressUser'
     cy.login(user)
     cy.visit('/')
-    cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
@@ -56,7 +55,7 @@ describe('Form tests', () => {
     cy.get('#measures_6_text').should('not.exist')
 
     cy.reload()
-    cy.wait(4000)
+    cy.wait(1000)
     cy.get('#measures_4_text').contains('4444')
     cy.get('#measures_5_text').contains('5555')
 
