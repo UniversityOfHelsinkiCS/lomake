@@ -12,6 +12,11 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
+
+    // the year changes to year with answers by default, if form not open for current year
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
+
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('contain', 'Smiley')
     cy.get('div').contains('colors').click()
