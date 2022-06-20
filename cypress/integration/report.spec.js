@@ -28,8 +28,10 @@ describe('ReportPage tests', () => {
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
+
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.wait(1000)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
