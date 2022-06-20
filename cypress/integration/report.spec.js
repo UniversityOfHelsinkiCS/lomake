@@ -12,6 +12,11 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
+
+    // the year changes to year with answers by default, if form not open for current year
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
+
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('contain', 'Smiley')
     cy.get('div').contains('colors').click()
@@ -23,6 +28,9 @@ describe('ReportPage tests', () => {
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
+
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
@@ -30,6 +38,7 @@ describe('ReportPage tests', () => {
 
     cy.visit('/')
     cy.reload()
+    cy.wait(1000)
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
@@ -49,6 +58,7 @@ describe('ReportPage tests', () => {
   it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit('/')
+    cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
@@ -154,6 +164,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('be.visible').click()
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text]')
+    cy.wait(1000)
     cy.get('path').eq(1).should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
   })
 })

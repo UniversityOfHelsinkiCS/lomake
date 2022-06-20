@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
@@ -16,6 +17,7 @@ describe('Form tests', () => {
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
+    cy.wait(1000)
 
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
@@ -28,6 +30,7 @@ describe('Form tests', () => {
 
     // Check that the changes have been saved:
     cy.visit('/')
+    cy.wait(1000)
 
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`)
       .should('have.css', 'background-color')
@@ -52,6 +55,7 @@ describe('Form tests', () => {
     cy.get('#measures_6_text').should('not.exist')
 
     cy.reload()
+    cy.wait(1000)
     cy.get('#measures_4_text').contains('4444')
     cy.get('#measures_5_text').contains('5555')
 
