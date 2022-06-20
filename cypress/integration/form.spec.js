@@ -18,6 +18,7 @@ describe('Form tests', () => {
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
+    cy.wait(1000)
 
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
@@ -54,6 +55,7 @@ describe('Form tests', () => {
     cy.get('#measures_6_text').should('not.exist')
 
     cy.reload()
+    cy.wait(4000)
     cy.get('#measures_4_text').contains('4444')
     cy.get('#measures_5_text').contains('5555')
 
