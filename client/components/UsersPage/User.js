@@ -87,7 +87,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         <Table.Cell data-cy="user-access-groups">
           {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang))}
         </Table.Cell>
-        {isSuperAdmin(currentUser) && (
+        {isAdmin(currentUser) && (
           <Table.Cell>
             <Icon onClick={logInAs} size="large" name="sign-in" />
           </Table.Cell>

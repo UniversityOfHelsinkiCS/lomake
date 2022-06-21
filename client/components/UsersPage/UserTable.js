@@ -7,7 +7,7 @@ import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
 import { usersPageTranslations as translations } from 'Utilities/translations'
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import './UsersPage.scss'
 
 export default () => {
@@ -119,7 +119,7 @@ export default () => {
               field: 'specialGroup',
               sortable: true,
             })}
-            {isSuperAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
+            {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
         </Table.Header>
         <Table.Body>
