@@ -2,7 +2,7 @@ const db = require('@models')
 const logger = require('@util/logger')
 
 const getCurrentUser = async (req, res) => {
-  if (req.user) {
+  if (req.user && !req.headers['x-admin-logged-in-as']) {
     try {
       const now = new Date()
       await db.user.update(
