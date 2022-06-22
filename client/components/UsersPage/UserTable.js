@@ -106,7 +106,7 @@ export default () => {
         />
       </div>
       <Table celled compact stackable>
-        <Table.Header>
+        <Table.Header className="sticky-header">
           <Table.Row>
             {getCustomHeader({ name: translations.name[lang], width: 2, field: 'lastname' })}
             {getCustomHeader({ name: translations.userId[lang], width: 1, field: 'uid' })}
