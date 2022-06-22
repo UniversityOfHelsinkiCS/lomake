@@ -93,7 +93,7 @@ const DeadlineSetting = () => {
       {warning && (
         <p>
           <b>
-            <span style={{ color: colors.red }} data-cy="previousDeadline-warning">
+            <span data-cy="previousDeadline-warning" className="deadline-warning">
               {translations.deadlineWarning[lang]}
             </span>
           </b>
