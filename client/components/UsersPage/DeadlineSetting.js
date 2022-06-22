@@ -14,6 +14,7 @@ const DeadlineSetting = () => {
   const [newDate, setNewDate] = useState(null)
   const [newDraftYear, setNewDraftYear] = useState(null)
   const [yearOptions, setYearOptions] = useState([])
+  const [warning, setWarning] = useState(false)
   const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
@@ -35,6 +36,14 @@ const DeadlineSetting = () => {
     })
     setYearOptions(options)
   }, [currentUser])
+
+  useEffect(() => {
+    if (newDraftYear && draftYear && draftYear.year !== newDraftYear) {
+      setWarning(true)
+    } else {
+      setWarning(false)
+    }
+  }, [newDraftYear])
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
@@ -81,12 +90,21 @@ const DeadlineSetting = () => {
           onChange={(e, { value }) => setNewDraftYear(value)}
         />
       </div>
+      {warning && (
+        <p>
+          <b>
+            <span style={{ color: colors.red }} data-cy="previousDeadline-warning">
+              {translations.deadlineWarning[lang]}
+            </span>
+          </b>
+        </p>
+      )}
       <Button
         data-cy="updateDeadline"
         primary
         compact
         size="mini"
-        disabled={!newDate || !newDraftYear}
+        disabled={warning || !newDate || !newDraftYear}
         onClick={handleDeadlineSave}
       >
         {translations.updateDeadline[lang]} and draft year

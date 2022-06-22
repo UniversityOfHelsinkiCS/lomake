@@ -1278,6 +1278,11 @@ export const usersPageTranslations = {
     fi: 'Viimeistä aukiolopäivää ei tälle vuodelle ole vielä asetettu tai se on jo umpeutunut. ',
     se: 'No deadline has yet been set for this year or the deadline has already passed. ',
   },
+  deadlineWarning: {
+    en: 'Form is already open for another draft year. Please freeze the form first so all data is saved properly',
+    fi: 'Lomake on jo auki toiselle vuodelle, lukitse lomake ennen uuden vuoden avaamista, jotta tiedot tallentuvat oikein',
+    sv: '',
+  },
   contactToska: {
     en: 'If you wish to change the deadline, please contact Toska (grp-toska@helsinki.fi).',
     fi: 'Jos viimeiseen aukiolopäivään tulee muutoksia, otathan yhteyden Toskaan (grp-toska@helsinki.fi).',
