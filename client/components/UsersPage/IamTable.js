@@ -42,7 +42,7 @@ const IamTable = () => {
             'Koulutussuunnittelijat ja opintoasiainpäälliköt'
           )}
           {getRowsForAccessGroup(
-            _.uniq(['hy-tiedekunta-maisteri/kandi-kojot', 'hy-tiedekunta-dekanaatti', 'hy-rehtoraatti']),
+            _.uniq(['hy-[tiedekunta]-maisteri/kandi-kojot', 'hy-[tiedekunta]-dekanaatti', 'hy-rehtoraatti']),
             'Lukuoikeudet kaikkiin ohjelmiin',
             'Dekanaatit, rehtoraatti ja koulutusohjelmien johtajat'
           )}
@@ -62,17 +62,17 @@ const IamTable = () => {
             'Tutkijakoulun johtoryhmä'
           )}
           {getRowsForAccessGroup(
-            ['hy-tiedekunta-koulutusohjelma-jory & hy-tiedekunta-maisteri/kandi-kojot & hy-employees'],
+            ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-[tiedekunta]-maisteri/kandi-kojot & hy-employees'],
             'Admin-oikeudet kyseiseen koulutusohjelmaan',
             'Koulutusohjelmien johtajat'
           )}
           {getRowsForAccessGroup(
-            ['hy-tiedekunta-koulutusohjelma-jory & hy-employees'],
+            ['hy-[tiedekunta]-[koulutusohjelma]-jory & hy-employees'],
             'Kirjoitusoikeudet kyseiseen koulutusohjelmaan',
             'Koulutusohjelman johtoryhmän työsuhteessa olevat jäsenet'
           )}
           {getRowsForAccessGroup(
-            ['hy-tiedekunta-koulutusohjelma-jory'],
+            ['hy-[tiedekunta]-[koulutusohjelma]-jory'],
             'Lukuoikeudet kyseiseen koulutusohjelmaan',
             'Koulutusohjelman johtoryhmän opiskelijajäsenet'
           )}
