@@ -96,9 +96,6 @@ const DeadlineSetting = () => {
           {translations.deleteThisDeadline[lang]}
         </Button>
       )}
-      <Button data-cy="discardDrafts" compact size="mini" disabled={!draftYear || !nextDeadline}>
-        Scratch that
-      </Button>
       <div style={{ margin: '1em 0em' }}>
         <p>
           <b>
