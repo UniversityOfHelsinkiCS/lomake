@@ -18,6 +18,8 @@ describe('Form Notification tests', () => {
   it('After being locked by admin, message matches the state', () => {
     cy.login('cypressUser')
     cy.visit(`/`)
+    // check page ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get(`[data-cy=formLocker-button-close]`).click()
     cy.get(`[data-cy=formLocker-verify-close-button]`).click({ waitForAnimations: false })
@@ -31,6 +33,9 @@ describe('Form Notification tests', () => {
   it('After Toska locks all forms, message matches the state', () => {
     cy.login('cypressToskaUser')
     cy.visit('/')
+    // check page ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
+
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
     cy.route('DELETE', '/api/deadlines').as('delete')

@@ -11,6 +11,29 @@ describe('SuperAdmin user tests', () => {
     cy.visit('/')
   })
 
+  it('A second year cannot be opened if another year is already open.', () => {
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
+
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Try adding deadline for another draft year
+    cy.get('.react-datepicker__input-container > input').click() // Open datepicked
+    cy.get('.react-datepicker__navigation').click() // Go to next month
+    cy.get('.react-datepicker__day--014').click() // Select 14th day
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[2]).click()
+
+    cy.get('[data-cy=updateDeadline]').should('be.disabled')
+    cy.get('[data-cy=previousDeadline-warning]')
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+
+    cy.get('[data-cy=previousDeadline-warning]').should('not.exist')
+    cy.get('[data-cy=updateDeadline]').click()
+  })
+
   it('Deadline can be deleted and created and deleting a deadline locks forms.', () => {
     cy.login('cypressSuperAdminUser')
 
@@ -73,6 +96,7 @@ describe('SuperAdmin user tests', () => {
     cy.visit('/form/KH50_004')
 
     // Edit text, year should have automatically switched to editable year
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', ' and editing old year')
     cy.reload()
