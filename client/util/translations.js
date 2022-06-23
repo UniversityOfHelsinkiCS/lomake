@@ -11,8 +11,8 @@ export const aboutPageTranslations = {
   },
   whatIsItReply: {
     fi: 'Tilannekuvalomake on koulutusohjelman johtoryhmässä käytävän tilannekuvakeskustelun asialista ja keskustelun dokumentoinnin väline. Lomaketta käytetään Helsingin yliopistossa.',
-    en: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
-    se: 'The Form is meant to act as a basis of the self-assessment discussion done by the management group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    en: 'The Form is meant to act as a basis of the self-assessment discussion done by the steering group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+    se: 'The Form is meant to act as a basis of the self-assessment discussion done by the steering group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
   },
   howShouldItBeFilled: {
     fi: 'Miten tilannekuvalomake täytetään?',
@@ -819,9 +819,9 @@ export const overviewPageTranslations = {
     en: 'Form - Overview',
     se: 'Blankett - översikt',
   },
-  accessControl: {
-    fi: 'Käytönhallinta',
-    en: 'Access Control',
+  accessRights: {
+    fi: 'Käyttöoikeudet',
+    en: 'Access Rights',
     se: '',
   },
   csvDownload: {
@@ -958,14 +958,19 @@ export const overviewPageTranslations = {
     se: 'Ta bort åtkomst',
   },
   noUsers: {
-    fi: 'Ei käyttäjiä, käytä ylläolevia linkkejä kutsumiseen',
-    en: 'No users, use the links above to invite',
-    se: 'Inga användare. Använd ovanstående länkar för att bjuda in användare.',
+    fi: 'Ei käyttäjiä',
+    en: 'No users',
+    se: 'Inga användare',
   },
-  userList: {
-    fi: 'Käyttäjät',
-    en: 'Users',
-    se: 'Users',
+  userListJory: {
+    fi: 'Lomakkeelle kirjautuneet käyttäjät, jotka kuuluvat koulutusohjelman johtoryhmään',
+    en: 'Steering group members who have accessed the form',
+    se: '',
+  },
+  userListOthers: {
+    fi: 'Lomakkeelle kirjautuneet muut käyttäjät, joilla oikeus koulutusohjelmaan',
+    en: 'Other users who have programme access rights and have accessed the form',
+    se: '',
   },
   // OverviewPage/ColorTable.js
   openManageText: {

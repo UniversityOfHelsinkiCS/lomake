@@ -76,7 +76,7 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${translations.accessControl[lang]} - ${
+          title={`${translations.accessRights[lang]} - ${
             programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
           }`}
           closeModal={() => setProgramControlsToShow(null)}
