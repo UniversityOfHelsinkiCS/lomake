@@ -94,7 +94,7 @@ const OwnerAccordionUsers = ({ programme }) => {
     return members
   }, [])
 
-  const others = users.data.filter(user => !joryMembers.incudes(user))
+  const others = users.data.filter(user => !joryMembers.includes(user))
   // eslint-disable-next-line no-console
   console.log('allUsers', users.data)
   // eslint-disable-next-line no-console
