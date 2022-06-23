@@ -72,11 +72,35 @@ const OwnerAccordionTable = ({ users, lang, programme }) => {
   )
 }
 
+const isJory = groups => {
+  // eslint-disable-next-line consistent-return
+  groups.forEach(iam => {
+    if (iam.includes('jory')) return true
+  })
+  return false
+}
+
 const OwnerAccordionUsers = ({ programme }) => {
   const lang = useSelector(state => state.language)
   const users = useSelector(state => state.programmesUsers)
 
   if (!users.data || users.pending) return null
+
+  // split jory members to their own table
+  const joryMembers = users.data.reduce((members, user) => {
+    if (user.iamGroups && isJory(user.iamGroups)) {
+      return members.concat(user)
+    }
+    return members
+  }, [])
+
+  const others = users.data.filter(user => !joryMembers.incudes(user))
+  // eslint-disable-next-line no-console
+  console.log('allUsers', users.data)
+  // eslint-disable-next-line no-console
+  console.log('joryMembers', joryMembers)
+  // eslint-disable-next-line no-console
+  console.log('otherMembers', others)
 
   return (
     <>

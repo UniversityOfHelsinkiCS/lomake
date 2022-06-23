@@ -10,10 +10,12 @@ const IAMmiddleware = async (req, _, next) => {
   const { headers } = req
 
   if (req.path.includes('login') && AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
-    const { access, specialGroup } = getIAMRights(headers?.hygroupcn)
+    const { access, specialGroup, iamGroups } = getIAMRights(headers?.hygroupcn)
     logger.info({ message: `${user?.uid}: ${headers?.hygroupcn}` })
     user.access = access
     user.specialGroup = specialGroup
+    user.iamGroups = iamGroups
+
     await user.save()
   }
 

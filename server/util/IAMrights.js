@@ -9,6 +9,7 @@ const {
   iamToOrganisationCode,
   isEmployeeIam,
   iamToDoctoralSchool,
+  relevantIAMs,
 } = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -213,6 +214,7 @@ const getIAMRights = hyGroupsHeader => {
   const hyGroups = parseHyGroupsFromHeader(hyGroupsHeader)
   let access = {}
   let specialGroup = {}
+  let iamGroups = []
 
   ;[
     getUniversityReadingRights,
@@ -232,7 +234,11 @@ const getIAMRights = hyGroupsHeader => {
       specialGroup = { ...specialGroup, ...newSpecialGroup }
     })
 
-  return { access, specialGroup }
+  iamGroups = hyGroups.filter(iam => relevantIAMs.includes(iam))
+  // eslint-disable-next-line no-console
+  console.log('header', hyGroups)
+
+  return { access, specialGroup, iamGroups }
 }
 
 module.exports = {

@@ -350,6 +350,19 @@ const iamToOrganisationCode = iam => {
   return [organisationCodes]
 }
 
+const relevantIAMs = []
+  .concat(Object.keys(joryMap))
+  .concat(Object.keys(kojoMap))
+  .concat(Object.values(kojoMap))
+  .concat(doctoralIams)
+  .concat(doctoralWritingIams)
+  .concat(Object.keys(doctoralSchoolMap))
+  .concat(universityWideGroups)
+  .concat(isUniversityWideWritingGroups)
+  .concat(superAdminGroups)
+  .concat(adminGroups)
+  .concat(employeeGroups)
+
 module.exports = {
   doctoralIams,
   doctoralWritingIams,
@@ -369,4 +382,5 @@ module.exports = {
   iamToDoctoralSchool,
   iamToOrganisationCode,
   getStudyLeaderGroup,
+  relevantIAMs,
 }
