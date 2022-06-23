@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       access: DataTypes.JSONB,
       specialGroup: DataTypes.JSONB,
       lastLogin: DataTypes.DATE,
+      iamGroups: DataTypes.ARRAY(DataTypes.STRING),
     },
     {
       underscored: true,
