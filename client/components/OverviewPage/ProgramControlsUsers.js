@@ -58,14 +58,14 @@ const OwnerAccordionTable = ({ users, lang, programme }) => {
             <Header as="h4">{translations.ownerHeader[lang]}</Header>
           </Grid.Column>
         </Grid.Row>
-        {users.data.length === 0 ? (
+        {users.length === 0 ? (
           <Grid.Row>
             <Grid.Column width={13} style={{ textAlign: 'center' }}>
               {translations.noUsers[lang]}
             </Grid.Column>
           </Grid.Row>
         ) : (
-          users.data.map(user => <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />)
+          users.map(user => <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />)
         )}
       </Grid>
     </Segment>
@@ -73,11 +73,12 @@ const OwnerAccordionTable = ({ users, lang, programme }) => {
 }
 
 const isJory = groups => {
-  // eslint-disable-next-line consistent-return
+  let jory = false
   groups.forEach(iam => {
-    if (iam.includes('jory')) return true
+    if (iam.includes('jory')) jory = true
   })
-  return false
+
+  return jory
 }
 
 const OwnerAccordionUsers = ({ programme }) => {
@@ -87,30 +88,31 @@ const OwnerAccordionUsers = ({ programme }) => {
   if (!users.data || users.pending) return null
 
   // split jory members to their own table
+  const otherUsers = []
   const joryMembers = users.data.reduce((members, user) => {
-    if (user.iamGroups && isJory(user.iamGroups)) {
-      return members.concat(user)
+    if (user.iamGroups?.length > 0 && isJory(user.iamGroups)) {
+      return members.concat([user])
     }
+    otherUsers.push(user)
     return members
   }, [])
 
-  const others = users.data.filter(user => !joryMembers.includes(user))
   // eslint-disable-next-line no-console
   console.log('allUsers', users.data)
   // eslint-disable-next-line no-console
   console.log('joryMembers', joryMembers)
   // eslint-disable-next-line no-console
-  console.log('otherMembers', others)
+  console.log('otherMembers', otherUsers)
 
   return (
     <>
       <div style={{ margin: '3em' }}>
         <h2>{translations.userListJory[lang]}</h2>
-        <OwnerAccordionTable users={users} programme={programme} lang={lang} />
+        <OwnerAccordionTable users={joryMembers} programme={programme} lang={lang} />
       </div>
       <div style={{ margin: '3em' }}>
         <h2>{translations.userListOthers[lang]}</h2>
-        <OwnerAccordionTable users={users} programme={programme} lang={lang} />
+        <OwnerAccordionTable users={otherUsers} programme={programme} lang={lang} />
       </div>
     </>
   )
