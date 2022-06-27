@@ -97,13 +97,6 @@ const OwnerAccordionUsers = ({ programme }) => {
     return members
   }, [])
 
-  // eslint-disable-next-line no-console
-  console.log('allUsers', users.data)
-  // eslint-disable-next-line no-console
-  console.log('joryMembers', joryMembers)
-  // eslint-disable-next-line no-console
-  console.log('otherMembers', otherUsers)
-
   return (
     <>
       <div style={{ margin: '3em' }}>

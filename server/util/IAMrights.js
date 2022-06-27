@@ -235,8 +235,6 @@ const getIAMRights = hyGroupsHeader => {
     })
 
   iamGroups = hyGroups.filter(iam => relevantIAMs.includes(iam))
-  // eslint-disable-next-line no-console
-  console.log('header', hyGroups)
 
   return { access, specialGroup, iamGroups }
 }
