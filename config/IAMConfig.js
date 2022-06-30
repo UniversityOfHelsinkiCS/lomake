@@ -1,3 +1,5 @@
+const { mapToDegreeCode } = require('./common')
+
 const joryMap = {
   'hy-ttdk-tuk-jory': '100-K001',
   'hy-ttdk-tum-jory': '100-M001',
@@ -350,6 +352,20 @@ const iamToOrganisationCode = iam => {
   return [organisationCodes]
 }
 
+const organisationCodeToIam = code => {
+  const match = (value, code) => {
+    if (Array.isArray(value)) {
+      if (mapToDegreeCode(value[0]).includes(code) || mapToDegreeCode(value[1]).includes(code)) return true
+      return false
+    }
+    const degreeCode = value[0] === 'T' ? value : mapToDegreeCode(value)
+    return degreeCode.includes(code)
+  }
+
+  const found = Object.entries(joryMap).find(pair => match(pair[1], code))
+  return found ? found[0] : ''
+}
+
 const relevantIAMs = []
   .concat(Object.keys(joryMap))
   .concat(Object.keys(kojoMap))
@@ -381,6 +397,7 @@ module.exports = {
   isEmployeeIam,
   iamToDoctoralSchool,
   iamToOrganisationCode,
+  organisationCodeToIam,
   getStudyLeaderGroup,
   relevantIAMs,
 }

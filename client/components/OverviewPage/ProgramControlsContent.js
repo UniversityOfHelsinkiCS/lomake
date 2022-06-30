@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
+import { organisationCodeToIam } from '@root/config/IAMConfig'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
 
@@ -9,6 +10,7 @@ const OwnerAccordionContent = ({ programKey }) => {
   const [dataLoading, setDataLoading] = useState(false)
   const [dataReady, setDataReady] = useState(false)
   const usersPending = useSelector(({ programmesUsers }) => programmesUsers.pending)
+  const programJoryIam = organisationCodeToIam(programKey)
 
   useEffect(() => {
     setDataLoading(true)
@@ -26,6 +28,7 @@ const OwnerAccordionContent = ({ programKey }) => {
 
   return (
     <>
+      <h4>{programJoryIam}</h4>
       <FormLocker programme={programKey} />
       <ProgramControlsUsers programme={programKey} />
     </>
