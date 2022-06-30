@@ -27,6 +27,31 @@ const getUserType = (user, lang) => {
   return ''
 }
 
+const getUserRole = userIams => {
+  if (userIams.length === 0) return ''
+  let role = ''
+
+  if (userIams.includes('hy-ypa-opa-ospa')) return 'Ospa-ryhmä'
+  if (userIams.includes('grp-toska')) return 'Toska-ryhmä'
+  if (userIams.includes('hy-ypa-opa-opintoasiainpaallikot')) return 'Opintoasiainpäällikkö'
+  role = userIams.find(iam => /hy-ypa-opa-.+/.test(iam))
+  if (role) return `Koulutussuunnittelija - ${role.split('-')[4]}`
+  role = userIams.find(iam => /hy-[a-z-]+-kojot/.test(iam))
+  if (role) return `Koulutusohjelman johtaja - ${role.split('-')[1]} - ${role.split('-')[2]}`
+  role = userIams.find(iam => /hy-[a-z-]+-dekanaatti/.test(iam))
+  if (role) return `Dekaani - ${role.split('-')[1]}`
+  if (userIams.includes('hy-rehtoraatti')) return 'Rehtoraatti'
+  if (userIams.includes('hy-ypa-tutto-toht')) return 'Tohtoriohjelmien suunnittelija'
+  if (userIams.includes('hy-tohtorikoulutus-johtoryhma')) return 'Tohtorikoulutuksen johtoryhmä'
+  if (userIams.includes('hy-tine')) return 'HY:n tieteellinen neuvosto'
+  role = userIams.find(iam => /hy-tutkijakoulut-[a-z]+-jory/.test(iam))
+  if (role) return `Tutkijakoulun johtoryhmä - ${role.split('-')[2]}`
+  role = userIams.find(iam => /hy-[a-z-]+-jory/.test(iam))
+  if (role) return `Johtoryhmän jäsen`
+
+  return role
+}
+
 export default ({ user, lang, programmeCodesAndNames }) => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
@@ -87,6 +112,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         <Table.Cell data-cy="user-access-groups">
           {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang))}
         </Table.Cell>
+        <Table.Cell data-cy="userRole">{getUserRole(user.iamGroups)}</Table.Cell>
         {isAdmin(currentUser) && (
           <Table.Cell>
             <Icon onClick={logInAs} size="large" name="sign-in" />

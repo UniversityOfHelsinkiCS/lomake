@@ -1458,6 +1458,11 @@ export const usersPageTranslations = {
     fi: 'Kirjautunut viimeksi',
     se: 'Last login',
   },
+  role: {
+    en: 'Main role',
+    fi: 'Ensisijainen rooli',
+    se: 'Main role',
+  },
   hide: {
     en: 'Hide',
     fi: 'Piilota',
