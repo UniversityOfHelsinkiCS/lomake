@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeCode } from '../../config/common'
+import { testProgrammeCode, testIAM } from '../../config/common'
 
 const user = 'cypressUser'
 const noRightsUser = 'cypressNoRightsUser'
@@ -46,5 +46,15 @@ describe('Permission tests', () => {
     cy.visit('/')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get('[data-cy^=formLocker-button]')
+  })
+
+  it('Can see programme jory IAM-group with ADMIN permissions', () => {
+    cy.visit('/')
+    cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
+    cy.contains(testIAM)
+
+    cy.login(readingRightsUser)
+    cy.visit('/')
+    cy.get(`[data-cy=${testProgrammeCode}-manage]`).should('not.exist')
   })
 })

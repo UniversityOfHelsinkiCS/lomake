@@ -177,6 +177,8 @@ const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
 
+const testIAM = 'hy-mltdk-tkt-jory'
+
 module.exports = {
   iamsInUse,
   inProduction,
@@ -195,6 +197,7 @@ module.exports = {
   isInternationalUser,
   testProgrammeCode,
   testProgrammeName,
+  testIAM,
   LOMAKE_SINCE_YEAR,
   getYearsArray,
   mapToDegreeCode,
