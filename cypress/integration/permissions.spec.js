@@ -6,6 +6,7 @@ import { testProgrammeCode, testIAM } from '../../config/common'
 const user = 'cypressUser'
 const noRightsUser = 'cypressNoRightsUser'
 const readingRightsUser = 'cypressReadingRightsUser'
+const cypressOspaUser = 'cypressOspaUser'
 
 describe('Permission tests', () => {
   it('Invalid url shows error', () => {
@@ -56,5 +57,17 @@ describe('Permission tests', () => {
     cy.login(readingRightsUser)
     cy.visit('/')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).should('not.exist')
+  })
+
+  it("Can see users' deducted role with ADMIN permissions", () => {
+    cy.visit('/')
+    cy.get('[data-cy=nav-admin]').should('not.exist')
+
+    cy.login(cypressOspaUser)
+    cy.visit('/admin')
+    cy.get('[data-cy=cypressToskaUser-userRole]').contains('Toska-ryhmä')
+    cy.get('[data-cy=cypressOspaUser-userRole]').contains('Ospa-ryhmä')
+    cy.get('[data-cy=cypressReadingRightsUser-userRole]').contains('Johtoryhmän jäsen')
+    cy.get('[data-cy=cypressUser-userRole]').contains('Koulutusohjelman johtaja - mltdk - kandi')
   })
 })
