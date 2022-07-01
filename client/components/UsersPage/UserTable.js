@@ -119,7 +119,7 @@ export default () => {
               field: 'specialGroup',
               sortable: true,
             })}
-            {getCustomHeader({ name: translations.role[lang], width: 2, field: 'role', sortable: true })}
+            {getCustomHeader({ name: translations.role[lang], width: 2, field: 'role', sortable: false })}
             {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
         </Table.Header>
