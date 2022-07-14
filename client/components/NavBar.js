@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
@@ -13,47 +13,10 @@ export default () => {
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
 
-  const translations = {
-    logOut: {
-      en: 'Log out',
-      fi: 'Kirjaudu ulos',
-      se: 'Logga ut',
-    },
-    adminPage: {
-      en: 'OSPA',
-      fi: 'OSPA',
-      se: 'OSPA',
-    },
-    language: {
-      en: 'English',
-      fi: 'Suomi',
-      se: 'Svenska',
-    },
-    about: {
-      en: 'About',
-      fi: 'About',
-      se: 'About',
-    },
-  }
-
-  const warning =
-    'The Swedish localization is a work in progress. Some of the content ' +
-    'may not be displayed correctly and some of the features may not work at all.\n\n' +
-    'In order to get the best experience, for the time being, please consider using the English or Finnish versions instead.\n\n ' +
-    'We apologize for the inconvenience!'
-
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
     i18n.changeLanguage(code)
   }
-
-  useEffect(() => {
-    if (lang === 'se') {
-      // alert will be removed once swedish translations have been completed
-      // eslint-disable-next-line no-alert
-      alert(warning)
-    }
-  }, [lang])
 
   const handleLogout = () => {
     dispatch(logoutAction())
@@ -77,7 +40,7 @@ export default () => {
   const GoToAdminPageButton = () => {
     return (
       <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
-        {translations.adminPage[lang]}
+        {t('adminPage')}
       </Menu.Item>
     )
   }
@@ -96,12 +59,7 @@ export default () => {
         </a>
       </Menu.Item>
       <Menu.Menu>
-        <Dropdown
-          data-cy="navBar-localeDropdown"
-          item
-          text={`${translations.language[lang]} (${lang.toUpperCase()}) `}
-          simple
-        >
+        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
           <Dropdown.Menu>
             <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
               Suomi
@@ -118,7 +76,7 @@ export default () => {
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
         <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
-          {translations.about[lang]}
+          {t('about')}
         </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${t('logOut')} (${user.uid})`}
