@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
-import { formViewTranslations as translations } from 'Utilities/translations'
 import { isAdmin } from '@root/config/common'
 
 const PDFDownload = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [takingPDF, setTakingPDF] = useState(false)
-  const lang = useSelector(state => state.language)
   const deadline = useSelector(state => state.deadlines.nextDeadline)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
@@ -45,7 +45,7 @@ const PDFDownload = () => {
 
   return (
     <span style={{ cursor: 'pointer', color: colors.blue }} onClick={openViewModeAndPrintPdf}>
-      {translations.downloadText[lang]}
+      {t('formView:downloadPDF')}
     </span>
   )
 }

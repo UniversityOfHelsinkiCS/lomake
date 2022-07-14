@@ -6,6 +6,12 @@ export default {
     // End of fallbacks
     logOut: 'Log out',
     chosenLanguage: 'English',
+    form: 'Form',
+    positive: 'No issues',
+    neutral: 'Challenges identified and development underway',
+    negative: 'Significant measures required/development areas not yet specified',
+    EMPTY: 'No answer provided',
+    OK: 'Answer given',
   },
 
   aboutPage: {
@@ -24,5 +30,16 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
+  },
+
+  formView: {
+    title: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
+    info1:
+      'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
+    info2:
+      'Please provide an overall assessment of the programme’s current status (“Where are we now?”) with regard to each topic using the following system of emoji:',
+    downloadCSV: 'Download all data as a CSV file',
+    downloadPDF: 'Print / Download answers as a PDF-file',
+    mandatory: 'required field',
   },
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Dropdown, Loader } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import rypsiImage from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
@@ -13,7 +14,6 @@ import FormStatusMessage from 'Components/Generic/FormStatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { formViewTranslations as translations } from 'Utilities/translations'
 import { colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
@@ -36,6 +36,7 @@ const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, vie
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const { t } = useTranslation()
 
   const lang = useSelector(state => state.language)
   const draftYear = useSelector(state => state.deadlines.draftYear)
@@ -51,7 +52,7 @@ const FormView = ({ room }) => {
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
-    document.title = `${translations.form[lang]} - ${room}`
+    document.title = `${t('form')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
 
@@ -109,15 +110,15 @@ const FormView = ({ room }) => {
 
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {translations.title[lang]} {year}
+            {t('formView:title')} {year}
           </h3>
 
           <div className="hide-in-print-mode">
             <YearSelector size="small" />
             <StatusMessage programme={room} />
 
-            <p>{translations.p1[lang]}</p>
-            <p>{translations.p2[lang]}</p>
+            <p>{t('formView:info1')}</p>
+            <p>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
@@ -125,7 +126,7 @@ const FormView = ({ room }) => {
               src={positiveEmoji}
               style={{ width: '40px', height: 'auto', marginRight: '5px' }}
             />{' '}
-            {translations.positive[lang]}
+            {t('positive')}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
             <img
@@ -139,7 +140,7 @@ const FormView = ({ room }) => {
                 marginBottom: '5px',
               }}
             />{' '}
-            {translations.neutral[lang]}
+            {t('neutral')}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
             <img
@@ -147,14 +148,14 @@ const FormView = ({ room }) => {
               alt="negative-emoji"
               style={{ width: '40px', height: 'auto', marginRight: '5px' }}
             />{' '}
-            {translations.negative[lang]}
+            {t('negative')}
           </div>
         </div>
         <div className="hide-in-print-mode" style={{ marginTop: '2em' }}>
           <Dropdown
             className="button basic gray"
             direction="left"
-            text={translations.csvDownload[lang]}
+            text={t('formView:downloadCSV')}
             data-cy="csv-download"
           >
             <Dropdown.Menu>

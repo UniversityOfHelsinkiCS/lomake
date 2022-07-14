@@ -2,6 +2,12 @@ export default {
   common: {
     logOut: 'Kirjaudu ulos',
     chosenLanguage: 'Suomi',
+    form: 'Lomake',
+    positive: 'Kunnossa',
+    neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
+    negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    EMPTY: 'Ei vastausta',
+    OK: 'Vastattu',
   },
 
   aboutPage: {
@@ -19,5 +25,15 @@ export default {
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
     contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
     broughtBy: 'Touteutus:',
+  },
+
+  formView: {
+    title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
+    info1:
+      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
+    info2: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
+    downloadCSV: 'Lataa vastaukset csv-tiedostona',
+    downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
+    mandatory: 'pakollinen kenttä',
   },
 }
