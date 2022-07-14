@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 
 export default () => {
   const dispatch = useDispatch()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
 
@@ -42,7 +42,10 @@ export default () => {
     'In order to get the best experience, for the time being, please consider using the English or Finnish versions instead.\n\n ' +
     'We apologize for the inconvenience!'
 
-  const setLanguageCode = code => dispatch(setLanguage(code))
+  const setLanguageCode = code => {
+    dispatch(setLanguage(code))
+    i18n.changeLanguage(code)
+  }
 
   useEffect(() => {
     if (lang === 'se') {
