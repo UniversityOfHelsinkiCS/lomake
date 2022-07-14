@@ -5,9 +5,11 @@ import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
+import { useTranslation } from 'react-i18next'
 
 export default () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
 
@@ -116,7 +118,7 @@ export default () => {
           {translations.about[lang]}
         </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`${translations.logOut[lang]} (${user.uid})`}
+          {`${t('logOut')} (${user.uid})`}
         </Menu.Item>
       </Menu.Menu>
     </Menu>
