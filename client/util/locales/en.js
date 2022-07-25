@@ -10,9 +10,15 @@ export default {
     positive: 'No issues',
     neutral: 'Challenges identified and development underway',
     negative: 'Significant measures required/development areas not yet specified',
+    noColors: '*Questions, without smileys are not shown here (e.g. 16 and 17)',
+    green: 'Green',
+    yellow: 'Yellow',
+    red: 'Red',
     EMPTY: 'No answer provided',
     OK: 'Answer given',
     lastSaved: 'Last saved',
+    faculty: 'Faculty',
+    programmeHeader: 'Programme',
   },
 
   aboutPage: {
@@ -54,5 +60,18 @@ export default {
       ospaProcessing: 'OSPA will process the answers.',
     },
     savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
+  },
+
+  generic: {
+    companionFilter: "Include faculty's partnership programmes to the answers",
+    isWriting: 'is writing',
+    allDoctoralSchools: 'All doctoral programmes',
+    doctoralSchoolFilter: 'Filter by doctoral schools',
+    socialSchool: 'Doctoral school in humanities and social sciences',
+    sciencesSchool: 'Doctoral school in natural sciences',
+    healthSchool: 'Doctoral school in health sciences',
+    environmentalSchool: 'Doctoral school in environmental, food and biological sciences',
+    textAreaLabel: 'Main points of discussion',
+    allFaculties: 'All faculties',
   },
 }

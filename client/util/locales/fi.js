@@ -7,9 +7,15 @@ export default {
     positive: 'Kunnossa',
     neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    noColors: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
+    green: 'Vihreä',
+    yellow: 'Keltainen',
+    red: 'Punainen',
     EMPTY: 'Ei vastausta',
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
+    faculty: ' Tiedekunta',
+    programmeHeader: 'Koulutusohjelma',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -51,5 +57,18 @@ export default {
       ospaProcessing: 'OSPA käsittelee vastaukset.',
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
+  },
+
+  generic: {
+    companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',
+    isWriting: 'kirjoittaa',
+    allDoctoralSchools: 'Kaikki tohtoriohjelmat',
+    doctoralSchoolFilter: 'Tohtoriohjelmien vastaukset tutkijakouluittain',
+    socialSchool: 'Humanistis-yhteiskuntatieteellinen tutkijakoulu',
+    sciencesSchool: 'Luonnontieteellinen tutkijakoulu',
+    healthSchool: 'Terveyden tutkimuksen tutkijakoulu',
+    environmentalSchool: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
+    textAreaLabel: 'Keskustelun pääkohdat olivat',
+    allFaculties: 'Kaikki tiedekunnat',
   },
 }

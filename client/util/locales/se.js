@@ -6,9 +6,15 @@ export default {
     positive: 'I sin ordning',
     neutral: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
-    EMPTY: 'inget svar',
+    // noColors: '',
+    green: 'Grön',
+    yellow: 'Gul',
+    red: 'Röd',
+    EMPTY: 'Inget svar',
     OK: 'Svaret lämnat',
     lastSaved: 'Senast sparat',
+    faculty: 'Fakultet',
+    programmeHeader: 'Program',
   },
 
   aboutPage: {
@@ -42,5 +48,18 @@ export default {
     //   ospaProcessing: '',
     // },
     // savingAnswers: 'Svaren sparas automatiskt.', // Viimeinen vastauspäivä:
+  },
+
+  generic: {
+    // companionFilter: '',
+    isWriting: 'skriver',
+    // allDoctoralSchools: '',
+    // doctoralSchoolFilter: '',
+    // socialSchool: '',
+    // sciencesSchool: '',
+    // healthSchool: '',
+    // environmentalSchool: '',
+    textAreaLabel: 'Diskussionens huvudpunkter',
+    // allFaculties: '',
   },
 }
