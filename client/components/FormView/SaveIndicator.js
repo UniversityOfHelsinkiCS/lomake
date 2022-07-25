@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Message, Icon } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 
 export default function SaveIndicator() {
+  const { t } = useTranslation()
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState(false)
   const [timeoutId, setTimeoutId] = useState(undefined)
@@ -15,31 +17,6 @@ export default function SaveIndicator() {
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const dispatch = useDispatch()
-
-  const translations = {
-    lastSaved: {
-      en: 'Last saved at:',
-      fi: 'Viimeksi tallennettu kello:',
-      se: 'Senast sparad kl.',
-    },
-    saveFailed: {
-      header: {
-        en: 'Error: The changes you have made in the last 10 seconds have not been saved!',
-        fi: 'Virhe: Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti!',
-        se: '',
-      },
-      content: {
-        en: 'In order to continue filling the form, please backup any recent changes you have made. Then click the button to reload the page.',
-        fi: 'Jatkaaksesi lomakkeen täyttämistä, ole hyvä ja ota viimeiset muutoksesi talteen. Klikkaa sen jälkeen allaolevaa näppäintä ladataksesi sivu uudelleen.',
-        se: '',
-      },
-      button: {
-        en: 'Reload the page',
-        fi: 'Lataa sivu uudelleen',
-        se: '',
-      },
-    },
-  }
 
   const errorHandler = () => {
     if (viewOnly) return
@@ -87,16 +64,16 @@ export default function SaveIndicator() {
             width: '75%',
             maxWidth: '50em',
           }}
-          header={`${translations.saveFailed.header[lang]}`}
+          header={`${t('formView:saveFailed')}`}
           content={
             <div style={{ paddingTop: '1em' }}>
-              <span>{translations.saveFailed.content[lang]}</span>
+              <span>{t('formView:saveFailedInstructions')}</span>
               <Button
                 style={{ marginTop: '2em', float: 'right' }}
                 color="blue"
                 onClick={() => window.location.reload()}
               >
-                {translations.saveFailed.button[lang]}
+                {t('formView:reload')}
               </Button>
             </div>
           }
@@ -113,9 +90,8 @@ export default function SaveIndicator() {
           bottom: '5px',
           zIndex: 100,
         }}
-        // loading={saving}
       >
-        {translations.lastSaved[lang]} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+        {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
       </Button>
     </>
   )

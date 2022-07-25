@@ -8,6 +8,7 @@ export default {
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
     EMPTY: 'inget svar',
     OK: 'Svaret lämnat',
+    lastSaved: 'Senast sparat',
   },
 
   aboutPage: {
@@ -30,5 +31,16 @@ export default {
     downloadCSV: 'Ladda ner svaren i en csv-fil',
     downloadPDF: 'Skriv ut / Ladda ner svaren i en PDF-fil',
     mandatory: 'obligatoriskt fält',
+    // saveFailed: '',
+    // saveFailedInstructions: '',
+    reload: 'Ladda om sidan',
+    // status: {
+    //   locked: '',
+    //   open: '',
+    //   canBeOpened: '',
+    //   deadlinePassed: '',
+    //   ospaProcessing: '',
+    // },
+    // savingAnswers: 'Svaren sparas automatiskt.', // Viimeinen vastauspäivä:
   },
 }

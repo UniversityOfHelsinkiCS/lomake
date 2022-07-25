@@ -1,4 +1,5 @@
 export default {
+  // default namespace, can be used without prefix, ie. t('logOut')
   common: {
     logOut: 'Kirjaudu ulos',
     chosenLanguage: 'Suomi',
@@ -8,7 +9,10 @@ export default {
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
     EMPTY: 'Ei vastausta',
     OK: 'Vastattu',
+    lastSaved: 'Viimeksi tallennettu',
   },
+
+  // other namespaces, use requires prefix, eg. t('aboutPage:title')
 
   aboutPage: {
     title: 'Tietoa lomakkeesta',
@@ -35,5 +39,17 @@ export default {
     downloadCSV: 'Lataa vastaukset csv-tiedostona',
     downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
     mandatory: 'pakollinen kenttä',
+    saveFailed: 'Virhe: Viimeisen 10 sekunnin aikana tekemäsi muutokset eivät tallentuneet onnistuneesti!',
+    saveFailedInstructions:
+      'Jatkaaksesi lomakkeen täyttämistä, ole hyvä ja ota viimeiset muutoksesi talteen. Klikkaa sen jälkeen allaolevaa näppäintä ladataksesi sivu uudelleen.',
+    reload: 'Lataa sivu uudelleen',
+    status: {
+      locked: 'Lomake on valitulta vuodelta lukittu, eikä sitä voi muokata.',
+      open: 'vastaukset ovat avoinna muokattavaksi.',
+      canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
+      deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
+      ospaProcessing: 'OSPA käsittelee vastaukset.',
+    },
+    savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
   },
 }
