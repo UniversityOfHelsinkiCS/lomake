@@ -13,8 +13,19 @@ export default {
     EMPTY: 'Inget svar',
     OK: 'Svaret lämnat',
     lastSaved: 'Senast sparat',
+
     faculty: 'Fakultet',
     programmeHeader: 'Program',
+    allProgrammes: 'Alla program',
+    bachelor: 'Kandidatsprogram',
+    master: 'Magisterprogram',
+    doctoral: 'Doktorandprogram',
+    international: 'Internationella Magisterprogram',
+    // programmeFilter: '',
+
+    // noData: '',
+    // selectAll: '',
+    // clearSelection: '',
   },
 
   aboutPage: {
@@ -61,5 +72,15 @@ export default {
     // environmentalSchool: '',
     textAreaLabel: 'Diskussionens huvudpunkter',
     // allFaculties: '',
+    collapseText: 'Dölj fjolårets svar',
+    expandText: 'Visa fjolårets svar',
+    // compareLevel: '',
+    // levelFilter: '',
+    measureLabel: 'Lägg till 1-5 åtgärder',
+    noPermissions: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
+    // nowShowing: '',
+    // chooseMore: '',
+    // tooLongPaste: '',
+    // year: '',
   },
 }

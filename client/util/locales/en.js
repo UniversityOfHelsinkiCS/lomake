@@ -17,8 +17,19 @@ export default {
     EMPTY: 'No answer provided',
     OK: 'Answer given',
     lastSaved: 'Last saved',
+
     faculty: 'Faculty',
     programmeHeader: 'Programme',
+    allProgrammes: 'All programmes',
+    bachelor: "Bachelor's programmes",
+    master: "Master's programmes",
+    doctoral: 'Doctoral programmes',
+    international: "International Master's programmes",
+    programmeFilter: 'Search for study programmes',
+
+    noData: 'No data available for these choices',
+    selectAll: 'Select all',
+    clearSelection: 'Clear selection',
   },
 
   aboutPage: {
@@ -73,5 +84,17 @@ export default {
     environmentalSchool: 'Doctoral school in environmental, food and biological sciences',
     textAreaLabel: 'Main points of discussion',
     allFaculties: 'All faculties',
+    collapseText: 'Hide answers from last year',
+    expandText: 'Show answers from last year',
+    compareLevel: 'Compare by programme level',
+    levelFilter: 'Filter by programme level',
+    measureLabel: 'Add 1-5 measures',
+    noPermissions:
+      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
+    nowShowing: 'NOW SHOWING THE ANSWERS OF',
+    chooseMore: 'CHOOSE MORE PROGRAMMES:',
+    tooLongPaste:
+      'The text you are trying to paste ({{newLength}} characters in total) does not fit in the maximum character limit {{MAX_LENGTH}} characters)',
+    year: 'Year(s)',
   },
 }

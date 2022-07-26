@@ -14,8 +14,19 @@ export default {
     EMPTY: 'Ei vastausta',
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
+
     faculty: ' Tiedekunta',
     programmeHeader: 'Koulutusohjelma',
+    allProgrammes: 'Kaikki ohjelmat',
+    bachelor: 'Kandiohjelmat',
+    master: 'Maisteriohjelmat',
+    doctoral: 'Tohtoriohjelmat',
+    international: 'Kansainväliset maisteriohjelmat',
+    programmeFilter: 'Etsi koulutusohjelmia',
+
+    noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    selectAll: 'Valitse kaikki',
+    clearSelection: 'Tyhjennä valinta',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -70,5 +81,17 @@ export default {
     environmentalSchool: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
     textAreaLabel: 'Keskustelun pääkohdat olivat',
     allFaculties: 'Kaikki tiedekunnat',
+    collapseText: 'Piilota viime vuoden vastaukset',
+    expandText: 'Näytä viime vuoden vastaukset',
+    compareLevel: 'Vertaile koulutusasteittain',
+    levelFilter: 'Vastaukset koulutusasteittain',
+    measureLabel: 'Lisää 1-5 toimenpidettä',
+    noPermissions:
+      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
+    nowShowing: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
+    chooseMore: 'VALITSE OHJELMAT RAPORTILLE:',
+    tooLongPaste:
+      'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',
+    year: 'Valitse vuodet',
   },
 }

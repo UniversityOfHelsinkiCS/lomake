@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 const LastYearsAnswersAccordion = ({ children }) => {
+  const { t } = useTranslation()
   const [expanded, setExpanded] = useState(false)
-  const lang = useSelector(state => state.language)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
 
   // When viewing old answers, theres really no need to show even "older" answers.
@@ -23,7 +23,7 @@ const LastYearsAnswersAccordion = ({ children }) => {
         }}
         onClick={() => setExpanded(!expanded)}
       >
-        {expanded ? translations.collapseText[lang] : translations.expandText[lang]}
+        {expanded ? t('generic:collapseText') : t('generic:expandText')}
       </span>
     </div>
   )

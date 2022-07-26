@@ -1,15 +1,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { setLevel, clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 const LevelFilter = ({ comparison }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const usersProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.usersProgrammes)
   const level = useSelector(({ filters }) => filters.level)
-  const lang = useSelector(state => state.language)
 
   if (!usersProgrammes) return null
 
@@ -32,12 +32,12 @@ const LevelFilter = ({ comparison }) => {
 
   return (
     <div className="level-filter">
-      <label>{comparison ? translations.compareLevel[lang] : translations.levelFilter[lang]}</label>
+      <label>{comparison ? t('generic:compareLevel') : t('generic:levelFilter')}</label>
       <Form>
         <Form.Group inline>
           <Form.Field>
             <Radio
-              label={translations.allProgrammes[lang]}
+              label={t('allProgrammes')}
               name="allProgrammes"
               value="allProgrammes"
               checked={level === 'allProgrammes'}
@@ -46,7 +46,7 @@ const LevelFilter = ({ comparison }) => {
           </Form.Field>
           <Form.Field>
             <Radio
-              label={translations.bachelor[lang]}
+              label={t('bachelor')}
               disabled={!levels.bachelor}
               name="bachelor"
               value="bachelor"
@@ -57,7 +57,7 @@ const LevelFilter = ({ comparison }) => {
           <Form.Field>
             <Radio
               data-cy="master-filter"
-              label={translations.master[lang]}
+              label={t('master')}
               disabled={!levels.master}
               name="master"
               value="master"
@@ -68,7 +68,7 @@ const LevelFilter = ({ comparison }) => {
           <Form.Field>
             <Radio
               data-cy="doctoral-filter"
-              label={translations.doctoral[lang]}
+              label={t('doctoral')}
               disabled={!levels.doctoral}
               name="doctoral"
               value="doctoral"
@@ -78,7 +78,7 @@ const LevelFilter = ({ comparison }) => {
           </Form.Field>
           <Form.Field>
             <Radio
-              label={translations.international[lang]}
+              label={t('international')}
               disabled={!levels.international}
               name="international"
               value="international"
