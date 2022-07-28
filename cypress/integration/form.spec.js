@@ -66,8 +66,7 @@ describe('Form tests', () => {
   })
 
   it(`Other years' form pages are locked`, () => {
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=locked-form-notice]')
     cy.get('.editor-class').should('not.exist')
   })
