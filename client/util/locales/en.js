@@ -21,6 +21,7 @@ export default {
 
     faculty: 'Faculty',
     programmeHeader: 'Programme',
+    code: 'Code',
     allProgrammes: 'All programmes',
     bachelor: "Bachelor's programmes",
     master: "Master's programmes",
@@ -119,5 +120,27 @@ export default {
     tooLongPaste:
       'The text you are trying to paste ({{newLength}} characters in total) does not fit in the maximum character limit {{MAX_LENGTH}} characters)',
     year: 'Year(s)',
+  },
+
+  overview: {
+    betterThanLastYear: 'Better than last year',
+    worseThanLastYear: 'Worse than last year',
+    formLocked: 'Form is locked',
+    formUnlocked: 'Form can be edited',
+    unlockForm: 'Unlock form',
+    lockForm: 'Lock form (prevents editing)',
+    overviewPage: 'Form - Overview',
+    accessRights: 'Access Rights',
+    selectYear: 'Select year to inspect',
+    readAnswers: 'Read answers',
+    compareAnswers: 'Compare answers',
+    csvDownload: 'Download CSV',
+    name: 'Name',
+    view: 'Read',
+    edit: 'Edit',
+    owner: 'Owner',
+    noUsers: 'No users',
+    userListJory: 'Steering group members who have accessed the form',
+    userListOthers: 'Other users who have programme access rights and have accessed the form',
   },
 }

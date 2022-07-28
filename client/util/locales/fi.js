@@ -18,6 +18,7 @@ export default {
 
     faculty: ' Tiedekunta',
     programmeHeader: 'Koulutusohjelma',
+    code: 'Koodi',
     allProgrammes: 'Kaikki ohjelmat',
     bachelor: 'Kandiohjelmat',
     master: 'Maisteriohjelmat',
@@ -116,5 +117,27 @@ export default {
     tooLongPaste:
       'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',
     year: 'Valitse vuodet',
+  },
+
+  overview: {
+    betterThanLastYear: 'Parempi kuin viime vuonna',
+    worseThanLastYear: 'Huonompi kuin viime vuonna',
+    formLocked: 'Lomake on lukittu',
+    formUnlocked: 'Lomaketta voi muokata',
+    unlockForm: 'Poista lukitus',
+    lockForm: 'Lukitse lomake',
+    overviewPage: 'Lomake - Yleisnäkymä',
+    accessRights: 'Käyttöoikeudet',
+    selectYear: 'Valitse tarkasteltava vuosi',
+    readAnswers: 'Lue vastauksia',
+    compareAnswers: 'Vertaile vastauksia',
+    csvDownload: 'Lataa CSV',
+    name: 'Nimi',
+    view: 'Luku',
+    edit: 'Vastaus',
+    owner: 'Omistaja',
+    noUsers: 'Ei käyttäjiä',
+    userListJory: 'Lomakkeelle kirjautuneet käyttäjät, jotka kuuluvat koulutusohjelman johtoryhmään',
+    userListOthers: 'Lomakkeelle kirjautuneet muut käyttäjät, joilla oikeus koulutusohjelmaan',
   },
 }

@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { overviewPageTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
@@ -23,6 +23,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
   }) => {
+    const { t } = useTranslation()
     const dispatch = useDispatch()
     const draftYear = useSelector(state => state.deadlines.draftYear)
     const answers = useSelector(state => state.tempAnswers)
@@ -100,7 +101,7 @@ const ColorTable = React.memo(
             data-cy="overviewpage-filter"
             icon="filter"
             size="small"
-            placeholder={translations.filter[lang]}
+            placeholder={t('programmeFilter')}
             onChange={handleFilterChange}
             value={filterValue}
           />

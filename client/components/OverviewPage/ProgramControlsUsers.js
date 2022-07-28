@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Header, Grid, Segment } from 'semantic-ui-react'
-
-import { overviewPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 
 const SwitchableBadge = ({ cyTag, currentAccess }) => {
   if (currentAccess) return <Icon data-cy={cyTag} name="check" className="users-green" size="large" />
@@ -37,31 +36,31 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
   )
 }
 
-const OwnerAccordionTable = ({ users, lang, programme }) => {
+const OwnerAccordionTable = ({ users, programme, t }) => {
   return (
     <Segment style={{ margin: '1em 0' }}>
       <Grid celled="internally">
         <Grid.Row>
           <Grid.Column width={3} style={{ textAlign: 'center' }}>
-            <Header as="h4">{translations.nameHeader[lang]}</Header>
+            <Header as="h4">{t('overview:name')}</Header>
           </Grid.Column>
           <Grid.Column width={4} style={{ textAlign: 'center' }}>
             <Header as="h4">Email</Header>
           </Grid.Column>
           <Grid.Column width={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{translations.viewHeader[lang]}</Header>
+            <Header as="h4">{t('overview:view')}</Header>
           </Grid.Column>
           <Grid.Column width={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{translations.editHeader[lang]}</Header>
+            <Header as="h4">{t('overview:edit')}</Header>
           </Grid.Column>
           <Grid.Column width={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{translations.ownerHeader[lang]}</Header>
+            <Header as="h4">{t('overview:owner')}</Header>
           </Grid.Column>
         </Grid.Row>
         {users.length === 0 ? (
           <Grid.Row>
             <Grid.Column width={13} style={{ textAlign: 'center' }}>
-              {translations.noUsers[lang]}
+              {t('overview:noUsers')}
             </Grid.Column>
           </Grid.Row>
         ) : (
@@ -82,7 +81,7 @@ const isJory = groups => {
 }
 
 const OwnerAccordionUsers = ({ programme }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const users = useSelector(state => state.programmesUsers)
 
   if (!users.data || users.pending) return null
@@ -100,12 +99,12 @@ const OwnerAccordionUsers = ({ programme }) => {
   return (
     <>
       <div style={{ margin: '3em' }}>
-        <h2>{translations.userListJory[lang]}</h2>
-        <OwnerAccordionTable users={joryMembers} programme={programme} lang={lang} />
+        <h2>{t('overview:userListJory')}</h2>
+        <OwnerAccordionTable users={joryMembers} programme={programme} t={t} />
       </div>
       <div style={{ margin: '3em' }}>
-        <h2>{translations.userListOthers[lang]}</h2>
-        <OwnerAccordionTable users={otherUsers} programme={programme} lang={lang} />
+        <h2>{t('overview:userListOthers')}</h2>
+        <OwnerAccordionTable users={otherUsers} programme={programme} t={t} />
       </div>
     </>
   )

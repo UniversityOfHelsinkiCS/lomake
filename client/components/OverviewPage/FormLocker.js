@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Icon, Popup } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { overviewPageTranslations as translations } from 'Utilities/translations'
 
 export default function FormLocker({ programme }) {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const programmeDetails = useSelector(state => state.studyProgrammes.singleProgram)
   const programmeDetailsPending = useSelector(state => state.studyProgrammes.singleProgramPending)
@@ -52,7 +52,7 @@ export default function FormLocker({ programme }) {
             labelPosition="left"
           >
             <Icon name={locked ? 'lock' : 'lock open'} />
-            {locked ? translations.lockedTriggerButtonText[lang] : translations.unlockedTriggerButtonText[lang]}
+            {locked ? t('overview:formLocked') : t('overview:formUnlocked')}
           </Button>
         }
         content={
@@ -60,7 +60,7 @@ export default function FormLocker({ programme }) {
             data-cy={`formLocker-verify-${locked ? 'open' : 'close'}-button`}
             color="red"
             secondary
-            content={locked ? translations.unLockForm[lang] : translations.lockForm[lang]}
+            content={locked ? t('overview:unlockForm') : t('overview:lockForm')}
             onClick={handleLock}
           />
         }
