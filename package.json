@@ -10,7 +10,7 @@
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open --e2e"
   },
   "engines": {
     "node": ">=10.15"
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "cypress": "^9.6.0",
+    "cypress": "^10.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",

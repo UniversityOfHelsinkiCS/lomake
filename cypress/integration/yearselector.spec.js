@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { defaultYears, testProgrammeCode } from '../../config/common'
+import '../support/commands'
 
 describe("Previous year's answers", () => {
   beforeEach(() => {

@@ -3,6 +3,7 @@
 
 import { testProgrammeCode, defaultYears, testProgrammeName } from '../../config/common'
 import helpers from '../support/helpers'
+import '../support/commands'
 
 const adminUser = 'cypressOspaUser'
 

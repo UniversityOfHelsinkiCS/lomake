@@ -3,6 +3,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
+import '../support/commands'
 
 const user = 'cypressUser'
 const adminUser = 'cypressOspaUser'

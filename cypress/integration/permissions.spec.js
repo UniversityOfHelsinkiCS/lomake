@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeCode, testIAM } from '../../config/common'
+import '../support/commands'
 
 const user = 'cypressUser'
 const noRightsUser = 'cypressNoRightsUser'

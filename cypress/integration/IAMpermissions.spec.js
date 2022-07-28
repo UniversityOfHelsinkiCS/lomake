@@ -2,6 +2,7 @@
 
 import { defaultYears } from '../../config/common'
 import helpers from '../support/helpers'
+import '../support/commands'
 
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {

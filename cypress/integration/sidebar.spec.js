@@ -3,6 +3,7 @@
 
 import * as _ from 'lodash'
 import { testProgrammeCode } from '../../config/common'
+import '../support/commands'
 
 const user = 'cypressUser'
 
