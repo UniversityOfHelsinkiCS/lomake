@@ -2,6 +2,7 @@ export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
     logOut: 'Kirjaudu ulos',
+    backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
     form: 'Lomake',
     positive: 'Kunnossa',
@@ -27,6 +28,7 @@ export default {
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     selectAll: 'Valitse kaikki',
     clearSelection: 'Tyhjennä valinta',
+    responses: 'Vastauksia:',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -46,6 +48,27 @@ export default {
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
     contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
     broughtBy: 'Touteutus:',
+  },
+
+  comparison: {
+    compare: 'Vastausten vertailu',
+    reportHeader: {
+      byFaculty: 'Vertaile ohjelmaa tiedekuntaan',
+      byYear: 'Vertaile vastauksia vuosittain',
+    },
+    selectYears: 'Valitse vuodet, joita haluat tarkastella',
+    filterFaculties: 'Vastaukset tiedekunnittain',
+    selectQuestions: 'Vertailun kysymykset',
+    writtenAnswers: 'Kirjalliset vastaukset vuosittain',
+    chosenProgrammes: 'Valittu ohjelma',
+    chooseProgramme: 'Valitse vertailtava ohjelma',
+    compareFaculties: 'Vertaile tiedekunnittain',
+    emptyAnswers: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
+    university: 'Koko yliopisto',
+    noAccessToAll: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
+    labelOptions: 'Graafin yksikkö',
+    percentage: 'Prosenttiosuudet',
+    programmeAmount: 'Ohjelmien lukumäärä',
   },
 
   formView: {

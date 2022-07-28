@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { Button } from 'semantic-ui-react'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 
 export default ({ question, answers, showEmpty, programmes, faculty, name, columns }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const [toolTipData, setToolTipData] = useState(null)
   const level = useSelector(({ filters }) => filters.level)
 
@@ -36,28 +36,28 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
       {
         color: colors.background_green,
         toolTipColor: 'green',
-        toolTipHeader: translations.positive[lang],
+        toolTipHeader: t('positive'),
         value: colorSums.green.value || 0,
         programmes: colorSums.green.programmes,
       },
       {
         color: colors.background_yellow,
         toolTipColor: 'yellow',
-        toolTipHeader: translations.neutral[lang],
+        toolTipHeader: t('neutral'),
         value: colorSums.yellow.value || 0,
         programmes: colorSums.yellow.programmes,
       },
       {
         color: colors.background_red,
         toolTipColor: 'red',
-        toolTipHeader: translations.negative[lang],
+        toolTipHeader: t('negative'),
         value: colorSums.red.value || 0,
         programmes: colorSums.red.programmes,
       },
       {
         color: colors.light_gray,
         toolTipColor: 'gray',
-        toolTipHeader: translations.empty[lang],
+        toolTipHeader: t('EMPTY'),
         value: colorSums.emptyAnswer.value && showEmpty ? colorSums.emptyAnswer.value : 0,
         programmes: colorSums.emptyAnswer.programmes,
       },
@@ -68,7 +68,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
   const amountOfResponses = () => {
     let answered = ''
     if (answers) {
-      answered = `${translations.responses[lang]} ${showEmpty ? programmes.length : colorSums.withoutEmpty.value}`
+      answered = `${t('responses')} ${showEmpty ? programmes.length : colorSums.withoutEmpty.value}`
     } else {
       answered = 0
     }
@@ -99,7 +99,7 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
           <b>{faculty}</b>
         </p>
         <p>
-          <b>{translations[level][lang]}</b>
+          <b>{t(`${level}`)}</b>
         </p>
         <p data-cy={`comparison-responses-${name}-${question.id}`}>
           <b>{amountOfResponses()}</b>

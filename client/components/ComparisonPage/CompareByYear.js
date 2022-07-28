@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import * as _ from 'lodash'
 
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import QuestionList from 'Components/Generic/QuestionList'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import { filteredProgrammes } from 'Utilities/common'
 import Question from './Question'
@@ -81,6 +81,7 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
 }
 
 const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
+  const { t } = useTranslation()
   const [unit, setUnit] = useState('percentage')
   const [showingQuestion, setShowingQuestion] = useState(-1)
   const [picked, setPicked] = useState([])
@@ -104,11 +105,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Row>
           <Grid.Column width={10}>
             <FilterTray filter={filter} setFilter={setFilter} />
-            <QuestionList
-              label={translations.selectQuestions[lang]}
-              questionsList={questionsList}
-              onlyColoredQuestions
-            />
+            <QuestionList label={t('comparison:selectQuestions')} questionsList={questionsList} onlyColoredQuestions />
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
           <Grid.Column width={6}>
@@ -124,7 +121,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column width={16}>
-                <h3>{translations.writtenAnswers[lang]}</h3>
+                <h3>{t('comparison:writtenAnswers')}</h3>
                 <div className="ui divider" />
                 <Accordion fluid className="comparison-container">
                   {questionsList.map(
@@ -145,7 +142,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
             </Grid.Row>
           </>
         ) : (
-          <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
+          <h3 data-cy="report-no-data">{t('noData')}</h3>
         )}
       </Grid>
     </div>

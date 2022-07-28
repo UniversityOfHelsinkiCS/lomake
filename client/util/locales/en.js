@@ -5,6 +5,7 @@ export default {
     about: 'About',
     // End of fallbacks
     logOut: 'Log out',
+    backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
     form: 'Form',
     positive: 'No issues',
@@ -30,6 +31,7 @@ export default {
     noData: 'No data available for these choices',
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
+    responses: 'Responses:',
   },
 
   aboutPage: {
@@ -48,6 +50,27 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
+  },
+
+  comparison: {
+    compare: 'Compare answers',
+    reportHeader: {
+      byFaculty: 'Compare programme to a faculty',
+      byYear: 'Compare answers by year',
+    },
+    selectYears: 'Select the year(s) you would like to inspect',
+    filterFaculties: 'Filter by faculty',
+    selectQuestions: 'Questions for comparison',
+    writtenAnswers: 'Written answers by year',
+    chosenProgrammes: 'Chosen programme',
+    chooseProgramme: 'Choose a programme for comparison',
+    compareFaculties: 'Compare by faculty',
+    emptyAnswers: 'Include programmes without answers to the graphs',
+    university: 'Entire university',
+    noAccessToAll: 'Please note, that you can only see comparison with the programmes you have reading rights to',
+    labelOptions: 'Unit in the graph',
+    percentage: 'Percentages',
+    programmeAmount: 'Amount of programmes',
   },
 
   formView: {

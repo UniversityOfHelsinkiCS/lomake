@@ -1,11 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
 export default ({ question, answers, showEmpty, programmeName, programmeFaculty, columns }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const colorsTotal = question => {
     if (!question || !answers) return null
     const colors = {
@@ -62,7 +61,7 @@ export default ({ question, answers, showEmpty, programmeName, programmeFaculty,
         </p>
         <p>
           <b>
-            {translations.responses[lang]} {showEmpty ? colorSums.total : colorSums.withoutEmpty}/1
+            {t('responses')} {showEmpty ? colorSums.total : colorSums.withoutEmpty}/1
           </b>
         </p>
       </div>

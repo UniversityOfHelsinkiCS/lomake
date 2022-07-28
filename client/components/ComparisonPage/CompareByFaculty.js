@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import YearSelector from 'Components/Generic/YearSelector'
 import { filteredProgrammes, filterByLevel } from 'Utilities/common'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { isAdmin } from '@root/config/common'
 import PieChart from './PieChart'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
 
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
   const faculties = useSelector(state => state.faculties.data)
@@ -82,12 +83,12 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Row className="row">
           <Grid.Column>
             <div className="filter">
-              <label>{translations.chosenProgrammes[lang]}</label>
+              <label>{t('comparison:chosenProgrammes')}</label>
               <Dropdown
                 fluid
                 selection
                 search
-                placeholder={translations.chooseProgramme[lang]}
+                placeholder={t('comparison:chooseProgramme')}
                 value={chosen}
                 onChange={handleChosenChange}
                 options={usersProgrammes ? options : []}
@@ -96,8 +97,8 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             </div>
           </Grid.Column>
           <Grid.Column>
-            <FacultyFilter size="large" label={translations.facultyFilter.compare[lang]} />
-            <small>{translations.noAccessToAll[lang]}</small>
+            <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
+            <small>{t('comparison:noAccessToAll')}</small>
             {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
               <CompanionFilter />
             )}
@@ -107,7 +108,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
               className={`toggle${isAdmin(user) ? '' : '-marginless'}`}
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
-              label={translations.emptyAnswers[lang]}
+              label={t('comparison:emptyAnswers')}
               toggle
             />
           </Grid.Column>
@@ -161,7 +162,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     showEmpty={showEmpty}
                     answers={getComparedAnswers(question, universityProgrammes)}
                     programmes={usersProgrammes ? universityProgrammes : []}
-                    faculty={translations.university[lang]}
+                    faculty={t('comparison:university')}
                     name="university"
                     columns={isAdmin(user) ? 3 : 2}
                   />

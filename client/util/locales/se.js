@@ -1,6 +1,7 @@
 export default {
   common: {
     logOut: 'Logga ut',
+    // backToFrontPage: '',
     chosenLanguage: 'Svenska',
     form: 'Blankett',
     positive: 'I sin ordning',
@@ -26,6 +27,7 @@ export default {
     // noData: '',
     // selectAll: '',
     // clearSelection: '',
+    // responses: '',
   },
 
   aboutPage: {
@@ -38,6 +40,27 @@ export default {
     // whatElse: '',
     // contactInfo: '',
     // broughtBy: '',
+  },
+
+  comparison: {
+    // compare: '',
+    // reportHeader: {
+    //   byFaculty: '',
+    //   byYear: '',
+    // },
+    // selectYears: '',
+    // filterFaculties: '',
+    // selectQuestions: '',
+    // writtenAnswers: '',
+    // chosenProgrammes: '',
+    // chooseProgramme: '',
+    // compareFaculties: '',
+    // emptyAnswers: '',
+    // university: '',
+    // noAccessToAll: '',
+    // labelOptions: '',
+    // percentage: '',
+    // programmeAmount: '',
   },
 
   formView: {
