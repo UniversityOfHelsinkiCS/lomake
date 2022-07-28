@@ -61,7 +61,7 @@ export default () => {
     }
   }, [oldAnswers, deadlines])
 
-  if (!currentUser.data || !studyProgrammes) return null
+  if (!currentUser.data || !studyProgrammes || !oldAnswers || !oldAnswers.data) return null
 
   return (
     <div>
