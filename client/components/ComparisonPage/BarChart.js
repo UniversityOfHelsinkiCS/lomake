@@ -29,7 +29,7 @@ const BarChart = ({ data, questions, unit }) => {
   const { faculty, level, multipleYears } = useSelector(state => state.filters)
   const faculties = useSelector(state => state.faculties.data)
   const lang = useSelector(state => state.language)
-  if (!data) return <></>
+  if (!data) return <> </>
 
   const seriesData = data.map((series, index) => {
     return {
