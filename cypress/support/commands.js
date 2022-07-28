@@ -36,7 +36,7 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
   // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.get(editorName).click().wait(500).type(`{moveToEnd}${textToBeTyped}`).wait(1000)
+  cy.get(editorName).click().type(`{moveToEnd}${textToBeTyped}`)
 })
 
 Cypress.Commands.add('getEditorInputLength', editorName => {
