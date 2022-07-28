@@ -17,11 +17,9 @@ describe('ComparisonPage tests', () => {
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[0])
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
-    cy.reload()
     cy.visit('/comparison')
 
     cy.get('[data-cy=programme-filter]').click()
@@ -34,13 +32,7 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').then(newEl => {
-      expect(newEl.find('.item')).to.have.length(4)
-    })
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
-
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
       helpers.getTotalProgrammeCount()
     )
@@ -50,9 +42,8 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
+    cy.selectYear(defaultYears[1])
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('All faculties').click()
@@ -65,9 +56,8 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
+    cy.selectYear(defaultYears[1])
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger('click', 200, 200)
