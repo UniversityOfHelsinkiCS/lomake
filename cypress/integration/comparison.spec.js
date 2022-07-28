@@ -25,7 +25,7 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.selectYear(defaultYears[1])
+    cy.selectYear(defaultYears[2])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
       helpers.getTotalProgrammeCount()
     )
@@ -49,7 +49,7 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.selectYear(defaultYears[1])
+    cy.selectYear(defaultYears[2])
 
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
