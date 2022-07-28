@@ -35,7 +35,8 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  cy.get(editorName).click().type(textToBeTyped)
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.get(editorName).click().type(`{moveToEnd}${textToBeTyped}`)
 })
 
 Cypress.Commands.add('getEditorInputLength', editorName => {
@@ -56,6 +57,15 @@ Cypress.Commands.add('getYearSelector', () => {
   cy.get('[data-cy=yearSelector]').then(newEl => {
     expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
   })
+})
+
+Cypress.Commands.add('selectYear', year => {
+  const currentDate = new Date()
+  cy.get('[data-cy=yearSelector]').click()
+  cy.get('[data-cy=yearSelector]').then(newEl => {
+    expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
+  })
+  cy.get('[data-cy=yearSelector]').contains(year).click()
 })
 
 Cypress.Commands.add('hasAccess', (uid, programCode, access) => {

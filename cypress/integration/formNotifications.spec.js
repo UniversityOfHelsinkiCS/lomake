@@ -5,10 +5,6 @@ import { testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 describe('Form Notification tests', () => {
-  beforeEach(() => {
-    cy.server()
-  })
-
   it('Save message is shown by default', () => {
     cy.login('cypressUser')
     cy.visit('/')
@@ -39,9 +35,8 @@ describe('Form Notification tests', () => {
 
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
-    cy.route('DELETE', '/api/deadlines').as('delete')
     cy.get('[data-cy=deleteDeadline]').click()
-    cy.wait('@delete')
+    cy.get('[data-cy=noNextDeadline]')
 
     cy.login('cypressUser')
     cy.visit('/')

@@ -15,8 +15,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=nav-report]').click()
 
     // the year changes to year with answers by default, if form not open for current year
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
+    cy.selectYear(defaultYears[0])
 
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('contain', 'Smiley')
@@ -26,12 +25,11 @@ describe('ReportPage tests', () => {
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
   })
 
-  it.skip('User should be able to see the just written answers in the report', () => {
+  it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
+    cy.selectYear(defaultYears[0])
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
@@ -77,8 +75,7 @@ describe('ReportPage tests', () => {
 
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
@@ -89,8 +86,7 @@ describe('ReportPage tests', () => {
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=master-filter]').should('be.visible').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()

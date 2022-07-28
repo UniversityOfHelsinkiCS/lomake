@@ -125,7 +125,7 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All programmes')
   })
 
-  it.skip('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
+  it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
     cy.login('cypressRandomRightsUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
@@ -152,8 +152,7 @@ describe('IAM permission tests', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
@@ -165,10 +164,7 @@ describe('IAM permission tests', () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
-
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
       helpers.getTotalProgrammeCount()
     )
