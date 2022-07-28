@@ -19,9 +19,7 @@ describe('Form tests', () => {
     cy.writeToTextField('[contenteditable="true"]', 'kissa')
     cy.reload()
 
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
-      .find('.editor-class')
-      .should('contain.text', 'kissa')
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').should('contain.text', 'kissa')
   })
 
   it('Can open a question, click on smiley face, and the result it saved.', () => {
