@@ -13,9 +13,12 @@ describe('ComparisonPage tests', () => {
       expect(res.status).to.eq(200)
     })
   })
+
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
+    cy.getYearSelector()
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
     cy.reload()
