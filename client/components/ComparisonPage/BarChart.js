@@ -100,7 +100,8 @@ const BarChart = ({ data, questions, unit }) => {
         text: '%',
       },
       stackLabels: {
-        enabled: false,
+        enabled: true,
+        format: '{stack}',
         style: {
           fontWeight: 'bold',
           fontSize: checkSize(seriesData),
@@ -174,6 +175,7 @@ const BarChart = ({ data, questions, unit }) => {
       },
       stackLabels: {
         enabled: true,
+        format: '{stack}',
         style: {
           fontWeight: 'bold',
           fontSize: checkSize(seriesData),
