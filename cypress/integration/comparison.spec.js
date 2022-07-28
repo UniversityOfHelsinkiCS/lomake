@@ -23,9 +23,12 @@ describe('ComparisonPage tests', () => {
 
   it('Admin should be able to see all the programmes on the comparison page', () => {
     cy.login(adminUser)
+    cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.selectYear(defaultYears[2])
+
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
       helpers.getTotalProgrammeCount()
     )
@@ -47,10 +50,12 @@ describe('ComparisonPage tests', () => {
 
   it('Tooltips work for compared programmes filtered by faculty', () => {
     cy.login(adminUser)
+    cy.request('/api/cypress/createAnswers')
+    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
-    cy.selectYear(defaultYears[2])
 
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('Faculty of Educational Sciences').click()
     cy.get('[data-cy=comparison-chart-faculty-programme_identity_text]').trigger('click', 200, 200)
