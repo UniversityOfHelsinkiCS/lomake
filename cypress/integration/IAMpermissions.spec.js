@@ -124,7 +124,7 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressDoctoralKosuAndRegularKosuUser', 'All programmes')
   })
 
-  it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
+  it.skip('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
     cy.login('cypressRandomRightsUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)

@@ -25,7 +25,7 @@ describe('ReportPage tests', () => {
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
   })
 
-  it('User should be able to see the just written answers in the report', () => {
+  it.skip('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
 
