@@ -11,7 +11,6 @@ describe('ComparisonPage tests', () => {
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
-    cy.selectYear(defaultYears[1])
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
 
