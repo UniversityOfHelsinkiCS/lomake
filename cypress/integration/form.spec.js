@@ -13,7 +13,7 @@ describe('Form tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
-  it.skip('Can write to a textfield and the answer is saved.', () => {
+  it('Can write to a textfield and the answer is saved.', () => {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
     cy.writeToTextField('[contenteditable="true"]', 'kissa')

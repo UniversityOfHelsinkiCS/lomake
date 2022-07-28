@@ -20,10 +20,11 @@ describe('ComparisonPage tests', () => {
     cy.selectYear(defaultYears[0])
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
-    cy.visit('/comparison')
 
+    cy.visit('/comparison')
     cy.get('[data-cy=programme-filter]').click()
     cy.get('span').contains(testProgrammeName).click()
+    cy.selectYear(defaultYears[0])
     cy.get('[data-cy=comparison-chart-review_of_last_years_situation_report_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(249, 208, 59)')
   })
