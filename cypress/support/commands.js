@@ -35,7 +35,7 @@ Cypress.Commands.add('copyToTextField', (editorName, textToBeTyped) => {
 })
 
 Cypress.Commands.add('writeToTextField', (editorName, textToBeTyped) => {
-  cy.get(editorName).click().type(textToBeTyped)
+  cy.get(editorName).type(textToBeTyped)
 })
 
 Cypress.Commands.add('getEditorInputLength', editorName => {
