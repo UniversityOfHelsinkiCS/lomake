@@ -25,7 +25,7 @@ describe('ReportPage tests', () => {
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
   })
 
-  it('User should be able to see the just written answers in the report', () => {
+  it.skip('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
     cy.selectYear(defaultYears[0])
@@ -51,7 +51,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
-  it('User should not be able to see answers in fields where there are none', () => {
+  it.skip('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit('/')
     cy.wait(1000)
