@@ -28,23 +28,20 @@ describe('ReportPage tests', () => {
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
-
     cy.selectYear(defaultYears[0])
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.writeToTextField('[contenteditable="true"]', 'kissa')
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
+
+    cy.writeToTextField('[contenteditable="true"]', 'test words')
 
     cy.visit('/')
     cy.reload()
     cy.wait(1000)
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
-    cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
-      'contain.text',
-      'kiss'
-    )
+    cy.get('[data-cy=report-question-learning_outcomes_text]').should('be.visible').click()
+    cy.get('[data-cy=report-question-content-learning_outcomes_text]').should('contain.text', 'test words')
   })
 
   it('User should be able to see answers from only one programme, when they have rights for only one', () => {
@@ -59,8 +56,8 @@ describe('ReportPage tests', () => {
     cy.visit('/')
     cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.writeToTextField('[contenteditable="true"]', 'kissa')
+    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
+    cy.writeToTextField('[contenteditable="true"]', 'more words')
     cy.reload()
 
     cy.visit('/')
