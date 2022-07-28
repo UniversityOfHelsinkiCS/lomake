@@ -7,7 +7,7 @@ module.exports = defineConfig({
     viewportWidth: 1500,
     viewportHeight: 1200,
     watchForFileChanges: false,
-    supportFile: false,
+    supportFile: 'cypress/support/index.js',
     specPattern: 'cypress/integration/*.spec.js',
   },
 })
