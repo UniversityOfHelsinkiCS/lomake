@@ -8,12 +8,6 @@ import '../support/commands'
 const adminUser = 'cypressOspaUser'
 
 describe('ComparisonPage tests', () => {
-  beforeEach(() => {
-    cy.request('/api/cypress/createAnswers').then(res => {
-      expect(res.status).to.eq(200)
-    })
-  })
-
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
