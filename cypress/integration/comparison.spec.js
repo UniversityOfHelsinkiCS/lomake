@@ -8,6 +8,11 @@ import '../support/commands'
 const adminUser = 'cypressOspaUser'
 
 describe('ComparisonPage tests', () => {
+  beforeEach(() => {
+    cy.request('/api/cypress/createAnswers').then(res => {
+      expect(res.status).to.eq(200)
+    })
+  })
   it('Changes in smileys are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
@@ -24,8 +29,6 @@ describe('ComparisonPage tests', () => {
 
   it('Admin should be able to see all the programmes on the comparison page', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
-    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
@@ -42,8 +45,6 @@ describe('ComparisonPage tests', () => {
 
   it('Filtering of comparison programmes works by programme level', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
-    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
@@ -59,8 +60,6 @@ describe('ComparisonPage tests', () => {
 
   it('Tooltips work for compared programmes filtered by faculty', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
-    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
@@ -74,8 +73,6 @@ describe('ComparisonPage tests', () => {
 
   it('Admin should be able to see answers from previous years', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
-    cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
 
