@@ -6,8 +6,6 @@ const { data } = require('./data')
 
 const inProduction = process.env.NODE_ENV === 'production'
 
-const inTest = process.env.RUNNING_TESTS === 'true'
-
 // Once the iams are in use, turn this to true
 // And later on, once everything is ok, remove the features behind this flag
 const iamsInUse = true
@@ -184,7 +182,6 @@ const testIAM = 'hy-mltdk-tkt-jory'
 module.exports = {
   iamsInUse,
   inProduction,
-  inTest,
   internationalAccess,
   basePath,
   defaultYears,
