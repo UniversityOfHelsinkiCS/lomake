@@ -31,6 +31,7 @@ const prodConfig = {
   },
   plugins: [sassPlugin()],
   color: true,
+  logLevel: 'info',
 }
 
 module.exports = { devConfig, prodConfig }

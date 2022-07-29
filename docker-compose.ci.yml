@@ -30,3 +30,6 @@ services:
     depends_on:
       - db
     container_name: lomake
+
+volumes:
+  pg_data:
