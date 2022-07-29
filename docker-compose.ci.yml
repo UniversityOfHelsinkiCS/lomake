@@ -24,7 +24,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
       - AUTOMATIC_IAM_PERMISSIONS_ENABLED=true
-      - RUNNING_TESTS=true
+      #- RUNNING_TESTS=true
     ports:
       - 8000:8000
     depends_on:

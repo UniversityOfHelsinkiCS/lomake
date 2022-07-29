@@ -5,7 +5,7 @@ const common = require('@root/config/common')
 const DB_URL = process.env.DB_URL || ''
 const PORT = process.env.PORT || 8000
 const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === 'true'
-const IN_TEST = process.env.RUNNING_TESTS === 'true'
+const IN_TEST = true // process.env.RUNNING_TESTS === 'true'
 
 const whereDraftYear = async () => {
   const draftYears = await db.draftYear.findAll({})
