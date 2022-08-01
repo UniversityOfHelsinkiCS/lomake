@@ -63,8 +63,10 @@ initializeDatabaseConnection()
       ? path.resolve(__dirname, './dist/prod')
       : path.resolve(__dirname, './dist/dev')
 
+    logger.info('DIST_PATH: ', DIST_PATH)
 
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
+    logger.info('INDEX_PATH: ', INDEX_PATH)
 
     app.use(express.static(DIST_PATH))
     app.get('*', (req, res) => res.sendFile(INDEX_PATH))

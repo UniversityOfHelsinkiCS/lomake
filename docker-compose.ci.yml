@@ -17,7 +17,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-      build_args: BASE_PATH=/tilannekuva/
     image: lomake_test
     labels:
       app: lomake
