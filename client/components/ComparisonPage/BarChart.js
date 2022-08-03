@@ -2,23 +2,24 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 
 require('highcharts/modules/exporting')(Highcharts)
 
 const checkSize = seriesData => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
 
-const getExportText = ({ lang, multipleYears, faculties, faculty, level }) => {
-  const formText = translations.chartExport[lang]
+const getExportText = ({ lang, multipleYears, faculties, faculty, level, t }) => {
+  const formText = t('comparison:chartExport')
   const time =
     multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length - 1]}` : multipleYears[0]
   const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
-  const levelText = translations[level][lang]
+  const levelText = t(level)
   return `${formText}_${time}_${facultyText}_${levelText}`
 }
 
 const BarChart = ({ data, questions, unit }) => {
+  const { t } = useTranslation()
   const { faculty, level, multipleYears } = useSelector(state => state.filters)
   const faculties = useSelector(state => state.faculties.data)
   const lang = useSelector(state => state.language)
@@ -26,7 +27,7 @@ const BarChart = ({ data, questions, unit }) => {
 
   const seriesData = data.map((series, index) => {
     return {
-      name: translations[series.name][lang],
+      name: t(series.name),
       id: Math.random(),
       data: series.data,
       changes: series.changes,
@@ -40,21 +41,21 @@ const BarChart = ({ data, questions, unit }) => {
   const graphImages = {
     menuItemDefinitions: {
       viewFullscreen: {
-        text: translations.viewFullscreen[lang],
+        text: t('comparison:fullscreen'),
       },
       downloadPNG: {
-        text: translations.downloadPNG[lang],
+        text: t('comparison:downloadPNG'),
       },
       downloadSVG: {
-        text: translations.downloadSVG[lang],
+        text: t('comparison:downloadSVG'),
       },
       downloadPDF: {
-        text: translations.downloadPDF[lang],
+        text: t('comparison:downloadPDF'),
       },
     },
     width: 2200,
     height: 1400,
-    filename: getExportText({ lang, multipleYears, faculties, faculty, level }),
+    filename: getExportText({ lang, multipleYears, faculties, faculty, level, t }),
     sourceWidth: 1200,
     sourceHeight: 600,
     buttons: {
@@ -170,7 +171,7 @@ const BarChart = ({ data, questions, unit }) => {
     yAxis: {
       min: 0,
       title: {
-        text: translations.programmes[lang],
+        text: t('comparison:programmes'),
       },
       stackLabels: {
         enabled: true,

@@ -13,6 +13,7 @@ export default {
     yellow: 'Keltainen',
     red: 'Punainen',
     EMPTY: 'Ei vastausta',
+    empty: 'Ei vastausta',
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
 
@@ -32,6 +33,13 @@ export default {
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
     smileyColors: 'Hymiöiden värit',
+
+    choose: 'Valitse',
+    colors_all: 'kaikki',
+    colors_green: 'vain vihreät',
+    colors_yellow: 'vain keltaiset',
+    colors_red: 'vain punaiset',
+    answers: 'vastaukset',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -72,6 +80,12 @@ export default {
     labelOptions: 'Graafin yksikkö',
     percentage: 'Prosenttiosuudet',
     programmeAmount: 'Ohjelmien lukumäärä',
+    programmes: 'Ohjelmaa',
+    fullscreen: 'Koko näyttö',
+    downloadPNG: 'Lataa PNG-kuvana',
+    downloadSVG: 'Lataa SVG-kuvana',
+    downloadPDF: 'Lataa PDF-tiedostona',
+    chartExport: 'Tilannekuvalomakkeen_vuosivertailu',
   },
 
   formView: {
@@ -119,6 +133,18 @@ export default {
     tooLongPaste:
       'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',
     year: 'Valitse vuodet',
+    pdfExportText: 'Tilannekuvalomakkeen_vastaukset',
+    reportPage: 'Tilannekuvalomakkeen vastaukset',
+    downloadPDF: 'Lataa vastaukset PDF-tiedostona',
+    statusHeader: 'Vuoden {{year}} vastaukset ovat avoinna muokattaviksi.',
+    statusMessage: 'Voit vaihtaa vuoden otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
+
+    csvFileformwritten: 'Tilannekuvalomake_kirjalliset_vastaukset',
+    csvFileformcolors: 'Tilannekuvalomake_hymiöiden_värit',
+    csvFileoverviewwritten: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
+    csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_hymiöiden_värit',
+    colors: 'Hymiöiden värit',
+    written: 'Kirjalliset vastaukset',
   },
 
   overview: {

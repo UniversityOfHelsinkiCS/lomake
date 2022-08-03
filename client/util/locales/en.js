@@ -17,6 +17,7 @@ export default {
     yellow: 'Yellow',
     red: 'Red',
     EMPTY: 'No answer provided',
+    empty: 'No answer provided',
     OK: 'Answer given',
     lastSaved: 'Last saved',
 
@@ -36,6 +37,13 @@ export default {
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
     smileyColors: ' Smiley colors',
+
+    choose: 'Choose',
+    colors_all: 'all',
+    colors_green: 'only green',
+    colors_yellow: 'only yellow',
+    colors_red: 'only red',
+    answers: 'answers',
   },
 
   aboutPage: {
@@ -75,6 +83,12 @@ export default {
     labelOptions: 'Unit in the graph',
     percentage: 'Percentages',
     programmeAmount: 'Amount of programmes',
+    programmes: 'Programmes',
+    fullscreen: 'Full screen',
+    downloadPNG: 'Download as a PNG-image',
+    downloadSVG: 'Download as a SVG-image',
+    downloadPDF: 'Download as a PDF',
+    chartExport: 'Comparison_of_self-assessment_answers',
   },
 
   formView: {
@@ -123,6 +137,18 @@ export default {
     tooLongPaste:
       'The text you are trying to paste ({{newLength}} characters in total) does not fit in the maximum character limit {{MAX_LENGTH}} characters)',
     year: 'Year(s)',
+    pdfExportText: 'Answers_to_the_self-assessment_form',
+    reportPage: 'Answers to the Form',
+    downloadPDF: 'Download answers as a PDF-file',
+    statusHeader: 'Answers for the year {{year}} can be modified.',
+    statusMessage: 'Year can be selected from the dropdown below the headline. Final day for answering the form is: ',
+
+    csvFileformwritten: 'Written_answers',
+    csvFileformcolors: 'Colored_smileys',
+    csvFileoverviewwritten: 'All_the_programmes_written_answers',
+    csvFileoverviewcolors: 'All_the_programmes_colored_smileys',
+    colors: 'Emoji colors',
+    written: 'Written answers',
   },
 
   overview: {

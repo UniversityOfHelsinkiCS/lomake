@@ -12,6 +12,7 @@ export default {
     yellow: 'Gul',
     red: 'Röd',
     EMPTY: 'Inget svar',
+    empty: 'Inget svar',
     OK: 'Svaret lämnat',
     lastSaved: 'Senast sparat',
 
@@ -31,6 +32,13 @@ export default {
     // responses: '',
     // writtenAnswers: '',
     // smileyColors: '',
+
+    // choose: '',
+    // colors_all: '',
+    // colors_green: '',
+    // colors_yellow: '',
+    // colors_red: '',
+    // answers:'',
   },
 
   aboutPage: {
@@ -64,6 +72,12 @@ export default {
     // labelOptions: '',
     // percentage: '',
     // programmeAmount: '',
+    // programmes: '',
+    // fullscreen: '',
+    // downloadPNG: '',
+    // downloadSVG: '',
+    // downloadPDF: '',
+    // chartExport: '',
   },
 
   formView: {
@@ -108,6 +122,18 @@ export default {
     // chooseMore: '',
     // tooLongPaste: '',
     // year: '',
+    // pdfExportText: '',
+    // reportPage: '',
+    downloadPDF: 'Ladda ner svaren i en PDF-fil',
+    // statusHeader: '{{year}}',
+    // statusMessage: '',
+
+    // csvFileformwritten: '',
+    // csvFileformcolors: '',
+    // csvFileoverviewwritten: '',
+    // csvFileoverviewcolors: '',
+    // colors: '',
+    // written: '',
   },
 
   overview: {
