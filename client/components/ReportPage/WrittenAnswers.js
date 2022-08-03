@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { reportPageTranslations as translations } from 'Utilities/translations'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import Question from './Question'
 import DisabledQuestion from './DisabledQuestion'
@@ -19,6 +19,7 @@ const WrittenAnswers = ({
   showing,
   setShowing,
 }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
@@ -50,7 +51,7 @@ const WrittenAnswers = ({
   if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
 
   if (allAnswers.size < 1) {
-    return <h3 data-cy="report-no-data">{translations.noData[lang]}</h3>
+    return <h3 data-cy="report-no-data">{t('noData')}</h3>
   }
 
   return (
@@ -61,17 +62,17 @@ const WrittenAnswers = ({
             <div className="side-note-large">
               <PDFDownload />
             </div>
-            <p className="report side-note-small">{translations.pdfNotification[lang]}</p>
+            <p className="report side-note-small">{t('report:pdfNotification')}</p>
           </Grid.Column>
         </Grid.Row>
         <Grid.Column width={4} className="left">
-          {translations.questions[lang]}
+          {t('report:question')}
         </Grid.Column>
         <Grid.Column width={6} className="center">
-          {year} - {translations.reportHeader.written[lang]}
+          {year} - {t('writtenAnswers')}
         </Grid.Column>
         <Grid.Column width={5} className="right" floated="right">
-          {translations.answered[lang]} / {translations.allProgrammes[lang]}
+          {t('report:answered')} / {t('allProgrammes')}
         </Grid.Column>
       </Grid>
       <div className="ui divider" />

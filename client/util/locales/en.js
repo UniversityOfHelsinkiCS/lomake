@@ -33,6 +33,8 @@ export default {
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
     responses: 'Responses:',
+    writtenAnswers: 'Written answers',
+    smileyColors: ' Smiley colors',
   },
 
   aboutPage: {
@@ -142,5 +144,15 @@ export default {
     noUsers: 'No users',
     userListJory: 'Steering group members who have accessed the form',
     userListOthers: 'Other users who have programme access rights and have accessed the form',
+  },
+
+  report: {
+    pdfNotification: 'Only the questions and answers chosen here will be printed on the PDF-report',
+    facultyFilter: 'Filter by faculty',
+    reportPage: 'Answers',
+    selectQuestions: 'Filter out questions',
+    clickToCheck: 'Check the written answers',
+    question: 'Question',
+    answered: 'Answered',
   },
 }

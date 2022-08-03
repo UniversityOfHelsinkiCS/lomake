@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
@@ -15,7 +16,6 @@ import {
   modifiedQuestions,
   programmeNameByKey as programmeName,
 } from 'Utilities/common'
-import { reportPageTranslations as translations } from 'Utilities/translations'
 import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
@@ -62,6 +62,7 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
 }
 
 export default () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [openQuestions, setOpenQuestions] = useState(false)
   const [filter, setFilter] = useState('')
@@ -85,7 +86,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-    document.title = `${translations.reportPage[lang]}`
+    document.title = `${t('report:reportPage')}`
   }, [lang])
 
   // Handles all filtering
@@ -97,7 +98,7 @@ export default () => {
 
   const panes = [
     {
-      menuItem: translations.reportHeader.written[lang],
+      menuItem: t('writtenAnswers'),
       render: () => (
         <Tab.Pane className="tab-pane">
           <WrittenAnswers
@@ -123,7 +124,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.reportHeader.colors[lang],
+      menuItem: t('smileyColors'),
       render: () => (
         <Tab.Pane className="tab-pane">
           <ColorAnswers
@@ -159,13 +160,13 @@ export default () => {
         <Grid.Column width={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
-            {translations.backToFrontPage[lang]}
+            {t('backToFrontPage')}
           </Button>
-          <h1>{translations.reportPage[lang]}</h1>
+          <h1>{t('report:reportPage')}</h1>
           <FilterTray filter={filter} setFilter={setFilter} />
           <Accordion fluid styled className="question-filter">
             <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
-              {translations.selectQuestions[lang]}{' '}
+              {t('report:selectQuestions')}{' '}
               <span className="noprint">
                 <Icon name={`caret ${openQuestions ? 'down' : 'right'}`} />
               </span>

@@ -30,6 +30,8 @@ export default {
     selectAll: 'Valitse kaikki',
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
+    writtenAnswers: 'Kirjalliset vastaukset',
+    smileyColors: 'Hymiöiden värit',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -139,5 +141,15 @@ export default {
     noUsers: 'Ei käyttäjiä',
     userListJory: 'Lomakkeelle kirjautuneet käyttäjät, jotka kuuluvat koulutusohjelman johtoryhmään',
     userListOthers: 'Lomakkeelle kirjautuneet muut käyttäjät, joilla oikeus koulutusohjelmaan',
+  },
+
+  report: {
+    pdfNotification: 'Vain tähän valitut kysymykset ja vastaukset tulevat PDF-tulosteelle',
+    facultyFilter: 'Vastaukset tiedekunnittain',
+    reportPage: 'Tilannekuvalomakkeen vastaukset',
+    selectQuestions: 'Suodata kysymyksiä',
+    clickToCheck: 'Katso kirjalliset vastaukset',
+    question: 'Kysymys',
+    answered: 'Vastattu',
   },
 }

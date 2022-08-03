@@ -6,7 +6,7 @@ import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import YearSelector from 'Components/Generic/YearSelector'
-import { reportPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
@@ -20,6 +20,7 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
 }
 
 const FilterTray = ({ filter, setFilter }) => {
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
@@ -35,7 +36,7 @@ const FilterTray = ({ filter, setFilter }) => {
       <YearSelector size="small" />
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
-          <FacultyFilter size="small" label={translations.facultyFilter[lang]} />
+          <FacultyFilter size="small" label={t('report:facultyFilter')} />
           <LevelFilter />
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
@@ -44,7 +45,7 @@ const FilterTray = ({ filter, setFilter }) => {
             filter={filter}
             onEmpty={() => setFilter('')}
             lang={lang}
-            label={translations.programmeFilter[lang]}
+            label={t('programmeFilter')}
           />
         </>
       )}

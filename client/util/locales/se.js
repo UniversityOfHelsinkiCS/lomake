@@ -29,6 +29,8 @@ export default {
     // selectAll: '',
     // clearSelection: '',
     // responses: '',
+    // writtenAnswers: '',
+    // smileyColors: '',
   },
 
   aboutPage: {
@@ -128,5 +130,15 @@ export default {
     noUsers: 'Inga användare',
     // userListJory: '',
     // userListOthers: '',
+  },
+
+  report: {
+    // pdfNotification: '',
+    // facultyFilter: '',
+    // reportPage: '',
+    // selectQuestions: '',
+    // clickToCheck: '',
+    question: 'Fråga',
+    answered: 'Svarat',
   },
 }
