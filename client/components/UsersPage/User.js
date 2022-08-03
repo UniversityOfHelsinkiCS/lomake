@@ -2,16 +2,20 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { Table, Icon, Label, Popup } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { colors } from 'Utilities/common'
 import './UsersPage.scss'
-import { usersPageTranslations as translations } from 'Utilities/translations'
 import { isSuperAdmin, isBasicUser, isAdmin, specialGroups } from '../../../config/common'
 
-const getSpecialGroup = (group, lang) => {
+const getSpecialGroup = (group, lang, t) => {
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
-  return <Label>{special.faculty ? special.translationTag[lang] : translations[special.translationTag][lang]}</Label>
+  return (
+    <Label>
+      {special.faculty ? special.translationTag[lang] : t('users:special:access', { context: special.translationTag })}
+    </Label>
+  )
 }
 
 const formatRights = programme => {
@@ -20,10 +24,10 @@ const formatRights = programme => {
     .join(', ')
 }
 
-const getUserType = (user, lang) => {
-  if (isBasicUser(user)) return translations.accessBasic[lang]
-  if (isSuperAdmin(user)) return translations.accessSuperAdmin[lang]
-  if (isAdmin(user)) return translations.accessAdmin[lang]
+const getUserType = (user, t) => {
+  if (isBasicUser(user)) return t('users:basicUser')
+  if (isSuperAdmin(user)) return t('users:superAdmin')
+  if (isAdmin(user)) return t('admin')
   return ''
 }
 
@@ -53,6 +57,7 @@ const getUserRole = userIams => {
 }
 
 export default ({ user, lang, programmeCodesAndNames }) => {
+  const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
 
   const logInAs = () => {
@@ -73,7 +78,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
             <div className="user-access-list">{programmeCodesAndNames.get(programmeKeys[0])}</div>
             {programmeKeys.length > 1 && (
               <div>
-                +{programmeKeys.length - 1} {translations.moreProgrammes[lang]}
+                +{programmeKeys.length - 1} {t('users:moreProgrammes', { count: programmeKeys.length - 1 })}
               </div>
             )}
           </div>
@@ -101,7 +106,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         <Table.Cell data-cy={`${user.uid}-userAccess`} style={{ display: 'flex' }}>
           <FormattedAccess />
         </Table.Cell>
-        <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, lang)}</Table.Cell>
+        <Table.Cell data-cy={`${user.uid}-userGroup`}>{getUserType(user, t)}</Table.Cell>
         <Table.Cell>
           {user.lastLogin ? (
             moment(user.lastLogin).format('DD.MM.YYYY')
@@ -110,7 +115,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
           )}
         </Table.Cell>
         <Table.Cell data-cy="user-access-groups">
-          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang))}
+          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang, t))}
         </Table.Cell>
         <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
         {isAdmin(currentUser) && (

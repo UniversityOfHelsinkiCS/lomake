@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Input, Icon, Loader, Table } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 
 import User from 'Components/UsersPage/User'
 import useDebounce from 'Utilities/useDebounce'
 import { sortedItems } from 'Utilities/common'
-import { usersPageTranslations as translations } from 'Utilities/translations'
 import { isAdmin } from '@root/config/common'
 import './UsersPage.scss'
 
@@ -18,6 +18,7 @@ export default () => {
 
   const debouncedName = useDebounce(nameFilter, 200)
 
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const users = useSelector(state => state.users)
   const user = useSelector(({ currentUser }) => currentUser.data)
@@ -94,7 +95,7 @@ export default () => {
           onChange={(e, { value }) => setNameFilter(value)}
           icon="search"
           iconPosition="left"
-          placeholder={translations.searchByName[lang]}
+          placeholder={t('users:searchByName')}
         />
         <Input
           className="user-filter"
@@ -102,24 +103,24 @@ export default () => {
           onChange={(e, { value }) => setAccessFilter(value)}
           icon="users"
           iconPosition="left"
-          placeholder={translations.filterByAccess[lang]}
+          placeholder={t('users:filterByAccess')}
         />
       </div>
       <Table celled compact stackable>
         <Table.Header className="sticky-header">
           <Table.Row>
-            {getCustomHeader({ name: translations.name[lang], width: 2, field: 'lastname' })}
-            {getCustomHeader({ name: translations.userId[lang], width: 1, field: 'uid' })}
-            {getCustomHeader({ name: translations.access[lang], width: 6, field: 'access', sortable: true })}
-            {getCustomHeader({ name: translations.userGroup[lang], width: 2, field: 'userGroup' })}
-            {getCustomHeader({ name: translations.lastLogin[lang], width: 2, field: 'lastLogin', sortable: true })}
+            {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
+            {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
+            {getCustomHeader({ name: t('users:access'), width: 6, field: 'access', sortable: true })}
+            {getCustomHeader({ name: t('users:userGroup'), width: 2, field: 'userGroup' })}
+            {getCustomHeader({ name: t('users:lastLogin'), width: 2, field: 'lastLogin', sortable: true })}
             {getCustomHeader({
-              name: translations.specialGroup[lang],
+              name: t('users:specialGroup'),
               width: 2,
               field: 'specialGroup',
               sortable: true,
             })}
-            {getCustomHeader({ name: translations.role[lang], width: 2, field: 'role', sortable: false })}
+            {getCustomHeader({ name: t('users:role'), width: 2, field: 'role', sortable: false })}
             {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
         </Table.Header>
