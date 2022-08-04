@@ -40,7 +40,7 @@ describe('Form tests', () => {
   })
 
   it('Can see upcoming deadline date', () => {
-    cy.get('[data-cy=saving-answers-notice]').contains('Ähäkutti') // ('Final day')
+    cy.get('[data-cy=saving-answers-notice]').contains('Final day')
   })
 
   it('Measurements are created dynamically and saved correctly', () => {
