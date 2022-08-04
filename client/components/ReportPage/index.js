@@ -151,7 +151,7 @@ export default () => {
   ]
 
   if (!usersProgrammes || !selectedAnswers) return <></>
-  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   return (
     <div className="report">

@@ -21,7 +21,6 @@ const WrittenAnswers = ({
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const lang = useSelector(state => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const WrittenAnswers = ({
     return false
   }
 
-  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>

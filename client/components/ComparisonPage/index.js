@@ -141,7 +141,7 @@ export default () => {
 
   if (!user || !usersProgrammes) return <></>
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
-  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   return (
     <div className="comparison">

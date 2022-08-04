@@ -137,7 +137,7 @@ export default () => {
           </div>
         </>
       ) : (
-        <NoPermissions lang={lang} />
+        <NoPermissions t={t} />
       )}
     </>
   )

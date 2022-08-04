@@ -22,7 +22,6 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
 
 const FilterTray = ({ filter, setFilter }) => {
   const { t } = useTranslation()
-  const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { faculty, level } = filters
@@ -46,7 +45,7 @@ const FilterTray = ({ filter, setFilter }) => {
             label={t('programmeFilter')}
             filter={filter}
             onEmpty={() => setFilter('')}
-            lang={lang}
+            t={t}
           />
         </>
       )}
