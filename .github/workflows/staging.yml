@@ -24,11 +24,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_form:
     name: Test Form Page
@@ -49,11 +49,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/form.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_form_notifications:
     name: Test Form notifications
@@ -74,11 +74,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/formNotifications.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_happy_path:
     name: Test happy path
@@ -99,11 +99,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/happypath.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_iam_permissions:
     name: Test IAM-permissions
@@ -124,11 +124,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/IAMpermissions.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_management:
     name: Test rights management
@@ -149,11 +149,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/management.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_misc:
     name: Test miscellaneous
@@ -174,11 +174,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/misc.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_ospa:
     name: Test OSPA features
@@ -199,11 +199,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/ospa.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_permissions:
     name: Test permissions
@@ -224,11 +224,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/permissions.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_report:
     name: Test Report Page
@@ -249,11 +249,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/report.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   test_year_selector:
     name: Test year selector
@@ -274,11 +274,11 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/yearselector.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
 
   build:
     name: 'Build and publish staging image'
