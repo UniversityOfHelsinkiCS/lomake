@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
+import '../support/commands'
 
 describe('Core tests', () => {
   beforeEach(() => {

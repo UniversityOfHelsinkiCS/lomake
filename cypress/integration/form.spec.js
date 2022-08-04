@@ -3,6 +3,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
+import '../support/commands'
 
 describe('Form tests', () => {
   beforeEach(() => {
@@ -13,15 +14,12 @@ describe('Form tests', () => {
   })
 
   it('Can write to a textfield and the answer is saved.', () => {
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-
-    cy.writeToTextField('[contenteditable="true"]', 'kissa')
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
+    cy.writeToTextField('[contenteditable="true"]', 'other words')
     cy.reload()
-    cy.wait(1000)
 
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
-      .find('.editor-class')
-      .should('contain.text', 'kissa')
+    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
   })
 
   it('Can open a question, click on smiley face, and the result it saved.', () => {
@@ -65,8 +63,7 @@ describe('Form tests', () => {
   })
 
   it(`Other years' form pages are locked`, () => {
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=locked-form-notice]')
     cy.get('.editor-class').should('not.exist')
   })

@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { defaultYears, testProgrammeCode } from '../../config/common'
+import '../support/commands'
 
 describe("Previous year's answers", () => {
   beforeEach(() => {
@@ -13,17 +14,15 @@ describe("Previous year's answers", () => {
   it("Can switch which year's answers to see in OverViewPage", () => {
     cy.request('/api/cypress/createAnswers')
     cy.reload()
-    cy.get('[data-cy=yearSelector]').click()
 
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).should('have.class', 'square-green')
 
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)
 
     cy.get('.customModal-content').find('.close').click()
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[2]).click()
+    cy.selectYear(defaultYears[2])
 
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[2]}`)
@@ -34,8 +33,7 @@ describe("Previous year's answers", () => {
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('span').contains(defaultYears[1]).should('be.visible').click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[1]}`)
 
     cy.reload()
@@ -46,16 +44,13 @@ describe("Previous year's answers", () => {
     cy.request('/api/cypress/createAnswers')
     cy.visit(`/form/${testProgrammeCode}`)
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('span').contains(defaultYears[1]).should('be.visible').click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[1]}`)
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[2]).click()
+    cy.selectYear(defaultYears[2])
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[2]}`)
 
-    cy.get('[data-cy=yearSelector]').click()
-    cy.get('[data-cy=yearSelector]').contains(new Date().getFullYear()).click() // select current year
+    cy.selectYear(new Date().getFullYear())
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'koira')
 

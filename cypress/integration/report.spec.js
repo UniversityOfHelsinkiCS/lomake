@@ -3,6 +3,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
+import '../support/commands'
 
 const user = 'cypressUser'
 const adminUser = 'cypressOspaUser'
@@ -14,8 +15,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=nav-report]').click()
 
     // the year changes to year with answers by default, if form not open for current year
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
+    cy.selectYear(defaultYears[0])
 
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('colors').should('contain', 'Smiley')
@@ -25,27 +25,23 @@ describe('ReportPage tests', () => {
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
   })
 
-  it('User should be able to see the just written answers in the report', () => {
+  it.skip('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
+    cy.selectYear(defaultYears[0])
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[0]).click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
 
-    cy.writeToTextField('[contenteditable="true"]', 'kissa')
+    cy.writeToTextField('[contenteditable="true"]', 'test words')
 
     cy.visit('/')
     cy.reload()
     cy.wait(1000)
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
-    cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
-      'contain.text',
-      'kiss'
-    )
+    cy.get('[data-cy=report-question-learning_outcomes_text]').should('be.visible').click()
+    cy.get('[data-cy=report-question-content-learning_outcomes_text]').should('contain.text', 'test words')
   })
 
   it('User should be able to see answers from only one programme, when they have rights for only one', () => {
@@ -55,13 +51,13 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
-  it('User should not be able to see answers in fields where there are none', () => {
+  it.skip('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
     cy.visit('/')
     cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.writeToTextField('[contenteditable="true"]', 'kissa')
+    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
+    cy.writeToTextField('[contenteditable="true"]', 'more words')
     cy.reload()
 
     cy.visit('/')
@@ -76,8 +72,7 @@ describe('ReportPage tests', () => {
 
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-content-teacher_skills_text]').contains(`Hello from ${defaultYears[1]}`)
   })
@@ -88,8 +83,7 @@ describe('ReportPage tests', () => {
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
 
-    cy.getYearSelector()
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1]).click()
+    cy.selectYear(defaultYears[1])
     cy.get('[data-cy=master-filter]').should('be.visible').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()

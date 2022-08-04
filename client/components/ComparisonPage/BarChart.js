@@ -7,7 +7,14 @@ import { colors } from 'Utilities/common'
 
 require('highcharts/modules/exporting')(Highcharts)
 
-const checkSize = seriesData => (seriesData[0] && seriesData[0].data.length > 7 ? '10px' : '15px')
+const checkSize = seriesData => {
+  const questionAmount = (seriesData[0] && seriesData[0].data.length) || 0
+  if (questionAmount < 9) return '14px'
+  if (questionAmount < 13) return '9px'
+  return '7px'
+}
+
+const defineLabelAngle = seriesData => (seriesData[0] && seriesData[0].data.length > 9 ? -45 : 0)
 
 const getExportText = ({ lang, multipleYears, faculties, faculty, level, t }) => {
   const formText = t('comparison:chartExport')
@@ -23,7 +30,7 @@ const BarChart = ({ data, questions, unit }) => {
   const { faculty, level, multipleYears } = useSelector(state => state.filters)
   const faculties = useSelector(state => state.faculties.data)
   const lang = useSelector(state => state.language)
-  if (!data) return <></>
+  if (!data) return <> </>
 
   const seriesData = data.map((series, index) => {
     return {
@@ -53,11 +60,11 @@ const BarChart = ({ data, questions, unit }) => {
         text: t('comparison:downloadPDF'),
       },
     },
-    width: 2200,
-    height: 1400,
+    width: 2600,
+    height: 1650,
     filename: getExportText({ lang, multipleYears, faculties, faculty, level, t }),
-    sourceWidth: 1200,
-    sourceHeight: 600,
+    sourceWidth: 1564,
+    sourceHeight: 700,
     buttons: {
       contextButton: {
         menuItems: ['viewFullscreen', 'downloadPNG', 'downloadSVG', 'downloadPDF'],
@@ -68,7 +75,7 @@ const BarChart = ({ data, questions, unit }) => {
   const percentageOptions = {
     chart: {
       type: 'column',
-      height: '700px',
+      height: '750px',
       marginTop: 50,
       marginRight: 30,
     },
@@ -85,14 +92,12 @@ const BarChart = ({ data, questions, unit }) => {
       categories: questions.map(q => q.slice(2, q.length)),
       reserveSpace: true,
       labels: {
-        autoRotationLimit: 90,
+        rotation: defineLabelAngle(seriesData),
         style: {
           color: '#000000',
-          minWidth: '200px',
           textOverflow: 'none',
           wordBreak: 'break-all',
         },
-        overflow: 'allow',
       },
     },
     yAxis: {
@@ -101,9 +106,9 @@ const BarChart = ({ data, questions, unit }) => {
         text: '%',
       },
       stackLabels: {
-        enabled: false,
+        enabled: true,
+        format: '{stack}',
         style: {
-          fontWeight: 'bold',
           fontSize: checkSize(seriesData),
         },
       },
@@ -133,7 +138,7 @@ const BarChart = ({ data, questions, unit }) => {
       useHTML: true,
       padding: 10,
       itemMarginTop: 10,
-      itemDistance: 45,
+      itemDistance: 65,
     },
     series: data ? seriesData : [],
   }
@@ -141,7 +146,7 @@ const BarChart = ({ data, questions, unit }) => {
   const normalOptions = {
     chart: {
       type: 'column',
-      height: '700px',
+      height: '750px',
       marginTop: 50,
       marginRight: 30,
     },
@@ -158,14 +163,12 @@ const BarChart = ({ data, questions, unit }) => {
       categories: questions.map(q => q.slice(2, q.length)),
       reserveSpace: true,
       labels: {
-        autoRotationLimit: 90,
+        rotation: defineLabelAngle(seriesData),
         style: {
           color: '#000000',
-          minWidth: '200px',
           textOverflow: 'none',
           wordBreak: 'break-all',
         },
-        overflow: 'allow',
       },
     },
     yAxis: {
@@ -175,8 +178,8 @@ const BarChart = ({ data, questions, unit }) => {
       },
       stackLabels: {
         enabled: true,
+        format: '{stack}',
         style: {
-          fontWeight: 'bold',
           fontSize: checkSize(seriesData),
         },
       },
@@ -206,7 +209,7 @@ const BarChart = ({ data, questions, unit }) => {
       useHTML: true,
       padding: 10,
       itemMarginTop: 10,
-      itemDistance: 45,
+      itemDistance: 65,
     },
     series: data ? seriesData : [],
   }

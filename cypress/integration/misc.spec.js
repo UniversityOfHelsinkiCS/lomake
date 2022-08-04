@@ -2,6 +2,7 @@
 /// <reference types="cypress" />
 
 import { testProgrammeCode } from '../../config/common'
+import '../support/commands'
 
 describe('Misc tests', () => {
   beforeEach(() => {
