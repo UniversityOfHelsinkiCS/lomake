@@ -15,11 +15,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
@@ -40,11 +40,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/form.spec.js"
@@ -65,11 +65,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/formNotifications.spec.js"
@@ -90,11 +90,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/happypath.spec.js"
@@ -115,11 +115,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/IAMpermissions.spec.js"
@@ -140,11 +140,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/management.spec.js"
@@ -165,11 +165,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/misc.spec.js"
@@ -190,11 +190,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/ospa.spec.js"
@@ -215,11 +215,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/permissions.spec.js"
@@ -240,11 +240,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/report.spec.js"
@@ -265,11 +265,11 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: docker-compose -f docker-compose.ci.yml up -d
-        run: docker-compose -f docker-compose.ci.yml up -d
+      - name: docker-compose up -d
+        run: docker-compose up -d
 
       - name: seed db
-        run: docker exec lomake bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "node index.js seed"
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/yearselector.spec.js"

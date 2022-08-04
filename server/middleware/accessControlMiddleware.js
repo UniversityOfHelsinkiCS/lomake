@@ -1,4 +1,4 @@
-const { inProduction, IN_TEST } = require('@util/common')
+const { inProduction } = require('@util/common')
 const { isAdmin, isSuperAdmin } = require('@root/config/common')
 const logger = require('@util/logger')
 
@@ -32,7 +32,7 @@ const checkAdmin = (req, res, next) => {
 }
 
 const notInProduction = (req, res, next) => {
-  if (!inProduction || IN_TEST) {
+  if (!inProduction) {
     next()
   } else {
     logger.error(`Test-only route (${req.method} ${req.url}) was requested while in production mode.`)

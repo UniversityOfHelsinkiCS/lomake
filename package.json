@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "docker-compose up",
     "build": "node build.js",
-    "start:prod": "cross-env NODE_ENV=production BASE_PATH=/tilannekuva/ node index.js",
+    "start:prod": "cross-env NODE_ENV=production node index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
