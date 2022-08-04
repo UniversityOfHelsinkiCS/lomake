@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 const FormStatusMessage = ({ programme }) => {
+  const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
@@ -32,10 +33,8 @@ const FormStatusMessage = ({ programme }) => {
       <Message
         onDismiss={() => setVisible(false)}
         color="teal"
-        header={`
-          ${translations.formStatusMessagePart1[lang]} ${draftYear && draftYear.year}
-          ${translations.formStatusMessagePart2[lang]}`}
-        content={`${translations.formStatusMessagePart3[lang]}${deadlineDate.toLocaleDateString(locale)}.`}
+        header={t('generic:statusHeader', { year: draftYear ? draftYear.year : '' })}
+        content={`${t('generic:statusMessage')}${deadlineDate.toLocaleDateString(locale)}.`}
       />
     </div>
   )

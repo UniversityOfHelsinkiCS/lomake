@@ -1,17 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { formViewTranslations as translations } from 'Utilities/translations'
 
-const showMessageForOpenYear = (draftYear, writeAccess, lang) => {
+const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   if (draftYear && writeAccess) {
-    return `${draftYear.year} ${translations.lockedFormNoticePart2[lang]}`
+    return `${draftYear.year} ${t('formView:status:open')}`
   }
   return ''
 }
 
 const StatusMessage = ({ programme }) => {
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const deadline = useSelector(state => state.deadlines.nextDeadline)
   const draftYear = useSelector(state => state.deadlines.draftYear)
@@ -29,8 +30,8 @@ const StatusMessage = ({ programme }) => {
         <Message
           data-cy="deadline-passed-notice"
           icon="clock"
-          header={`${translations.deadlinePassedNotice[lang]}`}
-          content={`${translations.deadlinePassedSubtitle[lang]}`}
+          header={`${t('formView:status:deadlinePassed')}`}
+          content={`${t('formView:status:ospaProcessing')}`}
         />
       </>
     )
@@ -40,8 +41,8 @@ const StatusMessage = ({ programme }) => {
       <Message
         data-cy="locked-form-notice"
         icon="lock"
-        header={`${translations.lockedFormNoticePart1[lang]} ${showMessageForOpenYear(draftYear, writeAccess, lang)}`}
-        content={`${translations.lockedFormSubtitle[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
+        header={`${t('formView:status:locked')} ${showMessageForOpenYear(draftYear, writeAccess, t)}`}
+        content={`${t('formView:status:canBeOpened')} ${deadlineObj.toLocaleDateString(locale)}.`}
       />
     )
 
@@ -49,8 +50,8 @@ const StatusMessage = ({ programme }) => {
     <Message
       data-cy="saving-answers-notice"
       icon="info"
-      header={`${translations.savingAnswersNotice[lang]} ${deadlineObj.toLocaleDateString(locale)}.`}
-      content={`${translations.savingAnswersSubtitle[lang]} ${lastSaved.toLocaleString(locale)}.`}
+      header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
+      content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}.`}
     />
   )
 }

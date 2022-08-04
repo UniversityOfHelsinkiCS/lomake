@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Icon, Segment } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { sortedItems } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const faculty = useSelector(({ filters }) => filters.faculty)
 
@@ -30,7 +31,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
-        <p className="list-header">{translations.nowShowing[lang]}</p>
+        <p className="list-header">{t('generic:nowShowing')}</p>
         {programmes.all.length > 0 ? (
           <>
             {sortedItems(programmes.all, 'name', lang).map(
@@ -48,9 +49,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                 )
             )}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
-              {translations.chooseMore[lang]}
-            </p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t('generic:chooseMore')}</p>
             {sortedItems(programmes.all, 'name', lang).map(
               p =>
                 !programmes.chosen.includes(p) && (
@@ -67,13 +66,13 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
             )}
           </>
         ) : (
-          <h4>{translations.noData[lang]}</h4>
+          <h4>{t('noData')}</h4>
         )}
       </Segment>
       <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
-        {translations.selectAll[lang]}
+        {t('selectAll')}
       </Button>
-      <Button onClick={() => setPicked([])}>{translations.clearSelection[lang]}</Button>
+      <Button onClick={() => setPicked([])}>{t('clearSelection')}</Button>
     </>
   )
 }

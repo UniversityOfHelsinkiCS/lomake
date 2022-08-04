@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
+import { useTranslation } from 'react-i18next'
 import { answersByYear, programmeNameByKey as getProgrammeName } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
 import './Generic.scss'
 
 const CsvDownload = ({ wantedData, view, programme }) => {
+  const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
@@ -39,8 +40,8 @@ const CsvDownload = ({ wantedData, view, programme }) => {
       },
       [[], []]
     )
-    csvData[0].push(translations.faculty[lang])
-    csvData[0].push(translations.programmeHeader[lang])
+    csvData[0].push(t('faculty'))
+    csvData[0].push(t('programmeHeader'))
     csvData[1].push('//')
     csvData[1].push('//')
     csvData[0].reverse()
@@ -106,7 +107,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
     const getColorAnswers = rawData => {
       const answerArray = csvData[1].slice(2).map(questionId => {
         const color = rawData[`${questionId}_light`]
-        if (color) return translations[color][lang]
+        if (color) return t(color)
         return ''
       })
 
@@ -146,10 +147,11 @@ const CsvDownload = ({ wantedData, view, programme }) => {
   }
 
   const data = handleData()
+  const dataTitle = t(`generic:csvFile${view}${wantedData}`)
 
   return (
-    <CSVLink filename={`${year}_${translations.csvFile[view][wantedData][lang]}_.csv`} data={data} separator=",">
-      {translations.csvLink[wantedData][lang]}
+    <CSVLink filename={`${year}_${dataTitle}_.csv`} data={data} separator=",">
+      {t(`generic:${wantedData}`)}
     </CSVLink>
   )
 }

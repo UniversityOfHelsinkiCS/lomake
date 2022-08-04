@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Accordion, Grid, Icon, Label, Popup } from 'semantic-ui-react'
-import { reportPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 
 const Question = ({ answers, question, chosenProgrammes, handleClick, showing }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const [chosenColor, setChosenColor] = useState('all')
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
   const ButtonPopup = ({ color }) => (
     <Popup
-      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
+      content={`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}
       trigger={
         <button
           key={color}
@@ -93,7 +92,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                 return undefined
               })
           ) : (
-            <h4>{translations.noData[lang]}</h4>
+            <h4>{t('noData')}</h4>
           )}
         </Accordion.Content>
       )}

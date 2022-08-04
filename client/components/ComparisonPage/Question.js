@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
+
 import { romanize } from 'Utilities/common'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
 const Question = ({ answers, question, handleClick, showing }) => {
+  const { t } = useTranslation()
   const [colors, setColors] = useState(['all', 'all', 'all'])
   const [buttons, setButtons] = useState([0, 0, 0])
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
-  const lang = useSelector(state => state.language)
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
@@ -25,7 +26,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
 
   const ButtonPopup = ({ color, index, yearsIndex }) => (
     <Popup
-      content={`${translations.choose[lang]} ${translations[`${color}Ones`][lang]} ${translations.answers[lang]}`}
+      content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
       trigger={
         <button
           key={color}
@@ -104,7 +105,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
                         return null
                       })
                     ) : (
-                      <h4>{translations.noData[lang]}</h4>
+                      <h4>{t('noData')}</h4>
                     )}
                   </Grid.Column>
                 )

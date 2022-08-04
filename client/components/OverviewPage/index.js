@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Button } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
@@ -10,13 +11,13 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import useDebounce from 'Utilities/useDebounce'
-import { overviewPageTranslations as translations } from 'Utilities/translations'
 import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
 import './OverviewPage.scss'
 
 export default () => {
+  const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const [modalData, setModalData] = useState(null)
@@ -29,7 +30,7 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${translations.overviewPage[lang]}`
+    document.title = `${t('overview:overviewPage')}`
   }, [lang])
 
   const handleFilterChange = ({ target }) => {
@@ -76,7 +77,7 @@ export default () => {
 
       {programControlsToShow && (
         <CustomModal
-          title={`${translations.accessRights[lang]} - ${
+          title={`${t('overview:accessRights')} - ${
             programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
           }`}
           closeModal={() => setProgramControlsToShow(null)}
@@ -94,21 +95,21 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <label className="year-filter-label">{translations.selectYear[lang]}</label>
+            <label className="year-filter-label">{t('overview:selectYear')}</label>
             <YearSelector size="extra-small" />
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
-              {translations.readAnswersButton[lang]}
+              {t('overview:readAnswers')}
             </Button>
             {moreThanFiveProgrammes && (
               <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-                {translations.compareAnswersButton[lang]}
+                {t('overview:compareAnswers')}
               </Button>
             )}
             <Dropdown
               data-cy="csv-download"
               className="button basic gray csv-download"
               direction="left"
-              text={translations.csvDownload[lang]}
+              text={t('overview:csvDownload')}
               onClick={() => setShowCsv(true)}
             >
               {showCsv ? (
@@ -136,7 +137,7 @@ export default () => {
           </div>
         </>
       ) : (
-        <NoPermissions lang={lang} />
+        <NoPermissions t={t} />
       )}
     </>
   )

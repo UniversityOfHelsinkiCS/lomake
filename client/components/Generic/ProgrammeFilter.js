@@ -1,10 +1,9 @@
 import React from 'react'
 import { Button, Input } from 'semantic-ui-react'
 
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
-const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, size = 'normal', lang }) => (
+const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, t, size = 'normal' }) => (
   <div className={`programme-filter-${size}`}>
     <label>{label}</label>
     <Input
@@ -12,7 +11,7 @@ const ProgrammeFilter = ({ onEmpty, handleChange, filter, label, size = 'normal'
       name="filter"
       className="programme-filter-input"
       icon="search"
-      placeholder={translations.filter[lang]}
+      placeholder={t('programmeFilter')}
       onChange={handleChange}
       value={filter}
     />

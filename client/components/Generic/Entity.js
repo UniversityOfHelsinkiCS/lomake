@@ -1,12 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
@@ -25,7 +24,7 @@ const mapColorToImage = {
 }
 
 const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
@@ -75,7 +74,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
 
-      <Textarea id={id} label={translations.textAreaLabel[lang]} EntityLastYearsAccordion={EntityLastYearsAccordion} />
+      <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
 }

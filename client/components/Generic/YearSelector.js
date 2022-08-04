@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 export default function YearSelector({ multiple, size, label }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const previousYearsWithAnswers = useSelector(state => state.oldAnswers.years)
   const currentUser = useSelector(state => state.currentUser.data)
-  const lang = useSelector(state => state.language)
   const year = useSelector(({ filters }) => filters.year)
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
@@ -58,7 +58,7 @@ export default function YearSelector({ multiple, size, label }) {
         data-cy="yearSelector"
         name="year"
         fluid
-        placeholder={translations.year[lang]}
+        placeholder={t('generic:year')}
         options={yearOptions}
         onChange={multiple ? handleMultipleYearChange : handleYearChange}
         value={multiple ? multipleYears : year}

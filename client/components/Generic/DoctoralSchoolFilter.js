@@ -1,15 +1,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import { clearLevelSpecificFilters, setDoctoralSchool } from 'Utilities/redux/filterReducer'
-import { genericTranslations as translations } from 'Utilities/translations'
 import './Generic.scss'
 
 const DoctoralSchoolFilter = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const doctoralSchool = useSelector(({ filters }) => filters.doctoralSchool)
-  const lang = useSelector(state => state.language)
 
   const handleChange = (e, { value }) => {
     dispatch(clearLevelSpecificFilters())
@@ -19,34 +19,34 @@ const DoctoralSchoolFilter = () => {
   const options = [
     {
       key: 'allSchools',
-      text: translations.allDoctoralSchools[lang],
+      text: t('generic:allDoctoralSchools'),
       value: 'allSchools',
     },
     {
       key: 'social',
-      text: translations.socialSchool[lang],
+      text: t('generic:socialSchool'),
       value: 'social',
     },
     {
       key: 'sciences',
-      text: translations.sciencesSchool[lang],
+      text: t('generic:sciencesSchool'),
       value: 'sciences',
     },
     {
       key: 'health',
-      text: translations.healthSchool[lang],
+      text: t('generic:healthSchool'),
       value: 'health',
     },
     {
       key: 'environmental',
-      text: translations.environmentalSchool[lang],
+      text: t('generic:environmentalSchool'),
       value: 'environmental',
     },
   ]
 
   return (
     <div className="doctoral-school-filter">
-      <label>{translations.doctoralSchoolFilter[lang]}</label>
+      <label>{t('generic:doctoralSchoolFilter')}</label>
       <Select
         data-cy="doctoral-school-filter"
         fluid

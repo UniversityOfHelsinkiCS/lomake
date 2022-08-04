@@ -6,10 +6,10 @@ import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
+import { useTranslation } from 'react-i18next'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 import { colors } from 'Utilities/common'
-import { genericTranslations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import './Generic.scss'
@@ -34,11 +34,11 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
 }
 
 const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const lang = useSelector(state => state.language)
   const ref = useRef(null)
 
   // check if current user is the editor
@@ -94,7 +94,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     const newLength = value.length + textLength
     const isTooLong = newLength > MAX_LENGTH
     // eslint-disable-next-line no-alert
-    if (isTooLong) window.alert(genericTranslations.tooLongPaste[lang](newLength, MAX_LENGTH))
+    if (isTooLong) window.alert(t('generic:tooLongPaste', { newLength, MAX_LENGTH }))
     return isTooLong
   }
 

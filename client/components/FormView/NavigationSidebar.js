@@ -3,8 +3,8 @@ import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
+import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
-import { formViewTranslations as translations } from 'Utilities/translations'
 import questions from '../../questions.json'
 
 const replaceTitle = {
@@ -24,6 +24,7 @@ const NavigationSidebar = ({ programmeKey }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
+  const { t } = useTranslation()
 
   let partNumber = -1
   return (
@@ -91,9 +92,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                               data-cy={`${id}-${status}`}
                               name={iconMap[status]}
                               style={{ color: getColor() }}
-                              title={`${translations[status][lang]}${
-                                required ? ` (${translations.mandatory_field[lang]})` : ''
-                              }`}
+                              title={`${t(status)}${required ? ` (${t('formView:mandatory')})` : ''}`}
                             />
                           </>
                         )}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { Button } from 'semantic-ui-react'
 import { HashLink as Link } from 'react-router-hash-link'
-import { reportPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 
 export default ({
@@ -16,7 +15,7 @@ export default ({
   setActiveTab,
   setShowing,
 }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const [toolTipData, setToolTipData] = useState(null)
 
   const colorsTotal = question => {
@@ -45,28 +44,28 @@ export default ({
       {
         color: colors.background_green,
         toolTipColor: 'green',
-        toolTipHeader: translations.positive[lang],
+        toolTipHeader: t('positive'),
         value: colorSums.green.value || 0,
         programmes: colorSums.green.programmes,
       },
       {
         color: colors.background_yellow,
         toolTipColor: 'yellow',
-        toolTipHeader: translations.neutral[lang],
+        toolTipHeader: t('neutral'),
         value: colorSums.yellow.value || 0,
         programmes: colorSums.yellow.programmes,
       },
       {
         color: colors.background_red,
         toolTipColor: 'red',
-        toolTipHeader: translations.negative[lang],
+        toolTipHeader: t('negative'),
         value: colorSums.red.value || 0,
         programmes: colorSums.red.programmes,
       },
       {
         color: colors.light_gray,
         toolTipColor: 'gray',
-        toolTipHeader: translations.empty[lang],
+        toolTipHeader: t('EMPTY'),
         value: colorSums.emptyAnswer.value && showEmpty ? colorSums.emptyAnswer.value : 0,
         programmes: colorSums.emptyAnswer.programmes,
       },
@@ -75,7 +74,7 @@ export default ({
   }
 
   const amountOfResponses = () => {
-    let answered = `${translations.responses[lang]} `
+    let answered = `${t('responses')} `
     if (answers) {
       answered = answered.concat(`${showEmpty ? chosenProgrammes.length : colorSums.withoutEmpty.value}`)
     } else {
@@ -117,7 +116,7 @@ export default ({
         </p>
         <p className="noprint">
           <Link to={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
-            {translations.clickToCheck[lang]}
+            {t('report:clickToCheck')}
           </Link>
         </p>
       </div>

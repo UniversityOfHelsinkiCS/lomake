@@ -1,23 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
-
-import { overviewPageTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 
 const TableHeader = ({ tableIds, sort }) => {
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
 
   return (
     <>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('name')}>
-          {translations.programmeNameHeader[lang]}
+          {t('programmeHeader')}
           <Icon name="sort" />
         </div>
       </div>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('key')}>
-          {translations.programmeCodeHeader[lang]}
+          {t('code')}
           <Icon name="sort" />
         </div>
       </div>

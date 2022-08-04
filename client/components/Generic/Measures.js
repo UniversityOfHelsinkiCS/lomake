@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { genericTranslations as translations } from 'Utilities/translations'
+// import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
 import './Generic.scss'
 
 const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo }) => {
+  const { t } = useTranslation()
   const formData = useSelector(state => state.form.data)
-  const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const [amountOfMeasures, setAmountOfMeasures] = useState(1)
@@ -62,7 +63,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
           margin: '1em 0',
         }}
       >
-        {translations.measureLabel[lang]}
+        {t('generic:measureLabel')}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
       {previousAnswerText && (

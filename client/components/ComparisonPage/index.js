@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import NoPermissions from 'Components/Generic/NoPermissions'
 import {
@@ -15,7 +16,6 @@ import {
   sortedItems,
 } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { comparisonPageTranslations as translations } from 'Utilities/translations'
 import { isAdmin } from '@root/config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
@@ -68,6 +68,7 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
 }
 
 export default () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(state => state.currentUser.data)
@@ -80,7 +81,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
-    document.title = `${translations.comparisonPage[lang]}`
+    document.title = `${t('comparison:compare')}`
   }, [lang])
 
   const years = allYears(oldAnswers)
@@ -108,7 +109,7 @@ export default () => {
 
   const panes = [
     {
-      menuItem: translations.reportHeader.byFaculty[lang],
+      menuItem: t('comparison:reportHeader:byFaculty'),
       render: () => (
         <Tab.Pane>
           <CompareByFaculty
@@ -125,7 +126,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.reportHeader.byYear[lang],
+      menuItem: t('comparison:reportHeader:byYear'),
       render: () => (
         <Tab.Pane>
           <CompareByYear
@@ -140,7 +141,7 @@ export default () => {
 
   if (!user || !usersProgrammes) return <></>
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
-  if (usersProgrammes.length < 1) return <NoPermissions lang={lang} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   return (
     <div className="comparison">
@@ -149,9 +150,9 @@ export default () => {
         <Grid.Column width={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
-            {translations.backToFrontPage[lang]}
+            {t('backToFrontPage')}
           </Button>
-          <h1>{translations.comparisonPage[lang]}</h1>
+          <h1>{t('comparison:compare')}</h1>
         </Grid.Column>
       </Grid>
       <Tab className="comparison tab" menu={{ secondary: true, pointing: true }} panes={panes} />

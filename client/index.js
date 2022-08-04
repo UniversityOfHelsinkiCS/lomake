@@ -10,6 +10,7 @@ import store from 'Utilities/store'
 import { basePath } from 'Utilities/common'
 import App from 'Components/App'
 import ErrorBoundary from 'Components/ErrorBoundary'
+import './util/i18n'
 
 const refresh = () =>
   render(

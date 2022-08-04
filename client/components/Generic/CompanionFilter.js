@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 
-import { genericTranslations as translations } from 'Utilities/translations'
+import { useTranslation } from 'react-i18next'
 import { clearLevelSpecificFilters, setCompanion } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
 const CompanionFilter = () => {
   const dispatch = useDispatch()
-  const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const companion = useSelector(({ filters }) => filters.companion)
 
   const handleChange = () => {
@@ -23,7 +23,7 @@ const CompanionFilter = () => {
           <Form.Field>
             <Radio
               data-cy="companion-filter"
-              label={translations.companionFilter[lang]}
+              label={t('generic:companionFilter')}
               name="companion"
               checked={companion}
               onChange={handleChange}

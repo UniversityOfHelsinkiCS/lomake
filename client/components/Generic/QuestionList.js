@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
-import { genericTranslations as translations } from 'Utilities/translations'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const lang = useSelector(state => state.language)
   const questions = useSelector(({ filters }) => filters.questions)
 
   const getLabel = question => {
@@ -61,13 +61,13 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
         onClick={() => dispatch(setQuestions({ selected: questionLabels, open: [] }))}
         data-cy="questions-list-select-all"
       >
-        {translations.selectAll[lang]}
+        {t('selectAll')}
       </Button>
       <Button
         onClick={() => dispatch(setQuestions({ selected: [], open: [] }))}
         className="comparison-questions-list-button"
       >
-        {translations.clearSelection[lang]}
+        {t('clearSelection')}
       </Button>
     </div>
   )

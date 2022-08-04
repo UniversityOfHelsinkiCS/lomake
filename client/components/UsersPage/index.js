@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
-import { usersPageTranslations as translations } from 'Utilities/translations'
 import { isSuperAdmin } from '@root/config/common'
 import UserTable from './UserTable'
 import IamTable from './IamTable'
@@ -11,12 +11,13 @@ import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 
 export default () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const user = useSelector(({ currentUser }) => currentUser.data)
 
   useEffect(() => {
-    document.title = translations.adminPage[lang]
+    document.title = t('users:adminPage')
   }, [lang])
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default () => {
 
   let panes = [
     {
-      menuItem: translations.users[lang],
+      menuItem: t('users:users'),
       render: () => (
         <Tab.Pane>
           <UserTable />
@@ -33,7 +34,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.iams[lang],
+      menuItem: t('users:iams'),
       render: () => (
         <Tab.Pane>
           <IamTable />
@@ -41,7 +42,7 @@ export default () => {
       ),
     },
     {
-      menuItem: translations.deadline[lang],
+      menuItem: t('users:deadline'),
       render: () => (
         <Tab.Pane>
           <DeadlineInfo />
@@ -54,7 +55,7 @@ export default () => {
     panes = [
       ...panes,
       {
-        menuItem: translations.updateStudyprogrammes[lang],
+        menuItem: t('users:updateStudyprogrammes'),
         render: () => (
           <Tab.Pane>
             <UpdateStudyprogrammes />
@@ -62,7 +63,7 @@ export default () => {
         ),
       },
       {
-        menuItem: translations.deadlineSettings[lang],
+        menuItem: t('users:deadlineSettings'),
         render: () => (
           <Tab.Pane>
             <DeadlineSetting />
