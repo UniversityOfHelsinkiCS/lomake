@@ -24,10 +24,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+          
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_form:
@@ -49,10 +55,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/form.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_form_notifications:
@@ -74,10 +86,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/formNotifications.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_happy_path:
@@ -99,10 +117,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/happypath.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_iam_permissions:
@@ -124,10 +148,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/IAMpermissions.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_management:
@@ -149,10 +179,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/management.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_misc:
@@ -174,10 +210,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/misc.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_ospa:
@@ -199,10 +241,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/ospa.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_permissions:
@@ -224,10 +272,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/permissions.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_report:
@@ -249,10 +303,16 @@ jobs:
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/report.spec.js"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_year_selector:
@@ -273,9 +333,15 @@ jobs:
 
       - name: Run cypress tests
         run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/yearselector.spec.js"
-
-      - uses: actions/upload-artifact@v2
+      
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
