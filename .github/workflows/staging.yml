@@ -30,6 +30,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_form:
     name: Test Form Page
     runs-on: ubuntu-latest
@@ -54,6 +60,12 @@ jobs:
         with:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_form_notifications:
     name: Test Form notifications
@@ -80,6 +92,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_happy_path:
     name: Test happy path
     runs-on: ubuntu-latest
@@ -104,6 +122,12 @@ jobs:
         with:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_iam_permissions:
     name: Test IAM-permissions
@@ -130,6 +154,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_management:
     name: Test rights management
     runs-on: ubuntu-latest
@@ -154,6 +184,12 @@ jobs:
         with:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_misc:
     name: Test miscellaneous
@@ -180,6 +216,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_ospa:
     name: Test OSPA features
     runs-on: ubuntu-latest
@@ -204,6 +246,12 @@ jobs:
         with:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
   test_permissions:
     name: Test permissions
@@ -230,6 +278,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_report:
     name: Test Report Page
     runs-on: ubuntu-latest
@@ -255,6 +309,12 @@ jobs:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
 
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   test_year_selector:
     name: Test year selector
     runs-on: ubuntu-latest
@@ -279,6 +339,12 @@ jobs:
         with:
           name: Cypress videos
           path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
   build:
     name: 'Build and publish staging image'
