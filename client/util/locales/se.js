@@ -48,7 +48,7 @@ export default {
     howToFillTitle: 'Hur fyller man in blanketten?',
     howToFill: ` 
     Frågorna i självbedömningsblanketten är avsedda att väcka diskussion, och inte att besvaras som sådana.
-    I blanketten antecknas kortfattat diskussionens huvudpunkter. Dessutom skapas både en lista på åtgärder för själva programmet, och en separat lista för fakultetets planer.
+    I blanketten antecknas kortfattat diskussionens huvudpunkter. Dessutom skapas både en lista på åtgärder för själva programmet, och en separat lista för fakultetens planer.
     För varje tema ges en allmän bedömning (trafikljus/smilis). Denna bedömning är avsedd att starta en diskussion, inte att dra slutsatser om verksamhetens kvalitet.`,
     whatElseTitle: 'Vad annat kan man göra med blanketten?',
     whatElse: 'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
@@ -105,7 +105,7 @@ export default {
   },
 
   generic: {
-    companionFilter: 'Inkludera i svaren fakultetets samarbetsprogram',
+    companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',
     isWriting: 'skriver',
     allDoctoralSchools: 'Alla doktorandprogram',
     doctoralSchoolFilter: 'Filtrera enligt forskarskola',
