@@ -34,11 +34,6 @@ app.use(currentUserMiddleware)
 
 app.use(routes)
 
-// eslint-disable-next-line
-app.get('/debug-sentry', function mainHandler(req, res) {
-  throw new Error('Sentry error works')
-})
-
 app.use(Sentry.Handlers.errorHandler())
 app.use(errorMiddleware)
 
