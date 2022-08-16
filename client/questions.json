@@ -2,7 +2,7 @@
   {
     "title": {
       "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
-      "se": "",
+      "se": "ÖVERSIKT ÖVER FÖRRA ÅRETS LÄGESRAPPORT",
       "en": "REVIEW OF PREVIOUS YEARS' STATUS REPORT"
     },
     "parts": [
@@ -12,17 +12,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Edellinen läpikäynti",
-          "se": "Review of last year",
+          "se": "Föregående översikt",
           "en": "Review of last year"
         },
         "label": {
           "fi": "EDELLISEN VUODEN TILANNEKUVAN LÄPIKÄYNTI",
-          "se": "",
+          "se": "ÖVERSIKT ÖVER FÖRRA ÅRETS LÄGESRAPPORT",
           "en": "REVIEW OF PREVIOUS YEARS' STATUS REPORT"
         },
         "description": {
           "fi": "Näkyvätkö toimenpidelistan asiat tiedekunnan toimenpidesuunnitelmassa ja / tai henkilöstösuunnitelmassa? Mitkä asiat ovat toteutuneet? Mitä muutoksia suunnittelussa on tarve tehdä tällä kertaa?",
-          "se": "",
+          "se": "Är punkterna på åtgärdslistan reflekterade i fakultetens handlingsplan och/eller personalplan? Vilka åtgärder har genomförts? Vilka ändringar i planeringen behöver göras denna gång?",
           "en": "Are the items on the list of measures visible in the implementation and/or HR plans? Which items have been achieved? Which have been put back? What will be done differently this time around?"
         },
         "required": true,
@@ -704,7 +704,7 @@
         "no_color": true,
         "extrainfo": {
           "fi": "Kysymys on jaettu koulutusohjelman ja tiedekunnan osuuteen vuonna 2021",
-          "se": "",
+          "se": "Denna fråga är uppdelad i två delar år 2021. En del för utbildningsprogrammet, och den andra för fakulteten.",
           "en": "This question has been divided into two separate sections in 2021. One section for the studyprogramme and one section for the faculty."
         }
       },
@@ -731,7 +731,7 @@
         "no_color": true,
         "extrainfo": {
           "fi": "Kysymys on lisätty vuonna 2021",
-          "se": "",
+          "se": "Frågan har lagts till år 2021",
           "en": "Question has been added in 2021"
         }
       }
