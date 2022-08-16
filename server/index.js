@@ -37,4 +37,7 @@ app.use(routes)
 app.use(Sentry.Handlers.errorHandler())
 app.use(errorMiddleware)
 
+// eslint-disable-next-line
+dothat()
+
 module.exports = app
