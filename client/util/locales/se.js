@@ -38,20 +38,22 @@ export default {
     colors_green: 'endast gröna',
     colors_yellow: 'endast gula',
     colors_red: 'endast röda',
-    answers:'svar',
+    answers: 'svar',
   },
 
   aboutPage: {
     title: 'Information om blanketten',
     whatIsIt: 'Vad är självbedömningsblanketten?',
-    whatIsItReply: 'Blanketten lägger grunden för diskussionen om självbedömning, som förs av ledningsgruppen av varje utbildningsprogram. Blanketten används dessutom för att dokumentera dessa diskussioner. Blanketten används i Helsingfors Universitet.',
+    whatIsItReply:
+      'Blanketten lägger grunden för diskussionen om självbedömning, som förs av ledningsgruppen av varje utbildningsprogram. Blanketten används dessutom för att dokumentera dessa diskussioner. Blanketten används i Helsingfors Universitet.',
     howToFillTitle: 'Hur fyller man in blanketten?',
     howToFill: ` 
     Frågorna i självbedömningsblanketten är avsedda att väcka diskussion, och inte att besvaras som sådana.
     I blanketten antecknas kortfattat diskussionens huvudpunkter. Dessutom skapas både en lista på åtgärder för själva programmet, och en separat lista för fakultetens planer.
     För varje tema ges en allmän bedömning (trafikljus/smilis). Denna bedömning är avsedd att starta en diskussion, inte att dra slutsatser om verksamhetens kvalitet.`,
     whatElseTitle: 'Vad annat kan man göra med blanketten?',
-    whatElse: 'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
+    whatElse:
+      'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
     contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
     broughtBy: 'Förverkligad av',
   },
@@ -92,7 +94,8 @@ export default {
     downloadPDF: 'Skriv ut / Ladda ner svaren i en PDF-fil',
     mandatory: 'obligatoriskt fält',
     saveFailed: 'Fel: De ändringar som du har gjort under de senaste 10 sekunderna har inte sparats!',
-    saveFailedInstructions: 'För att fortsätta att fylla i formuläret, säkerhetskopiera dina senaste ändringar. Tryck sedan på knappen för att ladda om sidan.',
+    saveFailedInstructions:
+      'För att fortsätta att fylla i formuläret, säkerhetskopiera dina senaste ändringar. Tryck sedan på knappen för att ladda om sidan.',
     reload: 'Ladda om sidan',
     status: {
       locked: 'Blanketten från det valda året har blivit låst och kan inte redigeras.',
@@ -123,7 +126,8 @@ export default {
     noPermissions: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
     nowShowing: 'PROGRAM MED I SVAREN',
     chooseMore: 'VÄLJ MER PROGRAM:',
-    tooLongPaste: 'Texten du försöker klistra in ({{newLength}} tecken totalt) ryms inte inom det maximala antalet tecken {{MAX_LENGTH}} tecken)',
+    tooLongPaste:
+      'Texten du försöker klistra in ({{newLength}} tecken totalt) ryms inte inom det maximala antalet tecken {{MAX_LENGTH}} tecken)',
     year: 'Välj år',
     pdfExportText: 'Svar_på_självbedömningsblanketten',
     reportPage: 'Svar på självbedömningsblanketten',
@@ -178,7 +182,8 @@ export default {
     noDeadlineSet: 'Ingen deadline har angetts för detta år, eller så har den gått ut',
     selectNewDeadline: 'Välj ny deadline',
     selectDraftYear: 'Välj redigeringsår: ',
-    deadlineWarning: 'Blanketten är redan öppen för ett annat år. Lås formuläret innan du öppnar ett nytt år, så att uppgifterna sparas ordentligt.',
+    deadlineWarning:
+      'Blanketten är redan öppen för ett annat år. Lås formuläret innan du öppnar ett nytt år, så att uppgifterna sparas ordentligt.',
     updateDeadline: 'Uppdatera deadline',
     deleteThisDeadline: 'Ta bort deadline',
     noDraftYear: 'Inget år har valts',
@@ -189,7 +194,7 @@ export default {
     updateStudyprogrammes: 'Uppdatera undervisningsprogram',
     deadlineSettings: 'Hantera deadline',
     moreProgrammes_one: 'annat program',
-    moreprorammes_other: 'annat program',
+    moreProgrammes_other: 'annat program',
     special: {
       access_accessAllProgrammes: 'Alla program',
       access_accessInternational2020: 'Internationella magisterprogram 2020 ->',
