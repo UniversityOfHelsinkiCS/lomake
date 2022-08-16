@@ -194,6 +194,7 @@ export default {
     updateStudyprogrammes: 'Uppdatera undervisningsprogram',
     deadlineSettings: 'Hantera deadline',
     moreProgrammes_one: 'annat program',
+    moreProgrammes_two: 'annat program',
     moreProgrammes_other: 'annat program',
     special: {
       access_accessAllProgrammes: 'Alla program',
