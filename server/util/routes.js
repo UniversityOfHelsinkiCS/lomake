@@ -50,9 +50,4 @@ router.get('/faculties', faculties.getAll)
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers', notInProduction, cypress.createAnswers)
 
-// eslint-disable-next-line
-router.get('/debug-sentry', function mainHandler(req, res) {
-  throw new Error('Sentry error works even more')
-})
-
 module.exports = router
