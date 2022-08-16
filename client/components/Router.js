@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom' //  Redirect
 
 import AboutPage from 'Components/AboutPage'
 import FormView from 'Components/FormView'
@@ -17,7 +17,7 @@ export default () => (
       <Route exact path="/comparison" component={ComparisonPage} />
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
-      <Redirect to="/" />
+      {/* <Redirect to="/" /> */}
     </Switch>
   </div>
 )
