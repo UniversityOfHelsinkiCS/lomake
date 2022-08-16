@@ -373,6 +373,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           build_args: |
             BASE_PATH=/tilannekuva/
+            SENTRY_ENVIRONMENT=staging
           tags: staging
 
   report_success:

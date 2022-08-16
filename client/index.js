@@ -17,7 +17,7 @@ import './util/i18n'
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   Sentry.init({
     dsn: 'https://4ff51e515d0e41a28dea1bbcf3451a18@sentry.cs.helsinki.fi/11',
-    environment: process.env.NODE_ENV,
+    environment: process.env.SENTRY_ENVIRONMENT,
     // release: process.env.SENTRY_RELEASE,
     integrations: [new BrowserTracing()],
     tracesSampleRate: 1.0,
