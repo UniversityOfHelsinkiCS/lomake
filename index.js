@@ -16,7 +16,7 @@ const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
 const { getUserList } = require('@root/server/scripts/getUserList')
 const { createTempAnswers } = require('@root/server/scripts/createTempAnswers');
-const { devConfig, prodConfig } = require('./esbuild_config');
+const { devConfig, prodConfig, stagingConfig } = require('./esbuild_config');
 
 initializeDatabaseConnection()
   .then(() => {
@@ -53,6 +53,9 @@ initializeDatabaseConnection()
     if (!inProduction) {
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } else {
+      if (process.env.SENTRY_ENVIRONMENT === 'staging') {
+        require('esbuild').build(stagingConfig).then(s => logger.info("Build successful"))
+      }
       require('esbuild').build(prodConfig).then(s => logger.info("Build successful"))
     }
 

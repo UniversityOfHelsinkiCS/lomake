@@ -14,7 +14,7 @@ import App from 'Components/App'
 import ErrorBoundary from 'Components/ErrorBoundary'
 import './util/i18n'
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+if (process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://4ff51e515d0e41a28dea1bbcf3451a18@sentry.cs.helsinki.fi/11',
     environment: process.env.SENTRY_ENVIRONMENT,

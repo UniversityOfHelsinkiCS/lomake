@@ -17,6 +17,23 @@ const devConfig = {
   watch: true,
 }
 
+const stagingConfig = {
+  entryPoints: ['client/index.js'],
+  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  bundle: true,
+  minify: true,
+  outdir: 'dist/prod',
+  define: {
+    'process.env.BASE_PATH': "'/tilannekuva/'",
+    'process.env.NODE_ENV': "'production'",
+    'process.env.ENVIRONMENT': "'production'",
+    'process.env.SENTRY_ENVIRONMENT': "'staging'",
+    global: 'window',
+  },
+  plugins: [sassPlugin()],
+  color: true,
+}
+
 const prodConfig = {
   entryPoints: ['client/index.js'],
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
@@ -27,10 +44,11 @@ const prodConfig = {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
+    'process.env.SENTRY_ENVIRONMENT': "'production'",
     global: 'window',
   },
   plugins: [sassPlugin()],
   color: true,
 }
 
-module.exports = { devConfig, prodConfig }
+module.exports = { devConfig, prodConfig, stagingConfig }

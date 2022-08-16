@@ -2,7 +2,7 @@ const Sentry = require('@sentry/node')
 const Tracing = require('@sentry/tracing')
 
 const initializeSentry = app => {
-  // if (!sentryRelease || !sentryEnvironment || runningInCI) return
+  if (!(process.env.NODE_ENV === 'production')) return
 
   Sentry.init({
     dsn: 'https://4ff51e515d0e41a28dea1bbcf3451a18@sentry.cs.helsinki.fi/11',
