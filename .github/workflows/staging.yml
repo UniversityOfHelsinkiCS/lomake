@@ -348,18 +348,18 @@ jobs:
 
   build:
     name: 'Build and publish staging image'
-    needs:
-      - test_comparison
-      - test_form
-      - test_form_notifications
-      - test_happy_path
-      - test_iam_permissions
-      - test_management
-      - test_misc
-      - test_ospa
-      - test_permissions
-      - test_report
-      - test_year_selector
+    # needs:
+    #   - test_comparison
+    #   - test_form
+    #   - test_form_notifications
+    #   - test_happy_path
+    #   - test_iam_permissions
+    #   - test_management
+    #   - test_misc
+    #   - test_ospa
+    #   - test_permissions
+    #   - test_report
+    #   - test_year_selector
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
