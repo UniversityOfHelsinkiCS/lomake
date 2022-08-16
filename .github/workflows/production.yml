@@ -15,7 +15,9 @@ jobs:
           repository: toska/lomake
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          build_args: BASE_PATH=/tilannekuva/
+          build_args: |
+            BASE_PATH=/tilannekuva/
+            SENTRY_ENVIRONMENT=production
           tags: production
 
   report_success:
