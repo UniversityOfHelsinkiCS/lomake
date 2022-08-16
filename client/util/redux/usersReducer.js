@@ -5,7 +5,7 @@ import callBuilder from '../apiConnection'
  */
 
 export const getAllUsersAction = () => {
-  const route = '/users'
+  const route = '/debug-sentry' // '/users'
   const prefix = 'GET_ALL_USERS'
   return callBuilder(route, prefix, 'get')
 }
