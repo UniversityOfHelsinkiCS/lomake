@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@sentry/browser": "^7.10.0",
+    "@sentry/node": "^7.10.0",
     "@sentry/tracing": "^7.10.0",
     "axios": "^0.27.2",
     "date-fns": "^2.23.0",

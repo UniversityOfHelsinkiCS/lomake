@@ -35,8 +35,6 @@ const refresh = () =>
     </Provider>,
     document.getElementById('root')
   )
-// eslint-disable-next-line
-dothis()
 
 if (process.env.NODE_ENV === 'development') {
   const newUser = 'admin'
@@ -46,4 +44,5 @@ if (process.env.NODE_ENV === 'development') {
     setHeaders(newUser)
   }
 }
+
 refresh()
