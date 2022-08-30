@@ -307,6 +307,7 @@ const universityWideGroups = [
   'hy-sskh-rehtoraatti',
   'hy-mmtdk-dekanaatti',
   'hy-eltdk-dekanaatti',
+  'hy-ypa-toimi-helsinki',
 ].concat(Object.values(kojoMap))
 
 const isUniversityWideWritingGroups = [
