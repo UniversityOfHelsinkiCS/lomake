@@ -42,9 +42,14 @@ const IamTable = () => {
             'Koulutussuunnittelijat ja opintoasiainpäälliköt'
           )}
           {getRowsForAccessGroup(
-            _.uniq(['hy-[tiedekunta]-maisteri/kandi-kojot', 'hy-[tiedekunta]-dekanaatti', 'hy-rehtoraatti']),
+            _.uniq([
+              'hy-[tiedekunta]-maisteri/kandi-kojot',
+              'hy-[tiedekunta]-dekanaatti',
+              'hy-rehtoraatti',
+              'hy-ypa-toimi-helsinki',
+            ]),
             'Lukuoikeudet kaikkiin ohjelmiin',
-            'Dekanaatit, rehtoraatti ja koulutusohjelmien johtajat'
+            'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat ja toiminnanohjausyksikkö'
           )}
           {getRowsForAccessGroup(
             doctoralWritingIams,
