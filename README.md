@@ -74,3 +74,8 @@ The current questions of the form can be found in [questions.json](https://githu
 
 ![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
 _Example of the ENTITY type containing title, description, text area and color form field (emoji selector)_
+
+
+## IAMs
+
+This project uses IAMs for access control. You can find the IAM-based access configs in ```config > IAMConfig.js```. In Lomake itself admins can find a table of different access types and corresponding IAM-groups (```OSPA > IAM-ryhmät```).
