@@ -39,6 +39,7 @@ const getUserRole = userIams => {
   if (userIams.includes('grp-toska')) return 'Toska-ryhmä'
   if (userIams.includes('hy-ypa-opa-opintoasiainpaallikot')) return 'Opintoasiainpäällikkö'
   if (userIams.includes('hy-ypa-toimi-helsinki')) return 'Toiminnanohjausyksikkö'
+  if (userIams.includes('hy-ypa-opa-oymp-jory')) return 'Oppimisympäristöjen palvelut'
   role = userIams.find(iam => /hy-ypa-opa-.+/.test(iam))
   if (role) return `Koulutussuunnittelija - ${role.split('-')[4]}`
   role = userIams.find(iam => /hy-[a-z-]+-kojot/.test(iam))
