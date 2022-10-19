@@ -48,9 +48,10 @@ const IamTable = () => {
               'hy-rehtoraatti',
               'hy-ypa-toimi-helsinki',
               'hy-ypa-opa-oymp-jory',
+              'grp-katselmus-projektiryhma/ohjausryhmä',
             ]),
             'Lukuoikeudet kaikkiin ohjelmiin',
-            'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö ja oppimisympäristöjen palvelut'
+            'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
           )}
           {getRowsForAccessGroup(
             doctoralWritingIams,

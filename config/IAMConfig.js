@@ -309,7 +309,11 @@ const universityWideGroups = [
   'hy-eltdk-dekanaatti',
   'hy-ypa-toimi-helsinki',
   'hy-ypa-opa-oymp-jory',
+  'grp-katselmus-projektiryhma',
+  'grp-katselmus-ohjausryhma',
 ].concat(Object.values(kojoMap))
+
+// Katselmus groups^ are temporary and will eventually be removed
 
 const isUniversityWideWritingGroups = [
   'hy-ypa-opa-opintoasiainpaallikot',

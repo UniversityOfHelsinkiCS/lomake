@@ -47,6 +47,8 @@ const getUserRole = userIams => {
   role = userIams.find(iam => /hy-[a-z-]+-dekanaatti/.test(iam))
   if (role) return `Dekanaatti - ${role.split('-')[1]}`
   if (userIams.includes('hy-rehtoraatti')) return 'Rehtoraatti'
+  role = userIams.find(iam => /grp-katselmus-.+/.test(iam))
+  if (role) return `Katselmus - ${role.split('-')[2]}`
   if (userIams.includes('hy-ypa-tutto-toht')) return 'Tohtoriohjelmien suunnittelija'
   if (userIams.includes('hy-tohtorikoulutus-johtoryhma')) return 'Tohtorikoulutuksen johtoryhmä'
   if (userIams.includes('hy-tine')) return 'HY:n tieteellinen neuvosto'
