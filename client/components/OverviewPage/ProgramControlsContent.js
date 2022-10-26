@@ -30,7 +30,7 @@ const OwnerAccordionContent = ({ programKey }) => {
     <>
       <h4>{programJoryIam}</h4>
       <FormLocker programme={programKey} />
-      <ProgramControlsUsers programme={programKey} />
+      <ProgramControlsUsers programme={programKey} joryIam={programJoryIam} />
     </>
   )
 }

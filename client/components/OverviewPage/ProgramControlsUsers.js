@@ -71,16 +71,7 @@ const OwnerAccordionTable = ({ users, programme, t }) => {
   )
 }
 
-const isJory = groups => {
-  let jory = false
-  groups.forEach(iam => {
-    if (iam.includes('jory')) jory = true
-  })
-
-  return jory
-}
-
-const OwnerAccordionUsers = ({ programme }) => {
+const OwnerAccordionUsers = ({ programme, joryIam }) => {
   const { t } = useTranslation()
   const users = useSelector(state => state.programmesUsers)
 
@@ -89,12 +80,15 @@ const OwnerAccordionUsers = ({ programme }) => {
   // split jory members to their own table
   const otherUsers = []
   const joryMembers = users.data.reduce((members, user) => {
-    if (user.iamGroups?.length > 0 && isJory(user.iamGroups)) {
+    if (user.iamGroups?.length > 0 && user.iamGroups.includes(joryIam)) {
       return members.concat([user])
     }
     otherUsers.push(user)
     return members
   }, [])
+
+  joryMembers.sort((a, b) => a.lastname.localeCompare(b.lastname, 'fi'))
+  otherUsers.sort((a, b) => a.lastname.localeCompare(b.lastname, 'fi'))
 
   return (
     <>
