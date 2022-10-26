@@ -315,6 +315,11 @@ const universityWideGroups = [
 
 // Katselmus groups^ are temporary and will eventually be removed
 
+// When updating rights, update:
+// 1) Here, the actual right
+// 2) IamTable.js, list of rights found on OSPA page
+// 3) getUserRole() in common, deducts user role, seen on users tab
+
 const isUniversityWideWritingGroups = [
   'hy-ypa-opa-opintoasiainpaallikot',
   'hy-ypa-opa-kosu-kumpula',
