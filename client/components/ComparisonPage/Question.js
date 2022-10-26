@@ -7,9 +7,14 @@ import { romanize } from 'Utilities/common'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
+const initialColorState = () => {
+  const times = new Date().getFullYear() - 2019 + 1
+  return Array(times).fill('all')
+}
+
 const Question = ({ answers, question, handleClick, showing }) => {
   const { t } = useTranslation()
-  const [colors, setColors] = useState(['all', 'all', 'all', 'all'])
+  const [colors, setColors] = useState(initialColorState())
   const [buttons, setButtons] = useState([0, 0, 0])
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
 
