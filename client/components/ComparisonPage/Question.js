@@ -9,7 +9,7 @@ const generateRandomKey = value => `${value}-${Math.random()}`
 
 const Question = ({ answers, question, handleClick, showing }) => {
   const { t } = useTranslation()
-  const [colors, setColors] = useState(['all', 'all', 'all'])
+  const [colors, setColors] = useState(['all', 'all', 'all', 'all'])
   const [buttons, setButtons] = useState([0, 0, 0])
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
 
