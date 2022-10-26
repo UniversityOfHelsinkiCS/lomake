@@ -290,4 +290,41 @@ export function romanize(num) {
   return Array(+digits.join('') + 1).join('M') + roman
 }
 
+export const getUserRole = userIams => {
+  if (userIams.length === 0) return ''
+  let role = ''
+
+  if (userIams.includes('hy-ypa-opa-ospa')) return 'Ospa-ryhmä'
+  if (userIams.includes('grp-toska')) return 'Toska-ryhmä'
+  if (userIams.includes('hy-ypa-opa-opintoasiainpaallikot')) return 'Opintoasiainpäällikkö'
+  if (userIams.includes('hy-ypa-toimi-helsinki')) return 'Toiminnanohjausyksikkö'
+  if (userIams.includes('hy-ypa-opa-oymp-jory')) return 'Oppimisympäristöjen palvelut'
+
+  role = userIams.find(iam => /hy-ypa-opa-.+/.test(iam))
+  if (role) return `Koulutussuunnittelija - ${role.split('-')[4]}`
+
+  role = userIams.find(iam => /hy-[a-z-]+-kojot/.test(iam))
+  if (role) return `Koulutusohjelman johtaja - ${role.split('-')[1]} - ${role.split('-')[2]}`
+
+  role = userIams.find(iam => /hy-[a-z-]+-dekanaatti/.test(iam))
+  if (role) return `Dekanaatti - ${role.split('-')[1]}`
+
+  if (userIams.includes('hy-rehtoraatti')) return 'Rehtoraatti'
+
+  role = userIams.find(iam => /grp-katselmus-.+/.test(iam))
+  if (role) return `Katselmus - ${role.split('-')[2]}`
+
+  if (userIams.includes('hy-ypa-tutto-toht')) return 'Tohtoriohjelmien suunnittelija'
+  if (userIams.includes('hy-tohtorikoulutus-johtoryhma')) return 'Tohtorikoulutuksen johtoryhmä'
+  if (userIams.includes('hy-tine')) return 'HY:n tieteellinen neuvosto'
+
+  role = userIams.find(iam => /hy-tutkijakoulut-[a-z]+-jory/.test(iam))
+  if (role) return `Tutkijakoulun johtoryhmä - ${role.split('-')[2]}`
+
+  role = userIams.find(iam => /hy-[a-z-]+-jory/.test(iam))
+  if (role) return `Johtoryhmän jäsen`
+
+  return role
+}
+
 export * from '@root/config/common'
