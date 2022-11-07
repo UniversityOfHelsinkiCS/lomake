@@ -31,6 +31,12 @@ const getUserType = (user, t) => {
   return ''
 }
 
+const mayHijack = (current, toMock) => {
+  if (isSuperAdmin(current)) return true
+  if (!isSuperAdmin(toMock)) return true
+  return false
+}
+
 export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -95,7 +101,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
         {isAdmin(currentUser) && (
           <Table.Cell>
-            <Icon onClick={logInAs} size="large" name="sign-in" />
+            {mayHijack(currentUser, user) && <Icon onClick={logInAs} size="large" name="sign-in" />}
           </Table.Cell>
         )}
       </Table.Row>
