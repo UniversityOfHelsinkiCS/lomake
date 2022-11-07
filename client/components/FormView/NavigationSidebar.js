@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
@@ -54,7 +55,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
-                    const { id, type, required, noColor } = part
+                    const { id, type, required, no_color } = part
                     if (type === 'ENTITY' || type === 'MEASURES') partNumber++
 
                     const idsToCheck = []
@@ -65,7 +66,7 @@ const NavigationSidebar = ({ programmeKey }) => {
                       idsToCheck.push(`${id}_1_text`)
                     }
 
-                    if (type === 'ENTITY' && !noColor) {
+                    if (type === 'ENTITY' && !no_color) {
                       idsToCheck.push(`${id}_light`)
                     }
 
