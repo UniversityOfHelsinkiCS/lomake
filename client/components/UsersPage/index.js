@@ -9,6 +9,7 @@ import IamTable from './IamTable'
 import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
+import TempAccess from './TempAccess'
 
 export default () => {
   const { t } = useTranslation()
@@ -46,6 +47,14 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <DeadlineInfo />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: t('users:tempAccess'),
+      render: () => (
+        <Tab.Pane>
+          <TempAccess />
         </Tab.Pane>
       ),
     },

@@ -213,5 +213,10 @@ export default {
     lastLogin: 'Senast inloggad',
     specialGroup: 'Åtkomstgrupper',
     role: 'Huvudroll',
+
+    // tempAccess: '',
+    // tempAccessMangement
+    // tempAccessInfo:
+    // tempAccessNote:,
   },
 }

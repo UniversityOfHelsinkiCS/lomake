@@ -216,5 +216,12 @@ export default {
     lastLogin: 'Kirjautunut viimeksi',
     specialGroup: 'Käyttöoikeusryhmät',
     role: 'Ensisijainen rooli',
+
+    tempAccess: 'Oikeuksien hallinta',
+    tempAccessMangement: 'Väliaikaisten oikeuksien hallinta',
+    tempAccessInfo:
+      'Käyttäjälle voidaan tarvittaessa myöntää väliaikainen luku- tai kirjoitusoikeus tiettyyn koulutusohjelmaan. Kullekin oikeudelle täytyy määritellä päättymispäivä, jonka jälkeen poikkeusoikeus ei ole enää voimassa. Oikeuden myöntämisestä lähetetään sähköposti-ilmoitus sen ohjelman johtoryhmän johtajalle, johon uusi oikeus myönnetään. Oikeuden tallennus ei onnistu ilman sähköpostiosoitetta.',
+    tempAccessNote:
+      'Tämä toiminto on tarkoitettu vain poikkeustilanteisiin. Oikeuksien jaossa tulisi ensisijaisesti käyttää IAM-ryhmiä.',
   },
 }

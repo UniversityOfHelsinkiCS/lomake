@@ -220,5 +220,15 @@ export default {
     lastLogin: 'Last login',
     specialGroup: 'Access groups',
     role: 'Main role',
+
+    tempAccess: 'Manage accesses',
+    tempAccessMangement: 'Manage temporary accesses',
+    tempAccessInfo: `
+      If necessary, an user can be given temporary reading and writing rights to certain programmes.
+      Each temporary right requires an end date after which it is no longer valid.
+      Upon giving temporary rights the chair of that programme's steering group will be sent a notification email. Saving a new right is not be possible without providing a suitable email address.
+      `,
+    tempAccessNote:
+      'This feature is meant only for exceptional situations. The standard way to manage rights is via IAM groups.',
   },
 }
