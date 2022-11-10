@@ -50,19 +50,19 @@ export default () => {
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: t('users:tempAccess'),
-      render: () => (
-        <Tab.Pane>
-          <TempAccess />
-        </Tab.Pane>
-      ),
-    },
   ]
 
   if (isSuperAdmin(user)) {
     panes = [
       ...panes,
+      {
+        menuItem: t('users:tempAccess'),
+        render: () => (
+          <Tab.Pane>
+            <TempAccess />
+          </Tab.Pane>
+        ),
+      },
       {
         menuItem: t('users:updateStudyprogrammes'),
         render: () => (
