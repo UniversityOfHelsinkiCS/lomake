@@ -40,6 +40,7 @@ router.get('/users', checkAdmin, users.getAllUsers)
 router.post('/users', checkAdmin, users.createUser)
 router.put('/users/:id', checkAdmin, users.editUser)
 router.delete('/users/delete/:id', checkAdmin, users.deleteUser)
+router.post('/users/tempAccess', checkAdmin, users.saveTempAccess)
 
 router.get('/deadlines', deadlines.get)
 router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)

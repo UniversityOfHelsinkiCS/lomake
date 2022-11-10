@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Checkbox, Container, Dropdown, Header, Input, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { saveTempAccessAction } from 'Utilities/redux/usersReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 
 const TempAccess = () => {
   const { t } = useTranslation()
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.data)
-  // const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const [uid, setUid] = useState('')
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const [email, setEmail] = useState('')
   const [programme, setProgramme] = useState('')
   const [endDate, setEndDate] = useState(null)
   const [writing, setWriting] = useState(false)
-  const [email, setEmail] = useState('')
+  const [kojoEmail, setKojoEmail] = useState('')
 
   const options = programmes.map(p => ({
     key: p.key,
@@ -26,23 +27,23 @@ const TempAccess = () => {
 
   const handleCancel = () => {
     setEndDate(null)
-    setUid('')
+    setEmail('')
     setProgramme('')
     setWriting(false)
-    setEmail('')
+    setKojoEmail('')
   }
 
   const handleSave = () => {
-    // const { key } = options.find(o => o.value === programme)
-    // const newRight = {
-    //   uid,
-    //   programme: key,
-    //   endDate,
-    //   writingRights: writing,
-    //   kojoEmail: email,
-    //   givenBy: currentUser.uid,
-    // }
-    // dispatch(saveTempAccess(newRight))
+    const { key } = options.find(o => o.value === programme)
+    const newRight = {
+      email,
+      programme: key,
+      endDate,
+      writingRights: writing,
+      kojoEmail,
+      givenBy: currentUser.uid,
+    }
+    dispatch(saveTempAccessAction(newRight))
     handleCancel()
   }
 
@@ -66,17 +67,17 @@ const TempAccess = () => {
         </Container>
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <Header as="h5"> Käyttäjätunnus, jolle oikeudet annetaan</Header>
+        <Header as="h5"> Oikeuden saajan helsinki.fi-sähköpostiosoite</Header>
         <Input
-          name="uid"
-          className="uid-input"
-          placeholder={t('users:userId')}
-          onChange={(e, { value }) => setUid(value)}
-          value={uid}
+          name="email"
+          className="email-input"
+          placeholder="Sähköpostiosoite"
+          onChange={(e, { value }) => setEmail(value)}
+          value={email}
         />
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <Header as="h5">{t('comparison:chosenProgrammes')}</Header>
+        <Header as="h5">Koulutusohjelma, johon oikeudet annetaan</Header>
         <Dropdown
           // fluid
           selection
@@ -89,7 +90,7 @@ const TempAccess = () => {
         />
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <Header as="h5">Valitse käyttöoikeuden viimeinen voimassaolopäivä</Header>
+        <Header as="h5">Käyttöoikeuden viimeinen voimassaolopäivä</Header>
         <DatePicker
           dateFormat="dd.MM.yyyy"
           placeholderText="Valitse viimeinen voimassaolopäivä"
@@ -103,13 +104,13 @@ const TempAccess = () => {
         <Checkbox label="Anna kirjoitusoikeudet" onChange={(e, data) => setWriting(data.checked)} checked={writing} />
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <Header as="h5"> Koulutusryhmän johtajan sähköpostiosoite</Header>
+        <Header as="h5"> Koulutusohjelman johtajan sähköpostiosoite</Header>
         <Input
-          name="email"
-          className="email-input"
+          name="kojoEmail"
+          className="kojoEmail-input"
           placeholder="Sähköpostiosoite"
-          onChange={(e, { value }) => setEmail(value)}
-          value={email}
+          onChange={(e, { value }) => setKojoEmail(value)}
+          value={kojoEmail}
         />
       </div>
       <div>
@@ -118,7 +119,7 @@ const TempAccess = () => {
           primary
           compact
           size="mini"
-          disabled={!endDate || !uid || !email || !programme}
+          disabled={!endDate || !email || !kojoEmail || !programme}
           onClick={handleSave}
         >
           Tallenna oikeus

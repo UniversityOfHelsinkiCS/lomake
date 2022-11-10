@@ -27,6 +27,12 @@ export const createUserAction = data => {
   return callBuilder(route, prefix, 'post', data)
 }
 
+export const saveTempAccessAction = data => {
+  const route = `/users/tempAccess`
+  const prefix = 'SAVE_TEMP_ACCESS'
+  return callBuilder(route, prefix, 'post', data)
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: [] }, action) => {
@@ -114,6 +120,26 @@ export default (state = { data: [] }, action) => {
         data: state.data.map(u => (u.id === action.response.user.id ? action.response.user : u)),
         pending: false,
         error: false,
+      }
+    case 'SAVE_TEMP_ACCESS_SUCCESS':
+      return {
+        ...state,
+        data: state.data.map(u => (u.email === action.response.email ? { ...u, tempAccess: action.response } : u)),
+        pending: false,
+        error: false,
+      }
+    case 'SAVE_TEMP_ACCESS_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'SAVE_TEMP_ACCESS_FAILURE':
+      return {
+        ...state,
+        data: [],
+        pending: false,
+        error: true,
       }
     default:
       return state

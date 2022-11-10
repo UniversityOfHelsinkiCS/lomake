@@ -218,6 +218,18 @@ const deleteUser = async (req, res) => {
   }
 }
 
+const saveTempAccess = async (req, res) => {
+  try {
+    const newAccess = req.body
+
+    if (newAccess) return res.status(200).json(newAccess)
+    return res.status({})
+  } catch (e) {
+    logger.error(e.message)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
@@ -227,4 +239,5 @@ module.exports = {
   getProgrammesUsers,
   editUserAccess,
   deleteUser,
+  saveTempAccess,
 }
