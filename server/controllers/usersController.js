@@ -222,7 +222,43 @@ const saveTempAccess = async (req, res) => {
   try {
     const newAccess = req.body
 
-    if (newAccess) return res.status(200).json(newAccess)
+    const user = await db.user.findOne({ where: { email: newAccess.email } })
+    if (!user) return res.status(400).json({ error: 'user not found' })
+
+    const temps = user.tempAccess
+    let toUpdate = []
+
+    const oldAccess = temps.find(access => access.programme === newAccess.programme)
+    if (oldAccess) {
+      toUpdate = temps.map(t => {
+        if (t.programme === newAccess.programme) {
+          return {
+            ...t,
+            endDate: newAccess.endDate,
+            writingRights: newAccess.writingRights,
+            lastEditor: newAccess.givenBy,
+            editedAt: new Date(),
+          }
+        }
+        return t
+      })
+    } else {
+      toUpdate = [
+        ...temps,
+        {
+          programme: newAccess.programme,
+          createdAt: new Date(),
+          endDate: newAccess.endDate,
+          writingRights: newAccess.writingRights,
+          lastEditor: newAccess.givenBy,
+          editedAt: new Date(),
+        },
+      ]
+    }
+
+    const updatedUser = await user.update({ tempAccess: toUpdate })
+
+    if (updatedUser) return res.status(200).json(updatedUser)
     return res.status({})
   } catch (e) {
     logger.error(e.message)

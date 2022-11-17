@@ -124,7 +124,9 @@ export default (state = { data: [] }, action) => {
     case 'SAVE_TEMP_ACCESS_SUCCESS':
       return {
         ...state,
-        data: state.data.map(u => (u.email === action.response.email ? { ...u, tempAccess: action.response } : u)),
+        data: state.data.map(u =>
+          u.id === action.response.user.id ? { ...u, tempAccess: action.response.user.tempAccess } : u
+        ),
         pending: false,
         error: false,
       }

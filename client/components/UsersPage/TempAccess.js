@@ -35,10 +35,11 @@ const TempAccess = () => {
 
   const handleSave = () => {
     const { key } = options.find(o => o.value === programme)
+    const acualDate = new Date(Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()))
     const newRight = {
       email,
       programme: key,
-      endDate,
+      endDate: acualDate.toISOString(),
       writingRights: writing,
       kojoEmail,
       givenBy: currentUser.uid,
