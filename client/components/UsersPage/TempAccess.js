@@ -2,14 +2,18 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Checkbox, Container, Dropdown, Header, Input, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { saveTempAccessAction } from 'Utilities/redux/usersReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
+import { isAdmin } from '@root/config/common'
+import TempAccessTable from './TempAccessTable'
 
 const TempAccess = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const history = useHistory()
   const lang = useSelector(state => state.language)
   const programmes = useSelector(state => state.studyProgrammes.data)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -18,6 +22,10 @@ const TempAccess = () => {
   const [endDate, setEndDate] = useState(null)
   const [writing, setWriting] = useState(false)
   const [kojoEmail, setKojoEmail] = useState('')
+
+  if (!isAdmin(currentUser)) {
+    history.push('/')
+  }
 
   const options = programmes.map(p => ({
     key: p.key,
@@ -51,10 +59,6 @@ const TempAccess = () => {
   registerLocale('fi', fi)
   registerLocale('en', enGB)
   registerLocale('se', sv)
-
-  // inlinet
-  // käännökset
-  // and draftyear
 
   return (
     <Segment>
@@ -129,6 +133,7 @@ const TempAccess = () => {
           Peruuta
         </Button>
       </div>
+      <TempAccessTable programmes={programmes} lang={lang} />
     </Segment>
   )
 }
