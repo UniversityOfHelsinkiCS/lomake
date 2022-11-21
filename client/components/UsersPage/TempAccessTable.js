@@ -64,29 +64,29 @@ const TempAccessTable = ({ programmes, lang }) => {
   if (reverse) sortedUsersToShow.reverse()
 
   return (
-    <div className="temp-access-table-container" style={{ marginTop: '5em' }}>
+    <div className="temp-access-table-container">
       <Divider />
-      <Header as="h3"> Annetut väliaikaiset oikeudet</Header>
-      <Checkbox toggle label="Näytä vanhentuneet" onChange={(e, data) => setShowAll(data.checked)} checked={showAll} />
+      <Header as="h3">{t('users:tempAccesses')} </Header>
+      <Checkbox toggle label={t('users:expired')} onChange={(e, data) => setShowAll(data.checked)} checked={showAll} />
       <Table celled stackable compact>
         <Table.Header className="sticky-header">
           <Table.Row>
             {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
             {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
-            {getCustomHeader({ name: 'Ohjelma', width: 6, field: 'progName' })}
-            {getCustomHeader({ name: 'Kirjoitusoikeus', width: 1, field: 'writingRights', sortable: false })}
-            {getCustomHeader({ name: 'Päättyy', width: 2, field: 'endDate', sortable: true })}
-            <Table.HeaderCell width={1}>Muokkaa</Table.HeaderCell>
-            <Table.HeaderCell width={1}>Poista</Table.HeaderCell>
+            {getCustomHeader({ name: t('programmeHeader'), width: 6, field: 'progName' })}
+            {getCustomHeader({ name: t('users:writingRight'), width: 1, field: 'writingRights', sortable: false })}
+            {getCustomHeader({ name: t('users:endsIn'), width: 2, field: 'endDate', sortable: true })}
+            <Table.HeaderCell width={1}>{t('edit')}</Table.HeaderCell>
+            <Table.HeaderCell width={1}>{t('delete')}</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {sortedUsersToShow.map(row => (
             <Table.Row key={`${row.uid}-${row.programme}-row`}>
-              <Table.Cell width={2}>
+              <Table.Cell>
                 {row.firstname} {row.lastname}
               </Table.Cell>
-              <Table.Cell width={1}>{row.uid}</Table.Cell>
+              <Table.Cell>{row.uid}</Table.Cell>
               <Table.Cell data-cy={`${row.uid}-${row.programme}-programme`} style={{ display: 'flex' }}>
                 {row.progName}
               </Table.Cell>

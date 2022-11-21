@@ -39,6 +39,11 @@ export default {
     colors_yellow: 'endast gula',
     colors_red: 'endast röda',
     answers: 'svar',
+
+    // email: ,
+    // cancel: '',
+    // edit: 'Muokkaa',
+    // delete: 'Poista',
   },
 
   aboutPage: {
@@ -215,8 +220,18 @@ export default {
     role: 'Huvudroll',
 
     // tempAccess: '',
-    // tempAccessMangement
-    // tempAccessInfo:
+    // tempAccessMangement,
+    // tempAccessInfo:,
     // tempAccessNote:,
+    // receiverEmail: 'Oikeuden saajan helsinki.fi-sähköpostiosoite',
+    // accessProgramme: 'Koulutusohjelma, johon oikeudet annetaan',
+    // endOfAccess: 'Käyttöoikeuden viimeinen voimassaolopäivä',
+    // kojoEmail: 'Koulutusohjelman johtajan sähköpostiosoite',
+    // giveWritingRights: 'Anna kirjoitusoikeudet',
+    // saveRight: 'Tallenna oikeus',
+    // tempAccesses: 'Annetut väliaikaiset oikeudet',
+    // expired: 'Näytä vanhentuneet',
+    // writingRight: 'Kirjoitusoikeus',
+    // endsIn: 'Päättyy',
   },
 }

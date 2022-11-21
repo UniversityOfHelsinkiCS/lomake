@@ -44,6 +44,11 @@ export default {
     colors_yellow: 'only yellow',
     colors_red: 'only red',
     answers: 'answers',
+
+    email: 'Email',
+    cancel: 'Cancel',
+    edit: 'Edit',
+    delete: 'Delete',
   },
 
   aboutPage: {
@@ -223,12 +228,24 @@ export default {
 
     tempAccess: 'Manage accesses',
     tempAccessMangement: 'Manage temporary accesses',
-    tempAccessInfo: `
+    tempAccessInfo1: `
       If necessary, an user can be given temporary reading and writing rights to certain programmes.
+    `,
+    tempAccessInfo2: `
       Each temporary right requires an end date after which it is no longer valid.
-      Upon giving temporary rights the chair of that programme's steering group will be sent a notification email. Saving a new right is not be possible without providing a suitable email address.
-      `,
+      Upon giving temporary rights the director of the chocen programme will be sent a notification email. Saving a new right is not be possible without providing the director's email address.
+    `,
     tempAccessNote:
-      'This feature is meant only for exceptional situations. The standard way to manage rights is via IAM groups.',
+      'This feature is meant only for exceptional situations. Rights should be primarily managed via IAM groups.',
+    receiverEmail: 'Helsinki.fi-email of the access recipient',
+    accessProgramme: 'Programme to give access to',
+    endOfAccess: 'Last day of access',
+    kojoEmail: 'Programme director email',
+    giveWritingRights: 'Give writing rights',
+    saveRight: 'Save access right',
+    tempAccesses: 'Temporary accesses',
+    expired: 'Show expired',
+    writingRight: 'Writing right',
+    endsIn: 'Until',
   },
 }

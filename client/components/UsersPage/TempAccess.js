@@ -9,6 +9,7 @@ import { saveTempAccessAction } from 'Utilities/redux/usersReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { isAdmin } from '@root/config/common'
 import TempAccessTable from './TempAccessTable'
+import './UsersPage.scss'
 
 const TempAccess = () => {
   const { t } = useTranslation()
@@ -62,61 +63,64 @@ const TempAccess = () => {
 
   return (
     <Segment>
-      <div style={{ margin: '1em 0em 3em 0em' }}>
+      <div>
         <Header as="h3"> {t('users:tempAccessMangement')} </Header>
-        <Container fluid style={{ paddingBottom: '10px' }}>
-          <b>{t('users:tempAccessNote')}</b>
+        <Container fluid className="temp-access-info">
+          {t('users:tempAccessInfo1')} <br />
+          {t('users:tempAccessInfo2')}
         </Container>
-        <Container fluid style={{ paddingBottom: '10px' }}>
-          {t('users:tempAccessInfo')}
+        <Container fluid className="temp-access-info">
+          <i>{t('users:tempAccessNote')}</i>
         </Container>
+        <br />
       </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Header as="h5"> Oikeuden saajan helsinki.fi-sähköpostiosoite</Header>
-        <Input
-          name="email"
-          className="email-input"
-          placeholder="Sähköpostiosoite"
-          onChange={(e, { value }) => setEmail(value)}
-          value={email}
-        />
+      <div className="temp-access-details">
+        <div>
+          <Header as="h5"> {t('users:receiverEmail')}</Header>
+          <Input
+            name="email"
+            className="email-input"
+            placeholder={t('email')}
+            onChange={(e, { value }) => setEmail(value)}
+            value={email}
+          />
+        </div>
+        <div>
+          <Header as="h5">{t('users:accessProgramme')}</Header>
+          <Dropdown
+            selection
+            search
+            placeholder={t('programmeHeader')}
+            value={programme}
+            onChange={(e, { value }) => setProgramme(value)}
+            options={options}
+            data-cy="programme-filter"
+          />
+        </div>
+        <div>
+          <Header as="h5">{t('users:endOfAccess')}</Header>
+          <DatePicker
+            dateFormat="dd.MM.yyyy"
+            placeholderText={t('choose')}
+            minDate={new Date()}
+            selected={endDate}
+            onChange={setEndDate}
+            locale={lang}
+          />
+        </div>
       </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Header as="h5">Koulutusohjelma, johon oikeudet annetaan</Header>
-        <Dropdown
-          // fluid
-          selection
-          search
-          placeholder={t('comparison:chooseProgramme')}
-          value={programme}
-          onChange={(e, { value }) => setProgramme(value)}
-          options={options}
-          data-cy="programme-filter"
-        />
-      </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Header as="h5">Käyttöoikeuden viimeinen voimassaolopäivä</Header>
-        <DatePicker
-          dateFormat="dd.MM.yyyy"
-          placeholderText="Valitse viimeinen voimassaolopäivä"
-          minDate={new Date()}
-          selected={endDate}
-          onChange={setEndDate}
-          locale={lang}
-        />
-      </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Checkbox label="Anna kirjoitusoikeudet" onChange={(e, data) => setWriting(data.checked)} checked={writing} />
-      </div>
-      <div style={{ marginBottom: '15px' }}>
-        <Header as="h5"> Koulutusohjelman johtajan sähköpostiosoite</Header>
+      <div className="temp-access-input">
+        <Header as="h5">{t('users:kojoEmail')}</Header>
         <Input
           name="kojoEmail"
           className="kojoEmail-input"
-          placeholder="Sähköpostiosoite"
+          placeholder={t('email')}
           onChange={(e, { value }) => setKojoEmail(value)}
           value={kojoEmail}
         />
+      </div>
+      <div className="temp-access-input">
+        <Checkbox label={t('users:writingRights')} onChange={(e, data) => setWriting(data.checked)} checked={writing} />
       </div>
       <div>
         <Button
@@ -127,10 +131,10 @@ const TempAccess = () => {
           disabled={!endDate || !email || !kojoEmail || !programme}
           onClick={handleSave}
         >
-          Tallenna oikeus
+          {t('users:saveRight')}
         </Button>
         <Button data-cy="cancelTempAcces" negative compact size="mini" onClick={handleCancel}>
-          Peruuta
+          {t('cancel')}
         </Button>
       </div>
       <TempAccessTable programmes={programmes} lang={lang} />

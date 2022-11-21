@@ -70,3 +70,22 @@
 .deadline-warning {
   color: $red
 }
+
+.temp-access-details {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5em;
+  margin-bottom: 1em;
+}
+
+.temp-access-info {
+  padding-bottom: 10px
+}
+
+.temp-access-input {
+  margin-bottom: 1em
+}
+
+.temp-access-table-container {
+  margin-top: 3em
+}

@@ -40,6 +40,11 @@ export default {
     colors_yellow: 'vain keltaiset',
     colors_red: 'vain punaiset',
     answers: 'vastaukset',
+
+    email: 'Sähköpostiosoite',
+    cancel: 'Peruuta',
+    edit: 'Muokkaa',
+    delete: 'Poista',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -219,9 +224,21 @@ export default {
 
     tempAccess: 'Oikeuksien hallinta',
     tempAccessMangement: 'Väliaikaisten oikeuksien hallinta',
-    tempAccessInfo:
-      'Käyttäjälle voidaan tarvittaessa myöntää väliaikainen luku- tai kirjoitusoikeus tiettyyn koulutusohjelmaan. Kullekin oikeudelle täytyy määritellä päättymispäivä, jonka jälkeen poikkeusoikeus ei ole enää voimassa. Oikeuden myöntämisestä lähetetään sähköposti-ilmoitus sen ohjelman johtoryhmän johtajalle, johon uusi oikeus myönnetään. Oikeuden tallennus ei onnistu ilman sähköpostiosoitetta.',
+    tempAccessInfo1:
+      'Käyttäjälle voidaan tarvittaessa myöntää väliaikainen luku- tai kirjoitusoikeus tiettyyn koulutusohjelmaan.',
+    tempAccessInfo2:
+      'Kullekin oikeudelle täytyy määritellä päättymispäivä, jonka jälkeen poikkeusoikeus ei ole enää voimassa. Oikeuden myöntämisestä lähetetään sähköposti-ilmoitus kyseisen koulutusohjelman johtajalle. Oikeuden tallennus ei onnistu ilman sähköpostiosoitetta.',
     tempAccessNote:
       'Tämä toiminto on tarkoitettu vain poikkeustilanteisiin. Oikeuksien jaossa tulisi ensisijaisesti käyttää IAM-ryhmiä.',
+    receiverEmail: 'Oikeuden saajan helsinki.fi-sähköpostiosoite',
+    accessProgramme: 'Koulutusohjelma, johon oikeudet annetaan',
+    endOfAccess: 'Käyttöoikeuden viimeinen voimassaolopäivä',
+    kojoEmail: 'Koulutusohjelman johtajan sähköpostiosoite',
+    giveWritingRights: 'Anna kirjoitusoikeudet',
+    saveRight: 'Tallenna oikeus',
+    tempAccesses: 'Annetut väliaikaiset oikeudet',
+    expired: 'Näytä vanhentuneet',
+    writingRight: 'Kirjoitusoikeus',
+    endsIn: 'Päättyy',
   },
 }
