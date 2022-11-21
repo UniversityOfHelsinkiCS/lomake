@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Checkbox, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -6,7 +6,7 @@ import moment from 'moment'
 import { sortedItems } from 'Utilities/common'
 import './UsersPage.scss'
 
-const TempAccessTable = ({ programmes, lang }) => {
+const TempAccessTable = ({ programmes, lang, handleEdit }) => {
   const { t } = useTranslation()
   const [showAll, setShowAll] = useState(false)
   const [sorter, setSorter] = useState('')
@@ -41,23 +41,26 @@ const TempAccessTable = ({ programmes, lang }) => {
     return true
   }
 
-  const data = users.reduce((acc, curr) => {
-    const rows = curr.tempAccess.flatMap(({ programme, writingRights, endDate }) => {
-      if (showAll || (!showAll && !oldAccess(endDate))) {
-        return {
-          firstname: curr.firstname,
-          lastname: curr.lastname,
-          uid: curr.uid,
-          programme,
-          writingRights,
-          endDate,
-          progName: programmes.find(p => p.key === programme)?.name[lang],
+  const data = useMemo(() => {
+    return users.reduce((acc, curr) => {
+      const rows = curr.tempAccess.flatMap(({ programme, writingRights, endDate }) => {
+        if (showAll || (!showAll && !oldAccess(endDate))) {
+          return {
+            firstname: curr.firstname,
+            lastname: curr.lastname,
+            uid: curr.uid,
+            programme,
+            writingRights,
+            endDate,
+            progName: programmes.find(p => p.key === programme)?.name[lang],
+            email: curr.email,
+          }
         }
-      }
-      return []
-    })
-    return [...acc, ...rows]
-  }, [])
+        return []
+      })
+      return [...acc, ...rows]
+    }, [])
+  }, [users])
 
   const sortedUsersToShow = sortedItems(data, sorter)
 
@@ -95,7 +98,7 @@ const TempAccessTable = ({ programmes, lang }) => {
               </Table.Cell>
               <Table.Cell>{moment(row.endDate).format('DD.MM.YYYY')}</Table.Cell>
               <Table.Cell data-cy="edit-access" textAlign="center">
-                <Icon name="edit" />
+                <Icon name="edit" onClick={() => handleEdit(row)} />
               </Table.Cell>
               <Table.Cell data-cy="delete-access" textAlign="center">
                 <Icon name="delete" color="red" />

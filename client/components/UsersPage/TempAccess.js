@@ -57,6 +57,13 @@ const TempAccess = () => {
     handleCancel()
   }
 
+  const handleEdit = row => {
+    setEmail(row.email)
+    setProgramme(row.progName)
+    setWriting(row.writingRights)
+    window.scrollTo(0, 0)
+  }
+
   registerLocale('fi', fi)
   registerLocale('en', enGB)
   registerLocale('se', sv)
@@ -137,7 +144,7 @@ const TempAccess = () => {
           {t('cancel')}
         </Button>
       </div>
-      <TempAccessTable programmes={programmes} lang={lang} />
+      <TempAccessTable programmes={programmes} lang={lang} handleEdit={handleEdit} />
     </Segment>
   )
 }
