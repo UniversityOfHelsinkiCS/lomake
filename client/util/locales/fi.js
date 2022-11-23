@@ -240,5 +240,6 @@ export default {
     expired: 'Näytä vanhentuneet',
     writingRight: 'Kirjoitusoikeus',
     endsIn: 'Päättyy',
+    confirm: 'Poista käyttäjän {{firstname}} {{lastname}} väliaikainen oikeus ohjelmaan {{progName}}?',
   },
 }

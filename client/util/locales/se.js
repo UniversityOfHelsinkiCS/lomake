@@ -233,5 +233,6 @@ export default {
     // expired: 'Näytä vanhentuneet',
     // writingRight: 'Kirjoitusoikeus',
     // endsIn: 'Päättyy',
+    // confirm: '',
   },
 }

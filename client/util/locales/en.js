@@ -247,5 +247,6 @@ export default {
     expired: 'Show expired',
     writingRight: 'Writing right',
     endsIn: 'Until',
+    confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
   },
 }

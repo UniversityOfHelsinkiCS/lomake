@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { saveTempAccessAction } from 'Utilities/redux/usersReducer'
+import { saveTempAccessAction, deleteTempAccessAction } from 'Utilities/redux/usersReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { isAdmin } from '@root/config/common'
 import TempAccessTable from './TempAccessTable'
@@ -62,6 +62,10 @@ const TempAccess = () => {
     setProgramme(row.progName)
     setWriting(row.writingRights)
     window.scrollTo(0, 0)
+  }
+
+  const handleDelete = row => {
+    dispatch(deleteTempAccessAction(row.uid, row.programme))
   }
 
   registerLocale('fi', fi)
@@ -148,7 +152,7 @@ const TempAccess = () => {
           {t('cancel')}
         </Button>
       </div>
-      <TempAccessTable programmes={programmes} lang={lang} handleEdit={handleEdit} />
+      <TempAccessTable programmes={programmes} lang={lang} handleEdit={handleEdit} handleDelete={handleDelete} />
     </Segment>
   )
 }

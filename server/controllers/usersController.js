@@ -275,6 +275,31 @@ const saveTempAccess = async (req, res) => {
   }
 }
 
+const deleteTempAccess = async (req, res) => {
+  try {
+    const user = await db.user.findOne({
+      where: {
+        uid: req.params.uid,
+      },
+    })
+
+    const temps = user.tempAccess
+    const toUpdate = temps.filter(t => t.programme !== req.params.programme)
+
+    const updatedUser = await user.update({ tempAccess: toUpdate })
+    if (updatedUser) {
+      logger.info(
+        `Temporary access of user ${user.uid} to programme ${req.params.programme} was deleted by ${req.user.firstname} ${req.user.lastname}`
+      )
+      return res.status(200).json(updatedUser)
+    }
+    return res.status({})
+  } catch (e) {
+    logger.error(e.message)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getCurrentUser,
   getLogoutUrl,
@@ -285,4 +310,5 @@ module.exports = {
   editUserAccess,
   deleteUser,
   saveTempAccess,
+  deleteTempAccess,
 }

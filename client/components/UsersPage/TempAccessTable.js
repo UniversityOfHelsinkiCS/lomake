@@ -1,16 +1,18 @@
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Checkbox, Divider, Header, Icon, Table } from 'semantic-ui-react'
+import { Checkbox, Confirm, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import { sortedItems } from 'Utilities/common'
 import './UsersPage.scss'
 
-const TempAccessTable = ({ programmes, lang, handleEdit }) => {
+const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
   const { t } = useTranslation()
   const [showAll, setShowAll] = useState(false)
   const [sorter, setSorter] = useState('')
   const [reverse, setReverse] = useState(false)
+  const [confirm, setConfirm] = useState(false)
+  const [toDelete, setToDelete] = useState(null)
   const users = useSelector(state => state.users.data.filter(u => u.tempAccess.length > 0))
 
   const getCustomHeader = ({ name, width, field, sortable = true }) => {
@@ -39,6 +41,17 @@ const TempAccessTable = ({ programmes, lang, handleEdit }) => {
       return false
     }
     return true
+  }
+
+  const handleConfirmOpen = row => {
+    setToDelete(row)
+    setConfirm(true)
+  }
+
+  const handleConfirm = () => {
+    handleDelete(toDelete)
+    setConfirm(false)
+    setToDelete(null)
   }
 
   const data = useMemo(() => {
@@ -101,12 +114,22 @@ const TempAccessTable = ({ programmes, lang, handleEdit }) => {
                 <Icon name="edit" onClick={() => handleEdit(row)} />
               </Table.Cell>
               <Table.Cell data-cy="delete-access" textAlign="center">
-                <Icon name="delete" color="red" />
+                <Icon name="delete" color="red" onClick={() => handleConfirmOpen(row)} />
               </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
       </Table>
+      <Confirm
+        open={confirm}
+        content={t('users:confirm', {
+          firstname: toDelete?.firstname,
+          lastname: toDelete?.lastname,
+          progName: toDelete?.progName,
+        })}
+        onCancel={() => setConfirm(false)}
+        onConfirm={handleConfirm}
+      />
     </div>
   )
 }
