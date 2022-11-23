@@ -8,3 +8,4 @@ mock.json
 .DS_Store
 cypress/screenshots/
 cypress/videos/*
+.env
