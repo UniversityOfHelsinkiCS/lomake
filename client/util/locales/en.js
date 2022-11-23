@@ -232,8 +232,8 @@ export default {
       If necessary, an user can be given temporary reading and writing rights to certain programmes.
     `,
     tempAccessInfo2: `
-      Each temporary right requires an end date after which it is no longer valid.
-      Upon giving temporary rights the director of the chocen programme will be sent a notification email. Saving a new right is not be possible without providing the director's email address.
+      The recipient of the temporary right must have LOGGED IN PREVIOUSLY to the form.
+      Upon saving, the director of the chosen programme will be sent a notification email.
     `,
     tempAccessNote:
       'This feature is meant only for exceptional situations. Rights should be primarily managed via IAM groups.',

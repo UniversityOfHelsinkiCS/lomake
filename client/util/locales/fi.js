@@ -227,7 +227,7 @@ export default {
     tempAccessInfo1:
       'Käyttäjälle voidaan tarvittaessa myöntää väliaikainen luku- tai kirjoitusoikeus tiettyyn koulutusohjelmaan.',
     tempAccessInfo2:
-      'Kullekin oikeudelle täytyy määritellä päättymispäivä, jonka jälkeen poikkeusoikeus ei ole enää voimassa. Oikeuden myöntämisestä lähetetään sähköposti-ilmoitus kyseisen koulutusohjelman johtajalle. Oikeuden tallennus ei onnistu ilman sähköpostiosoitetta.',
+      'Oikeuden saajan tulee olla jo AIEMMIN KIRJAUTUNUT lomakkeelle. Oikeuden myöntämisestä lähetetään sähköposti-ilmoitus kyseisen koulutusohjelman johtajalle.',
     tempAccessNote:
       'Tämä toiminto on tarkoitettu vain poikkeustilanteisiin. Oikeuksien jaossa tulisi ensisijaisesti käyttää IAM-ryhmiä.',
     receiverEmail: 'Oikeuden saajan helsinki.fi-sähköpostiosoite',
