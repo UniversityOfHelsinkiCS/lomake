@@ -9,12 +9,6 @@ export const getProgrammesUsersAction = programme => {
   return callBuilder(route, prefix)
 }
 
-export const editUserAccessAction = (id, programme, access) => {
-  const route = `/programmes/${programme}/users/${id}/access`
-  const prefix = 'EDIT_PROGRAMMES_USER'
-  return callBuilder(route, prefix, 'put', access)
-}
-
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -33,30 +27,6 @@ export default (state = { data: null }, action) => {
         error: false,
       }
     case 'GET_PROGRAMMES_USERS_FAILURE':
-      return {
-        ...state,
-        data: null,
-        pending: false,
-        error: true,
-      }
-    case 'EDIT_PROGRAMMES_USER_SUCCESS':
-      return {
-        ...state,
-        data: state.data
-          .filter(
-            u => u.id !== action.response.user.id || (u.id === action.response.user.id && action.response.stillAccess)
-          )
-          .map(u => (u.id === action.response.user.id ? action.response.user : u)),
-        pending: false,
-        error: false,
-      }
-    case 'EDIT_PROGRAMMES_USER_ATTEMPT':
-      return {
-        ...state,
-        pending: true,
-        error: false,
-      }
-    case 'EDIT_PROGRAMMES_USER_FAILURE':
       return {
         ...state,
         data: null,

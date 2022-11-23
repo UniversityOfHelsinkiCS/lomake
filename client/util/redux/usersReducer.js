@@ -10,23 +10,6 @@ export const getAllUsersAction = () => {
   return callBuilder(route, prefix, 'get')
 }
 
-export const editUserAction = user => {
-  const route = `/users/${user.id}`
-  const prefix = 'EDIT_USER'
-  return callBuilder(route, prefix, 'put', user)
-}
-
-export const deleteUserAction = id => {
-  const route = `/users/delete/${id}`
-  const prefix = 'DELETE_USER'
-  return callBuilder(route, prefix, 'delete')
-}
-export const createUserAction = data => {
-  const route = `/users`
-  const prefix = 'ADD_USER'
-  return callBuilder(route, prefix, 'post', data)
-}
-
 export const saveTempAccessAction = data => {
   const route = `/users/tempAccess`
   const prefix = 'SAVE_TEMP_ACCESS'
@@ -63,70 +46,7 @@ export default (state = { data: [] }, action) => {
         pending: false,
         error: true,
       }
-    case 'EDIT_USER_SUCCESS':
-      return {
-        ...state,
-        data: state.data.map(u => (u.id === action.response.id ? action.response : u)),
-        pending: false,
-        error: false,
-      }
-    case 'EDIT_USER_ATTEMPT':
-      return {
-        ...state,
-        pending: true,
-        error: false,
-      }
-    case 'EDIT_USER_FAILURE':
-      return {
-        ...state,
-        data: [],
-        pending: false,
-        error: true,
-      }
-    case 'ADD_USER_SUCCESS':
-      return {
-        data: state.data.concat(action.response),
-        pending: false,
-        error: false,
-      }
-    case 'ADD_USER_ATTEMPT':
-      return {
-        ...state,
-        pending: true,
-        error: false,
-      }
-    case 'ADD_USER_FAILURE':
-      return {
-        ...state,
-        pending: false,
-        error: true,
-      }
-    case 'DELETE_USER_SUCCESS':
-      return {
-        ...state,
-        data: state.data.filter(u => u.id !== action.response),
-        pending: false,
-        error: false,
-      }
-    case 'DELETE_USER_ATTEMPT':
-      return {
-        ...state,
-        pending: true,
-        error: false,
-      }
-    case 'DELETE_USER_FAILURE':
-      return {
-        ...state,
-        pending: false,
-        error: true,
-      }
-    case 'EDIT_PROGRAMMES_USER_SUCCESS':
-      return {
-        ...state,
-        data: state.data.map(u => (u.id === action.response.user.id ? action.response.user : u)),
-        pending: false,
-        error: false,
-      }
+
     case 'SAVE_TEMP_ACCESS_SUCCESS':
       return {
         ...state,

@@ -25,7 +25,6 @@ router.post('/answers', requireProgrammeWrite, answers.create)
 router.post('/bulkanswers', answers.bulkCreate)
 
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
-router.put('/programmes/:programme/users/:id/access', requireProgrammeOwner, users.editUserAccess)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)
 router.get('/programmes/foruser', studyprogrammes.getUsersProgrammes)
@@ -37,9 +36,6 @@ router.post('/login', users.getCurrentUser) // IAM-middleware checks this path
 router.post('/logout', users.getLogoutUrl)
 
 router.get('/users', checkAdmin, users.getAllUsers)
-router.post('/users', checkAdmin, users.createUser)
-router.put('/users/:id', checkAdmin, users.editUser)
-router.delete('/users/delete/:id', checkAdmin, users.deleteUser)
 router.post('/users/tempAccess', checkAdmin, users.saveTempAccess)
 router.delete('/users/tempAccess/:uid/:programme', checkAdmin, users.deleteTempAccess)
 
