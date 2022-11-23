@@ -127,7 +127,11 @@ const TempAccess = () => {
         />
       </div>
       <div className="temp-access-input">
-        <Checkbox label={t('users:writingRights')} onChange={(e, data) => setWriting(data.checked)} checked={writing} />
+        <Checkbox
+          label={t('users:giveWritingRights')}
+          onChange={(e, data) => setWriting(data.checked)}
+          checked={writing}
+        />
       </div>
       <div>
         <Button

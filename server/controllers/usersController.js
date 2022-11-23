@@ -1,5 +1,6 @@
 const db = require('@models')
 const logger = require('@util/logger')
+const { Op } = require('sequelize')
 
 const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {
@@ -221,8 +222,16 @@ const deleteUser = async (req, res) => {
 const saveTempAccess = async (req, res) => {
   try {
     const newAccess = req.body
+    const email = newAccess.email.toLowerCase()
 
-    const user = await db.user.findOne({ where: { email: newAccess.email } })
+    const user = await db.user.findOne({
+      where: {
+        email: {
+          [Op.iLike]: email,
+        },
+      },
+    })
+
     if (!user) return res.status(400).json({ error: 'user not found' })
 
     const temps = user.tempAccess

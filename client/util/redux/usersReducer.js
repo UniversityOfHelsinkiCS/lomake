@@ -137,7 +137,6 @@ export default (state = { data: [] }, action) => {
     case 'SAVE_TEMP_ACCESS_FAILURE':
       return {
         ...state,
-        data: [],
         pending: false,
         error: true,
       }
