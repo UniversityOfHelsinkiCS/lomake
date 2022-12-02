@@ -1,7 +1,7 @@
 const db = require('@models')
 const logger = require('@util/logger')
 const { Op } = require('sequelize')
-// const { sendNewTempAccessNotification } = require('./mailController')
+const { sendNewTempAccessNotification } = require('./mailController')
 
 const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {
@@ -81,7 +81,7 @@ const saveTempAccess = async (req, res) => {
     if (!user) return res.status(400).json({ error: 'user not found' })
 
     const temps = user.tempAccess
-    // let brandNew = false
+    let brandNew = false
     let toUpdate = []
 
     const oldAccess = temps.find(access => access.programme === newAccess.programme)
@@ -99,7 +99,7 @@ const saveTempAccess = async (req, res) => {
         return t
       })
     } else {
-      // brandNew = true
+      brandNew = true
       toUpdate = [
         ...temps,
         {
@@ -116,13 +116,13 @@ const saveTempAccess = async (req, res) => {
     const updatedUser = await user.update({ tempAccess: toUpdate })
 
     if (updatedUser) {
-      // if (brandNew) {
-      //   await sendNewTempAccessNotification(
-      //     `${user.firstname} ${user.lastname}`,
-      //     newAccess.programme,
-      //     newAccess.kojoEmail
-      //   )
-      // }
+      if (brandNew) {
+        await sendNewTempAccessNotification(
+          `${user.firstname} ${user.lastname}`,
+          newAccess.progNames,
+          newAccess.kojoEmail
+        )
+      }
       return res.status(200).json(updatedUser)
     }
     return res.status({})

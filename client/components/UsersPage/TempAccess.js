@@ -50,8 +50,9 @@ const TempAccess = () => {
       programme: key,
       endDate: acualDate.toISOString(),
       writingRights: writing,
-      kojoEmail,
+      kojoEmail: kojoEmail.trim(),
       givenBy: currentUser.uid,
+      progNames: programmes.find(p => p.key === key).name,
     }
     dispatch(saveTempAccessAction(newRight))
     handleCancel()
