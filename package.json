@@ -27,7 +27,7 @@
     "draft-js": "^0.11.7",
     "esbuild": "^0.14.38",
     "esbuild-sass-plugin": "^2.2.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
     "fibers": "^5.0.1",
     "highcharts": "^10.1.0",
