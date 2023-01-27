@@ -1,4 +1,3 @@
-$QUESTION_COUNT: 20;
 @import '../../assets/colors.scss';
 
 .wide-header {
@@ -20,106 +19,8 @@ $QUESTION_COUNT: 20;
 }
 
 .view-title {
-  //margin: 2em 1em;
-  // margin-bottom: 3rem;
   margin-right: 1em;
   margin-top: 1em,
 }
 
-.csv-download {
-  max-width: 200px;
-}
 
-.overview-color-grid {
-  display: grid;
-  grid-template-columns: 4fr 1fr repeat($QUESTION_COUNT, 1fr) 1fr;
-  grid-auto-columns: 50px;
-  grid-template-rows: 160px;
-  grid-auto-rows: 50px;
-  grid-row-gap: 25px;
-  grid-column-gap: 5px;
-  width: 95vw;
-}
-
-@mixin square-basics {
-  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  word-wrap: break-word;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.square {
-  @include square-basics;
-
-  &-red {
-    @include square-basics;
-    background-color: $light-red;
-    &:hover {
-      filter: brightness(0.8);
-    }
-  }
-  &-yellow {
-    @include square-basics;
-    background-color: $light-yellow;
-    &:hover {
-      filter: brightness(0.8);
-    }
-  }
-  &-green {
-    @include square-basics();
-    background-color: $light-green;
-    &:hover {
-      filter: brightness(0.8);
-    }
-  }
-}
-
-@mixin sticky-header-basics {
-  position: sticky;
-  top: 0;
-  background-color: $background-white;
-  box-shadow: 0px 0px 2px 2px $background-white; //little white shadow to cover the shadow of the .square
-  padding-top: 10px;
-  z-index: 4;
-}
-
-.sticky-header {
-  @include sticky-header-basics();
-
-  &-categories {
-    @include sticky-header-basics();
-    word-wrap: break-word;
-    text-align: center;
-    font-weight: bold;
-  }
-}
-
-.year-filter-label {
-  font-size: 17px;
-}
-
-@mixin container-basics {
-  display: flex;
-  align-items: center;
-}
-
-.table-container {
-  @include container-basics;
-
-  &-manage-cell {
-    @include container-basics;
-    justify-content: center;
-  }
-}
-
-.sorter {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.vertical-text {
-  writing-mode: vertical-lr;
-}

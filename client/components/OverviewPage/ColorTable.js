@@ -8,6 +8,7 @@ import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
+import katselmusQuestions from '../../katselmusQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -22,6 +23,7 @@ const ColorTable = React.memo(
     isBeingFiltered,
     filterValue,
     handleFilterChange,
+    katselmus = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -40,12 +42,14 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    const selectedAnswers = answersByYear({
-      year,
-      tempAnswers: answers,
-      oldAnswers,
-      draftYear: draftYear && draftYear.year,
-    })
+    const selectedAnswers = katselmus
+      ? []
+      : answersByYear({
+          year,
+          tempAnswers: answers,
+          oldAnswers,
+          draftYear: draftYear && draftYear.year,
+        })
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -79,7 +83,9 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
-    const tableIds = questions.reduce((acc, cur) => {
+    const questionsToShow = katselmus ? katselmusQuestions : questions
+
+    const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
           return acc
@@ -94,7 +100,7 @@ const ColorTable = React.memo(
     }, [])
 
     return (
-      <div className="overview-color-grid">
+      <div className={`overview-color-grid${katselmus ? '-katselmus' : ''}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
           <Input

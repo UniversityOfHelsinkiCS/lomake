@@ -1,0 +1,243 @@
+[
+  {
+    "title": {
+      "fi": "KATSELMUKSEN TAVOITTAVUUS",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "outreach",
+        "index": 0,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Tavoittavuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "KATSELMUKSEN TAVOITTAVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Onko katselmuksesta tiedotetty koulutusohjelman yhteisössä ja onko kaikille jäsenille kerrottu mahdollisuuksista osallitua?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": []
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "OPISKELUPROSESSIN SUJUVUUS",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "programme_structures",
+        "index": 1,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Koulutusrakenteet",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "KOULUTUSRAKENTEET",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten koulutusrakenteet tukevat valmistumista ja opiskelun etenemistä?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [ "learning_outcomes", "curriculum"]
+      },
+      {
+        "id": "master_transfer",
+        "index": 2,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Maisterisiirtymä",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "SIIRTYMINEN MAISTERIIN",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten siirtyminen kandiohjelmasta maisteriohjelmaan sujuu?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [ "guidance"]
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUKSEN KOKONAISRAKENNE",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "resources",
+        "index": 3,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Resurssit",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "RESURSSIT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Mitä ovat koulutusohjelmien käytössä olevat resurssit? ",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["teaching_resources", "resourcing"]
+      },
+      {
+        "id": "resource_conflicts",
+        "index": 4,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Resurssien sopivuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "RESURSSIEN SOPIVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Onko koulutusohjelman opetussuunnitelman ja resurssien välillä kohtaanto-ongelmia",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["measures"]
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "KOULUTUKSEN KOKONAISRAKENNE",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "resources_information_used",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja ja tietolähteitä käytitte?",
+          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
+          "en": "What other information and sources of information did you use?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "resources_information_needed",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja jäitte kaipaamaan?",
+          "se": "Vilka uppgifter skulle ni ha behövt?",
+          "en": "What information would you have needed?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUSOHJELMAN ASEMA",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "status",
+        "index": 5,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Ohjelman asema",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "OHJELMAN ASEMA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten henkilöstön rekrytointi toimii koulutusohjelman tarpeiden näkökulmasta?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["cooperation_success", "recruitment_influence", "employability" ]
+      }
+    ] 
+  }
+]
