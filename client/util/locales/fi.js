@@ -45,6 +45,9 @@ export default {
     cancel: 'Peruuta',
     edit: 'Muokkaa',
     delete: 'Poista',
+
+    yearlyAssessment: 'Vuosikatsaus',
+    katselmus: 'Katselmus',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

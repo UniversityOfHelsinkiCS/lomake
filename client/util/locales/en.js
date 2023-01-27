@@ -49,6 +49,9 @@ export default {
     cancel: 'Cancel',
     edit: 'Edit',
     delete: 'Delete',
+
+    yearlyAssessment: 'Yearly assessment',
+    katselmus: 'Katselmus',
   },
 
   aboutPage: {

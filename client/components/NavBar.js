@@ -45,12 +45,21 @@ export default () => {
     )
   }
 
+  const GoToKatselmusButton = () => {
+    return (
+      <Menu.Item data-cy="nav-katselmus" as={Link} to="/katselmus" name="katselmus">
+        {t('katselmus')}
+      </Menu.Item>
+    )
+  }
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
+      {user.superAdmin ? <GoToKatselmusButton /> : null}
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

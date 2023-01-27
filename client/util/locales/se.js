@@ -44,6 +44,9 @@ export default {
     // cancel: '',
     // edit: 'Muokkaa',
     // delete: 'Poista',
+
+    // yearlyAssessment: '',
+    // katselmus: '',
   },
 
   aboutPage: {

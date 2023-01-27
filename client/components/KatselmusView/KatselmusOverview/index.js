@@ -1,37 +1,36 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { Dropdown, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
+import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { isAdmin } from '@root/config/common'
-import CsvDownload from 'Components/Generic/CsvDownload'
+import { isAdmin, isSuperAdmin } from '@root/config/common'
+import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import YearSelector from 'Components/Generic/YearSelector'
-import useDebounce from 'Utilities/useDebounce'
-import StatsContent from './StatsContent'
-import ColorTable from './ColorTable'
-import ProgramControlsContent from './ProgramControlsContent'
-import './OverviewPage.scss'
+import ColorTable from '../../OverviewPage/ColorTable'
+import StatsContent from '../../OverviewPage/StatsContent'
+import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
 export default () => {
+  const history = useHistory()
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter, 200)
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
-  const [showCsv, setShowCsv] = useState(false)
-
+  const debouncedFilter = useDebounce(filter, 200)
+  const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
-  const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${t('overview:overviewPage')}`
+    document.title = `${t('katselmus')}`
   }, [lang])
+
+  if (!isSuperAdmin(currentUser.data)) {
+    history.push('/')
+  }
 
   const handleFilterChange = ({ target }) => {
     const { value } = target
@@ -95,35 +94,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('yearlyAssessment').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-            <YearSelector size="extra-small" />
-            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-                {t('overview:compareAnswers')}
-              </Button>
-            )}
-            <Dropdown
-              data-cy="csv-download"
-              className="button basic gray csv-download"
-              direction="left"
-              text={t('overview:csvDownload')}
-              onClick={() => setShowCsv(true)}
-            >
-              {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              ) : null}
-            </Dropdown>
+            <h2 className="view-title">{t('katselmus').toUpperCase()}</h2>
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable

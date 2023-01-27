@@ -8,6 +8,8 @@ import OverviewPage from 'Components/OverviewPage'
 import ReportPage from 'Components/ReportPage'
 import ComparisonPage from 'Components/ComparisonPage'
 
+import KatselmusOverview from 'Components/KatselmusView/KatselmusOverview'
+
 export default () => (
   <div className="content">
     <Switch>
@@ -17,7 +19,8 @@ export default () => (
       <Route exact path="/comparison" component={ComparisonPage} />
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
-      {/* <Redirect to="/" /> */}
+
+      <Route exact path="/katselmus" component={KatselmusOverview} />
     </Switch>
   </div>
 )
