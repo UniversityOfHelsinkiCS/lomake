@@ -129,6 +129,7 @@ const ColorTable = React.memo(
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
+              katselmus
             />
           )
         })}
