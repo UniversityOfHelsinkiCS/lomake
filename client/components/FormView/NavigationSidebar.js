@@ -29,6 +29,7 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
   const { t } = useTranslation()
 
   const questionsToShow = katselmus ? katselmusQuestions : questions
+  const linkBase = katselmus ? '/katselmus/form/' : '/form/'
 
   let partNumber = -1
   return (
@@ -52,7 +53,7 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
                 }}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link to={`/form/${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
+                  <Link to={`${linkBase}${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
                     {romanNumeral} - {title}
                   </Link>
                 </div>
