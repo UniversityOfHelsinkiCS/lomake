@@ -59,6 +59,7 @@ const Form = ({ questions, programmeKey }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
+          katselmus
         />
       </div>
     )
