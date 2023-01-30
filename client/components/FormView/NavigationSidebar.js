@@ -7,6 +7,7 @@ import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
+import katselmusQuestions from '../../katselmusQuestions.json'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -21,18 +22,20 @@ const iconMap = {
   EMPTY: 'exclamation',
 }
 
-const NavigationSidebar = ({ programmeKey }) => {
+const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
   const { t } = useTranslation()
+
+  const questionsToShow = katselmus ? katselmusQuestions : questions
 
   let partNumber = -1
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
-          {questions.map((section, index) => {
+          {questionsToShow.map((section, index) => {
             const titleFromJson = section.title[lang]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
