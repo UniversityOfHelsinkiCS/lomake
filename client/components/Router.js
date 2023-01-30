@@ -10,6 +10,7 @@ import ComparisonPage from 'Components/ComparisonPage'
 
 import KatselmusOverview from 'Components/KatselmusView/KatselmusOverview'
 import KatselmusFormView from 'Components/KatselmusView/KatselmusFormView'
+import PastAnswersView from 'Components/KatselmusView/PastAnswersView'
 
 export default () => (
   <div className="content">
@@ -26,6 +27,11 @@ export default () => (
         exact
         path="/katselmus/form/:room"
         render={props => <KatselmusFormView room={props.match.params.room} />}
+      />
+      <Route
+        exact
+        path="/katselmus/previous-years/:programme"
+        render={props => <PastAnswersView programmeKey={props.match.params.programme} />}
       />
     </Switch>
   </div>

@@ -34,6 +34,7 @@ const Entity = ({
   previousYearsAnswers,
   extrainfo,
   katselmus = false,
+  programme = null,
 }) => {
   const { t } = useTranslation()
 
@@ -43,7 +44,7 @@ const Entity = ({
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
-  const targetURL = `/katselmus/previous-years/${id}`
+  const targetURL = `/katselmus/previous-years/${programme}`
 
   const EntityLastYearsAccordion = () => {
     if (!previousAnswerText && !previousAnswerColor) return null
@@ -87,7 +88,7 @@ const Entity = ({
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
       {katselmus && (
-        <Link data-cy={`link-to-old-${id}-answers`} to={targetURL}>
+        <Link data-cy={`link-to-old-${id}-answers`} to={targetURL} target="_blank">
           Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />
         </Link>
       )}
