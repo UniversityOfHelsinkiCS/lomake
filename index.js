@@ -60,7 +60,7 @@ initializeDatabaseConnection()
     }
 
     const DIST_PATH = inProduction
-      ? path.resolve(__dirname, './dist/prod')
+      ? path.resolve(__dirname, './build')
       : path.resolve(__dirname, './dist/dev')
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
 
