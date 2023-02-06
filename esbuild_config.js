@@ -22,7 +22,7 @@ const stagingConfig = {
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   bundle: true,
   minify: true,
-  outdir: 'dist/prod',
+  outdir: 'build',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
