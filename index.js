@@ -52,12 +52,12 @@ initializeDatabaseConnection()
 
     if (!inProduction) {
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
-    } else {
+    } /* else {
       if (process.env.SENTRY_ENVIRONMENT === 'staging') {
         require('esbuild').build(stagingConfig).then(s => logger.info("Build successful"))
       }
       require('esbuild').build(prodConfig).then(s => logger.info("Build successful"))
-    }
+    } */
 
     const DIST_PATH = inProduction
       ? path.resolve(__dirname, './build')
