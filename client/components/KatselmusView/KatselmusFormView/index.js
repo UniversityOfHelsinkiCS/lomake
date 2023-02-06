@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
@@ -11,10 +12,6 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
 import Form from './KatselmusForm'
-
-// import positiveEmoji from 'Assets/sunglasses.png'
-// import neutralEmoji from 'Assets/neutral.png'
-// import negativeEmoji from 'Assets/persevering.png'
 
 import questions from '../../../katselmusQuestions.json'
 
@@ -43,6 +40,8 @@ const KatselmusFormView = ({ room }) => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
+  const targetURL = `/katselmus/previous-years/${room}`
+
   return (
     <div className="form-container">
       <NavigationSidebar programmeKey={room} katselmus />
@@ -58,6 +57,23 @@ const KatselmusFormView = ({ room }) => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('katselmus')} 2023
           </h3>
+
+          <p
+            className="past-answers-link"
+            style={{
+              lineHeight: 2,
+              backgroundColor: colors.background_blue,
+              padding: '1.5em 0.5em',
+              borderRadius: '5px',
+              margin: '4em 0em 1em 0em',
+            }}
+          >
+            <Link data-cy={`link-to-old-${room}-answers`} to={targetURL} target="_blank">
+              <h4>
+                Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />{' '}
+              </h4>
+            </Link>
+          </p>
         </div>
         <Form programmeKey={programme.key} questions={questions} />
       </div>

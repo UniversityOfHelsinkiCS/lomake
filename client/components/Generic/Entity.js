@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Divider, Icon } from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
@@ -24,18 +24,7 @@ const mapColorToImage = {
   red: negativeEmoji,
 }
 
-const Entity = ({
-  id,
-  label,
-  description,
-  required,
-  noColor,
-  number,
-  previousYearsAnswers,
-  extrainfo,
-  katselmus = false,
-  programme = null,
-}) => {
+const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
   const { t } = useTranslation()
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -43,8 +32,6 @@ const Entity = ({
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
-
-  const targetURL = `/katselmus/previous-years/${programme}`
 
   const EntityLastYearsAccordion = () => {
     if (!previousAnswerText && !previousAnswerColor) return null
@@ -87,11 +74,6 @@ const Entity = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
-      {katselmus && (
-        <Link data-cy={`link-to-old-${id}-answers`} to={targetURL} target="_blank">
-          Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />
-        </Link>
-      )}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
