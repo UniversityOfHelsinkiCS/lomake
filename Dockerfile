@@ -16,6 +16,8 @@ COPY . .
 
 RUN npm run build
 
+RUN mv dist/index.html dist/prod/
+
 EXPOSE 8000
 
 CMD ["npm", "run", "start:prod"]
