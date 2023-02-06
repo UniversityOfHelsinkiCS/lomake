@@ -5,7 +5,7 @@ const devConfig = {
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   sourcemap: true,
   bundle: true,
-  outdir: 'dist/dev',
+  outdir: 'dev',
   define: {
     'process.env.BASE_PATH': "'/'",
     'process.env.NODE_ENV': "'development'",
@@ -22,7 +22,7 @@ const stagingConfig = {
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   bundle: true,
   minify: true,
-  outdir: 'dist/prod',
+  outdir: 'build',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
@@ -39,7 +39,7 @@ const prodConfig = {
   loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   bundle: true,
   minify: true,
-  outdir: 'dist/prod',
+  outdir: 'build',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",

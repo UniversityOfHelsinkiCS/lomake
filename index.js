@@ -60,8 +60,8 @@ initializeDatabaseConnection()
     }
 
     const DIST_PATH = inProduction
-      ? path.resolve(__dirname, './dist/prod')
-      : path.resolve(__dirname, './dist/dev')
+      ? path.resolve(__dirname, './build')
+      : path.resolve(__dirname, './dev')
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
 
     app.use(express.static(DIST_PATH))

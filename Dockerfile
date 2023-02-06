@@ -16,7 +16,7 @@ COPY . .
 
 RUN npm run build
 
-RUN mv dist/index.html dist/prod/
+RUN cp index.html build/
 
 EXPOSE 8000
 
