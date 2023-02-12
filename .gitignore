@@ -1,8 +1,7 @@
 node_modules
-dist/prod/*
-dist/dev/*
-!dist/prod/index.html
-!dist/dev/index.html
+dev/*
+!dev/index.html
+build
 stats.json
 mock.json
 .DS_Store

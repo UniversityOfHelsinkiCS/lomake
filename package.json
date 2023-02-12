@@ -87,7 +87,7 @@
   "nodemonConfig": {
     "ignore": [
       "cypress/*",
-      "dist/*"
+      "dev/*"
     ]
   },
   "_moduleAliases": {
