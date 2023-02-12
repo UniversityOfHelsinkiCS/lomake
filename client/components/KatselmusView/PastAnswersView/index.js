@@ -82,6 +82,9 @@ const PastAnswersView = ({ programmeKey }) => {
     dispatch(getProgramme(programmeKey))
   }, [lang, programmeKey])
 
+  // To be removed
+  if (!isAdmin(user)) return <Redirect to="/" />
+
   if (!programmeKey || !readAccess) return <Redirect to="/" />
 
   const questionsList = modifiedQuestions(questions, lang)

@@ -36,6 +36,9 @@ const KatselmusFormView = ({ room }) => {
     dispatch(getProgramme(room))
   }, [lang, room])
 
+  // To be removed
+  if (!isAdmin(user)) return <Redirect to="/" />
+
   if (!room) return <Redirect to="/" />
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
