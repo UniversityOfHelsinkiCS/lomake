@@ -166,15 +166,15 @@
           "en": "LEARNING OUTCOMES"
         },
         "description": {
-          "fi": "Ovatko koulutusohjelmalle asetetut osaamistavoitteet selkeät ja realistiset? Miten koulutusohjelman osaamistavoitteita pitäisi kehittää?",
+          "fi": "Ovatko koulutusohjelmalle asetetut osaamistavoitteet selkeät ja realistiset? Tarkasteletteko säännöllisesti koulutusohjelman osaamistavoitteita suhteessa opetussuunnitelman sisältämien opintokokonaisuuksien tai opintojaksojen osaamistavoitteisiin? Milloin viimeksi? Miten koulutusohjelman osaamistavoitteita pitäisi kehittää?",
           "se": "Är utbildningsprogrammets kunskapsmål realistiska? Når studenterna målen? Är kunskapsmålen lämpligt preciserade? Hur borde kunskapsmålen utvecklas?",
           "en": "Are the learning outcomes set for the degree programme clear and realistic? How should the learning outcomes be developed?"
         },
         "required": true,
         "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
+          "fi": "Kysymystä on muokattu vuonna 2023",
+          "se": "Frågan har redigerats år 2023",
+          "en": "Question has been edited in 2023"
         }
       },
       {
@@ -244,15 +244,15 @@
           "en": "USE OF STUDENT FEEDBACK"
         },
         "description": {
-          "fi": "Miten eri palautteita ohjelmassa hyödynnetään ja miten? Miten eri tavoin kerätyt palautteet on käsitelty koulutusohjelmassa? Ketkä ovat osallistuneet palautteiden käsittelyyn? Mitä muutoksia palautteista on seurannut?",
+          "fi": "Mitä eri palautteita ohjelmassa hyödynnetään ja miten? Miten eri tavoin kerätyt palautteet on käsitelty koulutusohjelmassa? Ketkä ovat osallistuneet palautteiden käsittelyyn? Mitä muutoksia palautteista on seurannut? Annetaanko opiskelijoille vastapalautetta? Miten opiskelijoille ja henkilökunnalle tiedotetaan palautteen perusteella tehdyistä muutoksista?",
           "se": "Hur fungerar användningen av respons? Hur har responsen som insamlats på olika sätt behandlats vid utbildningsprogrammet? Av vem har responsen behandlats? Vilka ändringar har responsen gett upphov till?",
           "en": "What types of feedback does the programme use and how? How has the feedback collected been processed in the degree programme? Who has participated in processing the feedback? What changes have been made based on the feedback?"
         },
         "required": true,
         "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
+          "fi": "Kysymystä on muokattu vuonna 2023",
+          "se": "Frågan har redigerats år 2023",
+          "en": "Question has been edited in 2023"
         }
       },
       {
