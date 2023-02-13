@@ -259,9 +259,20 @@
   margin: 1em 0;
 }
 
-
 .selection-group {
   display: flex;
   flex-direction: column;
   gap: 1em;
+}
+
+.entity-description, .selection-description{
+  line-height: 2;
+  background-color: $background_beige;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em 0;
+}
+
+.selection-area {
+  margin-top: 3em;
 }

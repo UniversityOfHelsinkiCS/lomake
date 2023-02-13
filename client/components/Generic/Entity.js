@@ -61,19 +61,10 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         </div>
         {!noColor && <SmileyColors id={id} />}
       </div>
-      <p
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
-        {description}
+      <div className="entity-description">
+        <p>{description}</p>
         <p className="form-question-extrainfo">{extrainfo}</p>
-      </p>
+      </div>
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
