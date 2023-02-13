@@ -48,7 +48,6 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
       </LastYearsAnswersAccordion>
     )
   }
-
   return (
     <div className="form-entity-area">
       <Divider />
@@ -74,7 +73,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
-      <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
+      <Textarea id={id} label={label} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
 }

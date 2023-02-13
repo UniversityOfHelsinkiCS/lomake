@@ -32,7 +32,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
       return Object({ key: q.index, text: q.label, value: getLabel(q) })
     }
     if (!onlyColoredQuestions) {
-      if (q.type === 'ENTITY' || q.type === 'MEASUREMENTS') {
+      if (q.type === 'ENTITY' || q.type === 'MEASUREMENTS' || type === 'CHOOSE-RADIO') {
         return Object({ key: q.labelIndex, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })
       }
       return Object({ key: `${q.labelIndex}. ${q.label}`, text: `${q.labelIndex}. ${q.label}`, value: getLabel(q) })

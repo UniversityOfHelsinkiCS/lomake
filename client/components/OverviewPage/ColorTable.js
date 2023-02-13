@@ -9,6 +9,7 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
 import katselmusQuestions from '../../katselmusQuestions.json'
+import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -24,6 +25,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
     katselmus = false,
+    koulutusuudistus = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -43,6 +45,8 @@ const ColorTable = React.memo(
     }, [])
 
     const selectedAnswers = katselmus
+      ? []
+      : koulutusuudistus
       ? []
       : answersByYear({
           year,
@@ -83,8 +87,8 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
-    const questionsToShow = katselmus ? katselmusQuestions : questions
-
+    const questionsToShow = katselmus ? katselmusQuestions : koulutusuudistus ? koulutusuudistusQuestions : questions
+    console.log(questionsToShow)
     const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
@@ -100,7 +104,7 @@ const ColorTable = React.memo(
     }, [])
 
     return (
-      <div className={`overview-color-grid${katselmus ? '-katselmus' : ''}`}>
+      <div className={`overview-color-grid${katselmus ? '-katselmus' : koulutusuudistus ? '-koulutusuudistus' : ''}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
           <Input
@@ -121,6 +125,7 @@ const ColorTable = React.memo(
         />
         <div className="sticky-header" />
         {sortedProgrammes.map(p => {
+          console.log(p)
           return (
             <TableRow
               p={p}
@@ -130,6 +135,7 @@ const ColorTable = React.memo(
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
               katselmus={katselmus}
+              koulutusuudistus={koulutusuudistus}
             />
           )
         })}

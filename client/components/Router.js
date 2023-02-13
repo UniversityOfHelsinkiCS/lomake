@@ -10,6 +10,8 @@ import ComparisonPage from 'Components/ComparisonPage'
 
 import KatselmusOverview from 'Components/KatselmusView/KatselmusOverview'
 import KatselmusFormView from 'Components/KatselmusView/KatselmusFormView'
+import KoulutusuudistusFormView from 'Components/KoulutusuudistusView/KoulutusuudistusFormView'
+import KoulutusuudistusOverview from 'Components/KoulutusuudistusView/KoulutusuudistusOverview'
 import PastAnswersView from 'Components/KatselmusView/PastAnswersView'
 
 export default () => (
@@ -23,6 +25,12 @@ export default () => (
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
 
       <Route exact path="/katselmus" component={KatselmusOverview} />
+      <Route exact path="/koulutusuudistus" component={KoulutusuudistusOverview} />
+      <Route
+        exact
+        path="/koulutusuudistus/form/:room"
+        render={props => <KoulutusuudistusFormView room={props.match.params.room} />}
+      />
       <Route
         exact
         path="/katselmus/form/:room"

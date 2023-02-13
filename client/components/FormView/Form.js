@@ -51,11 +51,12 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES') number++
+    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO') number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
+    const radioOptions = part.radioOptions ? part.radioOptions[lang] : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -69,6 +70,7 @@ const Form = ({ questions, programmeKey }) => {
           previousYearsAnswers={
             previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
           }
+          radioOptions={radioOptions}
         />
       </div>
     )
