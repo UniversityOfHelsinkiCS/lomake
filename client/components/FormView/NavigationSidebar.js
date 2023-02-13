@@ -64,7 +64,7 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
 
                     const idsToCheck = []
 
-                    if (type === 'TEXTAREA' || type === 'ENTITY') {
+                    if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'SELECTION') {
                       idsToCheck.push(`${id}_text`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
