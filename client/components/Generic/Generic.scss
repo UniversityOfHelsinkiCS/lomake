@@ -258,3 +258,10 @@
 .form-text-area {
   margin: 1em 0;
 }
+
+
+.selection-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

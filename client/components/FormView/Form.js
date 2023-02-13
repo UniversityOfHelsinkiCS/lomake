@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
+import Selection from 'Components/Generic/Selection'
 import { colors, romanize } from 'Utilities/common'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 import Section from './Section'
@@ -76,6 +77,16 @@ const Form = ({ questions, programmeKey }) => {
 
   return (
     <>
+      <Selection
+        label="Palautejärjestelmät"
+        id="feedback_systems"
+        required
+        number={50}
+        previousYearsAnswers={previousYearsAnswers}
+        extrainfo="Lisätty vuonna 2023"
+        options={['norppa', 'howULearn', 'kandipalaute', 'thessa', 'isb', 'uraseuranta']}
+        lang={lang}
+      />
       {questions.map((section, index) => {
         return (
           <Section
