@@ -204,8 +204,34 @@
         }
       },
       {
-        "id": "guidance",
+        "id": "research",
         "index": 7,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Tutkimusperustaisuus",
+          "se": "Tutkimusperustaisuus",
+          "en": "Tutkimusperustaisuus"
+        },
+        "label": {
+          "fi": "TUTKIMUSPERUSTAISUUS JA TIEDEYHTEISÖÖN KUULUMINEN",
+          "se": "TUTKIMUSPERUSTAISUUS JA TIEDEYHTEISÖÖN KUULUMINEN",
+          "en": "TUTKIMUSPERUSTAISUUS JA TIEDEYHTEISÖÖN KUULUMINEN"
+        },
+        "description": {
+          "fi": "Miten toteutatte tutkimusperustaisuutta koulutusohjelmassanne käytännössä? Miten tuette koulutusohjelmassanne opiskelijoiden kuulumista tiedeyhteisöön?",
+          "se": "Miten toteutatte tutkimusperustaisuutta koulutusohjelmassanne käytännössä? Miten tuette koulutusohjelmassanne opiskelijoiden kuulumista tiedeyhteisöön?",
+          "en": "Miten toteutatte tutkimusperustaisuutta koulutusohjelmassanne käytännössä? Miten tuette koulutusohjelmassanne opiskelijoiden kuulumista tiedeyhteisöön?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "Kysymys on lisätty vuonna 2023",
+          "se": "Frågan har lagts till år 2023",
+          "en": "Question has been added in 2023"
+        }
+      },
+      {
+        "id": "guidance",
+        "index": 8,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opintojen ohjaus",
@@ -231,7 +257,7 @@
       },
       {
         "id": "student_feedback",
-        "index": 8,
+        "index": 9,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opiskelijapalaute",
@@ -309,7 +335,7 @@
     "parts": [
       {
         "id": "community_wellbeing",
-        "index": 9,
+        "index": 10,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteisön hyvinvointi",
@@ -335,7 +361,7 @@
       },
       {
         "id": "teacher_skills",
-        "index": 10,
+        "index": 11,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opettajien osaaminen",
@@ -361,7 +387,7 @@
       },
       {
         "id": "management",
-        "index": 11,
+        "index": 12,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Johtaminen",
@@ -439,7 +465,7 @@
     "parts": [
       {
         "id": "teaching_resources",
-        "index": 12,
+        "index": 13,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opetusresurssit",
@@ -465,7 +491,7 @@
       },
       {
         "id": "recruitment_influence",
-        "index": 13,
+        "index": 14,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Rekrytointi",
@@ -491,7 +517,7 @@
       },
       {
         "id": "resourcing",
-        "index": 14,
+        "index": 15,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Tila- ja laiteresurssit",
@@ -569,7 +595,7 @@
     "parts": [
       {
         "id": "cooperation_success",
-        "index": 15,
+        "index": 16,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteistyön sujuvuus",
@@ -647,7 +673,7 @@
     "parts": [
       {
         "id": "successes_and_development_needs",
-        "index": 16,
+        "index": 17,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Onnistumiset",
@@ -683,7 +709,7 @@
     "parts": [
       {
         "id": "measures",
-        "index": 17,
+        "index": 18,
         "type": "MEASURES",
         "shortLabel": {
           "fi": "Ohjelman toimenpiteet",
@@ -710,7 +736,7 @@
       },
       {
         "id": "measures_faculty",
-        "index": 18,
+        "index": 19,
         "type": "MEASURES",
         "shortLabel": {
           "fi": "Tiedekunnan toimet",
@@ -746,7 +772,7 @@
     "parts": [
       {
         "id": "feedback",
-        "index": 19,
+        "index": 20,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Miten meni?",
