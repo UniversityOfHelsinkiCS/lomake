@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox, Divider } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
+import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 // import SimpleTextarea from './SimpleTextarea'
 
-const Selection = ({ label, description, required, number, extrainfo, options, lang }) => {
-  const [selected, setSelected] = useState({})
+const Selection = ({ id, label, description, required, number, extrainfo, options, lang }) => {
+  const dispatch = useDispatch()
+  const fieldName = `${id}_selection`
   const [other, setOther] = useState('')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-
+  const values = useSelector(({ form }) => form.data[fieldName])
+  const selections = values ? JSON.parse(values) : null
   const ids = Object.keys(options)
 
-  useEffect(() => {
-    const data = {}
-    ids.forEach(id => {
-      data[id] = false
-    })
-    setSelected(data)
-  }, [options])
-
   const handleSelection = data => {
-    const { id, checked } = data
-    const updated = { ...selected }
-    updated[id] = checked
-    setSelected(updated)
+    const { optionId, checked } = data
+    const updated = { ...selections }
+    updated[optionId] = checked
+    dispatch(updateFormField(fieldName, JSON.stringify(updated)))
   }
 
   const handleOther = ({ target }) => setOther(target.value)
@@ -56,13 +51,13 @@ const Selection = ({ label, description, required, number, extrainfo, options, l
         </div>
         <h4>{t[lang].select}</h4>
         <div className="selection-group">
-          {ids.map(id => {
+          {ids.map(optionId => {
             return (
               <Checkbox
-                id={id}
-                label={options[id][lang]}
+                optionId={optionId}
+                label={options[optionId][lang]}
                 onChange={(e, data) => handleSelection(data)}
-                checked={selected[id]}
+                checked={selections ? selections[optionId] : false}
                 disabled={viewOnly}
               />
             )
