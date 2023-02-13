@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox, Divider } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
-// import SimpleTextarea from './SimpleTextarea'
 
 const Selection = ({ id, label, description, required, number, extrainfo, options, lang }) => {
   const dispatch = useDispatch()
-  const fieldName = `${id}_selection`
-  const [other, setOther] = useState('')
+  const fieldNameOptions = `${id}_selection`
+  const fieldNameText = `${id}_text`
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const values = useSelector(({ form }) => form.data[fieldName])
+
+  const values = useSelector(({ form }) => form.data[fieldNameOptions])
   const selections = values ? JSON.parse(values) : null
+  const otherText = useSelector(({ form }) => form.data[fieldNameText])
   const ids = Object.keys(options)
 
   const handleSelection = data => {
     const { optionId, checked } = data
     const updated = { ...selections }
     updated[optionId] = checked
-    dispatch(updateFormField(fieldName, JSON.stringify(updated)))
+    dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated)))
   }
 
-  const handleOther = ({ target }) => setOther(target.value)
+  const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value))
 
   // To do: move to translations
   const t = {
@@ -65,9 +66,9 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
           <div className="form-textarea">
             <label>{t[lang].other}</label>
             {viewOnly ? (
-              <>{other}</>
+              <>{otherText || ''}</>
             ) : (
-              <textarea id="other" value={other} onChange={handleOther} placeholder={t[lang].info} />
+              <textarea id="other" value={otherText || ''} onChange={handleOther} placeholder={t[lang].info} />
             )}
           </div>
         </div>
