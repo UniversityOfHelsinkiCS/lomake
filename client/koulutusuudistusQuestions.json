@@ -41,12 +41,13 @@
           {"label": "Opintoasiainneuvosto"},
           {"label": "Katselmuksen arviointiryhmä"}
           ]}
+          
         
       },
       {
         "id": "base-information-1",
         "index": 1,
-        "type": "ENTITY",
+        "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "valitse taustatiedot",
           "se": "",
@@ -68,12 +69,21 @@
           "se": "",
           "en": ""
         },
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+        {"fi": [
+        {"label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)"},
+        {"label": "opetus- ja tutkimushenkilökunta"},
+        {"label": "hallinto- tai muu henkilökunta"},
+        {"label": "opiskelija"},
+        {"label": "väitöskirjatutkija"},
+        {"label": "alumni"}
+        ]}
       },
       {
         "id": "base-information-2",
         "index": 2,
-        "type": "ENTITY",
+        "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
           "se": "",
@@ -95,7 +105,14 @@
           "se": "",
           "en": ""
         },
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+        {"fi": [
+        {"label": "kanditason koulutus"},
+        {"label": "maisteritason koulutus"},
+        {"label": "tohtoritason koulutus"},
+        {"label": "kaikki koulutustasot"}
+        ]}
       },
       {
         "id": "base-information-3",
