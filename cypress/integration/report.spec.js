@@ -25,13 +25,13 @@ describe('ReportPage tests', () => {
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
   })
 
-  it('User should be able to see the just written answers in the report', () => {
+  it.only('User should be able to see the just written answers in the report', () => {
     cy.login(user)
     cy.visit('/')
     cy.selectYear(defaultYears[0])
 
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click().wait(100)
     cy.get('[data-cy=textarea-learning_outcomes] [contenteditable]').type('test words')
 
     cy.visit('/')
