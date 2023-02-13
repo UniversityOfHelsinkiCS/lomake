@@ -32,7 +32,7 @@ describe('ReportPage tests', () => {
 
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-learning_outcomes] [contenteditable="true"]').type('test words')
+    cy.get('[data-cy=textarea-learning_outcomes] [contenteditable]').type('test words')
 
     cy.visit('/')
     cy.reload()
