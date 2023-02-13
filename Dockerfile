@@ -1,16 +1,8 @@
-FROM node:16.15
+FROM registry.access.redhat.com/ubi8/nodejs-16
 
-WORKDIR /usr/src/app
-COPY package* ./ 
-RUN npm ci
-COPY . .
+ENV TZ=Europe/Helsinki
 
-# Set timezone to Europe/Helsinki
-RUN echo "Europe/Helsinki" > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-
-# The commands above dont seem to do the trick, this works locally atleast:
-ENV TZ=Europe/Helsinki 
+WORKDIR /opt/app-root/src
 
 ARG BASE_PATH
 ENV BASE_PATH=$BASE_PATH
@@ -18,7 +10,13 @@ ENV BASE_PATH=$BASE_PATH
 ARG SENTRY_ENVIRONMENT
 ENV SENTRY_ENVIRONMENT=$SENTRY_ENVIRONMENT
 
+COPY package* ./
+RUN npm ci -f --omit-dev --ignore-scripts
+COPY . .
+
 RUN npm run build
+
+RUN cp index.html build/
 
 EXPOSE 8000
 

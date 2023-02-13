@@ -7,12 +7,14 @@ import { romanize } from 'Utilities/common'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
-const Question = ({ answers, question, handleClick, showing }) => {
+const Question = ({ answers, question, handleClick, showing, katselmus = false }) => {
   const { t } = useTranslation()
   const stateLength = new Date().getFullYear() - 2019 + 1
   const [colors, setColors] = useState(Array(stateLength).fill('all'))
   const [buttons, setButtons] = useState(Array(stateLength).fill(0))
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
+
+  const yearSelection = katselmus ? [2020, 2021, 2022] : multipleYears
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
@@ -76,14 +78,18 @@ const Question = ({ answers, question, handleClick, showing }) => {
           <Grid.Row columns={answers.length}>
             {answers.map(
               (year, yearsIndex) =>
-                multipleYears.includes(year.year) && (
+                yearSelection.includes(year.year) && (
                   <Grid.Column key={generateRandomKey(year)} className="question-content">
-                    <div className="comparison color-buttons noprint">
+                    {katselmus ? (
                       <label>{year.year}</label>
-                      {buttonColors.map((color, index) => (
-                        <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
-                      ))}
-                    </div>
+                    ) : (
+                      <div className="comparison color-buttons noprint">
+                        <label>{year.year}</label>
+                        {buttonColors.map((color, index) => (
+                          <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
+                        ))}
+                      </div>
+                    )}
                     {year.answers.length > 0 ? (
                       year.answers.map(programme => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
@@ -106,7 +112,7 @@ const Question = ({ answers, question, handleClick, showing }) => {
                         return null
                       })
                     ) : (
-                      <h4>{t('noData')}</h4>
+                      <h4>{katselmus ? t('empty') : t('noData')}</h4>
                     )}
                   </Grid.Column>
                 )
