@@ -87,7 +87,12 @@ const ColorTable = React.memo(
 
     const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
+        if (
+          cur.id.includes('information_needed') ||
+          cur.id.includes('information_used') ||
+          cur.type === 'TITLE' ||
+          cur.type === 'SELECTION'
+        ) {
           return acc
         }
         return [

@@ -282,6 +282,65 @@
         }
       },
       {
+        "id": "used_systems",
+        "index": 10,
+        "type": "SELECTION",
+        "shortLabel": {
+          "fi": "Palautejärjestelmät",
+          "se": "Palautejärjestelmät",
+          "en": "Palautejärjestelmät"
+        },
+        "label": {
+          "fi": "KÄYTETYT PALAUTEJÄRJESTELMÄT",
+          "se": "KÄYTETYT PALAUTEJÄRJESTELMÄT",
+          "en": "KÄYTETYT PALAUTEJÄRJESTELMÄT"
+        },
+        "description": {
+          "fi": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?",
+          "se": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?",
+          "en": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?"
+        },
+        "required": true,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "Kysymys on lisätty vuonna 2023",
+          "se": "Frågan har lagts till år 2023",
+          "en": "Question has been added in 2023"
+        },
+        "options": {
+          "norppa": {
+            "fi": "Norppa",
+            "se": "Norppa",
+            "en": "Norppa"
+          },
+          "howULearn": {
+            "fi": "HowULearn",
+            "se": "HowULearn",
+            "en": "HowULearn"
+          },
+          "kandipalaute": {
+            "fi": "Kandipalaute",
+            "se": "Kandipalaute",
+            "en": "Kandipalaute"
+          },
+          "thessa": {
+            "fi": "Thessa",
+            "se": "Thessa",
+            "en": "Thessa"
+          },
+          "isb": {
+            "fi": "ISB",
+            "se": "ISB",
+            "en": "ISB"
+          },
+          "uraseuranta": {
+            "fi": "Uraseuranta",
+            "se": "Uraseuranta",
+            "en": "Uraseuranta"
+          }
+        }
+      },
+      {
         "id": "meta1",
         "type": "TITLE",
         "label": {
@@ -335,7 +394,7 @@
     "parts": [
       {
         "id": "community_wellbeing",
-        "index": 10,
+        "index": 11,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteisön hyvinvointi",
@@ -361,7 +420,7 @@
       },
       {
         "id": "teacher_skills",
-        "index": 11,
+        "index": 12,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opettajien osaaminen",
@@ -387,7 +446,7 @@
       },
       {
         "id": "management",
-        "index": 12,
+        "index": 13,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Johtaminen",
@@ -465,7 +524,7 @@
     "parts": [
       {
         "id": "teaching_resources",
-        "index": 13,
+        "index": 14,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opetusresurssit",
@@ -491,7 +550,7 @@
       },
       {
         "id": "recruitment_influence",
-        "index": 14,
+        "index": 15,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Rekrytointi",
@@ -517,7 +576,7 @@
       },
       {
         "id": "resourcing",
-        "index": 15,
+        "index": 16,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Tila- ja laiteresurssit",
@@ -595,7 +654,7 @@
     "parts": [
       {
         "id": "cooperation_success",
-        "index": 16,
+        "index": 17,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteistyön sujuvuus",
@@ -673,7 +732,7 @@
     "parts": [
       {
         "id": "successes_and_development_needs",
-        "index": 17,
+        "index": 18,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Onnistumiset",
@@ -709,7 +768,7 @@
     "parts": [
       {
         "id": "measures",
-        "index": 18,
+        "index": 19,
         "type": "MEASURES",
         "shortLabel": {
           "fi": "Ohjelman toimenpiteet",
@@ -736,7 +795,7 @@
       },
       {
         "id": "measures_faculty",
-        "index": 19,
+        "index": 20,
         "type": "MEASURES",
         "shortLabel": {
           "fi": "Tiedekunnan toimet",
@@ -772,7 +831,7 @@
     "parts": [
       {
         "id": "feedback",
-        "index": 20,
+        "index": 21,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Miten meni?",

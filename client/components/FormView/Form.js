@@ -22,6 +22,7 @@ const Form = ({ questions, programmeKey }) => {
     TEXTAREA: Textarea,
     ENTITY: Entity,
     MEASURES: Measures,
+    SELECTION: Selection,
   }
 
   let number = -1
@@ -52,7 +53,7 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES') number++
+    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'SELECTION') number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
@@ -67,6 +68,8 @@ const Form = ({ questions, programmeKey }) => {
           noColor={part.no_color}
           number={number}
           extrainfo={extrainfo}
+          options={part.options}
+          lang={lang}
           previousYearsAnswers={
             previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
           }
@@ -77,16 +80,6 @@ const Form = ({ questions, programmeKey }) => {
 
   return (
     <>
-      <Selection
-        label="Palautejärjestelmät"
-        id="feedback_systems"
-        required
-        number={50}
-        previousYearsAnswers={previousYearsAnswers}
-        extrainfo="Lisätty vuonna 2023"
-        options={['norppa', 'howULearn', 'kandipalaute', 'thessa', 'isb', 'uraseuranta']}
-        lang={lang}
-      />
       {questions.map((section, index) => {
         return (
           <Section

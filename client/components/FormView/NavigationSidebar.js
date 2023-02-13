@@ -60,7 +60,7 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
                     const { id, type, required, no_color } = part
-                    if (type === 'ENTITY' || type === 'MEASURES') partNumber++
+                    if (type === 'ENTITY' || type === 'MEASURES' || type === 'SELECTION') partNumber++
 
                     const idsToCheck = []
 
@@ -72,6 +72,10 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
 
                     if (type === 'ENTITY' && !no_color) {
                       idsToCheck.push(`${id}_light`)
+                    }
+
+                    if (type === 'SELECTION') {
+                      idsToCheck.push(`${id}_selected`)
                     }
 
                     const status = idsToCheck.reduce((acc, cur) => {
@@ -90,7 +94,7 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
 
                     return (
                       <div key={id}>
-                        {type === 'ENTITY' && (
+                        {(type === 'ENTITY' || type === 'SELECTION') && (
                           <>
                             {partNumber}.{' '}
                             <Icon

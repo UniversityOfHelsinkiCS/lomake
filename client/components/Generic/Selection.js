@@ -5,15 +5,17 @@ import { colors } from 'Utilities/common'
 import './Generic.scss'
 // import SimpleTextarea from './SimpleTextarea'
 
-const Selection = ({ label, required, number, extrainfo, options, lang }) => {
+const Selection = ({ label, description, required, number, extrainfo, options, lang }) => {
   const [selected, setSelected] = useState({})
   const [other, setOther] = useState('')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
+  const ids = Object.keys(options)
+
   useEffect(() => {
     const data = {}
-    options.forEach(option => {
-      data[option] = false
+    ids.forEach(id => {
+      data[id] = false
     })
     setSelected(data)
   }, [options])
@@ -30,22 +32,12 @@ const Selection = ({ label, required, number, extrainfo, options, lang }) => {
   // To do: move to translations
   const t = {
     fi: {
-      norppa: 'Norppa',
-      howULearn: 'HowULearn',
-      kandipalaute: 'Kandipalaute',
-      thessa: 'Thessa',
-      isb: 'ISB',
-      uraseuranta: 'Uraseuranta',
+      select: 'Valitse sopivat vaihtoehdot',
       other: 'Muu, mikä',
       info: 'Lisää puuttuvat vaihtoehdot - Voit lisätä useamman',
     },
     en: {
-      norppa: 'Norppa',
-      howULearn: 'HowULearn',
-      kandipalaute: 'Kandipalaute',
-      thessa: 'Thessa',
-      isb: 'ISB',
-      uraseuranta: 'Uraseuranta',
+      select: 'Valitse sopivat vaihtoehdot',
       other: 'Muu, mikä',
       info: 'Lisää puuttuvat vaihtoehdot - Voit lisätä useamman',
     },
@@ -66,17 +58,18 @@ const Selection = ({ label, required, number, extrainfo, options, lang }) => {
           margin: '1em 0',
         }}
       >
-        Valitse sopivat vaihtoehdot
+        {description}
+        <p className="form-question-extrainfo">{t[lang].select}</p>
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
       <div className="selection-group">
-        {options.map(option => {
+        {ids.map(id => {
           return (
             <Checkbox
-              id={option}
-              label={t[lang][option]}
+              id={id}
+              label={options[id][lang]}
               onChange={(e, data) => handleSelection(data)}
-              checked={selected[option]}
+              checked={selected[id]}
               disabled={viewOnly}
             />
           )
