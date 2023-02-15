@@ -2,9 +2,10 @@ const axios = require('axios')
 const { inProduction } = require('@util/common')
 
 const pateToken = process.env.PATE_API_TOKEN || ''
+const pateUrl = process.env.PATE_URL || ''
 
 const pateClient = axios.create({
-  baseURL: 'https://importer.cs.helsinki.fi/api/pate/',
+  baseURL: pateUrl,
   params: {
     token: pateToken,
   },
