@@ -67,9 +67,9 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
         />
         <datalist className="datalist" id="amazing">
           <option value={1}>Erittäin huonosti</option>
-          <option value={2} />
+          <option value={2}>Osittain huonosti</option>
           <option value={3}>En tiedä</option>
-          <option value={4} />
+          <option value={4}>Osittain hyvin </option>
           <option value={5}>Erittäin hyvin</option>
         </datalist>
       </div>

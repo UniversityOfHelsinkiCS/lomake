@@ -181,30 +181,241 @@
     },
     "parts": [
       {
-        "id": "outreach",
+        "id": "knowledge_lead",
         "index": 0,
         "type": "SLIDER",
         "shortLabel": {
-          "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
+          "fi": "Tutkintokoulutus on osaamisperustaista.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla.",
+          "fi": "Tutkintokoulutus on osaamisperustaista.",
           "se": "",
           "en": ""
         },
         "required": true,
-        "extrainfo": {
-          "fi": "Opintoasiainneuvoston 20.4.2015 hyväksymään projektisuunnitelmaan muotoiltiin koulutusuudistuksen (Iso Pyörä) tavoitteet.",
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "skills_for_worklife",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
           "se": "",
           "en": ""
         },
+        "label": {
+          "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "degrees_give_skills_for_digitalization",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "Digitalization_and_university",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "multiple_environments",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studying_process",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studytrack_choices",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "diverse_studies_inside_studytracks",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_international_appeal",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_international_professionals",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_forerunner",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_practices_widely",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_improve_conversations",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_educates_future",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
         "relatedYearlyQuestions": []
       }
     ] 
