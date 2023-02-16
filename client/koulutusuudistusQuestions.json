@@ -11,6 +11,38 @@
         "index": 0,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+          {"fi": [
+          {"label": "Ryhmä"},
+          {"label": "Yksitäinen vastaaja"}
+          ]}
+      },
+      {
+        "id": "base-information-1",
+        "index": 1,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
           "fi": "Valitse ryhmä",
           "se": "",
           "en": ""
@@ -41,12 +73,10 @@
           {"label": "Opintoasiainneuvosto"},
           {"label": "Katselmuksen arviointiryhmä"}
           ]}
-          
-        
       },
       {
-        "id": "base-information-1",
-        "index": 1,
+        "id": "base-information-2",
+        "index": 2,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "valitse taustatiedot",
@@ -81,8 +111,8 @@
         ]}
       },
       {
-        "id": "base-information-2",
-        "index": 2,
+        "id": "base-information-3",
+        "index": 3,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
@@ -115,8 +145,8 @@
         ]}
       },
       {
-        "id": "base-information-3",
-        "index": 3,
+        "id": "base-information-4",
+        "index": 4,
         "type": "ENTITY",
         "shortLabel": {
           "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
@@ -145,7 +175,7 @@
   },
   {
     "title": {
-      "fi": "KATSELMUKSEN TAVOITTAVUUS",
+      "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
       "se": "",
       "en": ""
     },
@@ -153,25 +183,25 @@
       {
         "id": "outreach",
         "index": 0,
-        "type": "ENTITY",
+        "type": "SLIDER",
         "shortLabel": {
-          "fi": "Tavoittavuus",
+          "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "KATSELMUKSEN TAVOITTAVUUS",
+          "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Onko katselmuksesta tiedotetty koulutusohjelman yhteisössä ja onko kaikille jäsenille kerrottu mahdollisuuksista osallitua?",
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla.",
           "se": "",
           "en": ""
         },
         "required": true,
         "extrainfo": {
-          "fi": "",
+          "fi": "Opintoasiainneuvoston 20.4.2015 hyväksymään projektisuunnitelmaan muotoiltiin koulutusuudistuksen (Iso Pyörä) tavoitteet.",
           "se": "",
           "en": ""
         },

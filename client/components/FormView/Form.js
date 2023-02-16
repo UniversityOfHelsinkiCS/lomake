@@ -51,7 +51,8 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO') number++
+    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
+      number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined

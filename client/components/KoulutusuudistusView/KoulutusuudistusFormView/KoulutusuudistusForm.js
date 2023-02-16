@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import ChooseRadio from 'Components/Generic/ChooseRadio'
+import Slider from 'Components/Generic/Slider'
 import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import Section from './KoulutusuudistusSection'
@@ -15,6 +16,7 @@ const Form = ({ questions, programmeKey }) => {
     ENTITY: Entity,
     MEASURES: Measures,
     'CHOOSE-RADIO': ChooseRadio,
+    SLIDER: Slider,
   }
 
   let number = -1
@@ -45,7 +47,8 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO') number++
+    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
+      number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined

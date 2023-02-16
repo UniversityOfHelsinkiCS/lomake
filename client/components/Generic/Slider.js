@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import { Divider, Radio, Form } from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
+import './Slider.scss'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -17,23 +12,20 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const ChooseRadio = ({
-  id,
-  label,
-  description,
-  required,
-  noColor,
-  number,
-  previousYearsAnswers,
-  extrainfo,
-  radioOptions,
-}) => {
+const Slider = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
   const { t } = useTranslation()
-  const [state, setState] = useState({ value: '' })
+  const [state, setState] = useState(3)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
+  }
+
+  const handleSlider = (event, value) => {
+    const x = document.getElementById(`slider-input-${id}`).value
+
+    console.log(x)
+    setState(value)
   }
 
   return (
@@ -61,27 +53,28 @@ const ChooseRadio = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
-      {radioOptions ? (
-        <Form>
-          {radioOptions.map(o => {
-            return (
-              <Form.Field>
-                <Radio
-                  label={o.label}
-                  name="radioGroup"
-                  value={o.label}
-                  checked={state.value === o.label}
-                  onChange={() => setState({ value: o.label })}
-                />
-              </Form.Field>
-            )
-          })}
-        </Form>
-      ) : (
-        <p>Missing options</p>
-      )}
+      <div className="slider-container">
+        <input
+          className="slider"
+          list="amazing"
+          id={`slider-input-${id}`}
+          step="1"
+          type="range"
+          min="1"
+          max="5"
+          value={state}
+          onChange={handleSlider}
+        />
+        <datalist className="datalist" id="amazing">
+          <option value={1}>Erittäin huonosti</option>
+          <option value={2} />
+          <option value={3}>En tiedä</option>
+          <option value={4} />
+          <option value={5}>Erittäin hyvin</option>
+        </datalist>
+      </div>
     </div>
   )
 }
 
-export default ChooseRadio
+export default Slider
