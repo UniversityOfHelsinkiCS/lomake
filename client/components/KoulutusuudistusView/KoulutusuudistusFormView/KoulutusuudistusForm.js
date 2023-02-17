@@ -4,6 +4,7 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import ChooseRadio from 'Components/Generic/ChooseRadio'
 import Slider from 'Components/Generic/Slider'
+import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import Section from './KoulutusuudistusSection'
@@ -17,6 +18,7 @@ const Form = ({ questions, programmeKey }) => {
     MEASURES: Measures,
     'CHOOSE-RADIO': ChooseRadio,
     SLIDER: Slider,
+    INFOBOX: InfoBox,
   }
 
   let number = -1

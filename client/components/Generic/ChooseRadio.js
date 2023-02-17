@@ -48,7 +48,7 @@ const ChooseRadio = ({
         </div>
         {!noColor && <SmileyColors id={id} />}
       </div>
-      <p
+      <div
         className="entity-description"
         style={{
           lineHeight: 2,
@@ -60,12 +60,12 @@ const ChooseRadio = ({
       >
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
-      </p>
+      </div>
       {radioOptions ? (
         <Form>
-          {radioOptions.map(o => {
+          {radioOptions.map((o, index) => {
             return (
-              <Form.Field>
+              <Form.Field key={index}>
                 <Radio
                   label={o.label}
                   name="radioGroup"

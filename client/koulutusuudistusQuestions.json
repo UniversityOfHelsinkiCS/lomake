@@ -32,11 +32,7 @@
           "en": ""
         },
         "relatedYearlyQuestions": [],
-        "radioOptions": 
-          {"fi": [
-          {"label": "Ryhmä"},
-          {"label": "Yksitäinen vastaaja"}
-          ]}
+        "radioOptions": { "fi": [{ "label": "Ryhmä" }, { "label": "Yksitäinen vastaaja" }] }
       },
       {
         "id": "base-information-1",
@@ -64,15 +60,18 @@
           "en": ""
         },
         "relatedYearlyQuestions": [],
-        "radioOptions": 
-          {"fi": [
-          {"label": "Koulutusohjelman johtoryhmä"},
-          {"label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"},
-          {"label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)"},
-          {"label": "Tutkijakoulun johtokunta"},
-          {"label": "Opintoasiainneuvosto"},
-          {"label": "Katselmuksen arviointiryhmä"}
-          ]}
+        "radioOptions": {
+          "fi": [
+            { "label": "Koulutusohjelman johtoryhmä" },
+            {
+              "label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"
+            },
+            { "label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)" },
+            { "label": "Tutkijakoulun johtokunta" },
+            { "label": "Opintoasiainneuvosto" },
+            { "label": "Katselmuksen arviointiryhmä" }
+          ]
+        }
       },
       {
         "id": "base-information-2",
@@ -100,15 +99,16 @@
           "en": ""
         },
         "relatedYearlyQuestions": [],
-        "radioOptions": 
-        {"fi": [
-        {"label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)"},
-        {"label": "opetus- ja tutkimushenkilökunta"},
-        {"label": "hallinto- tai muu henkilökunta"},
-        {"label": "opiskelija"},
-        {"label": "väitöskirjatutkija"},
-        {"label": "alumni"}
-        ]}
+        "radioOptions": {
+          "fi": [
+            { "label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)" },
+            { "label": "opetus- ja tutkimushenkilökunta" },
+            { "label": "hallinto- tai muu henkilökunta" },
+            { "label": "opiskelija" },
+            { "label": "väitöskirjatutkija" },
+            { "label": "alumni" }
+          ]
+        }
       },
       {
         "id": "base-information-3",
@@ -136,13 +136,14 @@
           "en": ""
         },
         "relatedYearlyQuestions": [],
-        "radioOptions": 
-        {"fi": [
-        {"label": "kanditason koulutus"},
-        {"label": "maisteritason koulutus"},
-        {"label": "tohtoritason koulutus"},
-        {"label": "kaikki koulutustasot"}
-        ]}
+        "radioOptions": {
+          "fi": [
+            { "label": "kanditason koulutus" },
+            { "label": "maisteritason koulutus" },
+            { "label": "tohtoritason koulutus" },
+            { "label": "kaikki koulutustasot" }
+          ]
+        }
       },
       {
         "id": "base-information-4",
@@ -171,7 +172,7 @@
         },
         "relatedYearlyQuestions": []
       }
-    ] 
+    ]
   },
   {
     "title": {
@@ -184,11 +185,6 @@
         "id": "knowledge_lead",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Tutkintokoulutus on osaamisperustaista.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Tutkintokoulutus on osaamisperustaista.",
           "se": "",
@@ -201,11 +197,6 @@
         "id": "skills_for_worklife",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
           "se": "",
@@ -218,11 +209,6 @@
         "id": "degrees_give_skills_for_digitalization",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
           "se": "",
@@ -235,11 +221,6 @@
         "id": "Digitalization_and_university",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
           "se": "",
@@ -252,11 +233,6 @@
         "id": "multiple_environments",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
           "se": "",
@@ -269,11 +245,6 @@
         "id": "studying_process",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
           "se": "",
@@ -286,11 +257,6 @@
         "id": "studytrack_choices",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
           "se": "",
@@ -303,11 +269,6 @@
         "id": "diverse_studies_inside_studytracks",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
           "se": "",
@@ -320,11 +281,6 @@
         "id": "university_international_appeal",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
           "se": "",
@@ -337,13 +293,8 @@
         "id": "university_international_professionals",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
-          "se": "",
-          "en": ""
-        },
         "label": {
-          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
           "se": "",
           "en": ""
         },
@@ -354,11 +305,6 @@
         "id": "university_forerunner",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
           "se": "",
@@ -371,11 +317,6 @@
         "id": "university_practices_widely",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
           "se": "",
@@ -388,11 +329,6 @@
         "id": "university_improve_conversations",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
           "se": "",
@@ -405,11 +341,6 @@
         "id": "university_educates_future",
         "index": 0,
         "type": "SLIDER",
-        "shortLabel": {
-          "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
-          "se": "",
-          "en": ""
-        },
         "label": {
           "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
           "se": "",
@@ -417,83 +348,236 @@
         },
         "required": true,
         "relatedYearlyQuestions": []
-      }
-    ] 
-  },
-  {
-    "title": {
-      "fi": "OPISKELUPROSESSIN SUJUVUUS",
-      "se": "",
-      "en": ""
-    },
-    "parts": [
-      {
-        "id": "programme_structures",
-        "index": 1,
-        "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Koulutusrakenteet",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "KOULUTUSRAKENTEET",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Miten koulutusrakenteet tukevat valmistumista ja opiskelun etenemistä?",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [ "learning_outcomes", "curriculum"]
       },
       {
-        "id": "master_transfer",
-        "index": 2,
+        "id": "free_answer",
+        "index": 0,
         "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Maisterisiirtymä",
-          "se": "",
-          "en": ""
-        },
         "label": {
-          "fi": "SIIRTYMINEN MAISTERIIN",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
-        "description": {
-          "fi": "Miten siirtyminen kandiohjelmasta maisteriohjelmaan sujuu?",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [ "guidance"]
+        "required": false,
+        "relatedYearlyQuestions": []
       }
-    ] 
+    ]
   },
   {
     "title": {
-      "fi": "KOULUTUKSEN KOKONAISRAKENNE",
+      "fi": "OPINTOASIAINNEUVOSTON VALITSEMA LINJA KOULUTUKSEN UUDISTAMISESSA",
       "se": "",
       "en": ""
     },
     "parts": [
       {
-        "id": "resources",
-        "index": 3,
+        "id": "outlining_questions_2015_study_council",
+        "index": 1,
+        "type": "INFOBOX",
+        "shortLabel": {
+          "fi": "Arvioi, miten hyvin mielestänne opintoasiainneuvoston 2015 tiedekunnista kokoamat näkemykset (=väittämät) yliopiston rohkeista uudistusaskeleista näkyvät tänä päivänä yliopistossa.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Arvioi, miten hyvin mielestänne opintoasiainneuvoston 2015 tiedekunnista kokoamat näkemykset (=väittämät) yliopiston rohkeista uudistusaskeleista näkyvät tänä päivänä yliopistossa.",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Koulutusuudistuksessa tavoiteltiin rohkeaa askelta Helsingin yliopiston koulutuksen uudistamisessa.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studying_boundaries",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Yliopistossa on asetettu selkeät rajat opiskeluajoille.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studying_in_center",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Oppiminen on nostettu keskiöön.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "worklife_talk_systematic",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Vuoropuhelu työelämän kanssa on systemaattista.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "teaching_methods_up_to_date",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Opetusmenetelmät ja opetusvälineet ovat ajanmukaisia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "support_up_to_date",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Opiskelun ja opetuksen tukipalvelut ovat ajanmukaisia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "teaching_material_up_to_date",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Opetussisällöt ovat ajanmukaisia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "outdated_material_removed",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Vanhentunut sisältö ja käytännöt on uskallettu karsia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "good_models_preserved",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Hyvin toimivat asiat on uskallettu säilyttää.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "good_models_preserved",
+        "index": 0,
+        "type": "INFOBOX",
+        "label": {
+          "fi": "Arvioi, miten hyvin seuraavat väittämät kuvaavat yliopiston koulutusuudistusta 2015-2017.",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Koulutusuudistuksessa tarkoitus oli tehdä kunkin tiedekunnan omista lähtökohdista tarvittavia muutoksia – kuitenkin yhteiseen suuntaan, mistä huolehti opintoasiainneuvosto.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "educational_reform_brave",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Koulutusuudistuksessa tehtiin rohkeita uudistuksia yhteiseen suuntaan.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "educational_reform_agile",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Muutoksia tehtiin ketterästi koulutusta kehittäen koulutusalojen tarpeiden mukaan.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "if_working_dont_change",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Yliopistossa lähdettiin tekemään asioita samalla tavalla, ellei ollut erityistä syytä tehdä toisella tavalla.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "faculty_preparation_and_participatory",
+        "index": 0,
+        "type": "SLIDER",
+        "label": {
+          "fi": "Omassa tiedekunnassani koulutusuudistusta valmisteltiin ja johdettiin osallistavasti.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "free_to_answer",
+        "index": 0,
         "type": "ENTITY",
+        "label": {
+          "fi": "Kommentoi halutessasi",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "AITO KOLMIPORTAISUUS JA BOLOGNAN PROSESSIN PERIAATTEET",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "information",
+        "index": 3,
+        "type": "INFOBOX",
         "shortLabel": {
           "fi": "Resurssit",
           "se": "",
@@ -505,17 +589,10 @@
           "en": ""
         },
         "description": {
-          "fi": "Mitä ovat koulutusohjelmien käytössä olevat resurssit? ",
+          "fi": "Helsingin yliopistossa Iso Pyörä koulutusuudistusta edeltävä isompi koulutusuudistus toteutettiin kansallisesti koordinoidun Bolognan prosessin yhteydessä vuosina 2003 - 2005. Silloin tavoitteena oli kaksiportaisen tutkintorakenteen muodostaminen sekä koulutuksen sisältöjen ydinaineksen uudistaminen. Kymmenen vuoden kuluessa (2015) oli ilmennyt, että tiedekunnissa ja aloilla oli vaihtelevasti toteutettu Bolognan prosessin tavoitteita ja koulutus oli edelleen hyvin vaihtelevaa rakenteiltaan eri tiedekunnissa, mikä muun muassa hakijan näkökulmasta vaikuttaa hajanaiselta.\nBolognan prosessin mukainen koulutusrakenne oli jäänyt keskeneräiseksi yliopistossa: alempi ja ylempi korkeakoulututkinto eivät olleet kaikilla aloilla profiililtaan ja sisällöltään itsenäisiä tutkintoja. Siten kaksiportaisen tutkintorakenteen hyödyt eivät olleet riittävästi tulleet yliopiston hyväksi. Lisäksi yliopiston kansainvälinen neuvottelukunta (International Advisory Board, IAB) ja kansainvälinen auditointiryhmä olivat myös kannustaneet yliopistoa koulutusuudistuksiin.\nIso Pyörä koulutusuudistuksen yksi keskeinen tarkoitus oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti. Ks. kuvio alla. ",
           "se": "",
           "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": ["teaching_resources", "resourcing"]
+        }
       },
       {
         "id": "resource_conflicts",
@@ -587,7 +664,7 @@
           "en": ""
         }
       }
-    ] 
+    ]
   },
   {
     "title": {
@@ -621,8 +698,8 @@
           "se": "",
           "en": ""
         },
-        "relatedYearlyQuestions": ["cooperation_success", "recruitment_influence", "employability" ]
+        "relatedYearlyQuestions": ["cooperation_success", "recruitment_influence", "employability"]
       }
-    ] 
+    ]
   }
 ]

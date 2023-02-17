@@ -51,7 +51,11 @@ describe("Previous year's answers", () => {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[2]}`)
 
     cy.selectYear(new Date().getFullYear())
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click().type('koira').wait(50)
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
+      .find('.editor-class')
+      .click()
+      .type('koira')
+      .wait(50)
 
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')

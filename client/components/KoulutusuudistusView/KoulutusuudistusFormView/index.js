@@ -67,9 +67,9 @@ const KoulutusuudistusFormView = ({ room }) => {
             }}
           >
             <Link data-cy={`link-to-old-${room}-answers`} to={targetURL} target="_blank">
-              <h4>
+              <p style={{ fontWeight: 'bold', fontSize: '16px' }}>
                 Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />{' '}
-              </h4>
+              </p>
             </Link>
           </p>
         </div>
