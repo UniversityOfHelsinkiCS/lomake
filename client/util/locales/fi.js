@@ -48,6 +48,7 @@ export default {
 
     yearlyAssessment: 'Vuosikatsaus',
     katselmus: 'Katselmus',
+    koulutusuudistus: 'Koulutusuudistus',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
