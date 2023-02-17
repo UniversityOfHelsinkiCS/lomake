@@ -60,11 +60,12 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
                     const { id, type, required, no_color } = part
-                    if (type === 'ENTITY' || type === 'MEASURES') partNumber++
+                    if (type === 'ENTITY' || type === 'MEASURES' || type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
+                      partNumber++
 
                     const idsToCheck = []
 
-                    if (type === 'TEXTAREA' || type === 'ENTITY') {
+                    if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'CHOOSE-RADIO' || part.type === 'SLIDER') {
                       idsToCheck.push(`${id}_text`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Radio, Form } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import positiveEmoji from 'Assets/sunglasses.png'
@@ -8,7 +8,6 @@ import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
-import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
 
@@ -18,36 +17,25 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const mapColorToImage = {
-  green: positiveEmoji,
-  yellow: neutralEmoji,
-  red: negativeEmoji,
-}
-
-const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
+const ChooseRadio = ({
+  id,
+  label,
+  description,
+  required,
+  noColor,
+  number,
+  previousYearsAnswers,
+  extrainfo,
+  radioOptions,
+}) => {
   const { t } = useTranslation()
+  const [state, setState] = useState({ value: '' })
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
-  const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
 
-  const EntityLastYearsAccordion = () => {
-    if (!previousAnswerText && !previousAnswerColor) return null
-    return (
-      <LastYearsAnswersAccordion>
-        {previousAnswerColor && (
-          <img
-            alt="previous-answer-color"
-            style={{ width: '40px', height: 'auto' }}
-            src={mapColorToImage[previousAnswerColor]}
-          />
-        )}
-        <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
-      </LastYearsAnswersAccordion>
-    )
-  }
   return (
     <div className="form-entity-area">
       <Divider />
@@ -73,9 +61,27 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
-      <Textarea id={id} label={label} EntityLastYearsAccordion={EntityLastYearsAccordion} />
+      {radioOptions ? (
+        <Form>
+          {radioOptions.map(o => {
+            return (
+              <Form.Field>
+                <Radio
+                  label={o.label}
+                  name="radioGroup"
+                  value={o.label}
+                  checked={state.value === o.label}
+                  onChange={() => setState({ value: o.label })}
+                />
+              </Form.Field>
+            )
+          })}
+        </Form>
+      ) : (
+        <p>Missing options</p>
+      )}
     </div>
   )
 }
 
-export default Entity
+export default ChooseRadio

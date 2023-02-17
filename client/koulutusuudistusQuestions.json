@@ -1,0 +1,628 @@
+[
+  {
+    "title": {
+      "fi": "Lähtötiedot",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "base-information-0",
+        "index": 0,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+          {"fi": [
+          {"label": "Ryhmä"},
+          {"label": "Yksitäinen vastaaja"}
+          ]}
+      },
+      {
+        "id": "base-information-1",
+        "index": 1,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+          {"fi": [
+          {"label": "Koulutusohjelman johtoryhmä"},
+          {"label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"},
+          {"label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)"},
+          {"label": "Tutkijakoulun johtokunta"},
+          {"label": "Opintoasiainneuvosto"},
+          {"label": "Katselmuksen arviointiryhmä"}
+          ]}
+      },
+      {
+        "id": "base-information-2",
+        "index": 2,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+        {"fi": [
+        {"label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)"},
+        {"label": "opetus- ja tutkimushenkilökunta"},
+        {"label": "hallinto- tai muu henkilökunta"},
+        {"label": "opiskelija"},
+        {"label": "väitöskirjatutkija"},
+        {"label": "alumni"}
+        ]}
+      },
+      {
+        "id": "base-information-3",
+        "index": 3,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": 
+        {"fi": [
+        {"label": "kanditason koulutus"},
+        {"label": "maisteritason koulutus"},
+        {"label": "tohtoritason koulutus"},
+        {"label": "kaikki koulutustasot"}
+        ]}
+      },
+      {
+        "id": "base-information-4",
+        "index": 4,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": []
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "knowledge_lead",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus on osaamisperustaista.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus on osaamisperustaista.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "skills_for_worklife",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus on sisällöltään tulevaisuuden työelämäntarpeita ennakoivaa.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "degrees_give_skills_for_digitalization",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia digitalisoituneessa toimintaympäristössä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "Digitalization_and_university",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "multiple_environments",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studying_process",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studytrack_choices",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "diverse_studies_inside_studytracks",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_international_appeal",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto on kansainvälisesti houkutteleva opiskelupaikka.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_international_professionals",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi":  "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_forerunner",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_practices_widely",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_improve_conversations",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_educates_future",
+        "index": 0,
+        "type": "SLIDER",
+        "shortLabel": {
+          "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Helsingin yliopisto kouluttaa tulevaisuuden tekijöitä tulevaisuuden työelämään.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "OPISKELUPROSESSIN SUJUVUUS",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "programme_structures",
+        "index": 1,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Koulutusrakenteet",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "KOULUTUSRAKENTEET",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten koulutusrakenteet tukevat valmistumista ja opiskelun etenemistä?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [ "learning_outcomes", "curriculum"]
+      },
+      {
+        "id": "master_transfer",
+        "index": 2,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Maisterisiirtymä",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "SIIRTYMINEN MAISTERIIN",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten siirtyminen kandiohjelmasta maisteriohjelmaan sujuu?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [ "guidance"]
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUKSEN KOKONAISRAKENNE",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "resources",
+        "index": 3,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Resurssit",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "RESURSSIT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Mitä ovat koulutusohjelmien käytössä olevat resurssit? ",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["teaching_resources", "resourcing"]
+      },
+      {
+        "id": "resource_conflicts",
+        "index": 4,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Resurssien sopivuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "RESURSSIEN SOPIVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Onko koulutusohjelman opetussuunnitelman ja resurssien välillä kohtaanto-ongelmia",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["measures"]
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "KOULUTUKSEN KOKONAISRAKENNE",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "resources_information_used",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja ja tietolähteitä käytitte?",
+          "se": "Vilka uppgifter skulle ni ytterligare ha behövt?",
+          "en": "What other information and sources of information did you use?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "resources_information_needed",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitä tietoja jäitte kaipaamaan?",
+          "se": "Vilka uppgifter skulle ni ha behövt?",
+          "en": "What information would you have needed?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUSOHJELMAN ASEMA",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "status",
+        "index": 5,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Ohjelman asema",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "OHJELMAN ASEMA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Miten henkilöstön rekrytointi toimii koulutusohjelman tarpeiden näkökulmasta?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": ["cooperation_success", "recruitment_influence", "employability" ]
+      }
+    ] 
+  }
+]

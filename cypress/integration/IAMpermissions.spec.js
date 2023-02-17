@@ -130,8 +130,8 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').type('random')
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click().wait(200)
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report] [contenteditable=true]').type('random').wait(100)
 
     cy.visit('/')
     cy.reload()
