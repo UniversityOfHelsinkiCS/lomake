@@ -31,7 +31,7 @@ describe('ReportPage tests', () => {
     cy.selectYear(defaultYears[0])
 
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click().wait(100)
+    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click().wait(200)
     cy.get('[data-cy=textarea-learning_outcomes] [contenteditable]').type('test words')
 
     cy.visit('/')
