@@ -11,6 +11,7 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
+import OldAnswersSummary from './OldAnswersSummary'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -24,7 +25,18 @@ const mapColorToImage = {
   red: negativeEmoji,
 }
 
-const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
+const Entity = ({
+  id,
+  label,
+  description,
+  required,
+  noColor,
+  number,
+  previousYearsAnswers,
+  extrainfo,
+  katselmus = false,
+  relatedYearlyAnswers = null,
+}) => {
   const { t } = useTranslation()
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -74,6 +86,7 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </p>
+      {katselmus && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
