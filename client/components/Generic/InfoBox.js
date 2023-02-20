@@ -3,28 +3,10 @@ import { Divider } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
 
 import { colors } from 'Utilities/common'
+import studyPath from 'Assets/koulutusuudistus/study_path.png'
 import './Generic.scss'
 
-// const mapColorToValid = {
-//   VIHREÄ: 'green',
-//   KELTAINEN: 'yellow',
-//   PUNAINEN: 'red',
-// }
-
-const InfoBox = ({
-  // id,
-  label,
-  description,
-  // required,
-  // noColor,
-  // number,
-  // previousYearsAnswers,
-  extrainfo,
-  // radioOptions,
-}) => {
-  // const { t } = useTranslation()
-  // const [state, setState] = useState({ value: '' })
-
+const InfoBox = ({ label, description, extrainfo, image }) => {
   return (
     <div className="form-entity-area">
       <Divider />
@@ -39,10 +21,11 @@ const InfoBox = ({
           fontSize: '16px',
         }}
       >
-        {description}
+        <p style={{ whiteSpace: 'pre-line' }}>{description}</p>
         <p className="form-question-extrainfo">{extrainfo}</p>
         <br />
         {label}
+        {image ? <img src={studyPath} alt={image.alt} /> : null}
       </div>
     </div>
   )

@@ -10,7 +10,7 @@ import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
-import calendarImage from 'Assets/calendar.jpg'
+import bigWheel from 'Assets/big_wheel.jpg'
 import Form from './KoulutusuudistusForm'
 
 import questions from '../../../koulutusuudistusQuestions.json'
@@ -49,7 +49,7 @@ const KoulutusuudistusFormView = ({ room }) => {
             <div style={{ marginBottom: '2em' }}>
               <Button onClick={() => history.push('/')} icon="arrow left" />
             </div>
-            <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
+            <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
