@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Divider, Radio, Form } from 'semantic-ui-react'
 
 import { colors } from 'Utilities/common'
-import SmileyColors from './SmileyColors'
 import './Generic.scss'
 
 const mapColorToValid = {
@@ -11,22 +10,16 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const ChooseRadio = ({
-  id,
-  label,
-  description,
-  required,
-  noColor,
-  number,
-  previousYearsAnswers,
-  extrainfo,
-  radioOptions,
-}) => {
+const ChooseRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
   const [state, setState] = useState({ value: '' })
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
+  }
+
+  const generateKey = label => {
+    return `${label}_${new Date().getTime()}`
   }
 
   return (
@@ -39,7 +32,6 @@ const ChooseRadio = ({
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <SmileyColors id={id} />}
       </div>
       <div
         className="entity-description"
@@ -56,10 +48,9 @@ const ChooseRadio = ({
       </div>
       {radioOptions ? (
         <Form>
-          {radioOptions.map((o, index) => {
+          {radioOptions.map(o => {
             return (
-              // eslint-disable-next-line react/no-array-index-key
-              <Form.Field key={index}>
+              <Form.Field key={generateKey(o.label)}>
                 <Radio
                   label={o.label}
                   name="radioGroup"

@@ -21,12 +21,14 @@ const TableRow = ({
   const lang = useSelector(state => state.language)
 
   const programme = selectedAnswers.find(a => a.programme === p.key)
-  // eslint-disable-next-line no-nested-ternary
-  const targetURL = katselmus
-    ? `/katselmus/form/${p.key}`
-    : koulutusuudistus
-    ? `/koulutusuudistus/form/${p.key}`
-    : `/form/${p.key}`
+
+  let targetURL = `/form/${p.key}`
+
+  if (katselmus) {
+    targetURL = `/katselmus/form/${p.key}`
+  } else if (koulutusuudistus) {
+    targetURL = `/koulutusuudistus/form/${p.key}`
+  }
 
   const lastYearsAnswers =
     oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)

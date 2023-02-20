@@ -44,17 +44,16 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    // eslint-disable-next-line no-nested-ternary
-    const selectedAnswers = katselmus
-      ? []
-      : koulutusuudistus
-      ? []
-      : answersByYear({
-          year,
-          tempAnswers: answers,
-          oldAnswers,
-          draftYear: draftYear && draftYear.year,
-        })
+    let selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
+
+    if (katselmus || koulutusuudistus) {
+      selectedAnswers = []
+    }
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -88,12 +87,22 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
-    // eslint-disable-next-line no-nested-ternary
-    const questionsToShow = katselmus ? katselmusQuestions : koulutusuudistus ? koulutusuudistusQuestions : questions
+    let questionsToShow = questions
+
+    if (katselmus) {
+      questionsToShow = katselmusQuestions
+    } else if (koulutusuudistus) {
+      questionsToShow = koulutusuudistusQuestions
+    }
 
     const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
+        if (
+          cur.id.includes('information_needed') ||
+          cur.id.includes('information_used') ||
+          cur.type === 'TITLE' ||
+          cur.type === 'INFOBOX'
+        ) {
           return acc
         }
         return [
@@ -105,9 +114,16 @@ const ColorTable = React.memo(
       return [...acc, ...questionObjects]
     }, [])
 
+    let tableClassName = ''
+
+    if (katselmus) {
+      tableClassName = '-katselmus'
+    } else if (koulutusuudistus) {
+      tableClassName = '-koulutusuudistus'
+    }
+
     return (
-      // eslint-disable-next-line no-nested-ternary
-      <div className={`overview-color-grid${katselmus ? '-katselmus' : koulutusuudistus ? '-koulutusuudistus' : ''}`}>
+      <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
           <Input
