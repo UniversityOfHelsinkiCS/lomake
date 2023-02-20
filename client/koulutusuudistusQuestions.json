@@ -182,11 +182,38 @@
     },
     "parts": [
       {
+        "id": "outlining_questions_2015_study_council",
+        "index": 1,
+        "type": "INFOBOX",
+        "shortLabel": {
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla.",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla.",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Opintoasiainneuvoston 20.4.2015 hyväksymään projektisuunnitelmaan muotoiltiin koulutusuudistuksen (Iso Pyörä) tavoitteet.          ",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "relatedYearlyQuestions": []
+      },
+      {
         "id": "knowledge_lead",
         "index": 0,
         "type": "SLIDER",
         "label": {
           "fi": "Tutkintokoulutus on osaamisperustaista.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -202,9 +229,15 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
+
       {
         "id": "degrees_give_skills_for_digitalization",
         "index": 0,
@@ -214,15 +247,26 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
+
       {
         "id": "Digitalization_and_university",
         "index": 0,
         "type": "SLIDER",
         "label": {
           "fi": "Digitalisoituminen on integroitunut yliopiston opiskeluympäristöön.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -238,6 +282,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -247,6 +296,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -262,6 +316,12 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -271,6 +331,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Hakukohteet ovat pääsääntöisesti useamman oppiaineen kokonaisuuksia, joissa oppiaineen tai suuntautumisvaihtoehdon tarkentuminen tapahtuu opintojen edetessä.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -286,6 +351,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -295,6 +365,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -310,6 +385,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -319,6 +399,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -334,6 +419,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -346,6 +436,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -355,6 +450,11 @@
         "type": "ENTITY",
         "label": {
           "fi": "Kommentoi halutessasi",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -401,6 +501,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -410,6 +515,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Oppiminen on nostettu keskiöön.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -425,6 +535,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -434,6 +549,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Opetusmenetelmät ja opetusvälineet ovat ajanmukaisia.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -449,6 +569,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -458,6 +583,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Opetussisällöt ovat ajanmukaisia.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -473,6 +603,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -485,6 +620,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -494,6 +634,11 @@
         "type": "INFOBOX",
         "label": {
           "fi": "Arvioi, miten hyvin seuraavat väittämät kuvaavat yliopiston koulutusuudistusta 2015-2017.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -514,6 +659,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -523,6 +673,11 @@
         "type": "SLIDER",
         "label": {
           "fi": "Muutoksia tehtiin ketterästi koulutusta kehittäen koulutusalojen tarpeiden mukaan.",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -538,6 +693,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -550,6 +710,11 @@
           "se": "",
           "en": ""
         },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
         "required": true,
         "relatedYearlyQuestions": []
       },
@@ -559,6 +724,11 @@
         "type": "ENTITY",
         "label": {
           "fi": "Kommentoi halutessasi",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
           "se": "",
           "en": ""
         },
