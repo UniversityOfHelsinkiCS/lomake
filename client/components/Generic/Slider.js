@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Radio } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
-import SmileyColors from './SmileyColors'
 import './Generic.scss'
 import './Slider.scss'
 
@@ -11,7 +10,7 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const Slider = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
+const Slider = ({ id, label, description, required, number, previousYearsAnswers, extrainfo }) => {
   const [state, setState] = useState(3)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -19,10 +18,9 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
 
-  const handleSlider = (event, value) => {
-    // const x = document.getElementById(`slider-input-${id}`).value
-
-    setState(value)
+  const handleSlider = () => {
+    const x = document.getElementById(`slider-input-${id}`).value
+    setState(x)
   }
 
   return (
@@ -35,7 +33,6 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <SmileyColors id={id} />}
       </div>
       {description !== null && description?.length > 0 ? (
         <div
@@ -55,7 +52,7 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
       <div className="slider-container">
         <input
           className="slider"
-          list="amazing"
+          list="slider-values"
           id={`slider-input-${id}`}
           step="1"
           type="range"
@@ -64,14 +61,15 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
           value={state}
           onChange={handleSlider}
         />
-        <datalist className="datalist" id="amazing">
-          <option value={1}>Erittäin huonosti</option>
-          <option value={2}>Osittain huonosti</option>
-          <option value={3}>En tiedä</option>
-          <option value={4}>Osittain hyvin </option>
-          <option value={5}>Erittäin hyvin</option>
+        <datalist className="datalist" id="slider-values">
+          <option value="1">Erittäin huonosti</option>
+          <option value="2">Osittain huonosti</option>
+          <option value="3">Ei hyvin eikä huonosti</option>
+          <option value="4">Osittain hyvin </option>
+          <option value="5">Erittäin hyvin</option>
         </datalist>
       </div>
+      <Radio toggle label="En tiedä" style={{ display: 'block' }} />
     </div>
   )
 }
