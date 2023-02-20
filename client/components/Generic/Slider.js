@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Divider } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
@@ -13,7 +12,6 @@ const mapColorToValid = {
 }
 
 const Slider = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
-  const { t } = useTranslation()
   const [state, setState] = useState(3)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -22,9 +20,8 @@ const Slider = ({ id, label, description, required, noColor, number, previousYea
   }
 
   const handleSlider = (event, value) => {
-    const x = document.getElementById(`slider-input-${id}`).value
+    // const x = document.getElementById(`slider-input-${id}`).value
 
-    console.log(x)
     setState(value)
   }
 

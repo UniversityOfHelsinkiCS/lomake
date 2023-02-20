@@ -46,7 +46,7 @@ export default {
     edit: 'Muokkaa',
     delete: 'Poista',
 
-    yearlyAssessment: 'Vuosikatsaus',
+    yearlyAssessment: 'Vuosiseuranta',
     katselmus: 'Katselmus',
     koulutusuudistus: 'Koulutusuudistus',
   },

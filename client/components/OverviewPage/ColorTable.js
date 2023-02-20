@@ -44,6 +44,7 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
+    // eslint-disable-next-line no-nested-ternary
     const selectedAnswers = katselmus
       ? []
       : koulutusuudistus
@@ -87,8 +88,9 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
+    // eslint-disable-next-line no-nested-ternary
     const questionsToShow = katselmus ? katselmusQuestions : koulutusuudistus ? koulutusuudistusQuestions : questions
-    console.log(questionsToShow)
+
     const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
@@ -104,6 +106,7 @@ const ColorTable = React.memo(
     }, [])
 
     return (
+      // eslint-disable-next-line no-nested-ternary
       <div className={`overview-color-grid${katselmus ? '-katselmus' : koulutusuudistus ? '-koulutusuudistus' : ''}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
@@ -125,7 +128,6 @@ const ColorTable = React.memo(
         />
         <div className="sticky-header" />
         {sortedProgrammes.map(p => {
-          console.log(p)
           return (
             <TableRow
               p={p}

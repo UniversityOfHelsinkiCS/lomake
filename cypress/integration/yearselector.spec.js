@@ -51,6 +51,7 @@ describe("Previous year's answers", () => {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[2]}`)
 
     cy.selectYear(new Date().getFullYear())
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
       .click()

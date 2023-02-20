@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
 
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
@@ -25,8 +24,6 @@ const mapColorToImage = {
 }
 
 const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
-  const { t } = useTranslation()
-
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]

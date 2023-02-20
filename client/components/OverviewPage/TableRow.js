@@ -21,6 +21,7 @@ const TableRow = ({
   const lang = useSelector(state => state.language)
 
   const programme = selectedAnswers.find(a => a.programme === p.key)
+  // eslint-disable-next-line no-nested-ternary
   const targetURL = katselmus
     ? `/katselmus/form/${p.key}`
     : koulutusuudistus

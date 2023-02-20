@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
 
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
 
@@ -28,7 +22,6 @@ const ChooseRadio = ({
   extrainfo,
   radioOptions,
 }) => {
-  const { t } = useTranslation()
   const [state, setState] = useState({ value: '' })
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -65,6 +58,7 @@ const ChooseRadio = ({
         <Form>
           {radioOptions.map((o, index) => {
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Form.Field key={index}>
                 <Radio
                   label={o.label}

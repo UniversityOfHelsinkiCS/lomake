@@ -1,35 +1,29 @@
-import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
+import React from 'react'
+import { Divider } from 'semantic-ui-react'
+// import { useTranslation } from 'react-i18next'
 
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
-import SmileyColors from './SmileyColors'
 import './Generic.scss'
 
-const mapColorToValid = {
-  VIHREÄ: 'green',
-  KELTAINEN: 'yellow',
-  PUNAINEN: 'red',
-}
+// const mapColorToValid = {
+//   VIHREÄ: 'green',
+//   KELTAINEN: 'yellow',
+//   PUNAINEN: 'red',
+// }
 
 const InfoBox = ({
-  id,
+  // id,
   label,
   description,
-  required,
-  noColor,
-  number,
-  previousYearsAnswers,
+  // required,
+  // noColor,
+  // number,
+  // previousYearsAnswers,
   extrainfo,
-  radioOptions,
+  // radioOptions,
 }) => {
-  const { t } = useTranslation()
-  const [state, setState] = useState({ value: '' })
+  // const { t } = useTranslation()
+  // const [state, setState] = useState({ value: '' })
 
   return (
     <div className="form-entity-area">
