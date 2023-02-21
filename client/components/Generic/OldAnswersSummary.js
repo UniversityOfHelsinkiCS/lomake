@@ -3,6 +3,10 @@ import { useSelector } from 'react-redux'
 // import { useTranslation } from 'react-i18next'
 import { Grid, Icon } from 'semantic-ui-react'
 
+const colorCircle = color => {
+  return <span className={`answer-circle-${color || 'gray'}`} />
+}
+
 const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
   // const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -15,7 +19,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
 
   return (
     <div className="summary-container">
-      <h4>Teemaan liittyvien vuosiseurantakysymyksien vastaukset</h4>
+      <h4>Teemaan liittyvien vuosiseurantakysymyksien vastaukset tarkastelujaksolta</h4>
       <div className="summary-grid" data-cy={`${partId}-summary`}>
         <Grid columns={5}>
           <Grid.Row className="row">
@@ -27,11 +31,11 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
           </Grid.Row>
           {keys.map(k => {
             return (
-              <Grid.Row className="row">
+              <Grid.Row className="row" key={k}>
                 <Grid.Column>{relatedYearlyAnswers[k].details.shortLabel[lang]}</Grid.Column>
-                <Grid.Column>{relatedYearlyAnswers[k][2020].light}</Grid.Column>
-                <Grid.Column>{relatedYearlyAnswers[k][2021].light}</Grid.Column>
-                <Grid.Column>{relatedYearlyAnswers[k][2022].light}</Grid.Column>
+                <Grid.Column>{colorCircle(relatedYearlyAnswers[k][2020].light)}</Grid.Column>
+                <Grid.Column>{colorCircle(relatedYearlyAnswers[k][2021].light)}</Grid.Column>
+                <Grid.Column>{colorCircle(relatedYearlyAnswers[k][2022].light)}</Grid.Column>
                 <Grid.Column>
                   <Icon name="angle down" />
                 </Grid.Column>
