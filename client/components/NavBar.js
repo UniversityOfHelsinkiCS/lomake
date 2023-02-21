@@ -53,6 +53,14 @@ export default () => {
     )
   }
 
+  const GoToKoulutusUudistusButton = () => {
+    return (
+      <Menu.Item data-cy="nav-koulutusuudistus" as={Link} to="/koulutusuudistus" name="koulutusuudistus">
+        {t('koulutusuudistus')}
+      </Menu.Item>
+    )
+  }
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
@@ -60,6 +68,7 @@ export default () => {
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
       {user.superAdmin ? <GoToKatselmusButton /> : null}
+      {user.superAdmin ? <GoToKoulutusUudistusButton /> : null}
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

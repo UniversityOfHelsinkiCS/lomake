@@ -60,7 +60,6 @@ const Entity = ({
       </LastYearsAnswersAccordion>
     )
   }
-
   return (
     <div className="form-entity-area">
       <Divider />
@@ -73,7 +72,7 @@ const Entity = ({
         </div>
         {!noColor && <SmileyColors id={id} />}
       </div>
-      <p
+      <div
         className="entity-description"
         style={{
           lineHeight: 2,
@@ -85,7 +84,7 @@ const Entity = ({
       >
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
-      </p>
+      </div>
       {katselmus && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>

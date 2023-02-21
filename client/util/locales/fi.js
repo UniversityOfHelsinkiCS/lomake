@@ -46,8 +46,9 @@ export default {
     edit: 'Muokkaa',
     delete: 'Poista',
 
-    yearlyAssessment: 'Vuosikatsaus',
+    yearlyAssessment: 'Vuosiseuranta',
     katselmus: 'Katselmus',
+    koulutusuudistus: 'Koulutusuudistus',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

@@ -6,14 +6,29 @@ import { Button } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import ColorTableCell from './ColorTableCell'
 
-const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, katselmus = false }) => {
+const TableRow = ({
+  p,
+  selectedAnswers,
+  tableIds,
+  setModalData,
+  setProgramControlsToShow,
+  katselmus = false,
+  koulutusuudistus = false,
+}) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
   const lang = useSelector(state => state.language)
 
   const programme = selectedAnswers.find(a => a.programme === p.key)
-  const targetURL = katselmus ? `/katselmus/form/${p.key}` : `/form/${p.key}`
+
+  let targetURL = `/form/${p.key}`
+
+  if (katselmus) {
+    targetURL = `/katselmus/form/${p.key}`
+  } else if (koulutusuudistus) {
+    targetURL = `/koulutusuudistus/form/${p.key}`
+  }
 
   const lastYearsAnswers =
     oldAnswers && oldAnswers.years && oldAnswers.years.includes(year - 1)

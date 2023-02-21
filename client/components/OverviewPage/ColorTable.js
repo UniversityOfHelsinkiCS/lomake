@@ -9,6 +9,7 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
 import katselmusQuestions from '../../katselmusQuestions.json'
+import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -24,6 +25,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
     katselmus = false,
+    koulutusuudistus = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -42,14 +44,16 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    const selectedAnswers = katselmus
-      ? []
-      : answersByYear({
-          year,
-          tempAnswers: answers,
-          oldAnswers,
-          draftYear: draftYear && draftYear.year,
-        })
+    let selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
+
+    if (katselmus || koulutusuudistus) {
+      selectedAnswers = []
+    }
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -83,11 +87,22 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
-    const questionsToShow = katselmus ? katselmusQuestions : questions
+    let questionsToShow = questions
+
+    if (katselmus) {
+      questionsToShow = katselmusQuestions
+    } else if (koulutusuudistus) {
+      questionsToShow = koulutusuudistusQuestions
+    }
 
     const tableIds = questionsToShow.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (cur.id.includes('information_needed') || cur.id.includes('information_used') || cur.type === 'TITLE') {
+        if (
+          cur.id.includes('information_needed') ||
+          cur.id.includes('information_used') ||
+          cur.type === 'TITLE' ||
+          cur.type === 'INFOBOX'
+        ) {
           return acc
         }
         return [
@@ -99,8 +114,16 @@ const ColorTable = React.memo(
       return [...acc, ...questionObjects]
     }, [])
 
+    let tableClassName = ''
+
+    if (katselmus) {
+      tableClassName = '-katselmus'
+    } else if (koulutusuudistus) {
+      tableClassName = '-koulutusuudistus'
+    }
+
     return (
-      <div className={`overview-color-grid${katselmus ? '-katselmus' : ''}`}>
+      <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
           <Input
@@ -130,6 +153,7 @@ const ColorTable = React.memo(
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
               katselmus={katselmus}
+              koulutusuudistus={koulutusuudistus}
             />
           )
         })}
