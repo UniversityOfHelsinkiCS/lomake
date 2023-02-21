@@ -14,6 +14,7 @@ import calendarImage from 'Assets/calendar.jpg'
 import EvaluationForm from './KatselmusForm'
 
 import questions from '../../../katselmusQuestions.json'
+import yearlyQuestions from '../../../questions.json'
 
 const KatselmusFormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -48,7 +49,7 @@ const KatselmusFormView = ({ room }) => {
 
       result[year] = { text, light }
     })
-
+    result.details = yearlyQuestions.flatMap(section => section.parts).find(part => part.id === relatedQuestion)
     return result
   }
 

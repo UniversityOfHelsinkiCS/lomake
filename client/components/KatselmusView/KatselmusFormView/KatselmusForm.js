@@ -6,6 +6,8 @@ import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import Section from './KatselmusSection'
 
+import './EvaluationForm.scss'
+
 const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
   const lang = useSelector(state => state.language)
 
