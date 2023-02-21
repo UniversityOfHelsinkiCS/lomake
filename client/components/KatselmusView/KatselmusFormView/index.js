@@ -11,6 +11,9 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
+import positiveEmoji from 'Assets/sunglasses.png'
+import neutralEmoji from 'Assets/neutral.png'
+import negativeEmoji from 'Assets/persevering.png'
 import EvaluationForm from './KatselmusForm'
 
 import questions from '../../../katselmusQuestions.json'
@@ -94,6 +97,56 @@ const KatselmusFormView = ({ room }) => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('katselmus')} 2023
           </h3>
+
+          <div className="hide-in-print-mode">
+            <p>
+              Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <b>kolmen viime vuoden ajalta</b>.
+            </p>
+            <p>Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista.</p>
+            <p>{t('formView:info2')}</p>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              alt="positive-emoji"
+              src={positiveEmoji}
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {t('positive')}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
+            <img
+              src={neutralEmoji}
+              alt="neutral-emoji"
+              style={{
+                width: '40px',
+                height: 'auto',
+                marginRight: '5px',
+                marginTop: '5px',
+                marginBottom: '5px',
+              }}
+            />{' '}
+            {t('neutral')}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
+            <img
+              src={negativeEmoji}
+              alt="negative-emoji"
+              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
+            />{' '}
+            {t('negative')}
+          </div>
+
+          <div>
+            <br /> <br />
+            <p>
+              Alla linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia edellisen kolmen
+              vuoden ajalta.
+            </p>
+            <p>
+              Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä kyseiseen teemaan
+              vuosiseurannan kysymysten vastauksista.
+            </p>
+          </div>
 
           <div
             className="past-answers-link"
