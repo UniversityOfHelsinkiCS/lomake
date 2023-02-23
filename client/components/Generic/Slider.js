@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, Radio } from 'semantic-ui-react'
+import { Divider, Radio, Popup, Icon } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import './Generic.scss'
 import './Slider.scss'
@@ -31,6 +31,19 @@ const Slider = ({ id, label, description, required, number, previousYearsAnswers
           <h3>
             {number}. {label}{' '}
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            <Popup
+              content={
+                <>
+                  <p>1 = Erittäin huonosti</p>
+                  <p>2 = Osittain huonosti</p>
+                  <p>3 = Ei hyvin eikä huonosti</p>
+                  <p>4 = Osittain huonosti</p>
+                  <p>5 = Erittäin hyvin</p>
+                </>
+              }
+              popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
+              trigger={<Icon style={{ marginLeft: '0.5em' }} name="question circle outline" />}
+            />
           </h3>
         </div>
       </div>
@@ -50,26 +63,35 @@ const Slider = ({ id, label, description, required, number, previousYearsAnswers
         </div>
       ) : null}
       <div className="slider-container">
-        <input
-          className="slider"
-          list="slider-values"
-          id={`slider-input-${id}`}
-          step="1"
-          type="range"
-          min="1"
-          max="5"
-          value={state}
-          onChange={handleSlider}
-        />
-        <datalist className="datalist" id="slider-values">
+        <div className="slider-and-button-container">
+          <input
+            className="slider"
+            list="slider-values"
+            id={`slider-input-${id}`}
+            step="1"
+            type="range"
+            min="1"
+            max="5"
+            value={state}
+            onChange={handleSlider}
+          />
+          <Radio className="slider-button" toggle label="En tiedä" style={{ display: 'block' }} />
+        </div>
+        {/* <datalist className="datalist" id="slider-values">
           <option value="1">Erittäin huonosti</option>
           <option value="2">Osittain huonosti</option>
           <option value="3">Ei hyvin eikä huonosti</option>
           <option value="4">Osittain hyvin </option>
           <option value="5">Erittäin hyvin</option>
+        </datalist> */}
+        <datalist className="datalist" id="slider-values">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4 </option>
+          <option value="5">5</option>
         </datalist>
       </div>
-      <Radio toggle label="En tiedä" style={{ display: 'block' }} />
     </div>
   )
 }
