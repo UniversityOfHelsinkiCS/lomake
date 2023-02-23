@@ -1,0 +1,32 @@
+@import '../../../assets/colors.scss';
+
+.summary-container {
+ // background-color: $light-gray;
+ padding: 1em;
+}
+
+@mixin answer-circle-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+}
+
+.answer {
+  &-circle-green {
+    @include answer-circle-basics;
+    background: $background-green;
+  }
+  &-circle-yellow {
+    @include answer-circle-basics;
+    background: $background-yellow;
+  }
+  &-circle-red {
+    @include answer-circle-basics;
+    background: $background-red;
+  }
+  &-circle-gray {
+    @include answer-circle-basics;
+    background: $gray;
+  }
+}

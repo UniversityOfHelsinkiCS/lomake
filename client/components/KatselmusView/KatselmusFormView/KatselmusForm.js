@@ -6,7 +6,9 @@ import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import Section from './KatselmusSection'
 
-const Form = ({ questions, programmeKey }) => {
+import './EvaluationForm.scss'
+
+const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
   const lang = useSelector(state => state.language)
 
   const partComponentMap = {
@@ -61,6 +63,7 @@ const Form = ({ questions, programmeKey }) => {
           previousYearsAnswers={null}
           katselmus
           programme={programmeKey}
+          relatedYearlyAnswers={yearlyAnswers[part.id]}
         />
       </div>
     )
@@ -89,4 +92,4 @@ const Form = ({ questions, programmeKey }) => {
   )
 }
 
-export default Form
+export default EvaluationForm

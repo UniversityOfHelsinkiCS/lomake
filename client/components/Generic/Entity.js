@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
@@ -10,6 +11,7 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import SmileyColors from './SmileyColors'
 import './Generic.scss'
+import OldAnswersSummary from './OldAnswersSummary'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -23,7 +25,20 @@ const mapColorToImage = {
   red: negativeEmoji,
 }
 
-const Entity = ({ id, label, description, required, noColor, number, previousYearsAnswers, extrainfo }) => {
+const Entity = ({
+  id,
+  label,
+  description,
+  required,
+  noColor,
+  number,
+  previousYearsAnswers,
+  extrainfo,
+  katselmus = false,
+  relatedYearlyAnswers = null,
+}) => {
+  const { t } = useTranslation()
+
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
     previousAnswerColor = mapColorToValid[previousAnswerColor]
@@ -70,7 +85,8 @@ const Entity = ({ id, label, description, required, noColor, number, previousYea
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      <Textarea id={id} label={label} EntityLastYearsAccordion={EntityLastYearsAccordion} />
+      {katselmus && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
+      <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )
 }
