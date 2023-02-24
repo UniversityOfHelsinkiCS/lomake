@@ -1,7 +1,6 @@
 @import '../../../assets/colors.scss';
 
 .summary-container {
- // background-color: $light-gray;
  padding: 1em;
 }
 
@@ -29,4 +28,18 @@
     @include answer-circle-basics;
     background: $gray;
   }
+}
+
+
+.measures-count-circle {
+  display: flexbox;
+  align-items: center;
+  border-radius: 20%;
+  padding: 5px;
+  background: $background-blue;
+  
+}
+
+.old-answer-text {
+  white-space: pre-line;
 }

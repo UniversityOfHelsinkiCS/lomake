@@ -19,6 +19,41 @@ import EvaluationForm from './KatselmusForm'
 import questions from '../../../katselmusQuestions.json'
 import yearlyQuestions from '../../../questions.json'
 
+const handleMeasures = (yearData, relatedQuestion) => {
+  let count = 0
+  let text = ''
+  let i = 1
+  while (i < 6) {
+    if (yearData[`${relatedQuestion}_${i}_text`]) {
+      text += `${i}) ${yearData[`${relatedQuestion}_${i}_text`]}\n`
+      count = i
+    }
+    i++
+  }
+
+  return { text, ligth: null, count }
+}
+
+const findAnswers = (allOldAnswers, relatedQuestion) => {
+  const years = [2020, 2021, 2022]
+  const result = {}
+
+  years.forEach(year => {
+    const yearData = allOldAnswers.find(a => a.year === year)
+
+    if (relatedQuestion.includes('measure')) {
+      result[year] = handleMeasures(yearData.data, relatedQuestion)
+    } else {
+      const text = yearData.data[`${relatedQuestion}_text`]
+      const light = yearData.data[`${relatedQuestion}_light`]
+
+      result[year] = { text, light }
+    }
+  })
+  result.details = yearlyQuestions.flatMap(section => section.parts).find(part => part.id === relatedQuestion)
+  return result
+}
+
 const KatselmusFormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -42,20 +77,6 @@ const KatselmusFormView = ({ room }) => {
     dispatch(getProgramme(room))
   }, [lang, room])
 
-  const findAnswers = relatedQuestion => {
-    const years = [2020, 2021, 2022]
-    const result = {}
-    years.forEach(year => {
-      const yearData = allOldAnswers.find(a => a.year === year)
-      const text = yearData.data[`${relatedQuestion}_text`]
-      const light = yearData.data[`${relatedQuestion}_light`]
-
-      result[year] = { text, light }
-    })
-    result.details = yearlyQuestions.flatMap(section => section.parts).find(part => part.id === relatedQuestion)
-    return result
-  }
-
   const yearlyAnswers = useMemo(() => {
     const result = {}
     questions.forEach(q => {
@@ -65,7 +86,7 @@ const KatselmusFormView = ({ room }) => {
             if (result[part.id] === undefined) {
               result[part.id] = {}
             }
-            result[part.id][relatedQuestion] = findAnswers(relatedQuestion)
+            result[part.id][relatedQuestion] = findAnswers(allOldAnswers, relatedQuestion)
           })
         }
       })
