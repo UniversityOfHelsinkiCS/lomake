@@ -12,6 +12,7 @@ const mapColorToValid = {
 
 const Slider = ({ id, label, description, required, number, previousYearsAnswers, extrainfo }) => {
   const [state, setState] = useState(3)
+  const [sliderClicked, setSliderCLicked] = useState(false)
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
@@ -67,15 +68,23 @@ const Slider = ({ id, label, description, required, number, previousYearsAnswers
           <input
             className="slider"
             list="slider-values"
+            style={{ backgroundColor: sliderClicked ? 'grey' : null }}
             id={`slider-input-${id}`}
             step="1"
             type="range"
             min="1"
             max="5"
+            disabled={sliderClicked}
             value={state}
             onChange={handleSlider}
           />
-          <Radio className="slider-button" toggle label="En tiedä" style={{ display: 'block' }} />
+          <Radio
+            className="slider-button"
+            toggle
+            onClick={() => setSliderCLicked(!sliderClicked)}
+            label="En tiedä"
+            style={{ display: 'block' }}
+          />
         </div>
         {/* <datalist className="datalist" id="slider-values">
           <option value="1">Erittäin huonosti</option>
