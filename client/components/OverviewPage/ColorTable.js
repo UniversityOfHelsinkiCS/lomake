@@ -95,27 +95,38 @@ const ColorTable = React.memo(
       questionsToShow = koulutusuudistusQuestions
     }
 
-    const tableIds = questionsToShow.reduce((acc, cur) => {
-      const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (
-          cur.id.includes('information_needed') ||
-          cur.id.includes('information_used') ||
-          cur.type === 'TITLE' ||
-          cur.type === 'INFOBOX'
-        ) {
-          return acc
-        }
-        return [
-          ...acc,
-          { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
-        ]
-      }, [])
+    let tableIds = null
 
-      return [...acc, ...questionObjects]
-    }, [])
+    const generateKey = label => {
+      return `${label}_${new Date().getTime()}`
+    }
+
+    if (koulutusuudistus) {
+      tableIds = questionsToShow.reduce((acc, cur) => {
+        return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
+      }, [])
+    } else {
+      tableIds = questionsToShow.reduce((acc, cur) => {
+        const questionObjects = cur.parts.reduce((acc, cur) => {
+          if (
+            cur.id.includes('information_needed') ||
+            cur.id.includes('information_used') ||
+            cur.type === 'TITLE' ||
+            cur.type === 'INFOBOX'
+          ) {
+            return acc
+          }
+          return [
+            ...acc,
+            { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+          ]
+        }, [])
+
+        return [...acc, ...questionObjects]
+      }, [])
+    }
 
     let tableClassName = ''
-
     if (katselmus) {
       tableClassName = '-katselmus'
     } else if (koulutusuudistus) {
