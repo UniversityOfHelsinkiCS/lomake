@@ -45,18 +45,31 @@ export default () => {
     )
   }
 
-  const GoToKatselmusButton = () => {
+  const GoToEvaluationButton = () => {
     return (
-      <Menu.Item data-cy="nav-katselmus" as={Link} to="/katselmus" name="katselmus">
-        {t('katselmus')}
+      <Menu.Item data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
+        {t('evaluation')}
       </Menu.Item>
     )
   }
 
-  const GoToKoulutusUudistusButton = () => {
+  const GoToDegreeReformGroup = () => {
     return (
-      <Menu.Item data-cy="nav-koulutusuudistus" as={Link} to="/koulutusuudistus" name="koulutusuudistus">
-        {t('koulutusuudistus')}
+      <Menu.Item data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
+        {t('degree-reform-group')}
+      </Menu.Item>
+    )
+  }
+
+  const GoToDegreeReformIndividual = () => {
+    return (
+      <Menu.Item
+        data-cy="nav-degree-reform-individual"
+        as={Link}
+        to="/degree-reform-individual/"
+        name="degree-reform-individual"
+      >
+        {t('degree-reform-individual')}
       </Menu.Item>
     )
   }
@@ -67,8 +80,9 @@ export default () => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
-      {user.superAdmin ? <GoToKatselmusButton /> : null}
-      {user.superAdmin ? <GoToKoulutusUudistusButton /> : null}
+      {user.superAdmin ? <GoToEvaluationButton /> : null}
+      {user.superAdmin ? <GoToDegreeReformGroup /> : null}
+      {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

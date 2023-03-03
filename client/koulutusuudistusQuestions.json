@@ -1,11 +1,115 @@
 [
   {
     "title": {
-      "fi": "Lähtötiedot",
+      "fi": "Taustatiedot",
       "se": "",
       "en": ""
     },
     "parts": [
+      {
+        "id": "base-information-0",
+        "index": 0,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Vastaajatyyppi (valitse)",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": { "fi": [{ "label": "Ryhmä" }, { "label": "Yksitäinen vastaaja" }] }
+      },
+      {
+        "id": "base-information-1",
+        "index": 1,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Valitse ryhmä",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            { "label": "Koulutusohjelman johtoryhmä" },
+            {
+              "label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"
+            },
+            { "label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)" },
+            { "label": "Tutkijakoulun johtokunta" },
+            { "label": "Opintoasiainneuvosto" },
+            { "label": "Katselmuksen arviointiryhmä" }
+          ]
+        }
+      },
+      {
+        "id": "base-information-2",
+        "index": 2,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "valitse taustatiedot",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            { "label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)" },
+            { "label": "opetus- ja tutkimushenkilökunta" },
+            { "label": "hallinto- tai muu henkilökunta" },
+            { "label": "opiskelija" },
+            { "label": "väitöskirjatutkija" },
+            { "label": "alumni" }
+          ]
+        }
+      },
       {
         "id": "base-information-3",
         "index": 3,
@@ -44,7 +148,7 @@
       {
         "id": "base-information-4",
         "index": 4,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "shortLabel": {
           "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
           "se": "",
@@ -72,7 +176,7 @@
   },
   {
     "title": {
-      "fi": "KOULUTUSUUDISTUKSEN TAVOITTEET",
+      "fi": "Koulutusuudistuksen tavoitteet",
       "se": "",
       "en": ""
     },
@@ -102,7 +206,7 @@
       {
         "id": "knowledge_lead",
         "index": 6,
-        "type": "SLIDER",
+        "type": "LIKERT",
         "label": {
           "fi": "Tutkintokoulutus on osaamisperustaista.",
           "se": "",
@@ -343,7 +447,7 @@
       {
         "id": "free_answer",
         "index": 20,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -617,7 +721,7 @@
       {
         "id": "study_council_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -766,7 +870,7 @@
       {
         "id": "three_stairs_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -950,7 +1054,7 @@
       {
         "id": "major_and_minor_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -1151,7 +1255,7 @@
       {
         "id": "bachelor_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -1335,7 +1439,7 @@
       {
         "id": "masters_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -1621,7 +1725,7 @@
       {
         "id": "international_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -1873,7 +1977,7 @@
       {
         "id": "phd_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Mikä yliopiston tohtoriohjelmissa on parasta? Miten ohjelmia tulisi kehittää?",
           "se": "",
@@ -2125,7 +2229,7 @@
       {
         "id": "studyprogramme_leading_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",
@@ -2275,7 +2379,7 @@
       {
         "id": "faculties_common_free_to_answer",
         "index": 0,
-        "type": "ENTITY",
+        "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
           "se": "",

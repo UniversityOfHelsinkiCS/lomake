@@ -3,7 +3,7 @@ import { Divider } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
 
 import { colors } from 'Utilities/common'
-import studyPath from 'Assets/koulutusuudistus/study_path.png'
+import studyPath from 'Assets/degreeReform/study_path.png'
 import './Generic.scss'
 
 const InfoBox = ({ label, description, extrainfo, image }) => {

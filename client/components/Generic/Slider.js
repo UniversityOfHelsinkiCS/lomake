@@ -35,11 +35,11 @@ const Slider = ({ id, label, description, required, number, previousYearsAnswers
             <Popup
               content={
                 <>
-                  <p>1 = Erittäin huonosti</p>
-                  <p>2 = Osittain huonosti</p>
-                  <p>3 = Ei hyvin eikä huonosti</p>
-                  <p>4 = Osittain huonosti</p>
-                  <p>5 = Erittäin hyvin</p>
+                  <p>1 = Täyin eri mieltä</p>
+                  <p>2 = Osittain eri mieltä§</p>
+                  <p>3 = Ei samaa eikä eri mieltä</p>
+                  <p>4 = Osittain samaa mieltä§</p>
+                  <p>5 = Täysin samaa mieltä</p>
                 </>
               }
               popper={{ id: 'popper-container', style: { zIndex: 2000 } }}

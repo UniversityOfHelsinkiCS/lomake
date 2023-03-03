@@ -8,7 +8,7 @@ import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
 import Likert from 'Components/Generic/Likert'
 import { colors, romanize } from 'Utilities/common'
-import Section from './KoulutusuudistusSection'
+import Section from './DegreeReformSection'
 
 const Form = ({ questions, programmeKey }) => {
   const lang = useSelector(state => state.language)
@@ -76,7 +76,7 @@ const Form = ({ questions, programmeKey }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          koulutusuudistus
+          form="degree-reform"
           programme={programmeKey}
           radioOptions={radioOptions}
           image={image}

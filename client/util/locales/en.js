@@ -51,7 +51,10 @@ export default {
     delete: 'Delete',
 
     yearlyAssessment: 'Yearly assessment',
-    katselmus: 'Katselmus',
+    evaluation: 'Evaluation',
+    'degree-reform': 'Degree reform',
+    'degree-reform-group': 'Degree reform group',
+    'degree-reform-individual': 'Degree reform individual',
   },
 
   aboutPage: {

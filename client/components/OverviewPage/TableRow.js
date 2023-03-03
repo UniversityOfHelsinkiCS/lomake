@@ -6,15 +6,7 @@ import { Button } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import ColorTableCell from './ColorTableCell'
 
-const TableRow = ({
-  p,
-  selectedAnswers,
-  tableIds,
-  setModalData,
-  setProgramControlsToShow,
-  katselmus = false,
-  koulutusuudistus = false,
-}) => {
+const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, form }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
@@ -24,10 +16,12 @@ const TableRow = ({
 
   let targetURL = `/form/${p.key}`
 
-  if (katselmus) {
-    targetURL = `/katselmus/form/${p.key}`
-  } else if (koulutusuudistus) {
-    targetURL = `/koulutusuudistus/form/${p.key}`
+  if (form === 'evaluation') {
+    targetURL = `/evaluation/form/${p.key}`
+  } else if (form === 'degree-reform') {
+    targetURL = `/degree-reform/form/${p.key}`
+  } else if (form === 'degree-reform-individual') {
+    targetURL = `/degree-reform-individual`
   }
 
   const lastYearsAnswers =

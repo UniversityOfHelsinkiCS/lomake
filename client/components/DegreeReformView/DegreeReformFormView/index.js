@@ -11,11 +11,11 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
-import Form from './KoulutusuudistusForm'
+import Form from './DegreeReformForm'
 
 import questions from '../../../koulutusuudistusQuestions.json'
 
-const KoulutusuudistusFormView = ({ room }) => {
+const DegreeReformFormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
@@ -38,11 +38,11 @@ const KoulutusuudistusFormView = ({ room }) => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  const targetURL = `/koulutusuudistus/previous-years/${room}`
+  const targetURL = `/degree-reform/previous-years/${room}`
 
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} koulutusuudistus />
+      <NavigationSidebar programmeKey={room} form="degree-reform" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -79,4 +79,4 @@ const KoulutusuudistusFormView = ({ room }) => {
   )
 }
 
-export default KoulutusuudistusFormView
+export default DegreeReformFormView

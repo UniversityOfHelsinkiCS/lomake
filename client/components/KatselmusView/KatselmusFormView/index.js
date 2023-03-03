@@ -19,6 +19,41 @@ import EvaluationForm from './KatselmusForm'
 import questions from '../../../katselmusQuestions.json'
 import yearlyQuestions from '../../../questions.json'
 
+const handleMeasures = (yearData, relatedQuestion) => {
+  let count = 0
+  let text = ''
+  let i = 1
+  while (i < 6) {
+    if (yearData[`${relatedQuestion}_${i}_text`]) {
+      text += `${i}) ${yearData[`${relatedQuestion}_${i}_text`]}\n`
+      count = i
+    }
+    i++
+  }
+
+  return { text, ligth: null, count }
+}
+
+const findAnswers = (allOldAnswers, relatedQuestion) => {
+  const years = [2020, 2021, 2022]
+  const result = {}
+
+  years.forEach(year => {
+    const yearData = allOldAnswers.find(a => a.year === year)
+
+    if (relatedQuestion.includes('measure')) {
+      result[year] = handleMeasures(yearData.data, relatedQuestion)
+    } else {
+      const text = yearData.data[`${relatedQuestion}_text`]
+      const light = yearData.data[`${relatedQuestion}_light`]
+
+      result[year] = { text, light }
+    }
+  })
+  result.details = yearlyQuestions.flatMap(section => section.parts).find(part => part.id === relatedQuestion)
+  return result
+}
+
 const KatselmusFormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -38,23 +73,9 @@ const KatselmusFormView = ({ room }) => {
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
 
   useEffect(() => {
-    document.title = `${t('katselmus')} - ${room}`
+    document.title = `${t('evaluation')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
-
-  const findAnswers = relatedQuestion => {
-    const years = [2020, 2021, 2022]
-    const result = {}
-    years.forEach(year => {
-      const yearData = allOldAnswers.find(a => a.year === year)
-      const text = yearData.data[`${relatedQuestion}_text`]
-      const light = yearData.data[`${relatedQuestion}_light`]
-
-      result[year] = { text, light }
-    })
-    result.details = yearlyQuestions.flatMap(section => section.parts).find(part => part.id === relatedQuestion)
-    return result
-  }
 
   const yearlyAnswers = useMemo(() => {
     const result = {}
@@ -65,7 +86,7 @@ const KatselmusFormView = ({ room }) => {
             if (result[part.id] === undefined) {
               result[part.id] = {}
             }
-            result[part.id][relatedQuestion] = findAnswers(relatedQuestion)
+            result[part.id][relatedQuestion] = findAnswers(allOldAnswers, relatedQuestion)
           })
         }
       })
@@ -80,22 +101,22 @@ const KatselmusFormView = ({ room }) => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  const targetURL = `/katselmus/previous-years/${room}`
+  const targetURL = `/evaluation/previous-years/${room}`
 
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} katselmus />
+      <NavigationSidebar programmeKey={room} form="evaluation" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
+              <Button onClick={() => history.push('/evaluation')} icon="arrow left" />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('katselmus')} 2023
+            {t('evaluation')} 2023
           </h3>
 
           <div className="hide-in-print-mode">
