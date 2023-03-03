@@ -7,23 +7,31 @@ const colorCircle = color => {
   return <span className={`answer-circle-${color || 'gray'}`} />
 }
 
+const measuresCount = count => {
+  return <span className="measures-count-circle">{count}</span>
+}
+
 const SummaryRow = ({ answer, lang, k, years, t }) => {
   const [showText, setShowText] = useState(false)
 
   return (
     <>
       <Grid.Row className="row" key={k}>
-        <Grid.Column>{answer.details.shortLabel[lang]}</Grid.Column>
+        <Grid.Column width={3}>{answer.details.shortLabel[lang]}</Grid.Column>
         {years.map(year => {
-          return <Grid.Column>{colorCircle(answer[year].light)}</Grid.Column>
+          return (
+            <Grid.Column width={4}>
+              {answer[year].count ? measuresCount(answer[year].count) : colorCircle(answer[year].light)}
+            </Grid.Column>
+          )
         })}
-        <Grid.Column>
+        <Grid.Column width={1}>
           <Icon name={`angle ${showText ? 'up' : 'down'}`} onClick={() => setShowText(!showText)} />
         </Grid.Column>
       </Grid.Row>
       {showText && (
         <Grid.Row className="row" key={`${k}-text`}>
-          <Grid.Column>
+          <Grid.Column width={3}>
             <p style={{ paddingBottom: '1em' }}>
               <i>{answer.details.description[lang]}</i>
             </p>
@@ -32,9 +40,13 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
             </p>
           </Grid.Column>
           {years.map(year => {
-            return <Grid.Column>{answer[year].text || t('empty')}</Grid.Column>
+            return (
+              <Grid.Column width={4} className="old-answer-text">
+                {answer[year].text || t('empty')}
+              </Grid.Column>
+            )
           })}
-          <Grid.Column />
+          <Grid.Column width={1} />
         </Grid.Row>
       )}
     </>
@@ -57,11 +69,11 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
       <div className="summary-grid" data-cy={`${partId}-summary`}>
         <Grid columns={5}>
           <Grid.Row className="row">
-            <Grid.Column> </Grid.Column>
+            <Grid.Column width={3}> </Grid.Column>
             {years.map(year => {
-              return <Grid.Column>{year}</Grid.Column>
+              return <Grid.Column width={4}>{year}</Grid.Column>
             })}
-            <Grid.Column />
+            <Grid.Column width={1} />
           </Grid.Row>
           {keys.map(k => {
             return <SummaryRow answer={relatedYearlyAnswers[k]} lang={lang} k={k} years={years} t={t} />
