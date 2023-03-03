@@ -28,14 +28,14 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
   // To do: move to translations
   const t = {
     fi: {
-      select: 'Valitse sopivat vaihtoehdot',
+      select: 'Valitkaa sopivat vaihtoehdot',
       other: 'Muu, mikä?',
-      info: 'Lisää puuttuvat vaihtoehdot - Voit lisätä useamman',
+      info: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     },
     en: {
-      select: 'Valitse sopivat vaihtoehdot',
+      select: 'Valitkaa sopivat vaihtoehdot',
       other: 'Muu, mikä?',
-      info: 'Lisää puuttuvat vaihtoehdot - Voit lisätä useamman',
+      info: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     },
   }
 
