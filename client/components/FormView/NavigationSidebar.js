@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
 import katselmusQuestions from '../../katselmusQuestions.json'
+import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -22,14 +23,22 @@ const iconMap = {
   EMPTY: 'exclamation',
 }
 
-const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
+const NavigationSidebar = ({ programmeKey, katselmus = false, degreeReform = false }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
   const { t } = useTranslation()
 
-  const questionsToShow = katselmus ? katselmusQuestions : questions
-  const linkBase = katselmus ? '/katselmus/form/' : '/form/'
+  let questionsToShow = questions
+  let linkBase = '/form/'
+
+  if (katselmus) {
+    questionsToShow = katselmusQuestions
+    linkBase = '/katselmus/form/'
+  } else if (degreeReform) {
+    questionsToShow = koulutusuudistusQuestions
+    linkBase = '/degree-reform/form/'
+  }
 
   let partNumber = -1
   return (
@@ -60,11 +69,25 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
                     const { id, type, required, no_color } = part
-                    if (type === 'ENTITY' || type === 'MEASURES' || type === 'SELECTION') partNumber++
+                    if (
+                      type === 'ENTITY' ||
+                      type === 'MEASURES' ||
+                      type === 'CHOOSE-RADIO' ||
+                      type === 'SLIDER' ||
+                      type === 'SELECTION'
+                    ) {
+                      partNumber++
+                    }
 
                     const idsToCheck = []
 
-                    if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'SELECTION') {
+                    if (
+                      type === 'TEXTAREA' ||
+                      type === 'ENTITY' ||
+                      type === 'CHOOSE-RADIO' ||
+                      type === 'SLIDER' ||
+                      type === 'SELECTION'
+                    ) {
                       idsToCheck.push(`${id}_text`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
@@ -91,10 +114,12 @@ const NavigationSidebar = ({ programmeKey, katselmus = false }) => {
 
                       return colors.red
                     }
-
                     return (
                       <div key={id}>
-                        {(type === 'ENTITY' || type === 'SELECTION') && (
+                        {(type === 'ENTITY' ||
+                          type === 'SLIDER' ||
+                          type === 'CHOOSE-RADIO' ||
+                          type === 'SELECTION') && (
                           <>
                             {partNumber}.{' '}
                             <Icon

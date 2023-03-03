@@ -48,6 +48,8 @@ const Question = ({ answers, question, handleClick, showing, katselmus = false }
 
   if (!answers) return <></>
 
+  const columnNumber = katselmus ? answers.length + 1 : answers.length
+
   return (
     <>
       <Accordion.Title
@@ -75,21 +77,18 @@ const Question = ({ answers, question, handleClick, showing, katselmus = false }
       </Accordion.Title>
       <Accordion.Content active={showing}>
         <Grid>
-          <Grid.Row columns={answers.length}>
+          <Grid.Row columns={columnNumber}>
             {answers.map(
               (year, yearsIndex) =>
                 yearSelection.includes(year.year) && (
                   <Grid.Column key={generateRandomKey(year)} className="question-content">
-                    {katselmus ? (
+                    <div className="comparison color-buttons noprint">
                       <label>{year.year}</label>
-                    ) : (
-                      <div className="comparison color-buttons noprint">
-                        <label>{year.year}</label>
-                        {buttonColors.map((color, index) => (
+                      {!katselmus &&
+                        buttonColors.map((color, index) => (
                           <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
                         ))}
-                      </div>
-                    )}
+                    </div>
                     {year.answers.length > 0 ? (
                       year.answers.map(programme => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {

@@ -1,28 +1,24 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
+import ChooseRadio from 'Components/Generic/ChooseRadio'
+import Slider from 'Components/Generic/Slider'
+import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
-import Selection from 'Components/Generic/Selection'
 import { colors, romanize } from 'Utilities/common'
-import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
-import Section from './Section'
+import Section from './DegreeReformSection'
 
 const Form = ({ questions, programmeKey }) => {
-  const previousYearsAnswers = useSelector(state => state.previousAnswers)
-  const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
-  const room = useSelector(({ room }) => room)
-
-  useEffect(() => {
-    if (room) dispatch(getPreviousAnswersAction(room))
-  }, [room])
 
   const partComponentMap = {
     TEXTAREA: Textarea,
     ENTITY: Entity,
     MEASURES: Measures,
-    SELECTION: Selection,
+    'CHOOSE-RADIO': ChooseRadio,
+    SLIDER: Slider,
+    INFOBOX: InfoBox,
   }
 
   let number = -1
@@ -53,20 +49,14 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (
-      part.type === 'ENTITY' ||
-      part.type === 'MEASURES' ||
-      part.type === 'CHOOSE-RADIO' ||
-      part.type === 'SLIDER' ||
-      part.type === 'SELECTION'
-    ) {
+    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
       number++
-    }
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     const radioOptions = part.radioOptions ? part.radioOptions[lang] : undefined
+    const image = part.image ? part.image : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -77,12 +67,11 @@ const Form = ({ questions, programmeKey }) => {
           noColor={part.no_color}
           number={number}
           extrainfo={extrainfo}
-          options={part.options}
-          lang={lang}
-          previousYearsAnswers={
-            previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
-          }
+          previousYearsAnswers={null}
+          degreeReform
+          programme={programmeKey}
           radioOptions={radioOptions}
+          image={image}
         />
       </div>
     )
@@ -98,11 +87,6 @@ const Form = ({ questions, programmeKey }) => {
             key={section.title[lang]}
             programmeKey={programmeKey}
           >
-            {section.link_title && section.link_url && (
-              <a className="hide-in-print-mode" target="_blank" href={section.link_url} rel="noreferrer">
-                {section.link_title[lang]}
-              </a>
-            )}
             {section.parts.map(partMap)}
           </Section>
         )

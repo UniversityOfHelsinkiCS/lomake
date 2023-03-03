@@ -9,6 +9,7 @@ import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
 import katselmusQuestions from '../../katselmusQuestions.json'
+import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -24,6 +25,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
     katselmus = false,
+    degreeReform = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -42,14 +44,16 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    const selectedAnswers = katselmus
-      ? []
-      : answersByYear({
-          year,
-          tempAnswers: answers,
-          oldAnswers,
-          draftYear: draftYear && draftYear.year,
-        })
+    let selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
+
+    if (katselmus || degreeReform) {
+      selectedAnswers = []
+    }
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -83,29 +87,55 @@ const ColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
-    const questionsToShow = katselmus ? katselmusQuestions : questions
+    let questionsToShow = questions
 
-    const tableIds = questionsToShow.reduce((acc, cur) => {
-      const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (
-          cur.id.includes('information_needed') ||
-          cur.id.includes('information_used') ||
-          cur.type === 'TITLE' ||
-          cur.type === 'SELECTION'
-        ) {
-          return acc
-        }
-        return [
-          ...acc,
-          { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
-        ]
+    if (katselmus) {
+      questionsToShow = katselmusQuestions
+    } else if (degreeReform) {
+      questionsToShow = koulutusuudistusQuestions
+    }
+
+    let tableIds = null
+
+    const generateKey = label => {
+      return `${label}_${new Date().getTime()}`
+    }
+
+    if (degreeReform) {
+      tableIds = questionsToShow.reduce((acc, cur) => {
+        return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
       }, [])
+    } else {
+      tableIds = questionsToShow.reduce((acc, cur) => {
+        const questionObjects = cur.parts.reduce((acc, cur) => {
+          if (
+            cur.id.includes('information_needed') ||
+            cur.id.includes('information_used') ||
+            cur.type === 'TITLE' ||
+            cur.type === 'INFOBOX' ||
+            cur.type === 'SELECTION'
+          ) {
+            return acc
+          }
+          return [
+            ...acc,
+            { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+          ]
+        }, [])
 
-      return [...acc, ...questionObjects]
-    }, [])
+        return [...acc, ...questionObjects]
+      }, [])
+    }
+
+    let tableClassName = ''
+    if (katselmus) {
+      tableClassName = '-katselmus'
+    } else if (degreeReform) {
+      tableClassName = '-degree-reform'
+    }
 
     return (
-      <div className={`overview-color-grid${katselmus ? '-katselmus' : ''}`}>
+      <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
           <Input
@@ -135,6 +165,7 @@ const ColorTable = React.memo(
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
               katselmus={katselmus}
+              degreeReform={degreeReform}
             />
           )
         })}
