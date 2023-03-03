@@ -61,7 +61,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          katselmus
+          form="evaluation"
           programme={programmeKey}
           relatedYearlyAnswers={yearlyAnswers[part.id]}
         />

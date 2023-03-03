@@ -25,7 +25,7 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${t('katselmus')}`
+    document.title = `${t('evaluation')}`
   }, [lang])
 
   if (!isSuperAdmin(currentUser.data)) {
@@ -94,7 +94,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('katselmus').toUpperCase()}</h2>
+            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable
@@ -105,7 +105,7 @@ export default () => {
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}
               filterValue={filter}
-              katselmus
+              form="evaluation"
             />
           </div>
         </>

@@ -68,7 +68,7 @@ const Form = ({ questions, programmeKey }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          degreeReform
+          form="degree-reform"
           programme={programmeKey}
           radioOptions={radioOptions}
           image={image}

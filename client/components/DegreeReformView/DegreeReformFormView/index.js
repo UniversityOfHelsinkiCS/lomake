@@ -42,7 +42,7 @@ const DegreeReformFormView = ({ room }) => {
 
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} degreeReform />
+      <NavigationSidebar programmeKey={room} form="degree-reform" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">

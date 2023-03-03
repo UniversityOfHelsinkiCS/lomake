@@ -23,7 +23,7 @@ const iconMap = {
   EMPTY: 'exclamation',
 }
 
-const NavigationSidebar = ({ programmeKey, katselmus = false, degreeReform = false }) => {
+const NavigationSidebar = ({ programmeKey, form }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
   const location = useLocation()
@@ -32,12 +32,15 @@ const NavigationSidebar = ({ programmeKey, katselmus = false, degreeReform = fal
   let questionsToShow = questions
   let linkBase = '/form/'
 
-  if (katselmus) {
+  if (form === 'evaluation') {
     questionsToShow = katselmusQuestions
-    linkBase = '/katselmus/form/'
-  } else if (degreeReform) {
+    linkBase = '/evaluation/form/'
+  } else if (form === 'degree-reform') {
     questionsToShow = koulutusuudistusQuestions
     linkBase = '/degree-reform/form/'
+  } else if (form === 'degree-reform-individual') {
+    questionsToShow = koulutusuudistusQuestions
+    linkBase = '/degree-reform-individual/'
   }
 
   let partNumber = -1
