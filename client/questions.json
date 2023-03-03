@@ -296,9 +296,9 @@
           "en": "KÄYTETYT PALAUTEJÄRJESTELMÄT"
         },
         "description": {
-          "fi": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?",
-          "se": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?",
-          "en": "Minkä palautejärjestelmän tietoja koulutusohjelman johtoryhmässä on käytetty viimeisen vuoden aikana?"
+          "fi": "Mitä seuraavista palautejärjestelmistä johtoryhmässä on käytetty viimeisen vuoden aikana?",
+          "se": "Mitä seuraavista palautejärjestelmistä johtoryhmässä on käytetty viimeisen vuoden aikana?",
+          "en": "Mitä seuraavista palautejärjestelmistä johtoryhmässä on käytetty viimeisen vuoden aikana?"
         },
         "required": true,
         "no_color": true,
