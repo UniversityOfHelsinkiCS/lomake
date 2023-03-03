@@ -7,7 +7,7 @@ import Slider from 'Components/Generic/Slider'
 import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
-import Section from './DegreeReformSectio'
+import Section from './DegreeReformSection'
 
 const Form = ({ questions, programmeKey }) => {
   const lang = useSelector(state => state.language)
