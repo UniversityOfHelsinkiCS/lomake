@@ -1,6 +1,6 @@
 $QUESTION_COUNT: 20;
 $KATSELMUS_COUNT: 6;
-$KOULUTUSUUDISTUS_COUNT: 11;
+$DEGREE_REFORM_COUNT: 11;
 @import '../../assets/colors.scss';
 
 .wide-header {
@@ -53,9 +53,9 @@ $KOULUTUSUUDISTUS_COUNT: 11;
   width: 95vw;
 }
 
-.overview-color-grid-koulutusuudistus {
+.overview-color-grid-degree-reform {
   display: grid;
-  grid-template-columns: 4fr 1fr repeat($KOULUTUSUUDISTUS_COUNT, 1fr) 1fr;
+  grid-template-columns: 4fr 1fr repeat($DEGREE_REFORM_COUNT, 1fr) 1fr;
   
   grid-auto-columns: 50px;
   grid-template-rows: 160px;

@@ -7,7 +7,7 @@ import Slider from 'Components/Generic/Slider'
 import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
-import Section from './KoulutusuudistusSection'
+import Section from './DegreeReformSectio'
 
 const Form = ({ questions, programmeKey }) => {
   const lang = useSelector(state => state.language)
@@ -68,7 +68,7 @@ const Form = ({ questions, programmeKey }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          koulutusuudistus
+          degreeReform
           programme={programmeKey}
           radioOptions={radioOptions}
           image={image}

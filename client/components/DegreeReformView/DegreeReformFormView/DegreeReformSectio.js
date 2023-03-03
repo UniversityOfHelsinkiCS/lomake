@@ -13,7 +13,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               window.history.pushState(
                 {},
                 '',
-                `${window.location.origin}${basePath}koulutusuudistus/form/${programmeKey}#${number}`
+                `${window.location.origin}${basePath}degree-reform/form/${programmeKey}#${number}`
               )
             }
           }}

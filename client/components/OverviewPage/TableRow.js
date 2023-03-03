@@ -13,7 +13,7 @@ const TableRow = ({
   setModalData,
   setProgramControlsToShow,
   katselmus = false,
-  koulutusuudistus = false,
+  degreeReform = false,
 }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -26,8 +26,8 @@ const TableRow = ({
 
   if (katselmus) {
     targetURL = `/katselmus/form/${p.key}`
-  } else if (koulutusuudistus) {
-    targetURL = `/koulutusuudistus/form/${p.key}`
+  } else if (degreeReform) {
+    targetURL = `/degree-reform/form/${p.key}`
   }
 
   const lastYearsAnswers =

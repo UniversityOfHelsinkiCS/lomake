@@ -53,10 +53,23 @@ export default () => {
     )
   }
 
-  const GoToKoulutusUudistusButton = () => {
+  const GoToDegreeReformGroup = () => {
     return (
-      <Menu.Item data-cy="nav-koulutusuudistus" as={Link} to="/koulutusuudistus" name="koulutusuudistus">
-        {t('koulutusuudistus')}
+      <Menu.Item data-cy="nav-degree-reform" as={Link} to="/degree-reform" name="degree-form">
+        {t('Koulutusuudistus ryhmä')}
+      </Menu.Item>
+    )
+  }
+
+  const GoToDegreeReformIndividual = () => {
+    return (
+      <Menu.Item
+        data-cy="nav-degree-reform-individual"
+        as={Link}
+        to="/degree-reform-individual/"
+        name="degree-reform-individual"
+      >
+        {t('Koulutusuudistus yksilö')}
       </Menu.Item>
     )
   }
@@ -68,7 +81,8 @@ export default () => {
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
       </Menu.Item>
       {user.superAdmin ? <GoToKatselmusButton /> : null}
-      {user.superAdmin ? <GoToKoulutusUudistusButton /> : null}
+      {user.superAdmin ? <GoToDegreeReformGroup /> : null}
+      {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
       {user.admin ? <GoToAdminPageButton /> : null}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

@@ -25,7 +25,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
     katselmus = false,
-    koulutusuudistus = false,
+    degreeReform = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -51,7 +51,7 @@ const ColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
-    if (katselmus || koulutusuudistus) {
+    if (katselmus || degreeReform) {
       selectedAnswers = []
     }
 
@@ -91,7 +91,7 @@ const ColorTable = React.memo(
 
     if (katselmus) {
       questionsToShow = katselmusQuestions
-    } else if (koulutusuudistus) {
+    } else if (degreeReform) {
       questionsToShow = koulutusuudistusQuestions
     }
 
@@ -101,7 +101,7 @@ const ColorTable = React.memo(
       return `${label}_${new Date().getTime()}`
     }
 
-    if (koulutusuudistus) {
+    if (degreeReform) {
       tableIds = questionsToShow.reduce((acc, cur) => {
         return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
       }, [])
@@ -129,8 +129,8 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (katselmus) {
       tableClassName = '-katselmus'
-    } else if (koulutusuudistus) {
-      tableClassName = '-koulutusuudistus'
+    } else if (degreeReform) {
+      tableClassName = '-degree-reform'
     }
 
     return (
@@ -164,7 +164,7 @@ const ColorTable = React.memo(
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
               katselmus={katselmus}
-              koulutusuudistus={koulutusuudistus}
+              degreeReform={degreeReform}
             />
           )
         })}
