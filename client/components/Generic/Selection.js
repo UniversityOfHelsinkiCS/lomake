@@ -17,9 +17,9 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
   const ids = Object.keys(options)
 
   const handleSelection = data => {
-    const { optionId, checked } = data
+    const { id, checked } = data
     const updated = { ...selections }
-    updated[optionId] = checked
+    updated[id] = checked
     dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated)))
   }
 
@@ -55,7 +55,8 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
           {ids.map(optionId => {
             return (
               <Checkbox
-                optionId={optionId}
+                key={optionId}
+                id={optionId}
                 label={options[optionId][lang]}
                 onChange={(e, data) => handleSelection(data)}
                 checked={selections ? selections[optionId] : false}
