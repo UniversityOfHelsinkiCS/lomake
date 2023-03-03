@@ -375,23 +375,6 @@
         }
       },
       {
-        "id": "feedback_information_needed",
-        "index": "I",
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Millaisesta palautteesta hyötyisitte koulutusohjelman kehittämisessä?",
-          "se": "Millaisesta palautteesta hyötyisitte koulutusohjelman kehittämisessä?",
-          "en": "Millaisesta palautteesta hyötyisitte koulutusohjelman kehittämisessä? "
-        },
-        "required": false,
-        "no_color": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        }
-      },
-      {
         "id": "meta1",
         "type": "TITLE",
         "label": {
