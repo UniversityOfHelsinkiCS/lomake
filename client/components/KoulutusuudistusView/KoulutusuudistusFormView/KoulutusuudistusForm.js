@@ -6,6 +6,7 @@ import ChooseRadio from 'Components/Generic/ChooseRadio'
 import Slider from 'Components/Generic/Slider'
 import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
+import Likert from 'Components/Generic/Likert'
 import { colors, romanize } from 'Utilities/common'
 import Section from './KoulutusuudistusSection'
 
@@ -19,6 +20,7 @@ const Form = ({ questions, programmeKey }) => {
     'CHOOSE-RADIO': ChooseRadio,
     SLIDER: Slider,
     INFOBOX: InfoBox,
+    LIKERT: Likert,
   }
 
   let number = -1
@@ -49,7 +51,13 @@ const Form = ({ questions, programmeKey }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
+    if (
+      part.type === 'ENTITY' ||
+      part.type === 'MEASURES' ||
+      part.type === 'CHOOSE-RADIO' ||
+      part.type === 'SLIDER' ||
+      part.type === 'LIKERT'
+    )
       number++
 
     const Component = partComponentMap[part.type]
