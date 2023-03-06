@@ -358,7 +358,7 @@
         }
       },
       {
-        "id": "used_systems_usefullnes_order",
+        "id": "used_systems_usefullness_order",
         "index": "I",
         "type": "ORDER",
         "label": {

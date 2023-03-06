@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Button, Grid, Header, Segment } from 'semantic-ui-react'
 
 import './Generic.scss'
+import { updateFormField } from 'Utilities/redux/formReducer'
 
-const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
+const OrderSelection = ({ id, label, description, extrainfo, lang, options }) => {
+  const dispatch = useDispatch()
   const { t } = useTranslation()
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const values = useSelector(({ form }) => form.data.used_systems_selection)
   const selections = values ? JSON.parse(values) : null
   const otherText = useSelector(({ form }) => form.data.used_systems_text) || ''
 
-  const [order, setOrder] = useState([])
+  const orderFromD = useSelector(({ form }) => form.data.used_systems_usefullness_order) || ''
+  const systemList = orderFromD ? orderFromD.split(';;') : []
 
   const getUsedSystems = () => {
     const toShow = []
@@ -29,10 +32,16 @@ const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
     return toShow
   }
 
-  const handleClick = id => {
-    if (order.length < 4) {
-      setOrder([...order, id])
+  const handleClick = optionId => {
+    if (systemList.length < 4) {
+      const updated = [...systemList, optionId]
+
+      dispatch(updateFormField(id, updated.join(';;')))
     }
+  }
+
+  const handleClear = () => {
+    dispatch(updateFormField(id, ''))
   }
 
   const getLabel = id => {
@@ -46,9 +55,9 @@ const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
 
   return (
     <div className="ordering-area">
-      <h3>
+      <h4>
         <span>{label} </span>
-      </h3>
+      </h4>
       <div className="ordering-description">
         <p>{description}</p>
         <p className="form-question-extrainfo">{extrainfo}</p>
@@ -60,29 +69,29 @@ const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
           <Grid columns={2} divided verticalAlign="top">
             <Grid.Row>
               <Grid.Column textAlign="left">
-                <Header>{t('formView:mostUseful')}</Header>
+                <Header size="small">{t('formView:mostUseful')}</Header>
                 <div className="ordered-systems">
                   <p>
-                    <b>1.</b> {order[0] ? getLabel(order[0]) : ''}
+                    <b>1.</b> {systemList[0] ? getLabel(systemList[0]) : ''}
                   </p>
                   <p>
-                    <b>2.</b> {order[1] ? getLabel(order[1]) : ''}
+                    <b>2.</b> {systemList[1] ? getLabel(systemList[1]) : ''}
                   </p>
                   <p>
-                    <b>3.</b> {order[2] ? getLabel(order[2]) : ''}
+                    <b>3.</b> {systemList[2] ? getLabel(systemList[2]) : ''}
                   </p>
                 </div>
                 <div>
-                  <Button disabled={viewOnly} onClick={() => setOrder([])}>
+                  <Button disabled={viewOnly} onClick={handleClear}>
                     {t('clearSelection')}
                   </Button>
                 </div>
               </Grid.Column>
               <Grid.Column textAlign="left">
-                <Header>{t('formView:selectSystems')}</Header>
+                <Header size="small">{t('formView:selectSystems')}</Header>
                 {getUsedSystems().map(system => (
                   <div className="ordering-options" key={system}>
-                    {!order.includes(system) && (
+                    {!systemList.includes(system) && (
                       <Button onClick={(e, data) => handleClick(data.id)} id={system} key={system} disabled={viewOnly}>
                         {getLabel(system)}
                       </Button>
