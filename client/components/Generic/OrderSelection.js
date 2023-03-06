@@ -30,10 +30,19 @@ const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
   }
 
   const handleClick = id => {
-    setOrder([...order, id])
+    if (order.length < 4) {
+      setOrder([...order, id])
+    }
   }
 
-  const noAnswers = (!selections && !otherText) || !Object.values(selections).some(value => value)
+  const getLabel = id => {
+    if (Object.keys(options).includes(id)) {
+      return options[id][lang]
+    }
+    return id
+  }
+
+  const noAnswers = !otherText && (!selections || (selections && !Object.values(selections).some(value => value)))
 
   return (
     <div className="ordering-area">
@@ -45,37 +54,37 @@ const OrderSelection = ({ label, description, extrainfo, lang, options }) => {
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {noAnswers ? (
-        <h4>{t('formView:noSystemsSelected')}</h4>
+        <h4 className="no-selections">{t('formView:noSystemsSelected')}</h4>
       ) : (
         <Segment placeholder>
           <Grid columns={2} divided verticalAlign="top">
             <Grid.Row>
               <Grid.Column textAlign="left">
-                <Header>Hyödyllisimmät palautejärjestelmät</Header>
+                <Header>{t('formView:mostUseful')}</Header>
+                <div className="ordered-systems">
+                  <p>
+                    <b>1.</b> {order[0] ? getLabel(order[0]) : ''}
+                  </p>
+                  <p>
+                    <b>2.</b> {order[1] ? getLabel(order[1]) : ''}
+                  </p>
+                  <p>
+                    <b>3.</b> {order[2] ? getLabel(order[2]) : ''}
+                  </p>
+                </div>
                 <div>
-                  <p>
-                    <b>1.</b> {order[0] ? options[order[0]][lang] : ''}
-                  </p>
-                  <p>
-                    <b>2.</b> {order[1] ? options[order[1]][lang] : ''}
-                  </p>
-                  <p>
-                    <b>3.</b> {order[2] ? options[order[2]][lang] : ''}
-                  </p>
+                  <Button disabled={viewOnly} onClick={() => setOrder([])}>
+                    {t('clearSelection')}
+                  </Button>
                 </div>
               </Grid.Column>
               <Grid.Column textAlign="left">
-                <Header>Valitse järjestelmä</Header>
+                <Header>{t('formView:selectSystems')}</Header>
                 {getUsedSystems().map(system => (
-                  <div className="ordering-options">
-                    {options[system] && !order.includes(system) && (
-                      <Button onClick={(e, data) => handleClick(data.id)} id={system} disabled={viewOnly}>
-                        {options[system][lang]}
-                      </Button>
-                    )}
-                    {!options[system] && (
-                      <Button onClick={(e, data) => handleClick(data.id)} id={system} disabled={viewOnly}>
-                        {system}
+                  <div className="ordering-options" key={system}>
+                    {!order.includes(system) && (
+                      <Button onClick={(e, data) => handleClick(data.id)} id={system} key={system} disabled={viewOnly}>
+                        {getLabel(system)}
                       </Button>
                     )}
                   </div>

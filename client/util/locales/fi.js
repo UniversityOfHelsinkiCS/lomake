@@ -118,6 +118,8 @@ export default {
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
+    selectSystems: 'Valitkaa järjestelmä klikkaamalla',
+    mostUseful: 'Hyödyllisimmät palautejärjestelmät',
   },
 
   generic: {

@@ -121,6 +121,8 @@ export default {
     },
     savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
     noSystemsSelected: 'No feedback systems selected.',
+    selectSystems: 'Chooce a system by clicking',
+    mostUseful: 'Most useful feedback systems',
   },
 
   generic: {

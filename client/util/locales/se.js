@@ -114,6 +114,8 @@ export default {
     },
     savingAnswers: 'Svaren sparas automatiskt. Sista dagen för att svara på blanketten:',
     // noSystemsSelected: '',
+    // selectSystems: '',
+    // mostUseful: '',
   },
 
   generic: {
