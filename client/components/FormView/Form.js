@@ -4,6 +4,7 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import Selection from 'Components/Generic/Selection'
+import OrderSelection from 'Components/Generic/OrderSelection'
 import { colors, romanize } from 'Utilities/common'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 import Section from './Section'
@@ -23,6 +24,7 @@ const Form = ({ questions, programmeKey }) => {
     ENTITY: Entity,
     MEASURES: Measures,
     SELECTION: Selection,
+    ORDER: OrderSelection,
   }
 
   let number = -1

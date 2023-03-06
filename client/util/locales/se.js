@@ -113,6 +113,7 @@ export default {
       ospaProcessing: 'OSPA behandlar svaren.',
     },
     savingAnswers: 'Svaren sparas automatiskt. Sista dagen för att svara på blanketten:',
+    // noSystemsSelected: '',
   },
 
   generic: {

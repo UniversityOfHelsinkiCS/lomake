@@ -120,6 +120,7 @@ export default {
       ospaProcessing: 'OSPA will process the answers.',
     },
     savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
+    noSystemsSelected: 'No feedback systems selected.',
   },
 
   generic: {

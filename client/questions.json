@@ -358,13 +358,13 @@
         }
       },
       {
-        "id": "used_systems_useful_information_used",
+        "id": "used_systems_usefullnes_order",
         "index": "I",
-        "type": "TEXTAREA",
+        "type": "ORDER",
         "label": {
-          "fi": "Mitkä palautetiedoista on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
-          "se": "Mitkä palautetiedoista on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
-          "en": "Mitkä palautetiedoista on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä."
+          "fi": "Mitkä palautejärjestelmistä on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
+          "se": "Mitkä palautejärjestelmistä on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
+          "en": "Mitkä palautejärjestelmistä on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä."
         },
         "required": false,
         "no_color": true,
@@ -372,6 +372,38 @@
           "fi": "",
           "se": "",
           "en": ""
+        },
+        "options": {
+          "norppa": {
+            "fi": "Norppa",
+            "se": "Norppa",
+            "en": "Norppa"
+          },
+          "howULearn": {
+            "fi": "HowULearn",
+            "se": "HowULearn",
+            "en": "HowULearn"
+          },
+          "kandipalaute": {
+            "fi": "Kandipalaute",
+            "se": "Kandipalaute",
+            "en": "Kandipalaute"
+          },
+          "thessa": {
+            "fi": "Thessa",
+            "se": "Thessa",
+            "en": "Thessa"
+          },
+          "isb": {
+            "fi": "ISB",
+            "se": "ISB",
+            "en": "ISB"
+          },
+          "uraseuranta": {
+            "fi": "Uraseuranta",
+            "se": "Uraseuranta",
+            "en": "Uraseuranta"
+          }
         }
       },
       {

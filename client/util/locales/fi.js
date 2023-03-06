@@ -117,6 +117,7 @@ export default {
       ospaProcessing: 'OSPA käsittelee vastaukset.',
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
+    noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
   },
 
   generic: {
