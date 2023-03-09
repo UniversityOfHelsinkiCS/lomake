@@ -64,10 +64,10 @@ export default () => {
   const GoToDegreeReformIndividual = () => {
     return (
       <Menu.Item
-        data-cy="nav-degree-reform-individual"
+        data-cy="nav-degree-reform-individual-form"
         as={Link}
-        to="/degree-reform-individual/"
-        name="degree-reform-individual"
+        to="/degree-reform-individual/form"
+        name="degree-reform-individual-form"
       >
         {t('degree-reform-individual')}
       </Menu.Item>

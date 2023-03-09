@@ -15,13 +15,12 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
   const programme = selectedAnswers.find(a => a.programme === p.key)
 
   let targetURL = `/form/${p.key}`
-
   if (form === 'evaluation') {
     targetURL = `/evaluation/form/${p.key}`
   } else if (form === 'degree-reform') {
     targetURL = `/degree-reform/form/${p.key}`
   } else if (form === 'degree-reform-individual') {
-    targetURL = `/degree-reform-individual`
+    targetURL = `/degree-reform-individual/form`
   }
 
   const lastYearsAnswers =

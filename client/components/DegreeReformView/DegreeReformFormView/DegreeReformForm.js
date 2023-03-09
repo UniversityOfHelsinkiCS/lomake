@@ -9,7 +9,7 @@ import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
 import Section from './DegreeReformSection'
 
-const Form = ({ questions, programmeKey }) => {
+const Form = ({ questions, programmeKey, form }) => {
   const lang = useSelector(state => state.language)
 
   const partComponentMap = {
@@ -55,7 +55,6 @@ const Form = ({ questions, programmeKey }) => {
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
-    const radioOptions = part.radioOptions ? part.radioOptions[lang] : undefined
     const image = part.image ? part.image : undefined
     return (
       <div key={part.id} style={divStyle}>
@@ -68,9 +67,9 @@ const Form = ({ questions, programmeKey }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          form="degree-reform"
+          form={form}
           programme={programmeKey}
-          radioOptions={radioOptions}
+          radioOptions={part?.radioOptions}
           image={image}
         />
       </div>
@@ -86,6 +85,7 @@ const Form = ({ questions, programmeKey }) => {
             number={romanize(index)}
             key={section.title[lang]}
             programmeKey={programmeKey}
+            form={form}
           >
             {section.parts.map(partMap)}
           </Section>
