@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
-
 import { colors } from 'Utilities/common'
+import { useTranslation } from 'react-i18next'
+import FacultyFilter from './FacultyFilter'
+
 import './Generic.scss'
 
 const mapColorToValid = {
@@ -12,12 +14,13 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const ChooseRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
+const AdvancedRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
-
+  const { t } = useTranslation()
+  const filters = useSelector(state => state.filters.faculty)
   const choose = (name, id) => dispatch(updateFormField(name, id))
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -27,9 +30,14 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
+
   const handleClick = label => {
     setState({ value: label })
-    choose(id, label)
+    if (label === 'faculty' && filters !== 'allFaculties') {
+      choose(id, `faculty-${filters}`)
+    } else {
+      choose(id, label)
+    }
   }
 
   useEffect(() => {
@@ -64,18 +72,28 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
       {radioButtonLabels ? (
         <Form>
           {radioButtonLabels.map(o => {
+            const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : 7
+            const selected = state.value.substring(0, indexOfine)
             return (
               <Form.Field key={generateKey(o.label)}>
                 <Radio
                   label={o.label}
                   name="radioGroup"
                   value={o.label}
-                  checked={state.value === o.id}
+                  checked={selected === o.id}
                   onChange={() => handleClick(o.id)}
                 />
               </Form.Field>
             )
           })}
+          {state.value.substring(0, 7) === 'faculty' ? (
+            <FacultyFilter
+              handleFilterChange={handleClick}
+              version="degree-reform"
+              size="small"
+              label={t('comparison:filterFaculties')}
+            />
+          ) : null}
         </Form>
       ) : (
         <p>Missing options</p>
@@ -84,4 +102,4 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   )
 }
 
-export default ChooseRadio
+export default AdvancedRadio

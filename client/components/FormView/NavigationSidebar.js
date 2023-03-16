@@ -72,14 +72,20 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts.map(part => {
                     const { id, type, required, no_color } = part
-                    if (type === 'ENTITY' || type === 'MEASURES' || type === 'CHOOSE-RADIO' || type === 'SLIDER')
+                    if (
+                      type === 'ENTITY' ||
+                      type === 'MEASURES' ||
+                      type === 'CHOOSE-RADIO' ||
+                      type === 'SLIDER' ||
+                      type === 'CHOOSE-ADVANCED'
+                    )
                       partNumber++
 
                     const idsToCheck = []
 
                     if (type === 'TEXTAREA' || type === 'ENTITY') {
                       idsToCheck.push(`${id}_text`)
-                    } else if (type === 'CHOOSE-RADIO') {
+                    } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED') {
                       idsToCheck.push(`${id}`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
@@ -104,7 +110,10 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                     }
                     return (
                       <div key={id}>
-                        {(type === 'ENTITY' || type === 'SLIDER' || type === 'CHOOSE-RADIO') && (
+                        {(type === 'ENTITY' ||
+                          type === 'SLIDER' ||
+                          type === 'CHOOSE-RADIO' ||
+                          type === 'CHOOSE-ADVANCED') && (
                           <>
                             {partNumber}.{' '}
                             <Icon

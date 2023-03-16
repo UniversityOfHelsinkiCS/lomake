@@ -9,19 +9,19 @@
       {
         "id": "base-information-0",
         "index": 0,
-        "type": "CHOOSE-RADIO",
+        "type": "CHOOSE-ADVANCED",
         "shortLabel": {
-          "fi": "Vastaajatyyppi (valitse)",
+          "fi": "Taustayksikkö",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Vastaajatyyppi (valitse)",
+          "fi": "Taustayksikkö",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Vastaajatyyppi (valitse)",
+          "fi": "Taustayksikkö",
           "se": "",
           "en": ""
         },
@@ -33,29 +33,56 @@
         },
         "relatedYearlyQuestions": [],
         "radioOptions": { 
-          "fi": [
-            { "label": "Ryhmä" }, 
-            { "label": "Yksitäinen vastaaja" }
-          ],
-          "indexes": ["group","individual"]
+            "fi": [
+                { "label": "Tiedekunta", "id": "faculty" }, 
+                { "label": "YPA", "id": "ypa" }, 
+                { "label": "SocCom", "id": "soc-com" }, 
+                { "label": "Muu, mikä", "id": "other" }
+            ],
+            "en": [
+                { "label": "Tiedekunta", "id": "faculty" }, 
+                { "label": "YPA", "id": "ypa" }, 
+                { "label": "SocCom", "id": "soc-com" }, 
+                { "label": "Muu, mikä", "id": "other" }
+            ],
+            "se": [
+                { "label": "Tiedekunta", "id": "faculty" }, 
+                { "label": "YPA", "id": "ypa" }, 
+                { "label": "SocCom", "id": "soc-com" }, 
+                { "label": "Muu, mikä", "id": "other" }
+            ]
+          },
+        "advancedOptions": {"faculty": 
+        ["facultyOfScience",
+        "facultyOfAgricultureAndForestry",
+        "facultyOfBiologigalAndEnvironmentalSciences",
+        "facultyOfEducationalSciences",
+        "facultyOfLaw",
+        "facultyOfMedicine",
+        "facultyOfPharmacy",
+        "facultyOfSocialSciences",
+        "facultyOfTheology",
+        "facultyOfVeterinaryMedicine"
+        ]
         }
       },
+      
       {
         "id": "base-information-1",
         "index": 1,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
-          "fi": "Valitse ryhmä",
+          "fi": "Ensisijainen rooli tällä hetkellä",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Valitse ryhmä",
+          "fi": "Ensisijainen rooli tällä hetkellä",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Valitse ryhmä",
+          "fi": "Ensisijainen rooli tällä hetkellä",
           "se": "",
           "en": ""
         },
@@ -68,16 +95,16 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "Koulutusohjelman johtoryhmä" },
+            { "label": "Dekaani / Varadekaani", "id": "dean" },
             {
-              "label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"
+              "label": "Tieteenalan tai osaston johtaja", "id": "faculty_or_department_lead"
+              
             },
-            { "label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)" },
-            { "label": "Tutkijakoulun johtokunta" },
-            { "label": "Opintoasiainneuvosto" },
-            { "label": "Katselmuksen arviointiryhmä" }
-          ],
-          "indexes": ["lead","faculty","research-lead-before-2022","research-lead","study-council","evaluation-assessment"]
+            { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
+            { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
+            { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" },
+            { "label": "Emeriitta / Emeritus / Alumni", "id": "emeritus_alumni" }
+          ]
         }
       },
       {
@@ -85,17 +112,17 @@
         "index": 2,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin näkökulma kohdistuu",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin näkökulma kohdistuu",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin näkökulma kohdistuu",
           "se": "",
           "en": ""
         },
@@ -108,82 +135,12 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)" },
-            { "label": "opetus- ja tutkimushenkilökunta" },
-            { "label": "hallinto- tai muu henkilökunta" },
-            { "label": "opiskelija" },
-            { "label": "väitöskirjatutkija" },
-            { "label": "alumni" }
-          ],
-          "indexes": 
-          [
-            "unit","teach-research-staff","governance-other-staff",
-            "student","doctoral-research","alumni"
+            { "label": "kanditason koulutus", "id": "bachelor" },
+            { "label": "maisteritason koulutus", "id": "masters"  },
+            { "label": "tohtoritason koulutus", "id": "doctoral"  },
+            { "label": "kaikki koulutustasot", "id": "all"  }
           ]
         }
-      },
-      {
-        "id": "base-information-3",
-        "index": 3,
-        "type": "CHOOSE-RADIO",
-        "shortLabel": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": {
-          "fi": [
-            { "label": "kanditason koulutus" },
-            { "label": "maisteritason koulutus" },
-            { "label": "tohtoritason koulutus" },
-            { "label": "kaikki koulutustasot" }
-          ],
-          "indexes": ["bachelor","masters", "doctoral", "all"]
-        }
-      },
-      {
-        "id": "base-information-4",
-        "index": 4,
-        "type": "TEXTAREA",
-        "shortLabel": {
-          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": []
       }
     ]
   },
