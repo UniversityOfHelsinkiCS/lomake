@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const FacultyFilter = ({ size, label, version, handleFilterChange }) => {
+const FacultyFilter = ({ size, label }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -15,16 +15,10 @@ const FacultyFilter = ({ size, label, version, handleFilterChange }) => {
   const handleChange = (e, { value }) => {
     dispatch(clearLevelSpecificFilters())
     dispatch(setFaculty(value))
-    handleFilterChange('faculty', value)
   }
 
   const getOptions = () => {
-    let facultiesWithAll = []
-    if (version !== 'degree-reform') {
-      facultiesWithAll = facultiesWithAll.concat([
-        { key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') },
-      ])
-    }
+    const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
     return facultiesWithAll.concat(
       faculties.map(f => ({
         key: f.code,
@@ -33,6 +27,7 @@ const FacultyFilter = ({ size, label, version, handleFilterChange }) => {
       }))
     )
   }
+
   return (
     <div className={`faculty-filter-${size}`}>
       <label>{label}</label>
