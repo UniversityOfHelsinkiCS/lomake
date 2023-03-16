@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
-import FacultyFilter from './FacultyFilter'
+import DropdownFilter from './DropdownFilter'
 
 import './Generic.scss'
 
@@ -20,7 +20,6 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
-  const filters = useSelector(state => state.filters.faculty)
   const choose = (name, id) => dispatch(updateFormField(name, id))
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
@@ -31,12 +30,13 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
     return `${label}_${new Date().getTime()}`
   }
 
-  const handleClick = label => {
-    setState({ value: label })
-    if (label === 'faculty' && filters !== 'allFaculties') {
-      choose(id, `faculty-${filters}`)
+  const handleClick = (firstPart, secondPart) => {
+    if (firstPart && !secondPart) {
+      setState({ value: `${firstPart}-` })
+      choose(id, firstPart)
     } else {
-      choose(id, label)
+      setState({ value: `${firstPart}-${secondPart}` })
+      choose(id, `${firstPart}-${secondPart}`)
     }
   }
 
@@ -44,6 +44,9 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
   const radioButtonLabels = radioOptions ? radioOptions[lang] : null
+
+  const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : 7
+  const selected = state.value.substring(0, indexOfine)
 
   return (
     <div className="form-entity-area">
@@ -72,8 +75,6 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
       {radioButtonLabels ? (
         <Form>
           {radioButtonLabels.map(o => {
-            const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : 7
-            const selected = state.value.substring(0, indexOfine)
             return (
               <Form.Field key={generateKey(o.label)}>
                 <Radio
@@ -81,17 +82,18 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
                   name="radioGroup"
                   value={o.label}
                   checked={selected === o.id}
-                  onChange={() => handleClick(o.id)}
+                  onChange={() => handleClick(o.id, '')}
                 />
               </Form.Field>
             )
           })}
           {state.value.substring(0, 7) === 'faculty' ? (
-            <FacultyFilter
+            <DropdownFilter
               handleFilterChange={handleClick}
               version="degree-reform"
               size="small"
               label={t('comparison:filterFaculties')}
+              selectedRadio={state.value}
             />
           ) : null}
         </Form>

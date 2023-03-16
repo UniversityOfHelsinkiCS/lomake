@@ -15,7 +15,7 @@ const FacultyFilter = ({ size, label, version, handleFilterChange }) => {
   const handleChange = (e, { value }) => {
     dispatch(clearLevelSpecificFilters())
     dispatch(setFaculty(value))
-    handleFilterChange('faculty')
+    handleFilterChange('faculty', value)
   }
 
   const getOptions = () => {
@@ -33,7 +33,6 @@ const FacultyFilter = ({ size, label, version, handleFilterChange }) => {
       }))
     )
   }
-
   return (
     <div className={`faculty-filter-${size}`}>
       <label>{label}</label>
