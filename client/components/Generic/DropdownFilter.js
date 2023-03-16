@@ -36,10 +36,10 @@ const DropdownFilter = ({ size, label, handleFilterChange, selectedRadio }) => {
   }
 
   return (
-    <div className={`faculty-filter-${size}`}>
+    <div className={`dropdown-filter-${size}`}>
       <label>{label}</label>
       <Select
-        data-cy="faculty-filter"
+        data-cy="dropdown-filter"
         fluid
         selection
         options={faculties ? getOptions() : []}
