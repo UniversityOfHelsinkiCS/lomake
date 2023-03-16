@@ -57,7 +57,6 @@ const Form = ({ questions, programmeKey }) => {
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
-    const radioOptions = part.radioOptions ? part.radioOptions[lang] : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -71,7 +70,7 @@ const Form = ({ questions, programmeKey }) => {
           previousYearsAnswers={
             previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
           }
-          radioOptions={radioOptions}
+          radioOptions={part.radioOptions}
         />
       </div>
     )

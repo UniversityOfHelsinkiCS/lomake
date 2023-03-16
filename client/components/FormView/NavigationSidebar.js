@@ -40,7 +40,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
     linkBase = '/degree-reform/form/'
   } else if (form === 'degree-reform-individual') {
     questionsToShow = koulutusuudistusQuestions
-    linkBase = '/degree-reform-individual/'
+    linkBase = '/degree-reform-individual/form'
   }
 
   let partNumber = -1
@@ -77,8 +77,10 @@ const NavigationSidebar = ({ programmeKey, form }) => {
 
                     const idsToCheck = []
 
-                    if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'CHOOSE-RADIO' || type === 'SLIDER') {
+                    if (type === 'TEXTAREA' || type === 'ENTITY') {
                       idsToCheck.push(`${id}_text`)
+                    } else if (type === 'CHOOSE-RADIO') {
+                      idsToCheck.push(`${id}`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
                     }

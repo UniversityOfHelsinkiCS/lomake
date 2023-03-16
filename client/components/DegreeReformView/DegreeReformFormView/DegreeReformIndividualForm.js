@@ -19,9 +19,11 @@ const DegreeReformIndividualForm = () => {
 
   if (!isAdmin(user)) return <Redirect to="/" />
 
+  const formType = 'degree-reform-individual'
+
   return (
     <div className="form-container">
-      <NavigationSidebar form="degree-reform-individual" />
+      <NavigationSidebar form={formType} />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -34,7 +36,7 @@ const DegreeReformIndividualForm = () => {
             {t('koulutusuudistus')} 2023
           </h3>
         </div>
-        <Form questions={questions} />
+        <Form questions={questions} form={formType} />
       </div>
     </div>
   )

@@ -2,7 +2,11 @@ import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
-const Section = ({ title, number, children, programmeKey }) => {
+const Section = ({ title, number, children, programmeKey, form }) => {
+  let historyState = `${window.location.origin}${basePath}${form}/form/${programmeKey}#${number}`
+  if (form === 'degree-reform-individual') {
+    historyState = `${window.location.origin}${basePath}${form}/form/`
+  }
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
@@ -10,11 +14,7 @@ const Section = ({ title, number, children, programmeKey }) => {
           as="div"
           onChange={inView => {
             if (inView) {
-              window.history.pushState(
-                {},
-                '',
-                `${window.location.origin}${basePath}degree-reform/form/${programmeKey}#${number}`
-              )
+              window.history.pushState({}, '', historyState)
             }
           }}
         >
