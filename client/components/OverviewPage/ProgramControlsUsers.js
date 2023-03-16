@@ -15,23 +15,23 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
 
   return (
     <>
-      <Grid.Row key={user.id}>
-        <Grid.Column width={3} style={{ textAlign: 'center' }}>
+      <Grid key={user.id}>
+        <Grid spacing={3} style={{ textAlign: 'center' }}>
           {`${user.lastname}, ${user.firstname}`}
-        </Grid.Column>
-        <Grid.Column width={4} style={{ textAlign: 'center' }}>
+        </Grid>
+        <Grid spacing={4} style={{ textAlign: 'center' }}>
           {user.email}
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
+        </Grid>
+        <Grid textAlign="center" spacing={2}>
           <SwitchableBadge cyTag={`read-${user.uid}${read ? '' : '-false'}`} currentAccess={read} />
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
+        </Grid>
+        <Grid textAlign="center" spacing={2}>
           <SwitchableBadge cyTag={`write-${user.uid}${write ? '' : '-false'}`} currentAccess={write} />
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
+        </Grid>
+        <Grid textAlign="center" spacing={2}>
           <SwitchableBadge cyTag={`admin-${user.uid}${admin ? '' : '-false'}`} currentAccess={admin} />
-        </Grid.Column>
-      </Grid.Row>
+        </Grid>
+      </Grid>
     </>
   )
 }
@@ -40,29 +40,29 @@ const OwnerAccordionTable = ({ users, programme, t }) => {
   return (
     <Segment style={{ margin: '1em 0' }}>
       <Grid celled="internally">
-        <Grid.Row>
-          <Grid.Column width={3} style={{ textAlign: 'center' }}>
+        <Grid>
+          <Grid spacing={3} style={{ textAlign: 'center' }}>
             <Header as="h4">{t('overview:name')}</Header>
-          </Grid.Column>
-          <Grid.Column width={4} style={{ textAlign: 'center' }}>
+          </Grid>
+          <Grid spacing={4} style={{ textAlign: 'center' }}>
             <Header as="h4">Email</Header>
-          </Grid.Column>
-          <Grid.Column width={2} style={{ textAlign: 'center' }}>
+          </Grid>
+          <Grid spacing={2} style={{ textAlign: 'center' }}>
             <Header as="h4">{t('overview:view')}</Header>
-          </Grid.Column>
-          <Grid.Column width={2} style={{ textAlign: 'center' }}>
+          </Grid>
+          <Grid spacing={2} style={{ textAlign: 'center' }}>
             <Header as="h4">{t('overview:edit')}</Header>
-          </Grid.Column>
-          <Grid.Column width={2} style={{ textAlign: 'center' }}>
+          </Grid>
+          <Grid spacing={2} style={{ textAlign: 'center' }}>
             <Header as="h4">{t('overview:owner')}</Header>
-          </Grid.Column>
-        </Grid.Row>
+          </Grid>
+        </Grid>
         {users.length === 0 ? (
-          <Grid.Row>
-            <Grid.Column width={13} style={{ textAlign: 'center' }}>
+          <Grid>
+            <Grid spacing={13} style={{ textAlign: 'center' }}>
               {t('overview:noUsers')}
-            </Grid.Column>
-          </Grid.Row>
+            </Grid>
+          </Grid>
         ) : (
           users.map(user => <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />)
         )}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Grid, Label } from 'semantic-ui-react'
+import { Accordion, Grid, Typography } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 
 const SingleProgramQuestion = ({ answers, question }) => (
@@ -12,8 +12,8 @@ const SingleProgramQuestion = ({ answers, question }) => (
       id={question.labelIndex}
     >
       <Grid>
-        <Grid.Column width={1} className="question-caret noprint" />
-        <Grid.Column width={11}>
+        <Grid spacing={1} className="question-caret noprint" />
+        <Grid spacing={11}>
           <span>
             <small className="question-title">
               {romanize(question.titleIndex)} - {question.title}
@@ -23,12 +23,12 @@ const SingleProgramQuestion = ({ answers, question }) => (
             {question.labelIndex}. {question.label.toUpperCase()}
           </p>
           <p className="question-description">{question.description}</p>
-        </Grid.Column>
-        <Grid.Column width={4} floated="right">
-          <Label className="question-answered-label" size="large">
+        </Grid>
+        <Grid spacing={4} floated="right">
+          <Typography className="question-answered-label" size="large">
             1 / 1
-          </Label>
-        </Grid.Column>
+          </Typography>
+        </Grid>
       </Grid>
     </Accordion.Title>
     <Accordion.Content active className="question-content">

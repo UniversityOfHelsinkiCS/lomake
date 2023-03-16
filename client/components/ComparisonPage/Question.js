@@ -60,10 +60,10 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
         onClick={handleClick}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret">
+          <Grid spacing={1} className="question-caret">
             <Icon name={`caret ${showing ? 'down' : 'right'}`} />
-          </Grid.Column>
-          <Grid.Column width={15}>
+          </Grid>
+          <Grid spacing={15}>
             <span>
               <small className="question-title">
                 {romanize(question.titleIndex)} - {question.title}
@@ -72,7 +72,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
             <p className="question-label">
               {question.labelIndex}. {question.label.toUpperCase()}
             </p>
-          </Grid.Column>
+          </Grid>
         </Grid>
       </Accordion.Title>
       <Accordion.Content active={showing}>
@@ -81,7 +81,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
             {answers.map(
               (year, yearsIndex) =>
                 yearSelection.includes(year.year) && (
-                  <Grid.Column key={generateRandomKey(year)} className="question-content">
+                  <Grid key={generateRandomKey(year)} className="question-content">
                     <div className="comparison color-buttons noprint">
                       <label>{year.year}</label>
                       {!form === 'evaluation' &&
@@ -113,7 +113,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                     ) : (
                       <h4>{form === 'evaluation' ? t('empty') : t('noData')}</h4>
                     )}
-                  </Grid.Column>
+                  </Grid>
                 )
             )}
           </Grid.Row>

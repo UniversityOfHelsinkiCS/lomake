@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { Table, Icon, Label, Popup } from 'semantic-ui-react'
+import { Table, Icon, Typography, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from 'Utilities/common'
@@ -12,9 +12,9 @@ const getSpecialGroup = (group, lang, t) => {
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
   return (
-    <Label>
+    <Typography>
       {special.faculty ? special.translationTag[lang] : t('users:special:access', { context: special.translationTag })}
-    </Label>
+    </Typography>
   )
 }
 

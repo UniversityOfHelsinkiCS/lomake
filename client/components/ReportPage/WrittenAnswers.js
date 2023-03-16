@@ -57,22 +57,22 @@ const WrittenAnswers = ({
     <Accordion fluid className="tab-pane">
       <Grid className="header">
         <Grid.Row className="noprint">
-          <Grid.Column floated="right">
+          <Grid floated="right">
             <div className="side-note-large">
               <PDFDownload />
             </div>
             <p className="report side-note-small">{t('report:pdfNotification')}</p>
-          </Grid.Column>
+          </Grid>
         </Grid.Row>
-        <Grid.Column width={4} className="left">
+        <Grid width={4} className="left">
           {t('report:question')}
-        </Grid.Column>
-        <Grid.Column width={6} className="center">
+        </Grid>
+        <Grid width={6} className="center">
           {year} - {t('writtenAnswers')}
-        </Grid.Column>
-        <Grid.Column width={5} className="right" floated="right">
+        </Grid>
+        <Grid width={5} className="right" floated="right">
           {t('report:answered')} / {t('allProgrammes')}
-        </Grid.Column>
+        </Grid>
       </Grid>
       <div className="ui divider" />
       {questionsList.map(

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
+import { Menu, Icon, Dropdown, Typography, MenuItem, MenuList } from '@mui/material'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
@@ -29,68 +29,68 @@ export default () => {
 
   const unHijackButton = () => {
     return (
-      <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
-        <Label color="green" horizontal>
+      <MenuItem data-cy="sign-in-as" onClick={handleUnhijack}>
+        <Typography color="green" horizontal>
           Unhijack
-        </Label>
-      </Menu.Item>
+        </Typography>
+      </MenuItem>
     )
   }
 
   const GoToAdminPageButton = () => {
     return (
-      <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
+      <MenuItem data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
         {t('adminPage')}
-      </Menu.Item>
+      </MenuItem>
     )
   }
 
   const GoToEvaluationButton = () => {
     return (
-      <Menu.Item data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
+      <MenuItem data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
         {t('evaluation')}
-      </Menu.Item>
+      </MenuItem>
     )
   }
 
   const GoToDegreeReformGroup = () => {
     return (
-      <Menu.Item data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
+      <MenuItem data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
         {t('degree-reform-group')}
-      </Menu.Item>
+      </MenuItem>
     )
   }
 
   const GoToDegreeReformIndividual = () => {
     return (
-      <Menu.Item
+      <MenuItem
         data-cy="nav-degree-reform-individual"
         as={Link}
         to="/degree-reform-individual/"
         name="degree-reform-individual"
       >
         {t('degree-reform-individual')}
-      </Menu.Item>
+      </MenuItem>
     )
   }
 
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
-      <Menu.Item as={Link} to="/">
+      <MenuItem as={Link} to="/">
         <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
-      </Menu.Item>
+      </MenuItem>
       {user.superAdmin ? <GoToEvaluationButton /> : null}
       {user.superAdmin ? <GoToDegreeReformGroup /> : null}
       {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
       {user.admin ? <GoToAdminPageButton /> : null}
-      <Menu.Item>
+      <MenuItem>
         <a href="mailto:ospa@helsinki.fi">
           <Icon name="mail outline" />
           ospa@helsinki.fi
         </a>
-      </Menu.Item>
-      <Menu.Menu>
+      </MenuItem>
+      <MenuList>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
           <Dropdown.Menu>
             <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
@@ -104,16 +104,16 @@ export default () => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-      </Menu.Menu>
-      <Menu.Menu position="right">
+      </MenuList>
+      <MenuList position="right">
         {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
-        <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
+        <MenuItem style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
           {t('about')}
-        </Menu.Item>
-        <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
+        </MenuItem>
+        <MenuItem data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${t('logOut')} (${user.uid})`}
-        </Menu.Item>
-      </Menu.Menu>
+        </MenuItem>
+      </MenuList>
     </Menu>
   )
 }

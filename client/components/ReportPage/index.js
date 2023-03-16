@@ -157,7 +157,7 @@ export default () => {
     <div className="report">
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
-        <Grid.Column width={10}>
+        <Grid spacing={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
             {t('backToFrontPage')}
@@ -175,10 +175,10 @@ export default () => {
               <QuestionList label="" questionsList={questionsList} />
             </Accordion.Content>
           </Accordion>
-        </Grid.Column>
-        <Grid.Column width={6}>
+        </Grid>
+        <Grid spacing={6}>
           <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
-        </Grid.Column>
+        </Grid>
       </Grid>
       <Tab
         className="report-tab"

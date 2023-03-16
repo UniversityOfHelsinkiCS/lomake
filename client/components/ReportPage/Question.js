@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Accordion, Grid, Icon, Label, Popup } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Typography, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 
@@ -37,10 +37,10 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
         id={question.labelIndex}
       >
         <Grid>
-          <Grid.Column width={1} className="question-caret noprint">
+          <Grid spacing={1} className="question-caret noprint">
             {chosenProgrammes.length > 1 && <Icon name={`caret ${showing === question.id ? 'down' : 'right'}`} />}
-          </Grid.Column>
-          <Grid.Column width={11}>
+          </Grid>
+          <Grid spacing={11}>
             <span>
               <small className="question-title">
                 {romanize(question.titleIndex)} - {question.title}
@@ -51,12 +51,12 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
             </p>
             <p className="question-description">{question.description}</p>
             <p className="question-extrainfo">{question.extrainfo}</p>
-          </Grid.Column>
-          <Grid.Column width={4} floated="right">
-            <Label data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
+          </Grid>
+          <Grid spacing={4} floated="right">
+            <Typography data-cy={`answered-label-${question.id}`} className="question-answered-label" size="large">
               {answers.length} / {chosenProgrammes.length}
-            </Label>
-          </Grid.Column>
+            </Typography>
+          </Grid>
         </Grid>
       </Accordion.Title>
       {answers && (

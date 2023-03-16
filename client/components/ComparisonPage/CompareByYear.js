@@ -103,24 +103,24 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
     <div className="tab-pane">
       <Grid doubling columns={2} padded>
         <Grid.Row>
-          <Grid.Column width={10}>
+          <Grid spacing={10}>
             <FilterTray filter={filter} setFilter={setFilter} />
             <QuestionList label={t('comparison:selectQuestions')} questionsList={questionsList} onlyColoredQuestions />
             <LabelOptions unit={unit} setUnit={setUnit} />
-          </Grid.Column>
-          <Grid.Column width={6}>
+          </Grid>
+          <Grid spacing={6}>
             <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
-          </Grid.Column>
+          </Grid>
         </Grid.Row>
         {data.length > 0 ? (
           <>
             <Grid.Row>
-              <Grid.Column width={16}>
+              <Grid spacing={16}>
                 <BarChart data={data} questions={questions.selected.sort((a, b) => a.localeCompare(b))} unit={unit} />
-              </Grid.Column>
+              </Grid>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column width={16}>
+              <Grid spacing={16}>
                 <h3>{t('comparison:writtenAnswers')}</h3>
                 <div className="ui divider" />
                 <Accordion fluid className="comparison-container">
@@ -138,7 +138,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                       )
                   )}
                 </Accordion>
-              </Grid.Column>
+              </Grid>
             </Grid.Row>
           </>
         ) : (

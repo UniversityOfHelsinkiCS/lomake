@@ -147,13 +147,13 @@ export default () => {
     <div className="comparison">
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="comparison filter-container">
-        <Grid.Column width={10}>
+        <Grid spacing={10}>
           <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
             {t('backToFrontPage')}
           </Button>
           <h1>{t('comparison:compare')}</h1>
-        </Grid.Column>
+        </Grid>
       </Grid>
       <Tab className="comparison tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </div>

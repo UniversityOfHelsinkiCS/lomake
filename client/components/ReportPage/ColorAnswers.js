@@ -28,32 +28,32 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
     <div className="tab-pane">
       <Grid className="header">
         <Grid.Row className="noprint">
-          <Grid.Column floated="right">
+          <Grid floated="right">
             <div className="side-note-large">
               <PDFDownload />
             </div>
             <p className="report side-note-small">{t('report:pdfNotification')}</p>
-          </Grid.Column>
+          </Grid>
         </Grid.Row>
-        <Grid.Column width={4} className="left" />
-        <Grid.Column width={6} className="center">
+        <Grid spacing={4} className="left" />
+        <Grid spacing={6} className="center">
           {year} - {t('smileyColors')}
-        </Grid.Column>
-        <Grid.Column width={5} className="right" floated="right" />
+        </Grid>
+        <Grid spacing={5} className="right" floated="right" />
       </Grid>
       <div className="ui divider" />
       <Grid centered>
-        <Grid.Row textAlign="left">
+        <Grid textAlign="left">
           <ColorLegend />
-        </Grid.Row>
-        <Grid.Row className="noprint">
+        </Grid>
+        <Grid className="noprint">
           <Radio
             checked={showEmpty}
             onChange={() => setShowEmpty(!showEmpty)}
             label={t('comparison:emptyAnswers')}
             toggle
           />
-        </Grid.Row>
+        </Grid>
       </Grid>
       <div className="color-grid">
         {questionsList.map(

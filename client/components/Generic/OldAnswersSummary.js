@@ -17,36 +17,36 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
   return (
     <>
       <Grid.Row className="row" key={k}>
-        <Grid.Column width={3}>{answer.details.shortLabel[lang]}</Grid.Column>
+        <Grid spacing={3}>{answer.details.shortLabel[lang]}</Grid>
         {years.map(year => {
           return (
-            <Grid.Column width={4}>
+            <Grid spacing={4}>
               {answer[year].count ? measuresCount(answer[year].count) : colorCircle(answer[year].light)}
-            </Grid.Column>
+            </Grid>
           )
         })}
-        <Grid.Column width={1}>
+        <Grid spacing={1}>
           <Icon name={`angle ${showText ? 'up' : 'down'}`} onClick={() => setShowText(!showText)} />
-        </Grid.Column>
+        </Grid>
       </Grid.Row>
       {showText && (
         <Grid.Row className="row" key={`${k}-text`}>
-          <Grid.Column width={3}>
+          <Grid spacing={3}>
             <p style={{ paddingBottom: '1em' }}>
               <i>{answer.details.description[lang]}</i>
             </p>
             <p>
               <i>{answer.details.extrainfo[lang]}</i>
             </p>
-          </Grid.Column>
+          </Grid>
           {years.map(year => {
             return (
-              <Grid.Column width={4} className="old-answer-text">
+              <Grid width={4} className="old-answer-text">
                 {answer[year].text || t('empty')}
-              </Grid.Column>
+              </Grid>
             )
           })}
-          <Grid.Column width={1} />
+          <Grid width={1} />
         </Grid.Row>
       )}
     </>
@@ -68,13 +68,13 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
       <h4>Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta</h4>
       <div className="summary-grid" data-cy={`${partId}-summary`}>
         <Grid columns={5}>
-          <Grid.Row className="row">
-            <Grid.Column width={3}> </Grid.Column>
+          <Grid className="row">
+            <Grid spacing={3}> </Grid>
             {years.map(year => {
-              return <Grid.Column width={4}>{year}</Grid.Column>
+              return <Grid width={4}>{year}</Grid>
             })}
-            <Grid.Column width={1} />
-          </Grid.Row>
+            <Grid spacing={1} />
+          </Grid>
           {keys.map(k => {
             return <SummaryRow answer={relatedYearlyAnswers[k]} lang={lang} k={k} years={years} t={t} />
           })}

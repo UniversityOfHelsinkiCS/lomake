@@ -74,14 +74,14 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   return (
     <div className="tab-pane">
       <Grid stackable doubling padded columns={isAdmin(user) ? 3 : 2}>
-        <Grid.Row>
-          <Grid.Column width={16}>
+        <Grid>
+          <Grid spacing={16}>
             <YearSelector size="small" />
             <LevelFilter comparison />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row className="row">
-          <Grid.Column>
+          </Grid>
+        </Grid>
+        <Grid className="row">
+          <Grid>
             <div className="filter">
               <label>{t('comparison:chosenProgrammes')}</label>
               <Dropdown
@@ -95,15 +95,15 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                 data-cy="programme-filter"
               />
             </div>
-          </Grid.Column>
-          <Grid.Column>
+          </Grid>
+          <Grid>
             <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
             <small>{t('comparison:noAccessToAll')}</small>
             {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
               <CompanionFilter />
             )}
-          </Grid.Column>
-          <Grid.Column>
+          </Grid>
+          <Grid>
             <Radio
               className={`toggle${isAdmin(user) ? '' : '-marginless'}`}
               checked={showEmpty}
@@ -111,11 +111,11 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
               label={t('comparison:emptyAnswers')}
               toggle
             />
-          </Grid.Column>
-        </Grid.Row>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid className="color-grid" centered stackable doubling relaxed columns={isAdmin(user) ? 3 : 2}>
-        <Grid.Column>
+        <Grid>
           {questionsList.map(
             question =>
               getChosenAnswers(question) &&
@@ -131,8 +131,8 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                 />
               )
           )}
-        </Grid.Column>
-        <Grid.Column>
+        </Grid>
+        <Grid>
           {questionsList.map(
             question =>
               getComparedAnswers(question) &&
@@ -149,9 +149,9 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                 />
               )
           )}
-        </Grid.Column>
+        </Grid>
         {isAdmin(user) && (
-          <Grid.Column>
+          <Grid>
             {questionsList.map(
               question =>
                 allAnswers.get(question.id) &&
@@ -168,7 +168,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   />
                 )
             )}
-          </Grid.Column>
+          </Grid>
         )}
       </Grid>
     </div>

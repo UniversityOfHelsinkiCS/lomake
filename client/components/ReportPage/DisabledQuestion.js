@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Grid, Label } from 'semantic-ui-react'
+import { Accordion, Grid, Typography } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 
 const DisabledQuestion = ({ question, chosenProgrammes }) => (
@@ -10,8 +10,8 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
     id={question.labelIndex}
   >
     <Grid>
-      <Grid.Column width={1} className="question-caret noprint" />
-      <Grid.Column width={11}>
+      <Grid spacing={1} className="question-caret noprint" />
+      <Grid spacing={11}>
         <span>
           <small className="question-title-disabled">
             {romanize(question.titleIndex)} - {question.title}
@@ -22,12 +22,12 @@ const DisabledQuestion = ({ question, chosenProgrammes }) => (
         </p>
         <p className="question-description-disabled">{question.description}</p>
         <p className="question-extrainfo">{question.extrainfo}</p>
-      </Grid.Column>
-      <Grid.Column width={4} floated="right">
-        <Label data-cy={`answered-label-${question.id}`} className="question-answered-label-disabled" size="large">
+      </Grid>
+      <Grid spacing={4} floated="right">
+        <Typography data-cy={`answered-label-${question.id}`} className="question-answered-label-disabled" size="large">
           0 / {chosenProgrammes.length}
-        </Label>
-      </Grid.Column>
+        </Typography>
+      </Grid>
     </Grid>
   </Accordion.Title>
 )
