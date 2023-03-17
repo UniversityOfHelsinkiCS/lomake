@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon } from '@mui/material'
 
 import useOnClickOutside from '../../util/useOnClickOutside'
 import './Generic.scss'

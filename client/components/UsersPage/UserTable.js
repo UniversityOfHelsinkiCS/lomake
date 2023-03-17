@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Input, Icon, Loader, Table } from 'semantic-ui-react'
+import { Input, Icon, CircularProgress, Table } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 
@@ -29,7 +29,7 @@ export default () => {
     history.push('/')
   }
 
-  if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />
+  if (users.pending || !users.data || !usersProgrammes) return <CircularProgress active inline="centered" />
 
   if (!users) return null
 
@@ -107,7 +107,7 @@ export default () => {
         />
       </div>
       <Table celled compact stackable>
-        <Table.Header className="sticky-header">
+        <Table.Typography className="sticky-header">
           <Table.Row>
             {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
             {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
@@ -123,7 +123,7 @@ export default () => {
             {getCustomHeader({ name: t('users:role'), width: 2, field: 'role', sortable: false })}
             {isAdmin(user) && getCustomHeader({ name: 'Hijack', width: 1, field: 'hijackUser', sortable: false })}
           </Table.Row>
-        </Table.Header>
+        </Table.Typography>
         <Table.Body>
           {filteredUsers().map(u => (
             <User

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Grid, Icon } from 'semantic-ui-react'
+import { Grid, Icon } from '@mui/material'
 
 const colorCircle = color => {
   return <span className={`answer-circle-${color || 'gray'}`} />

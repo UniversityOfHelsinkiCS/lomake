@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Checkbox, Container, Dropdown, Header, Input, Segment } from 'semantic-ui-react'
+import { Button, Checkbox, Container, Menu, Typography, Input, Paper } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -74,9 +74,9 @@ const TempAccess = () => {
   registerLocale('se', sv)
 
   return (
-    <Segment>
+    <Paper>
       <div>
-        <Header as="h3"> {t('users:tempAccessMangement')} </Header>
+        <Typography as="h3"> {t('users:tempAccessMangement')} </Typography>
         <Container fluid className="temp-access-info">
           {t('users:tempAccessInfo1')} <br />
           {t('users:tempAccessInfo2')}
@@ -88,7 +88,7 @@ const TempAccess = () => {
       </div>
       <div className="temp-access-details">
         <div>
-          <Header as="h5"> {t('users:receiverEmail')}</Header>
+          <Typography as="h5"> {t('users:receiverEmail')}</Typography>
           <Input
             name="email"
             className="email-input"
@@ -98,8 +98,8 @@ const TempAccess = () => {
           />
         </div>
         <div>
-          <Header as="h5">{t('users:accessProgramme')}</Header>
-          <Dropdown
+          <Typography as="h5">{t('users:accessProgramme')}</Typography>
+          <Menu
             selection
             search
             placeholder={t('programmeHeader')}
@@ -110,7 +110,7 @@ const TempAccess = () => {
           />
         </div>
         <div>
-          <Header as="h5">{t('users:endOfAccess')}</Header>
+          <Typography as="h5">{t('users:endOfAccess')}</Typography>
           <DatePicker
             dateFormat="dd.MM.yyyy"
             placeholderText={t('choose')}
@@ -122,7 +122,7 @@ const TempAccess = () => {
         </div>
       </div>
       <div className="temp-access-input">
-        <Header as="h5">{t('users:kojoEmail')}</Header>
+        <Typography as="h5">{t('users:kojoEmail')}</Typography>
         <Input
           name="kojoEmail"
           className="kojoEmail-input"
@@ -154,7 +154,7 @@ const TempAccess = () => {
         </Button>
       </div>
       <TempAccessTable programmes={programmes} lang={lang} handleEdit={handleEdit} handleDelete={handleDelete} />
-    </Segment>
+    </Paper>
   )
 }
 

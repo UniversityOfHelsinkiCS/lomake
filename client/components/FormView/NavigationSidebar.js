@@ -1,11 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { Message, Icon } from 'semantic-ui-react'
+import { Card } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
+import CheckIcon from '@mui/icons-material/Check'
 import questions from '../../questions.json'
 import katselmusQuestions from '../../katselmusQuestions.json'
 import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
@@ -16,11 +18,6 @@ const replaceTitle = {
   'FRAMGÅNGAR OCH UTVECKLINGSÅTGÄRDER': 'FRAMGÅNGAR OCH UTVECKLING-\nSÅTGÄRDER',
   'PERSONALRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET':
     'PERSONAL-\nRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET',
-}
-
-const iconMap = {
-  OK: 'check',
-  EMPTY: 'exclamation',
 }
 
 const NavigationSidebar = ({ programmeKey, form }) => {
@@ -46,7 +43,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
   let partNumber = -1
   return (
     <div className="navigation-sidebar">
-      <Message style={{ padding: 0 }}>
+      <Card style={{ padding: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
           {questionsToShow.map((section, index) => {
             const titleFromJson = section.title[lang]
@@ -106,13 +103,16 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                       <div key={id}>
                         {(type === 'ENTITY' || type === 'SLIDER' || type === 'CHOOSE-RADIO') && (
                           <>
-                            {partNumber}.{' '}
-                            <Icon
-                              data-cy={`${id}-${status}`}
-                              name={iconMap[status]}
-                              style={{ color: getColor() }}
-                              title={`${t(status)}${required ? ` (${t('formView:mandatory')})` : ''}`}
-                            />
+                            <div style={{ display: 'flex' }}>
+                              {partNumber}.{' '}
+                              <div
+                                data-cy={`${id}-${status}`}
+                                style={{ color: getColor() }}
+                                title={`${t(status)}${required ? ` (${t('formView:mandatory')})` : ''}`}
+                              >
+                                {status === 'OK' ? <CheckIcon /> : <PriorityHighIcon />}
+                              </div>
+                            </div>
                           </>
                         )}
                       </div>
@@ -123,7 +123,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
             )
           })}
         </div>
-      </Message>
+      </Card>
     </div>
   )
 }

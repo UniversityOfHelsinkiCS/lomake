@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Divider } from 'semantic-ui-react'
+import { Divider } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import positiveEmoji from 'Assets/sunglasses.png'

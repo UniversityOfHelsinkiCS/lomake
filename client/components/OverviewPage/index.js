@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Menu, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
@@ -106,7 +106,7 @@ export default () => {
                 {t('overview:compareAnswers')}
               </Button>
             )}
-            <Dropdown
+            <Menu
               data-cy="csv-download"
               className="button basic gray csv-download"
               direction="left"
@@ -114,16 +114,16 @@ export default () => {
               onClick={() => setShowCsv(true)}
             >
               {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
+                <Menu.Menu>
+                  <Menu.Item>
                     <CsvDownload wantedData="written" view="overview" />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
+                  </Menu.Item>
+                  <Menu.Item>
                     <CsvDownload wantedData="colors" view="overview" />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
+                  </Menu.Item>
+                </Menu.Menu>
               ) : null}
-            </Dropdown>
+            </Menu>
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable

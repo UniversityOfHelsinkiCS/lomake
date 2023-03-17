@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 

@@ -20,6 +20,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
     "@mui/system": "^5.11.11",
     "@sentry/browser": "^7.10.0",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Message, Icon } from 'semantic-ui-react'
+import { Button, Card, Icon } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
@@ -52,7 +52,7 @@ export default function SaveIndicator() {
   if (saveError) {
     return (
       <>
-        <Message
+        <Card
           negative
           icon={<Icon color={colors.red} name="exclamation" />}
           style={{

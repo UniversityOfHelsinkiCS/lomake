@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Menu, Icon, Dropdown, Typography, MenuItem, MenuList } from '@mui/material'
+import { Menu, Icon, Typography, MenuItem, Button, Box, AppBar, Container, Divider, Toolbar } from '@mui/material'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
@@ -12,6 +12,23 @@ export default () => {
   const { t, i18n } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
+
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const languageLinks = [
+    { code: 'fi', text: 'Suomi' },
+    { code: 'se', text: 'Svenska' },
+    { code: 'en', text: 'English' },
+  ]
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
@@ -76,44 +93,72 @@ export default () => {
 
   if (!user) return null
   return (
-    <Menu id="navBar-wrapper" stackable compact fluid>
-      <MenuItem as={Link} to="/">
-        <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
-      </MenuItem>
-      {user.superAdmin ? <GoToEvaluationButton /> : null}
-      {user.superAdmin ? <GoToDegreeReformGroup /> : null}
-      {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
-      {user.admin ? <GoToAdminPageButton /> : null}
-      <MenuItem>
-        <a href="mailto:ospa@helsinki.fi">
-          <Icon name="mail outline" />
-          ospa@helsinki.fi
-        </a>
-      </MenuItem>
-      <MenuList>
-        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
-          <Dropdown.Menu>
-            <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
-              Suomi
-            </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={() => setLanguageCode('se')}>
-              Svenska
-            </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={() => setLanguageCode('en')}>
-              English
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </MenuList>
-      <MenuList position="right">
-        {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
-        <MenuItem style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
-          {t('about')}
-        </MenuItem>
-        <MenuItem data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`${t('logOut')} (${user.uid})`}
-        </MenuItem>
-      </MenuList>
-    </Menu>
+    <>
+      <AppBar position="static" style={{ background: 'white', color: 'black' }}>
+        <Container maxWidth="xl" className="navBar-wrapper">
+          <Toolbar>
+            <Box>
+              <MenuItem as={Link} to="/">
+                <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+              </MenuItem>
+            </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {user.superAdmin ? <GoToEvaluationButton /> : null}
+              {user.superAdmin ? <GoToDegreeReformGroup /> : null}
+              {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+              {user.admin ? <GoToAdminPageButton /> : null}
+            </Box>
+            <Box>
+              <MenuItem>
+                <a href="mailto:ospa@helsinki.fi">
+                  <Icon name="mail outline" />
+                  ospa@helsinki.fi
+                </a>
+              </MenuItem>
+            </Box>
+            <Button
+              id="basic-button"
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              {languageLinks.map(language => {
+                return (
+                  <>
+                    <Divider orientation="vertical" flexItem />
+                    <MenuItem
+                      data-cy={`navBar-localeOption-${language.code}`}
+                      value={language.code}
+                      onClick={() => setLanguageCode(language.code)}
+                    >
+                      {language.text}
+                    </MenuItem>
+                  </>
+                )
+              })}
+            </Menu>
+            {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
+            <MenuItem style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
+              {t('about')}
+            </MenuItem>
+            <MenuItem data-cy="nav-logout" name="log-out" onClick={handleLogout}>
+              {`${t('logOut')} (${user.uid})`}
+            </MenuItem>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   )
 }

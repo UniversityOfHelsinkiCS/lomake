@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, Radio, Popup, Icon } from 'semantic-ui-react'
+import { Divider, Radio, Popover, Icon } from '@mui/material'
 import { colors } from 'Utilities/common'
 import './Generic.scss'
 import './Slider.scss'
@@ -32,7 +32,7 @@ const Slider = ({ id, label, description, required, number, previousYearsAnswers
           <h3>
             {number}. {label}{' '}
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
-            <Popup
+            <Popover
               content={
                 <>
                   <p>1 = Täyin eri mieltä</p>

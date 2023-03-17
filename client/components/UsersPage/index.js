@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Tab } from 'semantic-ui-react'
+import { Tab } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '@root/config/common'

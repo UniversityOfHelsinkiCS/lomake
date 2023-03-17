@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Icon, Popup } from 'semantic-ui-react'
+import { Icon, Popover } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import questions from '../../questions.json'
@@ -163,10 +163,10 @@ const ColorTableCell = ({
   if (!icon) return IconElement
 
   return (
-    <Popup trigger={IconElement}>
+    <Popover trigger={IconElement}>
       <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}
       {icon === 'angle up' ? t('overview:betterThanLastYear') : t('overview:worseThanLastYear')}
-    </Popup>
+    </Popover>
   )
 }
 

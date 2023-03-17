@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button, Menu } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { setQuestions } from 'Utilities/redux/filterReducer'
@@ -43,7 +43,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   return (
     <div className="questions-list-container" data-cy="comparison-question-list">
       <label className={`questions-list-label${questions.length === 0 ? '-bolded' : ''}`}>{label}</label>
-      <Dropdown
+      <Menu
         className="comparison-questions-list-selector"
         data-cy="questions-list"
         name="questions-list"

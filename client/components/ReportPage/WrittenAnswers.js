@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Accordion, Grid } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'

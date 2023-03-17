@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 const TableHeader = ({ tableIds, sort }) => {

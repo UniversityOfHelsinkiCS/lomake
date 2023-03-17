@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio } from 'semantic-ui-react'
+import { Grid, Radio } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
 

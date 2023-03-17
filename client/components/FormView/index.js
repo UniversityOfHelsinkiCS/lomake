@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
-import { Button, Dropdown, Loader } from 'semantic-ui-react'
+import { Button, Menu, CircularProgress } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
@@ -93,7 +93,7 @@ const FormView = ({ room }) => {
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
   return singleProgramPending ? (
-    <Loader active />
+    <CircularProgress active />
   ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
@@ -152,17 +152,12 @@ const FormView = ({ room }) => {
           </div>
         </div>
         <div className="hide-in-print-mode" style={{ marginTop: '2em' }}>
-          <Dropdown
-            className="button basic gray"
-            direction="left"
-            text={t('formView:downloadCSV')}
-            data-cy="csv-download"
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written" />} />
-              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="colors" />} />
-            </Dropdown.Menu>
-          </Dropdown>
+          <Menu className="button basic gray" direction="left" text={t('formView:downloadCSV')} data-cy="csv-download">
+            <Menu.Menu>
+              <Menu.Item content={<CsvDownload programme={programme} view="form" wantedData="written" />} />
+              <Menu.Item content={<CsvDownload programme={programme} view="form" wantedData="colors" />} />
+            </Menu.Menu>
+          </Menu>
           <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
           <PDFDownload />
         </div>

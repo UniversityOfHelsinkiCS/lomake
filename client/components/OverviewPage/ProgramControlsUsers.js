@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Icon, Header, Grid, Segment } from 'semantic-ui-react'
+import { Icon, Typography, Grid, Paper } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 const SwitchableBadge = ({ cyTag, currentAccess }) => {
@@ -38,23 +38,23 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
 
 const OwnerAccordionTable = ({ users, programme, t }) => {
   return (
-    <Segment style={{ margin: '1em 0' }}>
+    <Paper style={{ margin: '1em 0' }}>
       <Grid celled="internally">
         <Grid>
           <Grid spacing={3} style={{ textAlign: 'center' }}>
-            <Header as="h4">{t('overview:name')}</Header>
+            <Typography as="h4">{t('overview:name')}</Typography>
           </Grid>
           <Grid spacing={4} style={{ textAlign: 'center' }}>
-            <Header as="h4">Email</Header>
+            <Typography as="h4">Email</Typography>
           </Grid>
           <Grid spacing={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{t('overview:view')}</Header>
+            <Typography as="h4">{t('overview:view')}</Typography>
           </Grid>
           <Grid spacing={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{t('overview:edit')}</Header>
+            <Typography as="h4">{t('overview:edit')}</Typography>
           </Grid>
           <Grid spacing={2} style={{ textAlign: 'center' }}>
-            <Header as="h4">{t('overview:owner')}</Header>
+            <Typography as="h4">{t('overview:owner')}</Typography>
           </Grid>
         </Grid>
         {users.length === 0 ? (
@@ -67,7 +67,7 @@ const OwnerAccordionTable = ({ users, programme, t }) => {
           users.map(user => <OwnerAccordionUserRow user={user} programme={programme} key={user.id} />)
         )}
       </Grid>
-    </Segment>
+    </Paper>
   )
 }
 

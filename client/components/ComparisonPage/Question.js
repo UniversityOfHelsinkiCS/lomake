@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Popover } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { romanize } from 'Utilities/common'
@@ -28,7 +28,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
   }
 
   const ButtonPopup = ({ color, index, yearsIndex }) => (
-    <Popup
+    <Popover
       content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
       trigger={
         <button

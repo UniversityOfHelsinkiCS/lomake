@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
-import { Button, Header, Select, Segment } from 'semantic-ui-react'
+import { Button, Typography, Select, Paper } from '@mui/material'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
@@ -69,9 +69,9 @@ const DeadlineSetting = () => {
   }
 
   return (
-    <Segment>
+    <Paper>
       <div style={{ margin: '1em 0em 3em 0em' }}>
-        <Header as="h4">{t('users:selectNewDeadline')}</Header>
+        <Typography as="h4">{t('users:selectNewDeadline')}</Typography>
         <DatePicker
           dateFormat="dd.MM.yyyy"
           excludeDates={existingDeadlines.map(dl => new Date(dl.date))}
@@ -81,7 +81,7 @@ const DeadlineSetting = () => {
           onChange={setNewDate}
           locale={lang}
         />
-        <Header as="h4">{t('users:selectDraftYear')}</Header>
+        <Typography as="h4">{t('users:selectDraftYear')}</Typography>
         <Select
           data-cy="draft-year-selector"
           placeholder="Select year"
@@ -137,7 +137,7 @@ const DeadlineSetting = () => {
           </b>
         </p>
       </div>
-    </Segment>
+    </Paper>
   )
 }
 

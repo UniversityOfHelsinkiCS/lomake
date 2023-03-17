@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Message } from 'semantic-ui-react'
+import { Typography, Card } from '@mui/material'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -33,11 +33,11 @@ const DeadlineInfo = () => {
   }
 
   return (
-    <Message>
-      <Header as="h4" style={{ textAlign: 'center' }}>
+    <Card>
+      <Typography as="h4" style={{ textAlign: 'center' }}>
         {getDeadlineText()}
-      </Header>
-    </Message>
+      </Typography>
+    </Card>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Input } from 'semantic-ui-react'
+import { CircularProgress, Input } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
@@ -84,7 +84,7 @@ const ColorTable = React.memo(
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
-      return <Loader active inline="centered" />
+      return <CircularProgress active inline="centered" />
 
     let questionsToShow = questions
 

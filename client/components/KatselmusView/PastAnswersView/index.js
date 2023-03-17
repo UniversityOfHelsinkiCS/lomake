@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
-import { Accordion } from 'semantic-ui-react'
+import { Accordion } from '@mui/material'
 import * as _ from 'lodash'
 
 import { isAdmin } from '@root/config/common'

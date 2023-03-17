@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { Button, Icon, Grid, Tab } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import NoPermissions from 'Components/Generic/NoPermissions'

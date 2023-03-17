@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Icon, Segment } from 'semantic-ui-react'
+import { Button, Icon, Paper } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems } from 'Utilities/common'
@@ -30,7 +30,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
 
   return (
     <>
-      <Segment className="list-container" data-cy="report-programmes-list">
+      <Paper className="list-container" data-cy="report-programmes-list">
         <p className="list-header">{t('generic:nowShowing')}</p>
         {programmes.all.length > 0 ? (
           <>
@@ -68,7 +68,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
         ) : (
           <h4>{t('noData')}</h4>
         )}
-      </Segment>
+      </Paper>
       <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
         {t('selectAll')}
       </Button>

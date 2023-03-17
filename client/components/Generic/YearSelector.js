@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Select } from 'semantic-ui-react'
+import { Select } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'

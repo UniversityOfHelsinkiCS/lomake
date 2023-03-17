@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Accordion, Grid, Icon, Typography, Popup } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Typography, Popover } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 
@@ -10,7 +10,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
   const ButtonPopup = ({ color }) => (
-    <Popup
+    <Popover
       content={`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}
       trigger={
         <button

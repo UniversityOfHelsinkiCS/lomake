@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Form, Radio } from 'semantic-ui-react'
+import { FormControl, Radio } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { setLevel, clearLevelSpecificFilters } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
@@ -33,61 +33,49 @@ const LevelFilter = ({ comparison }) => {
   return (
     <div className="level-filter">
       <label>{comparison ? t('generic:compareLevel') : t('generic:levelFilter')}</label>
-      <Form>
-        <Form.Group inline>
-          <Form.Field>
-            <Radio
-              label={t('allProgrammes')}
-              name="allProgrammes"
-              value="allProgrammes"
-              checked={level === 'allProgrammes'}
-              onChange={handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label={t('bachelor')}
-              disabled={!levels.bachelor}
-              name="bachelor"
-              value="bachelor"
-              checked={level === 'bachelor'}
-              onChange={handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              data-cy="master-filter"
-              label={t('master')}
-              disabled={!levels.master}
-              name="master"
-              value="master"
-              checked={level === 'master'}
-              onChange={handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              data-cy="doctoral-filter"
-              label={t('doctoral')}
-              disabled={!levels.doctoral}
-              name="doctoral"
-              value="doctoral"
-              checked={level === 'doctoral'}
-              onChange={handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label={t('international')}
-              disabled={!levels.international}
-              name="international"
-              value="international"
-              checked={level === 'international'}
-              onChange={handleChange}
-            />
-          </Form.Field>
-        </Form.Group>
-      </Form>
+      <FormControl>
+        <Radio
+          label={t('allProgrammes')}
+          name="allProgrammes"
+          value="allProgrammes"
+          checked={level === 'allProgrammes'}
+          onChange={handleChange}
+        />
+        <Radio
+          label={t('bachelor')}
+          disabled={!levels.bachelor}
+          name="bachelor"
+          value="bachelor"
+          checked={level === 'bachelor'}
+          onChange={handleChange}
+        />
+        <Radio
+          data-cy="master-filter"
+          label={t('master')}
+          disabled={!levels.master}
+          name="master"
+          value="master"
+          checked={level === 'master'}
+          onChange={handleChange}
+        />
+        <Radio
+          data-cy="doctoral-filter"
+          label={t('doctoral')}
+          disabled={!levels.doctoral}
+          name="doctoral"
+          value="doctoral"
+          checked={level === 'doctoral'}
+          onChange={handleChange}
+        />
+        <Radio
+          label={t('international')}
+          disabled={!levels.international}
+          name="international"
+          value="international"
+          checked={level === 'international'}
+          onChange={handleChange}
+        />
+      </FormControl>
     </div>
   )
 }

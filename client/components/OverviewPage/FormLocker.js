@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon, Popup } from 'semantic-ui-react'
+import { Button, Icon, Popover } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 
@@ -43,7 +43,7 @@ export default function FormLocker({ programme }) {
 
   return (
     <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>
-      <Popup
+      <Popover
         trigger={
           <Button
             data-cy={`formLocker-button-${locked ? 'open' : 'close'}`}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table } from '@mui/material'
 import * as _ from 'lodash'
 import {
   doctoralIams,
@@ -28,11 +28,11 @@ const IamTable = () => {
   return (
     <>
       <Table compact>
-        <Table.Header>
+        <Table.Typography>
           <Table.HeaderCell>IAM-ryhmä</Table.HeaderCell>
           <Table.HeaderCell>Mitä oikeuksia sillä saa?</Table.HeaderCell>
           <Table.HeaderCell>Keitä ryhmään kuuluu?</Table.HeaderCell>
-        </Table.Header>
+        </Table.Typography>
         <Table.Body>
           {getRowsForAccessGroup(superAdminGroups, 'Super-admin-oikeudet', 'Toska-ryhmä')}
           {getRowsForAccessGroup(adminGroups, 'Admin-oikeudet', 'Ospa-ryhmä')}

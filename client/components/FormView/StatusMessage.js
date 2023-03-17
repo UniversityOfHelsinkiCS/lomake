@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Message } from 'semantic-ui-react'
+import { Card } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 
@@ -27,7 +27,7 @@ const StatusMessage = ({ programme }) => {
   if (!deadlineObj)
     return (
       <>
-        <Message
+        <Card
           data-cy="deadline-passed-notice"
           icon="clock"
           header={`${t('formView:status:deadlinePassed')}`}
@@ -38,7 +38,7 @@ const StatusMessage = ({ programme }) => {
 
   if (viewOnly)
     return (
-      <Message
+      <Card
         data-cy="locked-form-notice"
         icon="lock"
         header={`${t('formView:status:locked')} ${showMessageForOpenYear(draftYear, writeAccess, t)}`}
@@ -47,7 +47,7 @@ const StatusMessage = ({ programme }) => {
     )
 
   return (
-    <Message
+    <Card
       data-cy="saving-answers-notice"
       icon="info"
       header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Radio, Form } from 'semantic-ui-react'
+import { Divider, Radio, FormControl, RadioGroup } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 
 import { colors } from 'Utilities/common'
 import './Generic.scss'
+import { FormControlLabel } from '@root/node_modules/@mui/material/index'
 
 const mapColorToValid = {
   VIHREÄ: 'green',
@@ -27,7 +28,6 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
-
   const handleClick = label => {
     setState({ value: label })
     choose(id, label)
@@ -37,7 +37,6 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
   const radioButtonLabels = radioOptions ? radioOptions[lang] : null
-  const radioButtonIndexes = radioOptions ? radioOptions?.indexes : null
 
   return (
     <div className="form-entity-area">
@@ -64,21 +63,22 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {radioButtonLabels ? (
-        <Form>
-          {radioButtonLabels.map((o, index) => {
+        <FormControl>
+          {radioButtonLabels.map(o => {
             return (
-              <Form.Field key={generateKey(o.label)}>
-                <Radio
+              <RadioGroup key={generateKey(o.label)}>
+                <FormControlLabel
                   label={o.label}
                   name="radioGroup"
                   value={o.label}
-                  checked={state.value === radioButtonIndexes[index]}
-                  onChange={() => handleClick(radioButtonIndexes[index])}
+                  control={<Radio />}
+                  checked={state.value === o.id}
+                  onChange={() => handleClick(o.id)}
                 />
-              </Form.Field>
+              </RadioGroup>
             )
           })}
-        </Form>
+        </FormControl>
       ) : (
         <p>Missing options</p>
       )}

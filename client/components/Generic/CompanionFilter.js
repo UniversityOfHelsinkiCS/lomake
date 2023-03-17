@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Form, Radio } from 'semantic-ui-react'
-
+import { FormControl, Radio } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { clearLevelSpecificFilters, setCompanion } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
@@ -18,20 +17,16 @@ const CompanionFilter = () => {
 
   return (
     <div className="companion-filter">
-      <Form>
-        <Form.Group inline>
-          <Form.Field>
-            <Radio
-              data-cy="companion-filter"
-              label={t('generic:companionFilter')}
-              name="companion"
-              checked={companion}
-              onChange={handleChange}
-              toggle
-            />
-          </Form.Field>
-        </Form.Group>
-      </Form>
+      <FormControl>
+        <Radio
+          data-cy="companion-filter"
+          label={t('generic:companionFilter')}
+          name="companion"
+          checked={companion}
+          onChange={handleChange}
+          toggle
+        />
+      </FormControl>
     </div>
   )
 }

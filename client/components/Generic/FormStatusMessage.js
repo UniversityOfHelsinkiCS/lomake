@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Message } from 'semantic-ui-react'
+import { Card } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
@@ -30,7 +30,7 @@ const FormStatusMessage = ({ programme }) => {
 
   return (
     <div className="form-status-message-sticky hide-in-print-mode">
-      <Message
+      <Card
         onDismiss={() => setVisible(false)}
         color="teal"
         header={t('generic:statusHeader', { year: draftYear ? draftYear.year : '' })}

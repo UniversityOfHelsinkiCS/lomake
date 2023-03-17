@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
-import { Table, Icon, Typography, Popup } from 'semantic-ui-react'
+import { Table, Icon, Typography, Popover } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { colors, getUserRole } from 'Utilities/common'
@@ -52,7 +52,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
       return <div>None</div>
     }
     return (
-      <Popup
+      <Popover
         position="bottom center"
         trigger={
           <div>

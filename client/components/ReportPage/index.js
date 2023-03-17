@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { Accordion, Button, Icon, Grid, Tab } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'

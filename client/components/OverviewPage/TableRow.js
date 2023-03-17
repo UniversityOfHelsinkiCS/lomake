@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
+import { Button } from '@mui/material'
 
 import { isAdmin } from '@root/config/common'
 import ColorTableCell from './ColorTableCell'

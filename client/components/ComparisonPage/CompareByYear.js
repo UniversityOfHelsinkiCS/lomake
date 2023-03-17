@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Accordion, Grid } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import * as _ from 'lodash'
 

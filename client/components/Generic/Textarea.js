@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField, getLock } from 'Utilities/redux/formReducer'
-import { Loader } from 'semantic-ui-react'
+import { CircularProgress } from '@mui/material'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
@@ -120,7 +120,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           >
             {label}
             {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
-            <Loader
+            <CircularProgress
               style={{
                 marginLeft: '1em',
                 visibility: !hasLock && gettingLock ? undefined : 'hidden',

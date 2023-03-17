@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Checkbox, Confirm, Divider, Header, Icon, Table } from 'semantic-ui-react'
+import { Checkbox, Dialog, Divider, Typography, Icon, Table } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import { sortedItems } from 'Utilities/common'
@@ -82,10 +82,10 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
   return (
     <div className="temp-access-table-container">
       <Divider />
-      <Header as="h3">{t('users:tempAccesses')} </Header>
+      <Typography as="h3">{t('users:tempAccesses')} </Typography>
       <Checkbox toggle label={t('users:expired')} onChange={(e, data) => setShowAll(data.checked)} checked={showAll} />
       <Table celled stackable compact>
-        <Table.Header className="sticky-header">
+        <Table.Typography className="sticky-header">
           <Table.Row>
             {getCustomHeader({ name: t('users:name'), width: 2, field: 'lastname' })}
             {getCustomHeader({ name: t('users:userId'), width: 1, field: 'uid' })}
@@ -95,7 +95,7 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
             <Table.HeaderCell width={1}>{t('edit')}</Table.HeaderCell>
             <Table.HeaderCell width={1}>{t('delete')}</Table.HeaderCell>
           </Table.Row>
-        </Table.Header>
+        </Table.Typography>
         <Table.Body>
           {sortedUsersToShow.map(row => (
             <Table.Row key={`${row.uid}-${row.programme}-row`}>
@@ -120,7 +120,7 @@ const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {
           ))}
         </Table.Body>
       </Table>
-      <Confirm
+      <Dialog
         open={confirm}
         content={t('users:confirm', {
           firstname: toDelete?.firstname,

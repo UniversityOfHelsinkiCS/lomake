@@ -1,6 +1,5 @@
 import React from 'react'
-import { Divider } from 'semantic-ui-react'
-// import { useTranslation } from 'react-i18next'
+import { Divider } from '@mui/material'
 
 import { colors } from 'Utilities/common'
 import studyPath from 'Assets/degreeReform/study_path.png'

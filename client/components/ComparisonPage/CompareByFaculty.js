@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Grid, Radio } from 'semantic-ui-react'
+import { Radio, Grid, Menu } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
@@ -84,7 +84,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
           <Grid>
             <div className="filter">
               <label>{t('comparison:chosenProgrammes')}</label>
-              <Dropdown
+              <Menu
                 fluid
                 selection
                 search

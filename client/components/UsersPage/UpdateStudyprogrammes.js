@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Message, Segment } from 'semantic-ui-react'
+import { Button, Card, Paper } from '@mui/material'
 
 import { updateStudyprogrammes } from 'Utilities/redux/studyProgrammesReducer'
 
@@ -14,8 +14,8 @@ export default () => {
 
   return (
     <>
-      {status && <Message color="blue">{status}</Message>}
-      <Segment padded>
+      {status && <Card color="blue">{status}</Card>}
+      <Paper padded>
         <h3>Päivitä koulutusohjelmat</h3>
         <div style={{ paddingBottom: '10px' }}>
           Nappulan painaminen poistaa tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat.
@@ -34,7 +34,7 @@ export default () => {
         <Button color="blue" onClick={() => handleClick()}>
           Päivitä
         </Button>
-      </Segment>
+      </Paper>
     </>
   )
 }

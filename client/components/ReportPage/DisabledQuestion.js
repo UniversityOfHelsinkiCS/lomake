@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Grid, Typography } from 'semantic-ui-react'
+import { Accordion, Grid, Typography } from '@mui/material'
 import { romanize } from 'Utilities/common'
 
 const DisabledQuestion = ({ question, chosenProgrammes }) => (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+import { Icon } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { colors } from 'Utilities/common'

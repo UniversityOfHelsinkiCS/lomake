@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
