@@ -77,7 +77,8 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                       type === 'MEASURES' ||
                       type === 'CHOOSE-RADIO' ||
                       type === 'SLIDER' ||
-                      type === 'CHOOSE-ADVANCED'
+                      type === 'CHOOSE-ADVANCED' ||
+                      type === 'CHECKBOX'
                     )
                       partNumber++
 
@@ -113,7 +114,8 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                         {(type === 'ENTITY' ||
                           type === 'SLIDER' ||
                           type === 'CHOOSE-RADIO' ||
-                          type === 'CHOOSE-ADVANCED') && (
+                          type === 'CHOOSE-ADVANCED' ||
+                          type === 'CHECKBOX') && (
                           <>
                             {partNumber}.{' '}
                             <Icon

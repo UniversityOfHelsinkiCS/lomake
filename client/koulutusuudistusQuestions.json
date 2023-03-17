@@ -110,7 +110,7 @@
       {
         "id": "base-information-2",
         "index": 2,
-        "type": "CHOOSE-RADIO",
+        "type": "CHECKBOX",
         "shortLabel": {
           "fi": "Mihin näkökulma kohdistuu",
           "se": "",
@@ -122,7 +122,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Mihin näkökulma kohdistuu",
+          "fi": "",
           "se": "",
           "en": ""
         },
