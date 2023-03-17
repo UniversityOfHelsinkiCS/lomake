@@ -20,6 +20,11 @@ const replaceTitle = {
     'PERSONAL-\nRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET',
 }
 
+const iconMap = {
+  OK: <CheckIcon />,
+  EMPTY: <PriorityHighIcon />,
+}
+
 const NavigationSidebar = ({ programmeKey, form }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
@@ -110,7 +115,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                                 style={{ color: getColor() }}
                                 title={`${t(status)}${required ? ` (${t('formView:mandatory')})` : ''}`}
                               >
-                                {status === 'OK' ? <CheckIcon /> : <PriorityHighIcon />}
+                                {iconMap[status]}
                               </div>
                             </div>
                           </>
