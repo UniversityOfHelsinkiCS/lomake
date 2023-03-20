@@ -86,7 +86,23 @@ export const modifiedQuestions = (questions, lang) => {
   questions.forEach(question => {
     titleIndex += 1
     question.parts.forEach(part => {
-      if (part.type !== 'TITLE') {
+      if (part.type === 'SELECTION') {
+        attributes = [
+          ...attributes,
+          {
+            id: `${part.id}_selection`,
+            color: `${part.id}_light`,
+            description: part.description ? part.description[lang] : '',
+            label: _.capitalize(part.label[lang]),
+            title: question.title[lang],
+            titleIndex,
+            labelIndex: part.index,
+            no_color: part.no_color,
+            extrainfo: part.extrainfo ? part.extrainfo[lang] : '',
+            options: part.options,
+          },
+        ]
+      } else if (part.type !== 'TITLE') {
         attributes = [
           ...attributes,
           {
@@ -202,6 +218,26 @@ export const cleanText = string => {
     .replace(/ - /g, '\n')
 
   return cleanedText
+}
+
+export const getSelectionAnswer = (data, question, lang) => {
+  if (!data) return ''
+  const { id, options } = question
+  const questionId = id.substring(0, id.length - 10)
+  let answer = []
+  if (data[id]) {
+    const selections = JSON.parse(data[id])
+    Object.entries(selections).forEach(([key, value]) => {
+      if (value) {
+        answer = [...answer, options?.[key]?.[lang] || key]
+      }
+    })
+  }
+  if (data[`${questionId}_text`]) {
+    answer = [...answer, data[`${questionId}_text`]]
+  }
+
+  return answer.join(', ')
 }
 
 export const getMeasuresAnswer = (data, rawId) => {

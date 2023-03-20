@@ -15,6 +15,7 @@ import {
   getMeasuresAnswer,
   modifiedQuestions,
   programmeNameByKey as programmeName,
+  getSelectionAnswer,
 } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
@@ -36,7 +37,9 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
         const color = data[question.color] ? data[question.color] : 'emptyAnswer'
         const name = programmeName(usersProgrammes, programme, lang)
         let answer = ''
+
         if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
         else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
         answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
