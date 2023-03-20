@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Message, Icon } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
@@ -26,6 +26,8 @@ const iconMap = {
 const NavigationSidebar = ({ programmeKey, form }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(({ form }) => form.data || {})
+  const filter = useSelector(state => state.filters || {})
+  const [checkboxFilter, setCheckboxFilter] = useState([])
   const location = useLocation()
   const { t } = useTranslation()
 
@@ -40,8 +42,27 @@ const NavigationSidebar = ({ programmeKey, form }) => {
     linkBase = '/degree-reform/form/'
   } else if (form === 'degree-reform-individual') {
     questionsToShow = koulutusuudistusQuestions
-    linkBase = '/degree-reform-individual/'
+    linkBase = '/degree-reform-individual/form'
   }
+  let filters = []
+  useEffect(() => {
+    filter?.answerLevels?.map(f => {
+      if (f.id === 'bachelor' && f.value === true) {
+        filters = filters.concat(5)
+      }
+      if (f.id === 'master' && f.value === true) {
+        filters = filters.concat([6, 7])
+      }
+      if (f.id === 'doctoral' && f.value === true) {
+        filters = filters.concat(8)
+      }
+      if (f.id === 'all' && f.value === true) {
+        filters = [5, 6, 7, 8]
+      }
+      return 0
+    })
+    setCheckboxFilter(filters)
+  }, [filter?.answerLevels])
 
   let partNumber = -1
   return (
@@ -53,6 +74,9 @@ const NavigationSidebar = ({ programmeKey, form }) => {
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
             const active = location.hash === `#${romanNumeral}`
+            if (checkboxFilter.length > 0 && checkboxFilter.find(f => f === section.id)) {
+              return <div />
+            }
             return (
               <div
                 key={title}
@@ -77,21 +101,19 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                       type === 'MEASURES' ||
                       type === 'CHOOSE-RADIO' ||
                       type === 'SLIDER' ||
-                      type === 'SELECTION'
+                      type === 'SELECTION' ||
+                      type === 'CHOOSE-ADVANCED' ||
+                      type === 'CHECKBOX'
                     ) {
                       partNumber++
                     }
 
                     const idsToCheck = []
 
-                    if (
-                      type === 'TEXTAREA' ||
-                      type === 'ENTITY' ||
-                      type === 'CHOOSE-RADIO' ||
-                      type === 'SLIDER' ||
-                      type === 'SELECTION'
-                    ) {
+                    if (type === 'TEXTAREA' || type === 'ENTITY') {
                       idsToCheck.push(`${id}_text`)
+                    } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
+                      idsToCheck.push(`${id}`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
                     }
@@ -122,7 +144,9 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                         {(type === 'ENTITY' ||
                           type === 'SLIDER' ||
                           type === 'CHOOSE-RADIO' ||
-                          type === 'SELECTION') && (
+                          type === 'SELECTION' ||
+                          type === 'CHOOSE-ADVANCED' ||
+                          type === 'CHECKBOX') && (
                           <>
                             {partNumber}.{' '}
                             <Icon

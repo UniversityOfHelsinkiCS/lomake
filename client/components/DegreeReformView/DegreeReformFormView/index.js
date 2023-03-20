@@ -11,9 +11,21 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
+import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
+import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import Form from './DegreeReformForm'
 
 import questions from '../../../koulutusuudistusQuestions.json'
+
+const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year }) => {
+  if (!accessToTempAnswers) return true
+  if (programme.locked) return true
+  if (!writeAccess) return true
+  if (viewingOldAnswers) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  return false
+}
 
 const DegreeReformFormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -32,6 +44,44 @@ const DegreeReformFormView = ({ room }) => {
     dispatch(getProgramme(room))
   }, [lang, room])
 
+  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
+  const year = 2023
+  const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
+  const currentRoom = useSelector(state => state.room)
+
+  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
+
+  useEffect(() => {
+    document.title = `${t('form')} - ${room}`
+    dispatch(getProgramme(room))
+  }, [lang, room])
+
+  useEffect(() => {
+    if (!programme) return
+    dispatch(getSingleProgrammesAnswers({ room, year }))
+    if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) {
+        dispatch(wsLeaveRoom(room))
+      }
+    } else {
+      dispatch(wsJoinRoom(room))
+      dispatch(setViewOnly(false))
+    }
+  }, [
+    programme,
+    singleProgramPending,
+    writeAccess,
+    viewingOldAnswers,
+    year,
+    draftYear,
+    accessToTempAnswers,
+    readAccess,
+    room,
+    user,
+  ])
+
   if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room) return <Redirect to="/" />
@@ -39,6 +89,8 @@ const DegreeReformFormView = ({ room }) => {
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
   const targetURL = `/degree-reform/previous-years/${room}`
+
+  const formType = 'degree-reform'
 
   return (
     <div className="form-container">
@@ -73,7 +125,7 @@ const DegreeReformFormView = ({ room }) => {
             </Link>
           </p>
         </div>
-        <Form programmeKey={programme.key} questions={questions} />
+        <Form form={formType} programmeKey={programme.key} questions={questions} />
       </div>
     </div>
   )

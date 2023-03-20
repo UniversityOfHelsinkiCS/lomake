@@ -50,6 +50,9 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
+
+    const formType = 'evaluation'
+
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -61,7 +64,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          form="evaluation"
+          form={formType}
           programme={programmeKey}
           relatedYearlyAnswers={yearlyAnswers[part.id]}
         />
