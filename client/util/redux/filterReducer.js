@@ -37,6 +37,11 @@ export const setQuestions = questions => ({
   questions,
 })
 
+export const setAnswerLevels = answerLevels => ({
+  type: 'SET_ANSWER_LEVELS',
+  answerLevels,
+})
+
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
@@ -45,6 +50,7 @@ const initialState = {
   year: '',
   multipleYears: [],
   questions: { selected: [], open: [] },
+  answerLevels: [],
 }
 
 export default (state = initialState, action) => {
@@ -96,6 +102,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         questions: action.questions,
+      }
+    }
+    case 'SET_ANSWER_LEVELS': {
+      return {
+        ...state,
+        answerLevels: action.answerLevels,
       }
     }
     default:

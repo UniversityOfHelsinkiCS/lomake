@@ -5,9 +5,10 @@
       "se": "",
       "en": ""
     },
+    "id": 0,
     "parts": [
       {
-        "id": "base-information-0",
+        "id": "background-unit",
         "index": 0,
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
@@ -65,7 +66,7 @@
       },
       
       {
-        "id": "base-information-1",
+        "id": "primary-role",
         "index": 1,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
@@ -105,7 +106,7 @@
         }
       },
       {
-        "id": "base-information-2",
+        "id": "view-is-based-on",
         "index": 2,
         "type": "CHECKBOX",
         "shortLabel": {
@@ -132,10 +133,10 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "kanditason koulutus", "id": "bachelor" },
-            { "label": "maisteritason koulutus", "id": "masters"  },
-            { "label": "tohtoritason koulutus", "id": "doctoral"  },
-            { "label": "kaikki koulutustasot", "id": "all"  }
+            { "label": "kanditason koulutus", "id": "bachelor", "titleIds": 5 },
+            { "label": "maisteritason koulutus", "id": "masters", "titleIds": [6,7] },
+            { "label": "tohtoritason koulutus", "id": "doctoral", "titleIds": 8 },
+            { "label": "kaikki koulutustasot", "id": "all", "titleIds":[5,6,7,8]  }
           ]
         }
       }
@@ -147,6 +148,7 @@
       "se": "",
       "en": ""
     },
+    "id": 1,
     "parts": [
       {
         "id": "outlining_questions_2015_study_council",
@@ -462,6 +464,7 @@
       "se": "",
       "en": ""
     },
+    "id": 2,
     "parts": [
       {
         "id": "outlining_questions_2015_study_council",
@@ -760,6 +763,7 @@
       "se": "",
       "en": ""
     },
+    "id": 3,
     "parts": [
       {
         "id": "information",
@@ -921,6 +925,7 @@
       "se": "",
       "en": ""
     },
+    "id": 4,
     "parts": [
       {
         "id": "status",
@@ -1121,6 +1126,7 @@
       "se": "",
       "en": ""
     },
+    "id": 5,
     "parts": [
       {
         "id": "status",
@@ -1145,7 +1151,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question 5-1",
+        "id": "question-5-1",
         "index": 53,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1340,6 +1346,7 @@
       "se": "",
       "en": ""
     },
+    "id": 6,
     "parts": [
       {
         "id": "status",
@@ -1540,6 +1547,7 @@
       "se": "",
       "en": ""
     },
+    "id": 7,
     "parts": [
       {
         "id": "status",
@@ -1854,6 +1862,7 @@
       "se": "",
       "en": ""
     },
+    "id": 8,
     "parts": [
       {
         "id": "status",
@@ -2130,6 +2139,7 @@
       "se": "",
       "en": ""
     },
+    "id": 9,
     "parts": [
       {
         "id": "status",
@@ -2406,6 +2416,7 @@
       "se": "",
       "en": ""
     },
+    "id": 10,
     "parts": [
       {
         "id": "status",

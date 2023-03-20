@@ -79,19 +79,23 @@ const ChooseRadio = ({
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
-        {description}
-        <p className="form-question-extrainfo">{extrainfo}</p>
-      </div>
+      {description?.length > 1 ? (
+        <div
+          className="entity-description"
+          style={{
+            lineHeight: 2,
+            backgroundColor: colors.background_beige,
+            padding: '1em',
+            borderRadius: '5px',
+            margin: '1em 0',
+          }}
+        >
+          {description}
+          <p className="form-question-extrainfo">{extrainfo}</p>
+        </div>
+      ) : (
+        <div style={{ height: '1em' }} />
+      )}
       {radioButtonLabels ? (
         <Form style={direction === 'horizontal' ? { display: 'flex' } : null}>
           {radioButtonLabels.map(o => {
