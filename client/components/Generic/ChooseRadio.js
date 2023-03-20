@@ -12,7 +12,17 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const ChooseRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
+const ChooseRadio = ({
+  id,
+  label,
+  description,
+  required,
+  number,
+  previousYearsAnswers,
+  extrainfo,
+  radioOptions,
+  direction,
+}) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -27,7 +37,6 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
-
   const handleClick = label => {
     setState({ value: label })
     choose(id, label)
@@ -36,9 +45,29 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   useEffect(() => {
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
-  const radioButtonLabels = radioOptions ? radioOptions[lang] : null
-  const radioButtonIndexes = radioOptions ? radioOptions?.indexes : null
 
+  let radioButtonLabels
+
+  if (typeof radioOptions === 'string') {
+    let idkButton
+    if (lang === 'fi') {
+      idkButton = 'En osaa sanoa'
+    } else if (lang === 'se') {
+      idkButton = "I don't know"
+    } else {
+      idkButton = "I don't know"
+    }
+    radioButtonLabels = [
+      { id: 'number-first', label: 1 },
+      { id: 'number-second', label: 2 },
+      { id: 'number-third', label: 3 },
+      { id: 'number-fourth', label: 4 },
+      { id: 'number-fifth', label: 5 },
+      { id: 'text-idk', label: idkButton },
+    ]
+  } else {
+    radioButtonLabels = radioOptions ? radioOptions[lang] : null
+  }
   return (
     <div className="form-entity-area">
       <Divider />
@@ -50,31 +79,40 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
-        {description}
-        <p className="form-question-extrainfo">{extrainfo}</p>
-      </div>
+      {description?.length > 1 ? (
+        <div
+          className="entity-description"
+          style={{
+            lineHeight: 2,
+            backgroundColor: colors.background_beige,
+            padding: '1em',
+            borderRadius: '5px',
+            margin: '1em 0',
+          }}
+        >
+          {description}
+          <p className="form-question-extrainfo">{extrainfo}</p>
+        </div>
+      ) : (
+        <div style={{ height: '1em' }} />
+      )}
       {radioButtonLabels ? (
-        <Form>
-          {radioButtonLabels.map((o, index) => {
+        <Form style={direction === 'horizontal' ? { display: 'flex' } : null}>
+          {radioButtonLabels.map(o => {
             return (
-              <Form.Field key={generateKey(o.label)}>
+              <Form.Field
+                key={generateKey(o.label)}
+                style={direction !== 'horizontal' ? { display: 'flex' } : { marginLeft: '2em', textAlign: 'center' }}
+              >
                 <Radio
-                  label={o.label}
                   name="radioGroup"
                   value={o.label}
-                  checked={state.value === radioButtonIndexes[index]}
-                  onChange={() => handleClick(radioButtonIndexes[index])}
+                  checked={state.value === o.id}
+                  onChange={() => handleClick(o.id)}
                 />
+                <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
+                  {o.label}
+                </label>
               </Form.Field>
             )
           })}

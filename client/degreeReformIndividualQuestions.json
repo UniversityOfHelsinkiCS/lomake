@@ -92,14 +92,14 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "Koulutusohjelman johtoryhmä" },
+            { "label": "Dekaani / Varadekaani" },
             {
-              "label": "Tiedekuntatason muut vastuuhenkilöt (dekaani, varadekaanit, osastojen/tieteenalayksiköiden johtajat, opintoasiainpäällikkö jne.)"
+              "label": "Tieteenalan tai osaston johtaja"
             },
-            { "label": "Tutkijakoulun johtoryhmä (2022 saakka toimineet)" },
-            { "label": "Tutkijakoulun johtokunta" },
-            { "label": "Opintoasiainneuvosto" },
-            { "label": "Katselmuksen arviointiryhmä" }
+            { "label": "Hallinto- tai muu henkilökunta" },
+            { "label": "Opetus- ja tutkimushenkilökunta" },
+            { "label": "Väitöskirjatutkija" },
+            { "label": "Emeriitta / Emeritus / Alumni" }
           ]
         }
       },
@@ -108,17 +108,17 @@
         "index": 2,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin mielipide kohdistuu",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin mielipide kohdistuu",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "valitse taustatiedot",
+          "fi": "Mihin mielipide kohdistuu",
           "se": "",
           "en": ""
         },
@@ -131,12 +131,10 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "yksikkö (valikko: tiedekunta, YPA, muu, mikä)" },
-            { "label": "opetus- ja tutkimushenkilökunta" },
-            { "label": "hallinto- tai muu henkilökunta" },
-            { "label": "opiskelija" },
-            { "label": "väitöskirjatutkija" },
-            { "label": "alumni" }
+            { "label": "kanditason koulutus" },
+            { "label": "maisteritason koulutus" },
+            { "label": "tohtoritason koulutus" },
+            { "label": "kaikki koulutustasot" }
           ]
         }
       }

@@ -6,6 +6,9 @@ import ChooseRadio from 'Components/Generic/ChooseRadio'
 import Slider from 'Components/Generic/Slider'
 import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
+
+import CustomCheckbox from 'Components/Generic/CustomCheckbox'
+import AdvancedRadio from 'Components/Generic/AdvancedRadio'
 import { colors, romanize } from 'Utilities/common'
 import Section from './DegreeReformSection'
 
@@ -19,6 +22,8 @@ const Form = ({ questions, programmeKey, form }) => {
     'CHOOSE-RADIO': ChooseRadio,
     SLIDER: Slider,
     INFOBOX: InfoBox,
+    'CHOOSE-ADVANCED': AdvancedRadio,
+    CHECKBOX: CustomCheckbox,
   }
 
   let number = -1
@@ -49,13 +54,21 @@ const Form = ({ questions, programmeKey, form }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'MEASURES' || part.type === 'CHOOSE-RADIO' || part.type === 'SLIDER')
+    if (
+      part.type === 'ENTITY' ||
+      part.type === 'MEASURES' ||
+      part.type === 'CHOOSE-RADIO' ||
+      part.type === 'SLIDER' ||
+      part.type === 'CHOOSE-ADVANCED' ||
+      part.type === 'CHECKBOX'
+    )
       number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     const image = part.image ? part.image : undefined
+    const direction = part.direction ? part.direction : 'vertical'
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -71,6 +84,7 @@ const Form = ({ questions, programmeKey, form }) => {
           programme={programmeKey}
           radioOptions={part?.radioOptions}
           image={image}
+          direction={direction}
         />
       </div>
     )

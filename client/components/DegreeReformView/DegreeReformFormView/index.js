@@ -46,7 +46,7 @@ const DegreeReformFormView = ({ room }) => {
 
   const draftYear = useSelector(state => state.deadlines.draftYear)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-  const year = useSelector(state => state.filters.year)
+  const year = 2023
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const currentRoom = useSelector(state => state.room)
 
@@ -62,7 +62,9 @@ const DegreeReformFormView = ({ room }) => {
     dispatch(getSingleProgrammesAnswers({ room, year }))
     if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
       dispatch(setViewOnly(true))
-      if (currentRoom) dispatch(wsLeaveRoom(room))
+      if (currentRoom) {
+        dispatch(wsLeaveRoom(room))
+      }
     } else {
       dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
