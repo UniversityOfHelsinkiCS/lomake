@@ -98,11 +98,18 @@ export default () => {
             <h2 className="view-title">{t('yearlyAssessment').toUpperCase()}</h2>
             <label className="year-filter-label">{t('overview:selectYear')}</label>
             <YearSelector size="extra-small" />
-            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+            <Button data-cy="nav-report" component={Link} to="/report" variant="contained" color="dark" size="big">
               {t('overview:readAnswers')}
             </Button>
             {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+              <Button
+                data-cy="nav-comparison"
+                component={Link}
+                to="/comparison"
+                variant="contained"
+                color="secondary"
+                size="big"
+              >
                 {t('overview:compareAnswers')}
               </Button>
             )}

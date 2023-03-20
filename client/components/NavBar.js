@@ -56,7 +56,7 @@ export default () => {
 
   const GoToAdminPageButton = () => {
     return (
-      <MenuItem data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
+      <MenuItem data-cy="nav-admin" component={Link} to="/admin" name="adminControls">
         {t('adminPage')}
       </MenuItem>
     )
@@ -64,7 +64,7 @@ export default () => {
 
   const GoToEvaluationButton = () => {
     return (
-      <MenuItem data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
+      <MenuItem data-cy="nav-evaluation" component={Link} to="/evaluation" name="evaluation">
         {t('evaluation')}
       </MenuItem>
     )
@@ -72,7 +72,7 @@ export default () => {
 
   const GoToDegreeReformGroup = () => {
     return (
-      <MenuItem data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
+      <MenuItem data-cy="nav-degree-reform-group" component={Link} to="/degree-reform" name="degree-form-group">
         {t('degree-reform-group')}
       </MenuItem>
     )
@@ -82,7 +82,7 @@ export default () => {
     return (
       <MenuItem
         data-cy="nav-degree-reform-individual-form"
-        as={Link}
+        component={Link}
         to="/degree-reform-individual/form"
         name="degree-reform-individual-form"
       >
@@ -94,14 +94,12 @@ export default () => {
   if (!user) return null
   return (
     <>
-      <AppBar position="static" style={{ background: 'white', color: 'black' }}>
-        <Container maxWidth="xl" className="navBar-wrapper">
-          <Toolbar>
-            <Box>
-              <MenuItem as={Link} to="/">
-                <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
-              </MenuItem>
-            </Box>
+      <AppBar position="static" style={{ background: 'white', color: 'black' }} disableGutters>
+        <Container maxWidth="xl" className="navBar-wrapper" disableGutters>
+          <Toolbar disableGutters>
+            <MenuItem component={Link} to="/">
+              <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+            </MenuItem>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {user.superAdmin ? <GoToEvaluationButton /> : null}
               {user.superAdmin ? <GoToDegreeReformGroup /> : null}
@@ -136,7 +134,7 @@ export default () => {
             >
               {languageLinks.map(language => {
                 return (
-                  <>
+                  <div key={language.code}>
                     <Divider orientation="vertical" flexItem />
                     <MenuItem
                       data-cy={`navBar-localeOption-${language.code}`}
@@ -145,12 +143,12 @@ export default () => {
                     >
                       {language.text}
                     </MenuItem>
-                  </>
+                  </div>
                 )
               })}
             </Menu>
             {window.localStorage.getItem('adminLoggedInAs') ? unHijackButton() : null}
-            <MenuItem style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
+            <MenuItem style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} component={Link} to="/about">
               {t('about')}
             </MenuItem>
             <MenuItem data-cy="nav-logout" name="log-out" onClick={handleLogout}>
