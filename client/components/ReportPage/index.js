@@ -16,6 +16,7 @@ import {
   modifiedQuestions,
   programmeNameByKey as programmeName,
   getSelectionAnswer,
+  getOrderAnswer,
 } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
@@ -40,6 +41,7 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
 
         if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
         else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
+        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
         else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
         answersByProgramme = [...answersByProgramme, { name, key, color, answer }]

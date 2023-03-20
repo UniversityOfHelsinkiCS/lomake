@@ -102,6 +102,22 @@ export const modifiedQuestions = (questions, lang) => {
             options: part.options,
           },
         ]
+      } else if (part.type === 'ORDER') {
+        attributes = [
+          ...attributes,
+          {
+            id: part.id,
+            color: `${part.id}_light`,
+            description: part.description ? part.description[lang] : '',
+            label: _.capitalize(part.label[lang]),
+            title: question.title[lang],
+            titleIndex,
+            labelIndex: part.index,
+            no_color: part.no_color,
+            extrainfo: part.extrainfo ? part.extrainfo[lang] : '',
+            options: part.options,
+          },
+        ]
       } else if (part.type !== 'TITLE') {
         attributes = [
           ...attributes,
@@ -238,6 +254,23 @@ export const getSelectionAnswer = (data, question, lang) => {
   }
 
   return answer.join(', ')
+}
+
+export const getOrderAnswer = (data, question, lang) => {
+  if (!data) return ''
+  const { id, options } = question
+  let answer = ''
+  if (data[id]) {
+    let i = 1
+    const ordered = data[id].split(';;')
+    while (i < 4) {
+      if (ordered[i - 1]) {
+        answer += `${i}. ${options?.[ordered[i - 1]]?.[lang] || ordered[i - 1]} `
+      }
+      i++
+    }
+  }
+  return answer
 }
 
 export const getMeasuresAnswer = (data, rawId) => {
