@@ -13,7 +13,7 @@ const Section = ({ title, number, children, programmeKey }) => {
               window.history.pushState(
                 {},
                 '',
-                `${window.location.origin}${basePath}katselmus/form/${programmeKey}#${number}`
+                `${window.location.origin}${basePath}evaluation/form/${programmeKey}#${number}`
               )
             }
           }}

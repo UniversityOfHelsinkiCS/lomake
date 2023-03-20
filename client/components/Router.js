@@ -11,6 +11,7 @@ import ComparisonPage from 'Components/ComparisonPage'
 import KatselmusOverview from 'Components/KatselmusView/KatselmusOverview'
 import KatselmusFormView from 'Components/KatselmusView/KatselmusFormView'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
+import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividualForm'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/KatselmusView/PastAnswersView'
 
@@ -24,22 +25,22 @@ export default () => (
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
 
-      <Route exact path="/katselmus" component={KatselmusOverview} />
+      <Route exact path="/evaluation" component={KatselmusOverview} />
       <Route exact path="/degree-reform" component={DegreeReformOverview} />
       <Route
         exact
         path="/degree-reform/form/:room"
         render={props => <DegreeReformFormView room={props.match.params.room} />}
       />
-      <Route exact path="/degree-reform-individual" render={DegreeReformFormView} />
+      <Route exact path="/degree-reform-individual" component={DegreeReformIndividualForm} />
       <Route
         exact
-        path="/katselmus/form/:room"
+        path="/evaluation/form/:room"
         render={props => <KatselmusFormView room={props.match.params.room} />}
       />
       <Route
         exact
-        path="/katselmus/previous-years/:programme"
+        path="/evaluation/previous-years/:programme"
         render={props => <PastAnswersView programmeKey={props.match.params.programme} />}
       />
     </Switch>

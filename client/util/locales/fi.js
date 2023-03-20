@@ -47,8 +47,10 @@ export default {
     delete: 'Poista',
 
     yearlyAssessment: 'Vuosiseuranta',
-    katselmus: 'Katselmus',
-    koulutusuudistus: 'Koulutusuudistus',
+    evaluation: 'Katselmus',
+    'degree-reform': 'Koulutusuudistus',
+    'degree-reform-group': 'Koulutusuudistus ryhmä',
+    'degree-reform-individual': 'Koulutusuudistus yksilö',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

@@ -73,7 +73,7 @@ const KatselmusFormView = ({ room }) => {
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
 
   useEffect(() => {
-    document.title = `${t('katselmus')} - ${room}`
+    document.title = `${t('evaluation')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
 
@@ -101,22 +101,22 @@ const KatselmusFormView = ({ room }) => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  const targetURL = `/katselmus/previous-years/${room}`
+  const targetURL = `/evaluation/previous-years/${room}`
 
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} katselmus />
+      <NavigationSidebar programmeKey={room} form="evaluation" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/katselmus')} icon="arrow left" />
+              <Button onClick={() => history.push('/evaluation')} icon="arrow left" />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('katselmus')} 2023
+            {t('evaluation')} 2023
           </h3>
 
           <div className="hide-in-print-mode">

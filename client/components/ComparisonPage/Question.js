@@ -7,14 +7,14 @@ import { romanize } from 'Utilities/common'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
-const Question = ({ answers, question, handleClick, showing, katselmus = false }) => {
+const Question = ({ answers, question, handleClick, showing, form }) => {
   const { t } = useTranslation()
   const stateLength = new Date().getFullYear() - 2019 + 1
   const [colors, setColors] = useState(Array(stateLength).fill('all'))
   const [buttons, setButtons] = useState(Array(stateLength).fill(0))
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
 
-  const yearSelection = katselmus ? [2020, 2021, 2022] : multipleYears
+  const yearSelection = form === 'evaluation' ? [2020, 2021, 2022] : multipleYears
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
@@ -48,7 +48,7 @@ const Question = ({ answers, question, handleClick, showing, katselmus = false }
 
   if (!answers) return <></>
 
-  const columnNumber = katselmus ? answers.length + 1 : answers.length
+  const columnNumber = form === 'evaluation' ? answers.length + 1 : answers.length
 
   return (
     <>
@@ -84,7 +84,7 @@ const Question = ({ answers, question, handleClick, showing, katselmus = false }
                   <Grid.Column key={generateRandomKey(year)} className="question-content">
                     <div className="comparison color-buttons noprint">
                       <label>{year.year}</label>
-                      {!katselmus &&
+                      {!form === 'evaluation' &&
                         buttonColors.map((color, index) => (
                           <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
                         ))}
@@ -111,7 +111,7 @@ const Question = ({ answers, question, handleClick, showing, katselmus = false }
                         return null
                       })
                     ) : (
-                      <h4>{katselmus ? t('empty') : t('noData')}</h4>
+                      <h4>{form === 'evaluation' ? t('empty') : t('noData')}</h4>
                     )}
                   </Grid.Column>
                 )
