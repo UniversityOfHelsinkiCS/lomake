@@ -110,7 +110,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
 
                     if (type === 'TEXTAREA' || type === 'ENTITY') {
                       idsToCheck.push(`${id}_text`)
-                    } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED') {
+                    } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
                       idsToCheck.push(`${id}`)
                     } else {
                       idsToCheck.push(`${id}_1_text`)
