@@ -68,6 +68,7 @@ const Form = ({ questions, programmeKey, form }) => {
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     const image = part.image ? part.image : undefined
+    const direction = part.direction ? part.direction : 'vertical'
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -83,6 +84,7 @@ const Form = ({ questions, programmeKey, form }) => {
           programme={programmeKey}
           radioOptions={part?.radioOptions}
           image={image}
+          direction={direction}
         />
       </div>
     )

@@ -87,7 +87,16 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
               </Form.Field>
             )
           })}
-          {state.value.substring(0, 7) === 'faculty' ? (
+          {selected === 'faculty' ? (
+            <DropdownFilter
+              handleFilterChange={handleClick}
+              version="degree-reform"
+              size="small"
+              label={t('comparison:filterFaculties')}
+              selectedRadio={state.value}
+            />
+          ) : null}
+          {selected === 'other' ? (
             <DropdownFilter
               handleFilterChange={handleClick}
               version="degree-reform"

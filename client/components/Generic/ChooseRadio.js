@@ -12,7 +12,17 @@ const mapColorToValid = {
   PUNAINEN: 'red',
 }
 
-const ChooseRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
+const ChooseRadio = ({
+  id,
+  label,
+  description,
+  required,
+  number,
+  previousYearsAnswers,
+  extrainfo,
+  radioOptions,
+  direction,
+}) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -35,8 +45,29 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
   useEffect(() => {
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
-  const radioButtonLabels = radioOptions ? radioOptions[lang] : null
 
+  let radioButtonLabels
+
+  if (typeof radioOptions === 'string') {
+    let idkButton
+    if (lang === 'fi') {
+      idkButton = 'En osaa sanoa'
+    } else if (lang === 'se') {
+      idkButton = "I don't know"
+    } else {
+      idkButton = "I don't know"
+    }
+    radioButtonLabels = [
+      { id: 'number-first', label: 1 },
+      { id: 'number-second', label: 2 },
+      { id: 'number-third', label: 3 },
+      { id: 'number-fourth', label: 4 },
+      { id: 'number-fifth', label: 5 },
+      { id: 'text-idk', label: idkButton },
+    ]
+  } else {
+    radioButtonLabels = radioOptions ? radioOptions[lang] : null
+  }
   return (
     <div className="form-entity-area">
       <Divider />
@@ -62,17 +93,22 @@ const ChooseRadio = ({ id, label, description, required, number, previousYearsAn
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {radioButtonLabels ? (
-        <Form>
+        <Form style={direction === 'horizontal' ? { display: 'flex' } : null}>
           {radioButtonLabels.map(o => {
             return (
-              <Form.Field key={generateKey(o.label)}>
+              <Form.Field
+                key={generateKey(o.label)}
+                style={direction !== 'horizontal' ? { display: 'flex' } : { marginLeft: '2em', textAlign: 'center' }}
+              >
                 <Radio
-                  label={o.label}
                   name="radioGroup"
                   value={o.label}
                   checked={state.value === o.id}
                   onChange={() => handleClick(o.id)}
                 />
+                <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
+                  {o.label}
+                </label>
               </Form.Field>
             )
           })}
