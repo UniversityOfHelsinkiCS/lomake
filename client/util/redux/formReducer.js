@@ -25,22 +25,10 @@ export const setViewingOldAnswers = value => ({
   value,
 })
 
-export const getFormAction = () => {
-  const route = '/form'
-  const prefix = 'GET_FORM'
-  return callBuilder(route, prefix)
-}
-
 export const getSingleProgrammesAnswers = ({ room, year }) => {
   const route = `/answers/single/${room}/${year}`
   const prefix = 'GET_TEMP_ANSWERS'
   return callBuilder(route, prefix)
-}
-
-export const postFormAction = message => {
-  const route = '/form'
-  const prefix = 'SAVE_FORM'
-  return callBuilder(route, prefix, 'post', message)
 }
 
 const initialState = {
