@@ -33,7 +33,7 @@ const DegreeReformIndividualForm = () => {
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('koulutusuudistus')} 2023
+            {t('degree-reform')} 2023
           </h3>
         </div>
         <Form questions={questions} form={formType} />

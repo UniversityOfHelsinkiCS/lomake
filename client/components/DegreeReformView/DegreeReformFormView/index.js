@@ -40,7 +40,7 @@ const DegreeReformFormView = ({ room }) => {
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
 
   useEffect(() => {
-    document.title = `${t('Koulutusuudistus')} - ${room}`
+    document.title = `${t('degree-reform')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
 
@@ -105,7 +105,7 @@ const DegreeReformFormView = ({ room }) => {
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('Koulutusuudistus')} 2023
+            {t('degree-reform')} 2023
           </h3>
 
           <p
