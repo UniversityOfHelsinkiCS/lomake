@@ -8,7 +8,7 @@ import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import questions from '../../questions.json'
-import katselmusQuestions from '../../katselmusQuestions.json'
+import evaluationQuestions from '../../evaluationQuestions.json'
 import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
@@ -89,7 +89,7 @@ const ColorTable = React.memo(
     let questionsToShow = questions
 
     if (form === 'evaluation') {
-      questionsToShow = katselmusQuestions
+      questionsToShow = evaluationQuestions
     } else if (form === 'degree-reform') {
       questionsToShow = koulutusuudistusQuestions
     }

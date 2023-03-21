@@ -8,12 +8,12 @@ import OverviewPage from 'Components/OverviewPage'
 import ReportPage from 'Components/ReportPage'
 import ComparisonPage from 'Components/ComparisonPage'
 
-import KatselmusOverview from 'Components/KatselmusView/KatselmusOverview'
-import KatselmusFormView from 'Components/KatselmusView/KatselmusFormView'
+import EvaluationOverview from 'Components/EvaluationView/EvaluationOverview'
+import EvaluationFormView from 'Components/EvaluationView/EvaluationFormView'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
 import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividualForm'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
-import PastAnswersView from 'Components/KatselmusView/PastAnswersView'
+import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
 
 export default () => (
   <div className="content">
@@ -25,7 +25,7 @@ export default () => (
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
 
-      <Route exact path="/evaluation" component={KatselmusOverview} />
+      <Route exact path="/evaluation" component={EvaluationOverview} />
       <Route exact path="/degree-reform" component={DegreeReformOverview} />
       <Route
         exact
@@ -36,7 +36,7 @@ export default () => (
       <Route
         exact
         path="/evaluation/form/:room"
-        render={props => <KatselmusFormView room={props.match.params.room} />}
+        render={props => <EvaluationFormView room={props.match.params.room} />}
       />
       <Route
         exact

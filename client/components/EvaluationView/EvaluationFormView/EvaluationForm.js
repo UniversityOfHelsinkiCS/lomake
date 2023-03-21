@@ -4,7 +4,7 @@ import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
 import { colors, romanize } from 'Utilities/common'
-import Section from './KatselmusSection'
+import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
 
