@@ -44,7 +44,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
     linkBase = '/degree-reform-individual/form'
   }
 
-  const filters = filter.answerLevels
+  const filters = filter && filter.answerLevels.length > 0 ? filter.answerLevels : null
 
   let partNumber = -1
   return (
@@ -56,7 +56,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
             const active = location.hash === `#${romanNumeral}`
-            if (filters.length > 0 && filters.find(f => f === section.id)) {
+            if (filters && filters.find(f => f === section.id)) {
               return <div />
             }
             return (
