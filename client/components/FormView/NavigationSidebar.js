@@ -7,7 +7,7 @@ import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
-import katselmusQuestions from '../../katselmusQuestions.json'
+import evaluationQuestions from '../../evaluationQuestions.json'
 import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
 
 const replaceTitle = {
@@ -34,7 +34,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
   let linkBase = '/form/'
 
   if (form === 'evaluation') {
-    questionsToShow = katselmusQuestions
+    questionsToShow = evaluationQuestions
     linkBase = '/evaluation/form/'
   } else if (form === 'degree-reform') {
     questionsToShow = koulutusuudistusQuestions

@@ -14,9 +14,9 @@ import calendarImage from 'Assets/calendar.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
-import EvaluationForm from './KatselmusForm'
+import EvaluationForm from './EvaluationForm'
 
-import questions from '../../../katselmusQuestions.json'
+import questions from '../../../evaluationQuestions.json'
 import yearlyQuestions from '../../../questions.json'
 
 const handleMeasures = (yearData, relatedQuestion) => {
@@ -54,7 +54,7 @@ const findAnswers = (allOldAnswers, relatedQuestion) => {
   return result
 }
 
-const KatselmusFormView = ({ room }) => {
+const EvaluationFormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
@@ -192,4 +192,4 @@ const KatselmusFormView = ({ room }) => {
   )
 }
 
-export default KatselmusFormView
+export default EvaluationFormView
