@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { setAnswerLevels } from 'Utilities/redux/filterReducer'
 
-import { colors } from 'Utilities/common'
+import { colors, getFilters } from 'Utilities/common'
 import './Generic.scss'
 
 const CustomCheckbox = ({ id, label, description, required, number, extrainfo, radioOptions }) => {
@@ -21,7 +21,8 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
     if (dataFromRedux.length > 0) {
       setValue(dataFromRedux)
       if (id === 'view-is-based-on') {
-        dispatch(setAnswerLevels(dataFromRedux))
+        const filters = getFilters(dataFromRedux)
+        dispatch(setAnswerLevels(filters))
       }
     }
   }, [dataFromRedux])
@@ -41,10 +42,17 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
         })
       }
     } else {
+      let allChecked = false
       newValues = values.map(v => {
         if (v.id === eventValue) {
+          if (v.value === true && values[3].value === true) {
+            allChecked = true
+          }
           v.value = !v.value
           return v
+        }
+        if (allChecked && v.id === 'all') {
+          v.value = false
         }
         return v
       })
@@ -52,7 +60,8 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
     setValue(newValues)
     choose(id, newValues)
     if (id === 'view-is-based-on') {
-      dispatch(setAnswerLevels(newValues))
+      const filters = getFilters(newValues)
+      dispatch(setAnswerLevels(filters))
     }
   }
   return (
