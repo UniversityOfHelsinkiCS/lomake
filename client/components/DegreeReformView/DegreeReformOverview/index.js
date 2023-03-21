@@ -25,7 +25,7 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
-    document.title = `${t('koulutusuudistus')}`
+    document.title = `${t('Koulutusuudistus')}`
   }, [lang])
 
   if (!isSuperAdmin(currentUser.data)) {

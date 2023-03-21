@@ -105,7 +105,7 @@ const DegreeReformFormView = ({ room }) => {
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('koulutusuudistus')} 2023
+            {t('Koulutusuudistus')} 2023
           </h3>
 
           <p
