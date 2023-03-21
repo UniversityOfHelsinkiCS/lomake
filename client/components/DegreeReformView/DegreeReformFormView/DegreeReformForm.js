@@ -14,6 +14,7 @@ import Section from './DegreeReformSection'
 
 const Form = ({ questions, programmeKey, form }) => {
   const lang = useSelector(state => state.language)
+  const filter = useSelector(state => state.filters || {})
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -41,13 +42,15 @@ const Form = ({ questions, programmeKey, form }) => {
           marginBottom: '0',
         }
       : {}
-
     if (part.type === 'TITLE') {
       return (
         <h2 key={part.id} style={divStyle}>
           {part.label[lang]}
         </h2>
       )
+    }
+    if (filter.answerLevels.length > 0 && filter.answerLevels.find(f => f === part.id)) {
+      return <div />
     }
 
     if (!Object.prototype.hasOwnProperty.call(partComponentMap, part.type)) {
@@ -89,7 +92,6 @@ const Form = ({ questions, programmeKey, form }) => {
       </div>
     )
   }
-
   return (
     <>
       {questions.map((section, index) => {
@@ -101,7 +103,11 @@ const Form = ({ questions, programmeKey, form }) => {
             programmeKey={programmeKey}
             form={form}
           >
-            {section.parts.map(partMap)}
+            {filter.answerLevels.length > 0 && filter.answerLevels.find(f => f === section.id) ? (
+              <div />
+            ) : (
+              section.parts.map(partMap)
+            )}
           </Section>
         )
       })}

@@ -396,4 +396,24 @@ export const getUserRole = userIams => {
   return role
 }
 
+export const getFilters = filter => {
+  let filters = []
+  filter?.map(f => {
+    if (f.id === 'bachelor' && f.value === true) {
+      filters = filters.concat(5)
+    }
+    if (f.id === 'masters' && f.value === true) {
+      filters = filters.concat([6, 7])
+    }
+    if (f.id === 'doctoral' && f.value === true) {
+      filters = filters.concat(8)
+    }
+    if (f.id === 'all' && f.value === true) {
+      filters = [5, 6, 7, 8]
+    }
+    return 0
+  })
+  return filters
+}
+
 export * from '@root/config/common'
