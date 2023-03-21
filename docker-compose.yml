@@ -22,7 +22,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - pg_data:/data
-    container_name: lomake_db
   adminer:
     container_name: adminer
     environment:
