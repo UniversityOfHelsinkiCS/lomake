@@ -15,19 +15,18 @@ const createOrUpdate = async (req, res) => {
     await db.studyprogramme.update({ locked: false }, { where: {} })
 
     // Create new or update old deadline for a specific form
-    let newDeadline = null
     const existingDeadline = await db.deadline.findOne({
       where: { form },
     })
 
     if (!existingDeadline) {
-      newDeadline = await db.deadline.create({
+      await db.deadline.create({
         date: deadline,
         form,
       })
     } else {
       existingDeadline.date = deadline
-      newDeadline = await existingDeadline.save()
+      await existingDeadline.save()
     }
 
     // Create new or update old draft year
@@ -43,7 +42,9 @@ const createOrUpdate = async (req, res) => {
     }
 
     await createDraftAnswers(draftYear, form)
-    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear, form })
+    const updatedDeadlines = await db.deadline.findAll({})
+
+    return res.status(200).json({ deadlines: updatedDeadlines, draftYear: newDraftYear, form })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -88,12 +89,12 @@ const remove = async (req, res) => {
 
 const get = async (_, res) => {
   try {
-    const deadlines = await db.deadline.findAll({})
+    const allDeadlines = await db.deadline.findAll({})
     const draftYears = await db.draftYear.findAll({})
-    const deadline = deadlines.length ? deadlines[0] : null
+    const deadlines = allDeadlines.length ? allDeadlines : null
     const draftYear = draftYears.length ? draftYears[0] : null
 
-    return res.status(200).json({ deadline, draftYear })
+    return res.status(200).json({ deadlines, draftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
