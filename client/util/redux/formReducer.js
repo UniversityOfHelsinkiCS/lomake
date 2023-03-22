@@ -25,8 +25,8 @@ export const setViewingOldAnswers = value => ({
   value,
 })
 
-export const getSingleProgrammesAnswers = ({ room, year }) => {
-  const route = `/answers/single/${room}/${year}`
+export const getSingleProgrammesAnswers = ({ room, year, form }) => {
+  const route = `/answers/single/${form}/${room}/${year}`
   const prefix = 'GET_TEMP_ANSWERS'
   return callBuilder(route, prefix)
 }

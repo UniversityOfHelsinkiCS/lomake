@@ -59,7 +59,8 @@ const DegreeReformFormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-    dispatch(getSingleProgrammesAnswers({ room, year }))
+    // form is now just a placeholder, 1 = vuosiseuranta
+    dispatch(getSingleProgrammesAnswers({ room, year, form: 1 }))
     if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {

@@ -45,7 +45,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
 
 const getSingleProgrammesAnswers = async (req, res) => {
   try {
-    const { programme, year } = req.params
+    const { programme, year, form } = req.params
     const draftYears = await db.draftYear.findAll({})
     const draftYear = draftYears.length ? draftYears[0].year : null
 
@@ -54,13 +54,13 @@ const getSingleProgrammesAnswers = async (req, res) => {
     if (draftYear && draftYear === year) {
       data = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme, year: draftYear }],
+          [Op.and]: [{ programme, year: draftYear, form }],
         },
       })
     } else {
       data = await db.answer.findOne({
         where: {
-          [Op.and]: [{ programme, year }],
+          [Op.and]: [{ programme, year, form }],
         },
       })
     }
