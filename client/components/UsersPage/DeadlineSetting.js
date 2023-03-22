@@ -48,13 +48,13 @@ const DeadlineSetting = () => {
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
-    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear }))
+    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear, form: 1 }))
     setNewDate(null)
     setNewDraftYear(null)
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadlineAndDraftYear())
+    dispatch(deleteDeadlineAndDraftYear({ form: 1 }))
     setNewDate(null)
     setNewDraftYear(null)
   }

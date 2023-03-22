@@ -1,9 +1,9 @@
 import callBuilder from '../apiConnection'
 
-export const setDeadlineAndDraftYear = ({ deadline, draftYear }) => {
+export const setDeadlineAndDraftYear = ({ deadline, draftYear, form }) => {
   const route = '/deadlines'
   const prefix = 'SET_DEADLINE_AND_DRAFT_YEAR'
-  return callBuilder(route, prefix, 'post', { deadline, draftYear })
+  return callBuilder(route, prefix, 'post', { deadline, draftYear, form })
 }
 
 export const getDeadlineAndDraftYear = () => {
@@ -12,10 +12,10 @@ export const getDeadlineAndDraftYear = () => {
   return callBuilder(route, prefix)
 }
 
-export const deleteDeadlineAndDraftYear = () => {
+export const deleteDeadlineAndDraftYear = ({ form }) => {
   const route = `/deadlines`
   const prefix = 'DELETE_DEADLINE_AND_DRAFT_YEAR'
-  return callBuilder(route, prefix, 'delete')
+  return callBuilder(route, prefix, 'delete', { form })
 }
 
 const initialState = {

@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'deadline',
     {
       date: DataTypes.DATE,
+      form: DataTypes.INTEGER,
     },
     {
       underscored: true,

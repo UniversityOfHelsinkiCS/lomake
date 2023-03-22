@@ -4,26 +4,30 @@ const logger = require('@util/logger')
 const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const createOrUpdate = async (req, res) => {
-  const { deadline, draftYear } = req.body
+  const { deadline, draftYear, form } = req.body
 
-  if (!deadline || !draftYear) {
-    throw new Error('No deadline or draft year defined')
+  if (!deadline || !draftYear || !form) {
+    throw new Error('No deadline, draft year or form defined')
   }
 
   try {
     // Unlock all programmes
     await db.studyprogramme.update({ locked: false }, { where: {} })
 
-    // Create new or update old deadline
+    // Create new or update old deadline for a specific form
     let newDeadline = null
-    const existingDeadlines = await db.deadline.findAll({})
-    if (existingDeadlines.length === 0) {
+    const existingDeadline = await db.deadline.findOne({
+      where: { form },
+    })
+
+    if (!existingDeadline) {
       newDeadline = await db.deadline.create({
         date: deadline,
+        form,
       })
     } else {
-      existingDeadlines[0].date = deadline
-      newDeadline = await existingDeadlines[0].save()
+      existingDeadline.date = deadline
+      newDeadline = await existingDeadline.save()
     }
 
     // Create new or update old draft year
@@ -38,30 +42,43 @@ const createOrUpdate = async (req, res) => {
       newDraftYear = await existingDraftYears[0].save()
     }
 
-    await createDraftAnswers(draftYear)
-    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
+    await createDraftAnswers(draftYear, form)
+    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear, form })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-const remove = async (_, res) => {
+const remove = async (req, res) => {
+  const { form } = req.body
+
+  if (!form) {
+    throw new Error('No form defined')
+  }
+
   try {
-    // Just delete all deadlines, there should be only 1 anyway.
-    await db.deadline.destroy({
-      truncate: true,
+    const existingDeadline = await db.deadline.findOne({
+      where: { form },
     })
+    if (!existingDeadline) {
+      return res.status(404).json({ error: 'Deadline not found' })
+    }
 
-    // Unlock all programmes
-    await db.studyprogramme.update({ locked: true }, { where: {} })
+    await existingDeadline.destroy()
 
+    // Destroy draftYear and lock programmes if no other deadlines remain
     const draftYears = await db.draftYear.findAll({})
-    await db.draftYear.destroy({
-      truncate: true,
-    })
+    const allDeadlines = await db.deadline.findAll({})
 
-    await createFinalAnswers(draftYears[0].year)
+    if (allDeadlines.length === 0) {
+      await db.studyprogramme.update({ locked: true }, { where: {} })
+      await db.draftYear.destroy({
+        truncate: true,
+      })
+    }
+
+    await createFinalAnswers(draftYears[0].year, form)
     return res.status(200).json({ deadline: null, draftYear: null })
   } catch (error) {
     logger.error(`Database error: ${error}`)
