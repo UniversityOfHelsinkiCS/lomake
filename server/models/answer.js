@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       programme: DataTypes.STRING,
       data: DataTypes.JSONB,
       year: DataTypes.INTEGER,
+      form: DataTypes.INTEGER,
       submittedBy: {
         type: DataTypes.STRING,
         field: 'submitted_by',
