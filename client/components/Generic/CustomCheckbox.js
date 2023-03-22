@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Checkbox } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+// import { updateFormField } from 'Utilities/redux/formReducer'
 import { setAnswerLevels } from 'Utilities/redux/filterReducer'
 
 import { colors, getFilters } from 'Utilities/common'
@@ -11,7 +11,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
-  const choose = (name, id) => dispatch(updateFormField(name, id))
+  // const choose = (name, id) => dispatch(updateFormField(name, id))
   const options = radioOptions ? radioOptions[lang] : null
 
   const defaultValues = radioOptions.fi.map(o => ({ id: o.id, value: false }))
@@ -58,7 +58,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
       })
     }
     setValue(newValues)
-    choose(id, newValues)
+    // choose(id, newValues)
     if (id === 'view-is-based-on') {
       const filters = getFilters(newValues)
       dispatch(setAnswerLevels(filters))

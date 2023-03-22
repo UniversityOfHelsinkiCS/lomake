@@ -86,7 +86,7 @@ const leaveRoom = async (socket, room) => {
 
 const updateField = async (socket, payload, io) => {
   try {
-    const { room, data } = payload
+    const { room, data, form } = payload
 
     const currentUser = await getCurrentUser(socket)
 
@@ -128,7 +128,7 @@ const updateField = async (socket, payload, io) => {
 
       const currentAnswer = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
         },
       })
 
@@ -137,7 +137,7 @@ const updateField = async (socket, payload, io) => {
         {
           returning: true,
           where: {
-            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
           },
         }
       )

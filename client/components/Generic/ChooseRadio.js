@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { useSelector } from 'react-redux'
+// import { updateFormField } from 'Utilities/redux/formReducer'
 
 import { colors } from 'Utilities/common'
 import './Generic.scss'
@@ -23,12 +23,13 @@ const ChooseRadio = ({
   radioOptions,
   direction,
 }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
 
-  const choose = (name, id) => dispatch(updateFormField(name, id))
+  // temporary restriction
+  // const choose = (name, id) => dispatch(updateFormField(name, id))
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
@@ -39,7 +40,7 @@ const ChooseRadio = ({
   }
   const handleClick = label => {
     setState({ value: label })
-    choose(id, label)
+    // choose(id, label)
   }
 
   useEffect(() => {
