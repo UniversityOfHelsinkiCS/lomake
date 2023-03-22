@@ -117,11 +117,12 @@ const getOne = async (req, res) => {
 }
 
 const getPreviousYear = async (req, res) => {
+  const { programme, form } = req.params
   try {
     const data = await db.answer.findAll({
       limit: 1,
       where: {
-        [Op.and]: [{ programme: req.params.programme, year: (await whereDraftYear()) - 1 }],
+        [Op.and]: [{ programme, form, year: (await whereDraftYear()) - 1 }],
       },
       order: [['createdAt', 'DESC']],
     })

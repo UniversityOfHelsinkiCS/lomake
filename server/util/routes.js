@@ -20,7 +20,7 @@ router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
 router.get('/answers/:programme', requireProgrammeRead, answers.getOne)
-router.get('/answers/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
+router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers', requireProgrammeWrite, answers.create)
 router.post('/bulkanswers', answers.bulkCreate)
 

@@ -3,8 +3,8 @@ import callBuilder from '../apiConnection'
  * Actions and reducers are in the same file for readability
  */
 
-export const getPreviousAnswersAction = programme => {
-  const route = `/answers/${programme}/previous`
+export const getPreviousAnswersAction = (programme, form) => {
+  const route = `/answers/${form}/${programme}/previous`
   const prefix = 'GET_PREVIOUS_ANSWERS'
   return callBuilder(route, prefix)
 }

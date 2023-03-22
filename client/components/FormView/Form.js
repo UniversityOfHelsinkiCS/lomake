@@ -16,7 +16,7 @@ const Form = ({ questions, programmeKey }) => {
   const room = useSelector(({ room }) => room)
 
   useEffect(() => {
-    if (room) dispatch(getPreviousAnswersAction(room))
+    if (room) dispatch(getPreviousAnswersAction(room, 1))
   }, [room])
 
   const partComponentMap = {
