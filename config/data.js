@@ -1,3 +1,34 @@
+const forms = [
+  {
+    key: 1,
+    name: 'Vuosiseuranta',
+  },
+  {
+    key: 2,
+    name: 'Koulutusuudistusarviointi - koulutusohjelmat',
+  },
+  {
+    key: 3,
+    name: 'Koulutusuudistusarviointi - yksilöt',
+  },
+  {
+    key: 4,
+    name: 'Katselmus - koulutusohjelmat',
+  },
+  {
+    key: 5,
+    name: 'Katselmus - tiedekunnat',
+  },
+  {
+    key: 6,
+    name: 'Katselmus - toimikunta',
+  },
+  {
+    key: 7,
+    name: 'Katselmus - arviointiryhmä',
+  },
+]
+
 const facultyMap = {
   teologinen: 'H10',
   oikeustieteellinen: 'H20',
@@ -1580,6 +1611,7 @@ const data = [
 ]
 
 module.exports = {
+  forms,
   data,
   facultyMap,
 }
