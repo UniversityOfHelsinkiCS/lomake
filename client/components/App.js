@@ -43,8 +43,8 @@ export default () => {
     let year = 2019
     if (oldAnswers.data) {
       if (
-        deadlines.nextDeadline &&
-        new Date(deadlines.nextDeadline.date) >= new Date() &&
+        deadlines.nextDeadlines &&
+        new Date(deadlines.nextDeadlines[0].date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
         year = deadlines.draftYear.year
