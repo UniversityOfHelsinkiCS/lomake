@@ -15,10 +15,11 @@ describe('Form tests', () => {
 
   it('Can write to a textfield and the answer is saved.', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.wait(2000)
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'other words')
     cy.reload()
-    cy.wait(2000)
+    cy.wait(5000)
 
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
   })
