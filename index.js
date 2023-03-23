@@ -29,9 +29,10 @@ initializeDatabaseConnection()
         case 'getUserList':
           getUserList()
           return
-        case 'generateMissingTempAnswers':
-          createTempAnswers()
-          return
+        // case 'generateMissingTempAnswers':
+        //   createTempAnswers()
+        //   return
+        // Function needs to be modfied to take into cosideration different form types
         default:
           return
       }
