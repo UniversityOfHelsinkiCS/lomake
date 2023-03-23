@@ -2,8 +2,8 @@ const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 
-const createDraftAnswers = async (newYear, form) => {
-  logger.info(`Creating draft answers from the year ${newYear} for form ${form}`)
+const createDraftAnswers = async newYear => {
+  logger.info(`Creating draft answers from the year ${newYear}`)
   const programmes = await db.studyprogramme.findAll({})
 
   // Save the current tempanswers as answers
@@ -12,14 +12,14 @@ const createDraftAnswers = async (newYear, form) => {
 
     const answers = await db.answer.findOne({
       where: {
-        [Op.and]: [{ programme: key }, { year: newYear }, { form }],
+        [Op.and]: [{ programme: key }, { year: newYear }],
       },
     })
     const acualAnswers = answers ? answers.data : {}
 
     const tempAnswer = await db.tempAnswer.findOne({
       where: {
-        [Op.and]: [{ programme: key }, { year: newYear }, { form }],
+        [Op.and]: [{ programme: key }, { year: newYear }],
       },
     })
     if (tempAnswer) {
@@ -30,15 +30,14 @@ const createDraftAnswers = async (newYear, form) => {
         data: acualAnswers,
         programme: key,
         year: newYear,
-        form,
       })
     }
   })
   logger.info(`Draft answers created`)
 }
 
-const createFinalAnswers = async (newYear, form) => {
-  logger.info(`Creating final answers for the year ${newYear} for form ${form}`)
+const createFinalAnswers = async newYear => {
+  logger.info(`Creating final answers for the year ${newYear}`)
   const programmes = await db.studyprogramme.findAll({})
 
   programmes.forEach(async programme => {
@@ -46,7 +45,7 @@ const createFinalAnswers = async (newYear, form) => {
 
     const tempAnswer = await db.tempAnswer.findOne({
       where: {
-        [Op.and]: [{ programme: key }, { year: newYear }, { form }],
+        [Op.and]: [{ programme: key }, { year: newYear }],
       },
     })
 
@@ -54,7 +53,7 @@ const createFinalAnswers = async (newYear, form) => {
 
     const answer = await db.answer.findOne({
       where: {
-        [Op.and]: [{ programme: key }, { year: newYear }, { form }],
+        [Op.and]: [{ programme: key }, { year: newYear }],
       },
     })
 
@@ -66,7 +65,6 @@ const createFinalAnswers = async (newYear, form) => {
         data: acualAnswers,
         programme: key,
         year: newYear,
-        form,
       })
     }
   })
