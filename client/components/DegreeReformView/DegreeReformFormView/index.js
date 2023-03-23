@@ -93,13 +93,6 @@ const DegreeReformFormView = ({ room }) => {
 
   const formType = 'degree-reform'
 
-  questions.map(q => {
-    if (q.id === 0) {
-      q.parts = q.parts.filter(p => p.index === 2)
-    }
-    return q
-  })
-
   return (
     <div className="form-container">
       <NavigationSidebar programmeKey={room} form="degree-reform" />

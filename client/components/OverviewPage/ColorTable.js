@@ -48,7 +48,6 @@ const ColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
-      form: 1, // TO FIX
     })
 
     if (form === 'evaluation' || form === 'degree-reform') {

@@ -104,9 +104,7 @@ const Form = ({ questions, programmeKey, form }) => {
             form={form}
           >
             {filter.answerLevels.length > 0 && filter.answerLevels.find(f => f === section.id) ? (
-              <div>
-                <p>Osiota ei valittu vastattavaksi</p>{' '}
-              </div>
+              <div />
             ) : (
               section.parts.map(partMap)
             )}

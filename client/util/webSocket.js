@@ -50,7 +50,7 @@ const socketMiddleware = () => {
       case 'WS_JOIN_ROOM':
         if (!socket) socket = connect() // This really only happens when developing.
 
-        socket.emit('join', action.room, action.form)
+        socket.emit('join', action.room)
         break
       case 'WS_DISCONNECT':
         if (socket !== null) socket.close()
