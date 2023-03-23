@@ -18,6 +18,7 @@ describe('Form tests', () => {
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
     cy.writeToTextField('[contenteditable="true"]', 'other words')
     cy.reload()
+    cy.wait(2000)
 
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
   })
