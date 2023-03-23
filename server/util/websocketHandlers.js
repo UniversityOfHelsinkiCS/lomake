@@ -53,7 +53,7 @@ const getCurrentUser = async socket => {
   return user
 }
 
-const joinRoom = async (socket, room, io) => {
+const joinRoom = async (socket, room, io, form) => {
   try {
     const currentUser = await getCurrentUser(socket)
     if (
@@ -63,12 +63,13 @@ const joinRoom = async (socket, room, io) => {
     ) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
-          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
         defaults: {
           data: {},
         },
       })
+
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
