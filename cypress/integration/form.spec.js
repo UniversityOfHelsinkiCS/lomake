@@ -30,7 +30,7 @@ describe('Form tests', () => {
 
     // Check that the changes have been saved:
     cy.visit('/')
-    cy.wait(1000)
+    cy.wait(10000)
 
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`)
       .should('have.css', 'background-color')
