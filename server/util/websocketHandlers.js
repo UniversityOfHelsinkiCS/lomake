@@ -129,7 +129,7 @@ const updateField = async (socket, payload, io) => {
 
       const currentAnswer = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
 
@@ -138,7 +138,7 @@ const updateField = async (socket, payload, io) => {
         {
           returning: true,
           where: {
-            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
+            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
           },
         }
       )
