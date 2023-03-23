@@ -19,7 +19,7 @@ export const deleteDeadlineAndDraftYear = ({ form }) => {
 }
 
 const initialState = {
-  nextDeadlines: null,
+  nextDeadline: null,
   draftYear: null,
 }
 
@@ -27,21 +27,21 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_DEADLINE_AND_DRAFT_YEAR_SUCCESS': {
       return {
-        nextDeadlines: action.response.deadline,
+        nextDeadline: action.response.deadline,
         draftYear: action.response.draftYear,
       }
     }
     case 'GET_DEADLINE_AND_DRAFT_YEAR_SUCCESS': {
       return {
         ...state,
-        nextDeadlines: action.response.deadlines,
+        nextDeadline: action.response.deadline,
         draftYear: action.response.draftYear,
       }
     }
     case 'DELETE_DEADLINE_AND_DRAFT_YEAR_SUCCESS':
       return {
         ...state,
-        nextDeadlines: null,
+        nextDeadline: null,
         draftYear: null,
       }
     default:
