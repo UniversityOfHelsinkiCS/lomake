@@ -95,4 +95,26 @@
       { "label": "Emeritta / Emeritus / Alumni", "id": "emeritus_alumni" }
     ]
   }
+},
+{
+  "id": "outlining-questions",
+  "index": 5,
+  "type": "INFOBOX",
+  "shortLabel": {
+    "fi": "kvastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuena",
+    "se": "",
+    "en": ""
+  },
+  "label": {
+    "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
+    "se": "",
+    "en": ""
+  },
+  "description": {
+    "fi": "",
+    "se": "",
+    "en": ""
+  },
+  "required": true,
+  "relatedYearlyQuestions": []
 }]

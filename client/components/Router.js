@@ -14,6 +14,7 @@ import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormVi
 import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
+import threeStepImage from '../assets/degreeReform/study_path.png'
 
 export default () => (
   <div className="content">
@@ -42,6 +43,13 @@ export default () => (
         exact
         path="/evaluation/previous-years/:programme"
         render={props => <PastAnswersView programmeKey={props.match.params.programme} />}
+      />
+      <Route
+        exact
+        path="/three-step"
+        render={() => (
+          <img src={threeStepImage} alt="Bolognan prosessin mukainen aito kolmiportainen tutkintorakenne" />
+        )}
       />
     </Switch>
   </div>
