@@ -11,7 +11,7 @@ import ComparisonPage from 'Components/ComparisonPage'
 import EvaluationOverview from 'Components/EvaluationView/EvaluationOverview'
 import EvaluationFormView from 'Components/EvaluationView/EvaluationFormView'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
-import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividualForm'
+import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
 

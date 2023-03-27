@@ -1,142 +1,98 @@
-
-[{
-    "title": {
-      "fi": "Taustatiedot",
-      "se": "",
-      "en": ""
+ [{
+  "id": "background-unit",
+  "index": 0,
+  "type": "CHOOSE-ADVANCED",
+  "shortLabel": {
+    "fi": "Taustayksikkö",
+    "se": "",
+    "en": ""
+  },
+  "label": {
+    "fi": "Taustayksikkö",
+    "se": "",
+    "en": ""
+  },
+  "description": {
+    "fi": "Taustayksikkö",
+    "se": "",
+    "en": ""
+  },
+  "required": true,
+  "extrainfo": {
+    "fi": "",
+    "se": "",
+    "en": ""
+  },
+  "relatedYearlyQuestions": [],
+  "radioOptions": { 
+      "fi": [
+          { "label": "Tiedekunta", "id": "faculty" }, 
+          { "label": "YPA", "id": "ypa" }, 
+          { "label": "Muu, mikä", "id": "other" }
+      ],
+      "en": [
+          { "label": "Tiedekunta", "id": "faculty" }, 
+          { "label": "YPA", "id": "ypa" }, 
+          { "label": "Muu, mikä", "id": "other" }
+      ],
+      "se": [
+          { "label": "Tiedekunta", "id": "faculty" }, 
+          { "label": "YPA", "id": "ypa" }, 
+          { "label": "Muu, mikä", "id": "other" }
+      ]
     },
-    "parts": [
+  "advancedOptions": {"faculty": 
+  ["facultyOfScience",
+  "facultyOfAgricultureAndForestry",
+  "facultyOfBiologigalAndEnvironmentalSciences",
+  "facultyOfEducationalSciences",
+  "facultyOfLaw",
+  "facultyOfMedicine",
+  "facultyOfPharmacy",
+  "facultyOfSocialSciences",
+  "facultyOfTheology",
+  "facultyOfVeterinaryMedicine"
+  ]
+  }
+},
+
+{
+  "id": "primary-role",
+  "index": 1,
+  "type": "CHOOSE-RADIO",
+  "shortLabel": {
+    "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
+    "se": "",
+    "en": ""
+  },
+  "label": {
+    "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
+    "se": "",
+    "en": ""
+  },
+  "description": {
+    "fi": "",
+    "se": "",
+    "en": ""
+  },
+  "required": true,
+  "extrainfo": {
+    "fi": "",
+    "se": "",
+    "en": ""
+  },
+  "relatedYearlyQuestions": [],
+  "radioOptions": {
+    "fi": [
+      { "label": "Dekaani / Varadekaani", "id": "dean" },
       {
-        "id": "base-information-0",
-        "index": 0,
-        "type": "CHOOSE-ADVANCED",
-        "shortLabel": {
-          "fi": "Taustayksikkö",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "Taustayksikkö",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Taustayksikkö",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": { 
-            "fi": [
-                { "label": "Tiedekunta" }, 
-                { "label": "YPA" }, 
-                { "label": "SocCom" }, 
-                { "label": "Muu, mikä" }
-            ],
-            "en": [
-                { "label": "Tiedekunta" }, 
-                { "label": "YPA" }, 
-                { "label": "SocCom" }, 
-                { "label": "Muu, mikä" }
-            ],
-            "se": [
-                { "label": "Tiedekunta" }, 
-                { "label": "YPA" }, 
-                { "label": "SocCom" }, 
-                { "label": "Muu, mikä" }
-            ]},
-        "advancedOptions": {"faculty": 
-        ["facultyOfScience",
-        "facultyOfAgricultureAndForestry",
-        "facultyOfBiologigalAndEnvironmentalSciences",
-        "facultyOfEducationalSciences",
-        "facultyOfLaw",
-        "facultyOfMedicine",
-        "facultyOfPharmacy",
-        "facultyOfSocialSciences",
-        "facultyOfTheology",
-        "facultyOfVeterinaryMedicine"
-        ]}
+        "label": "Tieteenalan tai osaston johtaja", "id": "faculty_or_department_lead"
       },
-      {
-        "id": "base-information-1",
-        "index": 1,
-        "type": "CHOOSE-RADIO",
-        "shortLabel": {
-          "fi": "Ensisijainen rooli tällä hetkellä",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "Ensisijainen rooli tällä hetkellä",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Ensisijainen rooli tällä hetkellä",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": {
-          "fi": [
-            { "label": "Dekaani / Varadekaani" },
-            {
-              "label": "Tieteenalan tai osaston johtaja"
-            },
-            { "label": "Hallinto- tai muu henkilökunta" },
-            { "label": "Opetus- ja tutkimushenkilökunta" },
-            { "label": "Väitöskirjatutkija" },
-            { "label": "Emeriitta / Emeritus / Alumni" }
-          ]
-        }
-      },
-      {
-        "id": "base-information-2",
-        "index": 2,
-        "type": "CHECKBOX",
-        "shortLabel": {
-          "fi": "Mihin mielipide kohdistuu",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "Mihin mielipide kohdistuu",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Mihin mielipide kohdistuu",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": {
-          "fi": [
-            { "label": "kanditason koulutus" },
-            { "label": "maisteritason koulutus" },
-            { "label": "tohtoritason koulutus" },
-            { "label": "kaikki koulutustasot" }
-          ]
-        }
-      }
+      { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
+      { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
+      { "label": "Opiskelija", "id": "student" },
+      { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" },
+      { "label": "Emeritta / Emeritus / Alumni", "id": "emeritus_alumni" }
     ]
-  }]
+  }
+}]
