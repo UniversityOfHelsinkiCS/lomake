@@ -22,7 +22,17 @@ import CompareByFaculty from './CompareByFaculty'
 import questions from '../../questions.json'
 import './ComparisonPage.scss'
 
-const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang }) => {
+const answersByQuestions = ({
+  usersProgrammes,
+  year,
+  answers,
+  oldAnswers,
+  draftYear,
+  deadline,
+  questionsList,
+  lang,
+  form,
+}) => {
   const answerMap = new Map()
   const chosenKeys = usersProgrammes.map(p => p.key)
   const selectedAnswers = answersByYear({
@@ -30,6 +40,8 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    deadline,
+    form,
   })
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
@@ -67,7 +79,7 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
   return answerMap
 }
 
-export default () => {
+export default ({ form = 1 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -77,7 +89,7 @@ export default () => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -98,7 +110,9 @@ export default () => {
           answers,
           oldAnswers,
           draftYear,
+          deadline: nextDeadline,
           questionsList,
+          form,
           lang,
         }),
       }

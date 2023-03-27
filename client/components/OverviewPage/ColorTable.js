@@ -28,7 +28,7 @@ const ColorTable = React.memo(
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const draftYear = useSelector(state => state.deadlines.draftYear)
+    const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
@@ -48,6 +48,8 @@ const ColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
+      deadline: nextDeadline,
+      form,
     })
 
     if (form === 'evaluation' || form === 'degree-reform') {
