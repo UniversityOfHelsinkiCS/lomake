@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
 import evaluationQuestions from '../../evaluationQuestions.json'
-import koulutusuudistusQuestions from '../../koulutusuudistusQuestions.json'
+import koulutusuudistusQuestions from '../../degreeReformQuestions.json'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -25,8 +25,7 @@ const iconMap = {
 
 const NavigationSidebar = ({ programmeKey, form }) => {
   const lang = useSelector(state => state.language)
-  const formData = useSelector(({ form }) => form.data || {})
-  const filter = useSelector(state => state.filters || {})
+  const formData = useSelector(({ form }) => form || {})
   const location = useLocation()
   const { t } = useTranslation()
 
@@ -43,8 +42,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
     questionsToShow = koulutusuudistusQuestions
     linkBase = '/degree-reform-individual/form'
   }
-
-  const filters = filter && filter.answerLevels.length > 0 ? filter.answerLevels : null
+  const formDataFilter = formData.answerLevels && formData.answerLevels.length > 0 ? formData.answerLevels : null
 
   let partNumber = -1
   return (
@@ -56,7 +54,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
             const active = location.hash === `#${romanNumeral}`
-            if (filters && filters.find(f => f === section.id)) {
+            if (formDataFilter && formDataFilter.find(f => f === section.id)) {
               return <div />
             }
             return (

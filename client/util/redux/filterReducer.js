@@ -37,11 +37,6 @@ export const setQuestions = questions => ({
   questions,
 })
 
-export const setAnswerLevels = answerLevels => ({
-  type: 'SET_ANSWER_LEVELS',
-  answerLevels,
-})
-
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
@@ -102,12 +97,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         questions: action.questions,
-      }
-    }
-    case 'SET_ANSWER_LEVELS': {
-      return {
-        ...state,
-        answerLevels: action.answerLevels,
       }
     }
     default:
