@@ -4,10 +4,10 @@ const logger = require('@util/logger')
 const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const createOrUpdate = async (req, res) => {
-  const { deadline, draftYear } = req.body
+  const { deadline, draftYear, form } = req.body
 
-  if (!deadline || !draftYear) {
-    throw new Error('No deadline or draft year defined')
+  if (!deadline || !draftYear || !form) {
+    throw new Error('No deadline, draft or form year defined')
   }
 
   try {
@@ -16,10 +16,11 @@ const createOrUpdate = async (req, res) => {
 
     // Create new or update old deadline
     let newDeadline = null
-    const existingDeadlines = await db.deadline.findAll({})
+    const existingDeadlines = await db.deadline.findAll({ where: { form } })
     if (existingDeadlines.length === 0) {
       newDeadline = await db.deadline.create({
         date: deadline,
+        form,
       })
     } else {
       existingDeadlines[0].date = deadline
@@ -38,7 +39,7 @@ const createOrUpdate = async (req, res) => {
       newDraftYear = await existingDraftYears[0].save()
     }
 
-    await createDraftAnswers(draftYear)
+    await createDraftAnswers(draftYear, form)
     return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -46,12 +47,20 @@ const createOrUpdate = async (req, res) => {
   }
 }
 
-const remove = async (_, res) => {
+const remove = async (req, res) => {
+  const { form } = req.body
+
+  if (!form) {
+    throw new Error('No form type defined')
+  }
   try {
-    // Just delete all deadlines, there should be only 1 anyway.
-    await db.deadline.destroy({
-      truncate: true,
+    const existingDeadline = await db.deadline.findOne({
+      where: { form },
     })
+    if (!existingDeadline) {
+      return res.status(404).json({ error: 'Deadline not found' })
+    }
+    await existingDeadline.destroy()
 
     // Unlock all programmes
     await db.studyprogramme.update({ locked: true }, { where: {} })
@@ -61,7 +70,7 @@ const remove = async (_, res) => {
       truncate: true,
     })
 
-    await createFinalAnswers(draftYears[0].year)
+    await createFinalAnswers(draftYears[0].year, form)
     return res.status(200).json({ deadline: null, draftYear: null })
   } catch (error) {
     logger.error(`Database error: ${error}`)
