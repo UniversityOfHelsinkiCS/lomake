@@ -23,13 +23,23 @@ import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
 import questions from '../../questions.json'
 
-const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year }) => {
+const formShouldBeViewOnly = ({
+  accessToTempAnswers,
+  programme,
+  writeAccess,
+  viewingOldAnswers,
+  draftYear,
+  year,
+  nextDeadline,
+  form,
+}) => {
   if (!accessToTempAnswers) return true
   if (programme.locked) return true
   if (!writeAccess) return true
   if (viewingOldAnswers) return true
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
+  if (nextDeadline.form !== form) return true // TO FIX handle multiple deadlines
   return false
 }
 
@@ -38,8 +48,10 @@ const FormView = ({ room }) => {
   const history = useHistory()
   const { t } = useTranslation()
 
+  const form = 1 // TO FIX or not?
+
   const lang = useSelector(state => state.language)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const user = useSelector(state => state.currentUser.data)
@@ -58,12 +70,23 @@ const FormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-    dispatch(getSingleProgrammesAnswers({ room, year, form: 1 }))
-    if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
+    dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    if (
+      formShouldBeViewOnly({
+        accessToTempAnswers,
+        programme,
+        writeAccess,
+        viewingOldAnswers,
+        draftYear,
+        year,
+        nextDeadline,
+        form,
+      })
+    ) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {
-      dispatch(wsJoinRoom(room, 1))
+      dispatch(wsJoinRoom(room, form))
       dispatch(setViewOnly(false))
     }
   }, [
