@@ -2,6 +2,7 @@ import React from 'react'
 import { Divider } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import sanitizeHtml from 'sanitize-html'
 
 import './Generic.scss'
 
@@ -20,14 +21,14 @@ const InfoBox = ({ label, description, extrainfo, image }) => {
           fontSize: '16px',
         }}
       >
-        {description && <p style={{ whiteSpace: 'pre-line' }}>{description}</p>}
+        {description && (
+          <p dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} style={{ whiteSpace: 'pre-line' }} />
+        )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
         {label && <p> {label}</p>}
         {image ? (
           <b>
-            <Link to={image.link} target="_blank">
-              {image.text}
-            </Link>
+            <Link to={image.link} target="_blank" />
           </b>
         ) : null}
       </div>
