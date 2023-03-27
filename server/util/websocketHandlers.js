@@ -53,7 +53,7 @@ const getCurrentUser = async socket => {
   return user
 }
 
-const joinRoom = async (socket, room, io) => {
+const joinRoom = async (socket, room, form, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
     if (
@@ -63,7 +63,7 @@ const joinRoom = async (socket, room, io) => {
     ) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
-          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }],
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
         defaults: {
           data: {},
@@ -128,7 +128,7 @@ const updateField = async (socket, payload, io) => {
 
       const currentAnswer = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
+          [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
 
@@ -137,7 +137,7 @@ const updateField = async (socket, payload, io) => {
         {
           returning: true,
           where: {
-            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, form],
+            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
           },
         }
       )

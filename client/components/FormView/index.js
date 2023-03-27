@@ -63,7 +63,7 @@ const FormView = ({ room }) => {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {
-      dispatch(wsJoinRoom(room))
+      dispatch(wsJoinRoom(room, 1))
       dispatch(setViewOnly(false))
     }
   }, [

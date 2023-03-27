@@ -20,12 +20,13 @@ const createBackups = async () => {
   })
 
   currentAnswers.forEach(async answer => {
-    const { programme, data } = answer
+    const { programme, data, form } = answer
 
     const newestBackup = await db.backupAnswer.findAll({
       limit: 1,
       where: {
         programme,
+        form,
       },
       order: [['createdAt', 'DESC']],
     })
@@ -37,6 +38,7 @@ const createBackups = async () => {
     await db.backupAnswer.create({
       programme,
       data,
+      form,
     })
 
     logger.info(`${loggerPrefix}Created new backup for ${programme}`)

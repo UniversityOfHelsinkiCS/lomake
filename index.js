@@ -42,7 +42,7 @@ initializeDatabaseConnection()
     const io = require('socket.io')(server)
     io.on('connection', socket => {
       socket.on('update_field', room => require('@util/websocketHandlers').updateField(socket, room, io))
-      socket.on('join', room => require('@util/websocketHandlers').joinRoom(socket, room, io))
+      socket.on('join', (room, form) => require('@util/websocketHandlers').joinRoom(socket, room, form, io))
       socket.on('leave', room => require('@util/websocketHandlers').leaveRoom(socket, room))
       socket.on('get_lock', room => require('@util/websocketHandlers').getLock(socket, room, io))
     })  
