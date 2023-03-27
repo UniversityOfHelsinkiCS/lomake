@@ -66,7 +66,7 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
   return answerMap
 }
 
-export default () => {
+export default ({ form = 1 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [openQuestions, setOpenQuestions] = useState(false)
@@ -81,12 +81,14 @@ export default () => {
   const filters = useSelector(state => state.filters)
   const { year } = filters
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines) // TO FIX handle multiples
   const selectedAnswers = answersByYear({
     year,
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    deadline: nextDeadline,
+    form,
   })
 
   useEffect(() => {
