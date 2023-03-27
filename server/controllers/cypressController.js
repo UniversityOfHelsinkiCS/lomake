@@ -103,6 +103,7 @@ const resetAnswers = async () => {
 const resetDeadline = async () => {
   const deadline = moment().add(7, 'days')
   const draftYear = defaultYears[0]
+  const form = 1 // TO FIX
 
   try {
     // Unlock all programmes
@@ -113,6 +114,7 @@ const resetDeadline = async () => {
     if (existingDeadlines.length === 0) {
       await db.deadline.create({
         date: deadline,
+        form,
       })
     } else {
       existingDeadlines[0].date = deadline
@@ -130,7 +132,7 @@ const resetDeadline = async () => {
       await existingDraftYears[0].save()
     }
 
-    await createDraftAnswers(draftYear)
+    await createDraftAnswers(draftYear, form)
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
@@ -153,6 +155,7 @@ const seed = async (_, res) => {
 }
 
 const createAnswers = async (req, res) => {
+  const form = 1 // To FIX
   try {
     logger.info('Cypress::creating answers')
 
@@ -171,6 +174,7 @@ const createAnswers = async (req, res) => {
             programme: prog.key,
             data: fakeanswers,
             year,
+            form,
             submittedBy: 'cypressFakeTest',
           })
         }
@@ -178,6 +182,7 @@ const createAnswers = async (req, res) => {
           data: {},
           programme: prog.key,
           year,
+          form,
         })
       })
     })
