@@ -62,13 +62,12 @@ export default () => {
   }, [oldAnswers, deadlines])
 
   if (!currentUser.data || !studyProgrammes || !oldAnswers || !oldAnswers.data) return null
-
   return (
     <div>
       {window.location.pathname.substring(1).split('/')[0] === 'degree-reform-individual' ? (
-        <NavBar />
-      ) : (
         <ReformIndividualNavBar />
+      ) : (
+        <NavBar />
       )}
       <Router />
     </div>
