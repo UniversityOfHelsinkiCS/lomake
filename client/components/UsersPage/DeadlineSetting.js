@@ -17,7 +17,7 @@ const DeadlineSetting = () => {
   const [yearOptions, setYearOptions] = useState([])
   const [warning, setWarning] = useState(false)
   const lang = useSelector(state => state.language)
-  const nextDeadlines = useSelector(({ deadlines }) => deadlines.nextDeadlines)
+  const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
@@ -48,13 +48,13 @@ const DeadlineSetting = () => {
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
-    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear, form: 1 }))
+    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear }))
     setNewDate(null)
     setNewDraftYear(null)
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadlineAndDraftYear({ form: 1 }))
+    dispatch(deleteDeadlineAndDraftYear())
     setNewDate(null)
     setNewDraftYear(null)
   }
@@ -110,7 +110,7 @@ const DeadlineSetting = () => {
       >
         {t('users:updateDeadline')} and draft year
       </Button>
-      {nextDeadlines && (
+      {nextDeadline && (
         <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
           {t('users:deleteThisDeadline')}
         </Button>
@@ -119,9 +119,9 @@ const DeadlineSetting = () => {
         <p>
           <b>
             {t('users:nextDeadline')}
-            <span style={{ color: nextDeadlines ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {nextDeadlines ? (
-                formatDate(nextDeadlines[0].date)
+            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
+              {nextDeadline ? (
+                formatDate(nextDeadline.date)
               ) : (
                 <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>
               )}
@@ -131,7 +131,7 @@ const DeadlineSetting = () => {
         <p>
           <b>
             {t('users:answersSavedForYear')}
-            <span style={{ color: nextDeadlines ? colors.blue : colors.red }} data-cy="draftYear">
+            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="draftYear">
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
           </b>

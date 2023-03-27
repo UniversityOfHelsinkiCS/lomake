@@ -58,12 +58,12 @@ const FormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-    dispatch(getSingleProgrammesAnswers({ room, year, form: 1 })) // To FIX
+    dispatch(getSingleProgrammesAnswers({ room, year, form: 1 }))
     if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {
-      dispatch(wsJoinRoom(room, 1)) // TO FIX
+      dispatch(wsJoinRoom(room))
       dispatch(setViewOnly(false))
     }
   }, [
