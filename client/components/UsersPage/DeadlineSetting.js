@@ -22,6 +22,8 @@ const DeadlineSetting = () => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
 
+  const form = 1 // TO FIX
+
   registerLocale('fi', fi)
   registerLocale('en', enGB)
   registerLocale('se', sv)
@@ -48,13 +50,13 @@ const DeadlineSetting = () => {
 
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
-    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear, form: 1 })) // TO FIX
+    dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear, form }))
     setNewDate(null)
     setNewDraftYear(null)
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadlineAndDraftYear({ form: 1 }))
+    dispatch(deleteDeadlineAndDraftYear({ form }))
     setNewDate(null)
     setNewDraftYear(null)
   }
