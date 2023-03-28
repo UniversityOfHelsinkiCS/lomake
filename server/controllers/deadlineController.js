@@ -62,16 +62,21 @@ const remove = async (req, res) => {
     }
     await existingDeadline.destroy()
 
-    // Unlock all programmes
-    await db.studyprogramme.update({ locked: true }, { where: {} })
-
     const draftYears = await db.draftYear.findAll({})
-    await db.draftYear.destroy({
-      truncate: true,
-    })
+    let draftYearToReturn = draftYears[0]
+
+    // Unlock all programmes and remove draft year if no deadlines remain
+    const existingDeadlines = await db.deadline.findAll({})
+    if (existingDeadlines.length === 0) {
+      await db.studyprogramme.update({ locked: true }, { where: {} })
+      await db.draftYear.destroy({
+        truncate: true,
+      })
+      draftYearToReturn = null
+    }
 
     await createFinalAnswers(draftYears[0].year, form)
-    return res.status(200).json({ deadline: null, draftYear: null })
+    return res.status(200).json({ deadline: null, draftYear: draftYearToReturn })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
