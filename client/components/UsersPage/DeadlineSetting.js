@@ -24,7 +24,7 @@ const DeadlineSetting = () => {
   const dispatch = useDispatch()
 
   const form = 1 // TO FIX
-  const formDeadline = nextDeadline.length > 0 ? nextDeadline.find(d => d.form === form) : null
+  const formDeadline = nextDeadline && nextDeadline.length > 0 ? nextDeadline.find(d => d.form === form) : null
 
   registerLocale('fi', fi)
   registerLocale('en', enGB)
