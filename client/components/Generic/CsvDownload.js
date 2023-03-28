@@ -13,9 +13,9 @@ const CsvDownload = ({ wantedData, view, programme }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
   const programmeData = useSelector(({ form }) => form.data)
-  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+  const draftYear = useSelector(state => state.deadlines.draftYear)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = answersByYear({ year, answers, oldAnswers, draftYear, deadline: nextDeadline, form: 1 }) // TO FIX
+  const selectedAnswers = answersByYear({ year, answers, oldAnswers, draftYear })
 
   const handleData = () => {
     // Create an array of arrays, with questions at index 0, and question_ids at index 1

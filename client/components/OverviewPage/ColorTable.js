@@ -24,12 +24,11 @@ const ColorTable = React.memo(
     isBeingFiltered,
     filterValue,
     handleFilterChange,
-    formNumber = 1, // TO FIX unify to one form variable
     form,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+    const draftYear = useSelector(state => state.deadlines.draftYear)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
@@ -49,8 +48,6 @@ const ColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
-      deadline: nextDeadline,
-      form: formNumber,
     })
 
     if (form === 'evaluation' || form === 'degree-reform') {

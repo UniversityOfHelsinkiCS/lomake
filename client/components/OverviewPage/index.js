@@ -28,7 +28,6 @@ export default () => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const form = 1 // TO FIX
 
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
@@ -135,7 +134,6 @@ export default () => {
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}
               filterValue={filter}
-              formNumber={form}
             />
           </div>
         </>
