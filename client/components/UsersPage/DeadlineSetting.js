@@ -22,7 +22,7 @@ const DeadlineSetting = () => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
 
-  const form = 2 // TO FIX
+  const form = 1 // TO FIX
 
   registerLocale('fi', fi)
   registerLocale('en', enGB)
