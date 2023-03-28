@@ -41,8 +41,8 @@ export default (state = initialState, action) => {
     case 'DELETE_DEADLINE_AND_DRAFT_YEAR_SUCCESS':
       return {
         ...state,
-        nextDeadline: null,
-        draftYear: null,
+        nextDeadline: action.response.deadline,
+        draftYear: action.response.draftYear,
       }
     default:
       return state

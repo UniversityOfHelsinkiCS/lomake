@@ -18,11 +18,13 @@ const DeadlineSetting = () => {
   const [warning, setWarning] = useState(false)
   const lang = useSelector(state => state.language)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
+
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
 
   const form = 1 // TO FIX
+  const formDeadline = nextDeadline.length > 0 ? nextDeadline.find(d => d.form === form) : null
 
   registerLocale('fi', fi)
   registerLocale('en', enGB)
@@ -112,7 +114,7 @@ const DeadlineSetting = () => {
       >
         {t('users:updateDeadline')} and draft year
       </Button>
-      {nextDeadline && (
+      {formDeadline && (
         <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
           {t('users:deleteThisDeadline')}
         </Button>
@@ -121,9 +123,9 @@ const DeadlineSetting = () => {
         <p>
           <b>
             {t('users:nextDeadline')}
-            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {nextDeadline ? (
-                formatDate(nextDeadline[0].date) // TO FIX
+            <span style={{ color: formDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
+              {formDeadline ? (
+                formatDate(formDeadline.date)
               ) : (
                 <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>
               )}
@@ -133,7 +135,7 @@ const DeadlineSetting = () => {
         <p>
           <b>
             {t('users:answersSavedForYear')}
-            <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="draftYear">
+            <span style={{ color: formDeadline ? colors.blue : colors.red }} data-cy="draftYear">
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
           </b>

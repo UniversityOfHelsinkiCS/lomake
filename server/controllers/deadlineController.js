@@ -15,16 +15,15 @@ const createOrUpdate = async (req, res) => {
     await db.studyprogramme.update({ locked: false }, { where: {} })
 
     // Create new or update old deadline
-    let newDeadline = null
     const existingDeadlines = await db.deadline.findAll({ where: { form } })
     if (existingDeadlines.length === 0) {
-      newDeadline = await db.deadline.create({
+      await db.deadline.create({
         date: deadline,
         form,
       })
     } else {
       existingDeadlines[0].date = deadline
-      newDeadline = await existingDeadlines[0].save()
+      await existingDeadlines[0].save()
     }
 
     // Create new or update old draft year
@@ -39,8 +38,10 @@ const createOrUpdate = async (req, res) => {
       newDraftYear = await existingDraftYears[0].save()
     }
 
+    const allDeadlines = await db.deadline.findAll({})
+
     await createDraftAnswers(draftYear, form)
-    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
+    return res.status(200).json({ deadline: allDeadlines, draftYear: newDraftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -65,18 +66,21 @@ const remove = async (req, res) => {
     const draftYears = await db.draftYear.findAll({})
     let draftYearToReturn = draftYears[0]
 
+    const remainingDeadlines = await db.deadline.findAll({})
+    let deadlinesToReturn = remainingDeadlines
+
     // Unlock all programmes and remove draft year if no deadlines remain
-    const existingDeadlines = await db.deadline.findAll({})
-    if (existingDeadlines.length === 0) {
+    if (remainingDeadlines.length === 0) {
       await db.studyprogramme.update({ locked: true }, { where: {} })
       await db.draftYear.destroy({
         truncate: true,
       })
       draftYearToReturn = null
+      deadlinesToReturn = null
     }
 
     await createFinalAnswers(draftYears[0].year, form)
-    return res.status(200).json({ deadline: null, draftYear: draftYearToReturn })
+    return res.status(200).json({ deadline: deadlinesToReturn, draftYear: draftYearToReturn })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

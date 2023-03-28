@@ -42,8 +42,10 @@ export default () => {
   useEffect(() => {
     let year = 2019
     if (oldAnswers.data) {
+      // TO FIX
       if (
-        deadlines.nextDeadline &&
+        deadlines.draftYear &&
+        deadlines.nextDeadline.length > 0 &&
         new Date(deadlines.nextDeadline[0].date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
