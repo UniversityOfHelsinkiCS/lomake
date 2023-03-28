@@ -14,10 +14,12 @@ const DeadlineInfo = () => {
   }
 
   const getDeadlineText = () => {
-    if (nextDeadline)
+    // TO FIX
+    if (nextDeadline[0])
       return (
         <>
-          {t('users:nextDeadline')} {formatDate(nextDeadline.date)}
+          {t('users:nextDeadline')} {formatDate(nextDeadline[0].date)}
+          {/* TO FIX */}
           <p>
             {t('users:answersSavedForYear')} {draftYear.year}
           </p>

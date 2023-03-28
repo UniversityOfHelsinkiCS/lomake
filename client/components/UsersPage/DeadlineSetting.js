@@ -22,7 +22,7 @@ const DeadlineSetting = () => {
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
 
-  const form = 1 // TO FIX
+  const form = 2 // TO FIX
 
   registerLocale('fi', fi)
   registerLocale('en', enGB)
@@ -123,7 +123,7 @@ const DeadlineSetting = () => {
             {t('users:nextDeadline')}
             <span style={{ color: nextDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
               {nextDeadline ? (
-                formatDate(nextDeadline.date)
+                formatDate(nextDeadline[0].date) // TO FIX
               ) : (
                 <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>
               )}

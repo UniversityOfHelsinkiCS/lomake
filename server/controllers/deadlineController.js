@@ -87,10 +87,10 @@ const get = async (_, res) => {
   try {
     const deadlines = await db.deadline.findAll({})
     const draftYears = await db.draftYear.findAll({})
-    const deadline = deadlines.length ? deadlines[0] : null
+    const deadlineList = deadlines.length ? deadlines : null
     const draftYear = draftYears.length ? draftYears[0] : null
 
-    return res.status(200).json({ deadline, draftYear })
+    return res.status(200).json({ deadlineList, draftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

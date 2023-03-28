@@ -44,7 +44,7 @@ export default () => {
     if (oldAnswers.data) {
       if (
         deadlines.nextDeadline &&
-        new Date(deadlines.nextDeadline.date) >= new Date() &&
+        new Date(deadlines.nextDeadline[0].date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
         year = deadlines.draftYear.year

@@ -30,7 +30,7 @@ const formShouldBeViewOnly = ({
   viewingOldAnswers,
   draftYear,
   year,
-  nextDeadline,
+  formDeadline,
   form,
 }) => {
   if (!accessToTempAnswers) return true
@@ -39,7 +39,7 @@ const formShouldBeViewOnly = ({
   if (viewingOldAnswers) return true
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (nextDeadline.form !== form) return true // TO FIX handle multiple deadlines
+  if (formDeadline?.form !== form) return true
   return false
 }
 
@@ -52,6 +52,7 @@ const FormView = ({ room }) => {
 
   const lang = useSelector(state => state.language)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const user = useSelector(state => state.currentUser.data)
@@ -79,7 +80,7 @@ const FormView = ({ room }) => {
         viewingOldAnswers,
         draftYear,
         year,
-        nextDeadline,
+        formDeadline,
         form,
       })
     ) {
@@ -121,7 +122,7 @@ const FormView = ({ room }) => {
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
       <div className="the-form">
-        <FormStatusMessage programme={room} />
+        <FormStatusMessage programme={room} form={form} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
@@ -138,7 +139,7 @@ const FormView = ({ room }) => {
 
           <div className="hide-in-print-mode">
             <YearSelector size="small" />
-            <StatusMessage programme={room} />
+            <StatusMessage programme={room} form={form} />
 
             <p>{t('formView:info1')}</p>
             <p>{t('formView:info2')}</p>

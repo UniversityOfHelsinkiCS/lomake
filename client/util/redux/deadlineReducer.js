@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case 'GET_DEADLINE_AND_DRAFT_YEAR_SUCCESS': {
       return {
         ...state,
-        nextDeadline: action.response.deadline,
+        nextDeadline: action.response.deadlineList,
         draftYear: action.response.draftYear,
       }
     }

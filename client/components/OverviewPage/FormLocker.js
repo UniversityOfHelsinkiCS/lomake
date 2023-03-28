@@ -4,12 +4,14 @@ import { Button, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 
-export default function FormLocker({ programme }) {
+// TO FIX
+export default function FormLocker({ programme, form = 1 }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const programmeDetails = useSelector(state => state.studyProgrammes.singleProgram)
   const programmeDetailsPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
 
   const [loadObj, setLoadObj] = useState({
     loading: false,
@@ -37,7 +39,7 @@ export default function FormLocker({ programme }) {
     dispatch(toggleLock(programme))
   }
 
-  if (!nextDeadline || !programmeDetails) return null
+  if (!formDeadline || !programmeDetails) return null
 
   const { locked } = programmeDetails
 

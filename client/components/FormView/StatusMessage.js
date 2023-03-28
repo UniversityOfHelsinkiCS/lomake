@@ -11,16 +11,18 @@ const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   return ''
 }
 
-const StatusMessage = ({ programme }) => {
+// TO FIX
+const StatusMessage = ({ programme, form = 1 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const deadline = useSelector(state => state.deadlines.nextDeadline)
+  const deadlines = useSelector(state => state.deadlines.nextDeadline)
+  const formDeadline = deadlines ? deadlines.find(d => d.form === form) : null
   const draftYear = useSelector(state => state.deadlines.draftYear)
   const lastSaved = useSelector(state => state.form.lastSaveSuccess)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const user = useSelector(state => state.currentUser.data)
   const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
-  const deadlineObj = deadline && deadline.date ? new Date(deadline.date) : undefined
+  const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = lang !== 'se' ? lang : 'sv'
 
