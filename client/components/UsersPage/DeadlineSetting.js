@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
-import { Button, Header, Select, Segment } from 'semantic-ui-react'
+import { Button, Divider, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
@@ -9,22 +9,23 @@ import { useTranslation } from 'react-i18next'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import { colors } from 'Utilities/common'
 import { isSuperAdmin } from '@root/config/common'
+import { forms } from '@root/config/data'
 
 const DeadlineSetting = () => {
   const { t } = useTranslation()
   const [newDate, setNewDate] = useState(null)
   const [newDraftYear, setNewDraftYear] = useState(null)
   const [yearOptions, setYearOptions] = useState([])
+  const [form, setForm] = useState(null)
+  const [formDeadline, setFormDeadline] = useState(null)
+  const [sortedDeadlines, setSortedDeadlines] = useState([])
   const [warning, setWarning] = useState(false)
   const lang = useSelector(state => state.language)
-  const nextDeadline = useSelector(({ deadlines }) => deadlines.nextDeadline)
+  const allDeadlines = useSelector(({ deadlines }) => deadlines.nextDeadline)
 
   const draftYear = useSelector(({ deadlines }) => deadlines.draftYear)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const dispatch = useDispatch()
-
-  const form = 1 // TO FIX
-  const formDeadline = nextDeadline && nextDeadline.length > 0 ? nextDeadline.find(d => d.form === form) : null
 
   registerLocale('fi', fi)
   registerLocale('en', enGB)
@@ -50,21 +51,59 @@ const DeadlineSetting = () => {
     }
   }, [newDraftYear])
 
+  useEffect(() => {
+    if (allDeadlines && allDeadlines.length > 0) {
+      const formDl = allDeadlines.find(d => d.form === form)
+      setFormDeadline(formDl)
+    }
+  }, [form])
+
+  useEffect(() => {
+    if (allDeadlines) {
+      const sorted = allDeadlines.map(d => {
+        return {
+          form: d.form,
+          date: d.date,
+          name: forms.find(f => f.key === d.form)?.name,
+        }
+      })
+      sorted.sort((a, b) => {
+        return new Date(b.date - new Date(a.date))
+      })
+      setSortedDeadlines(sorted)
+    } else {
+      setSortedDeadlines([])
+    }
+  }, [allDeadlines])
+
+  const formOptions = forms.map(f => {
+    return {
+      key: f.key,
+      value: f.key,
+      text: f.name,
+    }
+  })
+
   const handleDeadlineSave = () => {
     const acualDate = new Date(Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()))
     dispatch(setDeadlineAndDraftYear({ deadline: acualDate.toISOString(), draftYear: newDraftYear, form }))
     setNewDate(null)
     setNewDraftYear(null)
+    setForm(null)
+    setFormDeadline(null)
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadlineAndDraftYear({ form }))
+    dispatch(deleteDeadlineAndDraftYear({ form })) // TO FIx
     setNewDate(null)
     setNewDraftYear(null)
+    setForm(null)
+    setFormDeadline(null)
   }
 
   if (!isSuperAdmin(currentUser)) return null
 
+  // TO FIX never contain anything?
   const existingDeadlines = []
 
   const formatDate = date => {
@@ -75,6 +114,24 @@ const DeadlineSetting = () => {
   return (
     <Segment>
       <div style={{ margin: '1em 0em 3em 0em' }}>
+        <Header as="h4">{t('users:selectDraftYear')}</Header>
+        <Select
+          data-cy="draft-year-selector"
+          placeholder="Select year"
+          options={yearOptions}
+          value={newDraftYear}
+          onChange={(e, { value }) => setNewDraftYear(value)}
+        />
+        <Header as="h4">{t('users:selectForm')}</Header>
+        <Select
+          fluid
+          data-cy="form-selector"
+          placeholder="Select form"
+          options={formOptions}
+          value={form}
+          disabled={!newDraftYear}
+          onChange={(e, { value }) => setForm(value)}
+        />
         <Header as="h4">{t('users:selectNewDeadline')}</Header>
         <DatePicker
           dateFormat="dd.MM.yyyy"
@@ -83,16 +140,8 @@ const DeadlineSetting = () => {
           minDate={new Date()}
           selected={newDate}
           onChange={setNewDate}
+          disabled={!form}
           locale={lang}
-        />
-        <Header as="h4">{t('users:selectDraftYear')}</Header>
-        <Select
-          data-cy="draft-year-selector"
-          placeholder="Select year"
-          options={yearOptions}
-          value={newDraftYear}
-          disabled={!newDate}
-          onChange={(e, { value }) => setNewDraftYear(value)}
         />
       </div>
       {warning && (
@@ -109,12 +158,12 @@ const DeadlineSetting = () => {
         primary
         compact
         size="mini"
-        disabled={warning || !newDate || !newDraftYear}
+        disabled={warning || !newDate || !newDraftYear || !form}
         onClick={handleDeadlineSave}
       >
         {t('users:updateDeadline')} and draft year
       </Button>
-      {formDeadline && (
+      {formDeadline && form && (
         <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">
           {t('users:deleteThisDeadline')}
         </Button>
@@ -124,22 +173,34 @@ const DeadlineSetting = () => {
           <b>
             {t('users:nextDeadline')}
             <span style={{ color: formDeadline ? colors.blue : colors.red }} data-cy="nextDeadline">
-              {formDeadline ? (
-                formatDate(formDeadline.date)
-              ) : (
-                <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>
-              )}
+              {form && formDeadline && formatDate(formDeadline.date)}
+              {form && !formDeadline && <span data-cy="noNextDeadline">{t('users:noDeadlineSet')}</span>}
             </span>
           </b>
         </p>
         <p>
-          <b>
+          <h3>
             {t('users:answersSavedForYear')}
-            <span style={{ color: formDeadline ? colors.blue : colors.red }} data-cy="draftYear">
+            <span style={{ color: draftYear ? colors.blue : colors.red }} data-cy="draftYear">
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
-          </b>
+          </h3>
         </p>
+      </div>
+      <Divider />
+      <Header as="h3">{t('users:openForms')}</Header>
+      <div style={{ margin: '1em 0em' }}>
+        {allDeadlines ? (
+          sortedDeadlines.map(d => {
+            return (
+              <p data-cy={`form-${d.form}-deadline`} key={d.form}>
+                {formatDate(d.date)} - {d.name} (id: {d.form})
+              </p>
+            )
+          })
+        ) : (
+          <p data-cy="no-form-deadlines">{t('users:noDeadlineSet')}</p>
+        )}
       </div>
     </Segment>
   )
