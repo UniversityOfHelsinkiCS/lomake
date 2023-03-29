@@ -44,17 +44,12 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    let selectedAnswers = answersByYear({
+    const selectedAnswers = answersByYear({
       year,
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
     })
-
-    // TO FIX
-    if (formType === 'evaluation' || formType === 'degree-reform') {
-      selectedAnswers = []
-    }
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
