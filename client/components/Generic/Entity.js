@@ -34,7 +34,7 @@ const Entity = ({
   number,
   previousYearsAnswers,
   extrainfo,
-  form,
+  formType,
   relatedYearlyAnswers = null,
 }) => {
   const { t } = useTranslation()
@@ -85,7 +85,7 @@ const Entity = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {form === 'evaluation' && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
+      {formType === 'evaluation' && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
     </div>
   )

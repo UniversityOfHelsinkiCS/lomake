@@ -8,8 +8,9 @@ import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
 
-const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
+const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
   const lang = useSelector(state => state.language)
+  const formType = 'evaluation'
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -51,8 +52,6 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
-    const formType = 'evaluation'
-
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -64,7 +63,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          form={formType}
+          formType={formType}
           programme={programmeKey}
           relatedYearlyAnswers={yearlyAnswers[part.id]}
         />
@@ -81,6 +80,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers }) => {
             number={romanize(index)}
             key={section.title[lang]}
             programmeKey={programmeKey}
+            form={form}
           >
             {/* {section.link_title && section.link_url && (
               <a className="hide-in-print-mode" target="_blank" href={section.link_url} rel="noreferrer">

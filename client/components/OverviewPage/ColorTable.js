@@ -24,7 +24,7 @@ const ColorTable = React.memo(
     isBeingFiltered,
     filterValue,
     handleFilterChange,
-    // form, Number id shall go here
+    form,
     formType,
   }) => {
     const { t } = useTranslation()
@@ -51,6 +51,7 @@ const ColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
+    // TO FIX
     if (formType === 'evaluation' || formType === 'degree-reform') {
       selectedAnswers = []
     }
@@ -166,6 +167,7 @@ const ColorTable = React.memo(
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
               formType={formType}
+              form={form}
             />
           )
         })}

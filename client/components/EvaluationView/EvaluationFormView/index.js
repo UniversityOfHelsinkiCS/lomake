@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Loader, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
+import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
@@ -18,6 +20,27 @@ import EvaluationForm from './EvaluationForm'
 
 import questions from '../../../evaluationQuestions.json'
 import yearlyQuestions from '../../../questions.json'
+
+// TO FIX yearly form uses same checker. refactor to common tools
+const formShouldBeViewOnly = ({
+  accessToTempAnswers,
+  programme,
+  writeAccess,
+  viewingOldAnswers,
+  draftYear,
+  year,
+  formDeadline,
+  form,
+}) => {
+  if (!accessToTempAnswers) return true
+  if (programme.locked) return true
+  if (!writeAccess) return true
+  if (viewingOldAnswers) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
+  return false
+}
 
 const handleMeasures = (yearData, relatedQuestion) => {
   let count = 0
@@ -54,29 +77,84 @@ const findAnswers = (allOldAnswers, relatedQuestion) => {
   return result
 }
 
-const EvaluationFormView = ({ room }) => {
+const EvaluationFormView = ({ room, formString }) => {
+  const form = parseInt(formString, 10) || null
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+
+  const programme = useSelector(state => state.studyProgrammes.singleProgram)
+  const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
+
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+  const formDeadline = nextDeadline.find(d => d.form === form) // nextDeadline ? nextDeadline.find(d => d.form === form) : null
+  const currentRoom = useSelector(state => state.room)
+  const year = 2023 // the next time form is filled is in 2026
+  const viewingOldAnswers = false // no old asnwers to watch
+
   // const programme = useSelector(state => state.studyProgrammes.singleProgram)
   // ^ might need to create a new state to not mess with vuosikatsaus?
 
-  const allOldAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
+  // temporary fix for programme being lost in refresh TO FIX
+  // const allProgrammes = useSelector(state => state.studyProgrammes.data)
+  // const programme = Object.values(allProgrammes).find(p => p.key === room)
 
-  // temporary fix for programme being lost in refresh
-  const allProgrammes = useSelector(state => state.studyProgrammes.data)
-  const programme = Object.values(allProgrammes).find(p => p.key === room)
+  const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
+  const targetURL = `/evaluation/previous-years/${room}`
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
 
+  useEffect(() => {
+    if (!programme || !form) return
+    dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    if (
+      formShouldBeViewOnly({
+        accessToTempAnswers,
+        programme,
+        writeAccess,
+        viewingOldAnswers,
+        draftYear,
+        year,
+        formDeadline,
+        form,
+      })
+    ) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) dispatch(wsLeaveRoom(room))
+    } else {
+      dispatch(wsJoinRoom(room, form))
+      dispatch(setViewOnly(false))
+    }
+  }, [
+    programme,
+    singleProgramPending,
+    writeAccess,
+    viewingOldAnswers,
+    year,
+    draftYear,
+    accessToTempAnswers,
+    readAccess,
+    room,
+    user,
+  ])
+
+  useEffect(() => {
+    return () => {
+      dispatch(wsLeaveRoom(room))
+      dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
+    }
+  }, [])
+
+  // Find programme's yearly assessment data
   const yearlyAnswers = useMemo(() => {
     const result = {}
     questions.forEach(q => {
@@ -86,7 +164,7 @@ const EvaluationFormView = ({ room }) => {
             if (result[part.id] === undefined) {
               result[part.id] = {}
             }
-            result[part.id][relatedQuestion] = findAnswers(allOldAnswers, relatedQuestion)
+            result[part.id][relatedQuestion] = findAnswers(programmeYearlyAnswers, relatedQuestion)
           })
         }
       })
@@ -94,16 +172,18 @@ const EvaluationFormView = ({ room }) => {
     return result
   }, [room, user])
 
-  // To be removed
+  // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
 
-  if (!room) return <Redirect to="/" />
+  if (!room || !form) return <Redirect to="/" />
+
+  if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  const targetURL = `/evaluation/previous-years/${room}`
-
-  return (
+  return singleProgramPending ? (
+    <Loader active />
+  ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={room} form="evaluation" />
       <div className="the-form">
@@ -186,7 +266,7 @@ const EvaluationFormView = ({ room }) => {
             </Link>
           </div>
         </div>
-        <EvaluationForm programmeKey={programme.key} questions={questions} yearlyAnswers={yearlyAnswers} />
+        <EvaluationForm programmeKey={programme.key} questions={questions} yearlyAnswers={yearlyAnswers} form={form} />
       </div>
     </div>
   )
