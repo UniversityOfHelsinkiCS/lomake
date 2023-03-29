@@ -66,6 +66,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
           formType={formType}
           programme={programmeKey}
           relatedYearlyAnswers={yearlyAnswers[part.id]}
+          form={form}
         />
       </div>
     )

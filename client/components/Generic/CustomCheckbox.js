@@ -11,7 +11,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
-  // const choose = (name, id) => dispatch(updateFormField(name, id))
+  // const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
   const options = radioOptions ? radioOptions[lang] : null
 
   const defaultValues = radioOptions.fi.map(o => ({ id: o.id, value: false }))

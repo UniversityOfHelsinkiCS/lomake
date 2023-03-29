@@ -36,6 +36,7 @@ const Entity = ({
   extrainfo,
   formType,
   relatedYearlyAnswers = null,
+  form,
 }) => {
   const { t } = useTranslation()
 
@@ -70,7 +71,7 @@ const Entity = ({
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <SmileyColors id={id} />}
+        {!noColor && <SmileyColors id={id} form={form} />}
       </div>
       <div
         className="entity-description"
@@ -86,7 +87,12 @@ const Entity = ({
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {formType === 'evaluation' && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
-      <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={EntityLastYearsAccordion} />
+      <Textarea
+        id={id}
+        label={t('generic:textAreaLabel')}
+        EntityLastYearsAccordion={EntityLastYearsAccordion}
+        form={form}
+      />
     </div>
   )
 }

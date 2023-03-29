@@ -33,7 +33,7 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   return null
 }
 
-const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion }) => {
+const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion, form }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
@@ -77,7 +77,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
-    dispatch(updateFormField(fieldName, markdownStr))
+    dispatch(updateFormField(fieldName, markdownStr, form))
   }
 
   const { length } = editorState.getCurrentContent().getPlainText()

@@ -5,10 +5,10 @@ import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import './Generic.scss'
 
-const SimpleTextarea = ({ label, id, required }) => {
+const SimpleTextarea = ({ label, id, required, form }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
-  const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value))
+  const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value, form))
   const value = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 

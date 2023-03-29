@@ -36,12 +36,12 @@ const OrderSelection = ({ id, label, description, extrainfo, lang, options }) =>
     if (systemList.length < 4) {
       const updated = [...systemList, optionId]
 
-      dispatch(updateFormField(id, updated.join(';;')))
+      dispatch(updateFormField(id, updated.join(';;'))) // TO FIX add form
     }
   }
 
   const handleClear = () => {
-    dispatch(updateFormField(id, ''))
+    dispatch(updateFormField(id, '')) // TO FIX add form
   }
 
   const getLabel = id => {

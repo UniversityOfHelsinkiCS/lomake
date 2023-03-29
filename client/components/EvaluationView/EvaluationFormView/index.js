@@ -97,10 +97,6 @@ const EvaluationFormView = ({ room, formString }) => {
   // const programme = useSelector(state => state.studyProgrammes.singleProgram)
   // ^ might need to create a new state to not mess with vuosikatsaus?
 
-  // temporary fix for programme being lost in refresh TO FIX
-  // const allProgrammes = useSelector(state => state.studyProgrammes.data)
-  // const programme = Object.values(allProgrammes).find(p => p.key === room)
-
   const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
   const targetURL = `/evaluation/previous-years/${room}`
 
