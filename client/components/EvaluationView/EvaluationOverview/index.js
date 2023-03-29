@@ -17,12 +17,16 @@ export default () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
+  // To FIX both next two
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+
+  const form = 4 // TO FIX
+  const formType = 'evaluation'
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
@@ -105,7 +109,8 @@ export default () => {
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}
               filterValue={filter}
-              form="evaluation"
+              form={form}
+              formType={formType}
             />
           </div>
         </>

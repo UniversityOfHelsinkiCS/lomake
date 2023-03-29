@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import ColorTableCell from './ColorTableCell'
 
-const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, form }) => {
+const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, formType }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const year = useSelector(({ filters }) => filters.year)
@@ -15,11 +15,11 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
   const programme = selectedAnswers.find(a => a.programme === p.key)
 
   let targetURL = `/form/${p.key}`
-  if (form === 'evaluation') {
+  if (formType === 'evaluation') {
     targetURL = `/evaluation/form/${p.key}`
-  } else if (form === 'degree-reform') {
+  } else if (formType === 'degree-reform') {
     targetURL = `/degree-reform/form/${p.key}`
-  } else if (form === 'degree-reform-individual') {
+  } else if (formType === 'degree-reform-individual') {
     targetURL = `/degree-reform-individual/form`
   }
 

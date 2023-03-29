@@ -2,30 +2,37 @@ const forms = [
   {
     key: 1,
     name: 'Vuosiseuranta',
+    type: 'yearlyAssessment',
   },
   {
     key: 2,
     name: 'Koulutusuudistusarviointi - koulutusohjelmat',
+    type: 'degree-reform',
   },
   {
     key: 3,
     name: 'Koulutusuudistusarviointi - yksilöt',
+    type: 'degree-reform',
   },
   {
     key: 4,
     name: 'Katselmus - koulutusohjelmat',
+    type: 'evaluation',
   },
   {
     key: 5,
     name: 'Katselmus - tiedekunnat',
+    type: 'evaluation',
   },
   {
     key: 6,
     name: 'Katselmus - toimikunta',
+    type: 'evaluation',
   },
   {
     key: 7,
     name: 'Katselmus - arviointiryhmä',
+    type: 'evaluation',
   },
 ]
 

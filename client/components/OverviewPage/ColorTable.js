@@ -24,7 +24,8 @@ const ColorTable = React.memo(
     isBeingFiltered,
     filterValue,
     handleFilterChange,
-    form,
+    // form, Number id shall go here
+    formType,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -50,7 +51,7 @@ const ColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
-    if (form === 'evaluation' || form === 'degree-reform') {
+    if (formType === 'evaluation' || formType === 'degree-reform') {
       selectedAnswers = []
     }
 
@@ -88,9 +89,9 @@ const ColorTable = React.memo(
 
     let questionsToShow = questions
 
-    if (form === 'evaluation') {
+    if (formType === 'evaluation') {
       questionsToShow = evaluationQuestions
-    } else if (form === 'degree-reform') {
+    } else if (formType === 'degree-reform') {
       questionsToShow = koulutusuudistusQuestions
     }
 
@@ -100,7 +101,7 @@ const ColorTable = React.memo(
       return `${label}_${new Date().getTime()}`
     }
 
-    if (form === 'degree-reform') {
+    if (formType === 'degree-reform') {
       tableIds = questionsToShow.reduce((acc, cur) => {
         return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
       }, [])
@@ -128,9 +129,9 @@ const ColorTable = React.memo(
     }
 
     let tableClassName = ''
-    if (form === 'evaluation') {
+    if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (form === 'degree-reform') {
+    } else if (formType === 'degree-reform') {
       tableClassName = '-degree-reform'
     }
 
@@ -164,7 +165,7 @@ const ColorTable = React.memo(
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
-              form={form}
+              formType={formType}
             />
           )
         })}
