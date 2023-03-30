@@ -41,7 +41,7 @@ const createBackups = async () => {
       form,
     })
 
-    logger.info(`${loggerPrefix}Created new backup for ${programme}`)
+    logger.info(`${loggerPrefix}Created new backup for ${programme} for form ${form}`)
   })
 }
 
