@@ -12,7 +12,7 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
   const year = useSelector(({ filters }) => filters.year)
   const lang = useSelector(state => state.language)
 
-  const programme = selectedAnswers.find(a => a.programme === p.key)
+  const programme = selectedAnswers.find(a => a.programme === p.key && a.form === form)
 
   let targetURL = `/form/${p.key}`
   if (formType === 'evaluation') {

@@ -64,7 +64,7 @@ const ColorTable = React.memo(
       if (!selectedAnswers) return {}
 
       return sortedProgrammes.reduce((statObject, { key }) => {
-        const programme = selectedAnswers.find(a => a.programme === key)
+        const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
         const answers = programme && programme.data ? programme.data : {}
 
         Object.keys(answers).forEach(answerKey => {
@@ -90,7 +90,6 @@ const ColorTable = React.memo(
     } else if (formType === 'degree-reform') {
       questionsToShow = koulutusuudistusQuestions
     }
-
     let tableIds = null
 
     const generateKey = label => {
