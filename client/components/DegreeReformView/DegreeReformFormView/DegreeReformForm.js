@@ -12,9 +12,9 @@ import AdvancedRadio from 'Components/Generic/AdvancedRadio'
 import { colors, romanize } from 'Utilities/common'
 import Section from './DegreeReformSection'
 
-const Form = ({ questions, programmeKey, form }) => {
+const DegreeReformForm = ({ programmeKey, form, questionData }) => {
   const lang = useSelector(state => state.language)
-  const filter = useSelector(state => state.filters || {})
+  const formData = useSelector(state => state.form || {})
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -49,7 +49,7 @@ const Form = ({ questions, programmeKey, form }) => {
         </h2>
       )
     }
-    if (filter.answerLevels.length > 0 && filter.answerLevels.find(f => f === part.id)) {
+    if (formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === part.id)) {
       return <div />
     }
 
@@ -94,7 +94,7 @@ const Form = ({ questions, programmeKey, form }) => {
   }
   return (
     <>
-      {questions.map((section, index) => {
+      {questionData.map((section, index) => {
         return (
           <Section
             title={section.title[lang]}
@@ -103,8 +103,10 @@ const Form = ({ questions, programmeKey, form }) => {
             programmeKey={programmeKey}
             form={form}
           >
-            {filter.answerLevels.length > 0 && filter.answerLevels.find(f => f === section.id) ? (
-              <div />
+            {formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id) ? (
+              <div>
+                <p>Osiota ei valittu vastattavaksi</p>{' '}
+              </div>
             ) : (
               section.parts.map(partMap)
             )}
@@ -115,4 +117,4 @@ const Form = ({ questions, programmeKey, form }) => {
   )
 }
 
-export default Form
+export default DegreeReformForm

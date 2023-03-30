@@ -7,6 +7,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
   if (form === 'degree-reform-individual') {
     historyState = `${window.location.origin}${basePath}${form}/form/`
   }
+
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>

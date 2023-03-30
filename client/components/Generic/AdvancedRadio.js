@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { Divider, Radio, Form, Input } from 'semantic-ui-react'
+import { /* useDispatch, */ useSelector } from 'react-redux'
+// import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import DropdownFilter from './DropdownFilter'
@@ -15,12 +15,12 @@ const mapColorToValid = {
 }
 
 const AdvancedRadio = ({ id, label, description, required, number, previousYearsAnswers, extrainfo, radioOptions }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
-  const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
+  // const choose = (name, id, form) => dispatch(updateFormField(name, id, form)) // TO FIX take into use
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
@@ -32,11 +32,11 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
 
   const handleClick = (firstPart, secondPart) => {
     if (firstPart && !secondPart) {
-      setState({ value: `${firstPart}-` })
-      choose(id, firstPart)
+      setState({ value: `${firstPart}` })
+      // choose(id, firstPart, 3)
     } else {
       setState({ value: `${firstPart}-${secondPart}` })
-      choose(id, `${firstPart}-${secondPart}`)
+      //  choose(id, `${firstPart}-${secondPart}`, 3)
     }
   }
 
@@ -96,15 +96,7 @@ const AdvancedRadio = ({ id, label, description, required, number, previousYears
               selectedRadio={state.value}
             />
           ) : null}
-          {selected === 'other' ? (
-            <DropdownFilter
-              handleFilterChange={handleClick}
-              version="degree-reform"
-              size="small"
-              label={t('comparison:filterFaculties')}
-              selectedRadio={state.value}
-            />
-          ) : null}
+          {selected === 'other' ? <Input handleFilterChange={handleClick} version="degree-reform" size="big" /> : null}
         </Form>
       ) : (
         <p>Missing options</p>

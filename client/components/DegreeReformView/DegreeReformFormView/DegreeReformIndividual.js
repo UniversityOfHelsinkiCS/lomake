@@ -1,25 +1,30 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Redirect, useHistory } from 'react-router'
+import { Redirect } from 'react-router'
 
 import { isAdmin } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
-import Form from './DegreeReformForm'
+import DegreeReformForm from './DegreeReformForm'
+import questionData from '../../../degreeReformQuestions.json'
+import individualQuestionData from '../../../degreeReformIndividualQuestions.json'
 
-import questions from '../../../koulutusuudistusQuestions.json'
-
-const DegreeReformIndividualForm = () => {
-  const history = useHistory()
+const DegreeReformIndividual = () => {
   const { t } = useTranslation()
-  // const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
 
   if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
+
+  const questions = questionData.map(q => {
+    if (q.id === 0 && q.parts.length === 1) {
+      q.parts = individualQuestionData.concat(q.parts)
+      return q
+    }
+    return q
+  })
 
   return (
     <div className="form-container">
@@ -27,18 +32,15 @@ const DegreeReformIndividualForm = () => {
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
-            <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
-            </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('degree-reform')} 2023
+            {t('degree-reform-individual')} 2023
           </h3>
         </div>
-        <Form questions={questions} form={formType} />
+        <DegreeReformForm questionData={questions} form={formType} />
       </div>
     </div>
   )
 }
-export default DegreeReformIndividualForm
+export default DegreeReformIndividual

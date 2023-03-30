@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import { useSelector /* useDispatch */ } from 'react-redux'
 // import { updateFormField } from 'Utilities/redux/formReducer'
 
 import { colors } from 'Utilities/common'
@@ -40,7 +40,7 @@ const ChooseRadio = ({
   }
   const handleClick = label => {
     setState({ value: label })
-    // choose(id, label)
+    //  choose(id, label, 3)
   }
 
   useEffect(() => {

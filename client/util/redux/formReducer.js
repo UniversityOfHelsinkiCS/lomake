@@ -32,12 +32,18 @@ export const getSingleProgrammesAnswers = ({ room, year, form }) => {
   return callBuilder(route, prefix)
 }
 
+export const setAnswerLevels = answerLevels => ({
+  type: 'SET_ANSWER_LEVELS',
+  answerLevels,
+})
+
 const initialState = {
   data: {},
   viewOnly: false,
   viewingOldAnswers: false,
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
+  answerLevels: [],
 }
 
 // Reducer
@@ -89,6 +95,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lastSaveSuccess: new Date(),
+      }
+    }
+    case 'SET_ANSWER_LEVELS': {
+      return {
+        ...state,
+        answerLevels: action.answerLevels,
       }
     }
 

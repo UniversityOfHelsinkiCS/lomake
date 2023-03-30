@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Checkbox } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-// import { updateFormField } from 'Utilities/redux/formReducer'
-import { setAnswerLevels } from 'Utilities/redux/filterReducer'
-
+import { setAnswerLevels /* updateFormField */ } from 'Utilities/redux/formReducer'
 import { colors, getFilters } from 'Utilities/common'
 import './Generic.scss'
 
@@ -14,6 +12,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
   // const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
   const options = radioOptions ? radioOptions[lang] : null
 
+  const generateRandomKey = value => `${value}-${Math.random()}`
   const defaultValues = radioOptions.fi.map(o => ({ id: o.id, value: false }))
   const [values, setValue] = useState(defaultValues)
 
@@ -58,7 +57,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
       })
     }
     setValue(newValues)
-    // choose(id, newValues)
+    // choose(id, newValues, 3)
     if (id === 'view-is-based-on') {
       const filters = getFilters(newValues)
       dispatch(setAnswerLevels(filters))
@@ -97,6 +96,7 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
           const checked = !!values.find(v => v.id === o.id && v.value)
           return (
             <Checkbox
+              key={generateRandomKey(o.label)}
               style={{ marginTop: '1em' }}
               checked={checked}
               id={o.id}

@@ -13,9 +13,11 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import Form from './DegreeReformForm'
+import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 
-import questions from '../../../koulutusuudistusQuestions.json'
+import DegreeReformForm from './DegreeReformForm'
+
+import questionData from '../../../degreeReformQuestions.json'
 
 const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year }) => {
   if (!accessToTempAnswers) return true
@@ -35,6 +37,10 @@ const DegreeReformFormView = ({ room }) => {
   const user = useSelector(state => state.currentUser.data)
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === room)
+
+  useEffect(() => {
+    if (room) dispatch(getPreviousAnswersAction(room, 3))
+  }, [room])
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
@@ -59,8 +65,8 @@ const DegreeReformFormView = ({ room }) => {
 
   useEffect(() => {
     if (!programme) return
-    // form is now just a placeholder, 1 = vuosiseuranta
-    dispatch(getSingleProgrammesAnswers({ room, year, form: 1 }))
+    // form is now just a placeholder, 1 = vuosiseuranta, 3 = koulutusuudistus ryhmä(?)
+    dispatch(getSingleProgrammesAnswers({ room, year, form: 3 }))
     if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
@@ -126,7 +132,7 @@ const DegreeReformFormView = ({ room }) => {
             </Link>
           </p>
         </div>
-        <Form form={formType} programmeKey={programme.key} questions={questions} />
+        <DegreeReformForm form={formType} programmeKey={programme.key} questionData={questionData} />
       </div>
     </div>
   )
