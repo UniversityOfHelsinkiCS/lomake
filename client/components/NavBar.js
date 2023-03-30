@@ -74,22 +74,40 @@ export default () => {
     )
   }
 
+  const MenuNavigation = () => {
+    if (window.location.pathname.substring(1).split('/')[0] === 'degree-reform-individual') {
+      return (
+        <>
+          <Menu.Item>
+            <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+          </Menu.Item>
+          {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        </>
+      )
+    }
+    return (
+      <>
+        <Menu.Item as={Link} to="/">
+          <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+        </Menu.Item>
+        {user.superAdmin ? <GoToEvaluationButton /> : null}
+        {user.superAdmin ? <GoToDegreeReformGroup /> : null}
+        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        {user.admin ? <GoToAdminPageButton /> : null}
+        <Menu.Item>
+          <a href="mailto:ospa@helsinki.fi">
+            <Icon name="mail outline" />
+            ospa@helsinki.fi
+          </a>
+        </Menu.Item>
+      </>
+    )
+  }
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
-      <Menu.Item as={Link} to="/">
-        <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
-      </Menu.Item>
-      {user.superAdmin ? <GoToEvaluationButton /> : null}
-      {user.superAdmin ? <GoToDegreeReformGroup /> : null}
-      {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
-      {user.admin ? <GoToAdminPageButton /> : null}
-      <Menu.Item>
-        <a href="mailto:ospa@helsinki.fi">
-          <Icon name="mail outline" />
-          ospa@helsinki.fi
-        </a>
-      </Menu.Item>
+      <MenuNavigation />
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
           <Dropdown.Menu>
