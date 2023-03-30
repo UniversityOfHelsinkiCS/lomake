@@ -199,6 +199,8 @@ export default {
     contactToska: 'Jos viimeiseen aukiolopäivään tulee muutoksia, otathan yhteyden Toskaan (grp-toska@helsinki.fi).',
     noDeadlineSet: 'Viimeistä aukiolopäivää ei tälle vuodelle ole vielä asetettu tai se on jo umpeutunut. ',
     selectNewDeadline: 'Valitse viimeinen aukiolopäivä',
+    selectForm: 'Valitse lomake',
+    openForms: 'Auki olevien lomakkeiden viimeiset täyttöpäivät',
     selectDraftYear: 'Valitse muokkausvuosi: ',
     deadlineWarning:
       'Lomake on jo auki toiselle vuodelle, lukitse lomake ennen uuden vuoden avaamista, jotta tiedot tallentuvat oikein',

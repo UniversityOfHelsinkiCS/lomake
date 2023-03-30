@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { testProgrammeCode } from '../../config/common'
+import { defaultYears, testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 describe('Form Notification tests', () => {
@@ -33,10 +33,16 @@ describe('Form Notification tests', () => {
     // check page ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
+    // Delete pre-set deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
+
+    cy.get('[data-cy=draft-year-selector]').click()
+    cy.get('.item').contains(defaultYears[0]).click()
+    cy.get('[data-cy=form-selector]').click()
+    cy.get('.item').contains('Vuosiseuranta').click()
     cy.get('[data-cy=deleteDeadline]').click()
-    cy.get('[data-cy=noNextDeadline]')
+    cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     cy.login('cypressUser')
     cy.visit('/')

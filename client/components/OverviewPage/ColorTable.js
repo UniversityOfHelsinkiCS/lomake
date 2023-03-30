@@ -25,6 +25,7 @@ const ColorTable = React.memo(
     filterValue,
     handleFilterChange,
     form,
+    formType,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -43,16 +44,12 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
-    let selectedAnswers = answersByYear({
+    const selectedAnswers = answersByYear({
       year,
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
     })
-
-    if (form === 'evaluation' || form === 'degree-reform') {
-      selectedAnswers = []
-    }
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
 
@@ -67,7 +64,7 @@ const ColorTable = React.memo(
       if (!selectedAnswers) return {}
 
       return sortedProgrammes.reduce((statObject, { key }) => {
-        const programme = selectedAnswers.find(a => a.programme === key)
+        const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
         const answers = programme && programme.data ? programme.data : {}
 
         Object.keys(answers).forEach(answerKey => {
@@ -88,19 +85,18 @@ const ColorTable = React.memo(
 
     let questionsToShow = questions
 
-    if (form === 'evaluation') {
+    if (formType === 'evaluation') {
       questionsToShow = evaluationQuestions
-    } else if (form === 'degree-reform') {
+    } else if (formType === 'degree-reform') {
       questionsToShow = koulutusuudistusQuestions
     }
-
     let tableIds = null
 
     const generateKey = label => {
       return `${label}_${new Date().getTime()}`
     }
 
-    if (form === 'degree-reform') {
+    if (formType === 'degree-reform') {
       tableIds = questionsToShow.reduce((acc, cur) => {
         return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
       }, [])
@@ -128,9 +124,9 @@ const ColorTable = React.memo(
     }
 
     let tableClassName = ''
-    if (form === 'evaluation') {
+    if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (form === 'degree-reform') {
+    } else if (formType === 'degree-reform') {
       tableClassName = '-degree-reform'
     }
 
@@ -164,6 +160,7 @@ const ColorTable = React.memo(
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               key={p.key}
+              formType={formType}
               form={form}
             />
           )

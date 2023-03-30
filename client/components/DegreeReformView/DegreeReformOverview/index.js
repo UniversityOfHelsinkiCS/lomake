@@ -105,7 +105,7 @@ export default () => {
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}
               filterValue={filter}
-              form="degree-reform"
+              formType="degree-reform"
             />
           </div>
         </>

@@ -7,10 +7,10 @@ import negativeEmoji from 'Assets/persevering.png'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
-const SmileyColors = ({ id }) => {
+const SmileyColors = ({ id, form }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_light`
-  const choose = (name, id) => dispatch(updateFormField(name, id))
+  const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const value = useSelector(({ form }) => form.data[fieldName])
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 

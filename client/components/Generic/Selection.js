@@ -20,10 +20,10 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
     const { id, checked } = data
     const updated = { ...selections }
     updated[id] = checked
-    dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated)))
+    dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated))) // TO FIX add form
   }
 
-  const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value))
+  const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value)) // TO FIX add form
 
   // To do: move to translations
   const t = {

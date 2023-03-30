@@ -36,8 +36,8 @@ export default () => (
       <Route exact path="/degree-reform-individual/form" component={DegreeReformIndividualForm} />
       <Route
         exact
-        path="/evaluation/form/:room"
-        render={props => <EvaluationFormView room={props.match.params.room} />}
+        path="/evaluation/form/:form/:room"
+        render={props => <EvaluationFormView room={props.match.params.room} formString={props.match.params.form} />}
       />
       <Route
         exact

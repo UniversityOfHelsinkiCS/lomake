@@ -4,10 +4,10 @@ const logger = require('@util/logger')
 const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const createOrUpdate = async (req, res) => {
-  const { deadline, draftYear } = req.body
+  const { deadline, draftYear, form } = req.body
 
-  if (!deadline || !draftYear) {
-    throw new Error('No deadline or draft year defined')
+  if (!deadline || !draftYear || !form) {
+    throw new Error('No deadline, draft or form year defined')
   }
 
   try {
@@ -15,15 +15,15 @@ const createOrUpdate = async (req, res) => {
     await db.studyprogramme.update({ locked: false }, { where: {} })
 
     // Create new or update old deadline
-    let newDeadline = null
-    const existingDeadlines = await db.deadline.findAll({})
+    const existingDeadlines = await db.deadline.findAll({ where: { form } })
     if (existingDeadlines.length === 0) {
-      newDeadline = await db.deadline.create({
+      await db.deadline.create({
         date: deadline,
+        form,
       })
     } else {
       existingDeadlines[0].date = deadline
-      newDeadline = await existingDeadlines[0].save()
+      await existingDeadlines[0].save()
     }
 
     // Create new or update old draft year
@@ -38,31 +38,49 @@ const createOrUpdate = async (req, res) => {
       newDraftYear = await existingDraftYears[0].save()
     }
 
-    await createDraftAnswers(draftYear)
-    return res.status(200).json({ deadline: newDeadline, draftYear: newDraftYear })
+    const allDeadlines = await db.deadline.findAll({})
+
+    await createDraftAnswers(draftYear, form)
+    return res.status(200).json({ deadline: allDeadlines, draftYear: newDraftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-const remove = async (_, res) => {
-  try {
-    // Just delete all deadlines, there should be only 1 anyway.
-    await db.deadline.destroy({
-      truncate: true,
-    })
+const remove = async (req, res) => {
+  const { form } = req.body
 
-    // Unlock all programmes
-    await db.studyprogramme.update({ locked: true }, { where: {} })
+  if (!form) {
+    throw new Error('No form type defined')
+  }
+  try {
+    const existingDeadline = await db.deadline.findOne({
+      where: { form },
+    })
+    if (!existingDeadline) {
+      return res.status(404).json({ error: 'Deadline not found' })
+    }
+    await existingDeadline.destroy()
 
     const draftYears = await db.draftYear.findAll({})
-    await db.draftYear.destroy({
-      truncate: true,
-    })
+    let draftYearToReturn = draftYears[0]
 
-    await createFinalAnswers(draftYears[0].year)
-    return res.status(200).json({ deadline: null, draftYear: null })
+    const remainingDeadlines = await db.deadline.findAll({})
+    let deadlinesToReturn = remainingDeadlines
+
+    // Unlock all programmes and remove draft year if no deadlines remain
+    if (remainingDeadlines.length === 0) {
+      await db.studyprogramme.update({ locked: true }, { where: {} })
+      await db.draftYear.destroy({
+        truncate: true,
+      })
+      draftYearToReturn = null
+      deadlinesToReturn = null
+    }
+
+    await createFinalAnswers(draftYears[0].year, form)
+    return res.status(200).json({ deadline: deadlinesToReturn, draftYear: draftYearToReturn })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -73,10 +91,10 @@ const get = async (_, res) => {
   try {
     const deadlines = await db.deadline.findAll({})
     const draftYears = await db.draftYear.findAll({})
-    const deadline = deadlines.length ? deadlines[0] : null
+    const deadlineList = deadlines.length ? deadlines : null
     const draftYear = draftYears.length ? draftYears[0] : null
 
-    return res.status(200).json({ deadline, draftYear })
+    return res.status(200).json({ deadlineList, draftYear })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

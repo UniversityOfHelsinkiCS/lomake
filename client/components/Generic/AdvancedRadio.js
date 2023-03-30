@@ -20,7 +20,7 @@ const AdvancedRadio = ({ id, label, description, required, previousYearsAnswers,
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
-  // const choose = (name, id, form) => dispatch(updateFormField(name, id, form))
+  // const choose = (name, id, form) => dispatch(updateFormField(name, id, form)) // TO FIX take into use
 
   let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
   if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {

@@ -9,8 +9,8 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
+  // const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
   const options = radioOptions ? radioOptions[lang] : null
-  // const choose = (name, id, form) => dispatch(updateFormField(name, id, form))
 
   const generateRandomKey = value => `${value}-${Math.random()}`
   const defaultValues = radioOptions.fi.map(o => ({ id: o.id, value: false }))

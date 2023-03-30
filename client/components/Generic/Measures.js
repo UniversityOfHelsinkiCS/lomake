@@ -8,7 +8,7 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
 import './Generic.scss'
 
-const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo }) => {
+const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo, form }) => {
   const { t } = useTranslation()
   const formData = useSelector(state => state.form.data)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -76,7 +76,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
         acc.push(
           // eslint-disable-next-line react/no-array-index-key
           <div style={{ paddingTop: '0' }} key={index}>
-            <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} viewOnly={viewOnly} />
+            <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} viewOnly={viewOnly} form={form} />
           </div>
         )
         return acc
