@@ -37,21 +37,21 @@ export default () => {
       dispatch(getAnswersAction())
     }
   }, [currentUser])
+
   // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
     let year = 2019
     if (oldAnswers.data) {
-      // TO FIX
       if (
         deadlines.draftYear &&
         deadlines.nextDeadline.length > 0 &&
-        new Date(deadlines.nextDeadline[0].date) >= new Date() &&
+        new Date(deadlines.nextDeadline.find(d => d.form === 1)?.date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
         year = deadlines.draftYear.year
       } else {
         year = oldAnswers.data.reduce((acc, answer) => {
-          if (Object.entries(answer.data).length > 0 && answer.year > acc) return answer.year
+          if (Object.entries(answer.data).length > 0 && answer.year > acc && answer.form === 1) return answer.year
           return acc
         }, 2019)
       }
