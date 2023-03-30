@@ -35,10 +35,9 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "kandidaattitason koulutus", "id": "bachelor"},
-            { "label": "maisteritason koulutus", "id": "masters" },
-            { "label": "tohtoritason koulutus", "id": "doctoral"},
-            { "label": "kaikki koulutustasot", "id": "all"  }
+            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
+            { "label": "Maisteritason koulutus", "id": "masters" },
+            { "label": "Tohtoritason koulutus", "id": "doctoral"}
           ]
         }
       }
@@ -71,7 +70,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -88,7 +87,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -107,7 +106,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
 
@@ -127,7 +126,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
 
@@ -147,7 +146,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -166,7 +165,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -185,7 +184,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -205,7 +204,7 @@
           "en": ""
         },
 
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -224,7 +223,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -273,7 +272,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -292,7 +291,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -311,7 +310,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -330,7 +329,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -349,7 +348,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -368,7 +367,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -387,7 +386,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -406,7 +405,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -425,7 +424,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -444,7 +443,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -463,7 +462,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -482,7 +481,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -549,7 +548,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -568,7 +567,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -587,7 +586,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -606,7 +605,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -625,7 +624,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -644,7 +643,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -693,7 +692,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -712,7 +711,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -731,7 +730,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -750,7 +749,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -769,7 +768,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -788,7 +787,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -807,7 +806,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -826,7 +825,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -845,7 +844,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -864,7 +863,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -913,7 +912,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -932,7 +931,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -951,7 +950,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -970,7 +969,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -989,7 +988,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1008,7 +1007,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1027,7 +1026,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1046,7 +1045,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1065,7 +1064,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1084,7 +1083,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1133,7 +1132,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1152,7 +1151,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1171,7 +1170,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1190,7 +1189,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1209,7 +1208,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1228,7 +1227,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1247,7 +1246,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1266,7 +1265,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1285,7 +1284,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1334,7 +1333,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1353,7 +1352,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1372,7 +1371,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1391,7 +1390,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1410,7 +1409,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1429,7 +1428,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1448,7 +1447,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1467,7 +1466,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1486,7 +1485,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1505,7 +1504,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1524,7 +1523,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1543,7 +1542,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1592,7 +1591,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1611,7 +1610,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1630,7 +1629,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1649,7 +1648,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1668,7 +1667,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1687,7 +1686,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1706,7 +1705,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1725,7 +1724,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1744,7 +1743,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1763,7 +1762,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
 
@@ -1781,7 +1780,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       }
     ]
@@ -1813,7 +1812,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1832,7 +1831,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1851,7 +1850,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1870,7 +1869,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1889,7 +1888,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1908,7 +1907,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1927,7 +1926,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1946,7 +1945,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1965,7 +1964,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -1984,7 +1983,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2003,7 +2002,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2052,7 +2051,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2071,7 +2070,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2090,7 +2089,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2109,7 +2108,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2128,7 +2127,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2147,7 +2146,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {
@@ -2166,7 +2165,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       },
       {

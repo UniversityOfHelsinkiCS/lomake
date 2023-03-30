@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { wsConnect } from 'Utilities/redux/websocketReducer'
 import { loginAction } from 'Utilities/redux/currentUserReducer'
 import NavBar from 'Components/NavBar'
-import ReformIndividualNavBar from 'Components/ReformIndividualNavBar'
 import Router from 'Components/Router'
 import { getStudyProgrammes, getUsersProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
@@ -64,11 +63,7 @@ export default () => {
   if (!currentUser.data || !studyProgrammes || !oldAnswers || !oldAnswers.data) return null
   return (
     <div>
-      {window.location.pathname.substring(1).split('/')[0] === 'degree-reform-individual' ? (
-        <ReformIndividualNavBar />
-      ) : (
-        <NavBar />
-      )}
+      <NavBar />
       <Router />
     </div>
   )

@@ -40,7 +40,7 @@ const NavigationSidebar = ({ programmeKey, form }) => {
     linkBase = '/degree-reform/form/'
   } else if (form === 'degree-reform-individual') {
     questionsToShow = koulutusuudistusQuestions
-    linkBase = '/degree-reform-individual/form'
+    linkBase = '/degree-reform-individual/form/'
   }
   const formDataFilter = formData.answerLevels && formData.answerLevels.length > 0 ? formData.answerLevels : null
 
@@ -57,6 +57,10 @@ const NavigationSidebar = ({ programmeKey, form }) => {
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
               return <div />
             }
+            const link =
+              form === 'degree-reform-individual'
+                ? `${linkBase}#${romanNumeral}`
+                : `${linkBase}${programmeKey}#${romanNumeral}`
             return (
               <div
                 key={title}
@@ -69,8 +73,8 @@ const NavigationSidebar = ({ programmeKey, form }) => {
                 }}
               >
                 <div style={{ margin: '1em 0' }}>
-                  <Link to={`${linkBase}${programmeKey}#${romanNumeral}`} style={{ color: colors.black }}>
-                    {romanNumeral} - {title}
+                  <Link to={link} style={{ color: colors.black }}>
+                    {title}
                   </Link>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
