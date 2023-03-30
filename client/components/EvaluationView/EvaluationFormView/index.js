@@ -56,7 +56,7 @@ const handleMeasures = (yearData, relatedQuestion) => {
     i++
   }
 
-  return { text, ligth: null, count }
+  return { text, light: null, count }
 }
 
 const findAnswers = (allOldAnswers, relatedQuestion) => {
@@ -65,8 +65,12 @@ const findAnswers = (allOldAnswers, relatedQuestion) => {
 
   years.forEach(year => {
     const yearData = allOldAnswers.find(a => a.year === year)
-
-    if (relatedQuestion.includes('measure')) {
+    if (!yearData) {
+      result[year] = { text: null, light: null }
+      if (relatedQuestion.includes('measure')) {
+        result[year].count = 0
+      }
+    } else if (relatedQuestion.includes('measure')) {
       result[year] = handleMeasures(yearData.data, relatedQuestion)
     } else {
       const text = yearData.data[`${relatedQuestion}_text`]
@@ -91,13 +95,10 @@ const EvaluationFormView = ({ room, formString }) => {
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline.find(d => d.form === form) // nextDeadline ? nextDeadline.find(d => d.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
-
-  // const programme = useSelector(state => state.studyProgrammes.singleProgram)
-  // ^ might need to create a new state to not mess with vuosikatsaus?
 
   const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
   const targetURL = `/evaluation/previous-years/${room}`
