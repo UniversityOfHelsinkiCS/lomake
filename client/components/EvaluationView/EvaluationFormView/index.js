@@ -16,6 +16,8 @@ import calendarImage from 'Assets/calendar.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
+import StatusMessage from 'Components/FormView/StatusMessage'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
 import questions from '../../../evaluationQuestions.json'
@@ -185,6 +187,7 @@ const EvaluationFormView = ({ room, formString }) => {
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
+            <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
               <Button onClick={() => history.push('/evaluation')} icon="arrow left" />
             </div>
@@ -196,6 +199,7 @@ const EvaluationFormView = ({ room, formString }) => {
           </h3>
 
           <div className="hide-in-print-mode">
+            <StatusMessage programme={room} form={form} />
             <p>
               Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <b>kolmen viime vuoden ajalta</b>.
             </p>
