@@ -30,7 +30,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
               color: colors.white,
             }}
           >
-            {number || '0'} - {title}
+            {title}
           </h2>
         </InView>
       </div>

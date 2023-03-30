@@ -1,6 +1,8 @@
 import React from 'react'
 import { Divider } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
+import { colors } from 'Utilities/common'
+
 import { Link } from 'react-router-dom'
 
 import './Generic.scss'
@@ -13,7 +15,7 @@ const InfoBox = ({ label, description, extrainfo, image }) => {
         className="entity-description"
         style={{
           lineHeight: 2,
-          backgroundColor: 'RGB(203, 203, 203, 1)',
+          backgroundColor: colors.background_beige,
           padding: '1em',
           borderRadius: '5px',
           margin: '1em 0',

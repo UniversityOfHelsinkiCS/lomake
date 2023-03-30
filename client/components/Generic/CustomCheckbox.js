@@ -5,7 +5,7 @@ import { setAnswerLevels /* updateFormField */ } from 'Utilities/redux/formReduc
 import { colors, getFilters } from 'Utilities/common'
 import './Generic.scss'
 
-const CustomCheckbox = ({ id, label, description, required, number, extrainfo, radioOptions }) => {
+const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -28,34 +28,15 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
 
   const handleClick = eventValue => {
     let newValues = []
-    if (eventValue === 'all') {
-      if (values[3].value === false) {
-        newValues = values.map(v => {
-          v.value = true
-          return v
-        })
-      } else {
-        newValues = values.map(v => {
-          v.value = false
-          return v
-        })
-      }
-    } else {
-      let allChecked = false
-      newValues = values.map(v => {
-        if (v.id === eventValue) {
-          if (v.value === true && values[3].value === true) {
-            allChecked = true
-          }
-          v.value = !v.value
-          return v
-        }
-        if (allChecked && v.id === 'all') {
-          v.value = false
-        }
+
+    newValues = values.map(v => {
+      if (v.id === eventValue) {
+        v.value = !v.value
         return v
-      })
-    }
+      }
+      return v
+    })
+
     setValue(newValues)
     // choose(id, newValues, 3)
     if (id === 'view-is-based-on') {
@@ -67,10 +48,9 @@ const CustomCheckbox = ({ id, label, description, required, number, extrainfo, r
     <div className="form-entity-area">
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '500px' }}>
+        <div style={{ maxWidth: '750px' }}>
           <h3>
-            {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
       </div>

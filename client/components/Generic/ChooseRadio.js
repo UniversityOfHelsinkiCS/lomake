@@ -17,7 +17,6 @@ const ChooseRadio = ({
   label,
   description,
   required,
-  number,
   previousYearsAnswers,
   extrainfo,
   radioOptions,
@@ -72,10 +71,9 @@ const ChooseRadio = ({
     <div className="form-entity-area">
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '500px' }}>
+        <div style={{ maxWidth: '750px' }}>
           <h3>
-            {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
       </div>

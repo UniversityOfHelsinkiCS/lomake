@@ -399,17 +399,14 @@ export const getUserRole = userIams => {
 export const getFilters = filter => {
   let filters = []
   filter?.map(f => {
-    if (f.id === 'bachelor' && f.value === true) {
+    if (f.id === 'bachelor' && f.value === false) {
       filters = filters.concat(5)
     }
-    if (f.id === 'masters' && f.value === true) {
+    if (f.id === 'masters' && f.value === false) {
       filters = filters.concat([6, 7])
     }
-    if (f.id === 'doctoral' && f.value === true) {
+    if (f.id === 'doctoral' && f.value === false) {
       filters = filters.concat(8)
-    }
-    if (f.id === 'all' && f.value === true) {
-      filters = [5, 6, 7, 8]
     }
     return 0
   })
