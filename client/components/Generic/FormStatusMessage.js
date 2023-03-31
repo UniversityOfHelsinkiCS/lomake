@@ -6,8 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 import './Generic.scss'
 
-// TO FIX
-const FormStatusMessage = ({ programme, form = 1 }) => {
+const FormStatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
   const user = useSelector(state => state.currentUser.data)

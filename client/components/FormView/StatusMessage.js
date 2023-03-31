@@ -11,8 +11,7 @@ const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   return ''
 }
 
-// TO FIX
-const StatusMessage = ({ programme, form = 1 }) => {
+const StatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const deadlines = useSelector(state => state.deadlines.nextDeadline)

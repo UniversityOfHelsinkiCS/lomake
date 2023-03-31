@@ -16,6 +16,8 @@ import calendarImage from 'Assets/calendar.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
+import StatusMessage from 'Components/FormView/StatusMessage'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
 import questions from '../../../evaluationQuestions.json'
@@ -54,7 +56,7 @@ const handleMeasures = (yearData, relatedQuestion) => {
     i++
   }
 
-  return { text, ligth: null, count }
+  return { text, light: null, count }
 }
 
 const findAnswers = (allOldAnswers, relatedQuestion) => {
@@ -63,8 +65,12 @@ const findAnswers = (allOldAnswers, relatedQuestion) => {
 
   years.forEach(year => {
     const yearData = allOldAnswers.find(a => a.year === year)
-
-    if (relatedQuestion.includes('measure')) {
+    if (!yearData) {
+      result[year] = { text: null, light: null }
+      if (relatedQuestion.includes('measure')) {
+        result[year].count = 0
+      }
+    } else if (relatedQuestion.includes('measure')) {
       result[year] = handleMeasures(yearData.data, relatedQuestion)
     } else {
       const text = yearData.data[`${relatedQuestion}_text`]
@@ -89,13 +95,10 @@ const EvaluationFormView = ({ room, formString }) => {
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline.find(d => d.form === form) // nextDeadline ? nextDeadline.find(d => d.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
-
-  // const programme = useSelector(state => state.studyProgrammes.singleProgram)
-  // ^ might need to create a new state to not mess with vuosikatsaus?
 
   const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
   const targetURL = `/evaluation/previous-years/${room}`
@@ -185,6 +188,7 @@ const EvaluationFormView = ({ room, formString }) => {
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
+            <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
               <Button onClick={() => history.push('/evaluation')} icon="arrow left" />
             </div>
@@ -196,6 +200,7 @@ const EvaluationFormView = ({ room, formString }) => {
           </h3>
 
           <div className="hide-in-print-mode">
+            <StatusMessage programme={room} form={form} />
             <p>
               Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <b>kolmen viime vuoden ajalta</b>.
             </p>
