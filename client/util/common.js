@@ -413,4 +413,20 @@ export const getFilters = filter => {
   return filters
 }
 
+export const getForm = formType => {
+  if (formType === 'degree-reform') {
+    return 2
+  }
+  if (formType === 'degree-reform-individual') {
+    return 3
+  }
+  if (formType === 'evaluation') {
+    return 4
+  }
+  if (formType === 'yearlyAssesment') {
+    return 1
+  }
+  return 1
+}
+
 export * from '@root/config/common'

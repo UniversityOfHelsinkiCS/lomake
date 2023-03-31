@@ -181,7 +181,7 @@ const EvaluationFormView = ({ room, formString }) => {
     <Loader active />
   ) : (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} form="evaluation" />
+      <NavigationSidebar programmeKey={room} formType="evaluation" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">

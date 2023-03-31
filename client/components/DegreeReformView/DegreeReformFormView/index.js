@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
 
 import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
@@ -13,7 +12,6 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 
 import DegreeReformForm from './DegreeReformForm'
 
@@ -35,45 +33,47 @@ const DegreeReformFormView = ({ room }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+
+  const form = 2
+
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === room)
+  const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
-  useEffect(() => {
-    if (room) dispatch(getPreviousAnswersAction(room, 3))
-  }, [room])
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+  const formDeadline = nextDeadline.find(d => d.form === form)
+  const currentRoom = useSelector(state => state.room)
+  const year = 2023
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
+  const viewingOldAnswers = false
 
   useEffect(() => {
     document.title = `${t('degree-reform')} - ${room}`
     dispatch(getProgramme(room))
   }, [lang, room])
 
-  const draftYear = useSelector(state => state.deadlines.draftYear)
-  const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-  const year = 2023
-  const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
-  const currentRoom = useSelector(state => state.room)
-
-  const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
-
   useEffect(() => {
-    document.title = `${t('form')} - ${room}`
-    dispatch(getProgramme(room))
-  }, [lang, room])
-
-  useEffect(() => {
-    if (!programme) return
-    // form is now just a placeholder, 1 = vuosiseuranta, 3 = koulutusuudistus ryhmä(?)
-    dispatch(getSingleProgrammesAnswers({ room, year, form: 3 }))
-    if (formShouldBeViewOnly({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year })) {
+    if (!programme || !form) return
+    dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    if (
+      formShouldBeViewOnly({
+        accessToTempAnswers,
+        programme,
+        writeAccess,
+        viewingOldAnswers,
+        draftYear,
+        year,
+        formDeadline,
+        form,
+      })
+    ) {
       dispatch(setViewOnly(true))
-      if (currentRoom) {
-        dispatch(wsLeaveRoom(room))
-      }
+      if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {
-      dispatch(wsJoinRoom(room))
+      dispatch(wsJoinRoom(room, form))
       dispatch(setViewOnly(false))
     }
   }, [
@@ -95,13 +95,10 @@ const DegreeReformFormView = ({ room }) => {
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  const targetURL = `/degree-reform/previous-years/${room}`
-
   const formType = 'degree-reform'
-
   return (
     <div className="form-container">
-      <NavigationSidebar programmeKey={room} form="degree-reform" />
+      <NavigationSidebar programmeKey={room} formType="degree-reform" />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -114,25 +111,8 @@ const DegreeReformFormView = ({ room }) => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('degree-reform')} 2023
           </h3>
-
-          <p
-            className="past-answers-link"
-            style={{
-              lineHeight: 2,
-              backgroundColor: colors.background_blue,
-              padding: '1.5em 0.5em',
-              borderRadius: '5px',
-              margin: '4em 0em 1em 0em',
-            }}
-          >
-            <Link data-cy={`link-to-old-${room}-answers`} to={targetURL} target="_blank">
-              <p style={{ fontWeight: 'bold', fontSize: '16px' }}>
-                Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />{' '}
-              </p>
-            </Link>
-          </p>
         </div>
-        <DegreeReformForm form={formType} programmeKey={programme.key} questionData={questionData} />
+        <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionData} />
       </div>
     </div>
   )
