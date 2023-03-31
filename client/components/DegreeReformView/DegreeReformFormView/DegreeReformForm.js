@@ -12,7 +12,7 @@ import AdvancedRadio from 'Components/Generic/AdvancedRadio'
 import { colors, romanize } from 'Utilities/common'
 import Section from './DegreeReformSection'
 
-const DegreeReformForm = ({ programmeKey, form, questionData }) => {
+const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(state => state.form || {})
 
@@ -83,7 +83,7 @@ const DegreeReformForm = ({ programmeKey, form, questionData }) => {
           number={number}
           extrainfo={extrainfo}
           previousYearsAnswers={null}
-          form={form}
+          formType={formType}
           programme={programmeKey}
           radioOptions={part?.radioOptions}
           image={image}
@@ -101,7 +101,7 @@ const DegreeReformForm = ({ programmeKey, form, questionData }) => {
             number={romanize(index)}
             key={section.title[lang]}
             programmeKey={programmeKey}
-            form={form}
+            formType={formType}
           >
             {formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id) ? (
               <div>

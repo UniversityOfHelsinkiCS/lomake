@@ -1,45 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form } from 'semantic-ui-react'
-import { useSelector /* useDispatch */ } from 'react-redux'
-// import { updateFormField } from 'Utilities/redux/formReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateFormField } from 'Utilities/redux/formReducer'
 
-import { colors } from 'Utilities/common'
+import { colors, getForm } from 'Utilities/common'
 import './Generic.scss'
 
-const mapColorToValid = {
-  VIHREÄ: 'green',
-  KELTAINEN: 'yellow',
-  PUNAINEN: 'red',
-}
-
-const ChooseRadio = ({
-  id,
-  label,
-  description,
-  required,
-  previousYearsAnswers,
-  extrainfo,
-  radioOptions,
-  direction,
-}) => {
-  // const dispatch = useDispatch()
+const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType }) => {
+  const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
+  const form = getForm(formType)
+  const choose = (name, id) => dispatch(updateFormField(name, id, form))
 
-  // temporary restriction
-  // const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
-
-  let previousAnswerColor = previousYearsAnswers ? previousYearsAnswers[`${id}_light`] : null
-  if (['VIHREÄ', 'KELTAINEN', 'PUNAINEN'].indexOf(previousAnswerColor) !== -1) {
-    previousAnswerColor = mapColorToValid[previousAnswerColor]
-  }
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
   const handleClick = label => {
     setState({ value: label })
-    //  choose(id, label, 3)
+    choose(id, label, 3)
   }
 
   useEffect(() => {

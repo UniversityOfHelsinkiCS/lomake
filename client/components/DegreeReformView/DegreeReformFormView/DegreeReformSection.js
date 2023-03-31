@@ -2,10 +2,10 @@ import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
-const Section = ({ title, number, children, programmeKey, form }) => {
-  let historyState = `${window.location.origin}${basePath}${form}/form/${programmeKey}#${number}`
-  if (form === 'degree-reform-individual') {
-    historyState = `${window.location.origin}${basePath}${form}/form/`
+const Section = ({ title, number, children, programmeKey, formType }) => {
+  let historyState = `${window.location.origin}${basePath}${formType}/form/${programmeKey}#${number}`
+  if (formType === 'degree-reform-individual') {
+    historyState = `${window.location.origin}${basePath}${formType}/form/`
   }
 
   return (

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Checkbox } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setAnswerLevels /* updateFormField */ } from 'Utilities/redux/formReducer'
-import { colors, getFilters } from 'Utilities/common'
+import { setAnswerLevels, updateFormField } from 'Utilities/redux/formReducer'
+import { colors, getFilters, getForm } from 'Utilities/common'
 import './Generic.scss'
 
-const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions }) => {
+const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
-  // const choose = (name, id) => dispatch(updateFormField(name, id)) // TO FIX add form
+  const form = getForm(formType)
+  const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const options = radioOptions ? radioOptions[lang] : null
 
   const generateRandomKey = value => `${value}-${Math.random()}`
@@ -38,7 +39,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
     })
 
     setValue(newValues)
-    // choose(id, newValues, 3)
+    choose(id, newValues)
     if (id === 'view-is-based-on') {
       const filters = getFilters(newValues)
       dispatch(setAnswerLevels(filters))
