@@ -25,7 +25,7 @@ const iconMap = {
 
 const NavigationSidebar = ({ programmeKey, formType }) => {
   const lang = useSelector(state => state.language)
-  const formData = useSelector(({ form }) => form || {})
+  const form = useSelector(({ form }) => form || {})
   const location = useLocation()
   const { t } = useTranslation()
 
@@ -41,7 +41,7 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
     questionsToShow = koulutusuudistusQuestions
     linkBase = '/degree-reform-individual/form/'
   }
-  const formDataFilter = formData.answerLevels && formData.answerLevels.length > 0 ? formData.answerLevels : null
+  const formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
 
   let partNumber = -1
   return (
@@ -108,14 +108,11 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
                     if (type === 'SELECTION') {
                       idsToCheck.push(`${id}_selected`)
                     }
-
                     const status = idsToCheck.reduce((acc, cur) => {
                       if (acc === 'EMPTY') return acc
-                      if (!formData[cur]) return 'EMPTY'
-
+                      if (!form.data[cur]) return 'EMPTY'
                       return 'OK'
                     }, null)
-
                     const getColor = () => {
                       if (status === 'OK') return colors.green
                       if (status === 'EMPTY' && !required) return colors.black
