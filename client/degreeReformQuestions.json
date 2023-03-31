@@ -907,6 +907,11 @@
           "se": "",
           "en": ""
         },
+        "accordion": {
+          "fi": "Taustatietoa kandiohjelmien periaatteista",
+          "se": "",
+          "en": ""
+        },
         "description": {
           "fi": "Jokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostaa yhden hakukohteen, mutta perustellusta syystä tästä voidaan poiketa. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kandiohjelmassa kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Kandiohjelman tulee olla riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelma on kooltaan sellainen, että aloituspaikkoja on vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nKandiohjelman jälkeen opiskelija voi jatkaa yhdessä tai useammassa vaihtoehtoisessa maisteriohjelmassa etukäteen ilmoitettujen kriteerien ja periaatteiden mukaisesti hakematta uutta tutkinnonsuoritusoikeutta. Mikäli opiskelijalle on myönnetty tutkinnonsuoritusoikeus vain alempaan korkeakoulututkintoon, hän hakee tutkinnonsuoritusoikeutta ylempään korkeakoulututkintoon johtavaan koulutusohjelmaan opiskelijavalinnassa.\n\nKoulutusohjelmarakenteessa opiskelijalla on yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Tiedekuntaneuvosto päättää osana opetussuunnitelmaa, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.",
           "se": "",
@@ -1124,6 +1129,11 @@
         },
         "label": {
           "fi": "Arvioi maisteriohjelmien toimivuutta",
+          "se": "",
+          "en": ""
+        },
+        "accordion": {
+          "fi": "Taustatietoa kandiohjelmien periaatteista",
           "se": "",
           "en": ""
         },
@@ -1586,6 +1596,11 @@
           "se": "",
           "en": ""
         },
+        "accordion": {
+          "fi": "Taustatietoa kandiohjelmien periaatteista",
+          "se": "",
+          "en": ""
+        },
         "description": {
           "fi": "Jokainen tohtorin tutkintoa suorittava kuuluu yhteen Helsingin yliopiston tohtoriohjelmaan. Tohtoriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen perusta. Tutkintokieli on tohtoriohjelmassa suomi, ruotsi tai englanti.\n\nTohtoriohjelma antaa syvällisen osaamisen tutkimustehtäviin ja muihin erittäin vaativiin asiantuntijatehtäviin.\n\nTohtoriohjelman tulee olla kooltaan riittävän suuri siten, että sen koulutuksen pohjalta valmistuu vuosittain vähintään keskimäärin 10 tohtorin tutkintoa.",
           "se": "",
@@ -1804,6 +1819,11 @@
         },
         "label": {
           "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua.",
+          "se": "",
+          "en": ""
+        },
+        "accordion": {
+          "fi": "Taustatietoa kandiohjelmien periaatteista",
           "se": "",
           "en": ""
         },

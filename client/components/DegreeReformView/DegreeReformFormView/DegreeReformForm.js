@@ -73,6 +73,8 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     const image = part.image ? part.image : undefined
     const direction = part.direction ? part.direction : 'vertical'
     const maxLength = part.maxLength ? part.maxLength : undefined
+    const accordion = part.accordion ? part.accordion : undefined
+
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -90,6 +92,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           image={image}
           direction={direction}
           maxLength={maxLength}
+          accordion={accordion}
         />
       </div>
     )
@@ -97,6 +100,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
   return (
     <>
       {questionData.map((section, index) => {
+        if (formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id)) return null
         return (
           <Section
             title={section.title[lang]}
@@ -105,13 +109,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
             programmeKey={programmeKey}
             formType={formType}
           >
-            {formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id) ? (
-              <div>
-                <p>Osiota ei valittu vastattavaksi</p>{' '}
-              </div>
-            ) : (
-              section.parts.map(partMap)
-            )}
+            {section.parts.map(partMap)}
           </Section>
         )
       })}

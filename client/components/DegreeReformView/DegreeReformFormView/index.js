@@ -41,7 +41,7 @@ const DegreeReformFormView = ({ room }) => {
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline.find(d => d.form === form)
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
   const year = 2023
 

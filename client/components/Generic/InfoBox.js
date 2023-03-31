@@ -16,13 +16,23 @@ const InfoBox = ({ label, description, extrainfo, image }) => {
         style={{
           lineHeight: 2,
           backgroundColor: colors.background_beige,
+          webkitMaskImage: 'linear-gradient(180deg, #000 60%, transparent)',
           padding: '1em',
           borderRadius: '5px',
           margin: '1em 0',
           fontSize: '16px',
         }}
       >
-        {description && <p style={{ whiteSpace: 'pre-line' }}>{description}</p>}
+        {description && (
+          <p
+            style={{
+              whiteSpace: 'pre-line',
+              overflow: 'hidden',
+            }}
+          >
+            {description}
+          </p>
+        )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
         {label && <p> {label}</p>}
         {image ? (
