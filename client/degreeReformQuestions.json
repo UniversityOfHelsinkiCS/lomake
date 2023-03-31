@@ -2186,5 +2186,33 @@
         "relatedYearlyQuestions": []
       }
     ]
+  },
+  {
+    "title": {
+      "fi": "Muuta kommentoitavaa",
+      "se": "",
+      "en": ""
+    },
+    "id": 11,
+    "parts": [
+      {
+        "id": "general_free_to_answer",
+        "index": 105,
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Kommentoi halutessasi",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "maxLength": 5100,
+        "required": false,
+        "relatedYearlyQuestions": []
+      }
+    ]
   }
 ]

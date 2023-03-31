@@ -14,8 +14,6 @@ import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import './Generic.scss'
 
-const MAX_LENGTH = 1100
-
 const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
 }
@@ -33,13 +31,15 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   return null
 }
 
-const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion, form }) => {
+const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion, form, maxLength }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
+
+  const MAX_LENGTH = maxLength || 1100
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)

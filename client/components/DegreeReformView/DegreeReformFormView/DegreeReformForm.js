@@ -72,6 +72,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
     const image = part.image ? part.image : undefined
     const direction = part.direction ? part.direction : 'vertical'
+    const maxLength = part.maxLength ? part.maxLength : undefined
     return (
       <div key={part.id} style={divStyle}>
         <Component
@@ -88,6 +89,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           radioOptions={part?.radioOptions}
           image={image}
           direction={direction}
+          maxLength={maxLength}
         />
       </div>
     )

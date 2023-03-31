@@ -25,9 +25,9 @@ const Section = ({ title, number, children, programmeKey, formType }) => {
               fontSize: '2em',
               padding: '1.5em 0.5em',
               margin: '4em 0em 1em 0em',
-              background: colors.background_black,
+              background: 'rgba(60, 119, 179, 1)',
               borderRadius: '5px',
-              color: colors.white,
+              color: colors.grey,
             }}
           >
             {title}
