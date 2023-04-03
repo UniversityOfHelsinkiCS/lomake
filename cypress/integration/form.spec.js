@@ -69,6 +69,7 @@ describe('Yearly assessment form tests', () => {
   })
 
   it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').click()
     cy.get('[data-cy=textarea-recruitment_influence]').find('[contenteditable]').type('new words').wait(300)
     cy.reload()
@@ -86,6 +87,7 @@ describe('Yearly assessment form tests', () => {
 
     // write to other form
     cy.visit('/evaluation/form/4/KH50_005')
+    cy.wait(1000)
     cy.get('[data-cy=textarea-programme_structures]').find('.editor-class').click()
     cy.get('[data-cy=textarea-programme_structures]').find('[contenteditable]').type('evaluation words').wait(300)
     cy.reload()
