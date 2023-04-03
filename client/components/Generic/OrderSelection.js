@@ -6,7 +6,7 @@ import { Button, Grid, Header, Segment } from 'semantic-ui-react'
 import './Generic.scss'
 import { updateFormField } from 'Utilities/redux/formReducer'
 
-const OrderSelection = ({ id, label, description, extrainfo, lang, options }) => {
+const OrderSelection = ({ id, label, description, extrainfo, lang, options, form }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -36,12 +36,12 @@ const OrderSelection = ({ id, label, description, extrainfo, lang, options }) =>
     if (systemList.length < 4) {
       const updated = [...systemList, optionId]
 
-      dispatch(updateFormField(id, updated.join(';;'))) // TO FIX add form
+      dispatch(updateFormField(id, updated.join(';;'), form))
     }
   }
 
   const handleClear = () => {
-    dispatch(updateFormField(id, '')) // TO FIX add form
+    dispatch(updateFormField(id, ''), form)
   }
 
   const getLabel = id => {

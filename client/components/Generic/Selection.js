@@ -5,7 +5,7 @@ import { colors } from 'Utilities/common'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
-const Selection = ({ id, label, description, required, number, extrainfo, options, lang }) => {
+const Selection = ({ id, label, description, required, number, extrainfo, options, lang, form }) => {
   const dispatch = useDispatch()
   const fieldNameOptions = `${id}_selection`
   const fieldNameText = `${id}_text`
@@ -20,12 +20,11 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
     const { id, checked } = data
     const updated = { ...selections }
     updated[id] = checked
-    dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated))) // TO FIX add form
+    dispatch(updateFormField(fieldNameOptions, JSON.stringify(updated), form))
   }
 
-  const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value)) // TO FIX add form
-
-  // To do: move to translations
+  const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value, form))
+  // TO FIX: move to translations
   const t = {
     fi: {
       select: 'Valitkaa sopivat vaihtoehdot',
