@@ -180,4 +180,58 @@ describe('SuperAdmin user tests', () => {
 
     cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`).should('have.class', 'square-green')
   })
+
+  it('Multiple deadlines can be opened and all relevant forms are editable', () => {
+    // check that page is ready
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
+
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.closeDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.get('[data-cy=form-1-deadline]').should('not.exist')
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.get('[data-cy=form-1-deadline]').contains('14.')
+
+    // Create other deadline
+    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.get('[data-cy=form-4-deadline]').contains('14.')
+
+    // Check that forms are open as they should be
+    cy.visit('/')
+    cy.visit('/form/KH50_004')
+    cy.get('.editor-class')
+    cy.visit('/evaluation/form/4/KH50_005')
+    cy.get('.editor-class')
+  })
+
+  it('Closing one deadline closes only one form', () => {
+    // Make sure multiplse deadlines are open new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.get('[data-cy=form-1-deadline]').contains('14.')
+
+    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.get('[data-cy=form-4-deadline]').contains('14.')
+
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Close one deadline
+    cy.closeDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.get('[data-cy=form-1-deadline]').should('not.exist')
+
+    cy.visit('/')
+    cy.visit('/form/KH50_004')
+    cy.get('.editor-class').should('not.exist')
+    cy.visit('/evaluation/form/4/KH50_005')
+    cy.get('.editor-class')
+  })
 })

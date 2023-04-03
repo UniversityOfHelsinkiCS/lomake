@@ -5,7 +5,7 @@
 import { testProgrammeCode, defaultYears } from '../../config/common'
 import '../support/commands'
 
-describe('Form tests', () => {
+describe('Yearly assessment form tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
@@ -66,5 +66,32 @@ describe('Form tests', () => {
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=locked-form-notice]')
     cy.get('.editor-class').should('not.exist')
+  })
+
+  it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
+    cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-recruitment_influence]').find('[contenteditable]').type('new words').wait(300)
+    cy.reload()
+    cy.visit('/')
+
+    cy.login('admin')
+    cy.visit('/')
+
+    // open another form
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.get('[data-cy=form-4-deadline]').contains('14.')
+
+    // write to other form
+    cy.visit('/evaluation/form/4/KH50_005')
+    cy.get('[data-cy=textarea-programme_structures]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-programme_structures]').find('[contenteditable]').type('evaluation words').wait(300)
+    cy.reload()
+
+    // check yearly assessment form
+    cy.visit(`/form/${testProgrammeCode}`)
+    cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').should('contain.text', 'new words')
   })
 })

@@ -84,3 +84,27 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
     cy.get('[data-cy^=user-access-groups]').contains(sg)
   })
 })
+
+Cypress.Commands.add('createDeadline', (draftYear, formName) => {
+  cy.get('[data-cy=draft-year-selector]').click()
+  cy.get('.item').contains(draftYear).click()
+
+  cy.get('[data-cy=form-selector]').click()
+  cy.get('.item').contains(formName).click()
+
+  cy.get('.react-datepicker__input-container > input').click() // Open datepicked
+  cy.get('.react-datepicker__navigation').click() // Go to next month
+  cy.get('.react-datepicker__day--014').click() // Select 14th day
+
+  cy.get('[data-cy=updateDeadline]').click()
+})
+
+Cypress.Commands.add('closeDeadline', (draftYear, formName) => {
+  cy.get('[data-cy=draft-year-selector]').click()
+  cy.get('.item').contains(draftYear).click()
+
+  cy.get('[data-cy=form-selector]').click()
+  cy.get('.item').contains(formName).click()
+
+  cy.get('[data-cy=deleteDeadline]').click()
+})

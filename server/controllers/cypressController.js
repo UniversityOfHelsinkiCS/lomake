@@ -5,7 +5,7 @@ const moment = require('moment')
 const { cypressUids } = require('@root/config/mockHeaders')
 const { createDraftAnswers } = require('../scripts/draftAndFinalAnswers')
 
-const getFakeAnswers = year => {
+const getFakeYearlyAnswers = year => {
   const fields = [
     'feedback_text',
     'guidance_text',
@@ -162,7 +162,7 @@ const createAnswers = async (req, res) => {
     const programmes = await db.studyprogramme.findAll({})
 
     defaultYears.forEach(async year => {
-      const fakeanswers = getFakeAnswers(year)
+      const fakeanswers = getFakeYearlyAnswers(year)
       const currentYear = new Date().getFullYear()
 
       programmes.forEach(async prog => {
