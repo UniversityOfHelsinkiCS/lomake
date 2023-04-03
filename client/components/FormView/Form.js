@@ -9,7 +9,7 @@ import { colors, romanize } from 'Utilities/common'
 import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 import Section from './Section'
 
-const Form = ({ questions, programmeKey }) => {
+const Form = ({ questions, programmeKey, form }) => {
   const previousYearsAnswers = useSelector(state => state.previousAnswers)
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -84,6 +84,8 @@ const Form = ({ questions, programmeKey }) => {
             previousYearsAnswers.data && previousYearsAnswers.data.data ? previousYearsAnswers.data.data : null
           }
           radioOptions={part.radioOptions}
+          form={form}
+          formType="yearlyAssessment"
         />
       </div>
     )

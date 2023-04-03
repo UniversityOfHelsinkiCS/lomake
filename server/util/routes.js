@@ -46,6 +46,6 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
-router.get('/cypress/createAnswers', notInProduction, cypress.createAnswers)
+router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 
 module.exports = router

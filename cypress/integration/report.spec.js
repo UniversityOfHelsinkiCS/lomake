@@ -7,6 +7,7 @@ import '../support/commands'
 
 const user = 'cypressUser'
 const adminUser = 'cypressOspaUser'
+const form = 1 // yearly assessment
 
 describe('ReportPage tests', () => {
   it('Piecharts are not shown if there are no answers', () => {
@@ -67,7 +68,7 @@ describe('ReportPage tests', () => {
 
   it('User should be able to see answers from previous years', () => {
     cy.login(user)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
 
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -78,7 +79,7 @@ describe('ReportPage tests', () => {
 
   it('Filtering works for programme level', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
 
@@ -91,7 +92,7 @@ describe('ReportPage tests', () => {
 
   it('Filtering works for faculty level', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -106,7 +107,7 @@ describe('ReportPage tests', () => {
 
   it('Filtering works for doctoral schools', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
@@ -123,7 +124,7 @@ describe('ReportPage tests', () => {
 
   it('Filtering works for companion programmes', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=companion-filter]').should('not.exist')

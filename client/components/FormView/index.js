@@ -190,7 +190,7 @@ const FormView = ({ room }) => {
           <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
           <PDFDownload />
         </div>
-        <Form programmeKey={programme.key} questions={questions} />
+        <Form programmeKey={programme.key} questions={questions} form={form} />
       </div>
     </div>
   )

@@ -4,6 +4,8 @@
 import { defaultYears, testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
+const form = 1 // yearly assessment
+
 describe("Previous year's answers", () => {
   beforeEach(() => {
     const user = 'cypressUser'
@@ -12,7 +14,7 @@ describe("Previous year's answers", () => {
   })
 
   it("Can switch which year's answers to see in OverViewPage", () => {
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
 
     cy.selectYear(defaultYears[1])
@@ -29,7 +31,7 @@ describe("Previous year's answers", () => {
   })
 
   it("Can't write answers if viewing old answers", () => {
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
 
@@ -41,7 +43,7 @@ describe("Previous year's answers", () => {
   })
 
   it('Can view old answers in Form-page and switch back to editMode to continue working.', () => {
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit(`/form/${testProgrammeCode}`)
 
     cy.selectYear(defaultYears[1])

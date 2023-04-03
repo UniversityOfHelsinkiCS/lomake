@@ -4,6 +4,8 @@ import { defaultYears } from '../../config/common'
 import helpers from '../support/helpers'
 import '../support/commands'
 
+const form = 1 // yearly assessment
+
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
@@ -151,7 +153,7 @@ describe('IAM permission tests', () => {
 
   it('Report works', () => {
     cy.login('cypressOspaUser')
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/')
     cy.get('[data-cy=nav-report]').click()
     cy.selectYear(defaultYears[1])
@@ -163,7 +165,7 @@ describe('IAM permission tests', () => {
 
   it('Comparison works', () => {
     cy.login('cypressOspaUser')
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
     cy.selectYear(defaultYears[1])

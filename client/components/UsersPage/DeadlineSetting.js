@@ -94,7 +94,7 @@ const DeadlineSetting = () => {
   }
 
   const handleDelete = () => {
-    dispatch(deleteDeadlineAndDraftYear({ form })) // TO FIx
+    dispatch(deleteDeadlineAndDraftYear({ form }))
     setNewDate(null)
     setNewDraftYear(null)
     setForm(null)
