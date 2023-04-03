@@ -35,7 +35,7 @@ const ColorTable = React.memo(
     const lang = useSelector(state => state.language)
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
-    const year = useSelector(({ filters }) => filters.year)
+    let year = useSelector(({ filters }) => filters.year)
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
@@ -43,6 +43,10 @@ const ColorTable = React.memo(
       dispatch(getAllTempAnswersAction())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
+
+    if (form !== 1) {
+      year = 2023
+    }
 
     const selectedAnswers = answersByYear({
       year,
