@@ -38,7 +38,7 @@ const DegreeReformIndividual = () => {
   const readAccess = (user.access[formNumber] && user.access[formNumber].read) || isAdmin(user)
 
   useEffect(() => {
-    document.title = `${t('degree-reform')}`
+    document.title = `${t('degree-reform-individual')}`
     dispatch(getProgramme(formNumber))
   }, [lang])
 
@@ -49,11 +49,6 @@ const DegreeReformIndividual = () => {
   const currentRoom = useSelector(state => state.room)
 
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
-
-  useEffect(() => {
-    document.title = `${t('form')}`
-    dispatch(getProgramme(formNumber))
-  }, [lang])
 
   useEffect(() => {
     dispatch(getSingleProgrammesAnswers({ year, formNumber }))

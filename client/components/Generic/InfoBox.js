@@ -1,26 +1,19 @@
-import React from 'react'
-import { Divider } from 'semantic-ui-react'
-// import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
-
+import React, { useState } from 'react'
+import { Divider, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import './Generic.scss'
 
 const InfoBox = ({ label, description, extrainfo, image }) => {
+  const [open, setOpen] = useState(false)
   return (
-    <div className="form-entity-area">
+    <div className="form-description-area">
       <Divider />
       <div
-        className="entity-description"
+        className="infobox-description"
         style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          webkitMaskImage: 'linear-gradient(180deg, #000 60%, transparent)',
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-          fontSize: '16px',
+          WebkitMaskImage: open ? null : 'linear-gradient(180deg, #000 60%, transparent)',
+          height: open ? 'auto' : '8em',
         }}
       >
         {description && (
@@ -43,6 +36,12 @@ const InfoBox = ({ label, description, extrainfo, image }) => {
           </b>
         ) : null}
       </div>
+      <Button
+        style={open ? null : { top: '-40px' }}
+        className="infobox-button"
+        content="Read more"
+        onClick={() => setOpen(!open)}
+      />
     </div>
   )
 }

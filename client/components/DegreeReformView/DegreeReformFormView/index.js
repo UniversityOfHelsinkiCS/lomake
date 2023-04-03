@@ -113,6 +113,7 @@ const DegreeReformFormView = ({ room }) => {
           </h3>
         </div>
         <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionData} />
+        <div style={{ height: '10em' }} />
       </div>
     </div>
   )

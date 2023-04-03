@@ -276,7 +276,7 @@
   gap: 1em;
 }
 
-.entity-description, .selection-description{
+.entity-description, .selection-description,.infobox-description{
   line-height: 2;
   background-color: $background_beige;
   padding: 1em;
@@ -303,4 +303,9 @@
 .no-selections {
   background-color: $background-light-gray;
   padding: 1em;
+}
+
+.infobox-button {
+  margin-left: 20em !important;
+  position: relative;
 }
