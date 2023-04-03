@@ -6,6 +6,7 @@ import helpers from '../support/helpers'
 import '../support/commands'
 
 const adminUser = 'cypressOspaUser'
+const form = 1 // yearly assessment
 
 describe('ComparisonPage tests', () => {
   it('Changes in smileys are reflected to the single programme piecharts', () => {
@@ -23,7 +24,7 @@ describe('ComparisonPage tests', () => {
 
   it('Admin should be able to see all the programmes on the comparison page', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()
@@ -50,7 +51,7 @@ describe('ComparisonPage tests', () => {
 
   it('Tooltips work for compared programmes filtered by faculty', () => {
     cy.login(adminUser)
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
     cy.visit('/')
     cy.get('[data-cy=nav-comparison]').click()

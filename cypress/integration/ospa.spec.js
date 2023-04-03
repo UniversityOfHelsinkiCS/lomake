@@ -6,6 +6,8 @@
 import { testProgrammeCode, defaultYears } from '../../config/common'
 import '../support/commands'
 
+const form = 1 // yearly assessment
+
 describe('SuperAdmin user tests', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
@@ -79,7 +81,7 @@ describe('SuperAdmin user tests', () => {
 
   it('Deadline for a past year can be created when no form is open for the current year, the form of that year can be edited and the form can be then again closed', () => {
     cy.login('cypressSuperAdminUser')
-    cy.request('/api/cypress/createAnswers')
+    cy.request(`/api/cypress/createAnswers/${form}`)
 
     // Delete pre-generated deadline
     cy.visit('/')

@@ -100,7 +100,7 @@ const resetAnswers = async () => {
   }
 }
 
-const resetDeadline = async () => {
+const resetDeadlines = async () => {
   const deadline = moment().add(7, 'days')
   const draftYear = defaultYears[0]
   const form = 1 // TO FIX
@@ -109,17 +109,14 @@ const resetDeadline = async () => {
     // Unlock all programmes
     await db.studyprogramme.update({ locked: false }, { where: {} })
 
-    // Create new or update old deadline
-    const existingDeadlines = await db.deadline.findAll({})
-    if (existingDeadlines.length === 0) {
-      await db.deadline.create({
-        date: deadline,
-        form,
-      })
-    } else {
-      existingDeadlines[0].date = deadline
-      await existingDeadlines[0].save()
-    }
+    // Close all deadlines and create new for yearly form
+    await db.deadline.destroy({
+      truncate: true,
+    })
+    await db.deadline.create({
+      date: deadline,
+      form,
+    })
 
     // Create new or update old draft year
     const existingDraftYears = await db.draftYear.findAll({})
@@ -145,7 +142,7 @@ const seed = async (_, res) => {
     await resetAnswers()
     await resetUsers()
     await resetForm()
-    await resetDeadline()
+    await resetDeadlines()
 
     return res.status(200).send('OK')
   } catch (error) {
@@ -155,7 +152,7 @@ const seed = async (_, res) => {
 }
 
 const createAnswers = async (req, res) => {
-  const form = 1 // To FIX
+  const form = req.params.form || 1
   try {
     logger.info('Cypress::creating answers')
 
