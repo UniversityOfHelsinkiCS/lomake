@@ -4,7 +4,7 @@ import callBuilder from '../apiConnection'
  */
 
 // TO FIX
-export const updateFormField = (field, value, form = 1) => ({
+export const updateFormField = (field, value, form) => ({
   type: 'UPDATE_FORM_FIELD',
   field,
   value,

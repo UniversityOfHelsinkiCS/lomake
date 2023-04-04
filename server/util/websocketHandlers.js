@@ -87,6 +87,7 @@ const leaveRoom = async (socket, room) => {
 const updateField = async (socket, payload, io) => {
   try {
     const { room, data, form } = payload
+    if (!form) return
 
     const currentUser = await getCurrentUser(socket)
 
