@@ -9,12 +9,13 @@ import Measures from 'Components/Generic/Measures'
 
 import CustomCheckbox from 'Components/Generic/CustomCheckbox'
 import AdvancedRadio from 'Components/Generic/AdvancedRadio'
-import { colors, romanize } from 'Utilities/common'
+import { colors, romanize, getForm } from 'Utilities/common'
 import Section from './DegreeReformSection'
 
 const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
   const lang = useSelector(state => state.language)
   const formData = useSelector(state => state.form || {})
+  const form = getForm(formType)
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -93,6 +94,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           direction={direction}
           maxLength={maxLength}
           accordion={accordion}
+          form={form}
         />
       </div>
     )
