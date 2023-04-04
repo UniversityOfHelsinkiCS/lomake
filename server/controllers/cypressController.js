@@ -103,7 +103,7 @@ const resetAnswers = async () => {
 const resetDeadlines = async () => {
   const deadline = moment().add(7, 'days')
   const draftYear = defaultYears[0]
-  const form = 1 // TO FIX
+  const form = 1
 
   try {
     // Unlock all programmes

@@ -103,9 +103,6 @@ const DeadlineSetting = () => {
 
   if (!isSuperAdmin(currentUser)) return null
 
-  // TO FIX never contain anything?
-  const existingDeadlines = []
-
   const formatDate = date => {
     const temp = new Date(date)
     return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
@@ -135,7 +132,6 @@ const DeadlineSetting = () => {
         <Header as="h4">{t('users:selectNewDeadline')}</Header>
         <DatePicker
           dateFormat="dd.MM.yyyy"
-          excludeDates={existingDeadlines.map(dl => new Date(dl.date))}
           placeholderText={t('users:selectNewDeadline')}
           minDate={new Date()}
           selected={newDate}

@@ -3,7 +3,6 @@ import callBuilder from '../apiConnection'
  * Actions and reducers are in the same file for readability
  */
 
-// TO FIX
 export const updateFormField = (field, value, form) => ({
   type: 'UPDATE_FORM_FIELD',
   field,
