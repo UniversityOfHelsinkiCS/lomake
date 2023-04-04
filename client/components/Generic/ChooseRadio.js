@@ -11,6 +11,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
 
@@ -88,6 +89,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
                   value={o.label}
                   checked={state.value === o.id}
                   onChange={() => handleClick(o.id)}
+                  disabled={viewOnly}
                 />
                 <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
                   {o.label}

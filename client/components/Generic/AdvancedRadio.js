@@ -15,6 +15,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const form = getForm(formType)
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
 
@@ -69,6 +70,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
             return (
               <Form.Field key={generateKey(o.label)}>
                 <Radio
+                  disbabled={viewOnly}
                   label={o.label}
                   name="radioGroup"
                   value={o.label}
@@ -85,6 +87,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               size="small"
               label={t('comparison:filterFaculties')}
               selectedRadio={state.value}
+              disabled={viewOnly}
             />
           ) : null}
           {selected === 'other' ? <Input handleFilterChange={handleClick} version="degree-reform" size="big" /> : null}

@@ -17,13 +17,23 @@ import DegreeReformForm from './DegreeReformForm'
 
 import questionData from '../../../degreeReformQuestions.json'
 
-const formShouldBeViewOnly = ({ accessToTempAnswers, programme, writeAccess, viewingOldAnswers, draftYear, year }) => {
+const formShouldBeViewOnly = ({
+  accessToTempAnswers,
+  programme,
+  writeAccess,
+  viewingOldAnswers,
+  draftYear,
+  year,
+  form,
+  formDeadline,
+}) => {
   if (!accessToTempAnswers) return true
   if (programme.locked) return true
   if (!writeAccess) return true
   if (viewingOldAnswers) return true
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
   return false
 }
 

@@ -9,6 +9,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const options = radioOptions ? radioOptions[lang] : null
@@ -83,6 +84,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
               id={o.id}
               label={o.label}
               onClick={() => handleClick(o.id)}
+              disabled={viewOnly}
             />
           )
         })}

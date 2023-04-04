@@ -23,7 +23,7 @@ import EvaluationForm from './EvaluationForm'
 import questions from '../../../evaluationQuestions.json'
 import yearlyQuestions from '../../../questions.json'
 
-// TO FIX yearly form uses same checker. refactor to common tools
+// TO FIX yearly and degree form uses same checker. refactor to common tools
 const formShouldBeViewOnly = ({
   accessToTempAnswers,
   programme,
