@@ -3,6 +3,7 @@ import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { forms } from '@root/config/data'
 
 const DeadlineInfo = () => {
   const { t } = useTranslation()
@@ -14,12 +15,20 @@ const DeadlineInfo = () => {
   }
 
   const getDeadlineText = () => {
-    // TO FIX
-    if (nextDeadline[0])
+    if (nextDeadline?.length > 0)
       return (
         <>
-          {t('users:nextDeadline')} {formatDate(nextDeadline[0].date)}
-          {/* TO FIX */}
+          {nextDeadline.map(deadline => {
+            return (
+              <>
+                <Header as="h3">{forms.find(f => f.key === deadline.form)?.name}</Header>
+                <p>
+                  {t('users:nextDeadline')} {formatDate(deadline.date)}
+                </p>
+                <p>**</p>
+              </>
+            )
+          })}
           <p>
             {t('users:answersSavedForYear')} {draftYear.year}
           </p>
