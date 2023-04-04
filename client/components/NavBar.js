@@ -61,18 +61,18 @@ export default () => {
     )
   }
 
-  const GoToDegreeReformIndividual = () => {
-    return (
-      <Menu.Item
-        data-cy="nav-degree-reform-individual-form"
-        as={Link}
-        to="/degree-reform-individual/form"
-        name="degree-reform-individual-form"
-      >
-        {t('degree-reform-individual')}
-      </Menu.Item>
-    )
-  }
+  // const GoToDegreeReformIndividual = () => {
+  //   return (
+  //     <Menu.Item
+  //       data-cy="nav-degree-reform-individual-form"
+  //       as={Link}
+  //       to="/degree-reform-individual/form"
+  //       name="degree-reform-individual-form"
+  //     >
+  //       {t('degree-reform-individual')}
+  //     </Menu.Item>
+  //   )
+  // }
 
   const MenuNavigation = () => {
     if (window.location.pathname.substring(1).split('/')[0] === 'degree-reform-individual') {
@@ -81,7 +81,7 @@ export default () => {
           <Menu.Item>
             <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
           </Menu.Item>
-          {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+          {/* {user.superAdmin ? <GoToDegreeReformIndividual /> : null} */}
         </>
       )
     }
@@ -92,7 +92,7 @@ export default () => {
         </Menu.Item>
         {user.superAdmin ? <GoToEvaluationButton /> : null}
         {user.superAdmin ? <GoToDegreeReformGroup /> : null}
-        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        {/* {user.superAdmin ? <GoToDegreeReformIndividual /> : null} */}
         {user.admin ? <GoToAdminPageButton /> : null}
         <Menu.Item>
           <a href="mailto:ospa@helsinki.fi">

@@ -9,11 +9,11 @@ const forms = [
     name: 'Koulutusuudistusarviointi - koulutusohjelmat',
     type: 'degree-reform',
   },
-  {
-    key: 3,
-    name: 'Koulutusuudistusarviointi - yksilöt',
-    type: 'degree-reform',
-  },
+  // {
+  //   key: 3,
+  //   name: 'Koulutusuudistusarviointi - yksilöt',
+  //   type: 'degree-reform',
+  // },
   {
     key: 4,
     name: 'Katselmus - koulutusohjelmat',

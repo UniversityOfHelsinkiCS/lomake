@@ -10,7 +10,6 @@ import bigWheel from 'Assets/big_wheel.jpg'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { getPreviousAnswersAction } from 'Utilities/redux/previousAnswersReducer'
 import individualQuestionData from '../../../degreeReformIndividualQuestions.json'
 import questionData from '../../../degreeReformQuestions.json'
 import DegreeReformForm from './DegreeReformForm'
@@ -30,9 +29,6 @@ const DegreeReformIndividual = () => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const formNumber = 3
-  useEffect(() => {
-    dispatch(getPreviousAnswersAction(3))
-  }, [])
 
   const writeAccess = (user.access[formNumber] && user.access[formNumber].write) || isAdmin(user)
   const readAccess = (user.access[formNumber] && user.access[formNumber].read) || isAdmin(user)

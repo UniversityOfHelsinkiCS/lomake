@@ -11,7 +11,7 @@ import ComparisonPage from 'Components/ComparisonPage'
 import EvaluationOverview from 'Components/EvaluationView/EvaluationOverview'
 import EvaluationFormView from 'Components/EvaluationView/EvaluationFormView'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
-import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
+// import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
 import threeStepImage from '../assets/degreeReform/study_path.png'
@@ -33,7 +33,7 @@ export default () => (
         path="/degree-reform/form/:room"
         render={props => <DegreeReformFormView room={props.match.params.room} />}
       />
-      <Route exact path="/degree-reform-individual/form" component={DegreeReformIndividualForm} />
+      {/* <Route exact path="/degree-reform-individual/form" component={DegreeReformIndividualForm} /> */}
       <Route
         exact
         path="/evaluation/form/:form/:room"
