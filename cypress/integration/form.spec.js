@@ -96,4 +96,44 @@ describe('Yearly assessment form tests', () => {
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').should('contain.text', 'new words')
   })
+
+  it("Closing a form and doesn't affect other forms' data", () => {
+    cy.login('admin')
+    cy.visit('/')
+
+    // open another form
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.get('[data-cy=form-4-deadline]').contains('14.')
+
+    cy.login('cypressUser')
+    cy.visit('/')
+
+    // write to yearly form
+    cy.visit(`/form/${testProgrammeCode}`)
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.get('[data-cy=textarea-employability]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').type('new words').wait(300)
+    cy.reload()
+    cy.visit('/')
+
+    cy.login('admin')
+    cy.visit('/')
+
+    // close the other form
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.closeDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+    cy.get('[data-cy=form-4-deadline]').should('not.exist')
+
+    cy.login('cypressUser')
+    cy.visit('/')
+
+    // check yearly assessment form
+    cy.visit(`/form/${testProgrammeCode}`)
+    cy.get('[data-cy=textarea-employability]').find('.editor-class').should('contain.text', 'new words')
+  })
 })
