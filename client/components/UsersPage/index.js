@@ -6,7 +6,7 @@ import { getAllUsersAction } from 'Utilities/redux/usersReducer'
 import { isSuperAdmin } from '@root/config/common'
 import UserTable from './UserTable'
 import IamTable from './IamTable'
-import DeadlineInfo from './DeadlineInfo'
+// import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
@@ -42,14 +42,14 @@ export default () => {
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: t('users:deadline'),
-      render: () => (
-        <Tab.Pane>
-          <DeadlineInfo />
-        </Tab.Pane>
-      ),
-    },
+    // {
+    //   menuItem: t('users:deadline'),
+    //   render: () => (
+    //     <Tab.Pane>
+    //       <DeadlineInfo />
+    //     </Tab.Pane>
+    //   ),
+    // },
     {
       menuItem: t('users:tempAccess'),
       render: () => (
