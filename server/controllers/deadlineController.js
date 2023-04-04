@@ -11,8 +11,10 @@ const createOrUpdate = async (req, res) => {
   }
 
   try {
-    // Unlock all programmes
-    await db.studyprogramme.update({ locked: false }, { where: {} })
+    if (form !== 3) {
+      // Unlock all programmes
+      await db.studyprogramme.update({ locked: false }, { where: {} })
+    }
 
     // Create new or update old deadline
     const existingDeadlines = await db.deadline.findAll({ where: { form } })
