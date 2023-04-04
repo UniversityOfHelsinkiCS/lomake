@@ -133,16 +133,27 @@ const updateField = async (socket, payload, io) => {
         },
       })
 
-      const [, [updatedAnswer]] = await db.tempAnswer.update(
-        { data: { ...currentAnswer.data, ...data } },
-        {
-          returning: true,
-          where: {
-            [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
-          },
-        }
-      )
-      socket.to(room).emit('new_form_data', updatedAnswer.data)
+      if (currentAnswer) {
+        const [, [updatedAnswer]] = await db.tempAnswer.update(
+          { data: { ...currentAnswer.data, ...data } },
+          {
+            returning: true,
+            where: {
+              [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
+            },
+          }
+        )
+        socket.to(room).emit('new_form_data', updatedAnswer.data)
+      } else {
+        // only should happen in individual users form
+        const createdAnswer = await db.tempAnswer.create({
+          data: { ...data },
+          programme: currentUser.uid,
+          year: await whereDraftYear(),
+          form,
+        })
+        socket.to(room).emit('new_form_data', createdAnswer.data)
+      }
     }
   } catch (error) {
     logger.error(`Database error: ${error}`)

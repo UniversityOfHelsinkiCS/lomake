@@ -420,9 +420,9 @@ export const getForm = formType => {
   if (formType === 'degree-reform-individual') {
     return 3
   }
-  if (formType === 'evaluation') {
-    return 4
-  }
+  // if (formType === 'evaluation') {
+  //   return 4
+  // } Needs finetuning for evaluation
   if (formType === 'yearlyAssesment') {
     return 1
   }

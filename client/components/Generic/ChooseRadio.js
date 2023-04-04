@@ -20,7 +20,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   }
   const handleClick = label => {
     setState({ value: label })
-    choose(id, label, 3)
+    choose(id, label, 3) // unnecessary 3 here?
   }
 
   useEffect(() => {
