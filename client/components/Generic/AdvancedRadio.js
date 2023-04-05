@@ -70,7 +70,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
             return (
               <Form.Field key={generateKey(o.label)}>
                 <Radio
-                  disbabled={viewOnly}
+                  disabled={viewOnly}
                   label={o.label}
                   name="radioGroup"
                   value={o.label}
