@@ -132,7 +132,6 @@ const updateField = async (socket, payload, io) => {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
-
       if (currentAnswer) {
         const [, [updatedAnswer]] = await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },
@@ -144,7 +143,7 @@ const updateField = async (socket, payload, io) => {
           }
         )
         socket.to(room).emit('new_form_data', updatedAnswer.data)
-      } else {
+      } else if (!currentAnswer && form === 3) {
         // only should happen in individual users form
         const createdAnswer = await db.tempAnswer.create({
           data: { ...data },
