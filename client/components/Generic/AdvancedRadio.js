@@ -76,6 +76,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
                   value={o.label}
                   checked={selected === o.id}
                   onChange={() => handleClick(o.id, '')}
+                  data-cy="unit-selection"
                 />
               </Form.Field>
             )

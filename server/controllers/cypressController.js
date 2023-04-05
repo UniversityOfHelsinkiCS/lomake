@@ -81,6 +81,12 @@ const resetForm = async () => {
         programme: testProgrammeCode,
       },
     })
+    // clean individual user test inputs
+    await db.tempAnswer.destroy({
+      where: {
+        programme: 'admin',
+      },
+    })
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
@@ -93,6 +99,12 @@ const resetAnswers = async () => {
     await db.answer.destroy({
       where: {
         programme: testProgrammeCode,
+      },
+    })
+    // clean individual user test inputs
+    await db.answer.destroy({
+      where: {
+        programme: 'admin',
       },
     })
   } catch (error) {

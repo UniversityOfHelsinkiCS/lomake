@@ -90,6 +90,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
                   checked={state.value === o.id}
                   onChange={() => handleClick(o.id)}
                   disabled={viewOnly}
+                  data-cy="reform-radio"
                 />
                 <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
                   {o.label}

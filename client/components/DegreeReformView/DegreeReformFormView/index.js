@@ -107,7 +107,7 @@ const DegreeReformFormView = ({ room }) => {
 
   const formType = 'degree-reform'
   return (
-    <div className="form-container">
+    <div className="form-container" data-cy="reform-form-group-container">
       <NavigationSidebar programmeKey={room} formType="degree-reform" />
       <div className="the-form">
         <div className="form-instructions">

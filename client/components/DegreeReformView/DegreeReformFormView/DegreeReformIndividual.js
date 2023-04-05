@@ -72,7 +72,7 @@ const DegreeReformIndividual = () => {
   })
 
   return (
-    <div className="form-container">
+    <div className="form-container" data-cy="reform-individual-form-container">
       <NavigationSidebar formType={formType} />
       <div className="the-form">
         <div className="form-instructions">
