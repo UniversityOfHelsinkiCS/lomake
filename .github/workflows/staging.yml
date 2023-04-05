@@ -346,6 +346,37 @@ jobs:
           name: Cypress screenshots
           path:  /home/runner/work/lomake/lomake/cypress/screenshots
 
+  test_degree_reform:
+    name: Test Degree Reform Form Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed"
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/degreeReform.spec.js"
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress videos
+          path:  /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+
   build:
     name: 'Build and publish staging image'
     needs:
@@ -360,6 +391,7 @@ jobs:
       - test_permissions
       - test_report
       - test_year_selector
+      - test_degree_reform
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -391,6 +423,7 @@ jobs:
       - test_permissions
       - test_report
       - test_year_selector
+      - test_degree_reform
       - build
     if: success()
     steps:
@@ -417,6 +450,7 @@ jobs:
       - test_permissions
       - test_report
       - test_year_selector
+      - test_degree_reform
       - build
     if: failure()
     steps:
