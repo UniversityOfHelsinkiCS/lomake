@@ -100,6 +100,8 @@ describe('Yearly assessment form tests', () => {
   it("Closing a form and doesn't affect other forms' data", () => {
     cy.login('admin')
     cy.visit('/')
+    // check page is ready
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
 
     // open another form
     cy.get('[data-cy=nav-admin]').click()
@@ -121,6 +123,8 @@ describe('Yearly assessment form tests', () => {
 
     cy.login('admin')
     cy.visit('/')
+    // check page is ready
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
 
     // close the other form
     cy.get('[data-cy=nav-admin]').click()
