@@ -120,7 +120,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').click()
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.get('[data-cy=textarea-learning_outcomes]').type(`{moveToEnd}, editing old year`).wait(1000)
+    cy.get('[data-cy=textarea-learning_outcomes]').type(`{moveToEnd}, editing old year`).wait(2000)
     cy.reload()
 
     // Check that edits have been added

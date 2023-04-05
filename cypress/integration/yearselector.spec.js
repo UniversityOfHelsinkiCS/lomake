@@ -58,7 +58,7 @@ describe("Previous year's answers", () => {
       .find('.editor-class')
       .click()
       .type('koira')
-      .wait(1000)
+      .wait(2000)
 
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
