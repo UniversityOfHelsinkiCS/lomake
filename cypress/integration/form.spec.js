@@ -16,7 +16,7 @@ describe('Yearly assessment form tests', () => {
   it('Can write to a textfield and the answer is saved.', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-community_wellbeing]').find('[contenteditable]').type('other words').wait(300)
+    cy.get('[data-cy=textarea-community_wellbeing]').find('[contenteditable]').type('other words').wait(1000)
     cy.reload()
 
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
@@ -49,7 +49,7 @@ describe('Yearly assessment form tests', () => {
     cy.get('#measures_4_text').should('not.exist')
     cy.get('#measures_3_text').type('3333')
     cy.get('#measures_4_text').type('4444')
-    cy.get('#measures_5_text').type('5555')
+    cy.get('#measures_5_text').type('5555').wait(1000)
     cy.get('#measures_6_text').should('not.exist')
 
     cy.reload()
@@ -71,7 +71,7 @@ describe('Yearly assessment form tests', () => {
   it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-recruitment_influence]').find('[contenteditable]').type('new words').wait(300)
+    cy.get('[data-cy=textarea-recruitment_influence]').find('[contenteditable]').type('new words').wait(1000)
     cy.reload()
     cy.visit('/')
 
@@ -89,7 +89,7 @@ describe('Yearly assessment form tests', () => {
     cy.visit('/evaluation/form/4/KH50_005')
     cy.wait(1000)
     cy.get('[data-cy=textarea-programme_structures]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-programme_structures]').find('[contenteditable]').type('evaluation words').wait(300)
+    cy.get('[data-cy=textarea-programme_structures]').find('[contenteditable]').type('evaluation words').wait(1000)
     cy.reload()
 
     // check yearly assessment form
@@ -115,7 +115,7 @@ describe('Yearly assessment form tests', () => {
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.get('[data-cy=textarea-employability]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').type('new words').wait(300)
+    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').type('new words').wait(1000)
     cy.reload()
     cy.visit('/')
 

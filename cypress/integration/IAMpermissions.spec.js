@@ -135,7 +135,7 @@ describe('IAM permission tests', () => {
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click().wait(200)
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report] [contenteditable=true]').type('random').wait(100)
+    cy.get('[data-cy=textarea-review_of_last_years_situation_report] [contenteditable=true]').type('random').wait(1000)
 
     cy.visit('/')
     cy.reload()
