@@ -19,10 +19,10 @@ router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
-router.get('/answers/:programme', requireProgrammeRead, answers.getOne) // TO FIX not in use?
+router.get('/answers/:programme', requireProgrammeRead, answers.getOne) // TO FIX route + function not in use?
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
-router.post('/answers', requireProgrammeWrite, answers.create)
-router.post('/bulkanswers', answers.bulkCreate)
+router.post('/answers', requireProgrammeWrite, answers.create) // TO FIX route + function not in use?
+router.post('/bulkanswers', answers.bulkCreate) // TO FIX route + function not in use?
 
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
