@@ -45,12 +45,13 @@ const getAllTempUserHasAccessTo = async (req, res) => {
 
 const getSingleProgrammesAnswers = async (req, res) => {
   try {
-    const { programme, year, form } = req.params
+    const { programme, form, year } = req.params
     const draftYears = await db.draftYear.findAll({})
     const draftYear = draftYears.length ? draftYears[0].year : null
 
     let data = null
-
+    // TO FIX comparing number to string = never happens
+    // How does everything still work?
     if (draftYear && draftYear === year) {
       data = await db.tempAnswer.findOne({
         where: {
@@ -66,6 +67,29 @@ const getSingleProgrammesAnswers = async (req, res) => {
     }
 
     const result = data ? data.data : {}
+
+    return res.status(200).json(result)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const getIndividualFormAnswers = async (req, res) => {
+  try {
+    // if (isAdmin(req.user) || isSuperAdmin(req.user)) {
+    //   const data = await db.answer.findAll({ where: { form: 3 } })
+    //   return res.status(200).json(data)
+    // }
+    const { uid } = req.user
+    const data = await db.answer.findOne({
+      where: {
+        programme: uid,
+        form: 3,
+      },
+    })
+
+    const result = data?.data || {}
 
     return res.status(200).json(result)
   } catch (error) {
@@ -170,6 +194,7 @@ module.exports = {
   getPreviousYear,
   bulkCreate,
   getAllTempUserHasAccessTo,
+  getIndividualFormAnswers,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
 }

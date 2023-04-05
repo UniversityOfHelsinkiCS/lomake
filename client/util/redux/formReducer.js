@@ -31,6 +31,12 @@ export const getSingleProgrammesAnswers = ({ room, year, form }) => {
   return callBuilder(route, prefix)
 }
 
+export const getSingleUsersAnswers = () => {
+  const route = '/answers/degreeReform/individualUsers'
+  const prefix = 'GET_USER_ANSWERS'
+  return callBuilder(route, prefix)
+}
+
 export const setAnswerLevels = answerLevels => ({
   type: 'SET_ANSWER_LEVELS',
   answerLevels,
@@ -74,6 +80,13 @@ export default (state = initialState, action) => {
         error: false,
       }
     case 'GET_TEMP_ANSWERS_SUCCESS':
+      return {
+        ...state,
+        data: action.response,
+        pending: false,
+        error: false,
+      }
+    case 'GET_USER_ANSWERS_SUCCESS':
       return {
         ...state,
         data: action.response,

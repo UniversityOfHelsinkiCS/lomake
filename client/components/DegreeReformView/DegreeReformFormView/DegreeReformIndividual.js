@@ -8,7 +8,7 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
-import { setViewOnly } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
 import individualQuestionData from '../../../degreeReformIndividualQuestions.json'
 import questionData from '../../../degreeReformQuestions.json'
 import DegreeReformForm from './DegreeReformForm'
@@ -35,30 +35,26 @@ const DegreeReformIndividual = () => {
   // TO FIX
   useEffect(() => {
     document.title = `${t('degree-reform-individual')}`
-    // dispatch(getProgramme(formNumber))
   }, [lang])
 
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === formNumber) : null
-  // const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-
-  const singleUserPending = 'To be done'
 
   const year = 2023
   const currentRoom = useSelector(state => state.room)
 
   useEffect(() => {
-    // dispatch(getSingleProgrammesAnswers({ year, formNumber }))
+    dispatch(getSingleUsersAnswers())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
         dispatch(wsLeaveRoom(uid))
       }
     } else {
-      dispatch(wsJoinRoom(uid))
+      dispatch(wsJoinRoom(uid, formNumber))
       dispatch(setViewOnly(false))
     }
-  }, [singleUserPending, year, draftYear, user])
+  }, [year, draftYear, user, formDeadline])
 
   if (!isAdmin(user)) return <Redirect to="/" />
 

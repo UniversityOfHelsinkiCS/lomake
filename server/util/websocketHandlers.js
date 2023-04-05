@@ -56,7 +56,26 @@ const getCurrentUser = async socket => {
 const joinRoom = async (socket, room, form, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
-    if (
+
+    if (form === 3) {
+      // handle individual users form
+      const [answer] = await db.tempAnswer.findOrCreate({
+        where: {
+          [Op.and]: [{ programme: currentUser.uid }, { year: 2023 }, { form }],
+        },
+        defaults: {
+          data: {},
+          programme: currentUser.uid,
+          year: 2023,
+          form: 3,
+        },
+      })
+
+      currentEditors = clearCurrentUser(currentUser)
+      socket.join(room)
+      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+      socket.emit('new_form_data', answer.data || {})
+    } else if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
       (currentUser.access[room] && currentUser.access[room].read)
@@ -66,7 +85,7 @@ const joinRoom = async (socket, room, form, io) => {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
         defaults: {
-          data: {},
+          data: {}, // TO FIX - this way creates null for prog + year, 1 for form (db default)
         },
       })
       currentEditors = clearCurrentUser(currentUser)
