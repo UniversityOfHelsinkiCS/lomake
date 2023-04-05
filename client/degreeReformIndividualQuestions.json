@@ -92,6 +92,26 @@
       { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
       { "label": "Opiskelija", "id": "student" },
       { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
+    ],
+    "en": [
+      { "label": "Dekaani / Varadekaani", "id": "dean" },
+      { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
+      {
+        "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "faculty_or_department_lead"
+      },
+      { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
+      { "label": "Opiskelija", "id": "student" },
+      { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
+    ],
+    "se": [
+      { "label": "Dekaani / Varadekaani", "id": "dean" },
+      { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
+      {
+        "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "faculty_or_department_lead"
+      },
+      { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
+      { "label": "Opiskelija", "id": "student" },
+      { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
     ]
   }
 },

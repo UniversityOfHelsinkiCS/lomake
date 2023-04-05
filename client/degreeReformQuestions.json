@@ -38,6 +38,16 @@
             { "label": "Kandidaattitason koulutus", "id": "bachelor"},
             { "label": "Maisteritason koulutus", "id": "masters" },
             { "label": "Tohtoritason koulutus", "id": "doctoral"}
+          ],
+          "en": [
+            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
+            { "label": "Maisteritason koulutus", "id": "masters" },
+            { "label": "Tohtoritason koulutus", "id": "doctoral"}
+          ],
+          "se": [
+            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
+            { "label": "Maisteritason koulutus", "id": "masters" },
+            { "label": "Tohtoritason koulutus", "id": "doctoral"}
           ]
         }
       }
