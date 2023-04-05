@@ -30,38 +30,66 @@ const startDeadlineWatcher = async () => {
       deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
 
-        programmes.forEach(async programme => {
-          const { key } = programme
+        if (form === 3) {
+          // handle individual users form
+          const allTempAnswers = await db.tempAnswer.findAll({ where: { form, year: draftYear } })
 
-          const tempAnswers = await db.tempAnswer.findOne({
-            where: {
-              [Op.and]: [{ programme: key, year: draftYear, form }],
-            },
-          })
+          if (allTempAnswers) {
+            allTempAnswers.forEach(async temp => {
+              const answer = await db.answer.findOne({
+                where: {
+                  [Op.and]: [{ programme: temp.programme }, { year: temp.year }, { form: temp.form }],
+                },
+              })
 
-          const answer = await db.answer.findOne({
-            where: {
-              [Op.and]: [{ programme: key }, { year: draftYear }, { form }],
-            },
-          })
+              const acualAnswers = temp.data || {}
 
-          const acualAnswers = tempAnswers ? tempAnswers.data : {}
-
-          if (answer) {
-            answer.data = acualAnswers
-            await answer.save()
-          } else {
-            await db.answer.create({
-              data: acualAnswers,
-              programme: key,
-              year: draftYear,
-              form,
-              submittedBy: 'cronJob',
+              if (answer) {
+                answer.data = acualAnswers
+                await answer.save()
+              } else {
+                await db.answer.create({
+                  data: acualAnswers,
+                  programme: temp.programme,
+                  year: draftYear,
+                  form,
+                  submittedBy: 'cronJob',
+                })
+              }
             })
           }
+        } else {
+          programmes.forEach(async programme => {
+            const { key } = programme
 
-          await programme.save()
-        })
+            const tempAnswers = await db.tempAnswer.findOne({
+              where: {
+                [Op.and]: [{ programme: key, year: draftYear, form }],
+              },
+            })
+
+            const answer = await db.answer.findOne({
+              where: {
+                [Op.and]: [{ programme: key }, { year: draftYear }, { form }],
+              },
+            })
+
+            const acualAnswers = tempAnswers ? tempAnswers.data : {}
+
+            if (answer) {
+              answer.data = acualAnswers
+              await answer.save()
+            } else {
+              await db.answer.create({
+                data: acualAnswers,
+                programme: key,
+                year: draftYear,
+                form,
+                submittedBy: 'cronJob',
+              })
+            }
+          })
+        }
 
         await db.deadline.destroy({
           where: { form },
