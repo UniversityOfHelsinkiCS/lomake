@@ -67,7 +67,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         content={
           <div className="user-programme-list-popup">
             {programmeKeys.map(p => (
-              <p>
+              <p key={p}>
                 {programmeCodesAndNames.get(p)}: {formatRights(user.access[p])}
               </p>
             ))}

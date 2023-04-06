@@ -59,13 +59,20 @@ const joinRoom = async (socket, room, form, io) => {
 
     if (form === 3) {
       // handle individual users form
+      let { uid } = currentUser
+      const loggedInAs = socket.request.headers['x-admin-logged-in-as']
+
+      if ((isAdmin(currentUser) || isSuperAdmin(currentUser)) && loggedInAs) {
+        uid = loggedInAs
+      }
+
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
-          [Op.and]: [{ programme: currentUser.uid }, { year: 2023 }, { form }],
+          [Op.and]: [{ programme: uid }, { year: 2023 }, { form }],
         },
         defaults: {
           data: {},
-          programme: currentUser.uid,
+          programme: uid,
           year: 2023,
           form: 3,
         },
