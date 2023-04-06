@@ -77,7 +77,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form style={direction === 'horizontal' ? { display: 'flex' } : null}>
+        <Form data-cy={`choose-radio-${id}`} style={direction === 'horizontal' ? { display: 'flex' } : null}>
           {radioButtonLabels.map(o => {
             return (
               <Form.Field
@@ -86,7 +86,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
               >
                 <Radio
                   name="radioGroup"
-                  id={id}
+                  id={o.id}
                   value={o.label}
                   label={
                     <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
@@ -96,7 +96,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
                   checked={state.value === o.id}
                   onChange={() => handleClick(o.id)}
                   disabled={viewOnly}
-                  data-cy="reform-radio"
+                  data-cy={`choose-radio-${o.id}`}
                 />
               </Form.Field>
             )
