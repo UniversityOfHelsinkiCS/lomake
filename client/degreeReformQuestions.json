@@ -86,7 +86,7 @@
       {
         "id": "knowledge_lead",
         "index": 6,
-        "type": "LIKERT",
+        "type": "CHOOSE-RADIO",
         "label": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
           "se": "",
