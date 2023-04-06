@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { testProgrammeCode } from '../../config/common'
+import { testProgrammeCode, defaultYears } from '../../config/common'
 import '../support/commands'
 
 describe('Degree reform form tests', () => {
@@ -33,4 +33,41 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=reform-radio]')
     cy.get('[data-cy=unit-selection]')
   })
+
+  it('Reform form for studyprogrammes can be opened and edited', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
+    cy.get('[data-cy=form-2-deadline]').contains('14.')
+    cy.visit(`/degree-reform/form/${testProgrammeCode}`)
+
+    // test you can click some buttons
+  })
+
+  it('Reform form for individual can be opened and edited', () => {
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
+    cy.get('[data-cy=form-3-deadline]').contains('14.')
+    cy.visit('/degree-reform-individual/form')
+
+    // test you can click some buttons
+  })
+
+  // programmes : click, reload, check data persists
+
+  // individual: click, reload, check data persists
+
+  // individual: check that correct data shown
+  //    login as someone else and make sure that they don't get admin's answers
 })
