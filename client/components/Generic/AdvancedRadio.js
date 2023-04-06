@@ -23,6 +23,8 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     return `${label}_${new Date().getTime()}`
   }
 
+  console.log(id, ,label,viewOnly)
+
   const handleClick = (firstPart, secondPart) => {
     if (firstPart && !secondPart) {
       setState({ value: `${firstPart}` })

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import ChooseRadio from 'Components/Generic/ChooseRadio'
-import Slider from 'Components/Generic/Slider'
 import InfoBox from 'Components/Generic/InfoBox'
 import Measures from 'Components/Generic/Measures'
 
@@ -22,7 +21,6 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     ENTITY: Entity,
     MEASURES: Measures,
     'CHOOSE-RADIO': ChooseRadio,
-    SLIDER: Slider,
     INFOBOX: InfoBox,
     'CHOOSE-ADVANCED': AdvancedRadio,
     CHECKBOX: CustomCheckbox,
@@ -62,7 +60,6 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
       part.type === 'ENTITY' ||
       part.type === 'MEASURES' ||
       part.type === 'CHOOSE-RADIO' ||
-      part.type === 'SLIDER' ||
       part.type === 'CHOOSE-ADVANCED' ||
       part.type === 'CHECKBOX'
     )

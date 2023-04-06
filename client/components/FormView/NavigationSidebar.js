@@ -83,7 +83,6 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
                       type === 'ENTITY' ||
                       type === 'MEASURES' ||
                       type === 'CHOOSE-RADIO' ||
-                      type === 'SLIDER' ||
                       type === 'SELECTION' ||
                       type === 'CHOOSE-ADVANCED' ||
                       type === 'CHECKBOX'
@@ -122,7 +121,6 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
                     return (
                       <div key={id}>
                         {(type === 'ENTITY' ||
-                          type === 'SLIDER' ||
                           type === 'CHOOSE-RADIO' ||
                           type === 'SELECTION' ||
                           type === 'CHOOSE-ADVANCED' ||

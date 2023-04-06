@@ -59,7 +59,6 @@ const Form = ({ questions, programmeKey, form }) => {
       part.type === 'ENTITY' ||
       part.type === 'MEASURES' ||
       part.type === 'CHOOSE-RADIO' ||
-      part.type === 'SLIDER' ||
       part.type === 'SELECTION'
     ) {
       number++
