@@ -113,7 +113,8 @@ const updateField = async (socket, payload, io) => {
     if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
-      (currentUser.access[room] && currentUser.access[room].write)
+      (currentUser.access[room] && currentUser.access[room].write) ||
+      room === currentUser.uid
     ) {
       const field = Object.keys(data)[0]
       const currentEditor = currentEditors[room] ? currentEditors[room][field] : undefined

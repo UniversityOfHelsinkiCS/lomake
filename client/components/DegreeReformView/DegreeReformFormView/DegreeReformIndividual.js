@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
+// import { Redirect } from 'react-router'
 
-import { isAdmin } from '@root/config/common'
+// import { isAdmin } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 
@@ -56,7 +56,7 @@ const DegreeReformIndividual = () => {
     }
   }, [year, draftYear, user, formDeadline])
 
-  if (!isAdmin(user)) return <Redirect to="/" />
+  // if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
 
