@@ -73,16 +73,17 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
       ) : (
         <div style={{ height: '1em' }} />
       )}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div data-cy={`choose-checkbox-${id}`} style={{ display: 'flex', flexDirection: 'column' }}>
         {options.map(o => {
           const checked = !!values.find(v => v.id === o.id && v.value)
           return (
             <Checkbox
+              data-cy={`choose-checkbox-${o.id}`}
               key={generateRandomKey(o.label)}
               style={{ marginTop: '1em' }}
               checked={checked}
               id={o.id}
-              label={o.label}
+              label={<label data-cy={`choose-checkbox-${o.id}`}>{o.label}</label>}
               onClick={() => handleClick(o.id)}
               disabled={viewOnly}
             />

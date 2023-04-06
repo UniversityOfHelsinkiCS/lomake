@@ -50,7 +50,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
   }
   return (
-    <div className="form-entity-area">
+    <div className="form-entity-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ maxWidth: '750px' }}>
@@ -89,14 +89,16 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
                   id={o.id}
                   value={o.label}
                   label={
-                    <label style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}>
+                    <label
+                      data-cy={`choose-radio-${o.id}`}
+                      style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}
+                    >
                       {o.label}
                     </label>
                   }
                   checked={state.value === o.id}
                   onChange={() => handleClick(o.id)}
                   disabled={viewOnly}
-                  data-cy={`choose-radio-${o.id}`}
                 />
               </Form.Field>
             )
