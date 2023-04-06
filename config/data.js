@@ -19,21 +19,22 @@ const forms = [
     name: 'Katselmus - koulutusohjelmat',
     type: 'evaluation',
   },
-  {
-    key: 5,
-    name: 'Katselmus - tiedekunnat',
-    type: 'evaluation',
-  },
-  {
-    key: 6,
-    name: 'Katselmus - toimikunta',
-    type: 'evaluation',
-  },
-  {
-    key: 7,
-    name: 'Katselmus - arviointiryhmä',
-    type: 'evaluation',
-  },
+  // Waiting to be configured
+  // {
+  //   key: 5,
+  //   name: 'Katselmus - tiedekunnat',
+  //   type: 'evaluation',
+  // },
+  // {
+  //   key: 6,
+  //   name: 'Katselmus - toimikunta',
+  //   type: 'evaluation',
+  // },
+  // {
+  //   key: 7,
+  //   name: 'Katselmus - arviointiryhmä',
+  //   type: 'evaluation',
+  // },
 ]
 
 const facultyMap = {
