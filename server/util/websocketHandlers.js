@@ -174,7 +174,7 @@ const updateField = async (socket, payload, io) => {
         // only should happen in individual users form
         const createdAnswer = await db.tempAnswer.create({
           data: { ...data },
-          programme: currentUser.uid,
+          programme: room,
           year: await whereDraftYear(),
           form,
         })

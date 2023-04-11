@@ -60,7 +60,7 @@ const handleMeasures = (yearData, relatedQuestion) => {
 }
 
 const findAnswers = (allOldAnswers, relatedQuestion) => {
-  const years = [2020, 2021, 2022]
+  const years = [2021, 2022, 2023]
   const result = {}
 
   years.forEach(year => {
@@ -100,8 +100,14 @@ const EvaluationFormView = ({ room, formString }) => {
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
 
-  const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
-  const targetURL = `/evaluation/previous-years/${room}`
+  const programmeYearlyAnswers = useSelector(state =>
+    state.oldAnswers.data.filter(a => a.programme === room && a.form === 1)
+  )
+
+  const faculty = programme?.primaryFaculty?.code || ''
+  const summaryURL = `/evaluation/previous-years/${room}`
+  const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
+  const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
@@ -238,15 +244,17 @@ const EvaluationFormView = ({ room, formString }) => {
             {t('negative')}
           </div>
 
-          <div>
-            <br /> <br />
+          <div style={{ marginTop: '2em' }}>
+            <h4 data-cy="formview-links">Taustamateriaali</h4>
+            <p>Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.</p>
             <p>
-              Alla linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia edellisen kolmen
-              vuoden ajalta.
+              Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä
+              vuodelta kyseiseen teemaan liityevien vuosiseurantakysymysten vastauksista.
             </p>
             <p>
-              Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä kyseiseen teemaan
-              vuosiseurannan kysymysten vastauksista.
+              Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja
+              koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä
+              koulutusohjelma- että tiedekuntatason näkymään.
             </p>
           </div>
 
@@ -257,12 +265,22 @@ const EvaluationFormView = ({ room, formString }) => {
               backgroundColor: colors.background_blue,
               padding: '1.5em 0.5em',
               borderRadius: '5px',
-              margin: '4em 0em 1em 0em',
+              margin: '2em 0em 1em 0em',
             }}
           >
-            <Link data-cy={`link-to-old-${room}-answers`} to={targetURL} target="_blank">
+            <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
+              <h4 style={{ marginBottom: '0.5em' }}>
+                Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
+              </h4>
+            </Link>
+            <Link data-cy={`link-to-oodikone-programme-${room}`} to={{ pathname: oodiProgURL }} target="_blank">
+              <h4 style={{ marginBottom: '0.5em' }}>
+                Tarkastele koulutusohjelman tietoja Oodikonessa <Icon name="external" />{' '}
+              </h4>
+            </Link>
+            <Link data-cy={`link-to-oodikone-faculty-${room}`} to={{ pathname: oodiFacultyURL }} target="_blank">
               <h4>
-                Tarkastele kolmen edellisen vuoden vastauksia <Icon name="external" />{' '}
+                Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
               </h4>
             </Link>
           </div>

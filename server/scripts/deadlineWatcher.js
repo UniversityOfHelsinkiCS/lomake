@@ -27,7 +27,7 @@ const startDeadlineWatcher = async () => {
 
       const programmes = await db.studyprogramme.findAll({})
 
-      deadlinesToday.forEach(async ({ form }) => {
+      await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
 
         if (form === 3) {
@@ -97,9 +97,7 @@ const startDeadlineWatcher = async () => {
       })
 
       // if no deadlines remain, lock programmes and destroy draftyear
-      const remainingDeadlines = await db.deadline.findAll({})
-
-      if (remainingDeadlines.length === 0) {
+      if (upcomingDeadlines.length === deadlinesToday?.length) {
         await db.draftYear.destroy({
           truncate: true,
         })
