@@ -14,7 +14,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
   const [buttons, setButtons] = useState(Array(stateLength).fill(0))
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
 
-  const yearSelection = form === 'evaluation' ? [2020, 2021, 2022] : multipleYears
+  const yearSelection = form === 'evaluation' ? [2019, 2020, 2021, 2022, 2023] : multipleYears
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>

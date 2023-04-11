@@ -90,7 +90,7 @@ const PastAnswersView = ({ programmeKey }) => {
   const questionsList = modifiedQuestions(questions, lang)
 
   const answersForYears = () => {
-    const all = [2020, 2021, 2022].map(year => {
+    const all = [2019, 2020, 2021, 2022, 2023].map(year => {
       const data = {
         year,
         answers: answersByQuestions({
