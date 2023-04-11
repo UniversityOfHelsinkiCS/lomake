@@ -13,7 +13,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
-  const choose = (name, id) => dispatch(updateFormField(name, id, form))
+  const choose = (field, value) => dispatch(updateFormField(field, value, form))
 
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
@@ -22,7 +22,6 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     setState({ value: label })
     choose(id, label)
   }
-
   useEffect(() => {
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
@@ -86,7 +85,6 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
               >
                 <Radio
                   name="radioGroup"
-                  id={o.id}
                   value={o.label}
                   label={
                     <label
