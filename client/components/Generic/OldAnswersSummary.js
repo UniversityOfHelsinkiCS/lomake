@@ -21,7 +21,7 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
         {years.map(year => {
           return (
             <Grid.Column width={4}>
-              {answer[year].count ? measuresCount(answer[year].count) : colorCircle(answer[year].light)}
+              {answer[year]?.count ? measuresCount(answer[year].count) : colorCircle(answer[year]?.light)}
             </Grid.Column>
           )
         })}
@@ -60,7 +60,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
   if (!relatedYearlyAnswers) {
     return null
   }
-  const years = [2020, 2021, 2022]
+  const years = [2021, 2022, 2023]
   const keys = Object.keys(relatedYearlyAnswers)
 
   return (
@@ -71,12 +71,16 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
           <Grid.Row className="row">
             <Grid.Column width={3}> </Grid.Column>
             {years.map(year => {
-              return <Grid.Column width={4}>{year}</Grid.Column>
+              return (
+                <Grid.Column width={4} key={year}>
+                  {year}
+                </Grid.Column>
+              )
             })}
             <Grid.Column width={1} />
           </Grid.Row>
           {keys.map(k => {
-            return <SummaryRow answer={relatedYearlyAnswers[k]} lang={lang} k={k} years={years} t={t} />
+            return <SummaryRow answer={relatedYearlyAnswers[k]} lang={lang} k={k} years={years} t={t} key={k} />
           })}
         </Grid>
       </div>

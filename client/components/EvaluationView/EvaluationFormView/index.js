@@ -60,7 +60,7 @@ const handleMeasures = (yearData, relatedQuestion) => {
 }
 
 const findAnswers = (allOldAnswers, relatedQuestion) => {
-  const years = [2020, 2021, 2022]
+  const years = [2021, 2022, 2023]
   const result = {}
 
   years.forEach(year => {
@@ -100,7 +100,9 @@ const EvaluationFormView = ({ room, formString }) => {
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
 
-  const programmeYearlyAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.programme === room))
+  const programmeYearlyAnswers = useSelector(state =>
+    state.oldAnswers.data.filter(a => a.programme === room && a.form === 1)
+  )
   const targetURL = `/evaluation/previous-years/${room}`
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
