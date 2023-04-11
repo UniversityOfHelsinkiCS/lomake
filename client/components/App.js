@@ -44,7 +44,7 @@ export default () => {
     if (oldAnswers.data) {
       if (
         deadlines.draftYear &&
-        deadlines.nextDeadline.length > 0 &&
+        deadlines?.nextDeadline?.length > 0 &&
         new Date(deadlines.nextDeadline.find(d => d.form === 1)?.date) >= new Date() &&
         currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
