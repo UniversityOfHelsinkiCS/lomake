@@ -52,7 +52,7 @@ initializeDatabaseConnection()
 
     logger.info(`I AM IN STAGING: ${inStaging}`)
 
-    if (!inProduction || !inStaging) {
+    if (!inProduction && !inStaging) {
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } /* else {
       if (process.env.SENTRY_ENVIRONMENT === 'staging') {
