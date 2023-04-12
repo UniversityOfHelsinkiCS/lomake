@@ -6,7 +6,7 @@ const path = require('path')
 
 require('express-async-errors')
 
-const { PORT, inProduction } = require('@util/common')
+const { PORT, inProduction, inStaging } = require('@util/common')
 const logger = require('@util/logger')
 
 const { initializeDatabaseConnection } = require('@root/server/database/connection')
@@ -50,8 +50,7 @@ initializeDatabaseConnection()
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
-    if (!inProduction) {
-      console.log('I am in production:', inProduction)
+    if (!inProduction || !inStaging) {
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } /* else {
       if (process.env.SENTRY_ENVIRONMENT === 'staging') {
@@ -60,7 +59,7 @@ initializeDatabaseConnection()
       require('esbuild').build(prodConfig).then(s => logger.info("Build successful"))
     } */
 
-    const DIST_PATH = inProduction
+    const DIST_PATH = (inProduction || inStaging)
       ? path.resolve(__dirname, './build')
       : path.resolve(__dirname, './dev')
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
