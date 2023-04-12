@@ -10,6 +10,7 @@ const devConfig = {
     'process.env.BASE_PATH': "'/'",
     'process.env.NODE_ENV': "'development'",
     'process.env.ENVIRONMENT': "'development'",
+    'process.env.SENTRY_ENVIRONMENT': "'development'",
     global: 'window',
   },
   plugins: [sassPlugin()],

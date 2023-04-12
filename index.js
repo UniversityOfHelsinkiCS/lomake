@@ -51,6 +51,7 @@ initializeDatabaseConnection()
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
     if (!inProduction) {
+      console.log('I am in production:', inProduction)
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } /* else {
       if (process.env.SENTRY_ENVIRONMENT === 'staging') {
