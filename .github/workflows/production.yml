@@ -6,19 +6,32 @@ on:
 
 jobs:
   build:
+    name: 'Build and publish production image'
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: Publish to DockerHub
-        uses: docker/build-push-action@v1.1.0
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
         with:
-          repository: toska/lomake
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          build_args: |
+          image: lomake
+          tags: production ${{ github.sha }}
+          containerfiles: |
+            ./Dockerfile
+          build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=production
-          tags: production
+
+      - name: Push to quay.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: quay.io/toska
+          username: toska+github
+          password: ${{ secrets.QUAY_IO_TOKEN }}
 
   report_success:
     name: 'Report release success to Tilku-channel'
