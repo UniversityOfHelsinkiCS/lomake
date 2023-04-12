@@ -273,16 +273,16 @@ const EvaluationFormView = ({ room, formString }) => {
                 Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
               </h4>
             </Link>
-            <Link data-cy={`link-to-oodikone-programme-${room}`} to={{ pathname: oodiProgURL }} target="_blank">
+            <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
               <h4 style={{ marginBottom: '0.5em' }}>
                 Tarkastele koulutusohjelman tietoja Oodikonessa <Icon name="external" />{' '}
               </h4>
-            </Link>
-            <Link data-cy={`link-to-oodikone-faculty-${room}`} to={{ pathname: oodiFacultyURL }} target="_blank">
+            </a>
+            <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
               <h4>
                 Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
               </h4>
-            </Link>
+            </a>
           </div>
         </div>
         <EvaluationForm programmeKey={programme.key} questions={questions} yearlyAnswers={yearlyAnswers} form={form} />
