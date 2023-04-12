@@ -50,8 +50,6 @@ initializeDatabaseConnection()
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
 
-    logger.info(`I AM IN STAGING: ${inStaging}`)
-
     if (!inProduction && !inStaging) {
       require('esbuild').build(devConfig).then(s => logger.info("Build successful"))
     } /* else {
@@ -65,8 +63,6 @@ initializeDatabaseConnection()
       ? path.resolve(__dirname, './build')
       : path.resolve(__dirname, './dev')
     const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
-
-    logger.info(`DIST PATH: ${DIST_PATH}`)
 
     app.use(express.static(DIST_PATH))
     app.get('*', (req, res) => res.sendFile(INDEX_PATH))
