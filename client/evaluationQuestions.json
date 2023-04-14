@@ -204,7 +204,7 @@
         }
       },
       {
-        "id": "ease_of_study_strengths_information_used",
+        "id": "ease_of_study_strengths_information_needed",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -418,7 +418,7 @@
         }
       },
       {
-        "id": "programme_structure_information_used",
+        "id": "programme_structure_information_needed",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
