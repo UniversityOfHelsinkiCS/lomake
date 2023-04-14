@@ -10,7 +10,6 @@ import bigWheel from 'Assets/big_wheel.jpg'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
 import individualQuestionData from '../../../degreeReformIndividualQuestions.json'
-import questionData from '../../../degreeReformQuestions.json'
 import DegreeReformForm from './DegreeReformForm'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => {
@@ -59,18 +58,6 @@ const DegreeReformIndividual = () => {
   // if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
-
-  const questions = questionData.map(q => {
-    if (q.id === 0 && q.parts.length === 1) {
-      const individualSubarray = individualQuestionData.slice(0, 2)
-      const lastInfobox = individualQuestionData.slice(2, 3)
-      q.parts = individualSubarray.concat(q.parts)
-      q.parts = q.parts.concat(lastInfobox)
-      return q
-    }
-    return q
-  })
-
   return (
     <div className="form-container" data-cy="reform-individual-form-container">
       <NavigationSidebar formType={formType} />
@@ -83,7 +70,7 @@ const DegreeReformIndividual = () => {
             {t('degree-reform-individual')} 2023
           </h3>
         </div>
-        <DegreeReformForm questionData={questions} formType={formType} />
+        <DegreeReformForm questionData={individualQuestionData} formType={formType} />
       </div>
     </div>
   )

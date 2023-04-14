@@ -1,60 +1,6 @@
 [
   {
     "title": {
-      "fi": "Taustatiedot",
-      "se": "",
-      "en": ""
-    },
-    "id": 0,
-    "parts": [
-      {
-        "id": "view-is-based-on",
-        "index": 2,
-        "type": "CHECKBOX",
-        "shortLabel": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Valintasi mukaan saat vastattavaksi valitsemaasi tutkintotasoa koskevat kysymykset (kysymykset eriytyvät)",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": {
-          "fi": [
-            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
-            { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral"}
-          ],
-          "en": [
-            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
-            { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral"}
-          ],
-          "se": [
-            { "label": "Kandidaattitason koulutus", "id": "bachelor"},
-            { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral"}
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "title": {
       "fi": "Koulutusuudistuksen tavoitteet",
       "se": "",
       "en": ""
@@ -538,7 +484,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti. ",
+          "fi": "<p>Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti. <a href='https://opetushallinto.cs.helsinki.fi/tilannekuva/three-step' target='_blank'>ks. lisätietoa</a></p>",
           "se": "",
           "en": ""
         },
