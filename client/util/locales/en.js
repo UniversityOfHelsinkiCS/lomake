@@ -12,7 +12,7 @@ export default {
     positive: 'No issues',
     neutral: 'Challenges identified and development underway',
     negative: 'Significant measures required/development areas not yet specified',
-    noColors: '*Questions, without smileys are not shown here (e.g. 16 and 17)',
+    noColors: '*Questions, without traffic lights are not shown here (e.g. 16 and 17)',
     green: 'Green',
     yellow: 'Yellow',
     red: 'Red',
@@ -36,7 +36,7 @@ export default {
     clearSelection: 'Clear selection',
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
-    smileyColors: ' Smiley colors',
+    smileyColors: 'Traffic lights',
 
     choose: 'Choose',
     colors_all: 'all',
@@ -66,7 +66,7 @@ export default {
     howToFill: `
     The questions are meant to arouse discussion around the respective topic, and each programme is suppose to write down the main points of that conversation. 
     Additionally, a separate list of measures is created for the programme itself, and another list regarding the measures for the faculty-wide planning.
-    The programmes give also a general assessment of the situation via the colored smileys / traffic lights. These color answers are supposed to answer the question "Where are we now?" in relation
+    The programmes give also a general assessment of the situation via traffic lights. These color answers are supposed to answer the question "Where are we now?" in relation
     to the subject at hand. The color answers are meant only as a conversation starter, thus no judgements or conclusions are drawn about the quality of the programme based on them. `,
     whatElseTitle: 'What else can I do with the form?',
     whatElse:
@@ -107,7 +107,7 @@ export default {
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
     info2:
-      "Please provide an overall assessment of the programme's current status (“Where are we now?”) with regard to each topic using the following system of emoji:",
+      "Please provide an overall assessment of the programme's current status with regard to each topic using the following system of traffic lights:",
     downloadCSV: 'Download all data as a CSV file',
     downloadPDF: 'Print / Download answers as a PDF-file',
     mandatory: 'required field',
@@ -158,10 +158,10 @@ export default {
     statusMessage: 'Year can be selected from the dropdown below the headline. Final day for answering the form is: ',
 
     csvFileformwritten: 'Written_answers',
-    csvFileformcolors: 'Colored_smileys',
+    csvFileformcolors: 'Traffic_lights',
     csvFileoverviewwritten: 'All_the_programmes_written_answers',
-    csvFileoverviewcolors: 'All_the_programmes_colored_smileys',
-    colors: 'Emoji colors',
+    csvFileoverviewcolors: 'All_the_programmes_traffic_lights',
+    colors: 'Traffic lights',
     written: 'Written answers',
   },
 

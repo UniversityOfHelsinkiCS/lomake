@@ -7,7 +7,7 @@ export default {
     positive: 'I sin ordning',
     neutral: 'Utmaningarna har identifierats och utvecklingsarbete pågår',
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
-    noColors: '*Frågor utan smilisar visas inte alls (t.ex. 16 och 17)',
+    noColors: '*Frågor utan trafikljus visas inte alls (t.ex. 16 och 17)',
     green: 'Grön',
     yellow: 'Gul',
     red: 'Röd',
@@ -31,7 +31,7 @@ export default {
     clearSelection: 'Rensa urval',
     responses: 'Svar:',
     writtenAnswers: 'Skriftliga svar',
-    smileyColors: 'Smilis färger',
+    smileyColors: 'Trafikljus',
 
     choose: 'Välj',
     colors_all: 'alla',
@@ -58,7 +58,7 @@ export default {
     howToFill: ` 
     Frågorna i självbedömningsblanketten är avsedda att väcka diskussion, och inte att besvaras som sådana.
     I blanketten antecknas kortfattat diskussionens huvudpunkter. Dessutom skapas både en lista på åtgärder för själva programmet, och en separat lista för fakultetens planer.
-    För varje tema ges en allmän bedömning (trafikljus/smilis). Denna bedömning är avsedd att starta en diskussion, inte att dra slutsatser om verksamhetens kvalitet.`,
+    För varje tema ges en allmän bedömning (trafikljus). Denna bedömning är avsedd att starta en diskussion, inte att dra slutsatser om verksamhetens kvalitet.`,
     whatElseTitle: 'Vad annat kan man göra med blanketten?',
     whatElse:
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
@@ -97,7 +97,7 @@ export default {
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
-    info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av smilis',
+    info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av trafikljus',
     downloadCSV: 'Ladda ner svaren i en csv-fil',
     downloadPDF: 'Skriv ut / Ladda ner svaren i en PDF-fil',
     mandatory: 'obligatoriskt fält',
@@ -147,10 +147,10 @@ export default {
     statusMessage: 'År kan väljas i rullgardinsmenyn nedanför rubriken. Sista dagen blanketten kan svaras på är:',
 
     csvFileformwritten: 'Skriftliga_svar',
-    csvFileformcolors: 'Färgade_smilisar',
+    csvFileformcolors: 'Trafikljus',
     csvFileoverviewwritten: 'Alla_program_skriftliga_svar',
-    csvFileoverviewcolors: 'Alla_program_färgade_smilisar',
-    colors: 'Smilisfärger',
+    csvFileoverviewcolors: 'Alla_program_trafikljus',
+    colors: 'Trafikljus',
     written: 'Skriftliga svar',
   },
 
