@@ -8,7 +8,8 @@ import { useTranslation } from 'react-i18next'
 import { romanize, colors } from 'Utilities/common'
 import questions from '../../questions.json'
 import evaluationQuestions from '../../evaluationQuestions.json'
-import koulutusuudistusQuestions from '../../degreeReformQuestions.json'
+import degreeReformQuestions from '../../degreeReformQuestions.json'
+import degreeReformIndividualQuestions from '../../degreeReformIndividualQuestions.json'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -31,15 +32,18 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
 
   let questionsToShow = questions
   let linkBase = '/form/'
+  let isDegreeForm = false
   if (formType === 'evaluation') {
     questionsToShow = evaluationQuestions
     linkBase = '/evaluation/form/'
   } else if (formType === 'degree-reform') {
-    questionsToShow = koulutusuudistusQuestions
+    questionsToShow = degreeReformQuestions
     linkBase = '/degree-reform/form/'
+    isDegreeForm = true
   } else if (formType === 'degree-reform-individual') {
-    questionsToShow = koulutusuudistusQuestions
+    questionsToShow = degreeReformIndividualQuestions
     linkBase = '/degree-reform-individual/form/'
+    isDegreeForm = true
   }
   const formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
 
@@ -49,6 +53,9 @@ const NavigationSidebar = ({ programmeKey, formType }) => {
       <Message style={{ padding: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
           {questionsToShow.map((section, index) => {
+            if (isDegreeForm) {
+              partNumber = 0
+            }
             const titleFromJson = section.title[lang]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
             const romanNumeral = romanize(index) || '0'
