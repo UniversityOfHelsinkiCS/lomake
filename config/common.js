@@ -4,7 +4,9 @@
 
 const { data } = require('./data')
 
-const inProduction = process.env.NODE_ENV === 'production'
+const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
+
+const inStaging = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'staging'
 
 // Once the iams are in use, turn this to true
 // And later on, once everything is ok, remove the features behind this flag
@@ -105,7 +107,7 @@ const isDevSuperAdminUid = uid => {
 }
 
 const isStagingSuperAdminUid = uid => {
-  return process.env.NODE_ENV === 'staging' && process.env.TEST_SUPERADMIN === uid
+  return process.env.SENTRY_ENVIRONMENT === 'staging' && process.env.STAGING_ADMIN_USER === uid
 }
 
 const isSuperAdmin = user => {
@@ -182,6 +184,7 @@ const testIAM = 'hy-mltdk-tkt-jory'
 module.exports = {
   iamsInUse,
   inProduction,
+  inStaging,
   internationalAccess,
   basePath,
   defaultYears,

@@ -44,7 +44,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if ((!inProduction && loggedInAs && isDevSuperAdminUid(uid)) || isStagingSuperAdminUid(uid)) {
+  if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
     const user = await await db.user.findOne({ where: { uid: loggedInAs } })
     return user
   }

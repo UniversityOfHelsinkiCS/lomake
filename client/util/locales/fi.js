@@ -8,7 +8,7 @@ export default {
     positive: 'Kunnossa',
     neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
-    noColors: '*Kysymyksiä, joille ei ole määritetty hymiöitä, ei näytetä ollenkaan (esim. 16 ja 17)',
+    noColors: '*Kysymyksiä, joille ei ole määritetty liikennevaloja, ei näytetä ollenkaan (esim. 16 ja 17)',
     green: 'Vihreä',
     yellow: 'Keltainen',
     red: 'Punainen',
@@ -32,7 +32,7 @@ export default {
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
-    smileyColors: 'Hymiöiden värit',
+    smileyColors: 'Liikennevalojen värit',
 
     choose: 'Valitse',
     colors_all: 'kaikki',
@@ -64,7 +64,7 @@ export default {
     howToFill: ` 
     Tilannekuvalomakkeen aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. 
     Lomakkeelle kirjataan lyhyesti muistiin keskustelun pääkohdat. Lisäksi laaditaan toimenpidelista ohjelmalle itselleen ja erillinen toimenpidelista tiedekunnan suunnitelmia varten.
-    Kustakin aihealueesta annetaan yleisarvio (liikennevalot). ”Missä mennään?” -liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
+    Kustakin aihealueesta annetaan yleisarvio (liikennevalot). Liikennevaloarvio on tarkoitettu keskustelun herättämistä varten, eikä sen perusteella tehdä johtopäätöksiä toiminnan laadusta.`,
     whatElseTitle: 'Mitä muuta lomakkeella voi tehdä?',
     whatElse:
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
@@ -103,7 +103,7 @@ export default {
     title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
-    info2: 'Antakaa yleisarvio ”Missä mennään?” -kunkin aiheen kohdalla (liikennevalot):',
+    info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',
     downloadCSV: 'Lataa vastaukset csv-tiedostona',
     downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
     mandatory: 'pakollinen kenttä',
@@ -154,10 +154,10 @@ export default {
     statusMessage: 'Voit vaihtaa vuoden otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
 
     csvFileformwritten: 'Tilannekuvalomake_kirjalliset_vastaukset',
-    csvFileformcolors: 'Tilannekuvalomake_hymiöiden_värit',
+    csvFileformcolors: 'Tilannekuvalomake_liikennevalovärit',
     csvFileoverviewwritten: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
-    csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_hymiöiden_värit',
-    colors: 'Hymiöiden värit',
+    csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalovärit',
+    colors: 'Liikennevalovärit',
     written: 'Kirjalliset vastaukset',
   },
 

@@ -88,8 +88,8 @@ describe('Yearly assessment form tests', () => {
     // write to other form
     cy.visit('/evaluation/form/4/KH50_005')
     cy.wait(1000)
-    cy.get('[data-cy=textarea-programme_structures]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-programme_structures]').find('[contenteditable]').type('evaluation words').wait(2000)
+    cy.get('[data-cy=textarea-degree_flow]').find('.editor-class').click()
+    cy.get('[data-cy=textarea-degree_flow]').find('[contenteditable]').type('evaluation words').wait(2000)
     cy.reload()
 
     // check yearly assessment form
