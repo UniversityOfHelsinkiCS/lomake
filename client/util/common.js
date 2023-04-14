@@ -2,6 +2,9 @@
  * Insert common items here
  */
 import _ from 'lodash'
+import parse from 'html-react-parser'
+import DOMPurify from 'dompurify'
+
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 
@@ -427,6 +430,12 @@ export const getForm = formType => {
     return 1
   }
   return 1
+}
+
+export const sanitize = dirtyHTml => {
+  const clean = DOMPurify.sanitize(dirtyHTml)
+  const parsedHtml = parse(clean)
+  return parsedHtml
 }
 
 export * from '@root/config/common'
