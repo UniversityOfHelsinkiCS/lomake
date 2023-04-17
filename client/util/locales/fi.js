@@ -51,6 +51,7 @@ export default {
     'degree-reform': 'Koulutusuudistus',
     'degree-reform-group': 'Koulutusuudistus ryhmä',
     'degree-reform-individual': 'Koulutusuudistus yksilö',
+    'read-more': 'Lue lisää',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

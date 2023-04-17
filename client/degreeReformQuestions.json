@@ -37,8 +37,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
-          "se": "",
-          "en": ""
+          "se": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
+          "en": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. "
         },
         "shortLabel": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
@@ -470,7 +470,7 @@
     "id": 3,
     "parts": [
       {
-        "id": "information",
+        "id": "information-for-3",
         "index": 36,
         "type": "INFOBOX",
         "shortLabel": {
@@ -484,11 +484,10 @@
           "en": ""
         },
         "description": {
-          "fi": "<p>Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti. <a href='https://opetushallinto.cs.helsinki.fi/tilannekuva/three-step' target='_blank'>ks. lisätietoa</a></p>",
+          "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
           "se": "",
           "en": ""
-        },
-        "image": { "text": "ks. lisätietoa", "link": "/three-step" }
+        }
       },
       {
         "id": "transfer_inside_uni_and_applied_sciences",
@@ -632,7 +631,7 @@
     "id": 4,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-4",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
@@ -854,7 +853,7 @@
       {
         "id": "status",
         "index": 5,
-        "type": "INFOBOX",
+        "type": "information-for-5",
         "shortLabel": {
           "fi": "Arvioi kandiohjelmien toimivuutta.",
           "se": "",
@@ -1077,7 +1076,7 @@
     "id": 6,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-6",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
@@ -1283,7 +1282,7 @@
     "id": 7,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-7",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
@@ -1541,7 +1540,7 @@
     "id": 8,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-8",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
@@ -1767,7 +1766,7 @@
     "id": 9,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-9",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
@@ -2011,7 +2010,7 @@
     "id": 10,
     "parts": [
       {
-        "id": "status",
+        "id": "information-for-10",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
