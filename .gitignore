@@ -8,3 +8,5 @@ mock.json
 cypress/screenshots/
 cypress/videos/*
 .env
+scripts/my_username
+backups/*
