@@ -157,8 +157,8 @@ export default {
     csvFileformcolors: 'Tilannekuvalomake_liikennevalovärit',
     csvFileoverviewwritten: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
     csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalovärit',
-    colors: 'Liikennevalovärit',
-    written: 'Kirjalliset vastaukset',
+    colors: 'Lataa liikennevalovastaukset CSV-tiedostoina',
+    written: 'Lataa kirjalliset vastaukset CSV-tiedostoina',
   },
 
   overview: {

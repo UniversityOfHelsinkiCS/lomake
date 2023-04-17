@@ -161,8 +161,8 @@ export default {
     csvFileformcolors: 'Traffic_lights',
     csvFileoverviewwritten: 'All_the_programmes_written_answers',
     csvFileoverviewcolors: 'All_the_programmes_traffic_lights',
-    colors: 'Traffic lights',
-    written: 'Written answers',
+    colors: 'Download traffic light answers as a CSV file',
+    written: 'Download written answers as a CSV file',
   },
 
   overview: {
