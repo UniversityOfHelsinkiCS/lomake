@@ -110,10 +110,13 @@ const ColorTable = React.memo(
           if (
             cur.id.includes('information_needed') ||
             cur.id.includes('information_used') ||
+            cur.id.includes('opinion_differences') ||
+            cur.id.includes('programme_strengths') ||
             cur.type === 'TITLE' ||
             cur.type === 'INFOBOX' ||
             cur.type === 'SELECTION' ||
-            cur.type === 'ORDER'
+            cur.type === 'ORDER' ||
+            cur.type === 'ACTIONS'
           ) {
             return acc
           }

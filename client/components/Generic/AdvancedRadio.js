@@ -51,10 +51,14 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
           </h3>
         </div>
       </div>
-      <div className="advanced-radio-description">
-        {description}
-        <p className="form-question-extrainfo">{extrainfo}</p>
-      </div>
+      {description.length > 1 ? (
+        <div className="advanced-radio-description">
+          {description}
+          <p className="form-question-extrainfo">{extrainfo}</p>
+        </div>
+      ) : (
+        <div style={{ height: '1em' }} />
+      )}
       {radioButtonLabels ? (
         <Form>
           {radioButtonLabels.map(o => {
