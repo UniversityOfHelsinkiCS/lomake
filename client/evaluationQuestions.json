@@ -178,7 +178,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "ease_of_study_differences_information_used",
+        "id": "ease_of_study_opinion_differences",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -204,7 +204,7 @@
         }
       },
       {
-        "id": "ease_of_study_strengths_information_needed",
+        "id": "ease_of_study_programme_strengths",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -219,6 +219,26 @@
           "se": "",
           "en": ""
         }
+      }, 
+      {
+        "id": "ease_of_study_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "Kehittämiskohteet ja toimenpiteet",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "se": "",
+          "en": ""
+        },
+        "required": true
       }
     ] 
   },
@@ -392,7 +412,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "programme_structure_information_used",
+        "id": "programme_structure_opinion_differences",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -418,7 +438,7 @@
         }
       },
       {
-        "id": "programme_structure_information_needed",
+        "id": "programme_structure_programme_strengths",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
