@@ -49,7 +49,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
   }
   return (
-    <div className="form-entity-area" data-cy={`choose-radio-container-${id}`}>
+    <div className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ maxWidth: '750px' }}>
@@ -59,16 +59,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
         </div>
       </div>
       {description?.length > 1 ? (
-        <div
-          className="entity-description"
-          style={{
-            lineHeight: 2,
-            backgroundColor: colors.background_beige,
-            padding: '1em',
-            borderRadius: '5px',
-            margin: '1em 0',
-          }}
-        >
+        <div className="choose-radio-description">
           {description}
           <p className="form-question-extrainfo">{extrainfo}</p>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Checkbox } from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAnswerLevels, updateFormField } from 'Utilities/redux/formReducer'
-import { colors, getFilters, getForm } from 'Utilities/common'
+import { getFilters, getForm } from 'Utilities/common'
 import './Generic.scss'
 
 const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
@@ -47,46 +47,46 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
     }
   }
   return (
-    <div className="form-entity-area">
+    <div className="form-checkbox-area">
       <Divider />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="question-title">
         <div style={{ maxWidth: '750px' }}>
           <h3>
-            {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {label} {required && <span className="question-required">*</span>}
           </h3>
         </div>
       </div>
       {description?.length > 0 ? (
-        <div
-          className="entity-description"
-          style={{
-            lineHeight: 2,
-            backgroundColor: colors.background_beige,
-            padding: '1em',
-            borderRadius: '5px',
-            margin: '1em 0',
-          }}
-        >
+        <div className="checkbox-description">
           {description}
           <p className="form-question-extrainfo">{extrainfo}</p>
         </div>
       ) : (
         <div style={{ height: '1em' }} />
       )}
-      <div data-cy={`choose-checkbox-${id}`} style={{ display: 'flex', flexDirection: 'column' }}>
+      <div
+        className="ui checked checkbox"
+        data-cy={`choose-checkbox-${id}`}
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
         {options.map(o => {
           const checked = !!values.find(v => v.id === o.id && v.value)
           return (
-            <Checkbox
-              data-cy={`choose-checkbox-${o.id}`}
-              key={generateRandomKey(o.label)}
-              style={{ marginTop: '1em' }}
-              checked={checked}
-              id={o.id}
-              label={<label data-cy={`choose-checkbox-${o.id}`}>{o.label}</label>}
-              onClick={() => handleClick(o.id)}
-              disabled={viewOnly}
-            />
+            <div key={generateRandomKey(o.label)} style={{ marginTop: '1em' }}>
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                data-cy={`choose-checkbox-${o.id}`}
+                checked={checked}
+                id={o.id}
+                onChange={() => handleClick(o.id)}
+                disabled={viewOnly}
+                value={o.id}
+              />
+              <label data-cy="testing" htmlFor={o.id}>
+                {o.label}
+              </label>
+            </div>
           )
         })}
       </div>

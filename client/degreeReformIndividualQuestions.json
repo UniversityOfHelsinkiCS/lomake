@@ -231,8 +231,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
-          "se": "",
-          "en": ""
+          "se": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
+          "en": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. "
         },
         "shortLabel": {
           "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä. ",
@@ -283,7 +283,7 @@
       },
 
       {
-        "id": "Digitalization_and_university",
+        "id": "digitalization_and_university",
         "index": 9,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",

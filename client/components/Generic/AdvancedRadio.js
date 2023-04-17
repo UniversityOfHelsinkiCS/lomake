@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
-import { colors, getForm } from 'Utilities/common'
+import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import DropdownFilter from './DropdownFilter'
 
@@ -42,25 +42,16 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
   const selected = state.value.substring(0, indexOfine)
 
   return (
-    <div className="form-entity-area">
+    <div className="form-advanced-radio-area">
       <Divider />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="question-title">
         <div style={{ maxWidth: '750px' }}>
           <h3>
-            {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {label} {required && <span className="question-required">*</span>}
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
+      <div className="advanced-radio-description">
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
