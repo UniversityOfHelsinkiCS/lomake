@@ -136,7 +136,7 @@ describe('Degree reform form tests', () => {
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
-    cy.visit('/degree-reform-individual/form').wait(1000)
+    cy.visit('/degree-reform-individual/form').wait(3000)
 
     // Start filling in the form
 
@@ -144,6 +144,7 @@ describe('Degree reform form tests', () => {
       .find('input[type="checkbox"]')
       .as('checkbox')
       .check('bachelor', { force: true })
+      .wait(1000)
 
     cy.get('@checkbox').should('be.checked')
 
