@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { romanize, colors } from 'Utilities/common'
+import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
 import questions from '../../questions.json'
 import evaluationQuestions from '../../evaluationQuestions.json'
 import degreeReformQuestions from '../../degreeReformQuestions.json'
@@ -45,7 +45,13 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
     linkBase = '/degree-reform-individual/form/'
     isDegreeForm = true
   }
-  const formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
+
+  let formDataFilter = []
+  if (programmeKey) {
+    formDataFilter = getProgramAnswerLevels(programmeKey)
+  } else {
+    formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
+  }
 
   let partNumber = -1
   return (
