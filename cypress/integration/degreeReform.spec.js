@@ -152,7 +152,7 @@ describe('Degree reform form tests', () => {
       .contains('Opiskelija')
       .as('primary-role-radio')
       .click({ force: true })
-      .wait(500)
+      .wait(2000)
 
     cy.get('[data-cy=choose-radio-container-primary-role]').find('input[value=Opiskelija]').should('be.checked')
 
