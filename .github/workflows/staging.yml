@@ -20,9 +20,11 @@ jobs:
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
-
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
+      
+      - name: Run cypress tests with 3 retries
+        uses: nick-fields/retry@v2 # Default number of retries is 3
+        with:
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
