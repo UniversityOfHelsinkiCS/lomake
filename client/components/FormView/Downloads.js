@@ -6,6 +6,7 @@ const Downloads = ({ programme }) => {
   return (
     <div className="hide-in-print-mode" style={{ marginTop: '2em', display: 'flex' }}>
       <div
+        data-cy="csv-download"
         style={{
           display: 'flex',
           flexDirection: 'column',
