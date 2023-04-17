@@ -116,12 +116,20 @@ describe('Degree reform form tests', () => {
       .check("I don't know", { force: true })
       .wait(1000)
 
-    cy.get('@radio1').should('be.checked')
-    cy.get('@radio2').should('be.checked')
-    cy.get('@radio3').should('be.checked')
-    cy.get('@radio4').should('be.checked')
-    cy.get('@radio5').should('be.checked')
-    cy.get('@radio6').should('be.checked')
+    cy.reload()
+
+    cy.wait(3000)
+
+    cy.get('[data-cy=choose-radio-degree_abilities_in_changing_conditions] :checked')
+      .should('be.checked')
+      .and('have.value', '1')
+    cy.get('[data-cy=choose-radio-skills_for_worklife] :checked').should('be.checked').and('have.value', '2')
+    cy.get('[data-cy=choose-radio-degrees_give_skills_for_digitalization] :checked')
+      .should('be.checked')
+      .and('have.value', '3')
+    cy.get('[data-cy=choose-radio-digitalization_and_university] :checked').should('be.checked').and('have.value', '4')
+    cy.get('[data-cy=choose-radio-multiple_environments] :checked').should('be.checked').and('have.value', '5')
+    cy.get('[data-cy=choose-radio-studying_process] :checked').should('be.checked').and('have.value', "I don't know")
 
     // test you can click some buttons
   })
@@ -154,6 +162,12 @@ describe('Degree reform form tests', () => {
       .as('primary-role-radio')
       .click({ force: true })
       .wait(2000)
+
+    cy.get('[data-cy=choose-radio-container-primary-role]').find('input[value=Opiskelija]').should('be.checked')
+
+    cy.reload()
+
+    cy.wait(2000)
 
     cy.get('[data-cy=choose-radio-container-primary-role]').find('input[value=Opiskelija]').should('be.checked')
 
