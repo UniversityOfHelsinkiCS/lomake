@@ -47,7 +47,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
         )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
         {label && <p> {label}</p>}
-        {image ? <img src={studyPath} alt="three-step" /> : null}
+        {image ? <img src={studyPath} alt="three-step" style={{ maxWidth: '100%', height: 'auto' }} /> : null}
       </div>
       {accordion.fetched && accordion.lines > 4 ? (
         <Button
