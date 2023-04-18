@@ -1,42 +1,6 @@
 [
   {
     "title": {
-      "fi": "KATSELMUKSEN TAVOITTAVUUS",
-      "se": "",
-      "en": ""
-    },
-    "parts": [
-      {
-        "id": "outreach",
-        "index": 0,
-        "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Tavoittavuus",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "KATSELMUKSEN TAVOITTAVUUS",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Onko katselmuksesta tiedotetty koulutusohjelman yhteisössä ja onko kaikille jäsenille kerrottu mahdollisuuksista osallistua?",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": []
-      }
-    ] 
-  },
-  {
-    "title": {
       "fi": "OPISKELUN SUJUVUUS",
       "se": "",
       "en": ""

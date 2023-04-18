@@ -53,7 +53,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
     formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
   }
 
-  let partNumber = -1
+  let partNumber = formType === 'evaluation' ? 0 : -1
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>

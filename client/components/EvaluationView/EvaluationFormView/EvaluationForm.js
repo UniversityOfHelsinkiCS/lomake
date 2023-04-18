@@ -21,7 +21,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
     ACTIONS: Actions,
   }
 
-  let number = -1
+  let number = 0
 
   const partMap = part => {
     const summary =
@@ -100,7 +100,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
         return (
           <Section
             title={section.title[lang]}
-            number={romanize(index)}
+            number={romanize(index + 1)}
             key={section.title[lang]}
             programmeKey={programmeKey}
             form={form}
