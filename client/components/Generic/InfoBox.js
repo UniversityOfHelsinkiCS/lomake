@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Divider, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import studyPath from '../../assets/degreeReform/study_path.png'
 import './Generic.scss'
 
 const InfoBox = ({ id, label, description, extrainfo, image }) => {
@@ -12,6 +12,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
     lines = description.split(/\r\n|\r|\n/).length
     lines += label ? label.split(/\r\n|\r|\n/).length : 0
     lines += extrainfo ? extrainfo.split(/\r\n|\r|\n/).length : 0
+    if (image) lines += 10
     if (lines < 4) {
       setAccordion({ open: true, fetched: true, lines })
     } else {
@@ -46,13 +47,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
         )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
         {label && <p> {label}</p>}
-        {image ? (
-          <b>
-            <Link to={image.link} target="_blank">
-              {image.text}
-            </Link>
-          </b>
-        ) : null}
+        {image ? <img src={studyPath} alt="three-step" /> : null}
       </div>
       {accordion.fetched && accordion.lines > 4 ? (
         <Button

@@ -487,7 +487,9 @@
           "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
           "se": "",
           "en": ""
-        }
+        },
+        "image": { "text": "ks. lisätietoa", "link": "/three-step" }
+
       },
       {
         "id": "transfer_inside_uni_and_applied_sciences",
