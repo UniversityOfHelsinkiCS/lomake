@@ -4,9 +4,9 @@ import { Redirect, useHistory } from 'react-router'
 import { Button, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from 'Assets/rypsi.jpg'
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
+// import positiveEmoji from 'Assets/sunglasses.png'
+// import neutralEmoji from 'Assets/neutral.png'
+// import negativeEmoji from 'Assets/persevering.png'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import FormStatusMessage from 'Components/Generic/FormStatusMessage'
@@ -21,6 +21,7 @@ import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
 import questions from '../../questions.json'
 import Downloads from './Downloads'
+import './FormView.scss'
 
 const formShouldBeViewOnly = ({
   accessToTempAnswers,
@@ -144,33 +145,15 @@ const FormView = ({ room }) => {
             <p>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              alt="positive-emoji"
-              src={positiveEmoji}
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+            <div className="big-circle-green" />
             {t('positive')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
-            <img
-              src={neutralEmoji}
-              alt="neutral-emoji"
-              style={{
-                width: '40px',
-                height: 'auto',
-                marginRight: '5px',
-                marginTop: '5px',
-                marginBottom: '5px',
-              }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-yellow" />
             {t('neutral')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-            <img
-              src={negativeEmoji}
-              alt="negative-emoji"
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-red" />
             {t('negative')}
           </div>
         </div>

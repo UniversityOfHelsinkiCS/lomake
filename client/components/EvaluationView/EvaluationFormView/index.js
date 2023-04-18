@@ -13,9 +13,6 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
@@ -226,33 +223,15 @@ const EvaluationFormView = ({ room, formString }) => {
             <p>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              alt="positive-emoji"
-              src={positiveEmoji}
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+            <div className="big-circle-green" />
             {t('positive')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
-            <img
-              src={neutralEmoji}
-              alt="neutral-emoji"
-              style={{
-                width: '40px',
-                height: 'auto',
-                marginRight: '5px',
-                marginTop: '5px',
-                marginBottom: '5px',
-              }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-yellow" />
             {t('neutral')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-            <img
-              src={negativeEmoji}
-              alt="negative-emoji"
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-red" />
             {t('negative')}
           </div>
 
