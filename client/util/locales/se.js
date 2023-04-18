@@ -116,6 +116,10 @@ export default {
     // noSystemsSelected: '',
     // selectSystems: '',
     // mostUseful: '',
+    // developmentArea: '',
+    // actions: '',
+    // addDevelopmentArea: '',
+    // removeDevelopmentArea: '',
   },
 
   generic: {

@@ -123,6 +123,10 @@ export default {
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
+    developmentArea: 'Kehittämiskohde',
+    actions: 'Toimenpiteet',
+    addDevelopmentArea: 'Lisää kehittämiskohde',
+    removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
   },
 
   generic: {

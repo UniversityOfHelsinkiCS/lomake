@@ -127,6 +127,10 @@ export default {
     noSystemsSelected: 'No feedback systems selected.',
     selectSystems: 'Chooce a system by clicking',
     mostUseful: 'Most useful feedback systems',
+    developmentArea: 'Development area',
+    actions: 'Corrective actions',
+    addDevelopmentArea: 'Add development area',
+    removeDevelopmentArea: 'Delete last',
   },
 
   generic: {

@@ -285,7 +285,14 @@ const EvaluationFormView = ({ room, formString }) => {
             </a>
           </div>
         </div>
-        <EvaluationForm programmeKey={programme.key} questions={questions} yearlyAnswers={yearlyAnswers} form={form} />
+        <div style={{ paddingBottom: '6em' }}>
+          <EvaluationForm
+            programmeKey={programme.key}
+            questions={questions}
+            yearlyAnswers={yearlyAnswers}
+            form={form}
+          />
+        </div>
       </div>
     </div>
   )
