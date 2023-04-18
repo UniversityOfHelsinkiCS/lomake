@@ -437,5 +437,19 @@ export const sanitize = dirtyHTml => {
   const parsedHtml = parse(clean)
   return parsedHtml
 }
-
+export const getProgramAnswerLevels = programmeKey => {
+  let formDataFilter = []
+  if (programmeKey === 'MH30_001') {
+    formDataFilter = [8]
+  } else if (programmeKey === 'MH30_003') {
+    formDataFilter = [8]
+  } else if (programmeKey.substring(0, 1) === 'T') {
+    formDataFilter = [5, 6, 7]
+  } else if (programmeKey.substring(0, 2) === 'MH') {
+    formDataFilter = [5, 8]
+  } else if (programmeKey.substring(0, 2) === 'KH') {
+    formDataFilter = [6, 7, 8]
+  }
+  return formDataFilter
+}
 export * from '@root/config/common'

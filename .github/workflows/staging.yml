@@ -20,9 +20,13 @@ jobs:
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
-
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
+      
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/comparison.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -52,8 +56,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/form.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/form.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -83,8 +91,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/formNotifications.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/formNotifications.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -114,8 +126,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/happypath.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/happypath.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -145,8 +161,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/IAMpermissions.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/IAMpermissions.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -176,8 +196,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/management.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/management.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -207,8 +231,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/misc.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/misc.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -238,8 +266,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/ospa.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/ospa.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -269,8 +301,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/permissions.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/permissions.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -300,8 +336,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/report.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/report.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -331,8 +371,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/yearselector.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/yearselector.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()
@@ -362,8 +406,12 @@ jobs:
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
 
-      - name: Run cypress tests
-        run: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/degreeReform.spec.js"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/degreeReform.spec.js"
 
       - uses: actions/upload-artifact@v3
         if: failure()

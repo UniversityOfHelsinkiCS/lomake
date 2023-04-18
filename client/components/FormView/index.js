@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
-import { Button, Dropdown, Loader } from 'semantic-ui-react'
+import { Button, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import rypsiImage from 'Assets/rypsi.jpg'
 import positiveEmoji from 'Assets/sunglasses.png'
 import neutralEmoji from 'Assets/neutral.png'
 import negativeEmoji from 'Assets/persevering.png'
-import CsvDownload from 'Components/Generic/CsvDownload'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import FormStatusMessage from 'Components/Generic/FormStatusMessage'
@@ -18,10 +17,10 @@ import { colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
-import PDFDownload from './PDFDownload'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
 import questions from '../../questions.json'
+import Downloads from './Downloads'
 
 const formShouldBeViewOnly = ({
   accessToTempAnswers,
@@ -175,21 +174,7 @@ const FormView = ({ room }) => {
             {t('negative')}
           </div>
         </div>
-        <div className="hide-in-print-mode" style={{ marginTop: '2em' }}>
-          <Dropdown
-            className="button basic gray"
-            direction="left"
-            text={t('formView:downloadCSV')}
-            data-cy="csv-download"
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="written" />} />
-              <Dropdown.Item content={<CsvDownload programme={programme} view="form" wantedData="colors" />} />
-            </Dropdown.Menu>
-          </Dropdown>
-          <span style={{ margin: '0 0.5em', color: colors.gray }}>|</span>
-          <PDFDownload />
-        </div>
+        <Downloads programme={programme} />
         <Form programmeKey={programme.key} questions={questions} form={form} />
       </div>
     </div>

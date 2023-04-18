@@ -64,7 +64,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
         }}
       >
         {t('generic:measureLabel')}
-        <p className="form-question-extrainfo">{extrainfo}</p>
+        <span className="form-question-extrainfo">{extrainfo}</span>
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>
