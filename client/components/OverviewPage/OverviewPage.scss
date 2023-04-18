@@ -147,3 +147,28 @@ $DEGREE_REFORM_COUNT: 11;
 .vertical-text {
   writing-mode: vertical-lr;
 }
+
+@mixin traffic-light-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.traffic-light {
+  &-green {
+    @include traffic-light-basics;
+    background: $background-green;
+  }
+  &-yellow {
+    @include traffic-light-basics;
+    background: $background-yellow;
+  }
+  &-red {
+    @include traffic-light-basics;
+    background: $background-red;
+  }
+}
