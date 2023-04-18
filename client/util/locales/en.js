@@ -131,6 +131,10 @@ export default {
     actions: 'Corrective actions',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
+    evaluationInfo1:
+      "For this evaluation, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
+    evaluationInfo2:
+      "Discuss the following themes among the studyprogramme's steering group. Please note, that the <strong> yearly assessment for year 2023 should be done before this evaluation</strong>.",
   },
 
   generic: {

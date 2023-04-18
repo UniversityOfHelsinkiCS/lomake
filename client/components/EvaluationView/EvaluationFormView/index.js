@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Loader, Icon } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -207,10 +207,22 @@ const EvaluationFormView = ({ room, formString }) => {
 
           <div className="hide-in-print-mode">
             <StatusMessage programme={room} form={form} />
-            <p>
-              Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <b>kolmen viime vuoden ajalta</b>.
-            </p>
-            <p>Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista.</p>
+            <div
+              style={{
+                lineHeight: 2,
+                backgroundColor: colors.background_blue,
+                padding: '1.5em 0.5em',
+                borderRadius: '5px',
+                margin: '2em 0em 1em 0em',
+              }}
+            >
+              <p>
+                <Trans i18nKey="formView:evaluationInfo1" />
+              </p>
+              <p>
+                <Trans i18nKey="formView:evaluationInfo2" />
+              </p>
+            </div>
             <p>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>

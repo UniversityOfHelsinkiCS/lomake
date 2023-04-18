@@ -120,6 +120,8 @@ export default {
     // actions: '',
     // addDevelopmentArea: '',
     // removeDevelopmentArea: '',
+    // evaluationInfo1: '',
+    // evaluationInfo2: '',
   },
 
   generic: {
