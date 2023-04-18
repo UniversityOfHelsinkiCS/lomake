@@ -9,11 +9,13 @@ import './Generic.scss'
 
 const ActionElement = ({ t, id, form, viewOnly, index }) => {
   return (
-    <div style={{ padding: '1em 0em' }} key={index}>
-      <Label color="red" ribbon>
-        {t('formView:developmentArea')}
-      </Label>
-      <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} />
+    <div key={index}>
+      <div style={{ paddingLeft: '2em' }}>
+        <Label color="red" ribbon>
+          {t('formView:developmentArea')}
+        </Label>
+        <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} />
+      </div>
       <SimpleTextarea label={t('formView:actions')} id={`${id}_${index}`} viewOnly={viewOnly} form={form} />
       {/* <Textarea id={id} label={t('formView:actions')} EntityLastYearsAccordion={null} form={form} maxLength={500} /> */}
     </div>
@@ -44,7 +46,14 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
   }
 
   return (
-    <div className="form-entity-area">
+    <div
+      className="form-entity-area"
+      style={{
+        borderLeft: '5px solid',
+        borderColor: colors.background_black,
+        padding: '1em',
+      }}
+    >
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ maxWidth: '500px' }}>
