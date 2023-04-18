@@ -123,6 +123,14 @@ export default {
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
+    developmentArea: 'Kehittämiskohde',
+    actions: 'Toimenpiteet',
+    addDevelopmentArea: 'Lisää kehittämiskohde',
+    removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
+    evaluationInfo1:
+      'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
+    evaluationInfo2:
+      'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
   },
 
   generic: {
