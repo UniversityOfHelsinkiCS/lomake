@@ -7,6 +7,7 @@ on:
 jobs:
   tests:
     strategy:
+      fail-fast: false
       matrix:
         spec: [comparison, degreeReform, form, formNotifications, happypath, IAMpermissions, management, misc, ospa, permissions, report, sidebar, yearselector]
     name: Run tests
