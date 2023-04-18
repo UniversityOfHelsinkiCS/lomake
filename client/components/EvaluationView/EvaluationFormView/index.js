@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Loader, Icon } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -13,9 +13,6 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
@@ -207,40 +204,34 @@ const EvaluationFormView = ({ room, formString }) => {
 
           <div className="hide-in-print-mode">
             <StatusMessage programme={room} form={form} />
-            <p>
-              Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <b>kolmen viime vuoden ajalta</b>.
-            </p>
-            <p>Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista.</p>
+            <div
+              style={{
+                lineHeight: 2,
+                backgroundColor: colors.background_blue,
+                padding: '1.5em 0.5em',
+                borderRadius: '5px',
+                margin: '2em 0em 1em 0em',
+              }}
+            >
+              <p>
+                <Trans i18nKey="formView:evaluationInfo1" />
+              </p>
+              <p>
+                <Trans i18nKey="formView:evaluationInfo2" />
+              </p>
+            </div>
             <p>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              alt="positive-emoji"
-              src={positiveEmoji}
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+            <div className="big-circle-green" />
             {t('positive')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', margin: '5px 0' }}>
-            <img
-              src={neutralEmoji}
-              alt="neutral-emoji"
-              style={{
-                width: '40px',
-                height: 'auto',
-                marginRight: '5px',
-                marginTop: '5px',
-                marginBottom: '5px',
-              }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-yellow" />
             {t('neutral')}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}>
-            <img
-              src={negativeEmoji}
-              alt="negative-emoji"
-              style={{ width: '40px', height: 'auto', marginRight: '5px' }}
-            />{' '}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="big-circle-red" />
             {t('negative')}
           </div>
 
@@ -285,7 +276,14 @@ const EvaluationFormView = ({ room, formString }) => {
             </a>
           </div>
         </div>
-        <EvaluationForm programmeKey={programme.key} questions={questions} yearlyAnswers={yearlyAnswers} form={form} />
+        <div style={{ paddingBottom: '6em' }}>
+          <EvaluationForm
+            programmeKey={programme.key}
+            questions={questions}
+            yearlyAnswers={yearlyAnswers}
+            form={form}
+          />
+        </div>
       </div>
     </div>
   )

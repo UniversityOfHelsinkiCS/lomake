@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { images } from 'Utilities/common'
 import './AboutPage.scss'
 
 export default () => {
@@ -24,16 +23,6 @@ export default () => {
         <h3>{t('aboutPage:whatElseTitle')}</h3>
         <p>{t('aboutPage:whatElse')}</p>
         <p>{t('aboutPage:contactInfo')}</p>
-      </div>
-      <div className="footer">
-        <a href="https://toska.dev/">
-          <div className="footer text">
-            <p>{t('aboutPage:broughtBy')}</p>
-          </div>
-          <div className="footer logo">
-            <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="toska-logo" />
-          </div>
-        </a>
       </div>
     </>
   )

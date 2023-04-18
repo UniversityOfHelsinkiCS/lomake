@@ -30,6 +30,13 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
   const location = useLocation()
   const { t } = useTranslation()
 
+  const getCorrectRomanNumeral = index => {
+    if (formType === 'evaluation') {
+      return romanize(index + 1) || '0'
+    }
+    return romanize(index) || '0'
+  }
+
   let questionsToShow = questions
   let linkBase = '/form/'
   let isDegreeForm = false
@@ -53,7 +60,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
     formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
   }
 
-  let partNumber = -1
+  let partNumber = formType === 'evaluation' ? 0 : -1
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
@@ -64,7 +71,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
             }
             const titleFromJson = section.title[lang]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
-            const romanNumeral = romanize(index) || '0'
+            const romanNumeral = getCorrectRomanNumeral(index)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
               return <div key={`${section.title}-${section.id}`} />

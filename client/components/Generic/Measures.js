@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-// import { genericTranslations as translations } from 'Utilities/translations'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import SimpleTextarea from './SimpleTextarea'
 import './Generic.scss'
@@ -64,7 +63,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
         }}
       >
         {t('generic:measureLabel')}
-        <p className="form-question-extrainfo">{extrainfo}</p>
+        <span className="form-question-extrainfo">{extrainfo}</span>
       </p>
       {previousAnswerText && (
         <LastYearsAnswersAccordion>

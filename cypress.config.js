@@ -10,4 +10,12 @@ module.exports = defineConfig({
     supportFile: 'cypress/support/index.js',
     specPattern: 'cypress/integration/*.spec.js',
   },
+  retries: {
+    // Configure retry attempts for `cypress run`
+    // Default is 0
+    runMode: 2,
+    // Configure retry attempts for `cypress open`
+    // Default is 0
+    openMode: 0,
+  },
 })

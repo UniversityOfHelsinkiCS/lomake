@@ -1,0 +1,24 @@
+@import '../../assets/colors.scss';
+
+@mixin big-circle-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  margin: 2px 1em;
+}
+
+.big-circle {
+  &-green {
+    @include big-circle-basics;
+    background: $background-green;
+  }
+  &-yellow {
+    @include big-circle-basics;
+    background: $background-yellow;
+  }
+  &-red {
+    @include big-circle-basics;
+    background: $background-red;
+  }
+}

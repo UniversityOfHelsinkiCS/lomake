@@ -123,6 +123,14 @@ export default {
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
+    developmentArea: 'Kehittämiskohde',
+    actions: 'Toimenpiteet',
+    addDevelopmentArea: 'Lisää kehittämiskohde',
+    removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
+    evaluationInfo1:
+      'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
+    evaluationInfo2:
+      'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
   },
 
   generic: {
@@ -158,8 +166,8 @@ export default {
     csvFileformcolors: 'Tilannekuvalomake_liikennevalovärit',
     csvFileoverviewwritten: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
     csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalovärit',
-    colors: 'Liikennevalovärit',
-    written: 'Kirjalliset vastaukset',
+    colors: 'Lataa liikennevalovastaukset CSV-tiedostoina',
+    written: 'Lataa kirjalliset vastaukset CSV-tiedostoina',
   },
 
   overview: {

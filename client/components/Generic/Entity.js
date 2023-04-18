@@ -3,9 +3,6 @@ import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import positiveEmoji from 'Assets/sunglasses.png'
-import neutralEmoji from 'Assets/neutral.png'
-import negativeEmoji from 'Assets/persevering.png'
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
@@ -17,12 +14,6 @@ const mapColorToValid = {
   VIHREÄ: 'green',
   KELTAINEN: 'yellow',
   PUNAINEN: 'red',
-}
-
-const mapColorToImage = {
-  green: positiveEmoji,
-  yellow: neutralEmoji,
-  red: negativeEmoji,
 }
 
 const Entity = ({
@@ -50,13 +41,7 @@ const Entity = ({
     if (!previousAnswerText && !previousAnswerColor) return null
     return (
       <LastYearsAnswersAccordion>
-        {previousAnswerColor && (
-          <img
-            alt="previous-answer-color"
-            style={{ width: '40px', height: 'auto' }}
-            src={mapColorToImage[previousAnswerColor]}
-          />
-        )}
+        {previousAnswerColor && <div className={`circle-big-${previousAnswerColor}`} />}
         <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
       </LastYearsAnswersAccordion>
     )

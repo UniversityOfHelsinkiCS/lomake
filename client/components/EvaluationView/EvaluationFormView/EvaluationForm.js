@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Divider } from 'semantic-ui-react'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import Measures from 'Components/Generic/Measures'
@@ -20,7 +21,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
     ACTIONS: Actions,
   }
 
-  let number = -1
+  let number = 0
 
   const partMap = part => {
     const summary =
@@ -37,6 +38,22 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
       : {}
 
     if (part.type === 'TITLE') {
+      if (part.label.fi === 'KOULUTUSOHJELMAN KIRJAUKSET') {
+        return (
+          <h2
+            key={part.id}
+            style={{
+              marginTop: '1em !important',
+              padding: '0.5em',
+              borderRadius: '5px',
+              backgroundColor: colors.background_blue,
+              marginBottom: '0',
+            }}
+          >
+            {part.label[lang]}
+          </h2>
+        )
+      }
       return (
         <h2 key={part.id} style={divStyle}>
           {part.label[lang]}
@@ -48,29 +65,32 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'ACTIONS') number++
+    if (part.type === 'ENTITY') number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     return (
-      <div key={part.id} style={divStyle}>
-        <Component
-          id={part.id}
-          label={part.label[lang]}
-          description={description}
-          required={part.required}
-          noColor={part.no_color}
-          number={number}
-          extrainfo={extrainfo}
-          previousYearsAnswers={null}
-          formType={formType}
-          programme={programmeKey}
-          relatedYearlyAnswers={yearlyAnswers[part.id]}
-          form={form}
-        />
-      </div>
+      <>
+        {part.id.includes('_differences') && <Divider />}
+        <div key={part.id} style={divStyle}>
+          <Component
+            id={part.id}
+            label={part.label[lang]}
+            description={description}
+            required={part.required}
+            noColor={part.no_color}
+            number={number}
+            extrainfo={extrainfo}
+            previousYearsAnswers={null}
+            formType={formType}
+            programme={programmeKey}
+            relatedYearlyAnswers={yearlyAnswers[part.id]}
+            form={form}
+          />
+        </div>
+      </>
     )
   }
 
@@ -80,16 +100,11 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
         return (
           <Section
             title={section.title[lang]}
-            number={romanize(index)}
+            number={romanize(index + 1)}
             key={section.title[lang]}
             programmeKey={programmeKey}
             form={form}
           >
-            {/* {section.link_title && section.link_url && (
-              <a className="hide-in-print-mode" target="_blank" href={section.link_url} rel="noreferrer">
-                {section.link_title[lang]}
-              </a>
-            )} */}
             {section.parts.map(partMap)}
           </Section>
         )

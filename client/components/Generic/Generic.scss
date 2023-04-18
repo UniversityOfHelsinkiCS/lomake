@@ -204,6 +204,8 @@
   }
 }
 
+// ****************
+
 .emoji {
   width: 40px;
   height: auto;
@@ -229,6 +231,71 @@
   margin: 1em 0; 
 }
 
+@mixin answer-circle-big-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  margin: 5px;
+  filter: grayscale(50%);
+}
+
+
+@mixin selected-answer-circle-big-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  margin: 5px;
+  box-shadow: 5px 2px 2px $gray;
+}
+
+.unselected-animated {
+  cursor: pointer;
+  transition-duration: 300ms;
+  &:hover {
+    width: 56px;
+    height: 56px;
+    filter: grayscale(0%);
+  }
+}
+
+.selected-animated {
+  cursor: pointer;
+  transition-duration: 300ms;
+  &:hover {
+    width: 60px;
+    height: 60px
+  }
+}
+
+.circle-big-green {
+  @include answer-circle-big-basics;
+  background: $background-green;
+}
+.circle-big-yellow {
+  @include answer-circle-big-basics;
+  background: $background-yellow;
+}
+.circle-big-red {
+  @include answer-circle-big-basics;
+  background: $background-red;
+}
+
+.circle-big-green-selected {
+  @include selected-answer-circle-big-basics;
+  background: $background-green;
+}
+.circle-big-yellow-selected {
+  @include selected-answer-circle-big-basics;
+  background: $background-yellow;
+}
+.circle-big-red-selected {
+  @include selected-answer-circle-big-basics;
+  background: $background-red;
+}
+
+// ***************************
 .editor-class {
   background-color: $background-light-gray;
   padding: 1em;

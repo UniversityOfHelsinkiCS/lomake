@@ -116,6 +116,12 @@ export default {
     // noSystemsSelected: '',
     // selectSystems: '',
     // mostUseful: '',
+    // developmentArea: '',
+    // actions: '',
+    // addDevelopmentArea: '',
+    // removeDevelopmentArea: '',
+    // evaluationInfo1: '',
+    // evaluationInfo2: '',
   },
 
   generic: {
@@ -150,8 +156,8 @@ export default {
     csvFileformcolors: 'Trafikljus',
     csvFileoverviewwritten: 'Alla_program_skriftliga_svar',
     csvFileoverviewcolors: 'Alla_program_trafikljus',
-    colors: 'Trafikljus',
-    written: 'Skriftliga svar',
+    colors: 'Trafikljus', // check
+    written: 'Skriftliga svar', // check
   },
 
   overview: {

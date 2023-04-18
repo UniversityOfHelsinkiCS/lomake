@@ -1,42 +1,6 @@
 [
   {
     "title": {
-      "fi": "KATSELMUKSEN TAVOITTAVUUS",
-      "se": "",
-      "en": ""
-    },
-    "parts": [
-      {
-        "id": "outreach",
-        "index": 0,
-        "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Tavoittavuus",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "KATSELMUKSEN TAVOITTAVUUS",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Onko katselmuksesta tiedotetty koulutusohjelman yhteisössä ja onko kaikille jäsenille kerrottu mahdollisuuksista osallistua?",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": []
-      }
-    ] 
-  },
-  {
-    "title": {
       "fi": "OPISKELUN SUJUVUUS",
       "se": "",
       "en": ""
@@ -224,7 +188,7 @@
         "id": "ease_of_study_actions",
         "type": "ACTIONS",
         "label": {
-          "fi": "Kehittämiskohteet ja toimenpiteet",
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
           "se": "",
           "en": ""
         },
@@ -238,7 +202,8 @@
           "se": "",
           "en": ""
         },
-        "required": true
+        "required": true,
+        "no_color": true
       }
     ] 
   },
@@ -453,6 +418,27 @@
           "se": "",
           "en": ""
         }
+      }, 
+      {
+        "id": "programme_structure_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "no_color": true
       } 
     ] 
   }
