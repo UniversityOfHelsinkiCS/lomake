@@ -11,6 +11,7 @@ import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
+import Footer from './Footer/Footer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -64,9 +65,10 @@ export default () => {
 
   if (!currentUser.data || !studyProgrammes || !oldAnswers || !oldAnswers.data) return null
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <NavBar />
       <Router />
+      <Footer />
     </div>
   )
 }
