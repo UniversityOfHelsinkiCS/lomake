@@ -383,7 +383,7 @@
         "index": 20,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -641,7 +641,7 @@
         "index": 35,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -681,7 +681,9 @@
           "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
           "se": "",
           "en": ""
-        }
+        },
+        "image": { "text": "ks. lisätietoa", "link": "/three-step" }
+
       },
       {
         "id": "transfer_inside_uni_and_applied_sciences",
@@ -802,7 +804,7 @@
         "index": 43,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1022,7 +1024,7 @@
         "index": 52,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1247,7 +1249,7 @@
         "index": 61,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1453,7 +1455,7 @@
         "index": 70,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1711,7 +1713,7 @@
         "index": 83,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1937,7 +1939,7 @@
         "index": 94,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -2181,7 +2183,7 @@
         "index": 107,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -2344,7 +2346,7 @@
         "index": 104,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi halutessasi",
+          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
