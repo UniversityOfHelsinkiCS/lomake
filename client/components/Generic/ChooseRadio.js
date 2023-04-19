@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Popup, Icon } from 'semantic-ui-react'
+import { Divider, Popup, Icon, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 
@@ -16,9 +16,9 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const form = getForm(formType)
   const choose = (field, value) => dispatch(updateFormField(field, value, form))
 
-  const handleClick = label => {
-    setState({ value: label })
-    choose(id, label)
+  const handleClick = ({ value }) => {
+    setState({ value })
+    choose(id, value)
   }
   useEffect(() => {
     setState({ value: dataFromRedux })
@@ -36,12 +36,12 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
       idkButton = "I don't know"
     }
     radioButtonLabels = [
-      { id: 'number-first', label: 1 },
-      { id: 'number-second', label: 2 },
-      { id: 'number-third', label: 3 },
-      { id: 'number-fourth', label: 4 },
-      { id: 'number-fifth', label: 5 },
-      { id: 'text-idk', label: idkButton },
+      { id: 'first', label: 1 },
+      { id: 'second', label: 2 },
+      { id: 'third', label: 3 },
+      { id: 'fourth', label: 4 },
+      { id: 'fifth', label: 5 },
+      { id: 'idk', label: idkButton },
     ]
   } else {
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
@@ -77,14 +77,16 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
       ) : (
         <div style={{ height: '1em' }} />
       )}
-      <BasicRadio
-        id={id}
-        direction={direction}
-        handleClick={handleClick}
-        checked={state.value}
-        disabled={viewOnly}
-        radioButtonLabels={radioButtonLabels}
-      />
+      <Form>
+        <BasicRadio
+          id={id}
+          direction={direction}
+          handleClick={handleClick}
+          checked={state.value}
+          disabled={viewOnly}
+          radioButtonLabels={radioButtonLabels}
+        />
+      </Form>
     </div>
   )
 }

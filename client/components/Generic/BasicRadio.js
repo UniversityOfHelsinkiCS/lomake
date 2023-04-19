@@ -10,7 +10,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, c
   let selectedFirstPart = ''
   let selectedSecondPart = ''
 
-  const isThereALine = checked.indexOf('-') === -1
+  const isThereALine = checked.length > 0 ? checked.indexOf('-') !== -1 : false
   if (isThereALine) {
     const indexOfLine = checked.length
     selectedFirstPart = checked.substring(0, indexOfLine)
@@ -20,9 +20,8 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, c
     selectedSecondPart = checked.substring(indexOfLine + 1, checked.length)
   }
   const handleChange = value => {
-    handleClick(selectedFirstPart, value)
+    handleClick({ firstPart: selectedFirstPart, value })
   }
-
   return (
     <div>
       {radioButtonLabels ? (

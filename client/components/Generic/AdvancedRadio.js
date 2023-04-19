@@ -24,13 +24,13 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     return `${label}_${new Date().getTime()}`
   }
 
-  const handleClick = (firstPart, secondPart) => {
-    if (firstPart && !secondPart) {
+  const handleClick = ({ firstPart, value }) => {
+    if (firstPart && !value) {
       setState({ value: `${firstPart}` })
       choose(id, firstPart)
     } else {
-      setState({ value: `${firstPart}-${secondPart}` })
-      choose(id, `${firstPart}-${secondPart}`)
+      setState({ value: `${firstPart}-${value}` })
+      choose(id, `${firstPart}-${value}`)
     }
   }
 
