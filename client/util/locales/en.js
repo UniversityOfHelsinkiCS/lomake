@@ -56,6 +56,7 @@ export default {
     'degree-reform-group': 'Degree reform group',
     'degree-reform-individual': 'Degree reform individual',
     'read-more': 'Read more',
+    'read-less': 'Read less',
   },
 
   aboutPage: {

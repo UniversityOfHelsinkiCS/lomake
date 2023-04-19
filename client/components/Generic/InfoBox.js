@@ -53,7 +53,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
         <Button
           style={accordion.fetched && accordion.open ? null : { top: '-40px' }}
           className="infobox-button"
-          content={t('read-more')}
+          content={accordion.open ? t('read-less') : t('read-more')}
           onClick={() => setAccordion({ ...accordion, open: !accordion.open })}
         />
       ) : null}
