@@ -104,7 +104,7 @@
             { "label": "Dekaani / Varadekaani(en)", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta(en)", "id": "teaching_or_other_research" },
             { "label": "Hallinto- tai muu henkilökunta(en)", "id": "admin_or_other_staff" },
-            { "label": "Opiskelija(en)", "id": "student" },
+            { "label": "Student", "id": "student" },
             { "label": "Väitöskirjatutkija(en)", "id": "doctoral_thesis" }
           ],
           "se": [

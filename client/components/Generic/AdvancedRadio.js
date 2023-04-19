@@ -59,7 +59,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form>
+        <Form data-cy={`advanced-radio-${id}`}>
           {radioButtonLabels.map(o => {
             return (
               <div key={generateKey(o.label)}>
@@ -70,7 +70,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
                     name="radioGroup"
                     value={o.label}
                     checked={selected === o.id}
-                    onChange={() => handleClick(o.id, '')}
+                    onChange={() => handleClick({ firstPart: o.id, value: '' })}
                     data-cy="unit-selection"
                   />
                 </Form.Field>
@@ -80,6 +80,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
                     checked={state.value}
                     disabled={viewOnly}
                     id={id}
+                    type="advanced"
                     radioButtonLabels={advancedOptions[o.id][lang]}
                   />
                 ) : null}

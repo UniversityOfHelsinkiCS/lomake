@@ -80,37 +80,36 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
     cy.wait(3000)
-    cy.get('[data-cy=choose-radio-container-degree_abilities_in_changing_conditions]')
+    cy.get('[data-cy=choose-radio-degree_abilities_in_changing_conditions]')
       .find('input[type="radio"]')
-      .as('radio1')
       .check('1', { force: true })
       .wait(1000)
 
-    cy.get('[data-cy=choose-radio-container-skills_for_worklife]')
+    cy.get('[data-cy=choose-radio-skills_for_worklife]')
       .find('input[type="radio"]')
       .as('radio2')
       .check('2', { force: true })
       .wait(1000)
 
-    cy.get('[data-cy=choose-radio-container-degrees_give_skills_for_digitalization]')
+    cy.get('[data-cy=choose-radio-degrees_give_skills_for_digitalization]')
       .find('input[type="radio"]')
       .as('radio3')
       .check('3', { force: true })
       .wait(1000)
 
-    cy.get('[data-cy=choose-radio-container-digitalization_and_university]')
+    cy.get('[data-cy=choose-radio-digitalization_and_university]')
       .find('input[type="radio"]')
       .as('radio4')
       .check('4', { force: true })
       .wait(1000)
 
-    cy.get('[data-cy=choose-radio-container-multiple_environments]')
+    cy.get('[data-cy=choose-radio-multiple_environments]')
       .find('input[type="radio"]')
       .as('radio5')
       .check('5', { force: true })
       .wait(1000)
 
-    cy.get('[data-cy=choose-radio-container-studying_process]')
+    cy.get('[data-cy=choose-radio-studying_process]')
       .find('input[type="radio"]')
       .as('radio6')
       .check("I don't know", { force: true })
@@ -157,19 +156,19 @@ describe('Degree reform form tests', () => {
     cy.get('@checkbox').should('be.checked')
 
     cy.get('[data-cy=reform-individual-form-container')
-    cy.get('[data-cy=choose-radio-container-primary-role]')
-      .contains('Opiskelija')
+    cy.get('[data-cy=advanced-radio-primary-role]')
+      .contains('Student')
       .as('primary-role-radio')
       .click({ force: true })
       .wait(2000)
 
-    cy.get('[data-cy=choose-radio-container-primary-role]').find('input[value=Opiskelija]').should('be.checked')
+    cy.get('[data-cy=advanced-radio-primary-role]').find('input[value=Student]').should('be.checked')
 
     cy.reload()
 
     cy.wait(2000)
 
-    cy.get('[data-cy=choose-radio-container-primary-role]').find('input[value=Opiskelija]').should('be.checked')
+    cy.get('[data-cy=advanced-radio-primary-role]').find('input[value=Student]').should('be.checked')
 
     // test you can click some buttons
   })

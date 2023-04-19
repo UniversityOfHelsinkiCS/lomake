@@ -2,15 +2,14 @@ import React from 'react'
 import { Radio, Form } from 'semantic-ui-react'
 import './Generic.scss'
 
-const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, checked }) => {
+const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, type, checked }) => {
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
 
   let selectedFirstPart = ''
   let selectedSecondPart = ''
-
-  const isThereALine = checked.length > 0 ? checked.indexOf('-') !== -1 : false
+  const isThereALine = checked.length > 0 ? checked.indexOf('-') === -1 : false
   if (isThereALine) {
     const indexOfLine = checked.length
     selectedFirstPart = checked.substring(0, indexOfLine)
@@ -19,9 +18,14 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, c
     selectedFirstPart = checked.substring(0, indexOfLine)
     selectedSecondPart = checked.substring(indexOfLine + 1, checked.length)
   }
-  const handleChange = value => {
-    handleClick({ firstPart: selectedFirstPart, value })
+  const handleChange = label => {
+    if (type === 'basic') {
+      handleClick(label)
+    } else {
+      handleClick({ firstPart: selectedFirstPart, value: label })
+    }
   }
+
   return (
     <div>
       {radioButtonLabels ? (
@@ -34,7 +38,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, c
               >
                 <Radio
                   name="basic-radio"
-                  value={selectedSecondPart}
+                  value={o.label}
                   label={
                     <label
                       data-cy={`choose-radio-${o.id}`}
@@ -43,7 +47,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, c
                       {o.label}
                     </label>
                   }
-                  checked={selectedSecondPart === o.id}
+                  checked={type === 'basic' ? selectedFirstPart === o.id : selectedSecondPart === o.id}
                   onClick={() => handleChange(o.id)}
                   disabled={viewOnly}
                 />

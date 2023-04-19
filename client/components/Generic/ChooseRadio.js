@@ -16,9 +16,9 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const form = getForm(formType)
   const choose = (field, value) => dispatch(updateFormField(field, value, form))
 
-  const handleClick = ({ value }) => {
-    setState({ value })
-    choose(id, value)
+  const handleClick = label => {
+    setState({ value: label })
+    choose(id, label)
   }
   useEffect(() => {
     setState({ value: dataFromRedux })
@@ -85,6 +85,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
           checked={state.value}
           disabled={viewOnly}
           radioButtonLabels={radioButtonLabels}
+          type="basic"
         />
       </Form>
     </div>
