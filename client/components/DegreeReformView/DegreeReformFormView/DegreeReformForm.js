@@ -94,6 +94,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           formType={formType}
           programme={programmeKey}
           radioOptions={part?.radioOptions}
+          advancedOptions={part?.advancedOptions}
           image={image}
           direction={direction}
           maxLength={maxLength}

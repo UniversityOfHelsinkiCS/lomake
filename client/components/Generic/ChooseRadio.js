@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Radio, Form } from 'semantic-ui-react'
+import { Divider, Popup, Icon } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 
 import { colors, getForm } from 'Utilities/common'
+import BasicRadio from './BasicRadio'
 import './Generic.scss'
 
 const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType }) => {
@@ -15,9 +16,6 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const form = getForm(formType)
   const choose = (field, value) => dispatch(updateFormField(field, value, form))
 
-  const generateKey = label => {
-    return `${label}_${new Date().getTime()}`
-  }
   const handleClick = label => {
     setState({ value: label })
     choose(id, label)
@@ -55,6 +53,19 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
         <div style={{ maxWidth: '750px' }}>
           <h3>
             {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            <Popup
+              content={
+                <>
+                  <p>1 = Täyin eri mieltä</p>
+                  <p>2 = Osittain eri mieltä§</p>
+                  <p>3 = Ei samaa eikä eri mieltä</p>
+                  <p>4 = Osittain samaa mieltä§</p>
+                  <p>5 = Täysin samaa mieltä</p>
+                </>
+              }
+              popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
+              trigger={<Icon style={{ marginLeft: '0.5em', color: 'grey' }} name="question circle outline" />}
+            />
           </h3>
         </div>
       </div>
@@ -66,36 +77,14 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
       ) : (
         <div style={{ height: '1em' }} />
       )}
-      {radioButtonLabels ? (
-        <Form data-cy={`choose-radio-${id}`} style={direction === 'horizontal' ? { display: 'flex' } : null}>
-          {radioButtonLabels.map(o => {
-            return (
-              <Form.Field
-                key={generateKey(o.label)}
-                style={direction !== 'horizontal' ? { display: 'flex' } : { marginLeft: '2em', textAlign: 'center' }}
-              >
-                <Radio
-                  name="radioGroup"
-                  value={o.label}
-                  label={
-                    <label
-                      data-cy={`choose-radio-${o.id}`}
-                      style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}
-                    >
-                      {o.label}
-                    </label>
-                  }
-                  checked={state.value === o.id}
-                  onChange={() => handleClick(o.id)}
-                  disabled={viewOnly}
-                />
-              </Form.Field>
-            )
-          })}
-        </Form>
-      ) : (
-        <p>Missing options</p>
-      )}
+      <BasicRadio
+        id={id}
+        direction={direction}
+        handleClick={handleClick}
+        checked={state.value}
+        disabled={viewOnly}
+        radioButtonLabels={radioButtonLabels}
+      />
     </div>
   )
 }

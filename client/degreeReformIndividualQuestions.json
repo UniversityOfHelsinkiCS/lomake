@@ -4,7 +4,7 @@
     "title": {
       "fi": "Taustatiedot",
       "se": "",
-      "en": ""
+      "en": "Background info"
     },
     "id": 0,
     "parts": [
@@ -15,12 +15,12 @@
         "shortLabel": {
           "fi": "Taustayksikkö",
           "se": "",
-          "en": ""
+          "en": "Background unit"
         },
         "label": {
           "fi": "Taustayksikkö",
           "se": "",
-          "en": ""
+          "en": "Background unit"
         },
         "description": {
           "fi": "",
@@ -41,14 +41,14 @@
                 { "label": "Muu, mikä", "id": "other" }
             ],
             "en": [
-                { "label": "Tiedekunta", "id": "faculty" }, 
+                { "label": "Faculty", "id": "faculty" }, 
                 { "label": "YPA", "id": "ypa" }, 
-                { "label": "Muu, mikä", "id": "other" }
+                { "label": "Other, what", "id": "other" }
             ],
             "se": [
-                { "label": "Tiedekunta", "id": "faculty" }, 
-                { "label": "YPA", "id": "ypa" }, 
-                { "label": "Muu, mikä", "id": "other" }
+                { "label": "Tiedekunta(se)", "id": "faculty" }, 
+                { "label": "YPA(se)", "id": "ypa" }, 
+                { "label": "Muu, mikä(se)", "id": "other" }
             ]
           },
         "advancedOptions": {"faculty": 
@@ -69,16 +69,16 @@
       {
         "id": "primary-role",
         "index": 1,
-        "type": "CHOOSE-RADIO",
+        "type": "CHOOSE-ADVANCED",
         "shortLabel": {
           "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
           "se": "",
-          "en": ""
+          "en": "Choose background info (primary role at the moment)"
         },
         "label": {
           "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
           "se": "",
-          "en": ""
+          "en": "Choose background info (primary role at the moment)"
         },
         "description": {
           "fi": "",
@@ -96,33 +96,27 @@
           "fi": [
             { "label": "Dekaani / Varadekaani", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
-            {
-              "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "faculty_or_department_lead"
-            },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
             { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
           ],
           "en": [
-            { "label": "Dekaani / Varadekaani", "id": "dean" },
-            { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
-            {
-              "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "faculty_or_department_lead"
-            },
-            { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
-            { "label": "Opiskelija", "id": "student" },
-            { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
+            { "label": "Dekaani / Varadekaani(en)", "id": "dean" },
+            { "label": "Opetus- ja tutkimushenkilökunta(en)", "id": "teaching_or_other_research" },
+            { "label": "Hallinto- tai muu henkilökunta(en)", "id": "admin_or_other_staff" },
+            { "label": "Opiskelija(en)", "id": "student" },
+            { "label": "Väitöskirjatutkija(en)", "id": "doctoral_thesis" }
           ],
           "se": [
             { "label": "Dekaani / Varadekaani", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
-            {
-              "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "faculty_or_department_lead"
-            },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
             { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
           ]
+        },
+        "advancedOptions": {"teaching_or_other_research": 
+        {"fi": [{"label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id":"science-or-research-lead"}, {"label":"Koulutusohjelman johtajat", "id": "programme-lead"}]}
         }
       },
       {

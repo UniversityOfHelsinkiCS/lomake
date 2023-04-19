@@ -5,10 +5,11 @@ import { updateFormField } from 'Utilities/redux/formReducer'
 import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import DropdownFilter from './DropdownFilter'
+import BasicRadio from './BasicRadio'
 
 import './Generic.scss'
 
-const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
+const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptions, formType, advancedOptions }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -37,10 +38,8 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     setState({ value: dataFromRedux })
   }, [dataFromRedux])
   const radioButtonLabels = radioOptions ? radioOptions[lang] : null
-
-  const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : 7
+  const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : state.value.indexOf('-')
   const selected = state.value.substring(0, indexOfine)
-
   return (
     <div className="form-advanced-radio-area">
       <Divider />
@@ -63,17 +62,28 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
         <Form>
           {radioButtonLabels.map(o => {
             return (
-              <Form.Field key={generateKey(o.label)}>
-                <Radio
-                  disabled={viewOnly}
-                  label={o.label}
-                  name="radioGroup"
-                  value={o.label}
-                  checked={selected === o.id}
-                  onChange={() => handleClick(o.id, '')}
-                  data-cy="unit-selection"
-                />
-              </Form.Field>
+              <div key={generateKey(o.label)}>
+                <Form.Field>
+                  <Radio
+                    disabled={viewOnly}
+                    label={o.label}
+                    name="radioGroup"
+                    value={o.label}
+                    checked={selected === o.id}
+                    onChange={() => handleClick(o.id, '')}
+                    data-cy="unit-selection"
+                  />
+                </Form.Field>
+                {o.id === 'teaching_or_other_research' && selected === 'teaching_or_other_research' ? (
+                  <BasicRadio
+                    handleClick={handleClick}
+                    checked={state.value}
+                    disabled={viewOnly}
+                    id={id}
+                    radioButtonLabels={advancedOptions[o.id][lang]}
+                  />
+                ) : null}
+              </div>
             )
           })}
           {selected === 'faculty' ? (
