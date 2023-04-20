@@ -88,8 +88,8 @@ describe('Yearly assessment form tests', () => {
     // write to other form
     cy.visit('/evaluation/form/4/KH50_005')
     cy.wait(1000)
-    cy.get('[data-cy=textarea-degree_flow]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-degree_flow]').find('[contenteditable]').type('evaluation words').wait(2000)
+    cy.get('[data-cy=textarea-degree_flow]').find('.editor-class').click().wait(500)
+    cy.get('[data-cy=textarea-degree_flow]').find('[contenteditable]').wait(500).type('evaluation words').wait(2000)
     cy.reload()
 
     // check yearly assessment form
@@ -116,8 +116,8 @@ describe('Yearly assessment form tests', () => {
     // write to yearly form
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.get('[data-cy=textarea-employability]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').type('new words').wait(2000)
+    cy.get('[data-cy=textarea-employability]').find('.editor-class').click().wait(500)
+    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').wait(1000).type('new words').wait(2000)
     cy.reload()
     cy.visit('/')
 
