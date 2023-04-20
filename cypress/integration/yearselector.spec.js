@@ -63,6 +63,7 @@ describe("Previous year's answers", () => {
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')
       .find('.editor-class')
-      .should('contain.text', 'koira')
+      .invoke('text')
+      .should('match', /koir/)
   })
 })

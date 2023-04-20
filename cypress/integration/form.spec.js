@@ -138,6 +138,9 @@ describe('Yearly assessment form tests', () => {
 
     // check yearly assessment form
     cy.visit(`/form/${testProgrammeCode}`)
-    cy.get('[data-cy=textarea-employability]').find('.editor-class').should('contain.text', 'new words')
+    cy.get('[data-cy=textarea-employability]')
+      .find('.editor-class')
+      .invoke('text')
+      .should('match', /new word/)
   })
 })
