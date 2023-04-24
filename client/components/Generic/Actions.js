@@ -14,7 +14,7 @@ const ActionElement = ({ t, id, form, viewOnly, index }) => {
         <Label color="red" ribbon>
           {t('formView:developmentArea')}
         </Label>
-        <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} />
+        <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} disabled={viewOnly} />
       </div>
       <SimpleTextarea label={t('formView:actions')} id={`${id}_${index}`} viewOnly={viewOnly} form={form} />
     </div>
@@ -90,13 +90,13 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
         )
       })}
       <div style={{ display: 'flex' }}>
-        {actionCount < 5 && (
+        {actionCount < 5 && !viewOnly && (
           <Button icon basic labelPosition="left" color="blue" onClick={handleAdd}>
             <Icon name="add" />
             {t('formView:addDevelopmentArea')}
           </Button>
         )}
-        {actionCount > 0 && (
+        {actionCount > 0 && !viewOnly && (
           <div>
             <Button icon basic labelPosition="left" color="red" onClick={() => setConfirm(true)}>
               <Icon name="trash alternate" />
