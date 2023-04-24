@@ -32,8 +32,7 @@ describe('ReportPage tests', () => {
     cy.selectYear(defaultYears[0])
 
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-learning_outcomes]').find('.editor-class').wait(500).click().wait(1000)
-    cy.get('[data-cy=textarea-learning_outcomes]').find('[contenteditable]').type('test words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-learning_outcomes]', 'test words')
 
     cy.visit('/')
     cy.reload()
@@ -56,8 +55,7 @@ describe('ReportPage tests', () => {
     cy.visit('/')
     cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').wait(500).click().wait(1000)
-    cy.get('[data-cy=textarea-community_wellbeing]').find('[contenteditable]').type('more words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-learning_outcomes]', 'test words')
     cy.reload()
 
     cy.visit('/')

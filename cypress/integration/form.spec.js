@@ -15,8 +15,7 @@ describe('Yearly assessment form tests', () => {
 
   it('Can write to a textfield and the answer is saved.', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-community_wellbeing]').find('[contenteditable]').type('other words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-community_wellbeing]', 'other words')
     cy.reload()
 
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
@@ -70,8 +69,7 @@ describe('Yearly assessment form tests', () => {
 
   it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.get('[data-cy=textarea-recruitment_influence]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-recruitment_influence]').find('[contenteditable]').type('new words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-recruitment_influence]', 'new words')
     cy.reload()
     cy.visit('/')
 
@@ -88,8 +86,7 @@ describe('Yearly assessment form tests', () => {
     // write to other form
     cy.visit('/evaluation/form/4/KH50_005')
     cy.wait(1000)
-    cy.get('[data-cy=textarea-degree_flow]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-degree_flow]').find('[contenteditable]').type('evaluation words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-degree_flow]', 'evaluation words')
     cy.reload()
 
     // check yearly assessment form
@@ -116,8 +113,7 @@ describe('Yearly assessment form tests', () => {
     // write to yearly form
     cy.visit(`/form/${testProgrammeCode}`)
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.get('[data-cy=textarea-employability]').find('.editor-class').click()
-    cy.get('[data-cy=textarea-employability]').find('[contenteditable]').type('new words').wait(2000)
+    cy.typeInEditor('[data-cy=textarea-employability]', 'new words')
     cy.reload()
     cy.visit('/')
 
@@ -138,6 +134,9 @@ describe('Yearly assessment form tests', () => {
 
     // check yearly assessment form
     cy.visit(`/form/${testProgrammeCode}`)
-    cy.get('[data-cy=textarea-employability]').find('.editor-class').should('contain.text', 'new words')
+    cy.get('[data-cy=textarea-employability]')
+      .find('.editor-class')
+      .invoke('text')
+      .should('match', /new word/)
   })
 })

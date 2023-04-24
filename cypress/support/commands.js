@@ -85,6 +85,18 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
   })
 })
 
+Cypress.Commands.add('typeInEditor', (editorTag, textToBeTyped) => {
+  // focus to aquire lock
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.get(editorTag)
+    .find('.editor-class')
+    .click()
+    .wait(500)
+    .find('[contenteditable]')
+    .wait(500)
+    .type(textToBeTyped, { delay: 0 })
+})
+
 Cypress.Commands.add('createDeadline', (draftYear, formName) => {
   cy.get('[data-cy=draft-year-selector]').click()
   cy.get('.item').contains(draftYear).click()

@@ -132,10 +132,8 @@ describe('IAM permission tests', () => {
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click().wait(1000)
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report] [contenteditable=true]').type('random').wait(2000)
+
+    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'random')
 
     cy.visit('/')
     cy.reload()

@@ -1,5 +1,5 @@
 ![Test and build staging-image](https://github.com/UniversityOfHelsinkiCS/lomake/workflows/Test%20and%20build%20staging-image/badge.svg)
-![Test and build production-image](https://github.com/UniversityOfHelsinkiCS/lomake/workflows/Test%20and%20build%20production-image/badge.svg)
+[![Build production image](https://github.com/UniversityOfHelsinkiCS/lomake/actions/workflows/production.yml/badge.svg)](https://github.com/UniversityOfHelsinkiCS/lomake/actions/workflows/production.yml)
 
 ## Short tutorial
 
