@@ -17,7 +17,6 @@ const ActionElement = ({ t, id, form, viewOnly, index }) => {
         <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} />
       </div>
       <SimpleTextarea label={t('formView:actions')} id={`${id}_${index}`} viewOnly={viewOnly} form={form} />
-      {/* <Textarea id={id} label={t('formView:actions')} EntityLastYearsAccordion={null} form={form} maxLength={500} /> */}
     </div>
   )
 }
@@ -27,7 +26,7 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
   // const formData = useSelector(state => state.form.data)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const [confirm, setConfirm] = useState(false)
-  const [actions, setActions] = useState([])
+  const [actions, setActions] = useState([{ id: 1, area_title: '', action_text: '' }])
   const actionCount = actions.length || 0
 
   const handleAdd = () => {
