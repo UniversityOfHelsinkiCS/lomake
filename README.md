@@ -45,11 +45,11 @@ Tilannekuvalomake has various sets of questions in separate files. All question 
 
 ### Yearly assessment
 
-The current questions of the yearly assessment form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). 
+The current questions of the yearly assessment (vuosiseuranta) form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). 
 
 ### Evaluation
 
-The current questions of the evaluation form can be found in [evaluationQuestions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/evaluationQuestions.json). 
+The current questions of the evaluation (katselmus) form can be found in [evaluationQuestions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/evaluationQuestions.json). 
 
 ### Degree reform
 
