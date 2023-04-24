@@ -37,6 +37,14 @@ export default () => {
     )
   }
 
+  const GoToYearlyAssessmentButton = () => {
+    return (
+      <Menu.Item data-cy="nav-yearly" as={Link} to="/" name="yearlyAssessment">
+        {t('yearlyAssessment')}
+      </Menu.Item>
+    )
+  }
+
   const GoToAdminPageButton = () => {
     return (
       <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
@@ -90,6 +98,7 @@ export default () => {
         <Menu.Item as={Link} to="/">
           <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
         </Menu.Item>
+        <GoToYearlyAssessmentButton />
         {user.admin ? <GoToEvaluationButton /> : null}
         {user.admin ? <GoToDegreeReformGroup /> : null}
         {user.admin ? <GoToDegreeReformIndividual /> : null}
