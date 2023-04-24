@@ -119,12 +119,12 @@
         "index": 5,
         "type": "ENTITY",
         "shortLabel": {
-          "fi": "Tutkintovirtaus",
+          "fi": "Läpivirtaus",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "TUTKINTOVIRTAUS",
+          "fi": "LÄPIVIRTAUS",
           "se": "",
           "en": ""
         },
@@ -332,7 +332,7 @@
           "en": ""
         },
         "label": {
-          "fi": "Tiedekuntien yhteiset ohjelmat",
+          "fi": "TIEDEKUNNAN YHTEISET OHJELMAT",
           "se": "",
           "en": ""
         },
