@@ -90,9 +90,9 @@ export default () => {
         <Menu.Item as={Link} to="/">
           <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
         </Menu.Item>
-        {user.superAdmin ? <GoToEvaluationButton /> : null}
-        {user.superAdmin ? <GoToDegreeReformGroup /> : null}
-        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        {user.admin ? <GoToEvaluationButton /> : null}
+        {user.admin ? <GoToDegreeReformGroup /> : null}
+        {user.admin ? <GoToDegreeReformIndividual /> : null}
         {user.admin ? <GoToAdminPageButton /> : null}
         <Menu.Item>
           <a href="mailto:ospa@helsinki.fi">
