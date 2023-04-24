@@ -36,7 +36,7 @@ export default {
     clearSelection: 'Clear selection',
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
-    smileyColors: 'Traffic lights',
+    trafficLights: 'Traffic lights',
 
     choose: 'Choose',
     colors_all: 'all',

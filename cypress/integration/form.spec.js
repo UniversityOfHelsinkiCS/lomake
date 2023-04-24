@@ -21,7 +21,7 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other words')
   })
 
-  it('Can open a question, click on smiley face, and the result it saved.', () => {
+  it('Can open a question, click on a traffic light, and the result it saved.', () => {
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 

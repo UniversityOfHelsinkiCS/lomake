@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
-import SmileyColors from './SmileyColors'
+import TrafficLights from './TrafficLights'
 import './Generic.scss'
 import OldAnswersSummary from './OldAnswersSummary'
 
@@ -58,7 +58,7 @@ const Entity = ({
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <SmileyColors id={id} form={form} />}
+        {!noColor && <TrafficLights id={id} form={form} />}
       </div>
       <div
         className="entity-description"

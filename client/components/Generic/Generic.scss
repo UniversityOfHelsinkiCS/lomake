@@ -204,33 +204,6 @@
   }
 }
 
-// ****************
-
-.emoji {
-  width: 40px;
-  height: auto;
-  margin: 0 7px;
-  filter: grayscale(100%);
-}
-
-.emoji-button {
-  cursor: pointer;
-  transition-duration: 300ms;
-  &:hover {
-    filter: grayscale(0%);
-    width: 50px;
-  }
-}
-
-.active-emoji {
-  filter: grayscale(0%);
-  width: 50px;
-}
-
-.form-view-only-smiley {
-  margin: 1em 0; 
-}
-
 @mixin answer-circle-big-basics {
   display: inline-block;
   border-radius: 50%;
@@ -295,7 +268,6 @@
   background: $background-red;
 }
 
-// ***************************
 .editor-class {
   background-color: $background-light-gray;
   padding: 1em;

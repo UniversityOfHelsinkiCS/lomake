@@ -32,7 +32,7 @@ export default {
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
-    smileyColors: 'Liikennevalojen värit',
+    trafficLights: 'Liikennevalojen värit',
 
     choose: 'Valitse',
     colors_all: 'kaikki',

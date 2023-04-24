@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
-const SmileyColors = ({ id, form }) => {
+const TrafficLights = ({ id, form }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
@@ -45,4 +45,4 @@ const SmileyColors = ({ id, form }) => {
   )
 }
 
-export default SmileyColors
+export default TrafficLights

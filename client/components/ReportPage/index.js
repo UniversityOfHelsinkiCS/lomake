@@ -129,7 +129,7 @@ export default () => {
       ),
     },
     {
-      menuItem: t('smileyColors'),
+      menuItem: t('trafficLights'),
       render: () => (
         <Tab.Pane className="tab-pane">
           <ColorAnswers

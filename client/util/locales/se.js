@@ -31,7 +31,7 @@ export default {
     clearSelection: 'Rensa urval',
     responses: 'Svar:',
     writtenAnswers: 'Skriftliga svar',
-    smileyColors: 'Trafikljus',
+    trafficLights: 'Trafikljus',
 
     choose: 'Välj',
     colors_all: 'alla',

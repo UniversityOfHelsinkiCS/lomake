@@ -147,7 +147,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2022`)
   })
 
-  it('Can write to form and change from smiley table to trends view', () => {
+  it('Can write to form and change from traffic light table to trends view', () => {
     cy.login('cypressSuperAdminUser')
     // check that page is ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)

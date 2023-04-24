@@ -9,7 +9,7 @@ const adminUser = 'cypressOspaUser'
 const form = 1 // yearly assessment
 
 describe('ComparisonPage tests', () => {
-  it('Changes in smileys are reflected to the single programme piecharts', () => {
+  it('Changes in traffic lights are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
     cy.visit('/')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()

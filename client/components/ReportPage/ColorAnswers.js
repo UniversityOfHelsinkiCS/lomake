@@ -37,7 +37,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
         </Grid.Row>
         <Grid.Column width={4} className="left" />
         <Grid.Column width={6} className="center">
-          {year} - {t('smileyColors')}
+          {year} - {t('trafficLights')}
         </Grid.Column>
         <Grid.Column width={5} className="right" floated="right" />
       </Grid>
