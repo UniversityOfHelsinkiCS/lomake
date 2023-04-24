@@ -124,12 +124,13 @@
         "index": 2,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "Haluan vastata seuraavista näkukulmista",
+          "fi": "Haluan vastata seuraavista näkökulmista",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Haluan vastata seuraavista näkukulmista",          "se": "",
+          "fi": "Haluan vastata seuraavista näkökulmista",
+          "se": "",
           "en": ""
         },
         "description": {
