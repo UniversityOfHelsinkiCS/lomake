@@ -40,9 +40,21 @@ ApiConnection is a custom redux middleware that is used in most toska software. 
 
 You can see redux example using apiConnection in client/components/MessageComponent.
 
-## questions.json
+## Questions
+Tilannekuvalomake has various sets of questions in separate files. All question files are in the format of an array of `Section` objects.
 
-The current questions of the form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). Its format is an array of `Section` objects:
+### Yearly assessment
+
+The current questions of the yearly assessment form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). 
+
+### Evaluation
+
+The current questions of the evaluation form can be found in [evaluationQuestions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/evaluationQuestions.json). 
+
+### Degree reform
+
+The current questions of the degree reform forms can be found in degreeReformIndividualQuestions.json and degreeReformQuestions.json.
+
 
 **Section**
 
@@ -58,11 +70,14 @@ The current questions of the form can be found in [questions.json](https://githu
 | Property    | Type      | Required | Description                                                               |
 | ----------- | --------- | -------- | ------------------------------------------------------------------------- |
 | id          | string    | Yes      |
-| type        | enum      | Yes      | TEXTAREA, ENTITY, MEASURES or TITLE                                       |
+| type        | enum      | Yes      | TEXTAREA, ENTITY, MEASURES, ACTIONS, CHOOSE-RADIO,CHOOSE-ADVANCED, SELECTION, ORDER, or TITLE |
 | label       | Localized | Yes      | Label of the form field                                                   |
 | required    | boolean   | No       | Is the form field required to be filled to submit the form                |
 | description | Localized | No       | (ENTITY only) More detailed explanation                                   |
-| no_color    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a color (emoji) form field |
+| no_color    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a color form field         |
+| relatedYearlyQuestions  | array | No| (Evaluation only) List of yearly assessment questions the evaluation question builds on |
+| radio_options| Localized   | No        | (Reform only) Options for radio buttons                               |
+| options     |  { Localized } | No       | (ORDER and SELECTION only) Options for selectiong and ordering            |
 
 **Localized**
 
@@ -72,8 +87,7 @@ The current questions of the form can be found in [questions.json](https://githu
 | se       | string | Yes      | Swedish text |
 | en       | string | Yes      | English text |
 
-![Example of an entity](https://raw.githubusercontent.com/UniversityOfHelsinkiCS/lomake/master/entity_example.png)
-_Example of the ENTITY type containing title, description, text area and color form field (emoji selector)_
+
 
 
 ## IAMs
