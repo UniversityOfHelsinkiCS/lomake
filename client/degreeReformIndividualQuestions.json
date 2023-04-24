@@ -124,13 +124,12 @@
         "index": 2,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
+          "fi": "Haluan vastata seuraavista näkukulmista",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "valitse näkökulma, johon vastauksesi pääasiallisesti perustuu",
-          "se": "",
+          "fi": "Haluan vastata seuraavista näkukulmista",          "se": "",
           "en": ""
         },
         "description": {
