@@ -282,6 +282,7 @@ const EvaluationFormView = ({ room, formString }) => {
             questions={questions}
             yearlyAnswers={yearlyAnswers}
             form={form}
+            summaryUrl={summaryURL}
           />
         </div>
       </div>
