@@ -83,7 +83,7 @@
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^4.2.5",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.6.2",
     "sequelize-cli": "^5.5.1"
