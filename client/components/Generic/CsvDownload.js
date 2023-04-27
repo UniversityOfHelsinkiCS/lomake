@@ -78,13 +78,34 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
   }
 
   const getWrittenAnswers = rawData => {
+    if (!Object.keys(rawData).length) return [] // May be empty initially
+
     const answersArray = csvData[1].slice(2).map(questionId => {
       let validValues = []
 
-      const questionText = rawData[`${questionId}_text`]
+      // for order-type questions
+      const questionOrderSelection = questionId.endsWith('_order')
+      const questionText = rawData[questionOrderSelection ? questionId : `${questionId}_text`]
+      // for selection-type questions
+      const questionSelection = rawData[`${questionId}_selection`]
+
       if (questionText) {
         const cleanedText = cleanText(questionText)
-        validValues = [...validValues, cleanedText]
+        validValues = [cleanedText]
+      }
+      if (questionSelection) {
+        const parsed = JSON.parse(questionSelection)
+        // json format: { key1: true|false, key2: true|false, ... }
+        // Make the cell value into a comma separated list
+        validValues = [
+          Object.keys(parsed)
+            .filter(key => parsed[key])
+            .join(', '),
+        ]
+      }
+      if (questionOrderSelection) {
+        // ordered values in a string separated by ;;
+        validValues = [questionText.split(';;').join(', ')]
       }
       if (questionId.startsWith('measures')) validValues = [...validValues, getMeasuresAnswer(rawData, questionId)]
       return validValues.join('\n')
