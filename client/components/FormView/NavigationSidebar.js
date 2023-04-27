@@ -123,7 +123,6 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                       const { id, type, required, no_color } = part
 
                       const idsToCheck = []
-
                       if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'SELECTION') {
                         idsToCheck.push(`${id}_text`)
                       } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
