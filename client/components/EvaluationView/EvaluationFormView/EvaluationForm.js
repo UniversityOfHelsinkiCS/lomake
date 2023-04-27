@@ -72,7 +72,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form, summaryU
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     return (
-      <>
+      <div key={`${part.id}-container`}>
         {part.id.includes('_differences') && <Divider />}
         <div key={part.id} style={divStyle}>
           <Component
@@ -91,7 +91,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form, summaryU
             summaryUrl={summaryUrl || null}
           />
         </div>
-      </>
+      </div>
     )
   }
 

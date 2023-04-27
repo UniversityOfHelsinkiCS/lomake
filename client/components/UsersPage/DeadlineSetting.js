@@ -174,14 +174,14 @@ const DeadlineSetting = () => {
             </span>
           </b>
         </p>
-        <p>
+        <div>
           <h3>
             {t('users:answersSavedForYear')}
             <span style={{ color: draftYear ? colors.blue : colors.red }} data-cy="draftYear">
               {draftYear ? draftYear.year : t('users:noDraftYear')}
             </span>
           </h3>
-        </p>
+        </div>
       </div>
       <Divider />
       <Header as="h3">{t('users:openForms')}</Header>
