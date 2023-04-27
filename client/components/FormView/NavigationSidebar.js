@@ -146,10 +146,12 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                             <>
                               {partNumber}.
                               <Icon
-                                data-cy={`${id}-${filled}`}
+                                data-cy={`${id}-${filled ? 'OK' : 'EMPTY'}`}
                                 name={getIcon(filled)}
                                 style={{ color: getColor(filled, required) }}
-                                title={`${t(filled)}${required ? ` (${t('formView:mandatory')})` : ''}`}
+                                title={`${t(filled ? 'OK' : 'EMPTY')}${
+                                  required ? ` (${t('formView:mandatory')})` : ''
+                                }`}
                               />
                             </>
                           )}
