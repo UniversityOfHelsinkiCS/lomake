@@ -19,9 +19,31 @@ const replaceTitle = {
     'PERSONAL-\nRESURSERNAS OCH DE ANDRA RESURSERNAS TILLRÄCKLIGHET OCH ÄNDAMÅLSENLIGHET',
 }
 
-const iconMap = {
-  OK: 'check',
-  EMPTY: 'exclamation',
+// These question types are shown in the navigation sidebar
+const questionTypesToShow = ['ENTITY', 'MEASURES', 'CHOOSE-RADIO', 'SELECTION', 'CHOOSE-ADVANCED', 'CHECKBOX']
+
+const getIcon = filled => (filled ? 'check' : 'exclamation')
+
+const getColor = (filled, required) => {
+  if (filled) return colors.green
+  if (!filled && !required) return colors.black
+
+  return colors.red
+}
+
+const getCorrectRomanNumeral = (number, formType) => {
+  if (formType === 'evaluation') {
+    return romanize(number + 1) || '0'
+  }
+  return romanize(number) || '0'
+}
+
+const getIsFilled = (questionData, fromJson) => {
+  if (fromJson) {
+    const json = JSON.parse(questionData || 'false')
+    return json && Object.values(json).some(value => value)
+  }
+  return questionData
 }
 
 const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
@@ -29,13 +51,6 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
   const form = useSelector(({ form }) => form || {})
   const location = useLocation()
   const { t } = useTranslation()
-
-  const getCorrectRomanNumeral = index => {
-    if (formType === 'evaluation') {
-      return romanize(index + 1) || '0'
-    }
-    return romanize(index) || '0'
-  }
 
   let questionsToShow = questions
   let linkBase = '/form/'
@@ -71,7 +86,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
             }
             const titleFromJson = section.title[lang]
             const title = replaceTitle[titleFromJson] ? replaceTitle[titleFromJson] : titleFromJson
-            const romanNumeral = getCorrectRomanNumeral(index)
+            const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
               return <div key={`${section.title}-${section.id}`} />
@@ -97,67 +112,50 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                   </Link>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {section.parts.map(part => {
-                    const { id, type, required, no_color } = part
-                    if (
-                      type === 'ENTITY' ||
-                      type === 'MEASURES' ||
-                      type === 'CHOOSE-RADIO' ||
-                      type === 'SELECTION' ||
-                      type === 'CHOOSE-ADVANCED' ||
-                      type === 'CHECKBOX'
-                    ) {
+                  {section.parts
+                    .filter(part => questionTypesToShow.includes(part.type))
+                    .map(part => {
                       partNumber++
-                    }
+                      const { id, type, required, no_color } = part
 
-                    const idsToCheck = []
+                      const idsToCheck = []
 
-                    if (type === 'TEXTAREA' || type === 'ENTITY') {
-                      idsToCheck.push(`${id}_text`)
-                    } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
-                      idsToCheck.push(`${id}`)
-                    } else {
-                      idsToCheck.push(`${id}_1_text`)
-                    }
+                      if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'SELECTION') {
+                        idsToCheck.push(`${id}_text`)
+                      } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
+                        idsToCheck.push(`${id}`)
+                      } else {
+                        idsToCheck.push(`${id}_1_text`)
+                      }
 
-                    if (type === 'ENTITY' && !no_color) {
-                      idsToCheck.push(`${id}_light`)
-                    }
+                      if (type === 'ENTITY' && !no_color) {
+                        idsToCheck.push(`${id}_light`)
+                      }
 
-                    if (type === 'SELECTION') {
-                      idsToCheck.push(`${id}_selected`)
-                    }
-                    const status = idsToCheck.reduce((acc, cur) => {
-                      if (acc === 'EMPTY') return acc
-                      if (!form.data[cur]) return 'EMPTY'
-                      return 'OK'
-                    }, null)
-                    const getColor = () => {
-                      if (status === 'OK') return colors.green
-                      if (status === 'EMPTY' && !required) return colors.black
+                      if (type === 'SELECTION') {
+                        idsToCheck.push(`${id}_selection`)
+                      }
 
-                      return colors.red
-                    }
-                    return (
-                      <div key={id}>
-                        {(type === 'ENTITY' ||
-                          type === 'CHOOSE-RADIO' ||
-                          type === 'SELECTION' ||
-                          type === 'CHOOSE-ADVANCED' ||
-                          type === 'CHECKBOX') && (
-                          <>
-                            {partNumber}.{' '}
-                            <Icon
-                              data-cy={`${id}-${status}`}
-                              name={iconMap[status]}
-                              style={{ color: getColor() }}
-                              title={`${t(status)}${required ? ` (${t('formView:mandatory')})` : ''}`}
-                            />
-                          </>
-                        )}
-                      </div>
-                    )
-                  })}
+                      const filled = idsToCheck.reduce((filled, id) => {
+                        return filled || getIsFilled(form.data[id], id.endsWith('_selection'))
+                      }, false)
+
+                      return (
+                        <div key={id}>
+                          {questionTypesToShow.includes(type) && (
+                            <>
+                              {partNumber}.
+                              <Icon
+                                data-cy={`${id}-${filled}`}
+                                name={getIcon(filled)}
+                                style={{ color: getColor(filled, required) }}
+                                title={`${t(filled)}${required ? ` (${t('formView:mandatory')})` : ''}`}
+                              />
+                            </>
+                          )}
+                        </div>
+                      )
+                    })}
                 </div>
               </div>
             )
