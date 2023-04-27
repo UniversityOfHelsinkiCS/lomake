@@ -53,6 +53,8 @@ export default {
     'degree-reform-individual': 'Koulutusuudistus - yksilö',
     'read-more': 'Lue lisää',
     'read-less': 'Lue vähemmän',
+
+    otherTextBox: 'Muu, mikä?',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -132,6 +134,8 @@ export default {
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
       'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
+    selectApplicable: 'Valitkaa sopivat vaihtoehdot',
+    addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
   },
 
   generic: {

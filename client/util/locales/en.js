@@ -57,6 +57,7 @@ export default {
     'degree-reform-individual': 'Degree reform - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
+    otherTextBox: 'Other, what?',
   },
 
   aboutPage: {
@@ -136,6 +137,8 @@ export default {
       "For this evaluation, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
       "Discuss the following themes among the studyprogramme's steering group. Please note, that the <strong> yearly assessment for year 2023 should be done before this evaluation</strong>.",
+    selectApplicable: 'Select all applicable options',
+    addMissing: ' Add any missing options - You may add several',
   },
 
   generic: {

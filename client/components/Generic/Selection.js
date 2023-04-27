@@ -1,12 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox, Divider } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
 const Selection = ({ id, label, description, required, number, extrainfo, options, lang, form }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const fieldNameOptions = `${id}_selection`
   const fieldNameText = `${id}_text`
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -24,19 +26,6 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
   }
 
   const handleOther = ({ target }) => dispatch(updateFormField(fieldNameText, target.value, form))
-  // TO FIX: move to translations
-  const t = {
-    fi: {
-      select: 'Valitkaa sopivat vaihtoehdot',
-      other: 'Muu, mikä?',
-      info: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
-    },
-    en: {
-      select: 'Valitkaa sopivat vaihtoehdot',
-      other: 'Muu, mikä?',
-      info: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
-    },
-  }
 
   return (
     <>
@@ -49,7 +38,7 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
           <p>{description}</p>
           <p className="form-question-extrainfo">{extrainfo}</p>
         </div>
-        <h4>{t[lang].select}</h4>
+        <h4>{t('formView:selectApplicable')}</h4>
         <div className="selection-group">
           {ids.map(optionId => {
             return (
@@ -64,11 +53,16 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
             )
           })}
           <div className="form-textarea">
-            <label>{t[lang].other}</label>
+            <label>{t('otherTextBox')}</label>
             {viewOnly ? (
               <>{otherText || ''}</>
             ) : (
-              <textarea id="other" value={otherText || ''} onChange={handleOther} placeholder={t[lang].info} />
+              <textarea
+                id="other"
+                value={otherText || ''}
+                onChange={handleOther}
+                placeholder={t('formView:addMissing')}
+              />
             )}
           </div>
         </div>

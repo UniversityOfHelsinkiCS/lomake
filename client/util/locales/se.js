@@ -47,6 +47,7 @@ export default {
 
     // yearlyAssessment: '',
     // katselmus: '',
+    // otherTextBox: '',
   },
 
   aboutPage: {
@@ -122,6 +123,8 @@ export default {
     // removeDevelopmentArea: '',
     // evaluationInfo1: '',
     // evaluationInfo2: '',
+    // selectApplicable: '',
+    // addMissing: '',
   },
 
   generic: {
