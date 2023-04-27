@@ -88,12 +88,13 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
 Cypress.Commands.add('typeInEditor', (editorTag, textToBeTyped) => {
   // focus to aquire lock
   // eslint-disable-next-line cypress/no-unnecessary-waiting
+  const attempt = Cypress.currentRetry + 1
   cy.get(editorTag)
     .find('.editor-class')
     .click()
-    .wait(500)
+    .wait(500 * attempt)
     .find('[contenteditable]')
-    .wait(500)
+    .wait(500 * attempt)
     .type(textToBeTyped, { delay: 0 })
 })
 
