@@ -38,12 +38,16 @@ const getCorrectRomanNumeral = (number, formType) => {
   return romanize(number) || '0'
 }
 
-const getIsFilled = (questionData, fromJson) => {
+const getIsCompleted = ({ formData, questionId }) => {
+  const questionData = formData[questionId]
+  const fromJson = questionId.endsWith('_selection')
+
   if (fromJson) {
     const json = JSON.parse(questionData || 'false')
     return json && Object.values(json).some(value => value)
   }
-  return questionData
+
+  return Boolean(questionData)
 }
 
 const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
@@ -136,9 +140,14 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                         idsToCheck.push(`${id}_selection`)
                       }
 
-                      const filled = idsToCheck.reduce((filled, id) => {
-                        return filled || getIsFilled(form.data[id], id.endsWith('_selection'))
-                      }, false)
+                      const comparator = type === 'ENTITY' ? 'every' : 'some'
+
+                      const filled = idsToCheck[comparator](id =>
+                        getIsCompleted({
+                          formData: form.data,
+                          questionId: id,
+                        })
+                      )
 
                       return (
                         <div key={id}>
