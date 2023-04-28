@@ -93,6 +93,7 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
         const cleanedText = cleanText(questionText)
         validValues = [cleanedText]
       }
+
       if (questionSelection) {
         const parsed = JSON.parse(questionSelection)
         // json format: { key1: true|false, key2: true|false, ... }
@@ -103,7 +104,7 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
             .join(', '),
         ]
       }
-      if (questionOrderSelection) {
+      if (questionOrderSelection && questionText) {
         // ordered values in a string separated by ;;
         validValues = [questionText.split(';;').join(', ')]
       }
