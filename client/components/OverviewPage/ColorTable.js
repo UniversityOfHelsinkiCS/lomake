@@ -7,13 +7,11 @@ import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import questions from '../../questions.json'
-import evaluationQuestions from '../../evaluationQuestions.json'
-import koulutusuudistusQuestions from '../../degreeReformQuestions.json'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
+import { yearlyQuestions as questions, evaluationQuestions, degreeReformQuestions } from '../../questionData'
 
 const ColorTable = React.memo(
   ({
@@ -92,7 +90,7 @@ const ColorTable = React.memo(
     if (formType === 'evaluation') {
       questionsToShow = evaluationQuestions
     } else if (formType === 'degree-reform') {
-      questionsToShow = koulutusuudistusQuestions
+      questionsToShow = degreeReformQuestions
     }
     let tableIds = null
 

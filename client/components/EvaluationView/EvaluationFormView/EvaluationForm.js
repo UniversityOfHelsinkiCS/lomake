@@ -10,7 +10,7 @@ import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
 
-const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
+const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
   const formType = 'evaluation'
 
@@ -72,7 +72,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     return (
-      <>
+      <div key={`${part.id}-container`}>
         {part.id.includes('_differences') && <Divider />}
         <div key={part.id} style={divStyle}>
           <Component
@@ -88,9 +88,10 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form }) => {
             programme={programmeKey}
             relatedYearlyAnswers={yearlyAnswers[part.id]}
             form={form}
+            summaryUrl={summaryUrl || null}
           />
         </div>
-      </>
+      </div>
     )
   }
 

@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { useTranslation } from 'react-i18next'
-import { answersByYear, programmeNameByKey as getProgrammeName } from 'Utilities/common'
-import questions from '../../questions.json'
+import { programmeNameByKey as getProgrammeName } from 'Utilities/common'
+import { yearlyQuestions as questions } from '../../questionData'
 import './Generic.scss'
 
 const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, programme, wantedData, view }) => {
@@ -78,13 +78,35 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
   }
 
   const getWrittenAnswers = rawData => {
+    if (!Object.keys(rawData).length) return [] // May be empty initially
+
     const answersArray = csvData[1].slice(2).map(questionId => {
       let validValues = []
 
-      const questionText = rawData[`${questionId}_text`]
+      // for order-type questions
+      const questionOrderSelection = questionId.endsWith('_order')
+      const questionText = rawData[questionOrderSelection ? questionId : `${questionId}_text`]
+      // for selection-type questions
+      const questionSelection = rawData[`${questionId}_selection`]
+
       if (questionText) {
         const cleanedText = cleanText(questionText)
-        validValues = [...validValues, cleanedText]
+        validValues = [cleanedText]
+      }
+
+      if (questionSelection) {
+        const parsed = JSON.parse(questionSelection)
+        // json format: { key1: true|false, key2: true|false, ... }
+        // Make the cell value into a comma separated list
+        validValues = [
+          Object.keys(parsed)
+            .filter(key => parsed[key])
+            .join(', '),
+        ]
+      }
+      if (questionOrderSelection && questionText) {
+        // ordered values in a string separated by ;;
+        validValues = [questionText.split(';;').join(', ')]
       }
       if (questionId.startsWith('measures')) validValues = [...validValues, getMeasuresAnswer(rawData, questionId)]
       return validValues.join('\n')
@@ -135,23 +157,40 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
   return csvData
 }
 
-const CsvDownload = ({ wantedData, view, programme }) => {
+const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const answers = useSelector(state => state.tempAnswers)
-  const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
   const programmeData = useSelector(({ form }) => form.data)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const selectedAnswers = answersByYear({ year, answers, oldAnswers, draftYear })
+  const allTempAnswers = useSelector(state => state.tempAnswers)
+  const allOldAnswers = useSelector(state => state.oldAnswers)
+
+  // filter data for only correct form
+  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+  const tempAnswers = allTempAnswers?.data ? allTempAnswers?.data.filter(answer => answer.form === form) : []
+  const oldAnswers = allOldAnswers?.data ? allOldAnswers?.data.filter(answer => answer.form === form) : []
+
+  const getAnswers = () => {
+    if (formDeadline && year === draftYear.year && tempAnswers.length > 0) {
+      return tempAnswers.filter(answer => answer.year === year)
+    }
+
+    if ((!draftYear || year !== draftYear.year) && oldAnswers && oldAnswers?.length > 0) {
+      return oldAnswers.filter(answer => answer.year === year)
+    }
+    return []
+  }
+
+  const selectedAnswers = getAnswers()
 
   const data = React.useMemo(
     () =>
       handleData({
         t,
         lang,
-        answers,
+        answers: tempAnswers,
         oldAnswers,
         year,
         programmeData,
@@ -165,7 +204,7 @@ const CsvDownload = ({ wantedData, view, programme }) => {
     [
       t,
       lang,
-      answers,
+      tempAnswers,
       oldAnswers,
       year,
       programmeData,

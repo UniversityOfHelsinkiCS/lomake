@@ -36,7 +36,7 @@ export default {
     clearSelection: 'Clear selection',
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
-    smileyColors: 'Traffic lights',
+    trafficLights: 'Traffic lights',
 
     choose: 'Choose',
     colors_all: 'all',
@@ -53,10 +53,11 @@ export default {
     yearlyAssessment: 'Yearly assessment',
     evaluation: 'Evaluation',
     'degree-reform': 'Degree reform',
-    'degree-reform-group': 'Degree reform group',
-    'degree-reform-individual': 'Degree reform individual',
+    'degree-reform-group': 'Degree reform - programmes',
+    'degree-reform-individual': 'Degree reform - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
+    otherTextBox: 'Other, what?',
   },
 
   aboutPage: {
@@ -136,6 +137,8 @@ export default {
       "For this evaluation, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
       "Discuss the following themes among the studyprogramme's steering group. Please note, that the <strong> yearly assessment for year 2023 should be done before this evaluation</strong>.",
+    selectApplicable: 'Select all applicable options',
+    addMissing: ' Add any missing options - You may add several',
   },
 
   generic: {
@@ -173,6 +176,13 @@ export default {
     csvFileoverviewcolors: 'All_the_programmes_traffic_lights',
     colors: 'Download traffic light answers as a CSV file',
     written: 'Download written answers as a CSV file',
+
+    level: {
+      programmes: 'Study programme level',
+      faculties: 'Faculty level',
+      university: 'University level',
+      committee: 'Committee',
+    },
   },
 
   overview: {

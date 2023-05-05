@@ -20,7 +20,7 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
         <Grid.Column width={3}>{answer.details.shortLabel[lang]}</Grid.Column>
         {years.map(year => {
           return (
-            <Grid.Column width={4}>
+            <Grid.Column width={4} key={year}>
               {answer[year]?.count ? measuresCount(answer[year].count) : colorCircle(answer[year]?.light)}
             </Grid.Column>
           )
@@ -41,7 +41,7 @@ const SummaryRow = ({ answer, lang, k, years, t }) => {
           </Grid.Column>
           {years.map(year => {
             return (
-              <Grid.Column width={4} className="old-answer-text">
+              <Grid.Column width={4} className="old-answer-text" key={year}>
                 {answer[year].text || t('empty')}
               </Grid.Column>
             )

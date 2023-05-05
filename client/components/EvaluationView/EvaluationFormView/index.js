@@ -17,8 +17,7 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
-import questions from '../../../evaluationQuestions.json'
-import yearlyQuestions from '../../../questions.json'
+import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
 
 // TO FIX yearly and degree form uses same checker. refactor to common tools
 const formShouldBeViewOnly = ({
@@ -282,6 +281,7 @@ const EvaluationFormView = ({ room, formString }) => {
             questions={questions}
             yearlyAnswers={yearlyAnswers}
             form={form}
+            summaryUrl={summaryURL}
           />
         </div>
       </div>

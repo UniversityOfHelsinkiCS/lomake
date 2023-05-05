@@ -9,6 +9,7 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     supportFile: 'cypress/support/index.js',
     specPattern: 'cypress/integration/*.spec.js',
+    experimentalRunAllSpecs: true,
   },
   retries: {
     // Configure retry attempts for `cypress run`

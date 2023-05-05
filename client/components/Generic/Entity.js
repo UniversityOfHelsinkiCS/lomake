@@ -2,11 +2,12 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
-import SmileyColors from './SmileyColors'
+import TrafficLights from './TrafficLights'
 import './Generic.scss'
 import OldAnswersSummary from './OldAnswersSummary'
 
@@ -28,6 +29,7 @@ const Entity = ({
   formType,
   relatedYearlyAnswers = null,
   form,
+  summaryUrl,
 }) => {
   const { t } = useTranslation()
 
@@ -56,7 +58,7 @@ const Entity = ({
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <SmileyColors id={id} form={form} />}
+        {!noColor && <TrafficLights id={id} form={form} />}
       </div>
       <div
         className="entity-description"
@@ -72,6 +74,11 @@ const Entity = ({
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {formType === 'evaluation' && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
+      {formType === 'evaluation' && (
+        <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
+          <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
+        </Link>
+      )}
       <Textarea
         id={id}
         label={t('generic:textAreaLabel')}

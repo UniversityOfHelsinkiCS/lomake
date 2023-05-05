@@ -31,7 +31,7 @@ export default {
     clearSelection: 'Rensa urval',
     responses: 'Svar:',
     writtenAnswers: 'Skriftliga svar',
-    smileyColors: 'Trafikljus',
+    trafficLights: 'Trafikljus',
 
     choose: 'Välj',
     colors_all: 'alla',
@@ -47,6 +47,7 @@ export default {
 
     // yearlyAssessment: '',
     // katselmus: '',
+    // otherTextBox: '',
   },
 
   aboutPage: {
@@ -122,6 +123,8 @@ export default {
     // removeDevelopmentArea: '',
     // evaluationInfo1: '',
     // evaluationInfo2: '',
+    // selectApplicable: '',
+    // addMissing: '',
   },
 
   generic: {
@@ -158,6 +161,13 @@ export default {
     csvFileoverviewcolors: 'Alla_program_trafikljus',
     colors: 'Trafikljus', // check
     written: 'Skriftliga svar', // check
+
+    // level: {
+    //   programmes: '',
+    //   faculties: '',
+    //   university: '',
+    //   committee: '',
+    // },
   },
 
   overview: {

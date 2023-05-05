@@ -1,10 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
-const SmileyColors = ({ id, form }) => {
+const TrafficLights = ({ id, form }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const value = useSelector(({ form }) => form.data[fieldName])
@@ -19,21 +21,21 @@ const SmileyColors = ({ id, form }) => {
   return (
     <div style={{ margin: '1em 0' }}>
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-        <div title="No issues">
+        <div title={`${t('positive')}`}>
           <div
             data-cy={`color-positive-${id}`}
             className={getClassName('green')}
             onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
           />
         </div>
-        <div title="Challenges identified and development underway">
+        <div title={`${t('neutral')}`}>
           <div
             data-cy={`color-neutral-${id}`}
             className={getClassName('yellow')}
             onClick={!viewOnly ? () => choose(fieldName, 'yellow') : undefined}
           />
         </div>
-        <div title="Significant measures required/development areas not yet specified">
+        <div title={`${t('negative')}`}>
           <div
             data-cy={`color-negative-${id}`}
             className={getClassName('red')}
@@ -45,4 +47,4 @@ const SmileyColors = ({ id, form }) => {
   )
 }
 
-export default SmileyColors
+export default TrafficLights

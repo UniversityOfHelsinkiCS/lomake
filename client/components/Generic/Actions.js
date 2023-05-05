@@ -1,50 +1,32 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Button, Confirm, Divider, Input, Label, Icon } from 'semantic-ui-react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Divider, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
-import SimpleTextarea from './SimpleTextarea'
-// import Textarea from './Textarea'
+import ActionElement from './ActionElement'
 import './Generic.scss'
-
-const ActionElement = ({ t, id, form, viewOnly, index }) => {
-  return (
-    <div key={index}>
-      <div style={{ paddingLeft: '2em' }}>
-        <Label color="red" ribbon>
-          {t('formView:developmentArea')}
-        </Label>
-        <Input style={{ width: '50%' }} placeholder={t('formView:developmentArea')} />
-      </div>
-      <SimpleTextarea label={t('formView:actions')} id={`${id}_${index}`} viewOnly={viewOnly} form={form} />
-      {/* <Textarea id={id} label={t('formView:actions')} EntityLastYearsAccordion={null} form={form} maxLength={500} /> */}
-    </div>
-  )
-}
 
 const Actions = ({ id, label, description, form, required, extrainfo }) => {
   const { t } = useTranslation()
-  // const formData = useSelector(state => state.form.data)
+  const dispatch = useDispatch()
+  const formData = useSelector(state => state.form.data)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const [confirm, setConfirm] = useState(false)
-  const [actions, setActions] = useState([])
-  const actionCount = actions.length || 0
+
+  const actionsList = Object.keys(formData).filter(questionId => questionId.includes(id)) || []
+  const actionsCount = actionsList.length
 
   const handleAdd = () => {
-    setActions([...actions, { id: actionCount + 1, area_title: '', action_text: '' }])
+    dispatch(updateFormField(`${id}-${actionsCount + 1}-text`, { title: '', actions: '' }, form))
   }
 
-  const handleRemove = () => {
-    const newList = actions.reduce((all, current) => {
-      if (current?.id !== actionCount) {
-        return [...all, current]
-      }
-      return all
-    }, [])
-    setActions(newList)
-    setConfirm(false)
+  const previousHasContent = () => {
+    if (!formData[`${id}-${actionsCount}-text`]) {
+      return false
+    }
+    const latest = formData[`${id}-${actionsCount}-text`]
+    return latest.title.length > 0 || latest.actions.length > 0
   }
-
   return (
     <div
       className="form-entity-area"
@@ -75,36 +57,19 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {actions.map((action, index) => {
-        return (
-          <ActionElement
-            key={action.id}
-            t={t}
-            id={id}
-            form={form}
-            viewOnly={viewOnly}
-            action={action}
-            index={index}
-            actions={actions}
-            setActions={setActions}
-          />
-        )
-      })}
+      {actionsList.length === 0 ? (
+        <ActionElement key="action-1" id={id} form={form} viewOnly={viewOnly} index={1} />
+      ) : (
+        actionsList.map((action, index) => {
+          return <ActionElement key={`action-${index + 1}`} id={id} form={form} viewOnly={viewOnly} index={index + 1} />
+        })
+      )}
       <div style={{ display: 'flex' }}>
-        {actionCount < 5 && (
-          <Button icon basic labelPosition="left" color="blue" onClick={handleAdd}>
+        {actionsCount < 5 && !viewOnly && (
+          <Button icon basic labelPosition="left" color="blue" onClick={handleAdd} disabled={!previousHasContent()}>
             <Icon name="add" />
             {t('formView:addDevelopmentArea')}
           </Button>
-        )}
-        {actionCount > 0 && (
-          <div>
-            <Button icon basic labelPosition="left" color="red" onClick={() => setConfirm(true)}>
-              <Icon name="trash alternate" />
-              {t('formView:removeDevelopmentArea')}
-            </Button>
-            <Confirm open={confirm} onCancel={() => setConfirm(false)} onConfirm={handleRemove} />
-          </div>
         )}
       </div>
     </div>

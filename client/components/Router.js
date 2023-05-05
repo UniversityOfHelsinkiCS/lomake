@@ -8,7 +8,7 @@ import OverviewPage from 'Components/OverviewPage'
 import ReportPage from 'Components/ReportPage'
 import ComparisonPage from 'Components/ComparisonPage'
 
-import EvaluationOverview from 'Components/EvaluationView/EvaluationOverview'
+import ProgrammeLevelOverview from 'Components/EvaluationView/ProgrammeLevelOverview'
 import EvaluationFormView from 'Components/EvaluationView/EvaluationFormView'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
 import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
@@ -25,7 +25,7 @@ export default () => (
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
 
-      <Route exact path="/evaluation" component={EvaluationOverview} />
+      <Route exact path="/evaluation" component={ProgrammeLevelOverview} />
       <Route exact path="/degree-reform" component={DegreeReformOverview} />
       <Route
         exact

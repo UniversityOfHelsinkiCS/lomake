@@ -37,6 +37,14 @@ export default () => {
     )
   }
 
+  const GoToYearlyAssessmentButton = () => {
+    return (
+      <Menu.Item data-cy="nav-yearly" as={Link} to="/" name="yearlyAssessment">
+        {t('yearlyAssessment')}
+      </Menu.Item>
+    )
+  }
+
   const GoToAdminPageButton = () => {
     return (
       <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
@@ -47,8 +55,17 @@ export default () => {
 
   const GoToEvaluationButton = () => {
     return (
-      <Menu.Item data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
-        {t('evaluation')}
+      <Menu.Item data-cy="nav-evaluation">
+        <Dropdown item data-cy="nav-evaluation-dropdown" text={t('evaluation')}>
+          <Dropdown.Menu>
+            <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
+              {t('generic:level:programmes')}
+            </Dropdown.Item>
+            <Dropdown.Item disabled data-cy="nav-evaluation-option-faculties" name="faculties">
+              {t('generic:level:faculties')}
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Item>
     )
   }
@@ -90,9 +107,10 @@ export default () => {
         <Menu.Item as={Link} to="/">
           <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
         </Menu.Item>
-        {user.superAdmin ? <GoToEvaluationButton /> : null}
-        {user.superAdmin ? <GoToDegreeReformGroup /> : null}
-        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        <GoToYearlyAssessmentButton />
+        {user.admin ? <GoToEvaluationButton /> : null}
+        {user.admin ? <GoToDegreeReformGroup /> : null}
+        {user.admin ? <GoToDegreeReformIndividual /> : null}
         {user.admin ? <GoToAdminPageButton /> : null}
         <Menu.Item>
           <a href="mailto:ospa@helsinki.fi">
@@ -109,7 +127,7 @@ export default () => {
     <Menu id="navBar-wrapper" stackable compact fluid>
       <MenuNavigation />
       <Menu.Menu>
-        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
+        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>
             <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
               Suomi

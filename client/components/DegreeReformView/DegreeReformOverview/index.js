@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
@@ -28,7 +28,7 @@ export default () => {
     document.title = `${t('degree-reform')}`
   }, [lang])
 
-  if (!isSuperAdmin(currentUser.data)) {
+  if (!isAdmin(currentUser.data)) {
     history.push('/')
   }
 

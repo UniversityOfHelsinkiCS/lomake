@@ -145,7 +145,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-list-programme-MH40_003]').should('be.visible')
   })
 
-  it('Changes in smileys are reflected to the piecharts', () => {
+  it('Changes in traffic lights are reflected to the piecharts', () => {
     cy.login(user)
     cy.visit('/')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()

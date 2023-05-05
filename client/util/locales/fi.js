@@ -17,7 +17,7 @@ export default {
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
 
-    faculty: ' Tiedekunta',
+    faculty: 'Tiedekunta',
     programmeHeader: 'Koulutusohjelma',
     code: 'Koodi',
     allProgrammes: 'Kaikki ohjelmat',
@@ -32,7 +32,7 @@ export default {
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
-    smileyColors: 'Liikennevalojen värit',
+    trafficLights: 'Liikennevalojen värit',
 
     choose: 'Valitse',
     colors_all: 'kaikki',
@@ -49,10 +49,12 @@ export default {
     yearlyAssessment: 'Vuosiseuranta',
     evaluation: 'Katselmus',
     'degree-reform': 'Koulutusuudistus',
-    'degree-reform-group': 'Koulutusuudistus ryhmä',
-    'degree-reform-individual': 'Koulutusuudistus yksilö',
+    'degree-reform-group': 'Koulutusuudistus - ohjelmat',
+    'degree-reform-individual': 'Koulutusuudistus - yksilö',
     'read-more': 'Lue lisää',
     'read-less': 'Lue vähemmän',
+
+    otherTextBox: 'Muu, mikä?',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -132,6 +134,8 @@ export default {
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
       'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
+    selectApplicable: 'Valitkaa sopivat vaihtoehdot',
+    addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
   },
 
   generic: {
@@ -169,6 +173,12 @@ export default {
     csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalovärit',
     colors: 'Lataa liikennevalovastaukset CSV-tiedostoina',
     written: 'Lataa kirjalliset vastaukset CSV-tiedostoina',
+    level: {
+      programmes: 'Koulutusohjelmataso',
+      faculties: 'Tiedekuntataso',
+      university: 'Yliopistotaso',
+      committee: 'Arviointiryhmä',
+    },
   },
 
   overview: {
