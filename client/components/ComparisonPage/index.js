@@ -19,7 +19,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { isAdmin } from '@root/config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
-import questions from '../../questionData/yearlyQuestions.json'
+import { yearlyQuestions as questions } from '../../questionData'
 import './ComparisonPage.scss'
 
 const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang }) => {

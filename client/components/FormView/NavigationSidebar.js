@@ -6,10 +6,12 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
-import questions from '../../questionData/yearlyQuestions.json'
-import evaluationQuestions from '../../questionData/evaluationQuestions.json'
-import degreeReformQuestions from '../../questionData/degreeReformQuestions.json'
-import degreeReformIndividualQuestions from '../../questionData/degreeReformIndividualQuestions.json'
+import {
+  yearlyQuestions as questions,
+  evaluationQuestions,
+  degreeReformQuestions,
+  degreeReformIndividualQuestions,
+} from '../../questionData'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',

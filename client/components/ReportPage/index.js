@@ -22,7 +22,7 @@ import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
-import rawQuestions from '../../questionData/yearlyQuestions.json'
+import { yearlyQuestions as rawQuestions } from '../../questionData'
 import './ReportPage.scss'
 
 const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang }) => {

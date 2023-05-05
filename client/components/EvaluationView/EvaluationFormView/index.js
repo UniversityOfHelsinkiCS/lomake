@@ -17,8 +17,7 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
-import questions from '../../../questionData/evaluationQuestions.json'
-import yearlyQuestions from '../../../questionData/yearlyQuestions.json'
+import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
 
 // TO FIX yearly and degree form uses same checker. refactor to common tools
 const formShouldBeViewOnly = ({
