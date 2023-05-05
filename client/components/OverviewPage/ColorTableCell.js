@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import questions from '../../questions.json'
+import yearlyQuestions from '../../questions.json'
+import evaluationQuestions from '../../evaluationQuestions.json'
 
 const colorScoreMap = {
   green: 1,
@@ -19,6 +20,7 @@ const ColorTableCell = ({
   questionType,
   setModalData,
   programmesOldAnswers,
+  form = 1,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -55,6 +57,11 @@ const ColorTableCell = ({
     return i - 1
   }
 
+  const questionMap = {
+    1: yearlyQuestions,
+    4: evaluationQuestions,
+  }
+  const questions = questionMap[form] || yearlyQuestions
   const textId = `${questionId}_text`
   const colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
