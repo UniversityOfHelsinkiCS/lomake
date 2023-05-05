@@ -55,8 +55,17 @@ export default () => {
 
   const GoToEvaluationButton = () => {
     return (
-      <Menu.Item data-cy="nav-evaluation" as={Link} to="/evaluation" name="evaluation">
-        {t('evaluation')}
+      <Menu.Item data-cy="nav-evaluation">
+        <Dropdown item data-cy="nav-evaluation-dropdown" text={t('evaluation')}>
+          <Dropdown.Menu>
+            <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
+              {t('generic:level:programmes')}
+            </Dropdown.Item>
+            <Dropdown.Item disabled data-cy="nav-evaluation-option-faculties" name="evaluation2">
+              {t('generic:level:faculties')}
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Item>
     )
   }

@@ -176,6 +176,13 @@ export default {
     csvFileoverviewcolors: 'All_the_programmes_traffic_lights',
     colors: 'Download traffic light answers as a CSV file',
     written: 'Download written answers as a CSV file',
+
+    level: {
+      programmes: 'Study programme level',
+      faculties: 'Faculty level',
+      university: 'University level',
+      committee: 'Committee',
+    },
   },
 
   overview: {

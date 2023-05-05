@@ -17,7 +17,7 @@ export default {
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
 
-    faculty: ' Tiedekunta',
+    faculty: 'Tiedekunta',
     programmeHeader: 'Koulutusohjelma',
     code: 'Koodi',
     allProgrammes: 'Kaikki ohjelmat',
@@ -173,6 +173,12 @@ export default {
     csvFileoverviewcolors: 'Tilannekuvalomake_kaikki_ohjelmat_liikennevalovärit',
     colors: 'Lataa liikennevalovastaukset CSV-tiedostoina',
     written: 'Lataa kirjalliset vastaukset CSV-tiedostoina',
+    level: {
+      programmes: 'Koulutusohjelmataso',
+      faculties: 'Tiedekuntataso',
+      university: 'Yliopistotaso',
+      committee: 'Arviointiryhmä',
+    },
   },
 
   overview: {

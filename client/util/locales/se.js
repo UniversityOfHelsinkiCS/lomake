@@ -161,6 +161,13 @@ export default {
     csvFileoverviewcolors: 'Alla_program_trafikljus',
     colors: 'Trafikljus', // check
     written: 'Skriftliga svar', // check
+
+    // level: {
+    //   programmes: '',
+    //   faculties: '',
+    //   university: '',
+    //   committee: '',
+    // },
   },
 
   overview: {
