@@ -119,10 +119,10 @@ export default () => {
               {showCsv ? (
                 <Dropdown.Menu>
                   <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" />
+                    <CsvDownload wantedData="written" view="overview" form={form} />
                   </Dropdown.Item>
                   <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" />
+                    <CsvDownload wantedData="colors" view="overview" form={form} />
                   </Dropdown.Item>
                 </Dropdown.Menu>
               ) : null}
