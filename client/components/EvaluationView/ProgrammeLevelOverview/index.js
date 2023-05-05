@@ -9,17 +9,17 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import ColorTable from '../../OverviewPage/ColorTable'
-import StatsContent from '../../OverviewPage/StatsContent'
-import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
+// import StatsContent from '../../OverviewPage/StatsContent'
+// import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
 export default () => {
   const history = useHistory()
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
-  // To FIX both next two
-  const [programControlsToShow, setProgramControlsToShow] = useState(null)
-  const [statsToShow, setStatsToShow] = useState(null)
+  // To FIX implement both next two at some point
+  // const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  // const [statsToShow, setStatsToShow] = useState(null)
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
@@ -78,7 +78,7 @@ export default () => {
         </CustomModal>
       )}
 
-      {programControlsToShow && (
+      {/* {programControlsToShow && (
         <CustomModal
           title={`${t('overview:accessRights')} - ${
             programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
@@ -93,7 +93,7 @@ export default () => {
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
-      )}
+      )} */}
 
       {usersProgrammes.length > 0 ? (
         <>
@@ -104,8 +104,8 @@ export default () => {
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
-              setProgramControlsToShow={setProgramControlsToShow}
-              setStatsToShow={setStatsToShow}
+              setProgramControlsToShow={null}
+              setStatsToShow={null}
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}
               filterValue={filter}
