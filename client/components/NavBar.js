@@ -127,7 +127,7 @@ export default () => {
     <Menu id="navBar-wrapper" stackable compact fluid>
       <MenuNavigation />
       <Menu.Menu>
-        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `} simple>
+        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>
             <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
               Suomi
