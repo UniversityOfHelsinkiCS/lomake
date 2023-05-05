@@ -1,29 +1,21 @@
 import React from 'react'
-import { Radio, Form } from 'semantic-ui-react'
+import { Radio, Form, Input } from 'semantic-ui-react'
 import './Generic.scss'
 
-const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, type, checked }) => {
+const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, type, checked, handleOtherField }) => {
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
-  }
-
-  let selectedFirstPart = ''
-  let selectedSecondPart = ''
-  const isThereALine = checked.length > 0 ? checked.indexOf('-') === -1 : false
-  if (isThereALine) {
-    const indexOfLine = checked.length
-    selectedFirstPart = checked.substring(0, indexOfLine)
-  } else {
-    const indexOfLine = checked.indexOf('-')
-    selectedFirstPart = checked.substring(0, indexOfLine)
-    selectedSecondPart = checked.substring(indexOfLine + 1, checked.length)
   }
   const handleChange = label => {
     if (type === 'basic') {
       handleClick(label)
     } else {
-      handleClick({ firstPart: selectedFirstPart, value: label })
+      handleClick({ firstPart: checked.firstValue, secondPart: label })
     }
+  }
+
+  const isChecked = value => {
+    return type === 'basic' ? checked.firstValue === value : checked.secondValue === value
   }
 
   return (
@@ -47,13 +39,24 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                       {o.label}
                     </label>
                   }
-                  checked={type === 'basic' ? selectedFirstPart === o.id : selectedSecondPart === o.id}
+                  checked={isChecked(o.id)}
                   onClick={() => handleChange(o.id)}
                   disabled={viewOnly}
                 />
               </Form.Field>
             )
           })}
+          {checked.secondValue === 'other' ? (
+            <Input
+              key={generateKey('random')}
+              style={{ width: '60%' }}
+              value={checked.thirdValue}
+              onChange={handleOtherField}
+              version="degree-reform"
+              size="small"
+              autoFocus
+            />
+          ) : null}
         </div>
       ) : (
         <p>Missing options</p>

@@ -7,21 +7,8 @@ const DropdownFilter = ({ size, label, handleFilterChange, selectedRadio }) => {
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
 
-  let selectedFirstPart = ''
-  let selectedSecondPart = ''
-
-  const isThereALine = selectedRadio.indexOf('-') === -1
-  if (isThereALine) {
-    const indexOfLine = selectedRadio.length
-    selectedFirstPart = selectedRadio.substring(0, indexOfLine)
-  } else {
-    const indexOfLine = selectedRadio.indexOf('-')
-    selectedFirstPart = selectedRadio.substring(0, indexOfLine)
-    selectedSecondPart = selectedRadio.substring(indexOfLine + 1, selectedRadio.length)
-  }
-
   const handleChange = (e, { value }) => {
-    handleFilterChange(selectedFirstPart, value)
+    handleFilterChange(selectedRadio[0], value)
   }
 
   const getOptions = () => {
@@ -44,7 +31,7 @@ const DropdownFilter = ({ size, label, handleFilterChange, selectedRadio }) => {
         selection
         options={faculties ? getOptions() : []}
         onChange={handleChange}
-        value={selectedSecondPart}
+        value={selectedRadio[1]}
       />
     </div>
   )

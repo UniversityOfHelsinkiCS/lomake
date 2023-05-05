@@ -11,7 +11,7 @@ import './Generic.scss'
 
 const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptions, formType, advancedOptions }) => {
   const dispatch = useDispatch()
-  const [state, setState] = useState({ value: '' })
+  const [state, setState] = useState({ firstValue: '', secondValue: '', thirdValue: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
@@ -20,26 +20,50 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
 
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
 
+  useEffect(() => {
+    const splitRadio = dataFromRedux.split('_-_')
+
+    for (let i = 0; i < 3; i++) {
+      if (!splitRadio[i]) {
+        splitRadio[i] = ''
+      }
+    }
+    setState({ firstValue: splitRadio[0], secondValue: splitRadio[1], thirdValue: splitRadio[2] })
+  }, [dataFromRedux])
+
   const generateKey = label => {
     return `${label}_${new Date().getTime()}`
   }
 
-  const handleClick = ({ firstPart, value }) => {
-    if (firstPart && !value) {
-      setState({ value: `${firstPart}` })
-      choose(id, firstPart)
+  const handleOtherField = input => {
+    const { value } = input.target
+
+    if (state.secondValue && value) {
+      setState({ firstValue: state.firstValue, secondValue: state.secondValue, thirdValue: value })
+      choose(id, `${state.firstValue}_-_${state.secondValue}_-_${value}`)
+    } else if (state.firstValue && value) {
+      setState({ firstValue: state.firstValue, secondValue: value })
+      choose(id, `${state.firstValue}_-_${value}`)
     } else {
-      setState({ value: `${firstPart}-${value}` })
-      choose(id, `${firstPart}-${value}`)
+      setState({ firstValue: value })
+      choose(id, `${value}`)
     }
   }
 
-  useEffect(() => {
-    setState({ value: dataFromRedux })
-  }, [dataFromRedux])
+  const handleClick = ({ firstPart, secondPart, thirdPart }) => {
+    if (thirdPart) {
+      setState({ firstValue: firstPart, secondValue: secondPart, thirdValue: thirdPart })
+      choose(id, `${firstPart}_-_${secondPart}_-_${thirdPart}`)
+    } else if (secondPart) {
+      setState({ firstValue: firstPart, secondValue: secondPart })
+      choose(id, `${firstPart}_-_${secondPart}`)
+    } else {
+      setState({ firstValue: firstPart })
+      choose(id, firstPart)
+    }
+  }
+
   const radioButtonLabels = radioOptions ? radioOptions[lang] : null
-  const indexOfine = state.value.indexOf('-') === -1 ? state.value.length : state.value.indexOf('-')
-  const selected = state.value.substring(0, indexOfine)
   return (
     <div className="form-advanced-radio-area">
       <Divider />
@@ -69,39 +93,54 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
                     label={o.label}
                     name="radioGroup"
                     value={o.label}
-                    checked={selected === o.id}
+                    checked={state.firstValue === o.id}
                     onChange={() => handleClick({ firstPart: o.id, value: '' })}
                     data-cy="unit-selection"
                   />
                 </Form.Field>
-                {o.id === 'teaching_or_other_research' && selected === 'teaching_or_other_research' ? (
-                  <BasicRadio
-                    handleClick={handleClick}
-                    checked={state.value}
-                    disabled={viewOnly}
-                    id={id}
-                    type="advanced"
-                    radioButtonLabels={advancedOptions[o.id][lang]}
-                  />
+                {o.id === 'teaching_or_other_research' && state.firstValue === 'teaching_or_other_research' ? (
+                  <>
+                    <BasicRadio
+                      handleClick={handleClick}
+                      checked={state}
+                      disabled={viewOnly}
+                      id={id}
+                      type="advanced"
+                      radioButtonLabels={advancedOptions[o.id][lang]}
+                      handleOtherField={handleOtherField}
+                    />
+                    <div style={{ marginBottom: '1em' }} />
+                  </>
                 ) : null}
               </div>
             )
           })}
-          {selected === 'faculty' ? (
+          {state.firstValue === 'faculty' ? (
             <DropdownFilter
               handleFilterChange={handleClick}
               version="degree-reform"
               size="small"
               label={t('comparison:filterFaculties')}
-              selectedRadio={state.value}
+              selectedRadio={state}
               disabled={viewOnly}
             />
           ) : null}
-          {selected === 'other' ? <Input handleFilterChange={handleClick} version="degree-reform" size="big" /> : null}
+          {state.firstValue === 'other' ? (
+            <Input
+              key={generateKey('random2')}
+              style={{ width: '60%' }}
+              value={state.secondValue}
+              onChange={handleOtherField}
+              version="degree-reform"
+              size="small"
+              autoFocus
+            />
+          ) : null}
         </Form>
       ) : (
         <p>Missing options</p>
       )}
+      {}
     </div>
   )
 }
