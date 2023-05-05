@@ -61,7 +61,7 @@ export default () => {
             <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
               {t('generic:level:programmes')}
             </Dropdown.Item>
-            <Dropdown.Item disabled data-cy="nav-evaluation-option-faculties" name="evaluation2">
+            <Dropdown.Item disabled data-cy="nav-evaluation-option-faculties" name="faculties">
               {t('generic:level:faculties')}
             </Dropdown.Item>
           </Dropdown.Menu>
