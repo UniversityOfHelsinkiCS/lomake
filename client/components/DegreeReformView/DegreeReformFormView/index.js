@@ -15,7 +15,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 
 import DegreeReformForm from './DegreeReformForm'
 
-import { yearlyQuestions as questionData } from '../../../questionData'
+import { degreeReformQuestions as questionData } from '../../../questionData'
 
 const formShouldBeViewOnly = ({
   accessToTempAnswers,
