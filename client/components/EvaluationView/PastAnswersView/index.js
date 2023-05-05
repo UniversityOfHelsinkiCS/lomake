@@ -9,7 +9,7 @@ import { isAdmin } from '@root/config/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
-import questions from '../../../questions.json'
+import questions from '../../../questionData/yearlyQuestions.json'
 
 const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
   const mapped = allAnswers.map(data => {

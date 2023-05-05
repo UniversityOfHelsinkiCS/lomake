@@ -16,7 +16,7 @@ import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
-import questions from '../../questions.json'
+import questions from '../../questionData/yearlyQuestions.json'
 import Downloads from './Downloads'
 import './FormView.scss'
 

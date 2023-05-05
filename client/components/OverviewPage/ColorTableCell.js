@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import yearlyQuestions from '../../questions.json'
-import evaluationQuestions from '../../evaluationQuestions.json'
+import yearlyQuestions from '../../questionData/yearlyQuestions.json'
+import evaluationQuestions from '../../questionData/evaluationQuestions.json'
 
 const colorScoreMap = {
   green: 1,

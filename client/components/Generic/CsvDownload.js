@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { useTranslation } from 'react-i18next'
 import { programmeNameByKey as getProgrammeName } from 'Utilities/common'
-import questions from '../../questions.json'
+import questions from '../../questionData/yearlyQuestions.json'
 import './Generic.scss'
 
 const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, programme, wantedData, view }) => {
