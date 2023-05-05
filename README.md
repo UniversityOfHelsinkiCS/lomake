@@ -41,19 +41,19 @@ ApiConnection is a custom redux middleware that is used in most toska software. 
 You can see redux example using apiConnection in client/components/MessageComponent.
 
 ## Questions
-Tilannekuvalomake has various sets of questions in separate files. All question files are in the format of an array of `Section` objects.
+Tilannekuvalomake has various sets of questions in separate files. All question files are in the format of an array of `Section` objects and can be found under client/questionData/.
 
 ### Yearly assessment
 
-The current questions of the yearly assessment (vuosiseuranta) form can be found in [questions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/questions.json). 
+The current questions of the yearly assessment (vuosiseuranta) form can be found in **yearlyQuestions.json**.
 
 ### Evaluation
 
-The current questions of the evaluation (katselmus) form can be found in [evaluationQuestions.json](https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/client/evaluationQuestions.json). 
+The current questions of the evaluation (katselmus) form can be found in **evaluationQuestions.json**. 
 
 ### Degree reform
 
-The current questions of the degree reform forms can be found in degreeReformIndividualQuestions.json and degreeReformQuestions.json.
+The current questions of the degree reform forms can be found in **degreeReformIndividualQuestions.json** and **degreeReformQuestions.json**.
 
 
 **Section**
