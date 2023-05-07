@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
+import debounce from 'lodash/debounce'
 import DropdownFilter from './DropdownFilter'
 import BasicRadio from './BasicRadio'
 
@@ -20,6 +21,17 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
 
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
 
+  const debouncedChangeHandler = useCallback(
+    debounce((value, firstValue, secondValue) => {
+      if (secondValue && value) {
+        choose(id, `${firstValue}_-_${secondValue}_-_${value}`)
+      } else if (firstValue && value) {
+        choose(id, `${firstValue}_-_${value}`)
+      }
+    }, 300),
+    []
+  )
+
   useEffect(() => {
     const splitRadio = dataFromRedux.split('_-_')
 
@@ -31,23 +43,14 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     setState({ firstValue: splitRadio[0], secondValue: splitRadio[1], thirdValue: splitRadio[2] })
   }, [dataFromRedux])
 
-  const generateKey = label => {
-    return `${label}_${new Date().getTime()}`
-  }
-
   const handleOtherField = input => {
     const { value } = input.target
-
     if (state.secondValue && value) {
       setState({ firstValue: state.firstValue, secondValue: state.secondValue, thirdValue: value })
-      choose(id, `${state.firstValue}_-_${state.secondValue}_-_${value}`)
     } else if (state.firstValue && value) {
       setState({ firstValue: state.firstValue, secondValue: value })
-      choose(id, `${state.firstValue}_-_${value}`)
-    } else {
-      setState({ firstValue: value })
-      choose(id, `${value}`)
     }
+    debouncedChangeHandler(value, state.firstValue, state.secondValue)
   }
 
   const handleClick = ({ firstPart, secondPart, thirdPart }) => {
@@ -83,10 +86,10 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form data-cy={`advanced-radio-${id}`}>
+        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`}>
           {radioButtonLabels.map(o => {
             return (
-              <div key={generateKey(o.label)}>
+              <div key={`${id}-${o.id}`}>
                 <Form.Field>
                   <Radio
                     disabled={viewOnly}
@@ -127,7 +130,6 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
           ) : null}
           {state.firstValue === 'other' ? (
             <Input
-              key={generateKey('random2')}
               style={{ width: '60%' }}
               value={state.secondValue}
               onChange={handleOtherField}

@@ -3,9 +3,6 @@ import { Radio, Form, Input } from 'semantic-ui-react'
 import './Generic.scss'
 
 const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, type, checked, handleOtherField }) => {
-  const generateKey = label => {
-    return `${label}_${new Date().getTime()}`
-  }
   const handleChange = label => {
     if (type === 'basic') {
       handleClick(label)
@@ -17,7 +14,6 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
   const isChecked = value => {
     return type === 'basic' ? checked.firstValue === value : checked.secondValue === value
   }
-
   return (
     <div>
       {radioButtonLabels ? (
@@ -25,7 +21,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
           {radioButtonLabels.map(o => {
             return (
               <Form.Field
-                key={generateKey(o.label)}
+                key={`basic-radio-${id}-${o.id}`}
                 style={direction !== 'horizontal' ? { display: 'flex' } : { marginLeft: '2em', textAlign: 'center' }}
               >
                 <Radio
@@ -47,15 +43,15 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
             )
           })}
           {checked.secondValue === 'other' ? (
-            <Input
-              key={generateKey('random')}
-              style={{ width: '60%' }}
-              value={checked.thirdValue}
-              onChange={handleOtherField}
-              version="degree-reform"
-              size="small"
-              autoFocus
-            />
+            <Form.Field>
+              <Input
+                style={{ width: '60%' }}
+                value={checked.thirdValue}
+                onChange={handleOtherField}
+                version="degree-reform"
+                size="small"
+              />
+            </Form.Field>
           ) : null}
         </div>
       ) : (
