@@ -56,10 +56,10 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
             <Popup
               content={
                 <>
-                  <p>1 = Täyin eri mieltä</p>
-                  <p>2 = Osittain eri mieltä§</p>
+                  <p>1 = Täysin eri mieltä</p>
+                  <p>2 = Osittain eri mieltä</p>
                   <p>3 = Ei samaa eikä eri mieltä</p>
-                  <p>4 = Osittain samaa mieltä§</p>
+                  <p>4 = Osittain samaa mieltä</p>
                   <p>5 = Täysin samaa mieltä</p>
                 </>
               }
