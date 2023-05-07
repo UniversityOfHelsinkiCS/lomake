@@ -8,6 +8,50 @@
     "id": 0,
     "parts": [
       {
+        "id": "how-many-years-at-uni",
+        "index": 0,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Vuosia yliopistossa",
+          "se": "",
+          "en": "Years at university"
+        },
+        "label": {
+          "fi": "Vuosia yliopistossa",
+          "se": "",
+          "en": "Years at university"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            { "label": "Alle 5 vuotta", "id": "under-5-years" },
+            { "label": "5-8 vuotta", "id": "5-8-years" },
+            { "label": "yli 8 vuotta", "id": "over-8-years" }
+          ],
+          "en": [
+            { "label": "Under 5 years", "id": "under-5-years" },
+            { "label": "5-8 years", "id": "5-8-years" },
+            { "label": "over 8 years", "id": "over-8-years" }
+          ],
+          "se": [
+            { "label": "Alle 5 vuotta", "id": "under-5-years" },
+            { "label": "5-8 vuotta", "id": "5-8-years" },
+            { "label": "yli 8 vuotta", "id": "over-8-years" }
+          ]
+        }
+      },
+      {
         "id": "background-unit",
         "index": 0,
         "type": "CHOOSE-ADVANCED",
@@ -71,12 +115,12 @@
         "index": 1,
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
-          "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
+          "fi": "Valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
           "se": "",
           "en": "Choose background info (primary role at the moment)"
         },
         "label": {
-          "fi": "valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
+          "fi": "Valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
           "se": "",
           "en": "Choose background info (primary role at the moment)"
         },
@@ -174,12 +218,12 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuena",
+          "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuena",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
+          "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
           "se": "",
           "en": ""
         },
@@ -206,12 +250,12 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "koulutusuudistuksen tavoitteiden toteutumista",
+          "fi": "Koulutusuudistuksen tavoitteiden toteutumista",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla",
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla \n1 = Täyin eri mieltä\n2 = Osittain eri mieltä\n3 = Ei samaa eikä eri mieltä\n4 = Osittain samaa mieltä\n5 = Täysin samaa mieltä",
           "se": "",
           "en": ""
         },
