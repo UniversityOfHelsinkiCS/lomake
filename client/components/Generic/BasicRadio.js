@@ -12,8 +12,9 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
   }
 
   const isChecked = value => {
-    return type === 'basic' ? checked.firstValue === value : checked.secondValue === value
+    return type === 'basic' ? checked === value : checked.secondValue === value
   }
+
   return (
     <div>
       {radioButtonLabels ? (
