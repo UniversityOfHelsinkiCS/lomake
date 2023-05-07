@@ -50,7 +50,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     <div className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '750px' }}>
+        <div>
           <h3>
             {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
             <Popup
