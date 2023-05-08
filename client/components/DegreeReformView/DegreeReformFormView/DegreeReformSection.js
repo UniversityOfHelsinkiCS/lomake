@@ -20,7 +20,6 @@ const Section = ({ title, number, children, programmeKey, formType }) => {
     { number: '4', text: 'Osittain samaa mieltä', id: 'somewhat-same' },
     { number: '5', text: 'Täysin samaa mieltä', id: 'very-same' },
   ]
-
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
@@ -45,14 +44,16 @@ const Section = ({ title, number, children, programmeKey, formType }) => {
           >
             {title}
           </h2>
-          <List style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-            {scaleNames.map(scaleName => (
-              <List.Item style={{ marginRight: '1em', padding: '!important 0.21428571em 0' }} key={scaleName.id}>
-                <Label horizontal>{scaleName.number}</Label>
-                <span> {scaleName.text} </span>
-              </List.Item>
-            ))}
-          </List>
+          {number !== 0 ? (
+            <List style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+              {scaleNames.map(scaleName => (
+                <List.Item style={{ marginRight: '1em', padding: '!important 0.21428571em 0' }} key={scaleName.id}>
+                  <Label horizontal>{scaleName.number}</Label>
+                  <span> {scaleName.text} </span>
+                </List.Item>
+              ))}
+            </List>
+          ) : null}
         </InView>
       </div>
       {children}
