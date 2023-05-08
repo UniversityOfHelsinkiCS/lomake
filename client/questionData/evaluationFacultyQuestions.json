@@ -26,6 +26,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -53,6 +54,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -80,6 +82,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -134,6 +137,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -234,6 +238,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -261,6 +266,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -288,6 +294,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -315,6 +322,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -342,6 +350,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -369,6 +378,7 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",

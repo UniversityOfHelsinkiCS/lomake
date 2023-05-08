@@ -1,0 +1,68 @@
+@import '../../../assets/colors.scss';
+
+.summary-container {
+ padding: 1em;
+}
+
+@mixin answer-circle-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+}
+
+.answer {
+  &-circle-green {
+    @include answer-circle-basics;
+    background: $background-green;
+  }
+  &-circle-yellow {
+    @include answer-circle-basics;
+    background: $background-yellow;
+  }
+  &-circle-red {
+    @include answer-circle-basics;
+    background: $background-red;
+  }
+  &-circle-gray {
+    @include answer-circle-basics;
+    background: $gray;
+  }
+}
+
+@mixin big-circle-basics {
+  display: inline-block;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  margin: 2px 1em;
+}
+
+.big-circle {
+  &-green {
+    @include big-circle-basics;
+    background: $background-green;
+  }
+  &-yellow {
+    @include big-circle-basics;
+    background: $background-yellow;
+  }
+  &-red {
+    @include big-circle-basics;
+    background: $background-red;
+  }
+}
+
+
+.measures-count-circle {
+  display: flexbox;
+  align-items: center;
+  border-radius: 20%;
+  padding: 5px;
+  background: $background-blue;
+  
+}
+
+.old-answer-text {
+  white-space: pre-line;
+}
