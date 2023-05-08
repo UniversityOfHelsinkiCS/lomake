@@ -1,0 +1,445 @@
+[
+  {
+    "title": {
+      "fi": "OPISKELUN SUJUVUUS",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "student_admittance_faculty",
+        "index": 1,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opiskelijavalinta",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "OPISKELIJAVALINTA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Opiskelijavalintojen toimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["student_admittance"]
+      },
+      {
+        "id": "ops_practicality_faculty",
+        "index": 2,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opetussuunnitelmat",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "OPETUSSUUNNITELMAT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Tiedekunnan koulutusohjelmien kokonaisuuden toimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["ops_practicality"]
+      },
+      {
+        "id": "study_ease_faculty",
+        "index": 3,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opiskelun sujuvuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "SUJUVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Opiskelun sujuvuus tiedekunnassa",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["guidance"]
+      },
+      {
+        "id": "transition_phase_faculty",
+        "index": 4,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Nivelvaihe",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "NIVELVAIHE",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["transition_phase"]
+      },
+      {
+        "id": "degree_flow_faculty",
+        "index": 5,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Läpivirtaus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "LÄPIVIRTAUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Tutkintojen suorittaminen ja läpivirtaus tiedekunnan koulutusohjelmissa",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["degree_flow"]
+      },
+      {
+        "id": "faculty_ease_of_study_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "faculty_ease_of_study_programme_strengths",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat opiskelun sujuuvus -teeman osalta koulutusohjelmanne vahvuudet?",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }, 
+      {
+        "id": "faculty_ease_of_study_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "no_color": true
+      }
+    ] 
+  },
+  {
+    "title": {
+      "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "communication_faculty",
+        "index": 6,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Johtaminen ja viestintä",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Johtamisen ja viestinnän toimivuus tiedekunnan koulutuksessa",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["communication"]
+      },
+      {
+        "id": "teaching_resources_management_faculty",
+        "index": 7,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Opetusresurssit",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "OPETUSRESURSSIT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Opetusresurssien suunnittelu ja hallinta",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["teaching_resources_management"]
+      },
+      {
+        "id": "recruiting_influence_faculty",
+        "index": 8,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Rekrytointi",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "REKRYTOINTIIN VAIKUTTAMINEN",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Ohjelman mahdollisuudet vaikuttaa uuden henkilökunnan rekrytointiin",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["recruiting_influence"]
+      },
+      {
+        "id": "environmental_resources_faculty",
+        "index": 9,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Laite- ja tilaresurssit",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "LAITE- JA TILARESURSSIT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["environmental_resources"]
+      },
+      {
+        "id": "shared_programmes_faculty",
+        "index": 10,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Yhteiset ohjelmat",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "TIEDEKUNNAN YHTEISET OHJELMAT",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Usean tiedekunnan yhteisten ohjelmien toimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["shared_programmes"]
+      },
+      {
+        "id": "programme_status_faculty",
+        "index": 11,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Ohjelman asema",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "KOULUTUSOHJELMAN ASEMA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Koulutusohjelmien asema yliopiston toiminta- ja johtamisrakenteessa",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestions": ["programme_status"]
+      },
+      {
+        "id": "faculty_programme_structure_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "faculty_programme_structure_programme_strengths",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teeman osalta koulutusohjelmanne vahvuudet?",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }, 
+      {
+        "id": "faculty_programme_structure_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "no_color": true
+      } 
+    ] 
+  }
+]
