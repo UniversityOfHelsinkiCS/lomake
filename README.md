@@ -42,7 +42,7 @@ You can see redux example using apiConnection in client/components/MessageCompon
 
 ### Form types
 
-Tilannekuva lomakes several different forms. These are listed in *config/data*.
+Tilannekuvalomake has several different forms. These are listed in *config/data*.
 
 ## Questions
 Tilannekuvalomake has various sets of questions in separate files. All question files are in the format of an array of `Section` objects and can be found under **client/questionData/**.
