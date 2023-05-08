@@ -73,7 +73,7 @@ export default {
     whatElse:
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
     contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
-    broughtBy: 'Touteutus:',
+    broughtBy: 'Toteutus:',
   },
 
   comparison: {
