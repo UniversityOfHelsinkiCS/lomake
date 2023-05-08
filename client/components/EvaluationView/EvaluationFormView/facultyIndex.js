@@ -26,7 +26,7 @@ const FacultyFormView = ({ room, formString }) => {
       <div style={{ marginBottom: '2em' }}>
         <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
       </div>
-      Hei {room}!
+      Saavuit tiedekunnan {room} lomakesivulle! Tämä näkymä on vielä kehitysvaiheessa.
     </>
   )
 }
