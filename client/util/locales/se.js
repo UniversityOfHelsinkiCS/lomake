@@ -48,6 +48,7 @@ export default {
     // yearlyAssessment: '',
     // katselmus: '',
     // otherTextBox: '',
+    send: 'Lähetä(se)',
   },
 
   aboutPage: {

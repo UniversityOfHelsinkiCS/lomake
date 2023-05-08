@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 // import { Redirect } from 'react-router'
-
+import { Button, Icon } from 'semantic-ui-react'
 // import { isAdmin } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
@@ -55,6 +55,10 @@ const DegreeReformIndividual = () => {
     }
   }, [year, draftYear, user, formDeadline])
 
+  const handleSendingForm = () => {
+    // Send form to server
+  }
+
   // if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
@@ -71,6 +75,10 @@ const DegreeReformIndividual = () => {
           </h3>
         </div>
         <DegreeReformForm questionData={questions} formType={formType} />
+        <Button style={{ maxWidth: '10em', marginTop: '1.5em' }} icon color="green" onClick={handleSendingForm}>
+          <Icon name="upload" />
+          {t('send')}
+        </Button>
       </div>
     </div>
   )

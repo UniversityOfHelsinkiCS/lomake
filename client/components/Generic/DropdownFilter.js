@@ -6,9 +6,8 @@ import './Generic.scss'
 const DropdownFilter = ({ size, label, handleFilterChange, selectedRadio }) => {
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-
   const handleChange = (e, { value }) => {
-    handleFilterChange(selectedRadio[0], value)
+    handleFilterChange({ firstPart: selectedRadio.firstValue, secondPart: value, thirdPart: '' })
   }
 
   const getOptions = () => {
@@ -31,7 +30,7 @@ const DropdownFilter = ({ size, label, handleFilterChange, selectedRadio }) => {
         selection
         options={faculties ? getOptions() : []}
         onChange={handleChange}
-        value={selectedRadio[1]}
+        value={selectedRadio.secondValue}
       />
     </div>
   )

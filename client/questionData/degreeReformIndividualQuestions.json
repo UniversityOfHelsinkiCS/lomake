@@ -37,17 +37,17 @@
           "fi": [
             { "label": "Alle 5 vuotta", "id": "under-5-years" },
             { "label": "5-8 vuotta", "id": "5-8-years" },
-            { "label": "yli 8 vuotta", "id": "over-8-years" }
+            { "label": "Yli 8 vuotta", "id": "over-8-years" }
           ],
           "en": [
             { "label": "Under 5 years", "id": "under-5-years" },
             { "label": "5-8 years", "id": "5-8-years" },
-            { "label": "over 8 years", "id": "over-8-years" }
+            { "label": "Over 8 years", "id": "over-8-years" }
           ],
           "se": [
             { "label": "Alle 5 vuotta(se)", "id": "under-5-years" },
             { "label": "5-8 vuotta(se)", "id": "5-8-years" },
-            { "label": "yli 8 vuotta(se)", "id": "over-8-years" }
+            { "label": "Yli 8 vuotta(se)", "id": "over-8-years" }
           ]
         }
       },

@@ -58,6 +58,7 @@ export default {
     'read-more': 'Read more',
     'read-less': 'Read less',
     otherTextBox: 'Other, what?',
+    send: 'Send',
   },
 
   aboutPage: {

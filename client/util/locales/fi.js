@@ -53,8 +53,8 @@ export default {
     'degree-reform-individual': 'Koulutusuudistus - yksilö',
     'read-more': 'Lue lisää',
     'read-less': 'Lue vähemmän',
-
     otherTextBox: 'Muu, mikä?',
+    send: 'Lähetä',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
