@@ -47,9 +47,11 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
       : {}
     if (part.type === 'TITLE') {
       return (
-        <h2 key={part.id} style={divStyle}>
-          {part.label[lang]}
-        </h2>
+        <>
+          <h2 key={part.id} style={divStyle}>
+            {part.label[lang]}
+          </h2>
+        </>
       )
     }
     if (formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === part.id)) {

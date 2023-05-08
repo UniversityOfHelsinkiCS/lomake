@@ -45,9 +45,9 @@
             { "label": "over 8 years", "id": "over-8-years" }
           ],
           "se": [
-            { "label": "Alle 5 vuotta", "id": "under-5-years" },
-            { "label": "5-8 vuotta", "id": "5-8-years" },
-            { "label": "yli 8 vuotta", "id": "over-8-years" }
+            { "label": "Alle 5 vuotta(se)", "id": "under-5-years" },
+            { "label": "5-8 vuotta(se)", "id": "5-8-years" },
+            { "label": "yli 8 vuotta(se)", "id": "over-8-years" }
           ]
         }
       },
@@ -174,12 +174,12 @@
         "index": 2,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "Haluan vastata seuraavista näkökulmista",
+          "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Haluan vastata seuraavista näkökulmista",
+          "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
           "se": "",
           "en": ""
         },
@@ -255,7 +255,7 @@
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla \n1 = Täyin eri mieltä\n2 = Osittain eri mieltä\n3 = Ei samaa eikä eri mieltä\n4 = Osittain samaa mieltä\n5 = Täysin samaa mieltä",
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla",
           "se": "",
           "en": ""
         },
