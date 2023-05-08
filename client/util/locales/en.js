@@ -30,6 +30,7 @@ export default {
     doctoral: 'Doctoral programmes',
     international: "International Master's programmes",
     programmeFilter: 'Search for study programmes',
+    facultyFilter: 'Search for faculties',
 
     noData: 'No data available for these choices',
     selectAll: 'Select all',

@@ -2,14 +2,14 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const TableHeader = ({ tableIds, sort }) => {
+const TableHeader = ({ tableIds, sort, title }) => {
   const { t } = useTranslation()
 
   return (
     <>
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('name')}>
-          {t('programmeHeader')}
+          {title || t('programmeHeader')}
           <Icon name="sort" />
         </div>
       </div>

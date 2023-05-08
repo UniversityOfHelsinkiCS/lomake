@@ -25,6 +25,7 @@ export default {
     doctoral: 'Doktorandprogram',
     international: 'Internationella Magisterprogram',
     programmeFilter: 'Sök utbildningsprogram',
+    facultyFilter: 'Sök',
 
     noData: 'Ingen data tillgänglig för dessa urval',
     selectAll: 'Välj alla',
