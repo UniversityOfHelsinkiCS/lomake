@@ -26,6 +26,7 @@ export default {
     doctoral: 'Tohtoriohjelmat',
     international: 'Kansainväliset maisteriohjelmat',
     programmeFilter: 'Etsi koulutusohjelmia',
+    facultyFilter: 'Etsi tiedekuntia',
 
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     selectAll: 'Valitse kaikki',

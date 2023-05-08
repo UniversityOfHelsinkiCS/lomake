@@ -15,6 +15,7 @@ import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormVi
 import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
+import FacultyFormView from './EvaluationView/EvaluationFormView/facultyIndex'
 
 export default () => (
   <div className="content">
@@ -39,6 +40,11 @@ export default () => (
         exact
         path="/evaluation/form/:form/:room"
         render={props => <EvaluationFormView room={props.match.params.room} formString={props.match.params.form} />}
+      />
+      <Route
+        exact
+        path="/evaluation-faculty/form/:form/:room"
+        render={props => <FacultyFormView room={props.match.params.room} formString={props.match.params.form} />}
       />
       <Route
         exact
