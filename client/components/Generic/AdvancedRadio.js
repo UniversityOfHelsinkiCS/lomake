@@ -48,7 +48,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     if (state.secondValue && value) {
       setState({ firstValue: state.firstValue, secondValue: state.secondValue, thirdValue: value })
     } else if (state.firstValue && value) {
-      setState({ firstValue: state.firstValue, secondValue: value })
+      setState({ ...state, firstValue: state.firstValue, secondValue: value })
     }
     debouncedChangeHandler(value, state.firstValue, state.secondValue)
   }
@@ -58,10 +58,10 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
       setState({ firstValue: firstPart, secondValue: secondPart, thirdValue: thirdPart })
       choose(id, `${firstPart}_-_${secondPart}_-_${thirdPart}`)
     } else if (secondPart) {
-      setState({ firstValue: firstPart, secondValue: secondPart })
+      setState({ ...state, firstValue: firstPart, secondValue: secondPart })
       choose(id, `${firstPart}_-_${secondPart}`)
     } else {
-      setState({ firstValue: firstPart })
+      setState({ ...state, firstValue: firstPart })
       choose(id, firstPart)
     }
   }
