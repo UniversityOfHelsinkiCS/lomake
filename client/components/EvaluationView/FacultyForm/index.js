@@ -4,13 +4,13 @@ import { Redirect, useHistory } from 'react-router'
 import { Button, Icon, Loader } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
-// import StatusMessage from 'Components/FormView/StatusMessage'
-// import SaveIndicator from 'Components/FormView/SaveIndicator'
+import StatusMessage from 'Components/FormView/StatusMessage'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import { colors } from 'Utilities/common'
@@ -21,7 +21,7 @@ import {
   // evaluationQuestions as programmeQuestions,
 } from '../../../questionData'
 
-// TO FIX now olny admin can write
+// TO FIX now only admin can write
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => {
   if (!isAdmin(user)) return true
   if (!draftYear) return true
@@ -42,7 +42,6 @@ const FacultyFormView = ({ room, formString }) => {
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
 
-  // placeHolder
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
@@ -53,7 +52,6 @@ const FacultyFormView = ({ room, formString }) => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
 
-  // to do properly
   useEffect(() => {
     if (!faculty || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
@@ -84,23 +82,14 @@ const FacultyFormView = ({ room, formString }) => {
     user,
   ])
 
-  // TO FIX To be removed
+  // To fix texts -prog -> faculty
+
+  // TO FIX To be removed and porer rights to be set
   if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room || !form) return <Redirect to="/" />
 
   //   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
-
-  if (!isSuperAdmin(user)) {
-    return (
-      <>
-        <div style={{ marginBottom: '2em' }}>
-          <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
-        </div>
-        Saavuit tiedekunnan {room} lomakesivulle! Tämä näkymä on vielä kehitysvaiheessa.
-      </>
-    )
-  }
 
   return (
     <>
@@ -112,7 +101,7 @@ const FacultyFormView = ({ room, formString }) => {
           <div className="the-form">
             <div className="form-instructions">
               <div className="hide-in-print-mode">
-                {/* <SaveIndicator /> */}
+                <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
                   <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
                 </div>
@@ -124,7 +113,7 @@ const FacultyFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
-                {/* <StatusMessage programme={room} form={form} /> */}
+                <StatusMessage programme={room} form={form} />
                 <div
                   style={{
                     lineHeight: 2,
@@ -136,7 +125,6 @@ const FacultyFormView = ({ room, formString }) => {
                 >
                   <p>
                     <Trans i18nKey="formView:evaluationInfo1" />
-                    {/* TO FIX -> tiedekunnan */}
                   </p>
                 </div>
                 <p>{t('formView:info2')}</p>
