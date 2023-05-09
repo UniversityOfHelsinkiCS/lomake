@@ -2,26 +2,29 @@ import React, { useEffect } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 import { isAdmin, isSuperAdmin } from '@root/config/common'
+
+import { setViewOnly } from 'Utilities/redux/formReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 // import StatusMessage from 'Components/FormView/StatusMessage'
 // import SaveIndicator from 'Components/FormView/SaveIndicator'
-// import FacultyForm from 'Components/EvaluationView/FacultyForm'
 
 import postItImage from 'Assets/post_it.jpg'
 import { colors } from 'Utilities/common'
+import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
-// import {
-//   facultyEvaluationQuestions as questions,
-//   evaluationQuestions as programmeQuestions,
-// } from '../../../questionData'
+import {
+  facultyEvaluationQuestions as questions,
+  // evaluationQuestions as programmeQuestions,
+} from '../../../questionData'
 
 const FacultyFormView = ({ room, formString }) => {
   const history = useHistory()
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
 
@@ -34,6 +37,42 @@ const FacultyFormView = ({ room, formString }) => {
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
+
+  // to do properly
+  useEffect(() => {
+    // if (!programme || !form) return
+    // dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    // if (
+    //   formShouldBeViewOnly({
+    //     accessToTempAnswers,
+    //     programme,
+    //     writeAccess,
+    //     viewingOldAnswers,
+    //     draftYear,
+    //     year,
+    //     formDeadline,
+    //     form,
+    //   })
+    // ) {
+    //   dispatch(setViewOnly(true))
+    //   if (currentRoom) dispatch(wsLeaveRoom(room))
+    // } else {
+    //   dispatch(wsJoinRoom(room, form))
+    //   dispatch(setViewOnly(false))
+    // }
+    dispatch(setViewOnly(true))
+  }, [
+    faculty,
+    // singleProgramPending,
+    // writeAccess,
+    // viewingOldAnswers,
+    // year,
+    // draftYear,
+    // accessToTempAnswers,
+    // readAccess,
+    room,
+    user,
+  ])
 
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
@@ -135,9 +174,9 @@ const FacultyFormView = ({ room, formString }) => {
                 </a>
               </div>
             </div>
-            {/* <div style={{ paddingBottom: '6em' }}>
-              <FacultyForm facultyKey={faculty.code} questions={questions} form={form} />
-            </div> */}
+            <div style={{ paddingBottom: '6em' }}>
+              <EvaluationForm programmeKey={faculty.code} questions={questions} form={form} />
+            </div>
           </div>
         </div>
       )}

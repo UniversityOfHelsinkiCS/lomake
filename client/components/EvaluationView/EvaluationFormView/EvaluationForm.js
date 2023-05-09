@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Divider } from 'semantic-ui-react'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
+import EntityLevels from 'Components/Generic/EntityLevels'
 import Measures from 'Components/Generic/Measures'
 import Actions from 'Components/Generic/Actions'
 import { colors, romanize } from 'Utilities/common'
@@ -10,13 +11,14 @@ import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
 
-const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form, summaryUrl }) => {
+const EvaluationForm = ({ questions, programmeKey, yearlyAnswers = {}, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
   const formType = 'evaluation'
 
   const partComponentMap = {
     TEXTAREA: Textarea,
     ENTITY: Entity,
+    ENTITY_LEVELS: EntityLevels,
     MEASURES: Measures,
     ACTIONS: Actions,
   }
@@ -86,7 +88,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers, form, summaryU
             previousYearsAnswers={null}
             formType={formType}
             programme={programmeKey}
-            relatedYearlyAnswers={yearlyAnswers[part.id]}
+            relatedYearlyAnswers={yearlyAnswers[part.id] || {}}
             form={form}
             summaryUrl={summaryUrl || null}
           />

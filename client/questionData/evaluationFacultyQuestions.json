@@ -9,7 +9,7 @@
       {
         "id": "student_admittance_faculty",
         "index": 1,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opiskelijavalinta",
           "se": "",
@@ -37,7 +37,7 @@
       {
         "id": "ops_practicality_faculty",
         "index": 2,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opetussuunnitelmat",
           "se": "",
@@ -65,7 +65,7 @@
       {
         "id": "study_ease_faculty",
         "index": 3,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opiskelun sujuvuus",
           "se": "",
@@ -120,7 +120,7 @@
       {
         "id": "degree_flow_faculty",
         "index": 5,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Läpivirtaus",
           "se": "",
@@ -221,7 +221,7 @@
       {
         "id": "communication_faculty",
         "index": 6,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
           "se": "",
@@ -249,7 +249,7 @@
       {
         "id": "teaching_resources_management_faculty",
         "index": 7,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opetusresurssit",
           "se": "",
@@ -277,7 +277,7 @@
       {
         "id": "recruiting_influence_faculty",
         "index": 8,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Rekrytointi",
           "se": "",
@@ -305,7 +305,7 @@
       {
         "id": "environmental_resources_faculty",
         "index": 9,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Laite- ja tilaresurssit",
           "se": "",
@@ -333,7 +333,7 @@
       {
         "id": "shared_programmes_faculty",
         "index": 10,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
           "se": "",
@@ -361,7 +361,7 @@
       {
         "id": "programme_status_faculty",
         "index": 11,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Ohjelman asema",
           "se": "",
