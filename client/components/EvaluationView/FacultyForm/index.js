@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Loader } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 import { isAdmin, isSuperAdmin } from '@root/config/common'
 
-import { setViewOnly } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 // import StatusMessage from 'Components/FormView/StatusMessage'
 // import SaveIndicator from 'Components/FormView/SaveIndicator'
@@ -20,6 +21,15 @@ import {
   // evaluationQuestions as programmeQuestions,
 } from '../../../questionData'
 
+// TO FIX now olny admin can write
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => {
+  if (!isAdmin(user)) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
+  return false
+}
+
 const FacultyFormView = ({ room, formString }) => {
   const history = useHistory()
   const form = parseInt(formString, 10) || null
@@ -27,10 +37,15 @@ const FacultyFormView = ({ room, formString }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
+  const currentRoom = useSelector(state => state.room)
+  const year = 2023 // the next time form is filled is in 2026
 
   // placeHolder
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
+  const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
 
@@ -40,34 +55,29 @@ const FacultyFormView = ({ room, formString }) => {
 
   // to do properly
   useEffect(() => {
-    // if (!programme || !form) return
-    // dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    // if (
-    //   formShouldBeViewOnly({
-    //     accessToTempAnswers,
-    //     programme,
-    //     writeAccess,
-    //     viewingOldAnswers,
-    //     draftYear,
-    //     year,
-    //     formDeadline,
-    //     form,
-    //   })
-    // ) {
-    //   dispatch(setViewOnly(true))
-    //   if (currentRoom) dispatch(wsLeaveRoom(room))
-    // } else {
-    //   dispatch(wsJoinRoom(room, form))
-    //   dispatch(setViewOnly(false))
-    // }
-    dispatch(setViewOnly(true))
+    if (!faculty || !form) return
+    dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    if (
+      formShouldBeViewOnly({
+        draftYear,
+        year,
+        formDeadline,
+        form,
+        user,
+      })
+    ) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) dispatch(wsLeaveRoom(room))
+    } else {
+      dispatch(wsJoinRoom(room, form))
+      dispatch(setViewOnly(false))
+    }
   }, [
     faculty,
-    // singleProgramPending,
+    singleFacultyPending,
     // writeAccess,
     // viewingOldAnswers,
-    // year,
-    // draftYear,
+    draftYear,
     // accessToTempAnswers,
     // readAccess,
     room,
@@ -77,17 +87,25 @@ const FacultyFormView = ({ room, formString }) => {
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
 
-  // if (!room || !form) return <Redirect to="/" />
+  if (!room || !form) return <Redirect to="/" />
+
+  //   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
+
+  if (!isSuperAdmin(user)) {
+    return (
+      <>
+        <div style={{ marginBottom: '2em' }}>
+          <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
+        </div>
+        Saavuit tiedekunnan {room} lomakesivulle! Tämä näkymä on vielä kehitysvaiheessa.
+      </>
+    )
+  }
 
   return (
     <>
-      {!isSuperAdmin(user) ? (
-        <>
-          <div style={{ marginBottom: '2em' }}>
-            <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
-          </div>
-          Saavuit tiedekunnan {room} lomakesivulle! Tämä näkymä on vielä kehitysvaiheessa.
-        </>
+      {singleFacultyPending ? (
+        <Loader active />
       ) : (
         <div className="form-container">
           <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
