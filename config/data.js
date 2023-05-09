@@ -19,12 +19,12 @@ const forms = [
     name: 'Katselmus - koulutusohjelmat',
     type: 'evaluation',
   },
+  {
+    key: 5,
+    name: 'Katselmus - tiedekunnat',
+    type: 'evaluation',
+  },
   // Waiting to be configured
-  // {
-  //   key: 5,
-  //   name: 'Katselmus - tiedekunnat',
-  //   type: 'evaluation',
-  // },
   // {
   //   key: 6,
   //   name: 'Katselmus - toimikunta',

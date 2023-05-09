@@ -22,7 +22,7 @@ const startDeadlineWatcher = async () => {
     const draftYears = await db.draftYear.findAll({})
     const draftYear = draftYears.length ? draftYears[0].year : null
 
-    if (deadlinesToday && draftYear) {
+    if (deadlinesToday && deadlinesToday.length > 0 && draftYear) {
       logger.info(`${loggerPrefix} Today is a deadline, taking backups...`)
 
       const programmes = await db.studyprogramme.findAll({})
@@ -30,8 +30,8 @@ const startDeadlineWatcher = async () => {
       await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
 
-        if (form === 3) {
-          // handle individual users form
+        if (form === 3 || form === 5) {
+          // handle individual users and faculty forms
           const allTempAnswers = await db.tempAnswer.findAll({ where: { form, year: draftYear } })
 
           if (allTempAnswers) {
