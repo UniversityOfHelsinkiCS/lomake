@@ -11,7 +11,7 @@ const createOrUpdate = async (req, res) => {
   }
 
   try {
-    if (form !== 3) {
+    if ([1, 2, 4].includes(form)) {
       // Unlock all programmes
       await db.studyprogramme.update({ locked: false }, { where: {} })
     }
