@@ -32,13 +32,19 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => 
 
 const findAnswers = (programmes, allAnswers, question) => {
   const result = {
-    bachelor: [],
-    master: [],
-    doctoral: [],
+    bachelor: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
+    master: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
+    doctoral: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
   }
   programmes.forEach(({ key, level }) => {
     const { data } = allAnswers.find(a => a.programme === key)
-    result[level].push({ key, light: data[`${question}_light`] || null })
+    const light = data[`${question}_light`]
+    result[level].programmes.push({ key, light: light || null })
+    if (light) {
+      result[level][light]++
+    } else {
+      result[level].empty++
+    }
   })
   return result
 }
@@ -106,13 +112,11 @@ const FacultyFormView = ({ room, formString }) => {
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
-        if (part.relatedEvaluationQuestions) {
-          part.relatedEvaluationQuestions.forEach(related => {
-            if (result[part.id] === undefined) {
-              result[part.id] = {}
-            }
-            result[part.id][related] = findAnswers(facultyProgrammes, progEvaluationAnswers, related)
-          })
+        if (part.relatedEvaluationQuestion) {
+          // if (result[part.id] === undefined) {
+          //   result[part.id] = {}
+          // }
+          result[part.id] = findAnswers(facultyProgrammes, progEvaluationAnswers, part.relatedEvaluationQuestion)
         }
       })
     })

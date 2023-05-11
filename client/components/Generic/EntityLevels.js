@@ -1,8 +1,7 @@
 import React from 'react'
-// import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-// import { Link } from 'react-router-dom'
+// import { PieChart } from 'react-minimal-pie-chart'
 
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
@@ -29,7 +28,9 @@ const EntityLevels = ({
   // summaryUrl,
 }) => {
   const { t } = useTranslation()
+  // console.log(summaryData)
 
+  // const level = 'master'
   return (
     <div className="form-entity-area">
       <Divider />
@@ -66,7 +67,32 @@ const EntityLevels = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {/* <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} /> */}
+      {/* <PieChart
+        animationDuration={500}
+        animationEasing="ease-out"
+        center={[50, 50]}
+        data={[
+          {
+            color: '#9dff9d',
+            value: summaryData[level]?.green || 0,
+          },
+          {
+            color: '#ffffb1',
+            value: summaryData[level]?.yellow || 0,
+          },
+          {
+            color: '#ff7f7f',
+            value: summaryData[level]?.red || 0,
+          },
+        ]}
+        labelPosition={50}
+        lengthAngle={360}
+        lineWidth={100}
+        paddingAngle={0}
+        radius={50}
+        startAngle={0}
+        viewBoxSize={[600, 600]}
+      /> */}
       {/* {formType === 'evaluation' && (
         <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
           <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
