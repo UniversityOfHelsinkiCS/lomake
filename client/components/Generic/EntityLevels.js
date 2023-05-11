@@ -41,18 +41,6 @@ const EntityLevels = ({
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        <div>
-          <TrafficLights id={`${id}_bachelor`} form={form} />
-          <label>{t('bachelor')}</label>
-        </div>
-        <div>
-          <TrafficLights id={`${id}_master`} form={form} />
-          <label>{t('master')}</label>
-        </div>
-        <div>
-          <TrafficLights id={`${id}_doctor`} form={form} />
-          <label>{t('doctoral')}</label>
-        </div>
       </div>
       <div
         className="entity-description"
@@ -66,6 +54,20 @@ const EntityLevels = ({
       >
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
+      </div>
+      <div className="level-lights-container">
+        <div className="traffic-light-row">
+          <label className="traffic-light-row-label">{t('bachelor')}</label>
+          <TrafficLights id={`${id}_bachelor`} form={form} />
+        </div>
+        <div className="traffic-light-row">
+          <label className="traffic-light-row-label">{t('master')}</label>
+          <TrafficLights id={`${id}_master`} form={form} />
+        </div>
+        <div className="traffic-light-row">
+          <label className="traffic-light-row-label">{t('doctoral')}</label>
+          <TrafficLights id={`${id}_doctor`} form={form} />
+        </div>
       </div>
       {/* <PieChart
         animationDuration={500}

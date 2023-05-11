@@ -364,3 +364,16 @@
   font-weight: '600';
 }
 
+.traffic-light-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 40%;
+  margin: 0;
+  padding-left: 2em;
+  padding-bottom: 0;
+}
+
+.traffic-light-row-label {
+  margin-right: auto;
+}
