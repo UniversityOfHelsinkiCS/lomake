@@ -67,7 +67,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers = {}, form, sum
       return null
     }
 
-    if (part.type === 'ENTITY') number++
+    if (part.type === 'ENTITY' || part.type === 'ENTITY_LEVELS') number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined
