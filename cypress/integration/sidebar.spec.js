@@ -58,6 +58,8 @@ describe('Sidebar tests', () => {
       expect(el.text()).to.be.eq('1100/1000')
     })
 
+    cy.wait(2000)
+
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
   })
 })
