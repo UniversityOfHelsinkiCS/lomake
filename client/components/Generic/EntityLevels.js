@@ -24,7 +24,7 @@ const EntityLevels = ({
   number,
   extrainfo,
   // formType,
-  // relatedYearlyAnswers = null,
+  // summaryData,
   form,
   // summaryUrl,
 }) => {

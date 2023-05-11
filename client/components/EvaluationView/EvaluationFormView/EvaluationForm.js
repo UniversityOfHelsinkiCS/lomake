@@ -11,7 +11,7 @@ import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
 
-const EvaluationForm = ({ questions, programmeKey, yearlyAnswers = {}, form, summaryUrl }) => {
+const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
   const formType = 'evaluation'
 
@@ -88,7 +88,7 @@ const EvaluationForm = ({ questions, programmeKey, yearlyAnswers = {}, form, sum
             previousYearsAnswers={null}
             formType={formType}
             programme={programmeKey}
-            relatedYearlyAnswers={yearlyAnswers[part.id] || {}}
+            summaryData={summaryData[part.id] || {}}
             form={form}
             summaryUrl={summaryUrl || null}
           />

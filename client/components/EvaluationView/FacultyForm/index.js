@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Icon, Loader } from 'semantic-ui-react'
@@ -30,6 +30,19 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => 
   return false
 }
 
+const findAnswers = (programmes, allAnswers, question) => {
+  const result = {
+    bachelor: [],
+    master: [],
+    doctoral: [],
+  }
+  programmes.forEach(({ key, level }) => {
+    const { data } = allAnswers.find(a => a.programme === key)
+    result[level].push({ key, light: data[`${question}_light`] || null })
+  })
+  return result
+}
+
 const FacultyFormView = ({ room, formString }) => {
   const history = useHistory()
   const form = parseInt(formString, 10) || null
@@ -46,6 +59,7 @@ const FacultyFormView = ({ room, formString }) => {
   const faculty = faculties ? faculties.find(f => f.code === room) : null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
 
+  const progEvaluationAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.form === 4 && a.year === year))
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
 
   useEffect(() => {
@@ -81,6 +95,29 @@ const FacultyFormView = ({ room, formString }) => {
     room,
     user,
   ])
+
+  const facultyProgrammeAnswers = useMemo(() => {
+    if (!progEvaluationAnswers) {
+      return {}
+    }
+    const facultyProgrammes = faculty.ownedProgrammes.map(p => {
+      return { key: p.key, level: p.level }
+    })
+    const result = {}
+    questions.forEach(q => {
+      q.parts.forEach(part => {
+        if (part.relatedEvaluationQuestions) {
+          part.relatedEvaluationQuestions.forEach(related => {
+            if (result[part.id] === undefined) {
+              result[part.id] = {}
+            }
+            result[part.id][related] = findAnswers(facultyProgrammes, progEvaluationAnswers, related)
+          })
+        }
+      })
+    })
+    return result
+  }, [room, user, progEvaluationAnswers])
 
   // To fix texts -prog -> faculty
 
@@ -181,7 +218,12 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
             </div>
             <div style={{ paddingBottom: '6em' }}>
-              <EvaluationForm programmeKey={faculty.code} questions={questions} form={form} />
+              <EvaluationForm
+                programmeKey={faculty.code}
+                questions={questions}
+                form={form}
+                summaryData={facultyProgrammeAnswers}
+              />
             </div>
           </div>
         </div>

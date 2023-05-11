@@ -27,7 +27,7 @@ const Entity = ({
   previousYearsAnswers,
   extrainfo,
   formType,
-  relatedYearlyAnswers = null,
+  summaryData = null,
   form,
   summaryUrl,
 }) => {
@@ -73,7 +73,7 @@ const Entity = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {formType === 'evaluation' && <OldAnswersSummary partId={id} relatedYearlyAnswers={relatedYearlyAnswers} />}
+      {form === 4 && <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />}
       {formType === 'evaluation' && (
         <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
           <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>

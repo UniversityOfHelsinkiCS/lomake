@@ -279,7 +279,7 @@ const EvaluationFormView = ({ room, formString }) => {
           <EvaluationForm
             programmeKey={programme.key}
             questions={questions}
-            yearlyAnswers={yearlyAnswers}
+            summaryData={yearlyAnswers}
             form={form}
             summaryUrl={summaryURL}
           />
