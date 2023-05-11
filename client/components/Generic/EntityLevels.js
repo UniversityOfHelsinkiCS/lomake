@@ -1,36 +1,57 @@
 import React from 'react'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Grid, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-// import { PieChart } from 'react-minimal-pie-chart'
+import { PieChart } from 'react-minimal-pie-chart'
 
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
 
-// const mapColorToValid = {
-//   VIHREÄ: 'green',
-//   KELTAINEN: 'yellow',
-//   PUNAINEN: 'red',
-// }
+const Pie = ({ level, data }) => {
+  return (
+    <div className="pie-box">
+      <PieChart
+        animationEasing="ease-out"
+        data={[
+          {
+            color: '#9dff9d',
+            value: data[level]?.green || 0,
+          },
+          {
+            color: '#ffffb1',
+            value: data[level]?.yellow || 0,
+          },
+          {
+            color: '#ff7f7f',
+            value: data[level]?.red || 0,
+          },
+          {
+            color: '#e6e6e6',
+            value: data[level]?.empty || 0,
+          },
+        ]}
+        paddingAngle={0}
+        startAngle={0}
+      />
+    </div>
+  )
+}
 
 const EntityLevels = ({
   id,
   label,
   description,
   required,
-  // noColor,
   number,
   extrainfo,
-  // formType,
-  // summaryData,
+  summaryData,
   form,
   // summaryUrl,
 }) => {
   const { t } = useTranslation()
-  // console.log(summaryData)
 
-  // const level = 'master'
+  const showText = false
   return (
     <div className="form-entity-area">
       <Divider />
@@ -69,32 +90,33 @@ const EntityLevels = ({
           <TrafficLights id={`${id}_doctor`} form={form} />
         </div>
       </div>
-      {/* <PieChart
-        animationDuration={500}
-        animationEasing="ease-out"
-        center={[50, 50]}
-        data={[
-          {
-            color: '#9dff9d',
-            value: summaryData[level]?.green || 0,
-          },
-          {
-            color: '#ffffb1',
-            value: summaryData[level]?.yellow || 0,
-          },
-          {
-            color: '#ff7f7f',
-            value: summaryData[level]?.red || 0,
-          },
-        ]}
-        labelPosition={50}
-        lengthAngle={360}
-        lineWidth={100}
-        paddingAngle={0}
-        radius={50}
-        startAngle={0}
-        viewBoxSize={[600, 600]}
-      /> */}
+      <div className="summary-container">
+        <h4>Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:</h4>
+        <div className="summary-grid" data-cy={`${id}-summary`}>
+          <Grid columns={4}>
+            <Grid.Row className="row">
+              <Grid.Column width={5}>{t('bachelor')}</Grid.Column>
+              <Grid.Column width={5}>{t('master')}</Grid.Column>
+              <Grid.Column width={5}>{t('doctoral')}</Grid.Column>
+              <Grid.Column width={1} />
+            </Grid.Row>
+            <Grid.Row className="row">
+              <Grid.Column width={5}>
+                <Pie level="bachelor" data={summaryData} />
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <Pie level="master" data={summaryData} />
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <Pie level="doctoral" data={summaryData} />
+              </Grid.Column>
+              <Grid.Column width={1}>
+                <Icon name={`angle ${showText ? 'up' : 'down'}`} />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </div>
+      </div>
       {/* {formType === 'evaluation' && (
         <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
           <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>

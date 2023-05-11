@@ -32,7 +32,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": "student_admittance"
+        "relatedEvaluationQuestion": "student_admittance"
       },
       {
         "id": "ops_practicality_faculty",
@@ -88,7 +88,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "guidance"
+        "relatedEvaluationQuestion": "studyguidance"
       },
       {
         "id": "transition_phase_faculty",

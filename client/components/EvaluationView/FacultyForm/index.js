@@ -16,10 +16,7 @@ import postItImage from 'Assets/post_it.jpg'
 import { colors } from 'Utilities/common'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
-import {
-  facultyEvaluationQuestions as questions,
-  // evaluationQuestions as programmeQuestions,
-} from '../../../questionData'
+import { facultyEvaluationQuestions as questions } from '../../../questionData'
 
 // TO FIX now only admin can write
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => {
@@ -113,9 +110,6 @@ const FacultyFormView = ({ room, formString }) => {
     questions.forEach(q => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion) {
-          // if (result[part.id] === undefined) {
-          //   result[part.id] = {}
-          // }
           result[part.id] = findAnswers(facultyProgrammes, progEvaluationAnswers, part.relatedEvaluationQuestion)
         }
       })
