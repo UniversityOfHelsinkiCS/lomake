@@ -3,6 +3,9 @@ import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
 const Section = ({ title, number, children, programmeKey, form }) => {
+  const id = form === 5 ? '-faculty' : ''
+  const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`
+
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
@@ -10,11 +13,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
           as="div"
           onChange={inView => {
             if (inView) {
-              window.history.pushState(
-                {},
-                '',
-                `${window.location.origin}${basePath}evaluation/form/${form}/${programmeKey}#${number}`
-              )
+              window.history.pushState({}, '', url)
             }
           }}
         >

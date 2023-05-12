@@ -15,7 +15,7 @@ import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormVi
 import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView'
-import FacultyFormView from './EvaluationView/EvaluationFormView/facultyIndex'
+import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 
 export default () => (
   <div className="content">

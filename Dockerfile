@@ -11,7 +11,7 @@ ARG SENTRY_ENVIRONMENT
 ENV SENTRY_ENVIRONMENT=$SENTRY_ENVIRONMENT
 
 COPY package* ./
-RUN npm ci -f --omit-dev --ignore-scripts
+RUN npm ci -f --omit-dev --ignore-scripts --no-audit --no-fund
 COPY . .
 
 RUN npm run build

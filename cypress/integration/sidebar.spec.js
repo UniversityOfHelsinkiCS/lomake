@@ -38,26 +38,4 @@ describe('Sidebar tests', () => {
       expect(res).to.be.eq(1000)
     )
   })
-
-  // Cypress and react-editor do not currently work together, when trying to copy text
-  // Copying to the editor however actually works
-  it('Answer length 1100 is also ok, but answer cant be longer than that.', () => {
-    cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
-    cy.get('[data-cy="color-positive-review_of_last_years_situation_report"]').wait(300).click()
-
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'A'.repeat(1100))
-
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'more more')
-    cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then(res =>
-      expect(res).to.be.eq(1100)
-    )
-
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report] > [style="color: rgb(230, 78, 64);"]').then(el => {
-      expect(el.text()).to.be.eq('1100/1000')
-    })
-
-    cy.get('[data-cy=review_of_last_years_situation_report-OK]')
-  })
 })

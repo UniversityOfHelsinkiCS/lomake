@@ -9,7 +9,7 @@
       {
         "id": "student_admittance_faculty",
         "index": 1,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opiskelijavalinta",
           "se": "",
@@ -26,17 +26,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["student_admittance"]
+        "relatedEvaluationQuestion": "student_admittance"
       },
       {
         "id": "ops_practicality_faculty",
         "index": 2,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opetussuunnitelmat",
           "se": "",
@@ -53,17 +54,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["ops_practicality"]
+        "relatedEvaluationQuestion": "ops_practicality"
       },
       {
         "id": "study_ease_faculty",
         "index": 3,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opiskelun sujuvuus",
           "se": "",
@@ -80,12 +82,13 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["guidance"]
+        "relatedEvaluationQuestion": "studyguidance"
       },
       {
         "id": "transition_phase_faculty",
@@ -112,12 +115,12 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["transition_phase"]
+        "relatedEvaluationQuestion": "transition_phase"
       },
       {
         "id": "degree_flow_faculty",
         "index": 5,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Läpivirtaus",
           "se": "",
@@ -134,12 +137,13 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["degree_flow"]
+        "relatedEvaluationQuestion": "degree_flow"
       },
       {
         "id": "faculty_ease_of_study_opinion_differences",
@@ -217,7 +221,7 @@
       {
         "id": "communication_faculty",
         "index": 6,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
           "se": "",
@@ -234,17 +238,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["communication"]
+        "relatedEvaluationQuestion": "communication"
       },
       {
         "id": "teaching_resources_management_faculty",
         "index": 7,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opetusresurssit",
           "se": "",
@@ -261,17 +266,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["teaching_resources_management"]
+        "relatedEvaluationQuestion": "teaching_resources_management"
       },
       {
         "id": "recruiting_influence_faculty",
         "index": 8,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Rekrytointi",
           "se": "",
@@ -288,17 +294,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["recruiting_influence"]
+        "relatedEvaluationQuestion": "recruiting_influence"
       },
       {
         "id": "environmental_resources_faculty",
         "index": 9,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Laite- ja tilaresurssit",
           "se": "",
@@ -315,17 +322,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["environmental_resources"]
+        "relatedEvaluationQuestion": "environmental_resources"
       },
       {
         "id": "shared_programmes_faculty",
         "index": 10,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
           "se": "",
@@ -342,17 +350,18 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["shared_programmes"]
+        "relatedEvaluationQuestion": "shared_programmes"
       },
       {
         "id": "programme_status_faculty",
         "index": 11,
-        "type": "ENTITY",
+        "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Ohjelman asema",
           "se": "",
@@ -369,12 +378,13 @@
           "en": ""
         },
         "required": true,
+        "level_breakdown": true,
         "extrainfo": {
           "fi": "",
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestions": ["programme_status"]
+        "relatedEvaluationQuestion": "programme_status"
       },
       {
         "id": "faculty_programme_structure_opinion_differences",
