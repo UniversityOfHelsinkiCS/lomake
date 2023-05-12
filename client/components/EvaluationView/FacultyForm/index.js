@@ -29,18 +29,18 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => 
 
 const findAnswers = (programmes, allAnswers, question) => {
   const result = {
-    bachelor: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
-    master: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
-    doctoral: { programmes: [], green: 0, yellow: 0, red: 0, empty: 0 },
+    bachelor: { programmes: [], green: [], yellow: [], red: [], gray: [] },
+    master: { programmes: [], green: [], yellow: [], red: [], gray: [] },
+    doctoral: { programmes: [], green: [], yellow: [], red: [], gray: [] },
   }
-  programmes.forEach(({ key, level }) => {
+  programmes.forEach(({ key, level, name }) => {
     const { data } = allAnswers.find(a => a.programme === key)
     const light = data[`${question}_light`]
-    result[level].programmes.push({ key, light: light || null })
+    result[level].programmes.push({ key, name, light: light || null })
     if (light) {
-      result[level][light]++
+      result[level][light].push(name)
     } else {
-      result[level].empty++
+      result[level].gray.push(name)
     }
   })
   return result
@@ -104,7 +104,7 @@ const FacultyFormView = ({ room, formString }) => {
       return {}
     }
     const facultyProgrammes = faculty.ownedProgrammes.map(p => {
-      return { key: p.key, level: p.level }
+      return { key: p.key, level: p.level, name: p.name }
     })
     const result = {}
     questions.forEach(q => {

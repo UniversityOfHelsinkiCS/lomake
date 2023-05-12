@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Divider, Grid, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
+
+const levels = ['bachelor', 'master', 'doctoral']
+const colorsList = ['green', 'yellow', 'red', 'gray']
 
 const Pie = ({ level, data }) => {
   return (
@@ -16,25 +20,41 @@ const Pie = ({ level, data }) => {
         data={[
           {
             color: '#9dff9d',
-            value: data[level]?.green || 0,
+            value: data[level]?.green.length || 0,
           },
           {
             color: '#ffffb1',
-            value: data[level]?.yellow || 0,
+            value: data[level]?.yellow.length || 0,
           },
           {
             color: '#ff7f7f',
-            value: data[level]?.red || 0,
+            value: data[level]?.red.length || 0,
           },
           {
             color: '#e6e6e6',
-            value: data[level]?.empty || 0,
+            value: data[level]?.gray.length || 0,
           },
         ]}
         paddingAngle={0}
         startAngle={0}
       />
     </div>
+  )
+}
+
+const ProgrammeList = ({ data, lang }) => {
+  return (
+    <>
+      {colorsList.map(color => {
+        return data[color].map(p => {
+          return (
+            <p>
+              <span className={`answer-circle-${color}`} /> {p[lang]}
+            </p>
+          )
+        })
+      })}
+    </>
   )
 }
 
@@ -50,8 +70,9 @@ const EntityLevels = ({
   // summaryUrl,
 }) => {
   const { t } = useTranslation()
+  const lang = useSelector(state => state.language)
+  const [showText, setShowText] = useState(false)
 
-  const showText = false
   return (
     <div className="form-entity-area">
       <Divider />
@@ -77,18 +98,14 @@ const EntityLevels = ({
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       <div className="level-lights-container">
-        <div className="traffic-light-row">
-          <label className="traffic-light-row-label">{t('bachelor')}</label>
-          <TrafficLights id={`${id}_bachelor`} form={form} />
-        </div>
-        <div className="traffic-light-row">
-          <label className="traffic-light-row-label">{t('master')}</label>
-          <TrafficLights id={`${id}_master`} form={form} />
-        </div>
-        <div className="traffic-light-row">
-          <label className="traffic-light-row-label">{t('doctoral')}</label>
-          <TrafficLights id={`${id}_doctor`} form={form} />
-        </div>
+        {levels.map(level => {
+          return (
+            <div className="traffic-light-row" key={level}>
+              <label className="traffic-light-row-label">{t(level)}</label>
+              <TrafficLights id={`${id}_${level}`} form={form} />
+            </div>
+          )
+        })}
       </div>
       <div className="summary-container">
         <h4>Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:</h4>
@@ -101,19 +118,30 @@ const EntityLevels = ({
               <Grid.Column width={1} />
             </Grid.Row>
             <Grid.Row className="row">
-              <Grid.Column width={5}>
-                <Pie level="bachelor" data={summaryData} />
-              </Grid.Column>
-              <Grid.Column width={5}>
-                <Pie level="master" data={summaryData} />
-              </Grid.Column>
-              <Grid.Column width={5}>
-                <Pie level="doctoral" data={summaryData} />
-              </Grid.Column>
+              {levels.map(level => {
+                return (
+                  <Grid.Column width={5} key={level}>
+                    <Pie level={level} data={summaryData} />
+                  </Grid.Column>
+                )
+              })}
               <Grid.Column width={1}>
-                <Icon name={`angle ${showText ? 'up' : 'down'}`} />
+                <Icon name={`angle ${showText ? 'up' : 'down'}`} onClick={() => setShowText(!showText)} />
               </Grid.Column>
             </Grid.Row>
+            {showText && (
+              <Grid.Row className="row">
+                <Grid.Column width={5}>
+                  <ProgrammeList data={summaryData.bachelor} lang={lang} />
+                </Grid.Column>
+                <Grid.Column width={5}>
+                  <ProgrammeList data={summaryData.master} lang={lang} />
+                </Grid.Column>
+                <Grid.Column width={5}>
+                  <ProgrammeList data={summaryData.doctoral} lang={lang} />
+                </Grid.Column>
+              </Grid.Row>
+            )}
           </Grid>
         </div>
       </div>
