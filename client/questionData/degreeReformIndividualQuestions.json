@@ -8,50 +8,6 @@
     "id": 0,
     "parts": [
       {
-        "id": "how-many-years-at-uni",
-        "index": 0,
-        "type": "CHOOSE-RADIO",
-        "shortLabel": {
-          "fi": "Vuosia yliopistossa",
-          "se": "",
-          "en": "Years at university"
-        },
-        "label": {
-          "fi": "Vuosia yliopistossa",
-          "se": "",
-          "en": "Years at university"
-        },
-        "description": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "relatedYearlyQuestions": [],
-        "radioOptions": {
-          "fi": [
-            { "label": "Alle 5 vuotta", "id": "under-5-years" },
-            { "label": "5-8 vuotta", "id": "5-8-years" },
-            { "label": "Yli 8 vuotta", "id": "over-8-years" }
-          ],
-          "en": [
-            { "label": "Under 5 years", "id": "under-5-years" },
-            { "label": "5-8 years", "id": "5-8-years" },
-            { "label": "Over 8 years", "id": "over-8-years" }
-          ],
-          "se": [
-            { "label": "Alle 5 vuotta(se)", "id": "under-5-years" },
-            { "label": "5-8 vuotta(se)", "id": "5-8-years" },
-            { "label": "Yli 8 vuotta(se)", "id": "over-8-years" }
-          ]
-        }
-      },
-      {
         "id": "background-unit",
         "index": 0,
         "type": "CHOOSE-ADVANCED",
@@ -170,6 +126,56 @@
         }
       },
       {
+        "id": "how-many-years-at-uni",
+        "index": 0,
+        "type": "CHOOSE-RADIO",
+        "shortLabel": {
+          "fi": "Vuosia yliopistossa",
+          "se": "",
+          "en": "Years at university"
+        },
+        "label": {
+          "fi": "Olen ollut Helsingin yliopistossa opiskelijana ja/tai henkilökuntaan kuuluvana yhtäjaksoisesti",
+          "se": "",
+          "en": "Years at university"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            { "label": "Alle vuoden", "id": "under-year" },
+            { "label": "1-3 vuotta", "id": "1-3-years" },
+            { "label": "3-7 vuotta", "id": "3-7-years" },
+            { "label": "7-10 vuotta", "id": "7-10-years" },
+            { "label": "Yli 10 vuotta", "id": "over-10-years" }
+          ],
+          "en": [
+            { "label": "Under year", "id": "under-year" },
+            { "label": "1-3 years", "id": "1-3-years" },
+            { "label": "3-7 years", "id": "3-7-years" },
+            { "label": "7-10 years", "id": "7-10-years" },
+            { "label": "Yli 10 years", "id": "over-10-years" }
+          ],
+          "se": [
+            { "label": "Alle vuoden(se)", "id": "under-year" },
+            { "label": "1-3 vuotta(se)", "id": "1-3-years" },
+            { "label": "3-7 vuotta(se)", "id": "3-7-years" },
+            { "label": "7-10 vuotta(se)", "id": "7-10-years" },
+            { "label": "Yli 10 vuotta(se)", "id": "over-10-years" }
+          ]
+        }
+      },
+      {
         "id": "view-is-based-on",
         "index": 2,
         "type": "CHECKBOX",
@@ -184,7 +190,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Valintasi mukaan saat vastattavaksi valitsemaasi tutkintotasoa koskevat kysymykset (kysymykset eriytyvät)",
+          "fi": "valitse koulutustaso(t) (kandi/maisteri/tohtori) johon haluat vastata",
           "se": "",
           "en": ""
         },
@@ -255,12 +261,12 @@
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista seuraavien väittämien avulla",
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista yliopistossa seuraavien väittämien avulla",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Koulutusuudistuksen (Iso Pyörä) tavoitteet muotoiltiin projektisuunnitelmaan (20.4.2015).",
+          "fi": "Koulutusuudistuksen (Iso Pyörä) tavoitteet muotoiltiin projektisuunnitelmaan (20.4.2015). Koulutusuudistuksessa tavoiteltiin rohkeaa askelta Helsingin yliopiston koulutuksen uudistamisessa. Tarkoituksena oli tehdä tarvittavia muutoksia kunkin tiedekunnan omista lähtökohdista – kuitenkin yhteiseen suuntaan, mistä huolehti yliopiston opintoasiainneuvosto.",
           "se": "",
           "en": ""
         },
@@ -274,12 +280,12 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä",
-          "se": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä",
-          "en": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä"
+          "fi": "Tutkintokoulutus antaa valmiudet toimia muuttuvissa toimintaympäristöissä",
+          "se": "Tutkintokoulutus antaa valmiudet toimia muuttuvissa toimintaympäristöissä",
+          "en": "Tutkintokoulutus antaa valmiudet toimia muuttuvissa toimintaympäristöissä"
         },
         "shortLabel": {
-          "fi": "Tutkintokoulutus antaa valmiudet toimia jatkuvasti erilaisissa muuttuvissa toimintaympäristöissä",
+          "fi": "Tutkintokoulutus antaa valmiudet toimia muuttuvissa toimintaympäristöissä",
           "se": "",
           "en": ""
         },
@@ -287,18 +293,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "skills_for_worklife",
+        "id": "studytrack_was_clear",
         "index": 7,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti",
+          "fi": "Opiskelupolku on selkeä",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Opiskeluprosessi on selkeä ja opiskelu sujuu kitkattomasti",
+          "fi": "Opiskelupolku on selkeä",
           "se": "",
           "en": ""
         },
@@ -307,18 +313,18 @@
       },
 
       {
-        "id": "degrees_give_skills_for_digitalization",
+        "id": "studytrack_choices_and_transitions_are_flexible",
         "index": 8,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä",
+          "fi": "Opiskelupolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Opintopolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti hidastamatta opiskelun etenemistä",
+          "fi": "Opiskelupolkuun kuuluvat valinnat ja nivelvaiheet sujuvat joustavasti",
           "se": "",
           "en": ""
         },
@@ -327,7 +333,7 @@
       },
 
       {
-        "id": "digitalization_and_university",
+        "id": "university_is_interationally_attractive",
         "index": 9,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -346,18 +352,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "multiple_environments",
+        "id": "university_graduates_are_international_worklife_oriented",
         "index": 10,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia",
+          "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita ja osaajia",
+          "fi": "Yliopistosta valmistuu kansainväliseen työelämään sijoittuvia asiantuntijoita",
           "se": "",
           "en": ""
         },
@@ -365,18 +371,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studying_process",
+        "id": "study_design_and_implementation_good_practices_are_shared",
         "index": 11,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana",
+          "fi": "Koulutuksen suunnittelun ja toteutuksen hyviä käytäntöjä jaetaan yliopistossa yli tiedekunta- ja yksikkörajojen",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Yliopistosta on tullut uudistusten myötä kansainvälisesti edelläkävijä tulevaisuuden osaajien kouluttajana",
+          "fi": "Koulutuksen suunnittelun ja toteutuksen hyviä käytäntöjä jaetaan yliopistossa yli tiedekunta- ja yksikkörajojen",
           "se": "",
           "en": ""
         },
@@ -384,96 +390,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studytrack_choices",
+        "id": "university_has_clear_study_time_limits",
         "index": 12,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "Yliopistossa koulutuksen suunnittelun ja toteutuksen hyvät käytännöt jaetaan yli tiedekunta- ja yksikkörajojen",
-          "se": "",
-          "en": ""
-        },
-
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "diverse_studies_inside_studytracks",
-        "index": 13,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "Koulutuksen kehittämistä koskevaan keskusteluun osallistuvat kaikki yliopiston opetuksesta vastaavat",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "free_answer",
-        "index": 20,
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      }
-    ]
-  },
-  {
-    "title": {
-      "fi": "Yliopiston linja koulutuksen uudistamisessa",
-      "se": "",
-      "en": ""
-    },
-    "id": 2,
-    "parts": [
-      {
-        "id": "outlining_questions_2015_study_council",
-        "index": 21,
-        "type": "INFOBOX",
-        "shortLabel": {
-          "fi": "Arvioi, miten hyvin mielestänne opintoasiainneuvoston 2015 tiedekunnista kokoamat näkemykset (=väittämät) näkyvät tänä päivänä yliopistossa",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "Arvioi, miten hyvin mielestänne opintoasiainneuvoston 2015 tiedekunnista kokoamat näkemykset (=väittämät) näkyvät tänä päivänä yliopistossa",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Koulutusuudistuksessa tavoiteltiin rohkeaa askelta Helsingin yliopiston koulutuksen uudistamisessa. Koulutusuudistuksessa tarkoitus oli tehdä kunkin tiedekunnan omista lähtökohdista tarvittavia muutoksia – kuitenkin yhteiseen suuntaan, mistä huolehti yliopiston opintoasiainneuvosto.",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "studying_boundaries",
-        "index": 22,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -483,16 +401,17 @@
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Yliopistossa on asetettu selkeät rajat opiskeluajoille",
           "se": "",
           "en": ""
         },
+
         "required": false,
         "relatedYearlyQuestions": []
       },
       {
-        "id": "worklife_talk_systematic",
-        "index": 24,
+        "id": "discussion_with_worklife_is_systematic",
+        "index": 13,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -502,7 +421,7 @@
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Vuoropuhelu työelämän kanssa on systemaattista",
           "se": "",
           "en": ""
         },
@@ -510,18 +429,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "teaching_methods_up_to_date",
-        "index": 25,
+        "id": "study_methods_are_up_to_date",
+        "index": 14,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opetusmenetelmät ja opetusvälineet ovat ajanmukaisia",
+          "fi": "Opetusmenetelmät ovat ajanmukaisia",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Opetusmenetelmät ovat ajanmukaisia",
           "se": "",
           "en": ""
         },
@@ -529,18 +448,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "support_up_to_date",
-        "index": 26,
+        "id": "study_and_teach_support_services_are_functional",
+        "index": 15,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opiskelun ja opetuksen tukipalvelut ovat ajanmukaisia",
+          "fi": "Opiskelun ja opetuksen tukipalvelut ovat toimivia",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Opiskelun ja opetuksen tukipalvelut ovat toimivia",
           "se": "",
           "en": ""
         },
@@ -548,8 +467,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "teaching_material_up_to_date",
-        "index": 27,
+        "id": "study_contents_are_up_to_date",
+        "index": 16,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -559,7 +478,7 @@
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Opetussisällöt ovat ajanmukaisia",
           "se": "",
           "en": ""
         },
@@ -567,18 +486,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "outdated_material_removed",
-        "index": 28,
+        "id": "working_things_are_kept",
+        "index": 17,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Vanhentunut sisältö ja käytännöt on uskallettu karsia",
+          "fi": "Hyvin toimivat asiat on säilytetty",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Hyvin toimivat asiat on säilytetty",
           "se": "",
           "en": ""
         },
@@ -586,18 +505,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "good_models_preserved",
-        "index": 29,
+        "id": "educational_fields_are_considered_in_development",
+        "index": 17,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Hyvin toimivat asiat on uskallettu säilyttää",
+          "fi": "Koulutusalojen tarpeet on huomioitu kehittämisessä",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Koulutusalojen tarpeet on huomioitu kehittämisessä",
           "se": "",
           "en": ""
         },
@@ -605,84 +524,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "educational_reform_brave",
-        "index": 31,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusuudistuksessa tehtiin rohkeita uudistuksia yhteiseen suuntaan",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "educational_reform_agile",
-        "index": 32,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Muutoksia tehtiin koulutusta kehittäen koulutusalojen tarpeiden mukaan",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "if_working_dont_change",
-        "index": 33,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Yliopistossa lähdettiin tekemään asioita samalla tavalla, ellei ollut erityistä syytä tehdä toisella tavalla",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "faculty_preparation_and_participatory",
-        "index": 34,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Omassa tiedekunnassani koulutusuudistusta valmisteltiin ja johdettiin osallistavasti",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "study_council_free_to_answer",
-        "index": 35,
+        "id": "free_answer",
+        "index": 19,
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi tätä teemaa halutessasi",
@@ -705,19 +548,19 @@
       "se": "",
       "en": ""
     },
-    "id": 3,
+    "id": 2,
     "parts": [
       {
         "id": "information-for-3",
         "index": 36,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi kolmiportaisen tutkintorakenteen toimivuutta tällä hetkellä",
+          "fi": "Arvioi koko yliopiston näkökulmasta kolmiportaisen tutkintorakenteen toimivuutta koko yliopiston näkökulmasta tällä hetkellä.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi kolmiportaisen tutkintorakenteen toimivuutta tällä hetkellä",
+          "fi": "Arvioi koko yliopiston näkökulmasta kolmiportaisen tutkintorakenteen toimivuutta koko yliopiston näkökulmasta tällä hetkellä.",
           "se": "",
           "en": ""
         },
@@ -726,21 +569,21 @@
           "se": "",
           "en": ""
         },
-        "image": { "text": "ks. lisätietoa", "link": "/three-step" }
+        "image": { "text": "Bolognan prosessin mukainen aito kolmiportainen tutkintorakenne", "id": "three-step" }
       },
       {
-        "id": "transfer_inside_uni_and_applied_sciences",
+        "id": "transfer_inside_uni_and_applied_sciences_works_well",
         "index": 37,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Liikkuvuus yliopiston sisällä sekä yliopistojen ja ammattikorkeakoulujen välillä sujuu kansallisesti ja kansainvälisesti luontevasti siten, että aiemmin hankittu osaaminen tunnustetaan",
+          "fi": "Liikkuvuus yliopiston sisällä sekä yliopistojen ja ammattikorkeakoulujen välillä sujuu luontevasti",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Liikkuvuus yliopiston sisällä sekä yliopistojen ja ammattikorkeakoulujen välillä sujuu luontevasti",
           "se": "",
           "en": ""
         },
@@ -748,13 +591,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studyprogrammes_are_clear_to_student",
+        "id": "earlier_gathered_knowledge_is_recognized",
         "index": 38,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yliopiston hakukohteet ovat hakijalle selkeitä ja mahdollistavat opiskelun kuluessa oppiaineen vaihdon tai suuntautumisvaihtoehdon valinnan",
+          "fi": "Aiemmin hankittu osaaminen tunnustetaan",
           "se": "",
           "en": ""
         },
@@ -767,18 +610,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studyprogramme_has_window_for_exchange",
+        "id": "university_studytracks_study_are_clear_to_applicant",
         "index": 39,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opetussuunnitelmassa on ns. liikkuvuusikkuna, mikä tarkoittaa, että opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
+          "fi": "Yliopiston hakukohteet ovat hakijalle selkeitä",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Yliopiston hakukohteet ovat hakijalle selkeitä",
           "se": "",
           "en": ""
         },
@@ -786,18 +629,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "after_bachelor_possible_to_masters_or_work",
+        "id": "student_can_go_abroad_without_delaying_studies",
         "index": 40,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kandidaatin tutkinnon jälkeen on mahdollista siirtyä työelämään ja myöhemmin jatkaa opintoja maisteriohjelmassa",
+          "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
           "se": "",
           "en": ""
         },
@@ -805,18 +648,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "after_bachelor_possible_to_continue_abroad",
+        "id": "after_bachelor_possible_work_and_later_master",
         "index": 41,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kandidaatin tutkinnon jälkeen hakeudutaan jatkamaan maisteriopintoja myös muissa yliopistoissa ja korkeakouluissa Suomessa ja ulkomailla",
+          "fi": "Kandidaatin tutkinnon jälkeen on mahdollista siirtyä työelämään ja myöhemmin halutessaan jatkaa opintoja maisteriohjelmassa",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Kandidaatin tutkinnon jälkeen on mahdollista siirtyä työelämään ja myöhemmin halutessaan jatkaa opintoja maisteriohjelmassa",
           "se": "",
           "en": ""
         },
@@ -824,18 +667,18 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "after_master_possible_to_apply_abroad_phd",
+        "id": "after_master_possible_doctoral_studies",
         "index": 42,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua alan tohtoriohjelmaan myös muissa yliopistoissa Suomessa ja ulkomailla",
+          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua alan tohtoriohjelmaan myös muissa yliopistoissa Suomessa ja ulkomailla.",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua alan tohtoriohjelmaan myös muissa yliopistoissa Suomessa ja ulkomailla.",
           "se": "",
           "en": ""
         },
@@ -867,24 +710,24 @@
       "se": "",
       "en": ""
     },
-    "id": 4,
+    "id": 3,
     "parts": [
       {
-        "id": "information-for-4",
+        "id": "information-for-3-3",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi seuraavia väittämiä",
+          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella ja/tai koulutusuohjelmasi/tiedekuntasi näkökulmasta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi seuraavia väittämiä",
+          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella ja/tai koulutusuohjelmasi/tiedekuntasi näkökulmasta.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": " Tutkintoasetuksen mukaan yliopiston tutkintokoulutus voidaan järjestää pää- ja sivuainepohjaisesti tai koulutusohjelmina. Koulutusuudistuksessa päätettiin, että Helsingin yliopistossa tutkintokoulutus järjestetään koulutusohjelmissa.",
+          "fi": "Tutkintoasetuksen mukaan yliopiston tutkintokoulutus voidaan järjestää pää- ja sivuainepohjaisesti tai koulutusohjelmina. Koulutusuudistuksessa päätettiin, että Helsingin yliopistossa tutkintokoulutus järjestetään koulutusohjelmissa.",
           "se": "",
           "en": ""
         },
@@ -892,13 +735,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "sciences_can_be_found_as_studyprogrammes",
+        "id": "studytracks_have_free_choice_study_modules",
         "index": 44,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Tieteenalat, joita ennen opetettiin pää- ja sivuaineina, löytyvät nyt koulutusohjelmien sisällöistä",
+          "fi": "Koulutusohjelmassa on valinnaisia ja vapaasti valittavia opintokokonaisuuksia",
           "se": "",
           "en": ""
         },
@@ -911,51 +754,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studyprogrammes_have_free_choice_study_modules",
+        "id": "university_does_not_have_multiple_studyprogrammes_with_same_content",
         "index": 45,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelmassa on valinnaisia ja vapaasti valittavia opintokokonaisuuksia, joita opiskelija voi suorittaa oman tai muiden koulutusohjelmien tarjonnasta (vastaa entistä sivuaineopiskelua)",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "no_studyprogrammes_with_same_content",
-        "index": 46,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Yliopistossa ei ole useampia samansisältöisiä saman tutkintotason koulutusohjelmia",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "no_same_content_multiple_language_multiple_studyprogrammes",
-        "index": 47,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Samansisältöistä koulutusta ei toteuteta eri kielillä useassa eri ohjelmassa",
+          "fi": "Yliopistossa ei ole useampia samansisältöisiä saman tutkintotason koulutusohjelmia esimerkiksi eri kielillä",
           "se": "",
           "en": ""
         },
@@ -987,13 +792,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "singular_teacher_affects_teaching_in_the_studyprogramme_as_a_whole",
+        "id": "studyprogramme_studytracks_form_whole",
         "index": 49,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yksittäisen opettajan opetus liittyy kiinteästi muiden opettajien antamaan opetukseen ja koko koulutusohjelman kokonaisuuteen",
+          "fi": "Koulutusohjelman opintojaksot muodostavat ehyen kokonaisuuden",
           "se": "",
           "en": ""
         },
@@ -1006,13 +811,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-4-7",
+        "id": "teachers_have_time_to_develop_studyprogramme",
         "index": 50,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yksittäisten opettajien aikaa on vapautunut opetuksen suunnitteluun ja kehittämiseen",
+          "fi": "Opettajien aikaa on vapautunut opetuksen suunnitteluun ja kehittämiseen",
           "se": "",
           "en": ""
         },
@@ -1025,13 +830,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-4-8",
+        "id": "teachers_time_is_freed_for_research",
         "index": 51,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yksittäisten opettajien aikaa on vapautunut tutkimukseen ja muuhun tieteelliseen toimintaan",
+          "fi": "Opettajien aikaa on vapautunut tutkimukseen ja muuhun tieteelliseen toimintaan",
           "se": "",
           "en": ""
         },
@@ -1044,13 +849,32 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-4-9",
+        "id": "studyprogrammes_are_functional",
         "index": 51,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelmat ovat pää- ja sivuainepohjaista koulutusta toimivampi rakenne Helsingin yliopistossa",
+          "fi": "Koulutusohjelmat ovat toimiva rakenne Helsingin yliopistossa",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "science_areas_taught_as_studytracks_are_found_in_studyprogrammes",
+        "index": 51,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Tieteenalat, joita ennen opetettiin pää- ja sivuaineina, löytyvät nyt koulutusohjelmien sisällöistä.",
           "se": "",
           "en": ""
         },
@@ -1087,29 +911,24 @@
       "se": "",
       "en": ""
     },
-    "id": 5,
+    "id": 4,
     "parts": [
       {
-        "id": "information-for-5",
+        "id": "information-for-4",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi kandiohjelmien toimivuutta",
+          "fi": "Arvioi kandiohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi kandiohjelmien toimivuutta",
-          "se": "",
-          "en": ""
-        },
-        "accordion": {
-          "fi": "Taustatietoa kandiohjelmien periaatteista",
+          "fi": "Arvioi kandiohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Jokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostaa yhden hakukohteen, mutta perustellusta syystä tästä voidaan poiketa. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kandiohjelmassa kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Kandiohjelman tulee olla riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelma on kooltaan sellainen, että aloituspaikkoja on vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nKandiohjelman jälkeen opiskelija voi jatkaa yhdessä tai useammassa vaihtoehtoisessa maisteriohjelmassa etukäteen ilmoitettujen kriteerien ja periaatteiden mukaisesti hakematta uutta tutkinnonsuoritusoikeutta. Mikäli opiskelijalle on myönnetty tutkinnonsuoritusoikeus vain alempaan korkeakoulututkintoon, hän hakee tutkinnonsuoritusoikeutta ylempään korkeakoulututkintoon johtavaan koulutusohjelmaan opiskelijavalinnassa.\n\nKoulutusohjelmarakenteessa opiskelijalla on yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Tiedekuntaneuvosto päättää osana opetussuunnitelmaa, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.",
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -1117,13 +936,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-5-1",
+        "id": "bachelor_programme_structure_is_clear",
         "index": 53,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Hakukohteet kandiohjelmissa ovat hakijan näkökulmasta selkeät",
+          "fi": "Kandiohjelmassa hakukohteet ovat opiskelijan näkökulmasta selkeät",
           "se": "",
           "en": ""
         },
@@ -1136,13 +955,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-5-2",
+        "id": "bachelor_programme_starting_amount_is_suitable",
         "index": 54,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Useista tieteenaloista muodostuneen kandiohjelman sisällä opiskelijan opintosuunta voi tarkentua opintojen kuluessa",
+          "fi": "Kandiohjelmat ovat aloituspaikkamäärältään sopivia",
           "se": "",
           "en": ""
         },
@@ -1155,27 +974,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-5-3",
+        "id": "bachelor_programme_gives_sufficient_skills_for_further_studies",
         "index": 55,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kandiohjelmat ovat aloituspaikkamäärältään riittävän suuria",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-5-4",
-        "index": 56,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1193,13 +993,32 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-5-5",
+        "id": "bachelor_programme_gives_sufficient_skills_for_working_life",
+        "index": 56,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Kandiohjelma antaa riittävän perusosaamisen alan asiantuntijatehtäviin työelämässä",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "student_gets_enough_support_for_studies",
         "index": 57,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kandiohjelma antaa riittävän perusosaamisen myös alan asiantuntijatehtäviin työelämässä",
+          "fi": "Opiskelija saa neuvontaa ja ohjausta optio-maisteriohjelmien valinnassa",
           "se": "",
           "en": ""
         },
@@ -1212,65 +1031,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-5-6",
+        "id": "bachelor_level_education_works_better_than_before_the_reform",
         "index": 58,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kandiohjelmassa voi olla kaikille yhteisten opintojen lisäksi vaihtoehtoisia tai valinnaisia opintoja, jotka voivat olla oman koulutusohjelman tarjonnasta valittuja tai muiden koulutusohjelmien opintokokonaisuuksia",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-5-7",
-        "index": 577,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Opiskelijalle annetaan neuvontaa ja ohjausta optio-maisteriohjelmien valinnassa",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-5-8",
-        "index": 59,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Opiskelijalle annetaan tietoa myös muista opiskelumahdollisuuksista kandiohjelman jälkeen kuin Helsingin yliopiston optiomaisteriohjelmista",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-5-9",
-        "index": 60,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1288,8 +1050,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "bachelor_free_to_answer",
-        "index": 61,
+        "id": "bachelor_free_answer",
+        "index": 52,
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi tätä teemaa halutessasi",
@@ -1312,29 +1074,24 @@
       "se": "",
       "en": ""
     },
-    "id": 6,
+    "id": 5,
     "parts": [
       {
-        "id": "information-for-6",
+        "id": "information-for-5",
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi maisteriohjelmien toimivuutta",
+          "fi": "Arvioi maisteriohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi maisteriohjelmien toimivuutta",
-          "se": "",
-          "en": ""
-        },
-        "accordion": {
-          "fi": "Taustatietoa kandiohjelmien periaatteista",
+          "fi": "Arvioi maisteriohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Jokainen ylempää korkeakoulututkintoa suorittava opiskelija kuuluu yhteen maisteriohjelmaan, tai lääketieteen, hammaslääketieteen tai eläinlääketieteen lisensiaatin koulutusohjelmaan.\n\nMaisteriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Lisäksi koulutusohjelma antaa riittävän perustan tohtorikoulutukseen. Maisteriohjelman sisällä voi olla useita opintosuuntia.\n\nTutkintokieli on ylempään korkeakoulututkintoon johtavassa koulutusohjelmassa suomi, ruotsi tai englanti. Maisteriohjelman tulee olla kooltaan riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa, voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi on suositeltavaa, että koulutusohjelma on kooltaan sellainen, jossa aloituspaikkoja on vähintään 40.",
+          "fi": "Jokainen ylempää korkeakoulututkintoa suorittava opiskelija kuuluu yhteen maisteriohjelmaan tai lääketieteen, hammaslääketieteen tai eläinlääketieteen lisensiaatin koulutusohjelmaan.\n\nMaisteriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Lisäksi koulutusohjelma antaa riittävän perustan tohtorikoulutukseen. Maisteriohjelman sisällä voi olla useita opintosuuntia.\n\nTutkintokieli on ylempään korkeakoulututkintoon johtavassa koulutusohjelmassa suomi, ruotsi tai englanti. Maisteriohjelman tulee olla kooltaan riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa, voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi on suositeltavaa, että koulutusohjelmassa on aloituspaikkoja vähintään 40.",
           "se": "",
           "en": ""
         },
@@ -1342,13 +1099,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-1",
+        "id": "master_programs_are_sufficiently_sized",
         "index": 62,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelmat ovat aloituspaikkamäärältään riittävän suuria",
+          "fi": "Maisteriohjelmat ovat aloituspaikkamäärältään riittävän suuria/sopivia",
           "se": "",
           "en": ""
         },
@@ -1361,13 +1118,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-2",
+        "id": "master_programmes_science_contents_are_functional",
         "index": 63,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelmien tieteenalasisällöt ovat onnistuneita",
+          "fi": "Maisteriohjelmien tieteenalasisällöt ovat toimivia",
           "se": "",
           "en": ""
         },
@@ -1380,13 +1137,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-3",
+        "id": "master_programs_gives_skills_for_demanded_positions",
         "index": 64,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelma antaa erikoistuneen tai monialaisen osaamisen syvällistä asiantuntemusta vaativiin tehtäviin työelämässä",
+          "fi": "Maisteriohjelma antaa valmiudet syvällistä asiantuntemusta vaativiin tehtäviin työelämässä",
           "se": "",
           "en": ""
         },
@@ -1399,13 +1156,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-4",
+        "id": "multi_language_master_programmes_are_sufficiently_taught_in_english",
         "index": 65,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelma antaa erikoistuneen tai monialaisen osaamisen syvällistä asiantuntemusta vaativiin tehtäviin työelämässä",
+          "fi": "Monikielisessä maisteriohjelmassa englanninkielistä opetusta ja ohjausta on riittävästi siten, että opiskelijat voivat suorittaa tutkinnon kahdessa vuodessa",
           "se": "",
           "en": ""
         },
@@ -1418,13 +1175,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-5",
+        "id": "multi_language_studies_are_sufficiently_taught_in_domestic",
         "index": 66,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Monikielisessä maisteriohjelmassa englanninkielistä opetusta ja ohjausta on riittävästi siten, että kotimaisia kieliä taitamattomat opiskelijat voivat suorittaa tutkinnon kahdessa vuodessa",
+          "fi": "Monikielisessä maisteriohjelmassa opiskeleville on tarjolla mahdollisuus seminaari- ja tutkielmaohjaukseen kotimaisilla kielillä",
           "se": "",
           "en": ""
         },
@@ -1437,46 +1194,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-6-6",
+        "id": "master_level_education_works_better_than_before_the_reform",
         "index": 67,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kandiohjelmassa voi olla kaikille yhteisten opintojen lisäksi vaihtoehtoisia tai valinnaisia opintoja, jotka voivat olla oman koulutusohjelman tarjonnasta valittuja tai muiden koulutusohjelmien opintokokonaisuuksia",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-6-7",
-        "index": 68,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Monikielisessä maisteriohjelmassa kotimaisilla kielillä opiskeleville on tarjolla mahdollisuus seminaari- ja tutkielmaohjaukseen kotimaisilla kielillä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-6-8",
-        "index": 69,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1518,24 +1237,24 @@
       "se": "",
       "en": ""
     },
-    "id": 7,
+    "id": 6,
     "parts": [
       {
-        "id": "information-for-7",
-        "index": 5,
+        "id": "information-for-6",
+        "index": 6,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta seuraavien väittämien perusteella",
+          "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta seuraavien väittämien perusteella.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta seuraavien väittämien perusteella",
+          "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta seuraavien väittämien perusteella.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Opintoasiainneuvosto linjasi kansainvälisten maisteriohjelmien kriteerit 22.2.2016. Maisteriohjelmien valmistelussa edellytettiin niiden hyödyntämistä. Lisäksi opintoasiainneuvosto keskusteli uudistuksen yhteydessä erityisesti kansainvälisten markkinointikärkien (flagship-ohjelmien) perustamisesta.",
+          "fi": "Vastaa lisäksi tähän osioon, mikäli maisteriohjelmassasi on kansainvälinen haku",
           "se": "",
           "en": ""
         },
@@ -1543,13 +1262,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-1",
+        "id": "study_program_has_both_finnish_and_foreign",
         "index": 71,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelmassa on sekä suomalaisia että eri maista tulevia ulkomaisia opiskelijoita",
+          "fi": "Ohjelmassa on suomalaisia ja kansainvälisiä opiskelijoita",
           "se": "",
           "en": ""
         },
@@ -1562,7 +1281,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-2",
+        "id": "study_program_has_clear_career_options",
         "index": 72,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1581,27 +1300,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-3",
+        "id": "study_program_student_can_network_globally",
         "index": 73,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Ohjelman nimi on selkeä ja kansainvälisesti ymmärrettävä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-4",
-        "index": 74,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1619,13 +1319,32 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-5",
+        "id": "students_graduated_from_study_program_work_internationally",
+        "index": 74,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Ohjelmasta valmistuneet työllistyvät kansainvälisille työmarkkinoille",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "study_program_integrates_international_students",
         "index": 75,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelman opettajat ovat kansainvälisesti verkostoituneita",
+          "fi": "Ohjelmassa kiinnitetään huomiota kansainvälisten opiskelijoiden kotoutumiseen",
           "se": "",
           "en": ""
         },
@@ -1638,13 +1357,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-6",
+        "id": "international_students_graduated_from_study_program_work_in_finland",
         "index": 76,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelmasta valmistuneet työllistyvät globaaleille työmarkkinoille",
+          "fi": "Ohjelmasta valmistuneiden kansainvälisten opiskelijoita mahdollisuudet työllistymiseen Suomessa ovat hyvät",
           "se": "",
           "en": ""
         },
@@ -1657,106 +1376,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-7-7",
+        "id": "study_program_stand_out_in_international_education_markets",
         "index": 766,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelmassa syntyy kokemus englanninkielisestä oppimisyhteisöstä, jossa kansainväliset opiskelijat eivät eriydy omaksi ryhmäkseen",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-8",
-        "index": 777,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
           "fi": "Ohjelma erottuu selkeästi kansainvälisillä koulutusmarkkinoilla",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-9",
-        "index": 77,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kansainvälisiä maisteriohjelmia markkinoidaan tehokkaasti",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-10",
-        "index": 78,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Ohjelmassa kiinnitetään huomiota kansainvälisten opiskelijoiden kotoutumiseen sekä Suomi- ja Helsinki-kokemukseen luomiseen opiskeluyhteisössä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-11",
-        "index": 79,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Ohjelmassa valmennetaan opiskelijoita siten, että kansainvälisten opiskelijoiden mahdollisuudet Suomessa työllistymiseen ovat hyvät",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-7-15",
-        "index": 83,
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
           "se": "",
           "en": ""
         },
@@ -1806,7 +1432,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-1",
+        "id": "doctoral_program_has_clear_profile",
         "index": 84,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1825,7 +1451,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-2",
+        "id": "doctoral_program_is_sufficiently_large",
         "index": 845,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1844,7 +1470,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-3",
+        "id": "doctoral_program_is_internationally_and_nationally_attractive",
         "index": 855,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1863,27 +1489,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-4",
+        "id": "doctoral_program_has_diverse_and_relevant_course_offerings",
         "index": 85,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Tohtoriohjelman nimi on selkeä ja kansainvälisesti ymmärrettävä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-8-5",
-        "index": 86,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1901,13 +1508,32 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-6",
+        "id": "doctoral_program_is_internationally_nationally_networked",
+        "index": 86,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Tohtoriohjelma on kansainvälisesti ja kansallisesti hyvin verkostoitunut",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "students_grauated_from_doctoral_program_have_skills_to_expert_positions",
         "index": 87,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Tohtoriohjelma on kansainvälisesti ja kansallisesti hyvin verkostunut",
+          "fi": "Tohtoriohjelmasta valmistuneilla tohtoreilla on valmiudet toimia syvällistä osaamista vaativissa tutkimus- ja asiantuntijatehtävissä",
           "se": "",
           "en": ""
         },
@@ -1920,46 +1546,8 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-8-7",
+        "id": "doctoral_program_works_better_than_before",
         "index": 88,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Tohtoriohjelmassa on riittävästi asiantuntemusta ja ohjausresursseja erilaisten väitöskirjaprojektien ohjaamiseen",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-8-8",
-        "index": 89,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Tohtoriohjelma antaa riittävästi valmiuksia toimia syvällistä osaamista vaativissa tutkimus- ja asiantuntijatehtävissä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-8-9",
-        "index": 90,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1976,7 +1564,6 @@
         "required": false,
         "relatedYearlyQuestions": []
       },
-
       {
         "id": "phd_free_to_answer",
         "index": 94,
@@ -2009,12 +1596,12 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua",
+          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua",
+          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
           "se": "",
           "en": ""
         },
@@ -2024,7 +1611,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Rehtorin päätöksellä 102/2016 linjattiin koulutusohjelmien johtajan ja johtoryhmän tehtävistä ja valintaprosessista sekä johtoryhmän kokoonpanosta.\n\nSyksyn 2016 lopussa valittiin koulutusohjelmien johtajat ja johtoryhmät ensimmäiselle toimikaudelle 2017-2020. Johtoryhmissä on opiskelijoiden edustajat ja tohtoriohjelmissa väitöskirjatutkijoiden edustajat. Kullekin koulutusohjelmalle oli nimetty hallinnollinen vastuutiedekunta koulutusohjelman perustamisen yhteydessä.\n\nKoulutusohjelman johtoryhmä tekee mm. esityksen koulutusohjelman 3-vuotiseksi opetussuunnitelmaksi ja päättää vuosittaisen opetusohjelman. Se valmistelee esitykset ohjelmaan otettavien opiskelijoiden enimmäismäärästä ja valintaperusteista. Lisäksi johtoryhmä huolehtii ruotsinkielisen opetuksen organisoinnista ohjelmassa.\n\nKoulutusohjelman johtaja vastaa koulutusohjelman johtamisesta ja sen tavoitteiden toteutumisesta ja sen laadusta. Johtaja vastaa koulutusohjelman opetussuunnitelmatyöstä ja sen opetuksen pedagogisesta ja sisällöllisestä suunnittelusta sekä yhteistyöstä koulutusohjelmassa mukana olevien yksiköiden ja muiden koulutusohjelmien kanssa. Lisäksi johtaja päättää koulutusohjelman käyttöön osoitettujen resurssien allokoinnista ja tarkoituksenmukaisesta käytöstä. ",
+          "fi": "Rehtorin päätöksellä 102/2016 linjattiin koulutusohjelmien johtajan ja johtoryhmän tehtävistä ja valintaprosessista sekä johtoryhmän kokoonpanosta.\n\nSyksyn 2016 lopussa valittiin koulutusohjelmien johtajat ja johtoryhmät ensimmäiselle toimikaudelle 2017-2020. Johtoryhmissä on opiskelijoiden edustajat ja tohtoriohjelmissa väitöskirjatutkijoiden edustajat. Kullekin koulutusohjelmalle oli nimetty hallinnollinen vastuutiedekunta koulutusohjelman perustamisen yhteydessä.\n\nKoulutusohjelman johtoryhmä tekee mm. esityksen koulutusohjelman 3-vuotiseksi opetussuunnitelmaksi ja päättää vuosittaisen opetusohjelman. Se valmistelee esitykset ohjelmaan otettavien opiskelijoiden enimmäismäärästä ja valintaperusteista. Lisäksi johtoryhmä huolehtii ruotsinkielisen opetuksen organisoinnista ohjelmassa.\n\nKoulutusohjelman johtaja vastaa koulutusohjelman johtamisesta ja sen tavoitteiden toteutumisesta ja sen laadusta. Johtaja vastaa koulutusohjelman opetussuunnitelmatyöstä ja sen opetuksen pedagogisesta ja sisällöllisestä suunnittelusta sekä yhteistyöstä koulutusohjelmassa mukana olevien yksiköiden ja muiden koulutusohjelmien kanssa. Lisäksi johtaja päättää koulutusohjelman käyttöön osoitettujen resurssien allokoinnista ja tarkoituksenmukaisesta käytöstä.",
           "se": "",
           "en": ""
         },
@@ -2032,13 +1619,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-9-1",
+        "id": "study_program_leader_has_clear_tasks_and_responsibilities",
         "index": 95,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelman johtajan tehtävä ja vastuu on määritelty selkeästi",
+          "fi": "Koulutusohjelman johtajan tehtävä ja vastuu ovat selkeät",
           "se": "",
           "en": ""
         },
@@ -2051,13 +1638,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-9-2",
+        "id": "lead_group_has_clear_tasks_and_responsibilities",
         "index": 96,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Johtoryhmän tehtävä ja vastuu on määritelty selkeästi",
+          "fi": "Johtoryhmän tehtävä ja vastuu ovat selkeät",
           "se": "",
           "en": ""
         },
@@ -2070,7 +1657,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-9-3",
+        "id": "lead_has_sufficient_authority_to_study_program",
         "index": 97,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -2095,7 +1682,7 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Johtajalla ja johtoryhmällä on opetussuunnitelmaa valmisteltaessa riittävästi tietoa käytettävissä olevasta opetushenkilökunnasta",
+          "fi": "Koulutusohjelmalla on käytössään riittävästi opetus- ja tutkimushenkilökuntaa opetuksen järjestämiseen",
           "se": "",
           "en": ""
         },
@@ -2114,7 +1701,7 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelman johtajan ja opetus- ja tutkimushenkilökunnan esimiesten, kuten osastojen johtajien tai tieteenalavastaavien välinen yhteistyö on toimivaa",
+          "fi": "Koulutusohjelmalla on mahdollisuus vaikuttaa uuden opetus- ja tutkimushenkilökunnan rekrytointiin",
           "se": "",
           "en": ""
         },
@@ -2133,7 +1720,7 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelmalla on saatavissa riittävästi opetus- ja tutkimushenkilökuntaa opetussuunnitelman mukaisen opetuksen laadukkaaseen toteuttamiseen",
+          "fi": "Koulutusohjelma osallistuu tiedekunnan toiminnan ja talouden suunnitteluun",
           "se": "",
           "en": ""
         },
@@ -2152,64 +1739,7 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Koulutusohjelmalla on mahdollisuus vaikuttaa uuden opetus- ja tutkimushenkilökunnan rekrytointivaiheessa siihen, millaisia osaajia rekrytoidaan",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-9-8",
-        "index": 102,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusohjelma osallistuu tiedekunnan toiminnan ja talouden suunnitteluun",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-9-9",
-        "index": 103,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
           "fi": "Koulutusohjelman resurssitarpeet on otettu huomioon tiedekunnan toiminta- ja taloussuunnitelmissa",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "question-9-10",
-        "index": 104,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Tiedekunnassa käsitellään yhdessä koulutusohjelmien kanssa toiminta- talous- ja henkilöstösuunnitelmia",
           "se": "",
           "en": ""
         },
@@ -2253,12 +1783,12 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä",
+          "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä",
+          "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä.",
           "se": "",
           "en": ""
         },
@@ -2271,7 +1801,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-1",
+        "id": "study_programmes_have_succesful_content",
         "index": 108,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -2290,13 +1820,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-2",
+        "id": "study_programme_resourcing_is_succesful",
         "index": 109,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelmien resurssoinnista on päästy kumppanien kesken yhteisymmärrykseen",
+          "fi": "Ohjelmien resurssoinnista on neuvoteltu yhdessä",
           "se": "",
           "en": ""
         },
@@ -2309,7 +1839,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-3",
+        "id": "faculties_respontibility_for_programmes_are_financed",
         "index": 110,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -2328,13 +1858,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-4",
+        "id": "study_programme_lead_is_succesful",
         "index": 101,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Ohjelmien johtaminen onnistuu yhteisessä johtoryhmässä",
+          "fi": "Ohjelmien johtaminen on onnistunutta",
           "se": "",
           "en": ""
         },
@@ -2347,13 +1877,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-5",
+        "id": "all_groups_are_represented_in_programme_leading_group",
         "index": 102,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Johtoryhmässä on riittävä edustus kaikista kumppaneista",
+          "fi": "Kaikki mukana olevat tahot ovat riittävästi edustettuina ohjalman johtoryhmässä",
           "se": "",
           "en": ""
         },
@@ -2366,13 +1896,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "question-10-6",
+        "id": "faculties_collaboration_study_programme_is_functional",
         "index": 103,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Tiedekuntien yhteinen koulutusohjelma on toimiva konsepti.",
+          "fi": "Tiedekuntien yhteinen koulutusohjelma on toimiva konsepti",
           "se": "",
           "en": ""
         },
