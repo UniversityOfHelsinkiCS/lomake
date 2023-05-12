@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
-import debounce from 'lodash/debounce'
+import useDebounce from 'Utilities/useDebounce'
 import DropdownFilter from './DropdownFilter'
 import BasicRadio from './BasicRadio'
 
@@ -20,17 +20,11 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
+  const debouncedFilter = useDebounce(state, 200)
 
-  const debouncedChangeHandler = useCallback(
-    debounce((value, firstValue, secondValue) => {
-      if (secondValue && value) {
-        choose(id, `${firstValue}_-_${secondValue}_-_${value}`)
-      } else if (firstValue && value) {
-        choose(id, `${firstValue}_-_${value}`)
-      }
-    }, 300),
-    []
-  )
+  const saveState = () => {
+    choose(id, `${debouncedFilter.firstValue}_-_${debouncedFilter.secondValue}_-_${debouncedFilter.thirdValue}`)
+  }
 
   useEffect(() => {
     const splitRadio = dataFromRedux.split('_-_')
@@ -43,14 +37,17 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
     setState({ firstValue: splitRadio[0], secondValue: splitRadio[1], thirdValue: splitRadio[2] })
   }, [dataFromRedux])
 
-  const handleOtherField = input => {
+  useEffect(() => {
+    saveState()
+  }, [debouncedFilter])
+
+  const handleOtherField = ({ input, level }) => {
     const { value } = input.target
-    if (state.secondValue && value) {
-      setState({ firstValue: state.firstValue, secondValue: state.secondValue, thirdValue: value })
-    } else if (state.firstValue && value) {
+    if (level === 2 && value) {
+      setState({ ...state, secondValue: state.secondValue, thirdValue: value })
+    } else if (level === 1 && value) {
       setState({ ...state, firstValue: state.firstValue, secondValue: value })
     }
-    debouncedChangeHandler(value, state.firstValue, state.secondValue)
   }
 
   const handleClick = ({ firstPart, secondPart, thirdPart }) => {
@@ -132,10 +129,9 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
             <Input
               style={{ width: '60%' }}
               value={state.secondValue}
-              onChange={handleOtherField}
+              onChange={value => handleOtherField({ input: value, level: 1 })}
               version="degree-reform"
               size="small"
-              autoFocus
             />
           ) : null}
         </Form>

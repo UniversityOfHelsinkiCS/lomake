@@ -47,7 +47,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
               <Input
                 style={{ width: '60%' }}
                 value={checked.thirdValue}
-                onChange={handleOtherField}
+                onChange={value => handleOtherField({ input: value, level: 2 })}
                 version="degree-reform"
                 size="small"
               />

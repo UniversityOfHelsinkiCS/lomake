@@ -401,13 +401,13 @@ export const getFilters = filter => {
   let filters = []
   filter?.map(f => {
     if (f.id === 'bachelor' && f.value === false) {
-      filters = filters.concat(5)
+      filters = filters.concat(4)
     }
     if (f.id === 'masters' && f.value === false) {
-      filters = filters.concat([6, 7])
+      filters = filters.concat([5, 6])
     }
     if (f.id === 'doctoral' && f.value === false) {
-      filters = filters.concat(8)
+      filters = filters.concat(7)
     }
     return 0
   })
