@@ -8,7 +8,7 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
-import { setViewOnly, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleUsersAnswers /* postIndividualFormAnswer */ } from 'Utilities/redux/formReducer'
 import { degreeReformIndividualQuestions as questions } from '../../../questionData'
 import DegreeReformForm from './DegreeReformForm'
 
@@ -20,8 +20,11 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => 
 }
 
 const DegreeReformIndividual = () => {
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
+
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
+  // const formData = useSelector(state => state.form)
   const { uid } = user
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -56,7 +59,7 @@ const DegreeReformIndividual = () => {
   }, [year, draftYear, user, formDeadline])
 
   const handleSendingForm = () => {
-    // Send form to server
+    //  dispatch(postIndividualFormAnswer(formData.data, formNumber, year))
   }
 
   // if (!isAdmin(user)) return <Redirect to="/" />
@@ -75,7 +78,14 @@ const DegreeReformIndividual = () => {
           </h3>
         </div>
         <DegreeReformForm questionData={questions} formType={formType} />
-        <Button style={{ maxWidth: '10em', marginTop: '1.5em' }} icon color="green" onClick={handleSendingForm}>
+        <Button
+          style={{ maxWidth: '10em', marginTop: '1.5em' }}
+          labelPosition="left"
+          icon
+          disabled={viewOnly}
+          color="green"
+          onClick={handleSendingForm}
+        >
           <Icon name="upload" />
           {t('send')}
         </Button>

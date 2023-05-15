@@ -50,6 +50,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                 onChange={value => handleOtherField({ input: value, level: 2 })}
                 version="degree-reform"
                 size="small"
+                disabled={viewOnly}
               />
             </Form.Field>
           ) : null}

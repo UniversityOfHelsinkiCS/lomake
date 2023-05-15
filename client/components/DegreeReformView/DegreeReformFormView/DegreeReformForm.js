@@ -113,6 +113,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
         if (programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
         return (
           <Section
+            id={section.id}
             title={section.title[lang]}
             number={romanize(index)}
             key={section.title[lang]}

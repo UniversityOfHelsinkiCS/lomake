@@ -132,6 +132,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               onChange={value => handleOtherField({ input: value, level: 1 })}
               version="degree-reform"
               size="small"
+              disabled={viewOnly}
             />
           ) : null}
         </Form>
