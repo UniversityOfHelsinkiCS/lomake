@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
@@ -12,6 +12,7 @@ export default () => {
   const { t, i18n } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
+  const location = useLocation()
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
@@ -96,8 +97,8 @@ export default () => {
     )
   }
 
-  const MenuNavigation = () => {
-    if (window.location.pathname.substring(1).split('/')[0] === 'degree-reform-individual') {
+  const MenuNavigation = ({ pathname }) => {
+    if (pathname === '/degree-reform-individual/form') {
       return (
         <>
           <Menu.Item>
@@ -130,7 +131,7 @@ export default () => {
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
-      <MenuNavigation />
+      <MenuNavigation pathname={location.pathname} />
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>
