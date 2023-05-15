@@ -84,16 +84,7 @@ const EntityLevels = ({
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
+      <div className="entity-description">
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
