@@ -48,8 +48,8 @@ const ProgrammeList = ({ data, lang }) => {
       {colorsList.map(color => {
         return data[color].map(p => {
           return (
-            <p>
-              <span className={`answer-circle-${color}`} /> {p[lang]}
+            <p key={`${p[lang]}`}>
+              <span className={`answer-circle-${color}`} /> <span style={{ marginLeft: '0.5em' }}>{p[lang]}</span>
             </p>
           )
         })
