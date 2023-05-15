@@ -101,8 +101,6 @@ const FacultyFormView = ({ room, formString }) => {
     user,
   ])
 
-  // Tee tempnouto myös jorylomakkeelle
-
   const facultyProgrammeAnswers = useMemo(() => {
     if (
       !facultyProgrammeData?.forFaculty ||
