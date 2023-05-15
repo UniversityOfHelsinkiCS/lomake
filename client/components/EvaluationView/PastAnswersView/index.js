@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
@@ -7,6 +7,7 @@ import * as _ from 'lodash'
 
 import { isAdmin } from '@root/config/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
+import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
 import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
 import { yearlyQuestions as questions } from '../../../questionData'
@@ -24,9 +25,12 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
 }
 
 const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, lang }) => {
+  if (!oldAnswers) {
+    return {}
+  }
   const answerMap = new Map()
   const chosenKeys = usersProgrammes.map(p => p.key)
-  const selectedAnswers = oldAnswers.data.filter(a => a.year === year)
+  const selectedAnswers = oldAnswers.filter(a => a.year === year)
 
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
@@ -71,42 +75,50 @@ const PastAnswersView = ({ programmeKey }) => {
   const user = useSelector(state => state.currentUser.data)
   const [showingQuestion, setShowingQuestion] = useState(-1)
 
-  const oldAnswers = useSelector(state => state.oldAnswers)
+  const { pending, forProgramme } = useSelector(state => state.summaries)
   const allProgrammes = useSelector(state => state.studyProgrammes.data)
   const programme = Object.values(allProgrammes).find(p => p.key === programmeKey)
 
   const readAccess = (user.access[programmeKey] && user.access[programmeKey].read) || isAdmin(user)
+  const questionsList = modifiedQuestions(questions, lang)
 
   useEffect(() => {
     document.title = `${t('Katselmus')} - ${programmeKey}`
     dispatch(getProgramme(programmeKey))
   }, [lang, programmeKey])
 
-  // To be removed
-  if (!isAdmin(user)) return <Redirect to="/" />
+  useEffect(() => {
+    if (!forProgramme || !pending) {
+      dispatch(getProgrammeOldAnswersAction(programmeKey))
+    }
+  }, [programmeKey])
 
-  if (!programmeKey || !readAccess) return <Redirect to="/" />
+  const allAnswers = useMemo(() => {
+    if (pending || !forProgramme || forProgramme.length === 0) {
+      return []
+    }
 
-  const questionsList = modifiedQuestions(questions, lang)
-
-  const answersForYears = () => {
-    const all = [2019, 2020, 2021, 2022, 2023].map(year => {
+    const result = [2019, 2020, 2021, 2022, 2023].map(year => {
       const data = {
         year,
         answers: answersByQuestions({
           usersProgrammes: [programme],
           year,
-          oldAnswers,
+          oldAnswers: forProgramme,
           questionsList,
           lang,
         }),
       }
       return data
     })
-    return all
-  }
 
-  const allAnswers = answersForYears()
+    return result
+  }, [forProgramme, pending, user, programmeKey])
+
+  // To be removed
+  if (!isAdmin(user)) return <Redirect to="/" />
+
+  if (!programmeKey || !readAccess) return <Redirect to="/" />
 
   return (
     <>

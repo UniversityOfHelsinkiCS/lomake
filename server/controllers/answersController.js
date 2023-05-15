@@ -222,15 +222,37 @@ const getProgrammeSummaryData = async (req, res) => {
     throw new Error('No programme defined')
   }
   try {
-    const years = [2019, 2020, 2021, 2022, 2023]
+    const years = [2019, 2020, 2021, 2022]
 
-    const answers = await db.tempAnswer.findAll({
+    const yearlyFormOpen = await db.deadline.findOne({ where: { form: 1 } })
+
+    const answers = await db.answer.findAll({
       where: {
         form: 1,
         year: years,
         programme: code,
       },
     })
+
+    if (yearlyFormOpen) {
+      const latestAnswers = await db.tempAnswer.findOne({
+        where: {
+          form: 1,
+          year: 2023,
+          programme: code,
+        },
+      })
+      answers.push(latestAnswers)
+    } else {
+      const latestAnswers = await db.answer.findOne({
+        where: {
+          form: 1,
+          year: 2023,
+          programme: code,
+        },
+      })
+      answers.push(latestAnswers)
+    }
     return res.status(200).json({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
