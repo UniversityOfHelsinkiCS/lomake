@@ -100,12 +100,18 @@ const FacultyFormView = ({ room, formString }) => {
     user,
   ])
 
+  // Tee tempnouto myös jorylomakkeelle
+
   const facultyProgrammeAnswers = useMemo(() => {
     if (!allAnswers.data || allAnswers.data.length === 0 || allAnswers.pending) {
       return {}
     }
     const facultyProgrammes = faculty.ownedProgrammes.map(p => {
       return { key: p.key, level: p.level, name: p.name }
+    })
+
+    facultyProgrammes.sort((a, b) => {
+      return a?.name[lang].localeCompare(b?.name[lang])
     })
 
     const progEvaluationAnswers = allAnswers.data ? allAnswers?.data.filter(a => a.form === 4 && a.year === year) : []
