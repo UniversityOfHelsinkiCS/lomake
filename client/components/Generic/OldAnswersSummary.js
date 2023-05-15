@@ -57,7 +57,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
 
-  if (!relatedYearlyAnswers) {
+  if (Object.entries(relatedYearlyAnswers).length === 0) {
     return null
   }
   const years = [2021, 2022, 2023]

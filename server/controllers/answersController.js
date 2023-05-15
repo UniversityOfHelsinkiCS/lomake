@@ -187,7 +187,7 @@ const bulkCreate = async (req, res) => {
   }
 }
 
-const answersForFacultySummary = async (req, res) => {
+const getFacultySummaryData = async (req, res) => {
   const { code, lang } = req.params
   if (!code) {
     throw new Error('No faculty defined')
@@ -216,6 +216,28 @@ const answersForFacultySummary = async (req, res) => {
   }
 }
 
+const getProgrammeSummaryData = async (req, res) => {
+  const { code } = req.params
+  if (!code) {
+    throw new Error('No programme defined')
+  }
+  try {
+    const years = [2019, 2020, 2021, 2022, 2023]
+
+    const answers = await db.tempAnswer.findAll({
+      where: {
+        form: 1,
+        year: years,
+        programme: code,
+      },
+    })
+    return res.status(200).json({ answers })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   create,
@@ -226,5 +248,6 @@ module.exports = {
   getIndividualFormAnswers,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
-  answersForFacultySummary,
+  getFacultySummaryData,
+  getProgrammeSummaryData,
 }

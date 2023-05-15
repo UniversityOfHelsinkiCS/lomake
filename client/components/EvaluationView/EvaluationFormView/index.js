@@ -9,6 +9,7 @@ import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
@@ -95,10 +96,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
-
-  const programmeYearlyAnswers = useSelector(state =>
-    state.oldAnswers.data.filter(a => a.programme === room && a.form === 1)
-  )
+  const summaries = useSelector(state => state.summaries)
 
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
@@ -117,6 +115,7 @@ const EvaluationFormView = ({ room, formString }) => {
   useEffect(() => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    dispatch(getProgrammeOldAnswersAction(room))
     if (
       formShouldBeViewOnly({
         accessToTempAnswers,
@@ -157,6 +156,9 @@ const EvaluationFormView = ({ room, formString }) => {
 
   // Find programme's yearly assessment data
   const yearlyAnswers = useMemo(() => {
+    if (!summaries.forProgramme || summaries.forProgramme.length === 0 || summaries.pending) {
+      return {}
+    }
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
@@ -165,13 +167,13 @@ const EvaluationFormView = ({ room, formString }) => {
             if (result[part.id] === undefined) {
               result[part.id] = {}
             }
-            result[part.id][relatedQuestion] = findAnswers(programmeYearlyAnswers, relatedQuestion)
+            result[part.id][relatedQuestion] = findAnswers(summaries.forProgramme, relatedQuestion)
           })
         }
       })
     })
     return result
-  }, [room, user])
+  }, [room, user, summaries])
 
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
