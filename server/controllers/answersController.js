@@ -187,6 +187,35 @@ const bulkCreate = async (req, res) => {
   }
 }
 
+const answersForFacultySummary = async (req, res) => {
+  const { code, lang } = req.params
+  if (!code) {
+    throw new Error('No faculty defined')
+  }
+  try {
+    const faculty = await db.faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
+    const programmes = faculty.ownedProgrammes
+    programmes.sort((a, b) => {
+      return a?.name[lang].localeCompare(b?.name[lang])
+    })
+
+    const codes = programmes.map(p => p.key)
+
+    const answers = await db.tempAnswer.findAll({
+      where: {
+        form: 4,
+        year: 2023,
+        programme: codes,
+      },
+    })
+
+    return res.status(200).json({ programmes, answers })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   create,
@@ -197,4 +226,5 @@ module.exports = {
   getIndividualFormAnswers,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
+  answersForFacultySummary,
 }

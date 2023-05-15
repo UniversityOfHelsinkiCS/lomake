@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isAdmin } from '@root/config/common'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getFacultyProgrammeAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -62,7 +62,7 @@ const FacultyFormView = ({ room, formString }) => {
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
-  const allAnswers = useSelector(state => state.tempAnswers)
+  const facultyProgrammeData = useSelector(state => state.summaries)
 
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
 
@@ -73,7 +73,7 @@ const FacultyFormView = ({ room, formString }) => {
   useEffect(() => {
     if (!faculty || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    dispatch(getAllTempAnswersAction())
+    dispatch(getFacultyProgrammeAnswersAction(room, lang))
     if (
       formShouldBeViewOnly({
         draftYear,
@@ -104,28 +104,24 @@ const FacultyFormView = ({ room, formString }) => {
   // Tee tempnouto myös jorylomakkeelle
 
   const facultyProgrammeAnswers = useMemo(() => {
-    if (!allAnswers.data || allAnswers.data.length === 0 || allAnswers.pending) {
+    if (
+      !facultyProgrammeData?.forFaculty ||
+      facultyProgrammeData?.forFaculty?.answers.length === 0 ||
+      facultyProgrammeData.pending
+    ) {
       return {}
     }
-    const facultyProgrammes = faculty.ownedProgrammes.map(p => {
-      return { key: p.key, level: p.level, name: p.name }
-    })
-
-    facultyProgrammes.sort((a, b) => {
-      return a?.name[lang].localeCompare(b?.name[lang])
-    })
-
-    const progEvaluationAnswers = allAnswers.data ? allAnswers?.data.filter(a => a.form === 4 && a.year === year) : []
+    const { programmes, answers } = facultyProgrammeData?.forFaculty
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion) {
-          result[part.id] = findAnswers(facultyProgrammes, progEvaluationAnswers, part.relatedEvaluationQuestion)
+          result[part.id] = findAnswers(programmes, answers, part.relatedEvaluationQuestion)
         }
       })
     })
     return result
-  }, [room, user, allAnswers])
+  }, [room, user, facultyProgrammeData])
 
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
