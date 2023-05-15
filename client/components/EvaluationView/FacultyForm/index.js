@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isAdmin } from '@root/config/common'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -29,14 +30,13 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => 
 
 const findAnswers = (programmes, allAnswers, question) => {
   const result = {
-    bachelor: { programmes: [], green: [], yellow: [], red: [], gray: [] },
-    master: { programmes: [], green: [], yellow: [], red: [], gray: [] },
-    doctoral: { programmes: [], green: [], yellow: [], red: [], gray: [] },
+    bachelor: { green: [], yellow: [], red: [], gray: [] },
+    master: { green: [], yellow: [], red: [], gray: [] },
+    doctoral: { green: [], yellow: [], red: [], gray: [] },
   }
   programmes.forEach(({ key, level, name }) => {
     const { data } = allAnswers.find(a => a.programme === key)
     const light = data[`${question}_light`]
-    result[level].programmes.push({ key, name, light: light || null })
     if (light) {
       result[level][light].push(name)
     } else {
@@ -61,8 +61,8 @@ const FacultyFormView = ({ room, formString }) => {
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
+  const allAnswers = useSelector(state => state.tempAnswers)
 
-  const progEvaluationAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.form === 4 && a.year === year))
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
 
   useEffect(() => {
@@ -72,6 +72,7 @@ const FacultyFormView = ({ room, formString }) => {
   useEffect(() => {
     if (!faculty || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    dispatch(getAllTempAnswersAction())
     if (
       formShouldBeViewOnly({
         draftYear,
@@ -100,12 +101,14 @@ const FacultyFormView = ({ room, formString }) => {
   ])
 
   const facultyProgrammeAnswers = useMemo(() => {
-    if (!progEvaluationAnswers) {
+    if (!allAnswers.data || allAnswers.data.length === 0 || allAnswers.pending) {
       return {}
     }
     const facultyProgrammes = faculty.ownedProgrammes.map(p => {
       return { key: p.key, level: p.level, name: p.name }
     })
+
+    const progEvaluationAnswers = allAnswers.data ? allAnswers?.data.filter(a => a.form === 4 && a.year === year) : []
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
@@ -115,16 +118,14 @@ const FacultyFormView = ({ room, formString }) => {
       })
     })
     return result
-  }, [room, user, progEvaluationAnswers])
+  }, [room, user, allAnswers])
 
   // To fix texts -prog -> faculty
 
-  // TO FIX To be removed and porer rights to be set
+  // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room || !form) return <Redirect to="/" />
-
-  //   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
   return (
     <>
