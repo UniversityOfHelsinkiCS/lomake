@@ -144,7 +144,7 @@ export default {
     expandText: 'Visa fjolårets svar',
     compareLevel: 'Jämför enligt utbildningsnivå',
     levelFilter: 'Filtrera enligt utbildningsnivå',
-    measureLabel: 'Lägg till 1-5 åtgärder',
+    measureLabel: 'Lägg till 1-5 åtgärder.',
     noPermissions: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
     nowShowing: 'PROGRAM MED I SVAREN',
     chooseMore: 'VÄLJ MER PROGRAM:',

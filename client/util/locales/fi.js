@@ -154,7 +154,7 @@ export default {
     expandText: 'Näytä viime vuoden vastaukset',
     compareLevel: 'Vertaile koulutusasteittain',
     levelFilter: 'Vastaukset koulutusasteittain',
-    measureLabel: 'Lisätkää 1-5 toimenpidettä',
+    measureLabel: 'Lisätkää 1-5 toimenpidettä.',
     noPermissions:
       'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
     nowShowing: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',

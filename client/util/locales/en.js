@@ -158,7 +158,7 @@ export default {
     expandText: 'Show answers from last year',
     compareLevel: 'Compare by programme level',
     levelFilter: 'Filter by programme level',
-    measureLabel: 'Add 1-5 measures',
+    measureLabel: 'Add 1-5 measures.',
     noPermissions:
       "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     nowShowing: 'NOW SHOWING THE ANSWERS OF',
