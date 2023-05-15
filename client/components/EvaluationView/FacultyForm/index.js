@@ -14,6 +14,7 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
+import './EvaluationForm.scss'
 import { colors } from 'Utilities/common'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
@@ -156,15 +157,7 @@ const FacultyFormView = ({ room, formString }) => {
 
               <div className="hide-in-print-mode">
                 <StatusMessage programme={room} form={form} />
-                <div
-                  style={{
-                    lineHeight: 2,
-                    backgroundColor: colors.background_blue,
-                    padding: '1.5em 0.5em',
-                    borderRadius: '5px',
-                    margin: '2em 0em 1em 0em',
-                  }}
-                >
+                <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:evaluationInfo1" />
                   </p>
@@ -200,16 +193,7 @@ const FacultyFormView = ({ room, formString }) => {
                 </p>
               </div>
 
-              <div
-                className="past-answers-link"
-                style={{
-                  lineHeight: 2,
-                  backgroundColor: colors.background_blue,
-                  padding: '1.5em 0.5em',
-                  borderRadius: '5px',
-                  margin: '2em 0em 1em 0em',
-                }}
-              >
+              <div className="info-container">
                 {/* <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
                   <h4 style={{ marginBottom: '0.5em' }}>
                     Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
