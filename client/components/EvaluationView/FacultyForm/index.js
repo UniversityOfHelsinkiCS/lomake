@@ -127,8 +127,6 @@ const FacultyFormView = ({ room, formString }) => {
     return result
   }, [room, user, allAnswers])
 
-  // To fix texts -prog -> faculty
-
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
 
@@ -159,7 +157,7 @@ const FacultyFormView = ({ room, formString }) => {
                 <StatusMessage programme={room} form={form} />
                 <div className="info-container">
                   <p>
-                    <Trans i18nKey="formView:evaluationInfo1" />
+                    <Trans i18nKey="formView:facultyInfo" />
                   </p>
                 </div>
                 <p>{t('formView:info2')}</p>
@@ -178,18 +176,9 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
 
               <div style={{ marginTop: '2em' }}>
-                <h4 data-cy="formview-links">Taustamateriaali</h4>
+                <h4 data-cy="formview-links">{t('formView:materials')}</h4>
                 <p>
-                  Alla olevasta linkistä voitte tarkastella kootusti kaikkia tiedekunnan katselmointikierroksella
-                  kirjattuja vastauksia.
-                </p>
-                <p>
-                  Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä tiedekunnan
-                  katselmointikysymysten vastauksista.
-                </p>
-                <p>
-                  Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja
-                  tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.
+                  <Trans i18nKey="formView:materialsFaculty" />
                 </p>
               </div>
 
@@ -201,7 +190,7 @@ const FacultyFormView = ({ room, formString }) => {
                 </Link> */}
                 <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
                   <h4>
-                    Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
+                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
                 </a>
               </div>

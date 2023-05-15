@@ -65,7 +65,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
 
   return (
     <div className="summary-container">
-      <h4>Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta</h4>
+      <h4>{t('formView:progSummaryTitle')}</h4>
       <div className="summary-grid" data-cy={`${partId}-summary`}>
         <Grid columns={5}>
           <Grid.Row className="row">

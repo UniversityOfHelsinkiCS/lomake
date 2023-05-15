@@ -127,6 +127,16 @@ export default {
     // evaluationInfo2: '',
     // selectApplicable: '',
     // addMissing: '',
+    // progSummaryTitle: '',
+    // facultySummaryTitle: '',
+    // materials: '',
+    // materialsProg: '',
+    // summaryLinkProg: '',
+    // oodikoneProg: '',
+    // oodikoneFaculty: '',
+    // facultyInfo: '',
+    // materialsFaculty: '',
+    // yearlyAnswers: '',
   },
 
   generic: {

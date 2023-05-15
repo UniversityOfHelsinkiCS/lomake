@@ -235,16 +235,9 @@ const EvaluationFormView = ({ room, formString }) => {
           </div>
 
           <div style={{ marginTop: '2em' }}>
-            <h4 data-cy="formview-links">Taustamateriaali</h4>
-            <p>Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.</p>
+            <h4 data-cy="formview-links">{t('formView:materials')}</h4>
             <p>
-              Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä
-              vuodelta kyseiseen teemaan liityevien vuosiseurantakysymysten vastauksista.
-            </p>
-            <p>
-              Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja
-              koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä
-              koulutusohjelma- että tiedekuntatason näkymään.
+              <Trans i18nKey="formView:materialsProg" />
             </p>
           </div>
 
@@ -260,17 +253,17 @@ const EvaluationFormView = ({ room, formString }) => {
           >
             <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
               <h4 style={{ marginBottom: '0.5em' }}>
-                Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
+                {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
               </h4>
             </Link>
             <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
               <h4 style={{ marginBottom: '0.5em' }}>
-                Tarkastele koulutusohjelman tietoja Oodikonessa <Icon name="external" />{' '}
+                {t('formView:oodikoneProg')} <Icon name="external" />{' '}
               </h4>
             </a>
             <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
               <h4>
-                Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
+                {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
               </h4>
             </a>
           </div>

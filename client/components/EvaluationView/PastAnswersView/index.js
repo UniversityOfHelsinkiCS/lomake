@@ -111,7 +111,7 @@ const PastAnswersView = ({ programmeKey }) => {
   return (
     <>
       <h2>{programme.name[lang]}</h2>
-      <h3> Vuosiseurantojen vastaukset</h3>
+      <h3>{t('formView:yearlyAnswers')}</h3>
       <Accordion fluid className="comparison-container">
         {questionsList.map(question => (
           <Question

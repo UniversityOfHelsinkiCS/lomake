@@ -99,7 +99,7 @@ const EntityLevels = ({
         })}
       </div>
       <div className="summary-container">
-        <h4>Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:</h4>
+        <h4>{t('formView:facultySummaryTitle')}</h4>
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">
