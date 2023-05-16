@@ -8,7 +8,7 @@
     "id": 0,
     "parts": [
       {
-        "id": "background-unit",
+        "id": "background_unit",
         "index": 0,
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
@@ -67,7 +67,7 @@
       },
 
       {
-        "id": "primary-role",
+        "id": "primary_role",
         "index": 1,
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
@@ -121,13 +121,23 @@
               { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
               { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
               { "label": "Muu", "id": "other" }
+            ],
+            "en": [
+              { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
+              { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
+              { "label": "Muu", "id": "other" }
+            ],
+            "se": [
+              { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
+              { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
+              { "label": "Muu", "id": "other" }
             ]
           }
         }
       },
       {
-        "id": "how-many-years-at-uni",
-        "index": 0,
+        "id": "how_many_years_at_uni",
+        "index": 2,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "Vuosia yliopistossa",
@@ -176,8 +186,8 @@
         }
       },
       {
-        "id": "view-is-based-on",
-        "index": 2,
+        "id": "view_is_based_on",
+        "index": 3,
         "type": "CHECKBOX",
         "shortLabel": {
           "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
@@ -221,7 +231,7 @@
       },
       {
         "id": "outlining-questions",
-        "index": 5,
+        "index": 4,
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuena",
@@ -528,7 +538,7 @@
         "index": 19,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -690,7 +700,7 @@
         "index": 43,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -891,7 +901,7 @@
         "index": 52,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1054,7 +1064,7 @@
         "index": 52,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1217,7 +1227,7 @@
         "index": 70,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1569,7 +1579,7 @@
         "index": 94,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1756,7 +1766,7 @@
         "index": 107,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1919,7 +1929,7 @@
         "index": 104,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1955,7 +1965,7 @@
           "se": "",
           "en": ""
         },
-        "maxLength": 5100,
+        "maxLength": 3100,
         "required": false,
         "relatedYearlyQuestions": []
       }

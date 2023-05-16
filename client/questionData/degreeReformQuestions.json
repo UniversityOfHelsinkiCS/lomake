@@ -284,7 +284,7 @@
         "index": 19,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -446,7 +446,7 @@
         "index": 43,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -647,7 +647,7 @@
         "index": 52,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -810,7 +810,7 @@
         "index": 52,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -973,7 +973,7 @@
         "index": 70,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1325,7 +1325,7 @@
         "index": 94,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1512,7 +1512,7 @@
         "index": 107,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1675,7 +1675,7 @@
         "index": 104,
         "type": "TEXTAREA",
         "label": {
-          "fi": "Kommentoi tätä teemaa halutessasi",
+          "fi": "Kommentoi halutessasi",
           "se": "",
           "en": ""
         },
@@ -1711,7 +1711,7 @@
           "se": "",
           "en": ""
         },
-        "maxLength": 5100,
+        "maxLength": 3100,
         "required": false,
         "relatedYearlyQuestions": []
       }
