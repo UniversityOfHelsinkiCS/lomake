@@ -22,7 +22,11 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
             return (
               <Form.Field
                 key={`basic-radio-${id}-${o.id}`}
-                style={direction !== 'horizontal' ? { display: 'flex' } : { marginLeft: '2em', textAlign: 'center' }}
+                style={
+                  direction !== 'horizontal'
+                    ? { display: 'flex', marginBottom: '0.2em' }
+                    : { marginLeft: '2em', textAlign: 'center' }
+                }
               >
                 <Radio
                   name="basic-radio"
@@ -30,7 +34,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                   label={
                     <label
                       data-cy={`choose-radio-${o.id}`}
-                      style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '0.5em' } : null}
+                      style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '1.5em' } : null}
                     >
                       {o.label}
                     </label>
