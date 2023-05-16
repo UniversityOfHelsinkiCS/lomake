@@ -5,10 +5,12 @@ import _ from 'lodash'
 
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
+import hy from 'Assets/hy_logo.svg'
 
 export const images = {
   toska_color: toscalogoColor,
   toska_grayscale: toscalogoGrayscale,
+  hy,
 }
 
 export const colors = {
