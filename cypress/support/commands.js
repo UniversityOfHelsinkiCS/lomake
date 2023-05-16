@@ -95,7 +95,9 @@ Cypress.Commands.add('typeInEditor', (editorTag, textToBeTyped) => {
     .wait(500 * attempt)
     .find('[contenteditable]')
     .wait(500 * attempt)
-    .type(textToBeTyped, { delay: 0 })
+    // TRUST ME THIS IS NEEDED
+    .type(`${textToBeTyped}                        `, { delay: 0 })
+    .wait(100 * attempt)
 })
 
 Cypress.Commands.add('createDeadline', (draftYear, formName) => {
