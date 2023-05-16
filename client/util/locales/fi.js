@@ -16,6 +16,9 @@ export default {
     empty: 'Ei vastausta',
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
+    lastSent: 'Viimeksi lähetetty',
+    lastSentInThisRole: 'Ensisijainen rooli viimeksi lähetetyssä lomakkeessa',
+    close: 'Sulje',
 
     faculty: 'Tiedekunta',
     programmeHeader: 'Koulutusohjelma',

@@ -20,6 +20,9 @@ export default {
     empty: 'No answer provided',
     OK: 'Answer given',
     lastSaved: 'Last saved',
+    lastSent: 'Last sent',
+    lastSentInThisRole: 'Ensisijainen rooli viimeksi lähetetyssä lomakkeessa',
+    close: 'Close',
 
     faculty: 'Faculty',
     programmeHeader: 'Programme',
