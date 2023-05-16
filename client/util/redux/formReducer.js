@@ -37,9 +37,25 @@ export const getSingleUsersAnswers = () => {
   return callBuilder(route, prefix)
 }
 
+export const postIndividualFormAnswer = (data, formNumber) => {
+  const route = '/answers/degreeReform/individualUser'
+  const prefix = 'POST_USER_ANSWER'
+  return callBuilder(route, prefix, 'POST', { data, formNumber })
+}
+
+export const getAllAnswersForUser = () => {
+  const route = '/answers/degreeReform/getAllAnswersForUser'
+  const prefix = 'GET_ALL_ANSWERS_FOR_USER'
+  return callBuilder(route, prefix, 'GET')
+}
+
 export const setAnswerLevels = answerLevels => ({
   type: 'SET_ANSWER_LEVELS',
   answerLevels,
+})
+
+export const clearFormState = () => ({
+  type: 'CLEAR_FORM_STATE',
 })
 
 const initialState = {
@@ -49,6 +65,7 @@ const initialState = {
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
   answerLevels: [],
+  oldIndividualAnswers: [],
 }
 
 // Reducer
@@ -113,6 +130,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         answerLevels: action.answerLevels,
+      }
+    }
+    case 'GET_ALL_ANSWERS_FOR_USER_SUCCESS': {
+      return {
+        ...state,
+        oldIndividualAnswers: action.response,
+      }
+    }
+    case 'CLEAR_FORM_STATE': {
+      return {
+        initialState,
       }
     }
 

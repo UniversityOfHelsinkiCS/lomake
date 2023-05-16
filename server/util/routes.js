@@ -19,6 +19,8 @@ router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/degreeReform/individualUsers', answers.getIndividualFormAnswers)
+router.post('/answers/degreeReform/individualUser', answers.postIndividualFormAnswer)
+router.get('/answers/degreeReform/getAllAnswersForUser', answers.getAllAnswersForUser)
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
 router.get('/answers/:programme', requireProgrammeRead, answers.getOne) // TO FIX route + function not in use?
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)

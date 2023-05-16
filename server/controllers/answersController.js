@@ -98,6 +98,48 @@ const getIndividualFormAnswers = async (req, res) => {
   }
 }
 
+const postIndividualFormAnswer = async (req, res) => {
+  try {
+    const { uid } = req.user
+    const { data, formNumber } = req.body
+    const result = await db.answer.create({
+      programme: uid,
+      data,
+      form: formNumber,
+      year: new Date().getFullYear(),
+      submittedBy: uid,
+    })
+
+    return res.status(200).json(result)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const getAllAnswersForUser = async (req, res) => {
+  try {
+    const { uid } = req.user
+
+    const data = await db.answer.findAll({
+      where: {
+        programme: uid,
+        form: 3,
+      },
+    })
+
+    let result = {}
+    if (data?.length > 1) {
+      result = data[data.length - 1]
+    }
+
+    return res.status(200).json(result)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getAllUserHasAccessTo = async (req, res) => {
   try {
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
@@ -197,4 +239,6 @@ module.exports = {
   getIndividualFormAnswers,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
+  postIndividualFormAnswer,
+  getAllAnswersForUser,
 }
