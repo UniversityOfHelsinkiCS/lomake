@@ -28,14 +28,14 @@ describe('Sidebar tests', () => {
   it('Answer length 1000 of is OK', () => {
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
 
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'A'.repeat(1000))
+    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'A'.repeat(1000), 0)
 
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
 
     cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then(res =>
-      expect(res).to.be.eq(1000)
+      expect(res).to.be.eq(1024)
     )
   })
 })
