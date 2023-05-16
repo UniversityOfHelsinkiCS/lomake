@@ -35,7 +35,7 @@ describe('Sidebar tests', () => {
     cy.get('[data-cy=review_of_last_years_situation_report-OK]')
 
     cy.getEditorInputLength('[data-cy=textarea-review_of_last_years_situation_report]').then(res =>
-      expect(res).to.be.eq(1024)
+      expect(res).to.be.eq(1000)
     )
   })
 })
