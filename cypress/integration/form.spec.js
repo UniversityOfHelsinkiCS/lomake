@@ -18,7 +18,7 @@ describe('Yearly assessment form tests', () => {
     cy.typeInEditor('[data-cy=textarea-community_wellbeing]', 'other words')
     cy.reload()
 
-    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', /other/)
+    cy.get('[data-cy=textarea-community_wellbeing]').find('.editor-class').should('contain.text', 'other')
   })
 
   it('Can open a question, click on a traffic light, and the result it saved.', () => {
