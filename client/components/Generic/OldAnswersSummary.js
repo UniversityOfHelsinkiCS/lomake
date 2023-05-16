@@ -57,7 +57,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
 
-  if (!relatedYearlyAnswers) {
+  if (Object.entries(relatedYearlyAnswers).length === 0) {
     return null
   }
   const years = [2021, 2022, 2023]
@@ -65,7 +65,7 @@ const OldAnswersSummary = ({ partId, relatedYearlyAnswers }) => {
 
   return (
     <div className="summary-container">
-      <h4>Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta</h4>
+      <h4>{t('formView:progSummaryTitle')}</h4>
       <div className="summary-grid" data-cy={`${partId}-summary`}>
         <Grid columns={5}>
           <Grid.Row className="row">

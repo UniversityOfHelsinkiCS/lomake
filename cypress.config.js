@@ -11,6 +11,7 @@ module.exports = defineConfig({
     specPattern: 'cypress/integration/*.spec.js',
     experimentalRunAllSpecs: true,
   },
+  video: false,
   retries: {
     // Configure retry attempts for `cypress run`
     // Default is 0

@@ -13,7 +13,6 @@ import './EvaluationForm.scss'
 
 const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
-  const formType = 'evaluation'
 
   const partComponentMap = {
     TEXTAREA: Textarea,
@@ -86,7 +85,6 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
             number={number}
             extrainfo={extrainfo}
             previousYearsAnswers={null}
-            formType={formType}
             programme={programmeKey}
             summaryData={summaryData[part.id] || {}}
             form={form}

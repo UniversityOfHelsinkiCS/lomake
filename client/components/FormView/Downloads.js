@@ -2,7 +2,7 @@ import CsvDownload from 'Components/Generic/CsvDownload'
 import React from 'react'
 import PDFDownload from './PDFDownload'
 
-const Downloads = ({ programme }) => {
+const Downloads = ({ programme, componentRef }) => {
   return (
     <div className="hide-in-print-mode" style={{ marginTop: '2em', display: 'flex' }}>
       <div
@@ -20,7 +20,7 @@ const Downloads = ({ programme }) => {
         <CsvDownload programme={programme} view="form" wantedData="colors" />
       </div>
       <div style={{ padding: '0.3em 0' }}>
-        <PDFDownload />
+        <PDFDownload componentRef={componentRef} />
       </div>
     </div>
   )

@@ -48,8 +48,8 @@ const ProgrammeList = ({ data, lang }) => {
       {colorsList.map(color => {
         return data[color].map(p => {
           return (
-            <p>
-              <span className={`answer-circle-${color}`} /> {p[lang]}
+            <p key={`${p[lang]}`}>
+              <span className={`answer-circle-${color}`} /> <span style={{ marginLeft: '0.5em' }}>{p[lang]}</span>
             </p>
           )
         })
@@ -84,16 +84,7 @@ const EntityLevels = ({
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
+      <div className="entity-description">
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
@@ -108,7 +99,7 @@ const EntityLevels = ({
         })}
       </div>
       <div className="summary-container">
-        <h4>Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:</h4>
+        <h4>{t('formView:facultySummaryTitle')}</h4>
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">
