@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Message } from 'semantic-ui-react'
+import { Message, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
+import { translateDegreeReformBackground } from 'Utilities/common'
 
 const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   if (draftYear && writeAccess) {
@@ -13,6 +14,8 @@ const showMessageForOpenYear = (draftYear, writeAccess, t) => {
 
 const StatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
+  const formData = useSelector(state => state.form.oldIndividualAnswers)
+
   const lang = useSelector(state => state.language)
   const deadlines = useSelector(state => state.deadlines.nextDeadline)
   const formDeadline = deadlines ? deadlines.find(d => d.form === form) : null
@@ -24,6 +27,13 @@ const StatusMessage = ({ programme, form }) => {
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = lang !== 'se' ? lang : 'sv'
+  let checking = ''
+  let lastSentInfo = []
+  if (form === 3 && formData && formData.updatedAt) {
+    const utcTime = new Date(formData.updatedAt)
+    checking = utcTime.toLocaleString(locale)
+    lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
+  }
 
   if (!deadlineObj)
     return (
@@ -47,13 +57,37 @@ const StatusMessage = ({ programme, form }) => {
       />
     )
 
+  const LastFormSentMessage = () => {
+    return (
+      <Message icon>
+        <Icon name="envelope open" color="green" />
+        <Message.Content>
+          <Message.Header>
+            {' '}
+            {t('lastSent')} {checking}
+          </Message.Header>
+          <p>{t('lastSentInThisRole')}</p>
+          <ul>
+            {lastSentInfo.map(info => {
+              if (info) return <li key={info}>{info}</li>
+              return null
+            })}
+          </ul>
+        </Message.Content>
+      </Message>
+    )
+  }
+
   return (
-    <Message
-      data-cy="saving-answers-notice"
-      icon="info"
-      header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
-      content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}.`}
-    />
+    <>
+      <Message
+        data-cy="saving-answers-notice"
+        icon="info"
+        header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
+        content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}.`}
+      />
+      {form === 3 && formData.data && <LastFormSentMessage />}
+    </>
   )
 }
 
