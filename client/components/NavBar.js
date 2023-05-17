@@ -98,7 +98,7 @@ export default () => {
   }
 
   const MenuNavigation = ({ pathname }) => {
-    if (pathname === '/degree-reform-individual/form') {
+    if (pathname.startsWith('/degree-reform-individual/')) {
       return (
         <>
           <Menu.Item>
