@@ -153,7 +153,7 @@ describe('Degree reform form tests', () => {
 
     // Start filling in the form
 
-    cy.get('[data-cy=choose-checkbox-view-is-based-on]')
+    cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .as('checkbox')
       .check('bachelor', { force: true })
@@ -162,19 +162,19 @@ describe('Degree reform form tests', () => {
     cy.get('@checkbox').should('be.checked')
 
     cy.get('[data-cy=reform-individual-form-container')
-    cy.get('[data-cy=advanced-radio-primary-role]')
+    cy.get('[data-cy=advanced-radio-primary_role]')
       .contains('Student')
-      .as('primary-role-radio')
+      .as('primary_role-radio')
       .click({ force: true })
       .wait(2000)
 
-    cy.get('[data-cy=advanced-radio-primary-role]').find('input[value=Student]').should('be.checked')
+    cy.get('[data-cy=advanced-radio-primary_role]').find('input[value=Student]').should('be.checked')
 
     cy.reload()
 
     cy.wait(2000)
 
-    cy.get('[data-cy=advanced-radio-primary-role]').find('input[value=Student]').should('be.checked')
+    cy.get('[data-cy=advanced-radio-primary_role]').find('input[value=Student]').should('be.checked')
 
     // test you can click some buttons
   })
