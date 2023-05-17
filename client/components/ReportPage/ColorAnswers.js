@@ -62,15 +62,17 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
             allAnswers.get(question.id) &&
             !question.no_color &&
             questions.selected.includes(getLabel(question)) && (
-              <PieChart
-                key={question.id}
-                question={question}
-                answers={allAnswers.get(question.id)}
-                showEmpty={showEmpty}
-                chosenProgrammes={chosenProgrammes}
-                setActiveTab={setActiveTab}
-                setShowing={setShowing}
-              />
+              <div style={{ margin: '1em' }}>
+                <PieChart
+                  key={question.id}
+                  question={question}
+                  answers={allAnswers.get(question.id)}
+                  showEmpty={showEmpty}
+                  chosenProgrammes={chosenProgrammes}
+                  setActiveTab={setActiveTab}
+                  setShowing={setShowing}
+                />
+              </div>
             )
         )}
       </div>
