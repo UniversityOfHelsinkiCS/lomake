@@ -83,7 +83,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
           direction={direction}
           handleClick={handleClick}
           checked={state.value}
-          disabled={viewOnly}
+          viewOnly={viewOnly}
           radioButtonLabels={radioButtonLabels}
           type="basic"
         />
