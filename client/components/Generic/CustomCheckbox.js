@@ -21,7 +21,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
   useEffect(() => {
     if (dataFromRedux.length > 0) {
       setValue(dataFromRedux)
-      if (id === 'view-is-based-on') {
+      if (id === 'view_is_based_on') {
         const filters = getFilters(dataFromRedux)
         dispatch(setAnswerLevels(filters))
       }
@@ -41,7 +41,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
 
     setValue(newValues)
     choose(id, newValues)
-    if (id === 'view-is-based-on') {
+    if (id === 'view_is_based_on') {
       const filters = getFilters(newValues)
       dispatch(setAnswerLevels(filters))
     }
