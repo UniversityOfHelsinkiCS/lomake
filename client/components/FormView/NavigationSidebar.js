@@ -95,7 +95,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
             const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
-              return <div key={`${section.title}-${section.id}`} />
+              return <div key={`${section.title[lang]}-${section.id}`} />
             }
             const link =
               formType === 'degree-reform-individual'
