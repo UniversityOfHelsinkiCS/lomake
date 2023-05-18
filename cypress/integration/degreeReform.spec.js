@@ -179,6 +179,36 @@ describe('Degree reform form tests', () => {
     // test you can click some buttons
   })
 
+  it('If individual degree reform is closed, answering is disabled', () => {
+    cy.reload()
+
+    cy.visit('/degree-reform-individual/form').wait(3000)
+
+    // Start filling in the form
+
+    cy.get('[data-cy=advanced-radio-background_unit]').find('input[type="radio"]').should('be.disabled')
+
+    cy.get('[data-cy=advanced-radio-primary_role]').find('input[type="radio"]').should('be.disabled')
+
+    cy.get('[data-cy=choose-radio-how_many_years]').find('input[type="radio"]').should('be.disabled')
+
+    cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[type="checkbox"]').should('be.disabled')
+
+    cy.get('[data-cy=choose-radio-degree_abilities_in_changing_conditions]')
+      .find('input[type="radio"]')
+      .should('be.disabled')
+
+    cy.get('[data-cy=choose-radio-studytrack_was_clear]').find('input[type="radio"]').should('be.disabled')
+
+    cy.get('[data-cy=editing-area-degree_reform_free_answer]').should('not.exist')
+
+    cy.reload()
+
+    cy.wait(2000)
+
+    // test you can click some buttons
+  })
+
   // individual: check that correct data shown
   //    login as someone else and make sure that they don't get admin's answers
 })
