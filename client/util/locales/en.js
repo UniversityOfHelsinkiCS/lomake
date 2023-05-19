@@ -58,7 +58,7 @@ export default {
     'degree-reform-individual': 'Degree reform - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
-    otherTextBox: 'Other, what?',
+    otherTextBox: 'Other, please specify',
     send: 'Send',
   },
 
