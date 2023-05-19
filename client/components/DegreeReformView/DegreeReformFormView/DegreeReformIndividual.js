@@ -9,7 +9,7 @@ import bigWheel from 'Assets/big_wheel.jpg'
 
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleUsersAnswers /* postIndividualFormAnswer */ } from 'Utilities/redux/formReducer'
-import { degreeReformIndividualQuestions as questions } from '../../../questionData'
+import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './DegreeReformForm'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => {
@@ -66,8 +66,8 @@ const DegreeReformIndividual = () => {
 
   const formType = 'degree-reform-individual'
   return (
-    <div className="form-container" data-cy="reform-individual-form-container">
-      <NavigationSidebar formType={formType} />
+    <div className="form-container" data-cy="reform-individual-form-container" lang={lang}>
+      <NavigationSidebar formType={formType} questionData={questionData} />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -77,7 +77,7 @@ const DegreeReformIndividual = () => {
             {t('degree-reform-individual')} 2015-2017
           </h3>
         </div>
-        <DegreeReformForm questionData={questions} formType={formType} />
+        <DegreeReformForm questionData={questionData} formType={formType} />
         <Button
           style={{ maxWidth: '10em', marginTop: '1.5em' }}
           labelPosition="left"

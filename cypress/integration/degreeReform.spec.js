@@ -201,7 +201,7 @@ describe('Degree reform form tests', () => {
     cy.wait(2000)
   })
 
-  it('Check "view-is-based-on"-checkbox works correctly', () => {
+  it('"view-is-based-on"-checkbox works correctly', () => {
     cy.reload()
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -209,8 +209,6 @@ describe('Degree reform form tests', () => {
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.visit('/degree-reform-individual/form').wait(3000)
-
-    // Start filling in the form
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
 
@@ -235,7 +233,11 @@ describe('Degree reform form tests', () => {
       .check('masters', { force: true })
       .wait(1000)
 
+    cy.get('[data-cy=choose-radio-container-master_programs_are_sufficiently_sized]').should('exist')
+
     cy.get(`[data-cy=navigation-sidebar-section-5]`).should('contain', 'Master programmes structure and functionality')
+
+    cy.get('[data-cy=choose-radio-container-study_program_has_both_finnish_and_foreign]').should('exist')
 
     cy.get(`[data-cy=navigation-sidebar-section-6]`).should('contain', 'International master programmes criteria')
 
