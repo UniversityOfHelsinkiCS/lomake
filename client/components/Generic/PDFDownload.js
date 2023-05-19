@@ -1,53 +1,66 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import ReactToPrint from 'react-to-print'
 
 import { colors } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const PDFDownload = () => {
+const PDFDownload = ({ componentRef }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const [isPrinting, setIsPrinting] = useState(false)
+  const [title, setTitle] = useState(t('generic:pdfExportText'))
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-  const [takingPDF, setTakingPDF] = useState(false)
   const { questions, level, faculty, year } = useSelector(state => state.filters)
 
-  const getExportText = () => {
+  const setExportTitle = () => {
     const formText = t('generic:pdfExportText')
     const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
     const levelText = t(level)
-    return `${formText}_${year}_${facultyText}_${levelText}`
+    setTitle(`${formText}_${year}_${facultyText}_${levelText}`)
   }
 
-  const openQuestionsAndPrintPdf = () => {
-    dispatch(setQuestions({ selected: questions.selected, open: questions.selected }))
-    setTakingPDF(true)
-    document.title = getExportText()
-  }
+  // Store the resolve Promise being used in `onBeforeGetContent` here
+  const promiseResolveRef = useRef(null)
 
+  // watch for the state to change here, and for the Promise resolve to be available
   useEffect(() => {
-    if (takingPDF) {
-      try {
-        const isSuccessful = document.execCommand('print', false, null)
-        if (isSuccessful === false) {
-          window.print()
-        }
-      } catch (e) {
-        window.print()
-      }
-
-      setTakingPDF(false)
-      dispatch(setQuestions({ selected: questions.selected, open: [] }))
-      document.title = `${t('generic:reportPage')}`
+    if (isPrinting && promiseResolveRef.current) {
+      // Resolves the Promise, letting `react-to-print` know that the DOM updates are completed
+      promiseResolveRef.current()
     }
-  }, [takingPDF])
+  }, [isPrinting])
+
+  const handleReady = () => {
+    promiseResolveRef.current = null
+    setIsPrinting(false)
+    dispatch(setQuestions({ selected: questions.selected, open: [] }))
+  }
+
+  const handlePrepare = () => {
+    dispatch(setQuestions({ selected: questions.selected, open: questions.selected }))
+  }
 
   return (
-    <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }} onClick={openQuestionsAndPrintPdf}>
-      {t('generic:downloadPDF')}
-    </span>
+    <ReactToPrint
+      content={() => componentRef.current}
+      documentTitle={title}
+      trigger={() => (
+        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>{t('generic:downloadPDF')}</span>
+      )}
+      onBeforeGetContent={() =>
+        new Promise(resolve => {
+          promiseResolveRef.current = resolve
+          handlePrepare()
+          setExportTitle()
+          setIsPrinting(true)
+        })
+      }
+      onAfterPrint={handleReady}
+    />
   )
 }
 

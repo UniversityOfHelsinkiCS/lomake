@@ -98,11 +98,11 @@ export default () => {
   }
 
   const MenuNavigation = ({ pathname }) => {
-    if (pathname === '/degree-reform-individual/form') {
+    if (pathname.startsWith('/degree-reform-individual/')) {
       return (
         <>
           <Menu.Item>
-            <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+            <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="tosca" />
           </Menu.Item>
           {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
         </>
@@ -111,7 +111,7 @@ export default () => {
     return (
       <>
         <Menu.Item as={Link} to="/">
-          <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="tosca" />
+          <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="tosca" />
         </Menu.Item>
         <GoToYearlyAssessmentButton />
         {user.admin ? <GoToEvaluationButton /> : null}

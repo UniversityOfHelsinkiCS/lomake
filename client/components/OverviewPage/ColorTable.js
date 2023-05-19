@@ -11,7 +11,7 @@ import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
-import { yearlyQuestions as questions, evaluationQuestions, degreeReformQuestions } from '../../questionData'
+import { yearlyQuestions as questions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const ColorTable = React.memo(
   ({
@@ -90,6 +90,8 @@ const ColorTable = React.memo(
     if (formType === 'evaluation') {
       questionsToShow = evaluationQuestions
     } else if (formType === 'degree-reform') {
+      const degreeReformQuestions = degreeReformIndividualQuestions.filter(q => q.id !== 0)
+
       questionsToShow = degreeReformQuestions
     }
     let tableIds = null

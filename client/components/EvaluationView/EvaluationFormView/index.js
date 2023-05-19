@@ -9,6 +9,7 @@ import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
@@ -95,10 +96,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
-
-  const programmeYearlyAnswers = useSelector(state =>
-    state.oldAnswers.data.filter(a => a.programme === room && a.form === 1)
-  )
+  const summaries = useSelector(state => state.summaries)
 
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
@@ -117,6 +115,7 @@ const EvaluationFormView = ({ room, formString }) => {
   useEffect(() => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    dispatch(getProgrammeOldAnswersAction(room))
     if (
       formShouldBeViewOnly({
         accessToTempAnswers,
@@ -157,6 +156,9 @@ const EvaluationFormView = ({ room, formString }) => {
 
   // Find programme's yearly assessment data
   const yearlyAnswers = useMemo(() => {
+    if (!summaries.forProgramme || summaries.forProgramme.length === 0 || summaries.pending) {
+      return {}
+    }
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
@@ -165,13 +167,13 @@ const EvaluationFormView = ({ room, formString }) => {
             if (result[part.id] === undefined) {
               result[part.id] = {}
             }
-            result[part.id][relatedQuestion] = findAnswers(programmeYearlyAnswers, relatedQuestion)
+            result[part.id][relatedQuestion] = findAnswers(summaries.forProgramme, relatedQuestion)
           })
         }
       })
     })
     return result
-  }, [room, user])
+  }, [room, user, summaries])
 
   // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
@@ -235,16 +237,9 @@ const EvaluationFormView = ({ room, formString }) => {
           </div>
 
           <div style={{ marginTop: '2em' }}>
-            <h4 data-cy="formview-links">Taustamateriaali</h4>
-            <p>Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.</p>
+            <h4 data-cy="formview-links">{t('formView:materials')}</h4>
             <p>
-              Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä
-              vuodelta kyseiseen teemaan liityevien vuosiseurantakysymysten vastauksista.
-            </p>
-            <p>
-              Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja
-              koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä
-              koulutusohjelma- että tiedekuntatason näkymään.
+              <Trans i18nKey="formView:materialsProg" />
             </p>
           </div>
 
@@ -260,17 +255,17 @@ const EvaluationFormView = ({ room, formString }) => {
           >
             <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
               <h4 style={{ marginBottom: '0.5em' }}>
-                Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
+                {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
               </h4>
             </Link>
             <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
               <h4 style={{ marginBottom: '0.5em' }}>
-                Tarkastele koulutusohjelman tietoja Oodikonessa <Icon name="external" />{' '}
+                {t('formView:oodikoneProg')} <Icon name="external" />{' '}
               </h4>
             </a>
             <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
               <h4>
-                Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
+                {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
               </h4>
             </a>
           </div>

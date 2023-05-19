@@ -12,7 +12,11 @@ import './Generic.scss'
 const levels = ['bachelor', 'master', 'doctoral']
 const colorsList = ['green', 'yellow', 'red', 'gray']
 
-const Pie = ({ level, data }) => {
+const Pie = ({ level, data, onlyBc }) => {
+  if (level !== 'bachelor' && onlyBc) {
+    return <div />
+  }
+
   return (
     <div className="pie-box">
       <PieChart
@@ -42,14 +46,18 @@ const Pie = ({ level, data }) => {
   )
 }
 
-const ProgrammeList = ({ data, lang }) => {
+const ProgrammeList = ({ data, lang, onlyBc }) => {
+  if (onlyBc) {
+    return <></>
+  }
+
   return (
     <>
       {colorsList.map(color => {
         return data[color].map(p => {
           return (
-            <p>
-              <span className={`answer-circle-${color}`} /> {p[lang]}
+            <p key={`${p[lang]}`}>
+              <span className={`answer-circle-${color}`} /> <span style={{ marginLeft: '0.5em' }}>{p[lang]}</span>
             </p>
           )
         })
@@ -67,11 +75,13 @@ const EntityLevels = ({
   extrainfo,
   summaryData,
   form,
+  programme,
   // summaryUrl,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [showText, setShowText] = useState(false)
+  const onlyBc = programme === 'H74'
 
   return (
     <div className="form-entity-area">
@@ -84,44 +94,42 @@ const EntityLevels = ({
           </h3>
         </div>
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
+      <div className="entity-description">
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       <div className="level-lights-container">
-        {levels.map(level => {
-          return (
-            <div className="traffic-light-row" key={level}>
-              <label className="traffic-light-row-label">{t(level)}</label>
-              <TrafficLights id={`${id}_${level}`} form={form} />
-            </div>
-          )
-        })}
+        {!onlyBc ? (
+          levels.map(level => {
+            return (
+              <div className="traffic-light-row" key={level}>
+                <label className="traffic-light-row-label">{t(level)}</label>
+                <TrafficLights id={`${id}_${level}`} form={form} />
+              </div>
+            )
+          })
+        ) : (
+          <div className="traffic-light-row">
+            <label className="traffic-light-row-label">{t('bachelor')}</label>
+            <TrafficLights id={`${id}_bachelor`} form={form} />
+          </div>
+        )}
       </div>
       <div className="summary-container">
-        <h4>Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:</h4>
+        <h4>{t('formView:facultySummaryTitle')}</h4>
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">
               <Grid.Column width={5}>{t('bachelor')}</Grid.Column>
-              <Grid.Column width={5}>{t('master')}</Grid.Column>
-              <Grid.Column width={5}>{t('doctoral')}</Grid.Column>
+              <Grid.Column width={5}>{!onlyBc ? t('master') : ''}</Grid.Column>
+              <Grid.Column width={5}>{!onlyBc ? t('doctoral') : ''}</Grid.Column>
               <Grid.Column width={1} />
             </Grid.Row>
             <Grid.Row className="row">
               {levels.map(level => {
                 return (
                   <Grid.Column width={5} key={level}>
-                    <Pie level={level} data={summaryData} />
+                    <Pie level={level} data={summaryData} onlyBc={onlyBc} />
                   </Grid.Column>
                 )
               })}
@@ -132,13 +140,13 @@ const EntityLevels = ({
             {showText && (
               <Grid.Row className="row">
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.bachelor} lang={lang} />
+                  <ProgrammeList data={summaryData.bachelor} lang={lang} onlyBc={false} />
                 </Grid.Column>
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.master} lang={lang} />
+                  <ProgrammeList data={summaryData.master} lang={lang} onlyBc={onlyBc} />
                 </Grid.Column>
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.doctoral} lang={lang} />
+                  <ProgrammeList data={summaryData.doctoral} lang={lang} onlyBc={onlyBc} />
                 </Grid.Column>
               </Grid.Row>
             )}

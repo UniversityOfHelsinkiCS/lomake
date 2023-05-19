@@ -5,11 +5,13 @@ import _ from 'lodash'
 
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
+import hy from 'Assets/hy_logo.svg'
 import degreeQuestionData from '../questionData/degreeReformIndividualQuestions.json'
 
 export const images = {
   toska_color: toscalogoColor,
   toska_grayscale: toscalogoGrayscale,
+  hy,
 }
 
 export const colors = {
@@ -434,15 +436,15 @@ export const getForm = formType => {
 export const getProgramAnswerLevels = programmeKey => {
   let formDataFilter = []
   if (programmeKey === 'MH30_001') {
-    formDataFilter = [8]
+    formDataFilter = [7]
   } else if (programmeKey === 'MH30_003') {
-    formDataFilter = [8]
+    formDataFilter = [7]
   } else if (programmeKey.substring(0, 1) === 'T') {
-    formDataFilter = [5, 6, 7]
+    formDataFilter = [4, 5, 6]
   } else if (programmeKey.substring(0, 2) === 'MH') {
-    formDataFilter = [5, 8]
+    formDataFilter = [4, 7]
   } else if (programmeKey.substring(0, 2) === 'KH') {
-    formDataFilter = [6, 7, 8]
+    formDataFilter = [5, 6, 7]
   }
   return formDataFilter
 }

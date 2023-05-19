@@ -131,7 +131,7 @@ export default {
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
     developmentArea: 'Kehittämiskohde',
-    actions: 'Toimenpiteet',
+    actions: 'Toimenpide-ehdotus',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
     evaluationInfo1:
@@ -140,6 +140,19 @@ export default {
       'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
     selectApplicable: 'Valitkaa sopivat vaihtoehdot',
     addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
+    progSummaryTitle: 'Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta',
+    facultySummaryTitle: 'Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:',
+    materials: 'Taustamateriaali',
+    materialsProg:
+      'Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.<br/> Lisäksi tässä lomakkeessa on usean kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä vuodelta kyseiseen teemaan liittyvien vuosiseurantakysymysten vastauksista. <br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä koulutusohjelma- että tiedekuntatason näkymään.',
+    summaryLinkProg: 'Tarkastele kaikkia aiempien vuosiseurontojen vastauksia',
+    oodikoneProg: 'Tarkastele koulutusohjelman tietoja Oodikonessa',
+    oodikoneFaculty: 'Tarkastele tiedekunnan tietoja Oodikonessa',
+    facultyInfo:
+      'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
+    materialsFaculty:
+      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmointikysymysten vastauksista. <br/><br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
+    yearlyAnswers: 'Vuosiseurantojen vastaukset',
   },
 
   generic: {
@@ -157,7 +170,7 @@ export default {
     expandText: 'Näytä viime vuoden vastaukset',
     compareLevel: 'Vertaile koulutusasteittain',
     levelFilter: 'Vastaukset koulutusasteittain',
-    measureLabel: 'Lisätkää 1-5 toimenpidettä',
+    measureLabel: 'Lisätkää 1-5 toimenpidettä.',
     noPermissions:
       'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
     nowShowing: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',

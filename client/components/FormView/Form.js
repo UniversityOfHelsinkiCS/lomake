@@ -84,7 +84,6 @@ const Form = ({ questions, programmeKey, form }) => {
           }
           radioOptions={part.radioOptions}
           form={form}
-          formType="yearlyAssessment"
         />
       </div>
     )

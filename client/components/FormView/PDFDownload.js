@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
+import ReactToPrint from 'react-to-print'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 
-const PDFDownload = () => {
+const PDFDownload = ({ componentRef }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const [takingPDF, setTakingPDF] = useState(false)
   const deadline = useSelector(state => state.deadlines.nextDeadline)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
@@ -19,34 +19,37 @@ const PDFDownload = () => {
   const userHasWriteAccess = isAdmin(user) || (user.access[programme.key] && user.access[programme.key].write)
   const userCanEdit = !!(userHasWriteAccess && !programme.locked && deadline && !viewingOldAnswers)
 
-  const openViewModeAndPrintPdf = () => {
-    handleViewOnlyChange(true)
-    setTakingPDF(true)
+  const [isPrinting, setIsPrinting] = useState(false)
+  // Store the resolve Promise being used in `onBeforeGetContent` here
+  const promiseResolveRef = useRef(null)
+
+  // watch for the state to change here, and for the Promise resolve to be available
+  useEffect(() => {
+    if (isPrinting && promiseResolveRef.current) {
+      // Resolves the Promise, letting `react-to-print` know that the DOM updates are completed
+      promiseResolveRef.current()
+    }
+  }, [isPrinting])
+
+  const handleReady = () => {
+    promiseResolveRef.current = null
+    setIsPrinting(false)
+    if (userCanEdit) handleViewOnlyChange(false)
   }
 
-  useEffect(() => {
-    if (takingPDF) {
-      //  ¯\_(ツ)_/¯ seems to work
-      // inspiration taken from this answer https://stackoverflow.com/a/50473614
-      // but it seems like adding the isSuccessful check to window.print() was a necessary addition
-      // for Firefox support
-      try {
-        const isSuccessful = document.execCommand('print', false, null)
-        if (isSuccessful === false) {
-          window.print()
-        }
-      } catch (e) {
-        window.print()
-      }
-      setTakingPDF(false)
-      if (userCanEdit) handleViewOnlyChange(false)
-    }
-  }, [takingPDF])
-
   return (
-    <span style={{ cursor: 'pointer', color: colors.blue }} onClick={openViewModeAndPrintPdf}>
-      {t('formView:downloadPDF')}
-    </span>
+    <ReactToPrint
+      content={() => componentRef.current}
+      trigger={() => <span style={{ cursor: 'pointer', color: colors.blue }}>{t('formView:downloadPDF')}</span>}
+      onBeforeGetContent={() =>
+        new Promise(resolve => {
+          promiseResolveRef.current = resolve
+          handleViewOnlyChange(true)
+          setIsPrinting(true)
+        })
+      }
+      onAfterPrint={handleReady}
+    />
   )
 }
 

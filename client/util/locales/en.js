@@ -61,7 +61,7 @@ export default {
     'degree-reform-individual': 'Degree reform - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
-    otherTextBox: 'Other, what?',
+    otherTextBox: 'Other, please specify',
     send: 'Send',
   },
 
@@ -135,7 +135,7 @@ export default {
     selectSystems: 'Chooce a system by clicking',
     mostUseful: 'Most useful feedback systems',
     developmentArea: 'Development area',
-    actions: 'Corrective actions',
+    actions: 'Suggestion for corrective actions',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     evaluationInfo1:
@@ -144,6 +144,19 @@ export default {
       "Discuss the following themes among the studyprogramme's steering group. Please note, that the <strong> yearly assessment for year 2023 should be done before this evaluation</strong>.",
     selectApplicable: 'Select all applicable options',
     addMissing: ' Add any missing options - You may add several',
+    progSummaryTitle: 'Yearly assessment answers related to this theme from the evaluation period',
+    facultySummaryTitle: "The faculty's programmes' steering groups' answers to this theme:",
+    materials: 'Supporting materials',
+    materialsProg:
+      'You can view all yearly assessment answers by following the below link.<br/> Additionally, a summary of yearly assessment answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',
+    summaryLinkProg: 'View all previous yearly assessment answers',
+    oodikoneProg: 'View programme statistics in Oodikone',
+    oodikoneFaculty: 'View faculty statistics in Oodikone',
+    facultyInfo:
+      'For this evaluation you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
+    materialsFaculty:
+      'Most questions in this form are accompanied by a summary of the answers given to the same theme by the studyprogramme steering groups of the faculty. <br/><br/> A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of your faculty, and about the progress of their studies. Link shown below.',
+    yearlyAnswers: 'Yearly assessment answers',
   },
 
   generic: {
@@ -161,7 +174,7 @@ export default {
     expandText: 'Show answers from last year',
     compareLevel: 'Compare by programme level',
     levelFilter: 'Filter by programme level',
-    measureLabel: 'Add 1-5 measures',
+    measureLabel: 'Add 1-5 measures.',
     noPermissions:
       "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
     nowShowing: 'NOW SHOWING THE ANSWERS OF',

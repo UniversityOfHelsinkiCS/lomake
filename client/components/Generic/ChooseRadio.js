@@ -47,7 +47,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
   }
   return (
-    <div className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
+    <div key={`${id}-${formType}-${lang}`} className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
@@ -83,7 +83,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
           direction={direction}
           handleClick={handleClick}
           checked={state.value}
-          disabled={viewOnly}
+          viewOnly={viewOnly}
           radioButtonLabels={radioButtonLabels}
           type="basic"
         />

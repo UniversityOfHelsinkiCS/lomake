@@ -18,7 +18,7 @@ import {
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import SendFormModal from 'Components/Generic/SendFormModal'
-import { degreeReformIndividualQuestions as questions } from '../../../questionData'
+import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './DegreeReformForm'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => {
@@ -81,8 +81,8 @@ const DegreeReformIndividual = () => {
 
   const formType = 'degree-reform-individual'
   return (
-    <div className="form-container" data-cy="reform-individual-form-container">
-      <NavigationSidebar formType={formType} />
+    <div className="form-container" data-cy="reform-individual-form-container" lang={lang}>
+      <NavigationSidebar formType={formType} questionData={questionData} />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -94,7 +94,7 @@ const DegreeReformIndividual = () => {
           <StatusMessage programme={user.id} form={formNumber} />
           <SaveIndicator />
         </div>
-        <DegreeReformForm questionData={questions} formType={formType} />
+        <DegreeReformForm questionData={questionData} formType={formType} />
         <SendFormModal
           openButton={
             <Button

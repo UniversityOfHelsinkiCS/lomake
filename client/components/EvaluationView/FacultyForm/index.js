@@ -7,12 +7,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isAdmin } from '@root/config/common'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { getFacultyProgrammeAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
+import './EvaluationForm.scss'
 import { colors } from 'Utilities/common'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
@@ -29,14 +31,13 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => 
 
 const findAnswers = (programmes, allAnswers, question) => {
   const result = {
-    bachelor: { programmes: [], green: [], yellow: [], red: [], gray: [] },
-    master: { programmes: [], green: [], yellow: [], red: [], gray: [] },
-    doctoral: { programmes: [], green: [], yellow: [], red: [], gray: [] },
+    bachelor: { green: [], yellow: [], red: [], gray: [] },
+    master: { green: [], yellow: [], red: [], gray: [] },
+    doctoral: { green: [], yellow: [], red: [], gray: [] },
   }
   programmes.forEach(({ key, level, name }) => {
     const { data } = allAnswers.find(a => a.programme === key)
     const light = data[`${question}_light`]
-    result[level].programmes.push({ key, name, light: light || null })
     if (light) {
       result[level][light].push(name)
     } else {
@@ -61,8 +62,8 @@ const FacultyFormView = ({ room, formString }) => {
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
+  const facultyProgrammeData = useSelector(state => state.summaries)
 
-  const progEvaluationAnswers = useSelector(state => state.oldAnswers.data.filter(a => a.form === 4 && a.year === year))
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const FacultyFormView = ({ room, formString }) => {
   useEffect(() => {
     if (!faculty || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
+    dispatch(getFacultyProgrammeAnswersAction(room, lang))
     if (
       formShouldBeViewOnly({
         draftYear,
@@ -100,31 +102,29 @@ const FacultyFormView = ({ room, formString }) => {
   ])
 
   const facultyProgrammeAnswers = useMemo(() => {
-    if (!progEvaluationAnswers) {
+    if (
+      !facultyProgrammeData?.forFaculty ||
+      facultyProgrammeData?.forFaculty?.answers.length === 0 ||
+      facultyProgrammeData.pending
+    ) {
       return {}
     }
-    const facultyProgrammes = faculty.ownedProgrammes.map(p => {
-      return { key: p.key, level: p.level, name: p.name }
-    })
+    const { programmes, answers } = facultyProgrammeData?.forFaculty
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion) {
-          result[part.id] = findAnswers(facultyProgrammes, progEvaluationAnswers, part.relatedEvaluationQuestion)
+          result[part.id] = findAnswers(programmes, answers, part.relatedEvaluationQuestion)
         }
       })
     })
     return result
-  }, [room, user, progEvaluationAnswers])
+  }, [room, user, facultyProgrammeData])
 
-  // To fix texts -prog -> faculty
-
-  // TO FIX To be removed and porer rights to be set
+  // TO FIX To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room || !form) return <Redirect to="/" />
-
-  //   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
   return (
     <>
@@ -149,17 +149,9 @@ const FacultyFormView = ({ room, formString }) => {
 
               <div className="hide-in-print-mode">
                 <StatusMessage programme={room} form={form} />
-                <div
-                  style={{
-                    lineHeight: 2,
-                    backgroundColor: colors.background_blue,
-                    padding: '1.5em 0.5em',
-                    borderRadius: '5px',
-                    margin: '2em 0em 1em 0em',
-                  }}
-                >
+                <div className="info-container">
                   <p>
-                    <Trans i18nKey="formView:evaluationInfo1" />
+                    <Trans i18nKey="formView:facultyInfo" />
                   </p>
                 </div>
                 <p>{t('formView:info2')}</p>
@@ -178,31 +170,13 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
 
               <div style={{ marginTop: '2em' }}>
-                <h4 data-cy="formview-links">Taustamateriaali</h4>
+                <h4 data-cy="formview-links">{t('formView:materials')}</h4>
                 <p>
-                  Alla olevasta linkistä voitte tarkastella kootusti kaikkia tiedekunnan katselmointikierroksella
-                  kirjattuja vastauksia.
-                </p>
-                <p>
-                  Lisäksi tässä lomakkeessa on kunkin kysymyksen yhteyteen lisätty tiivistelmä tiedekunnan
-                  katselmointikysymysten vastauksista.
-                </p>
-                <p>
-                  Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja
-                  tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.
+                  <Trans i18nKey="formView:materialsFaculty" />
                 </p>
               </div>
 
-              <div
-                className="past-answers-link"
-                style={{
-                  lineHeight: 2,
-                  backgroundColor: colors.background_blue,
-                  padding: '1.5em 0.5em',
-                  borderRadius: '5px',
-                  margin: '2em 0em 1em 0em',
-                }}
-              >
+              <div className="info-container">
                 {/* <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
                   <h4 style={{ marginBottom: '0.5em' }}>
                     Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
@@ -210,7 +184,7 @@ const FacultyFormView = ({ room, formString }) => {
                 </Link> */}
                 <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
                   <h4>
-                    Tarkastele tiedekunnan tietoja Oodikonessa <Icon name="external" />{' '}
+                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
                 </a>
               </div>

@@ -6,12 +6,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
-import {
-  yearlyQuestions as questions,
-  evaluationQuestions,
-  degreeReformQuestions,
-  degreeReformIndividualQuestions,
-} from '../../questionData'
+import { yearlyQuestions as questions, evaluationQuestions } from '../../questionData'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -52,7 +47,7 @@ const getIsCompleted = ({ formData, questionId }) => {
   return Boolean(questionData)
 }
 
-const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
+const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData }) => {
   const lang = useSelector(state => state.language)
   const form = useSelector(({ form }) => form || {})
   const location = useLocation()
@@ -65,11 +60,11 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
     questionsToShow = evaluationQuestions
     linkBase = `/evaluation/form/${formNumber}/`
   } else if (formType === 'degree-reform') {
-    questionsToShow = degreeReformQuestions
+    questionsToShow = questionData
     linkBase = '/degree-reform/form/'
     isDegreeForm = true
   } else if (formType === 'degree-reform-individual') {
-    questionsToShow = degreeReformIndividualQuestions
+    questionsToShow = questionData
     linkBase = '/degree-reform-individual/form/'
     isDegreeForm = true
   }
@@ -85,7 +80,11 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
+        <div
+          key={`navigation-sidebar-list-${formType}-${lang}}`}
+          data-cy="navigation-sidebar-list"
+          style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}
+        >
           {questionsToShow.map((section, index) => {
             if (isDegreeForm) {
               partNumber = 0
@@ -95,7 +94,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
             const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
-              return <div key={`${section.title}-${section.id}`} />
+              return null
             }
             const link =
               formType === 'degree-reform-individual'
@@ -103,7 +102,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                 : `${linkBase}${programmeKey}#${romanNumeral}`
             return (
               <div
-                key={title}
+                key={`${section.id}-${title}`}
                 style={{
                   fontWeight: active ? 'bold' : undefined,
                   padding: '1em',
@@ -111,6 +110,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                   borderRadius: '5px',
                   margin: '1px',
                 }}
+                data-cy={`navigation-sidebar-section-${section.id}`}
               >
                 <div style={{ margin: '1em 0' }}>
                   <Link to={link} style={{ color: colors.black }}>
@@ -151,7 +151,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                       )
 
                       return (
-                        <div key={id}>
+                        <div key={`${id}-${lang}`}>
                           {questionTypesToShow.includes(type) && (
                             <>
                               {partNumber}.

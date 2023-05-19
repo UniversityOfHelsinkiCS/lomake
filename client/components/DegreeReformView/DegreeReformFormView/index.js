@@ -15,7 +15,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 
 import DegreeReformForm from './DegreeReformForm'
 
-import { degreeReformQuestions as questionData } from '../../../questionData'
+import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 
 const formShouldBeViewOnly = ({
   accessToTempAnswers,
@@ -59,6 +59,8 @@ const DegreeReformFormView = ({ room }) => {
   const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const viewingOldAnswers = false
+
+  const questionDataFiltered = questionData.filter(q => q.id !== 0)
 
   useEffect(() => {
     document.title = `${t('degree-reform')} - ${room}`
@@ -108,7 +110,7 @@ const DegreeReformFormView = ({ room }) => {
   const formType = 'degree-reform'
   return (
     <div className="form-container" data-cy="reform-form-group-container">
-      <NavigationSidebar programmeKey={room} formType="degree-reform" />
+      <NavigationSidebar programmeKey={room} formType={formType} questionData={questionDataFiltered} />
       <div className="the-form">
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -122,7 +124,7 @@ const DegreeReformFormView = ({ room }) => {
             {t('degree-reform')} 2015-2017
           </h3>
         </div>
-        <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionData} />
+        <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionDataFiltered} />
         <div style={{ height: '10em' }} />
       </div>
     </div>

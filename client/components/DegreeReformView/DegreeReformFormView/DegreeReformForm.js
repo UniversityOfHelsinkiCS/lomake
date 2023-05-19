@@ -48,7 +48,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     if (part.type === 'TITLE') {
       return (
         <>
-          <h2 key={part.id} style={divStyle}>
+          <h2 key={`question-${part.id}-${formType}-${lang}`} style={divStyle}>
             {part.label[lang]}
           </h2>
         </>
@@ -83,7 +83,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     const accordion = part.accordion ? part.accordion : undefined
 
     return (
-      <div key={part.id} style={divStyle}>
+      <div key={`question-${part.id}-${formType}-${lang}`} style={divStyle}>
         <Component
           id={part.id}
           label={part.label[lang]}
@@ -116,7 +116,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
             id={section.id}
             title={section.title[lang]}
             number={romanize(index)}
-            key={section.title[lang]}
+            key={`section-${section.id}-${formType}-${lang}`}
             programmeKey={programmeKey}
             formType={formType}
           >

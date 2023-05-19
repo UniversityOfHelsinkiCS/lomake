@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { Button, Loader } from 'semantic-ui-react'
@@ -44,6 +44,7 @@ const FormView = ({ room }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { t } = useTranslation()
+  const componentRef = useRef()
 
   const form = 1 // TO FIX or not?
 
@@ -118,7 +119,7 @@ const FormView = ({ room }) => {
   ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={programme.key} />
-      <div className="the-form">
+      <div className="the-form" ref={componentRef}>
         <FormStatusMessage programme={room} form={form} />
         <div className="form-instructions">
           <div className="hide-in-print-mode">
@@ -154,7 +155,7 @@ const FormView = ({ room }) => {
             {t('negative')}
           </div>
         </div>
-        <Downloads programme={programme} />
+        <Downloads programme={programme} componentRef={componentRef} />
         <Form programmeKey={programme.key} questions={questions} form={form} />
       </div>
     </div>

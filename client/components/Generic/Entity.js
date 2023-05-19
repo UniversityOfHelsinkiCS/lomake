@@ -26,7 +26,6 @@ const Entity = ({
   number,
   previousYearsAnswers,
   extrainfo,
-  formType,
   summaryData = null,
   form,
   summaryUrl,
@@ -60,24 +59,17 @@ const Entity = ({
         </div>
         {!noColor && <TrafficLights id={id} form={form} />}
       </div>
-      <div
-        className="entity-description"
-        style={{
-          lineHeight: 2,
-          backgroundColor: colors.background_beige,
-          padding: '1em',
-          borderRadius: '5px',
-          margin: '1em 0',
-        }}
-      >
+      <div className="entity-description">
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {form === 4 && <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />}
-      {formType === 'evaluation' && (
-        <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-          <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
-        </Link>
+      {form === 4 && (
+        <>
+          <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />
+          <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
+            <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
+          </Link>
+        </>
       )}
       <Textarea
         id={id}
