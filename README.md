@@ -84,7 +84,7 @@ The current questions of the degree reform forms can be found in **degreeReformI
 | no_color    | boolean   | No       | (ENTITY only) If `true` Entity doesn't contain a color form field         |
 | relatedYearlyQuestions  | array | No| (Evaluation only) List of yearly assessment questions the evaluation question builds on |
 | radio_options| Localized   | No        | (Reform only) Options for radio buttons                               |
-| options     |  { Localized } | No       | (ORDER and SELECTION only) Options for selectiong and ordering, containing language versions, eg, norppa: { Localized }         |
+| options     |  { Localized } | No       | (ORDER and SELECTION only) Options for selection and ordering, containing language versions, eg, norppa: { Localized }         |
 
 **Localized**
 
