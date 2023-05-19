@@ -58,7 +58,7 @@ export default {
     'degree-reform-individual': 'Degree reform - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
-    otherTextBox: 'Other, what?',
+    otherTextBox: 'Other, please specify',
     send: 'Send',
   },
 
@@ -132,7 +132,7 @@ export default {
     selectSystems: 'Chooce a system by clicking',
     mostUseful: 'Most useful feedback systems',
     developmentArea: 'Development area',
-    actions: 'Corrective actions',
+    actions: 'Suggestion for corrective actions',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     evaluationInfo1:
