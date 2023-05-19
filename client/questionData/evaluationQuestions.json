@@ -193,12 +193,12 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
           "se": "",
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "",
           "en": ""
         },
@@ -428,12 +428,12 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpidelistalle",
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
           "se": "",
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpiteet.",
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "",
           "en": ""
         },

@@ -128,7 +128,7 @@ export default {
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
     developmentArea: 'Kehittämiskohde',
-    actions: 'Toimenpiteet',
+    actions: 'Toimenpide-ehdotus',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
     evaluationInfo1:
