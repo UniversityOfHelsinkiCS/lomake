@@ -48,7 +48,7 @@ const initialState = {
   viewingOldAnswers: false,
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
-  answerLevels: [],
+  answerLevels: [4, 5, 6, 7],
 }
 
 // Reducer

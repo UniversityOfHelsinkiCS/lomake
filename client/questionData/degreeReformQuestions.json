@@ -3,7 +3,7 @@
     "title": {
       "fi": "Koulutusuudistuksen tavoitteet",
       "se": "",
-      "en": ""
+      "en": "Degree reform goals"
     },
     "id": 1,
     "parts": [
@@ -280,7 +280,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "free_answer",
+        "id": "degree_reform_free_answer",
         "index": 19,
         "type": "TEXTAREA",
         "label": {
@@ -302,7 +302,7 @@
     "title": {
       "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteet",
       "se": "",
-      "en": ""
+      "en": "Real three level structure and principles of the Bologna process"
     },
     "id": 2,
     "parts": [
@@ -464,7 +464,7 @@
     "title": {
       "fi": "Pää- ja sivuainepohjaisesta koulutuksesta koulutusohjelmiksi",
       "se": "",
-      "en": ""
+      "en": "Mayor and minor subjects to study programmes"
     },
     "id": 3,
     "parts": [
@@ -665,7 +665,7 @@
     "title": {
       "fi": "Kandiohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Bachelor programmes structure and functionality"
     },
     "id": 4,
     "parts": [
@@ -828,7 +828,7 @@
     "title": {
       "fi": "Maisteriohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Master programmes structure and functionality"
     },
     "id": 5,
     "parts": [
@@ -991,7 +991,7 @@
     "title": {
       "fi": "Kansainvälisten maisteriohjelmien kriteerit",
       "se": "",
-      "en": ""
+      "en": "International master programmes criteria"
     },
     "id": 6,
     "parts": [
@@ -1156,9 +1156,9 @@
     "title": {
       "fi": "Tohtoriohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Doctoral programmes structure and functionality"
     },
-    "id": 8,
+    "id": 7,
     "parts": [
       {
         "id": "information-for-8",
@@ -1343,9 +1343,9 @@
     "title": {
       "fi": "Koulutusohjelmien johtaminen",
       "se": "",
-      "en": ""
+      "en": "Studyprogramme management"
     },
-    "id": 9,
+    "id": 8,
     "parts": [
       {
         "id": "information-for-9",
@@ -1530,9 +1530,9 @@
     "title": {
       "fi": "Tiedekuntien yhteiset koulutusohjelmat",
       "se": "",
-      "en": ""
+      "en": "Faculties' joint study programmes"
     },
-    "id": 10,
+    "id": 9,
     "parts": [
       {
         "id": "information-for-10",
@@ -1693,9 +1693,9 @@
     "title": {
       "fi": "Muuta kommentoitavaa",
       "se": "",
-      "en": ""
+      "en": "Other comments"
     },
-    "id": 11,
+    "id": 10,
     "parts": [
       {
         "id": "general_free_to_answer",

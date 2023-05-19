@@ -85,7 +85,10 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}>
+        <div
+          data-cy="navigation-sidebar-list"
+          style={{ display: 'flex', flexDirection: 'column', overflow: 'auto', height: '99vh' }}
+        >
           {questionsToShow.map((section, index) => {
             if (isDegreeForm) {
               partNumber = 0
@@ -95,7 +98,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
             const romanNumeral = getCorrectRomanNumeral(index, formType)
             const active = location.hash === `#${romanNumeral}`
             if (formDataFilter && formDataFilter.find(f => f === section.id)) {
-              return <div key={`${section.title[lang]}-${section.id}`} />
+              return null
             }
             const link =
               formType === 'degree-reform-individual'
@@ -111,6 +114,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber }) => {
                   borderRadius: '5px',
                   margin: '1px',
                 }}
+                data-cy={`navigation-sidebar-section-${section.id}`}
               >
                 <div style={{ margin: '1em 0' }}>
                   <Link to={link} style={{ color: colors.black }}>

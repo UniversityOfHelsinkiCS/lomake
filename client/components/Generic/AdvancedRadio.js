@@ -23,7 +23,13 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
   const debouncedFilter = useDebounce(state, 200)
 
   const saveState = () => {
-    choose(id, `${debouncedFilter.firstValue}_-_${debouncedFilter.secondValue}_-_${debouncedFilter.thirdValue}`)
+    if (debouncedFilter.thirdValue) {
+      choose(id, `${debouncedFilter.firstValue}_-_${debouncedFilter.secondValue}_-_${debouncedFilter.thirdValue}`)
+    } else if (debouncedFilter.secondValue) {
+      choose(id, `${debouncedFilter.firstValue}_-_${debouncedFilter.secondValue}`)
+    } else if (debouncedFilter.firstValue) {
+      choose(id, `${debouncedFilter.firstValue}`)
+    }
   }
 
   useEffect(() => {

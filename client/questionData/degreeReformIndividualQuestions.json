@@ -98,21 +98,21 @@
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
-            { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
+            { "label": "Väitöskirjatutkija", "id": "doctoral" }
           ],
           "en": [
             { "label": "Dekaani / Varadekaani(en)", "id": "dean" },
-            { "label": "Opetus- ja tutkimushenkilökunta(en)", "id": "teaching_or_other_research" },
-            { "label": "Hallinto- tai muu henkilökunta(en)", "id": "admin_or_other_staff" },
+            { "label": "Teaching or other research staff", "id": "teaching_or_other_research" },
+            { "label": "Administrative or other staff", "id": "admin_or_other_staff" },
             { "label": "Student", "id": "student" },
-            { "label": "Väitöskirjatutkija(en)", "id": "doctoral_thesis" }
+            { "label": "Doctoral", "id": "doctoral" }
           ],
           "se": [
             { "label": "Dekaani / Varadekaani", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
-            { "label": "Väitöskirjatutkija", "id": "doctoral_thesis" }
+            { "label": "Väitöskirjatutkija", "id": "doctoral" }
           ]
         },
         "advancedOptions": {
@@ -136,7 +136,7 @@
         }
       },
       {
-        "id": "how_many_years_at_uni",
+        "id": "how_many_years",
         "index": 2,
         "type": "CHOOSE-RADIO",
         "shortLabel": {
@@ -163,25 +163,33 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "Alle vuoden", "id": "under-year" },
-            { "label": "1-3 vuotta", "id": "1-3-years" },
-            { "label": "3-7 vuotta", "id": "3-7-years" },
-            { "label": "7-10 vuotta", "id": "7-10-years" },
-            { "label": "Yli 10 vuotta", "id": "over-10-years" }
+            { "label": "Alle vuoden ", "id": "under-year", "extraLabel": "" },
+            {
+              "label": "1-3 vuotta",
+              "id": "1-3-years",
+              "extraLabel": "(HUOM! pandemia, koulutusuudistuksen siirtymävaihe)"
+            },
+            { "label": "3-7 vuotta", "id": "3-7-years", "extraLabel": "(ennen pandemiaa, koulutusohjelmarakenne)" },
+            { "label": "7-10 vuotta", "id": "7-10-years", "extraLabel": "(koulutusuudistus ja sen toimeenpano)" },
+            {
+              "label": "Yli 10 vuotta",
+              "id": "over-10-years",
+              "extraLabel": "(tutkijakoulujen perustaminen/tohtorikoulutusuudistus 2013)"
+            }
           ],
           "en": [
-            { "label": "Under year", "id": "under-year" },
-            { "label": "1-3 years", "id": "1-3-years" },
-            { "label": "3-7 years", "id": "3-7-years" },
-            { "label": "7-10 years", "id": "7-10-years" },
-            { "label": "Yli 10 years", "id": "over-10-years" }
+            { "label": "Under year", "id": "under-year", "extraLabel": "" },
+            { "label": "1-3 years", "id": "1-3-years", "extraLabel": "" },
+            { "label": "3-7 years", "id": "3-7-years", "extraLabel": "" },
+            { "label": "7-10 years", "id": "7-10-years", "extraLabel": "" },
+            { "label": "Yli 10 years", "id": "over-10-years", "extraLabel": "" }
           ],
           "se": [
-            { "label": "Alle vuoden(se)", "id": "under-year" },
-            { "label": "1-3 vuotta(se)", "id": "1-3-years" },
-            { "label": "3-7 vuotta(se)", "id": "3-7-years" },
-            { "label": "7-10 vuotta(se)", "id": "7-10-years" },
-            { "label": "Yli 10 vuotta(se)", "id": "over-10-years" }
+            { "label": "Alle vuoden(se)", "id": "under-year", "extraLabel": "" },
+            { "label": "1-3 vuotta(se)", "id": "1-3-years", "extraLabel": "" },
+            { "label": "3-7 vuotta(se)", "id": "3-7-years", "extraLabel": "" },
+            { "label": "7-10 vuotta(se)", "id": "7-10-years", "extraLabel": "" },
+            { "label": "Yli 10 vuotta(se)", "id": "over-10-years", "extraLabel": "" }
           ]
         }
       },
@@ -191,13 +199,13 @@
         "type": "CHECKBOX",
         "shortLabel": {
           "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "se": "",
-          "en": ""
+          "se": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
+          "en": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin"
         },
         "label": {
           "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "se": "",
-          "en": ""
+          "se": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
+          "en": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin"
         },
         "description": {
           "fi": "valitse koulutustaso(t) (kandi/maisteri/tohtori) johon haluat vastata",
@@ -257,7 +265,7 @@
     "title": {
       "fi": "Koulutusuudistuksen tavoitteet",
       "se": "",
-      "en": ""
+      "en": "Degree reform goals"
     },
     "id": 1,
     "parts": [
@@ -534,7 +542,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "free_answer",
+        "id": "degree_reform_free_answer",
         "index": 19,
         "type": "TEXTAREA",
         "label": {
@@ -556,7 +564,7 @@
     "title": {
       "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteet",
       "se": "",
-      "en": ""
+      "en": "Real three level structure and principles of the Bologna process"
     },
     "id": 2,
     "parts": [
@@ -718,7 +726,7 @@
     "title": {
       "fi": "Pää- ja sivuainepohjaisesta koulutuksesta koulutusohjelmiksi",
       "se": "",
-      "en": ""
+      "en": "Mayor and minor subjects to study programmes"
     },
     "id": 3,
     "parts": [
@@ -919,9 +927,9 @@
     "title": {
       "fi": "Kandiohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Bachelor programmes structure and functionality"
     },
-    "id": 3,
+    "id": 4,
     "parts": [
       {
         "id": "information-for-4",
@@ -1082,9 +1090,9 @@
     "title": {
       "fi": "Maisteriohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Master programmes structure and functionality"
     },
-    "id": 4,
+    "id": 5,
     "parts": [
       {
         "id": "information-for-5",
@@ -1245,9 +1253,9 @@
     "title": {
       "fi": "Kansainvälisten maisteriohjelmien kriteerit",
       "se": "",
-      "en": ""
+      "en": "International master programmes criteria"
     },
-    "id": 5,
+    "id": 6,
     "parts": [
       {
         "id": "information-for-6",
@@ -1410,9 +1418,9 @@
     "title": {
       "fi": "Tohtoriohjelmien rakenne ja toimivuus",
       "se": "",
-      "en": ""
+      "en": "Doctoral programmes structure and functionality"
     },
-    "id": 6,
+    "id": 7,
     "parts": [
       {
         "id": "information-for-8",
@@ -1597,9 +1605,9 @@
     "title": {
       "fi": "Koulutusohjelmien johtaminen",
       "se": "",
-      "en": ""
+      "en": "Studyprogramme management"
     },
-    "id": 7,
+    "id": 8,
     "parts": [
       {
         "id": "information-for-9",
@@ -1784,9 +1792,9 @@
     "title": {
       "fi": "Tiedekuntien yhteiset koulutusohjelmat",
       "se": "",
-      "en": ""
+      "en": "Faculties' joint study programmes"
     },
-    "id": 8,
+    "id": 9,
     "parts": [
       {
         "id": "information-for-10",
@@ -1947,9 +1955,9 @@
     "title": {
       "fi": "Muuta kommentoitavaa",
       "se": "",
-      "en": ""
+      "en": "Other comments"
     },
-    "id": 9,
+    "id": 10,
     "parts": [
       {
         "id": "general_free_to_answer",

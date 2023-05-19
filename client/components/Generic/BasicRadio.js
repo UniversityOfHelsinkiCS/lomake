@@ -30,7 +30,9 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
               >
                 <Radio
                   name="basic-radio"
+                  style={{ display: 'flex', alignItems: 'center' }}
                   value={o.label}
+                  disabled={viewOnly}
                   label={
                     <label
                       data-cy={`choose-radio-${o.id}`}
@@ -41,20 +43,20 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                   }
                   checked={isChecked(o.id)}
                   onClick={() => handleChange(o.id)}
-                  disabled={viewOnly}
                 />
+                {o.extraLabel ? <span style={{ marginLeft: '10em' }}>{o.extraLabel}</span> : null}
               </Form.Field>
             )
           })}
           {checked.secondValue === 'other' ? (
             <Form.Field>
               <Input
+                disabled={viewOnly}
                 style={{ width: '60%' }}
                 value={checked.thirdValue}
                 onChange={value => handleOtherField({ input: value, level: 2 })}
                 version="degree-reform"
                 size="small"
-                disabled={viewOnly}
               />
             </Form.Field>
           ) : null}
