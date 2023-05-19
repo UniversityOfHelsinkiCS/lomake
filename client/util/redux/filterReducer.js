@@ -45,7 +45,6 @@ const initialState = {
   year: '',
   multipleYears: [],
   questions: { selected: [], open: [] },
-  answerLevels: [],
 }
 
 export default (state = initialState, action) => {
