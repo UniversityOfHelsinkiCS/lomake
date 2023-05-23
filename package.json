@@ -60,7 +60,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^2.1.2",
     "sequelize": "^6.6.2",
-    "socket.io": "^4.5.0",
+    "socket.io": "^4.6.1",
     "socket.io-client": "^4.5.0",
     "umzug": "^2.3.0",
     "unfuck-spa-shibboleth-session": "^3.1.3",
