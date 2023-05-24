@@ -77,7 +77,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
       ) : (
         <div style={{ height: '1em' }} />
       )}
-      <Form>
+      <Form disabled={viewOnly}>
         <BasicRadio
           id={id}
           direction={direction}
