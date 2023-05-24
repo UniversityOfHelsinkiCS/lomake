@@ -89,7 +89,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`}>
+        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`} disabled={viewOnly}>
           {radioButtonLabels.map(o => {
             return (
               <div key={`${id}-${o.id}`}>

@@ -27,12 +27,12 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                     ? { display: 'flex', marginBottom: '0.2em' }
                     : { marginLeft: '2em', textAlign: 'center' }
                 }
+                disabled={viewOnly}
               >
                 <Radio
                   name="basic-radio"
                   style={{ display: 'flex', alignItems: 'center' }}
                   value={o.label}
-                  disabled={viewOnly}
                   label={
                     <label
                       data-cy={`choose-radio-${o.id}`}
