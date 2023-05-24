@@ -177,11 +177,6 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
 
               <div className="info-container">
-                {/* <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
-                  <h4 style={{ marginBottom: '0.5em' }}>
-                    Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
-                  </h4>
-                </Link> */}
                 <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
                   <h4>
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
