@@ -50,6 +50,8 @@ export default {
     // katselmus: '',
     // otherTextBox: '',
     send: 'Lähetä(se)',
+    what: 'Vad',
+    chooseFaculty: 'Valitse tiedekunta',
   },
 
   aboutPage: {

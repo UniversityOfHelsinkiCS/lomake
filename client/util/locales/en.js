@@ -60,6 +60,8 @@ export default {
     'read-less': 'Read less',
     otherTextBox: 'Other, please specify',
     send: 'Send',
+    what: 'What',
+    chooseFaculty: 'Choose faculty',
   },
 
   aboutPage: {

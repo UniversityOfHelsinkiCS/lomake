@@ -56,6 +56,8 @@ export default {
     'read-less': 'Lue vähemmän',
     otherTextBox: 'Muu, mikä?',
     send: 'Lähetä',
+    what: 'Mikä',
+    chooseFaculty: 'Valitse tiedekunta',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
