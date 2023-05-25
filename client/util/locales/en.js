@@ -135,6 +135,7 @@ export default {
     mostUseful: 'Most useful feedback systems',
     developmentArea: 'Development area',
     actions: 'Suggestion for corrective actions',
+    requiredActions: 'Actions required',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     evaluationInfo1:

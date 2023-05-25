@@ -35,7 +35,7 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
         />
       </div>
       <div className="form-textarea">
-        <label>{t('formView:actions')}</label>
+        <label>{t(form === 4 ? 'formView:actions' : 'formView:requiredActions')}</label>
         {viewOnly ? <>{actions}</> : <textarea id="actions" value={actions || ''} onChange={handleChange} />}
       </div>
     </div>

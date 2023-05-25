@@ -192,17 +192,17 @@
         "id": "faculty_ease_of_study_actions",
         "type": "ACTIONS",
         "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena tarvittavien toimenpiteiden listalle",
           "se": "",
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
           "se": "",
           "en": ""
         },
@@ -433,17 +433,17 @@
         "id": "faculty_programme_structure_actions",
         "type": "ACTIONS",
         "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena tarvittavien toimenpiteiden listalle",
           "se": "",
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
+          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
           "se": "",
           "en": ""
         },
