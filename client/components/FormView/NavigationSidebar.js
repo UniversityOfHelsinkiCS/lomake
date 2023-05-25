@@ -6,7 +6,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
-import { yearlyQuestions as questions, evaluationQuestions } from '../../questionData'
+import { yearlyQuestions as questions, evaluationQuestions, facultyEvaluationQuestions } from '../../questionData'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -17,7 +17,15 @@ const replaceTitle = {
 }
 
 // These question types are shown in the navigation sidebar
-const questionTypesToShow = ['ENTITY', 'MEASURES', 'CHOOSE-RADIO', 'SELECTION', 'CHOOSE-ADVANCED', 'CHECKBOX']
+const questionTypesToShow = [
+  'ENTITY',
+  'MEASURES',
+  'CHOOSE-RADIO',
+  'SELECTION',
+  'CHOOSE-ADVANCED',
+  'CHECKBOX',
+  'ENTITY_LEVELS',
+]
 
 const getIcon = filled => (filled ? 'check' : 'exclamation')
 
@@ -56,9 +64,12 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   let questionsToShow = questions
   let linkBase = '/form/'
   let isDegreeForm = false
-  if (formType === 'evaluation') {
+  if (formNumber === 4) {
     questionsToShow = evaluationQuestions
     linkBase = `/evaluation/form/${formNumber}/`
+  } else if (formNumber === 5) {
+    questionsToShow = facultyEvaluationQuestions
+    linkBase = `/evaluation-faculty/form/${formNumber}/`
   } else if (formType === 'degree-reform') {
     questionsToShow = questionData
     linkBase = '/degree-reform/form/'
@@ -125,7 +136,12 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       const { id, type, required, no_color } = part
 
                       const idsToCheck = []
-                      if (type === 'TEXTAREA' || type === 'ENTITY' || type === 'SELECTION') {
+                      if (
+                        type === 'TEXTAREA' ||
+                        type === 'ENTITY' ||
+                        type === 'SELECTION' ||
+                        type === 'ENTITY_LEVELS'
+                      ) {
                         idsToCheck.push(`${id}_text`)
                       } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
                         idsToCheck.push(`${id}`)
@@ -136,12 +152,19 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       if (type === 'ENTITY' && !no_color) {
                         idsToCheck.push(`${id}_light`)
                       }
+                      if (type === 'ENTITY_LEVELS') {
+                        idsToCheck.push(`${id}_bachelor_light`)
+                        if (programmeKey !== 'H74') {
+                          idsToCheck.push(`${id}_master_light`)
+                          idsToCheck.push(`${id}_doctoral_light`)
+                        }
+                      }
 
                       if (type === 'SELECTION') {
                         idsToCheck.push(`${id}_selection`)
                       }
 
-                      const comparator = type === 'ENTITY' ? 'every' : 'some'
+                      const comparator = type.includes('ENTITY') ? 'every' : 'some'
 
                       const filled = idsToCheck[comparator](id =>
                         getIsCompleted({
