@@ -260,6 +260,55 @@ const getProgrammeSummaryData = async (req, res) => {
   }
 }
 
+const getOldFacultySummaryData = async (req, res) => {
+  const { code, lang } = req.params
+  if (!code) {
+    throw new Error('No programme defined')
+  }
+  try {
+    const faculty = await db.faculty.findOne({ where: { code }, include: ['ownedProgrammes'] })
+    const programmes = faculty.ownedProgrammes
+    programmes.sort((a, b) => {
+      return a?.name[lang].localeCompare(b?.name[lang])
+    })
+    const years = [2019, 2020, 2021, 2022]
+    const codes = programmes.map(p => p.key)
+    const answers = await db.answer.findAll({
+      where: {
+        form: 1,
+        year: years,
+        programme: codes,
+      },
+    })
+
+    const yearlyFormOpen = await db.deadline.findOne({ where: { form: 1 } })
+
+    if (yearlyFormOpen) {
+      const latestAnswers = await db.tempAnswer.findOne({
+        where: {
+          form: 1,
+          year: 2023,
+          programme: codes,
+        },
+      })
+      answers.push(latestAnswers)
+    } else {
+      const latestAnswers = await db.answer.findOne({
+        where: {
+          form: 1,
+          year: 2023,
+          programme: codes,
+        },
+      })
+      answers.push(latestAnswers)
+    }
+    return res.status(200).json({ answers })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   create,
@@ -272,4 +321,5 @@ module.exports = {
   getSingleProgrammesAnswers,
   getFacultySummaryData,
   getProgrammeSummaryData,
+  getOldFacultySummaryData,
 }

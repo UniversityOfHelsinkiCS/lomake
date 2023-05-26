@@ -49,9 +49,9 @@ export default {
     // yearlyAssessment: '',
     // katselmus: '',
     otherTextBox: 'Något annat, vilket?',
-    send: 'Lähetä(se)',
-    what: 'Vad',
-    chooseFaculty: 'Valitse tiedekunta',
+    send: '',
+    what: '',
+    chooseFaculty: '',
   },
 
   aboutPage: {
