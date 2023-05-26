@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { testProgrammeCode } from '../../config/common'
+import { testFacultyCode, testFacultyName, testProgrammeCode, testProgrammeName } from '../../config/common'
 import '../support/commands'
 
 describe('Evaluation forms tests', () => {
@@ -12,7 +12,7 @@ describe('Evaluation forms tests', () => {
   })
 
   // ***
-  // EDIT BEFORE EACH AFTER FOR IS ACCESSIBLE TO ALL
+  // EDIT 'BEFORE EACH' AFTER FORM IS ACCESSIBLE TO ALL
   // ***
 
   it('Can navigate to evaluation programme level form', () => {
@@ -20,7 +20,16 @@ describe('Evaluation forms tests', () => {
     cy.contains('Study programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
-    cy.contains("Bachelor's Programme in Computer Science")
+    cy.contains(testProgrammeName)
+    cy.contains('Evaluation 2023')
+  })
+
+  it('Can navigate to evaluation faculty level form', () => {
+    cy.get('[data-cy=nav-evaluation-dropdown]').click()
+    cy.contains('Faculty level').click()
+    cy.get(`[data-cy=colortable-link-to-${testFacultyCode}]`).click()
+
+    cy.contains(testFacultyName)
     cy.contains('Evaluation 2023')
   })
 })

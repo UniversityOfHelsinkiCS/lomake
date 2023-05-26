@@ -36,8 +36,8 @@ const findAnswers = (programmes, allAnswers, question) => {
     doctoral: { green: [], yellow: [], red: [], gray: [] },
   }
   programmes.forEach(({ key, level, name }) => {
-    const { data } = allAnswers.find(a => a.programme === key)
-    const light = data[`${question}_light`]
+    const answer = allAnswers.find(a => a.programme === key)
+    const light = answer?.data ? answer.data[`${question}_light`] : null
     if (light) {
       result[level][light].push(name)
     } else {
