@@ -131,6 +131,7 @@ export default {
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
     developmentArea: 'Kehittämiskohde',
     actions: 'Toimenpide-ehdotus',
+    requiredActions: 'Tarvittavat toimenpiteet',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
     evaluationInfo1:
