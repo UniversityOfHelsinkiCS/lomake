@@ -7,21 +7,20 @@ import * as _ from 'lodash'
 
 import { isAdmin } from '@root/config/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { getOldYearlyFacultyAnswersAction } from 'Utilities/redux/summaryReducer'
+import { getCurrentEvaluationFacultySummary } from 'Utilities/redux/summaryReducer'
 import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
-import { yearlyQuestions as questions } from '../../../questionData'
+import { evaluationQuestions as questions } from '../../../questionData'
 
 const getTotalWritten = ({ question, allAnswers }) => {
-  const mapped = allAnswers.map(data => {
-    const answers = data.answers.get(question.id)
-    const filteredAnswers = answers ? answers.filter(a => a.answer) : []
-    return {
-      year: data.year,
-      answers: _.sortBy(filteredAnswers, 'name'),
-    }
-  })
-  return mapped
+  if (allAnswers.length === 0) return []
+  const answers = allAnswers.answers.get(question.id)
+  const filteredAnswers = answers ? answers.filter(a => a.answer) : []
+  const mapped = {
+    year: allAnswers.year,
+    answers: _.sortBy(filteredAnswers, 'name'),
+  }
+  return [mapped]
 }
 
 const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, lang }) => {
@@ -31,7 +30,6 @@ const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, 
   const answerMap = new Map()
   const chosenKeys = usersProgrammes.map(p => p.key)
   const selectedAnswers = oldAnswers.filter(a => a.year === year)
-
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
     const key = programme.programme
@@ -50,6 +48,7 @@ const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, 
       })
     }
   })
+
   // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
   // So empty answers need to be added.
   answerMap.forEach((value, key) => {
@@ -62,11 +61,10 @@ const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, 
       })
     }
   })
-
   return answerMap
 }
 
-const PastAnswersViewFaculty = ({ programmeKey }) => {
+const ViewEvaluationAnswersForFaculty = ({ programmeKey }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -88,7 +86,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
 
   useEffect(() => {
     if (!forProgramme || !pending) {
-      dispatch(getOldYearlyFacultyAnswersAction(programmeKey, lang))
+      dispatch(getCurrentEvaluationFacultySummary(programmeKey, lang))
     }
   }, [programmeKey])
   const allAnswers = useMemo(() => {
@@ -96,30 +94,25 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
       return []
     }
 
-    const result = [2019, 2020, 2021, 2022, 2023].map(year => {
-      const data = {
-        year,
-        answers: answersByQuestions({
-          usersProgrammes: facultyProgrammes,
-          year,
-          oldAnswers: forProgramme,
-          questionsList,
-          lang,
-        }),
-      }
-      return data
-    })
-
+    const result = {
+      year: 2023,
+      answers: answersByQuestions({
+        usersProgrammes: facultyProgrammes,
+        year: 2023,
+        oldAnswers: forProgramme,
+        questionsList,
+        lang,
+      }),
+    }
     return result
   }, [forProgramme, pending, user, programmeKey])
-
   // To be removed
   if (!isAdmin(user)) return <Redirect to="/" />
   if (!programmeKey || !readAccess) return <Redirect to="/" />
   return (
     <>
       <h2>{facultyName}</h2>
-      <h3>{t('formView:yearlyFacultyAnswers')}</h3>
+      <h3>{t('formView:evaluationFacultyAnswers')}</h3>
       <Accordion fluid className="comparison-container">
         {questionsList.map(question => (
           <Question
@@ -137,4 +130,4 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
   )
 }
 
-export default PastAnswersViewFaculty
+export default ViewEvaluationAnswersForFaculty

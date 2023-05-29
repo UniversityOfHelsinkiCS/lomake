@@ -153,6 +153,8 @@ export default {
     materialsFaculty:
       'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmointikysymysten vastauksista. <br/><br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
+    evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
+    yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
   },
 
   generic: {

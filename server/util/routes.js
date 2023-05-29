@@ -22,7 +22,8 @@ router.get('/answers/degreeReform/individualUsers', answers.getIndividualFormAns
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
 router.get('/answers/forSummary/:code/:lang', answers.getFacultySummaryData)
 router.get('/answers/forSummary/:code', answers.getProgrammeSummaryData)
-router.get('/answers/faculty/forSummary/:code/:lang', answers.getOldFacultySummaryData)
+router.get('/answers/oldSummaryYearly/faculty/:code/:lang', answers.getOldFacultySummaryData)
+router.get('/answers/currentSummaryEvaluation/faculty/:code/:lang', answers.getEvaluationSummaryDataForFaculty)
 router.get('/answers/:programme', requireProgrammeRead, answers.getOne) // TO FIX route + function not in use?
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers', requireProgrammeWrite, answers.create) // TO FIX route + function not in use?

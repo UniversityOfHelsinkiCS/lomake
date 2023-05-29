@@ -16,6 +16,8 @@ import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReform
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView/ProgrammeLevel'
 import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/FacultyLevel'
+import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
+
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 
 export default () => (
@@ -56,6 +58,11 @@ export default () => (
         exact
         path="/evaluation-faculty/previous-years/:faculty"
         render={props => <PastAnswersViewFaculty programmeKey={props.match.params.faculty} />}
+      />
+      <Route
+        exact
+        path="/evaluation-faculty/programme-evaluation-summary/:faculty"
+        render={props => <ViewEvaluationAnswersForFaculty programmeKey={props.match.params.faculty} />}
       />
     </Switch>
   </div>

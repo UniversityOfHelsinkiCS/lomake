@@ -82,6 +82,7 @@ const EntityLevels = ({
   const lang = useSelector(state => state.language)
   const [showText, setShowText] = useState(false)
   const onlyBc = programme === 'H74'
+  const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${programme}`
 
   return (
     <div className="form-entity-area">
@@ -155,9 +156,14 @@ const EntityLevels = ({
         </div>
       </div>
       {form === 5 && (
-        <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-          <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
-        </Link>
+        <>
+          <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
+            <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
+          </Link>
+          <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
+            <p style={{ marginTop: '1em' }}>Kaikki katselmus-vastaukset koulutusohjelmilta</p>
+          </Link>
+        </>
       )}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={null} form={form} />
     </div>
