@@ -6,7 +6,7 @@ import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { isAdmin } from '@root/config/common'
-import { colors } from 'Utilities/common'
+import { colors, getFormViewRights } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
@@ -19,27 +19,6 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
 import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
-
-// TO FIX yearly and degree form uses same checker. refactor to common tools
-const formShouldBeViewOnly = ({
-  accessToTempAnswers,
-  programme,
-  writeAccess,
-  viewingOldAnswers,
-  draftYear,
-  year,
-  formDeadline,
-  form,
-}) => {
-  if (!accessToTempAnswers) return true
-  if (programme.locked) return true
-  if (!writeAccess) return true
-  if (viewingOldAnswers) return true
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  return false
-}
 
 const handleMeasures = (yearData, relatedQuestion) => {
   let count = 0
@@ -102,9 +81,8 @@ const EvaluationFormView = ({ room, formString }) => {
   const summaryURL = `/evaluation/previous-years/${room}`
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
-
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const readAccess = user.access || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
@@ -117,7 +95,7 @@ const EvaluationFormView = ({ room, formString }) => {
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getProgrammeOldAnswersAction(room))
     if (
-      formShouldBeViewOnly({
+      getFormViewRights({
         accessToTempAnswers,
         programme,
         writeAccess,
@@ -174,9 +152,6 @@ const EvaluationFormView = ({ room, formString }) => {
     })
     return result
   }, [room, user, summaries])
-
-  // TO FIX To be removed
-  if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room || !form) return <Redirect to="/" />
 

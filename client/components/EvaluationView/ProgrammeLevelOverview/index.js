@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
@@ -13,7 +12,6 @@ import ColorTable from '../../OverviewPage/ColorTable'
 // import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
 export default () => {
-  const history = useHistory()
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
@@ -32,20 +30,16 @@ export default () => {
     document.title = `${t('evaluation')}`
   }, [lang])
 
-  if (!isAdmin(currentUser.data)) {
-    history.push('/')
-  }
-
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)
   }
 
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return isAdmin(currentUser.data)
-      ? programmes
-      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
+    if (isAdmin(currentUser.data) || currentUser.data.access) {
+      return programmes
+    }
+    return []
   }, [programmes, currentUser.data])
 
   const filteredProgrammes = useMemo(() => {

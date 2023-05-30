@@ -114,7 +114,7 @@ export default () => {
           <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="tosca" />
         </Menu.Item>
         <GoToYearlyAssessmentButton />
-        {user.admin ? <GoToEvaluationButton /> : null}
+        <GoToEvaluationButton />
         {user.admin ? <GoToDegreeReformGroup /> : null}
         {user.admin ? <GoToDegreeReformIndividual /> : null}
         {user.admin ? <GoToAdminPageButton /> : null}

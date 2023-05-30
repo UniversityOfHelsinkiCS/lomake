@@ -10,7 +10,7 @@ import FormStatusMessage from 'Components/Generic/FormStatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { colors } from 'Utilities/common'
+import { colors, getFormViewRights } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
@@ -19,26 +19,6 @@ import Form from './Form'
 import { yearlyQuestions as questions } from '../../questionData'
 import Downloads from './Downloads'
 import './FormView.scss'
-
-const formShouldBeViewOnly = ({
-  accessToTempAnswers,
-  programme,
-  writeAccess,
-  viewingOldAnswers,
-  draftYear,
-  year,
-  formDeadline,
-  form,
-}) => {
-  if (!accessToTempAnswers) return true
-  if (programme.locked) return true
-  if (!writeAccess) return true
-  if (viewingOldAnswers) return true
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  return false
-}
 
 const FormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -71,7 +51,7 @@ const FormView = ({ room }) => {
     if (!programme) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     if (
-      formShouldBeViewOnly({
+      getFormViewRights({
         accessToTempAnswers,
         programme,
         writeAccess,
