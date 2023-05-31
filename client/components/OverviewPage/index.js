@@ -32,7 +32,6 @@ export default () => {
 
   const form = 1 // TO FIX
   const formType = 'yearlyAssessment'
-
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
@@ -47,7 +46,10 @@ export default () => {
   }
 
   const usersProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data) || currentUser.data.access) {
+    if (isAdmin(currentUser.data)) {
+      return programmes
+    }
+    if (currentUser.data.access || currentUser.specialGroup) {
       const usersPermissionsKeys = Object.keys(currentUser.data.access)
       if (!showAllProgrammes) {
         return programmes.filter(program => usersPermissionsKeys.includes(program.key))

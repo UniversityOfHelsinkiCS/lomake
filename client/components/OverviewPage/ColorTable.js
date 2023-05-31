@@ -143,14 +143,16 @@ const ColorTable = React.memo(
       <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
-          <Radio
-            style={{ marginRight: 'auto', marginBottom: '2em' }}
-            data-cy="overviewpage-filter-button"
-            toggle
-            onChange={handleShowProgrammes}
-            checked={showAllProgrammes}
-            label={t('showAllProgrammes')}
-          />
+          {!isAdmin(currentUser) ? (
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              data-cy="overviewpage-filter-button"
+              toggle
+              onChange={handleShowProgrammes}
+              checked={showAllProgrammes}
+              label={t('showAllProgrammes')}
+            />
+          ) : null}
           <Input
             style={{ marginBottom: '0.5em' }}
             data-cy="overviewpage-filter"

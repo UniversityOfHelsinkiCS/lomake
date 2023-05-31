@@ -41,7 +41,10 @@ export default () => {
   }
 
   const usersProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data) || currentUser.data.access) {
+    if (isAdmin(currentUser.data)) {
+      return programmes
+    }
+    if (currentUser.data.access || currentUser.specialGroup) {
       const usersPermissionsKeys = Object.keys(currentUser.data.access)
       if (!showAllProgrammes) {
         return programmes.filter(program => usersPermissionsKeys.includes(program.key))
