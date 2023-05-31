@@ -95,7 +95,7 @@ const DegreeReformFormView = ({ room }) => {
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
+              <Button onClick={() => history.push('/degree-reform')} icon="arrow left" />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>

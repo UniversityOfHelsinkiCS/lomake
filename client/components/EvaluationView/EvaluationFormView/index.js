@@ -153,6 +153,9 @@ const EvaluationFormView = ({ room, formString }) => {
     return result
   }, [room, user, summaries])
 
+  // TO FIX To be removed
+  if (!isAdmin(user)) return <Redirect to="/" />
+
   if (!room || !form) return <Redirect to="/" />
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
