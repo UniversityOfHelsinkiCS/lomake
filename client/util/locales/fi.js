@@ -58,6 +58,7 @@ export default {
     send: 'Lähetä',
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
+    showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

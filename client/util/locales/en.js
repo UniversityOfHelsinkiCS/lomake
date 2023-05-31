@@ -159,6 +159,7 @@ export default {
     yearlyAnswers: 'Yearly assessment answers',
     evaluationFacultyAnswers: 'Evaluation in studyprogrammes answers',
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
+    showAllProgrammes: 'Show all studyprogrammes',
   },
 
   generic: {

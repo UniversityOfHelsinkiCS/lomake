@@ -48,12 +48,12 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
 
   return (
     <React.Fragment key={p.key}>
-      <div className="table-container">
+      <div className="table-container-row-link">
         <Link data-cy={`colortable-link-to-${p.key}`} to={targetURL}>
           {p.name[lang]}
         </Link>
       </div>
-      <div className="table-container">
+      <div className="table-container-row-link">
         <Link to={targetURL}>{p.key}</Link>
       </div>
       {tableIds.map(idObject => (
