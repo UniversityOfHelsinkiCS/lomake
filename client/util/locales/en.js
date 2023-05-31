@@ -125,6 +125,7 @@ export default {
     status: {
       locked: 'The form has been locked for the selected year and it cannot be edited.',
       open: 'form is open for editing.',
+      viewOnly: "You don't have editing rights to this form. But you can view the answers.",
       canBeOpened: 'The owner of the form may still unlock the form before its deadline',
       deadlinePassed: 'The deadline to edit form has passed.',
       ospaProcessing: 'OSPA will process the answers.',
