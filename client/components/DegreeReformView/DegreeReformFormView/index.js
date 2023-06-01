@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
+import StatusMessage from 'Components/FormView/StatusMessage'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import { isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
@@ -123,6 +125,8 @@ const DegreeReformFormView = ({ room }) => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('degree-reform')} 2015-2017
           </h3>
+          <StatusMessage programme={programme} form={form} />
+          <SaveIndicator />
         </div>
         <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionDataFiltered} />
         <div style={{ height: '10em' }} />
