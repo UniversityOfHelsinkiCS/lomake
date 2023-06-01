@@ -6,6 +6,7 @@ import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
+import { isAdmin } from '@root/config/common'
 
 export default () => {
   const dispatch = useDispatch()
@@ -62,14 +63,26 @@ export default () => {
             <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
               {t('generic:level:programmes')}
             </Dropdown.Item>
-            <Dropdown.Item
-              data-cy="nav-evaluation-option-faculties"
-              as={Link}
-              to="/evaluation-faculty"
-              name="faculties"
-            >
-              {t('generic:level:faculties')}
-            </Dropdown.Item>
+            {isAdmin(user) ? (
+              <Dropdown.Item
+                data-cy="nav-evaluation-option-faculties"
+                as={Link}
+                to="/evaluation-faculty"
+                name="faculties"
+              >
+                {t('generic:level:faculties')}
+              </Dropdown.Item>
+            ) : (
+              <Dropdown.Item
+                data-cy="nav-evaluation-option-faculties"
+                //  as={Link}
+                //  to="/evaluation-faculty" FIX THIS after faculty evaluation is open
+                disabled
+                name="faculties"
+              >
+                {t('generic:level:faculties')}
+              </Dropdown.Item>
+            )}
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
