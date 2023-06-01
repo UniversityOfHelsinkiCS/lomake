@@ -39,7 +39,7 @@ const FormView = ({ room }) => {
   const currentRoom = useSelector(state => state.room)
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const readAccess = user.access || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
@@ -91,7 +91,6 @@ const FormView = ({ room }) => {
   if (!room) return <Redirect to="/" />
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
-
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
   return singleProgramPending ? (
