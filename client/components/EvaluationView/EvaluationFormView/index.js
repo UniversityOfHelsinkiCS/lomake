@@ -31,6 +31,7 @@ const formShouldBeViewOnly = ({
   formDeadline,
   form,
   room,
+  isAdmin,
 }) => {
   if (!accessToTempAnswers) return true
   if (programme.locked) return true
@@ -39,7 +40,7 @@ const formShouldBeViewOnly = ({
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
-  if (room !== 'KH70_003') return true
+  if (room !== 'KH70_003' && !isAdmin) return true
   return false
 }
 
@@ -129,6 +130,7 @@ const EvaluationFormView = ({ room, formString }) => {
         formDeadline,
         form,
         room, // Remove when full open
+        isAdmin: isAdmin(user), // Remove when full open
       })
     ) {
       dispatch(setViewOnly(true))
