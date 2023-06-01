@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       data: DataTypes.JSONB,
       year: DataTypes.INTEGER,
       form: DataTypes.INTEGER,
+      version: DataTypes.INTEGER,
     },
     {
       underscored: true,

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         field: 'submitted_by',
       },
+      version: DataTypes.INTEGER,
     },
     {
       underscored: true,
