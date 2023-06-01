@@ -41,7 +41,6 @@ To run these tests, simply execute `npm run cypress:open` and select _Run all sp
 
 ApiConnection is a custom redux middleware that is used in most toska software. It is used to simplify redux usage by wrapping axios.
 
-You can see redux example using apiConnection in client/components/MessageComponent.
 
 ### Form types
 
@@ -60,7 +59,7 @@ The current questions of the evaluation (katselmus) form can be found in **evalu
 
 ### Degree reform
 
-The current questions of the degree reform forms can be found in **degreeReformIndividualQuestions.json** and **degreeReformQuestions.json**.
+The current questions of the degree reform forms can be found in **degreeReformIndividualQuestions.json**.
 
 
 **Section**

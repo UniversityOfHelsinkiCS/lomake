@@ -1,8 +1,11 @@
 import React from 'react'
 import { Radio, Form, Input } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import './Generic.scss'
 
 const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, type, checked, handleOtherField }) => {
+  const { t } = useTranslation()
+
   const handleChange = label => {
     if (type === 'basic') {
       handleClick(label)
@@ -22,6 +25,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
             return (
               <Form.Field
                 key={`basic-radio-${id}-${o.id}`}
+                disabled={viewOnly}
                 style={
                   direction !== 'horizontal'
                     ? { display: 'flex', marginBottom: '0.2em' }
@@ -44,7 +48,6 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                   checked={isChecked(o.id)}
                   onClick={() => handleChange(o.id)}
                 />
-                {o.extraLabel ? <span style={{ marginLeft: '10em' }}>{o.extraLabel}</span> : null}
               </Form.Field>
             )
           })}
@@ -57,6 +60,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                 onChange={value => handleOtherField({ input: value, level: 2 })}
                 version="degree-reform"
                 size="small"
+                placeholder={t('what')}
               />
             </Form.Field>
           ) : null}

@@ -188,7 +188,7 @@
         "id": "ease_of_study_actions",
         "type": "ACTIONS",
         "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
           "se": "",
           "en": ""
         },
@@ -423,7 +423,7 @@
         "id": "programme_structure_actions",
         "type": "ACTIONS",
         "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TOIMENPITEET",
+          "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
           "se": "",
           "en": ""
         },

@@ -18,7 +18,7 @@ import './EvaluationForm.scss'
 import { colors } from 'Utilities/common'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
-import { facultyEvaluationQuestions as questions } from '../../../questionData'
+import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
 // TO FIX now only admin can write
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => {
@@ -36,14 +36,15 @@ const findAnswers = (programmes, allAnswers, question) => {
     doctoral: { green: [], yellow: [], red: [], gray: [] },
   }
   programmes.forEach(({ key, level, name }) => {
-    const { data } = allAnswers.find(a => a.programme === key)
-    const light = data[`${question}_light`]
+    const answer = allAnswers.find(a => a.programme === key)
+    const light = answer?.data ? answer.data[`${question}_light`] : null
     if (light) {
       result[level][light].push(name)
     } else {
       result[level].gray.push(name)
     }
   })
+  result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
   return result
 }
 
@@ -64,8 +65,8 @@ const FacultyFormView = ({ room, formString }) => {
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
+  const summaryURL = `/evaluation-faculty/previous-years/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
-
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
@@ -126,6 +127,8 @@ const FacultyFormView = ({ room, formString }) => {
 
   if (!room || !form) return <Redirect to="/" />
 
+  if (!faculty) return 'Error: Invalid url.'
+
   return (
     <>
       {singleFacultyPending ? (
@@ -177,11 +180,6 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
 
               <div className="info-container">
-                {/* <Link data-cy={`link-to-old-${room}-answers`} to={summaryURL} target="_blank">
-                  <h4 style={{ marginBottom: '0.5em' }}>
-                    Tarkastele kaikkia aiempien vuosiseurontojen vastauksia <Icon name="external" />{' '}
-                  </h4>
-                </Link> */}
                 <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
                   <h4>
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
@@ -195,6 +193,7 @@ const FacultyFormView = ({ room, formString }) => {
                 questions={questions}
                 form={form}
                 summaryData={facultyProgrammeAnswers}
+                summaryUrl={summaryURL}
               />
             </div>
           </div>

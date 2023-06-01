@@ -49,10 +49,11 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
 
   const handleOtherField = ({ input, level }) => {
     const { value } = input.target
-    if (level === 2 && value) {
+
+    if (level === 2) {
       setState({ ...state, secondValue: state.secondValue, thirdValue: value })
-    } else if (level === 1 && value) {
-      setState({ ...state, firstValue: state.firstValue, secondValue: value })
+    } else if (level === 1) {
+      setState({ firstValue: state.firstValue, secondValue: value, thirdValue: null })
     }
   }
 
@@ -89,7 +90,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
         <div style={{ height: '1em' }} />
       )}
       {radioButtonLabels ? (
-        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`}>
+        <Form key={`advanced-radio-${id}`} data-cy={`advanced-radio-${id}`} disabled={viewOnly}>
           {radioButtonLabels.map(o => {
             return (
               <div key={`${id}-${o.id}`}>
@@ -126,7 +127,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               handleFilterChange={handleClick}
               version="degree-reform"
               size="small"
-              label={t('comparison:filterFaculties')}
+              label={t('chooseFaculty')}
               selectedRadio={state}
               disabled={viewOnly}
             />
@@ -139,6 +140,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               version="degree-reform"
               size="small"
               disabled={viewOnly}
+              placeholder={t('what')}
             />
           ) : null}
         </Form>

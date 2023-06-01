@@ -179,6 +179,10 @@ const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
 
+const testFacultyCode = 'H50'
+
+const testFacultyName = 'Faculty of Science'
+
 const testIAM = 'hy-mltdk-tkt-jory'
 
 module.exports = {
@@ -200,6 +204,8 @@ module.exports = {
   isInternationalUser,
   testProgrammeCode,
   testProgrammeName,
+  testFacultyCode,
+  testFacultyName,
   testIAM,
   LOMAKE_SINCE_YEAR,
   getYearsArray,

@@ -209,17 +209,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Tutkimusperustaisuus",
-          "se": "Tutkimusperustaisuus",
+          "se": "Forskningsgrund",
           "en": "Research-based"
         },
         "label": {
           "fi": "TUTKIMUSPERUSTAISUUS JA TIEDEYHTEISÖÖN KUULUMINEN",
-          "se": "TUTKIMUSPERUSTAISUUS JA TIEDEYHTEISÖÖN KUULUMINEN",
+          "se": "FORSKNINGSGRUND OCH TILLHÖRIGHET TILL VETENSKAPSSAMHÄLLET",
           "en": "A RESEARCH-BASED APPROACH AND MEMBERSHIP IN THE ACADEMIC COMMUNITY"
         },
         "description": {
           "fi": "Miten toteutatte tutkimusperustaisuutta koulutusohjelmassanne käytännössä? Miten tuette koulutusohjelmassanne opiskelijoiden kuulumista tiedeyhteisöön?",
-          "se": "Miten toteutatte tutkimusperustaisuutta koulutusohjelmassanne käytännössä? Miten tuette koulutusohjelmassanne opiskelijoiden kuulumista tiedeyhteisöön?",
+          "se": "Hur förverkligas förankringen i forskningsbaserad kunskap vid utbildningsprogrammet? Hur stöder ni vid ert utbildningsprogram studenternas tillhörighet till vetenskapssamhället?",
           "en": "How does your degree programme implement the research-based approach in practice? How does your degree programme support student membership in the academic community?"
         },
         "required": true,
@@ -261,23 +261,23 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opiskelijapalaute",
-          "se": "Respons",
+          "se": "Studentrespons",
           "en": "Student feedback"
         },
         "label": {
           "fi": "OPISKELIJAPALAUTTEEN HYÖDYNTÄMINEN",
-          "se": "ANVÄNDNING AV RESPONS",
+          "se": "ANVÄNDNING AV STUDENTRESPONS",
           "en": "USE OF STUDENT FEEDBACK"
         },
         "description": {
           "fi": "Mitä eri palautteita ohjelmassa hyödynnetään ja miten? Miten eri tavoin kerätyt palautteet on käsitelty koulutusohjelmassa? Ketkä ovat osallistuneet palautteiden käsittelyyn? Mitä muutoksia palautteista on seurannut? Annetaanko opiskelijoille vastapalautetta? Miten opiskelijoille ja henkilökunnalle tiedotetaan palautteen perusteella tehdyistä muutoksista?",
-          "se": "Hur fungerar användningen av respons? Hur har responsen som insamlats på olika sätt behandlats vid utbildningsprogrammet? Av vem har responsen behandlats? Vilka ändringar har responsen gett upphov till?",
+          "se": "Vilka typer av respons använder sig programmet av och hur? Hur har responsen som samlats in på olika sätt behandlats vid utbildningsprogrammet? Av vem har responsen behandlats? Vilka ändringar har responsen gett upphov till? Ges studenterna svarsrespons? Hur informeras studenterna och de anställda om ändringarna som gjorts på basis av responsen?",
           "en": "What types of feedback does the programme use and how? How has the feedback collected been processed in the degree programme? Who has participated in processing the feedback? What changes have been made based on the feedback? Do you respond to student feedback? How are students and staff informed of changes made based on the feedback?"
         },
         "required": true,
         "extrainfo": {
           "fi": "Kysymystä on muokattu vuonna 2023",
-          "se": "Frågan har redigerats år 2023",
+          "se": "Frågan har modifierats år 2023",
           "en": "Question has been edited in 2023"
         }
       },
@@ -287,17 +287,17 @@
         "type": "SELECTION",
         "shortLabel": {
           "fi": "Palautejärjestelmät",
-          "se": "Palautejärjestelmät",
+          "se": "Responssystem",
           "en": "Feedback systems"
         },
         "label": {
           "fi": "KÄYTETYT PALAUTEJÄRJESTELMÄT",
-          "se": "KÄYTETYT PALAUTEJÄRJESTELMÄT",
+          "se": "RESPONSSYSTEM SOM ANVÄNDS",
           "en": "FEEDBACK SYSTEMS IN USE"
         },
         "description": {
           "fi": "Mitä seuraavista palautejärjestelmistä johtoryhmässä on käytetty viimeisen vuoden aikana?",
-          "se": "Mitä seuraavista palautejärjestelmistä johtoryhmässä on käytetty viimeisen vuoden aikana?",
+          "se": "Vilka av följande responssystem har ledningsgruppen använt under det senaste året?",
           "en": "Which of the following feedback systems has the steering group used in the past year?"
         },
         "required": true,
@@ -320,7 +320,7 @@
           },
           "kandipalaute": {
             "fi": "Kandipalaute",
-            "se": "Kandipalaute",
+            "se": "Kandidatrespons",
             "en": "Bachelor's Graduate Survey"
           },
           "thessa": {
@@ -335,7 +335,7 @@
           },
           "uraseuranta": {
             "fi": "Uraseuranta",
-            "se": "Uraseuranta",
+            "se": "Karriäruppföljning",
             "en": "Career monitoring"
           }
         }
@@ -346,7 +346,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Miten palautejärjestelmätietoja on hyödynnetty?",
-          "se": "Miten palautejärjestelmätietoja on hyödynnetty?",
+          "se": "Hur har responssystemens uppgifter utnyttjats?",
           "en": "How has the information obtained been used?"
         },
         "required": false,
@@ -363,7 +363,7 @@
         "type": "ORDER",
         "label": {
           "fi": "Mitkä palautejärjestelmistä on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
-          "se": "Mitkä palautejärjestelmistä on koettu hyödyllisimmiksi? Merkitkää 1-3 tärkeintä.",
+          "se": "Vilket responssystem upplevde ni att var det mest användbara? Välj de 1-3 som varit mest användbara.",
           "en": "Which feedback systems have been deemed most useful? Select up to three most important systems."
         },
         "required": false,

@@ -59,6 +59,8 @@ export default {
     'read-less': 'Lue vähemmän',
     otherTextBox: 'Muu, mikä?',
     send: 'Lähetä',
+    what: 'Mikä',
+    chooseFaculty: 'Valitse tiedekunta',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -132,6 +134,7 @@ export default {
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
     developmentArea: 'Kehittämiskohde',
     actions: 'Toimenpide-ehdotus',
+    requiredActions: 'Tarvittavat toimenpiteet',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
     evaluationInfo1:
@@ -145,14 +148,16 @@ export default {
     materials: 'Taustamateriaali',
     materialsProg:
       'Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.<br/> Lisäksi tässä lomakkeessa on usean kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä vuodelta kyseiseen teemaan liittyvien vuosiseurantakysymysten vastauksista. <br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä koulutusohjelma- että tiedekuntatason näkymään.',
-    summaryLinkProg: 'Tarkastele kaikkia aiempien vuosiseurontojen vastauksia',
-    oodikoneProg: 'Tarkastele koulutusohjelman tietoja Oodikonessa',
-    oodikoneFaculty: 'Tarkastele tiedekunnan tietoja Oodikonessa',
+    summaryLinkProg: 'Tarkastelkaa kaikkia aiempien vuosiseurontojen vastauksia',
+    oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
+    oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
     facultyInfo:
       'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
     materialsFaculty:
       'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmointikysymysten vastauksista. <br/><br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
+    evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
+    yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
   },
 
   generic: {

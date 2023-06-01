@@ -63,6 +63,8 @@ export default {
     'read-less': 'Read less',
     otherTextBox: 'Other, please specify',
     send: 'Send',
+    what: 'What',
+    chooseFaculty: 'Choose faculty',
   },
 
   aboutPage: {
@@ -136,6 +138,7 @@ export default {
     mostUseful: 'Most useful feedback systems',
     developmentArea: 'Development area',
     actions: 'Suggestion for corrective actions',
+    requiredActions: 'Actions required',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     evaluationInfo1:
@@ -157,6 +160,8 @@ export default {
     materialsFaculty:
       'Most questions in this form are accompanied by a summary of the answers given to the same theme by the studyprogramme steering groups of the faculty. <br/><br/> A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of your faculty, and about the progress of their studies. Link shown below.',
     yearlyAnswers: 'Yearly assessment answers',
+    evaluationFacultyAnswers: 'Evaluation in studyprogrammes answers',
+    yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
   },
 
   generic: {
