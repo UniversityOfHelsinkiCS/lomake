@@ -9,8 +9,8 @@ describe('Evaluation forms tests', () => {
     // ADD THESE WHEN FORM OPENED TO ALL
     // const user = 'cypressUser'
     // cy.login(user)
-    const superAdmin = 'cypressSuperAdminUser'
-    cy.login(superAdmin)
+    const cypressOspa = 'cypressOspaUser'
+    cy.login(cypressOspa)
     cy.visit('/')
   })
 
