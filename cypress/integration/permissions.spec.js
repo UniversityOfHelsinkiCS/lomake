@@ -46,12 +46,15 @@ describe('Permission tests', () => {
 
   it('Can do management with ADMIN permissions', () => {
     cy.visit('/')
+    cy.login(cypressOspaUser)
+
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get('[data-cy^=formLocker-button]')
   })
 
   it('Can see programme jory IAM-group with ADMIN permissions', () => {
     cy.visit('/')
+    cy.login(cypressOspaUser)
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.contains(testIAM)
 
@@ -63,8 +66,8 @@ describe('Permission tests', () => {
   it("Can see users' deducted role with ADMIN permissions", () => {
     cy.visit('/')
     cy.get('[data-cy=nav-admin]').should('not.exist')
-
     cy.login(cypressOspaUser)
+
     cy.visit('/admin')
     cy.get('[data-cy=cypressOspaUser-userRole]').contains('Ospa-ryhmä')
     cy.get('[data-cy=cypressReadingRightsUser-userRole]').contains('Johtoryhmän jäsen')
