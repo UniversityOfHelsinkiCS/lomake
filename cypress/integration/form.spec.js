@@ -73,7 +73,7 @@ describe('Yearly assessment form tests', () => {
     cy.reload()
     cy.visit('/')
 
-    cy.login('admin')
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
 
     // open another form
@@ -98,7 +98,7 @@ describe('Yearly assessment form tests', () => {
   })
 
   it("Closing a form and doesn't affect other forms' data", () => {
-    cy.login('admin')
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
     // check page is ready
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
@@ -120,7 +120,7 @@ describe('Yearly assessment form tests', () => {
     cy.reload()
     cy.visit('/')
 
-    cy.login('admin')
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
     // check page is ready
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
