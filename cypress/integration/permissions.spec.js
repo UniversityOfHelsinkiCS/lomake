@@ -45,16 +45,16 @@ describe('Permission tests', () => {
   })
 
   it('Can do management with ADMIN permissions', () => {
-    cy.visit('/')
     cy.login(cypressOspaUser)
+    cy.visit('/')
 
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get('[data-cy^=formLocker-button]')
   })
 
   it('Can see programme jory IAM-group with ADMIN permissions', () => {
-    cy.visit('/')
     cy.login(cypressOspaUser)
+    cy.visit('/')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.contains(testIAM)
 
