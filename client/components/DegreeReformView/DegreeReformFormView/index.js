@@ -26,6 +26,7 @@ const formShouldBeViewOnly = ({
   year,
   form,
   formDeadline,
+  isAdmin,
 }) => {
   if (!accessToTempAnswers) return true
   if (programme.locked) return true
@@ -34,6 +35,7 @@ const formShouldBeViewOnly = ({
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
+  if (!isAdmin) return false
   return false
 }
 
@@ -80,6 +82,7 @@ const DegreeReformFormView = ({ room }) => {
         year,
         formDeadline,
         form,
+        isAdmin: isAdmin(user),
       })
     ) {
       dispatch(setViewOnly(true))
@@ -100,8 +103,6 @@ const DegreeReformFormView = ({ room }) => {
     room,
     user,
   ])
-
-  if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room) return <Redirect to="/" />
 
