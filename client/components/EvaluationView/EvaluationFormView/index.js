@@ -40,7 +40,7 @@ const formShouldBeViewOnly = ({
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
-  if (room !== 'KH70_003' && !isAdmin) return true
+  if ((room !== 'KH70_003' && !isAdmin) || (room !== 'KH50_005' && !isAdmin)) return true
   return false
 }
 
