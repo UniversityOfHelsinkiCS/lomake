@@ -3,9 +3,8 @@ const { isAdmin, isSuperAdmin } = require('@root/config/common')
 const logger = require('@util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
-  const { programme } = req.params
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (req.user.access[programme] && req.user.access[programme].read) next()
+  else if (Object.values(req.user?.access || {}).some(a => a.read)) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
