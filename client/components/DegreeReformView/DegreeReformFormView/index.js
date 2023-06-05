@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 
-import { isAdmin } from '@root/config/common'
+import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import { colors, getFormViewRights } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
@@ -36,7 +36,7 @@ const DegreeReformFormView = ({ room }) => {
   const year = 2023
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const viewingOldAnswers = false
 
