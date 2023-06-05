@@ -50,23 +50,29 @@ const getSingleProgrammesAnswers = async (req, res) => {
     const draftYear = draftYears.length ? draftYears[0].year : null
 
     let data = null
-    // TO FIX comparing number to string = never happens
-    // How does everything still work?
-    if (draftYear && draftYear === year) {
+
+    if (draftYear && draftYear === Number(year)) {
       data = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme, year: draftYear, form }],
+          programme,
+          year: draftYear,
+          form,
         },
       })
     } else {
       data = await db.answer.findOne({
         where: {
-          [Op.and]: [{ programme, year, form }],
+          programme,
+          year,
+          form,
         },
       })
     }
 
-    const result = data ? data.data : {}
+    const result = {
+      ...data?.data,
+      ready: data?.ready,
+    }
 
     return res.status(200).json(result)
   } catch (error) {
@@ -351,6 +357,29 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
   }
 }
 
+const updateAnswerReady = async (req, res) => {
+  const { programme, form, year } = req.params
+  const { ready } = req.body
+  if (!form || !year || !programme) return res.sendStatus(400)
+
+  try {
+    const tempAnswer = await db.tempAnswer.findOne({
+      where: {
+        programme,
+        form,
+        year,
+      },
+    })
+
+    tempAnswer.ready = Boolean(ready)
+    await tempAnswer.save()
+    return res.send(tempAnswer)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   create,
@@ -365,4 +394,5 @@ module.exports = {
   getProgrammeSummaryData,
   getOldFacultySummaryData,
   getEvaluationSummaryDataForFaculty,
+  updateAnswerReady,
 }

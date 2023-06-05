@@ -9,9 +9,10 @@ import YearSelector from 'Components/Generic/YearSelector'
 import FormStatusMessage from 'Components/Generic/FormStatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleProgrammesAnswers, updateAnswersReady } from 'Utilities/redux/formReducer'
 import { colors, getFormViewRights } from 'Utilities/common'
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
+import ReadyToggle from 'Components/Generic/ReadyToggle'
 import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
@@ -36,10 +37,13 @@ const FormView = ({ room }) => {
   const user = useSelector(state => state.currentUser.data)
   const year = useSelector(state => state.filters.year)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
+  const ready = useSelector(state => state.form.ready)
   const currentRoom = useSelector(state => state.room)
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
+
+  const handleReadyToggle = () => dispatch(updateAnswersReady({ room, year, form, ready: !ready }))
 
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
@@ -137,6 +141,7 @@ const FormView = ({ room }) => {
         </div>
         <Downloads programme={programme} componentRef={componentRef} />
         <Form programmeKey={programme.key} questions={questions} form={form} />
+        {writeAccess && !viewingOldAnswers && <ReadyToggle ready={ready} handleClick={handleReadyToggle} />}
       </div>
     </div>
   )

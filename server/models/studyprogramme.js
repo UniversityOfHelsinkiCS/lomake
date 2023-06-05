@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       key: DataTypes.STRING,
       name: DataTypes.JSONB,
       locked: DataTypes.BOOLEAN,
-      claimed: DataTypes.BOOLEAN,
+      claimed: DataTypes.BOOLEAN, // what the hell is this? (Jukka) (I don't know, but it's not used anywhere) (Jussi) (I removed it (Jukka)) (Jussi) (I added it back (Jukka)) (who the hell is Jukka?) (Jussi)
       level: DataTypes.STRING,
       international: DataTypes.BOOLEAN,
       primaryFacultyId: DataTypes.INTEGER,
