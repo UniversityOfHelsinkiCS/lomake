@@ -6,7 +6,7 @@ import '../support/commands'
 
 describe('Degree reform form tests', () => {
   beforeEach(() => {
-    cy.login('admin')
+    cy.login('cypressSuperAdminUser')
     cy.visit('/')
   })
 

@@ -6,7 +6,7 @@ import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { isAdmin } from '@root/config/common'
-import { colors, getFormViewRights } from 'Utilities/common'
+import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
@@ -19,6 +19,30 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 import EvaluationForm from './EvaluationForm'
 
 import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
+
+// TO FIX yearly and degree form uses same checker. refactor to common tools
+const formShouldBeViewOnly = ({
+  accessToTempAnswers,
+  programme,
+  writeAccess,
+  viewingOldAnswers,
+  draftYear,
+  year,
+  formDeadline,
+  form,
+  room,
+  isAdmin,
+}) => {
+  if (!accessToTempAnswers) return true
+  if (programme.locked) return true
+  if (!writeAccess) return true
+  if (viewingOldAnswers) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
+  if ((room !== 'KH70_003' && !isAdmin) || (room !== 'KH50_005' && !isAdmin)) return true
+  return false
+}
 
 const handleMeasures = (yearData, relatedQuestion) => {
   let count = 0
@@ -95,7 +119,7 @@ const EvaluationFormView = ({ room, formString }) => {
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getProgrammeOldAnswersAction(room))
     if (
-      getFormViewRights({
+      formShouldBeViewOnly({
         accessToTempAnswers,
         programme,
         writeAccess,
@@ -104,6 +128,8 @@ const EvaluationFormView = ({ room, formString }) => {
         year,
         formDeadline,
         form,
+        room, // Remove when full open
+        isAdmin: isAdmin(user), // Remove when full open
       })
     ) {
       dispatch(setViewOnly(true))
@@ -152,9 +178,6 @@ const EvaluationFormView = ({ room, formString }) => {
     })
     return result
   }, [room, user, summaries])
-
-  // TO FIX To be removed
-  if (!isAdmin(user)) return <Redirect to="/" />
 
   if (!room || !form) return <Redirect to="/" />
 

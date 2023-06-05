@@ -2,13 +2,13 @@ const ITEM_NAME = 'fakeUser'
 
 const possibleUsers = [
   {
-    uid: 'admin',
+    uid: 'cypressSuperAdminUser',
     employeeNumber: undefined,
-    givenName: 'adminEtunimi',
+    givenName: 'superAdmin',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
     hyGroupCn: 'grp-toska',
-    sn: 'admin',
+    sn: 'cypressSuperAdminUser',
   },
   {
     uid: 'cypressReadingRightsUser',

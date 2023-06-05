@@ -84,7 +84,7 @@ const resetForm = async () => {
     // clean individual user test inputs
     await db.tempAnswer.destroy({
       where: {
-        programme: 'admin',
+        programme: 'cypressSuperAdminUser',
       },
     })
   } catch (error) {
@@ -104,7 +104,7 @@ const resetAnswers = async () => {
     // clean individual user test inputs
     await db.answer.destroy({
       where: {
-        programme: 'admin',
+        programme: 'cypressSuperAdminUser',
       },
     })
   } catch (error) {

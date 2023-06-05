@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { useHistory } from 'react-router'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -14,7 +13,6 @@ import ColorTable from '../../OverviewPage/ColorTable'
 
 export default () => {
   const { t } = useTranslation()
-  const history = useHistory()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   // To FIX implement both next two at some point
@@ -32,11 +30,6 @@ export default () => {
   useEffect(() => {
     document.title = `${t('evaluation')}`
   }, [lang])
-
-  // TO FIX remove admin requirement
-  if (!isAdmin(currentUser.data)) {
-    history.push('/')
-  }
 
   const handleFilterChange = ({ target }) => {
     const { value } = target
