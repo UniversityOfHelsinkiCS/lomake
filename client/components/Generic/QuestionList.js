@@ -9,6 +9,8 @@ import './Generic.scss'
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const lang = useSelector(state => state.language)
+
   const questions = useSelector(({ filters }) => filters.questions)
 
   const getLabel = question => {
@@ -21,7 +23,7 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
 
   useEffect(() => {
     dispatch(setQuestions({ selected: questionLabels, open: [] }))
-  }, [])
+  }, [lang])
 
   const addToList = (_, { value }) => {
     dispatch(setQuestions({ selected: value, open: [] }))

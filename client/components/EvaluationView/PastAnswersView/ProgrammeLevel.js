@@ -115,9 +115,6 @@ const PastAnswersView = ({ programmeKey }) => {
     return result
   }, [forProgramme, pending, user, programmeKey])
 
-  // To be removed
-  if (!isAdmin(user)) return <Redirect to="/" />
-
   if (!programmeKey || !readAccess) return <Redirect to="/" />
 
   return (
