@@ -11,7 +11,7 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { colors, getFormViewRights } from 'Utilities/common'
-import { isAdmin } from '@root/config/common'
+import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
 import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
@@ -39,7 +39,8 @@ const FormView = ({ room }) => {
   const currentRoom = useSelector(state => state.room)
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = user.access || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
+
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
-import { isAdmin } from '@root/config/common'
+import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import { colors } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
@@ -106,7 +106,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = user.access || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
 
   useEffect(() => {
