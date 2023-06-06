@@ -28,10 +28,11 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     // Get all answers user has some access to
     // And get all answers that are ready
     const accessibleProgrammes = Object.keys(access)
+    const hasAnyAccess = accessibleProgrammes.length > 0
 
     const data = await db.tempAnswer.findAll({
       where: {
-        [Op.or]: [{ programme: accessibleProgrammes }, { ready: true }],
+        [Op.or]: [{ programme: accessibleProgrammes }, hasAnyAccess ? { ready: true } : {}],
         year: await whereDraftYear(),
       },
     })
