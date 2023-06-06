@@ -23,17 +23,23 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       })
       return res.status(200).json(data)
     }
+
     const { access } = req.user
-    const now = new Date()
+    // Get all answers user has some access to
+    // And get all answers that are ready
+    const accessibleProgrammes = Object.keys(access)
+
     const data = await db.tempAnswer.findAll({
       where: {
-        [Op.and]: [{ programme: Object.keys(req.user.access) }, { year: await whereDraftYear() }],
+        [Op.or]: [{ programme: accessibleProgrammes }, { ready: true }],
+        year: await whereDraftYear(),
       },
     })
+
     // If the programme access has a year-limit on answers
     // filter out the ones, that are before that time
     const yearFilter = (answer, access) =>
-      access[answer.programme].year ? now.getFullYear() === access[answer.programme].year : true
+      access[answer.programme].year ? new Date().getFullYear() === access[answer.programme].year : true
 
     const filteredAnswers = data.filter(answer => yearFilter(answer, access))
     return res.status(200).json(filteredAnswers)
