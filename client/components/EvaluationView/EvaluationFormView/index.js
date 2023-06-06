@@ -33,6 +33,7 @@ const formShouldBeViewOnly = ({
   room,
   isAdmin,
 }) => {
+  const pilots = ['KH70_003', 'KH50_005', 'KH70_001']
   if (!accessToTempAnswers) return true
   if (programme.locked) return true
   if (!writeAccess) return true
@@ -40,7 +41,7 @@ const formShouldBeViewOnly = ({
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
-  if ((room !== 'KH70_003' && !isAdmin) || (room !== 'KH50_005' && !isAdmin)) return true
+  if (room && !pilots.includes(room) && !isAdmin) return true
   return false
 }
 
