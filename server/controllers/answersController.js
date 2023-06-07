@@ -58,6 +58,9 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   }
 }
 
+/**
+ * Note: programme may mean a single programme or a faculty (who fixed this? :D) -Joni
+ */
 const getSingleProgrammesAnswers = async (req, res) => {
   try {
     const { programme, form, year } = req.params
@@ -106,7 +109,7 @@ const getIndividualFormAnswers = async (req, res) => {
     const data = await db.answer.findOne({
       where: {
         programme: uid,
-        form: 3,
+        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
       },
     })
 
@@ -227,7 +230,7 @@ const getFacultySummaryData = async (req, res) => {
 
     const answers = await db.tempAnswer.findAll({
       where: {
-        form: 4,
+        form: formKeys.EVALUATION_PROGRAMMES,
         year: 2023,
         programme: codes,
       },
@@ -252,7 +255,7 @@ const getProgrammeSummaryData = async (req, res) => {
 
     const answers = await db.answer.findAll({
       where: {
-        form: 1,
+        form: formKeys.YEARLY_ASSESSMENT,
         year: years,
         programme: code,
       },
@@ -261,7 +264,7 @@ const getProgrammeSummaryData = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: code,
         },
@@ -299,7 +302,7 @@ const getOldFacultySummaryData = async (req, res) => {
     const codes = programmes.map(p => p.key)
     const answers = await db.answer.findAll({
       where: {
-        form: 1,
+        form: formKeys.YEARLY_ASSESSMENT,
         year: years,
         programme: codes,
       },
@@ -310,7 +313,7 @@ const getOldFacultySummaryData = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: codes,
         },
@@ -319,7 +322,7 @@ const getOldFacultySummaryData = async (req, res) => {
     } else {
       const latestAnswers = await db.answer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: codes,
         },
@@ -352,7 +355,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findAll({
         where: {
-          form: 4,
+          form: formKeys.EVALUATION_PROGRAMMES,
           year: 2023,
           programme: codes,
         },
@@ -361,7 +364,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
     } else {
       const latestAnswers = await db.answer.findAll({
         where: {
-          form: 4,
+          form: formKeys.EVALUATION_PROGRAMMES,
           year: 2023,
           programme: codes,
         },
