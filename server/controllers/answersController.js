@@ -15,35 +15,29 @@ const getAll = async (_, res) => {
 
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
-    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
+    const { access } = req.user
+    // Get all answers if user has ANY access (this is LINJAUS with 95% certainty)
+    const accessibleProgrammes = Object.keys(access)
+    const hasAnyAccess = accessibleProgrammes.length > 0
+
+    if (hasAnyAccess || isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.tempAnswer.findAll({
         where: {
           year: await whereDraftYear(),
         },
       })
-      return res.status(200).json(data)
+
+      // If the programme access has a year-limit on answers
+      // filter out the ones, that are before that time
+      const yearFilter = (answer, access) =>
+        access[answer.programme]?.year ? new Date().getFullYear() === access[answer.programme].year : true
+
+      const filteredAnswers = data.filter(answer => yearFilter(answer, access))
+
+      return res.status(200).json(filteredAnswers)
     }
 
-    const { access } = req.user
-    // Get all answers user has some access to
-    // And get all answers that are ready
-    const accessibleProgrammes = Object.keys(access)
-    const hasAnyAccess = accessibleProgrammes.length > 0
-
-    const data = await db.tempAnswer.findAll({
-      where: {
-        [Op.or]: [{ programme: accessibleProgrammes }, hasAnyAccess ? { ready: true } : {}],
-        year: await whereDraftYear(),
-      },
-    })
-
-    // If the programme access has a year-limit on answers
-    // filter out the ones, that are before that time
-    const yearFilter = (answer, access) =>
-      access[answer.programme].year ? new Date().getFullYear() === access[answer.programme].year : true
-
-    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
-    return res.status(200).json(filteredAnswers)
+    return res.status(200).json([])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
