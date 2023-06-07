@@ -2,6 +2,16 @@ const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
+const { formKeys } = require('@root/config/data')
+
+/**
+ * The LINJAUS function: if user has ANY access, they can see all programmes' answers
+ */
+const hasAnyAccess = user => {
+  const { access } = user
+  const accessibleProgrammes = Object.keys(access)
+  return accessibleProgrammes.length > 0
+}
 
 const getAll = async (_, res) => {
   try {
@@ -15,29 +25,33 @@ const getAll = async (_, res) => {
 
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
-    const { access } = req.user
-    // Get all answers if user has ANY access (this is LINJAUS with 95% certainty)
-    const accessibleProgrammes = Object.keys(access)
-    const hasAnyAccess = accessibleProgrammes.length > 0
-
-    if (hasAnyAccess || isAdmin(req.user) || isSuperAdmin(req.user)) {
+    // admin route
+    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.tempAnswer.findAll({
         where: {
           year: await whereDraftYear(),
         },
       })
-
-      // If the programme access has a year-limit on answers
-      // filter out the ones, that are before that time
-      const yearFilter = (answer, access) =>
-        access[answer.programme]?.year ? new Date().getFullYear() === access[answer.programme].year : true
-
-      const filteredAnswers = data.filter(answer => yearFilter(answer, access))
-
-      return res.status(200).json(filteredAnswers)
+      return res.status(200).json(data)
     }
 
-    return res.status(200).json([])
+    // normal user route
+    const anyAccess = hasAnyAccess(req.user)
+    const data = await db.tempAnswer.findAll({
+      where: {
+        year: await whereDraftYear(),
+        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
+      },
+    })
+
+    // If the programme access has a year-limit on answers
+    // filter out the ones, that are before that time
+    const yearFilter = (answer, access) =>
+      access[answer.programme]?.year ? new Date().getFullYear() === access[answer.programme].year : true
+
+    const filteredAnswers = data.filter(answer => yearFilter(answer, req.user.access))
+
+    return res.status(200).json(filteredAnswers)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -111,17 +125,20 @@ const getAllUserHasAccessTo = async (req, res) => {
       const data = await db.answer.findAll({})
       return res.status(200).json(data)
     }
+
+    const anyAccess = hasAnyAccess(req.user)
     const { access } = req.user
+    // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
     const data = await db.answer.findAll({
       where: {
-        programme: Object.keys(access),
+        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
       },
     })
 
-    // If the programme access has a year-limit on answers
+    // If the programme access has a year-limit on answers // DELETE THIS 🔫
     // filter out the ones, that are before that time
     const yearFilter = (answer, access) =>
-      access[answer.programme].year ? answer.year === access[answer.programme].year : true
+      access[answer.programme]?.year ? answer.year === access[answer.programme].year : true
 
     const filteredAnswers = data.filter(answer => yearFilter(answer, access))
     return res.status(200).json(filteredAnswers)
@@ -136,7 +153,7 @@ const getOne = async (req, res) => {
     const data = await db.answer.findAll({
       limit: 1,
       where: {
-        programme: req.params.programme, // Might have to switch to some kind of id, not sure how well full string works with urls.
+        programme: req.params.programme,
       },
       order: [['createdAt', 'DESC']],
     })
