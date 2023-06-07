@@ -75,20 +75,18 @@ const getSingleProgrammesAnswers = async (req, res) => {
   }
 }
 
-const getIndividualFormAnswers = async (req, res) => {
+const getIndividualFormAnswerForUser = async (req, res) => {
   try {
-    // if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-    //   const data = await db.answer.findAll({ where: { form: 3 } })
-    //   return res.status(200).json(data)
-    // }
     const { uid } = req.user
     const data = await db.answer.findOne({
       where: {
-        programme: uid,
+        programme: {
+          [Op.startsWith]: uid,
+        },
         form: 3,
       },
+      order: [['updated_at', 'DESC']],
     })
-
     const result = data?.data || {}
 
     return res.status(200).json(result)
@@ -98,32 +96,14 @@ const getIndividualFormAnswers = async (req, res) => {
   }
 }
 
-const postIndividualFormAnswer = async (req, res) => {
+const getAllIndividualAnswersForUser = async (req, res) => {
   try {
     const { uid } = req.user
-    const { data, formNumber } = req.body
-    const result = await db.answer.create({
-      programme: uid,
-      data,
-      form: formNumber,
-      year: new Date().getFullYear(),
-      submittedBy: uid,
-    })
-
-    return res.status(200).json(result)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const getAllAnswersForUser = async (req, res) => {
-  try {
-    const { uid } = req.user
-
     const data = await db.answer.findAll({
       where: {
-        programme: uid,
+        programme: {
+          [Op.startsWith]: uid,
+        },
         form: 3,
       },
     })
@@ -132,7 +112,6 @@ const getAllAnswersForUser = async (req, res) => {
     if (data?.length > 1) {
       result = data[data.length - 1]
     }
-
     return res.status(200).json(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -393,6 +372,74 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
   }
 }
 
+const removeIndividualFormBackupForUser = async (req, res) => {
+  const { previousVersion } = req.params
+
+  try {
+    db.backupAnswer.destroy({
+      where: {
+        [Op.and]: [{ programme: previousVersion }, { form: 3 }],
+      },
+    })
+    return res.status(200)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const removeIndividualFormTempForUser = async (req, res) => {
+  const { previousVersion } = req.params
+
+  try {
+    db.tempAnswer.destroy({
+      where: {
+        [Op.and]: [{ programme: previousVersion }, { form: 3 }],
+      },
+    })
+    return res.status(200)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const postIndividualFormAnswer = async (req, res) => {
+  const { data } = req.body
+  const { uid } = req.user
+  let previousAnswers = []
+
+  const allAnswers = await db.answer.findAll({
+    where: {
+      programme: {
+        [Op.startsWith]: uid,
+      },
+      form: 3,
+    },
+  })
+
+  previousAnswers = previousAnswers.concat(allAnswers)
+
+  try {
+    const answer = {
+      programme: `${uid}-${previousAnswers.length}`,
+      data,
+      year: new Date().getFullYear(),
+      form: 3,
+      submittedBy: uid,
+    }
+    const savedAnswer = await db.answer.create(answer)
+    if (previousAnswers.length > 0) {
+      removeIndividualFormBackupForUser(`${uid}-${previousAnswers[previousAnswers.length - 1]}`)
+      removeIndividualFormTempForUser(`${uid}-${previousAnswers[previousAnswers.length - 1]}`)
+    }
+    return res.status(200).json(savedAnswer)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   create,
@@ -400,11 +447,11 @@ module.exports = {
   getPreviousYear,
   bulkCreate,
   getAllTempUserHasAccessTo,
-  getIndividualFormAnswers,
+  getIndividualFormAnswerForUser,
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
   postIndividualFormAnswer,
-  getAllAnswersForUser,
+  getAllIndividualAnswersForUser,
   getFacultySummaryData,
   getProgrammeSummaryData,
   getOldFacultySummaryData,

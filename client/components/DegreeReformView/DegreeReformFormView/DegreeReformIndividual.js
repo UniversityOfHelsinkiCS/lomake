@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-// import { Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-// import { isAdmin } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -13,7 +13,7 @@ import {
   setViewOnly,
   getSingleUsersAnswers,
   postIndividualFormAnswer,
-  getAllAnswersForUser,
+  getAllIndividualAnswersForUser,
   clearFormState,
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
@@ -56,7 +56,7 @@ const DegreeReformIndividual = () => {
 
   useEffect(() => {
     dispatch(getSingleUsersAnswers())
-    dispatch(getAllAnswersForUser())
+    dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
@@ -66,18 +66,18 @@ const DegreeReformIndividual = () => {
       dispatch(wsJoinRoom(uid, formNumber))
       dispatch(setViewOnly(false))
     }
-  }, [year, draftYear, user, formDeadline])
+  }, [year, draftYear, user, formDeadline, modalOpen, currentRoom])
 
   const handleSendingForm = async () => {
-    dispatch(postIndividualFormAnswer(formData.data, formNumber))
-    // answers-table modify programme from uuid to uuid-[increment]
-    // Clear temp answers from db
-    // clear backup answers from db
+    dispatch(postIndividualFormAnswer(formData.data))
     dispatch(clearFormState())
     setModalOpen(false)
   }
 
-  // if (!isAdmin(user)) return <Redirect to="/" />
+  if (!currentRoom) {
+    return <div>loading</div>
+  }
+  if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
   return (

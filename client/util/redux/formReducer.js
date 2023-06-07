@@ -32,20 +32,20 @@ export const getSingleProgrammesAnswers = ({ room, year, form }) => {
 }
 
 export const getSingleUsersAnswers = () => {
-  const route = '/answers/degreeReform/individualUsers'
+  const route = `/answers/degreeReform/currentAnswer`
   const prefix = 'GET_USER_ANSWERS'
   return callBuilder(route, prefix)
 }
 
-export const postIndividualFormAnswer = (data, formNumber) => {
-  const route = '/answers/degreeReform/individualUser'
+export const postIndividualFormAnswer = data => {
+  const route = '/answers/degreeReform/individualAnswer'
   const prefix = 'POST_USER_ANSWER'
-  return callBuilder(route, prefix, 'POST', { data, formNumber })
+  return callBuilder(route, prefix, 'POST', { data })
 }
 
-export const getAllAnswersForUser = () => {
+export const getAllIndividualAnswersForUser = () => {
   const route = '/answers/degreeReform/getAllAnswersForUser'
-  const prefix = 'GET_ALL_ANSWERS_FOR_USER'
+  const prefix = 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER'
   return callBuilder(route, prefix, 'GET')
 }
 
@@ -132,7 +132,7 @@ export default (state = initialState, action) => {
         answerLevels: action.answerLevels,
       }
     }
-    case 'GET_ALL_ANSWERS_FOR_USER_SUCCESS': {
+    case 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER_SUCCESS': {
       return {
         ...state,
         oldIndividualAnswers: action.response,
