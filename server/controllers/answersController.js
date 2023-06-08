@@ -78,7 +78,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
 const getIndividualFormAnswerForUser = async (req, res) => {
   try {
     const { uid } = req.user
-    const data = await db.answer.findOne({
+    const data = await db.tempAnswer.findOne({
       where: {
         programme: {
           [Op.startsWith]: uid,
@@ -372,13 +372,12 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
   }
 }
 
-const removeIndividualFormBackupForUser = async (req, res) => {
-  const { previousVersion } = req.params
-
+const removeBackupForIndividual = async (req, res) => {
+  const uid = req
   try {
     db.backupAnswer.destroy({
       where: {
-        [Op.and]: [{ programme: previousVersion }, { form: 3 }],
+        [Op.and]: [{ programme: uid }, { form: 3 }],
       },
     })
     return res.status(200)
@@ -388,15 +387,17 @@ const removeIndividualFormBackupForUser = async (req, res) => {
   }
 }
 
-const removeIndividualFormTempForUser = async (req, res) => {
-  const { previousVersion } = req.params
-
+const clearTempForIndividual = async (req, res) => {
+  const uid = req
   try {
-    db.tempAnswer.destroy({
-      where: {
-        [Op.and]: [{ programme: previousVersion }, { form: 3 }],
-      },
-    })
+    db.tempAnswer.update(
+      { data: {} },
+      {
+        where: {
+          [Op.and]: [{ programme: uid }, { form: 3 }],
+        },
+      }
+    )
     return res.status(200)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -430,8 +431,8 @@ const postIndividualFormAnswer = async (req, res) => {
     }
     const savedAnswer = await db.answer.create(answer)
     if (previousAnswers.length > 0) {
-      removeIndividualFormBackupForUser(`${uid}-${previousAnswers[previousAnswers.length - 1]}`)
-      removeIndividualFormTempForUser(`${uid}-${previousAnswers[previousAnswers.length - 1]}`)
+      removeBackupForIndividual(uid)
+      clearTempForIndividual(uid)
     }
     return res.status(200).json(savedAnswer)
   } catch (error) {

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-import { isAdmin } from '@root/config/common'
+import { isAdmin, requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -34,6 +34,7 @@ const DegreeReformIndividual = () => {
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const formData = useSelector(state => state.form)
+  const [message, setMessage] = useState(null)
   const { uid } = user
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -69,6 +70,11 @@ const DegreeReformIndividual = () => {
   }, [year, draftYear, user, formDeadline, modalOpen, currentRoom])
 
   const handleSendingForm = async () => {
+    if (!requiredDegreeReformIds.every(id => formData.data[id])) {
+      setMessage(t('formView:fillAllRequiredFields'))
+      setTimeout(() => setMessage(null), 10000)
+      return
+    }
     dispatch(postIndividualFormAnswer(formData.data))
     dispatch(clearFormState())
     setModalOpen(false)
@@ -108,11 +114,12 @@ const DegreeReformIndividual = () => {
               {t('send')}
             </Button>
           }
-          header="Nyt ei kannata lähettää"
-          description="Lähettäminen on vaarallista"
+          header="Koulutusuudistus lomakkeen lähetys"
+          description="Lähetä lomake, voit tämän jälkeen lähettää uuden"
           sendButton={handleSendingForm}
           open={modalOpen}
           setOpen={setModalOpen}
+          message={message}
         />
       </div>
     </div>

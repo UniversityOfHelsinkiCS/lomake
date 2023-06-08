@@ -92,6 +92,8 @@ const requiredFormIds = [
   'measures_1_text',
 ]
 
+const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_years', 'view_is_based_on']
+
 const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
 
 const hasSpecialGroup = (user, group) => {
@@ -210,4 +212,5 @@ module.exports = {
   LOMAKE_SINCE_YEAR,
   getYearsArray,
   mapToDegreeCode,
+  requiredDegreeReformIds,
 }

@@ -140,7 +140,22 @@ export default (state = initialState, action) => {
     }
     case 'CLEAR_FORM_STATE': {
       return {
-        initialState,
+        ...initialState,
+        pending: state.pending,
+        error: state.error,
+      }
+    }
+    case 'POST_USER_ANSWER_ATTEMPT': {
+      return {
+        ...state,
+        pending: true,
+      }
+    }
+    case 'POST_USER_ANSWER_SUCCESS': {
+      return {
+        ...state,
+        pending: false,
+        error: false,
       }
     }
 
