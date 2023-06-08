@@ -138,22 +138,6 @@ const getAllUserHasAccessTo = async (req, res) => {
   }
 }
 
-const getOne = async (req, res) => {
-  try {
-    const data = await db.answer.findAll({
-      limit: 1,
-      where: {
-        programme: req.params.programme,
-      },
-      order: [['createdAt', 'DESC']],
-    })
-    return res.send(data[0])
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getPreviousYear = async (req, res) => {
   const { programme, form } = req.params
   try {
@@ -361,7 +345,6 @@ const updateAnswerReady = async (req, res) => {
 
 module.exports = {
   getAll,
-  getOne,
   getPreviousYear,
   getAllTempUserHasAccessTo,
   getIndividualFormAnswers,
