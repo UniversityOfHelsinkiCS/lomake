@@ -172,22 +172,6 @@ const getPreviousYear = async (req, res) => {
   }
 }
 
-const create = async (req, res) => {
-  try {
-    const answer = {
-      programme: req.body.room,
-      data: req.body.data,
-      year: new Date().getFullYear(),
-      submittedBy: req.user.uid,
-    }
-    const savedAnswer = await db.answer.create(answer)
-    return res.send(savedAnswer)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getFacultySummaryData = async (req, res) => {
   const { code, lang } = req.params
   if (!code) {
@@ -377,7 +361,6 @@ const updateAnswerReady = async (req, res) => {
 
 module.exports = {
   getAll,
-  create,
   getOne,
   getPreviousYear,
   getAllTempUserHasAccessTo,

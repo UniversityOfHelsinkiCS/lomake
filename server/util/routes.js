@@ -27,7 +27,6 @@ router.get('/answers/oldSummaryYearly/faculty/:code/:lang', answers.getOldFacult
 router.get('/answers/currentSummaryEvaluation/faculty/:code/:lang', answers.getEvaluationSummaryDataForFaculty)
 router.get('/answers/:programme', requireProgrammeRead, answers.getOne) // TO FIX route + function not in use?
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
-router.post('/answers', requireProgrammeWrite, answers.create) // TO FIX route + function not in use?
 
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
