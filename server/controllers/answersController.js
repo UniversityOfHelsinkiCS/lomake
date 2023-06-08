@@ -44,14 +44,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       },
     })
 
-    // If the programme access has a year-limit on answers
-    // filter out the ones, that are before that time
-    const yearFilter = (answer, access) =>
-      access[answer.programme]?.year ? new Date().getFullYear() === access[answer.programme].year : true
-
-    const filteredAnswers = data.filter(answer => yearFilter(answer, req.user.access))
-
-    return res.status(200).json(filteredAnswers)
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -130,7 +123,7 @@ const getAllUserHasAccessTo = async (req, res) => {
     }
 
     const anyAccess = hasAnyAccess(req.user)
-    const { access } = req.user
+
     // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
     const data = await db.answer.findAll({
       where: {
@@ -138,13 +131,7 @@ const getAllUserHasAccessTo = async (req, res) => {
       },
     })
 
-    // If the programme access has a year-limit on answers // DELETE THIS 🔫
-    // filter out the ones, that are before that time
-    const yearFilter = (answer, access) =>
-      access[answer.programme]?.year ? answer.year === access[answer.programme].year : true
-
-    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
-    return res.status(200).json(filteredAnswers)
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
