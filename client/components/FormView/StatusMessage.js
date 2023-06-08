@@ -35,6 +35,16 @@ const StatusMessage = ({ programme, form }) => {
     lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
   }
 
+  if (!writeAccess) {
+    return (
+      <Message
+        data-cy="no-write-access-notice"
+        icon="lock"
+        header={`${t('formView:status:viewOnly')} ${showMessageForOpenYear(draftYear, writeAccess, t)}`}
+      />
+    )
+  }
+
   if (!deadlineObj)
     return (
       <>

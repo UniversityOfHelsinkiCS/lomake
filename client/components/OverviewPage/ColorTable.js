@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Input } from 'semantic-ui-react'
+import { Loader, Input, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
@@ -24,6 +24,8 @@ const ColorTable = React.memo(
     handleFilterChange,
     form,
     formType,
+    showAllProgrammes,
+    handleShowProgrammes,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -141,7 +143,18 @@ const ColorTable = React.memo(
       <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         <div className="table-container">
+          {!isAdmin(currentUser) ? (
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              data-cy="overviewpage-filter-button"
+              toggle
+              onChange={handleShowProgrammes}
+              checked={showAllProgrammes}
+              label={t('showAllProgrammes')}
+            />
+          ) : null}
           <Input
+            style={{ marginBottom: '0.5em' }}
             data-cy="overviewpage-filter"
             icon="filter"
             size="small"
@@ -157,7 +170,7 @@ const ColorTable = React.memo(
           selectedAnswers={selectedAnswers}
           tableIds={tableIds}
         />
-        <div className="sticky-header" />
+        <div className="sticky-header" style={{ marginTop: '1em' }} />
         {sortedProgrammes.map(p => {
           return (
             <TableRow

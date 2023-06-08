@@ -1,3 +1,11 @@
+const formKeys = {
+  YEARLY_ASSESSMENT: 1,
+  DEGREE_REFORM_PROGRAMMES: 2,
+  DEGREE_REFORM_INDIVIDUALS: 3,
+  EVALUATION_PROGRAMMES: 4,
+  EVALUATION_FACULTIES: 5,
+}
+
 const forms = [
   {
     key: 1,
@@ -1620,6 +1628,7 @@ const data = [
 
 module.exports = {
   forms,
+  formKeys,
   data,
   facultyMap,
 }

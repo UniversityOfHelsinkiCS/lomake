@@ -57,6 +57,11 @@ export const setAnswerLevels = answerLevels => ({
 export const clearFormState = () => ({
   type: 'CLEAR_FORM_STATE',
 })
+export const updateAnswersReady = ({ room, year, form, ready }) => {
+  const route = `/answers/${form}/${room}/${year}/updateAnswersReady`
+  const prefix = 'UPDATE_ANSWERS_READY'
+  return callBuilder(route, prefix, 'put', { ready })
+}
 
 const initialState = {
   data: {},
@@ -100,6 +105,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: action.response,
+        ready: Boolean(action.response.ready),
         pending: false,
         error: false,
       }
@@ -156,6 +162,10 @@ export default (state = initialState, action) => {
         ...state,
         pending: false,
         error: false,
+    case 'UPDATE_ANSWERS_READY_SUCCESS': {
+      return {
+        ...state,
+        ready: Boolean(action.response.ready),
       }
     }
 

@@ -40,11 +40,6 @@ const DegreeReformIndividual = () => {
   const lang = useSelector(state => state.language)
   const formNumber = 3
 
-  // Not needed as it is, some other ways to check rights
-  // const writeAccess = (user.access[formNumber] && user.access[formNumber].write) || isAdmin(user)
-  // const readAccess = (user.access[formNumber] && user.access[formNumber].read) || isAdmin(user)
-
-  // TO FIX
   useEffect(() => {
     document.title = `${t('degree-reform-individual')}`
   }, [lang])

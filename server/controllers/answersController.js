@@ -2,47 +2,58 @@ const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
+const { formKeys } = require('@root/config/data')
+
+/**
+ * The LINJAUS function: if user has ANY access, they can see all programmes' answers
+ */
+const hasAnyAccess = user => {
+  const { access } = user
+  const accessibleProgrammes = Object.keys(access)
+  return accessibleProgrammes.length > 0
+}
 
 const getAll = async (_, res) => {
   try {
     const data = await db.answer.findAll({})
-    res.status(200).json(data)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const getAllTempUserHasAccessTo = async (req, res) => {
-  try {
-    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const data = await db.tempAnswer.findAll({
-        where: {
-          year: await whereDraftYear(),
-        },
-      })
-      return res.status(200).json(data)
-    }
-    const { access } = req.user
-    const now = new Date()
-    const data = await db.tempAnswer.findAll({
-      where: {
-        [Op.and]: [{ programme: Object.keys(req.user.access) }, { year: await whereDraftYear() }],
-      },
-    })
-    // If the programme access has a year-limit on answers
-    // filter out the ones, that are before that time
-    const yearFilter = (answer, access) =>
-      access[answer.programme].year ? now.getFullYear() === access[answer.programme].year : true
-
-    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
-    return res.status(200).json(filteredAnswers)
+    return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
+const getAllTempUserHasAccessTo = async (req, res) => {
+  try {
+    // admin route
+    if (isAdmin(req.user) || isSuperAdmin(req.user)) {
+      const data = await db.tempAnswer.findAll({
+        where: {
+          year: await whereDraftYear(),
+        },
+      })
+      return res.send(data)
+    }
+
+    // normal user route
+    const anyAccess = hasAnyAccess(req.user)
+    const data = await db.tempAnswer.findAll({
+      where: {
+        year: await whereDraftYear(),
+        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
+      },
+    })
+
+    return res.send(data)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+/**
+ * Note: programme may mean a single programme or a faculty (who fixed this? :D) -Joni
+ */
 const getSingleProgrammesAnswers = async (req, res) => {
   try {
     const { programme, form, year } = req.params
@@ -50,25 +61,31 @@ const getSingleProgrammesAnswers = async (req, res) => {
     const draftYear = draftYears.length ? draftYears[0].year : null
 
     let data = null
-    // TO FIX comparing number to string = never happens
-    // How does everything still work?
-    if (draftYear && draftYear === year) {
+
+    if (draftYear && draftYear === Number(year)) {
       data = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme, year: draftYear, form }],
+          programme,
+          year: draftYear,
+          form,
         },
       })
     } else {
       data = await db.answer.findOne({
         where: {
-          [Op.and]: [{ programme, year, form }],
+          programme,
+          year,
+          form,
         },
       })
     }
 
-    const result = data ? data.data : {}
+    const result = {
+      ...data?.data,
+      ready: data?.ready,
+    }
 
-    return res.status(200).json(result)
+    return res.send(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -83,7 +100,7 @@ const getIndividualFormAnswerForUser = async (req, res) => {
         programme: {
           [Op.startsWith]: uid,
         },
-        form: 3,
+        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
       },
       order: [['updated_at', 'DESC']],
     })
@@ -123,38 +140,19 @@ const getAllUserHasAccessTo = async (req, res) => {
   try {
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.answer.findAll({})
-      return res.status(200).json(data)
+      return res.send(data)
     }
-    const { access } = req.user
+
+    const anyAccess = hasAnyAccess(req.user)
+
+    // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
     const data = await db.answer.findAll({
       where: {
-        programme: Object.keys(access),
+        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
       },
     })
 
-    // If the programme access has a year-limit on answers
-    // filter out the ones, that are before that time
-    const yearFilter = (answer, access) =>
-      access[answer.programme].year ? answer.year === access[answer.programme].year : true
-
-    const filteredAnswers = data.filter(answer => yearFilter(answer, access))
-    return res.status(200).json(filteredAnswers)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const getOne = async (req, res) => {
-  try {
-    const data = await db.answer.findAll({
-      limit: 1,
-      where: {
-        programme: req.params.programme, // Might have to switch to some kind of id, not sure how well full string works with urls.
-      },
-      order: [['createdAt', 'DESC']],
-    })
-    return res.status(200).json(data[0])
+    return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -172,36 +170,7 @@ const getPreviousYear = async (req, res) => {
       order: [['createdAt', 'DESC']],
     })
     if (data.length === 0) return res.status(204).end()
-    return res.status(200).json(data[0])
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const create = async (req, res) => {
-  try {
-    const answer = {
-      programme: req.body.room,
-      data: req.body.data,
-      year: new Date().getFullYear(),
-      submittedBy: req.user.uid,
-    }
-    const savedAnswer = await db.answer.create(answer)
-    return res.status(200).json(savedAnswer)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const bulkCreate = async (req, res) => {
-  if (!process.env.BULK_INSERT_TOKEN || req.headers.token !== process.env.BULK_INSERT_TOKEN)
-    return res.status(404).send('Not found.').end()
-  try {
-    const answers = req.body
-    answers.forEach(answer => db.answer.create(answer))
-    return res.status(200).send('ok').end()
+    return res.send(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -224,13 +193,13 @@ const getFacultySummaryData = async (req, res) => {
 
     const answers = await db.tempAnswer.findAll({
       where: {
-        form: 4,
+        form: formKeys.EVALUATION_PROGRAMMES,
         year: 2023,
         programme: codes,
       },
     })
 
-    return res.status(200).json({ programmes, answers })
+    return res.send({ programmes, answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -249,7 +218,7 @@ const getProgrammeSummaryData = async (req, res) => {
 
     const answers = await db.answer.findAll({
       where: {
-        form: 1,
+        form: formKeys.YEARLY_ASSESSMENT,
         year: years,
         programme: code,
       },
@@ -258,7 +227,7 @@ const getProgrammeSummaryData = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: code,
         },
@@ -274,7 +243,7 @@ const getProgrammeSummaryData = async (req, res) => {
       })
       answers.push(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -296,7 +265,7 @@ const getOldFacultySummaryData = async (req, res) => {
     const codes = programmes.map(p => p.key)
     const answers = await db.answer.findAll({
       where: {
-        form: 1,
+        form: formKeys.YEARLY_ASSESSMENT,
         year: years,
         programme: codes,
       },
@@ -307,7 +276,7 @@ const getOldFacultySummaryData = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: codes,
         },
@@ -316,14 +285,14 @@ const getOldFacultySummaryData = async (req, res) => {
     } else {
       const latestAnswers = await db.answer.findOne({
         where: {
-          form: 1,
+          form: formKeys.YEARLY_ASSESSMENT,
           year: 2023,
           programme: codes,
         },
       })
       answers.push(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -349,7 +318,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
     if (yearlyFormOpen) {
       const latestAnswers = await db.tempAnswer.findAll({
         where: {
-          form: 4,
+          form: formKeys.EVALUATION_PROGRAMMES,
           year: 2023,
           programme: codes,
         },
@@ -358,14 +327,37 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
     } else {
       const latestAnswers = await db.answer.findAll({
         where: {
-          form: 4,
+          form: formKeys.EVALUATION_PROGRAMMES,
           year: 2023,
           programme: codes,
         },
       })
       answers = answers.concat(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+const updateAnswerReady = async (req, res) => {
+  const { programme, form, year } = req.params
+  const { ready } = req.body
+  if (!form || !year || !programme) return res.sendStatus(400)
+
+  try {
+    const tempAnswer = await db.tempAnswer.findOne({
+      where: {
+        programme,
+        form,
+        year,
+      },
+    })
+
+    tempAnswer.ready = Boolean(ready)
+    await tempAnswer.save()
+    return res.send(tempAnswer)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -443,10 +435,7 @@ const postIndividualFormAnswer = async (req, res) => {
 
 module.exports = {
   getAll,
-  create,
-  getOne,
   getPreviousYear,
-  bulkCreate,
   getAllTempUserHasAccessTo,
   getIndividualFormAnswerForUser,
   getAllUserHasAccessTo,
@@ -457,4 +446,5 @@ module.exports = {
   getProgrammeSummaryData,
   getOldFacultySummaryData,
   getEvaluationSummaryDataForFaculty,
+  updateAnswerReady,
 }

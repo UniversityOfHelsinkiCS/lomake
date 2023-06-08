@@ -8,11 +8,11 @@ import { colors, getUserRole } from 'Utilities/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin, specialGroups } from '../../../config/common'
 
-const getSpecialGroup = (group, lang, t) => {
+const getSpecialGroup = (user, group, lang, t) => {
   const special = specialGroups.find(s => s.group === group)
   if (!special) return null
   return (
-    <Label>
+    <Label key={`${user}-${special.translationTag}`}>
       {special.faculty ? special.translationTag[lang] : t('users:special:access', { context: special.translationTag })}
     </Label>
   )
@@ -96,7 +96,7 @@ export default ({ user, lang, programmeCodesAndNames }) => {
           )}
         </Table.Cell>
         <Table.Cell data-cy="user-access-groups">
-          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(group, lang, t))}
+          {user.specialGroup && Object.keys(user.specialGroup).map(group => getSpecialGroup(user, group, lang, t))}
         </Table.Cell>
         <Table.Cell data-cy={`${user.uid}-userRole`}>{getUserRole(user.iamGroups)}</Table.Cell>
         {isAdmin(currentUser) && (
