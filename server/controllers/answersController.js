@@ -16,10 +16,10 @@ const hasAnyAccess = user => {
 const getAll = async (_, res) => {
   try {
     const data = await db.answer.findAll({})
-    res.status(200).json(data)
+    return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    res.status(500).json({ error: 'Database error' })
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 
@@ -32,7 +32,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
           year: await whereDraftYear(),
         },
       })
-      return res.status(200).json(data)
+      return res.send(data)
     }
 
     // normal user route
@@ -44,7 +44,7 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       },
     })
 
-    return res.status(200).json(data)
+    return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -85,7 +85,7 @@ const getSingleProgrammesAnswers = async (req, res) => {
       ready: data?.ready,
     }
 
-    return res.status(200).json(result)
+    return res.send(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -108,7 +108,7 @@ const getIndividualFormAnswers = async (req, res) => {
 
     const result = data?.data || {}
 
-    return res.status(200).json(result)
+    return res.send(result)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -119,7 +119,7 @@ const getAllUserHasAccessTo = async (req, res) => {
   try {
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.answer.findAll({})
-      return res.status(200).json(data)
+      return res.send(data)
     }
 
     const anyAccess = hasAnyAccess(req.user)
@@ -131,7 +131,7 @@ const getAllUserHasAccessTo = async (req, res) => {
       },
     })
 
-    return res.status(200).json(data)
+    return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -147,7 +147,7 @@ const getOne = async (req, res) => {
       },
       order: [['createdAt', 'DESC']],
     })
-    return res.status(200).json(data[0])
+    return res.send(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -165,7 +165,7 @@ const getPreviousYear = async (req, res) => {
       order: [['createdAt', 'DESC']],
     })
     if (data.length === 0) return res.status(204).end()
-    return res.status(200).json(data[0])
+    return res.send(data[0])
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -181,7 +181,7 @@ const create = async (req, res) => {
       submittedBy: req.user.uid,
     }
     const savedAnswer = await db.answer.create(answer)
-    return res.status(200).json(savedAnswer)
+    return res.send(savedAnswer)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -194,7 +194,7 @@ const bulkCreate = async (req, res) => {
   try {
     const answers = req.body
     answers.forEach(answer => db.answer.create(answer))
-    return res.status(200).send('ok').end()
+    return res.send('ok')
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -223,7 +223,7 @@ const getFacultySummaryData = async (req, res) => {
       },
     })
 
-    return res.status(200).json({ programmes, answers })
+    return res.send({ programmes, answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -267,7 +267,7 @@ const getProgrammeSummaryData = async (req, res) => {
       })
       answers.push(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -316,7 +316,7 @@ const getOldFacultySummaryData = async (req, res) => {
       })
       answers.push(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -358,7 +358,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
       })
       answers = answers.concat(latestAnswers)
     }
-    return res.status(200).json({ answers })
+    return res.send({ answers })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
