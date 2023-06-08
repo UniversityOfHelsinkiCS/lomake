@@ -24,6 +24,7 @@ export default () => {
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
+  const [showAllProgrammes, setShowAllProgrammes] = useState(false)
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser)
@@ -31,7 +32,6 @@ export default () => {
 
   const form = 1 // TO FIX
   const formType = 'yearlyAssessment'
-
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
@@ -41,12 +41,23 @@ export default () => {
     setFilter(value)
   }
 
+  const handleShowProgrammes = () => {
+    setShowAllProgrammes(!showAllProgrammes)
+  }
+
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return isAdmin(currentUser.data)
-      ? programmes
-      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
-  }, [programmes, currentUser.data])
+    if (isAdmin(currentUser.data)) {
+      return programmes
+    }
+    if (currentUser.data.access || currentUser.specialGroup) {
+      const usersPermissionsKeys = Object.keys(currentUser.data.access)
+      if (!showAllProgrammes) {
+        return programmes.filter(program => usersPermissionsKeys.includes(program.key))
+      }
+      return programmes
+    }
+    return []
+  }, [programmes, currentUser.data, showAllProgrammes])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -139,6 +150,8 @@ export default () => {
               filterValue={filter}
               form={form}
               formType={formType}
+              handleShowProgrammes={handleShowProgrammes}
+              showAllProgrammes={showAllProgrammes}
             />
           </div>
         </>

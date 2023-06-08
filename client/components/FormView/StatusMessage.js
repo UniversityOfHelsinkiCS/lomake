@@ -25,6 +25,16 @@ const StatusMessage = ({ programme, form }) => {
 
   const locale = lang !== 'se' ? lang : 'sv'
 
+  if (!writeAccess) {
+    return (
+      <Message
+        data-cy="no-write-access-notice"
+        icon="lock"
+        header={`${t('formView:status:viewOnly')} ${showMessageForOpenYear(draftYear, writeAccess, t)}`}
+      />
+    )
+  }
+
   if (!deadlineObj)
     return (
       <>

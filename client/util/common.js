@@ -447,4 +447,25 @@ export const getProgramAnswerLevels = programmeKey => {
   }
   return formDataFilter
 }
+
+export const getFormViewRights = ({
+  accessToTempAnswers,
+  programme,
+  writeAccess,
+  viewingOldAnswers,
+  draftYear,
+  year,
+  formDeadline,
+  form,
+}) => {
+  if (!accessToTempAnswers) return true
+  if (programme.locked) return true
+  if (!writeAccess) return true
+  if (viewingOldAnswers) return true
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
+  return false
+}
+
 export * from '@root/config/common'

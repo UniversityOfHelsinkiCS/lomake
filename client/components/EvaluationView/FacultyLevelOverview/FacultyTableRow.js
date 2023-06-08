@@ -11,12 +11,12 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form }) =>
 
   return (
     <React.Fragment key={faculty.code}>
-      <div className="table-container">
+      <div className="table-container-row-link">
         <Link data-cy={`colortable-link-to-${faculty.code}`} to={targetURL}>
           {faculty.name[lang]}
         </Link>
       </div>
-      <div className="table-container">
+      <div className="table-container-row-link">
         <Link to={targetURL}>{faculty.code}</Link>
       </div>
       {tableIds.map(idObject => (

@@ -18,6 +18,7 @@ export default () => {
   // To FIX implement both next two at some point
   // const [programControlsToShow, setProgramControlsToShow] = useState(null)
   // const [statsToShow, setStatsToShow] = useState(null)
+  const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
@@ -35,12 +36,23 @@ export default () => {
     setFilter(value)
   }
 
+  const handleShowProgrammes = () => {
+    setShowAllProgrammes(!showAllProgrammes)
+  }
+
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.data.access)
-    return isAdmin(currentUser.data)
-      ? programmes
-      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
-  }, [programmes, currentUser.data])
+    if (isAdmin(currentUser.data)) {
+      return programmes
+    }
+    if (currentUser.data.access || currentUser.specialGroup) {
+      const usersPermissionsKeys = Object.keys(currentUser.data.access)
+      if (!showAllProgrammes) {
+        return programmes.filter(program => usersPermissionsKeys.includes(program.key))
+      }
+      return programmes
+    }
+    return []
+  }, [programmes, currentUser.data, showAllProgrammes])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -105,6 +117,8 @@ export default () => {
               filterValue={filter}
               form={form}
               formType={formType}
+              showAllProgrammes={showAllProgrammes}
+              handleShowProgrammes={handleShowProgrammes}
             />
           </div>
         </>

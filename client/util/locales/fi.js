@@ -58,6 +58,7 @@ export default {
     send: 'Lähetä',
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
+    showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -121,6 +122,7 @@ export default {
     status: {
       locked: 'Lomake on valitulta vuodelta lukittu, eikä sitä voi muokata.',
       open: 'vastaukset ovat avoinna muokattavaksi.',
+      viewOnly: 'Sinulla ei ole oikeuksia muokata lomaketta. Voit kuitenkin tarkastella vastauksia.',
       canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
       deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
       ospaProcessing: 'OSPA käsittelee vastaukset.',
@@ -185,6 +187,11 @@ export default {
     downloadPDF: 'Lataa vastaukset PDF-tiedostona',
     statusHeader: 'Vuoden {{year}} vastaukset ovat avoinna muokattaviksi.',
     statusMessage: 'Voit vaihtaa vuoden otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
+
+    ready:
+      'Vastaukset ovat merkattu valmiiksi, jolloin ne näkyvät muille koulutusohjelmille. Niitä voi vielä muokata lomakkeen sulkeutumiseen asti. Klikkaa tästä merkataksesi vastaukset keskeneräiseksi.',
+    notReady:
+      'Vastaukset ovat kesken, joten ne eivät näy koulutusohjelman ulkopuolelle. Klikkaa tästä merkataksesi vastaukset valmiiksi.',
 
     csvFileformwritten: 'Tilannekuvalomake_kirjalliset_vastaukset',
     csvFileformcolors: 'Tilannekuvalomake_liikennevalovärit',

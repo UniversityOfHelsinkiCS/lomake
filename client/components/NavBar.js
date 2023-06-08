@@ -128,7 +128,7 @@ export default () => {
         </Menu.Item>
         <GoToYearlyAssessmentButton />
         <GoToEvaluationButton />
-        {user.admin ? <GoToDegreeReformGroup /> : null}
+        {user.admin ? <GoToDegreeReformGroup /> : null} {/* FIX Remove admin */}
         {user.admin ? <GoToDegreeReformIndividual /> : null}
         {user.admin ? <GoToAdminPageButton /> : null}
         <Menu.Item>

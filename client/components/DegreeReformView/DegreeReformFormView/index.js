@@ -4,8 +4,8 @@ import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 
-import { isAdmin } from '@root/config/common'
-import { colors } from 'Utilities/common'
+import { hasSomeReadAccess, isAdmin } from '@root/config/common'
+import { colors, getFormViewRights } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
@@ -16,26 +16,6 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 import DegreeReformForm from './DegreeReformForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
-
-const formShouldBeViewOnly = ({
-  accessToTempAnswers,
-  programme,
-  writeAccess,
-  viewingOldAnswers,
-  draftYear,
-  year,
-  form,
-  formDeadline,
-}) => {
-  if (!accessToTempAnswers) return true
-  if (programme.locked) return true
-  if (!writeAccess) return true
-  if (viewingOldAnswers) return true
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  return false
-}
 
 const DegreeReformFormView = ({ room }) => {
   const dispatch = useDispatch()
@@ -56,7 +36,7 @@ const DegreeReformFormView = ({ room }) => {
   const year = 2023
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
-  const readAccess = (user.access[room] && user.access[room].read) || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
   const viewingOldAnswers = false
 
@@ -71,7 +51,7 @@ const DegreeReformFormView = ({ room }) => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     if (
-      formShouldBeViewOnly({
+      getFormViewRights({
         accessToTempAnswers,
         programme,
         writeAccess,
@@ -115,7 +95,7 @@ const DegreeReformFormView = ({ room }) => {
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
+              <Button onClick={() => history.push('/degree-reform')} icon="arrow left" />
             </div>
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>

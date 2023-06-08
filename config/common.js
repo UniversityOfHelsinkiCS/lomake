@@ -137,6 +137,8 @@ const isInternationalUser = user => {
   return false
 }
 
+const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
+
 const internationalAccess = {
   MH50_004: { read: true, year: 2020 },
   MH50_010: { read: true, year: 2020 },
@@ -202,6 +204,7 @@ module.exports = {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
+  hasSomeReadAccess,
   testProgrammeCode,
   testProgrammeName,
   testFacultyCode,
