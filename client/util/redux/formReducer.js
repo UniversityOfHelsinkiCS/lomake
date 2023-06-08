@@ -32,9 +32,21 @@ export const getSingleProgrammesAnswers = ({ room, year, form }) => {
 }
 
 export const getSingleUsersAnswers = () => {
-  const route = '/answers/degreeReform/individualUsers'
+  const route = `/answers/degreeReform/currentAnswer`
   const prefix = 'GET_USER_ANSWERS'
   return callBuilder(route, prefix)
+}
+
+export const postIndividualFormAnswer = data => {
+  const route = '/answers/degreeReform/individualAnswer'
+  const prefix = 'POST_USER_ANSWER'
+  return callBuilder(route, prefix, 'POST', { data })
+}
+
+export const getAllIndividualAnswersForUser = () => {
+  const route = '/answers/degreeReform/getAllAnswersForUser'
+  const prefix = 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER'
+  return callBuilder(route, prefix, 'GET')
 }
 
 export const setAnswerLevels = answerLevels => ({
@@ -42,6 +54,9 @@ export const setAnswerLevels = answerLevels => ({
   answerLevels,
 })
 
+export const clearFormState = () => ({
+  type: 'CLEAR_FORM_STATE',
+})
 export const updateAnswersReady = ({ room, year, form, ready }) => {
   const route = `/answers/${form}/${room}/${year}/updateAnswersReady`
   const prefix = 'UPDATE_ANSWERS_READY'
@@ -54,6 +69,7 @@ const initialState = {
   viewingOldAnswers: false,
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
+  oldIndividualAnswers: [],
   answerLevels: [4, 5, 6, 7],
 }
 
@@ -120,6 +136,32 @@ export default (state = initialState, action) => {
       return {
         ...state,
         answerLevels: action.answerLevels,
+      }
+    }
+    case 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER_SUCCESS': {
+      return {
+        ...state,
+        oldIndividualAnswers: action.response,
+      }
+    }
+    case 'CLEAR_FORM_STATE': {
+      return {
+        ...initialState,
+        pending: state.pending,
+        error: state.error,
+      }
+    }
+    case 'POST_USER_ANSWER_ATTEMPT': {
+      return {
+        ...state,
+        pending: true,
+      }
+    }
+    case 'POST_USER_ANSWER_SUCCESS': {
+      return {
+        ...state,
+        pending: false,
+        error: false,
       }
     }
     case 'UPDATE_ANSWERS_READY_SUCCESS': {

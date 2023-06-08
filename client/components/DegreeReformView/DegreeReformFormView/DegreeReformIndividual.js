@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-// import { Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-// import { isAdmin } from '@root/config/common'
+import { isAdmin, requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
+import StatusMessage from 'Components/FormView/StatusMessage'
 
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
-import { setViewOnly, getSingleUsersAnswers /* postIndividualFormAnswer */ } from 'Utilities/redux/formReducer'
+import {
+  setViewOnly,
+  getSingleUsersAnswers,
+  postIndividualFormAnswer,
+  getAllIndividualAnswersForUser,
+  clearFormState,
+} from 'Utilities/redux/formReducer'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
+import SendFormModal from 'Components/Generic/SendFormModal'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './DegreeReformForm'
 
@@ -21,10 +30,11 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => 
 
 const DegreeReformIndividual = () => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-
+  const [modalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
-  // const formData = useSelector(state => state.form)
+  const formData = useSelector(state => state.form)
+  const [message, setMessage] = useState(null)
   const { uid } = user
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -42,6 +52,7 @@ const DegreeReformIndividual = () => {
 
   useEffect(() => {
     dispatch(getSingleUsersAnswers())
+    dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
@@ -51,13 +62,20 @@ const DegreeReformIndividual = () => {
       dispatch(wsJoinRoom(uid, formNumber))
       dispatch(setViewOnly(false))
     }
-  }, [year, draftYear, user, formDeadline])
+  }, [year, draftYear, user, formDeadline, modalOpen, currentRoom])
 
-  const handleSendingForm = () => {
-    //  dispatch(postIndividualFormAnswer(formData.data, formNumber, year))
+  const handleSendingForm = async () => {
+    if (!requiredDegreeReformIds.every(id => formData.data[id])) {
+      setMessage(t('formView:fillAllRequiredFields'))
+      setTimeout(() => setMessage(null), 10000)
+      return
+    }
+    dispatch(postIndividualFormAnswer(formData.data))
+    dispatch(clearFormState())
+    setModalOpen(false)
   }
 
-  // if (!isAdmin(user)) return <Redirect to="/" />
+  if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
   return (
@@ -71,19 +89,30 @@ const DegreeReformIndividual = () => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('degree-reform')} 2015-2017
           </h3>
+          <StatusMessage programme={user.id} form={formNumber} />
+          <SaveIndicator />
         </div>
         <DegreeReformForm questionData={questionData} formType={formType} />
-        <Button
-          style={{ maxWidth: '10em', marginTop: '1.5em' }}
-          labelPosition="left"
-          icon
-          disabled={viewOnly}
-          color="green"
-          onClick={handleSendingForm}
-        >
-          <Icon name="upload" />
-          {t('send')}
-        </Button>
+        <SendFormModal
+          openButton={
+            <Button
+              style={{ maxWidth: '10em', marginTop: '1.5em' }}
+              labelPosition="left"
+              icon
+              disabled={viewOnly}
+              color="green"
+            >
+              <Icon name="upload" />
+              {t('send')}
+            </Button>
+          }
+          header="Koulutusuudistus lomakkeen lähetys"
+          description="Lähetä lomake, voit tämän jälkeen lähettää uuden"
+          sendButton={handleSendingForm}
+          open={modalOpen}
+          setOpen={setModalOpen}
+          message={message}
+        />
       </div>
     </div>
   )

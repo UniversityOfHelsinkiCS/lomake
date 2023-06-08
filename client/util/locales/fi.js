@@ -16,6 +16,9 @@ export default {
     empty: 'Ei vastausta',
     OK: 'Vastattu',
     lastSaved: 'Viimeksi tallennettu',
+    lastSent: 'Viimeksi lähetetty',
+    lastSentInThisRole: 'Ensisijainen rooli viimeksi lähetetyssä lomakkeessa',
+    close: 'Sulje',
 
     faculty: 'Tiedekunta',
     programmeHeader: 'Koulutusohjelma',
@@ -157,6 +160,7 @@ export default {
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
+    fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
   },
 
   generic: {
@@ -205,6 +209,7 @@ export default {
       university: 'Yliopistotaso',
       committee: 'Arviointiryhmä',
     },
+    loading: 'Ladataan...',
   },
 
   overview: {

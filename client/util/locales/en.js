@@ -20,6 +20,9 @@ export default {
     empty: 'No answer provided',
     OK: 'Answer given',
     lastSaved: 'Last saved',
+    lastSent: 'Last sent',
+    lastSentInThisRole: 'Ensisijainen rooli viimeksi lähetetyssä lomakkeessa',
+    close: 'Close',
 
     faculty: 'Faculty',
     programmeHeader: 'Programme',
@@ -160,6 +163,7 @@ export default {
     yearlyAnswers: 'Yearly assessment answers',
     evaluationFacultyAnswers: 'Evaluation in studyprogrammes answers',
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
+    fillAllRequiredFields: 'Please fill all required fields',
     showAllProgrammes: 'Show all studyprogrammes',
   },
 
@@ -205,6 +209,7 @@ export default {
       university: 'University level',
       committee: 'Committee',
     },
+    loading: 'Loading...',
   },
 
   overview: {
