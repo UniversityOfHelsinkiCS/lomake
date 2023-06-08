@@ -188,19 +188,6 @@ const create = async (req, res) => {
   }
 }
 
-const bulkCreate = async (req, res) => {
-  if (!process.env.BULK_INSERT_TOKEN || req.headers.token !== process.env.BULK_INSERT_TOKEN)
-    return res.status(404).send('Not found.').end()
-  try {
-    const answers = req.body
-    answers.forEach(answer => db.answer.create(answer))
-    return res.send('ok')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getFacultySummaryData = async (req, res) => {
   const { code, lang } = req.params
   if (!code) {
@@ -393,7 +380,6 @@ module.exports = {
   create,
   getOne,
   getPreviousYear,
-  bulkCreate,
   getAllTempUserHasAccessTo,
   getIndividualFormAnswers,
   getAllUserHasAccessTo,
