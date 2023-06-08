@@ -8,7 +8,7 @@ import './Generic.scss'
 const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
-  const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
+  const formData = useSelector(({ form }) => form.data || 'pending')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
@@ -17,13 +17,18 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
   const generateRandomKey = value => `${value}-${Math.random()}`
   const defaultValues = radioOptions.fi.map(o => ({ id: o.id, value: false }))
   const [values, setValue] = useState(defaultValues)
+  const dataFromRedux = formData[id]
 
   useEffect(() => {
-    if (dataFromRedux.length > 0) {
-      setValue(dataFromRedux)
-      if (id === 'view_is_based_on') {
-        const filters = getFilters(dataFromRedux)
-        dispatch(setAnswerLevels(filters))
+    if (formData !== 'pending' && !formData.pending) {
+      if (!dataFromRedux) {
+        setValue(defaultValues)
+      } else {
+        setValue(dataFromRedux)
+        if (id === 'view_is_based_on') {
+          const filters = getFilters(dataFromRedux)
+          dispatch(setAnswerLevels(filters))
+        }
       }
     }
   }, [dataFromRedux])
