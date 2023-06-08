@@ -162,6 +162,8 @@ export default (state = initialState, action) => {
         ...state,
         pending: false,
         error: false,
+      }
+    }
     case 'UPDATE_ANSWERS_READY_SUCCESS': {
       return {
         ...state,
