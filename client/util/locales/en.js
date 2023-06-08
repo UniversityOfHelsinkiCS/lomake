@@ -162,6 +162,7 @@ export default {
     yearlyAnswers: 'Yearly assessment answers',
     evaluationFacultyAnswers: 'Evaluation in studyprogrammes answers',
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
+    fillAllRequiredFields: 'Please fill all required fields',
   },
 
   generic: {

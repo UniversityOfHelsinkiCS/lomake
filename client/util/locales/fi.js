@@ -158,6 +158,7 @@ export default {
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
+    fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
   },
 
   generic: {

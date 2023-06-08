@@ -450,6 +450,7 @@ export const getProgramAnswerLevels = programmeKey => {
 }
 
 export const translateDegreeReformBackground = ({ primaryRole, lang }) => {
+  if (!primaryRole) return []
   const splitRadio = primaryRole.split('_-_')
   const check = splitRadio.map(item => {
     if (item.length > 0) {

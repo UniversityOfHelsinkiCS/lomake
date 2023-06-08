@@ -1,13 +1,19 @@
 import React from 'react'
-import { Button, Modal } from 'semantic-ui-react'
+import { Button, Modal, Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const SendFormModal = ({ openButton, header, description, sendButton, open, setOpen }) => {
+const SendFormModal = ({ openButton, header, description, sendButton, open, setOpen, message }) => {
   const { t } = useTranslation()
 
   return (
     <Modal onClose={() => setOpen(false)} onOpen={() => setOpen(true)} open={open} trigger={openButton}>
       <Modal.Header>{header}</Modal.Header>
+      {message ? (
+        <Modal.Content>
+          {' '}
+          <Message size="tiny" header={message} color="red" />
+        </Modal.Content>
+      ) : null}
       <Modal.Content image>
         <Modal.Description>{description}</Modal.Description>
       </Modal.Content>
