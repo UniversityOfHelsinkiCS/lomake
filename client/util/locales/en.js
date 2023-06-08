@@ -207,6 +207,7 @@ export default {
       university: 'University level',
       committee: 'Committee',
     },
+    loading: 'Loading...',
   },
 
   overview: {

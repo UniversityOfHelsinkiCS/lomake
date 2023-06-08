@@ -80,9 +80,6 @@ const DegreeReformIndividual = () => {
     setModalOpen(false)
   }
 
-  if (!currentRoom) {
-    return <div>loading</div>
-  }
   if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'

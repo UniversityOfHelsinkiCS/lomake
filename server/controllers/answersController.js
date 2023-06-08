@@ -109,7 +109,7 @@ const getAllIndividualAnswersForUser = async (req, res) => {
     })
 
     let result = {}
-    if (data?.length > 1) {
+    if (data?.length > 0) {
       result = data[data.length - 1]
     }
     return res.status(200).json(result)
@@ -430,7 +430,7 @@ const postIndividualFormAnswer = async (req, res) => {
       submittedBy: uid,
     }
     const savedAnswer = await db.answer.create(answer)
-    if (previousAnswers.length > 0) {
+    if (savedAnswer) {
       removeBackupForIndividual(uid)
       clearTempForIndividual(uid)
     }

@@ -202,6 +202,7 @@ export default {
       university: 'Yliopistotaso',
       committee: 'Arviointiryhmä',
     },
+    loading: 'Ladataan...',
   },
 
   overview: {
