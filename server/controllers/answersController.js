@@ -121,7 +121,7 @@ const getAllIndividualAnswersForUser = async (req, res) => {
         programme: {
           [Op.startsWith]: uid,
         },
-        form: 3,
+        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
       },
     })
 
@@ -369,7 +369,7 @@ const removeBackupForIndividual = async (req, res) => {
   try {
     db.backupAnswer.destroy({
       where: {
-        [Op.and]: [{ programme: uid }, { form: 3 }],
+        [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
       },
     })
     return res.status(200)
@@ -386,7 +386,7 @@ const clearTempForIndividual = async (req, res) => {
       { data: {} },
       {
         where: {
-          [Op.and]: [{ programme: uid }, { form: 3 }],
+          [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
         },
       }
     )
@@ -407,7 +407,7 @@ const postIndividualFormAnswer = async (req, res) => {
       programme: {
         [Op.startsWith]: uid,
       },
-      form: 3,
+      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
     },
   })
 
