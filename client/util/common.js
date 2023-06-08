@@ -6,6 +6,7 @@ import _ from 'lodash'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
+import degreeQuestionData from '../questionData/degreeReformIndividualQuestions.json'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -448,6 +449,26 @@ export const getProgramAnswerLevels = programmeKey => {
   return formDataFilter
 }
 
+export const translateDegreeReformBackground = ({ primaryRole, lang }) => {
+  if (!primaryRole) return []
+  const splitRadio = primaryRole.split('_-_')
+  const check = splitRadio.map(item => {
+    if (item.length > 0) {
+      const firstCheck = degreeQuestionData[0].parts[1].radioOptions[lang].find(option => option.id === item)?.label
+      if (!firstCheck) {
+        return degreeQuestionData[0].parts[1].advancedOptions.teaching_or_other_research[lang].find(
+          option => option.id === item
+        )?.label
+      }
+      return firstCheck
+    }
+    if (item === '') {
+      return null
+    }
+    return item
+  })
+  return check
+}
 export const getFormViewRights = ({
   accessToTempAnswers,
   programme,

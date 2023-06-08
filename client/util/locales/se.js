@@ -15,6 +15,9 @@ export default {
     empty: 'Inget svar',
     OK: 'Svaret lämnat',
     lastSaved: 'Senast sparat',
+    lastSent: 'Last sent(se)',
+    lastSentInThisRole: 'Ensisijainen rooli viimeksi lähetetyssä lomakkeessa(se)',
+    close: 'Close',
 
     faculty: 'Fakultet',
     programmeHeader: 'Program',
