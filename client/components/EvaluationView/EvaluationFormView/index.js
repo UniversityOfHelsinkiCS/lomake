@@ -106,6 +106,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const summaryURL = `/evaluation/previous-years/${room}`
   const oodiProgURL = `https://oodikone.helsinki.fi/evaluationoverview/programme/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${faculty}`
+  const rapoLink = `https://rapocloud.it.helsinki.fi/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FHelsingin%20yliopiston%20dashboardit%2F_portal%2FTohtorikoulutus&Page=Tohtoriohjelman%20vuosiseuranta%20%2F%20Annual%20review%20by%20doctoral%20programme`
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
@@ -270,6 +271,15 @@ const EvaluationFormView = ({ room, formString }) => {
                 {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
               </h4>
             </a>
+            {room.startsWith('T') ? (
+              <div style={{ marginTop: '1em' }}>
+                <a href={rapoLink} data-cy={`link-to-rapo-${room}`} target="_blank" rel="noreferrer">
+                  <h4>
+                    {t('formView:rapo')} <Icon name="external" />{' '}
+                  </h4>
+                </a>
+              </div>
+            ) : null}
           </div>
         </div>
         <div style={{ paddingBottom: '6em' }}>

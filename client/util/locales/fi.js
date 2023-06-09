@@ -161,6 +161,7 @@ export default {
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
     fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
+    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
   },
 
   generic: {

@@ -165,6 +165,7 @@ export default {
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
     fillAllRequiredFields: 'Please fill all required fields',
     showAllProgrammes: 'Show all studyprogrammes',
+    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
   },
 
   generic: {
