@@ -70,6 +70,26 @@ const seedFacultiesAndStudyprogrammes = async () => {
       }
     }
   }
+
+  /**
+   * Create studyprogrammes_locked for checking locked status
+   */
+
+  for (const { code } of data) {
+    const studyprogramme = await db.studyprogramme.findOne({ where: { code } })
+
+    for (const { id, key } of studyprogramme) {
+      await db.studyprogrammesLocked.create({
+        key,
+        studyprogrammeId: id,
+        locked: {
+          yearly: false,
+          evaluation: false,
+          'degree-reform': false,
+        },
+      })
+    }
+  }
 }
 
 const seed = async () => {
