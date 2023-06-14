@@ -120,6 +120,10 @@ const resetDeadlines = async () => {
   try {
     // Unlock all programmes
     await db.studyprogramme.update({ locked: false }, { where: {} })
+    await db.studyprogrammesLocked.update(
+      { locked: { evaluation: true, yearly: true, 'degree-reform': true } },
+      { where: {} }
+    )
 
     // Close all deadlines and create new for yearly form
     await db.deadline.destroy({
