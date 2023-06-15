@@ -60,18 +60,47 @@ const ColorTableCell = ({
     1: yearlyQuestions,
     4: evaluationQuestions,
   }
+
   const questions = questionMap[form] || yearlyQuestions
   const textId = `${questionId}_text`
-  const colorId = `${questionId}_light`
+  let colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
-  const colorAnswer = programmesAnswers[colorId]
+  let colorAnswer = null
+
+  if (form === 5) {
+    colorId = [
+      `${questionId}_light`,
+      `${questionId}_bachelor_light`,
+      `${questionId}_master_light`,
+      `${questionId}_doctoral_light`,
+    ]
+    if (programmesAnswers[colorId[0]]) {
+      colorAnswer = programmesAnswers[colorId[0]]
+    } else {
+      const countColors = { green: 0, yellow: 0, red: 0 }
+      colorId.map(id => {
+        countColors[programmesAnswers[id]] = programmesAnswers[id]
+          ? countColors[programmesAnswers[id]] + 1
+          : countColors[programmesAnswers[id]]
+        if (countColors[programmesAnswers[id]] > 1) {
+          colorAnswer = programmesAnswers[id]
+        }
+        return programmesAnswers[id]
+      })
+      if (countColors.green === 1 && countColors.yellow === 1 && countColors.red === 1) {
+        colorAnswer = 'multi'
+      }
+    }
+  } else {
+    colorAnswer = programmesAnswers[colorId]
+  }
 
   // below is a bit 🍝 but the basic idea is that we only want to show the
   // dialog to explain the icon arrows when they are shown
 
   let IconElement = null
 
-  if (textAnswer && questionType !== 'ENTITY') {
+  if (textAnswer && questionType !== 'ENTITY' && questionType !== 'ENTITY_LEVELS') {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
@@ -135,7 +164,6 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-
   IconElement = (
     <div
       data-cy={`${programmesKey}-${questionId}`}
@@ -167,7 +195,6 @@ const ColorTableCell = ({
   )
 
   if (!icon) return IconElement
-
   return (
     <Popup trigger={IconElement}>
       <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}

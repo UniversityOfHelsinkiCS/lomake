@@ -66,6 +66,15 @@ $QUESTION_COUNT: 11;
       filter: brightness(0.8);
     }
   }
+  &-multi {
+    @include square-basics();
+    background: rgb(255,127,127);
+background: linear-gradient(0deg, rgba(255,127,127,1) 0%, rgba(255,255,177,1) 50%, rgba(157,255,157,1) 100%);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+
 }
 
 @mixin sticky-header-basics {

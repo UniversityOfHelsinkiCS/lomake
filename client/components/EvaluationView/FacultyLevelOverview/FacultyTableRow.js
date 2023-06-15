@@ -6,9 +6,9 @@ import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form }) => {
   const lang = useSelector(state => state.language)
 
-  const facultyAnswers = selectedAnswers.find(a => a.faculty === faculty.code)
+  const programmeAnswers = selectedAnswers.filter(a => faculty.ownedProgrammes.find(p => p.key === a.programme))
+  const facultyAnswers = selectedAnswers.find(a => a.programme === faculty.code && a.form === form)
   const targetURL = `/evaluation-faculty/form/${form}/${faculty.code}`
-
   return (
     <React.Fragment key={faculty.code}>
       <div className="table-container-row-link">

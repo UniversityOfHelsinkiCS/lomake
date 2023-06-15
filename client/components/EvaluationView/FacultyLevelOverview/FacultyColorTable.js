@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems } from 'Utilities/common'
+import { sortedItems, answersByYear } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
@@ -19,7 +19,7 @@ const FacultyColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
-    // const year = 2023
+    const year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
@@ -27,13 +27,12 @@ const FacultyColorTable = React.memo(
       dispatch(getAllTempAnswersAction())
     }, [])
 
-    const selectedAnswers = []
-    // const selectedAnswers = answersByYear({
-    //   year,
-    //   tempAnswers: answers,
-    //   oldAnswers,
-    //   draftYear: draftYear && draftYear.year,
-    // })
+    const selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
 
     const sortedFaculties = sortedItems(faculties, sorter, lang)
 
@@ -87,7 +86,6 @@ const FacultyColorTable = React.memo(
 
       return [...acc, ...questionObjects]
     }, [])
-
     return (
       <div className="overview-color-grid-faculty">
         <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} />
