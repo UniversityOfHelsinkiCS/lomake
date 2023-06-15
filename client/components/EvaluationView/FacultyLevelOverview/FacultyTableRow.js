@@ -6,7 +6,7 @@ import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form }) => {
   const lang = useSelector(state => state.language)
 
-  const programmeAnswers = selectedAnswers.filter(a => faculty.ownedProgrammes.find(p => p.key === a.programme))
+  // const programmeAnswers = selectedAnswers.filter(a => faculty.ownedProgrammes.find(p => p.key === a.programme)) This is for programme level summary piechart
   const facultyAnswers = selectedAnswers.find(a => a.programme === faculty.code && a.form === form)
   const targetURL = `/evaluation-faculty/form/${form}/${faculty.code}`
   return (
