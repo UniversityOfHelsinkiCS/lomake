@@ -62,6 +62,7 @@ export default {
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
+    showDataByProgramme: 'Näytä tiedot koulutusohjelmittain',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')

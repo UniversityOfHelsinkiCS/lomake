@@ -42,6 +42,7 @@ export default () => {
   }, [programmes, currentUser])
 
   const filteredFaculties = useMemo(() => {
+    if (!faculties) return []
     return faculties.filter(f => {
       const name = f.name[lang]
       const { code } = f

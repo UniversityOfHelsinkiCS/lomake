@@ -65,6 +65,7 @@ export default {
     send: 'Send',
     what: 'What',
     chooseFaculty: 'Choose faculty',
+    showDataByProgramme: "Show data by programme's",
   },
 
   aboutPage: {
