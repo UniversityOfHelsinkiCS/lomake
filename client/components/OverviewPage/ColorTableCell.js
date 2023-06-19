@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { yearlyQuestions, evaluationQuestions } from '../../questionData'
+import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const colorScoreMap = {
   green: 1,
@@ -58,6 +58,8 @@ const ColorTableCell = ({
 
   const questionMap = {
     1: yearlyQuestions,
+    2: degreeReformIndividualQuestions,
+
     4: evaluationQuestions,
   }
 
@@ -77,18 +79,10 @@ const ColorTableCell = ({
     if (programmesAnswers[colorId[0]]) {
       colorAnswer = programmesAnswers[colorId[0]]
     } else {
-      const countColors = { green: 0, yellow: 0, red: 0 }
-      colorId.map(id => {
-        countColors[programmesAnswers[id]] = programmesAnswers[id]
-          ? countColors[programmesAnswers[id]] + 1
-          : countColors[programmesAnswers[id]]
-        if (countColors[programmesAnswers[id]] > 1) {
-          colorAnswer = programmesAnswers[id]
-        }
-        return programmesAnswers[id]
-      })
-      if (countColors.green === 1 && countColors.yellow === 1 && countColors.red === 1) {
-        colorAnswer = 'multi'
+      colorAnswer = {
+        bachelor: programmesAnswers[colorId[1]],
+        master: programmesAnswers[colorId[2]],
+        doctoral: programmesAnswers[colorId[3]],
       }
     }
   } else {
@@ -96,7 +90,7 @@ const ColorTableCell = ({
   }
 
   // below is a bit 🍝 but the basic idea is that we only want to show the
-  // dialog to explain the icon arrows when they are shown
+  // dialog to explain the icon arrows when they are shown🔥🔥🔥🔥
 
   let IconElement = null
 
@@ -164,35 +158,74 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-  IconElement = (
-    <div
-      data-cy={`${programmesKey}-${questionId}`}
-      className={`square-${colorAnswer}`}
-      onClick={() =>
-        setModalData({
-          header: questions.reduce((acc, cur) => {
-            if (acc) return acc
-            const header = cur.parts.reduce((acc, cur) => {
+  if (form !== 5 || typeof colorAnswer === 'string') {
+    IconElement = (
+      <div
+        data-cy={`${programmesKey}-${questionId}`}
+        className={`square-${colorAnswer}`}
+        onClick={() =>
+          setModalData({
+            header: questions.reduce((acc, cur) => {
               if (acc) return acc
+              const header = cur.parts.reduce((acc, cur) => {
+                if (acc) return acc
 
-              if (cur.id === questionId) return cur.description[lang]
+                if (cur.id === questionId) return cur.description[lang]
+
+                return acc
+              }, '')
+
+              if (header) return header
 
               return acc
-            }, '')
+            }, ''),
+            programme: programmesName,
+            content: textAnswer,
+            color: colorAnswer,
+          })
+        }
+      >
+        {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+      </div>
+    )
+  } else {
+    IconElement = (
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {Object.entries(colorAnswer).map(([key, value]) => {
+          return (
+            <div
+              key={`${programmesKey}-${questionId}-${key}`}
+              data-cy={`${programmesKey}-${questionId}-${key}`}
+              className={`square-${value}`}
+              onClick={() =>
+                setModalData({
+                  header: questions.reduce((acc, cur) => {
+                    if (acc) return acc
+                    const header = cur.parts.reduce((acc, cur) => {
+                      if (acc) return acc
 
-            if (header) return header
+                      if (cur.id === questionId) return cur.description[lang]
 
-            return acc
-          }, ''),
-          programme: programmesName,
-          content: textAnswer,
-          color: colorAnswer,
-        })
-      }
-    >
-      {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-    </div>
-  )
+                      return acc
+                    }, '')
+
+                    if (header) return header
+
+                    return acc
+                  }, ''),
+                  programme: programmesName,
+                  content: textAnswer,
+                  color: value,
+                })
+              }
+            >
+              {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
   if (!icon) return IconElement
   return (
