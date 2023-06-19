@@ -35,6 +35,7 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
               facultyKey={faculty.code}
               programmesAnswers={answers}
               form={form}
+              setModalData={setModalData}
             />
           ))
         : tableIds.map(idObject => (

@@ -151,3 +151,45 @@ background: linear-gradient(0deg, rgba(255,127,127,1) 0%, rgba(255,255,177,1) 50
     background: $background-red;
   }
 }
+
+@mixin accordion-title-basics {
+  margin-left: 0.5rem;
+  
+}
+
+.accordion-title {
+  
+  &-green {
+    border-radius: 10px 100px / 120px;
+    h2 {
+      @include accordion-title-basics;
+    }
+    background: $light-green;
+  }
+  &-yellow {
+    border-radius: 10px 100px / 120px;
+    h2 {
+      @include accordion-title-basics;
+    } 
+    background: $light-yellow;
+  }
+  &-red {
+    border-radius: 10px 100px / 120px;
+    h2 {
+      @include accordion-title-basics;
+    }
+    background: $light-red;
+  }
+
+}
+
+.modal-accordion-container {
+
+  div:not(:first-child) {
+    margin-top: 1rem;
+}
+
+  h2, h4, p {
+    margin-left: 1rem;
+  }
+}

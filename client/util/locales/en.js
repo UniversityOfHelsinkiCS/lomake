@@ -234,6 +234,9 @@ export default {
     noUsers: 'No users',
     userListJory: 'Steering group members who have accessed the form',
     userListOthers: 'Other users who have programme access rights and have accessed the form',
+    greenModalAccordion: 'Situation good',
+    yellowModalAccordion: 'Situation satisfactory',
+    redModalAccordion: 'Situation poor',
   },
 
   report: {

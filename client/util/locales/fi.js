@@ -234,6 +234,9 @@ export default {
     noUsers: 'Ei käyttäjiä',
     userListJory: 'Lomakkeelle kirjautuneet käyttäjät, jotka kuuluvat koulutusohjelman johtoryhmään',
     userListOthers: 'Lomakkeelle kirjautuneet muut käyttäjät, joilla oikeus koulutusohjelmaan',
+    greenModalAccordion: 'Tilanne hyvä',
+    yellowModalAccordion: 'Tilanne neutraali',
+    redModalAccordion: 'Tilanne huono',
   },
 
   report: {
