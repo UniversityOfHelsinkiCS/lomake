@@ -7,7 +7,7 @@ import { sortedItems, answersByYear } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
-import SummaryRow from '../../OverviewPage/SummaryRow'
+import SummaryRowFaculty from './SummaryRowFaculty'
 import './OverviewPage.scss'
 import { facultyEvaluationQuestions as questions } from '../../../questionData'
 
@@ -109,7 +109,8 @@ const FacultyColorTable = React.memo(
           />
         </div>
         <div />
-        <SummaryRow
+
+        <SummaryRowFaculty
           setStatsToShow={setStatsToShow}
           stats={stats}
           selectedAnswers={selectedAnswers}
