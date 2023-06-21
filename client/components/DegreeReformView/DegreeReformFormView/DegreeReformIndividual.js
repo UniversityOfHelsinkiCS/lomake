@@ -87,7 +87,7 @@ const DegreeReformIndividual = () => {
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('degree-reform')} 2015-2017
+            {t('degree-reform')} 2015-2017 Testilomake
           </h3>
           <StatusMessage programme={user.id} form={formNumber} />
           <SaveIndicator />

@@ -88,7 +88,7 @@ const GoToDegreeReformIndividual = () => {
     <Menu.Item
       data-cy="nav-degree-reform-individual-form"
       as={Link}
-      to="/degree-reform-individual/form"
+      to="/individual"
       name="degree-reform-individual-form"
     >
       {t('degree-reform-individual')}
@@ -97,7 +97,7 @@ const GoToDegreeReformIndividual = () => {
 }
 
 const MenuNavigation = ({ pathname, user }) => {
-  if (pathname.startsWith('/degree-reform-individual/')) {
+  if (pathname.startsWith('/individual')) {
     return (
       <>
         <Menu.Item>

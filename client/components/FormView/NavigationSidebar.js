@@ -76,7 +76,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     isDegreeForm = true
   } else if (formType === 'degree-reform-individual') {
     questionsToShow = questionData
-    linkBase = '/degree-reform-individual/form/'
+    linkBase = '/individual'
     isDegreeForm = true
   }
 
