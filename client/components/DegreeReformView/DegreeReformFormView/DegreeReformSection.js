@@ -44,7 +44,7 @@ const Section = ({ id, title, number, children, programmeKey, formType }) => {
           >
             {title}
           </h2>
-          {id !== 11 && id !== 0 ? (
+          {id !== 10 && id !== 0 ? (
             <List style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
               {scaleNames.map(scaleName => (
                 <List.Item style={{ marginRight: '1em', padding: '!important 0.21428571em 0' }} key={scaleName.id}>
