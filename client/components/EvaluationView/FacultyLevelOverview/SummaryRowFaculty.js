@@ -18,13 +18,13 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
           )
         }
         return (
-          <div>
+          <div style={{ maxHeight: '5em', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}>
             {studyLevels.map(level => {
               const levelStats = stats[`${idObject.id}_${level}`]
               return (
                 <div
-                  style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
                   key={`${idObject.id}_${level}`}
+                  style={{ maxHeight: '5em' }}
                   onClick={() =>
                     setStatsToShow({
                       stats: stats[idObject.id],
@@ -56,7 +56,7 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
                     lengthAngle={360}
                     lineWidth={100}
                     paddingAngle={0}
-                    radius={50}
+                    radius={35}
                     startAngle={0}
                     viewBoxSize={[100, 100]}
                   />

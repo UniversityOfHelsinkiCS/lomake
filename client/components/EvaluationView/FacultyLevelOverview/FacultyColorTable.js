@@ -109,10 +109,16 @@ const FacultyColorTable = React.memo(
           />
         </div>
         <div />
-        <div>
-          <p style={{ marginTop: '0.8rem' }}>{t('bachelor')}</p>
-          <p style={{ marginTop: '1.5rem' }}>{t('master')}</p>
-          <p style={{ marginTop: '1.5rem' }}>{t('doctoral')}</p>
+        <div
+          style={{
+            maxHeight: '210px',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+          }}
+        >
+          <p style={{ height: '25%', display: 'flex', alignItems: 'center' }}>{t('bachelor')}</p>
+          <p style={{ height: '30%', display: 'flex', alignItems: 'center' }}>{t('master')}</p>
+          <p style={{ height: '30%', display: 'flex', alignItems: 'center' }}>{t('doctoral')}</p>
         </div>
 
         <SummaryRowFaculty
