@@ -6,7 +6,7 @@ import { List, Label } from 'semantic-ui-react'
 const Section = ({ id, title, number, children, programmeKey, formType }) => {
   let historyState = `${window.location.origin}${basePath}${formType}/form/${programmeKey}#${number}`
   if (formType === 'degree-reform-individual') {
-    historyState = `${window.location.origin}${basePath}${formType}/form/`
+    historyState = `${window.location.origin}${basePath}individual`
   }
 
   const scaleNames = [
