@@ -34,8 +34,7 @@ const StatusMessage = ({ programme, form }) => {
     checking = utcTime.toLocaleString(locale)
     lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
   }
-
-  if (!writeAccess) {
+  if (form !== 3 && !writeAccess) {
     return (
       <Message
         data-cy="no-write-access-notice"
