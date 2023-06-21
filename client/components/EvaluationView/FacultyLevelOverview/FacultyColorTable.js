@@ -89,7 +89,7 @@ const FacultyColorTable = React.memo(
     }, [])
     return (
       <div className="overview-color-grid-faculty">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} />
+        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
           <Radio
             style={{ marginRight: 'auto', marginBottom: '2em' }}
@@ -109,6 +109,11 @@ const FacultyColorTable = React.memo(
           />
         </div>
         <div />
+        <div>
+          <p style={{ marginTop: '0.8rem' }}>{t('bachelor')}</p>
+          <p style={{ marginTop: '1.5rem' }}>{t('master')}</p>
+          <p style={{ marginTop: '1.5rem' }}>{t('doctoral')}</p>
+        </div>
 
         <SummaryRowFaculty
           setStatsToShow={setStatsToShow}
