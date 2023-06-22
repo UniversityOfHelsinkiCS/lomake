@@ -1,10 +1,12 @@
 export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
-    logOut: 'Kirjaudu ulos',
+    // all use Finnish fallback for following
     adminPage: 'OSPA',
     about: 'About',
     admin: 'Admin',
+    // end
+    logOut: 'Kirjaudu ulos',
     backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
     form: 'Lomake',

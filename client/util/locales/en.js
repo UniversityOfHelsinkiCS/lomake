@@ -1,10 +1,8 @@
 export default {
   common: {
-    // all use English fallback for following
     adminPage: 'OSPA',
     about: 'About',
     admin: 'Admin',
-    // End of fallbacks
     logOut: 'Log out',
     backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
