@@ -135,6 +135,7 @@ export default {
       canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
       deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
       ospaProcessing: 'OSPA käsittelee vastaukset.',
+      prosessing: 'Vastaukset käsitellään.',
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
