@@ -134,7 +134,10 @@ const ColorTableCell = ({
   }
   if (
     !colorAnswer ||
-    (colorAnswer.bachelor === undefined && colorAnswer.master === undefined && colorAnswer.doctoral === undefined)
+    (form === 5 &&
+      colorAnswer.bachelor === undefined &&
+      colorAnswer.master === undefined &&
+      colorAnswer.doctoral === undefined)
   ) {
     return (
       <div
