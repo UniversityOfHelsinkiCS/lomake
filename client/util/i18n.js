@@ -19,7 +19,7 @@ const getInitial = () => {
 
 i18n.use(initReactI18next).init({
   lng: getInitial(),
-  fallbackLng: 'en',
+  fallbackLng: 'fi',
   defaultNS: 'common',
   resources: {
     fi,
