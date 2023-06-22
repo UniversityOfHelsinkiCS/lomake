@@ -44,15 +44,15 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
                     data={[
                       {
                         color: '#9dff9d',
-                        value: levelStats.green || 0,
+                        value: levelStats?.green || 0,
                       },
                       {
                         color: '#ffffb1',
-                        value: levelStats.yellow || 0,
+                        value: levelStats?.yellow || 0,
                       },
                       {
                         color: '#ff7f7f',
-                        value: levelStats.red || 0,
+                        value: levelStats?.red || 0,
                       },
                     ]}
                     labelPosition={50}
