@@ -2,6 +2,9 @@ export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
     logOut: 'Kirjaudu ulos',
+    adminPage: 'OSPA',
+    about: 'About',
+    admin: 'Admin',
     backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
     form: 'Lomake',
