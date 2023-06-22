@@ -1,6 +1,11 @@
 export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
+    // all use Finnish fallback for following
+    adminPage: 'OSPA',
+    about: 'About',
+    admin: 'Admin',
+    // end
     logOut: 'Kirjaudu ulos',
     backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
@@ -130,6 +135,7 @@ export default {
       canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
       deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
       ospaProcessing: 'OSPA käsittelee vastaukset.',
+      prosessing: 'Vastaukset käsitellään.',
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',

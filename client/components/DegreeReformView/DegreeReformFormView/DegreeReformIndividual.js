@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-import { isAdmin, requiredDegreeReformIds } from '@root/config/common'
+import { requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -74,8 +73,6 @@ const DegreeReformIndividual = () => {
     dispatch(clearFormState())
     setModalOpen(false)
   }
-
-  if (!isAdmin(user)) return <Redirect to="/" />
 
   const formType = 'degree-reform-individual'
   return (

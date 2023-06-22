@@ -1,10 +1,8 @@
 export default {
   common: {
-    // all use English fallback for following
     adminPage: 'OSPA',
     about: 'About',
     admin: 'Admin',
-    // End of fallbacks
     logOut: 'Log out',
     backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
@@ -133,6 +131,7 @@ export default {
       canBeOpened: 'The owner of the form may still unlock the form before its deadline',
       deadlinePassed: 'The deadline to edit form has passed.',
       ospaProcessing: 'OSPA will process the answers.',
+      prosessing: 'The answers will be processed.',
     },
     savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
     noSystemsSelected: 'No feedback systems selected.',

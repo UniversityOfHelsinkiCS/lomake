@@ -34,8 +34,7 @@ const StatusMessage = ({ programme, form }) => {
     checking = utcTime.toLocaleString(locale)
     lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
   }
-
-  if (!writeAccess) {
+  if (form !== 3 && !writeAccess) {
     return (
       <Message
         data-cy="no-write-access-notice"
@@ -52,7 +51,7 @@ const StatusMessage = ({ programme, form }) => {
           data-cy="deadline-passed-notice"
           icon="clock"
           header={`${t('formView:status:deadlinePassed')}`}
-          content={`${t('formView:status:ospaProcessing')}`}
+          content={`${t('formView:status:prosessing')}`}
         />
       </>
     )
