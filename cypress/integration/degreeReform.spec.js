@@ -29,7 +29,7 @@ describe('Degree reform form tests', () => {
   })
 
   it('Reform form for individuals loads', () => {
-    cy.visit('/degree-reform-individual/form')
+    cy.visit('/individual')
     cy.get('[data-cy=reform-individual-form-container')
     cy.get('[data-cy=choose-radio-container-degree_abilities_in_changing_conditions]')
     cy.get('[data-cy=unit-selection]')
@@ -60,7 +60,7 @@ describe('Degree reform form tests', () => {
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
-    cy.visit('/degree-reform-individual/form')
+    cy.visit('/individual')
   })
 
   // programmes : click, reload, check data persists
@@ -145,7 +145,7 @@ describe('Degree reform form tests', () => {
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
-    cy.visit('/degree-reform-individual/form').wait(3000)
+    cy.visit('/individual').wait(3000)
 
     // Start filling in the form
 
@@ -176,7 +176,7 @@ describe('Degree reform form tests', () => {
   it('If individual degree reform is closed, answering is disabled', () => {
     cy.reload()
 
-    cy.visit('/degree-reform-individual/form').wait(3000)
+    cy.visit('/individual').wait(3000)
 
     // Start filling in the form
 
@@ -208,7 +208,7 @@ describe('Degree reform form tests', () => {
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
-    cy.visit('/degree-reform-individual/form').wait(3000)
+    cy.visit('/individual').wait(3000)
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
 

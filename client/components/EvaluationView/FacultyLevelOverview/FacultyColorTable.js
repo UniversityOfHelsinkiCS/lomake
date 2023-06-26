@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Input } from 'semantic-ui-react'
+import { Loader, Input, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems } from 'Utilities/common'
+import { sortedItems, answersByYear } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
-import SummaryRow from '../../OverviewPage/SummaryRow'
+import SummaryRowFaculty from './SummaryRowFaculty'
 import './OverviewPage.scss'
 import { facultyEvaluationQuestions as questions } from '../../../questionData'
 
@@ -19,21 +19,21 @@ const FacultyColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
-    // const year = 2023
+    const year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
+    const [showDataByProgramme, setShowByProgramme] = useState(false)
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
     }, [])
 
-    const selectedAnswers = []
-    // const selectedAnswers = answersByYear({
-    //   year,
-    //   tempAnswers: answers,
-    //   oldAnswers,
-    //   draftYear: draftYear && draftYear.year,
-    // })
+    const selectedAnswers = answersByYear({
+      year,
+      tempAnswers: answers,
+      oldAnswers,
+      draftYear: draftYear && draftYear.year,
+    })
 
     const sortedFaculties = sortedItems(faculties, sorter, lang)
 
@@ -50,7 +50,6 @@ const FacultyColorTable = React.memo(
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
         const answers = faculty && faculty.data ? faculty.data : {}
-
         Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
@@ -87,11 +86,18 @@ const FacultyColorTable = React.memo(
 
       return [...acc, ...questionObjects]
     }, [])
-
     return (
       <div className="overview-color-grid-faculty">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} />
+        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
+          <Radio
+            style={{ marginRight: 'auto', marginBottom: '2em' }}
+            data-cy="overviewpage-filter-button"
+            toggle
+            onChange={() => setShowByProgramme(!showDataByProgramme)}
+            checked={showDataByProgramme}
+            label={t('showDataByProgramme')}
+          />
           <Input
             data-cy="overviewpage-filter"
             icon="filter"
@@ -102,7 +108,7 @@ const FacultyColorTable = React.memo(
           />
         </div>
         <div />
-        <SummaryRow
+        <SummaryRowFaculty
           setStatsToShow={setStatsToShow}
           stats={stats}
           selectedAnswers={selectedAnswers}
@@ -120,6 +126,7 @@ const FacultyColorTable = React.memo(
               key={f.code}
               formType={formType}
               form={form}
+              showDataByProgramme={showDataByProgramme}
             />
           )
         })}

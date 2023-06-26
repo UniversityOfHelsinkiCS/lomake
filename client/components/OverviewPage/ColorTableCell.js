@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
-import { yearlyQuestions, evaluationQuestions } from '../../questionData'
+import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const colorScoreMap = {
   green: 1,
@@ -58,20 +58,43 @@ const ColorTableCell = ({
 
   const questionMap = {
     1: yearlyQuestions,
+    2: degreeReformIndividualQuestions,
+
     4: evaluationQuestions,
   }
+
   const questions = questionMap[form] || yearlyQuestions
   const textId = `${questionId}_text`
-  const colorId = `${questionId}_light`
+  let colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
-  const colorAnswer = programmesAnswers[colorId]
+  let colorAnswer = null
+
+  if (form === 5) {
+    colorId = [
+      `${questionId}_light`,
+      `${questionId}_bachelor_light`,
+      `${questionId}_master_light`,
+      `${questionId}_doctoral_light`,
+    ]
+    if (programmesAnswers[colorId[0]]) {
+      colorAnswer = programmesAnswers[colorId[0]]
+    } else {
+      colorAnswer = {
+        bachelor: programmesAnswers[colorId[1]],
+        master: programmesAnswers[colorId[2]],
+        doctoral: programmesAnswers[colorId[3]],
+      }
+    }
+  } else {
+    colorAnswer = programmesAnswers[colorId]
+  }
 
   // below is a bit 🍝 but the basic idea is that we only want to show the
-  // dialog to explain the icon arrows when they are shown
+  // dialog to explain the icon arrows when they are shown🔥🔥🔥🔥
 
   let IconElement = null
 
-  if (textAnswer && questionType !== 'ENTITY') {
+  if (textAnswer && questionType !== 'ENTITY' && questionType !== 'ENTITY_LEVELS') {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
@@ -109,8 +132,13 @@ const ColorTableCell = ({
       </div>
     )
   }
-
-  if (!colorAnswer) {
+  if (
+    !colorAnswer ||
+    (form === 5 &&
+      colorAnswer.bachelor === undefined &&
+      colorAnswer.master === undefined &&
+      colorAnswer.doctoral === undefined)
+  ) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
@@ -135,39 +163,76 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-
-  IconElement = (
-    <div
-      data-cy={`${programmesKey}-${questionId}`}
-      className={`square-${colorAnswer}`}
-      onClick={() =>
-        setModalData({
-          header: questions.reduce((acc, cur) => {
-            if (acc) return acc
-            const header = cur.parts.reduce((acc, cur) => {
+  if (form !== 5 || typeof colorAnswer === 'string') {
+    IconElement = (
+      <div
+        data-cy={`${programmesKey}-${questionId}`}
+        className={`square-${colorAnswer}`}
+        onClick={() =>
+          setModalData({
+            header: questions.reduce((acc, cur) => {
               if (acc) return acc
+              const header = cur.parts.reduce((acc, cur) => {
+                if (acc) return acc
 
-              if (cur.id === questionId) return cur.description[lang]
+                if (cur.id === questionId) return cur.description[lang]
+
+                return acc
+              }, '')
+
+              if (header) return header
 
               return acc
-            }, '')
+            }, ''),
+            programme: programmesName,
+            content: textAnswer,
+            color: colorAnswer,
+          })
+        }
+      >
+        {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+      </div>
+    )
+  } else {
+    IconElement = (
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {Object.entries(colorAnswer).map(([key, value]) => {
+          return (
+            <div
+              key={`${programmesKey}-${questionId}-${key}`}
+              data-cy={`${programmesKey}-${questionId}-${key}`}
+              className={`square-${value}`}
+              onClick={() =>
+                setModalData({
+                  header: questions.reduce((acc, cur) => {
+                    if (acc) return acc
+                    const header = cur.parts.reduce((acc, cur) => {
+                      if (acc) return acc
 
-            if (header) return header
+                      if (cur.id === questionId) return cur.description[lang]
 
-            return acc
-          }, ''),
-          programme: programmesName,
-          content: textAnswer,
-          color: colorAnswer,
-        })
-      }
-    >
-      {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-    </div>
-  )
+                      return acc
+                    }, '')
+
+                    if (header) return header
+
+                    return acc
+                  }, ''),
+                  programme: programmesName,
+                  content: textAnswer,
+                  color: value,
+                })
+              }
+            >
+              {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
   if (!icon) return IconElement
-
   return (
     <Popup trigger={IconElement}>
       <Icon name={icon} style={{ margin: '0 auto' }} size="large" />{' '}

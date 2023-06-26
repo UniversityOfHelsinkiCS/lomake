@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
 import { Button, Icon } from 'semantic-ui-react'
-import { isAdmin, requiredDegreeReformIds } from '@root/config/common'
+import { requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
@@ -75,8 +74,6 @@ const DegreeReformIndividual = () => {
     setModalOpen(false)
   }
 
-  if (!isAdmin(user)) return <Redirect to="/" />
-
   const formType = 'degree-reform-individual'
   return (
     <div className="form-container" data-cy="reform-individual-form-container" lang={lang}>
@@ -87,7 +84,7 @@ const DegreeReformIndividual = () => {
             <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
           </div>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('degree-reform')} 2015-2017
+            {t('degree-reform')} 2015-2017 Testilomake
           </h3>
           <StatusMessage programme={user.id} form={formNumber} />
           <SaveIndicator />

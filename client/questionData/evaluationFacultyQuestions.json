@@ -187,7 +187,7 @@
           "se": "",
           "en": ""
         }
-      }, 
+      },
       {
         "id": "faculty_ease_of_study_actions",
         "type": "ACTIONS",
@@ -202,14 +202,14 @@
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
+          "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
           "se": "",
           "en": ""
         },
         "required": true,
         "no_color": true
       }
-    ] 
+    ]
   },
   {
     "title": {
@@ -428,7 +428,7 @@
           "se": "",
           "en": ""
         }
-      }, 
+      },
       {
         "id": "faculty_programme_structure_actions",
         "type": "ACTIONS",
@@ -443,13 +443,13 @@
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
+          "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset tarvittavat toimenpiteet",
           "se": "",
           "en": ""
         },
         "required": true,
         "no_color": true
-      } 
-    ] 
+      }
+    ]
   }
 ]

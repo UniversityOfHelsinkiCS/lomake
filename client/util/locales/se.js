@@ -119,6 +119,7 @@ export default {
       canBeOpened: 'Blankettens ägare kan ännu öppna blanketten innan dess deadline.',
       deadlinePassed: 'Tiden för att redigera blanketten har gått ut.',
       ospaProcessing: 'OSPA behandlar svaren.',
+      prosessing: 'Svaren behandlas.',
     },
     savingAnswers: 'Svaren sparas automatiskt. Sista dagen för att svara på blanketten:',
     noSystemsSelected: 'Inget responssystem har valts',

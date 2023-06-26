@@ -1,6 +1,11 @@
 export default {
   // default namespace, can be used without prefix, ie. t('logOut')
   common: {
+    // all use Finnish fallback for following
+    adminPage: 'OSPA',
+    about: 'About',
+    admin: 'Admin',
+    // end
     logOut: 'Kirjaudu ulos',
     backToFrontPage: 'Takaisin etusivulle',
     chosenLanguage: 'Suomi',
@@ -62,6 +67,7 @@ export default {
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
+    showDataByProgramme: 'Näytä tiedot koulutusohjelmittain',
   },
 
   // other namespaces, use requires prefix, eg. t('aboutPage:title')
@@ -129,13 +135,14 @@ export default {
       canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
       deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
       ospaProcessing: 'OSPA käsittelee vastaukset.',
+      prosessing: 'Vastaukset käsitellään.',
     },
     savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
-    developmentArea: 'Kehittämiskohde',
-    actions: 'Toimenpide-ehdotus',
+    developmentArea: 'Nimeä kehittämiskohde',
+    actions: 'Toimenpide-ehdotukset',
     requiredActions: 'Tarvittavat toimenpiteet',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
@@ -233,6 +240,9 @@ export default {
     noUsers: 'Ei käyttäjiä',
     userListJory: 'Lomakkeelle kirjautuneet käyttäjät, jotka kuuluvat koulutusohjelman johtoryhmään',
     userListOthers: 'Lomakkeelle kirjautuneet muut käyttäjät, joilla oikeus koulutusohjelmaan',
+    greenModalAccordion: 'Tilanne hyvä',
+    yellowModalAccordion: 'Tilanne neutraali',
+    redModalAccordion: 'Tilanne huono',
   },
 
   report: {

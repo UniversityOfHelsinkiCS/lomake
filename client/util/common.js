@@ -34,6 +34,9 @@ export const colors = {
   dark_gray: '#4e4c4c',
   black: '#1B1C1D',
   dimmer_dark: 'rgba(0, 0, 0, 0.75)',
+  light_green: '#9dff9d',
+  light_red: '#ff9d9d',
+  light_yellow: '#ffff9d',
 }
 
 const getUserGroupSortValue = ({ specialGroup }) => {

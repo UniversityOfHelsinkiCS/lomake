@@ -364,25 +364,21 @@ const updateAnswerReady = async (req, res) => {
   }
 }
 
-const removeBackupForIndividual = async (req, res) => {
-  const uid = req
+const removeBackupForIndividual = async uid => {
   try {
-    db.backupAnswer.destroy({
+    await db.backupAnswer.destroy({
       where: {
         [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
       },
     })
-    return res.status(200)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
   }
 }
 
-const clearTempForIndividual = async (req, res) => {
-  const uid = req
+const clearTempForIndividual = async uid => {
   try {
-    db.tempAnswer.update(
+    await db.tempAnswer.update(
       { data: {} },
       {
         where: {
@@ -390,10 +386,8 @@ const clearTempForIndividual = async (req, res) => {
         },
       }
     )
-    return res.status(200)
   } catch (error) {
     logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
   }
 }
 

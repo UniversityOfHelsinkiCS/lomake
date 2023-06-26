@@ -20,7 +20,7 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
   } else if (formType === 'degree-reform') {
     targetURL = `/degree-reform/form/${p.key}`
   } else if (formType === 'degree-reform-individual') {
-    targetURL = `/degree-reform-individual/form`
+    targetURL = `/individual`
   }
 
   const lastYearsAnswers =

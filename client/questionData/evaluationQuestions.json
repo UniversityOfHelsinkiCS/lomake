@@ -31,7 +31,7 @@
           "se": "",
           "en": ""
         },
-        "relatedYearlyQuestions": [ "student_admissions"]
+        "relatedYearlyQuestions": ["student_admissions"]
       },
       {
         "id": "ops_practicality",
@@ -183,7 +183,7 @@
           "se": "",
           "en": ""
         }
-      }, 
+      },
       {
         "id": "ease_of_study_actions",
         "type": "ACTIONS",
@@ -198,14 +198,14 @@
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
+          "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "",
           "en": ""
         },
         "required": true,
         "no_color": true
       }
-    ] 
+    ]
   },
   {
     "title": {
@@ -418,7 +418,7 @@
           "se": "",
           "en": ""
         }
-      }, 
+      },
       {
         "id": "programme_structure_actions",
         "type": "ACTIONS",
@@ -433,13 +433,13 @@
           "en": ""
         },
         "extrainfo": {
-          "fi": "Kirjatkaa 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
+          "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "",
           "en": ""
         },
         "required": true,
         "no_color": true
-      } 
-    ] 
+      }
+    ]
   }
 ]

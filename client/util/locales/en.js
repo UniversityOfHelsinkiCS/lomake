@@ -1,10 +1,8 @@
 export default {
   common: {
-    // all use English fallback for following
     adminPage: 'OSPA',
     about: 'About',
     admin: 'Admin',
-    // End of fallbacks
     logOut: 'Log out',
     backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
@@ -65,6 +63,7 @@ export default {
     send: 'Send',
     what: 'What',
     chooseFaculty: 'Choose faculty',
+    showDataByProgramme: "Show data by programme's",
   },
 
   aboutPage: {
@@ -132,6 +131,7 @@ export default {
       canBeOpened: 'The owner of the form may still unlock the form before its deadline',
       deadlinePassed: 'The deadline to edit form has passed.',
       ospaProcessing: 'OSPA will process the answers.',
+      prosessing: 'The answers will be processed.',
     },
     savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
     noSystemsSelected: 'No feedback systems selected.',
@@ -233,6 +233,9 @@ export default {
     noUsers: 'No users',
     userListJory: 'Steering group members who have accessed the form',
     userListOthers: 'Other users who have programme access rights and have accessed the form',
+    greenModalAccordion: 'Situation good',
+    yellowModalAccordion: 'Situation satisfactory',
+    redModalAccordion: 'Situation poor',
   },
 
   report: {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input, Label } from 'semantic-ui-react'
+import { TextArea, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
@@ -22,12 +22,13 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
   return (
     <div key={index}>
       <div style={{ paddingLeft: '2em' }}>
-        <Label color="red" ribbon>
+        <Label color="red" ribbon style={{ top: '-2em' }}>
           {t('formView:developmentArea')}
         </Label>
-        <Input
+        <TextArea
           id="title"
           style={{ width: '50%' }}
+          rows={2}
           placeholder={t('formView:developmentArea')}
           onChange={handleChange}
           disabled={viewOnly}

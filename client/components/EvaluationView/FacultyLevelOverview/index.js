@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import { Accordion, Icon } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -9,12 +10,14 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import FacultyColorTable from './FacultyColorTable'
+import { data } from '../../../../config/data'
 
 export default () => {
   const { t } = useTranslation()
   const [modalData, setModalData] = useState(null)
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
+  const [accordionsOpen, setAccordionsOpen] = useState({})
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
@@ -42,6 +45,7 @@ export default () => {
   }, [programmes, currentUser])
 
   const filteredFaculties = useMemo(() => {
+    if (!faculties) return []
     return faculties.filter(f => {
       const name = f.name[lang]
       const { code } = f
@@ -51,7 +55,6 @@ export default () => {
       )
     })
   }, [usersProgrammes, faculties, lang, debouncedFilter])
-
   return (
     <>
       {modalData && (
@@ -59,7 +62,54 @@ export default () => {
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
-              <ReactMarkdown>{modalData.content}</ReactMarkdown>
+              {modalData?.content?.answer ? (
+                <Accordion className="modal-accordion-container" exclusive={false}>
+                  {modalData.content
+                    ? Object.entries(modalData.content)
+                        .sort((a, b) => {
+                          if (a[0] === 'green' && b[0] === 'yellow') return -1
+                          if (a[0] === 'yellow' && b[0] === 'red') return -1
+                          if (a[0] === 'green' && b[0] === 'red') return -1
+                          if (a[0] === 'yellow' && b[0] === 'green') return 1
+                          if (a[0] === 'red' && b[0] === 'green') return 1
+                          if (a[0] === 'red' && b[0] === 'yellow') return 1
+
+                          return 0
+                        })
+                        .map(([key, value]) => {
+                          return (
+                            <div key={`${key}-${value}`}>
+                              <Accordion.Title
+                                className={`accordion-title-${key}`}
+                                active={accordionsOpen[key] === true}
+                                onClick={() => setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })}
+                              >
+                                <Icon name="angle down" />
+                                <span style={{ fontSize: '22px' }}> {t(`overview:${key}ModalAccordion`)}</span>
+                              </Accordion.Title>
+                              {value.map(answerContent => {
+                                const programmeName = data
+                                  .find(f => f.code === modalData.facultyKey)
+                                  .programmes.find(p => p.key === answerContent.programme).name[lang]
+                                return (
+                                  <Accordion.Content
+                                    className={`accordion-content-${key}`}
+                                    key={answerContent.programme}
+                                    active={accordionsOpen[key] === true}
+                                  >
+                                    <h4>{programmeName}</h4>
+                                    <ReactMarkdown>{answerContent.answer}</ReactMarkdown>
+                                  </Accordion.Content>
+                                )
+                              })}
+                            </div>
+                          )
+                        })
+                    : null}
+                </Accordion>
+              ) : (
+                <ReactMarkdown>{modalData.content}</ReactMarkdown>
+              )}
             </div>
           </>
         </CustomModal>
