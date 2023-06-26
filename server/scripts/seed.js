@@ -24,7 +24,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create studyprogrammes
    */
   for (const { code, programmes } of data) {
-    const primaryFaculty = await db.faculty.findOne({ where: { key: code } })
+    const primaryFaculty = await db.faculty.findOne({ where: { code } })
 
     for (const { key, name, level, international } of programmes) {
       await db.studyprogramme.create({
@@ -77,7 +77,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
    */
 
   for (const { code } of data) {
-    const studyprogramme = await db.studyprogramme.findOne({ where: { code } })
+    const studyprogramme = await db.studyprogramme.findOne({ where: { key: code } })
 
     for (const { id, key } of studyprogramme) {
       await db.studyprogrammesLocked.create({
