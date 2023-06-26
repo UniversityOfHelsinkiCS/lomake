@@ -7,7 +7,7 @@ import { sortedItems, answersByYear } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
-import SummaryRow from '../../OverviewPage/SummaryRow'
+import SummaryRowFaculty from './SummaryRowFaculty'
 import './OverviewPage.scss'
 import { facultyEvaluationQuestions as questions } from '../../../questionData'
 
@@ -50,7 +50,6 @@ const FacultyColorTable = React.memo(
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
         const answers = faculty && faculty.data ? faculty.data : {}
-
         Object.keys(answers).forEach(answerKey => {
           if (answerKey.includes('_light')) {
             const color = answers[answerKey] // "red", "yellow", "green" or ""
@@ -89,7 +88,7 @@ const FacultyColorTable = React.memo(
     }, [])
     return (
       <div className="overview-color-grid-faculty">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} />
+        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
           <Radio
             style={{ marginRight: 'auto', marginBottom: '2em' }}
@@ -109,7 +108,7 @@ const FacultyColorTable = React.memo(
           />
         </div>
         <div />
-        <SummaryRow
+        <SummaryRowFaculty
           setStatsToShow={setStatsToShow}
           stats={stats}
           selectedAnswers={selectedAnswers}
