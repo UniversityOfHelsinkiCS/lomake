@@ -76,12 +76,12 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create studyprogrammes_locked for checking locked status
    */
 
-  for (const { code } of data) {
-    const studyprogramme = await db.studyprogramme.findOne({ where: { key: code } })
+  const studyprogramme = await db.studyprogramme.findAll({ where: {} })
 
+  for (const { id, key } of studyprogramme) {
     await db.studyprogrammesLocked.create({
-      key: studyprogramme.key,
-      studyprogrammeId: studyprogramme.id,
+      key,
+      studyprogrammeId: id,
       locked: {
         yearly: false,
         evaluation: false,
