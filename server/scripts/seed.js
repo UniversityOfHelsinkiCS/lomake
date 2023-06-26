@@ -6,6 +6,7 @@ const { data, facultyMap } = require('@root/config/data')
 
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
+  await db.studyprogrammesLocked.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
   await db.faculty.destroy({ where: {} })
 
@@ -23,7 +24,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
    * Create studyprogrammes
    */
   for (const { code, programmes } of data) {
-    const primaryFaculty = await db.faculty.findOne({ where: { code } })
+    const primaryFaculty = await db.faculty.findOne({ where: { key: code } })
 
     for (const { key, name, level, international } of programmes) {
       await db.studyprogramme.create({
