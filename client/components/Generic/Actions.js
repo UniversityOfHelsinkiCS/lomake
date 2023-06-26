@@ -54,7 +54,8 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
           margin: '1em 0',
         }}
       >
-        {description}
+        <p> {description}</p>
+
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
       {actionsList.length === 0 ? (
