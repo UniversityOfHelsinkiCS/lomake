@@ -10,8 +10,13 @@ module.exports = {
       key: {
         type: Sequelize.STRING,
       },
-      studyprogrammeId: {
+      studyprogramme_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'studyprogrammes',
+          key: 'id',
+        },
       },
       locked: {
         type: Sequelize.JSONB,
