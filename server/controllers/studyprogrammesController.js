@@ -29,7 +29,7 @@ const getUsersProgrammes = async (req, res) => {
         include: [
           'primaryFaculty',
           'companionFaculties',
-          { model: db.studyprogrammeLocked, as: 'studyprogrammesLocked' },
+          { model: db.studyprogrammesLocked, as: 'studyprogrammesLocked' },
         ],
       })
       return res.status(200).json(data)
@@ -39,12 +39,12 @@ const getUsersProgrammes = async (req, res) => {
         key: Object.keys(req.user.access),
       },
       attributes: {
-        include: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
+        exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
       },
       include: [
         'primaryFaculty',
         'companionFaculties',
-        { model: db.studyprogrammeLocked, as: 'studyprogrammesLocked' },
+        { model: db.studyprogrammesLocked, as: 'studyprogrammesLocked' },
       ],
     })
     return res.status(200).json(data)
@@ -63,9 +63,9 @@ const getOne = async (req, res) => {
       },
       include: ['primaryFaculty', 'companionFaculties'],
     })
-    const studyProgrammeLocked = await db.studyProgrammeLocked.findOne({
+    const studyProgrammeLocked = await db.studyprogrammesLocked.findOne({
       where: {
-        studyProgrammeId: programEntity.id,
+        studyprogrammeId: programEntity.id,
       },
     })
     return res.status(200).json(studyProgrammeLocked)
