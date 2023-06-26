@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const TableHeader = ({ tableIds, sort, title }) => {
+const TableHeader = ({ tableIds, sort, title, form }) => {
   const { t } = useTranslation()
 
   return (
@@ -19,6 +19,11 @@ const TableHeader = ({ tableIds, sort, title }) => {
           <Icon name="sort" />
         </div>
       </div>
+      {form === 5 ? (
+        <div className="sticky-header">
+          <p style={{ fontWeight: 'bold' }}>Levels</p>{' '}
+        </div>
+      ) : null}
       {tableIds.map(idObject => (
         <div key={idObject.id} className="sticky-header-categories">
           <span className="vertical-text">{idObject.shortLabel}</span>

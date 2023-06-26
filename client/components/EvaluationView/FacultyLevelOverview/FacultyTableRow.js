@@ -2,10 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
+import { useTranslation } from 'react-i18next'
 import PieForFaculty from './PieForFaculty'
 
 const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, showDataByProgramme }) => {
   const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   let answers = []
   if (showDataByProgramme) {
     const programmeAnswers = selectedAnswers.filter(a => faculty.ownedProgrammes.find(p => p.key === a.programme))
@@ -24,6 +26,11 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
       </div>
       <div className="table-container-row-link">
         <Link to={targetURL}>{faculty.code}</Link>
+      </div>
+      <div>
+        <p style={{ margin: '0' }}>{t('bachelor')}</p>
+        <p style={{ margin: '0' }}>{t('master')}</p>
+        <p style={{ margin: '0' }}>{t('doctoral')}</p>
       </div>
       {showDataByProgramme
         ? tableIds.map(idObject => (

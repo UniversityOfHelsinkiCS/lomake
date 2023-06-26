@@ -132,8 +132,13 @@ const ColorTableCell = ({
       </div>
     )
   }
-
-  if (!colorAnswer) {
+  if (
+    !colorAnswer ||
+    (form === 5 &&
+      colorAnswer.bachelor === undefined &&
+      colorAnswer.master === undefined &&
+      colorAnswer.doctoral === undefined)
+  ) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
