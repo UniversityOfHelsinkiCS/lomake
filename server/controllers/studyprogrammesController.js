@@ -61,14 +61,10 @@ const getOne = async (req, res) => {
       where: {
         key: programme,
       },
-      include: ['primaryFaculty', 'companionFaculties'],
+      include: ['primaryFaculty', 'companionFaculties', 'studyprogrammesLocked'],
     })
-    const studyProgrammeLocked = await db.studyprogrammesLocked.findOne({
-      where: {
-        studyprogrammeId: programEntity.id,
-      },
-    })
-    return res.status(200).json(studyProgrammeLocked)
+
+    return res.status(200).json(programEntity)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

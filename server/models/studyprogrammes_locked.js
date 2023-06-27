@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   studyprogrammesLocked.associate = models => {
     studyprogrammesLocked.belongsTo(models.studyprogramme, {
       foreignKey: 'studyprogrammeId',
-      as: 'studyprogramme',
     })
   }
   return studyprogrammesLocked

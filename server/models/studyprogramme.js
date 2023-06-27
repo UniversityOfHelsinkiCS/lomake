@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       as: 'companionFaculties',
     })
 
-    studyprogramme.belongsTo(models.studyprogrammesLocked, {
-      foreignKey: 'id',
+    studyprogramme.hasOne(models.studyprogrammesLocked, {
+      foreignKey: 'studyprogramme_id',
       as: 'studyprogrammesLocked',
     })
   }

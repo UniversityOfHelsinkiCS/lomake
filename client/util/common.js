@@ -421,18 +421,25 @@ export const getFilters = filter => {
 }
 
 export const getForm = formType => {
+  if (formType === 'yearlyAssesment') {
+    return 1
+  }
   if (formType === 'degree-reform') {
     return 2
   }
   if (formType === 'degree-reform-individual') {
     return 3
   }
-  // if (formType === 'evaluation') {
-  //   return 4
-  // } Needs finetuning for evaluation
-  if (formType === 'yearlyAssesment') {
-    return 1
+  if (formType === 'evaluation') {
+    return 4
   }
+  if (formType === 'evaluation-faculty') {
+    return 5
+  }
+  if (formType === 'evaluation-committee') {
+    return 6
+  }
+
   return 1
 }
 
