@@ -6,7 +6,6 @@ const { data, facultyMap } = require('@root/config/data')
 
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
-  await db.studyprogrammesLocked.destroy({ where: {} })
   await db.studyprogramme.destroy({ where: {} })
   await db.faculty.destroy({ where: {} })
 
@@ -32,7 +31,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
         name,
         level,
         international,
-        locked: false,
+        locked_all: { yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false },
         claimed: false,
         primaryFacultyId: primaryFaculty.id,
       })
@@ -70,24 +69,6 @@ const seedFacultiesAndStudyprogrammes = async () => {
         })
       }
     }
-  }
-
-  /**
-   * Create studyprogrammes_locked for checking locked status
-   */
-
-  const studyprogramme = await db.studyprogramme.findAll({ where: {} })
-
-  for (const { id, key } of studyprogramme) {
-    await db.studyprogrammesLocked.create({
-      key,
-      studyprogrammeId: id,
-      locked: {
-        yearly: false,
-        evaluation: false,
-        'degree-reform': false,
-      },
-    })
   }
 }
 

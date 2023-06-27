@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       level: DataTypes.STRING,
       international: DataTypes.BOOLEAN,
       primaryFacultyId: DataTypes.INTEGER,
+      locked_all: DataTypes.JSONB,
     },
     {
       underscored: true,
@@ -28,11 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       through: 'companionFaculty',
       foreignKey: 'studyprogrammeId',
       as: 'companionFaculties',
-    })
-
-    studyprogramme.hasOne(models.studyprogrammesLocked, {
-      foreignKey: 'studyprogramme_id',
-      as: 'studyprogrammesLocked',
     })
   }
 

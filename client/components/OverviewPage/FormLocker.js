@@ -41,7 +41,7 @@ export default function FormLocker({ programme, form = 1 }) {
   }
 
   if (!formDeadline || !programmeDetails) return null
-  const locked = Object.entries(programmeDetails.studyprogrammesLocked.locked).find(f => getForm(f[0]) === form)[1]
+  const locked = Object.entries(programmeDetails.locked_all).find(f => getForm(f[0]) === form)[1]
 
   return (
     <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>

@@ -119,9 +119,11 @@ const resetDeadlines = async () => {
 
   try {
     // Unlock all programmes
-    await db.studyprogramme.update({ locked: false }, { where: {} })
-    await db.studyprogrammesLocked.update(
-      { locked: { evaluation: true, yearly: true, 'degree-reform': true } },
+    await db.studyprogramme.update(
+      {
+        locked: false,
+        all_locked: { evaluation: false, yearly: false, 'degree-reform': false, 'evaluation-faculty': false },
+      },
       { where: {} }
     )
 

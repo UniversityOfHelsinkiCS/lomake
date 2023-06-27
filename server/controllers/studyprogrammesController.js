@@ -2,6 +2,7 @@ const db = require('@models/index')
 const { isAdmin, isSuperAdmin } = require('@util/common')
 const logger = require('@util/logger')
 const moment = require('moment')
+const { getFormType } = require('@util/common')
 const { seed } = require('../scripts/seed')
 
 const getAll = async (_, res) => {
@@ -26,11 +27,7 @@ const getUsersProgrammes = async (req, res) => {
         attributes: {
           exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
         },
-        include: [
-          'primaryFaculty',
-          'companionFaculties',
-          { model: db.studyprogrammesLocked, as: 'studyprogrammesLocked' },
-        ],
+        include: ['primaryFaculty', 'companionFaculties'],
       })
       return res.status(200).json(data)
     }
@@ -41,11 +38,7 @@ const getUsersProgrammes = async (req, res) => {
       attributes: {
         exclude: ['id', 'primaryFacultyId', 'createdAt', 'updatedAt'],
       },
-      include: [
-        'primaryFaculty',
-        'companionFaculties',
-        { model: db.studyprogrammesLocked, as: 'studyprogrammesLocked' },
-      ],
+      include: ['primaryFaculty', 'companionFaculties'],
     })
     return res.status(200).json(data)
   } catch (error) {
@@ -61,7 +54,7 @@ const getOne = async (req, res) => {
       where: {
         key: programme,
       },
-      include: ['primaryFaculty', 'companionFaculties', 'studyprogrammesLocked'],
+      include: ['primaryFaculty', 'companionFaculties'],
     })
 
     return res.status(200).json(programEntity)
@@ -96,8 +89,10 @@ const toggleLock = async (req, res) => {
 
     const { programme, form } = req.params
 
-    const programEntity = await db.studyprogrammesLocked.findOne({ where: { key: programme } })
-    programEntity.locked[form] = !programEntity.locked[form]
+    const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
+
+    programEntity.locked_all[getFormType(form)] = !programEntity.locked_all[getFormType(form)]
+    programEntity.changed('locked_all', true)
     await programEntity.save()
     logger.info(`User ${req.user.uid} toggled edit-lock of ${programme}`)
     return res.status(200).json(programEntity)

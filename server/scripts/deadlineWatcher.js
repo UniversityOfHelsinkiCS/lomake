@@ -26,7 +26,6 @@ const startDeadlineWatcher = async () => {
       logger.info(`${loggerPrefix} Today is a deadline, taking backups...`)
 
       const programmes = await db.studyprogramme.findAll({})
-      const programmesLocked = await db.studyprogrammesLocked.findAll({})
 
       await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
@@ -105,12 +104,7 @@ const startDeadlineWatcher = async () => {
 
         programmes.forEach(async programme => {
           programme.locked = true
-          programme.save()
-        })
-        programmesLocked.forEach(async programme => {
-          programme.locked['degree-reform'] = true
-          programme.locked.evaluation = true
-          programme.locked.yearly = true
+          programme.locked_all = { yearly: true, evaluation: true, 'evaluation-faculty': true, 'degree-reform': true }
           programme.save()
         })
       }
