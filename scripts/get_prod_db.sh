@@ -4,12 +4,13 @@ CONTAINER=lomake_db
 SERVICE_NAME=db
 DB_NAME=postgres
 
-LOMAKE_FILE_NAME=lomake.sql.gz
+# current_date=$(date +"%Y%m%d")
+LOMAKE_FILE_NAME="lomake.sql.gz"
 
-SERVER=toska.cs.helsinki.fi
+SERVER=toska-tmp.cs.helsinki.fi
 SERVER_PATH=/home/toska_user/most_recent_backup_store/
-
-SERVER_FILE=${SERVER_PATH}${LOMAKE_FILE_NAME}
+MELKKI=melkki.cs.helsinki.fi
+BACKUP_PATH=${SERVER_PATH}${LOMAKE_FILE_NAME}
 
 PROJECT_ROOT=$(dirname $(dirname $(realpath "$0")))
 BACKUPS=$PROJECT_ROOT/backups/
@@ -50,7 +51,8 @@ mkdir -p ${BACKUPS}
 
 echo "Fetching a new dump"
 get_username
-scp -r -o ProxyCommand="ssh -l $username -W %h:%p melkki.cs.helsinki.fi" $username@$SERVER:$SERVER_FILE $BACKUPS
+
+scp -r -o ProxyCommand="ssh -l $username -W %h:%p $MELKKI" $username@$SERVER:$BACKUP_PATH $BACKUPS
 
 echo "Removing database and related volume"
 docker-compose -f $DOCKER_COMPOSE down -v
