@@ -110,7 +110,7 @@ const FacultyFormView = ({ room, formString }) => {
     ) {
       return {}
     }
-    const { programmes, answers } = facultyProgrammeData?.forFaculty
+    const { programmes, answers } = facultyProgrammeData?.forFaculty || {}
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {

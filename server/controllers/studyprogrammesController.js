@@ -2,6 +2,7 @@ const db = require('@models/index')
 const { isAdmin, isSuperAdmin } = require('@util/common')
 const logger = require('@util/logger')
 const moment = require('moment')
+const { getFormType } = require('@util/common')
 const { seed } = require('../scripts/seed')
 
 const getAll = async (_, res) => {
@@ -55,6 +56,7 @@ const getOne = async (req, res) => {
       },
       include: ['primaryFaculty', 'companionFaculties'],
     })
+
     return res.status(200).json(programEntity)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -84,10 +86,12 @@ const toggleLock = async (req, res) => {
     if (upcomingDeadlinesCount === 0) {
       return res.status(200).json({ message: 'Cant toggle.' })
     }
+    const { programme, form } = req.params
+    const formInt = parseInt(form, 10)
 
-    const { programme } = req.params
     const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
-    programEntity.locked = !programEntity.locked
+    programEntity.lockedForms[getFormType(formInt)] = !programEntity.lockedForms[getFormType(formInt)]
+    programEntity.changed('lockedForms', true)
     await programEntity.save()
     logger.info(`User ${req.user.uid} toggled edit-lock of ${programme}`)
     return res.status(200).json(programEntity)

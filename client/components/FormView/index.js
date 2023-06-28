@@ -135,7 +135,7 @@ const FormView = ({ room }) => {
             {t('negative')}
           </div>
         </div>
-        <Downloads programme={programme} componentRef={componentRef} />
+        <Downloads programme={programme} componentRef={componentRef} form={form} />
         <Form programmeKey={programme.key} questions={questions} form={form} />
       </div>
     </div>

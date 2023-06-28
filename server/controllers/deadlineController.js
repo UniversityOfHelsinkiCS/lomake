@@ -1,6 +1,7 @@
 const db = require('@models/index')
 const logger = require('@util/logger')
 
+const { getFormType } = require('@util/common')
 const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const createOrUpdate = async (req, res) => {
@@ -13,7 +14,15 @@ const createOrUpdate = async (req, res) => {
   try {
     if ([1, 2, 4].includes(form)) {
       // Unlock all programmes
-      await db.studyprogramme.update({ locked: false }, { where: {} })
+      const formType = getFormType(form)
+      const studyprogrammes = await db.studyprogramme.findAll({})
+
+      await studyprogrammes.forEach(async programme => {
+        programme.lockedForms = { ...programme.lockedForms, [formType]: false }
+        await programme.save()
+      })
+
+      // await db.studyprogramme.update({ lockedForms: { [formType]: false } }, { where: {} })
     }
 
     // Create new or update old deadline
@@ -73,7 +82,10 @@ const remove = async (req, res) => {
 
     // Unlock all programmes and remove draft year if no deadlines remain
     if (remainingDeadlines.length === 0) {
-      await db.studyprogramme.update({ locked: true }, { where: {} })
+      await db.studyprogramme.update(
+        { lockedForms: { evaluation: true, yearly: true, 'degree-reform': true } },
+        { where: {} }
+      )
       await db.draftYear.destroy({
         truncate: true,
       })

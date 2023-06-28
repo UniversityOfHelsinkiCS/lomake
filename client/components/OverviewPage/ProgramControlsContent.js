@@ -5,7 +5,7 @@ import { organisationCodeToIam } from '@root/config/IAMConfig'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
 
-const OwnerAccordionContent = ({ programKey }) => {
+const OwnerAccordionContent = ({ programKey, form }) => {
   const dispatch = useDispatch()
   const [dataLoading, setDataLoading] = useState(false)
   const [dataReady, setDataReady] = useState(false)
@@ -29,7 +29,7 @@ const OwnerAccordionContent = ({ programKey }) => {
   return (
     <>
       <h4>{programJoryIam}</h4>
-      <FormLocker programme={programKey} />
+      <FormLocker programme={programKey} form={form} />
       <ProgramControlsUsers programme={programKey} joryIam={programJoryIam} />
     </>
   )

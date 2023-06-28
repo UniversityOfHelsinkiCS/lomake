@@ -12,10 +12,33 @@ const whereDraftYear = async () => {
   return draftYear || { [Op.is]: null }
 }
 
+const getFormType = form => {
+  if (form === 1) {
+    return 'yearly'
+  }
+  if (form === 2) {
+    return 'degree-reform'
+  }
+  if (form === 3) {
+    return 'degree-reform-individual'
+  }
+  if (form === 4) {
+    return 'evaluation'
+  }
+  if (form === 5) {
+    return 'evaluation-faculty'
+  }
+  if (form === 6) {
+    return 'evaluation-committee'
+  }
+  return 'yearly'
+}
+
 module.exports = {
   ...common,
   DB_URL,
   PORT,
   AUTOMATIC_IAM_PERMISSIONS_ENABLED,
   whereDraftYear,
+  getFormType,
 }

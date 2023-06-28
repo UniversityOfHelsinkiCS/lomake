@@ -421,21 +421,56 @@ export const getFilters = filter => {
 }
 
 export const getForm = formType => {
+  if (formType === 'yearly') {
+    return 1
+  }
   if (formType === 'degree-reform') {
     return 2
   }
   if (formType === 'degree-reform-individual') {
     return 3
   }
-  // if (formType === 'evaluation') {
-  //   return 4
-  // } Needs finetuning for evaluation
-  if (formType === 'yearlyAssesment') {
-    return 1
+  if (formType === 'evaluation') {
+    return 4
   }
+  if (formType === 'evaluation-faculty') {
+    return 5
+  }
+  if (formType === 'evaluation-committee') {
+    return 6
+  }
+
   return 1
 }
 
+export const getFormType = form => {
+  if (form === 1) {
+    return 'yearly'
+  }
+  if (form === 2) {
+    return 'degree-reform'
+  }
+  if (form === 3) {
+    return 'degree-reform-individual'
+  }
+  if (form === 4) {
+    return 'evaluation'
+  }
+  if (form === 5) {
+    return 'evaluation-faculty'
+  }
+  if (form === 6) {
+    return 'evaluation-committee'
+  }
+
+  return 'yearly'
+}
+
+export const isFormLocked = (form, lockedForms) => {
+  const formType = getFormType(form)
+  const lockedStatus = lockedForms[formType]
+  return lockedStatus
+}
 export const getProgramAnswerLevels = programmeKey => {
   let formDataFilter = []
   if (programmeKey === 'MH30_001') {
@@ -483,7 +518,7 @@ export const getFormViewRights = ({
   form,
 }) => {
   if (!accessToTempAnswers) return true
-  if (programme.locked) return true
+  if (isFormLocked(form, programme.lockedForms)) return true
   if (!writeAccess) return true
   if (viewingOldAnswers) return true
   if (!draftYear) return true
