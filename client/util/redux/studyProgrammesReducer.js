@@ -134,7 +134,7 @@ export default (state = { data: null, updateStatus: null }, action) => {
         ...state,
         data: state.data.map(programme => {
           if (programme.id === action.response.id) {
-            return { ...programme, locked: action.response.locked }
+            return { ...programme, lockedForms: action.response.lockedForms }
           }
           return programme
         }),
