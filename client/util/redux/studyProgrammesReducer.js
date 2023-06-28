@@ -21,8 +21,8 @@ export const getUsersProgrammes = () => {
   return callBuilder(route, prefix)
 }
 
-export const toggleLock = programmeKey => {
-  const route = `/programmes/${programmeKey}/toggleLock`
+export const toggleLock = (programmeKey, form) => {
+  const route = `/programmes/${programmeKey}/toggleLock/${form}`
   const prefix = 'TOGGLE_LOCK'
   return callBuilder(route, prefix, 'post')
 }

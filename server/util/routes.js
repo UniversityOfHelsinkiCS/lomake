@@ -33,7 +33,7 @@ router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)
 router.get('/programmes/foruser', studyprogrammes.getUsersProgrammes)
 router.get('/programmes/:programme', studyprogrammes.getOne)
-router.post('/programmes/:programme/toggleLock', requireProgrammeOwner, studyprogrammes.toggleLock)
+router.post('/programmes/:programme/toggleLock/:form', requireProgrammeOwner, studyprogrammes.toggleLock)
 router.post('/programmes/update', checkAdmin, studyprogrammes.updateAll)
 
 router.post('/login', users.getCurrentUser) // IAM-middleware checks this path

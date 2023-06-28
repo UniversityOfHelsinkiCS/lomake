@@ -16,16 +16,15 @@ const getFormType = form => {
   if (form === 1) {
     return 'yearly'
   }
-  if (form === 4) {
-    return 'evaluation'
-  }
   if (form === 2) {
     return 'degree-reform'
   }
   if (form === 3) {
     return 'degree-reform-individual'
   }
-
+  if (form === 4) {
+    return 'evaluation'
+  }
   if (form === 5) {
     return 'evaluation-faculty'
   }

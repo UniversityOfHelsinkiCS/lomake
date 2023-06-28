@@ -91,7 +91,7 @@ export default () => {
           }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
-          <ProgramControlsContent programKey={programControlsToShow.key} />
+          <ProgramControlsContent programKey={programControlsToShow.key} form={form} />
         </CustomModal>
       )}
 

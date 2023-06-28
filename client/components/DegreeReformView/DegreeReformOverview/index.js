@@ -9,6 +9,7 @@ import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { getForm } from 'Utilities/common'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -97,7 +98,7 @@ export default () => {
           }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
-          <ProgramControlsContent programKey={programControlsToShow.key} />
+          <ProgramControlsContent programKey={programControlsToShow.key} form={getForm(formType)} />
         </CustomModal>
       )}
 

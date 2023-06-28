@@ -37,7 +37,7 @@ export default function FormLocker({ programme, form = 1 }) {
   }, [programmeDetails, loadObj])
 
   const handleLock = () => {
-    dispatch(toggleLock(programme))
+    dispatch(toggleLock(programme, form))
   }
 
   if (!formDeadline || !programmeDetails) return null
