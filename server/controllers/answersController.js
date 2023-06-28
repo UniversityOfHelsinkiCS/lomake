@@ -95,18 +95,32 @@ const getSingleProgrammesAnswers = async (req, res) => {
 const getIndividualFormAnswerForUser = async (req, res) => {
   try {
     const { uid } = req.user
-    const data = await db.tempAnswer.findOne({
-      where: {
-        programme: {
-          [Op.startsWith]: uid,
+    const draftYears = await db.draftYear.findAll({})
+    const draftYear = draftYears.length ? draftYears[0].year : null
+    let data = null
+    if (draftYear && draftYear === Number(2023)) {
+      data = await db.tempAnswer.findOne({
+        where: {
+          programme: {
+            [Op.startsWith]: uid,
+          },
+          form: formKeys.DEGREE_REFORM_INDIVIDUALS,
         },
-        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-      },
-      order: [['updated_at', 'DESC']],
-    })
-    const result = data?.data || {}
-
-    return res.status(200).json(result)
+        order: [['updated_at', 'DESC']],
+      })
+    } else {
+      data = await db.answer.findOne({
+        where: {
+          programme: {
+            [Op.startsWith]: uid,
+          },
+          form: formKeys.DEGREE_REFORM_INDIVIDUALS,
+        },
+        order: [['updated_at', 'DESC']],
+      })
+    }
+    const result = data.data || {}
+    return res.status(200).json({ result, ready: data.ready })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

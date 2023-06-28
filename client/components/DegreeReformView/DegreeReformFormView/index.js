@@ -15,7 +15,7 @@ import bigWheel from 'Assets/big_wheel.jpg'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 
-import DegreeReformForm from './DegreeReformForm'
+import DegreeReformForm from './ProgramForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 

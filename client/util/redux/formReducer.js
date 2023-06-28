@@ -112,7 +112,8 @@ export default (state = initialState, action) => {
     case 'GET_USER_ANSWERS_SUCCESS':
       return {
         ...state,
-        data: action.response,
+        data: action.response.result,
+        ready: Boolean(action.response.ready),
         pending: false,
         error: false,
       }

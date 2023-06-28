@@ -169,6 +169,12 @@ export default {
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
     fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
+    formReady: 'Lomake on tallennettu',
+    sendNewForm: 'Lähetä uusi lomake',
+    modifyForm: 'Muokkaa lomaketta',
+    sendForm: 'Lähetä lomake',
+    sendFormModalDescription: 'Haluatko lähettää toisen lomakkeen? Kaikkien lähetettyjen lomakkeiden tiedot säilyvät',
+    sendFormModalHeader: 'Uuden koulutusuudistus-lomakkeen lähettäminen',
   },
 
   generic: {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Dimmer, Segment, Header } from 'semantic-ui-react'
 import { requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
@@ -14,16 +14,18 @@ import {
   postIndividualFormAnswer,
   getAllIndividualAnswersForUser,
   clearFormState,
+  updateAnswersReady,
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import SendFormModal from 'Components/Generic/SendFormModal'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
-import DegreeReformForm from './DegreeReformForm'
+import DegreeReformForm from './ProgramForm'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber, ready }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== formNumber) return true
+  if (ready) return true
   return false
 }
 
@@ -52,7 +54,7 @@ const DegreeReformIndividual = () => {
   useEffect(() => {
     dispatch(getSingleUsersAnswers())
     dispatch(getAllIndividualAnswersForUser())
-    if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber })) {
+    if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
       dispatch(setViewOnly(true))
       if (currentRoom) {
         dispatch(wsLeaveRoom(uid))
@@ -63,6 +65,17 @@ const DegreeReformIndividual = () => {
     }
   }, [year, draftYear, user, formDeadline, modalOpen, currentRoom])
 
+  const handleFormReady = async () => {
+    if (!requiredDegreeReformIds.every(id => formData.data[id])) {
+      setMessage(t('formView:fillAllRequiredFields'))
+      setTimeout(() => setMessage(null), 10000)
+      return false
+    }
+    dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: true, year }))
+    setModalOpen(false)
+    return true
+  }
+
   const handleSendingForm = async () => {
     if (!requiredDegreeReformIds.every(id => formData.data[id])) {
       setMessage(t('formView:fillAllRequiredFields'))
@@ -70,47 +83,67 @@ const DegreeReformIndividual = () => {
       return
     }
     dispatch(postIndividualFormAnswer(formData.data))
+    dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: false, year }))
     dispatch(clearFormState())
     setModalOpen(false)
   }
-
   const formType = 'degree-reform-individual'
   return (
     <div className="form-container" data-cy="reform-individual-form-container" lang={lang}>
       <NavigationSidebar formType={formType} questionData={questionData} />
-      <div className="the-form">
-        <div className="form-instructions">
-          <div className="hide-in-print-mode">
-            <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
-          </div>
-          <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('degree-reform')} 2015-2017 Testilomake
-          </h3>
-          <StatusMessage programme={user.id} form={formNumber} />
-          <SaveIndicator />
-        </div>
-        <DegreeReformForm questionData={questionData} formType={formType} />
-        <SendFormModal
-          openButton={
+      <Dimmer.Dimmable as={Segment} dimmed={formData.ready}>
+        <Dimmer active={formData.ready} verticalAlign="top">
+          <div style={{ marginTop: '5em' }}>
+            <Header as="h2" inverted>
+              {t('formView:formReady')}
+            </Header>
+            <SendFormModal
+              openButton={
+                <Button disabled={viewOnly} primary>
+                  {t('formView:sendNewForm')}
+                </Button>
+              }
+              header={t('formView:sendFormModalHeader')}
+              description={t('formView:sendFormModalDescription')}
+              open={modalOpen}
+              setOpen={setModalOpen}
+              message={message}
+              sendButton={handleSendingForm}
+            />
             <Button
-              style={{ maxWidth: '10em', marginTop: '1.5em' }}
-              labelPosition="left"
-              icon
-              disabled={viewOnly}
-              color="green"
+              onClick={() => {
+                dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: false, year }))
+              }}
             >
-              <Icon name="upload" />
-              {t('send')}
+              {t('formView:modifyForm')}
             </Button>
-          }
-          header="Koulutusuudistus lomakkeen lähetys"
-          description="Lähetä lomake, voit tämän jälkeen lähettää uuden"
-          sendButton={handleSendingForm}
-          open={modalOpen}
-          setOpen={setModalOpen}
-          message={message}
-        />
-      </div>
+          </div>
+        </Dimmer>
+        <div className="the-form">
+          <div className="form-instructions">
+            <div className="hide-in-print-mode">
+              <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
+            </div>
+            <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+              {t('degree-reform')} 2015-2017 Testilomake
+            </h3>
+            <StatusMessage programme={user.id} form={formNumber} />
+            <SaveIndicator />
+          </div>
+          <DegreeReformForm questionData={questionData} formType={formType} />
+          <Button
+            style={{ maxWidth: '10em', marginTop: '1.5em' }}
+            labelPosition="left"
+            icon
+            disabled={viewOnly}
+            color="green"
+            onClick={handleFormReady}
+          >
+            <Icon name="upload" />
+            {t('formView:sendForm')}
+          </Button>
+        </div>
+      </Dimmer.Dimmable>
     </div>
   )
 }
