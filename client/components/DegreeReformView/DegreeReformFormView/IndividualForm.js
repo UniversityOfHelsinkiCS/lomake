@@ -72,7 +72,7 @@ const DegreeReformIndividual = () => {
       return false
     }
     dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: true, year }))
-    setModalOpen(false)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     return true
   }
 
@@ -85,6 +85,7 @@ const DegreeReformIndividual = () => {
     dispatch(postIndividualFormAnswer(formData.data))
     dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: false, year }))
     dispatch(clearFormState())
+
     setModalOpen(false)
   }
   const formType = 'degree-reform-individual'
