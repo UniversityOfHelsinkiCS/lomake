@@ -6,7 +6,7 @@ import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
-import { colors } from 'Utilities/common'
+import { colors, isFormLocked } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
@@ -35,7 +35,7 @@ const formShouldBeViewOnly = ({
 }) => {
   const pilots = ['KH70_003', 'KH50_005', 'KH70_001']
   if (!accessToTempAnswers) return true
-  if (programme.locked) return true
+  if (isFormLocked(form, programme.lockedForms)) return true
   if (!writeAccess) return true
   if (viewingOldAnswers) return true
   if (!draftYear) return true

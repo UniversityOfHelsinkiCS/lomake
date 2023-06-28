@@ -31,7 +31,7 @@ const seedFacultiesAndStudyprogrammes = async () => {
         name,
         level,
         international,
-        locked_all: { yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false },
+        lockedForms: { yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false },
         claimed: false,
         primaryFacultyId: primaryFaculty.id,
       })

@@ -104,7 +104,7 @@ const startDeadlineWatcher = async () => {
 
         programmes.forEach(async programme => {
           programme.locked = true
-          programme.locked_all = { yearly: true, evaluation: true, 'evaluation-faculty': true, 'degree-reform': true }
+          programme.lockedForms = { yearly: true, evaluation: true, 'evaluation-faculty': true, 'degree-reform': true }
           programme.save()
         })
       }

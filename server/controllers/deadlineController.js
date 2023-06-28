@@ -74,7 +74,7 @@ const remove = async (req, res) => {
     // Unlock all programmes and remove draft year if no deadlines remain
     if (remainingDeadlines.length === 0) {
       await db.studyprogramme.update(
-        { locked: true, all_locked: { evaluation: true, yearly: true, 'degree-reform': true } },
+        { locked: true, lockedForms: { evaluation: true, yearly: true, 'degree-reform': true } },
         { where: {} }
       )
       await db.draftYear.destroy({

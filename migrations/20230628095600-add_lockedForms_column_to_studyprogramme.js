@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn('studyprogrammes', 'locked_all', {
+    return queryInterface.addColumn('studyprogrammes', 'locked_forms', {
       type: Sequelize.JSONB,
       allowNull: false,
       defaultValue: {
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.removeColumn('studyprogrammes', 'locked_all')
+    return queryInterface.removeColumn('studyprogrammes', 'locked_forms')
   },
 }

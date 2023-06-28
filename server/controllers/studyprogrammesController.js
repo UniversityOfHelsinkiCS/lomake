@@ -90,9 +90,8 @@ const toggleLock = async (req, res) => {
     const { programme, form } = req.params
 
     const programEntity = await db.studyprogramme.findOne({ where: { key: programme } })
-
-    programEntity.locked_all[getFormType(form)] = !programEntity.locked_all[getFormType(form)]
-    programEntity.changed('locked_all', true)
+    programEntity.lockedForms[getFormType(form)] = !programEntity.lockedForms[getFormType(form)]
+    programEntity.changed('lockedForms', true)
     await programEntity.save()
     logger.info(`User ${req.user.uid} toggled edit-lock of ${programme}`)
     return res.status(200).json(programEntity)

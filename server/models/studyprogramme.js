@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       level: DataTypes.STRING,
       international: DataTypes.BOOLEAN,
       primaryFacultyId: DataTypes.INTEGER,
-      locked_all: DataTypes.JSONB,
+      lockedForms: DataTypes.JSONB,
     },
     {
       underscored: true,

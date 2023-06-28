@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { getForm } from 'Utilities/common'
+import { isFormLocked } from 'Utilities/common'
 
 // TO FIX
 export default function FormLocker({ programme, form = 1 }) {
@@ -41,7 +41,7 @@ export default function FormLocker({ programme, form = 1 }) {
   }
 
   if (!formDeadline || !programmeDetails) return null
-  const locked = Object.entries(programmeDetails.locked_all).find(f => getForm(f[0]) === form)[1]
+  const locked = isFormLocked(form, programmeDetails.lockedForms)
 
   return (
     <div style={{ margin: '2em 3em 0em 3em', display: 'flex' }}>

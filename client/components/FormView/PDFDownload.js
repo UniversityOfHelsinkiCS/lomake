@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactToPrint from 'react-to-print'
 import { setViewOnly } from 'Utilities/redux/formReducer'
-import { colors } from 'Utilities/common'
+import { colors, isFormLocked } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 
-const PDFDownload = ({ componentRef }) => {
+const PDFDownload = ({ componentRef, form }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const deadline = useSelector(state => state.deadlines.nextDeadline)
@@ -17,7 +17,12 @@ const PDFDownload = ({ componentRef }) => {
   const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
   const userHasWriteAccess = isAdmin(user) || (user.access[programme.key] && user.access[programme.key].write)
-  const userCanEdit = !!(userHasWriteAccess && !programme.locked && deadline && !viewingOldAnswers)
+  const userCanEdit = !!(
+    userHasWriteAccess &&
+    !isFormLocked(form, programme.lockedForms) &&
+    deadline &&
+    !viewingOldAnswers
+  )
 
   const [isPrinting, setIsPrinting] = useState(false)
   // Store the resolve Promise being used in `onBeforeGetContent` here

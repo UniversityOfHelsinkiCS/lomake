@@ -14,7 +14,7 @@ const whereDraftYear = async () => {
 
 const getFormType = form => {
   if (form === 1) {
-    return 'yearlyAssesment'
+    return 'yearly'
   }
   if (form === 4) {
     return 'evaluation'
