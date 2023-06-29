@@ -62,18 +62,6 @@ const getFakeYearlyAnswers = year => {
   }, {})
 }
 
-const resetUsers = async () => {
-  try {
-    await db.user.destroy({
-      where: { uid: cypressUids },
-    })
-
-    logger.info('Cypress::resetUsers')
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-  }
-}
-
 const resetForm = async () => {
   try {
     logger.info('Cypress::resetForm')
@@ -160,7 +148,6 @@ const seed = async (_, res) => {
     logger.info('Cypress::seeding database')
 
     await resetAnswers()
-    await resetUsers()
     await resetForm()
     await resetDeadlines()
 
