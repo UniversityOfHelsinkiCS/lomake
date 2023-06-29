@@ -10,11 +10,10 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import {
   setViewOnly,
-  getSingleUsersAnswers,
   postIndividualFormAnswer,
   getAllIndividualAnswersForUser,
   clearFormState,
-  updateAnswersReady,
+  updateIndividualReady,
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import SendFormModal from 'Components/Generic/SendFormModal'
@@ -40,7 +39,6 @@ const DegreeReformIndividual = () => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const formNumber = 3
-
   useEffect(() => {
     document.title = `${t('degree-reform-individual')}`
   }, [lang])
@@ -50,9 +48,7 @@ const DegreeReformIndividual = () => {
 
   const year = 2023
   const currentRoom = useSelector(state => state.room)
-
   useEffect(() => {
-    dispatch(getSingleUsersAnswers())
     dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
       dispatch(setViewOnly(true))
@@ -71,7 +67,7 @@ const DegreeReformIndividual = () => {
       setTimeout(() => setMessage(null), 10000)
       return false
     }
-    dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: true, year }))
+    dispatch(updateIndividualReady({ uid, ready: true }))
     window.scrollTo({ top: 0, behavior: 'smooth' })
     return true
   }
@@ -83,8 +79,8 @@ const DegreeReformIndividual = () => {
       return
     }
     dispatch(postIndividualFormAnswer(formData.data))
-    dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: false, year }))
     dispatch(clearFormState())
+    dispatch(updateIndividualReady({ uid, ready: false }))
 
     setModalOpen(false)
   }
@@ -100,7 +96,7 @@ const DegreeReformIndividual = () => {
             </Header>
             <SendFormModal
               openButton={
-                <Button disabled={viewOnly} primary>
+                <Button disabled={viewOnly} primary data-cy="individual-form-send-modal-button">
                   {t('formView:sendNewForm')}
                 </Button>
               }
@@ -113,7 +109,7 @@ const DegreeReformIndividual = () => {
             />
             <Button
               onClick={() => {
-                dispatch(updateAnswersReady({ room: uid, form: formNumber, ready: false, year }))
+                dispatch(updateIndividualReady({ uid, ready: false }))
               }}
             >
               {t('formView:modifyForm')}
@@ -135,6 +131,7 @@ const DegreeReformIndividual = () => {
           <Button
             style={{ maxWidth: '10em', marginTop: '1.5em' }}
             labelPosition="left"
+            data-cy="individual-form-ready-button"
             icon
             disabled={viewOnly}
             color="green"

@@ -13,9 +13,10 @@ const handleNonProgrammeDraftAnswers = async form => {
 
   if (allAnswers) {
     allAnswers.forEach(async a => {
+      const programmeCleaned = a.programme.split('-')
       const tempAnswer = await db.tempAnswer.findOne({
         where: {
-          [Op.and]: [{ programme: a.programme }, { year: a.year }, { form }],
+          [Op.and]: [{ programme: { [Op.startsWith]: programmeCleaned[0] } }, { year: a.year }, { form }],
         },
       })
       if (tempAnswer) {
@@ -24,7 +25,7 @@ const handleNonProgrammeDraftAnswers = async form => {
       } else {
         await db.tempAnswer.create({
           data: a.data,
-          programme: a.programme,
+          programme: programmeCleaned[0],
           year: a.year,
           form,
         })

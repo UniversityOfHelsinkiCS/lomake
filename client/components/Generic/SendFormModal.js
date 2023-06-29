@@ -18,7 +18,14 @@ const SendFormModal = ({ openButton, header, description, sendButton, open, setO
         <Modal.Description>{description}</Modal.Description>
       </Modal.Content>
       <Modal.Actions style={{ display: 'flex' }}>
-        <Button content={t('send')} labelPosition="right" icon="checkmark" onClick={sendButton} positive />
+        <Button
+          data-cy="individual-form-send-form-button"
+          content={t('send')}
+          labelPosition="right"
+          icon="checkmark"
+          onClick={sendButton}
+          positive
+        />
         <Button color="black" onClick={() => setOpen(false)}>
           {t('close')}
         </Button>

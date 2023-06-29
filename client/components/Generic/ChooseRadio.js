@@ -85,7 +85,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
           checked={state.value}
           viewOnly={viewOnly}
           radioButtonLabels={radioButtonLabels}
-          type="basic"
+          type="choose"
         />
       </Form>
     </div>

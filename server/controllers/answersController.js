@@ -119,8 +119,10 @@ const getIndividualFormAnswerForUser = async (req, res) => {
         order: [['updated_at', 'DESC']],
       })
     }
-    const result = data.data || {}
-    return res.status(200).json({ result, ready: data.ready })
+    const result = data?.data || {}
+    const ready = data?.ready || false
+
+    return res.status(200).json({ result, ready })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -378,6 +380,28 @@ const updateAnswerReady = async (req, res) => {
   }
 }
 
+const updateIndividualReady = async (req, res) => {
+  const { uid } = req.params
+  const { ready } = req.body
+  if (!uid) return res.sendStatus(400)
+
+  try {
+    const tempAnswer = await db.tempAnswer.findOne({
+      where: {
+        programme: uid,
+        form: 3,
+      },
+    })
+
+    tempAnswer.ready = Boolean(ready)
+    await tempAnswer.save()
+    return res.send(tempAnswer)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const removeBackupForIndividual = async uid => {
   try {
     await db.backupAnswer.destroy({
@@ -455,4 +479,5 @@ module.exports = {
   getOldFacultySummaryData,
   getEvaluationSummaryDataForFaculty,
   updateAnswerReady,
+  updateIndividualReady,
 }

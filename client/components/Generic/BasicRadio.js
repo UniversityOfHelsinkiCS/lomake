@@ -7,7 +7,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
   const { t } = useTranslation()
 
   const handleChange = label => {
-    if (type === 'basic') {
+    if (type === 'choose') {
       handleClick(label)
     } else {
       handleClick({ firstPart: checked.firstValue, secondPart: label })
@@ -15,12 +15,12 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
   }
 
   const isChecked = value => {
-    return type === 'basic' ? checked === value : checked.secondValue === value
+    return type === 'choose' ? checked === value : checked.secondValue === value
   }
   return (
     <div>
       {radioButtonLabels ? (
-        <div data-cy={`choose-radio-${id}`} style={direction === 'horizontal' ? { display: 'flex' } : null}>
+        <div data-cy={`${type}-basic-radio-${id}`} style={direction === 'horizontal' ? { display: 'flex' } : null}>
           {radioButtonLabels.map(o => {
             return (
               <Form.Field
@@ -39,7 +39,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
                   disabled={viewOnly}
                   label={
                     <label
-                      data-cy={`choose-radio-${o.id}`}
+                      data-cy={`basic-radio-${o.id}`}
                       style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '1.5em' } : null}
                     >
                       {o.label}
@@ -54,6 +54,7 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
           {checked.secondValue === 'other' ? (
             <Form.Field>
               <Input
+                data-cy={`${type}-basic-input-other-field`}
                 disabled={viewOnly}
                 style={{ width: '60%' }}
                 value={checked.thirdValue}

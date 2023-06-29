@@ -63,6 +63,12 @@ export const updateAnswersReady = ({ room, year, form, ready }) => {
   return callBuilder(route, prefix, 'put', { ready })
 }
 
+export const updateIndividualReady = ({ uid, ready }) => {
+  const route = `/answers/individual/${uid}/updateReady`
+  const prefix = 'UPDATE_INDIVIDUAL_READY'
+  return callBuilder(route, prefix, 'put', { ready })
+}
+
 const initialState = {
   data: {},
   viewOnly: false,
@@ -84,8 +90,8 @@ export default (state = initialState, action) => {
         data: {
           ...state.data,
           [action.field]: action.value,
-          form: action.form,
         },
+        form: action.form,
       }
     case 'SAVE_FORM_SUCCESS':
       return {
@@ -160,12 +166,18 @@ export default (state = initialState, action) => {
     }
     case 'POST_USER_ANSWER_SUCCESS': {
       return {
-        ...state,
+        ...initialState,
         pending: false,
         error: false,
       }
     }
     case 'UPDATE_ANSWERS_READY_SUCCESS': {
+      return {
+        ...state,
+        ready: Boolean(action.response.ready),
+      }
+    }
+    case 'UPDATE_INDIVIDUAL_READY_SUCCESS': {
       return {
         ...state,
         ready: Boolean(action.response.ready),

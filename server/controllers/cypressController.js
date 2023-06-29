@@ -1,4 +1,5 @@
 const db = require('@models/index')
+const { Op } = require('sequelize')
 const logger = require('@util/logger')
 const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
@@ -63,9 +64,10 @@ const getFakeYearlyAnswers = year => {
 
 const resetUsers = async () => {
   try {
-    await db.users.destroy({
+    await db.user.destroy({
       where: { uid: cypressUids },
     })
+
     logger.info('Cypress::resetUsers')
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -84,7 +86,7 @@ const resetForm = async () => {
     // clean individual user test inputs
     await db.tempAnswer.destroy({
       where: {
-        programme: 'cypressSuperAdminUser',
+        [Op.or]: [{ programme: { [Op.startsWith]: 'cypressSuperAdminUser' } }, { programme: 'cypressSuperAdminUser' }],
       },
     })
   } catch (error) {
@@ -104,7 +106,7 @@ const resetAnswers = async () => {
     // clean individual user test inputs
     await db.answer.destroy({
       where: {
-        programme: 'cypressSuperAdminUser',
+        [Op.or]: [{ programme: { [Op.startsWith]: 'cypressSuperAdminUser' } }, { programme: 'cypressSuperAdminUser' }],
       },
     })
   } catch (error) {
