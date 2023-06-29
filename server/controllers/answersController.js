@@ -95,18 +95,34 @@ const getSingleProgrammesAnswers = async (req, res) => {
 const getIndividualFormAnswerForUser = async (req, res) => {
   try {
     const { uid } = req.user
-    const data = await db.tempAnswer.findOne({
-      where: {
-        programme: {
-          [Op.startsWith]: uid,
+    const draftYears = await db.draftYear.findAll({})
+    const draftYear = draftYears.length ? draftYears[0].year : null
+    let data = null
+    if (draftYear && draftYear === Number(2023)) {
+      data = await db.tempAnswer.findOne({
+        where: {
+          programme: {
+            [Op.startsWith]: uid,
+          },
+          form: formKeys.DEGREE_REFORM_INDIVIDUALS,
         },
-        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-      },
-      order: [['updated_at', 'DESC']],
-    })
+        order: [['updated_at', 'DESC']],
+      })
+    } else {
+      data = await db.answer.findOne({
+        where: {
+          programme: {
+            [Op.startsWith]: uid,
+          },
+          form: formKeys.DEGREE_REFORM_INDIVIDUALS,
+        },
+        order: [['updated_at', 'DESC']],
+      })
+    }
     const result = data?.data || {}
+    const ready = data?.ready || false
 
-    return res.status(200).json(result)
+    return res.status(200).json({ result, ready })
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -364,6 +380,28 @@ const updateAnswerReady = async (req, res) => {
   }
 }
 
+const updateIndividualReady = async (req, res) => {
+  const { uid } = req.params
+  const { ready } = req.body
+  if (!uid) return res.sendStatus(400)
+
+  try {
+    const tempAnswer = await db.tempAnswer.findOne({
+      where: {
+        programme: uid,
+        form: 3,
+      },
+    })
+
+    tempAnswer.ready = Boolean(ready)
+    await tempAnswer.save()
+    return res.send(tempAnswer)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const removeBackupForIndividual = async uid => {
   try {
     await db.backupAnswer.destroy({
@@ -441,4 +479,5 @@ module.exports = {
   getOldFacultySummaryData,
   getEvaluationSummaryDataForFaculty,
   updateAnswerReady,
+  updateIndividualReady,
 }

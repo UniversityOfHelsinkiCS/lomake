@@ -21,6 +21,7 @@ router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answe
 router.get('/answers/degreeReform/currentAnswer', answers.getIndividualFormAnswerForUser)
 router.get('/answers/degreeReform/getAllAnswersForUser', answers.getAllIndividualAnswersForUser)
 router.put('/answers/:form/:programme/:year/updateAnswersReady', requireProgrammeWrite, answers.updateAnswerReady)
+router.put('/answers/individual/:uid/updateReady', answers.updateIndividualReady)
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
 router.get('/answers/forSummary/:code/:lang', answers.getFacultySummaryData)
 router.get('/answers/forSummary/:code', answers.getProgrammeSummaryData)

@@ -144,6 +144,12 @@ export default {
     // facultyInfo: '',
     // materialsFaculty: '',
     // yearlyAnswers: '',
+    // formReady: '',
+    // sendNewForm: '',
+    // modifyForm: '',
+    // sendForm: '',
+    // sendFormModalHeader: '',
+    // sendFormModalDescription: '',
   },
 
   generic: {

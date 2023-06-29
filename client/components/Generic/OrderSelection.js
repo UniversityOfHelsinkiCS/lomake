@@ -41,7 +41,7 @@ const OrderSelection = ({ id, label, description, extrainfo, lang, options, form
   }
 
   const handleClear = () => {
-    dispatch(updateFormField(id, ''), form)
+    dispatch(updateFormField(id, '', form))
   }
 
   const getLabel = id => {

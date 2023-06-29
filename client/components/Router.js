@@ -12,7 +12,7 @@ import ProgrammeLevelOverview from 'Components/EvaluationView/ProgrammeLevelOver
 import EvaluationFormView from 'Components/EvaluationView/EvaluationFormView'
 import FacultyLevelOverview from 'Components/EvaluationView/FacultyLevelOverview/index'
 import DegreeReformFormView from 'Components/DegreeReformView/DegreeReformFormView'
-import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/DegreeReformIndividual'
+import DegreeReformIndividualForm from 'Components/DegreeReformView/DegreeReformFormView/IndividualForm'
 import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOverview'
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView/ProgrammeLevel'
 import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/FacultyLevel'

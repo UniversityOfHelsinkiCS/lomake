@@ -166,6 +166,12 @@ export default {
     fillAllRequiredFields: 'Please fill all required fields',
     showAllProgrammes: 'Show all studyprogrammes',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
+    formReady: 'Form is ready',
+    sendNewForm: 'Send a new form',
+    modifyForm: 'Modify the form',
+    sendForm: 'Send the form',
+    sendFormModalDescription: 'Are you sure you want to send the form? Information from sent forms are saved',
+    sendFormModalHeader: 'Sending new Degree Reform form',
   },
 
   generic: {
