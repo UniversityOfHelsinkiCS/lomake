@@ -14,6 +14,7 @@ import {
   getAllIndividualAnswersForUser,
   clearFormState,
   updateIndividualReady,
+  getSingleUsersAnswers,
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import SendFormModal from 'Components/Generic/SendFormModal'
@@ -49,6 +50,7 @@ const DegreeReformIndividual = () => {
   const year = 2023
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {
+    dispatch(getSingleUsersAnswers())
     dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
       dispatch(setViewOnly(true))
