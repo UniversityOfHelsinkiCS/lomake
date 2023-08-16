@@ -66,6 +66,7 @@ export default {
     send: 'Lähetä',
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
+    chooseProgramme: 'Valitse koulutusohjelma',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Näytä tiedot koulutusohjelmittain',
   },

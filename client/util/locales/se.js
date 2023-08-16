@@ -55,6 +55,7 @@ export default {
     send: '',
     what: '',
     chooseFaculty: '',
+    chooseProgramme: '',
   },
 
   aboutPage: {

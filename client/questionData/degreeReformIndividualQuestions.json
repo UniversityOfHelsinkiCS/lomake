@@ -947,6 +947,56 @@
         "relatedYearlyQuestions": []
       },
       {
+        "id": "bachelor_my_view_is_based_on_programme",
+        "index": 0,
+        "type": "CHOOSE-ADVANCED",
+        "shortLabel": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "label": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            {
+              "label": "ensisijaisesti kokemukseeni kandiohjelmasta (valikko kaikista kandiohjelmista)",
+              "id": "specific-programme"
+            },
+            { "label": "kokemukseeni useista kandiohjelmista", "id": "multiple-programs" }
+          ],
+          "en": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ],
+          "se": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ]
+        }
+      },
+      {
         "id": "bachelor_programme_structure_is_clear",
         "index": 53,
         "type": "CHOOSE-RADIO",

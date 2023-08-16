@@ -63,6 +63,7 @@ export default {
     send: 'Send',
     what: 'What',
     chooseFaculty: 'Choose faculty',
+    chooseProgramme: 'Choose study programme',
     showDataByProgramme: "Show data by programme's",
   },
 

@@ -122,12 +122,11 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               </div>
             )
           })}
-          {state.firstValue === 'faculty' ? (
+          {state.firstValue === 'faculty' || state.firstValue === 'specific-programme' ? (
             <DropdownFilter
               handleFilterChange={handleClick}
-              version="degree-reform"
+              version={state.firstValue}
               size="small"
-              label={t('chooseFaculty')}
               selectedRadio={state}
               disabled={viewOnly}
             />
