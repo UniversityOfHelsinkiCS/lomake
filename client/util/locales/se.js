@@ -155,6 +155,11 @@ export default {
     // sendForm: '',
     // sendFormModalHeader: '',
     // sendFormModalDescription: '',
+    // veryDifferent: '',
+    // someWhatDifferent: '',
+    // neitherNor: '',
+    // someWhatAgree: '',
+    // veryAgree: '',
   },
 
   generic: {

@@ -173,6 +173,11 @@ export default {
     sendForm: 'Send the form',
     sendFormModalDescription: 'Are you sure you want to send the form? Information from sent forms are saved',
     sendFormModalHeader: 'Sending new Degree Reform form',
+    veryDifferent: '',
+    someWhatDifferent: '',
+    neitherNor: '',
+    someWhatAgree: '',
+    veryAgree: '',
   },
 
   generic: {

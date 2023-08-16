@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Divider, Popup, Icon, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
+import { useTranslation } from 'react-i18next'
 
 import { colors, getForm } from 'Utilities/common'
 import BasicRadio from './BasicRadio'
@@ -15,6 +16,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (field, value) => dispatch(updateFormField(field, value, form))
+  const { t } = useTranslation('formView')
 
   const handleClick = label => {
     setState({ value: label })
@@ -56,11 +58,11 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
             <Popup
               content={
                 <>
-                  <p>1 = Täysin eri mieltä</p>
-                  <p>2 = Osittain eri mieltä</p>
-                  <p>3 = Ei samaa eikä eri mieltä</p>
-                  <p>4 = Osittain samaa mieltä</p>
-                  <p>5 = Täysin samaa mieltä</p>
+                  <p>1 = {t('veryDifferent')}</p>
+                  <p>2 = {t('someWhatDifferent')}</p>
+                  <p>3 = {t('neitherNor')}</p>
+                  <p>4 = {t('someWhatAgree')}</p>
+                  <p>5 = {t('veryAgree')}</p>
                 </>
               }
               popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
