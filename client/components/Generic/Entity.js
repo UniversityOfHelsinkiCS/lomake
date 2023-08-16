@@ -67,7 +67,7 @@ const Entity = ({
         <>
           <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />
           <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-            <p style={{ marginTop: '1em' }}>Kaikki vuosiseurannan vuodet</p>
+            <p style={{ marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
           </Link>
         </>
       )}

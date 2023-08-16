@@ -2,7 +2,7 @@
   {
     "title": {
       "fi": "OPISKELUN SUJUVUUS",
-      "se": "",
+      "se": "SMIDIGA STUDIER",
       "en": ""
     },
     "parts": [
@@ -12,17 +12,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opiskelijavalinta",
-          "se": "",
+          "se": "Studentantagning",
           "en": ""
         },
         "label": {
           "fi": "OPISKELIJAVALINTA",
-          "se": "",
+          "se": "STUDENTANTAGNING ",
           "en": ""
         },
         "description": {
           "fi": "Opiskelijavalinnan toimivuus",
-          "se": "",
+          "se": "Studentantagningens ändamålsenlighet",
           "en": ""
         },
         "required": true,
@@ -39,17 +39,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opetussuunnitelma",
-          "se": "",
+          "se": "Undervisningsplan",
           "en": ""
         },
         "label": {
           "fi": "OPETUSSUUNNITELMA",
-          "se": "",
+          "se": "UNDERVISNINGSPLAN",
           "en": ""
         },
         "description": {
           "fi": "Opetussuunnitelman toimivuus",
-          "se": "",
+          "se": "Undervisningsplanens ändamålsenlighet",
           "en": ""
         },
         "required": true,
@@ -66,17 +66,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opintojen ohjaus",
-          "se": "",
+          "se": "Studiehandledning",
           "en": ""
         },
         "label": {
           "fi": "OPINTOJEN OHJAUS",
-          "se": "",
+          "se": "STUDIEHANDLEDNING ",
           "en": ""
         },
         "description": {
           "fi": "Opintojen ohjauksen toimivuus",
-          "se": "",
+          "se": "Studiehandledningens ändamålsenlighet",
           "en": ""
         },
         "required": true,
@@ -93,17 +93,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Nivelvaihe",
-          "se": "",
+          "se": "Övergångsstadium",
           "en": ""
         },
         "label": {
           "fi": "NIVELVAIHE",
-          "se": "",
+          "se": "ÖVERGÅNGSSTADIUM",
           "en": ""
         },
         "description": {
           "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus",
-          "se": "",
+          "se": "Övergången mellan kandidat- och magisterprogram samt optioner",
           "en": ""
         },
         "required": true,
@@ -120,17 +120,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Läpivirtaus",
-          "se": "",
+          "se": "Genomströmning",
           "en": ""
         },
         "label": {
           "fi": "LÄPIVIRTAUS",
-          "se": "",
+          "se": "GENOMSTRÖMNING",
           "en": ""
         },
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus koulutusohjelmassa",
-          "se": "",
+          "se": "Avläggande av examina och genomströmning inom utbildningsprogrammet",
           "en": ""
         },
         "required": true,
@@ -147,7 +147,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli koulutusohjelman johtoryhmän sisällä oli huomattavia näkemyseroja annetuista arvioista, kuvatkaa millaisia näkemyserot ovat ja miten nyt annettuun arvion päädyttiin.",
-          "se": "",
+          "se": "Om det inom utbildningsprogrammets ledningsgrupp fanns betydande åsiktsskillnader i fråga om bedömningarna, beskriv skillnaderna och hur gruppen kom fram till det omdöme som nu avgetts. ",
           "en": ""
         },
         "required": false,
@@ -163,7 +163,7 @@
         "type": "TITLE",
         "label": {
           "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
-          "se": "",
+          "se": "UTBILDNINGSPROGRAMMETS ANTECKNINGAR",
           "en": ""
         }
       },
@@ -173,7 +173,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitkä ovat opiskelun sujuuvus -teeman osalta koulutusohjelmanne vahvuudet?",
-          "se": "",
+          "se": "Vilka styrkor har ert utbildningsprogram när det gäller temat Smidiga studier?",
           "en": ""
         },
         "required": false,
@@ -189,17 +189,17 @@
         "type": "ACTIONS",
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
-          "se": "",
+          "se": "UTVECKLINGSOBJEKT OCH ÅTGÄRDSFÖRSLAG",
           "en": ""
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
-          "se": "",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärdsförslag. För teman som fått en gul bedömning kan det i vissa fall behövas fler konkreta åtgärder, och då är det bra att lägga till dem som utvecklingsobjekt på listan över åtgärdsförslag.",
           "en": ""
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
-          "se": "",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärdsförslag som formulerats för dem.",
           "en": ""
         },
         "required": true,
@@ -210,7 +210,7 @@
   {
     "title": {
       "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
-      "se": "",
+      "se": "UTBILDNINGENS ÖVERGRIPANDE STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
       "en": ""
     },
     "parts": [
@@ -220,17 +220,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
-          "se": "",
+          "se": "Ledning och kommunikation",
           "en": ""
         },
         "label": {
           "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
-          "se": "",
+          "se": "LEDNING OCH KOMMUNIKATION",
           "en": ""
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus",
-          "se": "",
+          "se": "Ledning och kommunikation",
           "en": ""
         },
         "required": true,
@@ -247,17 +247,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Opetusresurssit",
-          "se": "",
+          "se": "Undervisningsresurser",
           "en": ""
         },
         "label": {
           "fi": "OPETUSRESURSSIT",
-          "se": "",
+          "se": "UNDERVISNINGSRESURSER",
           "en": ""
         },
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta",
-          "se": "",
+          "se": "Planering och administration av undervisningsresurser ",
           "en": ""
         },
         "required": true,
@@ -274,17 +274,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Rekrytointi",
-          "se": "",
+          "se": "Inflytande över rekrytering",
           "en": ""
         },
         "label": {
           "fi": "REKRYTOINTIIN VAIKUTTAMINEN",
-          "se": "",
+          "se": "INFLYTANDE ÖVER REKRYTERING",
           "en": ""
         },
         "description": {
           "fi": "Ohjelman mahdollisuudet vaikuttaa uuden henkilökunnan rekrytointiin",
-          "se": "",
+          "se": "Programmets möjligheter att påverka rekryteringen av nya anställda",
           "en": ""
         },
         "required": true,
@@ -301,17 +301,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Laite- ja tilaresurssit",
-          "se": "",
+          "se": "UTRUSTNINGS- OCH LOKALRESURSER",
           "en": ""
         },
         "label": {
           "fi": "LAITE- JA TILARESURSSIT",
-          "se": "",
+          "se": "Utrustnings- och lokalresurser",
           "en": ""
         },
         "description": {
           "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit",
-          "se": "",
+          "se": "Resurser för lokaler, utrustning och lärmiljöer ",
           "en": ""
         },
         "required": true,
@@ -328,17 +328,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
-          "se": "",
+          "se": "FAKULTETSÖVERSKRIDANDE PROGRAM",
           "en": ""
         },
         "label": {
           "fi": "TIEDEKUNNAN YHTEISET OHJELMAT",
-          "se": "",
+          "se": "Fakultetsöverskridande program",
           "en": ""
         },
         "description": {
           "fi": "Usean tiedekunnan yhteisen ohjelman toimivuus",
-          "se": "",
+          "se": "Fakultetsöverskridande program",
           "en": ""
         },
         "required": true,
@@ -355,17 +355,17 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Ohjelman asema",
-          "se": "",
+          "se": "Utbildningsprogrammets ställning",
           "en": ""
         },
         "label": {
           "fi": "KOULUTUSOHJELMAN ASEMA",
-          "se": "",
+          "se": "UTBILDNINGSPROGRAMMETS STÄLLNING",
           "en": ""
         },
         "description": {
           "fi": "Koulutusohjelman asema yliopiston toiminta- ja johtamisrakenteessa",
-          "se": "",
+          "se": "Utbildningsprogrammets ställning i universitetets verksamhets- och ledningsstruktur",
           "en": ""
         },
         "required": true,
@@ -382,7 +382,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli koulutusohjelman johtoryhmän sisällä oli huomattavia näkemyseroja annetuista arvioista, kuvatkaa millaisia näkemyserot ovat ja miten nyt annettuun arvion päädyttiin.",
-          "se": "",
+          "se": "Om det inom utbildningsprogrammets ledningsgrupp fanns betydande åsiktsskillnader i fråga om bedömningarna, beskriv skillnaderna och hur gruppen kom fram till det omdöme som nu avgetts.",
           "en": ""
         },
         "required": false,
@@ -398,7 +398,7 @@
         "type": "TITLE",
         "label": {
           "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
-          "se": "",
+          "se": "UTBILDNINGSPROGRAMMETS ANTECKNINGAR",
           "en": ""
         }
       },
@@ -408,7 +408,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitkä ovat Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teeman osalta koulutusohjelmanne vahvuudet?",
-          "se": "",
+          "se": "Vilka styrkor har ert utbildningsprogram när det gäller temat Utbildningens övergripande struktur, ledning, resurser och utbildningsprogrammets ställning?",
           "en": ""
         },
         "required": false,
@@ -424,17 +424,17 @@
         "type": "ACTIONS",
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
-          "se": "",
+          "se": "UTVECKLINGSOBJEKT OCH ÅTGÄRDSFÖRSLAG",
           "en": ""
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
-          "se": "",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärdsförslag. För teman som fått en gul bedömning kan det i vissa fall behövas fler konkreta åtgärder, och då är det bra att lägga till dem som utvecklingsobjekt på listan över åtgärdsförslag.",
           "en": ""
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
-          "se": "",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärdsförslag som formulerats för dem.",
           "en": ""
         },
         "required": true,

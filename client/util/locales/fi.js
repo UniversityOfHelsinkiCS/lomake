@@ -146,6 +146,7 @@ export default {
     requiredActions: 'Tarvittavat toimenpiteet',
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
+    allYearlyAnswerYears: 'Kaikki vuosiseurannan vuodet',
     evaluationInfo1:
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
@@ -160,6 +161,7 @@ export default {
     summaryLinkProg: 'Tarkastelkaa kaikkia aiempien vuosiseurontojen vastauksia',
     oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
+    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     facultyInfo:
       'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
     materialsFaculty:
@@ -168,7 +170,6 @@ export default {
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
     fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
-    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     formReady: 'Lomake on tallennettu',
     sendNewForm: 'Lähetä uusi lomake',
     modifyForm: 'Muokkaa lomaketta',

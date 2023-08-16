@@ -142,6 +142,7 @@ export default {
     requiredActions: 'Actions required',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
+    allYearlyAnswerYears: 'All yearly report years',
     evaluationInfo1:
       "For this evaluation, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
@@ -156,6 +157,7 @@ export default {
     summaryLinkProg: 'View all previous yearly assessment answers',
     oodikoneProg: 'View programme statistics in Oodikone',
     oodikoneFaculty: 'View faculty statistics in Oodikone',
+    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     facultyInfo:
       'For this evaluation you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
     materialsFaculty:
@@ -165,7 +167,6 @@ export default {
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
     fillAllRequiredFields: 'Please fill all required fields',
     showAllProgrammes: 'Show all studyprogrammes',
-    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     formReady: 'Form is ready',
     sendNewForm: 'Send a new form',
     modifyForm: 'Modify the form',
