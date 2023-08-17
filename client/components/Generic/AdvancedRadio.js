@@ -10,7 +10,17 @@ import BasicRadio from './BasicRadio'
 
 import './Generic.scss'
 
-const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptions, formType, advancedOptions }) => {
+const AdvancedRadio = ({
+  id,
+  label,
+  description,
+  required,
+  extrainfo,
+  radioOptions,
+  formType,
+  advancedOptions,
+  version,
+}) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ firstValue: '', secondValue: '', thirdValue: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -125,7 +135,7 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
           {state.firstValue === 'faculty' || state.firstValue === 'specific-programme' ? (
             <DropdownFilter
               handleFilterChange={handleClick}
-              version={state.firstValue}
+              version={version}
               size="small"
               selectedRadio={state}
               disabled={viewOnly}
@@ -136,7 +146,6 @@ const AdvancedRadio = ({ id, label, description, required, extrainfo, radioOptio
               style={{ width: '60%' }}
               value={state.secondValue}
               onChange={value => handleOtherField({ input: value, level: 1 })}
-              version="degree-reform"
               size="small"
               disabled={viewOnly}
               placeholder={t('what')}

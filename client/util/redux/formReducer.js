@@ -76,7 +76,7 @@ const initialState = {
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
   oldIndividualAnswers: [],
-  answerLevels: [4, 5, 6, 7],
+  answerLevels: [4, 5, 6, 7, 9],
 }
 
 // Reducer

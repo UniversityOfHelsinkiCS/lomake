@@ -17,9 +17,26 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
   const getOptions = () => {
     const options = []
     if (!faculties) return []
-    if (version === 'specific-programme') {
+    if (selectedRadio.firstValue === 'specific-programme') {
+      const filteredStudyProgrammes = studyProgrammes
+        .filter(s => {
+          if (version === 'bachelor') {
+            return s.key.startsWith('KH')
+          }
+          if (version === 'master') {
+            return s.key.startsWith('MH')
+          }
+          if (version === 'international') {
+            return s.international
+          }
+          if (version === 'doctoral') {
+            return s.key.startsWith('T')
+          }
+          return false
+        })
+        .map(s => s)
       return options.concat(
-        studyProgrammes.map(s => ({
+        filteredStudyProgrammes.map(s => ({
           key: s.key,
           value: s.key,
           text: s.name[lang],
@@ -37,7 +54,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
 
   return (
     <div className={`dropdown-filter-${size}`}>
-      <label>{version === 'faculty' ? t('chooseFaculty') : t('chooseProgramme')}</label>
+      <label>{selectedRadio.firstValue === 'faculty' ? t('chooseFaculty') : t('chooseProgramme')}</label>
       <Dropdown
         data-cy="dropdown-filter"
         fluid

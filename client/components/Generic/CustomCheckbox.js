@@ -24,9 +24,16 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
       if (!dataFromRedux) {
         setValue(defaultValues)
       } else {
-        setValue(dataFromRedux)
+        const oldValues = defaultValues.map(v => {
+          const value = dataFromRedux.find(d => d.id === v.id)
+          if (value) {
+            return value
+          }
+          return v
+        })
+        setValue(oldValues)
         if (id === 'view_is_based_on') {
-          const filters = getFilters(dataFromRedux)
+          const filters = getFilters(oldValues)
           dispatch(setAnswerLevels(filters))
         }
       }

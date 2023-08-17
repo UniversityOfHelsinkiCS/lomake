@@ -81,6 +81,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
     const direction = part.direction ? part.direction : 'vertical'
     const maxLength = part.maxLength ? part.maxLength : undefined
     const accordion = part.accordion ? part.accordion : undefined
+    const version = part.version ? part.version : undefined
 
     return (
       <div key={`question-${part.id}-${formType}-${lang}`} style={divStyle}>
@@ -102,6 +103,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           maxLength={maxLength}
           accordion={accordion}
           form={form}
+          version={version}
         />
       </div>
     )

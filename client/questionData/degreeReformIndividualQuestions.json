@@ -36,12 +36,12 @@
         "radioOptions": {
           "fi": [
             { "label": "Tiedekunta", "id": "faculty" },
-            { "label": "YPA", "id": "ypa" },
+            { "label": "YPA/opetuksen toimiala/ YPA muu kuin opetuksen toimiala", "id": "ypa" },
             { "label": "Muu", "id": "other", "placeholder": "Mikä" }
           ],
           "en": [
             { "label": "Faculty", "id": "faculty" },
-            { "label": "YPA", "id": "ypa" },
+            { "label": "", "id": "ypa" },
             { "label": "Other", "id": "other", "placeholder": "What" }
           ],
           "se": [
@@ -94,43 +94,43 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "Dekaani / Varadekaani", "id": "dean" },
+            { "label": "Dekaani tai Varadekaani", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
             { "label": "Väitöskirjatutkija", "id": "doctoral" }
           ],
           "en": [
-            { "label": "Dekaani / Varadekaani(en)", "id": "dean" },
+            { "label": "Dean or vice dean", "id": "dean" },
             { "label": "Teaching or other research staff", "id": "teaching_or_other_research" },
             { "label": "Administrative or other staff", "id": "admin_or_other_staff" },
             { "label": "Student", "id": "student" },
             { "label": "Doctoral", "id": "doctoral" }
           ],
           "se": [
-            { "label": "Dekaani / Varadekaani", "id": "dean" },
-            { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
-            { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
-            { "label": "Opiskelija", "id": "student" },
-            { "label": "Väitöskirjatutkija", "id": "doctoral" }
+            { "label": "", "id": "dean" },
+            { "label": "", "id": "teaching_or_other_research" },
+            { "label": "", "id": "admin_or_other_staff" },
+            { "label": "", "id": "student" },
+            { "label": "", "id": "doctoral" }
           ]
         },
         "advancedOptions": {
           "teaching_or_other_research": {
             "fi": [
               { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
-              { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
+              { "label": "koulutusohjelman johtaja tai johtoryhmän jäsen", "id": "programme_lead" },
               { "label": "Muu", "id": "other" }
             ],
             "en": [
-              { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
-              { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
-              { "label": "Muu", "id": "other" }
+              { "label": "", "id": "science_or_research_lead" },
+              { "label": "", "id": "programme_lead" },
+              { "label": "Other", "id": "other" }
             ],
             "se": [
-              { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
-              { "label": "Koulutusohjelman johtajat", "id": "programme_lead" },
-              { "label": "Muu", "id": "other" }
+              { "label": "", "id": "science_or_research_lead" },
+              { "label": "", "id": "programme_lead" },
+              { "label": "", "id": "other" }
             ]
           }
         }
@@ -145,9 +145,9 @@
           "en": "Years at university"
         },
         "label": {
-          "fi": "Olen ollut Helsingin yliopistossa opiskelijana ja/tai henkilökuntaan kuuluvana yhtäjaksoisesti",
+          "fi": "Kuinka kauan olet ollut Helsingin yliopistossa opiskelijana ja/tai henkilökuntaan kuuluvana",
           "se": "",
-          "en": "Years at university"
+          "en": "How many years have you been at the University of Helsinki as a student and/or as a member of staff"
         },
         "description": {
           "fi": "",
@@ -165,11 +165,10 @@
           "fi": [
             { "label": "Alle vuoden ", "id": "under-year" },
             {
-              "label": "1-3 vuotta",
-              "id": "1-3-years"
+              "label": "1-5 vuotta",
+              "id": "1-5-years"
             },
-            { "label": "3-7 vuotta", "id": "3-7-years" },
-            { "label": "7-10 vuotta", "id": "7-10-years" },
+            { "label": "5-10 vuotta", "id": "5-10-years" },
             {
               "label": "Yli 10 vuotta",
               "id": "over-10-years"
@@ -177,16 +176,14 @@
           ],
           "en": [
             { "label": "Under year", "id": "under-year" },
-            { "label": "1-3 years", "id": "1-3-years" },
-            { "label": "3-7 years", "id": "3-7-years" },
-            { "label": "7-10 years", "id": "7-10-years" },
+            { "label": "1-5 years", "id": "1-5-years" },
+            { "label": "5-10 years", "id": "5-10-years" },
             { "label": "Yli 10 years", "id": "over-10-years" }
           ],
           "se": [
             { "label": "", "id": "under-year" },
-            { "label": "", "id": "1-3-years" },
-            { "label": "", "id": "3-7-years" },
-            { "label": "", "id": "7-10-years" },
+            { "label": "", "id": "1-5-years" },
+            { "label": "", "id": "5-10-years" },
             { "label": "", "id": "over-10-years" }
           ]
         }
@@ -196,14 +193,14 @@
         "index": 3,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "se": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "en": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin"
+          "fi": "valitse osiot, joihin haluat vastata",
+          "se": "choose sections you want to answer",
+          "en": ""
         },
         "label": {
-          "fi": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "se": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin",
-          "en": "Haluan vastata seuraavia tutkintotasoja koskeviin kysymyksiin"
+          "fi": "valitse osiot, joihin haluat vastata",
+          "se": "choose sections you want to answer",
+          "en": ""
         },
         "required": true,
         "extrainfo": {
@@ -216,17 +213,23 @@
           "fi": [
             { "label": "Kandidaattitason koulutus", "id": "bachelor" },
             { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral" }
+            { "label": "Tohtoritason koulutus", "id": "doctoral" },
+            { "label": "Kansainväliset maisteriohjelmat", "id": "international" },
+            { "label": "Tiedekuntien yhteiset koulutusohjelmat", "id": "faculty_collarobate" }
           ],
           "en": [
-            { "label": "Kandidaattitason koulutus", "id": "bachelor" },
-            { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral" }
+            { "label": "Bachelor's level education", "id": "bachelor" },
+            { "label": "Master's level education", "id": "masters" },
+            { "label": "Doctoral level education", "id": "doctoral" },
+            { "label": "International master's programs", "id": "international" },
+            { "label": "Joint faculty programmes", "id": "faculty_collarobate" }
           ],
           "se": [
-            { "label": "Kandidaattitason koulutus", "id": "bachelor" },
-            { "label": "Maisteritason koulutus", "id": "masters" },
-            { "label": "Tohtoritason koulutus", "id": "doctoral" }
+            { "label": "", "id": "bachelor" },
+            { "label": "", "id": "masters" },
+            { "label": "", "id": "doctoral" },
+            { "label": "", "id": "international" },
+            { "label": "", "id": "faculty_collarobate" }
           ]
         }
       },
@@ -235,7 +238,7 @@
         "index": 4,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuena",
+          "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
           "se": "",
           "en": ""
         },
@@ -272,12 +275,12 @@
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista yliopistossa seuraavien väittämien avulla",
+          "fi": "Arvioi koulutusuudistuksen tavoitteiden toteutumista eli nykytilaa yliopistossa.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Koulutusuudistuksen (Iso Pyörä) tavoitteet muotoiltiin projektisuunnitelmaan (20.4.2015). Koulutusuudistuksessa tavoiteltiin rohkeaa askelta Helsingin yliopiston koulutuksen uudistamisessa. Tarkoituksena oli tehdä tarvittavia muutoksia kunkin tiedekunnan omista lähtökohdista – kuitenkin yhteiseen suuntaan, mistä huolehti yliopiston opintoasiainneuvosto.",
+          "fi": "Koulutusuudistuksen (Iso Pyörä) tavoitteet kirjattiin projektisuunnitelmaan (20.4.2015). Uudistuksen tarkoituksena oli tehdä tarvittavia muutoksia lähtien kunkin tiedekunnan omista lähtökohdista, mutta kuitenkin yliopiston yhteiseen suuntaan. Yliopiston yhteisestä suunnasta huolehti yliopiston opintoasiainneuvosto tekemällä koko yliopistoa koskevia linjauksia.",
           "se": "",
           "en": ""
         },
@@ -555,28 +558,210 @@
   },
   {
     "title": {
-      "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteiden näkyminen",
+      "fi": "Pää- ja sivuaineperusteisesta koulutuksesta koulutusohjelmiksi",
       "se": "",
-      "en": "Real three level structure and principles of the Bologna process"
+      "en": "Master's and minor based education to study programmes"
     },
     "id": 2,
+    "parts": [
+      {
+        "id": "information-for-2",
+        "index": 21,
+        "type": "INFOBOX",
+        "shortLabel": {
+          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella. ",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella. ",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Koulutusuudistuksessa päätettiin, että Helsingin yliopistossa tutkintokoulutus järjestetään koulutusohjelmissa.",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studytracks_have_free_choice_study_modules",
+        "index": 22,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Yliopistossa ei ole useampia samansisältöisiä saman tutkintotason koulutusohjelmia esimerkiksi eri kielillä",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "university_does_not_have_multiple_studyprogrammes_with_same_content",
+        "index": 23,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Koulutusohjelman opetus suunnitellaan ja toteutetaan opettajien yhteistyönä",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studypogramme_is_planned_and_carried_out_with_teachers",
+        "index": 24,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Koulutusohjelman opintojaksot muodostavat mielekkään kokonaisuuden",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studyprogramme_studytracks_form_whole",
+        "index": 25,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Opetushenkilökunnan aikaa on vapautunut opetuksen suunnitteluun ja kehittämiseen",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "teachers_have_time_to_develop_studyprogramme",
+        "index": 26,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Opetushenkilökunnan aikaa on vapautunut tutkimukseen ja muuhun tieteelliseen toimintaan",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "teachers_time_is_freed_for_research",
+        "index": 27,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Tieteenalat, joita ennen opetettiin pää- ja sivuaineina, löytyvät nyt koulutusohjelmien sisällöistä",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "studyprogrammes_are_functional",
+        "index": 28,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Koulutusohjelmiin perustuva koulutusrakenne on toimiva",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "major_and_minor_free_to_answer",
+        "index": 29,
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Kommentoi halutessasi",
+          "se": "",
+          "en": ""
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteet",
+      "se": "",
+      "en": "Real three-step and Bologna process principles"
+    },
+    "id": 3,
     "parts": [
       {
         "id": "information-for-3",
         "index": 36,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi koko yliopiston näkökulmasta kolmiportaisen tutkintorakenteen toimivuutta koko yliopiston näkökulmasta tällä hetkellä.",
+          "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koko yliopiston näkökulmasta kolmiportaisen tutkintorakenteen toimivuutta koko yliopiston näkökulmasta tällä hetkellä.",
+          "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa aito kolmiportaisuus, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
+          "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa <strong>aito kolmiportaisuus</strong>, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
           "se": "",
           "en": ""
         },
@@ -589,12 +774,12 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Liikkuvuus yliopiston sisällä sekä yliopistojen ja ammattikorkeakoulujen välillä sujuu luontevasti",
+          "fi": "Hakukohteet ovat hakijalle selkeitä ",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Liikkuvuus yliopiston sisällä sekä yliopistojen ja ammattikorkeakoulujen välillä sujuu luontevasti",
+          "fi": "Hakukohteet ovat hakijalle selkeitä ",
           "se": "",
           "en": ""
         },
@@ -608,7 +793,7 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Aiemmin hankittu osaaminen tunnustetaan",
+          "fi": "Aiemmin hankittu osaaminen tunnistetaan ja tunnustetaan",
           "se": "",
           "en": ""
         },
@@ -627,12 +812,12 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Yliopiston hakukohteet ovat hakijalle selkeitä",
+          "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Yliopiston hakukohteet ovat hakijalle selkeitä",
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -646,50 +831,12 @@
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
+          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua myös ulkomaisiin alan tohtoriohjelmiin",
           "se": "",
           "en": ""
         },
         "shortLabel": {
-          "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "after_bachelor_possible_work_and_later_master",
-        "index": 41,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kandidaatin tutkinnon jälkeen on mahdollista siirtyä työelämään ja myöhemmin halutessaan jatkaa opintoja maisteriohjelmassa",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "Kandidaatin tutkinnon jälkeen on mahdollista siirtyä työelämään ja myöhemmin halutessaan jatkaa opintoja maisteriohjelmassa",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "after_master_possible_doctoral_studies",
-        "index": 42,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua alan tohtoriohjelmaan myös muissa yliopistoissa Suomessa ja ulkomailla.",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "Maisteriohjelmasta voi sujuvasti hakeutua alan tohtoriohjelmaan myös muissa yliopistoissa Suomessa ja ulkomailla.",
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -717,207 +864,6 @@
   },
   {
     "title": {
-      "fi": "Pää- ja sivuainepohjaisesta koulutuksesta koulutusohjelmiksi muuttamiseksi",
-      "se": "",
-      "en": "Mayor and minor subjects to study programmes"
-    },
-    "id": 3,
-    "parts": [
-      {
-        "id": "information-for-3-3",
-        "index": 5,
-        "type": "INFOBOX",
-        "shortLabel": {
-          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella ja/tai koulutusuohjelmasi/tiedekuntasi näkökulmasta.",
-          "se": "",
-          "en": ""
-        },
-        "label": {
-          "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella ja/tai koulutusuohjelmasi/tiedekuntasi näkökulmasta.",
-          "se": "",
-          "en": ""
-        },
-        "description": {
-          "fi": "Tutkintoasetuksen mukaan yliopiston tutkintokoulutus voidaan järjestää pää- ja sivuainepohjaisesti tai koulutusohjelmina. Koulutusuudistuksessa päätettiin, että Helsingin yliopistossa tutkintokoulutus järjestetään koulutusohjelmissa.",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "studytracks_have_free_choice_study_modules",
-        "index": 44,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusohjelmassa on valinnaisia ja vapaasti valittavia opintokokonaisuuksia",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "university_does_not_have_multiple_studyprogrammes_with_same_content",
-        "index": 45,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Yliopistossa ei ole useampia samansisältöisiä saman tutkintotason koulutusohjelmia esimerkiksi eri kielillä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "studypogramme_is_planned_and_carried_out_with_teachers",
-        "index": 48,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusohjelman opetus suunnitellaan ja toteutetaan opettajien yhteistyönä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "studyprogramme_studytracks_form_whole",
-        "index": 49,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusohjelman opintojaksot muodostavat ehyen kokonaisuuden",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "teachers_have_time_to_develop_studyprogramme",
-        "index": 50,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Opettajien aikaa on vapautunut opetuksen suunnitteluun ja kehittämiseen",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "teachers_time_is_freed_for_research",
-        "index": 51,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Opettajien aikaa on vapautunut tutkimukseen ja muuhun tieteelliseen toimintaan",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "studyprogrammes_are_functional",
-        "index": 51,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Koulutusohjelmat ovat toimiva rakenne Helsingin yliopistossa",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "science_areas_taught_as_studytracks_are_found_in_studyprogrammes",
-        "index": 51,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Tieteenalat, joita ennen opetettiin pää- ja sivuaineina, löytyvät nyt koulutusohjelmien sisällöistä.",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "major_and_minor_free_to_answer",
-        "index": 52,
-        "type": "TEXTAREA",
-        "label": {
-          "fi": "Kommentoi halutessasi",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      }
-    ]
-  },
-  {
-    "title": {
       "fi": "Kandiohjelmien rakenne ja toimivuus",
       "se": "",
       "en": "Bachelor programmes structure and functionality"
@@ -926,7 +872,7 @@
     "parts": [
       {
         "id": "information-for-4",
-        "index": 5,
+        "index": 41,
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi kandiohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
@@ -939,7 +885,7 @@
           "en": ""
         },
         "description": {
-          "fi": "",
+          "fi": "Taustatietoa kandiohjelmien periaatteista:\n\nJokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Ohjelman tulee olla riittävän suuri: opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelmassa tulee olla aloituspaikkoja vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nOpiskelijalla on kandiohjelman jälkeen yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Opetussuunnitelmaan on kirjattu, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.  ",
           "se": "",
           "en": ""
         },
@@ -948,8 +894,9 @@
       },
       {
         "id": "bachelor_my_view_is_based_on_programme",
-        "index": 0,
+        "index": 42,
         "type": "CHOOSE-ADVANCED",
+        "version": "bachelor",
         "shortLabel": {
           "fi": "Arvioni perustuu",
           "se": "",
@@ -975,7 +922,7 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "ensisijaisesti kokemukseeni kandiohjelmasta (valikko kaikista kandiohjelmista)",
+              "label": "ensisijaisesti kokemukseeni kandiohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseeni useista kandiohjelmista", "id": "multiple-programs" }
@@ -998,12 +945,12 @@
       },
       {
         "id": "bachelor_programme_structure_is_clear",
-        "index": 53,
+        "index": 43,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kandiohjelmassa hakukohteet ovat opiskelijan näkökulmasta selkeät",
+          "fi": "Kandiohjelmassa hakukohteet ovat opiskelijalle selkeät",
           "se": "",
           "en": ""
         },
@@ -1017,12 +964,12 @@
       },
       {
         "id": "bachelor_programme_starting_amount_is_suitable",
-        "index": 54,
+        "index": 44,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kandiohjelmat ovat aloituspaikkamäärältään sopivia",
+          "fi": "Kandiohjelman aloituspaikkamäärä on liian suuri",
           "se": "",
           "en": ""
         },
@@ -1036,26 +983,7 @@
       },
       {
         "id": "bachelor_programme_gives_sufficient_skills_for_further_studies",
-        "index": 55,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Kandiohjelma antaa riittävän perusosaamisen useisiin ylempään korkeakoulututkintoon johtaviin koulutuksiin",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "bachelor_programme_gives_sufficient_skills_for_working_life",
-        "index": 56,
+        "index": 45,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
@@ -1073,13 +1001,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "student_gets_enough_support_for_studies",
-        "index": 57,
+        "id": "bachelor_programme_gives_sufficient_skills_for_working_life",
+        "index": 46,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Opiskelija saa neuvontaa ja ohjausta optio-maisteriohjelmien valinnassa",
+          "fi": "Kandiohjelmassa opintosuunnan tarkentaminen on sujuvaa",
           "se": "",
           "en": ""
         },
@@ -1092,13 +1020,13 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "bachelor_level_education_works_better_than_before_the_reform",
-        "index": 58,
+        "id": "student_gets_enough_support_for_studies",
+        "index": 47,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Kanditason koulutus toimii nyt paremmin kuin ennen koulutusuudistusta",
+          "fi": "Kanditason koulutus toimii nyt hyvin",
           "se": "",
           "en": ""
         },
@@ -1112,7 +1040,7 @@
       },
       {
         "id": "bachelor_free_answer",
-        "index": 52,
+        "index": 48,
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
@@ -1142,17 +1070,17 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi maisteriohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta",
+          "fi": "Arvioi maisteriohjelmien toimivuutta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi maisteriohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta",
+          "fi": "Arvioi maisteriohjelmien toimivuutta.",
           "se": "",
           "en": ""
         },
         "description": {
-          "fi": "Jokainen ylempää korkeakoulututkintoa suorittava opiskelija kuuluu yhteen maisteriohjelmaan tai lääketieteen, hammaslääketieteen tai eläinlääketieteen lisensiaatin koulutusohjelmaan.\n\nMaisteriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Lisäksi koulutusohjelma antaa riittävän perustan tohtorikoulutukseen. Maisteriohjelman sisällä voi olla useita opintosuuntia.\n\nTutkintokieli on ylempään korkeakoulututkintoon johtavassa koulutusohjelmassa suomi, ruotsi tai englanti. Maisteriohjelman tulee olla kooltaan riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa, voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi on suositeltavaa, että koulutusohjelmassa on aloituspaikkoja vähintään 40.",
+          "fi": "Taustatietoa maisteriohjelmien periaatteista:\n\nJokainen ylempää korkeakoulututkintoa suorittava opiskelija kuuluu yhteen maisteriohjelmaan tai lääketieteen, hammaslääketieteen tai eläinlääketieteen lisensiaatin koulutusohjelmaan.\n\nMaisteriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Lisäksi koulutusohjelma antaa riittävän perustan tohtorikoulutukseen. Maisteriohjelman sisällä voi olla useita opintosuuntia.\n\nTutkintokieli on ylempään korkeakoulututkintoon johtavassa koulutusohjelmassa suomi, ruotsi tai englanti. Maisteriohjelman tulee olla kooltaan riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa, voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi on suositeltavaa, että koulutusohjelmassa on aloituspaikkoja vähintään 40.",
           "se": "",
           "en": ""
         },
@@ -1160,13 +1088,64 @@
         "relatedYearlyQuestions": []
       },
       {
+        "id": "master_my_view_is_based_on_programme",
+        "index": 42,
+        "type": "CHOOSE-ADVANCED",
+        "version": "master",
+        "shortLabel": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "label": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            {
+              "label": "ensisijaisesti kokemukseeni maisteriohjelmasta",
+              "id": "specific-programme"
+            },
+            { "label": "kokemukseeni useista maisteriohjelmista", "id": "multiple-programs" }
+          ],
+          "en": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ],
+          "se": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ]
+        }
+      },
+      {
         "id": "master_programs_are_sufficiently_sized",
-        "index": 62,
+        "index": 51,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelmat ovat aloituspaikkamäärältään riittävän suuria/sopivia",
+          "fi": "Maisteriohjelma on opiskelijamäärältään liian suuri",
           "se": "",
           "en": ""
         },
@@ -1180,12 +1159,12 @@
       },
       {
         "id": "master_programmes_science_contents_are_functional",
-        "index": 63,
+        "index": 52,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelmien tieteenalasisällöt ovat toimivia",
+          "fi": "Maisteriohjelman tieteenalasisällöt ovat toimivia",
           "se": "",
           "en": ""
         },
@@ -1199,12 +1178,12 @@
       },
       {
         "id": "master_programs_gives_skills_for_demanded_positions",
-        "index": 64,
+        "index": 53,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Maisteriohjelma antaa valmiudet syvällistä asiantuntemusta vaativiin tehtäviin työelämässä",
+          "fi": "Haku maisteriohjelmaan toimii hyvin",
           "se": "",
           "en": ""
         },
@@ -1218,12 +1197,12 @@
       },
       {
         "id": "multi_language_master_programmes_are_sufficiently_taught_in_english",
-        "index": 65,
+        "index": 54,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Monikielisessä maisteriohjelmassa englanninkielistä opetusta ja ohjausta on riittävästi siten, että opiskelijat voivat suorittaa tutkinnon kahdessa vuodessa",
+          "fi": "Maisteriohjelma antaa hyvät valmiudet työelämään",
           "se": "",
           "en": ""
         },
@@ -1237,31 +1216,12 @@
       },
       {
         "id": "multi_language_studies_are_sufficiently_taught_in_domestic",
-        "index": 66,
+        "index": 55,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
         "radioOptions": "numbers",
         "label": {
-          "fi": "Monikielisessä maisteriohjelmassa opiskeleville on tarjolla mahdollisuus seminaari- ja tutkielmaohjaukseen kotimaisilla kielillä",
-          "se": "",
-          "en": ""
-        },
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": false,
-        "relatedYearlyQuestions": []
-      },
-      {
-        "id": "master_level_education_works_better_than_before_the_reform",
-        "index": 67,
-        "type": "CHOOSE-RADIO",
-        "direction": "horizontal",
-        "radioOptions": "numbers",
-        "label": {
-          "fi": "Maisteritason koulutus toimii nyt paremmin kuin ennen koulutusuudistusta",
+          "fi": "Maisteritason koulutus toimii nyt hyvin",
           "se": "",
           "en": ""
         },
@@ -1275,7 +1235,7 @@
       },
       {
         "id": "masters_free_to_answer",
-        "index": 70,
+        "index": 56,
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
@@ -1321,6 +1281,57 @@
         },
         "required": false,
         "relatedYearlyQuestions": []
+      },
+      {
+        "id": "international_master_my_view_is_based_on_programme",
+        "index": 42,
+        "type": "CHOOSE-ADVANCED",
+        "version": "international",
+        "shortLabel": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "label": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            {
+              "label": "ensisijaisesti kokemukseeni maisteriohjelmasta",
+              "id": "specific-programme"
+            },
+            { "label": "kokemukseeni useista kansainvälisistä maisteriohjelmista", "id": "multiple-programs" }
+          ],
+          "en": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ],
+          "se": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ]
+        }
       },
       {
         "id": "study_program_has_both_finnish_and_foreign",
@@ -1491,6 +1502,57 @@
         },
         "required": false,
         "relatedYearlyQuestions": []
+      },
+      {
+        "id": "doctoral_my_view_is_based_on_programme",
+        "index": 42,
+        "type": "CHOOSE-ADVANCED",
+        "version": "doctoral",
+        "shortLabel": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "label": {
+          "fi": "Arvioni perustuu",
+          "se": "",
+          "en": "Arvioni perustuu"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedYearlyQuestions": [],
+        "radioOptions": {
+          "fi": [
+            {
+              "label": "ensisijaisesti kokemukseeni tohtoriohjelmasta",
+              "id": "specific-programme"
+            },
+            { "label": "kokemukseeni useista kansainvälisistä tohtoriohjelmista", "id": "multiple-programs" }
+          ],
+          "en": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ],
+          "se": [
+            {
+              "label": "",
+              "id": "specific-programme"
+            },
+            { "label": "", "id": "multiple-programs" }
+          ]
+        }
       },
       {
         "id": "doctoral_program_has_clear_profile",
