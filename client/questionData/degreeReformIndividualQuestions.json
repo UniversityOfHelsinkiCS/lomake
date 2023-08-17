@@ -41,7 +41,7 @@
           ],
           "en": [
             { "label": "Faculty", "id": "faculty" },
-            { "label": "", "id": "ypa" },
+            { "label": "YPA/area of teaching/YPA other than area of teaching", "id": "ypa" },
             { "label": "Other", "id": "other", "placeholder": "What" }
           ],
           "se": [

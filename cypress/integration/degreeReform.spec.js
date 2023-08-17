@@ -271,7 +271,7 @@ describe('Degree reform form tests', () => {
 
     cy.get('[data-cy=choose-radio-container-study_programmes_have_succesful_content]').should('exist')
 
-    cy.get(`[data-cy=navigation-sidebar-section-7]`).should('contain', "Faculties' joint study programmes")
+    cy.get(`[data-cy=navigation-sidebar-section-8]`).should('contain', "Faculties' joint study programmes")
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 11)
   })
@@ -293,7 +293,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=advanced-radio-background_unit]')
       .find('input[type="radio"]')
       .as('YPACheckbox')
-      .check('YPA', { force: true })
+      .check('YPA/area of teaching/YPA other than area of teaching', { force: true })
       .wait(1000)
 
     cy.get('@YPACheckbox').should('be.checked')
