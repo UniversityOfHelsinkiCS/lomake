@@ -271,7 +271,7 @@ describe('Degree reform form tests', () => {
 
     cy.get('[data-cy=choose-radio-container-study_programmes_have_succesful_content]').should('exist')
 
-    cy.get(`[data-cy=navigation-sidebar-section-8]`).should('contain', "Faculties' joint study programmes")
+    cy.get(`[data-cy=navigation-sidebar-section-9]`).should('contain', "Faculties' joint study programmes")
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 11)
   })
@@ -308,7 +308,7 @@ describe('Degree reform form tests', () => {
 
     cy.get('[data-cy=advanced-basic-radio-primary_role]')
       .find('input[value="Other"]')
-      .check('Muu', { force: true })
+      .check('Other', { force: true })
       .as('primaryRoleTeaching')
 
     cy.get('@primaryRoleTeaching').should('be.checked')
