@@ -50,6 +50,7 @@ const DegreeReformIndividual = () => {
   const year = 2023
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {
+    if (formData.pending) return
     dispatch(getSingleUsersAnswers())
     dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
@@ -74,14 +75,14 @@ const DegreeReformIndividual = () => {
     return true
   }
 
-  const handleSendingForm = async () => {
+  const handleSendingForm = () => {
     if (!requiredDegreeReformIds.every(id => formData.data[id])) {
       setMessage(t('formView:fillAllRequiredFields'))
       setTimeout(() => setMessage(null), 10000)
       return
     }
     dispatch(postIndividualFormAnswer(formData.data))
-    dispatch(clearFormState())
+    // dispatch(clearFormState())
     dispatch(updateIndividualReady({ uid, ready: false }))
 
     setModalOpen(false)
