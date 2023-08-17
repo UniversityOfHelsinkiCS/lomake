@@ -210,7 +210,7 @@ describe('Degree reform form tests', () => {
 
     cy.visit('/individual').wait(3000) // Wait for the form to load, (Increses the chance of the test passing exponentially)
 
-    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
+    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 6)
 
     cy.get('[data-cy=choose-radio-container-bachelor_programme_structure_is_clear]').should('not.exist')
 
@@ -226,7 +226,7 @@ describe('Degree reform form tests', () => {
       'Bachelor programmes structure and functionality'
     )
 
-    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 8)
+    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
@@ -237,11 +237,18 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-5]`).should('contain', 'Master programmes structure and functionality')
 
+    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 8)
+
+    cy.get('[data-cy=choose-checkbox-view_is_based_on]')
+      .find('input[type="checkbox"]')
+      .check('international', { force: true })
+      .wait(1000)
+
     cy.get('[data-cy=choose-radio-container-study_program_has_both_finnish_and_foreign]').should('exist')
 
     cy.get(`[data-cy=navigation-sidebar-section-6]`).should('contain', 'International master programmes criteria')
 
-    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 10)
+    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 9)
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
@@ -254,6 +261,17 @@ describe('Degree reform form tests', () => {
       'contain',
       'Doctoral programmes structure and functionality'
     )
+
+    cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 10)
+
+    cy.get('[data-cy=choose-checkbox-view_is_based_on]')
+      .find('input[type="checkbox"]')
+      .check('faculty_collarobate', { force: true })
+      .wait(1000)
+
+    cy.get('[data-cy=choose-radio-container-study_programmes_have_succesful_content]').should('exist')
+
+    cy.get(`[data-cy=navigation-sidebar-section-7]`).should('contain', "Faculties' joint study programmes")
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 11)
   })

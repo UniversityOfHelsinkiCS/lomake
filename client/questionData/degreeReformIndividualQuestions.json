@@ -119,7 +119,7 @@
           "teaching_or_other_research": {
             "fi": [
               { "label": "Tieteenalayksikön tai osaston johtaja tai vastaava", "id": "science_or_research_lead" },
-              { "label": "koulutusohjelman johtaja tai johtoryhmän jäsen", "id": "programme_lead" },
+              { "label": "Koulutusohjelman johtaja tai johtoryhmän jäsen", "id": "programme_lead" },
               { "label": "Muu", "id": "other" }
             ],
             "en": [
