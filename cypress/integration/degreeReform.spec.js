@@ -307,7 +307,7 @@ describe('Degree reform form tests', () => {
     cy.get('@primaryRole').should('be.checked')
 
     cy.get('[data-cy=advanced-basic-radio-primary_role]')
-      .find('input[value="Muu"]')
+      .find('input[value="Other"]')
       .check('Muu', { force: true })
       .as('primaryRoleTeaching')
 
