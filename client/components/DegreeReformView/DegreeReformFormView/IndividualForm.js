@@ -12,7 +12,6 @@ import {
   setViewOnly,
   postIndividualFormAnswer,
   getAllIndividualAnswersForUser,
-  clearFormState,
   updateIndividualReady,
   getSingleUsersAnswers,
 } from 'Utilities/redux/formReducer'
@@ -82,7 +81,6 @@ const DegreeReformIndividual = () => {
       return
     }
     dispatch(postIndividualFormAnswer(formData.data))
-    // dispatch(clearFormState())
     dispatch(updateIndividualReady({ uid, ready: false }))
 
     setModalOpen(false)
