@@ -202,7 +202,7 @@
           "se": "choose sections you want to answer",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -252,7 +252,7 @@
           "se": "",
           "en": ""
         },
-        "required": true,
+        "required": false,
         "relatedYearlyQuestions": []
       }
     ]

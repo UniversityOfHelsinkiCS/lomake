@@ -424,6 +424,7 @@ const clearTempForIndividual = async uid => {
         },
       }
     )
+    logger.info(`Cleared temp answer for current user`)
   } catch (error) {
     logger.error(`Database error: ${error}`)
   }
@@ -455,8 +456,8 @@ const postIndividualFormAnswer = async (req, res) => {
     }
     const savedAnswer = await db.answer.create(answer)
     if (savedAnswer) {
-      removeBackupForIndividual(uid)
-      clearTempForIndividual(uid)
+      await removeBackupForIndividual(uid)
+      await clearTempForIndividual(uid)
     }
     return res.status(200).json(savedAnswer)
   } catch (error) {

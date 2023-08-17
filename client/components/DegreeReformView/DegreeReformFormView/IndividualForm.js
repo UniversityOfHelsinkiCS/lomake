@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Button, Icon, Dimmer, Segment, Header } from 'semantic-ui-react'
+import { Button, Icon, Dimmer, Segment, Header, Message } from 'semantic-ui-react'
 import { requiredDegreeReformIds } from '@root/config/common'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
@@ -142,6 +142,11 @@ const DegreeReformIndividual = () => {
             <Icon name="upload" />
             {t('formView:sendForm')}
           </Button>
+          {message ? (
+            <>
+              <Message size="tiny" header={message} color="red" />
+            </>
+          ) : null}
         </div>
       </Dimmer.Dimmable>
     </div>
