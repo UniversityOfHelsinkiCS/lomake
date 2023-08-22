@@ -14,13 +14,12 @@ const Section = ({ id, title, number, children, programmeKey, formType }) => {
   const scaleNames = [
     {
       number: '1',
-      text: 'veryDifferent',
-      id: 'very-different',
+      text: 'stronglyDisagree',
     },
-    { number: '2', text: 'someWhatDifferent', id: 'somewhat-different' },
-    { number: '3', text: 'neitherNor', id: 'neither' },
-    { number: '4', text: 'someWhatAgree', id: 'somewhat-same' },
-    { number: '5', text: 'veryAgree', id: 'very-same' },
+    { number: '2', text: 'partiallyDisagree' },
+    { number: '3', text: 'neitherNor' },
+    { number: '4', text: 'partiallyAgree' },
+    { number: '5', text: 'stronglyAgree' },
   ]
   return (
     <>

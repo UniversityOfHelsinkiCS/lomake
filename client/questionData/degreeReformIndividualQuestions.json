@@ -900,12 +900,12 @@
         "shortLabel": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "description": {
           "fi": "",
@@ -1095,12 +1095,12 @@
         "shortLabel": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "description": {
           "fi": "",
@@ -1124,10 +1124,10 @@
           ],
           "en": [
             {
-              "label": "",
+              "label": "First and foremost, my experience with the Master's programme",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "My experience with several master's programs", "id": "multiple-programs" }
           ],
           "se": [
             {
@@ -1290,12 +1290,12 @@
         "shortLabel": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "description": {
           "fi": "",
@@ -1511,12 +1511,12 @@
         "shortLabel": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvioni perustuu",
           "se": "",
-          "en": "Arvioni perustuu"
+          "en": "My assessment is based"
         },
         "description": {
           "fi": "",

@@ -58,11 +58,11 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
             <Popup
               content={
                 <>
-                  <p>1 = {t('veryDifferent')}</p>
-                  <p>2 = {t('someWhatDifferent')}</p>
+                  <p>1 = {t('stronglyDisagree')}</p>
+                  <p>2 = {t('partiallyDisagree')}</p>
                   <p>3 = {t('neitherNor')}</p>
-                  <p>4 = {t('someWhatAgree')}</p>
-                  <p>5 = {t('veryAgree')}</p>
+                  <p>4 = {t('partiallyAgree')}</p>
+                  <p>5 = {t('stronglyAgree')}</p>
                 </>
               }
               popper={{ id: 'popper-container', style: { zIndex: 2000 } }}

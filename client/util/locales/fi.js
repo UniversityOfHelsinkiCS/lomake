@@ -177,11 +177,11 @@ export default {
     sendForm: 'Lähetä lomake',
     sendFormModalDescription: 'Haluatko lähettää toisen lomakkeen? Kaikkien lähetettyjen lomakkeiden tiedot säilyvät',
     sendFormModalHeader: 'Uuden koulutusuudistus-lomakkeen lähettäminen',
-    veryDifferent: 'Täysin eri mieltä',
-    someWhatDifferent: 'Osittain eri mieltä',
+    stronglyDisagree: 'Täysin eri mieltä',
+    partiallyDisagree: 'Osittain eri mieltä',
     neitherNor: 'Ei samaa eikä eri mieltä',
-    someWhatAgree: 'Osittain samaa mieltä',
-    veryAgree: 'Täysin samaa mieltä',
+    partiallyAgree: 'Osittain samaa mieltä',
+    stronglyAgree: 'Täysin samaa mieltä',
   },
 
   generic: {
