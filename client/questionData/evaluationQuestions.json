@@ -439,6 +439,58 @@
         },
         "required": true,
         "no_color": true
+      },
+      {
+        "id": "studyprogramme_status",
+        "index": 14,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Koulutusohjelman kokonaistoimivuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "KOULUTUSOHJELMAN KOKONAISTOIMIVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Koulutusohjelman kokonaistoimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "where_are_we_in_five_years",
+        "index": 15,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Missä koulutusohjelmassa mennään viiden vuoden kuluttua",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "MISSÄ KOULUTUSOHJELMASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Opiskelijavalinnan toimivuus",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   }
