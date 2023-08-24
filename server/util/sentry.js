@@ -5,7 +5,7 @@ const initializeSentry = app => {
   if (!(process.env.NODE_ENV === 'production')) return
 
   Sentry.init({
-    dsn: 'https://4ff51e515d0e41a28dea1bbcf3451a18@sentry.cs.helsinki.fi/11',
+    dsn: 'https://a6ceb1539cbea12e147f5e73189a1d45@toska.cs.helsinki.fi/13',
     environment: process.env.SENTRY_ENVIRONMENT,
     // release: sentryRelease,
     integrations: [new Sentry.Integrations.Http({ tracing: true }), new Tracing.Integrations.Express({ app })],
