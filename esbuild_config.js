@@ -1,4 +1,5 @@
 const { sassPlugin } = require('esbuild-sass-plugin')
+const { sentryEsbuildPlugin } = require('@sentry/esbuild-plugin')
 
 const devConfig = {
   entryPoints: ['client/index.js'],
@@ -48,7 +49,15 @@ const prodConfig = {
     'process.env.SENTRY_ENVIRONMENT': "'production'",
     global: 'window',
   },
-  plugins: [sassPlugin()],
+  plugins: [
+    sassPlugin(),
+    sentryEsbuildPlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'toska',
+      project: 'lomake',
+      url: 'https://sentry.cs.helsinki.fi/',
+    }),
+  ],
   color: true,
 }
 
