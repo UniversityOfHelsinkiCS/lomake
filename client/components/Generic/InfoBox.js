@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Divider, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 import studyPath from '../../assets/degreeReform/study_path.png'
 import './Generic.scss'
 
@@ -39,10 +40,11 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
             style={{
               whiteSpace: 'pre-line',
               overflow: 'hidden',
+              fontSize: '1.1em',
             }}
             id="infobox-description-paragraph"
           >
-            {description}
+            <ReactMarkdown>{description}</ReactMarkdown>
           </p>
         )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
