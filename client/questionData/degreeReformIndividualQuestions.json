@@ -36,12 +36,14 @@
         "radioOptions": {
           "fi": [
             { "label": "Tiedekunta", "id": "faculty" },
-            { "label": "YPA/opetuksen toimiala/ YPA muu kuin opetuksen toimiala", "id": "ypa" },
+            { "label": "YPA opetus ja opiskelupalvelut", "id": "ypa-teach" },
+            { "label": "YPA muu kuin opetus ja opiskelupalvelut", "id": "ypa-not-teach" },
             { "label": "Muu", "id": "other", "placeholder": "Mikä" }
           ],
           "en": [
             { "label": "Faculty", "id": "faculty" },
-            { "label": "YPA/area of teaching/YPA other than area of teaching", "id": "ypa" },
+            { "label": "YPA teaching and study services", "id": "ypa" },
+            { "label": "YPA", "id": "ypa" },
             { "label": "Other", "id": "other", "placeholder": "What" }
           ],
           "se": [
@@ -155,6 +157,7 @@
           "en": ""
         },
         "required": true,
+        "hidePopup": true,
         "extrainfo": {
           "fi": "",
           "se": "",
@@ -193,13 +196,13 @@
         "index": 3,
         "type": "CHECKBOX",
         "shortLabel": {
-          "fi": "valitse osiot, joihin haluat vastata",
-          "se": "choose sections you want to answer",
+          "fi": "Valitse osiot, joihin haluat vastata",
+          "se": "Choose sections you want to answer",
           "en": ""
         },
         "label": {
-          "fi": "valitse osiot, joihin haluat vastata",
-          "se": "choose sections you want to answer",
+          "fi": "Valitse osiot, joihin haluat vastata",
+          "se": "Choose sections you want to answer",
           "en": ""
         },
         "required": false,
@@ -875,12 +878,12 @@
         "index": 41,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi kandiohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
+          "fi": "Arvioi kandiohjelmien toimivuutta.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi kandiohjelmien toimivuutta oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
+          "fi": "Arvioi kandiohjelmien toimivuutta.",
           "se": "",
           "en": ""
         },
@@ -898,12 +901,12 @@
         "type": "CHOOSE-ADVANCED",
         "version": "bachelor",
         "shortLabel": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
         "label": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
@@ -922,10 +925,10 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "ensisijaisesti kokemukseeni kandiohjelmasta",
+              "label": "Kokemukseen yhdestä kandiohjelmasta",
               "id": "specific-programme"
             },
-            { "label": "kokemukseeni useista kandiohjelmista", "id": "multiple-programs" }
+            { "label": "Kokemukseen useista kandiohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
@@ -1093,12 +1096,12 @@
         "type": "CHOOSE-ADVANCED",
         "version": "master",
         "shortLabel": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
         "label": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
@@ -1117,10 +1120,10 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "ensisijaisesti kokemukseeni maisteriohjelmasta",
+              "label": "Kokemukseen yhdestä maisteriohjelmasta",
               "id": "specific-programme"
             },
-            { "label": "kokemukseeni useista maisteriohjelmista", "id": "multiple-programs" }
+            { "label": "kokemukseen useista maisteriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
@@ -1288,12 +1291,12 @@
         "type": "CHOOSE-ADVANCED",
         "version": "international",
         "shortLabel": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
         "label": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
@@ -1312,7 +1315,7 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "ensisijaisesti kokemukseeni maisteriohjelmasta",
+              "label": "Kokemukseen yhdestä maisteriohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseeni useista kansainvälisistä maisteriohjelmista", "id": "multiple-programs" }
@@ -1509,12 +1512,12 @@
         "type": "CHOOSE-ADVANCED",
         "version": "doctoral",
         "shortLabel": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
         "label": {
-          "fi": "Arvioni perustuu",
+          "fi": "Arvio perustuu",
           "se": "",
           "en": "My assessment is based"
         },
@@ -1533,10 +1536,10 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "ensisijaisesti kokemukseeni tohtoriohjelmasta",
+              "label": "Kokemukseen yhdestä tohtoriohjelmasta",
               "id": "specific-programme"
             },
-            { "label": "kokemukseeni useista kansainvälisistä tohtoriohjelmista", "id": "multiple-programs" }
+            { "label": "kokemukseen useista kansainvälisistä tohtoriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
@@ -1719,12 +1722,12 @@
         "index": 5,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
+          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua.",
           "se": "",
           "en": ""
         },
         "label": {
-          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta.",
+          "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua.",
           "se": "",
           "en": ""
         },

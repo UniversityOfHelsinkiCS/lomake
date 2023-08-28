@@ -112,7 +112,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
           <label
             style={{
               fontStyle: 'bolder',
-              fontSize: '1.1em',
+              fontSize: '1.3em',
               minWidth: '50%',
               height: 'auto',
             }}

@@ -84,6 +84,7 @@ const Form = ({ questions, programmeKey, form }) => {
           }
           radioOptions={part.radioOptions}
           form={form}
+          hidePopup={part.hidePopup}
         />
       </div>
     )

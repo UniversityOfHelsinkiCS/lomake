@@ -104,6 +104,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           accordion={accordion}
           form={form}
           version={version}
+          hidePopup={part.hidePopup}
         />
       </div>
     )
