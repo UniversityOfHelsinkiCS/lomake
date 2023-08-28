@@ -1,5 +1,5 @@
 import React from 'react'
-import { Radio, Form, Input } from 'semantic-ui-react'
+import { Radio, Form, Input, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import './Generic.scss'
 
@@ -17,38 +17,63 @@ const BasicRadio = ({ id, radioButtonLabels, direction, handleClick, viewOnly, t
   const isChecked = value => {
     return type === 'choose' ? checked === value : checked.secondValue === value
   }
+
   return (
     <div>
       {radioButtonLabels ? (
         <div data-cy={`${type}-basic-radio-${id}`} style={direction === 'horizontal' ? { display: 'flex' } : null}>
           {radioButtonLabels.map(o => {
+            let toolTipText = ''
+            if (o.id === 'first') {
+              toolTipText = `${t('formView:stronglyDisagree')}`
+            } else if (o.id === 'second') {
+              toolTipText = `${t('formView:partiallyDisagree')}`
+            } else if (o.id === 'third') {
+              toolTipText = `${t('formView:neitherNor')}`
+            } else if (o.id === 'fourth') {
+              toolTipText = `${t('formView:partiallyAgree')}`
+            } else if (o.id === 'fifth') {
+              toolTipText = `${t('formView:stronglyAgree')}`
+            } else if (o.id === 'idk') {
+              toolTipText = t('formView:doNotKnow')
+            }
             return (
-              <Form.Field
-                key={`basic-radio-${id}-${o.id}`}
-                disabled={viewOnly}
-                style={
-                  direction !== 'horizontal'
-                    ? { display: 'flex', marginBottom: '0.2em' }
-                    : { marginLeft: '2em', textAlign: 'center' }
+              <Popup
+                content={
+                  <>
+                    <p>{toolTipText}</p>
+                  </>
                 }
-              >
-                <Radio
-                  name="basic-radio"
-                  style={{ display: 'flex', alignItems: 'center' }}
-                  value={o.label}
-                  disabled={viewOnly}
-                  label={
-                    <label
-                      data-cy={`basic-radio-${o.id}`}
-                      style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '1.5em' } : null}
-                    >
-                      {o.label}
-                    </label>
-                  }
-                  checked={isChecked(o.id)}
-                  onClick={() => handleChange(o.id)}
-                />
-              </Form.Field>
+                popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
+                trigger={
+                  <Form.Field
+                    key={`basic-radio-${id}-${o.id}`}
+                    disabled={viewOnly}
+                    style={
+                      direction !== 'horizontal'
+                        ? { display: 'flex', marginBottom: '0.2em' }
+                        : { marginLeft: '2em', textAlign: 'center' }
+                    }
+                  >
+                    <Radio
+                      name="basic-radio"
+                      style={{ display: 'flex', alignItems: 'center' }}
+                      value={o.label}
+                      disabled={viewOnly}
+                      label={
+                        <label
+                          data-cy={`basic-radio-${o.id}`}
+                          style={direction !== 'horizontal' ? { display: 'flex', marginLeft: '1.5em' } : null}
+                        >
+                          {o.label}
+                        </label>
+                      }
+                      checked={isChecked(o.id)}
+                      onClick={() => handleChange(o.id)}
+                    />
+                  </Form.Field>
+                }
+              />
             )
           })}
           {checked.secondValue === 'other' ? (

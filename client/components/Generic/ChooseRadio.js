@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Popup, Icon, Form } from 'semantic-ui-react'
+import { Divider, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField } from 'Utilities/redux/formReducer'
-import { useTranslation } from 'react-i18next'
-
 import { colors, getForm } from 'Utilities/common'
 import BasicRadio from './BasicRadio'
 import './Generic.scss'
 
-const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType }) => {
+const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions, direction, formType, hidePopup }) => {
   const dispatch = useDispatch()
   const [state, setState] = useState({ value: '' })
   const dataFromRedux = useSelector(({ form }) => form.data[id] || '')
@@ -16,7 +14,6 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (field, value) => dispatch(updateFormField(field, value, form))
-  const { t } = useTranslation('formView')
 
   const handleClick = label => {
     setState({ value: label })
@@ -33,7 +30,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
     if (lang === 'fi') {
       idkButton = 'En osaa sanoa'
     } else if (lang === 'se') {
-      idkButton = "I don't know"
+      idkButton = 'Jag vet inte'
     } else {
       idkButton = "I don't know"
     }
@@ -48,6 +45,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   } else {
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
   }
+  const hidePopupTrue = !(hidePopup === true || hidePopup === undefined)
   return (
     <div key={`${id}-${formType}-${lang}`} className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
@@ -55,19 +53,6 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
         <div>
           <h3>
             {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
-            <Popup
-              content={
-                <>
-                  <p>1 = {t('stronglyDisagree')}</p>
-                  <p>2 = {t('partiallyDisagree')}</p>
-                  <p>3 = {t('neitherNor')}</p>
-                  <p>4 = {t('partiallyAgree')}</p>
-                  <p>5 = {t('stronglyAgree')}</p>
-                </>
-              }
-              popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
-              trigger={<Icon style={{ marginLeft: '0.5em', color: 'grey' }} name="question circle outline" />}
-            />
           </h3>
         </div>
       </div>
@@ -87,6 +72,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
           checked={state.value}
           viewOnly={viewOnly}
           radioButtonLabels={radioButtonLabels}
+          hidePopup={hidePopupTrue}
           type="choose"
         />
       </Form>

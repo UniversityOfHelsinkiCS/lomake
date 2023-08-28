@@ -171,10 +171,10 @@ export default {
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
     fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
-    formReady: 'Lomake on tallennettu',
-    sendNewForm: 'Lähetä uusi lomake',
-    modifyForm: 'Muokkaa lomaketta',
-    sendForm: 'Lähetä lomake',
+    formReady: 'Vastaukset on tallennettu',
+    sendNewForm: 'Täytä uusi lomake',
+    modifyForm: 'Muokkaa vastauksia',
+    sendForm: 'Tallenna vastaukset',
     sendFormModalDescription: 'Haluatko lähettää toisen lomakkeen? Kaikkien lähetettyjen lomakkeiden tiedot säilyvät',
     sendFormModalHeader: 'Uuden koulutusuudistus-lomakkeen lähettäminen',
     stronglyDisagree: 'Täysin eri mieltä',
@@ -182,6 +182,7 @@ export default {
     neitherNor: 'Ei samaa eikä eri mieltä',
     partiallyAgree: 'Osittain samaa mieltä',
     stronglyAgree: 'Täysin samaa mieltä',
+    doNotKnow: 'En osaa sanoa',
   },
 
   generic: {
