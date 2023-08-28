@@ -10,13 +10,11 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import {
   setViewOnly,
-  postIndividualFormAnswer,
   getAllIndividualAnswersForUser,
   updateIndividualReady,
   getSingleUsersAnswers,
 } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
-import SendFormModal from 'Components/Generic/SendFormModal'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
 
@@ -30,7 +28,6 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber, ready
 
 const DegreeReformIndividual = () => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const [modalOpen, setModalOpen] = useState(false)
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const formData = useSelector(state => state.form)
@@ -61,7 +58,7 @@ const DegreeReformIndividual = () => {
       dispatch(wsJoinRoom(uid, formNumber))
       dispatch(setViewOnly(false))
     }
-  }, [year, draftYear, user, formDeadline, modalOpen, currentRoom])
+  }, [year, draftYear, user, formDeadline, currentRoom])
 
   const handleFormReady = async () => {
     if (!requiredDegreeReformIds.every(id => formData.data[id])) {
@@ -74,17 +71,6 @@ const DegreeReformIndividual = () => {
     return true
   }
 
-  const handleSendingForm = () => {
-    if (!requiredDegreeReformIds.every(id => formData.data[id])) {
-      setMessage(t('formView:fillAllRequiredFields'))
-      setTimeout(() => setMessage(null), 10000)
-      return
-    }
-    dispatch(postIndividualFormAnswer(formData.data))
-    dispatch(updateIndividualReady({ uid, ready: false }))
-
-    setModalOpen(false)
-  }
   const formType = 'degree-reform-individual'
   return (
     <div className="form-container" data-cy="reform-individual-form-container" lang={lang}>
@@ -95,9 +81,18 @@ const DegreeReformIndividual = () => {
             <Header as="h2" inverted>
               {t('formView:formReady')}
             </Header>
-            <SendFormModal
+            <Button
+              primary
+              onClick={() => {
+                dispatch(updateIndividualReady({ uid, ready: false }))
+              }}
+            >
+              {t('formView:modifyForm')}
+            </Button>
+
+            {/* <SendFormModal
               openButton={
-                <Button disabled={viewOnly} primary data-cy="individual-form-send-modal-button">
+                <Button disabled={viewOnly} data-cy="individual-form-send-modal-button">
                   {t('formView:sendNewForm')}
                 </Button>
               }
@@ -107,14 +102,7 @@ const DegreeReformIndividual = () => {
               setOpen={setModalOpen}
               message={message}
               sendButton={handleSendingForm}
-            />
-            <Button
-              onClick={() => {
-                dispatch(updateIndividualReady({ uid, ready: false }))
-              }}
-            >
-              {t('formView:modifyForm')}
-            </Button>
+            /> */}
           </div>
         </Dimmer>
         <div className="the-form">
@@ -123,14 +111,14 @@ const DegreeReformIndividual = () => {
               <img alt="form-header-calendar" className="img-responsive" src={bigWheel} />
             </div>
             <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-              {t('degree-reform')} 2015-2017 Testilomake
+              {t('degree-reform')} 2015-2017
             </h3>
             <StatusMessage programme={user.id} form={formNumber} />
             <SaveIndicator />
           </div>
           <DegreeReformForm questionData={questionData} formType={formType} />
           <Button
-            style={{ maxWidth: '10em', marginTop: '1.5em' }}
+            style={{ maxWidth: '80em', marginTop: '1.5em' }}
             labelPosition="left"
             data-cy="individual-form-ready-button"
             icon
@@ -139,8 +127,9 @@ const DegreeReformIndividual = () => {
             onClick={handleFormReady}
           >
             <Icon name="upload" />
-            {t('formView:sendForm')}
+            <span style={{ fontSize: '1.5em' }}>{t('formView:sendForm')}</span>
           </Button>
+          <p style={{ fontSize: '15px', textAlign: 'center' }}>Vastauksia voi edelleen muokata</p>
           {message ? (
             <>
               <Message size="tiny" header={message} color="red" />
