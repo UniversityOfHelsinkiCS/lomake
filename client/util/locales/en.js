@@ -158,7 +158,8 @@ export default {
     summaryLinkProg: 'View all previous yearly assessment answers',
     oodikoneProg: 'View programme statistics in Oodikone',
     oodikoneFaculty: 'View faculty statistics in Oodikone',
-    rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
+    rapo: 'View doctoral programme statistics in Rapo',
+    toijo: 'TOIJO-evaluation coming 11.9.',
     facultyInfo:
       'For this evaluation you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
     materialsFaculty:
