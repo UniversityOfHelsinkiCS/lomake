@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Message, Icon } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { translateDegreeReformBackground } from 'Utilities/common'
 
 const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   if (draftYear && writeAccess) {
@@ -14,8 +13,6 @@ const showMessageForOpenYear = (draftYear, writeAccess, t) => {
 
 const StatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
-  const formData = useSelector(state => state.form.oldIndividualAnswers)
-
   const lang = useSelector(state => state.language)
   const deadlines = useSelector(state => state.deadlines.nextDeadline)
   const formDeadline = deadlines ? deadlines.find(d => d.form === form) : null
@@ -27,6 +24,7 @@ const StatusMessage = ({ programme, form }) => {
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = lang !== 'se' ? lang : 'sv'
+  /*
   let checking = ''
   let lastSentInfo = []
   if (form === 3 && formData && formData.updatedAt) {
@@ -34,6 +32,7 @@ const StatusMessage = ({ programme, form }) => {
     checking = utcTime.toLocaleString(locale)
     lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
   }
+  */
   if (form !== 3 && !writeAccess) {
     return (
       <Message
@@ -65,7 +64,7 @@ const StatusMessage = ({ programme, form }) => {
         content={`${t('formView:status:canBeOpened')} ${deadlineObj.toLocaleDateString(locale)}.`}
       />
     )
-
+  /*  Deprecated since sending forms is not a thing
   const LastFormSentMessage = () => {
     return (
       <Message icon>
@@ -86,7 +85,7 @@ const StatusMessage = ({ programme, form }) => {
       </Message>
     )
   }
-
+*/
   return (
     <>
       <Message
@@ -95,7 +94,7 @@ const StatusMessage = ({ programme, form }) => {
         header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
         content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}.`}
       />
-      {form === 3 && formData.data && <LastFormSentMessage />}
+      {/* form === 3 && formData.data && <LastFormSentMessage /> Deprecated since sending forms is not a thing */}
     </>
   )
 }

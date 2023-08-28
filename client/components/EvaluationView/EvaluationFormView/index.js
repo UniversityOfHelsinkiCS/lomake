@@ -261,16 +261,20 @@ const EvaluationFormView = ({ room, formString }) => {
                 {t('formView:summaryLinkProg')} <Icon name="external" />{' '}
               </h4>
             </Link>
-            <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
-              <h4 style={{ marginBottom: '0.5em' }}>
-                {t('formView:oodikoneProg')} <Icon name="external" />{' '}
-              </h4>
-            </a>
-            <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
-              <h4>
-                {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
-              </h4>
-            </a>
+            {!room.startsWith('T') && (
+              <>
+                <a href={oodiProgURL} data-cy={`link-to-oodikone-programme-${room}`} target="_blank" rel="noreferrer">
+                  <h4 style={{ marginBottom: '0.5em' }}>
+                    {t('formView:oodikoneProg')} <Icon name="external" />{' '}
+                  </h4>
+                </a>
+                <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
+                  <h4>
+                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
+                  </h4>
+                </a>
+              </>
+            )}
             {room.startsWith('T') ? (
               <div style={{ marginTop: '1em' }}>
                 <a href={rapoLink} data-cy={`link-to-rapo-${room}`} target="_blank" rel="noreferrer">
