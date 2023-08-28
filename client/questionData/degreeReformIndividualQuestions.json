@@ -42,8 +42,8 @@
           ],
           "en": [
             { "label": "Faculty", "id": "faculty" },
-            { "label": "YPA teaching and study services", "id": "ypa" },
-            { "label": "YPA", "id": "ypa" },
+            { "label": "YPA teach and study services", "id": "ypa" },
+            { "label": "YPA other than teach and study services", "id": "ypa" },
             { "label": "Other", "id": "other", "placeholder": "What" }
           ],
           "se": [

@@ -293,7 +293,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=advanced-radio-background_unit]')
       .find('input[type="radio"]')
       .as('YPACheckbox')
-      .check('YPA/area of teaching/YPA other than area of teaching', { force: true })
+      .check('YPA teach and study services', { force: true })
       .wait(1000)
 
     cy.get('@YPACheckbox').should('be.checked')
@@ -332,6 +332,7 @@ describe('Degree reform form tests', () => {
 
     cy.get('[data-cy=individual-form-ready-button]').click()
 
+    /* Deprecated since there's no function to send form
     cy.get('[data-cy=individual-form-send-modal-button]').click()
     cy.get('[data-cy=individual-form-send-form-button]').click().wait(1000)
 
@@ -344,6 +345,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=advanced-radio-background_unit]').find('input[value="Other"]').should('not.be.checked')
 
     cy.get('[data-cy=choose-basic-radio-how_many_years]').find('input[type="radio"]').should('not.be.checked')
+    */
   })
 
   // individual: check that correct data shown
