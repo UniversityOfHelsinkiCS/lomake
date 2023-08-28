@@ -3,7 +3,7 @@
     "title": {
       "fi": "OPISKELUN SUJUVUUS",
       "se": "SMIDIGA STUDIER",
-      "en": ""
+      "en": "SEAMLESS STUDIES"
     },
     "parts": [
       {
@@ -13,17 +13,17 @@
         "shortLabel": {
           "fi": "Opiskelijavalinta",
           "se": "Studentantagning",
-          "en": ""
+          "en": "Student admissions"
         },
         "label": {
           "fi": "OPISKELIJAVALINTA",
           "se": "STUDENTANTAGNING ",
-          "en": ""
+          "en": "STUDENT ADMISSIONS"
         },
         "description": {
           "fi": "Opiskelijavalinnan toimivuus",
           "se": "Studentantagningens ändamålsenlighet",
-          "en": ""
+          "en": "Functioning of the student admissions procedure"
         },
         "required": true,
         "extrainfo": {
@@ -40,17 +40,17 @@
         "shortLabel": {
           "fi": "Opetussuunnitelma",
           "se": "Undervisningsplan",
-          "en": ""
+          "en": "Curriculum"
         },
         "label": {
           "fi": "OPETUSSUUNNITELMA",
           "se": "UNDERVISNINGSPLAN",
-          "en": ""
+          "en": "CURRICULUM"
         },
         "description": {
           "fi": "Opetussuunnitelman toimivuus",
           "se": "Undervisningsplanens ändamålsenlighet",
-          "en": ""
+          "en": "Functioning of the curriculum"
         },
         "required": true,
         "extrainfo": {
@@ -67,17 +67,17 @@
         "shortLabel": {
           "fi": "Opintojen ohjaus",
           "se": "Studiehandledning",
-          "en": ""
+          "en": "Student guidance and supervision"
         },
         "label": {
           "fi": "OPINTOJEN OHJAUS",
           "se": "STUDIEHANDLEDNING ",
-          "en": ""
+          "en": "STUDENT GUIDANCE AND SUPERVISION"
         },
         "description": {
           "fi": "Opintojen ohjauksen toimivuus",
           "se": "Studiehandledningens ändamålsenlighet",
-          "en": ""
+          "en": "Functioning of student guidance and supervision"
         },
         "required": true,
         "extrainfo": {
@@ -94,17 +94,17 @@
         "shortLabel": {
           "fi": "Nivelvaihe",
           "se": "Övergångsstadium",
-          "en": ""
+          "en": "Transition period"
         },
         "label": {
           "fi": "NIVELVAIHE",
           "se": "ÖVERGÅNGSSTADIUM",
-          "en": ""
+          "en": "TRANSITION PERIOD"
         },
         "description": {
           "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus",
           "se": "Övergången mellan kandidat- och magisterprogram samt optioner",
-          "en": ""
+          "en": "Functioning of the transition between bachelor’s and master’s programmes and master’s programme options"
         },
         "required": true,
         "extrainfo": {
@@ -121,17 +121,17 @@
         "shortLabel": {
           "fi": "Läpivirtaus",
           "se": "Genomströmning",
-          "en": ""
+          "en": "Progression"
         },
         "label": {
           "fi": "LÄPIVIRTAUS",
           "se": "GENOMSTRÖMNING",
-          "en": ""
+          "en": "PROGRESSION"
         },
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus koulutusohjelmassa",
           "se": "Avläggande av examina och genomströmning inom utbildningsprogrammet",
-          "en": ""
+          "en": "Completion of degrees and rate of progression in the degree programme"
         },
         "required": true,
         "extrainfo": {
@@ -148,7 +148,7 @@
         "label": {
           "fi": "Mikäli koulutusohjelman johtoryhmän sisällä oli huomattavia näkemyseroja annetuista arvioista, kuvatkaa millaisia näkemyserot ovat ja miten nyt annettuun arvion päädyttiin.",
           "se": "Om det inom utbildningsprogrammets ledningsgrupp fanns betydande åsiktsskillnader i fråga om bedömningarna, beskriv skillnaderna och hur gruppen kom fram till det omdöme som nu avgetts. ",
-          "en": ""
+          "en": "If the degree programme steering group members markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -164,7 +164,7 @@
         "label": {
           "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
           "se": "UTBILDNINGSPROGRAMMETS ANTECKNINGAR",
-          "en": ""
+          "en": "COMMENTS BY THE DEGREE PROGRAMME"
         }
       },
       {
@@ -174,7 +174,7 @@
         "label": {
           "fi": "Mitkä ovat opiskelun sujuuvus -teeman osalta koulutusohjelmanne vahvuudet?",
           "se": "Vilka styrkor har ert utbildningsprogram när det gäller temat Smidiga studier?",
-          "en": ""
+          "en": "What are the strengths of your degree programme in terms of the theme ‘seamless studies’?"
         },
         "required": false,
         "no_color": true,
@@ -190,17 +190,17 @@
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
           "se": "UTVECKLINGSOBJEKT OCH ÅTGÄRDSFÖRSLAG",
-          "en": ""
+          "en": "DEVELOPMENT AREAS AND PROPOSED MEASURES"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärdsförslag. För teman som fått en gul bedömning kan det i vissa fall behövas fler konkreta åtgärder, och då är det bra att lägga till dem som utvecklingsobjekt på listan över åtgärdsförslag.",
-          "en": ""
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may require concrete measures, in which case they should be documented as development targets in the list of proposed measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärdsförslag som formulerats för dem.",
-          "en": ""
+          "en": "Write down one to five development targets and concrete measures proposed for them."
         },
         "required": true,
         "no_color": true
@@ -211,7 +211,7 @@
     "title": {
       "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
       "se": "UTBILDNINGENS ÖVERGRIPANDE STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
-      "en": ""
+      "en": "OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES"
     },
     "parts": [
       {
@@ -221,17 +221,17 @@
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
           "se": "Ledning och kommunikation",
-          "en": ""
+          "en": "MANAGEMENT, LEADERSHIP AND COMMUNICATION"
         },
         "label": {
           "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
           "se": "LEDNING OCH KOMMUNIKATION",
-          "en": ""
+          "en": "FUNCTIONING OF MANAGEMENT, LEADERSHIP AND COMMUNICATION"
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus",
           "se": "Ledning och kommunikation",
-          "en": ""
+          "en": "Functioning of management, leadership and communication"
         },
         "required": true,
         "extrainfo": {
@@ -248,17 +248,17 @@
         "shortLabel": {
           "fi": "Opetusresurssit",
           "se": "Undervisningsresurser",
-          "en": ""
+          "en": "Teaching resources"
         },
         "label": {
           "fi": "OPETUSRESURSSIT",
           "se": "UNDERVISNINGSRESURSER",
-          "en": ""
+          "en": "TEACHING RESOURCES"
         },
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta",
           "se": "Planering och administration av undervisningsresurser ",
-          "en": ""
+          "en": "Planning and management of teaching resources"
         },
         "required": true,
         "extrainfo": {
@@ -275,17 +275,17 @@
         "shortLabel": {
           "fi": "Rekrytointi",
           "se": "Inflytande över rekrytering",
-          "en": ""
+          "en": "Opportunities to influence recruitment"
         },
         "label": {
           "fi": "REKRYTOINTIIN VAIKUTTAMINEN",
           "se": "INFLYTANDE ÖVER REKRYTERING",
-          "en": ""
+          "en": "OPPORTUNITIES TO INFLUENCE RECRUITMENT"
         },
         "description": {
           "fi": "Ohjelman mahdollisuudet vaikuttaa uuden henkilökunnan rekrytointiin",
           "se": "Programmets möjligheter att påverka rekryteringen av nya anställda",
-          "en": ""
+          "en": "The programme’s opportunities to influence the recruitment of new staff"
         },
         "required": true,
         "extrainfo": {
@@ -301,18 +301,18 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Laite- ja tilaresurssit",
-          "se": "UTRUSTNINGS- OCH LOKALRESURSER",
-          "en": ""
+          "se": "Utrustnings- och lokalresurser",
+          "en": "Equipment and facility resources"
         },
         "label": {
           "fi": "LAITE- JA TILARESURSSIT",
-          "se": "Utrustnings- och lokalresurser",
-          "en": ""
+          "se": "UTRUSTNINGS- OCH LOKALRESURSER",
+          "en": "EQUIPMENT AND FACILITY RESOURCES"
         },
         "description": {
           "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit",
           "se": "Resurser för lokaler, utrustning och lärmiljöer ",
-          "en": ""
+          "en": "Resources related to facilities, equipment and learning environments"
         },
         "required": true,
         "extrainfo": {
@@ -328,18 +328,18 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
-          "se": "FAKULTETSÖVERSKRIDANDE PROGRAM",
-          "en": ""
+          "se": "Fakultetsöverskridande program",
+          "en": "Jointprogrammes at the faculty"
         },
         "label": {
           "fi": "TIEDEKUNNAN YHTEISET OHJELMAT",
-          "se": "Fakultetsöverskridande program",
-          "en": ""
+          "se": "FAKULTETSÖVERSKRIDANDE PROGRAM",
+          "en": "JOINT PROGRAMMES AT THE FACULTY"
         },
         "description": {
           "fi": "Usean tiedekunnan yhteisen ohjelman toimivuus",
           "se": "Fakultetsöverskridande program",
-          "en": ""
+          "en": "Functioning of joint programmes between several faculties"
         },
         "required": true,
         "extrainfo": {
@@ -356,17 +356,17 @@
         "shortLabel": {
           "fi": "Ohjelman asema",
           "se": "Utbildningsprogrammets ställning",
-          "en": ""
+          "en": "Status of the degree programme"
         },
         "label": {
           "fi": "KOULUTUSOHJELMAN ASEMA",
           "se": "UTBILDNINGSPROGRAMMETS STÄLLNING",
-          "en": ""
+          "en": "STATUS OF THE DEGREE PROGRAMME"
         },
         "description": {
           "fi": "Koulutusohjelman asema yliopiston toiminta- ja johtamisrakenteessa",
           "se": "Utbildningsprogrammets ställning i universitetets verksamhets- och ledningsstruktur",
-          "en": ""
+          "en": "Status of the degree programme in the University’s operations and management structure"
         },
         "required": true,
         "extrainfo": {
@@ -383,7 +383,7 @@
         "label": {
           "fi": "Mikäli koulutusohjelman johtoryhmän sisällä oli huomattavia näkemyseroja annetuista arvioista, kuvatkaa millaisia näkemyserot ovat ja miten nyt annettuun arvion päädyttiin.",
           "se": "Om det inom utbildningsprogrammets ledningsgrupp fanns betydande åsiktsskillnader i fråga om bedömningarna, beskriv skillnaderna och hur gruppen kom fram till det omdöme som nu avgetts.",
-          "en": ""
+          "en": "If the degree programme steering group members markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -399,7 +399,7 @@
         "label": {
           "fi": "KOULUTUSOHJELMAN KIRJAUKSET",
           "se": "UTBILDNINGSPROGRAMMETS ANTECKNINGAR",
-          "en": ""
+          "en": "COMMENTS BY THE DEGREE PROGRAMME"
         }
       },
       {
@@ -409,7 +409,7 @@
         "label": {
           "fi": "Mitkä ovat Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teeman osalta koulutusohjelmanne vahvuudet?",
           "se": "Vilka styrkor har ert utbildningsprogram när det gäller temat Utbildningens övergripande struktur, ledning, resurser och utbildningsprogrammets ställning?",
-          "en": ""
+          "en": "What are the strengths of your degree programme in terms of the theme ‘overall structure of education, leadership and management, resources, and the status of degree programmes’?"
         },
         "required": false,
         "no_color": true,
@@ -425,17 +425,17 @@
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
           "se": "UTVECKLINGSOBJEKT OCH ÅTGÄRDSFÖRSLAG",
-          "en": ""
+          "en": "DEVELOPMENT AREAS AND PROPOSED MEASURES *"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpide-ehdotuksineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita lisää konkreettisia toimenpiteitä, jolloin ne on hyvä liittää kehittämiskohteena toimenpide-ehdotusten listalle",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärdsförslag. För teman som fått en gul bedömning kan det i vissa fall behövas fler konkreta åtgärder, och då är det bra att lägga till dem som utvecklingsobjekt på listan över åtgärdsförslag.",
-          "en": ""
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may require concrete measures, in which case they should be documented as development targets in the list of proposed measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 kehittämiskohdetta ja niille muodostetut konkreettiset toimenpide-ehdotukset",
           "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärdsförslag som formulerats för dem.",
-          "en": ""
+          "en": "Write down one to five development targets and concrete measures proposed for them."
         },
         "required": true,
         "no_color": true
@@ -446,16 +446,16 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Koulutusohjelman kokonaistoimivuus",
-          "se": "",
-          "en": ""
+          "se": "Den övergripande situationen för programmet för närvarande",
+          "en": "Overall status of the degree programme at the moment"
         },
         "label": {
           "fi": "KOULUTUSOHJELMAN KOKONAISTOIMIVUUS",
-          "se": "",
-          "en": ""
+          "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR PROGRAMMET FÖR NÄRVARANDE",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME AT THE MOMENT"
         },
         "description": {
-          "fi": "Koulutusohjelman kokonaistoimivuus",
+          "fi": "",
           "se": "",
           "en": ""
         },
@@ -472,18 +472,18 @@
         "type": "ENTITY",
         "shortLabel": {
           "fi": "Missä koulutusohjelmassa mennään viiden vuoden kuluttua",
-          "se": "",
-          "en": ""
+          "se": "Programmets övergripande situation om fem år",
+          "en": "Overall status of the degree programme in five years"
         },
         "label": {
           "fi": "MISSÄ KOULUTUSOHJELMASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
-          "se": "",
-          "en": ""
+          "se": "PROGRAMMETS ÖVERGRIPANDE SITUATION OM FEM ÅR",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME IN FIVE YEARS"
         },
         "description": {
-          "fi": "Opiskelijavalinnan toimivuus",
-          "se": "",
-          "en": ""
+          "fi": "Kuvaile missä koulutusohjelmassa mennään viiden vuoden kuluttua",
+          "se": "Beskriv hur du ser på programmet om fem år",
+          "en": "Describe how you picture the status of the degree programme to be in five years"
         },
         "required": true,
         "extrainfo": {
