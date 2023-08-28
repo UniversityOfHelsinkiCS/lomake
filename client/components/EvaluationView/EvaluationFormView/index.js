@@ -284,7 +284,7 @@ const EvaluationFormView = ({ room, formString }) => {
                 </a>
               </div>
             ) : null}
-            <div style={{ marginTop: '1em' }}>
+            <div style={{ marginTop: '1em', color: 'red' }}>
               <h4>{t('formView:toijo')}</h4>
             </div>
           </div>

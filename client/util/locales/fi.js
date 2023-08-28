@@ -163,6 +163,7 @@ export default {
     oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
+    toijo: 'TOIJO-arviointi tulossa 11.9.',
     facultyInfo:
       'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
     materialsFaculty:
