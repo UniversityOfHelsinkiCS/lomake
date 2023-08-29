@@ -112,7 +112,6 @@ const AdvancedRadio = ({
                     value={o.label}
                     checked={state.firstValue === o.id}
                     onChange={() => handleClick({ firstPart: o.id, value: '' })}
-                    data-cy="unit-selection"
                   />
                 </Form.Field>
                 {o.id === 'teaching_or_other_research' && state.firstValue === 'teaching_or_other_research' ? (

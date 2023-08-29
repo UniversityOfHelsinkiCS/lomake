@@ -42,8 +42,11 @@
           ],
           "en": [
             { "label": "Faculty", "id": "faculty" },
-            { "label": "University Services / Teaching and Learning Service", "id": "ypa" },
-            { "label": "University Services / Sector other than Teaching and Learning Services", "id": "ypa" },
+            { "label": "University Services / Teaching and Learning Service", "id": "ypa-teach" },
+            {
+              "label": "University Services / Sector other than Teaching and Learning Services",
+              "id": "ypa-not-teach"
+            },
             { "label": "Other, please specify", "id": "other", "placeholder": "What" }
           ],
           "se": [

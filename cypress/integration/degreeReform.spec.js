@@ -27,14 +27,14 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
 
     // check that no individual form contents
-    cy.get('[data-cy=unit-selection]').should('not.exist')
+    cy.get('[data-cy=advanced-radio-background_unit]').should('not.exist')
   })
 
   it('Reform form for individuals loads', () => {
     cy.visit('/individual')
     cy.get('[data-cy=reform-individual-form-container')
     cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
-    cy.get('[data-cy=unit-selection]')
+    cy.get('[data-cy=advanced-radio-background_unit]')
   })
 
   it('Reform form for studyprogrammes can be opened and edited', () => {

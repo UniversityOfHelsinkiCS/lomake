@@ -45,7 +45,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   } else {
     radioButtonLabels = radioOptions ? radioOptions[lang] : null
   }
-  const hidePopupTrue = !(hidePopup === true || hidePopup === undefined)
+  const hidePopupTrue = hidePopup === true
   return (
     <div key={`${id}-${formType}-${lang}`} className="form-choose-radio-area" data-cy={`choose-radio-container-${id}`}>
       <Divider />
