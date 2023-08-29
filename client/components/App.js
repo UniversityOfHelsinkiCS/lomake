@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { wsConnect } from 'Utilities/redux/websocketReducer'
 import { loginAction } from 'Utilities/redux/currentUserReducer'
@@ -42,12 +43,14 @@ export default () => {
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
 
+  const { i18n } = useTranslation()
+
   useEffect(() => {
     const linkLang = languageFromUrl()
 
     if (linkLang && lang !== linkLang && ['fi', 'se', 'en'].includes(linkLang)) {
       dispatch(setLanguage(linkLang))
-      window.location.reload()
+      i18n.changeLanguage(linkLang)
     }
   }, [])
 
