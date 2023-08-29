@@ -36,6 +36,7 @@ const DegreeReformIndividual = () => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const formNumber = 3
+
   useEffect(() => {
     document.title = `${t('degree-reform-individual')}`
   }, [lang])
@@ -105,6 +106,7 @@ const DegreeReformIndividual = () => {
             /> */}
           </div>
         </Dimmer>
+
         <div className="the-form">
           <div className="form-instructions">
             <div className="hide-in-print-mode">
@@ -129,7 +131,7 @@ const DegreeReformIndividual = () => {
             <Icon name="upload" />
             <span style={{ fontSize: '1.5em' }}>{t('formView:sendForm')}</span>
           </Button>
-          <p style={{ fontSize: '15px', textAlign: 'center' }}>Vastauksia voi edelleen muokata</p>
+          <p style={{ fontSize: '15px', textAlign: 'center' }}>{t('formView:canChange')}</p>
           {message ? (
             <>
               <Message size="tiny" header={message} color="red" />

@@ -11,7 +11,28 @@ import { getFaculties } from 'Utilities/redux/facultyReducer'
 import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
+import { setLanguage } from 'Utilities/redux/languageReducer'
 import Footer from './Footer/Footer'
+
+const languageFromUrl = () => {
+  const url = window.location.href
+  const langStart = url.indexOf('lang=')
+  if (langStart === -1) {
+    return undefined
+  }
+
+  let linkLang = url.substring(langStart + 5)
+  const langEnd = linkLang.indexOf('&')
+  if (langEnd !== -1) {
+    linkLang = linkLang.substring(0, langEnd)
+  }
+
+  if (['fi', 'se', 'en'].includes(linkLang)) {
+    return linkLang
+  }
+
+  return undefined
+}
 
 export default () => {
   const dispatch = useDispatch()
@@ -19,6 +40,16 @@ export default () => {
   const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const deadlines = useSelector(state => state.deadlines)
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
+  const lang = useSelector(state => state.language)
+
+  useEffect(() => {
+    const linkLang = languageFromUrl()
+
+    if (linkLang && lang !== linkLang && ['fi', 'se', 'en'].includes(linkLang)) {
+      dispatch(setLanguage(linkLang))
+      window.location.reload()
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(loginAction())

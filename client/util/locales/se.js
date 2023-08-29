@@ -103,6 +103,7 @@ export default {
   },
 
   formView: {
+    canChange: 'Du kan redigera svaren efter att du har sparat',
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',

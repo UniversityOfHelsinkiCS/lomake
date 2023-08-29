@@ -113,6 +113,7 @@ export default {
   },
 
   formView: {
+    canChange: 'You can edit the answers after saving',
     title: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',

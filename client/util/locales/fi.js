@@ -118,6 +118,7 @@ export default {
   },
 
   formView: {
+    canChange: 'Voit muokata vastauksia tallentamisen jälkeen',
     title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
