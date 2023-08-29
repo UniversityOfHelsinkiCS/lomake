@@ -24,7 +24,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=reform-form-group-container')
-    cy.get('[data-cy=choose-radio-container-degree_abilities_in_changing_conditions]')
+    cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
 
     // check that no individual form contents
     cy.get('[data-cy=unit-selection]').should('not.exist')
@@ -33,7 +33,7 @@ describe('Degree reform form tests', () => {
   it('Reform form for individuals loads', () => {
     cy.visit('/individual')
     cy.get('[data-cy=reform-individual-form-container')
-    cy.get('[data-cy=choose-radio-container-degree_abilities_in_changing_conditions]')
+    cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
     cy.get('[data-cy=unit-selection]')
   })
 
@@ -80,7 +80,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
     cy.wait(3000)
-    cy.get('[data-cy=choose-basic-radio-degree_abilities_in_changing_conditions]')
+    cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place]')
       .find('input[type="radio"]')
       .check('1', { force: true })
       .wait(1000)
@@ -119,7 +119,7 @@ describe('Degree reform form tests', () => {
 
     cy.wait(3000)
 
-    cy.get('[data-cy=choose-basic-radio-degree_abilities_in_changing_conditions] :checked')
+    cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place] :checked')
       .should('be.checked')
       .and('have.value', '1')
     cy.get('[data-cy=choose-basic-radio-studytrack_was_clear] :checked').should('be.checked').and('have.value', '2')
@@ -184,7 +184,7 @@ describe('Degree reform form tests', () => {
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[type="checkbox"]').should('be.disabled')
 
-    cy.get('[data-cy=choose-basic-radio-degree_abilities_in_changing_conditions]')
+    cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place]')
       .find('input[type="radio"]')
       .should('be.disabled')
 
