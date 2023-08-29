@@ -32,6 +32,9 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
           if (version === 'doctoral') {
             return s.key.startsWith('T')
           }
+          if (version === 'all') {
+            return true
+          }
           return false
         })
         .map(s => s)
