@@ -787,7 +787,7 @@
         },
         "description": {
           "fi": "Taustatietoa kandiohjelmien periaatteista:\n\nJokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Ohjelman tulee olla riittävän suuri: opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelmassa tulee olla aloituspaikkoja vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nOpiskelijalla on kandiohjelman jälkeen yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Opetussuunnitelmaan on kirjattu, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.  ",
-          "se": "Bakgrundsuppgifter om principerna för kandidatprogrammen:\n\bVarje student som avlägger lägre högskoleexamen hör till ett kandidatprogram. Ett kandidatprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Studierna differentieras i flera studieinriktningar efter de studier som är gemensamma. Programmet ska vara tillräckligt stort: nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Ett program ska därför ha minst 40 nybörjarplatser. Endast av särskilda skäl kan ett program vara mindre.\n\nEfter kandidatprogrammet har studenten ett eller flera alternativa magisterprogram (optioner) som hen kan fortsätta till. I undervisningsplanen finns angivet vilka magisterprogram (optioner) studenten kan fortsätta studera vid efter kandidatprogrammet. Vilka studier som studenten har genomfört i kandidatprogrammet påverkar vilka magisterprogram eller studieinriktningar i programmen som är optioner.",
+          "se": "Bakgrundsuppgifter om principerna för kandidatprogrammen:\n\nVarje student som avlägger lägre högskoleexamen hör till ett kandidatprogram. Ett kandidatprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Studierna differentieras i flera studieinriktningar efter de studier som är gemensamma. Programmet ska vara tillräckligt stort: nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Ett program ska därför ha minst 40 nybörjarplatser. Endast av särskilda skäl kan ett program vara mindre.\n\nEfter kandidatprogrammet har studenten ett eller flera alternativa magisterprogram (optioner) som hen kan fortsätta till. I undervisningsplanen finns angivet vilka magisterprogram (optioner) studenten kan fortsätta studera vid efter kandidatprogrammet. Vilka studier som studenten har genomfört i kandidatprogrammet påverkar vilka magisterprogram eller studieinriktningar i programmen som är optioner.",
           "en": "All students pursuing a first-cycle degree belong to a bachelor’s programme. A bachelor’s programme includes one or more disciplines with a sufficiently consistent scientific or educational foundation. After students have completed the compulsory studies for all students, they may be offered various study tracks. The degree programme must be of adequate size: cooperation between teachers will yield benefits, such as time freed for research, only if the programme includes a sufficient number of teachers. Therefore, the recommended minimum size of a degree programme is 40 student places. A degree programme may be smaller than this for special reasons only.\n\nStudents who have completed a bachelor’s programme are able to select from among one or more master’s programmes available as options. The curriculum defines the master’s programmes (options) which are offered to students after they have completed their bachelor’s degree. The studies completed in the bachelor’s programme determine which master’s programmes (options) or their study tracks are available to each student."
         },
         "required": false,
@@ -823,24 +823,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä kandiohjelmasta",
+              "label": "kokemukseen yhdestä kandiohjelmasta",
               "id": "specific-programme"
             },
-            { "label": "Kokemukseen useista kandiohjelmista", "id": "multiple-programs" }
+            { "label": "kokemukseen useista kandiohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Bachelor’s Programme...",
+              "label": "primarily on my own experience of the Bachelor’s Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several bachelor's programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several bachelor's programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av kandidatprogrammet ",
+              "label": "i första hand mina egna erfarenheter av kandidatprogrammet ",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera kandidatprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera kandidatprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -945,7 +945,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1018,24 +1018,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä maisteriohjelmasta",
+              "label": "kokemukseen yhdestä maisteriohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseen useista maisteriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Master’s Programme...",
+              "label": "primarily on my own experience of the Master’s Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several master's programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several master's programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av magisterprogrammet",
+              "label": "i första hand mina egna erfarenheter av magisterprogrammet",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera magisterprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera magisterprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1213,24 +1213,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä maisteriohjelmasta",
+              "label": "kokemukseen yhdestä maisteriohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseeni useista kansainvälisistä maisteriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Master’s Programme...",
+              "label": "primarily on my own experience of the Master’s Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several international master’s programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several international master’s programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av magisterprogrammet",
+              "label": "i första hand mina egna erfarenheter av magisterprogrammet",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera internationella magisterprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera internationella magisterprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1432,24 +1432,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä tohtoriohjelmasta",
+              "label": "kokemukseen yhdestä tohtoriohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseen useista kansainvälisistä tohtoriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Doctoral Programme...",
+              "label": "primarily on my own experience of the Doctoral Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several doctoral programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several doctoral programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av doktorandprogrammet ",
+              "label": "i första hand mina egna erfarenheter av doktorandprogrammet ",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera doktorandprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera doktorandprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1632,24 +1632,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä koulutusohjelmasta",
+              "label": "kokemukseen yhdestä koulutusohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseen useista koulutusohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Degree Programme...",
+              "label": "primarily on my own experience of the Degree Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several degree programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several degree programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av utbildningsprogrammet",
+              "label": "i första hand mina egna erfarenheter av utbildningsprogrammet",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1847,7 +1847,7 @@
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -1865,24 +1865,24 @@
         "radioOptions": {
           "fi": [
             {
-              "label": "Kokemukseen yhdestä koulutusohjelmasta",
+              "label": "kokemukseen yhdestä koulutusohjelmasta",
               "id": "specific-programme"
             },
             { "label": "kokemukseen useista koulutusohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
-              "label": "Primarily on my own experience of the Degree Programme...",
+              "label": "primarily on my own experience of the Degree Programme...",
               "id": "specific-programme"
             },
-            { "label": "On my experience of several degree programmes", "id": "multiple-programs" }
+            { "label": "on my experience of several degree programmes", "id": "multiple-programs" }
           ],
           "se": [
             {
-              "label": "I första hand mina egna erfarenheter av utbildningsprogrammet",
+              "label": "i första hand mina egna erfarenheter av utbildningsprogrammet",
               "id": "specific-programme"
             },
-            { "label": "Min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
+            { "label": "min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
           ]
         }
       },
