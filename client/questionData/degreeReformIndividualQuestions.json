@@ -446,7 +446,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -628,7 +629,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -759,7 +761,8 @@
           "en": "Any comments?"
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -954,7 +957,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -1149,7 +1153,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -1300,7 +1305,7 @@
         "label": {
           "fi": "Maisteriohjelmassa kiinnitetään huomiota kansainvälisten opiskelijoiden kotoutumiseen Suomeen",
           "se": "Inom magisterprogrammet ägnas uppmärksamhet åt integreringen av de internationella studenterna i Finland",
-          "en": "The master's programme pays attention to the integration of international students to Finland."
+          "en": "The master's programme pays attention to the integration of international students to Finland"
         },
         "shortLabel": {
           "fi": "",
@@ -1363,7 +1368,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -1500,7 +1506,7 @@
         "label": {
           "fi": "Tohtoriohjelman koulutustarjonta vastaa väitöskirjatutkijoiden tarpeita",
           "se": "Doktorandprogrammets studieutbud motsvarar doktorandernas behov",
-          "en": "The studies offered by the doctoral programme meet the needs of doctoral researchers."
+          "en": "The studies offered by the doctoral programme meet the needs of doctoral researchers"
         },
         "shortLabel": {
           "fi": "",
@@ -1538,7 +1544,7 @@
         "label": {
           "fi": "Tohtorikoulutus toimii nyt hyvin",
           "se": "Doktorsutbildningen fungerar väl i nuläget",
-          "en": "Currently doctoral education functions well."
+          "en": "Currently doctoral education functions well"
         },
         "shortLabel": {
           "fi": "",
@@ -1563,7 +1569,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -1801,7 +1808,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -1996,7 +2004,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   },
@@ -2024,7 +2033,8 @@
         },
         "maxLength": 3100,
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "marginTop": 30
       }
     ]
   }

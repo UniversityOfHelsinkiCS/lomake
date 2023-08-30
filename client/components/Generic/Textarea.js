@@ -31,7 +31,16 @@ const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
   return null
 }
 
-const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAccordion, form, maxLength }) => {
+const Textarea = ({
+  label,
+  id,
+  required,
+  previousYearsAnswers,
+  EntityLastYearsAccordion,
+  form,
+  maxLength,
+  marginTop,
+}) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
@@ -99,7 +108,7 @@ const Textarea = ({ label, id, required, previousYearsAnswers, EntityLastYearsAc
   }
 
   return (
-    <div data-cy={`textarea-${id}`}>
+    <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
         className="form-text-area"
         style={{
