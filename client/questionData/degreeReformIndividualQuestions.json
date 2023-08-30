@@ -1104,13 +1104,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
-          "se": "",
-          "en": "CUtbildningen på magisternivå fungerar väl i nuläget"
+          "se": "Utbildningen på magisternivå fungerar väl i nuläget",
+          "en": ""
         },
         "shortLabel": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
-          "se": "",
-          "en": "Utbildningen på magisternivå fungerar väl i nuläget"
+          "se": "Utbildningen på magisternivå fungerar väl i nuläget",
+          "en": ""
         },
         "required": false,
         "relatedYearlyQuestions": []
