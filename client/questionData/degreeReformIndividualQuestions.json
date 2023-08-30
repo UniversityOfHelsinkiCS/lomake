@@ -1105,12 +1105,12 @@
         "label": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
           "se": "Utbildningen på magisternivå fungerar väl i nuläget",
-          "en": ""
+          "en": "Currently master’s level education functions well"
         },
         "shortLabel": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
           "se": "Utbildningen på magisternivå fungerar väl i nuläget",
-          "en": ""
+          "en": "Currently master’s level education functions well"
         },
         "required": false,
         "relatedYearlyQuestions": []
