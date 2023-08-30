@@ -1,5 +1,8 @@
 export default {
   common: {
+    adminPage: 'OSPA',
+    about: 'Om blanketten',
+    admin: 'Administration',
     logOut: 'Logga ut',
     backToFrontPage: 'Tillbaka till framsidan',
     chosenLanguage: 'Svenska',
@@ -145,7 +148,7 @@ export default {
     evaluationInfo2:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Observera att <strong> 2023 års årsuppföljning ska vara slutförd innan översynsformuläret fylls i</strong>.',
     selectApplicable: 'Välj alla lämpliga alternativ',
-    // addMissing: '',
+    addMissing: 'Lägg till ett alternativ',
     progSummaryTitle: 'Svaren på årsuppföljningens frågor om temat under observationsperioden',
     // facultySummaryTitle: '',
     materials: 'Bakgrundsmaterial',
@@ -210,12 +213,13 @@ export default {
     colors: 'Trafikljus', // check
     written: 'Skriftliga svar', // check
 
-    // level: {
-    //   programmes: '',
-    //   faculties: '',
-    //   university: '',
-    //   committee: '',
-    // },
+    level: {
+      programmes: 'Studieprogram',
+      faculties: 'Fakultet',
+      university: 'Universitet',
+      committee: 'Kommitté',
+    },
+    loading: 'Laddar...',
   },
 
   overview: {

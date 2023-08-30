@@ -64,7 +64,8 @@ export default {
     what: 'What',
     chooseFaculty: 'Choose faculty',
     chooseProgramme: 'Choose degree programme',
-    showDataByProgramme: "Show data by programme's",
+    showAllProgrammes: 'Show all programmes',
+    showDataByProgramme: 'Show data by programme',
   },
 
   aboutPage: {
@@ -181,6 +182,7 @@ export default {
     neitherNor: 'Neither agree nor disagree',
     partiallyAgree: 'Partially agree',
     stronglyAgree: 'Strongly agree',
+    doNotKnow: "I don't know",
   },
 
   generic: {
