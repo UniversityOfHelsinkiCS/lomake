@@ -4,10 +4,17 @@ import { Dropdown } from 'semantic-ui-react'
 import './Generic.scss'
 import { useTranslation } from 'react-i18next'
 
+const byNameInLang = lang => (p1, p2) => {
+  const n1 = p1.name[lang]
+  const n2 = p2.name[lang]
+  return n1 < n2 ? -1 : 1
+}
+
 const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) => {
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-  const studyProgrammes = useSelector(state => state.studyProgrammes.data)
+  const studyProgrammes = useSelector(state => state.studyProgrammes.data).sort(byNameInLang(lang))
+
   const { t } = useTranslation()
 
   const handleChange = (e, { value }) => {

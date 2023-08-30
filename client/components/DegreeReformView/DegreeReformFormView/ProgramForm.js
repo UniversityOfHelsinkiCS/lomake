@@ -105,12 +105,13 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           form={form}
           version={version}
           hidePopup={part.hidePopup}
+          marginTop={part.marginTop}
         />
       </div>
     )
   }
   return (
-    <>
+    <div style={{ marginTop: -50 }}>
       {questionData.map((section, index) => {
         if (formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id)) return null
         if (programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
@@ -127,7 +128,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
           </Section>
         )
       })}
-    </>
+    </div>
   )
 }
 
