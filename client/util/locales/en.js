@@ -170,10 +170,10 @@ export default {
     yearlyFacultyAnswers: 'Yearly assessment answers in studyprogrammes',
     fillAllRequiredFields: 'Please fill all required fields',
     showAllProgrammes: 'Show all studyprogrammes',
-    formReady: 'Form is ready',
+    formReady: 'Your answers are saved',
     sendNewForm: 'Send a new form',
-    modifyForm: 'Modify the form',
-    sendForm: 'Send the form',
+    modifyForm: 'Modify your answers',
+    sendForm: 'Save your answers',
     sendFormModalDescription: 'Are you sure you want to send the form? Information from sent forms are saved',
     sendFormModalHeader: 'Sending new Degree Reform form',
     stronglyDisagree: 'Strongly disagree',
@@ -181,6 +181,7 @@ export default {
     neitherNor: 'Neither agree nor disagree',
     partiallyAgree: 'Partially agree',
     stronglyAgree: 'Strongly agree',
+    doNotKnow: "I don't know",
   },
 
   generic: {
