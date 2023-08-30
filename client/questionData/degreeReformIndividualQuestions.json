@@ -635,7 +635,7 @@
   {
     "title": {
       "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteet",
-      "se": "En tydlig trestegsstruktur och bolognaprocessens principer",
+      "se": "En tydlig trestegsstruktur och Bolognaprocessens principer",
       "en": "Genuine three-tier structure and the principles of the Bologna Process"
     },
     "id": 3,
@@ -766,7 +766,7 @@
   {
     "title": {
       "fi": "Kandiohjelmien rakenne ja toimivuus",
-      "se": "",
+      "se": "Kandidatprogrammens struktur och ändamålsenlighe",
       "en": "Bachelor programmes structure and functionality"
     },
     "id": 4,
@@ -787,7 +787,7 @@
         },
         "description": {
           "fi": "Taustatietoa kandiohjelmien periaatteista:\n\nJokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Ohjelman tulee olla riittävän suuri: opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelmassa tulee olla aloituspaikkoja vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nOpiskelijalla on kandiohjelman jälkeen yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Opetussuunnitelmaan on kirjattu, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.  ",
-          "se": "Varje student som avlägger lägre högskoleexamen hör till ett kandidatprogram. Ett kandidatprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Studierna differentieras i flera studieinriktningar efter de studier som är gemensamma. Programmet ska vara tillräckligt stort: nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Ett program ska därför ha minst 40 nybörjarplatser. Endast av särskilda skäl kan ett program vara mindre.\n\nEfter kandidatprogrammet har studenten ett eller flera alternativa magisterprogram (optioner) som hen kan fortsätta till. I undervisningsplanen finns angivet vilka magisterprogram (optioner) studenten kan fortsätta studera vid efter kandidatprogrammet. Vilka studier som studenten har genomfört i kandidatprogrammet påverkar vilka magisterprogram eller studieinriktningar i programmen som är optioner.",
+          "se": "Bakgrundsuppgifter om principerna för kandidatprogrammen:\n\bVarje student som avlägger lägre högskoleexamen hör till ett kandidatprogram. Ett kandidatprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Studierna differentieras i flera studieinriktningar efter de studier som är gemensamma. Programmet ska vara tillräckligt stort: nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Ett program ska därför ha minst 40 nybörjarplatser. Endast av särskilda skäl kan ett program vara mindre.\n\nEfter kandidatprogrammet har studenten ett eller flera alternativa magisterprogram (optioner) som hen kan fortsätta till. I undervisningsplanen finns angivet vilka magisterprogram (optioner) studenten kan fortsätta studera vid efter kandidatprogrammet. Vilka studier som studenten har genomfört i kandidatprogrammet påverkar vilka magisterprogram eller studieinriktningar i programmen som är optioner.",
           "en": "All students pursuing a first-cycle degree belong to a bachelor’s programme. A bachelor’s programme includes one or more disciplines with a sufficiently consistent scientific or educational foundation. After students have completed the compulsory studies for all students, they may be offered various study tracks. The degree programme must be of adequate size: cooperation between teachers will yield benefits, such as time freed for research, only if the programme includes a sufficient number of teachers. Therefore, the recommended minimum size of a degree programme is 40 student places. A degree programme may be smaller than this for special reasons only.\n\nStudents who have completed a bachelor’s programme are able to select from among one or more master’s programmes available as options. The curriculum defines the master’s programmes (options) which are offered to students after they have completed their bachelor’s degree. The studies completed in the bachelor’s programme determine which master’s programmes (options) or their study tracks are available to each student."
         },
         "required": false,
@@ -916,6 +916,25 @@
           "fi": "Kandiohjelmassa opintosuunnan tarkentaminen on sujuvaa",
           "se": "Preciseringen av studieinriktning går smidigt inom kandidatprogrammet",
           "en": "The selection of study track in the bachelor's programme is seamless"
+        },
+        "required": false,
+        "relatedYearlyQuestions": []
+      },
+      {
+        "id": "bachelors_level_functions_well",
+        "index": 47,
+        "type": "CHOOSE-RADIO",
+        "direction": "horizontal",
+        "radioOptions": "numbers",
+        "label": {
+          "fi": "Kanditason koulutus toimii nyt hyvin",
+          "se": "Utbildningen på kandidatnivå fungerar väl i nuläget",
+          "en": "Currently bachelor's level education functions well"
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1097,7 +1116,7 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "multi_language_studies_are_sufficiently_taught_in_domestic",
+        "id": "masters_level_functions_well",
         "index": 55,
         "type": "CHOOSE-RADIO",
         "direction": "horizontal",
@@ -1551,8 +1570,8 @@
   {
     "title": {
       "fi": "Koulutusohjelmien johtaminen",
-      "se": "Management and leadership of degree programmes",
-      "en": "Ledning av utbildningsprogrammen"
+      "en": "Management and leadership of degree programmes",
+      "se": "Ledning av utbildningsprogrammen"
     },
     "id": 8,
     "parts": [
