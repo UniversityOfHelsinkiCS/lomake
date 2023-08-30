@@ -942,7 +942,7 @@
   {
     "title": {
       "fi": "Maisteriohjelmien rakenne ja toimivuus",
-      "se": "",
+      "se": "Magisterprogrammens struktur och ändamålsenlighet",
       "en": "Structure and functioning of master’s programmes"
     },
     "id": 5,
@@ -953,17 +953,17 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi maisteriohjelmien toimivuutta.",
-          "se": "",
+          "se": "Bedöm hur väl magisterprogrammen fungerar.",
           "en": "Assess how well master’s programmes function."
         },
         "label": {
           "fi": "Arvioi maisteriohjelmien toimivuutta.",
-          "se": "",
+          "se": "Bedöm hur väl magisterprogrammen fungerar.",
           "en": "Assess how well master’s programmes function."
         },
         "description": {
           "fi": "Taustatietoa maisteriohjelmien periaatteista:\n\nJokainen ylempää korkeakoulututkintoa suorittava opiskelija kuuluu yhteen maisteriohjelmaan tai lääketieteen, hammaslääketieteen tai eläinlääketieteen lisensiaatin koulutusohjelmaan.\n\nMaisteriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Lisäksi koulutusohjelma antaa riittävän perustan tohtorikoulutukseen. Maisteriohjelman sisällä voi olla useita opintosuuntia.\n\nTutkintokieli on ylempään korkeakoulututkintoon johtavassa koulutusohjelmassa suomi, ruotsi tai englanti. Maisteriohjelman tulee olla kooltaan riittävän suuri. Opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa, voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi on suositeltavaa, että koulutusohjelmassa on aloituspaikkoja vähintään 40.",
-          "se": "",
+          "se": "Varje student som avlägger högre högskoleexamen hör till ett magisterprogram eller till ett utbildningsprogram för licentiatexamen i medicin, odontologi eller veterinärmedicin.\n\nEtt magisterprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Dessutom är ett magisterprogram en tillräcklig grund för doktorsutbildning. Inom ett magisterprogram kan det finnas flera studieinriktningar.\n\nI ett utbildningsprogram som leder till högre högskoleexamen är examensspråket svenska, finska eller engelska. Ett magisterprogram måste vara tillräckligt stort. Nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Därför rekommenderas att ett magisterprogram har minst 40 nybörjarplatser. ",
           "en": "All students pursuing a second-cycle degree belong to a master’s programme or to a degree programme leading to a licentiate degree in medicine, dentistry or veterinary medicine.\n\nA master’s programme includes one or more disciplines with a sufficiently consistent scientific or educational foundation. In addition, the degree programme will offer a sufficient basis for doctoral education. A master's programme may include several study tracks.\n\nThe language of a degree programme leading to a second-cycle degree is Finnish, Swedish or English. A master’s programme must be of adequate size. Cooperation between teachers will yield benefits, such as time freed for research, only if the degree programme includes a sufficient number of teachers. Therefore, the recommended minimum size of a degree programme is 40 student places."
         },
         "required": false,
@@ -976,12 +976,12 @@
         "version": "master",
         "shortLabel": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -1013,10 +1013,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av magisterprogrammet",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera magisterprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1028,13 +1028,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelma on opiskelijamäärältään liian suuri",
-          "se": "",
-          "en": "The number of student places in the master’s programme is too great."
+          "se": "Magisterprogrammet har ett för stort antal studenter",
+          "en": "The number of student places in the master’s programme is too great"
         },
         "shortLabel": {
           "fi": "Maisteriohjelma on opiskelijamäärältään liian suuri",
-          "se": "",
-          "en": "The number of student places in the master’s programme is too great."
+          "se": "Magisterprogrammet har ett för stort antal studenter",
+          "en": "The number of student places in the master’s programme is too great"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1047,13 +1047,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelman tieteenalasisällöt ovat toimivia",
-          "se": "",
-          "en": "The academic content of the master's programme is appropriate."
+          "se": "Magisterprogrammet har ett ändamålsenligt vetenskapligt innehåll",
+          "en": "The academic content of the master's programme is appropriate"
         },
         "shortLabel": {
           "fi": "Maisteriohjelman tieteenalasisällöt ovat toimivia",
-          "se": "",
-          "en": "The academic content of the master's programme is appropriate."
+          "se": "Magisterprogrammet har ett ändamålsenligt vetenskapligt innehåll",
+          "en": "The academic content of the master's programme is appropriate"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1066,13 +1066,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Haku maisteriohjelmaan toimii hyvin",
-          "se": "",
-          "en": "The application procedure for the master’s programme functions seamlessly."
+          "se": "Ansökan till magisterprogrammet fungerar bra",
+          "en": "The application procedure for the master’s programme functions seamlessly"
         },
         "shortLabel": {
           "fi": "Haku maisteriohjelmaan toimii hyvin",
-          "se": "",
-          "en": "The application procedure for the master’s programme functions seamlessly."
+          "se": "Ansökan till magisterprogrammet fungerar bra",
+          "en": "The application procedure for the master’s programme functions seamlessly"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1085,13 +1085,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelma antaa hyvät valmiudet työelämään",
-          "se": "",
-          "en": "The master’s programme provides students with solid skills for professional life."
+          "se": "Magisterprogrammet ger goda färdigheter för arbetslivet",
+          "en": "The master’s programme provides students with solid skills for professional life"
         },
         "shortLabel": {
           "fi": "Maisteriohjelma antaa hyvät valmiudet työelämään",
-          "se": "",
-          "en": "The master’s programme provides students with solid skills for professional life."
+          "se": "Magisterprogrammet ger goda färdigheter för arbetslivet",
+          "en": "The master’s programme provides students with solid skills for professional life"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1105,12 +1105,12 @@
         "label": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
           "se": "",
-          "en": "Currently master’s level education functions well."
+          "en": "CUtbildningen på magisternivå fungerar väl i nuläget"
         },
         "shortLabel": {
           "fi": "Maisteritason koulutus toimii nyt hyvin",
           "se": "",
-          "en": "Currently master’s level education functions well."
+          "en": "Utbildningen på magisternivå fungerar väl i nuläget"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -1121,7 +1121,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1137,7 +1137,7 @@
   {
     "title": {
       "fi": "Kansainvälisten maisteriohjelmien toimivuus",
-      "se": "",
+      "se": "De internationella magisterprogrammens ändamålsenlighet",
       "en": "Functioning of international master’s programmes"
     },
     "id": 6,
@@ -1148,12 +1148,12 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta.",
-          "se": "",
+          "se": "Bedöm i synnerhet de internationella och flerspråkiga magisterprogrammens ändamålsenlighet.",
           "en": "Assess how well international and multilingual master’s programmes function."
         },
         "label": {
           "fi": "Arvioi erityisesti kansainvälisten ja monikielisten maisteriohjelmien toimivuutta.",
-          "se": "",
+          "se": "Bedöm i synnerhet de internationella och flerspråkiga magisterprogrammens ändamålsenlighet.",
           "en": "Assess how well international and multilingual master’s programmes function."
         },
         "description": {
@@ -1171,12 +1171,12 @@
         "version": "international",
         "shortLabel": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -1208,10 +1208,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av magisterprogrammet",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera internationella magisterprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1223,8 +1223,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelma erottuu selkeästi kansainvälisillä koulutusmarkkinoilla",
-          "se": "",
-          "en": "The master's programme stands out in the international education market."
+          "se": "Magisterprogrammet utmärker sig tydligt på den internationella utbildningsmarknaden",
+          "en": "The master's programme stands out in the international education market"
         },
         "shortLabel": {
           "fi": "",
@@ -1242,8 +1242,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelman tieteenalasisällöt ovat toimivia",
-          "se": "",
-          "en": "The academic content of the master's programme is appropriate."
+          "se": "Magisterprogrammet har ett ändamålsenligt vetenskapligt innehåll",
+          "en": "The academic content of the master's programme is appropriate"
         },
         "shortLabel": {
           "fi": "",
@@ -1261,8 +1261,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelmasta valmistuneet työllistyvät kansainvälisille työmarkkinoille",
-          "se": "",
-          "en": "Graduates from the master’s programme find employment in the international labour market."
+          "se": "Studenter med en examen från magisterprogrammet får jobb på den internationella arbetsmarknaden",
+          "en": "Graduates from the master’s programme find employment in the international labour market"
         },
         "shortLabel": {
           "fi": "",
@@ -1280,7 +1280,7 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelmassa kiinnitetään huomiota kansainvälisten opiskelijoiden kotoutumiseen Suomeen",
-          "se": "",
+          "se": "Inom magisterprogrammet ägnas uppmärksamhet åt integreringen av de internationella studenterna i Finland",
           "en": "The master's programme pays attention to the integration of international students to Finland."
         },
         "shortLabel": {
@@ -1299,8 +1299,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelmasta valmistuneiden kansainvälisten opiskelijoiden mahdollisuudet työllistymiseen Suomessa ovat hyvät",
-          "se": "",
-          "en": "International graduates from the master’s programme have good employment prospects in Finland."
+          "se": "Internationella studenter vid magisterprogrammet har goda möjligheter att få arbete i Finland efter examen",
+          "en": "International graduates from the master’s programme have good employment prospects in Finland"
         },
         "shortLabel": {
           "fi": "",
@@ -1318,8 +1318,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kansainvälinen maisterikoulutus toimii nyt hyvin",
-          "se": "",
-          "en": "Currently international master’s education functions well."
+          "se": "Den internationella magisterutbildningen fungerar väl i nuläget",
+          "en": "Currently international master’s education functions well"
         },
         "shortLabel": {
           "fi": "",
@@ -1335,7 +1335,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1351,7 +1351,7 @@
   {
     "title": {
       "fi": "Tohtoriohjelmien rakenne ja toimivuus",
-      "se": "",
+      "se": "Doktorandprogrammens struktur och ändamålsenlighet",
       "en": "Structure and functioning of doctoral programmes"
     },
     "id": 7,
@@ -1362,22 +1362,22 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi tohtoriohjelmien toimivuutta",
-          "se": "",
+          "se": "Bedöm hur väl doktorandprogrammen fungerar.",
           "en": "Assess how well doctoral programmes function."
         },
         "label": {
           "fi": "Arvioi tohtoriohjelmien toimivuutta",
-          "se": "",
+          "se": "Bedöm hur väl doktorandprogrammen fungerar.",
           "en": "Assess how well doctoral programmes function."
         },
         "accordion": {
-          "fi": "Taustatietoa kandiohjelmien periaatteista",
-          "se": "",
+          "fi": "Taustatietoa tohtoriohjelmien periaatteista",
+          "se": "Bakgrundsuppgifter om principerna för doktorandprogrammen",
           "en": "Background information on doctoral programme"
         },
         "description": {
           "fi": "Jokainen tohtorin tutkintoa suorittava kuuluu yhteen Helsingin yliopiston tohtoriohjelmaan. Tohtoriohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen perusta. Tutkintokieli on tohtoriohjelmassa suomi, ruotsi tai englanti.\n\nTohtoriohjelma antaa syvällisen osaamisen tutkimustehtäviin ja muihin erittäin vaativiin asiantuntijatehtäviin.\n\nTohtoriohjelman tulee olla kooltaan riittävän suuri siten, että sen koulutuksen pohjalta valmistuu vuosittain vähintään keskimäärin 10 tohtorin tutkintoa.",
-          "se": "",
+          "se": "Varje student som avlägger doktorsexamen hör till ett av Helsingfors universitets doktorandprogram. Ett doktorandprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas. Examensspråket i ett doktorandprogram kan vara svenska, finska eller engelska.\n\nEtt doktorandprogram ger fördjupad kompetens för forskning och andra mycket krävande expertuppdrag.\n\nEtt doktorandprogram ska vara tillräckligt stort, vilket betyder att antalet doktorer som utexamineras från programmet årligen är minst 10 doktorer i genomsnitt.",
           "en": "All students pursuing a doctoral degree belong to one of the doctoral programmes of the University of Helsinki. A doctoral programme includes one or more disciplines with a sufficiently consistent scientific foundation. The language of a degree programme leading to a third-cycle degree is Finnish, Swedish or English.\n\nA doctoral degree will provide thorough expertise for research work and other highly demanding specialist positions.\n\nA doctoral programme must be of adequate size to be able to produce an average of 10 doctoral degrees or more every year."
         },
         "required": false,
@@ -1395,7 +1395,7 @@
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -1427,10 +1427,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av doktorandprogrammet ",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera doktorandprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1442,8 +1442,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tohtoriohjelma on profiililtaan selkeä",
-          "se": "",
-          "en": "The doctoral programme has a clear profile."
+          "se": "Doktorandprogrammet har en tydlig profil",
+          "en": "The doctoral programme has a clear profile"
         },
         "shortLabel": {
           "fi": "",
@@ -1461,8 +1461,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tohtoriohjelma on kansainvälisesti ja kansallisesti houkutteleva",
-          "se": "",
-          "en": "The doctoral programme is attractive from both an international and national perspective."
+          "se": "Doktorandprogrammet är attraktivt nationellt och internationellt sett",
+          "en": "The doctoral programme is attractive from both an international and national perspective"
         },
         "shortLabel": {
           "fi": "",
@@ -1480,7 +1480,7 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tohtoriohjelman koulutustarjonta vastaa väitöskirjatutkijoiden tarpeita",
-          "se": "",
+          "se": "Doktorandprogrammets studieutbud motsvarar doktorandernas behov",
           "en": "The studies offered by the doctoral programme meet the needs of doctoral researchers."
         },
         "shortLabel": {
@@ -1499,8 +1499,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tohtoriohjelmasta valmistuneilla tohtoreilla on hyvät valmiudet toimia syvällistä osaamista vaativissa tutkimus- ja asiantuntijatehtävissä",
-          "se": "",
-          "en": "Graduates from the doctoral programme have the in-depth knowledge and skills required for demanding research and specialist positions."
+          "se": "Doktorer som utexaminerats från doktorandprogrammet har goda färdigheter att arbeta med forsknings- och expertuppdrag som kräver djupgående kunskaper",
+          "en": "Graduates from the doctoral programme have the in-depth knowledge and skills required for demanding research and specialist positions"
         },
         "shortLabel": {
           "fi": "",
@@ -1518,7 +1518,7 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tohtorikoulutus toimii nyt hyvin",
-          "se": "",
+          "se": "Doktorsutbildningen fungerar väl i nuläget",
           "en": "Currently doctoral education functions well."
         },
         "shortLabel": {
@@ -1535,7 +1535,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1552,7 +1552,7 @@
     "title": {
       "fi": "Koulutusohjelmien johtaminen",
       "se": "Management and leadership of degree programmes",
-      "en": "Studyprogramme management"
+      "en": "Ledning av utbildningsprogrammen"
     },
     "id": 8,
     "parts": [
@@ -1562,22 +1562,22 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua.",
-          "se": "",
+          "se": "Bedöm utbildningsprogrammets ledning samt verksamhets- och resursplanering.",
           "en": "Assess the management and leadership as well as the planning of operations and resources in degree programmes."
         },
         "label": {
           "fi": "Arvioi koulutusohjelman johtamista, toiminnan ja resurssien suunnittelua.",
-          "se": "",
+          "se": "Bedöm utbildningsprogrammets ledning samt verksamhets- och resursplanering.",
           "en": "Assess the management and leadership as well as the planning of operations and resources in degree programmes."
         },
         "accordion": {
           "fi": "Taustatietoa koulutusohjelmien johtamisen periaatteista",
-          "se": "",
+          "se": "Bakgrundsuppgifter om principerna för utbildningsprogrammen",
           "en": "Background information on the management and leadership of degree programmes"
         },
         "description": {
           "fi": "Koulutusohjelmilla on johtajat ja johtoryhmät, joissa on myös opiskelijoiden edustajat ja tohtoriohjelmissa väitöskirjatutkijoiden edustajat. Kullekin koulutusohjelmalle oli nimetty hallinnollinen vastuutiedekunta koulutusohjelman perustamisen yhteydessä.\n\nKoulutusohjelman johtoryhmä tekee mm. esityksen koulutusohjelman 3-vuotiseksi opetussuunnitelmaksi ja päättää vuosittaisen opetusohjelman. Se valmistelee esitykset ohjelmaan otettavien opiskelijoiden enimmäismäärästä ja valintaperusteista. Lisäksi johtoryhmä huolehtii ruotsinkielisen opetuksen organisoinnista ohjelmassa.\n\nKoulutusohjelman johtaja vastaa koulutusohjelman johtamisesta ja sen tavoitteiden toteutumisesta ja sen laadusta. Johtaja vastaa koulutusohjelman opetussuunnitelmatyöstä ja sen opetuksen pedagogisesta ja sisällöllisestä suunnittelusta sekä yhteistyöstä koulutusohjelmassa mukana olevien yksiköiden ja muiden koulutusohjelmien kanssa. Lisäksi johtaja päättää koulutusohjelman käyttöön osoitettujen resurssien allokoinnista ja tarkoituksenmukaisesta käytöstä.",
-          "se": "",
+          "se": "Utbildningsprogrammen har ledare och ledningsgrupper i vilka det även ingår studentrepresentanter, och i doktorandprogrammen finns doktoranderna företrädda. I samband med att utbildningsprogrammen inrättades utsågs för varje program en fakultet som har det administrativa ansvaret för programmet.\n\nUtbildningsprogrammets ledningsgrupp gör bland annat en framställning om en treårig undervisningsplan för utbildningsprogrammet och beslutar om det årliga undervisningsprogrammet. Ledningsgruppen bereder framställningarna om det maximala antalet studenter som ska antas till programmet och om antagningsprinciperna. Vidare sörjer ledningsgruppen för att ordna undervisning på svenska i programmet.\n\nUtbildningsprogrammets ledare ansvarar för ledningen av programmet samt för programmets måluppfyllelse och kvalitet. Ledaren ansvarar för utbildningsprogrammets undervisningsplanering och planeringen av undervisningens pedagogik och innehåll samt för samarbetet med utbildningsprogrammets medverkande enheter och de andra utbildningsprogrammen. Utöver det beslutar ledaren om fördelningen och användningen av resurser som tilldelas utbildningsprogrammet.",
           "en": "Degree programmes have directors and steering groups, which include student representatives. Doctoral programme steering groups include representatives of doctoral researchers. A coordinating faculty was appointed for each degree programme in conjunction with their establishment.\n\nThe degree programme steering group submits a proposal for the three-year curriculum of the programme and decides on the annual teaching programme. It also prepares proposals for the maximum student intake for the programme and the admission criteria. In addition, the steering group will see to the organisation of Swedish-language instruction in the programme.\n\nThe degree programme director is responsible for the management of the degree programme, the achievement of its objectives and its quality. The director is responsible for the design of the programme curriculum, the pedagogical and content-related planning of teaching, and cooperation with the units involved in the programme as well as with other degree programmes. In addition, the director decides on the allocation and appropriate use of the resources allocated to the degree programme."
         },
         "required": false,
@@ -1590,12 +1590,12 @@
         "version": "all",
         "shortLabel": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -1627,10 +1627,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av utbildningsprogrammet",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1642,8 +1642,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelman johtajan tehtävä ja vastuu ovat selkeät",
-          "se": "",
-          "en": "The duties and responsibilities of the degree programme director are clear."
+          "se": "Ledaren för utbildningsprogrammet har en tydlig uppgift och ett tydligt ansvar",
+          "en": "The duties and responsibilities of the degree programme director are clear"
         },
         "shortLabel": {
           "fi": "",
@@ -1661,8 +1661,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Johtoryhmän tehtävä ja vastuu ovat selkeät",
-          "se": "",
-          "en": "The duties and responsibilities of the degree programme steering group are clear."
+          "se": "Ledningsgruppen har en tydlig uppgift och ett tydligt ansvar",
+          "en": "The duties and responsibilities of the degree programme steering group are clear"
         },
         "shortLabel": {
           "fi": "",
@@ -1680,7 +1680,7 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Johtajalla on liian vähäiset valtuudet päättää koulutusohjelmaa koskevista asioista",
-          "se": "",
+          "se": "Ledaren har alltför få befogenheter att fatta beslut i frågor som rör utbildningsprogrammet",
           "en": "The director does not have enough authority to decide on matters pertaining to the degree programme."
         },
         "shortLabel": {
@@ -1699,8 +1699,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelmalla on käytössään liian vähän opetus- ja tutkimushenkilökuntaa opetuksen järjestämiseen",
-          "se": "",
-          "en": "The degree programme does not have a sufficient number of teaching and research staff for the provision of teaching."
+          "se": "Utbildningsprogrammet har inte tillräckligt med undervisnings- och forskningspersonal till sitt förfogande för att kunna anordna undervisning",
+          "en": "The degree programme does not have a sufficient number of teaching and research staff for the provision of teaching"
         },
         "shortLabel": {
           "fi": "",
@@ -1718,8 +1718,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelmalla on mahdollisuus vaikuttaa uuden opetus- ja tutkimushenkilökunnan rekrytointiin",
-          "se": "",
-          "en": "The degree programme has opportunities to influence the recruitment of new teaching and research staff."
+          "se": "Utbildningsprogrammet har möjlighet att påverka rekryteringen av ny undervisnings- och forskningspersonal",
+          "en": "The degree programme has opportunities to influence the recruitment of new teaching and research staff"
         },
         "shortLabel": {
           "fi": "",
@@ -1737,8 +1737,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelma osallistuu tiedekunnan toiminnan ja talouden suunnitteluun",
-          "se": "",
-          "en": "The degree programme participates in the faculty’s operational and financial planning."
+          "se": "Utbildningsprogrammet deltar i planeringen av fakultetens verksamhet och ekonomi",
+          "en": "The degree programme participates in the faculty’s operational and financial planning"
         },
         "shortLabel": {
           "fi": "",
@@ -1756,8 +1756,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelman resurssitarpeet on otettu huomioon tiedekunnan toiminta- ja taloussuunnitelmissa",
-          "se": "",
-          "en": "The degree programme’s resource needs have been taken into account in the faculty's operational and financial planning."
+          "se": "Utbildningsprogrammets resursbehov har beaktats i fakultetens verksamhets- och ekonomiplaner",
+          "en": "The degree programme’s resource needs have been taken into account in the faculty's operational and financial planning"
         },
         "shortLabel": {
           "fi": "",
@@ -1773,7 +1773,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1789,7 +1789,7 @@
   {
     "title": {
       "fi": "Tiedekuntien yhteisten koulutusohjelmien toimiminen",
-      "se": "",
+      "se": "Fakulteternas gemensamma utbildningsprogra",
       "en": "Joint degree programmes between faculties"
     },
     "id": 9,
@@ -1800,17 +1800,17 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä.",
-          "se": "",
+          "se": "Bedöm nuläget för fakulteternas gemensamma utbildningsprogram.",
           "en": "Assess the current status of joint degree programmes between faculties."
         },
         "label": {
           "fi": "Arvioi oman kokemuksesi perusteella ja/tai koulutusohjelmasi näkökulmasta tiedekuntien yhteisten maisteriohjelmien tilannetta tällä hetkellä.",
-          "se": "",
+          "se": "Bedöm nuläget för fakulteternas gemensamma utbildningsprogram.",
           "en": "Assess the current status of joint degree programmes between faculties."
         },
         "description": {
           "fi": "Opintoasiainneuvosto kannusti tiedekuntia yhteisten koulutusohjelmien suunnitteluun ja perustamiseen. Tiedekuntien yhteiset maisteriohjelmat olivat koulutusuudistuksen yksi erityinen valmistelukohde.",
-          "se": "",
+          "se": "Utbildningsrådet har uppmuntrat fakulteterna att utforma och inrätta gemensamma utbildningsprogram.",
           "en": "The Academic Affairs Council has encouraged faculties to plan and establish joint degree programmes."
         },
         "required": false,
@@ -1823,7 +1823,7 @@
         "version": "all",
         "shortLabel": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "label": {
@@ -1860,10 +1860,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av utbildningsprogrammet",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera utbildningsprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -1875,8 +1875,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tiedekuntien yhteiset ohjelmat ovat sisällöltään onnistuneita",
-          "se": "",
-          "en": "The joint programmes between faculties are successful in terms of their content."
+          "se": "Fakulteternas gemensamma utbildningsprogram är lyckade till innehållet",
+          "en": "The joint programmes between faculties are successful in terms of their content"
         },
         "shortLabel": {
           "fi": "",
@@ -1894,8 +1894,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Ohjelmien resurssoinnista on neuvoteltu yhdessä",
-          "se": "",
-          "en": "The resource allocation of the programmes has been jointly negotiated."
+          "se": "Resurserna för programmen har förhandlats fram gemensamt",
+          "en": "The resource allocation of the programmes has been jointly negotiated"
         },
         "shortLabel": {
           "fi": "",
@@ -1913,8 +1913,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Ohjelmien johtaminen on onnistunutta",
-          "se": "",
-          "en": "The programmes are successfully managed."
+          "se": "Ledningen av programmen är lyckad",
+          "en": "The programmes are successfully managed"
         },
         "shortLabel": {
           "fi": "",
@@ -1932,8 +1932,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kaikki mukana olevat tahot ovat riittävästi edustettuina ohjelman johtoryhmässä",
-          "se": "",
-          "en": "All participants are adequately represented in the degree programme steering group."
+          "se": "Alla medverkande parter är tillräckligt representerade i programmets ledningsgrupp",
+          "en": "All participants are adequately represented in the degree programme steering group"
         },
         "shortLabel": {
           "fi": "",
@@ -1951,8 +1951,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tiedekuntien yhteiset koulutusohjelmat toimivat hyvin",
-          "se": "",
-          "en": "Joint degree programmes between faculties function well."
+          "se": "Fakulteternas gemensamma utbildningsprogram fungerar bra",
+          "en": "Joint degree programmes between faculties function well"
         },
         "shortLabel": {
           "fi": "",
@@ -1968,7 +1968,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -1984,7 +1984,7 @@
   {
     "title": {
       "fi": "Muuta kommentoitavaa",
-      "se": "",
+      "se": "Andra kommentarer du vill ge",
       "en": "Other comments"
     },
     "id": 10,
@@ -1995,8 +1995,8 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
-          "en": ""
+          "se": "Vill du kommentera?",
+          "en": "Any comments?"
         },
         "shortLabel": {
           "fi": "",
