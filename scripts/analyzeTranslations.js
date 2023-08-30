@@ -169,11 +169,11 @@ const printMissing = (translationKey, referenceLocations, missingLangs, longestK
   if (missingLangs.length > 0 && (!args.lang || missingLangs.some(l => args.lang.includes(l)))) {
     let msg = translationKey
     // add padding
-    for (let i = 0; i < longestKey - translationKey.length; i++) {
+    for (let i = 0; i < longestKey - translationKey.length + 1; i++) {
       msg += ' '
     }
 
-    msg += ['fi', 'en', 'sv']
+    msg += ['fi', 'en', 'se']
       .map(l => (missingLangs.includes(l) ? `${FgRed}${l}${Reset}` : `${FgGreen}${l}${Reset}`))
       .join(', ')
 
