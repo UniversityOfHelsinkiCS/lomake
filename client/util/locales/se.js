@@ -157,11 +157,11 @@ export default {
     // sendForm: '',
     // sendFormModalHeader: '',
     // sendFormModalDescription: '',
-    // stronglyDisagree: '',
-    // partiallyDisagree: '',
-    // neitherNor: '',
-    // partiallyAgree: '',
-    // stronglyAgree: '',
+    stronglyDisagree: 'Helt av annan åsikt',
+    partiallyDisagree: 'Delvis av annan åsikt',
+    neitherNor: 'Varken av samma eller av annan åsikt',
+    partiallyAgree: 'Delvis av samma åsikt',
+    stronglyAgree: 'Helt av samma åsikt / kan inte säga',
   },
 
   generic: {

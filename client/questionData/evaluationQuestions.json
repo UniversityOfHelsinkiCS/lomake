@@ -445,8 +445,8 @@
   {
     "title": {
       "fi": "KOKONAISARVIO",
-      "se": "",
-      "en": ""
+      "se": "HELHETSBEDÖMNING",
+      "en": "OVERALL ASSESSMENT"
     },
     "parts": [
       {
@@ -492,7 +492,7 @@
           "en": "OVERALL STATUS OF THE DEGREE PROGRAMME IN FIVE YEARS"
         },
         "description": {
-          "fi": "Kuvaile missä koulutusohjelmassa mennään viiden vuoden kuluttua",
+          "fi": "Kuvatkaa koulutusohjelman kokonaistilannetta viiden vuoden kuluttua",
           "se": "Beskriv hur du ser på programmet om fem år",
           "en": "Describe how you picture the status of the degree programme to be in five years"
         },

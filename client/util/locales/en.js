@@ -30,7 +30,7 @@ export default {
     master: "Master's programmes",
     doctoral: 'Doctoral programmes',
     international: "International Master's programmes",
-    programmeFilter: 'Search for study programmes',
+    programmeFilter: 'Search for degree programmes',
     facultyFilter: 'Search for faculties',
 
     noData: 'No data available for these choices',
@@ -63,7 +63,7 @@ export default {
     send: 'Send',
     what: 'What',
     chooseFaculty: 'Choose faculty',
-    chooseProgramme: 'Choose study programme',
+    chooseProgramme: 'Choose degree programme',
     showDataByProgramme: "Show data by programme's",
   },
 
@@ -71,7 +71,7 @@ export default {
     title: 'What is the Form?',
     whatIsIt: 'What is the self-assessment form?',
     whatIsItReply:
-      'The Form is meant to act as a basis of the self-assessment discussion done by the steering group of each study programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
+      'The Form is meant to act as a basis of the self-assessment discussion done by the steering group of each degree programme. The Form is also used to document these discussions. The Form is being used in the University of Helsinki.',
     howToFillTitle: 'How should we fill in the form?',
     howToFill: `
     The questions are meant to arouse discussion around the respective topic, and each programme is suppose to write down the main points of that conversation. 
@@ -202,7 +202,7 @@ export default {
     levelFilter: 'Filter by programme level',
     measureLabel: 'Add 1-5 measures.',
     noPermissions:
-      "You have no permissions for any study programmes. Please contact Strategic Services for Teaching or your study programme's leader.",
+      "You have no permissions for any degree programmes. Please contact Strategic Services for Teaching or your degree programme's leader.",
     nowShowing: 'NOW SHOWING THE ANSWERS OF',
     chooseMore: 'CHOOSE MORE PROGRAMMES:',
     tooLongPaste:
@@ -222,7 +222,7 @@ export default {
     written: 'Download written answers as a CSV file',
 
     level: {
-      programmes: 'Study programme level',
+      programmes: 'Degree programme level',
       faculties: 'Faculty level',
       university: 'University level',
       committee: 'Committee',

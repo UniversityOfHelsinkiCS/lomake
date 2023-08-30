@@ -2,7 +2,7 @@
   {
     "title": {
       "fi": "Taustatiedot",
-      "se": "",
+      "se": " Bakgrund",
       "en": "Background"
     },
     "id": 0,
@@ -13,12 +13,12 @@
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
           "fi": "Taustayksikkö",
-          "se": "",
+          "se": "Enhet",
           "en": "Group"
         },
         "label": {
           "fi": "Taustayksikkö",
-          "se": "",
+          "se": "Enhet ",
           "en": "Group"
         },
         "description": {
@@ -50,9 +50,10 @@
             { "label": "Other, please specify", "id": "other", "placeholder": "What" }
           ],
           "se": [
-            { "label": "", "id": "faculty" },
-            { "label": "", "id": "ypa" },
-            { "label": "", "id": "other", "placeholder": "" }
+            { "label": "Fakultet", "id": "faculty" },
+            { "label": "Universitetsservicen/Undervisnings- och studentservicen", "id": "ypa-teach" },
+            { "label": "Universitetsservicen/annan sektor", "id": "ypa-not-teach" },
+            { "label": "Annan/vilken", "id": "other", "placeholder": "" }
           ]
         },
         "advancedOptions": {
@@ -70,19 +71,18 @@
           ]
         }
       },
-
       {
         "id": "primary_role",
         "index": 1,
         "type": "CHOOSE-ADVANCED",
         "shortLabel": {
           "fi": "Valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
-          "se": "",
+          "se": "Välj bakgrundsinformation (nuvarande primära roll)",
           "en": "Select your background information (current primary role)."
         },
         "label": {
           "fi": "Valitse taustatiedot (ensisijainen rooli tällä hetkellä)",
-          "se": "",
+          "se": "Välj bakgrundsinformation (nuvarande primära roll)",
           "en": "Select your background information (current primary role)."
         },
         "description": {
@@ -113,11 +113,11 @@
             { "label": "Doctoral researcher", "id": "doctoral" }
           ],
           "se": [
-            { "label": "", "id": "dean" },
-            { "label": "", "id": "teaching_or_other_research" },
-            { "label": "", "id": "admin_or_other_staff" },
-            { "label": "", "id": "student" },
-            { "label": "", "id": "doctoral" }
+            { "label": "Dekanus eller prodekanus", "id": "dean" },
+            { "label": "Undervisnings- och forskningspersonal", "id": "teaching_or_other_research" },
+            { "label": "Administrativ eller övrig personal", "id": "admin_or_other_staff" },
+            { "label": "Student", "id": "student" },
+            { "label": "Doktorand", "id": "doctoral" }
           ]
         },
         "advancedOptions": {
@@ -136,9 +136,9 @@
               { "label": "Other", "id": "other" }
             ],
             "se": [
-              { "label": "", "id": "science_or_research_lead" },
-              { "label": "", "id": "programme_lead" },
-              { "label": "", "id": "other" }
+              { "label": "Ledare för ett utbildningsprogram eller medlem av ett programs ledningsgrupp", "id": "programme_lead" },
+              { "label": "ledare för en vetenskapsområdesenhet eller avdelning, eller motsvarande befattning", "id": "science_or_research_lead" },
+              { "label": "Andra", "id": "other" }
             ]
           }
         }
@@ -149,12 +149,12 @@
         "type": "CHOOSE-RADIO",
         "shortLabel": {
           "fi": "Vuosia yliopistossa",
-          "se": "",
+          "se": "År på universitetet",
           "en": "Years at university"
         },
         "label": {
           "fi": "Kuinka kauan olet ollut Helsingin yliopistossa opiskelijana ja/tai henkilökuntaan kuuluvana",
-          "se": "",
+          "se": "Hur länge har du studerat och/eller varit anställd vid Helsingfors universitet?",
           "en": "How long have you been a student and/or a staff member at the University of Helsinki?"
         },
         "description": {
@@ -190,10 +190,10 @@
             { "label": "More than 10 years", "id": "over-10-years" }
           ],
           "se": [
-            { "label": "", "id": "under-year" },
-            { "label": "", "id": "1-5-years" },
-            { "label": "", "id": "5-10-years" },
-            { "label": "", "id": "over-10-years" }
+            { "label": "Mindre än ett år", "id": "under-year" },
+            { "label": "1–5 år", "id": "1-5-years" },
+            { "label": "5–10 år", "id": "5-10-years" },
+            { "label": "Mer än 10 år", "id": "over-10-years" }
           ]
         }
       },
@@ -203,13 +203,13 @@
         "type": "CHECKBOX",
         "shortLabel": {
           "fi": "Valitse osiot, joihin haluat vastata",
-          "se": "Choose sections you want to answer",
+          "se": "Välj den eller de delar som du vill besvara",
           "en": ""
         },
         "label": {
           "fi": "Valitse osiot, joihin haluat vastata",
-          "se": "Choose sections you want to answer",
-          "en": ""
+          "se": "Välj den eller de delar som du vill besvar",
+          "en": "Choose sections you want to answer"
         },
         "required": false,
         "extrainfo": {
@@ -234,11 +234,11 @@
             { "label": "Joint degree programmes between faculties", "id": "faculty_collarobate" }
           ],
           "se": [
-            { "label": "", "id": "bachelor" },
-            { "label": "", "id": "masters" },
-            { "label": "", "id": "doctoral" },
-            { "label": "", "id": "international" },
-            { "label": "", "id": "faculty_collarobate" }
+            { "label": "Utbildning på kandidatnivå", "id": "bachelor" },
+            { "label": "Utbildning på magisternivå", "id": "masters" },
+            { "label": "Utbildning på doktorsnivå", "id": "doctoral" },
+            { "label": "Internationella magisterprogram ", "id": "international" },
+            { "label": "Fakulteternas gemensamma utbildningsprogram", "id": "faculty_collarobate" }
           ]
         }
       },
@@ -248,13 +248,13 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
-          "se": "",
-          "en": "Answer questions about your current role/position and give an assessment of the current situation based on your own experience."
+          "se": "Besvara frågorna utgående från din nuvarande roll eller position och utgå från din egen erfarenhet när du bedömer den aktuella situationen",
+          "en": "Answer questions about your current role/position and give an assessment of the current situation based on your own experience"
         },
         "label": {
           "fi": "Vastaa kysymyksiin nykyisestä roolistasi/positiostasi ja muodosta nykyhetken arvio tilanteesta omaan kokemukseesi perustuen",
-          "se": "",
-          "en": "Answer questions about your current role/position and give an assessment of the current situation based on your own experience."
+          "se": "Besvara frågorna utgående från din nuvarande roll eller position och utgå från din egen erfarenhet när du bedömer den aktuella situationen",
+          "en": "Answer questions about your current role/position and give an assessment of the current situation based on your own experience"
         },
         "description": {
           "fi": "",
@@ -269,7 +269,7 @@
   {
     "title": {
       "fi": "Koulutusuudistuksen tavoitteiden toteutuminen",
-      "se": "",
+      "se": "Hur har målen för utbildningsreformen uppfylltsn",
       "en": "Degree reform goals"
     },
     "id": 1,
@@ -280,17 +280,17 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Koulutusuudistuksen 2015-2017 tavoitteiden toteutuminen",
-          "se": "",
+          "se": "Hur har målen för utbildningsreformen 2015–2017 uppfyllts",
           "en": "Implementation of the objectives of the education reform carried out between 2015 and 2017"
         },
         "label": {
           "fi": "KOULUTUSUUDISTUKSEN 2015-2017 TAVOITTEIDEN TOTEUTUMINEN",
-          "se": "",
+          "se": "HUR HAR MÅLEN FÖR UTBILDNINGSREFORMEN 2015–2017 UPPFYLLTS",
           "en": "IMPLEMENTATION OF THE OBJECTIVES OF THE EDUCATION REFORM CARRIED OUT BETWEEN 2015 AND 2017"
         },
         "description": {
           "fi": "Koulutusuudistuksen (Iso Pyörä) tavoitteet kirjattiin projektisuunnitelmaan (20.4.2015). Uudistuksen tarkoituksena oli tehdä tarvittavia muutoksia lähtien kunkin tiedekunnan omista lähtökohdista, mutta kuitenkin yliopiston yhteiseen suuntaan. Yliopiston yhteisestä suunnasta huolehti yliopiston opintoasiainneuvosto tekemällä koko yliopistoa koskevia linjauksia.",
-          "se": "",
+          "se": "Målsättningarna för utbildningsreformen Stora hjulet formulerades i en projektplan (20.4.2015). Avsikten med reformen var att göra de nödvändiga förändringarna med avstamp i fakulteternas egna utgångspunkter men ändå i en gemensam riktning. För den gemensamma riktningen stod universitetets utbildningsråd genom att dra upp riktlinjer för hela universitetet.",
           "en": "The objectives of the education reform known as the Big Wheel were formulated in a project plan (dated 20 April 2015). The purpose was to make necessary changes from the starting point of each individual faculty, while maintaining a shared direction with other University units. To ensure this, the University’s Academic Affairs Council issued University-level guidelines."
         },
         "required": false,
@@ -304,13 +304,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Helsingin yliopisto on kansainvälisesti houkutteleva opiskelupaikka",
-          "se": "",
-          "en": "The University of Helsinki is an internationally attractive place to study."
+          "se": "Helsingfors universitet är en internationellt attraktiv studiemiljö",
+          "en": "The University of Helsinki is an internationally attractive place to study"
         },
         "shortLabel": {
           "fi": "Helsingin yliopisto on kansainvälisesti houkutteleva opiskelupaikka",
-          "se": "",
-          "en": "The University of Helsinki is an internationally attractive place to study."
+          "se": "Helsingfors universitet är en internationellt attraktiv studiemiljö",
+          "en": "The University of Helsinki is an internationally attractive place to study"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -323,18 +323,17 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Työelämän muuttuvat tarpeet on huomioitu koulutuksen sisällöissä",
-          "se": "",
-          "en": "The changing needs of the labour market are taken into account in the content of education."
+          "se": "De föränderliga behoven i arbetslivet har beaktats i utbildningens innehåll",
+          "en": "The changing needs of the labour market are taken into account in the content of education"
         },
         "shortLabel": {
           "fi": "Työelämän muuttuvat tarpeet on huomioitu koulutuksen sisällöissä",
-          "se": "",
-          "en": "The changing needs of the labour market are taken into account in the content of education."
+          "se": "De föränderliga behoven i arbetslivet har beaktats i utbildningens innehåll",
+          "en": "The changing needs of the labour market are taken into account in the content of education"
         },
         "required": false,
         "relatedYearlyQuestions": []
       },
-
       {
         "id": "study_content_is_up_to_date",
         "index": 8,
@@ -343,13 +342,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opetussisällöt ovat ajanmukaisia",
-          "se": "",
-          "en": "The content of teaching is up to date."
+          "se": "Undervisningens innehåll är modernt och aktuellt",
+          "en": "The content of teaching is up to date"
         },
         "shortLabel": {
           "fi": "Opetussisällöt ovat ajanmukaisia",
-          "se": "",
-          "en": "The content of teaching is up to date."
+          "se": "Undervisningens innehåll är modernt och aktuellt",
+          "en": "The content of teaching is up to date"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -363,13 +362,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opetusmenetelmät ovat ajanmukaisia",
-          "se": "",
-          "en": "Teaching methods are up to date."
+          "se": "Undervisningsmetoderna är moderna",
+          "en": "Teaching methods are up to date"
         },
         "shortLabel": {
           "fi": "Opetusmenetelmät ovat ajanmukaisia",
-          "se": "",
-          "en": "Teaching methods are up to date."
+          "se": "Undervisningsmetoderna är moderna",
+          "en": "Teaching methods are up to date"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -382,13 +381,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opiskelun tukipalvelut ovat toimivia",
-          "se": "",
-          "en": "Support services for learning function well."
+          "se": "Stödtjänsterna för studier är ändamålsenliga",
+          "en": "Support services for learning function well"
         },
         "shortLabel": {
           "fi": "Opiskelun tukipalvelut ovat toimivia",
-          "se": "",
-          "en": "Support services for learning function well."
+          "se": "Stödtjänsterna för studier är ändamålsenliga",
+          "en": "Support services for learning function well"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -401,13 +400,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opetuksen tukipalvelut ovat toimivia",
-          "se": "",
-          "en": "Support services for teaching function well."
+          "se": "Stödtjänsterna för undervisning är ändamålsenliga",
+          "en": "Support services for teaching function well"
         },
         "shortLabel": {
           "fi": "Opetuksen tukipalvelut ovat toimivia",
-          "se": "",
-          "en": "Support services for teaching function well."
+          "se": "Stödtjänsterna för undervisning är ändamålsenliga",
+          "en": "Support services for teaching function well"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -420,13 +419,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tieteenalojen tarpeet on huomioitu kehittämisessä",
-          "se": "",
-          "en": "The needs of individual of disciplines are taken into account in development measures."
+          "se": "Vetenskapsområdenas behov har beaktats i utvecklingsarbetet",
+          "en": "The needs of individual of disciplines are taken into account in development measures"
         },
         "shortLabel": {
           "fi": "Tieteenalojen tarpeet on huomioitu kehittämisessä",
-          "se": "",
-          "en": "The needs of individual of disciplines are taken into account in development measures."
+          "se": "Vetenskapsområdenas behov har beaktats i utvecklingsarbetet",
+          "en": "The needs of individual of disciplines are taken into account in development measures"
         },
 
         "required": false,
@@ -438,7 +437,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -454,7 +453,7 @@
   {
     "title": {
       "fi": "Pää- ja sivuaineperusteisesta koulutuksesta koulutusohjelmiksi",
-      "se": "",
+      "se": "Från en utbildning med huvud- och biämnen till utbildningsprogram",
       "en": "Master's and minor based education to study programmes"
     },
     "id": 2,
@@ -465,17 +464,17 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella. ",
-          "se": "",
+          "se": "Bedöm följande påståenden utifrån din egen erfarenhet.",
           "en": "Assess the below statements based on your own experience."
         },
         "label": {
           "fi": "Arvioi seuraavia väittämiä oman kokemuksesi perusteella. ",
-          "se": "",
+          "se": "Bedöm följande påståenden utifrån din egen erfarenhet.",
           "en": "Assess the below statements based on your own experience."
         },
         "description": {
           "fi": "Koulutusuudistuksessa päätettiin, että Helsingin yliopistossa tutkintokoulutus järjestetään koulutusohjelmissa.",
-          "se": "",
+          "se": "I utbildningsreformen bestämdes det att all examensutbildning vid Helsingfors universitet ordnas i utbildningsprogram.",
           "en": "In connection with the education reform, the University of Helsinki decided to provide education in degree programmes."
         },
         "required": false,
@@ -489,8 +488,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Yliopistossa ei ole useampia samansisältöisiä saman tutkintotason koulutusohjelmia esimerkiksi eri kielillä",
-          "se": "",
-          "en": "The University does not offer several degree programmes of the same level and content, for example, in different languages."
+          "se": "Det finns inte flera utbildningsprogram på samma examensnivå med samma innehåll vid universitetet, till exempel på olika språk",
+          "en": "The University does not offer several degree programmes of the same level and content, for example, in different languages"
         },
         "shortLabel": {
           "fi": "",
@@ -508,8 +507,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelman opetus suunnitellaan ja toteutetaan opettajien yhteistyönä",
-          "se": "",
-          "en": "Teaching in degree programmes is planned and implemented in collaboration between the teachers."
+          "se": "Undervisningen vid utbildningsprogrammet planeras och genomförs som ett samarbete mellan lärarna",
+          "en": "Teaching in degree programmes is planned and implemented in collaboration between the teachers"
         },
         "shortLabel": {
           "fi": "",
@@ -527,8 +526,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelman opintojaksot muodostavat mielekkään kokonaisuuden",
-          "se": "",
-          "en": "The courses in the degree programme constitute a meaningful whole."
+          "se": "Utbildningsprogrammets studieavsnitt bildar en meningsfull helhet",
+          "en": "The courses in the degree programme constitute a meaningful whole"
         },
         "shortLabel": {
           "fi": "",
@@ -546,8 +545,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opetushenkilökunnan aikaa on vapautunut opetuksen suunnitteluun ja kehittämiseen",
-          "se": "",
-          "en": "Teachers have more time for planning and developing teaching."
+          "se": "Undervisningspersonalen har tid över för planering och utveckling av undervisningen",
+          "en": "Teachers have more time for planning and developing teaching"
         },
         "shortLabel": {
           "fi": "",
@@ -565,8 +564,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opetushenkilökunnan aikaa on vapautunut tutkimukseen ja muuhun tieteelliseen toimintaan",
-          "se": "",
-          "en": "Teachers have more time for research and other scholarly activities."
+          "se": "Undervisningspersonalen har tid över för forskning och annan vetenskaplig verksamhet",
+          "en": "Teachers have more time for research and other scholarly activities"
         },
         "shortLabel": {
           "fi": "",
@@ -584,8 +583,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Tieteenalat, joita ennen opetettiin pää- ja sivuaineina, löytyvät nyt koulutusohjelmien sisällöistä",
-          "se": "",
-          "en": "The disciplines that were previously taught as major and minor subjects are now integrated into the contents of the degree programmes."
+          "se": "Vetenskapsområdena, som tidigare undervisades som huvud- och biämnen, återfinns efter reformen i utbildningsprogrammens innehåll",
+          "en": "The disciplines that were previously taught as major and minor subjects are now integrated into the contents of the degree programmes"
         },
         "shortLabel": {
           "fi": "",
@@ -603,8 +602,8 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Koulutusohjelmiin perustuva koulutusrakenne on toimiva",
-          "se": "",
-          "en": "The structure of education based on degree programmes functions well."
+          "se": "Den programbaserade utbildningsstrukturen är ändamålsenlig",
+          "en": "The structure of education based on degree programmes functions well"
         },
         "shortLabel": {
           "fi": "",
@@ -620,7 +619,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
@@ -636,7 +635,7 @@
   {
     "title": {
       "fi": "Aito kolmiportaisuus ja Bolognan prosenssin periaatteet",
-      "se": "",
+      "se": "En tydlig trestegsstruktur och bolognaprocessens principer",
       "en": "Genuine three-tier structure and the principles of the Bologna Process"
     },
     "id": 3,
@@ -646,25 +645,25 @@
         "index": 36,
         "type": "INFOBOX",
         "shortLabel": {
-          "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta.",
-          "se": "",
+          "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta",
+          "se": "Bedöm hur väl utbildningen fungerar i nuläget",
           "en": ""
         },
         "label": {
           "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta.",
-          "se": "",
+          "se": "Bedöm hur väl utbildningen fungerar i nuläget",
           "en": ""
         },
         "description": {
           "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa **aito kolmiportaisuus**, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
-          "se": "",
+          "se": "Ett av utbildningsreformens centrala mål var att utbildningsstrukturen skulle vara **tydligt indelad i tre steg** med en väl fungerande rörlighet mellan och inom examina samt mellan arbetslivet och andra universitet och högskolor.",
           "en": "One of the key objectives of the Big Wheel education reform was a **genuine three-tier** degree structure that would enable seamless transition between and within degrees as well as between other universities and institutions of higher education and the labour market."
         },
         "image": {
           "text": {
             "fi": "Bolognan prosessin mukainen aito kolmiportainen tutkintorakenne",
             "en": "A genuine three-tier degree structure as set out in the Bologna Process",
-            "se": ""
+            "se": "En genuin struktur i tre nivåer enligt Bolognaprocessen"
           },
           "id": "three-step"
         }
@@ -677,13 +676,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Hakukohteet ovat hakijalle selkeitä ",
-          "se": "",
-          "en": "The options available for application are clear to applicants."
+          "se": "Ansökningsmålen är tydliga för den sökande",
+          "en": "The options available for application are clear to applicants"
         },
         "shortLabel": {
-          "fi": "Hakukohteet ovat hakijalle selkeitä ",
-          "se": "",
-          "en": "The options available for application are clear to applicants."
+          "fi": "Hakukohteet ovat hakijalle selkeitä",
+          "se": "Ansökningsmålen är tydliga för den sökande",
+          "en": "The options available for application are clear to applicants"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -696,12 +695,12 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Aiemmin hankittu osaaminen tunnistetaan ja tunnustetaan",
-          "se": "",
-          "en": "Prior learning is recognised and validated."
+          "se": "Tidigare förvärvad kompetens identifieras och erkänns",
+          "en": "Prior learning is recognised and validated"
         },
         "shortLabel": {
-          "fi": "",
-          "se": "",
+          "fi": "Aiemmin hankittu osaaminen tunnistetaan ja tunnustetaan",
+          "se": "Tidigare förvärvad kompetens identifieras och erkänns",
           "en": "Prior learning is recognised and validated."
         },
         "required": false,
@@ -715,13 +714,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
-          "se": "",
-          "en": "Students may depart on an exchange without this causing any delay in their studies."
+          "se": "Studenten kan åka på studentutbyte utan att studierna fördröjs",
+          "en": "Students may depart on an exchange without this causing any delay in their studies"
         },
         "shortLabel": {
           "fi": "Opiskelija voi halutessaan lähteä opiskelijavaihtoon ilman, että opinnot viivästyvät",
-          "se": "",
-          "en": "Students may depart on an exchange without this causing any delay in their studies."
+          "se": "Studenten kan åka på studentutbyte utan att studierna fördröjs",
+          "en": "Students may depart on an exchange without this causing any delay in their studies"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -734,13 +733,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Maisteriohjelmasta voi sujuvasti hakeutua myös ulkomaisiin alan tohtoriohjelmiin",
-          "se": "",
-          "en": "Graduates from a master's programme can also easily apply to a doctoral programme in the same field in universities abroad."
+          "se": "Från magisterprogrammet går det smidigt att även söka sig till utländska doktorandprogram inom området",
+          "en": "Graduates from a master's programme can also easily apply to a doctoral programme in the same field in universities abroad"
         },
         "shortLabel": {
           "fi": "Maisteriohjelmasta voi sujuvasti hakeutua myös ulkomaisiin alan tohtoriohjelmiin",
-          "se": "",
-          "en": "Graduates from a master's programme can also easily apply to a doctoral programme in the same field in universities abroad."
+          "se": "Från magisterprogrammet går det smidigt att även söka sig till utländska doktorandprogram inom området",
+          "en": "Graduates from a master's programme can also easily apply to a doctoral programme in the same field in universities abroad"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -751,12 +750,12 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "shortLabel": {
           "fi": "Kommentoi halutessasi",
-          "se": "",
+          "se": "Vill du kommentera?",
           "en": "Any comments?"
         },
         "required": false,
@@ -778,17 +777,17 @@
         "type": "INFOBOX",
         "shortLabel": {
           "fi": "Arvioi kandiohjelmien toimivuutta.",
-          "se": "",
-          "en": "Assess how well bachelor’s programmes function."
+          "se": "Bedöm hur väl kandidatprogrammen fungerar",
+          "en": "Assess how well bachelor’s programmes function"
         },
         "label": {
           "fi": "Arvioi kandiohjelmien toimivuutta.",
-          "se": "",
+          "se": "Bedöm hur väl kandidatprogrammen fungerar",
           "en": "Assess how well bachelor’s programmes function."
         },
         "description": {
           "fi": "Taustatietoa kandiohjelmien periaatteista:\n\nJokainen alempaa korkeakoulututkintoa suorittava opiskelija kuuluu yhteen kandiohjelmaan. Kandiohjelma muodostuu yhdestä tai useammasta tieteenalasta, joilla on riittävän yhtenäinen tieteellinen tai koulutuksellinen perusta. Kaikille yhteisten opintojen jälkeen opinnot voivat eriytyä opintosuunniksi. Ohjelman tulee olla riittävän suuri: opettajien yhteistyöstä tulevia hyötyjä, kuten tutkimukselle vapautuvaa työaikaa voidaan saada vain, jos koulutusohjelmaan kuuluu riittävä määrä opettajia. Siksi ohjelmassa tulee olla aloituspaikkoja vähintään 40. Vain erityisestä syystä ohjelma voi olla tätä pienempi.\n\nOpiskelijalla on kandiohjelman jälkeen yksi tai useampia vaihtoehtoja (optiot) maisteriohjelmaksi kandiohjelman jälkeen. Opetussuunnitelmaan on kirjattu, mitkä ovat ne maisteriohjelmat (optiot), joissa opiskelija voi kandiohjelman jälkeen jatkaa opintojaan. Opiskelijan kandiohjelmassa suorittamat opinnot vaikuttavat siihen, mitkä maisteriohjelmat (optiot) tai niiden opintosuunnat ovat hänelle mahdollisia.  ",
-          "se": "",
+          "se": "Varje student som avlägger lägre högskoleexamen hör till ett kandidatprogram. Ett kandidatprogram består av ett eller flera vetenskapsområden som har en tillräckligt omfattande gemensam vetenskaplig bas eller utbildningsgrund. Studierna differentieras i flera studieinriktningar efter de studier som är gemensamma. Programmet ska vara tillräckligt stort: nyttan av samarbetet mellan lärarna, till exempel att de får arbetstid över för forskning, uppnås endast om utbildningsprogrammet har ett tillräckligt stort antal lärare. Ett program ska därför ha minst 40 nybörjarplatser. Endast av särskilda skäl kan ett program vara mindre.\n\nEfter kandidatprogrammet har studenten ett eller flera alternativa magisterprogram (optioner) som hen kan fortsätta till. I undervisningsplanen finns angivet vilka magisterprogram (optioner) studenten kan fortsätta studera vid efter kandidatprogrammet. Vilka studier som studenten har genomfört i kandidatprogrammet påverkar vilka magisterprogram eller studieinriktningar i programmen som är optioner.",
           "en": "All students pursuing a first-cycle degree belong to a bachelor’s programme. A bachelor’s programme includes one or more disciplines with a sufficiently consistent scientific or educational foundation. After students have completed the compulsory studies for all students, they may be offered various study tracks. The degree programme must be of adequate size: cooperation between teachers will yield benefits, such as time freed for research, only if the programme includes a sufficient number of teachers. Therefore, the recommended minimum size of a degree programme is 40 student places. A degree programme may be smaller than this for special reasons only.\n\nStudents who have completed a bachelor’s programme are able to select from among one or more master’s programmes available as options. The curriculum defines the master’s programmes (options) which are offered to students after they have completed their bachelor’s degree. The studies completed in the bachelor’s programme determine which master’s programmes (options) or their study tracks are available to each student."
         },
         "required": false,
@@ -801,12 +800,12 @@
         "version": "bachelor",
         "shortLabel": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "label": {
           "fi": "Arvio perustuu",
-          "se": "",
+          "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
         "description": {
@@ -838,10 +837,10 @@
           ],
           "se": [
             {
-              "label": "",
+              "label": "I första hand mina egna erfarenheter av kandidatprogrammet ",
               "id": "specific-programme"
             },
-            { "label": "", "id": "multiple-programs" }
+            { "label": "Min erfarenhet av flera kandidatprogram", "id": "multiple-programs" }
           ]
         }
       },
@@ -853,12 +852,12 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kandiohjelmassa hakukohteet ovat opiskelijalle selkeät",
-          "se": "",
+          "se": "Kandidatprogrammets ansökningsmål är tydliga ur studentens perspektiv",
           "en": "The options available for application in the bachelor’s programme are clear to prospective students."
         },
         "shortLabel": {
           "fi": "Kandiohjelmassa hakukohteet ovat opiskelijalle selkeät",
-          "se": "",
+          "se": "Kandidatprogrammets ansökningsmål är tydliga ur studentens perspektiv",
           "en": "The options available for application in the bachelor’s programme are clear to prospective students."
         },
         "required": false,
@@ -872,13 +871,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kandiohjelman aloituspaikkamäärä on liian suuri",
-          "se": "",
-          "en": "The number of students admitted to the bachelor’s programme is too great."
+          "se": "Antalet nybörjarplatser vid kandidatprogrammet är för stort",
+          "en": "The number of students admitted to the bachelor’s programme is too great"
         },
         "shortLabel": {
           "fi": "Kandiohjelman aloituspaikkamäärä on liian suuri",
-          "se": "",
-          "en": "The number of students admitted to the bachelor’s programme is too great."
+          "se": "Antalet nybörjarplatser vid kandidatprogrammet är för stort",
+          "en": "The number of students admitted to the bachelor’s programme is too great"
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -891,13 +890,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kandiohjelma antaa riittävän perusosaamisen alan asiantuntijatehtäviin työelämässä",
-          "se": "",
-          "en": "The selection of study track in the bachelor's programme is seamless."
+          "se": "Kandidatprogrammet ger tillräckliga baskunskaper för att arbeta som expert inom området",
+          "en": ""
         },
         "shortLabel": {
           "fi": "Kandiohjelma antaa riittävän perusosaamisen alan asiantuntijatehtäviin työelämässä",
-          "se": "",
-          "en": "The selection of study track in the bachelor's programme is seamless."
+          "se": "Kandidatprogrammet ger tillräckliga baskunskaper för att arbeta som expert inom området",
+          "en": ""
         },
         "required": false,
         "relatedYearlyQuestions": []
@@ -910,13 +909,13 @@
         "radioOptions": "numbers",
         "label": {
           "fi": "Kandiohjelmassa opintosuunnan tarkentaminen on sujuvaa",
-          "se": "",
-          "en": "Currently bachelor’s level education functions well."
+          "se": "Preciseringen av studieinriktning går smidigt inom kandidatprogrammet",
+          "en": "The selection of study track in the bachelor's programme is seamless"
         },
         "shortLabel": {
           "fi": "Kandiohjelmassa opintosuunnan tarkentaminen on sujuvaa",
-          "se": "",
-          "en": "Currently bachelor’s level education functions well."
+          "se": "Preciseringen av studieinriktning går smidigt inom kandidatprogrammet",
+          "en": "The selection of study track in the bachelor's programme is seamless"
         },
         "required": false,
         "relatedYearlyQuestions": []
