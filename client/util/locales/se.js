@@ -51,9 +51,9 @@ export default {
 
     yearlyAssessment: 'Årlig utvärdering',
     evaluation: 'Katselmus',
-    'degree-reform': 'Koulutusuudistus',
-    'degree-reform-group': 'Koulutusuudistus - ohjelmat',
-    'degree-reform-individual': 'Koulutusuudistus - yksilö',
+    'degree-reform': 'Utbildningens nuvarande tillstånd',
+    'degree-reform-group': 'Utbildningens nuvarande tillstånd - program',
+    'degree-reform-individual': 'Utbildningens nuvarande tillstånd - individuell',
     'read-more': 'Läs mer',
     'read-less': 'Läs mindre',
     otherTextBox: 'Något annat, vilket?',

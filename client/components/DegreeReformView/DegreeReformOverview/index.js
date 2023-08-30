@@ -111,7 +111,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('koulutusuudistus').toUpperCase()}</h2>
+            <h2 className="view-title">{t('degree-reform').toUpperCase()}</h2>
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable

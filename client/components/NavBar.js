@@ -115,7 +115,7 @@ const MenuNavigation = ({ pathname, user }) => {
       <GoToYearlyAssessmentButton />
       <GoToEvaluationButton user={user} />
       <GoToDegreeReformGroup />
-      <GoToDegreeReformIndividual />
+      {user.admin && <GoToDegreeReformIndividual />}
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

@@ -54,9 +54,9 @@ export default {
 
     yearlyAssessment: 'Yearly assessment',
     evaluation: 'Evaluation',
-    'degree-reform': 'Degree reform',
-    'degree-reform-group': 'Degree reform - programmes',
-    'degree-reform-individual': 'Degree reform - individual',
+    'degree-reform': 'Current state of education',
+    'degree-reform-group': 'Current state of education - programmes',
+    'degree-reform-individual': 'Current state of education - individual',
     'read-more': 'Read more',
     'read-less': 'Read less',
     otherTextBox: 'Other, please specify',
