@@ -114,8 +114,8 @@ const MenuNavigation = ({ pathname, user }) => {
       </Menu.Item>
       <GoToYearlyAssessmentButton />
       <GoToEvaluationButton user={user} />
-      {user.admin && <GoToDegreeReformGroup />} {/* FIX Remove admin */}
-      {user.admin && <GoToDegreeReformIndividual />}
+      <GoToDegreeReformGroup />
+      <GoToDegreeReformIndividual />
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
