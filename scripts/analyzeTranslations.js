@@ -44,7 +44,7 @@ const EXTENSION_MATCHER = /.+\.js/
 const TRANSLATION_KEY_REFERENCE_MATCHER = new RegExp(/['"`]\w+(?::\w+)+['"`]/, 'g')
 // matches t('asd'
 const TRANSLATION_KEY_REFERENCE_MATCHER_2 = new RegExp(/\bt\(['"`]\w+(?::\w+)*['"`]/, 'g')
-
+const DEFAULT_NAMESPACE = 'common'
 const LANGUAGES = ['fi', 'se', 'en']
 const NAMESPACE = 'translation'
 
@@ -93,7 +93,7 @@ const importTranslationObjectFromESModule = async filePath => {
           const t = match.startsWith('t')
           const common = !match.includes(':')
           const location = new Location(file, lineNumber)
-          const reference = `${common ? 'common:' : ''}${match.slice(t ? 3 : 1, match.length - 1)}`
+          const reference = `${common ? `${DEFAULT_NAMESPACE}:` : ''}${match.slice(t ? 3 : 1, match.length - 1)}`
           if (translationKeyReferences.has(reference)) {
             translationKeyReferences.get(reference).push(location)
           } else {
@@ -140,7 +140,8 @@ const importTranslationObjectFromESModule = async filePath => {
 
   let missingCount = 0
 
-  translationKeyReferences.forEach((v, k) => {
+  const entries = [...translationKeyReferences.entries()].sort((a, b) => a[0].localeCompare(b[0]))
+  entries.forEach(([k, v]) => {
     const missing = []
     const parts = k.split(':')
 
