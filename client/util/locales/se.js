@@ -168,7 +168,8 @@ export default {
     partiallyDisagree: 'Delvis av annan åsikt',
     neitherNor: 'Varken av samma eller av annan åsikt',
     partiallyAgree: 'Delvis av samma åsikt',
-    stronglyAgree: 'Helt av samma åsikt / kan inte säga',
+    stronglyAgree: 'Helt av samma åsikt',
+    doNotKnow: 'Kan inte säga',
   },
 
   generic: {
