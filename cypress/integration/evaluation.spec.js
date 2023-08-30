@@ -20,7 +20,7 @@ describe('Evaluation forms tests', () => {
 
   it('User can navigate to evaluation programme level form', () => {
     cy.get('[data-cy=nav-evaluation-dropdown]').click()
-    cy.contains('Study programme level').click()
+    cy.contains('Degree programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
@@ -40,7 +40,7 @@ describe('Evaluation forms tests', () => {
     cy.request(`/api/cypress/createAnswers/1`)
     cy.reload()
     cy.get('[data-cy=nav-evaluation-dropdown]').click()
-    cy.contains('Study programme level').click()
+    cy.contains('Degree programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.wait(2000)
