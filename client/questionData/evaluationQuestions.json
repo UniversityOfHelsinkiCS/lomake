@@ -377,58 +377,6 @@
         "relatedYearlyQuestions": []
       },
       {
-        "id": "studyprogramme_status",
-        "index": 12,
-        "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Koulutusohjelman kokonaistoimivuus",
-          "se": "Den övergripande situationen för programmet för närvarande",
-          "en": "Overall status of the degree programme at the moment"
-        },
-        "label": {
-          "fi": "KOULUTUSOHJELMAN KOKONAISTOIMIVUUS",
-          "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR PROGRAMMET FÖR NÄRVARANDE",
-          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME AT THE MOMENT"
-        },
-        "description": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        }
-      },
-      {
-        "id": "where_are_we_in_five_years",
-        "index": 13,
-        "type": "ENTITY",
-        "shortLabel": {
-          "fi": "Missä koulutusohjelmassa mennään viiden vuoden kuluttua",
-          "se": "Programmets övergripande situation om fem år",
-          "en": "Overall status of the degree programme in five years"
-        },
-        "label": {
-          "fi": "MISSÄ KOULUTUSOHJELMASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
-          "se": "PROGRAMMETS ÖVERGRIPANDE SITUATION OM FEM ÅR",
-          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME IN FIVE YEARS"
-        },
-        "description": {
-          "fi": "Kuvaile missä koulutusohjelmassa mennään viiden vuoden kuluttua",
-          "se": "Beskriv hur du ser på programmet om fem år",
-          "en": "Describe how you picture the status of the degree programme to be in five years"
-        },
-        "required": true,
-        "extrainfo": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        }
-      },
-      {
         "id": "programme_structure_opinion_differences",
         "index": "I",
         "type": "TEXTAREA",
@@ -491,6 +439,69 @@
         },
         "required": true,
         "no_color": true
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "KOKONAISARVIO",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": "studyprogramme_status",
+        "index": 12,
+        "kludge": true,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Koulutusohjelman kokonaistoimivuus",
+          "se": "Den övergripande situationen för programmet för närvarande",
+          "en": "Overall status of the degree programme at the moment"
+        },
+        "label": {
+          "fi": "KOULUTUSOHJELMAN KOKONAISTOIMIVUUS",
+          "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR PROGRAMMET FÖR NÄRVARANDE",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME AT THE MOMENT"
+        },
+        "description": {
+          "fi": "Antakaa kokonaisarvio koulutusohjelman toimivuudesta. Perustelkaa arvio.",
+          "se": "Motivering",
+          "en": "Grounds"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "where_are_we_in_five_years",
+        "index": 13,
+        "kludge": true,
+        "type": "ENTITY",
+        "shortLabel": {
+          "fi": "Missä koulutusohjelmassa mennään viiden vuoden kuluttua",
+          "se": "Programmets övergripande situation om fem år",
+          "en": "Overall status of the degree programme in five years"
+        },
+        "label": {
+          "fi": "MISSÄ KOULUTUSOHJELMASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
+          "se": "PROGRAMMETS ÖVERGRIPANDE SITUATION OM FEM ÅR",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME IN FIVE YEARS"
+        },
+        "description": {
+          "fi": "Kuvaile missä koulutusohjelmassa mennään viiden vuoden kuluttua",
+          "se": "Beskriv hur du ser på programmet om fem år",
+          "en": "Describe how you picture the status of the degree programme to be in five years"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   }

@@ -63,7 +63,6 @@ const handleMeasures = (yearData, relatedQuestion) => {
 const findAnswers = (allOldAnswers, relatedQuestion) => {
   const years = [2021, 2022, 2023]
   const result = {}
-
   years.forEach(year => {
     const yearData = allOldAnswers.find(a => a.year === year)
     if (!yearData) {

@@ -197,6 +197,8 @@ export default {
     healthSchool: 'Terveyden tutkimuksen tutkijakoulu',
     environmentalSchool: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
     textAreaLabel: 'Keskustelun pääkohdat olivat',
+    kludgedLabel: 'ARVIO',
+    kludgedLabel2: 'KUVAUS',
     allFaculties: 'Kaikki tiedekunnat',
     collapseText: 'Piilota viime vuoden vastaukset',
     expandText: 'Näytä viime vuoden vastaukset',

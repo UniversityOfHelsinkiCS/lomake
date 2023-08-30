@@ -89,6 +89,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
             summaryData={summaryData[part.id] || {}}
             form={form}
             summaryUrl={summaryUrl || null}
+            kludge={part.kludge}
           />
         </div>
       </div>

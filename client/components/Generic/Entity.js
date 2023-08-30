@@ -29,6 +29,7 @@ const Entity = ({
   summaryData = null,
   form,
   summaryUrl,
+  kludge,
 }) => {
   const { t } = useTranslation()
 
@@ -47,6 +48,15 @@ const Entity = ({
       </LastYearsAnswersAccordion>
     )
   }
+
+  let textAreaLabel = t('generic:textAreaLabel')
+  if (kludge && id === 'studyprogramme_status') {
+    textAreaLabel = t('generic:kludgedLabel')
+  }
+  if (kludge && id !== 'studyprogramme_status') {
+    textAreaLabel = t('generic:kludgedLabel2')
+  }
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -63,7 +73,7 @@ const Entity = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {form === 4 && (
+      {!kludge && form === 4 && (
         <>
           <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />
           <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
@@ -73,9 +83,10 @@ const Entity = ({
       )}
       <Textarea
         id={id}
-        label={t('generic:textAreaLabel')}
+        label={textAreaLabel}
         EntityLastYearsAccordion={EntityLastYearsAccordion}
         form={form}
+        kludge={kludge}
       />
     </div>
   )

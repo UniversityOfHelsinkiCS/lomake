@@ -174,6 +174,8 @@ export default {
     healthSchool: 'Forskarskolan i hälsoforskning',
     environmentalSchool: 'Miljö-, livsmedels- och biovetenskapliga forskarskolan',
     textAreaLabel: 'Diskussionens huvudpunkter',
+    kludgedLabel: 'BEDÖMNING',
+    kludgedLabel2: 'BESKRIVNING',
     allFaculties: 'Alla fakultet',
     collapseText: 'Dölj fjolårets svar',
     expandText: 'Visa fjolårets svar',

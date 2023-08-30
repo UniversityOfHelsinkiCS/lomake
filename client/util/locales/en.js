@@ -193,6 +193,8 @@ export default {
     healthSchool: 'Doctoral school in health sciences',
     environmentalSchool: 'Doctoral school in environmental, food and biological sciences',
     textAreaLabel: 'Main points of discussion',
+    kludgedLabel: 'ASSESMENT',
+    kludgedLabel2: 'DESCRIPTION',
     allFaculties: 'All faculties',
     collapseText: 'Hide answers from last year',
     expandText: 'Show answers from last year',
