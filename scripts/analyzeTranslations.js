@@ -17,6 +17,7 @@ const Reverse = '\x1b[7m'
 const Hidden = '\x1b[8m'
 const FgBlack = '\x1b[30m'
 const FgRed = '\x1b[31m'
+const FgOrange = '\x1b[38;5;208m'
 const FgGreen = '\x1b[32m'
 const FgYellow = '\x1b[33m'
 const FgBlue = '\x1b[34m'
@@ -31,6 +32,11 @@ const BgBlue = '\x1b[44m'
 const BgMagenta = '\x1b[45m'
 const BgCyan = '\x1b[46m'
 const BgWhite = '\x1b[47m'
+
+const Missing = FgRed
+const Unsure = FgOrange
+const Unused = FgMagenta
+const Found = FgGreen
 
 /**
  * Paths and regexs
@@ -131,7 +137,8 @@ const importTranslationObjectFromESModule = async filePath => {
   })
   const numberOfTranslations = translationsNotUsed.size
   console.log('Generated translation keys\n')
-  console.log(`${Underscore}Listing references with missing translations${Reset}\n`)
+  console.log(`${Underscore}Listing references with missing translations${Reset}`)
+  console.log(`${Found}Found${Reset} ${Missing}Missing${Reset} ${Unsure}Maybe${Reset}\n`)
 
   let longestKey = 0
   translationKeyReferences.forEach((v, k) => {
@@ -143,13 +150,30 @@ const importTranslationObjectFromESModule = async filePath => {
   const entries = [...translationKeyReferences.entries()].sort((a, b) => a[0].localeCompare(b[0]))
   entries.forEach(([k, v]) => {
     const missing = []
+    const unsure = []
     const parts = k.split(':')
 
     Object.entries(locales).forEach(([lang, t]) => {
       let obj = t
-      for (const p of parts) {
-        obj = obj[p]
-        if (!obj) break
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i]
+
+        if (!obj[part] && i === parts.length - 1) {
+          // Not found, but since its the last part, check if there is a match with i18n context part
+          const regex = new RegExp(`${part}_\\w+`)
+          const matches = Object.keys(obj).filter(k => regex.test(k))
+          if (matches.length > 0) {
+            unsure.push(lang)
+            matches.forEach(match => {
+              translationsNotUsed.delete(k + match.slice(match.indexOf('_')))
+            })
+          }
+        }
+
+        obj = obj[part]
+        if (!obj) {
+          break
+        }
       }
       if (typeof obj !== 'string') {
         missing.push(lang)
@@ -158,7 +182,7 @@ const importTranslationObjectFromESModule = async filePath => {
       }
     })
 
-    missingCount += printMissing(k, v, missing, longestKey)
+    missingCount += printMissing(k, v, missing, unsure, longestKey)
   })
 
   console.log(`\n${missingCount} translations missing${Reset}\n`)
@@ -166,7 +190,7 @@ const importTranslationObjectFromESModule = async filePath => {
   printUnused(translationsNotUsed, numberOfTranslations)
 })()
 
-const printMissing = (translationKey, referenceLocations, missingLangs, longestKey) => {
+const printMissing = (translationKey, referenceLocations, missingLangs, unsureLangs, longestKey) => {
   if (missingLangs.length > 0 && (!args.lang || missingLangs.some(l => args.lang.includes(l)))) {
     let msg = translationKey
     // add padding
@@ -175,7 +199,10 @@ const printMissing = (translationKey, referenceLocations, missingLangs, longestK
     }
 
     msg += ['fi', 'en', 'se']
-      .map(l => (missingLangs.includes(l) ? `${FgRed}${l}${Reset}` : `${FgGreen}${l}${Reset}`))
+      .map(l => missingLangs.includes(l) 
+        ? (unsureLangs.includes(l) ? `${Unsure}${l}${Reset}` : `${Missing}${l}${Reset}`)
+        : `${Found}${l}${Reset}`
+      )
       .join(', ')
 
     if (args.detailed) {
@@ -185,7 +212,7 @@ const printMissing = (translationKey, referenceLocations, missingLangs, longestK
     console.log(msg, Reset)
   }
 
-  return missingLangs.length
+  return missingLangs.length - unsureLangs.length
 }
 
 const printUnused = (translationsNotUsed, numberOfTranslations) => {
