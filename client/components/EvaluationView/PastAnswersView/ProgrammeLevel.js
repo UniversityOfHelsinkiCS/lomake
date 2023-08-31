@@ -83,7 +83,7 @@ const PastAnswersView = ({ programmeKey }) => {
   const questionsList = modifiedQuestions(questions, lang)
 
   useEffect(() => {
-    document.title = `${t('Katselmus')} - ${programmeKey}`
+    document.title = `${t('common:evaluation')} - ${programmeKey}`
     dispatch(getProgramme(programmeKey))
   }, [lang, programmeKey])
 

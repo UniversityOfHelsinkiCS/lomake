@@ -82,7 +82,7 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
 
   const facultyName = facultyProgrammes[0].primaryFaculty.name[lang]
   useEffect(() => {
-    document.title = `${t('Katselmus')} - ${programmeKey}`
+    document.title = `${t('common:evaluation')} - ${programmeKey}`
     dispatch(getProgramme(programmeKey))
   }, [lang, programmeKey])
 
