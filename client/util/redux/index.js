@@ -15,6 +15,7 @@ import deadlines from './deadlineReducer'
 import currentEditors from './currentEditorsReducer'
 import faculties from './facultyReducer'
 import summaries from './summaryReducer'
+import reformAnswers from './reformAnswerReducer'
 
 export default combineReducers({
   form,
@@ -32,4 +33,5 @@ export default combineReducers({
   currentEditors,
   faculties,
   summaries,
+  reformAnswers,
 })
