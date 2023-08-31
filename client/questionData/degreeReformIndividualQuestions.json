@@ -649,12 +649,12 @@
         "shortLabel": {
           "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta",
           "se": "Bedöm hur väl utbildningen fungerar i nuläget",
-          "en": ""
+          "en": "Evaluate the current functioning of the education"
         },
         "label": {
           "fi": "Arvioi koulutuksen tämänhetkistä toimivuutta.",
           "se": "Bedöm hur väl utbildningen fungerar i nuläget",
-          "en": ""
+          "en": "Evaluate the current functioning of the education"
         },
         "description": {
           "fi": "Yksi Iso Pyörä -koulutusuudistuksen keskeinen tavoite oli toteuttaa koulutusrakenteessa **aito kolmiportaisuus**, jossa liikkuvuus tutkintojen välillä ja sisällä sekä työelämän ja muiden yliopistojen ja korkeakoulujen välillä toimii sujuvasti.",
@@ -894,12 +894,12 @@
         "label": {
           "fi": "Kandiohjelma antaa riittävän perusosaamisen alan asiantuntijatehtäviin työelämässä",
           "se": "Kandidatprogrammet ger tillräckliga baskunskaper för att arbeta som expert inom området",
-          "en": ""
+          "en": "The bachelor programme provides sufficient basic skills in expert positions in working life"
         },
         "shortLabel": {
           "fi": "Kandiohjelma antaa riittävän perusosaamisen alan asiantuntijatehtäviin työelämässä",
           "se": "Kandidatprogrammet ger tillräckliga baskunskaper för att arbeta som expert inom området",
-          "en": ""
+          "en": "The bachelor programme provides sufficient basic skills in expert positions in working life"
         },
         "required": false,
         "relatedYearlyQuestions": []
