@@ -161,7 +161,8 @@ export default {
     oodikoneProg: 'View programme statistics in Oodikone',
     oodikoneFaculty: 'View faculty statistics in Oodikone',
     rapo: 'View doctoral programme statistics in Rapo',
-    toijo: 'TOIJO-evaluation coming 11.9.',
+    toijo: 'Assessment of the operating structure and management system (TOIJO) self-assessment report available on September 11',
+    langCenterRaport: "Language Centre's self-evaluation report coming on September 6",
     facultyInfo:
       'For this evaluation you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
     materialsFaculty:

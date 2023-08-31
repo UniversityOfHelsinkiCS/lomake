@@ -174,6 +174,8 @@ export default {
     partiallyAgree: 'Delvis av samma åsikt',
     stronglyAgree: 'Helt av samma åsikt',
     doNotKnow: 'Kan inte säga',
+    toijo: 'TOIJO självutvärderingsrapporten kommer 11.9.2023',
+    langCenterRaport: 'Språkcentrums självutvärderingsrapporten kommer 6.9.2023',
   },
 
   generic: {

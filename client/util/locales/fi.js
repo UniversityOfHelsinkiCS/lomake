@@ -164,7 +164,8 @@ export default {
     oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
-    toijo: 'TOIJO-arviointi tulossa 11.9.',
+    toijo: 'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti tulossa 11.9.2023',
+    langCenterRaport: 'Kielikeskuksen itsearviointiraportti tulossa 6.9.2023',
     facultyInfo:
       'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
     materialsFaculty:

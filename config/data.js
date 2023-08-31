@@ -66,7 +66,7 @@ const data = [
     name: {
       fi: 'Teologinen tiedekunta',
       en: 'Faculty of Theology',
-      se: 'Faculty of Theology',
+      se: 'Teologiska fakulteten',
     },
     programmes: [
       {
@@ -109,7 +109,7 @@ const data = [
     name: {
       fi: 'Oikeustieteellinen tiedekunta',
       en: 'Faculty of Law',
-      se: 'Faculty of Law',
+      se: 'Juridiska fakulteten',
     },
     programmes: [
       {
@@ -174,7 +174,7 @@ const data = [
     name: {
       fi: 'Lääketieteellinen tiedekunta',
       en: 'Faculty of Medicine',
-      se: 'Faculty of Medicine',
+      se: 'Medicinska fakulteten',
     },
     programmes: [
       {
@@ -316,7 +316,7 @@ const data = [
     name: {
       fi: 'Humanistinen tiedekunta',
       en: 'Faculty of Arts',
-      se: 'Faculty of Arts',
+      se: 'Humanistiska fakulteten',
     },
     programmes: [
       {
@@ -601,7 +601,7 @@ const data = [
     name: {
       fi: 'Matemaattis-luonnontieteellinen tiedekunta',
       en: 'Faculty of Science',
-      se: 'Faculty of Science',
+      se: 'Matematisk-naturvetenskapliga fakulteten',
     },
     programmes: [
       {
@@ -919,7 +919,7 @@ const data = [
     name: {
       fi: 'Farmasian tiedekunta',
       en: 'Faculty of Pharmacy',
-      se: 'Faculty of Pharmacy',
+      se: 'Farmaceutiska fakulteten',
     },
     programmes: [
       {
@@ -962,7 +962,7 @@ const data = [
     name: {
       fi: 'Bio- ja ympäristötieteellinen tiedekunta',
       en: 'Faculty of Biological and Environmental Sciences',
-      se: 'Faculty of Biological and Environmental Sciences',
+      se: 'Bio- och miljövetenskapliga fakulteten',
     },
     programmes: [
       {
@@ -1134,7 +1134,7 @@ const data = [
     name: {
       fi: 'Kasvatustieteellinen tiedekunta',
       en: 'Faculty of Educational Sciences',
-      se: 'Faculty of Educational Sciences',
+      se: 'Pedagogiska fakulteten',
     },
     programmes: [
       {
@@ -1199,7 +1199,7 @@ const data = [
     name: {
       fi: 'Valtiotieteellinen tiedekunta',
       en: 'Faculty of Social Sciences',
-      se: 'Faculty of Social Sciences',
+      se: 'Statsvetenskapliga fakulteten',
     },
     programmes: [
       {
@@ -1422,7 +1422,7 @@ const data = [
     name: {
       fi: 'Maatalous-metsätieteellinen tiedekunta',
       en: 'Faculty of Agriculture and Forestry',
-      se: 'Faculty of Agriculture and Forestry',
+      se: 'Agrikultur-forstvetenskapliga fakulteten',
     },
     programmes: [
       {
@@ -1575,7 +1575,7 @@ const data = [
     name: {
       fi: 'Eläinlääketieteellinen tiedekunta',
       en: 'Faculty of Veterinary Medicine',
-      se: 'Faculty of Veterinary Medicine',
+      se: 'Veterinärmedicinska fakulteten',
     },
     programmes: [
       {

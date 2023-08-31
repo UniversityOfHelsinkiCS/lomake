@@ -12,7 +12,7 @@ const byNameInLang = lang => (p1, p2) => {
 
 const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) => {
   const lang = useSelector(state => state.language)
-  const faculties = useSelector(state => state.faculties.data)
+  const faculties = useSelector(state => state.faculties.data).sort(byNameInLang(lang))
   const studyProgrammes = useSelector(state => state.studyProgrammes.data).sort(byNameInLang(lang))
 
   const { t } = useTranslation()
@@ -53,6 +53,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
         }))
       )
     }
+
     return options.concat(
       faculties.map(f => ({
         key: f.code,
