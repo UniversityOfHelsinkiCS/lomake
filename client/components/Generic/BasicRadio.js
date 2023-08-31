@@ -56,6 +56,7 @@ const BasicRadio = ({
                       </>
                     }
                     popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
+                    position="bottom center"
                     trigger={
                       <Form.Field
                         key={`basic-radio-${id}-${o.id}`}
