@@ -219,7 +219,6 @@ export default {
       university: 'Universitet',
       committee: 'Kommitté',
     },
-    loading: 'Laddar...',
   },
 
   overview: {

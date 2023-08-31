@@ -218,11 +218,6 @@ export default {
     statusHeader: 'Vuoden {{year}} vastaukset ovat avoinna muokattaviksi.',
     statusMessage: 'Voit vaihtaa vuoden otsikon alla näkyvästä valikosta. Viimeinen vastauspäivä: ',
 
-    ready:
-      'Vastaukset ovat merkattu valmiiksi, jolloin ne näkyvät muille koulutusohjelmille. Niitä voi vielä muokata lomakkeen sulkeutumiseen asti. Klikkaa tästä merkataksesi vastaukset keskeneräiseksi.',
-    notReady:
-      'Vastaukset ovat kesken, joten ne eivät näy koulutusohjelman ulkopuolelle. Klikkaa tästä merkataksesi vastaukset valmiiksi.',
-
     csvFileformwritten: 'Tilannekuvalomake_kirjalliset_vastaukset',
     csvFileformcolors: 'Tilannekuvalomake_liikennevalovärit',
     csvFileoverviewwritten: 'Tilannekuvalomake_kaikki_ohjelmat_kirjalliset_vastaukset',
@@ -235,7 +230,6 @@ export default {
       university: 'Yliopistotaso',
       committee: 'Arviointiryhmä',
     },
-    loading: 'Ladataan...',
   },
 
   overview: {
