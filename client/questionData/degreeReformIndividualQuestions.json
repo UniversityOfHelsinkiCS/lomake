@@ -36,8 +36,8 @@
         "radioOptions": {
           "fi": [
             { "label": "Tiedekunta", "id": "faculty" },
-            { "label": "YPA opetus ja opiskelupalvelut", "id": "ypa-teach" },
-            { "label": "YPA muu kuin opetus ja opiskelupalvelut", "id": "ypa-not-teach" },
+            { "label": "YPA opetus- ja opiskelupalvelut", "id": "ypa-teach" },
+            { "label": "YPA muu kuin opetus- ja opiskelupalvelut", "id": "ypa-not-teach" },
             { "label": "Muu", "id": "other", "placeholder": "Mikä" }
           ],
           "en": [
@@ -99,7 +99,7 @@
         "relatedYearlyQuestions": [],
         "radioOptions": {
           "fi": [
-            { "label": "Dekaani tai Varadekaani", "id": "dean" },
+            { "label": "Dekaani tai varadekaani", "id": "dean" },
             { "label": "Opetus- ja tutkimushenkilökunta", "id": "teaching_or_other_research" },
             { "label": "Hallinto- tai muu henkilökunta", "id": "admin_or_other_staff" },
             { "label": "Opiskelija", "id": "student" },
