@@ -7,7 +7,7 @@ DB_NAME=postgres
 # current_date=$(date +"%Y%m%d")
 LOMAKE_FILE_NAME="lomake.sql.gz"
 
-SERVER=toska-tmp.cs.helsinki.fi
+SERVER=toska.cs.helsinki.fi
 SERVER_PATH=/home/toska_user/most_recent_backup_store/
 MELKKI=melkki.cs.helsinki.fi
 BACKUP_PATH=${SERVER_PATH}${LOMAKE_FILE_NAME}
