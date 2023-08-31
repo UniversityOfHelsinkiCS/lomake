@@ -227,7 +227,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-4]`).should(
       'contain',
-      'Bachelor programmes structure and functionality'
+      'Stucture and functioning of bachelor’s programmes'
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
