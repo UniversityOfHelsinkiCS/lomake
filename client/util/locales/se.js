@@ -113,6 +113,8 @@ export default {
   },
 
   formView: {
+    facultyInfo:
+      'Denna översyn tar ett bredare grepp på situationen för <strong>fakulteten</strong> under de senaste tre åren.',
     canChange: 'Du kan redigera svaren efter att du har sparat',
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
     info1:
