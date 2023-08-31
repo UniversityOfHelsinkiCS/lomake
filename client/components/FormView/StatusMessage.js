@@ -13,7 +13,6 @@ const showMessageForOpenYear = (draftYear, writeAccess, t) => {
 
 const StatusMessage = ({ programme, form }) => {
   const { t } = useTranslation()
-  const lang = useSelector(state => state.language)
   const deadlines = useSelector(state => state.deadlines.nextDeadline)
   const formDeadline = deadlines ? deadlines.find(d => d.form === form) : null
   const draftYear = useSelector(state => state.deadlines.draftYear)
@@ -23,7 +22,7 @@ const StatusMessage = ({ programme, form }) => {
   const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
-  const locale = lang !== 'se' ? lang : 'sv'
+  const locale = 'fi'
   /*
   let checking = ''
   let lastSentInfo = []

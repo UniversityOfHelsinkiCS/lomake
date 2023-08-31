@@ -172,7 +172,7 @@ export default {
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
-    fillAllRequiredFields: 'Täytä kaikki pakolliset kentät',
+    fillAllRequiredFields: 'Vähintään kolme ensimmäistä kysymystä tulee olla vastattu, mikäli haluaa tallentaa',
     formReady: 'Vastaukset on tallennettu',
     sendNewForm: 'Täytä uusi lomake',
     modifyForm: 'Muokkaa vastauksia',
