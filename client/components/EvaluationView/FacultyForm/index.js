@@ -4,7 +4,6 @@ import { Redirect, useHistory } from 'react-router'
 import { Button, Icon, Loader } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
-import { isAdmin } from '@root/config/common'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getFacultyProgrammeAnswersAction } from 'Utilities/redux/summaryReducer'
@@ -20,9 +19,7 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-// TO FIX now only admin can write
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user }) => {
-  if (!isAdmin(user)) return true
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
