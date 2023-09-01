@@ -24,7 +24,7 @@ describe('Evaluation forms tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
-    cy.contains('Evaluation 2023')
+    cy.contains('Review 2023')
   })
 
   it('User can navigate to evaluation faculty level form', () => {
@@ -33,7 +33,7 @@ describe('Evaluation forms tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testFacultyCode}]`).click()
 
     cy.contains(testFacultyName)
-    cy.contains('Evaluation 2023')
+    cy.contains('Review 2023')
   })
 
   it("Programme level user can see summary of previous years' answers", () => {
