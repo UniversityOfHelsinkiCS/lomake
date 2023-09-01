@@ -83,8 +83,6 @@ const DegreeReformFormView = ({ room }) => {
     user,
   ])
 
-  if (!isAdmin(user)) return <Redirect to="/" />
-
   if (!room) return <Redirect to="/" />
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />

@@ -6,7 +6,7 @@ export default () => {
   const dispatch = useDispatch()
   const answers = useSelector(state => state.reformAnswers)
 
-  console.log(answers)
+  // console.log(answers)
 
   useEffect(() => {
     dispatch(getReformAnswers())
