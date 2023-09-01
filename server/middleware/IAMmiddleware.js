@@ -30,11 +30,7 @@ const IAMmiddleware = async (req, _, next) => {
 
     checkTemporaryAccesses(access, user.tempAccess)
 
-    if (user.id === 32) {
-      user.specialGroup = {}
-    } else {
-      user.specialGroup = specialGroup
-    }
+    user.specialGroup = specialGroup
 
     user.access = access
     user.iamGroups = iamGroups
