@@ -101,7 +101,7 @@ const DegreeReformFormView = ({ room }) => {
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('degree-reform')} 2015-2017
+            {t('degree-reform')}
           </h3>
           <StatusMessage programme={programme} form={form} />
           <SaveIndicator />
