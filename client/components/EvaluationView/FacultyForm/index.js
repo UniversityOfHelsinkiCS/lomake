@@ -122,9 +122,6 @@ const FacultyFormView = ({ room, formString }) => {
     return result
   }, [room, user, facultyProgrammeData])
 
-  // TO FIX To be removed
-  if (!isAdmin(user)) return <Redirect to="/" />
-
   if (!room || !form) return <Redirect to="/" />
 
   if (!faculty) return 'Error: Invalid url.'

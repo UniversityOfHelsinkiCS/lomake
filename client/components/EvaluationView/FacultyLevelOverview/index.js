@@ -31,8 +31,6 @@ export default () => {
     document.title = `${t('evaluation')}`
   }, [lang])
 
-  if (!isAdmin(currentUser)) return <Redirect to="/" />
-
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)
