@@ -113,15 +113,16 @@ const isStagingSuperAdminUid = uid => {
 }
 
 const isSuperAdmin = user => {
+  if (user.uid === 'mluukkai') return false // Test
   return (
     hasSpecialGroup(user, 'superAdmin') ||
     isStagingSuperAdminUid(user.uid) ||
-    (!inProduction && isDevSuperAdminUid(user.uid)) ||
-    user.uid === 'mluukkai'
+    (!inProduction && isDevSuperAdminUid(user.uid))
   )
 }
 
 const isAdmin = user => {
+  if (user.uid === 'mluukkai') return false // Test
   return hasSpecialGroup(user, 'admin') || hasSpecialGroup(user, 'superAdmin')
 }
 
