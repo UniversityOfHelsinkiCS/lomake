@@ -71,8 +71,6 @@ export default {
     showDataByProgramme: 'Näytä tiedot koulutusohjelmittain',
   },
 
-  // other namespaces, use requires prefix, eg. t('aboutPage:title')
-
   aboutPage: {
     title: 'Tietoa lomakkeesta',
     whatIsIt: 'Mikä tilannekuvalomake on?',
