@@ -13,6 +13,7 @@ import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { setLanguage } from 'Utilities/redux/languageReducer'
+
 import Footer from './Footer/Footer'
 
 const languageFromUrl = () => {

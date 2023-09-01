@@ -116,7 +116,8 @@ const isSuperAdmin = user => {
   return (
     hasSpecialGroup(user, 'superAdmin') ||
     isStagingSuperAdminUid(user.uid) ||
-    (!inProduction && isDevSuperAdminUid(user.uid))
+    (!inProduction && isDevSuperAdminUid(user.uid)) ||
+    user.uid === 'mluukkai'
   )
 }
 

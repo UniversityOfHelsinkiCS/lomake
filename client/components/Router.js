@@ -19,6 +19,7 @@ import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/Fa
 import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
 
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
+import ReformAnswers from './ReformAnswers/index'
 
 export default () => (
   <div className="content">
@@ -64,6 +65,7 @@ export default () => (
         path="/evaluation-faculty/programme-evaluation-summary/:faculty"
         render={props => <ViewEvaluationAnswersForFaculty programmeKey={props.match.params.faculty} />}
       />
+      <Route exact path="/reform-answers" component={ReformAnswers} />
     </Switch>
   </div>
 )

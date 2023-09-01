@@ -5,6 +5,7 @@ const studyprogrammes = require('@controllers/studyprogrammesController')
 const deadlines = require('@controllers/deadlineController')
 const cypress = require('@controllers/cypressController')
 const faculties = require('@controllers/facultyController')
+const degreeReform = require('@controllers/degreeReformController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -15,6 +16,7 @@ const {
 
 const router = Router()
 
+router.get('/reform/temp', checkAdmin, degreeReform.getAllTemp)
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
