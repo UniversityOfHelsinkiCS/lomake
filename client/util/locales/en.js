@@ -53,7 +53,7 @@ export default {
     delete: 'Delete',
 
     yearlyAssessment: 'Annual followup',
-    evaluation: 'Evaluation',
+    evaluation: 'Review',
     'degree-reform': 'Current state of education',
     'degree-reform-group': 'Current state of education - programmes',
     'degree-reform-individual': 'Current state of education - individual',
@@ -147,12 +147,12 @@ export default {
     removeDevelopmentArea: 'Delete last',
     allYearlyAnswerYears: 'All yearly report years',
     evaluationInfo1:
-      "For this evaluation, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
+      "For this review, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
-      "Discuss the following themes among the studyprogramme's steering group. Please note, that <strong>the annual followup for year 2023 should be done before this evaluation</strong>.",
+      "Discuss the following themes among the studyprogramme's steering group. Please note, that <strong>the annual followup for year 2023 should be done before this review</strong>.",
     selectApplicable: 'Select all applicable options',
     addMissing: ' Add any missing options - You may add several',
-    progSummaryTitle: 'Annual followup answers related to this theme from the evaluation period',
+    progSummaryTitle: 'Annual followup answers related to this theme from the review period',
     facultySummaryTitle: "The faculty's programmes' steering groups' answers to this theme:",
     materials: 'Supporting materials',
     materialsProg:
@@ -165,11 +165,11 @@ export default {
       'Assessment of the operating structure and management system (TOIJO) self-assessment report available on September 11',
     langCenterRaport: "Language Centre's self-evaluation report coming on September 6",
     facultyInfo:
-      'For this evaluation you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
+      'For this review you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
     materialsFaculty:
       'Most questions in this form are accompanied by a summary of the answers given to the same theme by the studyprogramme steering groups of the faculty. <br/><br/> A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of your faculty, and about the progress of their studies. Link shown below.',
     yearlyAnswers: 'Annual followup answers',
-    evaluationFacultyAnswers: 'Evaluation in studyprogrammes answers',
+    evaluationFacultyAnswers: 'Review in studyprogrammes answers',
     yearlyFacultyAnswers: 'Annual followup answers in studyprogrammes',
     fillAllRequiredFields: 'At least the first three questions must be answered if you want to save',
     showAllProgrammes: 'Show all degree programmes',
