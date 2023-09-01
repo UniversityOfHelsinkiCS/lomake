@@ -52,7 +52,7 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
 
-    yearlyAssessment: 'Yearly assessment',
+    yearlyAssessment: 'Annual followup',
     evaluation: 'Evaluation',
     'degree-reform': 'Current state of education',
     'degree-reform-group': 'Current state of education - programmes',
