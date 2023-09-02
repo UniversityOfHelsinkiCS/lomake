@@ -5,6 +5,7 @@ const logger = require('@util/logger')
 const getAllTemp = async (_, res) => {
   try {
     const data = await db.tempAnswer.findAll({
+      attributes: ['id', 'data', 'year', 'ready'],
       where: {
         form: 3,
         programme: {
