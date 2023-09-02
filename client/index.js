@@ -43,6 +43,12 @@ if (process.env.NODE_ENV === 'development') {
   if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
     setHeaders(newUser)
   }
+
+  /* eslint-disable no-console no-restricted-globals */
+  new EventSource('http://localhost:8000/esbuild').addEventListener('change', () => {
+    location.reload()
+    console.log('Reloaded due to changes')
+  })
 }
 
 refresh()
