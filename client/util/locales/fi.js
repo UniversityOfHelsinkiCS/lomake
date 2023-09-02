@@ -184,6 +184,8 @@ export default {
     partiallyAgree: 'Osittain samaa mieltä',
     stronglyAgree: 'Täysin samaa mieltä',
     doNotKnow: 'En osaa sanoa',
+    noAnswer: 'Ei vastausta',
+    average: 'Keskiarvo',
   },
 
   generic: {

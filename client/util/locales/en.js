@@ -185,6 +185,8 @@ export default {
     partiallyAgree: 'Partially agree',
     stronglyAgree: 'Strongly agree',
     doNotKnow: "I don't know",
+    noAnswer: 'No answer',
+    average: 'Average',
   },
 
   generic: {
