@@ -69,11 +69,6 @@ const Question = ({ question, answers }) => {
               <Table.Cell key={i}>{values[keys[i]]}</Table.Cell>
             ))}
           </Table.Row>
-          <Table.Row>
-            {keys.map(k => (
-              <Table.Cell key={k}>{values[k]}</Table.Cell>
-            ))}
-          </Table.Row>
         </Table.Body>
       </Table>
     </div>

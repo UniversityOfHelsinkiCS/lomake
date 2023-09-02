@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 
@@ -6,6 +7,9 @@ const getAllTemp = async (_, res) => {
     const data = await db.tempAnswer.findAll({
       where: {
         form: 3,
+        programme: {
+          [Op.not]: '',
+        },
       },
     })
     return res.send(data)
