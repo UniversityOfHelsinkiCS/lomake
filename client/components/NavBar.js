@@ -169,9 +169,6 @@ export default () => {
       </Menu.Menu>
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
-        <Menu.Item style={{ borderRight: '1px solid rgba(34,36,38,.15)' }} as={Link} to="/about">
-          {t('about')}
-        </Menu.Item>
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
           {`${t('logOut')} (${user.uid})`}
         </Menu.Item>
