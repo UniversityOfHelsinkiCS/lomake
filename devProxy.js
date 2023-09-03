@@ -87,7 +87,7 @@ const createProxy = (host, port) => {
             res.writeHead(proxyRes.statusCode, proxyRes.headers)
             proxyRes.pipe(res, { end: true })
           } catch (e) {
-            console.log(e.message)
+            // console.log(e.message)
             res.end()
           }
         }
