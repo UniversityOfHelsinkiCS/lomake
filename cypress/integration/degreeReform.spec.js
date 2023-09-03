@@ -65,6 +65,94 @@ describe('Degree reform form tests', () => {
     cy.visit('/individual')
   })
 
+  it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
+    cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
+    cy.get('[data-cy=form-section-II]').contains(
+      'Genuine three-tier structure and the principles of the Bologna Process'
+    )
+    cy.get('[data-cy=form-section-III]').contains('Structure and functioning of bachelor’s programmes')
+    cy.get('[data-cy=form-section-VII]').contains('Management and leadership of degree programmes')
+    cy.get('[data-cy=form-section-VIII]').contains('Joint degree programmes between faculties')
+    cy.get('[data-cy=form-section-IX]').contains('Other comments')
+    // Check that no other programmes questions show:
+    cy.get('[data-cy=form-section-IV]').should('not.exist') // master
+    cy.get('[data-cy=form-section-V]').should('not.exist') // master int
+    cy.get('[data-cy=form-section-VI]').should('not.exist') // doctoral
+  })
+
+  it('Degree Reform - Programme - Master - Sections are shown', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
+    cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
+    cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
+    cy.get('[data-cy=form-section-II]').contains(
+      'Genuine three-tier structure and the principles of the Bologna Process'
+    )
+    cy.get('[data-cy=form-section-IV]').contains('Structure and functioning of master’s programmes')
+    cy.get('[data-cy=form-section-V]').contains('Functioning of international master’s programmes')
+    cy.get('[data-cy=form-section-VII]').contains('Management and leadership of degree programmes')
+    cy.get('[data-cy=form-section-VIII]').contains('Joint degree programmes between faculties')
+    cy.get('[data-cy=form-section-IX]').contains('Other comments')
+    // Check that no other programmes questions show:
+    cy.get('[data-cy=form-section-III]').should('not.exist') // bachelor
+    cy.get('[data-cy=form-section-VI]').should('not.exist') // doctoral
+  })
+
+  it('Degree Reform - Programme - Doctoral - Sections are shown', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-T923103]`).click()
+    cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
+    cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
+    cy.get('[data-cy=form-section-II]').contains(
+      'Genuine three-tier structure and the principles of the Bologna Process'
+    )
+    cy.get('[data-cy=form-section-VI]').contains('Structure and functioning of doctoral programmes')
+    cy.get('[data-cy=form-section-VII]').contains('Management and leadership of degree programmes')
+    cy.get('[data-cy=form-section-VIII]').contains('Joint degree programmes between faculties')
+    cy.get('[data-cy=form-section-IX]').contains('Other comments')
+    // Check that no other programmes questions show:
+    cy.get('[data-cy=form-section-III]').should('not.exist') // bachelor
+    cy.get('[data-cy=form-section-IV]').should('not.exist') // master
+    cy.get('[data-cy=form-section-V]').should('not.exist') // master int
+  })
+
+  it('Degree Reform - Programme - Bachelor - Sidebar works', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-4]`).children().should('have.length', 5)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
+  })
+
+  it('Degree Reform - Programme - Master - Sidebar works', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-5]`).children().should('have.length', 5)
+    cy.get(`[id=question-list-6]`).children().should('have.length', 6)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
+  })
+
+  it('Degree Reform - Programme - Doctoral - Sidebar works', () => {
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-T923103]`).click()
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-7]`).children().should('have.length', 5)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
+  })
+
   // programmes : click, reload, check data persists
 
   // FIX THIS TEST
@@ -227,7 +315,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-4]`).should(
       'contain',
-      'Stucture and functioning of bachelor’s programmes'
+      'Structure and functioning of bachelor’s programmes'
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
@@ -284,6 +372,17 @@ describe('Degree reform form tests', () => {
     cy.get(`[data-cy=navigation-sidebar-section-9]`).should('contain', 'Joint degree programmes between faculties')
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 11)
+    // Check that each section has correct amount of questions
+    cy.get(`[id=question-list-0]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-4]`).children().should('have.length', 6)
+    cy.get(`[id=question-list-5]`).children().should('have.length', 6)
+    cy.get(`[id=question-list-6]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-7]`).children().should('have.length', 6)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 8)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 6)
   })
 
   it('Sending individual form works correctly', () => {
