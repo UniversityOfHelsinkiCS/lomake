@@ -116,7 +116,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
       {questionData.map((section, index) => {
         if (form !== 2 && formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id))
           return null
-        if (form !== 2 && programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
+        if (form === 2 && programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
 
         const parts = form !== 2 ? section.parts : section.parts.filter(p => !p.notInProgrammeView)
 

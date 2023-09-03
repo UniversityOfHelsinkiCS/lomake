@@ -128,7 +128,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                     {title}
                   </Link>
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div id={`question-list-${section.id}`} style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {section.parts
                     .filter(part => questionTypesToShow.includes(part.type))
                     .map(part => {

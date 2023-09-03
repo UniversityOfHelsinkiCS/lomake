@@ -136,8 +136,14 @@
               { "label": "Other", "id": "other" }
             ],
             "se": [
-              { "label": "Ledare för ett utbildningsprogram eller medlem av ett programs ledningsgrupp", "id": "programme_lead" },
-              { "label": "ledare för en vetenskapsområdesenhet eller avdelning, eller motsvarande befattning", "id": "science_or_research_lead" },
+              {
+                "label": "Ledare för ett utbildningsprogram eller medlem av ett programs ledningsgrupp",
+                "id": "programme_lead"
+              },
+              {
+                "label": "ledare för en vetenskapsområdesenhet eller avdelning, eller motsvarande befattning",
+                "id": "science_or_research_lead"
+              },
               { "label": "Andra", "id": "other" }
             ]
           }
@@ -770,7 +776,7 @@
     "title": {
       "fi": "Kandiohjelmien rakenne ja toimivuus",
       "se": "Kandidatprogrammens srtuktur och ändamålsenlighet",
-      "en": "Stucture and functioning of bachelor’s programmes"
+      "en": "Structure and functioning of bachelor’s programmes"
     },
     "id": 4,
     "parts": [
