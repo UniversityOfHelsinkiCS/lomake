@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from 'Utilities/redux/formReducer'
 import { colors, getForm } from 'Utilities/common'
 import BasicRadio from './BasicRadio'
 import './Generic.scss'
@@ -13,7 +13,14 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
-  const choose = (field, value) => dispatch(updateFormField(field, value, form))
+  const choose = async (field, value) => {
+    if (form === 3) {
+      dispatch(updateFormFieldExp(field, value, form))
+      dispatch(postIndividualFormPartialAnswer({ field, value }))
+    } else {
+      dispatch(updateFormField(field, value, form))
+    }
+  }
 
   const handleClick = label => {
     setState({ value: label })

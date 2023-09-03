@@ -39,8 +39,11 @@ const socketMiddleware = () => {
 
         socket = connect()
         // websocket handlers
-        socket.on('new_form_data', updateForm(store))
-        socket.on('update_editors', updateEditors(store))
+        if (!window.location.href.endsWith('/individual')) {
+          socket.on('new_form_data', updateForm(store))
+          socket.on('update_editors', updateEditors(store))
+        }
+
         break
       case 'WS_LEAVE_ROOM':
         if (!socket) socket = connect() // This really only happens when developing.

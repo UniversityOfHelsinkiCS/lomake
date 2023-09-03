@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField, getLock } from 'Utilities/redux/formReducer'
+import {
+  updateFormField,
+  getLock,
+  updateFormFieldExp,
+  postIndividualFormPartialAnswer,
+} from 'Utilities/redux/formReducer'
 import { Loader } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
@@ -48,6 +53,8 @@ const Textarea = ({
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
 
+  const formData = useSelector(({ form }) => form.data)
+
   const MAX_LENGTH = maxLength || 1100
 
   // check if current user is the editor
@@ -59,7 +66,8 @@ const Textarea = ({
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
   useEffect(() => {
-    const gotTheLock = currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid
+    const gotTheLock =
+      form === 3 || (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
 
     setHasLock(gotTheLock)
     if (gettingLock && currentEditors[fieldName]) {
@@ -69,11 +77,20 @@ const Textarea = ({
   }, [currentEditors])
 
   const editorStateFromRedux = () => {
-    const rawData = markdownToDraft(dataFromRedux)
+    const initialContent = dataFromRedux
+    const rawData = markdownToDraft(initialContent)
     const contentState = convertFromRaw(rawData)
     return EditorState.createWithContent(contentState)
   }
+
   const [editorState, setEditorState] = useState(editorStateFromRedux())
+
+  useEffect(() => {
+    // due to async data load, we have to reset the field when the possible data arrives
+    if (form === 3 && Object.keys(formData).length > 0) {
+      setEditorState(editorStateFromRedux())
+    }
+  }, [Object.keys(formData).length])
 
   useEffect(() => {
     if (!hasLock) {
@@ -86,13 +103,19 @@ const Textarea = ({
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
-    dispatch(updateFormField(fieldName, markdownStr, form))
+    // prevent a too early dispatch
+    if (form === 3 && Object.keys(formData).length > 0) {
+      dispatch(updateFormFieldExp(fieldName, markdownStr, form))
+      dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+    } else {
+      dispatch(updateFormField(fieldName, markdownStr, form))
+    }
   }
 
   const { length } = editorState.getCurrentContent().getPlainText()
 
   const askForLock = () => {
-    if (!hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
+    if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
       dispatch(getLock(fieldName))
     }

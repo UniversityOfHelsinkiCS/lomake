@@ -11,14 +11,19 @@ export default function SaveIndicator() {
   const [saveError, setSaveError] = useState(false)
   const [timeoutId, setTimeoutId] = useState(undefined)
 
+  const isIndividualForm = window.location.href.endsWith('/individual')
+
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
   const lastSaveAttempt = useSelector(state => state.form.lastSaveAttempt)
+
+  const formError = useSelector(state => state.form.error)
 
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const dispatch = useDispatch()
 
   const errorHandler = () => {
+    if (isIndividualForm) return
     if (viewOnly) return
     setSaveError(true)
     setTimeoutId(undefined)
@@ -26,6 +31,13 @@ export default function SaveIndicator() {
   }
 
   useEffect(() => {
+    if (formError) {
+      setSaveError(true)
+    }
+  }, [formError])
+
+  useEffect(() => {
+    if (isIndividualForm) return undefined
     setSaving(true)
     if (timeoutId || viewOnly) return undefined
 
@@ -40,7 +52,7 @@ export default function SaveIndicator() {
   }, [lastSaveAttempt, viewOnly])
 
   useEffect(() => {
-    if (saving) {
+    if (!isIndividualForm && saving) {
       setSaving(false)
       clearTimeout(timeoutId)
       setTimeoutId(undefined)

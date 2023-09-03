@@ -57,7 +57,10 @@ export default () => {
 
   useEffect(() => {
     dispatch(loginAction())
-    dispatch(wsConnect())
+    if (!window.location.href.endsWith('/individual')) {
+      dispatch(wsConnect())
+    }
+
     initShibbolethPinger(60000, null, true) // Errors are handled in lomake
   }, [])
 

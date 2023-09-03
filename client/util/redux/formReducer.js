@@ -10,6 +10,13 @@ export const updateFormField = (field, value, form) => ({
   form,
 })
 
+export const updateFormFieldExp = (field, value, form) => ({
+  type: 'UPDATE_FORM_FIELD_EXP',
+  field,
+  value,
+  form,
+})
+
 export const getLock = field => ({
   type: 'GET_LOCK',
   field,
@@ -43,6 +50,12 @@ export const postIndividualFormAnswer = data => {
   return callBuilder(route, prefix, 'POST', { data })
 }
 
+export const postIndividualFormPartialAnswer = data => {
+  const route = '/answers/degreeReform/individualAnswer/partial'
+  const prefix = 'POST_USER_PARTIAL_ANSWER'
+  return callBuilder(route, prefix, 'POST', { data })
+}
+
 export const getAllIndividualAnswersForUser = () => {
   const route = '/answers/degreeReform/getAllAnswersForUser'
   const prefix = 'GET_ALL_INDIVIDUAL_ANSWERS_FOR_USER'
@@ -57,6 +70,7 @@ export const setAnswerLevels = answerLevels => ({
 export const clearFormState = () => ({
   type: 'CLEAR_FORM_STATE',
 })
+
 export const updateAnswersReady = ({ room, year, form, ready }) => {
   const route = `/answers/${form}/${room}/${year}/updateAnswersReady`
   const prefix = 'UPDATE_ANSWERS_READY'
@@ -84,6 +98,16 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_FORM_FIELD':
+      return {
+        ...state,
+        lastSaveAttempt: new Date(),
+        data: {
+          ...state.data,
+          [action.field]: action.value,
+        },
+        form: action.form,
+      }
+    case 'UPDATE_FORM_FIELD_EXP':
       return {
         ...state,
         lastSaveAttempt: new Date(),
@@ -169,6 +193,19 @@ export default (state = initialState, action) => {
         ...initialState,
         pending: false,
         error: false,
+      }
+    }
+    case 'POST_USER_PARTIAL_ANSWER_FAILURE': {
+      return {
+        ...state,
+        pending: state.pending,
+        error: true,
+      }
+    }
+    case 'POST_USER_PARTIAL_ANSWER_SUCCESS': {
+      return {
+        ...state,
+        lastSaveSuccess: new Date(),
       }
     }
     case 'UPDATE_ANSWERS_READY_SUCCESS': {

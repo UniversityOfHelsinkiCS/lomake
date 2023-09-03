@@ -7,7 +7,6 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
 
-import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import {
   setViewOnly,
   getAllIndividualAnswersForUser,
@@ -52,11 +51,7 @@ const DegreeReformIndividual = () => {
     dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
       dispatch(setViewOnly(true))
-      if (currentRoom) {
-        dispatch(wsLeaveRoom(uid))
-      }
     } else {
-      dispatch(wsJoinRoom(uid, formNumber))
       dispatch(setViewOnly(false))
     }
   }, [year, draftYear, user, formDeadline, currentRoom])
