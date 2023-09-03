@@ -36,7 +36,8 @@ const createProxy = (host, port) => {
             console.log(`Proxyreq got the following error: ${e.message}`)
           })
 
-          return req.pipe(proxyReq, { end: true })
+          req.pipe(proxyReq, { end: true })
+          return
         }
 
         const options = {
