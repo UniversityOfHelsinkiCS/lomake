@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Divider, Radio, Form, Input } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from 'Utilities/redux/formReducer'
 import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import useDebounce from 'Utilities/useDebounce'
@@ -29,7 +29,14 @@ const AdvancedRadio = ({
   const form = getForm(formType)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
-  const choose = (name, id) => dispatch(updateFormField(name, id, form))
+  const choose = (name, id) => {
+    if (form === 3) {
+      dispatch(updateFormFieldExp(name, id, form))
+      dispatch(postIndividualFormPartialAnswer({ field: name, value: id }))
+    } else {
+      dispatch(updateFormField(name, id, form))
+    }
+  }
   const debouncedFilter = useDebounce(state, 200)
 
   const saveState = () => {

@@ -91,7 +91,7 @@ const StatusMessage = ({ programme, form }) => {
         data-cy="saving-answers-notice"
         icon="info"
         header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
-        content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}.`}
+        content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}`}
       />
       {/* form === 3 && formData.data && <LastFormSentMessage /> Deprecated since sending forms is not a thing */}
     </>

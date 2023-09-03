@@ -108,6 +108,17 @@ const getIndividualFormAnswerForUser = async (req, res) => {
         },
         order: [['updated_at', 'DESC']],
       })
+
+      if (!data) {
+        const answer = {
+          programme: uid,
+          data: {},
+          year: new Date().getFullYear(),
+          form: 3,
+          submittedBy: uid,
+        }
+        data = await db.tempAnswer.create(answer)
+      }
     } else {
       data = await db.answer.findOne({
         where: {
@@ -466,6 +477,35 @@ const postIndividualFormAnswer = async (req, res) => {
   }
 }
 
+const postIndividualFormPartialAnswer = async (req, res) => {
+  const { data } = req.body
+  const { uid } = req.user
+
+  let answers = await db.tempAnswer.findOne({
+    where: {
+      programme: uid,
+      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
+    },
+  })
+
+  const previousData = answers.data
+
+  const updatedData = { ...previousData, [data.field]: data.value }
+
+  answers.data = updatedData
+
+  await answers.save()
+
+  answers = await db.tempAnswer.findOne({
+    where: {
+      programme: uid,
+      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
+    },
+  })
+
+  return res.status(200).json(answers)
+}
+
 module.exports = {
   getAll,
   getPreviousYear,
@@ -474,6 +514,7 @@ module.exports = {
   getAllUserHasAccessTo,
   getSingleProgrammesAnswers,
   postIndividualFormAnswer,
+  postIndividualFormPartialAnswer,
   getAllIndividualAnswersForUser,
   getFacultySummaryData,
   getProgrammeSummaryData,

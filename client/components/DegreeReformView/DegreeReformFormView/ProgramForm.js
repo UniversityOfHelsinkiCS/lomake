@@ -110,11 +110,16 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
       </div>
     )
   }
+
   return (
     <div style={{ marginTop: -50 }}>
       {questionData.map((section, index) => {
-        if (formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id)) return null
-        if (programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
+        if (form !== 2 && formData.answerLevels.length > 0 && formData.answerLevels.find(f => f === section.id))
+          return null
+        if (form !== 2 && programAnswerLevels.length > 0 && programAnswerLevels.find(f => f === section.id)) return null
+
+        const parts = form !== 2 ? section.parts : section.parts.filter(p => !p.notInProgrammeView)
+
         return (
           <Section
             id={section.id}
@@ -124,7 +129,7 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
             programmeKey={programmeKey}
             formType={formType}
           >
-            {section.parts.map(partMap)}
+            {parts.map(partMap)}
           </Section>
         )
       })}

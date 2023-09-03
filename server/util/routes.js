@@ -31,6 +31,7 @@ router.get('/answers/oldSummaryYearly/faculty/:code/:lang', answers.getOldFacult
 router.get('/answers/currentSummaryEvaluation/faculty/:code/:lang', answers.getEvaluationSummaryDataForFaculty)
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers/degreeReform/individualAnswer', answers.postIndividualFormAnswer)
+router.post('/answers/degreeReform/individualAnswer/partial', answers.postIndividualFormPartialAnswer)
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)

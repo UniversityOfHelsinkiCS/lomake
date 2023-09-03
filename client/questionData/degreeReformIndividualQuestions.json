@@ -811,6 +811,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
@@ -1007,6 +1008,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
@@ -1203,6 +1205,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
@@ -1423,6 +1426,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
@@ -1624,6 +1628,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
@@ -1858,6 +1863,7 @@
           "se": "Min bedömning baserar sig på",
           "en": "My assessment is based"
         },
+        "notInProgrammeView": true,
         "description": {
           "fi": "",
           "se": "",
