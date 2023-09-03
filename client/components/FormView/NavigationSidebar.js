@@ -132,9 +132,13 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                   {section.parts
                     .filter(part => questionTypesToShow.includes(part.type))
                     .map(part => {
+                      if (formType === 'degree-reform') {
+                        if (part.notInProgrammeView !== undefined || part.notInProgrammeView === true) {
+                          return null
+                        }
+                      }
                       partNumber++
                       const { id, type, required, no_color } = part
-
                       const idsToCheck = []
                       if (
                         type === 'TEXTAREA' ||
