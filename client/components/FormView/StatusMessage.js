@@ -19,7 +19,7 @@ const StatusMessage = ({ programme, form }) => {
   const lastSaved = useSelector(state => state.form.lastSaveSuccess)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const user = useSelector(state => state.currentUser.data)
-  const writeAccess = (user.access[programme.key] && user.access[programme.key].write) || isAdmin(user)
+  const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = 'fi'
