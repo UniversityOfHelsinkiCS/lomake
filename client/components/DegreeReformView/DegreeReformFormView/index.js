@@ -52,18 +52,17 @@ const DegreeReformFormView = ({ room }) => {
   useEffect(() => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    if (
-      getFormViewRights({
-        accessToTempAnswers,
-        programme,
-        writeAccess,
-        viewingOldAnswers,
-        draftYear,
-        year,
-        formDeadline,
-        form,
-      })
-    ) {
+    const hasRights = getFormViewRights({
+      accessToTempAnswers,
+      programme,
+      writeAccess,
+      viewingOldAnswers,
+      draftYear,
+      year,
+      formDeadline,
+      form,
+    })
+    if (hasRights) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {

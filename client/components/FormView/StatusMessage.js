@@ -19,19 +19,11 @@ const StatusMessage = ({ programme, form }) => {
   const lastSaved = useSelector(state => state.form.lastSaveSuccess)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const user = useSelector(state => state.currentUser.data)
-  const writeAccess = (user.access[programme] && user.access[programme].write) || isAdmin(user)
+  const writeAccess = (user.access[programme.key] && user.access[programme.key].write) || isAdmin(user)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = 'fi'
-  /*
-  let checking = ''
-  let lastSentInfo = []
-  if (form === 3 && formData && formData.updatedAt) {
-    const utcTime = new Date(formData.updatedAt)
-    checking = utcTime.toLocaleString(locale)
-    lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
-  }
-  */
+
   if (form !== 3 && !writeAccess) {
     return (
       <Message
