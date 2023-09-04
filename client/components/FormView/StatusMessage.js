@@ -23,15 +23,7 @@ const StatusMessage = ({ programme, form }) => {
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
   const locale = 'fi'
-  /*
-  let checking = ''
-  let lastSentInfo = []
-  if (form === 3 && formData && formData.updatedAt) {
-    const utcTime = new Date(formData.updatedAt)
-    checking = utcTime.toLocaleString(locale)
-    lastSentInfo = translateDegreeReformBackground({ primaryRole: formData.data.primary_role, lang })
-  }
-  */
+
   if (form !== 3 && !writeAccess) {
     return (
       <Message
