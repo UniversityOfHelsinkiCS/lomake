@@ -94,7 +94,8 @@
   "nodemonConfig": {
     "ignore": [
       "cypress/*",
-      "dev/*"
+      "dev/*",
+      "client/*"
     ]
   },
   "_moduleAliases": {
