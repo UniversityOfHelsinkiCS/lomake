@@ -9,7 +9,7 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
     <>
       {studyLevels.map(level => {
         return (
-          <>
+          <React.Fragment key={level}>
             {level !== 'bachelor' ? (
               <>
                 {' '}
@@ -66,7 +66,7 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
                 </div>
               )
             })}
-          </>
+          </React.Fragment>
         )
       })}
     </>

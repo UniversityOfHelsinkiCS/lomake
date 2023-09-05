@@ -90,15 +90,6 @@ export default (state = { data: undefined }, action) => {
         error: true,
       }
 
-    case 'CLAIM_TOKEN_SUCCESS':
-      return {
-        ...state,
-        data: {
-          ...action.response,
-        },
-        pending: false,
-        error: false,
-      }
     default:
       return state
   }
