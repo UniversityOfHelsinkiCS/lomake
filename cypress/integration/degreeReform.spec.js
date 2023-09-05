@@ -67,36 +67,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-0]')
   })
 
-  it('Degree Reform - Programme - Status Message, open', () => {
-    cy.login(cypressSuperAdmin)
-    cy.visit('/')
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
-    // Create new deadline
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat').wait(400)
-    cy.get('[data-cy=form-2-deadline]').contains('14.')
-
-    cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get(`[data-cy="saving-answers-notice"]`).contains(
-      'Answers are saved automatically. Final day for answering the form:'
-    )
-  })
-
-  it('Degree Reform - Programme - Status Message, closed', () => {
-    cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
-  })
-
   it('Degree Reform - Programme - Status Message, no rights', () => {
     cy.login(cypressSuperAdmin)
     cy.visit('/')
@@ -119,30 +89,6 @@ describe('Degree reform form tests', () => {
     )
   })
 
-  it('Degree Reform - Individual - Status Message, open', () => {
-    cy.login(cypressSuperAdmin)
-    cy.visit('/')
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
-    // Create new deadline
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
-    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilö')
-    cy.get('[data-cy=form-3-deadline]').contains('14.')
-
-    cy.login(cypressUser)
-    cy.visit('/individual')
-    cy.get(`[data-cy=saving-answers-notice]`).contains('Answers are saved automatically.')
-  })
-
-  it('Degree Reform - Individual - Status Message, closed', () => {
-    cy.login(cypressUser)
-    cy.visit('/individual').wait(1000)
-    cy.get(`[data-cy=deadline-passed-notice]`).contains('The deadline to edit form has passed.')
-  })
-
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
     cy.login(cypressUser)
     cy.visit('/')
@@ -161,12 +107,18 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-IV]').should('not.exist') // master
     cy.get('[data-cy=form-section-V]').should('not.exist') // master int
     cy.get('[data-cy=form-section-VI]').should('not.exist') // doctoral
-  })
 
-  it('Degree Reform - Programme - Master - Sections are shown', () => {
-    cy.login(cypressUser)
+    // Sidebar works Bachelor
 
-    cy.visit('/')
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-4]`).children().should('have.length', 5)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
+
+    // ----------------------------------------
+    // Check that Master's sections work
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -182,11 +134,19 @@ describe('Degree reform form tests', () => {
     // Check that no other programmes questions show:
     cy.get('[data-cy=form-section-III]').should('not.exist') // bachelor
     cy.get('[data-cy=form-section-VI]').should('not.exist') // doctoral
-  })
 
-  it('Degree Reform - Programme - Doctoral - Sections are shown', () => {
-    cy.login(cypressUser)
-    cy.visit('/')
+    // Sidebar works Master
+
+    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
+    cy.get(`[id=question-list-5]`).children().should('have.length', 5)
+    cy.get(`[id=question-list-6]`).children().should('have.length', 6)
+    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
+    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
+
+    // ----------------------------------------
+    // Check that Doctoral sections work
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -202,40 +162,9 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-III]').should('not.exist') // bachelor
     cy.get('[data-cy=form-section-IV]').should('not.exist') // master
     cy.get('[data-cy=form-section-V]').should('not.exist') // master int
-  })
 
-  it('Degree Reform - Programme - Bachelor - Sidebar works', () => {
-    cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
-    cy.get(`[id=question-list-4]`).children().should('have.length', 5)
-    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
-  })
+    // Sidebar works Doctoral
 
-  it('Degree Reform - Programme - Master - Sidebar works', () => {
-    cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
-    cy.get(`[id=question-list-1]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-2]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-3]`).children().should('have.length', 4)
-    cy.get(`[id=question-list-5]`).children().should('have.length', 5)
-    cy.get(`[id=question-list-6]`).children().should('have.length', 6)
-    cy.get(`[id=question-list-8]`).children().should('have.length', 7)
-    cy.get(`[id=question-list-9]`).children().should('have.length', 5)
-  })
-
-  it('Degree Reform - Programme - Doctoral - Sidebar works', () => {
-    cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get(`[id=question-list-1]`).children().should('have.length', 7)
     cy.get(`[id=question-list-2]`).children().should('have.length', 7)
     cy.get(`[id=question-list-3]`).children().should('have.length', 4)
@@ -248,6 +177,13 @@ describe('Degree reform form tests', () => {
 
   // FIX THIS TEST
   it('Reform form for group check that data persists', () => {
+    // Check that Status Message works and is closed
+    cy.login(cypressUser)
+    cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
+    // ----------------------------------------
     cy.login(cypressSuperAdmin)
     cy.visit('/')
     // Create new deadline
@@ -263,6 +199,11 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
     cy.wait(3000)
+    // Check that Status Message works and is open
+    cy.get(`[data-cy="saving-answers-notice"]`).contains(
+      'Answers are saved automatically. Final day for answering the form:'
+    )
+    // ----------------------------------------
     cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place]')
       .find('input[type="radio"]')
       .check('1', { force: true })
@@ -337,6 +278,9 @@ describe('Degree reform form tests', () => {
 
     cy.login(cypressUser)
     cy.visit('/individual')
+    // Check that Status Message works
+    cy.get(`[data-cy=saving-answers-notice]`).contains('Answers are saved automatically.')
+    // ----------------------------------------
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value=bachelor]').as('checkbox').wait(2000)
 
@@ -360,6 +304,10 @@ describe('Degree reform form tests', () => {
   it('If individual degree reform is closed, answering is disabled', () => {
     cy.login(cypressUser)
     cy.visit('/individual')
+
+    // Check that Status Message works
+    cy.get(`[data-cy=deadline-passed-notice]`).contains('The deadline to edit form has passed.')
+    // ----------------------------------------
 
     // Start filling in the form
 
