@@ -6,6 +6,7 @@ import '../support/commands'
 
 const cypressSuperAdmin = 'cypressSuperAdminUser'
 const cypressUser = 'cypressUser'
+const cypressJoryReadUser = 'cypressJoryReadUser'
 
 describe('Degree reform form tests', () => {
   // **************************************************
@@ -64,6 +65,82 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.visit('/individual')
     cy.get('[data-cy=form-section-0]')
+  })
+
+  it('Degree Reform - Programme - Status Message, open', () => {
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat').wait(400)
+    cy.get('[data-cy=form-2-deadline]').contains('14.')
+
+    cy.login(cypressUser)
+    cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get(`[data-cy="saving-answers-notice"]`).contains(
+      'Answers are saved automatically. Final day for answering the form:'
+    )
+  })
+
+  it('Degree Reform - Programme - Status Message, closed', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
+  })
+
+  it('Degree Reform - Programme - Status Message, no rights', () => {
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
+    cy.get('[data-cy=form-2-deadline]').contains('14.')
+
+    cy.login(cypressJoryReadUser)
+    cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform-group]').click().wait(1000)
+    cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
+    cy.get(`[data-cy="no-write-access-notice"]`).contains(
+      `You don't have editing rights to this form. But you can view the answers.`
+    )
+  })
+
+  it('Degree Reform - Individual - Status Message, open', () => {
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    // Create new deadline
+    cy.get('[data-cy=nav-admin]').click()
+    cy.contains('Deadline settings').click()
+
+    cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilö')
+    cy.get('[data-cy=form-3-deadline]').contains('14.')
+
+    cy.login(cypressUser)
+    cy.visit('/individual')
+    cy.get(`[data-cy=saving-answers-notice]`).contains('Answers are saved automatically.')
+  })
+
+  it('Degree Reform - Individual - Status Message, closed', () => {
+    cy.login(cypressUser)
+    cy.visit('/individual').wait(1000)
+    cy.get(`[data-cy=deadline-passed-notice]`).contains('The deadline to edit form has passed.')
   })
 
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
@@ -405,7 +482,7 @@ describe('Degree reform form tests', () => {
     cy.get(`[id=question-list-9]`).children().should('have.length', 6)
   })
 
-  it('Sending individual form works correctly', () => {
+  it('Saving individual form works correctly', () => {
     cy.login(cypressSuperAdmin)
     cy.visit('/')
     // Create new deadline

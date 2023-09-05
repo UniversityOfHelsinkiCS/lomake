@@ -133,7 +133,7 @@ export default {
       open: 'vastaukset ovat avoinna muokattavaksi.',
       viewOnly: 'Sinulla ei ole oikeuksia muokata lomaketta. Voit kuitenkin tarkastella vastauksia.',
       canBeOpened: 'Lomakkeen omistaja voi vielä avata lomakkeen ennen sen eräpäivää',
-      deadlinePassed: 'Lomakeen täyttöaika on päättynyt.',
+      deadlinePassed: 'Lomakkeen täyttöaika on päättynyt.',
       ospaProcessing: 'OSPA käsittelee vastaukset.',
       prosessing: 'Vastaukset käsitellään.',
     },
