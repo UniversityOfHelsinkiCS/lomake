@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
+    "cypress:run": "cypress run",
     "translations": "node ./scripts/analyzeTranslations.js"
   },
   "engines": {

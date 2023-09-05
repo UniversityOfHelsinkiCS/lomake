@@ -5,13 +5,9 @@ import { testProgrammeCode, defaultYears } from '../../config/common'
 import '../support/commands'
 
 const cypressSuperAdmin = 'cypressSuperAdminUser'
+const cypressUser = 'cypressUser'
 
 describe('Degree reform form tests', () => {
-  beforeEach(() => {
-    cy.login(cypressSuperAdmin)
-    cy.visit('/')
-  })
-
   // **************************************************
   // * tests use admin now due to access restrictions  *
   // * Use normal role once this changes              *
@@ -21,6 +17,8 @@ describe('Degree reform form tests', () => {
   // **************************************************
 
   it('Reform form for programmes is accessible through links and loads', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=reform-form-group-container')
@@ -31,6 +29,7 @@ describe('Degree reform form tests', () => {
   })
 
   it('Reform form for individuals loads', () => {
+    cy.login(cypressUser)
     cy.visit('/individual')
     cy.get('[data-cy=reform-individual-form-container')
     cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
@@ -38,9 +37,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Reform form for studyprogrammes can be opened and edited', () => {
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -53,6 +51,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Reform form for individual can be opened and edited', () => {
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -63,9 +63,12 @@ describe('Degree reform form tests', () => {
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.visit('/individual')
+    cy.get('[data-cy=form-section-0]')
   })
 
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -84,6 +87,9 @@ describe('Degree reform form tests', () => {
   })
 
   it('Degree Reform - Programme - Master - Sections are shown', () => {
+    cy.login(cypressUser)
+
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -102,6 +108,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Degree Reform - Programme - Doctoral - Sections are shown', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -120,6 +128,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Degree Reform - Programme - Bachelor - Sidebar works', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get(`[id=question-list-1]`).children().should('have.length', 7)
@@ -131,6 +141,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Degree Reform - Programme - Master - Sidebar works', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
     cy.get(`[id=question-list-1]`).children().should('have.length', 7)
@@ -143,6 +155,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('Degree Reform - Programme - Doctoral - Sidebar works', () => {
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get(`[id=question-list-1]`).children().should('have.length', 7)
@@ -157,14 +171,18 @@ describe('Degree reform form tests', () => {
 
   // FIX THIS TEST
   it('Reform form for group check that data persists', () => {
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
     // Create new deadline
+
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
     cy.get('[data-cy=form-2-deadline]').contains('14.')
     // Start filling in the form
-
+    cy.login(cypressUser)
+    cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
     cy.wait(3000)
@@ -230,8 +248,8 @@ describe('Degree reform form tests', () => {
   // individual: click, reload, check data persists
 
   it('Reform form for individual check that data persists', () => {
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
 
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
@@ -240,6 +258,7 @@ describe('Degree reform form tests', () => {
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
 
+    cy.login(cypressUser)
     cy.visit('/individual')
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value=bachelor]').as('checkbox').wait(2000)
@@ -262,6 +281,7 @@ describe('Degree reform form tests', () => {
   })
 
   it('If individual degree reform is closed, answering is disabled', () => {
+    cy.login(cypressUser)
     cy.visit('/individual')
 
     // Start filling in the form
@@ -290,9 +310,8 @@ describe('Degree reform form tests', () => {
   })
 
   it('"view-is-based-on"-checkbox works correctly', () => {
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -300,6 +319,7 @@ describe('Degree reform form tests', () => {
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
 
+    cy.login(cypressUser)
     cy.visit('/individual').wait(3000) // Wait for the form to load, (Increses the chance of the test passing exponentially)
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 6)
@@ -386,15 +406,15 @@ describe('Degree reform form tests', () => {
   })
 
   it('Sending individual form works correctly', () => {
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
-
+    cy.login(cypressSuperAdmin)
+    cy.visit('/')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - yksilöt')
     cy.get('[data-cy=form-3-deadline]').contains('14.')
+    cy.login(cypressUser)
 
     cy.visit('/individual').wait(3000) // Wait for the form to load, (Increses the chance of the test passing exponentially)
 

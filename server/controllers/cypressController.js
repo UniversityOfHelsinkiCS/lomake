@@ -73,7 +73,12 @@ const resetForm = async () => {
     // clean individual user test inputs
     await db.tempAnswer.destroy({
       where: {
-        [Op.or]: [{ programme: { [Op.startsWith]: 'cypressSuperAdminUser' } }, { programme: 'cypressSuperAdminUser' }],
+        [Op.or]: [
+          { programme: { [Op.startsWith]: 'cypressSuperAdminUser' } },
+          { programme: 'cypressSuperAdminUser' },
+          { programme: 'cypressUser' },
+          { programme: 'cypressNoRightsUser' },
+        ],
       },
     })
   } catch (error) {
@@ -93,7 +98,12 @@ const resetAnswers = async () => {
     // clean individual user test inputs
     await db.answer.destroy({
       where: {
-        [Op.or]: [{ programme: { [Op.startsWith]: 'cypressSuperAdminUser' } }, { programme: 'cypressSuperAdminUser' }],
+        [Op.or]: [
+          { programme: { [Op.startsWith]: 'cypressSuperAdminUser' } },
+          { programme: 'cypressSuperAdminUser' },
+          { programme: { [Op.startsWith]: 'cypressUser' } },
+          { programme: { [Op.startsWith]: 'cypressNoRightsUser' } },
+        ],
       },
     })
   } catch (error) {

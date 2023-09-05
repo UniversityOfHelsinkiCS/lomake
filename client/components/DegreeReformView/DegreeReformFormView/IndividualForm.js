@@ -7,12 +7,7 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
 
-import {
-  setViewOnly,
-  getAllIndividualAnswersForUser,
-  updateIndividualReady,
-  getSingleUsersAnswers,
-} from 'Utilities/redux/formReducer'
+import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
@@ -48,7 +43,6 @@ const DegreeReformIndividual = () => {
   useEffect(() => {
     if (formData.pending) return
     dispatch(getSingleUsersAnswers())
-    dispatch(getAllIndividualAnswersForUser())
     if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
       dispatch(setViewOnly(true))
     } else {
