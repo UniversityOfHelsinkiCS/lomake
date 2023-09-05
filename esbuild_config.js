@@ -16,7 +16,6 @@ const devConfig = {
   },
   plugins: [sassPlugin()],
   color: true,
-  watch: true,
 }
 
 const stagingConfig = {

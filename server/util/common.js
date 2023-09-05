@@ -3,7 +3,7 @@ const db = require('@models/index')
 const common = require('@root/config/common')
 
 const DB_URL = process.env.DB_URL || ''
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8001
 const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === 'true'
 
 const whereDraftYear = async () => {
