@@ -47,7 +47,7 @@ const BasicRadio = ({
               toolTipText = t('formView:doNotKnow')
             }
             return (
-              <>
+              <React.Fragment key={o.id}>
                 {!hidePopup ? (
                   <Popup
                     content={
@@ -114,7 +114,7 @@ const BasicRadio = ({
                     />
                   </Form.Field>
                 )}
-              </>
+              </React.Fragment>
             )
           })}
           {checked.secondValue === 'other' ? (

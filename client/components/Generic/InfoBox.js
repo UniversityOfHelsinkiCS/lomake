@@ -47,7 +47,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
         }}
       >
         {description && (
-          <p
+          <div
             style={{
               whiteSpace: 'pre-line',
               overflow: 'hidden',
@@ -56,7 +56,7 @@ const InfoBox = ({ id, label, description, extrainfo, image }) => {
             id="infobox-description-paragraph"
           >
             <ReactMarkdown>{description}</ReactMarkdown>
-          </p>
+          </div>
         )}
         {extrainfo && <p className="form-question-extrainfo">{extrainfo}</p>}
         {label && (
