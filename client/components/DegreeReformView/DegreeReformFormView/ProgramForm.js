@@ -105,56 +105,53 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
 
   return (
     <div style={{ marginTop: -50 }}>
-      {questionData
-        .filter(section => {
-          if (form !== 2 && formData.answerLevels.find(f => f === section.id)) {
-            return false
-          }
-          if (form === 2 && programAnswerLevels.find(f => f === section.id)) {
-            return false
-          }
-          return true
-        })
-        .map((section, index) => {
-          const parts = form !== 2 ? section.parts : section.parts.filter(p => !p.notInProgrammeView)
+      {questionData.map((section, index) => {
+        if (form !== 2 && formData.answerLevels.find(f => f === section.id)) {
+          return null
+        }
+        if (form === 2 && programAnswerLevels.find(f => f === section.id)) {
+          return null
+        }
 
-          return (
-            <Section
-              id={section.id}
-              title={section.title[lang]}
-              number={romanize(index)}
-              key={`section-${section.id}-${formType}-${lang}`}
-              programmeKey={programmeKey}
-              formType={formType}
-            >
-              {parts.map(part => {
-                if (
-                  part.type === 'ENTITY' ||
-                  part.type === 'MEASURES' ||
-                  part.type === 'CHOOSE-RADIO' ||
-                  part.type === 'CHOOSE-ADVANCED' ||
-                  part.type === 'CHECKBOX'
-                ) {
-                  number++
-                }
+        const parts = form !== 2 ? section.parts : section.parts.filter(p => !p.notInProgrammeView)
 
-                return (
-                  <Part
-                    key={`${part.type}-${part.id}-${formType}-${lang}`}
-                    part={part}
-                    programAnswerLevels={programAnswerLevels}
-                    formData={formData}
-                    lang={lang}
-                    formType={formType}
-                    programmeKey={programmeKey}
-                    form={form}
-                    number={number}
-                  />
-                )
-              })}
-            </Section>
-          )
-        })}
+        return (
+          <Section
+            id={section.id}
+            title={section.title[lang]}
+            number={romanize(index)}
+            key={`section-${section.id}-${formType}-${lang}`}
+            programmeKey={programmeKey}
+            formType={formType}
+          >
+            {parts.map(part => {
+              if (
+                part.type === 'ENTITY' ||
+                part.type === 'MEASURES' ||
+                part.type === 'CHOOSE-RADIO' ||
+                part.type === 'CHOOSE-ADVANCED' ||
+                part.type === 'CHECKBOX'
+              ) {
+                number++
+              }
+
+              return (
+                <Part
+                  key={`${part.type}-${part.id}-${formType}-${lang}`}
+                  part={part}
+                  programAnswerLevels={programAnswerLevels}
+                  formData={formData}
+                  lang={lang}
+                  formType={formType}
+                  programmeKey={programmeKey}
+                  form={form}
+                  number={number}
+                />
+              )
+            })}
+          </Section>
+        )
+      })}
     </div>
   )
 }
