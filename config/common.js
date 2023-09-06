@@ -177,6 +177,7 @@ const internationalAccess = {
   MH57_005: { read: true, year: 2020 },
   MH60_002: { read: true, year: 2020 },
   MH20_003: { read: true, year: 2020 },
+  MH55_002: { read: true, year: 2020 },
 }
 
 const testProgrammeCode = 'KH50_005'
