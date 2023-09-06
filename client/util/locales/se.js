@@ -247,6 +247,7 @@ export default {
     noUsers: 'Inga användare',
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',
     userListOthers: 'Övriga användare med programåtkomsträttigheter, som har fått tillgång till blanketten',
+    // facultySummary: '',
   },
 
   report: {

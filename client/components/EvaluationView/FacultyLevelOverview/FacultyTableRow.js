@@ -27,10 +27,18 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
       <div className="table-container-row-link">
         <Link to={targetURL}>{faculty.code}</Link>
       </div>
-      <div>
-        <p style={{ margin: '0' }}>{t('bachelor')}</p>
-        <p style={{ margin: '0' }}>{t('master')}</p>
-        <p style={{ margin: '0' }}>{t('doctoral')}</p>
+      <div style={{ marginRight: '0.5em' }}>
+        {!showDataByProgramme ? (
+          <>
+            <p style={{ margin: '0' }}>{t('bachelor')}</p>
+            <p style={{ margin: '0' }}>{t('master')}</p>
+            <p style={{ margin: '0' }}>{t('doctoral')}</p>
+          </>
+        ) : (
+          <>
+            <p style={{ marginTop: '0.5em', wordWrap: 'break-word' }}>{t('overview:facultySummary')}</p>
+          </>
+        )}
       </div>
       {showDataByProgramme
         ? tableIds.map(idObject => (

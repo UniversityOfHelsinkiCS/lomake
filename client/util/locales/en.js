@@ -258,6 +258,7 @@ export default {
     greenModalAccordion: 'Situation good',
     yellowModalAccordion: 'Situation satisfactory',
     redModalAccordion: 'Situation poor',
+    facultySummary: 'Studyprogramme answers',
   },
 
   report: {

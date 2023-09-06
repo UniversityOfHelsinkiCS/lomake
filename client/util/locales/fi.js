@@ -256,6 +256,7 @@ export default {
     greenModalAccordion: 'Tilanne hyvä',
     yellowModalAccordion: 'Tilanne neutraali',
     redModalAccordion: 'Tilanne huono',
+    facultySummary: 'Koulutusohjelmien vastaukset',
   },
 
   report: {
