@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Loader, Icon } from 'semantic-ui-react'
@@ -278,10 +279,10 @@ const EvaluationFormView = ({ room, formString }) => {
               </div>
             ) : null}
             <div style={{ marginTop: '1em', color: 'red' }}>
-              <h4>{t('formView:toijo')}</h4>
+              <h4 dangerouslySetInnerHTML={{ __html: t('formView:langCenterRaport') }} />
             </div>
             <div style={{ marginTop: '1em', color: 'red' }}>
-              <h4>{t('formView:langCenterRaport')}</h4>
+              <h4>{t('formView:toijo')}</h4>
             </div>
           </div>
         </div>
