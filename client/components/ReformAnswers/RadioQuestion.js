@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { degreeReformBackgroundColor } from 'Utilities/common'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
@@ -72,25 +73,11 @@ const Question = ({ question, answers }) => {
   values.average = answersCount === 0 ? 0 : (weightedSum / answersCount).toFixed(1)
 
   const cellColor = (i, value, question) => {
-    // NOTE this is copypasted to 
-    const avgColors = {
-      2: 'orange',
-      3: 'yellow',
-      4: 'lightgreen',
-      4.5: 'green',
-    }
-
     if (question.radioOptions !== 'numbers') {
       return {}
     }
     if (i === 7) {
-      let backgroundColor = 'red'
-      for (const key of Object.keys(avgColors)) {
-        if (value > key) {
-          backgroundColor = avgColors[key]
-        }
-      }
-      return { backgroundColor }
+      return { backgroundColor: degreeReformBackgroundColor(value) }
     }
 
     if (i === medianIndex) {

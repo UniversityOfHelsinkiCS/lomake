@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
+import { colors, degreeReformBackgroundColor } from 'Utilities/common'
 import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const colorScoreMap = {
@@ -39,22 +39,7 @@ const DegreeReformCell = ({ programmesKey, questionId, acualQuestionId, programm
 
   const avg = n > 0 ? (sum / n).toFixed(1) : ''
 
-  // NOTE this is copypaste from RadioQuestion.js
-  const avgColors = {
-    0: 'red',
-    2: 'orange',
-    3: 'yellow',
-    4: 'lightgreen',
-    4.5: 'green',
-  }
-
-  let background = colors.background_gray
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key of Object.keys(avgColors)) {
-    if (avg > key) {
-      background = avgColors[key]
-    }
-  }
+  const background = degreeReformBackgroundColor(avg)
 
   return (
     <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background }}>

@@ -14,6 +14,25 @@ export const images = {
   hy,
 }
 
+export const degreeReformBackgroundColor = value => {
+  const degreeReformAvgColors = {
+    0: 'red',
+    2: 'orange',
+    3: 'yellow',
+    4: 'lightgreen',
+    4.5: 'green',
+  }
+
+  let backgroundColor = '#f8f8f8'
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key of Object.keys(degreeReformAvgColors)) {
+    if (value > key) {
+      backgroundColor = degreeReformAvgColors[key]
+    }
+  }
+  return backgroundColor
+}
+
 export const colors = {
   background_blue: '#dff0ff',
   background_red: '#F37778',
