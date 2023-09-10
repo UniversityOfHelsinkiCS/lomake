@@ -85,8 +85,13 @@ const GoToDegreeReformGroup = () => {
 const GoToDegreeReformIndividual = () => {
   const { t } = useTranslation()
   return (
-    <Menu.Item data-cy="nav-evaluation" style={{ padding: 0 }}>
-      <Dropdown item data-cy="nav-evaluation-dropdown" text={t('degree-reform-individual')} style={{ height: '100%' }}>
+    <Menu.Item data-cy="nav-evaluation-individual" style={{ padding: 0 }}>
+      <Dropdown
+        item
+        data-cy="nav-evaluation-individual-dropdown"
+        text={t('degree-reform-individual')}
+        style={{ height: '100%' }}
+      >
         <Dropdown.Menu>
           <Dropdown.Item
             data-cy="nav-evaluation-option-reform-individual-answers"
