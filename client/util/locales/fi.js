@@ -190,6 +190,8 @@ export default {
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Vastaukset',
+    degreeReformIndividualForm: 'Lomake',
     companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',
     isWriting: 'kirjoittaa',
     allDoctoralSchools: 'Kaikki tohtoriohjelmat',

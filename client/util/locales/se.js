@@ -184,6 +184,8 @@ export default {
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Svara',
+    degreeReformIndividualForm: 'Form',
     companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',
     isWriting: 'skriver',
     allDoctoralSchools: 'Alla doktorandprogram',

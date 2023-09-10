@@ -191,6 +191,8 @@ export default {
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Answers',
+    degreeReformIndividualForm: 'Form',
     companionFilter: "Include faculty's partnership programmes to the answers",
     isWriting: 'is writing',
     allDoctoralSchools: 'All doctoral programmes',
