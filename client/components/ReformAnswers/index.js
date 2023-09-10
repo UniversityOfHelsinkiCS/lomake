@@ -40,7 +40,7 @@ const TextQuestionGroup = ({ questionGroup, answers }) => {
 }
 
 export default () => {
-  const [form, setForm] = useState('textual')
+  const [form, setForm] = useState('number')
   const dispatch = useDispatch()
   const answers = useSelector(state => state.reformAnswers)
 
