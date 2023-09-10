@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Radio } from 'semantic-ui-react'
 import { getReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
 
@@ -40,6 +40,7 @@ const TextQuestionGroup = ({ questionGroup, answers }) => {
 }
 
 export default () => {
+  const [form, setForm] = useState('textual')
   const dispatch = useDispatch()
   const answers = useSelector(state => state.reformAnswers)
 
@@ -57,13 +58,38 @@ export default () => {
 
       <strong>Number of opened forms {answers.data.length}</strong>
 
-      {questionData.map(group => (
-        <RadioQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
-      ))}
+      <div style={{ marginTop: 30 }}>
+        <div>
+          <Radio
+            label="Numerical answers"
+            name="answerSelection"
+            checked={form === 'number'}
+            onChange={() => setForm('number')}
+          />
+        </div>
+        <div>
+          <Radio
+            label="Text answers"
+            name="answerSelection"
+            checked={form === 'textual'}
+            onChange={() => setForm('textual')}
+          />
+        </div>
+      </div>
 
-      {questionData.slice(1).map(group => (
-        <TextQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
-      ))}
+      {form === 'textual' ? (
+        <>
+          {questionData.slice(1).map(group => (
+            <TextQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
+          ))}
+        </>
+      ) : (
+        <>
+          {questionData.map(group => (
+            <RadioQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
+          ))}
+        </>
+      )}
     </div>
   )
 }
