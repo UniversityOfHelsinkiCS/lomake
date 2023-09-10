@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider, Radio } from 'semantic-ui-react'
+import { Divider, Radio, Loader } from 'semantic-ui-react'
 import { getReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
 
@@ -49,7 +49,13 @@ export default () => {
   }, [])
 
   if (!answers.data || answers.pending || answers.error) {
-    return null
+    return (
+      <div>
+        <h1>Reform answers</h1>
+
+        <Loader active inline="centered" />
+      </div>
+    )
   }
 
   return (
