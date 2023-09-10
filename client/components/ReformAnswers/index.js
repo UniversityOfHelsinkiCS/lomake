@@ -73,14 +73,17 @@ const Question = ({ question, answers }) => {
 
   values.average = answersCount === 0 ? 0 : (weightedSum / answersCount).toFixed(1)
 
-  const avgColors = {
-    1.2: 'orange',
-    2.5: 'yellow',
-    3.5: 'lightgreen',
-    4.5: 'green',
-  }
+  const cellColor = (i, value, question) => {
+    const avgColors = {
+      2: 'orange',
+      3: 'yellow',
+      4: 'lightgreen',
+      4.5: 'green',
+    }
 
-  const cellColor = (i, value) => {
+    if (question.radioOptions !== 'numbers') {
+      return {}
+    }
     if (i === 7) {
       let backgroundColor = 'red'
       for (const key of Object.keys(avgColors)) {
@@ -112,7 +115,7 @@ const Question = ({ question, answers }) => {
           <Table.Row>
             {headerLables.map((_, i) => (
               // eslint-disable-next-line react/no-array-index-key
-              <Table.Cell key={i} style={cellColor(i, values[keys[i]])}>
+              <Table.Cell key={i} style={cellColor(i, values[keys[i]], question)}>
                 {values[keys[i]]}
               </Table.Cell>
             ))}
