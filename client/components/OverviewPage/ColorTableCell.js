@@ -39,8 +39,25 @@ const DegreeReformCell = ({ programmesKey, questionId, acualQuestionId, programm
 
   const avg = n > 0 ? (sum / n).toFixed(1) : ''
 
+  // NOTE this is copypaste from RadioQuestion.js
+  const avgColors = {
+    0: 'red',
+    2: 'orange',
+    3: 'yellow',
+    4: 'lightgreen',
+    4.5: 'green',
+  }
+
+  let background = colors.background_gray
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key of Object.keys(avgColors)) {
+    if (avg > key) {
+      background = avgColors[key]
+    }
+  }
+
   return (
-    <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background: colors.background_gray }}>
+    <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background }}>
       {avg}
     </div>
   )

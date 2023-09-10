@@ -72,6 +72,7 @@ const Question = ({ question, answers }) => {
   values.average = answersCount === 0 ? 0 : (weightedSum / answersCount).toFixed(1)
 
   const cellColor = (i, value, question) => {
+    // NOTE this is copypasted to 
     const avgColors = {
       2: 'orange',
       3: 'yellow',
