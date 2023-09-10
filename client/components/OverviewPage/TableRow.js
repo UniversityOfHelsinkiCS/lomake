@@ -67,6 +67,7 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
           questionType={idObject.type}
           setModalData={setModalData}
           form={form}
+          acualQuestionId={idObject.acual_id}
         />
       ))}
       {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}

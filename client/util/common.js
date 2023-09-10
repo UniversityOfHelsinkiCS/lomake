@@ -311,6 +311,7 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear }) => {
   if (draftYear !== year && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year)
   }
+
   // if there is a deadline (the form is open) and tempAnswers exist
   if (draftYear && tempAnswers) {
     return tempAnswers.data

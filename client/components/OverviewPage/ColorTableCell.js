@@ -11,6 +11,41 @@ const colorScoreMap = {
   red: -1,
 }
 
+const DegreeReformCell = ({ programmesKey, questionId, acualQuestionId, programmesAnswers, questions }) => {
+  const questionOfCell = questions.find(q => q.id === acualQuestionId)
+  const questionKeys = questionOfCell.parts.filter(p => p.radioOptions === 'numbers').map(p => p.id)
+
+  let sum = 0
+  let n = 0
+  const answers = {
+    first: 0,
+    second: 0,
+    third: 0,
+    fourth: 0,
+    fifth: 0,
+  }
+  const answerValues = Object.keys(answers)
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key of questionKeys) {
+    const answer = programmesAnswers[key]
+    if (answer) {
+      const val = answerValues.indexOf(answer) + 1
+      answers[answer] += 1
+      n += 1
+      sum += val
+    }
+  }
+
+  const avg = n > 0 ? (sum / n).toFixed(1) : ''
+
+  return (
+    <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background: colors.background_gray }}>
+      {avg}
+    </div>
+  )
+}
+
 const ColorTableCell = ({
   programmesName,
   programmesKey,
@@ -20,9 +55,30 @@ const ColorTableCell = ({
   setModalData,
   programmesOldAnswers,
   form = 1,
+  acualQuestionId,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
+  const questionMap = {
+    1: yearlyQuestions,
+    2: degreeReformIndividualQuestions,
+
+    4: evaluationQuestions,
+  }
+
+  const questions = questionMap[form] || yearlyQuestions
+
+  if (form === 2) {
+    return (
+      <DegreeReformCell
+        programmesKey={programmesKey}
+        questionId={questionId}
+        acualQuestionId={acualQuestionId}
+        programmesAnswers={programmesAnswers}
+        questions={questionMap[2]}
+      />
+    )
+  }
 
   const getMeasuresAnswer = () => {
     if (!programmesAnswers) return null
@@ -56,14 +112,6 @@ const ColorTableCell = ({
     return i - 1
   }
 
-  const questionMap = {
-    1: yearlyQuestions,
-    2: degreeReformIndividualQuestions,
-
-    4: evaluationQuestions,
-  }
-
-  const questions = questionMap[form] || yearlyQuestions
   const textId = `${questionId}_text`
   let colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
