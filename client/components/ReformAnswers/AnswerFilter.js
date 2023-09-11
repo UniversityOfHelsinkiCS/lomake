@@ -79,7 +79,6 @@ const AnswerFilter = ({ filters, setFilters }) => {
       {filterQuestions.map(question => (
         <FilterQuestion key={question.id} question={question} setFilters={setFilters} filters={filters} />
       ))}
-      {JSON.stringify(filters, null, 2)}
     </div>
   )
 }
