@@ -2,50 +2,14 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { colors, degreeReformBackgroundColor } from 'Utilities/common'
+import { colors } from 'Utilities/common'
+import DegreeReformCell from './DegreeReformCell'
 import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const colorScoreMap = {
   green: 1,
   yellow: 0,
   red: -1,
-}
-
-const DegreeReformCell = ({ programmesKey, questionId, acualQuestionId, programmesAnswers, questions }) => {
-  const questionOfCell = questions.find(q => q.id === acualQuestionId)
-  const questionKeys = questionOfCell.parts.filter(p => p.radioOptions === 'numbers').map(p => p.id)
-
-  let sum = 0
-  let n = 0
-  const answers = {
-    first: 0,
-    second: 0,
-    third: 0,
-    fourth: 0,
-    fifth: 0,
-  }
-  const answerValues = Object.keys(answers)
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key of questionKeys) {
-    const answer = programmesAnswers[key]
-    if (answer) {
-      const val = answerValues.indexOf(answer) + 1
-      answers[answer] += 1
-      n += 1
-      sum += val
-    }
-  }
-
-  const avg = n > 0 ? (sum / n).toFixed(1) : ''
-
-  const background = degreeReformBackgroundColor(avg)
-
-  return (
-    <div data-cy={`${programmesKey}-${questionId}`} className="square" style={{ background }}>
-      {avg}
-    </div>
-  )
 }
 
 const ColorTableCell = ({
@@ -78,6 +42,8 @@ const ColorTableCell = ({
         acualQuestionId={acualQuestionId}
         programmesAnswers={programmesAnswers}
         questions={questionMap[2]}
+        setModalData={setModalData}
+        programmesName={programmesName}
       />
     )
   }
