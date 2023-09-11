@@ -25,8 +25,8 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, s
           } else if (curr.programme.startsWith('T')) {
             currentLevel = 'doctoral'
           }
+          acc[currentLevel][modifiedQuestionId] = { colors: {}, text: [] }
           if (colorAnswerData) {
-            acc[currentLevel][modifiedQuestionId] = { colors: {}, text: [] }
             acc[currentLevel][modifiedQuestionId].colors[colorAnswerData] = acc[currentLevel][modifiedQuestionId]
               .colors[colorAnswerData]
               ? acc[currentLevel][modifiedQuestionId].colors[colorAnswerData] + 1
