@@ -60,6 +60,7 @@ export default () => {
 
   const filterList = a => {
     const stripPossibleUserInput = v => {
+      if (!v) return v
       const splitPoint = v.indexOf('_-_')
       return splitPoint === -1 ? v : v.slice(0, splitPoint)
     }
