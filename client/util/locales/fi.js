@@ -163,7 +163,8 @@ export default {
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     toijo: 'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti tulossa 11.9.2023',
-    langCenterRaport: 'Kielikeskuksen itsearviointiraportti tulossa 6.9.2023',
+    langCenterRaport:
+      'Kielikeskuksen itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">täällä</a>',
     facultyInfo:
       'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
     materialsFaculty:
@@ -189,6 +190,8 @@ export default {
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Vastaukset',
+    degreeReformIndividualForm: 'Lomake',
     companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',
     isWriting: 'kirjoittaa',
     allDoctoralSchools: 'Kaikki tohtoriohjelmat',

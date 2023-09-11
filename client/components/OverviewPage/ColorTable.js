@@ -104,7 +104,15 @@ const ColorTable = React.memo(
 
     if (formType === 'degree-reform') {
       tableIds = questionsToShow.reduce((acc, cur) => {
-        return [...acc, { id: `${generateKey(cur.title[lang])}`, shortLabel: cur.title[lang], type: 'TITLE' }]
+        return [
+          ...acc,
+          {
+            id: `${generateKey(cur.title[lang])}`,
+            shortLabel: cur.title[lang],
+            type: 'TITLE',
+            acual_id: cur.id,
+          },
+        ]
       }, [])
     } else {
       tableIds = questionsToShow.reduce((acc, cur) => {

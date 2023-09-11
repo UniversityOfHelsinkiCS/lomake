@@ -119,6 +119,7 @@ export default () => {
               formType={formType}
               handleShowProgrammes={handleShowProgrammes}
               showAllProgrammes={showAllProgrammes}
+              form={2}
             />
           </div>
         </>

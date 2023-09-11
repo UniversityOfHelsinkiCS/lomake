@@ -179,10 +179,13 @@ export default {
     noAnswer: 'Inget svar',
     average: 'Genomsnitt',
     toijo: 'TOIJO självutvärderingsrapporten kommer 11.9.2023',
-    langCenterRaport: 'Språkcentrums självutvärderingsrapporten kommer 6.9.2023',
+    langCenterRaport:
+      'Språkcentrums självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">här</a> (för närvarande endast på finska)',
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Svara',
+    degreeReformIndividualForm: 'Form',
     companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',
     isWriting: 'skriver',
     allDoctoralSchools: 'Alla doktorandprogram',
