@@ -84,6 +84,13 @@ const ColorTableCell = ({
         master: programmesAnswers[colorId[2]],
         doctoral: programmesAnswers[colorId[3]],
       }
+      if (
+        colorAnswer.bachelor === undefined &&
+        colorAnswer.master === undefined &&
+        colorAnswer.doctoral === undefined
+      ) {
+        colorAnswer = null
+      }
     }
   } else {
     colorAnswer = programmesAnswers[colorId]
@@ -132,13 +139,8 @@ const ColorTableCell = ({
       </div>
     )
   }
-  if (
-    !colorAnswer ||
-    (form === 5 &&
-      colorAnswer.bachelor === undefined &&
-      colorAnswer.master === undefined &&
-      colorAnswer.doctoral === undefined)
-  ) {
+
+  if (!colorAnswer) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}

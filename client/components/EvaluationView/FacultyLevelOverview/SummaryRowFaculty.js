@@ -18,12 +18,15 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
                 <div />
               </>
             ) : null}
-            <p style={{ margin: '0' }}>{t(level)}</p>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <p>{t(level)}</p>
+            </div>
             {tableIds.map(idObject => {
               let levelStats = stats[`${idObject.id}_${level}`]
               if (idObject.id === 'transition_phase_faculty') {
                 levelStats = stats[idObject.id]
               }
+
               return (
                 <div
                   key={`${idObject.id}_${level}`}
