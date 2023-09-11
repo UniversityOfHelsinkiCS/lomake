@@ -58,19 +58,28 @@ export default () => {
     )
   }
 
-  const filterBy = a => {
+  const filterList = a => {
+    const stripPossibleUserInput = v => {
+      const splitPoint = v.indexOf('_-_')
+      return splitPoint === -1 ? v : v.slice(0, splitPoint)
+    }
+
     if (filters.length === 0) {
       return true
     }
 
-    const filter = filters[0]
-    const key = Object.keys(filter)[0]
-    const value = filter[key]
+    // eslint-disable-next-line no-restricted-syntax
+    for (const filter of filters) {
+      const key = Object.keys(filter)[0]
+      const value = filter[key]
 
-    return a.data[key] === value
+      if (stripPossibleUserInput(a.data[key]) !== value) return false
+    }
+
+    return true
   }
 
-  const answerData = answers.data.filter(filterBy)
+  const answerData = answers.data.filter(filterList)
 
   return (
     <div>
