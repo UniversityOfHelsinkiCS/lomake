@@ -10,7 +10,7 @@ const mapToTranslation = {
   third: 'formView:neitherNor',
   fourth: 'formView:partiallyAgree',
   fifth: 'formView:stronglyAgree',
-  sixth: 'formView:doNotKnow',
+  idk: 'formView:doNotKnow',
 }
 
 const DegreeReformCell = ({
@@ -27,46 +27,45 @@ const DegreeReformCell = ({
   const questionKeys = questionOfCell.parts.filter(p => p.radioOptions === 'numbers').map(p => p.id)
   const lang = useSelector(state => state.language)
 
-  const answers = {
-    first: 0,
-    second: 0,
-    third: 0,
-    fourth: 0,
-    fifth: 0,
-  }
-  const answerValues = Object.keys(answers)
+  const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
 
   const answeredQuestionKeys = questionKeys.filter(k => programmesAnswers[k])
 
-  let sum = 0
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key of answeredQuestionKeys) {
+  const noIdkKeys = answeredQuestionKeys.filter(k => {
+    return programmesAnswers[k] !== 'idk'
+  })
+
+  const sum = noIdkKeys.reduce((sum, key) => {
     const answer = programmesAnswers[key]
-    const val = answerValues.indexOf(answer) + 1
-    answers[answer] += 1
-    sum += val
-  }
+    return sum + answerValues.indexOf(answer) + 1
+  }, 0)
 
-  const n = answeredQuestionKeys.length
-  const notOnlyIdk = n > 0 && Object.values(answers).some(v => v > 0 && v < 5)
+  const noIdkCount = noIdkKeys.length
 
-  const average = notOnlyIdk && n > 0 ? (sum / n).toFixed(1) : ''
+  const average = noIdkCount > 0 ? (sum / noIdkCount).toFixed(1) : ''
 
   const background = degreeReformBackgroundColor(average)
 
-  const content = answeredQuestionKeys.reduce((acc, key) => {
-    const part = questionOfCell.parts.find(p => p.id === key)
-    const label = part.label[lang]
-    const answer = t(mapToTranslation[programmesAnswers[key]])
-    return `${acc}\n\n${label}:  **${answer}**`
-  }, '')
+  const getContent = () => {
+    const textAnswerKey = `${questionOfCell.parts.find(p => p.type === 'TEXTAREA').id}_text`
+    const possibleTextAnswer = programmesAnswers[textAnswerKey]
+
+    const radioAnswers = answeredQuestionKeys.reduce((acc, key) => {
+      const part = questionOfCell.parts.find(p => p.id === key)
+      const label = part.label[lang]
+      const answer = t(mapToTranslation[programmesAnswers[key]])
+      return `${acc}\n\n${label}:  **${answer}**`
+    }, '')
+
+    return possibleTextAnswer ? `${radioAnswers}\n\n\n*${possibleTextAnswer}*` : radioAnswers
+  }
 
   const modalData = () =>
     setModalData({
       header: questionOfCell.title[lang],
       programme: programmesName,
       color: background,
-      content,
+      content: getContent(),
     })
 
   return (
