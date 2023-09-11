@@ -162,9 +162,9 @@ export default {
     oodikoneFaculty: 'View faculty statistics in Oodikone',
     rapo: 'View doctoral programme statistics in Rapo',
     toijo:
-      'Assessment of the operating structure and management system (TOIJO) self-assessment report available on September 11',
+      'Assessment of the operating structure and management system (TOIJO) self-assessment report <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">here</a>',
     langCenterRaport:
-      "Language Centre's self-evaluation report <a href='https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi' target='_blank'>täällä</a> (currently only in Finnish)",
+      "Language Centre's self-evaluation report <a href='https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi' target='_blank'>here</a> (currently only in Finnish)",
     facultyInfo:
       'For this review you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
     materialsFaculty:
