@@ -2,9 +2,59 @@ import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
 
-const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds }) => {
+const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, showDataByProgramme }) => {
   const { t } = useTranslation()
   const studyLevels = ['bachelor', 'master', 'doctoral']
+  let answersCounted = {}
+  if (showDataByProgramme) {
+    const selectedAnswersFiltered = selectedAnswers.filter(answer => answer.form === 4)
+    answersCounted = selectedAnswersFiltered.reduce(
+      (acc, curr) => {
+        if (!curr.data || Object.keys(curr.data).length === 0) return acc
+        tableIds.forEach(({ id }) => {
+          const modifiedQuestionId = id.replace('_faculty', '')
+          const colorId = `${modifiedQuestionId}_light`
+          const textId = `${modifiedQuestionId}_text`
+          const colorAnswerData = curr.data[colorId]
+          const textAnswerData = curr.data[textId]
+          let currentLevel = null
+          if (curr.programme.startsWith('KH')) {
+            currentLevel = 'bachelor'
+          } else if (curr.programme.startsWith('MH')) {
+            currentLevel = 'master'
+          } else if (curr.programme.startsWith('T')) {
+            currentLevel = 'doctoral'
+          }
+          if (colorAnswerData) {
+            acc[currentLevel][modifiedQuestionId] = { colors: {}, text: [] }
+            acc[currentLevel][modifiedQuestionId].colors[colorAnswerData] = acc[currentLevel][modifiedQuestionId]
+              .colors[colorAnswerData]
+              ? acc[currentLevel][modifiedQuestionId].colors[colorAnswerData] + 1
+              : 1
+          }
+          if (textAnswerData) {
+            if (acc[currentLevel][modifiedQuestionId].text[colorAnswerData] === undefined) {
+              acc[currentLevel][modifiedQuestionId].text[colorAnswerData] = [
+                {
+                  programme: curr.programme,
+                  answer: textAnswerData,
+                },
+              ]
+            } else {
+              acc[currentLevel][modifiedQuestionId].text[colorAnswerData] = acc[currentLevel][modifiedQuestionId].text[
+                colorAnswerData
+              ].concat({
+                programme: curr.programme,
+                answer: textAnswerData,
+              })
+            }
+          }
+        })
+        return acc
+      },
+      { bachelor: {}, master: {}, doctoral: {} }
+    )
+  }
   return (
     <>
       {studyLevels.map(level => {
@@ -23,8 +73,18 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds })
             </div>
             {tableIds.map(idObject => {
               let levelStats = stats[`${idObject.id}_${level}`]
-              if (idObject.id === 'transition_phase_faculty') {
-                levelStats = stats[idObject.id]
+
+              if (!showDataByProgramme) {
+                if (idObject.id === 'transition_phase_faculty') {
+                  levelStats = stats[idObject.id]
+                }
+              } else {
+                const modifiedQuestionId = idObject.id.replace('_faculty', '')
+                if (!answersCounted[level][modifiedQuestionId]) {
+                  levelStats = { green: 0, yellow: 0, red: 0 }
+                } else {
+                  levelStats = answersCounted[level][modifiedQuestionId].colors
+                }
               }
 
               return (

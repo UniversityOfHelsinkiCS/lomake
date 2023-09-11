@@ -62,7 +62,6 @@ const FacultyColorTable = React.memo(
         return statObject
       }, {})
     }, [sortedFaculties, selectedAnswers, answers, draftYear])
-
     if (answers.pending || !answers.data || !oldAnswers.data) {
       return <Loader active inline="centered" />
     }
@@ -113,6 +112,7 @@ const FacultyColorTable = React.memo(
           stats={stats}
           selectedAnswers={selectedAnswers}
           tableIds={tableIds}
+          showDataByProgramme={showDataByProgramme}
         />
         <div className="sticky-header" />
         {sortedFaculties.map(f => {
