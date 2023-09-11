@@ -271,6 +271,8 @@ export default {
     clickToCheck: 'Katso kirjalliset vastaukset',
     question: 'Kysymys',
     answered: 'Vastattu',
+    all: 'Kaikki',
+    filterBy: 'Rajaa vastauksia',
   },
 
   users: {

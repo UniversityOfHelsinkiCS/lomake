@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Radio, Loader } from 'semantic-ui-react'
@@ -7,6 +6,7 @@ import { degreeReformIndividualQuestions as questionData } from '../../questionD
 
 import RadioQuestion from './RadioQuestion'
 import TextQuestion from './TextQuestion'
+import AnswerFilter from './AnswerFilter'
 
 const RadioQuestionGroup = ({ questionGroup, answers }) => {
   const lang = useSelector(state => state.language)
@@ -41,6 +41,7 @@ const TextQuestionGroup = ({ questionGroup, answers }) => {
 
 export default () => {
   const [form, setForm] = useState('number')
+  const [filters, setFilters] = useState([])
   const dispatch = useDispatch()
   const answers = useSelector(state => state.reformAnswers)
 
@@ -52,17 +53,32 @@ export default () => {
     return (
       <div>
         <h1>Reform answers</h1>
-
         <Loader active inline="centered" />
       </div>
     )
   }
+
+  const filterBy = a => {
+    if (filters.length === 0) {
+      return true
+    }
+
+    const filter = filters[0]
+    const key = Object.keys(filter)[0]
+    const value = filter[key]
+
+    return a.data[key] === value
+  }
+
+  const answerData = answers.data.filter(filterBy)
 
   return (
     <div>
       <h1>Reform answers</h1>
 
       <strong>Number of opened forms {answers.data.length}</strong>
+
+      <AnswerFilter setFilters={setFilters} filters={filters} />
 
       <div style={{ marginTop: 30 }}>
         <div>
@@ -86,13 +102,13 @@ export default () => {
       {form === 'textual' ? (
         <>
           {questionData.slice(1).map(group => (
-            <TextQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
+            <TextQuestionGroup key={group.id} questionGroup={group} answers={answerData} />
           ))}
         </>
       ) : (
         <>
           {questionData.map(group => (
-            <RadioQuestionGroup key={group.id} questionGroup={group} answers={answers.data} />
+            <RadioQuestionGroup key={group.id} questionGroup={group} answers={answerData} />
           ))}
         </>
       )}

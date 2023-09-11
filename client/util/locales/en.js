@@ -272,6 +272,8 @@ export default {
     clickToCheck: 'Check the written answers',
     question: 'Question',
     answered: 'Answered',
+    all: 'All',
+    filterBy: 'Filter answers by',
   },
 
   users: {
