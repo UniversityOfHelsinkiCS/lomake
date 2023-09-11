@@ -44,12 +44,12 @@ const DegreeReformCell = ({
 
   const average = noIdkCount > 0 ? (sum / noIdkCount).toFixed(1) : ''
 
-  const background = degreeReformBackgroundColor(average)
+  const textAnswerKey = `${questionOfCell.parts.find(p => p.type === 'TEXTAREA').id}_text`
+  const possibleTextAnswer = programmesAnswers[textAnswerKey]
+
+  const background = acualQuestionId === 10 && possibleTextAnswer ? '#E5E4E2' : degreeReformBackgroundColor(average)
 
   const getContent = () => {
-    const textAnswerKey = `${questionOfCell.parts.find(p => p.type === 'TEXTAREA').id}_text`
-    const possibleTextAnswer = programmesAnswers[textAnswerKey]
-
     const radioAnswers = answeredQuestionKeys.reduce((acc, key) => {
       const part = questionOfCell.parts.find(p => p.id === key)
       const label = part.label[lang]
