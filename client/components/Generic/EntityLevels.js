@@ -158,10 +158,12 @@ const EntityLevels = ({
       {form === 5 && (
         <>
           <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-            <p style={{ marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
+            <p style={{ fontSize: '15px', marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
           </Link>
           <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
-            <p style={{ marginTop: '1em' }}>Kaikki katselmus-vastaukset koulutusohjelmilta</p>
+            <p style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
+              Katselmuksen yhteenveto koulutusohjelmittain
+            </p>
           </Link>
         </>
       )}
