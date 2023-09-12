@@ -65,7 +65,7 @@ export default {
     chooseFaculty: 'Välj en fakultet',
     chooseProgramme: 'Välj ett studieprogram',
     showAllProgrammes: 'Visa alla studieprogram',
-    showDataByProgramme: 'Visa data per studieprogram',
+    showDataByProgramme: '',
   },
 
   aboutPage: {

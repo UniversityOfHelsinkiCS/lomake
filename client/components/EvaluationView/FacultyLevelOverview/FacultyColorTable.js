@@ -90,7 +90,7 @@ const FacultyColorTable = React.memo(
         <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
           <Radio
-            style={{ marginRight: 'auto', marginBottom: '2em' }}
+            style={{ marginRight: 'auto', marginBottom: '3.5em' }}
             data-cy="overviewpage-filter-button"
             toggle
             onChange={() => setShowByProgramme(!showDataByProgramme)}

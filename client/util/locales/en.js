@@ -65,7 +65,7 @@ export default {
     chooseFaculty: 'Choose faculty',
     chooseProgramme: 'Choose degree programme',
     showAllProgrammes: 'Show all programmes',
-    showDataByProgramme: 'Show data by programme',
+    showDataByProgramme: 'Studyprogramme answers by faculty',
   },
 
   aboutPage: {
