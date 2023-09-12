@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
-import { Accordion } from 'semantic-ui-react'
+import { Accordion, Divider } from 'semantic-ui-react'
 import * as _ from 'lodash'
 
 import { isAdmin } from '@root/config/common'
@@ -114,21 +114,46 @@ const PastAnswersViewFaculty = ({ programmeKey }) => {
   }, [forProgramme, pending, user, programmeKey])
 
   if (!programmeKey || !readAccess) return <Redirect to="/" />
+  let titleNumberLast = 0
+  let titleNumberNew = 0
+
+  const titleList = []
+  questionsList.map(question => {
+    titleNumberLast = titleNumberNew
+    titleNumberNew = question.titleIndex
+    if (titleNumberNew !== titleNumberLast) {
+      titleList.push(question.title)
+      return true
+    }
+    return false
+  })
+
   return (
     <>
       <h2>{facultyName}</h2>
       <h3>{t('formView:yearlyFacultyAnswers')}</h3>
       <Accordion fluid className="comparison-container">
-        {questionsList.map(question => (
-          <Question
-            key={question.id}
-            answers={getTotalWritten({ question, allAnswers, chosenKeys: [programmeKey] })}
-            question={question}
-            chosenProgrammes={[programmeKey]}
-            showing={showingQuestion === question.id}
-            handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
-            form="evaluation"
-          />
+        {titleList.map(title => (
+          <div key={`${title}`}>
+            <Divider section />
+
+            <h2>{title}</h2>
+            {questionsList.map(question => {
+              if (question.title !== title) return false
+              return (
+                <div key={question.id}>
+                  <Question
+                    answers={getTotalWritten({ question, allAnswers, chosenKeys: [programmeKey] })}
+                    question={question}
+                    chosenProgrammes={[programmeKey]}
+                    showing={showingQuestion === question.id}
+                    handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
+                    form="evaluation"
+                  />
+                </div>
+              )
+            })}
+          </div>
         ))}
       </Accordion>
     </>
