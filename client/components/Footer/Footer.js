@@ -19,9 +19,9 @@ const Footer = () => {
               <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="toska-logo" />
             </div>
           </a>
-        </div>
-        <div style={{ marginLeft: '2em', marginTop: '1em' }}>
-          <p style={{ textAlign: 'end', fontSize: '16px' }}>Tilannekuvalomake last updated at: {builtAt}</p>
+          <div className="footer updated" style={{ marginLeft: '2em', marginTop: '1em' }}>
+            <p style={{ textAlign: 'end' }}>Tilannekuvalomake last updated at: {builtAt}</p>
+          </div>
         </div>
       </footer>
     </>
