@@ -6,7 +6,7 @@ import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
-import { isAdmin } from '@root/config/common'
+import { isAdmin, isSuperAdmin } from '@root/config/common'
 
 const UnHijackButton = ({ handleUnhijack }) => {
   return (
@@ -189,7 +189,12 @@ export default () => {
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-          {`${t('logOut')} (${user.uid})`}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            {`${t('logOut')} (${user.uid})`}
+            {isSuperAdmin(user) && (
+              <Label color="red">Server running since {new Date(user.lastRestart).toLocaleTimeString()}</Label>
+            )}
+          </div>
         </Menu.Item>
       </Menu.Menu>
     </Menu>

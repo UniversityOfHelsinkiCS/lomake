@@ -25,7 +25,7 @@ const possibleUsers = [
     givenName: 'no rights',
     mail: 'no-rights@fake.helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-mltdk-tkt-jory',
+    hyGroupCn: 'hy-rehtoraatti',
     sn: 'nah',
   },
   {

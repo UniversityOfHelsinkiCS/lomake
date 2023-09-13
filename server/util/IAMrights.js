@@ -7,7 +7,6 @@ const {
   isDoctoralWritingIam,
   getStudyLeaderGroup,
   iamToOrganisationCode,
-  isEmployeeIam,
   iamToDoctoralSchool,
   relevantIAMs,
 } = require('@root/config/IAMConfig')
@@ -173,11 +172,10 @@ const getProgrammeAdminAccess = hyGroups => {
 }
 
 /**
- * Grant write and read access if the user belongs to employees group and studyprogramme's manager group
+ * Grant write and read access if the user belongs to jory IAM
  * @param {string[]} hyGroups
  */
 const getProgrammeWriteAccess = hyGroups => {
-  if (!hyGroups.some(isEmployeeIam)) return {}
   const orgCodes = hyGroups.map(iam => iamToOrganisationCode(iam)).filter(Boolean)
   const degreeCodes = orgCodes.flatMap(codes => codes.map(mapToDegreeCode))
   const access = {}
@@ -190,7 +188,7 @@ const getProgrammeWriteAccess = hyGroups => {
 }
 
 /**
- * Grant read access if the user belongs to studyprogramme's manager group
+ * Grant read access if the user belongs to jory IAM (Note that this currently overlaps write access, and is technically redundant)
  * @param {string[]} hyGroups
  */
 const getProgrammeReadAccess = hyGroups => {

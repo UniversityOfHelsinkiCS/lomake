@@ -1,6 +1,8 @@
 const db = require('@models')
 const logger = require('@util/logger')
 const { Op } = require('sequelize')
+const { getLastRestart } = require('@util/lastRestart')
+const { isAdmin } = require('@util/common')
 const { sendNewTempAccessNotification } = require('./mailController')
 
 const getCurrentUser = async (req, res) => {
@@ -19,6 +21,12 @@ const getCurrentUser = async (req, res) => {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
     }
   }
+
+  if (isAdmin(req.user)) {
+    const lastRestart = getLastRestart()
+    return res.send({ ...req.user.toJSON(), lastRestart })
+  }
+
   return res.send(req.user)
 }
 
