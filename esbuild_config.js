@@ -30,7 +30,7 @@ const stagingConfig = {
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
     'process.env.SENTRY_ENVIRONMENT': "'staging'",
-    'process.env.REACT_APP_BUILT_AT': "'staging'",
+    'process.env.REACT_APP_BUILT_AT': process.env.REACT_APP_BUILT_AT,
     global: 'window',
   },
   plugins: [sassPlugin()],
@@ -48,7 +48,7 @@ const prodConfig = {
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
     'process.env.SENTRY_ENVIRONMENT': "'production'",
-    'process.env.REACT_APP_BUILT_AT': "'production'",
+    'process.env.REACT_APP_BUILT_AT': process.env.REACT_APP_BUILT_AT,
     global: 'window',
   },
   plugins: [
