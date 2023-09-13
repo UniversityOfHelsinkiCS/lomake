@@ -70,7 +70,7 @@ describe('Permission tests', () => {
 
     cy.visit('/admin')
     cy.get('[data-cy=cypressOspaUser-userRole]').contains('Ospa-ryhmä')
-    cy.get('[data-cy=cypressReadingRightsUser-userRole]').contains('Johtoryhmän jäsen')
+    cy.get('[data-cy=cypressReadingRightsUser-userRole]').contains('Rehtoraatti')
     cy.get('[data-cy=cypressUser-userRole]').contains('Koulutusohjelman johtaja - mltdk - kandi')
   })
 })
