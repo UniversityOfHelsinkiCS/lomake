@@ -9,7 +9,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        spec: [comparison, degreeReform, form, formNotifications, happypath, IAMpermissions, management, misc, ospa, permissions, report, sidebar, yearselector, evaluation]
+        spec:
+          [
+            comparison,
+            degreeReform,
+            form,
+            formNotifications,
+            happypath,
+            IAMpermissions,
+            management,
+            misc,
+            ospa,
+            permissions,
+            report,
+            sidebar,
+            yearselector,
+            evaluation,
+          ]
     name: Run tests
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +44,7 @@ jobs:
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
-      
+
       - name: Run cypress tests with retry
         uses: nick-fields/retry@v2
         with:
@@ -40,13 +56,13 @@ jobs:
         if: failure()
         with:
           name: Cypress videos
-          path:  /home/runner/work/lomake/lomake/cypress/videos
+          path: /home/runner/work/lomake/lomake/cypress/videos
 
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: Cypress screenshots
-          path:  /home/runner/work/lomake/lomake/cypress/screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
 
   build:
     name: 'Build and publish staging image'
@@ -56,10 +72,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: 'Get current time'
-        id: get_current_time
-        run: echo "NOW=$(date --iso-8601=seconds)" >> $GITHUB_OUTPUT
 
       - name: Build image
         id: build-image
@@ -72,7 +84,6 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=staging
-            BUILT_AT=${{ steps.get_current_time.outputs.NOW }}
 
       - name: Push to quay.io
         uses: redhat-actions/push-to-registry@v2
@@ -91,8 +102,8 @@ jobs:
       - build
     if: success()
     steps:
-      - name: "Send notification to Slack"
-        uses:  UniversityOfHelsinkiCS/slackbot-action@v1.4.2
+      - name: 'Send notification to Slack'
+        uses: UniversityOfHelsinkiCS/slackbot-action@v1.4.2
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           message-type: deployment
@@ -107,8 +118,8 @@ jobs:
       - build
     if: failure()
     steps:
-      - name: "Send notification to Slack"
-        uses:  UniversityOfHelsinkiCS/slackbot-action@v1.4.2
+      - name: 'Send notification to Slack'
+        uses: UniversityOfHelsinkiCS/slackbot-action@v1.4.2
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           message-type: test-failure

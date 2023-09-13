@@ -16,14 +16,6 @@ const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
 
-let builtAt = ''
-
-if (typeof window === 'undefined') {
-  builtAt = process.env.BUILT_AT
-} else {
-  builtAt = window.REACT_APP_BUILT_AT
-}
-
 const getYearsArray = since => {
   const years = []
   for (let i = new Date().getFullYear(); i >= since; i--) {
@@ -225,5 +217,4 @@ module.exports = {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
-  builtAt,
 }
