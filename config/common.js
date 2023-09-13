@@ -16,7 +16,13 @@ const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
 
-const builtAt = process.env.REACT_APP_BUILT_AT || ''
+let builtAt = ''
+
+if (typeof window === 'undefined') {
+  builtAt = process.env.BUILT_AT
+} else {
+  builtAt = window.REACT_APP_BUILT_AT
+}
 
 const getYearsArray = since => {
   const years = []

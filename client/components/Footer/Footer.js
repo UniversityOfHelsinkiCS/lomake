@@ -2,6 +2,7 @@ import React from 'react'
 import './Footer.scss'
 import { useTranslation } from 'react-i18next'
 import { images, builtAt } from 'Utilities/common'
+import moment from 'moment'
 
 const Footer = () => {
   const { t } = useTranslation()
@@ -20,7 +21,9 @@ const Footer = () => {
             </div>
           </a>
           <div className="footer updated" style={{ marginLeft: '2em', marginTop: '1em' }}>
-            <p style={{ textAlign: 'end' }}>Tilannekuvalomake last updated at: {builtAt}</p>
+            <p style={{ textAlign: 'end' }}>
+              Tilannekuvalomake last updated at: {moment(builtAt).toDate().toLocaleString()}
+            </p>
           </div>
         </div>
       </footer>
