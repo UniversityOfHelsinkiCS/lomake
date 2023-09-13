@@ -12,6 +12,8 @@ const devConfig = {
     'process.env.NODE_ENV': "'development'",
     'process.env.ENVIRONMENT': "'development'",
     'process.env.SENTRY_ENVIRONMENT': "'development'",
+    'process.env.REACT_APP_BUILT_AT': "'development'",
+
     global: 'window',
   },
   plugins: [sassPlugin()],
@@ -29,6 +31,7 @@ const stagingConfig = {
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
     'process.env.SENTRY_ENVIRONMENT': "'staging'",
+    'process.env.REACT_APP_BUILT_AT': "'staging'",
     global: 'window',
   },
   plugins: [sassPlugin()],
@@ -46,6 +49,7 @@ const prodConfig = {
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
     'process.env.SENTRY_ENVIRONMENT': "'production'",
+    'process.env.REACT_APP_BUILT_AT': "'production'",
     global: 'window',
   },
   plugins: [

@@ -68,6 +68,7 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=staging
+            BUILT_AT=${{ steps.get_current_time.outputs.NOW }}
 
       - name: Push to quay.io
         uses: redhat-actions/push-to-registry@v2

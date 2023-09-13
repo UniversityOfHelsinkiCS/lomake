@@ -1,7 +1,7 @@
 import React from 'react'
 import './Footer.scss'
 import { useTranslation } from 'react-i18next'
-import { images } from 'Utilities/common'
+import { images, builtAt } from 'Utilities/common'
 
 const Footer = () => {
   const { t } = useTranslation()
@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <>
       <div style={{ height: '10em', marginTop: 'auto' }} />
-      <footer className="footer">
+      <footer className="footer" style={{ display: 'flex', flexDirection: 'row' }}>
         <div>
           <a href="https://toska.dev/">
             <div className="footer text">
@@ -19,6 +19,9 @@ const Footer = () => {
               <img style={{ width: '75px', height: 'auto' }} src={images.toska_color} alt="toska-logo" />
             </div>
           </a>
+        </div>
+        <div style={{ marginLeft: '2em', marginTop: '1em' }}>
+          <p style={{ textAlign: 'end', fontSize: '16px' }}>Tilannekuvalomake last updated at: {builtAt}</p>
         </div>
       </footer>
     </>
