@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: 'Get current time'
+        id: get_current_time
+        run: echo "NOW=$(date --iso-8601=seconds)" >> $GITHUB_OUTPUT
+
       - name: Build image
         id: build-image
         uses: redhat-actions/buildah-build@v2
