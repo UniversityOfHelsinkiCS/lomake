@@ -62,7 +62,6 @@ const FacultyColorTable = React.memo(
         return statObject
       }, {})
     }, [sortedFaculties, selectedAnswers, answers, draftYear])
-
     if (answers.pending || !answers.data || !oldAnswers.data) {
       return <Loader active inline="centered" />
     }
@@ -91,7 +90,7 @@ const FacultyColorTable = React.memo(
         <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
           <Radio
-            style={{ marginRight: 'auto', marginBottom: '2em' }}
+            style={{ marginRight: 'auto', marginBottom: '3.5em' }}
             data-cy="overviewpage-filter-button"
             toggle
             onChange={() => setShowByProgramme(!showDataByProgramme)}
@@ -113,6 +112,7 @@ const FacultyColorTable = React.memo(
           stats={stats}
           selectedAnswers={selectedAnswers}
           tableIds={tableIds}
+          showDataByProgramme={showDataByProgramme}
         />
         <div className="sticky-header" />
         {sortedFaculties.map(f => {

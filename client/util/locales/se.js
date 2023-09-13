@@ -65,7 +65,7 @@ export default {
     chooseFaculty: 'Välj en fakultet',
     chooseProgramme: 'Välj ett studieprogram',
     showAllProgrammes: 'Visa alla studieprogram',
-    showDataByProgramme: 'Visa data per studieprogram',
+    showDataByProgramme: '',
   },
 
   aboutPage: {
@@ -178,12 +178,15 @@ export default {
     doNotKnow: 'Kan inte säga',
     noAnswer: 'Inget svar',
     average: 'Genomsnitt',
-    toijo: 'TOIJO självutvärderingsrapporten kommer 11.9.2023',
+    toijo:
+      'TOIJO självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">här</a> (endast på engelska)',
     langCenterRaport:
       'Språkcentrums självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">här</a> (för närvarande endast på finska)',
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Svara',
+    degreeReformIndividualForm: 'Form',
     companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',
     isWriting: 'skriver',
     allDoctoralSchools: 'Alla doktorandprogram',

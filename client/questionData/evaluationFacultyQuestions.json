@@ -451,5 +451,68 @@
         "no_color": true
       }
     ]
+  },
+  {
+    "title": {
+      "fi": "KOKONAISARVIO",
+      "se": "HELHETSBEDÖMNING",
+      "en": "OVERALL ASSESSMENT"
+    },
+    "parts": [
+      {
+        "id": "faculty_studyprogramme_status",
+        "index": 12,
+        "kludge": true,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Tiedekunnan kokonaistoimivuus",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "TIEDEKUNNAN KOKONAISTOIMIVUUS",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Antakaa kokonaisarvio tiedekunnan toimivuudesta. Perustelkaa arvio.",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "faculty_where_are_we_in_five_years",
+        "index": 13,
+        "kludge": true,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Missä tiedekunnassa mennään viiden vuoden kuluttua",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "MISSÄ TIEDEKUNNASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
+          "se": "",
+          "en": ""
+        },
+        "description": {
+          "fi": "Kuvatkaa tiedekunnan kokonaistilannetta viiden vuoden kuluttua",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
   }
 ]

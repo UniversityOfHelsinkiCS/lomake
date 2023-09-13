@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
+import DegreeReformCell from './DegreeReformCell'
 import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
 const colorScoreMap = {
@@ -20,9 +21,32 @@ const ColorTableCell = ({
   setModalData,
   programmesOldAnswers,
   form = 1,
+  acualQuestionId,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
+  const questionMap = {
+    1: yearlyQuestions,
+    2: degreeReformIndividualQuestions,
+
+    4: evaluationQuestions,
+  }
+
+  const questions = questionMap[form] || yearlyQuestions
+
+  if (form === 2) {
+    return (
+      <DegreeReformCell
+        programmesKey={programmesKey}
+        questionId={questionId}
+        acualQuestionId={acualQuestionId}
+        programmesAnswers={programmesAnswers}
+        questions={questionMap[2]}
+        setModalData={setModalData}
+        programmesName={programmesName}
+      />
+    )
+  }
 
   const getMeasuresAnswer = () => {
     if (!programmesAnswers) return null
@@ -56,14 +80,6 @@ const ColorTableCell = ({
     return i - 1
   }
 
-  const questionMap = {
-    1: yearlyQuestions,
-    2: degreeReformIndividualQuestions,
-
-    4: evaluationQuestions,
-  }
-
-  const questions = questionMap[form] || yearlyQuestions
   const textId = `${questionId}_text`
   let colorId = `${questionId}_light`
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
@@ -83,6 +99,13 @@ const ColorTableCell = ({
         bachelor: programmesAnswers[colorId[1]],
         master: programmesAnswers[colorId[2]],
         doctoral: programmesAnswers[colorId[3]],
+      }
+      if (
+        colorAnswer.bachelor === undefined &&
+        colorAnswer.master === undefined &&
+        colorAnswer.doctoral === undefined
+      ) {
+        colorAnswer = null
       }
     }
   } else {
@@ -132,13 +155,8 @@ const ColorTableCell = ({
       </div>
     )
   }
-  if (
-    !colorAnswer ||
-    (form === 5 &&
-      colorAnswer.bachelor === undefined &&
-      colorAnswer.master === undefined &&
-      colorAnswer.doctoral === undefined)
-  ) {
+
+  if (!colorAnswer) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}

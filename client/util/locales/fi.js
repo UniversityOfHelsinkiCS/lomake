@@ -68,7 +68,7 @@ export default {
     chooseFaculty: 'Valitse tiedekunta',
     chooseProgramme: 'Valitse koulutusohjelma',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
-    showDataByProgramme: 'Näytä tiedot koulutusohjelmittain',
+    showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekkunnittain',
   },
 
   aboutPage: {
@@ -162,7 +162,8 @@ export default {
     oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
-    toijo: 'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti tulossa 11.9.2023',
+    toijo:
+      'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">täällä</a> (raportti englanniksi)',
     langCenterRaport:
       'Kielikeskuksen itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">täällä</a>',
     facultyInfo:
@@ -190,6 +191,8 @@ export default {
   },
 
   generic: {
+    degreeReformIndividualAnswers: 'Vastaukset',
+    degreeReformIndividualForm: 'Lomake',
     companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',
     isWriting: 'kirjoittaa',
     allDoctoralSchools: 'Kaikki tohtoriohjelmat',
@@ -268,6 +271,8 @@ export default {
     clickToCheck: 'Katso kirjalliset vastaukset',
     question: 'Kysymys',
     answered: 'Vastattu',
+    all: 'Kaikki',
+    filterBy: 'Rajaa vastauksia',
   },
 
   users: {
