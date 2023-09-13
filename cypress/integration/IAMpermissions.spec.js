@@ -29,14 +29,6 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressJoryUser', 'KH10_001', { read: true, write: true })
   })
 
-  it('Non-employee jory user only gets read access to organisation', () => {
-    cy.login('cypressJoryReadUser')
-    cy.visit('/')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
-
-    cy.hasAccess('cypressJoryReadUser', 'KH10_001', { read: true })
-  })
-
   it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')

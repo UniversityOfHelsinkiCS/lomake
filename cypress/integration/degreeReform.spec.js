@@ -6,7 +6,7 @@ import '../support/commands'
 
 const cypressSuperAdmin = 'cypressSuperAdminUser'
 const cypressUser = 'cypressUser'
-const cypressJoryReadUser = 'cypressJoryReadUser'
+const cypressReadingRightsUser = 'cypressReadingRightsUser'
 
 describe('Degree reform form tests', () => {
   // **************************************************
@@ -80,7 +80,7 @@ describe('Degree reform form tests', () => {
     cy.createDeadline(defaultYears[0], 'Koulutusuudistusarviointi - koulutusohjelmat')
     cy.get('[data-cy=form-2-deadline]').contains('14.')
 
-    cy.login(cypressJoryReadUser)
+    cy.login(cypressReadingRightsUser)
     cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
