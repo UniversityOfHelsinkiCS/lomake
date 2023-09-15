@@ -1,10 +1,11 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Loader, Icon } from 'semantic-ui-react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
+import Downloads from 'Components/FormView/Downloads'
 
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import { colors, isFormLocked } from 'Utilities/common'
@@ -87,6 +88,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+  const componentRef = useRef()
 
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const singleProgramPending = useSelector(state => state.studyProgrammes.singleProgramPending)
@@ -186,7 +188,7 @@ const EvaluationFormView = ({ room, formString }) => {
   ) : (
     <div className="form-container">
       <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
-      <div className="the-form">
+      <div className="the-form" ref={componentRef}>
         <div className="form-instructions">
           <div className="hide-in-print-mode">
             <SaveIndicator />
@@ -287,6 +289,8 @@ const EvaluationFormView = ({ room, formString }) => {
           </div>
         </div>
         <div style={{ paddingBottom: '6em' }}>
+          <Downloads programme={programme} componentRef={componentRef} form={form} />
+
           <EvaluationForm
             programmeKey={programme.key}
             questions={questions}
