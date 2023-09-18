@@ -280,10 +280,10 @@ const EvaluationFormView = ({ room, formString }) => {
                 </a>
               </div>
             ) : null}
-            <div style={{ marginTop: '1em', color: 'red' }}>
+            <div style={{ marginTop: '1em' }}>
               <h4 dangerouslySetInnerHTML={{ __html: t('formView:langCenterRaport') }} />
             </div>
-            <div style={{ marginTop: '1em', color: 'red' }}>
+            <div style={{ marginTop: '1em' }}>
               <h4 dangerouslySetInnerHTML={{ __html: t('formView:toijo') }} />
             </div>
           </div>
