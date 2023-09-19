@@ -484,7 +484,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "studyprogramme_status"
       },
       {
         "id": "faculty_where_are_we_in_five_years",
@@ -511,7 +512,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "where_are_we_in_five_years"
       }
     ]
   }
