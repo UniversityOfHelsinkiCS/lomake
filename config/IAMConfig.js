@@ -311,6 +311,7 @@ const universityWideGroups = [
   'hy-ypa-opa-oymp-jory',
   'grp-katselmus-projektiryhma',
   'grp-katselmus-ohjausryhma',
+  'grp-a01807-svenskaarenden',
 ].concat(Object.values(kojoMap))
 
 // Katselmus groups^ are temporary and will eventually be removed
