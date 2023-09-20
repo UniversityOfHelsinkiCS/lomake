@@ -49,6 +49,7 @@ const IamTable = () => {
               'hy-ypa-toimi-helsinki',
               'hy-ypa-opa-oymp-jory',
               'grp-katselmus-projektiryhma/ohjausryhmä',
+              'grp-a01807-svenskaarenden',
             ]),
             'Lukuoikeudet kaikkiin ohjelmiin',
             'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä'
