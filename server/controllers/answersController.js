@@ -40,7 +40,10 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     const data = await db.tempAnswer.findAll({
       where: {
         year: await whereDraftYear(),
-        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
+        [Op.or]: [
+          { programme: Object.keys(req.user.access) },
+          anyAccess ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES] } : {},
+        ],
       },
     })
 
