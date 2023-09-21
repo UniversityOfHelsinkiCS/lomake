@@ -490,23 +490,27 @@ const postIndividualFormPartialAnswer = async (req, res) => {
       form: formKeys.DEGREE_REFORM_INDIVIDUALS,
     },
   })
+  try {
+    const previousData = answers.data
 
-  const previousData = answers.data
+    const updatedData = { ...previousData, [data.field]: data.value }
 
-  const updatedData = { ...previousData, [data.field]: data.value }
+    answers.data = updatedData
 
-  answers.data = updatedData
+    await answers.save()
 
-  await answers.save()
+    answers = await db.tempAnswer.findOne({
+      where: {
+        programme: uid,
+        form: formKeys.DEGREE_REFORM_INDIVIDUALS,
+      },
+    })
 
-  answers = await db.tempAnswer.findOne({
-    where: {
-      programme: uid,
-      form: formKeys.DEGREE_REFORM_INDIVIDUALS,
-    },
-  })
-
-  return res.status(200).json(answers)
+    return res.status(200).json(answers)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
 }
 
 module.exports = {
