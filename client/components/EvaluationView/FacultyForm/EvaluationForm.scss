@@ -30,6 +30,14 @@
   }
 }
 
+.programme-list-button {
+  background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+
+}
+
 @mixin big-circle-basics {
   display: inline-block;
   border-radius: 50%;

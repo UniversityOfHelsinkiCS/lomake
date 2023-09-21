@@ -28,17 +28,22 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
 
 const findAnswers = (programmes, allAnswers, question) => {
   const result = {
-    bachelor: { green: [], yellow: [], red: [], gray: [] },
-    master: { green: [], yellow: [], red: [], gray: [] },
-    doctoral: { green: [], yellow: [], red: [], gray: [] },
+    bachelor: { green: [], yellow: [], red: [], gray: [], text: [] },
+    master: { green: [], yellow: [], red: [], gray: [], text: [] },
+    doctoral: { green: [], yellow: [], red: [], gray: [], text: [] },
   }
   programmes.forEach(({ key, level, name }) => {
     const answer = allAnswers.find(a => a.programme === key)
     const light = answer?.data ? answer.data[`${question}_light`] : null
+    const text = answer?.data ? answer.data[`${question}_text`] : null
+
     if (light) {
-      result[level][light].push(name)
+      result[level][light].push({ name, key })
     } else {
-      result[level].gray.push(name)
+      result[level].gray.push({ name, key })
+    }
+    if (text) {
+      result[level].text[key] = text
     }
   })
   result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)

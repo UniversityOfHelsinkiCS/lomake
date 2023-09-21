@@ -46,19 +46,31 @@ const Pie = ({ level, data, onlyBc }) => {
   )
 }
 
-const ProgrammeList = ({ data, lang, onlyBc }) => {
+const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
   if (onlyBc) {
     return <></>
   }
-
   return (
     <>
       {colorsList.map(color => {
         return data[color].map(p => {
           return (
-            <p key={`${p[lang]}`}>
-              <span className={`answer-circle-${color}`} /> <span style={{ marginLeft: '0.5em' }}>{p[lang]}</span>
-            </p>
+            <div key={p.key}>
+              <p key={`${p.name[lang]}`}>
+                <span className={`answer-circle-${color}`} />{' '}
+                <span
+                  className="programme-list-button"
+                  onClick={() => handleShowSpecific(p.key)}
+                  style={{ marginLeft: '0.5em' }}
+                >
+                  {p.name[lang]}
+                </span>
+              </p>
+              {(showText && data.text[p.key]) ||
+                (showSpecific[p.key] && data.text[p.key] && (
+                  <p style={{ marginTop: '1em', marginBottom: '1em' }}>{data.text[p.key]}</p>
+                ))}
+            </div>
           )
         })
       })}
@@ -80,10 +92,23 @@ const EntityLevels = ({
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const [showText, setShowText] = useState(false)
+  const [showProgrammes, setShowProgrammes] = useState(false)
+  const [showText, setShowText] = useState({ bachelor: false, master: false, doctoral: false })
+  const [showSpecific, setShowSpecific] = useState([])
   const onlyBc = programme === 'H74'
   const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${programme}`
 
+  const handleShowText = (level, value) => {
+    setShowText({ ...showText, [level]: value })
+  }
+
+  const handleShowSpecific = programme => {
+    if (!showSpecific[programme]) {
+      setShowSpecific({ ...showSpecific, [programme]: true })
+    } else {
+      setShowSpecific({ ...showSpecific, [programme]: !showSpecific[programme] })
+    }
+  }
   return (
     <div className="form-entity-area">
       <Divider />
@@ -136,19 +161,55 @@ const EntityLevels = ({
                 )
               })}
               <Grid.Column width={1}>
-                <Icon name={`angle ${showText ? 'up' : 'down'}`} onClick={() => setShowText(!showText)} />
+                <Icon
+                  name={`angle ${showProgrammes ? 'up' : 'down'}`}
+                  onClick={() => setShowProgrammes(!showProgrammes)}
+                />
               </Grid.Column>
             </Grid.Row>
-            {showText && (
+            {showProgrammes && (
               <Grid.Row className="row">
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.bachelor} lang={lang} onlyBc={false} />
+                  <ProgrammeList
+                    data={summaryData.bachelor}
+                    lang={lang}
+                    onlyBc={false}
+                    showText={showText.bachelor}
+                    showSpecific={showSpecific}
+                    handleShowSpecific={handleShowSpecific}
+                  />
+                  <Icon
+                    name={`angle ${showText.bachelor ? 'up' : 'down'}`}
+                    onClick={() => handleShowText('bachelor', !showText.bachelor)}
+                  />
                 </Grid.Column>
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.master} lang={lang} onlyBc={onlyBc} />
+                  <ProgrammeList
+                    data={summaryData.master}
+                    lang={lang}
+                    onlyBc={onlyBc}
+                    showText={showText.master}
+                    showSpecific={showSpecific}
+                    handleShowSpecific={handleShowSpecific}
+                  />
+                  <Icon
+                    name={`angle ${showText.master ? 'up' : 'down'}`}
+                    onClick={() => handleShowText('master', !showText.master)}
+                  />
                 </Grid.Column>
                 <Grid.Column width={5}>
-                  <ProgrammeList data={summaryData.doctoral} lang={lang} onlyBc={onlyBc} />
+                  <ProgrammeList
+                    data={summaryData.doctoral}
+                    lang={lang}
+                    onlyBc={onlyBc}
+                    showText={showText.doctoral}
+                    showSpecific={showSpecific}
+                    handleShowSpecific={handleShowSpecific}
+                  />
+                  <Icon
+                    name={`angle ${showText.doctoral ? 'up' : 'down'}`}
+                    onClick={() => handleShowText('doctoral', !showText.doctoral)}
+                  />
                 </Grid.Column>
               </Grid.Row>
             )}
