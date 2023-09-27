@@ -11,12 +11,16 @@ import AnswerFilter from './AnswerFilter'
 const RadioQuestionGroup = ({ questionGroup, answers }) => {
   const lang = useSelector(state => state.language)
   const relevantParts = questionGroup.parts.filter(q => q.type === 'CHOOSE-RADIO')
+
+  const primaryRoleQuestion = questionGroup.parts.find(q => q.id === 'primary_role')
+
   return (
     <div style={{ margin: 30, marginBottom: 10 }}>
       <h3 style={{ marginBotton: 10 }}>{questionGroup.title[lang]}</h3>
       {relevantParts.map(part => (
         <RadioQuestion key={part.id} question={part} answers={answers} />
       ))}
+      {primaryRoleQuestion && <RadioQuestion question={primaryRoleQuestion} answers={answers} />}
       <div style={{ marginTop: 10 }} />
       <Divider />
     </div>
