@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
 import { colors } from 'Utilities/common'
+import ReactMarkdown from 'react-markdown'
 import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
@@ -66,10 +67,9 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
                   {p.name[lang]}
                 </span>
               </p>
-              {(showText && data.text[p.key]) ||
-                (showSpecific[p.key] && data.text[p.key] && (
-                  <p style={{ marginTop: '1em', marginBottom: '1em' }}>{data.text[p.key]}</p>
-                ))}
+              {(showText || showSpecific[p.key]) && data.text[p.key] && (
+                <ReactMarkdown>{data.text[p.key]}</ReactMarkdown>
+              )}
             </div>
           )
         })
