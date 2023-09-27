@@ -46,7 +46,7 @@ const Question = ({ question, answers }) => {
 
   const getValue = answer => {
     const theAnswer = answer.data[id]
-    if (question.type !== 'CHOOSE-ADVANCED') {
+    if (question.type !== 'CHOOSE-ADVANCED' || !theAnswer) {
       return theAnswer
     }
 
