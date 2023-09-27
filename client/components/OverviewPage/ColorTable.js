@@ -64,29 +64,6 @@ const ColorTable = React.memo(
       setReverse(!reverse)
     }
 
-    const stats = useMemo(() => {
-      if (!selectedAnswers) return {}
-
-      return sortedProgrammes.reduce((statObject, { key }) => {
-        const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
-        const answers = programme && programme.data ? programme.data : {}
-
-        Object.keys(answers).forEach(answerKey => {
-          if (answerKey.includes('_light')) {
-            const color = answers[answerKey] // "red", "yellow", "green" or ""
-            const baseKey = answerKey.replace('_light', '')
-            if (!statObject[baseKey]) statObject[baseKey] = {}
-
-            statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
-          }
-        })
-        return statObject
-      }, {})
-    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
-
-    if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
-      return <Loader active inline="centered" />
-
     let questionsToShow = questions
 
     if (formType === 'evaluation') {
@@ -140,6 +117,35 @@ const ColorTable = React.memo(
       }, [])
     }
 
+    const stats = useMemo(() => {
+      if (!selectedAnswers) return {}
+
+      return sortedProgrammes.reduce((statObject, { key }) => {
+        const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
+        const answers = programme && programme.data ? programme.data : {}
+        Object.keys(answers).forEach(answerKey => {
+          if (answerKey.includes('_light')) {
+            const color = answers[answerKey] // "red", "yellow", "green" or ""
+            const baseKey = answerKey.replace('_light', '')
+            if (!statObject[baseKey]) statObject[baseKey] = {}
+
+            statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
+          } else if (!answerKey.includes('_text')) {
+            const baseKey = answerKey
+            if (!statObject[baseKey]) statObject[baseKey] = {}
+            const answerNumber = answers[baseKey]
+
+            statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
+              ? statObject[baseKey][answerNumber] + 1
+              : 1
+          }
+        })
+        return statObject
+      }, {})
+    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
+    if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
+      return <Loader active inline="centered" />
+
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
@@ -177,6 +183,7 @@ const ColorTable = React.memo(
           stats={stats}
           selectedAnswers={selectedAnswers}
           tableIds={tableIds}
+          form={form}
         />
         <div className="sticky-header" style={{ marginTop: '1em' }} />
         {sortedProgrammes.map(p => {

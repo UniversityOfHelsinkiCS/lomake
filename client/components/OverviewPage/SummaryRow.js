@@ -1,11 +1,76 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
+import { degreeReformBackgroundColor } from 'Utilities/common'
+import { degreeReformIndividualQuestions } from '../../questionData'
 
-const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds }) => {
+const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers }) => {
   return (
     <>
-      {tableIds.map(idObject =>
-        Object.prototype.hasOwnProperty.call(stats, idObject.id) ? (
+      {tableIds.map(idObject => {
+        let themeSum = 0
+        let themeCount = 0
+        degreeReformIndividualQuestions[idObject.acual_id].parts.forEach(part => {
+          if (stats[part.id]) {
+            if (stats[part.id].first) {
+              themeSum += 1
+              themeCount += 1
+            } else if (stats[part.id].second) {
+              themeSum += 2
+              themeCount += 1
+            } else if (stats[part.id].third) {
+              themeSum += 3
+              themeCount += 1
+            } else if (stats[part.id].fourth) {
+              themeSum += 4
+              themeCount += 1
+            } else if (stats[part.id].fifth) {
+              themeSum += 5
+              themeCount += 1
+            }
+          }
+        })
+        themeSum /= themeCount
+        const average = themeCount > 0 ? (themeSum / themeCount).toFixed(1) : ''
+        const background = degreeReformBackgroundColor(average)
+        return tableIds.find(tableId => tableId.acual_id === idObject.acual_id) ? (
+          <div
+            key={idObject.id}
+            style={{ cursor: 'pointer', background }}
+            className="square"
+            onClick={() =>
+              setStatsToShow({
+                stats: stats[idObject.id],
+                title: <span>{idObject.shortLabel}</span>, // transformIdToTitle(idObject.shortLabel, false),
+                answers: selectedAnswers,
+                questionId: idObject.id,
+              })
+            }
+          >
+            {themeCount > 0 ? average : null}
+          </div>
+        ) : (
+          <div key={idObject.id} />
+        )
+      })}
+    </>
+  )
+}
+
+const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) => {
+  if (form === 2) {
+    return (
+      <DegreeReformPieChart
+        stats={stats}
+        setStatsToShow={setStatsToShow}
+        selectedAnswers={selectedAnswers}
+        tableIds={tableIds}
+      />
+    )
+  }
+  return (
+    <>
+      {tableIds.map(idObject => {
+        return Object.prototype.hasOwnProperty.call(stats, idObject.id) ? (
           <div
             key={idObject.id}
             style={{ cursor: 'pointer' }}
@@ -48,7 +113,7 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds }) => {
         ) : (
           <div key={idObject.id} />
         )
-      )}
+      })}
     </>
   )
 }
