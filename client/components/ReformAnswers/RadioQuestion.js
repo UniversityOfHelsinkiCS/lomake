@@ -44,8 +44,23 @@ const Question = ({ question, answers }) => {
     return o
   }, {})
 
+  const getValue = answer => {
+    const theAnswer = answer.data[id]
+    if (question.type !== 'CHOOSE-ADVANCED' || !theAnswer) {
+      return theAnswer
+    }
+
+    const stop = theAnswer.indexOf('_-_')
+    if (stop === -1) {
+      return theAnswer
+    }
+
+    return theAnswer.slice(0, stop)
+  }
+
   for (const answer of answers) {
-    const valOf = answer.data[id]
+    const valOf = getValue(answer)
+
     if (valOf) {
       values[valOf] += 1
     } else {
