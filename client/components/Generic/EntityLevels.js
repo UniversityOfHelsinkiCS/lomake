@@ -13,7 +13,7 @@ import './Generic.scss'
 const levels = ['bachelor', 'master', 'doctoral']
 const colorsList = ['green', 'yellow', 'red', 'gray']
 
-const Pie = ({ level, data, onlyBc }) => {
+function Pie({ level, data, onlyBc }) {
   if (level !== 'bachelor' && onlyBc) {
     return <div />
   }
@@ -49,7 +49,7 @@ const Pie = ({ level, data, onlyBc }) => {
 
 const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
   if (onlyBc) {
-    return <></>
+    return <div />
   }
   return (
     <>
@@ -78,7 +78,7 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
   )
 }
 
-const EntityLevels = ({
+function EntityLevels({
   id,
   label,
   description,
@@ -89,7 +89,7 @@ const EntityLevels = ({
   form,
   programme,
   summaryUrl,
-}) => {
+}) {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [showProgrammes, setShowProgrammes] = useState(false)

@@ -41,7 +41,8 @@
       {
         "props": false
       }
-    ]
+    ],
+    "function": "declaration" 
   },
   "parserOptions": {
     "ecmaVersion": 2020

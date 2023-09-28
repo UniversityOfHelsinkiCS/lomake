@@ -1451,7 +1451,7 @@
               "label": "kokemukseen yhdestä tohtoriohjelmasta",
               "id": "specific-programme"
             },
-            { "label": "kokemukseen useista kansainvälisistä tohtoriohjelmista", "id": "multiple-programs" }
+            { "label": "kokemukseen useista tohtoriohjelmista", "id": "multiple-programs" }
           ],
           "en": [
             {
