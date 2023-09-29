@@ -188,6 +188,8 @@ export default {
     doNotKnow: 'En osaa sanoa',
     noAnswer: 'Ei vastausta',
     average: 'Keskiarvo',
+    showAnswers: 'Näytä vastaukset',
+    hideAnswers: 'Piilota vastaukset',
   },
 
   generic: {

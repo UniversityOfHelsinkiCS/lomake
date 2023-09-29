@@ -188,6 +188,8 @@ export default {
     doNotKnow: "I don't know",
     noAnswer: 'No answer',
     average: 'Average',
+    showAnswers: 'Show answers',
+    hideAnswers: 'Hide answers',
   },
 
   generic: {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, Grid, Icon } from 'semantic-ui-react'
+import { Divider, Grid, Icon,Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
@@ -185,10 +185,9 @@ function EntityLevels({
                     showSpecific={showSpecific}
                     handleShowSpecific={handleShowSpecific}
                   />
-                  <Icon
-                    name={`angle ${showText.bachelor ? 'up' : 'down'}`}
-                    onClick={() => handleShowText('bachelor', !showText.bachelor)}
-                  />
+                  <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
+                    {showText === "bachelor" ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                  </Button>
                 </Grid.Column>
                 <Grid.Column width={5}>
                   <ProgrammeList
@@ -199,10 +198,9 @@ function EntityLevels({
                     showSpecific={showSpecific}
                     handleShowSpecific={handleShowSpecific}
                   />
-                  <Icon
-                    name={`angle ${showText.master ? 'up' : 'down'}`}
-                    onClick={() => handleShowText('master', !showText.master)}
-                  />
+                  <Button onClick={() => handleShowText('master', !showText.master)}>
+                    {showText === "master" ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                  </Button>
                 </Grid.Column>
                 <Grid.Column width={5}>
                   <ProgrammeList
@@ -213,10 +211,9 @@ function EntityLevels({
                     showSpecific={showSpecific}
                     handleShowSpecific={handleShowSpecific}
                   />
-                  <Icon
-                    name={`angle ${showText.doctoral ? 'up' : 'down'}`}
-                    onClick={() => handleShowText('doctoral', !showText.doctoral)}
-                  />
+                  <Button onClick={() => handleShowText('master', !showText.bachelor)}>
+                    {showText === "doctoral" ? t('hideAnswers') : t('showAnswers')}
+                  </Button>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row className="row">
