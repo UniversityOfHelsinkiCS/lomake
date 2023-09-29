@@ -93,13 +93,19 @@ function EntityLevels({
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [showProgrammes, setShowProgrammes] = useState(false)
-  const [showText, setShowText] = useState({ bachelor: false, master: false, doctoral: false })
+  const [showText, setShowText] = useState({})
   const [showSpecific, setShowSpecific] = useState([])
   const onlyBc = programme === 'H74'
   const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${programme}`
 
   const handleShowText = (level, value) => {
-    setShowText({ ...showText, [level]: value })
+    if(showText.level === level){
+      setShowText({  })
+      return true
+    }
+    console.log(showText, level)
+    setShowText({ "level": level })
+    console.log(showText)
   }
 
   const handleShowSpecific = programme => {
@@ -168,6 +174,7 @@ function EntityLevels({
               </Grid.Column>
             </Grid.Row>
             {showProgrammes && (
+              <>
               <Grid.Row className="row">
                 <Grid.Column width={5}>
                   <ProgrammeList
@@ -212,6 +219,32 @@ function EntityLevels({
                   />
                 </Grid.Column>
               </Grid.Row>
+              <Grid.Row className="row">
+              {showText.level && colorsList.map(color => {
+                console.log(summaryData)
+                console.log(showText)
+        return summaryData[showText.level][color].map(p => {
+          return (
+            <div key={p.key}  style={{ marginRight: '1em', marginTop: "1em" }}>
+              <p key={`${p.name[lang]}`}>
+                <span className={`answer-circle-${color}`} />{' '}
+                <span
+                  className="programme-list-button"
+                  onClick={() => handleShowSpecific(p.key)}
+                  style={{ marginLeft: '0.5em' }}
+                >
+                  {p.name[lang]}
+                </span>
+              </p>
+              {(showText || showSpecific[p.key]) && summaryData[showText.level].text[p.key] && (
+                <ReactMarkdown>{summaryData[showText.level].text[p.key]}</ReactMarkdown>
+              )}
+            </div>
+          )
+        })
+      })}
+              </Grid.Row>
+              </>
             )}
           </Grid>
         </div>
