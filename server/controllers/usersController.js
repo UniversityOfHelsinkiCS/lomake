@@ -9,6 +9,7 @@ const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {
     try {
       const now = new Date()
+      const start = new Date().valueOf()
       await db.user.update(
         { lastLogin: now },
         {
@@ -17,6 +18,8 @@ const getCurrentUser = async (req, res) => {
           },
         }
       )
+      const end = new Date().valueOf()
+      logger.info(`DEBUG getCurrentUser query ${(end - start) / 1000} sec ${req.user.uid}`)
     } catch (error) {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
     }

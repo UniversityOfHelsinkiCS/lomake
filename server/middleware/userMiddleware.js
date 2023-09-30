@@ -9,6 +9,7 @@ const userMiddleware = async (req, res, next) => {
     return res.status(400).json({ error: 'missing uid' })
   }
   try {
+    const start = new Date().valueOf()
     const [user, created] = await db.user.findOrCreate({
       where: {
         uid: req.headers.uid,
@@ -21,6 +22,8 @@ const userMiddleware = async (req, res, next) => {
         specialGroup: {},
       },
     })
+    const end = new Date().valueOf()
+    logger.info(`DEBUG userMiddleware query ${(end - start) / 1000} sec ${req.headers.uid}`)
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
     req.user = user
 
