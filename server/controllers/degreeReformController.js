@@ -4,6 +4,7 @@ const logger = require('@util/logger')
 
 const getAllTemp = async (_, res) => {
   try {
+    const start = new Date().valueOf()
     const data = await db.tempAnswer.findAll({
       attributes: ['id', 'data', 'year', 'ready'],
       where: {
@@ -13,6 +14,8 @@ const getAllTemp = async (_, res) => {
         },
       },
     })
+    const end = new Date().valueOf()
+    logger.info(`DEGREE REFORM query ${(end - start) / 1000} sec`)
     return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
