@@ -4,6 +4,7 @@ const logger = require('@util/logger')
 
 const getAllTemp = async (_, res) => {
   try {
+    logger.info('DEGREE REFORM CTRLR TEST')
     const data = await db.tempAnswer.findAll({
       attributes: ['id', 'data', 'year', 'ready'],
       where: {
