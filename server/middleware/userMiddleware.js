@@ -23,7 +23,7 @@ const userMiddleware = async (req, res, next) => {
       },
     })
     const end = new Date().valueOf()
-    logger.info(`DEBUG userMiddleware query ${(end - start) / 1000} sec ${req.headers.uid} ${req.baseUrl}`)
+    logger.info(`DEBUG userMiddleware query ${(end - start) / 1000} sec ${req.headers.uid} ${req.originalUrl}`)
     if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
     req.user = user
 
