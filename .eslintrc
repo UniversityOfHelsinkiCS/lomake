@@ -42,13 +42,13 @@
         "props": false
       }
     ],
-    "func-style": [
+    "react/function-component-definition": [
       "error",
-      "declaration",
       {
-        "allowArrowFunctions": true
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
       }
-    ]
+    ],
   },
   "parserOptions": {
     "ecmaVersion": 2020
