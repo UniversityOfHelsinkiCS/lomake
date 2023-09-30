@@ -42,7 +42,13 @@
         "props": false
       }
     ],
-    "function": "declaration" 
+    "func-style": [
+      "error",
+      "declaration",
+      {
+        "allowArrowFunctions": true
+      }
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 2020
