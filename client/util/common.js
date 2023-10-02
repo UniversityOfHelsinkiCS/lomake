@@ -521,7 +521,7 @@ export const translateDegreeReformBackground = ({ primaryRole, lang }) => {
       const firstCheck = degreeQuestionData[0].parts[1].radioOptions[lang].find(option => option.id === item)?.label
       if (!firstCheck) {
         return degreeQuestionData[0].parts[1].advancedOptions.teaching_or_other_research[lang].find(
-          option => option.id === item
+          option => option.id === item,
         )?.label
       }
       return firstCheck

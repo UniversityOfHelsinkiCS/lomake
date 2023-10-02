@@ -211,7 +211,7 @@ const EntityLevels = ({
                       handleShowSpecific={handleShowSpecific}
                     />
                     <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
-                      {showText === 'doctoral' ? t('hideAnswers') : t('showAnswers')}
+                      {showText === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
                     </Button>
                   </Grid.Column>
                 </Grid.Row>

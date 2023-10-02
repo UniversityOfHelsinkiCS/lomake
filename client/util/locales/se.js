@@ -182,8 +182,8 @@ export default {
       'TOIJO självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">här</a> (endast på engelska)',
     langCenterRaport:
       'Språkcentrums självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">här</a> (för närvarande endast på finska)',
-      showAnswers: '',
-      hideAnswers: '',
+    showAnswers: '',
+    hideAnswers: '',
   },
 
   generic: {

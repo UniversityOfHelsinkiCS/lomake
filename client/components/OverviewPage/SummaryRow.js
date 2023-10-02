@@ -14,16 +14,21 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
             if (stats[part.id].first) {
               themeSum += 1
               themeCount += 1
-            } else if (stats[part.id].second) {
+            }
+
+            if (stats[part.id].second) {
               themeSum += 2
               themeCount += 1
-            } else if (stats[part.id].third) {
+            }
+            if (stats[part.id].third) {
               themeSum += 3
               themeCount += 1
-            } else if (stats[part.id].fourth) {
+            }
+            if (stats[part.id].fourth) {
               themeSum += 4
               themeCount += 1
-            } else if (stats[part.id].fifth) {
+            }
+            if (stats[part.id].fifth) {
               themeSum += 5
               themeCount += 1
             }
