@@ -46,7 +46,7 @@ const createBackups = async () => {
 }
 
 const startBackupJob = () => {
-  cron.schedule('* * * * *', () => createBackups())
+  cron.schedule('0 0 * * 0', () => createBackups())
   logger.info('Backup job started')
 }
 
