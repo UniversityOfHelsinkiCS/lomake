@@ -6,6 +6,16 @@ const { whereDraftYear, inProduction } = require('@util/common')
 
 let currentEditors = {}
 
+const withLogging = fn => {
+  return async (...args) => {
+    const start = Date.now()
+    const res = await fn(...args)
+    const end = Date.now()
+    logger.info(`[WS] ${fn.name} ${end - start}ms`)
+    return res
+  }
+}
+
 const stripTimeouts = room => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
@@ -217,8 +227,8 @@ const getLock = async (socket, payload, io) => {
 }
 
 module.exports = {
-  joinRoom,
-  leaveRoom,
-  updateField,
-  getLock,
+  joinRoom: withLogging(joinRoom),
+  leaveRoom: withLogging(leaveRoom),
+  updateField: withLogging(updateField),
+  getLock: withLogging(getLock),
 }
