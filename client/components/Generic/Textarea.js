@@ -108,7 +108,8 @@ const Textarea = ({
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
       // dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
-      dispatch(updateFormField(fieldName, markdownStr, form))
+      dispatch(updateFormFieldExp(fieldName, markdownStr, form))
+      // dispatch(updateFormField(fieldName, markdownStr, form))
     }
   }
 
@@ -117,7 +118,11 @@ const Textarea = ({
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
-    dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+    if (form === 3) {
+      dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+    } else {
+      dispatch(updateFormField(fieldName, markdownStr, form))
+    }
   }
 
   const { length } = editorState.getCurrentContent().getPlainText()
