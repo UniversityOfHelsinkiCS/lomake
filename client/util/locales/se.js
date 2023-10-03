@@ -135,7 +135,7 @@ export default {
       ospaProcessing: 'OSPA behandlar svaren.',
       prosessing: 'Svaren behandlas.',
     },
-    savingAnswers: 'Svaren sparas automatiskt. Sista dagen för att svara på blanketten:',
+    savingAnswers: 'Svaren sparas automatiskt utom för textfält. Sista dagen för att svara på blanketten:',
     noSystemsSelected: 'Inget responssystem har valts',
     // selectSystems: '',
     // mostUseful: '',
@@ -187,6 +187,7 @@ export default {
   },
 
   generic: {
+    kludgeButton: 'Spara textfält',
     degreeReformIndividualAnswers: 'Svara',
     degreeReformIndividualForm: 'Form',
     companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',

@@ -137,7 +137,7 @@ export default {
       ospaProcessing: 'OSPA käsittelee vastaukset.',
       prosessing: 'Vastaukset käsitellään.',
     },
-    savingAnswers: 'Vastaukset tallentuvat automaattisesti. Viimeinen vastauspäivä:',
+    savingAnswers: 'Vastaukset tallentuvat automaattisesti tekstikenttiä lukuunottamatta. Viimeinen vastauspäivä:',
     noSystemsSelected: 'Ei valittuja palautejärjestelmiä.',
     selectSystems: 'Valitkaa järjestelmä klikkaamalla',
     mostUseful: 'Hyödyllisimmät palautejärjestelmät',
@@ -193,6 +193,7 @@ export default {
   },
 
   generic: {
+    kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',
     degreeReformIndividualForm: 'Lomake',
     companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',

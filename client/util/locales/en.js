@@ -136,7 +136,7 @@ export default {
       ospaProcessing: 'OSPA will process the answers.',
       prosessing: 'The answers will be processed.',
     },
-    savingAnswers: 'Answers are saved automatically. Final day for answering the form:',
+    savingAnswers: 'Answers are saved automatically except for text fields. Final day for answering the form:',
     noSystemsSelected: 'No feedback systems selected.',
     selectSystems: 'Chooce a system by clicking',
     mostUseful: 'Most useful feedback systems',
@@ -193,6 +193,7 @@ export default {
   },
 
   generic: {
+    kludgeButton: 'Save the textfield',
     degreeReformIndividualAnswers: 'Answers',
     degreeReformIndividualForm: 'Form',
     companionFilter: "Include faculty's partnership programmes to the answers",

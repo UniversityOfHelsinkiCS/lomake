@@ -6,7 +6,7 @@ import {
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
-import { Loader } from 'semantic-ui-react'
+import { Loader, Button } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
@@ -52,6 +52,8 @@ const Textarea = ({
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
+
+  const [changes, setChanges] = useState(false)
 
   const formData = useSelector(({ form }) => form.data)
 
@@ -100,6 +102,7 @@ const Textarea = ({
 
   const handleChange = value => {
     setEditorState(value)
+    setChanges(true)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
@@ -114,6 +117,7 @@ const Textarea = ({
   }
 
   const handleBlur = () => {
+    setChanges(false)
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
@@ -214,6 +218,9 @@ const Textarea = ({
               }}
               readOnly={!hasLock}
             />
+            <Button disabled={!changes} style={{ marginTop: 20, marginBottom: 10 }}>
+              {t('generic:kludgeButton')}
+            </Button>
           </div>
           <span style={{ color: length > MAX_LENGTH - 100 ? colors.red : undefined }}>
             {length}/{MAX_LENGTH - 100}
