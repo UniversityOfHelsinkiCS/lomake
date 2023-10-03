@@ -29,6 +29,20 @@ const withLogging = fn => {
   }
 }
 
+const logAndEmit = (socket, event, payload) => {
+  const { uid } = socket.request.headers
+  const { data, form } = payload
+  logger.info(`[WS] EMIT ${event} from=${uid} to=${uid} form=${form} ${JSON.stringify(data)}`)
+  socket.emit(event, payload)
+}
+
+const logAndEmitToRoom = (socket, room, event, payload) => {
+  const { uid } = socket.request.headers
+  const { data, form } = payload
+  logger.info(`[WS] EMIT ${event} from=${uid} to=${room} form=${form} ${JSON.stringify(data)}`)
+  socket.to(room).emit(event, payload)
+}
+
 const stripTimeouts = room => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
@@ -104,7 +118,7 @@ const joinRoom = async (socket, room, form, io) => {
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-      socket.emit('new_form_data', answer.data || {})
+      logAndEmit(socket, 'new_form_data', answer.data || {})
     } else if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
@@ -121,7 +135,7 @@ const joinRoom = async (socket, room, form, io) => {
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
       io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-      socket.emit('new_form_data', answer.data || {})
+      logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -192,7 +206,7 @@ const updateField = async (socket, payload, io) => {
             },
           }
         )
-        socket.to(room).emit('new_form_data', updatedAnswer.data)
+        logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data)
       } else if (!currentAnswer && form === 3) {
         // only should happen in individual users form
         const createdAnswer = await db.tempAnswer.create({
@@ -201,7 +215,7 @@ const updateField = async (socket, payload, io) => {
           year: await whereDraftYear(),
           form,
         })
-        socket.to(room).emit('new_form_data', createdAnswer.data)
+        logAndEmitToRoom(socket, room, 'new_form_data', createdAnswer.data)
       }
     }
   } catch (error) {
