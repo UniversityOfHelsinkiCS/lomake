@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { isFormLocked } from 'Utilities/common'
 
-// TO FIX
+// eslint-disable-next-line react/function-component-definition
 export default function FormLocker({ programme, form = 1 }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()

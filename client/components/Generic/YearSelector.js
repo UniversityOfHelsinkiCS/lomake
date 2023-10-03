@@ -8,6 +8,7 @@ import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
 import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
 import './Generic.scss'
 
+// eslint-disable-next-line react/function-component-definition
 export default function YearSelector({ multiple, size, label }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()

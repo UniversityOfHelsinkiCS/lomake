@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 
+// eslint-disable-next-line react/function-component-definition
 export default function SaveIndicator() {
   const { t } = useTranslation()
   const [saving, setSaving] = useState(false)
