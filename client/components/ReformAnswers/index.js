@@ -5,6 +5,7 @@ import { getReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import { degreeReformIndividualQuestions as questionData } from '../../questionData'
 
 import RadioQuestion from './RadioQuestion'
+import BackroundUnitQuestion from './FacultyQuestion'
 import TextQuestion from './TextQuestion'
 import AnswerFilter from './AnswerFilter'
 
@@ -13,6 +14,7 @@ const RadioQuestionGroup = ({ questionGroup, answers }) => {
   const relevantParts = questionGroup.parts.filter(q => q.type === 'CHOOSE-RADIO')
 
   const primaryRoleQuestion = questionGroup.parts.find(q => q.id === 'primary_role')
+  const backroundUnitQuestion = questionGroup.parts.find(q => q.id === 'background_unit')
 
   return (
     <div style={{ margin: 30, marginBottom: 10 }}>
@@ -21,6 +23,7 @@ const RadioQuestionGroup = ({ questionGroup, answers }) => {
         <RadioQuestion key={part.id} question={part} answers={answers} />
       ))}
       {primaryRoleQuestion && <RadioQuestion question={primaryRoleQuestion} answers={answers} />}
+      {backroundUnitQuestion && <BackroundUnitQuestion question={backroundUnitQuestion} answers={answers} />}
       <div style={{ marginTop: 10 }} />
       <Divider />
     </div>
