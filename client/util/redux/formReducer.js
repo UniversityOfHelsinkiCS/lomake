@@ -125,9 +125,12 @@ export default (state = initialState, action) => {
         error: false,
       }
     case 'GET_FORM_SUCCESS':
+      // eslint-disable-next-line no-case-declarations
+      const data = { ...state.data, ...action.response }
+
       return {
         ...state,
-        data: action.response,
+        data,
         pending: false,
         error: false,
       }
