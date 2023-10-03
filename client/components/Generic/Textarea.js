@@ -106,10 +106,18 @@ const Textarea = ({
     // prevent a too early dispatch
     if (form === 3 && Object.keys(formData).length > 0) {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
-      dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+      // dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
       dispatch(updateFormField(fieldName, markdownStr, form))
     }
+  }
+
+  const handleBlur = () => {
+    const value = editorState
+    const content = value.getCurrentContent()
+    const rawObject = convertToRaw(content)
+    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
+    dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
   }
 
   const { length } = editorState.getCurrentContent().getPlainText()
@@ -174,6 +182,7 @@ const Textarea = ({
         <>
           <div data-cy={`editing-area-${id}`} onClick={askForLock} style={{ marginTop: '1em' }}>
             <Editor
+              onBlur={handleBlur}
               editorStyle={{ wordBreak: 'break-word', width: '100%' }}
               ref={ref}
               wrapperClassName="wrapper-class"
