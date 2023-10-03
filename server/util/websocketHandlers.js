@@ -11,7 +11,20 @@ const withLogging = fn => {
     const start = Date.now()
     const res = await fn(...args)
     const end = Date.now()
-    logger.info(`[WS] ${fn.name} ${end - start}ms`)
+
+    // Hacky logging. Please improve.
+    let payloadString = ''
+
+    const userId = args[0]?.request?.headers?.uid
+    payloadString += userId || ''
+
+    if (typeof args[1] === 'object') {
+      const { room, data, form } = args[1]
+      // Log payload
+      payloadString += room && data && form ? ` ${room} form=${form} ${JSON.stringify(data)}` : ''
+    }
+
+    logger.info(`[WS] ${fn.name} ${payloadString} ${end - start}ms`)
     return res
   }
 }
