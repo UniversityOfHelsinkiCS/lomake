@@ -16,7 +16,7 @@ describe('Misc tests', () => {
     cy.contains('Answers are saved automatically')
     cy.get('[data-cy=navBar-localeDropdown]').click()
     cy.get('[data-cy=navBar-localeOption-fi]').click()
-    cy.contains('Vastaukset tallentuvat automaattisesti.')
+    cy.contains('Vastaukset tallentuvat automaattisesti')
   })
 
   it('CSV-download can be started on OverviewPage', () => {
