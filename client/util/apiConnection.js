@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { getHeaders } from '@root/config/mockHeaders'
 import { basePath, inProduction } from 'Utilities/common'
+import { Sentry } from './sentry'
 
 /**
  * ApiConnection simplifies redux usage
@@ -47,6 +48,7 @@ export const handleRequest = store => next => async action => {
       const res = await callApi(route, method, data)
       store.dispatch({ type: `${prefix}_SUCCESS`, response: res.data, query })
     } catch (err) {
+      Sentry.captureException(err)
       store.dispatch({ type: `${prefix}_FAILURE`, response: err, query })
     }
   }

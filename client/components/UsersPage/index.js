@@ -10,6 +10,7 @@ import DeadlineInfo from './DeadlineInfo'
 import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
+import Debug from './Debug'
 
 export default () => {
   const { t } = useTranslation()
@@ -76,6 +77,14 @@ export default () => {
         render: () => (
           <Tab.Pane>
             <DeadlineSetting />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: 'Debug',
+        render: () => (
+          <Tab.Pane>
+            <Debug />
           </Tab.Pane>
         ),
       },

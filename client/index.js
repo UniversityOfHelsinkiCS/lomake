@@ -2,8 +2,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import * as Sentry from '@sentry/browser'
-import { BrowserTracing } from '@sentry/tracing'
 import { cypressUids, setHeaders, possibleUsers } from '@root/config/mockHeaders'
 
 import './assets/custom.scss'
@@ -15,15 +13,10 @@ import UserFaker from 'Components/UserFaker'
 
 import ErrorBoundary from 'Components/ErrorBoundary'
 import './util/i18n'
+import { initSentry } from 'Utilities/sentry'
 
-if (process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production') {
-  Sentry.init({
-    dsn: 'https://a6ceb1539cbea12e147f5e73189a1d45@toska.cs.helsinki.fi/13',
-    environment: process.env.SENTRY_ENVIRONMENT,
-    // release: process.env.SENTRY_RELEASE,
-    integrations: [new BrowserTracing()],
-    tracesSampleRate: 1.0,
-  })
+if (process.env.NODE_ENV === 'production') {
+  initSentry()
 }
 
 const refresh = () =>
