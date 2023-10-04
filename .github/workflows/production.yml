@@ -1,10 +1,10 @@
 name: Build production image
 
 on:
-  workflow_run:
-    workflows: ["Test and build staging-image"]
-    branches: [master]
-    types: [completed]
+  #workflow_run:
+  #  workflows: ["Test and build staging-image"]
+  #  branches: [master]
+  #  types: [completed]
   release:
     types: [published]
 
