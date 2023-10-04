@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { setViewOnly } from 'Utilities/redux/formReducer'
+import { Sentry } from 'Utilities/sentry'
 
 // eslint-disable-next-line react/function-component-definition
 export default function SaveIndicator() {
@@ -29,6 +30,7 @@ export default function SaveIndicator() {
     setSaveError(true)
     setTimeoutId(undefined)
     dispatch(setViewOnly(true))
+    Sentry.captureMessage('Form save failed')
   }
 
   useEffect(() => {

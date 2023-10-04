@@ -1,4 +1,5 @@
 import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { Sentry } from 'Utilities/sentry'
 import { defaultYears } from 'Utilities/common'
 import callBuilder from '../apiConnection'
 /**
@@ -47,18 +48,27 @@ export const getYearsUserHasAccessToAction = user => {
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: undefined }, action) => {
   switch (action.type) {
-    case 'LOGIN_SUCCESS':
+    case 'LOGIN_SUCCESS': {
+      const userData = {
+        ...action.response,
+        admin: isAdmin(action.response) || isSuperAdmin(action.response),
+        superAdmin: isSuperAdmin(action.response),
+        yearsUserHasAccessTo: getYearsUserHasAccessToAction(action.response),
+      }
+
+      Sentry.setUser({
+        id: userData.uid,
+        username: userData.username,
+        email: userData.email,
+      })
+
       return {
         ...state,
-        data: {
-          ...action.response,
-          admin: isAdmin(action.response) || isSuperAdmin(action.response),
-          superAdmin: isSuperAdmin(action.response),
-          yearsUserHasAccessTo: getYearsUserHasAccessToAction(action.response),
-        },
+        data: userData,
         pending: false,
         error: false,
       }
+    }
     case 'LOGIN_ATTEMPT':
       return {
         ...state,
@@ -71,6 +81,7 @@ export default (state = { data: undefined }, action) => {
         error: true,
       }
     case 'LOGOUT_SUCCESS':
+      Sentry.setUser(null)
       window.location = action.response.logoutUrl
       return {
         ...state,
