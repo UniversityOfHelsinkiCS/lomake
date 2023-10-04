@@ -3,13 +3,16 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('@root/config/common')
 const { whereDraftYear, inProduction } = require('@util/common')
+const { v4: uuidv4 } = require('uuid')
 
 let currentEditors = {}
 
 const withLogging = fn => {
   return async (...args) => {
+    const uuid = uuidv4()
     const start = Date.now()
-    const res = await fn(...args)
+    const acualArgs = [...args, uuid]
+    const res = await fn(...acualArgs)
     const end = Date.now()
 
     // Hacky logging. Please improve.
@@ -24,7 +27,7 @@ const withLogging = fn => {
       payloadString += room && data && form ? ` ${room} form=${form} ${JSON.stringify(data)}` : ''
     }
 
-    logger.info(`[WS] ${fn.name} ${payloadString} ${end - start}ms`)
+    logger.info(`[WS] ${fn.name} ${payloadString} ${end - start}ms , UUID=${uuid}`)
     return res
   }
 }
@@ -35,9 +38,9 @@ const logAndEmit = (socket, event, payload) => {
   socket.emit(event, payload)
 }
 
-const logAndEmitToRoom = (socket, room, event, payload) => {
+const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
   const { uid } = socket.request.headers
-  logger.info(`[WS] EMIT ${event} from=${uid} to=${room} ${JSON.stringify(payload)}`)
+  logger.info(`[WS] EMIT ${event} from=${uid} to=${room} UUID=${uuid} ${JSON.stringify(payload)}`)
   socket.to(room).emit(event, payload)
 }
 
@@ -145,7 +148,7 @@ const leaveRoom = async (socket, room) => {
   socket.emit('left_success', 'ok')
 }
 
-const updateField = async (socket, payload, io) => {
+const updateField = async (socket, payload, io, uuid) => {
   try {
     const { room, data, form } = payload
     if (!form) return
@@ -204,7 +207,7 @@ const updateField = async (socket, payload, io) => {
             },
           }
         )
-        logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data)
+        logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data, uuid)
       } else if (!currentAnswer && form === 3) {
         // only should happen in individual users form
         const createdAnswer = await db.tempAnswer.create({
@@ -213,7 +216,9 @@ const updateField = async (socket, payload, io) => {
           year: await whereDraftYear(),
           form,
         })
-        logAndEmitToRoom(socket, room, 'new_form_data', createdAnswer.data)
+        logAndEmitToRoom(socket, room, 'new_form_data', createdAnswer.data, uuid)
+      } else {
+        logger.error(`PANIC this should never happen: ${uuid}`)
       }
     }
   } catch (error) {

@@ -2,6 +2,24 @@ const ITEM_NAME = 'fakeUser'
 
 const possibleUsers = [
   {
+    uid: 'klemstro',
+    employeeNumber: undefined,
+    givenName: 'Acual kojo fake user',
+    mail: 'grp-toska+mockadmin@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees',
+    sn: 'AcualKojo',
+  },
+  {
+    uid: 'niklande',
+    employeeNumber: undefined,
+    givenName: 'Acual no kojo fake user',
+    mail: 'grp-toska+mockadmin@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-bsc-jory;hy-employees',
+    sn: 'AcualNonKojo',
+  },
+  {
     uid: 'superAdmin',
     employeeNumber: undefined,
     givenName: 'superAdmin',

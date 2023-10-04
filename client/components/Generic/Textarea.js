@@ -129,6 +129,21 @@ const Textarea = ({
     }
   }
 
+  // we could start saving on click instead on blur, in some cases the blur does not seem to work
+  // eslint-disable-next-line no-unused-vars
+  const handleSave = () => {
+    setChanges(false)
+    const value = editorState
+    const content = value.getCurrentContent()
+    const rawObject = convertToRaw(content)
+    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
+    if (form === 3) {
+      dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+    } else {
+      dispatch(updateFormField(fieldName, markdownStr, form))
+    }
+  }
+
   const { length } = editorState.getCurrentContent().getPlainText()
 
   const askForLock = () => {
