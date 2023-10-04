@@ -16,6 +16,7 @@ const { startDeadlineWatcher } = require('@root/server/scripts/deadlineWatcher')
 const { seed } = require('@root/server/scripts/seed')
 const { getUserList } = require('@root/server/scripts/getUserList')
 const { createTempAnswers } = require('@root/server/scripts/createTempAnswers')
+const { createWebsocketServer } = require('./server/websocket')
 
 initializeDatabaseConnection()
   .then(() => {
@@ -38,13 +39,7 @@ initializeDatabaseConnection()
 
     const app = express()
     const server = http.Server(app)
-    const io = require('socket.io')(server)
-    io.on('connection', socket => {
-      socket.on('update_field', room => require('@util/websocketHandlers').updateField(socket, room, io))
-      socket.on('join', (room, form) => require('@util/websocketHandlers').joinRoom(socket, room, form, io))
-      socket.on('leave', room => require('@util/websocketHandlers').leaveRoom(socket, room))
-      socket.on('get_lock', room => require('@util/websocketHandlers').getLock(socket, room, io))
-    })
+    createWebsocketServer(server)
 
     // Require is here so we can delete it from cache when files change (*)
     app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
