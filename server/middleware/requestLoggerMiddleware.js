@@ -12,7 +12,7 @@ const accessLogger = morgan((tokens, req, res) => {
   const responseTime = tokens['response-time'](req, res)
   const userAgent = tokens['user-agent'](req, res)
 
-  const message = `${method} ${url} ${status} - ${responseTime} ms`
+  const message = `${method} ${url} ${status} - ${responseTime} ms ${uid}`
 
   const additionalInfo = inProduction
     ? {
