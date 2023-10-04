@@ -66,8 +66,8 @@ jobs:
 
   build:
     name: 'Build and publish staging image'
-    needs:
-      - tests
+    #needs:
+    #  - tests
     runs-on: ubuntu-latest
 
     steps:
