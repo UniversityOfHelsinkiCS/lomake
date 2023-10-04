@@ -118,7 +118,7 @@ describe('SuperAdmin user tests', () => {
 
     // Edit text, year should have automatically switched to editable year
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.typeInEditor('[data-cy=textarea-learning_outcomes]', `{moveToEnd}, editing old year`)
+    cy.typeInEditor('learning_outcomes', `{moveToEnd}, editing old year`)
     cy.reload()
 
     // Check that edits have been added

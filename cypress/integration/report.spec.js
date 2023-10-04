@@ -34,7 +34,7 @@ describe('ReportPage tests', () => {
     cy.wait(500)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.wait(500)
-    cy.typeInEditor('[data-cy=textarea-learning_outcomes]', 'test words')
+    cy.typeInEditor('learning_outcomes', 'test words')
 
     cy.visit('/')
     cy.reload()
@@ -57,7 +57,7 @@ describe('ReportPage tests', () => {
     cy.visit('/')
     cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
-    cy.typeInEditor('[data-cy=textarea-learning_outcomes]', 'test words')
+    cy.typeInEditor('learning_outcomes', 'test words')
     cy.reload()
 
     cy.visit('/')

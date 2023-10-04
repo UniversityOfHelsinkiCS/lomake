@@ -85,20 +85,21 @@ Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
   })
 })
 
-Cypress.Commands.add('typeInEditor', (editorTag, textToBeTyped, flakyness = 24) => {
+Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24) => {
   // focus to aquire lock
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   const attempt = Cypress.currentRetry + 1
-  cy.get(editorTag)
+  cy.get(`[data-cy=textarea-${questionId}]`)
     .find('.editor-class')
     .click()
     .wait(500 * attempt)
     .find('[contenteditable]')
-    .wait(500 * attempt)
+    .focus()
     // TRUST ME THIS IS NEEDED
     .type(`${textToBeTyped}${' '.repeat(flakyness)}`, { delay: 0 })
     .wait(100 * attempt)
-    .blur()
+
+  cy.get(`[data-cy=save-button-${questionId}]`).click()
 })
 
 Cypress.Commands.add('createDeadline', (draftYear, formName) => {

@@ -125,7 +125,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
 
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'random')
+    cy.typeInEditor('review_of_last_years_situation_report', 'random')
 
     cy.visit('/')
     cy.reload()

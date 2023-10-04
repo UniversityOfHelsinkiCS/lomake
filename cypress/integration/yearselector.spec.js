@@ -54,7 +54,7 @@ describe("Previous year's answers", () => {
 
     cy.selectYear(new Date().getFullYear())
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'koira')
+    cy.typeInEditor('review_of_last_years_situation_report', 'koira')
 
     cy.reload()
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]')

@@ -233,7 +233,7 @@ const Textarea = ({
               }}
               readOnly={!hasLock}
             />
-            <Button disabled={!changes} style={{ marginTop: 20, marginBottom: 10 }}>
+            <Button disabled={!changes} style={{ marginTop: 20, marginBottom: 10 }} data-cy={`save-button-${id}`}>
               {t('generic:kludgeButton')}
             </Button>
           </div>

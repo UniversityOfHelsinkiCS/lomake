@@ -16,7 +16,7 @@ describe('Sidebar tests', () => {
 
   // Skip for now, figure out later why this does not work in CI-pipeline when it works locally
   it('Answer length of 1 is OK', () => {
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'A')
+    cy.typeInEditor('review_of_last_years_situation_report', 'A')
 
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
@@ -26,9 +26,7 @@ describe('Sidebar tests', () => {
   // Cypress and react-editor do not currently work together, when trying to copy text
   // Copying to the editor however actually works
   it('Answer length 1000 of is OK', () => {
-    cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').click()
-
-    cy.typeInEditor('[data-cy=textarea-review_of_last_years_situation_report]', 'A'.repeat(1000), 0)
+    cy.typeInEditor('review_of_last_years_situation_report', 'A'.repeat(1000), 0)
 
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-positive-review_of_last_years_situation_report]').click()
