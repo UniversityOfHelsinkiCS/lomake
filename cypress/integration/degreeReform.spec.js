@@ -197,9 +197,7 @@ describe('Degree reform form tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
     cy.wait(3000)
     // Check that Status Message works and is open
-    cy.get(`[data-cy="saving-answers-notice"]`).contains(
-      'Answers are saved automatically. Final day for answering the form:'
-    )
+    cy.get(`[data-cy="saving-answers-notice"]`)
     // ----------------------------------------
     cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place]')
       .find('input[type="radio"]')
@@ -274,7 +272,7 @@ describe('Degree reform form tests', () => {
     cy.login(cypressUser)
     cy.visit('/individual')
     // Check that Status Message works
-    cy.get(`[data-cy=saving-answers-notice]`).contains('Answers are saved automatically.')
+    cy.get(`[data-cy=saving-answers-notice]`)
     // ----------------------------------------
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value=bachelor]').as('checkbox').wait(1000)

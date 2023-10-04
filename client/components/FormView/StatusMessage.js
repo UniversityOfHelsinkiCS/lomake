@@ -55,28 +55,7 @@ const StatusMessage = ({ programme, form }) => {
         content={`${t('formView:status:canBeOpened')} ${deadlineObj.toLocaleDateString(locale)}.`}
       />
     )
-  /*  Deprecated since sending forms is not a thing
-  const LastFormSentMessage = () => {
-    return (
-      <Message icon>
-        <Icon name="envelope open" color="green" />
-        <Message.Content>
-          <Message.Header>
-            {' '}
-            {t('lastSent')} {checking}
-          </Message.Header>
-          <p>{t('lastSentInThisRole')}</p>
-          <ul>
-            {lastSentInfo.map(info => {
-              if (info) return <li key={info}>{info}</li>
-              return null
-            })}
-          </ul>
-        </Message.Content>
-      </Message>
-    )
-  }
-*/
+
   return (
     <>
       <Message

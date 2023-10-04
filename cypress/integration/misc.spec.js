@@ -13,7 +13,7 @@ describe('Misc tests', () => {
 
   it('Locale can be changed and translations work', () => {
     cy.visit(`/form/${testProgrammeCode}`)
-    cy.contains('Answers are saved automatically. ')
+    cy.contains('Answers are saved automatically')
     cy.get('[data-cy=navBar-localeDropdown]').click()
     cy.get('[data-cy=navBar-localeOption-fi]').click()
     cy.contains('Vastaukset tallentuvat automaattisesti.')

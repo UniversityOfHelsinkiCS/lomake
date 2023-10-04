@@ -98,6 +98,7 @@ Cypress.Commands.add('typeInEditor', (editorTag, textToBeTyped, flakyness = 24) 
     // TRUST ME THIS IS NEEDED
     .type(`${textToBeTyped}${' '.repeat(flakyness)}`, { delay: 0 })
     .wait(100 * attempt)
+    .blur()
 })
 
 Cypress.Commands.add('createDeadline', (draftYear, formName) => {
