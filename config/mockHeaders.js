@@ -215,6 +215,7 @@ const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.starts
 
 const setHeaders = uid => {
   const user = possibleUsers.find(u => u.uid === uid)
+
   if (!user) return
 
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))

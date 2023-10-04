@@ -4,13 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import * as Sentry from '@sentry/browser'
 import { BrowserTracing } from '@sentry/tracing'
-import { cypressUids, setHeaders } from '@root/config/mockHeaders'
+import { cypressUids, setHeaders, possibleUsers } from '@root/config/mockHeaders'
 
 import './assets/custom.scss'
 
 import store from 'Utilities/store'
 import { basePath } from 'Utilities/common'
 import App from 'Components/App'
+import UserFaker from 'Components/UserFaker'
+
 import ErrorBoundary from 'Components/ErrorBoundary'
 import './util/i18n'
 
@@ -29,6 +31,7 @@ const refresh = () =>
     <Provider store={store}>
       <BrowserRouter basename={basePath}>
         <ErrorBoundary>
+          {process.env.NODE_ENV === 'development' && <UserFaker />}
           <App />
         </ErrorBoundary>
       </BrowserRouter>
@@ -42,6 +45,13 @@ if (process.env.NODE_ENV === 'development') {
 
   if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {
     setHeaders(newUser)
+  }
+
+  // if you want to pick the user 'nicely' set the following key in local storage
+  if (window.localStorage.getItem('pickUser')) {
+    // eslint-disable-next-line no-alert
+    const user = window.prompt(`which user:\n\n${possibleUsers.map(u => u.uid).join('\n')}`)
+    setHeaders(user)
   }
 
   /* eslint-disable no-console */
