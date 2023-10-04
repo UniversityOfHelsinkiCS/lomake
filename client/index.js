@@ -43,7 +43,9 @@ if (process.env.NODE_ENV === 'development') {
   // if you want to pick the user 'nicely' set the following key in local storage
   if (window.localStorage.getItem('pickUser')) {
     // eslint-disable-next-line no-alert
-    const user = window.prompt(`which user:\n\n${possibleUsers.map(u => u.uid).join('\n')}`)
+    const user = window.prompt(
+      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`
+    )
     setHeaders(user)
   }
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 export default () => {
   const [faker, setFaker] = useState(null)
+  const [info, setInfo] = useState(null)
 
   useEffect(() => {
     const val = window.localStorage.getItem('pickUser')
@@ -18,9 +19,19 @@ export default () => {
       window.localStorage.setItem('pickUser', 1)
     }
   }
+
+  const onHover = () => {
+    if (!faker) {
+      setInfo('Click the button AND refresh the browser')
+    }
+  }
+
   return (
     <div>
-      <button onClick={onClick}>{faker ? 'turn faker off' : 'turn faker on'}</button>
+      <button onMouseEnter={onHover} onMouseLeave={() => setInfo(null)} onClick={onClick}>
+        {faker ? 'turn faker off' : 'turn faker on'}
+      </button>
+      <span style={{ marginLeft: 15 }}>{info}</span>
     </div>
   )
 }
