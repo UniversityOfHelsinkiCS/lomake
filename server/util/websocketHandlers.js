@@ -4,6 +4,7 @@ const logger = require('@util/logger')
 const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('@root/config/common')
 const { whereDraftYear, inProduction } = require('@util/common')
 const { v4: uuidv4 } = require('uuid')
+const { getUserByUid } = require('../services/userService')
 
 let currentEditors = {}
 
@@ -83,11 +84,11 @@ const getCurrentUser = async socket => {
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
   if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
-    const user = await await db.user.findOne({ where: { uid: loggedInAs } })
+    const user = await getUserByUid(loggedInAs)
     return user
   }
 
-  const user = await db.user.findOne({ where: { uid } })
+  const user = await getUserByUid(uid)
   return user
 }
 
