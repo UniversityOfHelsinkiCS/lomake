@@ -58,6 +58,7 @@ const facultyMap = {
   svenska: 'H74',
   'maatalous-metsätieteellinen': 'H80',
   eläinlääketieteellinen: 'H90',
+  testauksellinen: 'HTEST',
 }
 
 const data = [
@@ -1635,6 +1636,27 @@ const data = [
       },
     ],
   },
+  {
+    code: 'HTEST',
+    name: {
+      fi: 'Testaamisen tiedekunta',
+      en: 'Faculty of testing',
+      se: 'Testaamisen fakulteten',
+    },
+    programmes: [
+      {
+        key: 'T999999',
+        name: {
+          fi: 'Testaamisen kandiohjelma',
+          en: "Bachelor's Programme in Testing",
+          se: 'Kandidatprogrammet i testning',
+        },
+        level: 'bachelor',
+        companionFaculties: [],
+        international: false,
+      },
+    ],
+  }
 ]
 
 module.exports = {

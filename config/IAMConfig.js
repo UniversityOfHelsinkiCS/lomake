@@ -128,6 +128,7 @@ const joryMap = {
   'hy-dp-domast-jory': 'T923105',
   'hy-dp-matrena-jory': 'T923106',
   'hy-dp-docs-jory': 'T923107',
+  'grp-toska': 'T999999',
 }
 
 const kojoMap = {
@@ -258,6 +259,7 @@ const kojoMap = {
   'hy-dp-domast-jory': 'hy-tohtoriohjelma-johtajat',
   'hy-dp-matrena-jory': 'hy-tohtoriohjelma-johtajat',
   'hy-dp-docs-jory': 'hy-tohtoriohjelma-johtajat',
+  'grp-toska': 'grp-toska',
 }
 
 const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']

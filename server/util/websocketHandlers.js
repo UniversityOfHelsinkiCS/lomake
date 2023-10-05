@@ -219,6 +219,7 @@ const updateField = async (socket, payload, io, uuid) => {
         })
         logAndEmitToRoom(socket, room, 'new_form_data', createdAnswer.data, uuid)
       } else {
+        // This can happen, at least in dev, when the programme is new and was added after deadlines are updated. Updating deadlines may fix.
         logger.error(`PANIC this should never happen: ${uuid}`)
       }
     }
