@@ -13,7 +13,7 @@ export default function SaveIndicator() {
   const [saveError, setSaveError] = useState(false)
   const [timeoutId, setTimeoutId] = useState(undefined)
 
-  const isIndividualForm = window.location.href.endsWith('/individual')
+  const isIndividualForm = window.location.href.includes('/individual')
 
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
   const lastSaveAttempt = useSelector(state => state.form.lastSaveAttempt)

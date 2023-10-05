@@ -57,7 +57,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(loginAction())
-    if (!window.location.href.endsWith('/individual')) {
+    if (!window.location.href.includes('/individual')) {
       dispatch(wsConnect())
     }
 
