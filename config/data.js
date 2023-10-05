@@ -1647,11 +1647,11 @@ const data = [
       {
         key: 'T999999',
         name: {
-          fi: 'Testaamisen kandiohjelma',
-          en: "Bachelor's Programme in Testing",
-          se: 'Kandidatprogrammet i testning',
+          fi: 'Testaamisen tohtoriohjelma',
+          en: 'Doctoral Programme in Testing',
+          se: 'Doktorandprogrammet i testning',
         },
-        level: 'bachelor',
+        level: 'doctoral',
         companionFaculties: [],
         international: false,
       },
