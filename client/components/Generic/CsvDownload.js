@@ -20,14 +20,14 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
             [questionId, ...acc[1]],
           ]
         },
-        [[], []]
+        [[], []],
       )
       return [
         [...newArray[0], ...acc[0]],
         [...newArray[1], ...acc[1]],
       ]
     },
-    [[], []]
+    [[], []],
   )
   csvData[0].push(t('faculty'))
   csvData[0].push(t('programmeHeader'))
@@ -214,7 +214,7 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
       wantedData,
       view,
       programme,
-    ]
+    ],
   )
 
   const dataTitle = t(`generic:csvFile${view}${wantedData}`)

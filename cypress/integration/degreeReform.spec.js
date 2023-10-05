@@ -85,7 +85,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=nav-degree-reform-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
     cy.get(`[data-cy="no-write-access-notice"]`).contains(
-      `You don't have editing rights to this form. But you can view the answers.`
+      `You don't have editing rights to this form. But you can view the answers.`,
     )
   })
 
@@ -97,7 +97,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
     cy.get('[data-cy=form-section-II]').contains(
-      'Genuine three-tier structure and the principles of the Bologna Process'
+      'Genuine three-tier structure and the principles of the Bologna Process',
     )
     cy.get('[data-cy=form-section-III]').contains('Structure and functioning of bachelor’s programmes')
     cy.get('[data-cy=form-section-VII]').contains('Management and leadership of degree programmes')
@@ -124,7 +124,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
     cy.get('[data-cy=form-section-II]').contains(
-      'Genuine three-tier structure and the principles of the Bologna Process'
+      'Genuine three-tier structure and the principles of the Bologna Process',
     )
     cy.get('[data-cy=form-section-IV]').contains('Structure and functioning of master’s programmes')
     cy.get('[data-cy=form-section-V]').contains('Functioning of international master’s programmes')
@@ -152,7 +152,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
     cy.get('[data-cy=form-section-II]').contains(
-      'Genuine three-tier structure and the principles of the Bologna Process'
+      'Genuine three-tier structure and the principles of the Bologna Process',
     )
     cy.get('[data-cy=form-section-VI]').contains('Structure and functioning of doctoral programmes')
     cy.get('[data-cy=form-section-VII]').contains('Management and leadership of degree programmes')
@@ -349,7 +349,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-4]`).should(
       'contain',
-      'Structure and functioning of bachelor’s programmes'
+      'Structure and functioning of bachelor’s programmes',
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 7)
@@ -363,7 +363,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-5]`).should(
       'contain',
-      'Structure and functioning of master’s programmes'
+      'Structure and functioning of master’s programmes',
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 8)
@@ -377,7 +377,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-6]`).should(
       'contain',
-      'Functioning of international master’s programmes'
+      'Functioning of international master’s programmes',
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 9)
@@ -391,7 +391,7 @@ describe('Degree reform form tests', () => {
 
     cy.get(`[data-cy=navigation-sidebar-section-7]`).should(
       'contain',
-      'Structure and functioning of doctoral programmes'
+      'Structure and functioning of doctoral programmes',
     )
 
     cy.get('[data-cy=navigation-sidebar-list]').children().should('have.length', 10)

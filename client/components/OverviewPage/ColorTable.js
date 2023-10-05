@@ -202,7 +202,7 @@ const ColorTable = React.memo(
         })}
       </div>
     )
-  }
+  },
 )
 
 export default ColorTable

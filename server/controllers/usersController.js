@@ -15,7 +15,7 @@ const getCurrentUser = async (req, res) => {
           where: {
             uid: req.user.uid,
           },
-        }
+        },
       )
     } catch (error) {
       logger.error(`Failed to update the last login for user: ${req.user.uid}`)
@@ -128,7 +128,7 @@ const saveTempAccess = async (req, res) => {
         await sendNewTempAccessNotification(
           `${user.firstname} ${user.lastname}`,
           newAccess.progNames,
-          newAccess.kojoEmail
+          newAccess.kojoEmail,
         )
       }
       return res.status(200).json(updatedUser)
@@ -154,7 +154,7 @@ const deleteTempAccess = async (req, res) => {
     const updatedUser = await user.update({ tempAccess: toUpdate })
     if (updatedUser) {
       logger.info(
-        `Temporary access of user ${user.uid} to programme ${req.params.programme} was deleted by ${req.user.firstname} ${req.user.lastname}`
+        `Temporary access of user ${user.uid} to programme ${req.params.programme} was deleted by ${req.user.firstname} ${req.user.lastname}`,
       )
       return res.status(200).json(updatedUser)
     }

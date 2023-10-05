@@ -14,25 +14,23 @@ const OwnerAccordionUserRow = ({ user, programme }) => {
   const admin = user.access[programme] ? user.access[programme].admin : false
 
   return (
-    <>
-      <Grid.Row key={user.id}>
-        <Grid.Column width={3} style={{ textAlign: 'center' }}>
-          {`${user.lastname}, ${user.firstname}`}
-        </Grid.Column>
-        <Grid.Column width={4} style={{ textAlign: 'center' }}>
-          {user.email}
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
-          <SwitchableBadge cyTag={`read-${user.uid}${read ? '' : '-false'}`} currentAccess={read} />
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
-          <SwitchableBadge cyTag={`write-${user.uid}${write ? '' : '-false'}`} currentAccess={write} />
-        </Grid.Column>
-        <Grid.Column textAlign="center" width={2}>
-          <SwitchableBadge cyTag={`admin-${user.uid}${admin ? '' : '-false'}`} currentAccess={admin} />
-        </Grid.Column>
-      </Grid.Row>
-    </>
+    <Grid.Row key={user.id}>
+      <Grid.Column width={3} style={{ textAlign: 'center' }}>
+        {`${user.lastname}, ${user.firstname}`}
+      </Grid.Column>
+      <Grid.Column width={4} style={{ textAlign: 'center' }}>
+        {user.email}
+      </Grid.Column>
+      <Grid.Column textAlign="center" width={2}>
+        <SwitchableBadge cyTag={`read-${user.uid}${read ? '' : '-false'}`} currentAccess={read} />
+      </Grid.Column>
+      <Grid.Column textAlign="center" width={2}>
+        <SwitchableBadge cyTag={`write-${user.uid}${write ? '' : '-false'}`} currentAccess={write} />
+      </Grid.Column>
+      <Grid.Column textAlign="center" width={2}>
+        <SwitchableBadge cyTag={`admin-${user.uid}${admin ? '' : '-false'}`} currentAccess={admin} />
+      </Grid.Column>
+    </Grid.Row>
   )
 }
 

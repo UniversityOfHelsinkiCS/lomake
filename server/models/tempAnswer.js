@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'temp_answers',
-    }
+    },
   )
 
   return tempAnswer

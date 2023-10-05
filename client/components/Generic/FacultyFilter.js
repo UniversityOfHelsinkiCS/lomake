@@ -24,7 +24,7 @@ const FacultyFilter = ({ size, label }) => {
         key: f.code,
         value: f.code,
         text: f.name[lang],
-      }))
+      })),
     )
   }
 

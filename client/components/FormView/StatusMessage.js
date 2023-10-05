@@ -36,14 +36,12 @@ const StatusMessage = ({ programme, form }) => {
 
   if (!deadlineObj)
     return (
-      <>
-        <Message
-          data-cy="deadline-passed-notice"
-          icon="clock"
-          header={`${t('formView:status:deadlinePassed')}`}
-          content={`${t('formView:status:prosessing')}`}
-        />
-      </>
+      <Message
+        data-cy="deadline-passed-notice"
+        icon="clock"
+        header={`${t('formView:status:deadlinePassed')}`}
+        content={`${t('formView:status:prosessing')}`}
+      />
     )
 
   if (viewOnly)

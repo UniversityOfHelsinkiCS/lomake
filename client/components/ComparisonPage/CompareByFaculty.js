@@ -129,7 +129,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   showEmpty={showEmpty}
                   columns={isAdmin(user) ? 3 : 2}
                 />
-              )
+              ),
           )}
         </Grid.Column>
         <Grid.Column>
@@ -147,7 +147,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                   name="faculty"
                   columns={isAdmin(user) ? 3 : 2}
                 />
-              )
+              ),
           )}
         </Grid.Column>
         {isAdmin(user) && (
@@ -166,7 +166,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
                     name="university"
                     columns={isAdmin(user) ? 3 : 2}
                   />
-                )
+                ),
             )}
           </Grid.Column>
         )}

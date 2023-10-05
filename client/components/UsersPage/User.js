@@ -106,6 +106,6 @@ export default ({ user, lang, programmeCodesAndNames }) => {
         )}
       </Table.Row>
     ),
-    [user]
+    [user],
   )
 }

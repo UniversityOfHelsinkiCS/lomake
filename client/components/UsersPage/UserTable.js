@@ -62,7 +62,7 @@ export default () => {
         .join(', ')
         .toString()
         .toLocaleLowerCase()
-        .includes(accessFilter.toLocaleLowerCase())
+        .includes(accessFilter.toLocaleLowerCase()),
     )
     return byAccess
   }

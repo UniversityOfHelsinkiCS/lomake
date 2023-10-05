@@ -50,11 +50,7 @@ const BasicRadio = ({
               <React.Fragment key={o.id}>
                 {!hidePopup ? (
                   <Popup
-                    content={
-                      <>
-                        <p>{toolTipText}</p>
-                      </>
-                    }
+                    content={<p>{toolTipText}</p>}
                     popper={{ id: 'popper-container', style: { zIndex: 2000 } }}
                     position="bottom center"
                     trigger={

@@ -121,11 +121,7 @@ const DegreeReformIndividual = () => {
             <span style={{ fontSize: '1.5em' }}>{t('formView:sendForm')}</span>
           </Button>
           <p style={{ fontSize: '15px', textAlign: 'center' }}>{t('formView:canChange')}</p>
-          {message ? (
-            <>
-              <Message size="tiny" header={message} color="red" />
-            </>
-          ) : null}
+          {message ? <Message size="tiny" header={message} color="red" /> : null}
         </div>
       </Dimmer.Dimmable>
     </div>

@@ -134,7 +134,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
       'contain.text',
-      'random'
+      'random',
     )
     cy.hasAccess('cypressRandomRightsUser', 'KH50_006', { read: true, write: true, admin: false })
   })
@@ -160,7 +160,7 @@ describe('IAM permission tests', () => {
     cy.get('[data-cy=nav-comparison]').click()
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount()
+      helpers.getTotalProgrammeCount(),
     )
   })
 })

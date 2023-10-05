@@ -84,7 +84,7 @@ const remove = async (req, res) => {
     if (remainingDeadlines.length === 0) {
       await db.studyprogramme.update(
         { lockedForms: { evaluation: true, yearly: true, 'degree-reform': true } },
-        { where: {} }
+        { where: {} },
       )
       await db.draftYear.destroy({
         truncate: true,

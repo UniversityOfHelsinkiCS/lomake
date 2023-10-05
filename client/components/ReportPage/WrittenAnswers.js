@@ -103,7 +103,7 @@ const WrittenAnswers = ({
                 <DisabledQuestion question={question} chosenProgrammes={chosenProgrammes} />
                 <div className="ui divider" />
               </div>
-            ))
+            )),
         )}
       </Accordion>
     </div>

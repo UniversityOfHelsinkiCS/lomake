@@ -436,7 +436,7 @@ const clearTempForIndividual = async uid => {
         where: {
           [Op.and]: [{ programme: uid }, { form: formKeys.DEGREE_REFORM_INDIVIDUALS }],
         },
-      }
+      },
     )
     logger.info(`Cleared temp answer for current user`)
   } catch (error) {

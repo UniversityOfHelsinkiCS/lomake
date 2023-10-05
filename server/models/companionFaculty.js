@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       tableName: 'companion_faculties',
-    }
+    },
   )
 
   companionFaculty.associate = models => {

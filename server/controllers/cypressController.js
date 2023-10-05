@@ -123,7 +123,7 @@ const resetDeadlines = async () => {
         locked: false,
         lockedForms: { evaluation: false, yearly: false, 'degree-reform': false, 'evaluation-faculty': false },
       },
-      { where: {} }
+      { where: {} },
     )
 
     // Close all deadlines and create new for yearly form

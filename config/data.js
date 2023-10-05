@@ -1656,7 +1656,7 @@ const data = [
         international: false,
       },
     ],
-  }
+  },
 ]
 
 module.exports = {

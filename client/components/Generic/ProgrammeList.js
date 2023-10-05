@@ -46,7 +46,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                   >
                     <Programme p={p} />
                   </p>
-                )
+                ),
             )}
             <div className="ui divider" />
             <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t('generic:chooseMore')}</p>
@@ -62,7 +62,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                   >
                     <Programme p={p} />
                   </p>
-                )
+                ),
             )}
           </>
         ) : (

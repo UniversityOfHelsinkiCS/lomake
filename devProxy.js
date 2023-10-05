@@ -55,7 +55,7 @@ const createProxy = (host, port) => {
               console.log(e.message)
               res.end()
             }
-          }
+          },
         )
 
         // This is the magic to fix Socket hang up when nodemon restarts backend. Now it doesn't process.exit(1)
@@ -90,7 +90,7 @@ const createProxy = (host, port) => {
             // console.log(e.message)
             res.end()
           }
-        }
+        },
       )
 
       // Forward the body of the request to esbuild

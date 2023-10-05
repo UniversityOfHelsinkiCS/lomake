@@ -75,7 +75,7 @@ const Measures = ({ label, id, required, number, previousYearsAnswers, extrainfo
           // eslint-disable-next-line react/no-array-index-key
           <div style={{ paddingTop: '0' }} key={index}>
             <SimpleTextarea label={`${index + 1})`} id={`${id}_${index + 1}`} viewOnly={viewOnly} form={form} />
-          </div>
+          </div>,
         )
         return acc
       }, [])}

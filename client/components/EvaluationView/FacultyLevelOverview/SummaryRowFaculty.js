@@ -52,7 +52,7 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, s
         })
         return acc
       },
-      { bachelor: {}, master: {}, doctoral: {} }
+      { bachelor: {}, master: {}, doctoral: {} },
     )
   }
   return (

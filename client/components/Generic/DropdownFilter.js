@@ -50,7 +50,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
           key: s.key,
           value: s.key,
           text: s.name[lang],
-        }))
+        })),
       )
     }
 
@@ -59,7 +59,7 @@ const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) =>
         key: f.code,
         value: f.code,
         text: f.name[lang],
-      }))
+      })),
     )
   }
 

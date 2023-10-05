@@ -25,6 +25,6 @@ export default function useOnClickOutside(ref, handler) {
     // ... callback/cleanup to run every render. It's not a big deal ...
     // ... but to optimize you can wrap handler in useCallback before ...
     // ... passing it into this hook.
-    [ref, handler]
+    [ref, handler],
   )
 }

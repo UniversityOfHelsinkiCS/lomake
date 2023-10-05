@@ -174,7 +174,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                         getIsCompleted({
                           formData: form.data,
                           questionId: id,
-                        })
+                        }),
                       )
 
                       return (

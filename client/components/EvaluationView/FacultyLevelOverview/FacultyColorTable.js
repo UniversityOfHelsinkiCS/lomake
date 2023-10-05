@@ -132,7 +132,7 @@ const FacultyColorTable = React.memo(
         })}
       </div>
     )
-  }
+  },
 )
 
 export default FacultyColorTable

@@ -31,7 +31,7 @@ describe('ComparisonPage tests', () => {
 
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
-      helpers.getTotalProgrammeCount()
+      helpers.getTotalProgrammeCount(),
     )
   })
 
@@ -45,7 +45,7 @@ describe('ComparisonPage tests', () => {
     cy.get('[data-cy=faculty-filter]').click()
     cy.get('span').contains('All faculties').click()
     cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains(
-      `/ ${helpers.getDoctoralProgrammeCount()}`
+      `/ ${helpers.getDoctoralProgrammeCount()}`,
     )
   })
 

@@ -31,7 +31,7 @@ const getUserList = async () => {
       if (programmeKeys) {
         programmeKeys.forEach(key => {
           data = data.concat(
-            `${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`
+            `${programmeKeyMap.get(key)};${key};${firstname} ${lastname};${formatRights(access[key])}\n`,
           )
         })
       }

@@ -72,7 +72,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
                   setShowing={setShowing}
                 />
               </div>
-            )
+            ),
         )}
       </div>
     </div>

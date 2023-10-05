@@ -206,7 +206,7 @@ const updateField = async (socket, payload, io, uuid) => {
             where: {
               [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
             },
-          }
+          },
         )
         logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data, uuid)
       } else if (!currentAnswer && form === 3) {

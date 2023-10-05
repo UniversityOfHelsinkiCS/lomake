@@ -229,7 +229,7 @@ const removeLoggedInUsersGroups = () => {
     JSON.stringify({
       ...user,
       hyGroupCn: '',
-    })
+    }),
   )
 }
 

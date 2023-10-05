@@ -135,7 +135,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
                           showing={showingQuestion === question.id}
                           handleClick={() => setShowingQuestion(showingQuestion === question.id ? -1 : question.id)}
                         />
-                      )
+                      ),
                   )}
                 </Accordion>
               </Grid.Column>

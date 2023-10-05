@@ -29,7 +29,7 @@ const refresh = () =>
         </ErrorBoundary>
       </BrowserRouter>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root'),
   )
 
 if (process.env.NODE_ENV === 'development') {
@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'development') {
   if (window.localStorage.getItem('pickUser')) {
     // eslint-disable-next-line no-alert
     const user = window.prompt(
-      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`
+      `select user (two first only in prod db):\n\n${possibleUsers.map(u => u.uid).join('\n')}`,
     )
     setHeaders(user)
   }

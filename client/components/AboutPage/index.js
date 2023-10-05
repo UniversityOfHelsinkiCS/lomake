@@ -12,18 +12,16 @@ export default () => {
   }, [lang])
 
   return (
-    <>
-      <div className="about-container">
-        <h1>{t('aboutPage:title')}</h1>
-        <div className="about-header-line" />
-        <h3>{t('aboutPage:whatIsIt')}</h3>
-        <p>{t('aboutPage:whatIsItReply')}</p>
-        <h3>{t('aboutPage:howToFillTitle')}</h3>
-        <p>{t('aboutPage:howToFill')}</p>
-        <h3>{t('aboutPage:whatElseTitle')}</h3>
-        <p>{t('aboutPage:whatElse')}</p>
-        <p>{t('aboutPage:contactInfo')}</p>
-      </div>
-    </>
+    <div className="about-container">
+      <h1>{t('aboutPage:title')}</h1>
+      <div className="about-header-line" />
+      <h3>{t('aboutPage:whatIsIt')}</h3>
+      <p>{t('aboutPage:whatIsItReply')}</p>
+      <h3>{t('aboutPage:howToFillTitle')}</h3>
+      <p>{t('aboutPage:howToFill')}</p>
+      <h3>{t('aboutPage:whatElseTitle')}</h3>
+      <p>{t('aboutPage:whatElse')}</p>
+      <p>{t('aboutPage:contactInfo')}</p>
+    </div>
   )
 }

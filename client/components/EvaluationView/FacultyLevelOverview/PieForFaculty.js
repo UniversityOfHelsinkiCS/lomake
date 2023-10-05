@@ -37,74 +37,72 @@ const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData
 
       return acc
     },
-    { colors: {}, text: [] }
+    { colors: {}, text: [] },
   )
   return (
-    <>
-      <div
-        key={facultyKey}
-        style={{ cursor: 'pointer' }}
-        onClick={() =>
-          setModalData({
-            header: evaluationQuestions.reduce((acc, cur) => {
+    <div
+      key={facultyKey}
+      style={{ cursor: 'pointer' }}
+      onClick={() =>
+        setModalData({
+          header: evaluationQuestions.reduce((acc, cur) => {
+            if (acc) return acc
+            const header = cur.parts.reduce((acc, cur) => {
               if (acc) return acc
-              const header = cur.parts.reduce((acc, cur) => {
-                if (acc) return acc
 
-                if (cur.id === modifiedQuestionId) {
-                  return cur.description[lang]
-                }
-
-                return acc
-              }, '')
-              if (header) return header
+              if (cur.id === modifiedQuestionId) {
+                return cur.description[lang]
+              }
 
               return acc
-            }, ''),
-            facultyKey,
-            facultyName,
-            content: answersCounted.text,
-            color: answersCounted.colors,
-          })
-        }
-      >
-        <PieChart
-          animationDuration={500}
-          animationEasing="ease-out"
-          center={[50, 50]}
-          data={[
-            {
-              color: '#9dff9d',
-              value: answersCounted.colors.green || 0,
-            },
-            {
-              color: '#ffffb1',
-              value: answersCounted.colors.yellow || 0,
-            },
-            {
-              color: '#ff7f7f',
-              value: answersCounted.colors.red || 0,
-            },
-            answersCounted.colors.green || answersCounted.colors.yellow || answersCounted.colors.red
-              ? {
-                  color: '#737373',
-                  value: 0,
-                }
-              : {
-                  color: '#737373',
-                  value: 1,
-                },
-          ]}
-          labelPosition={50}
-          lengthAngle={360}
-          lineWidth={100}
-          paddingAngle={0}
-          radius={50}
-          startAngle={0}
-          viewBoxSize={[100, 100]}
-        />
-      </div>
-    </>
+            }, '')
+            if (header) return header
+
+            return acc
+          }, ''),
+          facultyKey,
+          facultyName,
+          content: answersCounted.text,
+          color: answersCounted.colors,
+        })
+      }
+    >
+      <PieChart
+        animationDuration={500}
+        animationEasing="ease-out"
+        center={[50, 50]}
+        data={[
+          {
+            color: '#9dff9d',
+            value: answersCounted.colors.green || 0,
+          },
+          {
+            color: '#ffffb1',
+            value: answersCounted.colors.yellow || 0,
+          },
+          {
+            color: '#ff7f7f',
+            value: answersCounted.colors.red || 0,
+          },
+          answersCounted.colors.green || answersCounted.colors.yellow || answersCounted.colors.red
+            ? {
+                color: '#737373',
+                value: 0,
+              }
+            : {
+                color: '#737373',
+                value: 1,
+              },
+        ]}
+        labelPosition={50}
+        lengthAngle={360}
+        lineWidth={100}
+        paddingAngle={0}
+        radius={50}
+        startAngle={0}
+        viewBoxSize={[100, 100]}
+      />
+    </div>
   )
 }
 

@@ -15,17 +15,15 @@ export default function SaveIndicator() {
   if (viewOnly) return null
 
   return (
-    <>
-      <Button
-        style={{
-          position: 'fixed',
-          right: '5px',
-          bottom: '5px',
-          zIndex: 100,
-        }}
-      >
-        {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
-      </Button>
-    </>
+    <Button
+      style={{
+        position: 'fixed',
+        right: '5px',
+        bottom: '5px',
+        zIndex: 100,
+      }}
+    >
+      {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+    </Button>
   )
 }

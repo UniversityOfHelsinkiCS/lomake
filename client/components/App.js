@@ -37,6 +37,7 @@ const languageFromUrl = () => {
 }
 
 export default () => {
+  const isNotIndividualForm = !window.location.href.includes('/individual')
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
   const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -57,7 +58,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(loginAction())
-    if (!window.location.href.includes('/individual')) {
+    if (isNotIndividualForm) {
       dispatch(wsConnect())
     }
 
@@ -69,11 +70,13 @@ export default () => {
   useEffect(() => {
     const user = currentUser.data
     if (user) {
-      dispatch(getUsersProgrammes())
-      dispatch(getStudyProgrammes())
       dispatch(getDeadlineAndDraftYear())
-      dispatch(getFaculties())
-      dispatch(getAnswersAction())
+      if (isNotIndividualForm) {
+        dispatch(getUsersProgrammes())
+        dispatch(getFaculties())
+        dispatch(getAnswersAction())
+        dispatch(getStudyProgrammes())
+      }
     }
   }, [currentUser])
 
@@ -101,7 +104,9 @@ export default () => {
     }
   }, [oldAnswers, deadlines])
 
-  if (!currentUser.data || !studyProgrammes || !oldAnswers || !oldAnswers.data) return null
+  if (!currentUser.data) return null
+
+  if (isNotIndividualForm && (!studyProgrammes || !oldAnswers || !oldAnswers.data)) return null
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <NavBar />

@@ -18,10 +18,10 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
 
   const filterColor = (yearsIndex, color, colorKey) => {
     const newColors = colors.map((c, index) =>
-      index === yearsIndex && colors[yearsIndex] !== color ? color : colors[index]
+      index === yearsIndex && colors[yearsIndex] !== color ? color : colors[index],
     )
     const newButtons = buttons.map((b, index) =>
-      index === yearsIndex && buttons[yearsIndex] !== colorKey ? colorKey : buttons[index]
+      index === yearsIndex && buttons[yearsIndex] !== colorKey ? colorKey : buttons[index],
     )
     setColors(newColors)
     setButtons(newButtons)
@@ -114,7 +114,7 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                       <h4>{form === 'evaluation' ? t('empty') : t('noData')}</h4>
                     )}
                   </Grid.Column>
-                )
+                ),
             )}
           </Grid.Row>
         </Grid>
