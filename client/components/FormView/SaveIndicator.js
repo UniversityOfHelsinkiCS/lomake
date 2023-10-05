@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import { Button, Message, Icon } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,6 +25,7 @@ export default function SaveIndicator() {
   const viewOnly = useSelector(state => state.form.viewOnly)
   const dispatch = useDispatch()
 
+  // eslint-disable-next-line no-unused-vars
   const errorHandler = () => {
     if (isIndividualForm) return
     if (viewOnly) return
@@ -44,8 +46,9 @@ export default function SaveIndicator() {
     setSaving(true)
     if (timeoutId || viewOnly) return undefined
 
+    console.log('STARTING TIMER')
     const temp = setTimeout(() => {
-      errorHandler()
+      // DO NOT DO THIS ANYMORE errorHandler()
     }, 10000)
     setTimeoutId(temp)
 
@@ -56,6 +59,7 @@ export default function SaveIndicator() {
 
   useEffect(() => {
     if (!isIndividualForm && saving) {
+      console.log('SAVE SUCCESS')
       setSaving(false)
       clearTimeout(timeoutId)
       setTimeoutId(undefined)
