@@ -48,7 +48,15 @@ export const handleRequest = store => next => async action => {
       const res = await callApi(route, method, data)
       store.dispatch({ type: `${prefix}_SUCCESS`, response: res.data, query })
     } catch (err) {
-      Sentry.captureException(err)
+      Sentry.captureException(err, {
+        tags: {
+          route,
+          method,
+          data,
+          prefix,
+          query,
+        },
+      })
       store.dispatch({ type: `${prefix}_FAILURE`, response: err, query })
     }
   }
