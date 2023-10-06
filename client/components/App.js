@@ -13,7 +13,7 @@ import { getAnswersAction } from 'Utilities/redux/oldAnswersReducer'
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { setLanguage } from 'Utilities/redux/languageReducer'
-
+import { Loader } from 'semantic-ui-react'
 import Footer from './Footer/Footer'
 
 const languageFromUrl = () => {
@@ -40,7 +40,8 @@ export default () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
-  const studyProgrammes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const studyProgrammes = useSelector(state => state.studyProgrammes)
+  const faculties = useSelector(state => state.faculties)
   const deadlines = useSelector(state => state.deadlines)
   const oldAnswers = useSelector(state => state.oldAnswers) // (({ oldAnswers }) => oldAnswers.data)
   const lang = useSelector(state => state.language)
@@ -71,11 +72,11 @@ export default () => {
     const user = currentUser.data
     if (user) {
       dispatch(getDeadlineAndDraftYear())
+      dispatch(getFaculties())
+      dispatch(getStudyProgrammes())
       if (isNotIndividualForm) {
         dispatch(getUsersProgrammes())
-        dispatch(getFaculties())
         dispatch(getAnswersAction())
-        dispatch(getStudyProgrammes())
       }
     }
   }, [currentUser])
@@ -106,11 +107,14 @@ export default () => {
 
   if (!currentUser.data) return null
 
-  if (isNotIndividualForm && (!studyProgrammes || !oldAnswers || !oldAnswers.data)) return null
+  const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
+  const isIndividualDataReady = studyProgrammes?.data && faculties?.data
+  const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <NavBar />
-      <Router />
+      {showRouter ? <Router /> : <Loader active />}
       <Footer />
     </div>
   )

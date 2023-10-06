@@ -139,7 +139,7 @@ export default () => {
     },
   ]
 
-  if (!user || !usersProgrammes) return <></>
+  if (!user || !usersProgrammes) return null
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
   if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
