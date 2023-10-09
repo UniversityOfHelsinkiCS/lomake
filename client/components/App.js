@@ -89,7 +89,7 @@ export default () => {
         deadlines.draftYear &&
         deadlines?.nextDeadline?.length > 0 &&
         new Date(deadlines.nextDeadline.find(d => d.form === 1)?.date) >= new Date() &&
-        currentUser.data.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
+        currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
         year = deadlines.draftYear.year
       } else {
@@ -98,7 +98,7 @@ export default () => {
           return acc
         }, 2019)
       }
-      if (currentUser.data.yearsUserHasAccessTo.includes(year)) {
+      if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
         dispatch(setYear(year))
         dispatch(setMultipleYears([year]))
       }
