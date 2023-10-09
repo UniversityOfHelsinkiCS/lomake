@@ -1,3 +1,5 @@
+const lodash = require('lodash')
+
 const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const { getIAMRights } = require('@util/IAMrights')
 const logger = require('@util/logger')
@@ -30,12 +32,18 @@ const IAMmiddleware = async (req, _, next) => {
 
     checkTemporaryAccesses(access, user.tempAccess)
 
-    user.specialGroup = specialGroup
+    console.log('HERE')
+    if (
+      !lodash.isEqual(specialGroup, user.specialGroup) ||
+      !lodash.isEqual(access, user.access) ||
+      !lodash.isEqual(iamGroups, user.iamGroups)
+    ) {
+      user.specialGroup = specialGroup
+      user.access = access
+      user.iamGroups = iamGroups
 
-    user.access = access
-    user.iamGroups = iamGroups
-
-    await user.save()
+      await user.save()
+    }
   }
 
   return next()
