@@ -165,7 +165,11 @@ const updateField = async (socket, payload, io, uuid) => {
       const field = Object.keys(data)[0]
       const currentEditor = currentEditors[room] ? currentEditors[room][field] : undefined
 
-      if (currentEditor && currentEditor.uid !== currentUser.uid) return
+      if (currentEditor && currentEditor.uid !== currentUser.uid) {
+        logger.error(`Missed an edit uid=${currentUser.uid} eid=${currentEditor.uid} uuid=${uuid}`)
+        return
+      }
+
       if (currentEditor) {
         clearTimeout(currentEditor.timeoutId)
       }
@@ -176,7 +180,7 @@ const updateField = async (socket, payload, io, uuid) => {
           [room]: { ...currentEditors[room], [field]: undefined },
         }
         io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-      }, 15000)
+      }, 5000)
 
       currentEditors = {
         ...currentEditors,
