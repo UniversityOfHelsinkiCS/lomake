@@ -23,8 +23,14 @@ const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
-const Accordion = ({ previousYearsAnswers, EntityLastYearsAccordion, id }) => {
-  if (EntityLastYearsAccordion) return <EntityLastYearsAccordion />
+const Accordion = ({ previousYearsAnswers, previousAnswerColor, previousAnswerText, id }) => {
+  if (previousAnswerText || previousAnswerColor)
+    return (
+      <LastYearsAnswersAccordion>
+        {previousAnswerColor && <div className={`circle-big-${previousAnswerColor}`} />}
+        <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
+      </LastYearsAnswersAccordion>
+    )
 
   if (previousYearsAnswers && previousYearsAnswers[`${id}_text`])
     return (
@@ -41,7 +47,8 @@ const Textarea = ({
   id,
   required,
   previousYearsAnswers,
-  EntityLastYearsAccordion,
+  previousAnswerText,
+  previousAnswerColor,
   form,
   maxLength,
   marginTop,
@@ -196,7 +203,8 @@ const Textarea = ({
         </div>
         <Accordion
           previousYearsAnswers={previousYearsAnswers}
-          EntityLastYearsAccordion={EntityLastYearsAccordion}
+          previousAnswerColor={previousAnswerColor}
+          previousAnswerText={previousAnswerText}
           id={id}
         />
       </div>

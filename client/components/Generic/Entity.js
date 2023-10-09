@@ -1,11 +1,8 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-
 import { colors } from 'Utilities/common'
-import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
@@ -38,16 +35,6 @@ const Entity = ({
     previousAnswerColor = mapColorToValid[previousAnswerColor]
   }
   const previousAnswerText = previousYearsAnswers ? previousYearsAnswers[`${id}_text`] : null
-
-  const EntityLastYearsAccordion = () => {
-    if (!previousAnswerText && !previousAnswerColor) return null
-    return (
-      <LastYearsAnswersAccordion>
-        {previousAnswerColor && <div className={`circle-big-${previousAnswerColor}`} />}
-        <ReactMarkdown>{previousAnswerText}</ReactMarkdown>
-      </LastYearsAnswersAccordion>
-    )
-  }
 
   let textAreaLabel = t('generic:textAreaLabel')
   if (kludge && id === 'studyprogramme_status') {
@@ -84,7 +71,8 @@ const Entity = ({
       <Textarea
         id={id}
         label={textAreaLabel}
-        EntityLastYearsAccordion={EntityLastYearsAccordion}
+        previousAnswerText={previousAnswerText}
+        previousAnswerColor={previousAnswerColor}
         form={form}
         kludge={kludge}
       />
