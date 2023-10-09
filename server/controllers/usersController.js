@@ -24,7 +24,10 @@ const getCurrentUser = async (req, res) => {
 
   if (isAdmin(req.user)) {
     const lastRestart = getLastRestart()
-    return res.send({ ...req.user.toJSON(), lastRestart })
+    const response =
+      typeof req.user.toJSON === 'function' ? { ...req.user.toJSON(), lastRestart } : { ...req.user, lastRestart }
+
+    return res.send(response)
   }
 
   return res.send(req.user)

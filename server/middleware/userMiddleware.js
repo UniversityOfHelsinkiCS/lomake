@@ -1,6 +1,8 @@
 const logger = require('@util/logger')
 const db = require('@models/index')
 
+const { getUserByUid } = require('../services/userService')
+
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) return next()
   if (req.path.includes('/cypress/')) return next()
@@ -8,6 +10,14 @@ const userMiddleware = async (req, res, next) => {
     logger.error('missing uid')
     return res.status(400).json({ error: 'missing uid' })
   }
+
+  const cachedUser = await getUserByUid(req.headers.uid)
+
+  if (cachedUser) {
+    req.user = cachedUser
+    return next()
+  }
+
   try {
     const [user, created] = await db.user.findOrCreate({
       where: {
@@ -21,7 +31,7 @@ const userMiddleware = async (req, res, next) => {
         specialGroup: {},
       },
     })
-    if (created) logger.info(`New user: ${user.lastname}, ${user.firstname}, ${user.email}`)
+    if (created) logger.info(`New user: ${user.uid}, ${user.lastname}, ${user.firstname}, ${user.email}`)
     req.user = user
 
     return next()
