@@ -45,7 +45,7 @@ const prodConfig = {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
     'process.env.ENVIRONMENT': "'production'",
-    'process.env.SENTRY_ENVIRONMENT': "'production'",
+    'process.env.SENTRY_ENVIRONMENT': `'${process.env.SENTRY_ENVIRONMENT}'` || "'production'",
     global: 'window',
   },
   // sourcemap: true,
