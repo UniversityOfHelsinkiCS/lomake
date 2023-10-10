@@ -1,3 +1,6 @@
+const lodash = require('lodash')
+
+const db = require('@models/index')
 const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
 const { getIAMRights } = require('@util/IAMrights')
 const logger = require('@util/logger')
@@ -30,12 +33,28 @@ const IAMmiddleware = async (req, _, next) => {
 
     checkTemporaryAccesses(access, user.tempAccess)
 
-    user.specialGroup = specialGroup
+    if (
+      !lodash.isEqual(specialGroup, user.specialGroup) ||
+      !lodash.isEqual(access, user.access) ||
+      !lodash.isEqual(iamGroups, user.iamGroups)
+    ) {
+      user.specialGroup = specialGroup
+      user.access = access
+      user.iamGroups = iamGroups
 
-    user.access = access
-    user.iamGroups = iamGroups
+      // can not do this to cached user
+      const userFromDb = await db.user.findOne({
+        where: {
+          uid: user.uid,
+        },
+      })
+      userFromDb.specialGroup = specialGroup
+      userFromDb.access = access
+      userFromDb.iamGroups = iamGroups
 
-    await user.save()
+      await userFromDb.save()
+      logger.info(`User access rights set ${user.uid}`)
+    }
   }
 
   return next()

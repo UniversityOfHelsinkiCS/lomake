@@ -23,6 +23,7 @@ const cache = {
 
 const getUserByUid = async (uid) => {
   const userFromCache = cache.get(uid)
+
   if (userFromCache) {
     return userFromCache
   }
