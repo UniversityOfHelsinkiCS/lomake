@@ -257,6 +257,7 @@ const getLock = async (socket, payload, io) => {
 
   if (currentEditors[room] && currentEditors[room][field]) return
 
+  // force release lock after 5 mins if no save
   const timeoutId = setTimeout(() => {
     currentEditors = {
       ...currentEditors,
@@ -264,7 +265,7 @@ const getLock = async (socket, payload, io) => {
     }
 
     io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-  }, 180 * SEC)
+  }, 300 * SEC)
 
   currentEditors = {
     ...currentEditors,
