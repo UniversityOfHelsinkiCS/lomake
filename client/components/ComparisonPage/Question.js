@@ -7,6 +7,26 @@ import { romanize } from 'Utilities/common'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
+const ButtonPopup = ({ color, index, yearsIndex, buttons, filterColor }) => {
+  const { t } = useTranslation()
+  return (
+    <Popup
+      content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
+      trigger={
+        <button
+          key={color}
+          name={color}
+          type="button"
+          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
+          onClick={() => filterColor(yearsIndex, color, index)}
+        >
+          <span className={`answer-circle-big-${color}`} />
+        </button>
+      }
+    />
+  )
+}
+
 const Question = ({ answers, question, handleClick, showing, form }) => {
   const { t } = useTranslation()
   const stateLength = new Date().getFullYear() - 2019 + 1
@@ -27,26 +47,9 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
     setButtons(newButtons)
   }
 
-  const ButtonPopup = ({ color, index, yearsIndex }) => (
-    <Popup
-      content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
-      trigger={
-        <button
-          key={color}
-          name={color}
-          type="button"
-          className={`color-button-${buttons[yearsIndex] === index ? 'active' : ''}`}
-          onClick={() => filterColor(yearsIndex, color, index)}
-        >
-          <span className={`answer-circle-big-${color}`} />
-        </button>
-      }
-    />
-  )
-
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
-  if (!answers) return <></>
+  if (!answers) return null
 
   const columnNumber = form === 'evaluation' ? answers.length + 1 : answers.length
 
@@ -86,7 +89,14 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                       <label>{year.year}</label>
                       {!form === 'evaluation' &&
                         buttonColors.map((color, index) => (
-                          <ButtonPopup key={color} color={color} index={index} yearsIndex={yearsIndex} />
+                          <ButtonPopup
+                            key={color}
+                            color={color}
+                            index={index}
+                            yearsIndex={yearsIndex}
+                            buttons={buttons}
+                            filterColor={filterColor}
+                          />
                         ))}
                     </div>
                     {year.answers.length > 0 ? (

@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable cypress/unsafe-to-chain-command */
 /// <reference types="cypress" />
 
 import { setHeaders } from '../../config/mockHeaders'

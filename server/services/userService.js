@@ -4,7 +4,7 @@ const { LRUCache } = require('lru-cache')
 
 const lru = new LRUCache({
   max: 200,
-  ttl: 86_400_000, // 24h,
+  ttl: 86400000, // 24h,
 })
 
 const cache = {
@@ -21,7 +21,7 @@ const cache = {
   },
 }
 
-const getUserByUid = async (uid) => {
+const getUserByUid = async uid => {
   const userFromCache = cache.get(uid)
 
   if (userFromCache) {

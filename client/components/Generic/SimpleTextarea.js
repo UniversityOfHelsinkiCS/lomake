@@ -20,7 +20,7 @@ const SimpleTextarea = ({ label, id, required, form }) => {
         {label}
         {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
       </label>
-      {viewOnly ? <>{value}</> : <textarea id={fieldName} value={value} onChange={handleChange} />}
+      {viewOnly ? value : <textarea id={fieldName} value={value} onChange={handleChange} />}
     </div>
   )
 }

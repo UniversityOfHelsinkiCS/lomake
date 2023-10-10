@@ -20,7 +20,10 @@ const runMigrations = async () => {
   return migrator.up()
 }
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const sleep = ms =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms)
+  })
 
 const initializeDatabaseConnection = async (attempt = 1) => {
   try {

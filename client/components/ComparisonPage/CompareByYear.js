@@ -97,7 +97,7 @@ const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
 
   const data = getTotalColors({ allAnswers, multipleYears, questionsList, questions, chosenKeys })
 
-  if (!usersProgrammes || !allAnswers) return <></>
+  if (!usersProgrammes || !allAnswers) return null
 
   return (
     <div className="tab-pane">

@@ -6,6 +6,7 @@ import {
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
+import { Sentry } from 'Utilities/sentry'
 import { Loader, Button } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
@@ -71,6 +72,8 @@ const Textarea = ({
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
+  const [askedForLock, setAskedForLock] = useState(null)
+
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
@@ -79,6 +82,14 @@ const Textarea = ({
       form === 3 || (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
 
     setHasLock(gotTheLock)
+
+    if (gotTheLock) {
+      const now = new Date().getTime()
+      if (now - askedForLock > 500) {
+        Sentry.captureException(`Getting lock took ${now - askedForLock} for ${currentUser.uid}`)
+      }
+    }
+
     if (gettingLock && currentEditors[fieldName]) {
       setGettingLock(false)
       if (gotTheLock) ref.current.focusEditor()
@@ -159,6 +170,8 @@ const Textarea = ({
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
       dispatch(getLock(fieldName))
+      const aika = new Date().getTime()
+      setAskedForLock(aika)
     }
   }
 

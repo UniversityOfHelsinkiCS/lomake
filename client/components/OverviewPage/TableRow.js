@@ -6,6 +6,12 @@ import { Button } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import ColorTableCell from './ColorTableCell'
 
+const ManageCell = ({ program, setProgramControlsToShow }) => (
+  <div className="table-container-manage-cell">
+    <Button data-cy={`${program.key}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(program)} />
+  </div>
+)
+
 const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramControlsToShow, formType, form }) => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -35,17 +41,6 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
     return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
   }
 
-  const ManageCell = ({ program }) => (
-    <div className="table-container-manage-cell">
-      <Button
-        data-cy={`${program.key}-manage`}
-        icon="user"
-        circular
-        onClick={() => setProgramControlsToShow(program)}
-      />
-    </div>
-  )
-
   return (
     <React.Fragment key={p.key}>
       <div className="table-container-row-link">
@@ -70,7 +65,11 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
           acualQuestionId={idObject.acual_id}
         />
       ))}
-      {hasManagementAccess(p.key) ? <ManageCell program={p} /> : <div />}
+      {hasManagementAccess(p.key) ? (
+        <ManageCell program={p} setProgramControlsToShow={setProgramControlsToShow} />
+      ) : (
+        <div />
+      )}
     </React.Fragment>
   )
 }

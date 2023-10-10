@@ -48,6 +48,7 @@ const PDFDownload = ({ componentRef }) => {
     <ReactToPrint
       content={() => componentRef.current}
       documentTitle={title}
+      // eslint-disable-next-line react/no-unstable-nested-components
       trigger={() => (
         <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>{t('generic:downloadPDF')}</span>
       )}
