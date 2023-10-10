@@ -7,6 +7,7 @@ const { v4: uuidv4 } = require('uuid')
 const { getUserByUid } = require('../services/userService')
 
 let currentEditors = {}
+const SEC = 1000
 
 const withLogging = fn => {
   return async (...args) => {
@@ -149,6 +150,12 @@ const leaveRoom = async (socket, room) => {
   socket.emit('left_success', 'ok')
 }
 
+const isTrafficOrRadio = data => {
+  const value = Object.values(data).length > 0 && Object.values(data)[0]
+  const radioValues = ['green', 'yellow', 'red', 'first', 'second', 'third', 'fourth', 'fifth', 'idk']
+  return radioValues.includes(value)
+}
+
 const updateField = async (socket, payload, io, uuid) => {
   try {
     const { room, data, form } = payload
@@ -165,7 +172,7 @@ const updateField = async (socket, payload, io, uuid) => {
       const field = Object.keys(data)[0]
       const currentEditor = currentEditors[room] ? currentEditors[room][field] : undefined
 
-      if (currentEditor && currentEditor.uid !== currentUser.uid) {
+      if (!isTrafficOrRadio(data) && currentEditor && currentEditor.uid !== currentUser.uid) {
         logger.error(`Missed an edit uid=${currentUser.uid} eid=${currentEditor.uid} uuid=${uuid}`)
         return
       }
@@ -174,28 +181,40 @@ const updateField = async (socket, payload, io, uuid) => {
         clearTimeout(currentEditor.timeoutId)
       }
 
-      const timeoutId = setTimeout(() => {
+      if (!isTrafficOrRadio(data)) {
+        // we just release the lock on write
+        /*
+        const timeoutId = setTimeout(() => {
+          currentEditors = {
+            ...currentEditors,
+            [room]: { ...currentEditors[room], [field]: undefined },
+          }
+          io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+        }, 180 * SEC)
+
         currentEditors = {
           ...currentEditors,
-          [room]: { ...currentEditors[room], [field]: undefined },
-        }
-        io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-      }, 5000)
-
-      currentEditors = {
-        ...currentEditors,
-        [room]: {
-          ...currentEditors[room],
-          [field]: {
-            uid: currentUser.uid,
-            firstname: currentUser.firstname,
-            lastname: currentUser.lastname,
-            timeoutId,
+          [room]: {
+            ...currentEditors[room],
+            [field]: {
+              uid: currentUser.uid,
+              firstname: currentUser.firstname,
+              lastname: currentUser.lastname,
+              timeoutId,
+            },
           },
-        },
-      }
+        } */
 
-      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+        currentEditors = {
+          ...currentEditors,
+          [room]: {
+            ...currentEditors[room],
+            [field]: undefined,
+          },
+        }
+
+        io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+      }
 
       const currentAnswer = await db.tempAnswer.findOne({
         where: {
@@ -238,13 +257,15 @@ const getLock = async (socket, payload, io) => {
 
   if (currentEditors[room] && currentEditors[room][field]) return
 
+  // force release lock after 5 mins if no save
   const timeoutId = setTimeout(() => {
     currentEditors = {
       ...currentEditors,
       [room]: { ...currentEditors[room], [field]: undefined },
     }
+
     io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-  }, 15000)
+  }, 300 * SEC)
 
   currentEditors = {
     ...currentEditors,

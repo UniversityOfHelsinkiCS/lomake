@@ -123,16 +123,18 @@ const Textarea = ({
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   const handleBlur = () => {
-    setChanges(false)
+    // setChanges(false)
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
+    // eslint-disable-next-line no-unused-vars
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
     if (form === 3) {
-      dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
+      // dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
-      dispatch(updateFormField(fieldName, markdownStr, form))
+      // dispatch(updateFormField(fieldName, markdownStr, form))
     }
   }
 
@@ -214,7 +216,7 @@ const Textarea = ({
         <>
           <div data-cy={`editing-area-${id}`} onClick={askForLock} style={{ marginTop: '1em' }}>
             <Editor
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
               editorStyle={{ wordBreak: 'break-word', width: '100%' }}
               ref={ref}
               wrapperClassName="wrapper-class"
@@ -241,7 +243,12 @@ const Textarea = ({
               }}
               readOnly={!hasLock}
             />
-            <Button disabled={!changes} style={{ marginTop: 20, marginBottom: 10 }} data-cy={`save-button-${id}`}>
+            <Button
+              onClick={handleSave}
+              disabled={!changes}
+              style={{ marginTop: 20, marginBottom: 10 }}
+              data-cy={`save-button-${id}`}
+            >
               {t('generic:kludgeButton')}
             </Button>
           </div>
