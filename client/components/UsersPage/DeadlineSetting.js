@@ -157,7 +157,7 @@ const DeadlineSetting = () => {
         disabled={warning || !newDate || !newDraftYear || !form}
         onClick={handleDeadlineSave}
       >
-        {t('users:updateDeadline')} and draft year
+        {formDeadline ? t('users:updateDeadline') : `${t('users:updateDeadline')} and draft year`}
       </Button>
       {formDeadline && form && (
         <Button data-cy="deleteDeadline" onClick={handleDelete} negative compact size="mini">

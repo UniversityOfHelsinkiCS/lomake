@@ -35,6 +35,8 @@ const createOrUpdate = async (req, res) => {
     } else {
       existingDeadlines[0].date = deadline
       await existingDeadlines[0].save()
+      const allDeadlines = await db.deadline.findAll({})
+      return res.status(200).json({ deadline: allDeadlines })
     }
 
     // Create new or update old draft year
