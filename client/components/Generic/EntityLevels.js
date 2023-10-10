@@ -96,7 +96,6 @@ const EntityLevels = ({
   const [showText, setShowText] = useState({})
   const [showSpecific, setShowSpecific] = useState([])
   const onlyBc = programme === 'H74'
-  const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${programme}`
 
   const handleShowText = level => {
     if (showText.level === level) {
@@ -162,6 +161,11 @@ const EntityLevels = ({
                 return (
                   <Grid.Column width={5} key={level}>
                     <Pie level={level} data={summaryData} onlyBc={onlyBc} />
+                    {Object.keys(showText).length > 0 && (
+                      <Button style={{ marginTop: '1em' }} onClick={() => handleShowText(level, !showText[level])}>
+                        {showText === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      </Button>
+                    )}
                   </Grid.Column>
                 )
               })}
@@ -172,7 +176,7 @@ const EntityLevels = ({
                 />
               </Grid.Column>
             </Grid.Row>
-            {showText && (
+            {Object.keys(showText).length > 0 && (
               <Grid.Row className="row">
                 {showText.level &&
                   colorsList.map(color => {
@@ -189,16 +193,17 @@ const EntityLevels = ({
                               {p.name[lang]}
                             </span>
                           </p>
-                          {(showText || showSpecific[p.key]) && summaryData[showText.level].text[p.key] && (
-                            <ReactMarkdown>{summaryData[showText.level].text[p.key]}</ReactMarkdown>
-                          )}
+                          {(Object.keys(showText).length > 0 || showSpecific[p.key]) &&
+                            summaryData[showText.level].text[p.key] && (
+                              <ReactMarkdown>{summaryData[showText.level].text[p.key]}</ReactMarkdown>
+                            )}
                         </div>
                       )
                     })
                   })}
               </Grid.Row>
             )}
-            {showProgrammes && (
+            {showProgrammes && Object.keys(showText).length === 0 && (
               <Grid.Row className="row">
                 <Grid.Column width={5}>
                   <ProgrammeList
@@ -245,16 +250,9 @@ const EntityLevels = ({
         </div>
       </div>
       {form === 5 && (
-        <>
-          <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-            <p style={{ fontSize: '15px', marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
-          </Link>
-          <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
-            <p style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-              Katselmuksen yhteenveto koulutusohjelmittain
-            </p>
-          </Link>
-        </>
+        <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
+          <p style={{ fontSize: '15px', marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
+        </Link>
       )}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={null} form={form} />
     </div>

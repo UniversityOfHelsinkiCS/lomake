@@ -190,6 +190,7 @@ export default {
     average: 'Average',
     showAnswers: 'Show answers',
     hideAnswers: 'Hide answers',
+    evaluationSummaryByProgramme: 'Evaluation summary by studyprogramme',
   },
 
   generic: {

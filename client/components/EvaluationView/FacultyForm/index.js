@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Button, Icon, Loader } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
@@ -99,6 +100,8 @@ const FacultyFormView = ({ room, formString }) => {
 
   const summaryURL = `/evaluation-faculty/previous-years/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
+  const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${room}`
+
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
@@ -219,6 +222,11 @@ const FacultyFormView = ({ room, formString }) => {
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
                 </a>
+                <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
+                  <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
+                    {t('formView:evaluationSummaryByProgramme')}
+                  </h4>
+                </Link>
               </div>
             </div>
             <div style={{ paddingBottom: '6em' }}>

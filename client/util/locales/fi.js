@@ -190,6 +190,7 @@ export default {
     average: 'Keskiarvo',
     showAnswers: 'Näytä vastaukset',
     hideAnswers: 'Piilota vastaukset',
+    evaluationSummaryByProgramme: 'Katselmuksen yhteenveto koulutusohjelmittain',
   },
 
   generic: {

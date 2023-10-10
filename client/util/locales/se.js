@@ -184,6 +184,7 @@ export default {
       'Språkcentrums självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">här</a> (för närvarande endast på finska)',
     showAnswers: '',
     hideAnswers: '',
+    evaluationSummaryByProgramme: '',
   },
 
   generic: {
