@@ -47,6 +47,36 @@ const findAnswers = (programmes, allAnswers, question) => {
     }
   })
   result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
+
+  return result
+}
+
+const findActionAnswers = (programmes, allAnswers, question) => {
+  const result = {
+    bachelor: [],
+    master: [],
+    doctoral: [],
+  }
+  programmes.forEach(({ key, level, name }) => {
+    const answer = allAnswers.find(a => a.programme === key)
+    const text = []
+    const actionNumbers = [1, 2, 3, 4, 5]
+
+    actionNumbers.map((number, index) => {
+      if (answer?.data && answer.data[`${question}-${number}-text`]) {
+        text[index] = {
+          title: answer.data[`${question}-${number}-text`].title,
+          action: answer.data[`${question}-${number}-text`].actions,
+        }
+        return true
+      }
+      return false
+    })
+    if (text.length > 0) {
+      result[level][key] = { text, programme: name }
+    }
+  })
+  result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
   return result
 }
 
@@ -116,9 +146,14 @@ const FacultyFormView = ({ room, formString }) => {
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
+        if (part.relatedEvaluationQuestion && part.type === 'ACTIONS') {
+          result[part.id] = findActionAnswers(programmes, answers, part.relatedEvaluationQuestion)
+          return true
+        }
         if (part.relatedEvaluationQuestion) {
           result[part.id] = findAnswers(programmes, answers, part.relatedEvaluationQuestion)
         }
+        return true
       })
     })
     return result
@@ -129,7 +164,7 @@ const FacultyFormView = ({ room, formString }) => {
   if (!faculty) return 'Error: Invalid url.'
 
   return (
-    <>
+    <div>
       {singleFacultyPending ? (
         <Loader active />
       ) : (
@@ -198,7 +233,7 @@ const FacultyFormView = ({ room, formString }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

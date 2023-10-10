@@ -6,6 +6,17 @@ import { useTranslation } from 'react-i18next'
 import { sortedItems } from 'Utilities/common'
 import './Generic.scss'
 
+const Programme = ({ p, lang, faculty }) => (
+  <>
+    {p.name[lang]}
+    {p.primaryFaculty.code !== faculty && faculty !== 'allFaculties' && (
+      <span className="list-companion-icon">
+        <Icon name="handshake outline" />
+      </span>
+    )}
+  </>
+)
+
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -16,18 +27,6 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
       setPicked(() => [...picked, programme])
     }
   }
-
-  const Programme = ({ p }) => (
-    <>
-      {p.name[lang]}
-      {p.primaryFaculty.code !== faculty && faculty !== 'allFaculties' && (
-        <span className="list-companion-icon">
-          <Icon name="handshake outline" />
-        </span>
-      )}
-    </>
-  )
-
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
@@ -44,7 +43,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     key={p.key}
                     role="presentation"
                   >
-                    <Programme p={p} />
+                    <Programme p={p} lang={lang} faculty={faculty} />
                   </p>
                 ),
             )}

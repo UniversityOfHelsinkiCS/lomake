@@ -1,13 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Divider, Icon } from 'semantic-ui-react'
+import { Button, Divider, Icon, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import ActionElement from './ActionElement'
 import './Generic.scss'
 
-const Actions = ({ id, label, description, form, required, extrainfo }) => {
+const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
+  if (onlyBc || !data) {
+    return <div />
+  }
+  return data.map(p => {
+    return (
+      <div key={p.key}>
+        <p key={`${p.name[lang]}`}>
+          <span className="answer-circle-green" />{' '}
+          <span
+            className="programme-list-button"
+            onClick={() => handleShowSpecific(p.key)}
+            style={{ marginLeft: '0.5em' }}
+          >
+            {p.name[lang]}
+          </span>
+        </p>
+        {(showText || showSpecific[p.key]) && data[p.key] && <ReactMarkdown>{data[p.key]}</ReactMarkdown>}
+      </div>
+    )
+  })
+}
+
+const Actions = ({ id, label, description, form, required, extrainfo, programme, summaryData }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const formData = useSelector(state => state.form.data)
@@ -15,6 +39,27 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
 
   const actionsList = Object.keys(formData).filter(questionId => questionId.includes(id)) || []
   const actionsCount = actionsList.length
+  const lang = useSelector(state => state.language)
+  const [showText, setShowText] = useState({})
+  const [showSpecific, setShowSpecific] = useState([])
+  const onlyBc = programme === 'H74'
+
+  const handleShowText = level => {
+    if (showText.level === level) {
+      setShowText({})
+      return true
+    }
+    setShowText({ level })
+    return true
+  }
+
+  const handleShowSpecific = programme => {
+    if (!showSpecific[programme]) {
+      setShowSpecific({ ...showSpecific, [programme]: true })
+    } else {
+      setShowSpecific({ ...showSpecific, [programme]: !showSpecific[programme] })
+    }
+  }
 
   const handleAdd = () => {
     dispatch(updateFormField(`${id}-${actionsCount + 1}-text`, { title: '', actions: '' }, form))
@@ -27,6 +72,7 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
     const latest = formData[`${id}-${actionsCount}-text`]
     return latest.title.length > 0 || latest.actions.length > 0
   }
+
   return (
     <div
       className="form-entity-area"
@@ -58,6 +104,98 @@ const Actions = ({ id, label, description, form, required, extrainfo }) => {
 
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
+      {form === 5 && (
+        <div className="summary-container">
+          <h4>{t('formView:facultySummaryTitle')}</h4>
+          <div className="summary-grid" data-cy={`${id}-summary`}>
+            <Grid columns={4}>
+              <Grid.Row className="row">
+                <Grid.Column width={5}>{t('bachelor')}</Grid.Column>
+                <Grid.Column width={5}>{!onlyBc ? t('master') : ''}</Grid.Column>
+                <Grid.Column width={5}>{!onlyBc ? t('doctoral') : ''}</Grid.Column>
+                <Grid.Column width={1} />
+              </Grid.Row>
+
+              <>
+                <Grid.Row className="row">
+                  <Grid.Column width={5}>
+                    <ProgrammeList
+                      data={summaryData.bachelor}
+                      lang={lang}
+                      onlyBc={false}
+                      showText={showText.bachelor}
+                      showSpecific={showSpecific}
+                      handleShowSpecific={handleShowSpecific}
+                    />
+                    <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
+                      {showText === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                    </Button>
+                  </Grid.Column>
+                  <Grid.Column width={5}>
+                    <ProgrammeList
+                      data={summaryData.master}
+                      lang={lang}
+                      onlyBc={onlyBc}
+                      showText={showText.master}
+                      showSpecific={showSpecific}
+                      handleShowSpecific={handleShowSpecific}
+                    />
+                    <Button onClick={() => handleShowText('master', !showText.master)}>
+                      {showText === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                    </Button>
+                  </Grid.Column>
+                  <Grid.Column width={5}>
+                    <ProgrammeList
+                      data={summaryData.doctoral}
+                      lang={lang}
+                      onlyBc={onlyBc}
+                      showText={showText.doctoral}
+                      showSpecific={showSpecific}
+                      handleShowSpecific={handleShowSpecific}
+                    />
+                    <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
+                      {showText === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                    </Button>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row className="row">
+                  {showText.level &&
+                    Object.keys(summaryData[showText.level]).map(programmeKey => {
+                      return (
+                        <div key={programmeKey} style={{ marginRight: '1em', marginTop: '1em' }}>
+                          <p key={`${summaryData[showText.level][programmeKey].programme[lang]}`}>
+                            <span className="answer-circle-green" />{' '}
+                            <span
+                              className="programme-list-button"
+                              onClick={() => handleShowSpecific(programmeKey)}
+                              style={{ marginLeft: '0.5em' }}
+                            >
+                              {summaryData[showText.level][programmeKey].programme[lang]}
+                            </span>
+                          </p>
+                          {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
+                            <>
+                              {summaryData[showText.level][programmeKey].text.map(answer => {
+                                return (
+                                  <div key={`${id}-${programmeKey}`}>
+                                    <h3>Kehityskohde</h3>
+                                    <ReactMarkdown>{answer.title}</ReactMarkdown>
+                                    <h3>Toimenpide-ehdotus</h3>
+                                    <ReactMarkdown>{answer.action}</ReactMarkdown>
+                                  </div>
+                                )
+                              })}
+                            </>
+                          )}
+                        </div>
+                      )
+                    })}
+                </Grid.Row>
+              </>
+            </Grid>
+          </div>
+        </div>
+      )}
       {actionsList.length === 0 ? (
         <ActionElement key="action-1" id={id} form={form} viewOnly={viewOnly} index={1} />
       ) : (

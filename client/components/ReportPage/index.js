@@ -155,7 +155,7 @@ export default () => {
     },
   ]
 
-  if (!usersProgrammes || !selectedAnswers) return <></>
+  if (!usersProgrammes || !selectedAnswers) return <div />
   if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   return (

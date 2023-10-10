@@ -207,7 +207,8 @@
           "en": ""
         },
         "required": true,
-        "no_color": true
+        "no_color": true,
+        "relatedEvaluationQuestion": "ease_of_study_actions"
       }
     ]
   },
@@ -448,7 +449,8 @@
           "en": ""
         },
         "required": true,
-        "no_color": true
+        "no_color": true,
+        "relatedEvaluationQuestion": "programme_structure_actions"
       }
     ]
   },
