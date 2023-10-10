@@ -240,6 +240,7 @@ export default {
       university: 'University level',
       committee: 'Committee',
     },
+    textUnsaved: 'Text not saved!',
   },
 
   overview: {

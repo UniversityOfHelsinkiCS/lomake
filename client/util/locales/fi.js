@@ -239,6 +239,7 @@ export default {
       university: 'Yliopistotaso',
       committee: 'Arviointiryhmä',
     },
+    textUnsaved: 'Tekstiä on tallentamatta!',
   },
 
   overview: {

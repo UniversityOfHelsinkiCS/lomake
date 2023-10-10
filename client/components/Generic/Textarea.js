@@ -264,6 +264,7 @@ const Textarea = ({
             >
               {t('generic:kludgeButton')}
             </Button>
+            {changes && <span style={{ marginLeft: '1em', color: 'red' }}>{t('generic:textUnsaved')}</span>}
           </div>
           <span style={{ color: length > MAX_LENGTH - 100 ? colors.red : undefined }}>
             {length}/{MAX_LENGTH - 100}

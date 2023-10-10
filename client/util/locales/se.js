@@ -233,6 +233,7 @@ export default {
       university: 'Universitet',
       committee: 'Kommitté',
     },
+    textUnsaved: '',
   },
 
   overview: {
