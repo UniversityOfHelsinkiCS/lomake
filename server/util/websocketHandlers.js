@@ -46,6 +46,9 @@ const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
   socket.to(room).emit(event, payload)
 }
 
+/**
+ * What does this do exactly
+ */
 const stripTimeouts = room => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
@@ -97,32 +100,7 @@ const joinRoom = async (socket, room, form, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
 
-    if (form === 3) {
-      // handle individual users form
-      let { uid } = currentUser
-      const loggedInAs = socket.request.headers['x-admin-logged-in-as']
-
-      if ((isAdmin(currentUser) || isSuperAdmin(currentUser)) && loggedInAs) {
-        uid = loggedInAs
-      }
-
-      const [answer] = await db.tempAnswer.findOrCreate({
-        where: {
-          [Op.and]: [{ programme: uid }, { year: 2023 }, { form }],
-        },
-        defaults: {
-          data: {},
-          programme: uid,
-          year: 2023,
-          form: 3,
-        },
-      })
-
-      currentEditors = clearCurrentUser(currentUser)
-      socket.join(room)
-      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-      logAndEmit(socket, 'new_form_data', answer.data || {})
-    } else if (
+    if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
       (currentUser.access[room] && currentUser.access[room].read)
@@ -232,15 +210,6 @@ const updateField = async (socket, payload, io, uuid) => {
           },
         )
         logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data, uuid)
-      } else if (!currentAnswer && form === 3) {
-        // only should happen in individual users form
-        const createdAnswer = await db.tempAnswer.create({
-          data: { ...data },
-          programme: room,
-          year: await whereDraftYear(),
-          form,
-        })
-        logAndEmitToRoom(socket, room, 'new_form_data', createdAnswer.data, uuid)
       } else {
         // This can happen, at least in dev, when the programme is new and was added after deadlines are updated. Updating deadlines may fix.
         logger.error(`PANIC this should never happen: ${uuid}`)
