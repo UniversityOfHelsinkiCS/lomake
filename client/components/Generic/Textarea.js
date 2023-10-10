@@ -85,7 +85,7 @@ const Textarea = ({
 
     if (gotTheLock) {
       const now = new Date().getTime()
-      if (now - askedForLock > 10) {
+      if (now - askedForLock > 500) {
         Sentry.captureException(`Getting lock took ${now - askedForLock} for ${currentUser.uid}`)
       }
     }
