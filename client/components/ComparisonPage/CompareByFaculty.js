@@ -22,7 +22,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const [chosen, setChosen] = useState('')
   const [showEmpty, setShowEmpty] = useState(true)
 
-  if (!usersProgrammes || !allAnswers) return <></>
+  if (!usersProgrammes || !allAnswers) return null
 
   const handleChosenChange = (e, { value }) => {
     setChosen(value)

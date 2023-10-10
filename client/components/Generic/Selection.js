@@ -55,7 +55,7 @@ const Selection = ({ id, label, description, required, number, extrainfo, option
           <div className="form-textarea">
             <label>{t('otherTextBox')}</label>
             {viewOnly ? (
-              <>{otherText || ''}</>
+              otherText || ''
             ) : (
               <textarea
                 id="other"

@@ -7,8 +7,8 @@ import { colors, isFormLocked } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 
 const PDFDownload = ({ componentRef, form }) => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const deadline = useSelector(state => state.deadlines.nextDeadline)
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
@@ -45,6 +45,7 @@ const PDFDownload = ({ componentRef, form }) => {
   return (
     <ReactToPrint
       content={() => componentRef.current}
+      // eslint-disable-next-line react/no-unstable-nested-components
       trigger={() => <span style={{ cursor: 'pointer', color: colors.blue }}>{t('formView:downloadPDF')}</span>}
       onBeforeGetContent={() =>
         new Promise(resolve => {

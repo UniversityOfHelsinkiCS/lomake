@@ -1,5 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable no-undef */
+/* eslint-disable cypress/unsafe-to-chain-command */
 /// <reference types="cypress" />
 
 import { testProgrammeCode, defaultYears } from '../../config/common'
