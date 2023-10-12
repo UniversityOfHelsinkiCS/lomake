@@ -166,7 +166,10 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                           key={programmeKey}
                           style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
                         >
-                          <p key={`${summaryData[showText.level][programmeKey].programme[lang]}`}>
+                          <p
+                            style={{ height: '5em' }}
+                            key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
+                          >
                             <span className="answer-circle-green" />{' '}
                             <span
                               className="programme-list-button"
