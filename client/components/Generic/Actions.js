@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Divider, Icon, Grid } from 'semantic-ui-react'
+import { Button, Divider, Icon, Grid, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
@@ -162,7 +162,10 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                   {showText.level &&
                     Object.keys(summaryData[showText.level]).map(programmeKey => {
                       return (
-                        <div key={programmeKey} style={{ marginRight: '1em', marginTop: '1em' }}>
+                        <div
+                          key={programmeKey}
+                          style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
+                        >
                           <p key={`${summaryData[showText.level][programmeKey].programme[lang]}`}>
                             <span className="answer-circle-green" />{' '}
                             <span
@@ -177,12 +180,12 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                             <>
                               {summaryData[showText.level][programmeKey].text.map(answer => {
                                 return (
-                                  <div key={`${id}-${programmeKey}`}>
-                                    <h3>Kehityskohde</h3>
-                                    <ReactMarkdown>{answer.title}</ReactMarkdown>
-                                    <h3>Toimenpide-ehdotus</h3>
-                                    <ReactMarkdown>{answer.action}</ReactMarkdown>
-                                  </div>
+                                  <Card key={`${id}-${programmeKey}`}>
+                                    <Card.Content>
+                                      <Card.Header>{answer.title}</Card.Header>
+                                      <Card.Description>{answer.action}</Card.Description>
+                                    </Card.Content>
+                                  </Card>
                                 )
                               })}
                             </>
