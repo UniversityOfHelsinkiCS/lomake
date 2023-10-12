@@ -6,7 +6,6 @@ import {
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
-import { Sentry } from 'Utilities/sentry'
 import { Loader, Button } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
@@ -72,7 +71,6 @@ const Textarea = ({
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
-  const [askedForLock, setAskedForLock] = useState(null)
 
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
@@ -82,13 +80,6 @@ const Textarea = ({
       form === 3 || (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
 
     setHasLock(gotTheLock)
-
-    if (gotTheLock) {
-      const now = new Date().getTime()
-      if (now - askedForLock > 500) {
-        Sentry.captureException(`Getting lock took ${now - askedForLock} for ${currentUser.uid}`)
-      }
-    }
 
     if (gettingLock && currentEditors[fieldName]) {
       setGettingLock(false)
@@ -127,30 +118,11 @@ const Textarea = ({
     // prevent a too early dispatch
     if (form === 3 && Object.keys(formData).length > 0) {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
-      // dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
-      // dispatch(updateFormField(fieldName, markdownStr, form))
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  const handleBlur = () => {
-    // setChanges(false)
-    const value = editorState
-    const content = value.getCurrentContent()
-    const rawObject = convertToRaw(content)
-    // eslint-disable-next-line no-unused-vars
-    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
-    if (form === 3) {
-      // dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
-    } else {
-      // dispatch(updateFormField(fieldName, markdownStr, form))
-    }
-  }
-
-  // we could start saving on click instead on blur, in some cases the blur does not seem to work
-  // eslint-disable-next-line no-unused-vars
   const handleSave = () => {
     setChanges(false)
     const value = editorState
@@ -170,8 +142,6 @@ const Textarea = ({
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
       dispatch(getLock(fieldName))
-      const aika = new Date().getTime()
-      setAskedForLock(aika)
     }
   }
 
