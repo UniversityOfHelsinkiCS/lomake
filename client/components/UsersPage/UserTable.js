@@ -87,7 +87,7 @@ export default () => {
   }
 
   return (
-    <>
+    <div style={{ overflowX: 'scroll' }}>
       <div className="user-filter-container">
         <Input
           className="user-filter"
@@ -136,6 +136,6 @@ export default () => {
           ))}
         </Table.Body>
       </Table>
-    </>
+    </div>
   )
 }
