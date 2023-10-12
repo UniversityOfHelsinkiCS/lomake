@@ -91,5 +91,15 @@ export default () => {
     ]
   }
 
-  return <Tab style={{ width: '90%' }} panes={panes} />
+  return (
+    <Tab
+      style={{ maxWidth: '90%' }}
+      menu={{
+        className: 'attached',
+        tabular: true,
+        style: { display: 'flex', flexWrap: 'wrap', flexDirection: 'row' },
+      }}
+      panes={panes}
+    />
+  )
 }
