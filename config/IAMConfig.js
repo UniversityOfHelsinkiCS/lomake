@@ -264,7 +264,7 @@ const kojoMap = {
 
 const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
 
-const doctoralWritingIams = ['hy-ypa-tutto-toht']
+const doctoralWritingIams = ['hy-ypa-tutto-toht', 'hy-tutkijakoulu-johtokunta']
 
 const doctoralSchoolMap = {
   'hy-tutkijakoulut-hymy-jory': [
