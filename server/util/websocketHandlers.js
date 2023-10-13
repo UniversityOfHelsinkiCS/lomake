@@ -47,7 +47,7 @@ const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
 }
 
 /**
- * What does this do exactly
+ * What does this do exactly?
  */
 const stripTimeouts = room => {
   if (!room) return {}
@@ -160,29 +160,6 @@ const updateField = async (socket, payload, io, uuid) => {
       }
 
       if (!isTrafficOrRadio(data)) {
-        // we just release the lock on write
-        /*
-        const timeoutId = setTimeout(() => {
-          currentEditors = {
-            ...currentEditors,
-            [room]: { ...currentEditors[room], [field]: undefined },
-          }
-          io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-        }, 180 * SEC)
-
-        currentEditors = {
-          ...currentEditors,
-          [room]: {
-            ...currentEditors[room],
-            [field]: {
-              uid: currentUser.uid,
-              firstname: currentUser.firstname,
-              lastname: currentUser.lastname,
-              timeoutId,
-            },
-          },
-        } */
-
         currentEditors = {
           ...currentEditors,
           [room]: {
