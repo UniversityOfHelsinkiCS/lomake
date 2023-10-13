@@ -553,4 +553,11 @@ export const getFormViewRights = ({
   return false
 }
 
+export const reversedPointsInDegreeReform = [
+  'lead_has_sufficient_authority_to_study_program',
+  'master_programs_are_sufficiently_sized',
+  'bachelor_programme_starting_amount_is_suitable',
+  'question-9-4',
+]
+
 export * from '@root/config/common'

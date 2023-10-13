@@ -890,7 +890,8 @@
           "en": "The number of students admitted to the bachelor’s programme is too great"
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "reversed": true
       },
       {
         "id": "bachelor_programme_gives_sufficient_skills_for_further_studies",
@@ -1068,7 +1069,8 @@
           "en": "The number of student places in the master’s programme is too great"
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "reversed": true
       },
       {
         "id": "master_programmes_science_contents_are_functional",
@@ -1726,7 +1728,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "reversed": true
       },
       {
         "id": "question-9-4",
@@ -1745,7 +1748,8 @@
           "en": ""
         },
         "required": false,
-        "relatedYearlyQuestions": []
+        "relatedYearlyQuestions": [],
+        "reversed": true
       },
       {
         "id": "question-9-5",

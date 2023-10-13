@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { degreeReformBackgroundColor } from 'Utilities/common'
+import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from 'Utilities/common'
 
 // TODO this is likely a copy paste from somewhere
 const mapToTranslation = {
@@ -28,7 +28,12 @@ const DegreeReformCell = ({
   const lang = useSelector(state => state.language)
 
   const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
-
+  const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
+  /*
+  console.log('questionKeys', questionKeys)
+  console.log('programmesAnswers', programmesAnswers)
+  console.log('questionOfCell', questionOfCell)
+*/
   const answeredQuestionKeys = questionKeys.filter(k => programmesAnswers[k])
 
   const noIdkKeys = answeredQuestionKeys.filter(k => {
@@ -37,6 +42,11 @@ const DegreeReformCell = ({
 
   const sum = noIdkKeys.reduce((sum, key) => {
     const answer = programmesAnswers[key]
+
+    if (reversedPointsInDegreeReform.find(dKey => dKey === key)) {
+      return sum + answerValuesReversed.indexOf(answer) + 1
+    }
+
     return sum + answerValues.indexOf(answer) + 1
   }, 0)
 
