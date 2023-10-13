@@ -108,16 +108,8 @@ const isDevSuperAdminUid = uid => {
   return DEV_SUPERADMINS.includes(uid)
 }
 
-const isStagingSuperAdminUid = uid => {
-  return process.env.SENTRY_ENVIRONMENT === 'staging' && process.env.STAGING_ADMIN_USER === uid
-}
-
 const isSuperAdmin = user => {
-  return (
-    hasSpecialGroup(user, 'superAdmin') ||
-    isStagingSuperAdminUid(user.uid) ||
-    (!inProduction && isDevSuperAdminUid(user.uid))
-  )
+  return hasSpecialGroup(user, 'superAdmin') || (!inProduction && isDevSuperAdminUid(user.uid))
 }
 
 const isAdmin = user => {
@@ -202,7 +194,6 @@ module.exports = {
   requiredFormIds,
   isSuperAdmin,
   isDevSuperAdminUid,
-  isStagingSuperAdminUid,
   isAdmin,
   isBasicUser,
   isSpecialGroupUser,
