@@ -182,6 +182,9 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                           {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
                             <>
                               {summaryData[showText.level][programmeKey].text.map(answer => {
+                                if (!(answer.title.length > 2) && !(answer.action.length > 2)) {
+                                  return <div> </div>
+                                }
                                 return (
                                   <Card key={`${id}-${programmeKey}`}>
                                     <Card.Content>
