@@ -106,7 +106,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
       </div>
       {form === 5 && (
         <div className="summary-container">
-          <h4>{t('formView:facultySummaryTitle')}</h4>
+          <h4>{t('formView:facultyActionSummaryTitle')}</h4>
           <div className="summary-grid" data-cy={`${id}-summary`}>
             <Grid columns={4}>
               <Grid.Row className="row">

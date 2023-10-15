@@ -224,7 +224,7 @@ const FacultyFormView = ({ room, formString }) => {
                 </a>
                 <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:evaluationSummaryByProgramme')}
+                    {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
                   </h4>
                 </Link>
               </div>

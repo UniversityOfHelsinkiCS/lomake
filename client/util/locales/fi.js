@@ -154,22 +154,24 @@ export default {
     selectApplicable: 'Valitkaa sopivat vaihtoehdot',
     addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     progSummaryTitle: 'Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta',
-    facultySummaryTitle: 'Tiedekunnan koulutusohjelmien johtoryhmät vastasivat tähän teemaan seuraavasti:',
+    facultySummaryTitle: 'Tiedekunnan koulutusohjelmien johtoryhmät vastasivat seuraavasti:',
+    facultyActionSummaryTitle:
+      'Koulutusohjelmien johtoryhmät kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti:',
     materials: 'Taustamateriaali',
     materialsProg:
       'Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.<br/> Lisäksi tässä lomakkeessa on usean kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä vuodelta kyseiseen teemaan liittyvien vuosiseurantakysymysten vastauksista. <br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä koulutusohjelma- että tiedekuntatason näkymään.',
     summaryLinkProg: 'Tarkastelkaa kaikkia aiempien vuosiseurontojen vastauksia',
-    oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikonessa',
-    oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikonessa',
+    oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikoneessa',
+    oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikoneessa',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     toijo:
       'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">täällä</a> (raportti englanniksi)',
     langCenterRaport:
       'Kielikeskuksen itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">täällä</a>',
     facultyInfo:
-      'Tässä katselmuksessa tarkastellaan <strong>tiedekunnan</strong> tilannetta laajemmin kolmen viime vuoden ajalta.',
+      'Katselmuksessa tarkastellaan <strong>tiedekunnan</strong> koulutusohjelmien tilannetta kolmelta viime vuodelta.',
     materialsFaculty:
-      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmointikysymysten vastauksista. <br/><br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
+      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekunnan opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
     evaluationFacultyAnswers: 'Katselmuksen vastaukset koulutusohjelmissa',
     yearlyFacultyAnswers: 'Vuosiseurantojen vastaukset koulutusohjelmissa',
@@ -190,7 +192,7 @@ export default {
     average: 'Keskiarvo',
     showAnswers: 'Näytä vastaukset',
     hideAnswers: 'Piilota vastaukset',
-    evaluationSummaryByProgramme: 'Katselmuksen yhteenveto koulutusohjelmittain',
+    evaluationSummaryByProgramme: 'Tarkastelkaa tiedekunnan tietoja Koulutuksen tila -kyselyn tuloksista',
   },
 
   generic: {

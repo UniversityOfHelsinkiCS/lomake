@@ -10,7 +10,6 @@ import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
 
-const levels = ['bachelor', 'master', 'doctoral']
 const colorsList = ['green', 'yellow', 'red', 'gray']
 
 const Pie = ({ level, data, onlyBc }) => {
@@ -97,11 +96,15 @@ const EntityLevels = ({
   const [showSpecific, setShowSpecific] = useState([])
   const onlyBc = programme === 'H74'
 
+  const hideLevels = id === 'transition_phase_faculty'
+  const levels = hideLevels ? ['bachelor', 'master'] : ['bachelor', 'master', 'doctoral']
+
   const handleShowText = level => {
     if (showText.level === level) {
       setShowText({})
       return true
     }
+
     setShowText({ level })
     return true
   }
@@ -113,6 +116,20 @@ const EntityLevels = ({
       setShowSpecific({ ...showSpecific, [programme]: !showSpecific[programme] })
     }
   }
+
+  const getStyleForm = level => {
+    if (showText?.level === level) {
+      return {
+        fontStyle: 'italic',
+        background: '#CDCDCD',
+        padding: 10,
+      }
+    }
+    return {
+      padding: 10,
+    }
+  }
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -151,9 +168,18 @@ const EntityLevels = ({
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">
-              <Grid.Column width={5}>{t('bachelor')}</Grid.Column>
-              <Grid.Column width={5}>{!onlyBc ? t('master') : ''}</Grid.Column>
-              <Grid.Column width={5}>{!onlyBc ? t('doctoral') : ''}</Grid.Column>
+              <Grid.Column width={5} style={getStyleForm('bachelor')}>
+                {t('bachelor')}
+              </Grid.Column>
+              <Grid.Column width={5} style={getStyleForm('master')}>
+                {!onlyBc ? t('master') : ''}
+              </Grid.Column>
+              {!hideLevels && (
+                <Grid.Column width={5} style={getStyleForm('doctoral')}>
+                  {!onlyBc ? t('doctoral') : ''}
+                </Grid.Column>
+              )}
+
               <Grid.Column width={1} />
             </Grid.Row>
             <Grid.Row className="row">
@@ -163,7 +189,7 @@ const EntityLevels = ({
                     <Pie level={level} data={summaryData} onlyBc={onlyBc} />
                     {Object.keys(showText).length > 0 && (
                       <Button style={{ marginTop: '1em' }} onClick={() => handleShowText(level, !showText[level])}>
-                        {showText === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                        {showText?.level === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
                       </Button>
                     )}
                   </Grid.Column>
@@ -231,19 +257,21 @@ const EntityLevels = ({
                     {showText === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
                   </Button>
                 </Grid.Column>
-                <Grid.Column width={5}>
-                  <ProgrammeList
-                    data={summaryData.doctoral}
-                    lang={lang}
-                    onlyBc={onlyBc}
-                    showText={showText.doctoral}
-                    showSpecific={showSpecific}
-                    handleShowSpecific={handleShowSpecific}
-                  />
-                  <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
-                    {showText === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                  </Button>
-                </Grid.Column>
+                {!hideLevels && (
+                  <Grid.Column width={5}>
+                    <ProgrammeList
+                      data={summaryData.doctoral}
+                      lang={lang}
+                      onlyBc={onlyBc}
+                      showText={showText.doctoral}
+                      showSpecific={showSpecific}
+                      handleShowSpecific={handleShowSpecific}
+                    />
+                    <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
+                      {showText === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                    </Button>
+                  </Grid.Column>
+                )}
               </Grid.Row>
             )}
           </Grid>
@@ -251,7 +279,9 @@ const EntityLevels = ({
       </div>
       {form === 5 && (
         <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-          <p style={{ fontSize: '15px', marginTop: '1em' }}>{t('formView:allYearlyAnswerYears')}</p>
+          <p style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
+            {t('formView:allYearlyAnswerYears')}
+          </p>
         </Link>
       )}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={null} form={form} />
