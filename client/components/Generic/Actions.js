@@ -73,6 +73,19 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
     return latest.title.length > 0 || latest.actions.length > 0
   }
 
+  const getStyleForm = level => {
+    if (showText?.level === level) {
+      return {
+        fontStyle: 'italic',
+        background: '#CDCDCD',
+        padding: 10,
+      }
+    }
+    return {
+      padding: 10,
+    }
+  }
+
   return (
     <div
       className="form-entity-area"
@@ -110,9 +123,15 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
           <div className="summary-grid" data-cy={`${id}-summary`}>
             <Grid columns={4}>
               <Grid.Row className="row">
-                <Grid.Column width={5}>{t('bachelor')}</Grid.Column>
-                <Grid.Column width={5}>{!onlyBc ? t('master') : ''}</Grid.Column>
-                <Grid.Column width={5}>{!onlyBc ? t('doctoral') : ''}</Grid.Column>
+                <Grid.Column width={5} style={getStyleForm('bachelor')}>
+                  {t('bachelor')}
+                </Grid.Column>
+                <Grid.Column width={5} style={getStyleForm('master')}>
+                  {!onlyBc ? t('master') : ''}
+                </Grid.Column>
+                <Grid.Column width={5} style={getStyleForm('doctoral')}>
+                  {!onlyBc ? t('doctoral') : ''}
+                </Grid.Column>
                 <Grid.Column width={1} />
               </Grid.Row>
 
@@ -128,7 +147,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                       handleShowSpecific={handleShowSpecific}
                     />
                     <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
-                      {showText === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
                     </Button>
                   </Grid.Column>
                   <Grid.Column width={5}>
@@ -141,7 +160,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                       handleShowSpecific={handleShowSpecific}
                     />
                     <Button onClick={() => handleShowText('master', !showText.master)}>
-                      {showText === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
                     </Button>
                   </Grid.Column>
                   <Grid.Column width={5}>
@@ -154,7 +173,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                       handleShowSpecific={handleShowSpecific}
                     />
                     <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
-                      {showText === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
                     </Button>
                   </Grid.Column>
                 </Grid.Row>
