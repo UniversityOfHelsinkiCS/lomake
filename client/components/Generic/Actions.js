@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Divider, Icon, Grid, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -7,29 +6,7 @@ import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
 import ActionElement from './ActionElement'
 import './Generic.scss'
-
-const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
-  if (onlyBc || !data) {
-    return <div />
-  }
-  return data.map(p => {
-    return (
-      <div key={p.key}>
-        <p key={`${p.name[lang]}`}>
-          <span className="answer-circle-green" />{' '}
-          <span
-            className="programme-list-button"
-            onClick={() => handleShowSpecific(p.key)}
-            style={{ marginLeft: '0.5em' }}
-          >
-            {p.name[lang]}
-          </span>
-        </p>
-        {(showText || showSpecific[p.key]) && data[p.key] && <ReactMarkdown>{data[p.key]}</ReactMarkdown>}
-      </div>
-    )
-  })
-}
+import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
 const Actions = ({ id, label, description, form, required, extrainfo, programme, summaryData }) => {
   const { t } = useTranslation()
@@ -138,7 +115,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
               <>
                 <Grid.Row className="row">
                   <Grid.Column width={5}>
-                    <ProgrammeList
+                    <ProgrammeAnswerSummaryList
                       data={summaryData.bachelor}
                       lang={lang}
                       onlyBc={false}
@@ -151,7 +128,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                     </Button>
                   </Grid.Column>
                   <Grid.Column width={5}>
-                    <ProgrammeList
+                    <ProgrammeAnswerSummaryList
                       data={summaryData.master}
                       lang={lang}
                       onlyBc={onlyBc}
@@ -164,7 +141,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                     </Button>
                   </Grid.Column>
                   <Grid.Column width={5}>
-                    <ProgrammeList
+                    <ProgrammeAnswerSummaryList
                       data={summaryData.doctoral}
                       lang={lang}
                       onlyBc={onlyBc}

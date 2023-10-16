@@ -160,7 +160,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
       },
       {
         "id": "meta2",
@@ -186,7 +187,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
       },
       {
         "id": "faculty_ease_of_study_actions",
@@ -402,7 +404,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
       },
       {
         "id": "meta2",
@@ -428,7 +431,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
       },
       {
         "id": "faculty_programme_structure_actions",
@@ -477,9 +481,9 @@
           "en": "COMMENTS BY THE DEGREE PROGRAMME"
         },
         "description": {
-          "fi": "Antakaa kokonaisarvio tiedekunnan toimivuudesta. Perustelkaa arvio.",
+          "fi": "Antakaa kokonaisarvio tiedekunnan toimivuudesta.",
           "se": "",
-          "en": "Provide an overall assessment of the effectiveness of the faculty´s degree programme education. Justify the assessment. "
+          "en": "Provide an overall assessment of the effectiveness of the faculty´s degree programme education."
         },
         "required": true,
         "extrainfo": {
@@ -490,14 +494,31 @@
         "relatedEvaluationQuestion": "studyprogramme_status"
       },
       {
+        "id": "faculty_studyprogramme_status_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
         "id": "faculty_where_are_we_in_five_years",
         "index": 13,
         "kludge": true,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
-          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua. Perustelkaa arvio.",
+          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
           "se": "",
-          "en": "Give the overall status of the faculty´s degree programme education in five years. Justify the assessment. "
+          "en": "Give the overall status of the faculty´s degree programme education in five years."
         },
         "label": {
           "fi": "MISSÄ TIEDEKUNNASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
@@ -516,6 +537,23 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "where_are_we_in_five_years"
+      },
+      {
+        "id": "faculty_where_are_we_in_five_years_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
       }
     ]
   }

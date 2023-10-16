@@ -18,6 +18,7 @@ import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import './Generic.scss'
+import ProgrammeTextAnswerSummary from './ProgrammeTextAnswerSummary'
 
 const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
@@ -49,6 +50,7 @@ const Textarea = ({
   previousYearsAnswers,
   previousAnswerText,
   previousAnswerColor,
+  summaryData,
   form,
   maxLength,
   marginTop,
@@ -74,6 +76,8 @@ const Textarea = ({
 
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
+
+  const hasSummaryData = Object.keys(summaryData || {}).length > 0
 
   useEffect(() => {
     const gotTheLock =
@@ -193,6 +197,7 @@ const Textarea = ({
           id={id}
         />
       </div>
+      {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} />}
       {viewOnly ? (
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (

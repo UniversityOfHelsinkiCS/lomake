@@ -196,6 +196,7 @@ export default {
   },
 
   generic: {
+    noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',
     degreeReformIndividualForm: 'Lomake',
@@ -208,6 +209,7 @@ export default {
     healthSchool: 'Terveyden tutkimuksen tutkijakoulu',
     environmentalSchool: 'Ympäristö-, elintarvike- ja biotieteellinen tutkijakoulu',
     textAreaLabel: 'Keskustelun pääkohdat olivat',
+    textAreaLabelQ12and13: 'Perustelkaa arvio',
     kludgedLabel: 'ARVIO',
     kludgedLabel2: 'KUVAUS',
     allFaculties: 'Kaikki tiedekunnat',

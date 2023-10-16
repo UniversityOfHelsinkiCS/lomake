@@ -28,7 +28,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   return false
 }
 
-const findAnswers = (programmes, allAnswers, question) => {
+const findEntityLevelAnswers = (programmes, allAnswers, question) => {
   const result = {
     bachelor: { green: [], yellow: [], red: [], gray: [], text: [] },
     master: { green: [], yellow: [], red: [], gray: [], text: [] },
@@ -68,7 +68,7 @@ const findActionAnswers = (programmes, allAnswers, question) => {
       if (answer?.data && answer.data[`${question}-${number}-text`]) {
         text[index] = {
           title: answer.data[`${question}-${number}-text`].title,
-          action: answer.data[`${question}-${number}-text`].actions,
+          content: answer.data[`${question}-${number}-text`].actions,
         }
         return true
       }
@@ -79,6 +79,36 @@ const findActionAnswers = (programmes, allAnswers, question) => {
     }
   })
   result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
+  return result
+}
+
+const findTextAnswers = (programmes, allAnswers, question) => {
+  const result = {
+    bachelor: [],
+    master: [],
+    doctoral: [],
+  }
+
+  programmes.forEach(({ key, level, name }) => {
+    const text = []
+    const answer = allAnswers.find(a => a.programme === key)
+    // console.log(answer?.data[`${question}_text`])
+    const answerText = answer?.data[`${question}_text`]
+    if (answerText) {
+      text.push({
+        title: '',
+        content: answerText,
+      })
+    }
+
+    if (text.length > 0) {
+      result[level][key] = {
+        programme: name,
+        text,
+      }
+    }
+  })
+
   return result
 }
 
@@ -155,16 +185,19 @@ const FacultyFormView = ({ room, formString }) => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion && part.type === 'ACTIONS') {
           result[part.id] = findActionAnswers(programmes, answers, part.relatedEvaluationQuestion)
-          return true
+          return
         }
-        if (part.relatedEvaluationQuestion) {
-          result[part.id] = findAnswers(programmes, answers, part.relatedEvaluationQuestion)
+        if (part.relatedEvaluationQuestion && part.type === 'ENTITY_LEVELS') {
+          result[part.id] = findEntityLevelAnswers(programmes, answers, part.relatedEvaluationQuestion)
+          return
         }
-        return true
+        if (part.relatedEvaluationQuestion && part.type === 'TEXTAREA') {
+          result[part.id] = findTextAnswers(programmes, answers, part.relatedEvaluationQuestion)
+        }
       })
     })
     return result
-  }, [room, user, facultyProgrammeData])
+  }, [room, user, facultyProgrammeData.pending])
 
   if (!room || !form) return <Redirect to="/" />
 

@@ -118,6 +118,10 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
     }
   }
 
+  const textAreaLabel = ['faculty_studyprogramme_status', 'faculty_where_are_we_in_five_years'].includes(id)
+    ? t('generic:textAreaLabelQ12and13')
+    : t('generic:textAreaLabel')
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -265,7 +269,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
           </Grid>
         </div>
       </div>
-      <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={null} form={form} />
+      <Textarea id={id} label={textAreaLabel} EntityLastYearsAccordion={null} form={form} />
     </div>
   )
 }
