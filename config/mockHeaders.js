@@ -7,7 +7,7 @@ const possibleUsers = [
     givenName: 'Acual kojo fake user',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees',
+    hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees;grp-katselmus-mltdk',
     sn: 'AcualKojo',
   },
   {
