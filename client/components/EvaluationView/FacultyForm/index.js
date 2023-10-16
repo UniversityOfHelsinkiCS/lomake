@@ -193,7 +193,7 @@ const FacultyFormView = ({ room, formString }) => {
       })
     })
     return result
-  }, [room, user, facultyProgrammeData])
+  }, [room, user, facultyProgrammeData.pending])
 
   if (!room || !form) return <Redirect to="/" />
 

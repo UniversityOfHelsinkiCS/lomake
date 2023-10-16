@@ -158,8 +158,6 @@ const Textarea = ({
     return isTooLong
   }
 
-  // if (hasSummaryData) console.log(label, summaryData)
-
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
