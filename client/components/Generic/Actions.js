@@ -177,13 +177,14 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                           </p>
                           {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
                             <>
-                              {summaryData[showText.level][programmeKey].text.map(answer => {
+                              {summaryData[showText.level][programmeKey].text.map((answer, i) => {
                                 if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
-                                  return <div> </div>
+                                  // eslint-disable-next-line react/no-array-index-key
+                                  return <div key={`${id}-${programmeKey}-${i}`}> </div>
                                 }
-
                                 return (
-                                  <Card key={`${id}-${programmeKey}`}>
+                                  // eslint-disable-next-line react/no-array-index-key
+                                  <Card key={`${id}-${programmeKey}-${i}`}>
                                     <Card.Content>
                                       <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
                                       <Card.Description>{answer.content}</Card.Description>
