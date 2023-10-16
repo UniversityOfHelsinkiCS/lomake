@@ -196,6 +196,7 @@ export default {
   },
 
   generic: {
+    noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',
     degreeReformIndividualForm: 'Lomake',

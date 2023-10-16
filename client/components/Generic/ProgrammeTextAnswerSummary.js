@@ -100,6 +100,9 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData }) => {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row className="row">
+              {showText.level && Object.keys(summaryData[showText.level]).length === 0 && (
+                <div style={{ marginLeft: '0.5em' }}>{t('generic:noAnswerData')}</div>
+              )}
               {showText.level &&
                 Object.keys(summaryData[showText.level]).map(programmeKey => {
                   return (

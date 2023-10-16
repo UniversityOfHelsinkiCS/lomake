@@ -196,6 +196,7 @@ export default {
   },
 
   generic: {
+    noAnswerData: 'No answeers for the question',
     kludgeButton: 'Save the textfield',
     degreeReformIndividualAnswers: 'Answers',
     degreeReformIndividualForm: 'Form',

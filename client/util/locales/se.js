@@ -188,6 +188,7 @@ export default {
   },
 
   generic: {
+    noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
     degreeReformIndividualAnswers: 'Svara',
     degreeReformIndividualForm: 'Form',
