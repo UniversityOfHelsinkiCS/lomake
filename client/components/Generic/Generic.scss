@@ -364,10 +364,28 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  max-width: 40%;
+  max-width: 32%;
   margin: 0;
   padding-left: 2em;
   padding-bottom: 0;
+  @media only screen and (max-width: 1200px) {
+    max-width: 40%;
+  }
+  @media only screen and (max-width: 1100px) {
+    max-width: 45%;
+  }
+  @media only screen and (max-width: 1000px) {
+    max-width: 55%;
+  }
+  @media only screen and (max-width: 900px) {
+    max-width: 60%;
+  }
+  @media only screen and (max-width: 850px) {
+    max-width: 70%;
+  }
+  @media only screen and (max-width: 700px) {
+    max-width: 80%;
+  }
 }
 
 .traffic-light-row-label {
