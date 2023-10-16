@@ -9,6 +9,7 @@ const {
   iamToOrganisationCode,
   iamToDoctoralSchool,
   relevantIAMs,
+  facultyWideWritingGroups,
 } = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -204,6 +205,28 @@ const getProgrammeReadAccess = hyGroups => {
 }
 
 /**
+ * Grant writing rights to specific faculty if the user belongs to faculty evaluation writing IAM (eg. grp-katselmus-mltdk)
+ * @param {string[]} hyGroups
+ * @returns write access to Katselmus faculty and read access to faculty's programmes
+ */
+const getFacultyKatselmusWriteAccess = hyGroups => {
+  const hasFacultyWideWritingsRights = hyGroups.map(iam => facultyWideWritingGroups[iam]).filter(Boolean)
+  if (!hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0) return {}
+  const access = {}
+  let specialGroup = {}
+  data.forEach(faculty => {
+    if (hasFacultyWideWritingsRights.includes(faculty.code)) {
+      faculty.programmes.forEach(program => {
+        access[program.key] = { read: true }
+      })
+      access[faculty.code] = { read: true, write: true }
+    }
+  })
+  specialGroup = { evaluationFaculty: true }
+  return { access, specialGroup }
+}
+
+/**
  * Gets access rights and special groups,
  * based on IAM-groups in IAM header string
  * @param {string} hyGroupsHeader
@@ -225,6 +248,7 @@ const getIAMRights = hyGroupsHeader => {
     getProgrammeAdminAccess,
     getAdmin,
     getSuperAdmin,
+    getFacultyKatselmusWriteAccess,
   ]
     .map(f => f(hyGroups))
     .forEach(({ access: newAccess, specialGroup: newSpecialGroup }) => {

@@ -44,6 +44,9 @@ export default () => {
   const filteredFaculties = useMemo(() => {
     if (!faculties) return []
     return faculties.filter(f => {
+      if (!currentUser.access[f.code]) {
+        return false
+      }
       const name = f.name[lang]
       const { code } = f
       return (

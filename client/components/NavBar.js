@@ -6,7 +6,7 @@ import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin, isSuperAdmin, isEvaluationFacultyUser } from '@root/config/common'
 
 const UnHijackButton = ({ handleUnhijack }) => {
   return (
@@ -47,7 +47,7 @@ const GoToEvaluationButton = ({ user }) => {
           <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
             {t('generic:level:programmes')}
           </Dropdown.Item>
-          {isAdmin(user) ? (
+          {isAdmin(user) || isEvaluationFacultyUser(user) ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-faculties"
               as={Link}

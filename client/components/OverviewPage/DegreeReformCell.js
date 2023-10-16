@@ -29,11 +29,7 @@ const DegreeReformCell = ({
 
   const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
   const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
-  /*
-  console.log('questionKeys', questionKeys)
-  console.log('programmesAnswers', programmesAnswers)
-  console.log('questionOfCell', questionOfCell)
-*/
+
   const answeredQuestionKeys = questionKeys.filter(k => programmesAnswers[k])
 
   const noIdkKeys = answeredQuestionKeys.filter(k => {

@@ -335,6 +335,20 @@ const isUniversityWideWritingGroups = [
   'hy-ypa-opa-kosu-viikki',
 ]
 
+const facultyWideWritingGroups = {
+  'grp-katselmus-ttdk': 'H10',
+  'grp-katselmus-oiktd': 'H20',
+  'grp-katselmus-ltdk': 'H30',
+  'grp-katselmus-humtd': 'H40',
+  'grp-katselmus-mltdk': 'H50',
+  'grp-katselmus-ftdk': 'H55',
+  'grp-katselmus-bytdk': 'H57',
+  'grp-katselmus-ktdk': 'H60',
+  'grp-katselmus-valtt': 'H70',
+  'grp-katselmus-sskh': 'H74',
+  'grp-katselmus-mmtdk': 'H80',
+  'grp-katselmus-eltdk': 'H90',
+}
 const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['hy-ypa-opa-ospa']
@@ -358,6 +372,14 @@ const isEmployeeIam = iam => employeeGroups.includes(iam)
 const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
 
 const getStudyLeaderGroup = iam => kojoMap[iam]
+
+const isFacultyWideWritingIam = iam => {
+  const facultyCodes = facultyWideWritingGroups[iam]
+  if (Array.isArray(facultyCodes)) {
+    return facultyCodes
+  }
+  return [facultyCodes]
+}
 
 const iamToOrganisationCode = iam => {
   const organisationCodes = joryMap[iam]
@@ -393,6 +415,7 @@ const relevantIAMs = []
   .concat(superAdminGroups)
   .concat(adminGroups)
   .concat(employeeGroups)
+  .concat(Object.keys(facultyWideWritingGroups))
 
 module.exports = {
   doctoralIams,
@@ -415,4 +438,6 @@ module.exports = {
   organisationCodeToIam,
   getStudyLeaderGroup,
   relevantIAMs,
+  isFacultyWideWritingIam,
+  facultyWideWritingGroups,
 }

@@ -131,6 +131,11 @@ const isInternationalUser = user => {
   return false
 }
 
+const isEvaluationFacultyUser = user => {
+  if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.evaluationFaculty) return true
+  return false
+}
+
 const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
 
 const internationalAccess = {
@@ -198,6 +203,7 @@ module.exports = {
   isBasicUser,
   isSpecialGroupUser,
   isInternationalUser,
+  isEvaluationFacultyUser,
   hasSomeReadAccess,
   testProgrammeCode,
   testProgrammeName,

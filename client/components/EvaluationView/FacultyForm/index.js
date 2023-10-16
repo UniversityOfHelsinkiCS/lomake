@@ -15,7 +15,8 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './EvaluationForm.scss'
-import { colors } from 'Utilities/common'
+import { colors, isAdmin } from 'Utilities/common'
+import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
@@ -108,6 +109,9 @@ const FacultyFormView = ({ room, formString }) => {
 
   useEffect(() => {
     if (!faculty || !form) return
+    if (!user.access[faculty.code]) {
+      return
+    }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getFacultyProgrammeAnswersAction(room, lang))
     if (
@@ -165,6 +169,10 @@ const FacultyFormView = ({ room, formString }) => {
   if (!room || !form) return <Redirect to="/" />
 
   if (!faculty) return 'Error: Invalid url.'
+
+  if (!user.access[faculty.code] && !isAdmin(user)) {
+    return <NoPermissions t={t} />
+  }
 
   return (
     <div>
