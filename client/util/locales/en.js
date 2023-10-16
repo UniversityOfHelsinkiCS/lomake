@@ -119,7 +119,7 @@ export default {
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
     info2:
-      "Please provide an overall assessment of the programme's current status with regard to each topic using the following system of traffic lights:",
+      'Please provide an overall assessment with regard to each topic using the following system of traffic lights:',
     downloadCSV: 'Download all data as a CSV file',
     downloadPDF: 'Print / Download answers as a PDF-file',
     mandatory: 'required field',
@@ -145,7 +145,7 @@ export default {
     requiredActions: 'Actions required',
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
-    allYearlyAnswerYears: 'All yearly report years',
+    allYearlyAnswerYears: 'All annual follow-up report years',
     evaluationInfo1:
       "For this review, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
@@ -153,7 +153,9 @@ export default {
     selectApplicable: 'Select all applicable options',
     addMissing: ' Add any missing options - You may add several',
     progSummaryTitle: 'Annual followup answers related to this theme from the review period',
-    facultySummaryTitle: "The faculty's programmes' steering groups' answers to this theme:",
+    facultySummaryTitle: 'The answers given by the steering groups of the faculty´s degree programmes',
+    facultyActionSummaryTitle:
+      'The steering groups of the degree programmes recorded their development areas and their required measures as follows:',
     materials: 'Supporting materials',
     materialsProg:
       'You can view all annual followup answers by following the below link.<br/> Additionally, a summary of annual followup answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',
@@ -166,9 +168,9 @@ export default {
     langCenterRaport:
       "Language Centre's self-evaluation report <a href='https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi' target='_blank'>here</a> (currently only in Finnish)",
     facultyInfo:
-      'For this review you will consider the state of your <strong>faculty</strong> over the preriod of the three previous years. ',
+      'For this review you will consider the state of degree programmes of the <strong>faculty</strong> over the period of the three previous years.',
     materialsFaculty:
-      'Most questions in this form are accompanied by a summary of the answers given to the same theme by the studyprogramme steering groups of the faculty. <br/><br/> A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of your faculty, and about the progress of their studies. Link shown below.',
+      'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.',
     yearlyAnswers: 'Annual followup answers',
     evaluationFacultyAnswers: 'Review in studyprogrammes answers',
     yearlyFacultyAnswers: 'Annual followup answers in studyprogrammes',
@@ -190,7 +192,7 @@ export default {
     average: 'Average',
     showAnswers: 'Show answers',
     hideAnswers: 'Hide answers',
-    evaluationSummaryByProgramme: 'Evaluation summary by studyprogramme',
+    evaluationSummaryByProgramme: 'View the faculty data on the results of the Current state of education survey.',
   },
 
   generic: {
