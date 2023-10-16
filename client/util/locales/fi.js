@@ -32,7 +32,7 @@ export default {
     bachelor: 'Kandiohjelmat',
     master: 'Maisteriohjelmat',
     doctoral: 'Tohtoriohjelmat',
-    bachelorShort: 'Kandio',
+    bachelorShort: 'Kandi',
     masterShort: 'Maisteri',
     doctoralShort: 'Tohtori',
     international: 'Kansainväliset maisteriohjelmat',
