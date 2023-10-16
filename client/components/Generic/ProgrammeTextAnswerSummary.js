@@ -44,7 +44,7 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData }) => {
 
   return (
     <div className="summary-container">
-      <h4>{t('formView:facultyActionSummaryTitle')}</h4>
+      <h4>{t('formView:facultySummaryTitle')}</h4>
       <div className="summary-grid" data-cy={`${questionId}-summary`}>
         <Grid columns={4}>
           <Grid.Row className="row">

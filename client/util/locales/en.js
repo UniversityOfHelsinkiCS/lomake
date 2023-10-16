@@ -170,7 +170,7 @@ export default {
     facultyInfo:
       'For this review you will consider the state of degree programmes of the <strong>faculty</strong> over the period of the three previous years.',
     materialsFaculty:
-      'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.',
+      'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.\n\n\nA supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
     yearlyAnswers: 'Annual followup answers',
     evaluationFacultyAnswers: 'Review in studyprogrammes answers',
     yearlyFacultyAnswers: 'Annual followup answers in studyprogrammes',

@@ -170,7 +170,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                             <span
                               className="programme-list-button"
                               onClick={() => handleShowSpecific(programmeKey)}
-                              style={{ marginLeft: '0.5em' }}
+                              style={{ marginLeft: '0.5em', fontSize: 16 }}
                             >
                               {summaryData[showText.level][programmeKey].programme[lang]}
                             </span>
@@ -178,14 +178,15 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                           {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
                             <>
                               {summaryData[showText.level][programmeKey].text.map(answer => {
-                                if (!(answer.title.length > 2) && !(answer.action.length > 2)) {
+                                if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
                                   return <div> </div>
                                 }
+
                                 return (
                                   <Card key={`${id}-${programmeKey}`}>
                                     <Card.Content>
-                                      <Card.Header>{answer.title}</Card.Header>
-                                      <Card.Description>{answer.action}</Card.Description>
+                                      <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
+                                      <Card.Description>{answer.content}</Card.Description>
                                     </Card.Content>
                                   </Card>
                                 )

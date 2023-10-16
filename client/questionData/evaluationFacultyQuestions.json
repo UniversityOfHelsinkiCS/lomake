@@ -526,9 +526,9 @@
           "en": "OVERALL STATUS OF THE DEGREE PROGRAMME EDUCATION IN FIVE YEARS "
         },
         "description": {
-          "fi": "Kuvatkaa tiedekunnan kokonaistilannetta viiden vuoden kuluttua",
+          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
           "se": "",
-          "en": ""
+          "en": "Give the overall status of the faculty´s degree programme education in five years."
         },
         "required": true,
         "extrainfo": {
