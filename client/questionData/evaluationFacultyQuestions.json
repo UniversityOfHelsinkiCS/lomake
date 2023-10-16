@@ -402,7 +402,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
       },
       {
         "id": "meta2",
@@ -428,7 +429,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
       },
       {
         "id": "faculty_programme_structure_actions",
