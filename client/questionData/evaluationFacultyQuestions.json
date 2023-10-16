@@ -160,7 +160,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
       },
       {
         "id": "meta2",
@@ -186,7 +187,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
       },
       {
         "id": "faculty_ease_of_study_actions",
