@@ -30,9 +30,9 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
       <div style={{ marginRight: '0.5em' }}>
         {!showDataByProgramme ? (
           <>
-            <p style={{ margin: '0' }}>{t('bachelor')}</p>
-            <p style={{ margin: '0' }}>{t('master')}</p>
-            <p style={{ margin: '0' }}>{t('doctoral')}</p>
+            <p style={{ margin: '0' }}>{t('bachelorShort')}</p>
+            <p style={{ margin: '0' }}>{t('masterShort')}</p>
+            <p style={{ margin: '0' }}>{t('doctoralShort')}</p>
           </>
         ) : (
           <p style={{ marginTop: '0.5em', wordWrap: 'break-word' }}>{t('overview:facultySummary')}</p>
