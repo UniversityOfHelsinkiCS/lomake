@@ -56,17 +56,7 @@ const GoToEvaluationButton = ({ user }) => {
             >
               {t('generic:level:faculties')}
             </Dropdown.Item>
-          ) : (
-            <Dropdown.Item
-              data-cy="nav-evaluation-option-faculties"
-              //  as={Link}
-              //  to="/evaluation-faculty" FIX THIS after faculty evaluation is open
-              disabled
-              name="faculties"
-            >
-              {t('generic:level:faculties')}
-            </Dropdown.Item>
-          )}
+          ) : null}
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
