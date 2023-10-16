@@ -200,6 +200,7 @@ export default {
     healthSchool: 'Forskarskolan i hälsoforskning',
     environmentalSchool: 'Miljö-, livsmedels- och biovetenskapliga forskarskolan',
     textAreaLabel: 'Diskussionens huvudpunkter',
+    textAreaLabelQ12and13: 'Motivera din bedömning',
     kludgedLabel: 'BEDÖMNING',
     kludgedLabel2: 'BESKRIVNING',
     allFaculties: 'Alla fakultet',
