@@ -3,7 +3,6 @@ import { Divider, Grid, Icon, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
-import { Link } from 'react-router-dom'
 import { colors } from 'Utilities/common'
 import ReactMarkdown from 'react-markdown'
 import Textarea from './Textarea'
@@ -77,18 +76,7 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
   )
 }
 
-const EntityLevels = ({
-  id,
-  label,
-  description,
-  required,
-  number,
-  extrainfo,
-  summaryData,
-  form,
-  programme,
-  summaryUrl,
-}) => {
+const EntityLevels = ({ id, label, description, required, number, extrainfo, summaryData, form, programme }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [showProgrammes, setShowProgrammes] = useState(false)
@@ -277,13 +265,6 @@ const EntityLevels = ({
           </Grid>
         </div>
       </div>
-      {form === 5 && (
-        <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">
-          <p style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-            {t('formView:allYearlyAnswerYears')}
-          </p>
-        </Link>
-      )}
       <Textarea id={id} label={t('generic:textAreaLabel')} EntityLastYearsAccordion={null} form={form} />
     </div>
   )
