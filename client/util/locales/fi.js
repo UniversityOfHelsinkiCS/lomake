@@ -68,7 +68,7 @@ export default {
     chooseFaculty: 'Valitse tiedekunta',
     chooseProgramme: 'Valitse koulutusohjelma',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
-    showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekkunnittain',
+    showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',
   },
 
   aboutPage: {
