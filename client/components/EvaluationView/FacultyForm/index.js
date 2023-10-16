@@ -139,7 +139,7 @@ const FacultyFormView = ({ room, formString }) => {
 
   useEffect(() => {
     if (!faculty || !form) return
-    if (!user.access[faculty.code]) {
+    if (!user.access[faculty.code] && !isAdmin(user)) {
       return
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
