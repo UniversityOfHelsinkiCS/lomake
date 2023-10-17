@@ -25,7 +25,7 @@ const possibleUsers = [
     givenName: 'superAdmin',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-tohtoriohjelma-johtajat;hy-tine;hy-ftdk-dekanaatti;hy-dp-dpdr-jory;hy-employees;grp-katselmus-ftdk',
+    hyGroupCn: 'grp-toska',
     sn: 'superAdmin',
   },
   {
