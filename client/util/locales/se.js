@@ -238,7 +238,7 @@ export default {
     written: 'Skriftliga svar', // check
 
     level: {
-      programmes: 'Studieprogram',
+      programmes: 'Utbilndingsprogram',
       faculties: 'Fakultet',
       university: 'Universitet',
       committee: 'Kommitté',

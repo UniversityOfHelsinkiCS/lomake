@@ -481,7 +481,7 @@
           "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE FACULT"
         },
         "description": {
-          "fi": "Antakaa kokonaisarvio tiedekunnan toimivuudesta.",
+          "fi": "Antakaa kokonaisarvio tiedekunnan koulutuksen toimivuudesta.",
           "se": "Ge en helhetsbedömning av hur fakultetens utbildning fungerar.",
           "en": "Provide an overall assessment of the effectiveness of the faculty´s degree programme education."
         },
@@ -521,8 +521,8 @@
           "en": "Give the overall status of the faculty´s degree programme education in five years."
         },
         "label": {
-          "fi": "MISSÄ TIEDEKUNNASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
-          "se": "VAR  FAKULTETS UTBILDNING BEFINNER SIG OM FEM ÅR",
+          "fi": "MISSÄ TIEDEKUNNAN KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
+          "se": "VAR FAKULTETS UTBILDNING BEFINNER SIG OM FEM ÅR",
           "en": "OVERALL STATUS OF THE DEGREE PROGRAMME EDUCATION IN FIVE YEARS "
         },
         "description": {

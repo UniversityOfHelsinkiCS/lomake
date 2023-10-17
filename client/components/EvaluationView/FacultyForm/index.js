@@ -129,7 +129,6 @@ const FacultyFormView = ({ room, formString }) => {
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
-  const summaryURL = `/evaluation-faculty/previous-years/${room}`
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${room}`
 
@@ -266,11 +265,6 @@ const FacultyFormView = ({ room, formString }) => {
                 <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
-                  </h4>
-                </Link>
-                <Link data-cy="link-to-old-answers" to={summaryURL} target="_blank">
-                  <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:allYearlyAnswerYears')}
                   </h4>
                 </Link>
               </div>
