@@ -239,6 +239,7 @@ const getIAMRights = hyGroupsHeader => {
 
   ;[
     getUniversityReadingRights,
+    getFacultyKatselmusWriteAccess,
     getDoctoralAccess,
     getDoctoralSchoolAccess,
     getProgrammeReadAccess,
@@ -248,7 +249,6 @@ const getIAMRights = hyGroupsHeader => {
     getProgrammeAdminAccess,
     getAdmin,
     getSuperAdmin,
-    getFacultyKatselmusWriteAccess,
   ]
     .map(f => f(hyGroups))
     .forEach(({ access: newAccess, specialGroup: newSpecialGroup }) => {
