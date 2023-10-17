@@ -55,7 +55,7 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
 
-    yearlyAssessment: 'Annual followup',
+    yearlyAssessment: 'Annual follow-up',
     evaluation: 'Review',
     'degree-reform': 'Current state of education',
     'degree-reform-group': 'Current state of education - programmes',
@@ -68,7 +68,7 @@ export default {
     chooseFaculty: 'Choose faculty',
     chooseProgramme: 'Choose degree programme',
     showAllProgrammes: 'Show all programmes',
-    showDataByProgramme: 'Studyprogramme answers by faculty',
+    showDataByProgramme: 'Degree programme answers by faculty',
   },
 
   aboutPage: {
@@ -150,19 +150,19 @@ export default {
     removeDevelopmentArea: 'Delete last',
     allYearlyAnswerYears: 'All annual follow-up report years',
     evaluationInfo1:
-      "For this review, consider the studyprogramme's overall situation <strong>over the last three years</strong>.",
+      "For this review, consider the degree programme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
-      "Discuss the following themes among the studyprogramme's steering group. Please note, that <strong>the annual followup for year 2023 should be done before this review</strong>.",
+      "Discuss the following themes among the degree programme's steering group. Please note, that <strong>the annual follow-up for year 2023 should be done before this review</strong>.",
     selectApplicable: 'Select all applicable options',
     addMissing: ' Add any missing options - You may add several',
-    progSummaryTitle: 'Annual followup answers related to this theme from the review period',
+    progSummaryTitle: 'Annual follow-up answers related to this theme from the review period',
     facultySummaryTitle: 'The answers given by the steering groups of the faculty´s degree programmes',
     facultyActionSummaryTitle:
       'The steering groups of the degree programmes recorded their development areas and their required measures as follows:',
     materials: 'Supporting materials',
     materialsProg:
-      'You can view all annual followup answers by following the below link.<br/> Additionally, a summary of annual followup answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',
-    summaryLinkProg: 'View all previous annual followup answers',
+      'You can view all annual follow-up answers by following the below link.<br/> Additionally, a summary of annual follow-up answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',
+    summaryLinkProg: 'View all previous annual follow-up answers',
     oodikoneProg: 'View programme statistics in Oodikone',
     oodikoneFaculty: 'View faculty statistics in Oodikone',
     rapo: 'View doctoral programme statistics in Rapo',
@@ -173,10 +173,10 @@ export default {
     facultyInfo:
       'For this review you will consider the state of degree programmes of the <strong>faculty</strong> over the period of the three previous years.',
     materialsFaculty:
-      'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.\n\n\nA supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
-    yearlyAnswers: 'Annual followup answers',
-    evaluationFacultyAnswers: 'Review in studyprogrammes answers',
-    yearlyFacultyAnswers: 'Annual followup answers in studyprogrammes',
+      'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.<br><br>A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
+    yearlyAnswers: 'Annual follow-up answers',
+    evaluationFacultyAnswers: 'Review in degree programmes answers',
+    yearlyFacultyAnswers: 'Annual follow-up answers in degree programmes',
     fillAllRequiredFields: 'At least the first three questions must be answered if you want to save',
     showAllProgrammes: 'Show all degree programmes',
     formReady: 'Your answers are saved',
@@ -273,7 +273,7 @@ export default {
     greenModalAccordion: 'Situation good',
     yellowModalAccordion: 'Situation satisfactory',
     redModalAccordion: 'Situation poor',
-    facultySummary: 'Studyprogramme answers',
+    facultySummary: 'Degree programme answers',
   },
 
   report: {
@@ -304,7 +304,7 @@ export default {
     users: 'Users',
     iams: 'IAM-groups',
     deadline: 'Deadline',
-    updateStudyprogrammes: 'Update studyprogrammes',
+    updateStudyprogrammes: 'Update degree programmes',
     deadlineSettings: 'Deadline settings',
     moreProgrammes_one: 'more programme',
     moreProgrammes_other: 'more programmes',
