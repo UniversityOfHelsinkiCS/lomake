@@ -168,11 +168,10 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth: '100%' }}>
           <label
             style={{
               fontStyle: 'bolder',
-              fontSize: '1.3em',
               minWidth: '50%',
               height: 'auto',
             }}

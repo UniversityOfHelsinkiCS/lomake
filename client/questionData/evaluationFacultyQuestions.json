@@ -134,7 +134,7 @@
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus tiedekunnan koulutusohjelmissa",
           "se": "Avläggande av examina och genomströmning inom fakultetens utbildningsprogram",
-          "en": "Completion of degrees and rate of progression in the Faculty degree programme"
+          "en": "Completion of degrees and rate of progression in the faculty degree programme"
         },
         "required": true,
         "level_breakdown": true,
