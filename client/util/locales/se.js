@@ -116,8 +116,13 @@ export default {
   },
 
   formView: {
+    facultyActionSummaryTitle:
+      'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
+    facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt',
+    materialsFaculty:
+      'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakultetens utbildningsprogram.<br><br>I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till fakultetens vy.',
     facultyInfo:
-      'Denna översyn tar ett bredare grepp på situationen för <strong>fakulteten</strong> under de senaste tre åren.',
+      'Denna översyn tar ett bredare grepp på situationen för <strong>fakultetets utbildningsprogram</strong> under de senaste tre åren.',
     canChange: 'Du kan redigera svaren efter att du har sparat',
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
     info1:
@@ -185,9 +190,9 @@ export default {
       'TOIJO självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">här</a> (endast på engelska)',
     langCenterRaport:
       'Språkcentrums självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">här</a> (för närvarande endast på finska)',
-    showAnswers: '',
-    hideAnswers: '',
-    evaluationSummaryByProgramme: '',
+    showAnswers: 'Visa svar',
+    hideAnswers: 'Dölj svar',
+    evaluationSummaryByProgramme: 'Titta på fakultetens information om resultaten av enkäten Utbildningens tillstånd',
   },
 
   generic: {

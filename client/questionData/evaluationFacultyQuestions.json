@@ -50,7 +50,7 @@
         },
         "description": {
           "fi": "Tiedekunnan koulutusohjelmien kokonaisuuden toimivuus",
-          "se": "Undervisningsplanens ändamålsenlighet",
+          "se": "Hur helheten av fakultetens utbildningsprogram fungerar",
           "en": "Functioning of the curriculum"
         },
         "required": true,
@@ -77,8 +77,8 @@
           "en": "STUDENT GUIDANCE AND SUPERVISION"
         },
         "description": {
-          "fi": "Opintojen ohjauksen toimivuus tiedekunnassa",
-          "se": "Studiehandledningens ändamålsenlighet",
+          "fi": "Opintojen ohjauksen toimivuus",
+          "se": "Hur studiehandledningen fungerar I fakultetens utbildningsprogram",
           "en": "Functioning of student guidance and supervision"
         },
         "required": true,
@@ -133,7 +133,7 @@
         },
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus tiedekunnan koulutusohjelmissa",
-          "se": "Avläggande av examina och genomströmning inom utbildningsprogrammet",
+          "se": "Avläggande av examina och genomströmning inom fakultetens utbildningsprogram",
           "en": "Completion of degrees and rate of progression in the Faculty degree programme"
         },
         "required": true,
@@ -151,7 +151,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
-          "se": "",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
@@ -168,7 +168,7 @@
         "type": "TITLE",
         "label": {
           "fi": "TIEDEKUNNAN KIRJAUKSET",
-          "se": "",
+          "se": "FAKULTETENS ANTECKNINGAR",
           "en": "COMMENTS BY THE FACULTY"
         }
       },
@@ -178,7 +178,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitkä ovat opiskelun sujuvuus -teeman osalta tiedekunnan vahvuudet?",
-          "se": "",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "required": false,
@@ -195,17 +195,17 @@
         "type": "ACTIONS",
         "label": {
           "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 tiedekunnan kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
           "en": "Write down one to five faculty development areas and concrete measures for them."
         },
         "required": true,
@@ -237,7 +237,7 @@
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus tiedekunnan koulutuksessa",
-          "se": "",
+          "se": "Ledarskap och kommunikation i fakultetens utbildning",
           "en": "Functioning of management, leadership and communication in the degree programmes of the faculty"
         },
         "required": true,
@@ -265,7 +265,7 @@
         },
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta tiedekunnan koulutuksessa",
-          "se": "",
+          "se": "Planering och administration av undervisningsresurser I fakultetens utbildning",
           "en": "Planning and management of teaching resources in the degree programmes of the faculty"
         },
         "required": true,
@@ -293,7 +293,7 @@
         },
         "description": {
           "fi": "Tiedekunnan näkemys ohjelmien mahdollisuuksista vaikuttaa uuden henkilökunnan rekrytointiin",
-          "se": "",
+          "se": "Fakultetens syn på programmens möjligheter att påverka rekryteringen av nya anställda",
           "en": "Faculty´s view of the programmes´ opportunities to influence the recruitment of new staff"
         },
         "required": true,
@@ -321,7 +321,7 @@
         },
         "description": {
           "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit tiedekunnassa",
-          "se": "",
+          "se": "Resurser för lokaler, utrustning och lärmiljöer vid fakulteten",
           "en": "Resources related to facilities, equipment and learning environments in the degree programmes of the faculty"
         },
         "required": true,
@@ -349,7 +349,7 @@
         },
         "description": {
           "fi": "Usean tiedekunnan yhteisten ohjelmien toimivuus",
-          "se": "",
+          "se": "Hur fungerar fakulteternas gemensamma program ",
           "en": "Functioning of joint programmes between several faculties"
         },
         "required": true,
@@ -377,7 +377,7 @@
         },
         "description": {
           "fi": "Tiedekunnan näkemys koulutusohjelmien asemasta yliopiston toiminta- ja johtamisrakenteessa",
-          "se": "",
+          "se": "Fakultetens syn på utbildningsprogrammens ställning i universitetets verksamhets- och ledningsstruktur",
           "en": "Faculty´s view on the status of the degree programme in the University’s operations and management structure"
         },
         "required": true,
@@ -395,7 +395,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
-          "se": "",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
@@ -412,7 +412,7 @@
         "type": "TITLE",
         "label": {
           "fi": "TIEDEKUNNAN KIRJAUKSET",
-          "se": "",
+          "se": "FAKULTETENS ANTECKNINGAR",
           "en": "COMMENTS BY THE FACULTY"
         }
       },
@@ -422,7 +422,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mitkä ovat tiedekunnan vahvuudet Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teemassa?",
-          "se": "",
+          "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
           "en": "What are the strengths of the overall structure of education, leadership, management, resources and status of degree programmes at the faculty?"
         },
         "required": false,
@@ -439,17 +439,17 @@
         "type": "ACTIONS",
         "label": {
           "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 tiedekunnan kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
           "en": "Write down one to five faculty development areas and concrete measures for them."
         },
         "required": true,
@@ -473,16 +473,16 @@
         "shortLabel": {
           "fi": "KOULUTUKSEN KOKONAISTOIMIVUUS",
           "se": "",
-          "en": ""
+          "en": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE "
         },
         "label": {
           "fi": "TIEDEKUNNAN KOULUTUKSEN KOKONAISTOIMIVUUS",
-          "se": "UTBILDNINGSPROGRAMMETS ANTECKNINGAR",
-          "en": "COMMENTS BY THE DEGREE PROGRAMME"
+          "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE FACULT"
         },
         "description": {
           "fi": "Antakaa kokonaisarvio tiedekunnan toimivuudesta.",
-          "se": "",
+          "se": "Ge en helhetsbedömning av hur fakultetens utbildning fungerar.",
           "en": "Provide an overall assessment of the effectiveness of the faculty´s degree programme education."
         },
         "required": true,
@@ -499,7 +499,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
-          "se": "",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
@@ -522,12 +522,12 @@
         },
         "label": {
           "fi": "MISSÄ TIEDEKUNNASSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
-          "se": "",
+          "se": "VAR  FAKULTETS UTBILDNING BEFINNER SIG OM FEM ÅR",
           "en": "OVERALL STATUS OF THE DEGREE PROGRAMME EDUCATION IN FIVE YEARS "
         },
         "description": {
           "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
-          "se": "",
+          "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
           "en": "Give the overall status of the faculty´s degree programme education in five years."
         },
         "required": true,
@@ -544,7 +544,7 @@
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
-          "se": "",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
