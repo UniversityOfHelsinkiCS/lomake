@@ -59,7 +59,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(loginAction())
-    if (isNotIndividualForm) {
+    if (isNotIndividualForm && !window.location.pathname.includes('/previous-years')) {
       dispatch(wsConnect())
     }
 

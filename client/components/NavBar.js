@@ -157,6 +157,8 @@ export default () => {
     window.location.reload()
   }
 
+  if (location.pathname.startsWith('/evaluation-faculty/previous-years')) return null
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
