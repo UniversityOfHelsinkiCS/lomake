@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { degreeReformBackgroundColor } from 'Utilities/common'
+import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from 'Utilities/common'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)
@@ -31,6 +31,7 @@ const Question = ({ question, answers }) => {
           .concat(trunc(t('formView:noAnswer')))
 
   const optionLabels = ['first', 'second', 'third', 'fourth', 'fifth']
+  const optionLabelsReversed = ['fifth', 'fourth', 'third', 'second', 'first']
 
   const keys =
     question.radioOptions === 'numbers'
@@ -73,7 +74,10 @@ const Question = ({ question, answers }) => {
   }, 0)
 
   const weightedSum = optionLabels.reduce((sum, i) => {
-    const weigth = optionLabels.indexOf(i) + 1
+    let weigth = optionLabels.indexOf(i) + 1
+    if (reversedPointsInDegreeReform.find(dKey => dKey === id)) {
+      weigth = optionLabelsReversed.indexOf(i) + 1
+    }
     return weigth * values[i] + sum
   }, 0)
 
