@@ -39,7 +39,7 @@ const languageFromUrl = () => {
 export default () => {
   const isNotIndividualForm = !window.location.href.includes('/individual')
   const isDegreeReformSummary =
-    window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=H50')
+    window.location.href.includes('/degree-reform') && window.location.search.startsWith('?faculty=')
   const isNotDegreeReformSummary = !isDegreeReformSummary
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser)
@@ -63,7 +63,6 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     if (isNotIndividualForm && isNotDegreeReformSummary && !window.location.pathname.includes('/previous-years')) {
-      console.log(window.location.href.includes('/degree-reform'), window.location.search.startsWith('?faculty=H50'))
       dispatch(wsConnect())
     }
 
