@@ -63,6 +63,7 @@ export default () => {
   useEffect(() => {
     dispatch(loginAction())
     if (isNotIndividualForm && isNotDegreeReformSummary && !window.location.pathname.includes('/previous-years')) {
+      console.log(window.location.href.includes('/degree-reform'), window.location.search.startsWith('?faculty=H50'))
       dispatch(wsConnect())
     }
 
