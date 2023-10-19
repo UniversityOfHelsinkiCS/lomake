@@ -159,6 +159,8 @@ export default () => {
 
   if (location.pathname.startsWith('/evaluation-faculty/previous-years')) return null
 
+  if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) return null
+
   if (!user) return null
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>

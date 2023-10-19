@@ -26,6 +26,7 @@ const ColorTable = React.memo(
     formType,
     showAllProgrammes,
     handleShowProgrammes,
+    hideFilter,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -143,6 +144,7 @@ const ColorTable = React.memo(
         return statObject
       }, {})
     }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
+
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
 
@@ -156,27 +158,34 @@ const ColorTable = React.memo(
     return (
       <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
-        <div className="table-container">
-          {!isAdmin(currentUser) ? (
-            <Radio
-              style={{ marginRight: 'auto', marginBottom: '2em' }}
-              data-cy="overviewpage-filter-button"
-              toggle
-              onChange={handleShowProgrammes}
-              checked={showAllProgrammes}
-              label={t('showAllProgrammes')}
+        {hideFilter ? (
+          <div className="table-container" style={{ paddingTop: 20 }}>
+            {t('generic:facultyAvg')}
+          </div>
+        ) : (
+          <div className="table-container">
+            {!isAdmin(currentUser) ? (
+              <Radio
+                style={{ marginRight: 'auto', marginBottom: '2em' }}
+                data-cy="overviewpage-filter-button"
+                toggle
+                onChange={handleShowProgrammes}
+                checked={showAllProgrammes}
+                label={t('showAllProgrammes')}
+              />
+            ) : null}
+            <Input
+              style={{ marginBottom: '0.5em' }}
+              data-cy="overviewpage-filter"
+              icon="filter"
+              size="small"
+              placeholder={t('programmeFilter')}
+              onChange={handleFilterChange}
+              value={filterValue}
             />
-          ) : null}
-          <Input
-            style={{ marginBottom: '0.5em' }}
-            data-cy="overviewpage-filter"
-            icon="filter"
-            size="small"
-            placeholder={t('programmeFilter')}
-            onChange={handleFilterChange}
-            value={filterValue}
-          />
-        </div>
+          </div>
+        )}
+
         <div />
         <SummaryRow
           setStatsToShow={setStatsToShow}

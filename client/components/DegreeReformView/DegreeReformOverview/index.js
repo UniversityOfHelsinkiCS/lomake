@@ -111,7 +111,7 @@ export default () => {
 
   return (
     <>
-      {faculty && <h2 style={{ marginTop: 20 }}>{nameOf(faculty)}</h2>}
+      {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}
       {modalData && (
         <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
           <>
@@ -158,6 +158,7 @@ export default () => {
               handleShowProgrammes={handleShowProgrammes}
               showAllProgrammes={showAllProgrammes}
               form={2}
+              hideFilter={faculty}
             />
           </div>
         </>
