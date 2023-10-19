@@ -130,7 +130,7 @@ const FacultyFormView = ({ room, formString }) => {
   const facultyProgrammeData = useSelector(state => state.summaries)
 
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
-  const evaluationSummaryURL = `/evaluation-faculty/programme-evaluation-summary/${room}`
+  const degreeReformUrl = `/degree-reform?faculty=${room}`
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -262,7 +262,7 @@ const FacultyFormView = ({ room, formString }) => {
                     {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
                   </h4>
                 </a>
-                <Link data-cy="link-to-old-answers" to={evaluationSummaryURL} target="_blank">
+                <Link data-cy="link-to-old-answers" to={degreeReformUrl} target="_blank">
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
                     {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
                   </h4>

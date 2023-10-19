@@ -32,8 +32,6 @@ const BarChart = ({ data, questions, unit }) => {
   const lang = useSelector(state => state.language)
   if (!data) return <> </>
 
-  console.log(data)
-
   const seriesData = data.map((series, index) => {
     return {
       name: t(series.name),

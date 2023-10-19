@@ -13,6 +13,22 @@ import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
+const getFacultyFromUrl = () => {
+  const url = window.location.href
+  const facStart = url.indexOf('faculty=')
+  if (facStart === -1) {
+    return undefined
+  }
+  let faculty = url.substring(facStart + 8)
+
+  const facEnd = faculty.indexOf('&')
+  if (facEnd !== -1) {
+    faculty = faculty.substring(0, facEnd)
+  }
+
+  return faculty
+}
+
 export default () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
@@ -20,11 +36,18 @@ export default () => {
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
+  const [faculty, setFaculty] = useState(null)
 
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const faculties = useSelector(({ faculties }) => faculties)
+
+  useEffect(() => {
+    const facultyFromUrl = getFacultyFromUrl()
+    setFaculty(facultyFromUrl)
+  }, [])
 
   useEffect(() => {
     document.title = `${t('degree-reform')}`
@@ -72,8 +95,23 @@ export default () => {
     return false
   }, [currentUser])
 
+  let facultyProgrammes = null
+
+  if (faculty) {
+    const facultyObject = faculties.data.find(f => f.code === faculty)
+    const facultyProgrammeCodes = facultyObject.ownedProgrammes
+      .map(p => p.key)
+      .concat(facultyObject.companionStudyprogrammes.map(p => p.key))
+      .sort()
+
+    facultyProgrammes = programmes.filter(p => facultyProgrammeCodes.includes(p.key))
+  }
+
+  const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
+
   return (
     <>
+      {faculty && <h2 style={{ marginTop: 20 }}>{nameOf(faculty)}</h2>}
       {modalData && (
         <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
           <>
@@ -109,7 +147,7 @@ export default () => {
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable
-              filteredProgrammes={filteredProgrammes}
+              filteredProgrammes={facultyProgrammes || filteredProgrammes}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
