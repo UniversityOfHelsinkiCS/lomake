@@ -158,6 +158,8 @@ const Textarea = ({
     return isTooLong
   }
 
+  const minWidth = form !== 1 ? '100%' : '50%'
+
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
@@ -168,7 +170,7 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth: '100%' }}>
+        <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
           <label
             style={{
               fontStyle: 'bolder',
