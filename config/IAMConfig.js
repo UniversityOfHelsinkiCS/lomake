@@ -339,7 +339,7 @@ const facultyWideWritingGroups = {
   'grp-katselmus-ttdk': 'H10',
   'grp-katselmus-oiktd': 'H20',
   'grp-katselmus-ltdk': 'H30',
-  'grp-katselmus-humtd': 'H40',
+  'grp-katselmus-humtdk': 'H40',
   'grp-katselmus-mltdk': 'H50',
   'grp-katselmus-ftdk': 'H55',
   'grp-katselmus-bytdk': 'H57',
