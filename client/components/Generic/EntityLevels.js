@@ -126,7 +126,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
     <div className="form-entity-area">
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '500px' }}>
+        <div style={{ maxWidth: '1000px' }}>
           <h3>
             {number}. {label}{' '}
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}

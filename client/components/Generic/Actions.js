@@ -74,7 +74,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
     >
       <Divider />
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ maxWidth: '500px' }}>
+        <div style={{ maxWidth: '1000px' }}>
           <h3>
             {label} {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>

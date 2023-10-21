@@ -78,7 +78,7 @@
         },
         "description": {
           "fi": "Opintojen ohjauksen toimivuus",
-          "se": "Hur studiehandledningen fungerar I fakultetens utbildningsprogram",
+          "se": "Hur studiehandledningen fungerar i fakultetens utbildningsprogram",
           "en": "Functioning of student guidance and supervision"
         },
         "required": true,
@@ -106,7 +106,7 @@
         },
         "description": {
           "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus",
-          "se": "Övergången mellan kandidat- och magisterprogram samt optioner",
+          "se": "Övergången mellan kandidat- och magisterprogram samt optionernas function",
           "en": "Functioning of the transition between bachelor’s and master’s programmes and master’s programme options"
         },
         "required": true,
@@ -134,7 +134,7 @@
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus tiedekunnan koulutusohjelmissa",
           "se": "Avläggande av examina och genomströmning inom fakultetens utbildningsprogram",
-          "en": "Completion of degrees and rate of progression in the faculty degree programme"
+          "en": "Completion of degrees and rate of progression in the degree programmes of the faculty"
         },
         "required": true,
         "level_breakdown": true,
@@ -144,6 +144,15 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "degree_flow"
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "TEEMA Opiskelun sujuvuus:",
+          "en": "THEME Seamless studies:",
+          "se": "TEMA Smidiga studier: "
+        }
       },
       {
         "id": "faculty_ease_of_study_opinion_differences",
@@ -217,7 +226,7 @@
   {
     "title": {
       "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
-      "se": "UTBILDNINGENS ÖVERGRIPANDE STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
+      "se": "UTBILDNINGENS HELHETSSTRUKTUR STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
       "en": "OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES"
     },
     "parts": [
@@ -265,7 +274,7 @@
         },
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta tiedekunnan koulutuksessa",
-          "se": "Planering och administration av undervisningsresurser I fakultetens utbildning",
+          "se": "Planering och administration av undervisningsresurser i fakultetens utbildning",
           "en": "Planning and management of teaching resources in the degree programmes of the faculty"
         },
         "required": true,
@@ -372,13 +381,13 @@
         },
         "label": {
           "fi": "KOULUTUSOHJELMAN ASEMA",
-          "se": "UTBILDNINGSPROGRAMMETS STÄLLNING",
-          "en": "STATUS OF THE DEGREE PROGRAMME"
+          "se": "UTBILDNINGSPROGRAMMENS STÄLLNING",
+          "en": "STATUS OF THE DEGREE PROGRAMMES"
         },
         "description": {
           "fi": "Tiedekunnan näkemys koulutusohjelmien asemasta yliopiston toiminta- ja johtamisrakenteessa",
           "se": "Fakultetens syn på utbildningsprogrammens ställning i universitetets verksamhets- och ledningsstruktur",
-          "en": "Faculty´s view on the status of the degree programme in the University’s operations and management structure"
+          "en": "Faculty´s view on the status of the degree programmes in the University´s operations and management structure"
         },
         "required": true,
         "level_breakdown": true,
@@ -388,6 +397,15 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "programme_status"
+      },
+      {
+        "id": "meta2",
+        "type": "TITLE",
+        "label": {
+          "fi": "TEEMA Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelman asema:",
+          "en": "THEME Overall structure of education, leadership and management, resources, and the status of degree programmes:",
+          "se": "TEMA Utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammets ställning:"
+        }
       },
       {
         "id": "faculty_programme_structure_opinion_differences",
@@ -423,7 +441,7 @@
         "label": {
           "fi": "Mitkä ovat tiedekunnan vahvuudet Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teemassa?",
           "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
-          "en": "What are the strengths of the overall structure of education, leadership, management, resources and status of degree programmes at the faculty?"
+          "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
         },
         "required": false,
         "no_color": true,
@@ -478,7 +496,7 @@
         "label": {
           "fi": "TIEDEKUNNAN KOULUTUKSEN KOKONAISTOIMIVUUS",
           "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE",
-          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE FACULT"
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE FACULTY"
         },
         "description": {
           "fi": "Antakaa kokonaisarvio tiedekunnan koulutuksen toimivuudesta.",
@@ -517,8 +535,8 @@
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
-          "se": "",
-          "en": "Give the overall status of the faculty´s degree programme education in five years."
+          "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
+          "en": "Evaluate the overall state of the faculty´s education in five years."
         },
         "label": {
           "fi": "MISSÄ TIEDEKUNNAN KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
@@ -528,7 +546,7 @@
         "description": {
           "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
           "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
-          "en": "Give the overall status of the faculty´s degree programme education in five years."
+          "en": "Evaluate the overall state of the faculty´s education in five years."
         },
         "required": true,
         "extrainfo": {

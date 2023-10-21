@@ -8,7 +8,7 @@ export default {
     chosenLanguage: 'Svenska',
     form: 'Blankett',
     positive: 'I sin ordning',
-    neutral: 'Utbildningsprogrammet är medvetet om utmaningarna och utvecklingsarbete pågår ',
+    neutral: 'Utmaningarna är kända och utvecklingsarbete pågår',
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
     noColors: '*Frågor utan trafikljus visas inte alls (t.ex. 16 och 17)',
     green: 'Grön',
@@ -116,6 +116,7 @@ export default {
   },
 
   formView: {
+    requiredActions: 'Åtgärder',
     facultyActionSummaryTitle:
       'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
     facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt:',
@@ -210,7 +211,7 @@ export default {
     healthSchool: 'Forskarskolan i hälsoforskning',
     environmentalSchool: 'Miljö-, livsmedels- och biovetenskapliga forskarskolan',
     textAreaLabel: 'Diskussionens huvudpunkter',
-    textAreaLabelQ12and13: 'Motivera din bedömning',
+    textAreaLabelQ12and13: 'Motivera bedömningen',
     kludgedLabel: 'BEDÖMNING',
     kludgedLabel2: 'BESKRIVNING',
     allFaculties: 'Alla fakultet',
