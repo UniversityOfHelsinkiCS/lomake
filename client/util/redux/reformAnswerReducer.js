@@ -6,6 +6,12 @@ export const getReformAnswers = () => {
   return callBuilder(route, prefix)
 }
 
+export const getFacultyReformAnswers = faculty => {
+  const route = `/reform/faculties/${faculty}`
+  const prefix = 'GET_REFORM_ANSWERS'
+  return callBuilder(route, prefix)
+}
+
 const initialState = {
   data: null,
 }

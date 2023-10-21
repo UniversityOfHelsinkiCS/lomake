@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
 import { isAdmin } from '@root/config/common'
@@ -9,6 +8,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { getForm } from 'Utilities/common'
+import { getFacultyReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -38,16 +38,25 @@ export default () => {
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const [faculty, setFaculty] = useState(null)
 
+  const dispatch = useDispatch()
+
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const faculties = useSelector(({ faculties }) => faculties)
+  const reformAnswers = useSelector(state => state.reformAnswers)
 
   useEffect(() => {
     const facultyFromUrl = getFacultyFromUrl()
     setFaculty(facultyFromUrl)
   }, [])
+
+  useEffect(() => {
+    if (faculty) {
+      dispatch(getFacultyReformAnswers(faculty))
+    }
+  }, [faculty])
 
   useEffect(() => {
     document.title = `${t('degree-reform')}`
@@ -108,6 +117,12 @@ export default () => {
   }
 
   const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
+
+  if (reformAnswers?.data) {
+    // do something with the data
+    // eslint-disable-next-line no-console
+    console.log(reformAnswers.data)
+  }
 
   return (
     <>

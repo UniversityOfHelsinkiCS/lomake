@@ -8,6 +8,13 @@ const requireProgrammeRead = (req, res, next) => {
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
+const requireFacultyRead = (req, res, next) => {
+  const { faculty } = req.params
+  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
+  else if (req.user.access[faculty]) next()
+  else res.status(401).json({ error: 'Unauthorized access.' }).end()
+}
+
 const requireProgrammeWrite = (req, res, next) => {
   const { programme } = req.params
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
@@ -41,6 +48,7 @@ const notInProduction = (req, res, next) => {
 
 module.exports = {
   notInProduction,
+  requireFacultyRead,
   requireProgrammeRead,
   requireProgrammeWrite,
   requireProgrammeOwner,

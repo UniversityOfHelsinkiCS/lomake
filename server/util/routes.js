@@ -12,11 +12,13 @@ const {
   requireProgrammeWrite,
   requireProgrammeOwner,
   notInProduction,
+  requireFacultyRead,
 } = require('@middleware/accessControlMiddleware')
 
 const router = Router()
 
 router.get('/reform/temp', checkAdmin, degreeReform.getAllTemp)
+router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
