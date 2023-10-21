@@ -2,18 +2,27 @@ const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 
+const getAnswersFromDb = async () => {
+  const existingDeadline = await db.deadline.findOne({
+    where: { form: 3 },
+  })
+
+  const query = {
+    attributes: existingDeadline ? ['id', 'data', 'year', 'ready'] : ['id', 'data', 'year'],
+    where: {
+      form: 3,
+      programme: {
+        [Op.not]: '',
+      },
+    },
+  }
+
+  return existingDeadline ? db.tempAnswer.findAll(query) : db.answer.findAll(query)
+}
+
 const getAllTemp = async (_, res) => {
   try {
-    // TODO: get data also from db.answer
-    const data = await db.tempAnswer.findAll({
-      attributes: ['id', 'data', 'year', 'ready'],
-      where: {
-        form: 3,
-        programme: {
-          [Op.not]: '',
-        },
-      },
-    })
+    const data = await getAnswersFromDb()
     return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -25,21 +34,10 @@ const getForFaculty = async (req, res) => {
   const { faculty } = req.params
 
   try {
-    // TODO: get data also from db.answer, filtering by tdk in SQL?
-    const data1 = await db.tempAnswer.findAll({
-      attributes: ['id', 'data', 'year', 'ready'],
-      where: {
-        form: 3,
-        programme: {
-          [Op.not]: '',
-        },
-      },
-    })
+    const data = await getAnswersFromDb()
 
-    const requiredFaculty = `faculty_-_${faculty}`
-
-    const dataByFaculty = data1.filter(d => {
-      return d.data?.background_unit === requiredFaculty
+    const dataByFaculty = data.filter(d => {
+      return d.data?.background_unit === `faculty_-_${faculty}`
     })
 
     return res.send(dataByFaculty)
