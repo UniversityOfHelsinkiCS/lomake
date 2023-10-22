@@ -111,11 +111,10 @@ const createDraftAnswers = async (newYear, form) => {
     if (form === 5) {
       toOpen = await db.faculty.findAll({})
     } else {
-      toOpen = await db.studyprogramme.findAll({})
+      toOpen = [] // await db.studyprogramme.findAll({})
     }
-    // const programmes = await db.studyprogramme.findAll({})
 
-    // Save the current tempanswers as answers
+    // Save the current answers as tempanswers
     toOpen.forEach(async obj => {
       const key = obj?.key || obj?.code
 
