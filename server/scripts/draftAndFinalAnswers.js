@@ -3,7 +3,6 @@ const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
 const { formKeys } = require('@root/config/data')
-const { inProduction, inStaging } = require('@util/common')
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -113,15 +112,8 @@ const createDraftAnswers = async (newYear, form) => {
     if (form === 5) {
       toOpen = await db.faculty.findAll({})
     } else {
-      toOpen = inProduction || inStaging ? [] : await db.studyprogramme.findAll({})
+      toOpen = await db.studyprogramme.findAll({})
     }
-
-    console.log('inProduction', inProduction)
-    console.log('inStaging', inStaging)
-    console.log(
-      'toOpen',
-      toOpen.map(p => p.key),
-    )
 
     // Save the current answers as tempanswers
     toOpen.forEach(async obj => {
