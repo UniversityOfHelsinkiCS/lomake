@@ -90,4 +90,4 @@ jobs:
           environment: production
           set_commits: 'skip'
           sourcemaps: './build'
-          url_prefix: '~'
+          url_prefix: '~/build'
