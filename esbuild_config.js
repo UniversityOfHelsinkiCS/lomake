@@ -48,7 +48,7 @@ const prodConfig = {
     'process.env.SENTRY_ENVIRONMENT': `'${process.env.SENTRY_ENVIRONMENT}'` || "'production'",
     global: 'window',
   },
-  // sourcemap: true,
+  sourcemap: true,
   plugins: [
     sassPlugin(),
     /* sentryEsbuildPlugin({
