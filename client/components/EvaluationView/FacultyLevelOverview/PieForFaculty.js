@@ -84,15 +84,6 @@ const PieForFaculty = ({ facultyKey, programmesAnswers, questionId, setModalData
             color: '#ff7f7f',
             value: answersCounted.colors.red || 0,
           },
-          answersCounted.colors.green || answersCounted.colors.yellow || answersCounted.colors.red
-            ? {
-                color: '#737373',
-                value: 0,
-              }
-            : {
-                color: '#737373',
-                value: 1,
-              },
         ]}
         labelPosition={50}
         lengthAngle={360}
