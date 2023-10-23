@@ -40,7 +40,30 @@ const getForFaculty = async (req, res) => {
       return d.data?.background_unit === `faculty_-_${faculty}`
     })
 
-    return res.send(dataByFaculty)
+    const fieldsToRemove = [
+      'degree_reform_free_answer_text',
+      'major_and_minor_free_to_answer_text',
+      'three_stairs_free_to_answer_text',
+      'bachelor_free_answer_text',
+      'masters_free_to_answer_text',
+      'int_master_free_to_answer_text',
+      'phd_free_to_answer_text',
+      'studyprogramme_leading_free_to_answer_text',
+      'faculties_common_free_to_answer_text',
+      'general_free_to_answer_text',
+    ]
+
+    const mapper = obj => {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const f of fieldsToRemove) {
+        if (obj.data[f]) {
+          obj.data[f] = undefined
+        }
+      }
+      return obj
+    }
+
+    return res.send(dataByFaculty.map(mapper))
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })

@@ -26,14 +26,15 @@ const ColorTable = React.memo(
     formType,
     showAllProgrammes,
     handleShowProgrammes,
-    hideFilter,
+    facultyView,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const draftYear = useSelector(state => state.deadlines.draftYear)
+    const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
+
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     let year = useSelector(({ filters }) => filters.year)
@@ -45,6 +46,12 @@ const ColorTable = React.memo(
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
+    useEffect(() => {
+      if (facultyView) {
+        setSorter('key')
+      }
+    }, [facultyView])
+
     if (form !== 1) {
       year = 2023
     }
@@ -54,6 +61,7 @@ const ColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
+      deadline: nextDeadline.find(d => d.form === form),
     })
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
@@ -155,25 +163,23 @@ const ColorTable = React.memo(
       tableClassName = '-degree-reform'
     }
 
+    const selectorLabel = facultyView ? t('showAllFacultyProgrammes') : t('showAllProgrammes')
+
     return (
       <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
-        {hideFilter ? (
-          <div className="table-container" style={{ paddingTop: 20 }}>
-            {t('generic:facultyAvg')}
-          </div>
-        ) : (
-          <div className="table-container">
-            {!isAdmin(currentUser) ? (
-              <Radio
-                style={{ marginRight: 'auto', marginBottom: '2em' }}
-                data-cy="overviewpage-filter-button"
-                toggle
-                onChange={handleShowProgrammes}
-                checked={showAllProgrammes}
-                label={t('showAllProgrammes')}
-              />
-            ) : null}
+        <div className="table-container">
+          {facultyView || !isAdmin(currentUser) ? (
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              data-cy="overviewpage-filter-button"
+              toggle
+              onChange={handleShowProgrammes}
+              checked={showAllProgrammes}
+              label={selectorLabel}
+            />
+          ) : null}
+          {!facultyView && (
             <Input
               style={{ marginBottom: '0.5em' }}
               data-cy="overviewpage-filter"
@@ -183,9 +189,8 @@ const ColorTable = React.memo(
               onChange={handleFilterChange}
               value={filterValue}
             />
-          </div>
-        )}
-
+          )}
+        </div>
         <div />
         <SummaryRow
           setStatsToShow={setStatsToShow}

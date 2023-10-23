@@ -108,10 +108,11 @@ export default () => {
 
   if (faculty) {
     const facultyObject = faculties.data.find(f => f.code === faculty)
-    const facultyProgrammeCodes = facultyObject.ownedProgrammes
-      .map(p => p.key)
-      .concat(facultyObject.companionStudyprogrammes.map(p => p.key))
-      .sort()
+    let facultyProgrammeCodes = facultyObject.ownedProgrammes.map(p => p.key)
+
+    if (showAllProgrammes) {
+      facultyProgrammeCodes = facultyProgrammeCodes.concat(facultyObject.companionStudyprogrammes.map(p => p.key))
+    }
 
     facultyProgrammes = programmes.filter(p => facultyProgrammeCodes.includes(p.key))
   }
@@ -173,7 +174,7 @@ export default () => {
               handleShowProgrammes={handleShowProgrammes}
               showAllProgrammes={showAllProgrammes}
               form={2}
-              hideFilter={faculty}
+              facultyView={faculty}
             />
           </div>
         </>
