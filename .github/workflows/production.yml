@@ -77,7 +77,7 @@ jobs:
         run: docker create --name lomake_sentry quay.io/toska/lomake:production
 
       - name: Copy assets from the container
-        run: docker cp lomake:/opt/app-root/src/build ./build
+        run: docker cp lomake_sentry:/opt/app-root/src/build ./build
 
       - name: Create Sentry release
         uses: getsentry/action-release@v1
