@@ -187,7 +187,9 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                                   <Card key={`${id}-${programmeKey}-${i}`}>
                                     <Card.Content>
                                       <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
-                                      <Card.Description>{answer.content}</Card.Description>
+                                      <Card.Description style={{ overflowWrap: 'anywhere' }}>
+                                        {answer.content}
+                                      </Card.Description>
                                     </Card.Content>
                                   </Card>
                                 )
