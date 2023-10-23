@@ -166,7 +166,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
                             style={{ height: '5em' }}
                             key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
                           >
-                            <span className="answer-circle-green" />{' '}
+                            <span className="answer-circle-blue" />{' '}
                             <span
                               className="programme-list-button"
                               onClick={() => handleShowSpecific(programmeKey)}

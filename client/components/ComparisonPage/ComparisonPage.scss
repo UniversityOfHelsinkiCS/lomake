@@ -219,6 +219,10 @@
     @include answer-circle-basics;
     background: $background-red;
   }
+  &-circle-blue {
+    @include answer-circle-basics;
+    background: #0080ff;
+  }
   &-circle-gray {
     @include answer-circle-basics;
     background: $gray;
