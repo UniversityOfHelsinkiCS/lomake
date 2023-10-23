@@ -1,5 +1,5 @@
 const { inProduction } = require('@util/common')
-const { isAdmin, isSuperAdmin } = require('@root/config/common')
+const { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma } = require('@root/config/common')
 const logger = require('@util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
@@ -37,6 +37,14 @@ const checkAdmin = (req, res, next) => {
   }
 }
 
+const checkAdminOrKatselmusryhma = (req, res, next) => {
+  if (isAdmin(req.user) || isSuperAdmin(req.user) || isKatselmusProjektiOrOhjausryhma(req.user)) {
+    next()
+  } else {
+    res.status(401).json({ error: 'Unauthorized access.' }).end()
+  }
+}
+
 const notInProduction = (req, res, next) => {
   if (!inProduction) {
     next()
@@ -53,4 +61,5 @@ module.exports = {
   requireProgrammeWrite,
   requireProgrammeOwner,
   checkAdmin,
+  checkAdminOrKatselmusryhma,
 }

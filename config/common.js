@@ -104,6 +104,14 @@ const hasSpecialGroup = (user, group) => {
   return false
 }
 
+const isKatselmusProjektiOrOhjausryhma = user => {
+  if (user.iamGroups) {
+    const groups = Object.keys(user.iamGroups)
+    return groups.includes('grp-katselmus-ohjausryhma') || groups.includes('grp-katselmus-projektiryhma')
+  }
+  return false
+}
+
 const isDevSuperAdminUid = uid => {
   return DEV_SUPERADMINS.includes(uid)
 }
@@ -214,4 +222,5 @@ module.exports = {
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,
+  isKatselmusProjektiOrOhjausryhma,
 }
