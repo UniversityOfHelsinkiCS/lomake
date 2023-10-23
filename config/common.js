@@ -105,11 +105,7 @@ const hasSpecialGroup = (user, group) => {
 }
 
 const isKatselmusProjektiOrOhjausryhma = user => {
-  if (user.iamGroups) {
-    const groups = Object.keys(user.iamGroups)
-    return groups.includes('grp-katselmus-ohjausryhma') || groups.includes('grp-katselmus-projektiryhma')
-  }
-  return false
+  return user.iamGroups.includes('grp-katselmus-ohjausryhma') || user.iamGroups.includes('grp-katselmus-projektiryhma')
 }
 
 const isDevSuperAdminUid = uid => {

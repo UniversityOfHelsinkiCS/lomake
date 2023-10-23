@@ -6,7 +6,7 @@ import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
-import { isAdmin, isSuperAdmin, isEvaluationFacultyUser } from '@root/config/common'
+import { isAdmin, isSuperAdmin, isEvaluationFacultyUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 
 const UnHijackButton = ({ handleUnhijack }) => {
   return (
@@ -124,7 +124,7 @@ const MenuNavigation = ({ pathname, user }) => {
       <GoToYearlyAssessmentButton />
       <GoToEvaluationButton user={user} />
       <GoToDegreeReformGroup />
-      {user.admin && <GoToDegreeReformIndividual />}
+      {(user.admin || isKatselmusProjektiOrOhjausryhma(user)) && <GoToDegreeReformIndividual />}
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
