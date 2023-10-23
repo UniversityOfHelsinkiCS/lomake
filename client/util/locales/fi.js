@@ -196,6 +196,7 @@ export default {
     showAnswers: 'Näytä vastaukset',
     hideAnswers: 'Piilota vastaukset',
     evaluationSummaryByProgramme: 'Tarkastelkaa tiedekunnan tietoja Koulutuksen tila -kyselyn tuloksista',
+    formNotReady: 'Lomake on vielä kehityksessä, avautuu 1.11.',
   },
 
   generic: {

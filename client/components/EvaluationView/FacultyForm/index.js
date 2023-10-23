@@ -222,6 +222,12 @@ const FacultyFormView = ({ room, formString }) => {
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
+              <div style={{ display: 'flex' }}>
+                <Icon size="huge" name="warning sign" color="yellow" />
+                <span style={{ alignSelf: 'flex-end', color: colors.yellow, fontSize: '26px' }}>
+                  {t('formView:formNotReady')}
+                </span>
+              </div>
               <h1 style={{ color: colors.blue }}>{faculty?.name[lang]}</h1>
               <h3 style={{ marginTop: '0' }} data-cy="formview-title">
                 {t('evaluation')} 2023

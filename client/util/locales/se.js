@@ -194,6 +194,7 @@ export default {
     showAnswers: 'Visa svar',
     hideAnswers: 'Dölj svar',
     evaluationSummaryByProgramme: 'Titta på fakultetens information om resultaten av enkäten Utbildningens tillstånd',
+    formNotReady: '',
   },
 
   generic: {

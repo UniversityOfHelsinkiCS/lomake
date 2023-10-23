@@ -196,6 +196,7 @@ export default {
     showAnswers: 'Show answers',
     hideAnswers: 'Hide answers',
     evaluationSummaryByProgramme: 'View the faculty data on the results of the Current state of education survey.',
+    formNotReady: 'Form is still under development, opens 1.11.',
   },
 
   generic: {
