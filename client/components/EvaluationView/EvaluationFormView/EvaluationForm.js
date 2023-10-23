@@ -74,7 +74,6 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
     return (
       <div key={`${part.id}-container`}>
-        {part.id.includes('_differences') && <Divider />}
         <div key={part.id} style={divStyle}>
           <Component
             id={part.id}
