@@ -61,7 +61,7 @@ const ColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
-      deadline: nextDeadline.find(d => d.form === form),
+      deadline: nextDeadline?.find(d => d.form === form),
     })
 
     const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
