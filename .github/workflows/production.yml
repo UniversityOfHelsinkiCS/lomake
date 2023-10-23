@@ -73,6 +73,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Extract release version
+        id: extract_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
       - name: Pull image and create a container
         run: docker create --name lomake_sentry quay.io/toska/lomake:production
 
@@ -91,3 +95,4 @@ jobs:
           set_commits: 'skip'
           sourcemaps: './build'
           url_prefix: '~/build'
+          version: ${{ steps.extract_version.outputs.VERSION }}
