@@ -2,7 +2,7 @@ name: Debug in Staging
 
 on:
   push:
-    branches: [debug]
+    branches: [http_lock]
 
 jobs:
   build:
