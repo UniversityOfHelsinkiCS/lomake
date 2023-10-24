@@ -106,6 +106,21 @@ const GoToDegreeReformIndividual = () => {
 }
 
 const MenuNavigation = ({ pathname, user }) => {
+  const location = useLocation()
+
+  if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) {
+    return null
+  }
+  if (pathname.startsWith('/individual')) {
+    return (
+      <>
+        <Menu.Item>
+          <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
+        </Menu.Item>
+        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+      </>
+    )
+  }
   if (pathname.startsWith('/individual')) {
     return (
       <>
@@ -159,9 +174,8 @@ export default () => {
 
   if (location.pathname.startsWith('/evaluation-faculty/previous-years')) return null
 
-  if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) return null
-
   if (!user) return null
+
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
       <MenuNavigation pathname={location.pathname} user={user} />
