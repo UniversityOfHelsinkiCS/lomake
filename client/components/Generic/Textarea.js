@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFormField,
-  getLock,
+  getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
-import { Loader, Button } from 'semantic-ui-react'
+import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
@@ -59,6 +59,8 @@ const Textarea = ({
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
+  const room = useSelector(({ room }) => room)
+  const { draftYear } = useSelector(({ deadlines }) => deadlines)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
 
@@ -70,6 +72,7 @@ const Textarea = ({
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
+  const editorError = useSelector(({ currentEditors }) => currentEditors.error)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
@@ -145,7 +148,8 @@ const Textarea = ({
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
-      dispatch(getLock(fieldName))
+      // dispatch(getLock(fieldName))
+      dispatch(getLockHttp(fieldName, currentUser.uid, form, room, draftYear?.year))
     }
   }
 
@@ -160,6 +164,10 @@ const Textarea = ({
 
   const minWidth = form !== 1 ? '100%' : '50%'
 
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
@@ -170,27 +178,37 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
-          <label
-            style={{
-              fontStyle: 'bolder',
-              minWidth: '50%',
-              height: 'auto',
-            }}
-          >
-            {label}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
-            <Loader
+        {!editorError && (
+          <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
+            <label
               style={{
-                marginLeft: '1em',
-                visibility: !hasLock && gettingLock ? undefined : 'hidden',
+                fontStyle: 'bolder',
+                minWidth: '50%',
+                height: 'auto',
               }}
-              size="small"
-              active
-              inline
-            />
-          </label>
-        </div>
+            >
+              {label}
+              {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+              <Loader
+                style={{
+                  marginLeft: '1em',
+                  visibility: !hasLock && gettingLock ? undefined : 'hidden',
+                }}
+                size="small"
+                active
+                inline
+              />
+            </label>
+          </div>
+        )}
+        {editorError && (
+          <Message negative>
+            <Message.Header>Error connecting the form</Message.Header>
+            <Button style={{ marginTop: 10 }} onClick={refreshPage}>
+              Click here to reload the page!
+            </Button>
+          </Message>
+        )}
         <Accordion
           previousYearsAnswers={previousYearsAnswers}
           previousAnswerColor={previousAnswerColor}
