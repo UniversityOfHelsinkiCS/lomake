@@ -19,7 +19,7 @@ const {
 
 const router = Router()
 
-router.post('/form/:form/:room/:year/lock', locks.getLock)
+router.post('/lock/:room', locks.getLock)
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)

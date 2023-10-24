@@ -22,10 +22,10 @@ export const getLock = field => ({
   field,
 })
 
-export const getLockHttp = (field, uid, form, room, year) => {
-  const route = `/form/${form}/${room}/${year}/lock`
+export const getLockHttp = (field, room) => {
+  const route = `/lock/${room}`
   const prefix = 'POST_GET_LOCK'
-  return callBuilder(route, prefix, 'POST', { field, uid })
+  return callBuilder(route, prefix, 'POST', { field })
 }
 
 export const setViewOnly = value => ({

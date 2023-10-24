@@ -60,7 +60,6 @@ const Textarea = ({
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
   const room = useSelector(({ room }) => room)
-  const { draftYear } = useSelector(({ deadlines }) => deadlines)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
 
@@ -148,8 +147,7 @@ const Textarea = ({
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
-      // dispatch(getLock(fieldName))
-      dispatch(getLockHttp(fieldName, currentUser.uid, form, room, draftYear?.year))
+      dispatch(getLockHttp(fieldName, room))
     }
   }
 
