@@ -201,7 +201,12 @@ const getLock = async (socket, payload, io) => {
   const { field, room } = payload
   const currentUser = await getCurrentUser(socket)
 
-  if (currentEditors[room] && currentEditors[room][field]) return
+  if (currentEditors[room] && currentEditors[room][field]) {
+    logger.error(
+      `PANIC getting lock failed uid: ${currentUser.uid} room: ${room} field: ${field} was: ${currentEditors[room][field]}`,
+    )
+    return
+  }
 
   // force release lock after 5 mins if no save
   const timeoutId = setTimeout(() => {
