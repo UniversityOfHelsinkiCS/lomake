@@ -215,89 +215,92 @@ const ColorTable = React.memo(
     }
 
     const selectorLabel = facultyView ? t('showAllFacultyProgrammes') : t('showAllProgrammes')
-
     return (
-      <div className={`overview-color-grid${tableClassName}`}>
-        <TableHeader sort={sort} tableIds={tableIds} />
-        {facultyView ? (
-          <>
-            <div className="table-container" style={{ paddingTop: 20 }}>
-              {t('generic:individualAvg')}
-            </div>
-            <div />
-            <SummaryRow
-              setStatsToShow={setStatsToShow}
-              stats={individualStats}
-              selectedAnswers={selectedAnswers}
-              tableIds={tableIds}
-              form={form}
+      <>
+        {facultyView || !isAdmin(currentUser) ? (
+          <div className="table-container-degree-reform-button" style={{ paddingTop: 20 }}>
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              data-cy="overviewpage-filter-button"
+              toggle
+              onChange={handleShowProgrammes}
+              checked={showAllProgrammes}
+              label={selectorLabel}
             />
-            <div />
-            <div className="table-container" style={{ paddingTop: 20 }}>
-              {t('generic:universityAvg')}
-            </div>
-            <div />
-            <SummaryRow
-              setStatsToShow={setStatsToShow}
-              stats={facultyStats}
-              selectedAnswers={selectedAnswers}
-              tableIds={tableIds}
-              form={form}
-            />
-            <div />
-            <div className="table-container" style={{ paddingTop: 20 }}>
-              {t('generic:facultyAvg')}
-            </div>
-          </>
-        ) : (
-          <div className="table-container">
-            {facultyView || !isAdmin(currentUser) ? (
-              <Radio
-                style={{ marginRight: 'auto', marginBottom: '2em' }}
-                data-cy="overviewpage-filter-button"
-                toggle
-                onChange={handleShowProgrammes}
-                checked={showAllProgrammes}
-                label={selectorLabel}
-              />
-            ) : null}
-            {!facultyView && (
-              <Input
-                style={{ marginBottom: '0.5em' }}
-                data-cy="overviewpage-filter"
-                icon="filter"
-                size="small"
-                placeholder={t('programmeFilter')}
-                onChange={handleFilterChange}
-                value={filterValue}
-              />
-            )}
           </div>
-        )}
-        <div />
-        <SummaryRow
-          setStatsToShow={setStatsToShow}
-          stats={overallStats}
-          selectedAnswers={selectedAnswers}
-          tableIds={tableIds}
-          form={form}
-        />
-        <div className="sticky-header" style={{ marginTop: '1em' }} />
-        {sortedAllProgrammes.map(p => {
-          return (
-            <TableRow
-              p={p}
-              selectedAnswers={selectedAnswers}
-              tableIds={tableIds}
-              setModalData={setModalData}
-              setProgramControlsToShow={setProgramControlsToShow}
-              key={p.key}
-              formType={formType}
-              form={form}
-            />
-          )
-        })}
-      </div>
+        ) : null}
+        <div className={`overview-color-grid${tableClassName}`}>
+          <TableHeader sort={sort} tableIds={tableIds} />
+          {facultyView ? (
+            <>
+              <div className="table-container" style={{ paddingTop: 20 }}>
+                {t('generic:individualAvg')}
+              </div>
+              <div />
+              <SummaryRow
+                setStatsToShow={setStatsToShow}
+                stats={individualStats}
+                selectedAnswers={selectedAnswers}
+                tableIds={tableIds}
+                form={form}
+              />
+              <div />
+              <div className="table-container" style={{ paddingTop: 20 }}>
+                {t('generic:universityAvg')}
+              </div>
+              <div />
+              <SummaryRow
+                setStatsToShow={setStatsToShow}
+                stats={overallStats}
+                selectedAnswers={selectedAnswers}
+                tableIds={tableIds}
+                form={form}
+              />
+              <div />
+              <div className="table-container" style={{ paddingTop: 20 }}>
+                {t('generic:facultyAvg')}
+              </div>
+            </>
+          ) : (
+            <div className="table-container">
+              {!facultyView && (
+                <Input
+                  style={{ marginBottom: '0.5em' }}
+                  data-cy="overviewpage-filter"
+                  icon="filter"
+                  size="small"
+                  placeholder={t('programmeFilter')}
+                  onChange={handleFilterChange}
+                  value={filterValue}
+                />
+              )}
+            </div>
+          )}
+          <div />
+          <SummaryRow
+            setStatsToShow={setStatsToShow}
+            stats={facultyStats}
+            selectedAnswers={selectedAnswers}
+            tableIds={tableIds}
+            form={form}
+          />
+          <div className="sticky-header" style={{ marginTop: '1em' }} />
+          {sortedAllProgrammes.map(p => {
+            return (
+              <TableRow
+                p={p}
+                selectedAnswers={selectedAnswers}
+                tableIds={tableIds}
+                setModalData={setModalData}
+                setProgramControlsToShow={setProgramControlsToShow}
+                key={p.key}
+                formType={formType}
+                form={form}
+              />
+            )
+          })}
+        </div>
+      </>
     )
   },
 )

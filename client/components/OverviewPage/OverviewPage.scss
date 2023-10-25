@@ -150,6 +150,12 @@ $DEGREE_REFORM_COUNT: 10;
   &-row-link {
     @include container-basics;
   }
+  &-degree-reform-button {
+    position: relative;
+    top: 140px;
+    z-index: 1000;
+    width: 8em;
+  }
 }
 
 .sorter {
