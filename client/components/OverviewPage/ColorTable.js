@@ -4,7 +4,7 @@ import { Loader, Input, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { isAdmin } from '@root/config/common'
-import { answersByYear, sortedItems } from 'Utilities/common'
+import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from './TableHeader'
@@ -13,10 +13,68 @@ import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
 import { yearlyQuestions as questions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
+const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
+
+const getSortedProgrammes = (sortedProgrammes, selectedAnswers, form) => {
+  return sortedProgrammes.reduce((statObject, { key }) => {
+    const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
+    const answers = programme && programme.data ? programme.data : {}
+    Object.keys(answers).forEach(answerKey => {
+      if (answerKey.includes('_light')) {
+        const color = answers[answerKey] // "red", "yellow", "green" or ""
+        const baseKey = answerKey.replace('_light', '')
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+
+        statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
+      } else if (!answerKey.includes('_text')) {
+        const baseKey = answerKey
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+        let answerNumber = answers[baseKey]
+
+        if (reversedPointsInDegreeReform.includes(answerKey)) {
+          answerNumber = answerValuesReversed.indexOf(answerNumber) + 1
+        }
+
+        statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
+          ? statObject[baseKey][answerNumber] + 1
+          : 1
+      }
+    })
+    return statObject
+  }, {})
+}
+
+const getIndividualAnswers = selectedAnswers => {
+  return selectedAnswers.reduce((statObject, { data }) => {
+    Object.keys(data).forEach(answerKey => {
+      if (answerKey.includes('_light')) {
+        const color = data[answerKey] // "red", "yellow", "green" or ""
+        const baseKey = answerKey.replace('_light', '')
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+
+        statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
+      } else if (!answerKey.includes('_text')) {
+        const baseKey = answerKey
+        if (!statObject[baseKey]) statObject[baseKey] = {}
+        let answerNumber = data[baseKey]
+
+        if (reversedPointsInDegreeReform.includes(answerKey)) {
+          answerNumber = answerValuesReversed.indexOf(answerNumber) + 1
+        }
+        statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
+          ? statObject[baseKey][answerNumber] + 1
+          : 1
+      }
+    })
+    return statObject
+  }, {})
+}
+
 const ColorTable = React.memo(
   ({
     setModalData,
     filteredProgrammes,
+    facultyProgrammes,
     setProgramControlsToShow,
     setStatsToShow,
     isBeingFiltered,
@@ -27,6 +85,7 @@ const ColorTable = React.memo(
     showAllProgrammes,
     handleShowProgrammes,
     hideFilter,
+    individualAnswers,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -56,9 +115,9 @@ const ColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
-    const sortedProgrammes = sortedItems(filteredProgrammes, sorter, lang)
-
-    if (reverse) sortedProgrammes.reverse()
+    const sortedAllProgrammes = sortedItems(filteredProgrammes, sorter, lang)
+    const sortedFacultyProgrammes = sortedItems(facultyProgrammes, sorter, lang)
+    if (reverse) sortedAllProgrammes.reverse()
 
     const sort = sortValue => {
       setSorter(sortValue)
@@ -118,32 +177,20 @@ const ColorTable = React.memo(
       }, [])
     }
 
-    const stats = useMemo(() => {
+    const overallStats = useMemo(() => {
       if (!selectedAnswers) return {}
+      return getSortedProgrammes(sortedAllProgrammes, selectedAnswers, form)
+    }, [sortedAllProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
-      return sortedProgrammes.reduce((statObject, { key }) => {
-        const programme = selectedAnswers.find(a => a.programme === key && a.form === form)
-        const answers = programme && programme.data ? programme.data : {}
-        Object.keys(answers).forEach(answerKey => {
-          if (answerKey.includes('_light')) {
-            const color = answers[answerKey] // "red", "yellow", "green" or ""
-            const baseKey = answerKey.replace('_light', '')
-            if (!statObject[baseKey]) statObject[baseKey] = {}
+    const facultyStats = useMemo(() => {
+      if (!selectedAnswers) return {}
+      return getSortedProgrammes(sortedFacultyProgrammes, selectedAnswers, form)
+    }, [sortedFacultyProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
-            statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
-          } else if (!answerKey.includes('_text')) {
-            const baseKey = answerKey
-            if (!statObject[baseKey]) statObject[baseKey] = {}
-            const answerNumber = answers[baseKey]
-
-            statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
-              ? statObject[baseKey][answerNumber] + 1
-              : 1
-          }
-        })
-        return statObject
-      }, {})
-    }, [sortedProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
+    const individualStats = useMemo(() => {
+      if (!individualAnswers) return {}
+      return getIndividualAnswers(individualAnswers)
+    }, [facultyProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
 
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
@@ -152,16 +199,46 @@ const ColorTable = React.memo(
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
     } else if (formType === 'degree-reform') {
-      tableClassName = '-degree-reform'
+      if (!hideFilter) {
+        tableClassName = '-degree-reform'
+      } else {
+        tableClassName = '-degree-reform-no-filter'
+      }
     }
 
     return (
       <div className={`overview-color-grid${tableClassName}`}>
         <TableHeader sort={sort} tableIds={tableIds} />
         {hideFilter ? (
-          <div className="table-container" style={{ paddingTop: 20 }}>
-            {t('generic:facultyAvg')}
-          </div>
+          <>
+            <div className="table-container" style={{ paddingTop: 20 }}>
+              {t('generic:individualAvg')}
+            </div>
+            <div />
+            <SummaryRow
+              setStatsToShow={setStatsToShow}
+              stats={individualStats}
+              selectedAnswers={selectedAnswers}
+              tableIds={tableIds}
+              form={form}
+            />
+            <div />
+            <div className="table-container" style={{ paddingTop: 20 }}>
+              {t('generic:universityAvg')}
+            </div>
+            <div />
+            <SummaryRow
+              setStatsToShow={setStatsToShow}
+              stats={facultyStats}
+              selectedAnswers={selectedAnswers}
+              tableIds={tableIds}
+              form={form}
+            />
+            <div />
+            <div className="table-container" style={{ paddingTop: 20 }}>
+              {t('generic:facultyAvg')}
+            </div>
+          </>
         ) : (
           <div className="table-container">
             {!isAdmin(currentUser) ? (
@@ -185,17 +262,16 @@ const ColorTable = React.memo(
             />
           </div>
         )}
-
         <div />
         <SummaryRow
           setStatsToShow={setStatsToShow}
-          stats={stats}
+          stats={overallStats}
           selectedAnswers={selectedAnswers}
           tableIds={tableIds}
           form={form}
         />
         <div className="sticky-header" style={{ marginTop: '1em' }} />
-        {sortedProgrammes.map(p => {
+        {sortedAllProgrammes.map(p => {
           return (
             <TableRow
               p={p}

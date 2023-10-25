@@ -162,7 +162,8 @@ export default () => {
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable
-              filteredProgrammes={facultyProgrammes || filteredProgrammes}
+              filteredProgrammes={filteredProgrammes}
+              facultyProgrammes={facultyProgrammes}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
@@ -174,6 +175,7 @@ export default () => {
               showAllProgrammes={showAllProgrammes}
               form={2}
               hideFilter={faculty}
+              individualAnswers={reformAnswers?.data}
             />
           </div>
         </>

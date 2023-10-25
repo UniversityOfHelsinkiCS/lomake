@@ -201,6 +201,8 @@ export default {
 
   generic: {
     facultyAvg: 'Tiedekunnan keskiarvo',
+    universityAvg: 'Yliopiston keskiarvo',
+    individualAvg: 'Yksittäisten keskiarvo',
     noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',

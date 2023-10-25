@@ -201,6 +201,8 @@ export default {
 
   generic: {
     facultyAvg: 'Faculty average',
+    universityAvg: 'University average',
+    individualAvg: 'Average of individual answers',
     noAnswerData: 'No answeers for the question',
     kludgeButton: 'Save the textfield',
     degreeReformIndividualAnswers: 'Answers',

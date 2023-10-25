@@ -199,6 +199,8 @@ export default {
 
   generic: {
     facultyAvg: 'Fakultetens genomsnitt',
+    // universityAvg: '',
+    // individualAvg: '',
     noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
     degreeReformIndividualAnswers: 'Svara',
