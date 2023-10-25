@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
+import { filterFromUrl } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -26,6 +27,13 @@ export default () => {
 
   const form = 4 // TO FIX
   const formType = 'evaluation'
+
+  useEffect(() => {
+    const filterQuery = filterFromUrl()
+    if (filterQuery) {
+      setFilter(filterQuery)
+    }
+  }, [])
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
