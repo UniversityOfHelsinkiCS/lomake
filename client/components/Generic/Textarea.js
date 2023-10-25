@@ -71,10 +71,11 @@ const Textarea = ({
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
-  const editorError = useSelector(({ currentEditors }) => currentEditors.error)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
+
+  const editorError = useSelector(({ currentEditors }) => currentEditors.error)
 
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
@@ -199,11 +200,11 @@ const Textarea = ({
             </label>
           </div>
         )}
-        {editorError && (
+        {editorError && !hasLock && (
           <Message negative>
-            <Message.Header>Error connecting the form</Message.Header>
+            <Message.Header>{t('formView:formError')}</Message.Header>
             <Button style={{ marginTop: 10 }} onClick={refreshPage}>
-              Click here to reload the page!
+              {t('formView:formErrorButton')}
             </Button>
           </Message>
         )}

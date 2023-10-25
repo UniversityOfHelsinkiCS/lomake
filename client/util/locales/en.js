@@ -118,6 +118,8 @@ export default {
   },
 
   formView: {
+    formError: 'Error connecting the form',
+    formErrorButton: 'Click here to reload the page!',
     canChange: 'You can edit the answers after saving',
     title: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
     info1:

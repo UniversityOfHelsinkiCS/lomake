@@ -117,6 +117,8 @@ export default {
   },
 
   formView: {
+    formError: 'Fel vid anslutning av sidan',
+    formErrorButton: 'Klicka här för att ladda om sidan!',
     requiredActions: 'Åtgärder',
     facultyActionSummaryTitle:
       'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
