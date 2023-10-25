@@ -103,6 +103,22 @@ export const sortedItems = (items, sorter, lang) => {
   return sorted
 }
 
+export const filterFromUrl = () => {
+  const url = window.location.href
+  const langStart = url.indexOf('filter=')
+  if (langStart === -1) {
+    return undefined
+  }
+
+  let filterVal = url.substring(langStart + 7)
+  const filterEnd = filterVal.indexOf('&')
+  if (filterEnd !== -1) {
+    filterVal = filterVal.substring(0, filterEnd)
+  }
+
+  return filterVal
+}
+
 export const modifiedQuestions = (questions, lang) => {
   // Gives a localized list of questions with
   // text_id, color_id, label, section, title and question nr.

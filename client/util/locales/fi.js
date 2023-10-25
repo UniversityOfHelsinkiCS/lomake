@@ -72,7 +72,7 @@ export default {
     chooseProgramme: 'Valitse koulutusohjelma',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',
-    showAllFacultyProgrammes: 'Näytä myös ne ohjelmat, joissa jokin muu tiedekunta vastuullisena',
+    showAllFacultyProgrammes: 'Näytä myös yhteisohjelmat',
   },
 
   aboutPage: {
@@ -202,6 +202,8 @@ export default {
 
   generic: {
     facultyAvg: 'Tiedekunnan keskiarvo',
+    universityAvg: 'Yliopiston keskiarvo',
+    individualAvg: 'Yksittäisten keskiarvo',
     noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',

@@ -69,7 +69,7 @@ export default {
     chooseProgramme: 'Välj ett studieprogram',
     showAllProgrammes: 'Visa alla studieprogram',
     showDataByProgramme: 'Examensprogram svar per fakultet',
-    showAllFacultyProgrammes: 'Visa även de program där en annan fakultet är ansvarig',
+    showAllFacultyProgrammes: 'Visa även gemensamma program',
   },
 
   aboutPage: {
@@ -200,6 +200,8 @@ export default {
 
   generic: {
     facultyAvg: 'Fakultetens genomsnitt',
+    // universityAvg: '',
+    // individualAvg: '',
     noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
     degreeReformIndividualAnswers: 'Svara',

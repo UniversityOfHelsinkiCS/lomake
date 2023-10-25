@@ -7,7 +7,7 @@ import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { getForm } from 'Utilities/common'
+import { getForm, filterFromUrl } from 'Utilities/common'
 import { getFacultyReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
@@ -46,6 +46,13 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const faculties = useSelector(({ faculties }) => faculties)
   const reformAnswers = useSelector(state => state.reformAnswers)
+
+  useEffect(() => {
+    const filterQuery = filterFromUrl()
+    if (filterQuery) {
+      setFilter(filterQuery)
+    }
+  }, [])
 
   useEffect(() => {
     const facultyFromUrl = getFacultyFromUrl()
@@ -163,7 +170,8 @@ export default () => {
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable
-              filteredProgrammes={facultyProgrammes || filteredProgrammes}
+              filteredProgrammes={filteredProgrammes}
+              facultyProgrammes={facultyProgrammes}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={setStatsToShow}
@@ -175,6 +183,7 @@ export default () => {
               showAllProgrammes={showAllProgrammes}
               form={2}
               facultyView={faculty}
+              individualAnswers={reformAnswers?.data}
             />
           </div>
         </>

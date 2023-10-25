@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
+import { filterFromUrl } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -32,6 +33,14 @@ export default () => {
 
   const form = 1 // TO FIX
   const formType = 'yearlyAssessment'
+
+  useEffect(() => {
+    const filterQuery = filterFromUrl()
+    if (filterQuery) {
+      setFilter(filterQuery)
+    }
+  }, [])
+
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
