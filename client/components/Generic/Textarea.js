@@ -174,7 +174,7 @@ const Textarea = ({
       dispatch(getLock(fieldName))
       const timeout = setTimeout(() => {
         handleLockTimeout()
-      }, 1)
+      }, 15000)
       setTimeoutObject(timeout)
     }
   }
