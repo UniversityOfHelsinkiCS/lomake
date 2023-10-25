@@ -69,7 +69,7 @@ export default {
     chooseProgramme: 'Choose degree programme',
     showAllProgrammes: 'Show all programmes',
     showDataByProgramme: 'Degree programme answers by faculty',
-    showAllFacultyProgrammes: 'Show also those programmes where another faculty is responsible',
+    showAllFacultyProgrammes: 'Show also joint programmes',
   },
 
   aboutPage: {
