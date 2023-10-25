@@ -65,6 +65,14 @@ const getSingleProgrammesAnswers = async (req, res) => {
 
     let data = null
 
+    /*
+    start using these when 1.11 DL passed:
+
+    const existingDeadlines = await db.deadline.findAll({ where: { form } })
+
+    if (draftYear && draftYear === Number(year) && existingDeadlines.length > 0) {
+    */
+
     if (draftYear && draftYear === Number(year)) {
       data = await db.tempAnswer.findOne({
         where: {
