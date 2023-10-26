@@ -231,6 +231,9 @@ const getLock = async (socket, payload, io) => {
     },
   }
 
+  // eslint-disable-next-line no-console
+  console.log('WS GET LOG', currentUser.uid)
+
   io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
 }
 
@@ -264,6 +267,8 @@ const getLockHttp = (currentUser, payload, io) => {
 
   const roomCurrentEditors = stripTimeouts(currentEditors[room])
 
+  // eslint-disable-next-line no-console
+  console.log('HTTP GET LOG', currentUser.uid)
   io.in(room).emit('update_editors', { ...roomCurrentEditors, donotusethiskeyforanythingbut_uid: currentUser.uid })
 
   // eslint-disable-next-line consistent-return

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFormField,
   getLock,
+  getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
@@ -76,6 +77,7 @@ const Textarea = ({
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
 
+  const editorLockError = useSelector(({ currentEditors }) => currentEditors.error)
   const [editorError, setEditorError] = useState()
   const lockRef = useRef(gettingLock)
   lockRef.current = gettingLock
@@ -170,10 +172,16 @@ const Textarea = ({
 
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
-      // eslint-disable-next-line no-console
-      console.log('ASK LOG', new Date())
       setGettingLock(true)
-      dispatch(getLock(fieldName))
+      if (['student_admittance_text'].includes(fieldName)) {
+        // eslint-disable-next-line no-console
+        console.log('ASK LOG HTTP', new Date())
+        dispatch(getLockHttp(fieldName, room))
+      } else {
+        // eslint-disable-next-line no-console
+        console.log('ASK LOG WS', new Date())
+        dispatch(getLock(fieldName))
+      }
       const timeout = setTimeout(() => {
         handleLockTimeout()
       }, 20000)
@@ -206,7 +214,7 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        {!editorError && (
+        {!editorError && !editorLockError && (
           <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
             <label
               style={{
@@ -229,7 +237,7 @@ const Textarea = ({
             </label>
           </div>
         )}
-        {editorError && !hasLock && (
+        {(editorError || editorLockError) && !hasLock && (
           <Message negative>
             <Message.Header>{t('formView:formError')}</Message.Header>
             <Button style={{ marginTop: 10 }} onClick={refreshPage}>
