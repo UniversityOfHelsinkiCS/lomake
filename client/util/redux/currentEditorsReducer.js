@@ -7,6 +7,11 @@ export const updateCurrentEditors = value => ({
   value,
 })
 
+export const releaseFieldLocally = field => ({
+  type: 'RELEASE_LOCALLY_EDITOR',
+  field,
+})
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = {}, action) => {
@@ -26,9 +31,16 @@ export default (state = {}, action) => {
       if (state.currentUser === byWhom) {
         return state
       }
+      // eslint-disable-next-line no-console
+      console.log('UPDATING EDITORS')
       return {
         ...state,
         data: { ...action.value, donotusethiskeyforanythingbut_uid: undefined },
+      }
+    case 'RELEASE_LOCALLY_EDITOR':
+      return {
+        ...state,
+        data: { ...state.data, [action.field]: undefined },
       }
     case 'WS_LEAVE_ROOM':
       return {

@@ -7,6 +7,7 @@ import {
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
+import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
 import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
@@ -150,6 +151,7 @@ const Textarea = ({
     setChanges(false)
     // maybe remove the next
     setHasLock(false)
+    dispatch(releaseFieldLocally(fieldName))
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
