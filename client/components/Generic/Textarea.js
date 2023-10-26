@@ -172,6 +172,8 @@ const Textarea = ({
   }
 
   const askForLock = () => {
+    // eslint-disable-next-line no-console
+    console.log('TRY ASK LOG', gettingLock, gettingLock, currentEditors[fieldName])
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
       if (['student_admittance_text'].includes(fieldName)) {
