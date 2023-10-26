@@ -148,6 +148,7 @@ const Textarea = ({
 
   const handleSave = () => {
     setChanges(false)
+    setHasLock(false)
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
