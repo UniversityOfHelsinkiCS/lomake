@@ -97,7 +97,7 @@ const Textarea = ({
       if (gotTheLock) {
         ref.current.focusEditor()
         // eslint-disable-next-line no-console
-        console.log('GOT LOCK', editorError)
+        console.log('GOT LOCK', editorError, new Date())
         if (timeoutObject) {
           clearTimeout(timeoutObject)
         }
@@ -171,7 +171,7 @@ const Textarea = ({
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       // eslint-disable-next-line no-console
-      console.log('ASK LOG')
+      console.log('ASK LOG', new Date())
       setGettingLock(true)
       dispatch(getLock(fieldName))
       const timeout = setTimeout(() => {
