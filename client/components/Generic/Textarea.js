@@ -170,6 +170,8 @@ const Textarea = ({
 
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
+      // eslint-disable-next-line no-console
+      console.log('ASK LOG')
       setGettingLock(true)
       dispatch(getLock(fieldName))
       const timeout = setTimeout(() => {
