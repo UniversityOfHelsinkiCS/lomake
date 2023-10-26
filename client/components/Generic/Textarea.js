@@ -175,7 +175,8 @@ const Textarea = ({
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
-      if (['student_admittance_text'].includes(fieldName)) {
+      // no field uses HTTP yet
+      if ([].includes(fieldName)) {
         dispatch(getLockHttp(fieldName, room))
       } else {
         dispatch(getLock(fieldName))
