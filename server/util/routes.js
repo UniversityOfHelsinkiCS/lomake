@@ -6,6 +6,7 @@ const deadlines = require('@controllers/deadlineController')
 const cypress = require('@controllers/cypressController')
 const faculties = require('@controllers/facultyController')
 const degreeReform = require('@controllers/degreeReformController')
+const locks = require('@controllers/lockController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -17,6 +18,8 @@ const {
 } = require('@middleware/accessControlMiddleware')
 
 const router = Router()
+
+router.post('/lock/:room', locks.getLock)
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)

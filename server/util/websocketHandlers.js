@@ -234,9 +234,46 @@ const getLock = async (socket, payload, io) => {
   io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
 }
 
+const getLockHttp = (currentUser, payload, io) => {
+  const { field, room } = payload
+
+  if (currentEditors[room] && currentEditors[room][field]) return undefined
+
+  // force release lock after 5 mins if no save
+  const timeoutId = setTimeout(() => {
+    currentEditors = {
+      ...currentEditors,
+      [room]: { ...currentEditors[room], [field]: undefined },
+    }
+
+    io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+  }, 300 * SEC)
+
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: {
+        uid: currentUser.uid,
+        firstname: currentUser.firstname,
+        lastname: currentUser.lastname,
+        timeoutId,
+      },
+    },
+  }
+
+  const roomCurrentEditors = stripTimeouts(currentEditors[room])
+
+  io.in(room).emit('update_editors', { ...roomCurrentEditors, donotusethiskeyforanythingbut_uid: currentUser.uid })
+
+  // eslint-disable-next-line consistent-return
+  return stripTimeouts(roomCurrentEditors)
+}
+
 module.exports = {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLock: withLogging(getLock),
+  getLockHttp,
 }
