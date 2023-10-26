@@ -99,8 +99,6 @@ const Textarea = ({
       setGettingLock(false)
       if (gotTheLock) {
         ref.current.focusEditor()
-        // eslint-disable-next-line no-console
-        console.log('GOT LOCK', editorError, new Date())
         if (timeoutObject) {
           clearTimeout(timeoutObject)
         }
@@ -149,7 +147,7 @@ const Textarea = ({
 
   const handleSave = () => {
     setChanges(false)
-    // maybe remove the next
+    // maybe remove the next?
     setHasLock(false)
     dispatch(releaseFieldLocally(fieldName))
     const value = editorState
@@ -175,23 +173,11 @@ const Textarea = ({
   }
 
   const askForLock = () => {
-    // eslint-disable-next-line no-console
-    console.log(
-      'TRY ASK LOG',
-      form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName],
-      gettingLock,
-      currentEditors[fieldName],
-      currentEditors,
-    )
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
       if (['student_admittance_text'].includes(fieldName)) {
-        // eslint-disable-next-line no-console
-        console.log('ASK LOG HTTP', new Date())
         dispatch(getLockHttp(fieldName, room))
       } else {
-        // eslint-disable-next-line no-console
-        console.log('ASK LOG WS', new Date())
         dispatch(getLock(fieldName))
       }
       const timeout = setTimeout(() => {
