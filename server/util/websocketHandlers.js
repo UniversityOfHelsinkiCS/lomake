@@ -240,7 +240,9 @@ const getLock = async (socket, payload, io) => {
 const getLockHttp = (currentUser, payload, io) => {
   const { field, room } = payload
 
-  if (currentEditors[room] && currentEditors[room][field]) return undefined
+  if (currentEditors[room] && currentEditors[room][field] && currentEditors[room][field].uid !== currentUser.uid) {
+    return undefined
+  }
 
   // force release lock after 5 mins if no save
   const timeoutId = setTimeout(() => {
