@@ -50,6 +50,7 @@ const IamTable = () => {
             'grp-katselmus-projektiryhma/ohjausryhmä',
             'grp-a01807-svenskaarenden',
             'grp-tilannekuvaoymp',
+            'grp-koordinaatioryhma',
           ]),
           'Lukuoikeudet kaikkiin ohjelmiin',
           'Dekanaatit, rehtoraatti, koulutusohjelmien johtajat, toiminnanohjausyksikkö, oppimisympäristöjen palvelut ja katselmustyöryhmä',
