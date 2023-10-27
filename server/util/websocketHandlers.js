@@ -46,9 +46,6 @@ const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
   socket.to(room).emit(event, payload)
 }
 
-/**
- * What does this do exactly?
- */
 const stripTimeouts = room => {
   if (!room) return {}
   return Object.keys(room).reduce((acc, key) => {
@@ -62,6 +59,16 @@ const stripTimeouts = room => {
       },
     }
   }, {})
+}
+
+const emitCurrentEditorsTo = (io, room, currentEditors, by) => {
+  const roomCurrentEditors = stripTimeouts(currentEditors[room])
+
+  if (by) {
+    roomCurrentEditors.donotusethiskeyforanythingbut_uid = by.uid
+  }
+
+  io.in(room).emit('update_editors', roomCurrentEditors)
 }
 
 const clearCurrentUser = user => {
@@ -115,7 +122,7 @@ const joinRoom = async (socket, room, form, io) => {
       })
       currentEditors = clearCurrentUser(currentUser)
       socket.join(room)
-      io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+      emitCurrentEditorsTo(io, room, currentEditors)
       logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {
@@ -168,7 +175,7 @@ const updateField = async (socket, payload, io, uuid) => {
           },
         }
 
-        io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+        emitCurrentEditorsTo(io, room, currentEditors)
       }
 
       const currentAnswer = await db.tempAnswer.findOne({
@@ -197,43 +204,6 @@ const updateField = async (socket, payload, io, uuid) => {
   }
 }
 
-const getLock = async (socket, payload, io) => {
-  const { field, room } = payload
-  const currentUser = await getCurrentUser(socket)
-
-  if (currentEditors[room] && currentEditors[room][field]) {
-    logger.error(
-      `PANIC getting lock failed uid: ${currentUser.uid} room: ${room} field: ${field} was: ${currentEditors[room][field]}`,
-    )
-    return
-  }
-
-  // force release lock after 5 mins if no save
-  const timeoutId = setTimeout(() => {
-    currentEditors = {
-      ...currentEditors,
-      [room]: { ...currentEditors[room], [field]: undefined },
-    }
-
-    io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-  }, 300 * SEC)
-
-  currentEditors = {
-    ...currentEditors,
-    [room]: {
-      ...currentEditors[room],
-      [field]: {
-        uid: currentUser.uid,
-        firstname: currentUser.firstname,
-        lastname: currentUser.lastname,
-        timeoutId,
-      },
-    },
-  }
-
-  io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
-}
-
 const getLockHttp = (currentUser, payload, io) => {
   const { field, room } = payload
 
@@ -248,7 +218,7 @@ const getLockHttp = (currentUser, payload, io) => {
       [room]: { ...currentEditors[room], [field]: undefined },
     }
 
-    io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+    emitCurrentEditorsTo(io, room, currentEditors)
   }, 300 * SEC)
 
   currentEditors = {
@@ -264,18 +234,15 @@ const getLockHttp = (currentUser, payload, io) => {
     },
   }
 
-  const roomCurrentEditors = stripTimeouts(currentEditors[room])
-
-  io.in(room).emit('update_editors', { ...roomCurrentEditors, donotusethiskeyforanythingbut_uid: currentUser.uid })
+  emitCurrentEditorsTo(io, room, currentEditors, currentUser)
 
   // eslint-disable-next-line consistent-return
-  return stripTimeouts(roomCurrentEditors)
+  return stripTimeouts(currentEditors[room])
 }
 
 module.exports = {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
-  getLock: withLogging(getLock),
   getLockHttp,
 }

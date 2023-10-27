@@ -1,4 +1,4 @@
-const { updateField, joinRoom, leaveRoom, getLock, getLockHttp } = require('@util/websocketHandlers')
+const { updateField, joinRoom, leaveRoom, getLockHttp } = require('@util/websocketHandlers')
 const ws = require('socket.io')
 
 let io = null
@@ -9,7 +9,6 @@ const createWebsocketServer = server => {
     socket.on('update_field', room => updateField(socket, room, io))
     socket.on('join', (room, form) => joinRoom(socket, room, form, io))
     socket.on('leave', room => leaveRoom(socket, room))
-    socket.on('get_lock', room => getLock(socket, room, io))
   })
 }
 
