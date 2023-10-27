@@ -61,14 +61,10 @@ const stripTimeouts = room => {
   }, {})
 }
 
-const emitCurrentEditorsTo = (io, room, currentEditors, by) => {
+const emitCurrentEditorsTo = (io, room, currentEditors, uid) => {
   const roomCurrentEditors = stripTimeouts(currentEditors[room])
 
-  if (by) {
-    roomCurrentEditors.donotusethiskeyforanythingbut_uid = by.uid
-  }
-
-  io.in(room).emit('update_editors', roomCurrentEditors)
+  io.in(room).emit('update_editors', { data: roomCurrentEditors, uid })
 }
 
 const clearCurrentUser = user => {
@@ -234,7 +230,7 @@ const getLockHttp = (currentUser, payload, io) => {
     },
   }
 
-  emitCurrentEditorsTo(io, room, currentEditors, currentUser)
+  emitCurrentEditorsTo(io, room, currentEditors, currentUser.uid)
 
   // eslint-disable-next-line consistent-return
   return stripTimeouts(currentEditors[room])
