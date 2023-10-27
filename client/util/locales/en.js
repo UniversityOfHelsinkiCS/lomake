@@ -203,6 +203,7 @@ export default {
   },
 
   generic: {
+    noData: 'answers to individual questions not yet available',
     facultyAvg: 'Average of programmes of the faculty',
     universityAvg: 'Average of all programmes',
     individualAvg: 'Average of individual answers of the faculty',

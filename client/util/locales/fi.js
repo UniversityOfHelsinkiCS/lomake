@@ -203,6 +203,7 @@ export default {
   },
 
   generic: {
+    noData: 'yksittäisten kysymysten vastaukset eivät vielä saatavilla',
     facultyAvg: 'Tiedekunnan koulutusohjelmien keskiarvo',
     universityAvg: 'Yliopiston koulutusohjelmien keskiarvo',
     individualAvg: 'Tietekunnan yksittäisten vastaajien keskiarvo',

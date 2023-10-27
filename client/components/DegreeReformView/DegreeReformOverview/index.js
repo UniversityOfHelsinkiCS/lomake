@@ -126,12 +126,6 @@ export default () => {
 
   const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
 
-  if (reformAnswers?.data) {
-    // do something with the data
-    // eslint-disable-next-line no-console
-    console.log(reformAnswers.data)
-  }
-
   return (
     <>
       {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}

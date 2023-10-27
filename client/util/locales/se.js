@@ -201,6 +201,7 @@ export default {
   },
 
   generic: {
+    noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
     facultyAvg: 'Genomsnitt av fakultetens program',
     universityAvg: 'Genomsnitt för alla program',
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',

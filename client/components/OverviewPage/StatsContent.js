@@ -1,8 +1,14 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
+import { useTranslation } from 'react-i18next'
 
 const StatsContent = ({ stats }) => {
+  const { t } = useTranslation()
+  if (!stats) {
+    return <div>{t('generic:noData')}</div>
+  }
+
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ height: '250px', width: '250px' }}>
