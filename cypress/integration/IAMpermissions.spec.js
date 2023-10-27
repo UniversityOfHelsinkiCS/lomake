@@ -33,7 +33,7 @@ describe('IAM permission tests', () => {
     cy.login('cypressKojoUser')
     cy.visit('/')
     cy.get('[data-cy=overviewpage-filter-button]').click()
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount() - 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
   })
 
@@ -96,7 +96,7 @@ describe('IAM permission tests', () => {
     cy.login('cypressKojoDeanUser')
     cy.visit('/')
     cy.get('[data-cy=overviewpage-filter-button]').click()
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount() - 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoDeanUser', 'MH50_001', { read: true, write: true, admin: true })
     cy.hasAccess('cypressKojoDeanUser', 'KH50_001', { read: true, write: false, admin: false })
   })
