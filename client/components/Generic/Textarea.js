@@ -177,9 +177,9 @@ const Textarea = ({
       setGettingLock(true)
       // no field uses HTTP yet
       if ([].includes(fieldName)) {
-        dispatch(getLockHttp(fieldName, room))
-      } else {
         dispatch(getLock(fieldName))
+      } else {
+        dispatch(getLockHttp(fieldName, room))
       }
       const timeout = setTimeout(() => {
         handleLockTimeout()
