@@ -285,8 +285,8 @@ const ColorTable = React.memo(
             form={form}
           />
           <div className="sticky-header" style={{ marginTop: '1em' }} />
-          {showAllProgrammes
-            ? sortedAllProgrammes.map(p => {
+          {!showAllProgrammes && facultyView
+            ? sortedFacultyProgrammes.map(p => {
                 return (
                   <TableRow
                     p={p}
@@ -300,7 +300,7 @@ const ColorTable = React.memo(
                   />
                 )
               })
-            : sortedFacultyProgrammes.map(p => {
+            : sortedAllProgrammes.map(p => {
                 return (
                   <TableRow
                     p={p}
