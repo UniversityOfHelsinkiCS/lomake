@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFormField,
-  getLock,
   getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
@@ -175,12 +174,7 @@ const Textarea = ({
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
-      // no field uses HTTP yet
-      if ([].includes(fieldName)) {
-        dispatch(getLock(fieldName))
-      } else {
-        dispatch(getLockHttp(fieldName, room))
-      }
+      dispatch(getLockHttp(fieldName, room))
       const timeout = setTimeout(() => {
         handleLockTimeout()
       }, 20000)
