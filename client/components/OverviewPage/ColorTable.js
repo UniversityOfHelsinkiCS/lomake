@@ -285,20 +285,35 @@ const ColorTable = React.memo(
             form={form}
           />
           <div className="sticky-header" style={{ marginTop: '1em' }} />
-          {sortedAllProgrammes.map(p => {
-            return (
-              <TableRow
-                p={p}
-                selectedAnswers={selectedAnswers}
-                tableIds={tableIds}
-                setModalData={setModalData}
-                setProgramControlsToShow={setProgramControlsToShow}
-                key={p.key}
-                formType={formType}
-                form={form}
-              />
-            )
-          })}
+          {showAllProgrammes
+            ? sortedAllProgrammes.map(p => {
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })
+            : sortedFacultyProgrammes.map(p => {
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })}
         </div>
       </>
     )
