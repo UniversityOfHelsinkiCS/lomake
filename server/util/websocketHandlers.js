@@ -177,7 +177,7 @@ const updateField = async (socket, payload, io, uuid) => {
         },
       })
       if (currentAnswer) {
-        const [, [updatedAnswer]] = await db.tempAnswer.update(
+        await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },
           {
             returning: true,
@@ -186,7 +186,7 @@ const updateField = async (socket, payload, io, uuid) => {
             },
           },
         )
-        logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data, uuid)
+        logAndEmitToRoom(socket, room, 'new_form_data', data, uuid)
       } else {
         // This can happen, at least in dev, when the programme is new and was added after deadlines are updated. Updating deadlines may fix.
         logger.error(`PANIC this should never happen: ${uuid}`)
