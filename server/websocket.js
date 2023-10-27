@@ -1,8 +1,10 @@
-const { updateField, joinRoom, leaveRoom, getLock } = require('@util/websocketHandlers')
+const { updateField, joinRoom, leaveRoom, getLock, getLockHttp } = require('@util/websocketHandlers')
 const ws = require('socket.io')
 
+let io = null
+
 const createWebsocketServer = server => {
-  const io = ws(server)
+  io = ws(server)
   io.on('connection', socket => {
     socket.on('update_field', room => updateField(socket, room, io))
     socket.on('join', (room, form) => joinRoom(socket, room, form, io))
@@ -11,4 +13,9 @@ const createWebsocketServer = server => {
   })
 }
 
-module.exports = { createWebsocketServer }
+const getLockForHttp = (cuser, room) => getLockHttp(cuser, room, io)
+
+module.exports = {
+  createWebsocketServer,
+  getLockForHttp,
+}

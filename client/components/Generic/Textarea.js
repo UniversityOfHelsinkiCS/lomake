@@ -3,16 +3,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFormField,
   getLock,
+  getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
-import { Loader, Button } from 'semantic-ui-react'
+import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
+import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import { Sentry } from 'Utilities/sentry'
 
 import { colors } from 'Utilities/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
@@ -59,6 +62,7 @@ const Textarea = ({
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const dataFromRedux = useSelector(({ form }) => form.data[fieldName] || '')
+  const room = useSelector(({ room }) => room)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
 
@@ -74,6 +78,12 @@ const Textarea = ({
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
 
+  const editorLockError = useSelector(({ currentEditors }) => currentEditors.error)
+  const [editorError, setEditorError] = useState()
+  const lockRef = useRef(gettingLock)
+  lockRef.current = gettingLock
+  const [timeoutObject, setTimeoutObject] = useState(null)
+
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
@@ -87,7 +97,15 @@ const Textarea = ({
 
     if (gettingLock && currentEditors[fieldName]) {
       setGettingLock(false)
-      if (gotTheLock) ref.current.focusEditor()
+      if (gotTheLock) {
+        ref.current.focusEditor()
+        if (timeoutObject) {
+          clearTimeout(timeoutObject)
+        }
+        if (editorError) {
+          setEditorError(null)
+        }
+      }
     }
   }, [currentEditors])
 
@@ -129,6 +147,9 @@ const Textarea = ({
 
   const handleSave = () => {
     setChanges(false)
+    // maybe remove the next?
+    setHasLock(false)
+    dispatch(releaseFieldLocally(fieldName))
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
@@ -142,10 +163,28 @@ const Textarea = ({
 
   const { length } = editorState.getCurrentContent().getPlainText()
 
+  const handleLockTimeout = () => {
+    // eslint-disable-next-line no-console
+    console.log('TIMEOUT')
+    if (lockRef.current) {
+      setEditorError(true)
+      Sentry.captureException(`hyrrä for ${currentUser.uid} room ${room} field ${fieldName}`)
+    }
+  }
+
   const askForLock = () => {
     if (form !== 3 && !hasLock && !gettingLock && currentEditors && !currentEditors[fieldName]) {
       setGettingLock(true)
-      dispatch(getLock(fieldName))
+      // no field uses HTTP yet
+      if ([].includes(fieldName)) {
+        dispatch(getLock(fieldName))
+      } else {
+        dispatch(getLockHttp(fieldName, room))
+      }
+      const timeout = setTimeout(() => {
+        handleLockTimeout()
+      }, 20000)
+      setTimeoutObject(timeout)
     }
   }
 
@@ -160,6 +199,10 @@ const Textarea = ({
 
   const minWidth = form !== 1 ? '100%' : '50%'
 
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
@@ -170,27 +213,37 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
-          <label
-            style={{
-              fontStyle: 'bolder',
-              minWidth: '50%',
-              height: 'auto',
-            }}
-          >
-            {label}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
-            <Loader
+        {!editorError && !editorLockError && (
+          <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
+            <label
               style={{
-                marginLeft: '1em',
-                visibility: !hasLock && gettingLock ? undefined : 'hidden',
+                fontStyle: 'bolder',
+                minWidth: '50%',
+                height: 'auto',
               }}
-              size="small"
-              active
-              inline
-            />
-          </label>
-        </div>
+            >
+              {label}
+              {required && <span style={{ color: colors.red, marginLeft: '0.2em' }}>*</span>}
+              <Loader
+                style={{
+                  marginLeft: '1em',
+                  visibility: !hasLock && gettingLock ? undefined : 'hidden',
+                }}
+                size="small"
+                active
+                inline
+              />
+            </label>
+          </div>
+        )}
+        {(editorError || editorLockError) && !hasLock && (
+          <Message negative>
+            <Message.Header>{t('formView:formError')}</Message.Header>
+            <Button style={{ marginTop: 10 }} onClick={refreshPage}>
+              {t('formView:formErrorButton')}
+            </Button>
+          </Message>
+        )}
         <Accordion
           previousYearsAnswers={previousYearsAnswers}
           previousAnswerColor={previousAnswerColor}

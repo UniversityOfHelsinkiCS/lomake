@@ -120,6 +120,8 @@ export default {
   },
 
   formView: {
+    formError: 'Ongelmia yhteydessä lomakkeeseen',
+    formErrorButton: 'Paina tästä niin sivu ladataan uudelleen!',
     canChange: 'Voit muokata vastauksia tallentamisen jälkeen',
     title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
     info1:

@@ -177,7 +177,7 @@ const updateField = async (socket, payload, io, uuid) => {
         },
       })
       if (currentAnswer) {
-        const [, [updatedAnswer]] = await db.tempAnswer.update(
+        await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },
           {
             returning: true,
@@ -186,7 +186,7 @@ const updateField = async (socket, payload, io, uuid) => {
             },
           },
         )
-        logAndEmitToRoom(socket, room, 'new_form_data', updatedAnswer.data, uuid)
+        logAndEmitToRoom(socket, room, 'new_form_data', data, uuid)
       } else {
         // This can happen, at least in dev, when the programme is new and was added after deadlines are updated. Updating deadlines may fix.
         logger.error(`PANIC this should never happen: ${uuid}`)
@@ -234,9 +234,48 @@ const getLock = async (socket, payload, io) => {
   io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
 }
 
+const getLockHttp = (currentUser, payload, io) => {
+  const { field, room } = payload
+
+  if (currentEditors[room] && currentEditors[room][field] && currentEditors[room][field].uid !== currentUser.uid) {
+    return undefined
+  }
+
+  // force release lock after 5 mins if no save
+  const timeoutId = setTimeout(() => {
+    currentEditors = {
+      ...currentEditors,
+      [room]: { ...currentEditors[room], [field]: undefined },
+    }
+
+    io.in(room).emit('update_editors', stripTimeouts(currentEditors[room]))
+  }, 300 * SEC)
+
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: {
+        uid: currentUser.uid,
+        firstname: currentUser.firstname,
+        lastname: currentUser.lastname,
+        timeoutId,
+      },
+    },
+  }
+
+  const roomCurrentEditors = stripTimeouts(currentEditors[room])
+
+  io.in(room).emit('update_editors', { ...roomCurrentEditors, donotusethiskeyforanythingbut_uid: currentUser.uid })
+
+  // eslint-disable-next-line consistent-return
+  return stripTimeouts(roomCurrentEditors)
+}
+
 module.exports = {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLock: withLogging(getLock),
+  getLockHttp,
 }
