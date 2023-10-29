@@ -85,9 +85,13 @@ export default () => {
       return programmes
     }
     if (currentUser.data.access || currentUser.specialGroup) {
-      const usersPermissionsKeys = Object.keys(currentUser.data.access)
       if (!showAllProgrammes) {
-        return programmes.filter(program => usersPermissionsKeys.includes(program.key))
+        const usersPermissionsEntries = Object.entries(currentUser.data.access)
+        let properAccess = usersPermissionsEntries.filter(e => e[1].write).map(e => e[0])
+        if (properAccess.length === 0) {
+          properAccess = usersPermissionsEntries.filter(e => e[1].read).map(e => e[0])
+        }
+        return programmes.filter(program => properAccess.includes(program.key))
       }
       return programmes
     }
@@ -125,12 +129,6 @@ export default () => {
   }
 
   const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
-
-  if (reformAnswers?.data) {
-    // do something with the data
-    // eslint-disable-next-line no-console
-    console.log(reformAnswers.data)
-  }
 
   return (
     <>

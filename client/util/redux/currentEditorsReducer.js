@@ -12,8 +12,6 @@ export const releaseFieldLocally = field => ({
   field,
 })
 
-// Reducer
-// You can include more app wide actions such as "selected: []" into the state
 export default (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS': {
@@ -26,16 +24,13 @@ export default (state = {}, action) => {
       }
     }
     case 'UPDATE_CURRENT_EDITORS':
-      // eslint-disable-next-line no-case-declarations
-      const byWhom = action.value.donotusethiskeyforanythingbut_uid
-      if (state.currentUser === byWhom) {
+      if (state.currentUser === action.value.uid) {
         return state
       }
       // eslint-disable-next-line no-console
-      console.log('UPDATING EDITORS')
       return {
         ...state,
-        data: { ...action.value, donotusethiskeyforanythingbut_uid: undefined },
+        data: action.value.data,
       }
     case 'RELEASE_LOCALLY_EDITOR':
       return {

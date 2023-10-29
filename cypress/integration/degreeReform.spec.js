@@ -121,6 +121,7 @@ describe('Degree reform form tests', () => {
     // ----------------------------------------
     // Check that Master's sections work
     cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
@@ -149,6 +150,7 @@ describe('Degree reform form tests', () => {
     // ----------------------------------------
     // Check that Doctoral sections work
     cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')

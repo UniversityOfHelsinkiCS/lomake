@@ -201,9 +201,10 @@ export default {
   },
 
   generic: {
-    facultyAvg: 'Fakultetens genomsnitt',
-    // universityAvg: '',
-    // individualAvg: '',
+    noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
+    facultyAvg: 'Genomsnitt av fakultetens program',
+    universityAvg: 'Genomsnitt för alla program',
+    individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
     degreeReformIndividualAnswers: 'Svara',

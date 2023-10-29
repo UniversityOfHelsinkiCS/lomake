@@ -17,6 +17,7 @@ export const updateFormFieldExp = (field, value, form) => ({
   form,
 })
 
+// not used anymore
 export const getLock = field => ({
   type: 'GET_LOCK',
   field,

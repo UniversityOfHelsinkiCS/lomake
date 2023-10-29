@@ -203,9 +203,10 @@ export default {
   },
 
   generic: {
-    facultyAvg: 'Tiedekunnan keskiarvo',
-    universityAvg: 'Yliopiston keskiarvo',
-    individualAvg: 'Yksittäisten keskiarvo',
+    noData: 'yksittäisten kysymysten vastaukset eivät vielä saatavilla',
+    facultyAvg: 'Tiedekunnan koulutusohjelmien keskiarvo',
+    universityAvg: 'Yliopiston koulutusohjelmien keskiarvo',
+    individualAvg: 'Tietekunnan yksittäisten vastaajien keskiarvo',
     noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     degreeReformIndividualAnswers: 'Vastaukset',

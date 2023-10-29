@@ -203,9 +203,10 @@ export default {
   },
 
   generic: {
-    facultyAvg: 'Faculty average',
-    universityAvg: 'University average',
-    individualAvg: 'Average of individual answers',
+    noData: 'answers to individual questions not yet available',
+    facultyAvg: 'Average of programmes of the faculty',
+    universityAvg: 'Average of all programmes',
+    individualAvg: 'Average of individual answers of the faculty',
     noAnswerData: 'No answeers for the question',
     kludgeButton: 'Save the textfield',
     degreeReformIndividualAnswers: 'Answers',

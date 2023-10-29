@@ -250,35 +250,36 @@ const Textarea = ({
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (
         <>
-          <div data-cy={`editing-area-${id}`} onClick={askForLock} style={{ marginTop: '1em' }}>
-            <Editor
-              // onBlur={handleBlur}
-              editorStyle={{ wordBreak: 'break-word', width: '100%' }}
-              ref={ref}
-              wrapperClassName="wrapper-class"
-              editorClassName={!someoneElseHasTheLock ? 'editor-class' : 'editor-class disabled'}
-              toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
-              editorState={editorState}
-              onEditorStateChange={handleChange}
-              handleBeforeInput={val => {
-                const textLength = editorState.getCurrentContent().getPlainText().length
-                if (val && textLength >= MAX_LENGTH) {
-                  return 'handled'
-                }
-                return 'not-handled'
-              }}
-              handlePastedText={handlePaste}
-              toolbar={{
-                options: ['inline', 'list', 'history'],
-                inline: {
-                  options: ['bold'],
-                },
-                list: {
-                  options: ['unordered', 'ordered'],
-                },
-              }}
-              readOnly={!hasLock}
-            />
+          <div style={{ marginTop: '1em' }}>
+            <div data-cy={`editing-area-${id}`} onClick={askForLock}>
+              <Editor
+                editorStyle={{ wordBreak: 'break-word', width: '100%' }}
+                ref={ref}
+                wrapperClassName="wrapper-class"
+                editorClassName={!someoneElseHasTheLock ? 'editor-class' : 'editor-class disabled'}
+                toolbarClassName={!someoneElseHasTheLock ? 'toolbar-class' : 'toolbar-class disabled'}
+                editorState={editorState}
+                onEditorStateChange={handleChange}
+                handleBeforeInput={val => {
+                  const textLength = editorState.getCurrentContent().getPlainText().length
+                  if (val && textLength >= MAX_LENGTH) {
+                    return 'handled'
+                  }
+                  return 'not-handled'
+                }}
+                handlePastedText={handlePaste}
+                toolbar={{
+                  options: ['inline', 'list', 'history'],
+                  inline: {
+                    options: ['bold'],
+                  },
+                  list: {
+                    options: ['unordered', 'ordered'],
+                  },
+                }}
+                readOnly={!hasLock}
+              />
+            </div>
             <Button
               onClick={handleSave}
               disabled={!changes}
