@@ -47,6 +47,7 @@ const specialGroups = [
   { group: 'international2020', translationTag: 'accessInternational2020' },
   { group: 'international', translationTag: 'accessInternational' },
   { group: 'doctoral', translationTag: 'accessDoctoral' },
+  { group: 'evaluationFaculty', translationTag: 'accessEvaluationFaculty' },
   ...data.map(f => ({ group: f.code, translationTag: f.name, faculty: true })),
 ]
 

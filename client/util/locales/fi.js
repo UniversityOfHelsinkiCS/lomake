@@ -322,6 +322,7 @@ export default {
       access_accessInternational2020: 'Kansainväliset maisteriohjelmat 2020 ->',
       access_accessInternational: 'Kansainväliset maisteriohjelmat',
       access_accessDoctoral: 'Kaikki tohtoriohjelmat',
+      access_accessEvaluationFaculty: 'Katselmus - tiedekunta',
     },
     basicUser: 'Peruskäyttäjä',
     superAdmin: 'Super-admin',

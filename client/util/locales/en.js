@@ -321,6 +321,7 @@ export default {
       access_accessInternational2020: "International Master's programmes 2020 ->",
       access_accessInternational: "International Master's programmes",
       access_accessDoctoral: 'All doctoral programmes',
+      access_accessEvaluationFaculty: 'Evaluation faculty',
     },
     basicUser: 'Basic user',
     superAdmin: 'Super admin',

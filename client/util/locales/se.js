@@ -314,6 +314,7 @@ export default {
       access_accessInternational2020: 'Internationella magisterprogram 2020 ->',
       access_accessInternational: 'Internationella magisterprogram',
       access_accessDoctoral: 'Alla doktorandprogram',
+      //  access_accessEvaluationFaculty: '',
     },
     basicUser: 'Vanlig användare',
     superAdmin: 'Super admin',
