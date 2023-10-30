@@ -53,10 +53,7 @@ const createOrUpdate = async (req, res) => {
 
     const allDeadlines = await db.deadline.findAll({})
 
-    if (existingDeadlines.length === 0) {
-      // this should not be done if dl was extended
-      await createDraftAnswers(draftYear, form)
-    }
+    await createDraftAnswers(draftYear, form)
 
     return res.status(200).json({ deadline: allDeadlines, draftYear: newDraftYear })
   } catch (error) {
