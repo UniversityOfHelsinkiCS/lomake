@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Input, Radio } from 'semantic-ui-react'
+import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems, answersByYear } from 'Utilities/common'
@@ -22,7 +22,7 @@ const FacultyColorTable = React.memo(
     const year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
-    const [showDataByProgramme, setShowByProgramme] = useState(false)
+    const [showDataByProgramme] = useState(false)
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
@@ -89,14 +89,6 @@ const FacultyColorTable = React.memo(
       <div className="overview-color-grid-faculty">
         <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
         <div className="table-container">
-          <Radio
-            style={{ marginRight: 'auto', marginBottom: '3.5em' }}
-            data-cy="overviewpage-filter-button"
-            toggle
-            onChange={() => setShowByProgramme(!showDataByProgramme)}
-            checked={showDataByProgramme}
-            label={t('showDataByProgramme')}
-          />
           <Input
             data-cy="overviewpage-filter"
             icon="filter"
