@@ -30,6 +30,7 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    form: 1,
   })
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {

@@ -342,7 +342,7 @@ export const allYears = oldAnswers => {
 }
 
 // eslint-disable-next-line no-unused-vars
-export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline }) => {
+export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
   // if viewing past years' answers
   if (draftYear !== year && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year)
@@ -350,6 +350,10 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
 
   // remove this when 1.11 DL passed:
   if (draftYear && tempAnswers) {
+    if (form && tempAnswers.data) {
+      return tempAnswers.data.filter(a => a.form === form)
+    }
+
     return tempAnswers.data
   }
 
