@@ -345,7 +345,7 @@ export const allYears = oldAnswers => {
 export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
   // if viewing past years' answers
   if (draftYear !== year && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter(a => a.year === year)
+    return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
   // remove this when 1.11 DL passed:
@@ -373,7 +373,7 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
 
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
   if (!draftYear && !tempAnswers && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter(a => a.year === year)
+    return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
   return []
