@@ -197,49 +197,43 @@ describe('Degree reform form tests', () => {
     cy.login(cypressUser)
     cy.visit('/')
     cy.get('[data-cy=nav-degree-reform-group]').click()
-    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click().wait(1000)
-    cy.wait(3000)
+    cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+    cy.wait(1000)
     // Check that Status Message works and is open
     cy.get(`[data-cy="saving-answers-notice"]`)
     // ----------------------------------------
     cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place]')
       .find('input[type="radio"]')
       .check('1', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-basic-radio-changing_workplace_needs_are_reflected_in_education]')
       .find('input[type="radio"]')
       .as('radio2')
       .check('2', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-basic-radio-study_content_is_up_to_date]')
       .find('input[type="radio"]')
       .as('radio3')
       .check('3', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-basic-radio-teach_practices_are_up_to_date]')
       .find('input[type="radio"]')
       .as('radio4')
       .check('4', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-basic-radio-study_support_services_are_functional]')
       .find('input[type="radio"]')
       .as('radio5')
       .check('5', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-basic-radio-teaching_support_services_are_functional]')
       .find('input[type="radio"]')
       .as('radio6')
       .check("I don't know", { force: true })
-      .wait(300)
 
     cy.reload()
 
-    cy.wait(1000)
+    cy.wait(500)
 
     cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place] :checked')
       .should('be.checked')
@@ -278,7 +272,7 @@ describe('Degree reform form tests', () => {
     cy.get(`[data-cy=saving-answers-notice]`)
     // ----------------------------------------
 
-    cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value=bachelor]').as('checkbox').wait(1000)
+    cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value=bachelor]').as('checkbox').wait(500)
 
     cy.get('@checkbox').check('bachelor', { force: true })
 
@@ -291,7 +285,7 @@ describe('Degree reform form tests', () => {
 
     cy.reload()
 
-    cy.wait(1000)
+    cy.wait(500)
     cy.get('@checkbox').should('be.checked')
 
     cy.get('[data-cy=advanced-radio-primary_role]').find('input[value=Student]').should('be.checked')
@@ -346,7 +340,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('bachelor', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-radio-container-bachelor_programme_structure_is_clear]').should('exist')
 
@@ -360,7 +353,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('masters', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-radio-container-master_programs_are_sufficiently_sized]').should('exist')
 
@@ -374,7 +366,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('international', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-radio-container-study_program_has_both_finnish_and_foreign]').should('exist')
 
@@ -388,7 +379,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('doctoral', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-radio-container-doctoral_program_has_clear_profile]').should('exist')
 
@@ -402,7 +392,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('faculty_collarobate', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-radio-container-study_programmes_have_succesful_content]').should('exist')
 
@@ -433,14 +422,13 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-3-deadline]').contains('14.')
     cy.login(cypressUser)
 
-    cy.visit('/individual').wait(1500) // Wait for the form to load, (Increses the chance of the test passing exponentially)
+    cy.visit('/individual').wait(1000) // Wait for the form to load, (Increses the chance of the test passing exponentially)
 
     cy.get('[data-cy=reform-individual-form-container')
     cy.get('[data-cy=advanced-radio-background_unit]')
       .find('input[type="radio"]')
       .as('YPACheckbox')
       .check('University Services / Teaching and Learning Service', { force: true })
-      .wait(300)
 
     cy.get('@YPACheckbox').should('be.checked')
 
@@ -448,7 +436,6 @@ describe('Degree reform form tests', () => {
       .find('input[type="radio"]')
       .as('primaryRole')
       .check('Member of teaching and research staff', { force: true })
-      .wait(300)
 
     cy.get('@primaryRole').should('be.checked')
 
@@ -472,7 +459,6 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=choose-checkbox-view_is_based_on]')
       .find('input[type="checkbox"]')
       .check('bachelor', { force: true })
-      .wait(300)
 
     cy.get('[data-cy=choose-checkbox-view_is_based_on]').find('input[value="bachelor"]').should('be.checked')
 
