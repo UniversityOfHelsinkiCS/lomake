@@ -12,7 +12,16 @@ import './OverviewPage.scss'
 import { facultyEvaluationQuestions as questions } from '../../../questionData'
 
 const FacultyColorTable = React.memo(
-  ({ setModalData, form, faculties, formType, setStatsToShow, handleFilterChange, filterValue }) => {
+  ({
+    setModalData,
+    form,
+    faculties,
+    formType,
+    setStatsToShow,
+    handleFilterChange,
+    filterValue,
+    setProgramControlsToShow,
+  }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const draftYear = useSelector(state => state.deadlines.draftYear)
@@ -114,7 +123,7 @@ const FacultyColorTable = React.memo(
               selectedAnswers={selectedAnswers}
               tableIds={tableIds}
               setModalData={setModalData}
-              setProgramControlsToShow={null}
+              setProgramControlsToShow={setProgramControlsToShow}
               key={f.code}
               formType={formType}
               form={form}

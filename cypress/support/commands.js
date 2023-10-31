@@ -78,6 +78,33 @@ Cypress.Commands.add('hasAccess', (uid, programCode, access) => {
   cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
 })
 
+Cypress.Commands.add('hasAccessEvaluation', (uid, programCode, access) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/evaluation')
+  cy.get(`[data-cy=${programCode}-manage]`).click()
+  cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
+  cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
+  cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
+})
+
+Cypress.Commands.add('hasAccessEvaluationFaculty', (uid, programCode, access) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/evaluation-faculty')
+  cy.get(`[data-cy=${programCode}-manage]`).click()
+  cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
+  cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
+  cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
+})
+
+Cypress.Commands.add('hasAccessDegreeReform', (uid, programCode, access) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/degree-reform')
+  cy.get(`[data-cy=${programCode}-manage]`).click()
+  cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
+  cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
+  cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
+})
+
 Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
   cy.login('cypressToskaUser')
   cy.visit('/admin')

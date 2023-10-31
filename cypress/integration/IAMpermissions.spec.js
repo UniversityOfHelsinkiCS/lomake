@@ -141,6 +141,42 @@ describe('IAM permission tests', () => {
     cy.hasAccess('cypressRandomRightsUser', 'KH50_006', { read: true, write: true, admin: false })
   })
 
+  it('Dekanaatti who has also writing rights to Faculty Evaluation works', () => {
+    cy.login('thairaks')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    cy.visit('/evaluation')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    cy.visit('/degree-reform')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
+    cy.visit('/evaluation-faculty')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+
+    cy.hasAccess('thairaks', 'T920103', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluation('thairaks', 'T920103', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluationFaculty('thairaks', 'H40', { read: true, write: true, admin: false })
+    cy.hasAccessDegreeReform('thairaks', 'T920103', { read: true, write: false, admin: false })
+    cy.hasSpecialGroups('thairaks', 'All programmes')
+  })
+
+  it('Jory group who has also writing rights to Faculty Evaluation works', () => {
+    cy.login('cypressFacultyKatselmusUser')
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.visit('/evaluation')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.visit('/degree-reform')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
+    cy.visit('/evaluation-faculty')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+
+    cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
+    cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
+    cy.hasAccessEvaluationFaculty('cypressFacultyKatselmusUser', 'H50', { read: true, write: true, admin: false })
+    cy.hasAccessDegreeReform('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
+
+    cy.hasSpecialGroups('cypressFacultyKatselmusUser', 'Evaluation faculty')
+  })
   /* Maybe wrong spec file for these tests? */
 
   it('Report works', () => {

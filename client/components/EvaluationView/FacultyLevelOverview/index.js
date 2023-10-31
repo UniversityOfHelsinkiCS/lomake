@@ -10,6 +10,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import FacultyColorTable from './FacultyColorTable'
 import { data } from '../../../../config/data'
+import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
 export default () => {
   const { t } = useTranslation()
@@ -17,6 +18,7 @@ export default () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   const [accordionsOpen, setAccordionsOpen] = useState({})
+  const [programControlsToShow, setProgramControlsToShow] = useState(null)
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
@@ -55,6 +57,7 @@ export default () => {
       )
     })
   }, [usersProgrammes, faculties, lang, debouncedFilter])
+
   return (
     <>
       {modalData && (
@@ -114,6 +117,16 @@ export default () => {
           </>
         </CustomModal>
       )}
+      {programControlsToShow && (
+        <CustomModal
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
+          closeModal={() => setProgramControlsToShow(null)}
+        >
+          <ProgramControlsContent programKey={programControlsToShow.code} />
+        </CustomModal>
+      )}
 
       {usersProgrammes.length > 0 ? (
         <>
@@ -124,7 +137,7 @@ export default () => {
             <FacultyColorTable
               faculties={filteredFaculties}
               setModalData={setModalData}
-              setProgramControlsToShow={null}
+              setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={null}
               isBeingFiltered={debouncedFilter !== ''}
               handleFilterChange={handleFilterChange}

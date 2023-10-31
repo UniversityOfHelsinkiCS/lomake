@@ -1,12 +1,29 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
+import { isAdmin } from '@root/config/common'
 import PieForFaculty from './PieForFaculty'
 
-const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, showDataByProgramme }) => {
+const ManageCell = ({ faculty, setProgramControlsToShow }) => (
+  <div className="table-container-manage-cell">
+    <Button data-cy={`${faculty.code}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(faculty)} />
+  </div>
+)
+
+const TableRow = ({
+  faculty,
+  selectedAnswers,
+  tableIds,
+  setModalData,
+  form,
+  showDataByProgramme,
+  setProgramControlsToShow,
+}) => {
   const lang = useSelector(state => state.language)
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const { t } = useTranslation()
   let answers = []
   if (showDataByProgramme) {
@@ -17,6 +34,12 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
     answers = facultyAnswers ? facultyAnswers.data : {}
   }
   const targetURL = `/evaluation-faculty/form/${form}/${faculty.code}`
+
+  const hasManagementAccess = program => {
+    if (isAdmin(currentUser)) return true
+    return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
+  }
+
   return (
     <React.Fragment key={faculty.code}>
       <div className="table-container-row-link">
@@ -64,7 +87,12 @@ const TableRow = ({ faculty, selectedAnswers, tableIds, setModalData, form, show
               form={form}
             />
           ))}
-      <div />
+
+      {hasManagementAccess(faculty.code) ? (
+        <ManageCell faculty={faculty} setProgramControlsToShow={setProgramControlsToShow} />
+      ) : (
+        <div />
+      )}
     </React.Fragment>
   )
 }
