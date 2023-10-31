@@ -85,7 +85,7 @@ export default () => {
       return programmes
     }
     if (currentUser.data.access || currentUser.specialGroup) {
-      if (!showAllProgrammes) {
+      if (!showAllProgrammes && Object.entries(currentUser.data.access).length > 0) {
         const usersPermissionsEntries = Object.entries(currentUser.data.access)
         let properAccess = usersPermissionsEntries.filter(e => e[1].write).map(e => e[0])
         if (properAccess.length === 0) {
