@@ -52,6 +52,7 @@ export default () => {
     if (isAdmin(currentUser.data)) {
       return programmes
     }
+
     if (currentUser.data.access || currentUser.specialGroup) {
       if (!showAllProgrammes) {
         const usersPermissionsEntries = Object.entries(currentUser.data.access)
