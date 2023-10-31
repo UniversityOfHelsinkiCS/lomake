@@ -85,10 +85,10 @@ export default () => {
       return programmes
     }
     if (currentUser.data.access || currentUser.specialGroup) {
-      if (!showAllProgrammes && Object.entries(currentUser.data.access).length > 0) {
+      if (!showAllProgrammes) {
         const usersPermissionsEntries = Object.entries(currentUser.data.access)
         let properAccess = usersPermissionsEntries.filter(e => e[1].write).map(e => e[0])
-        if (properAccess.length === 0) {
+        if (properAccess.length === 0 || properAccess[0].startsWith('H')) {
           properAccess = usersPermissionsEntries.filter(e => e[1].read).map(e => e[0])
         }
         return programmes.filter(program => properAccess.includes(program.key))
