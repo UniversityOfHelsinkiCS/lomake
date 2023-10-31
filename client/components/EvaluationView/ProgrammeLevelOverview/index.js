@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
 import { filterFromUrl } from 'Utilities/common'
+import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -48,24 +49,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data)) {
-      return programmes
-    }
-
-    if (currentUser.data.access || currentUser.specialGroup) {
-      if (!showAllProgrammes) {
-        const usersPermissionsEntries = Object.entries(currentUser.data.access)
-        let properAccess = usersPermissionsEntries.filter(e => e[1].write).map(e => e[0])
-        if (properAccess.length === 0 || properAccess[0].startsWith('H')) {
-          properAccess = usersPermissionsEntries.filter(e => e[1].read).map(e => e[0])
-        }
-        return programmes.filter(program => properAccess.includes(program.key))
-      }
-      return programmes
-    }
-    return []
-  }, [programmes, currentUser.data, showAllProgrammes])
+  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
