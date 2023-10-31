@@ -57,6 +57,7 @@ export default {
 
     yearlyAssessment: 'Annual follow-up',
     evaluation: 'Review',
+    evaluationFaculty: 'Review - Faculty',
     'degree-reform': 'Current state of education',
     'degree-reform-group': 'Current state of education - programmes',
     'degree-reform-individual': 'Current state of education - individual',
@@ -66,6 +67,7 @@ export default {
     send: 'Send',
     what: 'What',
     chooseFaculty: 'Choose faculty',
+    chooseForm: 'Choose form',
     chooseProgramme: 'Choose degree programme',
     showAllProgrammes: 'Show all programmes',
     showDataByProgramme: 'Degree programme answers by faculty',

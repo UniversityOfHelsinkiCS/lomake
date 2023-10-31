@@ -57,6 +57,7 @@ export default {
 
     yearlyAssessment: 'Årlig uppföljning',
     evaluation: 'Översyn',
+    evaluationFaculty: 'Översyn - fakultet',
     'degree-reform': 'Utbildningens nuvarande tillstånd',
     'degree-reform-group': 'Utbildningens nuvarande tillstånd - program',
     'degree-reform-individual': 'Utbildningens nuvarande tillstånd - individuell',
@@ -66,6 +67,7 @@ export default {
     send: 'Skicka',
     what: 'Vad',
     chooseFaculty: 'Välj en fakultet',
+    chooseForm: 'Välj en svaren',
     chooseProgramme: 'Välj ett studieprogram',
     showAllProgrammes: 'Visa alla studieprogram',
     showDataByProgramme: 'Examensprogram svar per fakultet',

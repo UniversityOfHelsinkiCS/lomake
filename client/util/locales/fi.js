@@ -60,6 +60,7 @@ export default {
 
     yearlyAssessment: 'Vuosiseuranta',
     evaluation: 'Katselmus',
+    evaluationFaculty: 'Tiedekunnan katselmus',
     'degree-reform': 'Koulutuksen nykytila',
     'degree-reform-group': 'Koulutuksen nykytila - ohjelmat',
     'degree-reform-individual': 'Koulutuksen nykytila - yksilö',
@@ -69,6 +70,7 @@ export default {
     send: 'Lähetä',
     what: 'Mikä',
     chooseFaculty: 'Valitse tiedekunta',
+    chooseForm: 'Valitse lomake',
     chooseProgramme: 'Valitse koulutusohjelma',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',

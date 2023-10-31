@@ -186,6 +186,7 @@
       },
       {
         "id": "ease_of_study_actions",
+        "index": "III",
         "type": "ACTIONS",
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",
@@ -421,6 +422,7 @@
       },
       {
         "id": "programme_structure_actions",
+        "index": "III",
         "type": "ACTIONS",
         "label": {
           "fi": "KEHITTÄMISKOHTEET JA TOIMENPIDE-EHDOTUKSET",

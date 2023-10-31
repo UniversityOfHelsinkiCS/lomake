@@ -6,7 +6,13 @@ import _ from 'lodash'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
-import degreeQuestionData from '../questionData/degreeReformIndividualQuestions.json'
+
+import {
+  yearlyQuestions,
+  evaluationQuestions,
+  facultyEvaluationQuestions as evaluationFacultyQuestions,
+  degreeReformIndividualQuestions as degreeQuestionData,
+} from '../questionData'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -119,11 +125,25 @@ export const filterFromUrl = () => {
   return filterVal
 }
 
-export const modifiedQuestions = (questions, lang) => {
+export const modifiedQuestions = (lang, form) => {
   // Gives a localized list of questions with
   // text_id, color_id, label, section, title and question nr.
   let attributes = []
   let titleIndex = -1
+
+  let questions = []
+
+  if (form === 1) {
+    questions = yearlyQuestions
+  } else if (form === 2) {
+    questions = degreeQuestionData
+  } else if (form === 3) {
+    questions = degreeQuestionData
+  } else if (form === 4) {
+    questions = evaluationQuestions
+  } else if (form === 5) {
+    questions = evaluationFacultyQuestions
+  }
 
   questions.forEach(question => {
     titleIndex += 1

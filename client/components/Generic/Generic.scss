@@ -121,7 +121,7 @@
   width: 300px;
 }
 
-.faculty-filter {
+.faculty-filter, .form-filter {
   &-small {
     @include filter-basics;
     width: 300px;

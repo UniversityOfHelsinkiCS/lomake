@@ -2,7 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-
+import { Link } from 'react-router-dom'
+import CsvDownload from 'Components/Generic/CsvDownload'
+import { Button, Dropdown } from 'semantic-ui-react'
 import { filterFromUrl } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import { isAdmin } from '@root/config/common'
@@ -17,6 +19,7 @@ export default () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
+  const [showCsv, setShowCsv] = useState(false)
 
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
@@ -102,6 +105,33 @@ export default () => {
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+            <label className="year-filter-label">{t('overview:selectYear')}</label>
+            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+              {t('overview:readAnswers')}
+            </Button>
+            {moreThanFiveProgrammes && (
+              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+                {t('overview:compareAnswers')}
+              </Button>
+            )}
+            <Dropdown
+              data-cy="csv-download"
+              className="button basic gray csv-download"
+              direction="left"
+              text={t('overview:csvDownload')}
+              onClick={() => setShowCsv(true)}
+            >
+              {showCsv ? (
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <CsvDownload wantedData="written" view="overview" form={form} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <CsvDownload wantedData="colors" view="overview" form={form} />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              ) : null}
+            </Dropdown>
           </div>
           <div style={{ marginTop: '1em' }}>
             <ColorTable

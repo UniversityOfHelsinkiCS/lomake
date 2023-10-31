@@ -3,11 +3,29 @@ import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { useTranslation } from 'react-i18next'
 import { programmeNameByKey as getProgrammeName } from 'Utilities/common'
-import { yearlyQuestions as questions } from '../../questionData'
+import { yearlyQuestions, facultyEvaluationQuestions, evaluationQuestions } from '../../questionData'
 import './Generic.scss'
 
-const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, programme, wantedData, view }) => {
+const handleData = ({
+  t,
+  lang,
+  programmeData,
+  usersProgrammes,
+  selectedAnswers,
+  programme,
+  wantedData,
+  view,
+  form,
+}) => {
   // Create an array of arrays, with questions at index 0, and question_ids at index 1
+  let questions = []
+  if (form === 1) {
+    questions = yearlyQuestions
+  } else if (form === 5) {
+    questions = facultyEvaluationQuestions
+  } else if (form === 4) {
+    questions = evaluationQuestions
+  }
   let csvData = questions.reduce(
     (acc, cur) => {
       const newArray = cur.parts.reduce(
@@ -77,6 +95,29 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
     return null
   }
 
+  // written answers for the "Actions"-question
+  const getActionsAnswer = (data, id) => {
+    const questionId = id
+    if (!data) return ''
+    if (data[`${questionId}-text`]) return data[`${id}_text`]
+
+    if (data[`${questionId}-1-text`]) {
+      let actions = ''
+      let i = 1
+      while (i < 6) {
+        if (data[`${questionId}-${i}-text`]) {
+          actions += `${i}) ${cleanText(data[`${questionId}-${i}-text`].title)} \n`
+          actions += `${i}) ${cleanText(data[`${questionId}-${i}-text`].actions)} \n`
+        }
+        i++
+      }
+
+      return actions
+    }
+
+    return null
+  }
+
   const getWrittenAnswers = rawData => {
     if (!Object.keys(rawData).length) return [] // May be empty initially
 
@@ -108,6 +149,11 @@ const handleData = ({ t, lang, programmeData, usersProgrammes, selectedAnswers, 
         // ordered values in a string separated by ;;
         validValues = [questionText.split(';;').join(', ')]
       }
+      if (questionId.includes('actions')) {
+        validValues = [...validValues, getActionsAnswer(rawData, questionId)]
+        return validValues.join('\n')
+      }
+
       if (questionId.startsWith('measures')) validValues = [...validValues, getMeasuresAnswer(rawData, questionId)]
       return validValues.join('\n')
     })
@@ -200,6 +246,7 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
         wantedData,
         view,
         programme,
+        form,
       }),
     [
       t,

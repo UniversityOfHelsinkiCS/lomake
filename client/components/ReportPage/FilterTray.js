@@ -6,7 +6,9 @@ import LevelFilter from 'Components/Generic/LevelFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import YearSelector from 'Components/Generic/YearSelector'
+import FormFilter from 'Components/Generic/FormFilter'
 import { useTranslation } from 'react-i18next'
+import '../Generic/Generic.scss'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
@@ -33,6 +35,7 @@ const FilterTray = ({ filter, setFilter }) => {
   return (
     <>
       <YearSelector size="small" />
+      <FormFilter />
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
           <FacultyFilter size="small" label={t('report:facultyFilter')} />

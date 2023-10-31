@@ -22,7 +22,6 @@ import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
-import { yearlyQuestions as rawQuestions } from '../../questionData'
 import './ReportPage.scss'
 
 const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang }) => {
@@ -87,6 +86,7 @@ export default () => {
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    form: filters.form,
   })
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default () => {
   // Handles all filtering
   const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
 
-  const questionsList = modifiedQuestions(rawQuestions, lang)
+  const questionsList = modifiedQuestions(lang, filters.form)
 
   const handleTabChange = (e, { activeIndex }) => setActiveTab(activeIndex)
 

@@ -37,6 +37,11 @@ export const setQuestions = questions => ({
   questions,
 })
 
+export const setForm = form => ({
+  type: 'SET_FORM',
+  form,
+})
+
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
@@ -45,6 +50,7 @@ const initialState = {
   year: '',
   multipleYears: [],
   questions: { selected: [], open: [] },
+  form: 1,
 }
 
 export default (state = initialState, action) => {
@@ -96,6 +102,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         questions: action.questions,
+      }
+    }
+    case 'SET_FORM': {
+      return {
+        ...state,
+        form: action.form,
       }
     }
     default:
