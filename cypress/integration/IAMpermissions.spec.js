@@ -142,7 +142,7 @@ describe('IAM permission tests', () => {
   })
 
   it('Dekanaatti who has also writing rights to Faculty Evaluation works', () => {
-    cy.login('thairaks')
+    cy.login('cypressDeanKatselmusUser')
     cy.visit('/')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation')
@@ -150,13 +150,13 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
 
-    cy.hasAccess('thairaks', 'T920103', { read: true, write: false, admin: false })
-    cy.hasAccessEvaluation('thairaks', 'T920103', { read: true, write: false, admin: false })
-    cy.hasAccessEvaluationFaculty('thairaks', 'H40', { read: true, write: true, admin: false })
-    cy.hasAccessDegreeReform('thairaks', 'T920103', { read: true, write: false, admin: false })
-    cy.hasSpecialGroups('thairaks', 'All programmes')
+    cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluationFaculty('cypressDeanKatselmusUser', 'H40', { read: true, write: true, admin: false })
+    cy.hasAccessDegreeReform('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
+    cy.hasSpecialGroups('cypressDeanKatselmusUser', 'All programmes')
   })
 
   it('Jory group who has also writing rights to Faculty Evaluation works', () => {
