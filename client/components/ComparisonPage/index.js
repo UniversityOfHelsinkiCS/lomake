@@ -19,7 +19,6 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { isAdmin } from '@root/config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
-import { yearlyQuestions as questions } from '../../questionData'
 import './ComparisonPage.scss'
 
 const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang }) => {
@@ -79,6 +78,7 @@ export default () => {
   const year = useSelector(({ filters }) => filters.year)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const draftYear = useSelector(state => state.deadlines.draftYear)
+  const filters = useSelector(state => state.filters)
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
@@ -87,7 +87,7 @@ export default () => {
 
   const years = allYears(oldAnswers)
 
-  const questionsList = modifiedQuestions(questions, lang)
+  const questionsList = modifiedQuestions(lang, filters.form)
 
   const answersForYears = () => {
     const all = years.map(year => {

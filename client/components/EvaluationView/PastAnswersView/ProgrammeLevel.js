@@ -10,7 +10,6 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
 import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
-import { yearlyQuestions as questions } from '../../../questionData'
 
 const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
   const mapped = allAnswers.map(data => {
@@ -73,6 +72,7 @@ const PastAnswersView = ({ programmeKey }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+  const filters = useSelector(state => state.filters)
   const [showingQuestion, setShowingQuestion] = useState(-1)
 
   const { pending, forProgramme } = useSelector(state => state.summaries)
@@ -80,7 +80,7 @@ const PastAnswersView = ({ programmeKey }) => {
   const programme = Object.values(allProgrammes).find(p => p.key === programmeKey)
 
   const readAccess = (user.access[programmeKey] && user.access[programmeKey].read) || isAdmin(user)
-  const questionsList = modifiedQuestions(questions, lang)
+  const questionsList = modifiedQuestions(lang, filters.form)
 
   useEffect(() => {
     document.title = `${t('common:evaluation')} - ${programmeKey}`

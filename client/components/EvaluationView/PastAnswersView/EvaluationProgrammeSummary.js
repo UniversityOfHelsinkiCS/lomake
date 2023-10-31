@@ -10,7 +10,6 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { getCurrentEvaluationFacultySummary } from 'Utilities/redux/summaryReducer'
 import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
-import { evaluationQuestions as questions } from '../../../questionData'
 
 const getTotalWritten = ({ question, allAnswers }) => {
   if (allAnswers.length === 0) return []
@@ -69,6 +68,7 @@ const ViewEvaluationAnswersForFaculty = ({ programmeKey }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
+  const filters = useSelector(state => state.filters)
   const [showingQuestion, setShowingQuestion] = useState(-1)
 
   const { pending, forProgramme } = useSelector(state => state.summaries)
@@ -76,7 +76,7 @@ const ViewEvaluationAnswersForFaculty = ({ programmeKey }) => {
   const facultyProgrammes = Object.values(allProgrammes).filter(p => p.primaryFaculty.code === programmeKey)
 
   const readAccess = (user.access[programmeKey] && user.access[programmeKey].read) || isAdmin(user)
-  const questionsList = modifiedQuestions(questions, lang)
+  const questionsList = modifiedQuestions(lang, filters.form)
 
   const facultyName = facultyProgrammes[0].primaryFaculty.name[lang]
   useEffect(() => {
