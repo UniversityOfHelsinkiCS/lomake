@@ -47,7 +47,6 @@ export default () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const faculties = useSelector(({ faculties }) => faculties)
   const reformAnswers = useSelector(state => state.reformAnswers)
-
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) {
@@ -114,7 +113,6 @@ export default () => {
   }
 
   const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
-
   return (
     <>
       {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}
@@ -142,7 +140,7 @@ export default () => {
 
       {statsToShow && (
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
-          <StatsContent stats={statsToShow.stats} />
+          <StatsContent statsToShow={statsToShow} />
         </CustomModal>
       )}
 

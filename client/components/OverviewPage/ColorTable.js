@@ -13,6 +13,7 @@ import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
 import { yearlyQuestions as questions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
 
+const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
 const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
 
 const getSortedProgrammes = (sortedProgrammes, selectedAnswers, form) => {
@@ -32,7 +33,12 @@ const getSortedProgrammes = (sortedProgrammes, selectedAnswers, form) => {
         let answerNumber = answers[baseKey]
 
         if (reversedPointsInDegreeReform.includes(answerKey)) {
-          answerNumber = answerValuesReversed.indexOf(answerNumber) + 1
+          if (answerNumber === 'idk') {
+            answerNumber = 'idk'
+          } else {
+            const indexOfAnswerNumber = answerValues.indexOf(answerNumber)
+            answerNumber = answerValuesReversed[indexOfAnswerNumber]
+          }
         }
 
         statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
@@ -59,7 +65,12 @@ const getIndividualAnswers = selectedAnswers => {
         let answerNumber = data[baseKey]
 
         if (reversedPointsInDegreeReform.includes(answerKey)) {
-          answerNumber = answerValuesReversed.indexOf(answerNumber) + 1
+          if (answerNumber === 'idk') {
+            answerNumber = 'idk'
+          } else {
+            const indexOfAnswerNumber = answerValues.indexOf(answerNumber)
+            answerNumber = answerValuesReversed[indexOfAnswerNumber]
+          }
         }
         statObject[baseKey][answerNumber] = statObject[baseKey][answerNumber]
           ? statObject[baseKey][answerNumber] + 1
@@ -184,7 +195,6 @@ const ColorTable = React.memo(
         return [...acc, ...questionObjects]
       }, [])
     }
-
     const overallStats = useMemo(() => {
       if (!selectedAnswers) return {}
       return getSortedProgrammes(sortedAllProgrammes, selectedAnswers, form)

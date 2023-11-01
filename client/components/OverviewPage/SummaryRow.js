@@ -1,41 +1,67 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 import { degreeReformBackgroundColor } from 'Utilities/common'
 import { degreeReformIndividualQuestions } from '../../questionData'
 
 const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers }) => {
+  const lang = useSelector(state => state.language)
   return (
     <>
       {tableIds.map(idObject => {
         let themeSum = 0
         let themeCount = 0
+        const themeQuestions = []
         degreeReformIndividualQuestions[idObject.acual_id].parts.forEach(part => {
+          if (part.id.includes('view_is_based_on')) return false
+          let byQuestionSum = 0
+          let byQuestionCount = 0
           if (stats[part.id]) {
             if (stats[part.id].first) {
               themeSum += 1
               themeCount += 1
+
+              byQuestionSum += 1
+              byQuestionCount += 1
             }
 
             if (stats[part.id].second) {
               themeSum += 2
               themeCount += 1
+
+              byQuestionSum += 2
+              byQuestionCount += 1
             }
             if (stats[part.id].third) {
               themeSum += 3
               themeCount += 1
+
+              byQuestionSum += 3
+              byQuestionCount += 1
             }
             if (stats[part.id].fourth) {
               themeSum += 4
               themeCount += 1
+
+              byQuestionSum += 4
+              byQuestionCount += 1
             }
             if (stats[part.id].fifth) {
               themeSum += 5
               themeCount += 1
+
+              byQuestionSum += 5
+              byQuestionCount += 1
             }
+            const averageByQuestion = byQuestionCount > 0 ? (byQuestionSum / byQuestionCount).toFixed(1) : ''
+            themeQuestions.push({ label: part.label[lang], average: averageByQuestion })
+
+            return true
           }
+          return false
         })
-        const average = themeCount > 0 ? (themeSum / themeCount).toFixed(1) : ''
-        const background = degreeReformBackgroundColor(average)
+        const averageByTheme = themeCount > 0 ? (themeSum / themeCount).toFixed(1) : ''
+        const background = degreeReformBackgroundColor(averageByTheme)
         return tableIds.find(tableId => tableId.acual_id === idObject.acual_id) ? (
           <div
             key={idObject.id}
@@ -47,10 +73,11 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
                 title: <span>{idObject.shortLabel}</span>, // transformIdToTitle(idObject.shortLabel, false),
                 answers: selectedAnswers,
                 questionId: idObject.id,
+                themeQuestions,
               })
             }
           >
-            {themeCount > 0 ? average : null}
+            {themeCount > 0 ? averageByTheme : null}
           </div>
         ) : (
           <div key={idObject.id} />

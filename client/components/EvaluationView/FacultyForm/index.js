@@ -92,7 +92,6 @@ const findTextAnswers = (programmes, allAnswers, question) => {
   programmes.forEach(({ key, level, name }) => {
     const text = []
     const answer = allAnswers.find(a => a.programme === key)
-    // console.log(answer?.data[`${question}_text`])
     const answerText = answer?.data[`${question}_text`]
     if (answerText) {
       text.push({

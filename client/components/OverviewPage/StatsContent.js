@@ -3,9 +3,29 @@ import { PieChart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 
-const StatsContent = ({ stats }) => {
+const ShowThemeQuestions = ({ themeQuestions }) => {
+  return (
+    <div>
+      {themeQuestions.map(question => {
+        return (
+          <div key={question.label}>
+            <p>
+              {question.label} - {question.average}
+            </p>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+const StatsContent = ({ statsToShow }) => {
   const { t } = useTranslation()
+  const stats = statsToShow?.stats
   if (!stats) {
+    if (statsToShow?.themeQuestions) {
+      return <ShowThemeQuestions themeQuestions={statsToShow.themeQuestions} />
+    }
     return <div>{t('generic:noData')}</div>
   }
 

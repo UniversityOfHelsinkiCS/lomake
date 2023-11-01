@@ -123,7 +123,7 @@ const ColorTableCell = ({
         data-cy={`${programmesKey}-${questionId}`}
         className="square"
         style={{ background: colors.background_blue }}
-        onClick={() =>
+        onClick={() => {
           setModalData({
             header: questions.reduce((acc, cur) => {
               if (acc) return acc
@@ -145,7 +145,7 @@ const ColorTableCell = ({
             content: textAnswer,
             color: colorAnswer,
           })
-        }
+        }}
       >
         {questionId === 'measures' || questionId === 'measures_faculty' ? (
           <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{getMeasuresCount()}</span>
@@ -186,7 +186,7 @@ const ColorTableCell = ({
       <div
         data-cy={`${programmesKey}-${questionId}`}
         className={`square-${colorAnswer}`}
-        onClick={() =>
+        onClick={() => {
           setModalData({
             header: questions.reduce((acc, cur) => {
               if (acc) return acc
@@ -206,7 +206,7 @@ const ColorTableCell = ({
             content: textAnswer,
             color: colorAnswer,
           })
-        }
+        }}
       >
         {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
       </div>
@@ -220,7 +220,7 @@ const ColorTableCell = ({
               key={`${programmesKey}-${questionId}-${key}`}
               data-cy={`${programmesKey}-${questionId}-${key}`}
               className={`square-${value}`}
-              onClick={() =>
+              onClick={() => {
                 setModalData({
                   header: questions.reduce((acc, cur) => {
                     if (acc) return acc
@@ -240,7 +240,7 @@ const ColorTableCell = ({
                   content: textAnswer,
                   color: value,
                 })
-              }
+              }}
             >
               {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
             </div>
