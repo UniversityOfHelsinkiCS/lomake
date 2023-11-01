@@ -62,6 +62,7 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
         })
         const averageByTheme = themeCount > 0 ? (themeSum / themeCount).toFixed(1) : ''
         const background = degreeReformBackgroundColor(averageByTheme)
+
         return tableIds.find(tableId => tableId.acual_id === idObject.acual_id) ? (
           <div
             key={idObject.id}
