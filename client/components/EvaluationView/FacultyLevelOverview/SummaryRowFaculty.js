@@ -74,11 +74,7 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, s
             {tableIds.map(idObject => {
               let levelStats = stats[`${idObject.id}_${level}`]
 
-              if (!showDataByProgramme) {
-                if (idObject.id === 'transition_phase_faculty') {
-                  levelStats = stats[idObject.id]
-                }
-              } else {
+              if (showDataByProgramme) {
                 const modifiedQuestionId = idObject.id.replace('_faculty', '')
                 if (!answersCounted[level][modifiedQuestionId]) {
                   levelStats = { green: 0, yellow: 0, red: 0 }
