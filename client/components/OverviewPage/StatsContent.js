@@ -14,11 +14,11 @@ const ShowThemeQuestions = ({ themeQuestions }) => {
   return (
     <div>
       {themeQuestions.map(({ label, average }) => {
-        const acualAverage = reverseLabels.includes(label) ? 5 - average : average
+        const acualAverage = reverseLabels.includes(label) ? 5 - Number(average) : Number(average)
         return (
           <div key={label}>
             <p>
-              <span style={{ marginRight: 10 }}>{label}</span> <strong>{acualAverage}</strong>
+              <span style={{ marginRight: 10 }}>{label}</span> <strong>{acualAverage.toFixed(1)}</strong>
             </p>
           </div>
         )
