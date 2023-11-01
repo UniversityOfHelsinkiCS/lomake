@@ -10,14 +10,15 @@ const ShowThemeQuestions = ({ themeQuestions }) => {
     return reversedInTheme.length > 0 ? acc.concat(reversedInTheme) : acc
   }, [])
   const reverseLabels = reversed.reduce((acc, label) => acc.concat([label.fi, label.en, label.se]), [])
+
   return (
     <div>
-      {themeQuestions.map(question => {
-        const avg = reverseLabels.includes(question.label) ? 5 - question.average : question.average
+      {themeQuestions.map(({ label, average }) => {
+        const acualAverage = reverseLabels.includes(label) ? 5 - average : average
         return (
-          <div key={question.label}>
+          <div key={label}>
             <p>
-              {question.label} - {avg}
+              <span style={{ marginRight: 10 }}>{label}</span> <strong>{acualAverage}</strong>
             </p>
           </div>
         )
