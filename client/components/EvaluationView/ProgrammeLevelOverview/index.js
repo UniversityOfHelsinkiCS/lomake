@@ -109,7 +109,7 @@ export default () => {
             <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
               {t('overview:readAnswers')}
             </Button>
-            {moreThanFiveProgrammes && (
+            {false && moreThanFiveProgrammes && (
               <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
                 {t('overview:compareAnswers')}
               </Button>
