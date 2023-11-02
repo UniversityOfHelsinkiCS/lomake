@@ -180,6 +180,22 @@ export const modifiedQuestions = (lang, form) => {
             options: part.options,
           },
         ]
+      } else if (part.type === 'ACTIONS') {
+        attributes = [
+          ...attributes,
+          {
+            id: part.id,
+            color: `${part.id}_light`,
+            description: part.description ? part.description[lang] : '',
+            label: _.capitalize(part.label[lang]),
+            title: question.title[lang],
+            titleIndex,
+            labelIndex: part.index,
+            no_color: part.no_color,
+            extrainfo: part.extrainfo ? part.extrainfo[lang] : '',
+            options: part.options,
+          },
+        ]
       } else if (part.type !== 'TITLE') {
         attributes = [
           ...attributes,
@@ -287,13 +303,21 @@ export const cleanText = string => {
   if (!string) return undefined
   if (string === '') return undefined
   const cleanedText = string
-    .replace(/_x000D_/g, '')
-    .replace(/&#8259;/g, '\n')
-    .replace(/ *• */g, '\n')
-    .replace(/· /g, '\n')
+    .replace(/,/g, ',')
+    .replace(/"/g, "'")
+    .replace(/\n\n/g, '\n')
+    .replace(/. +\n/g, '.\n')
+    .replace(/ {4}- /g, '')
+    .replace(/^- /g, '')
+    .replace(/\n- /g, '\n')
+    .replace(/ +- +/g, '\n')
+    .replace(/\r/g, ' ')
+    .replace(/;/g, ',')
     .replace(/\*\*/g, '')
-    .replace(/ {2}•/g, '\n')
-    .replace(/ - /g, '\n')
+    .replace(/&#8259;/g, ' ')
+    .replace(/ *• */g, '')
+    .replace(/· /g, '')
+    .replace(/_x000D_/g, '\n')
 
   return cleanedText
 }
@@ -349,6 +373,36 @@ export const getMeasuresAnswer = (data, rawId) => {
     }
 
     return measures
+  }
+
+  return null
+}
+
+export const getActionsAnswer = (data, id, t) => {
+  if (!data) return ''
+  if (data[`${id}-text`]) return data[`${id}_text`]
+
+  if (data[`${id}-1-text`]) {
+    let actions = ''
+    let i = 1
+    while (i < 6) {
+      const actionData = data[`${id}-${i}-text`]
+      if (actionData) {
+        if (actionData.title.length > 0) {
+          actions += `${t('report:improvementAreas')} \n`
+          actions += `${i}) ${cleanText(actionData.title)} \n`
+        }
+        if (actionData.actions.length > 0) {
+          actions += `${t('report:improvementActions')} \n`
+          actions += `${i}) ${cleanText(actionData.actions)} \n`
+        }
+        if (actionData.actions.length > 0 || actionData.title.length > 0) {
+          actions += '\n'
+        }
+      }
+      i++
+    }
+    return actions
   }
 
   return null

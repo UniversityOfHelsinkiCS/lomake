@@ -2,7 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
 import { useTranslation } from 'react-i18next'
-import { programmeNameByKey as getProgrammeName } from 'Utilities/common'
+import {
+  programmeNameByKey as getProgrammeName,
+  getActionsAnswer,
+  getMeasuresAnswer,
+  cleanText,
+} from 'Utilities/common'
 import { yearlyQuestions, facultyEvaluationQuestions, evaluationQuestions } from '../../questionData'
 import './Generic.scss'
 
@@ -54,70 +59,6 @@ const handleData = ({
   csvData[0].reverse()
   csvData[1].reverse()
 
-  const cleanText = string => {
-    const cleanedText = string
-      .replace(/,/g, ',')
-      .replace(/"/g, "'")
-      .replace(/\n\n/g, '\n')
-      .replace(/. +\n/g, '.\n')
-      .replace(/ {4}- /g, '')
-      .replace(/^- /g, '')
-      .replace(/\n- /g, '\n')
-      .replace(/ +- +/g, '\n')
-      .replace(/\r/g, ' ')
-      .replace(/;/g, ',')
-      .replace(/\*\*/g, '')
-      .replace(/&#8259;/g, ' ')
-      .replace(/ *• */g, '')
-      .replace(/· /g, '')
-      .replace(/_x000D_/g, '\n')
-
-    return cleanedText
-  }
-
-  // written answers for the "Measures"-question
-  const getMeasuresAnswer = (data, id) => {
-    const questionId = id
-    if (!data) return ''
-    if (data[`${questionId}_text`]) return data[`${id}_text`]
-
-    if (data[`${questionId}_1_text`]) {
-      let measures = ''
-      let i = 1
-      while (i < 6) {
-        if (data[`${questionId}_${i}_text`]) measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
-        i++
-      }
-
-      return measures
-    }
-
-    return null
-  }
-
-  // written answers for the "Actions"-question
-  const getActionsAnswer = (data, id) => {
-    const questionId = id
-    if (!data) return ''
-    if (data[`${questionId}-text`]) return data[`${id}_text`]
-
-    if (data[`${questionId}-1-text`]) {
-      let actions = ''
-      let i = 1
-      while (i < 6) {
-        if (data[`${questionId}-${i}-text`]) {
-          actions += `${i}) ${cleanText(data[`${questionId}-${i}-text`].title)} \n`
-          actions += `${i}) ${cleanText(data[`${questionId}-${i}-text`].actions)} \n`
-        }
-        i++
-      }
-
-      return actions
-    }
-
-    return null
-  }
-
   const getWrittenAnswers = rawData => {
     if (!Object.keys(rawData).length) return [] // May be empty initially
 
@@ -150,7 +91,7 @@ const handleData = ({
         validValues = [questionText.split(';;').join(', ')]
       }
       if (questionId.includes('actions')) {
-        validValues = [...validValues, getActionsAnswer(rawData, questionId)]
+        validValues = [...validValues, getActionsAnswer(rawData, questionId, t)]
         return validValues.join('\n')
       }
 

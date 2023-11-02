@@ -17,6 +17,7 @@ import {
   programmeNameByKey as programmeName,
   getSelectionAnswer,
   getOrderAnswer,
+  getActionsAnswer,
 } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
@@ -24,7 +25,7 @@ import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
 import './ReportPage.scss'
 
-const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang }) => {
+const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang, t }) => {
   const answerMap = new Map()
   const chosenKeys = chosenProgrammes.map(p => p.key)
   selectedAnswers.forEach(programme => {
@@ -41,6 +42,7 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
         if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
         else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
         else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
+        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
         else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
         answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
@@ -119,6 +121,7 @@ export default () => {
                     questionsList,
                     usersProgrammes,
                     lang,
+                    t,
                   })
                 : []
             }
@@ -144,6 +147,7 @@ export default () => {
                     questionsList,
                     usersProgrammes,
                     lang,
+                    t,
                   })
                 : []
             }

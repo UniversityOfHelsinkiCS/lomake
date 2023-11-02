@@ -295,6 +295,8 @@ export default {
     answered: 'Vastattu',
     all: 'Kaikki',
     filterBy: 'Rajaa vastauksia',
+    improvementAreas: 'Kehittämiskohde',
+    improvementActions: 'Toimenpide-ehdotus',
   },
 
   users: {
