@@ -54,7 +54,7 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
               byQuestionCount += 1
             }
             const averageByQuestion = byQuestionCount > 0 ? (byQuestionSum / byQuestionCount).toFixed(1) : ''
-            themeQuestions.push({ label: part.label[lang], average: averageByQuestion, id: part.id })
+            themeQuestions.push({ label: part.label[lang], average: averageByQuestion, reversed: part.reversed })
 
             return true
           }

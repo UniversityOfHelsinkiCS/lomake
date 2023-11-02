@@ -2,18 +2,12 @@ import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { colors } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
-import { degreeReformIndividualQuestions } from '../../questionData'
 
 const ShowThemeQuestions = ({ themeQuestions }) => {
-  const reversed = degreeReformIndividualQuestions.reduce((acc, section) => {
-    const reversedInTheme = section.parts.filter(p => p.reversed).map(p => p.id)
-    return reversedInTheme.length > 0 ? acc.concat(reversedInTheme) : acc
-  }, [])
-
   return (
     <div>
-      {themeQuestions.map(({ label, average, id }) => {
-        const acualAverage = reversed.includes(id) ? 5 - Number(average) : Number(average)
+      {themeQuestions.map(({ label, average, reversed }) => {
+        const acualAverage = reversed ? 5 - Number(average) : Number(average)
         return (
           <div key={label}>
             <p>
