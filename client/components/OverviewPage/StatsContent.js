@@ -5,16 +5,15 @@ import { useTranslation } from 'react-i18next'
 import { degreeReformIndividualQuestions } from '../../questionData'
 
 const ShowThemeQuestions = ({ themeQuestions }) => {
-  const reversed = degreeReformIndividualQuestions.reduce((acc, theme) => {
-    const reversedInTheme = theme.parts.filter(p => p.reversed).map(p => p.label)
+  const reversed = degreeReformIndividualQuestions.reduce((acc, section) => {
+    const reversedInTheme = section.parts.filter(p => p.reversed).map(p => p.id)
     return reversedInTheme.length > 0 ? acc.concat(reversedInTheme) : acc
   }, [])
-  const reverseLabels = reversed.reduce((acc, label) => acc.concat([label.fi, label.en, label.se]), [])
 
   return (
     <div>
-      {themeQuestions.map(({ label, average }) => {
-        const acualAverage = reverseLabels.includes(label) ? 5 - Number(average) : Number(average)
+      {themeQuestions.map(({ label, average, id }) => {
+        const acualAverage = reversed.includes(id) ? 5 - Number(average) : Number(average)
         return (
           <div key={label}>
             <p>
