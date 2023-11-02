@@ -233,7 +233,7 @@ describe('Degree reform form tests', () => {
 
     cy.reload()
 
-    cy.wait(500)
+    cy.wait(1000)
 
     cy.get('[data-cy=choose-basic-radio-helsinki_is_an_attractive_study_place] :checked')
       .should('be.checked')
