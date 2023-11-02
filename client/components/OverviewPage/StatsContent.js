@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next'
 const ShowThemeQuestions = ({ themeQuestions }) => {
   return (
     <div>
-      {themeQuestions.map(question => {
+      {themeQuestions.map(({ label, average, reversed }) => {
+        const acualAverage = reversed ? 5 - Number(average) : Number(average)
         return (
-          <div key={question.label}>
+          <div key={label}>
             <p>
-              {question.label} - {question.average}
+              <span style={{ marginRight: 10 }}>{label}</span> <strong>{acualAverage.toFixed(1)}</strong>
             </p>
           </div>
         )
