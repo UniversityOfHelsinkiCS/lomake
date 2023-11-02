@@ -278,6 +278,7 @@ export default {
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',
     userListOthers: 'Övriga användare med programåtkomsträttigheter, som har fått tillgång till blanketten',
     // facultySummary: '',
+    pcs: 'st',
   },
 
   report: {
@@ -288,6 +289,8 @@ export default {
     clickToCheck: 'Se skriftliga svar',
     question: 'Fråga',
     answered: 'Svarat',
+    //  improvementAreas: '',
+    //  improvementActions: '',
   },
 
   users: {

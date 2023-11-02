@@ -246,7 +246,11 @@ const ColorTable = React.memo(
               <div className="table-container" style={{ paddingTop: 20 }}>
                 {t('generic:individualAvg')}
               </div>
-              <div />
+              <div className="table-container" style={{ paddingTop: 20 }}>
+                <p>
+                  {individualAnswers?.length} {t('overview:pcs')}
+                </p>
+              </div>
               <SummaryRow
                 setStatsToShow={setStatsToShow}
                 stats={individualStats}

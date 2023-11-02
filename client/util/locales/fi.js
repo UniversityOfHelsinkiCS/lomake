@@ -283,6 +283,7 @@ export default {
     yellowModalAccordion: 'Tilanne neutraali',
     redModalAccordion: 'Tilanne huono',
     facultySummary: 'Koulutusohjelmien vastaukset',
+    pcs: 'kpl',
   },
 
   report: {

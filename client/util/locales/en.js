@@ -284,6 +284,7 @@ export default {
     yellowModalAccordion: 'Situation satisfactory',
     redModalAccordion: 'Situation poor',
     facultySummary: 'Degree programme answers',
+    pcs: 'pcs',
   },
 
   report: {
@@ -296,6 +297,8 @@ export default {
     answered: 'Answered',
     all: 'All',
     filterBy: 'Filter answers by',
+    improvementAreas: 'Development areas',
+    improvementActions: 'Suggestion for corrective actions',
   },
 
   users: {
