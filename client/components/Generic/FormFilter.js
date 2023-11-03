@@ -24,6 +24,8 @@ const FormFilter = () => {
     if (facStart !== -1) {
       const formNumber = Number(url.substring(facStart + 5))
       dispatch(setForm(formNumber))
+    } else {
+      dispatch(setForm(1))
     }
   }, [])
 
