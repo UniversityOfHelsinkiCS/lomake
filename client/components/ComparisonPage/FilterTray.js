@@ -8,6 +8,7 @@ import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
 import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
+import FormFilter from 'Components/Generic/FormFilter'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
@@ -34,6 +35,7 @@ const FilterTray = ({ filter, setFilter }) => {
   return (
     <>
       <YearSelector multiple size="small" label={t('comparison:selectYears')} />
+      <FormFilter />
       {usersProgrammes && (
         <>
           <FacultyFilter size="small" label={t('comparison:filterFaculties')} />

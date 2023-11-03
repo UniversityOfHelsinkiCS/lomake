@@ -106,11 +106,11 @@ export default () => {
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
             <label className="year-filter-label">{t('overview:selectYear')}</label>
-            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+            <Button data-cy="nav-report" as={Link} to="/report?form=4" secondary size="big">
               {t('overview:readAnswers')}
             </Button>
-            {false && moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+            {moreThanFiveProgrammes && (
+              <Button data-cy="nav-comparison" as={Link} to="/comparison?form=4" size="big">
                 {t('overview:compareAnswers')}
               </Button>
             )}

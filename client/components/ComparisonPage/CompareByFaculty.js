@@ -11,6 +11,7 @@ import { isAdmin } from '@root/config/common'
 import PieChart from './PieChart'
 import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
+import FormFilter from '../Generic/FormFilter'
 
 const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const { t } = useTranslation()
@@ -77,6 +78,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />
+            <FormFilter />
             <LevelFilter comparison />
           </Grid.Column>
         </Grid.Row>

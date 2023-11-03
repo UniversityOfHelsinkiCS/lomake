@@ -21,7 +21,7 @@ import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import './ComparisonPage.scss'
 
-const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang }) => {
+const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang, form }) => {
   const answerMap = new Map()
   const chosenKeys = usersProgrammes.map(p => p.key)
   const selectedAnswers = answersByYear({
@@ -29,7 +29,7 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
-    form: 1,
+    form,
   })
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
@@ -101,6 +101,7 @@ export default () => {
           draftYear,
           questionsList,
           lang,
+          form: filters.form,
         }),
       }
       return data
@@ -119,7 +120,16 @@ export default () => {
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={
               usersProgrammes
-                ? answersByQuestions({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang })
+                ? answersByQuestions({
+                    usersProgrammes,
+                    year,
+                    answers,
+                    oldAnswers,
+                    draftYear,
+                    questionsList,
+                    lang,
+                    form: filters.form,
+                  })
                 : []
             }
           />
