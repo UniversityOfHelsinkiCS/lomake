@@ -55,7 +55,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
         )
       }
       return (
-        <h2 key={part.id} style={divStyle}>
+        <h2 key={`${part.id}-${part.index}`} style={divStyle}>
           {part.label[lang]}
         </h2>
       )
@@ -73,7 +73,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
     return (
       <div key={`${part.id}-container`}>
-        <div key={part.id} style={divStyle}>
+        <div key={`${part.id}-${part.index}`} style={divStyle}>
           <Component
             id={part.id}
             label={part.label[lang]}
@@ -101,7 +101,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
           <Section
             title={section.title[lang]}
             number={romanize(index + 1)}
-            key={section.title[lang]}
+            key={`${section.title[lang]}`}
             programmeKey={programmeKey}
             form={form}
           >

@@ -147,6 +147,7 @@
       },
       {
         "id": "meta2",
+        "index": "meta-1",
         "type": "TITLE",
         "label": {
           "fi": "TEEMA Opiskelun sujuvuus:",
@@ -174,6 +175,7 @@
       },
       {
         "id": "meta2",
+        "index": "meta-2",
         "type": "TITLE",
         "label": {
           "fi": "TIEDEKUNNAN KIRJAUKSET",
@@ -400,6 +402,7 @@
       },
       {
         "id": "meta2",
+        "index": "meta-3",
         "type": "TITLE",
         "label": {
           "fi": "TEEMA Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelman asema:",
@@ -427,6 +430,7 @@
       },
       {
         "id": "meta2",
+        "index": "meta-4",
         "type": "TITLE",
         "label": {
           "fi": "TIEDEKUNNAN KIRJAUKSET",
