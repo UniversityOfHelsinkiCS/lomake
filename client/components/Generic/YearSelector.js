@@ -19,19 +19,6 @@ export default function YearSelector({ multiple, size, label }) {
   const multipleYears = useSelector(({ filters }) => filters.multipleYears)
   const [yearOptions, setYearOptions] = useState([])
 
-  useEffect(() => {
-    if (!previousYearsWithAnswers || !currentUser) return
-    const years = getYearsUserHasAccessToAction(currentUser)
-    const options = years.map(y => {
-      return {
-        key: y,
-        value: y,
-        text: y,
-      }
-    })
-    setYearOptions(options)
-  }, [previousYearsWithAnswers, currentUser])
-
   const handleYearChange = (_, { value }) => {
     if (!draftYear || (draftYear && draftYear.year !== value)) {
       dispatch(setViewOnly(true))
@@ -43,12 +30,36 @@ export default function YearSelector({ multiple, size, label }) {
     dispatch(setYear(value))
   }
 
+  useEffect(() => {
+    if (!previousYearsWithAnswers || !currentUser) return
+    let years = getYearsUserHasAccessToAction(currentUser)
+    const url = window.location.href
+    const facStart = url.indexOf('form=')
+    if (facStart !== -1) {
+      const formNumber = Number(url.substring(facStart + 5))
+      if (formNumber === 4 || formNumber === 5) {
+        years = [2023]
+        handleYearChange(null, { value: 2023 })
+      }
+    }
+
+    const options = years.map(y => {
+      return {
+        key: y,
+        value: y,
+        text: y,
+      }
+    })
+    setYearOptions(options)
+  }, [previousYearsWithAnswers, currentUser])
+
   const handleMultipleYearChange = (_, { value }) => {
     if (value.length > 3) dispatch(setMultipleYears(value.slice(value.length - 3), value.length))
     else dispatch(setMultipleYears(value))
   }
 
   if (!currentUser) return null
+  if (yearOptions.length === 1) return <div />
 
   return (
     <div className={`year-filter-${size}`}>
