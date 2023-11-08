@@ -112,6 +112,15 @@
   }
 }
 
+@mixin filter-no-margin-top {
+  margin: 0em 0em 0.5em 0em;
+  > label {
+    font-size: 1.05em;
+    margin-bottom: 0.5em;
+    display: block;
+  }
+}
+
 .companion-filter {
   @include filter-basics;
 }
@@ -122,6 +131,10 @@
 }
 
 .faculty-filter, .form-filter {
+  &-small-4 {
+  @include filter-no-margin-top;
+    width: 300px;
+  }
   &-small {
     @include filter-basics;
     width: 300px;
