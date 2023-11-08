@@ -76,6 +76,7 @@ const Textarea = ({
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const [hasLock, setHasLock] = useState(true)
   const [gettingLock, setGettingLock] = useState(false)
+  const [unsavedContent, setUnsavedContent] = useState(false)
 
   const editorLockError = useSelector(({ currentEditors }) => currentEditors.error)
   const [editorError, setEditorError] = useState()
@@ -136,7 +137,10 @@ const Textarea = ({
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
-    // prevent a too early dispatch
+    if (markdownStr !== dataFromRedux) {
+      setUnsavedContent(true)
+    }
+
     if (form === 3 && Object.keys(formData).length > 0) {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
     } else {
@@ -146,8 +150,8 @@ const Textarea = ({
 
   const handleSave = () => {
     setChanges(false)
-    // maybe remove the next?
     setHasLock(false)
+    setUnsavedContent(false)
     dispatch(releaseFieldLocally(fieldName))
     const value = editorState
     const content = value.getCurrentContent()
@@ -163,8 +167,6 @@ const Textarea = ({
   const { length } = editorState.getCurrentContent().getPlainText()
 
   const handleLockTimeout = () => {
-    // eslint-disable-next-line no-console
-    console.log('TIMEOUT')
     if (lockRef.current) {
       setEditorError(true)
       Sentry.captureException(`hyrrä for ${currentUser.uid} room ${room} field ${fieldName}`)
@@ -196,6 +198,9 @@ const Textarea = ({
   const refreshPage = () => {
     window.location.reload(false)
   }
+
+  const saveButtonLabel = !hasLock || unsavedContent ? t('generic:kludgeButton') : t('generic:kludgeButtonRelease')
+  const notSavedInfoText = unsavedContent ? t('generic:textUnsaved') : t('generic:textUnsavedRelease')
 
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
@@ -286,9 +291,11 @@ const Textarea = ({
               style={{ marginTop: 20, marginBottom: 10 }}
               data-cy={`save-button-${id}`}
             >
-              {t('generic:kludgeButton')}
+              {saveButtonLabel}
             </Button>
-            {changes && <span style={{ marginLeft: '1em', color: 'red' }}>{t('generic:textUnsaved')}</span>}
+            {changes && (
+              <span style={{ marginLeft: '1em', color: unsavedContent ? 'red' : '' }}>{notSavedInfoText}</span>
+            )}
           </div>
           <span style={{ color: length > MAX_LENGTH - 100 ? colors.red : undefined }}>
             {length}/{MAX_LENGTH - 100}

@@ -211,6 +211,7 @@ export default {
     individualAvg: 'Tietekunnan yksittäisten vastaajien keskiarvo',
     noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
+    kludgeButtonRelease: 'Lopeta tekstikentän muokkaus',
     degreeReformIndividualAnswers: 'Vastaukset',
     degreeReformIndividualForm: 'Lomake',
     companionFilter: 'Ota vastauksiin mukaan tiedekunnan yhteistyöohjelmat',
@@ -257,6 +258,7 @@ export default {
       committee: 'Arviointiryhmä',
     },
     textUnsaved: 'Tekstiä on tallentamatta!',
+    textUnsavedRelease: 'Vapauta kenttä muiden muokattavaksi painamalla nappia!',
   },
 
   overview: {
