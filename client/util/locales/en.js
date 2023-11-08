@@ -210,7 +210,8 @@ export default {
     universityAvg: 'Average of all programmes',
     individualAvg: 'Average of individual answers of the faculty',
     noAnswerData: 'No answeers for the question',
-    kludgeButton: 'Save the textfield',
+    kludgeButton: 'Save the text field',
+    kludgeButtonRelease: 'Stop editing the text field',
     degreeReformIndividualAnswers: 'Answers',
     degreeReformIndividualForm: 'Form',
     companionFilter: "Include faculty's partnership programmes to the answers",
@@ -258,6 +259,7 @@ export default {
       committee: 'Committee',
     },
     textUnsaved: 'Text not saved!',
+    textUnsavedRelease: 'Press the button to release the field for others to edit!',
   },
 
   overview: {

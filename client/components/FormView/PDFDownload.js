@@ -27,7 +27,8 @@ const PDFDownload = ({ componentRef, form }) => {
 
   const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
-  const userHasWriteAccess = isAdmin(user) || (user.access[programme.key] && user.access[programme.key].write)
+  const userHasWriteAccess =
+    isAdmin(user) || (programme && user.access[programme.key] && user.access[programme.key].write)
 
   let userCanEdit = false
   if (form !== 5) {

@@ -209,6 +209,8 @@ export default {
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
+    kludgeButtonRelease: 'Sluta redigera textfältet',
+    textUnsavedRelease: 'Tryck på knappen för att frigöra fältet för andra att redigera!!',
     degreeReformIndividualAnswers: 'Svara',
     degreeReformIndividualForm: 'Form',
     companionFilter: 'Inkludera i svaren fakultetens samarbetsprogram',
