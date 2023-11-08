@@ -16,8 +16,8 @@ const Downloads = ({ programme, componentRef, form }) => {
           borderRight: '1px solid #ccc',
         }}
       >
-        <CsvDownload programme={programme} view="form" wantedData="written" />
-        <CsvDownload programme={programme} view="form" wantedData="colors" />
+        <CsvDownload form={form} programme={programme} view="form" wantedData="written" />
+        <CsvDownload form={form} programme={programme} view="form" wantedData="colors" />
       </div>
       <div style={{ padding: '0.3em 0' }}>
         <PDFDownload componentRef={componentRef} form={form} />
