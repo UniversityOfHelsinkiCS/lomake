@@ -6,6 +6,15 @@ import { setViewOnly } from 'Utilities/redux/formReducer'
 import { colors, isFormLocked } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, viewingOldAnswers, userHasWriteAccess }) => {
+  if (!draftYear) return true
+  if (draftYear && draftYear.year !== year) return true
+  if (formDeadline?.form !== form) return true
+  if (viewingOldAnswers) return true
+  if (!userHasWriteAccess) return true
+  return false
+}
+
 const PDFDownload = ({ componentRef, form }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -13,16 +22,27 @@ const PDFDownload = ({ componentRef, form }) => {
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const user = useSelector(state => state.currentUser.data)
+  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const year = useSelector(state => state.filters.year)
 
   const handleViewOnlyChange = value => dispatch(setViewOnly(value))
 
   const userHasWriteAccess = isAdmin(user) || (user.access[programme.key] && user.access[programme.key].write)
-  const userCanEdit = !!(
-    userHasWriteAccess &&
-    !isFormLocked(form, programme.lockedForms) &&
-    deadline &&
-    !viewingOldAnswers
-  )
+
+  let userCanEdit = false
+  if (form !== 5) {
+    userCanEdit = !!(userHasWriteAccess && !isFormLocked(form, programme.lockedForms) && deadline && !viewingOldAnswers)
+  } else {
+    userCanEdit = !!formShouldBeViewOnly({
+      draftYear,
+      year,
+      deadline,
+      form,
+      user,
+      viewingOldAnswers,
+      userHasWriteAccess,
+    })
+  }
 
   const [isPrinting, setIsPrinting] = useState(false)
   // Store the resolve Promise being used in `onBeforeGetContent` here

@@ -122,10 +122,17 @@ const handleData = ({
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
     else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-    const name = programme.name[lang]
-    const faculty = programme.primaryFaculty.name[lang]
-    const dataRow = [name, faculty, ...answersArray]
-    csvData = [...csvData, dataRow]
+    if (form === 5) {
+      const name = programme.name[lang]
+      const faculty = programme.name[lang]
+      const dataRow = [name, faculty, ...answersArray]
+      csvData = [...csvData, dataRow]
+    } else {
+      const name = programme.name[lang]
+      const faculty = programme.primaryFaculty.name[lang]
+      const dataRow = [name, faculty, ...answersArray]
+      csvData = [...csvData, dataRow]
+    }
   } else if (view === 'overview') {
     if (!selectedAnswers) return [[], []]
     if (!usersProgrammes) return [[], []]

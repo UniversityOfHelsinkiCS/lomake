@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { Redirect, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Loader } from 'semantic-ui-react'
+import Downloads from 'Components/FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 
@@ -116,6 +117,7 @@ const FacultyFormView = ({ room, formString }) => {
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const componentRef = useRef()
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
@@ -212,7 +214,7 @@ const FacultyFormView = ({ room, formString }) => {
       ) : (
         <div className="form-container">
           <NavigationSidebar programmeKey={room} formType="evaluation" formNumber={form} />
-          <div className="the-form">
+          <div className="the-form" ref={componentRef}>
             <div className="form-instructions">
               <div className="hide-in-print-mode">
                 <SaveIndicator />
@@ -268,6 +270,7 @@ const FacultyFormView = ({ room, formString }) => {
                 </Link>
               </div>
             </div>
+            <Downloads programme={faculty} componentRef={componentRef} form={form} />
             <div style={{ paddingBottom: '6em' }}>
               <EvaluationForm
                 programmeKey={faculty.code}
