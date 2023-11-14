@@ -42,14 +42,15 @@ const findEntityLevelAnswers = (faculties, allAnswers, question) => {
     const answer = allAnswers.find(a => a.programme === code)
     levels.forEach(level => {
       const light = answer?.data ? answer.data[`${question}_${level}_light`] : null
-      const text = answer?.data ? answer.data[`${question}_${level}_text`] : null
+      const text = answer?.data ? answer.data[`${question}_text`] : null
+      const key = code
       if (light) {
-        result[level][light].push({ name, code })
+        result[level][light].push({ name, key })
       } else {
-        result[level].gray.push({ name, code })
+        result[level].gray.push({ name, key })
       }
       if (text) {
-        result[level].text[code] = text
+        result[level].text[key] = text
       }
     })
   })
