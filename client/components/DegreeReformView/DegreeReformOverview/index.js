@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
+import { Radio } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import useDebounce from 'Utilities/useDebounce'
@@ -13,6 +14,25 @@ import { getFacultyReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
+import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
+import { TextQuestionGroup } from '../../ReformAnswers'
+
+const TextualAnswers = ({ reformAnswers }) => {
+  const { data } = reformAnswers
+
+  if (!data) {
+    return
+  }
+
+  // eslint-disable-next-line consistent-return
+  return (
+    <div>
+      {questionData.slice(1).map(group => (
+        <TextQuestionGroup key={group.id} questionGroup={group} answers={data} />
+      ))}
+    </div>
+  )
+}
 
 const getFacultyFromUrl = () => {
   const url = window.location.href
@@ -38,7 +58,7 @@ export default () => {
   const [statsToShow, setStatsToShow] = useState(null)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const [faculty, setFaculty] = useState(null)
-
+  const [textualVisible, setTextualVisible] = useState(false)
   const dispatch = useDispatch()
 
   const debouncedFilter = useDebounce(filter, 200)
@@ -167,6 +187,19 @@ export default () => {
               individualAnswers={reformAnswers?.data}
             />
           </div>
+          {faculty && (
+            <div style={{ marginTop: 50 }}>
+              <h3>{t('generic:individualTxt')}</h3>
+              <Radio
+                style={{ marginRight: 'auto', marginBottom: '2em' }}
+                toggle
+                onChange={() => setTextualVisible(!textualVisible)}
+                checked={textualVisible}
+                label={t('formView:showAnswers')}
+              />
+            </div>
+          )}
+          {textualVisible && <TextualAnswers reformAnswers={reformAnswers} />}
         </>
       ) : (
         <NoPermissions t={t} />

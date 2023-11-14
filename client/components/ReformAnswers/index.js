@@ -30,7 +30,7 @@ const RadioQuestionGroup = ({ questionGroup, answers }) => {
   )
 }
 
-const TextQuestionGroup = ({ questionGroup, answers }) => {
+export const TextQuestionGroup = ({ questionGroup, answers }) => {
   const lang = useSelector(state => state.language)
   const relevantParts = questionGroup.parts.filter(q => q.type === 'TEXTAREA')
 

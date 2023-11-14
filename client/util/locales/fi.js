@@ -209,6 +209,7 @@ export default {
     facultyAvg: 'Tiedekunnan koulutusohjelmien keskiarvo',
     universityAvg: 'Yliopiston koulutusohjelmien keskiarvo',
     individualAvg: 'Tietekunnan yksittäisten vastaajien keskiarvo',
+    individualTxt: 'Tietekunnan yksittäisten vastaajien avovastaukset',
     noAnswerData: 'Kysymykseen ei vastauksia',
     kludgeButton: 'Tallenna tekstikenttä',
     kludgeButtonRelease: 'Lopeta tekstikentän muokkaus',

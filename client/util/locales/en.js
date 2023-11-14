@@ -209,6 +209,7 @@ export default {
     facultyAvg: 'Average of programmes of the faculty',
     universityAvg: 'Average of all programmes',
     individualAvg: 'Average of individual answers of the faculty',
+    individualTxt: 'Open responses from individual faculty respondents',
     noAnswerData: 'No answeers for the question',
     kludgeButton: 'Save the text field',
     kludgeButtonRelease: 'Stop editing the text field',
