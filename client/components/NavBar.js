@@ -62,7 +62,7 @@ const GoToEvaluationButton = ({ user }) => {
               data-cy="nav-evaluation-option-committee"
               as={Link}
               to="/evaluation-committee"
-              name="committee"
+              name="committees"
             >
               {t('generic:level:committee')}
             </Dropdown.Item>

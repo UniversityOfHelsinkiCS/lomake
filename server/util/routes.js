@@ -31,6 +31,7 @@ router.get('/answers/degreeReform/getAllAnswersForUser', answers.getAllIndividua
 router.put('/answers/:form/:programme/:year/updateAnswersReady', requireProgrammeWrite, answers.updateAnswerReady)
 router.put('/answers/individual/:uid/updateReady', answers.updateIndividualReady)
 router.get('/answers/foruser', answers.getAllUserHasAccessTo)
+router.get('/answers/committeeSummary/:code/:lang', answers.getCommitteeSummaryData)
 router.get('/answers/forSummary/:code/:lang', answers.getFacultySummaryData)
 router.get('/answers/forSummary/:code', answers.getProgrammeSummaryData)
 router.get('/answers/oldSummaryYearly/faculty/:code/:lang', answers.getOldFacultySummaryData)

@@ -122,7 +122,7 @@ const handleData = ({
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
     else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-    if (form === 5) {
+    if (form === 5 || form === 6) {
       const name = programme.name[lang]
       const faculty = programme.name[lang]
       const dataRow = [name, faculty, ...answersArray]

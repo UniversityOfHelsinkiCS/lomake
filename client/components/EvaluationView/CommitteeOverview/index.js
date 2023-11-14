@@ -8,7 +8,7 @@ import useDebounce from 'Utilities/useDebounce'
 
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { data } from '../../../../config/data'
+import { data, committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 
@@ -22,7 +22,6 @@ export default () => {
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
-  const faculties = useSelector(({ faculties }) => faculties.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   const form = 6
@@ -43,9 +42,8 @@ export default () => {
     return isAdmin(currentUser) ? programmes : programmes.filter(program => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser])
 
-  const filteredFaculties = useMemo(() => {
-    if (!faculties) return []
-    return faculties.filter(f => {
+  const filteredCommittes = useMemo(() => {
+    return committeeList.filter(f => {
       if (!currentUser.access[f.code] && !isAdmin(currentUser)) {
         return false
       }
@@ -56,7 +54,7 @@ export default () => {
         code.toLowerCase().includes(debouncedFilter.toLowerCase())
       )
     })
-  }, [usersProgrammes, faculties, lang, debouncedFilter])
+  }, [usersProgrammes, lang, debouncedFilter])
 
   return (
     <>
@@ -135,7 +133,7 @@ export default () => {
           </div>
           <div style={{ marginTop: '1em' }}>
             <CommitteeColorTable
-              faculties={filteredFaculties}
+              committees={filteredCommittes}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={null}

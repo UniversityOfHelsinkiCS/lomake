@@ -29,9 +29,8 @@ const PDFDownload = ({ componentRef, form }) => {
 
   const userHasWriteAccess =
     isAdmin(user) || (programme && user.access[programme.key] && user.access[programme.key].write)
-
   let userCanEdit = false
-  if (form !== 5) {
+  if (form !== 5 && form !== 6) {
     userCanEdit = !!(userHasWriteAccess && !isFormLocked(form, programme.lockedForms) && deadline && !viewingOldAnswers)
   } else {
     userCanEdit = !!formShouldBeViewOnly({

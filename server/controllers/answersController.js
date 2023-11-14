@@ -244,6 +244,34 @@ const getFacultySummaryData = async (req, res) => {
   }
 }
 
+const getCommitteeSummaryData = async (req, res) => {
+  const { code, lang } = req.params
+  if (!code) {
+    throw new Error('No faculty defined')
+  }
+  try {
+    const faculty = await db.faculty.findAll({})
+    const faculties = faculty.sort((a, b) => {
+      return a?.name[lang].localeCompare(b?.name[lang])
+    })
+
+    const codes = faculties.map(p => p.code)
+
+    const answers = await db.tempAnswer.findAll({
+      where: {
+        form: formKeys.EVALUATION_FACULTIES,
+        year: 2023,
+        programme: codes,
+      },
+    })
+
+    return res.send({ faculties, answers })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 const getProgrammeSummaryData = async (req, res) => {
   const { code } = req.params
   if (!code) {
@@ -537,4 +565,5 @@ module.exports = {
   getEvaluationSummaryDataForFaculty,
   updateAnswerReady,
   updateIndividualReady,
+  getCommitteeSummaryData,
 }

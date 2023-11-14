@@ -15,7 +15,7 @@ const CommitteeColorTable = React.memo(
   ({
     setModalData,
     form,
-    faculties,
+    committees,
     formType,
     setStatsToShow,
     handleFilterChange,
@@ -28,6 +28,7 @@ const CommitteeColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
+    const faculties = useSelector(state => state.faculties)
     const year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
@@ -44,9 +45,9 @@ const CommitteeColorTable = React.memo(
       draftYear: draftYear && draftYear.year,
     })
 
-    const sortedFaculties = sortedItems(faculties, sorter, lang)
+    const sortedCommittees = sortedItems(committees, sorter, lang)
 
-    if (reverse) sortedFaculties.reverse()
+    if (reverse) sortedCommittees.reverse()
 
     const sort = sortValue => {
       setSorter(sortValue === 'key' ? 'code' : sortValue)
@@ -56,7 +57,7 @@ const CommitteeColorTable = React.memo(
     const stats = useMemo(() => {
       if (!selectedAnswers) return {}
 
-      return sortedFaculties.reduce((statObject, { code }) => {
+      return faculties.data.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
         const answers = faculty && faculty.data ? faculty.data : {}
         Object.keys(answers).forEach(answerKey => {
@@ -70,11 +71,10 @@ const CommitteeColorTable = React.memo(
         })
         return statObject
       }, {})
-    }, [sortedFaculties, selectedAnswers, answers, draftYear])
+    }, [selectedAnswers, answers, draftYear])
     if (answers.pending || !answers.data || !oldAnswers.data) {
       return <Loader active inline="centered" />
     }
-
     const tableIds = questions.reduce((acc, cur) => {
       const questionObjects = cur.parts.reduce((acc, cur) => {
         if (
@@ -116,7 +116,7 @@ const CommitteeColorTable = React.memo(
           showDataByProgramme={showDataByProgramme}
         />
         <div className="sticky-header" />
-        {sortedFaculties.map(f => {
+        {sortedCommittees.map(f => {
           return (
             <TableRow
               faculty={f}

@@ -3,7 +3,12 @@ import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
 const Section = ({ title, number, children, programmeKey, form }) => {
-  const id = form === 5 ? '-faculty' : ''
+  let id = ''
+  if (form === 5) {
+    id = '-faculty'
+  } else if (form === 6) {
+    id = '-committee'
+  }
   const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`
 
   return (

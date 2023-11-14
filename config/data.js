@@ -32,17 +32,110 @@ const forms = [
     name: 'Katselmus - tiedekunnat',
     type: 'evaluation',
   },
-  // Waiting to be configured
-  // {
-  //   key: 6,
-  //   name: 'Katselmus - toimikunta',
-  //   type: 'evaluation',
-  // },
-  // {
-  //   key: 7,
-  //   name: 'Katselmus - arviointiryhmä',
-  //   type: 'evaluation',
-  // },
+  {
+    key: 6,
+    name: 'Katselmus - arviointiryhmä',
+    type: 'evaluation',
+  },
+]
+
+const facultyList = [
+  {
+    code: 'H10',
+    name: {
+      fi: 'Teologinen tiedekunta',
+      en: 'Faculty of Theology',
+      se: 'Teologiska fakulteten',
+    },
+  },
+  {
+    code: 'H20',
+    name: {
+      fi: 'Oikeustieteellinen tiedekunta',
+      en: 'Faculty of Law',
+      se: 'Juridiska fakulteten',
+    },
+  },
+  {
+    code: 'H30',
+    name: {
+      fi: 'Lääketieteellinen tiedekunta',
+      en: 'Faculty of Medicine',
+      se: 'Medicinska fakulteten',
+    },
+  },
+  {
+    code: 'H40',
+    name: {
+      fi: 'Humanistinen tiedekunta',
+      en: 'Faculty of Arts',
+      se: 'Humanistiska fakulteten',
+    },
+  },
+  {
+    code: 'H50',
+    name: {
+      fi: 'Matemaattis-luonnontieteellinen tiedekunta',
+      en: 'Faculty of Science',
+      se: 'Matematisk-naturvetenskapliga fakulteten',
+    },
+  },
+  {
+    code: 'H55',
+    name: {
+      fi: 'Farmasian tiedekunta',
+      en: 'Faculty of Pharmacy',
+      se: 'Farmaceutiska fakulteten',
+    },
+  },
+  {
+    code: 'H57',
+    name: {
+      fi: 'Bio- ja ympäristötieteellinen tiedekunta',
+      en: 'Faculty of Biological and Environmental Sciences',
+      se: 'Biologiska och miljövetenskapliga fakulteten',
+    },
+  },
+  {
+    code: 'H60',
+    name: {
+      fi: 'Kasvatustieteellinen tiedekunta',
+      en: 'Faculty of Educational Sciences',
+      se: 'Pedagogiska fakulteten',
+    },
+  },
+  {
+    code: 'H70',
+    name: {
+      fi: 'Valtiotieteellinen tiedekunta',
+      en: 'Faculty of Social Sciences',
+      se: 'Statsvetenskapliga fakulteten',
+    },
+  },
+  {
+    code: 'H74',
+    name: {
+      fi: 'Humanistinen tiedekunta, ruotsinkielinen',
+      en: 'Faculty of Arts, Swedish',
+      se: 'Humanistiska fakulteten, svenska',
+    },
+  },
+  {
+    code: 'H80',
+    name: {
+      fi: 'Maatalous-metsätieteellinen tiedekunta',
+      en: 'Faculty of Agriculture and Forestry',
+      se: 'Agrikultur-forstvetenskapliga fakulteten',
+    },
+  },
+  {
+    code: 'H90',
+    name: {
+      fi: 'Eläinlääketieteellinen tiedekunta',
+      en: 'Faculty of Veterinary Medicine',
+      se: 'Veterinärmedicinska fakulteten',
+    },
+  },
 ]
 
 const facultyMap = {
@@ -1692,4 +1785,5 @@ module.exports = {
   data,
   facultyMap,
   committeeList,
+  facultyList,
 }
