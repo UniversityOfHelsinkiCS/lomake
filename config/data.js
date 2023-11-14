@@ -61,6 +61,33 @@ const facultyMap = {
   testauksellinen: 'HTEST',
 }
 
+const committeeList = [
+  {
+    code: 'ONE',
+    name: {
+      fi: 'Opintoasiainneuvosto',
+      en: 'Academic Affairs Council',
+      se: 'Utbildningsrådet',
+    },
+  },
+  {
+    code: 'TINE',
+    name: {
+      fi: 'Tieteellinen neuvosto',
+      en: 'Scientific Council',
+      se: 'Vetenskapliga rådet',
+    },
+  },
+  {
+    code: 'TUTK',
+    name: {
+      fi: 'Tutkijakoulun johtokunta',
+      en: 'Doctoral School Council',
+      se: 'Doktorandskolans styrelse',
+    },
+  },
+]
+
 const data = [
   {
     code: 'H10',
@@ -1664,4 +1691,5 @@ module.exports = {
   formKeys,
   data,
   facultyMap,
+  committeeList,
 }

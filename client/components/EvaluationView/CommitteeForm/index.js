@@ -15,7 +15,7 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
-import './EvaluationFacultyForm.scss'
+import './EvaluationCommitteeForm.scss'
 import { colors, isAdmin } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'

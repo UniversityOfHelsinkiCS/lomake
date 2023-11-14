@@ -17,6 +17,7 @@ import DegreeReformOverview from 'Components/DegreeReformView/DegreeReformOvervi
 import PastAnswersView from 'Components/EvaluationView/PastAnswersView/ProgrammeLevel'
 import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/FacultyLevel'
 import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
+import CommitteeLevelOverview from 'Components/EvaluationView/CommitteeOverview'
 
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 import ReformAnswers from './ReformAnswers/index'
@@ -35,6 +36,7 @@ export default () => (
 
         <Route exact path="/evaluation" component={ProgrammeLevelOverview} />
         <Route exact path="/evaluation-faculty" component={FacultyLevelOverview} />
+        <Route exact path="/evaluation-committee" component={CommitteeLevelOverview} />
         <Route exact path="/degree-reform" component={DegreeReformOverview} />
         <Route
           exact
@@ -50,6 +52,11 @@ export default () => (
         <Route
           exact
           path="/evaluation-faculty/form/:form/:room"
+          render={props => <FacultyFormView room={props.match.params.room} formString={props.match.params.form} />}
+        />
+        <Route
+          exact
+          path="/evaluation-committee/form/:form/:room"
           render={props => <FacultyFormView room={props.match.params.room} formString={props.match.params.form} />}
         />
         <Route
