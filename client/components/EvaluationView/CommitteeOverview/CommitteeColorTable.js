@@ -96,7 +96,7 @@ const CommitteeColorTable = React.memo(
     }, [])
     return (
       <div className="overview-color-grid-committee">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} form={form} />
+        <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} showStudyLevel />
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"

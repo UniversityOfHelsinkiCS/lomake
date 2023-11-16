@@ -96,7 +96,7 @@ const FacultyColorTable = React.memo(
     }, [])
     return (
       <div className="overview-color-grid-faculty">
-        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} form={form} />
+        <TableHeader sort={sort} tableIds={tableIds} title={t('faculty')} showStudyLevel />
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
