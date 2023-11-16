@@ -19,7 +19,7 @@ const TableHeader = ({ tableIds, sort, title, form }) => {
           <Icon name="sort" />
         </div>
       </div>
-      {form === 5 ? (
+      {form === 5 || form === 6 ? (
         <div className="sticky-header">
           <p style={{ fontWeight: 'bold' }}>Levels</p>{' '}
         </div>

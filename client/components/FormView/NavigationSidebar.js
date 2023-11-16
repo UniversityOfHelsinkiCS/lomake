@@ -60,7 +60,6 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   const form = useSelector(({ form }) => form || {})
   const location = useLocation()
   const { t } = useTranslation()
-
   let questionsToShow = questions
   let linkBase = '/form/'
   let isDegreeForm = false
@@ -70,6 +69,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   } else if (formNumber === 5) {
     questionsToShow = facultyEvaluationQuestions
     linkBase = `/evaluation-faculty/form/${formNumber}/`
+  } else if (formNumber === 6) {
+    linkBase = `/evaluation-committee/form/${formNumber}/`
   } else if (formType === 'degree-reform') {
     questionsToShow = questionData
     linkBase = '/degree-reform/form/'

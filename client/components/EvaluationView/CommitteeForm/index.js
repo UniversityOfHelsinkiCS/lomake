@@ -8,19 +8,20 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { getFacultyProgrammeAnswersAction } from 'Utilities/redux/summaryReducer'
+import { getCommitteeFacultyAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
-import './EvaluationFacultyForm.scss'
+import './EvaluationCommitteeForm.scss'
 import { colors, isAdmin } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
+import { committeeList } from '../../../../config/data'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   if (!draftYear) return true
@@ -29,25 +30,29 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   return false
 }
 
-const findEntityLevelAnswers = (programmes, allAnswers, question) => {
+const findEntityLevelAnswers = (faculties, allAnswers, question) => {
   const result = {
     bachelor: { green: [], yellow: [], red: [], gray: [], text: [] },
     master: { green: [], yellow: [], red: [], gray: [], text: [] },
     doctoral: { green: [], yellow: [], red: [], gray: [], text: [] },
   }
-  programmes.forEach(({ key, level, name }) => {
-    const answer = allAnswers.find(a => a.programme === key)
-    const light = answer?.data ? answer.data[`${question}_light`] : null
-    const text = answer?.data ? answer.data[`${question}_text`] : null
+  const levels = ['bachelor', 'master', 'doctoral']
 
-    if (light) {
-      result[level][light].push({ name, key })
-    } else {
-      result[level].gray.push({ name, key })
-    }
-    if (text) {
-      result[level].text[key] = text
-    }
+  faculties.forEach(({ code, name }) => {
+    const answer = allAnswers.find(a => a.programme === code)
+    levels.forEach(level => {
+      const light = answer?.data ? answer.data[`${question}_${level}_light`] : null
+      const text = answer?.data ? answer.data[`${question}_text`] : null
+      const key = code
+      if (light) {
+        result[level][light].push({ name, key })
+      } else {
+        result[level].gray.push({ name, key })
+      }
+      if (text) {
+        result[level].text[key] = text
+      }
+    })
   })
   result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
 
@@ -112,7 +117,7 @@ const findTextAnswers = (programmes, allAnswers, question) => {
   return result
 }
 
-const FacultyFormView = ({ room, formString }) => {
+const CommitteeFormView = ({ room, formString }) => {
   const history = useHistory()
   const form = parseInt(formString, 10) || null
   const { t } = useTranslation()
@@ -125,8 +130,7 @@ const FacultyFormView = ({ room, formString }) => {
   const currentRoom = useSelector(state => state.room)
   const year = 2023 // the next time form is filled is in 2026
 
-  const faculties = useSelector(state => state.faculties.data)
-  const faculty = faculties ? faculties.find(f => f.code === room) : null
+  const committee = committeeList.find(c => c.code === room) || null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
@@ -138,12 +142,12 @@ const FacultyFormView = ({ room, formString }) => {
   }, [lang, room])
 
   useEffect(() => {
-    if (!faculty || !form) return
-    if (!user.access[faculty.code] && !isAdmin(user)) {
+    if (!committee || !form) return
+    if (!user.access[committee] && !isAdmin(user)) {
       return
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
-    dispatch(getFacultyProgrammeAnswersAction(room, lang))
+    dispatch(getCommitteeFacultyAnswersAction(room, lang))
     if (
       formShouldBeViewOnly({
         draftYear,
@@ -160,7 +164,7 @@ const FacultyFormView = ({ room, formString }) => {
       dispatch(setViewOnly(false))
     }
   }, [
-    faculty,
+    committee,
     singleFacultyPending,
     // writeAccess,
     // viewingOldAnswers,
@@ -171,39 +175,37 @@ const FacultyFormView = ({ room, formString }) => {
     user,
   ])
 
-  const facultyProgrammeAnswers = useMemo(() => {
+  const facultyAnswers = useMemo(() => {
     if (
-      !facultyProgrammeData?.forFaculty ||
-      facultyProgrammeData?.forFaculty?.answers.length === 0 ||
+      !facultyProgrammeData?.forCommittee ||
+      facultyProgrammeData?.forCommittee?.answers.length === 0 ||
       facultyProgrammeData.pending
     ) {
       return {}
     }
-    const { programmes, answers } = facultyProgrammeData?.forFaculty || {}
+    const { faculties, answers } = facultyProgrammeData?.forCommittee || {}
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion && part.type === 'ACTIONS') {
-          result[part.id] = findActionAnswers(programmes, answers, part.relatedEvaluationQuestion)
+          result[part.id] = findActionAnswers(faculties, answers, part.id)
           return
         }
         if (part.relatedEvaluationQuestion && part.type === 'ENTITY_LEVELS') {
-          result[part.id] = findEntityLevelAnswers(programmes, answers, part.relatedEvaluationQuestion)
+          result[part.id] = findEntityLevelAnswers(faculties, answers, part.id)
           return
         }
         if (part.relatedEvaluationQuestion && part.type === 'TEXTAREA') {
-          result[part.id] = findTextAnswers(programmes, answers, part.relatedEvaluationQuestion)
+          result[part.id] = findTextAnswers(faculties, answers, part.id)
         }
       })
     })
     return result
   }, [room, user, facultyProgrammeData.pending])
-
   if (!room || !form) return <Redirect to="/" />
+  if (!committee) return 'Error: Invalid url.'
 
-  if (!faculty) return 'Error: Invalid url.'
-
-  if (!user.access[faculty.code] && !isAdmin(user)) {
+  if (!user.access[committee.code] && !isAdmin(user)) {
     return <NoPermissions t={t} />
   }
 
@@ -219,11 +221,11 @@ const FacultyFormView = ({ room, formString }) => {
               <div className="hide-in-print-mode">
                 <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
-                  <Button onClick={() => history.push('/evaluation-faculty')} icon="arrow left" />
+                  <Button onClick={() => history.push('/evaluation-committee')} icon="arrow left" />
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>
-              <h1 style={{ color: colors.blue }}>{faculty?.name[lang]}</h1>
+              <h1 style={{ color: colors.blue }}>{committee?.name[lang]}</h1>
               <h3 style={{ marginTop: '0' }} data-cy="formview-title">
                 {t('evaluation')} 2023
               </h3>
@@ -270,13 +272,13 @@ const FacultyFormView = ({ room, formString }) => {
                 </Link>
               </div>
             </div>
-            <Downloads programme={faculty} componentRef={componentRef} form={form} />
+            <Downloads programme={committee} componentRef={componentRef} form={form} />
             <div style={{ paddingBottom: '6em' }}>
               <EvaluationForm
-                programmeKey={faculty.code}
+                programmeKey={committee.code}
                 questions={questions}
                 form={form}
-                summaryData={facultyProgrammeAnswers}
+                summaryData={facultyAnswers}
               />
             </div>
           </div>
@@ -286,4 +288,4 @@ const FacultyFormView = ({ room, formString }) => {
   )
 }
 
-export default FacultyFormView
+export default CommitteeFormView

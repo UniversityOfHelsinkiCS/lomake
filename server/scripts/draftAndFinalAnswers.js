@@ -2,7 +2,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { formKeys } = require('@root/config/data')
+const { formKeys, committeeList } = require('@root/config/data')
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -111,6 +111,8 @@ const createDraftAnswers = async (newYear, form) => {
 
     if (form === 5) {
       toOpen = await db.faculty.findAll({})
+    } else if (form === 6) {
+      toOpen = committeeList
     } else {
       toOpen = await db.studyprogramme.findAll({})
     }

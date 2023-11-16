@@ -1,5 +1,11 @@
 import callBuilder from '../apiConnection'
 
+export const getCommitteeFacultyAnswersAction = (committee, lang) => {
+  const route = `/answers/committeeSummary/${committee}/${lang}`
+  const prefix = 'GET_COMMITTEE_FACULTY_ANSWERS'
+  return callBuilder(route, prefix)
+}
+
 export const getFacultyProgrammeAnswersAction = (faculty, lang) => {
   const route = `/answers/forSummary/${faculty}/${lang}`
   const prefix = 'GET_FACULTY_PROG_ANSWERS'
@@ -26,6 +32,26 @@ export const getCurrentEvaluationFacultySummary = (faculty, lang) => {
 
 export default (state = { forFaculty: null, forProgramme: null }, action) => {
   switch (action.type) {
+    case 'GET_COMMITTEE_FACULTY_ANSWERS_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'GET_COMMITTEE_FACULTY_ANSWERS_SUCCESS':
+      return {
+        ...state,
+        forCommittee: { ...action.response },
+        pending: false,
+        error: false,
+      }
+    case 'GET_COMMITTEE_FACULTY_ANSWERS_FAILURE':
+      return {
+        ...state,
+        forCommittee: null,
+        pending: false,
+        error: true,
+      }
     case 'GET_FACULTY_PROG_ANSWERS_ATTEMPT':
       return {
         ...state,

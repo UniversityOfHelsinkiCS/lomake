@@ -30,7 +30,7 @@ const startDeadlineWatcher = async () => {
       await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
 
-        if (form === 3 || form === 5) {
+        if (form === 3 || form === 5 || form === 6) {
           // handle individual users and faculty forms
           const allTempAnswers = await db.tempAnswer.findAll({ where: { form, year: draftYear } })
 

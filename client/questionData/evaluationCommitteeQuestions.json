@@ -1,0 +1,582 @@
+[
+  {
+    "title": {
+      "fi": "OPISKELUN SUJUVUUS",
+      "se": "SMIDIGA STUDIER",
+      "en": "SEAMLESS STUDIES"
+    },
+    "parts": [
+      {
+        "id": "student_admittance_faculty",
+        "index": 1,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Opiskelijavalinta",
+          "se": "Studentantagning",
+          "en": "Student admissions"
+        },
+        "label": {
+          "fi": "OPISKELIJAVALINTA",
+          "se": "STUDENTANTAGNING ",
+          "en": "STUDENT ADMISSIONS"
+        },
+        "description": {
+          "fi": "Opiskelijavalintojen toimivuus",
+          "se": "Studentantagningens ändamålsenlighet",
+          "en": "Functioning of the student admissions procedure"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "student_admittance"
+      },
+      {
+        "id": "ops_practicality_faculty",
+        "index": 2,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Opetussuunnitelmat",
+          "se": "Undervisningsplan",
+          "en": "Curriculum"
+        },
+        "label": {
+          "fi": "OPETUSSUUNNITELMAT",
+          "se": "UNDERVISNINGSPLAN",
+          "en": "CURRICULUM"
+        },
+        "description": {
+          "fi": "Tiedekunnan koulutusohjelmien kokonaisuuden toimivuus",
+          "se": "Hur helheten av fakultetens utbildningsprogram fungerar",
+          "en": "Functioning of the curriculum"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ops_practicality"
+      },
+      {
+        "id": "study_ease_faculty",
+        "index": 3,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Opintojen ohjaus",
+          "se": "Studiehandledning",
+          "en": "Student guidance and supervision"
+        },
+        "label": {
+          "fi": "OPINTOJEN OHJAUS",
+          "se": "STUDIEHANDLEDNING ",
+          "en": "STUDENT GUIDANCE AND SUPERVISION"
+        },
+        "description": {
+          "fi": "Opintojen ohjauksen toimivuus",
+          "se": "Hur studiehandledningen fungerar i fakultetens utbildningsprogram",
+          "en": "Functioning of student guidance and supervision"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "studyguidance"
+      },
+      {
+        "id": "transition_phase_faculty",
+        "index": 4,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Nivelvaihe",
+          "se": "Övergångsstadium",
+          "en": "Transition period"
+        },
+        "label": {
+          "fi": "NIVELVAIHE",
+          "se": "ÖVERGÅNGSSTADIUM",
+          "en": "TRANSITION PERIOD"
+        },
+        "description": {
+          "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus",
+          "se": "Övergången mellan kandidat- och magisterprogram samt optionernas function",
+          "en": "Functioning of the transition between bachelor’s and master’s programmes and master’s programme options"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "transition_phase"
+      },
+      {
+        "id": "degree_flow_faculty",
+        "index": 5,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Läpivirtaus",
+          "se": "Genomströmning",
+          "en": "Progression"
+        },
+        "label": {
+          "fi": "LÄPIVIRTAUS",
+          "se": "GENOMSTRÖMNING",
+          "en": "PROGRESSION"
+        },
+        "description": {
+          "fi": "Tutkintojen suorittaminen ja läpivirtaus tiedekunnan koulutusohjelmissa",
+          "se": "Avläggande av examina och genomströmning inom fakultetens utbildningsprogram",
+          "en": "Completion of degrees and rate of progression in the degree programmes of the faculty"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "degree_flow"
+      },
+      {
+        "id": "meta2",
+        "index": "meta-1",
+        "type": "TITLE",
+        "label": {
+          "fi": "TEEMA Opiskelun sujuvuus:",
+          "en": "THEME Seamless studies:",
+          "se": "TEMA Smidiga studier: "
+        }
+      },
+      {
+        "id": "faculty_ease_of_study_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+      },
+      {
+        "id": "meta2",
+        "index": "meta-2",
+        "type": "TITLE",
+        "label": {
+          "fi": "TIEDEKUNNAN KIRJAUKSET",
+          "se": "FAKULTETENS ANTECKNINGAR",
+          "en": "COMMENTS BY THE FACULTY"
+        }
+      },
+      {
+        "id": "faculty_ease_of_study_programme_strengths",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat opiskelun sujuvuus -teeman osalta tiedekunnan vahvuudet?",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+      },
+      {
+        "id": "faculty_ease_of_study_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-5 tiedekunnan kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "ease_of_study_actions"
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
+      "se": "UTBILDNINGENS HELHETSSTRUKTUR STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
+      "en": "OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES"
+    },
+    "parts": [
+      {
+        "id": "communication_faculty",
+        "index": 6,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Johtaminen ja viestintä",
+          "se": "Ledning och kommunikation",
+          "en": "MANAGEMENT, LEADERSHIP AND COMMUNICATION"
+        },
+        "label": {
+          "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
+          "se": "LEDNING OCH KOMMUNIKATION",
+          "en": "FUNCTIONING OF MANAGEMENT, LEADERSHIP AND COMMUNICATION"
+        },
+        "description": {
+          "fi": "Johtamisen ja viestinnän toimivuus tiedekunnan koulutuksessa",
+          "se": "Ledarskap och kommunikation i fakultetens utbildning",
+          "en": "Functioning of management, leadership and communication in the degree programmes of the faculty"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "communication"
+      },
+      {
+        "id": "teaching_resources_management_faculty",
+        "index": 7,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Opetusresurssit",
+          "se": "Undervisningsresurser",
+          "en": "Teaching resources"
+        },
+        "label": {
+          "fi": "OPETUSRESURSSIT",
+          "se": "UNDERVISNINGSRESURSER",
+          "en": "TEACHING RESOURCES"
+        },
+        "description": {
+          "fi": "Opetusresurssien suunnittelu ja hallinta tiedekunnan koulutuksessa",
+          "se": "Planering och administration av undervisningsresurser i fakultetens utbildning",
+          "en": "Planning and management of teaching resources in the degree programmes of the faculty"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "teaching_resources_management"
+      },
+      {
+        "id": "recruiting_influence_faculty",
+        "index": 8,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Rekrytointi",
+          "se": "Inflytande över rekrytering",
+          "en": "Opportunities to influence recruitment"
+        },
+        "label": {
+          "fi": "REKRYTOINTIIN VAIKUTTAMINEN",
+          "se": "INFLYTANDE ÖVER REKRYTERING",
+          "en": "OPPORTUNITIES TO INFLUENCE RECRUITMENT"
+        },
+        "description": {
+          "fi": "Tiedekunnan näkemys ohjelmien mahdollisuuksista vaikuttaa uuden henkilökunnan rekrytointiin",
+          "se": "Fakultetens syn på programmens möjligheter att påverka rekryteringen av nya anställda",
+          "en": "Faculty´s view of the programmes´ opportunities to influence the recruitment of new staff"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "recruiting_influence"
+      },
+      {
+        "id": "environmental_resources_faculty",
+        "index": 9,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Laite- ja tilaresurssit",
+          "se": "Utrustnings- och lokalresurser",
+          "en": "Equipment and facility resources"
+        },
+        "label": {
+          "fi": "LAITE- JA TILARESURSSIT",
+          "se": "UTRUSTNINGS- OCH LOKALRESURSER",
+          "en": "EQUIPMENT AND FACILITY RESOURCES"
+        },
+        "description": {
+          "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit tiedekunnassa",
+          "se": "Resurser för lokaler, utrustning och lärmiljöer vid fakulteten",
+          "en": "Resources related to facilities, equipment and learning environments in the degree programmes of the faculty"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "environmental_resources"
+      },
+      {
+        "id": "shared_programmes_faculty",
+        "index": 10,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Yhteiset ohjelmat",
+          "se": "Fakultetsöverskridande program",
+          "en": "Jointprogrammes at the faculty"
+        },
+        "label": {
+          "fi": "TIEDEKUNNAN YHTEISET OHJELMAT",
+          "se": "FAKULTETSÖVERSKRIDANDE PROGRAM",
+          "en": "JOINT PROGRAMMES AT THE FACULTY"
+        },
+        "description": {
+          "fi": "Usean tiedekunnan yhteisten ohjelmien toimivuus",
+          "se": "Hur fungerar fakulteternas gemensamma program ",
+          "en": "Functioning of joint programmes between several faculties"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "shared_programmes"
+      },
+      {
+        "id": "programme_status_faculty",
+        "index": 11,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Ohjelman asema",
+          "se": "Utbildningsprogrammets ställning",
+          "en": "Status of the degree programme"
+        },
+        "label": {
+          "fi": "KOULUTUSOHJELMAN ASEMA",
+          "se": "UTBILDNINGSPROGRAMMENS STÄLLNING",
+          "en": "STATUS OF THE DEGREE PROGRAMMES"
+        },
+        "description": {
+          "fi": "Tiedekunnan näkemys koulutusohjelmien asemasta yliopiston toiminta- ja johtamisrakenteessa",
+          "se": "Fakultetens syn på utbildningsprogrammens ställning i universitetets verksamhets- och ledningsstruktur",
+          "en": "Faculty´s view on the status of the degree programmes in the University´s operations and management structure"
+        },
+        "required": true,
+        "level_breakdown": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_status"
+      },
+      {
+        "id": "meta2",
+        "index": "meta-3",
+        "type": "TITLE",
+        "label": {
+          "fi": "TEEMA Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelman asema:",
+          "en": "THEME Overall structure of education, leadership and management, resources, and the status of degree programmes:",
+          "se": "TEMA Utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammets ställning:"
+        }
+      },
+      {
+        "id": "faculty_programme_structure_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+      },
+      {
+        "id": "meta2",
+        "index": "meta-4",
+        "type": "TITLE",
+        "label": {
+          "fi": "TIEDEKUNNAN KIRJAUKSET",
+          "se": "FAKULTETENS ANTECKNINGAR",
+          "en": "COMMENTS BY THE FACULTY"
+        }
+      },
+      {
+        "id": "faculty_programme_structure_programme_strengths",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat tiedekunnan vahvuudet Koulutuksen kokonaisrakenne, johtaminen, resurssit ja koulutusohjelmien asema -teemassa?",
+          "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
+          "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+      },
+      {
+        "id": "faculty_programme_structure_actions",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-5 tiedekunnan kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "programme_structure_actions"
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "KOKONAISARVIO",
+      "se": "HELHETSBEDÖMNING",
+      "en": "OVERALL ASSESSMENT"
+    },
+    "parts": [
+      {
+        "id": "faculty_studyprogramme_status",
+        "index": 12,
+        "kludge": true,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "KOULUTUKSEN KOKONAISTOIMIVUUS",
+          "se": "",
+          "en": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE "
+        },
+        "label": {
+          "fi": "TIEDEKUNNAN KOULUTUKSEN KOKONAISTOIMIVUUS",
+          "se": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE FACULTY"
+        },
+        "description": {
+          "fi": "Antakaa kokonaisarvio tiedekunnan koulutuksen toimivuudesta.",
+          "se": "Ge en helhetsbedömning av hur fakultetens utbildning fungerar.",
+          "en": "Provide an overall assessment of the effectiveness of the faculty´s degree programme education."
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "studyprogramme_status"
+      },
+      {
+        "id": "faculty_studyprogramme_status_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "faculty_where_are_we_in_five_years",
+        "index": 13,
+        "kludge": true,
+        "type": "ENTITY_LEVELS",
+        "shortLabel": {
+          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
+          "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
+          "en": "Evaluate the overall state of the faculty´s education in five years."
+        },
+        "label": {
+          "fi": "MISSÄ TIEDEKUNNAN KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
+          "se": "VAR FAKULTETS UTBILDNING BEFINNER SIG OM FEM ÅR",
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMME EDUCATION IN FIVE YEARS "
+        },
+        "description": {
+          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
+          "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
+          "en": "Evaluate the overall state of the faculty´s education in five years."
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "where_are_we_in_five_years"
+      },
+      {
+        "id": "faculty_where_are_we_in_five_years_opinion_differences",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  }
+]

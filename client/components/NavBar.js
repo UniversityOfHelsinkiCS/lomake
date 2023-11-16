@@ -57,6 +57,16 @@ const GoToEvaluationButton = ({ user }) => {
               {t('generic:level:faculties')}
             </Dropdown.Item>
           ) : null}
+          {isAdmin(user) ? (
+            <Dropdown.Item
+              data-cy="nav-evaluation-option-committee"
+              as={Link}
+              to="/evaluation-committee"
+              name="committees"
+            >
+              {t('generic:level:committee')}
+            </Dropdown.Item>
+          ) : null}
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>

@@ -45,7 +45,7 @@ const Pie = ({ level, data, onlyBc }) => {
   )
 }
 
-const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
+const ProgrammeListCommittee = ({ data, lang, onlyBc, showText, showSpecific, handleShowSpecific }) => {
   if (onlyBc) {
     return <div />
   }
@@ -76,7 +76,7 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
   )
 }
 
-const EntityLevels = ({ id, label, description, required, number, extrainfo, summaryData, form, programme }) => {
+const EntityCommittee = ({ id, label, description, required, number, extrainfo, summaryData, form, programme }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [showProgrammes, setShowProgrammes] = useState(false)
@@ -162,7 +162,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
             <Grid.Row className="row">
               {levels.map(level => {
                 if (level === 'doctoral' && hideLevels) return null
-                if (onlyBc && level === 'master') return null
+                if (!onlyBc && level === 'master') return null
                 return (
                   <Grid.Column key={`${id}-summary-labels-${level}`} width={5} style={getStyleForm(level)}>
                     {t(level)}
@@ -224,14 +224,25 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
                   if (level === 'doctoral' && hideLevels) return null
                   return (
                     <Grid.Column width={5} key={`${id}-summary-programme-list-${level}`}>
-                      <ProgrammeList
-                        data={summaryData[level]}
-                        lang={lang}
-                        onlyBc={false}
-                        showText={showText[level]}
-                        showSpecific={showSpecific}
-                        handleShowSpecific={handleShowSpecific}
-                      />
+                      {form !== 6 ? (
+                        <ProgrammeListCommittee
+                          data={summaryData[level]}
+                          lang={lang}
+                          onlyBc={false}
+                          showText={showText[level]}
+                          showSpecific={showSpecific}
+                          handleShowSpecific={handleShowSpecific}
+                        />
+                      ) : (
+                        <ProgrammeListCommittee
+                          data={summaryData[level]}
+                          lang={lang}
+                          onlyBc={false}
+                          showText={showText[level]}
+                          showSpecific={showSpecific}
+                          handleShowSpecific={handleShowSpecific}
+                        />
+                      )}
                       <Button onClick={() => handleShowText(level, !showText[level])}>
                         {showText === level ? t('formView:hideAnswers') : t('formView:showAnswers')}
                       </Button>
@@ -248,4 +259,4 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
   )
 }
 
-export default EntityLevels
+export default EntityCommittee
