@@ -334,6 +334,7 @@ const isUniversityWideWritingGroups = [
   'hy-ypa-opa-kosu-porthania',
   'hy-ypa-opa-kosu-siltavuori',
   'hy-ypa-opa-kosu-viikki',
+  'grp-vuosiseuranta-hype-pedaleht',
 ]
 
 const facultyWideWritingGroups = {
