@@ -63,7 +63,7 @@ const stripTimeouts = room => {
 
 const emitCurrentEditorsTo = (io, room, currentEditors, uid) => {
   const roomCurrentEditors = stripTimeouts(currentEditors[room])
-
+  logger.info(`[WS] update_editors room=${room} ${JSON.stringify(roomCurrentEditors)}`)
   io.in(room).emit('update_editors', { data: roomCurrentEditors, uid })
 }
 
