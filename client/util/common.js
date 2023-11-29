@@ -434,19 +434,6 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
     }
     return oldAnswers.data.filter(a => a.year === year)
   }
-  /*
-  start using these when 1.11 DL passed:
-
-  // if there is a deadline (the form is open) and tempAnswers exist
-  if (draftYear && tempAnswers && deadline) {
-    return tempAnswers.data
-  }
-
-  // current year but deadline gone
-  if (!deadline && draftYear === year && oldAnswers && oldAnswers.data) {
-    return oldAnswers.data.filter(a => a.year === year)
-  }
-  */
 
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
   if (!draftYear && !tempAnswers && oldAnswers && oldAnswers.data) {
