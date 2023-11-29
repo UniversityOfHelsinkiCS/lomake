@@ -82,12 +82,13 @@ export default () => {
   const filters = useSelector(state => state.filters)
   const { year } = filters
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const selectedAnswers = answersByYear({
     year,
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    deadline: draftYear && nextDeadline,
     form: filters.form,
   })
 

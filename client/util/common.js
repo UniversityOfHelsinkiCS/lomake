@@ -426,7 +426,6 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
   if (draftYear && tempAnswers && deadline) {
     return tempAnswers.data
   }
-
   // current year but deadline gone
   if (!deadline && draftYear === year && oldAnswers && oldAnswers.data) {
     if (form) {
@@ -434,7 +433,6 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
     }
     return oldAnswers.data.filter(a => a.year === year)
   }
-
   // if there is no deadline and no tempAnswers, choose oldAnswers instead
   if (!draftYear && !tempAnswers && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
