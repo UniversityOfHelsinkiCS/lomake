@@ -141,6 +141,7 @@ export default () => {
                     questionsList,
                     lang,
                     form: filters.form,
+                    deadline: nextDeadline,
                   })
                 : []
             }

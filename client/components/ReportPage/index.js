@@ -88,7 +88,7 @@ export default () => {
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
-    deadline: draftYear && nextDeadline,
+    deadline: nextDeadline,
     form: filters.form,
   })
 
