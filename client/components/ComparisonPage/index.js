@@ -21,7 +21,17 @@ import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import './ComparisonPage.scss'
 
-const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftYear, questionsList, lang, form }) => {
+const answersByQuestions = ({
+  usersProgrammes,
+  year,
+  answers,
+  oldAnswers,
+  draftYear,
+  questionsList,
+  lang,
+  form,
+  deadline,
+}) => {
   const answerMap = new Map()
   const chosenKeys = usersProgrammes.map(p => p.key)
   const selectedAnswers = answersByYear({
@@ -29,6 +39,7 @@ const answersByQuestions = ({ usersProgrammes, year, answers, oldAnswers, draftY
     tempAnswers: answers,
     oldAnswers,
     draftYear: draftYear && draftYear.year,
+    deadline,
     form,
   })
   if (!selectedAnswers) return new Map()
@@ -77,7 +88,7 @@ export default () => {
   const oldAnswers = useSelector(state => state.oldAnswers)
   const year = useSelector(({ filters }) => filters.year)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const draftYear = useSelector(state => state.deadlines.draftYear)
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const filters = useSelector(state => state.filters)
 
   useEffect(() => {
@@ -102,6 +113,7 @@ export default () => {
           questionsList,
           lang,
           form: filters.form,
+          deadline: nextDeadline?.find(d => d.form === filters.form),
         }),
       }
       return data

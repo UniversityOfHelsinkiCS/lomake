@@ -100,7 +100,6 @@ const ColorTable = React.memo(
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
@@ -108,6 +107,8 @@ const ColorTable = React.memo(
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     let year = useSelector(({ filters }) => filters.year)
+    const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
@@ -293,7 +294,7 @@ const ColorTable = React.memo(
           <div />
           <SummaryRow
             setStatsToShow={setStatsToShow}
-            stats={facultyStats}
+            stats={facultyView ? facultyStats : overallStats}
             selectedAnswers={selectedAnswers}
             tableIds={tableIds}
             form={form}

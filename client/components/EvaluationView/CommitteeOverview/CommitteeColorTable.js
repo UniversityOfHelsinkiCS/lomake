@@ -24,7 +24,7 @@ const CommitteeColorTable = React.memo(
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    const draftYear = useSelector(state => state.deadlines.draftYear)
+    const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
@@ -43,6 +43,7 @@ const CommitteeColorTable = React.memo(
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
+      deadline: nextDeadline?.find(d => d.form === form),
     })
 
     const sortedCommittees = sortedItems(committees, sorter, lang)
