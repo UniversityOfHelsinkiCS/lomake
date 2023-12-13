@@ -7,7 +7,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
   if (form === 5) {
     id = '-faculty'
   } else if (form === 6) {
-    id = '-committee'
+    id = '-university'
   }
   const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`
 

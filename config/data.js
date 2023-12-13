@@ -35,6 +35,11 @@ const forms = [
   },
   {
     key: 6,
+    name: 'Katselmus - yliopisto',
+    type: 'evaluation',
+  },
+  {
+    key: 7,
     name: 'Katselmus - arviointiryhmä',
     type: 'evaluation',
   },

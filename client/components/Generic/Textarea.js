@@ -250,7 +250,7 @@ const Textarea = ({
           id={id}
         />
       </div>
-      {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} />}
+      {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} form={form} />}
       {viewOnly ? (
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (

@@ -60,13 +60,6 @@ export default () => (
           path="/evaluation-university/form/:form/:room"
           render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
         />
-
-        <Route
-          exact
-          path="/evaluation-committee/form/:form/:room"
-          render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
-        />
-
         <Route
           exact
           path="/evaluation/previous-years/:programme"

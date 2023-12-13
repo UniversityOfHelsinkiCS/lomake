@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import EntityLevels from 'Components/Generic/EntityLevels'
+import EntityUniversity from 'Components/Generic/EntityUniversity'
 import Measures from 'Components/Generic/Measures'
 import Actions from 'Components/Generic/Actions'
 import { colors, romanize } from 'Utilities/common'
@@ -17,6 +18,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     TEXTAREA: Textarea,
     ENTITY: Entity,
     ENTITY_LEVELS: EntityLevels,
+    ENTITY_UNIVERSITY: EntityUniversity,
     MEASURES: Measures,
     ACTIONS: Actions,
   }
@@ -65,7 +67,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'ENTITY_LEVELS') number++
+    if (part.type === 'ENTITY' || part.type === 'ENTITY_LEVELS' || part.type === 'ENTITY_UNIVERSITY') number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined

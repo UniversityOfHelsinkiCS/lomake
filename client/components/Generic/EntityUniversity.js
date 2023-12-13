@@ -156,13 +156,13 @@ const EntityCommittee = ({ id, label, description, required, number, extrainfo, 
         )}
       </div>
       <div className="summary-container">
-        <h4>{t('formView:facultySummaryTitle')}</h4>
+        <h4>{t('formView:universitySummaryTitle')}</h4>
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">
               {levels.map(level => {
                 if (level === 'doctoral' && hideLevels) return null
-                if (!onlyBc && level === 'master') return null
+                if (onlyBc && level === 'master') return null
                 return (
                   <Grid.Column key={`${id}-summary-labels-${level}`} width={5} style={getStyleForm(level)}>
                     {t(level)}

@@ -122,6 +122,8 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
     ? t('generic:textAreaLabelQ12and13')
     : t('generic:textAreaLabel')
 
+  const summaryTitle = form !== 6 ? 'formView:facultySummaryTitle' : 'formView:universitySummaryTitle'
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -156,7 +158,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
         )}
       </div>
       <div className="summary-container">
-        <h4>{t('formView:facultySummaryTitle')}</h4>
+        <h4>{t(summaryTitle)}</h4>
         <div className="summary-grid" data-cy={`${id}-summary`}>
           <Grid columns={4}>
             <Grid.Row className="row">

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
-const ProgrammeTextAnswerSummary = ({ questionId, summaryData }) => {
+const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
   const { t } = useTranslation()
 
   const lang = useSelector(state => state.language)
@@ -42,9 +42,11 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData }) => {
     }
   }
 
+  const summaryTitle = form && form === 6 ? 'formView:universitySummaryTitle' : 'formView:facultySummaryTitle'
+
   return (
     <div className="summary-container">
-      <h4>{t('formView:facultySummaryTitle')}</h4>
+      <h4>{t(summaryTitle)}</h4>
       <div className="summary-grid" data-cy={`${questionId}-summary`}>
         <Grid columns={4}>
           <Grid.Row className="row">
