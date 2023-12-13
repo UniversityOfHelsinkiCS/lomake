@@ -33,7 +33,7 @@ const TableRow = ({
     const facultyAnswers = selectedAnswers.find(a => a.programme === faculty.code && a.form === form)
     answers = facultyAnswers ? facultyAnswers.data : {}
   }
-  const targetURL = `/evaluation-committee/form/${form}/${faculty.code}`
+  const targetURL = `/evaluation-university/form/${form}/${faculty.code}`
 
   const hasManagementAccess = program => {
     if (isAdmin(currentUser)) return true

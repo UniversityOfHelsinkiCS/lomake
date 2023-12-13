@@ -61,10 +61,10 @@ const GoToEvaluationButton = ({ user }) => {
             <Dropdown.Item
               data-cy="nav-evaluation-option-committee"
               as={Link}
-              to="/evaluation-committee"
+              to="/evaluation-university"
               name="committees"
             >
-              {t('generic:level:committee')}
+              {t('generic:level:university')}
             </Dropdown.Item>
           ) : null}
         </Dropdown.Menu>

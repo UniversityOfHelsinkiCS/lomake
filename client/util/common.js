@@ -560,7 +560,7 @@ export const getForm = formType => {
   if (formType === 'evaluation-faculty') {
     return 5
   }
-  if (formType === 'evaluation-committee') {
+  if (formType === 'evaluation-university') {
     return 6
   }
 

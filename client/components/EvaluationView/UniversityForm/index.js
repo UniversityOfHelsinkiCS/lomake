@@ -15,12 +15,12 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
-import './EvaluationCommitteeForm.scss'
+import './index.scss'
 import { colors, isAdmin } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
-import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
+import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
@@ -221,7 +221,7 @@ const CommitteeFormView = ({ room, formString }) => {
               <div className="hide-in-print-mode">
                 <SaveIndicator />
                 <div style={{ marginBottom: '2em' }}>
-                  <Button onClick={() => history.push('/evaluation-committee')} icon="arrow left" />
+                  <Button onClick={() => history.push('/evaluation-university')} icon="arrow left" />
                 </div>
                 <img alt="form-header-calendar" className="img-responsive" src={postItImage} />
               </div>

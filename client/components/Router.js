@@ -20,7 +20,7 @@ import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswe
 import CommitteeLevelOverview from 'Components/EvaluationView/CommitteeOverview'
 
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
-import CommitteeFormView from 'Components/EvaluationView/CommitteeForm'
+import UniversityFormView from 'Components/EvaluationView/UniversityForm'
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 
@@ -37,7 +37,7 @@ export default () => (
 
         <Route exact path="/evaluation" component={ProgrammeLevelOverview} />
         <Route exact path="/evaluation-faculty" component={FacultyLevelOverview} />
-        <Route exact path="/evaluation-committee" component={CommitteeLevelOverview} />
+        <Route exact path="/evaluation-university" component={CommitteeLevelOverview} />
         <Route exact path="/degree-reform" component={DegreeReformOverview} />
         <Route
           exact
@@ -57,9 +57,16 @@ export default () => (
         />
         <Route
           exact
-          path="/evaluation-committee/form/:form/:room"
-          render={props => <CommitteeFormView room={props.match.params.room} formString={props.match.params.form} />}
+          path="/evaluation-university/form/:form/:room"
+          render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
         />
+
+        <Route
+          exact
+          path="/evaluation-committee/form/:form/:room"
+          render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
+        />
+
         <Route
           exact
           path="/evaluation/previous-years/:programme"

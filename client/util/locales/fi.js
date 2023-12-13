@@ -162,6 +162,7 @@ export default {
     selectApplicable: 'Valitkaa sopivat vaihtoehdot',
     addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     progSummaryTitle: 'Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta',
+    universitySummaryTitle: 'Tiedekunnat vastasivat seuraavasti:',
     facultySummaryTitle: 'Tiedekunnan koulutusohjelmien johtoryhmät vastasivat seuraavasti:',
     facultyActionSummaryTitle:
       'Koulutusohjelmien johtoryhmät kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti:',

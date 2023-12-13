@@ -70,7 +70,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     questionsToShow = facultyEvaluationQuestions
     linkBase = `/evaluation-faculty/form/${formNumber}/`
   } else if (formNumber === 6) {
-    linkBase = `/evaluation-committee/form/${formNumber}/`
+    linkBase = `/evaluation-university/form/${formNumber}/`
   } else if (formType === 'degree-reform') {
     questionsToShow = questionData
     linkBase = '/degree-reform/form/'

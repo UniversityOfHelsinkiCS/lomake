@@ -29,7 +29,7 @@ const getFormType = form => {
     return 'evaluation-faculty'
   }
   if (form === 6) {
-    return 'evaluation-committee'
+    return 'evaluation-university'
   }
   return 'yearly'
 }

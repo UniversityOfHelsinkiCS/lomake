@@ -161,6 +161,7 @@ export default {
     selectApplicable: 'Select all applicable options',
     addMissing: ' Add any missing options - You may add several',
     progSummaryTitle: 'Annual follow-up answers related to this theme from the review period',
+    universitySummaryTitle: 'The answers given by the faculty:',
     facultySummaryTitle: 'The answers given by the steering groups of the faculty´s degree programmes',
     facultyActionSummaryTitle:
       'The steering groups of the degree programmes recorded their development areas and their required measures as follows:',

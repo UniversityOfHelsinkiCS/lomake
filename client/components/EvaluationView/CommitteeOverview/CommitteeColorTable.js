@@ -8,7 +8,7 @@ import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
-import { facultyEvaluationQuestions as questions } from '../../../questionData'
+import { universityEvaluationQuestions as questions } from '../../../questionData'
 import SummaryRowCommittee from './SummaryRowCommittee'
 
 const CommitteeColorTable = React.memo(

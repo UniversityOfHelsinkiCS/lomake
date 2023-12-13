@@ -122,6 +122,7 @@ export default {
     formError: 'Fel vid anslutning av sidan',
     formErrorButton: 'Klicka här för att ladda om sidan!',
     requiredActions: 'Åtgärder',
+    universitySummaryTitle: 'Fakulteten svarade på följande sätt:',
     facultyActionSummaryTitle:
       'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
     facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt:',
