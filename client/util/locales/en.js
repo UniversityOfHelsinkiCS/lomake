@@ -178,6 +178,8 @@ export default {
       "Language Centre's self-evaluation report <a href='https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi' target='_blank'>here</a> (currently only in Finnish)",
     facultyInfo:
       'For this review you will consider the state of degree programmes of the <strong>faculty</strong> over the period of the three previous years.',
+    materialsUniversity:
+      'The questions in this form are accompanied by a summary of the answers given to the same theme by the faculties.<br><br>A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
     materialsFaculty:
       'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.<br><br>A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
     yearlyAnswers: 'Annual follow-up answers',

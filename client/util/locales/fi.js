@@ -179,6 +179,8 @@ export default {
       'Kielikeskuksen itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/display/KTKKT/Kielikeskuksen+taustamateriaali+koulutusohjelmien+katselmuksen+tueksi" target="_blank">täällä</a>',
     facultyInfo:
       'Katselmuksessa tarkastellaan <strong>tiedekunnan</strong> koulutusohjelmien tilannetta kolmelta viime vuodelta.',
+    materialsUniversity:
+      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekuntien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekunnan opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     materialsFaculty:
       'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekunnan opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     yearlyAnswers: 'Vuosiseurantojen vastaukset',

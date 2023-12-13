@@ -255,7 +255,7 @@ const CommitteeFormView = ({ room, formString }) => {
               <div style={{ marginTop: '2em' }}>
                 <h4 data-cy="formview-links">{t('formView:materials')}</h4>
                 <p>
-                  <Trans i18nKey="formView:materialsFaculty" />
+                  <Trans i18nKey="formView:materialsUniversity" />
                 </p>
               </div>
 
