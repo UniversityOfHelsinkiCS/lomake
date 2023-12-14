@@ -2,9 +2,8 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const StudyLevelHeader = ({ showStudyLevel }) => {
+const StudyLevelHeader = () => {
   // If overview shows study level (bachelor, master, doctoral) then this is needed
-  if (!showStudyLevel) return <div />
   return (
     <div className="sticky-header">
       <p style={{ fontWeight: 'bold' }}>Levels</p>{' '}
@@ -29,7 +28,7 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel }) => {
           <Icon name="sort" />
         </div>
       </div>
-      <StudyLevelHeader showStudyLevel={showStudyLevel} />
+      {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
       {tableIds.map(idObject => (
         <div key={idObject.id} className="sticky-header-categories">
           <span className="vertical-text">{idObject.shortLabel}</span>
