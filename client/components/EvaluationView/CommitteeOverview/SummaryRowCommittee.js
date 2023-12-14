@@ -6,6 +6,7 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
   const { t } = useTranslation()
   const studyLevels = ['bachelor', 'master', 'doctoral']
   let answersCounted = {}
+
   if (showDataByProgramme) {
     const selectedAnswersFiltered = selectedAnswers.filter(answer => answer.form === 4)
     answersCounted = selectedAnswersFiltered.reduce(

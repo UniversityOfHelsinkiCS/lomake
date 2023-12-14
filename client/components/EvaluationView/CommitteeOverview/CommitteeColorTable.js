@@ -76,29 +76,32 @@ const CommitteeColorTable = React.memo(
     if (answers.pending || !answers.data || !oldAnswers.data) {
       return <Loader active inline="centered" />
     }
-    const tableIds = questions.reduce((acc, cur) => {
-      const questionObjects = cur.parts.reduce((acc, cur) => {
-        if (
-          cur.id.includes('opinion_differences') ||
-          cur.id.includes('programme_strengths') ||
-          cur.type === 'TITLE' ||
-          cur.type === 'INFOBOX' ||
-          cur.type === 'ACTIONS'
-        ) {
-          return acc
-        }
-        return [
-          ...acc,
-          {
-            id: cur.id,
-            shortLabel: cur.shortLabel && cur.shortLabel[lang],
-            type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type,
-          },
-        ]
-      }, [])
+    const tableIds = questions
+      .reduce((acc, cur) => {
+        const questionObjects = cur.parts.reduce((acc, cur) => {
+          if (
+            cur.id.includes('opinion_differences') ||
+            cur.id.includes('programme_strengths') ||
+            cur.type === 'TITLE' ||
+            cur.type === 'INFOBOX' ||
+            cur.type === 'ACTIONS'
+          ) {
+            return acc
+          }
+          return [
+            ...acc,
+            {
+              id: cur.id,
+              shortLabel: cur.shortLabel && cur.shortLabel[lang],
+              type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type,
+            },
+          ]
+        }, [])
 
-      return [...acc, ...questionObjects]
-    }, [])
+        return [...acc, ...questionObjects]
+      }, [])
+      .filter(t => !t.id.includes('tone'))
+
     return (
       <div className="overview-color-grid-committee">
         <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} showStudyLevel />

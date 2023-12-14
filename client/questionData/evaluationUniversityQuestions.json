@@ -210,6 +210,11 @@
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
+        "shortLabel": {
+          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -478,6 +483,11 @@
         "index": "II",
         "type": "TEXTAREA",
         "label": {
+          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "shortLabel": {
           "fi": "Tarkastelkaa tiedekuntien katselmusarvioita koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
