@@ -57,7 +57,7 @@ const GoToEvaluationButton = ({ user }) => {
               {t('generic:level:faculties')}
             </Dropdown.Item>
           ) : null}
-          {isAdmin(user) ? (
+          {isAdmin(user) || isKatselmusProjektiOrOhjausryhma(user) ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-committee"
               as={Link}

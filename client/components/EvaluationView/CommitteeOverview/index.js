@@ -3,7 +3,7 @@ import { Accordion, Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin } from '@root/config/common'
+import { isAdmin, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 
 import CustomModal from 'Components/Generic/CustomModal'
@@ -36,15 +36,19 @@ export default () => {
     setFilter(value)
   }
 
+  const hasRights = currentUser => isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)
+
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
   const usersProgrammes = useMemo(() => {
     const usersPermissionsKeys = Object.keys(currentUser.access)
-    return isAdmin(currentUser) ? programmes : programmes.filter(program => usersPermissionsKeys.includes(program.key))
+    return hasRights(currentUser)
+      ? programmes
+      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
   }, [programmes, currentUser])
 
   const filteredCommittes = useMemo(() => {
     return committeeList.filter(f => {
-      if (!currentUser.access[f.code] && !isAdmin(currentUser)) {
+      if (!currentUser.access[f.code] && !hasRights(currentUser)) {
         return false
       }
       const name = f.name[lang]
