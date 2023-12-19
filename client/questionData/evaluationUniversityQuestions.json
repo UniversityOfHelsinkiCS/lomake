@@ -278,7 +278,7 @@
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa kandiopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "fi": "Puhuvatko kandiopintojen tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
@@ -304,7 +304,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista kandiopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -322,7 +322,7 @@
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa maisteriopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "fi": "Puhuvatko maisteriopintojen tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
@@ -348,7 +348,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -366,7 +366,7 @@
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa tohtoriopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "fi": "Puhuvatko tohtoriopintojen tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
@@ -392,7 +392,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista tohtoriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -741,7 +741,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista kandiopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -785,7 +785,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -829,7 +829,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista tohtoriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
