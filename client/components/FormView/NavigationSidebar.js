@@ -6,7 +6,12 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
-import { yearlyQuestions as questions, evaluationQuestions, facultyEvaluationQuestions } from '../../questionData'
+import {
+  yearlyQuestions as questions,
+  evaluationQuestions,
+  facultyEvaluationQuestions,
+  universityEvaluationQuestions,
+} from '../../questionData'
 
 const replaceTitle = {
   'DET ALLMÄNNA LÄGET INOM UTBILDNINGSPROGRAMMET': 'DET ALLMÄNNA LÄGET INOM UTBILDNINGS-\nPROGRAMMET',
@@ -70,6 +75,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     questionsToShow = facultyEvaluationQuestions
     linkBase = `/evaluation-faculty/form/${formNumber}/`
   } else if (formNumber === 6) {
+    questionsToShow = universityEvaluationQuestions
     linkBase = `/evaluation-university/form/${formNumber}/`
   } else if (formType === 'degree-reform') {
     questionsToShow = questionData
