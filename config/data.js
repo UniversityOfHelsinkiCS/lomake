@@ -162,7 +162,7 @@ const facultyMap = {
 
 const committeeList = [
   {
-    code: 'UNI',
+    code: 'UNIVIERSITY',
     name: {
       fi: 'Yliopistotaso',
       en: 'University level',
