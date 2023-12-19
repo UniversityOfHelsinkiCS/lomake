@@ -162,27 +162,11 @@ const facultyMap = {
 
 const committeeList = [
   {
-    code: 'ONE',
+    code: 'UNI',
     name: {
-      fi: 'Opintoasiainneuvosto',
-      en: 'Academic Affairs Council',
-      se: 'Utbildningsrådet',
-    },
-  },
-  {
-    code: 'TINE',
-    name: {
-      fi: 'Tieteellinen neuvosto',
-      en: 'Scientific Council',
-      se: 'Vetenskapliga rådet',
-    },
-  },
-  {
-    code: 'TUTK',
-    name: {
-      fi: 'Tutkijakoulun johtokunta',
-      en: 'Doctoral School Council',
-      se: 'Doktorandskolans styrelse',
+      fi: 'Yliopistotaso',
+      en: 'University level',
+      se: 'Universitetsnivå',
     },
   },
 ]
