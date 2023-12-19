@@ -32,7 +32,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "student_admittance"
+        "relatedEvaluationQuestion": "student_admittance_faculty"
       },
       {
         "id": "ops_practicality_university",
@@ -60,7 +60,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ops_practicality"
+        "relatedEvaluationQuestion": "ops_practicality_faculty"
       },
       {
         "id": "study_ease_university",
@@ -88,7 +88,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "studyguidance"
+        "relatedEvaluationQuestion": "studyguidance_faculty"
       },
       {
         "id": "transition_phase_university",
@@ -115,7 +115,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "transition_phase"
+        "relatedEvaluationQuestion": "transition_phase_faculty"
       },
       {
         "id": "degree_flow_university",
@@ -143,11 +143,11 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "degree_flow"
+        "relatedEvaluationQuestion": "degree_flow_faculty"
       },
       {
         "id": "meta2",
-        "index": "meta-1",
+        "index": "meta-MH",
         "type": "TITLE",
         "label": {
           "fi": "TEEMA Opiskelun sujuvuus:",
@@ -156,7 +156,7 @@
         }
       },
       {
-        "id": "university_ease_of_study_opinion_differences-0",
+        "id": "university_ease_of_study_opinion_differences-KH",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -171,10 +171,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_opinion_differences"
       },
       {
-        "id": "university_ease_of_study_opinion_differences-1",
+        "id": "university_ease_of_study_opinion_differences-MH",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -189,10 +189,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_opinion_differences"
       },
       {
-        "id": "university_ease_of_study_opinion_differences-2",
+        "id": "university_ease_of_study_opinion_differences-T",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -207,11 +207,11 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_opinion_differences"
       },
       {
         "id": "meta2",
-        "index": "meta-2",
+        "index": "meta-T",
         "type": "TITLE",
         "label": {
           "fi": "YLIOPISTON KIRJAUKSET",
@@ -220,7 +220,7 @@
         }
       },
       {
-        "id": "university_ease_of_study_programme_strengths-0",
+        "id": "university_ease_of_study_programme_strengths-KH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -235,10 +235,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_programme_strengths"
       },
       {
-        "id": "university_ease_of_study_programme_strengths-1",
+        "id": "university_ease_of_study_programme_strengths-MH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -253,10 +253,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_programme_strengths"
       },
       {
-        "id": "university_ease_of_study_programme_strengths-2",
+        "id": "university_ease_of_study_programme_strengths-T",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -271,10 +271,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_programme_strengths"
       },
       {
-        "id": "university_same_tone_seamless_studies-0",
+        "id": "university_same_tone_seamless_studies-KH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -296,7 +296,7 @@
         }
       },
       {
-        "id": "university_ease_of_study_actions-0",
+        "id": "university_ease_of_study_actions-KH",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -315,10 +315,10 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "ease_of_study_actions"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_actions"
       },
       {
-        "id": "university_same_tone_seamless_studies-1",
+        "id": "university_same_tone_seamless_studies-MH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -340,7 +340,7 @@
         }
       },
       {
-        "id": "university_ease_of_study_actions-1",
+        "id": "university_ease_of_study_actions-MH",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -359,10 +359,10 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "ease_of_study_actions"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_actions"
       },
       {
-        "id": "university_same_tone_seamless_studies-2",
+        "id": "university_same_tone_seamless_studies-T",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -384,7 +384,7 @@
         }
       },
       {
-        "id": "university_ease_of_study_actions-2",
+        "id": "university_ease_of_study_actions-T",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -403,7 +403,7 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "ease_of_study_actions"
+        "relatedEvaluationQuestion": "faculty_ease_of_study_actions"
       }
     ]
   },
@@ -440,7 +440,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "communication"
+        "relatedEvaluationQuestion": "communication_faculty"
       },
       {
         "id": "teaching_resources_management_university",
@@ -468,7 +468,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "teaching_resources_management"
+        "relatedEvaluationQuestion": "teaching_resources_management_faculty"
       },
       {
         "id": "recruiting_influence_university",
@@ -496,7 +496,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "recruiting_influence"
+        "relatedEvaluationQuestion": "recruiting_influence_faculty"
       },
       {
         "id": "environmental_resources_university",
@@ -524,7 +524,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "environmental_resources"
+        "relatedEvaluationQuestion": "environmental_resources_faculty"
       },
       {
         "id": "shared_programmes_university",
@@ -552,7 +552,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "shared_programmes"
+        "relatedEvaluationQuestion": "shared_programmes_faculty"
       },
       {
         "id": "programme_status_university",
@@ -580,7 +580,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_status"
+        "relatedEvaluationQuestion": "programme_status_faculty"
       },
       {
         "id": "meta2",
@@ -593,7 +593,7 @@
         }
       },
       {
-        "id": "university_programme_structure_opinion_differences-0",
+        "id": "university_programme_structure_opinion_differences-KH",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -608,10 +608,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_programme_structure_opinion_differences"
       },
       {
-        "id": "university_programme_structure_opinion_differences-1",
+        "id": "university_programme_structure_opinion_differences-MH",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -626,10 +626,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_programme_structure_opinion_differences"
       },
       {
-        "id": "university_programme_structure_opinion_differences-2",
+        "id": "university_programme_structure_opinion_differences-T",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -644,7 +644,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+        "relatedEvaluationQuestion": "faculty_programme_structure_opinion_differences"
       },
       {
         "id": "meta2",
@@ -657,7 +657,7 @@
         }
       },
       {
-        "id": "university_programme_structure_programme_strengths-0",
+        "id": "university_programme_structure_programme_strengths-KH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -672,10 +672,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_programme_structure_programme_strengths"
       },
       {
-        "id": "university_programme_structure_programme_strengths-1",
+        "id": "university_programme_structure_programme_strengths-MH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -690,10 +690,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_programme_structure_programme_strengths"
       },
       {
-        "id": "university_programme_structure_programme_strengths-2",
+        "id": "university_programme_structure_programme_strengths-T",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -708,10 +708,10 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+        "relatedEvaluationQuestion": "faculty_programme_structure_programme_strengths"
       },
       {
-        "id": "university_same_tone_programme_structure-0",
+        "id": "university_same_tone_programme_structure-KH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -733,7 +733,7 @@
         }
       },
       {
-        "id": "university_programme_structure_actions-0",
+        "id": "university_programme_structure_actions-KH",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -752,10 +752,10 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "programme_structure_actions"
+        "relatedEvaluationQuestion": "faculty_programme_structure_actions"
       },
       {
-        "id": "university_same_tone_programme_structure-1",
+        "id": "university_same_tone_programme_structure-MH",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -777,7 +777,7 @@
         }
       },
       {
-        "id": "university_programme_structure_actions-1",
+        "id": "university_programme_structure_actions-MH",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -796,10 +796,10 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "programme_structure_actions"
+        "relatedEvaluationQuestion": "faculty_programme_structure_actions"
       },
       {
-        "id": "university_same_tone_programme_structure-2",
+        "id": "university_same_tone_programme_structure-T",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
@@ -821,7 +821,7 @@
         }
       },
       {
-        "id": "university_programme_structure_actions-2",
+        "id": "university_programme_structure_actions-T",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -840,7 +840,7 @@
         },
         "required": true,
         "no_color": true,
-        "relatedEvaluationQuestion": "programme_structure_actions"
+        "relatedEvaluationQuestion": "faculty_programme_structure_actions"
       }
     ]
   },
@@ -877,7 +877,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "studyprogramme_status"
+        "relatedEvaluationQuestion": "faculty_studyprogramme_status"
       },
       {
         "id": "university_studyprogramme_status_opinion_differences",
@@ -922,7 +922,7 @@
           "se": "",
           "en": ""
         },
-        "relatedEvaluationQuestion": "where_are_we_in_five_years"
+        "relatedEvaluationQuestion": "faculty_where_are_we_in_five_years"
       },
       {
         "id": "university_where_are_we_in_five_years_opinion_differences",

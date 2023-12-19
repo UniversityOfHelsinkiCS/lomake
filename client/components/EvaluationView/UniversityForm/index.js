@@ -61,17 +61,14 @@ const findEntityLevelAnswers = (faculties, allAnswers, question) => {
   return result
 }
 
-const findActionAnswers = (programmes, allAnswers, question) => {
+const findActionAnswers = (faculties, allAnswers, question) => {
   const result = {
-    bachelor: [],
-    master: [],
-    doctoral: [],
+    faculty: [],
   }
-  programmes.forEach(({ key, level, name }) => {
-    const answer = allAnswers.find(a => a.programme === key)
+  faculties.forEach(({ code, name }) => {
+    const answer = allAnswers.find(a => a.programme === code)
     const text = []
     const actionNumbers = [1, 2, 3, 4, 5]
-
     actionNumbers.map((number, index) => {
       if (answer?.data && answer.data[`${question}-${number}-text`]) {
         text[index] = {
@@ -83,23 +80,20 @@ const findActionAnswers = (programmes, allAnswers, question) => {
       return false
     })
     if (text.length > 0) {
-      result[level][key] = { text, programme: name }
+      result.faculty[code] = { text, programme: name }
     }
   })
   result.details = evaluationQuestions.flatMap(section => section.parts).find(part => part.id === question)
   return result
 }
 
-const findTextAnswers = (programmes, allAnswers, question) => {
+const findTextAnswers = (faculties, allAnswers, question) => {
   const result = {
-    bachelor: [],
-    master: [],
-    doctoral: [],
+    faculty: [],
   }
-
-  programmes.forEach(({ key, level, name }) => {
+  faculties.forEach(({ code, name }) => {
     const text = []
-    const answer = allAnswers.find(a => a.programme === key)
+    const answer = allAnswers.find(a => a.programme === code)
     const answerText = answer?.data[`${question}_text`]
     if (answerText) {
       text.push({
@@ -109,13 +103,12 @@ const findTextAnswers = (programmes, allAnswers, question) => {
     }
 
     if (text.length > 0) {
-      result[level][key] = {
+      result.faculty[code] = {
         programme: name,
         text,
       }
     }
   })
-
   return result
 }
 
@@ -190,15 +183,15 @@ const CommitteeFormView = ({ room, formString }) => {
     questions.forEach(q => {
       q.parts.forEach(part => {
         if (part.relatedEvaluationQuestion && part.type === 'ACTIONS') {
-          result[part.id] = findActionAnswers(faculties, answers, part.id)
+          result[part.id] = findActionAnswers(faculties, answers, part.relatedEvaluationQuestion)
           return
         }
         if (part.relatedEvaluationQuestion && part.type === 'ENTITY_LEVELS') {
-          result[part.id] = findEntityLevelAnswers(faculties, answers, part.id)
+          result[part.id] = findEntityLevelAnswers(faculties, answers, part.relatedEvaluationQuestion)
           return
         }
         if (part.relatedEvaluationQuestion && part.type === 'TEXTAREA') {
-          result[part.id] = findTextAnswers(faculties, answers, part.id)
+          result[part.id] = findTextAnswers(faculties, answers, part.relatedEvaluationQuestion)
         }
       })
     })

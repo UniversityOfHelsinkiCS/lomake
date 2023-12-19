@@ -94,117 +94,141 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
 
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {form === 5 && (
-        <div className="summary-container">
-          <h4>{t('formView:facultyActionSummaryTitle')}</h4>
-          <div className="summary-grid" data-cy={`${id}-summary`}>
-            <Grid columns={4}>
-              <Grid.Row className="row">
-                <Grid.Column width={5} style={getStyleForm('bachelor')}>
-                  {t('bachelor')}
-                </Grid.Column>
-                <Grid.Column width={5} style={getStyleForm('master')}>
-                  {!onlyBc ? t('master') : ''}
-                </Grid.Column>
-                <Grid.Column width={5} style={getStyleForm('doctoral')}>
-                  {!onlyBc ? t('doctoral') : ''}
-                </Grid.Column>
-                <Grid.Column width={1} />
-              </Grid.Row>
-
-              <>
+      {form === 5 ||
+        (form === 6 && (
+          <div className="summary-container">
+            <h4>{t('formView:facultyActionSummaryTitle')}</h4>
+            <div className="summary-grid" data-cy={`${id}-summary`}>
+              <Grid columns={4}>
                 <Grid.Row className="row">
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.bachelor}
-                      lang={lang}
-                      onlyBc={false}
-                      showText={showText.bachelor}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
-                      {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.master}
-                      lang={lang}
-                      onlyBc={onlyBc}
-                      showText={showText.master}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('master', !showText.master)}>
-                      {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.doctoral}
-                      lang={lang}
-                      onlyBc={onlyBc}
-                      showText={showText.doctoral}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
-                      {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
+                  {form === 5 && (
+                    <>
+                      <Grid.Column width={5} style={getStyleForm('bachelor')}>
+                        {t('bachelor')}
+                      </Grid.Column>
+                      <Grid.Column width={5} style={getStyleForm('master')}>
+                        {!onlyBc ? t('master') : ''}
+                      </Grid.Column>
+                      <Grid.Column width={5} style={getStyleForm('doctoral')}>
+                        {!onlyBc ? t('doctoral') : ''}
+                      </Grid.Column>
+                    </>
+                  )}
+                  <Grid.Column width={1} />
                 </Grid.Row>
-                <Grid.Row className="row">
-                  {showText.level &&
-                    Object.keys(summaryData[showText.level]).map(programmeKey => {
-                      return (
-                        <div
-                          key={programmeKey}
-                          style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
-                        >
-                          <p
-                            style={{ height: '5em' }}
-                            key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
+                <>
+                  <Grid.Row className="row">
+                    {form === 5 && (
+                      <>
+                        <Grid.Column width={5}>
+                          <ProgrammeAnswerSummaryList
+                            data={summaryData.bachelor}
+                            lang={lang}
+                            onlyBc={false}
+                            showText={showText.bachelor}
+                            showSpecific={showSpecific}
+                            handleShowSpecific={handleShowSpecific}
+                          />
+                          <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
+                            {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                          </Button>
+                        </Grid.Column>
+                        <Grid.Column width={5}>
+                          <ProgrammeAnswerSummaryList
+                            data={summaryData.master}
+                            lang={lang}
+                            onlyBc={onlyBc}
+                            showText={showText.master}
+                            showSpecific={showSpecific}
+                            handleShowSpecific={handleShowSpecific}
+                          />
+                          <Button onClick={() => handleShowText('master', !showText.master)}>
+                            {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                          </Button>
+                        </Grid.Column>
+                        <Grid.Column width={5}>
+                          <ProgrammeAnswerSummaryList
+                            data={summaryData.doctoral}
+                            lang={lang}
+                            onlyBc={onlyBc}
+                            showText={showText.doctoral}
+                            showSpecific={showSpecific}
+                            handleShowSpecific={handleShowSpecific}
+                          />
+                          <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
+                            {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                          </Button>
+                        </Grid.Column>
+                      </>
+                    )}
+                    {form === 6 && (
+                      <Grid.Column width={5}>
+                        <ProgrammeAnswerSummaryList
+                          data={summaryData.faculty}
+                          lang={lang}
+                          onlyBc={onlyBc}
+                          showText={showText.faculty}
+                          showSpecific={showSpecific}
+                          handleShowSpecific={handleShowSpecific}
+                        />
+                        <Button onClick={() => handleShowText('faculty', !showText.faculty)}>
+                          {showText?.level === 'faculty' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                        </Button>
+                      </Grid.Column>
+                    )}
+                  </Grid.Row>
+                  <Grid.Row className="row">
+                    {showText.level &&
+                      Object.keys(summaryData[showText.level]).map(programmeKey => {
+                        return (
+                          <div
+                            key={programmeKey}
+                            style={{ marginRight: '1em', marginTop: '1em', flex: 1, maxWidth: '15em' }}
                           >
-                            <span className="answer-circle-blue" />{' '}
-                            <span
-                              className="programme-list-button"
-                              onClick={() => handleShowSpecific(programmeKey)}
-                              style={{ marginLeft: '0.5em', fontSize: 16 }}
+                            <p
+                              style={{ height: '5em' }}
+                              key={`${summaryData[showText.level][programmeKey].programme[lang]}`}
                             >
-                              {summaryData[showText.level][programmeKey].programme[lang]}
-                            </span>
-                          </p>
-                          {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
-                            <>
-                              {summaryData[showText.level][programmeKey].text.map((answer, i) => {
-                                if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
-                                  // eslint-disable-next-line react/no-array-index-key
-                                  return <div key={`${id}-${programmeKey}-${i}`}> </div>
-                                }
-                                return (
-                                  // eslint-disable-next-line react/no-array-index-key
-                                  <Card key={`${id}-${programmeKey}-${i}`}>
-                                    <Card.Content>
-                                      <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
-                                      <Card.Description style={{ overflowWrap: 'anywhere' }}>
-                                        {answer.content}
-                                      </Card.Description>
-                                    </Card.Content>
-                                  </Card>
-                                )
-                              })}
-                            </>
-                          )}
-                        </div>
-                      )
-                    })}
-                </Grid.Row>
-              </>
-            </Grid>
+                              <span className="answer-circle-blue" />{' '}
+                              <span
+                                className="programme-list-button"
+                                onClick={() => handleShowSpecific(programmeKey)}
+                                style={{ marginLeft: '0.5em', fontSize: 16 }}
+                              >
+                                {summaryData[showText.level][programmeKey].programme[lang]}
+                              </span>
+                            </p>
+                            {(showText || showSpecific[programmeKey]) && summaryData[showText.level][programmeKey] && (
+                              <>
+                                {summaryData[showText.level][programmeKey].text.map((answer, i) => {
+                                  if (!(answer.title.length > 2) && !(answer.content?.length > 2)) {
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    return <div key={`${id}-${programmeKey}-${i}`}> </div>
+                                  }
+                                  return (
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    <Card key={`${id}-${programmeKey}-${i}`}>
+                                      <Card.Content>
+                                        <Card.Header style={{ fontSize: 15 }}>{answer.title}</Card.Header>
+                                        <Card.Description style={{ overflowWrap: 'anywhere' }}>
+                                          {answer.content}
+                                        </Card.Description>
+                                      </Card.Content>
+                                    </Card>
+                                  )
+                                })}
+                              </>
+                            )}
+                          </div>
+                        )
+                      })}
+                  </Grid.Row>
+                </>
+              </Grid>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
+
       {actionsList.length === 0 ? (
         <ActionElement key="action-1" id={id} form={form} viewOnly={viewOnly} index={1} />
       ) : (
