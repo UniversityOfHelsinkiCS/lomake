@@ -7,7 +7,7 @@
     },
     "parts": [
       {
-        "id": "student_admittance_faculty",
+        "id": "student_admittance_university",
         "index": 1,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -35,7 +35,7 @@
         "relatedEvaluationQuestion": "student_admittance"
       },
       {
-        "id": "ops_practicality_faculty",
+        "id": "ops_practicality_university",
         "index": 2,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -63,7 +63,7 @@
         "relatedEvaluationQuestion": "ops_practicality"
       },
       {
-        "id": "study_ease_faculty",
+        "id": "study_ease_university",
         "index": 3,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -91,7 +91,7 @@
         "relatedEvaluationQuestion": "studyguidance"
       },
       {
-        "id": "transition_phase_faculty",
+        "id": "transition_phase_university",
         "index": 4,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -118,7 +118,7 @@
         "relatedEvaluationQuestion": "transition_phase"
       },
       {
-        "id": "degree_flow_faculty",
+        "id": "degree_flow_university",
         "index": 5,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -156,11 +156,47 @@
         }
       },
       {
-        "id": "faculty_ease_of_study_opinion_differences",
+        "id": "university_ease_of_study_opinion_differences-0",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja opiskelun sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja kandiopintojen sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+      },
+      {
+        "id": "university_ease_of_study_opinion_differences-1",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja maisteriopintojen sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_opinion_differences"
+      },
+      {
+        "id": "university_ease_of_study_opinion_differences-2",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja tohtoriopintojen sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
@@ -184,11 +220,11 @@
         }
       },
       {
-        "id": "faculty_ease_of_study_programme_strengths",
+        "id": "university_ease_of_study_programme_strengths-0",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Mitkä ovat yliopiston vahvuuksia opiskelun sujuvuudessa?",
+          "fi": "Mitkä ovat yliopiston vahvuuksia kandiopintojen sujuvuudessa?",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
@@ -202,18 +238,54 @@
         "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
       },
       {
-        "id": "faculty_same_tone_seamless_studies",
+        "id": "university_ease_of_study_programme_strengths-1",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "fi": "Mitkä ovat yliopiston vahvuuksia maisteriopintojen sujuvuudessa?",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+      },
+      {
+        "id": "university_ease_of_study_programme_strengths-2",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat yliopiston vahvuuksia tohtoriopintojen sujuvuudessa?",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "ease_of_study_programme_strengths"
+      },
+      {
+        "id": "university_same_tone_seamless_studies-0",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa kandiopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "shortLabel": {
-          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
-          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
-          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+          "fi": "",
+          "se": "",
+          "en": ""
         },
         "required": false,
         "no_color": true,
@@ -224,7 +296,95 @@
         }
       },
       {
-        "id": "faculty_ease_of_study_actions",
+        "id": "university_ease_of_study_actions-0",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-10 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–10 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "ease_of_study_actions"
+      },
+      {
+        "id": "university_same_tone_seamless_studies-1",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa maisteriopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "university_ease_of_study_actions-1",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-10 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–10 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "ease_of_study_actions"
+      },
+      {
+        "id": "university_same_tone_seamless_studies-2",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Puhuvatko tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa tohtoriopintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "university_ease_of_study_actions-2",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -255,7 +415,7 @@
     },
     "parts": [
       {
-        "id": "communication_faculty",
+        "id": "communication_university",
         "index": 6,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -283,7 +443,7 @@
         "relatedEvaluationQuestion": "communication"
       },
       {
-        "id": "teaching_resources_management_faculty",
+        "id": "teaching_resources_management_university",
         "index": 7,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -311,7 +471,7 @@
         "relatedEvaluationQuestion": "teaching_resources_management"
       },
       {
-        "id": "recruiting_influence_faculty",
+        "id": "recruiting_influence_university",
         "index": 8,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -339,7 +499,7 @@
         "relatedEvaluationQuestion": "recruiting_influence"
       },
       {
-        "id": "environmental_resources_faculty",
+        "id": "environmental_resources_university",
         "index": 9,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -367,7 +527,7 @@
         "relatedEvaluationQuestion": "environmental_resources"
       },
       {
-        "id": "shared_programmes_faculty",
+        "id": "shared_programmes_university",
         "index": 10,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -395,7 +555,7 @@
         "relatedEvaluationQuestion": "shared_programmes"
       },
       {
-        "id": "programme_status_faculty",
+        "id": "programme_status_university",
         "index": 11,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -433,11 +593,47 @@
         }
       },
       {
-        "id": "faculty_programme_structure_opinion_differences",
+        "id": "university_programme_structure_opinion_differences-0",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja koulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja kandikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+      },
+      {
+        "id": "university_programme_structure_opinion_differences-1",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja maisterikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_opinion_differences"
+      },
+      {
+        "id": "university_programme_structure_opinion_differences-2",
+        "index": "I",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja tohtorikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
@@ -461,11 +657,11 @@
         }
       },
       {
-        "id": "faculty_programme_structure_programme_strengths",
+        "id": "university_programme_structure_programme_strengths-0",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan koulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
+          "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan kandikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
           "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
           "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
         },
@@ -479,18 +675,54 @@
         "relatedEvaluationQuestion": "programme_structure_programme_strengths"
       },
       {
-        "id": "faculty_same_tone_programme_structure",
+        "id": "university_programme_structure_programme_strengths-1",
         "index": "II",
         "type": "TEXTAREA",
         "label": {
-          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan maisterikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
+          "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
+          "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+      },
+      {
+        "id": "university_programme_structure_programme_strengths-2",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan tohtorikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
+          "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
+          "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "relatedEvaluationQuestion": "programme_structure_programme_strengths"
+      },
+      {
+        "id": "university_same_tone_programme_structure-0",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita kandikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
           "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "shortLabel": {
-          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
-          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
-          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+          "fi": "",
+          "se": "",
+          "en": ""
         },
         "required": false,
         "no_color": true,
@@ -501,7 +733,95 @@
         }
       },
       {
-        "id": "faculty_programme_structure_actions",
+        "id": "university_programme_structure_actions-0",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-10 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "programme_structure_actions"
+      },
+      {
+        "id": "university_same_tone_programme_structure-1",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita maisterikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "university_programme_structure_actions-1",
+        "type": "ACTIONS",
+        "label": {
+          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
+        },
+        "description": {
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
+        },
+        "extrainfo": {
+          "fi": "Nimetkää 1-10 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
+          "en": "Write down one to five faculty development areas and concrete measures for them."
+        },
+        "required": true,
+        "no_color": true,
+        "relatedEvaluationQuestion": "programme_structure_actions"
+      },
+      {
+        "id": "university_same_tone_programme_structure-2",
+        "index": "II",
+        "type": "TEXTAREA",
+        "label": {
+          "fi": "Tarkastelkaa tiedekuntien katselmusarvioita tohtorikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason toimikuntien näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
+        },
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": false,
+        "no_color": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "university_programme_structure_actions-2",
         "type": "ACTIONS",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
@@ -532,7 +852,7 @@
     },
     "parts": [
       {
-        "id": "faculty_studyprogramme_status",
+        "id": "university_studyprogramme_status",
         "index": 12,
         "kludge": true,
         "type": "ENTITY_LEVELS",
@@ -560,7 +880,7 @@
         "relatedEvaluationQuestion": "studyprogramme_status"
       },
       {
-        "id": "faculty_studyprogramme_status_opinion_differences",
+        "id": "university_studyprogramme_status_opinion_differences",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
@@ -577,7 +897,7 @@
         }
       },
       {
-        "id": "faculty_where_are_we_in_five_years",
+        "id": "university_where_are_we_in_five_years",
         "index": 13,
         "kludge": true,
         "type": "ENTITY_LEVELS",
@@ -605,7 +925,7 @@
         "relatedEvaluationQuestion": "where_are_we_in_five_years"
       },
       {
-        "id": "faculty_where_are_we_in_five_years_opinion_differences",
+        "id": "university_where_are_we_in_five_years_opinion_differences",
         "index": "I",
         "type": "TEXTAREA",
         "label": {
