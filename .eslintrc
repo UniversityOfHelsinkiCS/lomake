@@ -49,7 +49,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "default-param-last": ["off"],
+    "default-param-last": ["off"]
   },
   "parserOptions": {
     "ecmaVersion": 2020
