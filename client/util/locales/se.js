@@ -35,6 +35,7 @@ export default {
     international: 'Internationella Magisterprogram',
     programmeFilter: 'Sök utbildningsprogram',
     facultyFilter: 'Sök',
+    find: 'Sök',
 
     noData: 'Ingen data tillgänglig för dessa urval',
     selectAll: 'Välj alla',
@@ -207,6 +208,7 @@ export default {
   generic: {
     noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
     facultyAvg: 'Genomsnitt av fakultetens program',
+    chosenFacultyAvg: 'genomsnitt för vald fakultet',
     universityAvg: 'Genomsnitt för alla program',
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     individualTxt: 'Öppna svar från enskilda respondenter vid fakulteten',

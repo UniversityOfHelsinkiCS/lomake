@@ -1,16 +1,35 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon } from 'semantic-ui-react'
+import { Accordion, Icon, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { isAdmin, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
-
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+
 import { data, committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
+import { TextQuestionGroup } from '../../ReformAnswers'
+import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
+
+const TextualAnswers = ({ reformAnswers }) => {
+  const { data } = reformAnswers
+
+  if (!data) {
+    return
+  }
+
+  // eslint-disable-next-line consistent-return
+  return (
+    <div>
+      {questionData.slice(1).map(group => (
+        <TextQuestionGroup key={group.id} questionGroup={group} answers={data} />
+      ))}
+    </div>
+  )
+}
 
 export default () => {
   const { t } = useTranslation()
@@ -19,7 +38,8 @@ export default () => {
   const debouncedFilter = useDebounce(filter, 200)
   const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
-
+  const [textualVisible, setTextualVisible] = useState(false)
+  const reformAnswers = useSelector(state => state.reformAnswers)
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
@@ -148,6 +168,18 @@ export default () => {
               formType={formType}
             />
           </div>
+          <div style={{ marginTop: 50 }}>
+            <h3>{t('generic:individualTxt')}</h3>
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              toggle
+              onChange={() => setTextualVisible(!textualVisible)}
+              checked={textualVisible}
+              label={t('formView:showAnswers')}
+            />
+          </div>
+
+          {textualVisible && <TextualAnswers reformAnswers={reformAnswers} />}
         </>
       ) : (
         <NoPermissions t={t} />

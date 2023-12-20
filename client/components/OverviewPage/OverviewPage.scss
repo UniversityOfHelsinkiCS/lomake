@@ -156,6 +156,14 @@ $DEGREE_REFORM_COUNT: 10;
     z-index: 10;
     width: 8em;
   }
+  &-degree-reform-filter {
+    align-self: flex-start;
+    position: relative;
+    top: 140px;
+    z-index: 10;
+    width: 8em;
+    display: flex;
+  }
 }
 
 .sorter {

@@ -97,6 +97,7 @@ const ColorTable = React.memo(
     handleShowProgrammes,
     individualAnswers,
     facultyView,
+    dropdownFilter,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -228,7 +229,7 @@ const ColorTable = React.memo(
     const selectorLabel = facultyView ? t('showAllFacultyProgrammes') : t('showAllProgrammes')
     return (
       <>
-        {facultyView || !isAdmin(currentUser) ? (
+        {(facultyView && facultyView !== 'UNI') || !isAdmin(currentUser) ? (
           <div className="table-container-degree-reform-button" style={{ paddingTop: 20 }}>
             <Radio
               style={{ marginRight: 'auto', marginBottom: '2em' }}
@@ -273,7 +274,7 @@ const ColorTable = React.memo(
               />
               <div />
               <div className="table-container" style={{ paddingTop: 20 }}>
-                {t('generic:facultyAvg')}
+                {dropdownFilter.length > 0 ? t('generic:chosenFacultyAvg') : t('generic:facultyAvg')}
               </div>
             </>
           ) : (

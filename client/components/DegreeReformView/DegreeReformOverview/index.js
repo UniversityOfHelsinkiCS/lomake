@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { Radio } from 'semantic-ui-react'
+import { Radio, Input, Dropdown } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import useDebounce from 'Utilities/useDebounce'
@@ -59,6 +59,7 @@ export default () => {
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const [faculty, setFaculty] = useState(null)
   const [textualVisible, setTextualVisible] = useState(false)
+  const [dropdownFilter, setDropdownFilter] = useState([])
   const dispatch = useDispatch()
 
   const debouncedFilter = useDebounce(filter, 200)
@@ -100,6 +101,15 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
+  const handleDropDownFilter = (e, code, selected) => {
+    e.stopPropagation()
+    if (selected) {
+      setDropdownFilter(dropdownFilter.filter(f => f !== code))
+    } else {
+      setDropdownFilter(dropdownFilter.concat(code))
+    }
+  }
+
   const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
 
   const filteredProgrammes = useMemo(() => {
@@ -120,19 +130,29 @@ export default () => {
   }, [currentUser])
 
   let facultyProgrammes = null
+  let nameOf = null
 
   if (faculty) {
-    const facultyObject = faculties.data.find(f => f.code === faculty)
-    let facultyProgrammeCodes = facultyObject.ownedProgrammes.map(p => p.key)
+    if (faculty === 'UNI') {
+      if (dropdownFilter.length > 0) {
+        facultyProgrammes = programmes.filter(p => dropdownFilter.includes(p.primaryFaculty.code))
+      } else {
+        facultyProgrammes = programmes
+      }
 
-    if (showAllProgrammes) {
-      facultyProgrammeCodes = facultyProgrammeCodes.concat(facultyObject.companionStudyprogrammes.map(p => p.key))
+      nameOf = () => t('generic:level:university')
+    } else {
+      const facultyObject = faculties.data.find(f => f.code === faculty)
+      let facultyProgrammeCodes = facultyObject.ownedProgrammes.map(p => p.key)
+
+      if (showAllProgrammes) {
+        facultyProgrammeCodes = facultyProgrammeCodes.concat(facultyObject.companionStudyprogrammes.map(p => p.key))
+      }
+
+      facultyProgrammes = programmes.filter(p => facultyProgrammeCodes.includes(p.key))
+      nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
     }
-
-    facultyProgrammes = programmes.filter(p => facultyProgrammeCodes.includes(p.key))
   }
-
-  const nameOf = faculty => faculties.data.find(f => f.code === faculty).name[lang]
   return (
     <>
       {faculty && <h2 style={{ marginTop: 5 }}>{nameOf(faculty)}</h2>}
@@ -169,6 +189,36 @@ export default () => {
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('degree-reform').toUpperCase()}</h2>
           </div>
+          {faculty === 'UNI' && (
+            <div className="table-container-degree-reform-filter">
+              <Input
+                data-cy="overviewpage-filter"
+                size="small"
+                placeholder={t('find')}
+                onChange={handleFilterChange}
+                value={filter}
+              />
+              <Dropdown icon="filter" floating button className="icon">
+                <Dropdown.Menu>
+                  <Dropdown.Header icon="tags" content="Filter by faculty" />
+                  <Dropdown.Divider />
+                  {faculties.data.map(f => {
+                    const selected = dropdownFilter.includes(f.code)
+                    return (
+                      <Dropdown.Item
+                        key={f.code}
+                        onClick={e => handleDropDownFilter(e, f.code, selected)}
+                        text={f.name[lang]}
+                        multiple
+                        active={selected}
+                        label={selected && { color: 'blue', empty: true, circular: true }}
+                      />
+                    )
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          )}
           <div style={{ marginTop: '1em' }}>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
@@ -185,6 +235,7 @@ export default () => {
               form={2}
               facultyView={faculty}
               individualAnswers={reformAnswers?.data}
+              dropdownFilter={dropdownFilter}
             />
           </div>
           {faculty && (

@@ -35,6 +35,7 @@ export default {
     international: "International Master's programmes",
     programmeFilter: 'Search for degree programmes',
     facultyFilter: 'Search for faculties',
+    find: 'Find',
 
     noData: 'No data available for these choices',
     selectAll: 'Select all',
@@ -210,6 +211,7 @@ export default {
   generic: {
     noData: 'answers to individual questions not yet available',
     facultyAvg: 'Average of programmes of the faculty',
+    chosenFacultyAvg: 'Average of chosen programmes of the faculty',
     universityAvg: 'Average of all programmes',
     individualAvg: 'Average of individual answers of the faculty',
     individualTxt: 'Open responses from individual faculty respondents',

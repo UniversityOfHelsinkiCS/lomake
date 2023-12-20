@@ -38,6 +38,7 @@ export default {
     international: 'Kansainväliset maisteriohjelmat',
     programmeFilter: 'Etsi koulutusohjelmia',
     facultyFilter: 'Etsi tiedekuntia',
+    find: 'Etsi',
 
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     selectAll: 'Valitse kaikki',
@@ -210,6 +211,7 @@ export default {
   generic: {
     noData: 'yksittäisten kysymysten vastaukset eivät vielä saatavilla',
     facultyAvg: 'Tiedekunnan koulutusohjelmien keskiarvo',
+    chosenFacultyAvg: 'Valittujen tiedekuntien koulutusohjelmien keskiarvo',
     universityAvg: 'Yliopiston koulutusohjelmien keskiarvo',
     individualAvg: 'Tiedekunnan yksittäisten vastaajien keskiarvo',
     individualTxt: 'Tiedekunnan yksittäisten vastaajien avovastaukset',
