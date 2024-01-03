@@ -35,7 +35,7 @@ const DegreeReformFormView = ({ room }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  const year = 2023
+  const year = formDeadline ? 2024 : 2023
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)

@@ -38,7 +38,8 @@ const DegreeReformIndividual = () => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === formNumber) : null
 
-  const year = 2023
+  const year = formDeadline ? 2024 : 2023
+
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {
     if (formData.pending) return

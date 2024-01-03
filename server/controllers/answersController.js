@@ -106,10 +106,9 @@ const getSingleProgrammesAnswers = async (req, res) => {
 const getIndividualFormAnswerForUser = async (req, res) => {
   try {
     const { uid } = req.user
-    const draftYears = await db.draftYear.findAll({})
-    const draftYear = draftYears.length ? draftYears[0].year : null
+    const deadline = await db.deadline.findOne({ where: { form: 3 } })
     let data = null
-    if (draftYear && draftYear === Number(2023)) {
+    if (deadline) {
       data = await db.tempAnswer.findOne({
         where: {
           programme: {
