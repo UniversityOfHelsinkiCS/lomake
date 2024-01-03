@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { Radio, Input, Dropdown } from 'semantic-ui-react'
+import { Radio, Dropdown } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import useDebounce from 'Utilities/useDebounce'
@@ -191,16 +191,8 @@ export default () => {
           </div>
           {faculty === 'UNI' && (
             <div className="table-container-degree-reform-filter">
-              <Input
-                data-cy="overviewpage-filter"
-                size="small"
-                placeholder={t('find')}
-                onChange={handleFilterChange}
-                value={filter}
-              />
-              <Dropdown icon="filter" floating button className="icon">
-                <Dropdown.Menu>
-                  <Dropdown.Header icon="tags" content="Filter by faculty" />
+              <Dropdown text={t('facultyFilter')} icon="filter" button labeled className="icon">
+                <Dropdown.Menu defaultUpward="false" upward="false">
                   <Dropdown.Divider />
                   {faculties.data.map(f => {
                     const selected = dropdownFilter.includes(f.code)
