@@ -278,7 +278,7 @@ const getProgrammeSummaryData = async (req, res) => {
     throw new Error('No programme defined')
   }
   try {
-    const years = [2019, 2020, 2021, 2022]
+    const years = [2019, 2020, 2021, 2022, 2023]
 
     const yearlyFormOpen = await db.deadline.findOne({ where: { form: 1 } })
 
@@ -294,16 +294,23 @@ const getProgrammeSummaryData = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
           form: formKeys.YEARLY_ASSESSMENT,
-          year: 2023,
+          year: 2024,
           programme: code,
         },
       })
       answers.push(latestAnswers)
     } else {
+      const areThereAnswersFor2024 = await db.answer.findOne({
+        where: {
+          form: formKeys.YEARLY_ASSESSMENT,
+          year: 2024,
+          programme: code,
+        },
+      })
       const latestAnswers = await db.answer.findOne({
         where: {
           form: 1,
-          year: 2023,
+          year: areThereAnswersFor2024 ? 2024 : 2023,
           programme: code,
         },
       })
@@ -327,7 +334,7 @@ const getOldFacultySummaryData = async (req, res) => {
     programmes.sort((a, b) => {
       return a?.name[lang].localeCompare(b?.name[lang])
     })
-    const years = [2019, 2020, 2021, 2022]
+    const years = [2019, 2020, 2021, 2022, 2023]
     const codes = programmes.map(p => p.key)
     const answers = await db.answer.findAll({
       where: {
@@ -343,7 +350,7 @@ const getOldFacultySummaryData = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
           form: formKeys.YEARLY_ASSESSMENT,
-          year: 2023,
+          year: 2024,
           programme: codes,
         },
       })
@@ -385,7 +392,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findAll({
         where: {
           form: formKeys.EVALUATION_PROGRAMMES,
-          year: 2023,
+          year: 2024,
           programme: codes,
         },
       })

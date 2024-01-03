@@ -96,7 +96,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  const year = 2023 // the next time form is filled is in 2026
+  const year = formDeadline ? 2024 : 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
   const summaries = useSelector(state => state.summaries)
 

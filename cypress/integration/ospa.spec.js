@@ -125,7 +125,7 @@ describe('SuperAdmin user tests', () => {
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]')
       .find('.editor-class')
-      .should('contain.text', `Hello from 2022, editing old year`)
+      .should('contain.text', `Hello from 2023, editing old year`)
 
     // Close the form
     cy.visit('/admin')
@@ -143,8 +143,8 @@ describe('SuperAdmin user tests', () => {
     // Check that changes persisted and fields with no changes stay the same
     cy.visit('/form/KH50_004')
     cy.selectYear(defaultYears[1])
-    cy.get('[data-cy=textarea-learning_outcomes]').should('contain.text', `Hello from 2022, editing old year`)
-    cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2022`)
+    cy.get('[data-cy=textarea-learning_outcomes]').should('contain.text', `Hello from 2023, editing old year`)
+    cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2023`)
   })
 
   it('Can write to form and change from traffic light table to trends view', () => {
