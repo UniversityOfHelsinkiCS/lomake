@@ -8,7 +8,7 @@ import ActionElement from './ActionElement'
 import './Generic.scss'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
-const Actions = ({ id, label, description, form, required, extrainfo, programme, summaryData }) => {
+const Actions = ({ id, label, description, form, required, extrainfo, programme, summaryData, questionLevel }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const formData = useSelector(state => state.form.data)
@@ -74,7 +74,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
 
   const showSummary = (form === 6 && subTitle === 'Kandi') || form === 5
 
-  const showDescription = showSummary || form !== 6
+  const showDescription = (subTitle === 'Kandi' && questionLevel.level === 'university') || form !== 6
 
   return (
     <div
@@ -111,6 +111,8 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
           </div>
         </>
       )}
+      {questionLevel && <h3>{questionLevel[lang]}</h3>}
+
       {showSummary && (
         <div className="summary-container">
           <h4>{t('formView:facultyActionSummaryTitle')}</h4>
