@@ -79,22 +79,6 @@ const seedFacultiesAndStudyprogrammes = async () => {
       se: 'Universitetsnivå',
     },
   })
-
-  const uniFaculty = await db.faculty.findOne({
-    where: {
-      code: 'UNI',
-    },
-  })
-
-  db.studyprogramme.create({
-    key: 'UNI',
-    name: uniFaculty.name,
-    level: 'UNI',
-    international: false,
-    lockedForms: { yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false },
-    claimed: false,
-    primaryFacultyId: uniFaculty.id,
-  })
 }
 
 const seed = async () => {
