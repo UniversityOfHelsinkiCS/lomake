@@ -29,7 +29,10 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
   const partMap = part => {
     const summary =
-      part.id.includes('meta') || part.id.includes('_opinion_differences') || part.id.includes('programme_strengths')
+      part.id.includes('meta') ||
+      part.id.includes('_opinion_differences') ||
+      part.id.includes('programme_strengths') ||
+      part.id.includes('seamless_studies')
 
     const divStyle = summary
       ? {

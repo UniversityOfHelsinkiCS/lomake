@@ -202,6 +202,15 @@ const Textarea = ({
   const saveButtonLabel = !hasLock || unsavedContent ? t('generic:kludgeButton') : t('generic:kludgeButtonRelease')
   const notSavedInfoText = unsavedContent ? t('generic:textUnsaved') : t('generic:textUnsavedRelease')
 
+  let subTitle = null
+  if (id.indexOf('_master') > -1) {
+    subTitle = 'Maisteri'
+  } else if (id.indexOf('_doctoral') > -1) {
+    subTitle = 'Tohtori'
+  } else if (id.indexOf('_bachelor') > -1) {
+    subTitle = 'Kandi'
+  }
+
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div
@@ -250,6 +259,7 @@ const Textarea = ({
           id={id}
         />
       </div>
+      {subTitle && <h2> {subTitle}</h2>}
       {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} form={form} />}
       {viewOnly ? (
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
