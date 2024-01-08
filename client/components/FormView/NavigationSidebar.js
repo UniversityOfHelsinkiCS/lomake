@@ -30,6 +30,8 @@ const questionTypesToShow = [
   'CHOOSE-ADVANCED',
   'CHECKBOX',
   'ENTITY_LEVELS',
+  'ENTITY_UNIVERSITY',
+  'TEXTAREA_UNIVERSITY',
 ]
 
 const getIcon = filled => (filled ? 'check' : 'exclamation')
@@ -151,7 +153,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                         type === 'TEXTAREA' ||
                         type === 'ENTITY' ||
                         type === 'SELECTION' ||
-                        type === 'ENTITY_LEVELS'
+                        type === 'ENTITY_LEVELS' ||
+                        type === 'ENTITY_UNIVERSITY'
                       ) {
                         idsToCheck.push(`${id}_text`)
                       } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
@@ -163,7 +166,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       if (type === 'ENTITY' && !no_color) {
                         idsToCheck.push(`${id}_light`)
                       }
-                      if (type === 'ENTITY_LEVELS') {
+                      if (type === 'ENTITY_LEVELS' || type === 'ENTITY_UNIVERSITY') {
                         idsToCheck.push(`${id}_bachelor_light`)
                         if (programmeKey !== 'H74') {
                           idsToCheck.push(`${id}_master_light`)

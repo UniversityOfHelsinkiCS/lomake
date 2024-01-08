@@ -117,7 +117,12 @@ const ColorTableCell = ({
 
   let IconElement = null
 
-  if (textAnswer && questionType !== 'ENTITY' && questionType !== 'ENTITY_LEVELS') {
+  if (
+    textAnswer &&
+    questionType !== 'ENTITY' &&
+    questionType !== 'ENTITY_LEVELS' &&
+    questionType !== 'ENTITY_UNIVERSITY'
+  ) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}

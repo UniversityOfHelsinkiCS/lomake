@@ -7,6 +7,7 @@ import EntityUniversity from 'Components/Generic/EntityUniversity'
 import Measures from 'Components/Generic/Measures'
 import Actions from 'Components/Generic/Actions'
 import { colors, romanize } from 'Utilities/common'
+import TextareaUniversity from 'Components/Generic/TextareaUniversity'
 import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
@@ -16,6 +17,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
   const partComponentMap = {
     TEXTAREA: Textarea,
+    TEXTAREA_UNIVERSITY: TextareaUniversity,
     ENTITY: Entity,
     ENTITY_LEVELS: EntityLevels,
     ENTITY_UNIVERSITY: EntityUniversity,

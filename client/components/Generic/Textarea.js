@@ -212,7 +212,7 @@ const Textarea = ({
           alignItems: 'flex-end',
         }}
       >
-        {!editorError && !editorLockError && (
+        {!editorError && !editorLockError && label && (
           <div className="entity-description" style={{ display: 'flex', justifyContent: 'left', minWidth }}>
             <label
               style={{

@@ -190,7 +190,14 @@ const CommitteeFormView = ({ room, formString }) => {
           result[part.id] = findEntityLevelAnswers(faculties, answers, part.relatedEvaluationQuestion)
           return
         }
+        if (part.relatedEvaluationQuestion && part.type === 'ENTITY_UNIVERSITY') {
+          result[part.id] = findEntityLevelAnswers(faculties, answers, part.relatedEvaluationQuestion)
+          return
+        }
         if (part.relatedEvaluationQuestion && part.type === 'TEXTAREA') {
+          result[part.id] = findTextAnswers(faculties, answers, part.relatedEvaluationQuestion)
+        }
+        if (part.relatedEvaluationQuestion && part.type === 'TEXTAREA_UNIVERSITY') {
           result[part.id] = findTextAnswers(faculties, answers, part.relatedEvaluationQuestion)
         }
       })
