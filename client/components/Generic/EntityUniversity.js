@@ -273,21 +273,18 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
               </div>
             </div>
           )}
-          <h4>{t('bachelorShort')}</h4>
           <Textarea
             id={`${id}-${object.level}_bachelor`}
             label={textAreaLabel}
             EntityLastYearsAccordion={null}
             form={form}
           />
-          <h4>{t('masterShort')}</h4>
           <Textarea
             id={`${id}-${object.level}_master`}
             label={textAreaLabel}
             EntityLastYearsAccordion={null}
             form={form}
           />
-          <h4>{t('doctoralShort')}</h4>
           <Textarea
             id={`${id}-${object.level}_doctoral`}
             label={textAreaLabel}
@@ -296,7 +293,6 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
           />
         </>
       ))}
-      <Divider />
     </div>
   )
 }

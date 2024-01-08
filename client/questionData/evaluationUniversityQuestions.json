@@ -11,7 +11,7 @@
         "index": 1,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Opiskelijavalinta (yliopisto)",
+          "fi": "Opiskelijavalinta",
           "se": "Studentantagning",
           "en": "Student admissions"
         },
@@ -39,12 +39,12 @@
         "index": 2,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Opetussuunnitelmat (yliopisto)",
+          "fi": "Opetussuunnitelmat",
           "se": "Undervisningsplan",
           "en": "Curriculum"
         },
         "label": {
-          "fi": "OPETUSSUUNNITELMAT (yliopisto)",
+          "fi": "OPETUSSUUNNITELMAT",
           "se": "UNDERVISNINGSPLAN",
           "en": "CURRICULUM"
         },
@@ -67,12 +67,12 @@
         "index": 3,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Opintojen ohjaus (yliopisto)",
+          "fi": "Opintojen ohjaus",
           "se": "Studiehandledning",
           "en": "Student guidance and supervision"
         },
         "label": {
-          "fi": "OPINTOJEN OHJAUS (yliopisto)",
+          "fi": "OPINTOJEN OHJAUS",
           "se": "STUDIEHANDLEDNING ",
           "en": "STUDENT GUIDANCE AND SUPERVISION"
         },
@@ -95,12 +95,12 @@
         "index": 4,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Nivelvaihe (yliopisto)",
+          "fi": "Nivelvaihe",
           "se": "Övergångsstadium",
           "en": "Transition period"
         },
         "label": {
-          "fi": "NIVELVAIHE (yliopisto)",
+          "fi": "NIVELVAIHE",
           "se": "ÖVERGÅNGSSTADIUM",
           "en": "TRANSITION PERIOD"
         },
@@ -122,12 +122,12 @@
         "index": 5,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Läpivirtaus (yliopisto)",
+          "fi": "Läpivirtaus",
           "se": "Genomströmning",
           "en": "Progression"
         },
         "label": {
-          "fi": "LÄPIVIRTAUS (yliopisto)",
+          "fi": "LÄPIVIRTAUS",
           "se": "GENOMSTRÖMNING",
           "en": "PROGRESSION"
         },
@@ -150,9 +150,9 @@
         "index": "meta-MH",
         "type": "TITLE",
         "label": {
-          "fi": "TEEMA Opiskelun sujuvuus:",
-          "en": "THEME Seamless studies:",
-          "se": "TEMA Smidiga studier: "
+          "fi": "NÄKEMYSEROT TEEMASTA Opiskelun sujuvuus :",
+          "en": "DIFFERENCES OF THE THEME seamless studies:",
+          "se": "SYNSÄTTEN OM TEMA Smidiga studier:"
         }
       },
       {
@@ -160,8 +160,8 @@
         "index": "I",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja kandiopintojen sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
-          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja kandi-, maisteri- ja tohtorikoulutuksen sujuvuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin. ",
+          "se": "",
           "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
@@ -188,8 +188,8 @@
         "index": "II",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Mitkä ovat yliopiston vahvuuksia kandiopintojen sujuvuudessa?",
-          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "fi": "Mitkä ovat yliopiston vahvuuksia kandi- maisteri- ja tohtoriopintojen sujuvuudessa?",
+          "se": "",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "required": false,
@@ -206,8 +206,8 @@
         "index": "II",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Puhuvatko kandiopintojen tilastot samaa kieltä kuin tiedekuntien vastaukset? Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
-          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "fi": "Arvioikaa opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuutta. Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
+          "se": "",
           "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "shortLabel": {
@@ -225,59 +225,15 @@
         "relatedEvaluationQuestion": "faculty_university_same_tone_seamless_studies"
       },
       {
-        "id": "university_ease_of_study_actions-KH",
-        "type": "ACTIONS",
+        "id": "university_ease_of_study_actions",
+        "type": "ACTIONS_UNIVERSITY",
         "label": {
-          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
-          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
-        },
-        "description": {
-          "fi": "Punaisen kokonaisarvion saaneista kandiopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
-          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
-        },
-        "extrainfo": {
-          "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "Anteckna 1–10 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five faculty development areas and concrete measures for them."
-        },
-        "required": true,
-        "no_color": true,
-        "relatedEvaluationQuestion": "faculty_ease_of_study_actions"
-      },
-      {
-        "id": "university_ease_of_study_actions-MH",
-        "type": "ACTIONS",
-        "label": {
-          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
-          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
-        },
-        "extrainfo": {
-          "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "Anteckna 1–10 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five faculty development areas and concrete measures for them."
-        },
-        "required": true,
-        "no_color": true,
-        "relatedEvaluationQuestion": "faculty_ease_of_study_actions"
-      },
-      {
-        "id": "university_ease_of_study_actions-T",
-        "type": "ACTIONS",
-        "label": {
-          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
-          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
-        },
-        "description": {
-          "fi": "Punaisen kokonaisarvion saaneista tohtoriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
@@ -546,8 +502,8 @@
         }
       },
       {
-        "id": "university_programme_structure_actions-KH",
-        "type": "ACTIONS",
+        "id": "university_programme_structure_actions",
+        "type": "ACTIONS_UNIVERSITY",
         "label": {
           "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
@@ -555,50 +511,6 @@
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista kandiopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
-          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
-        },
-        "extrainfo": {
-          "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five faculty development areas and concrete measures for them."
-        },
-        "required": true,
-        "no_color": true,
-        "relatedEvaluationQuestion": "faculty_programme_structure_actions"
-      },
-      {
-        "id": "university_programme_structure_actions-MH",
-        "type": "ACTIONS",
-        "label": {
-          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
-          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
-        },
-        "description": {
-          "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
-          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
-        },
-        "extrainfo": {
-          "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta ja niihin tarvittavat konkreettiset toimenpiteet.",
-          "se": "Anteckna 1–5 utvecklingsobjekt och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five faculty development areas and concrete measures for them."
-        },
-        "required": true,
-        "no_color": true,
-        "relatedEvaluationQuestion": "faculty_programme_structure_actions"
-      },
-      {
-        "id": "university_programme_structure_actions-T",
-        "type": "ACTIONS",
-        "label": {
-          "fi": "YLIOPISTON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
-          "en": "DEVELOPMENT AREAS AND MEASURES BY THE FACULTY"
-        },
-        "description": {
-          "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
           "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },

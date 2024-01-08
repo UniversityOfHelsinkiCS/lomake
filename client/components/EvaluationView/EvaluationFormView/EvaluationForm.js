@@ -8,6 +8,7 @@ import Measures from 'Components/Generic/Measures'
 import Actions from 'Components/Generic/Actions'
 import { colors, romanize } from 'Utilities/common'
 import TextareaUniversity from 'Components/Generic/TextareaUniversity'
+import ActionsUniversity from 'Components/Generic/ActionsUniversity'
 import Section from './EvaluationSection'
 
 import './EvaluationForm.scss'
@@ -23,6 +24,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     ENTITY_UNIVERSITY: EntityUniversity,
     MEASURES: Measures,
     ACTIONS: Actions,
+    ACTIONS_UNIVERSITY: ActionsUniversity,
   }
 
   let number = 0
@@ -72,7 +74,13 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
       return null
     }
 
-    if (part.type === 'ENTITY' || part.type === 'ENTITY_LEVELS' || part.type === 'ENTITY_UNIVERSITY') number++
+    if (
+      part.type === 'ENTITY' ||
+      part.type === 'ENTITY_LEVELS' ||
+      part.type === 'ENTITY_UNIVERSITY' ||
+      part.type === 'ACTIONS_UNIVERSITY'
+    )
+      number++
 
     const Component = partComponentMap[part.type]
     const description = part.description ? part.description[lang] : undefined

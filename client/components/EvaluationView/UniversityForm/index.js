@@ -182,6 +182,10 @@ const CommitteeFormView = ({ room, formString }) => {
     const result = {}
     questions.forEach(q => {
       q.parts.forEach(part => {
+        if (part.relatedEvaluationQuestion && part.type === 'ACTIONS_UNIVERSITY') {
+          result[part.id] = findActionAnswers(faculties, answers, part.relatedEvaluationQuestion)
+          return
+        }
         if (part.relatedEvaluationQuestion && part.type === 'ACTIONS') {
           result[part.id] = findActionAnswers(faculties, answers, part.relatedEvaluationQuestion)
           return
