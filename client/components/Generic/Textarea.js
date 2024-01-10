@@ -69,7 +69,7 @@ const Textarea = ({
 
   const formData = useSelector(({ form }) => form.data)
 
-  const MAX_LENGTH = maxLength || 1100
+  const MAX_LENGTH = maxLength || form === 5 ? 2100 : 1100
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -136,7 +136,7 @@ const Textarea = ({
     setChanges(true)
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
-    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
+    const markdownStr = draftToMarkdown(rawObject).substring(0, MAX_LENGTH)
     if (markdownStr !== dataFromRedux) {
       setUnsavedContent(true)
     }
@@ -156,7 +156,7 @@ const Textarea = ({
     const value = editorState
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
-    const markdownStr = draftToMarkdown(rawObject).substring(0, 1100)
+    const markdownStr = draftToMarkdown(rawObject).substring(0, MAX_LENGTH)
     if (form === 3) {
       dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
