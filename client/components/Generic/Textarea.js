@@ -259,7 +259,7 @@ const Textarea = ({
           id={id}
         />
       </div>
-      {subTitle && <h2> {subTitle}</h2>}
+      {subTitle && <h3> {subTitle}</h3>}
       {hasSummaryData && <ProgrammeTextAnswerSummary questionId={id} summaryData={summaryData} form={form} />}
       {viewOnly ? (
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
