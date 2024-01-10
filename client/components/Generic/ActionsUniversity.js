@@ -60,6 +60,20 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
           >
             {' '}
           </Actions>
+          {questionLevel.level === 'arviointi' && (
+            <Actions
+              id={`${id}-${questionLevel.level}_overall`}
+              label={label}
+              description={description}
+              form={form}
+              required={required}
+              extrainfo={extrainfo}
+              programme={programme}
+              summaryData={summaryData}
+            >
+              {' '}
+            </Actions>
+          )}
         </>
       ))}
     </div>

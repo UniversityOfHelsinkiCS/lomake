@@ -70,9 +70,11 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
     subTitle = 'Tohtori'
   } else if (id.indexOf('_bachelor') > -1) {
     subTitle = 'Kandi'
+  } else if (id.indexOf('_overall') > -1) {
+    subTitle = 'Yleiset arviot ja toimenpidesuositukset'
   }
 
-  const showSummary = (form === 6 && subTitle === 'Kandi') || form === 5
+  const showSummary = (form === 6 && subTitle === 'Kandi' && questionLevel.level === 'university') || form === 5
 
   const showDescription = (subTitle === 'Kandi' && questionLevel.level === 'university') || form !== 6
 
