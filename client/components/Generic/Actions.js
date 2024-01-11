@@ -78,11 +78,13 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
 
   const showDescription = (subTitle === 'Kandi' && questionLevel.level === 'university') || form !== 6
 
+  const isArviointi = id.includes('arviointi')
+
   return (
     <div
       className="form-entity-area"
       style={{
-        borderLeft: '5px solid',
+        borderLeft: isArviointi ? 0 : '5px solid',
         borderColor: colors.background_black,
         padding: '1em',
       }}

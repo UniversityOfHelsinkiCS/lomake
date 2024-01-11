@@ -140,6 +140,27 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
 
   const summaryTitle = form !== 6 ? 'formView:facultySummaryTitle' : 'formView:universitySummaryTitle'
 
+  const styleFor = ({ level }) => {
+    if (level === 'university') {
+      return {
+        marginTop: 30,
+      }
+    }
+
+    // eslint-disable-next-line consistent-return
+    return {
+      marginTop: 30,
+      marginBottom: 10,
+      borderStyle: 'solid',
+      borderColor: 'gray',
+      borderWidth: 5,
+      paddingTop: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 30,
+    }
+  }
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -152,7 +173,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
         </div>
       </div>
       {questionLevels.map(object => (
-        <>
+        <div style={styleFor(object)}>
           <h3>{object[lang]}</h3>
           <div className="entity-description">
             {description}
@@ -291,7 +312,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
             EntityLastYearsAccordion={null}
             form={form}
           />
-        </>
+        </div>
       ))}
     </div>
   )

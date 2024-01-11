@@ -19,10 +19,31 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
 
   const questionLevels = [universityTitle, evaluationTitle]
 
+  const styleFor = ({ level }) => {
+    if (level === 'university') {
+      return {
+        marginTop: 30,
+      }
+    }
+
+    // eslint-disable-next-line consistent-return
+    return {
+      marginTop: 30,
+      marginBottom: 10,
+      borderStyle: 'solid',
+      borderColor: 'gray',
+      borderWidth: 5,
+      paddingTop: 15,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingBottom: 30,
+    }
+  }
+
   return (
     <div>
       {questionLevels.map(questionLevel => (
-        <>
+        <div style={styleFor(questionLevel)}>
           <Actions
             id={`${id}-${questionLevel.level}_bachelor`}
             label={label}
@@ -74,7 +95,7 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
               {' '}
             </Actions>
           )}
-        </>
+        </div>
       ))}
     </div>
   )
