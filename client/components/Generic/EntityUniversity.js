@@ -130,7 +130,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
   }
 
   const evaluationTitle = {
-    level: 'arvioniti',
+    level: 'arviointi',
     fi: 'Arviointiryhmän arvio',
     en: "Evaluation committee's evaluation",
     sv: 'Bedömningsgruppens bedömning',
@@ -197,7 +197,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
               </div>
             )}
           </div>
-          {object.level === 'arviointi' && (
+          {object.level !== 'arviointi' && (
             <div className="summary-container">
               <h4>{t(summaryTitle)}</h4>
               <div className="summary-grid" data-cy={`${id}-${object.level}-summary`}>
