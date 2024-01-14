@@ -65,18 +65,18 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
 
   let subTitle = null
   if (id.indexOf('_master') > -1) {
-    subTitle = 'Maisteri'
+    subTitle = 'Maisteriohjelmat'
   } else if (id.indexOf('_doctoral') > -1) {
-    subTitle = 'Tohtori'
+    subTitle = 'Tohtoriohjelmat'
   } else if (id.indexOf('_bachelor') > -1) {
-    subTitle = 'Kandi'
+    subTitle = 'Kandiohjelmat'
   } else if (id.indexOf('_overall') > -1) {
     subTitle = 'Yleiset arviot ja toimenpidesuositukset'
   }
 
-  const showSummary = (form === 6 && subTitle === 'Kandi' && questionLevel.level === 'university') || form === 5
+  const showSummary = (form === 6 && subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form === 5
 
-  const showDescription = (subTitle === 'Kandi' && questionLevel.level === 'university') || form !== 6
+  const showDescription = (subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form !== 6
 
   const isArviointi = id.includes('arviointi')
 
@@ -250,7 +250,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
           </div>
         </div>
       )}
-      {subTitle && <h2>{subTitle}</h2>}
+      {subTitle && <h3>{subTitle}</h3>}
 
       {actionsList.length === 0 ? (
         <ActionElement key="action-1" id={id} form={form} viewOnly={viewOnly} index={1} />
