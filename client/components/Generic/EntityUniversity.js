@@ -300,18 +300,8 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
             EntityLastYearsAccordion={null}
             form={form}
           />
-          <Textarea
-            id={`${id}-${object.level}_master`}
-            label={textAreaLabel}
-            EntityLastYearsAccordion={null}
-            form={form}
-          />
-          <Textarea
-            id={`${id}-${object.level}_doctoral`}
-            label={textAreaLabel}
-            EntityLastYearsAccordion={null}
-            form={form}
-          />
+          <Textarea id={`${id}-${object.level}_master`} EntityLastYearsAccordion={null} form={form} />
+          <Textarea id={`${id}-${object.level}_doctoral`} EntityLastYearsAccordion={null} form={form} />
         </div>
       ))}
     </div>
