@@ -173,7 +173,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
         </div>
       </div>
       {questionLevels.map(object => (
-        <div style={styleFor(object)}>
+        <div style={styleFor(object)} key={`uni-${id}-${object.level}`}>
           <h3>{object[lang]}</h3>
           <div className="entity-description">
             {description}

@@ -43,7 +43,7 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
   return (
     <div>
       {questionLevels.map(questionLevel => (
-        <div style={styleFor(questionLevel)}>
+        <div style={styleFor(questionLevel)} key={`uni-${id}-${questionLevel.level}`}>
           <Actions
             id={`${id}-${questionLevel.level}_bachelor`}
             label={label}
