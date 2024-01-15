@@ -12,7 +12,7 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
 
   const evaluationTitle = {
     level: 'arviointi',
-    fi: 'Arviointiryhmän arvio',
+    fi: 'Arviointiryhmän toimenpide-ehdotukset',
     en: "Evaluation committee's evaluation",
     sv: 'Bedömningsgruppens bedömning',
   }
