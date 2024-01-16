@@ -212,9 +212,22 @@ const getProgrammeReadAccess = hyGroups => {
  */
 const getFacultyKatselmusWriteAccess = hyGroups => {
   const hasFacultyWideWritingsRights = hyGroups.map(iam => facultyWideWritingGroups[iam]).filter(Boolean)
-  if (!hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0) return {}
+  const noFacultyRights = !hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0
   const access = {}
   let specialGroup = {}
+  if (hyGroups.find(group => group === 'grp-katselmus-projektiryhma')) {
+    data.forEach(faculty => {
+      faculty.programmes.forEach(program => {
+        access[program.key] = { read: true }
+      })
+      access[faculty.code] = { read: true, write: false }
+    })
+    specialGroup = { evaluationFaculty: true }
+    if (noFacultyRights) {
+      return { access, specialGroup }
+    }
+  }
+  if (!hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0) return {}
   data.forEach(faculty => {
     if (hasFacultyWideWritingsRights.includes(faculty.code)) {
       faculty.programmes.forEach(program => {
@@ -253,6 +266,7 @@ const getIAMRights = hyGroupsHeader => {
 
   ;[
     getUniversityReadingRights,
+    getUniversityFormAccess,
     getFacultyKatselmusWriteAccess,
     getDoctoralAccess,
     getDoctoralSchoolAccess,
@@ -261,7 +275,6 @@ const getIAMRights = hyGroupsHeader => {
     getDoctoralWriteAccess,
     getUniversityWriteAccess,
     getProgrammeAdminAccess,
-    getUniversityFormAccess,
     getAdmin,
     getSuperAdmin,
   ]

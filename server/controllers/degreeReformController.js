@@ -14,6 +14,9 @@ const getAnswersFromDb = async () => {
       programme: {
         [Op.not]: '',
       },
+      createdAt: {
+        [Op.between]: [new Date('2023-10-29'), new Date('2023-11-01')],
+      },
     },
   }
 
@@ -51,6 +54,7 @@ const getForUniversity = async (req, res) => {
   let { dropdownFilter } = req.params
   try {
     const data = await getAnswersFromDb()
+    //  const filteredData = data.filter(d => d.data?)
     if (dropdownFilter === 'UNI') {
       return res.send(data)
     }
