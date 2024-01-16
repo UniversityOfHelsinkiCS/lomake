@@ -84,7 +84,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
   const [showSpecific, setShowSpecific] = useState([])
   const onlyBc = programme === 'H74'
 
-  const hideLevels = id === 'transition_phase_faculty'
+  const hideLevels = id === 'transition_phase_university'
   const levels = hideLevels ? ['bachelor', 'master'] : ['bachelor', 'master', 'doctoral']
 
   const handleShowText = level => {
@@ -183,6 +183,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
           <div className="level-lights-container">
             {!onlyBc ? (
               levels.map(level => {
+                if (level === 'doctoral' && hideLevels) return null
                 return (
                   <div className="traffic-light-row" key={level}>
                     <label className="traffic-light-row-label">{t(level)}</label>
