@@ -126,6 +126,7 @@ export default {
     universitySummaryTitle: 'Fakulteten svarade på följande sätt:',
     facultyActionSummaryTitle:
       'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
+    // universityActionSummaryTitle: '',
     facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt:',
     materialsUniversity:
       'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakultetes.<br><br>I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till fakultetens vy.',

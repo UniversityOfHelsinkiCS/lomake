@@ -74,6 +74,8 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
     subTitle = 'Yleiset arviot ja toimenpidesuositukset'
   }
 
+  const summaryTitle = form === 6 ? 'formView:universityActionSummaryTitle' : 'formView:facultyActionSummaryTitle'
+
   const showSummary = (form === 6 && subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form === 5
 
   const showDescription = (subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form !== 6
@@ -119,7 +121,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
 
       {showSummary && (
         <div className="summary-container">
-          <h4>{t('formView:facultyActionSummaryTitle')}</h4>
+          <h4>{t(summaryTitle)}</h4>
           <div className="summary-grid" data-cy={`${id}-summary`}>
             <Grid columns={4}>
               <Grid.Row className="row">

@@ -166,6 +166,8 @@ export default {
     facultySummaryTitle: 'The answers given by the steering groups of the faculty´s degree programmes',
     facultyActionSummaryTitle:
       'The steering groups of the degree programmes recorded their development areas and their required measures as follows:',
+    universityActionSummaryTitle:
+      'The steering groups of the faculty´s degree programmes recorded their development areas and their required measures as follows:',
     materials: 'Supporting materials',
     materialsProg:
       'You can view all annual follow-up answers by following the below link.<br/> Additionally, a summary of annual follow-up answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',

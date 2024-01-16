@@ -167,6 +167,8 @@ export default {
     facultySummaryTitle: 'Tiedekunnan koulutusohjelmien johtoryhmät vastasivat seuraavasti:',
     facultyActionSummaryTitle:
       'Koulutusohjelmien johtoryhmät kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti:',
+    universityActionSummaryTitle:
+      'Tiedekunnat kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti: ',
     materials: 'Taustamateriaali',
     materialsProg:
       'Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.<br/> Lisäksi tässä lomakkeessa on usean kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä vuodelta kyseiseen teemaan liittyvien vuosiseurantakysymysten vastauksista. <br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä koulutusohjelma- että tiedekuntatason näkymään.',
