@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@sentry/browser": "^7.64.0",
-    "@sentry/esbuild-plugin": "^2.8.0",
+    "@sentry/esbuild-plugin": "^2.10.2",
     "@sentry/node": "^7.64.0",
     "@sentry/tracing": "^7.64.0",
     "axios": "^1.5.0",
