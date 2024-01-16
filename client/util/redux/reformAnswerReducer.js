@@ -12,6 +12,12 @@ export const getFacultyReformAnswers = faculty => {
   return callBuilder(route, prefix)
 }
 
+export const getUniversityReformAnswers = dropdownFilter => {
+  const route = `/reform/university/${dropdownFilter}`
+  const prefix = 'GET_REFORM_ANSWERS'
+  return callBuilder(route, prefix)
+}
+
 const initialState = {
   data: null,
 }

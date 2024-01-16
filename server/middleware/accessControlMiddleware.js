@@ -15,6 +15,12 @@ const requireFacultyRead = (req, res, next) => {
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
+const requireUniFormRight = (req, res, next) => {
+  if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
+  else if (req.user.specialGroup.university) next()
+  else res.status(401).json({ error: 'Unauthorized access.' }).end()
+}
+
 const requireProgrammeWrite = (req, res, next) => {
   const { programme } = req.params
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
@@ -62,4 +68,5 @@ module.exports = {
   requireProgrammeOwner,
   checkAdmin,
   checkAdminOrKatselmusryhma,
+  requireUniFormRight,
 }

@@ -47,7 +47,29 @@ const getForFaculty = async (req, res) => {
   }
 }
 
+const getForUniversity = async (req, res) => {
+  let { dropdownFilter } = req.params
+  try {
+    const data = await getAnswersFromDb()
+    if (dropdownFilter === 'UNI') {
+      return res.send(data)
+    }
+    dropdownFilter = dropdownFilter.split(',')
+    const dataByFaculty = data.filter(d => {
+      const backgroundUnit = d.data?.background_unit
+      if (!backgroundUnit) return false
+      return dropdownFilter.some(f => backgroundUnit.includes(`faculty_-_${f}`))
+    })
+
+    return res.send(dataByFaculty)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAllTemp,
   getForFaculty,
+  getForUniversity,
 }

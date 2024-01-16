@@ -10,7 +10,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { getForm, filterFromUrl } from 'Utilities/common'
-import { getFacultyReformAnswers } from 'Utilities/redux/reformAnswerReducer'
+import { getFacultyReformAnswers, getUniversityReformAnswers } from 'Utilities/redux/reformAnswerReducer'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -82,9 +82,14 @@ export default () => {
 
   useEffect(() => {
     if (faculty) {
-      dispatch(getFacultyReformAnswers(faculty))
+      if (faculty === 'UNI') {
+        const selectedFaculties = dropdownFilter.length < 1 ? 'UNI' : dropdownFilter
+        dispatch(getUniversityReformAnswers(selectedFaculties))
+      } else {
+        dispatch(getFacultyReformAnswers(faculty))
+      }
     }
-  }, [faculty])
+  }, [faculty, dropdownFilter])
 
   useEffect(() => {
     document.title = `${t('degree-reform')}`

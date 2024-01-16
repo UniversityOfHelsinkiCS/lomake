@@ -15,6 +15,7 @@ const {
   notInProduction,
   requireFacultyRead,
   checkAdminOrKatselmusryhma,
+  requireUniFormRight,
 } = require('@middleware/accessControlMiddleware')
 
 const router = Router()
@@ -23,6 +24,7 @@ router.post('/lock/:room', locks.getLock)
 
 router.get('/reform/temp', checkAdminOrKatselmusryhma, degreeReform.getAllTemp)
 router.get('/reform/faculties/:faculty', requireFacultyRead, degreeReform.getForFaculty)
+router.get('/reform/university/:dropdownFilter', requireUniFormRight, degreeReform.getForUniversity)
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
