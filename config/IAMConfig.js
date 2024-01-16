@@ -351,6 +351,9 @@ const facultyWideWritingGroups = {
   'grp-katselmus-mmtdk': 'H80',
   'grp-katselmus-eltdk': 'H90',
 }
+
+const universityFormWritingGroups = ['grp-katselmus-projektiryhma']
+
 const superAdminGroups = ['grp-toska']
 
 const adminGroups = ['hy-ypa-opa-ospa']
@@ -366,6 +369,8 @@ const isUniversityWideIam = iam => universityWideGroups.includes(iam)
 const isUniversityWideWritingIam = iam => isUniversityWideWritingGroups.includes(iam)
 
 const isDoctoralIam = iam => doctoralIams.includes(iam)
+
+const isUniverstyFormIam = iam => universityFormWritingGroups.includes(iam)
 
 const isDoctoralWritingIam = iam => doctoralWritingIams.includes(iam)
 
@@ -418,6 +423,7 @@ const relevantIAMs = []
   .concat(adminGroups)
   .concat(employeeGroups)
   .concat(Object.keys(facultyWideWritingGroups))
+  .concat(universityFormWritingGroups)
 
 module.exports = {
   doctoralIams,
@@ -442,4 +448,6 @@ module.exports = {
   relevantIAMs,
   isFacultyWideWritingIam,
   facultyWideWritingGroups,
+  isUniverstyFormIam,
+  universityFormWritingGroups,
 }

@@ -10,6 +10,7 @@ const {
   iamToDoctoralSchool,
   relevantIAMs,
   facultyWideWritingGroups,
+  isUniverstyFormIam,
 } = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -227,6 +228,19 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
 }
 
 /**
+ * Grant writing rights to university form to projektiryhma and the users of the form
+ * @param {string[]} hyGroups
+ * @returns write access to Katselmus university form
+ */
+const getUniversityFormAccess = hyGroups => {
+  const hasUniversityFormWritingRights = hyGroups.some(isUniverstyFormIam)
+  if (!hasUniversityFormWritingRights) return {}
+  let specialGroup = {}
+  specialGroup = { universityForm: true }
+  return { specialGroup }
+}
+
+/**
  * Gets access rights and special groups,
  * based on IAM-groups in IAM header string
  * @param {string} hyGroupsHeader
@@ -247,6 +261,7 @@ const getIAMRights = hyGroupsHeader => {
     getDoctoralWriteAccess,
     getUniversityWriteAccess,
     getProgrammeAdminAccess,
+    getUniversityFormAccess,
     getAdmin,
     getSuperAdmin,
   ]
