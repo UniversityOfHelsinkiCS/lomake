@@ -102,7 +102,7 @@ const DegreeReformFormView = ({ room }) => {
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
             {t('degree-reform')}
           </h3>
-          <StatusMessage programme={programme.key} form={form} />
+          <StatusMessage form={form} writeAccess={writeAccess} />
           <SaveIndicator />
         </div>
         <DegreeReformForm formType={formType} programmeKey={programme.key} questionData={questionDataFiltered} />

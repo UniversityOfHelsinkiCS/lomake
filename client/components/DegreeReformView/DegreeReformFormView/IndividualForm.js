@@ -105,7 +105,7 @@ const DegreeReformIndividual = () => {
             <h3 style={{ marginTop: 10, fontSize: 32, marginBottom: 30 }} data-cy="formview-title">
               {t('degree-reform')}
             </h3>
-            <StatusMessage programme={user.id} form={formNumber} />
+            <StatusMessage form={formNumber} />
             <SaveIndicator />
           </div>
           <DegreeReformForm questionData={questionData} formType={formType} />

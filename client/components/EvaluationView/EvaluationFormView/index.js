@@ -203,7 +203,7 @@ const EvaluationFormView = ({ room, formString }) => {
           </h3>
 
           <div className="hide-in-print-mode">
-            <StatusMessage programme={room} form={form} />
+            <StatusMessage form={form} writeAccess={writeAccess} />
             <div
               style={{
                 lineHeight: 2,

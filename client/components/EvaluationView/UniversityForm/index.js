@@ -16,7 +16,7 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './index.scss'
-import { colors, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
+import { colors, isAdmin } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
@@ -30,7 +30,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   return false
 }
 
-const hasRights = currentUser => isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)
+const hasRights = currentUser => isAdmin(currentUser) || currentUser.specialGroup?.universityForm
 
 const findEntityLevelAnswers = (faculties, allAnswers, question) => {
   const result = {
@@ -138,7 +138,7 @@ const CommitteeFormView = ({ room, formString }) => {
 
   useEffect(() => {
     if (!committee || !form) return
-    if (!user.access[committee] && !hasRights(user)) {
+    if (!hasRights(user)) {
       return
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
@@ -210,7 +210,6 @@ const CommitteeFormView = ({ room, formString }) => {
   }, [room, user, facultyProgrammeData.pending])
   if (!room || !form) return <Redirect to="/" />
   if (!committee) return 'Error: Invalid url.'
-
   if (!user.access[committee.code] && !hasRights(user)) {
     return <NoPermissions t={t} />
   }
@@ -237,7 +236,7 @@ const CommitteeFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
-                <StatusMessage programme={room} form={form} />
+                <StatusMessage form={form} writeAccess={hasRights} />
                 <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:facultyInfo" />

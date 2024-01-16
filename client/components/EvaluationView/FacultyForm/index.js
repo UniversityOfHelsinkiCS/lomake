@@ -133,6 +133,7 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
+  const hasRights = user.access[faculty.code] || isAdmin(user)
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
@@ -203,7 +204,7 @@ const FacultyFormView = ({ room, formString }) => {
 
   if (!faculty) return 'Error: Invalid url.'
 
-  if (!user.access[faculty.code] && !isAdmin(user)) {
+  if (!hasRights) {
     return <NoPermissions t={t} />
   }
 
@@ -229,7 +230,7 @@ const FacultyFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
-                <StatusMessage programme={room} form={form} />
+                <StatusMessage form={form} writeAccess={hasRights?.write} />
                 <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:facultyInfo" />
