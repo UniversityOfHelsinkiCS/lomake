@@ -74,12 +74,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
       return null
     }
 
-    if (
-      part.type === 'ENTITY' ||
-      part.type === 'ENTITY_LEVELS' ||
-      part.type === 'ENTITY_UNIVERSITY' ||
-      part.type === 'ACTIONS_UNIVERSITY'
-    )
+    if (part.type === 'ENTITY_UNIVERSITY' || part.type === 'ACTIONS_UNIVERSITY' || part.type === 'TEXTAREA_UNIVERSITY')
       number++
 
     const Component = partComponentMap[part.type]

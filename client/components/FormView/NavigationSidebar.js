@@ -32,6 +32,7 @@ const questionTypesToShow = [
   'ENTITY_LEVELS',
   'ENTITY_UNIVERSITY',
   'TEXTAREA_UNIVERSITY',
+  'ACTIONS_UNIVERSITY',
 ]
 
 const getIcon = filled => (filled ? 'check' : 'exclamation')
@@ -154,7 +155,9 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                         type === 'ENTITY' ||
                         type === 'SELECTION' ||
                         type === 'ENTITY_LEVELS' ||
-                        type === 'ENTITY_UNIVERSITY'
+                        type === 'ENTITY_UNIVERSITY' ||
+                        type === 'TEXTAREA_UNIVERSITY' ||
+                        type === 'ACTIONS_UNIVERSITY'
                       ) {
                         idsToCheck.push(`${id}_text`)
                       } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
