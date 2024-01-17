@@ -152,12 +152,13 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
       marginTop: 30,
       marginBottom: 10,
       borderStyle: 'solid',
-      borderColor: 'gray',
+      borderColor: 'green',
       borderWidth: 5,
       paddingTop: 15,
       paddingLeft: 15,
       paddingRight: 15,
       paddingBottom: 30,
+      backgroundColor: '#f0f5f1',
     }
   }
 

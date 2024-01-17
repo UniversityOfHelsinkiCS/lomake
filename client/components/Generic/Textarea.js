@@ -204,11 +204,11 @@ const Textarea = ({
 
   let subTitle = null
   if (id.indexOf('_master') > -1) {
-    subTitle = 'Maisteri'
+    subTitle = 'Maisteriohjelmat'
   } else if (id.indexOf('_doctoral') > -1) {
-    subTitle = 'Tohtori'
+    subTitle = 'Tohtoriohjelmat'
   } else if (id.indexOf('_bachelor') > -1) {
-    subTitle = 'Kandi'
+    subTitle = 'Kandiohjelmat'
   }
 
   return (

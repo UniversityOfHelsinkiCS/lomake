@@ -81,8 +81,10 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
+    const gapSytle = form === 6 ? { marginBottom: 70 } : {}
+
     return (
-      <div key={`${part.id}-container`}>
+      <div key={`${part.id}-container`} style={gapSytle}>
         <div key={`${part.id}-${part.index}`} style={divStyle}>
           <Component
             id={part.id}
