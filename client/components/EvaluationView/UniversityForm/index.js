@@ -30,7 +30,15 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   return false
 }
 
-const hasRights = currentUser => isAdmin(currentUser) || currentUser.specialGroup?.universityForm
+const hasRights = currentUser => {
+  // eslint-disable-next-line no-console
+  console.log(currentUser)
+  return (
+    isAdmin(currentUser) ||
+    currentUser.specialGroup?.universityForm ||
+    currentUser.iamGroups.includes('grp-katselmus-projektiryhma') // TODO: fix this properly
+  )
+}
 
 const findEntityLevelAnswers = (faculties, allAnswers, question) => {
   const result = {
