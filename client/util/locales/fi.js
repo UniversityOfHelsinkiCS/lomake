@@ -217,6 +217,7 @@ export default {
     noData: 'yksittäisten kysymysten vastaukset eivät vielä saatavilla',
     facultyAvg: 'Tiedekunnan koulutusohjelmien keskiarvo',
     chosenFacultyAvg: 'Valittujen tiedekuntien koulutusohjelmien keskiarvo',
+    chosenFaculties: 'Valitut tiedekunnat',
     universityAvg: 'Yliopiston koulutusohjelmien keskiarvo',
     individualAvg: 'Tiedekunnan yksittäisten vastaajien keskiarvo',
     individualTxt: 'Tiedekunnan yksittäisten vastaajien avovastaukset',

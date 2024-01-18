@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { Radio, Dropdown } from 'semantic-ui-react'
+import { Radio, Dropdown, List, ListItem, ListIcon, ListContent } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import useDebounce from 'Utilities/useDebounce'
@@ -83,7 +83,8 @@ export default () => {
   useEffect(() => {
     if (faculty) {
       if (faculty === 'UNI') {
-        const selectedFaculties = dropdownFilter.length < 1 ? 'UNI' : dropdownFilter
+        const dropdownFilterWithOnlyCodes = dropdownFilter.map(f => f.code)
+        const selectedFaculties = dropdownFilterWithOnlyCodes.length < 1 ? 'UNI' : dropdownFilterWithOnlyCodes
         dispatch(getUniversityReformAnswers(selectedFaculties))
       } else {
         dispatch(getFacultyReformAnswers(faculty))
@@ -106,12 +107,13 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const handleDropDownFilter = (e, code, selected) => {
+  const handleDropDownFilter = (e, faculty, selected) => {
     e.stopPropagation()
     if (selected) {
-      setDropdownFilter(dropdownFilter.filter(f => f !== code))
+      setDropdownFilter(dropdownFilter.filter(f => f.code !== faculty.code))
     } else {
-      setDropdownFilter(dropdownFilter.concat(code))
+      const facultyObject = { name: faculty.name[lang], code: faculty.code }
+      setDropdownFilter(dropdownFilter.concat(facultyObject))
     }
   }
 
@@ -140,7 +142,8 @@ export default () => {
   if (faculty) {
     if (faculty === 'UNI') {
       if (dropdownFilter.length > 0) {
-        facultyProgrammes = programmes.filter(p => dropdownFilter.includes(p.primaryFaculty.code))
+        const dropdownFilterWithOnlyCodes = dropdownFilter.map(f => f.code)
+        facultyProgrammes = programmes.filter(p => dropdownFilterWithOnlyCodes.includes(p.primaryFaculty.code))
       } else {
         facultyProgrammes = programmes
       }
@@ -194,17 +197,27 @@ export default () => {
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('degree-reform').toUpperCase()}</h2>
           </div>
+          {dropdownFilter.length > 0 && <h3>{t('generic:chosenFaculties')}</h3>}
+          <List>
+            {dropdownFilter.length > 0 &&
+              dropdownFilter.map(f => (
+                <ListItem>
+                  <ListIcon name="circle" color="blue" />
+                  <ListContent> {f.name}</ListContent>
+                </ListItem>
+              ))}
+          </List>
           {faculty === 'UNI' && (
             <div className="table-container-degree-reform-filter">
               <Dropdown text={t('facultyFilter')} icon="filter" button labeled className="icon">
                 <Dropdown.Menu defaultUpward="false" upward="false">
                   <Dropdown.Divider />
                   {faculties.data.map(f => {
-                    const selected = dropdownFilter.includes(f.code)
+                    const selected = dropdownFilter.filter(d => d.code === f.code).length > 0
                     return (
                       <Dropdown.Item
                         key={f.code}
-                        onClick={e => handleDropDownFilter(e, f.code, selected)}
+                        onClick={e => handleDropDownFilter(e, f, selected)}
                         text={f.name[lang]}
                         multiple
                         active={selected}

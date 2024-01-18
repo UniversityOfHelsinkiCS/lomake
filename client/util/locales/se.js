@@ -210,6 +210,7 @@ export default {
     noData: 'svar på enskilda frågor som ännu inte är tillgängliga',
     facultyAvg: 'Genomsnitt av fakultetens program',
     chosenFacultyAvg: 'genomsnitt för vald fakultet',
+    //   chosenFaculties: '',
     universityAvg: 'Genomsnitt för alla program',
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     individualTxt: 'Öppna svar från enskilda respondenter vid fakulteten',

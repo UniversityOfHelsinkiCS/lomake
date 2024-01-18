@@ -218,6 +218,7 @@ export default {
     noData: 'answers to individual questions not yet available',
     facultyAvg: 'Average of programmes of the faculty',
     chosenFacultyAvg: 'Average of chosen programmes of the faculty',
+    chosenFaculties: 'Chosen faculties',
     universityAvg: 'Average of all programmes',
     individualAvg: 'Average of individual answers of the faculty',
     individualTxt: 'Open responses from individual faculty respondents',
