@@ -155,6 +155,8 @@ export default {
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     allYearlyAnswerYears: 'All annual follow-up report years',
+    evaluationInfoUni:
+      "For this review, consider the degree programme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo1:
       "For this review, consider the degree programme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
@@ -174,6 +176,7 @@ export default {
     summaryLinkProg: 'View all previous annual follow-up answers',
     oodikoneProg: 'View programme statistics in Oodikone',
     oodikoneFaculty: 'View faculty statistics in Oodikone',
+    oodikoneUniversity: 'View statistics in Oodikone',
     rapo: 'View doctoral programme statistics in Rapo',
     toijo:
       'Assessment of the operating structure and management system (TOIJO) self-assessment report <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">here</a>',
@@ -207,6 +210,7 @@ export default {
     showAnswers: 'Show answers',
     hideAnswers: 'Hide answers',
     evaluationSummaryByProgramme: 'View the faculty data on the results of the Current state of education survey.',
+    evaluationSummaryUniversity: 'Results of the Current state of education survey.',
     formNotReady: 'Form is still under development, opens 1.11.',
   },
 

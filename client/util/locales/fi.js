@@ -160,6 +160,7 @@ export default {
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
       'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
+    evaluationInfoUni: 'Katselmuksessa tarkastellaan yliopiston koulutusohjelmien tilannetta kolmelta viime vuodelta.',
     selectApplicable: 'Valitkaa sopivat vaihtoehdot',
     addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     progSummaryTitle: 'Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta',
@@ -175,6 +176,7 @@ export default {
     summaryLinkProg: 'Tarkastelkaa kaikkia aiempien vuosiseurontojen vastauksia',
     oodikoneProg: 'Tarkastelkaa koulutusohjelman tietoja Oodikoneessa',
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikoneessa',
+    oodikoneUniversity: 'Tiedot Oodikoneesta',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
     toijo:
       'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">täällä</a> (raportti englanniksi)',
@@ -183,7 +185,7 @@ export default {
     facultyInfo:
       'Katselmuksessa tarkastellaan <strong>tiedekunnan</strong> koulutusohjelmien tilannetta kolmelta viime vuodelta.',
     materialsUniversity:
-      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekuntien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekunnan opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
+      'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekuntien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekuntien opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki yliopistotason näkymään.',
     materialsFaculty:
       'Lomakkeessa on useimpien kysymyksien yhteyteen lisätty tiivistelmä tiedekunnan koulutusohjelmien katselmuskysymysten vastauksista. <br/><br/>Oodikoneeseen on luotu näkymä katselmuksen tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja tiedekunnan opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki tiedekuntatason näkymään.',
     yearlyAnswers: 'Vuosiseurantojen vastaukset',
@@ -207,6 +209,7 @@ export default {
     showAnswers: 'Näytä vastaukset',
     hideAnswers: 'Piilota vastaukset',
     evaluationSummaryByProgramme: 'Tarkastelkaa tiedekunnan tietoja Koulutuksen tila -kyselyn tuloksista',
+    evaluationSummaryUniversity: 'Koulutuksen tila -kyselyn tulokset',
     formNotReady: 'Lomake on vielä kehityksessä, avautuu 1.11.',
   },
 

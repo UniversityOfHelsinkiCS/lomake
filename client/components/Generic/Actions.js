@@ -71,7 +71,7 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
   } else if (id.indexOf('_bachelor') > -1) {
     subTitle = 'Kandiohjelmat'
   } else if (id.indexOf('_overall') > -1) {
-    subTitle = 'Yleiset arviot ja toimenpidesuositukset'
+    subTitle = 'Yleiset toimenpidesuositukset'
   }
 
   const summaryTitle = form === 6 ? 'formView:universityActionSummaryTitle' : 'formView:facultyActionSummaryTitle'

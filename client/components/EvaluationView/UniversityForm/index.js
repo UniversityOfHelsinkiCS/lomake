@@ -30,7 +30,15 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
   return false
 }
 
-const hasRights = currentUser => isAdmin(currentUser) || currentUser.specialGroup?.universityForm
+const hasRights = currentUser => {
+  // eslint-disable-next-line no-console
+  console.log(currentUser)
+  return (
+    isAdmin(currentUser) ||
+    currentUser.specialGroup?.universityForm ||
+    currentUser.iamGroups.includes('grp-katselmus-projektiryhma') // TODO: fix this properly
+  )
+}
 
 const findEntityLevelAnswers = (faculties, allAnswers, question) => {
   const result = {
@@ -129,7 +137,7 @@ const CommitteeFormView = ({ room, formString }) => {
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)
 
-  const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
+  const oodikoneURL = `https://oodikone.helsinki.fi/evaluationoverview/university`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
   useEffect(() => {
@@ -239,7 +247,7 @@ const CommitteeFormView = ({ room, formString }) => {
                 <StatusMessage form={form} writeAccess={hasRights} />
                 <div className="info-container">
                   <p>
-                    <Trans i18nKey="formView:facultyInfo" />
+                    <Trans i18nKey="formView:evaluationInfoUni" />
                   </p>
                 </div>
                 <p>{t('formView:info2')}</p>
@@ -265,14 +273,14 @@ const CommitteeFormView = ({ room, formString }) => {
               </div>
 
               <div className="info-container">
-                <a href={oodiFacultyURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
+                <a href={oodikoneURL} data-cy={`link-to-oodikone-faculty-${room}`} target="_blank" rel="noreferrer">
                   <h4>
-                    {t('formView:oodikoneFaculty')} <Icon name="external" />{' '}
+                    {t('formView:oodikoneUniversity')} <Icon name="external" />{' '}
                   </h4>
                 </a>
                 <Link data-cy="link-to-old-answers" to={degreeReformUrl} target="_blank">
                   <h4 style={{ fontSize: '15px', marginTop: '1em', marginBottom: '1em' }}>
-                    {t('formView:evaluationSummaryByProgramme')} <Icon name="external" />{' '}
+                    {t('formView:evaluationSummaryUniversity')} <Icon name="external" />{' '}
                   </h4>
                 </Link>
               </div>

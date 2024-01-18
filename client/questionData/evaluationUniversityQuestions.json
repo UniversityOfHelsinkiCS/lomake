@@ -178,7 +178,7 @@
         "index": "meta-T",
         "type": "TITLE",
         "label": {
-          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA SEKÄ KATSELMUSARVIOIDEN JA TILASTOTIEDON VASTAAVUUS",
+          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA",
           "se": "",
           "en": "THE UNIVERSITY’S ASSESSMENTS OF STRENGTHS AND THE CORRESPONDENCE BETWEEN THE ASSESSMENTS AND STATISTICS"
         }
@@ -200,6 +200,16 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "faculty_ease_of_study_programme_strengths"
+      },
+      {
+        "id": "meta2",
+        "index": "meta-T",
+        "type": "TITLE",
+        "label": {
+          "fi": "KATSELMUSARVIOIDEN JA TILASTOTIEDON VASTAAVUUS",
+          "se": "",
+          "en": "THE UNIVERSITY’S ASSESSMENTS OF STRENGTHS AND THE CORRESPONDENCE BETWEEN THE ASSESSMENTS AND STATISTICS"
+        }
       },
       {
         "id": "university_same_tone_seamless_studies",
@@ -232,7 +242,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista maisteriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "",
           "en": ""
         },
@@ -354,8 +364,8 @@
         },
         "description": {
           "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit yliopistossa",
-          "se": "",
-          "en": ""
+          "se": "Resurser för lokaler, utrustning och lärmiljöer vid fakulteten",
+          "en": "Resources related to facilities, equipment and learning environments in the degree programmes of the faculty"
         },
         "required": true,
         "level_breakdown": true,
@@ -438,8 +448,8 @@
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
           "fi": "Mikäli tiedekuntien välillä on huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
-          "se": "",
-          "en": ""
+          "se": "Om det fanns betydande skillnader i åsikterna mellan fakultetens olika aktörer eller om åsikterna hos aktörerna på fakultetsnivå avviker avsevärt från åsikterna inom ett eller flera utbildningsprogram, beskriv hur skillnaderna var och hur man kom fram till en gemensam bedömning.",
+          "en": "If the faculty actors markedly disagreed in their assessments, please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -466,8 +476,8 @@
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
           "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan kandi- maisteri- ja tohtorikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
-          "se": "",
-          "en": ""
+          "se": "Vilka är fakultetens styrkor inom temat Utbildningens helhetsstruktur, ledarskap, resurser och utbildningsprogrammens ställning?",
+          "en": "What are the strengths of the overall structure of education, leadership and management, resources, and the status of degree programmes at the faculty?"
         },
         "required": false,
         "no_color": true,
@@ -484,8 +494,8 @@
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
           "fi": "Tarkastelkaa tiedekuntien katselmusarvioita kandi-, maisteri- ja tohtorikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta. Vastaavatko tiedekuntien antamat arviot yliopistotason näkemystä? Antakaa arvio vastaavuudesta ja esittäkää tarvittavia toimenpiteitä.",
-          "se": "",
-          "en": ""
+          "se": "Vilka är fakultetens styrkor när det gäller temat Smidiga studier?",
+          "en": "What are the strengths of the degree programme education at the faculty in terms of ‘seamless studies’?"
         },
         "shortLabel": {
           "fi": "",
@@ -509,9 +519,9 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista tohtoriopiskelua koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
-          "se": "",
-          "en": ""
+          "fi": "Punaisen kokonaisarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.\nNimetkää 1-5 yliopiston kehittämiskohdetta/ tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
+          "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development targets with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
