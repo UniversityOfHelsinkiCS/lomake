@@ -54,7 +54,6 @@ const getForUniversity = async (req, res) => {
   let { dropdownFilter } = req.params
   try {
     const data = await getAnswersFromDb()
-    //  const filteredData = data.filter(d => d.data?)
     if (dropdownFilter === 'UNI') {
       return res.send(data)
     }

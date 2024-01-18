@@ -17,7 +17,7 @@ const requireFacultyRead = (req, res, next) => {
 
 const requireUniFormRight = (req, res, next) => {
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()
-  else if (req.user.specialGroup.university) next()
+  else if (req.user.specialGroup.universityForm) next()
   else res.status(401).json({ error: 'Unauthorized access.' }).end()
 }
 
