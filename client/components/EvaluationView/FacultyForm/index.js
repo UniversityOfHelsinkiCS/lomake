@@ -133,7 +133,7 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  const hasRights = user.access[faculty.code] || isAdmin(user)
+  const hasRights = user.access[faculty.code]?.write || isAdmin(user)
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
@@ -230,7 +230,7 @@ const FacultyFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
-                <StatusMessage form={form} writeAccess={hasRights?.write} />
+                <StatusMessage form={form} writeAccess={hasRights} />
                 <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:facultyInfo" />
