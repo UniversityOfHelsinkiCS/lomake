@@ -212,6 +212,10 @@ export default {
     evaluationSummaryByProgramme: 'View the faculty data on the results of the Current state of education survey.',
     evaluationSummaryUniversity: 'Results of the Current state of education survey.',
     formNotReady: 'Form is still under development, opens 1.11.',
+    overallActionSummaryTitle: 'General measure suggestions',
+    bachelorUniForm: 'Bachelor programmes (ONE writes)',
+    masterUniForm: 'Master programmes (ONE writes)',
+    doctoralUniForm: 'Doctoral programmes (Research board directors and TINE write together)',
   },
 
   generic: {

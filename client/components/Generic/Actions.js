@@ -8,7 +8,18 @@ import ActionElement from './ActionElement'
 import './Generic.scss'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
-const Actions = ({ id, label, description, form, required, extrainfo, programme, summaryData, questionLevel }) => {
+const Actions = ({
+  id,
+  label,
+  description,
+  form,
+  required,
+  extrainfo,
+  programme,
+  summaryData,
+  questionLevel,
+  isArviointi = false,
+}) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const formData = useSelector(state => state.form.data)
@@ -64,23 +75,35 @@ const Actions = ({ id, label, description, form, required, extrainfo, programme,
   }
 
   let subTitle = null
-  if (id.indexOf('_master') > -1) {
-    subTitle = 'Maisteriohjelmat'
-  } else if (id.indexOf('_doctoral') > -1) {
-    subTitle = 'Tohtoriohjelmat'
-  } else if (id.indexOf('_bachelor') > -1) {
-    subTitle = 'Kandiohjelmat'
-  } else if (id.indexOf('_overall') > -1) {
-    subTitle = 'Yleiset toimenpidesuositukset'
+  if (form === 6) {
+    if (id.indexOf('-bachelor') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:bachelorUniForm')
+      } else {
+        subTitle = `${t('bachelor')}`
+      }
+    } else if (id.indexOf('-master') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:masterUniForm')
+      } else {
+        subTitle = `${t('master')}`
+      }
+    } else if (id.indexOf('-doctoral') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:doctoralUniForm')
+      } else {
+        subTitle = `${t('doctoral')}`
+      }
+    } else if (id.indexOf('-overall') > -1) {
+      subTitle = `${t('formView:overallActionSummaryTitle')}`
+    }
   }
 
   const summaryTitle = form === 6 ? 'formView:universityActionSummaryTitle' : 'formView:facultyActionSummaryTitle'
 
-  const showSummary = (form === 6 && subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form === 5
+  const showSummary = (form === 6 && subTitle === t('formView:bachelorUniForm')) || form === 5
 
-  const showDescription = (subTitle === 'Kandiohjelmat' && questionLevel.level === 'university') || form !== 6
-
-  const isArviointi = id.includes('arviointi')
+  const showDescription = subTitle === t('formView:bachelorUniForm') || form !== 6
 
   return (
     <div

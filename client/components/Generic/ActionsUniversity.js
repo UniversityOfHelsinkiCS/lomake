@@ -43,48 +43,27 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
 
   return (
     <div>
-      {questionLevels.map(questionLevel => (
-        <div style={styleFor(questionLevel)} key={`uni-${id}-${questionLevel.level}`}>
-          <Actions
-            id={`${id}-${questionLevel.level}_bachelor`}
-            label={label}
-            description={description}
-            form={form}
-            required={required}
-            extrainfo={extrainfo}
-            programme={programme}
-            summaryData={summaryData}
-            questionLevel={questionLevel}
-          >
-            {' '}
-          </Actions>
-          <Actions
-            id={`${id}-${questionLevel.level}_master`}
-            label={label}
-            description={description}
-            form={form}
-            required={required}
-            extrainfo={extrainfo}
-            programme={programme}
-            summaryData={summaryData}
-          >
-            {' '}
-          </Actions>
-          <Actions
-            id={`${id}-${questionLevel.level}_doctoral`}
-            label={label}
-            description={description}
-            form={form}
-            required={required}
-            extrainfo={extrainfo}
-            programme={programme}
-            summaryData={summaryData}
-          >
-            {' '}
-          </Actions>
-          {questionLevel.level === 'arviointi' && (
+      {questionLevels.map(questionLevel => {
+        const isArviointi = questionLevel.level === 'arviointi'
+        return (
+          <div style={styleFor(questionLevel)} key={`uni-${id}-${questionLevel.level}`}>
             <Actions
-              id={`${id}-${questionLevel.level}_overall`}
+              id={`${id}-${questionLevel.level}-bachelor`}
+              isArviointi={isArviointi}
+              label={label}
+              description={description}
+              form={form}
+              required={required}
+              extrainfo={extrainfo}
+              programme={programme}
+              summaryData={summaryData}
+              questionLevel={questionLevel}
+            >
+              {' '}
+            </Actions>
+            <Actions
+              id={`${id}-${questionLevel.level}-master`}
+              isArviointi={isArviointi}
               label={label}
               description={description}
               form={form}
@@ -95,9 +74,36 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
             >
               {' '}
             </Actions>
-          )}
-        </div>
-      ))}
+            <Actions
+              id={`${id}-${questionLevel.level}-doctoral`}
+              isArviointi={isArviointi}
+              label={label}
+              description={description}
+              form={form}
+              required={required}
+              extrainfo={extrainfo}
+              programme={programme}
+              summaryData={summaryData}
+            >
+              {' '}
+            </Actions>
+            {questionLevel.level === 'arviointi' && (
+              <Actions
+                id={`${id}-${questionLevel.level}-overall`}
+                label={label}
+                description={description}
+                form={form}
+                required={required}
+                extrainfo={extrainfo}
+                programme={programme}
+                summaryData={summaryData}
+              >
+                {' '}
+              </Actions>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

@@ -211,6 +211,10 @@ export default {
     evaluationSummaryByProgramme: 'Tarkastelkaa tiedekunnan tietoja Koulutuksen tila -kyselyn tuloksista',
     evaluationSummaryUniversity: 'Koulutuksen tila -kyselyn tulokset',
     formNotReady: 'Lomake on vielä kehityksessä, avautuu 1.11.',
+    overallActionSummaryTitle: 'Yleiset toimenpidesuositukset',
+    bachelorUniForm: 'Kandiohjelmat (ONE kirjaa)',
+    masterUniForm: 'Maisteriohjelmat (ONE kirjaa)',
+    doctoralUniForm: 'Tohtoriohjelmat (Tutkijakoulun johtokunta ja TINE yhdessä kirjaavat)',
   },
 
   generic: {

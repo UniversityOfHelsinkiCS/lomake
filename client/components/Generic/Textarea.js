@@ -56,6 +56,7 @@ const Textarea = ({
   form,
   maxLength,
   marginTop,
+  isArviointi,
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -201,16 +202,28 @@ const Textarea = ({
 
   const saveButtonLabel = !hasLock || unsavedContent ? t('generic:kludgeButton') : t('generic:kludgeButtonRelease')
   const notSavedInfoText = unsavedContent ? t('generic:textUnsaved') : t('generic:textUnsavedRelease')
-
   let subTitle = null
-  if (id.indexOf('_master') > -1) {
-    subTitle = 'Maisteriohjelmat'
-  } else if (id.indexOf('_doctoral') > -1) {
-    subTitle = 'Tohtoriohjelmat'
-  } else if (id.indexOf('_bachelor') > -1) {
-    subTitle = 'Kandiohjelmat'
+  if (form === 6) {
+    if (id.indexOf('-bachelor') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:bachelorUniForm')
+      } else {
+        subTitle = `${t('bachelor')}`
+      }
+    } else if (id.indexOf('-master') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:masterUniForm')
+      } else {
+        subTitle = `${t('master')}`
+      }
+    } else if (id.indexOf('-doctoral') > -1) {
+      if (!isArviointi) {
+        subTitle = t('formView:doctoralUniForm')
+      } else {
+        subTitle = `${t('doctoral')}`
+      }
+    }
   }
-
   return (
     <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <div

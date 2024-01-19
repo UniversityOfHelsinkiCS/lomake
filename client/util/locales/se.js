@@ -204,6 +204,10 @@ export default {
     hideAnswers: 'Dölj svar',
     evaluationSummaryByProgramme: 'Titta på fakultetens information om resultaten av enkäten Utbildningens tillstånd',
     formNotReady: '',
+    // overallActionSummaryTitle: '',
+    // bachelorUniForm: '',
+    // masterUniForm: '',
+    // doctoralUniForm: '',
   },
 
   generic: {

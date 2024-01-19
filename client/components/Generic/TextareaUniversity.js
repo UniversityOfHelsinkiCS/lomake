@@ -5,7 +5,7 @@ const TextareaUniversity = ({ label, id, required, summaryData, form, maxLength,
   return (
     <div data-cy={`university-textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       <Textarea
-        id={`${id}_bachelor`}
+        id={`${id}-bachelor`}
         label={label}
         required={required}
         form={form}
@@ -13,7 +13,7 @@ const TextareaUniversity = ({ label, id, required, summaryData, form, maxLength,
         maxLength={maxLength}
       />
       <Textarea
-        id={`${id}_master`}
+        id={`${id}-master`}
         label={null}
         required={required}
         form={form}
@@ -21,7 +21,7 @@ const TextareaUniversity = ({ label, id, required, summaryData, form, maxLength,
         maxLength={maxLength}
       />
       <Textarea
-        id={`${id}_doctoral`}
+        id={`${id}-doctoral`}
         label={null}
         required={required}
         form={form}
