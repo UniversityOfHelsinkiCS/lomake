@@ -209,7 +209,7 @@ export default () => {
           </List>
           {faculty === 'UNI' && faculties.data.length > 0 && (
             <div className="table-container-degree-reform-filter">
-              <Dropdown text={t('facultyFilter')} icon="filter" button labeled className="icon">
+              <Dropdown text={t('overview:chooseFaculty')} icon="filter" button labeled className="icon">
                 <Dropdown.Menu defaultUpward="false" upward="false">
                   <Dropdown.Divider />
                   {faculties.data.map(f => {

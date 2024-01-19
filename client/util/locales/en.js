@@ -300,6 +300,7 @@ export default {
     redModalAccordion: 'Situation poor',
     facultySummary: 'Degree programme answers',
     pcs: 'pcs',
+    chooseFaculty: 'Delineate the selected faculties',
   },
 
   report: {

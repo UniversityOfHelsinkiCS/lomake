@@ -288,6 +288,7 @@ export default {
     userListOthers: 'Övriga användare med programåtkomsträttigheter, som har fått tillgång till blanketten',
     // facultySummary: '',
     pcs: 'st',
+    // chooseFaculty: '',
   },
 
   report: {

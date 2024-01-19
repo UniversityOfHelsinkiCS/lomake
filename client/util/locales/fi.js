@@ -298,6 +298,7 @@ export default {
     redModalAccordion: 'Tilanne huono',
     facultySummary: 'Koulutusohjelmien vastaukset',
     pcs: 'kpl',
+    chooseFaculty: 'Rajaa näytettävät tiedekunnat',
   },
 
   report: {
