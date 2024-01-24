@@ -210,10 +210,13 @@ const ColorTable = React.memo(
     const individualStats = useMemo(() => {
       if (!individualAnswers) return {}
       return getIndividualAnswers(individualAnswers)
-    }, [facultyProgrammes, selectedAnswers, answers, isBeingFiltered, draftYear])
+    }, [facultyProgrammes, selectedAnswers, individualAnswers, isBeingFiltered, draftYear])
 
     if (answers.pending || !answers.data || !oldAnswers.data || (isAdmin(currentUser) && !programmeOwners))
       return <Loader active inline="centered" />
+
+    const isUniFacultyView = facultyView && facultyView === 'UNI'
+    const isUniFacultyViewFiltered = isUniFacultyView && dropdownFilter.length > 0
 
     let tableClassName = ''
     if (formType === 'evaluation') {
@@ -228,7 +231,7 @@ const ColorTable = React.memo(
 
     let individualAvgText = t('generic:individualAvg')
 
-    if (facultyView && facultyView === 'UNI') {
+    if (isUniFacultyView) {
       if (dropdownFilter.length === 0) {
         individualAvgText = t('generic:individualAvgUni')
       } else {
@@ -239,7 +242,7 @@ const ColorTable = React.memo(
     const selectorLabel = facultyView ? t('showAllFacultyProgrammes') : t('showAllProgrammes')
     return (
       <>
-        {(facultyView && facultyView !== 'UNI') || !isAdmin(currentUser) ? (
+        {!isUniFacultyView || !isAdmin(currentUser) ? (
           <div className="table-container-degree-reform-button" style={{ paddingTop: 20 }}>
             <Radio
               style={{ marginRight: 'auto', marginBottom: '2em' }}
@@ -282,10 +285,14 @@ const ColorTable = React.memo(
                 tableIds={tableIds}
                 form={form}
               />
-              <div />
-              <div className="table-container" style={{ paddingTop: 20 }}>
-                {dropdownFilter.length > 0 ? t('generic:chosenFacultyAvg') : t('generic:facultyAvg')}
-              </div>
+              {(isUniFacultyViewFiltered || !isUniFacultyView) && (
+                <>
+                  <div />
+                  <div className="table-container" style={{ paddingTop: 20 }}>
+                    {isUniFacultyViewFiltered ? t('generic:chosenFacultyAvg') : t('generic:facultyAvg')}
+                  </div>
+                </>
+              )}
             </>
           ) : (
             <div className="table-container">
@@ -302,14 +309,20 @@ const ColorTable = React.memo(
               )}
             </div>
           )}
-          <div />
-          <SummaryRow
-            setStatsToShow={setStatsToShow}
-            stats={facultyView ? facultyStats : overallStats}
-            selectedAnswers={selectedAnswers}
-            tableIds={tableIds}
-            form={form}
-          />
+
+          {(!isUniFacultyView || isUniFacultyViewFiltered) && (
+            <>
+              {' '}
+              <div />
+              <SummaryRow
+                setStatsToShow={setStatsToShow}
+                stats={facultyView ? facultyStats : overallStats}
+                selectedAnswers={selectedAnswers}
+                tableIds={tableIds}
+                form={form}
+              />
+            </>
+          )}
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
