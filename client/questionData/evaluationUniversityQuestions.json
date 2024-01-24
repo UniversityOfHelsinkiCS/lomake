@@ -234,16 +234,6 @@
         }
       },
       {
-        "id": "meta2",
-        "index": "meta-programme_structure_actions",
-        "type": "TITLE",
-        "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "",
-          "en": "DEVELOPMENT AREAS AND MEASURES"
-        }
-      },
-      {
         "id": "university_ease_of_study_actions",
         "type": "ACTIONS_UNIVERSITY",
         "label": {
@@ -497,16 +487,6 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "faculty_programme_structure_programme_strengths"
-      },
-      {
-        "id": "meta2",
-        "index": "meta-programme_structure_actions",
-        "type": "TITLE",
-        "label": {
-          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
-          "se": "",
-          "en": "DEVELOPMENT AREAS AND MEASURES"
-        }
       },
       {
         "id": "university_programme_structure_actions",
