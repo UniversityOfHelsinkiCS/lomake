@@ -18,40 +18,40 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
           let byQuestionCount = 0
           if (stats[part.id]) {
             if (stats[part.id].first) {
-              themeSum += 1
-              themeCount += 1
+              themeSum += 1 * stats[part.id].first
+              themeCount += stats[part.id].first
 
-              byQuestionSum += 1
-              byQuestionCount += 1
+              byQuestionSum += stats[part.id].first
+              byQuestionCount += stats[part.id].first
             }
 
             if (stats[part.id].second) {
-              themeSum += 2
-              themeCount += 1
+              themeSum += 2 * stats[part.id].second
+              themeCount += stats[part.id].second
 
-              byQuestionSum += 2
-              byQuestionCount += 1
+              byQuestionSum += 2 * stats[part.id].second
+              byQuestionCount += stats[part.id].second
             }
             if (stats[part.id].third) {
-              themeSum += 3
-              themeCount += 1
+              themeSum += 3 * stats[part.id].third
+              themeCount += stats[part.id].third
 
-              byQuestionSum += 3
-              byQuestionCount += 1
+              byQuestionSum += 3 * stats[part.id].third
+              byQuestionCount += stats[part.id].third
             }
             if (stats[part.id].fourth) {
-              themeSum += 4
-              themeCount += 1
+              themeSum += 4 * stats[part.id].fourth
+              themeCount += stats[part.id].fourth
 
-              byQuestionSum += 4
-              byQuestionCount += 1
+              byQuestionSum += 4 * stats[part.id].fourth
+              byQuestionCount += stats[part.id].fourth
             }
             if (stats[part.id].fifth) {
-              themeSum += 5
-              themeCount += 1
+              themeSum += 5 * stats[part.id].fifth
+              themeCount += stats[part.id].fifth
 
-              byQuestionSum += 5
-              byQuestionCount += 1
+              byQuestionSum += 5 * stats[part.id].fifth
+              byQuestionCount += stats[part.id].fifth
             }
             const averageByQuestion = byQuestionCount > 0 ? (byQuestionSum / byQuestionCount).toFixed(1) : ''
             themeQuestions.push({ label: part.label[lang], average: averageByQuestion, reversed: part.reversed })
