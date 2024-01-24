@@ -352,7 +352,7 @@ const facultyWideWritingGroups = {
   'grp-katselmus-eltdk': 'H90',
 }
 
-const universityFormWritingGroups = ['grp-katselmus-projektiryhma']
+const universityFormWritingGroups = ['grp-katselmus-projektiryhma', 'hy-one', 'hy-tine', 'hy-tutkijakoulu-johtokunta']
 
 const superAdminGroups = ['grp-toska']
 

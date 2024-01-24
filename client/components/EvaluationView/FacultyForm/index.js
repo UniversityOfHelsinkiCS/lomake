@@ -133,14 +133,20 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  const hasRights = user.access[faculty.code]?.write || isAdmin(user) || isKatselmusProjektiOrOhjausryhma(user)
+  const hasReadRights =
+    user.access[faculty.code] ||
+    isAdmin(user) ||
+    user.specialGroup.evaluationFaculty ||
+    isKatselmusProjektiOrOhjausryhma(user)
+  const hasWriteRights = user.access[faculty.code]?.write || isAdmin(user)
+
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
 
   useEffect(() => {
     if (!faculty || !form) return
-    if (!user.access[faculty.code] && !isAdmin(user) && !isKatselmusProjektiOrOhjausryhma(user)) {
+    if (!hasReadRights) {
       return
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
@@ -204,7 +210,7 @@ const FacultyFormView = ({ room, formString }) => {
 
   if (!faculty) return 'Error: Invalid url.'
 
-  if (!hasRights) {
+  if (!hasReadRights) {
     return <NoPermissions t={t} />
   }
 
@@ -230,7 +236,7 @@ const FacultyFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
-                <StatusMessage form={form} writeAccess={hasRights} />
+                <StatusMessage form={form} writeAccess={hasWriteRights} />
                 <div className="info-container">
                   <p>
                     <Trans i18nKey="formView:facultyInfo" />

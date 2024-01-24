@@ -6,7 +6,13 @@ import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
-import { isAdmin, isSuperAdmin, isEvaluationFacultyUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
+import {
+  isAdmin,
+  isSuperAdmin,
+  isEvaluationFacultyUser,
+  isKatselmusProjektiOrOhjausryhma,
+  isEvaluationUniversityUser,
+} from '@root/config/common'
 
 const UnHijackButton = ({ handleUnhijack }) => {
   return (
@@ -57,7 +63,7 @@ const GoToEvaluationButton = ({ user }) => {
               {t('generic:level:faculties')}
             </Dropdown.Item>
           ) : null}
-          {isAdmin(user) || isKatselmusProjektiOrOhjausryhma(user) ? (
+          {isAdmin(user) || isEvaluationUniversityUser(user) ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-committee"
               as={Link}
@@ -132,7 +138,9 @@ const GoToDegreeReform = ({ user }) => {
       <Dropdown item data-cy="nav-evaluation-individual-dropdown" text={t('degree-reform')} style={{ height: '100%' }}>
         <Dropdown.Menu>
           <GoToDegreeReformGroup />
-          {(user.admin || isKatselmusProjektiOrOhjausryhma(user)) && <GoToDegreeReformIndividual />}
+          {(user.admin || isKatselmusProjektiOrOhjausryhma(user) || user?.specialGroup.universityForm) && (
+            <GoToDegreeReformIndividual />
+          )}
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>

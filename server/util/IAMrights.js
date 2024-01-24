@@ -215,7 +215,7 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
   const noFacultyRights = !hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0
   const access = {}
   let specialGroup = {}
-  if (hyGroups.find(group => group === 'grp-katselmus-projektiryhma')) {
+  if (hyGroups.some(isUniverstyFormIam)) {
     data.forEach(faculty => {
       faculty.programmes.forEach(program => {
         access[program.key] = { read: true }

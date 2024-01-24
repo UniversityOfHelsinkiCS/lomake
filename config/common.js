@@ -141,6 +141,15 @@ const isEvaluationFacultyUser = user => {
   return false
 }
 
+const isEvaluationUniversityUser = user => {
+  if (
+    (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.evaluationUniversity) ||
+    isKatselmusProjektiOrOhjausryhma(user)
+  )
+    return true
+  return false
+}
+
 const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
 
 const internationalAccess = {
@@ -220,4 +229,5 @@ module.exports = {
   mapToDegreeCode,
   requiredDegreeReformIds,
   isKatselmusProjektiOrOhjausryhma,
+  isEvaluationUniversityUser,
 }
