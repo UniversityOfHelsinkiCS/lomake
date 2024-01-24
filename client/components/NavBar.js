@@ -86,21 +86,21 @@ const GoToEvaluationButton = ({ user }) => {
 const GoToDegreeReformGroup = () => {
   const { t } = useTranslation()
   return (
-    <Menu.Item data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
+    <Dropdown.Item data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
       {t('degree-reform-group')}
-    </Menu.Item>
+    </Dropdown.Item>
   )
 }
 
 const GoToDegreeReformIndividual = () => {
   const { t } = useTranslation()
   return (
-    <Menu.Item data-cy="nav-evaluation-individual" style={{ padding: 0 }}>
+    <Dropdown.Item data-cy="nav-evaluation-individual">
       <Dropdown
         item
         data-cy="nav-evaluation-individual-dropdown"
         text={t('degree-reform-individual')}
-        style={{ height: '100%' }}
+        style={{ padding: 0 }}
       >
         <Dropdown.Menu>
           <Dropdown.Item
@@ -119,6 +119,20 @@ const GoToDegreeReformIndividual = () => {
           >
             {t('generic:degreeReformIndividualForm')}
           </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Dropdown.Item>
+  )
+}
+
+const GoToDegreeReform = ({ user }) => {
+  const { t } = useTranslation()
+  return (
+    <Menu.Item data-cy="nav-evaluation-individual" style={{ padding: 0 }}>
+      <Dropdown item data-cy="nav-evaluation-individual-dropdown" text={t('degree-reform')} style={{ height: '100%' }}>
+        <Dropdown.Menu>
+          <GoToDegreeReformGroup />
+          {(user.admin || isKatselmusProjektiOrOhjausryhma(user)) && <GoToDegreeReformIndividual />}
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
@@ -158,8 +172,7 @@ const MenuNavigation = ({ pathname, user }) => {
       </Menu.Item>
       <GoToYearlyAssessmentButton />
       <GoToEvaluationButton user={user} />
-      <GoToDegreeReformGroup />
-      {(user.admin || isKatselmusProjektiOrOhjausryhma(user)) && <GoToDegreeReformIndividual />}
+      <GoToDegreeReform user={user} />
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
