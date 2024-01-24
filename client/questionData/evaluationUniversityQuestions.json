@@ -23,7 +23,7 @@
         "description": {
           "fi": "Opiskelijavalintojen toimivuus yliopistossa",
           "se": "Studentantagningens ändamålsenlighet",
-          "en": "Functioning of the student admissions procedure"
+          "en": "Functioning of the student admissions procedures "
         },
         "required": true,
         "level_breakdown": true,
@@ -51,7 +51,7 @@
         "description": {
           "fi": "Yliopiston koulutusohjelmien kokonaisuuden toimivuus",
           "se": "",
-          "en": ""
+          "en": "Functionality of the university's degree programmes as a whole"
         },
         "required": true,
         "level_breakdown": true,
@@ -79,7 +79,7 @@
         "description": {
           "fi": "Opintojen ohjauksen toimivuus yliopistossa",
           "se": "Hur studiehandledningen fungerar i fakultetens utbildningsprogram",
-          "en": "Functioning of student guidance and supervision"
+          "en": "Functioning of student guidance and supervision at the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -106,8 +106,8 @@
         },
         "description": {
           "fi": "Kandi- ja maisteriohjelmien nivelvaiheen ja optioiden toimivuus yliopistossa",
-          "se": "",
-          "en": ""
+          "se": "F",
+          "en": "Functioning of the transition between bachelor’s and master’s programmes and master’s programme options"
         },
         "required": true,
         "extrainfo": {
@@ -134,7 +134,7 @@
         "description": {
           "fi": "Tutkintojen suorittaminen ja läpivirtaus yliopiston koulutusohjelmissa",
           "se": "",
-          "en": ""
+          "en": "Completion of degrees and rate of progression in the degree programmes of the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -151,7 +151,7 @@
         "type": "TITLE",
         "label": {
           "fi": "NÄKEMYSEROT OPISKELUN SUJUVUUDESTA",
-          "en": "DIFFERENCES IN SEAMLESS STUDIES:",
+          "en": "DIFFERENCES OF OPINION ON THE SMOOTH RUNNING OF STUDIES",
           "se": ""
         }
       },
@@ -162,7 +162,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtoriopintojen sujuvuudesta?  Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the smoothness of studying for a bachelor's, master's and/or doctoral degree?  Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -180,7 +180,7 @@
         "label": {
           "fi": "YLIOPISTON VAHVUUDET OPINTOJEN SUJUVUUDESSA",
           "se": "",
-          "en": "THE UNIVERSITY’S ASSESSMENTS OF STRENGTHS AND THE CORRESPONDENCE BETWEEN THE ASSESSMENTS AND STATISTICS"
+          "en": "THE UNIVERSITY'S STRENGTHS IN THE SMOOTH RUNNING OF STUDIES "
         }
       },
       {
@@ -190,7 +190,7 @@
         "label": {
           "fi": "Mitkä ovat yliopiston vahvuuksia kandi- maisteri- ja tohtoriopintojen sujuvuudessa?",
           "se": "",
-          "en": ""
+          "en": "What are the university's strengths in terms of the smooth running of Bachelor's, Master's and PhD studies?"
         },
         "required": false,
         "no_color": true,
@@ -208,7 +208,7 @@
         "label": {
           "fi": "TILASTOTIEDON JA TIEDEKUNTIEN KATSELMUSARVIOIDEN VASTAAVUUS",
           "se": "",
-          "en": ""
+          "en": "CONSISTENCY BETWEEN STATISTICAL DATA AND FACULTY REVIEWS "
         }
       },
       {
@@ -218,7 +218,7 @@
         "label": {
           "fi": "Antakaa arvio opintojen etenemistä koskevien tilastotietojen ja tiedekuntien antamien opiskelun sujuvuutta koskevien katselmusarvioiden vastaavuudesta.",
           "se": "",
-          "en": ""
+          "en": "Please provide an assessment of the correspondence between statistical data on the progress of studies and faculty reviews of student progress."
         },
         "shortLabel": {
           "fi": "",
@@ -234,22 +234,32 @@
         }
       },
       {
+        "id": "meta2",
+        "index": "meta-programme_structure_actions",
+        "type": "TITLE",
+        "label": {
+          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "se": "",
+          "en": "DEVELOPMENT AREAS AND MEASURES"
+        }
+      },
+      {
         "id": "university_ease_of_study_actions",
         "type": "ACTIONS_UNIVERSITY",
         "label": {
           "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "",
-          "en": ""
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä. Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "",
-          "en": ""
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development areas with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "",
-          "en": ""
+          "en": "Write down one to five development areas for Bachelor´s programmes, Master´s programs and Doctoral programmes each, with concrete measures."
         },
         "required": true,
         "no_color": true,
@@ -261,7 +271,7 @@
     "title": {
       "fi": "KOULUTUKSEN KOKONAISRAKENNE, JOHTAMINEN, RESURSSIT JA KOULUTUSOHJELMAN ASEMA",
       "se": "UTBILDNINGENS HELHETSSTRUKTUR STRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMETS STÄLLNING",
-      "en": "OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES"
+      "en": "OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES "
     },
     "parts": [
       {
@@ -271,17 +281,17 @@
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
           "se": "Ledning och kommunikation",
-          "en": "MANAGEMENT, LEADERSHIP AND COMMUNICATION"
+          "en": "COMMUNICATION"
         },
         "label": {
           "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
           "se": "LEDNING OCH KOMMUNIKATION",
-          "en": "FUNCTIONING OF MANAGEMENT, LEADERSHIP AND COMMUNICATION"
+          "en": "COMMUNICATION"
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus yliopiston koulutuksessa",
           "se": "Ledarskap och kommunikation i fakultetens utbildning",
-          "en": "Functioning of management, leadership and communication in the degree programmes of the faculty"
+          "en": "Functioning of management, leadership and communication in education at the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -309,7 +319,7 @@
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta yliopiston koulutuksessa",
           "se": "Planering och administration av undervisningsresurser i fakultetens utbildning",
-          "en": "Planning and management of teaching resources in the degree programmes of the faculty"
+          "en": "Planning and managing teaching resources of education at the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -337,7 +347,7 @@
         "description": {
           "fi": "Yliopiston näkemys ohjelmien mahdollisuuksista vaikuttaa uuden henkilökunnan rekrytointiin",
           "se": "",
-          "en": ""
+          "en": "University´s view of the programmes´ opportunities to influence the recruitment of new staff"
         },
         "required": true,
         "level_breakdown": true,
@@ -365,7 +375,7 @@
         "description": {
           "fi": "Tila- ja laiteresurssit ja oppimisympäristöjen resurssit yliopistossa",
           "se": "Resurser för lokaler, utrustning och lärmiljöer vid fakulteten",
-          "en": "Resources related to facilities, equipment and learning environments in the degree programmes of the faculty"
+          "en": "Resources related to facilities, equipment and learning environments of the degree programmes of the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -388,7 +398,7 @@
         "label": {
           "fi": "TIEDEKUNTIEN YHTEISET OHJELMAT",
           "se": "",
-          "en": ""
+          "en": "JOINT PROGRAMMES AT THE UNIVERSITY"
         },
         "description": {
           "fi": "Usean tiedekunnan yhteisten ohjelmien toimivuus",
@@ -421,7 +431,7 @@
         "description": {
           "fi": "Yliopiston näkemys koulutusohjelmien asemasta yliopiston toiminta- ja johtamisrakenteessa",
           "se": "",
-          "en": ""
+          "en": "University´s view on the status of the degree programme in the University’s operations and management structure"
         },
         "required": true,
         "level_breakdown": true,
@@ -438,7 +448,7 @@
         "type": "TITLE",
         "label": {
           "fi": "NÄKEMYSEROT KOULUTUKSEN KOKONAISRAKENTEESTA, JOHTAMISESTA, RESURSSEISTA JA KOULUTUSOHJELMIEN ASEMASTA",
-          "en": "",
+          "en": "DIFFERENCES OF OPINION ON THE OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES",
           "se": ""
         }
       },
@@ -449,7 +459,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaisrakenteesta, johtamisesta, resursseista tai koulutusohjelmien asemasta yliopistossa? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the overall structure of education, leadership and management, resources, and the status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -465,9 +475,9 @@
         "index": "meta-4",
         "type": "TITLE",
         "label": {
-          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA  ",
+          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA",
           "se": "",
-          "en": ""
+          "en": "THE UNIVERSITY'S STRENGTHS IN OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES"
         }
       },
       {
@@ -477,7 +487,7 @@
         "label": {
           "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan kandi- maisteri- ja tohtorikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
           "se": "",
-          "en": ""
+          "en": "What are the university's strengths in overall structure of education, leadership and management, resources, and the status of degree programmes?"
         },
         "required": false,
         "no_color": true,
@@ -493,9 +503,9 @@
         "index": "meta-programme_structure_actions",
         "type": "TITLE",
         "label": {
-          "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
+          "fi": "KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "",
-          "en": ""
+          "en": "DEVELOPMENT AREAS AND MEASURES"
         }
       },
       {
@@ -504,17 +514,17 @@
         "label": {
           "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "",
-          "en": ""
+          "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
         "description": {
           "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "",
-          "en": ""
+          "en": "The topics that in the general assessment received a ‘red light’ must be formulated into development areas with concrete proposals for measures to be taken. Some topics that received a ‘yellow light’ may also require concrete measures."
         },
         "extrainfo": {
           "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "",
-          "en": ""
+          "en": "Write down one to five development areas for Bachelor´s programmes, Master´s programs and Doctoral programmes each, with concrete measures."
         },
         "required": true,
         "no_color": true,
@@ -542,12 +552,12 @@
         "label": {
           "fi": "YLIOPISTON KOULUTUKSEN KOKONAISTOIMIVUUS",
           "se": "",
-          "en": ""
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE UNIVERSITY "
         },
         "description": {
           "fi": "Antakaa kokonaisarvio yliopiston koulutuksen toimivuudesta.",
           "se": "",
-          "en": ""
+          "en": "Provide an overall assessment of the effectiveness of the university´s degree programme education. Justify the assessment."
         },
         "required": true,
         "extrainfo": {
@@ -564,7 +574,7 @@
         "label": {
           "fi": "NÄKEMYSEROT KOULUTUKSEN KOKONAISTOIMIVUUDESTA",
           "se": "",
-          "en": ""
+          "en": "DIFFERENCES OF OPINION ON THE OVERALL STATUS OF DEGREE PROGRAMMES"
         }
       },
       {
@@ -574,7 +584,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the overall status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -597,12 +607,12 @@
         "label": {
           "fi": "MISSÄ YLIOPISTON KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
           "se": "",
-          "en": ""
+          "en": "OVERALL STATUS OF EDUCATION OF THE UNIVERSITY IN FIVE YEARS "
         },
         "description": {
           "fi": "Arvioikaa yliopiston koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
           "se": "",
-          "en": ""
+          "en": "Give the overall status of the university´s education in five years. Justify the assessment. "
         },
         "required": true,
         "extrainfo": {
@@ -619,7 +629,7 @@
         "label": {
           "fi": "NÄKEMYSEROT YLIOPISTON KOULUTUKSEN KOKONAISTILANTEESTA VIIDEN VUODEN KULUTTUA",
           "se": "",
-          "en": ""
+          "en": "DIFFERENCES OF OPINION ON THE OVERALL STATUS OF EDUCATION AT THE UNIVERSITY IN FIVE YEARS"
         }
       },
       {
@@ -629,7 +639,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta viiden vuoden kuluttua? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the overall status of education at the university in five years? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,

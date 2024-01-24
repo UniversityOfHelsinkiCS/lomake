@@ -10,12 +10,20 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
     sv: 'Universitetsnivå utvärdering',
   }
 
-  const evaluationTitle = {
-    level: 'arviointi',
-    fi: 'Arviointiryhmän toimenpide-ehdotukset',
-    en: "Evaluation committee's evaluation",
-    sv: 'Bedömningsgruppens bedömning',
-  }
+  const evaluationTitle =
+    id === 'university_ease_of_study_actions'
+      ? {
+          level: 'arviointi',
+          fi: 'ARVIOINTIRYHMÄN ESITTÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET OPISKELUN SUJUVUUDESTA',
+          se: "Evaluation committee's evaluation",
+          en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE SMOOTH RUNNING OF STUDIES, AS IDENTIFIED BY THE EVALUATION GROUP',
+        }
+      : {
+          level: 'arviointi',
+          fi: 'ARVIOINTIRYHMÄN ESITTÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET KOULUTUKSEN KOKONAISRAKENTEESTA, KOULUTUSOHJELMIEN ASEMASTA, JOHTAMISESTA JA RESURSSEISTA',
+          se: "Evaluation committee's evaluation",
+          en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES, AS IDENTIFIED BY THE EVALUATION GROUP',
+        }
 
   const questionLevels = [universityTitle, evaluationTitle]
 

@@ -155,8 +155,10 @@ export default {
     addDevelopmentArea: 'Add development area',
     removeDevelopmentArea: 'Delete last',
     allYearlyAnswerYears: 'All annual follow-up report years',
+    evaluationUniTopInfo:
+      "<strong>NOTE!</strong> University-level records and their preparation are the responsibility of the Academic Affairs Council (ONE) for Bachelor's and Master's programmes, and the Board of the doctoral school and Scientific Council (TINE) for doctoral programmes.<br /><br />The committees make their records on the same form, which will be used by the evaluation team. The evaluation team will also use this same form.",
     evaluationInfoUni:
-      "For this review, consider the degree programme's overall situation <strong>over the last three years</strong>.",
+      'For this review you will consider the state of degree education of the University over the period of the three previous years.',
     evaluationInfo1:
       "For this review, consider the degree programme's overall situation <strong>over the last three years</strong>.",
     evaluationInfo2:
@@ -169,7 +171,7 @@ export default {
     facultyActionSummaryTitle:
       'The steering groups of the degree programmes recorded their development areas and their required measures as follows:',
     universityActionSummaryTitle:
-      'The steering groups of the faculty´s degree programmes recorded their development areas and their required measures as follows:',
+      'The faculties recorded their development areas and their required measures as follows:',
     materials: 'Supporting materials',
     materialsProg:
       'You can view all annual follow-up answers by following the below link.<br/> Additionally, a summary of annual follow-up answers related to each theme has been added to most questions in this form.<br/>A new view has also been added to Oodikone. This view contains a selection of key statistics about the students of your programme and faculty, and about the progress of their studies. Shown below are links to both programme and faculty views.',
@@ -185,7 +187,7 @@ export default {
     facultyInfo:
       'For this review you will consider the state of degree programmes of the <strong>faculty</strong> over the period of the three previous years.',
     materialsUniversity:
-      'The questions in this form are accompanied by a summary of the answers given to the same theme by the faculties.<br><br>A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
+      'The questions in this form are accompanied by a summary of the answers given to the same theme by the faculties.<br /><br />A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculties, and about the progress of their studies. Link shown below.',
     materialsFaculty:
       'The questions in this form are accompanied by a summary of the answers given to the same theme by the steering groups of the faculty´s degree programmes.<br><br>A supporting view has been added to Oodikone. This view contains some of the key statistics about the students of the faculty, and about the progress of their studies. Link shown below.',
     yearlyAnswers: 'Annual follow-up answers',
@@ -213,9 +215,9 @@ export default {
     evaluationSummaryUniversity: 'Results of the Current state of education survey.',
     formNotReady: 'Form is still under development, opens 1.11.',
     overallActionSummaryTitle: 'General measure suggestions',
-    bachelorUniForm: 'Bachelor programmes (ONE writes)',
-    masterUniForm: 'Master programmes (ONE writes)',
-    doctoralUniForm: 'Doctoral programmes (Research board directors and TINE write together)',
+    bachelorUniForm: 'Bachelor programmes (ONE´s assessment)',
+    masterUniForm: 'Master programmes (ONE´s assessment)',
+    doctoralUniForm: 'Doctoral programmes (Joint assessment by TINE and the Board of the Doctoral School)',
   },
 
   generic: {

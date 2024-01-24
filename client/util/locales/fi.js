@@ -156,6 +156,8 @@ export default {
     addDevelopmentArea: 'Lisää kehittämiskohde',
     removeDevelopmentArea: 'Poista viimeinen kehittämiskohde',
     allYearlyAnswerYears: 'Kaikki vuosiseurannan vuodet',
+    evaluationUniTopInfo:
+      '<strong>HUOM!</strong> Yliopistotason kirjauksista sekä niiden valmistelusta vastaavat kandi- ja maisteriohjelmien osalta opintoasiainneuvosto (ONE) ja tohtoriohjelmien osalta tutkijakoulun johtokunta ja tieteellinen neuvosto (TINE).<br /><br />Toimikunnat tekevät kirjauksensa samaan lomakkeeseen, jota arviointiryhmä tulee käyttämään materiaalinaan. Myös arviointiryhmä tekee kirjauksensa tähän samaan lomakkeeseen.',
     evaluationInfo1:
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
