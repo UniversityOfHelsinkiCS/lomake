@@ -114,7 +114,7 @@ const Actions = ({
         padding: '1em',
       }}
     >
-      <Divider />
+      {id.indexOf('-bachelor') === -1 && <Divider />}
       {showDescription && (
         <>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
