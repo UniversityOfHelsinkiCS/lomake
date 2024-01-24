@@ -552,12 +552,12 @@
         "label": {
           "fi": "YLIOPISTON KOULUTUKSEN KOKONAISTOIMIVUUS",
           "se": "",
-          "en": ""
+          "en": "OVERALL STATUS OF THE DEGREE PROGRAMMES AT THE UNIVERSITY "
         },
         "description": {
           "fi": "Antakaa kokonaisarvio yliopiston koulutuksen toimivuudesta.",
           "se": "",
-          "en": ""
+          "en": "Provide an overall assessment of the effectiveness of the university´s degree programme education. Justify the assessment."
         },
         "required": true,
         "extrainfo": {
@@ -574,7 +574,7 @@
         "label": {
           "fi": "NÄKEMYSEROT KOULUTUKSEN KOKONAISTOIMIVUUDESTA",
           "se": "",
-          "en": ""
+          "en": "DIFFERENCES OF OPINION ON THE OVERALL STATUS OF DEGREE PROGRAMMES"
         }
       },
       {
@@ -584,7 +584,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the overall status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
@@ -607,12 +607,12 @@
         "label": {
           "fi": "MISSÄ YLIOPISTON KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
           "se": "",
-          "en": ""
+          "en": "OVERALL STATUS OF EDUCATION OF THE UNIVERSITY IN FIVE YEARS "
         },
         "description": {
           "fi": "Arvioikaa yliopiston koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
           "se": "",
-          "en": ""
+          "en": "Give the overall status of the university´s education in five years. Justify the assessment. "
         },
         "required": true,
         "extrainfo": {
@@ -629,7 +629,7 @@
         "label": {
           "fi": "NÄKEMYSEROT YLIOPISTON KOULUTUKSEN KOKONAISTILANTEESTA VIIDEN VUODEN KULUTTUA",
           "se": "",
-          "en": ""
+          "en": "DIFFERENCES OF OPINION ON THE OVERALL STATUS OF EDUCATION AT THE UNIVERSITY IN FIVE YEARS"
         }
       },
       {
@@ -639,7 +639,7 @@
         "label": {
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta viiden vuoden kuluttua? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
-          "en": ""
+          "en": "Are there significant differences of opinion between faculties on the overall status of education at the university in five years? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
         "required": false,
         "no_color": true,
