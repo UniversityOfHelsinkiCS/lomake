@@ -2,7 +2,7 @@ import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
 
-const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, showDataByProgramme }) => {
+const SummaryRowFaculty = ({ stats, selectedAnswers, tableIds, showDataByProgramme }) => {
   const { t } = useTranslation()
   const studyLevels = ['bachelor', 'master', 'doctoral']
   let answersCounted = {}
@@ -87,14 +87,14 @@ const SummaryRowFaculty = ({ setStatsToShow, stats, selectedAnswers, tableIds, s
                 <div
                   key={`${idObject.id}_${level}`}
                   style={{ maxHeight: '5em' }}
-                  onClick={() =>
+                  /* onClick={() =>
                     setStatsToShow({
                       stats: stats[idObject.id],
                       title: <span>{idObject.shortLabel}</span>, // transformIdToTitle(idObject.shortLabel, false),
                       answers: selectedAnswers,
                       questionId: idObject.id,
                     })
-                  }
+                  } */
                 >
                   <PieChart
                     animationDuration={500}
