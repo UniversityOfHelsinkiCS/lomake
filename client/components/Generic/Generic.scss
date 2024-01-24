@@ -384,14 +384,13 @@
   justify-content: flex-start;
   max-width: 40%;
   margin: 0;
-  gap: 1em;
   padding-left: 2em;
   padding-bottom: 0;
 }
 
 .traffic-light-row-label {
-  margin-right: auto;
-  flex: 1 0 10rem;
+  margin-right: 2em;
+  flex: 0.7 0 10rem;
 }
 
 .traffic-light-row-buttons {
