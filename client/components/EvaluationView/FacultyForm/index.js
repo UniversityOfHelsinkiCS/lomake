@@ -16,7 +16,7 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
-import { colors, isAdmin } from 'Utilities/common'
+import { colors, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
@@ -133,14 +133,14 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  const hasRights = user.access[faculty.code]?.write || isAdmin(user)
+  const hasRights = user.access[faculty.code]?.write || isAdmin(user) || isKatselmusProjektiOrOhjausryhma(user)
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
 
   useEffect(() => {
     if (!faculty || !form) return
-    if (!user.access[faculty.code] && !isAdmin(user)) {
+    if (!user.access[faculty.code] && !isAdmin(user) && !isKatselmusProjektiOrOhjausryhma(user)) {
       return
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
