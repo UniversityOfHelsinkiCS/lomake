@@ -88,7 +88,7 @@ const Textarea = ({
   const someoneElseHasTheLock =
     currentEditors && currentUser && currentEditors[fieldName] && currentEditors[fieldName].uid !== currentUser.uid
 
-  const hasSummaryData = Object.keys(summaryData || {}).length > 0 && id.includes('_bachelor')
+  const hasSummaryData = Object.keys(summaryData || {}).length > 0 && id.includes('-bachelor')
 
   useEffect(() => {
     const gotTheLock =
