@@ -160,7 +160,7 @@
         "index": "I",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtoriopintojen sujuvuudesta? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtoriopintojen sujuvuudesta?  Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
           "en": ""
         },
@@ -206,7 +206,7 @@
         "index": "meta-same_tone_seamless_studies",
         "type": "TITLE",
         "label": {
-          "fi": "TILASTOTIEDON JA TIEDEKUNTIEN KATSELMUSARVIOIDEN VASTAAVUUS ",
+          "fi": "TILASTOTIEDON JA TIEDEKUNTIEN KATSELMUSARVIOIDEN VASTAAVUUS",
           "se": "",
           "en": ""
         }
@@ -242,7 +242,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä.",
+          "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä. Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "",
           "en": ""
         },
@@ -414,7 +414,7 @@
           "en": "Status of the degree programme"
         },
         "label": {
-          "fi": "KOULUTUSOHJELMIEN ASEMA ",
+          "fi": "KOULUTUSOHJELMIEN ASEMA",
           "se": "UTBILDNINGSPROGRAMMENS STÄLLNING",
           "en": "STATUS OF THE DEGREE PROGRAMMES"
         },
@@ -465,7 +465,7 @@
         "index": "meta-4",
         "type": "TITLE",
         "label": {
-          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA ",
+          "fi": "YLIOPISTON KIRJAUKSET VAHVUUKSISTA  ",
           "se": "",
           "en": ""
         }
@@ -507,7 +507,7 @@
           "en": ""
         },
         "description": {
-          "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä. ",
+          "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "",
           "en": ""
         },
@@ -572,7 +572,7 @@
         "index": "I",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Mikäli tiedekunnissa on huomattavia näkemyseroja koulutuksen kokonaistoimivuudesta, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
           "en": ""
         },
@@ -627,7 +627,7 @@
         "index": "I",
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "Mikäli tiedekunnissa on huomattavia näkemyseroja koulutuksen kokonaistilanteesta viiden vuoden kuluttua, kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
+          "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta viiden vuoden kuluttua? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "",
           "en": ""
         },

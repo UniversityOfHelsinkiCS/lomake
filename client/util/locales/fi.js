@@ -160,7 +160,7 @@ export default {
       'Katselmuksessa tarkastellaan koulutusohjelman tilannetta laajemmin <strong>kolmen viime vuoden ajalta</strong>.',
     evaluationInfo2:
       'Keskustelkaa koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Huomaattehan, että vuoden <strong> 2023 vuosiseuranta tulee olla tehtynä ennen katselmuksen täyttämistä</strong>.',
-    evaluationInfoUni: 'Katselmuksessa tarkastellaan yliopiston koulutusohjelmien tilannetta kolmelta viime vuodelta.',
+    evaluationInfoUni: 'Katselmuksessa tarkastellaan yliopiston koulutuksen tilannetta kolmelta viime vuodelta.',
     selectApplicable: 'Valitkaa sopivat vaihtoehdot',
     addMissing: 'Kirjatkaa puuttuvat vaihtoehdot - Voitte kirjata useamman',
     progSummaryTitle: 'Teemaan liittyvien vuosiseurantakysymysten vastaukset tarkastelujaksolta',
@@ -169,7 +169,7 @@ export default {
     facultyActionSummaryTitle:
       'Koulutusohjelmien johtoryhmät kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti:',
     universityActionSummaryTitle:
-      'Tiedekunnat kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti: ',
+      'Tiedekunnat kirjasivat kehittämiskohteensa ja niiden vaatimat toimenpiteet seuraavasti:',
     materials: 'Taustamateriaali',
     materialsProg:
       'Alla olevasta linkistä voitte tarkastella kootusti kaikkia vuosiseurannassa kirjattuja vastauksia.<br/> Lisäksi tässä lomakkeessa on usean kysymyksen yhteyteen lisätty tiivistelmä kolmelta viimeisimmältä vuodelta kyseiseen teemaan liittyvien vuosiseurantakysymysten vastauksista. <br/>Oodikoneseen on luotu näkymä katselmoinnin tueksi. Tähän näkymään on kerätty keskeisimpiä tilastoja koulutusohjelmanne ja tiedekuntanne opiskelijoista ja heidän opintojensa etenemisestä. Alla linkki sekä koulutusohjelma- että tiedekuntatason näkymään.',
