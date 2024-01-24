@@ -189,19 +189,27 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                   if (level === 'doctoral' && hideLevels) return null
                   return (
                     <div className="traffic-light-row" key={level}>
-                      <label className="traffic-light-row-label">{t(level)}</label>
+                      <label className="traffic-light-row-label">
+                        {!isArviointi ? t(`formView:${level}UniForm`) : t(level)}
+                      </label>
                       <TrafficLights id={`${id}-${object.level}_${level}`} form={form} />
                     </div>
                   )
                 })
               ) : (
                 <div className="traffic-light-row">
-                  <label className="traffic-light-row-label">{t('bachelor')}</label>
-                  <TrafficLights id={`${id}-${object.level}_bachelor`} form={form} />
+                  <label className="traffic-light-row-label">
+                    {!isArviointi ? t('formView:bachelorUniForm') : t('bachelor')}
+                  </label>
+                  <TrafficLights
+                    className="traffic-light-row-buttons"
+                    id={`${id}-${object.level}_bachelor`}
+                    form={form}
+                  />
                 </div>
               )}
             </div>
-            {object.level !== 'arviointi' && (
+            {!isArviointi && (
               <div className="summary-container">
                 <h4>{t(summaryTitle)}</h4>
                 <div className="summary-grid" data-cy={`${id}-${object.level}-summary`}>
