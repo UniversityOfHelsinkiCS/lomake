@@ -31,8 +31,6 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
 }
 
 const hasRights = currentUser => {
-  // eslint-disable-next-line no-console
-  console.log(currentUser)
   return (
     isAdmin(currentUser) ||
     currentUser.specialGroup?.universityForm ||

@@ -129,7 +129,7 @@ export default {
     // universityActionSummaryTitle: '',
     facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt:',
     materialsUniversity:
-      'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakultetes.<br><br>I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till fakultetens vy.',
+      'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakulteten.<br /><br />I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till Oodikone.',
     materialsFaculty:
       'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakultetens utbildningsprogram.<br><br>I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till fakultetens vy.',
     facultyInfo:
@@ -164,10 +164,14 @@ export default {
     addDevelopmentArea: 'Lägg till utvecklingsobjekt', // Not from translation (FIX?)
     // removeDevelopmentArea: '',
     allYearlyAnswerYears: 'Alla år i årsuppföljningen',
+    evaluationUniTopInfo:
+      '<strong>OBS!</strong> Ansvaret för att sammanställa uppgifter på universitetsnivå ligger utbildningsrådet (ONE) för kandidat- och masterprogram, och hos styrgruppen för forskarskolan och det vetenskapliga rådet (TINE) för doktorandprogram.<br /><br />Utbildningsrådet, vetenskapliga rådet och styrgruppen för forskarskolan gör sina noteringar på samma formulär som utvärderingsgruppen kommer att använda.',
     evaluationInfo1:
       'I översynen granskas läget för utbildningsprogrammet på ett mer omfattande plan i fråga om <strong>de senaste tre åren</strong>.',
     evaluationInfo2:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Observera att <strong> 2023 års årsuppföljning ska vara slutförd innan översynsformuläret fylls i</strong>.',
+    evaluationInfoUni:
+      'Denna översyn tar ett bredare grepp på situationen för universitetets utbildningsprogrammen under de senastge tre åren.',
     selectApplicable: 'Välj alla lämpliga alternativ',
     addMissing: 'Lägg till ett alternativ',
     progSummaryTitle: 'Svaren på årsuppföljningens frågor om temat under observationsperioden',
@@ -178,6 +182,7 @@ export default {
     summaryLinkProg: 'Granska alla svar från tidigare årsuppföljningar',
     oodikoneProg: 'Granska utbildningsprogrammets uppgifter i Oodikone',
     oodikoneFaculty: 'Granska fakultetens uppgifter i Oodikone',
+    oodikoneUniversity: 'Granska uppgifter i Oodikone',
     // rapo: '',
     // facultyInfo: '',
     // yearlyAnswers: '',
@@ -203,11 +208,12 @@ export default {
     showAnswers: 'Visa svar',
     hideAnswers: 'Dölj svar',
     evaluationSummaryByProgramme: 'Titta på fakultetens information om resultaten av enkäten Utbildningens tillstånd',
+    evaluationSummaryUniversity: 'Granska resultat av enkäten Utbildningens nuvarande tillstånd',
     formNotReady: '',
-    // overallActionSummaryTitle: '',
-    // bachelorUniForm: '',
-    // masterUniForm: '',
-    // doctoralUniForm: '',
+    overallActionSummaryTitle: 'Allmänna bedömningar och rekommendationer',
+    bachelorUniForm: 'Kandidatprogrammen (ONE gör anteckningarna)',
+    masterUniForm: 'Magisterprogrammen (ONE gör anteckningarna)',
+    doctoralUniForm: 'Doktorandprogrammen (TINE och styrgruppen för forskarskolan gör anteckningarna)',
   },
 
   generic: {
