@@ -244,6 +244,14 @@ const CommitteeFormView = ({ room, formString }) => {
               </h3>
 
               <div className="hide-in-print-mode">
+                <div className="info-container">
+                  <p>
+                    <Trans i18nKey="formView:evaluationUniTopInfo" />
+                  </p>
+                </div>
+              </div>
+
+              <div className="hide-in-print-mode">
                 <StatusMessage form={form} writeAccess={hasRights} />
                 <div className="info-container">
                   <p>
