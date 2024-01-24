@@ -226,6 +226,16 @@ const ColorTable = React.memo(
       }
     }
 
+    let individualAvgText = t('generic:individualAvg')
+
+    if (facultyView && facultyView === 'UNI') {
+      if (dropdownFilter.length === 0) {
+        individualAvgText = t('generic:individualAvgUni')
+      } else {
+        individualAvgText = t('generic:individualAvgUniSelected')
+      }
+    }
+
     const selectorLabel = facultyView ? t('showAllFacultyProgrammes') : t('showAllProgrammes')
     return (
       <>
@@ -246,7 +256,7 @@ const ColorTable = React.memo(
           {facultyView ? (
             <>
               <div className="table-container" style={{ paddingTop: 20 }}>
-                {t('generic:individualAvg')}
+                {individualAvgText}
               </div>
               <div className="table-container" style={{ paddingTop: 20 }}>
                 <p>

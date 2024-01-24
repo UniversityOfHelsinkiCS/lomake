@@ -218,6 +218,8 @@ export default {
     universityAvg: 'Genomsnitt för alla program',
     individualAvg: 'Genomsnitt av individuella svar från fakulteten',
     individualTxt: 'Öppna svar från enskilda respondenter vid fakulteten',
+    individualAvgUni: '',
+    individualAvgUniSelected: '',
     noAnswerData: 'Inga svar på frågan',
     kludgeButton: 'Spara textfält',
     kludgeButtonRelease: 'Sluta redigera textfältet',
