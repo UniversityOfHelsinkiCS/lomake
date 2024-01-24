@@ -21,6 +21,7 @@ describe('Degree reform form tests', () => {
   it('Reform form for programmes is accessible through links and loads', () => {
     cy.login(cypressUser)
     cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=reform-form-group-container')
@@ -83,6 +84,7 @@ describe('Degree reform form tests', () => {
 
     cy.login(cypressReadingRightsUser)
     cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
     cy.get(`[data-cy="no-write-access-notice"]`).contains(
@@ -93,6 +95,7 @@ describe('Degree reform form tests', () => {
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
     cy.login(cypressUser)
     cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -120,6 +123,7 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Master's sections work
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
@@ -149,6 +153,7 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Doctoral sections work
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
@@ -180,6 +185,7 @@ describe('Degree reform form tests', () => {
     // Check that Status Message works and is closed
     cy.login(cypressUser)
     cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
@@ -196,6 +202,7 @@ describe('Degree reform form tests', () => {
     // Start filling in the form
     cy.login(cypressUser)
     cy.visit('/')
+    cy.get('[data-cy=nav-degree-reform]').click()
     cy.get('[data-cy=nav-degree-reform-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.wait(1000)
