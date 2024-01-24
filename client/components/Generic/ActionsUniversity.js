@@ -90,6 +90,7 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
             {questionLevel.level === 'arviointi' && (
               <Actions
                 id={`${id}-${questionLevel.level}-overall`}
+                isArviointi={isArviointi}
                 label={label}
                 description={description}
                 form={form}
