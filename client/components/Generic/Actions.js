@@ -119,10 +119,10 @@ const Actions = ({
         <>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ maxWidth: '1000px' }}>
-              <h3>
+              <h2>
                 {label}{' '}
                 {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
-              </h3>
+              </h2>
             </div>
           </div>
           <div
