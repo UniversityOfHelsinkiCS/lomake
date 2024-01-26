@@ -3,8 +3,7 @@ import { Accordion, Icon, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
-import useDebounce from 'Utilities/useDebounce'
+import { isEvaluationUniversityUser } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 
@@ -34,8 +33,6 @@ const TextualAnswers = ({ reformAnswers }) => {
 export default () => {
   const { t } = useTranslation()
   const [modalData, setModalData] = useState(null)
-  const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter, 200)
   const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [textualVisible, setTextualVisible] = useState(false)
@@ -51,34 +48,13 @@ export default () => {
     document.title = `${t('evaluation')}`
   }, [lang])
 
-  const handleFilterChange = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
-
-  const hasRights = currentUser => isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)
+  const hasRights = currentUser => isEvaluationUniversityUser(currentUser)
 
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.access)
-    return hasRights(currentUser)
-      ? programmes
-      : programmes.filter(program => usersPermissionsKeys.includes(program.key))
+    if (!hasRights(currentUser)) return []
+    return ['UNI']
   }, [programmes, currentUser])
-
-  const filteredCommittes = useMemo(() => {
-    return committeeList.filter(f => {
-      if (!currentUser.access[f.code] && !hasRights(currentUser)) {
-        return false
-      }
-      const name = f.name[lang]
-      const { code } = f
-      return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        code.toLowerCase().includes(debouncedFilter.toLowerCase())
-      )
-    })
-  }, [usersProgrammes, lang, debouncedFilter])
 
   return (
     <>
@@ -157,13 +133,10 @@ export default () => {
           </div>
           <div style={{ marginTop: '1em' }}>
             <CommitteeColorTable
-              committees={filteredCommittes}
+              committees={committeeList}
               setModalData={setModalData}
               setProgramControlsToShow={setProgramControlsToShow}
               setStatsToShow={null}
-              isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleFilterChange}
-              filterValue={filter}
               form={form}
               formType={formType}
             />

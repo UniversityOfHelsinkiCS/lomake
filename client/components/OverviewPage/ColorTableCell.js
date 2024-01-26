@@ -85,7 +85,7 @@ const ColorTableCell = ({
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
   let colorAnswer = null
 
-  if (form === 5) {
+  if (form === 5 || form === 6) {
     colorId = [
       `${questionId}_light`,
       `${questionId}_bachelor_light`,

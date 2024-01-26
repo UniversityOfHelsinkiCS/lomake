@@ -5,7 +5,6 @@ import { Button } from 'semantic-ui-react'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import PieForCommittee from './PieForCommittee'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell">
@@ -13,83 +12,48 @@ const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   </div>
 )
 
-const TableRow = ({
-  faculty,
-  selectedAnswers,
-  tableIds,
-  setModalData,
-  form,
-  showDataByProgramme,
-  setProgramControlsToShow,
-}) => {
+const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, setProgramControlsToShow, committee }) => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const { t } = useTranslation()
-  let answers = []
-  if (showDataByProgramme) {
-    const programmeAnswers = selectedAnswers.filter(a => faculty.ownedProgrammes.find(p => p.key === a.programme))
-    answers = programmeAnswers
-  } else {
-    const facultyAnswers = selectedAnswers.find(a => a.programme === faculty.code && a.form === form)
-    answers = facultyAnswers ? facultyAnswers.data : {}
-  }
-  const targetURL = `/evaluation-university/form/${form}/${faculty.code}`
+  const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
 
   const hasManagementAccess = program => {
     if (isAdmin(currentUser)) return true
     return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
   }
-
   return (
-    <React.Fragment key={faculty.code}>
+    <React.Fragment key={form}>
       <div className="table-container-row-link">
-        <Link data-cy={`colortable-link-to-${faculty.code}`} to={targetURL}>
-          {faculty.name[lang]}
+        <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
+          {question.label[lang]}
         </Link>
       </div>
       <div className="table-container-row-link">
-        <Link to={targetURL}>{faculty.code}</Link>
+        <Link to={targetURL}>{committee.code}</Link>
       </div>
       <div style={{ marginRight: '0.5em' }}>
-        {!showDataByProgramme ? (
-          <>
-            <p style={{ margin: '0' }}>{t('bachelorShort')}</p>
-            <p style={{ margin: '0' }}>{t('masterShort')}</p>
-            <p style={{ margin: '0' }}>{t('doctoralShort')}</p>
-          </>
-        ) : (
-          <p style={{ marginTop: '0.5em', wordWrap: 'break-word' }}>{t('overview:facultySummary')}</p>
-        )}
+        <p style={{ margin: '0' }}>{t('bachelorShort')}</p>
+        <p style={{ margin: '0' }}>{t('masterShort')}</p>
+        <p style={{ margin: '0' }}>{t('doctoralShort')}</p>
       </div>
-      {showDataByProgramme
-        ? tableIds.map(idObject => (
-            <PieForCommittee
-              key={`${faculty.code}-${idObject.id}`}
-              questionId={idObject.id}
-              selectedAnswers={selectedAnswers}
-              facultyName={faculty.name[lang]}
-              facultyKey={faculty.code}
-              programmesAnswers={answers}
-              form={form}
-              setModalData={setModalData}
-            />
-          ))
-        : tableIds.map(idObject => (
-            <ColorTableCell
-              key={`${faculty.code}-${idObject.id}`}
-              programmesName={faculty.name[lang]}
-              programmesKey={faculty.code}
-              programmesAnswers={answers}
-              programmesOldAnswers={null}
-              questionId={idObject.id}
-              questionType={idObject.type}
-              setModalData={setModalData}
-              form={form}
-            />
-          ))}
 
-      {hasManagementAccess(faculty.code) ? (
-        <ManageCell faculty={faculty} setProgramControlsToShow={setProgramControlsToShow} />
+      {tableIds.map(idObject => (
+        <ColorTableCell
+          key={`${question.id}-${idObject.id}`}
+          programmesName={committee.name[lang]}
+          programmesKey={committee.code}
+          programmesAnswers={selectedAnswers}
+          programmesOldAnswers={null}
+          questionId={committee.id}
+          questionType={committee.type}
+          setModalData={setModalData}
+          form={form}
+        />
+      ))}
+
+      {hasManagementAccess(committee.code) ? (
+        <ManageCell faculty={committee} setProgramControlsToShow={setProgramControlsToShow} />
       ) : (
         <div />
       )}

@@ -142,11 +142,7 @@ const isEvaluationFacultyUser = user => {
 }
 
 const isEvaluationUniversityUser = user => {
-  if (
-    (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.evaluationUniversity) ||
-    isKatselmusProjektiOrOhjausryhma(user)
-  )
-    return true
+  if (user?.specialGroup?.evaluationUniversity || isKatselmusProjektiOrOhjausryhma(user) || isAdmin(user)) return true
   return false
 }
 

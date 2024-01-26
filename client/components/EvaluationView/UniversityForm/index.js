@@ -16,7 +16,7 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './index.scss'
-import { colors, isAdmin } from 'Utilities/common'
+import { colors, isEvaluationUniversityUser } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
@@ -31,11 +31,7 @@ const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
 }
 
 const hasRights = currentUser => {
-  return (
-    isAdmin(currentUser) ||
-    currentUser.specialGroup?.universityForm ||
-    currentUser.iamGroups.includes('grp-katselmus-projektiryhma') // TODO: fix this properly
-  )
+  return isEvaluationUniversityUser(currentUser)
 }
 
 const findEntityLevelAnswers = (faculties, allAnswers, question) => {
