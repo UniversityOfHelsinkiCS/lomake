@@ -121,7 +121,7 @@ const CommitteeColorTable = React.memo(
                     }}
                     as="h2"
                   >
-                    {index + 1}\) {theme.title[lang]}
+                    {index + 1}) {theme.title[lang]}
                   </Header>
                 )}
                 <TableRow
