@@ -23,7 +23,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
     return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
   }
   return (
-    <React.Fragment key={form}>
+    <React.Fragment key={question.id}>
       <div className="table-container-row-link">
         <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
           {question.label[lang]}
@@ -38,19 +38,21 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
         <p style={{ margin: '0' }}>{t('doctoralShort')}</p>
       </div>
 
-      {tableIds.map(idObject => (
-        <ColorTableCell
-          key={`${question.id}-${idObject.id}`}
-          programmesName={committee.name[lang]}
-          programmesKey={committee.code}
-          programmesAnswers={selectedAnswers}
-          programmesOldAnswers={null}
-          questionId={committee.id}
-          questionType={committee.type}
-          setModalData={setModalData}
-          form={form}
-        />
-      ))}
+      {tableIds.map(upperLevel => {
+        return upperLevel.levels.map(level => (
+          <ColorTableCell
+            key={`${question.id}-${upperLevel.title}-${level}`}
+            programmesName={committee.name[lang]}
+            programmesKey={committee.code}
+            programmesAnswers={selectedAnswers}
+            programmesOldAnswers={null}
+            questionId={committee.id}
+            questionType={committee.type}
+            setModalData={setModalData}
+            form={form}
+          />
+        ))
+      })}
 
       {hasManagementAccess(committee.code) ? (
         <ManageCell faculty={committee} setProgramControlsToShow={setProgramControlsToShow} />
