@@ -132,7 +132,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
   const evaluationTitle = {
     level: 'arviointi',
     fi: 'Arviointiryhmän arvio',
-    en: "Evaluation committee's evaluation",
+    en: "Evaluation group's assessment",
     sv: 'Bedömningsgruppens bedömning',
   }
 

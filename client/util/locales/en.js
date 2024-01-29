@@ -157,7 +157,7 @@ export default {
     removeDevelopmentArea: 'Delete last',
     allYearlyAnswerYears: 'All annual follow-up report years',
     evaluationUniTopInfo:
-      "<strong>NOTE!</strong> University-level records and their preparation are the responsibility of the Academic Affairs Council (ONE) for Bachelor's and Master's programmes, and the Board of the doctoral school and Scientific Council (TINE) for doctoral programmes.<br /><br />The committees make their records on the same form, which will be used by the evaluation team. The evaluation team will also use this same form.",
+      "<strong>NOTE!</strong> University-level records and their preparation are the responsibility of the Academic Affairs Council (ONE) for Bachelor's and Master's programmes, and the Board of the doctoral school and Scientific Council (TINE) for doctoral programmes.<br /><br />The committees make their records on the same form, which will be used by the evaluation group. The evaluation group will also use this same form.",
     evaluationInfoUni:
       'For this review you will consider the state of degree education of the University over the period of the three previous years.',
     evaluationInfo1:
@@ -216,8 +216,8 @@ export default {
     evaluationSummaryUniversity: 'Results of the Current state of education survey.',
     formNotReady: 'Form is still under development, opens 1.11.',
     overallActionSummaryTitle: 'General measure suggestions',
-    bachelorUniForm: 'Bachelor programmes (ONE´s assessment)',
-    masterUniForm: 'Master programmes (ONE´s assessment)',
+    bachelorUniForm: "Bachelor's programmes (ONE´s assessment)",
+    masterUniForm: "Master's programmes (ONE´s assessment)",
     doctoralUniForm: 'Doctoral programmes (Joint assessment by TINE and the Board of the Doctoral School)',
   },
 
