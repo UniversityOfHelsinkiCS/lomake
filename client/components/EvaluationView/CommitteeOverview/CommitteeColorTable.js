@@ -35,7 +35,9 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
     form,
   })
 
-  const filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI').data
+  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
+
+  if (!filteredAnswers?.data) filteredAnswers = []
 
   const sortedCommittees = sortedItems(committees, sorter, lang)
 
