@@ -367,7 +367,7 @@
         "description": {
           "fi": "Koulutusohjelman asema yliopiston toiminta- ja johtamisrakenteessa",
           "se": "Utbildningsprogrammets ställning i universitetets verksamhets- och ledningsstruktur",
-          "en": "Status of the degree programme in the University’s operations and management structure"
+          "en": "Status of the degree programme in the university’s operations and management structure"
         },
         "required": true,
         "extrainfo": {

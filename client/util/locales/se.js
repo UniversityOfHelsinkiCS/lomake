@@ -26,14 +26,13 @@ export default {
     programmeHeader: 'Program',
     code: 'Kod',
     allProgrammes: 'Alla program',
-    bachelor: 'Kandidatsprogram',
-    master: 'Magisterprogram',
-    doctoral: 'Doktorandprogram',
-    actionsHeader: '',
+    bachelor: 'Kandidatsprogrammen',
+    master: 'Magisterprogrammen',
+    doctoral: 'Doktorandprogrammen',
     bachelorShort: 'Kandidat',
     masterShort: 'Magister',
     doctoralShort: 'Doktorand',
-    international: 'Internationella Magisterprogram',
+    international: 'Internationella magisterprogrammen',
     programmeFilter: 'Sök utbildningsprogram',
     facultyFilter: 'Sök',
     find: 'Sök',
@@ -124,10 +123,11 @@ export default {
     formError: 'Fel vid anslutning av sidan',
     formErrorButton: 'Klicka här för att ladda om sidan!',
     requiredActions: 'Åtgärder',
-    universitySummaryTitle: 'Fakulteten svarade på följande sätt:',
+    universitySummaryTitle: 'Fakulteterna svarade på följande sätt:',
     facultyActionSummaryTitle:
       'Ledningsgrupperna för fakultetens utbildningsprogram antecknade sina utvecklingsobjekt och åtgärder på följande sätt:',
-    // universityActionSummaryTitle: '',
+    universityActionSummaryTitle:
+      'Fakulteterna antecknade sina utvecklingsobjekt och de åtgärder som behövs på följande sätt:',
     facultySummaryTitle: 'Ledningsgrupperna för fakultetens utbildningsprogram svarade på följande sätt:',
     materialsUniversity:
       'I blanketten har man lagt till en sammanfattning av svaren på översyn från fakulteten.<br /><br />I Oodikone har skapats en vy som stöd för översynen. I denna vy har man samlat in statistik om fakultetens studerande och hur deras studier framskrider. Nedan länk till Oodikone.',
@@ -166,7 +166,7 @@ export default {
     // removeDevelopmentArea: '',
     allYearlyAnswerYears: 'Alla år i årsuppföljningen',
     evaluationUniTopInfo:
-      '<strong>OBS!</strong> Ansvaret för att sammanställa uppgifter på universitetsnivå ligger utbildningsrådet (ONE) för kandidat- och masterprogram, och hos styrgruppen för forskarskolan och det vetenskapliga rådet (TINE) för doktorandprogram.<br /><br />Utbildningsrådet, vetenskapliga rådet och styrgruppen för forskarskolan gör sina noteringar på samma formulär som utvärderingsgruppen kommer att använda.',
+      '<strong>OBS!</strong> Ansvaret för att sammanställa uppgifter på universitetsnivå ligger utbildningsrådet (ONE) för kandidat- och magisterprogram, och hos styrgruppen för forskarskolan och det vetenskapliga rådet (TINE) för doktorandprogram.<br /><br />Utbildningsrådet, vetenskapliga rådet och styrgruppen för forskarskolan gör sina noteringar på samma formulär som utvärderingsgruppen kommer att använda.',
     evaluationInfo1:
       'I översynen granskas läget för utbildningsprogrammet på ett mer omfattande plan i fråga om <strong>de senaste tre åren</strong>.',
     evaluationInfo2:

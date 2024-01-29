@@ -190,7 +190,7 @@
         "label": {
           "fi": "Mitkä ovat yliopiston vahvuuksia kandi- maisteri- ja tohtoriopintojen sujuvuudessa?",
           "se": "Vilka är universitetets styrkor när det gäller temat smidiga studier i kandidat-, magister- och doktorandprogram?",
-          "en": "What are the university's strengths in terms of the smooth running of Bachelor's, Master's and PhD studies?"
+          "en": "What are the university's strengths in terms of the smooth running of bachelor's, master's and doctoral studies?"
         },
         "required": false,
         "no_color": true,
@@ -249,7 +249,7 @@
         "extrainfo": {
           "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "Anteckna 1–5 utvecklingsobjekt per examensnivå och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five development areas for Bachelor´s programmes, Master´s programs and Doctoral programmes each, with concrete measures."
+          "en": "Write down one to five development areas for bachelor´s programmes, master´s programs and doctoral programmes each, with concrete measures."
         },
         "required": true,
         "no_color": true,
@@ -276,7 +276,7 @@
         "label": {
           "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
           "se": "LEDNING OCH KOMMUNIKATION",
-          "en": "COMMUNICATION"
+          "en": "LEADERSHIP AND COMMUNICATION"
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus yliopiston koulutuksessa",
@@ -308,7 +308,7 @@
         },
         "description": {
           "fi": "Opetusresurssien suunnittelu ja hallinta yliopiston koulutuksessa",
-          "se": "Planering och ledning av undervisningsresurser i universitetets utbildning",
+          "se": "Planering och ledning av undervisningsresurserna i universitetets utbildning",
           "en": "Planning and managing teaching resources of education at the university"
         },
         "required": true,
@@ -421,7 +421,7 @@
         "description": {
           "fi": "Yliopiston näkemys koulutusohjelmien asemasta yliopiston toiminta- ja johtamisrakenteessa",
           "se": "Universitetets syn på utbildningsprogrammens ställning i universitetets verksamhets- och ledningsstruktur",
-          "en": "University´s view on the status of the degree programme in the University’s operations and management structure"
+          "en": "University´s view on the status of the degree programme in the university’s operations and management structure"
         },
         "required": true,
         "level_breakdown": true,
@@ -504,7 +504,7 @@
         "extrainfo": {
           "fi": "Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "Anteckna 1–5 utvecklingsobjekt per examensnivå och de konkreta åtgärder som formulerats för dem.",
-          "en": "Write down one to five development areas for Bachelor´s programmes, Master´s programs and Doctoral programmes each, with concrete measures."
+          "en": "Write down one to five development areas for bachelor´s programmes, master´s programs and doctoral programmes each, with concrete measures."
         },
         "required": true,
         "no_color": true,
@@ -586,7 +586,7 @@
         },
         "label": {
           "fi": "MISSÄ YLIOPISTON KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
-          "se": "VAR FAKULTETS UTBILDNING BEFINNER SIG OM FEM ÅR",
+          "se": "VAR UNIVERSITETES UTBILDNING BEFINNER SIG OM FEM ÅR",
           "en": "OVERALL STATUS OF EDUCATION OF THE UNIVERSITY IN FIVE YEARS "
         },
         "description": {
