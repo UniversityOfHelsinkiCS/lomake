@@ -105,7 +105,7 @@ $QUESTION_COUNT: 6;
   @include container-basics;
   flex-direction: column;
   margin-right: auto;
-  &-manage-cell {
+  &-manage-cell-committee {
     @include container-basics;
     justify-content: center;
     grid-column: 14/15

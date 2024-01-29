@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
-  <div className="table-container-manage-cell">
+  <div className="table-container-manage-cell-committee">
     <Button data-cy={`${faculty.code}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(faculty)} />
   </div>
 )
