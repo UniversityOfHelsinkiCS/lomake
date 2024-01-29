@@ -23,7 +23,7 @@
         "description": {
           "fi": "Opiskelijavalintojen toimivuus yliopistossa",
           "se": "Studentintagningens ändamålsenlighet vid universitetet",
-          "en": "Functioning of the student admissions procedures "
+          "en": "Functioning of the student admissions procedures"
         },
         "required": true,
         "level_breakdown": true,
@@ -280,7 +280,7 @@
         },
         "description": {
           "fi": "Johtamisen ja viestinnän toimivuus yliopiston koulutuksessa",
-          "se": "Ledarskap och kommunikation i universitetets utbildning ",
+          "se": "Ledarskap och kommunikation i universitetets utbildning",
           "en": "Functioning of management, leadership and communication in education at the university"
         },
         "required": true,
@@ -591,8 +591,8 @@
         },
         "description": {
           "fi": "Arvioikaa yliopiston koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
-          "se": "Bedöm den totala situationen för universitetets utbildning om fem år",
-          "en": "Give the overall status of the university´s education in five years. Justify the assessment. "
+          "se": "Bedöm den totala situationen för universitetets utbildning om fem år.",
+          "en": "Give the overall status of the university´s education in five years. Justify the assessment."
         },
         "required": true,
         "extrainfo": {
