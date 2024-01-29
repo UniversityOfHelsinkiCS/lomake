@@ -36,8 +36,11 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
   })
 
   let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
-
-  if (!filteredAnswers?.data) filteredAnswers = []
+  if (!filteredAnswers?.data) {
+    filteredAnswers = []
+  } else {
+    filteredAnswers = filteredAnswers.data
+  }
 
   const sortedCommittees = sortedItems(committees, sorter, lang)
 
@@ -53,7 +56,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
   }
   const tableIds = [
     { title: 'university', levels: ['bachelor', 'master', 'doctoral'] },
-    { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'actionsHeader'] },
+    { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'overallHeader'] },
   ]
 
   return (
@@ -72,7 +75,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
               {index === 0 && (
                 <Header
                   style={{
-                    gridColumn: '1/14',
+                    gridColumn: '1/13',
                     gridRow: index,
                     textDecoration: 'underline',
                     textDecorationColor: 'khaki',

@@ -66,6 +66,14 @@ $QUESTION_COUNT: 6;
       filter: brightness(0.8);
     }
   }
+  &-actions {
+    @include square-basics();
+    overflow-wrap: anywhere;
+    background-color: $light-green;
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {
@@ -108,7 +116,7 @@ $QUESTION_COUNT: 6;
   &-manage-cell-committee {
     @include container-basics;
     justify-content: center;
-    grid-column: 13/14
+    grid-column: 12/13
   }
   &-row-link {
     @include container-basics;

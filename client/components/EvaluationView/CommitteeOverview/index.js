@@ -7,7 +7,7 @@ import { isEvaluationUniversityUser } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 
-import { data, committeeList } from '../../../../config/data'
+import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import { TextQuestionGroup } from '../../ReformAnswers'
@@ -63,10 +63,10 @@ export default () => {
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
-              {modalData?.content?.answer ? (
+              {modalData?.content ? (
                 <Accordion className="modal-accordion-container" exclusive={false}>
                   {modalData.content
-                    ? Object.entries(modalData.content)
+                    ? modalData.content
                         .sort((a, b) => {
                           if (a[0] === 'green' && b[0] === 'yellow') return -1
                           if (a[0] === 'yellow' && b[0] === 'red') return -1
@@ -77,32 +77,27 @@ export default () => {
 
                           return 0
                         })
-                        .map(([key, value]) => {
+
+                        .map(({ title, actions }) => {
                           return (
-                            <div key={`${key}-${value}`}>
+                            <div key={`${title}-${actions}`}>
                               <Accordion.Title
-                                className={`accordion-title-${key}`}
-                                active={accordionsOpen[key] === true}
-                                onClick={() => setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })}
+                                className={`accordion-title-${title}`}
+                                active={accordionsOpen[title] === true}
+                                onClick={() =>
+                                  setAccordionsOpen({ ...accordionsOpen, [title]: !accordionsOpen[title] })
+                                }
                               >
                                 <Icon name="angle down" />
-                                <span style={{ fontSize: '22px' }}> {t(`overview:${key}ModalAccordion`)}</span>
+                                <span style={{ fontSize: '22px' }}> {title}</span>
                               </Accordion.Title>
-                              {value.map(answerContent => {
-                                const programmeName = data
-                                  .find(f => f.code === modalData.facultyKey)
-                                  .programmes.find(p => p.key === answerContent.programme).name[lang]
-                                return (
-                                  <Accordion.Content
-                                    className={`accordion-content-${key}`}
-                                    key={answerContent.programme}
-                                    active={accordionsOpen[key] === true}
-                                  >
-                                    <h4>{programmeName}</h4>
-                                    <ReactMarkdown>{answerContent.answer}</ReactMarkdown>
-                                  </Accordion.Content>
-                                )
-                              })}
+                              <Accordion.Content
+                                className={`accordion-content-${title}`}
+                                key={title}
+                                active={accordionsOpen[title] === true}
+                              >
+                                <ReactMarkdown>{actions}</ReactMarkdown>
+                              </Accordion.Content>
                             </div>
                           )
                         })

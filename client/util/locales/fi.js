@@ -32,7 +32,7 @@ export default {
     bachelor: 'Kandiohjelmat',
     master: 'Maisteriohjelmat',
     doctoral: 'Tohtoriohjelmat',
-    actionsHeader: 'Yleiset arviot ja toimenpidesuositukset',
+    overallHeader: 'Yleiset arviot ja toimenpidesuositukset',
     bachelorShort: 'Kandi',
     masterShort: 'Maisteri',
     doctoralShort: 'Tohtori',
@@ -308,6 +308,8 @@ export default {
     facultySummary: 'Koulutusohjelmien vastaukset',
     pcs: 'kpl',
     chooseFaculty: 'Rajaa näytettävät tiedekunnat',
+    developmentTarget: 'Kehityskohde',
+    arviointi: 'Arviointiryhmä',
   },
 
   report: {

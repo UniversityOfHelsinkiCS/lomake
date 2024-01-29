@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 import { isAdmin } from '@root/config/common'
+import { useTranslation } from 'react-i18next'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   <div className="table-container-manage-cell-committee">
@@ -13,6 +14,7 @@ const ManageCell = ({ faculty, setProgramControlsToShow }) => (
 
 const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, setProgramControlsToShow, committee }) => {
   const lang = useSelector(state => state.language)
+  const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
 
@@ -20,15 +22,19 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
     if (isAdmin(currentUser)) return true
     return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
   }
+
+  let questionLabel = question.label[lang]
+
+  if (question.id.includes('_actions')) {
+    questionLabel = t('overview:developmentTarget')
+  }
+
   return (
     <React.Fragment key={question.id}>
       <div className="table-container-row-link">
         <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
-          {question.label[lang]}
+          {questionLabel}
         </Link>
-      </div>
-      <div className="table-container-row-link">
-        <Link to={targetURL}>{committee.code}</Link>
       </div>
 
       {tableIds.map(upperLevel => {
@@ -43,6 +49,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
             questionType={committee.code}
             setModalData={setModalData}
             form={form}
+            questionLabel={questionLabel}
           />
         ))
       })}

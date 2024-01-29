@@ -29,7 +29,7 @@ export default {
     bachelor: 'Kandidatsprogram',
     master: 'Magisterprogram',
     doctoral: 'Doktorandprogram',
-    actionsHeader: '',
+    overallHeader: '',
     bachelorShort: 'Kandidat',
     masterShort: 'Magister',
     doctoralShort: 'Doktorand',
@@ -302,6 +302,8 @@ export default {
     // facultySummary: '',
     pcs: 'st',
     // chooseFaculty: '',
+    // developmentTarget: '',
+    // arviointi: '',
   },
 
   report: {

@@ -76,7 +76,6 @@ export default () => {
                           if (a[0] === 'yellow' && b[0] === 'green') return 1
                           if (a[0] === 'red' && b[0] === 'green') return 1
                           if (a[0] === 'red' && b[0] === 'yellow') return 1
-
                           return 0
                         })
                         .map(([key, value]) => {

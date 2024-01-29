@@ -29,7 +29,7 @@ export default {
     bachelor: "Bachelor's programmes",
     master: "Master's programmes",
     doctoral: 'Doctoral programmes',
-    actionsHeader: '',
+    overallHeader: '',
     bachelorShort: 'Bachelor',
     masterShort: 'Master',
     doctoralShort: 'Doctoral',
@@ -310,6 +310,8 @@ export default {
     facultySummary: 'Degree programme answers',
     pcs: 'pcs',
     chooseFaculty: 'Delineate the selected faculties',
+    developmentTarget: 'Development target',
+    arviointi: 'Committee',
   },
 
   report: {

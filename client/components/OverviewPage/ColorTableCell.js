@@ -4,12 +4,39 @@ import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import DegreeReformCell from './DegreeReformCell'
-import { yearlyQuestions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
+import Square from '../EvaluationView/CommitteeOverview/Square'
+import {
+  yearlyQuestions,
+  evaluationQuestions,
+  degreeReformIndividualQuestions,
+  universityEvaluationQuestions,
+  facultyEvaluationQuestions,
+} from '../../questionData'
 
 const colorScoreMap = {
   green: 1,
   yellow: 0,
   red: -1,
+}
+
+const getModalConfig = (questions, questionId, lang, programmesName, textAnswer, colorAnswer) => {
+  return {
+    header: questions.reduce((acc, cur) => {
+      if (acc) return acc
+      const header = cur.parts.reduce((acc, cur) => {
+        if (acc) return acc
+        if (cur.id === questionId) return cur.description[lang]
+        return acc
+      }, '')
+
+      if (header) return header
+
+      return acc
+    }, ''),
+    programme: programmesName,
+    content: textAnswer,
+    color: colorAnswer,
+  }
 }
 
 const ColorTableCell = ({
@@ -22,6 +49,7 @@ const ColorTableCell = ({
   programmesOldAnswers,
   form = 1,
   acualQuestionId,
+  questionLabel,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -30,6 +58,8 @@ const ColorTableCell = ({
     2: degreeReformIndividualQuestions,
 
     4: evaluationQuestions,
+    5: facultyEvaluationQuestions,
+    6: universityEvaluationQuestions,
   }
 
   const questions = questionMap[form] || yearlyQuestions
@@ -112,6 +142,18 @@ const ColorTableCell = ({
     colorAnswer = programmesAnswers[colorId]
   }
 
+  if (form === 6 && questionId.includes('_actions')) {
+    return (
+      <Square
+        setModalData={setModalData}
+        programmesAnswers={programmesAnswers}
+        questionId={questionId}
+        t={t}
+        questionLabel={questionLabel}
+      />
+    )
+  }
+
   // below is a bit 🍝 but the basic idea is that we only want to show the
   // dialog to explain the icon arrows when they are shown🔥🔥🔥🔥
 
@@ -129,27 +171,7 @@ const ColorTableCell = ({
         className="square"
         style={{ background: colors.background_blue }}
         onClick={() => {
-          setModalData({
-            header: questions.reduce((acc, cur) => {
-              if (acc) return acc
-              const header = cur.parts.reduce((acc, cur) => {
-                if (acc) return acc
-
-                if (cur.id === questionId) {
-                  return cur.description[lang]
-                }
-
-                return acc
-              }, '')
-
-              if (header) return header
-
-              return acc
-            }, ''),
-            programme: programmesName,
-            content: textAnswer,
-            color: colorAnswer,
-          })
+          setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
         }}
       >
         {questionId === 'measures' || questionId === 'measures_faculty' ? (
@@ -160,7 +182,6 @@ const ColorTableCell = ({
       </div>
     )
   }
-
   if (!colorAnswer) {
     return (
       <div
@@ -186,31 +207,18 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-  if ((form !== 5 && form !== 6) || typeof colorAnswer === 'string') {
+  if (form !== 5 || typeof colorAnswer === 'string') {
     IconElement = (
       <div
         data-cy={`${programmesKey}-${questionId}`}
         className={`square-${colorAnswer}`}
         onClick={() => {
-          setModalData({
-            header: questions.reduce((acc, cur) => {
-              if (acc) return acc
-              const header = cur.parts.reduce((acc, cur) => {
-                if (acc) return acc
-
-                if (cur.id === questionId) return cur.description[lang]
-
-                return acc
-              }, '')
-
-              if (header) return header
-
-              return acc
-            }, ''),
-            programme: programmesName,
-            content: textAnswer,
-            color: colorAnswer,
-          })
+          let selectedQuestionId = questionId
+          if (programmesKey === 'UNI') {
+            const lineBeforeTopLevel = questionId.lastIndexOf('-')
+            selectedQuestionId = `${questionId.substring(0, lineBeforeTopLevel)}`
+          }
+          setModalData(getModalConfig(questions, selectedQuestionId, lang, programmesName, textAnswer, colorAnswer))
         }}
       >
         {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
@@ -226,25 +234,7 @@ const ColorTableCell = ({
               data-cy={`${programmesKey}-${questionId}-${key}`}
               className={`square-${value}`}
               onClick={() => {
-                setModalData({
-                  header: questions.reduce((acc, cur) => {
-                    if (acc) return acc
-                    const header = cur.parts.reduce((acc, cur) => {
-                      if (acc) return acc
-
-                      if (cur.id === questionId) return cur.description[lang]
-
-                      return acc
-                    }, '')
-
-                    if (header) return header
-
-                    return acc
-                  }, ''),
-                  programme: programmesName,
-                  content: textAnswer,
-                  color: value,
-                })
+                setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
               }}
             >
               {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
