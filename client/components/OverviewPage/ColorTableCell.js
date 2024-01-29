@@ -85,7 +85,7 @@ const ColorTableCell = ({
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
   let colorAnswer = null
 
-  if (form === 5 || form === 6) {
+  if (form === 5) {
     colorId = [
       `${questionId}_light`,
       `${questionId}_bachelor_light`,
@@ -186,7 +186,7 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-  if (form !== 5 || typeof colorAnswer === 'string') {
+  if ((form !== 5 && form !== 6) || typeof colorAnswer === 'string') {
     IconElement = (
       <div
         data-cy={`${programmesKey}-${questionId}`}

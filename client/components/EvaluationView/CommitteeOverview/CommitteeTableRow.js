@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
-import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (
@@ -15,7 +14,6 @@ const ManageCell = ({ faculty, setProgramControlsToShow }) => (
 const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, setProgramControlsToShow, committee }) => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
-  const { t } = useTranslation()
   const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
 
   const hasManagementAccess = program => {
@@ -32,11 +30,6 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
       <div className="table-container-row-link">
         <Link to={targetURL}>{committee.code}</Link>
       </div>
-      <div style={{ marginRight: '0.5em' }}>
-        <p style={{ margin: '0' }}>{t('bachelorShort')}</p>
-        <p style={{ margin: '0' }}>{t('masterShort')}</p>
-        <p style={{ margin: '0' }}>{t('doctoralShort')}</p>
-      </div>
 
       {tableIds.map(upperLevel => {
         return upperLevel.levels.map(level => (
@@ -46,8 +39,8 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
             programmesKey={committee.code}
             programmesAnswers={selectedAnswers}
             programmesOldAnswers={null}
-            questionId={committee.id}
-            questionType={committee.type}
+            questionId={`${question.id}-${upperLevel.title}_${level}`}
+            questionType={committee.code}
             setModalData={setModalData}
             form={form}
           />

@@ -35,6 +35,8 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
     form,
   })
 
+  const filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI').data
+
   const sortedCommittees = sortedItems(committees, sorter, lang)
 
   if (reverse) sortedCommittees.reverse()
@@ -43,37 +45,18 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
     setSorter(sortValue === 'key' ? 'code' : sortValue)
     setReverse(!reverse)
   }
-  /*
-    const stats = useMemo(() => {
-      if (!selectedAnswers) return {}
-
-      const faculty = selectedAnswers.find(a => a.programme === 'UNI' && a.form === form)
-      const answers = faculty && faculty.data ? faculty.data : {}
-      const statObject = {}
-      Object.keys(answers).forEach(answerKey => {
-        if (answerKey.includes('_light')) {
-          const color = answers[answerKey] // "red", "yellow", "green" or ""
-          const baseKey = answerKey.replace('_light', '')
-          if (!statObject[baseKey]) statObject[baseKey] = {}
-
-          statObject[baseKey][color] = statObject[baseKey][color] ? statObject[baseKey][color] + 1 : 1
-        }
-      })
-      return statObject
-    }, [selectedAnswers, answers, draftYear])
-*/
 
   if (answers.pending || !answers.data || !oldAnswers.data) {
     return <Loader active inline="centered" />
   }
   const tableIds = [
-    { title: 'university', levels: [t('bachelor'), t('master'), t('doctoral')] },
-    { title: 'arviointi', levels: [t('bachelor'), t('master'), t('doctoral')] },
+    { title: 'university', levels: ['bachelor', 'master', 'doctoral'] },
+    { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'actionsHeader'] },
   ]
 
   return (
     <div className="overview-color-grid-committee">
-      <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} showStudyLevel />
+      <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} />
       <div />
       <div />
 
@@ -87,7 +70,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
               {index === 0 && (
                 <Header
                   style={{
-                    gridColumn: '1/15',
+                    gridColumn: '1/14',
                     gridRow: index,
                     textDecoration: 'underline',
                     textDecorationColor: 'khaki',
@@ -100,7 +83,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, committees, formTy
               )}
               <TableRow
                 question={part}
-                selectedAnswers={selectedAnswers}
+                selectedAnswers={filteredAnswers}
                 tableIds={tableIds}
                 setModalData={setModalData}
                 key={`${part.id}-${theme.title}`}

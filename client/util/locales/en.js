@@ -29,6 +29,7 @@ export default {
     bachelor: "Bachelor's programmes",
     master: "Master's programmes",
     doctoral: 'Doctoral programmes',
+    actionsHeader: '',
     bachelorShort: 'Bachelor',
     masterShort: 'Master',
     doctoralShort: 'Doctoral',

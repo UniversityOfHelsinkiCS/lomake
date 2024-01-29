@@ -29,6 +29,7 @@ export default {
     bachelor: 'Kandidatsprogram',
     master: 'Magisterprogram',
     doctoral: 'Doktorandprogram',
+    actionsHeader: '',
     bachelorShort: 'Kandidat',
     masterShort: 'Magister',
     doctoralShort: 'Doktorand',

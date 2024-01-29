@@ -32,6 +32,7 @@ export default {
     bachelor: 'Kandiohjelmat',
     master: 'Maisteriohjelmat',
     doctoral: 'Tohtoriohjelmat',
+    actionsHeader: 'Yleiset arviot ja toimenpidesuositukset',
     bachelorShort: 'Kandi',
     masterShort: 'Maisteri',
     doctoralShort: 'Tohtori',
