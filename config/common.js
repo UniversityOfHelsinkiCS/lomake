@@ -142,7 +142,7 @@ const isEvaluationFacultyUser = user => {
 }
 
 const isEvaluationUniversityUser = user => {
-  if (user?.specialGroup?.evaluationUniversity || isKatselmusProjektiOrOhjausryhma(user) || isAdmin(user)) return true
+  if (user?.specialGroup?.universityForm || isKatselmusProjektiOrOhjausryhma(user) || isAdmin(user)) return true
   return false
 }
 
