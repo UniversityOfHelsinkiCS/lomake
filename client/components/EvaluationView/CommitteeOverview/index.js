@@ -55,7 +55,6 @@ export default () => {
     if (!hasRights(currentUser)) return []
     return ['UNI']
   }, [programmes, currentUser])
-
   return (
     <>
       {modalData && (
@@ -63,7 +62,7 @@ export default () => {
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
-              {modalData?.content ? (
+              {modalData?.type === 'actions' ? (
                 <Accordion className="modal-accordion-container" exclusive={false}>
                   {modalData.content
                     ? modalData.content

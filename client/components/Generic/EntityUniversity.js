@@ -192,7 +192,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                       <label className="traffic-light-row-label">
                         {!isArviointi ? t(`formView:${level}UniForm`) : t(level)}
                       </label>
-                      <TrafficLights id={`${id}-${object.level}_${level}`} form={form} />
+                      <TrafficLights id={`${id}-${object.level}-${level}`} form={form} />
                     </div>
                   )
                 })
@@ -203,7 +203,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                   </label>
                   <TrafficLights
                     className="traffic-light-row-buttons"
-                    id={`${id}-${object.level}_bachelor`}
+                    id={`${id}-${object.level}-bachelor`}
                     form={form}
                   />
                 </div>

@@ -45,11 +45,12 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
             programmesKey={committee.code}
             programmesAnswers={selectedAnswers}
             programmesOldAnswers={null}
-            questionId={`${question.id}-${upperLevel.title}_${level}`}
+            questionId={`${question.id}-${upperLevel.title}-${level}`}
             questionType={question.type}
             setModalData={setModalData}
             form={form}
             questionLabel={questionLabel}
+            questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
           />
         ))
       })}

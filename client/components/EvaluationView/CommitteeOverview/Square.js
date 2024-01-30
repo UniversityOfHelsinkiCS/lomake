@@ -30,23 +30,18 @@ const getActionsAnswerForUniversity = (data, id) => {
   return []
 }
 
-const Square = ({ setModalData, programmesAnswers, questionId, t, questionLabel }) => {
-  const lineBeforeLevel = questionId.lastIndexOf('_')
-  const lineBeforeTopLevel = questionId.lastIndexOf('-')
-  const questionIdCorrected = `${questionId.substring(0, lineBeforeLevel)}-${questionId.substring(
-    lineBeforeLevel + 1,
-    questionId.length,
-  )}`
-  const actions = getActionsAnswerForUniversity(programmesAnswers, questionIdCorrected, t)
-  const level = questionId.substring(lineBeforeLevel + 1, questionId.length)
-  const topLevel = questionId.substring(lineBeforeTopLevel + 1, lineBeforeLevel)
+const Square = ({ setModalData, programmesAnswers, questionId, t, questionData }) => {
+  const actions = getActionsAnswerForUniversity(programmesAnswers, questionId, t)
+  const { level } = questionData
+  const { topLevel } = questionData
 
   const tempModalData = {
     header: `${t(`overview:${topLevel}`)} - ${t(level)}`,
     content: actions,
     color: 'blue',
-    programme: questionLabel,
+    programme: questionData.questionLabel,
     arviointi: true,
+    type: 'actions',
   }
 
   if (actions.length === 0) {

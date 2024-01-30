@@ -19,26 +19,6 @@ const colorScoreMap = {
   red: -1,
 }
 
-const getModalConfig = (questions, questionId, lang, programmesName, textAnswer, colorAnswer) => {
-  return {
-    header: questions.reduce((acc, cur) => {
-      if (acc) return acc
-      const header = cur.parts.reduce((acc, cur) => {
-        if (acc) return acc
-        if (cur.id === questionId) return cur.description[lang]
-        return acc
-      }, '')
-
-      if (header) return header
-
-      return acc
-    }, ''),
-    programme: programmesName,
-    content: textAnswer,
-    color: colorAnswer,
-  }
-}
-
 const ColorTableCell = ({
   programmesName,
   programmesKey,
@@ -49,7 +29,7 @@ const ColorTableCell = ({
   programmesOldAnswers,
   form = 1,
   acualQuestionId,
-  questionLabel,
+  questionData = null,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -115,6 +95,31 @@ const ColorTableCell = ({
   const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
   let colorAnswer = null
 
+  const getModalConfig = () => {
+    // Kysymys - ylätaso - alataso
+    let tempQuestionId = questionId
+    if (programmesKey === 'UNI') {
+      tempQuestionId = questionData.rawQuestionId
+    }
+    return {
+      header: questions.reduce((acc, cur) => {
+        if (acc) return acc
+        const header = cur.parts.reduce((acc, cur) => {
+          if (acc) return acc
+          if (cur.id === tempQuestionId) return cur.description[lang]
+          return acc
+        }, '')
+
+        if (header) return header
+
+        return acc
+      }, ''),
+      programme: programmesName,
+      content: textAnswer,
+      color: colorAnswer,
+    }
+  }
+
   if (form === 5) {
     colorId = [
       `${questionId}_light`,
@@ -149,7 +154,7 @@ const ColorTableCell = ({
         programmesAnswers={programmesAnswers}
         questionId={questionId}
         t={t}
-        questionLabel={questionLabel}
+        questionData={questionData}
       />
     )
   }
@@ -213,12 +218,7 @@ const ColorTableCell = ({
         data-cy={`${programmesKey}-${questionId}`}
         className={`square-${colorAnswer}`}
         onClick={() => {
-          let selectedQuestionId = questionId
-          if (programmesKey === 'UNI') {
-            const lineBeforeTopLevel = questionId.lastIndexOf('-')
-            selectedQuestionId = `${questionId.substring(0, lineBeforeTopLevel)}`
-          }
-          setModalData(getModalConfig(questions, selectedQuestionId, lang, programmesName, textAnswer, colorAnswer))
+          setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
         }}
       >
         {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
