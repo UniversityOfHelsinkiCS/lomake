@@ -155,6 +155,9 @@ const createFinalAnswers = async (newYear, form) => {
 
   if (form === formKeys.EVALUATION_FACULTIES) {
     await handleNonProgrammeFinalAnswers(form)
+  }
+  if (form === formKeys.EVALUATION_COMMTTEES) {
+    await handleNonProgrammeFinalAnswers(form)
   } else if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     await handleIndividualFinalAnswers(form)
   } else {
