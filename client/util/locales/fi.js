@@ -215,9 +215,9 @@ export default {
     evaluationSummaryUniversity: 'Koulutuksen tila -kyselyn tulokset',
     formNotReady: 'Lomake on vielä kehityksessä, avautuu 1.11.',
     overallActionSummaryTitle: 'Yleiset toimenpidesuositukset',
-    bachelorUniForm: 'Kandiohjelmat (ONE kirjaa)',
-    masterUniForm: 'Maisteriohjelmat (ONE kirjaa)',
-    doctoralUniForm: 'Tohtoriohjelmat (Tutkijakoulun johtokunta ja TINE yhdessä kirjaavat)',
+    bachelorUniForm: 'Kandiohjelmat\n(ONE kirjaa)',
+    masterUniForm: 'Maisteriohjelmat\n(ONE kirjaa)',
+    doctoralUniForm: 'Tohtoriohjelmat\n(Tutkijakoulun johtokunta ja TINE yhdessä kirjaavat)',
   },
 
   generic: {
