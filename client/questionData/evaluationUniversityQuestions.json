@@ -572,7 +572,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "faculty_studyprogramme_status_opinion_differences"
       },
       {
         "id": "university_where_are_we_in_five_years",
@@ -627,7 +628,8 @@
           "fi": "",
           "se": "",
           "en": ""
-        }
+        },
+        "relatedEvaluationQuestion": "faculty_where_are_we_in_five_years_opinion_differences"
       }
     ]
   }
