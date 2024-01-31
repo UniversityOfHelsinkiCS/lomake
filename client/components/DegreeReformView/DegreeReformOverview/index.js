@@ -117,7 +117,13 @@ export default () => {
     }
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
+  const usersProgrammes = useVisibleOverviewProgrammes(
+    currentUser,
+    programmes,
+    showAllProgrammes,
+    faculty,
+    dropdownFilter,
+  )
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -209,8 +215,15 @@ export default () => {
           </List>
           {faculty === 'UNI' && faculties.data.length > 0 && (
             <div className="table-container-degree-reform-filter">
-              <Dropdown text={t('overview:chooseFaculty')} icon="filter" button labeled className="icon">
-                <Dropdown.Menu defaultUpward="false" upward="false">
+              <Dropdown
+                text={t('overview:chooseFaculty')}
+                icon="filter"
+                button
+                labeled
+                className="icon"
+                defaultUpward={false}
+              >
+                <Dropdown.Menu upward="false">
                   <Dropdown.Divider />
                   {faculties.data.map(f => {
                     const selected = dropdownFilter.filter(d => d.code === f.code).length > 0

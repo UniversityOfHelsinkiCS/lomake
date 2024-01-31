@@ -10,19 +10,22 @@ const getOverviewProgrammesToShow = (programmes, access) => {
   return programmes.filter(program => properAccess.includes(program.key))
 }
 
-export const useVisibleOverviewProgrammes = (currentUser, programmes, showAllProgrammes) =>
+export const useVisibleOverviewProgrammes = (currentUser, programmes, showAllProgrammes, faculty, dropdownFilter) =>
   React.useMemo(() => {
     if (isAdmin(currentUser.data)) {
       return programmes
     }
     if (currentUser.data.access || currentUser.specialGroup) {
-      if (!showAllProgrammes) {
+      if (
+        (!showAllProgrammes && faculty !== 'UNI') ||
+        (!showAllProgrammes && dropdownFilter.length > 0 && faculty === 'UNI')
+      ) {
         return getOverviewProgrammesToShow(programmes, currentUser.data.access)
       }
       return programmes
     }
 
     return []
-  }, [programmes, currentUser.data, showAllProgrammes])
+  }, [programmes, currentUser.data, showAllProgrammes, faculty, dropdownFilter])
 
 export const deleteWhenMoreThanOneExport = 0
