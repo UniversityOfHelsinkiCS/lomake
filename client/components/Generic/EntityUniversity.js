@@ -319,12 +319,14 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
               EntityLastYearsAccordion={null}
               form={form}
             />
-            <Textarea
-              id={`${id}-${object.level}-doctoral`}
-              isArviointi={isArviointi}
-              EntityLastYearsAccordion={null}
-              form={form}
-            />
+            {!hideLevels && (
+              <Textarea
+                id={`${id}-${object.level}-doctoral`}
+                isArviointi={isArviointi}
+                EntityLastYearsAccordion={null}
+                form={form}
+              />
+            )}
           </div>
         )
       })}
