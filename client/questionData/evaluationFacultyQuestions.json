@@ -239,7 +239,7 @@
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
           "se": "Ledning och kommunikation",
-          "en": "MANAGEMENT, LEADERSHIP AND COMMUNICATION"
+          "en": "Management, leadership and communication"
         },
         "label": {
           "fi": "JOHTAMISEN JA VIESTINNÄN TOIMIVUUS",
@@ -493,9 +493,9 @@
         "kludge": true,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
-          "fi": "KOULUTUKSEN KOKONAISTOIMIVUUS",
-          "se": "",
-          "en": "DEN ÖVERGRIPANDE SITUATIONEN FÖR FAKULTETENS UTBILDNING FÖR NÄRVARANDE "
+          "fi": "Koulutuksen kokonaistoimivuus",
+          "se": "Den övergripande situationen för fakultetens utbildning för närvarande",
+          "en": "Overall status of the degree programmes"
         },
         "label": {
           "fi": "TIEDEKUNNAN KOULUTUKSEN KOKONAISTOIMIVUUS",
