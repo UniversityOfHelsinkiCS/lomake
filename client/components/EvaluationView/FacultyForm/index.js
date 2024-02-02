@@ -22,10 +22,12 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user, room }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
+  if (!user.specialGroup.evaluationFaculty) return true
+  if (!user.access[room].write) return true
   return false
 }
 
@@ -158,6 +160,7 @@ const FacultyFormView = ({ room, formString }) => {
         formDeadline,
         form,
         user,
+        room,
       })
     ) {
       dispatch(setViewOnly(true))

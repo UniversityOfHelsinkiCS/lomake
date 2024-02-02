@@ -11,6 +11,7 @@ const {
   relevantIAMs,
   facultyWideWritingGroups,
   isUniverstyFormIam,
+  hrHeadsGroup,
 } = require('@root/config/IAMConfig')
 const { data } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
@@ -226,6 +227,16 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
     if (noFacultyRights) {
       return { access, specialGroup }
     }
+  }
+  if (hrHeadsGroup.some(iam => hyGroups.includes(iam))) {
+    data.forEach(faculty => {
+      faculty.programmes.forEach(program => {
+        access[program.key] = { read: true }
+      })
+      access[faculty.code] = { read: true }
+    })
+    specialGroup = { evaluationFaculty: true }
+    return { access, specialGroup }
   }
   if (!hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0) return {}
   data.forEach(faculty => {

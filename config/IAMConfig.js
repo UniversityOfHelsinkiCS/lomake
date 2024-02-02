@@ -316,6 +316,7 @@ const universityWideGroups = [
   'grp-a01807-svenskaarenden',
   'grp-tilannekuvaoymp',
   'grp-koordinaatioryhma',
+  'yhy-ypa-hr-henkilostopaallikot',
 ].concat(Object.values(kojoMap))
 
 // Katselmus groups^ are temporary and will eventually be removed
@@ -359,6 +360,8 @@ const superAdminGroups = ['grp-toska']
 const adminGroups = ['hy-ypa-opa-ospa']
 
 const employeeGroups = ['hy-employees']
+
+const hrHeadsGroup = ['hy-ypa-hr-henkilostopaallikot']
 
 const isSuperAdminIam = iam => superAdminGroups.includes(iam)
 
@@ -434,6 +437,7 @@ module.exports = {
   superAdminGroups,
   adminGroups,
   employeeGroups,
+  hrHeadsGroup,
   isSuperAdminIam,
   isAdminIam,
   isUniversityWideIam,

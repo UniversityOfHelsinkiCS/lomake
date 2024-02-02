@@ -65,7 +65,6 @@ const Textarea = ({
   const room = useSelector(({ room }) => room)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
-
   const [changes, setChanges] = useState(false)
 
   const formData = useSelector(({ form }) => form.data)
