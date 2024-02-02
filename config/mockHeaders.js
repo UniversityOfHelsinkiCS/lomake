@@ -34,7 +34,7 @@ const possibleUsers = [
     givenName: 'superAdmin',
     mail: 'grp-toska+mockadmin@helsinki.fi',
     schacDateOfBirth: undefined,
-    hyGroupCn: 'hy-employee',
+    hyGroupCn: 'grp-toska',
     sn: 'superAdmin',
   },
   {
