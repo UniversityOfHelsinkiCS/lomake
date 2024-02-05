@@ -4,7 +4,7 @@ import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems, answersByYear } from 'Utilities/common'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getTempAnswersByFormAndYear, getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
 import SummaryRowFaculty from './SummaryRowFaculty'
@@ -34,18 +34,21 @@ const FacultyColorTable = React.memo(
     const [showDataByProgramme] = useState(false)
 
     useEffect(() => {
-      dispatch(getAllTempAnswersAction())
-    }, [])
-
+      if (!nextDeadline.find(d => d.form === form)) {
+        dispatch(getTempAnswersByFormAndYear(form, year))
+      } else {
+        dispatch(getAllTempAnswersAction())
+      }
+    }, [nextDeadline])
     const selectedAnswers = answersByYear({
       year,
       tempAnswers: answers,
       oldAnswers,
       draftYear: draftYear && draftYear.year,
       deadline: nextDeadline?.find(d => d.form === form),
+      form,
     })
     const sortedFaculties = sortedItems(faculties, sorter, lang)
-
     if (reverse) sortedFaculties.reverse()
 
     const sort = sortValue => {
@@ -55,7 +58,6 @@ const FacultyColorTable = React.memo(
 
     const stats = useMemo(() => {
       if (!selectedAnswers) return {}
-
       return sortedFaculties.reduce((statObject, { code }) => {
         const faculty = selectedAnswers.find(a => a.programme === code && a.form === form)
         const answers = faculty && faculty.data ? faculty.data : {}
@@ -71,6 +73,7 @@ const FacultyColorTable = React.memo(
         return statObject
       }, {})
     }, [sortedFaculties, selectedAnswers, answers, draftYear])
+
     if (answers.pending || !answers.data || !oldAnswers.data) {
       return <Loader active inline="centered" />
     }

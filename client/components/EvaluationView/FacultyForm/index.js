@@ -139,7 +139,8 @@ const FacultyFormView = ({ room, formString }) => {
     user.access[faculty.code] ||
     isAdmin(user) ||
     user.specialGroup.evaluationFaculty ||
-    isKatselmusProjektiOrOhjausryhma(user)
+    isKatselmusProjektiOrOhjausryhma(user) ||
+    Object.keys(user.access).length > 0
   const hasWriteRights = user.access[faculty.code]?.write || isAdmin(user)
 
   useEffect(() => {

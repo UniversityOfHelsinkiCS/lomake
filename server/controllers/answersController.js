@@ -54,6 +54,24 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   }
 }
 
+const getFacultyTempAnswersAfterDeadline = async (req, res) => {
+  const { form, year } = req.params
+  try {
+    const deadline = await db.deadline.findOne({ where: { form } })
+    if (deadline) return res.status(403).json({ error: 'Deadline is active, this should not be used' })
+    const data = await db.tempAnswer.findAll({
+      where: {
+        form,
+        year,
+      },
+    })
+    return res.send(data)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 /**
  * Note: programme may mean a single programme or a faculty (who fixed this? :D) -Joni
  */
@@ -572,4 +590,5 @@ module.exports = {
   updateAnswerReady,
   updateIndividualReady,
   getCommitteeSummaryData,
+  getFacultyTempAnswersAfterDeadline,
 }

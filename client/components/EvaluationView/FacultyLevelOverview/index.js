@@ -37,16 +37,17 @@ export default () => {
     setFilter(value)
   }
 
+  const userHasAccessToSomething = Object.keys(currentUser.access).length > 0
+
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
   const usersProgrammes = useMemo(() => {
-    const usersPermissionsKeys = Object.keys(currentUser.access)
-    return isAdmin(currentUser) ? programmes : programmes.filter(program => usersPermissionsKeys.includes(program.key))
+    return isAdmin(currentUser) || userHasAccessToSomething ? programmes : []
   }, [programmes, currentUser])
 
   const filteredFaculties = useMemo(() => {
     if (!faculties) return []
     return faculties.filter(f => {
-      if (!currentUser.access[f.code] && !isAdmin(currentUser)) {
+      if (!userHasAccessToSomething && !isAdmin(currentUser)) {
         return false
       }
       const name = f.name[lang]
@@ -57,7 +58,6 @@ export default () => {
       )
     })
   }, [usersProgrammes, faculties, lang, debouncedFilter])
-
   return (
     <>
       {modalData && (

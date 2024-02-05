@@ -43,7 +43,6 @@ const ColorTableCell = ({
   }
 
   const questions = questionMap[form] || yearlyQuestions
-
   if (form === 2) {
     return (
       <DegreeReformCell

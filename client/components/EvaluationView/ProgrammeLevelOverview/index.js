@@ -28,6 +28,7 @@ export default () => {
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const year = 2023
 
   const form = 4 // TO FIX
   const formType = 'evaluation'
@@ -52,7 +53,8 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
+  const usersProgrammes =
+    year === 2023 ? programmes : useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {

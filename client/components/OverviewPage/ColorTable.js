@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAllTempAnswersAction, getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
+import { formKeys } from '@root/config/data'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -114,7 +115,11 @@ const ColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
-      dispatch(getAllTempAnswersAction())
+      if (form === formKeys.EVALUATION_PROGRAMMES && year === 2023) {
+        dispatch(getTempAnswersByFormAndYear(form, year))
+      } else {
+        dispatch(getAllTempAnswersAction())
+      }
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
@@ -134,6 +139,7 @@ const ColorTable = React.memo(
       oldAnswers,
       draftYear: draftYear && draftYear.year,
       deadline: nextDeadline?.find(d => d.form === form),
+      form,
     })
 
     const sortedAllProgrammes = sortedItems(filteredProgrammes, sorter, lang)

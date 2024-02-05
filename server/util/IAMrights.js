@@ -216,7 +216,7 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
   const noFacultyRights = !hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0
   const access = {}
   let specialGroup = {}
-  if (hyGroups.some(isUniverstyFormIam)) {
+  if (hyGroups.some(isUniverstyFormIam) || hrHeadsGroup.some(iam => hyGroups.includes(iam))) {
     data.forEach(faculty => {
       faculty.programmes.forEach(program => {
         access[program.key] = { read: true }
@@ -227,16 +227,6 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
     if (noFacultyRights) {
       return { access, specialGroup }
     }
-  }
-  if (hrHeadsGroup.some(iam => hyGroups.includes(iam))) {
-    data.forEach(faculty => {
-      faculty.programmes.forEach(program => {
-        access[program.key] = { read: true }
-      })
-      access[faculty.code] = { read: true }
-    })
-    specialGroup = { evaluationFaculty: true }
-    return { access, specialGroup }
   }
   if (!hasFacultyWideWritingsRights[0] || hasFacultyWideWritingsRights.length === 0) return {}
   data.forEach(faculty => {

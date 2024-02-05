@@ -9,6 +9,12 @@ export const getAllTempAnswersAction = () => {
   return callBuilder(route, prefix)
 }
 
+export const getTempAnswersByFormAndYear = (form, year) => {
+  const route = `/answers/temp/${form}/${year}`
+  const prefix = 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR'
+  return callBuilder(route, prefix)
+}
+
 // Reducer
 // You can include more app wide actions such as "selected: []" into the state
 export default (state = { data: null }, action) => {
@@ -32,6 +38,19 @@ export default (state = { data: null }, action) => {
         data: [],
         pending: false,
         error: true,
+      }
+    case 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR_SUCCESS':
+      return {
+        ...state,
+        data: action.response,
+        pending: false,
+        error: false,
       }
     default:
       return state

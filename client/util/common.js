@@ -417,6 +417,14 @@ export const allYears = oldAnswers => {
 
 // eslint-disable-next-line no-unused-vars
 export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
+  // Special case for faculty evaluation for the moment when showing to all
+  if ((form === 5 || form === 4) && !deadline && draftYear === 2023) {
+    if (tempAnswers && !tempAnswers.data) {
+      return tempAnswers.data
+    }
+    return tempAnswers?.data.filter(a => a.year === year).filter(a => !form || a.form === form)
+  }
+
   // if viewing past years' answers
   if (draftYear !== year && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
