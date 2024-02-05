@@ -103,7 +103,7 @@ export default () => {
         </CustomModal>
       )}
 
-      {usersProgrammes.length > 0 ? (
+      {currentUser?.access && Object.keys(currentUser?.access) > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
