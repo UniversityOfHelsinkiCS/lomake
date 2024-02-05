@@ -53,8 +53,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes =
-    year === 2023 ? programmes : useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
+  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes, null, year, form)
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -103,7 +102,7 @@ export default () => {
         </CustomModal>
       )}
 
-      {currentUser?.access && Object.keys(currentUser?.access) > 0 ? (
+      {usersProgrammes.length > 0 ? (
         <>
           <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
