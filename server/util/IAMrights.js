@@ -259,9 +259,10 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
 const getUniversityFormAccess = hyGroups => {
   const hasUniversityFormWritingRights = hyGroups.some(isUniverstyFormIam)
   if (!hasUniversityFormWritingRights) return {}
-  let specialGroup = {}
+  let specialGroup = { universityForm: true }
+  const access = { UNI: { read: true, write: true } }
   specialGroup = { universityForm: true }
-  return { specialGroup }
+  return { specialGroup, access }
 }
 
 /**
