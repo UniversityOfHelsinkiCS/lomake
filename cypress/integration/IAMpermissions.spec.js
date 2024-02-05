@@ -150,7 +150,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
 
     cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
@@ -168,7 +168,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
 
     cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
