@@ -138,6 +138,14 @@ const CommitteeFormView = ({ room, formString }) => {
     document.title = `${t('evaluation')} - ${room}`
   }, [lang, room])
 
+  const viewOnly = formShouldBeViewOnly({
+    draftYear,
+    year,
+    formDeadline,
+    form,
+    user,
+  })
+
   useEffect(() => {
     if (!committee || !form) return
     if (!hasRights(user)) {
@@ -145,15 +153,7 @@ const CommitteeFormView = ({ room, formString }) => {
     }
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getCommitteeFacultyAnswersAction(room, lang))
-    if (
-      formShouldBeViewOnly({
-        draftYear,
-        year,
-        formDeadline,
-        form,
-        user,
-      })
-    ) {
+    if (viewOnly) {
       dispatch(setViewOnly(true))
       if (currentRoom) dispatch(wsLeaveRoom(room))
     } else {
