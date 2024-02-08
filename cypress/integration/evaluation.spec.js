@@ -5,14 +5,20 @@ import { testFacultyCode, testFacultyName, testProgrammeCode, testProgrammeName 
 import '../support/commands'
 
 describe('Evaluation forms tests', () => {
+  beforeEach(() => {
+    // ADD THESE WHEN FORM OPENED TO ALL
+    // const user = 'cypressUser'
+    // cy.login(user)
+    const cypressOspa = 'cypressOspaUser'
+    cy.login(cypressOspa)
+    cy.visit('/')
+  })
+
   // ***
   // EDIT 'BEFORE EACH' AFTER FORM IS ACCESSIBLE TO ALL
   // ***
 
   it('User can navigate to evaluation programme level form', () => {
-    const cypressOspa = 'cypressOspaUser'
-    cy.login(cypressOspa)
-    cy.visit('/')
     cy.get('[data-cy=nav-evaluation-dropdown]').click()
     cy.contains('Degree programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
