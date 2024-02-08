@@ -105,6 +105,15 @@ Cypress.Commands.add('hasAccessDegreeReform', (uid, programCode, access) => {
   cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
 })
 
+Cypress.Commands.add('hasAccessEvaluationUniversity', (uid, programCode, access) => {
+  cy.login('cypressToskaUser')
+  cy.visit('/evaluation-university/form/6/UNI')
+  cy.get(`[data-cy=${programCode}-manage]`).click()
+  cy.get(`[data-cy=read-${uid}${access.read ? '' : '-false'}]`)
+  cy.get(`[data-cy=write-${uid}${access.write ? '' : '-false'}]`)
+  cy.get(`[data-cy=admin-${uid}${access.admin ? '' : '-false'}]`)
+})
+
 Cypress.Commands.add('hasSpecialGroups', (uid, ...specialGroup) => {
   cy.login('cypressToskaUser')
   cy.visit('/admin')

@@ -354,6 +354,7 @@ export default {
       access_accessInternational: "International Master's programmes",
       access_accessDoctoral: 'All doctoral programmes',
       access_accessEvaluationFaculty: 'Evaluation faculty',
+      access_accessEvaluationUniversity: 'Evaluation university',
     },
     basicUser: 'Basic user',
     superAdmin: 'Super admin',

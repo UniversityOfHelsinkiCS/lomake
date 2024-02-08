@@ -346,6 +346,7 @@ export default {
       access_accessInternational: 'Internationella magisterprogram',
       access_accessDoctoral: 'Alla doktorandprogram',
       //  access_accessEvaluationFaculty: '',
+      // access_accessEvaluationUniversity: '',
     },
     basicUser: 'Vanlig användare',
     superAdmin: 'Super admin',

@@ -354,6 +354,7 @@ export default {
       access_accessInternational: 'Kansainväliset maisteriohjelmat',
       access_accessDoctoral: 'Kaikki tohtoriohjelmat',
       access_accessEvaluationFaculty: 'Katselmus - tiedekunta',
+      access_accessEvaluationUniversity: 'Katselmus - Yliopistotaso',
     },
     basicUser: 'Peruskäyttäjä',
     superAdmin: 'Super-admin',

@@ -201,4 +201,42 @@ describe('IAM permission tests', () => {
       helpers.getTotalProgrammeCount(),
     )
   })
+
+  it('Katselmus Projektiryhma user, who has rights to mltdk faculty also', () => {
+    const user = 'cypressKatselmusProjektiryhmaUser'
+    cy.login(user)
+    cy.visit('/')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.visit('/evaluation')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.visit('/degree-reform')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.visit('/evaluation-faculty')
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
+    cy.visit('/evaluation-university')
+    cy.contains('University level')
+
+    cy.hasAccess(user, 'KH50_006', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluation(user, 'KH50_006', { read: true, write: false, admin: false })
+    cy.hasAccessEvaluationFaculty(user, 'H50', { read: true, write: true, admin: false })
+    cy.hasAccessDegreeReform(user, 'KH50_006', { read: true, write: false, admin: false })
+
+    cy.hasSpecialGroups(user, 'Evaluation faculty')
+    cy.hasSpecialGroups(user, 'Evaluation university')
+  })
+
+  it('HY employee with no other IAMs sees nothing', () => {
+    const user = 'cypressHyEmployeeUser'
+    cy.login(user)
+    cy.visit('/')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/evaluation')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/degree-reform')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/evaluation-faculty')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/evaluation-university/form/6/UNI')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+  })
 })

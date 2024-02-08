@@ -236,6 +236,34 @@ const possibleUsers = [
     hyGroupCn: 'hy-employees;grp-katselmus-humtdk;hy-humtdk-dekanaatti',
     sn: 'AcualFakePerson',
   },
+  {
+    uid: 'cypressKatselmusProjektiryhmaUser',
+    employeeNumber: 223344,
+    givenName: 'Acual projektiryhma, fake user',
+    mail: 'grp-toska+mockadmin@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'grp-katselmus-projektiryhma;grp-katselmus-mltdk;hy-employees',
+    sn: 'AcualFakePerson',
+  },
+  {
+    uid: 'cypressKatselmusUniversityUser',
+    employeeNumber: 223344,
+    givenName: 'Acual university worker, fake user',
+    mail: 'grp-toska+mockadmin@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn:
+      'hy-employees;grp-katselmus-valttdk;grp-koordinaatioryhma;hy-ypa-tutto-toht;grp-katselmus-projektiryhma;hy-tutkijakoulu-johtokunta',
+    sn: 'AcualFakePerson',
+  },
+  {
+    uid: 'cypressHyEmployeeUser',
+    employeeNumber: 223344,
+    givenName: 'Acual university worker, fake user',
+    mail: 'grp-toska+mockadmin@helsinki.fi',
+    schacDateOfBirth: undefined,
+    hyGroupCn: 'hy-employees',
+    sn: 'nah',
+  },
 ]
 
 const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
