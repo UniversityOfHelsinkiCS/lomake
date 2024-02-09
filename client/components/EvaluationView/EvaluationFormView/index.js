@@ -96,9 +96,14 @@ const EvaluationFormView = ({ room, formString }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  const year = formDeadline ? 2024 : 2023 // the next time form is filled is in 2026
   const viewingOldAnswers = false // no old asnwers to watch
   const summaries = useSelector(state => state.summaries)
+
+  let year = 2023 // the next time form is filled is in 2026
+  if (draftYear) {
+    // This is for tests
+    year = draftYear.year
+  }
 
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`

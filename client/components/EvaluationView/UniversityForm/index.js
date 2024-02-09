@@ -234,7 +234,7 @@ const CommitteeFormView = ({ room, formString }) => {
               </div>
               <h1 style={{ color: colors.blue }}>{committee?.name[lang]}</h1>
               <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-                {t('evaluation')} 2023
+                {t('evaluation')} {year}
               </h3>
 
               <div className="hide-in-print-mode">

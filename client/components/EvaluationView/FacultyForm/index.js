@@ -138,6 +138,7 @@ const FacultyFormView = ({ room, formString }) => {
   let year = 2023 // the next time form is filled is in 2026
 
   if (draftYear) {
+    // This is for tests
     year = draftYear.year
   } else if (oldAnswerYears) {
     const [latestYear] = oldAnswerYears.sort((a, b) => b - a)
