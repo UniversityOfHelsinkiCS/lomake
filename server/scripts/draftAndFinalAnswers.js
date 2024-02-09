@@ -104,14 +104,14 @@ const handleIndividualFinalAnswers = async form => {
 const createDraftAnswers = async (newYear, form) => {
   logger.info(`Creating draft answers from the year ${newYear} for form ${form}`)
 
-  if (form === 3) {
+  if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     await handleNonProgrammeDraftAnswers(form)
   } else {
     let toOpen = []
 
-    if (form === 5) {
+    if (form === formKeys.EVALUATION_FACULTIES) {
       toOpen = await db.faculty.findAll({})
-    } else if (form === 6) {
+    } else if (form === formKeys.EVALUATION_COMMTTEES) {
       toOpen = committeeList
     } else {
       toOpen = await db.studyprogramme.findAll({})

@@ -6,6 +6,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import {
   yearlyQuestions as questions,
   evaluationQuestions,
@@ -69,13 +70,13 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   let questionsToShow = questions
   let linkBase = '/form/'
   let isDegreeForm = false
-  if (formNumber === 4) {
+  if (formNumber === formKeys.EVALUATION_PROGRAMMES) {
     questionsToShow = evaluationQuestions
     linkBase = `/evaluation/form/${formNumber}/`
-  } else if (formNumber === 5) {
+  } else if (formNumber === formKeys.EVALUATION_FACULTIES) {
     questionsToShow = facultyEvaluationQuestions
     linkBase = `/evaluation-faculty/form/${formNumber}/`
-  } else if (formNumber === 6) {
+  } else if (formNumber === formKeys.EVALUATION_COMMTTEES) {
     questionsToShow = universityEvaluationQuestions
     linkBase = `/evaluation-university/form/${formNumber}/`
   } else if (formType === 'degree-reform') {

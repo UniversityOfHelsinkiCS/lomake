@@ -4,6 +4,7 @@ import { TextArea, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
+import { formKeys } from '@root/config/data'
 
 const ActionElement = ({ id, form, viewOnly, index }) => {
   const { t } = useTranslation()
@@ -36,7 +37,7 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
         />
       </div>
       <div className="form-textarea">
-        <label>{t(form === 4 ? 'formView:actions' : 'formView:requiredActions')}</label>
+        <label>{t(form === formKeys.EVALUATION_PROGRAMMES ? 'formView:actions' : 'formView:requiredActions')}</label>
         {viewOnly ? actions : <textarea id="actions" value={actions || ''} onChange={handleChange} />}
       </div>
     </div>

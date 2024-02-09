@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
 
 import { wsConnect } from 'Utilities/redux/websocketReducer'
 import { loginAction } from 'Utilities/redux/currentUserReducer'
@@ -91,13 +92,14 @@ export default () => {
       if (
         deadlines.draftYear &&
         deadlines?.nextDeadline?.length > 0 &&
-        new Date(deadlines.nextDeadline.find(d => d.form === 1)?.date) >= new Date() &&
+        new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date() &&
         currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
       ) {
         year = deadlines.draftYear.year
       } else {
         year = oldAnswers.data.reduce((acc, answer) => {
-          if (Object.entries(answer.data).length > 0 && answer.year > acc && answer.form === 1) return answer.year
+          if (Object.entries(answer.data).length > 0 && answer.year > acc && answer.form === formKeys.YEARLY_ASSESSMENT)
+            return answer.year
           return acc
         }, 2019)
       }

@@ -6,6 +6,8 @@ import {
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
 } from 'Utilities/redux/formReducer'
+import { formKeys } from '@root/config/data'
+
 import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
 import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
@@ -69,7 +71,7 @@ const Textarea = ({
 
   const formData = useSelector(({ form }) => form.data)
 
-  const MAX_LENGTH = maxLength || form === 5 ? 1600 : 1100
+  const MAX_LENGTH = maxLength || form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -91,7 +93,8 @@ const Textarea = ({
 
   useEffect(() => {
     const gotTheLock =
-      form === 3 || (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
+      form === formKeys.DEGREE_REFORM_INDIVIDUALS ||
+      (currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid)
 
     setHasLock(gotTheLock)
 
@@ -120,7 +123,7 @@ const Textarea = ({
 
   useEffect(() => {
     // due to async data load, we have to reset the field when the possible data arrives
-    if (form === 3 && Object.keys(formData).length > 0) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS && Object.keys(formData).length > 0) {
       setEditorState(editorStateFromRedux())
     }
   }, [Object.keys(formData).length])
@@ -141,7 +144,7 @@ const Textarea = ({
       setUnsavedContent(true)
     }
 
-    if (form === 3 && Object.keys(formData).length > 0) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS && Object.keys(formData).length > 0) {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
     } else {
       dispatch(updateFormFieldExp(fieldName, markdownStr, form))
@@ -157,7 +160,7 @@ const Textarea = ({
     const content = value.getCurrentContent()
     const rawObject = convertToRaw(content)
     const markdownStr = draftToMarkdown(rawObject).substring(0, MAX_LENGTH)
-    if (form === 3) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
       dispatch(postIndividualFormPartialAnswer({ field: fieldName, value: markdownStr }))
     } else {
       dispatch(updateFormField(fieldName, markdownStr, form))
@@ -202,7 +205,7 @@ const Textarea = ({
   const saveButtonLabel = !hasLock || unsavedContent ? t('generic:kludgeButton') : t('generic:kludgeButtonRelease')
   const notSavedInfoText = unsavedContent ? t('generic:textUnsaved') : t('generic:textUnsavedRelease')
   let subTitle = null
-  if (form === 6) {
+  if (form === formKeys.EVALUATION_COMMTTEES) {
     if (id.indexOf('-bachelor') > -1) {
       if (!isArviointi) {
         subTitle = t('formView:bachelorUniForm')

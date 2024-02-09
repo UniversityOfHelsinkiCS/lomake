@@ -5,6 +5,7 @@ import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } 
 import { getForm } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import useDebounce from 'Utilities/useDebounce'
+import { formKeys } from '@root/config/data'
 import DropdownFilter from './DropdownFilter'
 import BasicRadio from './BasicRadio'
 
@@ -30,7 +31,7 @@ const AdvancedRadio = ({
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const choose = (name, id) => {
-    if (form === 3) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
       dispatch(updateFormFieldExp(name, id, form))
       dispatch(postIndividualFormPartialAnswer({ field: name, value: id }))
     } else {
@@ -67,9 +68,9 @@ const AdvancedRadio = ({
   const handleOtherField = ({ input, level }) => {
     const { value } = input.target
 
-    if (level === 2) {
+    if (level === formKeys.DEGREE_REFORM_PROGRAMMES) {
       setState({ ...state, secondValue: state.secondValue, thirdValue: value })
-    } else if (level === 1) {
+    } else if (level === formKeys.YEARLY_ASSESSMENT) {
       setState({ firstValue: state.firstValue, secondValue: value, thirdValue: null })
     }
   }

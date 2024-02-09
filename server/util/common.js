@@ -1,6 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const common = require('@root/config/common')
+const { formKeys } = require('@root/config/data')
 
 const DB_URL = process.env.DB_URL || ''
 const PORT = process.env.PORT || 8001
@@ -13,22 +14,22 @@ const whereDraftYear = async () => {
 }
 
 const getFormType = form => {
-  if (form === 1) {
+  if (form === formKeys.YEARLY_ASSESSMENT) {
     return 'yearly'
   }
-  if (form === 2) {
+  if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return 'degree-reform'
   }
-  if (form === 3) {
+  if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     return 'degree-reform-individual'
   }
-  if (form === 4) {
+  if (form === formKeys.EVALUATION_PROGRAMMES) {
     return 'evaluation'
   }
-  if (form === 5) {
+  if (form === formKeys.EVALUATION_FACULTIES) {
     return 'evaluation-faculty'
   }
-  if (form === 6) {
+  if (form === formKeys.EVALUATION_COMMTTEES) {
     return 'evaluation-university'
   }
   return 'yearly'

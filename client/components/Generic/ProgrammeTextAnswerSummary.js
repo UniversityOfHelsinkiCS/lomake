@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Grid, Button, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { formKeys } from '@root/config/data'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
 const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
@@ -41,7 +42,8 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
       setShowSpecific({ ...showSpecific, [programme]: !showSpecific[programme] })
     }
   }
-  const summaryTitle = form && form === 6 ? 'formView:universitySummaryTitle' : 'formView:facultySummaryTitle'
+  const summaryTitle =
+    form && form === formKeys.EVALUATION_COMMTTEES ? 'formView:universitySummaryTitle' : 'formView:facultySummaryTitle'
 
   return (
     <div className="summary-container">
@@ -49,7 +51,7 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
       <div className="summary-grid" data-cy={`${questionId}-summary`}>
         <Grid columns={4}>
           <Grid.Row className="row">
-            {form === 5 && (
+            {form === formKeys.EVALUATION_FACULTIES && (
               <>
                 <Grid.Column width={5} style={getStyleForm('bachelor')}>
                   {t('bachelor')}
@@ -67,7 +69,7 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
 
           <>
             <Grid.Row className="row">
-              {form === 5 && (
+              {form === formKeys.EVALUATION_FACULTIES && (
                 <>
                   <Grid.Column width={5}>
                     <ProgrammeAnswerSummaryList
@@ -107,7 +109,7 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
                   </Grid.Column>
                 </>
               )}
-              {form === 6 && (
+              {form === formKeys.EVALUATION_COMMTTEES && (
                 <Grid.Column width={5}>
                   <ProgrammeAnswerSummaryList
                     data={summaryData.faculty}

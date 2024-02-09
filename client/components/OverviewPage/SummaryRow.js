@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
 import { degreeReformBackgroundColor } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import { degreeReformIndividualQuestions } from '../../questionData'
 
 const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers }) => {
@@ -89,7 +90,7 @@ const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers
 }
 
 const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) => {
-  if (form === 2) {
+  if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformPieChart
         stats={stats}

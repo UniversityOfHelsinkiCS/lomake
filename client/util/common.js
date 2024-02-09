@@ -6,6 +6,7 @@ import _ from 'lodash'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
+import { formKeys } from '../../config/data'
 
 import {
   yearlyQuestions,
@@ -133,15 +134,15 @@ export const modifiedQuestions = (lang, form) => {
 
   let questions = []
 
-  if (form === 1) {
+  if (form === formKeys.YEARLY_ASSESSMENT) {
     questions = yearlyQuestions
-  } else if (form === 2) {
+  } else if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     questions = degreeQuestionData
-  } else if (form === 3) {
+  } else if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     questions = degreeQuestionData
-  } else if (form === 4) {
+  } else if (form === formKeys.EVALUATION_PROGRAMMES) {
     questions = evaluationQuestions
-  } else if (form === 5) {
+  } else if (form === formKeys.EVALUATION_FACULTIES) {
     questions = evaluationFacultyQuestions
   }
 
@@ -418,7 +419,11 @@ export const allYears = oldAnswers => {
 // eslint-disable-next-line no-unused-vars
 export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
   // Special case for faculty evaluation for the moment when showing to all
-  if ((form === 5 || form === 4) && !deadline && draftYear === 2023) {
+  if (
+    (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_PROGRAMMES) &&
+    !deadline &&
+    draftYear === 2023
+  ) {
     if (tempAnswers && !tempAnswers.data) {
       return tempAnswers.data
     }
@@ -577,22 +582,22 @@ export const getForm = formType => {
 }
 
 export const getFormType = form => {
-  if (form === 1) {
+  if (form === formKeys.YEARLY_ASSESSMENT) {
     return 'yearly'
   }
-  if (form === 2) {
+  if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return 'degree-reform'
   }
-  if (form === 3) {
+  if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     return 'degree-reform-individual'
   }
-  if (form === 4) {
+  if (form === formKeys.EVALUATION_PROGRAMMES) {
     return 'evaluation'
   }
-  if (form === 5) {
+  if (form === formKeys.EVALUATION_FACULTIES) {
     return 'evaluation-faculty'
   }
-  if (form === 6) {
+  if (form === formKeys.EVALUATION_COMMTTEES) {
     return 'evaluation-university'
   }
   if (form === 7) {

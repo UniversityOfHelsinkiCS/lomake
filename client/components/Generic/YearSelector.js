@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
 
 import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
 import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
@@ -34,7 +35,7 @@ export default function YearSelector({ multiple, size, label }) {
   useEffect(() => {
     if (!previousYearsWithAnswers || !currentUser) return
     let years = getYearsUserHasAccessToAction(currentUser)
-    if (form === 4 || form === 5) {
+    if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
       years = [2023]
       handleYearChange(null, { value: 2023 })
     }
@@ -55,7 +56,7 @@ export default function YearSelector({ multiple, size, label }) {
   }
 
   if (!currentUser) return null
-  if (yearOptions.length === 1) return <div />
+  if (yearOptions.length === formKeys.YEARLY_ASSESSMENT) return <div />
 
   return (
     <div className={`year-filter-${size}`}>

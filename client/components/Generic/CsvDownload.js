@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
+import { formKeys } from '@root/config/data'
+
 import { useTranslation } from 'react-i18next'
 import {
   programmeNameByKey as getProgrammeName,
@@ -24,11 +26,11 @@ const handleData = ({
 }) => {
   // Create an array of arrays, with questions at index 0, and question_ids at index 1
   let questions = []
-  if (form === 1) {
+  if (form === formKeys.YEARLY_ASSESSMENT) {
     questions = yearlyQuestions
-  } else if (form === 5) {
+  } else if (form === formKeys.EVALUATION_FACULTIES) {
     questions = facultyEvaluationQuestions
-  } else if (form === 4) {
+  } else if (form === formKeys.EVALUATION_PROGRAMMES) {
     questions = evaluationQuestions
   }
   let csvData = questions.reduce(
@@ -122,7 +124,7 @@ const handleData = ({
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
     else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-    if (form === 5 || form === 6) {
+    if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_COMMTTEES) {
       const name = programme.name[lang]
       const faculty = programme.name[lang]
       const dataRow = [name, faculty, ...answersArray]

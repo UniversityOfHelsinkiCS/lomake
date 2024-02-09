@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { formKeys } from '@root/config/data'
+
 import Textarea from 'Components/Generic/Textarea'
 import Entity from 'Components/Generic/Entity'
 import EntityLevels from 'Components/Generic/EntityLevels'
@@ -80,7 +82,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
-    const gapSytle = form === 6 ? { marginBottom: 70 } : {}
+    const gapSytle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
 
     return (
       <div key={`${part.id}-container`} style={gapSytle}>

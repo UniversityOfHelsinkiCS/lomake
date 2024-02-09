@@ -1,6 +1,7 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
 
 const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds, showDataByProgramme }) => {
   const { t } = useTranslation()
@@ -8,7 +9,7 @@ const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds,
   let answersCounted = {}
 
   if (showDataByProgramme) {
-    const selectedAnswersFiltered = selectedAnswers.filter(answer => answer.form === 4)
+    const selectedAnswersFiltered = selectedAnswers.filter(answer => answer.form === formKeys.EVALUATION_PROGRAMMES)
     answersCounted = selectedAnswersFiltered.reduce(
       (acc, curr) => {
         if (!curr.data || Object.keys(curr.data).length === 0) return acc

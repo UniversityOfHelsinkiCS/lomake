@@ -9,6 +9,7 @@ import Measures from 'Components/Generic/Measures'
 import CustomCheckbox from 'Components/Generic/CustomCheckbox'
 import AdvancedRadio from 'Components/Generic/AdvancedRadio'
 import { colors, romanize, getForm, getProgramAnswerLevels } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import Section from './DegreeReformSection'
 
 const partComponentMap = {
@@ -104,10 +105,10 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
   return (
     <div style={{ marginTop: -50 }}>
       {questionData.map((section, index) => {
-        if (form !== 2 && formData.answerLevels.find(f => f === section.id)) {
+        if (form !== formKeys.DEGREE_REFORM_PROGRAMMES && formData.answerLevels.find(f => f === section.id)) {
           return null
         }
-        if (form === 2 && programAnswerLevels.find(f => f === section.id)) {
+        if (form === formKeys.DEGREE_REFORM_PROGRAMMES && programAnswerLevels.find(f => f === section.id)) {
           return null
         }
 

@@ -3,6 +3,7 @@ import { Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { colors } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import Textarea from './Textarea'
 import TrafficLights from './TrafficLights'
 import './Generic.scss'
@@ -60,7 +61,7 @@ const Entity = ({
         {description}
         <p className="form-question-extrainfo">{extrainfo}</p>
       </div>
-      {!kludge && form === 4 && (
+      {!kludge && form === formKeys.EVALUATION_PROGRAMMES && (
         <>
           <OldAnswersSummary partId={id} relatedYearlyAnswers={summaryData} />
           <Link data-cy="link-to-old-answers" to={summaryUrl} target="_blank">

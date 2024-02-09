@@ -4,6 +4,7 @@ import { Button, Divider, Icon, Grid, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import { colors } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import ActionElement from './ActionElement'
 import './Generic.scss'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
@@ -75,7 +76,7 @@ const Actions = ({
   }
 
   let subTitle = null
-  if (form === 6) {
+  if (form === formKeys.EVALUATION_COMMTTEES) {
     if (id.indexOf('-bachelor') > -1) {
       if (!isArviointi) {
         subTitle = t('formView:bachelorUniForm')
@@ -99,9 +100,14 @@ const Actions = ({
     }
   }
 
-  const summaryTitle = form === 6 ? 'formView:universityActionSummaryTitle' : 'formView:facultyActionSummaryTitle'
+  const summaryTitle =
+    form === formKeys.EVALUATION_COMMTTEES
+      ? 'formView:universityActionSummaryTitle'
+      : 'formView:facultyActionSummaryTitle'
 
-  const showSummary = (form === 6 && subTitle === t('formView:bachelorUniForm')) || form === 5
+  const showSummary =
+    (form === formKeys.EVALUATION_COMMTTEES && subTitle === t('formView:bachelorUniForm')) ||
+    form === formKeys.EVALUATION_FACULTIES
 
   const showDescription = subTitle === t('formView:bachelorUniForm') || form !== 6
 
@@ -148,7 +154,7 @@ const Actions = ({
           <div className="summary-grid" data-cy={`${id}-summary`}>
             <Grid columns={4}>
               <Grid.Row className="row">
-                {form === 5 && (
+                {form === formKeys.EVALUATION_FACULTIES && (
                   <>
                     <Grid.Column width={5} style={getStyleForm('bachelor')}>
                       {t('bachelor')}
@@ -165,7 +171,7 @@ const Actions = ({
               </Grid.Row>
               <>
                 <Grid.Row className="row">
-                  {form === 5 && (
+                  {form === formKeys.EVALUATION_FACULTIES && (
                     <>
                       <Grid.Column width={5}>
                         <ProgrammeAnswerSummaryList
@@ -208,7 +214,7 @@ const Actions = ({
                       </Grid.Column>
                     </>
                   )}
-                  {form === 6 && (
+                  {form === formKeys.EVALUATION_COMMTTEES && (
                     <Grid.Column width={5}>
                       <ProgrammeAnswerSummaryList
                         data={summaryData.faculty}

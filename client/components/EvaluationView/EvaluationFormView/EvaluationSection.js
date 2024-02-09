@@ -1,12 +1,13 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 
 const Section = ({ title, number, children, programmeKey, form }) => {
   let id = ''
-  if (form === 5) {
+  if (form === formKeys.EVALUATION_FACULTIES) {
     id = '-faculty'
-  } else if (form === 6) {
+  } else if (form === formKeys.EVALUATION_COMMTTEES) {
     id = '-university'
   }
   const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`

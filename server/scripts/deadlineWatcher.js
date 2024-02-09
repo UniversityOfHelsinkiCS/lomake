@@ -6,6 +6,7 @@ const db = require('@models/index')
 const logger = require('@util/logger')
 
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
+const { formKeys } = require('@root/config/data')
 
 const startDeadlineWatcher = async () => {
   // 5 min before midnight: 55 23 * * *
@@ -30,7 +31,11 @@ const startDeadlineWatcher = async () => {
       await deadlinesToday.forEach(async ({ form }) => {
         logger.info(`${loggerPrefix} Processing backups for form ${form}...`)
 
-        if (form === 3 || form === 5 || form === 6) {
+        if (
+          form === formKeys.DEGREE_REFORM_INDIVIDUALS ||
+          form === formKeys.EVALUATION_FACULTIES ||
+          form === formKeys.EVALUATION_COMMTTEES
+        ) {
           // handle individual users and faculty forms
           const allTempAnswers = await db.tempAnswer.findAll({ where: { form, year: draftYear } })
 

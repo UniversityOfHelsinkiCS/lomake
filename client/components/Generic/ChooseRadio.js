@@ -3,6 +3,7 @@ import { Divider, Form } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateFormField, updateFormFieldExp, postIndividualFormPartialAnswer } from 'Utilities/redux/formReducer'
 import { colors, getForm } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import BasicRadio from './BasicRadio'
 import './Generic.scss'
 
@@ -14,7 +15,7 @@ const ChooseRadio = ({ id, label, description, required, extrainfo, radioOptions
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = async (field, value) => {
-    if (form === 3) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS3) {
       dispatch(updateFormFieldExp(field, value, form))
       dispatch(postIndividualFormPartialAnswer({ field, value }))
     } else {

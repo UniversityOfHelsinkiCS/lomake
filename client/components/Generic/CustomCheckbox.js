@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Divider } from 'semantic-ui-react'
+import { formKeys } from '@root/config/data'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setAnswerLevels,
@@ -17,7 +18,7 @@ const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOpti
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const form = getForm(formType)
   const choose = (name, id) => {
-    if (form === 3) {
+    if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
       dispatch(updateFormFieldExp(name, id, form))
       dispatch(postIndividualFormPartialAnswer({ field: name, value: id }))
     } else {

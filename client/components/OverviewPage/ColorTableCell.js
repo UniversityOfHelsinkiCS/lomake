@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import DegreeReformCell from './DegreeReformCell'
 import Square from '../EvaluationView/CommitteeOverview/Square'
 import {
@@ -43,7 +44,7 @@ const ColorTableCell = ({
   }
 
   const questions = questionMap[form] || yearlyQuestions
-  if (form === 2) {
+  if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformCell
         programmesKey={programmesKey}
@@ -119,7 +120,7 @@ const ColorTableCell = ({
     }
   }
 
-  if (form === 5) {
+  if (form === formKeys.EVALUATION_FACULTIES) {
     colorId = [
       `${questionId}_light`,
       `${questionId}_bachelor_light`,
@@ -146,7 +147,7 @@ const ColorTableCell = ({
     colorAnswer = programmesAnswers[colorId]
   }
 
-  if (form === 6 && questionId.includes('_actions')) {
+  if (form === formKeys.EVALUATION_COMMTTEES && questionId.includes('_actions')) {
     return (
       <Square
         setModalData={setModalData}
