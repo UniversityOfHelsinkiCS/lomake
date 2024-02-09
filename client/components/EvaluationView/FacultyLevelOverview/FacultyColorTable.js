@@ -28,13 +28,19 @@ const FacultyColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
-    const year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
     const [showDataByProgramme] = useState(false)
 
+    let year = 2023
+
+    if (oldAnswers?.years) {
+      const [latestYear] = oldAnswers.years.sort((a, b) => b - a)
+      year = latestYear
+    }
+
     useEffect(() => {
-      if (!nextDeadline.find(d => d.form === form)) {
+      if (!nextDeadline || !nextDeadline.find(d => d.form === form)) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())

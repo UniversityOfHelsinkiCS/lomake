@@ -150,7 +150,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
 
     cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
@@ -168,7 +168,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
 
     cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
@@ -212,7 +212,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 14)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
     cy.visit('/evaluation-university')
     cy.contains('University level')
 
@@ -228,6 +228,7 @@ describe('IAM permission tests', () => {
   it('HY employee with no other IAMs sees nothing', () => {
     const user = 'cypressHyEmployeeUser'
     cy.login(user)
+    // Check that no permissions to overview
     cy.visit('/')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
     cy.visit('/evaluation')
@@ -237,6 +238,15 @@ describe('IAM permission tests', () => {
     cy.visit('/evaluation-faculty')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
     cy.visit('/evaluation-university/form/6/UNI')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    // Check that no permissions to formView
+    cy.visit('/form/KH50_006')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/evaluation/form/4/KH50_006')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/degree-reform/form/KH50_006')
+    cy.get('[data-cy=no-permissions-message]').should('be.visible')
+    cy.visit('/evaluation-faculty/form/5/H50')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
   })
 })

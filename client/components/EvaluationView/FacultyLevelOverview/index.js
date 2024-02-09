@@ -50,6 +50,7 @@ export default () => {
       if (!userHasAccessToSomething && !isAdmin(currentUser)) {
         return false
       }
+      if (f.code === 'UNI') return false
       const name = f.name[lang]
       const { code } = f
       return (

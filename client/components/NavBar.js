@@ -47,8 +47,8 @@ const GoToAdminPageButton = () => {
 const GoToEvaluationButton = ({ user }) => {
   const { t } = useTranslation()
   return (
-    <Menu.Item data-cy="nav-evaluation" style={{ padding: 0 }}>
-      <Dropdown item data-cy="nav-evaluation-dropdown" text={t('evaluation')} style={{ height: '100%' }}>
+    <Menu.Item style={{ padding: 0 }}>
+      <Dropdown item data-cy="nav-evaluation" text={t('evaluation')} style={{ height: '100%' }}>
         <Dropdown.Menu>
           <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
             {t('generic:level:programmes')}

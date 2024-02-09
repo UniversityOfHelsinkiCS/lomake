@@ -120,12 +120,12 @@ const FacultyFormView = ({ room, formString }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const componentRef = useRef()
+  const oldAnswerYears = useSelector(state => state.oldAnswers.years)
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  const year = 2023 // the next time form is filled is in 2026
 
   const faculties = useSelector(state => state.faculties.data)
   const faculty = faculties ? faculties.find(f => f.code === room) : null
@@ -134,6 +134,15 @@ const FacultyFormView = ({ room, formString }) => {
 
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
+
+  let year = 2023 // the next time form is filled is in 2026
+
+  if (draftYear) {
+    year = draftYear.year
+  } else if (oldAnswerYears) {
+    const [latestYear] = oldAnswerYears.sort((a, b) => b - a)
+    year = latestYear
+  }
 
   const hasReadRights =
     user.access[faculty.code] ||
@@ -236,7 +245,7 @@ const FacultyFormView = ({ room, formString }) => {
               </div>
               <h1 style={{ color: colors.blue }}>{faculty?.name[lang]}</h1>
               <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-                {t('evaluation')} 2023
+                {t('evaluation')} {year}
               </h3>
 
               <div className="hide-in-print-mode">
