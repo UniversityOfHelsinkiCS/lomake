@@ -22,12 +22,11 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, user, room }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, writeAccess }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
-  if (!user.specialGroup.evaluationFaculty) return true
-  if (!user.access[room].write) return true
+  if (!writeAccess) return true
   return false
 }
 
@@ -151,7 +150,7 @@ const FacultyFormView = ({ room, formString }) => {
     user.specialGroup.evaluationFaculty ||
     isKatselmusProjektiOrOhjausryhma(user) ||
     Object.keys(user.access).length > 0
-  const hasWriteRights = user.access[faculty.code]?.write || isAdmin(user)
+  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -170,8 +169,7 @@ const FacultyFormView = ({ room, formString }) => {
         year,
         formDeadline,
         form,
-        user,
-        room,
+        writeAccess: hasWriteRights,
       })
     ) {
       dispatch(setViewOnly(true))
