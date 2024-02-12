@@ -4,23 +4,23 @@ import { useTranslation } from 'react-i18next'
 
 const CommitteeTableHeader = ({ tableIds, sort, title }) => {
   const { t } = useTranslation()
-
+  const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
     <>
-      <div style={{ gridColumn: '1/2' }} />
-      <div style={{ gridColumn: '2/5' }}>
-        <Header block style={{ height: '60px' }}>
+      <div className={`committee-table-header-${gridColumnSize}-left-padding`} />
+      <div className={`committee-table-header-${gridColumnSize}-university`}>
+        <Header block style={{ height: 'max-content' }}>
           {' '}
           Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
         </Header>
       </div>
-      <div style={{ gridColumn: '5/9' }}>
-        <Header style={{ height: '60px' }} block>
+      <div className={`committee-table-header-${gridColumnSize}-arviointi`}>
+        <Header style={{ height: 'max-content' }} block>
           {' '}
           Arviointiryhmän arvio ja toimenpide-ehdotukset
         </Header>
       </div>
-      <div style={{ gridColumn: '9/13' }} />
+      <div className={`committee-table-header-${gridColumnSize}-right-padding`} />
       <div className="sticky-header">
         <div className="sorter" onClick={() => sort('name')}>
           {title || t('programmeHeader')}
@@ -29,7 +29,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
       </div>
       {tableIds.map(upperLevel =>
         upperLevel.levels.map(level => (
-          <div key={`${upperLevel.title}-${level}`} className="sticky-header-categories">
+          <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
             <span>{t(level)}</span>
           </div>
         )),

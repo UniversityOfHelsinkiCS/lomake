@@ -20,7 +20,7 @@ $QUESTION_COUNT: 6;
   max-width: 200px;
 }
 
-.overview-color-grid-committee {
+@mixin committee-overview-basics {
   display: grid;
   grid-template-columns: 4fr 1fr repeat($QUESTION_COUNT, 1fr) 1fr;
   grid-auto-columns: 50px;
@@ -29,6 +29,22 @@ $QUESTION_COUNT: 6;
   grid-row-gap: 25px;
   grid-column-gap: 5px;
   width: 95vw;
+}
+
+.overview-color-grid-committee {
+  @include committee-overview-basics;
+  &-3 {
+    @include committee-overview-basics;
+  grid-template-rows: 100px 50px;
+ }
+ &-5 {
+  @include committee-overview-basics;
+  grid-template-rows: 70px 50px;
+ }
+ &-7 {
+  @include committee-overview-basics;
+  grid-template-rows: 100px 50px;
+ }
 }
 
 @mixin square-basics {
@@ -85,11 +101,8 @@ $QUESTION_COUNT: 6;
   z-index: 4;
 }
 
-.sticky-header {
+@mixin sticky-header-committee {
   @include sticky-header-basics();
-
-  &-categories {
-    @include sticky-header-basics();
     word-wrap: break-word;
     text-align: center;
     font-weight: bold;
@@ -97,6 +110,14 @@ $QUESTION_COUNT: 6;
     margin-right: -3px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.sticky-header {
+  @include sticky-header-basics();
+
+  &-categories-7 {
+   @include sticky-header-committee();
+    grid-row: span 1;
   }
 }
 
@@ -116,7 +137,7 @@ $QUESTION_COUNT: 6;
   &-manage-cell-committee {
     @include container-basics;
     justify-content: center;
-    grid-column: 12/13
+    grid-column: 9/13
   }
   &-row-link {
     @include container-basics;
@@ -193,4 +214,58 @@ $QUESTION_COUNT: 6;
   h2, h4, p {
     margin-left: 1rem;
   }
+}
+
+.committee-level-filter {
+  font-size: 1.5rem !important;
+  height: 1.5em;
+}
+
+.committee-table-header-7 {
+  &-left-padding {
+    grid-column: 1/2;
+  }
+  &-university {
+    grid-column:2/5;
+  }
+  &-arviointi {
+    grid-column: 5/9;
+  }
+  &-right-padding {
+    grid-column: 9/13;
+  }
+}
+
+.committee-table-header-3 {
+  &-left-padding {
+    grid-column: 1/2;
+  }
+  &-university {
+    grid-column: 2/3;
+  }
+  &-arviointi {
+    grid-column: 3/4;
+  }
+  &-right-padding {
+    grid-column: 4/13;
+  }
+}
+
+.committee-table-header-5 {
+  &-left-padding {
+    grid-column: 1/2;
+  }
+  &-university {
+    grid-column: 2/4;
+  }
+  &-arviointi {
+    grid-column: 4/6;
+  }
+  &-right-padding {
+    grid-column: 6/13;
+  }
+}
+
+.committee-table-header-second-level-right-padding {
+  grid-column: 9/13;
 }

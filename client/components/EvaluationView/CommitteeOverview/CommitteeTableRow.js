@@ -38,21 +38,30 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
       </div>
 
       {tableIds.map(upperLevel => {
-        return upperLevel.levels.map(level => (
-          <ColorTableCell
-            key={`${question.id}-${upperLevel.title}-${level}`}
-            programmesName={committee.name[lang]}
-            programmesKey={committee.code}
-            programmesAnswers={selectedAnswers}
-            programmesOldAnswers={null}
-            questionId={`${question.id}-${upperLevel.title}-${level}`}
-            questionType={question.type}
-            setModalData={setModalData}
-            form={form}
-            questionLabel={questionLabel}
-            questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
-          />
-        ))
+        return upperLevel.levels.map(level => {
+          if (
+            level === 'overallHeader' &&
+            question.id !== 'university_ease_of_study_actions' &&
+            question.id !== 'university_programme_structure_actions'
+          ) {
+            return null
+          }
+          return (
+            <ColorTableCell
+              key={`${question.id}-${upperLevel.title}-${level}`}
+              programmesName={committee.name[lang]}
+              programmesKey={committee.code}
+              programmesAnswers={selectedAnswers}
+              programmesOldAnswers={null}
+              questionId={`${question.id}-${upperLevel.title}-${level}`}
+              questionType={question.type}
+              setModalData={setModalData}
+              form={form}
+              questionLabel={questionLabel}
+              questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
+            />
+          )
+        })
       })}
 
       {hasManagementAccess(committee.code) ? (
