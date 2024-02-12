@@ -98,8 +98,11 @@ const ColorTableCell = ({
   const getModalConfig = () => {
     // Kysymys - ylätaso - alataso
     let tempQuestionId = questionId
+    let tempSubtitle = programmesName
     if (programmesKey === 'UNI') {
       tempQuestionId = questionData.rawQuestionId
+      const whichLevel = questionId.match('bachelor|master|doctoral')[0]
+      tempSubtitle = t(whichLevel)
     }
     return {
       header: questions.reduce((acc, cur) => {
@@ -114,7 +117,7 @@ const ColorTableCell = ({
 
         return acc
       }, ''),
-      programme: programmesName,
+      programme: tempSubtitle,
       content: textAnswer,
       color: colorAnswer,
     }

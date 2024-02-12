@@ -49,6 +49,9 @@ const ProgrammeList = ({ data, lang, onlyBc, showText, showSpecific, handleShowS
   if (onlyBc) {
     return <div />
   }
+  if (!data) {
+    return <div>No data</div>
+  }
   return (
     <>
       {colorsList.map(color => {
@@ -196,6 +199,7 @@ const EntityLevels = ({ id, label, description, required, number, extrainfo, sum
             {Object.keys(showText).length > 0 && (
               <Grid.Row className="row">
                 {showText.level &&
+                  summaryData[showText.level] &&
                   colorsList.map(color => {
                     return summaryData[showText.level][color].map(p => {
                       return (

@@ -9,7 +9,10 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
     <>
       <div style={{ gridColumn: '1/2' }} />
       <div style={{ gridColumn: '2/5' }}>
-        <Header block> Helsingin yliopiston arvio ja toimenpide-ehdotukset </Header>
+        <Header block style={{ height: '60px' }}>
+          {' '}
+          Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
+        </Header>
       </div>
       <div style={{ gridColumn: '5/9' }}>
         <Header style={{ height: '60px' }} block>
