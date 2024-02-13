@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon, Radio } from 'semantic-ui-react'
+import { Accordion, Icon, Radio, Checkbox } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -40,6 +40,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const [selectedLevels, setSelectedLevels] = useState({ bachelor: false, master: false, doctoral: false })
 
   const form = 6
   const formType = 'evaluation'
@@ -49,6 +50,10 @@ export default () => {
   }, [lang])
 
   const hasRights = currentUser => isEvaluationUniversityUser(currentUser)
+
+  const handleSelectedLevels = level => {
+    setSelectedLevels({ ...selectedLevels, [level]: !selectedLevels[level] })
+  }
 
   // show faculty overview to those that have access to some programmes in tilannekuvalomake
   const usersProgrammes = useMemo(() => {
@@ -124,6 +129,17 @@ export default () => {
         <>
           <div className="wide-header">
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '8em' }}>
+              {Object.keys(selectedLevels).map(level => (
+                <Checkbox
+                  key={level}
+                  className="committee-level-filter"
+                  active={selectedLevels[level]}
+                  onClick={() => handleSelectedLevels(level)}
+                  label={t(level)}
+                />
+              ))}
+            </div>
           </div>
           <div style={{ marginTop: '1em' }}>
             <CommitteeColorTable
@@ -133,6 +149,7 @@ export default () => {
               setStatsToShow={null}
               form={form}
               formType={formType}
+              selectedLevels={selectedLevels}
             />
           </div>
           <div style={{ marginTop: 50 }}>

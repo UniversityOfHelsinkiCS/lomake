@@ -44,7 +44,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
             question.id !== 'university_ease_of_study_actions' &&
             question.id !== 'university_programme_structure_actions'
           ) {
-            return null
+            return <div />
           }
           return (
             <ColorTableCell
