@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon, Radio, Checkbox } from 'semantic-ui-react'
+import { Accordion, Icon, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -131,7 +131,8 @@ export default () => {
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em' }}>
               {Object.keys(selectedLevels).map(level => (
-                <Checkbox
+                <Radio
+                  toggle
                   key={level}
                   className="committee-level-filter"
                   active={selectedLevels[level]}
