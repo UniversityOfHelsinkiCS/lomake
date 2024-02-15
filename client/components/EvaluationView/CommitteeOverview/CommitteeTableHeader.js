@@ -14,7 +14,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
           Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
         </Header>
       </div>
-      <div className={`committee-table-header-${gridColumnSize}-arviointi`}>
+      <div className={`committee-table-header-${gridColumnSize}-committee`}>
         <Header style={{ height: 'max-content' }} block>
           {' '}
           Arviointiryhmän arvio ja toimenpide-ehdotukset
@@ -34,7 +34,6 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
           </div>
         )),
       )}
-      <div className="sticky-header" />
     </>
   )
 }

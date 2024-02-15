@@ -135,7 +135,6 @@ export default () => {
                   toggle
                   key={level}
                   className="committee-level-filter"
-                  active={selectedLevels[level]}
                   onClick={() => handleSelectedLevels(level)}
                   label={t(level)}
                 />

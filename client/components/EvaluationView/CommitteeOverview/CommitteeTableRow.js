@@ -12,7 +12,16 @@ const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   </div>
 )
 
-const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, setProgramControlsToShow, committee }) => {
+const TableRow = ({
+  question,
+  selectedAnswers,
+  tableIds,
+  setModalData,
+  form,
+  setProgramControlsToShow,
+  committee,
+  showText,
+}) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -31,7 +40,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
 
   return (
     <React.Fragment key={question.id}>
-      <div className="table-container-row-link">
+      <div className="table-container-row-link-committee">
         <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
           {questionLabel}
         </Link>
@@ -59,6 +68,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, set
               form={form}
               questionLabel={questionLabel}
               questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
+              showText={showText}
             />
           )
         })

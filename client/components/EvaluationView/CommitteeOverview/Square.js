@@ -30,33 +30,49 @@ const getActionsAnswerForUniversity = (data, id) => {
   return []
 }
 
-const Square = ({ setModalData, programmesAnswers, questionId, t, questionData }) => {
+const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, showText }) => {
   const actions = getActionsAnswerForUniversity(programmesAnswers, questionId, t)
   const { level } = questionData
   const { topLevel } = questionData
 
   const tempModalData = {
-    header: `${t(`overview:${topLevel}`)} - ${t(level)}`,
+    header: `${t(`generic:level:${topLevel}`)} - ${t(level)}`,
     content: actions,
     color: 'blue',
     programme: questionData.questionLabel,
     arviointi: true,
     type: 'actions',
   }
-
   if (actions.length === 0) {
     return <div data-cy={`${questionId}`} className="square" style={{ background: colors.background_gray }} />
   }
-
+  if (!showText) {
+    return (
+      <div
+        onClick={() => setModalData(tempModalData)}
+        className="square-actions"
+        style={{ background: colors.background_blue }}
+      >
+        <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>
+          {actions.length}
+        </p>
+      </div>
+    )
+  }
   return (
-    <div
-      onClick={() => setModalData(tempModalData)}
-      className="square-actions"
-      style={{ background: colors.background_blue }}
-    >
-      <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>
-        {actions.length}
-      </p>
+    <div>
+      {actions.map(action => (
+        <div
+          key={action.title}
+          onClick={() => setModalData(tempModalData)}
+          className="square-actions"
+          style={{ background: colors.background_blue }}
+        >
+          <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>
+            {action.title}
+          </p>
+        </div>
+      ))}
     </div>
   )
 }

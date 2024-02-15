@@ -31,6 +31,7 @@ const ColorTableCell = ({
   form = 1,
   acualQuestionId,
   questionData = null,
+  showText = false,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -158,6 +159,7 @@ const ColorTableCell = ({
         questionId={questionId}
         t={t}
         questionData={questionData}
+        showText={showText}
       />
     )
   }
@@ -183,7 +185,10 @@ const ColorTableCell = ({
         }}
       >
         {questionId === 'measures' || questionId === 'measures_faculty' ? (
-          <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{getMeasuresCount()}</span>
+          <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+            {form !== formKeys.EVALUATION_COMMTTEES && getMeasuresCount()}
+            {form === formKeys.EVALUATION_COMMTTEES && textAnswer}
+          </span>
         ) : (
           <Icon name="discussions" size="large" />
         )}

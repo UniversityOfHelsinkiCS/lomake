@@ -279,6 +279,7 @@ export default {
       faculties: 'Faculty level',
       university: 'University level',
       committee: 'Committee',
+      arviointi: 'Committee',
     },
     textUnsaved: 'Text not saved!',
     textUnsavedRelease: 'Press the button to release the field for others to edit!',

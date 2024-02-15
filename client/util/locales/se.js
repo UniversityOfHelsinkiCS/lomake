@@ -276,6 +276,7 @@ export default {
       faculties: 'Fakultet',
       university: 'Universitet',
       committee: 'Kommitté',
+      arviointi: 'Kommitté',
     },
     textUnsaved: '',
   },

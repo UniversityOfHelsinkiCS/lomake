@@ -277,6 +277,7 @@ export default {
       faculties: 'Tiedekuntataso',
       university: 'Yliopistotaso',
       committee: 'Arviointiryhmä',
+      arviointi: 'Arviointiryhmä',
     },
     textUnsaved: 'Tekstiä on tallentamatta!',
     textUnsavedRelease: 'Vapauta kenttä muiden muokattavaksi painamalla nappia!',
@@ -309,7 +310,6 @@ export default {
     pcs: 'kpl',
     chooseFaculty: 'Rajaa näytettävät tiedekunnat',
     developmentTarget: 'Kehityskohde',
-    arviointi: 'Arviointiryhmä',
   },
 
   report: {
