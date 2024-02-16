@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Header } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -85,7 +85,7 @@ const CommitteeColorTable = React.memo(
           return theme.parts.map((part, index) => {
             if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
             return (
-              <div key={`${part.id}-${theme.title}`} className="table-row-container">
+              <Fragment key={`${part.id}-${theme.title}`}>
                 {index === 0 && (
                   <Header
                     className={`committee-table-theme-title-${gridColumnSize}`}
@@ -112,7 +112,7 @@ const CommitteeColorTable = React.memo(
                   setProgramControlsToShow={setProgramControlsToShow}
                   showText={gridColumnSize < 7}
                 />
-              </div>
+              </Fragment>
             )
           })
         })}
