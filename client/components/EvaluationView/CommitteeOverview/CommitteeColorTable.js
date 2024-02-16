@@ -85,7 +85,7 @@ const CommitteeColorTable = React.memo(
           return theme.parts.map((part, index) => {
             if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
             return (
-              <>
+              <div key={`${part.id}-${theme.title}`} className="table-row-container">
                 {index === 0 && (
                   <Header
                     className={`committee-table-theme-title-${gridColumnSize}`}
@@ -106,14 +106,13 @@ const CommitteeColorTable = React.memo(
                   selectedAnswers={filteredAnswers}
                   tableIds={tableIds}
                   setModalData={setModalData}
-                  key={`${part.id}-${theme.title}`}
                   committee={committee}
                   formType={formType}
                   form={form}
                   setProgramControlsToShow={setProgramControlsToShow}
                   showText={gridColumnSize < 7}
                 />
-              </>
+              </div>
             )
           })
         })}

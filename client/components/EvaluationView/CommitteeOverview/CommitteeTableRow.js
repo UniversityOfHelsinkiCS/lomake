@@ -53,7 +53,7 @@ const TableRow = ({
             question.id !== 'university_ease_of_study_actions' &&
             question.id !== 'university_programme_structure_actions'
           ) {
-            return <div />
+            return <div key={`${question.id}-${upperLevel.title}-${level}`} />
           }
           return (
             <ColorTableCell
