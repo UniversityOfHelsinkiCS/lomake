@@ -9,6 +9,7 @@ import YearSelector from 'Components/Generic/YearSelector'
 import FormFilter from 'Components/Generic/FormFilter'
 import { useTranslation } from 'react-i18next'
 import '../Generic/Generic.scss'
+import { formKeys } from '@root/config/data'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
@@ -25,7 +26,7 @@ const FilterTray = ({ filter, setFilter }) => {
   const { t } = useTranslation()
   const filters = useSelector(state => state.filters)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const { faculty, level } = filters
+  const { faculty, level, form } = filters
 
   const handleSearch = ({ target }) => {
     const { value } = target
@@ -38,7 +39,7 @@ const FilterTray = ({ filter, setFilter }) => {
       <FormFilter />
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
-          <FacultyFilter size="small" label={t('report:facultyFilter')} />
+          {form !== formKeys.EVALUATION_FACULTIES && <FacultyFilter size="small" label={t('report:facultyFilter')} />}
           <LevelFilter />
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}

@@ -198,11 +198,15 @@ export const modifiedQuestions = (lang, form) => {
           },
         ]
       } else if (part.type !== 'TITLE') {
+        let colorId = `${part.id}_light`
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          colorId = [`${part.id}_bachelor_light`, `${part.id}_master_light`, `${part.id}_doctoral_light`]
+        }
         attributes = [
           ...attributes,
           {
             id: `${part.id}_text`,
-            color: `${part.id}_light`,
+            color: colorId,
             description: part.description ? part.description[lang] : '',
             label: _.capitalize(part.label[lang]),
             title: question.title[lang],

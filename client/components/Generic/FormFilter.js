@@ -15,7 +15,7 @@ const FormFilter = () => {
     //  { text: t('degree-reform-group'), value: 2 },
     // { text: t('degree-reform-individual'), value: 3 },
     { text: t('evaluation'), value: 4 },
-    //    { text: t('evaluationFaculty'), value: 5 },
+    { text: t('evaluationFaculty'), value: 5 },
   ]
 
   useEffect(() => {

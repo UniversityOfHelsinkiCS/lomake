@@ -130,6 +130,7 @@ export default () => {
             year={year}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
+            form={filters.form}
             allAnswers={
               usersProgrammes
                 ? answersByQuestions({

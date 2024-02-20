@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Dropdown, Grid, Radio } from 'semantic-ui-react'
+import { formKeys } from '@root/config/data'
 import { useTranslation } from 'react-i18next'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
@@ -13,7 +14,7 @@ import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
 import FormFilter from '../Generic/FormFilter'
 
-const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
+const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers, form }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
@@ -99,7 +100,9 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             </div>
           </Grid.Column>
           <Grid.Column>
-            <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
+            {form !== formKeys.EVALUATION_FACULTIES && (
+              <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
+            )}
             <small>{t('comparison:noAccessToAll')}</small>
             {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
               <CompanionFilter />

@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
+import { facultyList, formKeys } from '@root/config/data'
+import { setForm } from 'Utilities/redux/filterReducer'
+
 import QuestionList from 'Components/Generic/QuestionList'
 import {
   answersByYear,
@@ -25,18 +28,38 @@ import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
 import './ReportPage.scss'
 
-const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsList, usersProgrammes, lang, t }) => {
+const getAnswersByQuestions = ({
+  chosenProgrammes,
+  selectedAnswers,
+  questionsList,
+  usersProgrammes,
+  lang,
+  t,
+  form,
+}) => {
   const answerMap = new Map()
-  const chosenKeys = chosenProgrammes.map(p => p.key)
+  // if the 'programme' is faculty use -> code
+  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
   selectedAnswers.forEach(programme => {
     const key = programme.programme
 
     if (chosenKeys.includes(key)) {
       const { data } = programme
       questionsList.forEach(question => {
+        let color = null
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
+          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
+          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
+          color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
+        } else {
+          color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        }
         let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
-        const name = programmeName(usersProgrammes, programme, lang)
+        let name = programmeName(usersProgrammes, programme, lang)
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          name = facultyList.find(f => f.code === programme.programme).name[lang]
+        }
         let answer = ''
 
         if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
@@ -54,16 +77,16 @@ const getAnswersByQuestions = ({ chosenProgrammes, selectedAnswers, questionsLis
   // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
   // So empty answers need to be added.
   answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => p.key)
+    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
     const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
     if (programmesMissing) {
       programmesMissing.forEach(p => {
         const earlierAnswers = answerMap.get(key)
-        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
+        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
       })
     }
   })
-
   return answerMap
 }
 
@@ -83,6 +106,7 @@ export default () => {
   const { year } = filters
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const faculties = useSelector(state => state.faculties.data)
   const selectedAnswers = answersByYear({
     year,
     tempAnswers: answers,
@@ -97,8 +121,25 @@ export default () => {
     document.title = `${t('report:reportPage')}`
   }, [lang])
 
-  // Handles all filtering
-  const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
+  useEffect(() => {
+    const url = window.location.href
+    const facStart = url.indexOf('form=')
+    if (facStart !== -1) {
+      const formNumber = Number(url.substring(facStart + 5))
+      dispatch(setForm(formNumber))
+    } else {
+      dispatch(setForm(1))
+    }
+  }, [])
+
+  let programmes
+  if (filters.form === formKeys.EVALUATION_FACULTIES) {
+    const filterFakeFaculties = faculties.filter(f => f.code !== 'UNI' && f.code !== 'HTEST')
+    programmes = filteredProgrammes(lang, filterFakeFaculties, picked, debouncedFilter, filters)
+  } else {
+    // Handles all filtering
+    programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
+  }
 
   const questionsList = modifiedQuestions(lang, filters.form)
 
@@ -123,6 +164,7 @@ export default () => {
                     usersProgrammes,
                     lang,
                     t,
+                    form: filters.form,
                   })
                 : []
             }
@@ -149,6 +191,7 @@ export default () => {
                     usersProgrammes,
                     lang,
                     t,
+                    form: filters.form,
                   })
                 : []
             }

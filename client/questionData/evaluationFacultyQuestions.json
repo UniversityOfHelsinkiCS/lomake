@@ -234,7 +234,7 @@
     "parts": [
       {
         "id": "communication_faculty",
-        "index": 6,
+        "index": 11,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Johtaminen ja viestintä",
@@ -262,7 +262,7 @@
       },
       {
         "id": "teaching_resources_management_faculty",
-        "index": 7,
+        "index": 12,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Opetusresurssit",
@@ -290,7 +290,7 @@
       },
       {
         "id": "recruiting_influence_faculty",
-        "index": 8,
+        "index": 13,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Rekrytointi",
@@ -318,7 +318,7 @@
       },
       {
         "id": "environmental_resources_faculty",
-        "index": 9,
+        "index": 14,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Laite- ja tilaresurssit",
@@ -346,7 +346,7 @@
       },
       {
         "id": "shared_programmes_faculty",
-        "index": 10,
+        "index": 15,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
@@ -374,7 +374,7 @@
       },
       {
         "id": "programme_status_faculty",
-        "index": 11,
+        "index": 16,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
           "fi": "Ohjelman asema",
@@ -489,7 +489,7 @@
     "parts": [
       {
         "id": "faculty_studyprogramme_status",
-        "index": 12,
+        "index": 21,
         "kludge": true,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
@@ -534,7 +534,7 @@
       },
       {
         "id": "faculty_where_are_we_in_five_years",
-        "index": 13,
+        "index": 23,
         "kludge": true,
         "type": "ENTITY_LEVELS",
         "shortLabel": {

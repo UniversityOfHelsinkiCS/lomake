@@ -34,9 +34,8 @@ const FacultyColorTable = React.memo(
 
     let year = 2023
 
-    if (oldAnswers?.years) {
-      const [latestYear] = oldAnswers.years.sort((a, b) => b - a)
-      year = latestYear
+    if (draftYear) {
+      year = draftYear.year
     }
 
     useEffect(() => {

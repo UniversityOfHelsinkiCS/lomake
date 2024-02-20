@@ -4,6 +4,8 @@ import { Button } from 'semantic-ui-react'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
+import { useSelector } from 'react-redux'
 
 export default ({
   question,
@@ -14,9 +16,11 @@ export default ({
   allProgrammes,
   setActiveTab,
   setShowing,
+  level,
 }) => {
   const { t } = useTranslation()
   const [toolTipData, setToolTipData] = useState(null)
+  const form = useSelector(state => state.filters.form)
 
   const colorsTotal = question => {
     if (!question || !answers) return null
@@ -29,8 +33,13 @@ export default ({
       total: { value: 0 },
     }
     answers.forEach(a => {
-      colors[a.color].value += 1
-      colors[a.color].programmes = [...colors[a.color].programmes, a.name]
+      if (form === formKeys.EVALUATION_FACULTIES) {
+        colors[a.color[level]].value += 1
+        colors[a.color[level]].programmes = [...colors[a.color[level]].programmes, a.name]
+      } else {
+        colors[a.color].value += 1
+        colors[a.color].programmes = [...colors[a.color].programmes, a.name]
+      }
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
     colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
@@ -103,7 +112,7 @@ export default ({
   }
 
   return (
-    <div className="color-chart-area">
+    <div className="color-chart-area" key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
       <div className="color-pie-header">
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
@@ -137,12 +146,13 @@ export default ({
               </b>
             </p>
             {toolTipData.programmes.map(p => (
-              <p key={p}>{p}</p>
+              <p key={`${p}-${level}`}>{p}</p>
             ))}
           </span>
         )}
         <Chart
           center={[72, 65]}
+          key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
           data={data()}
           lengthAngle={360}
           lineWidth={100}

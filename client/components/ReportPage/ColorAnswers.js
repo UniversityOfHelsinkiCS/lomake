@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
+import { formKeys } from '@root/config/data'
 
 import PDFDownload from 'Components/Generic/PDFDownload'
 import ColorLegend from 'Components/Generic/ColorLegend'
@@ -13,7 +14,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
   const [showEmpty, setShowEmpty] = useState(true)
   const componentRef = useRef()
   const questions = useSelector(({ filters }) => filters.questions)
-
+  const form = useSelector(({ filters }) => filters.form)
   if (chosenProgrammes.length < 1 || allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
   }
@@ -25,6 +26,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
     return `${index}${label}`
   }
 
+  const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">
@@ -63,14 +65,33 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
             !question.no_color &&
             questions.selected.includes(getLabel(question)) && (
               <div key={question.id} style={{ margin: '1em' }}>
-                <PieChart
-                  question={question}
-                  answers={allAnswers.get(question.id)}
-                  showEmpty={showEmpty}
-                  chosenProgrammes={chosenProgrammes}
-                  setActiveTab={setActiveTab}
-                  setShowing={setShowing}
-                />
+                {showFacultyPie ? (
+                  <>
+                    {['bachelor', 'master', 'doctoral'].map(level => {
+                      return (
+                        <PieChart
+                          key={`${question.id}-${level}`}
+                          question={question}
+                          answers={allAnswers.get(question.id)}
+                          showEmpty={showEmpty}
+                          chosenProgrammes={chosenProgrammes}
+                          setActiveTab={setActiveTab}
+                          setShowing={setShowing}
+                          level={level}
+                        />
+                      )
+                    })}
+                  </>
+                ) : (
+                  <PieChart
+                    question={question}
+                    answers={allAnswers.get(question.id)}
+                    showEmpty={showEmpty}
+                    chosenProgrammes={chosenProgrammes}
+                    setActiveTab={setActiveTab}
+                    setShowing={setShowing}
+                  />
+                )}
               </div>
             ),
         )}

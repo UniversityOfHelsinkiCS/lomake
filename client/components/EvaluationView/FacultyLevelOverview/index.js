@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon } from 'semantic-ui-react'
+import { Accordion, Icon, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
@@ -59,6 +60,13 @@ export default () => {
       )
     })
   }, [usersProgrammes, faculties, lang, debouncedFilter])
+
+  const moreThanFiveProgrammes = useMemo(() => {
+    if (isAdmin(currentUser)) return true
+    if (currentUser.access && Object.keys(currentUser.access).length > 5) return true
+    return false
+  }, [currentUser])
+
   return (
     <>
       {modalData && (
@@ -132,6 +140,16 @@ export default () => {
         <>
           <div className="wide-header">
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+            <label className="year-filter-label">{t('overview:selectYear')}</label>
+
+            <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary size="big">
+              {t('overview:readAnswers')}
+            </Button>
+            {moreThanFiveProgrammes && (
+              <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5" size="big">
+                {t('overview:compareAnswers')}
+              </Button>
+            )}
           </div>
           <div style={{ marginTop: '1em' }}>
             <FacultyColorTable
