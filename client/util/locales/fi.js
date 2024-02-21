@@ -310,6 +310,7 @@ export default {
     pcs: 'kpl',
     chooseFaculty: 'Rajaa näytettävät tiedekunnat',
     developmentTarget: 'Kehityskohde',
+    universityOverview: 'Yliopistotason yhteenveto',
   },
 
   report: {

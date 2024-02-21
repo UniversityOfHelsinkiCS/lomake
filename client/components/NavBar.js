@@ -73,14 +73,14 @@ const GoToEvaluationButton = ({ user }) => {
               {t('generic:level:university')}
             </Dropdown.Item>
           ) : null}
-          {isSuperAdmin(user) ? (
+          {isAdmin(user) ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-big-boss"
               as={Link}
               to="/evaluation-university/"
               name="big-boss"
             >
-              Big Boss
+              Yliopistotason yhteenveto
             </Dropdown.Item>
           ) : null}
         </Dropdown.Menu>

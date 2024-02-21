@@ -306,6 +306,7 @@ export default {
     // chooseFaculty: '',
     // developmentTarget: '',
     // arviointi: '',
+    // universityOverview: '',
   },
 
   report: {

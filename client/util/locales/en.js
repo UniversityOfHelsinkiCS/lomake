@@ -313,6 +313,7 @@ export default {
     chooseFaculty: 'Delineate the selected faculties',
     developmentTarget: 'Development target',
     arviointi: 'Committee',
+    universityOverview: 'University overview',
   },
 
   report: {
