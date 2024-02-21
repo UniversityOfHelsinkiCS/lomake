@@ -34,9 +34,8 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, 
   const actions = getActionsAnswerForUniversity(programmesAnswers, questionId, t)
   const { level } = questionData
   const { topLevel } = questionData
-
   const tempModalData = {
-    header: `${t(`generic:level:${topLevel}`)} - ${t(level)}`,
+    header: `${t(`generic:level:${topLevel}`)} - ${t(`uniAnswerLevels:${level}`)}`,
     content: actions,
     color: 'blue',
     programme: questionData.questionLabel,

@@ -29,7 +29,6 @@ export default {
     bachelor: 'Kandidatsprogrammen',
     master: 'Magisterprogrammen',
     doctoral: 'Doktorandprogrammen',
-    overallHeader: '',
     bachelorShort: 'Kandidat',
     masterShort: 'Magister',
     doctoralShort: 'Doktorand',
@@ -307,6 +306,12 @@ export default {
     // developmentTarget: '',
     // arviointi: '',
     // universityOverview: '',
+    uniAnswerLevels: {
+      bachelor: 'Kandidatsprogrammen',
+      master: 'Magisterprogrammen',
+      doctoral: 'Doktorandprogrammen',
+      overall: '',
+    },
   },
 
   report: {

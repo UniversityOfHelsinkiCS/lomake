@@ -49,7 +49,7 @@ const TableRow = ({
       {tableIds.map(upperLevel => {
         return upperLevel.levels.map(level => {
           if (
-            level === 'overallHeader' &&
+            level === 'overall' &&
             question.id !== 'university_ease_of_study_actions' &&
             question.id !== 'university_programme_structure_actions'
           ) {

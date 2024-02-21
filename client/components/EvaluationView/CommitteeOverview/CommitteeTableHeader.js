@@ -30,7 +30,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
       {tableIds.map(upperLevel =>
         upperLevel.levels.map(level => (
           <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
-            <span>{t(level)}</span>
+            <span>{t(`overview:uniAnswerLevels:${level}`)}</span>
           </div>
         )),
       )}

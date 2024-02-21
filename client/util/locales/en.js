@@ -29,7 +29,6 @@ export default {
     bachelor: "Bachelor's programmes",
     master: "Master's programmes",
     doctoral: 'Doctoral programmes',
-    overallHeader: '',
     bachelorShort: 'Bachelor',
     masterShort: 'Master',
     doctoralShort: 'Doctoral',
@@ -314,6 +313,12 @@ export default {
     developmentTarget: 'Development target',
     arviointi: 'Committee',
     universityOverview: 'University overview',
+    uniAnswerLevels: {
+      bachelor: "Bachelor's programmes",
+      master: "Master's programmes",
+      doctoral: 'Doctoral programmes',
+      overall: '',
+    },
   },
 
   report: {

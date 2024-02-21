@@ -57,7 +57,7 @@ const CommitteeColorTable = React.memo(
     }
     let tableIds = [
       { title: 'university', levels: ['bachelor', 'master', 'doctoral'] },
-      { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'overallHeader'] },
+      { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'overall'] },
     ]
 
     if (selectedLevels) {
