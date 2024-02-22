@@ -5,7 +5,6 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
-import { useSelector } from 'react-redux'
 
 export default ({
   question,
@@ -16,11 +15,11 @@ export default ({
   allProgrammes,
   setActiveTab,
   setShowing,
-  level,
+  level = null,
+  form = 1,
 }) => {
   const { t } = useTranslation()
   const [toolTipData, setToolTipData] = useState(null)
-  const form = useSelector(state => state.filters.form)
 
   const colorsTotal = question => {
     if (!question || !answers) return null
@@ -110,7 +109,10 @@ export default ({
     setShowing(id)
     setActiveTab(0)
   }
-
+  const configs =
+    form === formKeys.EVALUATION_FACULTIES
+      ? { secondLabel: `overview:uniAnswerLevels:${level}` }
+      : { secondLabel: faculty }
   return (
     <div className="color-chart-area" key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
       <div className="color-pie-header">
@@ -118,7 +120,7 @@ export default ({
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
         <p>
-          <b>{faculty}</b>
+          <b>{t(configs.secondLabel)}</b>
         </p>
         <p>
           <b>{amountOfResponses()}</b>

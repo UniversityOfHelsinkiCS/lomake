@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin } from '@root/config/common'
+import { isAdmin, isSuperAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 
 import CustomModal from 'Components/Generic/CustomModal'
@@ -145,7 +145,7 @@ export default () => {
             <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary size="big">
               {t('overview:readAnswers')}
             </Button>
-            {moreThanFiveProgrammes && (
+            {isSuperAdmin(currentUser) && moreThanFiveProgrammes && (
               <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5" size="big">
                 {t('overview:compareAnswers')}
               </Button>

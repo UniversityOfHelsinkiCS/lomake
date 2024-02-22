@@ -78,6 +78,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
                           setActiveTab={setActiveTab}
                           setShowing={setShowing}
                           level={level}
+                          form={form}
                         />
                       )
                     })}
