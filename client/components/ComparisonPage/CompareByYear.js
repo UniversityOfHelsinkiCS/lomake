@@ -6,8 +6,7 @@ import * as _ from 'lodash'
 
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import QuestionList from 'Components/Generic/QuestionList'
-import useDebounce from 'Utilities/useDebounce'
-import { filteredProgrammes } from 'Utilities/common'
+import { formKeys } from '@root/config/data'
 import Question from './Question'
 import LabelOptions from './LabelOptions'
 import BarChart from './BarChart'
@@ -20,7 +19,50 @@ const getLabel = question => {
   return `${index}${question.label}`
 }
 
-const getTotalColors = ({ allAnswers, multipleYears, questionsList, questions, chosenKeys }) => {
+const checkFacultyColors = ({ questionsAnswers, chosenKeys, levels }) => {
+  const questionColors = {
+    green: 0,
+    yellow: 0,
+    red: 0,
+    emptyAnswer: 0,
+  }
+  let checkForData = false
+
+  questionsAnswers.forEach(a => {
+    if (chosenKeys.includes(a.key)) {
+      if (levels === 'allProgrammes') {
+        ;['bachelor', 'master', 'doctoral'].forEach(level => {
+          checkForData = true
+
+          questionColors[a.color[level]] += 1
+        })
+      } else {
+        checkForData = true
+        questionColors[a.color[levels]] += 1
+      }
+    }
+  })
+  return { colors: questionColors, checkForData }
+}
+
+const checkProgrammeColors = ({ questionsAnswers, chosenKeys }) => {
+  const questionColors = {
+    green: 0,
+    yellow: 0,
+    red: 0,
+    emptyAnswer: 0,
+  }
+  let checkForData = false
+  questionsAnswers.forEach(a => {
+    if (chosenKeys.includes(a.key)) {
+      checkForData = true
+      questionColors[a.color] += 1
+    }
+  })
+  return { colors: questionColors, checkForData }
+}
+
+const getTotalColors = ({ allAnswers, multipleYears, questionsList, questions, chosenKeys, levels, form }) => {
   if (!allAnswers) return null
   let total = []
   let checkForData = false
@@ -36,18 +78,16 @@ const getTotalColors = ({ allAnswers, multipleYears, questionsList, questions, c
         const question = questionsList.find(q => q.id === key)
         const questionLabel = getLabel(question)
         if (questions && questions.selected.includes(questionLabel)) {
-          const questionColors = {
-            green: 0,
-            yellow: 0,
-            red: 0,
-            emptyAnswer: 0,
+          let questionColors = {}
+          if (form === formKeys.EVALUATION_FACULTIES) {
+            const colorsAndCheck = checkFacultyColors({ questionsAnswers, chosenKeys, yearsColors, levels })
+            checkForData = colorsAndCheck.checkForData
+            questionColors = colorsAndCheck.colors
+          } else {
+            const colorsAndCheck = checkProgrammeColors({ questionsAnswers, chosenKeys })
+            checkForData = colorsAndCheck.checkForData
+            questionColors = colorsAndCheck.colors
           }
-          questionsAnswers.forEach(a => {
-            if (chosenKeys.includes(a.key)) {
-              checkForData = true
-              questionColors[a.color] += 1
-            }
-          })
           Object.keys(yearsColors).forEach(key => {
             yearsColors[key] = [...yearsColors[key], questionColors[key]]
           })
@@ -80,22 +120,34 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
   return mapped
 }
 
-const CompareByYear = ({ questionsList, usersProgrammes, allAnswers }) => {
+const CompareByYear = ({
+  questionsList,
+  usersProgrammes,
+  allAnswers,
+  programmes,
+  setPicked,
+  picked,
+  setFilter,
+  filter,
+}) => {
   const { t } = useTranslation()
   const [unit, setUnit] = useState('percentage')
   const [showingQuestion, setShowingQuestion] = useState(-1)
-  const [picked, setPicked] = useState([])
-  const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter, 200)
-  const lang = useSelector(state => state.language)
+
   const filters = useSelector(state => state.filters)
   const { multipleYears, questions } = filters
 
-  const programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
+  const chosenKeys = programmes.chosen.map(p => p.key || (filters.form === formKeys.EVALUATION_FACULTIES && p.code))
 
-  const chosenKeys = programmes.chosen.map(p => p.key)
-
-  const data = getTotalColors({ allAnswers, multipleYears, questionsList, questions, chosenKeys })
+  const data = getTotalColors({
+    allAnswers,
+    multipleYears,
+    questionsList,
+    questions,
+    chosenKeys,
+    levels: filters.level,
+    form: filters.form,
+  })
 
   if (!usersProgrammes || !allAnswers) return null
 

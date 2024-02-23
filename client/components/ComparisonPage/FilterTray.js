@@ -31,7 +31,6 @@ const FilterTray = ({ filter, setFilter }) => {
     const { value } = target
     setFilter(value)
   }
-
   return (
     <>
       <YearSelector multiple size="small" label={t('comparison:selectYears')} />

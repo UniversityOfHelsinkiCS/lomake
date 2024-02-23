@@ -258,7 +258,7 @@ export const filterByLevel = (usersProgrammes, level) => {
 
 export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilter, filters) => {
   if (!usersProgrammes) return { chosen: [], all: [] }
-  const { faculty, level, companion, doctoralSchool } = filters
+  const { faculty, level, companion, doctoralSchool, form } = filters
 
   const filteredByName = usersProgrammes.filter(p => {
     const prog = p.name[lang]
@@ -266,7 +266,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
   })
 
   const filteredByLevel = filteredByName.filter(p => {
-    if (level === 'allProgrammes') {
+    if (level === 'allProgrammes' || form === formKeys.EVALUATION_FACULTIES) {
       return true
     }
     if (level === 'international') {
@@ -423,11 +423,7 @@ export const allYears = oldAnswers => {
 // eslint-disable-next-line no-unused-vars
 export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadline, form }) => {
   // Special case for faculty evaluation for the moment when showing to all
-  if (
-    (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_PROGRAMMES) &&
-    !deadline &&
-    draftYear === 2023
-  ) {
+  if ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_PROGRAMMES) && draftYear === 2023) {
     if (tempAnswers && !tempAnswers.data) {
       return tempAnswers.data
     }
