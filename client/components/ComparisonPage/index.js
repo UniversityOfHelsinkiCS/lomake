@@ -27,6 +27,62 @@ import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import './ComparisonPage.scss'
 
+const answersForFaculty = ({
+  usersProgrammes,
+  year,
+  answers,
+  oldAnswers,
+  draftYear,
+  questionsList,
+  lang,
+  form,
+  deadline,
+}) => {
+  const answerMap = new Map()
+  const chosenKeys = usersProgrammes.map(p => p.key)
+  const selectedAnswers = answersByYear({
+    year,
+    tempAnswers: answers,
+    oldAnswers,
+    draftYear: draftYear && draftYear.year,
+    deadline,
+    form,
+  })
+  if (!selectedAnswers) return new Map()
+  selectedAnswers.forEach(programme => {
+    const key = programme.programme
+
+    if (chosenKeys.includes(key)) {
+      const { data } = programme
+      questionsList.forEach(question => {
+        let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        const name = programmeName(usersProgrammes, programme, lang)
+        let answer = ''
+        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+        colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
+
+        answerMap.set(question.id, colorsByProgramme)
+      })
+    }
+  })
+  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+  // So empty answers need to be added.
+  answerMap.forEach((value, key) => {
+    const answeredProgrammes = value.map(p => p.key)
+    const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
+    if (programmesMissing) {
+      programmesMissing.forEach(p => {
+        const earlierAnswers = answerMap.get(key)
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
+      })
+    }
+  })
+  return answerMap
+}
+
 const getAnswersByQuestions = ({
   chosenProgrammes,
   selectedAnswers,
@@ -165,18 +221,18 @@ export default () => {
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             form={filters.form}
-            programmes={programmes}
-            chosenAnswers={selectedAnswers}
             allAnswers={
               usersProgrammes
-                ? getAnswersByQuestions({
-                    chosenProgrammes: programmes.chosen,
-                    selectedAnswers,
-                    questionsList,
+                ? answersForFaculty({
                     usersProgrammes,
+                    year,
+                    answers,
+                    oldAnswers,
+                    draftYear,
+                    questionsList,
                     lang,
-                    t,
                     form: filters.form,
+                    deadline: nextDeadline,
                   })
                 : []
             }

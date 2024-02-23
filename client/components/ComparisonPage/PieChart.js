@@ -88,7 +88,6 @@ export default ({ question, answers, showEmpty, programmes, faculty, name, colum
     }
     setToolTipData(toolTip)
   }
-
   return (
     <div className={`color-chart-area-${columns}`}>
       <div className="color-pie-header">
