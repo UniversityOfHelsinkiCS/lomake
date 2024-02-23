@@ -200,10 +200,19 @@ const getAllUserHasAccessTo = async (req, res) => {
 
     const anyAccess = hasAnyAccess(req.user)
 
+    const mostRecentYear = await db.answer.findOne({
+      where: { year: { [db.Sequelize.Op.in]: [db.Sequelize.literal('SELECT MAX(year) FROM answers')] } },
+      order: [['year', 'DESC']],
+    })
+    const mostRecentYears = [mostRecentYear.year, mostRecentYear.year - 1]
     // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
     const data = await db.answer.findAll({
       where: {
-        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
+        [Op.or]: [
+          // Load only last two years answers
+          { programme: Object.keys(req.user.access), year: mostRecentYears },
+          anyAccess ? { form: formKeys.YEARLY_ASSESSMENT, year: mostRecentYears } : {},
+        ],
       },
     })
 
