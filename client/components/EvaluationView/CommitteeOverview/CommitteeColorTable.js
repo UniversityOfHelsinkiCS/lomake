@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Header } from 'semantic-ui-react'
+import { Loader, Header, Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems, answersByYear } from 'Utilities/common'
@@ -91,13 +91,12 @@ const CommitteeColorTable = React.memo(
                     className={`committee-table-theme-title-${gridColumnSize}`}
                     style={{
                       gridRow: index,
-                      textDecoration: 'underline',
-                      textDecorationColor: 'khaki',
                     }}
                     key={`${theme.title}`}
                     as="h2"
                   >
                     {index + 1}) {theme.title[lang]}
+                    <Divider />
                   </Header>
                 )}
                 <TableRow
