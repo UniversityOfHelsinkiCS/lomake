@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-16
+FROM registry.access.redhat.com/ubi8/nodejs-20
 
 ENV TZ=Europe/Helsinki
 
