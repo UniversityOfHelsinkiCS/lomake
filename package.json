@@ -88,7 +88,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^4.2.5",
     "minimist": "^1.2.8",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.1.0",
     "prettier": "^3.0.3",
     "sequelize-cli": "^5.5.1"
   },
