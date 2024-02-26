@@ -71,6 +71,12 @@ const CommitteeColorTable = React.memo(
 
       if (activeLevels.length > 0) {
         tableIds = tableIds.map(tableId => {
+          const allLevelsSelected = activeLevels.length === 3
+          if (tableId.title === 'arviointi' && allLevelsSelected) {
+            const tempLevels = activeLevels.concat('overall')
+            tableId.levels = tempLevels
+            return tableId
+          }
           tableId.levels = activeLevels
           return tableId
         })
