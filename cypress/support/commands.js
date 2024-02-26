@@ -132,7 +132,10 @@ Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24)
     .wait(500 * attempt)
     .find('[contenteditable]')
     .focus()
-    // TRUST ME THIS IS NEEDED
+  // TRUST ME THIS IS NEEDED
+  cy.get(`[data-cy=textarea-${questionId}]`)
+    .find('[contenteditable]')
+    .click()
     .type(`${textToBeTyped}${' '.repeat(flakyness)}`, { delay: 0 })
     .wait(100 * attempt)
 
