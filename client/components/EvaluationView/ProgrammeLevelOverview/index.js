@@ -53,7 +53,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes, null, year, form)
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes, year, form })
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {

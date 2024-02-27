@@ -359,6 +359,7 @@ const universityFormWritingGroups = [
   'hy-tine',
   'hy-tutkijakoulu-johtokunta',
   'grp-katselmus-arviointiryhma',
+  'hy-johtoryhma-ja-kansleri',
 ]
 
 const superAdminGroups = ['grp-toska']

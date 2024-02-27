@@ -97,7 +97,8 @@
       "cypress/*",
       "dev/*",
       "client/*"
-    ]
+    ],
+    "delay": 2500
   },
   "_moduleAliases": {
     "@root": ".",

@@ -117,13 +117,13 @@ export default () => {
     }
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(
+  const usersProgrammes = useVisibleOverviewProgrammes({
     currentUser,
     programmes,
     showAllProgrammes,
     faculty,
     dropdownFilter,
-  )
+  })
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
