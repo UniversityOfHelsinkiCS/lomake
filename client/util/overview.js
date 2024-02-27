@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { isAdmin } from '@root/config/common'
-import { formKeys } from '@root/config/data'
 
 const getOverviewProgrammesToShow = (programmes, access) => {
   const usersPermissionsEntries = Object.entries(access)
@@ -11,17 +10,9 @@ const getOverviewProgrammesToShow = (programmes, access) => {
   return programmes.filter(program => properAccess.includes(program.key))
 }
 
-export const useVisibleOverviewProgrammes = ({
-  currentUser,
-  programmes,
-  showAllProgrammes,
-  faculty,
-  dropdownFilter,
-  year,
-  form,
-}) =>
+export const useVisibleOverviewProgrammes = ({ currentUser, programmes, showAllProgrammes, faculty, dropdownFilter }) =>
   React.useMemo(() => {
-    if (isAdmin(currentUser.data) || (form === formKeys.EVALUATION_PROGRAMMES && year === 2023)) {
+    if (isAdmin(currentUser.data)) {
       return programmes
     }
     if (currentUser.data.access || currentUser.specialGroup) {
