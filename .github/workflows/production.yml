@@ -27,6 +27,8 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=production
+          extra-args: |
+            --ulimit nofile=4096:4096
 
       - name: Push to quay.io
         uses: redhat-actions/push-to-registry@v2
