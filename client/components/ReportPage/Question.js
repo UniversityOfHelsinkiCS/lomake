@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Accordion, Grid, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
+import QuestionTitle from './QuestionTitle'
 
 const ButtonPopup = ({ color, chosenColor, setChosenColor, t }) => (
   <Popup
@@ -75,7 +76,8 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                   return (
                     <div key={`${question.id}-${programme.key}`}>
                       <label className="answer-title">
-                        {programme.name} <span className={`answer-circle-${programme.color}`} />
+                        {programme.name}
+                        <QuestionTitle id={programme.id} answerColors={programme.color} />
                       </label>
                       <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                         {programme.answer &&

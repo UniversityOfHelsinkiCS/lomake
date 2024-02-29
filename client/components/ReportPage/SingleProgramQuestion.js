@@ -1,6 +1,7 @@
 import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
+import QuestionTitle from './QuestionTitle'
 
 const SingleProgramQuestion = ({ answers, question }) => {
   return (
@@ -39,7 +40,7 @@ const SingleProgramQuestion = ({ answers, question }) => {
             .map(programme => (
               <div key={`${question.id}-${programme.key}`}>
                 <label className="answer-title">
-                  {programme.name} <span className={`answer-circle-${programme.color}`} />
+                  {programme.name} <QuestionTitle name={programme.name} answerColors={programme.color} />
                 </label>
                 <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                   {programme.answer &&
