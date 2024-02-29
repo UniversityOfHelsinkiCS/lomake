@@ -30,11 +30,11 @@ describe('Yearly assessment form tests', () => {
     cy.visit('/')
     cy.wait(1000)
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`)
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(255, 255, 177)')
 
-    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`)
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing-single]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
   })

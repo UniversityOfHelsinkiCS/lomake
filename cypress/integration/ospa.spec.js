@@ -177,7 +177,7 @@ describe('SuperAdmin user tests', () => {
 
     cy.visit('/')
 
-    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`).should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing-single]`).should('have.class', 'square-green')
   })
 
   it('Multiple deadlines can be opened and all relevant forms are editable', () => {

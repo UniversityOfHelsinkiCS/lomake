@@ -119,7 +119,7 @@ const ColorTableCell = ({
   } else if (programmesAnswers[colorId] === undefined) {
     colorAnswer = null
   } else {
-    colorAnswer = { all: programmesAnswers[colorId] }
+    colorAnswer = { single: programmesAnswers[colorId] }
   }
 
   if (form === formKeys.EVALUATION_COMMTTEES && questionId.includes('_actions')) {
@@ -169,9 +169,9 @@ const ColorTableCell = ({
     if (!programmesOldAnswers) return null
 
     const oldColorAnswer = programmesOldAnswers[colorId]
-    if (!oldColorAnswer || oldColorAnswer === colorAnswer.all) return null
+    if (!oldColorAnswer || oldColorAnswer === colorAnswer.single) return null
 
-    const difference = colorScoreMap[colorAnswer.all] - colorScoreMap[oldColorAnswer]
+    const difference = colorScoreMap[colorAnswer.single] - colorScoreMap[oldColorAnswer]
 
     if (difference > 0) return 'angle up'
     if (difference < 0) return 'angle down'

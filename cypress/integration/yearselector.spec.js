@@ -18,15 +18,18 @@ describe("Previous year's answers", () => {
     cy.reload()
 
     cy.selectYear(defaultYears[1])
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).should(
+      'have.class',
+      'square-green',
+    )
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)
 
     cy.get('.customModal-content').find('.close').click()
     cy.selectYear(defaultYears[2])
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[2]}`)
   })
 
