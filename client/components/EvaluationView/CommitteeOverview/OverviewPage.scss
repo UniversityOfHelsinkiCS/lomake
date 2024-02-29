@@ -22,7 +22,7 @@ $QUESTION_COUNT: 6;
 
 @mixin committee-overview-basics {
   display: grid;
-  grid-template-columns: minmax(0,2fr) repeat($QUESTION_COUNT+2, minmax(0,1fr));
+  grid-template-columns: minmax(0,2fr) repeat(3, minmax(0,1fr)) minmax(0,1em)  repeat(5, minmax(0,1fr)) ;
   grid-auto-columns: 50px;
   grid-template-rows: 50px 50px;
   grid-row-gap: 25px;
@@ -35,14 +35,14 @@ $QUESTION_COUNT: 6;
   &-3 {
     @include committee-overview-basics;
   grid-template-rows: 100px 50px;
-  grid-template-columns: minmax(0,4fr) repeat(2, minmax(0,7fr));
+  grid-template-columns: minmax(0,4fr) repeat(1, minmax(0,6fr)) minmax(0,1em)  repeat(1, minmax(0,6fr)) ;
   grid-auto-rows: 100px;
   grid-auto-columns: 50px;
  }
  &-5 {
   @include committee-overview-basics;
   grid-template-rows: 70px 50px repeat(5, 100px) 200px;
-  grid-template-columns: minmax(0,2fr) repeat(5, minmax(0,2fr));
+  grid-template-columns: minmax(0,2fr) repeat(2, minmax(0,2fr)) minmax(0,1em)  repeat(3, minmax(0,2fr)) ;
   grid-auto-rows: 100px;
  }
  &-7 {
@@ -251,16 +251,16 @@ $QUESTION_COUNT: 6;
 
 .committee-table-header-3 {
   &-left-padding {
-    grid-column: 1;
+    grid-column: span 1;
   }
   &-university {
-    grid-column: 2;
+    grid-column: span 1;
   }
   &-committee {
-    grid-column: 3;
+    grid-column: span 1;
   }
   &-right-padding {
-    grid-column: 4;
+    grid-column: span 1;
   }
 }
 
@@ -285,15 +285,15 @@ $QUESTION_COUNT: 6;
 
 .committee-table-theme-title {
   &-7 {
-    grid-column: span 9;
+    grid-column: span 10;
     margin: 0 !important;
   }
   &-5 {
-    grid-column: span 6;
+    grid-column: span 7;
     margin: 0 !important;
   }
   &-3 {
-    grid-column: span 4;
+    grid-column: span 5;
     margin: 0 !important;
   }
 }

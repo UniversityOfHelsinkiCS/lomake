@@ -14,6 +14,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
           Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
         </Header>
       </div>
+      <div className={`committee-table-header-${gridColumnSize}-gap`} />
       <div className={`committee-table-header-${gridColumnSize}-committee`}>
         <Header style={{ height: 'max-content' }} block>
           {' '}
@@ -27,13 +28,16 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
           <Icon name="sort" />
         </div>
       </div>
-      {tableIds.map(upperLevel =>
-        upperLevel.levels.map(level => (
-          <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
-            <span>{t(`overview:uniAnswerLevels:${level}`)}</span>
-          </div>
-        )),
-      )}
+      {tableIds.map((upperLevel, index) => (
+        <>
+          {upperLevel.levels.map(level => (
+            <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
+              <span>{t(`overview:uniAnswerLevels:${level}`)}</span>
+            </div>
+          ))}
+          {index === 0 && <div className="committee-table-header-second-level-gap" />}
+        </>
+      ))}
     </>
   )
 }

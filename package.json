@@ -96,9 +96,10 @@
     "ignore": [
       "cypress/*",
       "dev/*",
-      "client/*"
+      "client/*",
+      "node_modules/*"
     ],
-    "delay": 2500
+    "delay": 1000
   },
   "_moduleAliases": {
     "@root": ".",

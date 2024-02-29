@@ -12,6 +12,14 @@ const ManageCell = ({ faculty, setProgramControlsToShow }) => (
   </div>
 )
 
+const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
+  if (topLevel === 'university' && gridColumnSize === 3 && index === 0) return true
+  if (topLevel === 'university' && gridColumnSize === 5 && index === 1) return true
+  if (topLevel === 'university' && gridColumnSize === 7 && index === 2) return true
+
+  return false
+}
+
 const TableRow = ({
   question,
   selectedAnswers,
@@ -21,12 +29,12 @@ const TableRow = ({
   setProgramControlsToShow,
   committee,
   showText,
+  gridColumnSize = null,
 }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
-
   const hasManagementAccess = program => {
     if (isAdmin(currentUser)) return true
     return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
@@ -47,7 +55,7 @@ const TableRow = ({
       </div>
 
       {tableIds.map(upperLevel => {
-        return upperLevel.levels.map(level => {
+        return upperLevel.levels.map((level, index) => {
           if (
             level === 'overall' &&
             question.id !== 'university_ease_of_study_actions' &&
@@ -55,21 +63,26 @@ const TableRow = ({
           ) {
             return <div key={`${question.id}-${upperLevel.title}-${level}`} />
           }
+          const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
           return (
-            <ColorTableCell
-              key={`${question.id}-${upperLevel.title}-${level}`}
-              programmesName={committee.name[lang]}
-              programmesKey={committee.code}
-              programmesAnswers={selectedAnswers}
-              programmesOldAnswers={null}
-              questionId={`${question.id}-${upperLevel.title}-${level}`}
-              questionType={question.type}
-              setModalData={setModalData}
-              form={form}
-              questionLabel={questionLabel}
-              questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
-              showText={showText}
-            />
+            <>
+              <ColorTableCell
+                key={`${question.id}-${upperLevel.title}-${level}`}
+                programmesName={committee.name[lang]}
+                programmesKey={committee.code}
+                programmesAnswers={selectedAnswers}
+                programmesOldAnswers={null}
+                questionId={`${question.id}-${upperLevel.title}-${level}`}
+                questionType={question.type}
+                setModalData={setModalData}
+                form={form}
+                questionLabel={questionLabel}
+                questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
+                showText={showText}
+                gridColumnSize={gridColumnSize}
+              />
+              {isGap && <div className="committee-table-square-gap" />}
+            </>
           )
         })
       })}
