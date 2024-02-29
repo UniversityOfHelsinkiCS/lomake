@@ -14,6 +14,7 @@ const ButtonPopup = ({ color, index, yearsIndex, buttons, filterColor }) => {
       content={`${`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}`}
       trigger={
         <button
+          aria-label="Choose color"
           key={color}
           name={color}
           type="button"
