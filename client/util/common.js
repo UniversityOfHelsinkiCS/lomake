@@ -373,7 +373,9 @@ export const getMeasuresAnswer = (data, rawId) => {
     let measures = ''
     let i = 1
     while (i < 6) {
-      if (data[`${questionId}_${i}_text`]) measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      if (data[`${questionId}_${i}_text`]) {
+        measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      }
       i++
     }
 
