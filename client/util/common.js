@@ -276,7 +276,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
   })
 
   const filteredByFaculty = filteredByLevel.filter(p => {
-    if (faculty === 'allFaculties') return true
+    if (faculty === 'allFaculties' || formKeys.EVALUATION_FACULTIES === filters.form) return true
     if (companion) {
       const companionFaculties = p.companionFaculties.map(f => f.code)
       if (companionFaculties.includes(faculty)) return true
