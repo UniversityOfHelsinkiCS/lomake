@@ -43,7 +43,7 @@ describe('ComparisonPage tests', () => {
 
     cy.get('[data-cy=doctoral-filter]').click()
     cy.get('[data-cy=faculty-filter]').click()
-    cy.get('span').contains('All faculties').click()
+    cy.get('a').contains('All faculties').click()
     cy.get('[data-cy=comparison-responses-faculty-programme_identity_text]').contains(
       `/ ${helpers.getDoctoralProgrammeCount()}`,
     )

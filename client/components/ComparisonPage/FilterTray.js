@@ -11,13 +11,13 @@ import LevelFilter from 'Components/Generic/LevelFilter'
 import FormFilter from 'Components/Generic/FormFilter'
 
 const getCompanionFilter = ({ faculty, level }) => {
-  if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
+  if (faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
     return <CompanionFilter />
   return null
 }
 
 const getDoctoralSchoolFilter = ({ faculty, level }) => {
-  if (faculty === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
+  if (faculty[0] === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
   return null
 }
 

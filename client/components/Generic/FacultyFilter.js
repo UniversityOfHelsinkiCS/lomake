@@ -35,11 +35,13 @@ const FacultyFilter = ({ size, label }) => {
   const getOptions = () => {
     const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
     return facultiesWithAll.concat(
-      faculties.map(f => ({
-        key: f.code,
-        value: f.code,
-        text: f.name[lang],
-      })),
+      faculties
+        .filter(f => f.code !== 'HTEST' && f.code !== 'UNI')
+        .map(f => ({
+          key: f.code,
+          value: f.code,
+          text: f.name[lang],
+        })),
     )
   }
   return (
