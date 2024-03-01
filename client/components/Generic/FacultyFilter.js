@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Select } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
@@ -10,11 +10,26 @@ const FacultyFilter = ({ size, label }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-  const faculty = useSelector(({ filters }) => filters.faculty)
+  const selectedFaculties = useSelector(({ filters }) => filters.faculty)
 
   const handleChange = (e, { value }) => {
     dispatch(clearLevelSpecificFilters())
-    dispatch(setFaculty(value))
+    if (value.length < 1) {
+      if (selectedFaculties[0] === 'allFaculties') {
+        return
+      }
+      dispatch(setFaculty(['allFaculties']))
+      return
+    }
+    const tempNewValue = value
+    if (value[0] === 'allFaculties') {
+      tempNewValue.shift()
+    }
+    if (tempNewValue.includes('allFaculties')) {
+      dispatch(setFaculty(['allFaculties']))
+      return
+    }
+    dispatch(setFaculty(tempNewValue))
   }
 
   const getOptions = () => {
@@ -27,17 +42,17 @@ const FacultyFilter = ({ size, label }) => {
       })),
     )
   }
-
   return (
     <div className={`faculty-filter-${size}`}>
       <label>{label}</label>
-      <Select
+      <Dropdown
         data-cy="faculty-filter"
         fluid
         selection
+        multiple
         options={faculties ? getOptions() : []}
         onChange={handleChange}
-        value={faculty}
+        value={selectedFaculties}
       />
     </div>
   )

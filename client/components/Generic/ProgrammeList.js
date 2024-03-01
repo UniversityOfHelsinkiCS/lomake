@@ -7,14 +7,14 @@ import { sortedItems } from 'Utilities/common'
 import './Generic.scss'
 import { formKeys } from '@root/config/data'
 
-const Programme = ({ p, lang, faculty, form }) => {
+const Programme = ({ p, lang, selectedFaculties, form }) => {
   return (
     <Fragment key={p.key}>
       {p.name[lang]}
       {form &&
         form !== formKeys.EVALUATION_FACULTIES &&
-        p.primaryFaculty.code !== faculty &&
-        faculty !== 'allFaculties' && (
+        !selectedFaculties.includes(p.primaryFaculty.code) &&
+        !selectedFaculties.includes('allFaculties') && (
           <span className="list-companion-icon">
             <Icon name="handshake outline" />
           </span>
@@ -26,7 +26,7 @@ const Programme = ({ p, lang, faculty, form }) => {
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const faculty = useSelector(({ filters }) => filters.faculty)
+  const selectedFaculties = useSelector(({ filters }) => filters.faculty)
   const form = useSelector(state => state.filters.form)
 
   const addToList = programme => {
@@ -34,7 +34,6 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
       setPicked(() => [...picked, programme])
     }
   }
-
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
@@ -55,7 +54,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     key={pKey}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} faculty={faculty} />
+                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} />
                   </p>
                 )
               )
@@ -76,7 +75,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     key={pKey}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} faculty={faculty} form={form} />
+                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} form={form} />
                   </p>
                 )
               )

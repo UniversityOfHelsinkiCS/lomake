@@ -45,7 +45,7 @@ export const setForm = form => ({
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
-  faculty: 'allFaculties',
+  faculty: ['allFaculties'],
   level: 'allProgrammes',
   year: '',
   multipleYears: [],
