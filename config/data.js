@@ -121,9 +121,9 @@ const facultyList = [
   {
     code: 'H74',
     name: {
-      fi: 'Humanistinen tiedekunta, ruotsinkielinen',
-      en: 'Faculty of Arts, Swedish',
-      se: 'Humanistiska fakulteten, svenska',
+      fi: 'Svenska social- och kommunalhögskolan',
+      en: 'Swedish School of Social Science',
+      se: 'Svenska social- och kommunalhögskolan',
     },
   },
   {
