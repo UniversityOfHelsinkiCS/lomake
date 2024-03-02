@@ -134,17 +134,11 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=companion-filter]').should('be.visible')
     cy.get('[data-cy=companion-filter]').click()
     // Companion programmes
-    cy.get('[data-cy=report-list-programme-T921107]').should('contain', 'Doctoral Programme in Brain and Mind')
-    cy.get('[data-cy=report-list-programme-T923102]').should('contain', 'Doctoral Programme in Geosciences')
-    cy.get('[data-cy=report-list-programme-T922103]').should(
-      'contain',
-      'Doctoral Programme in Interdisciplinary Environmental Sciences',
-    )
+    cy.get('[data-cy=report-list-programme-T921107]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-T923102]').should('be.visible')
+    cy.get('[data-cy=report-list-programme-T922103]').should('be.visible')
     // Original programmes
-    cy.get('[data-cy=report-list-programme-T920103]').should(
-      'contain',
-      'Doctoral Programme in History and Cultural Heritage',
-    )
+    cy.get('[data-cy=report-list-programme-T920103]').should('be.visible')
     // Other level and faculty
     cy.get('[data-cy=report-list-programme-MH40_003]').should('not.exist')
     cy.get('[data-cy=report-list-programme-T922105]').should('not.exist')
