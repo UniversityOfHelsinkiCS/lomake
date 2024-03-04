@@ -61,11 +61,12 @@ export default () => {
                           return 0
                         })
 
-                        .map(({ title, actions }) => {
+                        .map(({ index, title, actions }) => {
                           return (
                             <div key={`${title}-${actions}`}>
                               <Accordion.Title
-                                className={`accordion-title-${title}`}
+                                className={`accordion-title-${index}`}
+                                data-cy={`accordion-title-${index}`}
                                 active={accordionsOpen[title] === true}
                                 onClick={() =>
                                   setAccordionsOpen({ ...accordionsOpen, [title]: !accordionsOpen[title] })
@@ -75,7 +76,8 @@ export default () => {
                                 <span style={{ fontSize: '22px' }}> {title}</span>
                               </Accordion.Title>
                               <Accordion.Content
-                                className={`accordion-content-${title}`}
+                                className={`accordion-content-${index}`}
+                                data-cy={`accordion-content-${index}`}
                                 key={title}
                                 active={accordionsOpen[title] === true}
                               >

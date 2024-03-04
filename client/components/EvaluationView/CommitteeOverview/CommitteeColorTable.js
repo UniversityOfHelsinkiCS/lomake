@@ -92,7 +92,7 @@ const CommitteeColorTable = React.memo(
       <div className={`overview-color-grid-committee-${gridColumnSize}`}>
         <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} />
         <div className="committee-table-header-second-level-right-padding" />
-        {questions.map(theme => {
+        {questions.map((theme, indexTopLevel) => {
           return theme.parts.map((part, index) => {
             if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
             return (
@@ -106,7 +106,7 @@ const CommitteeColorTable = React.memo(
                     key={`${theme.title}`}
                     as="h2"
                   >
-                    {index + 1}) {theme.title[lang]}
+                    {indexTopLevel + 1}) {theme.title[lang]}
                     <Divider />
                   </Header>
                 )}

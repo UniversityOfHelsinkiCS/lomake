@@ -19,7 +19,7 @@ const getActionsAnswerForUniversity = (data, id) => {
           actionActions = cleanText(actionData.actions)
         }
         if (actionData.actions.length > 0 || actionData.title.length > 0) {
-          actions = actions.concat({ title: actionAreas, actions: actionActions })
+          actions = actions.concat({ index: i, title: actionAreas, actions: actionActions })
         }
       }
       i++
@@ -50,6 +50,7 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, 
       <div
         onClick={() => setModalData(tempModalData)}
         className="square-actions"
+        data-cy={`${questionId}`}
         style={{ background: colors.background_blue }}
       >
         <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>

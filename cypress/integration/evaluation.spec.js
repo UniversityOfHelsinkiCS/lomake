@@ -224,6 +224,51 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('not.exist')
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('not.exist')
     })
+
+    it('Test that actions are saved', () => {
+      cy.login(cypressSuperAdmin)
+      cy.visit('/')
+      // Create new deadline
+
+      cy.get('[data-cy=nav-admin]').click()
+      cy.contains('Deadline settings').click()
+
+      cy.createDeadline(defaultYears[0], 'Katselmus - yliopisto')
+      cy.get('[data-cy=form-6-deadline]').contains('14.')
+
+      // Go to form and write answers
+      const hyTineUser = 'cypressHyTineUser'
+      cy.login(hyTineUser)
+      cy.visit('/')
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University level').click()
+      cy.wait(100)
+      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-development-area-1']").type(
+        'Bachelor: This is a development area',
+      )
+      cy.wait(100)
+      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-action-1']").type(
+        'Bachelor: This is action',
+      )
+      cy.wait(100)
+      cy.get('[data-cy=university_ease_of_study_actions-university-bachelor-add-action-button]').click()
+      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-development-area-2']").type(
+        'Bachelor: This is also development area',
+      )
+      cy.wait(100)
+      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-action-2']").type(
+        'Bachelor: This is second action',
+      )
+      cy.wait(100)
+
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University overview').click()
+
+      cy.get('[data-cy=university_ease_of_study_actions-university-bachelor]').click()
+      cy.get("[data-cy='accordion-title-1']").contains('Bachelor: This is a development area')
+      cy.get("[data-cy='accordion-title-1']").click()
+      cy.get("[data-cy='accordion-content-1']").contains('Bachelor: This is action')
+    })
   })
 
   // Test that written answers can be seen by toggling the arrow button
