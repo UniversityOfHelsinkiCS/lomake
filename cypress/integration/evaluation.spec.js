@@ -88,7 +88,143 @@ describe('Evaluation forms tests', () => {
     })
   })
 
-  context('Answering evaluation university', () => {})
+  context('Answering evaluation university', () => {
+    it('Test the traffic lights and text answers are saved', () => {
+      cy.login(cypressSuperAdmin)
+      cy.visit('/')
+      // Create new deadline
+
+      cy.get('[data-cy=nav-admin]').click()
+      cy.contains('Deadline settings').click()
+
+      cy.createDeadline(defaultYears[0], 'Katselmus - yliopisto')
+      cy.get('[data-cy=form-6-deadline]').contains('14.')
+
+      // Go to form and write answers
+      const hyTineUser = 'cypressHyTineUser'
+      cy.login(hyTineUser)
+      cy.visit('/')
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University level').click()
+      cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
+      cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").click()
+      cy.get("[data-cy='color-negative-student_admittance_university-university-doctoral']").click()
+
+      cy.typeInEditor('student_admittance_university-university-bachelor', 'ONE: Bachelor is really good')
+      cy.typeInEditor('student_admittance_university-university-master', 'ONE: Master is doing okay')
+      cy.typeInEditor('student_admittance_university-university-doctoral', 'TINE: Doctoral is not doing so good')
+
+      cy.reload()
+
+      cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").should(
+        'have.class',
+        'selected-animated',
+      )
+      cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").should(
+        'have.class',
+        'selected-animated',
+      )
+      cy.get("[data-cy='color-negative-student_admittance_university-university-doctoral']").should(
+        'have.class',
+        'selected-animated',
+      )
+
+      cy.get("[data-cy='editing-area-student_admittance_university-university-bachelor']").contains(
+        'ONE: Bachelor is really good',
+      )
+      cy.get("[data-cy='editing-area-student_admittance_university-university-master']").contains(
+        'ONE: Master is doing okay',
+      )
+      cy.get("[data-cy='editing-area-student_admittance_university-university-doctoral']").contains(
+        'TINE: Doctoral is not doing so good',
+      )
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University overview').click()
+
+      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should(
+        'have.css',
+        'background-color',
+        'rgb(157, 255, 157)',
+      )
+      cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should(
+        'have.css',
+        'background-color',
+        'rgb(255, 255, 177)',
+      )
+      cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should(
+        'have.css',
+        'background-color',
+        'rgb(255, 127, 127)',
+      )
+    })
+
+    it('Test that overview page level filter works', () => {
+      cy.login(cypressSuperAdmin)
+      cy.visit('/')
+      // Create new deadline
+
+      cy.get('[data-cy=nav-admin]').click()
+      cy.contains('Deadline settings').click()
+
+      cy.createDeadline(defaultYears[0], 'Katselmus - yliopisto')
+      cy.get('[data-cy=form-6-deadline]').contains('14.')
+
+      // Go to form and write answers
+      const hyTineUser = 'cypressHyTineUser'
+      cy.login(hyTineUser)
+      cy.visit('/')
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University level').click()
+      cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
+      cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").click()
+      cy.get("[data-cy='color-negative-student_admittance_university-university-doctoral']").click()
+
+      cy.typeInEditor('student_admittance_university-university-bachelor', 'ONE: Bachelor is really good')
+      cy.typeInEditor('student_admittance_university-university-master', 'ONE: Master is doing okay')
+      cy.typeInEditor('student_admittance_university-university-doctoral', 'TINE: Doctoral is not doing so good')
+
+      cy.get("[data-cy='color-positive-student_admittance_university-arviointi-bachelor']").click()
+      cy.get("[data-cy='color-neutral-student_admittance_university-arviointi-master']").click()
+      cy.get("[data-cy='color-negative-student_admittance_university-arviointi-doctoral']").click()
+
+      cy.typeInEditor('student_admittance_university-arviointi-bachelor', 'ONE: Bachelor is really good')
+      cy.typeInEditor('student_admittance_university-arviointi-master', 'ONE: Master is doing okay')
+      cy.typeInEditor('student_admittance_university-arviointi-doctoral', 'TINE: Doctoral is not doing so good')
+
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('University overview').click()
+
+      // At start all levels are visible
+      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('be.visible')
+      // ----------------
+
+      // Choose bachelor level
+      cy.get('[data-cy=committee-level-filter-bachelor]').click()
+      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
+      // Other levels shouldn't be visible
+      cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('not.exist')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('not.exist')
+      cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('not.exist')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('not.exist')
+
+      // Choose master level
+      cy.get('[data-cy=committee-level-filter-master]').click()
+
+      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('be.visible')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('be.visible')
+      // Doctoral shouldn't be visible
+      cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('not.exist')
+      cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('not.exist')
+    })
+  })
 
   // Test that written answers can be seen by toggling the arrow button
 

@@ -35,7 +35,7 @@ const FacultyColorTable = React.memo(
     let year = 2023
 
     if (nextDeadline.find(d => d.form === form)) {
-      year = nextDeadline.find(d => d.form === form).year
+      year = draftYear.year
     }
 
     useEffect(() => {

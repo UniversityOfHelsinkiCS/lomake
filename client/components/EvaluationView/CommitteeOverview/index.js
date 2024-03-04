@@ -114,6 +114,7 @@ export default () => {
                   toggle
                   key={level}
                   className="committee-level-filter"
+                  data-cy={`committee-level-filter-${level}`}
                   onClick={() => handleSelectedLevels(level)}
                   label={t(level)}
                 />

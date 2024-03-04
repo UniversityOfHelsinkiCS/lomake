@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
@@ -45,7 +45,6 @@ const TableRow = ({
   if (question.id.includes('_actions')) {
     questionLabel = t('overview:developmentTarget')
   }
-
   return (
     <React.Fragment key={question.id}>
       <div className="table-container-row-link-committee">
@@ -65,9 +64,8 @@ const TableRow = ({
           }
           const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
           return (
-            <>
+            <Fragment key={`${question.id}-${upperLevel.title}-${level}`}>
               <ColorTableCell
-                key={`${question.id}-${upperLevel.title}-${level}`}
                 programmesName={committee.name[lang]}
                 programmesKey={committee.code}
                 programmesAnswers={selectedAnswers}
@@ -82,7 +80,7 @@ const TableRow = ({
                 gridColumnSize={gridColumnSize}
               />
               {isGap && <div className="committee-table-square-gap" />}
-            </>
+            </Fragment>
           )
         })
       })}

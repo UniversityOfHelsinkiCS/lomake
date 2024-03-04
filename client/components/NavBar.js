@@ -80,7 +80,7 @@ const GoToEvaluationButton = ({ user }) => {
               to="/evaluation-university/"
               name="big-boss"
             >
-              Yliopistotason yhteenveto
+              {t('overview:universityOverview')}
             </Dropdown.Item>
           ) : null}
         </Dropdown.Menu>
