@@ -205,7 +205,7 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
   const allOldAnswers = useSelector(state => state.oldAnswers)
 
   // filter data for only correct form
-  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
   const tempAnswers = allTempAnswers?.data ? allTempAnswers?.data.filter(answer => answer.form === form) : []
   const oldAnswers = allOldAnswers?.data ? allOldAnswers?.data.filter(answer => answer.form === form) : []
 

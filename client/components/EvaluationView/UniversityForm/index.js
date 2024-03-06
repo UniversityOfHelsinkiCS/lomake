@@ -24,10 +24,10 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (!formDeadline) return true
+  if (formDeadline?.form !== form) return true
   if (!writeAccess) return true
 
   return false
@@ -128,7 +128,7 @@ const CommitteeFormView = ({ room, formString }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const currentRoom = useSelector(state => state.room)
 
-  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
@@ -149,6 +149,7 @@ const CommitteeFormView = ({ room, formString }) => {
     year,
     formDeadline,
     writeAccess: hasRights(user),
+    form,
   })
 
   useEffect(() => {

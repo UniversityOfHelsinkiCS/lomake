@@ -33,7 +33,7 @@ const FacultyColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
     const [showDataByProgramme] = useState(false)
 
-    const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+    const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
     const year = getYearToShow({ draftYear, nextDeadline, form })
 

@@ -13,10 +13,10 @@ import { getYearToShow } from 'Utilities/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, ready }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, ready, form }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (!formDeadline) return true
+  if (formDeadline?.form !== form) return true
   if (ready) return true
   return false
 }
@@ -45,7 +45,7 @@ const DegreeReformIndividual = () => {
   useEffect(() => {
     if (formData.pending) return
     dispatch(getSingleUsersAnswers())
-    if (formShouldBeViewOnly({ draftYear, year, formDeadline, ready: formData.data.ready })) {
+    if (formShouldBeViewOnly({ draftYear, year, formDeadline, ready: formData.data.ready, form: formNumber })) {
       dispatch(setViewOnly(true))
     } else {
       dispatch(setViewOnly(false))

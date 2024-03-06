@@ -23,11 +23,11 @@ import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   // This is used since faculty doesn't have stuyprogramme
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (!formDeadline) return true
+  if (formDeadline?.form !== form) return true
   if (!writeAccess) return true
   return false
 }
@@ -134,7 +134,7 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 

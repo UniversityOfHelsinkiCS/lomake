@@ -76,7 +76,7 @@ const EvaluationFormView = ({ room, formString }) => {
   const viewingOldAnswers = false // no old asnwers to watch
   const summaries = useSelector(state => state.summaries)
 
-  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
