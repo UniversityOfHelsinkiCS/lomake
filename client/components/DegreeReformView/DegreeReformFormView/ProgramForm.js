@@ -116,10 +116,10 @@ const DegreeReformForm = ({ programmeKey, formType, questionData }) => {
 
         return (
           <Section
+            key={`section-${section.id}-${formType}-${lang}`}
             id={section.id}
             title={section.title[lang]}
             number={romanize(index)}
-            key={`section-${section.id}-${formType}-${lang}`}
             programmeKey={programmeKey}
             formType={formType}
           >
