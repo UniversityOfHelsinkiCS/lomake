@@ -85,6 +85,32 @@ describe('Evaluation forms tests', () => {
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
         'Answers are saved automatically except for text fields. Final day for answering the form:',
       )
+      cy.typeInEditor(
+        'student_admittance_faculty',
+        'Bachelor is kinda okay \n Master is doing okay \n Doctoral is not doing so good',
+      )
+      cy.get("[data-cy='color-neutral-student_admittance_faculty_bachelor']").click()
+      cy.get("[data-cy='color-neutral-student_admittance_faculty_master']").click()
+      cy.get("[data-cy='color-negative-student_admittance_faculty_doctoral']").click()
+
+      cy.get('[data-cy=nav-evaluation]').click()
+      cy.contains('Faculty level').click()
+
+      cy.get('[data-cy=H50-student_admittance_faculty-bachelor]').should(
+        'have.css',
+        'background-color',
+        'rgb(255, 255, 177)',
+      )
+      cy.get('[data-cy=H50-student_admittance_faculty-master]').should(
+        'have.css',
+        'background-color',
+        'rgb(255, 255, 177)',
+      )
+      cy.get('[data-cy=H50-student_admittance_faculty-doctoral]').should(
+        'have.css',
+        'background-color',
+        'rgb(255, 127, 127)',
+      )
     })
   })
 
