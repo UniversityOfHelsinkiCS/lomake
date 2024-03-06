@@ -2,14 +2,19 @@ $QUESTION_COUNT: 6;
 
 @import '../../../assets/colors.scss';
 
-.wide-header {
+@mixin committee-wide-header-basics {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 2fr 2fr 1fr;
   align-items: center;
   column-gap: 2rem;
   margin: 2rem 1rem;
   margin-bottom: 3rem;
+}
+
+
+.wide-header {
+  @include committee-wide-header-basics;
   &-committee {
+    @include committee-wide-header-basics;
     grid-template-columns: 1fr 7fr 1fr;
   }
 }
