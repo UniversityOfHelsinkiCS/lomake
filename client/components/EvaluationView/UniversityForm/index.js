@@ -16,17 +16,20 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './index.scss'
-import { colors, isEvaluationUniversityUser } from 'Utilities/common'
+import { colors, getYearToShow, isEvaluationUniversityUser } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
+  if (!formDeadline) return true
+  if (!writeAccess) return true
+
   return false
 }
 
@@ -127,10 +130,7 @@ const CommitteeFormView = ({ room, formString }) => {
 
   const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-  let year = 2023 // the next time form is filled is in 2026
-  if (formDeadline) {
-    year = draftYear.year
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const committee = committeeList.find(c => c.code === room) || null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
@@ -141,14 +141,14 @@ const CommitteeFormView = ({ room, formString }) => {
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
-  }, [lang, room])
+    dispatch(setYear(year))
+  }, [lang, room, year])
 
   const viewOnly = formShouldBeViewOnly({
     draftYear,
     year,
     formDeadline,
-    form,
-    user,
+    writeAccess: hasRights(user),
   })
 
   useEffect(() => {

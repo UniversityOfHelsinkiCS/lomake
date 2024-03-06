@@ -671,8 +671,18 @@ export const getFormViewRights = ({
   if (viewingOldAnswers) return true
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
+  if (!formDeadline) return true
   return false
+}
+
+export const getYearToShow = ({ nextDeadline, form, draftYear }) => {
+  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+
+  let year = 2023
+  if (formDeadline) {
+    year = draftYear.year
+  }
+  return year
 }
 
 export const reversedPointsInDegreeReform = [

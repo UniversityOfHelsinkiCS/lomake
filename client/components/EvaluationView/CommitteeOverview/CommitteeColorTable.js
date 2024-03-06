@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Header, Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems, answersByYear } from 'Utilities/common'
+import { sortedItems, answersByYear, getYearToShow } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
@@ -23,12 +23,7 @@ const CommitteeColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
     const committee = committeeList[0]
 
-    const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
-
-    let year = 2023
-    if (formDeadline) {
-      year = draftYear.year
-    }
+    const year = getYearToShow({ draftYear, nextDeadline, form })
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())

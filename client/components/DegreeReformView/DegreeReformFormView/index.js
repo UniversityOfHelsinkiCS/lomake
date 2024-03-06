@@ -7,14 +7,13 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
-import { colors, getFormViewRights } from 'Utilities/common'
+import { colors, getFormViewRights, getYearToShow } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import bigWheel from 'Assets/big_wheel.jpg'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-
 import DegreeReformForm from './ProgramForm'
 
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
@@ -35,13 +34,9 @@ const DegreeReformFormView = ({ room }) => {
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const currentRoom = useSelector(state => state.room)
 
-  let year = 2023
-
   const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-  if (formDeadline) {
-    year = draftYear.year
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const readAccess = hasSomeReadAccess(user) || isAdmin(user)

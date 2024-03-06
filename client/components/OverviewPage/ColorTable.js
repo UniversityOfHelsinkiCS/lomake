@@ -108,14 +108,14 @@ const ColorTable = React.memo(
 
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
-    let year = useSelector(({ filters }) => filters.year)
+    const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
 
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
-      if (form === formKeys.EVALUATION_PROGRAMMES && year === 2023) {
+      if (form === formKeys.EVALUATION_PROGRAMMES && year) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())
@@ -128,10 +128,6 @@ const ColorTable = React.memo(
         setSorter('key')
       }
     }, [facultyView])
-
-    if (form !== 1) {
-      year = 2023
-    }
 
     const selectedAnswers = answersByYear({
       year,

@@ -16,16 +16,18 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
-import { colors, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
+import { colors, getYearToShow, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, writeAccess }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess }) => {
+  // This is used since faculty doesn't have stuyprogramme
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
+  if (!formDeadline) return true
   if (!writeAccess) return true
   return false
 }
@@ -134,10 +136,7 @@ const FacultyFormView = ({ room, formString }) => {
 
   const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-  let year = 2023
-  if (formDeadline) {
-    year = draftYear.year
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const hasReadRights =
     user.access[faculty.code] ||
@@ -149,7 +148,8 @@ const FacultyFormView = ({ room, formString }) => {
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
-  }, [lang, room])
+    dispatch(setYear(year))
+  }, [lang, room, year])
 
   useEffect(() => {
     if (!faculty || !form) return

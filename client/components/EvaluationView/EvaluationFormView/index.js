@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Downloads from 'Components/FormView/Downloads'
 
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
-import { colors, isFormLocked } from 'Utilities/common'
+import { colors, getFormViewRights, getYearToShow } from 'Utilities/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
@@ -18,30 +18,10 @@ import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import calendarImage from 'Assets/calendar.jpg'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
+import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from './EvaluationForm'
 
 import { evaluationQuestions as questions, yearlyQuestions } from '../../../questionData'
-
-// TO FIX yearly and degree form uses same checker. refactor to common tools
-const formShouldBeViewOnly = ({
-  accessToTempAnswers,
-  programme,
-  writeAccess,
-  viewingOldAnswers,
-  draftYear,
-  year,
-  formDeadline,
-  form,
-}) => {
-  if (!accessToTempAnswers) return true
-  if (isFormLocked(form, programme.lockedForms)) return true
-  if (!writeAccess) return true
-  if (viewingOldAnswers) return true
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  return false
-}
 
 const handleMeasures = (yearData, relatedQuestion) => {
   let count = 0
@@ -98,10 +78,7 @@ const EvaluationFormView = ({ room, formString }) => {
 
   const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-  let year = 2023
-  if (formDeadline) {
-    year = draftYear.year
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`
@@ -115,14 +92,15 @@ const EvaluationFormView = ({ room, formString }) => {
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
     dispatch(getProgramme(room))
-  }, [lang, room])
+    dispatch(setYear(year))
+  }, [lang, room, year])
 
   useEffect(() => {
     if (!programme || !form) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     dispatch(getProgrammeOldAnswersAction(room))
     if (
-      formShouldBeViewOnly({
+      getFormViewRights({
         accessToTempAnswers,
         programme,
         writeAccess,
@@ -202,7 +180,7 @@ const EvaluationFormView = ({ room, formString }) => {
           </div>
           <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
           <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-            {t('evaluation')} 2023
+            {t('evaluation')} {year}
           </h3>
 
           <div className="hide-in-print-mode">

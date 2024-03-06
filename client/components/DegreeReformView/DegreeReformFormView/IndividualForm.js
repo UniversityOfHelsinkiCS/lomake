@@ -9,6 +9,7 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 
 import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
+import { getYearToShow } from 'Utilities/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
 
@@ -38,10 +39,7 @@ const DegreeReformIndividual = () => {
 
   const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === formNumber) : null
 
-  let year = 2023
-  if (formDeadline) {
-    year = draftYear.year
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form: formNumber })
 
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {
