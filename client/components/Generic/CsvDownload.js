@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { formKeys } from '@root/config/data'
+import { facultyList, formKeys } from '@root/config/data'
 
 import { useTranslation } from 'react-i18next'
 import {
@@ -54,17 +54,29 @@ const handleData = ({
     },
     [[], []],
   )
-  csvData[0].push(t('faculty'))
-  csvData[0].push(t('programmeHeader'))
-  csvData[1].push('//')
-  csvData[1].push('//')
-  csvData[0].reverse()
-  csvData[1].reverse()
+
+  if (form === formKeys.EVALUATION_PROGRAMMES) {
+    csvData[0].push(t('faculty'))
+    csvData[0].push(t('programmeHeader'))
+    csvData[1].push('//')
+    csvData[1].push('//')
+    csvData[0].reverse()
+    csvData[1].reverse()
+  } else if (form === formKeys.EVALUATION_FACULTIES) {
+    csvData[0].push(t('faculty'))
+    csvData[1].push('//')
+    csvData[0].reverse()
+    csvData[1].reverse()
+  }
 
   const getWrittenAnswers = rawData => {
     if (!Object.keys(rawData).length) return [] // May be empty initially
 
-    const answersArray = csvData[1].slice(2).map(questionId => {
+    let sliceStart = 2
+    if (form === formKeys.EVALUATION_FACULTIES) {
+      sliceStart = 1
+    }
+    const answersArray = csvData[1].slice(sliceStart).map(questionId => {
       let validValues = []
 
       // for order-type questions
@@ -115,7 +127,11 @@ const handleData = ({
   }
 
   const getProgrammeFaculty = programme => {
-    const searched = usersProgrammes.find(p => p.key === programme.programme)
+    let searched = usersProgrammes.find(p => p.key === programme.programme)
+    if (!searched) {
+      searched = facultyList.find(a => a.code === programme.programme)
+      if (searched) return searched.name[lang]
+    }
     if (!searched) return ''
     return searched.primaryFaculty.name[lang]
   }
@@ -145,7 +161,10 @@ const handleData = ({
       else if (wantedData === 'colors') answersArray = getColorAnswers(programme.data)
       const name = getProgrammeName(usersProgrammes, programme, lang)
       const faculty = getProgrammeFaculty(programme)
-      const dataRow = [name, faculty, ...answersArray]
+      let dataRow = [name, faculty, ...answersArray]
+      if (form === formKeys.EVALUATION_FACULTIES) {
+        dataRow = [faculty, ...answersArray]
+      }
       csvData = [...csvData, dataRow]
     })
   }

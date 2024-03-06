@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,7 @@ import useDebounce from 'Utilities/useDebounce'
 
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import CsvDownload from 'Components/Generic/CsvDownload'
 import FacultyColorTable from './FacultyColorTable'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyCellModal from './FacultyCellModal'
@@ -19,6 +20,7 @@ export default () => {
   const debouncedFilter = useDebounce(filter, 200)
   const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  const [showCsv, setShowCsv] = useState(false)
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
@@ -103,6 +105,21 @@ export default () => {
                 {t('overview:compareAnswers')}
               </Button>
             )}
+            <Dropdown
+              data-cy="csv-download"
+              className="button basic gray csv-download"
+              direction="left"
+              text={t('overview:csvDownload')}
+              onClick={() => setShowCsv(true)}
+            >
+              {showCsv ? (
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <CsvDownload wantedData="written" view="overview" form={form} />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              ) : null}
+            </Dropdown>
           </div>
           <div style={{ marginTop: '1em' }}>
             <FacultyColorTable
