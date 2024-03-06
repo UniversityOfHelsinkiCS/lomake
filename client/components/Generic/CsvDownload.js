@@ -121,20 +121,18 @@ const handleData = ({
 
   const getColorAnswers = ({ rawData, level }) => {
     const answerArray = []
-    csvData[1].slice(2).forEach(questionId => {
-      let color
-      if (form === formKeys.EVALUATION_PROGRAMMES) {
-        color = rawData[`${questionId}_light`]
-      } else if (form === formKeys.EVALUATION_FACULTIES) {
+    csvData[1].slice(2).map(questionId => {
+      let color = rawData[`${questionId}_light`]
+      if (form === formKeys.EVALUATION_FACULTIES) {
         color = {
           bachelor: rawData[`${questionId}_bachelor_light`],
           master: rawData[`${questionId}_master_light`],
           doctoral: rawData[`${questionId}_doctoral_light`],
         }
-        return answerArray.push(t(color[level]))
+        return t(color[level])
       }
-      if (color) return answerArray.push(t(color))
-      return answerArray.push('')
+      if (color) return t(color)
+      return ''
     })
 
     return answerArray
@@ -153,8 +151,8 @@ const handleData = ({
   if (view === 'form') {
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
-    else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-    if (form === formKeys.EVALUATION_FACULTIES) {
+    else if (wantedData === 'colors') answersArray = getColorAnswers({ rawData: programmeData })
+    if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_COMMTTEES) {
       const facultyName = programme.name[lang]
       const levels = 'Levels'
       const dataRow = [facultyName, levels, ...answersArray]

@@ -13,6 +13,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 import { colors, getFormViewRights } from 'Utilities/common'
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
+
 import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
@@ -94,7 +95,7 @@ const FormView = ({ room }) => {
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  return singleProgramPending ? (
+  return singleProgramPending || !programme ? (
     <Loader active />
   ) : (
     <div className="form-container">
