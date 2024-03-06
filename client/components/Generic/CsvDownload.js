@@ -56,18 +56,21 @@ const handleData = ({
   )
 
   if (form === formKeys.EVALUATION_PROGRAMMES) {
-    csvData[0].push(t('faculty'))
     csvData[0].push(t('programmeHeader'))
-    csvData[1].push('//')
-    csvData[1].push('//')
-    csvData[0].reverse()
-    csvData[1].reverse()
-  } else if (form === formKeys.EVALUATION_FACULTIES) {
     csvData[0].push(t('faculty'))
     csvData[1].push('//')
-    csvData[0].reverse()
-    csvData[1].reverse()
+  } else if (form === formKeys.EVALUATION_FACULTIES) {
+    if (wantedData === 'colors') {
+      csvData[0].push('Levels Header')
+      csvData[0].push(t('faculty'))
+      csvData[1].push('//')
+    } else if (wantedData === 'written') {
+      csvData[0].push(t('faculty'))
+    }
   }
+  csvData[1].push('//')
+  csvData[0].reverse()
+  csvData[1].reverse()
 
   const getWrittenAnswers = rawData => {
     if (!Object.keys(rawData).length) return [] // May be empty initially
@@ -116,11 +119,22 @@ const handleData = ({
     return answersArray
   }
 
-  const getColorAnswers = rawData => {
-    const answerArray = csvData[1].slice(2).map(questionId => {
-      const color = rawData[`${questionId}_light`]
-      if (color) return t(color)
-      return ''
+  const getColorAnswers = ({ rawData, level }) => {
+    const answerArray = []
+    csvData[1].slice(2).forEach(questionId => {
+      let color
+      if (form === formKeys.EVALUATION_PROGRAMMES) {
+        color = rawData[`${questionId}_light`]
+      } else if (form === formKeys.EVALUATION_FACULTIES) {
+        color = {
+          bachelor: rawData[`${questionId}_bachelor_light`],
+          master: rawData[`${questionId}_master_light`],
+          doctoral: rawData[`${questionId}_doctoral_light`],
+        }
+        return answerArray.push(t(color[level]))
+      }
+      if (color) return answerArray.push(t(color))
+      return answerArray.push('')
     })
 
     return answerArray
@@ -128,7 +142,7 @@ const handleData = ({
 
   const getProgrammeFaculty = programme => {
     let searched = usersProgrammes.find(p => p.key === programme.programme)
-    if (!searched) {
+    if (form) {
       searched = facultyList.find(a => a.code === programme.programme)
       if (searched) return searched.name[lang]
     }
@@ -140,10 +154,10 @@ const handleData = ({
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
     else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
-    if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_COMMTTEES) {
-      const name = programme.name[lang]
-      const faculty = programme.name[lang]
-      const dataRow = [name, faculty, ...answersArray]
+    if (form === formKeys.EVALUATION_FACULTIES) {
+      const facultyName = programme.name[lang]
+      const levels = 'Levels'
+      const dataRow = [facultyName, levels, ...answersArray]
       csvData = [...csvData, dataRow]
     } else {
       const name = programme.name[lang]
@@ -157,13 +171,23 @@ const handleData = ({
 
     selectedAnswers.forEach(programme => {
       let answersArray = []
-      if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
-      else if (wantedData === 'colors') answersArray = getColorAnswers(programme.data)
       const name = getProgrammeName(usersProgrammes, programme, lang)
       const faculty = getProgrammeFaculty(programme)
+      if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
+      else if (wantedData === 'colors') answersArray = getColorAnswers({ rawData: programme.data })
       let dataRow = [name, faculty, ...answersArray]
       if (form === formKeys.EVALUATION_FACULTIES) {
-        dataRow = [faculty, ...answersArray]
+        if (wantedData === 'written') {
+          dataRow = [faculty, ...answersArray]
+        }
+        if (wantedData === 'colors') {
+          ;['bachelor', 'master', 'doctoral'].forEach(level => {
+            const facultyColorAnswers = getColorAnswers({ rawData: programme.data, level })
+            dataRow = [faculty, level, ...facultyColorAnswers]
+            csvData = [...csvData, dataRow]
+          })
+          return
+        }
       }
       csvData = [...csvData, dataRow]
     })
