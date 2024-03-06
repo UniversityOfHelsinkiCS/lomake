@@ -19,13 +19,14 @@ const CommitteeColorTable = React.memo(
     const answers = useSelector(state => state.tempAnswers)
     const oldAnswers = useSelector(state => state.oldAnswers)
     const lang = useSelector(state => state.language)
-    let year = 2023
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
     const committee = committeeList[0]
 
-    if (nextDeadline.find(d => d.form === form)) {
-      // This is for tests
+    const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+
+    let year = 2023
+    if (formDeadline) {
       year = draftYear.year
     }
 

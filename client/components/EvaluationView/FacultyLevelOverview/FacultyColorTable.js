@@ -32,14 +32,15 @@ const FacultyColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
     const [showDataByProgramme] = useState(false)
 
-    let year = 2023
+    const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-    if (nextDeadline.find(d => d.form === form)) {
+    let year = 2023
+    if (formDeadline) {
       year = draftYear.year
     }
 
     useEffect(() => {
-      if (!nextDeadline || !nextDeadline.find(d => d.form === form)) {
+      if (!formDeadline) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())

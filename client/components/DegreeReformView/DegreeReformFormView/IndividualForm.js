@@ -24,6 +24,7 @@ const DegreeReformIndividual = () => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formData = useSelector(state => state.form)
   const [message, setMessage] = useState(null)
   const { uid } = user
@@ -35,10 +36,12 @@ const DegreeReformIndividual = () => {
     document.title = `${t('degree-reform-individual')}`
   }, [lang])
 
-  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === formNumber) : null
+  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === formNumber) : null
 
-  const year = formDeadline ? 2024 : 2023
+  let year = 2023
+  if (formDeadline) {
+    year = draftYear.year
+  }
 
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {

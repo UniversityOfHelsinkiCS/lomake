@@ -123,14 +123,15 @@ const CommitteeFormView = ({ room, formString }) => {
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  let year = 2023 // the next time form is filled is in 2026
 
-  if (nextDeadline.find(d => d.form === form)) {
-    // This is for tests
+  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
+
+  let year = 2023 // the next time form is filled is in 2026
+  if (formDeadline) {
     year = draftYear.year
   }
+
   const committee = committeeList.find(c => c.code === room) || null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
   const facultyProgrammeData = useSelector(state => state.summaries)

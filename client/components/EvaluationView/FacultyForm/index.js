@@ -119,11 +119,9 @@ const FacultyFormView = ({ room, formString }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const componentRef = useRef()
-  const oldAnswerYears = useSelector(state => state.oldAnswers.years)
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
 
   const faculties = useSelector(state => state.faculties.data)
@@ -134,14 +132,11 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  let year = 2023 // the next time form is filled is in 2026
+  const formDeadline = nextDeadline ? nextDeadline.filter(dl => dl.form === form) : null
 
-  if (draftYear) {
-    // This is for tests
+  let year = 2023
+  if (formDeadline) {
     year = draftYear.year
-  } else if (oldAnswerYears) {
-    const [latestYear] = oldAnswerYears.sort((a, b) => b - a)
-    year = latestYear
   }
 
   const hasReadRights =
