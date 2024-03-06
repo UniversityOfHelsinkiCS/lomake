@@ -108,7 +108,7 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className="wide-header">
+          <div className="wide-header-committee">
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em' }}>
               {Object.keys(selectedLevels).map(level => (
