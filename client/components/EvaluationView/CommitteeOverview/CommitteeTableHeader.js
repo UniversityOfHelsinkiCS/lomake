@@ -9,16 +9,16 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
     <>
       <div className={`committee-table-header-${gridColumnSize}-left-padding`} />
       <div className={`committee-table-header-${gridColumnSize}-university`}>
-        <Header block style={{ height: 'max-content' }}>
+        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
-          Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
+          {t('overview:uniTableHeaderHY')}
         </Header>
       </div>
       <div className={`committee-table-header-${gridColumnSize}-gap`} />
       <div className={`committee-table-header-${gridColumnSize}-committee`}>
-        <Header style={{ height: 'max-content' }} block>
+        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
-          Arviointiryhmän arvio ja toimenpide-ehdotukset
+          {t('overview:uniTableHeaderCommittee')}
         </Header>
       </div>
       <div className={`committee-table-header-${gridColumnSize}-right-padding`} />

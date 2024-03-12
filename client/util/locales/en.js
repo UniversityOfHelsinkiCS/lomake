@@ -317,8 +317,10 @@ export default {
       bachelor: "Bachelor's programmes",
       master: "Master's programmes",
       doctoral: 'Doctoral programmes',
-      overall: '',
+      overall: 'General assessments and recommendations for corrective actions',
     },
+    uniTableHeaderHY: 'University of Helsinki evaluation and development areas',
+    uniTableHeaderCommittee: 'Committee evaluation and development areas',
   },
 
   report: {

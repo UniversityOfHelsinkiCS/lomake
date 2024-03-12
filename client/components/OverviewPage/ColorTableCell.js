@@ -72,7 +72,7 @@ const ColorTableCell = ({
     if (programmesKey === 'UNI') {
       tempQuestionId = questionData.rawQuestionId
       const whichLevel = questionId.match('bachelor|master|doctoral')[0]
-      tempSubtitle = t(whichLevel)
+      tempSubtitle = t(`common:${whichLevel}`)
     }
     return {
       header: questions.reduce((acc, cur) => {

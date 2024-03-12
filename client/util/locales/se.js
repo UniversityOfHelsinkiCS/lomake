@@ -312,6 +312,8 @@ export default {
       doctoral: 'Doktorandprogrammen',
       overall: '',
     },
+    uniTableHeaderHY: '',
+    uniTableHeaderCommittee: '',
   },
 
   report: {
