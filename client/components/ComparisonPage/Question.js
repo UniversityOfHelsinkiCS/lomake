@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-
 import { romanize } from 'Utilities/common'
+import QuestionTitle from '../ReportPage/QuestionTitle'
 
 const generateRandomKey = value => `${value}-${Math.random()}`
 
@@ -105,9 +105,11 @@ const Question = ({ answers, question, handleClick, showing, form }) => {
                         if (colors[yearsIndex] === 'all' || programme.color === colors[yearsIndex]) {
                           return (
                             <div key={generateRandomKey(`${programme}-${year}`)}>
-                              <label className="answer-title">
-                                {programme.name} <span className={`answer-circle-${programme.color}`} />
-                              </label>
+                              <QuestionTitle
+                                id={question.id}
+                                answerColors={programme.color}
+                                programmeName={programme.name}
+                              />
                               <ul className="answer-list" data-cy={`compare-question-content-${question.id}`}>
                                 {programme.answer &&
                                   programme.answer.split('\n').map(row => (

@@ -76,10 +76,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                 if (chosenColor === 'all' || programme.color === chosenColor) {
                   return (
                     <div key={`${question.id}-${programme.key}`}>
-                      <label className="answer-title">
-                        {programme.name}
-                        <QuestionTitle id={programme.id} answerColors={programme.color} />
-                      </label>
+                      <QuestionTitle id={programme.id} answerColors={programme.color} programmeName={programme.name} />
                       <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                         {programme.answer &&
                           programme.answer.split('\n').map((row, index) => (
