@@ -18,7 +18,7 @@ const PDFDownload = ({ componentRef }) => {
 
   const setExportTitle = () => {
     const formText = t('generic:pdfExportText')
-    const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
+    const facultyText = faculty[0] === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
     const levelText = t(level)
     setTitle(`${formText}_${year}_${facultyText}_${levelText}`)
   }
