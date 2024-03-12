@@ -22,6 +22,11 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
   return null
 }
 
+const getLevelFilter = ({ filters }) => {
+  if (filters.form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
+  return null
+}
+
 const FilterTray = ({ filter, setFilter }) => {
   const { t } = useTranslation()
   const filters = useSelector(state => state.filters)
@@ -40,7 +45,7 @@ const FilterTray = ({ filter, setFilter }) => {
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
           {form !== formKeys.EVALUATION_FACULTIES && <FacultyFilter size="small" label={t('report:facultyFilter')} />}
-          <LevelFilter />
+          {getLevelFilter({ filters })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
           <ProgrammeFilter

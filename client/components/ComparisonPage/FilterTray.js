@@ -9,6 +9,7 @@ import FacultyFilter from 'Components/Generic/FacultyFilter'
 import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
 import LevelFilter from 'Components/Generic/LevelFilter'
 import FormFilter from 'Components/Generic/FormFilter'
+import { formKeys } from '@root/config/data'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
@@ -18,6 +19,17 @@ const getCompanionFilter = ({ faculty, level }) => {
 
 const getDoctoralSchoolFilter = ({ faculty, level }) => {
   if (faculty[0] === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
+  return null
+}
+
+const getLevelFilter = ({ filters }) => {
+  if (filters.form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
+  return null
+}
+
+const getFacultyFilter = ({ filters, t }) => {
+  if (filters.form !== formKeys.EVALUATION_FACULTIES)
+    return <FacultyFilter size="small" label={t('comparison:filterFaculties')} />
   return null
 }
 
@@ -37,8 +49,8 @@ const FilterTray = ({ filter, setFilter }) => {
       <FormFilter />
       {usersProgrammes && (
         <>
-          <FacultyFilter size="small" label={t('comparison:filterFaculties')} />
-          <LevelFilter />
+          {getFacultyFilter({ filters, t })}
+          {getLevelFilter({ filters })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
           <ProgrammeFilter
