@@ -294,7 +294,7 @@ const CommitteeFormView = ({ room, formString }) => {
               </div>
             </div>
             <Downloads programme={committee} componentRef={componentRef} form={form} />
-            <div style={{ paddingBottom: '6em' }}>
+            <div id="university-form" style={{ paddingBottom: '6em' }}>
               <EvaluationForm
                 programmeKey={committee.code}
                 questions={questions}
