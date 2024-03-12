@@ -14,7 +14,7 @@ import SingleProgramPieChart from './SingleProgramPieChart'
 import './ComparisonPage.scss'
 import FormFilter from '../Generic/FormFilter'
 
-const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers, form }) => {
+const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const filters = useSelector(state => state.filters)
@@ -79,7 +79,7 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers, form }) 
         <Grid.Row>
           <Grid.Column width={16}>
             <YearSelector size="small" />
-            <FormFilter />
+            <FormFilter version="compareByFaculty" />
             <LevelFilter comparison />
           </Grid.Column>
         </Grid.Row>
@@ -100,11 +100,11 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers, form }) 
             </div>
           </Grid.Column>
           <Grid.Column>
-            {form !== formKeys.EVALUATION_FACULTIES && (
+            {filters.form !== formKeys.EVALUATION_FACULTIES && (
               <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
             )}
             <small>{t('comparison:noAccessToAll')}</small>
-            {faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
+            {faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
               <CompanionFilter />
             )}
           </Grid.Column>

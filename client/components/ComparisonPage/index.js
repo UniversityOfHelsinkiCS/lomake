@@ -211,8 +211,23 @@ export default () => {
     return all
   }
 
-  const panes = [
+  const compareByFacultyAnswers = usersProgrammes
+    ? answersForFaculty({
+        usersProgrammes,
+        year,
+        answers,
+        oldAnswers,
+        draftYear,
+        questionsList,
+        lang,
+        form: filters.form,
+        deadline: nextDeadline,
+      })
+    : []
+
+  let panes = [
     {
+      index: 0,
       menuItem: t('comparison:reportHeader:byFaculty'),
       render: () => (
         <Tab.Pane>
@@ -220,27 +235,13 @@ export default () => {
             year={year}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
-            form={filters.form}
-            allAnswers={
-              usersProgrammes
-                ? answersForFaculty({
-                    usersProgrammes,
-                    year,
-                    answers,
-                    oldAnswers,
-                    draftYear,
-                    questionsList,
-                    lang,
-                    form: filters.form,
-                    deadline: nextDeadline,
-                  })
-                : []
-            }
+            allAnswers={compareByFacultyAnswers}
           />
         </Tab.Pane>
       ),
     },
     {
+      index: 1,
       menuItem: t('comparison:reportHeader:byYear'),
       render: () => (
         <Tab.Pane>
@@ -259,6 +260,11 @@ export default () => {
       ),
     },
   ]
+
+  if (filters.form === formKeys.EVALUATION_FACULTIES) {
+    const paneOptions = panes.filter(pane => pane.index === 1)
+    panes = paneOptions
+  }
 
   if (!user || !usersProgrammes) return null
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
