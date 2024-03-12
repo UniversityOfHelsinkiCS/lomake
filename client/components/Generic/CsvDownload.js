@@ -138,6 +138,21 @@ const handleData = ({
     return answerArray
   }
 
+  const getOverviewDataForFaculty = ({ faculty, answersArray, data }) => {
+    let dataRow = []
+    if (wantedData === 'written') {
+      dataRow = [faculty, ...answersArray]
+    }
+    if (wantedData === 'colors') {
+      ;['bachelor', 'master', 'doctoral'].forEach(level => {
+        const facultyColorAnswers = getColorAnswers({ rawData: data, level })
+        dataRow = [faculty, level, ...facultyColorAnswers]
+        csvData = [...csvData, dataRow]
+      })
+    }
+    return dataRow
+  }
+
   const getProgrammeFaculty = programme => {
     let searched = usersProgrammes.find(p => p.key === programme.programme)
     if (form) {
@@ -175,17 +190,7 @@ const handleData = ({
       else if (wantedData === 'colors') answersArray = getColorAnswers({ rawData: programme.data })
       let dataRow = [name, faculty, ...answersArray]
       if (form === formKeys.EVALUATION_FACULTIES) {
-        if (wantedData === 'written') {
-          dataRow = [faculty, ...answersArray]
-        }
-        if (wantedData === 'colors') {
-          ;['bachelor', 'master', 'doctoral'].forEach(level => {
-            const facultyColorAnswers = getColorAnswers({ rawData: programme.data, level })
-            dataRow = [faculty, level, ...facultyColorAnswers]
-            csvData = [...csvData, dataRow]
-          })
-          return
-        }
+        dataRow = getOverviewDataForFaculty({ faculty, answersArray, data: programme.data })
       }
       csvData = [...csvData, dataRow]
     })
