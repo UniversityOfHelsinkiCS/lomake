@@ -54,9 +54,8 @@ const PastAnswersView = ({ programmeKey }) => {
       return []
     }
 
-    const selectedAnswers = forProgramme.filter(a => a.year === 2023)
-
     const result = [2019, 2020, 2021, 2022, 2023].map(year => {
+      const selectedAnswers = forProgramme.filter(a => a.year === year)
       const data = {
         year,
         answers: answersByQuestions({
