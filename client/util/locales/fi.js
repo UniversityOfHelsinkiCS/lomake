@@ -76,6 +76,9 @@ export default {
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',
     showAllFacultyProgrammes: 'Näytä myös yhteisohjelmat',
+    formFilter: {
+      evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
+    },
   },
 
   aboutPage: {
