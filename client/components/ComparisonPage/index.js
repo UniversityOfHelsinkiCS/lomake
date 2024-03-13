@@ -16,6 +16,7 @@ import {
 } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import { setForm } from 'Utilities/redux/filterReducer'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { isAdmin } from '@root/config/common'
@@ -74,6 +75,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
+    dispatch(getAnswersActionAll())
     document.title = `${t('comparison:compare')}`
   }, [lang])
 

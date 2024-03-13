@@ -193,10 +193,12 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    const recentThreeYears = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
-    // recentThreeYears = [2019, 2020, 2021, 2022, 2023]
+    let years = [2019, 2020, 2021, 2022, 2023]
+    if (!req.path.endsWith('/all')) {
+      years = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
+    }
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const data = await db.answer.findAll({ where: { year: recentThreeYears } })
+      const data = await db.answer.findAll({ where: { year: years } })
       return res.send(data)
     }
 
@@ -206,8 +208,8 @@ const getAllUserHasAccessTo = async (req, res) => {
     const data = await db.answer.findAll({
       where: {
         [Op.or]: [
-          { programme: Object.keys(req.user.access), year: recentThreeYears },
-          anyAccess ? { year: recentThreeYears, form: formKeys.YEARLY_ASSESSMENT } : {},
+          { programme: Object.keys(req.user.access), year: years },
+          anyAccess ? { year: years, form: formKeys.YEARLY_ASSESSMENT } : {},
         ],
       },
     })
