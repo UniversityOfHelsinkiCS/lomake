@@ -185,7 +185,6 @@ export default () => {
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
   if (usersProgrammes.length < 1) return <NoPermissions t={t} />
 
-  const defaultTab = filters.form === formKeys.EVALUATION_FACULTIES ? 0 : 0
   if (filters.form === formKeys.EVALUATION_FACULTIES) {
     const paneOptions = panes.filter(pane => pane.index === 1)
     panes = paneOptions
@@ -203,12 +202,7 @@ export default () => {
           <h1>{t('comparison:compare')}</h1>
         </Grid.Column>
       </Grid>
-      <Tab
-        defaultActiveIndex={defaultTab}
-        className="comparison tab"
-        menu={{ secondary: true, pointing: true }}
-        panes={panes}
-      />
+      <Tab className="comparison tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </div>
   )
 }
