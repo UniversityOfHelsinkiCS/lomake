@@ -19,14 +19,6 @@ const FormFilter = ({ version = null }) => {
   const filterForm = useSelector(({ filters }) => filters.form)
 
   useEffect(() => {
-    const url = window.location.href
-    const facStart = url.indexOf('form=')
-    if (facStart !== -1) {
-      const formNumber = Number(url.substring(facStart + 5))
-      dispatch(setForm(formNumber))
-    } else {
-      dispatch(setForm(1))
-    }
     if (version === 'compareByFaculty') {
       const filteredOptions = options.filter(option => option.value !== 5)
       setOptions(filteredOptions)

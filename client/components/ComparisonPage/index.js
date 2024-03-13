@@ -5,21 +5,17 @@ import { Link } from 'react-router-dom'
 import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { formKeys, facultyList } from '@root/config/data'
+import { formKeys } from '@root/config/data'
 import {
   allYears,
-  cleanText,
-  getMeasuresAnswer,
   modifiedQuestions,
-  programmeNameByKey as programmeName,
   sortedItems,
-  getSelectionAnswer,
-  getOrderAnswer,
-  getActionsAnswer,
   filteredProgrammes,
   answersByYear,
+  answersByQuestions,
 } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
+import { setForm } from 'Utilities/redux/filterReducer'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { isAdmin } from '@root/config/common'
@@ -37,9 +33,8 @@ const answersForFaculty = ({
   lang,
   form,
   deadline,
+  t,
 }) => {
-  const answerMap = new Map()
-  const chosenKeys = usersProgrammes.map(p => p.key)
   const selectedAnswers = answersByYear({
     year,
     tempAnswers: answers,
@@ -48,102 +43,15 @@ const answersForFaculty = ({
     deadline,
     form,
   })
-  if (!selectedAnswers) return new Map()
-  selectedAnswers.forEach(programme => {
-    const key = programme.programme
-
-    if (chosenKeys.includes(key)) {
-      const { data } = programme
-      questionsList.forEach(question => {
-        let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
-        const name = programmeName(usersProgrammes, programme, lang)
-        let answer = ''
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-        colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
-
-        answerMap.set(question.id, colorsByProgramme)
-      })
-    }
+  const answerMap = answersByQuestions({
+    chosenProgrammes: usersProgrammes,
+    selectedAnswers,
+    questionsList,
+    usersProgrammes,
+    lang,
+    form,
+    t,
   })
-  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-  // So empty answers need to be added.
-  answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => p.key)
-    const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-    if (programmesMissing) {
-      programmesMissing.forEach(p => {
-        const earlierAnswers = answerMap.get(key)
-        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-      })
-    }
-  })
-  return answerMap
-}
-
-const getAnswersByQuestions = ({
-  chosenProgrammes,
-  selectedAnswers,
-  questionsList,
-  usersProgrammes,
-  lang,
-  t,
-  form,
-}) => {
-  const answerMap = new Map()
-  // if the 'programme' is faculty use -> code
-  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
-  selectedAnswers.forEach(programme => {
-    const key = programme.programme
-
-    if (chosenKeys.includes(key)) {
-      const { data } = programme
-      questionsList.forEach(question => {
-        let color = null
-        if (form === formKeys.EVALUATION_FACULTIES) {
-          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
-          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
-          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
-          color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
-        } else {
-          color = data[question.color] ? data[question.color] : 'emptyAnswer'
-        }
-        let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-        let name = programmeName(usersProgrammes, programme, lang)
-        if (form === formKeys.EVALUATION_FACULTIES) {
-          name = facultyList.find(f => f.code === programme.programme).name[lang]
-        }
-        let answer = ''
-
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
-        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
-        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-        answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
-
-        answerMap.set(question.id, answersByProgramme)
-      })
-    }
-  })
-
-  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-  // So empty answers need to be added.
-  answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
-    const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-    if (programmesMissing) {
-      programmesMissing.forEach(p => {
-        const earlierAnswers = answerMap.get(key)
-        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
-        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
-      })
-    }
-  })
-
   return answerMap
 }
 
@@ -159,7 +67,6 @@ export default () => {
 
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
-  const year = useSelector(({ filters }) => filters.year)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const filters = useSelector(state => state.filters)
@@ -170,15 +77,18 @@ export default () => {
     document.title = `${t('comparison:compare')}`
   }, [lang])
 
+  useEffect(() => {
+    const url = window.location.href
+    const facStart = url.indexOf('form=')
+    if (facStart !== -1) {
+      const formNumber = Number(url.substring(facStart + 5))
+      dispatch(setForm(formNumber))
+    } else {
+      dispatch(setForm(1))
+    }
+  }, [])
+
   if (!answers || answers?.pending) return <div />
-  const selectedAnswers = answersByYear({
-    year,
-    tempAnswers: answers,
-    oldAnswers,
-    draftYear: draftYear && draftYear.year,
-    deadline: nextDeadline,
-    form: filters.form,
-  })
 
   const years = allYears(oldAnswers)
 
@@ -192,11 +102,20 @@ export default () => {
     // Handles all filtering
     programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
   }
+
   const answersForYears = () => {
     const all = years.map(year => {
+      const selectedAnswers = answersByYear({
+        year,
+        tempAnswers: answers,
+        oldAnswers,
+        draftYear: draftYear && draftYear.year,
+        deadline: nextDeadline,
+        form: filters.form,
+      })
       const data = {
         year,
-        answers: getAnswersByQuestions({
+        answers: answersByQuestions({
           chosenProgrammes: programmes.chosen,
           selectedAnswers,
           questionsList,
@@ -214,7 +133,7 @@ export default () => {
   const compareByFacultyAnswers = usersProgrammes
     ? answersForFaculty({
         usersProgrammes,
-        year,
+        year: filters.year,
         answers,
         oldAnswers,
         draftYear,
@@ -222,6 +141,7 @@ export default () => {
         lang,
         form: filters.form,
         deadline: nextDeadline,
+        t,
       })
     : []
 
@@ -232,7 +152,7 @@ export default () => {
       render: () => (
         <Tab.Pane>
           <CompareByFaculty
-            year={year}
+            year={filters.year}
             questionsList={questionsList}
             usersProgrammes={usersProgrammes ? sortedItems(usersProgrammes, 'name', lang) : []}
             allAnswers={compareByFacultyAnswers}
@@ -261,17 +181,18 @@ export default () => {
     },
   ]
 
+  if (!user || !usersProgrammes) return null
+  if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
+
+  const defaultTab = filters.form === formKeys.EVALUATION_FACULTIES ? 0 : 0
   if (filters.form === formKeys.EVALUATION_FACULTIES) {
     const paneOptions = panes.filter(pane => pane.index === 1)
     panes = paneOptions
   }
 
-  if (!user || !usersProgrammes) return null
-  if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/')
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
-
   return (
-    <div className="comparison">
+    <div key={filters.form} className="comparison">
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="comparison filter-container">
         <Grid.Column width={10}>
@@ -282,7 +203,12 @@ export default () => {
           <h1>{t('comparison:compare')}</h1>
         </Grid.Column>
       </Grid>
-      <Tab className="comparison tab" menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab
+        defaultActiveIndex={defaultTab}
+        className="comparison tab"
+        menu={{ secondary: true, pointing: true }}
+        panes={panes}
+      />
     </div>
   )
 }

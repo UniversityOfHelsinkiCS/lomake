@@ -6,7 +6,7 @@ import _ from 'lodash'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
-import { formKeys } from '../../config/data'
+import { formKeys, facultyList } from '../../config/data'
 
 import {
   yearlyQuestions,
@@ -691,5 +691,71 @@ export const reversedPointsInDegreeReform = [
   'bachelor_programme_starting_amount_is_suitable',
   'question-9-4',
 ]
+
+export const answersByQuestions = ({
+  form,
+  usersProgrammes,
+  selectedAnswers,
+  chosenProgrammes,
+  questionsList,
+  lang,
+  t,
+}) => {
+  if (!selectedAnswers) {
+    return {}
+  }
+  const answerMap = new Map()
+
+  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
+
+  if (!selectedAnswers) return new Map()
+  selectedAnswers.forEach(programme => {
+    const key = programme.programme
+    if (chosenKeys.includes(key)) {
+      const { data } = programme
+      questionsList.forEach(question => {
+        let color = null
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
+          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
+          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
+          color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
+        } else {
+          color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        }
+        let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+        let name = programmeNameByKey(usersProgrammes, programme, lang)
+
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          name = facultyList.find(f => f.code === programme.programme).name[lang]
+        }
+        let answer = ''
+        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
+        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
+        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
+        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+        answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
+        answerMap.set(question.id, answersByProgramme)
+      })
+    }
+  })
+  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+  // So empty answers need to be added.
+  answerMap.forEach((value, key) => {
+    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
+    const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
+    if (programmesMissing) {
+      programmesMissing.forEach(p => {
+        const earlierAnswers = answerMap.get(key)
+        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
+      })
+    }
+  })
+
+  return answerMap
+}
 
 export * from '@root/config/common'

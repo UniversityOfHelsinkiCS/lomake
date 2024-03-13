@@ -6,9 +6,9 @@ const QuestionTitle = ({ id, answerColors, programmeName }) => {
   if (typeof answerColors === 'object' && Object.keys(answerColors).length === 3) {
     const trafficLights = ['bachelor', 'master', 'doctoral'].map((level, index) => {
       return (
-        <label className="answer-title">
+        <label key={`${id}-${level}`} className="answer-title">
           {index === 0 && <span>{programmeName}</span>}
-          <div key={`${id}-${level}`} className="question-title-faculty">
+          <div className="question-title-faculty">
             <span>{t(level)}</span>
             <span className={`answer-circle-${answerColors[level]}`} />
           </div>
@@ -18,8 +18,8 @@ const QuestionTitle = ({ id, answerColors, programmeName }) => {
     return trafficLights
   }
   return (
-    <label className="answer-title">
-      <div key={id} className="question-title-programme">
+    <label key={id} className="answer-title">
+      <div className="question-title-programme">
         <span>{programmeName}</span>
         <span className={`answer-circle-${answerColors}`} />
       </div>
