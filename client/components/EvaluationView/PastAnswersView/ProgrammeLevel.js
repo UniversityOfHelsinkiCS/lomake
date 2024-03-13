@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 import { isAdmin } from '@root/config/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { getProgrammeOldAnswersAction } from 'Utilities/redux/summaryReducer'
-import { modifiedQuestions, cleanText, getMeasuresAnswer, programmeNameByKey as programmeName } from 'Utilities/common'
+import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import Question from '../../ComparisonPage/Question'
 
 const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
@@ -21,50 +21,6 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
     }
   })
   return mapped
-}
-
-const answersByQuestions = ({ usersProgrammes, year, oldAnswers, questionsList, lang }) => {
-  if (!oldAnswers) {
-    return {}
-  }
-  const answerMap = new Map()
-  const chosenKeys = usersProgrammes.map(p => p.key)
-  const selectedAnswers = oldAnswers.filter(a => a.year === year)
-
-  if (!selectedAnswers) return new Map()
-  selectedAnswers.forEach(programme => {
-    const key = programme.programme
-
-    if (chosenKeys.includes(key)) {
-      const { data } = programme
-      questionsList.forEach(question => {
-        let colorsByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-        const color = data[question.color] ? data[question.color] : 'emptyAnswer'
-        const name = programmeName(usersProgrammes, programme, lang)
-        let answer = ''
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-        colorsByProgramme = [...colorsByProgramme, { name, key, color, answer }]
-
-        answerMap.set(question.id, colorsByProgramme)
-      })
-    }
-  })
-  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-  // So empty answers need to be added.
-  answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => p.key)
-    const programmesMissing = usersProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-    if (programmesMissing) {
-      programmesMissing.forEach(p => {
-        const earlierAnswers = answerMap.get(key)
-        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: p.key, color: 'emptyAnswer' }])
-      })
-    }
-  })
-
-  return answerMap
 }
 
 const PastAnswersView = ({ programmeKey }) => {
@@ -99,14 +55,17 @@ const PastAnswersView = ({ programmeKey }) => {
     }
 
     const result = [2019, 2020, 2021, 2022, 2023].map(year => {
+      const selectedAnswers = forProgramme.filter(a => a.year === year)
       const data = {
         year,
         answers: answersByQuestions({
           usersProgrammes: [programme],
-          year,
-          oldAnswers: forProgramme,
+          selectedAnswers,
           questionsList,
+          chosenProgrammes: [programme],
           lang,
+          t,
+          form: filters.form,
         }),
       }
       return data
