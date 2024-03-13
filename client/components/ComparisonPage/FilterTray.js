@@ -22,14 +22,28 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
   return null
 }
 
-const getLevelFilter = ({ filters }) => {
-  if (filters.form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
+const getLevelFilter = ({ form }) => {
+  if (form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
   return null
 }
 
-const getFacultyFilter = ({ filters, t }) => {
-  if (filters.form !== formKeys.EVALUATION_FACULTIES)
+const getFacultyFilter = ({ form, t }) => {
+  if (form !== formKeys.EVALUATION_FACULTIES)
     return <FacultyFilter size="small" label={t('comparison:filterFaculties')} />
+  return null
+}
+
+const getProgrammeFilter = ({ form, filter, t, handleSearch, setFilter }) => {
+  if (form !== formKeys.EVALUATION_FACULTIES)
+    return (
+      <ProgrammeFilter
+        handleChange={handleSearch}
+        label={t('programmeFilter')}
+        filter={filter}
+        onEmpty={() => setFilter('')}
+        t={t}
+      />
+    )
   return null
 }
 
@@ -37,7 +51,7 @@ const FilterTray = ({ filter, setFilter }) => {
   const { t } = useTranslation()
   const filters = useSelector(state => state.filters)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const { faculty, level } = filters
+  const { faculty, level, form } = filters
 
   const handleSearch = ({ target }) => {
     const { value } = target
@@ -49,17 +63,11 @@ const FilterTray = ({ filter, setFilter }) => {
       <FormFilter />
       {usersProgrammes && (
         <>
-          {getFacultyFilter({ filters, t })}
-          {getLevelFilter({ filters })}
+          {getFacultyFilter({ form, t })}
+          {getLevelFilter({ form })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
-          <ProgrammeFilter
-            handleChange={handleSearch}
-            label={t('programmeFilter')}
-            filter={filter}
-            onEmpty={() => setFilter('')}
-            t={t}
-          />
+          {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}
         </>
       )}
     </>

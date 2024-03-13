@@ -27,6 +27,20 @@ const getLevelFilter = ({ filters }) => {
   return null
 }
 
+const getProgrammeFilter = ({ form, filter, t, handleSearch, setFilter }) => {
+  if (form !== formKeys.EVALUATION_FACULTIES)
+    return (
+      <ProgrammeFilter
+        handleChange={handleSearch}
+        label={t('programmeFilter')}
+        filter={filter}
+        onEmpty={() => setFilter('')}
+        t={t}
+      />
+    )
+  return null
+}
+
 const FilterTray = ({ filter, setFilter }) => {
   const { t } = useTranslation()
   const filters = useSelector(state => state.filters)
@@ -48,13 +62,7 @@ const FilterTray = ({ filter, setFilter }) => {
           {getLevelFilter({ filters })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
-          <ProgrammeFilter
-            handleChange={handleSearch}
-            filter={filter}
-            onEmpty={() => setFilter('')}
-            t={t}
-            label={t('programmeFilter')}
-          />
+          {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}
         </>
       )}
     </>
