@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -7,12 +7,14 @@ import { isEvaluationUniversityUser } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 
+import PDFDownload from 'Components/Generic/PDFDownload'
 import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 
 export default () => {
   const { t } = useTranslation()
+  const componentRef = useRef()
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const lang = useSelector(state => state.language)
@@ -91,8 +93,9 @@ export default () => {
                 />
               ))}
             </div>
+            <PDFDownload componentRef={componentRef} />
           </div>
-          <div style={{ marginTop: '1em' }}>
+          <div style={{ marginTop: '1em' }} ref={componentRef}>
             <CommitteeColorTable
               committees={committeeList}
               setModalData={setModalData}

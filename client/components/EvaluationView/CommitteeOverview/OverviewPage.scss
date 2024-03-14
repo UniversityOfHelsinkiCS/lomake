@@ -15,7 +15,7 @@ $QUESTION_COUNT: 6;
   @include committee-wide-header-basics;
   &-committee {
     @include committee-wide-header-basics;
-    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-columns: 1fr 5fr 3fr;
   }
 }
 
