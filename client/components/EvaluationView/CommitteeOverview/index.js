@@ -54,7 +54,9 @@ export default () => {
                       return (
                         <div style={{ marginBottom: '1em' }} key={`${title}-${actions}`}>
                           <h2 data-cy={`modal-title-action-${index}`}>{title}</h2>
-                          <ReactMarkdown data-cy={`modal-content-action-${index}`}>{actions}</ReactMarkdown>
+                          <div data-cy={`modal-content-action-${index}`}>
+                            <ReactMarkdown>{actions}</ReactMarkdown>
+                          </div>
                         </div>
                       )
                     })}
