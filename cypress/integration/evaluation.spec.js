@@ -291,9 +291,9 @@ describe('Evaluation forms tests', () => {
       cy.contains('University overview').click()
 
       cy.get('[data-cy=university_ease_of_study_actions-university-bachelor]').click()
-      cy.get("[data-cy='accordion-title-1']").contains('Bachelor: This is a development area')
-      cy.get("[data-cy='accordion-title-1']").click()
-      cy.get("[data-cy='accordion-content-1']").contains('Bachelor: This is action')
+      cy.get("[data-cy='modal-title-action-1']").contains('Bachelor: This is a development area')
+      cy.get("[data-cy='modal-title-action-1']").click()
+      cy.get("[data-cy='modal-content-action-1']").contains('Bachelor: This is action')
     })
   })
 

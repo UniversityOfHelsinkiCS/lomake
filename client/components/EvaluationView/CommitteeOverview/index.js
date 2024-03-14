@@ -50,11 +50,11 @@ export default () => {
               {modalData?.type === 'actions' ? (
                 <div>
                   {modalData.content &&
-                    modalData.content.map(({ title, actions }) => {
+                    modalData.content.map(({ title, actions, index }) => {
                       return (
                         <div style={{ marginBottom: '1em' }} key={`${title}-${actions}`}>
-                          <h2>{title}</h2>
-                          <ReactMarkdown>{actions}</ReactMarkdown>
+                          <h2 data-cy={`modal-title-action-${index}`}>{title}</h2>
+                          <ReactMarkdown data-cy={`modal-content-action-${index}`}>{actions}</ReactMarkdown>
                         </div>
                       )
                     })}
