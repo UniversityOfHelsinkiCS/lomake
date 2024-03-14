@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon, Radio } from 'semantic-ui-react'
+import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -14,7 +14,6 @@ import CommitteeColorTable from './CommitteeColorTable'
 export default () => {
   const { t } = useTranslation()
   const [modalData, setModalData] = useState(null)
-  const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
@@ -47,47 +46,17 @@ export default () => {
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
               {modalData?.type === 'actions' ? (
-                <Accordion className="modal-accordion-container" exclusive={false}>
-                  {modalData.content
-                    ? modalData.content
-                        .sort((a, b) => {
-                          if (a[0] === 'green' && b[0] === 'yellow') return -1
-                          if (a[0] === 'yellow' && b[0] === 'red') return -1
-                          if (a[0] === 'green' && b[0] === 'red') return -1
-                          if (a[0] === 'yellow' && b[0] === 'green') return 1
-                          if (a[0] === 'red' && b[0] === 'green') return 1
-                          if (a[0] === 'red' && b[0] === 'yellow') return 1
-
-                          return 0
-                        })
-
-                        .map(({ index, title, actions }) => {
-                          return (
-                            <div key={`${title}-${actions}`}>
-                              <Accordion.Title
-                                className={`accordion-title-${index}`}
-                                data-cy={`accordion-title-${index}`}
-                                active={accordionsOpen[title] === true}
-                                onClick={() =>
-                                  setAccordionsOpen({ ...accordionsOpen, [title]: !accordionsOpen[title] })
-                                }
-                              >
-                                <Icon name="angle down" />
-                                <span style={{ fontSize: '22px' }}> {title}</span>
-                              </Accordion.Title>
-                              <Accordion.Content
-                                className={`accordion-content-${index}`}
-                                data-cy={`accordion-content-${index}`}
-                                key={title}
-                                active={accordionsOpen[title] === true}
-                              >
-                                <ReactMarkdown>{actions}</ReactMarkdown>
-                              </Accordion.Content>
-                            </div>
-                          )
-                        })
-                    : null}
-                </Accordion>
+                <div>
+                  {modalData.content &&
+                    modalData.content.map(({ title, actions }) => {
+                      return (
+                        <div style={{ marginBottom: '1em' }} key={`${title}-${actions}`}>
+                          <h2>{title}</h2>
+                          <ReactMarkdown>{actions}</ReactMarkdown>
+                        </div>
+                      )
+                    })}
+                </div>
               ) : (
                 <ReactMarkdown>{modalData.content}</ReactMarkdown>
               )}
