@@ -97,7 +97,7 @@ export default () => {
             </div>
             <PDFDownload componentRef={componentRef} />
           </div>
-          <div style={{ marginTop: '1em' }} ref={componentRef}>
+          <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }} ref={componentRef}>
             <CommitteeColorTable
               committees={committeeList}
               setModalData={setModalData}
