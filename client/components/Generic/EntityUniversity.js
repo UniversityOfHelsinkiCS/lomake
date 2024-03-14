@@ -292,12 +292,14 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
               label={textAreaLabel}
               EntityLastYearsAccordion={null}
               form={form}
+              maxLength={1500}
             />
             <Textarea
               id={`${id}-${object.level}-master`}
               isArviointi={isArviointi}
               EntityLastYearsAccordion={null}
               form={form}
+              maxLength={1500}
             />
             {!hideLevels && (
               <Textarea
@@ -305,6 +307,7 @@ const EntityUniversity = ({ id, label, description, required, number, extrainfo,
                 isArviointi={isArviointi}
                 EntityLastYearsAccordion={null}
                 form={form}
+                maxLength={1500}
               />
             )}
             <div className="page-break" />
