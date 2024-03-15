@@ -66,6 +66,7 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, 
           key={action.title}
           onClick={() => setModalData(tempModalData)}
           className="square-actions"
+          data-cy={`${questionId}`}
           style={{ background: colors.background_blue }}
         >
           <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>

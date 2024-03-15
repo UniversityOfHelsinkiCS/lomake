@@ -167,11 +167,6 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University overview').click()
 
-      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should(
-        'have.css',
-        'background-color',
-        'rgb(157, 255, 157)',
-      )
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should(
         'have.css',
         'background-color',
@@ -221,29 +216,15 @@ describe('Evaluation forms tests', () => {
       cy.contains('University overview').click()
 
       // At start all levels are visible
-      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
-      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('be.visible')
       // ----------------
 
-      // Choose bachelor level
-      cy.get('[data-cy=committee-level-filter-bachelor]').click()
-      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
-      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
-      // Other levels shouldn't be visible
-      cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('not.exist')
-      cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('not.exist')
-      cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('not.exist')
-      cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('not.exist')
-
       // Choose master level
       cy.get('[data-cy=committee-level-filter-master]').click()
 
-      cy.get('[data-cy=UNI-student_admittance_university-university-bachelor-single]').should('be.visible')
-      cy.get('[data-cy=UNI-student_admittance_university-arviointi-bachelor-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('be.visible')
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-master-single]').should('be.visible')
       // Doctoral shouldn't be visible
@@ -269,31 +250,29 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University level').click()
       cy.wait(100)
-      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-development-area-1']").type(
-        'Bachelor: This is a development area',
+      cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-1']").type(
+        'Master: This is a development area',
       )
       cy.wait(100)
-      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-action-1']").type(
-        'Bachelor: This is action',
+      cy.get("[data-cy='university_ease_of_study_actions-university-master-action-1']").type('Master: This is action')
+      cy.wait(100)
+      cy.get('[data-cy=university_ease_of_study_actions-university-master-add-action-button]').click()
+      cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-2']").type(
+        'Master: This is also development area',
       )
       cy.wait(100)
-      cy.get('[data-cy=university_ease_of_study_actions-university-bachelor-add-action-button]').click()
-      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-development-area-2']").type(
-        'Bachelor: This is also development area',
-      )
-      cy.wait(100)
-      cy.get("[data-cy='university_ease_of_study_actions-university-bachelor-action-2']").type(
-        'Bachelor: This is second action',
+      cy.get("[data-cy='university_ease_of_study_actions-university-master-action-2']").type(
+        'Master: This is second action',
       )
       cy.wait(100)
 
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University overview').click()
 
-      cy.get('[data-cy=university_ease_of_study_actions-university-bachelor]').click()
-      cy.get("[data-cy='modal-title-action-1']").contains('Bachelor: This is a development area')
+      cy.get('[data-cy=university_ease_of_study_actions-university-master]').click()
+      cy.get("[data-cy='modal-title-action-1']").contains('Master: This is a development area')
       cy.get("[data-cy='modal-title-action-1']").click()
-      cy.get("[data-cy='modal-content-action-1']").contains('Bachelor: This is action')
+      cy.get("[data-cy='modal-content-action-1']").contains('Master: This is action')
     })
   })
 
