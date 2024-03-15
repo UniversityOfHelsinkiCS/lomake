@@ -71,7 +71,7 @@ const Textarea = ({
 
   const formData = useSelector(({ form }) => form.data)
 
-  let MAX_LENGTH = form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
+  let MAX_LENGTH = maxLength || form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
 
   if (maxLength) {
     MAX_LENGTH = maxLength + 100
