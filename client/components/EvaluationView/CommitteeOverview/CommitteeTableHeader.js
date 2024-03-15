@@ -32,7 +32,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
         <>
           {upperLevel.levels.map(level => (
             <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
-              <span>{t(`overview:uniAnswerLevels:${level}`)}</span>
+              <span>{t(`overview:selectedLevels:${level}`)}</span>
             </div>
           ))}
           {index === 0 && <div className="committee-table-header-second-level-gap" />}

@@ -35,7 +35,7 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, 
   const { level } = questionData
   const { topLevel } = questionData
   const tempModalData = {
-    header: `${t(`generic:level:${topLevel}`)} - ${t(`overview:uniAnswerLevels:${level}`)}`,
+    header: `${t(`generic:level:${topLevel}`)} - ${t(`overview:selectedLevels:${level}`)}`,
     content: actions,
     color: 'blue',
     programme: questionData.questionLabel,

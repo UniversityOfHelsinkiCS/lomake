@@ -57,8 +57,8 @@ const CommitteeColorTable = React.memo(
       return <Loader active inline="centered" />
     }
     let tableIds = [
-      { title: 'university', levels: ['bachelor', 'master', 'doctoral'] },
-      { title: 'arviointi', levels: ['bachelor', 'master', 'doctoral', 'overall'] },
+      { title: 'university', levels: ['master', 'doctoral'] },
+      { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
     ]
 
     if (selectedLevels) {
@@ -72,7 +72,7 @@ const CommitteeColorTable = React.memo(
 
       if (activeLevels.length > 0) {
         tableIds = tableIds.map(tableId => {
-          const allLevelsSelected = activeLevels.length === 3
+          const allLevelsSelected = activeLevels.length === 2
           if (tableId.title === 'arviointi' && allLevelsSelected) {
             const tempLevels = activeLevels.concat('overall')
             tableId.levels = tempLevels

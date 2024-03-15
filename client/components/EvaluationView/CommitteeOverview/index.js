@@ -20,7 +20,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const [selectedLevels, setSelectedLevels] = useState({ bachelor: false, master: false, doctoral: false })
+  const [selectedLevels, setSelectedLevels] = useState({ master: false, doctoral: false })
 
   const form = 6
   const formType = 'evaluation'
@@ -91,7 +91,7 @@ export default () => {
                   className="committee-level-filter"
                   data-cy={`committee-level-filter-${level}`}
                   onClick={() => handleSelectedLevels(level)}
-                  label={t(level)}
+                  label={t(`overview:selectedLevels:${level}`)}
                 />
               ))}
             </div>

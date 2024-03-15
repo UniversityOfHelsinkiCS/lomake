@@ -319,6 +319,11 @@ export default {
       doctoral: 'Tohtoriohjelmat',
       overall: 'Yleiset arviot ja toimenpidesuositukset',
     },
+    selectedLevels: {
+      master: 'Kandidaatti- ja maisteriohjelmat',
+      doctoral: 'Tohtoriohjelmat',
+      overall: 'Yleiset arviot ja toimenpidesuositukset',
+    },
     uniTableHeaderHY: 'Helsingin yliopiston arvio ja toimenpide-ehdotukset',
     uniTableHeaderCommittee: 'Arviointiryhmän arvio ja toimenpide-ehdotukset',
   },

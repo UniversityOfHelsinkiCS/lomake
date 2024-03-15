@@ -312,6 +312,11 @@ export default {
       doctoral: 'Doktorandprogrammen',
       overall: '',
     },
+    selectedLevels: {
+      master: 'Kandidatsprogrammen + Magisterprogrammen',
+      doctoral: 'Doktorandprogrammen',
+      overall: '',
+    },
     uniTableHeaderHY: '',
     uniTableHeaderCommittee: '',
   },

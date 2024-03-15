@@ -319,6 +319,11 @@ export default {
       doctoral: 'Doctoral programmes',
       overall: 'General assessment and measure suggestions',
     },
+    selectedLevels: {
+      master: "Bachelor's and Master's programmes p",
+      doctoral: 'Doctoral programmes',
+      overall: 'General assessment and measure suggestions',
+    },
     uniTableHeaderHY: 'University of Helsinki evaluation and development areas',
     uniTableHeaderCommittee: 'Committee evaluation and development areas',
   },
