@@ -320,7 +320,7 @@ export default {
       overall: 'General assessment and measure suggestions',
     },
     selectedLevels: {
-      master: "Bachelor's and Master's programmes p",
+      master: "Bachelor's and Master's programmes",
       doctoral: 'Doctoral programmes',
       overall: 'General assessment and measure suggestions',
     },

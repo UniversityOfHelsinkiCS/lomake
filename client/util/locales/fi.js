@@ -320,7 +320,7 @@ export default {
       overall: 'Yleiset arviot ja toimenpidesuositukset',
     },
     selectedLevels: {
-      master: 'Kandidaatti- ja maisteriohjelmat',
+      master: 'Kandi- ja maisteriohjelmat',
       doctoral: 'Tohtoriohjelmat',
       overall: 'Yleiset arviot ja toimenpidesuositukset',
     },
