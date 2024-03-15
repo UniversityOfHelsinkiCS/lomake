@@ -73,7 +73,7 @@ const Textarea = ({
 
   let MAX_LENGTH = maxLength || form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
 
-  if (maxLength) {
+  if (maxLength && form === formKeys.EVALUATION_COMMTTEES) {
     MAX_LENGTH = maxLength + 100
   }
 
