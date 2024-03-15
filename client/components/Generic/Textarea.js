@@ -71,7 +71,11 @@ const Textarea = ({
 
   const formData = useSelector(({ form }) => form.data)
 
-  const MAX_LENGTH = maxLength || form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
+  let MAX_LENGTH = form === formKeys.EVALUATION_FACULTIES ? 1600 : 1100
+
+  if (maxLength) {
+    MAX_LENGTH = maxLength + 100
+  }
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
