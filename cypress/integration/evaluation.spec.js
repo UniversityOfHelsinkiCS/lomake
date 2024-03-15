@@ -269,7 +269,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University overview').click()
 
-      cy.get('[data-cy=university_ease_of_study_actions-university-master]').click()
+      cy.get('[data-cy=university_ease_of_study_actions-university-master-1]').click()
       cy.get("[data-cy='modal-title-action-1']").contains('Master: This is a development area')
       cy.get("[data-cy='modal-title-action-1']").click()
       cy.get("[data-cy='modal-content-action-1']").contains('Master: This is action')

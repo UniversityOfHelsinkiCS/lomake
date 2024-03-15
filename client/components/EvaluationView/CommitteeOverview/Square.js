@@ -61,12 +61,12 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData, 
   }
   return (
     <div>
-      {actions.map(action => (
+      {actions.map((action, index) => (
         <div
           key={action.title}
           onClick={() => setModalData(tempModalData)}
           className="square-actions"
-          data-cy={`${questionId}`}
+          data-cy={`${questionId}-${index}`}
           style={{ background: colors.background_blue }}
         >
           <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>
