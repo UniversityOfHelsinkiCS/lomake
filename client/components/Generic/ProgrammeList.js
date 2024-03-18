@@ -34,10 +34,13 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
       setPicked(() => [...picked, programme])
     }
   }
+
+  const programmeListLabel =
+    form === formKeys.EVALUATION_FACULTIES ? t('generic:nowShowing:faculties') : t('generic:nowShowing:programmes')
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
-        <p className="list-header">{t('generic:nowShowing')}</p>
+        <p className="list-header">{t(programmeListLabel)}</p>
         {programmes.all.length > 0 ? (
           <Fragment key={programmes}>
             {sortedItems(programmes.all, 'name', lang).map(p => {

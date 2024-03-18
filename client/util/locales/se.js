@@ -111,6 +111,7 @@ export default {
     labelOptions: 'Enhet i grafen',
     percentage: 'Procentandelar',
     programmeAmount: 'Antal program',
+    facultyAmount: 'Antal fakultet',
     programmes: 'Program',
     fullscreen: 'Helskärm',
     downloadPNG: 'Ladda ner som PNG-bild',
@@ -252,7 +253,10 @@ export default {
     levelFilter: 'Filtrera enligt utbildningsnivå',
     measureLabel: 'Lägg till 1-5 åtgärder.',
     noPermissions: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
-    nowShowing: 'PROGRAM MED I SVAREN',
+    nowShowing: {
+      programmes: 'PROGRAM MED I SVAREN',
+      faculties: 'FAKULTETER MED I SVAREN',
+    },
     chooseMore: 'VÄLJ MER PROGRAM:',
     tooLongPaste:
       'Texten du försöker klistra in ({{newLength}} tecken totalt) ryms inte inom det maximala antalet tecken {{MAX_LENGTH}} tecken)',

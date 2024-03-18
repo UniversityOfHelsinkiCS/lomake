@@ -117,6 +117,7 @@ export default {
     labelOptions: 'Graafin yksikkö',
     percentage: 'Prosenttiosuudet',
     programmeAmount: 'Ohjelmien lukumäärä',
+    facultyAmount: 'Tiedekuntien lukumäärä',
     programmes: 'Ohjelmaa',
     fullscreen: 'Koko näyttö',
     downloadPNG: 'Lataa PNG-kuvana',
@@ -257,7 +258,10 @@ export default {
     measureLabel: 'Lisätkää 1-5 toimenpidettä.',
     noPermissions:
       'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    nowShowing: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
+    nowShowing: {
+      programmes: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
+      faculties: 'VASTAUKSISSA MUKANA OLEVAT TIEDEKUNNAT:',
+    },
     chooseMore: 'VALITSE OHJELMAT RAPORTILLE:',
     tooLongPaste:
       'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',

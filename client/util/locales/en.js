@@ -112,6 +112,7 @@ export default {
     labelOptions: 'Unit in the graph',
     percentage: 'Percentages',
     programmeAmount: 'Amount of programmes',
+    facultyAmount: 'Amount of faculties',
     programmes: 'Programmes',
     fullscreen: 'Full screen',
     downloadPNG: 'Download as a PNG-image',
@@ -255,7 +256,10 @@ export default {
     measureLabel: 'Add 1-5 measures.',
     noPermissions:
       "You have no permissions for any degree programmes. Please contact Strategic Services for Teaching or your degree programme's leader.",
-    nowShowing: 'NOW SHOWING THE ANSWERS OF',
+    nowShowing: {
+      programmes: 'NOW SHOWING THE ANSWERS OF:',
+      faculties: 'NOW SHOWING THE ANSWERS OF:',
+    },
     chooseMore: 'CHOOSE MORE PROGRAMMES:',
     tooLongPaste:
       'The text you are trying to paste ({{newLength}} characters in total) does not fit in the maximum character limit {{MAX_LENGTH}} characters)',
