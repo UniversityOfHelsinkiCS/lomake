@@ -23,8 +23,16 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
 }
 
 const getLevelFilter = ({ form }) => {
-  if (form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
-  return null
+  const url = window.location.href
+  const facStart = url.indexOf('/comparison')
+  if (form === formKeys.EVALUATION_FACULTIES) {
+    if (facStart !== -1) {
+      return <LevelFilter comparison />
+    }
+    return null
+  }
+
+  return <LevelFilter />
 }
 
 const getFacultyFilter = ({ form, t }) => {
