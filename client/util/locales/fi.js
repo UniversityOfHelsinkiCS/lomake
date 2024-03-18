@@ -41,6 +41,7 @@ export default {
     find: 'Etsi',
 
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    noDataForFaculty: 'Yhtään tiedekuntaa tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     selectAll: 'Valitse kaikki',
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
@@ -262,7 +263,10 @@ export default {
       programmes: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
       faculties: 'VASTAUKSISSA MUKANA OLEVAT TIEDEKUNNAT:',
     },
-    chooseMore: 'VALITSE OHJELMAT RAPORTILLE:',
+    chooseMore: {
+      programmes: 'VALITSE OHJELMAT RAPORTILLE:',
+      faculties: 'VALITSE TIEDEKUNNAT RAPORTILLE:',
+    },
     tooLongPaste:
       'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',
     year: 'Valitse vuodet',

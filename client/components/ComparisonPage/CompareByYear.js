@@ -194,7 +194,9 @@ const CompareByYear = ({
             </Grid.Row>
           </>
         ) : (
-          <h3 data-cy="report-no-data">{t('noData')}</h3>
+          <h3 data-cy="report-no-data">
+            {filters.form !== formKeys.EVALUATION_FACULTIES ? t('noData') : t('noDataForFaculty')}
+          </h3>
         )}
       </Grid>
     </div>

@@ -31,7 +31,7 @@ const LabelOptions = ({ unit, setUnit }) => {
           </Form.Field>
           <Form.Field>
             <Radio
-              label={t(amountLabel)}
+              label={amountLabel}
               name="chart-unit"
               value="programmeAmount"
               checked={unit === 'programmeAmount'}

@@ -38,6 +38,7 @@ export default {
     find: 'Sök',
 
     noData: 'Ingen data tillgänglig för dessa urval',
+    noDataForFaculty: 'Ingen data tillgänglig för vald fakultet',
     selectAll: 'Välj alla',
     clearSelection: 'Rensa urval',
     responses: 'Svar:',
@@ -257,7 +258,10 @@ export default {
       programmes: 'PROGRAM MED I SVAREN',
       faculties: 'FAKULTETER MED I SVAREN',
     },
-    chooseMore: 'VÄLJ MER PROGRAM:',
+    chooseMore: {
+      programmes: 'VÄLJ MER PROGRAM:',
+      faculties: 'VÄLJ MER FAKULTETER:',
+    },
     tooLongPaste:
       'Texten du försöker klistra in ({{newLength}} tecken totalt) ryms inte inom det maximala antalet tecken {{MAX_LENGTH}} tecken)',
     year: 'Välj år',

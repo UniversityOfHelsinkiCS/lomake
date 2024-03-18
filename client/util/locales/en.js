@@ -38,6 +38,7 @@ export default {
     find: 'Find',
 
     noData: 'No data available for these choices',
+    noDataForFaculty: 'No data available for this faculty',
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
     responses: 'Responses:',
@@ -260,7 +261,10 @@ export default {
       programmes: 'NOW SHOWING THE ANSWERS OF:',
       faculties: 'NOW SHOWING THE ANSWERS OF:',
     },
-    chooseMore: 'CHOOSE MORE PROGRAMMES:',
+    chooseMore: {
+      programmes: 'CHOOSE MORE PROGRAMMES:',
+      faculties: 'CHOOSE MORE FACULTIES:',
+    },
     tooLongPaste:
       'The text you are trying to paste ({{newLength}} characters in total) does not fit in the maximum character limit {{MAX_LENGTH}} characters)',
     year: 'Year(s)',

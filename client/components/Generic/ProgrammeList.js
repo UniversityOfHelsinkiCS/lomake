@@ -23,6 +23,16 @@ const Programme = ({ p, lang, selectedFaculties, form }) => {
   )
 }
 
+const facultyLabels = {
+  nowShowing: 'generic:nowShowing:faculties',
+  chooseMore: 'generic:chooseMore:faculties',
+}
+
+const programmeLabels = {
+  nowShowing: 'generic:nowShowing:programmes',
+  chooseMore: 'generic:chooseMore:programmes',
+}
+
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -35,12 +45,11 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
     }
   }
 
-  const programmeListLabel =
-    form === formKeys.EVALUATION_FACULTIES ? t('generic:nowShowing:faculties') : t('generic:nowShowing:programmes')
+  const labels = form === formKeys.EVALUATION_FACULTIES ? facultyLabels : programmeLabels
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
-        <p className="list-header">{t(programmeListLabel)}</p>
+        <p className="list-header">{t(labels.nowShowing)}</p>
         {programmes.all.length > 0 ? (
           <Fragment key={programmes}>
             {sortedItems(programmes.all, 'name', lang).map(p => {
@@ -63,7 +72,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               )
             })}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t('generic:chooseMore')}</p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{labels.chooseMore}</p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
               if (form === formKeys.EVALUATION_FACULTIES) {
