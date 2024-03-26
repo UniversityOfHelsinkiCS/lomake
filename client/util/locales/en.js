@@ -318,7 +318,7 @@ export default {
     facultySummary: 'Degree programme answers',
     pcs: 'pcs',
     chooseFaculty: 'Delineate the selected faculties',
-    developmentTarget: 'Development target',
+    developmentTarget: 'DEVELELOPMENT AREA AND CORRECTIVE ACTIONS',
     arviointi: 'Committee',
     universityOverview: 'University overview',
     uniAnswerLevels: {

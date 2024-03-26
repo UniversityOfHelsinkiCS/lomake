@@ -319,7 +319,7 @@ export default {
     facultySummary: 'Koulutusohjelmien vastaukset',
     pcs: 'kpl',
     chooseFaculty: 'Rajaa näytettävät tiedekunnat',
-    developmentTarget: 'Kehityskohde',
+    developmentTarget: 'KEHITTÄMISKOHDE JA TOIMENPITEET',
     universityOverview: 'Yliopistotason yhteenveto',
     uniAnswerLevels: {
       bachelor: 'Kandiohjelmat',
