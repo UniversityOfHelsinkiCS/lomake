@@ -32,7 +32,6 @@ const ColorTableCell = ({
   form = 1,
   acualQuestionId,
   questionData = null,
-  showText = false,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -130,7 +129,6 @@ const ColorTableCell = ({
         questionId={questionId}
         t={t}
         questionData={questionData}
-        showText={showText}
       />
     )
   }

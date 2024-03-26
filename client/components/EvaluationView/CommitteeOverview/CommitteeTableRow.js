@@ -12,16 +12,7 @@ const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
   return false
 }
 
-const TableRow = ({
-  question,
-  selectedAnswers,
-  tableIds,
-  setModalData,
-  form,
-  committee,
-  showText,
-  gridColumnSize = null,
-}) => {
+const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, committee, gridColumnSize = null }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
@@ -62,7 +53,6 @@ const TableRow = ({
                 form={form}
                 questionLabel={questionLabel}
                 questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
-                showText={showText}
                 gridColumnSize={gridColumnSize}
               />
               {isGap && <div className="committee-table-square-gap" />}

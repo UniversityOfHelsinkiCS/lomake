@@ -102,7 +102,6 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
                 formType={formType}
                 form={form}
                 setProgramControlsToShow={setProgramControlsToShow}
-                showText={gridColumnSize < 7}
                 gridColumnSize={gridColumnSize}
               />
             </Fragment>
