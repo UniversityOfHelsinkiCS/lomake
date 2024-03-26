@@ -52,7 +52,7 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData }
       data-cy={`${questionId}`}
       style={{ background: colors.background_blue }}
     >
-      <p style={{ fontSize: '1rem', fontWeight: 'bold' }} key={`${actions}`}>
+      <p style={{ fontSize: '1.5em', fontWeight: 'bold' }} key={`${actions}`}>
         {actions.length}
       </p>
     </div>
