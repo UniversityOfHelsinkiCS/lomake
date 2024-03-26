@@ -1,9 +1,8 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Header, Divider } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next'
 
-import { sortedItems, answersByYear, getYearToShow } from 'Utilities/common'
+import { answersByYear, getYearToShow } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
@@ -11,121 +10,107 @@ import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
-const CommitteeColorTable = React.memo(
-  ({ setModalData, form, committees, formType, setProgramControlsToShow, selectedLevels }) => {
-    const { t } = useTranslation()
-    const dispatch = useDispatch()
-    const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-    const answers = useSelector(state => state.tempAnswers)
-    const oldAnswers = useSelector(state => state.oldAnswers)
-    const lang = useSelector(state => state.language)
-    const [reverse, setReverse] = useState(false)
-    const [sorter, setSorter] = useState('name')
-    const committee = committeeList[0]
+const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
+  const dispatch = useDispatch()
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const answers = useSelector(state => state.tempAnswers)
+  const oldAnswers = useSelector(state => state.oldAnswers)
+  const lang = useSelector(state => state.language)
+  const committee = committeeList[0]
 
-    const year = getYearToShow({ draftYear, nextDeadline, form })
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
-    useEffect(() => {
-      dispatch(getAllTempAnswersAction())
-    }, [])
-    const selectedAnswers = answersByYear({
-      year,
-      tempAnswers: answers,
-      oldAnswers,
-      draftYear: draftYear && draftYear.year,
-      deadline: nextDeadline?.find(d => d.form === form),
-      form,
+  useEffect(() => {
+    dispatch(getAllTempAnswersAction())
+  }, [])
+  const selectedAnswers = answersByYear({
+    year,
+    tempAnswers: answers,
+    oldAnswers,
+    draftYear: draftYear && draftYear.year,
+    deadline: nextDeadline?.find(d => d.form === form),
+    form,
+  })
+
+  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
+  if (!filteredAnswers?.data) {
+    filteredAnswers = []
+  } else {
+    filteredAnswers = filteredAnswers.data
+  }
+
+  if (answers.pending || !answers.data || !oldAnswers.data) {
+    return <Loader active inline="centered" />
+  }
+  let tableIds = [
+    { title: 'university', levels: ['master', 'doctoral'] },
+    { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
+  ]
+
+  if (selectedLevels) {
+    const activeLevels = []
+    Object.keys(selectedLevels).forEach(levelKey => {
+      const levelValue = selectedLevels[levelKey]
+      if (levelValue) {
+        activeLevels.push(levelKey)
+      }
     })
 
-    let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
-    if (!filteredAnswers?.data) {
-      filteredAnswers = []
-    } else {
-      filteredAnswers = filteredAnswers.data
-    }
-
-    const sortedCommittees = sortedItems(committees, sorter, lang)
-
-    if (reverse) sortedCommittees.reverse()
-
-    const sort = sortValue => {
-      setSorter(sortValue === 'key' ? 'code' : sortValue)
-      setReverse(!reverse)
-    }
-
-    if (answers.pending || !answers.data || !oldAnswers.data) {
-      return <Loader active inline="centered" />
-    }
-    let tableIds = [
-      { title: 'university', levels: ['master', 'doctoral'] },
-      { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
-    ]
-
-    if (selectedLevels) {
-      const activeLevels = []
-      Object.keys(selectedLevels).forEach(levelKey => {
-        const levelValue = selectedLevels[levelKey]
-        if (levelValue) {
-          activeLevels.push(levelKey)
-        }
-      })
-
-      if (activeLevels.length > 0) {
-        tableIds = tableIds.map(tableId => {
-          const allLevelsSelected = activeLevels.length === 2
-          if (tableId.title === 'arviointi' && allLevelsSelected) {
-            const tempLevels = activeLevels.concat('overall')
-            tableId.levels = tempLevels
-            return tableId
-          }
-          tableId.levels = activeLevels
+    if (activeLevels.length > 0) {
+      tableIds = tableIds.map(tableId => {
+        const allLevelsSelected = activeLevels.length === 2
+        if (tableId.title === 'arviointi' && allLevelsSelected) {
+          const tempLevels = activeLevels.concat('overall')
+          tableId.levels = tempLevels
           return tableId
-        })
-      }
+        }
+        tableId.levels = activeLevels
+        return tableId
+      })
     }
-    const gridColumnSize = tableIds[0].levels.length * 2 + 1
-    return (
-      <div className={`overview-color-grid-committee-${gridColumnSize}`}>
-        <TableHeader sort={sort} tableIds={tableIds} title={t('generic:level:committee')} />
-        <div className="committee-table-header-second-level-right-padding" />
-        {questions.map((theme, indexTopLevel) => {
-          return theme.parts.map((part, index) => {
-            if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
-            return (
-              <Fragment key={`${part.id}-${theme.title}`}>
-                {index === 0 && (
-                  <Header
-                    className={`committee-table-theme-title-${gridColumnSize}`}
-                    style={{
-                      gridRow: index,
-                    }}
-                    key={`${theme.title}`}
-                    as="h2"
-                  >
-                    {indexTopLevel + 1}) {theme.title[lang]}
-                    <Divider />
-                  </Header>
-                )}
-                <TableRow
-                  selectedLevels={selectedLevels}
-                  question={part}
-                  selectedAnswers={filteredAnswers}
-                  tableIds={tableIds}
-                  setModalData={setModalData}
-                  committee={committee}
-                  formType={formType}
-                  form={form}
-                  setProgramControlsToShow={setProgramControlsToShow}
-                  showText={gridColumnSize < 7}
-                  gridColumnSize={gridColumnSize}
-                />
-              </Fragment>
-            )
-          })
-        })}
-      </div>
-    )
-  },
-)
+  }
+  const gridColumnSize = tableIds[0].levels.length * 2 + 1
+  return (
+    <div className={`overview-color-grid-committee-${gridColumnSize}`}>
+      <TableHeader tableIds={tableIds} />
+      <div className="committee-table-header-second-level-right-padding" />
+      {questions.map((theme, indexTopLevel) => {
+        return theme.parts.map((part, index) => {
+          if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
+          return (
+            <Fragment key={`${part.id}-${theme.title}`}>
+              {index === 0 && (
+                <Header
+                  className={`committee-table-theme-title-${gridColumnSize}`}
+                  style={{
+                    gridRow: index,
+                  }}
+                  key={`${theme.title}`}
+                  as="h2"
+                >
+                  {indexTopLevel + 1}) {theme.title[lang]}
+                  <Divider />
+                </Header>
+              )}
+              <TableRow
+                selectedLevels={selectedLevels}
+                question={part}
+                selectedAnswers={filteredAnswers}
+                tableIds={tableIds}
+                setModalData={setModalData}
+                committee={committee}
+                formType={formType}
+                form={form}
+                setProgramControlsToShow={setProgramControlsToShow}
+                showText={gridColumnSize < 7}
+                gridColumnSize={gridColumnSize}
+              />
+            </Fragment>
+          )
+        })
+      })}
+    </div>
+  )
+})
 
 export default CommitteeColorTable

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Icon, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const CommitteeTableHeader = ({ tableIds, sort, title }) => {
+const CommitteeTableHeader = ({ tableIds }) => {
   const { t } = useTranslation()
   const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
@@ -22,12 +22,7 @@ const CommitteeTableHeader = ({ tableIds, sort, title }) => {
         </Header>
       </div>
       <div className={`committee-table-header-${gridColumnSize}-right-padding`} />
-      <div className="sticky-header">
-        <div className="sorter" onClick={() => sort('name')}>
-          {title || t('programmeHeader')}
-          <Icon name="sort" />
-        </div>
-      </div>
+      <div className="sticky-header" />
       {tableIds.map((upperLevel, index) => (
         <>
           {upperLevel.levels.map(level => (
