@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Header } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -24,14 +24,14 @@ const CommitteeTableHeader = ({ tableIds }) => {
       <div className={`committee-table-header-${gridColumnSize}-right-padding`} />
       <div className="sticky-header" />
       {tableIds.map((upperLevel, index) => (
-        <>
+        <Fragment key={upperLevel.levels}>
           {upperLevel.levels.map(level => (
             <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
               <span>{t(`overview:selectedLevels:${level}`)}</span>
             </div>
           ))}
           {index === 0 && <div className="committee-table-header-second-level-gap" />}
-        </>
+        </Fragment>
       ))}
     </>
   )
