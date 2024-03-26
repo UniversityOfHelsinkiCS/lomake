@@ -1,16 +1,8 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
-import { isAdmin } from '@root/config/common'
 import { useTranslation } from 'react-i18next'
-
-const ManageCell = ({ faculty, setProgramControlsToShow }) => (
-  <div className="table-container-manage-cell-committee">
-    <Button data-cy={`${faculty.code}-manage`} icon="user" circular onClick={() => setProgramControlsToShow(faculty)} />
-  </div>
-)
 
 const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
   if (topLevel === 'university' && gridColumnSize === 3 && index === 0) return true
@@ -26,19 +18,13 @@ const TableRow = ({
   tableIds,
   setModalData,
   form,
-  setProgramControlsToShow,
   committee,
   showText,
   gridColumnSize = null,
 }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
-  const currentUser = useSelector(({ currentUser }) => currentUser.data)
   const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
-  const hasManagementAccess = program => {
-    if (isAdmin(currentUser)) return true
-    return Object.entries(currentUser.access).find(access => access[0] === program && access[1].admin === true)
-  }
 
   let questionLabel = question.label[lang]
 
@@ -84,12 +70,7 @@ const TableRow = ({
           )
         })
       })}
-
-      {hasManagementAccess(committee.code) ? (
-        <ManageCell faculty={committee} setProgramControlsToShow={setProgramControlsToShow} />
-      ) : (
-        <div />
-      )}
+      <div />
     </React.Fragment>
   )
 }
