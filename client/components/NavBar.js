@@ -82,7 +82,7 @@ const GoToEvaluationButton = ({ user }) => {
           ) : null}
           {isAdmin(user) || isEvaluationUniversityUser(user) ? (
             <Dropdown.Item
-              data-cy="nav-evaluation-option-big-boss"
+              data-cy="nav-evaluation-option-university-overview"
               as={Link}
               to="/evaluation-university/"
               name="big-boss"
