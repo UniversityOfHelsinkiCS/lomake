@@ -217,7 +217,6 @@ const CommitteeFormView = ({ room, formString }) => {
   if (!user.access[committee.code] && !hasRights(user)) {
     return <NoPermissions t={t} />
   }
-
   return (
     <div>
       {singleFacultyPending ? (
@@ -292,6 +291,7 @@ const CommitteeFormView = ({ room, formString }) => {
             <Downloads programme={committee} componentRef={componentRef} form={form} />
             <div id="university-form" style={{ paddingBottom: '6em' }}>
               <EvaluationForm
+                key={lang}
                 programmeKey={committee.code}
                 questions={questions}
                 form={form}

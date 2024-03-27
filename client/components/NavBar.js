@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
@@ -205,6 +205,7 @@ export default () => {
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
   const location = useLocation()
+  const history = useHistory()
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
@@ -224,19 +225,33 @@ export default () => {
 
   if (!user) return null
 
+  const handleLanguageChange = (e, { value }) => {
+    e.preventDefault()
+    setLanguageCode(value)
+    if (window.location.href.includes('/6/UNI')) {
+      let uniFormCode = `UNI`
+      if (value === 'en') {
+        uniFormCode = `UNI_EN`
+      } else if (value === 'se') {
+        uniFormCode = `UNI_SE`
+      }
+      history.push(`/evaluation-university/form/6/${uniFormCode}`)
+    }
+  }
+
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
       <MenuNavigation pathname={location.pathname} user={user} />
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>
-            <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={() => setLanguageCode('fi')}>
+            <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
               Suomi
             </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={() => setLanguageCode('se')}>
+            <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
               Svenska
             </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={() => setLanguageCode('en')}>
+            <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
               English
             </Dropdown.Item>
           </Dropdown.Menu>
