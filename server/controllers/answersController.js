@@ -580,6 +580,37 @@ const postIndividualFormPartialAnswer = async (req, res) => {
   }
 }
 
+const getDataFromFinnishUniForm = async (req, res) => {
+  try {
+    const { year } = req.params
+    const draftYears = await db.draftYear.findAll({})
+    const draftYear = draftYears.length ? draftYears[0].year : null
+
+    let data = null
+
+    if (draftYear && draftYear === Number(year)) {
+      data = await db.tempAnswer.findOne({
+        where: {
+          programme: 'UNI',
+          year: draftYear,
+          form: 6,
+        },
+      })
+    } else {
+      data = await db.answer.findOne({
+        where: {
+          programme: 'UNI',
+          year,
+          form: 6,
+        },
+      })
+    }
+    return res.send({ data: data.data })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
 module.exports = {
   getAll,
   getPreviousYear,
@@ -598,4 +629,5 @@ module.exports = {
   updateIndividualReady,
   getCommitteeSummaryData,
   getFacultyTempAnswersAfterDeadline,
+  getDataFromFinnishUniForm,
 }

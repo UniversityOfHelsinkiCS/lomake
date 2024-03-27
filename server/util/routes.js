@@ -43,6 +43,7 @@ router.get('/answers/currentSummaryEvaluation/faculty/:code/:lang', answers.getE
 router.get('/answers/:form/:programme/previous', requireProgrammeRead, answers.getPreviousYear)
 router.post('/answers/degreeReform/individualAnswer', answers.postIndividualFormAnswer)
 router.post('/answers/degreeReform/individualAnswer/partial', answers.postIndividualFormPartialAnswer)
+router.get('/answers/committee/FIN/:year', answers.getDataFromFinnishUniForm)
 router.get('/programmes/:programme/users', requireProgrammeOwner, users.getProgrammesUsers)
 router.get('/programmes/getOwners', checkAdmin, studyprogrammes.getOwners)
 router.get('/programmes', studyprogrammes.getAll)

@@ -169,6 +169,22 @@ const committeeList = [
       se: 'Universitetsnivå',
     },
   },
+  {
+    code: 'UNI_EN',
+    name: {
+      fi: 'Yliopistotaso',
+      en: 'University level',
+      se: 'Universitetsnivå',
+    },
+  },
+  {
+    code: 'UNI_SE',
+    name: {
+      fi: 'Yliopistotaso',
+      en: 'University level',
+      se: 'Universitetsnivå',
+    },
+  },
 ]
 
 const data = [

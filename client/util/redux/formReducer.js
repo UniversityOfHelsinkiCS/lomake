@@ -90,6 +90,12 @@ export const updateIndividualReady = ({ uid, ready }) => {
   return callBuilder(route, prefix, 'put', { ready })
 }
 
+export const getCommitteeAnswers = ({ year }) => {
+  const route = `/answers/committee/FIN/${year}`
+  const prefix = 'GET_COMMITTEE_ANSWERS'
+  return callBuilder(route, prefix, 'GET')
+}
+
 const initialState = {
   data: {},
   viewOnly: false,
@@ -97,6 +103,8 @@ const initialState = {
   lastSaveAttempt: new Date(),
   lastSaveSuccess: new Date(),
   oldIndividualAnswers: [],
+  // (below) data from Finnish UNI-form to be used in other language versions
+  finnishUniFormData: [],
   answerLevels: [4, 5, 6, 7, 9],
 }
 
@@ -230,7 +238,27 @@ export default (state = initialState, action) => {
         ready: Boolean(action.response.ready),
       }
     }
-
+    case 'GET_COMMITTEE_ANSWERS_ATTEMPT': {
+      return {
+        ...state,
+        pending: true,
+      }
+    }
+    case 'GET_COMMITTEE_ANSWERS_SUCCESS': {
+      return {
+        ...state,
+        finnishUniFormData: action.response,
+        pending: false,
+        error: false,
+      }
+    }
+    case 'GET_COMMITTEE_ANSWERS_FAILURE': {
+      return {
+        ...state,
+        pending: false,
+        error: true,
+      }
+    }
     default:
       return state
   }

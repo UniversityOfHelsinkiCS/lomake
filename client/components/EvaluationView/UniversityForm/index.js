@@ -7,7 +7,7 @@ import Downloads from 'Components/FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 
-import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from 'Utilities/redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
@@ -166,17 +166,13 @@ const CommitteeFormView = ({ room, formString }) => {
       dispatch(wsJoinRoom(room, form))
       dispatch(setViewOnly(false))
     }
-  }, [
-    committee,
-    singleFacultyPending,
-    // writeAccess,
-    // viewingOldAnswers,
-    draftYear,
-    // accessToTempAnswers,
-    // readAccess,
-    room,
-    user,
-  ])
+  }, [committee, singleFacultyPending, draftYear, room, user])
+
+  useEffect(() => {
+    if (window.location.href.match('((/UNI_EN)|(/UNI_SE))') && year) {
+      dispatch(getCommitteeAnswers({ year }))
+    }
+  }, [year])
 
   const facultyAnswers = useMemo(() => {
     if (
