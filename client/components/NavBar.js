@@ -45,7 +45,14 @@ const GoToAdminPageButton = () => {
 }
 
 const GoToEvaluationButton = ({ user }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  let uniFormCode = `UNI`
+  if (i18n.language === 'en') {
+    uniFormCode = `UNI_EN`
+  } else if (i18n.language === 'se') {
+    uniFormCode = `UNI_SE`
+  }
+
   return (
     <Menu.Item style={{ padding: 0 }}>
       <Dropdown item data-cy="nav-evaluation" text={t('evaluation')} style={{ height: '100%' }}>
@@ -67,7 +74,7 @@ const GoToEvaluationButton = ({ user }) => {
             <Dropdown.Item
               data-cy="nav-evaluation-option-committee"
               as={Link}
-              to="/evaluation-university/form/6/UNI"
+              to={`/evaluation-university/form/6/${uniFormCode}`}
               name="committees"
             >
               {t('generic:level:university')}

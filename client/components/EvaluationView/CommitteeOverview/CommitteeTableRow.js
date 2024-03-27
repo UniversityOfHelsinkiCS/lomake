@@ -15,7 +15,14 @@ const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
 const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, committee, gridColumnSize = null }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
-  const targetURL = `/evaluation-university/form/${form}/${committee.code}#${question.id}`
+  let formCode = `${committee.code}`
+  if (lang === 'en') {
+    formCode = `${committee.code}_EN`
+  } else if (lang === 'se') {
+    formCode = `${committee.code}_SE`
+  }
+
+  const targetURL = `/evaluation-university/form/${form}/${formCode}#${question.id}`
 
   let questionLabel = question.label[lang]
 
