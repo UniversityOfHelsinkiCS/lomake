@@ -194,8 +194,10 @@ describe('Evaluation forms tests', () => {
       const hyTineUser = 'cypressHyTineUser'
       cy.login(hyTineUser)
       cy.visit('/')
+
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
+
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University level').click()
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
@@ -249,6 +251,10 @@ describe('Evaluation forms tests', () => {
       const hyTineUser = 'cypressHyTineUser'
       cy.login(hyTineUser)
       cy.visit('/')
+
+      cy.get('[data-cy=navBar-localeDropdown]').click()
+      cy.get('[data-cy=navBar-localeOption-fi]').click()
+
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('University level').click()
       cy.wait(100)
