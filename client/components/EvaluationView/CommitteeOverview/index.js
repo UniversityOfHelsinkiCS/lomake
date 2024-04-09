@@ -101,7 +101,7 @@ export default () => {
               <br />
               {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
                 <Link to="/evaluation-university/printing">
-                  Uusi kehityksessä oleva printtaus (näkyy vain admineille){' '}
+                  Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
                 </Link>
               )}
             </div>
