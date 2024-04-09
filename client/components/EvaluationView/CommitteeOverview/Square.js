@@ -1,7 +1,7 @@
 import React from 'react'
 import { cleanText, colors } from 'Utilities/common'
 
-const getActionsAnswerForUniversity = (data, id) => {
+export const getActionsAnswerForUniversity = (data, id) => {
   if (!data) return ''
   if (data[`${id}-text`]) return data[`${id}_text`]
   if (data[`${id}-1-text`]) {

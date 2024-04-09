@@ -2,12 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { formKeys } from '@root/config/data'
 import { Loader } from 'semantic-ui-react'
-import { answersByYear, getActionsAnswer, getYearToShow, isEvaluationUniversityUser } from 'Utilities/common'
+import { answersByYear, getYearToShow, isEvaluationUniversityUser } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import ReactMarkdown from '@root/node_modules/react-markdown/index'
 import { universityEvaluationQuestions as questions } from '@root/client/questionData'
 import PDFDownload from 'Components/Generic/PDFDownload'
+
+import { getActionsAnswerForUniversity } from './Square'
 
 const StudyLevelContainer = () => {
   const answerLevels = [
@@ -73,8 +75,11 @@ const QuestionContainer = ({ question, level, upperLevel }) => {
   }
 
   const completeQuestionId = `${question.id}-${upperLevel}-${level}`
-  const currentAnswer =
-    filteredAnswers[`${completeQuestionId}_text`] || getActionsAnswer(filteredAnswers, completeQuestionId, t)
+  let currentAnswer = filteredAnswers[`${completeQuestionId}_text`]
+  if (question.id.includes('actions')) {
+    currentAnswer = getActionsAnswerForUniversity(filteredAnswers, completeQuestionId)
+  }
+
   if (!currentAnswer || currentAnswer.length < 0) {
     return (
       <div style={{ height: '20em', border: '3px solid', width: '100%', padding: '2em', margin: '2em' }}>
@@ -82,6 +87,24 @@ const QuestionContainer = ({ question, level, upperLevel }) => {
       </div>
     )
   }
+
+  if (question.id.includes('actions')) {
+    return (
+      <div style={{ border: '3px solid', padding: '2em', margin: '2em' }}>
+        <h3>{t(`overview:selectedLevels:${level}`)}</h3>
+        {currentAnswer.map(({ title, actions }) => {
+          return (
+            <div key={`${title}-${actions}`}>
+              {' '}
+              <p style={{ fontWeight: 'bold', paddingTop: '1em' }}>{title} </p>
+              <ReactMarkdown>{actions}</ReactMarkdown>{' '}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
     <div style={{ border: '3px solid', padding: '2em', margin: '2em' }}>
       <h3>{t(`overview:selectedLevels:${level}`)}</h3>
