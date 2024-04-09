@@ -3,7 +3,7 @@ import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin, isEvaluationUniversityUser } from '@root/config/common'
+import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 
@@ -99,7 +99,7 @@ export default () => {
             <div>
               <PDFDownload componentRef={componentRef} />
               <br />
-              {isAdmin(currentUser) && (
+              {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
                 <Link to="/evaluation-university/printing">
                   Uusi kehityksessä oleva printtaus (näkyy vain admineille){' '}
                 </Link>
