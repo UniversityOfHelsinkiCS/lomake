@@ -164,6 +164,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om studiernas smidighet i kandidat-, magister- och doktorandprogram? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the smoothness of studying for a bachelor's, master's and/or doctoral degree?  Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot opiskelun sujuvuudesta",
+          "en": "Differences of opinion on the smooth running of studies",
+          "se": "Skilda uppfattningar om smidiga studier"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -451,6 +456,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställninag i kandidat-, magister- och doktorandprogram? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall structure of education, leadership and management, resources, and the status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta",
+          "en": "Differences of opinion on the overall structure of education, leadership and management, resources, and the status of degree programmes",
+          "se": "Skilda uppfattningar om utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställning"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -478,6 +488,11 @@
           "fi": "Mitkä ovat yliopiston vahvuudet, kun tarkastellaan kandi- maisteri- ja tohtorikoulutuksen kokonaisrakennetta, johtamista, resursseja ja koulutusohjelmien asemaa yliopistossa?",
           "se": "Vilka är universitetets styrkor när det gäller temat utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställning i kandidat-, magister- och doktorandprogram?",
           "en": "What are the university's strengths in overall structure of education, leadership and management, resources, and the status of degree programmes?"
+        },
+        "shortLabel": {
+          "fi": "Yliopiston vahvuudet",
+          "se": "Universitetets styrkor",
+          "en": "The university's strengths"
         },
         "required": false,
         "no_color": true,
@@ -566,6 +581,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsbedömning? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaistoimivuudesta",
+          "se": "Skilda uppfattningar om utbildningens helhetsbedömning",
+          "en": "Differences of opinion on the overall status of degree programmes"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -621,6 +641,11 @@
           "fi": "Onko tiedekuntien vastauksissa huomattavia näkemyseroja kandi-, maisteri- ja/tai tohtorikoulutuksen kokonaistoimivuudesta viiden vuoden kuluttua? Kuvatkaa, millaisia näkemyserot ovat ja miten yliopistotason arvioon päädyttiin.",
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsbedömning om fem år? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall status of education at the university in five years? Please describe the differences of opinion and how consensus was reached for the current assessment."
+        },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaistilanteesta viiden vuoden kuluttua",
+          "se": "Skilda uppfattningar om utbildningens helhetsbedömning om fem år",
+          "en": "Differences of opinion on the overall status of education at the university in five years"
         },
         "required": false,
         "no_color": true,

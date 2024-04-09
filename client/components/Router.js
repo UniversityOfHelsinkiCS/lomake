@@ -18,6 +18,7 @@ import PastAnswersView from 'Components/EvaluationView/PastAnswersView/Programme
 import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/FacultyLevel'
 import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
 import CommitteeLevelOverview from 'Components/EvaluationView/CommitteeOverview'
+import CommitteePrinting from 'Components/EvaluationView/CommitteeOverview/CommitteePrinting'
 
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 import UniversityFormView from 'Components/EvaluationView/UniversityForm'
@@ -60,6 +61,7 @@ export default () => (
           path="/evaluation-university/form/:form/:room"
           render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
         />
+        <Route exact path="/evaluation-university/printing" component={CommitteePrinting} />
         <Route
           exact
           path="/evaluation/previous-years/:programme"

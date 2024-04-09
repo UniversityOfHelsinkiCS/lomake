@@ -3,11 +3,12 @@ import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isEvaluationUniversityUser } from '@root/config/common'
+import { isAdmin, isEvaluationUniversityUser } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 
 import PDFDownload from 'Components/Generic/PDFDownload'
+import { Link } from 'react-router-dom'
 import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
@@ -95,7 +96,15 @@ export default () => {
                 />
               ))}
             </div>
-            <PDFDownload componentRef={componentRef} />
+            <div>
+              <PDFDownload componentRef={componentRef} />
+              <br />
+              {isAdmin(currentUser) && (
+                <Link to="/evaluation-university/printing">
+                  Uusi kehityksessä oleva printtaus (näkyy vain admineille){' '}
+                </Link>
+              )}
+            </div>
           </div>
           <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }} ref={componentRef}>
             <CommitteeColorTable
