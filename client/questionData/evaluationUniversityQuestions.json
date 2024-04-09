@@ -226,9 +226,9 @@
           "en": "Please provide an assessment of the correspondence between statistical data on the progress of studies and faculty reviews of student progress."
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Tilastotiedon ja tiedekuntien arvioiden vastaavuus",
           "se": "",
-          "en": ""
+          "en": "Consistency between statistical data and faculty reviews"
         },
         "required": false,
         "no_color": true,
