@@ -4,7 +4,6 @@ import { Loader, Header, Divider } from 'semantic-ui-react'
 
 import { answersByYear, getYearToShow } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
@@ -72,7 +71,6 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
   const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
     <div className={`overview-color-grid-committee-${gridColumnSize}`}>
-      <TableHeader tableIds={tableIds} />
       <div className="committee-table-header-second-level-right-padding" />
       {questions.map((theme, indexTopLevel) => {
         return theme.parts.map((part, index) => {

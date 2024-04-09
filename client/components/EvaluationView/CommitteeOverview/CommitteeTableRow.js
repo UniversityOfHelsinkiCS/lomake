@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
+import { TestingHeader } from './CommitteeTableHeader'
 
 const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
   if (topLevel === 'university' && gridColumnSize === 3 && index === 0) return true
@@ -31,12 +32,13 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, com
   }
   return (
     <React.Fragment key={question.id}>
-      <div className="table-container-row-link-committee">
-        <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
-          {questionLabel}
-        </Link>
+      <div className="hide-in-print-mode">
+        <div className="table-container-row-link-committee">
+          <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
+            {questionLabel}
+          </Link>
+        </div>
       </div>
-
       {tableIds.map(upperLevel => {
         return upperLevel.levels.map((level, index) => {
           if (
@@ -47,8 +49,10 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, com
             return <div key={`${question.id}-${upperLevel.title}-${level}`} />
           }
           const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
+
           return (
             <Fragment key={`${question.id}-${upperLevel.title}-${level}`}>
+              <TestingHeader upperLevel={upperLevel} level={level} index={index} />
               <ColorTableCell
                 programmesName={committee.name[lang]}
                 programmesKey={committee.code}
@@ -67,7 +71,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, com
           )
         })
       })}
-      <div />
+      <div className="committee-table-row-right-padding" />
     </React.Fragment>
   )
 }

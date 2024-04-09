@@ -1,3 +1,4 @@
+import ReactMarkdown from '@root/node_modules/react-markdown/index'
 import React from 'react'
 import { cleanText, colors } from 'Utilities/common'
 
@@ -53,7 +54,7 @@ const Square = ({ setModalData, programmesAnswers, questionId, t, questionData }
       style={{ background: colors.background_blue }}
     >
       <p style={{ fontSize: '1.5em', fontWeight: 'bold' }} key={`${actions}`}>
-        {actions.length}
+        <ReactMarkdown>{actions}</ReactMarkdown>
       </p>
     </div>
   )

@@ -199,4 +199,44 @@ label {
     margin-left: 4em;
     margin-right: 4em;
   }
+
+  @mixin printable-square-basics {
+    display: block !important;
+    justify-content: none !important;
+    align-items: none !important;
+    background-color: white !important; 
+    padding: 20px !important;
+  }
+
+  .overview-color-grid-committee-5 {
+    grid-template-rows: 70px 50px repeat(60, minmax(10em,auto)) !important;
+    grid-template-columns: repeat(3, minmax(0,4fr)) !important;
+    grid-auto-rows: 100px;
+
+    .square-yellow {
+      @include printable-square-basics;
+      border: 3px solid yellow !important;
+    }
+    .square-green {
+      @include printable-square-basics;
+      border:3x solid green !important;
+    }
+    .square-red {
+      @include printable-square-basics;
+      border:3x solid red !important;
+    }
+  }
+  .committee-table-theme-title {
+    &-5 {
+      grid-column: span 3 !important;
+    
+    }
+    &-3 {
+      grid-column: span 3 !important;
+    
+    }
+  }
+  .committee-table-row-right-padding {
+    display: none;
+  }
 }

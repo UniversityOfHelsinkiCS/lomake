@@ -4,6 +4,7 @@ import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { colors, getMeasuresAnswer } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
+import ReactMarkdown from '@root/node_modules/react-markdown/index'
 import DegreeReformCell from './DegreeReformCell'
 import Square from '../EvaluationView/CommitteeOverview/Square'
 import {
@@ -68,10 +69,12 @@ const ColorTableCell = ({
     // Kysymys - ylätaso - alataso
     let tempQuestionId = questionId
     let tempSubtitle = programmesName
+    let tempColor = colorAnswer
     if (programmesKey === 'UNI') {
       tempQuestionId = questionData.rawQuestionId
       const whichLevel = questionId.match('bachelor|master|doctoral')[0]
       tempSubtitle = t(`common:${whichLevel}`)
+      tempColor = colorAnswer?.single
     }
     return {
       header: questions.reduce((acc, cur) => {
@@ -88,7 +91,7 @@ const ColorTableCell = ({
       }, ''),
       programme: tempSubtitle,
       content: textAnswer,
-      color: colorAnswer,
+      color: tempColor,
     }
   }
 
@@ -190,6 +193,7 @@ const ColorTableCell = ({
               setModalData(getModalConfig(modalConfig))
             }}
           >
+            <ReactMarkdown>{modalConfig.content}</ReactMarkdown>
             {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
           </div>
         )

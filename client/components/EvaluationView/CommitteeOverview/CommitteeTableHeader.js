@@ -2,7 +2,32 @@ import React, { Fragment } from 'react'
 import { Header } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const CommitteeTableHeader = ({ tableIds }) => {
+const defaultTableIds = [
+  { title: 'university', levels: ['master', 'doctoral'] },
+  { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
+]
+
+export const TestingHeader = ({ upperLevel, index }) => {
+  const { t } = useTranslation()
+  if (upperLevel.title === 'university' && index === 0) {
+    return (
+      <Header block style={{ minHeight: '5em', height: 'max-content', gridColumn: 'span 3' }}>
+        {' '}
+        {t('overview:uniTableHeaderHY')}
+      </Header>
+    )
+  }
+  if (upperLevel.title === 'arviointi' && index === 0) {
+    return (
+      <Header block style={{ minHeight: '5em', height: 'max-content', gridColumn: 'span 3' }}>
+        {' '}
+        {t('overview:uniTableHeaderCommittee')}
+      </Header>
+    )
+  }
+  return null
+}
+const CommitteeTableHeader = ({ tableIds = defaultTableIds }) => {
   const { t } = useTranslation()
   const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
