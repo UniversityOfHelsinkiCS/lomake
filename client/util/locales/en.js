@@ -334,6 +334,8 @@ export default {
     },
     uniTableHeaderHY: 'University of Helsinki evaluation and development areas',
     uniTableHeaderCommittee: 'Committee evaluation and development areas',
+    uniPrintingTopHeader: 'University of Helsinki studyprogrammes evaluation',
+    uniPrintingSubHeaderHY: 'University of Helsinki and committees evaluation 2024',
   },
 
   report: {

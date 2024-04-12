@@ -12,37 +12,92 @@ import PDFDownload from 'Components/Generic/PDFDownload'
 import { getActionsAnswerForUniversity } from './Square'
 
 const StudyLevelContainer = () => {
+  const { t } = useTranslation()
   const answerLevels = [
     { title: 'university', levels: ['master', 'doctoral'] },
     { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
   ]
   return answerLevels.map(upperLevel => {
-    return upperLevel.levels.map(level => {
-      return questions.map(theme => {
-        return <ThemeContainer upperLevel={upperLevel.title} level={level} theme={theme} />
-      })
-    })
+    return (
+      <div>
+        <h2 style={{ textAlign: 'center' }}>{t('overview:uniPrintingTopHeader')}</h2>
+        <h2 style={{ textAlign: 'center' }}>{t('overview:uniPrintingSubHeaderHY')}</h2>
+        {upperLevel.levels.map(level => {
+          return questions.map((theme, themeIndex) => {
+            return <ThemeContainer upperLevel={upperLevel.title} level={level} theme={theme} themeIndex={themeIndex} />
+          })
+        })}
+      </div>
+    )
   })
 }
 
-const ThemeContainer = ({ upperLevel, theme, level }) => {
+const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
   const lang = useSelector(state => state.language)
-
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const answers = useSelector(state => state.tempAnswers)
+  const oldAnswers = useSelector(state => state.oldAnswers)
+  const year = getYearToShow({ draftYear, nextDeadline, form: formKeys.EVALUATION_COMMTTEES })
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', margin: '1em' }}>
+    <div style={{ margin: '1em' }}>
       <div className="uni-print-theme-parts">
-        {theme.parts.map(question => {
-          if (question.id === 'meta2') {
+        {theme.parts.map((question, index) => {
+          if (question.id === 'meta2' || question.id === 'university_where_are_we_in_five_years_opinion_differences') {
             return null
           }
+          const showThemeTitle = index === 0 || question.id.includes('actions')
           const questionLabel = question.shortLabel ? question.shortLabel[lang] : question.label[lang]
+
+          const selectedAnswers = answersByYear({
+            year,
+            tempAnswers: answers,
+            oldAnswers,
+            draftYear: draftYear && draftYear.year,
+            deadline: nextDeadline?.find(d => d.form === formKeys.EVALUATION_COMMTTEES),
+            form: formKeys.EVALUATION_COMMTTEES,
+          })
+
+          let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
+          if (!filteredAnswers?.data) {
+            filteredAnswers = []
+          } else {
+            filteredAnswers = filteredAnswers.data
+          }
+
+          const completeQuestionId = `${question.id}-${upperLevel}-${level}`
+          let currentAnswer = filteredAnswers[`${completeQuestionId}_text`]
+          if (question.id.includes('actions')) {
+            currentAnswer = getActionsAnswerForUniversity(filteredAnswers, completeQuestionId)
+          }
+
+          if (!currentAnswer || currentAnswer.length < 1) {
+            return null
+          }
+
           return (
-            <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
-              <div style={{ position: 'relative', marginBottom: '4em' }}>
-                <p style={{ fontWeight: 'bold', wordWrap: 'break-word', width: '6em' }}>{theme.title[lang]}</p>
-                <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabel}</p>
+            <div>
+              {showThemeTitle && (
+                <h3
+                  style={{
+                    fontWeight: 'bold',
+                    wordWrap: 'break-word',
+                    textAlign: 'center',
+                  }}
+                >
+                  {themeIndex + 1}. {theme.title[lang]}
+                </h3>
+              )}
+              <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
+                <div style={{ position: 'relative', marginBottom: '4em' }}>
+                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabel}</p>
+                </div>
+                <QuestionContainer
+                  upperLevel={upperLevel}
+                  level={level}
+                  question={question}
+                  currentAnswer={currentAnswer}
+                />
               </div>
-              <QuestionContainer upperLevel={upperLevel} level={level} question={question} />
             </div>
           )
         })}
@@ -51,34 +106,8 @@ const ThemeContainer = ({ upperLevel, theme, level }) => {
   )
 }
 
-const QuestionContainer = ({ question, level, upperLevel }) => {
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const answers = useSelector(state => state.tempAnswers)
-  const oldAnswers = useSelector(state => state.oldAnswers)
-  const year = getYearToShow({ draftYear, nextDeadline, form: formKeys.EVALUATION_COMMTTEES })
+const QuestionContainer = ({ question, level, currentAnswer }) => {
   const { t } = useTranslation()
-
-  const selectedAnswers = answersByYear({
-    year,
-    tempAnswers: answers,
-    oldAnswers,
-    draftYear: draftYear && draftYear.year,
-    deadline: nextDeadline?.find(d => d.form === formKeys.EVALUATION_COMMTTEES),
-    form: formKeys.EVALUATION_COMMTTEES,
-  })
-
-  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
-  if (!filteredAnswers?.data) {
-    filteredAnswers = []
-  } else {
-    filteredAnswers = filteredAnswers.data
-  }
-
-  const completeQuestionId = `${question.id}-${upperLevel}-${level}`
-  let currentAnswer = filteredAnswers[`${completeQuestionId}_text`]
-  if (question.id.includes('actions')) {
-    currentAnswer = getActionsAnswerForUniversity(filteredAnswers, completeQuestionId)
-  }
 
   if (!currentAnswer || currentAnswer.length < 0) {
     return (
@@ -145,5 +174,6 @@ const CommitteePrinting = () => {
     </div>
   )
 }
+//                 <p style={{ fontWeight: 'bold', wordWrap: 'break-word', width: '6em' }}>{theme.title[lang]}</p>
 
 export default CommitteePrinting

@@ -246,6 +246,11 @@
           "se": "UTVECKLINGSOMRÅDEN PÅ UNIVERSITETSNIVÅ OCH ÅTGÄRDER SOM BÖR VIDTAS",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
+        "shortLabel": {
+          "fi": "Yliopiston näkemys kehitämiskohteista ja toimenpiteistä",
+          "se": "",
+          "en": "University view of development areas and measures"
+        },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä. Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
@@ -511,6 +516,11 @@
           "se": "UTVECKLINGSOMRÅDEN PÅ UNIVERSITETSNIVÅ OCH ÅTGÄRDER SOM BÖR VIDTAS",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
+        "shortLabel": {
+          "fi": "Yliopiston näkemys kehitämiskohteista ja toimenpiteistä",
+          "se": "",
+          "en": "University view of development areas and measures"
+        },
         "description": {
           "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä.",
           "se": "För teman som fått en röd helhetsbedömning ska det formuleras utvecklingsobjekt med konkreta åtgärder. För teman som fått en gul bedömning kan det i vissa fall också behövas konkreta åtgärder.",
@@ -601,7 +611,7 @@
         "kludge": true,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Arvioikaa yliopiston koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
+          "fi": "Missä yliopiston koulutuksessa mennään viiden vuoden kuluttua",
           "se": "",
           "en": ""
         },

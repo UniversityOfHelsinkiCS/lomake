@@ -327,6 +327,8 @@ export default {
     },
     uniTableHeaderHY: '',
     uniTableHeaderCommittee: '',
+    uniPrintingTopHeader: '',
+    uniPrintingSubHeaderHY: '',
   },
 
   report: {
