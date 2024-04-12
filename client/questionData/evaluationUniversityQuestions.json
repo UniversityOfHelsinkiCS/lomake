@@ -49,9 +49,9 @@
           "en": "CURRICULUM"
         },
         "description": {
-          "fi": "Yliopiston koulutusohjelmien kokonaisuuden toimivuus",
-          "se": "Hur helheten av universitetets utbildnigsprogram fungerar",
-          "en": "Functionality of the university's degree programmes as a whole"
+          "fi": "Koulutusohjelmien opetussuunnitelmien toimivuus yliopistossas",
+          "se": "Undervisningsplanernas ändamålsenlighet vid universitetet",
+          "en": "Functionality of the curricula of degree programmes at the university"
         },
         "required": true,
         "level_breakdown": true,
