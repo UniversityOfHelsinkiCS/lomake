@@ -38,6 +38,8 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
   const answers = useSelector(state => state.tempAnswers)
   const oldAnswers = useSelector(state => state.oldAnswers)
   const year = getYearToShow({ draftYear, nextDeadline, form: formKeys.EVALUATION_COMMTTEES })
+  const { t } = useTranslation()
+
   return (
     <div style={{ margin: '1em' }}>
       <div className="uni-print-theme-parts">
@@ -89,7 +91,9 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
                 <div style={{ position: 'relative', marginBottom: '4em' }}>
-                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabel}</p>
+                  <p style={{ wordWrap: 'break-word', width: '8em' }}>
+                    {questionLabel} ({t(`generic:level:${upperLevel}`)})
+                  </p>
                 </div>
                 <QuestionContainer
                   upperLevel={upperLevel}
