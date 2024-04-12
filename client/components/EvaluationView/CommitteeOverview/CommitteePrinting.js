@@ -49,6 +49,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
           }
           const showThemeTitle = index === 0 || question.id.includes('actions')
           const questionLabel = question.shortLabel ? question.shortLabel[lang] : question.label[lang]
+          const questionLabelCorrectCase = questionLabel.charAt(0).toUpperCase() + questionLabel.toLowerCase().slice(1)
 
           const selectedAnswers = answersByYear({
             year,
@@ -91,7 +92,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
                 <div style={{ position: 'relative', marginBottom: '4em' }}>
-                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabel}</p>
+                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabelCorrectCase}</p>
                 </div>
                 <QuestionContainer
                   upperLevel={upperLevel}
