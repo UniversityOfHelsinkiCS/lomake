@@ -329,6 +329,10 @@ export default {
     uniTableHeaderCommittee: '',
     uniPrintingTopHeader: '',
     uniPrintingSubHeaderHY: '',
+    printingUpperLevelTitle: {
+      university: '',
+      committee: '',
+    },
   },
 
   report: {

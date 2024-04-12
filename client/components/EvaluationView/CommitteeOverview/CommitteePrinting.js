@@ -86,14 +86,12 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
                     textAlign: 'center',
                   }}
                 >
-                  {themeIndex + 1}. {theme.title[lang]}
+                  {themeIndex + 1}. {theme.title[lang]} ({t(`overview:printingUpperLevelTitle:${upperLevel}`)})
                 </h3>
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
                 <div style={{ position: 'relative', marginBottom: '4em' }}>
-                  <p style={{ wordWrap: 'break-word', width: '8em' }}>
-                    {questionLabel} ({t(`generic:level:${upperLevel}`)})
-                  </p>
+                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabel}</p>
                 </div>
                 <QuestionContainer
                   upperLevel={upperLevel}

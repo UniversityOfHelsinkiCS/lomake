@@ -336,6 +336,10 @@ export default {
     uniTableHeaderCommittee: 'Arviointiryhmän arvio ja toimenpide-ehdotukset',
     uniPrintingTopHeader: 'Helsingin yliopiston koulutusohjelmien katselmus',
     uniPrintingSubHeaderHY: 'Yliopiston ja arviointiryhmän arviot 2024',
+    printingUpperLevelTitle: {
+      university: 'Yliopiston arvio',
+      committee: 'Arviointiryhmän arvio',
+    },
   },
 
   report: {
