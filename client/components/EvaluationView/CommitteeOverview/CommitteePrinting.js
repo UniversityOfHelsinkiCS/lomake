@@ -60,7 +60,15 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             form: formKeys.EVALUATION_COMMTTEES,
           })
 
-          let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
+          let formLanguageVersion = 'UNI'
+
+          if (lang === 'en') {
+            formLanguageVersion = 'UNI_EN'
+          } else if (lang === 'se') {
+            formLanguageVersion = 'UNI_SE'
+          }
+
+          let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === formLanguageVersion)
           if (!filteredAnswers?.data) {
             filteredAnswers = []
           } else {
