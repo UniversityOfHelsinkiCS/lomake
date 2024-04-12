@@ -32,6 +32,7 @@ const ColorTableCell = ({
   form = 1,
   acualQuestionId,
   questionData = null,
+  uniFormTrafficLights = null,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
@@ -91,7 +92,6 @@ const ColorTableCell = ({
       color: colorAnswer,
     }
   }
-
   if (form === formKeys.EVALUATION_FACULTIES) {
     colorId = [
       `${questionId}_light`,
@@ -115,6 +115,8 @@ const ColorTableCell = ({
         colorAnswer = null
       }
     }
+  } else if (form === formKeys.EVALUATION_COMMTTEES) {
+    colorAnswer = { single: uniFormTrafficLights[colorId] }
   } else if (programmesAnswers[colorId] === undefined) {
     colorAnswer = null
   } else {

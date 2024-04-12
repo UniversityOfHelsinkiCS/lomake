@@ -12,7 +12,16 @@ const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
   return false
 }
 
-const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, committee, gridColumnSize = null }) => {
+const TableRow = ({
+  question,
+  selectedAnswers,
+  tableIds,
+  setModalData,
+  form,
+  committee,
+  gridColumnSize = null,
+  finnishFormForTrafficLights,
+}) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   let formCode = `${committee.code}`
@@ -61,6 +70,7 @@ const TableRow = ({ question, selectedAnswers, tableIds, setModalData, form, com
                 questionLabel={questionLabel}
                 questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
                 gridColumnSize={gridColumnSize}
+                uniFormTrafficLights={finnishFormForTrafficLights}
               />
               {isGap && <div className="committee-table-square-gap" />}
             </Fragment>

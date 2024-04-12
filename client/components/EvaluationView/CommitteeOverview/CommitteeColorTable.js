@@ -32,13 +32,20 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
     form,
   })
 
-  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')
+  let languageVersionOfTheForm = 'UNI'
+
+  if (lang === 'en') {
+    languageVersionOfTheForm = 'UNI_EN'
+  } else if (lang === 'se') {
+    languageVersionOfTheForm = 'UNI_SE'
+  }
+  let filteredAnswers = selectedAnswers && selectedAnswers.find(a => a.programme === languageVersionOfTheForm)
+  const finnishFormForTrafficLights = selectedAnswers && selectedAnswers.find(a => a.programme === 'UNI')?.data
   if (!filteredAnswers?.data) {
     filteredAnswers = []
   } else {
     filteredAnswers = filteredAnswers.data
   }
-
   if (answers.pending || !answers.data || !oldAnswers.data) {
     return <Loader active inline="centered" />
   }
@@ -103,6 +110,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
                 form={form}
                 setProgramControlsToShow={setProgramControlsToShow}
                 gridColumnSize={gridColumnSize}
+                finnishFormForTrafficLights={finnishFormForTrafficLights}
               />
             </Fragment>
           )
