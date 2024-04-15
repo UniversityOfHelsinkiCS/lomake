@@ -77,7 +77,6 @@ const TableRow = ({
           )
         })
       })}
-      <div />
     </React.Fragment>
   )
 }

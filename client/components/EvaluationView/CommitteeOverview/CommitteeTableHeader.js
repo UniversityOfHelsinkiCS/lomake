@@ -21,10 +21,9 @@ const CommitteeTableHeader = ({ tableIds }) => {
           {t('overview:uniTableHeaderCommittee')}
         </Header>
       </div>
-      <div className={`committee-table-header-${gridColumnSize}-right-padding`} />
       <div className="sticky-header" />
       {tableIds.map((upperLevel, index) => (
-        <Fragment key={upperLevel.levels}>
+        <Fragment key={upperLevel.title}>
           {upperLevel.levels.map(level => (
             <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
               <span>{t(`overview:selectedLevels:${level}`)}</span>

@@ -15,7 +15,7 @@ $QUESTION_COUNT: 6;
   @include committee-wide-header-basics;
   &-committee {
     @include committee-wide-header-basics;
-    grid-template-columns: 1fr 4fr 3fr;
+    grid-template-columns: 1fr 3fr 4fr;
   }
 }
 
@@ -30,12 +30,14 @@ $QUESTION_COUNT: 6;
 
 @mixin committee-overview-basics {
   display: grid;
-  grid-template-columns: minmax(0,2fr) repeat(2, minmax(0,1fr)) minmax(0,1em)  repeat(4, minmax(0,1fr)) ;
   grid-auto-columns: 50px;
+  grid-auto-rows: 100px;
   grid-template-rows: 50px 50px;
   grid-row-gap: 25px;
   grid-column-gap: 5px;
-  width: 95vw;
+  width: 90vw;
+  padding-left: 2em;
+  padding-right: 30em;
 }
 
 .overview-color-grid-committee {
@@ -43,15 +45,12 @@ $QUESTION_COUNT: 6;
   &-3 {
     @include committee-overview-basics;
     grid-template-rows: 70px 50px repeat(7, 20px) 100px repeat(7, 20px) 100px repeat(2, 20px);
-    grid-template-columns: minmax(0,4fr) repeat(1, minmax(0,6fr)) minmax(0,3em)  repeat(2, minmax(0,6fr)) ;
-  grid-auto-rows: 100px;
-  grid-auto-columns: 50px;
+    grid-template-columns: minmax(0,4fr) repeat(1, minmax(0,6fr)) minmax(0,3em)  repeat(1, minmax(0,6fr)) ;
  }
  &-5 {
   @include committee-overview-basics;
   grid-template-rows: 70px 50px repeat(7, 20px) 100px repeat(7, 20px) 100px repeat(2, 20px);
-  grid-template-columns: minmax(0,2fr) repeat(2, minmax(0,2fr)) minmax(0,3em)  repeat(4, minmax(0,2fr)) ;
-  grid-auto-rows: 100px;
+  grid-template-columns: minmax(0,2fr) repeat(2, minmax(0,2fr)) minmax(0,3em)  repeat(2, minmax(0,2fr)) ;
  }
 }
 
@@ -244,9 +243,6 @@ $QUESTION_COUNT: 6;
   &-committee {
     grid-column: span 1;
   }
-  &-right-padding {
-    grid-column: span 1;
-  }
 }
 
 .committee-table-header-5 {
@@ -257,10 +253,7 @@ $QUESTION_COUNT: 6;
     grid-column: span 2;
   }
   &-committee {
-    grid-column: span 3;
-  }
-  &-right-padding {
-    grid-column: span 1;
+    grid-column: span 2;
   }
 }
 
@@ -270,11 +263,11 @@ $QUESTION_COUNT: 6;
 
 .committee-table-theme-title {
   &-5 {
-    grid-column: span 8;
+    grid-column: span 6;
     margin: 0 !important;
   }
   &-3 {
-    grid-column: span 5;
+    grid-column: span 4;
     margin: 0 !important;
   }
 }
