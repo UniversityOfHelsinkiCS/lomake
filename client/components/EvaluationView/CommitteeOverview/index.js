@@ -6,8 +6,6 @@ import ReactMarkdown from 'react-markdown'
 import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
-
-import PDFDownload from 'Components/Generic/PDFDownload'
 import { Link } from 'react-router-dom'
 import { setColorBlindMode } from 'Utilities/redux/filterReducer'
 import { committeeList } from '../../../../config/data'
@@ -102,9 +100,7 @@ export default () => {
                 />
               ))}
             </div>
-            <div style={{ gap: '1em' }}>
-              <PDFDownload componentRef={componentRef} />
-              <br />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
                 <Link to="/evaluation-university/printing">
                   Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
