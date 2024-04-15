@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -9,6 +9,7 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 
 import PDFDownload from 'Components/Generic/PDFDownload'
 import { Link } from 'react-router-dom'
+import { setColorBlindMode } from 'Utilities/redux/filterReducer'
 import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
@@ -16,6 +17,7 @@ import CommitteeColorTable from './CommitteeColorTable'
 export default () => {
   const { t } = useTranslation()
   const componentRef = useRef()
+  const dispatch = useDispatch()
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const lang = useSelector(state => state.language)
@@ -96,7 +98,7 @@ export default () => {
                 />
               ))}
             </div>
-            <div>
+            <div style={{ gap: '1em' }}>
               <PDFDownload componentRef={componentRef} />
               <br />
               {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
@@ -104,6 +106,8 @@ export default () => {
                   Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
                 </Link>
               )}
+              <br />
+              <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>
           </div>
           <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }} ref={componentRef}>

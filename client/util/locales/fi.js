@@ -340,6 +340,7 @@ export default {
       university: 'Yliopiston arvio',
       committee: 'Arviointiryhmän arvio',
     },
+    colorBlindMode: 'Näytä värit tekstinä',
   },
 
   report: {

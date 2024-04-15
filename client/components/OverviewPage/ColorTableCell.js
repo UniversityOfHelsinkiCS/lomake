@@ -36,6 +36,7 @@ const ColorTableCell = ({
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
+  const { colorBlindMode } = useSelector(state => state.filters)
   const questionMap = {
     1: yearlyQuestions,
     2: degreeReformIndividualQuestions,
@@ -192,6 +193,7 @@ const ColorTableCell = ({
               setModalData(getModalConfig(modalConfig))
             }}
           >
+            {colorBlindMode && t(value)}
             {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
           </div>
         )

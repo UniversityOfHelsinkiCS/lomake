@@ -340,6 +340,7 @@ export default {
       university: 'University evaluation',
       committee: 'Committee evaluation',
     },
+    colorBlindMode: 'Show colors as text',
   },
 
   report: {

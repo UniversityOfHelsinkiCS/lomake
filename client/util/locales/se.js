@@ -333,6 +333,7 @@ export default {
       university: '',
       committee: '',
     },
+    colorBlindMode: '',
   },
 
   report: {
