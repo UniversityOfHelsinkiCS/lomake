@@ -46,7 +46,11 @@ export default () => {
   return (
     <>
       {modalData && (
-        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+        <CustomModal
+          title={modalData.header}
+          closeModal={() => setModalData(null)}
+          borderColor={modalData.color.single}
+        >
           <>
             <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
             <div style={{ fontSize: '1.2em' }}>
