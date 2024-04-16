@@ -88,7 +88,7 @@ export default () => {
         <>
           <div className="wide-header-committee">
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', height: '8em' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
               {Object.keys(selectedLevels).map(level => (
                 <Radio
                   toggle
