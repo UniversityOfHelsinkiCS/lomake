@@ -8,13 +8,18 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { Link } from 'react-router-dom'
 import { setColorBlindMode } from 'Utilities/redux/filterReducer'
+import PDFDownload from 'Components/Generic/PDFDownload'
 import { committeeList } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
+import CommitteePrinting from './CommitteePrinting'
 
 export default () => {
   const { t } = useTranslation()
-  const componentRef = useRef()
+  const printingRefHyBachelorMaster = useRef()
+  const printingRefHyDoctoral = useRef()
+  const printingRefArviointiBachelorMaster = useRef()
+  const printingRefArviointiDoctoral = useRef()
   const dispatch = useDispatch()
   const [modalData, setModalData] = useState(null)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
@@ -41,6 +46,14 @@ export default () => {
     if (!hasRights(currentUser)) return []
     return ['UNI']
   }, [programmes, currentUser])
+
+  const pageStyle = `
+  @page {
+    margin-top: 20cm;
+    margin-bottom: 20cm;
+
+  }
+`
   return (
     <>
       {modalData && (
@@ -102,15 +115,37 @@ export default () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
-                <Link to="/evaluation-university/printing">
-                  Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
-                </Link>
+                <>
+                  <Link to="/evaluation-university/printing">
+                    Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
+                  </Link>
+                  <PDFDownload componentRef={printingRefHyBachelorMaster} />
+                  <PDFDownload componentRef={printingRefHyDoctoral} />
+                  <PDFDownload componentRef={printingRefArviointiBachelorMaster} />
+                  <PDFDownload componentRef={printingRefArviointiDoctoral} />
+                  <div className="testing-testing" ref={printingRefHyBachelorMaster}>
+                    <style>{pageStyle}</style>
+                    <CommitteePrinting type="uni-bachelor-master"> </CommitteePrinting>
+                  </div>
+                  <div className="testing-testing" ref={printingRefHyDoctoral}>
+                    <style>{pageStyle}</style>
+                    <CommitteePrinting type="uni-doctoral"> </CommitteePrinting>
+                  </div>
+                  <div className="testing-testing" ref={printingRefArviointiBachelorMaster}>
+                    <style>{pageStyle}</style>
+                    <CommitteePrinting type="arviointi-bachelor-master"> </CommitteePrinting>
+                  </div>
+                  <div className="testing-testing" ref={printingRefArviointiDoctoral}>
+                    <style>{pageStyle}</style>
+                    <CommitteePrinting type="arviointi-doctoral"> </CommitteePrinting>
+                  </div>
+                </>
               )}
               <br />
               <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>
           </div>
-          <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }} ref={componentRef}>
+          <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }}>
             <CommitteeColorTable
               committees={committeeList}
               setModalData={setModalData}

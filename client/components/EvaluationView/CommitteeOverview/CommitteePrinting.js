@@ -11,12 +11,8 @@ import PDFDownload from 'Components/Generic/PDFDownload'
 
 import { getActionsAnswerForUniversity } from './Square'
 
-const StudyLevelContainer = () => {
+const StudyLevelContainer = ({ answerLevels }) => {
   const { t } = useTranslation()
-  const answerLevels = [
-    { title: 'university', levels: ['master', 'doctoral'] },
-    { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
-  ]
   return answerLevels.map(upperLevel => {
     return (
       <div>
@@ -49,7 +45,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
           if (question.id === 'meta2' || question.id === 'university_where_are_we_in_five_years_opinion_differences') {
             return null
           }
-          const showThemeTitle = index === 0 || question.id.includes('actions')
+          const showThemeTitle = index === 0
           const questionLabel = question.shortLabel ? question.shortLabel[lang] : question.label[lang]
           const questionLabelCorrectCase = questionLabel.charAt(0).toUpperCase() + questionLabel.toLowerCase().slice(1)
 
@@ -99,9 +95,9 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             <div className={answerLength > 1500 ? 'page-break' : ''}>
               {showThemeTitle && (
                 <h3
+                  lang="fi"
                   style={{
                     fontWeight: 'bold',
-                    wordWrap: 'break-word',
                     textAlign: 'center',
                   }}
                 >
@@ -110,7 +106,14 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
                 <div style={{ position: 'relative', marginBottom: '4em' }}>
-                  <p style={{ wordWrap: 'break-word', width: '6em' }}>{questionLabelCorrectCase}</p>
+                  <p
+                    lang="fi"
+                    style={{
+                      width: '10em',
+                    }}
+                  >
+                    {questionLabelCorrectCase}
+                  </p>
                 </div>
                 <QuestionContainer
                   upperLevel={upperLevel}
@@ -138,7 +141,6 @@ const QuestionContainer = ({ question, level, currentAnswer }) => {
       </div>
     )
   }
-
   if (question.id.includes('actions')) {
     return (
       <div style={{ border: '3px solid', padding: '2em', margin: '2em' }}>
@@ -164,7 +166,7 @@ const QuestionContainer = ({ question, level, currentAnswer }) => {
   )
 }
 
-const CommitteePrinting = () => {
+const CommitteePrinting = ({ type = null }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.currentUser.data)
   const answers = useSelector(state => state.tempAnswers)
@@ -189,10 +191,35 @@ const CommitteePrinting = () => {
     return <Loader active inline="centered" />
   }
 
+  let answerLevel = []
+
+  const answerLevels = [
+    { title: 'university', levels: ['master', 'doctoral'] },
+    { title: 'arviointi', levels: ['master', 'doctoral', 'overall'] },
+  ]
+
+  switch (type) {
+    case 'uni-bachelor-master':
+      answerLevel = [{ title: 'university', levels: ['master'] }]
+      break
+    case 'uni-doctoral':
+      answerLevel = [{ title: 'university', levels: ['doctoral'] }]
+      break
+    case 'arviointi-bachelor-master':
+      answerLevel = [{ title: 'arviointi', levels: ['master'] }]
+      break
+    case 'arviointi-doctoral':
+      answerLevel = [{ title: 'arviointi', levels: ['doctoral'] }]
+      break
+    default:
+      answerLevel = answerLevels
+      break
+  }
+
   return (
     <div ref={componentRef}>
       <PDFDownload componentRef={componentRef} />
-      <StudyLevelContainer />
+      <StudyLevelContainer answerLevels={answerLevel} />
     </div>
   )
 }
