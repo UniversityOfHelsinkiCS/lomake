@@ -119,10 +119,10 @@ export default () => {
                   <Link to="/evaluation-university/printing">
                     Uusi kehityksessä oleva printtaus (näkyy vain admineille ja projektiryhmälle){' '}
                   </Link>
-                  <PDFDownload componentRef={printingRefHyBachelorMaster} />
-                  <PDFDownload componentRef={printingRefHyDoctoral} />
-                  <PDFDownload componentRef={printingRefArviointiBachelorMaster} />
-                  <PDFDownload componentRef={printingRefArviointiDoctoral} />
+                  <PDFDownload linkName="uniBachelorMaster" componentRef={printingRefHyBachelorMaster} />
+                  <PDFDownload linkName="uniDoctoral" componentRef={printingRefHyDoctoral} />
+                  <PDFDownload linkName="arviointiBachelorMaster" componentRef={printingRefArviointiBachelorMaster} />
+                  <PDFDownload linkName="arviointiDoctoral" componentRef={printingRefArviointiDoctoral} />
                   <div className="testing-testing" ref={printingRefHyBachelorMaster}>
                     <style>{pageStyle}</style>
                     <CommitteePrinting type="uni-bachelor-master"> </CommitteePrinting>

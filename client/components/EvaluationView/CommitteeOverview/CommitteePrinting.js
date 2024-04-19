@@ -16,8 +16,11 @@ const StudyLevelContainer = ({ answerLevels }) => {
   return answerLevels.map(upperLevel => {
     return (
       <div>
-        <h2 style={{ textAlign: 'center' }}>{t('overview:uniPrintingTopHeader')}</h2>
-        <h2 style={{ textAlign: 'center' }}>{t('overview:uniPrintingSubHeaderHY')}</h2>
+        <h2 style={{ textAlign: 'center' }}>{t('overview:printingTopHeader')}</h2>
+        {upperLevel.levels.length === 1 && (
+          <h2 style={{ textAlign: 'center' }}>{t(`overview:selectedLevels:${upperLevel.levels[0]}`)}</h2>
+        )}
+        <h2 style={{ textAlign: 'center' }}>{t(`overview:printingSubHeaderUpperLevel:${upperLevel.title}`)}</h2>
         {upperLevel.levels.map(level => {
           return questions.map((theme, themeIndex) => {
             return <ThemeContainer upperLevel={upperLevel.title} level={level} theme={theme} themeIndex={themeIndex} />
@@ -207,7 +210,9 @@ const CommitteePrinting = ({ type = null }) => {
 
   return (
     <div ref={componentRef}>
-      <PDFDownload componentRef={componentRef} />
+      <div className="hide-in-print-mode">
+        <PDFDownload componentRef={componentRef} />
+      </div>
       <StudyLevelContainer answerLevels={answerLevel} />
     </div>
   )

@@ -334,11 +334,20 @@ export default {
     },
     uniTableHeaderHY: 'Helsingin yliopiston arvio ja toimenpide-ehdotukset',
     uniTableHeaderCommittee: 'Arviointiryhmän arvio ja toimenpide-ehdotukset',
-    uniPrintingTopHeader: 'Helsingin yliopiston koulutusohjelmien katselmus',
-    uniPrintingSubHeaderHY: 'Yliopiston ja arviointiryhmän arviot 2024',
+    printingTopHeader: 'Helsingin yliopiston koulutusohjelmien katselmus',
+    printingSubHeaderUpperLevel: {
+      university: 'Yliopiston arviot 2024',
+      arviointi: 'Arviointiryhmän arviot 2024',
+    },
     printingUpperLevelTitle: {
       university: 'Yliopiston arvio',
-      committee: 'Arviointiryhmän arvio',
+      arviointi: 'Arviointiryhmän arvio',
+    },
+    printingPDF: {
+      uniBachelorMaster: 'Kandi- ja maisteriohjelmat (yliopistotaso)',
+      uniDoctoral: 'Tohtoriohjelmat (yliopistotaso)',
+      arviointiBachelorMaster: 'Kandi- ja maisteriohjelmat (arviointiryhmä)',
+      arviointiDoctoral: 'Tohtoriohjelmat (arviointiryhmä)',
     },
     colorBlindMode: 'Näytä värit tekstinä',
   },

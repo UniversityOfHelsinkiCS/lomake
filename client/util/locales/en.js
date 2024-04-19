@@ -334,11 +334,20 @@ export default {
     },
     uniTableHeaderHY: 'University of Helsinki evaluation and development areas',
     uniTableHeaderCommittee: 'Evaluation group evaluation and development areas',
-    uniPrintingTopHeader: 'University of Helsinki review of degree programme evaluation',
-    uniPrintingSubHeaderHY: 'University of Helsinki and evaluation group 2024',
+    printingTopHeader: 'University of Helsinki review of degree programme evaluation',
+    printingSubHeaderUpperLevel: {
+      university: 'University level review 2024',
+      arviointi: 'Evaluation group review 2024',
+    },
     printingUpperLevelTitle: {
       university: 'University evaluation',
-      committee: 'Evaluation group evaluation',
+      arviointi: 'Evaluation group evaluation',
+    },
+    printingPDF: {
+      uniBachelorMaster: 'Bachelor´s and Master´s programmes (University level)',
+      uniDoctoral: 'Doctoral programmes (University level)',
+      arviointiBachelorMaster: 'Bachelor´s and Master´s programmes (Evaluation group)',
+      arviointiDoctoral: 'Doctoral programmes (Evaluation group)',
     },
     colorBlindMode: 'Show colors as text',
   },

@@ -327,12 +327,23 @@ export default {
     },
     uniTableHeaderHY: 'Helsingfors universitets utvärderings- och utvecklingsområden',
     uniTableHeaderCommittee: 'Utvärderingsgruppens utvärderings- och utvecklingsområden',
-    uniPrintingTopHeader: 'Helsingfors universitet genomgång av utvärderingen av utbildningsprogrammet',
-    uniPrintingSubHeaderHY: 'Helsingfors universitet och utvärderingsgruppen 2024',
+    printingTopHeader: 'Helsingfors universitet genomgång av utvärderingen av utbildningsprogrammet',
+    printingSubHeader: 'Helsingfors universitet och utvärderingsgruppen 2024',
+    printingSubHeaderUpperLevel: {
+      university: 'Recensioner på universitetsnivå 2024',
+      arviointi: 'utvärderingsgruppens bedömningar 2024',
+    },
     printingUpperLevelTitle: {
       university: 'Universitetsutvärdering',
-      committee: 'Utvärderingsgruppsutvärdering',
+      arviointi: 'Utvärderingsgruppsutvärdering',
     },
+    printingPDF: {
+      uniBachelorMaster: 'Kandidat- och masterprogram (universitetsnivå)',
+      uniDoctoral: 'Doktorandprogram (universitetsnivå)',
+      arviointiBachelorMaster: 'Kandidat- och masterprogram (Utvärderingsgrupp)',
+      arviointiDoctoral: 'Doktorandprogram (Utvärderingsgrupp)',
+    },
+
     colorBlindMode: 'Visa färger som text',
   },
 
