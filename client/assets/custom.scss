@@ -178,25 +178,14 @@ label {
   .the-form {
     display: block;
   }
-  .entity-university-container {
-    &-university {
-      margin-top: 30px,
-    }
-    &-arviointi {
-      margin-top: 30px;
-      margin-bottom: 10px;
-      border-style: solid;
-      border-color: black !important;
-      background-color: #f0f5f1;
-      border-width: 5px;
-      padding-top: 15px;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-bottom: 30px;
+
+  .university-printing-wrapper {
+    .page-break {
+      margin-top: 1rem;
+      display: block;
+      page-break-before:always;
     }
   }
-  .committee-color-table-wrapper {
-    margin-left: 4em;
-    margin-right: 4em;
-  }
+
+
 }

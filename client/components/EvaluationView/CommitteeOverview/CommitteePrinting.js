@@ -40,8 +40,10 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
   const year = getYearToShow({ draftYear, nextDeadline, form: formKeys.EVALUATION_COMMTTEES })
   const { t } = useTranslation()
 
+  let answerLength = 0
+
   return (
-    <div style={{ margin: '1em' }}>
+    <div style={{ margin: '1em' }} className="university-printing-wrapper">
       <div className="uni-print-theme-parts">
         {theme.parts.map((question, index) => {
           if (question.id === 'meta2' || question.id === 'university_where_are_we_in_five_years_opinion_differences') {
@@ -84,9 +86,17 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
           if (!currentAnswer || currentAnswer.length < 1) {
             return null
           }
-
+          if (answerLength > 1500) {
+            answerLength = 0
+          }
+          if (question.id.includes('actions')) {
+            const actionLength = currentAnswer.reduce((acc, { actions }) => acc + actions.length, 0)
+            answerLength += actionLength
+          } else {
+            answerLength += currentAnswer.length
+          }
           return (
-            <div>
+            <div className={answerLength > 1500 ? 'page-break' : ''}>
               {showThemeTitle && (
                 <h3
                   style={{
@@ -107,6 +117,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
                   level={level}
                   question={question}
                   currentAnswer={currentAnswer}
+                  answerLength={answerLength}
                 />
               </div>
             </div>
