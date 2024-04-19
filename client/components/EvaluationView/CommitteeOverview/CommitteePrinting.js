@@ -105,22 +105,13 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
                 </h3>
               )}
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'row' }}>
-                <div style={{ position: 'relative', marginBottom: '4em' }}>
-                  <p
-                    lang="fi"
-                    style={{
-                      width: '10em',
-                    }}
-                  >
-                    {questionLabelCorrectCase}
-                  </p>
-                </div>
                 <QuestionContainer
                   upperLevel={upperLevel}
                   level={level}
                   question={question}
                   currentAnswer={currentAnswer}
                   answerLength={answerLength}
+                  questionLabelCorrectCase={questionLabelCorrectCase}
                 />
               </div>
             </div>
@@ -131,9 +122,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
   )
 }
 
-const QuestionContainer = ({ question, level, currentAnswer }) => {
-  const { t } = useTranslation()
-
+const QuestionContainer = ({ question, currentAnswer, questionLabelCorrectCase }) => {
   if (!currentAnswer || currentAnswer.length < 0) {
     return (
       <div style={{ height: '20em', border: '3px solid', width: '100%', padding: '2em', margin: '2em' }}>
@@ -144,7 +133,7 @@ const QuestionContainer = ({ question, level, currentAnswer }) => {
   if (question.id.includes('actions')) {
     return (
       <div style={{ border: '3px solid', padding: '2em', margin: '2em' }}>
-        <h3>{t(`overview:selectedLevels:${level}`)}</h3>
+        <h3>{questionLabelCorrectCase}</h3>
         {currentAnswer.map(({ title, actions }) => {
           return (
             <div key={`${title}-${actions}`}>
@@ -160,7 +149,7 @@ const QuestionContainer = ({ question, level, currentAnswer }) => {
 
   return (
     <div style={{ border: '3px solid', padding: '2em', margin: '2em' }}>
-      <h3>{t(`overview:selectedLevels:${level}`)}</h3>
+      <h3>{questionLabelCorrectCase}</h3>
       <ReactMarkdown>{currentAnswer}</ReactMarkdown>
     </div>
   )
