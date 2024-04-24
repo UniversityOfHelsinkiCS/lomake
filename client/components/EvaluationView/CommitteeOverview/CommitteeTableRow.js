@@ -21,6 +21,7 @@ const TableRow = ({
   committee,
   gridColumnSize = null,
   finnishFormForTrafficLights,
+  topLevelIndex,
 }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
@@ -36,7 +37,13 @@ const TableRow = ({
   let questionLabel = question.label[lang]
 
   if (question.id.includes('_actions')) {
-    questionLabel = t('overview:developmentTarget')
+    if (topLevelIndex !== 3) {
+      questionLabel = t('overview:developmentTarget')
+    } else if (question.id === 'university_ease_of_study_actions') {
+      questionLabel = `1) ${questionLabel}`
+    } else if (question.id === 'university_programme_structure_actions') {
+      questionLabel = `2) ${questionLabel}`
+    }
   }
   return (
     <React.Fragment key={question.id}>
@@ -48,14 +55,21 @@ const TableRow = ({
 
       {tableIds.map(upperLevel => {
         return upperLevel.levels.map((level, index) => {
-          if (
-            level === 'overall' &&
-            question.id !== 'university_ease_of_study_actions' &&
-            question.id !== 'university_programme_structure_actions'
-          ) {
-            return <div key={`${question.id}-${upperLevel.title}-${level}`} />
-          }
           const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
+
+          if (
+            (level === 'overall' &&
+              question.id !== 'university_ease_of_study_actions' &&
+              question.id !== 'university_programme_structure_actions') ||
+            level === 'emptyFiller'
+          ) {
+            return (
+              <>
+                <div key={`${question.id}-${upperLevel.title}-${level}`} />
+                {isGap && <div className="committee-table-square-gap" />}
+              </>
+            )
+          }
           return (
             <Fragment key={`${question.id}-${upperLevel.title}-${level}`}>
               <ColorTableCell

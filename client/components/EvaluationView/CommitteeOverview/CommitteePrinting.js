@@ -15,7 +15,7 @@ const StudyLevelContainer = ({ answerLevels }) => {
   const { t } = useTranslation()
   return answerLevels.map(upperLevel => {
     return (
-      <div>
+      <div key={upperLevel.title}>
         <h2 style={{ textAlign: 'center' }}>{t('overview:printingTopHeader')}</h2>
         {upperLevel.levels.length === 1 && (
           <h2 style={{ textAlign: 'center' }}>{t(`overview:selectedLevels:${upperLevel.levels[0]}`)}</h2>
@@ -23,7 +23,15 @@ const StudyLevelContainer = ({ answerLevels }) => {
         <h2 style={{ textAlign: 'center' }}>{t(`overview:printingSubHeaderUpperLevel:${upperLevel.title}`)}</h2>
         {upperLevel.levels.map(level => {
           return questions.map((theme, themeIndex) => {
-            return <ThemeContainer upperLevel={upperLevel.title} level={level} theme={theme} themeIndex={themeIndex} />
+            return (
+              <ThemeContainer
+                key={`${upperLevel.title}-${level}-${theme.title.en}`}
+                upperLevel={upperLevel.title}
+                level={level}
+                theme={theme}
+                themeIndex={themeIndex}
+              />
+            )
           })
         })}
       </div>
@@ -95,7 +103,7 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             answerLength += currentAnswer.length
           }
           return (
-            <div className={answerLength > 1500 ? 'page-break' : ''}>
+            <div key={question.id} className={answerLength > 1500 ? 'page-break' : ''}>
               {showThemeTitle && (
                 <h3
                   lang="fi"

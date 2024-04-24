@@ -47,6 +47,7 @@ export default () => {
     return ['UNI']
   }, [programmes, currentUser])
 
+  // This is used for margin on printing
   const pageStyle = `
   @page {
     margin-top: 20cm;
