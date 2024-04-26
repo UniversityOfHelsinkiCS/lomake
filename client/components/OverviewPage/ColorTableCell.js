@@ -117,6 +117,16 @@ const ColorTableCell = ({
       }
     }
   } else if (form === formKeys.EVALUATION_COMMTTEES) {
+    if (uniFormTrafficLights === null) {
+      return (
+        <div
+          data-cy={`${programmesKey}-${questionId}`}
+          className="square"
+          style={{ background: colors.background_gray }}
+        />
+      )
+    }
+
     colorAnswer = { single: uniFormTrafficLights[colorId] }
     if (questionType === 'TEXTAREA_UNIVERSITY') {
       const textId = `${acualQuestionId}-overall_text`
