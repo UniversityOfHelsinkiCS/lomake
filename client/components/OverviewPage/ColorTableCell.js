@@ -161,7 +161,21 @@ const ColorTableCell = ({
     )
   }
 
-  if ((!colorAnswer || !colorAnswer.single) && (questionType !== 'TEXTAREA_UNIVERSITY' || !textAnswer)) {
+  if (form === formKeys.EVALUATION_COMMTTEES) {
+    if (
+      (!textAnswer && questionType === 'TEXTAREA_UNIVERSITY') ||
+      (questionType !== 'TEXTAREA_UNIVERSITY' && !colorAnswer.single)
+    ) {
+      return (
+        <div
+          data-cy={`${programmesKey}-${questionId}`}
+          className="square"
+          style={{ background: colors.background_gray }}
+        />
+      )
+    }
+  }
+  if (!colorAnswer) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
