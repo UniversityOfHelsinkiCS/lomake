@@ -108,6 +108,13 @@ $DEGREE_REFORM_COUNT: 10;
       filter: brightness(0.8);
     }
   }
+  &-blue {
+    @include square-basics();
+    background-color: rgb(223, 240, 255);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {

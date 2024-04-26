@@ -63,7 +63,7 @@ const ColorTableCell = ({
 
   const textId = `${questionId}_text`
   let colorId = `${questionId}_light`
-  const textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
+  let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
   let colorAnswer = null
 
   const getModalConfig = () => {
@@ -72,7 +72,7 @@ const ColorTableCell = ({
     let tempSubtitle = programmesName
     if (programmesKey === 'UNI') {
       tempQuestionId = questionData.rawQuestionId
-      const whichLevel = questionId.match('bachelor|master|doctoral')[0]
+      const whichLevel = questionId.match('bachelor|master|doctoral|overall')[0]
       tempSubtitle = t(`overview:selectedLevels:${whichLevel}`)
     }
     return {
@@ -118,6 +118,10 @@ const ColorTableCell = ({
     }
   } else if (form === formKeys.EVALUATION_COMMTTEES) {
     colorAnswer = { single: uniFormTrafficLights[colorId] }
+    if (questionType === 'TEXTAREA_UNIVERSITY') {
+      const textId = `${acualQuestionId}-overall_text`
+      textAnswer = programmesAnswers[textId]
+    }
   } else if (programmesAnswers[colorId] === undefined) {
     colorAnswer = null
   } else {
@@ -156,12 +160,26 @@ const ColorTableCell = ({
       />
     )
   }
-  if (!colorAnswer) {
+
+  if ((!colorAnswer || !colorAnswer.single) && !textAnswer) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
         className="square"
         style={{ background: colors.background_gray }}
+      />
+    )
+  }
+  if (questionType === 'TEXTAREA_UNIVERSITY') {
+    if (!textAnswer) return null
+    return (
+      <div
+        key={`${programmesKey}-${questionId}`}
+        data-cy={`${programmesKey}-${questionId}`}
+        className="square-blue"
+        onClick={() => {
+          setModalData(getModalConfig(modalConfig))
+        }}
       />
     )
   }

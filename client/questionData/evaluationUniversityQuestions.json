@@ -665,6 +665,55 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "faculty_where_are_we_in_five_years_opinion_differences"
+      },
+      {
+        "id": "evaluation_group_overall_actions",
+        "type": "ACTIONS_UNIVERSITY",
+        "label": {
+          "fi": "ARVIOINTIRYHMÄN YLEISET TOIMENPITEET",
+          "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA ÅTGÄRDER",
+          "en": "GENERAL MEASURES OF THE EVALUATION GROUP"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "no_color": true,
+        "noUniversityLevel": true
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
+      "en": "GENERAL OBSERVATIONS AND FEEDBACK OF THE EVALUATION GROUP",
+      "se": "ALLMÄNNA IAKTTAGELSER OCH FEEDBACK FRÅN UTVÄRDERINGSGRUPPEN"
+    },
+    "parts": [
+      {
+        "id": "evaluation_group_development_targets_and_actionable_items",
+        "index": 14,
+        "kludge": true,
+        "type": "TEXTAREA_UNIVERSITY",
+        "label": {
+          "fi": "",
+          "en": "",
+          "se": ""
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "maxLength": 2500
       }
     ]
   }

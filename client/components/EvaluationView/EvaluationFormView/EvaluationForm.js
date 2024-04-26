@@ -83,6 +83,8 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
     const gapSytle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
+    const maxLength = part.maxLength ? part.maxLength : undefined
+    const noUniversityLevel = part.noUniversityLevel ? part.noUniversityLevel : undefined
 
     return (
       <div key={`${part.id}-container`} style={gapSytle}>
@@ -101,6 +103,8 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
             form={form}
             summaryUrl={summaryUrl || null}
             kludge={part.kludge}
+            maxLength={maxLength}
+            noUniversityLevel={noUniversityLevel}
           />
         </div>
       </div>

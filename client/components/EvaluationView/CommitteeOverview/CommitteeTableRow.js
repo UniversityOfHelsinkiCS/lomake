@@ -21,7 +21,6 @@ const TableRow = ({
   committee,
   gridColumnSize = null,
   finnishFormForTrafficLights,
-  topLevelIndex,
 }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
@@ -37,14 +36,10 @@ const TableRow = ({
   let questionLabel = question.label[lang]
 
   if (question.id.includes('_actions')) {
-    if (topLevelIndex !== 3) {
-      questionLabel = t('overview:developmentTarget')
-    } else if (question.id === 'university_ease_of_study_actions') {
-      questionLabel = `1) ${questionLabel}`
-    } else if (question.id === 'university_programme_structure_actions') {
-      questionLabel = `2) ${questionLabel}`
-    }
+    questionLabel = t('overview:developmentTarget')
   }
+  const acualQuestionId = question.id
+
   return (
     <React.Fragment key={question.id}>
       <div className="table-container-row-link-committee">
@@ -58,18 +53,15 @@ const TableRow = ({
           const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
 
           if (
-            (level === 'overall' &&
-              question.id !== 'university_ease_of_study_actions' &&
-              question.id !== 'university_programme_structure_actions') ||
-            level === 'emptyFiller'
+            level === 'overall' &&
+            question.id !== 'university_ease_of_study_actions' &&
+            question.id !== 'university_programme_structure_actions'
           ) {
-            return (
-              <>
-                <div key={`${question.id}-${upperLevel.title}-${level}`} />
-                {isGap && <div className="committee-table-square-gap" />}
-              </>
-            )
+            return <div key={`${question.id}-${upperLevel.title}-${level}`} />
           }
+          const tempLevel =
+            question.id === 'evaluation_group_development_targets_and_actionable_items' ? 'overall' : level
+          const questionId = `${question.id}-${upperLevel.title}-${tempLevel}`
           return (
             <Fragment key={`${question.id}-${upperLevel.title}-${level}`}>
               <ColorTableCell
@@ -77,7 +69,7 @@ const TableRow = ({
                 programmesKey={committee.code}
                 programmesAnswers={selectedAnswers}
                 programmesOldAnswers={null}
-                questionId={`${question.id}-${upperLevel.title}-${level}`}
+                questionId={questionId}
                 questionType={question.type}
                 setModalData={setModalData}
                 form={form}
@@ -85,6 +77,7 @@ const TableRow = ({
                 questionData={{ rawQuestionId: question.id, topLevel: upperLevel.title, level, questionLabel }}
                 gridColumnSize={gridColumnSize}
                 uniFormTrafficLights={finnishFormForTrafficLights}
+                acualQuestionId={acualQuestionId}
               />
               {isGap && <div className="committee-table-square-gap" />}
             </Fragment>

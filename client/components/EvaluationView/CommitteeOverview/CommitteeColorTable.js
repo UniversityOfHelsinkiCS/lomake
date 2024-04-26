@@ -10,27 +10,6 @@ import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
-const customOverviewQuestions = () => {
-  const overallQuestions = questions.map((theme, index) => {
-    if (index === 2) return null
-    return theme.parts.find(
-      part => part.id === 'university_programme_structure_actions' || part.id === 'university_ease_of_study_actions',
-    )
-  })
-  const newQuestions = [
-    ...questions,
-    {
-      title: {
-        fi: 'ARVIOINTIRYHMÄN NIMEÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET OPISKELUN SUJUVUUDESTA',
-        en: 'DEVELOPING TARGETS DESIGNED BY THE EVALUATION GROUP AND THE MEASURES NEEDED TO PROTECT STUDIES',
-        se: 'DE UTVECKLINGSOMRÅDEN SOM UTFÄRDAS AV UTVÄRDERINGSGRUPPEN OCH BEHÖRIGA ÅTGÄRDER FÖR SKYDD AV LÄRDEN',
-      },
-      parts: [overallQuestions[0], overallQuestions[1]],
-    },
-  ]
-  return newQuestions
-}
-
 const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
   const dispatch = useDispatch()
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
@@ -74,10 +53,6 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
     { title: 'university', levels: ['master', 'doctoral'] },
     { title: 'arviointi', levels: ['master', 'doctoral'] },
   ]
-  const tableIdsForLastTheme = [
-    { title: 'university', levels: ['emptyFiller', 'emptyFiller'] },
-    { title: 'arviointi', levels: ['emptyFiller', 'overall'] },
-  ]
 
   if (selectedLevels) {
     const activeLevels = []
@@ -95,17 +70,19 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
       })
     }
   }
-  const customQuestions = customOverviewQuestions()
   const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
     <div className={`overview-color-grid-committee-${gridColumnSize}`}>
       <TableHeader tableIds={tableIds} />
       <div className="committee-table-header-second-level-right-padding" />
-      {customQuestions.map((theme, indexTopLevel) => {
+      {questions.map((theme, indexTopLevel) => {
         return theme.parts.map((part, index) => {
-          if (part.type === 'TITLE' || part.type === 'INFOBOX' || part.type === 'TEXTAREA_UNIVERSITY') return null
-          if (indexTopLevel === 3) {
-            tableIds = tableIdsForLastTheme
+          if (
+            part.type === 'TITLE' ||
+            part.type === 'INFOBOX' ||
+            (part.type === 'TEXTAREA_UNIVERSITY' && theme.title.fi !== 'ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE')
+          ) {
+            return null
           }
           return (
             <Fragment key={`${part.id}-${theme.title}`}>
@@ -134,7 +111,6 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
                 setProgramControlsToShow={setProgramControlsToShow}
                 gridColumnSize={gridColumnSize}
                 finnishFormForTrafficLights={finnishFormForTrafficLights}
-                topLevelIndex={indexTopLevel}
               />
             </Fragment>
           )
