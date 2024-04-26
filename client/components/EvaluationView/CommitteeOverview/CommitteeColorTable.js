@@ -46,7 +46,7 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
   } else {
     filteredAnswers = filteredAnswers.data
   }
-  if (answers.pending || !answers.data || !oldAnswers.data) {
+  if (answers.pending || !answers.data || !oldAnswers.data || !finnishFormForTrafficLights) {
     return <Loader active inline="centered" />
   }
   let tableIds = [
