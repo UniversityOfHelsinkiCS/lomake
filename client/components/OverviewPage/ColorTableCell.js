@@ -161,7 +161,7 @@ const ColorTableCell = ({
     )
   }
 
-  if ((!colorAnswer || !colorAnswer.single) && !textAnswer) {
+  if ((!colorAnswer || !colorAnswer.single) && (questionType !== 'TEXTAREA_UNIVERSITY' || !textAnswer)) {
     return (
       <div
         data-cy={`${programmesKey}-${questionId}`}
