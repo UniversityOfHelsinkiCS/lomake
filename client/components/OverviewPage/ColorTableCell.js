@@ -200,7 +200,7 @@ const ColorTableCell = ({
       <div
         key={`${programmesKey}-${questionId}`}
         data-cy={`${programmesKey}-${questionId}`}
-        className="square-blue"
+        className="square-blue-wide"
         onClick={() => {
           setModalData(getModalConfig(modalConfig))
         }}

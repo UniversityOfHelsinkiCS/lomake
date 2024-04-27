@@ -109,11 +109,14 @@ $DEGREE_REFORM_COUNT: 10;
     }
   }
   &-blue {
+    &-wide {
     @include square-basics();
+    grid-column:span  2;
     background-color: rgb(223, 240, 255);
     &:hover {
       filter: brightness(0.8);
     }
+  }
   }
 }
 

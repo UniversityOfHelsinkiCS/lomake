@@ -12,6 +12,35 @@ const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {
   return false
 }
 
+const isItEmptyCell = ({ questionId, upperLevel, level }) => {
+  // This is used to create empty cells for the table when the question is not supposed to be shown in the table
+  if (questionId === 'evaluation_group_development_targets_and_actionable_items' && upperLevel === 'university') {
+    return true
+  }
+  if (
+    level === 'overall' &&
+    questionId !== 'university_ease_of_study_actions' &&
+    questionId !== 'university_programme_structure_actions'
+  ) {
+    return true
+  }
+  if (questionId === 'evaluation_group_overall_actions' && upperLevel === 'university') {
+    return true
+  }
+  return false
+}
+
+const isItHiddenCell = ({ questionId, upperLevel, level }) => {
+  if (
+    questionId === 'evaluation_group_development_targets_and_actionable_items' &&
+    upperLevel === 'arviointi' &&
+    level === 'master'
+  ) {
+    return true
+  }
+  return false
+}
+
 const TableRow = ({
   question,
   selectedAnswers,
@@ -52,12 +81,16 @@ const TableRow = ({
         return upperLevel.levels.map((level, index) => {
           const isGap = getCommitteeGap({ topLevel: upperLevel.title, gridColumnSize, index })
 
-          if (
-            level === 'overall' &&
-            question.id !== 'university_ease_of_study_actions' &&
-            question.id !== 'university_programme_structure_actions'
-          ) {
-            return <div key={`${question.id}-${upperLevel.title}-${level}`} />
+          if (isItEmptyCell({ questionId: question.id, upperLevel: upperLevel.title, level })) {
+            return (
+              <>
+                <div key={`${question.id}-${upperLevel.title}-${level}`} />
+                {isGap && <div className="committee-table-square-gap" />}
+              </>
+            )
+          }
+          if (isItHiddenCell({ questionId: question.id, upperLevel: upperLevel.title, level })) {
+            return null
           }
           const tempLevel =
             question.id === 'evaluation_group_development_targets_and_actionable_items' ? 'overall' : level
