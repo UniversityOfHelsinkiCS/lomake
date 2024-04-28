@@ -704,13 +704,13 @@
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
           "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
-          "en": "",
-          "se": ""
+          "en": "GENERAL FINDINGS AND FEEDBACK FROM THE EVALUATION GROUP",
+          "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA IAKTTAGELSER OCH RESPONS"
         },
         "description": {
-          "fi": "",
-          "se": "",
-          "en": ""
+          "fi": "Arviointiryhmän yleiset havainnot ja palaute",
+          "se": "Utvärderingsgruppens allmänna iakttagelser och respons",
+          "en": "General findings and feedback from the evaluation group"
         },
         "required": true,
         "maxLength": 2500
