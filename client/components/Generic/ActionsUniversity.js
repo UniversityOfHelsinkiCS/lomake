@@ -22,24 +22,24 @@ const ActionsUniversity = ({
 
   let evaluationTitle = {
     level: 'arviointi',
-    fi: 'ARVIOINTIRYHMÄN NIMEÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET OPISKELUN SUJUVUUDESTA',
-    se: 'ÅTGÄRDER SON FÖRESLAGITS AV UTVÄRDERINGSGRUPPEN OM SMIDIGA STUDIER',
-    en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE SMOOTH RUNNING OF STUDIES, AS IDENTIFIED BY THE EVALUATION GROUP',
+    fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
+    se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
+    en: 'Areas for development and measures identified by the evaluation group',
   }
 
   if (id === 'university_programme_structure_actions') {
     evaluationTitle = {
       level: 'arviointi',
-      fi: 'ARVIOINTIRYHMÄN NIMEÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET KOULUTUKSEN KOKONAISRAKENTEESTA, KOULUTUSOHJELMIEN ASEMASTA, JOHTAMISESTA JA RESURSSEISTA',
-      se: 'ÅTGÄRDER SON FÖRESLAGITS AV UTVÄRDERINGSGRUPPEN OM UTBILDNINGENS HELHETSSTRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMENS STÄLLNING',
-      en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES, AS IDENTIFIED BY THE EVALUATION GROUP',
+      fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
+      se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
+      en: 'Areas for development and measures identified by the evaluation group',
     }
   } else if (id === 'evaluation_group_overall_actions') {
     evaluationTitle = {
       level: 'arviointi',
-      fi: 'ARVIOINTIRYHMÄN YLEISET KEHITTÄMISEHDOTUKSET',
-      se: '',
-      en: '',
+      fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
+      se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
+      en: 'Areas for development and measures identified by the evaluation group',
     }
   }
   const questionLevels = [universityTitle, evaluationTitle]

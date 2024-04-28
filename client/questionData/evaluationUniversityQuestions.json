@@ -247,7 +247,7 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
         "shortLabel": {
-          "fi": "Yliopiston näkemys kehittämiskohteista ja toimenpiteistä",
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
           "se": "",
           "en": "University view of development areas and measures"
         },
@@ -392,8 +392,8 @@
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
-          "se": "",
-          "en": ""
+          "se": "Fakultetsöverskridande program",
+          "en": "Joint programmes at the university"
         },
         "label": {
           "fi": "TIEDEKUNTIEN YHTEISET OHJELMAT",
@@ -518,7 +518,7 @@
         },
         "shortLabel": {
           "fi": "Yliopiston näkemys kehittämiskohteista ja toimenpiteistä",
-          "se": "",
+          "se": "Universitetets syn på utvecklingsområden och åtgärder som bör vidtas",
           "en": "University view of development areas and measures"
         },
         "description": {
@@ -551,8 +551,8 @@
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
           "fi": "KOULUTUKSEN KOKONAISTOIMIVUUS",
-          "se": "",
-          "en": ""
+          "se": "Den övergripande situationen för universitets utbildning för närvarande",
+          "en": "Overall status of the degree programmes at the university"
         },
         "label": {
           "fi": "YLIOPISTON KOULUTUKSEN KOKONAISTOIMIVUUS",
@@ -612,8 +612,8 @@
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
           "fi": "Missä yliopiston koulutuksessa mennään viiden vuoden kuluttua",
-          "se": "",
-          "en": ""
+          "se": "Var universitetes utbildning befinner sig om fem år",
+          "en": "Overall status of education of the university in five years"
         },
         "label": {
           "fi": "MISSÄ YLIOPISTON KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
@@ -670,9 +670,9 @@
         "id": "evaluation_group_overall_actions",
         "type": "ACTIONS_UNIVERSITY",
         "label": {
-          "fi": "ARVIOINTIRYHMÄN YLEISET TOIMENPITEET",
-          "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA ÅTGÄRDER",
-          "en": "GENERAL MEASURES OF THE EVALUATION GROUP"
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
         },
         "description": {
           "fi": "",
@@ -693,8 +693,8 @@
   {
     "title": {
       "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
-      "en": "GENERAL OBSERVATIONS AND FEEDBACK OF THE EVALUATION GROUP",
-      "se": "ALLMÄNNA IAKTTAGELSER OCH FEEDBACK FRÅN UTVÄRDERINGSGRUPPEN"
+      "en": "GENERAL FINDINGS AND FEEDBACK FROM THE EVALUATION GROUP",
+      "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA IAKTTAGELSER OCH RESPONS"
     },
     "parts": [
       {
@@ -703,7 +703,7 @@
         "kludge": true,
         "type": "TEXTAREA_UNIVERSITY",
         "label": {
-          "fi": "",
+          "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
           "en": "",
           "se": ""
         },
