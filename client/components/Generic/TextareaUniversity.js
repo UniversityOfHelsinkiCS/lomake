@@ -7,7 +7,7 @@ const TextareaUniversity = ({ label, id, required, summaryData, form, maxLength,
     <div data-cy={`university-textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
       {showOnlyOverall ? (
         <Textarea
-          id={`${id}-overall`}
+          id={`${id}-arviointi-overall`}
           label={label}
           required={required}
           form={form}

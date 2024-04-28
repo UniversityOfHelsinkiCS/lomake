@@ -129,7 +129,7 @@ const ColorTableCell = ({
 
     colorAnswer = { single: uniFormTrafficLights[colorId] }
     if (questionType === 'TEXTAREA_UNIVERSITY') {
-      const textId = `${acualQuestionId}-overall_text`
+      const textId = `${acualQuestionId}-arviointi-overall_text`
       textAnswer = programmesAnswers[textId]
     }
   } else if (programmesAnswers[colorId] === undefined) {

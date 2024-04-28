@@ -206,10 +206,10 @@ const CommitteePrinting = ({ type = null }) => {
       answerLevel = [{ title: 'university', levels: ['doctoral'] }]
       break
     case 'arviointi-bachelor-master':
-      answerLevel = [{ title: 'arviointi', levels: ['master'] }]
+      answerLevel = [{ title: 'arviointi', levels: ['master', 'overall'] }]
       break
     case 'arviointi-doctoral':
-      answerLevel = [{ title: 'arviointi', levels: ['doctoral'] }]
+      answerLevel = [{ title: 'arviointi', levels: ['doctoral', 'overall'] }]
       break
     default:
       answerLevel = answerLevels
