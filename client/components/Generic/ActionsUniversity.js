@@ -20,28 +20,13 @@ const ActionsUniversity = ({
     sv: 'Universitetsnivå utvärdering',
   }
 
-  let evaluationTitle = {
+  const evaluationTitle = {
     level: 'arviointi',
     fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
     se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
     en: 'Areas for development and measures identified by the evaluation group',
   }
 
-  if (id === 'university_programme_structure_actions') {
-    evaluationTitle = {
-      level: 'arviointi',
-      fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
-      se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
-      en: 'Areas for development and measures identified by the evaluation group',
-    }
-  } else if (id === 'evaluation_group_overall_actions') {
-    evaluationTitle = {
-      level: 'arviointi',
-      fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
-      se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
-      en: 'Areas for development and measures identified by the evaluation group',
-    }
-  }
   const questionLevels = [universityTitle, evaluationTitle]
 
   if (noUniversityLevel === true) {

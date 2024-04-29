@@ -248,8 +248,8 @@
         },
         "shortLabel": {
           "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
-          "se": "",
-          "en": "University view of development areas and measures"
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä. Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
@@ -517,9 +517,9 @@
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
         },
         "shortLabel": {
-          "fi": "Yliopiston näkemys kehittämiskohteista ja toimenpiteistä",
-          "se": "Universitetets syn på utvecklingsområden och åtgärder som bör vidtas",
-          "en": "University view of development areas and measures"
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
         },
         "description": {
           "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä.",
