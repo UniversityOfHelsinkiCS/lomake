@@ -57,8 +57,6 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
             return null
           }
           const showThemeTitle = index === 0
-          const questionLabel = question.shortLabel ? question.shortLabel[lang] : question.label[lang]
-          const questionLabelCorrectCase = questionLabel.charAt(0).toUpperCase() + questionLabel.toLowerCase().slice(1)
 
           const selectedAnswers = answersByYear({
             year,
@@ -102,6 +100,15 @@ const ThemeContainer = ({ upperLevel, theme, level, themeIndex }) => {
           } else {
             answerLength += currentAnswer.length
           }
+
+          let questionLabel = question.label ? question.label[lang] : question.shortLabel[lang]
+          if (question.type === 'ACTIONS_UNIVERSITY') {
+            if (upperLevel === 'arviointi') {
+              questionLabel = question.shortLabel ? question.shortLabel[lang] : question.label[lang]
+            }
+          }
+          const questionLabelCorrectCase = questionLabel.charAt(0).toUpperCase() + questionLabel.toLowerCase().slice(1)
+
           return (
             <div key={question.id} className={answerLength > 1500 ? 'page-break' : ''}>
               {showThemeTitle && (
