@@ -713,7 +713,7 @@
           "en": "General findings and feedback from the evaluation group"
         },
         "required": true,
-        "maxLength": 2500
+        "maxLength": 6000
       }
     ]
   }
