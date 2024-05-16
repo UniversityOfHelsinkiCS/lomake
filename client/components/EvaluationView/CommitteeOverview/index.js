@@ -103,20 +103,12 @@ export default () => {
           <div className="wide-header-committee">
             <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
-              {Object.keys(selectedLevels).map(level => (
-                <Radio
-                  toggle
-                  key={level}
-                  className="committee-level-filter"
-                  data-cy={`committee-level-filter-${level}`}
-                  onClick={() => handleSelectedLevels(level)}
-                  label={t(`overview:selectedLevels:${level}`)}
-                />
-              ))}
+              <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {(isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
+              {(true || isAdmin(currentUser) || isKatselmusProjektiOrOhjausryhma(currentUser)) && (
                 <>
+                  <h4>{t(`overview:print`)}</h4>
                   <PDFDownload linkName="uniBachelorMaster" componentRef={printingRefHyBachelorMaster} />
                   <PDFDownload linkName="uniDoctoral" componentRef={printingRefHyDoctoral} />
                   <PDFDownload linkName="arviointiBachelorMaster" componentRef={printingRefArviointiBachelorMaster} />
@@ -139,8 +131,6 @@ export default () => {
                   </div>
                 </>
               )}
-              <br />
-              <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>
           </div>
           <div className="committee-color-table-wrapper" style={{ marginTop: '1em' }}>

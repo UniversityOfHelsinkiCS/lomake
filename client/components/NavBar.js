@@ -53,13 +53,17 @@ const GoToEvaluationButton = ({ user }) => {
     uniFormCode = `UNI_SE`
   }
 
+  const isEmployee = user.iamGroups.includes('hy-employees')
+
   return (
     <Menu.Item style={{ padding: 0 }}>
       <Dropdown item data-cy="nav-evaluation" text={t('evaluation')} style={{ height: '100%' }}>
         <Dropdown.Menu>
-          <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
-            {t('generic:level:programmes')}
-          </Dropdown.Item>
+          {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (    
+            <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
+              {t('generic:level:programmes')}
+            </Dropdown.Item>
+          ) : null}
           {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-faculties"
@@ -80,7 +84,7 @@ const GoToEvaluationButton = ({ user }) => {
               {t('generic:level:university')}
             </Dropdown.Item>
           ) : null}
-          {isAdmin(user) || isEvaluationUniversityUser(user) ? (
+          {isAdmin(user) || isEvaluationUniversityUser(user) || isEmployee ? (
             <Dropdown.Item
               data-cy="nav-evaluation-option-university-overview"
               as={Link}
@@ -186,7 +190,7 @@ const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
         <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
       </Menu.Item>
       {hasProgrammeOrSpecial && <GoToYearlyAssessmentButton />}
-      {hasProgrammeOrSpecial && <GoToEvaluationButton user={user} />}
+      <GoToEvaluationButton user={user} />
       {hasProgrammeOrSpecial && <GoToDegreeReform user={user} />}
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>

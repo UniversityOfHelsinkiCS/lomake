@@ -304,6 +304,7 @@ export default {
     selectYear: 'Select year to inspect',
     readAnswers: 'Read answers',
     compareAnswers: 'Compare answers',
+    toKatselmus: 'To university review overview',
     csvDownload: 'Download CSV',
     name: 'Name',
     view: 'Read',
@@ -350,6 +351,7 @@ export default {
       arviointiDoctoral: 'Doctoral programmes (Evaluation group)',
     },
     colorBlindMode: 'Show colors as text',
+    print: 'Printable versions',
   },
 
   report: {

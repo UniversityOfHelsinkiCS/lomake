@@ -153,7 +153,10 @@ export default () => {
           </div>
         </>
       ) : (
-        <NoPermissions t={t} />
+        <>
+          {false && <NoPermissions t={t} />}
+          <a href="/evaluation-university/">{t('overview:toKatselmus')}</a>
+        </>
       )}
     </>
   )

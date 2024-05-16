@@ -305,6 +305,7 @@ export default {
     selectYear: 'Valitse tarkasteltava vuosi',
     readAnswers: 'Lue vastauksia',
     compareAnswers: 'Vertaile vastauksia',
+    toKatselmus: 'Katselmuksen yliopistotason yhteenvetoon',
     csvDownload: 'Lataa CSV',
     name: 'Nimi',
     view: 'Luku',
@@ -350,6 +351,7 @@ export default {
       arviointiDoctoral: 'Tohtoriohjelmat (arviointiryhmä)',
     },
     colorBlindMode: 'Näytä värit tekstinä',
+    print: 'Tulostettavat versiot'
   },
 
   report: {

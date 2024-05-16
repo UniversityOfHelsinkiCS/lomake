@@ -300,6 +300,7 @@ export default {
     selectYear: 'Välj ett år att granska',
     readAnswers: 'Läs svar',
     compareAnswers: 'Jämför svar',
+    toKatselmus: 'Till universitetsnivå översyn',
     csvDownload: 'Ladda ner CSV',
     name: 'Namn',
     view: 'Läs',
@@ -345,6 +346,7 @@ export default {
     },
 
     colorBlindMode: 'Visa färger som text',
+    print: 'Utskrivbara versioner',
   },
 
   report: {
