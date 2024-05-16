@@ -59,7 +59,7 @@ const GoToEvaluationButton = ({ user }) => {
     <Menu.Item style={{ padding: 0 }}>
       <Dropdown item data-cy="nav-evaluation" text={t('evaluation')} style={{ height: '100%' }}>
         <Dropdown.Menu>
-          {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (    
+          {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (
             <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
               {t('generic:level:programmes')}
             </Dropdown.Item>

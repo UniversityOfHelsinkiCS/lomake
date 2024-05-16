@@ -37,6 +37,7 @@ export default () => {
   // all have rights!
   const hasRights = currentUser => isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)
 
+  // eslint-disable-next-line no-unused-vars
   const handleSelectedLevels = level => {
     setSelectedLevels({ ...selectedLevels, [level]: !selectedLevels[level] })
   }

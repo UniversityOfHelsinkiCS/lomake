@@ -59,7 +59,6 @@ export default () => {
 
   const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes, year, form })
 
-
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
       const name = prog.name[lang]

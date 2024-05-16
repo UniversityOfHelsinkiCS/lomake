@@ -351,7 +351,7 @@ export default {
       arviointiDoctoral: 'Tohtoriohjelmat (arviointiryhmä)',
     },
     colorBlindMode: 'Näytä värit tekstinä',
-    print: 'Tulostettavat versiot'
+    print: 'Tulostettavat versiot',
   },
 
   report: {
