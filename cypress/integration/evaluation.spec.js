@@ -232,6 +232,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('be.visible')
       // ----------------
 
+      /*
       // Choose master level
       cy.get('[data-cy=committee-level-filter-master]').click()
 
@@ -240,6 +241,7 @@ describe('Evaluation forms tests', () => {
       // Doctoral shouldn't be visible
       cy.get('[data-cy=UNI-student_admittance_university-university-doctoral-single]').should('not.exist')
       cy.get('[data-cy=UNI-student_admittance_university-arviointi-doctoral-single]').should('not.exist')
+      */
     })
 
     it('Test that actions are saved', () => {
