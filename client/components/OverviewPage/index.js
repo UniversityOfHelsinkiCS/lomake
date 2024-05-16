@@ -155,7 +155,9 @@ export default () => {
       ) : (
         <>
           {false && <NoPermissions t={t} />}
-          <a href="/evaluation-university/">{t('overview:toKatselmus')}</a>
+          <div data-cy="no-permissions-message">
+            <a href="/evaluation-university/">{t('overview:toKatselmus')}</a>
+          </div>
         </>
       )}
     </>
