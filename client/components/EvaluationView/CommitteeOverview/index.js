@@ -3,7 +3,7 @@ import { Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
+import { isAdmin, isEvaluationUniversityUser, isKatselmusProjektiOrOhjausryhma, isBasicUser } from '@root/config/common'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { setColorBlindMode } from 'Utilities/redux/filterReducer'
@@ -34,7 +34,8 @@ export default () => {
     document.title = `${t('evaluation')}`
   }, [lang])
 
-  const hasRights = currentUser => isEvaluationUniversityUser(currentUser)
+  // all have rights!
+  const hasRights = currentUser => isBasicUser(currentUser) || isEvaluationUniversityUser(currentUser)
 
   const handleSelectedLevels = level => {
     setSelectedLevels({ ...selectedLevels, [level]: !selectedLevels[level] })

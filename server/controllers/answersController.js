@@ -35,13 +35,15 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       return res.send(data)
     }
 
+    const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
+
     // normal user route
     const anyAccess = hasAnyAccess(req.user)
     const data = await db.tempAnswer.findAll({
       where: {
         year: await whereDraftYear(),
         [Op.or]: [
-          { programme: Object.keys(req.user.access) },
+          { programme: Object.keys(req.user.access).concat(finalCommitee) },
           anyAccess ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES] } : {},
         ],
       },
@@ -197,6 +199,7 @@ const getAllUserHasAccessTo = async (req, res) => {
     if (!req.path.endsWith('/all')) {
       years = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
     }
+
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.answer.findAll({ where: { year: years } })
       return res.send(data)
@@ -205,10 +208,13 @@ const getAllUserHasAccessTo = async (req, res) => {
     const anyAccess = hasAnyAccess(req.user)
 
     // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
+
+    const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
+
     const data = await db.answer.findAll({
       where: {
         [Op.or]: [
-          { programme: Object.keys(req.user.access), year: years },
+          { programme: Object.keys(req.user.access).concat(finalCommitee), year: years },
           anyAccess ? { year: years, form: formKeys.YEARLY_ASSESSMENT } : {},
         ],
       },
