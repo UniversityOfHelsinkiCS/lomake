@@ -154,7 +154,7 @@ const GoToDegreeReform = ({ user }) => {
   )
 }
 
-const MenuNavigation = ({ pathname, user }) => {
+const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
   const location = useLocation()
 
   if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) {
@@ -185,9 +185,9 @@ const MenuNavigation = ({ pathname, user }) => {
       <Menu.Item as={Link} to="/">
         <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
       </Menu.Item>
-      <GoToYearlyAssessmentButton />
-      <GoToEvaluationButton user={user} />
-      <GoToDegreeReform user={user} />
+      {hasProgrammeOrSpecial && <GoToYearlyAssessmentButton />}
+      {hasProgrammeOrSpecial && <GoToEvaluationButton user={user} />}
+      {hasProgrammeOrSpecial && <GoToDegreeReform user={user} />}
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
@@ -204,6 +204,7 @@ export default () => {
   const { t, i18n } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
   const lang = useSelector(state => state.language)
+  const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const location = useLocation()
   const history = useHistory()
 
@@ -239,9 +240,11 @@ export default () => {
     }
   }
 
+  const hasProgrammeOrSpecial = (programmes && programmes.length > 0) || Object.keys(user.specialGroup).length > 0
+
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
-      <MenuNavigation pathname={location.pathname} user={user} />
+      <MenuNavigation pathname={location.pathname} user={user} hasProgrammeOrSpecial={hasProgrammeOrSpecial} />
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>

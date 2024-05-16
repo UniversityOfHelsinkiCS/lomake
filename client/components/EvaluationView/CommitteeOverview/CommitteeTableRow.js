@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -72,9 +73,12 @@ const TableRow = ({
   return (
     <React.Fragment key={question.id}>
       <div className="table-container-row-link-committee">
-        <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
-          {questionLabel}
-        </Link>
+        {form === 6 ?
+          <div>{questionLabel}</div> :
+          <Link data-cy="colortable-link-to-[question-fill-this]" to={targetURL}>
+            {questionLabel}
+          </Link>
+        }
       </div>
 
       {tableIds.map(upperLevel => {
