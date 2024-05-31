@@ -2,7 +2,7 @@ import React from 'react'
 import { Divider } from 'semantic-ui-react'
 import Textarea from './Textarea'
 
-const MetaEntity = ({ label, id, form, actions, description }) => {
+const MetaEntity = ({ label, id, form, actions, description, kludge }) => {
   return (
     <div>
       <Divider />
@@ -13,7 +13,7 @@ const MetaEntity = ({ label, id, form, actions, description }) => {
           <li key={action}>{action}</li>
         ))}
       </ol>
-      <Textarea id={id} label={description} form={form} kludge={false} />
+      <Textarea id={id} label={description} form={form} kludge={kludge} />
     </div>
   )
 }
