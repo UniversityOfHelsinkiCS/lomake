@@ -38,7 +38,7 @@ const ProgrammeLevelForm = ({ room }) => {
     if (!programme) return
     dispatch(getSingleProgrammesAnswers({ room, year, form }))
     if (
-      !getFormViewRights({
+      getFormViewRights({
         accessToTempAnswers,
         programme,
         writeAccess,
