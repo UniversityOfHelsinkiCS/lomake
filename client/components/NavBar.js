@@ -158,6 +158,15 @@ const GoToDegreeReform = ({ user }) => {
   )
 }
 
+const GoToMetaEvaluation = () => {
+  const { t } = useTranslation()
+  return (
+    <Menu.Item as={Link} to="/meta-evaluation">
+      {t('meta-evaluation')}
+    </Menu.Item>
+  )
+}
+
 const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
   const location = useLocation()
 
@@ -193,6 +202,7 @@ const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
       <GoToEvaluationButton user={user} />
       {hasProgrammeOrSpecial && <GoToDegreeReform user={user} />}
       {user.admin && <GoToAdminPageButton />}
+      {user.admin && <GoToMetaEvaluation />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">
           <Icon name="mail outline" />
