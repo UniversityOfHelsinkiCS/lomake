@@ -162,7 +162,7 @@ const GoToMetaEvaluation = () => {
   const { t } = useTranslation()
   return (
     <Menu.Item as={Link} to="/meta-evaluation">
-      {t('meta-evaluation')}
+      {t('metaevaluation')}
     </Menu.Item>
   )
 }

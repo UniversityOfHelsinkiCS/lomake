@@ -74,6 +74,7 @@ export default {
     showAllProgrammes: 'Visa alla studieprogram',
     showDataByProgramme: 'Examensprogram svar per fakultet',
     showAllFacultyProgrammes: 'Visa även gemensamma program',
+    metaevaluation: 'Översyns översyn',
   },
 
   aboutPage: {
