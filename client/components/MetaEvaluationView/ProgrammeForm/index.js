@@ -14,7 +14,6 @@ import { metareviewQuestions as questions } from '../../../questionData'
 
 const form = 7
 
-// eslint-disable-next-line no-unused-vars
 const ProgrammeLevelForm = ({ room }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
