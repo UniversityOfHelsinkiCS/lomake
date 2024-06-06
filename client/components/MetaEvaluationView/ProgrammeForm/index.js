@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
+import { Loader } from 'semantic-ui-react'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getFormViewRights } from 'Utilities/common'
@@ -57,6 +58,7 @@ const ProgrammeLevelForm = ({ room }) => {
   }, [programme, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
   if (!user || !room) return <Redirect to="/" />
+  if (!programme) return <Loader active inline="centered" />
 
   const partComponentMap = {
     META_ENTITY: MetaEntity,
@@ -89,7 +91,7 @@ const ProgrammeLevelForm = ({ room }) => {
 
   return (
     <div>
-      <h1>Programme Level form</h1>
+      <h1>{programme.name[lang]}</h1>
       {questions.map(question => (
         <div key={question.id}>{partMap(question)}</div>
       ))}
