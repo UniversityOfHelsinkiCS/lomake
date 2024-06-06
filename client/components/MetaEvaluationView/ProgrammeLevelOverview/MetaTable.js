@@ -2,25 +2,16 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const MetaTable = ({ programmes, questions }) => {
+const MetaTable = ({ programmes, questions, answers }) => {
   const lang = useSelector(state => state.language)
-  const isQuestionFilled = (programmeId, questionId) => {
-    // Replace this with your logic to determine if a question is filled
-    // For demonstration, let's assume an object where this data is stored
-    const filledQuestions = {
-      1: { 1: true, 2: false },
-      2: { 1: true, 2: true },
-    }
 
-    return filledQuestions[programmeId] && filledQuestions[programmeId][questionId]
-  }
   return (
     <table border="1">
       <thead>
         <tr>
           <th>Programme / Question</th>
-          {questions.map(question => (
-            <th key={question.id}>{question}</th>
+          {questions.map((question, index) => (
+            <th key={question.id}>{index + 1}</th>
           ))}
         </tr>
       </thead>
@@ -30,9 +21,12 @@ const MetaTable = ({ programmes, questions }) => {
             <td>
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.name[lang]}</Link>
             </td>
-            {questions.map(question => (
-              <td key={question.id}>{isQuestionFilled(programme.id, question.id) ? 'Filled' : 'Not Filled'}</td>
-            ))}
+            {questions.map(question => {
+              const programmeAnswers = answers.data.find(answer => answer.programme === programme.key)
+              const answerStatus =
+                programmeAnswers && programmeAnswers.data[`${question.id}_text`] !== undefined ? 'Filled' : 'Not Filled'
+              return <td key={question.id}>{answerStatus}</td>
+            })}
           </tr>
         ))}
       </tbody>
