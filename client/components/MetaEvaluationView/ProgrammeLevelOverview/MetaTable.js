@@ -31,9 +31,10 @@ const MetaTable = ({ programmes, questions }) => {
   if (answers.pending || !answers.data) {
     return <Loader active inline="centered" />
   }
+
   return (
-    <table border="1">
-      <thead>
+    <table border="0">
+      <thead className="sticky-header">
         <tr>
           <th>
             <div onClick={() => sort('name')}>
@@ -47,14 +48,16 @@ const MetaTable = ({ programmes, questions }) => {
               <Icon name="sort" />
             </div>
           </th>
-          {questions.map((question, index) => (
-            <th key={question.id}>{index + 1}</th>
+          {questions.map(question => (
+            <th key={question.id}>
+              <span className="vertical-text">{question.shortLabel[lang]}</span>
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {programmes.map(programme => (
-          <tr key={programme.id}>
+          <tr style={{ lineHeight: '3' }} key={programme.id}>
             <td>
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.name[lang]}</Link>
             </td>
