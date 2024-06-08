@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next'
 import { Loader, Icon } from 'semantic-ui-react'
 import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import { sortedItems } from 'Utilities/common'
+import MetaTableCell from './MetaTableCell'
 
-const MetaTable = ({ programmes, questions }) => {
+const MetaTable = ({ programmes, questions, onButtonClick }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -37,13 +38,13 @@ const MetaTable = ({ programmes, questions }) => {
       <thead className="sticky-header">
         <tr>
           <th>
-            <div onClick={() => sort('name')}>
+            <div style={{ cursor: 'pointer' }} onClick={() => sort('name')}>
               {t('programmeHeader')}
               <Icon name="sort" />
             </div>
           </th>
           <th>
-            <div onClick={() => sort('key')}>
+            <div style={{ cursor: 'pointer' }} onClick={() => sort('key')}>
               {t('code')}
               <Icon name="sort" />
             </div>
@@ -66,9 +67,8 @@ const MetaTable = ({ programmes, questions }) => {
             </td>
             {questions.map(question => {
               const programmeAnswers = answers.data.find(answer => answer.programme === programme.key)
-              const answerStatus =
-                programmeAnswers && programmeAnswers.data[`${question.id}_text`] !== undefined ? 'Filled' : 'Not Filled'
-              return <td key={question.id}>{answerStatus}</td>
+              const answer = programmeAnswers.data[`${question.id}_text`]
+              return <MetaTableCell question={question} answer={answer} onButtonClick={onButtonClick} />
             })}
           </tr>
         ))}
