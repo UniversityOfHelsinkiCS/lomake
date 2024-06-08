@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
@@ -6,10 +6,13 @@ import CustomModal from 'Components/Generic/CustomModal'
 import ReactMarkdown from 'react-markdown'
 
 import { metareviewQuestions as questions } from '@root/client/questionData/index'
+import useDebounce from 'Utilities/useDebounce'
 import MetaTable from './MetaTable'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
+  const [filter, setFilter] = useState('')
+  const debouncedFilter = useDebounce(filter, 200)
   const showAllProgrammes = false
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser)
@@ -20,14 +23,29 @@ const ProgrammeLevelOverview = () => {
     document.title = `${t('overview')}`
   }, [lang, t])
 
-  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes })
-
   const onButtonClick = (question, answer) => {
     const title = question.label[lang]
     const content = answer
     const color = 'green'
     setModalData({ title, content, color })
   }
+
+  const handleFilterChange = ({ target }) => {
+    const { value } = target
+    setFilter(value)
+  }
+
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes })
+  const filteredProgrammes = useMemo(() => {
+    return usersProgrammes.filter(prog => {
+      const name = prog.name[lang]
+      const code = prog.key
+      return (
+        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        code.toLowerCase().includes(debouncedFilter.toLowerCase())
+      )
+    })
+  }, [usersProgrammes, lang, debouncedFilter])
 
   return (
     <>
@@ -40,7 +58,13 @@ const ProgrammeLevelOverview = () => {
       )}
       <div>
         <h1>Programme Level Overview</h1>
-        <MetaTable programmes={usersProgrammes} questions={questions} onButtonClick={onButtonClick} />
+        <MetaTable
+          programmes={filteredProgrammes}
+          questions={questions}
+          onButtonClick={onButtonClick}
+          handleFilterChange={handleFilterChange}
+          filterValue={filter}
+        />
       </div>
     </>
   )

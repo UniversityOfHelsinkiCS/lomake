@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Loader, Icon } from 'semantic-ui-react'
+import { Loader, Icon, Input } from 'semantic-ui-react'
 import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import { sortedItems } from 'Utilities/common'
 import MetaTableCell from './MetaTableCell'
 
-const MetaTable = ({ programmes, questions, onButtonClick }) => {
+const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, filterValue }) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -41,6 +41,16 @@ const MetaTable = ({ programmes, questions, onButtonClick }) => {
             <div style={{ cursor: 'pointer' }} onClick={() => sort('name')}>
               {t('programmeHeader')}
               <Icon name="sort" />
+            </div>
+            <div>
+              <Input
+                style={{ marginBottom: '0.5em' }}
+                icon="filter"
+                size="small"
+                placeHolder={t('programmeFilter')}
+                onChange={handleFilterChange}
+                value={filterValue}
+              />
             </div>
           </th>
           <th>
