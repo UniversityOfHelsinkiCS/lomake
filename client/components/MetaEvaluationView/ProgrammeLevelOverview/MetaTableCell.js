@@ -1,17 +1,24 @@
 import React from 'react'
-import { Button } from 'semantic-ui-react'
+import '../../EvaluationView/CommitteeOverview/OverviewPage.scss'
 
 const MetaTableCell = ({ question, answer, onButtonClick }) => {
-  if (answer === undefined) {
-    return (
-      <td>
-        <Button aria-label="Undefined Answer" />
-      </td>
-    )
+  const handleClick = () => {
+    if (answer !== undefined) {
+      onButtonClick(question, answer)
+    }
   }
+
   return (
-    <td key={`${question.id} - ${answer}`}>
-      <Button onClick={() => onButtonClick(question, answer)} color="green" aria-label={`Answer for ${question}`} />
+    <td>
+      <div
+        className={answer !== undefined ? 'square-green' : 'square'}
+        onClick={handleClick}
+        tabIndex={answer !== undefined ? 0 : -1}
+        role="button"
+        aria-label={answer !== undefined ? `Answer for ${question}` : 'Undefined Answer'}
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
     </td>
   )
 }

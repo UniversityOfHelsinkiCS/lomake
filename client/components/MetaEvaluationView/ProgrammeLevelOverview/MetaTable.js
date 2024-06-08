@@ -67,7 +67,7 @@ const MetaTable = ({ programmes, questions, onButtonClick }) => {
             </td>
             {questions.map(question => {
               const programmeAnswers = answers.data.find(answer => answer.programme === programme.key)
-              const answer = programmeAnswers.data[`${question.id}_text`]
+              const answer = programmeAnswers ? programmeAnswers.data[`${question.id}_text`] : undefined
               return <MetaTableCell question={question} answer={answer} onButtonClick={onButtonClick} />
             })}
           </tr>
