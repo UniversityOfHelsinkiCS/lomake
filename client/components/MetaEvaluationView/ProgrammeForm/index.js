@@ -81,6 +81,7 @@ const ProgrammeLevelForm = ({ room }) => {
     const divStyle = {}
     const number = 1
     const label = part.label[lang]
+    const actions = part.actions.map(action => action.name[lang])
 
     return (
       <div key={part.id} style={divStyle}>
@@ -94,7 +95,7 @@ const ProgrammeLevelForm = ({ room }) => {
           lang={lang}
           radioOptions={part.radioOptions}
           form={form}
-          actions={part.actions[lang]}
+          actions={actions}
         />
       </div>
     )

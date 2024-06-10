@@ -13,16 +13,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [
-        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
-      ],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -50,16 +51,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [
-        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
-      ],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -87,11 +89,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -119,11 +127,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -151,11 +165,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -183,11 +203,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -215,11 +241,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "kandimaisteri",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -247,16 +279,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [
-        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
-      ],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "tohtori",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -284,16 +317,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [
-        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
-      ],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      }
+    ],
     "level": "tohtori",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -321,11 +355,17 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": "doctoral_action_n3",
+        "number": 1,
+        "name": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ],
     "level": "tohtori",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
@@ -353,11 +393,24 @@
       "se": "",
       "en": ""
     },
-    "actions": {
-      "fi": [],
-      "se": [],
-      "en": []
-    },
+    "actions": [
+      {
+        "id": 1,
+        "number": 1,
+        "name": {
+          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 2,
+        "number": 2,
+        "name": {
+          "fi": "Toimenpide uno dos tres"
+        }
+      }
+    ],
     "level": "tohtori",
     "description": {
       "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
