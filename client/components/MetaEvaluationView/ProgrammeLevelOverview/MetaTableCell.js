@@ -3,7 +3,7 @@ import '../../EvaluationView/CommitteeOverview/OverviewPage.scss'
 
 const MetaTableCell = ({ question, answer, onButtonClick }) => {
   const handleClick = () => {
-    if (answer !== undefined) {
+    if (answer !== undefined && answer !== '') {
       onButtonClick(question, answer)
     }
   }
@@ -11,11 +11,11 @@ const MetaTableCell = ({ question, answer, onButtonClick }) => {
   return (
     <td>
       <div
-        className={answer !== undefined ? 'square-green' : 'square'}
+        className={answer !== undefined && answer !== '' ? 'square-green' : 'square'}
         onClick={handleClick}
         tabIndex={answer !== undefined ? 0 : -1}
         role="button"
-        aria-label={answer !== undefined ? `Answer for ${question}` : 'Undefined Answer'}
+        aria-label={answer !== undefined ? `Answer for ${question.id}` : 'Undefined Answer'}
       >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>

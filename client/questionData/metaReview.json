@@ -232,5 +232,143 @@
       "se": "",
       "en": ""
     }
+  },
+  {
+    "id": "TKehittämiskohde1",
+    "index": 1,
+    "type": "META_ENTITY",
+    "shortLabel": {
+      "fi": "Kehittämiskohde 1",
+      "se": "",
+      "en": ""
+    },
+    "label": {
+      "fi": "Kehittämiskohde 1: Opintopolkujen hallinta, nivelvaiheet ja horisontaaliset siirtymät",
+      "se": "",
+      "en": ""
+    },
+    "actions": {
+      "fi": [
+        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
+        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
+        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
+      ],
+      "se": [],
+      "en": []
+    },
+    "level": "tohtori",
+    "description": {
+      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+      "se": "",
+      "en": ""
+    },
+    "required": true,
+    "extrainfo": {
+      "fi": "",
+      "se": "",
+      "en": ""
+    }
+  },
+  {
+    "id": "TKehittämiskohde2",
+    "index": 1,
+    "type": "META_ENTITY",
+    "shortLabel": {
+      "fi": "Kehittämiskohde 2",
+      "se": "",
+      "en": ""
+    },
+    "label": {
+      "fi": "Kehittämiskohde 2: ...",
+      "se": "",
+      "en": ""
+    },
+    "actions": {
+      "fi": [
+        "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+        "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
+        "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
+        "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi"
+      ],
+      "se": [],
+      "en": []
+    },
+    "level": "tohtori",
+    "description": {
+      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+      "se": "",
+      "en": ""
+    },
+    "required": true,
+    "extrainfo": {
+      "fi": "",
+      "se": "",
+      "en": ""
+    }
+  },
+  {
+    "id": "TKehittämiskohde3",
+    "index": 1,
+    "type": "META_ENTITY",
+    "shortLabel": {
+      "fi": "Kehittämiskohde 3",
+      "se": "",
+      "en": ""
+    },
+    "label": {
+      "fi": "Kehittämiskohde 3: ...",
+      "se": "",
+      "en": ""
+    },
+    "actions": {
+      "fi": [],
+      "se": [],
+      "en": []
+    },
+    "level": "tohtori",
+    "description": {
+      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+      "se": "",
+      "en": ""
+    },
+    "required": true,
+    "extrainfo": {
+      "fi": "",
+      "se": "",
+      "en": ""
+    }
+  },
+  {
+    "id": "TKehittämiskohde4",
+    "index": 1,
+    "type": "META_ENTITY",
+    "shortLabel": {
+      "fi": "Kehittämiskohde 4",
+      "se": "",
+      "en": ""
+    },
+    "label": {
+      "fi": "Kehittämiskohde 4: ...",
+      "se": "",
+      "en": ""
+    },
+    "actions": {
+      "fi": [],
+      "se": [],
+      "en": []
+    },
+    "level": "tohtori",
+    "description": {
+      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+      "se": "",
+      "en": ""
+    },
+    "required": true,
+    "extrainfo": {
+      "fi": "",
+      "se": "",
+      "en": ""
+    }
   }
 ]

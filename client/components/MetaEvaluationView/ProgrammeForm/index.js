@@ -27,6 +27,7 @@ const ProgrammeLevelForm = ({ room }) => {
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const history = useHistory()
   const year = 2024
+  let renderedQuestions = null
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
@@ -63,6 +64,12 @@ const ProgrammeLevelForm = ({ room }) => {
 
   if (!user || !room) return <Redirect to="/" />
   if (!programme) return <Loader active inline="centered" />
+
+  if (programme.level === 'doctoral') {
+    renderedQuestions = questions.filter(q => q.level === 'tohtori')
+  } else {
+    renderedQuestions = questions.filter(q => q.level === 'kandimaisteri')
+  }
 
   const partComponentMap = {
     META_ENTITY: MetaEntity,
@@ -110,9 +117,9 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
         </div>
-        {questions.map(question => (
-          <div key={question.id}>{partMap(question)}</div>
-        ))}
+        {renderedQuestions.map(question => {
+          return <div key={question.id}>{partMap(question)}</div>
+        })}
       </div>
     </div>
   )

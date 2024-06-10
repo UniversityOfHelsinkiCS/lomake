@@ -47,7 +47,7 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
                 style={{ marginBottom: '0.5em' }}
                 icon="filter"
                 size="small"
-                placeHolder={t('programmeFilter')}
+                placeholder={t('programmeFilter')}
                 onChange={handleFilterChange}
                 value={filterValue}
               />
