@@ -64,19 +64,20 @@ const MetaTable = ({
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <Radio
-            style={{ marginRight: 'auto', marginBottom: '2em' }}
-            data-cy="overviewpage-filter-button"
-            toggle
-            onChange={handleShowProgrammes}
-            checked={showAllProgrammes}
-            label={selectorLabel}
-          />
+        <tr key="radio-row">
+          <td key="radio">
+            <Radio
+              style={{ marginRight: 'auto', marginBottom: '2em' }}
+              data-cy="overviewpage-filter-button"
+              toggle
+              onChange={handleShowProgrammes}
+              checked={showAllProgrammes}
+              label={selectorLabel}
+            />
+          </td>
         </tr>
-
-        <tr>
-          <div>
+        <tr key="input-row">
+          <td key="input">
             <Input
               style={{ marginBottom: '0.5em' }}
               icon="filter"
@@ -84,15 +85,16 @@ const MetaTable = ({
               placeholder={t('programmeFilter')}
               onChange={handleFilterChange}
               value={filterValue}
+              aria-label={`${t('programmeFilter')}`}
             />
-          </div>
+          </td>
         </tr>
         {programmes.map(programme => (
           <tr style={{ lineHeight: '3' }} key={programme.id}>
-            <td>
+            <td key={`${programme.id}-name`}>
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.name[lang]}</Link>
             </td>
-            <td>
+            <td key={`${programme.id}-key`}>
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.key}</Link>
             </td>
             {questions.map(question => {
@@ -100,7 +102,14 @@ const MetaTable = ({
                 ? answers.data.find(answer => answer.programme === programme.key)
                 : null
               const answer = programmeAnswers ? programmeAnswers.data[`${question.id}_text`] : undefined
-              return <MetaTableCell question={question} answer={answer} onButtonClick={onButtonClick} />
+              return (
+                <MetaTableCell
+                  key={`${programme.id}-${question.id}`}
+                  question={question}
+                  answer={answer}
+                  onButtonClick={onButtonClick}
+                />
+              )
             })}
           </tr>
         ))}
