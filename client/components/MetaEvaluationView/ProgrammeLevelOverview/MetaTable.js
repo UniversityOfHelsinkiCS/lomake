@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Loader, Icon, Input } from 'semantic-ui-react'
+import { Icon, Input } from 'semantic-ui-react'
 import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import { sortedItems } from 'Utilities/common'
 import MetaTableCell from './MetaTableCell'
@@ -16,9 +16,10 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
   const [reverse, setReverse] = useState(false)
 
   const form = 7
+  const year = 2024
 
   useEffect(() => {
-    dispatch(getTempAnswersByFormAndYear(form, 2024))
+    dispatch(getTempAnswersByFormAndYear(form, year))
   }, [dispatch])
 
   const sortedProgrammes = sortedItems(programmes, sorter, lang)
@@ -27,10 +28,6 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
   const sort = sortValue => {
     setSorter(sortValue)
     setReverse(!reverse)
-  }
-
-  if (answers.pending || !answers.data) {
-    return <Loader active inline="centered" />
   }
 
   return (
@@ -76,7 +73,9 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.key}</Link>
             </td>
             {questions.map(question => {
-              const programmeAnswers = answers.data.find(answer => answer.programme === programme.key)
+              const programmeAnswers = answers.data
+                ? answers.data.find(answer => answer.programme === programme.key)
+                : null
               const answer = programmeAnswers ? programmeAnswers.data[`${question.id}_text`] : undefined
               return <MetaTableCell question={question} answer={answer} onButtonClick={onButtonClick} />
             })}
