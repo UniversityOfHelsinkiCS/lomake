@@ -201,7 +201,7 @@ const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
       {hasProgrammeOrSpecial && <GoToYearlyAssessmentButton />}
       <GoToEvaluationButton user={user} />
       {hasProgrammeOrSpecial && <GoToDegreeReform user={user} />}
-      {user.admin && <GoToMetaEvaluation />}
+      {hasProgrammeOrSpecial && <GoToMetaEvaluation />}
       {user.admin && <GoToAdminPageButton />}
       <Menu.Item>
         <a href="mailto:ospa@helsinki.fi">

@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Icon, Input } from 'semantic-ui-react'
+import { Icon, Input, Radio } from 'semantic-ui-react'
 import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import { sortedItems } from 'Utilities/common'
 import MetaTableCell from './MetaTableCell'
 
-const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, filterValue }) => {
+const MetaTable = ({
+  programmes,
+  questions,
+  onButtonClick,
+  handleFilterChange,
+  filterValue,
+  handleShowProgrammes,
+  showAllProgrammes,
+}) => {
   const lang = useSelector(state => state.language)
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -30,6 +38,8 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
     setReverse(!reverse)
   }
 
+  const selectorLabel = t('showAllProgrammes')
+
   return (
     <table border="0">
       <thead className="sticky-header">
@@ -38,16 +48,6 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
             <div style={{ cursor: 'pointer' }} onClick={() => sort('name')}>
               {t('programmeHeader')}
               <Icon name="sort" />
-            </div>
-            <div>
-              <Input
-                style={{ marginBottom: '0.5em' }}
-                icon="filter"
-                size="small"
-                placeholder={t('programmeFilter')}
-                onChange={handleFilterChange}
-                value={filterValue}
-              />
             </div>
           </th>
           <th>
@@ -64,6 +64,29 @@ const MetaTable = ({ programmes, questions, onButtonClick, handleFilterChange, f
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <Radio
+            style={{ marginRight: 'auto', marginBottom: '2em' }}
+            data-cy="overviewpage-filter-button"
+            toggle
+            onChange={handleShowProgrammes}
+            checked={showAllProgrammes}
+            label={selectorLabel}
+          />
+        </tr>
+
+        <tr>
+          <div>
+            <Input
+              style={{ marginBottom: '0.5em' }}
+              icon="filter"
+              size="small"
+              placeholder={t('programmeFilter')}
+              onChange={handleFilterChange}
+              value={filterValue}
+            />
+          </div>
+        </tr>
         {programmes.map(programme => (
           <tr style={{ lineHeight: '3' }} key={programme.id}>
             <td>

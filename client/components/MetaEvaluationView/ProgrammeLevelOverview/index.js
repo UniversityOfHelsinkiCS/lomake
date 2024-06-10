@@ -2,25 +2,24 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Message } from 'semantic-ui-react'
-import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import CustomModal from 'Components/Generic/CustomModal'
 import ReactMarkdown from 'react-markdown'
-
 import { metareviewQuestions as questions } from '@root/client/questionData/index'
 import useDebounce from 'Utilities/useDebounce'
+import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import MetaTable from './MetaTable'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
-  const showAllProgrammes = true
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const [modalData, setModalData] = useState(null)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const deadlineInfo = nextDeadline ? nextDeadline.find(item => item.form === 7) : null
+  const [showAllProgrammes, setShowAllProgrammes] = useState(false)
 
   useEffect(() => {
     document.title = `${t('overview')}`
@@ -36,6 +35,10 @@ const ProgrammeLevelOverview = () => {
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)
+  }
+
+  const handleShowProgrammes = () => {
+    setShowAllProgrammes(!showAllProgrammes)
   }
 
   const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes })
@@ -74,6 +77,8 @@ const ProgrammeLevelOverview = () => {
           onButtonClick={onButtonClick}
           handleFilterChange={handleFilterChange}
           filterValue={filter}
+          handleShowProgrammes={handleShowProgrammes}
+          showAllProgrammes={showAllProgrammes}
         />
       </div>
     </>
