@@ -56,6 +56,11 @@ const ProgrammeLevelOverview = () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
+  const formatDate = date => {
+    const temp = new Date(date)
+    return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
+  }
+
   return (
     <>
       {modalData && (
@@ -67,19 +72,20 @@ const ProgrammeLevelOverview = () => {
       )}
       <div className="wide-header">
         <h1>{t('evaluation').toUpperCase()}</h1>
-        {deadlineInfo && (
-          <Message
-            icon="clock"
-            header={`${draftYear.year} ${t('formView:status:open')}`}
-            content={`${t('formCloses')}: ${deadlineInfo.date}`}
-          />
-        )}
         <Button
           label={t('questionAnswers')}
           onClick={() => history.push('/meta-evaluation/answers')}
           icon="arrow right"
         />
       </div>
+      {deadlineInfo && (
+        <Message
+          icon="clock"
+          header={`${draftYear.year} ${t('formView:status:open')}`}
+          content={`${t('formCloses')}: ${formatDate(deadlineInfo.date)}`}
+        />
+      )}
+
       <div>
         <MetaTable
           programmes={filteredProgrammes}
