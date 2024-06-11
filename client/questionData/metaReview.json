@@ -22,6 +22,33 @@
           "en": "....",
           "se": "...."
         }
+      },
+      {
+        "id": 2,
+        "number": 2,
+        "name": {
+          "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 3,
+        "number": 3,
+        "name": {
+          "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 4,
+        "number": 4,
+        "name": {
+          "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
+          "en": "....",
+          "se": "...."
+        }
       }
     ],
     "level": "kandimaisteri",
@@ -47,16 +74,61 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 2: ...",
+      "fi": "Kehittämiskohde 2: Yliopiston läpivirtauksen määritelmä ja kriteerit sekä opintojen viivästymistä estävät keinot",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 5,
+        "number": 5,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 6,
+        "number": 6,
+        "name": {
+          "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 7,
+        "number": 7,
+        "name": {
+          "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 8,
+        "number": 8,
+        "name": {
+          "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 9,
+        "number": 9,
+        "name": {
+          "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 10,
+        "number": 10,
+        "name": {
+          "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
           "en": "....",
           "se": "...."
         }
@@ -85,16 +157,43 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 3: ...",
+      "fi": "Kehittämiskohde 3: Koulutusohjelmien johtaminen yliopiston strategisena tehtävänä",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 11,
+        "number": 11,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 12,
+        "number": 12,
+        "name": {
+          "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 13,
+        "number": 13,
+        "name": {
+          "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 14,
+        "number": 14,
+        "name": {
+          "fi": "Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta",
           "en": "....",
           "se": "...."
         }
@@ -123,16 +222,52 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 4: ...",
+      "fi": "Kehittämiskohde 4: Opetusresurssien kattava haltuunotto koulutusohjelmien tarpeisiin",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 15,
+        "number": 15,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 16,
+        "number": 16,
+        "name": {
+          "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 17,
+        "number": 17,
+        "name": {
+          "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 18,
+        "number": 18,
+        "name": {
+          "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 19,
+        "number": 19,
+        "name": {
+          "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken.",
           "en": "....",
           "se": "...."
         }
@@ -161,16 +296,43 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 5: ...",
+      "fi": "Kehittämiskohde 5: Koulutusohjelmien kielisyys ja kansainvälisten ohjelmien strateginen merkitys",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 20,
+        "number": 20,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 21,
+        "number": 21,
+        "name": {
+          "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 22,
+        "number": 22,
+        "name": {
+          "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 23,
+        "number": 23,
+        "name": {
+          "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
           "en": "....",
           "se": "...."
         }
@@ -199,16 +361,34 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 6: ...",
+      "fi": "Kehittämiskohde 6: Koulutusohjelmien perustaminen ja lakkauttaminen yliopiston strategisina valintoina",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 24,
+        "number": 24,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 25,
+        "number": 25,
+        "name": {
+          "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 26,
+        "number": 26,
+        "name": {
+          "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
           "en": "....",
           "se": "...."
         }
@@ -237,16 +417,43 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 7: ...",
+      "fi": "Kehittämiskohde 7: Koulutusohjelmaportfolion kehittäminen kokonaisuutena",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 27,
+        "number": 27,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 28,
+        "number": 28,
+        "name": {
+          "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 29,
+        "number": 29,
+        "name": {
+          "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 30,
+        "number": 30,
+        "name": {
+          "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
           "en": "....",
           "se": "...."
         }
