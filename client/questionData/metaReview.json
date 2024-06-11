@@ -482,7 +482,7 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 1: Opintopolkujen hallinta, nivelvaiheet ja horisontaaliset siirtymät",
+      "fi": "Kehittämiskohde 1: Tohtorin tutkinnon suorittaminen tavoiteajassa",
       "se": "",
       "en": ""
     },
@@ -491,7 +491,43 @@
         "id": 1,
         "number": 1,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 2,
+        "number": 2,
+        "name": {
+          "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 3,
+        "number": 3,
+        "name": {
+          "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 4,
+        "number": 4,
+        "name": {
+          "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 5,
+        "number": 5,
+        "name": {
+          "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
           "en": "....",
           "se": "...."
         }
@@ -520,16 +556,16 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 2: ...",
+      "fi": "Kehittämiskohde 2: Nivelvaihe maisterista tohtoriin",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 6,
+        "number": 6,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
           "en": "....",
           "se": "...."
         }
@@ -558,16 +594,16 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 3: ...",
+      "fi": "Kehittämiskohde 3: Uuden tutkijakoulurakenteen vakinaistaminen",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": "doctoral_action_n3",
-        "number": 1,
+        "id": "7",
+        "number": 7,
         "name": {
-          "fi": "",
+          "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
           "se": "",
           "en": ""
         }
@@ -596,16 +632,25 @@
       "en": ""
     },
     "label": {
-      "fi": "Kehittämiskohde 4: ...",
+      "fi": "Kehittämiskohde 4: Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
       "se": "",
       "en": ""
     },
     "actions": [
       {
-        "id": 1,
-        "number": 1,
+        "id": 8,
+        "number": 8,
         "name": {
-          "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
+          "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
+          "en": "....",
+          "se": "...."
+        }
+      },
+      {
+        "id": 9,
+        "number": 9,
+        "name": {
+          "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
           "en": "....",
           "se": "...."
         }
