@@ -77,6 +77,8 @@ export default {
     metaevaluation: 'Meta review',
     formCloses: 'Form closes at',
     questionAnswers: 'Question / Anwers',
+    noAnswers: 'No answers',
+    actionProposals: 'Action proposals',
   },
 
   aboutPage: {

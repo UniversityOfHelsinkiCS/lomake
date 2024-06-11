@@ -654,13 +654,6 @@
           "en": "....",
           "se": "...."
         }
-      },
-      {
-        "id": 2,
-        "number": 2,
-        "name": {
-          "fi": "Toimenpide uno dos tres"
-        }
       }
     ],
     "level": "tohtori",

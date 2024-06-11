@@ -83,6 +83,8 @@ export default {
     metaevaluation: 'Katselmuksen arviointi',
     formCloses: 'Lomake sulkeutuu',
     questionAnswers: 'Vastaukset kysymyksittäin',
+    noAnswers: 'Ei vastauksia',
+    actionProposals: 'Toimenpide-ehdotukset',
   },
 
   aboutPage: {

@@ -77,6 +77,8 @@ export default {
     metaevaluation: 'Översyns översyn',
     formCloses: 'Formuläret stängs',
     questionAnswers: 'Svar per fråga',
+    noAnswers: 'No answers',
+    actionProposals: 'Action proposals',
   },
 
   aboutPage: {

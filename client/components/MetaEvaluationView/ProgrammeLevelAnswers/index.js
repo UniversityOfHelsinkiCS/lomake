@@ -34,7 +34,18 @@ const ProgrammeLevelAnswers = () => {
           : []
         return (
           <div key={question.id} style={{ marginBottom: '1em' }}>
-            <div>{question.label[lang]}</div>
+            <div>
+              <h3>{question.label[lang]}</h3>
+              <div>{t('actionProposals')}:</div>
+              {question.actions.map(action => {
+                return (
+                  <div key={action.name[lang]}>
+                    {action.number}: {action.name[lang]}
+                  </div>
+                )
+              })}
+            </div>
+            <h3>{t('answers')}:</h3>
             {questionAnswers.length > 0 ? (
               questionAnswers.map(answer => (
                 <div key={answer.programme}>
@@ -42,7 +53,7 @@ const ProgrammeLevelAnswers = () => {
                 </div>
               ))
             ) : (
-              <div>No answers available</div>
+              <div>{t('noAnswers')}</div>
             )}
           </div>
         )
