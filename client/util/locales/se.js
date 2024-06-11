@@ -75,6 +75,8 @@ export default {
     showDataByProgramme: 'Examensprogram svar per fakultet',
     showAllFacultyProgrammes: 'Visa även gemensamma program',
     metaevaluation: 'Översyns översyn',
+    formCloses: 'Formuläret stängs',
+    questionAnswers: 'Svar per fråga',
   },
 
   aboutPage: {

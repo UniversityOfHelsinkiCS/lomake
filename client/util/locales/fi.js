@@ -81,6 +81,8 @@ export default {
       evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
     },
     metaevaluation: 'Katselmuksen katselmus',
+    formCloses: 'Lomake sulkeutuu',
+    questionAnswers: 'Vastaukset kysymyksittäin',
   },
 
   aboutPage: {
