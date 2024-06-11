@@ -14,6 +14,7 @@ const ProgrammeLevelAnswers = () => {
   const answers = useSelector(state => state.tempAnswers)
   const year = 2024
   const form = 7
+  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
   useEffect(() => {
     document.title = `${t('overview')}`
@@ -22,6 +23,8 @@ const ProgrammeLevelAnswers = () => {
   useEffect(() => {
     dispatch(getTempAnswersByFormAndYear(form, year))
   }, [dispatch])
+
+  const programmeByKey = key => programmes.find(prog => prog.key === key)
 
   return (
     <div>
@@ -48,8 +51,11 @@ const ProgrammeLevelAnswers = () => {
             <h3>{t('answers')}:</h3>
             {questionAnswers.length > 0 ? (
               questionAnswers.map(answer => (
-                <div key={answer.programme}>
-                  {answer.programme}: {answer.data[`${question.id}_text`]}
+                <div key={answer.programme} style={{ marginBottom: 25 }}>
+                  <div style={{ margin: 10, fontSize: 14, fontWeight: 'bold' }}>
+                    {answer.programme} {programmeByKey(answer.programme).name[lang]}
+                  </div>
+                  <div style={{ margin: 10, paddingLeft: 10 }}>{answer.data[`${question.id}_text`]}</div>
                 </div>
               ))
             ) : (
