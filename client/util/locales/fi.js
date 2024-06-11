@@ -80,7 +80,7 @@ export default {
     formFilter: {
       evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
     },
-    metaevaluation: 'Katselmuksen katselmus',
+    metaevaluation: 'Katselmuksen arviointi',
     formCloses: 'Lomake sulkeutuu',
     questionAnswers: 'Vastaukset kysymyksittäin',
   },
