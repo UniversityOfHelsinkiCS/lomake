@@ -74,6 +74,7 @@ export default {
     showAllProgrammes: 'Show all programmes',
     showDataByProgramme: 'Degree programme answers by faculty',
     showAllFacultyProgrammes: 'Show also joint programmes',
+    metaevaluation: 'Meta review',
   },
 
   aboutPage: {

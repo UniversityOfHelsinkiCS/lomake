@@ -13,7 +13,7 @@ const MetaEntity = ({ label, id, form, actions, description }) => {
           <li key={action}>{action}</li>
         ))}
       </ol>
-      <Textarea id={id} label={description} form={form} kludge={false} />
+      <Textarea id={id} form={form} label={description} kludge={false} />
     </div>
   )
 }

@@ -179,6 +179,7 @@ const updateField = async (socket, payload, io, uuid) => {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
+      logger.info('currentAnswer', currentAnswer)
       if (currentAnswer) {
         await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },

@@ -80,6 +80,7 @@ export default {
     formFilter: {
       evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
     },
+    metaevaluation: 'Katselmuksen katselmus',
   },
 
   aboutPage: {
