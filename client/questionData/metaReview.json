@@ -1,672 +1,1154 @@
 [
   {
-    "id": "Kehittämiskohde1",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 1",
-      "se": "",
-      "en": ""
-    },
-    "label": {
+    "title": {
       "fi": "Kehittämiskohde 1: Opintopolkujen hallinta, nivelvaiheet ja horisontaaliset siirtymät",
       "se": "",
       "en": ""
     },
-    "actions": [
+    "parts": [
       {
         "id": 1,
-        "number": 1,
-        "name": {
+        "index": 1,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
           "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
           "en": "....",
           "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
         }
       },
       {
         "id": 2,
-        "number": 2,
-        "name": {
+        "index": 2,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
           "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
           "en": "....",
           "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
         }
       },
       {
         "id": 3,
-        "number": 3,
-        "name": {
+        "index": 3,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
           "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
           "en": "....",
           "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
         }
       },
       {
         "id": 4,
-        "number": 4,
-        "name": {
+        "index": 4,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
           "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
           "en": "....",
           "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde2",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 2",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 2: Yliopiston läpivirtauksen määritelmä ja kriteerit sekä opintojen viivästymistä estävät keinot",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 5,
-        "number": 5,
-        "name": {
-          "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 6,
-        "number": 6,
-        "name": {
-          "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 7,
-        "number": 7,
-        "name": {
-          "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 8,
-        "number": 8,
-        "name": {
-          "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 9,
-        "number": 9,
-        "name": {
-          "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 10,
-        "number": 10,
-        "name": {
-          "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde3",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 3",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 3: Koulutusohjelmien johtaminen yliopiston strategisena tehtävänä",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 11,
-        "number": 11,
-        "name": {
-          "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 12,
-        "number": 12,
-        "name": {
-          "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 13,
-        "number": 13,
-        "name": {
-          "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 14,
-        "number": 14,
-        "name": {
-          "fi": "Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde4",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 4",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 4: Opetusresurssien kattava haltuunotto koulutusohjelmien tarpeisiin",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 15,
-        "number": 15,
-        "name": {
-          "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 16,
-        "number": 16,
-        "name": {
-          "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 17,
-        "number": 17,
-        "name": {
-          "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 18,
-        "number": 18,
-        "name": {
-          "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 19,
-        "number": 19,
-        "name": {
-          "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken.",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde5",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 5",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 5: Koulutusohjelmien kielisyys ja kansainvälisten ohjelmien strateginen merkitys",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 20,
-        "number": 20,
-        "name": {
-          "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 21,
-        "number": 21,
-        "name": {
-          "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 22,
-        "number": 22,
-        "name": {
-          "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 23,
-        "number": 23,
-        "name": {
-          "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde6",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 6",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 6: Koulutusohjelmien perustaminen ja lakkauttaminen yliopiston strategisina valintoina",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 24,
-        "number": 24,
-        "name": {
-          "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 25,
-        "number": 25,
-        "name": {
-          "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 26,
-        "number": 26,
-        "name": {
-          "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "Kehittämiskohde7",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 7",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 7: Koulutusohjelmaportfolion kehittäminen kokonaisuutena",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 27,
-        "number": 27,
-        "name": {
-          "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 28,
-        "number": 28,
-        "name": {
-          "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 29,
-        "number": 29,
-        "name": {
-          "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 30,
-        "number": 30,
-        "name": {
-          "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "kandimaisteri",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "TKehittämiskohde1",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 1",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 1: Tohtorin tutkinnon suorittaminen tavoiteajassa",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 1,
-        "number": 1,
-        "name": {
-          "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 2,
-        "number": 2,
-        "name": {
-          "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 3,
-        "number": 3,
-        "name": {
-          "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 4,
-        "number": 4,
-        "name": {
-          "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
-          "en": "....",
-          "se": "...."
-        }
-      },
-      {
-        "id": 5,
-        "number": 5,
-        "name": {
-          "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "tohtori",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "TKehittämiskohde2",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 2",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 2: Nivelvaihe maisterista tohtoriin",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": 6,
-        "number": 6,
-        "name": {
-          "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
-          "en": "....",
-          "se": "...."
-        }
-      }
-    ],
-    "level": "tohtori",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
-  },
-  {
-    "id": "TKehittämiskohde3",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 3",
-      "se": "",
-      "en": ""
-    },
-    "label": {
-      "fi": "Kehittämiskohde 3: Uuden tutkijakoulurakenteen vakinaistaminen",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
-      {
-        "id": "7",
-        "number": 7,
-        "name": {
-          "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
           "se": "",
           "en": ""
         }
       }
-    ],
-    "level": "tohtori",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-      "se": "",
-      "en": ""
-    },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
-      "se": "",
-      "en": ""
-    }
+    ]
   },
   {
-    "id": "TKehittämiskohde4",
-    "index": 1,
-    "type": "META_ENTITY",
-    "shortLabel": {
-      "fi": "Kehittämiskohde 4",
+    "title": {
+      "fi": "Kehittämiskohde 2: Yliopiston läpivirtauksen määritelmä ja kriteerit sekä opintojen viivästymistä estävät keinot",
       "se": "",
       "en": ""
     },
-    "label": {
-      "fi": "Kehittämiskohde 4: Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
-      "se": "",
-      "en": ""
-    },
-    "actions": [
+    "parts": [
       {
-        "id": 8,
-        "number": 8,
-        "name": {
-          "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
+        "id": 5,
+        "index": 5,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
           "en": "....",
           "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 6,
+        "index": 6,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 7,
+        "index": 7,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 8,
+        "index": 8,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
         }
       },
       {
         "id": 9,
-        "number": 9,
-        "name": {
-          "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
+        "index": 9,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
           "en": "....",
           "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 10,
+        "index": 10,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
         }
       }
-    ],
-    "level": "tohtori",
-    "description": {
-      "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 3: Koulutusohjelmien johtaminen yliopiston strategisena tehtävänä",
       "se": "",
       "en": ""
     },
-    "required": true,
-    "extrainfo": {
-      "fi": "",
+    "parts": [
+      {
+        "id": 11,
+        "index": 11,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 12,
+        "index": 12,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 13,
+        "index": 13,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 14,
+        "index": 14,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 4: Opetusresurssien kattava haltuunotto koulutusohjelmien tarpeisiin",
       "se": "",
       "en": ""
-    }
+    },
+    "parts": [
+      {
+        "id": 15,
+        "index": 15,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 16,
+        "index": 16,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 17,
+        "index": 17,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 18,
+        "index": 18,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 19,
+        "index": 19,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken.",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 5: Koulutusohjelmien kielisyys ja kansainvälisten ohjelmien strateginen merkitys",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 20,
+        "index": 20,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 21,
+        "index": 21,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 22,
+        "index": 22,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 23,
+        "index": 23,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 6: Koulutusohjelmien perustaminen ja lakkauttaminen yliopiston strategisina valintoina",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 24,
+        "index": 24,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 25,
+        "index": 25,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 26,
+        "index": 26,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 7: Koulutusohjelmaportfolion kehittäminen kokonaisuutena",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 27,
+        "index": 27,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 28,
+        "index": 28,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 29,
+        "index": 29,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 30,
+        "index": 30,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "kandimaisteri",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 1: Tohtorin tutkinnon suorittaminen tavoiteajassa",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 1,
+        "index": 1,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 2,
+        "index": 2,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 3,
+        "index": 3,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 4,
+        "index": 4,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 5,
+        "index": 5,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 2: Nivelvaihe maisterista tohtoriin",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 6,
+        "index": 6,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 3: Uuden tutkijakoulurakenteen vakinaistaminen",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 7,
+        "index": 7,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
+          "se": "",
+          "en": ""
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 4: Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
+      "se": "",
+      "en": ""
+    },
+    "parts": [
+      {
+        "id": 8,
+        "index": 8,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": 9,
+        "index": 9,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
+          "en": "....",
+          "se": "...."
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
   }
 ]
