@@ -40,7 +40,7 @@ const forms = [
   },
   {
     key: 7,
-    name: 'Katselmus - arviointiryhmä',
+    name: 'Katselmus - arviointi',
     type: 'evaluation',
   },
 ]

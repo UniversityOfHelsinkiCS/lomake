@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import MetaEntity from 'Components/Generic/MetaEntity'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
@@ -12,6 +11,8 @@ import { isAdmin } from '@root/config/common'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import calendarImage from 'Assets/calendar.jpg'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
+
+import MetaEvaluationForm from './MetaEvaluationForm'
 
 import { metareviewQuestions as questions } from '../../../questionData'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
@@ -27,12 +28,12 @@ const ProgrammeLevelForm = ({ room }) => {
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
   const history = useHistory()
   const year = 2024
-  let renderedQuestions = null
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)
   const writeAccess = (user.access[room] && user.access[room].write) || isAdmin(user)
   const accessToTempAnswers = user.yearsUserHasAccessTo.includes(year)
+  const answers = useSelector(state => state.tempAnswers)
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
@@ -63,43 +64,7 @@ const ProgrammeLevelForm = ({ room }) => {
   }, [programme, writeAccess, viewingOldAnswers, year, draftYear, accessToTempAnswers, room, user])
 
   if (!user || !room) return <Redirect to="/" />
-  if (!programme) return <Loader active inline="centered" />
-
-  if (programme.level === 'doctoral') {
-    renderedQuestions = questions.filter(q => q.level === 'tohtori')
-  } else {
-    renderedQuestions = questions.filter(q => q.level === 'kandimaisteri')
-  }
-
-  const partComponentMap = {
-    META_ENTITY: MetaEntity,
-  }
-
-  const partMap = part => {
-    const Component = partComponentMap[part.type]
-
-    const divStyle = {}
-    const number = 1
-    const label = part.label[lang]
-    const actions = part.actions.map(action => action.name[lang])
-
-    return (
-      <div key={part.id} style={divStyle}>
-        <Component
-          id={part.id}
-          label={label}
-          description={part.description[lang]}
-          required={part.required}
-          number={number}
-          options={part.options}
-          lang={lang}
-          radioOptions={part.radioOptions}
-          form={form}
-          actions={actions}
-        />
-      </div>
-    )
-  }
+  if (!programme || !answers) return <Loader active inline="centered" />
 
   return (
     <div className="form-container">
@@ -118,9 +83,13 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
         </div>
-        {renderedQuestions.map(question => {
-          return <div key={question.id}>{partMap(question)}</div>
-        })}
+        <MetaEvaluationForm
+          questions={questions}
+          programmeKey={programme.key}
+          summaryData={answers}
+          form={form}
+          summaryUrl={null}
+        />
       </div>
     </div>
   )
