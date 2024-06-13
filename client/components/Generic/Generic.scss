@@ -267,6 +267,10 @@
   @include answer-circle-big-basics;
   background: $background-red;
 }
+.circle-big-gray {
+  @include answer-circle-big-basics;
+  background: $background-gray
+}
 
 .circle-big-green-selected {
   @include selected-answer-circle-big-basics;
@@ -280,6 +284,11 @@
   @include selected-answer-circle-big-basics;
   background: $background-red;
 }
+.circle-big-gray-selected {
+  @include selected-answer-circle-big-basics;
+  background: $background-gray
+}
+
 
 .editor-class {
   background-color: $background-light-gray;

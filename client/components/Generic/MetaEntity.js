@@ -2,7 +2,7 @@ import React from 'react'
 import { Divider } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
-import TrafficLights from './TrafficLights'
+import MetaTrafficLights from './MetaTrafficLights'
 import './Generic.scss'
 
 const MetaEntity = ({ id, label, description, required, noColor, number, form, kludge }) => {
@@ -16,7 +16,7 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
             {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
           </h3>
         </div>
-        {!noColor && <TrafficLights id={id} form={form} />}
+        {!noColor && <MetaTrafficLights id={id} form={form} />}
       </div>
       <Textarea id={id} label={description} form={form} kludge={kludge} />
       <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} />
