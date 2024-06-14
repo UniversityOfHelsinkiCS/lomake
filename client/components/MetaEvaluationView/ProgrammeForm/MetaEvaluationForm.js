@@ -2,51 +2,30 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { formKeys } from '@root/config/data'
 
-import Textarea from 'Components/Generic/Textarea'
-import Entity from 'Components/Generic/Entity'
 import MetaEntity from 'Components/Generic/MetaEntity'
-import EntityLevels from 'Components/Generic/EntityLevels'
-import EntityUniversity from 'Components/Generic/EntityUniversity'
-import Measures from 'Components/Generic/Measures'
-import Actions from 'Components/Generic/Actions'
 import { colors, romanize } from 'Utilities/common'
-import TextareaUniversity from 'Components/Generic/TextareaUniversity'
-import ActionsUniversity from 'Components/Generic/ActionsUniversity'
 import Section from './MetaEvaluationSection'
 
 import './EvaluationForm.scss'
 
 const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
+  const level = programmeKey.startsWith('T') ? 'tohtori' : 'kandimaisteri'
 
   const partComponentMap = {
-    TEXTAREA: Textarea,
-    TEXTAREA_UNIVERSITY: TextareaUniversity,
-    ENTITY: Entity,
-    ENTITY_LEVELS: EntityLevels,
     META_ENTITY: MetaEntity,
-    ENTITY_UNIVERSITY: EntityUniversity,
-    MEASURES: Measures,
-    ACTIONS: Actions,
-    ACTIONS_UNIVERSITY: ActionsUniversity,
   }
 
-  const partMap = part => {
-    const summary =
-      part.id.includes('meta') ||
-      part.id.includes('_opinion_differences') ||
-      part.id.includes('programme_strengths') ||
-      part.id.includes('seamless_studies')
+  const showQuestions = questions.filter(q => q.level === level)
 
-    const divStyle = summary
-      ? {
-        marginTop: '1em !important',
-        paddingLeft: '0.5em',
-        borderLeft: '5px solid',
-        borderColor: colors.background_black,
-        marginBottom: '0',
-      }
-      : {}
+  const partMap = part => {
+    const divStyle = {
+      marginTop: '1em !important',
+      paddingLeft: '0.5em',
+      borderLeft: '5px solid',
+      borderColor: colors.background_black,
+      marginBottom: '0',
+    }
 
     if (part.type === 'TITLE') {
       if (part.label.fi === 'KOULUTUSOHJELMAN KIRJAUKSET') {
@@ -111,7 +90,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
   return (
     <>
-      {questions.map((section, index) => {
+      {showQuestions.map((section, index) => {
         return (
           <Section
             title={section.title[lang]}
