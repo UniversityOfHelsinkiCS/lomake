@@ -10,13 +10,10 @@ import './EvaluationForm.scss'
 
 const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
-  const level = programmeKey.startsWith('T') ? 'tohtori' : 'kandimaisteri'
 
   const partComponentMap = {
     META_ENTITY: MetaEntity,
   }
-
-  const showQuestions = questions.filter(q => q.level === level)
 
   const partMap = part => {
     const divStyle = {
@@ -90,7 +87,7 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
   return (
     <>
-      {showQuestions.map((section, index) => {
+      {questions.map((section, index) => {
         return (
           <Section
             title={section.title[lang]}

@@ -25,6 +25,7 @@ const replaceTitle = {
 // These question types are shown in the navigation sidebar
 const questionTypesToShow = [
   'ENTITY',
+  'META_ENTITY',
   'MEASURES',
   'CHOOSE-RADIO',
   'SELECTION',
@@ -44,7 +45,7 @@ const getColor = (filled, required) => {
 }
 
 const getCorrectRomanNumeral = (number, formType) => {
-  if (formType === 'evaluation') {
+  if (formType === 'evaluation' || formType === 'meta-evaluation') {
     return romanize(number + 1) || '0'
   }
   return romanize(number) || '0'
@@ -87,6 +88,9 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     questionsToShow = questionData
     linkBase = '/individual'
     isDegreeForm = true
+  } else {
+    questionsToShow = questionData
+    linkBase = 'meta-evaluation/form/'
   }
 
   let formDataFilter = []
@@ -97,6 +101,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   }
 
   let partNumber = formType === 'evaluation' ? 0 : -1
+  partNumber = formType === 'meta-evaluation' ? 0 : -1
+
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
@@ -152,6 +158,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       if (
                         type === 'TEXTAREA' ||
                         type === 'ENTITY' ||
+                        type === 'META_ENTITY' ||
                         type === 'SELECTION' ||
                         type === 'ENTITY_LEVELS' ||
                         type === 'ENTITY_UNIVERSITY'
@@ -196,9 +203,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                                 data-cy={`${id}-${filled ? 'OK' : 'EMPTY'}`}
                                 name={getIcon(filled)}
                                 style={{ color: getColor(filled, required) }}
-                                title={`${t(filled ? 'OK' : 'EMPTY')}${
-                                  required ? ` (${t('formView:mandatory')})` : ''
-                                }`}
+                                title={`${t(filled ? 'OK' : 'EMPTY')}${required ? ` (${t('formView:mandatory')})` : ''
+                                  }`}
                               />
                             </>
                           )}

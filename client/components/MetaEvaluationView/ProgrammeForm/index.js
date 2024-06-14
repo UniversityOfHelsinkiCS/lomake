@@ -11,6 +11,7 @@ import { isAdmin } from '@root/config/common'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import calendarImage from 'Assets/calendar.jpg'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
+import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 
 import MetaEvaluationForm from './MetaEvaluationForm'
 
@@ -66,8 +67,12 @@ const ProgrammeLevelForm = ({ room }) => {
   if (!user || !room) return <Redirect to="/" />
   if (!programme || !answers) return <Loader active inline="centered" />
 
+  const level = room.startsWith('T') ? 'tohtori' : 'kandimaisteri'
+  const questionData = questions.filter(q => q.level === level)
+
   return (
     <div className="form-container">
+      <NavigationSidebar programmeKey={room} formType="meta-evaluation" formNumber={form} questionData={questionData} />
       <div className="the-form">
         <div className="hide-in-print-mode">
           <SaveIndicator />
@@ -84,7 +89,7 @@ const ProgrammeLevelForm = ({ room }) => {
           <StatusMessage form={form} writeAccess={writeAccess} />
         </div>
         <MetaEvaluationForm
-          questions={questions}
+          questions={questionData}
           programmeKey={programme.key}
           summaryData={answers}
           form={form}
