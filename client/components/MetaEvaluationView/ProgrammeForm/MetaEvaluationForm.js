@@ -40,12 +40,12 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
     const divStyle = summary
       ? {
-          marginTop: '1em !important',
-          paddingLeft: '0.5em',
-          borderLeft: '5px solid',
-          borderColor: colors.background_black,
-          marginBottom: '0',
-        }
+        marginTop: '1em !important',
+        paddingLeft: '0.5em',
+        borderLeft: '5px solid',
+        borderColor: colors.background_black,
+        marginBottom: '0',
+      }
       : {}
 
     if (part.type === 'TITLE') {

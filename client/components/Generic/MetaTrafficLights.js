@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
 
-const TrafficLights = ({ id, form }) => {
+const MetaTrafficLights = ({ id, form }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const fieldName = `${id}_light`
@@ -24,21 +24,21 @@ const TrafficLights = ({ id, form }) => {
   return (
     <div style={{ margin: '1em 0' }}>
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-        <div title={`${t('positive')}`}>
+        <div title={`${t('nonUrgent')}`}>
           <div
             data-cy={`color-positive-${id}`}
             className={getClassName('green')}
             onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
           />
         </div>
-        <div title={`${t('neutral')}`}>
+        <div title={`${t('semiUrgent')}`}>
           <div
             data-cy={`color-neutral-${id}`}
             className={getClassName('yellow')}
             onClick={!viewOnly ? () => choose(fieldName, 'yellow') : undefined}
           />
         </div>
-        <div title={`${t('negative')}`}>
+        <div title={`${t('urgent')}`}>
           <div
             data-cy={`color-negative-${id}`}
             className={getClassName('red')}
@@ -57,4 +57,4 @@ const TrafficLights = ({ id, form }) => {
   )
 }
 
-export default TrafficLights
+export default MetaTrafficLights

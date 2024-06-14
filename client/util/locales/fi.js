@@ -85,6 +85,10 @@ export default {
     questionAnswers: 'Vastaukset kysymyksittäin',
     noAnswers: 'Ei vastauksia',
     actionProposals: 'Toimenpide-ehdotukset',
+    urgent: 'kiireellinen',
+    semiUrgent: 'jokseenkin kiireellinen',
+    nonUrgent: 'kiireetön',
+    irrelevant: 'merkityksetön',
   },
 
   aboutPage: {
