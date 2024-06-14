@@ -88,7 +88,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     questionsToShow = questionData
     linkBase = '/individual'
     isDegreeForm = true
-  } else {
+  } else if (formType === 'meta-evaluation') {
     questionsToShow = questionData
     linkBase = 'meta-evaluation/form/'
   }
@@ -203,8 +203,9 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                                 data-cy={`${id}-${filled ? 'OK' : 'EMPTY'}`}
                                 name={getIcon(filled)}
                                 style={{ color: getColor(filled, required) }}
-                                title={`${t(filled ? 'OK' : 'EMPTY')}${required ? ` (${t('formView:mandatory')})` : ''
-                                  }`}
+                                title={`${t(filled ? 'OK' : 'EMPTY')}${
+                                  required ? ` (${t('formView:mandatory')})` : ''
+                                }`}
                               />
                             </>
                           )}
