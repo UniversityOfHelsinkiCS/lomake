@@ -6,6 +6,7 @@ import { Message, Button } from 'semantic-ui-react'
 import CustomModal from 'Components/Generic/CustomModal'
 import ReactMarkdown from 'react-markdown'
 
+import { metareviewQuestions as questions } from '@root/client/questionData/index'
 import useDebounce from 'Utilities/useDebounce'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import MetaTable from './MetaTable'
@@ -55,11 +56,6 @@ const ProgrammeLevelOverview = () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
-  const formatDate = date => {
-    const temp = new Date(date)
-    return `${temp.getDate()}.${temp.getMonth() + 1}.${temp.getFullYear()}`
-  }
-
   return (
     <>
       {modalData && (
@@ -78,23 +74,19 @@ const ProgrammeLevelOverview = () => {
         />
       </div>
       {deadlineInfo && (
-        <Message
-          icon="clock"
-          header={`${draftYear.year} ${t('formView:status:open')}`}
-          content={`${t('formCloses')}: ${formatDate(deadlineInfo.date)}`}
-        />
-      )}
-
+          <Message
+            icon="clock"
+            header={`${draftYear.year} ${t('formView:status:open')}`}
+            content={`${t('formCloses')}: ${deadlineInfo.date}`}
+          />
+        )}
       <div>
         <MetaTable
-          filteredProgrammes={filteredProgrammes}
-          setModalData={onButtonClick}
-          setStatsToShow={null}
-          isBeingFiltered={false}
+          programmes={filteredProgrammes}
+          questions={questions}
+          onButtonClick={onButtonClick}
           handleFilterChange={handleFilterChange}
           filterValue={filter}
-          form={7}
-          formType="meta-evaluation"
           handleShowProgrammes={handleShowProgrammes}
           showAllProgrammes={showAllProgrammes}
         />

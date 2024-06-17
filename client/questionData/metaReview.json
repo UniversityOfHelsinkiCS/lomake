@@ -12,7 +12,7 @@
         "index": 1,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -39,7 +39,7 @@
         "index": 2,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -66,7 +66,7 @@
         "index": 3,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -93,7 +93,7 @@
         "index": 4,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -130,7 +130,7 @@
         "index": 5,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -157,7 +157,7 @@
         "index": 6,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -184,7 +184,7 @@
         "index": 7,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -211,7 +211,7 @@
         "index": 8,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -238,7 +238,7 @@
         "index": 9,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -265,7 +265,7 @@
         "index": 10,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -302,7 +302,7 @@
         "index": 11,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -329,7 +329,7 @@
         "index": 12,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -356,7 +356,7 @@
         "index": 13,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -383,7 +383,7 @@
         "index": 14,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -420,7 +420,7 @@
         "index": 15,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -447,7 +447,7 @@
         "index": 16,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -474,7 +474,7 @@
         "index": 17,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -501,7 +501,7 @@
         "index": 18,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -528,7 +528,7 @@
         "index": 19,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -565,7 +565,7 @@
         "index": 20,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -592,7 +592,7 @@
         "index": 21,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -619,7 +619,7 @@
         "index": 22,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -646,7 +646,7 @@
         "index": 23,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -683,7 +683,7 @@
         "index": 24,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -710,7 +710,7 @@
         "index": 25,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -737,7 +737,7 @@
         "index": 26,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -774,7 +774,7 @@
         "index": 27,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -801,7 +801,7 @@
         "index": 28,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -828,7 +828,7 @@
         "index": 29,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -855,7 +855,7 @@
         "index": 30,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -888,11 +888,11 @@
     "level": "tohtori",
     "parts": [
       {
-        "id": "1",
+        "id": "T1",
         "index": 1,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -915,11 +915,11 @@
         }
       },
       {
-        "id": "2",
+        "id": "T2",
         "index": 2,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -942,11 +942,11 @@
         }
       },
       {
-        "id": "3",
+        "id": "T3",
         "index": 3,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -969,11 +969,11 @@
         }
       },
       {
-        "id": "4",
+        "id": "T4",
         "index": 4,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -996,11 +996,11 @@
         }
       },
       {
-        "id": "5",
+        "id": "T5",
         "index": 5,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -1033,11 +1033,11 @@
     "level": "tohtori",
     "parts": [
       {
-        "id": "6",
+        "id": "T6",
         "index": 6,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -1070,11 +1070,11 @@
     "level": "tohtori",
     "parts": [
       {
-        "id": "7",
+        "id": "T7",
         "index": 7,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -1107,11 +1107,11 @@
     "level": "tohtori",
     "parts": [
       {
-        "id": "8",
+        "id": "T8",
         "index": 8,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
@@ -1134,11 +1134,11 @@
         }
       },
       {
-        "id": "9",
+        "id": "T9",
         "index": 9,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "",
+          "fi": "Kysymys",
           "se": "",
           "en": ""
         },
