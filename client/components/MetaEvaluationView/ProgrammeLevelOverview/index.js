@@ -74,12 +74,12 @@ const ProgrammeLevelOverview = () => {
         />
       </div>
       {deadlineInfo && (
-          <Message
-            icon="clock"
-            header={`${draftYear.year} ${t('formView:status:open')}`}
-            content={`${t('formCloses')}: ${deadlineInfo.date}`}
-          />
-        )}
+        <Message
+          icon="clock"
+          header={`${draftYear.year} ${t('formView:status:open')}`}
+          content={`${t('formCloses')}: ${deadlineInfo.date}`}
+        />
+      )}
       <div>
         <MetaTable
           programmes={filteredProgrammes}

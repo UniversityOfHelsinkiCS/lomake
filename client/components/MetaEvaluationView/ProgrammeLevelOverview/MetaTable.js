@@ -56,13 +56,15 @@ const MetaTable = ({
               <Icon name="sort" />
             </div>
           </th>
-          {questions.map(question => (
+          {questions.map(question =>
             question.parts.map(part => (
               <th>
-                <span className="vertical-text">{part.shortLabel[lang]} {part.index}</span>
+                <span className="vertical-text">
+                  {part.shortLabel[lang]} {part.index}
+                </span>
               </th>
-            ))
-          ))}
+            )),
+          )}
         </tr>
       </thead>
       <tbody>
@@ -99,21 +101,22 @@ const MetaTable = ({
             <td key={`${programme.id}-key`}>
               <Link to={`/meta-evaluation/form/${programme.key}`}>{programme.key}</Link>
             </td>
-            {questions.map(question => (
+            {questions.map(question =>
               question.parts.map(part => {
                 const programmeAnswers = answers.data
-                ? answers.data.find(answer => answer.programme === programme.key)
-                : null
+                  ? answers.data.find(answer => answer.programme === programme.key)
+                  : null
                 const answer = programmeAnswers ? programmeAnswers.data[`${part.id}_text`] : undefined
                 return (
-                <MetaTableCell
-                  key={`${programme.id}-${question.id}-${part.id}`}
-                  question={part}
-                  answer={answer}
-                  onButtonClick={onButtonClick}
-                />
-              )})
-            ))}
+                  <MetaTableCell
+                    key={`${programme.id}-${question.id}-${part.id}`}
+                    question={part}
+                    answer={answer}
+                    onButtonClick={onButtonClick}
+                  />
+                )
+              }),
+            )}
           </tr>
         ))}
       </tbody>
