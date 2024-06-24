@@ -89,6 +89,7 @@ export default {
     semiUrgent: 'jokseenkin kiireellinen',
     nonUrgent: 'kiireetön',
     irrelevant: 'merkityksetön',
+    metaEvaluationAnswers: 'Katselmuksen vastaukset',
   },
 
   aboutPage: {

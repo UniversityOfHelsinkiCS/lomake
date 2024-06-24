@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Message, Button } from 'semantic-ui-react'
+import { Message, Button, Icon } from 'semantic-ui-react'
 import CustomModal from 'Components/Generic/CustomModal'
 import ReactMarkdown from 'react-markdown'
 
@@ -67,11 +67,10 @@ const ProgrammeLevelOverview = () => {
       )}
       <div className="wide-header">
         <h1>{t('evaluation').toUpperCase()}</h1>
-        <Button
-          label={t('questionAnswers')}
-          onClick={() => history.push('/meta-evaluation/answers')}
-          icon="arrow right"
-        />
+        <Button onClick={() => history.push('/meta-evaluation/answers')}>
+          {t('questionAnswers')}
+          <Icon name="arrow right" />
+        </Button>
       </div>
       {deadlineInfo && (
         <Message

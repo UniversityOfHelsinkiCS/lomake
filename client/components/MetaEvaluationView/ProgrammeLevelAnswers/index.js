@@ -46,7 +46,8 @@ const ProgrammeLevelAnswers = () => {
 
   return (
     <div>
-      <div key="back-button" style={{ marginBottom: '2em' }}>
+      <div className="wide-header">
+        <h1>{t('metaEvaluationAnswers').toUpperCase()}</h1>
         <Button onClick={() => history.push('/meta-evaluation')}>
           <Icon name="arrow left" />
           {t('backToFrontPage')}
