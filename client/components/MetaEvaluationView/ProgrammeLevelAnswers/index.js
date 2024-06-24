@@ -1,12 +1,12 @@
-import { metareviewQuestions as questionData } from '@root/client/questionData/index'
-import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
-import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
+import { Button, Loader, Icon } from 'semantic-ui-react'
+import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
+import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
+import QuestionList from 'Components/Generic/QuestionList'
 
 const ProgrammeLevelAnswers = () => {
   const lang = useSelector(state => state.language)
@@ -17,10 +17,8 @@ const ProgrammeLevelAnswers = () => {
   const year = 2024
   const form = 7
   const programmes = useSelector(state => state.studyProgrammes)
-  const { usersProgrammes } = programmes
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
-
-  const appendix = '_text'
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
@@ -30,52 +28,40 @@ const ProgrammeLevelAnswers = () => {
     dispatch(getTempAnswersByFormAndYear(form, year))
   }, [dispatch])
 
-  const questionsList = modifiedQuestions(lang, form)
+  if (!answers.data || !programmes) return <Loader active />
 
-  if (!answers.data || !programmes) return null
+  const questionsList = modifiedQuestions(lang, 7)
+
+  const answersList =
+    answers.data &&
+    answersByQuestions({
+      chosenProgrammes: usersProgrammes,
+      selectedAnswers: answers.data,
+      questionsList,
+      usersProgrammes,
+      lang,
+      t,
+      form,
+    })
 
   return (
     <div>
       <div key="back-button" style={{ marginBottom: '2em' }}>
-        <Button onClick={() => history.push('/meta-evaluation')} icon="arrow left" />
+        <Button onClick={() => history.push('/meta-evaluation')}>
+          <Icon name="arrow left" />
+          {t('backToFrontPage')}
+        </Button>
       </div>
+      <QuestionList label="" questionsList={questionsList} />
       <WrittenAnswers
         year={year}
-        usersProgrammes={programmes}
-        chosenProgrammes={programmes}
-        allAnswers={answersByQuestions({
-          programmes,
-          answers,
-          questionsList,
-          usersProgrammes,
-          lang,
-          t,
-          form,
-        })}
         questionsList={questionsList}
+        chosenProgrammes={usersProgrammes}
+        usersProgrammes={usersProgrammes}
+        allAnswers={answersList}
         showing={showing}
         setShowing={setShowing}
       />
-      {questionData.map(question =>
-        question.parts.map(action => {
-          const programAnswers = answers.data
-            ? answers.data.filter(answer => answer.data && answer.data[`${action.id}${appendix}`])
-            : null
-          return (
-            <>
-              <h3 key={action.id}>
-                {action.index}: {action.label[lang]}
-              </h3>
-              {programAnswers &&
-                programAnswers.map(answer => (
-                  <div key={answer.created_at}>
-                    {answer.programme}: {answer.data[`${action.id}${appendix}`]}
-                  </div>
-                ))}
-            </>
-          )
-        }),
-      )}
     </div>
   )
 }

@@ -73,18 +73,6 @@ export default () => {
 
   const handleTabChange = (e, { activeIndex }) => setActiveTab(activeIndex)
 
-  console.log(
-    answersByQuestions({
-      chosenProgrammes: programmes.chosen,
-      selectedAnswers,
-      questionsList,
-      usersProgrammes,
-      lang,
-      t,
-      form: filters.form,
-    }),
-  )
-
   const panes = [
     {
       menuItem: t('writtenAnswers'),
@@ -98,14 +86,14 @@ export default () => {
             allAnswers={
               programmes.chosen
                 ? answersByQuestions({
-                  chosenProgrammes: programmes.chosen,
-                  selectedAnswers,
-                  questionsList,
-                  usersProgrammes,
-                  lang,
-                  t,
-                  form: filters.form,
-                })
+                    chosenProgrammes: programmes.chosen,
+                    selectedAnswers,
+                    questionsList,
+                    usersProgrammes,
+                    lang,
+                    t,
+                    form: filters.form,
+                  })
                 : []
             }
             showing={showing}
@@ -125,14 +113,14 @@ export default () => {
             allAnswers={
               programmes.chosen
                 ? answersByQuestions({
-                  chosenProgrammes: programmes.chosen,
-                  selectedAnswers,
-                  questionsList,
-                  usersProgrammes,
-                  lang,
-                  t,
-                  form: filters.form,
-                })
+                    chosenProgrammes: programmes.chosen,
+                    selectedAnswers,
+                    questionsList,
+                    usersProgrammes,
+                    lang,
+                    t,
+                    form: filters.form,
+                  })
                 : []
             }
             setActiveTab={setActiveTab}
