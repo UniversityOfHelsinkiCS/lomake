@@ -17,7 +17,7 @@ const MetaTableCell = ({ question, answer, onButtonClick }) => {
         role="button"
         aria-label={answer !== undefined ? `Answer for ${question.id}` : 'Undefined Answer'}
       >
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </td>
   )

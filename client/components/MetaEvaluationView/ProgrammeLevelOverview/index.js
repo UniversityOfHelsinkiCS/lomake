@@ -81,8 +81,8 @@ const ProgrammeLevelOverview = () => {
       )}
       <div>
         <MetaTable
-          programmes={filteredProgrammes}
-          questions={questions}
+          programmes={filteredProgrammes.filter(a => !a.key.startsWith('T'))}
+          questions={questions.filter(a => a.level.startsWith('k'))}
           onButtonClick={onButtonClick}
           handleFilterChange={handleFilterChange}
           filterValue={filter}

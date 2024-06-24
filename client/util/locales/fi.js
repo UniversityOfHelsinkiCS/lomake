@@ -90,6 +90,8 @@ export default {
     nonUrgent: 'kiireetön',
     irrelevant: 'merkityksetön',
     metaEvaluationAnswers: 'Katselmuksen vastaukset',
+    bm: 'Kandiohjelmat & maisteriohjelmat',
+    t: 'Tohtoriohjelmat',
   },
 
   aboutPage: {

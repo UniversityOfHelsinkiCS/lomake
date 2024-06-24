@@ -161,8 +161,17 @@ const GoToDegreeReform = ({ user }) => {
 const GoToMetaEvaluation = () => {
   const { t } = useTranslation()
   return (
-    <Menu.Item as={Link} to="/meta-evaluation">
-      {t('metaevaluation')}
+    <Menu.Item style={{ padding: 0 }}>
+      <Dropdown item text={t('metaevaluation')} style={{ height: '100%' }}>
+        <Dropdown.Menu>
+          <Dropdown.Item as={Link} to="/meta-evaluation">
+            {t('bm')}
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/meta-evaluation/doctor">
+            {t('t')}
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </Menu.Item>
   )
 }
