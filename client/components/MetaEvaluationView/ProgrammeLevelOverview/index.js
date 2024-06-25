@@ -1,39 +1,52 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Message, Button, Icon } from 'semantic-ui-react'
-import CustomModal from 'Components/Generic/CustomModal'
+import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-
-import { metareviewQuestions as questions } from '@root/client/questionData/index'
-import useDebounce from 'Utilities/useDebounce'
+import { Link } from 'react-router-dom'
+import CsvDownload from 'Components/Generic/CsvDownload'
+import { Button, Dropdown } from 'semantic-ui-react'
+import { filterFromUrl, getYearToShow } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
-import MetaTable from './MetaTable'
+import { isAdmin } from '@root/config/common'
+import useDebounce from 'Utilities/useDebounce'
+import CustomModal from 'Components/Generic/CustomModal'
+import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
+import ColorTable from '../../OverviewPage/ColorTable'
+import StatsContent from '../../OverviewPage/StatsContent'
+import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
-const ProgrammeLevelOverview = () => {
+export default () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter, 200)
-  const lang = useSelector(state => state.language)
-  const currentUser = useSelector(state => state.currentUser)
-  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const [modalData, setModalData] = useState(null)
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const deadlineInfo = nextDeadline ? nextDeadline.find(item => item.form === 7) : null
+  const [showCsv, setShowCsv] = useState(false)
+  const dispatch = useDispatch()
+
+  const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  const [statsToShow, setStatsToShow] = useState(null)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
-  const history = useHistory()
+  const debouncedFilter = useDebounce(filter, 200)
+  const currentUser = useSelector(({ currentUser }) => currentUser)
+  const lang = useSelector(state => state.language)
+  const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const form = 7 // TO FIX
+  const formType = 'meta-evaluation'
+
+  const year = getYearToShow({ draftYear, nextDeadline, form })
+
+  useEffect(() => {
+    const filterQuery = filterFromUrl()
+    if (filterQuery) {
+      setFilter(filterQuery)
+    }
+    dispatch(setYear(year))
+  }, [])
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
-  }, [lang, t])
-
-  const onButtonClick = (question, answer) => {
-    const title = question.label[lang]
-    const content = answer
-    const color = 'green'
-    setModalData({ title, content, color })
-  }
+  }, [lang])
 
   const handleFilterChange = ({ target }) => {
     const { value } = target
@@ -44,7 +57,14 @@ const ProgrammeLevelOverview = () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes })
+  const usersProgrammes = useVisibleOverviewProgrammes({
+    currentUser,
+    programmes,
+    showAllProgrammes,
+    year,
+    form,
+  }).filter(a => !a.key.startsWith('T'))
+
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
       const name = prog.name[lang]
@@ -56,42 +76,87 @@ const ProgrammeLevelOverview = () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
+  const moreThanFiveProgrammes = useMemo(() => {
+    if (isAdmin(currentUser.data)) return true
+    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
+    return false
+  }, [currentUser])
+
   return (
     <>
       {modalData && (
-        <CustomModal title={modalData.title} closeModal={() => setModalData(null)} borderColor={modalData.color}>
-          <div style={{ fontSize: '1.2em' }}>
-            <ReactMarkdown>{modalData.content}</ReactMarkdown>
-          </div>
+        <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
+          <>
+            <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
+            <div style={{ fontSize: '1.2em' }}>
+              <ReactMarkdown>{modalData.content}</ReactMarkdown>
+            </div>
+          </>
         </CustomModal>
       )}
-      <div className="wide-header">
-        <h1>{t('evaluation').toUpperCase()}</h1>
-        <Button onClick={() => history.push('/meta-evaluation/answers')}>
-          {t('questionAnswers')}
-          <Icon name="arrow right" />
-        </Button>
-      </div>
-      {deadlineInfo && (
-        <Message
-          icon="clock"
-          header={`${draftYear.year} ${t('formView:status:open')}`}
-          content={`${t('formCloses')}: ${deadlineInfo.date}`}
-        />
+
+      {programControlsToShow && (
+        <CustomModal
+          title={`${t('overview:accessRights')} - ${
+            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+          }`}
+          closeModal={() => setProgramControlsToShow(null)}
+        >
+          <ProgramControlsContent programKey={programControlsToShow.key} form={form} />
+        </CustomModal>
       )}
-      <div>
-        <MetaTable
-          programmes={filteredProgrammes.filter(a => !a.key.startsWith('T'))}
-          questions={questions.filter(a => a.level.startsWith('k'))}
-          onButtonClick={onButtonClick}
-          handleFilterChange={handleFilterChange}
-          filterValue={filter}
-          handleShowProgrammes={handleShowProgrammes}
-          showAllProgrammes={showAllProgrammes}
-        />
-      </div>
+
+      {statsToShow && (
+        <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
+          <StatsContent stats={statsToShow.stats} />
+        </CustomModal>
+      )}
+
+      {usersProgrammes.length > 0 ? (
+        <>
+          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
+            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+            <Button data-cy="nav-report" as={Link} to="/meta-evaluation/answers" secondary size="big">
+              {t('overview:readAnswers')}
+            </Button>
+            <Dropdown
+              data-cy="csv-download"
+              className="button basic gray csv-download"
+              direction="left"
+              text={t('overview:csvDownload')}
+              onClick={() => setShowCsv(true)}
+            >
+              {showCsv ? (
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <CsvDownload wantedData="written" view="overview" form={form} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <CsvDownload wantedData="colors" view="overview" form={form} />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              ) : null}
+            </Dropdown>
+          </div>
+          <div style={{ marginTop: '1em' }}>
+            <ColorTable
+              filteredProgrammes={filteredProgrammes}
+              setModalData={setModalData}
+              setProgramControlsToShow={setProgramControlsToShow}
+              setStatsToShow={setStatsToShow}
+              isBeingFiltered={debouncedFilter !== ''}
+              handleFilterChange={handleFilterChange}
+              filterValue={filter}
+              form={form}
+              formType={formType}
+              showAllProgrammes={showAllProgrammes}
+              handleShowProgrammes={handleShowProgrammes}
+            />
+          </div>
+        </>
+      ) : (
+        <NoPermissions t={t} />
+      )}
     </>
   )
 }
-
-export default ProgrammeLevelOverview

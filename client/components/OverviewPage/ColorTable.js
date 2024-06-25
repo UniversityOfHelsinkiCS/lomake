@@ -12,7 +12,12 @@ import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
-import { yearlyQuestions as questions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
+import {
+  yearlyQuestions as questions,
+  evaluationQuestions,
+  degreeReformIndividualQuestions,
+  metareviewQuestions,
+} from '../../questionData'
 
 const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
 const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
@@ -115,7 +120,7 @@ const ColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
-      if (form === formKeys.EVALUATION_PROGRAMMES && year) {
+      if ((form === formKeys.EVALUATION_PROGRAMMES && year) || (form === 7 && year)) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())
@@ -155,6 +160,10 @@ const ColorTable = React.memo(
       const degreeReformQuestions = degreeReformIndividualQuestions.filter(q => q.id !== 0)
 
       questionsToShow = degreeReformQuestions
+    } else if (formType === 'meta-evaluation') {
+      questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
+    } else if (formType === 'meta-doctoral') {
+      questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
     }
     let tableIds = null
 
@@ -223,6 +232,10 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
+    } else if (formType === 'meta-evaluation') {
+      tableClassName = '-meta-evaluation'
+    } else if (formType === 'meta-doctoral') {
+      tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {
         tableClassName = '-degree-reform'
