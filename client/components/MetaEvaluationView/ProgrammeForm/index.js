@@ -77,7 +77,7 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <SaveIndicator />
           <div style={{ marginBottom: '2em' }}>
-            <Button onClick={() => history.push('/meta-evaluation')} icon="arrow left" />
+            <Button onClick={() => history.goBack()} icon="arrow left" />
           </div>
           <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
         </div>{' '}
