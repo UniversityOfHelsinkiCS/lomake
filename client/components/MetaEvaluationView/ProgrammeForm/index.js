@@ -9,7 +9,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 import { getFormViewRights, colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from 'Components/FormView/StatusMessage'
-import calendarImage from 'Assets/calendar.jpg'
+import powerlineImage from 'Assets/APowerlineTower.png'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 
@@ -79,7 +79,7 @@ const ProgrammeLevelForm = ({ room }) => {
           <div style={{ marginBottom: '2em' }}>
             <Button onClick={() => history.goBack()} icon="arrow left" />
           </div>
-          <img alt="form-header-calendar" className="img-responsive" src={calendarImage} />
+          <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
         </div>{' '}
         <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
         <h3 style={{ marginTop: '0' }} data-cy="formview-title">
