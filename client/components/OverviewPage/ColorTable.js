@@ -104,6 +104,7 @@ const ColorTable = React.memo(
     individualAnswers,
     facultyView,
     dropdownFilter,
+    doctoral = false,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -161,9 +162,8 @@ const ColorTable = React.memo(
 
       questionsToShow = degreeReformQuestions
     } else if (formType === 'meta-evaluation') {
-      questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
-    } else if (formType === 'meta-doctoral') {
-      questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
+      if (doctoral) questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
+      else questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
     }
     let tableIds = null
 
@@ -232,9 +232,9 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (formType === 'meta-evaluation') {
+    } else if (formType === 'meta-evaluation' && !doctoral) {
       tableClassName = '-meta-evaluation'
-    } else if (formType === 'meta-doctoral') {
+    } else if (doctoral) {
       tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {

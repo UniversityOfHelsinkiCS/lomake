@@ -23,7 +23,6 @@ import CommitteePrinting from 'Components/EvaluationView/CommitteeOverview/Commi
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 import UniversityFormView from 'Components/EvaluationView/UniversityForm'
 import ProgrammeLevelMetaOverview from 'Components/MetaEvaluationView/ProgrammeLevelOverview'
-import DoctoralLevelMetaOverview from 'Components/MetaEvaluationView/DoctoralLevelOverview'
 import ProgrammeLevelMetaForm from 'Components/MetaEvaluationView/ProgrammeForm'
 import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelAnswers'
 import ReformAnswers from './ReformAnswers/index'
@@ -41,7 +40,7 @@ export default () => (
         <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
 
         <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
-        <Route exact path="/meta-evaluation/doctor" component={DoctoralLevelMetaOverview} />
+        <Route exact path="/meta-evaluation/doctor" component={ProgrammeLevelMetaOverview} />
         <Route exact path="/meta-evaluation/answers" component={ProgrammeLevelAnswers} />
         <Route
           exact

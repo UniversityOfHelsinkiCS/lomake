@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { filterFromUrl, getYearToShow } from 'Utilities/common'
@@ -16,12 +16,13 @@ import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 
-export default () => {
+const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
@@ -33,6 +34,7 @@ export default () => {
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const form = 7 // TO FIX
   const formType = 'meta-evaluation'
+  const [doctoral, setDoctoral] = useState(false)
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
@@ -42,7 +44,13 @@ export default () => {
       setFilter(filterQuery)
     }
     dispatch(setYear(year))
-  }, [])
+
+    if (location.pathname.endsWith('doctor')) {
+      setDoctoral(true)
+    } else {
+      setDoctoral(false)
+    }
+  }, [dispatch, location.pathname])
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
@@ -57,13 +65,15 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
+  const filterProgrammes = doctoral ? a => a.key.startsWith('T') : a => !a.key.startsWith('T')
+
   const usersProgrammes = useVisibleOverviewProgrammes({
     currentUser,
     programmes,
     showAllProgrammes,
     year,
     form,
-  }).filter(a => !a.key.startsWith('T'))
+  }).filter(filterProgrammes)
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -151,6 +161,7 @@ export default () => {
               formType={formType}
               showAllProgrammes={showAllProgrammes}
               handleShowProgrammes={handleShowProgrammes}
+              doctoral={doctoral}
             />
           </div>
         </>
@@ -160,3 +171,5 @@ export default () => {
     </>
   )
 }
+
+export default ProgrammeLevelOverview
