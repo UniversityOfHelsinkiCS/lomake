@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link, useLocation } from 'react-router-dom'
 import CsvDownload from 'Components/Generic/CsvDownload'
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown, Message } from 'semantic-ui-react'
 import { filterFromUrl, getYearToShow } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import { isAdmin } from '@root/config/common'
@@ -12,6 +12,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { setYear } from 'Utilities/redux/filterReducer'
+import { formKeys } from '@root/config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -32,8 +33,9 @@ const ProgrammeLevelOverview = () => {
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const form = 7 // TO FIX
+  const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
+  const deadlineInfo = nextDeadline ? nextDeadline.find(a => a.form === form) : null
   const [doctoral, setDoctoral] = useState(false)
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
@@ -120,6 +122,14 @@ const ProgrammeLevelOverview = () => {
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
+      )}
+
+      {deadlineInfo && (
+        <Message
+          icon="clock"
+          header={`${draftYear.year} ${t('formView:status:open')}`}
+          content={`${t('formCloses')}: ${deadlineInfo.date}`}
+        />
       )}
 
       {usersProgrammes.length > 0 ? (
