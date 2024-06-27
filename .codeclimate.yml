@@ -39,3 +39,4 @@ exclude_patterns:
   - '**/*.txt'
   - '**/*.yml'
   - 'client/util/locales/*.js'
+  - 'config/data.js'
