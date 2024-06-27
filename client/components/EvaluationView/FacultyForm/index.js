@@ -25,11 +25,11 @@ import { facultyEvaluationQuestions as questions, evaluationQuestions } from '..
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   // This is used since faculty doesn't have stuyprogramme
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  if (!writeAccess) return true
-  return false
+  const isDraftYearInvalid = !draftYear || (draftYear && draftYear.year !== year)
+  const isFormDeadlineInvalid = formDeadline?.form !== form
+  const isWriteAccessInvalid = !writeAccess
+
+  return isDraftYearInvalid || isFormDeadlineInvalid || isWriteAccessInvalid
 }
 
 const findEntityLevelAnswers = (programmes, allAnswers, question) => {
