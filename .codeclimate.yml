@@ -38,3 +38,4 @@ exclude_patterns:
   - '**/*.svg'
   - '**/*.txt'
   - '**/*.yml'
+  - 'client/util/locales/*.js'
