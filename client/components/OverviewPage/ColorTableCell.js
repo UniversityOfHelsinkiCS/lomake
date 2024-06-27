@@ -12,6 +12,7 @@ import {
   degreeReformIndividualQuestions,
   universityEvaluationQuestions,
   facultyEvaluationQuestions,
+  metareviewQuestions,
 } from '../../questionData'
 import MeasuresCell from './MeasuresCell'
 
@@ -44,6 +45,7 @@ const ColorTableCell = ({
     4: evaluationQuestions,
     5: facultyEvaluationQuestions,
     6: universityEvaluationQuestions,
+    7: metareviewQuestions,
   }
 
   const questions = questionMap[form] || yearlyQuestions
@@ -92,6 +94,9 @@ const ColorTableCell = ({
       content: textAnswer,
       color: colorAnswer,
     }
+  }
+  if (form === formKeys.META_EVALUATION) {
+    return null
   }
   if (form === formKeys.EVALUATION_FACULTIES) {
     colorId = [

@@ -5,6 +5,7 @@ const formKeys = {
   EVALUATION_PROGRAMMES: 4,
   EVALUATION_FACULTIES: 5,
   EVALUATION_COMMTTEES: 6,
+  META_EVALUATION: 7,
 }
 
 const forms = [

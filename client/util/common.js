@@ -145,7 +145,7 @@ export const modifiedQuestions = (lang, form) => {
     questions = evaluationQuestions
   } else if (form === formKeys.EVALUATION_FACULTIES) {
     questions = evaluationFacultyQuestions
-  } else if (form === 7) {
+  } else if (form === formKeys.META_EVALUATION) {
     questions = metareviewQuestions
   }
 
@@ -610,7 +610,7 @@ export const getFormType = form => {
   if (form === formKeys.EVALUATION_COMMTTEES) {
     return 'evaluation-university'
   }
-  if (form === 7) {
+  if (form === formKeys.META_EVALUATION) {
     return 'evaluation-committee'
   }
 

@@ -120,7 +120,7 @@ const ColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
-      if ((form === formKeys.EVALUATION_PROGRAMMES && year) || (form === 7 && year)) {
+      if ((form === formKeys.EVALUATION_PROGRAMMES && year) || (form === formKeys.META_EVALUATION && year)) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())
