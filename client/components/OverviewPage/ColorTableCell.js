@@ -82,6 +82,7 @@ const ColorTableCell = ({
         if (acc) return acc
         const header = cur.parts.reduce((acc, cur) => {
           if (acc) return acc
+          if (form === formKeys.META_EVALUATION && cur.id === tempQuestionId) return cur.label[lang]
           if (cur.id === tempQuestionId) return cur.description[lang]
           return acc
         }, '')
@@ -95,9 +96,7 @@ const ColorTableCell = ({
       color: colorAnswer,
     }
   }
-  if (form === formKeys.META_EVALUATION) {
-    return null
-  }
+
   if (form === formKeys.EVALUATION_FACULTIES) {
     colorId = [
       `${questionId}_light`,
@@ -162,7 +161,7 @@ const ColorTableCell = ({
 
   const modalConfig = getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer)
 
-  if (textAnswer && questionType === 'ENTITY_NOLIGHT') {
+  if ((textAnswer && questionType === 'ENTITY_NOLIGHT') || (textAnswer && !colorAnswer)) {
     return (
       <MeasuresCell
         programmesAnswers={programmesAnswers}
@@ -175,7 +174,6 @@ const ColorTableCell = ({
       />
     )
   }
-
   if (form === formKeys.EVALUATION_COMMTTEES) {
     if (
       (!textAnswer && questionType === 'TEXTAREA_UNIVERSITY') ||
@@ -212,7 +210,6 @@ const ColorTableCell = ({
       />
     )
   }
-
   const getIcon = () => {
     if (!programmesOldAnswers) return null
 
@@ -231,6 +228,20 @@ const ColorTableCell = ({
   IconElement = (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {Object.entries(colorAnswer).map(([key, value]) => {
+        if (value === 'gray')
+          return (
+            <div
+              key={`${programmesKey}-${questionId}-${key}`}
+              data-cy={`${programmesKey}-${questionId}-${key}`}
+              className="square"
+              onClick={() => {
+                setModalData(getModalConfig(modalConfig))
+              }}
+            >
+              {colorBlindMode && t(value)}
+              {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+            </div>
+          )
         return (
           <div
             key={`${programmesKey}-${questionId}-${key}`}

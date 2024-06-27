@@ -14,6 +14,7 @@ export default {
     green: 'Green',
     yellow: 'Yellow',
     red: 'Red',
+    gray: 'Gray',
     EMPTY: 'No answer provided',
     empty: 'No answer provided',
     OK: 'Answer given',
