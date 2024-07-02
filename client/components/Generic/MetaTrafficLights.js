@@ -24,11 +24,11 @@ const MetaTrafficLights = ({ id, form }) => {
   return (
     <div style={{ margin: '1em 0' }}>
       <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
-        <div title={`${t('nonUrgent')}`}>
+        <div title={`${t('urgent')}`}>
           <div
-            data-cy={`color-positive-${id}`}
-            className={getClassName('green')}
-            onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
+            data-cy={`color-negative-${id}`}
+            className={getClassName('red')}
+            onClick={!viewOnly ? () => choose(fieldName, 'red') : undefined}
           />
         </div>
         <div title={`${t('semiUrgent')}`}>
@@ -38,11 +38,11 @@ const MetaTrafficLights = ({ id, form }) => {
             onClick={!viewOnly ? () => choose(fieldName, 'yellow') : undefined}
           />
         </div>
-        <div title={`${t('urgent')}`}>
+        <div title={`${t('nonUrgent')}`}>
           <div
-            data-cy={`color-negative-${id}`}
-            className={getClassName('red')}
-            onClick={!viewOnly ? () => choose(fieldName, 'red') : undefined}
+            data-cy={`color-positive-${id}`}
+            className={getClassName('green')}
+            onClick={!viewOnly ? () => choose(fieldName, 'green') : undefined}
           />
         </div>
         <div title={`${t('irrelevant')}`}>
