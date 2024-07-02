@@ -269,7 +269,7 @@
 }
 .circle-big-gray {
   @include answer-circle-big-basics;
-  background: $background-gray
+  background: rgb(128,128,128);
 }
 
 .circle-big-green-selected {
@@ -286,7 +286,7 @@
 }
 .circle-big-gray-selected {
   @include selected-answer-circle-big-basics;
-  background: $background-gray
+  background: rgb(128,128,128);
 }
 
 

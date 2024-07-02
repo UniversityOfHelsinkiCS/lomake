@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Divider } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
@@ -6,6 +7,10 @@ import MetaTrafficLights from './MetaTrafficLights'
 import './Generic.scss'
 
 const MetaEntity = ({ id, label, description, required, noColor, number, form, kludge }) => {
+  const fieldName = `${id}_light`
+  const value = useSelector(({ form }) => form.data[fieldName])
+  const bool = value !== 'gray'
+
   return (
     <div className="form-entity-area">
       <Divider />
@@ -18,7 +23,7 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
         </div>
         {!noColor && <MetaTrafficLights id={id} form={form} />}
       </div>
-      <Textarea id={id} label={description} form={form} kludge={kludge} />
+      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} />}
       <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} />
     </div>
   )
