@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import { Link, useLocation } from 'react-router-dom'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import { Button, Dropdown, Message } from 'semantic-ui-react'
-import { filterFromUrl, getYearToShow } from 'Utilities/common'
+import { filterFromUrl } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
@@ -38,7 +38,7 @@ const ProgrammeLevelOverview = () => {
   const deadlineInfo = nextDeadline ? nextDeadline.find(a => a.form === form) : null
   const [doctoral, setDoctoral] = useState(false)
 
-  const year = getYearToShow({ draftYear, nextDeadline, form })
+  const year = 2024
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
