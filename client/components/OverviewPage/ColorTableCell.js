@@ -228,20 +228,6 @@ const ColorTableCell = ({
   IconElement = (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {Object.entries(colorAnswer).map(([key, value]) => {
-        if (value === 'gray')
-          return (
-            <div
-              key={`${programmesKey}-${questionId}-${key}`}
-              data-cy={`${programmesKey}-${questionId}-${key}`}
-              className="square"
-              onClick={() => {
-                setModalData(getModalConfig(modalConfig))
-              }}
-            >
-              {colorBlindMode && t(value)}
-              {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-            </div>
-          )
         return (
           <div
             key={`${programmesKey}-${questionId}-${key}`}

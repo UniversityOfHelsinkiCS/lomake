@@ -142,6 +142,13 @@ $METADOCTORAL_COUNT: 9;
     }
   }
   }
+  &-gray {
+    @include square-basics();
+    background-color: rgb(128,128,128);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {

@@ -66,6 +66,13 @@ $QUESTION_COUNT: 14;
       filter: brightness(0.8);
     }
   }
+  &-gray {
+    @include square-basics();
+    background-color: rgb(128,128,128);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {
