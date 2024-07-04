@@ -2,14 +2,15 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import CsvDownload from 'Components/Generic/CsvDownload'
 import { Button, Dropdown, Message } from 'semantic-ui-react'
-import { filterFromUrl } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
-import useDebounce from 'Utilities/useDebounce'
-import CustomModal from 'Components/Generic/CustomModal'
+import { filterFromUrl } from 'Utilities/common'
 import { setYear } from 'Utilities/redux/filterReducer'
 import { data as facultyList } from '@root/config/data'
+import useDebounce from 'Utilities/useDebounce'
+
+import CsvDownload from 'Components/Generic/CsvDownload'
+import CustomModal from 'Components/Generic/CustomModal'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -31,99 +32,87 @@ const MetaOverview = ({
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
-
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
+  const [usersProgrammes, setUsersProgrammes] = useState(programmes)
+  const [dropdownText, setDropdownText] = useState(t('chooseFaculty'))
+
   const debouncedFilter = useDebounce(filter, 200)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const deadlineInfo = nextDeadline ? nextDeadline.find(a => a.form === form) : null
-
-  const [usersProgrammes, setUsersProgrammes] = useState(programmes)
+  const deadlineInfo = nextDeadline?.find(a => a.form === form)
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
-    if (filterQuery) {
-      setFilter(filterQuery)
-    }
+    if (filterQuery) setFilter(filterQuery)
     dispatch(setYear(year))
-  }, [dispatch])
+    document.title = t('evaluation')
+  }, [dispatch, year, t, lang])
 
-  useEffect(() => {
-    document.title = `${t('evaluation')}`
-  }, [lang])
+  const filteredProgrammes = useMemo(() => {
+    return usersProgrammes.filter(
+      prog =>
+        prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
+    )
+  }, [usersProgrammes, lang, debouncedFilter])
 
-  const handleFilterChange = ({ target }) => {
-    const { value } = target
-    setFilter(value)
-  }
+  const moreThanFiveProgrammes = useMemo(
+    () => isAdmin(currentUser.data) || (currentUser.data.access && Object.keys(currentUser.data.access).length > 5),
+    [currentUser],
+  )
 
-  const handleShowProgrammes = () => {
-    setShowAllProgrammes(!showAllProgrammes)
-  }
+  const handleFilterChange = e => setFilter(e.target.value)
 
-  const handleDropdownFilter = value => {
-    if (value === '') {
+  const handleDropdownFilter = faculty => {
+    if (!faculty) {
+      setDropdownText(t('chooseFaculty'))
       setUsersProgrammes(programmes)
       return
     }
 
-    const temp = facultyList.find(item => item.code === value)
-    if (doctoral) {
-      const res = temp.programmes.filter(item => item.level === 'doctoral')
-      const resKeys = res.map(program => program.key)
-      setUsersProgrammes(programmes.filter(a => resKeys.includes(a.key)))
-    } else {
-      const res = temp.programmes.filter(item => item.level !== 'doctoral')
-      const resKeys = res.map(program => program.key)
-      setUsersProgrammes(programmes.filter(a => resKeys.includes(a.key)))
-    }
+    setDropdownText(faculty.name[lang])
+    const facultyData = facultyList.find(item => item.code === faculty.code)
+    const filteredPrograms = facultyData.programmes
+      .filter(item => (doctoral ? item.level === 'doctoral' : item.level !== 'doctoral'))
+      .map(program => program.key)
+
+    setUsersProgrammes(programmes.filter(a => filteredPrograms.includes(a.key)))
   }
 
-  const filteredProgrammes = useMemo(() => {
-    return usersProgrammes.filter(prog => {
-      const name = prog.name[lang]
-      const code = prog.key
+  const renderModal = () => {
+    if (modalData) {
       return (
-        name.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        code.toLowerCase().includes(debouncedFilter.toLowerCase())
-      )
-    })
-  }, [usersProgrammes, lang, debouncedFilter])
-
-  const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data)) return true
-    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
-    return false
-  }, [currentUser])
-
-  return (
-    <>
-      {modalData && (
         <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
-          <>
-            <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
-            <div style={{ fontSize: '1.2em' }}>
-              <ReactMarkdown>{modalData.content}</ReactMarkdown>
-            </div>
-          </>
+          <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
+          <div style={{ fontSize: '1.2em' }}>
+            <ReactMarkdown>{modalData.content}</ReactMarkdown>
+          </div>
         </CustomModal>
-      )}
-
-      {programControlsToShow && (
+      )
+    }
+    if (programControlsToShow) {
+      return (
         <CustomModal
           title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang]}`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.key} form={form} />
         </CustomModal>
-      )}
-
-      {statsToShow && (
+      )
+    }
+    if (statsToShow) {
+      return (
         <CustomModal title={statsToShow.title} closeModal={() => setStatsToShow(null)}>
           <StatsContent stats={statsToShow.stats} />
         </CustomModal>
-      )}
+      )
+    }
+    return null
+  }
 
+  return (
+    <>
+      {renderModal()}
       {deadlineInfo && (
         <Message
           icon="clock"
@@ -131,7 +120,6 @@ const MetaOverview = ({
           content={`${t('formCloses')}: ${deadlineInfo.date}`}
         />
       )}
-
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
         <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
         <Button data-cy="nav-report" as={Link} to="/meta-evaluation/answers" secondary size="big">
@@ -142,34 +130,25 @@ const MetaOverview = ({
           className="button basic gray csv-download"
           direction="left"
           text={t('overview:csvDownload')}
-          onClick={() => setShowCsv(true)}
+          onClick={() => setShowCsv(!showCsv)}
         >
-          {showCsv ? (
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <CsvDownload wantedData="written" view="overview" form={form} />
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <CsvDownload wantedData="colors" view="overview" form={form} />
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          ) : null}
-        </Dropdown>
-        <Dropdown text="filter by faculty" className="button basic gray">
           <Dropdown.Menu>
             <Dropdown.Item>
-              <div onClick={() => handleDropdownFilter('')}>{t('all')}</div>
+              <CsvDownload wantedData="written" view="overview" form={form} />
             </Dropdown.Item>
-            {faculties &&
-              faculties.data.map(faculty => {
-                return (
-                  <Dropdown.Item>
-                    <div key={faculty.code} onClick={() => handleDropdownFilter(faculty.code)}>
-                      {faculty.name[lang]}
-                    </div>
-                  </Dropdown.Item>
-                )
-              })}
+            <Dropdown.Item>
+              <CsvDownload wantedData="colors" view="overview" form={form} />
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>{' '}
+        <Dropdown text={dropdownText} className="button basic gray">
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleDropdownFilter('')}>{t('report:all')}</Dropdown.Item>
+            {faculties?.data.map(faculty => (
+              <Dropdown.Item key={faculty.code} onClick={() => handleDropdownFilter(faculty)}>
+                {faculty.name[lang]}
+              </Dropdown.Item>
+            ))}
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -185,7 +164,7 @@ const MetaOverview = ({
           form={form}
           formType={formType}
           showAllProgrammes={showAllProgrammes}
-          handleShowProgrammes={handleShowProgrammes}
+          handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
           doctoral={doctoral}
         />
       </div>
