@@ -4,11 +4,11 @@ import { formKeys } from '@root/config/data'
 
 import MetaEntity from 'Components/Generic/MetaEntity'
 import { colors, romanize } from 'Utilities/common'
-import Section from './MetaEvaluationSection'
+import MetaEvaluationSection from './MetaEvaluationSection'
 
 import './EvaluationForm.scss'
 
-const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
+const MetaEvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl }) => {
   const lang = useSelector(state => state.language)
 
   const partComponentMap = {
@@ -25,22 +25,6 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     }
 
     if (part.type === 'TITLE') {
-      if (part.label.fi === 'KOULUTUSOHJELMAN KIRJAUKSET') {
-        return (
-          <h2
-            key={part.id}
-            style={{
-              marginTop: '1em !important',
-              padding: '0.5em',
-              borderRadius: '5px',
-              backgroundColor: colors.background_blue,
-              marginBottom: '0',
-            }}
-          >
-            {part.label[lang]}
-          </h2>
-        )
-      }
       return (
         <h2 key={`${part.id}-${part.index}`} style={divStyle}>
           {part.label[lang]}
@@ -58,7 +42,6 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
 
     const gapSytle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
     const maxLength = part.maxLength ? part.maxLength : undefined
-    const noUniversityLevel = part.noUniversityLevel ? part.noUniversityLevel : undefined
 
     return (
       <div key={`${part.id}-container`} style={gapSytle}>
@@ -78,7 +61,6 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
             summaryUrl={summaryUrl || null}
             kludge={part.kludge}
             maxLength={maxLength}
-            noUniversityLevel={noUniversityLevel}
           />
         </div>
       </div>
@@ -89,19 +71,18 @@ const EvaluationForm = ({ questions, programmeKey, summaryData, form, summaryUrl
     <>
       {questions.map((section, index) => {
         return (
-          <Section
+          <MetaEvaluationSection
             title={section.title[lang]}
             number={romanize(index + 1)}
             key={`${section.title[lang]}`}
             programmeKey={programmeKey}
-            form={form}
           >
             {section.parts.map(partMap)}
-          </Section>
+          </MetaEvaluationSection>
         )
       })}
     </>
   )
 }
 
-export default EvaluationForm
+export default MetaEvaluationForm

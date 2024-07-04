@@ -1,18 +1,9 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
 
-const Section = ({ title, number, children, programmeKey, form }) => {
-  let id = ''
-
-  if (form === formKeys.EVALUATION_FACULTIES) {
-    id = '-faculty'
-  } else if (form === formKeys.EVALUATION_COMMTTEES) {
-    id = '-university'
-  }
-
-  const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`
+const MetaEvaluationSection = ({ title, number, children, programmeKey }) => {
+  const url = `${window.location.origin}${basePath}meta-evaluation/form/${programmeKey}#${number}`
 
   return (
     <>
@@ -20,7 +11,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
         <InView
           as="div"
           onChange={inView => {
-            if (form !== 7 && inView) {
+            if (inView) {
               window.history.pushState({}, '', url)
             }
           }}
@@ -45,4 +36,4 @@ const Section = ({ title, number, children, programmeKey, form }) => {
   )
 }
 
-export default Section
+export default MetaEvaluationSection

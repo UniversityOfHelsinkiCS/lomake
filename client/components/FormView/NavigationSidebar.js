@@ -90,7 +90,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     isDegreeForm = true
   } else if (formType === 'meta-evaluation') {
     questionsToShow = questionData
-    linkBase = 'meta-evaluation/form/'
+    linkBase = ''
   }
 
   let formDataFilter = []
