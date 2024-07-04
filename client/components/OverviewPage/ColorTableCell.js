@@ -64,9 +64,15 @@ const ColorTableCell = ({
   }
 
   const textId = `${questionId}_text`
+  const commentId = `${questionId}_comment_text`
   let colorId = `${questionId}_light`
   let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
+  const commentAnswer = programmesAnswers[commentId] || getMeasuresAnswer(programmesAnswers, commentId)
   let colorAnswer = null
+
+  if (form === formKeys.META_EVALUATION && commentAnswer) {
+    textAnswer += `\n\n${commentAnswer}`
+  }
 
   const getModalConfig = () => {
     // Kysymys - ylätaso - alataso

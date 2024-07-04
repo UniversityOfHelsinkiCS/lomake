@@ -114,11 +114,14 @@ const ColorTable = React.memo(
 
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
-    const year = useSelector(({ filters }) => filters.year)
+    let year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
+
+    if (formType === 'meta-evaluation') {
+      year = 2024
+    }
 
     useEffect(() => {
       if ((form === formKeys.EVALUATION_PROGRAMMES && year) || (form === formKeys.META_EVALUATION && year)) {
