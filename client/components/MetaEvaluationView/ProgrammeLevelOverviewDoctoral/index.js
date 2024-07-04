@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
-import MetaOverview from './MetaOverview'
+import MetaOverview from '../ProgrammeLevelOverview/MetaOverview'
 
-const ProgrammeLevelOverview = () => {
+const ProgrammeLevelOverviewDoctoral = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const doctoral = false
+  const doctoral = true
 
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const currentUser = useSelector(({ currentUser }) => currentUser)
@@ -18,7 +18,7 @@ const ProgrammeLevelOverview = () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
-  const filterProgrammes = a => !a.key.startsWith('T')
+  const filterProgrammes = a => a.key.startsWith('T')
 
   const year = 2024
 
@@ -58,4 +58,4 @@ const ProgrammeLevelOverview = () => {
   )
 }
 
-export default ProgrammeLevelOverview
+export default ProgrammeLevelOverviewDoctoral
