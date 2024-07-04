@@ -12,7 +12,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { setYear } from 'Utilities/redux/filterReducer'
-import { formKeys } from '@root/config/data'
+import { formKeys, data as facultyList } from '@root/config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -31,28 +31,36 @@ const ProgrammeLevelOverview = () => {
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
+  const faculties = useSelector(state => state.faculties)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
   const deadlineInfo = nextDeadline ? nextDeadline.find(a => a.form === form) : null
-  const [doctoral, setDoctoral] = useState(false)
+  const doctoral = location.pathname.endsWith('doctor')
+  const filterProgrammes = doctoral ? a => a.key.startsWith('T') : a => !a.key.startsWith('T')
 
   const year = 2024
 
+  const initialProgrammes = useVisibleOverviewProgrammes({
+    currentUser,
+    programmes,
+    showAllProgrammes,
+    year,
+    form,
+  }).filter(filterProgrammes)
+  const [usersProgrammes, setUsersProgrammes] = useState([])
+
+  useEffect(() => {
+    setUsersProgrammes(initialProgrammes)
+  }, [currentUser, programmes, showAllProgrammes, year, form])
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) {
       setFilter(filterQuery)
     }
     dispatch(setYear(year))
-
-    if (location.pathname.endsWith('doctor')) {
-      setDoctoral(true)
-    } else {
-      setDoctoral(false)
-    }
-  }, [dispatch, location.pathname])
+  }, [dispatch])
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
@@ -67,15 +75,24 @@ const ProgrammeLevelOverview = () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const filterProgrammes = doctoral ? a => a.key.startsWith('T') : a => !a.key.startsWith('T')
+  const handleDropdownFilter = value => {
+    if (value === '') {
+      setUsersProgrammes(initialProgrammes)
+      return
+    }
 
-  const usersProgrammes = useVisibleOverviewProgrammes({
-    currentUser,
-    programmes,
-    showAllProgrammes,
-    year,
-    form,
-  }).filter(filterProgrammes)
+    if (doctoral) {
+      const temp = facultyList.find(item => item.code === value)
+      const res = temp.programmes.filter(item => item.level === 'doctoral')
+      const resKeys = res.map(program => program.key)
+      setUsersProgrammes(initialProgrammes.filter(a => resKeys.includes(a.key)))
+    } else {
+      const temp = facultyList.find(item => item.code === value)
+      const res = temp.programmes.filter(item => item.level !== 'doctoral')
+      const resKeys = res.map(program => program.key)
+      setUsersProgrammes(initialProgrammes.filter(a => resKeys.includes(a.key)))
+    }
+  }
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -156,6 +173,23 @@ const ProgrammeLevelOverview = () => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               ) : null}
+            </Dropdown>
+            <Dropdown text="filter by faculty" className="button basic gray">
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <div onClick={() => handleDropdownFilter('')}>{t('all')}</div>
+                </Dropdown.Item>
+                {faculties &&
+                  faculties.data.map(faculty => {
+                    return (
+                      <Dropdown.Item>
+                        <div key={faculty.code} onClick={() => handleDropdownFilter(faculty.code)}>
+                          {faculty.name[lang]}
+                        </div>
+                      </Dropdown.Item>
+                    )
+                  })}
+              </Dropdown.Menu>
             </Dropdown>
           </div>
           <div style={{ marginTop: '1em' }}>
