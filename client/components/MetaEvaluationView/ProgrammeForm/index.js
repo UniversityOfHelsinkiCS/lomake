@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
 import { Loader, Button } from 'semantic-ui-react'
@@ -27,7 +28,6 @@ const ProgrammeLevelForm = ({ room }) => {
   const user = useSelector(state => state.currentUser.data)
   const currentRoom = useSelector(state => state.room)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
-  const history = useHistory()
   const year = 2024
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
@@ -77,7 +77,11 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <SaveIndicator />
           <div style={{ marginBottom: '2em' }}>
-            <Button onClick={() => history.goBack()} icon="arrow left" />
+            {level !== 'tohtori' ? (
+              <Button as={Link} to="/meta-evaluation" icon="arrow left" />
+            ) : (
+              <Button as={Link} to="/meta-evaluation/doctor" icon="arrow left" />
+            )}
           </div>
           <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
         </div>{' '}
