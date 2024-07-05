@@ -25,6 +25,7 @@ jobs:
             sidebar,
             yearselector,
             evaluation,
+            metaevaluation,
           ]
     name: Run tests
     runs-on: ubuntu-latest
