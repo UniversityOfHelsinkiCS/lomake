@@ -125,6 +125,22 @@ const MetaOverview = ({
         <Button data-cy="nav-report" as={Link} to="/meta-evaluation/answers" secondary size="big">
           {t('overview:readAnswers')}
         </Button>
+        <Dropdown data-cy="faculty-dropdown" text={dropdownText} className="button basic gray">
+          <Dropdown.Menu>
+            <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
+              {t('report:all')}
+            </Dropdown.Item>
+            {faculties?.data.map(faculty => (
+              <Dropdown.Item
+                data-cy={`dropdown-item-${faculty.code}`}
+                key={faculty.code}
+                onClick={() => handleDropdownFilter(faculty)}
+              >
+                {faculty.name[lang]}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
         <Dropdown
           data-cy="csv-download"
           className="button basic gray csv-download"
@@ -141,16 +157,6 @@ const MetaOverview = ({
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>{' '}
-        <Dropdown text={dropdownText} className="button basic gray">
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => handleDropdownFilter('')}>{t('report:all')}</Dropdown.Item>
-            {faculties?.data.map(faculty => (
-              <Dropdown.Item key={faculty.code} onClick={() => handleDropdownFilter(faculty)}>
-                {faculty.name[lang]}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
       </div>
       <div style={{ marginTop: '1em' }}>
         <ColorTable
