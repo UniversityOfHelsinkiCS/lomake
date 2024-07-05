@@ -75,7 +75,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
-        'Answers are saved automatically except for text fields. Final day for answering the form:'
+        'Answers are saved automatically except for text fields. Final day for answering the form:',
       )
 
       cy.get(`[data-cy="color-negative-1"]`).click()
@@ -87,18 +87,9 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation-overview]').click()
 
-      cy.get(`[data-cy=${testProgrammeCode}-1-single`).should(
-        'have.css',
-        'background-color',
-        'rgb(128, 128, 128)',
-      )
+      cy.get(`[data-cy=${testProgrammeCode}-1-single`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
 
-      cy.get(`[data-cy=${testProgrammeCode}-2-single`).should(
-        'have.css',
-        'background-color',
-        'rgb(157, 255, 157)',
-      )
+      cy.get(`[data-cy=${testProgrammeCode}-2-single`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
     })
   })
 })
-
