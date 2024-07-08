@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { Button, Loader, Icon } from 'semantic-ui-react'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
-import QuestionList from 'Components/Generic/QuestionList'
+import { setQuestions } from 'Utilities/redux/filterReducer'
 
 const ProgrammeLevelAnswers = () => {
   const lang = useSelector(state => state.language)
@@ -19,6 +19,7 @@ const ProgrammeLevelAnswers = () => {
   const programmes = useSelector(state => state.studyProgrammes)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
+  const questionsList = modifiedQuestions(lang, 7)
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
@@ -28,14 +29,25 @@ const ProgrammeLevelAnswers = () => {
     dispatch(getTempAnswersByFormAndYear(form, year))
   }, [dispatch])
 
+  const getLabel = question => {
+    if (!question) return ''
+    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+    return `${index}${question.label}`
+  }
+  const questionLabels = questionsList.map(q => getLabel(q))
+
+  useEffect(() => {
+    dispatch(setQuestions({ selected: questionLabels, open: [] }))
+  }, [lang])
+
   if (!answers.data || !programmes) return <Loader active />
 
-  const questionsList = modifiedQuestions(lang, 7)
+  const filteredProgrammes = usersProgrammes.filter(a => a.key.includes(''))
 
   const answersList =
     answers.data &&
     answersByQuestions({
-      chosenProgrammes: usersProgrammes,
+      chosenProgrammes: filteredProgrammes,
       selectedAnswers: answers.data,
       questionsList,
       usersProgrammes,
@@ -53,12 +65,11 @@ const ProgrammeLevelAnswers = () => {
           {t('backToFrontPage')}
         </Button>
       </div>
-      <QuestionList label="" questionsList={questionsList} />
       <WrittenAnswers
         year={year}
         questionsList={questionsList}
-        chosenProgrammes={usersProgrammes}
-        usersProgrammes={usersProgrammes}
+        chosenProgrammes={filteredProgrammes}
+        usersProgrammes={filteredProgrammes}
         allAnswers={answersList}
         showing={showing}
         setShowing={setShowing}
