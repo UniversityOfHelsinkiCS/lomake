@@ -6,7 +6,6 @@ import { Button, Dropdown, Message } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { filterFromUrl } from 'Utilities/common'
 import { setYear } from 'Utilities/redux/filterReducer'
-import { data as facultyList } from '@root/config/data'
 import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
@@ -14,6 +13,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
+import FacultyDropdown from './FacultyDropdown'
 
 const MetaOverview = ({
   t,
@@ -35,8 +35,6 @@ const MetaOverview = ({
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [usersProgrammes, setUsersProgrammes] = useState(programmes)
-  const [dropdownText, setDropdownText] = useState(t('chooseFaculty'))
-
   const debouncedFilter = useDebounce(filter, 200)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const deadlineInfo = nextDeadline?.find(a => a.form === form)
@@ -62,22 +60,6 @@ const MetaOverview = ({
   )
 
   const handleFilterChange = e => setFilter(e.target.value)
-
-  const handleDropdownFilter = faculty => {
-    if (!faculty) {
-      setDropdownText(t('chooseFaculty'))
-      setUsersProgrammes(programmes)
-      return
-    }
-
-    setDropdownText(faculty.name[lang])
-    const facultyData = facultyList.find(item => item.code === faculty.code)
-    const filteredPrograms = facultyData.programmes
-      .filter(item => (doctoral ? item.level === 'doctoral' : item.level !== 'doctoral'))
-      .map(program => program.key)
-
-    setUsersProgrammes(programmes.filter(a => filteredPrograms.includes(a.key)))
-  }
 
   const renderModal = () => {
     if (modalData) {
@@ -125,22 +107,14 @@ const MetaOverview = ({
         <Button data-cy="nav-report" as={Link} to="/meta-evaluation/answers" secondary size="big">
           {t('overview:readAnswers')}
         </Button>
-        <Dropdown data-cy="faculty-dropdown" text={dropdownText} className="button basic gray">
-          <Dropdown.Menu>
-            <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
-              {t('report:all')}
-            </Dropdown.Item>
-            {faculties?.data.map(faculty => (
-              <Dropdown.Item
-                data-cy={`dropdown-item-${faculty.code}`}
-                key={faculty.code}
-                onClick={() => handleDropdownFilter(faculty)}
-              >
-                {faculty.name[lang]}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
+        <FacultyDropdown
+          t={t}
+          programmes={programmes}
+          setUsersProgrammes={setUsersProgrammes}
+          doctoral={doctoral}
+          faculties={faculties}
+          lang={lang}
+        />
         <Dropdown
           data-cy="csv-download"
           className="button basic gray csv-download"
