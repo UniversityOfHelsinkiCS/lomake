@@ -49,7 +49,7 @@ describe('Meta evaluation form & overview tests', () => {
   })
 
   context('Answering meta evaluation form', () => {
-    it('should open meta evaluation form and answer questions', () => {
+    it('should open meta evaluation form and answer questions and then inspect questions in overview and answers pages', () => {
       const cypressOspa = 'cypressOspaUser'
       cy.login(cypressOspa)
       cy.visit('/')
@@ -90,6 +90,21 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy=${testProgrammeCode}-1-single`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
 
       cy.get(`[data-cy=${testProgrammeCode}-2-single`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
+
+      cy.visit('/')
+      cy.get('[data-cy=nav-meta-evaluation]').click()
+      cy.get('[data-cy=nav-meta-evaluation-overview]').click()
+      cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
+
+      cy.get('[data-cy=textarea-2]').click()
+      cy.get('[data-cy=textarea-2]').type('1234')
+      cy.get('[data-cy=save-button-2]').click()
+
+      cy.get('[data-cy=color-negative-2]').click()
+
+      cy.visit('/meta-evaluation/answers')
+      cy.get('[data-cy=report-question-2_text]').click()
+      cy.get('[data-cy=report-question-content-2_text]').contains('1234')
     })
   })
 })
