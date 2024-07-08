@@ -38,6 +38,7 @@ const MetaOverview = ({
   const debouncedFilter = useDebounce(filter, 200)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const deadlineInfo = nextDeadline?.find(a => a.form === form)
+  const linkToAnwers = doctoral ? '/meta-evaluation/doctor/answers' : '/meta-evaluation/answers'
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
@@ -104,7 +105,7 @@ const MetaOverview = ({
       )}
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
         <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
-        <Button data-cy="nav-report" as={Link} to="/meta-evaluation/answers" secondary size="big">
+        <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
           {t('overview:readAnswers')}
         </Button>
         <FacultyDropdown
