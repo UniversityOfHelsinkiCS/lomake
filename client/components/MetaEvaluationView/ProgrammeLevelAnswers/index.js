@@ -25,6 +25,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const filteredQuestions = doctoral
     ? questionsList.filter(a => a.id.includes('T'))
     : questionsList.filter(a => !a.id.includes('T'))
+
   const filteredProgrammes = doctoral
     ? usersProgrammes.filter(a => a.key.includes('T'))
     : usersProgrammes.filter(a => !a.key.includes('T'))
