@@ -85,6 +85,13 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                               {row}
                             </li>
                           ))}
+                        {programme.comment &&
+                          programme.comment.split('\n').map((row, index) => (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <li key={index} className="answer-row">
+                              {row}
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   )
