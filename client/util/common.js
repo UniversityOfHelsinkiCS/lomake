@@ -209,6 +209,7 @@ export const modifiedQuestions = (lang, form) => {
           ...attributes,
           {
             id: `${part.id}_text`,
+            comment: `${part.id}_comment_text`,
             color: colorId,
             description: part.description ? part.description[lang] : '',
             label: _.capitalize(part.label[lang]),
@@ -707,6 +708,7 @@ export const answersByQuestions = ({
   if (!selectedAnswers) {
     return {}
   }
+
   const answerMap = new Map()
 
   const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
@@ -739,7 +741,10 @@ export const answersByQuestions = ({
         else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
         else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
-        answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
+        let comment = 'emptyComment'
+        if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
+
+        answersByProgramme = [...answersByProgramme, { name, key, color, answer, comment }]
         answerMap.set(question.id, answersByProgramme)
       })
     }
