@@ -26,21 +26,13 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const form = formKeys.META_EVALUATION
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
+
   const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)
   const [usersProgrammes, setUsersProgrammes] = useState([])
   const [filter, setFilter] = useState('both')
-  let filteredProgrammes = []
-
   const filteredQuestions = doctoralBasedFilter(doctoral, questionsList, 'id')
-  let questionLabels
-
-  useEffect(() => {
-    document.title = `${t('evaluation')}`
-    dispatch(setQuestions({ selected: questionLabels, open: [] }))
-    dispatch(getTempAnswersByFormAndYear(form, year))
-    setUsersProgrammes(programmes)
-  }, [lang, t, dispatch, programmes])
+  let filteredProgrammes = []
 
   const getLabel = question => {
     if (!question) return ''
@@ -48,7 +40,14 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
     return `${index}${question.label}`
   }
 
-  questionLabels = filteredQuestions.map(q => getLabel(q))
+  const questionLabels = filteredQuestions.map(q => getLabel(q))
+
+  useEffect(() => {
+    document.title = `${t('evaluation')}`
+    dispatch(setQuestions({ selected: questionLabels, open: [] }))
+    dispatch(getTempAnswersByFormAndYear(form, year))
+    setUsersProgrammes(programmes)
+  }, [lang, t, dispatch, programmes])
 
   if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
@@ -108,7 +107,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
       </div>
       <WrittenAnswers
         year={year}
-        questionsList={questionsList}
+        questionsList={filteredQuestions}
         chosenProgrammes={filteredProgrammes}
         usersProgrammes={filteredProgrammes}
         allAnswers={filteredAnswersList}
