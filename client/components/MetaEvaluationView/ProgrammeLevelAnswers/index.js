@@ -13,7 +13,7 @@ import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 const doctoralBasedFilter = (doctoral, items, attribute) => {
   return doctoral
     ? items.filter(item => item[attribute].includes('T'))
-    : items.filter(item => item[attribute].includes('T'))
+    : items.filter(item => !item[attribute].includes('T'))
 }
 
 const ProgrammeLevelAnswers = ({ doctoral = false }) => {
