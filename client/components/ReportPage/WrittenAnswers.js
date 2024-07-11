@@ -40,12 +40,10 @@ const WrittenAnswers = ({
     setShowing(newIndex)
   }
 
-  const checkIfAnswers = question => {
+  const checkIfContent = question => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
-    const t = answer.find(a => a.answer)
-    if (t) return true
-    return false
+    return answer.some(a => a.answer || a.comment)
   }
 
   if (usersProgrammes.length < 1) return <NoPermissions t={t} />
@@ -80,13 +78,13 @@ const WrittenAnswers = ({
         {questionsList.map(
           question =>
             questions.selected.includes(getLabel(question)) &&
-            (checkIfAnswers(question) ? (
+            (checkIfContent(question) ? (
               <div key={question.id}>
                 {chosenProgrammes.length === 1 ? (
                   <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
                 ) : (
                   <Question
-                    answers={allAnswers.get(question.id).filter(p => p.answer)}
+                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
                     question={question}
                     chosenProgrammes={chosenProgrammes}
                     year={year}

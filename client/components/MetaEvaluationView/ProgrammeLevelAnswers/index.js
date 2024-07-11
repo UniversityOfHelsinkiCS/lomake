@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Button, Loader, Icon } from 'semantic-ui-react'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
-import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { setQuestions } from 'Utilities/redux/filterReducer'
+import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const ProgrammeLevelAnswers = ({ doctoral = false }) => {

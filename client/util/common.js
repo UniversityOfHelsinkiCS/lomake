@@ -741,7 +741,7 @@ export const answersByQuestions = ({
         else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
         else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
 
-        let comment = 'emptyComment'
+        let comment = ''
         if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
 
         answersByProgramme = [...answersByProgramme, { name, key, color, answer, comment }]
