@@ -106,5 +106,38 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=report-question-2_text]').click()
       cy.get('[data-cy=report-question-content-2_text]').contains('1234')
     })
+
+    it('should only see comments', () => {
+      cy.login(cypressSuperAdmin)
+
+      cy.visit('/')
+      cy.get('[data-cy=nav-admin]').click()
+      cy.contains('Deadline settings').click()
+
+      cy.createDeadline(2024, 'Katselmus - arviointi')
+      cy.get('[data-cy=form-7-deadline]').contains('2024')
+
+      cy.visit(`/meta-evaluation/form/${testProgrammeCodeDoctor}`)
+      cy.get('[data-cy=textarea-T1]').click()
+      cy.get('[data-cy=textarea-T1]').type('2345')
+      cy.get('[data-cy=save-button-T1]').click()
+
+      cy.get('[data-cy=textarea-T1_comment]').click()
+      cy.get('[data-cy=textarea-T1_comment]').type('3456')
+      cy.get('[data-cy=save-button-T1_comment]').click()
+
+      cy.visit('/meta-evaluation/doctor/answers')
+      cy.get('[data-cy=content-type-dropdown]').click()
+      cy.contains('Only answers').click()
+
+      cy.get('[data-cy=report-question-T1_text]').click()
+      cy.get('[data-cy=report-question-content-T1_text]').contains('2345')
+
+      cy.get('[data-cy=content-type-dropdown]').click()
+      cy.contains('Only comments').click()
+
+      cy.get('[data-cy=report-question-T1_text]').click()
+      cy.get('[data-cy=report-question-content-T1_text]').contains('3456')
+    })
   })
 })

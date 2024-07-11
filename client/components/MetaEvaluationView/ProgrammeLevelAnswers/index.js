@@ -10,6 +10,12 @@ import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
+const doctoralBasedFilter = (doctoral, items, attribute) => {
+  return doctoral
+    ? items.filter(item => item[attribute].includes('T'))
+    : items.filter(item => item[attribute].includes('T'))
+}
+
 const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
@@ -20,18 +26,21 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const form = formKeys.META_EVALUATION
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
-  const questionsList = modifiedQuestions(lang, 7)
+  const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)
-  const [usersProgrammes, setUsersProgrammes] = useState(programmes)
-  const filteredQuestions = doctoral
-    ? questionsList.filter(a => a.id.includes('T'))
-    : questionsList.filter(a => !a.id.includes('T'))
-
-  const filteredProgrammes = doctoral
-    ? usersProgrammes.filter(a => a.key.includes('T'))
-    : usersProgrammes.filter(a => !a.key.includes('T'))
-
+  const [usersProgrammes, setUsersProgrammes] = useState([])
   const [filter, setFilter] = useState('both')
+  let filteredProgrammes = []
+
+  const filteredQuestions = doctoralBasedFilter(doctoral, questionsList, 'id')
+  let questionLabels
+
+  useEffect(() => {
+    document.title = `${t('evaluation')}`
+    dispatch(setQuestions({ selected: questionLabels, open: [] }))
+    dispatch(getTempAnswersByFormAndYear(form, year))
+    setUsersProgrammes(programmes)
+  }, [lang, t, dispatch, programmes])
 
   const getLabel = question => {
     if (!question) return ''
@@ -39,15 +48,11 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
     return `${index}${question.label}`
   }
 
-  const questionLabels = filteredQuestions.map(q => getLabel(q))
+  questionLabels = filteredQuestions.map(q => getLabel(q))
 
-  useEffect(() => {
-    document.title = `${t('evaluation')}`
-    dispatch(setQuestions({ selected: questionLabels, open: [] }))
-    dispatch(getTempAnswersByFormAndYear(form, year))
-  }, [lang, t, dispatch, doctoral, programmes])
+  if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
-  if (!answers.data || !programmes) return <Loader active />
+  filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key')
 
   const answersList =
     answers.data &&
@@ -93,7 +98,13 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
           faculties={faculties}
           lang={lang}
         />
-        <Dropdown selection options={filterOptions} value={filter} onChange={(e, { value }) => setFilter(value)} />
+        <Dropdown
+          data-cy="content-type-dropdown"
+          selection
+          options={filterOptions}
+          value={filter}
+          onChange={(e, { value }) => setFilter(value)}
+        />
       </div>
       <WrittenAnswers
         year={year}
