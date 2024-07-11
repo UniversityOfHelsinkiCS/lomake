@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
+import { isAdmin } from '@root/config/common'
 import { Container, Header, Grid, Divider } from 'semantic-ui-react'
 
 const PageItem = ({ title, content }) => (
@@ -64,7 +65,7 @@ const HomePage = () => {
           {header.toUpperCase()}
         </Header>
         <Header as="h2" style={{ textAlign: 'center' }}>
-          {t('latest').toUpperCase()}
+          {t('description').toUpperCase()}
         </Header>
         <Grid columns={2} style={{ marginTop: '40px' }}>
           <Grid.Row>
@@ -73,9 +74,23 @@ const HomePage = () => {
                 // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={`${index}-${item.title}`}>
                   <PageItem key={item.title} title={item.title} content={item.content} />
-                  {index !== items.length - 1 ? <Divider section /> : null}
+                  {
+                    // eslint-disable-next-line
+                    !isAdmin(currentUser.data) ? (
+                      index !== items.length - 1 ? (
+                        <Divider section />
+                      ) : null
+                    ) : (
+                      <Divider section />
+                    )
+                  }
                 </Fragment>
               ))}
+              {isAdmin(currentUser.data) && (
+                <Fragment key="adminpage">
+                  <PageItem key="admini" title={t('adminPage')} content={t('adminpageText')} />
+                </Fragment>
+              )}
             </Grid.Column>
             <Grid.Column>
               <Header as="h3">{t('timesensitive')}</Header>
