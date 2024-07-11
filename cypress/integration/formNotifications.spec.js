@@ -14,7 +14,7 @@ describe('Form Notification tests', () => {
 
   it('After being locked by admin, message matches the state', () => {
     cy.login('cypressUser')
-    cy.visit(`/`)
+    cy.visit('/yearly')
     // check page ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
