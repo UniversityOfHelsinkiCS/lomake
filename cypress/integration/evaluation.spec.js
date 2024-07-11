@@ -19,7 +19,7 @@ describe('Evaluation forms tests', () => {
     // cy.login(user)
     const cypressOspa = 'cypressOspaUser'
     cy.login(cypressOspa)
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   // ***
@@ -60,14 +60,14 @@ describe('Evaluation forms tests', () => {
       const facultyUser = 'cypressFacultyKatselmusUser'
       // Check corrent saves notice message
       cy.login(facultyUser)
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
       cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
       // ----------------------------------------
       cy.login(cypressSuperAdmin)
-      cy.visit('/')
+      cy.visit('/yearly')
       // Create new deadline
 
       cy.get('[data-cy=nav-admin]').click()
@@ -78,7 +78,7 @@ describe('Evaluation forms tests', () => {
 
       // Go to form and write answers
       cy.login(facultyUser)
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
@@ -117,7 +117,7 @@ describe('Evaluation forms tests', () => {
   context('Answering evaluation university', () => {
     it('Test the traffic lights and text answers are saved', () => {
       cy.login(cypressSuperAdmin)
-      cy.visit('/')
+      cy.visit('/yearly')
       // Create new deadline
 
       cy.get('[data-cy=nav-admin]').click()
@@ -129,7 +129,7 @@ describe('Evaluation forms tests', () => {
       // Go to form and write answers
       const hyTineUser = 'cypressHyTineUser'
       cy.login(hyTineUser)
-      cy.visit('/')
+      cy.visit('/yearly')
 
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
@@ -186,7 +186,7 @@ describe('Evaluation forms tests', () => {
 
     it('Test that overview page level filter works', () => {
       cy.login(cypressSuperAdmin)
-      cy.visit('/')
+      cy.visit('/yearly')
       // Create new deadline
 
       cy.get('[data-cy=nav-admin]').click()
@@ -198,7 +198,7 @@ describe('Evaluation forms tests', () => {
       // Go to form and write answers
       const hyTineUser = 'cypressHyTineUser'
       cy.login(hyTineUser)
-      cy.visit('/')
+      cy.visit('/yearly')
 
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
@@ -246,7 +246,7 @@ describe('Evaluation forms tests', () => {
 
     it('Test that actions are saved', () => {
       cy.login(cypressSuperAdmin)
-      cy.visit('/')
+      cy.visit('/yearly')
       // Create new deadline
 
       cy.get('[data-cy=nav-admin]').click()
@@ -258,7 +258,7 @@ describe('Evaluation forms tests', () => {
       // Go to form and write answers
       const hyTineUser = 'cypressHyTineUser'
       cy.login(hyTineUser)
-      cy.visit('/')
+      cy.visit('/yearly')
 
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()

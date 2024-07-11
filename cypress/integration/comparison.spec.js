@@ -11,7 +11,7 @@ const form = 1 // yearly assessment
 describe('ComparisonPage tests', () => {
   it('Changes in traffic lights are reflected to the single programme piecharts', () => {
     cy.login(adminUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-neutral-review_of_last_years_situation_report]').click()
 
@@ -26,7 +26,7 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
 
     cy.selectYear(defaultYears[1])
@@ -37,7 +37,7 @@ describe('ComparisonPage tests', () => {
 
   it('Filtering of comparison programmes works by programme level', () => {
     cy.login(adminUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
     cy.selectYear(defaultYears[1])
 
@@ -53,7 +53,7 @@ describe('ComparisonPage tests', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
 
     cy.selectYear(defaultYears[1])
@@ -65,7 +65,7 @@ describe('ComparisonPage tests', () => {
 
   it('Admin should be able to see answers from previous years', () => {
     cy.login(adminUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
 
     cy.getYearSelector()

@@ -9,7 +9,7 @@ const form = 1 // yearly assessment
 describe('IAM permission tests', () => {
   it('Ospa group grants admin access', () => {
     cy.login('cypressOspaUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/admin')
     cy.get('[data-cy^=cypressOspaUser-userGroup]').contains('Admin')
@@ -23,7 +23,7 @@ describe('IAM permission tests', () => {
 
   it('Jory && employee iams grant read and write access to organisation', () => {
     cy.login('cypressJoryUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
 
     cy.hasAccess('cypressJoryUser', 'KH10_001', { read: true, write: true })
@@ -31,7 +31,7 @@ describe('IAM permission tests', () => {
 
   it('Jory and corresponding kojo give admin access to programme and read access to all', () => {
     cy.login('cypressKojoUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoUser', 'KH10_001', { read: true, write: true, admin: true })
@@ -39,7 +39,7 @@ describe('IAM permission tests', () => {
 
   it('Doctoral user has reading rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralUser', 'T920103', { read: true })
@@ -49,7 +49,7 @@ describe('IAM permission tests', () => {
 
   it('Doctoral writing user has writing rights to all doctoral programmes', () => {
     cy.login('cypressDoctoralWritingUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getDoctoralProgrammeCount())
 
     cy.hasAccess('cypressDoctoralWritingUser', 'T920103', { read: true, write: true, admin: false })
@@ -60,14 +60,14 @@ describe('IAM permission tests', () => {
   it('Psyk and logo groups grant access to two programmes', () => {
     ;['cypressPsykoUser', 'cypressLogoUser'].forEach(user => {
       cy.login(user)
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 2)
     })
   })
 
   it('Rehtoraatti gets university wide read access', () => {
     cy.login('cypressRehtoriUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressRehtoriUser', 'All programmes')
@@ -75,7 +75,7 @@ describe('IAM permission tests', () => {
 
   it('Faculty iam group gives reading rights to all programmes', () => {
     cy.login('cypressTheologyFacultyUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressTheologyFacultyUser', 'All programmes')
@@ -83,7 +83,7 @@ describe('IAM permission tests', () => {
 
   it('Kosu user gets wide writing access', () => {
     cy.login('cypressKosuUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasSpecialGroups('cypressKosuUser', 'All programmes')
@@ -94,7 +94,7 @@ describe('IAM permission tests', () => {
   /* Special cases with multiple rights groups */
   it('Dean who is also a kojo gets reading rights to all programmes and admin rights to one programme', () => {
     cy.login('cypressKojoDeanUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKojoDeanUser', 'MH50_001', { read: true, write: true, admin: true })
@@ -103,7 +103,7 @@ describe('IAM permission tests', () => {
 
   it('Kosu who is also a jory-member gets writing rights to all programmes', () => {
     cy.login('cypressKosuJoryUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.hasAccess('cypressKosuJoryUser', 'MH50_002', { read: true, write: true, admin: false })
     cy.hasAccess('cypressKosuJoryUser', 'KH50_002', { read: true, write: true, admin: false })
@@ -111,7 +111,7 @@ describe('IAM permission tests', () => {
 
   it('Doctoral kosu who is also a regular kosu gets writing rights to all programmes', () => {
     cy.login('cypressDoctoralKosuAndRegularKosuUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
 
     cy.hasAccess('cypressDoctoralKosuAndRegularKosuUser', 'T920103', { read: true, write: true, admin: false })
@@ -123,13 +123,13 @@ describe('IAM permission tests', () => {
 
   it('User who has random IAM-groups and one jory group and is an employee can write to one programme', () => {
     cy.login('cypressRandomRightsUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 1)
     cy.get(`[data-cy=colortable-link-to-KH50_006]`).click()
 
     cy.typeInEditor('review_of_last_years_situation_report', 'random')
 
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.reload()
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
@@ -143,7 +143,7 @@ describe('IAM permission tests', () => {
 
   it('Dekanaatti who has also writing rights to Faculty Evaluation works', () => {
     cy.login('cypressDeanKatselmusUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
@@ -161,7 +161,7 @@ describe('IAM permission tests', () => {
 
   it('Jory group who has also writing rights to Faculty Evaluation works', () => {
     cy.login('cypressFacultyKatselmusUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
     cy.visit('/evaluation')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
@@ -182,7 +182,7 @@ describe('IAM permission tests', () => {
   it('Report works', () => {
     cy.login('cypressOspaUser')
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
@@ -194,7 +194,7 @@ describe('IAM permission tests', () => {
   it('Comparison works', () => {
     cy.login('cypressOspaUser')
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-comparison]').click()
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=comparison-responses-university-language_environment_text]').contains(
@@ -205,7 +205,7 @@ describe('IAM permission tests', () => {
   it('Katselmus Projektiryhma user, who has rights to mltdk faculty also', () => {
     const user = 'cypressKatselmusProjektiryhmaUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
     cy.visit('/evaluation')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
@@ -229,7 +229,7 @@ describe('IAM permission tests', () => {
     const user = 'cypressHyEmployeeUser'
     cy.login(user)
     // Check that no permissions to overview
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
     cy.visit('/evaluation')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')

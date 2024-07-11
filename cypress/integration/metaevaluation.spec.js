@@ -13,7 +13,7 @@ describe('Meta evaluation form & overview tests', () => {
   beforeEach(() => {
     const cypressOspa = 'cypressOspaUser'
     cy.login(cypressOspa)
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it('should open meta evaluation form', () => {
@@ -52,7 +52,7 @@ describe('Meta evaluation form & overview tests', () => {
     it('should open meta evaluation form and answer questions and then inspect questions in overview and answers pages', () => {
       const cypressOspa = 'cypressOspaUser'
       cy.login(cypressOspa)
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -60,7 +60,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
 
       cy.login(cypressSuperAdmin)
-      cy.visit('/')
+      cy.visit('/yearly')
 
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
@@ -69,7 +69,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.login(cypressOspa)
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -91,7 +91,7 @@ describe('Meta evaluation form & overview tests', () => {
 
       cy.get(`[data-cy=${testProgrammeCode}-2-single`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
 
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -110,7 +110,7 @@ describe('Meta evaluation form & overview tests', () => {
     it('should only see comments', () => {
       cy.login(cypressSuperAdmin)
 
-      cy.visit('/')
+      cy.visit('/yearly')
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 

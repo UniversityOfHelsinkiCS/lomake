@@ -10,7 +10,7 @@ describe("Previous year's answers", () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it("Can switch which year's answers to see in OverViewPage", () => {

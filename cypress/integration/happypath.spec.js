@@ -5,7 +5,7 @@ import '../support/commands'
 describe('Core tests', () => {
   beforeEach(() => {
     cy.login('cypressNoRightsUser')
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it('Frontpage loads', () => {

@@ -106,7 +106,7 @@ const FormView = ({ room }) => {
           <div className="hide-in-print-mode">
             <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
+              <Button onClick={() => history.push('/yearly')} icon="arrow left" />
             </div>
             <img alt="form-header-rypsi" className="img-responsive" src={rypsiImage} />
           </div>

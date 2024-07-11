@@ -9,7 +9,7 @@ describe('Management tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
   })
 

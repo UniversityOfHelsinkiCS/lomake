@@ -28,7 +28,7 @@ const GoToYearlyAssessmentButton = () => {
   const { t } = useTranslation()
 
   return (
-    <Menu.Item data-cy="nav-yearly" as={Link} to="/" name="yearlyAssessment">
+    <Menu.Item data-cy="nav-yearly" as={Link} to="/yearly" name="yearlyAssessment">
       {t('yearlyAssessment')}
     </Menu.Item>
   )

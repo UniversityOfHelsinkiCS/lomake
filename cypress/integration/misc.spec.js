@@ -8,7 +8,7 @@ describe('Misc tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it('Locale can be changed and translations work', () => {

@@ -10,7 +10,7 @@ const user = 'cypressUser'
 describe('Sidebar tests', () => {
   beforeEach(() => {
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 

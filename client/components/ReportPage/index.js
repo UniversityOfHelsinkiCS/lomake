@@ -139,7 +139,7 @@ export default () => {
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
         <Grid.Column width={10}>
-          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
+          <Button as={Link} to="/yearly" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
             {t('backToFrontPage')}
           </Button>

@@ -26,7 +26,7 @@ export default () => {
   const history = useHistory()
 
   if (!isAdmin(user)) {
-    history.push('/')
+    history.push('/yearly')
   }
 
   if (users.pending || !users.data || !usersProgrammes) return <Loader active inline="centered" />

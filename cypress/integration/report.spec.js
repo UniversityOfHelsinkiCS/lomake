@@ -12,7 +12,7 @@ const form = 1 // yearly assessment
 describe('ReportPage tests', () => {
   it('Piecharts are not shown if there are no answers', () => {
     cy.login(adminUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
 
     // the year changes to year with answers by default, if form not open for current year
@@ -28,7 +28,7 @@ describe('ReportPage tests', () => {
 
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.selectYear(defaultYears[0])
 
     cy.wait(500)
@@ -36,7 +36,7 @@ describe('ReportPage tests', () => {
     cy.wait(500)
     cy.typeInEditor('learning_outcomes', 'test words')
 
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.reload()
     cy.wait(1000)
     cy.get('[data-cy=nav-report]').click()
@@ -47,20 +47,20 @@ describe('ReportPage tests', () => {
 
   it('User should be able to see answers from only one programme, when they have rights for only one', () => {
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-programmes-list]').should('have.length', 1)
   })
 
   it('User should not be able to see answers in fields where there are none', () => {
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.wait(1000)
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.typeInEditor('learning_outcomes', 'test words')
     cy.reload()
 
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-disabled-language_environment_text]').contains('0')
@@ -70,7 +70,7 @@ describe('ReportPage tests', () => {
     cy.login(user)
     cy.request(`/api/cypress/createAnswers/${form}`)
 
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=report-select-all]').click()
@@ -80,7 +80,7 @@ describe('ReportPage tests', () => {
   it('Filtering works for programme level', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
 
     cy.selectYear(defaultYears[1])
@@ -94,7 +94,7 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=faculty-filter]').click()
     cy.wait(1000)
@@ -109,7 +109,7 @@ describe('ReportPage tests', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=doctoral-school-filter]').should('not.exist')
     cy.get('[data-cy=doctoral-filter]')
@@ -125,7 +125,7 @@ describe('ReportPage tests', () => {
   it('Filtering works for companion programmes', () => {
     cy.login(adminUser)
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=companion-filter]').should('not.exist')
     cy.get('[data-cy=faculty-filter]').should('be.visible').click()
@@ -149,11 +149,11 @@ describe('ReportPage tests', () => {
 
   it('Changes in traffic lights are reflected to the piecharts', () => {
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=review_of_last_years_situation_report-EMPTY]')
     cy.get('[data-cy=color-negative-review_of_last_years_situation_report]').click()
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('div').contains('lights').should('be.visible').click()

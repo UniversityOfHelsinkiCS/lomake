@@ -11,7 +11,7 @@ const form = 1 // yearly assessment
 describe('SuperAdmin user tests', () => {
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it('A second year cannot be opened if another year is already open.', () => {
@@ -57,7 +57,7 @@ describe('SuperAdmin user tests', () => {
     // Check that form is locked as it should be
     cy.visit('/form/KH50_004')
     cy.get('.editor-class').should('not.exist')
-    cy.visit('/')
+    cy.visit('/yearly')
     // check that page is ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
@@ -84,7 +84,7 @@ describe('SuperAdmin user tests', () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
 
     // Delete pre-generated deadline
-    cy.visit('/')
+    cy.visit('/yearly')
     // check that page is ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     cy.get('[data-cy=nav-admin]').click()
@@ -171,11 +171,11 @@ describe('SuperAdmin user tests', () => {
 
     // Login as another user to see if answers can be created
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
-    cy.visit('/')
+    cy.visit('/yearly')
 
     cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing-single]`).should('have.class', 'square-green')
   })
@@ -202,7 +202,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     // Check that forms are open as they should be
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.visit('/form/KH50_004')
     cy.get('.editor-class')
     cy.visit('/evaluation/form/4/KH50_005')
@@ -227,7 +227,7 @@ describe('SuperAdmin user tests', () => {
     cy.closeDeadline(defaultYears[0], 'Vuosiseuranta')
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.visit('/form/KH50_004')
     cy.get('.editor-class').should('not.exist')
     cy.visit('/evaluation/form/4/KH50_005')
