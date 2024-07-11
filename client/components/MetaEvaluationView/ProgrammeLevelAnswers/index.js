@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Button, Loader, Icon } from 'semantic-ui-react'
+import { Button, Loader, Icon, Dropdown } from 'semantic-ui-react'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
+import { formKeys } from '@root/config/data'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const ProgrammeLevelAnswers = ({ doctoral = false }) => {
@@ -16,7 +17,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const history = useHistory()
   const answers = useSelector(state => state.tempAnswers)
   const year = 2024
-  const form = 7
+  const form = formKeys.META_EVALUATION
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
   const questionsList = modifiedQuestions(lang, 7)
@@ -29,6 +30,8 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const filteredProgrammes = doctoral
     ? usersProgrammes.filter(a => a.key.includes('T'))
     : usersProgrammes.filter(a => !a.key.includes('T'))
+
+  const [filter, setFilter] = useState('both')
 
   const getLabel = question => {
     if (!question) return ''
@@ -58,6 +61,22 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
       form,
     })
 
+  const filterOptions = [
+    { key: 'both', text: t('showBoth'), value: 'both' },
+    { key: 'answers', text: t('showOnlyAnswers'), value: 'answers' },
+    { key: 'comments', text: t('showOnlyComments'), value: 'comments' },
+  ]
+
+  const filterAnswers = answers => {
+    return answers.map(answer => ({
+      ...answer,
+      answer: filter === 'comments' ? undefined : answer.answer,
+      comment: filter === 'answers' ? undefined : answer.comment,
+    }))
+  }
+
+  const filteredAnswersList = new Map(Array.from(answersList).map(([key, value]) => [key, filterAnswers(value)]))
+
   return (
     <div>
       <div className="wide-header">
@@ -74,13 +93,14 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
           faculties={faculties}
           lang={lang}
         />
+        <Dropdown selection options={filterOptions} value={filter} onChange={(e, { value }) => setFilter(value)} />
       </div>
       <WrittenAnswers
         year={year}
         questionsList={questionsList}
         chosenProgrammes={filteredProgrammes}
         usersProgrammes={filteredProgrammes}
-        allAnswers={answersList}
+        allAnswers={filteredAnswersList}
         showing={showing}
         setShowing={setShowing}
       />

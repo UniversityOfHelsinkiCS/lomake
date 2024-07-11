@@ -92,6 +92,9 @@ export default {
     metaEvaluationAnswers: 'Katselmuksen vastaukset',
     bm: 'Kandiohjelmat & maisteriohjelmat',
     t: 'Tohtoriohjelmat',
+    showBoth: 'Vastaukset & kommentit',
+    showOnlyAnswers: 'Vain vastaukset',
+    showOnlyComments: 'Vain kommentit',
   },
 
   aboutPage: {

@@ -79,6 +79,9 @@ export default {
     questionAnswers: 'Svar per fråga',
     noAnswers: 'No answers',
     actionProposals: 'Action proposals',
+    showBoth: '',
+    showOnlyAnswers: ' ',
+    showOnlyComments: ' ',
   },
 
   aboutPage: {

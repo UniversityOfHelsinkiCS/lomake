@@ -80,6 +80,9 @@ export default {
     questionAnswers: 'Question / Anwers',
     noAnswers: 'No answers',
     actionProposals: 'Action proposals',
+    showBoth: 'Answers & comments',
+    showOnlyAnswers: 'Only answers',
+    showOnlyComments: 'Only comments',
   },
 
   aboutPage: {
