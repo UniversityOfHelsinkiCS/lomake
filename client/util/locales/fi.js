@@ -95,6 +95,11 @@ export default {
     showBoth: 'Vastaukset & kommentit',
     showOnlyAnswers: 'Vain vastaukset',
     showOnlyComments: 'Vain kommentit',
+    yearlyAssessmentText: '',
+    evaluationText: '',
+    degreeReformText: '',
+    metaevaluationText: '',
+    adminpageText: '',
   },
 
   aboutPage: {

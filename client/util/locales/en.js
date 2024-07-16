@@ -83,6 +83,11 @@ export default {
     showBoth: 'Answers & comments',
     showOnlyAnswers: 'Only answers',
     showOnlyComments: 'Only comments',
+    yearlyAssessmentText: '',
+    evaluationText: '',
+    degreeReformText: '',
+    metaevaluationText: '',
+    adminpageText: '',
   },
 
   aboutPage: {
