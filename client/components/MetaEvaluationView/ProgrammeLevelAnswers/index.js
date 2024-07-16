@@ -1,9 +1,9 @@
-import { getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Button, Loader, Icon, Dropdown } from 'semantic-ui-react'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
@@ -45,7 +45,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   useEffect(() => {
     document.title = `${t('evaluation')}`
     dispatch(setQuestions({ selected: questionLabels, open: [] }))
-    dispatch(getTempAnswersByFormAndYear(form, year))
+    dispatch(getAllTempAnswersAction())
     setUsersProgrammes(programmes)
   }, [lang, t, dispatch, programmes])
 
