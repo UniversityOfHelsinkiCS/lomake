@@ -65,7 +65,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(2024, 'Katselmus - arviointi')
+      cy.createDeadline(2024, 'Katselmuksen arviointi')
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.login(cypressOspa)
@@ -114,7 +114,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(2024, 'Katselmus - arviointi')
+      cy.createDeadline(2024, 'Katselmuksen arviointi')
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.visit(`/meta-evaluation/form/${testProgrammeCodeDoctor}`)
