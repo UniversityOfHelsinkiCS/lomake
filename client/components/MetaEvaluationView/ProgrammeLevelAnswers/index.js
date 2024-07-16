@@ -113,6 +113,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
         allAnswers={filteredAnswersList}
         showing={showing}
         setShowing={setShowing}
+        form={form}
       />
     </div>
   )

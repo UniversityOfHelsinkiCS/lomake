@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import Question from './Question'
 import DisabledQuestion from './DisabledQuestion'
@@ -20,13 +19,8 @@ const WrittenAnswers = ({
   setShowing,
 }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const componentRef = useRef()
   const questions = useSelector(({ filters }) => filters.questions)
-
-  useEffect(() => {
-    dispatch(getAllTempAnswersAction())
-  }, [])
 
   const getLabel = question => {
     if (!question) return ''
