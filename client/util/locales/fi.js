@@ -102,6 +102,7 @@ export default {
     adminpageText: '',
     timesensitive: 'Ajankohtaista',
     description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
+    noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
   },
 
   aboutPage: {

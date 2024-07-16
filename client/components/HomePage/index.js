@@ -4,7 +4,7 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 import { Container, Header, Grid, Divider, Message } from 'semantic-ui-react'
-import { formKeys } from '@root/config/data'
+import { formKeys, forms } from '@root/config/data'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -18,20 +18,23 @@ const PageItem = ({ title, content }) => (
 const HomePage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const { nextDeadline } = useSelector(state => state.deadlines)
   const [deadlineInfo, setDeadlineInfo] = useState([])
   const header = 'tilannekuvalomake'
 
   useEffect(() => {
     document.title = 'Tilannekuvalomake'
-  }, [])
 
-  Object.keys(formKeys).forEach(form => {
-    const foundDeadline = nextDeadline?.find(a => a.form === form)
-    if (foundDeadline) {
-      setDeadlineInfo([...deadlineInfo, foundDeadline])
-    }
-  })
+    let tempDl = []
+    Object.keys(formKeys).forEach(form => {
+      const foundDeadline = nextDeadline?.find(a => a.form === formKeys[form])
+      if (foundDeadline) {
+        tempDl = [...tempDl, foundDeadline]
+      }
+    })
+
+    setDeadlineInfo(tempDl)
+  }, [formKeys])
 
   const items = [
     {
@@ -106,14 +109,21 @@ const HomePage = () => {
             </Grid.Column>
             <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Header as="h3">{t('timesensitive')}</Header>
-              {deadlineInfo.length > 0 &&
-                deadlineInfo.map(dl => (
-                  <Message
-                    icon="clock"
-                    header={`${draftYear.year} ${t('formView:status:open')}`}
-                    content={`${t('formCloses')}: ${dl.date}`}
-                  />
-                ))}
+              {deadlineInfo.length > 0 && <p>{t('users:openForms')}</p>}
+              {deadlineInfo.length > 0 ? (
+                deadlineInfo.map(dl => {
+                  return (
+                    <Message
+                      key={dl.createdAt + dl.updatedAt}
+                      icon="clock"
+                      header={`${forms[dl.form - 1].name}: ${t('formView:status:open')}`}
+                      content={`${t('formCloses')}: ${dl.date}`}
+                    />
+                  )
+                })
+              ) : (
+                <Header as="h3">{t('noTimesensitive')}</Header>
+              )}
             </Grid.Column>
           </Grid.Row>
         </Grid>

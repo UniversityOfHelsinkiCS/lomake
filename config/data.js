@@ -41,7 +41,7 @@ const forms = [
   },
   {
     key: 7,
-    name: 'Katselmus - arviointi',
+    name: 'Katselmuksen arviointi',
     type: 'evaluation',
   },
 ]
