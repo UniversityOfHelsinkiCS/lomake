@@ -20,13 +20,10 @@ const ProgrammeLevelOverview = () => {
   const formType = 'meta-evaluation'
   const filterProgrammes = a => !a.key.startsWith('T')
 
-  const year = 2024
-
   const usersProgrammes = useVisibleOverviewProgrammes({
     currentUser,
     programmes,
     showAllProgrammes,
-    year,
     form,
   }).filter(filterProgrammes)
 
@@ -44,7 +41,6 @@ const ProgrammeLevelOverview = () => {
           dispatch={dispatch}
           faculties={faculties}
           programmes={usersProgrammes}
-          year={year}
           form={form}
           formType={formType}
           doctoral={doctoral}

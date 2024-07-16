@@ -62,8 +62,7 @@ const getFacultyTempAnswersAfterDeadline = async (req, res) => {
   try {
     const deadline = await db.deadline.findOne({ where: { form } })
 
-    // TODO no idea what is the logic here so will exclude form 7 for now
-    if (deadline && Number(form) !== formKeys.META_EVALUATION) {
+    if (deadline) {
       return res.status(403).json({ error: 'Deadline is active, this should not be used' })
     }
 

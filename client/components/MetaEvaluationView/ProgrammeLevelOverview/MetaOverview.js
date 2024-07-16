@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { Button, Dropdown, Message } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { filterFromUrl } from 'Utilities/common'
-import { setYear } from 'Utilities/redux/filterReducer'
 import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
@@ -22,7 +21,6 @@ const MetaOverview = ({
   currentUser,
   faculties,
   programmes,
-  year,
   form,
   formType,
   doctoral,
@@ -43,9 +41,8 @@ const MetaOverview = ({
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) setFilter(filterQuery)
-    dispatch(setYear(year))
     document.title = t('evaluation')
-  }, [dispatch, year, t, lang])
+  }, [dispatch, t, lang])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(
