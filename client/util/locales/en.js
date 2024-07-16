@@ -88,6 +88,7 @@ export default {
     degreeReformText: '',
     metaevaluationText: '',
     adminpageText: '',
+    timesensitive: 'Topic',
   },
 
   aboutPage: {

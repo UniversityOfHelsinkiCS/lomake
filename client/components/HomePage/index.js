@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { Container, Header, Grid, Divider } from 'semantic-ui-react'
+import { Container, Header, Grid, Divider, Message } from 'semantic-ui-react'
+import { formKeys } from '@root/config/data'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -17,7 +18,20 @@ const PageItem = ({ title, content }) => (
 const HomePage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const [deadlineInfo, setDeadlineInfo] = useState([])
   const header = 'tilannekuvalomake'
+
+  useEffect(() => {
+    document.title = 'Tilannekuvalomake'
+  }, [])
+
+  Object.keys(formKeys).forEach(form => {
+    const foundDeadline = nextDeadline?.find(a => a.form === form)
+    if (foundDeadline) {
+      setDeadlineInfo([...deadlineInfo, foundDeadline])
+    }
+  })
 
   const items = [
     {
@@ -64,9 +78,7 @@ const HomePage = () => {
         <Header as="h1" style={{ textAlign: 'center' }}>
           {header.toUpperCase()}
         </Header>
-        <Header as="h2" style={{ textAlign: 'center' }}>
-          {t('description').toUpperCase()}
-        </Header>
+        <p style={{ textAlign: 'center' }}>{t('description')}</p>
         <Grid columns={2} style={{ marginTop: '40px' }}>
           <Grid.Row>
             <Grid.Column>
@@ -92,8 +104,16 @@ const HomePage = () => {
                 </Fragment>
               )}
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Header as="h3">{t('timesensitive')}</Header>
+              {deadlineInfo.length > 0 &&
+                deadlineInfo.map(dl => (
+                  <Message
+                    icon="clock"
+                    header={`${draftYear.year} ${t('formView:status:open')}`}
+                    content={`${t('formCloses')}: ${dl.date}`}
+                  />
+                ))}
             </Grid.Column>
           </Grid.Row>
         </Grid>

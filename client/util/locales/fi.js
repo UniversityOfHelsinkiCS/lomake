@@ -100,6 +100,8 @@ export default {
     degreeReformText: '',
     metaevaluationText: '',
     adminpageText: '',
+    timesensitive: 'Ajankohtaista',
+    description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
   },
 
   aboutPage: {
