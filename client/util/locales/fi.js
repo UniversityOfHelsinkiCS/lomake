@@ -158,6 +158,10 @@ export default {
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',
+    infoMeta1:
+      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. Jokaisessa kysymyksessä on myös kommenttikenttä mihin voi vapaasti kommentoida kysymystä.',
+    infoMeta2:
+      'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot, toisin kuin muissa lomakkeissa tässä lomakkeessa on käytössä neljäs liikennevalo, jolla voi merkata että kysymys ei kosketa tätä koulutusohjelmaa):',
     downloadCSV: 'Lataa vastaukset csv-tiedostona',
     downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
     mandatory: 'pakollinen kenttä',

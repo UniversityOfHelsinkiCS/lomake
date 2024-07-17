@@ -14,12 +14,13 @@ import powerlineImage from 'Assets/APowerlineTower.png'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 
+import { formKeys } from '@root/config/data'
 import MetaEvaluationForm from './MetaEvaluationForm'
 
 import { metareviewQuestions as questions } from '../../../questionData'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
-const form = 7
+const form = formKeys.META_EVALUATION
 
 const ProgrammeLevelForm = ({ room }) => {
   const lang = useSelector(state => state.language)
@@ -91,6 +92,24 @@ const ProgrammeLevelForm = ({ room }) => {
         </h3>
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
+          <p>{t('formView:infoMeta1')}</p>
+          <p>{t('formView:infoMeta2')}</p>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-red" />
+          {t('urgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-yellow" />
+          {t('semiUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-green" />
+          {t('nonUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-gray" />
+          {t('irrelevant')}
         </div>
         <MetaEvaluationForm
           questions={questionData}

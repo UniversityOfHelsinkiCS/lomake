@@ -26,7 +26,7 @@
   }
   &-circle-gray {
     @include answer-circle-basics;
-    background: $gray;
+    background: rgb(128,128,128);
   }
 }
 
@@ -50,6 +50,10 @@
   &-red {
     @include big-circle-basics;
     background: $background-red;
+  }
+  &-gray {
+    @include big-circle-basics;
+    background: rgb(128,128,128);
   }
 }
 
