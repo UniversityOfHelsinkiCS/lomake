@@ -1,5 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
@@ -15,7 +17,7 @@ const PageItem = ({ title, content }) => (
   </div>
 )
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
   const { nextDeadline } = useSelector(state => state.deadlines)
@@ -44,6 +46,7 @@ const HomePage = () => {
           <p>{t('yearlyAssessmentText')}</p>
         </div>
       ),
+      link: '/yearly',
     },
     {
       title: t('evaluation'),
@@ -52,14 +55,16 @@ const HomePage = () => {
           <p>{t('evaluationText')}</p>
         </div>
       ),
+      link: '/evaluation',
     },
     {
-      title: t('degreeReform'),
+      title: t('degree-reform'),
       content: (
         <div>
           <p>{t('degreeReformText')}</p>
         </div>
       ),
+      link: '/degree-reform',
     },
     {
       title: t('metaevaluation'),
@@ -68,8 +73,16 @@ const HomePage = () => {
           <p>{t('metaevaluationText')}</p>
         </div>
       ),
+      link: '/meta-evaluation',
     },
   ]
+
+  const handleDeadlineClick = formId => {
+    const item = items.find(item => item.title === forms[formId - 1].name)
+    if (item) {
+      history.push(item.link)
+    }
+  }
 
   if (Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
@@ -89,16 +102,13 @@ const HomePage = () => {
                 // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={`${index}-${item.title}`}>
                   <PageItem key={item.title} title={item.title} content={item.content} />
-                  {
-                    // eslint-disable-next-line
-                    !isAdmin(currentUser.data) ? (
-                      index !== items.length - 1 ? (
-                        <Divider section />
-                      ) : null
-                    ) : (
+                  {!isAdmin(currentUser.data) ? (
+                    index !== items.length - 1 ? (
                       <Divider section />
-                    )
-                  }
+                    ) : null
+                  ) : (
+                    <Divider section />
+                  )}
                 </Fragment>
               ))}
               {isAdmin(currentUser.data) && (
@@ -109,7 +119,7 @@ const HomePage = () => {
             </Grid.Column>
             <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Header as="h3">{t('timesensitive')}</Header>
-              {deadlineInfo.length > 0 && <p>{t('users:openForms')}</p>}
+              {deadlineInfo.length > 0 && <p>{t('timesensitiveDesc')}</p>}
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   return (
@@ -118,6 +128,8 @@ const HomePage = () => {
                       icon="clock"
                       header={`${forms[dl.form - 1].name}: ${t('formView:status:open')}`}
                       content={`${t('formCloses')}: ${dl.date}`}
+                      onClick={() => handleDeadlineClick(dl.form)}
+                      style={{ cursor: 'pointer' }}
                     />
                   )
                 })
@@ -132,4 +144,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default withRouter(HomePage)

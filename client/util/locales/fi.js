@@ -101,6 +101,7 @@ export default {
     metaevaluationText: '',
     adminpageText: '',
     timesensitive: 'Ajankohtaista',
+    timesensitiveDesc: 'Auki olevien lomakkeiden viimeinen täyttöpäivä.',
     description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
     noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
   },
