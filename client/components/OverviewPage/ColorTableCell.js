@@ -71,7 +71,8 @@ const ColorTableCell = ({
   let colorAnswer = null
 
   if (form === formKeys.META_EVALUATION && commentAnswer) {
-    textAnswer += `\n\n${commentAnswer}`
+    if (textAnswer) textAnswer += `\n\n${commentAnswer}`
+    else textAnswer = commentAnswer
   }
 
   const getModalConfig = () => {
