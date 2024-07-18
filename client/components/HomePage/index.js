@@ -1,12 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { Container, Header, Grid, Divider, Message } from 'semantic-ui-react'
-import { formKeys, forms } from '@root/config/data'
+import { Container, Header, Grid, Divider } from 'semantic-ui-react'
+import { formKeys } from '@root/config/data'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -17,7 +16,28 @@ const PageItem = ({ title, content }) => (
   </div>
 )
 
-const HomePage = ({ history }) => {
+const DateItem = ({ timestamp, t }) => {
+  const date = new Date(timestamp)
+
+  // Extract date
+  const year = date.getUTCFullYear()
+  const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
+  const day = date.getUTCDate()
+
+  // Extract time
+  let hours = date.getUTCHours()
+  if (hours.toString().length === 1) hours = `0${hours.toString()}`
+  let minutes = date.getUTCMinutes()
+  if (minutes.toString().length === 1) minutes = `0${minutes.toString()}`
+
+  return (
+    <p>
+      {day}/{month}/{year} {t('clock')}: {hours}:{minutes}
+    </p>
+  )
+}
+
+const HomePage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
   const { nextDeadline } = useSelector(state => state.deadlines)
@@ -46,7 +66,7 @@ const HomePage = ({ history }) => {
           <p>{t('yearlyAssessmentText')}</p>
         </div>
       ),
-      link: '/yearly',
+      links: ['/yearly'],
     },
     {
       title: t('evaluation'),
@@ -55,7 +75,7 @@ const HomePage = ({ history }) => {
           <p>{t('evaluationText')}</p>
         </div>
       ),
-      link: '/evaluation',
+      links: ['/evaluation', '/evaluation-faculty', 'evaluation-university/form/6/UNI', '/evaluation-university'],
     },
     {
       title: t('degree-reform'),
@@ -64,7 +84,7 @@ const HomePage = ({ history }) => {
           <p>{t('degreeReformText')}</p>
         </div>
       ),
-      link: '/degree-reform',
+      links: ['/degree-reform', '/reform-answers', '/individual'],
     },
     {
       title: t('metaevaluation'),
@@ -73,16 +93,9 @@ const HomePage = ({ history }) => {
           <p>{t('metaevaluationText')}</p>
         </div>
       ),
-      link: '/meta-evaluation',
+      links: ['/meta-evaluation', '/meta-evaluation/doctor'],
     },
   ]
-
-  const handleDeadlineClick = formId => {
-    const item = items.find(item => item.title === forms[formId - 1].name)
-    if (item) {
-      history.push(item.link)
-    }
-  }
 
   if (Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
@@ -95,12 +108,12 @@ const HomePage = ({ history }) => {
           {header.toUpperCase()}
         </Header>
         <p style={{ textAlign: 'center' }}>{t('description')}</p>
-        <Grid columns={2} style={{ marginTop: '40px' }}>
+        <Grid columns={2} divided style={{ marginTop: '40px' }}>
           <Grid.Row>
             <Grid.Column>
               {items.map((item, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <Fragment key={`${index}-${item.title}`}>
+                <Fragment key={`${index} -${item.title} `}>
                   <PageItem key={item.title} title={item.title} content={item.content} />
                   {!isAdmin(currentUser.data) ? (
                     index !== items.length - 1 ? (
@@ -122,16 +135,7 @@ const HomePage = ({ history }) => {
               {deadlineInfo.length > 0 && <p>{t('timesensitiveDesc')}</p>}
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
-                  return (
-                    <Message
-                      key={dl.createdAt + dl.updatedAt}
-                      icon="clock"
-                      header={`${forms[dl.form - 1].name}: ${t('formView:status:open')}`}
-                      content={`${t('formCloses')}: ${dl.date}`}
-                      onClick={() => handleDeadlineClick(dl.form)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                  )
+                  return <DateItem timestamp={dl.date} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
@@ -144,4 +148,4 @@ const HomePage = ({ history }) => {
   )
 }
 
-export default withRouter(HomePage)
+export default HomePage

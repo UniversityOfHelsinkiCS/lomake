@@ -37,6 +37,9 @@ const MetaOverview = ({
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const deadlineInfo = nextDeadline?.find(a => a.form === form)
   const linkToAnwers = doctoral ? '/meta-evaluation/doctor/answers' : '/meta-evaluation/answers'
+  const titleText = doctoral
+    ? `${t('metaevaluation').toUpperCase()} ${t('doctoral').toUpperCase()}`
+    : `${t('metaevaluation').toUpperCase()} ${t('bachelor').toUpperCase()} & ${t('master').toUpperCase()}`
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
@@ -101,7 +104,7 @@ const MetaOverview = ({
         />
       )}
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-        <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+        <h2 className="view-title">{titleText}</h2>
         <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
           {t('overview:readAnswers')}
         </Button>
