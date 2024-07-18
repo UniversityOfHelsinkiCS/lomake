@@ -22,7 +22,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const { t } = useTranslation()
   const history = useHistory()
   const answers = useSelector(state => state.tempAnswers)
-  const year = 2024
+  const year = useSelector(state => state.year)
   const form = formKeys.META_EVALUATION
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const [showing, setShowing] = useState(-1)
