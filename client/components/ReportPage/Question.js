@@ -28,6 +28,8 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
 
+  const commentAppendix = `${t('comment')}:\n\n`
+
   return (
     <>
       <Accordion.Title
@@ -89,6 +91,7 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing })
                           programme.comment.split('\n').map((row, index) => (
                             // eslint-disable-next-line react/no-array-index-key
                             <li key={index} className="answer-row">
+                              {commentAppendix}
                               {row}
                             </li>
                           ))}

@@ -69,11 +69,10 @@ const ColorTableCell = ({
   let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
   const commentAnswer = programmesAnswers[commentId] || getMeasuresAnswer(programmesAnswers, commentId)
   let colorAnswer = null
-  const answerAppendix = `${t('answer')}:\n\n`
   const commentAppendix = `${t('comment')}:\n\n`
 
   if (form === formKeys.META_EVALUATION && commentAnswer) {
-    if (textAnswer) textAnswer = `${answerAppendix + textAnswer}\n\n${commentAppendix}${commentAnswer}`
+    if (textAnswer) textAnswer += `\n\n${commentAppendix}${commentAnswer}`
     else textAnswer = commentAppendix + commentAnswer
   }
 
