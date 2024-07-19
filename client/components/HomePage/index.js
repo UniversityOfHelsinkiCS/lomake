@@ -1,11 +1,26 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { Container, Header, Grid, Divider, Message } from 'semantic-ui-react'
+import {
+  Container,
+  Header,
+  Grid,
+  Divider,
+  Item,
+  ItemMeta,
+  ItemImage,
+  ItemHeader,
+  ItemGroup,
+  Button,
+  Icon,
+} from 'semantic-ui-react'
 import { formKeys, forms } from '@root/config/data'
+import powerlineImage from 'Assets/APowerlineTower.png'
+import './Homepage.scss'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -18,7 +33,6 @@ const PageItem = ({ title, content }) => (
 
 export const DateItem = ({ timestamp, t }) => {
   const date = new Date(timestamp)
-
   const year = date.getUTCFullYear()
   const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
   const day = date.getUTCDate()
@@ -58,6 +72,7 @@ const HomePage = () => {
 
   const items = [
     {
+      show: Object.keys(currentUser).length > 0,
       title: t('yearlyAssessment'),
       content: (
         <div>
@@ -67,6 +82,7 @@ const HomePage = () => {
       links: ['/yearly'],
     },
     {
+      show: Object.keys(currentUser).length > 0,
       title: t('evaluation'),
       content: (
         <div>
@@ -76,6 +92,7 @@ const HomePage = () => {
       links: ['/evaluation', '/evaluation-faculty', 'evaluation-university/form/6/UNI', '/evaluation-university'],
     },
     {
+      show: Object.keys(currentUser).length > 0,
       title: t('degree-reform'),
       content: (
         <div>
@@ -85,6 +102,7 @@ const HomePage = () => {
       links: ['/degree-reform', '/reform-answers', '/individual'],
     },
     {
+      show: Object.keys(currentUser).length > 0,
       title: t('metaevaluation'),
       content: (
         <div>
@@ -92,6 +110,15 @@ const HomePage = () => {
         </div>
       ),
       links: ['/meta-evaluation', '/meta-evaluation/doctor'],
+    },
+    {
+      show: isAdmin(currentUser.data),
+      title: t('adminPage'),
+      content: (
+        <div>
+          <p>{t('adminpageText')}</p>
+        </div>
+      ),
     },
   ]
 
@@ -109,38 +136,44 @@ const HomePage = () => {
         <Grid columns={2} divided style={{ marginTop: '40px' }}>
           <Grid.Row>
             <Grid.Column>
-              {items.map((item, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Fragment key={`${index} -${item.title} `}>
-                  <PageItem key={item.title} title={item.title} content={item.content} />
-                  {!isAdmin(currentUser.data) ? (
-                    index !== items.length - 1 ? (
-                      <Divider section />
-                    ) : null
-                  ) : (
-                    <Divider section />
-                  )}
-                </Fragment>
-              ))}
-              {isAdmin(currentUser.data) && (
-                <Fragment key="adminpage">
-                  <PageItem key="admini" title={t('adminPage')} content={t('adminpageText')} />
-                </Fragment>
+              {items.map(
+                (item, index) =>
+                  item.show && (
+                    <Fragment key={item.title}>
+                      <PageItem title={item.title} content={item.content} />
+                      {index !== items.length - 1 ? <Divider section /> : null}
+                    </Fragment>
+                  ),
               )}
             </Grid.Column>
             <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Header as="h3">{t('timesensitive')}</Header>
               {deadlineInfo.length > 0 && <p>{t('timesensitiveDesc')}</p>}
               {deadlineInfo.length > 0 ? (
-                deadlineInfo.map(dl => {
-                  return (
-                    <Message
-                      icon="clock"
-                      header={`${forms[dl.form - 1].name}: ${t('formView:status:open')}`}
-                      content={<DateItem timestamp={dl.date} t={t} />}
-                    />
-                  )
-                })
+                deadlineInfo.map(dl => (
+                  <ItemGroup divided key={dl.form}>
+                    <Item>
+                      <ItemImage src={powerlineImage} />
+                      <Item.Content>
+                        <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
+                        <ItemMeta>
+                          <span>
+                            <DateItem timestamp={dl.date} t={t} />
+                          </span>
+                        </ItemMeta>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                          <Button as={Link} to={`/form/${dl.form}`}>
+                            Open Form
+                          </Button>
+                          <Button as={Link} to={`/form-overview/${dl.form}`}>
+                            <Icon name="info circle" />
+                            Form Overview
+                          </Button>
+                        </div>
+                      </Item.Content>
+                    </Item>
+                  </ItemGroup>
+                ))
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
               )}

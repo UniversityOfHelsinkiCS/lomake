@@ -28,7 +28,7 @@ const TableRow = ({ p, selectedAnswers, tableIds, setModalData, setProgramContro
   } else if (formType === 'degree-reform-individual') {
     targetURL = `/individual`
   } else if (formType === 'meta-evaluation' || formType === 'meta-doctoral') {
-    targetURL = `/meta-evaluation/form/${p.key}`
+    targetURL = `/meta-evaluation/form/${form}/${p.key}`
   }
 
   const lastYearsAnswers =

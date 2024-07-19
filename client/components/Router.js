@@ -48,7 +48,7 @@ export default () => (
         <Route exact path="/meta-evaluation/doctor/answers" render={() => <ProgrammeLevelAnswers doctoral />} />
         <Route
           exact
-          path="/meta-evaluation/form/:room"
+          path="/meta-evaluation/form/:form/:room"
           render={props => (
             <ProgrammeLevelMetaForm room={props.match.params.room} formString={props.match.params.form} />
           )}
