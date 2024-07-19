@@ -105,6 +105,8 @@ export default {
     description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
     noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
     clock: 'Kello',
+    comment: 'Kommentti',
+    answer: 'Vastaus',
   },
 
   aboutPage: {
