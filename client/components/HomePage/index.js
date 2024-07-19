@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import { Container, Header, Grid, Divider } from 'semantic-ui-react'
-import { formKeys } from '@root/config/data'
+import { Container, Header, Grid, Divider, Message } from 'semantic-ui-react'
+import { formKeys, forms } from '@root/config/data'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -16,15 +16,13 @@ const PageItem = ({ title, content }) => (
   </div>
 )
 
-const DateItem = ({ timestamp, t }) => {
+export const DateItem = ({ timestamp, t }) => {
   const date = new Date(timestamp)
 
-  // Extract date
   const year = date.getUTCFullYear()
   const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
   const day = date.getUTCDate()
 
-  // Extract time
   let hours = date.getUTCHours()
   if (hours.toString().length === 1) hours = `0${hours.toString()}`
   let minutes = date.getUTCMinutes()
@@ -32,7 +30,7 @@ const DateItem = ({ timestamp, t }) => {
 
   return (
     <p>
-      {day}/{month}/{year} {t('clock')}: {hours}:{minutes}
+      {t('formCloses')}: {day}/{month}/{year} {t('clock')}: {hours}:{minutes}
     </p>
   )
 }
@@ -135,7 +133,13 @@ const HomePage = () => {
               {deadlineInfo.length > 0 && <p>{t('timesensitiveDesc')}</p>}
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
-                  return <DateItem timestamp={dl.date} t={t} />
+                  return (
+                    <Message
+                      icon="clock"
+                      header={`${forms[dl.form - 1].name}: ${t('formView:status:open')}`}
+                      content={<DateItem timestamp={dl.date} t={t} />}
+                    />
+                  )
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>

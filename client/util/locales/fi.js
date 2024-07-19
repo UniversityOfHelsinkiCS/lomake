@@ -104,6 +104,7 @@ export default {
     timesensitiveDesc: 'Auki olevien lomakkeiden viimeinen täyttöpäivä.',
     description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
     noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
+    clock: 'Kello',
   },
 
   aboutPage: {

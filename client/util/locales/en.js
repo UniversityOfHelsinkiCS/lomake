@@ -89,6 +89,7 @@ export default {
     metaevaluationText: '',
     adminpageText: '',
     timesensitive: 'Topic',
+    clock: 'Clock',
   },
 
   aboutPage: {

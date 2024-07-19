@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { Button, Dropdown, Message } from 'semantic-ui-react'
+import { Button, Dropdown } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import { filterFromUrl } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
@@ -34,8 +33,6 @@ const MetaOverview = ({
   const [statsToShow, setStatsToShow] = useState(null)
   const [usersProgrammes, setUsersProgrammes] = useState(programmes)
   const debouncedFilter = useDebounce(filter, 200)
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const deadlineInfo = nextDeadline?.find(a => a.form === form)
   const linkToAnwers = doctoral ? '/meta-evaluation/doctor/answers' : '/meta-evaluation/answers'
   const titleText = doctoral
     ? `${t('metaevaluation').toUpperCase()} ${t('doctoral').toUpperCase()}`
@@ -96,13 +93,6 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      {deadlineInfo && (
-        <Message
-          icon="clock"
-          header={`${draftYear.year} ${t('formView:status:open')}`}
-          content={`${t('formCloses')}: ${deadlineInfo.date}`}
-        />
-      )}
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
         <h2 className="view-title">{titleText}</h2>
         <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
