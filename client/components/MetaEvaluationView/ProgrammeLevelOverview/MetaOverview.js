@@ -23,6 +23,7 @@ const MetaOverview = ({
   form,
   formType,
   doctoral,
+  setDoctoral,
   showAllProgrammes,
   setShowAllProgrammes,
 }) => {
@@ -31,18 +32,18 @@ const MetaOverview = ({
   const [showCsv, setShowCsv] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
-  const [usersProgrammes, setUsersProgrammes] = useState(programmes)
+  const [usersProgrammes, setUsersProgrammes] = useState([])
   const debouncedFilter = useDebounce(filter, 200)
   const linkToAnwers = doctoral ? '/meta-evaluation/doctor/answers' : '/meta-evaluation/answers'
-  const titleText = doctoral
-    ? `${t('metaevaluation').toUpperCase()} ${t('doctoral').toUpperCase()}`
-    : `${t('metaevaluation').toUpperCase()} ${t('bachelor').toUpperCase()} & ${t('master').toUpperCase()}`
+  const titleText = `${t('metaevaluation').toUpperCase()}`
+  const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) setFilter(filterQuery)
     document.title = t('evaluation')
-  }, [dispatch, t, lang])
+    setUsersProgrammes(programmes)
+  }, [dispatch, t, lang, programmes])
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(
@@ -56,6 +57,10 @@ const MetaOverview = ({
     () => isAdmin(currentUser.data) || (currentUser.data.access && Object.keys(currentUser.data.access).length > 5),
     [currentUser],
   )
+
+  const handleDoctoralChange = () => {
+    setDoctoral(!doctoral)
+  }
 
   const handleFilterChange = e => setFilter(e.target.value)
 
@@ -95,6 +100,9 @@ const MetaOverview = ({
       {renderModal()}
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
         <h2 className="view-title">{titleText}</h2>
+        <Button data-cy="doctle" onClick={() => handleDoctoralChange()} primary size="big">
+          {doctoralToggleText}
+        </Button>
         <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
           {t('overview:readAnswers')}
         </Button>

@@ -92,7 +92,7 @@ const Homepage = () => {
           <p>{t('evaluationText')}</p>
         </div>
       ),
-      links: ['/evaluation', '/evaluation-faculty', 'evaluation-university/form/6/UNI', '/evaluation-university'],
+      links: ['/evaluation', '/evaluation-faculty', '/evaluation-university'],
       forms: [4, 5, 6],
       thumbnail: calendarImage,
     },
@@ -104,7 +104,7 @@ const Homepage = () => {
           <p>{t('degreeReformText')}</p>
         </div>
       ),
-      links: ['/degree-reform', '/reform-answers', '/individual'],
+      links: ['/degree-reform', '/individual'],
       forms: [2, 3],
       thumbnail: wheelImage,
     },
@@ -116,7 +116,7 @@ const Homepage = () => {
           <p>{t('metaevaluationText')}</p>
         </div>
       ),
-      links: ['/meta-evaluation', '/meta-evaluation/doctor'],
+      links: ['/meta-evaluation'],
       forms: [7],
       thumbnail: powerlineImage,
     },
@@ -135,18 +135,6 @@ const Homepage = () => {
     const item = items.find(item => item.forms && item.forms.includes(formId))
     return item
   }
-
-  const checkIfAdminIsTrue = data => {
-    for (let i = 0; i < data.length; i++) {
-      const item = data[i]
-      if (item[1] && item[1].admin === true) {
-        return item[0]
-      }
-    }
-    return null
-  }
-
-  const directionRoom = checkIfAdminIsTrue(Object.entries(currentUser.data.access))
 
   if (Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
@@ -213,7 +201,7 @@ const Homepage = () => {
                           </ItemMeta>
                           {item.links.map(link => (
                             <Button key={link} as={Link} to={link}>
-                              {directionRoom}
+                              {t('overview')}
                               <Icon name="right chevron" />
                             </Button>
                           ))}

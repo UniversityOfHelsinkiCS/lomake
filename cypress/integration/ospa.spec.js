@@ -114,7 +114,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
     // Visit the form page
-    cy.visit('/form/KH50_004')
+    cy.visit('/yearly/form/KH50_004')
 
     // Edit text, year should have automatically switched to editable year
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
@@ -141,7 +141,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     // Check that changes persisted and fields with no changes stay the same
-    cy.visit('/form/KH50_004')
+    cy.visit('yearly/form/1/KH50_004')
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]').should('contain.text', `Hello from 2023, editing old year`)
     cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2023`)
@@ -203,7 +203,7 @@ describe('SuperAdmin user tests', () => {
 
     // Check that forms are open as they should be
     cy.visit('/yearly')
-    cy.visit('/form/KH50_004')
+    cy.visit('/yearly/form/1/KH50_004')
     cy.get('.editor-class')
     cy.visit('/evaluation/form/4/KH50_005')
     cy.get('.editor-class')
@@ -228,7 +228,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     cy.visit('/yearly')
-    cy.visit('/form/KH50_004')
+    cy.visit('/yearly/form/1/KH50_004')
     cy.get('.editor-class').should('not.exist')
     cy.visit('/evaluation/form/4/KH50_005')
     cy.get('.editor-class')

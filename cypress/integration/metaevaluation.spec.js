@@ -18,7 +18,6 @@ describe('Meta evaluation form & overview tests', () => {
 
   it('should open meta evaluation form', () => {
     cy.get('[data-cy=nav-meta-evaluation]').click()
-    cy.get('[data-cy=nav-meta-evaluation-overview]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
@@ -27,7 +26,7 @@ describe('Meta evaluation form & overview tests', () => {
 
   it('should open meta evaluation form with doctoral degree', () => {
     cy.get('[data-cy=nav-meta-evaluation]').click()
-    cy.get('[data-cy=nav-meta-evaluation-overview-doctor]').click()
+    cy.get('[data-cy=doctle]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCodeDoctor}]`).click()
 
     cy.contains(testProgrammeNameDoctor)
@@ -36,7 +35,6 @@ describe('Meta evaluation form & overview tests', () => {
 
   it('should open dropdown and select faculty', () => {
     cy.get('[data-cy=nav-meta-evaluation]').click()
-    cy.get('[data-cy=nav-meta-evaluation-overview]').click()
     cy.get('[data-cy=faculty-dropdown]').click()
     cy.get(`[data-cy=dropdown-item-${testFacultyCode}]`).click()
 
@@ -52,15 +50,14 @@ describe('Meta evaluation form & overview tests', () => {
     it('should open meta evaluation form and answer questions and then inspect questions in overview and answers pages', () => {
       const cypressOspa = 'cypressOspaUser'
       cy.login(cypressOspa)
-      cy.visit('/yearly')
+      cy.visit('/')
       cy.get('[data-cy=nav-meta-evaluation]').click()
-      cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
       cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
 
       cy.login(cypressSuperAdmin)
-      cy.visit('/yearly')
+      cy.visit('/')
 
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
@@ -69,9 +66,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.login(cypressOspa)
-      cy.visit('/yearly')
+      cy.visit('/')
       cy.get('[data-cy=nav-meta-evaluation]').click()
-      cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
@@ -85,15 +81,13 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy="color-positive-2"]`).click()
 
       cy.get('[data-cy=nav-meta-evaluation]').click()
-      cy.get('[data-cy=nav-meta-evaluation-overview]').click()
 
       cy.get(`[data-cy=${testProgrammeCode}-1-single`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
 
       cy.get(`[data-cy=${testProgrammeCode}-2-single`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
 
-      cy.visit('/yearly')
+      cy.visit('/')
       cy.get('[data-cy=nav-meta-evaluation]').click()
-      cy.get('[data-cy=nav-meta-evaluation-overview]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
       cy.get('[data-cy=textarea-2]').click()
@@ -110,14 +104,14 @@ describe('Meta evaluation form & overview tests', () => {
     it('should only see comments', () => {
       cy.login(cypressSuperAdmin)
 
-      cy.visit('/yearly')
+      cy.visit('/')
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
       cy.createDeadline(2024, 'Katselmuksen arviointi')
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
-      cy.visit(`/meta-evaluation/form/${testProgrammeCodeDoctor}`)
+      cy.visit(`/meta-evaluation/form/7/${testProgrammeCodeDoctor}`)
       cy.get('[data-cy=textarea-T1]').click()
       cy.get('[data-cy=textarea-T1]').type('2345')
       cy.get('[data-cy=save-button-T1]').click()

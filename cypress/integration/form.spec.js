@@ -91,7 +91,7 @@ describe('Yearly assessment form tests', () => {
     cy.reload()
 
     // check yearly assessment form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-recruitment_influence]')
       .find('.editor-class')
       .invoke('text')
@@ -115,7 +115,7 @@ describe('Yearly assessment form tests', () => {
     cy.visit('/yearly')
 
     // write to yearly form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.typeInEditor('employability', 'new words')
     cy.reload()
@@ -137,7 +137,7 @@ describe('Yearly assessment form tests', () => {
     cy.visit('/yearly')
 
     // check yearly assessment form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-employability]')
       .find('.editor-class')
       .invoke('text')

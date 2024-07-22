@@ -12,7 +12,7 @@ describe('Misc tests', () => {
   })
 
   it('Locale can be changed and translations work', () => {
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.contains('Answers are saved automatically')
     cy.get('[data-cy=navBar-localeDropdown]').click()
     cy.get('[data-cy=navBar-localeOption-fi]').click()
@@ -25,7 +25,7 @@ describe('Misc tests', () => {
   })
 
   it('CSV-download can be started on FormPage', () => {
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=csv-download]').should('contain', 'Download')
     cy.get('[data-cy=csv-download]').click()
   })

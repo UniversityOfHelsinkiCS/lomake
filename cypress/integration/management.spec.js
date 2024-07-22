@@ -20,7 +20,7 @@ describe('Management tests', () => {
     cy.get(`[data-cy=formLocker-verify-open-button]`)
 
     cy.login('cypressUser')
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').find('.editor-class').should('not.exist')
   })
 })

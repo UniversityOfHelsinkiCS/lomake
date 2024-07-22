@@ -240,7 +240,7 @@ describe('IAM permission tests', () => {
     cy.visit('/evaluation-university/form/6/UNI')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
     // Check that no permissions to formView
-    cy.visit('/form/KH50_006')
+    cy.visit('/yearly/form/1/KH50_006')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')
     cy.visit('/evaluation/form/4/KH50_006')
     cy.get('[data-cy=no-permissions-message]').should('be.visible')

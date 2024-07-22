@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
@@ -9,8 +9,7 @@ import MetaOverview from './MetaOverview'
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const doctoral = false
-
+  const [doctoral, setDoctoral] = useState(false)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
@@ -18,18 +17,20 @@ const ProgrammeLevelOverview = () => {
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
-  const filterProgrammes = a => !a.key.startsWith('T')
+
+  const filterState = useMemo(() => (doctoral ? a => a.key.startsWith('T') : a => !a.key.startsWith('T')), [doctoral])
 
   const usersProgrammes = useVisibleOverviewProgrammes({
     currentUser,
     programmes,
     showAllProgrammes,
-    form,
-  }).filter(filterProgrammes)
+  })
+
+  const filteredProgrammes = usersProgrammes.filter(filterState)
 
   useEffect(() => {
     document.title = `${t('evaluation')}`
-  }, [lang])
+  }, [lang, doctoral, t])
 
   return (
     <div>
@@ -40,10 +41,11 @@ const ProgrammeLevelOverview = () => {
           currentUser={currentUser}
           dispatch={dispatch}
           faculties={faculties}
-          programmes={usersProgrammes}
+          programmes={filteredProgrammes}
           form={form}
           formType={formType}
           doctoral={doctoral}
+          setDoctoral={setDoctoral}
           showAllProgrammes={showAllProgrammes}
           setShowAllProgrammes={setShowAllProgrammes}
         />

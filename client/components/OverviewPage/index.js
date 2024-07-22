@@ -13,6 +13,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import useDebounce from 'Utilities/useDebounce'
+import { formKeys } from '@root/config/data'
 import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
@@ -32,7 +33,7 @@ export default () => {
   const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
-  const form = 1 // TO FIX
+  const form = formKeys.YEARLY_ASSESSMENT
   const formType = 'yearlyAssessment'
 
   useEffect(() => {

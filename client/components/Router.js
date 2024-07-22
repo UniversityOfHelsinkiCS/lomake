@@ -27,7 +27,6 @@ import ProgrammeLevelMetaForm from 'Components/MetaEvaluationView/ProgrammeForm'
 import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelAnswers'
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
-import ProgrammeLevelOverviewDoctoral from './MetaEvaluationView/ProgrammeLevelOverviewDoctoral'
 import Homepage from './Homepage'
 
 export default () => (
@@ -43,7 +42,6 @@ export default () => (
         <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
 
         <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
-        <Route exact path="/meta-evaluation/doctor" component={ProgrammeLevelOverviewDoctoral} />
         <Route exact path="/meta-evaluation/answers" component={ProgrammeLevelAnswers} />
         <Route exact path="/meta-evaluation/doctor/answers" render={() => <ProgrammeLevelAnswers doctoral />} />
         <Route
