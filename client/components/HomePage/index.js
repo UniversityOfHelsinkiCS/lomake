@@ -20,7 +20,6 @@ import {
 } from 'semantic-ui-react'
 import { formKeys, forms } from '@root/config/data'
 import powerlineImage from 'Assets/APowerlineTower.png'
-import './Homepage.scss'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
