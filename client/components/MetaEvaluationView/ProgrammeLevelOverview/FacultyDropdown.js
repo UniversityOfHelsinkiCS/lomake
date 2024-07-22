@@ -23,7 +23,12 @@ const FacultyDropdown = ({ t, programmes, setUsersProgrammes, doctoral, facultie
 
   return (
     <div>
-      <Dropdown data-cy="faculty-dropdown" text={dropdownText} className="button basic gray">
+      <Dropdown
+        data-cy="faculty-dropdown"
+        text={dropdownText}
+        className="button basic gray csv-download"
+        direction="left"
+      >
         <Dropdown.Menu>
           <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
             {t('report:all')}

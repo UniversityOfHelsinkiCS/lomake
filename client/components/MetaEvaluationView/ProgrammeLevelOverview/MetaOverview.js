@@ -100,9 +100,14 @@ const MetaOverview = ({
       {renderModal()}
       <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
         <h2 className="view-title">{titleText}</h2>
-        <Button data-cy="doctle" onClick={() => handleDoctoralChange()} primary size="big">
-          {doctoralToggleText}
-        </Button>
+        <Button
+          data-cy="doctle"
+          onClick={() => handleDoctoralChange()}
+          icon="filter"
+          labelPosition="right"
+          size="big"
+          content={doctoralToggleText}
+        />
         <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
           {t('overview:readAnswers')}
         </Button>
@@ -129,9 +134,9 @@ const MetaOverview = ({
               <CsvDownload wantedData="colors" view="overview" form={form} />
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>{' '}
+        </Dropdown>
       </div>
-      <div style={{ marginTop: '1em' }}>
+      <div>
         <ColorTable
           filteredProgrammes={filteredProgrammes}
           setModalData={setModalData}

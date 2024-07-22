@@ -107,6 +107,9 @@ export default {
     clock: 'Kello',
     comment: 'Kommentti',
     answer: 'Vastaus',
+    overview: 'Yleiskatsaus',
+    bachelorMasterToggle: 'Kandi- ja Maisteriohjelmat',
+    doctoralToggle: 'Tohtoriohjelmat',
   },
 
   aboutPage: {
