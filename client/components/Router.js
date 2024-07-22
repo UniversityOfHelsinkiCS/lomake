@@ -28,19 +28,19 @@ import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelA
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 import ProgrammeLevelOverviewDoctoral from './MetaEvaluationView/ProgrammeLevelOverviewDoctoral'
-import HomePage from './HomePage'
+import Homepage from './Homepage'
 
 export default () => (
   <div className="content">
     <ErrorBoundary>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={Homepage} />
         <Route exact path="/yearly" component={OverviewPage} />
         <Route exact path="/admin" component={AdminPage} />
         <Route exact path="/report" component={ReportPage} />
         <Route exact path="/comparison" component={ComparisonPage} />
         <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
+        <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
 
         <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
         <Route exact path="/meta-evaluation/doctor" component={ProgrammeLevelOverviewDoctoral} />

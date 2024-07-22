@@ -12,7 +12,6 @@ import {
   Divider,
   Item,
   ItemMeta,
-  ItemImage,
   ItemHeader,
   ItemGroup,
   Button,
@@ -20,6 +19,9 @@ import {
 } from 'semantic-ui-react'
 import { formKeys, forms } from '@root/config/data'
 import powerlineImage from 'Assets/APowerlineTower.png'
+import rypsiImage from 'Assets/rypsi.jpg'
+import wheelImage from 'Assets/big_wheel.jpg'
+import calendarImage from 'Assets/calendar.jpg'
 
 const PageItem = ({ title, content }) => (
   <div style={{ marginBottom: '30px' }}>
@@ -48,7 +50,7 @@ export const DateItem = ({ timestamp, t }) => {
   )
 }
 
-const HomePage = () => {
+const Homepage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
   const { nextDeadline } = useSelector(state => state.deadlines)
@@ -79,6 +81,8 @@ const HomePage = () => {
         </div>
       ),
       links: ['/yearly'],
+      forms: [1],
+      thumbnail: rypsiImage,
     },
     {
       show: Object.keys(currentUser).length > 0,
@@ -89,6 +93,8 @@ const HomePage = () => {
         </div>
       ),
       links: ['/evaluation', '/evaluation-faculty', 'evaluation-university/form/6/UNI', '/evaluation-university'],
+      forms: [4, 5, 6],
+      thumbnail: calendarImage,
     },
     {
       show: Object.keys(currentUser).length > 0,
@@ -99,6 +105,8 @@ const HomePage = () => {
         </div>
       ),
       links: ['/degree-reform', '/reform-answers', '/individual'],
+      forms: [2, 3],
+      thumbnail: wheelImage,
     },
     {
       show: Object.keys(currentUser).length > 0,
@@ -109,6 +117,8 @@ const HomePage = () => {
         </div>
       ),
       links: ['/meta-evaluation', '/meta-evaluation/doctor'],
+      forms: [7],
+      thumbnail: powerlineImage,
     },
     {
       show: isAdmin(currentUser.data),
@@ -120,6 +130,23 @@ const HomePage = () => {
       ),
     },
   ]
+
+  const getItem = formId => {
+    const item = items.find(item => item.forms && item.forms.includes(formId))
+    return item
+  }
+
+  const checkIfAdminIsTrue = data => {
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i]
+      if (item[1] && item[1].admin === true) {
+        return item[0]
+      }
+    }
+    return null
+  }
+
+  const directionRoom = checkIfAdminIsTrue(Object.entries(currentUser.data.access))
 
   if (Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
@@ -145,34 +172,56 @@ const HomePage = () => {
                   ),
               )}
             </Grid.Column>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
               <Header as="h3">{t('timesensitive')}</Header>
               {deadlineInfo.length > 0 && <p>{t('timesensitiveDesc')}</p>}
               {deadlineInfo.length > 0 ? (
-                deadlineInfo.map(dl => (
-                  <ItemGroup divided key={dl.form}>
-                    <Item>
-                      <ItemImage src={powerlineImage} />
-                      <Item.Content>
-                        <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
-                        <ItemMeta>
-                          <span>
-                            <DateItem timestamp={dl.date} t={t} />
-                          </span>
-                        </ItemMeta>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-                          <Button as={Link} to={`/form/${dl.form}`}>
-                            Open Form
-                          </Button>
-                          <Button as={Link} to={`/form-overview/${dl.form}`}>
-                            <Icon name="info circle" />
-                            Form Overview
-                          </Button>
-                        </div>
-                      </Item.Content>
-                    </Item>
-                  </ItemGroup>
-                ))
+                deadlineInfo.map(dl => {
+                  const item = getItem(dl.form)
+                  return (
+                    <ItemGroup divided key={dl.form}>
+                      <Item>
+                        <div
+                          style={{
+                            width: '150px',
+                            height: '100px',
+                            overflow: 'hidden',
+                            position: 'relative',
+                            marginRight: '10px',
+                          }}
+                        >
+                          <img
+                            src={item.thumbnail}
+                            style={{
+                              position: 'absolute',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                            }}
+                            alt={`Thumbnail for ${forms[dl.form - 1].name}`}
+                          />
+                        </div>{' '}
+                        <Item.Content>
+                          <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
+                          <ItemMeta>
+                            <span>
+                              <DateItem timestamp={dl.date} t={t} />
+                            </span>
+                          </ItemMeta>
+                          {item.links.map(link => (
+                            <Button key={link} as={Link} to={link}>
+                              {directionRoom}
+                              <Icon name="right chevron" />
+                            </Button>
+                          ))}
+                        </Item.Content>
+                      </Item>
+                    </ItemGroup>
+                  )
+                })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
               )}
@@ -184,4 +233,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default Homepage
