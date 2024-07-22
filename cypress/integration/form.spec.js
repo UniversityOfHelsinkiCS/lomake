@@ -137,7 +137,7 @@ describe('Yearly assessment form tests', () => {
     cy.visit('/yearly')
 
     // check yearly assessment form
-    cy.visit(`/yearly/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-employability]')
       .find('.editor-class')
       .invoke('text')

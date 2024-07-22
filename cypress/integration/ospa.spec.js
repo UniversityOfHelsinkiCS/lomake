@@ -114,7 +114,7 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
     // Visit the form page
-    cy.visit('/yearly/form/KH50_004')
+    cy.visit('/yearly/form/1/KH50_004')
 
     // Edit text, year should have automatically switched to editable year
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
