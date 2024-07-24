@@ -53,6 +53,7 @@ export const DateItem = ({ timestamp, t }) => {
 const Homepage = () => {
   const { t } = useTranslation()
   const currentUser = useSelector(state => state.currentUser)
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { nextDeadline } = useSelector(state => state.deadlines)
   const [deadlineInfo, setDeadlineInfo] = useState([])
   const header = 'tilannekuvalomake'
@@ -136,7 +137,7 @@ const Homepage = () => {
     return item
   }
 
-  if (Object.keys(currentUser.data.access).length < 1) {
+  if (usersProgrammes.length + Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
   }
 
