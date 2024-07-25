@@ -23,6 +23,15 @@ describe('homepage tests', () => {
 
     cy.visit('/')
 
-    cy.get('[data-cy=1]').contains('Vuosiseuranta')
+    cy.get('[data-cy=deadline-label-1]').contains('Vuosiseuranta')
+  })
+
+  it('Should not see ospa', () => {
+    const klemdu = 'cypressJoryUser'
+
+    cy.login(klemdu)
+    cy.visit('/')
+
+    cy.get('[data-cy=OSPA]').should('not.exist')
   })
 })

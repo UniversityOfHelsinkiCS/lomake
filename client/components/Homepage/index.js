@@ -16,6 +16,7 @@ import {
   ItemGroup,
   Button,
   Icon,
+  Loader,
 } from 'semantic-ui-react'
 import { formKeys, forms } from '@root/config/data'
 import powerlineImage from 'Assets/APowerlineTower.png'
@@ -24,7 +25,7 @@ import wheelImage from 'Assets/big_wheel.jpg'
 import calendarImage from 'Assets/calendar.jpg'
 
 const PageItem = ({ title, content }) => (
-  <div style={{ marginBottom: '30px' }}>
+  <div data-cy={title} style={{ marginBottom: '30px' }}>
     <Header as="h3" style={{ textAlign: 'center' }}>
       {title.toUpperCase()}
     </Header>
@@ -137,6 +138,8 @@ const Homepage = () => {
     return item
   }
 
+  if (!usersProgrammes) return <Loader active />
+
   if (usersProgrammes.length + Object.keys(currentUser.data.access).length < 1) {
     return <NoPermissions t={t} />
   }
@@ -168,7 +171,7 @@ const Homepage = () => {
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
                   return (
-                    <ItemGroup data-cy={dl.form} divided key={dl.form}>
+                    <ItemGroup data-cy={`deadline-label-${dl.form}`} divided key={dl.form}>
                       <Item>
                         <div
                           style={{
