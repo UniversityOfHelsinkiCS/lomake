@@ -92,7 +92,7 @@ const Homepage = () => {
           <p>{t('evaluationText')}</p>
         </div>
       ),
-      links: ['/evaluation', '/evaluation-faculty', '/evaluation-university'],
+      links: [],
       forms: [4, 5, 6],
       thumbnail: calendarImage,
     },
@@ -104,7 +104,7 @@ const Homepage = () => {
           <p>{t('degreeReformText')}</p>
         </div>
       ),
-      links: ['/degree-reform', '/individual'],
+      links: [],
       forms: [2, 3],
       thumbnail: wheelImage,
     },
