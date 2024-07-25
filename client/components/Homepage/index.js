@@ -168,7 +168,7 @@ const Homepage = () => {
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
                   return (
-                    <ItemGroup divided key={dl.form}>
+                    <ItemGroup data-cy={dl.form} divided key={dl.form}>
                       <Item>
                         <div
                           style={{
@@ -192,7 +192,7 @@ const Homepage = () => {
                             }}
                             alt={`Thumbnail for ${forms[dl.form - 1].name}`}
                           />
-                        </div>{' '}
+                        </div>
                         <Item.Content>
                           <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
                           <ItemMeta>
@@ -201,7 +201,7 @@ const Homepage = () => {
                             </span>
                           </ItemMeta>
                           {item.links.map(link => (
-                            <Button key={link} as={Link} to={link}>
+                            <Button data-cy={link} key={link} as={Link} to={link}>
                               {t('overview')}
                               <Icon name="right chevron" />
                             </Button>
