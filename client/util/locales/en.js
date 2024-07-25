@@ -90,6 +90,7 @@ export default {
     adminpageText: '',
     timesensitive: 'Topic',
     clock: 'Clock',
+    toFrontpage: 'To frontpage',
   },
 
   aboutPage: {

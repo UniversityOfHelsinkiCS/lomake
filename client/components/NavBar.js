@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import { Dropdown, Icon, Label, Menu } from 'semantic-ui-react'
+import { Dropdown, Icon, Label, Menu, Popup } from 'semantic-ui-react'
 import { images } from 'Utilities/common'
 import { logoutAction } from 'Utilities/redux/currentUserReducer'
 import { setLanguage } from 'Utilities/redux/languageReducer'
@@ -167,7 +167,7 @@ const GoToMetaEvaluation = () => {
   )
 }
 
-const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
+const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial, t }) => {
   const location = useLocation()
 
   if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) {
@@ -196,7 +196,10 @@ const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial }) => {
   return (
     <>
       <Menu.Item as={Link} to="/">
-        <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
+        <Popup
+          content={t('toFrontpage')}
+          trigger={<img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="homepage" />}
+        />
       </Menu.Item>
       {hasProgrammeOrSpecial && <GoToYearlyAssessmentButton />}
       <GoToEvaluationButton user={user} />
@@ -258,7 +261,7 @@ export default () => {
 
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
-      <MenuNavigation pathname={location.pathname} user={user} hasProgrammeOrSpecial={hasProgrammeOrSpecial} />
+      <MenuNavigation pathname={location.pathname} user={user} hasProgrammeOrSpecial={hasProgrammeOrSpecial} t={t} />
       <Menu.Menu>
         <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
           <Dropdown.Menu>

@@ -88,6 +88,8 @@ export default {
     metaevaluationText: '',
     adminpageText: '',
     timesensitive: '',
+
+    toFrontpage: 'Till startsidan',
   },
 
   aboutPage: {

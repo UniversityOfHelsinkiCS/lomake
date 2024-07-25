@@ -110,6 +110,8 @@ export default {
     overview: 'Yleiskatsaus',
     bachelorMasterToggle: 'Kandi- ja Maisteriohjelmat',
     doctoralToggle: 'Tohtoriohjelmat',
+
+    toFrontpage: 'Etusivulle',
   },
 
   aboutPage: {
