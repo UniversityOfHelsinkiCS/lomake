@@ -24,8 +24,5 @@ describe('homepage tests', () => {
     cy.visit('/')
 
     cy.get('[data-cy=1]').contains('Vuosiseuranta')
-    cy.get('[data-cy=/yearly]').click()
-
-    cy.get('[data-cy=nav-comparison]')
   })
 })

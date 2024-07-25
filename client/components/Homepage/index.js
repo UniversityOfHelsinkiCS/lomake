@@ -201,7 +201,7 @@ const Homepage = () => {
                             </span>
                           </ItemMeta>
                           {item.links.map(link => (
-                            <Button data-cy={link} key={link} as={Link} to={link}>
+                            <Button data-cy={`button-${link}`} key={link} as={Link} to={link}>
                               {t('overview')}
                               <Icon name="right chevron" />
                             </Button>
