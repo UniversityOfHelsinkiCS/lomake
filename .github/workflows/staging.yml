@@ -26,6 +26,7 @@ jobs:
             yearselector,
             evaluation,
             metaevaluation,
+            homepage,
           ]
     name: Run tests
     runs-on: ubuntu-latest
