@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Button, Loader, Icon, Dropdown } from 'semantic-ui-react'
+import { Button, Loader, Icon, Dropdown, Input } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
+import useDebounce from 'Utilities/useDebounce'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const doctoralBasedFilter = (doctoral, items, attribute) => {
@@ -30,8 +31,10 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)
   const [usersProgrammes, setUsersProgrammes] = useState([])
-  const [filter, setFilter] = useState('both')
+  const [answerFilter, setAnswerFilter] = useState('both')
   const filteredQuestions = doctoralBasedFilter(doctoral, questionsList, 'id')
+  const [filter, setFilter] = useState('')
+  const debouncedFilter = useDebounce(filter)
   let filteredProgrammes = []
 
   const getLabel = question => {
@@ -51,7 +54,11 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
 
   if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
-  filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key')
+  filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key').filter(
+    prog =>
+      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
+  )
 
   const answersList =
     answers.data &&
@@ -74,10 +81,12 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const filterAnswers = answers => {
     return answers.map(answer => ({
       ...answer,
-      answer: filter === 'comments' ? undefined : answer.answer,
-      comment: filter === 'answers' ? undefined : answer.comment,
+      answer: answerFilter === 'comments' ? undefined : answer.answer,
+      comment: answerFilter === 'answers' ? undefined : answer.comment,
     }))
   }
+
+  const handleFilterChange = e => setFilter(e.target.value)
 
   const filteredAnswersList = new Map(Array.from(answersList).map(([key, value]) => [key, filterAnswers(value)]))
 
@@ -89,6 +98,14 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
           <Icon name="arrow left" />
           {t('backToFrontPage')}
         </Button>
+        <Input
+          data-cy="overviewpage-filter"
+          icon="filter"
+          size="small"
+          placeholder={t('programmeFilter')}
+          onChange={handleFilterChange}
+          value={filter}
+        />
         <FacultyDropdown
           t={t}
           programmes={programmes}
@@ -101,8 +118,8 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
           data-cy="content-type-dropdown"
           selection
           options={filterOptions}
-          value={filter}
-          onChange={(e, { value }) => setFilter(value)}
+          value={answerFilter}
+          onChange={(e, { value }) => setAnswerFilter(value)}
         />
       </div>
       <WrittenAnswers
@@ -114,6 +131,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
         showing={showing}
         setShowing={setShowing}
         form={form}
+        metaEvaluation
       />
     </div>
   )

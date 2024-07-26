@@ -17,6 +17,7 @@ const WrittenAnswers = ({
   questionsList,
   showing,
   setShowing,
+  metaEvaluation = false,
 }) => {
   const { t } = useTranslation()
   const componentRef = useRef()
@@ -40,7 +41,8 @@ const WrittenAnswers = ({
     return answer.some(a => a.answer || a.comment)
   }
 
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
+  // (!metaEvaluation) to check if both are true
+  if (!metaEvaluation && usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
