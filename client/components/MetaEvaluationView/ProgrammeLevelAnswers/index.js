@@ -119,7 +119,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
           selection
           options={filterOptions}
           value={answerFilter}
-          onChange={(e, { value }) => setAnswerFilter(value)}
+          onChange={(_, { value }) => setAnswerFilter(value)}
         />
       </div>
       <WrittenAnswers

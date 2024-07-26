@@ -89,7 +89,7 @@ export default {
     semiUrgent: 'jokseenkin kiireellinen',
     nonUrgent: 'kiireetön',
     irrelevant: 'merkityksetön',
-    metaEvaluationAnswers: 'Katselmuksen vastaukset',
+    metaEvaluationAnswers: 'Kirjalliset vastaukset',
     bm: 'Kandiohjelmat & maisteriohjelmat',
     t: 'Tohtoriohjelmat',
     showBoth: 'Vastaukset & kommentit',
