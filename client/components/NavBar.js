@@ -14,86 +14,90 @@ import {
   isEvaluationUniversityUser,
 } from '@root/config/common'
 
-const UnHijackButton = ({ handleUnhijack }) => {
-  return (
-    <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
-      <Label color="green" horizontal>
-        Unhijack
-      </Label>
-    </Menu.Item>
-  )
-}
+const UnHijackButton = ({ handleUnhijack }) => (
+  <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
+    <Label color="green" horizontal>
+      Unhijack
+    </Label>
+  </Menu.Item>
+)
+
+const MenuItemLink = ({ dataCy, to, name, children }) => (
+  <Menu.Item data-cy={dataCy} as={Link} to={to} name={name}>
+    {children}
+  </Menu.Item>
+)
 
 const GoToYearlyAssessmentButton = () => {
   const { t } = useTranslation()
-
   return (
-    <Menu.Item data-cy="nav-yearly" as={Link} to="/yearly" name="yearlyAssessment">
+    <MenuItemLink dataCy="nav-yearly" to="/yearly" name="yearlyAssessment">
       {t('yearlyAssessment')}
-    </Menu.Item>
+    </MenuItemLink>
   )
 }
 
 const GoToAdminPageButton = () => {
   const { t } = useTranslation()
-
   return (
-    <Menu.Item data-cy="nav-admin" as={Link} to="/admin" name="adminControls">
+    <MenuItemLink dataCy="nav-admin" to="/admin" name="adminControls">
       {t('adminPage')}
-    </Menu.Item>
+    </MenuItemLink>
   )
 }
 
+const EvaluationDropdownItem = ({ dataCy, to, name, children }) => (
+  <Dropdown.Item data-cy={dataCy} as={Link} to={to} name={name}>
+    {children}
+  </Dropdown.Item>
+)
+
 const GoToEvaluationButton = ({ user }) => {
   const { t, i18n } = useTranslation()
-  let uniFormCode = `UNI`
-  if (i18n.language === 'en') {
-    uniFormCode = `UNI_EN`
-  } else if (i18n.language === 'se') {
-    uniFormCode = `UNI_SE`
+  const uniFormCodeMap = {
+    en: 'UNI_EN',
+    se: 'UNI_SE',
   }
-
+  const uniFormCode = uniFormCodeMap[i18n.language] || 'UNI'
   const isEmployee = user.iamGroups.includes('hy-employees')
+  const hasAccess = isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0
 
   return (
     <Menu.Item style={{ padding: 0 }}>
       <Dropdown item data-cy="nav-evaluation" text={t('evaluation')} style={{ height: '100%' }}>
         <Dropdown.Menu>
-          {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (
-            <Dropdown.Item data-cy="nav-evaluation-option-programmes" as={Link} to="/evaluation" name="evaluation">
-              {t('generic:level:programmes')}
-            </Dropdown.Item>
-          ) : null}
-          {isAdmin(user) || isEvaluationFacultyUser(user) || Object.keys(user.access).length > 0 ? (
-            <Dropdown.Item
-              data-cy="nav-evaluation-option-faculties"
-              as={Link}
-              to="/evaluation-faculty"
-              name="faculties"
-            >
-              {t('generic:level:faculties')}
-            </Dropdown.Item>
-          ) : null}
-          {isAdmin(user) || isEvaluationUniversityUser(user) ? (
-            <Dropdown.Item
-              data-cy="nav-evaluation-option-committee"
-              as={Link}
+          {hasAccess && (
+            <>
+              <EvaluationDropdownItem dataCy="nav-evaluation-option-programmes" to="/evaluation" name="evaluation">
+                {t('generic:level:programmes')}
+              </EvaluationDropdownItem>
+              <EvaluationDropdownItem
+                dataCy="nav-evaluation-option-faculties"
+                to="/evaluation-faculty"
+                name="faculties"
+              >
+                {t('generic:level:faculties')}
+              </EvaluationDropdownItem>
+            </>
+          )}
+          {(isAdmin(user) || isEvaluationUniversityUser(user)) && (
+            <EvaluationDropdownItem
+              dataCy="nav-evaluation-option-committee"
               to={`/evaluation-university/form/6/${uniFormCode}`}
               name="committees"
             >
               {t('generic:level:university')}
-            </Dropdown.Item>
-          ) : null}
-          {isAdmin(user) || isEvaluationUniversityUser(user) || isEmployee ? (
-            <Dropdown.Item
-              data-cy="nav-evaluation-option-university-overview"
-              as={Link}
+            </EvaluationDropdownItem>
+          )}
+          {(isAdmin(user) || isEvaluationUniversityUser(user) || isEmployee) && (
+            <EvaluationDropdownItem
+              dataCy="nav-evaluation-option-university-overview"
               to="/evaluation-university/"
               name="big-boss"
             >
               {t('overview:universityOverview')}
-            </Dropdown.Item>
-          ) : null}
+            </EvaluationDropdownItem>
+          )}
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
@@ -103,9 +107,9 @@ const GoToEvaluationButton = ({ user }) => {
 const GoToDegreeReformGroup = () => {
   const { t } = useTranslation()
   return (
-    <Dropdown.Item data-cy="nav-degree-reform-group" as={Link} to="/degree-reform" name="degree-form-group">
+    <EvaluationDropdownItem dataCy="nav-degree-reform-group" to="/degree-reform" name="degree-form-group">
       {t('degree-reform-group')}
-    </Dropdown.Item>
+    </EvaluationDropdownItem>
   )
 }
 
@@ -120,22 +124,20 @@ const GoToDegreeReformIndividual = () => {
         style={{ padding: 0 }}
       >
         <Dropdown.Menu>
-          <Dropdown.Item
-            data-cy="nav-evaluation-option-reform-individual-answers"
-            as={Link}
+          <EvaluationDropdownItem
+            dataCy="nav-evaluation-option-reform-individual-answers"
             to="/reform-answers"
             name="answers"
           >
             {t('generic:degreeReformIndividualAnswers')}
-          </Dropdown.Item>
-          <Dropdown.Item
-            data-cy="nav-evaluation-option-reform-individual-from"
-            as={Link}
+          </EvaluationDropdownItem>
+          <EvaluationDropdownItem
+            dataCy="nav-evaluation-option-reform-individual-from"
             to="/individual"
             name="evaluation"
           >
             {t('generic:degreeReformIndividualForm')}
-          </Dropdown.Item>
+          </EvaluationDropdownItem>
         </Dropdown.Menu>
       </Dropdown>
     </Dropdown.Item>
@@ -161,38 +163,29 @@ const GoToDegreeReform = ({ user }) => {
 const GoToMetaEvaluation = () => {
   const { t } = useTranslation()
   return (
-    <Menu.Item data-cy="nav-meta-evaluation" as={Link} to="/meta-evaluation">
+    <MenuItemLink dataCy="nav-meta-evaluation" to="/meta-evaluation">
       {t('metaevaluation')}
-    </Menu.Item>
+    </MenuItemLink>
   )
 }
 
 const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial, t }) => {
   const location = useLocation()
 
-  if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) {
-    return null
-  }
-  if (pathname.startsWith('/individual')) {
+  if (location.pathname === '/degree-reform' && location.search.startsWith('?faculty=')) return null
+
+  const isIndividualPath = pathname.startsWith('/individual')
+  if (isIndividualPath) {
     return (
       <>
         <Menu.Item>
           <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
         </Menu.Item>
-        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
+        {user.superAdmin && <GoToDegreeReformIndividual />}
       </>
     )
   }
-  if (pathname.startsWith('/individual')) {
-    return (
-      <>
-        <Menu.Item>
-          <img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="toska" />
-        </Menu.Item>
-        {user.superAdmin ? <GoToDegreeReformIndividual /> : null}
-      </>
-    )
-  }
+
   return (
     <>
       <Menu.Item as={Link} to="/">
@@ -216,7 +209,28 @@ const MenuNavigation = ({ pathname, user, hasProgrammeOrSpecial, t }) => {
   )
 }
 
-export default () => {
+const LanguageDropdown = ({ lang, handleLanguageChange }) => {
+  const { t } = useTranslation()
+  return (
+    <Menu.Menu>
+      <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
+        <Dropdown.Menu>
+          <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
+            Suomi
+          </Dropdown.Item>
+          <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
+            Svenska
+          </Dropdown.Item>
+          <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
+            English
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Menu.Menu>
+  )
+}
+
+const NavBar = () => {
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
@@ -230,53 +244,34 @@ export default () => {
     i18n.changeLanguage(code)
   }
 
-  const handleLogout = () => {
-    dispatch(logoutAction())
-  }
+  const handleLogout = () => dispatch(logoutAction())
 
   const handleUnhijack = () => {
     window.localStorage.removeItem('adminLoggedInAs')
     window.location.reload()
   }
 
-  if (location.pathname.startsWith('/evaluation-faculty/previous-years')) return null
-
-  if (!user) return null
-
   const handleLanguageChange = (e, { value }) => {
     e.preventDefault()
     setLanguageCode(value)
     if (window.location.href.includes('/6/UNI')) {
-      let uniFormCode = `UNI`
-      if (value === 'en') {
-        uniFormCode = `UNI_EN`
-      } else if (value === 'se') {
-        uniFormCode = `UNI_SE`
+      const uniFormCodeMap = {
+        en: 'UNI_EN',
+        se: 'UNI_SE',
       }
+      const uniFormCode = uniFormCodeMap[value] || 'UNI'
       history.push(`/evaluation-university/form/6/${uniFormCode}`)
     }
   }
+
+  if (location.pathname.startsWith('/evaluation-faculty/previous-years') || !user) return null
 
   const hasProgrammeOrSpecial = (programmes && programmes.length > 0) || Object.keys(user.specialGroup).length > 0
 
   return (
     <Menu id="navBar-wrapper" stackable compact fluid>
       <MenuNavigation pathname={location.pathname} user={user} hasProgrammeOrSpecial={hasProgrammeOrSpecial} t={t} />
-      <Menu.Menu>
-        <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
-          <Dropdown.Menu>
-            <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
-              Suomi
-            </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
-              Svenska
-            </Dropdown.Item>
-            <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
-              English
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu.Menu>
+      <LanguageDropdown lang={lang} handleLanguageChange={handleLanguageChange} />
       <Menu.Menu position="right">
         {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
         <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
@@ -291,3 +286,5 @@ export default () => {
     </Menu>
   )
 }
+
+export default NavBar
