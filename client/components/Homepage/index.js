@@ -59,6 +59,8 @@ const Homepage = () => {
   const [deadlineInfo, setDeadlineInfo] = useState([])
   const header = 'tilannekuvalomake'
 
+  const access = Object.keys(currentUser).length > 0
+
   useEffect(() => {
     document.title = 'Tilannekuvalomake'
 
@@ -75,7 +77,7 @@ const Homepage = () => {
 
   const items = [
     {
-      show: Object.keys(currentUser).length > 0,
+      show: access,
       title: t('yearlyAssessment'),
       content: (
         <div>
@@ -87,7 +89,7 @@ const Homepage = () => {
       thumbnail: rypsiImage,
     },
     {
-      show: Object.keys(currentUser).length > 0,
+      show: access,
       title: t('evaluation'),
       content: (
         <div>
@@ -99,7 +101,7 @@ const Homepage = () => {
       thumbnail: calendarImage,
     },
     {
-      show: Object.keys(currentUser).length > 0,
+      show: access,
       title: t('degree-reform'),
       content: (
         <div>
@@ -111,7 +113,7 @@ const Homepage = () => {
       thumbnail: wheelImage,
     },
     {
-      show: Object.keys(currentUser).length > 0,
+      show: access,
       title: t('metaevaluation'),
       content: (
         <div>
