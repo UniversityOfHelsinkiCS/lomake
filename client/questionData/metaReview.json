@@ -1,9 +1,10 @@
+
 [
   {
     "title": {
       "fi": "Opintopolkujen hallinta, nivelvaiheet ja horisontaaliset siirtymät",
-      "se": "",
-      "en": ""
+      "se": "Hantering av studievägar, övergångsskeden och horisontella övergångar",
+      "en": "Management of study paths, transition phases and horizontal transfers"
     },
     "level": "kandimaisteri",
     "parts": [
@@ -12,20 +13,20 @@
         "index": 1,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "1 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Mallilukujärjestykset Opetussuunnitelmissa",
+          "se": "Modellscheman Läroplaner",
+          "en": "Model Schedules"
         },
         "label": {
           "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-          "en": "....",
-          "se": "...."
+          "en": "Degree programs include model schedules in curricula to support understanding of the education system, study paths, and course offerings",
+          "se": "Utbildningsprogrammen inkluderar modellscheman i läroplanerna för att stödja förståelsen av utbildningssystemet, studievägar och kursutbud"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -39,20 +40,20 @@
         "index": 2,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "2 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Horisontaaliset Siirtymät",
+          "se": "Horisontella Övergångar",
+          "en": "Horizontal Transfers"
         },
         "label": {
           "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-          "en": "....",
-          "se": "...."
+          "en": "The university develops and clarifies horizontal transfers within and between programs to support student choices and study progress",
+          "se": "Universitetet utvecklar och förtydligar horisontella övergångar inom och mellan program för att stödja studenternas val och studieframsteg"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -66,20 +67,20 @@
         "index": 3,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "3 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Nivelvaiheen Sujuvuus",
+          "se": "Smidig Övergång",
+          "en": "Smooth Transition"
         },
         "label": {
           "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-          "en": "....",
-          "se": "...."
+          "en": "The smoothness of the transition phase from bachelor's to master's programs is ensured through guidance measures in cooperation between programs",
+          "se": "Smidigheten i övergångsfasen från kandidatprogram till masterprogram säkerställs genom vägledningsåtgärder i samarbete mellan programmen"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -93,20 +94,20 @@
         "index": 4,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "4 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Jatkuva Oppiminen",
+          "se": "Livslångt Lärande",
+          "en": "Continuous Learning"
         },
         "label": {
           "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
-          "en": "....",
-          "se": "...."
+          "en": "The university forms a strategic view on what continuous learning offerings are organized at the university and why",
+          "se": "Universitetet bildar en strategisk syn på vilka erbjudanden om livslångt lärande som organiseras vid universitetet och varför"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -120,8 +121,8 @@
   {
     "title": {
       "fi": "Yliopiston läpivirtauksen määritelmä ja kriteerit sekä opintojen viivästymistä estävät keinot",
-      "se": "",
-      "en": ""
+      "se": "Definition och kriterier för universitetets genomströmning samt metoder för att förhindra förseningar i studierna",
+      "en": "Definition and criteria for university throughput and methods to prevent study delays"
     },
     "level": "kandimaisteri",
     "parts": [
@@ -130,20 +131,20 @@
         "index": 5,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "5 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Läpivirtauksen Määrittely",
+          "se": "Genomströmningens Definition",
+          "en": "Throughput Definition"
         },
         "label": {
           "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
-          "en": "....",
-          "se": "...."
+          "en": "The university defines throughput and its criteria based on quality and effectiveness of operations - not solely based on the Ministry of Education and Culture funding model",
+          "se": "Universitetet definierar genomströmning och dess kriterier baserat på verksamhetens kvalitet och effektivitet - inte enbart baserat på Undervisnings- och kulturministeriets finansieringsmodell"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -157,20 +158,20 @@
         "index": 6,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "6 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Valmistumisaikojen Lyhentäminen",
+          "se": "Förkorta Studietider",
+          "en": "Shorten Graduation"
         },
         "label": {
           "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
-          "en": "....",
-          "se": "...."
+          "en": "Degree programs address prolonged graduation times through study guidance, continuous improvement of teaching quality, and supporting students' learning regulation and well-being",
+          "se": "Utbildningsprogram åtgärdar förlängda studietider genom studievägledning, kontinuerlig förbättring av undervisningskvaliteten och stöd för studenternas inlärningsreglering och välbefinnande"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -184,20 +185,20 @@
         "index": 7,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "7 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Opinnäytetöiden Valmistuminen",
+          "se": "Slutförande Examensarbeten",
+          "en": "Thesis Completion"
         },
         "label": {
           "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
-          "en": "....",
-          "se": "...."
+          "en": "Degree programs develop effective mechanisms for completing theses, utilizing best practices used across the university",
+          "se": "Utbildningsprogram utvecklar effektiva mekanismer för att slutföra examensarbeten, med hjälp av bästa praxis som används över hela universitetet"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -211,20 +212,20 @@
         "index": 8,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "8 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Yliopistopedagogiikan Tutkimus",
+          "se": "Universitetspedagogisk Forskning",
+          "en": "Pedagogical Research"
         },
         "label": {
           "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
-          "en": "....",
-          "se": "...."
+          "en": "The Center for University Pedagogy (HYPE) focuses research on the university's educational development areas to support the development of degree programs",
+          "se": "Centret för universitetspedagogik (HYPE) fokuserar forskning på universitetets utbildningsutvecklingsområden för att stödja utvecklingen av utbildningsprogram"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -238,20 +239,20 @@
         "index": 9,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "9 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Opiskelijapalaute Seurannassa",
+          "se": "Studentfeedback Uppföljning",
+          "en": "Student Feedback"
         },
         "label": {
           "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
-          "en": "....",
-          "se": "...."
+          "en": "Degree programs use information from all student feedback systems to monitor study progress",
+          "se": "Utbildningsprogram använder information från alla studentåterkopplingssystem för att övervaka studieframsteg"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -265,10 +266,11 @@
         "index": 10,
         "type": "META_ENTITY",
         "shortLabel": {
-          "fi": "10 Kysymys",
-          "se": "",
-          "en": ""
+          "fi": "Ohjelman Vetovoima",
+          "se": "Programattraktivitet",
+          "en": "Program Attractiveness"
         },
+
         "label": {
           "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
           "en": "....",
