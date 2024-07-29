@@ -12,6 +12,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { setYear } from 'Utilities/redux/filterReducer'
+import { formKeys } from '@root/config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -31,7 +32,7 @@ export default () => {
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
   const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-  const form = 4 // TO FIX
+  const form = formKeys.EVALUATION_PROGRAMMES
   const formType = 'evaluation'
 
   const year = getYearToShow({ draftYear, nextDeadline, form })
