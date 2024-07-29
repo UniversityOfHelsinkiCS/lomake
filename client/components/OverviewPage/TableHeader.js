@@ -11,7 +11,7 @@ const StudyLevelHeader = () => {
   )
 }
 
-const TableHeader = ({ tableIds, sort, title, showStudyLevel }) => {
+const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) => {
   const { t } = useTranslation()
 
   return (
@@ -29,11 +29,15 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel }) => {
         </div>
       </div>
       {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
-      {tableIds.map(idObject => (
-        <div key={idObject.id} className="sticky-header-categories">
-          <span className="vertical-text">{idObject.shortLabel}</span>
-        </div>
-      ))}
+      {tableIds.map(idObject => {
+        let shortLabel = meta ? `${idObject.id} ${idObject.shortLabel}` : idObject.shortLabel
+        if (meta && shortLabel.startsWith('T')) shortLabel = shortLabel.substr(1, shortLabel.length - 1)
+        return (
+          <div key={idObject.id} className="sticky-header-categories">
+            <span className="vertical-text">{shortLabel}</span>
+          </div>
+        )
+      })}
       <div className="sticky-header" />
     </>
   )

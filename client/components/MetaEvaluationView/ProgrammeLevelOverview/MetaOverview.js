@@ -150,6 +150,7 @@ const MetaOverview = ({
           showAllProgrammes={showAllProgrammes}
           handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
           doctoral={doctoral}
+          meta
         />
       </div>
     </>

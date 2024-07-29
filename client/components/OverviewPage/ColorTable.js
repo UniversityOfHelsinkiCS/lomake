@@ -105,6 +105,7 @@ const ColorTable = React.memo(
     facultyView,
     dropdownFilter,
     doctoral = false,
+    meta,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -262,7 +263,7 @@ const ColorTable = React.memo(
           </div>
         ) : null}
         <div className={`overview-color-grid${tableClassName}`}>
-          <TableHeader sort={sort} tableIds={tableIds} />
+          <TableHeader sort={sort} tableIds={tableIds} meta={meta} />
           {facultyView ? (
             <>
               <div className="table-container" style={{ paddingTop: 20 }}>
