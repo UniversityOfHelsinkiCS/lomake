@@ -98,7 +98,7 @@ const ProgrammeLevelAnswers = () => {
 
   return (
     <div>
-      <Menu secondary>
+      <Menu size="large" secondary>
         <MenuItem>
           <Button onClick={() => history.goBack()} icon="arrow left" />
         </MenuItem>

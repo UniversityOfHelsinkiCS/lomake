@@ -120,7 +120,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=textarea-T1_comment]').type('3456')
       cy.get('[data-cy=save-button-T1_comment]').click()
 
-      cy.visit('/meta-evaluation/doctor/answers')
+      cy.visit('/meta-evaluation/answers')
+      cy.get('[data-cy=doctle]').click()
       cy.get('[data-cy=content-type-dropdown]').click()
       cy.contains('Only answers').click()
 

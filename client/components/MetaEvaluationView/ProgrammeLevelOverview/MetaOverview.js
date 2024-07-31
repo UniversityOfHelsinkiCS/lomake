@@ -91,7 +91,7 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <Menu secondary>
+      <Menu size="large" secondary>
         <MenuItem header>{titleText}</MenuItem>
         <MenuItem>
           <Button
