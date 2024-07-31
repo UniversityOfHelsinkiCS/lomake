@@ -103,7 +103,6 @@ const ColorTable = React.memo(
     individualAnswers,
     facultyView,
     dropdownFilter,
-    doctoral = false,
     meta,
   }) => {
     const { t } = useTranslation()
@@ -116,6 +115,7 @@ const ColorTable = React.memo(
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+    const doctoral = useSelector(state => state.doctoral)
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 

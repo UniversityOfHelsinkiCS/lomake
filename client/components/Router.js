@@ -43,7 +43,6 @@ export default () => (
 
         <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
         <Route exact path="/meta-evaluation/answers" component={ProgrammeLevelAnswers} />
-        <Route exact path="/meta-evaluation/doctor/answers" render={() => <ProgrammeLevelAnswers doctoral />} />
         <Route
           exact
           path="/meta-evaluation/form/:form/:room"

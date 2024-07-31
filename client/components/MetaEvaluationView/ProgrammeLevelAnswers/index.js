@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Button, Loader, Icon, Dropdown, Input, Header } from 'semantic-ui-react'
+import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
 import useDebounce from 'Utilities/useDebounce'
+import { setDoctoral } from 'Utilities/redux/doctoralReducer'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const doctoralBasedFilter = (doctoral, items, attribute) => {
@@ -17,7 +18,7 @@ const doctoralBasedFilter = (doctoral, items, attribute) => {
     : items.filter(item => !item[attribute].includes('T'))
 }
 
-const ProgrammeLevelAnswers = ({ doctoral = false }) => {
+const ProgrammeLevelAnswers = () => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -26,8 +27,8 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const year = useSelector(state => state.year)
   const form = formKeys.META_EVALUATION
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
+  const doctoral = useSelector(state => state.doctoral)
   const [showing, setShowing] = useState(-1)
-
   const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)
   const [usersProgrammes, setUsersProgrammes] = useState([])
@@ -36,6 +37,7 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter)
   let filteredProgrammes = []
+  const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
 
   const getLabel = question => {
     if (!question) return ''
@@ -46,11 +48,11 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   const questionLabels = filteredQuestions.map(q => getLabel(q))
 
   useEffect(() => {
-    document.title = `${t('evaluation')}`
+    document.title = `${t('metaEvaluationAnswers')}`
     dispatch(setQuestions({ selected: questionLabels, open: [] }))
     dispatch(getAllTempAnswersAction())
     setUsersProgrammes(programmes)
-  }, [lang, t, dispatch, programmes])
+  }, [lang, t, dispatch, programmes, doctoral])
 
   if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
@@ -90,42 +92,61 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
 
   const filteredAnswersList = new Map(Array.from(answersList).map(([key, value]) => [key, filterAnswers(value)]))
 
+  const handleDoctoralChange = () => {
+    dispatch(setDoctoral(!doctoral))
+  }
+
   return (
     <div>
-      <div className="wide-header">
+      <Menu>
+        <MenuItem>
+          <Button onClick={() => history.goBack()} icon="arrow left" />
+        </MenuItem>
         {doctoral ? (
-          <Header as="h3">{`${t('metaEvaluationAnswers').toUpperCase()} ${t('doctoralToggle').toUpperCase()}`}</Header>
+          <MenuItem header>{`${t('metaEvaluationAnswers')} ${t('doctoralToggle')}`}</MenuItem>
         ) : (
-          <Header as="h3">{`${t('metaEvaluationAnswers').toUpperCase()} ${t('bachelorMasterToggle').toUpperCase()}`}</Header>
+          <MenuItem header>{`${t('metaEvaluationAnswers')} ${t('bachelorMasterToggle')}`}</MenuItem>
         )}
-        <Button onClick={() => history.goBack()}>
-          <Icon name="arrow left" />
-          {t('backToFrontPage')}
-        </Button>
-        <Input
-          data-cy="overviewpage-filter"
-          icon="filter"
-          size="small"
-          placeholder={t('programmeFilter')}
-          onChange={handleFilterChange}
-          value={filter}
-        />
-        <FacultyDropdown
-          t={t}
-          programmes={programmes}
-          setUsersProgrammes={setUsersProgrammes}
-          doctoral={doctoral}
-          faculties={faculties}
-          lang={lang}
-        />
-        <Dropdown
-          data-cy="content-type-dropdown"
-          selection
-          options={filterOptions}
-          value={answerFilter}
-          onChange={(_, { value }) => setAnswerFilter(value)}
-        />
-      </div>
+        <MenuItem>
+          <Button
+            data-cy="doctle"
+            onClick={() => handleDoctoralChange()}
+            icon="filter"
+            labelPosition="right"
+            size="big"
+            content={doctoralToggleText}
+          />
+        </MenuItem>
+        <MenuItem>
+          <FacultyDropdown
+            t={t}
+            programmes={programmes}
+            setUsersProgrammes={setUsersProgrammes}
+            doctoral={doctoral}
+            faculties={faculties}
+            lang={lang}
+          />
+        </MenuItem>
+        <MenuItem>
+          <Dropdown
+            data-cy="content-type-dropdown"
+            selection
+            options={filterOptions}
+            value={answerFilter}
+            onChange={(_, { value }) => setAnswerFilter(value)}
+          />
+        </MenuItem>
+        <MenuItem position="right">
+          <Input
+            data-cy="overviewpage-filter"
+            icon="filter"
+            size="small"
+            placeholder={t('programmeFilter')}
+            onChange={handleFilterChange}
+            value={filter}
+          />
+        </MenuItem>
+      </Menu>
       <WrittenAnswers
         year={year}
         questionsList={filteredQuestions}

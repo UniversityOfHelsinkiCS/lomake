@@ -8,6 +8,8 @@ import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
+import { useSelector } from 'react-redux'
+import { setDoctoral } from 'Utilities/redux/doctoralReducer'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -22,11 +24,10 @@ const MetaOverview = ({
   programmes,
   form,
   formType,
-  doctoral,
-  setDoctoral,
   showAllProgrammes,
   setShowAllProgrammes,
 }) => {
+  const doctoral = useSelector(state => state.doctoral)
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
@@ -34,7 +35,6 @@ const MetaOverview = ({
   const [statsToShow, setStatsToShow] = useState(null)
   const [usersProgrammes, setUsersProgrammes] = useState([])
   const debouncedFilter = useDebounce(filter, 200)
-  const linkToAnwers = doctoral ? '/meta-evaluation/doctor/answers' : '/meta-evaluation/answers'
   const titleText = `${t('metaevaluation').toUpperCase()}`
   const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
 
@@ -108,7 +108,7 @@ const MetaOverview = ({
           size="big"
           content={doctoralToggleText}
         />
-        <Button data-cy="nav-report" as={Link} to={linkToAnwers} secondary size="big">
+        <Button data-cy="nav-report" as={Link} to="meta-evaluation/answers" secondary size="big">
           {t('overview:readAnswers')}
         </Button>
         <FacultyDropdown
@@ -149,7 +149,6 @@ const MetaOverview = ({
           formType={formType}
           showAllProgrammes={showAllProgrammes}
           handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
-          doctoral={doctoral}
           meta
         />
       </div>
