@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
+import { Button, Dropdown, Menu, MenuItem, Loader } from 'semantic-ui-react'
 import { filterFromUrl } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 
@@ -87,6 +87,8 @@ const MetaOverview = ({
     }
     return null
   }
+
+  if (programmes.length < 1) <Loader active />
 
   return (
     <>
