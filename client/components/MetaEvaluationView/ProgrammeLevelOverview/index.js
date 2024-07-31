@@ -39,7 +39,6 @@ const ProgrammeLevelOverview = () => {
         <MetaOverview
           t={t}
           lang={lang}
-          currentUser={currentUser}
           dispatch={dispatch}
           faculties={faculties}
           programmes={filteredProgrammes}

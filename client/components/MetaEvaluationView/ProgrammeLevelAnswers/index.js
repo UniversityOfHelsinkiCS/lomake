@@ -98,15 +98,11 @@ const ProgrammeLevelAnswers = () => {
 
   return (
     <div>
-      <Menu>
+      <Menu secondary>
         <MenuItem>
           <Button onClick={() => history.goBack()} icon="arrow left" />
         </MenuItem>
-        {doctoral ? (
-          <MenuItem header>{`${t('metaEvaluationAnswers')} ${t('doctoralToggle')}`}</MenuItem>
-        ) : (
-          <MenuItem header>{`${t('metaEvaluationAnswers')} ${t('bachelorMasterToggle')}`}</MenuItem>
-        )}
+        <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <MenuItem>
           <Button
             data-cy="doctle"

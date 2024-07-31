@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { Button, Dropdown } from 'semantic-ui-react'
-import { isAdmin } from '@root/config/common'
+import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
 import { filterFromUrl } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 
@@ -19,7 +18,6 @@ const MetaOverview = ({
   t,
   lang,
   dispatch,
-  currentUser,
   faculties,
   programmes,
   form,
@@ -52,11 +50,6 @@ const MetaOverview = ({
         prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
     )
   }, [usersProgrammes, lang, debouncedFilter])
-
-  const moreThanFiveProgrammes = useMemo(
-    () => isAdmin(currentUser.data) || (currentUser.data.access && Object.keys(currentUser.data.access).length > 5),
-    [currentUser],
-  )
 
   const handleDoctoralChange = () => {
     dispatch(setDoctoral(!doctoral))
@@ -98,44 +91,52 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-        <h2 className="view-title">{titleText}</h2>
-        <Button
-          data-cy="doctle"
-          onClick={() => handleDoctoralChange()}
-          icon="filter"
-          labelPosition="right"
-          size="big"
-          content={doctoralToggleText}
-        />
-        <Button data-cy="nav-report" as={Link} to="meta-evaluation/answers" secondary size="big">
-          {t('overview:readAnswers')}
-        </Button>
-        <FacultyDropdown
-          t={t}
-          programmes={programmes}
-          setUsersProgrammes={setUsersProgrammes}
-          doctoral={doctoral}
-          faculties={faculties}
-          lang={lang}
-        />
-        <Dropdown
-          data-cy="csv-download"
-          className="button basic gray csv-download"
-          direction="left"
-          text={t('overview:csvDownload')}
-          onClick={() => setShowCsv(!showCsv)}
-        >
-          <Dropdown.Menu>
-            <Dropdown.Item>
-              <CsvDownload wantedData="written" view="overview" form={form} />
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <CsvDownload wantedData="colors" view="overview" form={form} />
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
+      <Menu secondary>
+        <MenuItem header>{titleText}</MenuItem>
+        <MenuItem>
+          <Button
+            data-cy="doctle"
+            onClick={() => handleDoctoralChange()}
+            icon="filter"
+            labelPosition="right"
+            size="big"
+            content={doctoralToggleText}
+          />
+        </MenuItem>
+        <MenuItem>
+          <Button data-cy="nav-report" as={Link} to="meta-evaluation/answers" secondary size="big">
+            {t('overview:readAnswers')}
+          </Button>
+        </MenuItem>
+        <MenuItem>
+          <FacultyDropdown
+            t={t}
+            programmes={programmes}
+            setUsersProgrammes={setUsersProgrammes}
+            doctoral={doctoral}
+            faculties={faculties}
+            lang={lang}
+          />
+        </MenuItem>
+        <MenuItem position="right">
+          <Dropdown
+            data-cy="csv-download"
+            className="button basic gray csv-download"
+            direction="left"
+            text={t('overview:csvDownload')}
+            onClick={() => setShowCsv(!showCsv)}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <CsvDownload wantedData="written" view="overview" form={form} />
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <CsvDownload wantedData="colors" view="overview" form={form} />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </MenuItem>
+      </Menu>
       <div>
         <ColorTable
           filteredProgrammes={filteredProgrammes}
