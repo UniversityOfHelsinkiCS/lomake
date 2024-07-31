@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Button, Loader, Icon, Dropdown, Input } from 'semantic-ui-react'
+import { Button, Loader, Icon, Dropdown, Input, Header } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
@@ -93,7 +93,11 @@ const ProgrammeLevelAnswers = ({ doctoral = false }) => {
   return (
     <div>
       <div className="wide-header">
-        <h1>{t('metaEvaluationAnswers').toUpperCase()}</h1>
+        {doctoral ? (
+          <Header as="h3">{`${t('metaEvaluationAnswers').toUpperCase()} ${t('doctoralToggle').toUpperCase()}`}</Header>
+        ) : (
+          <Header as="h3">{`${t('metaEvaluationAnswers').toUpperCase()} ${t('bachelorMasterToggle').toUpperCase()}`}</Header>
+        )}
         <Button onClick={() => history.goBack()}>
           <Icon name="arrow left" />
           {t('backToFrontPage')}

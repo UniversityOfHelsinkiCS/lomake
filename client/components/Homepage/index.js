@@ -1,55 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
-import {
-  Container,
-  Header,
-  Grid,
-  Divider,
-  Item,
-  ItemMeta,
-  ItemHeader,
-  ItemGroup,
-  Button,
-  Icon,
-  Loader,
-} from 'semantic-ui-react'
-import { formKeys, forms } from '@root/config/data'
+import { Container, Header, Grid, Divider, Loader, List } from 'semantic-ui-react'
+import { formKeys } from '@root/config/data'
 import powerlineImage from 'Assets/APowerlineTower.png'
 import rypsiImage from 'Assets/rypsi.jpg'
 import wheelImage from 'Assets/big_wheel.jpg'
 import calendarImage from 'Assets/calendar.jpg'
-
-const PageItem = ({ title, content }) => (
-  <div data-cy={title} style={{ marginBottom: '30px' }}>
-    <Header as="h3" style={{ textAlign: 'center' }}>
-      {title.toUpperCase()}
-    </Header>
-    <Container textAlign="justified">{content}</Container>
-  </div>
-)
-
-export const DateItem = ({ timestamp, t }) => {
-  const date = new Date(timestamp)
-  const year = date.getUTCFullYear()
-  const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
-  const day = date.getUTCDate()
-
-  let hours = date.getUTCHours()
-  if (hours.toString().length === 1) hours = `0${hours.toString()}`
-  let minutes = date.getUTCMinutes()
-  if (minutes.toString().length === 1) minutes = `0${minutes.toString()}`
-
-  return (
-    <p>
-      {t('formCloses')}: {day}/{month}/{year} {t('clock')}: {hours}:{minutes}
-    </p>
-  )
-}
+import { PageItem, FormCard } from '../Generic/Homepage'
 
 const Homepage = () => {
   const { t } = useTranslation()
@@ -80,9 +41,11 @@ const Homepage = () => {
       show: access,
       title: t('yearlyAssessment'),
       content: (
-        <div>
-          <p>{t('yearlyAssessmentText')}</p>
-        </div>
+        <List bulleted>
+          <List.Item>
+            <i>Vuosiseurantalomake ja sen yleiskatsaus</i>
+          </List.Item>
+        </List>
       ),
       links: ['/yearly'],
       forms: [1],
@@ -155,7 +118,7 @@ const Homepage = () => {
         <p style={{ textAlign: 'center' }}>{t('description')}</p>
         <Grid columns={2} divided style={{ marginTop: '40px' }}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alingItems: 'left' }}>
               {items.map(
                 (item, index) =>
                   item.show && (
@@ -172,49 +135,7 @@ const Homepage = () => {
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
-                  return (
-                    <ItemGroup data-cy={`deadline-label-${dl.form}`} divided key={dl.form}>
-                      <Item>
-                        <div
-                          style={{
-                            width: '150px',
-                            height: '100px',
-                            overflow: 'hidden',
-                            position: 'relative',
-                            marginRight: '10px',
-                          }}
-                        >
-                          <img
-                            src={item.thumbnail}
-                            style={{
-                              position: 'absolute',
-                              top: '50%',
-                              left: '50%',
-                              transform: 'translate(-50%, -50%)',
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                            }}
-                            alt={`Thumbnail for ${forms[dl.form - 1].name}`}
-                          />
-                        </div>
-                        <Item.Content>
-                          <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
-                          <ItemMeta>
-                            <span>
-                              <DateItem timestamp={dl.date} t={t} />
-                            </span>
-                          </ItemMeta>
-                          {item.links.map(link => (
-                            <Button data-cy={`button-${link}`} key={link} as={Link} to={link}>
-                              {t('overview')}
-                              <Icon name="right chevron" />
-                            </Button>
-                          ))}
-                        </Item.Content>
-                      </Item>
-                    </ItemGroup>
-                  )
+                  return <FormCard item={item} dl={dl} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
