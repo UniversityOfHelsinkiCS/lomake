@@ -20,12 +20,11 @@ import MetaEvaluationForm from './MetaEvaluationForm'
 import { metareviewQuestions as questions } from '../../../questionData'
 // tämä on samanlainen kuin Evaluationiew/EvaluationFormView/index.js
 
-const form = formKeys.META_EVALUATION
-
 const ProgrammeLevelForm = ({ room }) => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const form = formKeys.META_EVALUATION
   const user = useSelector(state => state.currentUser.data)
   const currentRoom = useSelector(state => state.room)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
@@ -78,11 +77,7 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <SaveIndicator />
           <div style={{ marginBottom: '2em' }}>
-            {level !== 'tohtori' ? (
-              <Button as={Link} to="/meta-evaluation" icon="arrow left" />
-            ) : (
-              <Button as={Link} to="/meta-evaluation/doctor" icon="arrow left" />
-            )}
+            <Button as={Link} to="/meta-evaluation" icon="arrow left" />
           </div>
           <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
         </div>{' '}

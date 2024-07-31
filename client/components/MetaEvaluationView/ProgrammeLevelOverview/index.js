@@ -4,17 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
+import { setDoctoral } from 'Utilities/redux/doctoralReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const [doctoral, setDoctoral] = useState(false)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
+  const doctoral = useSelector(state => state.doctoral)
   const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
 
@@ -29,8 +30,8 @@ const ProgrammeLevelOverview = () => {
   const filteredProgrammes = usersProgrammes.filter(filterState)
 
   useEffect(() => {
-    document.title = `${t('evaluation')}`
-  }, [lang, doctoral, t])
+    document.title = `${t('metareview')}`
+  }, [lang, t])
 
   return (
     <div>

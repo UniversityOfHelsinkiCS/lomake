@@ -16,6 +16,7 @@ import currentEditors from './currentEditorsReducer'
 import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
+import doctoral from './doctoralReducer'
 
 export default combineReducers({
   form,
@@ -34,4 +35,5 @@ export default combineReducers({
   faculties,
   summaries,
   reformAnswers,
+  doctoral,
 })

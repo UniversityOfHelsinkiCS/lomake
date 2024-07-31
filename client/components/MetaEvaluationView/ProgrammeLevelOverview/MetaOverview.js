@@ -59,7 +59,7 @@ const MetaOverview = ({
   )
 
   const handleDoctoralChange = () => {
-    setDoctoral(!doctoral)
+    dispatch(setDoctoral(!doctoral))
   }
 
   const handleFilterChange = e => setFilter(e.target.value)

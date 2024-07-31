@@ -135,7 +135,7 @@ const Homepage = () => {
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
-                  return <FormCard item={item} dl={dl} t={t} />
+                  return <FormCard key={dl} item={item} dl={dl} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
