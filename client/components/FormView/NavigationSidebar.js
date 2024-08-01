@@ -69,7 +69,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   const location = useLocation()
   const { t } = useTranslation()
   let questionsToShow = questions
-  let linkBase = '/form/'
+  let linkBase = ''
   let isDegreeForm = false
   if (formNumber === formKeys.EVALUATION_PROGRAMMES) {
     questionsToShow = evaluationQuestions
@@ -90,7 +90,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     isDegreeForm = true
   } else if (formType === 'meta-evaluation') {
     questionsToShow = questionData
-    linkBase = ''
+  } else if (formType === formKeys.YEARLY_ASSESSMENT) {
+    linkBase = `/yearly/form/${formNumber}`
   }
 
   let formDataFilter = []
