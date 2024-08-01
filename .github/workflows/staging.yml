@@ -41,8 +41,8 @@ jobs:
       - name: npm ci
         run: npm ci --no-audit --no-fund
 
-      - name: docker-compose up -d
-        run: docker-compose up -d
+      - name: docker compose up -d
+        run: docker compose up -d
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
