@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable prettier/prettier */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
@@ -18,39 +15,90 @@ import {
 } from '@root/config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'yearly', path: '/yearly', access: ['programme'] },
+  yearly: { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },
   evaluation: {
     key: 'evaluation',
     label: 'evaluation',
     items: [
-      { key: 'programme', label: 'programme', path: '/evaluation', access: ['programme'] },
-      { key: 'faculty', label: 'faculty', path: '/evaluation-faculty', access: ['programme'] },
-      { key: 'university', label: 'university', path: '/evaluation-university', access: ['employee'] },
-      { key: 'university-form', label: 'university-form', path: '/evaluation-university/form/6/UNI' },
+      {
+        key: 'programme',
+        label: 'generic:level:programmes',
+        path: '/evaluation',
+        access: ['programme', 'admin', 'evaluationFaculty'],
+      },
+      {
+        key: 'faculty',
+        label: 'generic:level:faculties',
+        path: '/evaluation-faculty',
+        access: ['programme', 'admin', 'evaluationFaculty'],
+      },
+      {
+        key: 'university',
+        label: 'generic:level:university',
+        path: '/evaluation-university/form/6/UNI',
+        access: ['admin', 'evaluationUniversity'],
+      },
+      {
+        key: 'university-overview',
+        label: 'overview:universityOverview',
+        path: '/evaluation-university',
+        access: ['admin', 'evaluationUniversity', 'employee'],
+      },
     ],
   },
   degreeReform: {
     key: 'degreeReform',
-    label: 'degreeReform',
+    label: 'degree-reform',
     items: [
-      { key: 'group', label: 'group', path: '/degree-reform', access: ['programme'] },
-      { key: 'individual', label: 'individual', path: '/individual', access: ['project', 'universityForm'] },
+      { key: 'group', label: 'degree-reform-group', path: '/degree-reform', access: ['programme', 'special'] },
+      {
+        key: 'individual',
+        label: 'degree-reform-individual',
+        path: '/individual',
+        access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
+      },
       {
         key: 'individual-answers',
-        label: 'reform-answers',
+        label: 'generic:degreeReformIndividualAnswers',
         path: '/reform-answers',
-        access: ['project', 'universityForm'],
+        access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
       },
     ],
   },
   metaEvaluation: {
     key: 'meta-evaluation',
-    label: 'metaEvaluation',
+    label: 'metaevaluation',
     path: '/meta-evaluation',
-    access: ['programme'],
+    access: ['programme', 'special'],
   },
-  admin: { key: 'admin', label: 'OSPA', path: '/admin', access: ['programme'] },
+  admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
+
+const LanguageDropdown = ({ t, lang, handleLanguageChange }) => (
+  <Menu.Menu>
+    <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
+      <Dropdown.Menu>
+        <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
+          Suomi
+        </Dropdown.Item>
+        <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
+          Svenska
+        </Dropdown.Item>
+        <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
+          English
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  </Menu.Menu>
+)
+
+const UnHijackButton = ({ handleUnhijack }) => (
+  <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
+    <Label color="green" horizontal>
+      Unhijack
+    </Label>
+  </Menu.Item>
+)
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -90,15 +138,6 @@ const NavBar = () => {
       </a>
     </Menu.Item>
   )
-
-  const UnHijackButton = () => (
-    <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
-      <Label color="green" horizontal>
-        Unhijack
-      </Label>
-    </Menu.Item>
-  )
-
   const renderLogOut = () => (
     <Menu.Menu position="right">
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
@@ -125,63 +164,77 @@ const NavBar = () => {
       history.push(`/evaluation-university/form/6/${uniFormCode}`)
     }
   }
-
-  const LanguageDropdown = () => (
-    <Menu.Menu>
-      <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
-        <Dropdown.Menu>
-          <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
-            Suomi
-          </Dropdown.Item>
-          <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
-            Svenska
-          </Dropdown.Item>
-          <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
-            English
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Menu.Menu>
-  )
+  const hasAccess = accessRights => {
+    if (!accessRights || accessRights.length === 0) return true // If no access rights specified, allow access
+    return accessRights.some(right => {
+      switch (right) {
+        case 'programme':
+          return programmes && programmes.length > 0
+        case 'special':
+          return user.specialGroup && Object.keys(user.specialGroup).length > 0
+        case 'admin':
+          return isAdmin(user)
+        case 'evaluationFaculty':
+          return isEvaluationFacultyUser(user)
+        case 'evaluationUniversity':
+          return isEvaluationUniversityUser(user)
+        case 'employee':
+          return user.iamGroups && user.iamGroups.includes('hy-employees')
+        case 'katselmusProjektiOrOhjausryhma':
+          return isKatselmusProjektiOrOhjausryhma(user)
+        case 'universityForm':
+          return user.specialGroup && user.specialGroup.universityForm
+        default:
+          return false
+      }
+    })
+  }
 
   const renderNavRoutes = () =>
-    Object.values(NavBarItems).map(({ items, key, label, path }) =>
-      items ? (
+    Object.values(NavBarItems).map(({ items, key, label, path, access }) => {
+      if (!hasAccess(access)) return null
+
+      return items ? (
         <MenuItem
           active={items.some(item => location.pathname.includes(item.path))}
           as={Dropdown}
-          data-cy={`navbar-${key}`}
+          data-cy={`nav-${key}`}
           key={`menu-item-drop-${key}`}
           tabIndex="-1"
           text={t(label)}
         >
           <Dropdown.Menu>
-            {items.map(item => (
-              <Dropdown.Item
-                as={Link}
-                data-cy={`navbar-${item.key}`}
-                key={`menu-item-${item.path}`}
-                tabIndex="-1"
-                to={item.path}
-              >
-                {item.label}
-              </Dropdown.Item>
-            ))}
+            {items.map(item => {
+              if (!hasAccess(item.access)) return null
+              return (
+                <Dropdown.Item
+                  as={Link}
+                  data-cy={`nav-${item.key}`}
+                  key={`menu-item-${item.path}`}
+                  tabIndex="-1"
+                  to={item.path}
+                >
+                  {t(item.label)}
+                </Dropdown.Item>
+              )
+            })}
           </Dropdown.Menu>
         </MenuItem>
       ) : (
-        <MenuItem as={Link} data-cy={`navbar-${key}`} key={`menu-item-${path}`} tabIndex="-1" to={path}>
+        <MenuItem as={Link} data-cy={`nav-${key}`} key={`menu-item-${path}`} tabIndex="-1" to={path}>
           {t(label)}
         </MenuItem>
-      ),
-    )
+      )
+    })
+
+  if (location.pathname.startsWith('/evaluation-faculty/previous-years') || !user) return null
 
   return (
     <Menu size="huge" fluid stackable>
       {renderHome()}
       {renderNavRoutes()}
       {renderContact()}
-      <LanguageDropdown lang={lang} handleLanguageChange={handleLanguageChange} />
+      <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
       {renderLogOut()}
     </Menu>
   )

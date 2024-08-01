@@ -27,9 +27,9 @@ describe('homepage tests', () => {
   })
 
   it('Should not see ospa', () => {
-    const klemdu = 'cypressJoryUser'
+    const user = 'cypressJoryUser'
 
-    cy.login(klemdu)
+    cy.login(user)
     cy.visit('/')
 
     cy.get('[data-cy=OSPA]').should('not.exist')
