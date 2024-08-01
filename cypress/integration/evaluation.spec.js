@@ -135,7 +135,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-committee]').click()
+      cy.get('[data-cy=nav-university]').click()
 
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
       cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").click()
@@ -170,7 +170,7 @@ describe('Evaluation forms tests', () => {
         'TINE: Doctoral is not doing so good',
       )
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-university-overview]').click()
+      cy.get('[data-cy=nav-university-overview]').click()
 
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should(
         'have.css',
@@ -204,7 +204,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-committee]').click()
+      cy.get('[data-cy=nav-university]').click()
 
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
       cy.get("[data-cy='color-neutral-student_admittance_university-university-master']").click()
@@ -223,7 +223,7 @@ describe('Evaluation forms tests', () => {
       cy.typeInEditor('student_admittance_university-arviointi-doctoral', 'TINE: Doctoral is not doing so good')
 
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-university-overview]').click()
+      cy.get('[data-cy=nav-university-overview]').click()
 
       // At start all levels are visible
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should('be.visible')
@@ -264,7 +264,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-committee]').click()
+      cy.get('[data-cy=nav-university]').click()
       cy.wait(100)
       cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-1']").type(
         'Master: This is a development area',
@@ -283,7 +283,7 @@ describe('Evaluation forms tests', () => {
       cy.wait(100)
 
       cy.get('[data-cy=nav-evaluation]').click()
-      cy.get('[data-cy=nav-evaluation-option-university-overview]').click()
+      cy.get('[data-cy=nav-university-overview]').click()
 
       cy.get('[data-cy=university_ease_of_study_actions-university-master]').click()
       cy.get("[data-cy='modal-title-action-1']").contains('Master: This is a development area')

@@ -5,7 +5,7 @@ import { formKeys } from '@root/config/data'
 
 import { wsConnect } from 'Utilities/redux/websocketReducer'
 import { loginAction } from 'Utilities/redux/currentUserReducer'
-import NavBar from 'Components/NavigationBar'
+import NavBar from 'Components/NavBar'
 import Router from 'Components/Router'
 import { getStudyProgrammes, getUsersProgrammes } from 'Utilities/redux/studyProgrammesReducer'
 import { getDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
