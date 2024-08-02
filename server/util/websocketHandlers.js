@@ -35,14 +35,10 @@ const withLogging = fn => {
 }
 
 const logAndEmit = (socket, event, payload) => {
-  const { uid } = socket.request.headers
-  logger.info(`[WS] EMIT ${event} from=${uid} to=${uid} ${JSON.stringify(payload)}`)
   socket.emit(event, payload)
 }
 
 const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
-  const { uid } = socket.request.headers
-  logger.info(`[WS] EMIT ${event} from=${uid} to=${room} UUID=${uuid} ${JSON.stringify(payload)}`)
   socket.to(room).emit(event, payload)
 }
 
