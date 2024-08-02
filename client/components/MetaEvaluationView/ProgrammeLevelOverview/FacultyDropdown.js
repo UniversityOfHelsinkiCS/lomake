@@ -17,7 +17,7 @@ const FacultyDropdown = ({ t, programmes, setUsersProgrammes, doctoral, facultie
     const filteredPrograms = facultyData.programmes
       .filter(item => (doctoral ? item.level === 'doctoral' : item.level !== 'doctoral'))
       .map(program => program.key)
-  
+
     setUsersProgrammes(programmes.filter(a => filteredPrograms.includes(a.key)))
   }
 
@@ -34,16 +34,16 @@ const FacultyDropdown = ({ t, programmes, setUsersProgrammes, doctoral, facultie
             {t('report:all')}
           </Dropdown.Item>
           {faculties?.data
-          .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-          .map(faculty => (
-            <Dropdown.Item
-              data-cy={`dropdown-item-${faculty.code}`}
-              key={faculty.code}
-              onClick={() => handleDropdownFilter(faculty)}
-            >
-              {faculty.name[lang]}
-            </Dropdown.Item>
-          ))}
+            .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
+            .map(faculty => (
+              <Dropdown.Item
+                data-cy={`dropdown-item-${faculty.code}`}
+                key={faculty.code}
+                onClick={() => handleDropdownFilter(faculty)}
+              >
+                {faculty.name[lang]}
+              </Dropdown.Item>
+            ))}
         </Dropdown.Menu>
       </Dropdown>
     </div>

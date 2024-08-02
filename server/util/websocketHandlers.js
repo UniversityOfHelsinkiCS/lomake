@@ -38,7 +38,7 @@ const logAndEmit = (socket, event, payload) => {
   socket.emit(event, payload)
 }
 
-const logAndEmitToRoom = (socket, room, event, payload, uuid) => {
+const logAndEmitToRoom = (socket, room, event, payload) => {
   socket.to(room).emit(event, payload)
 }
 
@@ -186,7 +186,7 @@ const updateField = async (socket, payload, io, uuid) => {
             },
           },
         )
-        logAndEmitToRoom(socket, room, 'new_form_data', data, uuid)
+        logAndEmitToRoom(socket, room, 'new_form_data', data)
       } else {
         // This can happen, at least in dev, when the programme is new and was added after deadlines are updated. Updating deadlines may fix.
         logger.error(`PANIC this should never happen: ${uuid}`)

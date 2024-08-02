@@ -42,7 +42,7 @@ const NavBarItems = {
         key: 'university-overview',
         label: 'overview:universityOverview',
         path: '/evaluation-university',
-        access: ['admin', 'programme', 'evaluationUniversity', 'employee'],
+        access: [],
       },
       {
         key: 'meta-evaluation',
@@ -122,8 +122,8 @@ const NavBar = () => {
     window.location.reload()
   }
 
-  const renderHome = () => (
-    <Menu.Item as={Link} to="/">
+  const renderHome = route => (
+    <Menu.Item as={Link} to={route}>
       <Popup
         content={t('toFrontpage')}
         trigger={<img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="homepage" />}
@@ -232,7 +232,7 @@ const NavBar = () => {
 
   return (
     <Menu size="huge" fluid stackable>
-      {renderHome()}
+      {user.access.length > 0 ? renderHome('/') : renderHome('/yearly')}
       {renderNavRoutes()}
       {renderContact()}
       <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
