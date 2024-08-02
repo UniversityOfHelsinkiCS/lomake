@@ -220,9 +220,9 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (formType === 'meta-evaluation' && !doctoral) {
+    } else if (meta && !doctoral) {
       tableClassName = '-meta-evaluation'
-    } else if (doctoral) {
+    } else if (meta && doctoral) {
       tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {
@@ -329,33 +329,33 @@ const ColorTable = React.memo(
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })
             : sortedAllProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })}
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })}
         </div>
       </>
     )
