@@ -37,7 +37,7 @@
     "i18next": "^21.8.14",
     "jsdom": "^21.1.1",
     "lodash": "^4.17.21",
-    "lru-cache": "^10.0.1",
+    "lru-cache": "^11.0.0",
     "markdown-draft-js": "^2.2.0",
     "module-alias": "^2.2.2",
     "moment": "^2.29.4",
