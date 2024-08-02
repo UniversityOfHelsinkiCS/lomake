@@ -133,6 +133,10 @@ const SummaryRow = ({ setStatsToShow, stats, selectedAnswers, tableIds, form }) 
                   color: '#ff7f7f',
                   value: stats[idObject.id].red || 0,
                 },
+                {
+                  color: '#808080',
+                  value: stats[idObject.id].gray || 0,
+                },
               ]}
               labelPosition={50}
               lengthAngle={360}
