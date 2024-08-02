@@ -26,18 +26,18 @@ const ProgrammeLevelAnswers = () => {
   const answers = useSelector(state => state.tempAnswers)
   const year = useSelector(state => state.year)
   const form = formKeys.META_EVALUATION
-  const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
+  const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const doctoral = useSelector(state => state.doctoral)
   const [showing, setShowing] = useState(-1)
   const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)
-  const [usersProgrammes, setUsersProgrammes] = useState([])
   const [answerFilter, setAnswerFilter] = useState('both')
   const filteredQuestions = doctoralBasedFilter(doctoral, questionsList, 'id')
   const [filter, setFilter] = useState('')
-  const debouncedFilter = useDebounce(filter)
+  const debouncedFilter = useDebounce(filter, 200)
   let filteredProgrammes = []
   const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
+  const baseUrl = '/meta-evaluation/answers'
 
   const getLabel = question => {
     if (!question) return ''
@@ -51,8 +51,7 @@ const ProgrammeLevelAnswers = () => {
     document.title = `${t('metaEvaluationAnswers')}`
     dispatch(setQuestions({ selected: questionLabels, open: [] }))
     dispatch(getAllTempAnswersAction())
-    setUsersProgrammes(programmes)
-  }, [lang, t, dispatch, programmes, doctoral])
+  }, [lang, t, dispatch, doctoral])
 
   if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
@@ -88,7 +87,15 @@ const ProgrammeLevelAnswers = () => {
     }))
   }
 
-  const handleFilterChange = e => setFilter(e.target.value)
+  const handleDropdownFilterChange = value => {
+    window.history.pushState({}, '', `${baseUrl}${doctoral ? '/doctoral' : ''}?filter=${value}`)
+    setFilter(value)
+  }
+
+  const handleFilterChange = e => {
+    window.history.pushState({}, '', `${baseUrl}${doctoral ? '/doctoral' : ''}?filter=${e.target.value}`)
+    setFilter(e.target.value)
+  }
 
   const filteredAnswersList = new Map(Array.from(answersList).map(([key, value]) => [key, filterAnswers(value)]))
 
@@ -98,9 +105,9 @@ const ProgrammeLevelAnswers = () => {
 
   return (
     <div style={{ width: '80%' }}>
-      <Menu size="large">
+      <Menu size="large" secondary>
         <MenuItem>
-          <Button onClick={() => history.goBack()} icon="arrow left" />
+          <Button onClick={() => history.push('/meta-evaluation')} icon="arrow left" />
         </MenuItem>
         <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <MenuItem>
@@ -116,11 +123,11 @@ const ProgrammeLevelAnswers = () => {
         <MenuItem>
           <FacultyDropdown
             t={t}
-            programmes={programmes}
-            setUsersProgrammes={setUsersProgrammes}
-            doctoral={doctoral}
+            programmes={usersProgrammes}
+            handleFilterChange={handleDropdownFilterChange}
             faculties={faculties}
             lang={lang}
+            debouncedFilter={debouncedFilter}
           />
         </MenuItem>
         <MenuItem>
