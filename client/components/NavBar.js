@@ -232,7 +232,7 @@ const NavBar = () => {
 
   return (
     <Menu size="huge" fluid stackable>
-      {user.access.length > 0 ? renderHome('/') : renderHome('/yearly')}
+      {renderHome('/')}
       {renderNavRoutes()}
       {renderContact()}
       <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
