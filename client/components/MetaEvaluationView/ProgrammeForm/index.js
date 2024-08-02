@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
 import { Loader, Button } from 'semantic-ui-react'

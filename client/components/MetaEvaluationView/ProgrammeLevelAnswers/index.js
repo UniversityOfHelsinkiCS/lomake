@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { modifiedQuestions, answersByQuestions, filterFromUrl } from 'Utilities/common'
@@ -22,7 +22,6 @@ const ProgrammeLevelAnswers = () => {
   const lang = useSelector(state => state.language)
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const history = useHistory()
   const answers = useSelector(state => state.tempAnswers)
   const year = useSelector(state => state.year)
   const form = formKeys.META_EVALUATION
@@ -109,7 +108,7 @@ const ProgrammeLevelAnswers = () => {
     <div style={{ width: '80%' }}>
       <Menu size="large" secondary>
         <MenuItem>
-          <Button onClick={() => history.push('/meta-evaluation')} icon="arrow left" />
+          <Button as={Link} to={filter ? `/meta-evaluation?filter=${filter}` : '/meta-evaluation'} icon="arrow left" />
         </MenuItem>
         <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <MenuItem>

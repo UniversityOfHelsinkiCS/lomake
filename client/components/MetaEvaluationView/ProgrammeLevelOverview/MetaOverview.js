@@ -114,7 +114,13 @@ const MetaOverview = ({
           />
         </MenuItem>
         <MenuItem>
-          <Button data-cy="nav-report" as={Link} to="meta-evaluation/answers" secondary size="big">
+          <Button
+            data-cy="nav-report"
+            as={Link}
+            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            secondary
+            size="big"
+          >
             {t('overview:readAnswers')}
           </Button>
         </MenuItem>
