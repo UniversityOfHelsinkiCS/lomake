@@ -47,7 +47,7 @@ const MetaOverview = ({
     return usersProgrammes.filter(
       prog =>
         prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
+        prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
     )
   }, [usersProgrammes, lang, debouncedFilter])
 

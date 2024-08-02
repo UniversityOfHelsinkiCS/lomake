@@ -60,7 +60,7 @@ const ProgrammeLevelAnswers = () => {
   filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key').filter(
     prog =>
       prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
+      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
   )
 
   const answersList =
