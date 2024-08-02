@@ -329,33 +329,33 @@ const ColorTable = React.memo(
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
-              return (
-                <TableRow
-                  p={p}
-                  selectedAnswers={selectedAnswers}
-                  tableIds={tableIds}
-                  setModalData={setModalData}
-                  setProgramControlsToShow={setProgramControlsToShow}
-                  key={p.key}
-                  formType={formType}
-                  form={form}
-                />
-              )
-            })
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })
             : sortedAllProgrammes.map(p => {
-              return (
-                <TableRow
-                  p={p}
-                  selectedAnswers={selectedAnswers}
-                  tableIds={tableIds}
-                  setModalData={setModalData}
-                  setProgramControlsToShow={setProgramControlsToShow}
-                  key={p.key}
-                  formType={formType}
-                  form={form}
-                />
-              )
-            })}
+                return (
+                  <TableRow
+                    p={p}
+                    selectedAnswers={selectedAnswers}
+                    tableIds={tableIds}
+                    setModalData={setModalData}
+                    setProgramControlsToShow={setProgramControlsToShow}
+                    key={p.key}
+                    formType={formType}
+                    form={form}
+                  />
+                )
+              })}
         </div>
       </>
     )
