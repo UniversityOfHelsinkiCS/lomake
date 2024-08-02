@@ -6,6 +6,12 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
 
   useEffect(() => {
     if (debouncedFilter === '') setDropdownText(t('chooseFaculty'))
+    else
+      setDropdownText(
+        faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
+          ? faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
+          : t('chooseFaculty'),
+      )
   }, [debouncedFilter])
 
   const handleDropdownFilter = faculty => {
