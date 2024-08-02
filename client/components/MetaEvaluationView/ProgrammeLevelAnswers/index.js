@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
+import { modifiedQuestions, answersByQuestions, filterFromUrl } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
@@ -49,6 +49,8 @@ const ProgrammeLevelAnswers = () => {
 
   useEffect(() => {
     document.title = `${t('metaEvaluationAnswers')}`
+    const filterQuery = filterFromUrl()
+    if (filterQuery) setFilter(filterQuery)
     dispatch(setQuestions({ selected: questionLabels, open: [] }))
     dispatch(getAllTempAnswersAction())
   }, [lang, t, dispatch, doctoral])
