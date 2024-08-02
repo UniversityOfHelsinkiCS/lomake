@@ -42,7 +42,13 @@ const NavBarItems = {
         key: 'university-overview',
         label: 'overview:universityOverview',
         path: '/evaluation-university',
-        access: ['admin', 'evaluationUniversity', 'employee'],
+        access: ['admin', 'programme', 'evaluationUniversity', 'employee'],
+      },
+      {
+        key: 'meta-evaluation',
+        label: 'metaevaluation',
+        path: '/meta-evaluation',
+        access: ['programme', 'special'],
       },
     ],
   },
@@ -64,12 +70,7 @@ const NavBarItems = {
         access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
       },
     ],
-  },
-  metaEvaluation: {
-    key: 'meta-evaluation',
-    label: 'metaevaluation',
-    path: '/meta-evaluation',
-    access: ['programme', 'special'],
+    access: ['programme'],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
