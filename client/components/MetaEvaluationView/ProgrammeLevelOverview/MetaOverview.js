@@ -39,7 +39,7 @@ const MetaOverview = ({
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) setFilter(filterQuery)
-    document.title = t('evaluation')
+    document.title = t('metaevaluation')
     setUsersProgrammes(programmes)
   }, [dispatch, t, lang, programmes])
 
@@ -55,7 +55,15 @@ const MetaOverview = ({
     dispatch(setDoctoral(!doctoral))
   }
 
-  const handleFilterChange = e => setFilter(e.target.value)
+  const handleDropdownFilterChange = value => {
+    window.history.pushState({}, '', `/meta-evaluation?filter=${value}`)
+    setFilter(value)
+  }
+
+  const handleFilterChange = e => {
+    window.history.pushState({}, '', `/meta-evaluation?filter=${e.target.value}`)
+    setFilter(e.target.value)
+  }
 
   const renderModal = () => {
     if (modalData) {
@@ -114,10 +122,10 @@ const MetaOverview = ({
           <FacultyDropdown
             t={t}
             programmes={programmes}
-            setUsersProgrammes={setUsersProgrammes}
-            doctoral={doctoral}
+            handleFilterChange={handleDropdownFilterChange}
             faculties={faculties}
             lang={lang}
+            debouncedFilter={debouncedFilter}
           />
         </MenuItem>
         <MenuItem position="right">
