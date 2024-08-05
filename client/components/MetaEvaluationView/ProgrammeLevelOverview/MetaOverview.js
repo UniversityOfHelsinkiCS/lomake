@@ -105,16 +105,6 @@ const MetaOverview = ({
         <MenuItem header>{titleText}</MenuItem>
         <MenuItem>
           <Button
-            data-cy="doctle"
-            onClick={() => handleDoctoralChange()}
-            icon="filter"
-            labelPosition="right"
-            size="big"
-            content={doctoralToggleText}
-          />
-        </MenuItem>
-        <MenuItem>
-          <Button
             data-cy="nav-report"
             as={Link}
             to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
@@ -123,6 +113,15 @@ const MetaOverview = ({
           >
             {t('overview:readAnswers')}
           </Button>
+        </MenuItem>
+        <MenuItem>
+          <Button
+            className="button basic gray"
+            data-cy="doctle"
+            onClick={() => handleDoctoralChange()}
+            size="big"
+            content={doctoralToggleText}
+          />
         </MenuItem>
         <MenuItem>
           <FacultyDropdown
