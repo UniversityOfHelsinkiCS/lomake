@@ -303,7 +303,7 @@ const ColorTable = React.memo(
                 <Input
                   style={{ marginBottom: '0.5em' }}
                   data-cy="overviewpage-filter"
-                  icon="filter"
+                  icon="search"
                   size="small"
                   placeholder={t('programmeFilter')}
                   onChange={handleFilterChange}

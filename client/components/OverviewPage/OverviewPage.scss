@@ -165,9 +165,12 @@ $METADOCTORAL_COUNT: 9;
 
   &-categories {
     @include sticky-header-basics();
+    height: 175px;
     word-wrap: break-word;
     text-align: center;
     font-weight: bold;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 }
 
