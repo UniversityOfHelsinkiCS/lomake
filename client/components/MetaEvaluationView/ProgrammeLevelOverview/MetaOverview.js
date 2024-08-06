@@ -101,8 +101,10 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <Menu size="large" secondary>
-        <MenuItem header>{titleText}</MenuItem>
+      <Menu size="large" className="filter-row" secondary>
+        <MenuItem header>
+          <h2>{titleText}</h2>
+        </MenuItem>
         <MenuItem>
           <Button
             data-cy="nav-report"

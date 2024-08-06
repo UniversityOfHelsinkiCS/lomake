@@ -2,15 +2,6 @@ $QUESTION_COUNT: 14;
 
 @import '../../../assets/colors.scss';
 
-.wide-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 2fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
-
 .view-title {
   margin-right: 1em;
   margin-top: 1em,
@@ -93,10 +84,6 @@ $QUESTION_COUNT: 14;
     text-align: center;
     font-weight: bold;
   }
-}
-
-.year-filter-label {
-  font-size: 17px;
 }
 
 @mixin container-basics {

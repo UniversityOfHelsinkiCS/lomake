@@ -123,6 +123,10 @@ label {
   }
 }
 
+.filter-row {
+  width: 100%;
+}
+
 // These css styles are applied, when user opens the print dialogue in browser.
 @media print {
   .hide-in-print-mode,
