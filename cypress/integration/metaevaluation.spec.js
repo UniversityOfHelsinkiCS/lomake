@@ -120,27 +120,27 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.visit(`/meta-evaluation/form/7/${testProgrammeCodeDoctor}`)
-      cy.get('[data-cy=textarea-1]').click()
-      cy.get('[data-cy=textarea-1]').type('2345')
-      cy.get('[data-cy=save-button-1]').click()
+      cy.get('[data-cy=textarea-T1]').click()
+      cy.get('[data-cy=textarea-T1]').type('2345')
+      cy.get('[data-cy=save-button-T1]').click()
 
-      cy.get('[data-cy=textarea-1_comment]').click()
-      cy.get('[data-cy=textarea-1_comment]').type('3456')
-      cy.get('[data-cy=save-button-1_comment]').click()
+      cy.get('[data-cy=textarea-T1_comment]').click()
+      cy.get('[data-cy=textarea-T1_comment]').type('3456')
+      cy.get('[data-cy=save-button-T1_comment]').click()
 
       cy.visit('/meta-evaluation/answers')
       cy.get('[data-cy=doctle]').click()
       cy.get('[data-cy=content-type-dropdown]').click()
       cy.contains('Only answers').click()
 
-      cy.get('[data-cy=report-question-1_text]').click()
-      cy.get('[data-cy=report-question-content-1_text]').contains('2345')
+      cy.get('[data-cy=report-question-T1_text]').click()
+      cy.get('[data-cy=report-question-content-T1_text]').contains('2345')
 
       cy.get('[data-cy=content-type-dropdown]').click()
       cy.contains('Only comments').click()
 
-      cy.get('[data-cy=report-question-1_text]').click()
-      cy.get('[data-cy=report-question-content-1_text]').contains('3456')
+      cy.get('[data-cy=report-question-T1_text]').click()
+      cy.get('[data-cy=report-question-content-T1_text]').contains('3456')
     })
   })
 })
