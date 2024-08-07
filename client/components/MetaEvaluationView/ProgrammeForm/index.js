@@ -67,7 +67,9 @@ const ProgrammeLevelForm = ({ room }) => {
   if (!user || !room) return <Redirect to="/" />
   if (!programme || !answers) return <Loader active inline="centered" />
 
-  const questionData = room.startsWith('T') ? metareviewDoctoralQuestions : metareviewQuestions
+  const questions = room.startsWith('T') ? metareviewDoctoralQuestions : metareviewQuestions
+  const level = room.startsWith('T') ? 'tohtori' : 'kandimaisteri'
+  const questionData = questions.filter(q => q.level === level)
 
   return (
     <div className="form-container">
