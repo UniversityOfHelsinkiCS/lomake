@@ -189,7 +189,7 @@ const ColorTable = React.memo(
           }
           return [
             ...acc,
-            { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+            { id: cur.id, shortLabel: cur.shortLabel[lang], label: cur.label[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
           ]
         }, [])
 
