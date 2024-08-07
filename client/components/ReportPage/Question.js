@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 import QuestionTitle from './QuestionTitle'
 
-const Question = ({ answers, question, chosenProgrammes, handleClick, showing, meta }) => {
+const Question = ({ answers, question, chosenProgrammes, handleClick, showing }) => {
   const { t } = useTranslation()
   const [chosenColor, setChosenColor] = useState('all')
 
