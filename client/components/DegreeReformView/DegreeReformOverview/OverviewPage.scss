@@ -1,22 +1,6 @@
 @import '../../assets/colors.scss';
 
-.wide-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 2fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
 
-.wideish-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
 
 .view-title {
   margin-right: 1em;
