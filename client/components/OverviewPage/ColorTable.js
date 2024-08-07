@@ -16,6 +16,7 @@ import {
   evaluationQuestions,
   degreeReformIndividualQuestions,
   metareviewQuestions,
+  metareviewDoctoralQuestions,
 } from '../../questionData'
 
 const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
@@ -157,8 +158,11 @@ const ColorTable = React.memo(
 
       questionsToShow = degreeReformQuestions
     } else if (formType === 'meta-evaluation') {
-      if (doctoral) questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
-      else questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
+      if (doctoral) {
+        questionsToShow = metareviewDoctoralQuestions
+      } else {
+        questionsToShow = metareviewQuestions
+      }
     }
     let tableIds = null
 

@@ -1,0 +1,283 @@
+[{
+    "title": {
+      "fi": "Tohtorin tutkinnon suorittaminen tavoiteajassa",
+      "se": "Avläggande av doktorsexamen inom målsatt tid",
+      "en": "Completion of doctoral degrees within the target duration"
+    },
+    "level": "tohtori",
+    "parts": [
+      {
+        "id": "1",
+        "index": 1,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Opetussuunnitelman uudistaminen",
+          "se": "Läroplanreform",
+          "en": "Curriculum reform"
+        },
+        "label": {
+          "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
+          "en": "Doctoral programmes will redesign their curricula so that doctoral degrees can be completed within the target duration",
+          "se": "Doktorandprogrammen ser över sina undervisningsplaner så att doktorsexamen kan avläggas inom utsatt tid"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "2",
+        "index": 2,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Kurssimuotoisen opetuksen",
+          "se": "Kursformad undervisning",
+          "en": "Course-based teaching"
+        },
+        "label": {
+          "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin",
+          "en": "The amount, content and role of course-based teaching in doctoral degrees must be examined critically and based on data from comparable countries",
+          "se": "Den kursformade undervisningens omfattning, innehåll och roll i doktorsexamen bör granskas kritiskt. Det är motiverat att granska dem i jämförelse med referensländer"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "3",
+        "index": 3,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Tohtoriohjelmien yhteistyö",
+          "se": "Doktorandprogramsamarbete",
+          "en": "Doctoral program cooperation"
+        },
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
+          "en": "As the number of doctoral researchers increases, collaboration between doctoral programmes will support effective doctoral education",
+          "se": "Samarbete mellan doktorandprogram stöder en smidig doktorsutbildning när antalet doktorander ökar"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "4",
+        "index": 4,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Ohjauskäytänteiden vaihtelu",
+          "se": "Variation handledningspraxis",
+          "en": "Supervision practices variation"
+        },
+        "label": {
+          "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
+          "en": "With the variation in supervision practices, supervisor training could be targeted to the doctoral programmes that have already identified this as a problem",
+          "se": "Handledningspraxis varierar, och därför skulle handledarutbildningen kunna inriktas på de doktorandprogram där detta redan är ett identifierat problem"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+      {
+        "id": "5",
+        "index": 5,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Ohjauskäytäntöjen kehittäminen",
+          "se": "Utveckling handledningspraxis",
+          "en": "Supervision practices development"
+        },
+        "label": {
+          "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
+          "en": "As the volume of doctoral researchers grows, the University will develop supervision practices, including peer support and supervision",
+          "se": "I takt med att volymen doktorander ökar, utvecklar universitetet sin handledningspraxis inklusive kamratstöd och kamrathandledning"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Nivelvaihe maisterista tohtoriin",
+      "se": "Övergången från magister till doktor",
+      "en": "The transition stage from master’s to doctoral studies"
+    },
+    "level": "tohtori",
+    "parts": [
+      {
+        "id": "6",
+        "index": 6,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Rekrytoinnin suunnittelu",
+          "se": "Rekryteringsplanering",
+          "en": "Recruitment planning"
+        },
+        "label": {
+          "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
+          "en": "It is recommended that practices supporting recruitment to doctoral education be planned in each field through collaboration between doctoral and master’s programmes",
+          "se": "Det rekommenderas att praxis för rekrytering till doktorsutbildning utformas inom varje disciplin som ett samarbete mellan doktorand- och magisterprogrammen"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Uuden tutkijakoulurakenteen vakinaistaminen",
+      "se": "Etablering av den nya forskarskolestrukturen",
+      "en": "Consolidating the new doctoral school structure"
+    },
+    "level": "tohtori",
+    "parts": [
+      {
+        "id": "7",
+        "index": 7,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Tutkijakoulun kehittäminen",
+          "se": "Utveckling forskarskola",
+          "en": "Research school development"
+        },
+        "label": {
+          "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
+          "en": "The University will continue to develop practices and procedures for its single doctoral school, taking into account the versatility of doctoral education and field-specific starting points",
+          "se": "Universitetet fortsätter utveckla sin forskarskolas verksamhetssätt med beaktande av doktorsutbildningens heterogenitet och disciplinernas olika utgångspunkter"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
+      "se": "Utveckling av doktorsutbildningens programportfölj som helhet",
+      "en": "Developing the doctoral programme portfolio comprehensively"
+    },
+    "level": "tohtori",
+    "parts": [
+      {
+        "id": "8",
+        "index": 8,
+        "type": "META_ENTITY",
+        "shortLabel": {
+          "fi": "Ohjelmien yhteistyö",
+          "se": "Programsamarbete",
+          "en": "Program cooperation"
+        },
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
+          "en": "By increasing collaboration between doctoral programmes and possibly merging programmes, the University can offer doctoral researchers more multidisciplinary research environments and support the leadership and coordination of programmes",
+          "se": "Genom att intensifiera samarbetet mellan doktorandprogrammen och eventuellt sammanslå program kan universitetet erbjuda doktorander mer mångdisciplinära forskningsmiljöer och få fördelar för programledning och koordinering"
+        },
+        "level": "tohtori",
+        "description": {
+          "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
+        },
+        "required": true,
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        }
+      },
+        {
+          "id": "9",
+          "index": 9,
+          "type": "META_ENTITY",
+          "shortLabel": {
+            "fi": "Yhteistyömahdollisuuksien tarkastelu",
+            "se": "Utforska möjligheter till samarbete",
+            "en": "Exploring opportunities for cooperation"
+          },
+          "label": {
+            "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
+            "en": "As the number of doctoral researchers is set to increase, it is necessary to explore collaboration opportunities between the programmes within the University and with other universities",
+            "se": "På grund av den ökande doktorandvolymen är det nödvändigt att undersöka doktorandprogrammens möjligheter till samarbete, både inom och utanför universitetet"
+          },
+          "level": "tohtori",
+          "description": {
+            "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
+            "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+            "en": "How does the development target concern the program and how can the measures be implemented?"
+          },
+          "required": true,
+          "extrainfo": {
+            "fi": "",
+            "se": "",
+            "en": ""
+          }
+        }
+      ]
+    }]
