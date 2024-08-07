@@ -1,25 +1,36 @@
 import React, { useState } from 'react'
-import { Accordion, Grid, Icon, Label, Dropdown } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Label, Popup, Button, ButtonGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 import QuestionTitle from './QuestionTitle'
+
+const ButtonPopup = ({ color, setChosenColor, t }) => (
+  <Popup
+    content={`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}
+    trigger={
+      <Button
+        size="mini"
+        color={color === 'all' ? 'black' : color}
+        aria-label="Choose color"
+        key={color}
+        name={color}
+        onClick={() => setChosenColor(color)}
+      >
+        {color === 'all' && <span>{t('all')}</span>}
+      </Button>
+    }
+  />
+)
 
 const Question = ({ answers, question, chosenProgrammes, handleClick, showing, meta }) => {
   const { t } = useTranslation()
   const [chosenColor, setChosenColor] = useState('all')
 
-  const buttonColors = [
-    { key: 'all', text: t('all'), value: 'all' },
-    { key: 'green', text: t('green'), value: 'green' },
-    { key: 'yellow', text: t('yellow'), value: 'yellow' },
-    { key: 'red', text: t('red'), value: 'red' },
-  ]
+  const buttonColors = ['all', 'green', 'yellow', 'red']
 
-  if (meta) buttonColors.push({ key: 'gray', text: t('gray'), value: 'gray' })
+  if (meta) buttonColors.push('gray')
 
   const commentAppendix = `${t('comment')}:\n\n`
-
-  const handleChange = (_, { value }) => setChosenColor(value)
 
   return (
     <>
@@ -58,7 +69,18 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
         <Accordion.Content active={showing === question.id} className="question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
           <div className="color-buttons noprint" style={{ paddingBottom: '1em' }}>
-            <Dropdown onChange={handleChange} text={t(chosenColor)} options={buttonColors} value={chosenColor} />
+            <ButtonGroup>
+              {buttonColors.map(color => (
+                <ButtonPopup
+                  key={color}
+                  color={color}
+                  circular
+                  t={t}
+                  chosenColor={chosenColor}
+                  setChosenColor={setChosenColor}
+                />
+              ))}
+            </ButtonGroup>
           </div>
           {answers.length > 0 ? (
             answers
