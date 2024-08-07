@@ -1,34 +1,32 @@
 import React, { useState } from 'react'
-import { Accordion, Grid, Icon, Label, Popup, Button, ButtonGroup } from 'semantic-ui-react'
+import { Accordion, Grid, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
 import QuestionTitle from './QuestionTitle'
 
-const ButtonPopup = ({ color, setChosenColor, t }) => (
+const ButtonPopup = ({ color, chosenColor, setChosenColor, t }) => (
   <Popup
     content={`${t('choose')} ${t('colors', { context: color })} ${t('answers')}`}
     trigger={
-      <Button
-        size="mini"
-        color={color === 'all' ? 'black' : color}
+      <button
         aria-label="Choose color"
         key={color}
         name={color}
+        type="button"
+        className={`color-button-${chosenColor === color ? 'active' : ''}`}
         onClick={() => setChosenColor(color)}
       >
-        {color === 'all' && <span>{t('all')}</span>}
-      </Button>
+        <span className={`answer-circle-big-${color}`} />
+      </button>
     }
   />
 )
 
-const Question = ({ answers, question, chosenProgrammes, handleClick, showing, meta }) => {
+const Question = ({ answers, question, chosenProgrammes, handleClick, showing }) => {
   const { t } = useTranslation()
   const [chosenColor, setChosenColor] = useState('all')
 
   const buttonColors = ['all', 'green', 'yellow', 'red']
-
-  if (meta) buttonColors.push('gray')
 
   const commentAppendix = `${t('comment')}:\n\n`
 
@@ -68,19 +66,10 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
       {answers && (
         <Accordion.Content active={showing === question.id} className="question-content">
           {chosenProgrammes.length > 1 && <div className="ui divider" />}
-          <div className="color-buttons noprint" style={{ paddingBottom: '1em' }}>
-            <ButtonGroup>
-              {buttonColors.map(color => (
-                <ButtonPopup
-                  key={color}
-                  color={color}
-                  circular
-                  t={t}
-                  chosenColor={chosenColor}
-                  setChosenColor={setChosenColor}
-                />
-              ))}
-            </ButtonGroup>
+          <div className="color-buttons noprint">
+            {buttonColors.map(color => (
+              <ButtonPopup key={color} color={color} t={t} chosenColor={chosenColor} setChosenColor={setChosenColor} />
+            ))}
           </div>
           {answers.length > 0 ? (
             answers

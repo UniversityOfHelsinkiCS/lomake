@@ -17,7 +17,6 @@ export default {
     green: 'Vihreä',
     yellow: 'Keltainen',
     red: 'Punainen',
-    gray: 'Harmaa',
     EMPTY: 'Ei vastausta',
     empty: 'Ei vastausta',
     OK: 'Vastattu',
@@ -54,7 +53,6 @@ export default {
     colors_green: 'vain vihreät',
     colors_yellow: 'vain keltaiset',
     colors_red: 'vain punaiset',
-    colors_gray: 'vain harmaat',
     answers: 'vastaukset',
 
     email: 'Sähköpostiosoite',
@@ -114,7 +112,6 @@ export default {
     doctoralToggle: 'Tohtoriohjelmat',
 
     toFrontpage: 'Etusivulle',
-    all: 'Kaikki',
   },
 
   aboutPage: {

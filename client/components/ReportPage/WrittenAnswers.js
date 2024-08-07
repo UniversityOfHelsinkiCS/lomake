@@ -17,7 +17,7 @@ const WrittenAnswers = ({
   questionsList,
   showing,
   setShowing,
-  meta = false,
+  metaEvaluation = false,
 }) => {
   const { t } = useTranslation()
   const componentRef = useRef()
@@ -42,7 +42,7 @@ const WrittenAnswers = ({
   }
 
   // (!metaEvaluation) to check if both are true
-  if (!meta && usersProgrammes.length < 1) return <NoPermissions t={t} />
+  if (!metaEvaluation && usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
@@ -88,7 +88,6 @@ const WrittenAnswers = ({
                     showing={
                       chosenProgrammes.length < 2 || questions.open.includes(getLabel(question)) ? question.id : showing
                     }
-                    meta={meta}
                   />
                 )}
                 <div className="ui divider" />
