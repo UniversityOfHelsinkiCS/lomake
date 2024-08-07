@@ -88,7 +88,7 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
           <p>{t('formView:infoMeta1')}</p>
-          <p>{t('formView:infoMeta2')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div className="big-circle-red" />
