@@ -13,7 +13,6 @@ import {
   universityEvaluationQuestions,
   facultyEvaluationQuestions,
   metareviewQuestions,
-  metareviewDoctoralQuestions,
 } from '../../questionData'
 import MeasuresCell from './MeasuresCell'
 
@@ -39,7 +38,6 @@ const ColorTableCell = ({
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const { colorBlindMode } = useSelector(state => state.filters)
-  const doctoral = useSelector(state => state.doctoral)
   const questionMap = {
     1: yearlyQuestions,
     2: degreeReformIndividualQuestions,
@@ -47,11 +45,10 @@ const ColorTableCell = ({
     4: evaluationQuestions,
     5: facultyEvaluationQuestions,
     6: universityEvaluationQuestions,
-    7: doctoral ? metareviewDoctoralQuestions : metareviewQuestions,
+    7: metareviewQuestions,
   }
 
   const questions = questionMap[form] || yearlyQuestions
-
   if (form === formKeys.DEGREE_REFORM_PROGRAMMES) {
     return (
       <DegreeReformCell

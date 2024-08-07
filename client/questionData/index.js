@@ -4,7 +4,6 @@ import evaluationQuestions from './evaluationQuestions.json'
 import facultyEvaluationQuestions from './evaluationFacultyQuestions.json'
 import universityEvaluationQuestions from './evaluationUniversityQuestions.json'
 import metareviewQuestions from './metaReview.json'
-import metareviewDoctoralQuestions from './metaReviewDoctoral.json'
 
 export {
   yearlyQuestions,
@@ -13,5 +12,4 @@ export {
   facultyEvaluationQuestions,
   universityEvaluationQuestions,
   metareviewQuestions,
-  metareviewDoctoralQuestions,
 }

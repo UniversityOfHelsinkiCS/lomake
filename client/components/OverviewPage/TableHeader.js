@@ -30,8 +30,13 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
       </div>
       {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
       {tableIds.map(idObject => {
-        const shortLabel = meta ? `${idObject.id} ${idObject.shortLabel}` : idObject.shortLabel
-        const label = meta ? `${idObject.id} ${idObject.label}` : shortLabel
+        let shortLabel = meta ? `${idObject.id} ${idObject.shortLabel}` : idObject.shortLabel
+        let label = meta ? `${idObject.id} ${idObject.label}` : shortLabel
+
+        if (meta) {
+          if (shortLabel.startsWith('T')) shortLabel = shortLabel.substring(1)
+          if (label.startsWith('T')) label = label.substring(1)
+        }
 
         return (
           <div key={idObject.id} className="sticky-header-categories">
