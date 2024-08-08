@@ -3,7 +3,7 @@ const { sentryEsbuildPlugin } = require('@sentry/esbuild-plugin')
 
 const devConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file' },
   sourcemap: true,
   bundle: true,
   outdir: 'dev',
@@ -20,7 +20,7 @@ const devConfig = {
 
 const stagingConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file:' },
   bundle: true,
   minify: true,
   outdir: 'build',
@@ -37,7 +37,7 @@ const stagingConfig = {
 
 const prodConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file' },
   bundle: true,
   minify: true,
   outdir: 'build',
@@ -59,6 +59,7 @@ const prodConfig = {
     }),
   ],
   color: true,
+  metafile: true,
 }
 
 module.exports = { devConfig, prodConfig, stagingConfig }
