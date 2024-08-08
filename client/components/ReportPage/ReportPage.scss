@@ -342,4 +342,19 @@
   }
 }
 
+@mixin question-title-basics {
+  display: flex;
+  gap: 0.3em;
+  align-items: center;
+}
 
+
+.question-title {
+  &-programme {
+    @include question-title-basics;
+  }
+  &-faculty {
+    @include question-title-basics;
+
+  }
+}

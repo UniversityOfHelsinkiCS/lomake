@@ -10,7 +10,7 @@ describe("Previous year's answers", () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
   })
 
   it("Can switch which year's answers to see in OverViewPage", () => {
@@ -18,21 +18,24 @@ describe("Previous year's answers", () => {
     cy.reload()
 
     cy.selectYear(defaultYears[1])
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).should('have.class', 'square-green')
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).should(
+      'have.class',
+      'square-green',
+    )
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[1]}`)
 
     cy.get('.customModal-content').find('.close').click()
     cy.selectYear(defaultYears[2])
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`).click()
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).click()
     cy.get('.customModal-content').contains(`Hello from ${defaultYears[2]}`)
   })
 
   it("Can't write answers if viewing old answers", () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=editing-area-review_of_last_years_situation_report]').should('be.visible')
 
     cy.selectYear(defaultYears[1])
@@ -44,7 +47,7 @@ describe("Previous year's answers", () => {
 
   it('Can view old answers in Form-page and switch back to editMode to continue working.', () => {
     cy.request(`/api/cypress/createAnswers/${form}`)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
 
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[1]}`)

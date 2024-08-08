@@ -157,7 +157,7 @@
       },
       {
         "id": "faculty_ease_of_study_opinion_differences",
-        "index": "I",
+        "index": "5. I",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
@@ -204,6 +204,7 @@
       {
         "id": "faculty_ease_of_study_actions",
         "type": "ACTIONS",
+        "index": "1. III",
         "label": {
           "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
@@ -412,7 +413,7 @@
       },
       {
         "id": "faculty_programme_structure_opinion_differences",
-        "index": "I",
+        "index": "16. I",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
@@ -459,6 +460,7 @@
       {
         "id": "faculty_programme_structure_actions",
         "type": "ACTIONS",
+        "index": "2. III",
         "label": {
           "fi": "TIEDEKUNNAN KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "FAKULTETENS UTVECKLINGSOBJEKT OCH ÅTGÄRDER",
@@ -517,7 +519,7 @@
       },
       {
         "id": "faculty_studyprogramme_status_opinion_differences",
-        "index": "I",
+        "index": "21. I",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",
@@ -562,7 +564,7 @@
       },
       {
         "id": "faculty_where_are_we_in_five_years_opinion_differences",
-        "index": "I",
+        "index": "23. I",
         "type": "TEXTAREA",
         "label": {
           "fi": "Mikäli tiedekunnan eri toimijoiden näkemyksissä oli huomattavia eroja tai tiedekuntatason toimijoiden näkemykset poikkeavat yhden tai useamman koulutusohjelman näkemyksistä merkittävästi, kuvatkaa, millaisia näkemyserot olivat ja miten yhteiseen arvioon päädyttiin.",

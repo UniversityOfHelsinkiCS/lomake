@@ -5,11 +5,13 @@ import { formKeys } from '@root/config/data'
 
 const Section = ({ title, number, children, programmeKey, form }) => {
   let id = ''
+
   if (form === formKeys.EVALUATION_FACULTIES) {
     id = '-faculty'
   } else if (form === formKeys.EVALUATION_COMMTTEES) {
     id = '-university'
   }
+
   const url = `${window.location.origin}${basePath}evaluation${id}/form/${form}/${programmeKey}#${number}`
 
   return (
@@ -18,7 +20,7 @@ const Section = ({ title, number, children, programmeKey, form }) => {
         <InView
           as="div"
           onChange={inView => {
-            if (inView) {
+            if (form !== 7 && inView) {
               window.history.pushState({}, '', url)
             }
           }}

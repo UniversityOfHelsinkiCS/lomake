@@ -1,13 +1,19 @@
 import React from 'react'
 import { Form, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
+import { useSelector } from 'react-redux'
 
 const LabelOptions = ({ unit, setUnit }) => {
   const { t } = useTranslation()
+  const form = useSelector(state => state.filters.form)
 
   const handleChange = (e, { value }) => {
     setUnit(value)
   }
+
+  const amountLabel =
+    form === formKeys.EVALUATION_FACULTIES ? t('comparison:facultyAmount') : t('comparison:programmeAmount')
 
   return (
     <div className="level-filter">
@@ -25,7 +31,7 @@ const LabelOptions = ({ unit, setUnit }) => {
           </Form.Field>
           <Form.Field>
             <Radio
-              label={t('comparison:programmeAmount')}
+              label={amountLabel}
               name="chart-unit"
               value="programmeAmount"
               checked={unit === 'programmeAmount'}

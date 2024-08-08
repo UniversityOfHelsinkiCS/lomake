@@ -6,13 +6,17 @@ import { useTranslation } from 'react-i18next'
 import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
-import { getAllTempAnswersAction, getTempAnswersByFormAndYear } from 'Utilities/redux/tempAnswersReducer'
-import { formKeys } from '@root/config/data'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
 import './OverviewPage.scss'
-import { yearlyQuestions as questions, evaluationQuestions, degreeReformIndividualQuestions } from '../../questionData'
+import {
+  yearlyQuestions as questions,
+  evaluationQuestions,
+  degreeReformIndividualQuestions,
+  metareviewQuestions,
+} from '../../questionData'
 
 const answerValues = ['first', 'second', 'third', 'fourth', 'fifth']
 const answerValuesReversed = ['fifth', 'fourth', 'third', 'second', 'first']
@@ -99,6 +103,7 @@ const ColorTable = React.memo(
     individualAnswers,
     facultyView,
     dropdownFilter,
+    meta,
   }) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -108,18 +113,14 @@ const ColorTable = React.memo(
 
     const currentUser = useSelector(({ currentUser }) => currentUser.data)
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
-    let year = useSelector(({ filters }) => filters.year)
+    const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-
+    const doctoral = useSelector(state => state.doctoral)
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
     useEffect(() => {
-      if (form === formKeys.EVALUATION_PROGRAMMES && year === 2023) {
-        dispatch(getTempAnswersByFormAndYear(form, year))
-      } else {
-        dispatch(getAllTempAnswersAction())
-      }
+      dispatch(getAllTempAnswersAction())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
@@ -128,10 +129,6 @@ const ColorTable = React.memo(
         setSorter('key')
       }
     }, [facultyView])
-
-    if (form !== 1) {
-      year = 2023
-    }
 
     const selectedAnswers = answersByYear({
       year,
@@ -159,6 +156,9 @@ const ColorTable = React.memo(
       const degreeReformQuestions = degreeReformIndividualQuestions.filter(q => q.id !== 0)
 
       questionsToShow = degreeReformQuestions
+    } else if (formType === 'meta-evaluation') {
+      if (doctoral) questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
+      else questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
     }
     let tableIds = null
 
@@ -181,22 +181,20 @@ const ColorTable = React.memo(
     } else {
       tableIds = questionsToShow.reduce((acc, cur) => {
         const questionObjects = cur.parts.reduce((acc, cur) => {
-          if (
-            cur.id.includes('information_needed') ||
-            cur.id.includes('information_used') ||
-            cur.id.includes('opinion_differences') ||
-            cur.id.includes('programme_strengths') ||
-            cur.type === 'TITLE' ||
-            cur.type === 'INFOBOX' ||
-            cur.type === 'SELECTION' ||
-            cur.type === 'ORDER' ||
-            cur.type === 'ACTIONS'
-          ) {
+          const idIncludes = ['information_needed', 'information_used', 'opinion_differences', 'programme_strengths']
+          const typeIs = ['TITLE', 'INFOBOX', 'SELECTION', 'ORDER', 'ACTIONS']
+
+          if (idIncludes.some(el => cur.id.includes(el)) || typeIs.includes(cur.type)) {
             return acc
           }
           return [
             ...acc,
-            { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+            {
+              id: cur.id,
+              shortLabel: cur.shortLabel[lang],
+              label: cur.label[lang],
+              type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type,
+            },
           ]
         }, [])
 
@@ -227,6 +225,10 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
+    } else if (meta && !doctoral) {
+      tableClassName = '-meta-evaluation'
+    } else if (meta && doctoral) {
+      tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {
         tableClassName = '-degree-reform'
@@ -261,7 +263,7 @@ const ColorTable = React.memo(
           </div>
         ) : null}
         <div className={`overview-color-grid${tableClassName}`}>
-          <TableHeader sort={sort} tableIds={tableIds} />
+          <TableHeader sort={sort} tableIds={tableIds} meta={meta} />
           {facultyView ? (
             <>
               <div className="table-container" style={{ paddingTop: 20 }}>
@@ -306,7 +308,7 @@ const ColorTable = React.memo(
                 <Input
                   style={{ marginBottom: '0.5em' }}
                   data-cy="overviewpage-filter"
-                  icon="filter"
+                  icon="search"
                   size="small"
                   placeholder={t('programmeFilter')}
                   onChange={handleFilterChange}

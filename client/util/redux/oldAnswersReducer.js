@@ -9,6 +9,12 @@ export const getAnswersAction = () => {
   return callBuilder(route, prefix)
 }
 
+export const getAnswersActionAll = () => {
+  const route = '/answers/foruser/all'
+  const prefix = 'GET_ANSWERS_ALL'
+  return callBuilder(route, prefix)
+}
+
 const initialState = {
   data: null,
   years: null,
@@ -40,6 +46,31 @@ export default (state = initialState, action) => {
         pending: false,
         error: true,
       }
+    case 'GET_ANSWERS_ALL_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'GET_ANSWERS_ALL_SUCCESS':
+      return {
+        ...state,
+        data: action.response,
+        years: action.response.reduce((pre, cur) => {
+          if (!pre.includes(cur.year)) pre.push(cur.year)
+          return pre
+        }, []),
+        pending: false,
+        error: false,
+      }
+    case 'GET_ANSWERS_ALL_FAILURE':
+      return {
+        ...state,
+        data: [],
+        pending: false,
+        error: true,
+      }
+
     default:
       return state
   }

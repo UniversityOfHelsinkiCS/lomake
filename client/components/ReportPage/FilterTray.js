@@ -12,13 +12,32 @@ import '../Generic/Generic.scss'
 import { formKeys } from '@root/config/data'
 
 const getCompanionFilter = ({ faculty, level }) => {
-  if (faculty !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
+  if (faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))
     return <CompanionFilter />
   return null
 }
 
 const getDoctoralSchoolFilter = ({ faculty, level }) => {
-  if (faculty === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
+  if (faculty[0] === 'allFaculties' && level === 'doctoral') return <DoctoralSchoolFilter />
+  return null
+}
+
+const getLevelFilter = ({ filters }) => {
+  if (filters.form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
+  return null
+}
+
+const getProgrammeFilter = ({ form, filter, t, handleSearch, setFilter }) => {
+  if (form !== formKeys.EVALUATION_FACULTIES)
+    return (
+      <ProgrammeFilter
+        handleChange={handleSearch}
+        label={t('programmeFilter')}
+        filter={filter}
+        onEmpty={() => setFilter('')}
+        t={t}
+      />
+    )
   return null
 }
 
@@ -40,16 +59,10 @@ const FilterTray = ({ filter, setFilter }) => {
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
           {form !== formKeys.EVALUATION_FACULTIES && <FacultyFilter size="small" label={t('report:facultyFilter')} />}
-          <LevelFilter />
+          {getLevelFilter({ filters })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
-          <ProgrammeFilter
-            handleChange={handleSearch}
-            filter={filter}
-            onEmpty={() => setFilter('')}
-            t={t}
-            label={t('programmeFilter')}
-          />
+          {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}
         </>
       )}
     </>

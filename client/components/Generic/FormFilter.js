@@ -1,31 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { setForm } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const FormFilter = () => {
+const FormFilter = ({ version = null }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-
-  const filterForm = useSelector(({ filters }) => filters.form)
-  const options = [
+  const [options, setOptions] = useState([
     { text: t('yearlyAssessment'), value: 1 },
     //  { text: t('degree-reform-group'), value: 2 },
     // { text: t('degree-reform-individual'), value: 3 },
-    { text: t('evaluation'), value: 4 },
+    { text: t('common:formFilter:evaluation'), value: 4 },
     { text: t('evaluationFaculty'), value: 5 },
-  ]
+  ])
+
+  const filterForm = useSelector(({ filters }) => filters.form)
 
   useEffect(() => {
-    const url = window.location.href
-    const facStart = url.indexOf('form=')
-    if (facStart !== -1) {
-      const formNumber = Number(url.substring(facStart + 5))
-      dispatch(setForm(formNumber))
-    } else {
-      dispatch(setForm(1))
+    if (version === 'compareByFaculty') {
+      const filteredOptions = options.filter(option => option.value !== 5)
+      setOptions(filteredOptions)
     }
   }, [])
 

@@ -7,14 +7,14 @@ import '../support/commands'
 describe('Form Notification tests', () => {
   it('Save message is shown by default', () => {
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=saving-answers-notice]')
   })
 
   it('After being locked by admin, message matches the state', () => {
     cy.login('cypressUser')
-    cy.visit(`/`)
+    cy.visit('/yearly')
     // check page ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
@@ -22,14 +22,14 @@ describe('Form Notification tests', () => {
     cy.get(`[data-cy=formLocker-verify-close-button]`).click({ waitForAnimations: false })
 
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=locked-form-notice]')
   })
 
   it('After Toska locks all forms, message matches the state', () => {
     cy.login('cypressToskaUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     // check page ready
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`)
 
@@ -45,7 +45,7 @@ describe('Form Notification tests', () => {
     cy.get('[data-cy=form-1-deadline]').should('not.exist')
 
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=deadline-passed-notice]')
   })

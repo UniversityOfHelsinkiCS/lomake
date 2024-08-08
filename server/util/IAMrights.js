@@ -13,7 +13,7 @@ const {
   isUniverstyFormIam,
   hrHeadsGroup,
 } = require('@root/config/IAMConfig')
-const { data } = require('@root/config/data')
+const { data, committeeList } = require('@root/config/data')
 const { mapToDegreeCode } = require('@util/common')
 
 /**
@@ -249,9 +249,12 @@ const getFacultyKatselmusWriteAccess = hyGroups => {
 const getUniversityFormAccess = hyGroups => {
   const hasUniversityFormWritingRights = hyGroups.some(isUniverstyFormIam)
   if (!hasUniversityFormWritingRights) return {}
-  let specialGroup = { universityForm: true }
-  const access = { UNI: { read: true, write: true } }
-  specialGroup = { universityForm: true }
+  const access = {}
+
+  committeeList.forEach(committeeLanguageVersion => {
+    access[committeeLanguageVersion.code] = { read: true, write: true }
+  })
+  const specialGroup = { universityForm: true }
   return { specialGroup, access }
 }
 

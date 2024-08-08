@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import './Generic.scss'
+import { formKeys } from '@root/config/data'
 
 const TrafficLights = ({ id, form }) => {
   const dispatch = useDispatch()
@@ -10,10 +11,18 @@ const TrafficLights = ({ id, form }) => {
   const fieldName = `${id}_light`
   const choose = (name, id) => dispatch(updateFormField(name, id, form))
   const value = useSelector(({ form }) => form.data[fieldName])
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const finnishUniFormData = useSelector(({ form }) => form.finnishUniFormData.data)
+  const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
+
+  const isUniFormLanguageVersion = window.location.href.match('((/UNI_EN)|(/UNI_SE))')
+  const viewOnly = reduxViewOnly || isUniFormLanguageVersion
 
   const getClassName = color => {
-    if (value === color) return `circle-big-${color}-selected${viewOnly ? '' : ' selected-animated'}`
+    let tempValue = value
+    if (form === formKeys.EVALUATION_COMMTTEES && finnishUniFormData) {
+      tempValue = finnishUniFormData[fieldName]
+    }
+    if (tempValue === color) return `circle-big-${color}-selected${viewOnly ? '' : ' selected-animated'}`
 
     return `circle-big-${color}${viewOnly ? '' : ' unselected-animated'}`
   }

@@ -2,20 +2,6 @@ $QUESTION_COUNT: 14;
 
 @import '../../../assets/colors.scss';
 
-.wide-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 2fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
-
-.view-title {
-  margin-right: 1em;
-  margin-top: 1em,
-}
-
 .csv-download {
   max-width: 200px;
 }
@@ -66,6 +52,13 @@ $QUESTION_COUNT: 14;
       filter: brightness(0.8);
     }
   }
+  &-gray {
+    @include square-basics();
+    background-color: rgb(128, 128, 128);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {
@@ -86,10 +79,6 @@ $QUESTION_COUNT: 14;
     text-align: center;
     font-weight: bold;
   }
-}
-
-.year-filter-label {
-  font-size: 17px;
 }
 
 @mixin container-basics {
@@ -146,11 +135,9 @@ $QUESTION_COUNT: 14;
 
 @mixin accordion-title-basics {
   margin-left: 0.5rem;
-  
 }
 
 .accordion-title {
-  
   &-green {
     border-radius: 10px 100px / 120px;
     h2 {
@@ -162,7 +149,7 @@ $QUESTION_COUNT: 14;
     border-radius: 10px 100px / 120px;
     h2 {
       @include accordion-title-basics;
-    } 
+    }
     background: $light-yellow;
   }
   &-red {
@@ -172,16 +159,16 @@ $QUESTION_COUNT: 14;
     }
     background: $light-red;
   }
-
 }
 
 .modal-accordion-container {
-
   div:not(:first-child) {
     margin-top: 1rem;
-}
+  }
 
-  h2, h4, p {
+  h2,
+  h4,
+  p {
     margin-left: 1rem;
   }
 }

@@ -13,6 +13,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 import { colors, getFormViewRights } from 'Utilities/common'
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
 import StatusMessage from './StatusMessage'
+
 import SaveIndicator from './SaveIndicator'
 import NavigationSidebar from './NavigationSidebar'
 import Form from './Form'
@@ -94,7 +95,7 @@ const FormView = ({ room }) => {
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
   if (!readAccess && !writeAccess) return <NoPermissions t={t} />
 
-  return singleProgramPending ? (
+  return singleProgramPending || !programme ? (
     <Loader active />
   ) : (
     <div className="form-container">
@@ -105,7 +106,7 @@ const FormView = ({ room }) => {
           <div className="hide-in-print-mode">
             <SaveIndicator />
             <div style={{ marginBottom: '2em' }}>
-              <Button onClick={() => history.push('/')} icon="arrow left" />
+              <Button onClick={() => history.push('/yearly')} icon="arrow left" />
             </div>
             <img alt="form-header-rypsi" className="img-responsive" src={rypsiImage} />
           </div>
@@ -120,7 +121,7 @@ const FormView = ({ room }) => {
             <StatusMessage form={form} writeAccess={writeAccess} />
 
             <p>{t('formView:info1')}</p>
-            <p>{t('formView:info2')}</p>
+            <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div className="big-circle-green" />

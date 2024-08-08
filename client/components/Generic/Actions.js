@@ -111,6 +111,8 @@ const Actions = ({
 
   const showDescription = subTitle === t('formView:bachelorUniForm') || form !== 6
 
+  const actionRenderList = actionsList.length > 0 ? actionsList : ['action-1']
+
   return (
     <div
       className="form-entity-area"
@@ -283,16 +285,20 @@ const Actions = ({
       )}
       {subTitle && <h3>{subTitle}</h3>}
 
-      {actionsList.length === 0 ? (
-        <ActionElement key="action-1" id={id} form={form} viewOnly={viewOnly} index={1} />
-      ) : (
-        actionsList.map((action, index) => {
-          return <ActionElement key={`action-${index + 1}`} id={id} form={form} viewOnly={viewOnly} index={index + 1} />
-        })
-      )}
+      {actionRenderList.map((action, index) => {
+        return <ActionElement key={`action-${index + 1}`} id={id} form={form} viewOnly={viewOnly} index={index + 1} />
+      })}
       <div style={{ display: 'flex' }}>
         {actionsCount < 5 && !viewOnly && (
-          <Button icon basic labelPosition="left" color="blue" onClick={handleAdd} disabled={!previousHasContent()}>
+          <Button
+            data-cy={`${id}-add-action-button`}
+            icon
+            basic
+            labelPosition="left"
+            color="blue"
+            onClick={handleAdd}
+            disabled={!previousHasContent()}
+          >
             <Icon name="add" />
             {t('formView:addDevelopmentArea')}
           </Button>

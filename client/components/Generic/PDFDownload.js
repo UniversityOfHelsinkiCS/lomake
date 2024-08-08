@@ -7,7 +7,7 @@ import { colors } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const PDFDownload = ({ componentRef }) => {
+const PDFDownload = ({ componentRef, linkName = null }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [isPrinting, setIsPrinting] = useState(false)
@@ -18,7 +18,7 @@ const PDFDownload = ({ componentRef }) => {
 
   const setExportTitle = () => {
     const formText = t('generic:pdfExportText')
-    const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
+    const facultyText = faculty[0] === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
     const levelText = t(level)
     setTitle(`${formText}_${year}_${facultyText}_${levelText}`)
   }
@@ -50,7 +50,9 @@ const PDFDownload = ({ componentRef }) => {
       documentTitle={title}
       // eslint-disable-next-line react/no-unstable-nested-components
       trigger={() => (
-        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>{t('generic:downloadPDF')}</span>
+        <span style={{ cursor: 'pointer', color: colors.blue, fontSize: '0.9em' }}>
+          {linkName ? t(`overview:printingPDF:${linkName}`) : t('generic:downloadPDF')}
+        </span>
       )}
       onBeforeGetContent={() =>
         new Promise(resolve => {

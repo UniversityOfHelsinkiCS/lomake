@@ -15,7 +15,7 @@ const CustomModal = ({ children, title, closeModal, borderColor }) => {
         ref={ref}
       >
         <div className="title-and-close">
-          <span style={{ maxWidth: '75%' }}>{title}</span>
+          <span style={{ maxWidth: '95%' }}>{title}</span>
           <Icon name="close" onClick={closeModal} style={{ cursor: 'pointer' }} />
         </div>
         {children}

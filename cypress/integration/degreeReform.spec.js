@@ -20,9 +20,9 @@ describe('Degree reform form tests', () => {
 
   it('Reform form for programmes is accessible through links and loads', () => {
     cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.visit('/yearly')
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=reform-form-group-container')
     cy.get('[data-cy=choose-radio-container-helsinki_is_an_attractive_study_place]')
@@ -41,7 +41,7 @@ describe('Degree reform form tests', () => {
 
   it('Reform form for studyprogrammes can be opened and edited', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -55,7 +55,7 @@ describe('Degree reform form tests', () => {
 
   it('Reform form for individual can be opened and edited', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -71,7 +71,7 @@ describe('Degree reform form tests', () => {
 
   it('Degree Reform - Programme - Status Message, no rights', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
 
@@ -83,9 +83,9 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-2-deadline]').contains('14.')
 
     cy.login(cypressReadingRightsUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click().wait(1000)
+    cy.visit('/yearly')
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
     cy.get(`[data-cy="no-write-access-notice"]`).contains(
       `You don't have editing rights to this form. But you can view the answers.`,
@@ -94,9 +94,9 @@ describe('Degree reform form tests', () => {
 
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
     cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.visit('/yearly')
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
     cy.get('[data-cy=form-section-I]').contains('Master and minor based education to degree programmes')
@@ -123,8 +123,8 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Master's sections work
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-MH80_001]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -153,8 +153,8 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Doctoral sections work
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
     cy.get(`[data-cy=colortable-link-to-T923103]`).click()
     cy.get('[data-cy=form-section-0]').contains('Degree reform goals')
@@ -184,14 +184,14 @@ describe('Degree reform form tests', () => {
   it('Reform form for group check that data persists', () => {
     // Check that Status Message works and is closed
     cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.visit('/yearly')
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
     // ----------------------------------------
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     // Create new deadline
 
     cy.get('[data-cy=nav-admin]').click()
@@ -201,9 +201,9 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=form-2-deadline]').contains('14.')
     // Start filling in the form
     cy.login(cypressUser)
-    cy.visit('/')
-    cy.get('[data-cy=nav-degree-reform]').click()
-    cy.get('[data-cy=nav-degree-reform-group]').click()
+    cy.visit('/yearly')
+    cy.get('[data-cy=nav-degreeReform]').click()
+    cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
     cy.wait(1000)
     // Check that Status Message works and is open
@@ -264,7 +264,7 @@ describe('Degree reform form tests', () => {
 
   it('Reform form for individual check that data persists', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
 
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
@@ -329,7 +329,7 @@ describe('Degree reform form tests', () => {
 
   it('"view-is-based-on"-checkbox works correctly', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()
@@ -420,7 +420,7 @@ describe('Degree reform form tests', () => {
 
   it('Saving individual form works correctly', () => {
     cy.login(cypressSuperAdmin)
-    cy.visit('/')
+    cy.visit('/yearly')
     // Create new deadline
     cy.get('[data-cy=nav-admin]').click()
     cy.contains('Deadline settings').click()

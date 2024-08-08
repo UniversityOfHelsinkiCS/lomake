@@ -70,15 +70,6 @@ const seedFacultiesAndStudyprogrammes = async () => {
       }
     }
   }
-  // Create UNI
-  await db.faculty.create({
-    code: 'UNI',
-    name: {
-      fi: 'Yliopistotaso',
-      en: 'University level',
-      se: 'Universitetsnivå',
-    },
-  })
 }
 
 const seed = async () => {

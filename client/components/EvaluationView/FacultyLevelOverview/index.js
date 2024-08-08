@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Accordion, Icon, Button } from 'semantic-ui-react'
+import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import { isAdmin, isSuperAdmin } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import CsvDownload from 'Components/Generic/CsvDownload'
 import FacultyColorTable from './FacultyColorTable'
-import { data } from '../../../../config/data'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
+import FacultyCellModal from './FacultyCellModal'
 
 export default () => {
   const { t } = useTranslation()
@@ -20,6 +20,7 @@ export default () => {
   const debouncedFilter = useDebounce(filter, 200)
   const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
+  const [showCsv, setShowCsv] = useState(false)
 
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
@@ -71,58 +72,12 @@ export default () => {
     <>
       {modalData && (
         <CustomModal title={modalData.header} closeModal={() => setModalData(null)} borderColor={modalData.color}>
-          <>
-            <div style={{ paddingBottom: '1em' }}>{modalData.programme}</div>
-            <div style={{ fontSize: '1.2em' }}>
-              {modalData?.content?.answer ? (
-                <Accordion className="modal-accordion-container" exclusive={false}>
-                  {modalData.content
-                    ? Object.entries(modalData.content)
-                        .sort((a, b) => {
-                          if (a[0] === 'green' && b[0] === 'yellow') return -1
-                          if (a[0] === 'yellow' && b[0] === 'red') return -1
-                          if (a[0] === 'green' && b[0] === 'red') return -1
-                          if (a[0] === 'yellow' && b[0] === 'green') return 1
-                          if (a[0] === 'red' && b[0] === 'green') return 1
-                          if (a[0] === 'red' && b[0] === 'yellow') return 1
-                          return 0
-                        })
-                        .map(([key, value]) => {
-                          return (
-                            <div key={`${key}-${value}`}>
-                              <Accordion.Title
-                                className={`accordion-title-${key}`}
-                                active={accordionsOpen[key] === true}
-                                onClick={() => setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })}
-                              >
-                                <Icon name="angle down" />
-                                <span style={{ fontSize: '22px' }}> {t(`overview:${key}ModalAccordion`)}</span>
-                              </Accordion.Title>
-                              {value.map(answerContent => {
-                                const programmeName = data
-                                  .find(f => f.code === modalData.facultyKey)
-                                  .programmes.find(p => p.key === answerContent.programme).name[lang]
-                                return (
-                                  <Accordion.Content
-                                    className={`accordion-content-${key}`}
-                                    key={answerContent.programme}
-                                    active={accordionsOpen[key] === true}
-                                  >
-                                    <h4>{programmeName}</h4>
-                                    <ReactMarkdown>{answerContent.answer}</ReactMarkdown>
-                                  </Accordion.Content>
-                                )
-                              })}
-                            </div>
-                          )
-                        })
-                    : null}
-                </Accordion>
-              ) : (
-                <ReactMarkdown>{modalData.content}</ReactMarkdown>
-              )}
-            </div>
-          </>
+          <FacultyCellModal
+            modalData={modalData}
+            setAccordionsOpen={setAccordionsOpen}
+            accordionsOpen={accordionsOpen}
+            t={t}
+          />
         </CustomModal>
       )}
       {programControlsToShow && (
@@ -138,19 +93,43 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className="wide-header">
-            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-
-            <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {isSuperAdmin(currentUser) && moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5" size="big">
-                {t('overview:compareAnswers')}
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem>
+              <h2>{t('evaluation').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary>
+                {t('overview:readAnswers')}
               </Button>
-            )}
-          </div>
+            </MenuItem>
+            <MenuItem>
+              {moreThanFiveProgrammes && (
+                <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5">
+                  {t('overview:compareAnswers')}
+                </Button>
+              )}
+            </MenuItem>
+            <MenuItem position="right">
+              <Dropdown
+                data-cy="csv-download"
+                className="button basic gray csv-download"
+                direction="left"
+                text={t('overview:csvDownload')}
+                onClick={() => setShowCsv(true)}
+              >
+                {showCsv ? (
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="written" view="overview" form={form} />
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : null}
+              </Dropdown>
+            </MenuItem>
+          </Menu>
           <div style={{ marginTop: '1em' }}>
             <FacultyColorTable
               faculties={filteredFaculties}

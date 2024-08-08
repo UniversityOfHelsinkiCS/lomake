@@ -42,15 +42,20 @@ export const setForm = form => ({
   form,
 })
 
+export const setColorBlindMode = () => ({
+  type: 'SET_COLOR_BLIND_MODE',
+})
+
 const initialState = {
   companion: false,
   doctoralSchool: 'allSchools',
-  faculty: 'allFaculties',
+  faculty: ['allFaculties'],
   level: 'allProgrammes',
   year: '',
   multipleYears: [],
   questions: { selected: [], open: [] },
   form: 1,
+  colorBlindMode: false,
 }
 
 export default (state = initialState, action) => {
@@ -108,6 +113,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         form: action.form,
+      }
+    }
+    case 'SET_COLOR_BLIND_MODE': {
+      return {
+        ...state,
+        colorBlindMode: !state.colorBlindMode,
       }
     }
     default:

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { formKeys } from '@root/config/data'
+import { facultyList, formKeys } from '@root/config/data'
 
 import { useTranslation } from 'react-i18next'
 import {
@@ -54,9 +54,20 @@ const handleData = ({
     },
     [[], []],
   )
-  csvData[0].push(t('faculty'))
-  csvData[0].push(t('programmeHeader'))
-  csvData[1].push('//')
+
+  if (form === formKeys.EVALUATION_PROGRAMMES) {
+    csvData[0].push(t('programmeHeader'))
+    csvData[0].push(t('faculty'))
+    csvData[1].push('//')
+  } else if (form === formKeys.EVALUATION_FACULTIES) {
+    if (wantedData === 'colors') {
+      csvData[0].push('Levels Header')
+      csvData[0].push(t('faculty'))
+      csvData[1].push('//')
+    } else if (wantedData === 'written') {
+      csvData[0].push(t('faculty'))
+    }
+  }
   csvData[1].push('//')
   csvData[0].reverse()
   csvData[1].reverse()
@@ -64,7 +75,11 @@ const handleData = ({
   const getWrittenAnswers = rawData => {
     if (!Object.keys(rawData).length) return [] // May be empty initially
 
-    const answersArray = csvData[1].slice(2).map(questionId => {
+    let sliceStart = 2
+    if (form === formKeys.EVALUATION_FACULTIES) {
+      sliceStart = 1
+    }
+    const answersArray = csvData[1].slice(sliceStart).map(questionId => {
       let validValues = []
 
       // for order-type questions
@@ -104,9 +119,18 @@ const handleData = ({
     return answersArray
   }
 
-  const getColorAnswers = rawData => {
-    const answerArray = csvData[1].slice(2).map(questionId => {
-      const color = rawData[`${questionId}_light`]
+  const getColorAnswers = ({ rawData, level }) => {
+    let answerArray = []
+    answerArray = csvData[1].slice(2).map(questionId => {
+      let color = rawData[`${questionId}_light`]
+      if (form === formKeys.EVALUATION_FACULTIES) {
+        color = {
+          bachelor: rawData[`${questionId}_bachelor_light`],
+          master: rawData[`${questionId}_master_light`],
+          doctoral: rawData[`${questionId}_doctoral_light`],
+        }
+        return t(color[level])
+      }
       if (color) return t(color)
       return ''
     })
@@ -114,8 +138,27 @@ const handleData = ({
     return answerArray
   }
 
+  const getOverviewDataForFaculty = ({ faculty, answersArray, data }) => {
+    let dataRow = []
+    if (wantedData === 'written') {
+      dataRow = [faculty, ...answersArray]
+    }
+    if (wantedData === 'colors') {
+      ;['bachelor', 'master', 'doctoral'].forEach(level => {
+        const facultyColorAnswers = getColorAnswers({ rawData: data, level })
+        dataRow = [faculty, level, ...facultyColorAnswers]
+        csvData = [...csvData, dataRow]
+      })
+    }
+    return dataRow
+  }
+
   const getProgrammeFaculty = programme => {
-    const searched = usersProgrammes.find(p => p.key === programme.programme)
+    let searched = usersProgrammes.find(p => p.key === programme.programme)
+    if (form) {
+      searched = facultyList.find(a => a.code === programme.programme)
+      if (searched) return searched.name[lang]
+    }
     if (!searched) return ''
     return searched.primaryFaculty.name[lang]
   }
@@ -123,11 +166,11 @@ const handleData = ({
   if (view === 'form') {
     let answersArray = []
     if (wantedData === 'written') answersArray = getWrittenAnswers(programmeData)
-    else if (wantedData === 'colors') answersArray = getColorAnswers(programmeData)
+    else if (wantedData === 'colors') answersArray = getColorAnswers({ rawData: programmeData })
     if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.EVALUATION_COMMTTEES) {
-      const name = programme.name[lang]
-      const faculty = programme.name[lang]
-      const dataRow = [name, faculty, ...answersArray]
+      const facultyName = programme.name[lang]
+      const levels = 'Levels'
+      const dataRow = [facultyName, levels, ...answersArray]
       csvData = [...csvData, dataRow]
     } else {
       const name = programme.name[lang]
@@ -141,11 +184,14 @@ const handleData = ({
 
     selectedAnswers.forEach(programme => {
       let answersArray = []
-      if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
-      else if (wantedData === 'colors') answersArray = getColorAnswers(programme.data)
       const name = getProgrammeName(usersProgrammes, programme, lang)
       const faculty = getProgrammeFaculty(programme)
-      const dataRow = [name, faculty, ...answersArray]
+      if (wantedData === 'written') answersArray = getWrittenAnswers(programme.data)
+      else if (wantedData === 'colors') answersArray = getColorAnswers({ rawData: programme.data })
+      let dataRow = [name, faculty, ...answersArray]
+      if (form === formKeys.EVALUATION_FACULTIES) {
+        dataRow = getOverviewDataForFaculty({ faculty, answersArray, data: programme.data })
+      }
       csvData = [...csvData, dataRow]
     })
   }
@@ -180,7 +226,6 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
   }
 
   const selectedAnswers = getAnswers()
-
   const data = React.useMemo(
     () =>
       handleData({

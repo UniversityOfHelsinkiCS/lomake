@@ -22,6 +22,7 @@ const createBackups = async () => {
   currentAnswers.forEach(async answer => {
     const { programme, data, form } = answer
 
+    if (!programme || !form) return
     const newestBackup = await db.backupAnswer.findAll({
       limit: 1,
       where: {

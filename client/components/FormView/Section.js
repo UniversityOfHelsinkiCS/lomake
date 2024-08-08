@@ -2,7 +2,7 @@ import React from 'react'
 import { InView } from 'react-intersection-observer'
 import { basePath, colors } from 'Utilities/common'
 
-const Section = ({ title, number, children, programmeKey }) => {
+const Section = ({ title, number, children, programmeKey, form = 1 }) => {
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
@@ -10,7 +10,11 @@ const Section = ({ title, number, children, programmeKey }) => {
           as="div"
           onChange={inView => {
             if (inView) {
-              window.history.pushState({}, '', `${window.location.origin}${basePath}form/${programmeKey}#${number}`)
+              window.history.pushState(
+                {},
+                '',
+                `${window.location.origin}${basePath}yearly/form/${form}/${programmeKey}#${number}`,
+              )
             }
           }}
         >

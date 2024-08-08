@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems, answersByYear } from 'Utilities/common'
+import { sortedItems, answersByYear, getYearToShow } from 'Utilities/common'
 import { getTempAnswersByFormAndYear, getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { setYear } from 'Utilities/redux/filterReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
 import SummaryRowFaculty from './SummaryRowFaculty'
@@ -32,14 +33,13 @@ const FacultyColorTable = React.memo(
     const [sorter, setSorter] = useState('name')
     const [showDataByProgramme] = useState(false)
 
-    let year = 2023
+    const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
-    if (draftYear) {
-      year = draftYear.year
-    }
+    const year = getYearToShow({ draftYear, nextDeadline, form })
 
     useEffect(() => {
-      if (!nextDeadline || !nextDeadline.find(d => d.form === form)) {
+      dispatch(setYear(year))
+      if (!formDeadline) {
         dispatch(getTempAnswersByFormAndYear(form, year))
       } else {
         dispatch(getAllTempAnswersAction())
@@ -108,7 +108,7 @@ const FacultyColorTable = React.memo(
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
-            icon="filter"
+            icon="search"
             size="small"
             placeholder={t('facultyFilter')}
             onChange={handleFilterChange}

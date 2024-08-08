@@ -7,88 +7,16 @@ import { useTranslation } from 'react-i18next'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
-import { facultyList, formKeys } from '@root/config/data'
+import { formKeys } from '@root/config/data'
 import { setForm } from 'Utilities/redux/filterReducer'
 
 import QuestionList from 'Components/Generic/QuestionList'
-import {
-  answersByYear,
-  cleanText,
-  filteredProgrammes,
-  getMeasuresAnswer,
-  modifiedQuestions,
-  programmeNameByKey as programmeName,
-  getSelectionAnswer,
-  getOrderAnswer,
-  getActionsAnswer,
-} from 'Utilities/common'
+import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
 import './ReportPage.scss'
-
-const getAnswersByQuestions = ({
-  chosenProgrammes,
-  selectedAnswers,
-  questionsList,
-  usersProgrammes,
-  lang,
-  t,
-  form,
-}) => {
-  const answerMap = new Map()
-  // if the 'programme' is faculty use -> code
-  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
-  selectedAnswers.forEach(programme => {
-    const key = programme.programme
-
-    if (chosenKeys.includes(key)) {
-      const { data } = programme
-      questionsList.forEach(question => {
-        let color = null
-        if (form === formKeys.EVALUATION_FACULTIES) {
-          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
-          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
-          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
-          color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
-        } else {
-          color = data[question.color] ? data[question.color] : 'emptyAnswer'
-        }
-        let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
-        let name = programmeName(usersProgrammes, programme, lang)
-        if (form === formKeys.EVALUATION_FACULTIES) {
-          name = facultyList.find(f => f.code === programme.programme).name[lang]
-        }
-        let answer = ''
-
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
-        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
-        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
-        answersByProgramme = [...answersByProgramme, { name, key, color, answer }]
-        answerMap.set(question.id, answersByProgramme)
-      })
-    }
-  })
-
-  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
-  // So empty answers need to be added.
-  answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
-    const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
-    if (programmesMissing) {
-      programmesMissing.forEach(p => {
-        const earlierAnswers = answerMap.get(key)
-        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
-        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
-      })
-    }
-  })
-  return answerMap
-}
 
 export default () => {
   const { t } = useTranslation()
@@ -157,7 +85,7 @@ export default () => {
             usersProgrammes={usersProgrammes}
             allAnswers={
               programmes.chosen
-                ? getAnswersByQuestions({
+                ? answersByQuestions({
                     chosenProgrammes: programmes.chosen,
                     selectedAnswers,
                     questionsList,
@@ -184,7 +112,7 @@ export default () => {
             chosenProgrammes={programmes.chosen}
             allAnswers={
               programmes.chosen
-                ? getAnswersByQuestions({
+                ? answersByQuestions({
                     chosenProgrammes: programmes.chosen,
                     selectedAnswers,
                     questionsList,
@@ -211,7 +139,7 @@ export default () => {
       <div className="info-header noprint" />
       <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
         <Grid.Column width={10}>
-          <Button as={Link} to="/" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
+          <Button as={Link} to="/yearly" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
             <Icon name="arrow left" />
             {t('backToFrontPage')}
           </Button>

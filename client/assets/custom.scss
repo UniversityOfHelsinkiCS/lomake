@@ -123,6 +123,10 @@ label {
   }
 }
 
+.filter-row {
+  width: 100%;
+}
+
 // These css styles are applied, when user opens the print dialogue in browser.
 @media print {
   .hide-in-print-mode,
@@ -150,6 +154,14 @@ label {
     margin-bottom: 0 !important;
     line-height: 1.5 !important;
   }
+
+  #university-form {
+      .page-break {
+        margin-top: 1rem;
+        display: block;
+        page-break-after: always;
+      }
+  }
   
   .form-text-area {
     margin: 1rem 0!important;
@@ -170,4 +182,18 @@ label {
   .the-form {
     display: block;
   }
+
+  .university-printing-wrapper {
+    .page-break {
+      margin-top: 1rem;
+      display: block;
+      page-break-after:always;
+    }
+  }
+
+  .testing-testing {
+    display: block !important; 
+  }
+
+
 }

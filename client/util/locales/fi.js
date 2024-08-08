@@ -17,6 +17,8 @@ export default {
     green: 'Vihreä',
     yellow: 'Keltainen',
     red: 'Punainen',
+    gray: 'Harmaa',
+    all: 'Kaikki',
     EMPTY: 'Ei vastausta',
     empty: 'Ei vastausta',
     OK: 'Vastattu',
@@ -41,6 +43,7 @@ export default {
     find: 'Etsi',
 
     noData: 'Yhtään ohjelmia tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
+    noDataForFaculty: 'Yhtään tiedekuntaa tai vastauksia ei löytynyt. Kokeile muuttaa hakua.',
     selectAll: 'Valitse kaikki',
     clearSelection: 'Tyhjennä valinta',
     responses: 'Vastauksia:',
@@ -48,10 +51,11 @@ export default {
     trafficLights: 'Liikennevalojen värit',
 
     choose: 'Valitse',
-    colors_all: 'kaikki',
-    colors_green: 'vain vihreät',
-    colors_yellow: 'vain keltaiset',
-    colors_red: 'vain punaiset',
+    colors_all: 'Kaikki',
+    colors_green: 'Vain vihreät',
+    colors_yellow: 'Vain keltaiset',
+    colors_red: 'Vain punaiset',
+    colors_gray: 'Vain harmaat',
     answers: 'vastaukset',
 
     email: 'Sähköpostiosoite',
@@ -76,6 +80,41 @@ export default {
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',
     showAllFacultyProgrammes: 'Näytä myös yhteisohjelmat',
+    formFilter: {
+      evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
+    },
+    metaevaluation: 'Katselmuksen toimeenpano',
+    formCloses: 'Lomake sulkeutuu',
+    questionAnswers: 'Vastaukset kysymyksittäin',
+    noAnswers: 'Ei vastauksia',
+    actionProposals: 'Toimenpide-ehdotukset',
+    urgent: 'kiireellinen',
+    semiUrgent: 'jokseenkin kiireellinen',
+    nonUrgent: 'kiireetön',
+    irrelevant: 'merkityksetön',
+    metaEvaluationAnswers: 'Kirjalliset vastaukset',
+    bm: 'Kandiohjelmat & maisteriohjelmat',
+    t: 'Tohtoriohjelmat',
+    showBoth: 'Vastaukset & kommentit',
+    showOnlyAnswers: 'Vain vastaukset',
+    showOnlyComments: 'Vain kommentit',
+    yearlyAssessmentText: '',
+    evaluationText: '',
+    degreeReformText: '',
+    metaevaluationText: '',
+    adminpageText: '',
+    timesensitive: 'Ajankohtaista',
+    timesensitiveDesc: 'Auki olevien lomakkeiden viimeinen täyttöpäivä.',
+    description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
+    noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
+    clock: 'Kello',
+    comment: 'Kommentti',
+    answer: 'Vastaus',
+    overview: 'Yleiskatsaus',
+    bachelorMasterToggle: 'Kandi- ja Maisteriohjelmat',
+    doctoralToggle: 'Tohtoriohjelmat',
+
+    toFrontpage: 'Etusivulle',
   },
 
   aboutPage: {
@@ -114,6 +153,7 @@ export default {
     labelOptions: 'Graafin yksikkö',
     percentage: 'Prosenttiosuudet',
     programmeAmount: 'Ohjelmien lukumäärä',
+    facultyAmount: 'Tiedekuntien lukumäärä',
     programmes: 'Ohjelmaa',
     fullscreen: 'Koko näyttö',
     downloadPNG: 'Lataa PNG-kuvana',
@@ -130,6 +170,10 @@ export default {
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',
+    infoMeta1:
+      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. Jokaisessa kysymyksessä on myös kommenttikenttä mihin voi vapaasti kommentoida kysymystä.',
+    infoMeta2:
+      'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot, toisin kuin muissa lomakkeissa tässä lomakkeessa on käytössä neljäs liikennevalo, jolla voi merkata että kysymys ei kosketa tätä koulutusohjelmaa):',
     downloadCSV: 'Lataa vastaukset csv-tiedostona',
     downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
     mandatory: 'pakollinen kenttä',
@@ -254,8 +298,14 @@ export default {
     measureLabel: 'Lisätkää 1-5 toimenpidettä.',
     noPermissions:
       'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
-    nowShowing: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
-    chooseMore: 'VALITSE OHJELMAT RAPORTILLE:',
+    nowShowing: {
+      programmes: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
+      faculties: 'VASTAUKSISSA MUKANA OLEVAT TIEDEKUNNAT:',
+    },
+    chooseMore: {
+      programmes: 'VALITSE OHJELMAT RAPORTILLE:',
+      faculties: 'VALITSE TIEDEKUNNAT RAPORTILLE:',
+    },
     tooLongPaste:
       'Teksti jota yrität liittää (yhteensä {{newLength}} merkkiä) ei mahdu maksimimerkkimäärään ({{MAX_LENGTH}} merkkiä)',
     year: 'Valitse vuodet',
@@ -294,6 +344,7 @@ export default {
     selectYear: 'Valitse tarkasteltava vuosi',
     readAnswers: 'Lue vastauksia',
     compareAnswers: 'Vertaile vastauksia',
+    toKatselmus: 'Katselmuksen yliopistotason yhteenvetoon',
     csvDownload: 'Lataa CSV',
     name: 'Nimi',
     view: 'Luku',
@@ -308,7 +359,7 @@ export default {
     facultySummary: 'Koulutusohjelmien vastaukset',
     pcs: 'kpl',
     chooseFaculty: 'Rajaa näytettävät tiedekunnat',
-    developmentTarget: 'Kehityskohde',
+    developmentTarget: 'KEHITTÄMISKOHDE JA TOIMENPITEET',
     universityOverview: 'Yliopistotason yhteenveto',
     uniAnswerLevels: {
       bachelor: 'Kandiohjelmat',
@@ -316,6 +367,30 @@ export default {
       doctoral: 'Tohtoriohjelmat',
       overall: 'Yleiset arviot ja toimenpidesuositukset',
     },
+    selectedLevels: {
+      master: 'Kandi- ja maisteriohjelmat',
+      doctoral: 'Tohtoriohjelmat',
+      overall: 'Yleiset arviot ja toimenpidesuositukset',
+    },
+    uniTableHeaderHY: 'Helsingin yliopiston arvio ja toimenpide-ehdotukset',
+    uniTableHeaderCommittee: 'Arviointiryhmän arvio ja toimenpide-ehdotukset',
+    printingTopHeader: 'Helsingin yliopiston koulutusohjelmien katselmus',
+    printingSubHeaderUpperLevel: {
+      university: 'Yliopiston arviot 2024',
+      arviointi: 'Arviointiryhmän arviot 2024',
+    },
+    printingUpperLevelTitle: {
+      university: 'Yliopiston arvio',
+      arviointi: 'Arviointiryhmän arvio',
+    },
+    printingPDF: {
+      uniBachelorMaster: 'Kandi- ja maisteriohjelmat (yliopistotaso)',
+      uniDoctoral: 'Tohtoriohjelmat (yliopistotaso)',
+      arviointiBachelorMaster: 'Kandi- ja maisteriohjelmat (arviointiryhmä)',
+      arviointiDoctoral: 'Tohtoriohjelmat (arviointiryhmä)',
+    },
+    colorBlindMode: 'Näytä värit tekstinä',
+    print: 'Tulostettavat versiot',
   },
 
   report: {

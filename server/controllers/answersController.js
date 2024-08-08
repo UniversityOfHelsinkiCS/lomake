@@ -35,13 +35,15 @@ const getAllTempUserHasAccessTo = async (req, res) => {
       return res.send(data)
     }
 
+    const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
+
     // normal user route
     const anyAccess = hasAnyAccess(req.user)
     const data = await db.tempAnswer.findAll({
       where: {
         year: await whereDraftYear(),
         [Op.or]: [
-          { programme: Object.keys(req.user.access) },
+          { programme: Object.keys(req.user.access).concat(finalCommitee) },
           anyAccess ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES] } : {},
         ],
       },
@@ -56,9 +58,14 @@ const getAllTempUserHasAccessTo = async (req, res) => {
 
 const getFacultyTempAnswersAfterDeadline = async (req, res) => {
   const { form, year } = req.params
+
   try {
     const deadline = await db.deadline.findOne({ where: { form } })
-    if (deadline) return res.status(403).json({ error: 'Deadline is active, this should not be used' })
+
+    if (deadline) {
+      return res.status(403).json({ error: 'Deadline is active, this should not be used' })
+    }
+
     const data = await db.tempAnswer.findAll({
       where: {
         form,
@@ -193,17 +200,28 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
+    let years = [2019, 2020, 2021, 2022, 2023]
+    if (!req.path.endsWith('/all')) {
+      years = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
+    }
+
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const data = await db.answer.findAll({})
+      const data = await db.answer.findAll({ where: { year: years } })
       return res.send(data)
     }
 
     const anyAccess = hasAnyAccess(req.user)
 
     // Access to answers where user has programme access & access to all yearly assessment form answers if user has any access. Wider access might be applied to other forms later
+
+    const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
+
     const data = await db.answer.findAll({
       where: {
-        [Op.or]: [{ programme: Object.keys(req.user.access) }, anyAccess ? { form: formKeys.YEARLY_ASSESSMENT } : {}],
+        [Op.or]: [
+          { programme: Object.keys(req.user.access).concat(finalCommitee), year: years },
+          anyAccess ? { year: years, form: formKeys.YEARLY_ASSESSMENT } : {},
+        ],
       },
     })
 
@@ -573,6 +591,37 @@ const postIndividualFormPartialAnswer = async (req, res) => {
   }
 }
 
+const getDataFromFinnishUniForm = async (req, res) => {
+  try {
+    const { year } = req.params
+    const draftYears = await db.draftYear.findAll({})
+    const draftYear = draftYears.length ? draftYears[0].year : null
+
+    let data = null
+
+    if (draftYear && draftYear === Number(year)) {
+      data = await db.tempAnswer.findOne({
+        where: {
+          programme: 'UNI',
+          year: draftYear,
+          form: 6,
+        },
+      })
+    } else {
+      data = await db.answer.findOne({
+        where: {
+          programme: 'UNI',
+          year,
+          form: 6,
+        },
+      })
+    }
+    return res.send({ data: data.data })
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
 module.exports = {
   getAll,
   getPreviousYear,
@@ -591,4 +640,5 @@ module.exports = {
   updateIndividualReady,
   getCommitteeSummaryData,
   getFacultyTempAnswersAfterDeadline,
+  getDataFromFinnishUniForm,
 }

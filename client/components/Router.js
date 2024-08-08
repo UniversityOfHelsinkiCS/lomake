@@ -18,22 +18,38 @@ import PastAnswersView from 'Components/EvaluationView/PastAnswersView/Programme
 import PastAnswersViewFaculty from 'Components/EvaluationView/PastAnswersView/FacultyLevel'
 import ViewEvaluationAnswersForFaculty from 'Components/EvaluationView/PastAnswersView/EvaluationProgrammeSummary'
 import CommitteeLevelOverview from 'Components/EvaluationView/CommitteeOverview'
+import CommitteePrinting from 'Components/EvaluationView/CommitteeOverview/CommitteePrinting'
 
 import FacultyFormView from 'Components/EvaluationView/FacultyForm'
 import UniversityFormView from 'Components/EvaluationView/UniversityForm'
+import ProgrammeLevelMetaOverview from 'Components/MetaEvaluationView/ProgrammeLevelOverview'
+import ProgrammeLevelMetaForm from 'Components/MetaEvaluationView/ProgrammeForm'
+import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelAnswers'
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
+import Homepage from './Homepage'
 
 export default () => (
   <div className="content">
     <ErrorBoundary>
       <Switch>
-        <Route exact path="/" component={OverviewPage} />
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/yearly" component={OverviewPage} />
         <Route exact path="/admin" component={AdminPage} />
         <Route exact path="/report" component={ReportPage} />
         <Route exact path="/comparison" component={ComparisonPage} />
         <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/form/:room" render={props => <FormView room={props.match.params.room} />} />
+        <Route exact path="/yearly/form/:form/:room" render={props => <FormView room={props.match.params.room} />} />
+
+        <Route exact path="/meta-evaluation" component={ProgrammeLevelMetaOverview} />
+        <Route exact path="/meta-evaluation/answers" component={ProgrammeLevelAnswers} />
+        <Route
+          exact
+          path="/meta-evaluation/form/:form/:room"
+          render={props => (
+            <ProgrammeLevelMetaForm room={props.match.params.room} formString={props.match.params.form} />
+          )}
+        />
 
         <Route exact path="/evaluation" component={ProgrammeLevelOverview} />
         <Route exact path="/evaluation-faculty" component={FacultyLevelOverview} />
@@ -60,6 +76,7 @@ export default () => (
           path="/evaluation-university/form/:form/:room"
           render={props => <UniversityFormView room={props.match.params.room} formString={props.match.params.form} />}
         />
+        <Route exact path="/evaluation-university/printing" component={CommitteePrinting} />
         <Route
           exact
           path="/evaluation/previous-years/:programme"

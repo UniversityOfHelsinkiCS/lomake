@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
+import { colors, getMeasuresAnswer } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 import DegreeReformCell from './DegreeReformCell'
 import Square from '../EvaluationView/CommitteeOverview/Square'
@@ -12,7 +12,9 @@ import {
   degreeReformIndividualQuestions,
   universityEvaluationQuestions,
   facultyEvaluationQuestions,
+  metareviewQuestions,
 } from '../../questionData'
+import MeasuresCell from './MeasuresCell'
 
 const colorScoreMap = {
   green: 1,
@@ -31,10 +33,11 @@ const ColorTableCell = ({
   form = 1,
   acualQuestionId,
   questionData = null,
-  showText = false,
+  uniFormTrafficLights = null,
 }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
+  const { colorBlindMode } = useSelector(state => state.filters)
   const questionMap = {
     1: yearlyQuestions,
     2: degreeReformIndividualQuestions,
@@ -42,6 +45,7 @@ const ColorTableCell = ({
     4: evaluationQuestions,
     5: facultyEvaluationQuestions,
     6: universityEvaluationQuestions,
+    7: metareviewQuestions,
   }
 
   const questions = questionMap[form] || yearlyQuestions
@@ -59,42 +63,18 @@ const ColorTableCell = ({
     )
   }
 
-  const getMeasuresAnswer = () => {
-    if (!programmesAnswers) return null
-    if (programmesAnswers[`${questionId}_text`]) return programmesAnswers[`${questionId}_text`]
-
-    if (programmesAnswers[`${questionId}_1_text`]) {
-      let measures = ''
-      let i = 1
-      while (i < 6) {
-        if (programmesAnswers[`${questionId}_${i}_text`])
-          measures += `${i}) ${programmesAnswers[`${questionId}_${i}_text`]}  \n`
-        i++
-      }
-
-      return measures
-    }
-
-    return null
-  }
-
-  const getMeasuresCount = () => {
-    let i = 1
-    while (i < 6) {
-      if (programmesAnswers[`${questionId}_${i}_text`]) {
-        i++
-      } else {
-        break
-      }
-    }
-
-    return i - 1
-  }
-
   const textId = `${questionId}_text`
+  const commentId = `${questionId}_comment_text`
   let colorId = `${questionId}_light`
-  const textAnswer = programmesAnswers[textId] || getMeasuresAnswer()
+  let textAnswer = programmesAnswers[textId] || getMeasuresAnswer(programmesAnswers, textId)
+  const commentAnswer = programmesAnswers[commentId] || getMeasuresAnswer(programmesAnswers, commentId)
   let colorAnswer = null
+  const commentAppendix = `${t('comment')}:\n\n`
+
+  if (form === formKeys.META_EVALUATION && commentAnswer) {
+    if (textAnswer) textAnswer += `\n\n${commentAppendix}${commentAnswer}`
+    else textAnswer = commentAppendix + commentAnswer
+  }
 
   const getModalConfig = () => {
     // Kysymys - ylätaso - alataso
@@ -102,14 +82,15 @@ const ColorTableCell = ({
     let tempSubtitle = programmesName
     if (programmesKey === 'UNI') {
       tempQuestionId = questionData.rawQuestionId
-      const whichLevel = questionId.match('bachelor|master|doctoral')[0]
-      tempSubtitle = t(whichLevel)
+      const whichLevel = questionId.match('bachelor|master|doctoral|overall')[0]
+      tempSubtitle = t(`overview:selectedLevels:${whichLevel}`)
     }
     return {
       header: questions.reduce((acc, cur) => {
         if (acc) return acc
         const header = cur.parts.reduce((acc, cur) => {
           if (acc) return acc
+          if (form === formKeys.META_EVALUATION && cur.id === tempQuestionId) return cur.label[lang]
           if (cur.id === tempQuestionId) return cur.description[lang]
           return acc
         }, '')
@@ -147,8 +128,26 @@ const ColorTableCell = ({
         colorAnswer = null
       }
     }
+  } else if (form === formKeys.EVALUATION_COMMTTEES) {
+    if (uniFormTrafficLights === null) {
+      return (
+        <div
+          data-cy={`${programmesKey}-${questionId}`}
+          className="square"
+          style={{ background: colors.background_gray }}
+        />
+      )
+    }
+
+    colorAnswer = { single: uniFormTrafficLights[colorId] }
+    if (questionType === 'TEXTAREA_UNIVERSITY') {
+      const textId = `${acualQuestionId}-arviointi-overall_text`
+      textAnswer = programmesAnswers[textId]
+    }
+  } else if (programmesAnswers[colorId] === undefined) {
+    colorAnswer = null
   } else {
-    colorAnswer = programmesAnswers[colorId]
+    colorAnswer = { single: programmesAnswers[colorId] }
   }
 
   if (form === formKeys.EVALUATION_COMMTTEES && questionId.includes('_actions')) {
@@ -159,7 +158,6 @@ const ColorTableCell = ({
         questionId={questionId}
         t={t}
         questionData={questionData}
-        showText={showText}
       />
     )
   }
@@ -169,31 +167,34 @@ const ColorTableCell = ({
 
   let IconElement = null
 
-  if (
-    textAnswer &&
-    questionType !== 'ENTITY' &&
-    questionType !== 'ENTITY_LEVELS' &&
-    questionType !== 'ENTITY_UNIVERSITY'
-  ) {
+  const modalConfig = getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer)
+
+  if ((textAnswer && questionType === 'ENTITY_NOLIGHT') || (textAnswer && !colorAnswer)) {
     return (
-      <div
-        data-cy={`${programmesKey}-${questionId}`}
-        className="square"
-        style={{ background: colors.background_blue }}
-        onClick={() => {
-          setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
-        }}
-      >
-        {questionId === 'measures' || questionId === 'measures_faculty' ? (
-          <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-            {form !== formKeys.EVALUATION_COMMTTEES && getMeasuresCount()}
-            {form === formKeys.EVALUATION_COMMTTEES && textAnswer}
-          </span>
-        ) : (
-          <Icon name="discussions" size="large" />
-        )}
-      </div>
+      <MeasuresCell
+        programmesAnswers={programmesAnswers}
+        programmesKey={programmesKey}
+        questionId={questionId}
+        modalConfig={modalConfig}
+        setModalData={setModalData}
+        form={form}
+        textAnswer={textAnswer}
+      />
     )
+  }
+  if (form === formKeys.EVALUATION_COMMTTEES) {
+    if (
+      (!textAnswer && questionType === 'TEXTAREA_UNIVERSITY') ||
+      (questionType !== 'TEXTAREA_UNIVERSITY' && !colorAnswer.single)
+    ) {
+      return (
+        <div
+          data-cy={`${programmesKey}-${questionId}`}
+          className="square"
+          style={{ background: colors.background_gray }}
+        />
+      )
+    }
   }
   if (!colorAnswer) {
     return (
@@ -204,14 +205,26 @@ const ColorTableCell = ({
       />
     )
   }
-
+  if (questionType === 'TEXTAREA_UNIVERSITY') {
+    if (!textAnswer) return null
+    return (
+      <div
+        key={`${programmesKey}-${questionId}`}
+        data-cy={`${programmesKey}-${questionId}`}
+        className="square-blue-wide"
+        onClick={() => {
+          setModalData(getModalConfig(modalConfig))
+        }}
+      />
+    )
+  }
   const getIcon = () => {
     if (!programmesOldAnswers) return null
 
     const oldColorAnswer = programmesOldAnswers[colorId]
-    if (!oldColorAnswer || oldColorAnswer === colorAnswer) return null
+    if (!oldColorAnswer || oldColorAnswer === colorAnswer.single) return null
 
-    const difference = colorScoreMap[colorAnswer] - colorScoreMap[oldColorAnswer]
+    const difference = colorScoreMap[colorAnswer.single] - colorScoreMap[oldColorAnswer]
 
     if (difference > 0) return 'angle up'
     if (difference < 0) return 'angle down'
@@ -220,38 +233,25 @@ const ColorTableCell = ({
   }
 
   const icon = getIcon()
-  if (form !== 5 || typeof colorAnswer === 'string') {
-    IconElement = (
-      <div
-        data-cy={`${programmesKey}-${questionId}`}
-        className={`square-${colorAnswer}`}
-        onClick={() => {
-          setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
-        }}
-      >
-        {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-      </div>
-    )
-  } else {
-    IconElement = (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {Object.entries(colorAnswer).map(([key, value]) => {
-          return (
-            <div
-              key={`${programmesKey}-${questionId}-${key}`}
-              data-cy={`${programmesKey}-${questionId}-${key}`}
-              className={`square-${value}`}
-              onClick={() => {
-                setModalData(getModalConfig(questions, questionId, lang, programmesName, textAnswer, colorAnswer))
-              }}
-            >
-              {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
-            </div>
-          )
-        })}
-      </div>
-    )
-  }
+  IconElement = (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {Object.entries(colorAnswer).map(([key, value]) => {
+        return (
+          <div
+            key={`${programmesKey}-${questionId}-${key}`}
+            data-cy={`${programmesKey}-${questionId}-${key}`}
+            className={`square-${value}`}
+            onClick={() => {
+              setModalData(getModalConfig(modalConfig))
+            }}
+          >
+            {colorBlindMode && t(value)}
+            {icon && <Icon name={icon} style={{ margin: '0 auto' }} size="large" />}
+          </div>
+        )
+      })}
+    </div>
+  )
 
   if (!icon) return IconElement
   return (

@@ -16,18 +16,20 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './EvaluationFacultyForm.scss'
-import { colors, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
+import { colors, getYearToShow, isAdmin, isKatselmusProjektiOrOhjausryhma } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { facultyEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, writeAccess }) => {
-  if (!draftYear) return true
-  if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== form) return true
-  if (!writeAccess) return true
-  return false
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
+  // This is used since faculty doesn't have stuyprogramme
+  const isDraftYearInvalid = !draftYear || (draftYear && draftYear.year !== year)
+  const isFormDeadlineInvalid = formDeadline?.form !== form
+  const isWriteAccessInvalid = !writeAccess
+
+  return isDraftYearInvalid || isFormDeadlineInvalid || isWriteAccessInvalid
 }
 
 const findEntityLevelAnswers = (programmes, allAnswers, question) => {
@@ -119,11 +121,9 @@ const FacultyFormView = ({ room, formString }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const componentRef = useRef()
-  const oldAnswerYears = useSelector(state => state.oldAnswers.years)
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
 
   const faculties = useSelector(state => state.faculties.data)
@@ -134,15 +134,9 @@ const FacultyFormView = ({ room, formString }) => {
   const oodiFacultyURL = `https://oodikone.helsinki.fi/evaluationoverview/faculty/${room}`
   const degreeReformUrl = `/degree-reform?faculty=${room}`
 
-  let year = 2023 // the next time form is filled is in 2026
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
-  if (draftYear) {
-    // This is for tests
-    year = draftYear.year
-  } else if (oldAnswerYears) {
-    const [latestYear] = oldAnswerYears.sort((a, b) => b - a)
-    year = latestYear
-  }
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const hasReadRights =
     user.access[faculty.code] ||
@@ -154,7 +148,8 @@ const FacultyFormView = ({ room, formString }) => {
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
-  }, [lang, room])
+    dispatch(setYear(year))
+  }, [lang, room, year])
 
   useEffect(() => {
     if (!faculty || !form) return
@@ -254,7 +249,7 @@ const FacultyFormView = ({ room, formString }) => {
                     <Trans i18nKey="formView:facultyInfo" />
                   </p>
                 </div>
-                <p>{t('formView:info2')}</p>
+                <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div className="big-circle-green" />

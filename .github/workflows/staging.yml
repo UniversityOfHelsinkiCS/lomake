@@ -25,6 +25,8 @@ jobs:
             sidebar,
             yearselector,
             evaluation,
+            metaevaluation,
+            homepage,
           ]
     name: Run tests
     runs-on: ubuntu-latest
@@ -39,8 +41,8 @@ jobs:
       - name: npm ci
         run: npm ci --no-audit --no-fund
 
-      - name: docker-compose up -d
-        run: docker-compose up -d
+      - name: docker compose up -d
+        run: docker compose up -d
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node index.js seed"
@@ -52,13 +54,13 @@ jobs:
           max_attempts: 2
           command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Cypress videos
           path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Cypress screenshots
@@ -84,6 +86,8 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=staging
+          extra-args: |
+            --ulimit nofile=4096:4096
 
       - name: Push to quay.io
         uses: redhat-actions/push-to-registry@v2

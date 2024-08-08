@@ -3,6 +3,7 @@ import degreeReformIndividualQuestions from './degreeReformIndividualQuestions.j
 import evaluationQuestions from './evaluationQuestions.json'
 import facultyEvaluationQuestions from './evaluationFacultyQuestions.json'
 import universityEvaluationQuestions from './evaluationUniversityQuestions.json'
+import metareviewQuestions from './metaReview.json'
 
 export {
   yearlyQuestions,
@@ -10,4 +11,5 @@ export {
   evaluationQuestions,
   facultyEvaluationQuestions,
   universityEvaluationQuestions,
+  metareviewQuestions,
 }

@@ -1,30 +1,9 @@
 $QUESTION_COUNT: 21;
 $EVALUATION_COUNT: 13;
 $DEGREE_REFORM_COUNT: 10;
+$METAEVALUATION_COUNT: 30;
+$METADOCTORAL_COUNT: 9;
 @import '../../assets/colors.scss';
-
-.wide-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 2fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
-
-.wideish-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
-  align-items: center;
-  column-gap: 2rem;
-  margin: 2rem 1rem;
-  margin-bottom: 3rem;
-}
-
-.view-title {
-  margin-right: 1em;
-  margin-top: 1em,
-}
 
 .csv-download {
   max-width: 200px;
@@ -44,6 +23,28 @@ $DEGREE_REFORM_COUNT: 10;
 .overview-color-grid-evaluation {
   display: grid;
   grid-template-columns: 4fr 1fr repeat($EVALUATION_COUNT, 1fr) 1fr;
+  grid-auto-columns: 50px;
+  grid-template-rows: 160px 70px;
+  grid-auto-rows: 50px;
+  grid-row-gap: 25px;
+  grid-column-gap: 5px;
+  width: 95vw;
+}
+
+.overview-color-grid-meta-evaluation {
+  display: grid;
+  grid-template-columns: 4fr 1fr repeat($METAEVALUATION_COUNT, 1fr) 1fr;
+  grid-auto-columns: 50px;
+  grid-template-rows: 160px 70px;
+  grid-auto-rows: 50px;
+  grid-row-gap: 25px;
+  grid-column-gap: 5px;
+  width: 95vw;
+}
+
+.overview-color-grid-meta-doctoral {
+  display: grid;
+  grid-template-columns: 4fr 1fr repeat($METADOCTORAL_COUNT, 1fr) 1fr;
   grid-auto-columns: 50px;
   grid-template-rows: 160px 70px;
   grid-auto-rows: 50px;
@@ -108,6 +109,23 @@ $DEGREE_REFORM_COUNT: 10;
       filter: brightness(0.8);
     }
   }
+  &-blue {
+    &-wide {
+      @include square-basics();
+      grid-column: span 2;
+      background-color: rgb(223, 240, 255);
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+  &-gray {
+    @include square-basics();
+    background-color: rgb(128, 128, 128);
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
 
 @mixin sticky-header-basics {
@@ -124,9 +142,12 @@ $DEGREE_REFORM_COUNT: 10;
 
   &-categories {
     @include sticky-header-basics();
+    height: 175px;
     word-wrap: break-word;
     text-align: center;
     font-weight: bold;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 }
 
@@ -152,9 +173,10 @@ $DEGREE_REFORM_COUNT: 10;
   }
   &-degree-reform-button {
     position: relative;
-    top: 140px;
+    top: 100px;
     z-index: 10;
-    width: 8em;
+    width: 0;
+    height: 0;
   }
   &-degree-reform-filter {
     align-self: flex-start;
@@ -173,6 +195,7 @@ $DEGREE_REFORM_COUNT: 10;
 
 .vertical-text {
   writing-mode: vertical-rl;
+  text-align: left;
 }
 
 @mixin traffic-light-basics {

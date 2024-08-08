@@ -1,39 +1,37 @@
-import React from 'react'
-import { Icon, Header } from 'semantic-ui-react'
+import React, { Fragment } from 'react'
+import { Header } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-const CommitteeTableHeader = ({ tableIds, sort, title }) => {
+const CommitteeTableHeader = ({ tableIds }) => {
   const { t } = useTranslation()
   const gridColumnSize = tableIds[0].levels.length * 2 + 1
   return (
     <>
       <div className={`committee-table-header-${gridColumnSize}-left-padding`} />
       <div className={`committee-table-header-${gridColumnSize}-university`}>
-        <Header block style={{ height: 'max-content' }}>
+        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
-          Helsingin yliopiston arvio ja toimenpide-ehdotukset{' '}
+          {t('overview:uniTableHeaderHY')}
         </Header>
       </div>
+      <div className={`committee-table-header-${gridColumnSize}-gap`} />
       <div className={`committee-table-header-${gridColumnSize}-committee`}>
-        <Header style={{ height: 'max-content' }} block>
+        <Header block style={{ minHeight: '5em', height: 'max-content' }}>
           {' '}
-          Arviointiryhmän arvio ja toimenpide-ehdotukset
+          {t('overview:uniTableHeaderCommittee')}
         </Header>
       </div>
-      <div className={`committee-table-header-${gridColumnSize}-right-padding`} />
-      <div className="sticky-header">
-        <div className="sorter" onClick={() => sort('name')}>
-          {title || t('programmeHeader')}
-          <Icon name="sort" />
-        </div>
-      </div>
-      {tableIds.map(upperLevel =>
-        upperLevel.levels.map(level => (
-          <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
-            <span>{t(`overview:uniAnswerLevels:${level}`)}</span>
-          </div>
-        )),
-      )}
+      <div className="sticky-header" />
+      {tableIds.map((upperLevel, index) => (
+        <Fragment key={upperLevel.title}>
+          {upperLevel.levels.map(level => (
+            <div key={`${upperLevel.title}-${level}`} className={`sticky-header-categories-${gridColumnSize}`}>
+              <span>{t(`overview:selectedLevels:${level}`)}</span>
+            </div>
+          ))}
+          {index === 0 && <div className="committee-table-header-second-level-gap" />}
+        </Fragment>
+      ))}
     </>
   )
 }

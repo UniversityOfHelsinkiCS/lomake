@@ -12,13 +12,13 @@ const cypressOspaUser = 'cypressOspaUser'
 describe('Permission tests', () => {
   it('Invalid url shows error', () => {
     cy.login(user)
-    cy.visit('/form/lmao')
+    cy.visit('yearly/form/1/lmao')
     cy.contains('Error: Invalid url.')
   })
 
   it("Can't access form without permissions", () => {
     cy.login(noRightsUser)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=no-permissions-message]')
   })
 
@@ -36,7 +36,7 @@ describe('Permission tests', () => {
 
   it("Can't WRITE with READ permissions and cant go to edit mode", () => {
     cy.login(readingRightsUser)
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
 
     // Check that cant edit stuff:
     cy.get('[data-cy=form-section-I]').click() // Simulate open attept even though does not do anything
@@ -46,7 +46,7 @@ describe('Permission tests', () => {
 
   it('Can do management with ADMIN permissions', () => {
     cy.login(cypressOspaUser)
-    cy.visit('/')
+    cy.visit('/yearly')
 
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.get('[data-cy^=formLocker-button]')
@@ -54,17 +54,17 @@ describe('Permission tests', () => {
 
   it('Can see programme jory IAM-group with ADMIN permissions', () => {
     cy.login(cypressOspaUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).click()
     cy.contains(testIAM)
 
     cy.login(readingRightsUser)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=${testProgrammeCode}-manage]`).should('not.exist')
   })
 
   it("Can see users' deducted role with ADMIN permissions", () => {
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get('[data-cy=nav-admin]').should('not.exist')
     cy.login(cypressOspaUser)
 

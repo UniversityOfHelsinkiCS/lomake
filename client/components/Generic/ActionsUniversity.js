@@ -2,7 +2,17 @@ import React from 'react'
 import './Generic.scss'
 import Actions from './Actions'
 
-const ActionsUniversity = ({ id, label, description, form, required, extrainfo, programme, summaryData }) => {
+const ActionsUniversity = ({
+  id,
+  label,
+  description,
+  form,
+  required,
+  extrainfo,
+  programme,
+  summaryData,
+  noUniversityLevel,
+}) => {
   const universityTitle = {
     level: 'university',
     fi: 'Yliopistotason arviointi',
@@ -10,22 +20,18 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
     sv: 'Universitetsnivå utvärdering',
   }
 
-  const evaluationTitle =
-    id === 'university_ease_of_study_actions'
-      ? {
-          level: 'arviointi',
-          fi: 'ARVIOINTIRYHMÄN NIMEÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET OPISKELUN SUJUVUUDESTA',
-          se: 'ÅTGÄRDER SON FÖRESLAGITS AV UTVÄRDERINGSGRUPPEN OM SMIDIGA STUDIER',
-          en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE SMOOTH RUNNING OF STUDIES, AS IDENTIFIED BY THE EVALUATION GROUP',
-        }
-      : {
-          level: 'arviointi',
-          fi: 'ARVIOINTIRYHMÄN NIMEÄMÄT KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET KOULUTUKSEN KOKONAISRAKENTEESTA, KOULUTUSOHJELMIEN ASEMASTA, JOHTAMISESTA JA RESURSSEISTA',
-          se: 'ÅTGÄRDER SON FÖRESLAGITS AV UTVÄRDERINGSGRUPPEN OM UTBILDNINGENS HELHETSSTRUKTUR, LEDNING, RESURSER OCH UTBILDNINGSPROGRAMMENS STÄLLNING',
-          en: 'AREAS FOR IMPROVEMENT AND NECESSARY MEASURES FOR THE OVERALL STRUCTURE OF EDUCATION, LEADERSHIP AND MANAGEMENT, RESOURCES, AND THE STATUS OF DEGREE PROGRAMMES, AS IDENTIFIED BY THE EVALUATION GROUP',
-        }
+  const evaluationTitle = {
+    level: 'arviointi',
+    fi: 'Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet',
+    se: 'Utvecklingsobjekt och åtgärder av utvärderingsgruppen',
+    en: 'Areas for development and measures identified by the evaluation group',
+  }
 
   const questionLevels = [universityTitle, evaluationTitle]
+
+  if (noUniversityLevel === true) {
+    questionLevels.shift()
+  }
 
   const styleFor = ({ level }) => {
     if (level === 'university') {
@@ -95,7 +101,7 @@ const ActionsUniversity = ({ id, label, description, form, required, extrainfo, 
             >
               {' '}
             </Actions>
-            {questionLevel.level === 'arviointi' && (
+            {questionLevel.level === 'arviointi' && !noUniversityLevel && (
               <Actions
                 id={`${id}-${questionLevel.level}-overall`}
                 isArviointi={isArviointi}

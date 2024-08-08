@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 const StudyLevelHeader = () => {
@@ -11,7 +11,7 @@ const StudyLevelHeader = () => {
   )
 }
 
-const TableHeader = ({ tableIds, sort, title, showStudyLevel }) => {
+const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) => {
   const { t } = useTranslation()
 
   return (
@@ -29,11 +29,21 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel }) => {
         </div>
       </div>
       {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
-      {tableIds.map(idObject => (
-        <div key={idObject.id} className="sticky-header-categories">
-          <span className="vertical-text">{idObject.shortLabel}</span>
-        </div>
-      ))}
+      {tableIds.map(idObject => {
+        let shortLabel = meta ? `${idObject.id} ${idObject.shortLabel}` : idObject.shortLabel
+        let label = meta ? `${idObject.id} ${idObject.label}` : shortLabel
+
+        if (meta) {
+          if (shortLabel.startsWith('T')) shortLabel = shortLabel.substring(1)
+          if (label.startsWith('T')) label = label.substring(1)
+        }
+
+        return (
+          <div key={idObject.id} className="sticky-header-categories">
+            <Popup trigger={<span className="vertical-text">{shortLabel}</span>}>{label}</Popup>
+          </div>
+        )
+      })}
       <div className="sticky-header" />
     </>
   )

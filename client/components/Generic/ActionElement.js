@@ -27,6 +27,7 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
           {t('formView:developmentArea')}
         </Label>
         <TextArea
+          data-cy={`${id}-development-area-${index}`}
           id="title"
           style={{ width: '50%' }}
           rows={2}
@@ -38,7 +39,11 @@ const ActionElement = ({ id, form, viewOnly, index }) => {
       </div>
       <div className="form-textarea">
         <label>{t(form === formKeys.EVALUATION_PROGRAMMES ? 'formView:actions' : 'formView:requiredActions')}</label>
-        {viewOnly ? actions : <textarea id="actions" value={actions || ''} onChange={handleChange} />}
+        {viewOnly ? (
+          actions
+        ) : (
+          <textarea data-cy={`${id}-action-${index}`} id="actions" value={actions || ''} onChange={handleChange} />
+        )}
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
@@ -13,6 +13,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import YearSelector from 'Components/Generic/YearSelector'
 import useDebounce from 'Utilities/useDebounce'
+import { formKeys } from '@root/config/data'
 import StatsContent from './StatsContent'
 import ColorTable from './ColorTable'
 import ProgramControlsContent from './ProgramControlsContent'
@@ -32,7 +33,7 @@ export default () => {
   const currentUser = useSelector(state => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
 
-  const form = 1 // TO FIX
+  const form = formKeys.YEARLY_ASSESSMENT
   const formType = 'yearlyAssessment'
 
   useEffect(() => {
@@ -55,8 +56,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes)
-
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes })
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
       const name = prog.name[lang]
@@ -106,38 +106,47 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('yearlyAssessment').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-            <YearSelector size="extra-small" />
-            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-                {t('overview:compareAnswers')}
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem>
+              <h2>{t('yearlyAssessment').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <YearSelector size="extra-small" />
+            </MenuItem>
+            <MenuItem>
+              <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+                {t('overview:readAnswers')}
               </Button>
-            )}
-            <Dropdown
-              data-cy="csv-download"
-              className="button basic gray csv-download"
-              direction="left"
-              text={t('overview:csvDownload')}
-              onClick={() => setShowCsv(true)}
-            >
-              {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" form={form} />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" form={form} />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              ) : null}
-            </Dropdown>
-          </div>
-          <div style={{ marginTop: '1em' }}>
+            </MenuItem>
+            <MenuItem>
+              {moreThanFiveProgrammes && (
+                <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+                  {t('overview:compareAnswers')}
+                </Button>
+              )}
+            </MenuItem>
+            <MenuItem position="right">
+              <Dropdown
+                data-cy="csv-download"
+                className="button basic gray csv-download"
+                direction="left"
+                text={t('overview:csvDownload')}
+                onClick={() => setShowCsv(true)}
+              >
+                {showCsv ? (
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="written" view="overview" form={form} />
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : null}
+              </Dropdown>
+            </MenuItem>
+          </Menu>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}
@@ -154,7 +163,14 @@ export default () => {
           </div>
         </>
       ) : (
-        <NoPermissions t={t} />
+        <>
+          {false && <NoPermissions t={t} />}
+          <div data-cy="no-permissions-message">
+            <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva/evaluation-university/">
+              {t('overview:toKatselmus')}
+            </a>
+          </div>
+        </>
       )}
     </>
   )

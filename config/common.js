@@ -192,6 +192,10 @@ const testProgrammeCode = 'KH50_005'
 
 const testProgrammeName = `Bachelor's Programme in Computer Science`
 
+const testProgrammeCodeDoctor = 'T923107'
+
+const testProgrammeNameDoctor = 'Doctoral Programme in Computer Science'
+
 const testFacultyCode = 'H50'
 
 const testFacultyName = 'Faculty of Science'
@@ -220,6 +224,8 @@ module.exports = {
   testProgrammeName,
   testFacultyCode,
   testFacultyName,
+  testProgrammeCodeDoctor,
+  testProgrammeNameDoctor,
   testIAM,
   LOMAKE_SINCE_YEAR,
   getYearsArray,

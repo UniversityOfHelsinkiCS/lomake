@@ -20,9 +20,10 @@ const getExportText = ({ lang, multipleYears, faculties, faculty, level, t }) =>
   const formText = t('comparison:chartExport')
   const time =
     multipleYears.length > 1 ? `${multipleYears[0]}-${multipleYears[multipleYears.length - 1]}` : multipleYears[0]
-  const facultyText = faculty === 'allFaculties' ? '' : faculties.find(f => f.code === faculty).name[lang]
+  const facultiesFiltered = faculty && faculty[0] === 'allFaculties' ? '' : faculties.filter(f => f.code === faculty)
   const levelText = t(level)
-  return `${formText}_${time}_${facultyText}_${levelText}`
+  const facultyTexts = faculty[0] !== 'allFaculties' ? facultiesFiltered.map(f => f.name[lang]) : ''
+  return `${formText}_${time}_${facultyTexts}_${levelText}`
 }
 
 const BarChart = ({ data, questions, unit }) => {

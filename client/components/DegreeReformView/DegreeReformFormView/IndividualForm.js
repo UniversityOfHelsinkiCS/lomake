@@ -9,13 +9,14 @@ import StatusMessage from 'Components/FormView/StatusMessage'
 
 import { setViewOnly, updateIndividualReady, getSingleUsersAnswers } from 'Utilities/redux/formReducer'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
+import { getYearToShow } from 'Utilities/common'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import DegreeReformForm from './ProgramForm'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, formNumber, ready }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, ready, form }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
-  if (formDeadline?.form !== formNumber) return true
+  if (formDeadline?.form !== form) return true
   if (ready) return true
   return false
 }
@@ -24,6 +25,7 @@ const DegreeReformIndividual = () => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const { t } = useTranslation()
   const user = useSelector(state => state.currentUser.data)
+  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formData = useSelector(state => state.form)
   const [message, setMessage] = useState(null)
   const { uid } = user
@@ -35,16 +37,15 @@ const DegreeReformIndividual = () => {
     document.title = `${t('degree-reform-individual')}`
   }, [lang])
 
-  const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === formNumber) : null
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === formNumber) : null
 
-  const year = formDeadline ? 2024 : 2023
+  const year = getYearToShow({ draftYear, nextDeadline, form: formNumber })
 
   const currentRoom = useSelector(state => state.room)
   useEffect(() => {
     if (formData.pending) return
     dispatch(getSingleUsersAnswers())
-    if (formShouldBeViewOnly({ draftYear, year, formDeadline, formNumber, ready: formData.data.ready })) {
+    if (formShouldBeViewOnly({ draftYear, year, formDeadline, ready: formData.data.ready, form: formNumber })) {
       dispatch(setViewOnly(true))
     } else {
       dispatch(setViewOnly(false))

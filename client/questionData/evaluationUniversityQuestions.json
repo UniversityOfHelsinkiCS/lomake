@@ -49,9 +49,9 @@
           "en": "CURRICULUM"
         },
         "description": {
-          "fi": "Yliopiston koulutusohjelmien kokonaisuuden toimivuus",
-          "se": "Hur helheten av universitetets utbildnigsprogram fungerar",
-          "en": "Functionality of the university's degree programmes as a whole"
+          "fi": "Koulutusohjelmien opetussuunnitelmien toimivuus yliopistossas",
+          "se": "Undervisningsplanernas ändamålsenlighet vid universitetet",
+          "en": "Functionality of the curricula of degree programmes at the university"
         },
         "required": true,
         "level_breakdown": true,
@@ -164,6 +164,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om studiernas smidighet i kandidat-, magister- och doktorandprogram? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the smoothness of studying for a bachelor's, master's and/or doctoral degree?  Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot opiskelun sujuvuudesta",
+          "en": "Differences of opinion on the smooth running of studies",
+          "se": "Skilda uppfattningar om smidiga studier"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -221,9 +226,9 @@
           "en": "Please provide an assessment of the correspondence between statistical data on the progress of studies and faculty reviews of student progress."
         },
         "shortLabel": {
-          "fi": "",
+          "fi": "Tilastotiedon ja tiedekuntien arvioiden vastaavuus",
           "se": "",
-          "en": ""
+          "en": "Consistency between statistical data and faculty reviews"
         },
         "required": false,
         "no_color": true,
@@ -240,6 +245,11 @@
           "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "UTVECKLINGSOMRÅDEN PÅ UNIVERSITETSNIVÅ OCH ÅTGÄRDER SOM BÖR VIDTAS",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
+        },
+        "shortLabel": {
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
         },
         "description": {
           "fi": "Punaisen kokonaisarvion saaneista koskevista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista teemoista osassa voidaan tarvita konkreettisia toimenpiteitä. Nimetkää 1-5 yliopiston kehittämiskohdetta / tutkintotaso ja niihin tarvittavat konkreettiset toimenpiteet.",
@@ -382,8 +392,8 @@
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
           "fi": "Yhteiset ohjelmat",
-          "se": "",
-          "en": ""
+          "se": "Fakultetsöverskridande program",
+          "en": "Joint programmes at the university"
         },
         "label": {
           "fi": "TIEDEKUNTIEN YHTEISET OHJELMAT",
@@ -451,6 +461,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställninag i kandidat-, magister- och doktorandprogram? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall structure of education, leadership and management, resources, and the status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaisrakenteesta, johtamisesta, resursseista ja koulutusohjelmien asemasta",
+          "en": "Differences of opinion on the overall structure of education, leadership and management, resources, and the status of degree programmes",
+          "se": "Skilda uppfattningar om utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställning"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -479,6 +494,11 @@
           "se": "Vilka är universitetets styrkor när det gäller temat utbildningens helhetsstruktur, ledning, resurser och utbildningsprogrammens ställning i kandidat-, magister- och doktorandprogram?",
           "en": "What are the university's strengths in overall structure of education, leadership and management, resources, and the status of degree programmes?"
         },
+        "shortLabel": {
+          "fi": "Yliopiston vahvuudet",
+          "se": "Universitetets styrkor",
+          "en": "The university's strengths"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -495,6 +515,11 @@
           "fi": "YLIOPISTOTASON KEHITTÄMISKOHTEET JA TARVITTAVAT TOIMENPITEET",
           "se": "UTVECKLINGSOMRÅDEN PÅ UNIVERSITETSNIVÅ OCH ÅTGÄRDER SOM BÖR VIDTAS",
           "en": "DEVELOPMENT AREAS AND MEASURES BY THE UNIVERSITY"
+        },
+        "shortLabel": {
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
         },
         "description": {
           "fi": "Punaisen liikennevaloarvion saaneista aiheista tulee muodostaa kehittämiskohteet konkreettisine toimenpiteineen. Myös keltaisen arvion saaneista aiheista osassa voidaan tarvita konkreettisia toimenpiteitä.",
@@ -526,8 +551,8 @@
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
           "fi": "KOULUTUKSEN KOKONAISTOIMIVUUS",
-          "se": "",
-          "en": ""
+          "se": "Den övergripande situationen för universitets utbildning för närvarande",
+          "en": "Overall status of the degree programmes at the university"
         },
         "label": {
           "fi": "YLIOPISTON KOULUTUKSEN KOKONAISTOIMIVUUS",
@@ -566,6 +591,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsbedömning? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall status of degree programmes? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaistoimivuudesta",
+          "se": "Skilda uppfattningar om utbildningens helhetsbedömning",
+          "en": "Differences of opinion on the overall status of degree programmes"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -581,9 +611,9 @@
         "kludge": true,
         "type": "ENTITY_UNIVERSITY",
         "shortLabel": {
-          "fi": "Arvioikaa yliopiston koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
-          "se": "",
-          "en": ""
+          "fi": "Missä yliopiston koulutuksessa mennään viiden vuoden kuluttua",
+          "se": "Var universitetes utbildning befinner sig om fem år",
+          "en": "Overall status of education of the university in five years"
         },
         "label": {
           "fi": "MISSÄ YLIOPISTON KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",
@@ -622,6 +652,11 @@
           "se": "Finns det betydande skillnader i åsikterna mellan fakulteterna om utbildningens helhetsbedömning om fem år? Beskriv hur skillnaderna är och hur man kom fram till en gemensam bedömning på universitetsnivå.",
           "en": "Are there significant differences of opinion between faculties on the overall status of education at the university in five years? Please describe the differences of opinion and how consensus was reached for the current assessment."
         },
+        "shortLabel": {
+          "fi": "Näkemyserot koulutuksen kokonaistilanteesta viiden vuoden kuluttua",
+          "se": "Skilda uppfattningar om utbildningens helhetsbedömning om fem år",
+          "en": "Differences of opinion on the overall status of education at the university in five years"
+        },
         "required": false,
         "no_color": true,
         "extrainfo": {
@@ -630,6 +665,55 @@
           "en": ""
         },
         "relatedEvaluationQuestion": "faculty_where_are_we_in_five_years_opinion_differences"
+      },
+      {
+        "id": "evaluation_group_overall_actions",
+        "type": "ACTIONS_UNIVERSITY",
+        "label": {
+          "fi": "Arviointiryhmän esittämät kehittämiskohteet ja toimenpiteet",
+          "se": "Utvecklingsobjekt och åtgärder av utvärderingsgruppen",
+          "en": "Areas for development and measures identified by the evaluation group"
+        },
+        "description": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "extrainfo": {
+          "fi": "",
+          "se": "",
+          "en": ""
+        },
+        "required": true,
+        "no_color": true,
+        "noUniversityLevel": true
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
+      "en": "GENERAL FINDINGS AND FEEDBACK FROM THE EVALUATION GROUP",
+      "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA IAKTTAGELSER OCH RESPONS"
+    },
+    "parts": [
+      {
+        "id": "evaluation_group_development_targets_and_actionable_items",
+        "index": 14,
+        "kludge": true,
+        "type": "TEXTAREA_UNIVERSITY",
+        "label": {
+          "fi": "ARVIOINTIRYHMÄN YLEISET HAVAINNOT JA PALAUTE",
+          "en": "GENERAL FINDINGS AND FEEDBACK FROM THE EVALUATION GROUP",
+          "se": "UTVÄRDERINGSGRUPPENS ALLMÄNNA IAKTTAGELSER OCH RESPONS"
+        },
+        "description": {
+          "fi": "Arviointiryhmän yleiset havainnot ja palaute",
+          "se": "Utvärderingsgruppens allmänna iakttagelser och respons",
+          "en": "General findings and feedback from the evaluation group"
+        },
+        "required": true,
+        "maxLength": 6000
       }
     ]
   }

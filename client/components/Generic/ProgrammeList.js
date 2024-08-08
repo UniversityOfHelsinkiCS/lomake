@@ -7,14 +7,14 @@ import { sortedItems } from 'Utilities/common'
 import './Generic.scss'
 import { formKeys } from '@root/config/data'
 
-const Programme = ({ p, lang, faculty, form }) => {
+const Programme = ({ p, lang, selectedFaculties, form }) => {
   return (
     <Fragment key={p.key}>
       {p.name[lang]}
       {form &&
         form !== formKeys.EVALUATION_FACULTIES &&
-        p.primaryFaculty.code !== faculty &&
-        faculty !== 'allFaculties' && (
+        !selectedFaculties.includes(p.primaryFaculty.code) &&
+        !selectedFaculties.includes('allFaculties') && (
           <span className="list-companion-icon">
             <Icon name="handshake outline" />
           </span>
@@ -23,10 +23,20 @@ const Programme = ({ p, lang, faculty, form }) => {
   )
 }
 
+const facultyLabels = {
+  nowShowing: 'generic:nowShowing:faculties',
+  chooseMore: 'generic:chooseMore:faculties',
+}
+
+const programmeLabels = {
+  nowShowing: 'generic:nowShowing:programmes',
+  chooseMore: 'generic:chooseMore:programmes',
+}
+
 const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
-  const faculty = useSelector(({ filters }) => filters.faculty)
+  const selectedFaculties = useSelector(({ filters }) => filters.faculty)
   const form = useSelector(state => state.filters.form)
 
   const addToList = programme => {
@@ -35,10 +45,11 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
     }
   }
 
+  const labels = form === formKeys.EVALUATION_FACULTIES ? facultyLabels : programmeLabels
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
-        <p className="list-header">{t('generic:nowShowing')}</p>
+        <p className="list-header">{t(labels.nowShowing)}</p>
         {programmes.all.length > 0 ? (
           <Fragment key={programmes}>
             {sortedItems(programmes.all, 'name', lang).map(p => {
@@ -55,13 +66,13 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     key={pKey}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} faculty={faculty} />
+                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} />
                   </p>
                 )
               )
             })}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t('generic:chooseMore')}</p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{labels.chooseMore}</p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
               if (form === formKeys.EVALUATION_FACULTIES) {
@@ -76,7 +87,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
                     key={pKey}
                     role="presentation"
                   >
-                    <Programme p={p} lang={lang} faculty={faculty} form={form} />
+                    <Programme p={p} lang={lang} selectedFaculties={selectedFaculties} form={form} />
                   </p>
                 )
               )

@@ -5,6 +5,7 @@ const formKeys = {
   EVALUATION_PROGRAMMES: 4,
   EVALUATION_FACULTIES: 5,
   EVALUATION_COMMTTEES: 6,
+  META_EVALUATION: 7,
 }
 
 const forms = [
@@ -40,7 +41,7 @@ const forms = [
   },
   {
     key: 7,
-    name: 'Katselmus - arviointiryhmä',
+    name: 'Katselmus - toimeenpano',
     type: 'evaluation',
   },
 ]
@@ -121,9 +122,9 @@ const facultyList = [
   {
     code: 'H74',
     name: {
-      fi: 'Humanistinen tiedekunta, ruotsinkielinen',
-      en: 'Faculty of Arts, Swedish',
-      se: 'Humanistiska fakulteten, svenska',
+      fi: 'Svenska social- och kommunalhögskolan',
+      en: 'Swedish School of Social Science',
+      se: 'Svenska social- och kommunalhögskolan',
     },
   },
   {
@@ -163,6 +164,22 @@ const facultyMap = {
 const committeeList = [
   {
     code: 'UNI',
+    name: {
+      fi: 'Yliopistotaso',
+      en: 'University level',
+      se: 'Universitetsnivå',
+    },
+  },
+  {
+    code: 'UNI_EN',
+    name: {
+      fi: 'Yliopistotaso',
+      en: 'University level',
+      se: 'Universitetsnivå',
+    },
+  },
+  {
+    code: 'UNI_SE',
     name: {
       fi: 'Yliopistotaso',
       en: 'University level',

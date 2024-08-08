@@ -25,6 +25,7 @@ const replaceTitle = {
 // These question types are shown in the navigation sidebar
 const questionTypesToShow = [
   'ENTITY',
+  'META_ENTITY',
   'MEASURES',
   'CHOOSE-RADIO',
   'SELECTION',
@@ -44,7 +45,7 @@ const getColor = (filled, required) => {
 }
 
 const getCorrectRomanNumeral = (number, formType) => {
-  if (formType === 'evaluation') {
+  if (formType === 'evaluation' || formType === 'meta-evaluation') {
     return romanize(number + 1) || '0'
   }
   return romanize(number) || '0'
@@ -68,7 +69,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   const location = useLocation()
   const { t } = useTranslation()
   let questionsToShow = questions
-  let linkBase = '/form/'
+  let linkBase = ''
   let isDegreeForm = false
   if (formNumber === formKeys.EVALUATION_PROGRAMMES) {
     questionsToShow = evaluationQuestions
@@ -87,6 +88,10 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     questionsToShow = questionData
     linkBase = '/individual'
     isDegreeForm = true
+  } else if (formType === 'meta-evaluation') {
+    questionsToShow = questionData
+  } else if (formType === formKeys.YEARLY_ASSESSMENT) {
+    linkBase = `/yearly/form/${formNumber}`
   }
 
   let formDataFilter = []
@@ -97,6 +102,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
   }
 
   let partNumber = formType === 'evaluation' ? 0 : -1
+  partNumber = formType === 'meta-evaluation' ? 0 : -1
+
   return (
     <div className="navigation-sidebar">
       <Message style={{ padding: 0 }}>
@@ -152,6 +159,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       if (
                         type === 'TEXTAREA' ||
                         type === 'ENTITY' ||
+                        type === 'META_ENTITY' ||
                         type === 'SELECTION' ||
                         type === 'ENTITY_LEVELS' ||
                         type === 'ENTITY_UNIVERSITY'

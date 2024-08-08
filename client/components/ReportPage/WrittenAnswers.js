@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import SingleProgramQuestion from './SingleProgramQuestion'
 import Question from './Question'
 import DisabledQuestion from './DisabledQuestion'
@@ -18,15 +17,11 @@ const WrittenAnswers = ({
   questionsList,
   showing,
   setShowing,
+  meta = false,
 }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const componentRef = useRef()
   const questions = useSelector(({ filters }) => filters.questions)
-
-  useEffect(() => {
-    dispatch(getAllTempAnswersAction())
-  }, [])
 
   const getLabel = question => {
     if (!question) return ''
@@ -40,15 +35,14 @@ const WrittenAnswers = ({
     setShowing(newIndex)
   }
 
-  const checkIfAnswers = question => {
+  const checkIfContent = question => {
     const answer = allAnswers.get(question.id)
     if (!answer) return false
-    const t = answer.find(a => a.answer)
-    if (t) return true
-    return false
+    return answer.some(a => a.answer || a.comment)
   }
 
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
+  // (!metaEvaluation) to check if both are true
+  if (!meta && usersProgrammes.length < 1) return <NoPermissions t={t} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
@@ -80,13 +74,13 @@ const WrittenAnswers = ({
         {questionsList.map(
           question =>
             questions.selected.includes(getLabel(question)) &&
-            (checkIfAnswers(question) ? (
+            (checkIfContent(question) ? (
               <div key={question.id}>
                 {chosenProgrammes.length === 1 ? (
                   <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
                 ) : (
                   <Question
-                    answers={allAnswers.get(question.id).filter(p => p.answer)}
+                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
                     question={question}
                     chosenProgrammes={chosenProgrammes}
                     year={year}
@@ -94,6 +88,7 @@ const WrittenAnswers = ({
                     showing={
                       chosenProgrammes.length < 2 || questions.open.includes(getLabel(question)) ? question.id : showing
                     }
+                    meta
                   />
                 )}
                 <div className="ui divider" />

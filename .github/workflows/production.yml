@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build image
         id: build-image
@@ -27,6 +27,8 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=production
+          extra-args: |
+            --ulimit nofile=4096:4096
 
       - name: Push to quay.io
         uses: redhat-actions/push-to-registry@v2
@@ -71,7 +73,7 @@ jobs:
     needs: report_success
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Extract release version
         id: extract_version

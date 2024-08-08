@@ -7,7 +7,7 @@ import Downloads from 'Components/FormView/Downloads'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
 
-import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
+import { setViewOnly, getSingleProgrammesAnswers, getCommitteeAnswers } from 'Utilities/redux/formReducer'
 import { getCommitteeFacultyAnswersAction } from 'Utilities/redux/summaryReducer'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
@@ -16,17 +16,20 @@ import SaveIndicator from 'Components/FormView/SaveIndicator'
 
 import postItImage from 'Assets/post_it.jpg'
 import './index.scss'
-import { colors, isEvaluationUniversityUser } from 'Utilities/common'
+import { colors, getYearToShow, isEvaluationUniversityUser } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
 
-const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form }) => {
+const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true
   if (draftYear && draftYear.year !== year) return true
   if (formDeadline?.form !== form) return true
+  if (!writeAccess) return true
+
   return false
 }
 
@@ -123,9 +126,11 @@ const CommitteeFormView = ({ room, formString }) => {
   const lang = useSelector(state => state.language)
   const user = useSelector(state => state.currentUser.data)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
-  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const currentRoom = useSelector(state => state.room)
-  const year = 2023 // the next time form is filled is in 2026
+
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
+
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   const committee = committeeList.find(c => c.code === room) || null
   const singleFacultyPending = useSelector(state => state.studyProgrammes.singleProgramPending)
@@ -136,14 +141,15 @@ const CommitteeFormView = ({ room, formString }) => {
 
   useEffect(() => {
     document.title = `${t('evaluation')} - ${room}`
-  }, [lang, room])
+    dispatch(setYear(year))
+  }, [lang, room, year])
 
   const viewOnly = formShouldBeViewOnly({
     draftYear,
     year,
     formDeadline,
+    writeAccess: hasRights(user),
     form,
-    user,
   })
 
   useEffect(() => {
@@ -160,17 +166,13 @@ const CommitteeFormView = ({ room, formString }) => {
       dispatch(wsJoinRoom(room, form))
       dispatch(setViewOnly(false))
     }
-  }, [
-    committee,
-    singleFacultyPending,
-    // writeAccess,
-    // viewingOldAnswers,
-    draftYear,
-    // accessToTempAnswers,
-    // readAccess,
-    room,
-    user,
-  ])
+  }, [committee, singleFacultyPending, draftYear, room, user])
+
+  useEffect(() => {
+    if (window.location.href.match('((/UNI_EN)|(/UNI_SE))') && year) {
+      dispatch(getCommitteeAnswers({ year }))
+    }
+  }, [year])
 
   const facultyAnswers = useMemo(() => {
     if (
@@ -215,7 +217,6 @@ const CommitteeFormView = ({ room, formString }) => {
   if (!user.access[committee.code] && !hasRights(user)) {
     return <NoPermissions t={t} />
   }
-
   return (
     <div>
       {singleFacultyPending ? (
@@ -247,12 +248,10 @@ const CommitteeFormView = ({ room, formString }) => {
 
               <div className="hide-in-print-mode">
                 <StatusMessage form={form} writeAccess={hasRights} />
-                <div className="info-container">
-                  <p>
-                    <Trans i18nKey="formView:evaluationInfoUni" />
-                  </p>
-                </div>
-                <p>{t('formView:info2')}</p>
+                <h4>
+                  <Trans i18nKey="formView:evaluationInfoUni" />
+                </h4>
+                <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div className="big-circle-green" />
@@ -288,8 +287,9 @@ const CommitteeFormView = ({ room, formString }) => {
               </div>
             </div>
             <Downloads programme={committee} componentRef={componentRef} form={form} />
-            <div style={{ paddingBottom: '6em' }}>
+            <div id="university-form" style={{ paddingBottom: '6em' }}>
               <EvaluationForm
+                key={lang}
                 programmeKey={committee.code}
                 questions={questions}
                 form={form}

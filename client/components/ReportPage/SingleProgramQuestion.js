@@ -1,6 +1,7 @@
 import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
+import QuestionTitle from './QuestionTitle'
 
 const SingleProgramQuestion = ({ answers, question }) => {
   return (
@@ -38,9 +39,7 @@ const SingleProgramQuestion = ({ answers, question }) => {
             .sort((a, b) => a.name.localeCompare(b.name))
             .map(programme => (
               <div key={`${question.id}-${programme.key}`}>
-                <label className="answer-title">
-                  {programme.name} <span className={`answer-circle-${programme.color}`} />
-                </label>
+                <QuestionTitle id={question.id} answerColors={programme.color} programmeName={programme.name} />
                 <ul className="answer-list" data-cy={`report-question-content-${question.id}`}>
                   {programme.answer &&
                     programme.answer.split('\n').map((row, index) => (

@@ -98,7 +98,11 @@ export default () => {
         year = deadlines.draftYear.year
       } else {
         year = oldAnswers.data.reduce((acc, answer) => {
-          if (Object.entries(answer.data).length > 0 && answer.year > acc && answer.form === formKeys.YEARLY_ASSESSMENT)
+          if (
+            Object.entries(answer.data).length > 0 &&
+            answer.year > acc &&
+            (answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION)
+          )
             return answer.year
           return acc
         }, 2019)

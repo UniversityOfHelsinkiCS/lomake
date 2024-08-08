@@ -267,6 +267,10 @@
   @include answer-circle-big-basics;
   background: $background-red;
 }
+.circle-big-gray {
+  @include answer-circle-big-basics;
+  background: rgb(128,128,128);
+}
 
 .circle-big-green-selected {
   @include selected-answer-circle-big-basics;
@@ -280,6 +284,11 @@
   @include selected-answer-circle-big-basics;
   background: $background-red;
 }
+.circle-big-gray-selected {
+  @include selected-answer-circle-big-basics;
+  background: rgb(128,128,128);
+}
+
 
 .editor-class {
   background-color: $background-light-gray;
@@ -401,4 +410,22 @@
 .pie-box {
   max-width: 3em;
   max-height: 3em;
+}
+
+.entity-university-container {
+  &-university {
+    margin-top: 30px,
+  }
+  &-arviointi {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-color: green;
+    background-color: #f0f5f1;
+    border-width: 5px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+  }
 }

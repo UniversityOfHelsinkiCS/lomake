@@ -10,7 +10,7 @@ describe('Yearly assessment form tests', () => {
   beforeEach(() => {
     const user = 'cypressUser'
     cy.login(user)
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
   })
 
@@ -27,14 +27,14 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=color-positive-community_wellbeing]').click()
 
     // Check that the changes have been saved:
-    cy.visit('/')
+    cy.visit('/yearly')
     cy.wait(1000)
 
-    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report]`)
+    cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(255, 255, 177)')
 
-    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing]`)
+    cy.get(`[data-cy=${testProgrammeCode}-community_wellbeing-single]`)
       .should('have.css', 'background-color')
       .and('eq', 'rgb(157, 255, 157)')
   })
@@ -72,10 +72,10 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.typeInEditor('recruitment_influence', 'new words')
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
 
     cy.login('cypressSuperAdminUser')
-    cy.visit('/')
+    cy.visit('/yearly')
 
     // open another form
     cy.get('[data-cy=nav-admin]').click()
@@ -91,7 +91,7 @@ describe('Yearly assessment form tests', () => {
     cy.reload()
 
     // check yearly assessment form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-recruitment_influence]')
       .find('.editor-class')
       .invoke('text')
@@ -100,7 +100,7 @@ describe('Yearly assessment form tests', () => {
 
   it("Closing a form and doesn't affect other forms' data", () => {
     cy.login('cypressSuperAdminUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     // check page is ready
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
 
@@ -112,17 +112,17 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=form-4-deadline]').contains('14.')
 
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
 
     // write to yearly form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
     cy.typeInEditor('employability', 'new words')
     cy.reload()
-    cy.visit('/')
+    cy.visit('/yearly')
 
     cy.login('cypressSuperAdminUser')
-    cy.visit('/')
+    cy.visit('/yearly')
     // check page is ready
     cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
 
@@ -134,10 +134,10 @@ describe('Yearly assessment form tests', () => {
     cy.get('[data-cy=form-4-deadline]').should('not.exist')
 
     cy.login('cypressUser')
-    cy.visit('/')
+    cy.visit('/yearly')
 
     // check yearly assessment form
-    cy.visit(`/form/${testProgrammeCode}`)
+    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
     cy.get('[data-cy=textarea-employability]')
       .find('.editor-class')
       .invoke('text')

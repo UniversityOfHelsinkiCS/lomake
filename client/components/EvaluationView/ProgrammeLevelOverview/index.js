@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import CsvDownload from 'Components/Generic/CsvDownload'
-import { Button, Dropdown } from 'semantic-ui-react'
-import { filterFromUrl } from 'Utilities/common'
+import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
+import { filterFromUrl, getYearToShow } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
+import { setYear } from 'Utilities/redux/filterReducer'
+import { formKeys } from '@root/config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -20,6 +22,7 @@ export default () => {
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
+  const dispatch = useDispatch()
 
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
@@ -28,16 +31,18 @@ export default () => {
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const year = 2023
-
-  const form = 4 // TO FIX
+  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
+  const form = formKeys.EVALUATION_PROGRAMMES
   const formType = 'evaluation'
+
+  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) {
       setFilter(filterQuery)
     }
+    dispatch(setYear(year))
   }, [])
 
   useEffect(() => {
@@ -53,7 +58,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes(currentUser, programmes, showAllProgrammes, null, year, form)
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes, year, form })
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -104,37 +109,45 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-            <Button data-cy="nav-report" as={Link} to="/report?form=4" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison?form=4" size="big">
-                {t('overview:compareAnswers')}
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem header>
+              <h2>{t('evaluation').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <Button data-cy="nav-report" as={Link} to="/report?form=4" secondary size="big">
+                {t('overview:readAnswers')}
               </Button>
-            )}
-            <Dropdown
-              data-cy="csv-download"
-              className="button basic gray csv-download"
-              direction="left"
-              text={t('overview:csvDownload')}
-              onClick={() => setShowCsv(true)}
-            >
-              {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" form={form} />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" form={form} />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              ) : null}
-            </Dropdown>
-          </div>
-          <div style={{ marginTop: '1em' }}>
+            </MenuItem>
+            <MenuItem>
+              {moreThanFiveProgrammes && (
+                <Button data-cy="nav-comparison" as={Link} to="/comparison?form=4" size="big">
+                  {t('overview:compareAnswers')}
+                </Button>
+              )}
+            </MenuItem>
+
+            <MenuItem position="right">
+              <Dropdown
+                data-cy="csv-download"
+                className="button basic gray csv-download"
+                direction="left"
+                text={t('overview:csvDownload')}
+                onClick={() => setShowCsv(true)}
+              >
+                {showCsv ? (
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="written" view="overview" form={form} />
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : null}
+              </Dropdown>
+            </MenuItem>
+          </Menu>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}

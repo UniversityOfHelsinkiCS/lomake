@@ -1,18 +1,19 @@
 /**
  * Insert common items here
  */
-import _ from 'lodash'
+import capitalize from 'lodash/capitalize'
 
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
-import { formKeys } from '../../config/data'
+import { formKeys, facultyList } from '../../config/data'
 
 import {
   yearlyQuestions,
   evaluationQuestions,
   facultyEvaluationQuestions as evaluationFacultyQuestions,
   degreeReformIndividualQuestions as degreeQuestionData,
+  metareviewQuestions,
 } from '../questionData'
 
 export const images = {
@@ -144,6 +145,8 @@ export const modifiedQuestions = (lang, form) => {
     questions = evaluationQuestions
   } else if (form === formKeys.EVALUATION_FACULTIES) {
     questions = evaluationFacultyQuestions
+  } else if (form === formKeys.META_EVALUATION) {
+    questions = metareviewQuestions
   }
 
   questions.forEach(question => {
@@ -156,7 +159,7 @@ export const modifiedQuestions = (lang, form) => {
             id: `${part.id}_selection`,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -172,7 +175,7 @@ export const modifiedQuestions = (lang, form) => {
             id: part.id,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -188,7 +191,7 @@ export const modifiedQuestions = (lang, form) => {
             id: part.id,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -206,9 +209,10 @@ export const modifiedQuestions = (lang, form) => {
           ...attributes,
           {
             id: `${part.id}_text`,
+            comment: `${part.id}_comment_text`,
             color: colorId,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -276,13 +280,18 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
   })
 
   const filteredByFaculty = filteredByLevel.filter(p => {
-    if (faculty === 'allFaculties') return true
+    if (faculty[0] === 'allFaculties' || formKeys.EVALUATION_FACULTIES === filters.form) return true
     if (companion) {
       const companionFaculties = p.companionFaculties.map(f => f.code)
-      if (companionFaculties.includes(faculty)) return true
-      return p.primaryFaculty.code === faculty
+      if (
+        companionFaculties.find(cf => {
+          return faculty.includes(cf)
+        })
+      )
+        return true
+      return faculty.includes(p.primaryFaculty.code)
     }
-    return p.primaryFaculty.code === faculty
+    return faculty.includes(p.primaryFaculty.code)
   })
 
   const filteredBySchool = filteredByFaculty.filter(p => {
@@ -373,7 +382,9 @@ export const getMeasuresAnswer = (data, rawId) => {
     let measures = ''
     let i = 1
     while (i < 6) {
-      if (data[`${questionId}_${i}_text`]) measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      if (data[`${questionId}_${i}_text`]) {
+        measures += `${i}) ${cleanText(data[`${questionId}_${i}_text`])} \n`
+      }
       i++
     }
 
@@ -600,7 +611,7 @@ export const getFormType = form => {
   if (form === formKeys.EVALUATION_COMMTTEES) {
     return 'evaluation-university'
   }
-  if (form === 7) {
+  if (form === formKeys.META_EVALUATION) {
     return 'evaluation-committee'
   }
 
@@ -668,11 +679,91 @@ export const getFormViewRights = ({
   return false
 }
 
+export const getYearToShow = ({ nextDeadline, form, draftYear }) => {
+  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
+
+  let year = 2023
+  if (formDeadline) {
+    year = draftYear.year
+  }
+  return year
+}
+
 export const reversedPointsInDegreeReform = [
   'lead_has_sufficient_authority_to_study_program',
   'master_programs_are_sufficiently_sized',
   'bachelor_programme_starting_amount_is_suitable',
   'question-9-4',
 ]
+
+export const answersByQuestions = ({
+  form,
+  usersProgrammes,
+  selectedAnswers,
+  chosenProgrammes,
+  questionsList,
+  lang,
+  t,
+}) => {
+  if (!selectedAnswers) {
+    return {}
+  }
+
+  const answerMap = new Map()
+
+  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
+
+  if (!selectedAnswers) return new Map()
+  selectedAnswers.forEach(programme => {
+    const key = programme.programme
+    if (chosenKeys.includes(key)) {
+      const { data } = programme
+      questionsList.forEach(question => {
+        let color = null
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          const bachelorColor = data[question.color[0]] ? data[question.color[0]] : 'emptyAnswer'
+          const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
+          const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
+          color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
+        } else {
+          color = data[question.color] ? data[question.color] : 'emptyAnswer'
+        }
+        let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
+        let name = programmeNameByKey(usersProgrammes, programme, lang)
+
+        if (form === formKeys.EVALUATION_FACULTIES) {
+          name = facultyList.find(f => f.code === programme.programme).name[lang]
+        }
+        let answer = ''
+        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
+        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
+        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
+        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+
+        let comment = ''
+        if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
+
+        answersByProgramme = [...answersByProgramme, { name, key, color, answer, comment }]
+        answerMap.set(question.id, answersByProgramme)
+      })
+    }
+  })
+  // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
+  // So empty answers need to be added.
+  answerMap.forEach((value, key) => {
+    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
+    const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
+    if (programmesMissing) {
+      programmesMissing.forEach(p => {
+        const earlierAnswers = answerMap.get(key)
+        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
+        answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
+      })
+    }
+  })
+
+  return answerMap
+}
 
 export * from '@root/config/common'
