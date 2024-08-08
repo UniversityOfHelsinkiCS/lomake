@@ -54,13 +54,13 @@ jobs:
           max_attempts: 2
           command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Cypress videos
           path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Cypress screenshots

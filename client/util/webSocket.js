@@ -1,6 +1,7 @@
 import { basePath, inProduction } from 'Utilities/common'
 import { getHeaders } from '@root/config/mockHeaders'
 import io from 'socket.io-client'
+import store from './store'
 
 const connect = () => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
@@ -22,6 +23,7 @@ const connect = () => {
 
 const socketMiddleware = () => {
   let socket = null
+  let isVisible = true
 
   const updateForm = store => event => {
     store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
@@ -30,19 +32,41 @@ const socketMiddleware = () => {
     store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
   }
 
+  const setupSocketListeners = socket => {
+    if (!window.location.href.endsWith('/individual')) {
+      socket.on('new_form_data', updateForm(store))
+      socket.on('update_editors', updateEditors(store))
+    }
+  }
+
+  const handleVisibilityChange = () => {
+    isVisible = !document.hidden
+    if (isVisible && !socket) {
+      const pathParts = window.location.pathname.split('/')
+      const room = pathParts[pathParts.length - 1]
+      const form = pathParts[pathParts.length - 2]
+
+      socket = connect()
+      setupSocketListeners(socket)
+      socket.emit('join', room, form)
+    } else if (!isVisible && socket) {
+      socket.close()
+      socket = null
+    }
+  }
+
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+
   // the middleware part of this function
   return store => next => action => {
     const { room } = store.getState()
+
     switch (action.type) {
       case 'WS_CONNECT':
         if (socket !== null) socket.close()
 
         socket = connect()
-        // websocket handlers
-        if (!window.location.href.endsWith('/individual')) {
-          socket.on('new_form_data', updateForm(store))
-          socket.on('update_editors', updateEditors(store))
-        }
+        setupSocketListeners(socket)
 
         break
       case 'WS_LEAVE_ROOM':

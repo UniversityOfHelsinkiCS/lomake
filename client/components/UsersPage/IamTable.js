@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
-import * as _ from 'lodash'
+import uniq from 'lodash/uniq'
 import {
   doctoralIams,
   doctoralWritingIams,
@@ -41,7 +41,7 @@ const IamTable = () => {
           'Koulutussuunnittelijat ja opintoasiainpäälliköt',
         )}
         {getRowsForAccessGroup(
-          _.uniq([
+          uniq([
             'hy-[tiedekunta]-maisteri/kandi-kojot',
             'hy-[tiedekunta]-dekanaatti',
             'hy-rehtoraatti',

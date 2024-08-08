@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
-import { Radio, Dropdown, List, ListItem, ListIcon, ListContent } from 'semantic-ui-react'
-import { isAdmin } from '@root/config/common'
+import { Radio, Dropdown, List, ListItem, ListIcon, ListContent, Menu, MenuItem } from 'semantic-ui-react'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -136,12 +135,6 @@ export default () => {
     })
   }, [usersProgrammes, lang, debouncedFilter])
 
-  const moreThanFiveProgrammes = useMemo(() => {
-    if (isAdmin(currentUser.data)) return true
-    if (currentUser.data.access && Object.keys(currentUser.data.access).length > 5) return true
-    return false
-  }, [currentUser])
-
   let facultyProgrammes = null
   let nameOf = null
 
@@ -200,49 +193,48 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('degree-reform').toUpperCase()}</h2>
-          </div>
-          {dropdownFilter.length > 0 && <h3>{t('generic:chosenFaculties')}</h3>}
-          <List>
-            {dropdownFilter.length > 0 &&
-              dropdownFilter.map(f => (
-                <ListItem>
-                  <ListIcon name="circle" color="blue" />
-                  <ListContent> {f.name}</ListContent>
-                </ListItem>
-              ))}
-          </List>
-          {faculty === 'UNI' && faculties.data.length > 0 && (
-            <div className="table-container-degree-reform-filter">
-              <Dropdown
-                text={t('overview:chooseFaculty')}
-                icon="filter"
-                button
-                labeled
-                className="icon"
-                defaultUpward={false}
-              >
-                <Dropdown.Menu upward="false">
-                  <Dropdown.Divider />
-                  {faculties.data.map(f => {
-                    const selected = dropdownFilter.filter(d => d.code === f.code).length > 0
-                    return (
-                      <Dropdown.Item
-                        key={f.code}
-                        onClick={e => handleDropDownFilter(e, f, selected)}
-                        text={f.name[lang]}
-                        multiple
-                        active={selected}
-                        label={selected && { color: 'blue', empty: true, circular: true }}
-                      />
-                    )
-                  })}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          )}
-          <div style={{ marginTop: '1em' }}>
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem>
+              <h2>{t('degree-reform').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>{dropdownFilter.length > 0 && <h3>{t('generic:chosenFaculties')}</h3>}</MenuItem>
+            {faculty === 'UNI' && faculties.data.length > 0 && (
+              <>
+                <MenuItem>
+                  <List>
+                    {dropdownFilter.length > 0 &&
+                      dropdownFilter.map(f => (
+                        <ListItem>
+                          <ListIcon name="circle" color="blue" />
+                          <ListContent> {f.name}</ListContent>
+                        </ListItem>
+                      ))}
+                  </List>
+                </MenuItem>
+                <MenuItem>
+                  <Dropdown text={t('overview:chooseFaculty')} button labeled className="icon" defaultUpward={false}>
+                    <Dropdown.Menu upward="false">
+                      <Dropdown.Divider />
+                      {faculties.data.map(f => {
+                        const selected = dropdownFilter.filter(d => d.code === f.code).length > 0
+                        return (
+                          <Dropdown.Item
+                            key={f.code}
+                            onClick={e => handleDropDownFilter(e, f, selected)}
+                            text={f.name[lang]}
+                            multiple
+                            active={selected}
+                            label={selected && { color: 'blue', empty: true, circular: true }}
+                          />
+                        )
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </MenuItem>
+              </>
+            )}
+          </Menu>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               facultyProgrammes={facultyProgrammes}

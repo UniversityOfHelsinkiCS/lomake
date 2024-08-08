@@ -121,7 +121,7 @@ const FormView = ({ room }) => {
             <StatusMessage form={form} writeAccess={writeAccess} />
 
             <p>{t('formView:info1')}</p>
-            <p>{t('formView:info2')}</p>
+            <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div className="big-circle-green" />

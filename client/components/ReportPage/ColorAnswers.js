@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import _ from 'lodash'
+import capitalize from 'lodash/capitalize'
 import { formKeys } from '@root/config/data'
 
 import PDFDownload from 'Components/Generic/PDFDownload'
@@ -21,7 +21,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
 
   const getLabel = question => {
     if (!question) return ''
-    const label = _.capitalize(question.label)
+    const label = capitalize(question.label)
     const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
     return `${index}${label}`
   }

@@ -26,31 +26,30 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
   }
 
   return (
-    <div>
-      <Dropdown
-        data-cy="faculty-dropdown"
-        text={dropdownText}
-        className="button basic gray csv-download"
-        direction="left"
-      >
-        <Dropdown.Menu>
-          <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
-            {t('report:all')}
-          </Dropdown.Item>
-          {faculties?.data
-            .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-            .map(faculty => (
-              <Dropdown.Item
-                data-cy={`dropdown-item-${faculty.code}`}
-                key={faculty.code}
-                onClick={() => handleDropdownFilter(faculty)}
-              >
-                {faculty.name[lang]}
-              </Dropdown.Item>
-            ))}
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
+    <Dropdown
+      data-cy="faculty-dropdown"
+      text={dropdownText}
+      className="button basic gray csv-download"
+      direction="left"
+      style={{ whiteSpace: 'nowrap', minWidth: 'max-content' }}
+    >
+      <Dropdown.Menu>
+        <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
+          {t('report:all')}
+        </Dropdown.Item>
+        {faculties?.data
+          .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
+          .map(faculty => (
+            <Dropdown.Item
+              data-cy={`dropdown-item-${faculty.code}`}
+              key={faculty.code}
+              onClick={() => handleDropdownFilter(faculty)}
+            >
+              {faculty.name[lang]}
+            </Dropdown.Item>
+          ))}
+      </Dropdown.Menu>
+    </Dropdown>
   )
 }
 

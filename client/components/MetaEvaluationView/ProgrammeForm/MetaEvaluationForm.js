@@ -40,11 +40,11 @@ const MetaEvaluationForm = ({ questions, programmeKey, summaryData, form, summar
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
-    const gapSytle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
+    const gapStyle = form === formKeys.EVALUATION_COMMTTEES ? { marginBottom: 70 } : {}
     const maxLength = part.maxLength ? part.maxLength : undefined
 
     return (
-      <div key={`${part.id}-container`} style={gapSytle}>
+      <div key={`${part.id}-container`} style={gapStyle}>
         <div key={`${part.id}-${part.index}`} style={divStyle}>
           <Component
             id={part.id}

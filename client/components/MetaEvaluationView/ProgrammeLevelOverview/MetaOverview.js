@@ -101,17 +101,9 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <Menu size="large" secondary>
-        <MenuItem header>{titleText}</MenuItem>
-        <MenuItem>
-          <Button
-            data-cy="doctle"
-            onClick={() => handleDoctoralChange()}
-            icon="filter"
-            labelPosition="right"
-            size="big"
-            content={doctoralToggleText}
-          />
+      <Menu size="large" className="filter-row" secondary>
+        <MenuItem header>
+          <h2>{titleText}</h2>
         </MenuItem>
         <MenuItem>
           <Button
@@ -123,6 +115,15 @@ const MetaOverview = ({
           >
             {t('overview:readAnswers')}
           </Button>
+        </MenuItem>
+        <MenuItem>
+          <Button
+            className="button basic gray"
+            data-cy="doctle"
+            onClick={() => handleDoctoralChange()}
+            size="big"
+            content={doctoralToggleText}
+          />
         </MenuItem>
         <MenuItem>
           <FacultyDropdown
