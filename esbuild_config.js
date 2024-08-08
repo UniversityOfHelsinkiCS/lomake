@@ -24,7 +24,7 @@ const stagingConfig = {
   bundle: true,
   minify: true,
   outdir: 'build',
-  publicPath: '/',
+  publicPath: '/tilannekuva/',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
@@ -42,7 +42,7 @@ const prodConfig = {
   bundle: true,
   minify: true,
   outdir: 'build',
-  publicPath: '/',
+  publicPath: '/tilannekuva/',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
