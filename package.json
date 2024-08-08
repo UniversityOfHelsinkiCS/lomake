@@ -4,7 +4,7 @@
   "description": "Opetushallinnon tilannekuvalomake",
   "main": "index.js",
   "scripts": {
-    "dev": "docker-compose up",
+    "dev": "docker compose up",
     "build": "node build.js",
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon index.js\" \"node devProxy.js\"",
