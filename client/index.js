@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { cypressUids, setHeaders, possibleUsers } from '@root/config/mockHeaders'
@@ -19,8 +19,10 @@ if (process.env.NODE_ENV === 'production') {
   initSentry()
 }
 
-const refresh = () =>
-  render(
+const refresh = () => {
+  const container = document.getElementById('root')
+  const root = createRoot(container)
+  root.render(
     <Provider store={store}>
       <BrowserRouter basename={basePath}>
         <ErrorBoundary>
@@ -29,8 +31,8 @@ const refresh = () =>
         </ErrorBoundary>
       </BrowserRouter>
     </Provider>,
-    document.getElementById('root'),
   )
+}
 
 if (process.env.NODE_ENV === 'development') {
   const newUser = 'superAdmin'
