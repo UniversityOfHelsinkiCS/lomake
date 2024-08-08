@@ -47,7 +47,7 @@
     "pg-hstore": "^2.3.3",
     "react": "^18.2.0",
     "react-csv": "^2.2.1",
-    "react-datepicker": "^4.7.0",
+    "react-datepicker": "^7.0.0",
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-i18next": "^15.0.0",
