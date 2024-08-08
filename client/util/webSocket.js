@@ -42,8 +42,13 @@ const socketMiddleware = () => {
   const handleVisibilityChange = () => {
     isVisible = !document.hidden
     if (isVisible && !socket) {
+      const pathParts = window.location.pathname.split('/')
+      const room = pathParts[pathParts.length - 1]
+      const form = pathParts[pathParts.length - 2]
+
       socket = connect()
       setupSocketListeners(socket)
+      socket.emit('join', room, form)
     } else if (!isVisible && socket) {
       socket.close()
       socket = null
@@ -58,21 +63,19 @@ const socketMiddleware = () => {
 
     switch (action.type) {
       case 'WS_CONNECT':
-        if (isVisible) {
-          if (socket !== null) socket.close()
+        if (socket !== null) socket.close()
 
-          socket = connect()
-          setupSocketListeners(socket)
-        }
+        socket = connect()
+        setupSocketListeners(socket)
 
         break
       case 'WS_LEAVE_ROOM':
-        if (isVisible && !socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect() // This really only happens when developing.
 
         socket.emit('leave', action.room)
         break
       case 'WS_JOIN_ROOM':
-        if (isVisible && !socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect() // This really only happens when developing.
 
         socket.emit('join', action.room, action.form)
         break
@@ -82,7 +85,7 @@ const socketMiddleware = () => {
         socket = null
         break
       case 'UPDATE_FORM_FIELD':
-        if (isVisible && !socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect() // This really only happens when developing.
 
         socket.emit('update_field', {
           data: { [action.field]: action.value },
@@ -91,7 +94,7 @@ const socketMiddleware = () => {
         })
         break
       case 'GET_LOCK':
-        if (isVisible && !socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect() // This really only happens when developing.
 
         socket.emit('get_lock', {
           field: action.field,
