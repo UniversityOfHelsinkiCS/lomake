@@ -195,7 +195,7 @@ export default () => {
         <>
           <Menu size="large" className="filter-row" secondary>
             <MenuItem>
-              <h2 className="view-title">{t('degree-reform').toUpperCase()}</h2>
+              <h2>{t('degree-reform').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>{dropdownFilter.length > 0 && <h3>{t('generic:chosenFaculties')}</h3>}</MenuItem>
             {faculty === 'UNI' && faculties.data.length > 0 && (
@@ -234,7 +234,7 @@ export default () => {
               </>
             )}
           </Menu>
-          <div style={{ marginTop: '1em' }}>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               facultyProgrammes={facultyProgrammes}

@@ -31,6 +31,7 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
       text={dropdownText}
       className="button basic gray csv-download"
       direction="left"
+      style={{ whiteSpace: 'nowrap', minWidth: 'max-content' }}
     >
       <Dropdown.Menu>
         <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>

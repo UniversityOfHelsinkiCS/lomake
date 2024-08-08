@@ -146,7 +146,7 @@ export default () => {
               </Dropdown>
             </MenuItem>
           </Menu>
-          <div style={{ marginTop: '1em' }}>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}

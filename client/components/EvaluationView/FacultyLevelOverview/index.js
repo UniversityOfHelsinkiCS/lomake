@@ -95,7 +95,7 @@ export default () => {
         <>
           <Menu size="large" className="filter-row" secondary>
             <MenuItem>
-              <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+              <h2>{t('evaluation').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>
               <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary>

@@ -248,11 +248,9 @@ const CommitteeFormView = ({ room, formString }) => {
 
               <div className="hide-in-print-mode">
                 <StatusMessage form={form} writeAccess={hasRights} />
-                <div className="info-container">
-                  <p>
-                    <Trans i18nKey="formView:evaluationInfoUni" />
-                  </p>
-                </div>
+                <h4>
+                  <Trans i18nKey="formView:evaluationInfoUni" />
+                </h4>
                 <p style={{ marginBottom: '10px' }}>{t('formView:info2')}</p>
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
