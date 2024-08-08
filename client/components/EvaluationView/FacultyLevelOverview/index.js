@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -93,37 +93,43 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className="wide-header">
-            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-
-            <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5" size="big">
-                {t('overview:compareAnswers')}
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem>
+              <h2>{t('evaluation').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <Button data-cy="nav-report" as={Link} to="/report?form=5" secondary>
+                {t('overview:readAnswers')}
               </Button>
-            )}
-            <Dropdown
-              data-cy="csv-download"
-              className="button basic gray csv-download"
-              direction="left"
-              text={t('overview:csvDownload')}
-              onClick={() => setShowCsv(true)}
-            >
-              {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" form={form} />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" form={form} />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              ) : null}
-            </Dropdown>
-          </div>
+            </MenuItem>
+            <MenuItem>
+              {moreThanFiveProgrammes && (
+                <Button data-cy="nav-comparison" as={Link} to="/comparison?form=5">
+                  {t('overview:compareAnswers')}
+                </Button>
+              )}
+            </MenuItem>
+            <MenuItem position="right">
+              <Dropdown
+                data-cy="csv-download"
+                className="button basic gray csv-download"
+                direction="left"
+                text={t('overview:csvDownload')}
+                onClick={() => setShowCsv(true)}
+              >
+                {showCsv ? (
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="written" view="overview" form={form} />
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : null}
+              </Dropdown>
+            </MenuItem>
+          </Menu>
           <div style={{ marginTop: '1em' }}>
             <FacultyColorTable
               faculties={filteredFaculties}

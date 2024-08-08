@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
 import { Loader, Button } from 'semantic-ui-react'
@@ -10,7 +10,7 @@ import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formRed
 import { getFormViewRights, colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from 'Components/FormView/StatusMessage'
-import powerlineImage from 'Assets/APowerlineTower.png'
+import powerlineImage from 'Assets/APowerlineTower.jpg'
 import SaveIndicator from 'Components/FormView/SaveIndicator'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 
@@ -88,7 +88,7 @@ const ProgrammeLevelForm = ({ room }) => {
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
           <p>{t('formView:infoMeta1')}</p>
-          <p>{t('formView:infoMeta2')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div className="big-circle-red" />

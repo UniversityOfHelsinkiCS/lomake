@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 const StudyLevelHeader = () => {
@@ -31,10 +31,16 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
       {showStudyLevel ? <StudyLevelHeader showStudyLevel={showStudyLevel} /> : null}
       {tableIds.map(idObject => {
         let shortLabel = meta ? `${idObject.id} ${idObject.shortLabel}` : idObject.shortLabel
-        if (meta && shortLabel.startsWith('T')) shortLabel = shortLabel.substr(1, shortLabel.length - 1)
+        let label = meta ? `${idObject.id} ${idObject.label}` : shortLabel
+
+        if (meta) {
+          if (shortLabel.startsWith('T')) shortLabel = shortLabel.substring(1)
+          if (label.startsWith('T')) label = label.substring(1)
+        }
+
         return (
           <div key={idObject.id} className="sticky-header-categories">
-            <span className="vertical-text">{shortLabel}</span>
+            <Popup trigger={<span className="vertical-text">{shortLabel}</span>}>{label}</Popup>
           </div>
         )
       })}

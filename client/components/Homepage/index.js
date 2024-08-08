@@ -3,13 +3,12 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
-import { isAdmin } from '@root/config/common'
 import { Container, Header, Grid, Divider, Loader, List } from 'semantic-ui-react'
 import { formKeys } from '@root/config/data'
-import powerlineImage from 'Assets/APowerlineTower.png'
 import rypsiImage from 'Assets/rypsi.jpg'
 import wheelImage from 'Assets/big_wheel.jpg'
 import calendarImage from 'Assets/calendar.jpg'
+import powerlineImage from 'Assets/APowerlineTower.jpg'
 import { PageItem, FormCard } from '../Generic/Homepage'
 
 const Homepage = () => {
@@ -76,7 +75,7 @@ const Homepage = () => {
       thumbnail: wheelImage,
     },
     {
-      show: access,
+      show: false,
       title: t('metaevaluation'),
       content: (
         <div>
@@ -86,15 +85,6 @@ const Homepage = () => {
       links: ['/meta-evaluation'],
       forms: [7],
       thumbnail: powerlineImage,
-    },
-    {
-      show: isAdmin(currentUser.data),
-      title: t('adminPage'),
-      content: (
-        <div>
-          <p>{t('adminpageText')}</p>
-        </div>
-      ),
     },
   ]
 
@@ -124,7 +114,7 @@ const Homepage = () => {
                   item.show && (
                     <Fragment key={item.title}>
                       <PageItem title={item.title} content={item.content} />
-                      {index !== items.length - 1 ? <Divider section /> : null}
+                      {index !== items.length - 2 ? <Divider section /> : null}
                     </Fragment>
                   ),
               )}
@@ -135,7 +125,7 @@ const Homepage = () => {
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
-                  return <FormCard key={dl} item={item} dl={dl} t={t} />
+                  return <FormCard key={dl.form} item={item} dl={dl} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>

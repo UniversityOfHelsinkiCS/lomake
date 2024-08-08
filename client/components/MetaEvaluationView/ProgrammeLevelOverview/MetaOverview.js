@@ -39,7 +39,7 @@ const MetaOverview = ({
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) setFilter(filterQuery)
-    document.title = t('evaluation')
+    document.title = t('metaevaluation')
     setUsersProgrammes(programmes)
   }, [dispatch, t, lang, programmes])
 
@@ -47,7 +47,7 @@ const MetaOverview = ({
     return usersProgrammes.filter(
       prog =>
         prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()),
+        prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
     )
   }, [usersProgrammes, lang, debouncedFilter])
 
@@ -55,7 +55,15 @@ const MetaOverview = ({
     dispatch(setDoctoral(!doctoral))
   }
 
-  const handleFilterChange = e => setFilter(e.target.value)
+  const handleDropdownFilterChange = value => {
+    window.history.pushState({}, '', `/meta-evaluation?filter=${value}`)
+    setFilter(value)
+  }
+
+  const handleFilterChange = e => {
+    window.history.pushState({}, '', `/meta-evaluation?filter=${e.target.value}`)
+    setFilter(e.target.value)
+  }
 
   const renderModal = () => {
     if (modalData) {
@@ -93,31 +101,38 @@ const MetaOverview = ({
   return (
     <>
       {renderModal()}
-      <Menu size="large" secondary>
-        <MenuItem header>{titleText}</MenuItem>
+      <Menu size="large" className="filter-row" secondary>
+        <MenuItem header>
+          <h2>{titleText}</h2>
+        </MenuItem>
         <MenuItem>
           <Button
+            data-cy="nav-report"
+            as={Link}
+            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            secondary
+            size="big"
+          >
+            {t('overview:readAnswers')}
+          </Button>
+        </MenuItem>
+        <MenuItem>
+          <Button
+            className="button basic gray"
             data-cy="doctle"
             onClick={() => handleDoctoralChange()}
-            icon="filter"
-            labelPosition="right"
             size="big"
             content={doctoralToggleText}
           />
         </MenuItem>
         <MenuItem>
-          <Button data-cy="nav-report" as={Link} to="meta-evaluation/answers" secondary size="big">
-            {t('overview:readAnswers')}
-          </Button>
-        </MenuItem>
-        <MenuItem>
           <FacultyDropdown
             t={t}
             programmes={programmes}
-            setUsersProgrammes={setUsersProgrammes}
-            doctoral={doctoral}
+            handleFilterChange={handleDropdownFilterChange}
             faculties={faculties}
             lang={lang}
+            debouncedFilter={debouncedFilter}
           />
         </MenuItem>
         <MenuItem position="right">

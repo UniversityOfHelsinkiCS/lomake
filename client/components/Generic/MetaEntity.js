@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Divider } from 'semantic-ui-react'
 import { colors } from 'Utilities/common'
 import Textarea from './Textarea'
 import MetaTrafficLights from './MetaTrafficLights'
@@ -12,9 +11,15 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
   const bool = value !== 'gray'
 
   return (
-    <div className="form-entity-area">
-      <Divider />
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="form-entity-area" style={{ marginBottom: 25 }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingTop: 15,
+        }}
+      >
         <div style={{ maxWidth: '1000px' }}>
           <h3>
             {number}. {label}{' '}

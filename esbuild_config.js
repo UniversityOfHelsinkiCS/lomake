@@ -20,10 +20,11 @@ const devConfig = {
 
 const stagingConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file:' },
   bundle: true,
   minify: true,
   outdir: 'build',
+  publicPath: '/tilannekuva/',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
@@ -37,10 +38,11 @@ const stagingConfig = {
 
 const prodConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
+  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file' },
   bundle: true,
   minify: true,
   outdir: 'build',
+  publicPath: '/tilannekuva/',
   define: {
     'process.env.BASE_PATH': "'/tilannekuva/'",
     'process.env.NODE_ENV': "'production'",
@@ -59,6 +61,7 @@ const prodConfig = {
     }),
   ],
   color: true,
+  metafile: true,
 }
 
 module.exports = { devConfig, prodConfig, stagingConfig }

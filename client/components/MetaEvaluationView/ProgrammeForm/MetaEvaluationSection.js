@@ -21,7 +21,7 @@ const MetaEvaluationSection = ({ title, number, children, programmeKey }) => {
             style={{
               fontSize: '2em',
               padding: '1.5em 0.5em',
-              margin: '4em 0em 1em 0em',
+              margin: '1.5em 0em 1em 0em',
               background: colors.background_black,
               borderRadius: '5px',
               color: colors.white,

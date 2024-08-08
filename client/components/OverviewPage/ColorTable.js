@@ -189,7 +189,12 @@ const ColorTable = React.memo(
           }
           return [
             ...acc,
-            { id: cur.id, shortLabel: cur.shortLabel[lang], type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type },
+            {
+              id: cur.id,
+              shortLabel: cur.shortLabel[lang],
+              label: cur.label[lang],
+              type: cur.no_color ? 'ENTITY_NOLIGHT' : cur.type,
+            },
           ]
         }, [])
 
@@ -220,9 +225,9 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (formType === 'meta-evaluation' && !doctoral) {
+    } else if (meta && !doctoral) {
       tableClassName = '-meta-evaluation'
-    } else if (doctoral) {
+    } else if (meta && doctoral) {
       tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {
@@ -303,7 +308,7 @@ const ColorTable = React.memo(
                 <Input
                   style={{ marginBottom: '0.5em' }}
                   data-cy="overviewpage-filter"
-                  icon="filter"
+                  icon="search"
                   size="small"
                   placeholder={t('programmeFilter')}
                   onChange={handleFilterChange}
