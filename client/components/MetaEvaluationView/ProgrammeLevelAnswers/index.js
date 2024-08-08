@@ -113,10 +113,9 @@ const ProgrammeLevelAnswers = () => {
         <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <MenuItem>
           <Button
+            className="button basic gray"
             data-cy="doctle"
             onClick={() => handleDoctoralChange()}
-            icon="filter"
-            labelPosition="right"
             size="big"
             content={doctoralToggleText}
           />
@@ -143,7 +142,7 @@ const ProgrammeLevelAnswers = () => {
         <MenuItem position="right">
           <Input
             data-cy="overviewpage-filter"
-            icon="filter"
+            icon="search"
             size="small"
             placeholder={t('programmeFilter')}
             onChange={handleFilterChange}

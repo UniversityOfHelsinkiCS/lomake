@@ -33,26 +33,22 @@ const ProgrammeLevelOverview = () => {
     document.title = `${t('metareview')}`
   }, [lang, t])
 
-  return (
-    <div>
-      {usersProgrammes.length > 0 ? (
-        <MetaOverview
-          t={t}
-          lang={lang}
-          dispatch={dispatch}
-          faculties={faculties}
-          programmes={filteredProgrammes}
-          form={form}
-          formType={formType}
-          doctoral={doctoral}
-          setDoctoral={setDoctoral}
-          showAllProgrammes={showAllProgrammes}
-          setShowAllProgrammes={setShowAllProgrammes}
-        />
-      ) : (
-        <NoPermissions t={t} />
-      )}
-    </div>
+  return usersProgrammes.length > 0 ? (
+    <MetaOverview
+      t={t}
+      lang={lang}
+      dispatch={dispatch}
+      faculties={faculties}
+      programmes={filteredProgrammes}
+      form={form}
+      formType={formType}
+      doctoral={doctoral}
+      setDoctoral={setDoctoral}
+      showAllProgrammes={showAllProgrammes}
+      setShowAllProgrammes={setShowAllProgrammes}
+    />
+  ) : (
+    <NoPermissions t={t} />
   )
 }
 

@@ -1,4 +1,4 @@
-const lodash = require('lodash')
+const isEqual = require('lodash/isEqual')
 
 const db = require('@models/index')
 const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
@@ -34,9 +34,9 @@ const IAMmiddleware = async (req, _, next) => {
     checkTemporaryAccesses(access, user.tempAccess)
 
     if (
-      !lodash.isEqual(specialGroup, user.specialGroup) ||
-      !lodash.isEqual(access, user.access) ||
-      !lodash.isEqual(iamGroups, user.iamGroups)
+      !isEqual(specialGroup, user.specialGroup) ||
+      !isEqual(access, user.access) ||
+      !isEqual(iamGroups, user.iamGroups)
     ) {
       user.specialGroup = specialGroup
       user.access = access

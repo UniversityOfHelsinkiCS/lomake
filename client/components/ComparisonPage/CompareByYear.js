@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import * as _ from 'lodash'
+import sortBy from 'lodash/sortBy'
 
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import QuestionList from 'Components/Generic/QuestionList'
@@ -114,7 +114,7 @@ const getTotalWritten = ({ question, allAnswers, chosenKeys }) => {
     const filteredAnswers = answers ? answers.filter(a => chosenKeys.includes(a.key) && a.answer) : []
     return {
       year: data.year,
-      answers: _.sortBy(filteredAnswers, 'name'),
+      answers: sortBy(filteredAnswers, 'name'),
     }
   })
   return mapped

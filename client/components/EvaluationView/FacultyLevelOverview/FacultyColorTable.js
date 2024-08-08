@@ -108,7 +108,7 @@ const FacultyColorTable = React.memo(
         <div className="table-container">
           <Input
             data-cy="overviewpage-filter"
-            icon="filter"
+            icon="search"
             size="small"
             placeholder={t('facultyFilter')}
             onChange={handleFilterChange}

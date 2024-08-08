@@ -3,8 +3,8 @@
   {
     "title": {
       "fi": "Opintopolkujen hallinta, nivelvaiheet ja horisontaaliset siirtymät",
-      "se": "Hantering av studievägar, övergångsskeden och horisontella övergångar",
-      "en": "Management of study paths, transition phases and horizontal transfers"
+      "se": "Studievägar, övergångsskeden och horisontella övergångar",
+      "en": "Management of study paths, transition stages and horizontal transfers"
     },
     "level": "kandimaisteri",
     "parts": [
@@ -19,8 +19,8 @@
         },
         "label": {
           "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
-          "en": "Degree programs include model schedules in curricula to support understanding of the education system, study paths, and course offerings",
-          "se": "Utbildningsprogrammen inkluderar modellscheman i läroplanerna för att stödja förståelsen av utbildningssystemet, studievägar och kursutbud"
+          "en": "Degree programmes will include model templates in their curricula to give students a better overview of the education system, study paths and the teaching offered",
+          "se": "Utbildningsprogrammens undervisningsplaner bör innehålla modellscheman som stöder studentens förståelse av utbildningssystemet, studievägarna och undervisningsutbudet"
         },
         "level": "kandimaisteri",
         "description": {
@@ -46,8 +46,8 @@
         },
         "label": {
           "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
-          "en": "The university develops and clarifies horizontal transfers within and between programs to support student choices and study progress",
-          "se": "Universitetet utvecklar och förtydligar horisontella övergångar inom och mellan program för att stödja studenternas val och studieframsteg"
+          "en": "The University will develop and clarify horizontal transfers within and between programmes to ensure they support student choices and progress",
+          "se": "Universitetet bör utveckla och förtydliga de horisontella övergångarna inom och mellan programmen för att stödja studentens val och studiernas smidighet"
         },
         "level": "kandimaisteri",
         "description": {
@@ -73,8 +73,8 @@
         },
         "label": {
           "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä ohjelmien kesken",
-          "en": "The smoothness of the transition phase from bachelor's to master's programs is ensured through guidance measures in cooperation between programs",
-          "se": "Smidigheten i övergångsfasen från kandidatprogram till masterprogram säkerställs genom vägledningsåtgärder i samarbete mellan programmen"
+          "en": "The seamless transition from bachelor’s to master’s programmes will be ensured with guidance and supervision through inter-programme collaboration",
+          "se": "Övergångsskedets smidighet vid övergången från ett kandidatprogram till ett magisterprogram säkerställs genom handledning i samarbete mellan programmen"
         },
         "level": "kandimaisteri",
         "description": {
@@ -100,8 +100,8 @@
         },
         "label": {
           "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
-          "en": "The university forms a strategic view on what continuous learning offerings are organized at the university and why",
-          "se": "Universitetet bildar en strategisk syn på vilka erbjudanden om livslångt lärande som organiseras vid universitetet och varför"
+          "en": "The University will develop a strategic vision for what continuous learning it will provide and why",
+          "se": "Universitetet tar fram en strategisk vision för hur utbudet inom kontinuerligt lärande ska ordnas vid universitetet och varför"
         },
         "level": "kandimaisteri",
         "description": {
@@ -121,8 +121,8 @@
   {
     "title": {
       "fi": "Yliopiston läpivirtauksen määritelmä ja kriteerit sekä opintojen viivästymistä estävät keinot",
-      "se": "Definition och kriterier för universitetets genomströmning samt metoder för att förhindra förseningar i studierna",
-      "en": "Definition and criteria for university throughput and methods to prevent study delays"
+      "se": "Definitionen på och kriterierna för genomströmning vid universitetet samt metoder att förhindra förseningar i studierna",
+      "en": "Definition of and criteria for the rate of progression at the University, as well as means to prevent graduation delays"
     },
     "level": "kandimaisteri",
     "parts": [
@@ -137,8 +137,8 @@
         },
         "label": {
           "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
-          "en": "The university defines throughput and its criteria based on quality and effectiveness of operations - not solely based on the Ministry of Education and Culture funding model",
-          "se": "Universitetet definierar genomströmning och dess kriterier baserat på verksamhetens kvalitet och effektivitet - inte enbart baserat på Undervisnings- och kulturministeriets finansieringsmodell"
+          "en": "The University will define the rate of progression, including its criteria, based on not only the Ministry of Education and Culture funding model, but also operational quality and performance",
+          "se": "Universitetet definierar genomströmningen och kriterierna för den utifrån verksamhetens kvalitet och resultat – inte enbart utifrån UKM:s finansieringsmodell"
         },
         "level": "kandimaisteri",
         "description": {
@@ -164,8 +164,8 @@
         },
         "label": {
           "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
-          "en": "Degree programs address prolonged graduation times through study guidance, continuous improvement of teaching quality, and supporting students' learning regulation and well-being",
-          "se": "Utbildningsprogram åtgärdar förlängda studietider genom studievägledning, kontinuerlig förbättring av undervisningskvaliteten och stöd för studenternas inlärningsreglering och välbefinnande"
+          "en": "Degree programmes will address graduation delays through student guidance and supervision, the continuous enhancement of teaching quality, and support for student wellbeing and the self-regulation of learning",
+          "se": "Utbildningsprogrammen ingriper i utdragna studietider genom studiehandledning och kontinuerlig utveckling av undervisningens kvalitet och genom att stödja studenternas välbefinnande och deras förmåga till reglering av lärandet"
         },
         "level": "kandimaisteri",
         "description": {
@@ -191,8 +191,8 @@
         },
         "label": {
           "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
-          "en": "Degree programs develop effective mechanisms for completing theses, utilizing best practices used across the university",
-          "se": "Utbildningsprogram utvecklar effektiva mekanismer för att slutföra examensarbeten, med hjälp av bästa praxis som används över hela universitetet"
+          "en": "Degree programmes will develop effective mechanisms for supporting thesis completion based on good practices used across the University",
+          "se": "Utvecklingsprogrammen utvecklar effektiva mekanismer för slutförande av examensarbeten genom att använda sig av god praxis som tillämpas på olika håll vid universitetet"
         },
         "level": "kandimaisteri",
         "description": {
@@ -218,8 +218,8 @@
         },
         "label": {
           "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
-          "en": "The Center for University Pedagogy (HYPE) focuses research on the university's educational development areas to support the development of degree programs",
-          "se": "Centret för universitetspedagogik (HYPE) fokuserar forskning på universitetets utbildningsutvecklingsområden för att stödja utvecklingen av utbildningsprogram"
+          "en": "The Centre for University Teaching and Learning (HYPE) will investigate areas of development in University education, with the results supporting degree programme development",
+          "se": "Centret för universitetspedagogik HYPE bedriver forskning om utvecklingsobjekten i universitetets utbildning med syftet att forskningsresultaten ska stödja utbildningsprogrammens utveckling"
         },
         "level": "kandimaisteri",
         "description": {
@@ -245,8 +245,8 @@
         },
         "label": {
           "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
-          "en": "Degree programs use information from all student feedback systems to monitor study progress",
-          "se": "Utbildningsprogram använder information från alla studentåterkopplingssystem för att övervaka studieframsteg"
+          "en": "In monitoring student progress, degree programmes will use the information obtained from all student feedback systems",
+          "se": "I uppföljningen av studierna använder sig utbildningsprogrammen av informationen från alla system för studentrespons"
         },
         "level": "kandimaisteri",
         "description": {
@@ -273,14 +273,14 @@
 
         "label": {
           "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
-          "en": "....",
-          "se": "...."
+          "en": "Degree programmes will critically examine their capacity to attract and retain students if they have too few applicants or a poor rate of progression. They will then take appropriate measures to improve the situation",
+          "se": "I situationer där det inte finns tillräckligt många sökande till ett utbildningsprogram och/eller genomströmningen är svag granskar utbildningsprogrammet kritiskt förmågan att attrahera och behålla studenter. Utifrån granskningen vidtar programmet åtgärder för att förbättra situationen"
         },
         "level": "kandimaisteri",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
@@ -294,8 +294,8 @@
   {
   "title": {
     "fi": "Koulutusohjelmien johtaminen yliopiston strategisena tehtävänä",
-    "se": "Ledning av utbildningsprogram som universitetets strategiska uppgift",
-    "en": "Management of Education Programs as a Strategic Task of the University"
+    "se": "Ledning av utbildningsprogrammen som universitetets strategiska uppgift",
+    "en": "Management of degree programmes as the University’s strategic duty "
   },
   "level": "kandimaisteri",
   "parts": [
@@ -310,8 +310,8 @@
       },
       "label": {
         "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
-        "en": "The university strengthens the position of education program leaders by involving them in university management and strategic planning forums and processes",
-        "se": "Universitetet stärker utbildningsprogramledarnas ställning genom att involvera dem i universitetets lednings- och strategiska planeringsforum och processer"
+        "en": " The University will strengthen the status of degree programmes by involving them in the University’s management and strategic planning forums and processes",
+        "se": "Universitetet stärker ställningen hos ledarna för utbildningsprogrammen genom att inkludera dem i universitetets forum och processer för ledning och strategisk planering"
       },
       "level": "kandimaisteri",
       "description": {
@@ -337,8 +337,8 @@
       },
       "label": {
         "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
-        "en": "The university strengthens the appreciation of education programs so that leading an education program becomes an attractive task",
-        "se": "Universitetet stärker uppskattningen av utbildningsprogram så att ledningen av ett utbildningsprogram blir en attraktiv uppgift"
+        "en": "The University will increase appreciation for the programmes by making their leadership an attractive role",
+        "se": "Universitetet stärker utbildningsprogrammens status så att det blir ett attraktivt uppdrag att leda ett utbildningsprogram"
       },
       "level": "kandimaisteri",
       "description": {
@@ -364,8 +364,8 @@
       },
       "label": {
         "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
-        "en": "The university gives education programs the power and responsibility for program operations and resource planning by changing the university's organizational structures and operational processes",
-        "se": "Universitetet ger utbildningsprogram makten och ansvaret för programmets verksamhet och resursplanering genom att ändra universitetets organisationsstrukturer och operativa processer"
+        "en": "The University will give the programmes power and responsibility for operations and resource allocation by reorganising structures and operational processes",
+        "se": "Universitetet ger utbildningsprogrammen makt och ansvar över programmets verksamhet och resursplaneringen genom att ändra universitetets organisationsstruktur och verksamhetsprocesser"
       },
       "level": "kandimaisteri",
       "description": {
@@ -391,8 +391,8 @@
       },
       "label": {
         "fi": "Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta",
-        "en": "In managing joint programs, the university and faculties ensure efficient information flow and commitment",
-        "se": "I ledningen av gemensamma program säkerställer universitetet och fakulteterna effektivt informationsflöde och engagemang"
+        "en": "In the management of joint programmes, the University and the faculties will ensure an efficient flow of information and commitment to offering teaching resources for a sufficiently long time",
+        "se": "I fråga om ledningen av de gemensamma programmen ser universitetet och fakulteterna till att informationsspridningen är effektiv och att det finns ett engagemang för ett tillräckligt långsiktigt tillhandahållande av undervisningsresurser"
       },
       "level": "kandimaisteri",
       "description": {
@@ -412,8 +412,8 @@
 {
   "title": {
     "fi": "Opetusresurssien kattava haltuunotto koulutusohjelmien tarpeisiin",
-    "se": "Omfattande hantering av undervisningsresurser för utbildningsprogrammens behov",
-    "en": "Comprehensive management of teaching resources for the needs of education programs"
+    "se": "Heltäckande kontroll över undervisningsresurserna för utbildningsprogrammens behov",
+    "en": "Comprehensive control of teaching resources for degree programme needs"
   },
   "level": "kandimaisteri",
   "parts": [
@@ -428,8 +428,8 @@
       },
       "label": {
         "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
-        "en": "The university solves the structural problem of the separation of education program operations and resources, which weakens the operating conditions of education programs",
-        "se": "Universitetet löser det strukturella problemet med separeringen av utbildningsprogrammens verksamhet och resurser, vilket försvagar utbildningsprogrammens verksamhetsförutsättningar"
+        "en": "The University will resolve the structural problem hindering the conditions required by degree programme operations, namely, their separation from resources",
+        "se": "Universitetet löser det strukturella problemet att utbildningsprogrammens verksamhet och resurser är åtskilda från varandra"
       },
       "level": "kandimaisteri",
       "description": {
@@ -455,8 +455,8 @@
       },
       "label": {
         "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
-        "en": "The university addresses problems related to teaching resources through management methods and decides to solve already identified problems",
-        "se": "Universitetet tar itu med problem relaterade till undervisningsresurser genom ledningsmetoder och beslutar att lösa redan identifierade problem"
+        "en": "The University will address, through management measures, the problems of teaching resources and resolve the problems identified so far",
+        "se": "Universitetet ingriper genom ledarskap i problemen som gäller undervisningsresurserna och bestämmer sig för att lösa de problem som redan identifierats"
       },
       "level": "kandimaisteri",
       "description": {
@@ -482,8 +482,8 @@
       },
       "label": {
         "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
-        "en": "The university creates norms and develops means to monitor the workload and distribution of teaching, taking into account the workload caused by different types of teaching",
-        "se": "Universitetet skapar normer och utvecklar metoder för att övervaka arbetsbördan och fördelningen av undervisning, med hänsyn till arbetsbördan som orsakas av olika typer av undervisning"
+        "en": "The University will establish norms and develop methods to monitor teacher workloads and the distribution of duties, taking into account the provision of different types of teaching",
+        "se": "Universitetet skapar normer och utvecklar sätt att följa undervisningsbelastningen och hur arbetsmängden fördelas med beaktande av den belastning som olika former av undervisning ger upphov till"
       },
       "level": "kandimaisteri",
       "description": {
@@ -509,8 +509,8 @@
       },
       "label": {
         "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
-        "en": "The university regularly monitors and evaluates the need and realization of teaching resources",
-        "se": "Universitetet övervakar och utvärderar regelbundet behovet och förverkligandet av undervisningsresurser"
+        "en": "The University will regularly monitor and assess the need for and implementation of teaching resources",
+        "se": "Universitetet skapar normer och utvecklar sätt att följa undervisningsbelastningen och hur arbetsmängden fördelas med beaktande av den belastning som olika former av undervisning ger upphov till"
       },
       "level": "kandimaisteri",
       "description": {
@@ -535,9 +535,9 @@
         "en": "Teaching appreciation"
       },
       "label": {
-        "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken.",
-        "en": "The university strengthens the appreciation of teaching to make teaching tasks more attractive. At the same time, it must promote a more even distribution of teaching tasks among staff.",
-        "se": "Universitetet stärker uppskattningen av undervisning för att göra undervisningsuppgifter mer attraktiva. Samtidigt måste det främja en jämnare fördelning av undervisningsuppgifter bland personalen."
+        "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken",
+        "en": "The University will boost the appreciation of teaching to increase the appeal of teaching roles. At the same time, it will promote a more even distribution of teaching duties among staff",
+        "se": "Universitetet stärker undervisningens status så att undervisningsuppgifter blir mer attraktiva. Samtidigt ska en jämnare fördelning av undervisningsuppgifterna mellan personalen främjas"
       },
       "level": "kandimaisteri",
       "description": {
@@ -557,8 +557,8 @@
   {
   "title": {
     "fi": "Koulutusohjelmien kielisyys ja kansainvälisten ohjelmien strateginen merkitys",
-    "se": "Utbildningsprogrammens språklighet och internationella programs strategiska betydelse",
-    "en": "Language of Education Programs and Strategic Importance of International Programs"
+    "se": "Utvecklingsprogrammens språk och de internationella programmens strategiska betydelse",
+    "en": "Languages of degree programmes and strategic significance of international programmes"
   },
   "level": "kandimaisteri",
   "parts": [
@@ -573,8 +573,8 @@
       },
       "label": {
         "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä",
-        "en": "The university clarifies and specifies the strategic importance of international English-language education programs",
-        "se": "Universitetet klargör och specificerar den strategiska betydelsen av internationella engelskspråkiga utbildningsprogram"
+        "en": "The University will clarify and elaborate on the strategic significance of its international English-language degree programmes",
+        "se": "Universitetet tydliggör och preciserar de internationella engelskspråkiga programmens strategiska betydelse"
       },
       "level": "kandimaisteri",
       "description": {
@@ -600,8 +600,8 @@
       },
       "label": {
         "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista",
-        "en": "The university outlines the opportunities and obligations for international staff to learn domestic languages (Finnish/Swedish)",
-        "se": "Universitetet beskriver möjligheter och skyldigheter för internationell personal att lära sig inhemska språk (finska/svenska)"
+        "en": "The University will decide on the opportunities and responsibilities of its international staff in learning the official languages of Finland (Finnish and Swedish)",
+        "se": "Universitetet drar upp linjerna för den internationella personalens möjligheter och skyldigheter att lära sig de inhemska språken (finska/svenska)"
       },
       "level": "kandimaisteri",
       "description": {
@@ -627,8 +627,8 @@
       },
       "label": {
         "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
-        "en": "The university reviews the functionality of practices in multilingual master's programs",
-        "se": "Universitetet granskar funktionaliteten av praxis i flerspråkiga masterprogram"
+        "en": "The University will review the effectiveness of practices in multilingual master’s programmes",
+        "se": "Universitetet ser över ändamålsenligheten i de flerspråkiga magisterprogrammens förfaringssätt"
       },
       "level": "kandimaisteri",
       "description": {
@@ -654,8 +654,8 @@
       },
       "label": {
         "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
-        "en": "The university promotes the employment of international students in Finland",
-        "se": "Universitetet främjar sysselsättningen av internationella studenter i Finland"
+        "en": "The University will promote the employment of international students in Finland",
+        "se": "Universitetet främjar internationella studenters möjligheter att få sysselsättning i Finland"
       },
       "level": "kandimaisteri",
       "description": {
@@ -675,8 +675,8 @@
 {
   "title": {
     "fi": "Koulutusohjelmien perustaminen ja lakkauttaminen yliopiston strategisina valintoina",
-    "se": "Inrättande och avveckling av utbildningsprogram som universitetets strategiska val",
-    "en": "Establishment and Termination of Education Programs as Strategic Choices of the University"
+    "se": "Inrättande och nedläggning av utbildningsprogram som universitetets strategiska val",
+    "en": "Establishing and terminating degree programmes as the University’s strategic choices"
   },
   "level": "kandimaisteri",
   "parts": [
@@ -691,8 +691,8 @@
       },
       "label": {
         "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
-        "en": "The university develops a strategic planning practice to identify the need for a new education program, taking into account the funding of the program's operations",
-        "se": "Universitetet utvecklar en strategisk planeringsmetod för att identifiera behovet av ett nytt utbildningsprogram, med hänsyn till finansieringen av programmets verksamhet"
+        "en": "The University will develop a strategic planning practice for recognising the need for a new degree programme, taking into account programme funding",
+        "se": "Universitetet utvecklar ett förfaringssätt för strategisk planering, med vilket behovet av ett nytt utbildningsprogram identifieras med beaktande av finansieringen av programmets verksamhet"
       },
       "level": "kandimaisteri",
       "description": {
@@ -718,8 +718,8 @@
       },
       "label": {
         "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina",
-        "en": "The university adopts the merging and termination of education programs as strategic tools",
-        "se": "Universitetet antar sammanslagning och avveckling av utbildningsprogram som strategiska verktyg"
+        "en": "The University will begin to use the merger and termination of degree programmes as strategic tools",
+        "se": "Universitetet tar i bruk sammanslagning och nedläggning av utbildningsprogram som strategiska verktyg"
       },
       "level": "kandimaisteri",
       "description": {
@@ -745,8 +745,8 @@
       },
       "label": {
         "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
-        "en": "The university decides on the criteria for establishing and terminating education programs",
-        "se": "Universitetet beslutar om kriterierna för att inrätta och avveckla utbildningsprogram"
+        "en": "The University will decide on criteria for establishing and terminating degree programmes",
+        "se": "Universitetet beslutar om kriterierna för inrättande och nedläggning av utbildningsprogram"
       },
       "level": "kandimaisteri",
       "description": {
@@ -766,8 +766,8 @@
 {
   "title": {
     "fi": "Koulutusohjelmaportfolion kehittäminen kokonaisuutena",
-    "se": "Utveckling av utbildningsprogramportföljen som helhet",
-    "en": "Development of the Education Program Portfolio as a Whole"
+    "se": "Utveckling av utbildningens programportfölj som helhet",
+    "en": "Developing the degree programme portfolio comprehensively"
   },
   "level": "kandimaisteri",
   "parts": [
@@ -782,8 +782,8 @@
       },
       "label": {
         "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
-        "en": "The university continuously monitors the attractiveness and retention power of education programs and makes necessary changes to programs and the program portfolio if there are not enough applicants or if the program is perceived as too broad, fragmented, or otherwise challenging in its functionality",
-        "se": "Universitetet övervakar kontinuerligt utbildningsprogrammens attraktionskraft och retentionsförmåga och gör nödvändiga förändringar i programmen och programportföljen om det inte finns tillräckligt med sökande eller om programmet uppfattas som för brett, fragmenterat eller på annat sätt utmanande i sin funktionalitet"
+        "en": "The University will continuously monitor the capacity of degree programmes to attract and retain students and will adjust programmes and the programme portfolio as necessary if the number of applicants is insufficient or if a programme is considered too broad-based, fragmented or otherwise operationally challenging",
+        "se": "Universitetet följer kontinuerligt utbildningsprogrammens förmåga att locka och behålla studenter, och gör ändringar i utbildningsprogrammen och i programportföljen om det inte finns tillräckligt med sökande eller om ett utbildningsprogram upplevs vara alltför brett, splittrat eller på annat sätt inte fungerar väl"
       },
       "level": "kandimaisteri",
       "description": {
@@ -809,8 +809,8 @@
       },
       "label": {
         "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
-        "en": "The university regularly reviews its education program portfolio and assesses, among other things, whether there are too many or too few education programs or master's program options after bachelor's programs, whether the educational fields of the programs are relevant, and whether there is content overlap in the program portfolio",
-        "se": "Universitetet granskar regelbundet sin utbildningsprogramportfölj och bedömer bland annat om det finns för många eller för få utbildningsprogram eller masterprogram-alternativ efter kandidatprogram, om programmens utbildningsområden är relevanta och om det finns innehållsmässig överlappning i programportföljen"
+        "en": "The University will regularly review its programme portfolio and assess, for example, whether it has too many or too few programmes or master’s programme options for bachelor’s graduates, whether the fields of education are relevant and whether the portfolio content is overlapping",
+        "se": "Universitetet granskar regelbundet sin programportfölj och bedömer bland annat huruvida det finns för många eller för få utbildningsprogram eller magisteroptioner efter kandidatprogrammen, huruvida programmens utbildningsområden är relevanta och huruvida portföljen innehåller program med överlappande innehåll"
       },
       "level": "kandimaisteri",
       "description": {
@@ -836,8 +836,8 @@
       },
       "label": {
         "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
-        "en": "The university develops the sharpness of master's program profiles so that applicants can better identify different options",
-        "se": "Universitetet utvecklar masterprogrammens profilskärpa så att sökande bättre kan identifiera olika alternativ"
+        "en": "The University will develop the distinct profiles of its master’s programmes so that applicants can better recognise different alternatives",
+        "se": "Universitetet utvecklar magisterprogrammens särpräglade profiler så att de sökande bättre kan identifiera de olika alternativen"
       },
       "level": "kandimaisteri",
       "description": {
@@ -863,8 +863,8 @@
   },
   "label": {
     "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
-    "en": "It is recommended for the university to prepare proactive scenarios and a range of methods for developing the education program portfolio 8-10 years ahead, taking into account the state of the national economy and the international operating environment",
-    "se": "Det rekommenderas att universitetet förbereder proaktiva scenarier och en uppsättning metoder för att utveckla utbildningsprogramportföljen 8-10 år framåt, med hänsyn till den nationella ekonomins tillstånd och den internationella verksamhetsmiljön"
+    "en": "It is recommended at the University that proactive scenarios and a range of means be prepared for the next eight to 10 years to develop the programme portfolio, considering current public finances and the international operating environment",
+    "se": "Det rekommenderas att universitetet förbereder förutseende scenarier och en uppsättning medel för 8–10 år framåt i tiden för att kunna utveckla programportföljen med beaktande av statsfinanserna och den internationella omvärlden"
   },
   "level": "kandimaisteri",
   "description": {
@@ -885,7 +885,7 @@
   "title": {
     "fi": "Tohtorin tutkinnon suorittaminen tavoiteajassa",
     "se": "Avläggande av doktorsexamen inom målsatt tid",
-    "en": "Completing doctoral degree within target time"
+    "en": "Completion of doctoral degrees within the target duration"
   },
   "level": "tohtori",
   "parts": [
@@ -900,8 +900,8 @@
       },
       "label": {
         "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
-        "en": "Doctoral programs renew their curricula so that the doctoral degree can be completed within the target time",
-        "se": "Doktorandprogram förnyar sina läroplaner så att doktorsexamen kan avläggas inom den målsatta tiden"
+        "en": "Doctoral programmes will redesign their curricula so that doctoral degrees can be completed within the target duration",
+        "se": "Doktorandprogrammen ser över sina undervisningsplaner så att doktorsexamen kan avläggas inom utsatt tid"
       },
       "level": "tohtori",
       "description": {
@@ -927,8 +927,8 @@
       },
       "label": {
         "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin",
-        "en": "The amount, content, and role of course-based teaching in the doctoral degree should be critically evaluated. It is good to examine this in relation to comparable countries",
-        "se": "Mängden, innehållet och rollen av kursformad undervisning i doktorsexamen bör utvärderas kritiskt. Det är bra att undersöka detta i förhållande till jämförbara länder"
+        "en": "The amount, content and role of course-based teaching in doctoral degrees must be examined critically and based on data from comparable countries",
+        "se": "Den kursformade undervisningens omfattning, innehåll och roll i doktorsexamen bör granskas kritiskt. Det är motiverat att granska dem i jämförelse med referensländer"
       },
       "level": "tohtori",
       "description": {
@@ -954,8 +954,8 @@
       },
       "label": {
         "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
-        "en": "Cooperation between doctoral programs supports the smooth running of doctoral education as the number of doctoral researchers increases",
-        "se": "Samarbete mellan doktorandprogram stöder smidigheten i doktorandutbildningen när antalet doktorander ökar"
+        "en": "As the number of doctoral researchers increases, collaboration between doctoral programmes will support effective doctoral education",
+        "se": "Samarbete mellan doktorandprogram stöder en smidig doktorsutbildning när antalet doktorander ökar"
       },
       "level": "tohtori",
       "description": {
@@ -981,8 +981,8 @@
       },
       "label": {
         "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
-        "en": "There is variation in supervision practices, which is why supervisor training could be targeted at those doctoral programs where it has already been identified as a problem",
-        "se": "Det finns variation i handledningspraxis, vilket är anledningen till att handledarutbildning skulle kunna riktas till de doktorandprogram där det redan har identifierats som ett problem"
+        "en": "With the variation in supervision practices, supervisor training could be targeted to the doctoral programmes that have already identified this as a problem",
+        "se": "Handledningspraxis varierar, och därför skulle handledarutbildningen kunna inriktas på de doktorandprogram där detta redan är ett identifierat problem"
       },
       "level": "tohtori",
       "description": {
@@ -1008,8 +1008,8 @@
       },
       "label": {
         "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
-        "en": "As the volume of doctoral researchers grows, the university develops supervision practices, including peer support and guidance",
-        "se": "När volymen av doktorander ökar utvecklar universitetet handledningspraxis, inklusive kamratstöd och vägledning"
+        "en": "As the volume of doctoral researchers grows, the University will develop supervision practices, including peer support and supervision",
+        "se": "I takt med att volymen doktorander ökar, utvecklar universitetet sin handledningspraxis inklusive kamratstöd och kamrathandledning"
       },
       "level": "tohtori",
       "description": {
@@ -1029,8 +1029,8 @@
 {
   "title": {
     "fi": "Nivelvaihe maisterista tohtoriin",
-    "se": "Övergångsfas från magister till doktor",
-    "en": "Transition phase from master's to doctoral"
+    "se": "Övergången från magister till doktor",
+    "en": "The transition stage from master’s to doctoral studies"
   },
   "level": "tohtori",
   "parts": [
@@ -1045,8 +1045,8 @@
       },
       "label": {
         "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
-        "en": "It is recommended to plan practices supporting recruitment for doctoral education in a field-specific manner in cooperation between doctoral and master's programs",
-        "se": "Det rekommenderas att planera praxis som stöder rekrytering till doktorandutbildning på ett ämnesspecifikt sätt i samarbete mellan doktorand- och magisterprogram"
+        "en": "It is recommended that practices supporting recruitment to doctoral education be planned in each field through collaboration between doctoral and master’s programmes",
+        "se": "Det rekommenderas att praxis för rekrytering till doktorsutbildning utformas inom varje disciplin som ett samarbete mellan doktorand- och magisterprogrammen"
       },
       "level": "tohtori",
       "description": {
@@ -1066,8 +1066,8 @@
 {
   "title": {
     "fi": "Uuden tutkijakoulurakenteen vakinaistaminen",
-    "se": "Permanentning av ny forskarskolestruktur",
-    "en": "Establishing new research school structure"
+    "se": "Etablering av den nya forskarskolestrukturen",
+    "en": "Consolidating the new doctoral school structure"
   },
   "level": "tohtori",
   "parts": [
@@ -1082,8 +1082,8 @@
       },
       "label": {
         "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
-        "en": "The university continues to develop the practices of a single research school, taking into account the diversity of doctoral education and the different starting points of the fields",
-        "se": "Universitetet fortsätter att utveckla praxis för en enda forskarskola, med hänsyn till mångfalden i doktorandutbildningen och de olika utgångspunkterna för områdena"
+        "en": "The University will continue to develop practices and procedures for its single doctoral school, taking into account the versatility of doctoral education and field-specific starting points",
+        "se": "Universitetet fortsätter utveckla sin forskarskolas verksamhetssätt med beaktande av doktorsutbildningens heterogenitet och disciplinernas olika utgångspunkter"
       },
       "level": "tohtori",
       "description": {
@@ -1103,8 +1103,8 @@
 {
   "title": {
     "fi": "Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
-    "se": "Utveckling av doktorandprogramportföljen som helhet",
-    "en": "Development of the doctoral program portfolio as a whole"
+    "se": "Utveckling av doktorsutbildningens programportfölj som helhet",
+    "en": "Developing the doctoral programme portfolio comprehensively"
   },
   "level": "tohtori",
   "parts": [
@@ -1119,8 +1119,8 @@
       },
       "label": {
         "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
-        "en": "By intensifying cooperation between doctoral programs and possibly combining programs, the university can offer doctoral researchers more multidisciplinary research environments and gain benefits for program management and coordination work",
-        "se": "Genom att intensifiera samarbetet mellan doktorandprogram och eventuellt kombinera program kan universitetet erbjuda doktorander mer tvärvetenskapliga forskningsmiljöer och få fördelar för programledning och samordningsarbete"
+        "en": "By increasing collaboration between doctoral programmes and possibly merging programmes, the University can offer doctoral researchers more multidisciplinary research environments and support the leadership and coordination of programmes",
+        "se": "Genom att intensifiera samarbetet mellan doktorandprogrammen och eventuellt sammanslå program kan universitetet erbjuda doktorander mer mångdisciplinära forskningsmiljöer och få fördelar för programledning och koordinering"
       },
       "level": "tohtori",
       "description": {
@@ -1141,19 +1141,19 @@
         "type": "META_ENTITY",
         "shortLabel": {
           "fi": "Yhteistyömahdollisuuksien tarkastelu",
-          "se": "",
-          "en": ""
+          "se": "Utforska möjligheter till samarbete",
+          "en": "Exploring opportunities for cooperation"
         },
         "label": {
           "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
-          "en": "....",
-          "se": "...."
+          "en": "As the number of doctoral researchers is set to increase, it is necessary to explore collaboration opportunities between the programmes within the University and with other universities",
+          "se": "På grund av den ökande doktorandvolymen är det nödvändigt att undersöka doktorandprogrammens möjligheter till samarbete, både inom och utanför universitetet"
         },
         "level": "tohtori",
         "description": {
           "fi": "Miten kehittämiskohde koskee ohjelmaa ja miten toimenpiteet toteutettavissa?",
-          "se": "",
-          "en": ""
+          "se": "Hur berör utvecklingsområdet programmet och hur kan åtgärderna genomföras?",
+          "en": "How does the development target concern the program and how can the measures be implemented?"
         },
         "required": true,
         "extrainfo": {
