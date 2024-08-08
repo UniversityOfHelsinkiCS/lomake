@@ -3,7 +3,7 @@ const { sentryEsbuildPlugin } = require('@sentry/esbuild-plugin')
 
 const devConfig = {
   entryPoints: ['client/index.js'],
-  loader: { '.js': 'jsx', '.png': 'file', '.svg': 'file', '.jpg': 'file' },
+  loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'dataurl', '.jpg': 'dataurl' },
   sourcemap: true,
   bundle: true,
   outdir: 'dev',

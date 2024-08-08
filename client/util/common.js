@@ -1,7 +1,7 @@
 /**
  * Insert common items here
  */
-import _ from 'lodash'
+import capitalize from 'lodash/capitalize'
 
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
@@ -159,7 +159,7 @@ export const modifiedQuestions = (lang, form) => {
             id: `${part.id}_selection`,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -175,7 +175,7 @@ export const modifiedQuestions = (lang, form) => {
             id: part.id,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -191,7 +191,7 @@ export const modifiedQuestions = (lang, form) => {
             id: part.id,
             color: `${part.id}_light`,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
@@ -212,7 +212,7 @@ export const modifiedQuestions = (lang, form) => {
             comment: `${part.id}_comment_text`,
             color: colorId,
             description: part.description ? part.description[lang] : '',
-            label: _.capitalize(part.label[lang]),
+            label: capitalize(part.label[lang]),
             title: question.title[lang],
             titleIndex,
             labelIndex: part.index,
