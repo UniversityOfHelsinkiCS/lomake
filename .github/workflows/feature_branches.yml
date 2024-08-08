@@ -2,7 +2,7 @@ name: Test feature branch
 
 on:
   push:
-    branches-ignore: 'master'
+    branches-ignore: ['master']
 
 jobs:
   tests:
@@ -25,7 +25,7 @@ jobs:
             sidebar,
             yearselector,
             evaluation,
-            metaevaluation.
+            metaevaluation,
             homepage,
           ]
     name: Run tests
