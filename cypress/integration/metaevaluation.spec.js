@@ -98,9 +98,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
-      cy.get('[data-cy=textarea-2]').click()
-      cy.get('[data-cy=textarea-2]').type('1234')
-      cy.get('[data-cy=save-button-2]').click()
+      cy.typeInEditor('2', '1234')
 
       cy.get('[data-cy=color-negative-2]').click()
 
@@ -120,13 +118,9 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=form-7-deadline]').contains('2024')
 
       cy.visit(`/meta-evaluation/form/7/${testProgrammeCodeDoctor}`)
-      cy.get('[data-cy=textarea-T1]').click()
-      cy.get('[data-cy=textarea-T1]').type('2345')
-      cy.get('[data-cy=save-button-T1]').click()
+      cy.typeInEditor('T1', '2345')
 
-      cy.get('[data-cy=textarea-T1_comment]').click()
-      cy.get('[data-cy=textarea-T1_comment]').type('3456')
-      cy.get('[data-cy=save-button-T1_comment]').click()
+      cy.typeInEditor('T1_comment', '3456')
 
       cy.visit('/meta-evaluation/answers')
       cy.get('[data-cy=doctle]').click()
