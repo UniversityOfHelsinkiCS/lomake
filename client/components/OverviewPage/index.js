@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Dropdown, Button, Menu, MenuItem } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
@@ -106,38 +106,47 @@ export default () => {
 
       {usersProgrammes.length > 0 ? (
         <>
-          <div className={moreThanFiveProgrammes ? 'wide-header' : 'wideish-header'}>
-            <h2 className="view-title">{t('yearlyAssessment').toUpperCase()}</h2>
-            <label className="year-filter-label">{t('overview:selectYear')}</label>
-            <YearSelector size="extra-small" />
-            <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
-              {t('overview:readAnswers')}
-            </Button>
-            {moreThanFiveProgrammes && (
-              <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
-                {t('overview:compareAnswers')}
+          <Menu size="large" className="filter-row" secondary>
+            <MenuItem>
+              <h2>{t('yearlyAssessment').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <YearSelector size="extra-small" />
+            </MenuItem>
+            <MenuItem>
+              <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
+                {t('overview:readAnswers')}
               </Button>
-            )}
-            <Dropdown
-              data-cy="csv-download"
-              className="button basic gray csv-download"
-              direction="left"
-              text={t('overview:csvDownload')}
-              onClick={() => setShowCsv(true)}
-            >
-              {showCsv ? (
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" form={form} />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" form={form} />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              ) : null}
-            </Dropdown>
-          </div>
-          <div style={{ marginTop: '1em' }}>
+            </MenuItem>
+            <MenuItem>
+              {moreThanFiveProgrammes && (
+                <Button data-cy="nav-comparison" as={Link} to="/comparison" size="big">
+                  {t('overview:compareAnswers')}
+                </Button>
+              )}
+            </MenuItem>
+            <MenuItem position="right">
+              <Dropdown
+                data-cy="csv-download"
+                className="button basic gray csv-download"
+                direction="left"
+                text={t('overview:csvDownload')}
+                onClick={() => setShowCsv(true)}
+              >
+                {showCsv ? (
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="written" view="overview" form={form} />
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <CsvDownload wantedData="colors" view="overview" form={form} />
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : null}
+              </Dropdown>
+            </MenuItem>
+          </Menu>
+          <div>
             <ColorTable
               filteredProgrammes={filteredProgrammes}
               setModalData={setModalData}

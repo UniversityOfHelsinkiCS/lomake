@@ -102,7 +102,7 @@ export default () => {
       {usersProgrammes.length > 0 ? (
         <>
           <div className="wide-header-committee">
-            <h2 className="view-title">{t('evaluation').toUpperCase()}</h2>
+            <h2>{t('evaluation').toUpperCase()}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', height: '8em', justifyContent: 'space-evenly' }}>
               <Radio toggle label={t(`overview:colorBlindMode`)} onClick={() => dispatch(setColorBlindMode())} />
             </div>

@@ -10,18 +10,12 @@ $QUESTION_COUNT: 6;
   margin-bottom: 1em;
 }
 
-
 .wide-header {
   @include committee-wide-header-basics;
   &-committee {
     @include committee-wide-header-basics;
     grid-template-columns: 1fr 3fr 4fr;
   }
-}
-
-.view-title {
-  margin-right: 1em;
-  margin-top: 1em,
 }
 
 .csv-download {
@@ -44,14 +38,20 @@ $QUESTION_COUNT: 6;
   @include committee-overview-basics;
   &-3 {
     @include committee-overview-basics;
-    grid-template-rows: 50px 50px 50px repeat(6, 20px) 40px minmax(50px,auto) repeat(6, 20px) 40px minmax(50px,auto) repeat(2, 50px);
-    grid-template-columns: minmax(0,4fr) repeat(1, minmax(0,6fr)) minmax(0,3em)  repeat(1, minmax(0,6fr)) ;
- }
- &-5 {
+    grid-template-rows: 50px 50px 50px repeat(6, 20px) 40px minmax(50px, auto) repeat(6, 20px) 40px minmax(50px, auto) repeat(
+        2,
+        50px
+      );
+    grid-template-columns: minmax(0, 4fr) repeat(1, minmax(0, 6fr)) minmax(0, 3em) repeat(1, minmax(0, 6fr));
+  }
+  &-5 {
     @include committee-overview-basics;
-    grid-template-rows: 50px 50px 50px repeat(6, 20px) 40px minmax(50px,auto) repeat(6, 20px) 40px minmax(50px,auto) repeat(2, 50px);
-    grid-template-columns: minmax(0,2fr) repeat(2, minmax(0,2fr)) minmax(0,3em)  repeat(2, minmax(0,2fr)) ;
- }
+    grid-template-rows: 50px 50px 50px repeat(6, 20px) 40px minmax(50px, auto) repeat(6, 20px) 40px minmax(50px, auto) repeat(
+        2,
+        50px
+      );
+    grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 2fr)) minmax(0, 3em) repeat(2, minmax(0, 2fr));
+  }
 }
 
 @mixin square-basics {
@@ -99,7 +99,7 @@ $QUESTION_COUNT: 6;
   }
   &-gray {
     @include square-basics();
-    background-color: rgb(128,128,128);
+    background-color: rgb(128, 128, 128);
     &:hover {
       filter: brightness(0.8);
     }
@@ -117,13 +117,13 @@ $QUESTION_COUNT: 6;
 
 @mixin sticky-header-committee {
   @include sticky-header-basics();
-    word-wrap: break-word;
-    text-align: center;
-    font-weight: bold;
-    margin-left: -3px;
-    margin-right: -3px;
-    padding-left: 5px;
-    padding-right: 5px;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  margin-left: -3px;
+  margin-right: -3px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .sticky-header {
@@ -131,12 +131,12 @@ $QUESTION_COUNT: 6;
 
   &-categories-5 {
     @include sticky-header-committee();
-     grid-column: span 1;
-   }
-   &-categories-3 {
+    grid-column: span 1;
+  }
+  &-categories-3 {
     @include sticky-header-committee();
-     grid-column: span 1;
-   }
+    grid-column: span 1;
+  }
 }
 
 .year-filter-label {
@@ -159,7 +159,7 @@ $QUESTION_COUNT: 6;
   }
   &-row-link-committee {
     @include container-basics;
-    overflow-wrap:anywhere;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -195,11 +195,9 @@ $QUESTION_COUNT: 6;
 
 @mixin accordion-title-basics {
   margin-left: 0.5rem;
-  
 }
 
 .accordion-title {
-  
   &-green {
     border-radius: 10px 100px / 120px;
     h2 {
@@ -211,7 +209,7 @@ $QUESTION_COUNT: 6;
     border-radius: 10px 100px / 120px;
     h2 {
       @include accordion-title-basics;
-    } 
+    }
     background: $light-yellow;
   }
   &-red {
@@ -221,16 +219,16 @@ $QUESTION_COUNT: 6;
     }
     background: $light-red;
   }
-
 }
 
 .modal-accordion-container {
-
   div:not(:first-child) {
     margin-top: 1rem;
-}
+  }
 
-  h2, h4, p {
+  h2,
+  h4,
+  p {
     margin-left: 1rem;
   }
 }

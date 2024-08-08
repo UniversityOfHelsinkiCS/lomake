@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader, Header, Divider } from 'semantic-ui-react'
+import { Loader, Header } from 'semantic-ui-react'
 
 import { answersByYear, getYearToShow } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -96,7 +96,6 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
                   as="h2"
                 >
                   {indexTopLevel + 1}) {theme.title[lang]}
-                  <Divider />
                 </Header>
               )}
               <TableRow

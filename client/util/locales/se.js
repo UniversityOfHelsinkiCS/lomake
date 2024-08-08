@@ -338,12 +338,12 @@ export default {
       overall: '',
     },
     selectedLevels: {
-      master: 'Kandidat- och masterprogram',
-      doctoral: 'Doktorandprogrammet',
+      master: 'Kandidat- och magisterprogram',
+      doctoral: 'Doktorandprogram',
       overall: '',
     },
-    uniTableHeaderHY: 'Helsingfors universitets utvärderings- och utvecklingsområden',
-    uniTableHeaderCommittee: 'Utvärderingsgruppens utvärderings- och utvecklingsområden',
+    uniTableHeaderHY: 'Helsingfors universitets utvärdering och åtgärdsförslag',
+    uniTableHeaderCommittee: 'Utvärderingsgruppens utvärdering och åtgärdsförslag',
     printingTopHeader: 'Helsingfors universitet genomgång av utvärderingen av utbildningsprogrammet',
     printingSubHeader: 'Helsingfors universitet och utvärderingsgruppen 2024',
     printingSubHeaderUpperLevel: {
@@ -355,9 +355,9 @@ export default {
       arviointi: 'Utvärderingsgruppsutvärdering',
     },
     printingPDF: {
-      uniBachelorMaster: 'Kandidat- och masterprogram (universitetsnivå)',
+      uniBachelorMaster: 'Kandidat- och magisterprogram (universitetsnivå)',
       uniDoctoral: 'Doktorandprogram (universitetsnivå)',
-      arviointiBachelorMaster: 'Kandidat- och masterprogram (Utvärderingsgrupp)',
+      arviointiBachelorMaster: 'Kandidat- och magisterprogram (Utvärderingsgrupp)',
       arviointiDoctoral: 'Doktorandprogram (Utvärderingsgrupp)',
     },
 

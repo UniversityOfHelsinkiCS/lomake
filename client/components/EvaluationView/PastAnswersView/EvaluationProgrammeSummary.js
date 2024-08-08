@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
 import { Accordion } from 'semantic-ui-react'
-import * as _ from 'lodash'
+import sortBy from 'lodash/sortBy'
 
 import { isAdmin } from '@root/config/common'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
@@ -18,7 +18,7 @@ const getTotalWritten = ({ question, allAnswers }) => {
   const filteredAnswers = answers ? answers.filter(a => a.answer) : []
   const mapped = {
     year: allAnswers.year,
-    answers: _.sortBy(filteredAnswers, 'name'),
+    answers: sortBy(filteredAnswers, 'name'),
   }
   return [mapped]
 }

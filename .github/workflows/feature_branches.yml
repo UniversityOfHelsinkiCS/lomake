@@ -2,7 +2,7 @@ name: Test feature branch
 
 on:
   push:
-    branches-ignore: 'master'
+    branches-ignore: ['master']
 
 jobs:
   tests:
