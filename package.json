@@ -60,7 +60,7 @@
     "react-router-hash-link": "^1.2.2",
     "react-to-print": "^2.14.12",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
+    "redux-thunk": "^3.0.0",
     "semantic-ui-react": "^2.1.2",
     "sequelize": "^6.6.2",
     "socket.io": "^4.7.2",
