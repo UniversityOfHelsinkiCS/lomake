@@ -200,9 +200,9 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    let years = [2019, 2020, 2021, 2022, 2023]
+    let years = [2019, 2020, 2021, 2022, 2023, 2024]
     if (!req.path.endsWith('/all')) {
-      years = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
+      years = [new Date().getFullYear(), new Date().getFullYear() - 1]
     }
 
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
