@@ -87,30 +87,32 @@ export default () => {
 
   // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
+    if (!oldAnswers.data) return
+
     let year = 2019
-    if (oldAnswers.data) {
-      if (
-        deadlines.draftYear &&
-        deadlines?.nextDeadline?.length > 0 &&
-        new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date() &&
-        currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)
-      ) {
-        year = deadlines.draftYear.year
-      } else {
-        year = oldAnswers.data.reduce((acc, answer) => {
-          if (
-            Object.entries(answer.data).length > 0 &&
-            answer.year > acc &&
-            (answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION)
-          )
-            return answer.year
-          return acc
-        }, 2019)
-      }
-      if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
-        dispatch(setYear(year))
-        dispatch(setMultipleYears([year]))
-      }
+
+    // Check if there's an upcoming deadline for the yearly assessment
+    const hasUpcomingDeadline =
+      deadlines.draftYear &&
+      deadlines.nextDeadline?.length > 0 &&
+      new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
+
+    if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
+      year = deadlines.draftYear.year
+    } else {
+      // Find the most recent year with data
+      year = oldAnswers.data.reduce((latestYear, answer) => {
+        const isRelevantForm = answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION
+        if (Object.entries(answer.data).length > 0 && answer.year > latestYear && isRelevantForm) {
+          return answer.year
+        }
+        return latestYear
+      }, 2019)
+    }
+
+    if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
+      dispatch(setYear(year))
+      dispatch(setMultipleYears([year]))
     }
   }, [oldAnswers, deadlines])
 
