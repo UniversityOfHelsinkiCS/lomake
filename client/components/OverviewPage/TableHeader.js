@@ -40,7 +40,9 @@ const TableHeader = ({ tableIds, sort, title, showStudyLevel, meta = false }) =>
 
         return (
           <div key={idObject.id} className="sticky-header-categories">
-            <Popup trigger={<span className="vertical-text">{shortLabel}</span>}>{label}</Popup>
+            <Popup position="top center" trigger={<span className="vertical-text">{shortLabel}</span>}>
+              {label}
+            </Popup>
           </div>
         )
       })}

@@ -11,25 +11,27 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
   const bool = value !== 'gray'
 
   return (
-    <div className="form-entity-area" style={{ marginBottom: 25 }}>
+    <div className="form-entity-area" style={{ marginBottom: '3.5em' }}>
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingTop: 15,
         }}
       >
-        <div style={{ maxWidth: '1000px' }}>
+        <div style={{ flexBasis: '75%' }}>
           <h3>
             {number}. {label}{' '}
-            {required && <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600' }}>*</span>}
+            {required && (
+              <span style={{ color: colors.red, marginLeft: '0.2em', fontWeight: '600', maxWidth: '' }}>*</span>
+            )}
           </h3>
         </div>
         {!noColor && <MetaTrafficLights id={id} form={form} />}
       </div>
-      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} />}
-      <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} />
+      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} marginTop={'0'} />}
+      <br />
+      <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} marginTop={'0'} />
     </div>
   )
 }

@@ -106,6 +106,7 @@ const ProgrammeLevelForm = ({ room }) => {
           <div className="big-circle-gray" />
           {t('irrelevant')}
         </div>
+        <br />
         <MetaEvaluationForm
           questions={questionData}
           programmeKey={programme.key}

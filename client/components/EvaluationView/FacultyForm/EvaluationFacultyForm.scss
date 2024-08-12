@@ -1,7 +1,7 @@
 @import '../../../assets/colors.scss';
 
 .summary-container {
- padding: 1em;
+  padding: 1em;
 }
 
 @mixin answer-circle-basics {
@@ -32,10 +32,9 @@
 
 .programme-list-button {
   background: none;
-	color: inherit;
-	font: inherit;
-	cursor: pointer;
-
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 @mixin big-circle-basics {
@@ -61,14 +60,12 @@
   }
 }
 
-
 .measures-count-circle {
   display: flexbox;
   align-items: center;
   border-radius: 20%;
   padding: 5px;
   background: $background-blue;
-  
 }
 
 .old-answer-text {
@@ -78,7 +75,7 @@
 .info-container {
   line-height: 2;
   background: $background_blue;
-  padding: 1.5em 0.5em;
+  padding: 1.5em 1em;
   border-radius: 5px;
   margin: 2em 0em 1em 0em;
 }

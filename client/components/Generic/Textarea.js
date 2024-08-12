@@ -231,7 +231,7 @@ const Textarea = ({
     }
   }
   return (
-    <div data-cy={`textarea-${id}`} style={{ marginTop: marginTop || 0 }}>
+    <div data-cy={`textarea-${id}`} style={{ marginTop: 0 }}>
       <div
         className="form-text-area"
         style={{
@@ -284,7 +284,7 @@ const Textarea = ({
         <ReactMarkdown>{dataFromRedux}</ReactMarkdown>
       ) : (
         <>
-          <div style={{ marginTop: '1em' }}>
+          <div style={{ marginTop: marginTop || '1em' }}>
             <div data-cy={`editing-area-${id}`} onClick={askForLock}>
               <Editor
                 editorStyle={{ wordBreak: 'break-word', width: '100%' }}
