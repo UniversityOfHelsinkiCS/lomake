@@ -34,7 +34,8 @@ const MetaOverview = ({
   const [usersProgrammes, setUsersProgrammes] = useState([])
   const debouncedFilter = useDebounce(filter, 200)
   const titleText = `${t('metaevaluation').toUpperCase()}`
-  const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
+  const doctoralToggleText = t('doctoralToggle')
+  const bachelorToggleText = t('bachelorMasterToggle')
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
@@ -117,13 +118,29 @@ const MetaOverview = ({
           </Button>
         </MenuItem>
         <MenuItem>
-          <Button
-            className="button basic gray"
+          <Dropdown
             data-cy="doctle"
-            onClick={() => handleDoctoralChange()}
-            size="big"
-            content={doctoralToggleText}
-          />
+            className="button basic gray"
+            direction="left"
+            text={doctoral ? doctoralToggleText : bachelorToggleText}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() => {
+                  if (doctoral) handleDoctoralChange()
+                }}
+              >
+                <p>{bachelorToggleText}</p>
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  if (!doctoral) handleDoctoralChange()
+                }}
+              >
+                <p>{doctoralToggleText}</p>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </MenuItem>
         <MenuItem>
           <FacultyDropdown
