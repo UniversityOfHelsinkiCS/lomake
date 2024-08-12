@@ -7,6 +7,7 @@ import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -121,6 +122,7 @@ const ColorTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
+      dispatch(getAnswersActionAll())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
@@ -334,33 +336,33 @@ const ColorTable = React.memo(
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })
             : sortedAllProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })}
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })}
         </div>
       </>
     )
