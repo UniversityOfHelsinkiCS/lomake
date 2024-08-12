@@ -91,6 +91,9 @@ export default {
     timesensitive: 'Topic',
     clock: 'Clock',
     toFrontpage: 'To frontpage',
+
+    doctoralToggle: 'Doctoral Programmes',
+    bachelorMasterToggle: 'Bachelor & Master Programmes',
   },
 
   aboutPage: {

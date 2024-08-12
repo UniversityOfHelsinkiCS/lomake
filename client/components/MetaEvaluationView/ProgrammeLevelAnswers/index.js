@@ -35,7 +35,8 @@ const ProgrammeLevelAnswers = () => {
   const [filter, setFilter] = useState('')
   const debouncedFilter = useDebounce(filter, 200)
   let filteredProgrammes = []
-  const doctoralToggleText = doctoral ? t('doctoralToggle') : t('bachelorMasterToggle')
+  const doctoralToggleText = t('doctoralToggle')
+  const bachelorToggleText = t('bachelorMasterToggle')
   const baseUrl = '/meta-evaluation/answers'
 
   const getLabel = question => {
@@ -112,14 +113,30 @@ const ProgrammeLevelAnswers = () => {
         </MenuItem>
         <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
         <MenuItem>
-          <Button
-            className="button basic gray"
+          <Dropdown
             data-cy="doctle"
-            onClick={() => handleDoctoralChange()}
-            size="big"
-            content={doctoralToggleText}
-          />
-        </MenuItem>
+            className="button basic gray"
+            direction="left"
+            text={doctoral ? doctoralToggleText : bachelorToggleText}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() => {
+                  if (doctoral) handleDoctoralChange()
+                }}
+              >
+                <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  if (!doctoral) handleDoctoralChange()
+                }}
+              >
+                <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </MenuItem>{' '}
         <MenuItem>
           <FacultyDropdown
             t={t}

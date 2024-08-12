@@ -130,14 +130,14 @@ const MetaOverview = ({
                   if (doctoral) handleDoctoralChange()
                 }}
               >
-                <p>{bachelorToggleText}</p>
+                <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
                   if (!doctoral) handleDoctoralChange()
                 }}
               >
-                <p>{doctoralToggleText}</p>
+                <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
