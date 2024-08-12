@@ -29,9 +29,9 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
         </div>
         {!noColor && <MetaTrafficLights id={id} form={form} />}
       </div>
-      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} marginTop={'0'} />}
+      {bool && <Textarea id={id} label={description} form={form} kludge={kludge} marginTop="0" />}
       <br />
-      <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} marginTop={'0'} />
+      <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} marginTop="0" />
     </div>
   )
 }

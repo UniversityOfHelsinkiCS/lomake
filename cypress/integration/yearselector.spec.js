@@ -18,6 +18,7 @@ describe("Previous year's answers", () => {
     cy.reload()
 
     cy.selectYear(defaultYears[1])
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).should(
       'have.class',
       'square-green',

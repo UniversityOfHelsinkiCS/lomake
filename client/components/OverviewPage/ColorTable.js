@@ -7,6 +7,7 @@ import { isAdmin } from '@root/config/common'
 import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilities/common'
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -121,6 +122,7 @@ const ColorTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
+      dispatch(getAnswersActionAll())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
