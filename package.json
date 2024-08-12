@@ -67,7 +67,7 @@
     "socket.io-client": "^4.7.2",
     "umzug": "^2.3.0",
     "unfuck-spa-shibboleth-session": "^4.0.0",
-    "uuid": "^8.3.2",
+    "uuid": "^10.0.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2"
   },
