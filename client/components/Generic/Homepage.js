@@ -51,11 +51,11 @@ export const FormCard = ({ item, dl, t }) => (
             height: '100%',
             objectFit: 'cover',
           }}
-          alt={`Thumbnail for ${forms[dl.form - 1].name}`}
+          alt={`Thumbnail for ${item.title}`}
         />
       </div>
       <Item.Content>
-        <ItemHeader as="h3">{forms[dl.form - 1].name}</ItemHeader>
+        <ItemHeader as="h3">{item.title}</ItemHeader>
         <ItemMeta>
           <span>
             <DateItem timestamp={dl.date} t={t} />
@@ -63,7 +63,7 @@ export const FormCard = ({ item, dl, t }) => (
         </ItemMeta>
         {item.links.map(link => (
           <Button data-cy={`button-${link}`} key={link} as={Link} to={link}>
-            {t('overview')}
+            {item.title}
             <Icon name="right chevron" />
           </Button>
         ))}

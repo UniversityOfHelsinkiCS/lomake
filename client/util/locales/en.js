@@ -88,7 +88,8 @@ export default {
     degreeReformText: '',
     metaevaluationText: '',
     adminpageText: '',
-    timesensitive: 'Topic',
+    timesensitive: 'Topical',
+    timesensitiveDesc: 'The deadline for filling in the open forms',
     clock: 'Clock',
     toFrontpage: 'To frontpage',
 
@@ -112,6 +113,20 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
+  },
+
+  landingPage: {
+    title: 'Status Report Form',
+    subTitle: 'Platform for monitoring and evaluating the activities of the degree programmes',
+    yearlyAssessmentTitle: 'Annual follow-up',
+    yearlyAssessmentSubtitles: ['Annual follow-up forms and summaries of the degree programmes 2019'],
+    evaluationTitle: 'Review 2024',
+    evaluationSubtitles: [
+      'Review forms and summaries ',
+      'Forms and summaries for implementing and monitoring the measures',
+    ],
+    degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
+    degreeReformSubtitles: ['Current state of education', 'Survey and summaries 2024'],
   },
 
   comparison: {

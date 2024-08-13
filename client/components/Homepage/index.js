@@ -17,13 +17,11 @@ const Homepage = () => {
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { nextDeadline } = useSelector(state => state.deadlines)
   const [deadlineInfo, setDeadlineInfo] = useState([])
-  const header = 'tilannekuvalomake'
+  const lang = useSelector(state => state.language)
 
   const access = Object.keys(currentUser).length > 0
 
   useEffect(() => {
-    document.title = 'Tilannekuvalomake'
-
     let tempDl = []
     Object.keys(formKeys).forEach(form => {
       const foundDeadline = nextDeadline?.find(a => a.form === formKeys[form])
@@ -31,19 +29,22 @@ const Homepage = () => {
         tempDl = [...tempDl, foundDeadline]
       }
     })
-
     setDeadlineInfo(tempDl)
   }, [formKeys])
+
+  useEffect(() => {
+    document.title = `${t('landingPage:title')}`
+  }, [lang])
 
   const items = [
     {
       show: access,
-      title: t('yearlyAssessment'),
+      title: t('landingPage:yearlyAssessmentTitle'),
       content: (
         <List bulleted>
-          <List.Item>
-            <i>Vuosiseurantalomake ja sen yleiskatsaus</i>
-          </List.Item>
+          {t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true }).map((subtitle, index) => (
+            <List.Item key={index}>{subtitle}</List.Item>
+          ))}
         </List>
       ),
       links: ['/yearly'],
@@ -52,11 +53,13 @@ const Homepage = () => {
     },
     {
       show: access,
-      title: t('evaluation'),
+      title: t('landingPage:evaluationTitle'),
       content: (
-        <div>
-          <p>{t('evaluationText')}</p>
-        </div>
+        <List bulleted>
+          {t('landingPage:evaluationSubtitles', { returnObjects: true }).map((subtitle, index) => (
+            <List.Item key={index}>{subtitle}</List.Item>
+          ))}
+        </List>
       ),
       links: [],
       forms: [4, 5, 6],
@@ -64,11 +67,13 @@ const Homepage = () => {
     },
     {
       show: access,
-      title: t('degree-reform'),
+      title: t('landingPage:degreeReformTitle'),
       content: (
-        <div>
-          <p>{t('degreeReformText')}</p>
-        </div>
+        <List bulleted>
+          {t('landingPage:degreeReformSubtitles', { returnObjects: true }).map((subtitle, index) => (
+            <List.Item key={index}>{subtitle}</List.Item>
+          ))}
+        </List>
       ),
       links: [],
       forms: [2, 3],
@@ -103,9 +108,9 @@ const Homepage = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Container style={{ paddingTop: 50, marginBottom: '30px' }} textAlign="justified">
         <Header as="h1" style={{ textAlign: 'center' }}>
-          {header.toUpperCase()}
+          {t('landingPage:title').toUpperCase()}
         </Header>
-        <p style={{ textAlign: 'center' }}>{t('description')}</p>
+        <p style={{ textAlign: 'center' }}>{t('landingPage:subTitle')}</p>
         <Grid columns={2} divided style={{ marginTop: '40px' }}>
           <Grid.Row>
             <Grid.Column style={{ display: 'flex', flexDirection: 'column', alingItems: 'left' }}>

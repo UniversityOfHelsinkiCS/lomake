@@ -104,7 +104,7 @@ export default {
     metaevaluationText: '',
     adminpageText: '',
     timesensitive: 'Ajankohtaista',
-    timesensitiveDesc: 'Auki olevien lomakkeiden viimeinen täyttöpäivä.',
+    timesensitiveDesc: 'Auki olevien lomakkeiden viimeinen täyttöpäivä',
     description: 'Helsingin yliopiston opetushallinnon tilannekuvalomake',
     noTimesensitive: 'Voit tarkastella eri lomakkeiden vastauksia sivun yläreunassa olevien linkkien avulla.',
     clock: 'Kello',
@@ -132,6 +132,20 @@ export default {
       'Voit lukea oman ja muiden koulutusohjelmien tilannekuvien kirjallisia dokumentaatioita.  Raportointityökaluilla voit vertailla oman koulutusohjelmasi tietoja muiden tietoihin. Voit myös muodostaa tiedoista kuvaajia.',
     contactInfo: 'Kysyttävää? Ota yhteys osoitteeseen ospa@helsinki.fi',
     broughtBy: 'Toteutus:',
+  },
+
+  landingPage: {
+    title: 'Tilannekuvalomake',
+    subTitle: 'Helsingin yliopiston koulutusohjelmien toiminnan seurannan ja arvioinnin alusta',
+    yearlyAssessmentTitle: 'Vuosiseuranta',
+    yearlyAssessmentSubtitles: ['Koulutusohjelmien vuosiseurannan lomakkeet ja yhteenvedot 2019'],
+    evaluationTitle: 'Katselmus 2024',
+    evaluationSubtitles: [
+      'Katselmuksen lomakkeet ja yhteenvedot',
+      'Toimenpiteiden toteutuksen ja seurannan lomakkeet sekä yhteenvedot',
+    ],
+    degreeReformTitle: 'Koulutusuudistuksen (Iso Pyörä 2015) arviointi',
+    degreeReformSubtitles: ['Koulutuksen nykytila', 'Kysely ja yhteenvedot 2024'],
   },
 
   comparison: {

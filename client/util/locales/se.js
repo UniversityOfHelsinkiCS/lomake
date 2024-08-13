@@ -87,7 +87,8 @@ export default {
     degreeReformText: '',
     metaevaluationText: '',
     adminpageText: '',
-    timesensitive: '',
+    timesensitive: 'Aktuellt',
+    timesensitiveDesc: 'Sista dag för ifyllande av öppna formulär',
 
     toFrontpage: 'Till startsidan',
   },
@@ -107,6 +108,21 @@ export default {
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
     contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
     broughtBy: 'Förverkligad av',
+  },
+
+  landingPage: {
+    title: 'Status Report Form',
+    subTitle:
+      'Plattform för uppföljning och utvärdering av utbildningsprogrammens verksamhet i Helsingfors universitet',
+    yearlyAssessmentTitle: 'Årlig uppföljning',
+    yearlyAssessmentSubtitles: ['Formulär och sammanfattningar för årlig uppföljning av utbildningsprogrammen 2019'],
+    evaluationTitle: 'Översynen 2024',
+    evaluationSubtitles: [
+      'Formulär och sammanfattningar för översynen ',
+      'Formulär och sammanfattningar för implementering och uppföljning av åtgärder',
+    ],
+    degreeReformTitle: 'Utvärdering av utbildningsreformen (Stora hjulet 2015)',
+    degreeReformSubtitles: ['Utbildningens nuvarande tillstånd', 'Enkäten och sammanfattningar 2024'],
   },
 
   comparison: {
