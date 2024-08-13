@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Item, Button, Icon, ItemMeta, ItemGroup, ItemHeader, Header, Container } from 'semantic-ui-react'
-import { forms } from '@root/config/data'
 
 export const PageItem = ({ title, content }) => (
   <div data-cy={title} style={{ marginBottom: '30px' }}>

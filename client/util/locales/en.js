@@ -90,6 +90,7 @@ export default {
     adminpageText: '',
     timesensitive: 'Topical',
     timesensitiveDesc: 'The deadline for filling in the open forms',
+    noTimesensitive: '',
     clock: 'Clock',
     toFrontpage: 'To frontpage',
 

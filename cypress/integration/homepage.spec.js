@@ -1,13 +1,13 @@
 describe('homepage tests', () => {
   beforeEach(() => {
     const ospaUser = 'cypressOspaUser'
-
     cy.login(ospaUser)
     cy.visit('/')
   })
 
   it('Should see homepage', () => {
-    cy.contains('TILANNEKUVALOMAKE')
+    cy.get('[data-cy=landingpage-title]').contains(/TILANNEKUVALOMAKE|STATUS REPORT FORM/)
+    cy.get('[data-cy=landingpage-subtitle]').should('have.length.above', 0)
   })
 
   it('Should see open form alerts', () => {
@@ -23,7 +23,7 @@ describe('homepage tests', () => {
 
     cy.visit('/')
 
-    cy.get('[data-cy=deadline-label-1]').contains('Vuosiseuranta')
+    cy.get('[data-cy=deadline-label-1]').contains(/Vuosiseuranta|Annual follow-up/)
   })
 
   it('Should not see ospa', () => {

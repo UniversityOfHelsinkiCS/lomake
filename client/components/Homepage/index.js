@@ -107,10 +107,12 @@ const Homepage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Container style={{ paddingTop: 50, marginBottom: '30px' }} textAlign="justified">
-        <Header as="h1" style={{ textAlign: 'center' }}>
+        <Header data-cy="landingpage-title" as="h1" style={{ textAlign: 'center' }}>
           {t('landingPage:title').toUpperCase()}
         </Header>
-        <p style={{ textAlign: 'center' }}>{t('landingPage:subTitle')}</p>
+        <p data-cy="landingpage-subtitle" style={{ textAlign: 'center' }}>
+          {t('landingPage:subTitle')}
+        </p>
         <Grid columns={2} divided style={{ marginTop: '40px' }}>
           <Grid.Row>
             <Grid.Column style={{ display: 'flex', flexDirection: 'column', alingItems: 'left' }}>

@@ -89,7 +89,7 @@ export default {
     adminpageText: '',
     timesensitive: 'Aktuellt',
     timesensitiveDesc: 'Sista dag för ifyllande av öppna formulär',
-
+    noTimesensitive: '',
     toFrontpage: 'Till startsidan',
   },
 
