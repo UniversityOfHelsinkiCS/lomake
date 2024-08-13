@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { colors } from 'Utilities/common'
+import { useTranslation } from 'react-i18next'
 import Textarea from './Textarea'
 import MetaTrafficLights from './MetaTrafficLights'
 import './Generic.scss'
 
 const MetaEntity = ({ id, label, description, required, noColor, number, form, kludge }) => {
   const fieldName = `${id}_light`
+  const { t } = useTranslation()
   const value = useSelector(({ form }) => form.data[fieldName])
   const bool = value !== 'gray'
 
@@ -31,7 +33,13 @@ const MetaEntity = ({ id, label, description, required, noColor, number, form, k
       </div>
       {bool && <Textarea id={id} label={description} form={form} kludge={kludge} marginTop="0" />}
       <br />
-      <Textarea id={`${id}_comment`} label="Kommentit" form={form} kludge={kludge} marginTop="0" />
+      <Textarea
+        id={`${id}_comment`}
+        label={`${t('formView:metaCommentLabel')}`}
+        form={form}
+        kludge={kludge}
+        marginTop="0"
+      />
     </div>
   )
 }

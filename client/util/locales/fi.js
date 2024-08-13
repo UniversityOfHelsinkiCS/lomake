@@ -181,13 +181,17 @@ export default {
     formErrorButton: 'Paina tästä niin sivu ladataan uudelleen!',
     canChange: 'Voit muokata vastauksia tallentamisen jälkeen',
     title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
+    metaSubtitle: 'Toimenpiteiden priorisointi koulutusohjelmissa',
+    metaCommentLabel: 'Muita kommentteja',
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',
     infoMeta1:
-      'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata. Jokaisessa kysymyksessä on myös kommenttikenttä mihin voi vapaasti kommentoida kysymystä.',
+      'Käykää koulutusohjelman johtoryhmässä keskustelu katselmuksen arviointiryhmän raportista. Keskustelkaa arviointiryhmän esittämistä toimenpiteistä, arvioikaa kunkin toimenpiteen toteutuksen tarvetta ja merkitystä koulutusohjelmanne tulevaisuuden kannalta. Kirjatkaa keskustelunne keskeisimmät sisällöt.',
     infoMeta2:
-      'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot, toisin kuin muissa lomakkeissa tässä lomakkeessa on käytössä neljäs liikennevalo, jolla voi merkata että kysymys ei kosketa tätä koulutusohjelmaa):',
+      'Arvioikaa kunkin toimenpiteen merkitystä ja tärkeyttä yleisarviolla (liikennevalot). Mikäli katsotte, että toimenpide ei koske koulutusohjelmaanne, kirjatkaa arvion perustelu.',
+    infoMeta3:
+      'Lisäksi voitte tarvittaessa kirjata muita kommentteja tiedekunnan ja yliopistotason valmistelua varten.',
     downloadCSV: 'Lataa vastaukset csv-tiedostona',
     downloadPDF: 'Tulosta vastaukset PDF-tiedostona',
     mandatory: 'pakollinen kenttä',

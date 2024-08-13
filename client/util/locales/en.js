@@ -163,10 +163,18 @@ export default {
     formErrorButton: 'Click here to reload the page!',
     canChange: 'You can edit the answers after saving',
     title: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
+    metaSubtitle: 'Prioritisation of measures in degree programmes',
+    metaCommentLabel: 'Other comments',
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
     info2:
       'Please provide an overall assessment with regard to each topic using the following system of traffic lights:',
+    infoMeta1:
+      'Discuss the measures proposed by the evaluation group, assess the need for each measure and its relevance for the future of your programme. Write down the main points of your discussion.',
+    infoMeta2:
+      'Assess the relevance and importance of each measure with an overall evaluation (traffic lights). If you consider that the measure is not relevant to your degree programme, please provide a justification for your assessment.',
+    infoMeta3:
+      'In addition, you can record any other comments for the faculty and university preparation, if necessary.',
     downloadCSV: 'Download all data as a CSV file',
     downloadPDF: 'Print / Download answers as a PDF-file',
     mandatory: 'required field',

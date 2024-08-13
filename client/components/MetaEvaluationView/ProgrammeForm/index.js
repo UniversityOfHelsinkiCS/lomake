@@ -85,10 +85,14 @@ const ProgrammeLevelForm = ({ room }) => {
         <h3 style={{ marginTop: '0' }} data-cy="formview-title">
           {t('evaluation')} {year}
         </h3>
+        <h5 style={{ marginTop: '0' }} data-cy="formview-subtitle">
+          {t('formView:metaSubtitle')}
+        </h5>
         <div className="hide-in-print-mode">
           <StatusMessage form={form} writeAccess={writeAccess} />
           <p>{t('formView:infoMeta1')}</p>
           <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta3')}</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div className="big-circle-red" />

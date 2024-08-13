@@ -58,8 +58,8 @@ export default {
     delete: 'Ta bort',
 
     yearlyAssessment: 'Årlig uppföljning',
-    evaluation: 'Översyn',
-    evaluationFaculty: 'Översyn - fakultet',
+    evaluation: 'Översynen',
+    evaluationFaculty: 'Översynen - fakultet',
     'degree-reform': 'Utbildningens nuvarande tillstånd',
     'degree-reform-group': 'Utbildningens nuvarande tillstånd - program',
     'degree-reform-individual': 'Utbildningens nuvarande tillstånd - individuell',
@@ -171,9 +171,17 @@ export default {
       'Denna översyn tar ett bredare grepp på situationen för <strong>fakultetets utbildningsprogram</strong> under de senaste tre åren.',
     canChange: 'Du kan redigera svaren efter att du har sparat',
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
+    metaSubtitle: 'Prioritering av åtgärder i utbildningsprogram',
+    metaCommentLabel: 'Övriga kommentarer',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
     info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av trafikljusen: ',
+    infoMeta1:
+      'Vänligen diskutera rapporten från översynens utvärderingsgrupp i ledningsgruppen för utbildningsprogrammet. Diskutera de åtgärder som föreslås av utvärderingsgruppen, och bedöm behovet och relevansen av varje åtgärd för utbildningsprogrammets framtid. Skriv ner huvudpunkterna av diskussionen.',
+    infoMeta2:
+      'Utvärdera relevansen och vikten av varje åtgärd med en övergripande bedömning (trafikljus). Om ni anser att åtgärden inte är relevant för utbildningsprogrammet ska ni ange en motivering till din bedömning.',
+    infoMeta3:
+      'Dessutom kan ni vid behov anteckna eventuella andra kommentarer för fakultetens och universitetets beredning.',
     downloadCSV: 'Ladda ner svaren i en csv-fil',
     downloadPDF: 'Skriv ut / Ladda ner svaren i en PDF-fil',
     mandatory: 'obligatoriskt fält',
