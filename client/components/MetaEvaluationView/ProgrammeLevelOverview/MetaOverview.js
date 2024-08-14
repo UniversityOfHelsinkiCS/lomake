@@ -104,7 +104,7 @@ const MetaOverview = ({
       {renderModal()}
       <Menu size="large" className="filter-row" secondary>
         <MenuItem header>
-          <h2>{titleText}</h2>
+          <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
         </MenuItem>
         <MenuItem>
           <Button

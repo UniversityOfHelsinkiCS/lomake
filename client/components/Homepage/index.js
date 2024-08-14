@@ -42,8 +42,8 @@ const Homepage = () => {
       title: t('landingPage:yearlyAssessmentTitle'),
       content: (
         <List bulleted>
-          {t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true }).map((subtitle, index) => (
-            <List.Item key={index}>{subtitle}</List.Item>
+          {t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true }).map(subtitle => (
+            <List.Item key={subtitle}>{subtitle}</List.Item>
           ))}
         </List>
       ),
@@ -56,8 +56,8 @@ const Homepage = () => {
       title: t('landingPage:evaluationTitle'),
       content: (
         <List bulleted>
-          {t('landingPage:evaluationSubtitles', { returnObjects: true }).map((subtitle, index) => (
-            <List.Item key={index}>{subtitle}</List.Item>
+          {t('landingPage:evaluationSubtitles', { returnObjects: true }).map(subtitle => (
+            <List.Item key={subtitle}>{subtitle}</List.Item>
           ))}
         </List>
       ),
@@ -70,8 +70,8 @@ const Homepage = () => {
       title: t('landingPage:degreeReformTitle'),
       content: (
         <List bulleted>
-          {t('landingPage:degreeReformSubtitles', { returnObjects: true }).map((subtitle, index) => (
-            <List.Item key={index}>{subtitle}</List.Item>
+          {t('landingPage:degreeReformSubtitles', { returnObjects: true }).map(subtitle => (
+            <List.Item key={subtitle}>{subtitle}</List.Item>
           ))}
         </List>
       ),
