@@ -36,17 +36,19 @@ const Homepage = () => {
     document.title = `${t('landingPage:title')}`
   }, [lang])
 
+  const listItem = subtitles => (
+    <List bulleted>
+      {subtitles.map(subtitle => (
+        <List.Item key={subtitle}>{subtitle}</List.Item>
+      ))}
+    </List>
+  )
+
   const items = [
     {
       show: access,
       title: t('landingPage:yearlyAssessmentTitle'),
-      content: (
-        <List bulleted>
-          {t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true }).map(subtitle => (
-            <List.Item key={subtitle}>{subtitle}</List.Item>
-          ))}
-        </List>
-      ),
+      content: listItem(t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true })),
       links: ['/yearly'],
       forms: [1],
       thumbnail: rypsiImage,
@@ -54,13 +56,7 @@ const Homepage = () => {
     {
       show: access,
       title: t('landingPage:evaluationTitle'),
-      content: (
-        <List bulleted>
-          {t('landingPage:evaluationSubtitles', { returnObjects: true }).map(subtitle => (
-            <List.Item key={subtitle}>{subtitle}</List.Item>
-          ))}
-        </List>
-      ),
+      content: listItem(t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true })),
       links: [],
       forms: [4, 5, 6],
       thumbnail: calendarImage,
@@ -68,13 +64,7 @@ const Homepage = () => {
     {
       show: access,
       title: t('landingPage:degreeReformTitle'),
-      content: (
-        <List bulleted>
-          {t('landingPage:degreeReformSubtitles', { returnObjects: true }).map(subtitle => (
-            <List.Item key={subtitle}>{subtitle}</List.Item>
-          ))}
-        </List>
-      ),
+      content: listItem(t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true })),
       links: [],
       forms: [2, 3],
       thumbnail: wheelImage,

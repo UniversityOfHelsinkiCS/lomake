@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Radio } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import capitalize from 'lodash/capitalize'
+import { getLabel } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 
 import PDFDownload from 'Components/Generic/PDFDownload'
@@ -17,13 +17,6 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
   const form = useSelector(({ filters }) => filters.form)
   if (chosenProgrammes.length < 1 || allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
-  }
-
-  const getLabel = question => {
-    if (!question) return ''
-    const label = capitalize(question.label)
-    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${label}`
   }
 
   const showFacultyPie = form === formKeys.EVALUATION_FACULTIES

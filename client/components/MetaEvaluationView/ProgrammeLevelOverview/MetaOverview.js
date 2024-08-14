@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import { Button, Dropdown, Menu, MenuItem, Loader } from 'semantic-ui-react'
-import { filterFromUrl, kludge } from 'Utilities/common'
+import { filterFromUrl, filterUserProgrammes, kludge } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
@@ -46,12 +46,7 @@ const MetaOverview = ({
   }, [dispatch, t, lang, programmes])
 
   const filteredProgrammes = useMemo(() => {
-    return usersProgrammes.filter(
-      prog =>
-        prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-        prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
-    )
+    return filterUserProgrammes(usersProgrammes, lang, debouncedFilter)
   }, [usersProgrammes, lang, debouncedFilter])
 
   const handleDoctoralChange = () => {

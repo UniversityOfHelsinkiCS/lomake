@@ -766,6 +766,21 @@ export const answersByQuestions = ({
   return answerMap
 }
 
+export const filterUserProgrammes = (usersProgrammes, lang, debouncedFilter) => {
+  return usersProgrammes.filter(
+    prog =>
+      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
+  )
+}
+
+export const getLabel = question => {
+  if (!question) return ''
+  const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+  return `${index}${question.label}`
+}
+
 export const kludge = true
 
 export * from '@root/config/common'

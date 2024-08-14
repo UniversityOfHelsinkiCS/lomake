@@ -7,17 +7,12 @@ import sortBy from 'lodash/sortBy'
 import ProgrammeList from 'Components/Generic/ProgrammeList'
 import QuestionList from 'Components/Generic/QuestionList'
 import { formKeys } from '@root/config/data'
+import { getLabel } from 'Utilities/common'
 import Question from './Question'
 import LabelOptions from './LabelOptions'
 import BarChart from './BarChart'
 import FilterTray from './FilterTray'
 import './ComparisonPage.scss'
-
-const getLabel = question => {
-  if (!question) return ''
-  const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-  return `${index}${question.label}`
-}
 
 const checkFacultyColors = ({ questionsAnswers, chosenKeys, levels }) => {
   const questionColors = {

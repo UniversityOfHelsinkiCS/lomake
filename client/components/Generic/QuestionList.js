@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-
+import { getLabel } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
@@ -12,12 +12,6 @@ const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {
   const lang = useSelector(state => state.language)
 
   const questions = useSelector(({ filters }) => filters.questions)
-
-  const getLabel = question => {
-    if (!question) return ''
-    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${question.label}`
-  }
 
   const questionLabels = questionsList.map(q => getLabel(q))
 

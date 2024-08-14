@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { getLabel } from 'Utilities/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import PDFDownload from 'Components/Generic/PDFDownload'
 import SingleProgramQuestion from './SingleProgramQuestion'
@@ -22,12 +23,6 @@ const WrittenAnswers = ({
   const { t } = useTranslation()
   const componentRef = useRef()
   const questions = useSelector(({ filters }) => filters.questions)
-
-  const getLabel = question => {
-    if (!question) return ''
-    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${question.label}`
-  }
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps

@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { modifiedQuestions, answersByQuestions, filterFromUrl, kludge } from 'Utilities/common'
+import {
+  modifiedQuestions,
+  answersByQuestions,
+  filterFromUrl,
+  filterUserProgrammes,
+  kludge,
+  getLabel,
+} from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
@@ -39,13 +46,6 @@ const ProgrammeLevelAnswers = () => {
   const doctoralToggleText = t('doctoralToggle')
   const bachelorToggleText = t('bachelorMasterToggle')
   const baseUrl = `${basePath}meta-evaluation/answers`
-
-  const getLabel = question => {
-    if (!question) return ''
-    const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
-    return `${index}${question.label}`
-  }
-
   const questionLabels = filteredQuestions.map(q => getLabel(q))
 
   useEffect(() => {
@@ -58,11 +58,10 @@ const ProgrammeLevelAnswers = () => {
 
   if (!answers.data || !usersProgrammes || usersProgrammes.length === 0) return <Loader active />
 
-  filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key').filter(
-    prog =>
-      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
-      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
+  filteredProgrammes = doctoralBasedFilter(
+    doctoral,
+    filterUserProgrammes(usersProgrammes, lang, debouncedFilter),
+    'key',
   )
 
   const answersList =
