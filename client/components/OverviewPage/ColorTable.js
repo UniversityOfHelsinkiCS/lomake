@@ -8,6 +8,7 @@ import { answersByYear, sortedItems, reversedPointsInDegreeReform } from 'Utilit
 import { getProgrammeOwners } from 'Utilities/redux/studyProgrammesReducer'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
+import { formKeys } from '@root/config/data'
 import TableHeader from './TableHeader'
 import TableRow from './TableRow'
 import SummaryRow from './SummaryRow'
@@ -122,7 +123,7 @@ const ColorTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
-      dispatch(getAnswersActionAll())
+      if (form === formKeys.YEARLY_ASSESSMENT) dispatch(getAnswersActionAll())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 
