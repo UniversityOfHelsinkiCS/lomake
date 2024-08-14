@@ -247,6 +247,7 @@ const Textarea = ({
                 fontStyle: 'bolder',
                 minWidth: '50%',
                 height: 'auto',
+                paddingRight: '3em',
               }}
             >
               {label}
