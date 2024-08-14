@@ -10,4 +10,4 @@ const initSentry = () => {
   })
 }
 
-export default initSentry
+export { initSentry, Sentry }
