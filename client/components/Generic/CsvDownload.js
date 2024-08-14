@@ -10,7 +10,12 @@ import {
   getMeasuresAnswer,
   cleanText,
 } from 'Utilities/common'
-import { yearlyQuestions, facultyEvaluationQuestions, evaluationQuestions } from '../../questionData'
+import {
+  yearlyQuestions,
+  facultyEvaluationQuestions,
+  evaluationQuestions,
+  metareviewQuestions,
+} from '../../questionData'
 import './Generic.scss'
 
 const handleData = ({
@@ -32,6 +37,8 @@ const handleData = ({
     questions = facultyEvaluationQuestions
   } else if (form === formKeys.EVALUATION_PROGRAMMES) {
     questions = evaluationQuestions
+  } else if (form === formKeys.META_EVALUATION) {
+    questions = metareviewQuestions
   }
   let csvData = questions.reduce(
     (acc, cur) => {
