@@ -102,44 +102,13 @@ const MetaOverview = ({
   if (programmes.length < 1) <Loader active />
 
   return (
-<<<<<<< HEAD
-    <>
-      {renderModal()}
-      <Menu size="large" className="filter-row" secondary>
-        <MenuItem header>
-          <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
-        </MenuItem>
-        <MenuItem>
-          <Button
-            data-cy="nav-report"
-            as={Link}
-            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
-            secondary
-            size="big"
-          >
-            {t('overview:readAnswers')}
-          </Button>
-        </MenuItem>
-        <MenuItem>
-          <Dropdown
-            data-cy="doctle"
-            className="button basic gray"
-            direction="left"
-            text={doctoral ? doctoralToggleText : bachelorToggleText}
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item
-                onClick={() => {
-                  if (doctoral) handleDoctoralChange()
-                }}
-=======
     <div>
       {kludge ? (
         <>
           {renderModal()}
           <Menu size="large" className="filter-row" secondary>
             <MenuItem header>
-              <h2>{titleText}</h2>
+              <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
             </MenuItem>
             <MenuItem>
               <Button
@@ -148,7 +117,6 @@ const MetaOverview = ({
                 to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
                 secondary
                 size="big"
->>>>>>> f77c4868 (added kludge to hide forms & overview before launch)
               >
                 {t('overview:readAnswers')}
               </Button>
