@@ -9,6 +9,7 @@ import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import { useSelector } from 'react-redux'
 import { setDoctoral } from 'Utilities/redux/doctoralReducer'
+import { basePath } from '@root/config/common'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -48,6 +49,7 @@ const MetaOverview = ({
     return usersProgrammes.filter(
       prog =>
         prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+        prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
         prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
     )
   }, [usersProgrammes, lang, debouncedFilter])
@@ -57,12 +59,12 @@ const MetaOverview = ({
   }
 
   const handleDropdownFilterChange = value => {
-    window.history.pushState({}, '', `/meta-evaluation?filter=${value}`)
+    window.history.pushState({}, '', `${basePath}meta-evaluation?filter=${value}`)
     setFilter(value)
   }
 
   const handleFilterChange = e => {
-    window.history.pushState({}, '', `/meta-evaluation?filter=${e.target.value}`)
+    window.history.pushState({}, '', `${basePath}meta-evaluation?filter=${e.target.value}`)
     setFilter(e.target.value)
   }
 
