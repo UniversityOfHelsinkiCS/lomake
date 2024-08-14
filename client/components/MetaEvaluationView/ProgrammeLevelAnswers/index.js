@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { modifiedQuestions, answersByQuestions, filterFromUrl } from 'Utilities/common'
+import { modifiedQuestions, answersByQuestions, filterFromUrl, kludge } from 'Utilities/common'
 import { setQuestions } from 'Utilities/redux/filterReducer'
 import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
@@ -108,78 +108,88 @@ const ProgrammeLevelAnswers = () => {
   }
 
   return (
-    <div style={{ width: '80%' }}>
-      <Menu size="large" secondary>
-        <MenuItem>
-          <Button as={Link} to={filter ? `/meta-evaluation?filter=${filter}` : '/meta-evaluation'} icon="arrow left" />
-        </MenuItem>
-        <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
-        <MenuItem>
-          <Dropdown
-            data-cy="doctle"
-            className="button basic gray"
-            direction="left"
-            text={doctoral ? doctoralToggleText : bachelorToggleText}
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item
-                onClick={() => {
-                  if (doctoral) handleDoctoralChange()
-                }}
+    <div>
+      {kludge ? (
+        <div style={{ width: '80%' }}>
+          <Menu size="large" secondary>
+            <MenuItem>
+              <Button
+                as={Link}
+                to={filter ? `/meta-evaluation?filter=${filter}` : '/meta-evaluation'}
+                icon="arrow left"
+              />
+            </MenuItem>
+            <MenuItem header>{t('metaEvaluationAnswers').toUpperCase()}</MenuItem>
+            <MenuItem>
+              <Dropdown
+                data-cy="doctle"
+                className="button basic gray"
+                direction="left"
+                text={doctoral ? doctoralToggleText : bachelorToggleText}
               >
-                <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  if (!doctoral) handleDoctoralChange()
-                }}
-              >
-                <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </MenuItem>{' '}
-        <MenuItem>
-          <FacultyDropdown
-            t={t}
-            programmes={usersProgrammes}
-            handleFilterChange={handleDropdownFilterChange}
-            faculties={faculties}
-            lang={lang}
-            debouncedFilter={debouncedFilter}
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={() => {
+                      if (doctoral) handleDoctoralChange()
+                    }}
+                  >
+                    <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      if (!doctoral) handleDoctoralChange()
+                    }}
+                  >
+                    <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </MenuItem>{' '}
+            <MenuItem>
+              <FacultyDropdown
+                t={t}
+                programmes={usersProgrammes}
+                handleFilterChange={handleDropdownFilterChange}
+                faculties={faculties}
+                lang={lang}
+                debouncedFilter={debouncedFilter}
+              />
+            </MenuItem>
+            <MenuItem>
+              <Dropdown
+                data-cy="content-type-dropdown"
+                selection
+                options={filterOptions}
+                value={answerFilter}
+                onChange={(_, { value }) => setAnswerFilter(value)}
+              />
+            </MenuItem>
+            <MenuItem position="right">
+              <Input
+                data-cy="overviewpage-filter"
+                icon="search"
+                size="small"
+                placeholder={t('programmeFilter')}
+                onChange={handleFilterChange}
+                value={filter}
+              />
+            </MenuItem>
+          </Menu>
+          <WrittenAnswers
+            year={year}
+            questionsList={filteredQuestions}
+            chosenProgrammes={filteredProgrammes}
+            usersProgrammes={filteredProgrammes}
+            allAnswers={filteredAnswersList}
+            showing={showing}
+            setShowing={setShowing}
+            form={form}
+            metaEvaluation
           />
-        </MenuItem>
-        <MenuItem>
-          <Dropdown
-            data-cy="content-type-dropdown"
-            selection
-            options={filterOptions}
-            value={answerFilter}
-            onChange={(_, { value }) => setAnswerFilter(value)}
-          />
-        </MenuItem>
-        <MenuItem position="right">
-          <Input
-            data-cy="overviewpage-filter"
-            icon="search"
-            size="small"
-            placeholder={t('programmeFilter')}
-            onChange={handleFilterChange}
-            value={filter}
-          />
-        </MenuItem>
-      </Menu>
-      <WrittenAnswers
-        year={year}
-        questionsList={filteredQuestions}
-        chosenProgrammes={filteredProgrammes}
-        usersProgrammes={filteredProgrammes}
-        allAnswers={filteredAnswersList}
-        showing={showing}
-        setShowing={setShowing}
-        form={form}
-        metaEvaluation
-      />
+        </div>
+      ) : (
+        <p>Waiting for release</p>
+      )}
     </div>
   )
 }

@@ -766,4 +766,6 @@ export const answersByQuestions = ({
   return answerMap
 }
 
+export const kludge = true
+
 export * from '@root/config/common'
