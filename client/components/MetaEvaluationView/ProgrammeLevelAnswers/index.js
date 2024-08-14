@@ -10,6 +10,7 @@ import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
 import { formKeys } from '@root/config/data'
 import useDebounce from 'Utilities/useDebounce'
 import { setDoctoral } from 'Utilities/redux/doctoralReducer'
+import { basePath } from '@root/config/common'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const doctoralBasedFilter = (doctoral, items, attribute) => {
@@ -37,7 +38,7 @@ const ProgrammeLevelAnswers = () => {
   let filteredProgrammes = []
   const doctoralToggleText = t('doctoralToggle')
   const bachelorToggleText = t('bachelorMasterToggle')
-  const baseUrl = '/meta-evaluation/answers'
+  const baseUrl = `${basePath}meta-evaluation/answers`
 
   const getLabel = question => {
     if (!question) return ''
@@ -60,6 +61,7 @@ const ProgrammeLevelAnswers = () => {
   filteredProgrammes = doctoralBasedFilter(doctoral, usersProgrammes, 'key').filter(
     prog =>
       prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
       prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
   )
 
