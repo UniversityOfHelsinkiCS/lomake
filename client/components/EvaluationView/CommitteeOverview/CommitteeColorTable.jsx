@@ -9,7 +9,7 @@ import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
-import { committeeList } from '../../../../config/data'
+import { committeeList } from '../../../../config/data.mjs'
 
 const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
   const dispatch = useDispatch()

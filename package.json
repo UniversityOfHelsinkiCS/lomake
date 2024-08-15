@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "docker compose up",
-    "build": "node build.js",
+    "build": "vite build",
     "start:prod": "cross-env NODE_ENV=production node index.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon index.js\" \"node devProxy.js\"",
+    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon index.js\" \"vite\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
@@ -17,19 +17,19 @@
   "engines": {
     "node": ">=20"
   },
-  "author": "Jami Kousa",
+  "author": "Jami Kousa, Tuomas Huhtala, Venla Rantanen",
   "license": "ISC",
   "dependencies": {
     "@sentry/browser": "^7.102.1",
     "@sentry/esbuild-plugin": "^2.14.2",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
+    "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.6.0",
     "compression": "^1.7.4",
     "date-fns": "^4.0.0",
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
-    "esbuild": "^0.24.0",
     "esbuild-sass-plugin": "^3.2.0",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
@@ -69,6 +69,7 @@
     "umzug": "^2.3.0",
     "unfuck-spa-shibboleth-session": "^4.0.0",
     "uuid": "^8.3.2",
+    "vite": "^5.4.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2"
   },
@@ -91,7 +92,8 @@
     "minimist": "^1.2.8",
     "nodemon": "^3.1.0",
     "prettier": "^3.0.3",
-    "sequelize-cli": "^6.0.0"
+    "sequelize-cli": "^6.0.0",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "nodemonConfig": {
     "ignore": [
