@@ -142,12 +142,17 @@ $METADOCTORAL_COUNT: 9;
 
   &-categories {
     @include sticky-header-basics();
-    height: 175px;
-    word-wrap: break-word;
-    text-align: center;
+    height: 170px;
+    font-weight: bold;
+  }
+  &-meta {
+    @include sticky-header-basics();
+    height: 285px;
+    display: flex;
     font-weight: bold;
     white-space: normal;
-    overflow-wrap: break-word;
+    justify-content: center;
+    line-height: 1.2em;
   }
 }
 
