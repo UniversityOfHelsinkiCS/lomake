@@ -94,6 +94,8 @@ export default {
     timesensitive: 'Aktuellt',
     timesensitiveDesc: 'Sista dag för ifyllande av öppna formulär',
     noTimesensitive: '',
+    bachelorMasterToggle: 'Kandidat- och Magisterprogrammet',
+    doctoralToggle: 'Doktorandprogrammet',
     toFrontpage: 'Till startsidan',
   },
 
