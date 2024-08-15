@@ -12,7 +12,7 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
           ? faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
           : t('chooseFaculty'),
       )
-  }, [debouncedFilter])
+  }, [debouncedFilter, lang])
 
   const handleDropdownFilter = faculty => {
     if (!faculty) {

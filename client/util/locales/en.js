@@ -99,7 +99,7 @@ export default {
     toFrontpage: 'To frontpage',
 
     doctoralToggle: 'Doctoral Programmes',
-    bachelorMasterToggle: 'Bachelor & Master Programmes',
+    bachelorMasterToggle: `Bachelor's & Master's Programmes`,
   },
 
   aboutPage: {

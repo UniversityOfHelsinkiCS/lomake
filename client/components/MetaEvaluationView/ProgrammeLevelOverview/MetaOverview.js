@@ -102,7 +102,7 @@ const MetaOverview = ({
         <>
           {renderModal()}
           <Menu size="large" className="filter-row" secondary>
-            <MenuItem header>
+            <MenuItem header style={{ paddingLeft: 0 }}>
               <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
             </MenuItem>
             <MenuItem>

@@ -403,6 +403,7 @@ export default {
     clickToCheck: 'Se skriftliga svar',
     question: 'Fråga',
     answered: 'Svarat',
+    all: 'Allt',
     //  improvementAreas: '',
     //  improvementActions: '',
   },
