@@ -8,7 +8,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { setColorBlindMode } from 'Utilities/redux/filterReducer'
 import PDFDownload from 'Components/Generic/PDFDownload'
-import { committeeList } from '../../../../config/data'
+import { committeeList } from '../../../../config/data.mjs'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import CommitteeColorTable from './CommitteeColorTable'
 import CommitteePrinting from './CommitteePrinting'
@@ -90,9 +90,8 @@ export default () => {
       )}
       {programControlsToShow && (
         <CustomModal
-          title={`${t('overview:accessRights')} - ${
-            programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
-          }`}
+          title={`${t('overview:accessRights')} - ${programControlsToShow.name[lang] ? programControlsToShow.name[lang] : programControlsToShow.name.en
+            }`}
           closeModal={() => setProgramControlsToShow(null)}
         >
           <ProgramControlsContent programKey={programControlsToShow.code} />
