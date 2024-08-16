@@ -56,7 +56,7 @@ const Homepage = () => {
     {
       show: access,
       title: t('landingPage:evaluationTitle'),
-      content: listItem(t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true })),
+      content: listItem(t('landingPage:evaluationSubtitles', { returnObjects: true })),
       links: [],
       forms: [4, 5, 6],
       thumbnail: calendarImage,
@@ -64,7 +64,7 @@ const Homepage = () => {
     {
       show: access,
       title: t('landingPage:degreeReformTitle'),
-      content: listItem(t('landingPage:yearlyAssessmentSubtitles', { returnObjects: true })),
+      content: listItem(t('landingPage:degreeReformSubtitles', { returnObjects: true })),
       links: [],
       forms: [2, 3],
       thumbnail: wheelImage,
