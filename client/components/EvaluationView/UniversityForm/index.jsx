@@ -22,7 +22,7 @@ import { setYear } from 'Utilities/redux/filterReducer'
 import EvaluationForm from '../EvaluationFormView/EvaluationForm'
 
 import { universityEvaluationQuestions as questions, evaluationQuestions } from '../../../questionData'
-import { committeeList } from '../../../../config/data.mjs'
+import { committeeList } from '../../../../config/data'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, writeAccess, form }) => {
   if (!draftYear) return true

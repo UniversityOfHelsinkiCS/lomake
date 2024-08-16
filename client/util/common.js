@@ -6,7 +6,7 @@ import capitalize from 'lodash/capitalize'
 import toscalogoColor from 'Assets/toscalogo_color.svg'
 import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
 import hy from 'Assets/hy_logo.svg'
-import { formKeys, facultyList } from '../../config/data.mjs'
+import { formKeys, facultyList } from '@root/config/data'
 
 import {
   yearlyQuestions,

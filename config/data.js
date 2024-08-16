@@ -1,4 +1,4 @@
-const formKeys = {
+export const formKeys = {
   YEARLY_ASSESSMENT: 1,
   DEGREE_REFORM_PROGRAMMES: 2,
   DEGREE_REFORM_INDIVIDUALS: 3,
@@ -9,7 +9,7 @@ const formKeys = {
   FACULTY_MONITORING: 8,
 }
 
-const forms = [
+export const forms = [
   {
     key: 1,
     name: 'Vuosiseuranta',
@@ -52,7 +52,7 @@ const forms = [
   },
 ]
 
-const facultyList = [
+export const facultyList = [
   {
     code: 'H10',
     name: {
@@ -151,7 +151,7 @@ const facultyList = [
   },
 ]
 
-const facultyMap = {
+export const facultyMap = {
   teologinen: 'H10',
   oikeustieteellinen: 'H20',
   lääketieteellinen: 'H30',
@@ -167,7 +167,7 @@ const facultyMap = {
   testauksellinen: 'HTEST',
 }
 
-const committeeList = [
+export const committeeList = [
   {
     code: 'UNI',
     name: {
@@ -194,7 +194,7 @@ const committeeList = [
   },
 ]
 
-const data = [
+export const data = [
   {
     code: 'H10',
     name: {
@@ -1791,12 +1791,3 @@ const data = [
     ],
   },
 ]
-
-module.exports = {
-  forms,
-  formKeys,
-  data,
-  facultyMap,
-  committeeList,
-  facultyList,
-}
