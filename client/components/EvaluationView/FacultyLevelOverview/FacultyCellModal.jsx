@@ -1,10 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Accordion, Icon } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-import { data } from '../../../../config/data.mjs'
-import { lang } from '../../../../config/common'
+import { data } from '../../../../config/data'
 
 const FacultyCellModal = ({ modalData, setAccordionsOpen, accordionsOpen, t }) => {
+  const lang = useSelector(state => state.language)
   return (
     <>
       <div

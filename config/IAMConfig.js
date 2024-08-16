@@ -1,6 +1,6 @@
 const { mapToDegreeCode } = require('./common')
 
-const joryMap = {
+export const joryMap = {
   'hy-ttdk-tuk-jory': '100-K001',
   'hy-ttdk-tum-jory': '100-M001',
   'hy-oiktdk-on-jory': '200-K001',
@@ -131,7 +131,7 @@ const joryMap = {
   'grp-toska': 'T999999',
 }
 
-const kojoMap = {
+export const kojoMap = {
   'hy-ttdk-tuk-jory': 'hy-ttdk-kandi-kojot',
   'hy-ttdk-tum-jory': 'hy-ttdk-maisteri-kojot',
   'hy-oiktdk-on-jory': 'hy-oiktdk-kandi-kojot',
@@ -262,11 +262,11 @@ const kojoMap = {
   'grp-toska': 'grp-toska',
 }
 
-const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
+export const doctoralIams = ['hy-tohtorikoulutus-johtoryhma', 'hy-tine']
 
-const doctoralWritingIams = ['hy-ypa-tutto-toht', 'hy-tutkijakoulu-johtokunta']
+export const doctoralWritingIams = ['hy-ypa-tutto-toht', 'hy-tutkijakoulu-johtokunta']
 
-const doctoralSchoolMap = {
+export const doctoralSchoolMap = {
   'hy-tutkijakoulut-hymy-jory': [
     'T920101',
     'T920102',
@@ -295,7 +295,7 @@ const doctoralSchoolMap = {
   'hy-tutkijakoulut-donasci-jory': ['T923101', 'T923102', 'T923103', 'T923104', 'T923105', 'T923106', 'T923107'],
 }
 
-const universityWideGroups = [
+export const universityWideGroups = [
   'hy-rehtoraatti',
   'hy-ttdk-dekanaatti',
   'hy-oiktdk-dekanaatti',
@@ -326,7 +326,7 @@ const universityWideGroups = [
 // 2) IamTable.js, list of rights found on OSPA page
 // 3) getUserRole() in common, deducts user role, seen on users tab
 
-const isUniversityWideWritingGroups = [
+export const isUniversityWideWritingGroups = [
   'hy-ypa-opa-opintoasiainpaallikot',
   'hy-ypa-opa-kosu-kumpula',
   'hy-ypa-opa-kosu-meilahti',
@@ -338,7 +338,7 @@ const isUniversityWideWritingGroups = [
   'grp-vuosiseuranta-hype-pedaleht',
 ]
 
-const facultyWideWritingGroups = {
+export const facultyWideWritingGroups = {
   'grp-katselmus-ttdk': 'H10',
   'grp-katselmus-oiktdk': 'H20',
   'grp-katselmus-ltdk': 'H30',
@@ -353,7 +353,7 @@ const facultyWideWritingGroups = {
   'grp-katselmus-eltdk': 'H90',
 }
 
-const universityFormWritingGroups = [
+export const universityFormWritingGroups = [
   'grp-katselmus-projektiryhma',
   'hy-one',
   'hy-tine',
@@ -362,35 +362,35 @@ const universityFormWritingGroups = [
   'hy-johtoryhma-ja-kansleri',
 ]
 
-const superAdminGroups = ['grp-toska']
+export const superAdminGroups = ['grp-toska']
 
-const adminGroups = ['hy-ypa-opa-ospa']
+export const adminGroups = ['hy-ypa-opa-ospa']
 
-const employeeGroups = ['hy-employees']
+export const employeeGroups = ['hy-employees']
 
-const hrHeadsGroup = ['hy-ypa-hr-henkilostopaallikot']
+export const hrHeadsGroup = ['hy-ypa-hr-henkilostopaallikot']
 
-const isSuperAdminIam = iam => superAdminGroups.includes(iam)
+export const isSuperAdminIam = iam => superAdminGroups.includes(iam)
 
-const isAdminIam = iam => adminGroups.includes(iam)
+export const isAdminIam = iam => adminGroups.includes(iam)
 
-const isUniversityWideIam = iam => universityWideGroups.includes(iam)
+export const isUniversityWideIam = iam => universityWideGroups.includes(iam)
 
-const isUniversityWideWritingIam = iam => isUniversityWideWritingGroups.includes(iam)
+export const isUniversityWideWritingIam = iam => isUniversityWideWritingGroups.includes(iam)
 
-const isDoctoralIam = iam => doctoralIams.includes(iam)
+export const isDoctoralIam = iam => doctoralIams.includes(iam)
 
-const isUniverstyFormIam = iam => universityFormWritingGroups.includes(iam)
+export const isUniverstyFormIam = iam => universityFormWritingGroups.includes(iam)
 
-const isDoctoralWritingIam = iam => doctoralWritingIams.includes(iam)
+export const isDoctoralWritingIam = iam => doctoralWritingIams.includes(iam)
 
-const isEmployeeIam = iam => employeeGroups.includes(iam)
+export const isEmployeeIam = iam => employeeGroups.includes(iam)
 
-const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
+export const iamToDoctoralSchool = iam => doctoralSchoolMap[iam]
 
-const getStudyLeaderGroup = iam => kojoMap[iam]
+export const getStudyLeaderGroup = iam => kojoMap[iam]
 
-const isFacultyWideWritingIam = iam => {
+export const isFacultyWideWritingIam = iam => {
   const facultyCodes = facultyWideWritingGroups[iam]
   if (Array.isArray(facultyCodes)) {
     return facultyCodes
@@ -398,7 +398,7 @@ const isFacultyWideWritingIam = iam => {
   return [facultyCodes]
 }
 
-const iamToOrganisationCode = iam => {
+export const iamToOrganisationCode = iam => {
   const organisationCodes = joryMap[iam]
   if (Array.isArray(organisationCodes)) {
     return organisationCodes
@@ -406,7 +406,7 @@ const iamToOrganisationCode = iam => {
   return [organisationCodes]
 }
 
-const organisationCodeToIam = code => {
+export const organisationCodeToIam = code => {
   const match = (value, code) => {
     if (Array.isArray(value)) {
       if (mapToDegreeCode(value[0]).includes(code) || mapToDegreeCode(value[1]).includes(code)) return true
@@ -420,7 +420,7 @@ const organisationCodeToIam = code => {
   return found ? found[0] : ''
 }
 
-const relevantIAMs = []
+export const relevantIAMs = []
   .concat(Object.keys(joryMap))
   .concat(Object.keys(kojoMap))
   .concat(Object.values(kojoMap))
