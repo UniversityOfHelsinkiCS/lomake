@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import { Button, Dropdown, Menu, MenuItem } from 'semantic-ui-react'
-import { filterFromUrl, getYearToShow } from 'Utilities/common'
+import { filterFromUrl } from 'Utilities/common'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
+import YearSelector from 'Components/Generic/YearSelector'
+
 import { isAdmin } from '@root/config/common'
 import useDebounce from 'Utilities/useDebounce'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
-import { setYear } from 'Utilities/redux/filterReducer'
 import { formKeys } from '@root/config/data'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
@@ -22,27 +23,22 @@ export default () => {
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
-  const dispatch = useDispatch()
-
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
+
   const debouncedFilter = useDebounce(filter, 200)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
   const form = formKeys.EVALUATION_PROGRAMMES
   const formType = 'evaluation'
-
-  const year = getYearToShow({ draftYear, nextDeadline, form })
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) {
       setFilter(filterQuery)
     }
-    dispatch(setYear(year))
   }, [])
 
   useEffect(() => {
@@ -58,7 +54,7 @@ export default () => {
     setShowAllProgrammes(!showAllProgrammes)
   }
 
-  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes, year, form })
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes, form })
 
   const filteredProgrammes = useMemo(() => {
     return usersProgrammes.filter(prog => {
@@ -124,6 +120,9 @@ export default () => {
                   {t('overview:compareAnswers')}
                 </Button>
               )}
+            </MenuItem>
+            <MenuItem>
+              <YearSelector size="extra-small" />
             </MenuItem>
 
             <MenuItem position="right">

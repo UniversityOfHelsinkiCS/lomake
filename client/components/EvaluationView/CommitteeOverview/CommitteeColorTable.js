@@ -9,6 +9,7 @@ import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 
 const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
   const dispatch = useDispatch()
@@ -21,7 +22,11 @@ const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgr
   const year = getYearToShow({ draftYear, nextDeadline, form })
 
   useEffect(() => {
-    dispatch(getAllTempAnswersAction())
+    if (nextDeadline) {
+      dispatch(getAllTempAnswersAction())
+    } else {
+      dispatch(getAnswersActionAll())
+    }
   }, [])
   const selectedAnswers = answersByYear({
     year,

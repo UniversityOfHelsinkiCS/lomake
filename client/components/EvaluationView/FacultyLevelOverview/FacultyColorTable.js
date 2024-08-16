@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems, answersByYear, getYearToShow } from 'Utilities/common'
+import { sortedItems, answersByYear } from 'Utilities/common'
 import { getTempAnswersByFormAndYear, getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { setYear } from 'Utilities/redux/filterReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
@@ -35,7 +35,8 @@ const FacultyColorTable = React.memo(
 
     const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
-    const year = getYearToShow({ draftYear, nextDeadline, form })
+    const filterYear = useSelector(({ filters }) => filters.year)
+    const year = filterYear ? filterYear : new Date().getFullYear()
 
     useEffect(() => {
       dispatch(setYear(year))
@@ -44,7 +45,8 @@ const FacultyColorTable = React.memo(
       } else {
         dispatch(getAllTempAnswersAction())
       }
-    }, [nextDeadline])
+    }, [nextDeadline, year])
+
     const selectedAnswers = answersByYear({
       year,
       tempAnswers: answers,

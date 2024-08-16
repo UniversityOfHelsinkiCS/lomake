@@ -15,6 +15,7 @@ import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import { TextQuestionGroup } from '../../ReformAnswers'
+import YearSelector from 'Components/Generic/YearSelector'
 
 const TextualAnswers = ({ reformAnswers }) => {
   const { data } = reformAnswers
@@ -196,6 +197,9 @@ export default () => {
           <Menu size="large" className="filter-row" secondary>
             <MenuItem>
               <h2>{t('degree-reform').toUpperCase()}</h2>
+            </MenuItem>
+            <MenuItem>
+              <YearSelector size="extra-small" />
             </MenuItem>
             <MenuItem>{dropdownFilter.length > 0 && <h3>{t('generic:chosenFaculties')}</h3>}</MenuItem>
             {faculty === 'UNI' && faculties.data.length > 0 && (

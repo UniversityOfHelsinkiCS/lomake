@@ -111,9 +111,6 @@ export default () => {
               <h2>{t('yearlyAssessment').toUpperCase()}</h2>
             </MenuItem>
             <MenuItem>
-              <YearSelector size="extra-small" />
-            </MenuItem>
-            <MenuItem>
               <Button data-cy="nav-report" as={Link} to="/report" secondary size="big">
                 {t('overview:readAnswers')}
               </Button>
@@ -124,6 +121,9 @@ export default () => {
                   {t('overview:compareAnswers')}
                 </Button>
               )}
+            </MenuItem>
+            <MenuItem>
+              <YearSelector size="extra-small" />
             </MenuItem>
             <MenuItem position="right">
               <Dropdown

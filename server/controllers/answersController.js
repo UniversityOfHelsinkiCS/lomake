@@ -202,7 +202,7 @@ const getAllUserHasAccessTo = async (req, res) => {
   try {
     let years = [2019, 2020, 2021, 2022, 2023, 2024]
     if (!req.path.endsWith('/all')) {
-      years = [new Date().getFullYear(), new Date().getFullYear() - 1]
+      years = [new Date().getFullYear()]
     }
 
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
