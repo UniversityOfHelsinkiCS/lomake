@@ -50,6 +50,13 @@ const NavBarItems = {
         path: '/meta-evaluation',
         access: ['programme', 'special'],
       },
+      {
+        key: 'faculty-evaluation',
+        label: 'facultyevaluation',
+        path: '',
+        access: [],
+        disabled: true,
+      },
     ],
   },
   degreeReform: {
@@ -214,6 +221,7 @@ const NavBar = () => {
                   key={`menu-item-${item.path}`}
                   tabIndex="-1"
                   to={item.path}
+                  disabled={item.disabled}
                 >
                   {t(item.label)}
                 </Dropdown.Item>

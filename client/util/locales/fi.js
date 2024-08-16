@@ -84,6 +84,7 @@ export default {
       evaluation: 'Koulutusohjelmien katselmus tiedekunnittain',
     },
     metaevaluation: 'Toimenpiteiden priorisointi koulutusohjelmissa',
+    facultyevaluation: 'Toimenpiteiden toteutus ja seuranta tiedekunnissa',
     formCloses: 'Lomake sulkeutuu',
     questionAnswers: 'Vastaukset kysymyksittäin',
     noAnswers: 'Ei vastauksia',

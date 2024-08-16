@@ -75,6 +75,7 @@ export default {
     showDataByProgramme: 'Examensprogram svar per fakultet',
     showAllFacultyProgrammes: 'Visa även gemensamma program',
     metaevaluation: 'Prioritering av åtgärder i utbildningsprogram',
+    facultyevaluation: 'Implementering och uppföljning av åtgärder inom fakulteterna',
     formCloses: 'Formuläret stängs',
     questionAnswers: 'Svar per fråga',
     noAnswers: 'No answers',
