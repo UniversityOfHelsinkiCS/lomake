@@ -13,7 +13,7 @@ services:
       - 8000:8000
     container_name: lomake_dev
   db:
-    image: postgres:13.16
+    image: postgres:16.4
     container_name: lomake_db
     environment:
       - PGDATA=/data
