@@ -1,9 +1,9 @@
 const { Op } = require('sequelize')
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('../../config/common')
-const { whereDraftYear, inProduction } = require('../util/common')
 const { v4: uuidv4 } = require('uuid')
+const db = require('../models/index')
+const logger = require('./logger')
+const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('../../config/common')
+const { whereDraftYear, inProduction } = require('./common')
 const { getUserByUid } = require('../services/userService')
 
 let currentEditors = {}

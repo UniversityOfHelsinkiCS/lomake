@@ -1,6 +1,6 @@
+const { LRUCache } = require('lru-cache')
 const db = require('../models/index')
 const logger = require('../util/logger')
-const { LRUCache } = require('lru-cache')
 
 const lru = new LRUCache({
   max: 200,

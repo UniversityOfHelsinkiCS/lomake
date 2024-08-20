@@ -14,7 +14,7 @@ const {
   hrHeadsGroup,
 } = require('../../config/IAMConfig')
 const { data, committeeList } = require('../../config/data')
-const { mapToDegreeCode } = require('../util/common')
+const { mapToDegreeCode } = require('./common')
 
 /**
  * Parses the header string with IAM groups separated by semicolons
