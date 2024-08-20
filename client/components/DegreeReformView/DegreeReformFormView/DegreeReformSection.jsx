@@ -1,6 +1,6 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
-import { basePath, colors } from 'Utilities/common'
+import { basePath, colors } from '../../../../config/common'
 import { List, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 

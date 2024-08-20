@@ -1,4 +1,4 @@
-import CsvDownload from 'Components/Generic/CsvDownload'
+import CsvDownload from '../Generic/CsvDownload'
 import React from 'react'
 import PDFDownload from './PDFDownload'
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form, Radio } from 'semantic-ui-react'
 
 import { useTranslation } from 'react-i18next'
-import { clearLevelSpecificFilters, setCompanion } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters, setCompanion } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const CompanionFilter = () => {

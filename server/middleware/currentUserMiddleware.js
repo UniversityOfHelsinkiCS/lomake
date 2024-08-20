@@ -1,6 +1,6 @@
-const db = require('@models/index')
+const db = require('../models/index')
 
-const { isAdmin } = require('@root/config/common')
+const { isAdmin } = require('../../config/common')
 
 const currentUser = async (req, _, next) => {
   if (req.path.includes('/cypress/')) return next()

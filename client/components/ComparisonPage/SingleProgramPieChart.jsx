@@ -1,7 +1,7 @@
 import React from 'react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 
 export default ({ question, answers, showEmpty, programmeName, programmeFaculty, columns }) => {
   const { t } = useTranslation()

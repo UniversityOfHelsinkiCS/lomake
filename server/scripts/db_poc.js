@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('module-alias/register')
-const db = require('@models/index')
+const db = require('../models/index')
 
 const func = async () => {
   const start = new Date().valueOf()

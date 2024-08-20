@@ -1,8 +1,8 @@
-const db = require('@models/index')
-const { isAdmin, isSuperAdmin } = require('@util/common')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const { isAdmin, isSuperAdmin } = require('../util/common')
+const logger = require('../util/logger')
 const moment = require('moment')
-const { getFormType } = require('@util/common')
+const { getFormType } = require('../util/common')
 const { seed } = require('../scripts/seed')
 
 const getAll = async (_, res) => {

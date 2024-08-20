@@ -1,8 +1,8 @@
 const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
-const { formKeys } = require('@root/config/data')
+const db = require('../models/index')
+const logger = require('../util/logger')
+const { whereDraftYear, isAdmin, isSuperAdmin } = require('../util/common')
+const { formKeys } = require('../../config/data')
 
 /**
  * The LINJAUS function: if user has ANY access, they can see all programmes' answers

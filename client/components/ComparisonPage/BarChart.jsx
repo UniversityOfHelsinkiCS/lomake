@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
-
-require('highcharts/modules/exporting')(Highcharts)
+import { colors } from '../../util/common'
 
 const checkSize = seriesData => {
   const questionAmount = (seriesData[0] && seriesData[0].data.length) || 0

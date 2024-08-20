@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getProgrammesUsersAction } from 'Utilities/redux/programmesUsersReducer'
-import { organisationCodeToIam } from '@root/config/IAMConfig'
+import { getProgrammesUsersAction } from '../../util/redux/programmesUsersReducer'
+import { organisationCodeToIam } from '/config/IAMConfig'
 import ProgramControlsUsers from './ProgramControlsUsers'
 import FormLocker from './FormLocker'
 

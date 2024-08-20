@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters, setFaculty } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const FacultyFilter = ({ label }) => {

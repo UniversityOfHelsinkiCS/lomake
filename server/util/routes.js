@@ -1,12 +1,12 @@
 const Router = require('express')
-const users = require('@controllers/usersController')
-const answers = require('@controllers/answersController')
-const studyprogrammes = require('@controllers/studyprogrammesController')
-const deadlines = require('@controllers/deadlineController')
-const cypress = require('@controllers/cypressController')
-const faculties = require('@controllers/facultyController')
-const degreeReform = require('@controllers/degreeReformController')
-const locks = require('@controllers/lockController')
+const users = require('../controllers/usersController')
+const answers = require('../controllers/answersController')
+const studyprogrammes = require('../controllers/studyprogrammesController')
+const deadlines = require('../controllers/deadlineController')
+const cypress = require('../controllers/cypressController')
+const faculties = require('../controllers/facultyController')
+const degreeReform = require('../controllers/degreeReformController')
+const locks = require('../controllers/lockController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -16,7 +16,8 @@ const {
   requireFacultyRead,
   checkAdminOrKatselmusryhma,
   requireUniFormRight,
-} = require('@middleware/accessControlMiddleware')
+} = require('../middleware/accessControlMiddleware')
+// const config = require('../controllers/configController')
 
 const router = Router()
 
@@ -69,5 +70,9 @@ router.get('/faculties', faculties.getAll)
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
+
+/* router.get('../../config/data', config.data)
+router.get('/config/common', config.common)
+router.get('/config/IAMConfig', config.IAM) */
 
 module.exports = router

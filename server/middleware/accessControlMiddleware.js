@@ -1,6 +1,6 @@
-const { inProduction } = require('@util/common')
-const { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma } = require('@root/config/common')
-const logger = require('@util/logger')
+const { inProduction } = require('../util/common')
+const { isAdmin, isSuperAdmin, isKatselmusProjektiOrOhjausryhma } = require('../../config/common')
+const logger = require('../util/logger')
 
 const requireProgrammeRead = (req, res, next) => {
   if (isAdmin(req.user) || isSuperAdmin(req.user)) next()

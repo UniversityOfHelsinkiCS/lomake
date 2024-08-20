@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { isAdmin } from '@root/config/common'
+import { isAdmin } from '../../../config/common'
 import './Generic.scss'
 
 const FormStatusMessage = ({ programme, form }) => {

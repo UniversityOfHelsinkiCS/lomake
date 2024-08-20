@@ -4,8 +4,8 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button, Menu, Tab } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import NoPermissions from 'Components/Generic/NoPermissions'
-import { formKeys } from '@root/config/data'
+import NoPermissions from '../Generic/NoPermissions'
+import { formKeys } from '../../../config/data'
 import {
   allYears,
   modifiedQuestions,
@@ -13,13 +13,13 @@ import {
   filteredProgrammes,
   answersByYear,
   answersByQuestions,
-} from 'Utilities/common'
-import useDebounce from 'Utilities/useDebounce'
-import { setForm } from 'Utilities/redux/filterReducer'
-import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
+} from '../../util/common'
+import useDebounce from '../../util/useDebounce'
+import { setForm } from '../../util/redux/filterReducer'
+import { getAnswersActionAll } from '../../util/redux/oldAnswersReducer'
 
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { isAdmin } from '@root/config/common'
+import { getAllTempAnswersAction } from '../../util/redux/tempAnswersReducer'
+import { isAdmin } from '../../../config/common'
 import CompareByYear from './CompareByYear'
 import CompareByFaculty from './CompareByFaculty'
 import './ComparisonPage.scss'

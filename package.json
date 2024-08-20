@@ -103,13 +103,6 @@
     ],
     "delay": 1000
   },
-  "_moduleAliases": {
-    "@root": ".",
-    "@controllers": "server/controllers",
-    "@middleware": "server/middleware",
-    "@models": "server/models",
-    "@util": "server/util"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "./grep_is.sh && npm run lint"

@@ -2,11 +2,11 @@ const { Op } = require('sequelize')
 const cron = require('node-cron')
 const moment = require('moment')
 
-const db = require('@models/index')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const logger = require('../util/logger')
 
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
-const { formKeys } = require('@root/config/data')
+const { formKeys } = require('../../config/data')
 
 const startDeadlineWatcher = async () => {
   // 5 min before midnight: 55 23 * * *

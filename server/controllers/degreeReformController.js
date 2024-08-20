@@ -1,6 +1,6 @@
 const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const logger = require('../util/logger')
 
 const getAnswersFromDb = async () => {
   const existingDeadline = await db.deadline.findOne({

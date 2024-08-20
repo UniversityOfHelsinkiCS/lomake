@@ -5,10 +5,10 @@ import {
   getLockHttp,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
-} from 'Utilities/redux/formReducer'
-import { formKeys } from '@root/config/data'
+} from '../../util/redux/formReducer'
+import { formKeys } from '../../../config/data'
 
-import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
+import { releaseFieldLocally } from '../../util/redux/currentEditorsReducer'
 import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
@@ -16,9 +16,9 @@ import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import { Sentry } from 'Utilities/sentry'
+import { Sentry } from '../../util/sentry'
 
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 import LastYearsAnswersAccordion from './LastYearsAnswersAccordion'
 import CurrentEditor from './CurrentEditor'
 import './Generic.scss'

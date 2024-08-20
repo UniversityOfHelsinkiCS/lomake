@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox, Divider } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { colors } from '../../util/common'
+import { updateFormField } from '../../util/redux/formReducer'
 import './Generic.scss'
 
 const Selection = ({ id, label, description, required, number, extrainfo, options, lang, form }) => {

@@ -1,6 +1,6 @@
-import { basePath, inProduction } from 'Utilities/common'
-import { getHeaders } from '@root/config/mockHeaders'
 import io from 'socket.io-client'
+import { basePath, inProduction } from './common'
+import { getHeaders } from '../../config/mockHeaders'
 import store from './store'
 
 const connect = () => {

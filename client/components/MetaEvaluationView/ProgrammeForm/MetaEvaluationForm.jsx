@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../../config/data'
 
-import MetaEntity from 'Components/Generic/MetaEntity'
-import { colors, romanize } from 'Utilities/common'
+import MetaEntity from '../../Generic/MetaEntity'
+import { colors, romanize } from '../../../util/common'
 import MetaEvaluationSection from './MetaEvaluationSection'
 
 import './EvaluationForm.scss'

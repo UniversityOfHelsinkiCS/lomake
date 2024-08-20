@@ -1,6 +1,6 @@
 import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
-import { romanize } from 'Utilities/common'
+import { romanize } from '../../util/common'
 import { useSelector } from 'react-redux'
 import { formKeys } from '@root/config/data'
 

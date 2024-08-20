@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { PieChart } from 'react-minimal-pie-chart'
-import { degreeReformBackgroundColor } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { degreeReformBackgroundColor } from '../../util/common'
+import { formKeys } from '../../../config/data'
 import { degreeReformIndividualQuestions } from '../../questionData'
 
 const DegreeReformPieChart = ({ stats, tableIds, setStatsToShow, selectedAnswers }) => {

@@ -1,6 +1,6 @@
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { cypressUsers } = require('@util/common')
+const db = require('../models/index')
+const logger = require('../util/logger')
+const { cypressUsers } = require('../util/common')
 
 const createCypressUsers = async () => {
   try {

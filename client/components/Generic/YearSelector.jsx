@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
-import { setYear, setMultipleYears } from 'Utilities/redux/filterReducer'
-import { setViewOnly, setViewingOldAnswers } from 'Utilities/redux/formReducer'
-import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
+import { setYear, setMultipleYears } from '../../util/redux/filterReducer'
+import { setViewOnly, setViewingOldAnswers } from '../../util/redux/formReducer'
+import { getYearsUserHasAccessToAction } from '../../util/redux/currentUserReducer'
 import './Generic.scss'
 
 // eslint-disable-next-line react/function-component-definition

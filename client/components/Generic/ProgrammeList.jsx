@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { Button, Icon, Accordion } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { sortedItems } from 'Utilities/common'
+import { sortedItems } from '../../util/common'
 import './Generic.scss'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const Programme = ({ p, lang, selectedFaculties, form }) => {
   return (

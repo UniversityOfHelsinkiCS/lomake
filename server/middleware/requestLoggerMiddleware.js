@@ -1,5 +1,5 @@
 const morgan = require('morgan')
-const logger = require('@util/logger')
+const logger = require('../util/logger')
 const { inProduction } = require('../../config/common')
 
 const accessLogger = morgan((tokens, req, res) => {

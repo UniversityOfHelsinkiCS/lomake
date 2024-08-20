@@ -1,5 +1,5 @@
-const logger = require('@util/logger')
-const db = require('@models/index')
+const logger = require('../util/logger')
+const db = require('../models/index')
 
 const { getUserByUid } = require('../services/userService')
 

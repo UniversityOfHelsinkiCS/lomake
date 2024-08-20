@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { romanize, colors, getProgramAnswerLevels } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { romanize, colors, getProgramAnswerLevels } from '../../util/common'
+import { formKeys } from '../../../config/data'
 import {
   yearlyQuestions as questions,
   evaluationQuestions,

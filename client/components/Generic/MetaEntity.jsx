@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 import { useTranslation } from 'react-i18next'
 import Textarea from './Textarea'
 import MetaTrafficLights from './MetaTrafficLights'

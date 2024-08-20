@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 import './Generic.scss'
 
 const LastYearsAnswersAccordion = ({ children }) => {

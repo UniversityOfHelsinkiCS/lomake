@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { inProduction } = require('@util/common')
+const { inProduction } = require('../util/common')
 
 const pateToken = process.env.PATE_API_TOKEN || ''
 const pateUrl = process.env.PATE_URL || ''

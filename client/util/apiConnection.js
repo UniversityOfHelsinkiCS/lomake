@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { getHeaders } from '@root/config/mockHeaders'
-import { basePath, inProduction } from 'Utilities/common'
+import { getHeaders } from '/config/mockHeaders'
+import { basePath, inProduction } from '../../config/common'
 import { Sentry } from './sentry'
 
 /**

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 import './Generic.scss'
 
 export default ({ fieldName }) => {

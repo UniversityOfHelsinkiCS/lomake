@@ -2,9 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextArea, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField } from '../../util/redux/formReducer'
 import './Generic.scss'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const ActionElement = ({ id, form, viewOnly, index }) => {
   const { t } = useTranslation()

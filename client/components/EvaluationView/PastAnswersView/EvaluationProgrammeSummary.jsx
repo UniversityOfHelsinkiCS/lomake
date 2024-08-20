@@ -5,11 +5,11 @@ import { Redirect } from 'react-router'
 import { Accordion } from 'semantic-ui-react'
 import sortBy from 'lodash/sortBy'
 
-import { isAdmin } from '@root/config/common'
-import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { getCurrentEvaluationFacultySummary } from 'Utilities/redux/summaryReducer'
-import { modifiedQuestions, answersByQuestions } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { isAdmin } from '../../../../config/common'
+import { getProgramme } from '../../../util/redux/studyProgrammesReducer'
+import { getCurrentEvaluationFacultySummary } from '../../../util/redux/summaryReducer'
+import { modifiedQuestions, answersByQuestions } from '../../../util/common'
+import { formKeys } from '../../../../config/data'
 import Question from '../../ComparisonPage/Question'
 
 const getTotalWritten = ({ question, allAnswers }) => {

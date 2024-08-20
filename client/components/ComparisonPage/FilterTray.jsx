@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import YearSelector from 'Components/Generic/YearSelector'
-import CompanionFilter from 'Components/Generic/CompanionFilter'
-import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
-import FacultyFilter from 'Components/Generic/FacultyFilter'
-import ProgrammeFilter from 'Components/Generic/ProgrammeFilter'
-import LevelFilter from 'Components/Generic/LevelFilter'
-import FormFilter from 'Components/Generic/FormFilter'
-import { formKeys } from '@root/config/data'
+import YearSelector from '../Generic/YearSelector'
+import CompanionFilter from '../Generic/CompanionFilter'
+import DoctoralSchoolFilter from '../Generic/DoctoralSchoolFilter'
+import FacultyFilter from '../Generic/FacultyFilter'
+import ProgrammeFilter from '../Generic/ProgrammeFilter'
+import LevelFilter from '../Generic/LevelFilter'
+import FormFilter from '../Generic/FormFilter'
+import { formKeys } from '../../../config/data'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))

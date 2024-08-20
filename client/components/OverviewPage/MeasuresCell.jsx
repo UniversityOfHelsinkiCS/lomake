@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-import { colors } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { colors } from '../../util/common'
+import { formKeys } from '../../../config/data'
 
 const MeasuresCell = ({
   programmesAnswers,

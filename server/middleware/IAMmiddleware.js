@@ -1,9 +1,9 @@
 const isEqual = require('lodash/isEqual')
 
-const db = require('@models/index')
-const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('@util/common')
-const { getIAMRights } = require('@util/IAMrights')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const { AUTOMATIC_IAM_PERMISSIONS_ENABLED } = require('../util/common')
+const { getIAMRights } = require('../util/IAMrights')
+const logger = require('../util/logger')
 
 const checkTemporaryAccesses = (access, tempAccess) => {
   if (tempAccess.length === 0) return

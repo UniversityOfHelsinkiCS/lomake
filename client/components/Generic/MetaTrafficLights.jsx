@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField } from '../../util/redux/formReducer'
 import './Generic.scss'
 
 const MetaTrafficLights = ({ id, form }) => {

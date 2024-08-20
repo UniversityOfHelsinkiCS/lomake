@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
-const db = require('@models/index')
-const common = require('@root/config/common')
-const { formKeys } = require('@root/config/data')
+const db = require('../models/index')
+const common = require('../../config/common')
+const { formKeys } = require('../../config/data')
 
 const DB_URL = process.env.DB_URL || ''
 const PORT = process.env.PORT || 8001

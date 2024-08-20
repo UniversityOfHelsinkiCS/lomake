@@ -4,10 +4,10 @@ import { Input, Icon, Loader, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router'
 
-import User from 'Components/UsersPage/User'
-import useDebounce from 'Utilities/useDebounce'
-import { sortedItems } from 'Utilities/common'
-import { isAdmin } from '@root/config/common'
+import User from '../UsersPage/User'
+import useDebounce from '../../util/useDebounce'
+import { sortedItems } from '../../util/common'
+import { isAdmin } from '../../../config/common'
 import './UsersPage.scss'
 
 export default () => {

@@ -5,7 +5,7 @@ import moment from 'moment'
 import { Table, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { colors, getUserRole } from 'Utilities/common'
+import { colors, getUserRole } from '../../util/common'
 import './UsersPage.scss'
 import { isSuperAdmin, isBasicUser, isAdmin, specialGroups } from '../../../config/common'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Message, Segment } from 'semantic-ui-react'
 
-import { updateStudyprogrammes } from 'Utilities/redux/studyProgrammesReducer'
+import { updateStudyprogrammes } from '../../util/redux/studyProgrammesReducer'
 
 export default () => {
   const dispatch = useDispatch()
@@ -21,7 +21,7 @@ export default () => {
           Nappulan painaminen poistaa tietokannasta kaikki koulutusohjelmat, tiedekunnat sekä yhteistyötiedekunnat.
           Tämän jälkeen ohjelmat tallennetaan uudestaan tietokantaan siinä muodossa, kuin ne on tallennettu{' '}
           <a
-            href="https://github.com/UniversityOfHelsinkiCS/lomake/blob/master/config/data.js"
+            href="https://github.com/UniversityOfHelsinkiCS/lomake/blob/master../../config/data.js"
             target="_blank"
             rel="noreferrer"
           >

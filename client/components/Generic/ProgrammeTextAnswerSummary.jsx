@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Grid, Button, Card } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 import ProgrammeAnswerSummaryList from './ProgrammeAnswerSummaryList'
 
 const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {

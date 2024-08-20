@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Checkbox, Confirm, Divider, Header, Icon, Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment'
-import { sortedItems } from 'Utilities/common'
+import { sortedItems } from '../../util/common'
 import './UsersPage.scss'
 
 const TempAccessTable = ({ programmes, lang, handleEdit, handleDelete }) => {

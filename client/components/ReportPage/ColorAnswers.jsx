@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Radio, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { getLabel } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { getLabel } from '../../util/common'
+import { formKeys } from '../../../config/data'
 
-import PDFDownload from 'Components/Generic/PDFDownload'
-import ColorLegend from 'Components/Generic/ColorLegend'
+import PDFDownload from '../Generic/PDFDownload'
+import ColorLegend from '../Generic/ColorLegend'
 import PieChart from './PieChart'
 
 const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setActiveTab, setShowing }) => {

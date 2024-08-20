@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { setForm } from 'Utilities/redux/filterReducer'
+import { setForm } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const FormFilter = ({ version = null, comparison = false }) => {

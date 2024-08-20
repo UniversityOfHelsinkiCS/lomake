@@ -3,10 +3,10 @@
  */
 import capitalize from 'lodash/capitalize'
 
-import toscalogoColor from 'Assets/toscalogo_color.svg'
-import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
-import hy from 'Assets/hy_logo.svg'
-import { formKeys, facultyList } from '@root/config/data'
+import toscalogoColor from '../assets/toscalogo_color.svg'
+import toscalogoGrayscale from '../assets/toscalogo_grayscale.svg'
+import hy from '../assets/hy_logo.svg'
+import { formKeys, facultyList } from '../../config/data'
 
 import {
   yearlyQuestions,
@@ -845,4 +845,4 @@ export const getLabel = question => {
 
 export const kludge = true
 
-export * from '@root/config/common'
+export * from '../../config/common'

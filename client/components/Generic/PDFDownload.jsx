@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import ReactToPrint from 'react-to-print'
 
-import { colors } from 'Utilities/common'
-import { setQuestions } from 'Utilities/redux/filterReducer'
+import { colors } from '../../util/common'
+import { setQuestions } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const PDFDownload = ({ componentRef, linkName = null }) => {

@@ -2,9 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
-import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
+import ColorTableCell from '../../OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
-import { isAdmin } from '@root/config/common'
+import { isAdmin } from '../../../../config/common'
 import PieForFaculty from './PieForFaculty'
 
 const ManageCell = ({ faculty, setProgramControlsToShow }) => (

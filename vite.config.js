@@ -21,24 +21,12 @@ export default defineConfig({
     strictPort: true,
     port: 3000,
   },
-  resolve: {
-    extension: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
-    alias: {
-      '@root': path.resolve(__dirname, '.'),
-      '@controllers': path.resolve(__dirname, 'server/controllers'),
-      '@middleware': path.resolve(__dirname, 'server/middleware'),
-      '@models': path.resolve(__dirname, 'server/models'),
-      '@util': path.resolve(__dirname, 'server/util'),
-      Utilities: path.resolve(__dirname, 'client/util'),
-      Components: path.resolve(__dirname, 'client/components'),
-      Assets: path.resolve(__dirname, 'client/assets'),
-    },
-  },
   build: {
     outDir: 'build/',
     sourcemap: true,
   },
   define: {
     'process.env': process.env,
+    global: {},
   },
 })

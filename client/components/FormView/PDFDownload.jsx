@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import ReactToPrint from 'react-to-print'
-import { setViewOnly } from 'Utilities/redux/formReducer'
-import { colors, isFormLocked } from 'Utilities/common'
-import { isAdmin } from '@root/config/common'
+import { setViewOnly } from '../../util/redux/formReducer'
+import { colors, isFormLocked } from '../../util/common'
+import { isAdmin } from '../../../config/common'
 
 const formShouldBeViewOnly = ({ draftYear, year, formDeadline, form, viewingOldAnswers, userHasWriteAccess }) => {
   if (!draftYear) return true

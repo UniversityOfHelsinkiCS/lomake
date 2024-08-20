@@ -1,5 +1,5 @@
-const db = require('@models/index')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const logger = require('../util/logger')
 
 const getAll = async (_, res) => {
   try {
