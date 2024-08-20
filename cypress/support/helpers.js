@@ -1,4 +1,4 @@
-import { data } from'../../config/data'
+import { data } from '../../config/data'
 
 const getTotalProgrammeCount = () => {
   return data.flatMap(fac => fac.programmes).length

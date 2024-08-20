@@ -1,6 +1,6 @@
+const fs = require('fs')
 const db = require('../models/index')
 const logger = require('../util/logger')
-const fs = require('fs')
 
 const mapProgrammes = programmes => {
   const programmeMap = new Map()
