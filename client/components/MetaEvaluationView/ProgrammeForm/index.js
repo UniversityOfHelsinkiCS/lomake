@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { useTranslation } from 'react-i18next'
-import { Loader, Button } from 'semantic-ui-react'
+import { Loader, Button, Icon } from 'semantic-ui-react'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { getFormViewRights, colors, kludge } from 'Utilities/common'
@@ -116,6 +116,13 @@ const ProgrammeLevelForm = ({ room }) => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className="big-circle-gray" />
               {t('irrelevant')}
+            </div>
+            <div className="info-container">
+              <a href={t('formView:metaPdfUrl')} target="_blank">
+                <h4>
+                  {t('formView:metaPdfName')} <Icon name="external" />{' '}
+                </h4>
+              </a>
             </div>
             <br />
             <MetaEvaluationForm

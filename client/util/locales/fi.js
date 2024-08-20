@@ -243,6 +243,9 @@ export default {
     oodikoneFaculty: 'Tarkastelkaa tiedekunnan tietoja Oodikoneessa',
     oodikoneUniversity: 'Tiedot Oodikoneesta',
     rapo: 'Tarkastelkaa tohtoriohjelman tietoja Rapossa',
+    metaPdfName: 'Katselmuksen arviointiryhmän arviot ja ehdotukset',
+    metaPdfUrl:
+      'https://www.helsinki.fi/assets/drupal/2024-05/Katselmuksen_arviointiryhman_arviot_ja_ehdotukset_15052024.pdf',
     toijo:
       'Toimintarakenteen ja johtamisjärjestelmän (TOIJO) itsearviointiraportti luettavissa <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">täällä</a> (raportti englanniksi)',
     langCenterRaport:

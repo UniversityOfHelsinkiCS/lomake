@@ -231,6 +231,8 @@ export default {
     oodikoneFaculty: 'View faculty statistics in Oodikone',
     oodikoneUniversity: 'View statistics in Oodikone',
     rapo: 'View doctoral programme statistics in Rapo',
+    metaPdfName: 'Review evaluation group`s assessments and proposals',
+    metaPdfUrl: 'https://www.helsinki.fi/assets/drupal/2024-05/Review_evaluation_group_proposals_15_May_2024.pdf',
     toijo:
       'Assessment of the operating structure and management system (TOIJO) self-assessment report <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">here</a>',
     langCenterRaport:

@@ -251,6 +251,8 @@ export default {
     doNotKnow: 'Kan inte säga',
     noAnswer: 'Inget svar',
     average: 'Genomsnitt',
+    metaPdfName: 'Review evaluation group`s assessments and proposals',
+    metaPdfUrl: 'https://www.helsinki.fi/assets/drupal/2024-05/Review_evaluation_group_proposals_15_May_2024.pdf',
     toijo:
       'TOIJO självutvärderingsrapporten <a href="https://workgroups.helsinki.fi/pages/viewpage.action?pageId=323688922&preview=/323688922/323688944/1_University%20of%20Helsinki%20TOIJO%20self-assessment%20report%20280823.pdf" target="_blank">här</a> (endast på engelska)',
     langCenterRaport:
