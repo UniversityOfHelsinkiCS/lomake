@@ -1,8 +1,8 @@
 const cron = require('node-cron')
-const db = require('@models/index')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const logger = require('../util/logger')
 const lodash = require('lodash')
-const { whereDraftYear } = require('@util/common')
+const { whereDraftYear } = require('../util/common')
 
 const loggerPrefix = 'Cronjob::backup | '
 

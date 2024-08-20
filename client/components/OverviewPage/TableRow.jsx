@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
-import { isAdmin } from '@root/config/common'
+import { isAdmin } from '../../../config/common'
 import ColorTableCell from './ColorTableCell'
 
 const ManageCell = ({ program, setProgramControlsToShow }) => (

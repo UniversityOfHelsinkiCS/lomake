@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 import { useTranslation } from 'react-i18next'
 
 const ShowThemeQuestions = ({ themeQuestions }) => {

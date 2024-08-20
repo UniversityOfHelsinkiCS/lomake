@@ -3,7 +3,7 @@ import { Header, Message } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { forms } from '@root/config/data'
+import { forms } from '../../../config/data'
 
 const DeadlineInfo = () => {
   const { t } = useTranslation()

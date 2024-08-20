@@ -1,4 +1,4 @@
-const logger = require('@util/logger')
+const logger = require('../util/logger')
 const { getLockForHttp } = require('../websocket')
 
 const getLock = async (req, res) => {

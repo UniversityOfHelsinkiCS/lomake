@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 // import { useTranslation } from 'react-i18next'
-import { data } from '@root/config/data'
+import { data } from '../../../config/data'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { updateFormField } from 'Utilities/redux/formReducer'
-import { colors } from 'Utilities/common'
+import { updateFormField } from '../../util/redux/formReducer'
+import { colors } from '../../util/common'
 import './Generic.scss'
 
 const SimpleTextarea = ({ label, id, required, form }) => {

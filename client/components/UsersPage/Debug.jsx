@@ -1,4 +1,4 @@
-import { Sentry } from 'Utilities/sentry'
+import { Sentry } from '../../util/sentry'
 import React from 'react'
 
 const Debug = () => {

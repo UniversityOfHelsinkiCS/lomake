@@ -3,8 +3,8 @@ import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { Button } from 'semantic-ui-react'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
+import { colors } from '../../util/common'
+import { formKeys } from '../../../config/data'
 
 export default ({
   question,

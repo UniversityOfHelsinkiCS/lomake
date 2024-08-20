@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { isAdmin } from '@root/config/common'
+import { isAdmin } from '../../config/common'
 
 const getOverviewProgrammesToShow = (programmes, access) => {
   const usersPermissionsEntries = Object.entries(access)

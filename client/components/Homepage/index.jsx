@@ -1,14 +1,14 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import NoPermissions from 'Components/Generic/NoPermissions'
+import NoPermissions from '../Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { Container, Header, Grid, Divider, Loader, List } from 'semantic-ui-react'
-import { formKeys } from '@root/config/data'
-import rypsiImage from 'Assets/rypsi.jpg'
-import wheelImage from 'Assets/big_wheel.jpg'
-import calendarImage from 'Assets/calendar.jpg'
-import powerlineImage from 'Assets/APowerlineTower.jpg'
+import { formKeys } from '../../../config/data'
+import rypsiImage from '../../assets/rypsi.jpg'
+import wheelImage from '../../assets/big_wheel.jpg'
+import calendarImage from '../../assets/calendar.jpg'
+import powerlineImage from '../../assets/APowerlineTower.jpg'
 import { PageItem, FormCard } from '../Generic/Homepage'
 
 const Homepage = () => {

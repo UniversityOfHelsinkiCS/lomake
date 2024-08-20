@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ColorTableCell from 'Components/OverviewPage/ColorTableCell'
+import ColorTableCell from '../../OverviewPage/ColorTableCell'
 import { useTranslation } from 'react-i18next'
 
 const getCommitteeGap = ({ topLevel, gridColumnSize, index }) => {

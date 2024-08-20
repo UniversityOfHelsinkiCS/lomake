@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
+import { colors } from '../../util/common'
 
 export default ({ question, answers, showEmpty, programmes, faculty, name, columns }) => {
   const { t } = useTranslation()

@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-import { handleRequest } from 'Utilities/apiConnection'
-import webSocketMiddleware from 'Utilities/webSocket'
-import combinedReducers from 'Utilities/redux'
+import { handleRequest } from './apiConnection'
+import webSocketMiddleware from './webSocket'
+import combinedReducers from './redux'
 
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

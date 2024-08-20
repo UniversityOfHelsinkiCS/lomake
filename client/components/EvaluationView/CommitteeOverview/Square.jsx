@@ -1,5 +1,5 @@
 import React from 'react'
-import { cleanText, colors } from 'Utilities/common'
+import { cleanText, colors } from '../../../util/common'
 
 export const getActionsAnswerForUniversity = (data, id) => {
   if (!data) return ''

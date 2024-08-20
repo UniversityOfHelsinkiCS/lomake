@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Accordion, Grid, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { romanize } from 'Utilities/common'
+import { romanize } from '../../util/common'
 import QuestionTitle from '../ReportPage/QuestionTitle'
 
 const generateRandomKey = value => `${value}-${Math.random()}`

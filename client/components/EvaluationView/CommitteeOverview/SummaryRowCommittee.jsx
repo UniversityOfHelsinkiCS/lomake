@@ -1,7 +1,7 @@
 import React from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../../config/data'
 
 const SummaryRowCommittee = ({ setStatsToShow, stats, selectedAnswers, tableIds, showDataByProgramme }) => {
   const { t } = useTranslation()

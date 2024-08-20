@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { useVisibleOverviewProgrammes } from 'Utilities/overview'
-import NoPermissions from 'Components/Generic/NoPermissions'
-import { formKeys } from '@root/config/data'
-import { setDoctoral } from 'Utilities/redux/doctoralReducer'
+import { useVisibleOverviewProgrammes } from '../../../util/overview'
+import NoPermissions from '../../Generic/NoPermissions'
+import { formKeys } from '../../../../config/data'
+import { setDoctoral } from '../../../util/redux/doctoralReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {

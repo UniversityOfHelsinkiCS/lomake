@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Select } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
-import { clearLevelSpecificFilters, setDoctoralSchool } from 'Utilities/redux/filterReducer'
+import { clearLevelSpecificFilters, setDoctoralSchool } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const DoctoralSchoolFilter = () => {

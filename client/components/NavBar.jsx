@@ -2,9 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { Dropdown, Icon, Label, Menu, Popup, MenuItem } from 'semantic-ui-react'
-import { images } from 'Utilities/common'
-import { logoutAction } from 'Utilities/redux/currentUserReducer'
-import { setLanguage } from 'Utilities/redux/languageReducer'
+import { images } from '../util/common'
+import { logoutAction } from '../util/redux/currentUserReducer'
+import { setLanguage } from '../util/redux/languageReducer'
 import { useTranslation } from 'react-i18next'
 import {
   isAdmin,
@@ -12,7 +12,7 @@ import {
   isEvaluationFacultyUser,
   isKatselmusProjektiOrOhjausryhma,
   isEvaluationUniversityUser,
-} from '@root/config/common'
+} from '../../config/common'
 
 const NavBarItems = {
   yearly: { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },

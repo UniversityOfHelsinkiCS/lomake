@@ -4,19 +4,19 @@
 
 const { data } = require('./data')
 
-export const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
+const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
 
-export const inStaging = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'staging'
+const inStaging = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'staging'
 
 // Once the iams are in use, turn this to true
 // And later on, once everything is ok, remove the features behind this flag
-export const iamsInUse = true
+const iamsInUse = true
 
-export const basePath = process.env.BASE_PATH || '/'
+const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
 
-export const getYearsArray = since => {
+const getYearsArray = since => {
   const years = []
   for (let i = new Date().getFullYear(); i >= since; i--) {
     const year = i
@@ -25,7 +25,7 @@ export const getYearsArray = since => {
   return years
 }
 
-export const mapToDegreeCode = organisationCode => {
+const mapToDegreeCode = organisationCode => {
   if (!organisationCode) return ''
   if (organisationCode.length < 7) return ''
   const doctoral = organisationCode[0] === 'T'
@@ -42,7 +42,7 @@ export const mapToDegreeCode = organisationCode => {
 }
 
 // admin- and superAdmin-rights are also defined as special groups
-export const specialGroups = [
+const specialGroups = [
   { group: 'allProgrammes', translationTag: 'accessAllProgrammes' },
   { group: 'international2020', translationTag: 'accessInternational2020' },
   { group: 'international', translationTag: 'accessInternational' },
@@ -53,11 +53,11 @@ export const specialGroups = [
 ]
 
 // First one is the current year, after that all the years that have answers
-export const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
+const defaultYears = getYearsArray(LOMAKE_SINCE_YEAR)
 
-export const degreeLevels = ['Bachelor´s level (1. cycle)', 'Master´s level (2. cycle)', 'Doctoral level (3. cycle)']
+const degreeLevels = ['Bachelor´s level (1. cycle)', 'Master´s level (2. cycle)', 'Doctoral level (3. cycle)']
 
-export const requiredFormIds = [
+const requiredFormIds = [
   'faculty',
   'degree_level',
   'programme',
@@ -94,11 +94,11 @@ export const requiredFormIds = [
   'measures_1_text',
 ]
 
-export const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_years']
+const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_years']
 
 const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
 
-export const hasSpecialGroup = (user, group) => {
+const hasSpecialGroup = (user, group) => {
   if (user.specialGroup) {
     const groups = Object.keys(user.specialGroup)
     return groups.includes(group)
@@ -106,50 +106,50 @@ export const hasSpecialGroup = (user, group) => {
   return false
 }
 
-export const isKatselmusProjektiOrOhjausryhma = user => {
+const isKatselmusProjektiOrOhjausryhma = user => {
   return user.iamGroups.includes('grp-katselmus-ohjausryhma') || user.iamGroups.includes('grp-katselmus-projektiryhma')
 }
 
-export const isDevSuperAdminUid = uid => {
+const isDevSuperAdminUid = uid => {
   return DEV_SUPERADMINS.includes(uid)
 }
 
-export const isSuperAdmin = user => {
+const isSuperAdmin = user => {
   return hasSpecialGroup(user, 'superAdmin') || (!inProduction && isDevSuperAdminUid(user.uid))
 }
 
-export const isAdmin = user => {
+const isAdmin = user => {
   return hasSpecialGroup(user, 'admin') || hasSpecialGroup(user, 'superAdmin')
 }
 
-export const isBasicUser = user => {
+const isBasicUser = user => {
   if (!hasSpecialGroup(user, 'superAdmin') && !hasSpecialGroup(user, 'admin')) return true
   return false
 }
 
-export const isSpecialGroupUser = user => {
+const isSpecialGroupUser = user => {
   if (user.specialGroup && Object.keys(user.specialGroup) && Object.keys(user.specialGroup).length > 0) return true
   return false
 }
 
-export const isInternationalUser = user => {
+const isInternationalUser = user => {
   if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.international) return true
   return false
 }
 
-export const isEvaluationFacultyUser = user => {
+const isEvaluationFacultyUser = user => {
   if (user.specialGroup && Object.keys(user.specialGroup) && user.specialGroup.evaluationFaculty) return true
   return false
 }
 
-export const isEvaluationUniversityUser = user => {
+const isEvaluationUniversityUser = user => {
   if (user?.specialGroup?.universityForm || isKatselmusProjektiOrOhjausryhma(user) || isAdmin(user)) return true
   return false
 }
 
-export const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
+const hasSomeReadAccess = user => Object.values(user?.access || {}).some(a => a.read)
 
-export const internationalAccess = {
+const internationalAccess = {
   MH50_004: { read: true, year: 2020 },
   MH50_010: { read: true, year: 2020 },
   MH40_005: { read: true, year: 2020 },
@@ -188,16 +188,49 @@ export const internationalAccess = {
   MH55_002: { read: true, year: 2020 },
 }
 
-export const testProgrammeCode = 'KH50_005'
+const testProgrammeCode = 'KH50_005'
 
-export const testProgrammeName = `Bachelor's Programme in Computer Science`
+const testProgrammeName = `Bachelor's Programme in Computer Science`
 
-export const testProgrammeCodeDoctor = 'T923107'
+const testProgrammeCodeDoctor = 'T923107'
 
-export const testProgrammeNameDoctor = 'Doctoral Programme in Computer Science'
+const testProgrammeNameDoctor = 'Doctoral Programme in Computer Science'
 
-export const testFacultyCode = 'H50'
+const testFacultyCode = 'H50'
 
-export const testFacultyName = 'Faculty of Science'
+const testFacultyName = 'Faculty of Science'
 
-export const testIAM = 'hy-mltdk-tkt-jory'
+const testIAM = 'hy-mltdk-tkt-jory'
+
+module.exports = {
+  iamsInUse,
+  inProduction,
+  inStaging,
+  internationalAccess,
+  basePath,
+  defaultYears,
+  degreeLevels,
+  specialGroups,
+  requiredFormIds,
+  isSuperAdmin,
+  isDevSuperAdminUid,
+  isAdmin,
+  isBasicUser,
+  isSpecialGroupUser,
+  isInternationalUser,
+  isEvaluationFacultyUser,
+  hasSomeReadAccess,
+  testProgrammeCode,
+  testProgrammeName,
+  testFacultyCode,
+  testFacultyName,
+  testProgrammeCodeDoctor,
+  testProgrammeNameDoctor,
+  testIAM,
+  LOMAKE_SINCE_YEAR,
+  getYearsArray,
+  mapToDegreeCode,
+  requiredDegreeReformIds,
+  isKatselmusProjektiOrOhjausryhma,
+  isEvaluationUniversityUser,
+}

@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from 'Utilities/common'
+import { degreeReformBackgroundColor, reversedPointsInDegreeReform } from '../../util/common'
 
 const Question = ({ question, answers }) => {
   const lang = useSelector(state => state.language)

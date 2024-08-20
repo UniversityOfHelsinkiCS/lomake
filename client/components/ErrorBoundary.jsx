@@ -1,5 +1,5 @@
 import { Button } from 'semantic-ui-react'
-import { Sentry } from 'Utilities/sentry'
+import { Sentry } from '../util/sentry'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 

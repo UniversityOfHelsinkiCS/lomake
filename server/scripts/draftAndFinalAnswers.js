@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { formKeys, committeeList } = require('@root/config/data')
+const db = require('../models/index')
+const logger = require('../util/logger')
+const { formKeys, committeeList } = require('../../config/data')
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid

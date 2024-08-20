@@ -1,6 +1,6 @@
-import { isAdmin, isSuperAdmin } from '@root/config/common'
-import { Sentry } from 'Utilities/sentry'
-import { defaultYears } from 'Utilities/common'
+import { isAdmin, isSuperAdmin } from '../../../config/common'
+import { Sentry } from '../../util/sentry'
+import { defaultYears } from '../../util/common'
 import callBuilder from '../apiConnection'
 /**
  * Actions and reducers are in the same file for readability

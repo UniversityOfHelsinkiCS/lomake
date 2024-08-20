@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Divider } from 'semantic-ui-react'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setAnswerLevels,
   updateFormField,
   updateFormFieldExp,
   postIndividualFormPartialAnswer,
-} from 'Utilities/redux/formReducer'
-import { getFilters, getForm } from 'Utilities/common'
+} from '../../util/redux/formReducer'
+import { getFilters, getForm } from '../../util/common'
 import './Generic.scss'
 
 const CustomCheckbox = ({ id, label, description, required, extrainfo, radioOptions, formType }) => {

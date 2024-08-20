@@ -12,9 +12,9 @@ const {
   facultyWideWritingGroups,
   isUniverstyFormIam,
   hrHeadsGroup,
-} = require('@root/config/IAMConfig')
-const { data, committeeList } = require('@root/config/data')
-const { mapToDegreeCode } = require('@util/common')
+} = require('../../config/IAMConfig')
+const { data, committeeList } = require('../../config/data')
+const { mapToDegreeCode } = require('../util/common')
 
 /**
  * Parses the header string with IAM groups separated by semicolons

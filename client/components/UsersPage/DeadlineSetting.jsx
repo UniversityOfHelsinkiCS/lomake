@@ -3,13 +3,13 @@ import DatePicker, { registerLocale } from 'react-datepicker'
 import { Button, Divider, Header, Select, Segment } from 'semantic-ui-react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from 'Utilities/redux/deadlineReducer'
+import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from '../../util/redux/deadlineReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { useTranslation } from 'react-i18next'
-import { getYearsUserHasAccessToAction } from 'Utilities/redux/currentUserReducer'
-import { colors } from 'Utilities/common'
-import { isSuperAdmin } from '@root/config/common'
-import { forms } from '@root/config/data'
+import { getYearsUserHasAccessToAction } from '../../util/redux/currentUserReducer'
+import { colors } from '../../util/common'
+import { isSuperAdmin } from '../../../config/common'
+import { forms } from '../../../config/data'
 
 const DeadlineSetting = () => {
   const { t } = useTranslation()

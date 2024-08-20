@@ -1,6 +1,6 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
-import { basePath, colors } from 'Utilities/common'
+import { basePath, colors } from '../../util/common'
 
 const Section = ({ title, number, children, programmeKey, form = 1 }) => {
   return (

@@ -1,7 +1,7 @@
-const db = require('@models/index')
-const logger = require('@util/logger')
+const db = require('../models/index')
+const logger = require('../util/logger')
 
-const { getFormType } = require('@util/common')
+const { getFormType } = require('../util/common')
 const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const createOrUpdate = async (req, res) => {

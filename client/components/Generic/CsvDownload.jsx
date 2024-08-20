@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CSVLink } from 'react-csv'
-import { facultyList, formKeys } from '@root/config/data'
+import { facultyList, formKeys } from '../../../config/data'
 
 import { useTranslation } from 'react-i18next'
 import {
@@ -9,7 +9,7 @@ import {
   getActionsAnswer,
   getMeasuresAnswer,
   cleanText,
-} from 'Utilities/common'
+} from '../../util/common'
 import {
   yearlyQuestions,
   facultyEvaluationQuestions,

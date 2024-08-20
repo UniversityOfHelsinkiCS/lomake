@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Accordion, Grid, Icon, Label, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { romanize } from 'Utilities/common'
+import { romanize } from '../../util/common'
 import QuestionTitle from './QuestionTitle'
 
 const Question = ({ answers, question, chosenProgrammes, handleClick, showing, meta }) => {

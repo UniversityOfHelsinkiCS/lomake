@@ -2,18 +2,18 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { cypressUids, setHeaders, possibleUsers } from '@root/config/mockHeaders'
+import ErrorBoundary from './components/ErrorBoundary'
+import UserFaker from './components/UserFaker'
+import App from './components/App'
+import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
 
 import './assets/custom.scss'
 
-import store from 'Utilities/store'
-import { basePath } from 'Utilities/common'
-import App from 'Components/App'
-import UserFaker from 'Components/UserFaker'
+import store from './util/store'
+import { basePath } from '../config/common'
 
-import ErrorBoundary from 'Components/ErrorBoundary'
 import './util/i18n'
-import { initSentry } from 'Utilities/sentry'
+import { initSentry } from './util/sentry'
 
 if (process.env.NODE_ENV === 'production') {
   initSentry()

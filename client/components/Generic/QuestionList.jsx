@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { getLabel } from 'Utilities/common'
-import { setQuestions } from 'Utilities/redux/filterReducer'
+import { getLabel } from '../../util/common'
+import { setQuestions } from '../../util/redux/filterReducer'
 import './Generic.scss'
 
 const QuestionList = ({ label, questionsList, onlyColoredQuestions }) => {

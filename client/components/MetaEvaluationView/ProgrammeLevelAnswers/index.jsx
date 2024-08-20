@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Loader, Dropdown, Input, Menu, MenuItem } from 'semantic-ui-react'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAllTempAnswersAction } from '../../../util/redux/tempAnswersReducer'
 import {
   modifiedQuestions,
   answersByQuestions,
@@ -11,13 +11,13 @@ import {
   filterUserProgrammes,
   kludge,
   getLabel,
-} from 'Utilities/common'
-import { setQuestions } from 'Utilities/redux/filterReducer'
-import WrittenAnswers from 'Components/ReportPage/WrittenAnswers'
-import { formKeys } from '@root/config/data'
-import useDebounce from 'Utilities/useDebounce'
-import { setDoctoral } from 'Utilities/redux/doctoralReducer'
-import { basePath } from '@root/config/common'
+} from '../../../util/common'
+import { setQuestions } from '../../../util/redux/filterReducer'
+import WrittenAnswers from '../../ReportPage/WrittenAnswers'
+import { formKeys } from '../../../../config/data'
+import useDebounce from '../../../util/useDebounce'
+import { setDoctoral } from '../../../util/redux/doctoralReducer'
+import { basePath } from '../../../../config/common'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 
 const doctoralBasedFilter = (doctoral, items, attribute) => {

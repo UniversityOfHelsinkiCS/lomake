@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Icon, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { toggleLock, getProgramme } from 'Utilities/redux/studyProgrammesReducer'
-import { isFormLocked } from 'Utilities/common'
+import { toggleLock, getProgramme } from '../../util/redux/studyProgrammesReducer'
+import { isFormLocked } from '../../util/common'
 
 // eslint-disable-next-line react/function-component-definition
 export default function FormLocker({ programme, form = 1 }) {
