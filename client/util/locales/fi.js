@@ -184,6 +184,11 @@ export default {
     title: 'KOULUTUSOHJELMAN TILANNEKUVAN DOKUMENTOINTI',
     metaSubtitle: 'Toimenpiteiden priorisointi koulutusohjelmissa',
     metaCommentLabel: 'Muita kommentteja',
+    facultyAnswerLabel1: 'Kuvaus siitä mitä tiedekunta tekee',
+    facultyAnswerLabel2: 'Vastuutahot',
+    facultyAnswerLabel3: 'Yhteyshenkilö / päävalmistelija',
+    facultyAnswerLabel4: 'Varatut resurssit',
+    facultyAnswerLabel5: 'Aikataulu',
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',

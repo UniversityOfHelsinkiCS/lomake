@@ -180,6 +180,11 @@ export default {
     title: 'DOKUMENTATION AV UTBILDNINGSPROGRAMMETS LÄGESBESKRIVNING',
     metaSubtitle: 'Prioritering av åtgärder i utbildningsprogram',
     metaCommentLabel: 'Övriga kommentarer',
+    facultyAnswerLabel1: 'Beskrivning av vad fakulteten gör',
+    facultyAnswerLabel2: 'Ansvariga parter',
+    facultyAnswerLabel3: 'Kontaktperson / huvudförfattare',
+    facultyAnswerLabel4: 'Tilldelade resurser',
+    facultyAnswerLabel5: 'Tidsplan',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
     info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av trafikljusen: ',

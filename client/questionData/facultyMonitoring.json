@@ -7,9 +7,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "1",
         "index": 1,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -19,13 +19,12 @@
           "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "2",
         "index": 2,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -35,13 +34,12 @@
           "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "3",
         "index": 3,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -51,13 +49,12 @@
           "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "4",
         "index": 4,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -67,8 +64,7 @@
           "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -80,9 +76,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "5",
         "index": 5,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -92,13 +88,12 @@
           "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "6",
         "index": 6,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -108,13 +103,12 @@
           "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "7",
         "index": 7,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -124,13 +118,12 @@
           "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "8",
         "index": 8,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -140,13 +133,12 @@
           "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "9",
         "index": 9,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -156,13 +148,12 @@
           "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "10",
         "index": 10,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -172,8 +163,7 @@
           "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -185,9 +175,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "11",
         "index": 11,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -197,13 +187,12 @@
           "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "12",
         "index": 12,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -213,13 +202,12 @@
           "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "13",
         "index": 13,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -229,13 +217,12 @@
           "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "14",
         "index": 14,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -245,8 +232,7 @@
           "fi": "14.Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta opetusresurssin tarjoamiseen riittävän pitkäkestoisesti",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -258,9 +244,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "15",
         "index": 15,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -270,13 +256,12 @@
           "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "16",
         "index": 16,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -286,13 +271,12 @@
           "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "17",
         "index": 17,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -302,13 +286,12 @@
           "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "18",
         "index": 18,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -318,13 +301,12 @@
           "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "19",
         "index": 19,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -334,8 +316,7 @@
           "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -347,9 +328,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "20",
         "index": 20,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -359,13 +340,12 @@
           "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä ",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "21",
         "index": 21,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -375,13 +355,12 @@
           "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista ",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "22",
         "index": 22,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -391,13 +370,12 @@
           "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "23",
         "index": 23,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -407,8 +385,7 @@
           "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -420,9 +397,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "24",
         "index": 24,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -432,13 +409,12 @@
           "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "25",
         "index": 25,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -448,13 +424,12 @@
           "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina ",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "26",
         "index": 26,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -464,8 +439,7 @@
           "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   },
@@ -477,9 +451,9 @@
     },
     "parts": [
       {
-        "id": "",
+        "id": "27",
         "index": 27,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -489,13 +463,12 @@
           "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "28",
         "index": 28,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -505,13 +478,12 @@
           "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "29",
         "index": 29,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -521,13 +493,12 @@
           "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       },
       {
-        "id": "",
+        "id": "30",
         "index": 30,
-        "type": "",
+        "type": "FACULTY_MONITORING",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -537,8 +508,7 @@
           "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
           "se": "",
           "en": ""
-        },
-        "required": true
+        }
       }
     ]
   }

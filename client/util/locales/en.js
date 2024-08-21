@@ -170,6 +170,11 @@ export default {
     title: 'DOCUMENTATION OF THE CURRENT STATUS OF DEGREE PROGRAMME',
     metaSubtitle: 'Prioritisation of measures in degree programmes',
     metaCommentLabel: 'Other comments',
+    facultyAnswerLabel1: 'Description of what the faculty is doing',
+    facultyAnswerLabel2: 'Responsible entities',
+    facultyAnswerLabel3: 'Contact person / lead author',
+    facultyAnswerLabel4: 'Allocated resources',
+    facultyAnswerLabel5: 'Schedule',
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
     info2:
