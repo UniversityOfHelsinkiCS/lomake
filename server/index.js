@@ -42,7 +42,7 @@ if (AUTOMATIC_IAM_PERMISSIONS_ENABLED) {
 }
 
 app.use(currentUserMiddleware)
-app.use(routes)
+app.use('/api', routes)
 
 app.use(Sentry.Handlers.errorHandler())
 app.use(errorMiddleware)

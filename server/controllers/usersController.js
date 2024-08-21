@@ -1,9 +1,11 @@
 import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
-import getLastRestart from '../util/lastRestart.js'
+import lastRestart from '../util/lastRestart.js'
 import { isAdmin } from '../util/common.js'
 import sendNewTempAccessNotification from './mailController.js'
+
+const { getLastRestart } = lastRestart
 
 const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {

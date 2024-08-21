@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import io from 'socket.io-client'
 import { basePath, inProduction } from './common'
 import { getHeaders } from '../../config/mockHeaders'
