@@ -1,8 +1,8 @@
-const { Op } = require('sequelize')
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { whereDraftYear, isAdmin, isSuperAdmin } = require('../util/common')
-const { formKeys } = require('../../config/data')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { whereDraftYear, isAdmin, isSuperAdmin } from '../util/common.js'
+import { formKeys } from '../../config/data.js'
 
 /**
  * The LINJAUS function: if user has ANY access, they can see all programmes' answers
@@ -13,7 +13,7 @@ const hasAnyAccess = user => {
   return accessibleProgrammes.length > 0
 }
 
-const getAll = async (_, res) => {
+const getAll = async (_req, res) => {
   try {
     const data = await db.answer.findAll({})
     return res.send(data)
@@ -642,7 +642,8 @@ const getFacultyTempAnswersByForm = async (req, res) => {
   }
 }
 
-module.exports = {
+
+export default {
   getAll,
   getPreviousYear,
   getAllTempUserHasAccessTo,

@@ -1,5 +1,5 @@
-const db = require('../models/index')
-const logger = require('../util/logger')
+import db from '../models/index.js'
+import logger from '../util/logger.js'
 
 const getAll = async (_, res) => {
   try {
@@ -15,6 +15,4 @@ const getAll = async (_, res) => {
   }
 }
 
-module.exports = {
-  getAll,
-}
+export default { getAll }

@@ -1,9 +1,7 @@
-const os = require('os')
-
-const winston = require('winston')
-const { WinstonGelfTransporter } = require('winston-gelf-transporter')
-
-const { inProduction } = require('../../config/common')
+import os from 'os'
+import winston from 'winston'
+import { WinstonGelfTransporter } from 'winston-gelf-transporter'
+import { inProduction } from '../../config/common.js'
 
 const { combine, timestamp, printf, splat } = winston.format
 
@@ -58,4 +56,4 @@ if (inProduction) {
 
 const logger = winston.createLogger({ transports })
 
-module.exports = logger
+export default logger

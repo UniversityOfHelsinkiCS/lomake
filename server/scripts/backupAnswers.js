@@ -1,8 +1,8 @@
-const cron = require('node-cron')
-const lodash = require('lodash')
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { whereDraftYear } = require('../util/common')
+import cron from 'node-cron'
+import lodash from 'lodash'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { whereDraftYear } from '../util/common.js'
 
 const loggerPrefix = 'Cronjob::backup | '
 
@@ -51,6 +51,4 @@ const startBackupJob = () => {
   logger.info('Backup job started')
 }
 
-module.exports = {
-  startBackupJob,
-}
+export default startBackupJob

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 

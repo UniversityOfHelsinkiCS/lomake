@@ -1,6 +1,5 @@
-const db = require('../models/index')
-
-const { isAdmin } = require('../../config/common')
+import db from '../models/index.js'
+import { isAdmin } from '../../config/common.js'
 
 const currentUser = async (req, _, next) => {
   if (req.path.includes('/cypress/')) return next()
@@ -16,4 +15,4 @@ const currentUser = async (req, _, next) => {
   return next()
 }
 
-module.exports = currentUser
+export default currentUser

@@ -1,4 +1,4 @@
-const {
+import {
   isSuperAdminIam,
   isAdminIam,
   isUniversityWideIam,
@@ -12,9 +12,10 @@ const {
   facultyWideWritingGroups,
   isUniverstyFormIam,
   hrHeadsGroup,
-} = require('../../config/IAMConfig')
-const { data, committeeList } = require('../../config/data')
-const { mapToDegreeCode } = require('./common')
+} from '../../config/IAMConfig.js'
+
+import { data, committeeList } from '../../config/data.js'
+import { mapToDegreeCode } from './common.js'
 
 /**
  * Parses the header string with IAM groups separated by semicolons
@@ -294,6 +295,4 @@ const getIAMRights = hyGroupsHeader => {
   return { access, specialGroup, iamGroups }
 }
 
-module.exports = {
-  getIAMRights,
-}
+export default getIAMRights

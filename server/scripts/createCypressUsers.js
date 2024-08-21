@@ -1,6 +1,6 @@
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { cypressUsers } = require('../util/common')
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { cypressUsers } from '../../config/common.js'
 
 const createCypressUsers = async () => {
   try {
@@ -14,6 +14,7 @@ const createCypressUsers = async () => {
     logger.error(`Failed to create users for Cypress tests: ${error}`)
   }
 }
-module.exports = {
+
+export default {
   createCypressUsers,
 }

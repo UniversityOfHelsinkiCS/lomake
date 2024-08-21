@@ -1,10 +1,9 @@
-const { Op } = require('sequelize')
-const { v4: uuidv4 } = require('uuid')
-const db = require('../models/index')
-const logger = require('./logger')
-const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('../../config/common')
-const { whereDraftYear, inProduction } = require('./common')
-const { getUserByUid } = require('../services/userService')
+import { Op } from 'sequelize'
+import { v4 as uuidv4 } from 'uuid'
+import db from '../models/index.js'
+import logger from './logger.js'
+import { isAdmin, isSuperAdmin, isDevSuperAdminUid, inProduction, whereDraftYear } from './common.js'
+import getUserByUid from '../services/userService.js'
 
 let currentEditors = {}
 const SEC = 1000
@@ -233,7 +232,7 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-module.exports = {
+export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),

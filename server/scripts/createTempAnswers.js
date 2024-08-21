@@ -1,7 +1,7 @@
-const { Op } = require('sequelize')
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { getYearsArray, LOMAKE_SINCE_YEAR } = require('../../config/common')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { getYearsArray, LOMAKE_SINCE_YEAR } from '../../config/common.js'
 
 const createTempAnswers = async () => {
   logger.info(`Creating empty temp answers `)
@@ -35,4 +35,4 @@ const createTempAnswers = async () => {
   }
 }
 
-module.exports = { createTempAnswers }
+export default createTempAnswers

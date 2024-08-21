@@ -2,11 +2,12 @@
   "name": "tilku",
   "version": "1.0.0",
   "description": "Opetushallinnon tilannekuvalomake",
+  "type": "module",
   "scripts": {
     "dev": "docker compose up",
     "build": "vite build",
-    "start:prod": "cross-env NODE_ENV=production node ./server/index.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon ./server/index.js\" \"vite\"",
+    "start:prod": "cross-env NODE_ENV=production node -r esm ./server/index.js",
+    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon esm ./server/index.js\" \"vite\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
@@ -30,6 +31,7 @@
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
     "esbuild-sass-plugin": "^3.2.0",
+    "esm": "^3.2.25",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "highcharts": "^11.0.0",
@@ -65,10 +67,11 @@
     "sequelize": "^6.6.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
-    "umzug": "^2.3.0",
+    "umzug": "^3.3.1",
     "unfuck-spa-shibboleth-session": "^4.0.0",
     "uuid": "^8.3.2",
     "vite": "^5.4.0",
+    "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2"
   },
@@ -94,15 +97,6 @@
     "sequelize-cli": "^6.0.0",
     "vite-plugin-eslint": "^1.8.1"
   },
-  "nodemonConfig": {
-    "ignore": [
-      "cypress/*",
-      "dev/*",
-      "client/*",
-      "node_modules/*"
-    ],
-    "delay": 1000
-  },
   "husky": {
     "hooks": {
       "pre-commit": "./grep_is.sh && npm run lint"
@@ -119,5 +113,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "cypress/*",
+      "dev/*",
+      "client/*",
+      "node_modules/*"
+    ],
+    "watch": [
+      "server"
+    ],
+    "ext": "*.js,*.ts,*.json"
   }
 }

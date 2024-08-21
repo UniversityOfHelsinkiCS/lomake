@@ -1,8 +1,8 @@
 import React from 'react'
 import { InView } from 'react-intersection-observer'
-import { basePath, colors } from '../../../../config/common'
 import { List, Label } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { basePath, colors } from '../../../util/common'
 
 const Section = ({ id, title, number, children, programmeKey, formType }) => {
   const { t } = useTranslation('formView')

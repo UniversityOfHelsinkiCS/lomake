@@ -1,6 +1,6 @@
-export const ITEM_NAME = 'fakeUser'
+const ITEM_NAME = 'fakeUser'
 
-export const possibleUsers = [
+const possibleUsers = [
   {
     uid: 'thairaks',
     employeeNumber: undefined,
@@ -275,9 +275,9 @@ export const possibleUsers = [
   },
 ]
 
-export const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
+const cypressUids = possibleUsers.map(user => user.uid).filter(uid => uid.startsWith('cypress'))
 
-export const setHeaders = uid => {
+const setHeaders = uid => {
   const user = possibleUsers.find(u => u.uid === uid)
 
   if (!user) return
@@ -285,7 +285,7 @@ export const setHeaders = uid => {
   localStorage.setItem(ITEM_NAME, JSON.stringify(user))
 }
 
-export const removeLoggedInUsersGroups = () => {
+const removeLoggedInUsersGroups = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME))
 
   localStorage.setItem(
@@ -297,11 +297,13 @@ export const removeLoggedInUsersGroups = () => {
   )
 }
 
-export const getHeaders = () => {
+const getHeaders = () => {
   const user = JSON.parse(localStorage.getItem(ITEM_NAME) || '{}')
   return user
 }
 
-export const clearHeaders = () => {
+const clearHeaders = () => {
   localStorage.removeItem(ITEM_NAME)
 }
+
+export { possibleUsers, cypressUids, setHeaders, removeLoggedInUsersGroups, getHeaders, clearHeaders }

@@ -1,23 +1,33 @@
-const Umzug = require('umzug')
-const logger = require('../util/logger')
-const { sequelize, Sequelize } = require('../models')
+import { Sequelize } from 'sequelize'
+import pkg from 'umzug'
 
-const DB_CONNECTION_RETRY_LIMIT = 60
+import logger from '../util/logger.js'
+import { DATABASE_URL } from '../util/common.js'
+
+const DB_CONNECTION_RETRY_LIMIT = 10
+
+export const sequelize = new Sequelize(DATABASE_URL, { logging: false })
+
+const { Umzug, SequelizeStorage } = pkg
+
+const umzug = new Umzug({
+  migrations: { glob: 'migrations/*.js' },
+  context: sequelize.getQueryInterface(),
+  storage: new SequelizeStorage({ sequelize }),
+  logger: console,
+})
 
 const runMigrations = async () => {
-  const migrator = new Umzug({
-    storage: 'sequelize',
-    storageOptions: {
-      sequelize,
-    },
-    logging: msg => logger.info(msg),
-    migrations: {
-      params: [sequelize.getQueryInterface(), Sequelize],
-      path: `${process.cwd()}/migrations`,
-      pattern: /\.js$/,
-    },
+  const migrations = await umzug.up()
+
+  logger.info('Migrations up to date', {
+    migrations,
   })
-  return migrator.up()
+}
+
+const testConnection = async () => {
+  await sequelize.authenticate()
+  // await runMigrations()
 }
 
 const sleep = ms =>
@@ -25,10 +35,9 @@ const sleep = ms =>
     setTimeout(resolve, ms)
   })
 
-const initializeDatabaseConnection = async (attempt = 1) => {
+export const initializeDatabaseConnection = async (attempt = 1) => {
   try {
-    await sequelize.authenticate()
-    await runMigrations()
+    await testConnection()
     return true
   } catch (e) {
     if (attempt === DB_CONNECTION_RETRY_LIMIT) {
@@ -40,5 +49,3 @@ const initializeDatabaseConnection = async (attempt = 1) => {
     return initializeDatabaseConnection(attempt + 1)
   }
 }
-
-module.exports = { initializeDatabaseConnection }
