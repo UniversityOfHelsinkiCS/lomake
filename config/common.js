@@ -2,7 +2,7 @@
  * Insert application wide common items here
  */
 
-const { data } = require('./data')
+import { data } from './data.js'
 
 const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
 
@@ -202,7 +202,7 @@ const testFacultyName = 'Faculty of Science'
 
 const testIAM = 'hy-mltdk-tkt-jory'
 
-module.exports = {
+export {
   iamsInUse,
   inProduction,
   inStaging,

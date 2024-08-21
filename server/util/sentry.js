@@ -1,5 +1,5 @@
-const Sentry = require('@sentry/node')
-const Tracing = require('@sentry/tracing')
+import Sentry from '@sentry/node'
+import Tracing from '@sentry/tracing'
 
 const initializeSentry = app => {
   if (!(process.env.NODE_ENV === 'production')) return
@@ -13,4 +13,4 @@ const initializeSentry = app => {
   })
 }
 
-module.exports = initializeSentry
+export default initializeSentry

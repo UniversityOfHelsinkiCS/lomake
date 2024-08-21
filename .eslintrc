@@ -36,6 +36,8 @@
     "react-hooks/rules-of-hooks": "error",
     "prettier/prettier": "error",
     "no-console": "error",
+    "import/no-named-as-default-member": "off",
+    "import/extensions": "off",
     "no-param-reassign": [
       "error",
       {

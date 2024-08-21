@@ -1,6 +1,6 @@
-const { LRUCache } = require('lru-cache')
-const db = require('../models/index')
-const logger = require('../util/logger')
+import { LRUCache } from 'lru-cache'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
 
 const lru = new LRUCache({
   max: 200,
@@ -43,6 +43,4 @@ const getUserByUid = async uid => {
   return userJson
 }
 
-module.exports = {
-  getUserByUid,
-}
+export default getUserByUid

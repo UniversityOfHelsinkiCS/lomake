@@ -1,6 +1,6 @@
-const morgan = require('morgan')
-const logger = require('../util/logger')
-const { inProduction } = require('../../config/common')
+import morgan from 'morgan'
+import logger from '../util/logger.js'
+import { inProduction } from '../../config/common.js'
 
 const accessLogger = morgan((tokens, req, res) => {
   const mockingAs = req.headers['x-admin-logged-in-as']
@@ -30,4 +30,4 @@ const accessLogger = morgan((tokens, req, res) => {
   logger.info(message, additionalInfo)
 })
 
-module.exports = { accessLogger }
+export default accessLogger

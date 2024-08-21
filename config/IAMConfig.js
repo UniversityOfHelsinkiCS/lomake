@@ -1,4 +1,4 @@
-const { mapToDegreeCode } = require('./common')
+import { mapToDegreeCode } from './common.js'
 
 const joryMap = {
   'hy-ttdk-tuk-jory': '100-K001',
@@ -435,7 +435,7 @@ const relevantIAMs = []
   .concat(Object.keys(facultyWideWritingGroups))
   .concat(universityFormWritingGroups)
 
-module.exports = {
+export {
   doctoralIams,
   doctoralWritingIams,
   doctoralSchoolMap,

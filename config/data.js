@@ -1786,11 +1786,4 @@ const data = [
   },
 ]
 
-module.exports = {
-  forms,
-  formKeys,
-  data,
-  facultyMap,
-  committeeList,
-  facultyList,
-}
+export { forms, formKeys, data, facultyMap, committeeList, facultyList }

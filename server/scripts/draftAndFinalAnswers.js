@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-const { Op } = require('sequelize')
-const db = require('../models/index')
-const logger = require('../util/logger')
-const { formKeys, committeeList } = require('../../config/data')
+import { Op } from 'sequelize'
+
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { formKeys, committeeList } from '../../config/data.js'
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -195,4 +196,4 @@ const createFinalAnswers = async (newYear, form) => {
   }
 }
 
-module.exports = { createDraftAnswers, createFinalAnswers }
+export { createDraftAnswers, createFinalAnswers }

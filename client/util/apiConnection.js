@@ -9,7 +9,7 @@ import { Sentry } from './sentry'
 
 const getAxios = axios.create({ baseURL: `${basePath}api` })
 
-const callApi = async (url, method = 'get', data) => {
+export const callApi = async (url, method = 'get', data) => {
   const defaultHeaders = !inProduction ? getHeaders() : {}
   const headers = { ...defaultHeaders }
 

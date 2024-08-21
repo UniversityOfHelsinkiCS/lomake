@@ -1,12 +1,11 @@
-const { Op } = require('sequelize')
-const cron = require('node-cron')
-const moment = require('moment')
-
-const db = require('../models/index')
-const logger = require('../util/logger')
+import { Op } from 'sequelize'
+import cron from 'node-cron'
+import moment from 'moment'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { formKeys } from '../../config/data.js'
 
 const loggerPrefix = 'Cronjob::deadlineWatcher | '
-const { formKeys } = require('../../config/data')
 
 const startDeadlineWatcher = async () => {
   // 5 min before midnight: 55 23 * * *
@@ -120,6 +119,4 @@ const startDeadlineWatcher = async () => {
   logger.info('Deadline job started')
 }
 
-module.exports = {
-  startDeadlineWatcher,
-}
+export default startDeadlineWatcher

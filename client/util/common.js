@@ -2,11 +2,9 @@
  * Insert common items here
  */
 import capitalize from 'lodash/capitalize'
-
 import toscalogoColor from '../assets/toscalogo_color.svg'
 import toscalogoGrayscale from '../assets/toscalogo_grayscale.svg'
 import hy from '../assets/hy_logo.svg'
-import { formKeys, facultyList } from '../../config/data'
 
 import {
   yearlyQuestions,
@@ -15,6 +13,8 @@ import {
   degreeReformIndividualQuestions as degreeQuestionData,
   metareviewQuestions,
 } from '../questionData'
+
+import { formKeys, facultyList } from '../../config/data'
 
 export const images = {
   toska_color: toscalogoColor,

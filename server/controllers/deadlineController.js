@@ -1,8 +1,7 @@
-const db = require('../models/index')
-const logger = require('../util/logger')
-
-const { getFormType } = require('../util/common')
-const { createDraftAnswers, createFinalAnswers } = require('../scripts/draftAndFinalAnswers')
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { getFormType } from '../util/common.js'
+import { createDraftAnswers, createFinalAnswers } from '../scripts/draftAndFinalAnswers.js'
 
 const createOrUpdate = async (req, res) => {
   const { deadline, draftYear, form } = req.body
@@ -118,8 +117,4 @@ const get = async (_, res) => {
   }
 }
 
-module.exports = {
-  createOrUpdate,
-  remove,
-  get,
-}
+export default { createOrUpdate, remove, get }

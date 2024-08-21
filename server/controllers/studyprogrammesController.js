@@ -1,9 +1,8 @@
-const moment = require('moment')
-const db = require('../models/index')
-const { isAdmin, isSuperAdmin } = require('../util/common')
-const logger = require('../util/logger')
-const { getFormType } = require('../util/common')
-const { seed } = require('../scripts/seed')
+import moment from 'moment'
+import db from '../models/index.js'
+import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'
+import logger from '../util/logger.js'
+import seed from '../scripts/seed.js'
 
 const getAll = async (_, res) => {
   try {
@@ -129,11 +128,4 @@ const getOwners = async (_, res) => {
   }
 }
 
-module.exports = {
-  getAll,
-  getUsersProgrammes,
-  getOne,
-  updateAll,
-  toggleLock,
-  getOwners,
-}
+export default { getAll, getUsersProgrammes, getOne, updateAll, toggleLock, getOwners }

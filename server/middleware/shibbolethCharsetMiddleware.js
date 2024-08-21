@@ -13,4 +13,4 @@ const shibbolethCharsetMiddleware = (req, _, next) => {
   next()
 }
 
-module.exports = shibbolethCharsetMiddleware
+export default shibbolethCharsetMiddleware
