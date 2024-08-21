@@ -50,13 +50,6 @@ if (process.env.NODE_ENV === 'development') {
     )
     setHeaders(user)
   }
-
-  /* eslint-disable no-console */
-  /* eslint-disable no-restricted-globals */
-  new EventSource('http://localhost:8000/esbuild').addEventListener('change', () => {
-    location.reload()
-    console.log('Reloaded due to changes')
-  })
 }
 
 refresh()

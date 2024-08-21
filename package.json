@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "docker compose up",
     "build": "vite build",
-    "start:prod": "cross-env NODE_ENV=production node -r esm ./server/index.js",
+    "start:prod": "cross-env NODE_ENV=production node ./server/index.js",
     "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon esm ./server/index.js\" \"vite\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

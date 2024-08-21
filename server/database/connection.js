@@ -11,7 +11,7 @@ export const sequelize = new Sequelize(DATABASE_URL, { logging: false })
 const { Umzug, SequelizeStorage } = pkg
 
 const umzug = new Umzug({
-  migrations: { glob: 'migrations/*.js' },
+  migrations: { glob: 'server/database/migrations/*.js' },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize }),
   logger: console,
@@ -27,7 +27,7 @@ const runMigrations = async () => {
 
 const testConnection = async () => {
   await sequelize.authenticate()
-  // await runMigrations()
+  await runMigrations()
 }
 
 const sleep = ms =>
