@@ -71,6 +71,7 @@
     "unfuck-spa-shibboleth-session": "^4.0.0",
     "uuid": "^8.3.2",
     "vite": "^5.4.0",
+    "vite-plugin-socket-io": "^1.0.2",
     "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2"

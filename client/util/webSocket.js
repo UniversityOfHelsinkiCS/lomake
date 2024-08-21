@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import io from 'socket.io-client'
 import { basePath, inProduction } from './common'
 import { getHeaders } from '../../config/mockHeaders'
@@ -27,9 +26,11 @@ const socketMiddleware = () => {
   let isVisible = true
 
   const updateForm = store => event => {
+    console.log('Received new_form_data:', event)
     store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
   }
   const updateEditors = store => event => {
+    console.log('Received update_editors:', event)
     store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
   }
 
@@ -50,6 +51,7 @@ const socketMiddleware = () => {
       socket = connect()
       setupSocketListeners(socket)
       socket.emit('join', room, form)
+      console.log(`Socket ${socket.id} joined room ${room} for form ${form}`)
     } else if (!isVisible && socket) {
       socket.close()
       socket = null
@@ -68,22 +70,26 @@ const socketMiddleware = () => {
 
         socket = connect()
         setupSocketListeners(socket)
+        console.log('Socket connected:', socket.id)
 
         break
       case 'WS_LEAVE_ROOM':
         if (!socket) socket = connect() // This really only happens when developing.
 
         socket.emit('leave', action.room)
+        console.log(`Socket ${socket.id} left room ${action.room}`)
         break
       case 'WS_JOIN_ROOM':
         if (!socket) socket = connect()
 
         socket.emit('join', action.room, action.form)
+        console.log(`Socket ${socket.id} joined room ${action.room} for form ${action.form}`)
         break
       case 'WS_DISCONNECT':
         if (socket !== null) socket.close()
 
         socket = null
+        console.log('Socket disconnected')
         break
       case 'UPDATE_FORM_FIELD':
         if (!socket) socket = connect()
@@ -93,6 +99,7 @@ const socketMiddleware = () => {
           room,
           form: action.form,
         })
+        console.log(`Socket ${socket.id} updated field in room ${room} for form ${action.form}`)
         break
       case 'GET_LOCK':
         if (!socket) socket = connect()
@@ -101,6 +108,7 @@ const socketMiddleware = () => {
           field: action.field,
           room,
         })
+        console.log(`Socket ${socket.id} requested lock for field ${action.field} in room ${room}`)
         break
       default:
         break
