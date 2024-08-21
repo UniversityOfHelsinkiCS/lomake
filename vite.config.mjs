@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react'
+import vitePluginSocketIO from 'vite-plugin-socket-io'
 import { defineConfig } from 'vite'
 import { inStaging } from './config/common'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), vitePluginSocketIO()],
   base: inStaging ? '/tilannekuva' : '/',
   server: {
     proxy: {

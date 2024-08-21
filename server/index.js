@@ -26,6 +26,10 @@ dotenv.config()
 
 const app = express()
 
+const server = http.Server(app)
+
+createWebsocketServer(server)
+
 initializeSentry(app)
 
 app.use(Sentry.Handlers.requestHandler())
@@ -58,9 +62,6 @@ const start = async () => {
   await seed()
   await getUserList()
   await createTempAnswers()
-
-  const server = http.Server(app)
-  createWebsocketServer(server)
 
   server.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`)
