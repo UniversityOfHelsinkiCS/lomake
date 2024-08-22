@@ -31,6 +31,9 @@ const ProgrammeLevelOverview = () => {
 
   useEffect(() => {
     document.title = `${t('metareview')}`
+    if (filteredProgrammes.length === 0) {
+      dispatch(setDoctoral(!doctoral))
+    }
   }, [lang, t])
 
   return usersProgrammes.length > 0 ? (
