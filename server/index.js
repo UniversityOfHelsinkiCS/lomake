@@ -10,6 +10,7 @@ const { accessLogger } = require('@middleware/requestLoggerMiddleware')
 const userMiddleware = require('@middleware/userMiddleware')
 const currentUserMiddleware = require('@middleware/currentUserMiddleware')
 const IAMmiddleware = require('@middleware/IAMmiddleware')
+const compression = require('compression')
 const initializeSentry = require('./util/sentry')
 
 const app = express()
@@ -19,7 +20,7 @@ app.use(Sentry.Handlers.requestHandler())
 app.use(Sentry.Handlers.tracingHandler())
 
 app.use(express.json({ limit: '50mb' }))
-
+app.use(compression())
 app.use(accessLogger)
 
 app.use(shibbolethCharsetMiddleware)
