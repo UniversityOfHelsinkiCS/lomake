@@ -9,7 +9,7 @@
       {
         "id": "1",
         "index": 1,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -24,7 +24,7 @@
       {
         "id": "2",
         "index": 2,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -39,7 +39,7 @@
       {
         "id": "3",
         "index": 3,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -54,7 +54,7 @@
       {
         "id": "4",
         "index": 4,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -78,7 +78,7 @@
       {
         "id": "5",
         "index": 5,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -93,7 +93,7 @@
       {
         "id": "6",
         "index": 6,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -108,7 +108,7 @@
       {
         "id": "7",
         "index": 7,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -123,7 +123,7 @@
       {
         "id": "8",
         "index": 8,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -138,7 +138,7 @@
       {
         "id": "9",
         "index": 9,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -153,7 +153,7 @@
       {
         "id": "10",
         "index": 10,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -177,7 +177,7 @@
       {
         "id": "11",
         "index": 11,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -192,7 +192,7 @@
       {
         "id": "12",
         "index": 12,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -207,7 +207,7 @@
       {
         "id": "13",
         "index": 13,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -222,7 +222,7 @@
       {
         "id": "14",
         "index": 14,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -246,7 +246,7 @@
       {
         "id": "15",
         "index": 15,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -261,7 +261,7 @@
       {
         "id": "16",
         "index": 16,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -276,7 +276,7 @@
       {
         "id": "17",
         "index": 17,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -291,7 +291,7 @@
       {
         "id": "18",
         "index": 18,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -306,7 +306,7 @@
       {
         "id": "19",
         "index": 19,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -330,7 +330,7 @@
       {
         "id": "20",
         "index": 20,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -345,7 +345,7 @@
       {
         "id": "21",
         "index": 21,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -360,7 +360,7 @@
       {
         "id": "22",
         "index": 22,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -375,7 +375,7 @@
       {
         "id": "23",
         "index": 23,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -399,7 +399,7 @@
       {
         "id": "24",
         "index": 24,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -414,7 +414,7 @@
       {
         "id": "25",
         "index": 25,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -429,7 +429,7 @@
       {
         "id": "26",
         "index": 26,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -453,7 +453,7 @@
       {
         "id": "27",
         "index": 27,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -468,7 +468,7 @@
       {
         "id": "28",
         "index": 28,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -483,7 +483,7 @@
       {
         "id": "29",
         "index": 29,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",
@@ -498,7 +498,7 @@
       {
         "id": "30",
         "index": 30,
-        "type": "FACULTY_MONITORING",
+        "type": "FACULTY_ENTITY",
         "shortLabel": {
           "fi": "",
           "se": "",

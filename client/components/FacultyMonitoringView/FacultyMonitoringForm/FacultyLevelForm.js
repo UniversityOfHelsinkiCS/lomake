@@ -9,7 +9,7 @@ const FacultyLevelForm = ({ faculty, form, questions }) => {
   const lang = useSelector(state => state.language)
 
   const partComponentMap = {
-    FACULTY_MONITORING: FacultyEntity,
+    FACULTY_ENTITY: FacultyEntity,
   }
 
   const partMap = part => {

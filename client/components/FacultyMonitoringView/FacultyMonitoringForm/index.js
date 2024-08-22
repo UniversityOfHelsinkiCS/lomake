@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import FacultyLevelForm from './FacultyLevelForm'
 import { formKeys } from '@root/config/data'
+import NavigationSidebar from 'Components/FormView/NavigationSidebar'
+
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import { Loader } from 'semantic-ui-react'
 import { wsJoinRoom } from 'Utilities/redux/websocketReducer'
@@ -25,6 +27,7 @@ const FacultyMonitoringForm = ({ room }) => {
   return (
     <div>
       <div className="form-container">
+        <NavigationSidebar formType="faculty-monitoring" formNumber={form} programmeKey={room} />
         <div className="the-form">
           <h1>{faculty.name[lang]}</h1>
           <FacultyLevelForm room={room} questions={questions} faculty={faculty} form={form} />

@@ -12,6 +12,7 @@ import {
   evaluationQuestions,
   facultyEvaluationQuestions,
   universityEvaluationQuestions,
+  facultyMonitoringQuestions,
 } from '../../questionData'
 
 const replaceTitle = {
@@ -33,6 +34,7 @@ const questionTypesToShow = [
   'CHECKBOX',
   'ENTITY_LEVELS',
   'ENTITY_UNIVERSITY',
+  'FACULTY_ENTITY',
 ]
 
 const getIcon = filled => (filled ? 'check' : 'exclamation')
@@ -45,7 +47,7 @@ const getColor = (filled, required) => {
 }
 
 const getCorrectRomanNumeral = (number, formType) => {
-  if (formType === 'evaluation' || formType === 'meta-evaluation') {
+  if (formType === 'evaluation' || formType === 'meta-evaluation' || formType === 'faculty-monitoring') {
     return romanize(number + 1) || '0'
   }
   return romanize(number) || '0'
@@ -90,6 +92,9 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     isDegreeForm = true
   } else if (formType === 'meta-evaluation') {
     questionsToShow = questionData
+  } else if (formType === 'faculty-monitoring') {
+    linkBase = `/faculty-monitoring/form/${formNumber}/`
+    questionsToShow = facultyMonitoringQuestions
   } else if (formType === formKeys.YEARLY_ASSESSMENT) {
     linkBase = `/yearly/form/${formNumber}`
   }
@@ -101,8 +106,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
   }
 
-  let partNumber = formType === 'evaluation' ? 0 : -1
-  partNumber = formType === 'meta-evaluation' ? 0 : -1
+  let partNumber = formType === 'evaluation' || 'meta-evaluation' || 'faculty-monitoring' ? 0 : -1
 
   return (
     <div className="navigation-sidebar">
@@ -167,6 +171,14 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                         idsToCheck.push(`${id}_text`)
                       } else if (type === 'CHOOSE-RADIO' || type === 'CHOOSE-ADVANCED' || type === 'CHECKBOX') {
                         idsToCheck.push(`${id}`)
+                      } else if (type === 'FACULTY_ENTITY') {
+                        idsToCheck.push(
+                          `${id}_actions_text`,
+                          `${id}_responsible_entities_text`,
+                          `${id}_contact_person_text`,
+                          `${id}_resources_text`,
+                          `${id}_schedule_text`,
+                        )
                       } else {
                         idsToCheck.push(`${id}_1_text`)
                       }

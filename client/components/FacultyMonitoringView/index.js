@@ -14,7 +14,7 @@ const FacultyMonitoringOverview = () => {
     document.title = `${t('facultymonitoring')}`
   }, [lang, t])
 
-  return <a href="form/8/H57">to form</a>
+  return <a href="/faculty-monitoring/form/8/H57">to form</a>
 }
 
 export default FacultyMonitoringOverview
