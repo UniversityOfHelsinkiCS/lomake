@@ -37,7 +37,7 @@ const FacultyLevelForm = ({ faculty, form, questions }) => {
     const description = part.description ? part.description[lang] : undefined
     const extrainfo = part.extrainfo ? part.extrainfo[lang] : undefined
 
-    const gapStyle = { marginBottom: 70 }
+    const gapStyle = { marginBottom: 25 }
     const maxLength = part.maxLength ? part.maxLength : undefined
 
     return (
