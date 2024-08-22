@@ -109,7 +109,7 @@ const createDraftAnswers = async (newYear, form) => {
   } else {
     let toOpen = []
 
-    if (form === formKeys.EVALUATION_FACULTIES) {
+    if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
       toOpen = await db.faculty.findAll({})
     } else if (form === formKeys.EVALUATION_COMMTTEES) {
       toOpen = committeeList
