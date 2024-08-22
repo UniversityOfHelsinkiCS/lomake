@@ -203,14 +203,7 @@ const NavBar = () => {
       if (!hasAccess(access)) return null
 
       return items ? (
-        <MenuItem
-          active={items.some(item => location.pathname.includes(item.path))}
-          as={Dropdown}
-          data-cy={`nav-${key}`}
-          key={`menu-item-drop-${key}`}
-          tabIndex="-1"
-          text={t(label)}
-        >
+        <MenuItem as={Dropdown} data-cy={`nav-${key}`} key={`menu-item-drop-${key}`} tabIndex="-1" text={t(label)}>
           <Dropdown.Menu>
             {items.map(item => {
               if (!hasAccess(item.access)) return null
