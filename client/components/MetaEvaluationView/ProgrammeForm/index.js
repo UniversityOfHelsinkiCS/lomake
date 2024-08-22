@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { Loader, Button, Icon } from 'semantic-ui-react'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
-import { getFormViewRights, colors, kludge } from 'Utilities/common'
+import { getFormViewRights, colors } from 'Utilities/common'
 import { isAdmin } from '@root/config/common'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import powerlineImage from 'Assets/APowerlineTower.jpg'
@@ -71,72 +71,61 @@ const ProgrammeLevelForm = ({ room }) => {
   const questionData = questions.filter(q => q.level === level)
 
   return (
-    <div>
-      {kludge ? (
-        <div className="form-container">
-          <NavigationSidebar
-            programmeKey={room}
-            formType="meta-evaluation"
-            formNumber={form}
-            questionData={questionData}
-          />
-          <div className="the-form">
-            <div className="hide-in-print-mode">
-              <SaveIndicator />
-              <div style={{ marginBottom: '2em' }}>
-                <Button as={Link} to="/meta-evaluation" icon="arrow left" />
-              </div>
-              <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
-            </div>{' '}
-            <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
-            <h3 style={{ marginTop: '0' }} data-cy="formview-title">
-              {t('evaluation')} {year}
-            </h3>
-            <h5 style={{ marginTop: '0' }} data-cy="formview-subtitle">
-              {t('formView:metaSubtitle')}
-            </h5>
-            <div className="hide-in-print-mode">
-              <StatusMessage form={form} writeAccess={writeAccess} />
-              <p>{t('formView:infoMeta1')}</p>
-              <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
-              <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta3')}</p>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div className="big-circle-red" />
-              {t('urgent')}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div className="big-circle-yellow" />
-              {t('semiUrgent')}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div className="big-circle-green" />
-              {t('nonUrgent')}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div className="big-circle-gray" />
-              {t('irrelevant')}
-            </div>
-            <div className="info-container">
-              <a href={t('formView:metaPdfUrl')} target="_blank">
-                <h4>
-                  {t('formView:metaPdfName')} <Icon name="external" />{' '}
-                </h4>
-              </a>
-            </div>
-            <br />
-            <MetaEvaluationForm
-              questions={questionData}
-              programmeKey={programme.key}
-              summaryData={answers}
-              form={form}
-              summaryUrl={null}
-            />
+    <div className="form-container">
+      <NavigationSidebar programmeKey={room} formType="meta-evaluation" formNumber={form} questionData={questionData} />
+      <div className="the-form">
+        <div className="hide-in-print-mode">
+          <SaveIndicator />
+          <div style={{ marginBottom: '2em' }}>
+            <Button as={Link} to="/meta-evaluation" icon="arrow left" />
           </div>
+          <img alt="form-header-calendar" className="img-responsive" src={powerlineImage} />
+        </div>{' '}
+        <h1 style={{ color: colors.blue }}>{programme.name[lang]}</h1>
+        <h3 style={{ marginTop: '0' }} data-cy="formview-title">
+          {t('evaluation')} {year}
+        </h3>
+        <h5 style={{ marginTop: '0' }} data-cy="formview-subtitle">
+          {t('formView:metaSubtitle')}
+        </h5>
+        <div className="hide-in-print-mode">
+          <StatusMessage form={form} writeAccess={writeAccess} />
+          <p>{t('formView:infoMeta1')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
+          <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta3')}</p>
         </div>
-      ) : (
-        <p>Waiting for release</p>
-      )}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-red" />
+          {t('urgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-yellow" />
+          {t('semiUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-green" />
+          {t('nonUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-gray" />
+          {t('irrelevant')}
+        </div>
+        <div className="info-container">
+          <a href={t('formView:metaPdfUrl')} target="_blank" rel="noreferrer">
+            <h4>
+              {t('formView:metaPdfName')} <Icon name="external" />{' '}
+            </h4>
+          </a>
+        </div>
+        <br />
+        <MetaEvaluationForm
+          questions={questionData}
+          programmeKey={programme.key}
+          summaryData={answers}
+          form={form}
+          summaryUrl={null}
+        />
+      </div>
     </div>
   )
 }

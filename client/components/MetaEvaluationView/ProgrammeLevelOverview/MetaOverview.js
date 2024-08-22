@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import { Button, Dropdown, Menu, MenuItem, Loader } from 'semantic-ui-react'
-import { filterFromUrl, filterUserProgrammes, kludge } from 'Utilities/common'
+import { filterFromUrl, filterUserProgrammes } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
@@ -97,100 +97,94 @@ const MetaOverview = ({
   if (programmes.length < 1) <Loader active />
 
   return (
-    <div>
-      {kludge ? (
-        <>
-          {renderModal()}
-          <Menu size="large" className="filter-row" secondary>
-            <MenuItem header style={{ paddingLeft: 0 }}>
-              <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
-            </MenuItem>
-            <MenuItem>
-              <Button
-                data-cy="nav-report"
-                as={Link}
-                to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
-                secondary
-                size="big"
+    <>
+      {renderModal()}
+      <Menu size="large" className="filter-row" secondary>
+        <MenuItem header style={{ paddingLeft: 0 }}>
+          <h2 style={{ maxWidth: '16em' }}>{titleText}</h2>
+        </MenuItem>
+        <MenuItem>
+          <Button
+            data-cy="nav-report"
+            as={Link}
+            to={filter ? `meta-evaluation/answers?filter=${filter}` : 'meta-evaluation/answers'}
+            secondary
+            size="big"
+          >
+            {t('overview:readAnswers')}
+          </Button>
+        </MenuItem>
+        <MenuItem>
+          <Dropdown
+            data-cy="doctle"
+            className="button basic gray"
+            direction="left"
+            text={doctoral ? doctoralToggleText : bachelorToggleText}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() => {
+                  if (doctoral) handleDoctoralChange()
+                }}
               >
-                {t('overview:readAnswers')}
-              </Button>
-            </MenuItem>
-            <MenuItem>
-              <Dropdown
-                data-cy="doctle"
-                className="button basic gray"
-                direction="left"
-                text={doctoral ? doctoralToggleText : bachelorToggleText}
+                <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  if (!doctoral) handleDoctoralChange()
+                }}
               >
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    onClick={() => {
-                      if (doctoral) handleDoctoralChange()
-                    }}
-                  >
-                    <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => {
-                      if (!doctoral) handleDoctoralChange()
-                    }}
-                  >
-                    <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </MenuItem>
-            <MenuItem>
-              <FacultyDropdown
-                t={t}
-                programmes={programmes}
-                handleFilterChange={handleDropdownFilterChange}
-                faculties={faculties}
-                lang={lang}
-                debouncedFilter={debouncedFilter}
-              />
-            </MenuItem>
-            <MenuItem position="right">
-              <Dropdown
-                data-cy="csv-download"
-                className="button basic gray csv-download"
-                direction="left"
-                text={t('overview:csvDownload')}
-                onClick={() => setShowCsv(!showCsv)}
-              >
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="written" view="overview" form={form} />
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <CsvDownload wantedData="colors" view="overview" form={form} />
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </MenuItem>
-          </Menu>
-          <div>
-            <ColorTable
-              filteredProgrammes={filteredProgrammes}
-              setModalData={setModalData}
-              setProgramControlsToShow={setProgramControlsToShow}
-              setStatsToShow={setStatsToShow}
-              isBeingFiltered={debouncedFilter !== ''}
-              handleFilterChange={handleFilterChange}
-              filterValue={filter}
-              form={form}
-              formType={formType}
-              showAllProgrammes={showAllProgrammes}
-              handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
-              meta
-            />
-          </div>
-        </>
-      ) : (
-        <p>Waiting for release</p>
-      )}
-    </div>
+                <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </MenuItem>
+        <MenuItem>
+          <FacultyDropdown
+            t={t}
+            programmes={programmes}
+            handleFilterChange={handleDropdownFilterChange}
+            faculties={faculties}
+            lang={lang}
+            debouncedFilter={debouncedFilter}
+          />
+        </MenuItem>
+        <MenuItem position="right">
+          <Dropdown
+            data-cy="csv-download"
+            className="button basic gray csv-download"
+            direction="left"
+            text={t('overview:csvDownload')}
+            onClick={() => setShowCsv(!showCsv)}
+          >
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <CsvDownload wantedData="written" view="overview" form={form} />
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <CsvDownload wantedData="colors" view="overview" form={form} />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </MenuItem>
+      </Menu>
+      <div>
+        <ColorTable
+          filteredProgrammes={filteredProgrammes}
+          setModalData={setModalData}
+          setProgramControlsToShow={setProgramControlsToShow}
+          setStatsToShow={setStatsToShow}
+          isBeingFiltered={debouncedFilter !== ''}
+          handleFilterChange={handleFilterChange}
+          filterValue={filter}
+          form={form}
+          formType={formType}
+          showAllProgrammes={showAllProgrammes}
+          handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
+          meta
+        />
+      </div>
+    </>
   )
 }
 
