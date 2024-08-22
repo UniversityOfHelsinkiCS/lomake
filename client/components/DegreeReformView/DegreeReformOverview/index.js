@@ -10,12 +10,12 @@ import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { getForm, filterFromUrl } from 'Utilities/common'
 import { getFacultyReformAnswers, getUniversityReformAnswers } from 'Utilities/redux/reformAnswerReducer'
+import YearSelector from 'Components/Generic/YearSelector'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import { degreeReformIndividualQuestions as questionData } from '../../../questionData'
 import { TextQuestionGroup } from '../../ReformAnswers'
-import YearSelector from 'Components/Generic/YearSelector'
 
 const TextualAnswers = ({ reformAnswers }) => {
   const { data } = reformAnswers

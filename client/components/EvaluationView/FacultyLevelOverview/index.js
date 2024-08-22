@@ -10,10 +10,10 @@ import YearSelector from 'Components/Generic/YearSelector'
 import CustomModal from 'Components/Generic/CustomModal'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CsvDownload from 'Components/Generic/CsvDownload'
+import { formKeys } from '@root/config/data'
 import FacultyColorTable from './FacultyColorTable'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyCellModal from './FacultyCellModal'
-import { formKeys } from '@root/config/data'
 
 export default () => {
   const { t } = useTranslation()
@@ -23,7 +23,6 @@ export default () => {
   const [accordionsOpen, setAccordionsOpen] = useState({})
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
-  const year = useSelector(state => state.filters.year)
   const lang = useSelector(state => state.language)
   const currentUser = useSelector(state => state.currentUser.data)
   const faculties = useSelector(({ faculties }) => faculties.data)

@@ -4,12 +4,12 @@ import { Loader, Header } from 'semantic-ui-react'
 
 import { answersByYear, getYearToShow } from 'Utilities/common'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import TableHeader from './CommitteeTableHeader'
 import TableRow from './CommitteeTableRow'
 import './OverviewPage.scss'
 import { universityEvaluationQuestions as questions } from '../../../questionData'
 import { committeeList } from '../../../../config/data'
-import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 
 const CommitteeColorTable = React.memo(({ setModalData, form, formType, setProgramControlsToShow, selectedLevels }) => {
   const dispatch = useDispatch()

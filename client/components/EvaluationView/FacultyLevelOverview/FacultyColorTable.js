@@ -36,7 +36,7 @@ const FacultyColorTable = React.memo(
     const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
 
     const filterYear = useSelector(({ filters }) => filters.year)
-    const year = filterYear ? filterYear : new Date().getFullYear()
+    const year = filterYear || new Date().getFullYear()
 
     useEffect(() => {
       dispatch(setYear(year))
