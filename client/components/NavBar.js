@@ -51,8 +51,8 @@ const NavBarItems = {
         access: ['programme', 'special'],
       },
       {
-        key: 'faculty-evaluation',
-        label: 'facultyevaluation',
+        key: 'faculty-monitoring',
+        label: 'facultymonitoring',
         path: '',
         access: [],
         disabled: true,

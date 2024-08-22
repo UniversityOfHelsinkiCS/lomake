@@ -6,6 +6,7 @@ const formKeys = {
   EVALUATION_FACULTIES: 5,
   EVALUATION_COMMTTEES: 6,
   META_EVALUATION: 7,
+  FACULTY_MONITORING: 8,
 }
 
 const forms = [
@@ -42,6 +43,11 @@ const forms = [
   {
     key: 7,
     name: 'Katselmus - toimeenpano',
+    type: 'evaluation',
+  },
+  {
+    key: 8,
+    name: 'Toimenpiteiden toteutus ja seuranta tiedekunnissa',
     type: 'evaluation',
   },
 ]

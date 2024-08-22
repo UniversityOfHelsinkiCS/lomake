@@ -28,40 +28,40 @@ const FacultyEntity = ({ id, label, required, number, form, kludge }) => {
         <TrafficLights id={id} form={form} />
       </div>
       <Textarea
-        id={`${id}_answer_1`}
-        label={`${t('formView:facultyAnswerLabel1')}`}
+        id={`${id}_actions`}
+        label={`${t('formView:facultyActionsLabel')}`}
         form={form}
         kludge={kludge}
         marginTop="0"
       />
       <br />
       <Textarea
-        id={`${id}_answer_2`}
-        label={`${t('formView:facultyAnswerLabel2')}`}
+        id={`${id}_responsible_entities`}
+        label={`${t('formView:facultyEntitiesLabel')}`}
         form={form}
         kludge={kludge}
         marginTop="0"
       />
       <br />
       <Textarea
-        id={`${id}_answer_3`}
-        label={`${t('formView:facultyAnswerLabel3')}`}
+        id={`${id}_contact_person`}
+        label={`${t('formView:facultyContactLabel')}`}
         form={form}
         kludge={kludge}
         marginTop="0"
       />
       <br />
       <Textarea
-        id={`${id}_answer_4`}
-        label={`${t('formView:facultyAnswerLabel4')}`}
+        id={`${id}_resources`}
+        label={`${t('formView:facultyResourcesLabel')}`}
         form={form}
         kludge={kludge}
         marginTop="0"
       />
       <br />
       <Textarea
-        id={`${id}_answer_5`}
-        label={`${t('formView:facultyAnswerLabel5')}`}
+        id={`${id}_schedule`}
+        label={`${t('formView:facultyScheduleLabel')}`}
         form={form}
         kludge={kludge}
         marginTop="0"

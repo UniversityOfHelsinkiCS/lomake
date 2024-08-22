@@ -614,6 +614,9 @@ export const getFormType = form => {
   if (form === formKeys.META_EVALUATION) {
     return 'evaluation-committee'
   }
+  if (form === formKeys.FACULTY_MONITORING) {
+    return 'faculty-monitoring'
+  }
 
   return 'yearly'
 }
