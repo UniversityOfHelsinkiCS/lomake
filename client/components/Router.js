@@ -28,7 +28,7 @@ import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelA
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
-import FacultyMonitoringOverview from 'Components/FacultyMonitoringView'
+import FacultyMonitoringOverview from 'Components/FacultyMonitoringView/FacultyMonitoringOverview'
 import FacultyMonitoringForm from 'Components/FacultyMonitoringView/FacultyMonitoringForm'
 
 export default () => (
