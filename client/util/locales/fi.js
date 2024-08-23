@@ -324,7 +324,7 @@ export default {
     levelFilter: 'Vastaukset koulutusasteittain',
     measureLabel: 'Lisätkää 1-5 toimenpidettä.',
     noPermissions:
-      'Sinulla ei ole oikeuksia millekään koulutusohjelmalle. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
+      'Sinulla ei ole käyttöoikeuksia näkymään {{requestedForm}}. Ota yhteyttä opetuksen strategisiin palveluihin tai koulutusohjelman johtajaan.',
     nowShowing: {
       programmes: 'VASTAUKSISSA MUKANA OLEVAT OHJELMAT:',
       faculties: 'VASTAUKSISSA MUKANA OLEVAT TIEDEKUNNAT:',

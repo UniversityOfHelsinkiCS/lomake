@@ -185,7 +185,7 @@ export default () => {
 
   if (!user || !usersProgrammes) return null
   if (!isAdmin(user) && usersProgrammes.length <= 5) history.push('/yearly')
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('comparison:compare')} />
 
   if (filters.form === formKeys.EVALUATION_FACULTIES) {
     const paneOptions = panes.filter(pane => pane.index === 1)

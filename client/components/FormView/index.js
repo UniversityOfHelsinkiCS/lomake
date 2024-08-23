@@ -93,7 +93,7 @@ const FormView = ({ room }) => {
   if (!room) return <Redirect to="/" />
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} />
+  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
   return singleProgramPending || !programme ? (
     <Loader active />

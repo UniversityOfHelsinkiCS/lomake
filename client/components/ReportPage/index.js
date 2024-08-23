@@ -132,7 +132,7 @@ export default () => {
   ]
 
   if (!usersProgrammes || !selectedAnswers) return <div />
-  if (usersProgrammes.length < 1) return <NoPermissions t={t} />
+  if (usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('report:reportPage')} />
 
   return (
     <div className="report">

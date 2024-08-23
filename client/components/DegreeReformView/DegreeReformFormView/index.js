@@ -85,7 +85,7 @@ const DegreeReformFormView = ({ room }) => {
 
   if (!room) return <Redirect to="/" />
 
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} />
+  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('degree-reform')} />
 
   const formType = 'degree-reform'
   return (

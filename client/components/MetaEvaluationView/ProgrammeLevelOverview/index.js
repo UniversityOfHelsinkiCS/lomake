@@ -30,7 +30,7 @@ const ProgrammeLevelOverview = () => {
   const filteredProgrammes = usersProgrammes.filter(filterState)
 
   useEffect(() => {
-    document.title = `${t('metareview')}`
+    document.title = `${t('metaevaluation')}`
     if (filteredProgrammes.length === 0) {
       dispatch(setDoctoral(!doctoral))
     }
@@ -51,7 +51,7 @@ const ProgrammeLevelOverview = () => {
       setShowAllProgrammes={setShowAllProgrammes}
     />
   ) : (
-    <NoPermissions t={t} />
+    <NoPermissions t={t} requestedForm={t('metaevaluation')} />
   )
 }
 

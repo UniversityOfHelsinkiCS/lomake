@@ -215,7 +215,7 @@ const CommitteeFormView = ({ room, formString }) => {
   if (!room || !form) return <Redirect to="/" />
   if (!committee) return 'Error: Invalid url.'
   if (!user.access[committee.code] && !hasRights(user)) {
-    return <NoPermissions t={t} />
+    return <NoPermissions t={t} requestedForm={t('evaluation')} />
   }
   return (
     <div>

@@ -162,7 +162,7 @@ const EvaluationFormView = ({ room, formString }) => {
 
   if (!programme && !singleProgramPending) return 'Error: Invalid url.'
 
-  if (!readAccess && !writeAccess) return <NoPermissions t={t} />
+  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('evaluation')} />
 
   return singleProgramPending ? (
     <Loader active />

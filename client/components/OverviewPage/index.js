@@ -164,7 +164,7 @@ export default () => {
         </>
       ) : (
         <>
-          {false && <NoPermissions t={t} />}
+          {false && <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />}
           <div data-cy="no-permissions-message">
             <a href="https://opetushallinto.cs.helsinki.fi/tilannekuva/evaluation-university/">
               {t('overview:toKatselmus')}

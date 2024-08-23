@@ -91,7 +91,7 @@ const Homepage = () => {
   if (!usersProgrammes) return <Loader active />
 
   if (usersProgrammes.length + Object.keys(currentUser.data.access).length < 1) {
-    return <NoPermissions t={t} />
+    return <NoPermissions t={t} requestedForm={t('landingPage:title')} />
   }
 
   return (

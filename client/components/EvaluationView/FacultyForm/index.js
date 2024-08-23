@@ -218,7 +218,7 @@ const FacultyFormView = ({ room, formString }) => {
   if (!faculty) return 'Error: Invalid url.'
 
   if (!hasReadRights) {
-    return <NoPermissions t={t} />
+    return <NoPermissions t={t} requestedForm={t('evaluation')} />
   }
 
   return (

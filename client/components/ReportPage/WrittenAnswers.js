@@ -37,7 +37,7 @@ const WrittenAnswers = ({
   }
 
   // (!metaEvaluation) to check if both are true
-  if (!meta && usersProgrammes.length < 1) return <NoPermissions t={t} />
+  if (!meta && usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('report:reportPage')} />
 
   if (allAnswers.size < 1) {
     return <h3 data-cy="report-no-data">{t('noData')}</h3>

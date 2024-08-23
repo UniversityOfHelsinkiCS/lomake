@@ -308,7 +308,8 @@ export default {
     compareLevel: 'Jämför enligt utbildningsnivå',
     levelFilter: 'Filtrera enligt utbildningsnivå',
     measureLabel: 'Lägg till 1-5 åtgärder.',
-    noPermissions: 'Ingen åtkomst. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
+    noPermissions:
+      'Du har inte åtkomsträttigheter för att se {{requestedForm}}. För att få åtkomst, kontakta utbildningsprogrammets ledare.',
     nowShowing: {
       programmes: 'PROGRAM MED I SVAREN',
       faculties: 'FAKULTETER MED I SVAREN',

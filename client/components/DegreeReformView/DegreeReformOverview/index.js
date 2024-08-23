@@ -272,7 +272,7 @@ export default () => {
           {textualVisible && <TextualAnswers reformAnswers={reformAnswers} />}
         </>
       ) : (
-        <NoPermissions t={t} />
+        <NoPermissions t={t} requestedForm={t('degree-reform')} />
       )}
     </>
   )
