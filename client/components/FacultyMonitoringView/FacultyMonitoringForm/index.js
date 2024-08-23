@@ -23,6 +23,8 @@ const FacultyMonitoringForm = ({ room }) => {
   const form = formKeys.FACULTY_MONITORING
   const year = 2024
   const user = useSelector(state => state.currentUser.data)
+  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+  // currently using faculty evaluation write rights and no check for read rights, this should be reviewed
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} - ${room}`
@@ -49,6 +51,7 @@ const FacultyMonitoringForm = ({ room }) => {
             {t('facultymonitoring')} {year}
           </h3>
           <div className="hide-in-print-mode">
+            <StatusMessage form={form} writeAccess={hasWriteRights} />
             <p>{t('formView:infoMeta1')}</p>
             <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta2')}</p>
             <p style={{ marginBottom: '10px' }}>{t('formView:infoMeta3')}</p>
