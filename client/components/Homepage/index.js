@@ -9,6 +9,7 @@ import rypsiImage from 'Assets/rypsi.jpg'
 import wheelImage from 'Assets/big_wheel.jpg'
 import calendarImage from 'Assets/calendar.jpg'
 import powerlineImage from 'Assets/APowerlineTower.jpg'
+import libraryImage from 'Assets/library.jpg'
 import { PageItem, FormCard } from '../Generic/Homepage'
 
 const Homepage = () => {
@@ -81,6 +82,19 @@ const Homepage = () => {
       forms: [7],
       thumbnail: powerlineImage,
     },
+    {
+      hide: true,
+      show: false,
+      title: t('facultymonitoring'),
+      content: (
+        <div>
+          <p>{t('facultymonitoringText')}</p>
+        </div>
+      ),
+      links: ['/faculty-monitoring'],
+      forms: [8],
+      thumbnail: libraryImage,
+    },
   ]
 
   const getItem = formId => {
@@ -122,7 +136,7 @@ const Homepage = () => {
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
-                  return <FormCard key={dl.form} item={item} dl={dl} t={t} />
+                  return !item.hide && <FormCard key={dl.form} item={item} dl={dl} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>
