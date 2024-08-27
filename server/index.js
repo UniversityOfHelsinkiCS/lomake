@@ -1,6 +1,7 @@
 import express from 'express'
 import Sentry from '@sentry/node'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import http from 'http'
 import dotenv from 'dotenv'
 import startBackupJob from './scripts/backupAnswers.js'
@@ -21,6 +22,11 @@ import routes from './util/routes.js'
 import initializeSentry from './util/sentry.js'
 import createWebsocketServer from './websocket.js'
 import { initializeDatabaseConnection } from './database/connection.js'
+
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url)
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = path.dirname(__filename)
 
 dotenv.config()
 
@@ -51,7 +57,7 @@ app.use('/api', routes)
 app.use(Sentry.Handlers.errorHandler())
 app.use(errorMiddleware)
 
-if (inProduction || inStaging) {
+if (true || inProduction || inStaging) {
   const DIST_PATH = path.resolve(__dirname, '../../build')
   const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
   app.use(express.static(DIST_PATH))
