@@ -67,7 +67,7 @@ export default () => {
       dispatch(wsConnect())
     }
 
-    initShibbolethPinger(60000, null, true) // Errors are handled in lomake
+    initShibbolethPinger(60000, null, false) // Errors are handled in lomake
   }, [])
 
   // Do this after user.data is ready, so that there wont be dupe users in db.
