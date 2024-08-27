@@ -106,7 +106,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
     formDataFilter = form.answerLevels && form.answerLevels.length > 0 ? form.answerLevels : null
   }
 
-  let partNumber = formType === 'evaluation' || 'meta-evaluation' || 'faculty-monitoring' ? 0 : -1
+  let partNumber =
+    formType === 'evaluation' || formType === 'meta-evaluation' || formType === 'faculty-monitoring' ? 0 : -1
 
   return (
     <div className="navigation-sidebar">

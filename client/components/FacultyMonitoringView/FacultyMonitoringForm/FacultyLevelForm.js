@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { formKeys } from '@root/config/data'
 import FacultyEntity from 'Components/Generic/FacultyEntity'
 import { colors, romanize } from 'Utilities/common'
 import FacultyLevelSection from './FacultyLevelSection'

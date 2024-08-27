@@ -3,7 +3,7 @@ import { Menu, MenuItem } from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom'
 
-const MonitoringOverview = ({ t, lang, faculties, form, formType }) => {
+const MonitoringOverview = ({ t, lang, faculties, form }) => {
   const filteredFaculties = useMemo(
     () =>
       faculties

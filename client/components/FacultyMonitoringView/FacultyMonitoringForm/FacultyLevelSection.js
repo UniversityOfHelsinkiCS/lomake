@@ -1,7 +1,7 @@
 import React from 'react'
 import { colors } from 'Utilities/common'
 
-const FacultyLevelSection = ({ title, number, children, faculty }) => {
+const FacultyLevelSection = ({ title, number, children }) => {
   return (
     <>
       <div data-cy={`form-section-${number}`} id={number || '0'}>
