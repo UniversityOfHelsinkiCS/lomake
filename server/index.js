@@ -57,8 +57,8 @@ app.use('/api', routes)
 app.use(Sentry.Handlers.errorHandler())
 app.use(errorMiddleware)
 
-if (true || inProduction || inStaging) {
-  const DIST_PATH = path.resolve(__dirname, '../../build')
+if (inProduction || inStaging) {
+  const DIST_PATH = path.resolve(__dirname, '../build')
   const INDEX_PATH = path.resolve(DIST_PATH, 'index.html')
   app.use(express.static(DIST_PATH))
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
