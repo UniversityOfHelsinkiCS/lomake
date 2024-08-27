@@ -54,7 +54,7 @@ export const FormCard = ({ item, dl, t }) => (
         />
       </div>
       <Item.Content>
-        <ItemHeader as="h3">{item.title}</ItemHeader>
+        <ItemHeader as="h2">{item.parent}</ItemHeader>
         <ItemMeta>
           <span>
             <DateItem timestamp={dl.date} t={t} />

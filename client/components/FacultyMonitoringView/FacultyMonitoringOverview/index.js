@@ -15,9 +15,7 @@ const FacultyMonitoringOverview = () => {
     document.title = `${t('facultymonitoring')}`
   }, [lang, t])
 
-  return (
-    <MonitoringOverview t={t} lang={lang} faculties={faculties} form={form} formType={formType}></MonitoringOverview>
-  )
+  return <MonitoringOverview t={t} lang={lang} faculties={faculties} form={form} formType={formType} />
 }
 
 export default FacultyMonitoringOverview

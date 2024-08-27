@@ -125,14 +125,14 @@ export default {
     title: 'Status Report Form',
     subTitle: 'Platform for monitoring and evaluating the activities of the degree programmes',
     yearlyAssessmentTitle: 'Annual follow-up',
-    yearlyAssessmentSubtitles: ['Annual follow-up forms and summaries of the degree programmes 2019'],
+    yearlyAssessmentSubtitles: ['Annual follow-up forms and summaries of the degree programmes since 2019'],
     evaluationTitle: 'Review 2024',
     evaluationSubtitles: [
       'Review forms and summaries ',
       'Forms and summaries for implementing and monitoring the measures',
     ],
     degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
-    degreeReformSubtitles: ['Current state of education', 'Survey and summaries 2024'],
+    degreeReformSubtitles: ['Current state of education survey and summaries 2024'],
   },
 
   comparison: {

@@ -53,6 +53,7 @@ const Homepage = () => {
       links: ['/yearly'],
       forms: [1],
       thumbnail: rypsiImage,
+      parent: t('landingPage:yearlyAssessmentTitle'),
     },
     {
       show: access,
@@ -61,6 +62,7 @@ const Homepage = () => {
       links: [],
       forms: [4, 5, 6],
       thumbnail: calendarImage,
+      parent: t('evaluation'),
     },
     {
       show: access,
@@ -81,6 +83,7 @@ const Homepage = () => {
       links: ['/meta-evaluation'],
       forms: [7],
       thumbnail: powerlineImage,
+      parent: t('evaluation'),
     },
     {
       hide: true,
@@ -94,6 +97,7 @@ const Homepage = () => {
       links: ['/faculty-monitoring'],
       forms: [8],
       thumbnail: libraryImage,
+      parent: t('evaluation'),
     },
   ]
 
@@ -125,7 +129,7 @@ const Homepage = () => {
                   item.show && (
                     <Fragment key={item.title}>
                       <PageItem title={item.title} content={item.content} />
-                      {index !== items.length - 2 ? <Divider section /> : null}
+                      {index !== items.length - 3 ? <Divider section /> : null}
                     </Fragment>
                   ),
               )}

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import FacultyLevelForm from './FacultyLevelForm'
 import { formKeys } from '@root/config/data'
 import NavigationSidebar from 'Components/FormView/NavigationSidebar'
 import libaryImage from 'Assets/library.jpg'
@@ -13,6 +12,7 @@ import { Loader, Button, Icon } from 'semantic-ui-react'
 import { wsJoinRoom } from 'Utilities/redux/websocketReducer'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import { isAdmin } from '@root/config/common'
+import FacultyLevelForm from './FacultyLevelForm'
 
 const FacultyMonitoringForm = ({ room }) => {
   const { t } = useTranslation()

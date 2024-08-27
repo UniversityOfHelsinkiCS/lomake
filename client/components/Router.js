@@ -25,11 +25,11 @@ import UniversityFormView from 'Components/EvaluationView/UniversityForm'
 import ProgrammeLevelMetaOverview from 'Components/MetaEvaluationView/ProgrammeLevelOverview'
 import ProgrammeLevelMetaForm from 'Components/MetaEvaluationView/ProgrammeForm'
 import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelAnswers'
+import FacultyMonitoringOverview from 'Components/FacultyMonitoringView/FacultyMonitoringOverview'
+import FacultyMonitoringForm from 'Components/FacultyMonitoringView/FacultyMonitoringForm'
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
-import FacultyMonitoringOverview from 'Components/FacultyMonitoringView/FacultyMonitoringOverview'
-import FacultyMonitoringForm from 'Components/FacultyMonitoringView/FacultyMonitoringForm'
 
 export default () => (
   <div className="content">

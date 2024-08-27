@@ -139,14 +139,14 @@ export default {
     title: 'Tilannekuvalomake',
     subTitle: 'Helsingin yliopiston koulutusohjelmien toiminnan seurannan ja arvioinnin alusta',
     yearlyAssessmentTitle: 'Vuosiseuranta',
-    yearlyAssessmentSubtitles: ['Koulutusohjelmien vuosiseurannan lomakkeet ja yhteenvedot 2019'],
+    yearlyAssessmentSubtitles: ['Koulutusohjelmien vuosiseurannan lomakkeet ja yhteenvedot vuodesta 2019 lähtien'],
     evaluationTitle: 'Katselmus 2024',
     evaluationSubtitles: [
       'Katselmuksen lomakkeet ja yhteenvedot',
       'Toimenpiteiden toteutuksen ja seurannan lomakkeet sekä yhteenvedot',
     ],
     degreeReformTitle: 'Koulutusuudistuksen (Iso Pyörä 2015) arviointi',
-    degreeReformSubtitles: ['Koulutuksen nykytila', 'Kysely ja yhteenvedot 2024'],
+    degreeReformSubtitles: ['Koulutuksen nykytila ja yhteenvedot 2024'],
   },
 
   comparison: {
