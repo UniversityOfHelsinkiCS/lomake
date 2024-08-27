@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  updateFormField,
-  getLockHttp,
-  updateFormFieldExp,
-  postIndividualFormPartialAnswer,
-} from '../../util/redux/formReducer'
-import { formKeys } from '../../../config/data'
 
-import { releaseFieldLocally } from '../../util/redux/currentEditorsReducer'
 import { Loader, Button, Message } from 'semantic-ui-react'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import { draftToMarkdown, markdownToDraft } from 'markdown-draft-js'
 import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
+import { releaseFieldLocally } from '../../util/redux/currentEditorsReducer'
+import { formKeys } from '../../../config/data'
+import {
+  updateFormField,
+  getLockHttp,
+  updateFormFieldExp,
+  postIndividualFormPartialAnswer,
+} from '../../util/redux/formReducer'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { Sentry } from '../../util/sentry'
 

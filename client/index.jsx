@@ -1,4 +1,3 @@
-import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -14,6 +13,7 @@ import { basePath } from '../config/common'
 
 import './util/i18n'
 import { initSentry } from './util/sentry'
+import se from './util/locales/se'
 
 if (process.env.NODE_ENV === 'production') {
   initSentry()

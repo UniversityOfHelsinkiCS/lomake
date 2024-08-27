@@ -1,17 +1,20 @@
 import react from '@vitejs/plugin-react'
-import vitePluginSocketIO from 'vite-plugin-socket-io'
 import { defineConfig } from 'vite'
 import { inStaging } from './config/common'
 
 export default defineConfig({
-  plugins: [react(), vitePluginSocketIO()],
+  plugins: [react()],
   base: inStaging ? '/tilannekuva' : '/',
   server: {
     proxy: {
-      '/api/': {
+      '/api': {
         target: 'http://localhost:8001',
         changeOrigin: true,
-        secure: false,
+      },
+      '/socket.io': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        ws: true,
       },
     },
     watch: {
