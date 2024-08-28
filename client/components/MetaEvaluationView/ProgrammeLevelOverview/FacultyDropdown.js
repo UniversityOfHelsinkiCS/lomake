@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, MenuItem } from 'semantic-ui-react'
 
 const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilter }) => {
   const [dropdownText, setDropdownText] = useState(t('chooseFaculty'))
@@ -26,30 +26,32 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
   }
 
   return (
-    <Dropdown
-      data-cy="faculty-dropdown"
-      text={dropdownText}
-      className="button basic gray csv-download"
-      direction="left"
-      style={{ whiteSpace: 'nowrap', minWidth: 'max-content' }}
-    >
-      <Dropdown.Menu>
-        <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
-          {t('report:all')}
-        </Dropdown.Item>
-        {faculties?.data
-          .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-          .map(faculty => (
-            <Dropdown.Item
-              data-cy={`dropdown-item-${faculty.code}`}
-              key={faculty.code}
-              onClick={() => handleDropdownFilter(faculty)}
-            >
-              {faculty.name[lang]}
-            </Dropdown.Item>
-          ))}
-      </Dropdown.Menu>
-    </Dropdown>
+    <MenuItem>
+      <Dropdown
+        data-cy="faculty-dropdown"
+        text={dropdownText}
+        className="button basic gray csv-download"
+        direction="left"
+        style={{ whiteSpace: 'nowrap', minWidth: 'max-content' }}
+      >
+        <Dropdown.Menu>
+          <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
+            {t('report:all')}
+          </Dropdown.Item>
+          {faculties?.data
+            .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
+            .map(faculty => (
+              <Dropdown.Item
+                data-cy={`dropdown-item-${faculty.code}`}
+                key={faculty.code}
+                onClick={() => handleDropdownFilter(faculty)}
+              >
+                {faculty.name[lang]}
+              </Dropdown.Item>
+            ))}
+        </Dropdown.Menu>
+      </Dropdown>
+    </MenuItem>
   )
 }
 

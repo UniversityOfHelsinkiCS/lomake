@@ -117,7 +117,7 @@ const ColorTable = React.memo(
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-    const doctoral = useSelector(state => state.doctoral)
+    const { isDoctoral } = useSelector(state => state.degree)
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
@@ -160,11 +160,12 @@ const ColorTable = React.memo(
 
       questionsToShow = degreeReformQuestions
     } else if (formType === 'meta-evaluation') {
-      if (doctoral) questionsToShow = metareviewQuestions.filter(a => a.level === 'tohtori')
+      if (isDoctoral) questionsToShow = metareviewQuestions.filter(a => a.level === 'doctoral')
       else questionsToShow = metareviewQuestions.filter(a => a.level === 'kandimaisteri')
     }
     let tableIds = null
 
+    console.log(questionsToShow)
     const generateKey = label => {
       return `${label}_${new Date().getTime()}`
     }
@@ -228,9 +229,10 @@ const ColorTable = React.memo(
     let tableClassName = ''
     if (formType === 'evaluation') {
       tableClassName = '-evaluation'
-    } else if (meta && !doctoral) {
+    } else if (meta && !isDoctoral) {
       tableClassName = '-meta-evaluation'
-    } else if (meta && doctoral) {
+    } else if (meta && isDoctoral) {
+      console.log(isDoctoral)
       tableClassName = '-meta-doctoral'
     } else if (formType === 'degree-reform') {
       if (!facultyView) {
@@ -337,33 +339,33 @@ const ColorTable = React.memo(
           <div className="sticky-header" style={{ marginTop: '1em' }} />
           {!showAllProgrammes && facultyView
             ? sortedFacultyProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })
             : sortedAllProgrammes.map(p => {
-                return (
-                  <TableRow
-                    p={p}
-                    selectedAnswers={selectedAnswers}
-                    tableIds={tableIds}
-                    setModalData={setModalData}
-                    setProgramControlsToShow={setProgramControlsToShow}
-                    key={p.key}
-                    formType={formType}
-                    form={form}
-                  />
-                )
-              })}
+              return (
+                <TableRow
+                  p={p}
+                  selectedAnswers={selectedAnswers}
+                  tableIds={tableIds}
+                  setModalData={setModalData}
+                  setProgramControlsToShow={setProgramControlsToShow}
+                  key={p.key}
+                  formType={formType}
+                  form={form}
+                />
+              )
+            })}
         </div>
       </>
     )

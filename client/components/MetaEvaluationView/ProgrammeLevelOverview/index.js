@@ -4,22 +4,29 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
-import { setDoctoral } from 'Utilities/redux/doctoralReducer'
+import { setLevel } from 'Utilities/redux/degreeReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
+  const { selectedLevel } = useSelector(state => state.degree)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties)
   const programmes = useSelector(({ studyProgrammes }) => studyProgrammes.data)
-  const doctoral = useSelector(state => state.doctoral)
   const form = formKeys.META_EVALUATION
   const formType = 'meta-evaluation'
 
-  const filterState = useMemo(() => (doctoral ? a => a.key.startsWith('T') : a => !a.key.startsWith('T')), [doctoral])
+  const filterState = useMemo(() => {
+    return a => {
+      if (selectedLevel === 'bachelor') return a.level === 'bachelor'
+      if (selectedLevel === 'master') return a.level === 'master'
+      if (selectedLevel === 'doctoral') return a.level === 'doctoral'
+      return a.level !== 'doctoral'
+    }
+  }, [selectedLevel])
 
   const usersProgrammes = useVisibleOverviewProgrammes({
     currentUser,
@@ -31,8 +38,8 @@ const ProgrammeLevelOverview = () => {
 
   useEffect(() => {
     document.title = `${t('metaevaluation')}`
-    if (filteredProgrammes.length === 0) {
-      dispatch(setDoctoral(!doctoral))
+    if (filteredProgrammes.length === 0 && selectedLevel !== 'doctoral') {
+      dispatch(setLevel('doctoral'))
     }
   }, [lang, t])
 
@@ -45,8 +52,6 @@ const ProgrammeLevelOverview = () => {
       programmes={filteredProgrammes}
       form={form}
       formType={formType}
-      doctoral={doctoral}
-      setDoctoral={setDoctoral}
       showAllProgrammes={showAllProgrammes}
       setShowAllProgrammes={setShowAllProgrammes}
     />

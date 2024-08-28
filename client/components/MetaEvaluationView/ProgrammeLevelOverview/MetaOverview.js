@@ -7,13 +7,12 @@ import useDebounce from 'Utilities/useDebounce'
 
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
-import { useSelector } from 'react-redux'
-import { setDoctoral } from 'Utilities/redux/doctoralReducer'
 import { basePath } from '@root/config/common'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
 import FacultyDropdown from './FacultyDropdown'
+import DegreeDropdown from './DegreeDropdown'
 
 const MetaOverview = ({
   t,
@@ -26,32 +25,23 @@ const MetaOverview = ({
   showAllProgrammes,
   setShowAllProgrammes,
 }) => {
-  const doctoral = useSelector(state => state.doctoral)
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
   const [showCsv, setShowCsv] = useState(false)
   const [programControlsToShow, setProgramControlsToShow] = useState(null)
   const [statsToShow, setStatsToShow] = useState(null)
-  const [usersProgrammes, setUsersProgrammes] = useState([])
   const debouncedFilter = useDebounce(filter, 200)
   const titleText = `${t('metaevaluation').toUpperCase()}`
-  const doctoralToggleText = t('doctoralToggle')
-  const bachelorToggleText = t('bachelorMasterToggle')
 
   useEffect(() => {
     const filterQuery = filterFromUrl()
     if (filterQuery) setFilter(filterQuery)
     document.title = t('metaevaluation')
-    setUsersProgrammes(programmes)
   }, [dispatch, t, lang, programmes])
 
   const filteredProgrammes = useMemo(() => {
-    return filterUserProgrammes(usersProgrammes, lang, debouncedFilter)
-  }, [usersProgrammes, lang, debouncedFilter])
-
-  const handleDoctoralChange = () => {
-    dispatch(setDoctoral(!doctoral))
-  }
+    return filterUserProgrammes(programmes, lang, debouncedFilter)
+  }, [programmes, lang, debouncedFilter])
 
   const handleDropdownFilterChange = value => {
     window.history.pushState({}, '', `${basePath}meta-evaluation?filter=${value}`)
@@ -114,41 +104,15 @@ const MetaOverview = ({
             {t('overview:readAnswers')}
           </Button>
         </MenuItem>
-        <MenuItem>
-          <Dropdown
-            data-cy="doctle"
-            className="button basic gray"
-            direction="left"
-            text={doctoral ? doctoralToggleText : bachelorToggleText}
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item
-                onClick={() => {
-                  if (doctoral) handleDoctoralChange()
-                }}
-              >
-                <p data-cy="bachelorToggleText">{bachelorToggleText}</p>
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  if (!doctoral) handleDoctoralChange()
-                }}
-              >
-                <p data-cy="doctoralToggleText">{doctoralToggleText}</p>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </MenuItem>
-        <MenuItem>
-          <FacultyDropdown
-            t={t}
-            programmes={programmes}
-            handleFilterChange={handleDropdownFilterChange}
-            faculties={faculties}
-            lang={lang}
-            debouncedFilter={debouncedFilter}
-          />
-        </MenuItem>
+        <DegreeDropdown />
+        <FacultyDropdown
+          t={t}
+          programmes={programmes}
+          handleFilterChange={handleDropdownFilterChange}
+          faculties={faculties}
+          lang={lang}
+          debouncedFilter={debouncedFilter}
+        />
         <MenuItem position="right">
           <Dropdown
             data-cy="csv-download"

@@ -28,8 +28,8 @@ describe('Meta evaluation form & overview tests', () => {
   it('should open meta evaluation form with doctoral degree', () => {
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
-    cy.get('[data-cy=doctle]').click()
-    cy.get('[data-cy=doctoralToggleText]').click()
+    cy.get('[data-cy=degreeDropdown]').click()
+    cy.get('[data-cy=doctoralOptionText]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCodeDoctor}]`).click()
 
     cy.contains(testProgrammeNameDoctor)
@@ -124,8 +124,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.typeInEditor('T1_comment', '3456')
 
       cy.visit('/meta-evaluation/answers')
-      cy.get('[data-cy=doctle]').click()
-      cy.get('[data-cy=doctoralToggleText]').click()
+      cy.get('[data-cy=degreeDropdown]').click()
+      cy.get('[data-cy=doctoralOptionText]').click()
       cy.get('[data-cy=content-type-dropdown]').click()
       cy.contains('Only answers').click()
 

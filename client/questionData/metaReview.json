@@ -886,7 +886,7 @@
       "se": "Avläggande av doktorsexamen inom målsatt tid",
       "en": "Completion of doctoral degrees within the target duration"
     },
-    "level": "tohtori",
+    "level": "doctoral",
     "parts": [
       {
         "id": "T1",
@@ -902,7 +902,7 @@
           "en": "Doctoral programmes will redesign their curricula so that doctoral degrees can be completed within the target duration",
           "se": "Doktorandprogrammen ser över sina undervisningsplaner så att doktorsexamen kan avläggas inom utsatt tid"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -929,7 +929,7 @@
           "en": "The amount, content and role of course-based teaching in doctoral degrees must be examined critically and based on data from comparable countries",
           "se": "Den kursformade undervisningens omfattning, innehåll och roll i doktorsexamen bör granskas kritiskt. Det är motiverat att granska dem i jämförelse med referensländer"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -956,7 +956,7 @@
           "en": "As the number of doctoral researchers increases, collaboration between doctoral programmes will support effective doctoral education",
           "se": "Samarbete mellan doktorandprogram stöder en smidig doktorsutbildning när antalet doktorander ökar"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -983,7 +983,7 @@
           "en": "With the variation in supervision practices, supervisor training could be targeted to the doctoral programmes that have already identified this as a problem",
           "se": "Handledningspraxis varierar, och därför skulle handledarutbildningen kunna inriktas på de doktorandprogram där detta redan är ett identifierat problem"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -1010,7 +1010,7 @@
           "en": "As the volume of doctoral researchers grows, the University will develop supervision practices, including peer support and supervision",
           "se": "I takt med att volymen doktorander ökar, utvecklar universitetet sin handledningspraxis inklusive kamratstöd och kamrathandledning"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -1031,7 +1031,7 @@
       "se": "Övergången från magister till doktor",
       "en": "The transition stage from master’s to doctoral studies"
     },
-    "level": "tohtori",
+    "level": "doctoral",
     "parts": [
       {
         "id": "T6",
@@ -1047,7 +1047,7 @@
           "en": "It is recommended that practices supporting recruitment to doctoral education be planned in each field through collaboration between doctoral and master’s programmes",
           "se": "Det rekommenderas att praxis för rekrytering till doktorsutbildning utformas inom varje disciplin som ett samarbete mellan doktorand- och magisterprogrammen"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -1068,7 +1068,7 @@
       "se": "Etablering av den nya forskarskolestrukturen",
       "en": "Consolidating the new doctoral school structure"
     },
-    "level": "tohtori",
+    "level": "doctoral",
     "parts": [
       {
         "id": "T7",
@@ -1084,7 +1084,7 @@
           "en": "The University will continue to develop practices and procedures for its single doctoral school, taking into account the versatility of doctoral education and field-specific starting points",
           "se": "Universitetet fortsätter utveckla sin forskarskolas verksamhetssätt med beaktande av doktorsutbildningens heterogenitet och disciplinernas olika utgångspunkter"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -1105,7 +1105,7 @@
       "se": "Utveckling av doktorsutbildningens programportfölj som helhet",
       "en": "Developing the doctoral programme portfolio comprehensively"
     },
-    "level": "tohtori",
+    "level": "doctoral",
     "parts": [
       {
         "id": "T8",
@@ -1121,7 +1121,7 @@
           "en": "By increasing collaboration between doctoral programmes and possibly merging programmes, the University can offer doctoral researchers more multidisciplinary research environments and support the leadership and coordination of programmes",
           "se": "Genom att intensifiera samarbetet mellan doktorandprogrammen och eventuellt sammanslå program kan universitetet erbjuda doktorander mer mångdisciplinära forskningsmiljöer och få fördelar för programledning och koordinering"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",
@@ -1148,7 +1148,7 @@
           "en": "As the number of doctoral researchers is set to increase, it is necessary to explore collaboration opportunities between the programmes within the University and with other universities",
           "se": "På grund av den ökande doktorandvolymen är det nödvändigt att undersöka doktorandprogrammens möjligheter till samarbete, både inom och utanför universitetet"
         },
-        "level": "tohtori",
+        "level": "doctoral",
         "description": {
           "fi": "Mitä toimenpide merkitsee koulutusohjelman kannalta? Mitä suunnitelmia koulutusohjelmalla on toimenpiteen edistämiseksi?",
           "se": "Vad innebär åtgärden för ditt utbildningsprogram? Vilka planer har programmet för att främja åtgärden?",

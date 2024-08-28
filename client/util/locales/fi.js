@@ -112,7 +112,7 @@ export default {
     comment: 'Kommentti',
     answer: 'Vastaus',
     overview: 'Yleiskatsaus',
-    bachelorMasterToggle: 'Kandi- ja Maisteriohjelmat',
+    bachelorMasterToggle: 'Kandi- ja maisteriohjelmat',
     doctoralToggle: 'Tohtoriohjelmat',
 
     toFrontpage: 'Etusivulle',
