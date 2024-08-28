@@ -16,8 +16,6 @@ COPY . .
 
 RUN npm run build
 
-RUN cp index.html build/
-
 EXPOSE 8000
 
 CMD ["npm", "run", "start:prod"]
