@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import { Table, Icon, Label, Popup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -40,9 +41,11 @@ const mayHijack = (current, toMock) => {
 export default ({ user, lang, programmeCodesAndNames }) => {
   const { t } = useTranslation()
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const history = useHistory()
 
   const logInAs = () => {
     localStorage.setItem('adminLoggedInAs', user.uid)
+    history.push('/')
     window.location.reload()
   }
 
