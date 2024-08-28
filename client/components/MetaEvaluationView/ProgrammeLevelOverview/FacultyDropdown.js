@@ -38,17 +38,19 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
           <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
             {t('report:all')}
           </Dropdown.Item>
-          {faculties?.data
-            .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
-            .map(faculty => (
-              <Dropdown.Item
-                data-cy={`dropdown-item-${faculty.code}`}
-                key={faculty.code}
-                onClick={() => handleDropdownFilter(faculty)}
-              >
-                {faculty.name[lang]}
-              </Dropdown.Item>
-            ))}
+          {faculties?.data?.length
+            ? faculties.data
+                .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
+                .map(faculty => (
+                  <Dropdown.Item
+                    data-cy={`dropdown-item-${faculty.code}`}
+                    key={faculty.code}
+                    onClick={() => handleDropdownFilter(faculty)}
+                  >
+                    {faculty.name[lang]}
+                  </Dropdown.Item>
+                ))
+            : null}
         </Dropdown.Menu>
       </Dropdown>
     </MenuItem>
