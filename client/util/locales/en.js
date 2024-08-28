@@ -312,7 +312,7 @@ export default {
     levelFilter: 'Filter by programme level',
     measureLabel: 'Add 1-5 measures.',
     noPermissions:
-      "You do not have access to view {{requestedForm}}. Please contact Strategic Services for Teaching or your degree programme's leader.",
+      "You do not have access to view {{requestedForm}}. Please contact strategic services for teaching or your degree programme's leader.",
     nowShowing: {
       programmes: 'NOW SHOWING THE ANSWERS OF:',
       faculties: 'NOW SHOWING THE ANSWERS OF:',
