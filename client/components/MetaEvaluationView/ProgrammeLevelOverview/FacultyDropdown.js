@@ -38,7 +38,7 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
           <Dropdown.Item data-cy="dropdown-item-all" onClick={() => handleDropdownFilter('')}>
             {t('report:all')}
           </Dropdown.Item>
-          {faculties?.data?.length
+          {!faculties.pending
             ? faculties.data
                 .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
                 .map(faculty => (
