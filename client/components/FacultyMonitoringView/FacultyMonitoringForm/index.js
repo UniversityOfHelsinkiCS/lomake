@@ -9,10 +9,11 @@ import { colors } from 'Utilities/common'
 import { Redirect } from 'react-router'
 
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
-import { Loader, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { wsJoinRoom } from 'Utilities/redux/websocketReducer'
 import StatusMessage from 'Components/FormView/StatusMessage'
 import { isAdmin } from '@root/config/common'
+import NoPermissions from 'Components/Generic/NoPermissions'
 import FacultyLevelForm from './FacultyLevelForm'
 
 const FacultyMonitoringForm = ({ room }) => {
@@ -25,7 +26,7 @@ const FacultyMonitoringForm = ({ room }) => {
   const year = 2024
   const user = useSelector(state => state.currentUser.data)
   const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
-  // currently using faculty evaluation write rights and no check for read rights, this should be reviewed
+  const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} - ${room}`
@@ -34,7 +35,11 @@ const FacultyMonitoringForm = ({ room }) => {
 
   if (!user || !room) return <Redirect to="/" />
 
-  if (!faculty) return <Loader active inline="centered" />
+  if (!faculty) return 'Error: Invalid url.'
+
+  if (!hasReadRights) {
+    return <NoPermissions t={t} requestedForm={t('evaluation')} />
+  }
 
   return (
     <div>
