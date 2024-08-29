@@ -78,12 +78,28 @@ const clearCurrentUser = user => {
   }, {})
 }
 
+const uidParser = socket => {
+  const cookieString = socket.request.headers.cookie
+
+  const regexUid = /uid=([^;]+)/
+  const regexLoggedInAs = /x-admin-logged-in-as=([^;]+)/
+
+  const matchUid = cookieString.match(regexUid)
+  const matchLoggedInAs = cookieString.match(regexLoggedInAs)
+
+  // Extract uid value
+  const uid = matchUid ? matchUid[1] : null
+
+  // Extract loggedInAs value (with fallback to headers)
+  const loggedInAs = matchLoggedInAs ? matchLoggedInAs[1] : socket.request.headers['x-admin-logged-in-as']
+
+  return { uid, loggedInAs }
+}
+
 const getCurrentUser = async socket => {
-  const { uid } = socket.request.headers
+  const { uid, loggedInAs } = uidParser(socket)
 
   if (!uid) return null
-
-  const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
   if (!inProduction && loggedInAs && isDevSuperAdminUid(uid)) {
     const user = await getUserByUid(loggedInAs)
@@ -97,7 +113,6 @@ const getCurrentUser = async socket => {
 const joinRoom = async (socket, room, form, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
-
     if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
