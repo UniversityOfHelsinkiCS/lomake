@@ -26,10 +26,10 @@ import ProgrammeLevelMetaOverview from 'Components/MetaEvaluationView/ProgrammeL
 import ProgrammeLevelMetaForm from 'Components/MetaEvaluationView/ProgrammeForm'
 import ProgrammeLevelAnswers from 'Components/MetaEvaluationView/ProgrammeLevelAnswers'
 import FacultyMonitoringOverview from 'Components/FacultyMonitoringView/FacultyMonitoringOverview'
-import FacultyMonitoringForm from 'Components/FacultyMonitoringView/FacultyMonitoringForm'
 import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
+import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/index'
 
 export default () => (
   <div className="content">
@@ -56,10 +56,8 @@ export default () => (
         <Route exact path="/faculty-monitoring" component={FacultyMonitoringOverview} />
         <Route
           exact
-          path="/faculty-monitoring/form/:form/:room"
-          render={props => (
-            <FacultyMonitoringForm room={props.match.params.room} formString={props.match.params.form} />
-          )}
+          path="/faculty-monitoring/:faculty"
+          render={props => <FacultyTrackingView faculty={props.match.params.faculty} />}
         />
 
         <Route exact path="/evaluation" component={ProgrammeLevelOverview} />

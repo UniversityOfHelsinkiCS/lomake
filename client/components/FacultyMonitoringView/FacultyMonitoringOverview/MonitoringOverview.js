@@ -3,7 +3,7 @@ import { Menu, MenuItem } from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom'
 
-const MonitoringOverview = ({ t, lang, faculties, form }) => {
+const MonitoringOverview = ({ t, lang, faculties }) => {
   const filteredFaculties = useMemo(
     () =>
       faculties
@@ -25,7 +25,7 @@ const MonitoringOverview = ({ t, lang, faculties, form }) => {
 
       <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
         {filteredFaculties.map(faculty => (
-          <Link key={faculty.key} to={`/faculty-monitoring/form/${form}/${faculty.key}`}>
+          <Link key={faculty.key} to={`/faculty-monitoring/${faculty.key}`}>
             {faculty.text} {faculty.key}
           </Link>
         ))}
