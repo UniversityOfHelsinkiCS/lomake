@@ -70,15 +70,15 @@ const start = async () => {
     switch (process.argv[2]) {
       case 'seed':
         await seed()
-        return
+        break
       case 'getUserList':
         await getUserList()
-        return
+        break
       case 'generateMissingTempAnswers':
         await createTempAnswers()
-        return
+        break
       default:
-        return
+        break
     }
   }
 
