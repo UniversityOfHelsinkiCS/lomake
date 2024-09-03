@@ -63,8 +63,9 @@ if (inProduction || inStaging) {
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
 }
 
-const start = async () => {
+server.listen(PORT, async () => {
   await initializeDatabaseConnection()
+
   if (process.argv[2]) {
     switch (process.argv[2]) {
       case 'seed':
@@ -81,13 +82,9 @@ const start = async () => {
     }
   }
 
-  server.listen(PORT, () => {
-    logger.info(`Server started on port ${PORT}`)
-    startBackupJob()
-    startDeadlineWatcher()
-  })
-}
-
-start()
+  logger.info(`Server started on port ${PORT}`)
+  startBackupJob()
+  startDeadlineWatcher()
+})
 
 export default app
