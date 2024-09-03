@@ -3,7 +3,7 @@ import websocketHandlers from './util/websocketHandlers.js'
 
 let io = null
 
-export const createWebsocketServer = server => {
+const createWebsocketServer = server => {
   io = new Server(server)
   io.on('connection', socket => {
     socket.on('update_field', room => websocketHandlers.updateField(socket, room, io))
