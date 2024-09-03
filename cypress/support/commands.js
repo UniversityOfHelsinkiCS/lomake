@@ -137,7 +137,7 @@ Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24)
     .find('[contenteditable]')
     .click()
     .type(`${textToBeTyped}${' '.repeat(flakyness)}`, { delay: 0 })
-    .wait(101 * attempt)
+    .wait(1010 * attempt)
 
   cy.get(`[data-cy=save-button-${questionId}]`).click()
 })

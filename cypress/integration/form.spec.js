@@ -70,7 +70,7 @@ describe('Yearly assessment form tests', () => {
 
   it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
     cy.get('[data-cy=yearSelector]').contains(defaultYears[0])
-    cy.typeInEditor('recruitment_influence', 'new words')
+    cy.typeInEditor('resourcing', 'new words')
     cy.reload()
     cy.visit('/yearly')
 
