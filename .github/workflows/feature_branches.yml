@@ -5,72 +5,71 @@ on:
     branches-ignore: ['master']
 
 jobs:
-  #tests:
-  #  strategy:
-  #    fail-fast: false
-  #    matrix:
-  #      spec:
-  #        [
-  #          comparison,
-  #          degreeReform,
-  #          form,
-  #          formNotifications,
-  #          happypath,
-  #          IAMpermissions,
-  #          management,
-  #          misc,
-  #          ospa,
-  #          permissions,
-  #          report,
-  #          sidebar,
-  #          yearselector,
-  #          evaluation,
-  #          metaevaluation,
-  #          homepage,
-  #        ]
-  #  name: Run tests
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - name: Checkout
-  #      uses: actions/checkout@v4
-  #    - uses: actions/setup-node@v4
-  #      with:
-  #        node-version: 20
-  #        cache: npm
-#
-  #    - name: npm ci
-  #      run: npm ci --no-audit --no-fund
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        spec:
+          [
+            comparison,
+            degreeReform,
+            form,
+            formNotifications,
+            happypath,
+            IAMpermissions,
+            management,
+            misc,
+            ospa,
+            permissions,
+            report,
+            sidebar,
+            yearselector,
+            evaluation,
+            metaevaluation,
+            homepage,
+          ]
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      #- name: docker compose up -d
-       # run: docker compose up -d
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
 
-      #- name: seed db
-        # run: docker exec lomake_dev bash -c "node index.js seed"
+      - name: docker compose up -d
+        run: docker compose up -d
 
-      #- name: Run cypress tests with retry
-      #  uses: nick-fields/retry@v3
-      #  with:
-      #    timeout_minutes: 6
-      #    max_attempts: 2
-      #    command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
-#
-      #- uses: actions/upload-artifact@v4
-      #  if: failure()
-      #  with:
-      #    name: Cypress videos
-      #    path: /home/runner/work/lomake/lomake/cypress/videos
-#
-      #- uses: actions/upload-artifact@v4
-      #  if: failure()
-      #  with:
-      #    name: Cypress screenshots
-      #    path: /home/runner/work/lomake/lomake/cypress/screenshots
+      - name: seed db
+        run: docker exec lomake_dev bash -c "node index.js seed"
+      - name: Run cypress tests with retry
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 6
+          max_attempts: 2
+          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Cypress videos
+          path: /home/runner/work/lomake/lomake/cypress/videos
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Cypress screenshots
+          path: /home/runner/work/lomake/lomake/cypress/screenshots
 
 
   build:
     name: 'Build and publish staging image'
-    #needs:
-    #  - tests
+    needs:
+      - tests
     runs-on: ubuntu-latest
 
     steps:
