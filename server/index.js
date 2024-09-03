@@ -64,9 +64,7 @@ if (inProduction || inStaging) {
   app.get('*', (_req, res) => res.sendFile(INDEX_PATH))
 }
 
-server.listen(PORT, async () => {
-  await initializeDatabaseConnection()
-
+initializeDatabaseConnection().then(async () => {
   // if there is a argument and return
   if (process.argv[2]) {
     switch (process.argv[2]) {
@@ -80,13 +78,13 @@ server.listen(PORT, async () => {
         await createTempAnswers()
         return
       default:
-        return
+        server.listen(PORT, async () => {
+          logger.info(`Server started on port ${PORT}`)
+          startBackupJob()
+          startDeadlineWatcher()
+        })
     }
   }
-
-  logger.info(`Server started on port ${PORT}`)
-  startBackupJob()
-  startDeadlineWatcher()
 })
 
 export default app
