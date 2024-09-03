@@ -66,9 +66,21 @@ if (inProduction || inStaging) {
 
 const start = async () => {
   await initializeDatabaseConnection()
-  await seed()
-  await getUserList()
-  await createTempAnswers()
+  if (process.argv[2]) {
+    switch (process.argv[2]) {
+      case 'seed':
+        await seed()
+        return
+      case 'getUserList':
+        await getUserList()
+        return
+      case 'generateMissingTempAnswers':
+        await createTempAnswers()
+        return
+      default:
+        return
+    }
+  }
 
   server.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`)
