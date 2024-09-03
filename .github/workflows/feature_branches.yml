@@ -46,6 +46,7 @@ jobs:
 
       - name: seed db
         run: docker exec lomake_dev bash -c "node server/index.js seed"
+
       - name: Run cypress tests with retry
         uses: nick-fields/retry@v3
         with:
