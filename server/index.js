@@ -67,19 +67,20 @@ if (inProduction || inStaging) {
 server.listen(PORT, async () => {
   await initializeDatabaseConnection()
 
+  // if there is a argument and return
   if (process.argv[2]) {
     switch (process.argv[2]) {
       case 'seed':
         await seed()
-        break
+        return
       case 'getUserList':
         await getUserList()
-        break
+        return
       case 'generateMissingTempAnswers':
         await createTempAnswers()
-        break
+        return
       default:
-        break
+        return
     }
   }
 
