@@ -7,6 +7,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { Sequelize } from 'sequelize'
 import config from '../../config/sequelize.js'
+import logger from '../util/logger.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -51,10 +52,10 @@ const initializeModels = async () => {
 
 initializeModels()
   .then(() => {
-    console.log('Models initialized')
+    logger.info('Models initialized')
   })
   .catch(err => {
-    console.error('Error initializing models:', err)
+    logger.error('Error initializing models:', err)
   })
 
 export default db

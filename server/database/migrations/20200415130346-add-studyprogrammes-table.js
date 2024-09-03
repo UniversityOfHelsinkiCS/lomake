@@ -1,29 +1,20 @@
 import { DataTypes } from 'sequelize'
 
 export const up = ({ context: queryInterface }) =>
-  queryInterface.createTable('users', {
+  queryInterface.createTable('studyprogrammes', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    uid: {
+    key: {
       type: DataTypes.STRING,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
     },
-    email: {
-      type: DataTypes.STRING,
-    },
-    admin: {
-      type: DataTypes.BOOLEAN,
-    },
-    access: {
-      type: DataTypes.BOOLEAN,
-    },
-    irrelevant: {
+    locked: {
       type: DataTypes.BOOLEAN,
     },
     created_at: {
@@ -36,4 +27,4 @@ export const up = ({ context: queryInterface }) =>
     },
   })
 
-export const down = ({ context: queryInterface }) => queryInterface.dropTable('users')
+export const down = ({ context: queryInterface }) => queryInterface.dropTable('studyprogrammes')
