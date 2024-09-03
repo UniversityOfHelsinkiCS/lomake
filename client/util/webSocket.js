@@ -19,7 +19,7 @@ const connect = () => {
 
   return io(window.origin, {
     path: `${basePath}socket.io`,
-    transports: ['websocket', 'polling'],
+    transports: ['polling'],
     extraHeaders: headers,
   })
 }
