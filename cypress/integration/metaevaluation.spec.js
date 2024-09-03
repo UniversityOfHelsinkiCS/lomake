@@ -109,14 +109,18 @@ describe('Meta evaluation form & overview tests', () => {
     })
 
     it('should only see comments', () => {
+      const cypressOspa = 'cypressOspaUser'
       cy.login(cypressSuperAdmin)
 
       cy.visit('/')
+
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
       cy.createDeadline(2024, 'Katselmus - toimeenpano')
       cy.get('[data-cy=form-7-deadline]').contains('2024')
+
+      cy.login(cypressOspa)
 
       cy.visit(`/meta-evaluation/form/7/${testProgrammeCodeDoctor}`)
       cy.typeInEditor('T1', '2345')
