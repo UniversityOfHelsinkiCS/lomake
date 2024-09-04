@@ -17,6 +17,7 @@ import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
 import degree from './degreeReducer'
+import monitoring from './facultyMonitoringReducer'
 
 export default combineReducers({
   form,
@@ -36,4 +37,5 @@ export default combineReducers({
   summaries,
   reformAnswers,
   degree,
+  monitoring,
 })

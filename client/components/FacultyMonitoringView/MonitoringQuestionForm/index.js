@@ -1,70 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, FormButton, FormInput, FormTextArea, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
+import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'
 
 const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
-  const { id } = question.id
+  const { id } = question
+  const form = formKeys.FACULTY_MONITORING
 
-  const [formValues, setFormValues] = useState({
-    [`${id}_actions`]: '',
-    [`${id}_responsible_entities`]: '',
-    [`${id}_contact_person`]: '',
-    [`${id}_resources`]: '',
-    [`${id}_schedule`]: '',
-  })
-
-  const handleChange = (e, { name, value }) => {
-    setFormValues(prev => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = () => {
-    console.log(formValues)
-    // todo: save answers to db
-  }
+  const handleSubmit = null
 
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup widths="equal">
-        <FormTextArea
+        <MonitoringTextarea
           id={`${id}_actions`}
           label={t('formView:facultyActionsLabel')}
-          value={formValues[`${id}_actions`]}
-          onChange={handleChange}
+          form={form}
+          className="textarea"
         />
       </FormGroup>
       <FormGroup widths="equal">
-        <FormInput
-          id={`${id}_responsible_entities`}
-          label={t('formView:facultyEntitiesLabel')}
-          value={formValues[`${id}_responsible_entities`]}
-          onChange={handleChange}
-        />
+        <MonitoringTextarea id={`${id}_responsible_entities`} label={t('formView:facultyEntitiesLabel')} form={form} />
       </FormGroup>
       <FormGroup widths="equal">
-        <FormInput
+        <MonitoringTextarea
           id={`${id}_contact_person`}
           label={t('formView:facultyContactLabel')}
-          value={formValues[`${id}_contact_person`]}
-          onChange={handleChange}
+          required
+          form={form}
         />
-        <FormInput
-          id={`${id}_resources`}
-          label={t('formView:facultyResourcesLabel')}
-          value={formValues[`${id}_resources`]}
-          onChange={handleChange}
-        />
+        <MonitoringTextarea id={`${id}_resources`} label={t('formView:facultyResourcesLabel')} form={form} />
       </FormGroup>
-      <FormInput
-        id={`${id}_schedule`}
-        label={t('formView:facultyScheduleLabel')}
-        value={formValues[`${id}_schedule`]}
-        onChange={handleChange}
-        width={8}
-      />
+      <MonitoringTextarea id={`${id}_schedule`} label={t('formView:facultyScheduleLabel')} form={form} />
       <div style={{ textAlign: 'right' }}>
         <FormButton secondary type="submit">
           {t('formView:sendForm')}

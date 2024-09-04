@@ -14,6 +14,7 @@ import {
   facultyEvaluationQuestions as evaluationFacultyQuestions,
   degreeReformIndividualQuestions as degreeQuestionData,
   metareviewQuestions,
+  facultyMonitoringQuestions,
 } from '../questionData'
 
 export const images = {
@@ -147,6 +148,8 @@ export const modifiedQuestions = (lang, form) => {
     questions = evaluationFacultyQuestions
   } else if (form === formKeys.META_EVALUATION) {
     questions = metareviewQuestions
+  } else if (form === formKeys.FACULTY_MONITORING) {
+    questions = facultyMonitoringQuestions
   }
 
   questions.forEach(question => {
