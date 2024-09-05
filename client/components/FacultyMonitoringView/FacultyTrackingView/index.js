@@ -13,17 +13,6 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
-import { facultyMonitoringQuestions as questions } from '../../../questionData/index'
-
-const extractNumbers = list => {
-  const pattern = /\d+/
-  return list
-    .map(item => {
-      const match = item.match(pattern)
-      return match ? parseInt(match[0], 10) : null
-    })
-    .filter(num => num !== null) // Filter out any null values
-}
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -37,8 +26,6 @@ const FacultyTrackingView = ({ faculty }) => {
 
   const fieldName = `${faculty}_selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
-
-  const selectedQuestionIds = extractNumbers(selectedQuestions)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} - ${faculty}`
@@ -73,12 +60,7 @@ const FacultyTrackingView = ({ faculty }) => {
 
   const questionList = modifiedQuestions(lang, form)
 
-  const filteredQuestions = questions.map(section => ({
-    ...section,
-    parts: section.parts.filter(question => selectedQuestionIds.includes(question.id)),
-  }))
-
-  const isSelected = id => selectedQuestionIds.includes(id)
+  const filteredQuestions = questionList.filter(question => selectedQuestions.includes(question.id))
 
   return (
     <>
@@ -95,29 +77,18 @@ const FacultyTrackingView = ({ faculty }) => {
 
       <QuestionPicker faculty={faculty} label="" questionsList={questionList} form={form} />
       <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
-        {filteredQuestions.map(section => (
-          <div key={section.title[lang]} style={{ marginBottom: '20px' }}>
-            <h2>{section.title[lang]}</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {section.parts.map(question => (
-                <Button
-                  key={question.id}
-                  onClick={() => openQuestionModal(question)}
-                  style={{
-                    backgroundColor: isSelected(question.id) ? 'lightgreen' : 'white',
-                  }}
-                >
-                  {isSelected(question.id) && '✓ '}
-                  {question.id} - {question.label[lang]}
-                </Button>
-              ))}
-            </div>
-          </div>
+        {filteredQuestions.map(question => (
+          <Button
+            key={question.id}
+            onClick={() => openQuestionModal(question)}
+            style={{ marginBottom: '1em' }}
+            content={`${parseInt(question.id, 10)} - ${question.label}`}
+          />
         ))}
       </div>
 
       {modalData && (
-        <CustomModal closeModal={closeModal} title={`${modalData.id} - ${modalData.label[lang]}`}>
+        <CustomModal closeModal={closeModal} title={`${parseInt(modalData.id, 10)} - ${modalData.label}`}>
           <MonitoringQuestionForm question={modalData} faculty={faculty} />
         </CustomModal>
       )}

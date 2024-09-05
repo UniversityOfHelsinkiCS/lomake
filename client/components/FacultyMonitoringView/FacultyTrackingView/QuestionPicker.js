@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
-import { getLabel } from 'Utilities/common'
-import { setQuestions, getQuestions } from 'Utilities/redux/facultyMonitoringReducer'
-import { updateFormField } from 'Utilities/redux/formReducer' // Assuming you have this action creator
+import { updateFormField } from 'Utilities/redux/formReducer'
 import '../../Generic/Generic.scss'
 
 const QuestionPicker = ({ faculty, label, questionsList, form }) => {
@@ -22,11 +20,6 @@ const QuestionPicker = ({ faculty, label, questionsList, form }) => {
     .filter(Boolean) // Filter out any undefined options
 
   const addToList = (_, { value }) => {
-    const selectedOptions = options.filter(option => value.includes(option.value))
-
-    dispatch(setQuestions(selectedOptions))
-
-    // Call handleChange with the faculty and selected question IDs
     handleChange({ id: fieldName, value })
   }
 
