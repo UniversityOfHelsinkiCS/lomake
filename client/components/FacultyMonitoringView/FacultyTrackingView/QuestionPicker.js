@@ -4,10 +4,10 @@ import { Dropdown } from 'semantic-ui-react'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import '../../Generic/Generic.scss'
 
-const QuestionPicker = ({ faculty, label, questionsList, form }) => {
+const QuestionPicker = ({ label, questionsList, form }) => {
   const dispatch = useDispatch()
 
-  const fieldName = `${faculty}_selectedQuestionIds`
+  const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const viewOnly = useSelector(({ form }) => form.viewOnly)
 

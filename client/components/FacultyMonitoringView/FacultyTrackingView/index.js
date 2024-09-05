@@ -10,7 +10,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import { modifiedQuestions } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
-import { setViewOnly } from 'Utilities/redux/formReducer'
+import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 
@@ -24,13 +24,14 @@ const FacultyTrackingView = ({ faculty }) => {
   const [modalData, setModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
 
-  const fieldName = `${faculty}_selectedQuestionIds`
+  const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} - ${faculty}`
     if (currentRoom) {
       dispatch(wsLeaveRoom(faculty))
+      dispatch(clearFormState())
     } else {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
@@ -41,6 +42,7 @@ const FacultyTrackingView = ({ faculty }) => {
     return () => {
       dispatch(wsLeaveRoom(faculty))
       dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
+      dispatch(clearFormState())
     }
   }, [])
 
@@ -75,7 +77,7 @@ const FacultyTrackingView = ({ faculty }) => {
         </MenuItem>
       </Menu>
 
-      <QuestionPicker faculty={faculty} label="" questionsList={questionList} form={form} />
+      <QuestionPicker label="" questionsList={questionList} form={form} />
       <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
         {filteredQuestions.map(question => (
           <Button
