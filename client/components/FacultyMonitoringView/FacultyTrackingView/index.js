@@ -7,13 +7,23 @@ import { Redirect } from 'react-router'
 import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
-import { modifiedQuestions, getFormViewRights } from 'Utilities/common'
+import { modifiedQuestions } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import { facultyMonitoringQuestions as questions } from '../../../questionData/index'
+
+const extractNumbers = list => {
+  const pattern = /\d+/
+  return list
+    .map(item => {
+      const match = item.match(pattern)
+      return match ? parseInt(match[0], 10) : null
+    })
+    .filter(num => num !== null) // Filter out any null values
+}
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -23,18 +33,29 @@ const FacultyTrackingView = ({ faculty }) => {
   const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
   const [modalData, setModalData] = useState(null)
+  const currentRoom = useSelector(state => state.room)
+
+  const fieldName = `${faculty}_selectedQuestionIds`
+  const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
+
+  const selectedQuestionIds = extractNumbers(selectedQuestions)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} - ${faculty}`
-    dispatch(wsJoinRoom(faculty, form))
-    dispatch(setViewOnly(false))
+    if (currentRoom) {
+      dispatch(wsLeaveRoom(faculty))
+    } else {
+      dispatch(wsJoinRoom(faculty, form))
+      dispatch(setViewOnly(false))
+    }
   }, [faculty, lang])
 
   useEffect(() => {
-    if (!faculty) return
-    dispatch(wsJoinRoom(faculty, form))
-    dispatch(setViewOnly(false))
-  }, [faculty, user])
+    return () => {
+      dispatch(wsLeaveRoom(faculty))
+      dispatch({ type: 'RESET_STUDYPROGRAM_SUCCESS' })
+    }
+  }, [])
 
   if (!user || !faculty) return <Redirect to="/" />
 
@@ -52,6 +73,13 @@ const FacultyTrackingView = ({ faculty }) => {
 
   const questionList = modifiedQuestions(lang, form)
 
+  const filteredQuestions = questions.map(section => ({
+    ...section,
+    parts: section.parts.filter(question => selectedQuestionIds.includes(question.id)),
+  }))
+
+  const isSelected = id => selectedQuestionIds.includes(id)
+
   return (
     <>
       <Menu size="large" className="filter-row" secondary>
@@ -65,13 +93,21 @@ const FacultyTrackingView = ({ faculty }) => {
         </MenuItem>
       </Menu>
 
+      <QuestionPicker faculty={faculty} label="" questionsList={questionList} form={form} />
       <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
-        {questions.map(section => (
+        {filteredQuestions.map(section => (
           <div key={section.title[lang]} style={{ marginBottom: '20px' }}>
             <h2>{section.title[lang]}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {section.parts.map(question => (
-                <Button key={question.id} onClick={() => openQuestionModal(question)}>
+                <Button
+                  key={question.id}
+                  onClick={() => openQuestionModal(question)}
+                  style={{
+                    backgroundColor: isSelected(question.id) ? 'lightgreen' : 'white',
+                  }}
+                >
+                  {isSelected(question.id) && '✓ '}
                   {question.id} - {question.label[lang]}
                 </Button>
               ))}
@@ -79,11 +115,10 @@ const FacultyTrackingView = ({ faculty }) => {
           </div>
         ))}
       </div>
-      <QuestionPicker faculty={faculty} label="" questionsList={questionList} />
 
       {modalData && (
         <CustomModal closeModal={closeModal} title={`${modalData.id} - ${modalData.label[lang]}`}>
-          <MonitoringQuestionForm question={modalData} />
+          <MonitoringQuestionForm question={modalData} faculty={faculty} />
         </CustomModal>
       )}
     </>

@@ -12,6 +12,7 @@ import { getProgramme } from 'Utilities/redux/studyProgrammesReducer'
 import { setViewOnly, getSingleProgrammesAnswers } from 'Utilities/redux/formReducer'
 import { colors, getFormViewRights } from 'Utilities/common'
 import { hasSomeReadAccess, isAdmin } from '@root/config/common'
+import { formKeys } from '@root/config/data'
 import StatusMessage from './StatusMessage'
 
 import SaveIndicator from './SaveIndicator'
@@ -27,7 +28,7 @@ const FormView = ({ room }) => {
   const { t } = useTranslation()
   const componentRef = useRef()
 
-  const form = 1 // TO FIX or not?
+  const form = formKeys.YEARLY_ASSESSMENT
 
   const lang = useSelector(state => state.language)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)

@@ -24,6 +24,6 @@ const getQuestions = async (req, res) => {
   }
 }
 
-const setQuestions = (req, res) => { }
+const setQuestions = (req, res) => {}
 
 module.exports = { getQuestions, setQuestions }
