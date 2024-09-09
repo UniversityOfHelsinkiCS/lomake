@@ -127,15 +127,13 @@ const FacultyTrackingView = ({ faculty }) => {
         </CustomModal>
       )}
 
-      <div className="flex-column-container">
+      <div className="answer-container">
         {filteredQuestions.length ? (
           filteredQuestions.map(question => (
-            <Button
-              key={question.id}
-              onClick={() => openFormModal(question)}
-              className="question-button"
-              content={`${parseInt(question.id, 10)} - ${question.label}`}
-            />
+            <>
+              <h4>{`${parseInt(question.id, 10)} - ${question.label}`}</h4>
+              <Button key={question.id} onClick={() => openFormModal(question)} content={t('formView:modifyForm')} />
+            </>
           ))
         ) : (
           <div className="no-selection-container">

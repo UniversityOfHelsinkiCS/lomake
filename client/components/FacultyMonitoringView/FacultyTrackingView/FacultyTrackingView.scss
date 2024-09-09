@@ -26,19 +26,18 @@
   }
 }
 
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 2em 0;
+
+  .button {
+    max-width: 200px;
+  }
+}
 .no-selection-container {
   width: 100%;
   text-align: center;
   margin-top: 25px;
-}
-
-.flex-column-container {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  width: 100%;
-
-  .question-button {
-    margin-bottom: 1em;
-  }
 }
