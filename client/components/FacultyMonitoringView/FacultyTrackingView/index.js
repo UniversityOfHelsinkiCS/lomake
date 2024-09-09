@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Menu, MenuItem, Button } from 'semantic-ui-react'
+import { Menu, MenuItem, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +21,8 @@ const FacultyTrackingView = ({ faculty }) => {
   const user = useSelector(state => state.currentUser.data)
   const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
-  const [modalData, setModalData] = useState(null)
+  const [formModalData, setFormModalData] = useState(null)
+  const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
 
   const fieldName = `selectedQuestionIds`
@@ -37,6 +38,7 @@ const FacultyTrackingView = ({ faculty }) => {
       dispatch(setViewOnly(false))
     }
   }, [faculty, lang])
+  console.log(faculty.name)
 
   useEffect(() => {
     return () => {
@@ -52,12 +54,20 @@ const FacultyTrackingView = ({ faculty }) => {
     return <NoPermissions t={t} requestedForm={t('facultymonitoring')} />
   }
 
-  const openQuestionModal = question => {
-    setModalData(question)
+  const openFormModal = question => {
+    setFormModalData(question)
   }
 
-  const closeModal = () => {
-    setModalData(null)
+  const openQuestionPickerModal = questions => {
+    setQuestionPickerModalData(questions)
+  }
+
+  const closeQuestionModal = () => {
+    setFormModalData(null)
+  }
+
+  const closeQuestionPickerModal = () => {
+    setQuestionPickerModalData(null)
   }
 
   const questionList = modifiedQuestions(lang, form)
@@ -89,28 +99,59 @@ const FacultyTrackingView = ({ faculty }) => {
             {t('facultymonitoring').toUpperCase()} - {faculty}
           </h2>
         </MenuItem>
+        <MenuItem position="right">
+          <Button
+            secondary
+            onClick={() => openQuestionPickerModal(groupedQuestions)}
+            style={{ marginBottom: '1em' }}
+            content={t('formView:selectQuestions')}
+          />
+        </MenuItem>
       </Menu>
 
-      {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
-        <div key={titleIndex} style={{ marginBottom: '2rem' }}>
-          <QuestionPicker label={group.title} questionsList={group.questions} form={form} />
-        </div>
-      ))}
+      {questionPickerModalData && (
+        <CustomModal closeModal={closeQuestionPickerModal} title={t('formView:selectQuestions')}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
+              <div key={titleIndex} style={{ margin: '15px 0px' }}>
+                <QuestionPicker label={group.title} questionsList={group.questions} form={form} />
+              </div>
+            ))}
+            <Button
+              onClick={closeQuestionPickerModal}
+              secondary
+              content={t('formView:sendSelection')}
+              style={{ alignSelf: 'flex-end', marginTop: '1em' }}
+            />
+          </div>
+        </CustomModal>
+      )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
-        {filteredQuestions.map(question => (
-          <Button
-            key={question.id}
-            onClick={() => openQuestionModal(question)}
-            style={{ marginBottom: '1em' }}
-            content={`${parseInt(question.id, 10)} - ${question.label}`}
-          />
-        ))}
+      <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start', width: '100%' }}>
+        {filteredQuestions.length ? (
+          filteredQuestions.map(question => (
+            <Button
+              key={question.id}
+              onClick={() => openFormModal(question)}
+              style={{ marginBottom: '1em' }}
+              content={`${parseInt(question.id, 10)} - ${question.label}`}
+            />
+          ))
+        ) : (
+          <div style={{ width: '100%', textAlign: 'center', marginTop: '25px' }}>
+            <Header as="h3" disabled>
+              {t('formView:noQuestionsSelected')}
+            </Header>
+          </div>
+        )}
       </div>
 
-      {modalData && (
-        <CustomModal closeModal={closeModal} title={`${parseInt(modalData.id, 10)} - ${modalData.label}`}>
-          <MonitoringQuestionForm question={modalData} faculty={faculty} />
+      {formModalData && (
+        <CustomModal
+          closeModal={closeQuestionModal}
+          title={`${parseInt(formModalData.id, 10)} - ${formModalData.label}`}
+        >
+          <MonitoringQuestionForm question={formModalData} faculty={faculty} />
         </CustomModal>
       )}
     </>
