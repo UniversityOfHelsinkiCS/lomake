@@ -13,6 +13,7 @@ import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
+import './FacultyTrackingView.scss'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -38,7 +39,6 @@ const FacultyTrackingView = ({ faculty }) => {
       dispatch(setViewOnly(false))
     }
   }, [faculty, lang])
-  console.log(faculty.name)
 
   useEffect(() => {
     return () => {
@@ -94,8 +94,8 @@ const FacultyTrackingView = ({ faculty }) => {
         <MenuItem>
           <Button as={Link} to="/faculty-monitoring" icon="arrow left" />
         </MenuItem>
-        <MenuItem header style={{ paddingLeft: 0 }}>
-          <h2 style={{ maxWidth: '16em' }}>
+        <MenuItem header className="menu-item-header">
+          <h2>
             {t('facultymonitoring').toUpperCase()} - {faculty}
           </h2>
         </MenuItem>
@@ -103,7 +103,7 @@ const FacultyTrackingView = ({ faculty }) => {
           <Button
             secondary
             onClick={() => openQuestionPickerModal(groupedQuestions)}
-            style={{ marginBottom: '1em' }}
+            className="select-questions-button"
             content={t('formView:selectQuestions')}
           />
         </MenuItem>
@@ -111,9 +111,9 @@ const FacultyTrackingView = ({ faculty }) => {
 
       {questionPickerModalData && (
         <CustomModal closeModal={closeQuestionPickerModal} title={t('formView:selectQuestions')}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="question-picker-container">
             {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
-              <div key={titleIndex} style={{ margin: '15px 0px' }}>
+              <div className="question-group" key={titleIndex}>
                 <QuestionPicker label={group.title} questionsList={group.questions} form={form} />
               </div>
             ))}
@@ -121,24 +121,24 @@ const FacultyTrackingView = ({ faculty }) => {
               onClick={closeQuestionPickerModal}
               secondary
               content={t('formView:sendSelection')}
-              style={{ alignSelf: 'flex-end', marginTop: '1em' }}
+              className="send-selection-button"
             />
           </div>
         </CustomModal>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start', width: '100%' }}>
+      <div className="flex-column-container">
         {filteredQuestions.length ? (
           filteredQuestions.map(question => (
             <Button
               key={question.id}
               onClick={() => openFormModal(question)}
-              style={{ marginBottom: '1em' }}
+              className="question-button"
               content={`${parseInt(question.id, 10)} - ${question.label}`}
             />
           ))
         ) : (
-          <div style={{ width: '100%', textAlign: 'center', marginTop: '25px' }}>
+          <div className="no-selection-container">
             <Header as="h3" disabled>
               {t('formView:noQuestionsSelected')}
             </Header>
