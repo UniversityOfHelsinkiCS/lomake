@@ -29,6 +29,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
     <div className="questions-list-container" data-cy="question-picker">
       <label className={`questions-list-label${selectedQuestions.length === 0 ? '-bolded' : ''}`}>{label}</label>
       <Dropdown
+        style={{ width: '700px' }}
         className="comparison-questions-list-selector"
         data-cy="questions-list"
         name="questions-list"

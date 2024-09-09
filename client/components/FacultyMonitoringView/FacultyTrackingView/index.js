@@ -64,6 +64,20 @@ const FacultyTrackingView = ({ faculty }) => {
 
   const filteredQuestions = questionList.filter(question => selectedQuestions.includes(question.id))
 
+  const groupedQuestions = questionList.reduce((acc, question) => {
+    const { titleIndex, title } = question
+
+    if (!acc[titleIndex]) {
+      acc[titleIndex] = {
+        title,
+        questions: [],
+      }
+    }
+
+    acc[titleIndex].questions.push(question)
+    return acc
+  }, {})
+
   return (
     <>
       <Menu size="large" className="filter-row" secondary>
@@ -77,7 +91,12 @@ const FacultyTrackingView = ({ faculty }) => {
         </MenuItem>
       </Menu>
 
-      <QuestionPicker label="" questionsList={questionList} form={form} />
+      {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
+        <div key={titleIndex} style={{ marginBottom: '2rem' }}>
+          <QuestionPicker label={group.title} questionsList={group.questions} form={form} />
+        </div>
+      ))}
+
       <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
         {filteredQuestions.map(question => (
           <Button
