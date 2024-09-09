@@ -14,9 +14,7 @@ const MonitoringQuestionForm = ({ question }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormGroup widths="equal">
-        <TrackingTrafficLight id={id} form={form} />
-      </FormGroup>
+      <TrackingTrafficLight id={id} form={form} />
       <FormGroup widths="equal">
         <MonitoringTextarea
           id={`${id}_actions`}
