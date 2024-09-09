@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Menu, MenuItem } from 'semantic-ui-react'
 
 import { Link } from 'react-router-dom'
-
+import './FacultyMonitoringOverview.scss'
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const filteredFaculties = useMemo(
     () =>
@@ -18,12 +18,12 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   return (
     <>
       <Menu size="large" className="filter-row" secondary>
-        <MenuItem header style={{ paddingLeft: 0 }}>
-          <h2 style={{ maxWidth: '16em' }}>{t('facultymonitoring').toUpperCase()}</h2>
+        <MenuItem header className="menu-item-header">
+          <h2>{t('facultymonitoring').toUpperCase()}</h2>
         </MenuItem>
       </Menu>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'flex-start' }}>
+      <div className="flex-container">
         {filteredFaculties.map(faculty => (
           <Link key={faculty.key} to={`/faculty-monitoring/${faculty.key}`}>
             {faculty.text} {faculty.key}

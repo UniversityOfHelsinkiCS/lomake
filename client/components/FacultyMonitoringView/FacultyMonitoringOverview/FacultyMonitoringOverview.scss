@@ -1,0 +1,16 @@
+.filter-row {
+  .menu-item-header {
+    padding-left: 0;
+
+    h2 {
+      max-width: 16em;
+    }
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  margin-left: 15px;
+}

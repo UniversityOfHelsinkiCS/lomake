@@ -99,7 +99,7 @@ const FacultyTrackingView = ({ faculty }) => {
             {t('facultymonitoring').toUpperCase()} - {faculty}
           </h2>
         </MenuItem>
-        <MenuItem position="right">
+        <MenuItem>
           <Button
             secondary
             onClick={() => openQuestionPickerModal(groupedQuestions)}
