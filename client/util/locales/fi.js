@@ -49,6 +49,8 @@ export default {
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
     trafficLights: 'Liikennevalojen värit',
+    tracking: 'Seuranta',
+    chooseTrafficLight: 'Lisää uusi arvio',
 
     choose: 'Valitse',
     colors_all: 'Kaikki',

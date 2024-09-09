@@ -45,6 +45,8 @@ export default {
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
     trafficLights: 'Traffic lights',
+    tracking: 'Tracking',
+    chooseTrafficLight: 'Valitse liikennevaloarvio',
 
     choose: 'Choose',
     colors_all: 'all',

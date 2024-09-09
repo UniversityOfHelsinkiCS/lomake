@@ -44,6 +44,8 @@ export default {
     responses: 'Svar:',
     writtenAnswers: 'Skriftliga svar',
     trafficLights: 'Trafikljus',
+    tracking: 'Tracking',
+    chooseTrafficLight: 'Valitse liikennevaloarvio',
 
     choose: 'Välj',
     colors_all: 'alla',

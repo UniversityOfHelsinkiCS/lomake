@@ -3,6 +3,7 @@ import { Form, FormButton, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'
+import TrackingTrafficLight from 'Components/Generic/TrackingTrafficLight'
 
 const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
@@ -13,6 +14,9 @@ const MonitoringQuestionForm = ({ question }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <FormGroup widths="equal">
+        <TrackingTrafficLight id={id} form={form} />
+      </FormGroup>
       <FormGroup widths="equal">
         <MonitoringTextarea
           id={`${id}_actions`}
