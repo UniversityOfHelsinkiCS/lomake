@@ -50,7 +50,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
       if (answer.data[`${value}_lights_history`]) {
         const lightList = answer.data[`${value}_lights_history`]
-        const { color } = lightList.pop()
+        const { color } = lightList[lightList.length - 1]
         return <Icon color={color} name="checkmark" size="large" />
       }
       if (selected) return <Icon color="grey" name="checkmark" size="large" />
