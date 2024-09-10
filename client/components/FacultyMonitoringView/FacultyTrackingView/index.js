@@ -19,6 +19,8 @@ const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
+  const faculties = useSelector(state => state.faculties.data)
+  const facultyName = faculties.find(f => f.code === faculty).name[lang]
   const user = useSelector(state => state.currentUser.data)
   const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
@@ -30,7 +32,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
 
   useEffect(() => {
-    document.title = `${t('facultymonitoring')} - ${faculty}`
+    document.title = `${t('facultymonitoring')} – ${faculty}`
     if (currentRoom) {
       dispatch(wsLeaveRoom(faculty))
       dispatch(clearFormState())
@@ -96,7 +98,7 @@ const FacultyTrackingView = ({ faculty }) => {
         </MenuItem>
         <MenuItem header className="menu-item-header">
           <h2>
-            {t('facultymonitoring').toUpperCase()} - {faculty}
+            {t('common:tracking').toUpperCase()}: {facultyName.toUpperCase()}
           </h2>
         </MenuItem>
         <MenuItem>
@@ -110,7 +112,7 @@ const FacultyTrackingView = ({ faculty }) => {
       </Menu>
 
       {questionPickerModalData && (
-        <CustomModal closeModal={closeQuestionPickerModal} title={t('formView:selectQuestions')}>
+        <CustomModal closeModal={closeQuestionPickerModal} title={`${t('formView:selectQuestions')} – ${facultyName}`}>
           <div className="question-picker-container">
             {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
               <div className="question-group" key={titleIndex}>
@@ -132,7 +134,7 @@ const FacultyTrackingView = ({ faculty }) => {
           filteredQuestions.map(question => (
             <>
               <h4>{`${parseInt(question.id, 10)} - ${question.label}`}</h4>
-              <Button key={question.id} onClick={() => openFormModal(question)} content={t('formView:modifyForm')} />
+              <Button key={question.id} onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
             </>
           ))
         ) : (
