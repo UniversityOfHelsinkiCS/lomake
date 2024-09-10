@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions } from '@root/client/questionData/index'
-import * as answer from '@models/answer'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
@@ -39,13 +38,26 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
     dispatch(getTempAnswersByForm(form))
   }, [])
 
-  console.log(answers)
-
-  const getAnswer = ({ part, faculty }) => {
-    return <Icon color="green" name="checkmark" size="large" />
-  }
-
   if (!answers) return <Loader active />
+
+  const getAnswer = (part, faculty) => {
+    const value = `${part}_text`
+    const answer = answers.find(a => a.programme === faculty)
+
+    if (answer.data.selectedQuestionIds) {
+      const questionIds = answer.data.selectedQuestionIds
+      const selected = questionIds.includes(value)
+
+      if (answer.data[`${value}_lights_history`]) {
+        const lightList = answer.data[`${value}_lights_history`]
+        const { color } = lightList.pop()
+        return <Icon color={color} name="checkmark" size="large" />
+      }
+      if (selected) return <Icon color="grey" name="checkmark" size="large" />
+    }
+
+    return null
+  }
 
   return (
     <>
@@ -74,7 +86,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
               <TableRow>
                 <TableCell>{part.label[lang]}</TableCell>
                 {filteredFaculties.map(faculty => (
-                  <TableCell>{getAnswer(part, faculty)}</TableCell>
+                  <TableCell>{getAnswer(part.id, faculty.key)}</TableCell>
                 ))}
               </TableRow>
             )),
