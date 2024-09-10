@@ -622,6 +622,23 @@ const getDataFromFinnishUniForm = async (req, res) => {
     return res.status(500).json({ error: 'Database error' })
   }
 }
+
+const getFacultyTempAnswersByForm = async (req, res) => {
+  const { form } = req.params
+
+  try {
+    const data = await db.tempAnswer.findAll({
+      where: {
+        form,
+      },
+    })
+    return res.send(data)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   getAll,
   getPreviousYear,
@@ -641,4 +658,5 @@ module.exports = {
   getCommitteeSummaryData,
   getFacultyTempAnswersAfterDeadline,
   getDataFromFinnishUniForm,
+  getFacultyTempAnswersByForm,
 }

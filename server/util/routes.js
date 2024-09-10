@@ -28,6 +28,7 @@ router.get('/reform/university/:dropdownFilter', requireUniFormRight, degreeRefo
 router.get('/answers', checkAdmin, answers.getAll)
 router.get('/answers/temp', answers.getAllTempUserHasAccessTo)
 router.get('/answers/temp/:form/:year', answers.getFacultyTempAnswersAfterDeadline)
+router.get('/answers/temp/:form', answers.getFacultyTempAnswersByForm)
 router.get('/answers/single/:form/:programme/:year', requireProgrammeRead, answers.getSingleProgrammesAnswers)
 router.get('/answers/degreeReform/currentAnswer', answers.getIndividualFormAnswerForUser)
 router.get('/answers/degreeReform/getAllAnswersForUser', answers.getAllIndividualAnswersForUser)

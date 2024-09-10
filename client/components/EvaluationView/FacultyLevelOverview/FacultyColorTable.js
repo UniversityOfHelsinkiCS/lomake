@@ -4,7 +4,7 @@ import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems, answersByYear } from 'Utilities/common'
-import { getTempAnswersByFormAndYear, getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getTempAnswersAfterDeadline, getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
 import { setYear } from 'Utilities/redux/filterReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'
@@ -41,7 +41,7 @@ const FacultyColorTable = React.memo(
     useEffect(() => {
       dispatch(setYear(year))
       if (!formDeadline) {
-        dispatch(getTempAnswersByFormAndYear(form, year))
+        dispatch(getTempAnswersAfterDeadline(form, year))
       } else {
         dispatch(getAllTempAnswersAction())
       }

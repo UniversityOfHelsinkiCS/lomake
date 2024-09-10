@@ -27,7 +27,6 @@ const FacultyTrackingView = ({ faculty }) => {
   const [formModalData, setFormModalData] = useState(null)
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
-
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
 

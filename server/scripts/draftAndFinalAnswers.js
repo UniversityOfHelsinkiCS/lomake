@@ -153,7 +153,7 @@ const createDraftAnswers = async (newYear, form) => {
 const createFinalAnswers = async (newYear, form) => {
   logger.info(`Creating final answers for the year ${newYear} for form ${form}`)
 
-  if (form === formKeys.EVALUATION_FACULTIES) {
+  if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
     await handleNonProgrammeFinalAnswers(form)
   }
   if (form === formKeys.EVALUATION_COMMTTEES) {
