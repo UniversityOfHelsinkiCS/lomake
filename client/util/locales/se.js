@@ -279,6 +279,13 @@ export default {
     bachelorUniForm: 'Kandidatprogrammen (ONE gör anteckningarna)',
     masterUniForm: 'Magisterprogrammen (ONE gör anteckningarna)',
     doctoralUniForm: 'Doktorandprogrammen (TINE och styrgruppen för forskarskolan gör anteckningarna)',
+    monitoringTrackingLabel: 'Övervakning',
+    monitoringActionsLabel: 'Beskrivning av vad fakulteten gör',
+    monitoringResponsibleLabel: 'Ansvariga parter',
+    monitoringContactLabel: 'Kontaktperson / huvudberedare',
+    monitoringResourceLabel: 'Tilldelade resurser',
+    monitoringStartLabel: 'Startdatum',
+    monitoringEndLabel: 'Beräknat slutdatum',
   },
 
   generic: {

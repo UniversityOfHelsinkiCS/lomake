@@ -10,10 +10,8 @@ const MonitoringQuestionForm = ({ question }) => {
   const { id } = question
   const form = formKeys.FACULTY_MONITORING
 
-  const handleSubmit = null
-
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <TrackingTrafficLight id={id} form={form} />
       <FormGroup widths="equal">
         <MonitoringTextarea
@@ -36,11 +34,6 @@ const MonitoringQuestionForm = ({ question }) => {
         <MonitoringTextarea id={`${id}_resources`} label={t('formView:facultyResourcesLabel')} form={form} />
       </FormGroup>
       <MonitoringTextarea id={`${id}_schedule`} label={t('formView:facultyScheduleLabel')} form={form} />
-      <div style={{ textAlign: 'right' }}>
-        <FormButton secondary type="submit">
-          {t('formView:sendForm')}
-        </FormButton>
-      </div>
     </Form>
   )
 }

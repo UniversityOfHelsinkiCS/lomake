@@ -283,6 +283,13 @@ export default {
     bachelorUniForm: "Bachelor's programmes (ONE´s assessment)",
     masterUniForm: "Master's programmes (ONE´s assessment)",
     doctoralUniForm: 'Doctoral programmes (Joint assessment by TINE and the Board of the Doctoral School)',
+    monitoringTrackingLabel: 'Monitoring',
+    monitoringActionsLabel: 'Description of what the faculty is doing',
+    monitoringResponsibleLabel: 'Responsible entities',
+    monitoringContactLabel: 'Contact person / main drafter',
+    monitoringResourceLabel: 'Resources allocated',
+    monitoringStartLabel: 'Start time',
+    monitoringEndLabel: 'Estimated end time',
   },
 
   generic: {

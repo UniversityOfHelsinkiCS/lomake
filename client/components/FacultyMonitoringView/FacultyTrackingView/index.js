@@ -12,8 +12,9 @@ import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
-import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import './FacultyTrackingView.scss'
+import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
+import Answer from './Answer'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -24,14 +25,16 @@ const FacultyTrackingView = ({ faculty }) => {
   const user = useSelector(state => state.currentUser.data)
   const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
-  const [formModalData, setFormModalData] = useState(null)
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
+  const answers = useSelector(state => state.tempAnswers.data)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
+    dispatch(getTempAnswersByForm(form))
+
     if (currentRoom) {
       dispatch(wsLeaveRoom(faculty))
       dispatch(clearFormState())
@@ -55,16 +58,8 @@ const FacultyTrackingView = ({ faculty }) => {
     return <NoPermissions t={t} requestedForm={t('facultymonitoring')} />
   }
 
-  const openFormModal = question => {
-    setFormModalData(question)
-  }
-
   const openQuestionPickerModal = questions => {
     setQuestionPickerModalData(questions)
-  }
-
-  const closeQuestionModal = () => {
-    setFormModalData(null)
   }
 
   const closeQuestionPickerModal = () => {
@@ -72,6 +67,8 @@ const FacultyTrackingView = ({ faculty }) => {
   }
 
   const questionList = modifiedQuestions(lang, form)
+
+  const facultyAnswers = answers ? answers.filter(answer => answer.programme === faculty)[0].data : ''
 
   const filteredQuestions = questionList.filter(question => selectedQuestions.includes(question.id))
 
@@ -128,13 +125,10 @@ const FacultyTrackingView = ({ faculty }) => {
         </CustomModal>
       )}
 
-      <div className="answer-container">
+      <div className="answers-list-container">
         {filteredQuestions.length ? (
           filteredQuestions.map(question => (
-            <>
-              <h4>{`${parseInt(question.id, 10)} - ${question.label}`}</h4>
-              <Button key={question.id} onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
-            </>
+            <Answer answer={facultyAnswers} question={question} faculty={faculty}></Answer>
           ))
         ) : (
           <div className="no-selection-container">
@@ -144,15 +138,6 @@ const FacultyTrackingView = ({ faculty }) => {
           </div>
         )}
       </div>
-
-      {formModalData && (
-        <CustomModal
-          closeModal={closeQuestionModal}
-          title={`${parseInt(formModalData.id, 10)} - ${formModalData.label}`}
-        >
-          <MonitoringQuestionForm question={formModalData} faculty={faculty} />
-        </CustomModal>
-      )}
     </>
   )
 }

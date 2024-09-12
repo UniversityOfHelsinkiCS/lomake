@@ -295,6 +295,13 @@ export default {
     bachelorUniForm: 'Kandiohjelmat\n(ONE kirjaa)',
     masterUniForm: 'Maisteriohjelmat\n(ONE kirjaa)',
     doctoralUniForm: 'Tohtoriohjelmat\n(Tutkijakoulun johtokunta ja TINE yhdessä kirjaavat)',
+    monitoringTrackingLabel: 'Seuranta',
+    monitoringActionsLabel: 'Kuvaus siitä mitä tiedekunta tekee',
+    monitoringResponsibleLabel: 'Vastuutahot',
+    monitoringContactLabel: 'Yhteyshenkilö / päävalmistelija',
+    monitoringResourceLabel: 'Varatut resurssit',
+    monitoringStartLabel: 'Alkamisaika',
+    monitoringEndLabel: 'Arvioitu päättymisaika',
   },
 
   generic: {

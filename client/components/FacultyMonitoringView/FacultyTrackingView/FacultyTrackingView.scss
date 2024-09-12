@@ -18,11 +18,10 @@
   }
 }
 
-.answer-container {
+.answers-list-container {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
-  margin: 2em 0;
 
   .button {
     max-width: 200px;
@@ -32,4 +31,15 @@
   width: 100%;
   text-align: center;
   margin-top: 25px;
+}
+
+.answer-container {
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 2px solid black;
+
+  i {
+    color: gray;
+    padding-bottom: 10px;
+  }
 }
