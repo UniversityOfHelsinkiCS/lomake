@@ -48,7 +48,12 @@ const TrackingTrafficLight = ({ id, form }) => {
         {lightsHistory.map((entry, index) => (
           <Menu.Item>
             <span className={`answer-circle-big-${entry.color}`} />
-            {entry.date.toLocaleString().split('T')[0]}
+            <i>
+              {new Date(entry.date)
+                .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                .split('/')
+                .join('.')}
+            </i>
             <Button
               icon="trash"
               size="mini"

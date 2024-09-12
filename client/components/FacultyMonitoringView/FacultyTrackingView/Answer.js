@@ -21,7 +21,7 @@ const Answer = ({ answer, question, faculty }) => {
   return (
     <>
       <div className="answer-container">
-        <h4>{`${parseInt(question.id, 10)} - ${question.label}`}</h4>
+        <h4>{`${parseInt(question.id, 10)}. ${question.label}`}</h4>
 
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
