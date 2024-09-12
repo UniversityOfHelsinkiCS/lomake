@@ -56,8 +56,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         part,
       }
 
-      if (answer.data[`${part.id}_lights_history`]) {
-        const lightList = answer.data[`${part.id}_lights_history`]
+      const lightList = answer.data[`${part.id}_lights_history`]
+
+      if (lightList && lightList.length > 0) {
         const { color } = lightList[lightList.length - 1]
         return <Button color={color} onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
       }
