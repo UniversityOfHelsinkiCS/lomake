@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Menu, MenuItem, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,7 +11,6 @@ import { facultyMonitoringQuestions as questions } from '@root/client/questionDa
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
-import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import QuestionPicker from './QuestionPicker'
 import Answer from './Answer'
 import './FacultyTrackingView.scss'
@@ -21,22 +20,17 @@ const FacultyTrackingView = ({ faculty }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-  const facultyName = faculties.find(f => f.code === faculty).name[lang]
+  const facultyName = faculties && faculties.find(f => f.code === faculty).name[lang]
   const user = useSelector(state => state.currentUser.data)
   const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
-  const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
-  const answers = useSelector(state => state.tempAnswers.data)
-  const facultyAnswers = useMemo(() => {
-    return answers ? answers.find(answer => answer.programme === faculty)?.data : ''
-  }, [answers, faculty])
+  const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
-    dispatch(getTempAnswersByForm(form))
 
     if (currentRoom) {
       dispatch(wsLeaveRoom(faculty))
@@ -59,6 +53,10 @@ const FacultyTrackingView = ({ faculty }) => {
 
   if (!hasReadRights) {
     return <NoPermissions t={t} requestedForm={t('facultymonitoring')} />
+  }
+
+  if (!faculties) {
+    return null
   }
 
   const openQuestionPickerModal = questions => {
@@ -111,10 +109,10 @@ const FacultyTrackingView = ({ faculty }) => {
       )}
 
       <div className="answers-list-container">
-        {filteredQuestions.length ? (
+        {selectedQuestions ? (
           filteredQuestions.map(parts => {
             if (parts.length) {
-              return parts.map(part => <Answer answer={facultyAnswers} question={part} faculty={faculty} />)
+              return parts.map(part => <Answer question={part} faculty={faculty} key={part} />)
             }
             return null
           })
