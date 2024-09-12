@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -7,6 +8,7 @@ import '../../Generic/Generic.scss'
 
 const Answer = ({ answer, question, faculty }) => {
   const { t } = useTranslation()
+  const lang = useSelector(state => state.language)
   const [formModalData, setFormModalData] = useState(null)
   const lightsHistory = answer[`${question.id}_lights_history`]
 
@@ -21,7 +23,7 @@ const Answer = ({ answer, question, faculty }) => {
   return (
     <>
       <div className="answer-container">
-        <h4>{`${parseInt(question.id, 10)}. ${question.label}`}</h4>
+        <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
 
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
@@ -63,7 +65,10 @@ const Answer = ({ answer, question, faculty }) => {
       </div>
 
       {formModalData && (
-        <CustomModal closeModal={closeFormModal} title={`${parseInt(formModalData.id, 10)} - ${formModalData.label}`}>
+        <CustomModal
+          closeModal={closeFormModal}
+          title={`${parseInt(formModalData.id, 10)} - ${formModalData.label[lang]}`}
+        >
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
           <Button secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>
             {t('formView:sendForm')}

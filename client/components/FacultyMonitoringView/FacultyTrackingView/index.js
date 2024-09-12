@@ -7,7 +7,7 @@ import { Redirect } from 'react-router'
 import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
-import { getGroupedQuestions, modifiedQuestions } from 'Utilities/common'
+import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
@@ -15,7 +15,6 @@ import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import QuestionPicker from './QuestionPicker'
 import Answer from './Answer'
 import './FacultyTrackingView.scss'
-import { facultyMonitoringQuestions } from '@root/client/questionData/index'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -29,7 +28,6 @@ const FacultyTrackingView = ({ faculty }) => {
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`
-  const questions = facultyMonitoringQuestions
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const answers = useSelector(state => state.tempAnswers.data)
   const facultyAnswers = useMemo(() => {
@@ -47,7 +45,7 @@ const FacultyTrackingView = ({ faculty }) => {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
     }
-  }, [faculty, lang])
+  }, [dispatch, faculty, lang])
 
   useEffect(() => {
     return () => {
@@ -71,7 +69,7 @@ const FacultyTrackingView = ({ faculty }) => {
     setQuestionPickerModalData(null)
   }
 
-  const filteredQuestions = questions.filter(question => selectedQuestions.includes(question.id))
+  const filteredQuestions = questions.map(object => object.parts.filter(part => selectedQuestions.includes(part.id)))
 
   return (
     <>
@@ -114,7 +112,12 @@ const FacultyTrackingView = ({ faculty }) => {
 
       <div className="answers-list-container">
         {filteredQuestions.length ? (
-          filteredQuestions.map(question => <Answer answer={facultyAnswers} question={question} faculty={faculty} />)
+          filteredQuestions.map(parts => {
+            if (parts.length) {
+              return parts.map(part => <Answer answer={facultyAnswers} question={part} faculty={faculty} />)
+            }
+            return null
+          })
         ) : (
           <div className="no-selection-container">
             <Header as="h3" disabled>
