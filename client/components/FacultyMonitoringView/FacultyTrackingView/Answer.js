@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import CustomModal from 'Components/Generic/CustomModal'
 import { Button } from 'semantic-ui-react'
-import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import { useTranslation } from 'react-i18next'
+import CustomModal from 'Components/Generic/CustomModal'
+import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
 const Answer = ({ answer, question, faculty }) => {
@@ -27,7 +27,8 @@ const Answer = ({ answer, question, faculty }) => {
             responsible_entities: 'monitoringResponsibleLabel',
             contact_person: 'monitoringContactLabel',
             resources: 'monitoringResourceLabel',
-            schedule: 'monitoringStartLabel', //todo: change schedule field to start and end
+            schedule: 'monitoringStartLabel',
+            //  todo: change schedule field to start and end
           }
           return (
             <>

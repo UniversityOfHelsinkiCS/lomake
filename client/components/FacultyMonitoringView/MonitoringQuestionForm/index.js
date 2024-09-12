@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, FormButton, FormGroup } from 'semantic-ui-react'
+import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'

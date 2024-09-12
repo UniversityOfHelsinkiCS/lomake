@@ -11,10 +11,10 @@ import { modifiedQuestions } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
-import QuestionPicker from './QuestionPicker'
-import './FacultyTrackingView.scss'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
+import QuestionPicker from './QuestionPicker'
 import Answer from './Answer'
+import './FacultyTrackingView.scss'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -127,9 +127,7 @@ const FacultyTrackingView = ({ faculty }) => {
 
       <div className="answers-list-container">
         {filteredQuestions.length ? (
-          filteredQuestions.map(question => (
-            <Answer answer={facultyAnswers} question={question} faculty={faculty}></Answer>
-          ))
+          filteredQuestions.map(question => <Answer answer={facultyAnswers} question={question} faculty={faculty} />)
         ) : (
           <div className="no-selection-container">
             <Header as="h3" disabled>
