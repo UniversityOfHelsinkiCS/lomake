@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
@@ -9,6 +9,8 @@ const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
   const { id } = question
   const form = formKeys.FACULTY_MONITORING
+
+  useEffect(() => {}, [])
 
   return (
     <Form>
