@@ -62,7 +62,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         return <Button color={color} onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
       }
       if (selected) {
-        return <Button onClick={() => setQuestionModal(answer)} icon="checkmark" />
+        return <Button onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
       }
     }
 
