@@ -6,7 +6,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
-const Answer = ({ answer, question, faculty }) => {
+const Answer = ({ answer, question, faculty, modify = true }) => {
   const { t } = useTranslation()
   const lang = useSelector(state => state.language)
   const [formModalData, setFormModalData] = useState(null)
@@ -61,7 +61,7 @@ const Answer = ({ answer, question, faculty }) => {
           )
         })}
 
-        <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
+        {modify && <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />}
       </div>
 
       {formModalData && (

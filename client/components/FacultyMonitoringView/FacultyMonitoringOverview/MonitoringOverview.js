@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import {
   Menu,
   MenuItem,
@@ -8,20 +8,23 @@ import {
   TableCell,
   TableBody,
   Table,
-  Icon,
+  Button,
   Loader,
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions } from '@root/client/questionData/index'
+import Answer from '../FacultyTrackingView/Answer'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
   const answers = useSelector(state => state.tempAnswers.data)
   const form = formKeys.FACULTY_MONITORING
+  const [questionModal, setQuestionModal] = useState(null)
 
   const filteredFaculties = useMemo(
     () =>
@@ -41,22 +44,32 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   if (!answers) return <Loader active />
 
   const getAnswer = (part, faculty) => {
-    const value = `${part}_text`
     const answer = answers.find(a => a.programme === faculty)
 
     if (answer.data.selectedQuestionIds) {
       const questionIds = answer.data.selectedQuestionIds
-      const selected = questionIds.includes(value)
+      const selected = questionIds.includes(part.id)
 
-      if (answer.data[`${value}_lights_history`]) {
-        const lightList = answer.data[`${value}_lights_history`]
-        const { color } = lightList[lightList.length - 1]
-        return <Icon color={color} name="checkmark" size="large" />
+      const answerObject = {
+        answer,
+        faculty,
+        part,
       }
-      if (selected) return <Icon color="grey" name="checkmark" size="large" />
+
+      if (answer.data[`${part.id}_lights_history`]) {
+        const lightList = answer.data[`${part.id}_lights_history`]
+        const { color } = lightList[lightList.length - 1]
+        return <Button color={color} onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
+      }
+      if (selected) {
+        return <Button onClick={() => setQuestionModal(answer)} icon="checkmark" />
+      }
     }
 
     return null
+  }
+  const closeModal = () => {
+    setQuestionModal(null)
   }
 
   return (
@@ -66,6 +79,17 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
           <h2>{t('facultymonitoring').toUpperCase()}</h2>
         </MenuItem>
       </Menu>
+
+      {questionModal && (
+        <CustomModal closeModal={closeModal}>
+          <Answer
+            answer={questionModal.answer.data}
+            question={questionModal.part}
+            faculty={questionModal.faculty}
+            modify={false}
+          />
+        </CustomModal>
+      )}
 
       <Table>
         <TableHeader>
@@ -86,7 +110,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
               <TableRow>
                 <TableCell>{part.label[lang]}</TableCell>
                 {filteredFaculties.map(faculty => (
-                  <TableCell>{getAnswer(part.id, faculty.key)}</TableCell>
+                  <TableCell>{getAnswer(part, faculty.key)}</TableCell>
                 ))}
               </TableRow>
             )),

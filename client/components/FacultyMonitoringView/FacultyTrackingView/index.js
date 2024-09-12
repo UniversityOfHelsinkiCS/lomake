@@ -45,7 +45,7 @@ const FacultyTrackingView = ({ faculty }) => {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
     }
-  }, [dispatch, faculty, lang])
+  }, [faculty, lang])
 
   useEffect(() => {
     return () => {
