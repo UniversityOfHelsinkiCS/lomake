@@ -6,7 +6,7 @@ import '../../Generic/Generic.scss'
 
 const QuestionPicker = ({ label, questionsList, form }) => {
   const dispatch = useDispatch()
-
+  const lang = useSelector(state => state.language)
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -15,7 +15,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
 
   const options = questionsList
     .map(q => {
-      return { key: `${q.id}`, text: `${q.labelIndex}. ${q.label}`, value: q.id }
+      return { key: `${q.id}`, text: `${q.index}. ${q.label[lang]}`, value: q.id }
     })
     .filter(Boolean) // Filter out any undefined options
 

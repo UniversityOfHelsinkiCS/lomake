@@ -7,7 +7,7 @@ import { Redirect } from 'react-router'
 import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
-import { modifiedQuestions } from 'Utilities/common'
+import { getGroupedQuestions, modifiedQuestions } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
@@ -15,6 +15,7 @@ import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import QuestionPicker from './QuestionPicker'
 import Answer from './Answer'
 import './FacultyTrackingView.scss'
+import { facultyMonitoringQuestions } from '@root/client/questionData/index'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -28,6 +29,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`
+  const questions = facultyMonitoringQuestions
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const answers = useSelector(state => state.tempAnswers.data)
   const facultyAnswers = useMemo(() => {
@@ -69,23 +71,7 @@ const FacultyTrackingView = ({ faculty }) => {
     setQuestionPickerModalData(null)
   }
 
-  const questionList = modifiedQuestions(lang, form)
-
-  const filteredQuestions = questionList.filter(question => selectedQuestions.includes(question.id))
-
-  const groupedQuestions = questionList.reduce((acc, question) => {
-    const { titleIndex, title } = question
-
-    if (!acc[titleIndex]) {
-      acc[titleIndex] = {
-        title,
-        questions: [],
-      }
-    }
-
-    acc[titleIndex].questions.push(question)
-    return acc
-  }, {})
+  const filteredQuestions = questions.filter(question => selectedQuestions.includes(question.id))
 
   return (
     <>
@@ -101,7 +87,7 @@ const FacultyTrackingView = ({ faculty }) => {
         <MenuItem>
           <Button
             secondary
-            onClick={() => openQuestionPickerModal(groupedQuestions)}
+            onClick={() => openQuestionPickerModal(questions)}
             className="select-questions-button"
             content={t('formView:selectQuestions')}
           />
@@ -111,9 +97,9 @@ const FacultyTrackingView = ({ faculty }) => {
       {questionPickerModalData && (
         <CustomModal closeModal={closeQuestionPickerModal} title={`${t('formView:selectQuestions')} – ${facultyName}`}>
           <div className="question-picker-container">
-            {Object.entries(groupedQuestions).map(([titleIndex, group]) => (
+            {Object.entries(questions).map(([titleIndex, group]) => (
               <div className="question-group" key={titleIndex}>
-                <QuestionPicker label={group.title} questionsList={group.questions} form={form} />
+                <QuestionPicker label={group.title[lang]} questionsList={group.parts} form={form} />
               </div>
             ))}
             <Button

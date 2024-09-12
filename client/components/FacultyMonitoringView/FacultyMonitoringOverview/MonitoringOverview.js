@@ -67,7 +67,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </MenuItem>
       </Menu>
 
-      <Table celled>
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHeaderCell />
