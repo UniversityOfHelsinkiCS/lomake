@@ -53,7 +53,7 @@ const NavBarItems = {
       {
         key: 'faculty-monitoring',
         label: 'facultymonitoring',
-        path: '',
+        path: '/faculty-monitoring',
         access: [],
         disabled: true,
       },
@@ -214,7 +214,7 @@ const NavBar = () => {
                   key={`menu-item-${item.path}`}
                   tabIndex="-1"
                   to={item.path}
-                  disabled={item.disabled}
+                  disabled={item.disabled && !isAdmin(user)}
                 >
                   {t(item.label)}
                 </Dropdown.Item>
