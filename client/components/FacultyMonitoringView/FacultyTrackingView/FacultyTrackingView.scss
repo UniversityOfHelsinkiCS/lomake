@@ -43,3 +43,21 @@
     padding-bottom: 10px;
   }
 }
+
+.light-container {
+  display: table;
+  margin-bottom: 1em;
+  .light {
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 1em;
+
+    span {
+      vertical-align: bottom;
+    }
+
+    i {
+      padding-left: 4px;
+    }
+  }
+}

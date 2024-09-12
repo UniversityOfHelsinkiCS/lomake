@@ -8,6 +8,7 @@ import '../../Generic/Generic.scss'
 const Answer = ({ answer, question, faculty }) => {
   const { t } = useTranslation()
   const [formModalData, setFormModalData] = useState(null)
+  const lightsHistory = answer[`${question.id}_lights_history`]
 
   const openFormModal = question => {
     setFormModalData(question)
@@ -21,6 +22,26 @@ const Answer = ({ answer, question, faculty }) => {
     <>
       <div className="answer-container">
         <h4>{`${parseInt(question.id, 10)} - ${question.label}`}</h4>
+
+        <div>
+          <i>{t(`formView:monitoringTrackingLabel`)}</i>
+          <div className="light-container">
+            {lightsHistory
+              ? lightsHistory.map(entry => (
+                  <div className="light">
+                    <span className={`answer-circle-big-${entry.color}`} />
+                    <i>
+                      {new Date(entry.date)
+                        .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                        .split('/')
+                        .join('.')}
+                    </i>
+                  </div>
+                ))
+              : t('formView:noAnswer')}
+          </div>
+        </div>
+
         {['actions', 'responsible_entities', 'contact_person', 'resources', 'schedule'].map(fieldName => {
           const labels = {
             actions: 'monitoringActionsLabel',
