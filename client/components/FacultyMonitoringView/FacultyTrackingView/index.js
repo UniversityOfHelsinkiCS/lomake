@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Menu, MenuItem, Button, Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -30,6 +30,9 @@ const FacultyTrackingView = ({ faculty }) => {
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const answers = useSelector(state => state.tempAnswers.data)
+  const facultyAnswers = useMemo(() => {
+    return answers ? answers.find(answer => answer.programme === faculty)?.data : ''
+  }, [answers, faculty])
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
@@ -67,8 +70,6 @@ const FacultyTrackingView = ({ faculty }) => {
   }
 
   const questionList = modifiedQuestions(lang, form)
-
-  const facultyAnswers = answers ? answers.filter(answer => answer.programme === faculty)[0].data : ''
 
   const filteredQuestions = questionList.filter(question => selectedQuestions.includes(question.id))
 
