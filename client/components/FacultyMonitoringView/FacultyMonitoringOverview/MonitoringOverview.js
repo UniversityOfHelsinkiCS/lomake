@@ -11,6 +11,7 @@ import {
   Button,
   Loader,
 } from 'semantic-ui-react'
+import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
 import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -69,6 +70,80 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
     return null
   }
+
+  const getFacultySummarySectionData = (section, faculty) => {
+    const answer = answers.find(a => a.programme === faculty)
+
+    if (answer && answer.data.selectedQuestionIds) {
+      const questionIds = section.parts.map(part => part.id)
+      const summaryAnswers = questionIds.map(id => {
+        const key = `${id}_lights_history`
+        return answer.data[key] || []
+      })
+
+      const colors = {
+        green: { value: 0, programmes: [] },
+        yellow: { value: 0, programmes: [] },
+        red: { value: 0, programmes: [] },
+        emptyAnswer: { value: 0, programmes: [] },
+        withoutEmpty: { value: 0, programmes: [] },
+        total: { value: 0 },
+      }
+
+      summaryAnswers.forEach(answerList => {
+        if (answerList.length > 0) {
+          const lastEntry = answerList[answerList.length - 1]
+          if (lastEntry.color) {
+            colors[lastEntry.color].value += 1
+            colors[lastEntry.color].programmes.push(lastEntry.date)
+          }
+        }
+      })
+
+      colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
+      colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
+
+      const data = [
+        {
+          title: 'Green',
+          value: colors.green.value || 0,
+          color: 'green',
+        },
+        {
+          title: 'Yellow',
+          value: colors.yellow.value || 0,
+          color: 'yellow',
+        },
+        {
+          title: 'Red',
+          value: colors.red.value || 0,
+          color: 'red',
+        },
+        {
+          title: 'Empty',
+          value: colors.emptyAnswer.value || 0,
+          color: 'grey',
+        },
+      ]
+
+      return (
+        <PieChart
+          data={data.sort((a, b) => b.value - a.value)}
+          lengthAngle={360}
+          lineWidth={100}
+          paddingAngle={0}
+          radius={50}
+          startAngle={270}
+          viewBoxSize={[145, 145]}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
+          labelPosition={112}
+        />
+      )
+    }
+
+    return null
+  }
+
   const closeModal = () => {
     setQuestionModal(null)
   }
@@ -106,16 +181,16 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {facultyMonitoringQuestions.map(section =>
-            section.parts.map(part => (
-              <TableRow>
-                <TableCell>{part.label[lang]}</TableCell>
-                {filteredFaculties.map(faculty => (
-                  <TableCell>{getAnswer(part, faculty.key)}</TableCell>
-                ))}
-              </TableRow>
-            )),
-          )}
+          {facultyMonitoringQuestions.map((section, index) => (
+            <TableRow>
+              <TableCell>
+                <h4>{section.title[lang]}</h4>
+              </TableCell>
+              {filteredFaculties.map(faculty => (
+                <TableCell>{getFacultySummarySectionData(section, faculty.key)}</TableCell>
+              ))}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </>
@@ -123,3 +198,16 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 }
 
 export default MonitoringOverview
+
+/* 
+ *
+ *section.parts.map(part => (
+              <TableRow>
+                <TableCell>{part.label[lang]}</TableCell>
+                {filteredFaculties.map(faculty => (
+                  <TableCell>{getAnswer(part, faculty.key)}</TableCell>
+                ))}
+              </TableRow>
+            )),
+
+*/
