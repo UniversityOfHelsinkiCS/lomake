@@ -80,29 +80,29 @@ const TrackingTrafficLight = ({ id, form }) => {
       {showChooser && (
         <div style={{ margin: '1em 0' }}>
           <div style={{ alignItems: 'center' }}>
-            <div title={t('positive')} style={{ display: 'flex' }}>
+            <div title={t('positiveFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-positive-${id}`}
                 className={getClassName('green')}
                 onClick={!reduxViewOnly ? () => chooseLight('green') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('positive')}</p>
+              <p style={{ margin: '1em' }}>{t('positiveFaculty')}</p>
             </div>
-            <div title={t('neutral')} style={{ display: 'flex' }}>
+            <div title={t('neutralFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-neutral-${id}`}
                 className={getClassName('yellow')}
                 onClick={!reduxViewOnly ? () => chooseLight('yellow') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('neutral')}</p>
+              <p style={{ margin: '1em' }}>{t('neutralFaculty')}</p>
             </div>
-            <div title={t('negative')} style={{ display: 'flex' }}>
+            <div title={t('negativeFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-negative-${id}`}
                 className={getClassName('red')}
                 onClick={!reduxViewOnly ? () => chooseLight('red') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('negative')}</p>
+              <p style={{ margin: '1em' }}>{t('negativeFaculty')}</p>
             </div>
           </div>
         </div>

@@ -13,6 +13,9 @@ export default {
     positive: 'Kunnossa',
     neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
+    positiveFaculty: 'Toteutettu',
+    neutralFaculty: 'Edennyt ja käynnissä',
+    negativeFaculty: 'Ei ole edennyt',
     noColors: '*Kysymyksiä, joille ei ole määritetty liikennevaloja, ei näytetä ollenkaan (esim. 16 ja 17)',
     green: 'Vihreä',
     yellow: 'Keltainen',
@@ -116,7 +119,6 @@ export default {
     overview: 'Yleiskatsaus',
     bachelorMasterToggle: 'Kandi- ja maisteriohjelmat',
     doctoralToggle: 'Tohtoriohjelmat',
-
     toFrontpage: 'Etusivulle',
   },
 
