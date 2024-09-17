@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'
 import TrackingTrafficLight from 'Components/Generic/TrackingTrafficLight'
+import DatePickerField from 'Components/Generic/DatePickerField'
 
 const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
@@ -35,7 +36,10 @@ const MonitoringQuestionForm = ({ question }) => {
         />
         <MonitoringTextarea id={`${id}_resources`} label={t('formView:facultyResourcesLabel')} form={form} />
       </FormGroup>
-      <MonitoringTextarea id={`${id}_schedule`} label={t('formView:facultyScheduleLabel')} form={form} />
+      <FormGroup widths="equal">
+        <DatePickerField id={`${id}_start_date`} label={t('formView:facultyStartLabel')} form={form} />
+        <DatePickerField id={`${id}_end_date`} label={t('formView:facultyEndLabel')} form={form} />
+      </FormGroup>
     </Form>
   )
 }

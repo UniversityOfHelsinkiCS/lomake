@@ -178,7 +178,8 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                           `${id}_responsible_entities_text`,
                           `${id}_contact_person_text`,
                           `${id}_resources_text`,
-                          `${id}_schedule_text`,
+                          `${id}_start_date_text`,
+                          `${id}_end_date_text`,
                         )
                       } else {
                         idsToCheck.push(`${id}_1_text`)

@@ -176,7 +176,8 @@ export default {
     facultyEntitiesLabel: 'Responsible entities',
     facultyContactLabel: 'Contact person / lead author',
     facultyResourcesLabel: 'Allocated resources',
-    facultyScheduleLabel: 'Schedule',
+    facultyStartLabel: 'Start time',
+    facultyEndLabel: 'Estimated end time',
     info1:
       'Please discuss the topics below in the steering group of the degree programme. The questions are intended to spark discussion, and the purpose is not to answer them as such.',
     info2:

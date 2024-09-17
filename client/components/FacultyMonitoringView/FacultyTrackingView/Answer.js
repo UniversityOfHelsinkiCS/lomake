@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Loader } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -39,8 +39,8 @@ const Answer = ({ question, faculty, modify = true }) => {
 
   return (
     <>
+      <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
       <div className="answer-container">
-        <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
           <div className="light-container">
@@ -59,18 +59,30 @@ const Answer = ({ question, faculty, modify = true }) => {
               : t('formView:noAnswer')}
           </div>
         </div>
-        {['actions', 'responsible_entities', 'contact_person', 'resources', 'schedule'].map(fieldName => {
+        {['actions', 'responsible_entities', 'contact_person', 'resources', 'start_date', 'end_date'].map(fieldName => {
           const labels = {
             actions: 'monitoringActionsLabel',
             responsible_entities: 'monitoringResponsibleLabel',
             contact_person: 'monitoringContactLabel',
             resources: 'monitoringResourceLabel',
-            schedule: 'monitoringStartLabel',
+            start_date: 'monitoringStartLabel',
+            end_date: 'monitoringEndLabel',
           }
           return (
             <React.Fragment key={fieldName}>
               <i>{t(`formView:${labels[fieldName]}`)}</i>{' '}
-              <p key={fieldName}>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+              {fieldName.includes('date') ? (
+                <p>
+                  {facultyAnswers[`${question.id}_${fieldName}_text`]
+                    ? new Date(facultyAnswers[`${question.id}_${fieldName}_text`])
+                        .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                        .split('/')
+                        .join('.')
+                    : t('formView:noAnswer')}
+                </p>
+              ) : (
+                <p key={fieldName}>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+              )}
             </React.Fragment>
           )
         })}

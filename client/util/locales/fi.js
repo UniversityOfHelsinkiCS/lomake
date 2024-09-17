@@ -191,6 +191,8 @@ export default {
     facultyContactLabel: 'Yhteyshenkilö / päävalmistelija',
     facultyResourcesLabel: 'Varatut resurssit',
     facultyScheduleLabel: 'Aikataulu',
+    facultyStartLabel: 'Alkamisaika',
+    facultyEndLabel: 'Arvioitu päättymisaika',
     info1:
       'Käykää koulutusohjelman johtoryhmässä keskustelua seuraavista aiheista. Aiheisiin liittyvät kysymykset on tarkoitettu keskustelua virittäviksi, eikä niihin sellaisenaan ole tarkoitus vastata.',
     info2: 'Antakaa yleisarvio kunkin aiheen kohdalla (liikennevalot):',

@@ -186,7 +186,8 @@ export default {
     facultyEntitiesLabel: 'Ansvariga parter',
     facultyContactLabel: 'Kontaktperson / huvudförfattare',
     facultyResourcesLabel: 'Tilldelade resurser',
-    facultyScheduleLabel: 'Tidsplan',
+    facultyStartLabel: 'Starttid',
+    facultyEndLabel: 'Beräknad sluttid',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
     info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av trafikljusen: ',
