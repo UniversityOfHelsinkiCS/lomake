@@ -8,8 +8,10 @@ import {
   TableCell,
   TableBody,
   Table,
-  Button,
+  Header,
   Loader,
+  Card,
+  Icon,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -21,11 +23,54 @@ import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions } from '@root/client/questionData/index'
 import Answer from '../FacultyTrackingView/Answer'
 
+const squareStyles = {
+  boxShadow: '0px 0px 1px 1px rgba(0, 0, 0, 0.1)',
+  overflow: 'hidden',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+  width: '80px',
+  height: '80px',
+  transition: 'filter 0.3s',
+}
+
+const colors = {
+  red: { backgroundColor: '#ff7f7f', hover: { filter: 'brightness(0.8)' } },
+  yellow: { backgroundColor: '#feffb0', hover: { filter: 'brightness(0.8)' } },
+  green: { backgroundColor: '#9dfe9c', hover: { filter: 'brightness(0.8)' } },
+  gray: { border: '4px solid gray', backgroundColor: 'transparent', hover: { filter: 'brightness(0.8)' } },
+}
+
+const Square = ({ color, wide, setQuestionModal, answerObject, chevron = null }) => {
+  const { backgroundColor, hover } = colors[color] || colors.gray
+
+  return (
+    <Card
+      style={{
+        ...squareStyles,
+        backgroundColor,
+        ...(wide && { gridColumn: 'span 2' }),
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.filter = hover.filter
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.filter = 'none'
+      }}
+      onClick={() => setQuestionModal(answerObject)}
+    >
+      {chevron}
+    </Card>
+  )
+}
+
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
   const answers = useSelector(state => state.tempAnswers.data)
   const form = formKeys.FACULTY_MONITORING
   const [questionModal, setQuestionModal] = useState(null)
+  const [accordion, setAccordion] = useState(false)
 
   const filteredFaculties = useMemo(
     () =>
@@ -59,12 +104,30 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
       const lightList = answer.data[`${part.id}_lights_history`]
 
+      if (lightList && lightList.length > 1) {
+        const lastMeasurement = lightList[lightList.length - 1]
+        const secondLastMeasurement = lightList[lightList.length - 2]
+
+        const hasChangedToPositive = lastMeasurement.value > secondLastMeasurement.value
+        const hasChangedToNegative = lastMeasurement.value < secondLastMeasurement.value
+
+        let chevron = null
+
+        if (hasChangedToPositive) chevron = <Icon name="chevron up" size="huge" color="black" />
+        if (hasChangedToNegative) chevron = <Icon name="chevron down" size="huge" color="black" />
+
+        const { color } = lastMeasurement
+        return (
+          <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} chevron={chevron} />
+        )
+      }
+
       if (lightList && lightList.length > 0) {
         const { color } = lightList[lightList.length - 1]
-        return <Button color={color} onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
+        return <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} />
       }
       if (selected) {
-        return <Button onClick={() => setQuestionModal(answerObject)} icon="checkmark" />
+        return <Square color="grey" setQuestionModal={setQuestionModal} answerObject={answerObject} />
       }
     }
 
@@ -105,22 +168,22 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
       const data = [
         {
-          title: 'Green',
+          title: t('green'),
           value: colors.green.value || 0,
-          color: 'green',
+          color: '#9dfe9c',
         },
         {
-          title: 'Yellow',
+          title: t('yellow'),
           value: colors.yellow.value || 0,
-          color: 'yellow',
+          color: '#feffb0',
         },
         {
-          title: 'Red',
+          title: t('red'),
           value: colors.red.value || 0,
-          color: 'red',
+          color: '#ff7f7f',
         },
         {
-          title: 'Empty',
+          title: t('empty'),
           value: colors.emptyAnswer.value || 0,
           color: 'grey',
         },
@@ -146,6 +209,11 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   const closeModal = () => {
     setQuestionModal(null)
+  }
+
+  const handleAccordion = sectionIndex => {
+    if (accordion === sectionIndex) setAccordion(null)
+    else setAccordion(sectionIndex)
   }
 
   return (
@@ -182,32 +250,36 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </TableHeader>
         <TableBody>
           {facultyMonitoringQuestions.map((section, index) => (
-            <TableRow>
-              <TableCell>
-                <h4>{section.title[lang]}</h4>
-              </TableCell>
-              {filteredFaculties.map(faculty => (
-                <TableCell>{getFacultySummarySectionData(section, faculty.key)}</TableCell>
-              ))}
-            </TableRow>
+            <React.Fragment key={section.id}>
+              {' '}
+              <TableRow>
+                <TableCell>
+                  <Header as="h4" onClick={() => handleAccordion(index)}>
+                    {section.title[lang]}
+                  </Header>
+                </TableCell>
+                {filteredFaculties.map(faculty => (
+                  <TableCell key={faculty.key}>{getFacultySummarySectionData(section, faculty.key)}</TableCell>
+                ))}
+              </TableRow>
+              {accordion === index &&
+                section.parts.map(part => (
+                  <TableRow key={part.id}>
+                    {' '}
+                    <TableCell>
+                      {part.index}. {part.label[lang]}
+                    </TableCell>
+                    {filteredFaculties.map(faculty => (
+                      <TableCell key={faculty.key}>{getAnswer(part, faculty.key)}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+            </React.Fragment>
           ))}
-        </TableBody>
+        </TableBody>{' '}
       </Table>
     </>
   )
 }
 
 export default MonitoringOverview
-
-/* 
- *
- *section.parts.map(part => (
-              <TableRow>
-                <TableCell>{part.label[lang]}</TableCell>
-                {filteredFaculties.map(faculty => (
-                  <TableCell>{getAnswer(part, faculty.key)}</TableCell>
-                ))}
-              </TableRow>
-            )),
-
-*/

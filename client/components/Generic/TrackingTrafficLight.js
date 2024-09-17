@@ -15,9 +15,16 @@ const TrackingTrafficLight = ({ id, form }) => {
 
   const [showChooser, setShowChooser] = useState(false)
 
+  const colorValueMap = {
+    green: 1,
+    yellow: 0,
+    red: -1,
+  }
+
   const chooseLight = color => {
     if (!reduxViewOnly) {
-      const newEntry = { color, date: new Date().toISOString() }
+      const value = colorValueMap[color] !== undefined ? colorValueMap[color] : null
+      const newEntry = { color, value, date: new Date().toISOString() }
       dispatch(updateFormField(fieldName, [...lightsHistory, newEntry], form))
       setShowChooser(false)
     }
