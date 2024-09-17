@@ -87,11 +87,9 @@ const Answer = ({ question, faculty, modify = true }) => {
           )
         })}
         {modify && (
-          <Button
-            style={{ float: 'right' }}
-            onClick={() => openFormModal(question)}
-            content={t('formView:modifyPlan')}
-          />
+          <div className="button-container">
+            <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
+          </div>
         )}
       </div>
       {formModalData && (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Menu, MenuItem, Button, Header } from 'semantic-ui-react'
+import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -28,6 +28,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const fieldName = `selectedQuestionIds`
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
+  const [activeAccordions, setActiveAccordions] = useState({})
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
@@ -67,7 +68,20 @@ const FacultyTrackingView = ({ faculty }) => {
     setQuestionPickerModalData(null)
   }
 
-  const filteredQuestions = questions.map(object => object.parts.filter(part => selectedQuestions.includes(part.id)))
+  const handleAccordionClick = (e, title) => {
+    const { index } = title
+    setActiveAccordions(prevState => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }))
+  }
+
+  const filteredQuestions = questions
+    .map(object => ({
+      ...object,
+      parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
+    }))
+    .filter(object => object.parts.length > 0)
 
   return (
     <>
@@ -109,13 +123,25 @@ const FacultyTrackingView = ({ faculty }) => {
       )}
 
       <div className="answers-list-container">
-        {selectedQuestions ? (
-          filteredQuestions.map(parts => {
-            if (parts.length) {
-              return parts.map(part => <Answer question={part} faculty={faculty} key={part} />)
-            }
-            return null
-          })
+        {filteredQuestions.length > 0 ? (
+          filteredQuestions.map(group => (
+            <div className="accordion-container" key={`group-${group.title[lang]}`}>
+              <Accordion>
+                <Accordion.Title
+                  active={activeAccordions[`group-${group.title[lang]}`]}
+                  index={`group-${group.title[lang]}`}
+                  onClick={handleAccordionClick}
+                >
+                  <h3>
+                    <Icon name="dropdown" />
+                    {group.title[lang]}
+                  </h3>
+                </Accordion.Title>
+                {activeAccordions[`group-${group.title[lang]}`] &&
+                  group.parts.map(part => <Answer question={part} faculty={faculty} key={part.id} />)}
+              </Accordion>
+            </div>
+          ))
         ) : (
           <div className="no-selection-container">
             <Header as="h3" disabled>

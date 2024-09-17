@@ -33,14 +33,23 @@
 }
 
 .answer-container {
+  display: flex;
+  flex-direction: column;
   margin: 1em 0;
   padding-left: 1em;
   border-left: 2px solid black;
+  max-width: 100%;
+  word-wrap: break-word;
 
   i {
     color: gray;
     padding-bottom: 10px;
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .light-container {
@@ -59,4 +68,9 @@
       padding-left: 4px;
     }
   }
+}
+
+.accordion-container {
+  padding: 2.5em 0em;
+  border-bottom: 0.5px solid lightgray;
 }
