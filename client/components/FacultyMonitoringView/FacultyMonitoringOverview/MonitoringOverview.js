@@ -113,8 +113,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
         let chevron = null
 
-        if (hasChangedToPositive) chevron = <Icon name="chevron up" size="huge" color="black" />
-        if (hasChangedToNegative) chevron = <Icon name="chevron down" size="huge" color="black" />
+        if (hasChangedToPositive) chevron = <Icon name="chevron up" size="big" color="black" />
+        if (hasChangedToNegative) chevron = <Icon name="chevron down" size="big" color="black" />
 
         const { color } = lastMeasurement
         return (
@@ -153,18 +153,21 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         total: { value: 0 },
       }
 
-      summaryAnswers.forEach(answerList => {
-        if (answerList.length > 0) {
+      const selectedQuestionIds = answer.data.selectedQuestionIds || []
+
+      summaryAnswers.forEach((answerList, index) => {
+        const questionId = questionIds[index]
+
+        if (answerList.length === 0 && selectedQuestionIds.includes(questionId)) {
+          colors.emptyAnswer.value += 1
+        } else if (answerList.length > 0) {
           const lastEntry = answerList[answerList.length - 1]
-          if (lastEntry.color) {
+          if (lastEntry && lastEntry.color) {
             colors[lastEntry.color].value += 1
             colors[lastEntry.color].programmes.push(lastEntry.date)
           }
         }
       })
-
-      colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
-      colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
 
       const data = [
         {
@@ -185,7 +188,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         {
           title: t('empty'),
           value: colors.emptyAnswer.value || 0,
-          color: 'grey',
+          color: 'white',
         },
       ]
 
@@ -254,7 +257,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
               {' '}
               <TableRow>
                 <TableCell>
-                  <Header as="h4" onClick={() => handleAccordion(index)}>
+                  <Header style={{ cursor: 'pointer' }} as="h4" onClick={() => handleAccordion(index)}>
                     {section.title[lang]}
                   </Header>
                 </TableCell>
