@@ -11,8 +11,6 @@ const MonitoringQuestionForm = ({ question }) => {
   const { id } = question
   const form = formKeys.FACULTY_MONITORING
 
-  useEffect(() => {}, [])
-
   return (
     <Form>
       <TrackingTrafficLight id={id} form={form} />

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
-import { isAdmin } from '@root/config/common'
+import { isAdmin, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
@@ -22,7 +22,6 @@ const FacultyTrackingView = ({ faculty }) => {
   const faculties = useSelector(state => state.faculties.data)
   const facultyName = faculties && faculties.find(f => f.code === faculty).name[lang]
   const user = useSelector(state => state.currentUser.data)
-  const hasReadRights = (user.access[faculty.code]?.read && user.specialGroup?.evaluationFaculty) || isAdmin(user)
   const form = formKeys.FACULTY_MONITORING
   const currentRoom = useSelector(state => state.room)
   const fieldName = `selectedQuestionIds`
@@ -30,12 +29,29 @@ const FacultyTrackingView = ({ faculty }) => {
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
 
+  const hasReadRights =
+    user.access[faculty.code] ||
+    isAdmin(user) ||
+    isKatselmusProjektiOrOhjausryhma(user) ||
+    Object.keys(user.access).length > 0
+
+  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
+  }, [lang, faculty])
 
-    if (currentRoom) {
-      dispatch(wsLeaveRoom(faculty))
-      dispatch(clearFormState())
+  useEffect(() => {
+    if (!faculty || !form) return
+    if (!hasReadRights) {
+      return
+    }
+    if (!hasWriteRights) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) {
+        dispatch(wsLeaveRoom(faculty))
+        dispatch(clearFormState())
+      }
     } else {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))

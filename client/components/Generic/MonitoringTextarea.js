@@ -7,7 +7,7 @@ import './Generic.scss'
 
 const MonitoringTextarea = ({ label, id, form, className = 'input' }) => {
   const dispatch = useDispatch()
-  const fieldName = `${id}_text`
+  const fieldName = `${id}`
   const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value, form))
   const value = useSelector(({ form }) => form.data[fieldName] || '')
   const viewOnly = useSelector(({ form }) => form.viewOnly)
