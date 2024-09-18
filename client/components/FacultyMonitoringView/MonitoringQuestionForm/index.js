@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
