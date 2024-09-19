@@ -24,7 +24,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
 
   const handleSelectionChange = (_, { value: newQuestion }) => {
     setSectionQuestions(newQuestion)
-    updateAllSelectedQuestions(newGroupSelection)
+    updateAllSelectedQuestions(newQuestion)
   }
 
   const dropdownOptions = questionsList.map(question => ({
