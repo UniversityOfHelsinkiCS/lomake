@@ -1,7 +1,7 @@
 const { Op } = require('sequelize')
 const db = require('@models/index')
 const logger = require('@util/logger')
-const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('@root/config/common')
+const { isAdmin, isSuperAdmin, isDevSuperAdminUid } = require('@root/config/common')
 const { whereDraftYear, inProduction } = require('@util/common')
 const { v4: uuidv4 } = require('uuid')
 const { getUserByUid } = require('../services/userService')
@@ -86,7 +86,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
+  if (!inProduction && loggedInAs && isDevSuperAdminUid(uid)) {
     const user = await getUserByUid(loggedInAs)
     return user
   }

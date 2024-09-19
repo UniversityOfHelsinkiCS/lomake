@@ -8,13 +8,15 @@ const QuestionPicker = ({ label, questionsList, form }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const allSelectedQuestions = useSelector(({ form }) => form.data.selectedQuestionIds || [])
+  const allSelectedQuestions = useSelector(({ form }) => form.data.selectedQuestionIds)
   const [sectionQuestions, setSectionQuestions] = useState([])
 
   useEffect(() => {
     const questionsInSection = allSelectedQuestions.filter(id => questionsList.some(question => question.id === id))
-    setSectionQuestions(questionsInSection)
-  }, [allSelectedQuestions, questionsList])
+    if (JSON.stringify(questionsInSection) !== JSON.stringify(sectionQuestions)) {
+      setSectionQuestions(questionsInSection)
+    }
+  }, [allSelectedQuestions, questionsList, sectionQuestions])
 
   const updateAllSelectedQuestions = newQuestion => {
     const otherSectionQuestions = allSelectedQuestions.filter(id => !questionsList.some(question => question.id === id))
