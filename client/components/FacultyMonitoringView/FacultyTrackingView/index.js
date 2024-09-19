@@ -30,24 +30,23 @@ const FacultyTrackingView = ({ faculty }) => {
   const [activeAccordions, setActiveAccordions] = useState({})
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
-
-  // const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
+  const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
   }, [lang, faculty])
 
   useEffect(() => {
-    /* if (!faculty || !form) return
+    if (!faculty || !form) return
     if (!hasReadRights) {
       return
     }
     if (!hasWriteRights) {
-      dispatch(setViewOnly(true)) */
-    if (currentRoom) {
-      dispatch(wsLeaveRoom(faculty))
-      dispatch(clearFormState())
-      // }
+      dispatch(setViewOnly(true))
+      if (currentRoom) {
+        dispatch(wsLeaveRoom(faculty))
+        dispatch(clearFormState())
+      }
     } else {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
