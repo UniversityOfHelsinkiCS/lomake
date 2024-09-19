@@ -28,13 +28,10 @@ const FacultyTrackingView = ({ faculty }) => {
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
-  console.log(user)
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
 
-  const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
-
-  console.log(hasReadRights, hasWriteRights)
+  // const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
