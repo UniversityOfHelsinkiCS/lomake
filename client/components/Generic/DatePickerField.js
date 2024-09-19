@@ -28,7 +28,16 @@ const DatePickerField = ({ label, id, form }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', padding: '0px 6px', width: '100%' }}>
       <b style={{ marginBottom: '4px' }}>{label}</b>
-      <DatePicker dateFormat="dd.MM.yyyy" onChange={handleChange} selected={date} disabled={!form} locale={lang} />
+      <DatePicker
+        dateFormat="dd.MM.yyyy"
+        onChange={handleChange}
+        selected={date}
+        disabled={!form}
+        locale={lang}
+        showYearDropdown
+        showMonthDropdown
+        fixedHeight
+      />
     </div>
   )
 }

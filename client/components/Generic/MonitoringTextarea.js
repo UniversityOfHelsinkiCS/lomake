@@ -20,7 +20,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input' }) => {
       {viewOnly ? (
         <span>{value}</span>
       ) : className === 'textarea' ? (
-        <FormTextArea label={label} id={fieldName} value={value} onChange={handleChange} />
+        <FormTextArea label={label} id={fieldName} value={value} onChange={handleChange} style={{ minHeight: 100 }} />
       ) : (
         <FormInput label={label} id={fieldName} value={value} onChange={handleChange} />
       )}

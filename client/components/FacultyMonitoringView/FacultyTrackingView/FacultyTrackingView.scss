@@ -26,6 +26,7 @@
     max-width: 200px;
   }
 }
+
 .no-selection-container {
   width: 100%;
   text-align: center;
@@ -53,19 +54,16 @@
 }
 
 .light-container {
-  display: table;
-  margin-bottom: 1em;
+  margin: 1em 0;
   .light {
-    display: table-cell;
-    vertical-align: middle;
-    padding-right: 1em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
 
-    span {
-      vertical-align: bottom;
-    }
-
-    i {
+    .light-text {
       padding-left: 4px;
+      font-style: italic;
     }
   }
 }
@@ -73,4 +71,18 @@
 .accordion-container {
   padding: 2.5em 0em;
   border-bottom: 0.5px solid lightgray;
+}
+
+.single-row {
+  margin-bottom: 20px;
+}
+
+.two-column-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.flex-item {
+  flex: 1;
 }

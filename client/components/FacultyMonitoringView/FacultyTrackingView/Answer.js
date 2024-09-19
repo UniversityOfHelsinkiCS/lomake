@@ -48,30 +48,58 @@ const Answer = ({ question, faculty, modify = true }) => {
               ? lightsHistory.map(entry => (
                   <div className="light" key={entry.date}>
                     <span className={`answer-circle-big-${entry.color}`} />
-                    <i>
-                      {new Date(entry.date)
-                        .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
-                        .split('/')
-                        .join('.')}
-                    </i>
+                    <div className="light-text">
+                      <span>{t(`common:${entry.color}Faculty`)}</span>
+                      {'  '}
+                      <span>
+                        {new Date(entry.date)
+                          .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                          .split('/')
+                          .join('.')}
+                      </span>
+                    </div>
                   </div>
                 ))
               : t('formView:noAnswer')}
           </div>
         </div>
-        {['actions', 'responsible_entities', 'contact_person', 'resources', 'start_date', 'end_date'].map(fieldName => {
-          const labels = {
-            actions: 'monitoringActionsLabel',
-            responsible_entities: 'monitoringResponsibleLabel',
-            contact_person: 'monitoringContactLabel',
-            resources: 'monitoringResourceLabel',
-            start_date: 'monitoringStartLabel',
-            end_date: 'monitoringEndLabel',
-          }
-          return (
-            <React.Fragment key={fieldName}>
-              <i>{t(`formView:${labels[fieldName]}`)}</i>{' '}
-              {fieldName.includes('date') ? (
+        <div className="single-row">
+          {['actions', 'responsible_entities'].map(fieldName => {
+            const labels = {
+              actions: 'monitoringActionsLabel',
+              responsible_entities: 'monitoringResponsibleLabel',
+            }
+            return (
+              <React.Fragment key={fieldName} style={{ marginBottom: '20px' }}>
+                <i>{t(`formView:${labels[fieldName]}`)}</i>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+              </React.Fragment>
+            )
+          })}
+        </div>
+        <div className="two-column-row">
+          {['contact_person', 'resources'].map(fieldName => {
+            const labels = {
+              contact_person: 'monitoringContactLabel',
+              resources: 'monitoringResourceLabel',
+            }
+            return (
+              <div key={fieldName} className="flex-item">
+                <i>{t(`formView:${labels[fieldName]}`)}</i>
+                <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
+              </div>
+            )
+          })}
+        </div>
+        <div className="two-column-row">
+          {['start_date', 'end_date'].map(fieldName => {
+            const labels = {
+              start_date: 'monitoringStartLabel',
+              end_date: 'monitoringEndLabel',
+            }
+            return (
+              <div key={fieldName} className="flex-item">
+                <i>{t(`formView:${labels[fieldName]}`)}</i>
                 <p>
                   {facultyAnswers[`${question.id}_${fieldName}_text`]
                     ? new Date(facultyAnswers[`${question.id}_${fieldName}_text`])
@@ -80,12 +108,10 @@ const Answer = ({ question, faculty, modify = true }) => {
                         .join('.')
                     : t('formView:noAnswer')}
                 </p>
-              ) : (
-                <p key={fieldName}>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
-              )}
-            </React.Fragment>
-          )
-        })}
+              </div>
+            )
+          })}
+        </div>
         {modify && (
           <div className="button-container">
             <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />

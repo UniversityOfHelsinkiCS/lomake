@@ -50,7 +50,7 @@ const TrackingTrafficLight = ({ id, form }) => {
 
   return (
     <>
-      <Header as="h4">{t('tracking')}</Header>
+      <Header as="h5">{t('tracking')}</Header>
       <Menu secondary>
         {lightsHistory.map((entry, index) => (
           <Menu.Item>
@@ -80,29 +80,29 @@ const TrackingTrafficLight = ({ id, form }) => {
       {showChooser && (
         <div style={{ margin: '1em 0' }}>
           <div style={{ alignItems: 'center' }}>
-            <div title={t('positiveFaculty')} style={{ display: 'flex' }}>
+            <div title={t('greenFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-positive-${id}`}
                 className={getClassName('green')}
                 onClick={!reduxViewOnly ? () => chooseLight('green') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('positiveFaculty')}</p>
+              <p style={{ margin: '1em' }}>{t('greenFaculty')}</p>
             </div>
-            <div title={t('neutralFaculty')} style={{ display: 'flex' }}>
+            <div title={t('yellowFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-neutral-${id}`}
                 className={getClassName('yellow')}
                 onClick={!reduxViewOnly ? () => chooseLight('yellow') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('neutralFaculty')}</p>
+              <p style={{ margin: '1em' }}>{t('yellowFaculty')}</p>
             </div>
-            <div title={t('negativeFaculty')} style={{ display: 'flex' }}>
+            <div title={t('redFaculty')} style={{ display: 'flex' }}>
               <div
                 data-cy={`color-negative-${id}`}
                 className={getClassName('red')}
                 onClick={!reduxViewOnly ? () => chooseLight('red') : undefined}
               />
-              <p style={{ margin: '1em' }}>{t('negativeFaculty')}</p>
+              <p style={{ margin: '1em' }}>{t('redFaculty')}</p>
             </div>
           </div>
         </div>
