@@ -77,6 +77,8 @@ export default {
     chooseFaculty: 'Choose faculty',
     chooseForm: 'Choose form',
     chooseProgramme: 'Choose degree programme',
+    showAll: 'Show all',
+    showLess: 'Show less',
     showAllProgrammes: 'Show all programmes',
     showDataByProgramme: 'Degree programme answers by faculty',
     showAllFacultyProgrammes: 'Show also joint programmes',

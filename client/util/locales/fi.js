@@ -82,6 +82,8 @@ export default {
     chooseFaculty: 'Valitse tiedekunta',
     chooseForm: 'Valitse lomake',
     chooseProgramme: 'Valitse koulutusohjelma',
+    showAll: 'Näytä kaikki',
+    showLess: 'Näytä vähemmän',
     showAllProgrammes: 'Näytä kaikki koulutusohjelmat',
     showDataByProgramme: 'Koulutusohjelmien vastaukset tiedekunnittain',
     showAllFacultyProgrammes: 'Näytä myös yhteisohjelmat',

@@ -75,6 +75,8 @@ export default {
     what: 'Vad',
     chooseFaculty: 'Välj en fakultet',
     chooseForm: 'Välj en svaren',
+    showAll: 'Visa alla',
+    showLess: 'Visa mindre',
     chooseProgramme: 'Välj ett studieprogram',
     showAllProgrammes: 'Visa alla studieprogram',
     showDataByProgramme: 'Examensprogram svar per fakultet',
