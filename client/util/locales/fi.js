@@ -122,6 +122,7 @@ export default {
     bachelorMasterToggle: 'Kandi- ja maisteriohjelmat',
     doctoralToggle: 'Tohtoriohjelmat',
     toFrontpage: 'Etusivulle',
+    noSelections: 'Ei valittuja toimenpiteitä',
   },
 
   aboutPage: {

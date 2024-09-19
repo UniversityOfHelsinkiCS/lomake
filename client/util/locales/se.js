@@ -105,6 +105,7 @@ export default {
     bachelorMasterToggle: 'Kandidat- och magisterprogrammet',
     doctoralToggle: 'Doktorandprogrammet',
     toFrontpage: 'Till startsidan',
+    noSelections: 'Inga valda åtgärder',
   },
 
   aboutPage: {

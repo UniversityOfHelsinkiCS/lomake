@@ -105,6 +105,7 @@ export default {
     noTimesensitive: '',
     clock: 'Clock',
     toFrontpage: 'To frontpage',
+    noSelections: 'No selected measures',
 
     doctoralToggle: 'Doctoral Programmes',
     bachelorMasterToggle: `Bachelor's & master's Programmes`,

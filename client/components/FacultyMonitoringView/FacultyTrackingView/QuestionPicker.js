@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import '../../Generic/Generic.scss'
 
 const QuestionPicker = ({ label, questionsList, form }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(({ form }) => form.viewOnly)
@@ -37,13 +39,13 @@ const QuestionPicker = ({ label, questionsList, form }) => {
 
   return (
     <div className="questions-list-container" data-cy="question-picker">
-      <label className={`questions-list-label${sectionQuestions.length === 0 ? '-bolded' : ''}`}>{label}</label>
+      <label className={`questions-list-label`}>{label}</label>
       <Dropdown
         className="comparison-questions-list-selector"
         data-cy="questions-list"
         name="questions-list"
         fluid
-        placeholder={label}
+        placeholder={t('common:noSelections')}
         options={dropdownOptions}
         onChange={handleSelectionChange}
         value={sectionQuestions}
