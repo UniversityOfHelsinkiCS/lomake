@@ -82,8 +82,8 @@ const Answer = ({ question, faculty, modify = true }) => {
             responsible_entities: 'monitoringResponsibleLabel',
           }
           return (
-            <div className="single-row">
-              <div key={fieldName}>
+            <div className="single-row" key={fieldName}>
+              <div>
                 <i>{t(`formView:${labels[fieldName]}`)}</i>
                 <p>{facultyAnswers[`${question.id}_${fieldName}_text`] || t('formView:noAnswer')}</p>
               </div>
