@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
-import { isAdmin, isKatselmusProjektiOrOhjausryhma } from '@root/config/common'
+import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
@@ -28,30 +28,29 @@ const FacultyTrackingView = ({ faculty }) => {
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
+  console.log(user)
 
-  const hasReadRights =
-    user.access[faculty.code] ||
-    isAdmin(user) ||
-    isKatselmusProjektiOrOhjausryhma(user) ||
-    Object.keys(user.access).length > 0
+  const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
 
-  const hasWriteRights = (user.access[faculty.code]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+  const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
+
+  console.log(hasReadRights, hasWriteRights)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
   }, [lang, faculty])
 
   useEffect(() => {
-    if (!faculty || !form) return
+    /* if (!faculty || !form) return
     if (!hasReadRights) {
       return
     }
     if (!hasWriteRights) {
-      dispatch(setViewOnly(true))
-      if (currentRoom) {
-        dispatch(wsLeaveRoom(faculty))
-        dispatch(clearFormState())
-      }
+      dispatch(setViewOnly(true)) */
+    if (currentRoom) {
+      dispatch(wsLeaveRoom(faculty))
+      dispatch(clearFormState())
+      // }
     } else {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
