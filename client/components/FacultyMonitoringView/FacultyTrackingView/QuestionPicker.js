@@ -9,8 +9,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
-  const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const allSelectedQuestions = useSelector(({ form }) => form.data.selectedQuestionIds)
+  const allSelectedQuestions = useSelector(({ form }) => form.data.selectedQuestionIds || [])
   const [sectionQuestions, setSectionQuestions] = useState([])
 
   useEffect(() => {
@@ -36,8 +35,6 @@ const QuestionPicker = ({ label, questionsList, form }) => {
     text: `${question.index}. ${question.label[lang]}`,
     value: question.id,
   }))
-
-  if (viewOnly && sectionQuestions.length === 0) return null
 
   return (
     <div className="questions-list-container" data-cy="question-picker">

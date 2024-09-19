@@ -28,9 +28,10 @@ const FacultyTrackingView = ({ faculty }) => {
   const selectedQuestions = useSelector(({ form }) => form.data[fieldName] || [])
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
-  const hasWriteRights = user.access[faculty]?.write || user.specialGroup?.evaluationFaculty || isAdmin(user)
+  const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
@@ -42,6 +43,7 @@ const FacultyTrackingView = ({ faculty }) => {
       return
     }
     if (!hasWriteRights) {
+      dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(true))
       if (currentRoom) {
         dispatch(wsLeaveRoom(faculty))
@@ -106,12 +108,14 @@ const FacultyTrackingView = ({ faculty }) => {
           </h2>
         </MenuItem>
         <MenuItem>
-          <Button
-            secondary
-            onClick={() => openQuestionPickerModal(questions)}
-            className="select-questions-button"
-            content={t('formView:selectQuestions')}
-          />
+          {!viewOnly && (
+            <Button
+              secondary
+              onClick={() => openQuestionPickerModal(questions)}
+              className="select-questions-button"
+              content={t('formView:selectQuestions')}
+            />
+          )}
         </MenuItem>
       </Menu>
 

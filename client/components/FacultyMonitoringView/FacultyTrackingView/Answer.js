@@ -21,6 +21,9 @@ const Answer = ({ question, faculty, modify = true }) => {
   const [showAll, setShowAll] = useState(false)
   const lightsHistory = facultyAnswers[`${question.id}_lights_history`]?.reverse() || []
   const displayedHistory = showAll ? lightsHistory : lightsHistory?.slice(0, 4).reverse()
+  const viewOnly = useSelector(({ form }) => form.viewOnly)
+
+  const isEditable = !viewOnly && modify
 
   useEffect(() => {
     dispatch(getTempAnswersByForm(form))
@@ -122,7 +125,7 @@ const Answer = ({ question, faculty, modify = true }) => {
             )
           })}
         </div>
-        {modify && (
+        {isEditable && (
           <div className="button-container">
             <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
           </div>
