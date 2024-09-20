@@ -11,7 +11,7 @@ const CustomModal = ({ children, title, closeModal, borderColor }) => {
     <div className="customModal-dimmer">
       <div
         className="customModal-content"
-        style={borderColor ? { border: '3px solid', borderColor, maxHeight: '90%' } : { maxHeight: '90%' }}
+        style={borderColor ? { border: '3px solid', borderColor, maxHeight: '95%' } : { maxHeight: '95%' }}
         ref={ref}
       >
         <div className="title-and-close">
