@@ -48,7 +48,8 @@ export default {
     writtenAnswers: 'Skriftliga svar',
     trafficLights: 'Trafikljus',
     tracking: 'Tracking',
-    chooseTrafficLight: 'Valitse liikennevaloarvio',
+    chooseTrafficLight: 'Välj en utvärdering av trafikljus',
+    noTrafficLight: 'Inga utvärderingar. Tryck på knappen för att lägga till en ny utvärdering av trafikljuset.',
 
     choose: 'Välj',
     colors_all: 'alla',

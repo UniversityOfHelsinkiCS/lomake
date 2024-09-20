@@ -54,6 +54,7 @@ export default {
     trafficLights: 'Liikennevalojen värit',
     tracking: 'Seuranta',
     chooseTrafficLight: 'Lisää uusi arvio',
+    noTrafficLight: 'Ei arvioita. Lisää uusi liikennevaloarvio painamalla nappia.',
 
     choose: 'Valitse',
     colors_all: 'Kaikki',

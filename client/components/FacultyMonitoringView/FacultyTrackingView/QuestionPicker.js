@@ -38,7 +38,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
 
   return (
     <div className="questions-list-container" data-cy="question-picker">
-      <label className={`questions-list-label`}>{label}</label>
+      <label className="questions-list-label">{label}</label>
       <Dropdown
         className="comparison-questions-list-selector"
         data-cy="questions-list"

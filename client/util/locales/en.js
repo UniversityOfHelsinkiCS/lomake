@@ -49,7 +49,8 @@ export default {
     writtenAnswers: 'Written answers',
     trafficLights: 'Traffic lights',
     tracking: 'Tracking',
-    chooseTrafficLight: 'Valitse liikennevaloarvio',
+    chooseTrafficLight: 'Select a traffic light evaluation',
+    noTrafficLight: 'No evaluations. Press the button to add a new traffic light evaluation.',
 
     choose: 'Choose',
     colors_all: 'all',
