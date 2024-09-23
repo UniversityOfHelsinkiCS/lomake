@@ -24,7 +24,7 @@ import CurrentEditor from './CurrentEditor'
 import './Generic.scss'
 import ProgrammeTextAnswerSummary from './ProgrammeTextAnswerSummary'
 
-const deepCheck = (a, b) => {
+export const deepCheck = (a, b) => {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
