@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
+import { getLockHttp } from 'Utilities/redux/formReducer'
+import { deepCheck } from 'Components/Generic/Textarea'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
@@ -19,17 +21,44 @@ const Answer = ({ question, faculty, modify = true }) => {
     return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
   }, [answers, faculty])
   const [showAll, setShowAll] = useState(false)
-  const dataFromRedux = useSelector(({ form }) => form.data) // Get data from Redux
-  const lightsHistory = dataFromRedux[`${question.id}_lights_history`] || [] // Assign lightsHistory from dataFromRedux
+  const fieldName = `${question.id}_lights_history`
+  const dataFromRedux = useSelector(({ form }) => form.data) // Get data from ReduUconst lightsHistory = dataFromRedux[`${question.id}_lights_history`] || [] // Assign lightsHistory from dataFromRedux
+  const lightsHistory = dataFromRedux[fieldName] || [] // Assign lightsHistory from dataFromRedux
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly && modify
 
+  // check if current user is the editor
+  const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
+  const currentUser = useSelector(({ currentUser }) => currentUser.data)
+  const [hasLock, setHasLock] = useState(true)
+  const [gettingLock, setGettingLock] = useState(false)
+  const lockRef = useRef(gettingLock)
+  lockRef.current = gettingLock
+
   useEffect(() => {
-    dispatch(getTempAnswersByForm(form))
-  }, [dispatch, form, dataFromRedux])
+    const gotTheLock = currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid
+
+    setHasLock(gotTheLock)
+
+    if (gettingLock && currentEditors[fieldName]) {
+      setGettingLock(false)
+    }
+  }, [currentEditors])
+
+  const askForLock = () => {
+    setGettingLock(true)
+    dispatch(getLockHttp(fieldName, faculty))
+  }
+
+  useEffect(() => {
+    if (!hasLock) {
+      dispatch(getTempAnswersByForm(form))
+    }
+  }, [dispatch, form, dataFromRedux, hasLock])
 
   const openFormModal = question => {
+    askForLock()
     setFormModalData(question)
   }
 
