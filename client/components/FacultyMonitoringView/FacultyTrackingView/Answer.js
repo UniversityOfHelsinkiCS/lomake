@@ -19,14 +19,15 @@ const Answer = ({ question, faculty, modify = true }) => {
     return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
   }, [answers, faculty])
   const [showAll, setShowAll] = useState(false)
-  const lightsHistory = facultyAnswers[`${question.id}_lights_history`] || []
+  const dataFromRedux = useSelector(({ form }) => form.data) // Get data from Redux
+  const lightsHistory = dataFromRedux[`${question.id}_lights_history`] || [] // Assign lightsHistory from dataFromRedux
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly && modify
 
   useEffect(() => {
     dispatch(getTempAnswersByForm(form))
-  }, [])
+  }, [dispatch, form, dataFromRedux])
 
   const openFormModal = question => {
     setFormModalData(question)
