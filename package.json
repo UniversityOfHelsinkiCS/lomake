@@ -29,7 +29,7 @@
     "date-fns": "^3.0.0",
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.24.0",
     "esbuild-sass-plugin": "^3.2.0",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
