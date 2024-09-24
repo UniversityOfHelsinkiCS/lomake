@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router'
 import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -20,7 +19,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties.data)
-  const facultyName = faculties && faculties.find(f => f.code === faculty).name[lang]
+  const facultyName = faculties?.find(f => f.code === faculty)?.name[lang]
   const user = useSelector(state => state.currentUser.data)
   const form = formKeys.FACULTY_MONITORING
   const currentRoom = useSelector(state => state.room)
@@ -35,13 +34,9 @@ const FacultyTrackingView = ({ faculty }) => {
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
-  }, [lang, faculty])
 
-  useEffect(() => {
-    if (!faculty || !form) return
-    if (!hasReadRights) {
-      return
-    }
+    if (!faculty || !form || !hasReadRights) return
+
     if (!hasWriteRights) {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(true))
@@ -63,6 +58,10 @@ const FacultyTrackingView = ({ faculty }) => {
     }
   }, [])
 
+  useEffect(() => {
+    setActiveAccordions({})
+  }, [lang])
+
   if (!user || !faculty) return <Redirect to="/" />
 
   if (!hasReadRights) {
@@ -73,14 +72,6 @@ const FacultyTrackingView = ({ faculty }) => {
     return null
   }
 
-  const openQuestionPickerModal = questions => {
-    setQuestionPickerModalData(questions)
-  }
-
-  const closeQuestionPickerModal = () => {
-    setQuestionPickerModalData(null)
-  }
-
   const handleAccordionClick = (e, title) => {
     const { index } = title
     setActiveAccordions(prevState => ({
@@ -89,12 +80,15 @@ const FacultyTrackingView = ({ faculty }) => {
     }))
   }
 
-  const filteredQuestions = questions
-    .map(object => ({
-      ...object,
-      parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
-    }))
-    .filter(object => object.parts.length > 0)
+  const filteredQuestions = useMemo(() =>
+    questions
+      .map((object, index) => ({
+        ...object,
+        groupId: `group-${index}`,
+        parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
+      }))
+      .filter(object => object.parts.length > 0),
+  )
 
   return (
     <>
@@ -104,14 +98,14 @@ const FacultyTrackingView = ({ faculty }) => {
         </MenuItem>
         <MenuItem header className="menu-item-header">
           <h2>
-            {t('common:tracking').toUpperCase()}: {facultyName.toUpperCase()}
+            {t('common:tracking').toUpperCase()}: {facultyName?.toUpperCase()}
           </h2>
         </MenuItem>
         <MenuItem>
           {!viewOnly && (
             <Button
               secondary
-              onClick={() => openQuestionPickerModal(questions)}
+              onClick={() => setQuestionPickerModalData(questions)}
               className="select-questions-button"
               content={t('formView:selectQuestions')}
             />
@@ -120,15 +114,18 @@ const FacultyTrackingView = ({ faculty }) => {
       </Menu>
 
       {questionPickerModalData && (
-        <CustomModal closeModal={closeQuestionPickerModal} title={`${t('formView:selectQuestions')} – ${facultyName}`}>
+        <CustomModal
+          closeModal={() => setQuestionPickerModalData(null)}
+          title={`${t('formView:selectQuestions')} – ${facultyName}`}
+        >
           <div className="question-picker-container">
-            {Object.entries(questions).map(([titleIndex, group]) => (
-              <div className="question-group" key={titleIndex}>
+            {questions.map((group, index) => (
+              <div className="question-group" key={`group-${index}`}>
                 <QuestionPicker label={group.title[lang]} questionsList={group.parts} form={form} />
               </div>
             ))}
             <Button
-              onClick={closeQuestionPickerModal}
+              onClick={() => setQuestionPickerModalData(null)}
               secondary
               content={t('formView:sendSelection')}
               className="send-selection-button"
@@ -140,11 +137,11 @@ const FacultyTrackingView = ({ faculty }) => {
       <div className="answers-list-container">
         {filteredQuestions.length > 0 ? (
           filteredQuestions.map(group => (
-            <div className="accordion-container" key={`group-${group.title[lang]}`}>
+            <div className="accordion-container" key={group.groupId}>
               <Accordion>
                 <Accordion.Title
-                  active={activeAccordions[`group-${group.title[lang]}`]}
-                  index={`group-${group.title[lang]}`}
+                  active={activeAccordions[group.groupId]}
+                  index={group.groupId}
                   onClick={handleAccordionClick}
                 >
                   <h3>
@@ -152,7 +149,7 @@ const FacultyTrackingView = ({ faculty }) => {
                     {group.title[lang]}
                   </h3>
                 </Accordion.Title>
-                {activeAccordions[`group-${group.title[lang]}`] &&
+                {activeAccordions[group.groupId] &&
                   group.parts.map(part => <Answer question={part} faculty={faculty} key={part.id} />)}
               </Accordion>
             </div>

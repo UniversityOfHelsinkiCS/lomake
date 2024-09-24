@@ -30,7 +30,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input', maxLength })
           id={fieldName}
           value={editorState}
           onChange={handleChange}
-          style={{ minHeight: 100, width: '100%' }}
+          style={{ minHeight: 150, width: '100%' }}
           maxLength={maxLength}
         />
       ) : (
