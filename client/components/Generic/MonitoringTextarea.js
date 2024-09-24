@@ -5,7 +5,7 @@ import { updateFormField } from 'Utilities/redux/formReducer'
 import { FormInput, FormTextArea } from 'semantic-ui-react'
 import './Generic.scss'
 
-const MonitoringTextarea = ({ label, id, form, className = 'input' }) => {
+const MonitoringTextarea = ({ label, id, form, className = 'input', maxLength }) => {
   const dispatch = useDispatch()
   const fieldName = `${id}_text`
   const handleChange = ({ target }) => dispatch(updateFormField(target.id, target.value, form))
@@ -21,7 +21,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input' }) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0px 6px' }}>
       {viewOnly ? (
         <span>{editorState}</span>
       ) : className === 'textarea' ? (
@@ -30,12 +30,23 @@ const MonitoringTextarea = ({ label, id, form, className = 'input' }) => {
           id={fieldName}
           value={editorState}
           onChange={handleChange}
-          style={{ minHeight: 100 }}
+          style={{ minHeight: 100, width: '100%' }}
+          maxLength={maxLength}
         />
       ) : (
-        <FormInput label={label} id={fieldName} value={editorState} onChange={handleChange} />
+        <FormInput
+          label={label}
+          id={fieldName}
+          value={editorState}
+          onChange={handleChange}
+          maxLength={maxLength}
+          style={{ width: '100%' }}
+        />
       )}
-    </>
+      <p style={{ color: 'gray', marginTop: '4px', alignSelf: 'flex-end' }}>
+        {editorState.length}/{maxLength}
+      </p>
+    </div>
   )
 }
 export default MonitoringTextarea

@@ -76,7 +76,7 @@ const TrackingTrafficLight = ({ id, form }) => {
           <i style={{ color: 'gray', marginLeft: '4px' }}>{t('noTrafficLight')}</i>
         )}
         <Menu.Item position="right">
-          <Button secondary onClick={toggleChooser} disabled={reduxViewOnly}>
+          <Button onClick={toggleChooser} disabled={reduxViewOnly}>
             {t('chooseTrafficLight')}
           </Button>
         </Menu.Item>

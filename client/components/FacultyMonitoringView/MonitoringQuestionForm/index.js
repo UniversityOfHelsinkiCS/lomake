@@ -20,10 +20,16 @@ const MonitoringQuestionForm = ({ question }) => {
           label={t('formView:facultyActionsLabel')}
           form={form}
           className="textarea"
+          maxLength={1500}
         />
       </FormGroup>
       <FormGroup widths="equal">
-        <MonitoringTextarea id={`${id}_responsible_entities`} label={t('formView:facultyEntitiesLabel')} form={form} />
+        <MonitoringTextarea
+          id={`${id}_responsible_entities`}
+          label={t('formView:facultyEntitiesLabel')}
+          form={form}
+          maxLength={150}
+        />
       </FormGroup>
       <FormGroup widths="equal">
         <MonitoringTextarea
@@ -31,8 +37,14 @@ const MonitoringQuestionForm = ({ question }) => {
           label={t('formView:facultyContactLabel')}
           required
           form={form}
+          maxLength={100}
         />
-        <MonitoringTextarea id={`${id}_resources`} label={t('formView:facultyResourcesLabel')} form={form} />
+        <MonitoringTextarea
+          id={`${id}_resources`}
+          label={t('formView:facultyResourcesLabel')}
+          form={form}
+          maxLength={100}
+        />
       </FormGroup>
       <FormGroup widths="equal">
         <DatePickerField id={`${id}_start_date`} label={t('formView:facultyStartLabel')} form={form} />
