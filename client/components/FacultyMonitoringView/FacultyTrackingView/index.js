@@ -9,6 +9,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
+import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import QuestionPicker from './QuestionPicker'
 import Answer from './Answer'
@@ -35,8 +36,17 @@ const FacultyTrackingView = ({ faculty }) => {
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
 
+<<<<<<< HEAD
     if (!faculty || !form || !hasReadRights) return
 
+=======
+  useEffect(() => {
+    if (!faculty || !form) return
+    if (!hasReadRights) {
+      return
+    }
+    dispatch(getTempAnswersByForm(form))
+>>>>>>> 8e0f2f87 (removed answers fetcing when opening accordion)
     if (!hasWriteRights) {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(true))

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useMemo, useRef } from 'react'
+=======
+import React, { useState, useMemo } from 'react'
+>>>>>>> 8e0f2f87 (removed answers fetcing when opening accordion)
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -28,6 +32,7 @@ const Answer = ({ question, faculty, modify = true }) => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly && modify
 
+<<<<<<< HEAD
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -57,6 +62,8 @@ const Answer = ({ question, faculty, modify = true }) => {
     }
   }, [dispatch, form, dataFromRedux, hasLock])
 
+=======
+>>>>>>> 8e0f2f87 (removed answers fetcing when opening accordion)
   const openFormModal = question => {
     askForLock()
     setFormModalData(question)
