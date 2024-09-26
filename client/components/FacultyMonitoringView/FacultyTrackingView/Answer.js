@@ -22,6 +22,7 @@ const Answer = ({ question, faculty, modify = true }) => {
   }, [answers, faculty])
   const [showAll, setShowAll] = useState(false)
   const fieldName = `${question.id}_lights_history`
+  const modalName = `${question.id}_modal`
   const dataFromRedux = useSelector(({ form }) => form.data)
   const lightsHistory = dataFromRedux[fieldName] || []
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
@@ -36,8 +37,11 @@ const Answer = ({ question, faculty, modify = true }) => {
   const lockRef = useRef(gettingLock)
   lockRef.current = gettingLock
 
+  const someoneElseHasTheLock =
+    currentEditors && currentUser && currentEditors[modalName] && currentEditors[modalName].uid !== currentUser.uid
+
   useEffect(() => {
-    const gotTheLock = currentEditors && currentEditors[fieldName] && currentEditors[fieldName].uid === currentUser.uid
+    const gotTheLock = currentEditors && currentEditors[modalName] && currentEditors[modalName].uid === currentUser.uid
 
     setHasLock(gotTheLock)
 
@@ -48,7 +52,7 @@ const Answer = ({ question, faculty, modify = true }) => {
 
   const askForLock = () => {
     setGettingLock(true)
-    dispatch(getLockHttp(fieldName, faculty))
+    dispatch(getLockHttp(modalName, faculty))
   }
 
   useEffect(() => {
@@ -154,7 +158,7 @@ const Answer = ({ question, faculty, modify = true }) => {
             )
           })}
         </div>
-        {isEditable && (
+        {isEditable && !someoneElseHasTheLock && (
           <div className="button-container">
             <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
           </div>
