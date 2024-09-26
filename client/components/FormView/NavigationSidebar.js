@@ -187,7 +187,7 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       } else if (type === 'META_ENTITY') {
                         idsToCheck.push(`${id}_light`)
 
-                        let lightColor = getIsCompleted({
+                        const lightColor = getIsCompleted({
                           formData: form.data,
                           questionId: `${id}_light`,
                           getFieldValue: true,
