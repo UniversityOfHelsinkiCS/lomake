@@ -7,6 +7,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { getLockHttp } from 'Utilities/redux/formReducer'
 import { deepCheck } from 'Components/Generic/Textarea'
+import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
@@ -67,9 +68,35 @@ const Answer = ({ question, faculty, modify = true }) => {
   }
 
   const closeFormModal = () => {
-    dispatch(getTempAnswersByForm(form))
+    dispatch(releaseFieldLocally(modalName))
     setFormModalData(null)
   }
+
+  useEffect(() => {
+    let timer
+
+    const resetTimer = () => {
+      clearTimeout(timer)
+      timer = setTimeout(closeFormModal, 2 * 60 * 1000) // timer is 2 minutes
+    }
+
+    window.addEventListener('mousemove', resetTimer)
+    window.addEventListener('keypress', resetTimer)
+    window.addEventListener('click', resetTimer)
+    window.addEventListener('scroll', resetTimer)
+
+    // Start the timer on mount
+    resetTimer()
+
+    // Cleanup function to remove event listeners and clear timer
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('mousemove', resetTimer)
+      window.removeEventListener('keypress', resetTimer)
+      window.removeEventListener('click', resetTimer)
+      window.removeEventListener('scroll', resetTimer)
+    }
+  }, [])
 
   const formatDate = date => {
     return new Date(date)
@@ -158,9 +185,13 @@ const Answer = ({ question, faculty, modify = true }) => {
             )
           })}
         </div>
-        {isEditable && !someoneElseHasTheLock && (
+        {isEditable && (
           <div className="button-container">
-            <Button onClick={() => openFormModal(question)} content={t('formView:modifyPlan')} />
+            <Button
+              disabled={someoneElseHasTheLock}
+              onClick={() => openFormModal(question)}
+              content={t('formView:modifyPlan')}
+            />
           </div>
         )}
       </div>
