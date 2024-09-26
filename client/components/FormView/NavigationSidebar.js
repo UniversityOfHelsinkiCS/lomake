@@ -53,13 +53,17 @@ const getCorrectRomanNumeral = (number, formType) => {
   return romanize(number) || '0'
 }
 
-const getIsCompleted = ({ formData, questionId }) => {
+const getIsCompleted = ({ formData, questionId, getFieldValue }) => {
   const questionData = formData[questionId]
   const fromJson = questionId.endsWith('_selection')
 
   if (fromJson) {
     const json = JSON.parse(questionData || 'false')
     return json && Object.values(json).some(value => value)
+  }
+
+  if (getFieldValue) {
+    return questionData
   }
 
   return Boolean(questionData)
@@ -164,7 +168,6 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                       if (
                         type === 'TEXTAREA' ||
                         type === 'ENTITY' ||
-                        type === 'META_ENTITY' ||
                         type === 'SELECTION' ||
                         type === 'ENTITY_LEVELS' ||
                         type === 'ENTITY_UNIVERSITY'
@@ -181,6 +184,20 @@ const NavigationSidebar = ({ programmeKey, formType, formNumber, questionData })
                           `${id}_start_date_text`,
                           `${id}_end_date_text`,
                         )
+                      } else if (type === 'META_ENTITY') {
+                        idsToCheck.push(`${id}_light`)
+
+                        let lightColor = getIsCompleted({
+                          formData: form.data,
+                          questionId: `${id}_light`,
+                          getFieldValue: true,
+                        })
+
+                        if (lightColor === 'gray') {
+                          idsToCheck.push(`${id}_comment_text`)
+                        } else {
+                          idsToCheck.push(`${id}_text`)
+                        }
                       } else {
                         idsToCheck.push(`${id}_1_text`)
                       }
