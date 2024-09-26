@@ -109,8 +109,6 @@ const Answer = ({ question, faculty, modify = true }) => {
     return null
   }
 
-  console.log(currentEditors)
-
   return (
     <>
       <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
@@ -190,11 +188,8 @@ const Answer = ({ question, faculty, modify = true }) => {
         {isEditable && (
           <div className="button-container">
             {someoneElseHasTheLock && (
-              <p>
-                {currentEditors[modalName].firstname} {currentEditors[modalName].lastname} is writing
-              </p>
+              <p>{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('isWriting')}`}</p>
             )}
-            <p />
             <Button
               disabled={someoneElseHasTheLock}
               onClick={() => openFormModal(question)}
