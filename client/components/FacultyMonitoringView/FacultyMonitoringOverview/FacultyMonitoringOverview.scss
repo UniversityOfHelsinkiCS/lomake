@@ -14,3 +14,53 @@
   align-self: flex-start;
   margin-left: 15px;
 }
+
+.monitoring-overview {
+  .monitoring-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .table-header-cell {
+    padding: 15px;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    vertical-align: top !important;
+  }
+
+  .pie-chart-cell,
+  .square-cell {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    vertical-align: middle;
+  }
+
+  .pie-chart-container,
+  .square-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+
+  .ui.table td {
+    padding: 0.7em;
+    vertical-align: middle;
+  }
+
+  .accordion-header {
+    cursor: pointer;
+    margin: 15px 0 !important;
+    width: 100%;
+    vertical-align: middle !important;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .question-text {
+    padding: 5px 0;
+  }
+}

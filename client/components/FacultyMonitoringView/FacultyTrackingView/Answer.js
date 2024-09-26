@@ -188,7 +188,9 @@ const Answer = ({ question, faculty, modify = true }) => {
         {isEditable && (
           <div className="button-container">
             {someoneElseHasTheLock && (
-              <p>{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('isWriting')}`}</p>
+              <i
+                style={{ color: 'gray', padding: '8px' }}
+              >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('isWriting')}`}</i>
             )}
             <Button
               disabled={someoneElseHasTheLock}

@@ -43,26 +43,27 @@ const colors = {
   gray: { border: '4px solid gray', backgroundColor: 'transparent', hover: { filter: 'brightness(0.8)' } },
 }
 
-const Square = ({ color, wide, setQuestionModal, answerObject, chevron = null }) => {
+const Square = ({ color, setQuestionModal, answerObject, chevron = null }) => {
   const { backgroundColor, hover } = colors[color] || colors.gray
 
   return (
-    <Card
-      style={{
-        ...squareStyles,
-        backgroundColor,
-        ...(wide && { gridColumn: 'span 2' }),
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.filter = hover.filter
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.filter = 'none'
-      }}
-      onClick={() => setQuestionModal(answerObject)}
-    >
-      {chevron}
-    </Card>
+    <div className="square-container">
+      <Card
+        style={{
+          ...squareStyles,
+          backgroundColor,
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.filter = hover.filter
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.filter = 'none'
+        }}
+        onClick={() => setQuestionModal(answerObject)}
+      >
+        {chevron}
+      </Card>
+    </div>
   )
 }
 
@@ -118,8 +119,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
         let chevron = null
 
-        if (hasChangedToPositive) chevron = <Icon name="chevron up" size="big" color="black" />
-        if (hasChangedToNegative) chevron = <Icon name="chevron down" size="big" color="black" />
+        if (hasChangedToPositive) chevron = <Icon name="chevron up" size="large" color="black" />
+        if (hasChangedToNegative) chevron = <Icon name="chevron down" size="large" color="black" />
 
         const { color } = lastMeasurement
         return (
@@ -198,17 +199,19 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       ]
 
       return (
-        <PieChart
-          data={data.sort((a, b) => b.value - a.value)}
-          lengthAngle={360}
-          lineWidth={100}
-          paddingAngle={0}
-          radius={50}
-          startAngle={270}
-          viewBoxSize={[145, 145]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={112}
-        />
+        <div className="pie-chart-container">
+          <PieChart
+            data={data.sort((a, b) => b.value - a.value)}
+            lengthAngle={360}
+            lineWidth={100}
+            paddingAngle={0}
+            radius={50}
+            startAngle={270}
+            viewBoxSize={[100, 100]}
+            labelStyle={{ fontSize: '4px', fontWeight: 'bold' }}
+            labelPosition={112}
+          />
+        </div>
       )
     }
 
@@ -225,7 +228,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   }
 
   return (
-    <>
+    <div className="monitoring-overview">
       <Menu size="large" className="filter-row" secondary>
         <MenuItem header className="menu-item-header">
           <h2>{t('facultymonitoring').toUpperCase()}</h2>
@@ -237,6 +240,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
       {questionModal && (
         <CustomModal closeModal={closeModal}>
+          <h2>{questionModal.faculty}</h2>
           <Answer
             answer={questionModal.answer.data}
             question={questionModal.part}
@@ -246,50 +250,56 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </CustomModal>
       )}
 
-      <Table>
+      <Table className="ui very basic table monitoring-table">
         <TableHeader>
           <TableRow>
-            <TableHeaderCell />
-            {filteredFaculties.map(faculty => (
-              <TableHeaderCell>
-                <Link key={faculty.key} to={`/faculty-monitoring/${faculty.key}`}>
-                  {faculty.text} {faculty.key}
-                </Link>
-              </TableHeaderCell>
-            ))}
+            <TableHeaderCell className="table-header-cell" />
+            {filteredFaculties
+              .sort((a, b) => a.text.localeCompare(b.text))
+              .map(faculty => (
+                <TableHeaderCell key={faculty.key} className="table-header-cell">
+                  <Link to={`/faculty-monitoring/${faculty.key}`}>
+                    {faculty.text} {faculty.key}
+                  </Link>
+                </TableHeaderCell>
+              ))}
           </TableRow>
         </TableHeader>
         <TableBody>
           {questionData.map((section, index) => (
             <React.Fragment key={section.id}>
-              {' '}
               <TableRow>
-                <TableCell>
-                  <Header style={{ cursor: 'pointer' }} as="h4" onClick={() => handleAccordion(index)}>
+                <TableCell className="table-header-cell">
+                  <Header className="accordion-header" as="h4" onClick={() => handleAccordion(index)}>
                     {section.title[lang]}
                   </Header>
                 </TableCell>
                 {filteredFaculties.map(faculty => (
-                  <TableCell key={faculty.key}>{getFacultySummarySectionData(section, faculty.key)}</TableCell>
+                  <TableCell key={faculty.key} className="pie-chart-cell">
+                    {getFacultySummarySectionData(section, faculty.key)}
+                  </TableCell>
                 ))}
               </TableRow>
               {accordion === index &&
                 section.parts.map(part => (
                   <TableRow key={part.id}>
-                    {' '}
-                    <TableCell>
-                      {part.index}. {part.label[lang]}
+                    <TableCell className="table-header-cell">
+                      <div className="question-text">
+                        {part.index}. {part.label[lang]}
+                      </div>
                     </TableCell>
                     {filteredFaculties.map(faculty => (
-                      <TableCell key={faculty.key}>{getAnswer(part, faculty.key)}</TableCell>
+                      <TableCell key={faculty.key} className="square-cell">
+                        {getAnswer(part, faculty.key)}
+                      </TableCell>
                     ))}
                   </TableRow>
                 ))}
             </React.Fragment>
           ))}
-        </TableBody>{' '}
+        </TableBody>
       </Table>
-    </>
+    </div>
   )
 }
 
