@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useEffect, useState, useMemo, useRef } from 'react'
-=======
-import React, { useState, useMemo } from 'react'
->>>>>>> 8e0f2f87 (removed answers fetcing when opening accordion)
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
@@ -26,13 +22,12 @@ const Answer = ({ question, faculty, modify = true }) => {
   }, [answers, faculty])
   const [showAll, setShowAll] = useState(false)
   const fieldName = `${question.id}_lights_history`
-  const dataFromRedux = useSelector(({ form }) => form.data) // Get data from ReduUconst lightsHistory = dataFromRedux[`${question.id}_lights_history`] || [] // Assign lightsHistory from dataFromRedux
-  const lightsHistory = dataFromRedux[fieldName] || [] // Assign lightsHistory from dataFromRedux
+  const dataFromRedux = useSelector(({ form }) => form.data)
+  const lightsHistory = dataFromRedux[fieldName] || []
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly && modify
 
-<<<<<<< HEAD
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }) => currentUser.data)
@@ -62,8 +57,6 @@ const Answer = ({ question, faculty, modify = true }) => {
     }
   }, [dispatch, form, dataFromRedux, hasLock])
 
-=======
->>>>>>> 8e0f2f87 (removed answers fetcing when opening accordion)
   const openFormModal = question => {
     askForLock()
     setFormModalData(question)
