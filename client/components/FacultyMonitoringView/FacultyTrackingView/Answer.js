@@ -53,7 +53,7 @@ const Answer = ({ question, faculty, modify = true }) => {
 
   useEffect(() => {
     if (!hasLock) {
-      // dispatch(getTempAnswersByForm(form))
+      dispatch(getTempAnswersByForm(form))
     }
   }, [dispatch, dataFromRedux, form, hasLock])
 
