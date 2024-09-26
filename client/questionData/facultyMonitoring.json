@@ -5,15 +5,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "1",
         "index": 1,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Koulutusohjelmat sisällyttävät opetussuunnitelmiin koulutusjärjestelmän, opintopolkujen ja opetustarjonnan hahmottamista tukevia mallilukujärjestyksiä",
           "se": "",
@@ -23,11 +20,7 @@
       {
         "id": "2",
         "index": 2,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopistossa kehitetään ja selkiytetään horisontaalisia siirtymiä ohjelmien sisällä ja välillä, jotta ne tukevat opiskelijan valintoja ja opiskelun sujuvuutta",
           "se": "",
@@ -37,11 +30,7 @@
       {
         "id": "3",
         "index": 3,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Nivelvaiheen sujuvuus kandiohjelmasta maisteriohjelmaan siirryttäessä varmistetaan ohjauksellisin keinoin yhteistyössä",
           "se": "",
@@ -51,11 +40,7 @@
       {
         "id": "4",
         "index": 4,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto muodostaa strategisen näkemyksen siitä, mitä jatkuvan oppimisen tarjontaa yliopistossa järjestetään ja miksi",
           "se": "",
@@ -70,15 +55,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "5",
         "index": 5,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto määrittelee läpivirtauksen ja sen kriteerit toiminnan laadun ja tuloksellisuuden lähtökohdista -ei pelkästään OKM-rahoitusmalliin perustuen",
           "se": "",
@@ -88,11 +70,7 @@
       {
         "id": "6",
         "index": 6,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Koulutusohjelmat puuttuvat valmistumisaikojen venymiseen opintojen ohjauksella, opetuksen laadun jatkuvalla kehittämisellä ja opiskelijoiden oppimisen säätelyä ja hyvinvointia tukemalla",
           "se": "",
@@ -102,11 +80,7 @@
       {
         "id": "7",
         "index": 7,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Koulutusohjelmat kehittävät opinnäytetöiden valmiiksi saattamiseen tehokkaat mekanismit hyödyntäen eri puolilla yliopistoa käytössä olevia hyviä käytäntöjä",
           "se": "",
@@ -116,11 +90,7 @@
       {
         "id": "8",
         "index": 8,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopistopedagogiikan keskus (HYPE) kohdistaa tutkimusta yliopiston koulutuksen kehittämiskohteisiin, jotta tutkimustulokset tukevat koulutusohjelmien kehittämistä",
           "se": "",
@@ -130,11 +100,7 @@
       {
         "id": "9",
         "index": 9,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Opintojen etenemisen seurannassa koulutusohjelmat käyttävät kaikista opiskelijapalautejärjestelmistä saatavaa tietoa",
           "se": "",
@@ -144,11 +110,7 @@
       {
         "id": "10",
         "index": 10,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Koulutusohjelma tarkastelee veto- ja pitovoimaansa kriittisesti, mikäli sillä ei ole riittävästi hakijoita ja/tai sen läpäisy on heikkoa. Tarkastelun perusteella koulutusohjelma ryhtyy toimenpiteisiin tilanteen parantamiseksi",
           "se": "",
@@ -163,15 +125,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "11",
         "index": 11,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto vahvistaa koulutusohjelmajohtajien asemaa ottamalla heidät mukaan yliopiston johtamisen ja strategisen suunnittelun foorumeihin ja prosesseihin",
           "se": "",
@@ -181,11 +140,7 @@
       {
         "id": "12",
         "index": 12,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto vahvistaa koulutusohjelmien arvostusta siten, että koulutusohjelman johtamisesta tulee houkutteleva tehtävä",
           "se": "",
@@ -195,11 +150,7 @@
       {
         "id": "13",
         "index": 13,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto antaa koulutusohjelmille vallan ja vastuun ohjelman toiminnasta ja resurssien suunnittelusta muuttamalla yliopiston organisaatiorakenteita ja toimintaprosesseja",
           "se": "",
@@ -209,11 +160,7 @@
       {
         "id": "14",
         "index": 14,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yhteisten ohjelmien johtamisessa yliopisto ja tiedekunnat huolehtivat tehokkaasta tiedonkulusta ja sitoutumisesta opetusresurssin tarjoamiseen riittävän pitkäkestoisesti",
           "se": "",
@@ -228,15 +175,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "15",
         "index": 15,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto ratkaisee koulutusohjelmien toimintaedellytyksiä heikentävän rakenteellisen ongelman koulutusohjelmien toiminnan ja resurssien erillisyydestä",
           "se": "",
@@ -246,11 +190,7 @@
       {
         "id": "16",
         "index": 16,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto puuttuu johtamisen keinoin opetusresursseja koskeviin ongelmiin ja päättää ratkaista jo tunnistetut ongelmat",
           "se": "",
@@ -260,11 +200,7 @@
       {
         "id": "17",
         "index": 17,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto luo normit ja kehittää keinot opetuksen kuormittavuuden ja jakautumisen seurantaan ottaen huomioon erityyppisesti toteutetusta opetuksesta aiheutuva kuormitus",
           "se": "",
@@ -274,11 +210,7 @@
       {
         "id": "18",
         "index": 18,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto seuraa ja arvioi opetusresurssien tarvetta ja toteutumista säännöllisesti",
           "se": "",
@@ -288,11 +220,7 @@
       {
         "id": "19",
         "index": 19,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto vahvistaa opetuksen arvostusta, jotta opetustehtävät tulevat houkuttelevammiksi. Samalla sen pitää edistää opetustehtävien tasaisempaa jakautumista henkilökunnan kesken",
           "se": "",
@@ -307,15 +235,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "20",
         "index": 20,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto selkiyttää ja tarkentaa kansainvälisten englanninkielisten koulutusohjelmien strategista merkitystä ",
           "se": "",
@@ -325,11 +250,7 @@
       {
         "id": "21",
         "index": 21,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto linjaa kansainvälisen henkilöstön kotimaisten kielten (suomi/ruotsi) oppimisen mahdollisuuksista ja velvollisuuksista ",
           "se": "",
@@ -339,11 +260,7 @@
       {
         "id": "22",
         "index": 22,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto tarkastaa monikielisten maisteriohjelmien käytäntöjen toimivuuden",
           "se": "",
@@ -353,11 +270,7 @@
       {
         "id": "23",
         "index": 23,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto edistää kansainvälisten opiskelijoiden työllistymistä Suomeen",
           "se": "",
@@ -372,15 +285,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "24",
         "index": 24,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto kehittää strategisen suunnittelun käytännön, jolla uuden koulutusohjelman tarve tunnistetaan ottaen huomioon koulutusohjelman toiminnan rahoitus",
           "se": "",
@@ -390,11 +300,7 @@
       {
         "id": "25",
         "index": 25,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto ottaa käyttöön koulutusohjelmien yhdistämisen ja lakkauttamisen strategisina työkaluina ",
           "se": "",
@@ -404,11 +310,7 @@
       {
         "id": "26",
         "index": 26,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto päättää koulutusohjelmien perustamisen ja lakkauttamisen kriteeristöstä",
           "se": "",
@@ -423,15 +325,12 @@
       "se": "",
       "en": ""
     },
+    "level": "kandimaisteri",
     "parts": [
       {
         "id": "27",
         "index": 27,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto seuraa jatkuvasti koulutusohjelmien veto- ja pitovoimaa ja tekee koulutusohjelmissa ja ohjelmaportfoliossa tarvittavia muutoksia, jos hakijoita ei ole riittävästi tai koulutusohjelma koetaan liian laaja-alaiseksi, hajanaiseksi tai muutoin toimivuudeltaan haasteelliseksi",
           "se": "",
@@ -441,11 +340,7 @@
       {
         "id": "28",
         "index": 28,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto tarkastaa säännöllisesti koulutusohjelmaportfolionsa ja arvioi muun muassa, onko koulutusohjelmia tai kandiohjelmien jälkeisiä maisteriohjelmaoptioita liikaa tai liian vähän, ovatko ohjelmien koulutusalat relevantteja ja onko ohjelmaportfoliossa sisällöllistä päällekkäisyyttä",
           "se": "",
@@ -455,11 +350,7 @@
       {
         "id": "29",
         "index": 29,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopisto kehittää maisteriohjelmien profiilien terävyyttä siten, että hakijat tunnistavat paremmin eri vaihtoehtoehdot",
           "se": "",
@@ -469,15 +360,132 @@
       {
         "id": "30",
         "index": 30,
-        "shortLabel": {
-          "fi": "",
-          "se": "",
-          "en": ""
-        },
+
         "label": {
           "fi": "Yliopistossa on suositeltavaa valmistella ennakoivia skenaarioita ja keinovalikoima 8-10 vuoden päähän koulutusohjelmaportfolion kehittämiseksi ottaen huomioon valtiontalouden tilanne ja kansainvälinen toimintaympäristö",
           "se": "",
           "en": ""
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 1: Tohtorin tutkinnon suorittaminen tavoiteajassa",
+      "se": "Utvecklingsobjekt 1: Avläggande av doktorsexamen inom målsatt tid",
+      "en": "Development area 1: Completion of doctoral degrees within the target duration"
+    },
+    "level": "doctoral",
+    "parts": [
+      {
+        "id": "T1",
+        "index": 1,
+        "label": {
+          "fi": "Tohtoriohjelmat uudistavat opetussuunnitelmansa siten, että tohtorin tutkinnon voi suorittaa tavoiteajassa",
+          "se": "Doktorandprogrammen ser över sina undervisningsplaner så att doktorsexamen kan avläggas inom utsatt tid",
+          "en": "Doctoral programmes will redesign their curricula so that doctoral degrees can be completed within the target duration"
+        }
+      },
+      {
+        "id": "T2",
+        "index": 2,
+        "label": {
+          "fi": "Kurssimuotoisen opetuksen määrää, sisältöä ja roolia tohtorin tutkinnossa pitää arvioida kriittisesti. Tarkastelua on hyvä tehdä suhteessa verrokkimaihin.",
+          "se": "Den kursformade undervisningens omfattning, innehåll och roll i doktorsexamen bör granskas kritiskt. Det är motiverat att granska dem i jämförelse med referensländer.",
+          "en": "The amount, content and role of course-based teaching in doctoral degrees must be examined critically and based on data from comparable countries."
+        }
+      },
+      {
+        "id": "T3",
+        "index": 3,
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyöllä tuetaan tohtorikoulutuksen sujuvuutta väitöskirjatutkijoiden määrän lisääntyessä",
+          "se": "Samarbete mellan doktorandprogram stöder en smidig doktorsutbildning när antalet doktorander ökar.",
+          "en": "As the number of doctoral researchers increases, collaboration between doctoral programmes will support effective doctoral education."
+        }
+      },
+      {
+        "id": "T4",
+        "index": 4,
+        "label": {
+          "fi": "Ohjauskäytänteissä on vaihtelua, mistä syystä ohjaajien koulutuksen voisi kohdentaa niihin tohtoriohjelmiin, joissa se on jo identifioitu ongelmaksi",
+          "se": "Handledningspraxis varierar, och därför skulle handledarutbildningen kunna inriktas på de doktorandprogram där detta redan är ett identifierat problem.",
+          "en": "With the variation in supervision practices, supervisor training could be targeted to the doctoral programmes that have already identified this as a problem."
+        }
+      },
+      {
+        "id": "T5",
+        "index": 5,
+        "label": {
+          "fi": "Väitöskirjatutkijoiden volyymien kasvaessa yliopisto kehittää ohjauskäytäntöjä, ml. vertaistuki ja -ohjaus",
+          "se": "I takt med att volymen doktorander ökar, utvecklar universitetet sin handledningspraxis inklusive kamratstöd och kamrathandledning.",
+          "en": "As the volume of doctoral researchers grows, the University will develop supervision practices, including peer support and supervision."
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 2: Nivelvaihe maisterista tohtoriin",
+      "se": "Utvecklingsobjekt 2: Övergångsfas från magister till doktorand",
+      "en": "Development area 2: The transition stage from master’s to doctoral studies"
+    },
+    "level": "doctoral",
+    "parts": [
+      {
+        "id": "T6",
+        "index": 6,
+        "label": {
+          "fi": "Tohtorikoulutukseen rekrytointia tukevia käytäntöjä on suositeltavaa suunnitella alakohtaisesti yhteistyössä tohtori- ja maisteriohjelmien kesken",
+          "se": "Det rekommenderas att praxis för rekrytering till doktorsutbildning utformas inom varje disciplin som ett samarbete mellan doktorand- och magisterprogrammen.",
+          "en": "It is recommended that practices supporting recruitment to doctoral education be planned in each field through collaboration between doctoral and master’s programmes."
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 3: Uuden tutkijakoulurakenteen vakinaistaminen",
+      "se": "Utvecklingsobjekt 3: Etablering av den nya forskarskolestrukturen",
+      "en": "Development area 3: Consolidating the new doctoral school structure"
+    },
+    "level": "doctoral",
+    "parts": [
+      {
+        "id": "T7",
+        "index": 7,
+        "label": {
+          "fi": "Yliopisto jatkaa yhden tutkijakoulun toimintatapojen kehittämistä edelleen ottaen huomioon tohtorikoulutuksen monimuotoisuuden ja alojen erilaiset lähtökohdat",
+          "se": "Universitetet fortsätter utveckla sin forskarskolas verksamhetssätt med beaktande av doktorsutbildningens heterogenitet och disciplinernas olika utgångspunkter.",
+          "en": "The University will continue to develop practices and procedures for its single doctoral school, taking into account the versatility of doctoral education and field-specific starting points."
+        }
+      }
+    ]
+  },
+  {
+    "title": {
+      "fi": "Kehittämiskohde 4: Tohtoriohjelmaportfolion kehittäminen kokonaisuutena",
+      "se": "Utvecklingsobjekt 4: Utveckling av doktorsutbildningens programportfölj som helhet",
+      "en": "Development area 4: Developing the doctoral programme portfolio comprehensively"
+    },
+    "level": "doctoral",
+    "parts": [
+      {
+        "id": "T8",
+        "index": 8,
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyötä tiivistämällä ja mahdollisesti ohjelmia yhdistämällä yliopisto voi tarjota väitöskirjatutkijoille monialaisempia tutkimusympäristöjä ja saada hyötyjä ohjelmajohdon ja koordinaation työhön",
+          "se": "Genom att intensifiera samarbetet mellan doktorandprogrammen och eventuellt sammanslå program kan universitetet erbjuda doktorander mer mångdisciplinära forskningsmiljöer och få fördelar för programledning och koordinering.",
+          "en": "By increasing collaboration between doctoral programmes and possibly merging programmes, the University can offer doctoral researchers more multidisciplinary research environments and support the leadership and coordination of programmes."
+        }
+      },
+      {
+        "id": "T9",
+        "index": 9,
+        "label": {
+          "fi": "Tohtoriohjelmien yhteistyömahdollisuuksien tarkastelu sekä yliopiston sisällä että muiden yliopistojen kanssa on tarpeellista kasvavien väitöskirjatutkijamäärien koulutuksessa",
+          "se": "På grund av den ökande doktorandvolymen är det nödvändigt att undersöka doktorandprogrammens möjligheter till samarbete, både inom och utanför universitetet.",
+          "en": "As the number of doctoral researchers is set to increase, it is necessary to explore collaboration opportunities between the programmes within the University and with other universities."
         }
       }
     ]

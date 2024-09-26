@@ -48,7 +48,7 @@ export default {
     responses: 'Responses:',
     writtenAnswers: 'Written answers',
     trafficLights: 'Traffic lights',
-    tracking: 'Tracking',
+    tracking: 'Planning and monitoring',
     chooseTrafficLight: 'Select a traffic light evaluation',
     noTrafficLight: 'No evaluations. Press the button to add a new traffic light evaluation.',
 

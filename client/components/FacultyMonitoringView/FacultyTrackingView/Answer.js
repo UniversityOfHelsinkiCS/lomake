@@ -111,7 +111,7 @@ const Answer = ({ question, faculty, modify = true }) => {
 
   return (
     <>
-      <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
+      <h4>{`${question.index}. ${question.label[lang]}`}</h4>
       <div className="answer-container">
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>

@@ -20,8 +20,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
-import { facultyMonitoringQuestions } from '@root/client/questionData/index'
+import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import Answer from '../FacultyTrackingView/Answer'
+import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 
 const squareStyles = {
   boxShadow: '0px 0px 1px 1px rgba(0, 0, 0, 0.1)',
@@ -71,6 +72,10 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   const form = formKeys.FACULTY_MONITORING
   const [questionModal, setQuestionModal] = useState(null)
   const [accordion, setAccordion] = useState(false)
+  const { selectedLevel } = useSelector(state => state.degree)
+
+  const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
+  const questionData = questions.filter(q => q.level === questionLevel)
 
   const filteredFaculties = useMemo(
     () =>
@@ -225,6 +230,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         <MenuItem header className="menu-item-header">
           <h2>{t('facultymonitoring').toUpperCase()}</h2>
         </MenuItem>
+        <MenuItem>
+          <FacultyDegreeDropdown />
+        </MenuItem>
       </Menu>
 
       {questionModal && (
@@ -252,7 +260,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {facultyMonitoringQuestions.map((section, index) => (
+          {questionData.map((section, index) => (
             <React.Fragment key={section.id}>
               {' '}
               <TableRow>

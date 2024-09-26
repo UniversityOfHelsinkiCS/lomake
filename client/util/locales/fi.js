@@ -52,7 +52,7 @@ export default {
     responses: 'Vastauksia:',
     writtenAnswers: 'Kirjalliset vastaukset',
     trafficLights: 'Liikennevalojen värit',
-    tracking: 'Seuranta',
+    tracking: 'Suunnittelu ja seuranta',
     chooseTrafficLight: 'Lisää uusi arvio',
     noTrafficLight: 'Ei arvioita. Lisää uusi liikennevaloarvio painamalla nappia.',
 

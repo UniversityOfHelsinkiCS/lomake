@@ -47,7 +47,7 @@ export default {
     responses: 'Svar:',
     writtenAnswers: 'Skriftliga svar',
     trafficLights: 'Trafikljus',
-    tracking: 'Tracking',
+    tracking: 'Planering och uppföljning',
     chooseTrafficLight: 'Välj en utvärdering av trafikljus',
     noTrafficLight: 'Inga utvärderingar. Tryck på knappen för att lägga till en ny utvärdering av trafikljuset.',
 

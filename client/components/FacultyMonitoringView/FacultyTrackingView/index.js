@@ -13,6 +13,7 @@ import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
+import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import './FacultyTrackingView.scss'
 
 const FacultyTrackingView = ({ faculty }) => {
@@ -29,9 +30,13 @@ const FacultyTrackingView = ({ faculty }) => {
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
   const viewOnly = useSelector(({ form }) => form.viewOnly)
+  const { selectedLevel } = useSelector(state => state.degree)
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
   const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
+
+  const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
+  const questionData = questions.filter(q => q.level === questionLevel)
 
   useEffect(() => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
@@ -50,7 +55,7 @@ const FacultyTrackingView = ({ faculty }) => {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(false))
     }
-  }, [faculty, lang])
+  }, [faculty, lang, selectedLevel])
 
   useEffect(() => {
     return () => {
@@ -62,7 +67,19 @@ const FacultyTrackingView = ({ faculty }) => {
 
   useEffect(() => {
     setActiveAccordions({})
-  }, [lang])
+  }, [lang, selectedLevel])
+
+  const filteredQuestions = useMemo(
+    () =>
+      questionData
+        .map((object, index) => ({
+          ...object,
+          groupId: `group-${index}`,
+          parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
+        }))
+        .filter(object => object.parts.length > 0),
+    [questionData, selectedQuestions],
+  )
 
   if (!user || !faculty) return <Redirect to="/" />
 
@@ -82,17 +99,6 @@ const FacultyTrackingView = ({ faculty }) => {
     }))
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const filteredQuestions = useMemo(() =>
-    questions
-      .map((object, index) => ({
-        ...object,
-        groupId: `group-${index}`,
-        parts: object.parts.filter(part => selectedQuestions.includes(part.id)),
-      }))
-      .filter(object => object.parts.length > 0),
-  )
-
   return (
     <>
       <Menu size="large" className="filter-row" secondary>
@@ -108,11 +114,14 @@ const FacultyTrackingView = ({ faculty }) => {
           {!viewOnly && (
             <Button
               secondary
-              onClick={() => setQuestionPickerModalData(questions)}
+              onClick={() => setQuestionPickerModalData(questionData)}
               className="select-questions-button"
               content={t('formView:selectQuestions')}
             />
           )}
+        </MenuItem>
+        <MenuItem>
+          <FacultyDegreeDropdown />
         </MenuItem>
       </Menu>
 
@@ -122,8 +131,7 @@ const FacultyTrackingView = ({ faculty }) => {
           title={`${t('formView:selectQuestions')} – ${facultyName}`}
         >
           <div className="question-picker-container">
-            {questions.map((group, index) => (
-              // eslint-disable-next-line react/no-array-index-key
+            {questionData.map((group, index) => (
               <div className="question-group" key={`group-${index}`}>
                 <QuestionPicker label={group.title[lang]} questionsList={group.parts} form={form} />
               </div>
