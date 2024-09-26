@@ -10,6 +10,7 @@ import { facultyMonitoringQuestions as questions } from '@root/client/questionDa
 import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
+import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
 import './FacultyTrackingView.scss'
@@ -36,6 +37,7 @@ const FacultyTrackingView = ({ faculty }) => {
     document.title = `${t('facultymonitoring')} – ${faculty}`
 
     if (!faculty || !form || !hasReadRights) return
+    dispatch(getTempAnswersByForm(form))
 
     if (!hasWriteRights) {
       dispatch(wsJoinRoom(faculty, form))

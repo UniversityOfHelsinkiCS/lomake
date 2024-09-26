@@ -53,9 +53,9 @@ const Answer = ({ question, faculty, modify = true }) => {
 
   useEffect(() => {
     if (!hasLock) {
-      dispatch(getTempAnswersByForm(form))
+      // dispatch(getTempAnswersByForm(form))
     }
-  }, [dispatch, form, dataFromRedux, hasLock])
+  }, [dispatch, dataFromRedux, form, hasLock])
 
   const openFormModal = question => {
     askForLock()
