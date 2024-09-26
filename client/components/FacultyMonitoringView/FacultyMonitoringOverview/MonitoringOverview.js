@@ -250,7 +250,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </CustomModal>
       )}
 
-      <Table className="ui very basic table monitoring-table">
+      <Table className="table monitoring-table">
         <TableHeader>
           <TableRow>
             <TableHeaderCell className="table-header-cell" />
