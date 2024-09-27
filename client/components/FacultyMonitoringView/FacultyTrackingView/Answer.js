@@ -11,7 +11,7 @@ import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
 import '../../Generic/Generic.scss'
 
-const Answer = ({ question, faculty, modify = true }) => {
+const Answer = ({ question, faculty }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const form = formKeys.FACULTY_MONITORING
@@ -28,7 +28,7 @@ const Answer = ({ question, faculty, modify = true }) => {
   const lightsHistory = dataFromRedux[fieldName] || []
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const isEditable = !viewOnly && modify
+  const isEditable = !viewOnly
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)

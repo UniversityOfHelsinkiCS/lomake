@@ -21,7 +21,7 @@ import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
-import Answer from '../FacultyTrackingView/Answer'
+import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 
 const squareStyles = {
@@ -239,9 +239,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       </Menu>
 
       {questionModal && (
-        <CustomModal closeModal={closeModal}>
-          <h2>{questionModal.faculty}</h2>
-          <Answer
+        <CustomModal title={questionModal.faculty} closeModal={closeModal}>
+          <ModalAnswer
             answer={questionModal.answer.data}
             question={questionModal.part}
             faculty={questionModal.faculty}
