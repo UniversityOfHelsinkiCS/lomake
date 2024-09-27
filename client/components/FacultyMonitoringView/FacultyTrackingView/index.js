@@ -11,6 +11,7 @@ import { formKeys } from '@root/config/data'
 import { wsJoinRoom, wsLeaveRoom } from 'Utilities/redux/websocketReducer'
 import { clearFormState, setViewOnly } from 'Utilities/redux/formReducer'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
+import SaveIndicator from 'Components/FormView/SaveIndicator'
 import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
@@ -175,6 +176,7 @@ const FacultyTrackingView = ({ faculty }) => {
           </div>
         )}
       </div>
+      <SaveIndicator />
     </>
   )
 }
