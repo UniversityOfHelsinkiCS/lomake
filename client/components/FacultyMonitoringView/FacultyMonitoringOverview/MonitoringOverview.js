@@ -12,6 +12,7 @@ import {
   Loader,
   Card,
   Icon,
+  Radio,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -74,6 +75,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   const [questionModal, setQuestionModal] = useState(null)
   const [accordion, setAccordion] = useState(false)
   const { selectedLevel } = useSelector(state => state.degree)
+  const [showAll, setShowAll] = useState(false)
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === questionLevel)
@@ -252,7 +254,15 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       <Table className="table monitoring-table">
         <TableHeader>
           <TableRow>
-            <TableHeaderCell className="table-header-cell" />
+            <TableHeaderCell className="table-header-cell">
+              <Radio
+                style={{ marginRight: 'auto' }}
+                data-cy="overviewpage-filter-button"
+                toggle
+                onChange={() => setShowAll(!showAll)}
+                label={t('showAll')}
+              />
+            </TableHeaderCell>
             {filteredFaculties
               .sort((a, b) => a.text.localeCompare(b.text))
               .map(faculty => (
@@ -279,7 +289,23 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
                   </TableCell>
                 ))}
               </TableRow>
+              {showAll &&
+                section.parts.map(part => (
+                  <TableRow key={part.id}>
+                    <TableCell className="table-header-cell">
+                      <div className="question-text">
+                        {part.index}. {part.label[lang]}
+                      </div>
+                    </TableCell>
+                    {filteredFaculties.map(faculty => (
+                      <TableCell key={faculty.key} className="square-cell">
+                        {getAnswer(part, faculty.key)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
               {accordion === index &&
+                !showAll &&
                 section.parts.map(part => (
                   <TableRow key={part.id}>
                     <TableCell className="table-header-cell">
