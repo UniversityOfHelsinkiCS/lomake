@@ -132,6 +132,7 @@ const FacultyTrackingView = ({ faculty }) => {
         >
           <div className="question-picker-container">
             {questionData.map((group, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <div className="question-group" key={`group-${index}`}>
                 <QuestionPicker label={group.title[lang]} questionsList={group.parts} form={form} />
               </div>

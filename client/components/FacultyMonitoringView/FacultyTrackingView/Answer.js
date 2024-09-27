@@ -44,8 +44,6 @@ const Answer = ({ question, faculty, modify = true }) => {
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[modalName] && currentEditors[modalName].uid === currentUser.uid
 
-    console.log(currentEditors)
-
     setHasLock(gotTheLock)
 
     if (gettingLock && currentEditors[fieldName]) {
