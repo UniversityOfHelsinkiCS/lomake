@@ -12,9 +12,8 @@ const ModalAnswer = ({ question, faculty }) => {
     return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
   }, [answers, faculty])
   const [showAll, setShowAll] = useState(false)
-  const lightsHistory = facultyAnswers[`${question.id}_lights_history`]?.reverse() || []
-  const displayedHistory = showAll ? lightsHistory : lightsHistory?.slice(0, 4).reverse()
-
+  const lightsHistory = facultyAnswers[`${question.id}_lights_history`] || []
+  const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const formatDate = date => {
     return new Date(date)
       .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
