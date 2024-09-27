@@ -75,7 +75,7 @@ const socketMiddleware = () => {
         socket.emit('leave', action.room)
         break
       case 'WS_JOIN_ROOM':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('join', action.room, action.form)
         break
@@ -85,7 +85,7 @@ const socketMiddleware = () => {
         socket = null
         break
       case 'UPDATE_FORM_FIELD':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('update_field', {
           data: { [action.field]: action.value },
@@ -94,7 +94,7 @@ const socketMiddleware = () => {
         })
         break
       case 'GET_LOCK':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('get_lock', {
           field: action.field,

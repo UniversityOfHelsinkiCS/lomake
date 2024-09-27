@@ -32,11 +32,14 @@ export default (state = {}, action) => {
         ...state,
         data: action.value.data,
       }
-    case 'RELEASE_LOCALLY_EDITOR':
+    case 'RELEASE_LOCALLY_EDITOR': {
+      const newData = { ...state.data }
+      delete newData[action.field] // Remove the field
       return {
         ...state,
-        data: { ...state.data, [action.field]: undefined },
+        data: newData,
       }
+    }
     case 'WS_LEAVE_ROOM':
       return {
         ...state,

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
-import { getLockHttp } from 'Utilities/redux/formReducer'
+import { getLockHttp, updateFormField } from 'Utilities/redux/formReducer'
 import { deepCheck } from 'Components/Generic/Textarea'
 import { releaseFieldLocally } from 'Utilities/redux/currentEditorsReducer'
 import MonitoringQuestionForm from '../MonitoringQuestionForm/index'
@@ -44,6 +44,8 @@ const Answer = ({ question, faculty, modify = true }) => {
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[modalName] && currentEditors[modalName].uid === currentUser.uid
 
+    console.log(currentEditors)
+
     setHasLock(gotTheLock)
 
     if (gettingLock && currentEditors[fieldName]) {
@@ -70,6 +72,7 @@ const Answer = ({ question, faculty, modify = true }) => {
   const closeFormModal = () => {
     dispatch(releaseFieldLocally(modalName))
     setFormModalData(null)
+    dispatch(updateFormField(modalName, '', form))
   }
 
   useEffect(() => {
@@ -190,7 +193,7 @@ const Answer = ({ question, faculty, modify = true }) => {
             {someoneElseHasTheLock && (
               <i
                 style={{ color: 'gray', padding: '8px' }}
-              >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('isWriting')}`}</i>
+              >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('generic:isWriting')}`}</i>
             )}
             <Button
               disabled={someoneElseHasTheLock}
