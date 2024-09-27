@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Menu, Header } from 'semantic-ui-react'
+import { Button, Menu, Header, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import { fi, enGB, sv } from 'date-fns/locale'
 import './Generic.scss'
 
 const TrackingTrafficLight = ({ id, form }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const lang = useSelector(state => state.language)
   const fieldName = `${id}_lights_history`
   const lightsHistory = useSelector(({ form }) => form.data[fieldName]) || []
   const displayedHistory = lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
@@ -15,6 +18,11 @@ const TrackingTrafficLight = ({ id, form }) => {
   const value = useSelector(({ form }) => form.data[fieldName])
 
   const [showChooser, setShowChooser] = useState(false)
+  const [customDate, setCustomDate] = useState(new Date().toISOString())
+
+  registerLocale('fi', fi)
+  registerLocale('en', enGB)
+  registerLocale('se', sv)
 
   const colorValueMap = {
     green: 1,
@@ -25,12 +33,15 @@ const TrackingTrafficLight = ({ id, form }) => {
   const chooseLight = color => {
     if (!reduxViewOnly) {
       const value = colorValueMap[color] !== undefined ? colorValueMap[color] : null
-      const newEntry = { color, value, date: new Date().toISOString() }
-      dispatch(updateFormField(fieldName, [...lightsHistory, newEntry], form))
+      const newEntry = { color, value, date: customDate }
+
+      // Insert the new entry in chronological order
+      const updatedHistory = [...lightsHistory, newEntry].sort((a, b) => new Date(a.date) - new Date(b.date))
+
+      dispatch(updateFormField(fieldName, updatedHistory, form))
       setShowChooser(false)
     }
   }
-
   const toggleChooser = () => {
     setShowChooser(prev => !prev)
   }
@@ -76,17 +87,31 @@ const TrackingTrafficLight = ({ id, form }) => {
           <i style={{ color: 'gray', marginLeft: '4px' }}>{t('noTrafficLight')}</i>
         )}
         <Menu.Item position="right">
-          <Button onClick={toggleChooser} disabled={reduxViewOnly}>
-            {t('chooseTrafficLight')}
-          </Button>
+          {!showChooser && (
+            <Button onClick={toggleChooser} disabled={reduxViewOnly}>
+              {t('chooseTrafficLight')}
+            </Button>
+          )}
         </Menu.Item>
       </Menu>
 
       {showChooser && (
-        <>
+        <Grid columns={4} style={{ margin: '1em 0' }}>
           <b>{t('chooseTrafficLight')}</b>
-          <div style={{ margin: '1em 0' }}>
-            <div style={{ alignItems: 'center' }}>
+          <Grid.Row>
+            <Grid.Column>
+              <DatePicker
+                dateFormat="dd.MM.yyyy"
+                onChange={setCustomDate}
+                selected={customDate}
+                disabled={!form}
+                locale={lang}
+                showYearDropdown
+                showMonthDropdown
+                fixedHeight
+              />
+            </Grid.Column>
+            <Grid.Column>
               <div title={t('greenFaculty')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-positive-${id}`}
@@ -95,6 +120,8 @@ const TrackingTrafficLight = ({ id, form }) => {
                 />
                 <p style={{ margin: '1em' }}>{t('greenFaculty')}</p>
               </div>
+            </Grid.Column>
+            <Grid.Column>
               <div title={t('yellowFaculty')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-neutral-${id}`}
@@ -103,6 +130,8 @@ const TrackingTrafficLight = ({ id, form }) => {
                 />
                 <p style={{ margin: '1em' }}>{t('yellowFaculty')}</p>
               </div>
+            </Grid.Column>
+            <Grid.Column>
               <div title={t('redFaculty')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-negative-${id}`}
@@ -111,9 +140,9 @@ const TrackingTrafficLight = ({ id, form }) => {
                 />
                 <p style={{ margin: '1em' }}>{t('redFaculty')}</p>
               </div>
-            </div>
-          </div>
-        </>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       )}
     </>
   )
