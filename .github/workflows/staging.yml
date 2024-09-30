@@ -27,6 +27,7 @@ jobs:
             evaluation,
             metaevaluation,
             homepage,
+            trackingpage,
           ]
     name: Run tests
     runs-on: ubuntu-latest
