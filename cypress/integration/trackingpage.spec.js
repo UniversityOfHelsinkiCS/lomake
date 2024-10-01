@@ -82,5 +82,11 @@ describe('Tracking page tests', () => {
 
     cy.get('[data-cy=send-form]').click()
     cy.contains('01.01.2000').should('exist')
+
+    cy.visit(`/faculty-monitoring`)
+    cy.contains('Development Area 1:').click()
+
+    cy.get(`[data-cy=square-${testFacultyCode}-1]`).click()
+    cy.contains('01.01.2000').should('exist')
   })
 })

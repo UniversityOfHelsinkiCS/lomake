@@ -48,7 +48,7 @@ const Square = ({ color, setQuestionModal, answerObject, chevron = null }) => {
   const { backgroundColor, hover } = colors[color] || colors.gray
 
   return (
-    <div className="square-container">
+    <div className="square-container" data-cy={`square-${answerObject.faculty}-${answerObject.part.id}`}>
       <Card
         style={{
           ...squareStyles,
