@@ -4,8 +4,7 @@ describe('Tracking page tests', () => {
   const cypressSuperAdmin = 'cypressSuperAdminUser'
 
   beforeEach(() => {
-    const cypressOspa = 'cypressOspaUser'
-    cy.login(cypressOspa)
+    cy.login(cypressSuperAdmin)
     cy.visit(`/faculty-monitoring/${testFacultyCode}`)
   })
 
@@ -14,7 +13,6 @@ describe('Tracking page tests', () => {
   })
 
   it('should pick questions', () => {
-    cy.login(cypressSuperAdmin)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
     cy.createDeadline(2024, 'Toimenpiteiden toteutus ja seuranta tiedekunnissa')
@@ -22,5 +20,7 @@ describe('Tracking page tests', () => {
 
     cy.visit(`/faculty-monitoring/${testFacultyCode}`)
     cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click()
+
+
   })
 })

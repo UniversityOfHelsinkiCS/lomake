@@ -41,7 +41,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
       <label className="questions-list-label">{label}</label>
       <Dropdown
         className="comparison-questions-list-selector"
-        data-cy="questions-list"
+        data-cy={`questions-list-${label}`}
         name="questions-list"
         fluid
         placeholder={t('common:noSelections')}

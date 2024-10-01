@@ -129,6 +129,7 @@ const FacultyTrackingView = ({ faculty }) => {
 
       {questionPickerModalData && (
         <CustomModal
+          data-cy="question-picker-modal"
           closeModal={() => setQuestionPickerModalData(null)}
           title={`${t('formView:selectQuestions')} – ${facultyName}`}
         >
