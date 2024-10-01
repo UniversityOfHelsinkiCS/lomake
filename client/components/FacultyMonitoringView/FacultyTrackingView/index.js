@@ -115,6 +115,7 @@ const FacultyTrackingView = ({ faculty }) => {
           {!viewOnly && (
             <Button
               secondary
+              data-cy={`question-picker-${faculty}`}
               onClick={() => setQuestionPickerModalData(questionData)}
               className="select-questions-button"
               content={t('formView:selectQuestions')}
