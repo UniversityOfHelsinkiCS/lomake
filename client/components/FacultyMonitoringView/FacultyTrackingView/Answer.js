@@ -194,6 +194,7 @@ const Answer = ({ question, faculty }) => {
               >{`${currentEditors[modalName].firstname} ${currentEditors[modalName].lastname} ${t('generic:isWriting')}`}</i>
             )}
             <Button
+              data-cy={`modify-plan-${question.id}`}
               disabled={someoneElseHasTheLock}
               onClick={() => openFormModal(question)}
               content={t('formView:modifyPlan')}
@@ -207,7 +208,7 @@ const Answer = ({ question, faculty }) => {
           title={`${parseInt(formModalData.id, 10)} - ${formModalData.label[lang]}`}
         >
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
-          <Button secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>
+          <Button data-cy="send-form" secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>
             {t('formView:sendForm')}
           </Button>
         </CustomModal>

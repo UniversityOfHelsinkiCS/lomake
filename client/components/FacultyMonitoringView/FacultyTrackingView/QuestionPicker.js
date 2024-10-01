@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { updateFormField } from 'Utilities/redux/formReducer'
 import '../../Generic/Generic.scss'
 
-const QuestionPicker = ({ label, questionsList, form }) => {
+const QuestionPicker = ({ index, label, questionsList, form }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -41,7 +41,7 @@ const QuestionPicker = ({ label, questionsList, form }) => {
       <label className="questions-list-label">{label}</label>
       <Dropdown
         className="comparison-questions-list-selector"
-        data-cy={`questions-list-${label}`}
+        data-cy={`questions-list-${index}`}
         name="questions-list"
         fluid
         placeholder={t('common:noSelections')}

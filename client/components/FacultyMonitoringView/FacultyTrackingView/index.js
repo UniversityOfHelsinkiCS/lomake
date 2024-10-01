@@ -137,10 +137,11 @@ const FacultyTrackingView = ({ faculty }) => {
             {questionData.map((group, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <div className="question-group" key={`group-${index}`}>
-                <QuestionPicker label={group.title[lang]} questionsList={group.parts} form={form} />
+                <QuestionPicker index={index} label={group.title[lang]} questionsList={group.parts} form={form} />
               </div>
             ))}
             <Button
+              data-cy="send-selection-button"
               onClick={() => setQuestionPickerModalData(null)}
               secondary
               content={t('formView:sendSelection')}
@@ -156,6 +157,7 @@ const FacultyTrackingView = ({ faculty }) => {
             <div className="accordion-container" key={group.groupId}>
               <Accordion>
                 <Accordion.Title
+                  data-cy={`accordion-${group.groupId}`}
                   active={activeAccordions[group.groupId]}
                   index={group.groupId}
                   onClick={handleAccordionClick}
