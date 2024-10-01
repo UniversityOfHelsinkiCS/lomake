@@ -66,7 +66,7 @@ const TrackingTrafficLight = ({ id, form }) => {
       <Menu secondary style={{ display: 'flex', flexWrap: 'wrap' }}>
         {displayedHistory.length ? (
           displayedHistory.map((entry, index) => (
-            <Menu.Item>
+            <Menu.Item key={`${entry.date}-${index}`}>
               <span className={`answer-circle-big-${entry.color}`} />
               <i>
                 {new Date(entry.date)
