@@ -99,7 +99,7 @@ const TrackingTrafficLight = ({ id, form }) => {
         <Grid columns={4} style={{ margin: '1em 0' }}>
           <b>{t('chooseTrafficLight')}</b>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column data-cy="date-picker">
               <DatePicker
                 dateFormat="dd.MM.yyyy"
                 onChange={setCustomDate}
