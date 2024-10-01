@@ -88,7 +88,7 @@ const TrackingTrafficLight = ({ id, form }) => {
         )}
         <Menu.Item position="right">
           {!showChooser && (
-            <Button onClick={toggleChooser} disabled={reduxViewOnly}>
+            <Button data-cy="toggle-chooser" onClick={toggleChooser} disabled={reduxViewOnly}>
               {t('chooseTrafficLight')}
             </Button>
           )}
