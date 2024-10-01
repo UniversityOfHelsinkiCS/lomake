@@ -14,6 +14,7 @@ const FormFilter = ({ version = null }) => {
     // { text: t('degree-reform-individual'), value: 3 },
     { text: t('common:formFilter:evaluation'), value: 4 },
     { text: t('evaluationFaculty'), value: 5 },
+    { text: t('metaevaluation'), value: 7 },
   ])
 
   const filterForm = useSelector(({ filters }) => filters.form)

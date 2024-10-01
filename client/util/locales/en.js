@@ -109,7 +109,7 @@ export default {
     noSelections: 'No selected measures',
 
     doctoralToggle: 'Doctoral Programmes',
-    bachelorMasterToggle: `Bachelor's & master's Programmes`,
+    bachelorMasterToggle: `Bachelor's & Master's Programmes`,
   },
 
   aboutPage: {

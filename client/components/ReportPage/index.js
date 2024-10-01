@@ -69,7 +69,18 @@ export default () => {
     programmes = filteredProgrammes(lang, usersProgrammes, picked, debouncedFilter, filters)
   }
 
-  const questionsList = modifiedQuestions(lang, filters.form)
+  let questionsList = modifiedQuestions(lang, filters.form)
+
+  if (filters.form === formKeys.META_EVALUATION) {
+    questionsList = questionsList.filter(q => {
+      if (filters.level === 'doctoral') {
+        return q.id.startsWith('T')
+      } else if (filters.level !== 'allProgrammes') {
+        return !q.id.startsWith('T')
+      }
+      return true
+    })
+  }
 
   const handleTabChange = (e, { activeIndex }) => setActiveTab(activeIndex)
 
