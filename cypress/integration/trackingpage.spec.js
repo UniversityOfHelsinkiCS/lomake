@@ -43,7 +43,7 @@ describe('Tracking page tests', () => {
 
     cy.get('[data-cy=questions-list-0]').click()
 
-    cy.contains('1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings').click()
+    cy.contains('1.').click()
     cy.contains('2.').click()
     cy.get('[data-cy=send-selection-button]').click()
 
@@ -60,5 +60,33 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=color-negative-2]').click()
 
     cy.get('[data-cy=send-form]').click()
+  })
+
+  it('should modify the date', () => {
+    cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click()
+
+    cy.get('[data-cy=questions-list-0]').click()
+
+    cy.contains('1.').click()
+    cy.get('[data-cy=send-selection-button]').click()
+
+    cy.get('[data-cy=accordion-group-0]').click()
+    cy.get('[data-cy=modify-plan-1]').click()
+
+    cy.get('[data-cy=toggle-chooser]').click()
+    cy.get('[data-cy=color-positive-1]').click()
+
+    cy.get('[data-cy=toggle-chooser]').click()
+    cy.get('[data-cy=date-picker]').type('{selectAll}01.01.2000')
+    cy.get('[data-cy=color-negative-1]').click()
+
+    cy.get('[data-cy=send-form]').click()
+    cy.contains('01.01.2000').should('exist')
+
+    cy.visit(`/faculty-monitoring`)
+    cy.contains('Development Area 1:').click()
+
+    cy.get(`[data-cy=square-${testFacultyCode}-1]`).click()
+    cy.contains('01.01.2000').should('exist')
   })
 })

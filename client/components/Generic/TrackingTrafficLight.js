@@ -66,7 +66,7 @@ const TrackingTrafficLight = ({ id, form }) => {
       <Menu secondary style={{ display: 'flex', flexWrap: 'wrap' }}>
         {displayedHistory.length ? (
           displayedHistory.map((entry, index) => (
-            <Menu.Item>
+            <Menu.Item key={`${entry.date}-${index}`}>
               <span className={`answer-circle-big-${entry.color}`} />
               <i>
                 {new Date(entry.date)
@@ -99,7 +99,7 @@ const TrackingTrafficLight = ({ id, form }) => {
         <Grid columns={4} style={{ margin: '1em 0' }}>
           <b>{t('chooseTrafficLight')}</b>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column data-cy="date-picker">
               <DatePicker
                 dateFormat="dd.MM.yyyy"
                 onChange={setCustomDate}
