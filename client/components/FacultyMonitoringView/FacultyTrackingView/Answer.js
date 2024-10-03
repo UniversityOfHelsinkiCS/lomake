@@ -21,12 +21,10 @@ const Answer = ({ question, faculty }) => {
   const facultyAnswers = useMemo(() => {
     return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
   }, [answers, faculty])
-  const [showAll, setShowAll] = useState(false)
   const fieldName = `${question.id}_lights_history`
   const modalName = `${question.id}_modal`
   const dataFromRedux = useSelector(({ form }) => form.data)
   const lightsHistory = dataFromRedux[fieldName] || []
-  const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly
 
@@ -117,10 +115,10 @@ const Answer = ({ question, faculty }) => {
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
           <div className="light-container">
-            {displayedHistory.length > 0 ? (
+            {lightsHistory.length > 0 ? (
               <>
-                {displayedHistory.map(entry => (
-                  <div className="light" key={entry.date}>
+                {lightsHistory.map((entry, index) => (
+                  <div data-cy={`${entry.color}-${index}`} className="light" key={entry.date}>
                     <span className={`answer-circle-big-${entry.color}`} />
                     <div className="light-text">
                       <span>{t(`common:${entry.color}Faculty`)}</span>
@@ -129,11 +127,11 @@ const Answer = ({ question, faculty }) => {
                     </div>
                   </div>
                 ))}
-                {lightsHistory.length > 4 && (
+                {/* lightsHistory.length > 4 && (
                   <Button onClick={() => setShowAll(!showAll)} style={{ marginTop: '10px' }}>
                     {showAll ? t('common:showLess') : t('common:showAll')}
                   </Button>
-                )}
+                ) */}
               </>
             ) : (
               t('formView:noAnswer')

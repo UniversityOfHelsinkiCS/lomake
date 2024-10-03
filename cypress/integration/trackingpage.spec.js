@@ -18,7 +18,9 @@ describe('Tracking page tests', () => {
 
     cy.get('[data-cy=questions-list-0]').click()
 
-    cy.contains('1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings').click()
+    cy.contains(
+      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings',
+    ).click()
     cy.get('[data-cy=send-selection-button]').click()
   })
 
@@ -27,7 +29,9 @@ describe('Tracking page tests', () => {
 
     cy.get('[data-cy=questions-list-0]').click()
 
-    cy.contains('1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings').click()
+    cy.contains(
+      '1. Degree programmes include model schedules in curricula that support understanding of the education system, study paths, and course offerings',
+    ).click()
     cy.get('[data-cy=send-selection-button]').click()
 
     cy.get('[data-cy=accordion-group-0]').click()

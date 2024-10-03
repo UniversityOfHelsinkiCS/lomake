@@ -75,7 +75,8 @@ export default () => {
     questionsList = questionsList.filter(q => {
       if (filters.level === 'doctoral') {
         return q.id.startsWith('T')
-      } else if (filters.level !== 'allProgrammes') {
+      }
+      if (filters.level !== 'allProgrammes') {
         return !q.id.startsWith('T')
       }
       return true
