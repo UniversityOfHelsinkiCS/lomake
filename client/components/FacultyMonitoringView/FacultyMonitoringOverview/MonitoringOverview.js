@@ -196,7 +196,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         {
           title: t('empty'),
           value: colors.emptyAnswer.value || 0,
-          color: 'white',
+          color: '#fafbfb',
         },
       ]
 
@@ -267,7 +267,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
               .sort((a, b) => a.text.localeCompare(b.text))
               .map(faculty => (
                 <TableHeaderCell key={faculty.key} className="table-header-cell">
-                  <Link to={`/faculty-monitoring/${faculty.key}`}>
+                  <Link className="faculty-header" to={`/faculty-monitoring/${faculty.key}`}>
                     {faculty.text} {faculty.key}
                   </Link>
                 </TableHeaderCell>

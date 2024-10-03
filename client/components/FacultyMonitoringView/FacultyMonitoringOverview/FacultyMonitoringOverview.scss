@@ -16,6 +16,8 @@
 }
 
 .monitoring-overview {
+  width: 100%;
+
   .monitoring-table {
     border-collapse: separate;
     border-spacing: 0;
@@ -23,12 +25,17 @@
   }
 
   .table-header-cell {
-    padding: 15px;
+    padding: 8px !important;
     margin-top: 10px !important;
     text-align: left;
-    white-space: normal;
+    min-width: 7vw;
+    max-width: 7vw;
     word-wrap: break-word;
-    vertical-align: top !important;
+    .faculty-header {
+      vertical-align: top !important;
+      font-size: 13px;
+      width: 100%;
+    }
   }
 
   .pie-chart-cell,
@@ -54,8 +61,9 @@
   .accordion-header {
     cursor: pointer;
     margin: 15px 0 !important;
-    width: 100%;
-    vertical-align: middle !important;
+    width: 210px;
+    overflow: visible;
+    word-wrap: break-word;
     &:hover {
       text-decoration: underline;
     }
