@@ -20,7 +20,7 @@
   "author": "Jami Kousa",
   "license": "ISC",
   "dependencies": {
-    "@sentry/browser": "^7.102.1",
+    "@sentry/browser": "^8.0.0",
     "@sentry/esbuild-plugin": "^2.14.2",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
