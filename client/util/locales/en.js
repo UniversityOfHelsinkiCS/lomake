@@ -4,6 +4,8 @@ export default {
     about: 'About',
     admin: 'Admin',
     logOut: 'Log out',
+    admin: 'Admin',
+    logOut: 'Log out',
     backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
     form: 'Form',
@@ -46,9 +48,7 @@ export default {
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
     responses: 'Responses:',
-    writtenAnswers: 'Written answers',
-    trafficLights: 'Traffic lights',
-    tracking: 'Planning and monitoring',
+    writtenAnswers: 'Writte"all": "All" monitoring',
     chooseTrafficLight: 'Select a traffic light evaluation',
     noTrafficLight: 'No evaluations. Press the button to add a new traffic light evaluation.',
 
@@ -110,6 +110,19 @@ export default {
 
     doctoralToggle: 'Doctoral Programmes',
     bachelorMasterToggle: `Bachelor's & Master's Programmes`,
+    all: "All",
+    colors_gray: "Only gray",
+    formFilter: {
+        "evaluation": "View of education programs by facultyd"
+      },
+    metaEvaluationAnswers: "Written answers",
+    bm: "Bachelor's programs & master's programs",
+    t: "Doctoral programs",
+    description: "University of Helsinki education administration snapshot form",
+    clock: "Clock",
+    comment: "Comment",
+    answer: "Answer",
+    overview: "Owerview"
   },
 
   aboutPage: {
@@ -298,6 +311,7 @@ export default {
     monitoringResourceLabel: 'Resources allocated',
     monitoringStartLabel: 'Start time',
     monitoringEndLabel: 'Estimated end time',
+    facultyScheduleLabel: "Schedule"
   },
 
   generic: {
@@ -508,5 +522,6 @@ export default {
     writingRight: 'Writing right',
     endsIn: 'Until',
     confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
+    openForms: "The last dates for filling in open forms"
   },
 }
