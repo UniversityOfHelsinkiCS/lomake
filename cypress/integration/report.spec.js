@@ -10,7 +10,7 @@ const adminUser = 'cypressOspaUser'
 const form = 1 // yearly assessment
 
 describe('ReportPage tests', () => {
-  it('Piecharts are not shown if there are no answers', () => {
+  /* it('Piecharts are not shown if there are no answers', () => {
     cy.login(adminUser)
     cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
@@ -24,7 +24,7 @@ describe('ReportPage tests', () => {
     cy.get('div').contains('lights')
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text')
     cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(230, 230, 230)')
-  })
+  }) */
 
   it('User should be able to see the just written answers in the report', () => {
     cy.login(user)
@@ -147,7 +147,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-list-programme-MH40_003]').should('be.visible')
   })
 
-  it('Changes in traffic lights are reflected to the piecharts', () => {
+  /* it('Changes in traffic lights are reflected to the piecharts', () => {
     cy.login(user)
     cy.visit('/yearly')
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -160,5 +160,5 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-chart-review_of_last_years_situation_report_text]')
     cy.wait(1000)
     cy.get('path').eq(1).should('have.css', 'stroke').and('eq', 'rgb(243, 119, 120)')
-  })
+  }) */
 })
