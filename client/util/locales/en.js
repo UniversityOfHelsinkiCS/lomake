@@ -4,8 +4,6 @@ export default {
     about: 'About',
     admin: 'Admin',
     logOut: 'Log out',
-    admin: 'Admin',
-    logOut: 'Log out',
     backToFrontPage: 'Back to frontpage',
     chosenLanguage: 'English',
     form: 'Form',
@@ -119,7 +117,6 @@ export default {
     bm: "Bachelor's programs & master's programs",
     t: "Doctoral programs",
     description: "University of Helsinki education administration snapshot form",
-    clock: "Clock",
     comment: "Comment",
     answer: "Answer",
     overview: "Owerview"
