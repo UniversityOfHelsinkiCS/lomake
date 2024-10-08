@@ -27,7 +27,7 @@ const ModalAnswer = ({ question, faculty }) => {
 
   return (
     <>
-      <h4>{`${parseInt(question.id, 10)}. ${question.label[lang]}`}</h4>
+      <h4>{`${question.id?.startsWith('T') ? question.id.slice(1) : question.id}. ${question.label[lang]}`}</h4>
       <div className="answer-container">
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>

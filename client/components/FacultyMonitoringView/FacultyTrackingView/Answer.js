@@ -110,7 +110,7 @@ const Answer = ({ question, faculty }) => {
 
   return (
     <>
-      <h4>{`${question.index}. ${question.label[lang]}`}</h4>
+      <h4>{`${question.id?.startsWith('T') ? question.id.slice(1) : question.id}. ${question.label[lang]}`}</h4>
       <div className="answer-container">
         <div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
@@ -203,7 +203,7 @@ const Answer = ({ question, faculty }) => {
       {formModalData && (
         <CustomModal
           closeModal={closeFormModal}
-          title={`${parseInt(formModalData.id, 10)} - ${formModalData.label[lang]}`}
+          title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id} - ${formModalData.label[lang]}`}
         >
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
           <Button data-cy="send-form" secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>

@@ -248,7 +248,10 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       </Menu>
 
       {questionModal && (
-        <CustomModal title={questionModal.faculty} closeModal={closeModal}>
+        <CustomModal
+          title={`${faculties?.find(f => f.code === questionModal.faculty)?.name[lang]}  ${questionModal.faculty}`}
+          closeModal={closeModal}
+        >
           <ModalAnswer
             answer={questionModal.answer.data}
             question={questionModal.part}
