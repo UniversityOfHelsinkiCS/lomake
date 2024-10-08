@@ -23,7 +23,7 @@ const MetaOverview = ({
   form,
   formType,
   showAllProgrammes,
-  setShowAllProgrammes,
+  handleShowAllProgrammes,
 }) => {
   const [filter, setFilter] = useState('')
   const [modalData, setModalData] = useState(null)
@@ -144,7 +144,7 @@ const MetaOverview = ({
           form={form}
           formType={formType}
           showAllProgrammes={showAllProgrammes}
-          handleShowProgrammes={() => setShowAllProgrammes(!showAllProgrammes)}
+          handleShowProgrammes={handleShowAllProgrammes}
           meta
         />
       </div>
