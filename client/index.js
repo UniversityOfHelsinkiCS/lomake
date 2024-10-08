@@ -35,7 +35,7 @@ const refresh = () => {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  const newUser = 'superAdmin'
+  const newUser = 'klemstro'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
 
   if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {

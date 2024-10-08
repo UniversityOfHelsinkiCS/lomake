@@ -90,9 +90,9 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
 
-      cy.get(`[data-cy=${testProgrammeCode}-1-single`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
+      cy.get(`[data-cy=${testProgrammeCode}-1-single]`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
 
-      cy.get(`[data-cy=${testProgrammeCode}-2-single`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
+      cy.get(`[data-cy=${testProgrammeCode}-2-single]`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
 
       cy.visit('/')
       cy.get('[data-cy=nav-evaluation]').click()

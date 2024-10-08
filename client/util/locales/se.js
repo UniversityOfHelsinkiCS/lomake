@@ -17,7 +17,7 @@ export default {
     green: 'Grön',
     yellow: 'Gul',
     red: 'Röd',
-    gray: "grå",
+    gray: 'grå',
     EMPTY: 'Inget svar',
     empty: 'Inget svar',
     OK: 'Svaret lämnat',
@@ -108,20 +108,19 @@ export default {
     doctoralToggle: 'Doktorandprogrammet',
     toFrontpage: 'Till startsidan',
     noSelections: 'Inga valda åtgärder',
-    all: "Alla",
-    colors_gray: "Bara grått",
+    all: 'Alla',
+    colors_gray: 'Bara grått',
     formFilter: {
-      evaluation: "Syn på utbildningsprogram per fakultet"
+      evaluation: 'Syn på utbildningsprogram per fakultet',
     },
-    metaEvaluationAnswers: "Skriftliga svar",
-    bm: "Kandidatprogram & magisterprogram",
-    t: "Forskarutbildningar",
-    description: "Helsingfors universitets utbildningsförvaltning ögonblicksbild",
-    clock: "Klocka",
-    comment: "Kommentar",
-    answer: "Svar",
-    overview: "Översikt"
-    
+    metaEvaluationAnswers: 'Skriftliga svar',
+    bm: 'Kandidatprogram & magisterprogram',
+    t: 'Forskarutbildningar',
+    description: 'Helsingfors universitets utbildningsförvaltning ögonblicksbild',
+    clock: 'Klocka',
+    comment: 'Kommentar',
+    answer: 'Svar',
+    overview: 'Översikt',
   },
 
   aboutPage: {
@@ -210,7 +209,7 @@ export default {
     facultyResourcesLabel: 'Tilldelade resurser',
     facultyStartLabel: 'Starttid',
     facultyEndLabel: 'Beräknad sluttid',
-    facultyScheduleLabel: "Schema",
+    facultyScheduleLabel: 'Schema',
     info1:
       'Diskutera formulärets teman i utbildningsprogrammets ledningsgrupp. Frågorna kring de olika temana är avsedda att stimulera till diskussion; de ska alltså inte besvaras som sådana.',
     info2: 'Ge en allmän bedömning av läget för varje tema med hjälp av trafikljusen: ',
@@ -310,17 +309,17 @@ export default {
     monitoringResourceLabel: 'Tilldelade resurser',
     monitoringStartLabel: 'Startdatum',
     monitoringEndLabel: 'Beräknat slutdatum',
-    selectSystems: "Välj system genom att klicka",
-    mostUseful: "De mest användbara feedbacksystemen",
-    removeDevelopmentArea: "Ta bort det senaste utvecklingsobjektet",
-    rapo: "Se information om doktorandprogrammet i Rapo",
-    yearlyAnswers: "Svar från årliga uppföljningar",
-    evaluationFacultyAnswers: "Enkätsvar i utbildningsprogram",
-    yearlyFacultyAnswers: "Svar från årliga uppföljningar i utbildningsprogram",
-    sendNewForm: "Fyll i ett nytt formulär",
-    sendFormModalDescription: "Vill du skicka ett annat formulär? Uppgifterna för alla inskickade formulär kommer att bevaras",
-    sendFormModalHeader: "Skickar den nya utbildningsstatusblanketten"
-
+    selectSystems: 'Välj system genom att klicka',
+    mostUseful: 'De mest användbara feedbacksystemen',
+    removeDevelopmentArea: 'Ta bort det senaste utvecklingsobjektet',
+    rapo: 'Se information om doktorandprogrammet i Rapo',
+    yearlyAnswers: 'Svar från årliga uppföljningar',
+    evaluationFacultyAnswers: 'Enkätsvar i utbildningsprogram',
+    yearlyFacultyAnswers: 'Svar från årliga uppföljningar i utbildningsprogram',
+    sendNewForm: 'Fyll i ett nytt formulär',
+    sendFormModalDescription:
+      'Vill du skicka ett annat formulär? Uppgifterna för alla inskickade formulär kommer att bevaras',
+    sendFormModalHeader: 'Skickar den nya utbildningsstatusblanketten',
   },
 
   generic: {
@@ -383,7 +382,7 @@ export default {
     colors: 'Trafikljus', // check
     written: 'Skriftliga svar', // check
 
-    chosenFaculties: "Utvalda fakulteter",
+    chosenFaculties: 'Utvalda fakulteter',
 
     level: {
       programmes: 'Utbilndingsprogram',
@@ -454,10 +453,10 @@ export default {
 
     colorBlindMode: 'Visa färger som text',
     print: 'Utskrivbara versioner',
-    greenModalAccordion: "Läget är bra",
-    yellowModalAccordion: "Läget är neutral",
-    redModalAccordion: "Läget är dåligt",
-    facultySummary: "Svar från träningsprogram"
+    greenModalAccordion: 'Läget är bra',
+    yellowModalAccordion: 'Läget är neutral',
+    redModalAccordion: 'Läget är dåligt',
+    facultySummary: 'Svar från träningsprogram',
   },
 
   report: {
@@ -469,9 +468,9 @@ export default {
     question: 'Fråga',
     answered: 'Svarat',
     all: 'Allt',
-    filterBy: "Begränsa svaren",
-    improvementAreas: "Utvecklingsmål",
-    improvementActions: "Åtgärdsförslag"
+    filterBy: 'Begränsa svaren',
+    improvementAreas: 'Utvecklingsmål',
+    improvementActions: 'Åtgärdsförslag',
     //  improvementAreas: '',
     //  improvementActions: '',
   },
@@ -516,27 +515,27 @@ export default {
     lastLogin: 'Senast inloggad',
     specialGroup: 'Åtkomstgrupper',
     role: 'Huvudroll',
-    selectForm: "Välj ett formulär",
-    openForms: "Sista dagarna för att fylla i öppna formulär",
-    tempAccess: "Rättighetsförvaltning",
-    tempAccessMangement: "Hantering av tillfälliga rättigheter",
-    tempAccessInfo1: "Vid behov kan användaren beviljas tillfällig läs- eller skrivbehörighet till ett specifikt utbildningsprogram.",
-    tempAccessInfo2: "Förmånstagaren måste TIDIGARE ha REGISTRERAD sig på blanketten. Ett e-postmeddelande om beviljandet av rättigheten skickas till chefen för det aktuella utbildningsprogrammet.",
-    tempAccessNote: "Denna funktion är endast avsedd för exceptionella situationer. IAM-grupper ska i första hand användas för att distribuera rättigheter.",
-    receiverEmail: "Bidragstagarens e-postadress helsinki.fi",
-    accessProgramme: "Det utbildningsprogram som rättigheterna tillerkänns",
-    endOfAccess: "Användningsrättens utgångsdatum",
-    kojoEmail: "E-postadress till chefen för utbildningsprogrammet",
-    writingRight: "Skrivtillstånd",
-    giveWritingRights: "Ge skrivbehörighet",
-    saveRight: "Spara rätt",
-    tempAccesses: "Beviljas tillfälliga rättigheter",
-    expired: "Visa har löpt ut",
-    endsIn: "Slut",
-    confirm: "Ta bort användaren {{firstname}} {{lastname}}s tillfälliga åtkomst till programmet {{progName}}?"
-    
-    
-
+    selectForm: 'Välj ett formulär',
+    openForms: 'Sista dagarna för att fylla i öppna formulär',
+    tempAccess: 'Rättighetsförvaltning',
+    tempAccessMangement: 'Hantering av tillfälliga rättigheter',
+    tempAccessInfo1:
+      'Vid behov kan användaren beviljas tillfällig läs- eller skrivbehörighet till ett specifikt utbildningsprogram.',
+    tempAccessInfo2:
+      'Förmånstagaren måste TIDIGARE ha REGISTRERAD sig på blanketten. Ett e-postmeddelande om beviljandet av rättigheten skickas till chefen för det aktuella utbildningsprogrammet.',
+    tempAccessNote:
+      'Denna funktion är endast avsedd för exceptionella situationer. IAM-grupper ska i första hand användas för att distribuera rättigheter.',
+    receiverEmail: 'Bidragstagarens e-postadress helsinki.fi',
+    accessProgramme: 'Det utbildningsprogram som rättigheterna tillerkänns',
+    endOfAccess: 'Användningsrättens utgångsdatum',
+    kojoEmail: 'E-postadress till chefen för utbildningsprogrammet',
+    writingRight: 'Skrivtillstånd',
+    giveWritingRights: 'Ge skrivbehörighet',
+    saveRight: 'Spara rätt',
+    tempAccesses: 'Beviljas tillfälliga rättigheter',
+    expired: 'Visa har löpt ut',
+    endsIn: 'Slut',
+    confirm: 'Ta bort användaren {{firstname}} {{lastname}}s tillfälliga åtkomst till programmet {{progName}}?',
 
     // tempAccess: '',
     // tempAccessMangement,

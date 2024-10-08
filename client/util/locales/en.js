@@ -108,18 +108,18 @@ export default {
 
     doctoralToggle: 'Doctoral Programmes',
     bachelorMasterToggle: `Bachelor's & Master's Programmes`,
-    all: "All",
-    colors_gray: "Only gray",
+    all: 'All',
+    colors_gray: 'Only gray',
     formFilter: {
-        "evaluation": "View of education programs by facultyd"
-      },
-    metaEvaluationAnswers: "Written answers",
+      evaluation: 'View of education programs by facultyd',
+    },
+    metaEvaluationAnswers: 'Written answers',
     bm: "Bachelor's programs & master's programs",
-    t: "Doctoral programs",
-    description: "University of Helsinki education administration snapshot form",
-    comment: "Comment",
-    answer: "Answer",
-    overview: "Owerview"
+    t: 'Doctoral programs',
+    description: 'University of Helsinki education administration snapshot form',
+    comment: 'Comment',
+    answer: 'Answer',
+    overview: 'Owerview',
   },
 
   aboutPage: {
@@ -308,7 +308,7 @@ export default {
     monitoringResourceLabel: 'Resources allocated',
     monitoringStartLabel: 'Start time',
     monitoringEndLabel: 'Estimated end time',
-    facultyScheduleLabel: "Schedule"
+    facultyScheduleLabel: 'Schedule',
   },
 
   generic: {
@@ -519,6 +519,6 @@ export default {
     writingRight: 'Writing right',
     endsIn: 'Until',
     confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
-    openForms: "The last dates for filling in open forms"
+    openForms: 'The last dates for filling in open forms',
   },
 }

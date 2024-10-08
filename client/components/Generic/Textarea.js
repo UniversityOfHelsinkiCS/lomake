@@ -68,7 +68,7 @@ const Textarea = ({
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const ref = useRef(null)
   const [changes, setChanges] = useState(false)
-  const editorContainerRef = useRef(null)
+  /* const editorContainerRef = useRef(null) */
 
   const formData = useSelector(({ form }) => form.data)
 
@@ -232,22 +232,23 @@ const Textarea = ({
     }
   }
 
-  useEffect(() => {
-    const handleClickOutside = event => {
-      if (editorContainerRef.current && !editorContainerRef.current.contains(event.target)) {
-        handleSave()
-      }
-    }
+  /* useEffect(() => { */
+  /* const handleClickOutside = event => { */
+  /* if (editorContainerRef.current && !editorContainerRef.current.contains(event.target)) { */
+  /* handleSave() */
+  /* } */
+  /* } */
 
-    // Bind the event listener to the document
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Cleanup the event listener on component unmount
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [editorContainerRef, handleSave])
+  /* // Bind the event listener to the document */
+  /* document.addEventListener('mousedown', handleClickOutside) */
+  /* return () => { */
+  /* // Cleanup the event listener on component unmount */
+  /* document.removeEventListener('mousedown', handleClickOutside) */
+  /* } */
+  /* }, [editorContainerRef, handleSave]) */
+
   return (
-    <div data-cy={`textarea-${id}`} style={{ marginTop: 0 }} ref={editorContainerRef}>
+    <div data-cy={`textarea-${id}`} style={{ marginTop: 0 }} /* ref={editorContainerRef} */>
       <div
         className="form-text-area"
         style={{
