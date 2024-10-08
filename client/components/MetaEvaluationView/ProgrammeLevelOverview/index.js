@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
-import { setLevel } from 'Utilities/redux/degreeReducer'
+import { setLevel } from 'Utilities/redux/filterReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [showAllProgrammes, setShowAllProgrammes] = useState(false)
-  const { selectedLevel } = useSelector(state => state.degree)
+  const selectedLevel = useSelector(({ filters }) => filters.level)
   const currentUser = useSelector(({ currentUser }) => currentUser)
   const lang = useSelector(state => state.language)
   const faculties = useSelector(state => state.faculties)

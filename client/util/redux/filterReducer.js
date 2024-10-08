@@ -56,6 +56,7 @@ const initialState = {
   questions: { selected: [], open: [] },
   form: 1,
   colorBlindMode: false,
+  isDoctoral: false,
 }
 
 export default (state = initialState, action) => {
@@ -70,6 +71,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         level: action.level,
+        isDoctoral: action.level === 'doctoral',
       }
     }
     case 'CLEAR_LEVEL_SPECIFIC_FILTERS': {

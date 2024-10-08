@@ -16,7 +16,6 @@ import currentEditors from './currentEditorsReducer'
 import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
-import degree from './degreeReducer'
 import monitoring from './facultyMonitoringReducer'
 
 export default combineReducers({
@@ -36,6 +35,5 @@ export default combineReducers({
   faculties,
   summaries,
   reformAnswers,
-  degree,
   monitoring,
 })

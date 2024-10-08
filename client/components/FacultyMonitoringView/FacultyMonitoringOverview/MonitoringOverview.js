@@ -74,7 +74,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   const form = formKeys.FACULTY_MONITORING
   const [questionModal, setQuestionModal] = useState(null)
   const [accordion, setAccordion] = useState(false)
-  const { selectedLevel } = useSelector(state => state.degree)
+  const selectedLevel = useSelector(({ filters }) => filters.level)
   const [showAll, setShowAll] = useState(false)
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'

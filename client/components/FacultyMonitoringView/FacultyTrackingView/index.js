@@ -31,7 +31,7 @@ const FacultyTrackingView = ({ faculty }) => {
   const [questionPickerModalData, setQuestionPickerModalData] = useState(null)
   const [activeAccordions, setActiveAccordions] = useState({})
   const viewOnly = useSelector(({ form }) => form.viewOnly)
-  const { selectedLevel } = useSelector(state => state.degree)
+  const selectedLevel = useSelector(({ filters }) => filters.level)
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
   const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)

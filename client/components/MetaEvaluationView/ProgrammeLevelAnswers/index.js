@@ -27,7 +27,10 @@ const ProgrammeLevelAnswers = () => {
   const year = useSelector(state => state.year)
   const form = formKeys.META_EVALUATION
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
-  const { isDoctoral, selectedLevel } = useSelector(state => state.degree)
+  const { isDoctoral, level: selectedLevel } = useSelector(({ filters }) => ({
+    isDoctoral: filters.isDoctoral,
+    level: filters.level,
+  }))
   const [showing, setShowing] = useState(-1)
   const questionsList = modifiedQuestions(lang, form)
   const faculties = useSelector(state => state.faculties)

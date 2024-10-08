@@ -117,7 +117,7 @@ const ColorTable = React.memo(
     const programmeOwners = useSelector(state => state.studyProgrammes.programmeOwners)
     const year = useSelector(({ filters }) => filters.year)
     const { nextDeadline, draftYear } = useSelector(state => state.deadlines)
-    const { isDoctoral } = useSelector(state => state.degree)
+    const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
     const [reverse, setReverse] = useState(false)
     const [sorter, setSorter] = useState('name')
 
