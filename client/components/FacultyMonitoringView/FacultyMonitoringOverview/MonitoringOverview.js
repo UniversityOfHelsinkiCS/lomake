@@ -104,6 +104,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       const questionIds = answer.data.selectedQuestionIds
       const selected = questionIds.includes(part.id)
 
+      if (!selected) return null
+
       const answerObject = {
         answer,
         faculty,
@@ -134,6 +136,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         const { color } = lightList[lightList.length - 1]
         return <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} />
       }
+
       if (selected) {
         return <Square color="grey" setQuestionModal={setQuestionModal} answerObject={answerObject} />
       }
@@ -147,6 +150,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
     if (answer && answer.data.selectedQuestionIds) {
       const questionIds = section.parts.map(part => part.id)
+
       const summaryAnswers = questionIds.map(id => {
         const key = `${id}_lights_history`
         return answer.data[key] || []
@@ -166,6 +170,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       summaryAnswers.forEach((answerList, index) => {
         const questionId = questionIds[index]
 
+        if (!selectedQuestionIds.includes(questionId)) {
+          return null
+        }
         if (answerList.length === 0 && selectedQuestionIds.includes(questionId)) {
           colors.emptyAnswer.value += 1
         } else if (answerList.length > 0) {
