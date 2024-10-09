@@ -555,9 +555,9 @@ const data = [
       {
         key: 'MH40_004',
         name: {
-          fi: 'Venäjän tutkimuksen maisteriohjelma',
-          en: "Master's Programme in Russian Studies",
-          se: 'Magisterprogrammet i ryska studier',
+          fi: 'Venäjän, Euraasian ja itäisen Euroopan tutkimuksen maisteriohjelma',
+          en: "Master's Programme in Russian, Eurasian and Eastern European Studies",
+          se: 'Magisterprogrammet i ryska, eurasiska och östeuropeiska studier',
         },
         level: 'master',
         companionFaculties: [],
