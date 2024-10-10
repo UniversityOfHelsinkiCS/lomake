@@ -38,7 +38,7 @@ const ModalAnswer = ({ question, faculty }) => {
                   <div className="light" key={entry.date}>
                     <span className={`answer-circle-big-${entry.color}`} />
                     <div className="light-text">
-                      <span>{t(`common:${entry.color}Faculty`)}</span>
+                      <span>{t(`facultyTracking:${entry.color}`)}</span>
                       {'  '}
                       <span>{formatDate(entry.date)}</span>
                     </div>
