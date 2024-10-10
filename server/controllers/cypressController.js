@@ -3,6 +3,7 @@ const { Op } = require('sequelize')
 const logger = require('@util/logger')
 const { testProgrammeCode, defaultYears } = require('@util/common')
 const moment = require('moment')
+const { facultyList } = require('@root/config/data')
 const { createDraftAnswers } = require('../scripts/draftAndFinalAnswers')
 
 const getFakeYearlyAnswers = year => {
@@ -207,7 +208,57 @@ const createAnswers = async (req, res) => {
   }
 }
 
+const createFacultyAnswers = async (req, res) => {
+  const form = req.params.form || 8
+  try {
+    logger.info('Cypress::creating answers')
+
+    await db.tempAnswer.destroy({ where: {} })
+
+    const promises = facultyList.map(async faculty => {
+      const facultyPromises = []
+      const answerData = { selectedQuestionIds: [] }
+
+      for (let i = 1; i <= 30; i++) {
+        answerData[`${i}_modal`] = ''
+        answerData[`${i}_actions_text`] = `Action text for ${i}`
+        answerData[`${i}_degree_radio`] = 'both'
+        answerData[`${i}_end_date_text`] = new Date(Date.now() + i * 24 * 60 * 60 * 1000).toISOString() // Example end date
+        answerData[`${i}_lights_history`] = [
+          {
+            date: new Date().toISOString(),
+            color: 'green',
+            value: 1,
+          },
+        ]
+        answerData[`${i}_resources_text`] = `Resource text for ${i}`
+        answerData[`${i}_start_date_text`] = new Date(Date.now() + (i - 1) * 24 * 60 * 60 * 1000).toISOString() // Example start date
+        answerData[`${i}_contact_person_text`] = `Contact person for ${i}`
+        answerData[`${i}_responsible_entities_text`] = `Responsible entity for ${i}`
+        answerData.selectedQuestionIds.push(i.toString())
+      }
+      // Create a promise for inserting answerData into the database
+      const insertPromise = db.tempAnswer.create({
+        programme: faculty.code,
+        data: answerData,
+        year: 2024,
+        form,
+      })
+
+      facultyPromises.push(insertPromise)
+      await Promise.all(facultyPromises)
+    })
+    await Promise.all(promises)
+
+    return res.status(200).send('OK')
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
 module.exports = {
   seed,
   createAnswers,
+  createFacultyAnswers,
 }

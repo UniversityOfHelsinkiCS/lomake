@@ -68,5 +68,6 @@ router.get('/faculties', faculties.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
+router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
 
 module.exports = router
