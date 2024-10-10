@@ -27,6 +27,7 @@ const Answer = ({ question, faculty }) => {
   const lightsHistory = dataFromRedux[fieldName] || []
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly
+  const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -138,6 +139,18 @@ const Answer = ({ question, faculty }) => {
             )}
           </div>
         </div>
+        {!isDoctoral && (
+          <div className="single-row">
+            <div>
+              <i>{t(`facultyTracking:selectDegree`)}</i>
+              <p>
+                {facultyAnswers[`${question.id}_degree`]
+                  ? t(`facultyTracking:${facultyAnswers[`${question.id}_degree`]}`)
+                  : t('facultyTracking:both')}
+              </p>
+            </div>
+          </div>
+        )}
         {['actions', 'responsible_entities'].map(fieldName => {
           const labels = {
             actions: 'monitoringActionsLabel',
