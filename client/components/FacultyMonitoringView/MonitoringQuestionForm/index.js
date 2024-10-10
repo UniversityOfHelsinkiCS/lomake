@@ -5,6 +5,7 @@ import { formKeys } from '@root/config/data'
 import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'
 import TrackingTrafficLight from 'Components/Generic/TrackingTrafficLight'
 import DatePickerField from 'Components/Generic/DatePickerField'
+import TrackingRadioButton from 'Components/Generic/TrackingRadioButton'
 
 const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
@@ -13,6 +14,7 @@ const MonitoringQuestionForm = ({ question }) => {
 
   return (
     <Form>
+      <TrackingRadioButton id={id} form={form} />
       <TrackingTrafficLight id={id} form={form} />
       <FormGroup widths="equal">
         <MonitoringTextarea

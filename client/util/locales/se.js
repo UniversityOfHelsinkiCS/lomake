@@ -572,4 +572,11 @@ export default {
     // endsIn: 'Päättyy',
     // confirm: '',
   },
+  tracking: 'Planering och uppföljning',
+  trackingPage: {
+    bachelor: `Kandidatprogram`,
+    master: `Magisterprogram`,
+    both: 'Båda',
+    selectDegree: 'Vem påverkas av åtgärden',
+  },
 }

@@ -539,4 +539,11 @@ export default {
     confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
     openForms: 'The last dates for filling in open forms',
   },
+  tracking: 'Planning and tracking',
+  trackingPage: {
+    bachelor: `Bachelor's programmes`,
+    master: `Master's programmes`,
+    both: 'Both',
+    selectDegree: 'Who is affected by the measure',
+  },
 }
