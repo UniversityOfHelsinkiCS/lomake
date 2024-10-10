@@ -154,8 +154,8 @@ const Answer = ({ question, faculty }) => {
             <div>
               <i>{t(`facultyTracking:selectDegree`)}</i>
               <p>
-                {facultyAnswers[`${question.id}_degree`]
-                  ? t(`facultyTracking:${facultyAnswers[`${question.id}_degree`]}`)
+                {facultyAnswers[`${question.id}_degree_radio`]
+                  ? t(`facultyTracking:${facultyAnswers[`${question.id}_degree_radio`]}`)
                   : t('facultyTracking:both')}
               </p>
             </div>
