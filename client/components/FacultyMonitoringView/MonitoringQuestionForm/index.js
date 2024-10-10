@@ -14,7 +14,7 @@ const MonitoringQuestionForm = ({ question }) => {
 
   return (
     <>
-      <div className="info-container">
+      <div className="info-container" style={{ marginBottom: '24px' }}>
         <h4>{t('facultyTracking:formInfoHeader')}</h4>
         <p>{t('facultyTracking:formInfo1')}</p>
         <p>{t('facultyTracking:formInfo2')}</p>
@@ -34,9 +34,9 @@ const MonitoringQuestionForm = ({ question }) => {
         <p>{t('facultyTracking:formInfo3')}</p>
       </div>
       <Form>
-        <TrackingRadioButton id={id} form={form} />
         <TrackingTrafficLight id={id} form={form} />
-        <FormGroup widths="equal">
+        <TrackingRadioButton id={id} form={form} />
+        <FormGroup widths="equal" style={{ marginTop: '28px' }}>
           <MonitoringTextarea
             id={`${id}_actions`}
             label={t('formView:facultyActionsLabel')}

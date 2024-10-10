@@ -31,7 +31,10 @@ const TrackingRadioButton = ({ id, form }) => {
           <b>{t('facultyTracking:selectDegree')}</b>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
+      <Grid.Row style={{ marginLeft: '20px' }}>
+        <Grid.Column>
+          <Radio label={t('facultyTracking:both')} value="both" checked={data === 'both'} onChange={handleChange} />
+        </Grid.Column>
         <Grid.Column>
           <Radio
             label={t('facultyTracking:bachelor')}
@@ -47,9 +50,6 @@ const TrackingRadioButton = ({ id, form }) => {
             checked={data === 'master'}
             onChange={handleChange}
           />
-        </Grid.Column>
-        <Grid.Column>
-          <Radio label={t('facultyTracking:both')} value="both" checked={data === 'both'} onChange={handleChange} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

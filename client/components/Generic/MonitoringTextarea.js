@@ -26,7 +26,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input', maxLength })
         <span>{editorState}</span>
       ) : className === 'textarea' ? (
         <FormTextArea
-          label={label}
+          label={<label style={{ fontSize: 'inherit' }}>{label}</label>}
           id={fieldName}
           value={editorState}
           onChange={handleChange}
@@ -35,7 +35,7 @@ const MonitoringTextarea = ({ label, id, form, className = 'input', maxLength })
         />
       ) : (
         <FormInput
-          label={label}
+          label={<label style={{ fontSize: 'inherit' }}>{label}</label>}
           id={fieldName}
           value={editorState}
           onChange={handleChange}

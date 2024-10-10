@@ -85,7 +85,7 @@ const TrackingTrafficLight = ({ id, form }) => {
             </Menu.Item>
           ))
         ) : (
-          <i style={{ color: 'gray', marginLeft: '4px' }}>{t('noTrafficLight')}</i>
+          <i style={{ color: 'gray', marginLeft: '4px', marginTop: '8px' }}>{t('noTrafficLight')}</i>
         )}
         <Menu.Item position="right">
           {!showChooser && (
