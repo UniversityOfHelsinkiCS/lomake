@@ -109,21 +109,11 @@ const Answer = ({ question, faculty }) => {
     return null
   }
 
-  const radioAnswer = `${facultyAnswers[`${question.id}_degree_radio`]}` || null
-  const translationKey = `trackingPage:${radioAnswer}`
-  const translationValue = t(translationKey)
-
   return (
     <>
       <h4>{`${question.id?.startsWith('T') ? question.id.slice(1) : question.id}. ${question.label[lang]}`}</h4>
       <div className="answer-container">
         <div>
-          <div>
-            <i>
-              {`${t('trackingPage:selectDegree')}: `}
-              {translationValue}
-            </i>
-          </div>
           <i>{t(`formView:monitoringTrackingLabel`)}</i>
           <div className="light-container">
             {lightsHistory.length > 0 ? (
