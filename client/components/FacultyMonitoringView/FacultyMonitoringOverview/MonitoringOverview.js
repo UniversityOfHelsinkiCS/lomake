@@ -245,6 +245,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
     else setAccordion(sectionIndex)
   }
 
+  if (!answers) return <Loader active />
+
   return (
     <div className="monitoring-overview">
       <Menu size="large" className="filter-row" secondary>

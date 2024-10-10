@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
+import { Loader } from 'semantic-ui-react'
 import { isAdmin } from '@root/config/common'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import MonitoringOverview from './MonitoringOverview'
@@ -27,9 +28,9 @@ const FacultyMonitoringOverview = () => {
     return <NoPermissions t={t} requestedForm={t('facultymonitoring')} />
   }
 
-  return !faculties.pending ? (
-    <MonitoringOverview t={t} lang={lang} faculties={faculties} form={form} formType={formType} />
-  ) : null
+  if (faculties.pending) return <Loader active />
+
+  return <MonitoringOverview t={t} lang={lang} faculties={faculties} form={form} formType={formType} />
 }
 
 export default FacultyMonitoringOverview
