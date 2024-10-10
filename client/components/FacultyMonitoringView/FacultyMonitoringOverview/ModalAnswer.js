@@ -14,6 +14,8 @@ const ModalAnswer = ({ question, faculty }) => {
   const [showAll, setShowAll] = useState(false)
   const lightsHistory = facultyAnswers[`${question.id}_lights_history`] || []
   const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
+  const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
+
   const formatDate = date => {
     return new Date(date)
       .toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -55,6 +57,19 @@ const ModalAnswer = ({ question, faculty }) => {
             )}
           </div>
         </div>
+        {!isDoctoral && (
+          <div className="single-row">
+            <div>
+              <i>{t(`facultyTracking:selectDegree`)}</i>
+              <p>
+                {facultyAnswers[`${question.id}_degree_radio`]
+                  ? t(`facultyTracking:${facultyAnswers[`${question.id}_degree_radio`]}`)
+                  : t('facultyTracking:both')}
+              </p>
+            </div>
+          </div>
+        )}
+
         {['actions', 'responsible_entities'].map(fieldName => {
           const labels = {
             actions: 'monitoringActionsLabel',
