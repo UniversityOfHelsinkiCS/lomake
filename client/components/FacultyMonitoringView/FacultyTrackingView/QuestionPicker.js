@@ -22,6 +22,7 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
   const updateAllSelectedQuestions = newQuestion => {
     const otherSectionQuestions = allSelectedQuestions.filter(id => !questionsList.some(question => question.id === id))
     const selectedQuestions = [...otherSectionQuestions, ...newQuestion]
+    dispatch(updateFormField(`${newQuestion[newQuestion.length - 1]}_degree_radio`, 'both', form))
     dispatch(updateFormField('selectedQuestionIds', selectedQuestions, form))
   }
 

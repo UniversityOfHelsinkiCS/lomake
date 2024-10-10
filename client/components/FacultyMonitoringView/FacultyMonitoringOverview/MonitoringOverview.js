@@ -79,7 +79,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === questionLevel)
-  const [radioFilter, setRadioFilter] = useState('both')
+  const [radioFilter, setRadioFilter] = useState('all')
 
   const filteredFaculties = useMemo(
     () =>
@@ -116,7 +116,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       const lightList = answer.data[`${part.id}_lights_history`]
       const degree = answer.data[`${part.id}_degree_radio`]
 
-      if (radioFilter !== 'both' && degree !== radioFilter) return null
+      if (radioFilter !== 'all' && degree !== radioFilter) return null
 
       if (lightList && lightList.length > 1) {
         const lastMeasurement = lightList[lightList.length - 1]
@@ -157,6 +157,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
       const summaryAnswers = questionIds.map(id => {
         const key = `${id}_lights_history`
+        const radio = `${id}_degree_radio`
+        if (radioFilter !== 'all' && answer.data?.[radio] !== radioFilter) return []
         return answer.data[key] || []
       })
 
@@ -270,6 +272,12 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
               value="both"
               checked={radioFilter === 'both'}
               onChange={() => setRadioFilter('both')}
+            />
+            <Radio
+              label={t('all')}
+              value="all"
+              checked={radioFilter === 'all'}
+              onChange={() => setRadioFilter('all')}
             />
           </div>
         )}
