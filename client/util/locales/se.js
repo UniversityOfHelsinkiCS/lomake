@@ -475,6 +475,25 @@ export default {
     //  improvementActions: '',
   },
 
+  facultyTracking: {
+    facultyInfoHeader: 'Val och planering av åtgärder i fakulteten',
+    facultyInfo1:
+      'Välj ut de åtgärder som är mest relevanta för er fakultet och planera genomförandet av dem. På denna plattform ska du skriva en kort beskrivning av vad din fakultet kommer att göra för att främja åtgärden. Inkludera resursbehov, ansvarsområden, kontaktperson och tidslinje för att genomföra åtgärden.',
+    facultyInfo2:
+      'Om ni redan har lagt in några av åtgärderna i TOPSU (Implementation Plan 2025-2028) kan ni lägga in samma information i det här formuläret. Om ni ännu inte har lagt in något i TOPSU 2025-2028 kan ni göra det när ni uppdaterar TOPSU under planeringsperiodens gång.',
+    facultyInfo3:
+      'Ni kan ta bort och lägga till åtgärder efter behov från vyn på knappen "Välj åtgärd". Det är dock viktigt att alla åtgärder som är helt eller delvis genomförda finns dokumenterade i plattformen.',
+    formInfoHeader: 'Uppföljning av fakultetens åtgärder',
+    formInfo1:
+      'Detta formulär innehåller ett trafikljus för att övervaka genomförandet av åtgärder. Den första uppföljningen sker i december 2024 i Akademiska rådet (kandidat- och masterprogram) och Forskarskolestyrelsen (doktorandprogram). Innan dess bör fakulteten registrera status för varje åtgärd på denna blankett. Åtgärderna kommer att fortsätta att följas upp under hela planeringsperioden eller, vid behov, så länge genomförandet pågår.',
+    formInfo2:
+      'På denna blankett används en trafikljusuppskattning som beskriver åtgärdens status. Trafikljusen har följande betydelser:',
+    formInfo3: 'Trafikljusbedömningen följs automatiskt av datumet för registreringen.',
+    green: 'Genomfört',
+    yellow: 'Nedsänkt och pågående',
+    red: 'Inga framsteg',
+  },
+
   users: {
     nextDeadline: 'Nästa deadline:',
     answersSavedForYear: 'Svaren sparas till året:',

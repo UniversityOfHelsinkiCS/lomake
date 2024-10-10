@@ -457,7 +457,7 @@ export default {
     improvementActions: 'Suggestion for corrective actions',
   },
 
-  facultyTrackingInfo: {
+  facultyTracking: {
     facultyInfoHeader: 'Selection and planning of faculty measures ',
     facultyInfo1:
       'Select the review measures most relevant to your faculty and plan their implementation. On this platform, please write a brief description of what your faculty will do to promote the measure. Include the resource requirements, responsibilities, contact person, and timeline for implementing the measure. ',
