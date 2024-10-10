@@ -25,24 +25,31 @@ const TrackingRadioButton = ({ id, form }) => {
   if (id.startsWith('T')) return null
 
   return (
-    <Grid columns={6}>
+    <Grid columns={3}>
       <Grid.Row>
         <Grid.Column>
-          <b>{t('trackingPage:selectDegree')}</b>
+          <b>{t('facultyTracking:selectDegree')}</b>
         </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
         <Grid.Column>
           <Radio
-            label={t('trackingPage:bachelor')}
+            label={t('facultyTracking:bachelor')}
             value="bachelor"
             checked={data === 'bachelor'}
             onChange={handleChange}
           />
         </Grid.Column>
         <Grid.Column>
-          <Radio label={t('trackingPage:master')} value="master" checked={data === 'master'} onChange={handleChange} />
+          <Radio
+            label={t('facultyTracking:master')}
+            value="master"
+            checked={data === 'master'}
+            onChange={handleChange}
+          />
         </Grid.Column>
         <Grid.Column>
-          <Radio label={t('trackingPage:both')} value="both" checked={data === 'both'} onChange={handleChange} />
+          <Radio label={t('facultyTracking:both')} value="both" checked={data === 'both'} onChange={handleChange} />
         </Grid.Column>
       </Grid.Row>
     </Grid>
