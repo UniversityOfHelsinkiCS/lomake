@@ -9,7 +9,7 @@ const TrackingRadioButton = ({ id, form }) => {
   const { t } = useTranslation()
   const fieldName = `${id}_degree_radio`
 
-  const initialValue = useSelector(state => state.form[form]?.[fieldName]) || 'both'
+  const initialValue = useSelector(state => state.form.data?.[fieldName]) || 'both'
 
   const [data, setData] = useState(initialValue)
 

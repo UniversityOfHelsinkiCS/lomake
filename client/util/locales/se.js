@@ -574,7 +574,7 @@ export default {
     red: 'Inga framsteg',
     bachelor: `Kandidatprogram`,
     master: `Magisterprogram`,
-    both: 'Båda',
-    selectDegree: 'Vem påverkas av åtgärden',
+    both: 'Kandidat- och magisterprogram',
+    selectDegree: 'I vilken utsträckning påverkas åtgärden',
   },
 }

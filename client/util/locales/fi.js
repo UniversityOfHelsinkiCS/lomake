@@ -534,7 +534,7 @@ export default {
     red: 'Ei ole edennyt',
     bachelor: 'Kandiohjelmia',
     master: 'Maisteriohjelmia',
-    both: 'Molempia',
-    selectDegree: 'Ketä toimenpide koskee',
+    both: 'Kandi- ja maisteriohjelmia',
+    selectDegree: 'Mitä asteita toimenpide koskee',
   },
 }

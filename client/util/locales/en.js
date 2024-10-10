@@ -540,7 +540,7 @@ export default {
     red: 'No progress',
     bachelor: `Bachelor's programmes`,
     master: `Master's programmes`,
-    both: 'Both',
-    selectDegree: 'Who is affected by the measure',
+    both: `Bachelor's and Master's programmes`,
+    selectDegree: 'What is the degree of impact',
   },
 }
