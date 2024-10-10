@@ -254,34 +254,35 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
           <FacultyDegreeDropdown />
         </MenuItem>
         {selectedLevel !== 'doctoral' && (
-          <div>
-            <Radio
-              label={t('bachelor')}
-              value="bachelor"
-              checked={radioFilter === 'bachelor'}
-              onChange={() => setRadioFilter('bachelor')}
-            />
-            <Radio
-              label={t('master')}
-              value="master"
-              checked={radioFilter === 'master'}
-              onChange={() => setRadioFilter('master')}
-            />
-            <Radio
-              label={t('both')}
-              value="both"
-              checked={radioFilter === 'both'}
-              onChange={() => setRadioFilter('both')}
-            />
-            <Radio
-              label={t('all')}
-              value="all"
-              checked={radioFilter === 'all'}
-              onChange={() => setRadioFilter('all')}
-            />
-          </div>
+          <MenuItem>
+            <div>
+              <Radio
+                label={t('bachelor')}
+                value="bachelor"
+                checked={radioFilter === 'bachelor'}
+                onChange={() => setRadioFilter('bachelor')}
+              />
+              <Radio
+                label={t('master')}
+                value="master"
+                checked={radioFilter === 'master'}
+                onChange={() => setRadioFilter('master')}
+              />
+              <Radio
+                label={t('both')}
+                value="both"
+                checked={radioFilter === 'both'}
+                onChange={() => setRadioFilter('both')}
+              />
+              <Radio
+                label={t('all')}
+                value="all"
+                checked={radioFilter === 'all'}
+                onChange={() => setRadioFilter('all')}
+              />
+            </div>
+          </MenuItem>
         )}
-        <MenuItem />
       </Menu>
 
       {questionModal && (
