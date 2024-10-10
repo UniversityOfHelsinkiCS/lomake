@@ -534,4 +534,10 @@ export default {
     endsIn: 'Päättyy',
     confirm: 'Poista käyttäjän {{firstname}} {{lastname}} väliaikainen oikeus ohjelmaan {{progName}}?',
   },
+  trackingPage: {
+    bachelor: 'Kandiohjelmia',
+    master: 'Maisteriohjelmia',
+    both: 'Molempia',
+    selectDegree: 'Ketä toimenpide koskee',
+  },
 }
