@@ -54,7 +54,7 @@ const NavBarItems = {
         key: 'faculty-monitoring',
         label: 'facultymonitoring',
         path: '/faculty-monitoring',
-        access: ['admin', 'evaluationFaculty', 'special'],
+        access: ['admin', 'evaluationFaculty'],
       },
     ],
   },
