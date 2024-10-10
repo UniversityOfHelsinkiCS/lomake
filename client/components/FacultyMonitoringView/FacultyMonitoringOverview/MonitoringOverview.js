@@ -79,6 +79,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === questionLevel)
+  const [radioFilter, setRadioFilter] = useState('both')
 
   const filteredFaculties = useMemo(
     () =>
@@ -113,6 +114,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       }
 
       const lightList = answer.data[`${part.id}_lights_history`]
+      const degree = answer.data[`${part.id}_degree_radio`]
+
+      if (radioFilter !== 'both' && degree !== radioFilter) return null
 
       if (lightList && lightList.length > 1) {
         const lastMeasurement = lightList[lightList.length - 1]
@@ -182,6 +186,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
             colors[lastEntry.color].programmes.push(lastEntry.date)
           }
         }
+
+        return null
       })
 
       const data = [
@@ -245,6 +251,29 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         <MenuItem>
           <FacultyDegreeDropdown />
         </MenuItem>
+        {selectedLevel !== 'doctoral' && (
+          <div>
+            <Radio
+              label={t('bachelor')}
+              value="bachelor"
+              checked={radioFilter === 'bachelor'}
+              onChange={() => setRadioFilter('bachelor')}
+            />
+            <Radio
+              label={t('master')}
+              value="master"
+              checked={radioFilter === 'master'}
+              onChange={() => setRadioFilter('master')}
+            />
+            <Radio
+              label={t('both')}
+              value="both"
+              checked={radioFilter === 'both'}
+              onChange={() => setRadioFilter('both')}
+            />
+          </div>
+        )}
+        <MenuItem />
       </Menu>
 
       {questionModal && (
