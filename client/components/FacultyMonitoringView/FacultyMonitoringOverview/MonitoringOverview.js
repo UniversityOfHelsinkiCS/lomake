@@ -13,6 +13,7 @@ import {
   Card,
   Icon,
   Radio,
+  Grid,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -256,30 +257,32 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         {selectedLevel !== 'doctoral' && (
           <MenuItem>
             <div>
-              <Radio
-                label={t('bachelor')}
-                value="bachelor"
-                checked={radioFilter === 'bachelor'}
-                onChange={() => setRadioFilter('bachelor')}
-              />
-              <Radio
-                label={t('master')}
-                value="master"
-                checked={radioFilter === 'master'}
-                onChange={() => setRadioFilter('master')}
-              />
-              <Radio
-                label={t('both')}
-                value="both"
-                checked={radioFilter === 'both'}
-                onChange={() => setRadioFilter('both')}
-              />
-              <Radio
-                label={t('all')}
-                value="all"
-                checked={radioFilter === 'all'}
-                onChange={() => setRadioFilter('all')}
-              />
+              <Grid>
+                <Radio
+                  label={t('bachelor')}
+                  value="bachelor"
+                  checked={radioFilter === 'bachelor'}
+                  onChange={() => setRadioFilter('bachelor')}
+                />
+                <Radio
+                  label={t('master')}
+                  value="master"
+                  checked={radioFilter === 'master'}
+                  onChange={() => setRadioFilter('master')}
+                />
+                <Radio
+                  label={t('bachelorMasterToggle')}
+                  value="both"
+                  checked={radioFilter === 'both'}
+                  onChange={() => setRadioFilter('both')}
+                />
+                <Radio
+                  label={t('all')}
+                  value="all"
+                  checked={radioFilter === 'all'}
+                  onChange={() => setRadioFilter('all')}
+                />
+              </Grid>
             </div>
           </MenuItem>
         )}
