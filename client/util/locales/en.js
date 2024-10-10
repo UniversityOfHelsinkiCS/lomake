@@ -457,6 +457,24 @@ export default {
     improvementActions: 'Suggestion for corrective actions',
   },
 
+  facultyTrackingInfo: {
+    facultyInfoHeader: 'Selection and planning of faculty measures ',
+    facultyInfo1:
+      'Select the review measures most relevant to your faculty and plan their implementation. On this platform, please write a brief description of what your faculty will do to promote the measure. Include the resource requirements, responsibilities, contact person, and timeline for implementing the measure. ',
+    facultyInfo2:
+      'If you have already entered some of the measures in TOPSU (Implementation Plan 2025-2028), you can enter the same information on this form. If you have not yet entered anything in TOPSU 2025-2028, you can do so when updating TOPSU as the planning period progresses.',
+    facultyInfo3:
+      'You can delete and add measures as required from the view of the "Select measure" button. However, it is important to leave all fully or partially implemented measures documented in the platform. ',
+    formInfoHeader: 'Monitoring of faculty measures',
+    formInfo1: `This form contains a traffic light to monitor the implementation of measures. The first monitoring will take place in December 2024 in the Academic Council (Bachelor's and Master's programmes) and the Graduate School Board (Doctoral programmes). Before then, the faculty should record the status of each measure on this form. The measures will continue to be monitored for the duration of the planning period or, if necessary, for as long as the implementation continues.`,
+    formInfo2:
+      'A traffic light estimate describing the status of the measure is used on this form. The traffic light meanings are: ',
+    formInfo3: 'The traffic light assessment is automatically followed by the date of the entry. ',
+    green: 'Implemented',
+    yellow: 'Progressed and preparation is underway',
+    red: 'No progress',
+  },
+
   users: {
     nextDeadline: 'Next deadline: ',
     answersSavedForYear: 'Current draft answers will be saved for the year: ',

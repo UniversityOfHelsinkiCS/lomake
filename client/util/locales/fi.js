@@ -13,9 +13,6 @@ export default {
     positive: 'Kunnossa',
     neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
-    greenFaculty: 'Toteutettu',
-    yellowFaculty: 'Edennyt ja käynnissä',
-    redFaculty: 'Ei ole edennyt',
     noColors: '*Kysymyksiä, joille ei ole määritetty liikennevaloja, ei näytetä ollenkaan (esim. 16 ja 17)',
     green: 'Vihreä',
     yellow: 'Keltainen',
@@ -454,6 +451,25 @@ export default {
     filterBy: 'Rajaa vastauksia',
     improvementAreas: 'Kehittämiskohde',
     improvementActions: 'Toimenpide-ehdotus',
+  },
+
+  facultyTracking: {
+    facultyInfoHeader: 'Tiedekunnan toimenpiteiden valinta ja suunnittelu ',
+    facultyInfo1:
+      'Valitkaa toimenpiteistä tiedekuntanne kannalta tarpeellisimmat ja suunnitelkaa niiden toteutusta. Kirjatkaa tälle alustalle tiivis kuvaus siitä, mitä tiedekunta aikoo tehdä toimenpiteen edistämiseksi. Kirjatkaa toimenpiteen toteutukseen liittyvät resurssitarpeet, vastuutahot, yhteyshenkilö sekä aikataulu. ',
+    facultyInfo2:
+      'Mikäli olette jo tehneet joistakin toimenpiteistä kirjauksia TOPSUun (toimeenpanosuunnitelmaan 2025-2028), voitte kirjata samat tiedot tälle lomakkeelle. Mikäli Topsuun 2025-2028 ei vielä ole kirjattu toimenpiteeseen liittyen mitään, kirjaukset voitte tehdä TOPSUn päivityksen yhteydessä suunnittelukauden edetessä. ',
+    facultyInfo3:
+      'Voitte poistaa ja lisätä toimenpiteitä tarpeen mukaan ”Valitse toimenpiteet” -painikkeen näkymästä. Kaikki kokonaan tai osittain toteutuneet toimenpiteet on kuitenkin tärkeä jättää alustalle dokumentoiduiksi.',
+    formInfoHeader: 'Tiedekunnan toimenpiteiden seuranta ',
+    formInfo1:
+      'Tässä lomakkeessa on liikennevalo, jota käytetään toimenpiteiden toteutuksen seurannassa. Ensimmäisen kerran seuranta tapahtuu joulukuussa 2024 opintoasiainneuvostossa (kandi- ja maisteriohjelmat) ja tutkijakoulun johtokunnassa (tohtoriohjelmat). Sitä ennen tiedekunnan tulee kirjata tähän lomakkeeseen kunkin toimenpiteen tilanne. Toimenpiteiden seurantaa jatketaan suunnittelukauden ajan tai tarvittaessa niin pitkään kuin toteutus jatkuu.',
+    formInfo2:
+      'Tässä lomakkeessa on käytössä toimenpiteen tilannetta kuvaava liikennevaloarvio. Liikennevalojen merkitykset ovat:',
+    formInfo3: 'Liikennevaloarvion perään tulee kirjauksen päivämäärä automaattisesti. ',
+    green: 'Toteutettu',
+    yellow: 'Edennyt ja käynnissä',
+    red: 'Ei ole edennyt',
   },
 
   users: {

@@ -152,6 +152,13 @@ const FacultyTrackingView = ({ faculty }) => {
       )}
 
       <div className="answers-list-container">
+        <div className="info-container">
+          <h4>{t('facultyTracking:facultyInfoHeader')}</h4>
+          <p>{t('facultyTracking:facultyInfo1')}</p>
+          <p>{t('facultyTracking:facultyInfo2')}</p>
+          <p>{t('facultyTracking:facultyInfo3')}</p>
+        </div>
+
         {filteredQuestions.length > 0 ? (
           filteredQuestions.map(group => (
             <div className="accordion-container" key={group.groupId}>

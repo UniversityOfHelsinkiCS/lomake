@@ -5,6 +5,7 @@
 }
 
 .question-picker-container {
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
 
@@ -14,11 +15,11 @@
 
   .send-selection-button {
     align-self: flex-end;
-    margin-top: 1em;
+    margin-top: 1em !important;
   }
 
   .comparison-questions-list-selector {
-    margin-top: 0.25em;
+    margin-top: 0.5em;
   }
 }
 

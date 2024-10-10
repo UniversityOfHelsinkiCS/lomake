@@ -121,7 +121,7 @@ const Answer = ({ question, faculty }) => {
                   <div data-cy={`${entry.color}-${index}`} className="light" key={entry.date}>
                     <span className={`answer-circle-big-${entry.color}`} />
                     <div className="light-text">
-                      <span>{t(`common:${entry.color}Faculty`)}</span>
+                      <span>{t(`facultyTracking:${entry.color}`)}</span>
                       {'  '}
                       <span>{formatDate(entry.date)}</span>
                     </div>
@@ -203,7 +203,7 @@ const Answer = ({ question, faculty }) => {
       {formModalData && (
         <CustomModal
           closeModal={closeFormModal}
-          title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id} - ${formModalData.label[lang]}`}
+          title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id}. ${formModalData.label[lang]}`}
         >
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
           <Button data-cy="send-form" secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>

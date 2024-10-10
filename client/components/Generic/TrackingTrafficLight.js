@@ -112,33 +112,33 @@ const TrackingTrafficLight = ({ id, form }) => {
               />
             </Grid.Column>
             <Grid.Column>
-              <div title={t('greenFaculty')} style={{ display: 'flex' }}>
+              <div title={t('facultyTracking:green')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-positive-${id}`}
                   className={getClassName('green')}
                   onClick={!reduxViewOnly ? () => chooseLight('green') : undefined}
                 />
-                <p style={{ margin: '1em' }}>{t('greenFaculty')}</p>
+                <p style={{ margin: '1em' }}>{t('facultyTracking:green')}</p>
               </div>
             </Grid.Column>
             <Grid.Column>
-              <div title={t('yellowFaculty')} style={{ display: 'flex' }}>
+              <div title={t('facultyTracking:yellow')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-neutral-${id}`}
                   className={getClassName('yellow')}
                   onClick={!reduxViewOnly ? () => chooseLight('yellow') : undefined}
                 />
-                <p style={{ margin: '1em' }}>{t('yellowFaculty')}</p>
+                <p style={{ margin: '1em' }}>{t('facultyTracking:yellow')}</p>
               </div>
             </Grid.Column>
             <Grid.Column>
-              <div title={t('redFaculty')} style={{ display: 'flex' }}>
+              <div title={t('facultyTracking:red')} style={{ display: 'flex' }}>
                 <div
                   data-cy={`color-negative-${id}`}
                   className={getClassName('red')}
                   onClick={!reduxViewOnly ? () => chooseLight('red') : undefined}
                 />
-                <p style={{ margin: '1em' }}>{t('redFaculty')}</p>
+                <p style={{ margin: '1em' }}>{t('facultyTracking:red')}</p>
               </div>
             </Grid.Column>
           </Grid.Row>
