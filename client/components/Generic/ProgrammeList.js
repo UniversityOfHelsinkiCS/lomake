@@ -72,7 +72,9 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               )
             })}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{labels.chooseMore}</p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
+              {t(`${labels.chooseMore}`)}
+            </p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
               if (form === formKeys.EVALUATION_FACULTIES) {

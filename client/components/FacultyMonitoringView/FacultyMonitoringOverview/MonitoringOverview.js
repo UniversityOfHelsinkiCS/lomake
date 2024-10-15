@@ -97,7 +97,6 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
             answerObject={answerObject}
             chevron={chevron}
             t={t}
-            lang={lang}
           />
         )
       }

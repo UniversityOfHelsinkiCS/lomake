@@ -1,9 +1,13 @@
 import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
+import { useTranslation } from 'react-i18next'
 import QuestionTitle from './QuestionTitle'
 
 const SingleProgramQuestion = ({ answers, question }) => {
+  const { t } = useTranslation()
+  const commentAppendix = `${t('comment')}:\n\n`
+
   return (
     <>
       <Accordion.Title
@@ -45,6 +49,14 @@ const SingleProgramQuestion = ({ answers, question }) => {
                     programme.answer.split('\n').map((row, index) => (
                       // eslint-disable-next-line react/no-array-index-key
                       <li key={index} className="answer-row">
+                        {row}
+                      </li>
+                    ))}
+                  {programme.comment &&
+                    programme.comment.split('\n').map((row, index) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <li key={index} className="answer-row">
+                        {commentAppendix}
                         {row}
                       </li>
                     ))}

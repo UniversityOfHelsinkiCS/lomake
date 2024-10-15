@@ -32,12 +32,24 @@ export default ({
       total: { value: 0 },
     }
     answers.forEach(a => {
+      if (!a) return
+
       if (form === formKeys.EVALUATION_FACULTIES) {
-        colors[a.color[level]].value += 1
-        colors[a.color[level]].programmes = [...colors[a.color[level]].programmes, a.name]
+        if (a.color && a.color[level] && colors[a.color[level]]) {
+          colors[a.color[level]].value += 1
+          colors[a.color[level]].programmes = [...colors[a.color[level]].programmes, a.name]
+        } else {
+          colors.emptyAnswer.value += 1
+          colors.emptyAnswer.programmes = [...colors.emptyAnswer.programmes, a.name]
+        }
       } else {
-        colors[a.color].value += 1
-        colors[a.color].programmes = [...colors[a.color].programmes, a.name]
+        if (a.color && colors[a.color]) {
+          colors[a.color].value += 1
+          colors[a.color].programmes = [...colors[a.color].programmes, a.name]
+        } else {
+          colors.emptyAnswer.value += 1
+          colors.emptyAnswer.programmes = [...colors.emptyAnswer.programmes, a.name]
+        }
       }
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
