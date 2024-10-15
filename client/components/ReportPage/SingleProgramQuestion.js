@@ -52,14 +52,17 @@ const SingleProgramQuestion = ({ answers, question }) => {
                         {row}
                       </li>
                     ))}
-                  {programme.comment &&
-                    programme.comment.split('\n').map((row, index) => (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <li key={index} className="answer-row">
-                        {commentAppendix}
-                        {row}
-                      </li>
-                    ))}
+                  {programme.comment && (
+                    <>
+                      {commentAppendix}
+                      {programme.comment.split('\n').map((row, index) => (
+                        // eslint-disable-next-line react/no-array-index-key
+                        <li key={index} className="answer-row">
+                          {row}
+                        </li>
+                      ))}
+                    </>
+                  )}
                 </ul>
               </div>
             ))}

@@ -72,7 +72,10 @@ const WrittenAnswers = ({
             (checkIfContent(question) ? (
               <div key={question.id}>
                 {chosenProgrammes.length === 1 ? (
-                  <SingleProgramQuestion answers={allAnswers.get(question.id)} question={question} />
+                  <SingleProgramQuestion
+                    answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
+                    question={question}
+                  />
                 ) : (
                   <Question
                     answers={allAnswers.get(question.id).filter(p => p.answer || p.comment)}
