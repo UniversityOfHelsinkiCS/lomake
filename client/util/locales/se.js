@@ -569,6 +569,7 @@ export default {
     green: 'Genomfört',
     yellow: 'Nedsänkt och pågående',
     red: 'Inga framsteg',
+    gray: 'Inget svar',
     bachelor: `Kandidatprogram`,
     master: `Magisterprogram`,
     both: 'Kandidat- och magisterprogram',

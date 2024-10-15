@@ -25,50 +25,7 @@ import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
-
-const squareStyles = {
-  boxShadow: '0px 0px 1px 1px rgba(0, 0, 0, 0.1)',
-  overflow: 'hidden',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer',
-  width: '80px',
-  height: '80px',
-  transition: 'filter 0.3s',
-}
-
-const colors = {
-  red: { backgroundColor: '#ff7f7f', hover: { filter: 'brightness(0.8)' } },
-  yellow: { backgroundColor: '#feffb0', hover: { filter: 'brightness(0.8)' } },
-  green: { backgroundColor: '#9dfe9c', hover: { filter: 'brightness(0.8)' } },
-  gray: { border: '4px solid gray', backgroundColor: 'transparent', hover: { filter: 'brightness(0.8)' } },
-}
-
-const Square = ({ color, setQuestionModal, answerObject, chevron = null }) => {
-  const { backgroundColor, hover } = colors[color] || colors.gray
-
-  return (
-    <div className="square-container">
-      <Card
-        data-cy={`square-${answerObject.faculty}-${answerObject.part.id}`}
-        style={{
-          ...squareStyles,
-          backgroundColor,
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.filter = hover.filter
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.filter = 'none'
-        }}
-        onClick={() => setQuestionModal(answerObject)}
-      >
-        {chevron}
-      </Card>
-    </div>
-  )
-}
+import Square from 'Components/Generic/Square'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
@@ -134,17 +91,24 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
         const { color } = lastMeasurement
         return (
-          <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} chevron={chevron} />
+          <Square
+            color={color}
+            setQuestionModal={setQuestionModal}
+            answerObject={answerObject}
+            chevron={chevron}
+            t={t}
+            lang={lang}
+          />
         )
       }
 
       if (lightList && lightList.length > 0) {
         const { color } = lightList[lightList.length - 1]
-        return <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} />
+        return <Square color={color} setQuestionModal={setQuestionModal} answerObject={answerObject} t={t} />
       }
 
       if (selected) {
-        return <Square color="grey" setQuestionModal={setQuestionModal} answerObject={answerObject} />
+        return <Square color="gray" setQuestionModal={setQuestionModal} answerObject={answerObject} t={t} />
       }
     }
 

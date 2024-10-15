@@ -535,6 +535,7 @@ export default {
     green: 'Implemented',
     yellow: 'Progressed and preparation is underway',
     red: 'No progress',
+    gray: 'No answer',
     bachelor: `Bachelor's programmes`,
     master: `Master's programmes`,
     both: `Bachelor's and Master's programmes`,

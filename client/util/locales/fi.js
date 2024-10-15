@@ -532,6 +532,7 @@ export default {
     green: 'Toteutettu',
     yellow: 'Edennyt ja käynnissä',
     red: 'Ei ole edennyt',
+    gray: 'Ei vastausta',
     bachelor: 'Kandiohjelmia',
     master: 'Maisteriohjelmia',
     both: 'Kandi- ja maisteriohjelmia',
