@@ -102,6 +102,7 @@ export default {
     clock: 'Clock',
     toFrontpage: 'To frontpage',
     noSelections: 'No selected measures',
+    tracking: 'Planning and tracking',
 
     doctoralToggle: 'Doctoral Programmes',
     bachelorMasterToggle: `Bachelor's & Master's Programmes`,
@@ -518,7 +519,6 @@ export default {
     confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
     openForms: 'The last dates for filling in open forms',
   },
-  tracking: 'Planning and tracking',
   facultyTracking: {
     facultyInfoHeader: 'Selection and planning of faculty measures ',
     facultyInfo1:
