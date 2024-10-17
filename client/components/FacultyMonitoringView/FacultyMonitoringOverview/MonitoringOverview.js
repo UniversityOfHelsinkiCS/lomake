@@ -10,7 +10,6 @@ import {
   Table,
   Header,
   Loader,
-  Card,
   Icon,
   Radio,
   Grid,
@@ -23,9 +22,9 @@ import CustomModal from 'Components/Generic/CustomModal'
 import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
+import Square from 'Components/Generic/Square'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
-import Square from 'Components/Generic/Square'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
@@ -52,8 +51,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   )
 
   useEffect(() => {
+    setRadioFilter('all')
     dispatch(getTempAnswersByForm(form))
-  }, [])
+  }, [selectedLevel])
 
   if (!answers) return <Loader active />
 
