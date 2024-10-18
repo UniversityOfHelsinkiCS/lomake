@@ -534,7 +534,7 @@ export default {
       'A traffic light estimate describing the status of the measure is used on this form. The traffic light meanings are: ',
     formInfo3: 'The traffic light assessment is automatically followed by the date of the entry. ',
     green: 'Implemented',
-    yellow: 'Progressed and preparation is underway',
+    yellow: 'Progressed',
     red: 'No progress',
     gray: 'No answer',
     bachelor: `Bachelor's programmes`,
