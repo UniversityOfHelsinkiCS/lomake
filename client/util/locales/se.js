@@ -118,6 +118,7 @@ export default {
     comment: 'Kommentar',
     answer: 'Svar',
     overview: 'Översikt',
+    startDateEndDateError: 'Starttiden kan inte vara senare än det beräknade sluttiden',
   },
 
   aboutPage: {

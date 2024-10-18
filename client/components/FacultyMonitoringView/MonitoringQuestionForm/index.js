@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
@@ -11,6 +11,7 @@ const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
   const { id } = question
   const form = formKeys.FACULTY_MONITORING
+  const [error, setError] = useState(null)
 
   return (
     <>
@@ -68,9 +69,9 @@ const MonitoringQuestionForm = ({ question }) => {
             maxLength={100}
           />
         </FormGroup>
+        {error && <p style={{ color: 'red' }}>{t(error)}</p>}
         <FormGroup widths="equal">
-          <DatePickerField id={`${id}_start_date`} label={t('formView:facultyStartLabel')} form={form} />
-          <DatePickerField id={`${id}_end_date`} label={t('formView:facultyEndLabel')} form={form} />
+          <DatePickerField id={id} form={form} error={error} setError={setError} />
         </FormGroup>
       </Form>
     </>

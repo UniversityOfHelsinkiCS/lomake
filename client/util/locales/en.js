@@ -118,6 +118,7 @@ export default {
     comment: 'Comment',
     answer: 'Answer',
     overview: 'Owerview',
+    startDateEndDateError: 'The start time cannot be later than the estimated end time',
   },
 
   aboutPage: {
