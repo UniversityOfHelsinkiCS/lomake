@@ -21,7 +21,7 @@ const FormFilter = ({ version = null }) => {
 
   useEffect(() => {
     if (version === 'compareByFaculty') {
-      const filteredOptions = options.filter(option => option.value !== 5)
+      const filteredOptions = options.filter(option => option.value !== 5 && option.value !== 7)
       setOptions(filteredOptions)
     }
   }, [])
