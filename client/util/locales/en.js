@@ -541,5 +541,6 @@ export default {
     master: `Master's programmes`,
     both: `Bachelor's and Master's programmes`,
     selectDegree: 'What is the degree of impact',
+    confirmRemoveLight: 'Are you sure you want to delete?',
   },
 }

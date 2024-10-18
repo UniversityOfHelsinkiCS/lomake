@@ -55,8 +55,12 @@ const TrackingTrafficLight = ({ id, form }) => {
 
   const removeLight = index => {
     if (!reduxViewOnly) {
-      const updatedHistory = lightsHistory.filter((_, i) => i !== index)
-      dispatch(updateFormField(fieldName, updatedHistory, form))
+      // eslint-disable-next-line no-alert
+      const confirmRemoval = window.confirm(t('confirmRemoveLight')) // Add confirmation prompt
+      if (confirmRemoval) {
+        const updatedHistory = lightsHistory.filter((_, i) => i !== index)
+        dispatch(updateFormField(fieldName, updatedHistory, form))
+      }
     }
   }
 

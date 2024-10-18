@@ -119,6 +119,7 @@ export default {
     answer: 'Svar',
     overview: 'Översikt',
     startDateEndDateError: 'Starttiden kan inte vara senare än det beräknade sluttiden',
+    confirmRemoveLight: 'Är du säker på att du vill ta bort?',
   },
 
   aboutPage: {

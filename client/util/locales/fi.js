@@ -122,6 +122,7 @@ export default {
     toFrontpage: 'Etusivulle',
     noSelections: 'Ei valittuja toimenpiteitä',
     startDateEndDateError: 'Alkamisaika ei voi olla arvioitua päättymisaikaa myöhemmin',
+    confirmRemoveLight: 'Haluatko varmasti poistaa',
   },
 
   aboutPage: {
