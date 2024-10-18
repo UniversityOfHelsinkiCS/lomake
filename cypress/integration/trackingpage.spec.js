@@ -39,8 +39,7 @@ describe('Tracking page tests', () => {
 
     cy.get('[id=1_contact_person_text]').type('contact person')
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(100)
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
   })
 
   it('should open tracking page and select question 1 and 2', () => {
@@ -58,14 +57,13 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=color-positive-1]').click()
     cy.get('[id=1_contact_person_text]').type('contact person')
     // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(100)
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
 
     cy.get('[data-cy=modify-plan-2]').click()
     cy.get('[data-cy=toggle-chooser]').click()
     cy.get('[data-cy=color-negative-2]').click()
 
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
   })
 
   it('should modify the date', () => {
@@ -86,7 +84,7 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=date-picker]').type('{selectAll}01.01.2000')
     cy.get('[data-cy=color-negative-1]').click()
 
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
     cy.contains('01.01.2000').should('exist')
 
     cy.visit(`/faculty-monitoring`)
@@ -127,27 +125,27 @@ describe('Tracking page tests', () => {
       cy.get(`[data-cy=modify-plan-T${i}]`).click()
       cy.get('[data-cy=toggle-chooser]').click()
       cy.get(`[data-cy=color-positive-T${i}]`).click()
-      cy.get('[data-cy=send-form]').click()
+      cy.get('[data-cy=close-modal]').click()
     }
 
     cy.get('[data-cy=accordion-group-1]').click()
     cy.get(`[data-cy=modify-plan-T6]`).click()
     cy.get('[data-cy=toggle-chooser]').click()
     cy.get(`[data-cy=color-positive-T6]`).click()
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
 
     cy.get('[data-cy=accordion-group-2]').click()
     cy.get(`[data-cy=modify-plan-T7]`).click()
     cy.get('[data-cy=toggle-chooser]').click()
     cy.get(`[data-cy=color-positive-T7]`).click()
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
 
     cy.get('[data-cy=accordion-group-3]').click()
     for (let i = 8; i < 10; i++) {
       cy.get(`[data-cy=modify-plan-T${i}]`).click()
       cy.get('[data-cy=toggle-chooser]').click()
       cy.get(`[data-cy=color-positive-T${i}]`).click()
-      cy.get('[data-cy=send-form]').click()
+      cy.get('[data-cy=close-modal]').click()
     }
   })
 
@@ -178,6 +176,6 @@ describe('Tracking page tests', () => {
     cy.visit(`/faculty-monitoring/${testFacultyCode}`)
     cy.get('[data-cy=accordion-group-2]').click()
     cy.get(`[data-cy=modify-plan-14]`).click()
-    cy.get('[data-cy=send-form]').click()
+    cy.get('[data-cy=close-modal]').click()
   })
 })

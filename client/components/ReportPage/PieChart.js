@@ -42,14 +42,12 @@ export default ({
           colors.emptyAnswer.value += 1
           colors.emptyAnswer.programmes = [...colors.emptyAnswer.programmes, a.name]
         }
+      } else if (a.color && colors[a.color]) {
+        colors[a.color].value += 1
+        colors[a.color].programmes = [...colors[a.color].programmes, a.name]
       } else {
-        if (a.color && colors[a.color]) {
-          colors[a.color].value += 1
-          colors[a.color].programmes = [...colors[a.color].programmes, a.name]
-        } else {
-          colors.emptyAnswer.value += 1
-          colors.emptyAnswer.programmes = [...colors.emptyAnswer.programmes, a.name]
-        }
+        colors.emptyAnswer.value += 1
+        colors.emptyAnswer.programmes = [...colors.emptyAnswer.programmes, a.name]
       }
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value

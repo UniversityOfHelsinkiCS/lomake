@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { Button, Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { formKeys } from '@root/config/data'
 import CustomModal from 'Components/Generic/CustomModal'
@@ -28,6 +28,7 @@ const Answer = ({ question, faculty }) => {
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const isEditable = !viewOnly
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
+  const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -219,9 +220,11 @@ const Answer = ({ question, faculty }) => {
           title={`${formModalData.id?.startsWith('T') ? formModalData.id.slice(1) : formModalData.id}. ${formModalData.label[lang]}`}
         >
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
-          <Button data-cy="send-form" secondary style={{ marginTop: '1em', float: 'right' }} onClick={closeFormModal}>
-            {t('formView:sendForm')}
-          </Button>
+          <Segment inverted color="green">
+            <b>
+              {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+            </b>
+          </Segment>
         </CustomModal>
       )}
     </>
