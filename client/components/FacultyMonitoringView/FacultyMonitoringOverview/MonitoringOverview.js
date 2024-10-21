@@ -296,7 +296,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
             <React.Fragment key={section.id}>
               <TableRow>
                 <TableCell className="table-header-cell">
-                  <Header className="accordion-header" as="h4" onClick={() => handleAccordion(index)}>
+                  <Header className="accordion-header" as="h5" onClick={() => handleAccordion(index)}>
                     {section.title[lang]}
                   </Header>
                 </TableCell>
@@ -346,3 +346,4 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 }
 
 export default MonitoringOverview
+ 
