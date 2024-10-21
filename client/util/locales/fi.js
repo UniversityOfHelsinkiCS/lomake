@@ -66,6 +66,8 @@ export default {
     edit: 'Muokkaa',
     delete: 'Poista',
 
+    modifyLights: 'Muokkaa valoja',
+
     yearlyAssessment: 'Vuosiseuranta',
     evaluation: 'Katselmus',
     evaluationFaculty: 'Tiedekunnan katselmus',

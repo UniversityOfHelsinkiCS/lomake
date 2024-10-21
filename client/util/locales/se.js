@@ -49,6 +49,7 @@ export default {
     chooseTrafficLight: 'Välj en utvärdering av trafikljus',
     noTrafficLight: 'Inga utvärderingar. Tryck på knappen för att lägga till en ny utvärdering av trafikljuset.',
 
+    modifyLights: 'Redigera ljus',
     choose: 'Välj',
     colors_all: 'alla',
     colors_green: 'endast gröna',

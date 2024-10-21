@@ -69,10 +69,20 @@ const TrackingTrafficLight = ({ id, form }) => {
     <>
       <Header as="h5">{t('tracking')}</Header>
       <Menu secondary style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <Menu.Item>
+          {!showChooser && (
+            <Button data-cy="toggle-chooser" onClick={toggleChooser} disabled={reduxViewOnly}>
+              {t('chooseTrafficLight')}
+            </Button>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          <Button onClick={() => setModify(!modify)}>{t('modifyLights')}</Button>
+        </Menu.Item>
         {displayedHistory.length ? (
           displayedHistory.map((entry, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Menu.Item key={`${entry.date}-${index}`}>
+            <Menu.Item key={`${entry.date}-${index}`} style={{ display: 'flex', alignItems: 'center'}}>
               <span className={`answer-circle-big-${entry.color}`} />
               <i>
                 {new Date(entry.date)
@@ -94,16 +104,6 @@ const TrackingTrafficLight = ({ id, form }) => {
         ) : (
           <i style={{ color: 'gray', marginLeft: '4px', marginTop: '8px' }}>{t('noTrafficLight')}</i>
         )}
-        <Menu.Item position="right">
-          {!showChooser && (
-            <Button data-cy="toggle-chooser" onClick={toggleChooser} disabled={reduxViewOnly}>
-              {t('chooseTrafficLight')}
-            </Button>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          <Button onClick={() => setModify(!modify)}>{t('modifyLights')}</Button>
-        </Menu.Item>
       </Menu>
 
       {showChooser && (

@@ -119,6 +119,7 @@ export default {
     answer: 'Answer',
     overview: 'Owerview',
     startDateEndDateError: 'The start time cannot be later than the estimated end time',
+    modifyLights: 'Modify lights',
   },
 
   aboutPage: {
