@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import '../../Generic/Generic.scss'
 
@@ -11,9 +10,8 @@ const ModalAnswer = ({ question, faculty }) => {
   const facultyAnswers = useMemo(() => {
     return answers ? answers.find(answer => answer.programme === faculty)?.data || {} : {}
   }, [answers, faculty])
-  const [showAll, setShowAll] = useState(false)
   const lightsHistory = facultyAnswers[`${question.id}_lights_history`] || []
-  const displayedHistory = showAll ? lightsHistory : lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
+  const displayedHistory = lightsHistory
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
 
   const formatDate = date => {
@@ -46,11 +44,6 @@ const ModalAnswer = ({ question, faculty }) => {
                     </div>
                   </div>
                 ))}
-                {lightsHistory.length > 4 && (
-                  <Button onClick={() => setShowAll(!showAll)} style={{ marginTop: '10px' }}>
-                    {showAll ? t('common:showLess') : t('common:showAll')}
-                  </Button>
-                )}
               </>
             ) : (
               t('formView:noAnswer')
