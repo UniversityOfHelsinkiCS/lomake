@@ -13,9 +13,10 @@ const TrackingTrafficLight = ({ id, form }) => {
   const lang = useSelector(state => state.language)
   const fieldName = `${id}_lights_history`
   const lightsHistory = useSelector(({ form }) => form.data[fieldName]) || []
-  const displayedHistory = lightsHistory.slice(Math.max(lightsHistory.length - 4, 0))
+  const displayedHistory = lightsHistory
   const reduxViewOnly = useSelector(({ form }) => form.viewOnly)
   const value = useSelector(({ form }) => form.data[fieldName])
+  const [modify, setModify] = useState(false)
 
   const [showChooser, setShowChooser] = useState(false)
   const [customDate, setCustomDate] = useState(new Date().toISOString())
@@ -79,13 +80,15 @@ const TrackingTrafficLight = ({ id, form }) => {
                   .split('/')
                   .join('.')}
               </i>
-              <Button
-                icon="trash"
-                size="mini"
-                onClick={() => removeLight(index)}
-                disabled={reduxViewOnly}
-                style={{ marginLeft: '0.5em' }} // Add some spacing
-              />
+              {modify && (
+                <Button
+                  icon="trash"
+                  size="mini"
+                  onClick={() => removeLight(index)}
+                  disabled={reduxViewOnly}
+                  style={{ marginLeft: '0.5em' }} // Add some spacing
+                />
+              )}
             </Menu.Item>
           ))
         ) : (
@@ -97,6 +100,9 @@ const TrackingTrafficLight = ({ id, form }) => {
               {t('chooseTrafficLight')}
             </Button>
           )}
+        </Menu.Item>
+        <Menu.Item>
+          <Button onClick={() => setModify(!modify)}>{t('modifyLights')}</Button>
         </Menu.Item>
       </Menu>
 
