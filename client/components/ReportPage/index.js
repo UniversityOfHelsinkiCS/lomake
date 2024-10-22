@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Accordion, Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { Accordion, Button, Icon, Grid, Tab, Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
@@ -13,6 +13,7 @@ import { setForm } from 'Utilities/redux/filterReducer'
 import QuestionList from 'Components/Generic/QuestionList'
 import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
+import YearSelector from 'Components/Generic/YearSelector'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
@@ -149,13 +150,22 @@ export default () => {
   return (
     <div className="report">
       <div className="info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
-        <Grid.Column width={10}>
-          <Button as={Link} to="/yearly" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
+      <Menu secondary>
+        <Menu.Item>
+          <Button as={Link} to="/yearly" icon labelPosition="left" size="small">
             <Icon name="arrow left" />
             {t('backToFrontPage')}
           </Button>
+        </Menu.Item>
+        <Menu.Item>
           <h1>{t('report:reportPage')}</h1>
+        </Menu.Item>
+        <Menu.Item>
+          <YearSelector size="small" />
+        </Menu.Item>
+      </Menu>
+      <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
+        <Grid.Column width={10}>
           <FilterTray filter={filter} setFilter={setFilter} />
           <Accordion fluid styled className="question-filter">
             <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
