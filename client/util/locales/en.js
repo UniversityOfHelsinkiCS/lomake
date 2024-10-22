@@ -168,6 +168,7 @@ export default {
     chooseProgramme: 'Choose a programme for comparison',
     compareFaculties: 'Compare by faculty',
     emptyAnswers: 'Include programmes without answers to the graphs',
+    emptyFacultyAnswers: 'Include faculties without answers to the graphs',
     university: 'Entire university',
     noAccessToAll: 'Please note, that you can only see comparison with the programmes you have reading rights to',
     labelOptions: 'Unit in the graph',

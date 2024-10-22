@@ -19,7 +19,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
   }
 
-  const showFacultyPie = form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING
+  const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">
@@ -46,7 +46,11 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
           <Radio
             checked={showEmpty}
             onChange={() => setShowEmpty(!showEmpty)}
-            label={t('comparison:emptyAnswers')}
+            label={
+              form === formKeys.EVALUATION_FACULTIES || formKeys.FACULTY_MONITORING
+                ? t('comparison:emptyFacultyAnswers')
+                : t('comparison:emptyAnswers')
+            }
             toggle
           />
         </Grid.Row>

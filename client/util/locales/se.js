@@ -169,6 +169,7 @@ export default {
     chooseProgramme: 'Välj ett program att jämföra',
     compareFaculties: 'Jämför enligt fakultet',
     emptyAnswers: 'Räkna in program utan svar på frågan',
+    emptyFacultyAnswers: 'Räkna in fakulteter utan svar på frågan',
     university: 'Hela universitetet',
     noAccessToAll: 'Observera att du bara kan se jämförelser med de programmen som du har läsrättigheter till',
     labelOptions: 'Enhet i grafen',

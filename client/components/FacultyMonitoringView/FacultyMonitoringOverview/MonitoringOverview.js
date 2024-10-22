@@ -13,6 +13,7 @@ import {
   Icon,
   Radio,
   Grid,
+  Button,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -216,6 +217,11 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
       <Menu size="large" className="filter-row" secondary>
         <MenuItem header className="menu-item-header">
           <h2>{t('facultymonitoring').toUpperCase()}</h2>
+        </MenuItem>
+        <MenuItem>
+          <Button data-cy="nav-report" as={Link} to={`/report?form=8`} secondary size="big">
+            {t('overview:readAnswers')}
+          </Button>
         </MenuItem>
         <MenuItem>
           <FacultyDegreeDropdown />

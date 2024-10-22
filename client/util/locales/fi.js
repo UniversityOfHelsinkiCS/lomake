@@ -172,6 +172,7 @@ export default {
     chooseProgramme: 'Valitse vertailtava ohjelma',
     compareFaculties: 'Vertaile tiedekunnittain',
     emptyAnswers: 'Ota mukaan koulutusohjelmat, jotka eivät ole vastanneet kysymykseen',
+    emptyFacultyAnswers: 'Ota mukaan tiedekunnat, jotka eivät ole vastanneet kysymykseen',
     university: 'Koko yliopisto',
     noAccessToAll: 'Huomioithan, että verrokkina näkyy vain niiden ohjelmien tiedot, joihin sinulla on lukuoikeus',
     labelOptions: 'Graafin yksikkö',
