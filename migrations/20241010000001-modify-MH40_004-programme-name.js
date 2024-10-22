@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.sequelize.query(`UPDATE studyprogrammes SET name='{

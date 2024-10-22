@@ -22,6 +22,7 @@ const colors = {
 }
 
 const Square = ({ color, setQuestionModal, answerObject, chevron = null, t }) => {
+  // eslint-disable-next-line no-unused-vars
   const [showTooltip, setShowTooltip] = useState(false)
   const { backgroundColor, hover } = colors[color] || colors.gray
 

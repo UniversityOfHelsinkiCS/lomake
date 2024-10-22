@@ -19,18 +19,16 @@ import { Link } from 'react-router-dom'
 import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomModal from 'Components/Generic/CustomModal'
-import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
-import { formKeys } from '@root/config/data'
+import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import Square from 'Components/Generic/Square'
-import Segment from '@root/node_modules/semantic-ui-react/dist/commonjs/elements/Segment/Segment'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
   const answers = useSelector(state => state.tempAnswers.data)
-  const form = formKeys.FACULTY_MONITORING
   const [questionModal, setQuestionModal] = useState(null)
   const [accordion, setAccordion] = useState(false)
   const selectedLevel = useSelector(({ filters }) => filters.level)
@@ -53,7 +51,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   useEffect(() => {
     setRadioFilter('all')
-    dispatch(getTempAnswersByForm(form))
+    dispatch(getAllTempAnswersAction())
+    dispatch(getAnswersActionAll())
   }, [selectedLevel])
 
   if (!answers) return <Loader active />
