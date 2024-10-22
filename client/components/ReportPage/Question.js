@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { Accordion, Grid, Icon, Label, Dropdown } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { romanize } from 'Utilities/common'
+import { useSelector } from 'react-redux'
+import { formKeys } from '@root/config/data'
 import QuestionTitle from './QuestionTitle'
 
 const Question = ({ answers, question, chosenProgrammes, handleClick, showing, meta }) => {
   const { t } = useTranslation()
   const [chosenColor, setChosenColor] = useState('all')
+  const form = useSelector(({ filters }) => filters.form)
 
   const buttonColors = [
     { key: 'all', text: t('all'), value: 'all' },
@@ -38,7 +41,9 @@ const Question = ({ answers, question, chosenProgrammes, handleClick, showing, m
           <Grid.Column width={11}>
             <span>
               <small className="question-title">
-                {romanize(question.titleIndex)} - {question.title}
+                {form === formKeys.META_EVALUATION || form === formKeys.FACULTY_MONITORING
+                  ? question.title
+                  : `${romanize(question.titleIndex)} - ${question.title}`}
               </small>
             </span>
             <p className="question-label">

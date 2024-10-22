@@ -2,11 +2,14 @@ import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { formKeys } from '@root/config/data'
 import QuestionTitle from './QuestionTitle'
 
 const SingleProgramQuestion = ({ answers, question }) => {
   const { t } = useTranslation()
   const commentAppendix = `${t('comment')}:\n\n`
+  const form = useSelector(({ filters }) => filters.form)
 
   return (
     <>
@@ -22,7 +25,9 @@ const SingleProgramQuestion = ({ answers, question }) => {
           <Grid.Column width={11}>
             <span>
               <small className="question-title">
-                {romanize(question.titleIndex)} - {question.title}
+                {form === formKeys.META_EVALUATION || form === formKeys.FACULTY_MONITORING
+                  ? question.title
+                  : `${romanize(question.titleIndex)} - ${question.title}`}
               </small>
             </span>
             <p className="question-label">
