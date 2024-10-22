@@ -429,7 +429,6 @@ export const getActionsAnswer = (data, id, t) => {
 
 export const getFacultyMonitoringAnswer = (data, questionId, t) => {
   let answer = ''
-  let comment = ''
   let color = 'emptyAnswer'
 
   const lightHistoryKey = `${questionId}_lights_history`
@@ -440,30 +439,36 @@ export const getFacultyMonitoringAnswer = (data, questionId, t) => {
 
   const actionTextKey = `${questionId}_actions_text`
   if (data[actionTextKey]) {
-    answer = cleanText(data[actionTextKey])
+    answer = cleanText(data[actionTextKey]) + '\n' + '\n'
   }
 
   const degreeRadioKey = `${questionId}_degree_radio`
   if (data[degreeRadioKey]) {
-    answer += ` (${t(`facultyTracking:${data[degreeRadioKey]}`)})`
+    answer += `${t('facultyTracking:selectDegree')}: ${t(`facultyTracking:${data[degreeRadioKey]}`)} \n`
+  }
+
+  const responsibleEntitiesKey = `${questionId}_responsible_entities_text`
+  if (data[responsibleEntitiesKey]) {
+    answer += `${t('formView:facultyEntitiesLabel')}: ${data[responsibleEntitiesKey]} \n`
+  }
+
+  const contactPersonKey = `${questionId}_contact_person_text`
+  if (data[contactPersonKey]) {
+    answer += `${t('formView:facultyContactLabel')}: ${data[contactPersonKey]} \n`
+  }
+
+  const resourcesKey = `${questionId}_resources_text`
+  if (data[resourcesKey]) {
+    answer += `${t('formView:facultyResourcesLabel')}: ${data[resourcesKey]} \n`
   }
 
   const startDateKey = `${questionId}_start_date_text`
   const endDateKey = `${questionId}_end_date_text`
   if (data[startDateKey] && data[endDateKey]) {
-    answer += ` ${t('formView:facultyStartLabel')}: ${new Date(data[startDateKey]).toLocaleDateString()} ${t('formView:facultyEndLabel')}: ${new Date(data[endDateKey]).toLocaleDateString()}`
+    answer += ` ${t('formView:facultyStartLabel')}: ${new Date(data[startDateKey]).toLocaleDateString()} \n ${t('formView:facultyEndLabel')}: ${new Date(data[endDateKey]).toLocaleDateString()}`
   }
 
-  const contactPersonKey = `${questionId}_contact_person_text`
-  const responsibleEntitiesKey = `${questionId}_responsible_entities_text`
-  if (data[contactPersonKey]) {
-    comment += `${t('formView:facultyContactLabel')}: ${data[contactPersonKey]} `
-  }
-  if (data[responsibleEntitiesKey]) {
-    comment += `${t('formView:facultyEntitiesLabel')}: ${data[responsibleEntitiesKey]}`
-  }
-
-  return { answer, comment, color }
+  return { answer, color }
 }
 
 export const allYears = oldAnswers => {
@@ -785,7 +790,6 @@ export const answersByQuestions = ({
         if (form === formKeys.FACULTY_MONITORING) {
           const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
           answer = facultyMonitoringAnswer.answer
-          comment = facultyMonitoringAnswer.comment
         } else {
           if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
           else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
