@@ -23,6 +23,7 @@ import { getTempAnswersByForm } from 'Utilities/redux/tempAnswersReducer'
 import { formKeys } from '@root/config/data'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import Square from 'Components/Generic/Square'
+import Segment from '@root/node_modules/semantic-ui-react/dist/commonjs/elements/Segment/Segment'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 
@@ -222,34 +223,33 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </MenuItem>
         {selectedLevel !== 'doctoral' && (
           <MenuItem>
-            <div>
-              <Grid>
-                <Radio
-                  label={t('bachelor')}
-                  value="bachelor"
-                  checked={radioFilter === 'bachelor'}
-                  onChange={() => setRadioFilter('bachelor')}
-                />
-                <Radio
-                  label={t('master')}
-                  value="master"
-                  checked={radioFilter === 'master'}
-                  onChange={() => setRadioFilter('master')}
-                />
-                <Radio
-                  label={t('bachelorMasterToggle')}
-                  value="both"
-                  checked={radioFilter === 'both'}
-                  onChange={() => setRadioFilter('both')}
-                />
-                <Radio
-                  label={t('all')}
-                  value="all"
-                  checked={radioFilter === 'all'}
-                  onChange={() => setRadioFilter('all')}
-                />
-              </Grid>
-            </div>
+            <Grid>
+              <Radio
+                label={t('bachelor')}
+                value="bachelor"
+                checked={radioFilter === 'bachelor'}
+                onChange={() => setRadioFilter('bachelor')}
+                style={{ paddingLeft: '2em' }}
+              />
+              <Radio
+                label={t('master')}
+                value="master"
+                checked={radioFilter === 'master'}
+                onChange={() => setRadioFilter('master')}
+              />
+              <Radio
+                label={t('bachelorMasterToggle')}
+                value="both"
+                checked={radioFilter === 'both'}
+                onChange={() => setRadioFilter('both')}
+              />
+              <Radio
+                label={t('all')}
+                value="all"
+                checked={radioFilter === 'all'}
+                onChange={() => setRadioFilter('all')}
+              />
+            </Grid>
           </MenuItem>
         )}
       </Menu>
@@ -346,4 +346,3 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 }
 
 export default MonitoringOverview
- 
