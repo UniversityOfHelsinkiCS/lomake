@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Button, Icon, Segment } from 'semantic-ui-react'
+import { Button, Icon, Accordion } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems } from 'Utilities/common'
@@ -10,7 +10,7 @@ import { formKeys } from '@root/config/data'
 const Programme = ({ p, lang, selectedFaculties, form }) => {
   return (
     <Fragment key={p.key}>
-      {p.name[lang]}
+      <span style={{ cursor: 'pointer' }}>{p.name[lang]}</span>
       {form &&
         form !== formKeys.EVALUATION_FACULTIES &&
         form !== formKeys.FACULTY_MONITORING &&
@@ -39,6 +39,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
   const lang = useSelector(state => state.language)
   const selectedFaculties = useSelector(({ filters }) => filters.faculty)
   const form = useSelector(state => state.filters.form)
+  const [isOpen, setIsOpen] = useState(false)
 
   const addToList = programme => {
     if (!picked.includes(programme)) {
@@ -47,11 +48,19 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
   }
 
   const labels =
-    form === formKeys.EVALUATION_FACULTIES || form == formKeys.FACULTY_MONITORING ? facultyLabels : programmeLabels
+    form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? facultyLabels : programmeLabels
+
   return (
-    <>
-      <Segment className="list-container" data-cy="report-programmes-list">
+    <Accordion styled active fluid data-cy="report-programmes-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+      <Accordion.Title onClick={() => setIsOpen(!isOpen)}>
+        {t(labels.nowShowing)}
+        <span>
+          <Icon name={`caret ${isOpen ? 'down' : 'right'}`} />
+        </span>
+      </Accordion.Title>
+      <Accordion.Content active={isOpen}>
         <p className="list-header">{t(labels.nowShowing)}</p>
+
         {programmes.all.length > 0 ? (
           <Fragment key={programmes}>
             {sortedItems(programmes.all, 'name', lang).map(p => {
@@ -74,9 +83,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               )
             })}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
-              {t(`${labels.chooseMore}`)}
-            </p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t(`${labels.chooseMore}`)}</p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
               if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
@@ -100,12 +107,12 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
         ) : (
           <h4>{t('noData')}</h4>
         )}
-      </Segment>
-      <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
-        {t('selectAll')}
-      </Button>
-      <Button onClick={() => setPicked([])}>{t('clearSelection')}</Button>
-    </>
+        <Button color="blue" onClick={() => setPicked(programmes.all)} data-cy="report-select-all">
+          {t('selectAll')}
+        </Button>
+        <Button onClick={() => setPicked([])}>{t('clearSelection')}</Button>
+      </Accordion.Content>
+    </Accordion>
   )
 }
 

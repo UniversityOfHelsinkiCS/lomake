@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { clearLevelSpecificFilters, setFaculty } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const FacultyFilter = ({ size, label }) => {
+const FacultyFilter = ({ label }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
@@ -45,16 +45,17 @@ const FacultyFilter = ({ size, label }) => {
     )
   }
   return (
-    <div className={`faculty-filter-${size}`}>
+    <div>
       <label>{label}</label>
       <Dropdown
         data-cy="faculty-filter"
         fluid
-        selection
         multiple
+        selection
         options={faculties ? getOptions() : []}
         onChange={handleChange}
         value={selectedFaculties}
+        className="responsive-dropdown"
       />
     </div>
   )

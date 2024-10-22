@@ -32,7 +32,7 @@ const FormFilter = ({ version = null }) => {
   }
 
   return (
-    <div className={filterForm !== 4 ? `form-filter-small` : `form-filter-small-${filterForm}`}>
+    <div className="form-filter-small">
       <label>{t('chooseForm')}</label>
       <Select
         className="button basic gray"

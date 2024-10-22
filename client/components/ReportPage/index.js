@@ -14,6 +14,7 @@ import QuestionList from 'Components/Generic/QuestionList'
 import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from 'Utilities/common'
 import useDebounce from 'Utilities/useDebounce'
 import YearSelector from 'Components/Generic/YearSelector'
+import FormFilter from 'Components/Generic/FormFilter'
 import FilterTray from './FilterTray'
 import ColorAnswers from './ColorAnswers'
 import WrittenAnswers from './WrittenAnswers'
@@ -148,43 +149,43 @@ export default () => {
   if (usersProgrammes.length < 1) return <NoPermissions t={t} requestedForm={t('report:reportPage')} />
 
   return (
-    <div className="report">
-      <div className="info-header noprint" />
-      <Menu secondary>
-        <Menu.Item>
-          <Button as={Link} to="/yearly" icon labelPosition="left" size="small">
-            <Icon name="arrow left" />
-            {t('backToFrontPage')}
-          </Button>
-        </Menu.Item>
-        <Menu.Item>
-          <h1>{t('report:reportPage')}</h1>
-        </Menu.Item>
-        <Menu.Item>
-          <YearSelector size="small" />
-        </Menu.Item>
-      </Menu>
-      <Grid doubling columns={2} padded="vertically" className="filter-container noprint">
-        <Grid.Column width={10}>
-          <FilterTray filter={filter} setFilter={setFilter} />
-          <Accordion fluid styled className="question-filter">
-            <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
-              {t('report:selectQuestions')}{' '}
-              <span className="noprint">
-                <Icon name={`caret ${openQuestions ? 'down' : 'right'}`} />
-              </span>
-            </Accordion.Title>
-            <Accordion.Content active={openQuestions}>
-              <QuestionList label="" questionsList={questionsList} />
-            </Accordion.Content>
-          </Accordion>
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
-        </Grid.Column>
-      </Grid>
+    <div style={{ width: '80%', maxWidth: '80%' }}>
+      <div className="no-print">
+        <Menu secondary>
+          <Menu.Item>
+            <Button as={Link} to="/yearly" icon="arrow left" size="small" />
+          </Menu.Item>
+          <Menu.Item>
+            <h1>{t('report:reportPage')}</h1>
+          </Menu.Item>
+          <Menu.Item>
+            <YearSelector size="small" />
+          </Menu.Item>
+          <Menu.Item>
+            <FormFilter />
+          </Menu.Item>
+        </Menu>
+        <FilterTray filter={filter} setFilter={setFilter} />
+        <Grid doubling columns={2} padded="vertically">
+          <Grid.Column>
+            <Accordion fluid styled style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              <Accordion.Title active onClick={() => setOpenQuestions(!openQuestions)}>
+                {t('report:selectQuestions')}{' '}
+                <span>
+                  <Icon name={`caret ${openQuestions ? 'down' : 'right'}`} />
+                </span>
+              </Accordion.Title>
+              <Accordion.Content active={openQuestions}>
+                <QuestionList label="" questionsList={questionsList} />
+              </Accordion.Content>
+            </Accordion>
+          </Grid.Column>
+          <Grid.Column>
+            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+          </Grid.Column>
+        </Grid>
+      </div>
       <Tab
-        className="report-tab"
         onTabChange={handleTabChange}
         activeIndex={activeTab}
         menu={{ secondary: true, pointing: true }}

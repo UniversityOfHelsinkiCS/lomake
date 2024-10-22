@@ -103,12 +103,13 @@
 }
 
 @mixin filter-basics {
-  margin: 2em 0em 0.5em 0em;
-  > label {
-    font-size: 1.05em;
-    margin-bottom: 0.5em;
-    display: block;
-  }
+  // margin: 2em 0em 0.5em 0em;
+  //   > label {
+  //   font-size: 1.05em;
+  //   margin-bottom: 0.5em;
+     display: flex;
+     align-items: center;
+  // }
 }
 
 @mixin filter-no-margin-top {
@@ -140,8 +141,6 @@
     width: 300px;
   }
   &-large {
-    @include filter-basics;
-    width: 100%;
   }
 }
 
