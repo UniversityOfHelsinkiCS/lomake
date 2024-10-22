@@ -23,12 +23,13 @@ const getDoctoralSchoolFilter = ({ faculty, level }) => {
 }
 
 const getLevelFilter = ({ filters }) => {
-  if (filters.form !== formKeys.EVALUATION_FACULTIES) return <LevelFilter />
+  if (filters.form !== formKeys.EVALUATION_FACULTIES && filters.form !== formKeys.FACULTY_MONITORING)
+    return <LevelFilter />
   return null
 }
 
 const getProgrammeFilter = ({ form, filter, t, handleSearch, setFilter }) => {
-  if (form !== formKeys.EVALUATION_FACULTIES)
+  if (form !== formKeys.EVALUATION_FACULTIES && form !== formKeys.FACULTY_MONITORING)
     return (
       <ProgrammeFilter
         handleChange={handleSearch}
@@ -58,7 +59,9 @@ const FilterTray = ({ filter, setFilter }) => {
       <FormFilter />
       {usersProgrammes && usersProgrammes.length > 5 && (
         <>
-          {form !== formKeys.EVALUATION_FACULTIES && <FacultyFilter size="small" label={t('report:facultyFilter')} />}
+          {form !== formKeys.EVALUATION_FACULTIES && form !== formKeys.FACULTY_MONITORING && (
+            <FacultyFilter size="small" label={t('report:facultyFilter')} />
+          )}
           {getLevelFilter({ filters })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}

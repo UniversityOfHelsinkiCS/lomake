@@ -13,6 +13,7 @@ const Programme = ({ p, lang, selectedFaculties, form }) => {
       {p.name[lang]}
       {form &&
         form !== formKeys.EVALUATION_FACULTIES &&
+        form !== formKeys.FACULTY_MONITORING &&
         !selectedFaculties.includes(p.primaryFaculty.code) &&
         !selectedFaculties.includes('allFaculties') && (
           <span className="list-companion-icon">
@@ -45,7 +46,8 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
     }
   }
 
-  const labels = form === formKeys.EVALUATION_FACULTIES ? facultyLabels : programmeLabels
+  const labels =
+    form === formKeys.EVALUATION_FACULTIES || form == formKeys.FACULTY_MONITORING ? facultyLabels : programmeLabels
   return (
     <>
       <Segment className="list-container" data-cy="report-programmes-list">
@@ -54,7 +56,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
           <Fragment key={programmes}>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
-              if (form === formKeys.EVALUATION_FACULTIES) {
+              if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
                 pKey = p.code
               }
               return (
@@ -77,7 +79,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
             </p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
-              if (form === formKeys.EVALUATION_FACULTIES) {
+              if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
                 pKey = p.code
               }
               return (

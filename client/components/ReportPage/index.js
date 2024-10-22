@@ -61,7 +61,7 @@ export default () => {
   }, [])
 
   let programmes
-  if (filters.form === formKeys.EVALUATION_FACULTIES) {
+  if (filters.form === formKeys.EVALUATION_FACULTIES || filters.form === formKeys.FACULTY_MONITORING) {
     const filterFakeFaculties = faculties.filter(f => f.code !== 'UNI' && f.code !== 'HTEST')
     programmes = filteredProgrammes(lang, filterFakeFaculties, picked, debouncedFilter, filters)
   } else {
@@ -71,7 +71,7 @@ export default () => {
 
   let questionsList = modifiedQuestions(lang, filters.form)
 
-  if (filters.form === formKeys.META_EVALUATION) {
+  if (filters.form === formKeys.META_EVALUATION || filters.form === formKeys.FACULTY_MONITORING) {
     questionsList = questionsList.filter(q => {
       if (filters.level === 'doctoral') {
         return q.id.startsWith('T')

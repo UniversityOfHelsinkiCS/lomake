@@ -51,64 +51,66 @@ const ProgrammeTextAnswerSummary = ({ questionId, summaryData, form }) => {
       <div className="summary-grid" data-cy={`${questionId}-summary`}>
         <Grid columns={4}>
           <Grid.Row className="row">
-            {form === formKeys.EVALUATION_FACULTIES && (
-              <>
-                <Grid.Column width={5} style={getStyleForm('bachelor')}>
-                  {t('bachelor')}
-                </Grid.Column>
-                <Grid.Column width={5} style={getStyleForm('master')}>
-                  {t('master')}
-                </Grid.Column>
-                <Grid.Column width={5} style={getStyleForm('doctoral')}>
-                  {t('doctoral')}
-                </Grid.Column>
-              </>
-            )}
+            {form === formKeys.EVALUATION_FACULTIES ||
+              (form === formKeys.FACULTY_MONITORING && (
+                <>
+                  <Grid.Column width={5} style={getStyleForm('bachelor')}>
+                    {t('bachelor')}
+                  </Grid.Column>
+                  <Grid.Column width={5} style={getStyleForm('master')}>
+                    {t('master')}
+                  </Grid.Column>
+                  <Grid.Column width={5} style={getStyleForm('doctoral')}>
+                    {t('doctoral')}
+                  </Grid.Column>
+                </>
+              ))}
             <Grid.Column width={1} />
           </Grid.Row>
 
           <>
             <Grid.Row className="row">
-              {form === formKeys.EVALUATION_FACULTIES && (
-                <>
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.bachelor}
-                      lang={lang}
-                      showText={showText.bachelor}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
-                      {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.master}
-                      lang={lang}
-                      showText={showText.master}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('master', !showText.master)}>
-                      {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
-                  <Grid.Column width={5}>
-                    <ProgrammeAnswerSummaryList
-                      data={summaryData.doctoral}
-                      lang={lang}
-                      showText={showText.doctoral}
-                      showSpecific={showSpecific}
-                      handleShowSpecific={handleShowSpecific}
-                    />
-                    <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
-                      {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
-                    </Button>
-                  </Grid.Column>
-                </>
-              )}
+              {form === formKeys.EVALUATION_FACULTIES ||
+                (form === formKeys.FACULTY_MONITORING && (
+                  <>
+                    <Grid.Column width={5}>
+                      <ProgrammeAnswerSummaryList
+                        data={summaryData.bachelor}
+                        lang={lang}
+                        showText={showText.bachelor}
+                        showSpecific={showSpecific}
+                        handleShowSpecific={handleShowSpecific}
+                      />
+                      <Button onClick={() => handleShowText('bachelor', !showText.bachelor)}>
+                        {showText?.level === 'bachelor' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      </Button>
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                      <ProgrammeAnswerSummaryList
+                        data={summaryData.master}
+                        lang={lang}
+                        showText={showText.master}
+                        showSpecific={showSpecific}
+                        handleShowSpecific={handleShowSpecific}
+                      />
+                      <Button onClick={() => handleShowText('master', !showText.master)}>
+                        {showText?.level === 'master' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      </Button>
+                    </Grid.Column>
+                    <Grid.Column width={5}>
+                      <ProgrammeAnswerSummaryList
+                        data={summaryData.doctoral}
+                        lang={lang}
+                        showText={showText.doctoral}
+                        showSpecific={showSpecific}
+                        handleShowSpecific={handleShowSpecific}
+                      />
+                      <Button onClick={() => handleShowText('doctoral', !showText.doctoral)}>
+                        {showText?.level === 'doctoral' ? t('formView:hideAnswers') : t('formView:showAnswers')}
+                      </Button>
+                    </Grid.Column>
+                  </>
+                ))}
               {form === formKeys.EVALUATION_COMMTTEES && (
                 <Grid.Column width={5}>
                   <ProgrammeAnswerSummaryList

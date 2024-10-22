@@ -19,7 +19,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
     return <h3 data-cy="report-no-data">{t('noData')}</h3>
   }
 
-  const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
+  const showFacultyPie = form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">

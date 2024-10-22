@@ -15,13 +15,14 @@ const FormFilter = ({ version = null }) => {
     { text: t('common:formFilter:evaluation'), value: 4 },
     { text: t('evaluationFaculty'), value: 5 },
     { text: t('metaevaluation'), value: 7 },
+    { text: t('common:facultymonitoring'), value: 8 },
   ])
 
   const filterForm = useSelector(({ filters }) => filters.form)
 
   useEffect(() => {
     if (version === 'compareByFaculty') {
-      const filteredOptions = options.filter(option => option.value !== 5 && option.value !== 7)
+      const filteredOptions = options.filter(option => option.value !== 5 && option.value !== 7 && option.value !== 8)
       setOptions(filteredOptions)
     }
   }, [])

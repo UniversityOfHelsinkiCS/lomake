@@ -427,6 +427,45 @@ export const getActionsAnswer = (data, id, t) => {
   return null
 }
 
+export const getFacultyMonitoringAnswer = (data, questionId, t) => {
+  let answer = ''
+  let comment = ''
+  let color = 'emptyAnswer'
+
+  const lightHistoryKey = `${questionId}_lights_history`
+  if (data[lightHistoryKey] && data[lightHistoryKey].length > 0) {
+    const latestLight = data[lightHistoryKey][data[lightHistoryKey].length - 1]
+    color = latestLight.color
+  }
+
+  const actionTextKey = `${questionId}_actions_text`
+  if (data[actionTextKey]) {
+    answer = cleanText(data[actionTextKey])
+  }
+
+  const degreeRadioKey = `${questionId}_degree_radio`
+  if (data[degreeRadioKey]) {
+    answer += ` (${t(`facultyTracking:${data[degreeRadioKey]}`)})`
+  }
+
+  const startDateKey = `${questionId}_start_date_text`
+  const endDateKey = `${questionId}_end_date_text`
+  if (data[startDateKey] && data[endDateKey]) {
+    answer += ` ${t('formView:facultyStartLabel')}: ${new Date(data[startDateKey]).toLocaleDateString()} ${t('formView:facultyEndLabel')}: ${new Date(data[endDateKey]).toLocaleDateString()}`
+  }
+
+  const contactPersonKey = `${questionId}_contact_person_text`
+  const responsibleEntitiesKey = `${questionId}_responsible_entities_text`
+  if (data[contactPersonKey]) {
+    comment += `${t('formView:facultyContactLabel')}: ${data[contactPersonKey]} `
+  }
+  if (data[responsibleEntitiesKey]) {
+    comment += `${t('formView:facultyEntitiesLabel')}: ${data[responsibleEntitiesKey]}`
+  }
+
+  return { answer, comment, color }
+}
+
 export const allYears = oldAnswers => {
   let years = oldAnswers && oldAnswers.years ? [...oldAnswers.years] : []
   const currentYear = new Date().getFullYear()
@@ -714,11 +753,10 @@ export const answersByQuestions = ({
   if (!selectedAnswers) {
     return {}
   }
-
   const answerMap = new Map()
-
-  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
-
+  const chosenKeys = chosenProgrammes.map(
+    p => p.key || ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code),
+  )
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
     const key = programme.programme
@@ -731,25 +769,31 @@ export const answersByQuestions = ({
           const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
           const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
           color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
+        } else if (form === formKeys.FACULTY_MONITORING) {
+          const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
+          color = facultyMonitoringAnswer.color
         } else {
           color = data[question.color] ? data[question.color] : 'emptyAnswer'
         }
         let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
         let name = programmeNameByKey(usersProgrammes, programme, lang)
-
-        if (form === formKeys.EVALUATION_FACULTIES) {
+        if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
           name = facultyList.find(f => f.code === programme.programme).name[lang]
         }
         let answer = ''
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
-        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
-        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
         let comment = ''
-        if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
-
+        if (form === formKeys.FACULTY_MONITORING) {
+          const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
+          answer = facultyMonitoringAnswer.answer
+          comment = facultyMonitoringAnswer.comment
+        } else {
+          if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+          else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
+          else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
+          else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
+          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+          if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
+        }
         answersByProgramme = [...answersByProgramme, { name, key, color, answer, comment }]
         answerMap.set(question.id, answersByProgramme)
       })
@@ -758,17 +802,19 @@ export const answersByQuestions = ({
   // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
   // So empty answers need to be added.
   answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
+    const answeredProgrammes = value.map(p =>
+      form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key,
+    )
     const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
     if (programmesMissing) {
       programmesMissing.forEach(p => {
         const earlierAnswers = answerMap.get(key)
-        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
+        const programmeCode =
+          form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key
         answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
       })
     }
   })
-
   return answerMap
 }
 

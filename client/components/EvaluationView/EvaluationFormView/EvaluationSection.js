@@ -6,7 +6,7 @@ import { formKeys } from '@root/config/data'
 const Section = ({ title, number, children, programmeKey, form }) => {
   let id = ''
 
-  if (form === formKeys.EVALUATION_FACULTIES) {
+  if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
     id = '-faculty'
   } else if (form === formKeys.EVALUATION_COMMTTEES) {
     id = '-university'
