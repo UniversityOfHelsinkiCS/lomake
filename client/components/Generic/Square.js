@@ -8,10 +8,11 @@ const squareStyles = {
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
-  width: '80px',
-  height: '80px',
+  width: '100%',
+  height: '100%',
   transition: 'filter 0.3s',
   position: 'relative',
+  margin: 0,
 }
 
 const colors = {

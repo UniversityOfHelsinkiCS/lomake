@@ -1,69 +1,69 @@
-.filter-row {
-  .menu-item-header {
-    padding-left: 0;
+$base-cell-size: min(5vw, 80px);
 
-    h2 {
-      max-width: 16em;
-    }
-  }
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  margin-left: 15px;
+@mixin cell-scaling {
+  width: $base-cell-size;
+  min-width: $base-cell-size;
+  height: $base-cell-size;
 }
 
 .monitoring-overview {
   width: 100%;
 
+  .filter-row .menu-item-header {
+    padding-left: 0;
+
+    h2 {
+      max-width: 16em;
+      font-size: 1.5em;
+    }
+  }
+
   .monitoring-table {
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
+    table-layout: fixed;
   }
 
   .table-header-cell {
     padding: 8px !important;
-    margin-top: 10px !important;
     text-align: left;
-    min-width: 7vw;
-    max-width: 7vw;
     word-wrap: break-word;
+
+    &:first-child {
+      width: 10vw;
+    }
+
+    &:not(:first-child) {
+      width: $base-cell-size;
+    }
+
     .faculty-header {
-      vertical-align: top !important;
-      font-size: 13px;
-      width: 100%;
+      font-size: 1em;
+      display: block;
     }
   }
 
   .pie-chart-cell,
   .square-cell {
-    width: 80px;
-    height: 80px;
+    @include cell-scaling;
     padding: 5px;
-    vertical-align: middle;
   }
 
   .pie-chart-container,
   .square-container {
-    width: 80px;
-    height: 80px;
+    @include cell-scaling;
     margin: 0 auto;
   }
 
-  .ui.table td {
-    padding: 0.7em;
-    vertical-align: middle;
-  }
-
-  .accordion-header {
+  h5.accordion-header {
     cursor: pointer;
-    margin: 15px 0 !important;
-    width: 210px;
-    overflow: visible;
     word-wrap: break-word;
+    hyphens: auto;
+    margin: 15px 0 !important;
+    font-size: 1.2em !important;
+    line-height: 1.2;
+
     &:hover {
       text-decoration: underline;
     }
@@ -71,5 +71,8 @@
 
   .question-text {
     padding: 5px 0;
+    font-size: 1em;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }

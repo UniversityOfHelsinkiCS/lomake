@@ -41,7 +41,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   const filteredFaculties = useMemo(
     () =>
-      faculties
+      (faculties || [])
         .filter(f => f.code !== 'HTEST')
         .map(f => ({
           key: f.code,

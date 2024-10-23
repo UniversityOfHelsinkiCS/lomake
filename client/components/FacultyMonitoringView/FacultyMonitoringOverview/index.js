@@ -16,7 +16,7 @@ const FacultyMonitoringOverview = () => {
   const user = useSelector(state => state.currentUser.data)
 
   const hasReadRights = (faculties, user) => {
-    const readRights = faculties.some(faculty => user.access[faculty.code]?.read)
+    const readRights = faculties?.some(faculty => user.access[faculty.code]?.read)
     return readRights || user.specialGroup?.evaluationFaculty || isAdmin(user)
   }
 
