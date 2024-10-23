@@ -14,6 +14,7 @@ import {
   Radio,
   Grid,
   Button,
+  Dropdown,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -26,6 +27,7 @@ import { facultyMonitoringQuestions as questions } from '@root/client/questionDa
 import Square from 'Components/Generic/Square'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
+import DegreeLevelDropdown from '../DegreeLevelDropdown'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()
@@ -228,33 +230,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
         </MenuItem>
         {selectedLevel !== 'doctoral' && (
           <MenuItem>
-            <Grid>
-              <Radio
-                label={t('bachelor')}
-                value="bachelor"
-                checked={radioFilter === 'bachelor'}
-                onChange={() => setRadioFilter('bachelor')}
-                style={{ paddingLeft: '2em' }}
-              />
-              <Radio
-                label={t('master')}
-                value="master"
-                checked={radioFilter === 'master'}
-                onChange={() => setRadioFilter('master')}
-              />
-              <Radio
-                label={t('bachelorMasterToggle')}
-                value="both"
-                checked={radioFilter === 'both'}
-                onChange={() => setRadioFilter('both')}
-              />
-              <Radio
-                label={t('all')}
-                value="all"
-                checked={radioFilter === 'all'}
-                onChange={() => setRadioFilter('all')}
-              />
-            </Grid>
+            <DegreeLevelDropdown t={t} radioFilter={radioFilter} setRadioFilter={setRadioFilter} />
           </MenuItem>
         )}
       </Menu>
