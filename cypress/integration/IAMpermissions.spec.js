@@ -132,6 +132,7 @@ describe('IAM permission tests', () => {
     cy.visit('/yearly')
     cy.reload()
     cy.get('[data-cy=nav-report]').click()
+    cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').should('be.visible').click()
     cy.get('[data-cy=report-question-content-review_of_last_years_situation_report_text]').should(
@@ -185,6 +186,7 @@ describe('IAM permission tests', () => {
     cy.visit('/yearly')
     cy.get('[data-cy=nav-report]').click()
     cy.selectYear(defaultYears[1])
+    cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
     cy.get('[data-cy=report-question-review_of_last_years_situation_report_text]').click()
