@@ -52,7 +52,7 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
 
   return (
     <Accordion styled active fluid data-cy="report-programmes-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-      <Accordion.Title onClick={() => setIsOpen(!isOpen)}>
+      <Accordion.Title data-cy="report-select-all-accordion" onClick={() => setIsOpen(!isOpen)}>
         {t(labels.nowShowing)}
         <span>
           <Icon name={`caret ${isOpen ? 'down' : 'right'}`} />
@@ -83,7 +83,9 @@ const ProgrammeList = ({ programmes, setPicked, picked }) => {
               )
             })}
             <div className="ui divider" />
-            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>{t(`${labels.chooseMore}`)}</p>
+            <p className={`list-header${programmes.chosen.length === 0 ? '-alert' : ''}`}>
+              {t(`${labels.chooseMore}`)}
+            </p>
             {sortedItems(programmes.all, 'name', lang).map(p => {
               let pKey = p.key
               if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
