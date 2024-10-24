@@ -31,6 +31,9 @@ export default ({
       withoutEmpty: { value: 0, programmes: [] },
       total: { value: 0 },
     }
+    if (form === 7) {
+      colors.gray = { value: 0, programmes: [] }
+    }
     answers.forEach(a => {
       if (!a) return
 
@@ -51,6 +54,9 @@ export default ({
       }
     })
     colors.withoutEmpty.value = colors.red.value + colors.green.value + colors.yellow.value
+    if (form === 7) {
+      colors.withoutEmpty.value += colors.gray.value
+    }
     colors.total.value = colors.withoutEmpty.value + colors.emptyAnswer.value
     return colors
   }
@@ -88,6 +94,15 @@ export default ({
         programmes: colorSums.emptyAnswer.programmes,
       },
     ]
+    if (form === 7) {
+      data.push({
+        color: colors.gray,
+        toolTipColor: 'gray',
+        toolTipHeader: t('gray'),
+        value: colorSums.gray.value || 0,
+        programmes: colorSums.gray.programmes,
+      })
+    }
     return data.sort((a, b) => b.value - a.value)
   }
 
@@ -123,6 +138,15 @@ export default ({
     form === formKeys.EVALUATION_FACULTIES
       ? { secondLabel: `overview:uniAnswerLevels:${level}` }
       : { secondLabel: faculty }
+
+  const colorDistribution = () => {
+    let distribution = `${t('green')} ${colorSums.green.value} | ${t('yellow')} ${colorSums.yellow.value} | ${t('red')} ${colorSums.red.value}`
+    if (form === 7) {
+      distribution += ` | ${t('gray')} ${colorSums.gray.value}`
+    }
+    return distribution
+  }
+
   return (
     <div style={{ width: '400px', paddingBottom: '300px' }} key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
       <div>
@@ -135,6 +159,7 @@ export default ({
         <p>
           <b>{amountOfResponses()}</b>
         </p>
+        <p>{colorDistribution()}</p>
         <p>
           <Link to={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
             {t('report:clickToCheck')}

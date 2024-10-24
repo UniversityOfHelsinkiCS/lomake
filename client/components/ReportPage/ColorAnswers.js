@@ -92,6 +92,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
                       chosenProgrammes={chosenProgrammes}
                       setActiveTab={setActiveTab}
                       setShowing={setShowing}
+                      form={form}
                     />
                   )}
                 </div>
