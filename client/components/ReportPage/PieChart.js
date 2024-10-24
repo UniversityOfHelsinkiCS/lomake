@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
-import { Button } from 'semantic-ui-react'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
 import { colors } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
+import CustomModal from 'Components/Generic/CustomModal'
 
 export default ({
   question,
@@ -143,40 +143,37 @@ export default ({
       </div>
       <div data-cy={`report-chart-${question.id}`} style={{ maxHeight: '150px' }}>
         {toolTipData && (
-          <span>
-            <p>
-              <b>
-                {question.labelIndex} - {question.label}
-              </b>
-              <Button color="red" size="mini" onClick={() => setToolTipData(null)}>
-                <b>X</b>
-              </Button>
-            </p>
-            <p>
-              <b>
-                <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
-              </b>
-            </p>
-            {toolTipData.programmes.map(p => (
-              <p key={`${p}-${level}`}>{p}</p>
-            ))}
-          </span>
+          <CustomModal closeModal={() => setToolTipData(null)} title={question.label} borderColor={toolTipData.color}>
+            <span>
+              <p>
+                <b>
+                  {question.labelIndex} - {question.label}
+                </b>
+              </p>
+              <p>
+                <b>
+                  <span className={`answer-circle-${toolTipData.color}`} /> {toolTipData.header}
+                </b>
+              </p>
+              {toolTipData.programmes.map(p => (
+                <p key={`${p}-${level}`}>{p}</p>
+              ))}
+            </span>
+          </CustomModal>
         )}
-        <div>
-          <Chart
-            key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
-            data={data()}
-            lengthAngle={360}
-            lineWidth={100}
-            label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
-            paddingAngle={0}
-            radius={40}
-            startAngle={270}
-            labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-            labelPosition={80}
-            onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
-          />
-        </div>
+        <Chart
+          key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
+          data={data()}
+          lengthAngle={360}
+          lineWidth={100}
+          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+          paddingAngle={0}
+          radius={40}
+          startAngle={270}
+          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
+          labelPosition={80}
+          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
+        />
       </div>
     </div>
   )
