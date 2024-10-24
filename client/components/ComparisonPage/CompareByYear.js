@@ -147,16 +147,18 @@ const CompareByYear = ({
   if (!usersProgrammes || !allAnswers) return null
 
   return (
-    <div className="tab-pane">
+    <div>
+      <FilterTray filter={filter} setFilter={setFilter} />
       <Grid doubling columns={2} padded>
         <Grid.Row>
-          <Grid.Column width={10}>
-            <FilterTray filter={filter} setFilter={setFilter} />
+          <Grid.Column>
             <QuestionList label={t('comparison:selectQuestions')} questionsList={questionsList} onlyColoredQuestions />
             <LabelOptions unit={unit} setUnit={setUnit} />
           </Grid.Column>
-          <Grid.Column width={6}>
-            <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+          <Grid.Column>
+            <div style={{ paddingTop: '3em' }}>
+              <ProgrammeList programmes={programmes} setPicked={setPicked} picked={picked} />
+            </div>
           </Grid.Column>
         </Grid.Row>
         {data.length > 0 ? (

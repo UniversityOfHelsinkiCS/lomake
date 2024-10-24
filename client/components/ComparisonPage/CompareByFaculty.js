@@ -77,15 +77,21 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
     <div className="tab-pane">
       <Grid stackable doubling padded columns={isAdmin(user) ? 3 : 2}>
         <Grid.Row>
-          <Grid.Column width={16}>
-            <YearSelector size="small" />
-            <FormFilter version="compareByFaculty" />
-            <LevelFilter comparison />
+          <Grid.Column>
+            <YearSelector size="small" style={{ paddingBottom: '1em' }} />
           </Grid.Column>
+          <Grid.Column>
+            <FormFilter version="compareByFaculty" />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <div style={{ paddingLeft: '1em' }}>
+            <LevelFilter comparison />
+          </div>
         </Grid.Row>
         <Grid.Row className="row">
           <Grid.Column>
-            <div className="filter">
+            <div style={{ paddingTop: '2em' }}>
               <label>{t('comparison:chosenProgrammes')}</label>
               <Dropdown
                 fluid
@@ -100,13 +106,14 @@ const CompareByFaculty = ({ questionsList, usersProgrammes, allAnswers }) => {
             </div>
           </Grid.Column>
           <Grid.Column>
-            {filters.form !== formKeys.EVALUATION_FACULTIES && (
-              <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
-            )}
-            <small>{t('comparison:noAccessToAll')}</small>
-            {faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor') && (
-              <CompanionFilter />
-            )}
+            <div className="filter">
+              {filters.form !== formKeys.EVALUATION_FACULTIES && (
+                <FacultyFilter size="large" label={t('comparison:compareFaculties')} />
+              )}
+              <small>{t('comparison:noAccessToAll')}</small>
+              {faculty[0] !== 'allFaculties' &&
+                (level === 'doctoral' || level === 'master' || level === 'bachelor') && <CompanionFilter />}
+            </div>
           </Grid.Column>
           <Grid.Column>
             <Radio

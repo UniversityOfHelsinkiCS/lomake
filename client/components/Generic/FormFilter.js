@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { setForm } from 'Utilities/redux/filterReducer'
 import './Generic.scss'
 
-const FormFilter = ({ version = null }) => {
+const FormFilter = ({ version = null, comparison = false }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [options, setOptions] = useState([
@@ -31,9 +31,26 @@ const FormFilter = ({ version = null }) => {
     dispatch(setForm(value))
   }
 
+  if (comparison)
+    return (
+      <div className="year-filter-small">
+        <label style={{ paddingRight: '1em' }}>{t('chooseForm')}</label>
+        <Select
+          className="button basic gray"
+          style={{ width: '280px' }}
+          data-cy="form-filter"
+          fluid
+          selection
+          options={options}
+          onChange={handleChange}
+          value={filterForm}
+        />
+      </div>
+    )
+
   return (
-    <div className="form-filter-small">
-      <label>{t('chooseForm')}</label>
+    <div className={filterForm !== 4 ? `form-filter-small` : `form-filter-small-${filterForm}`}>
+      <label style={{ paddingRight: '1em' }}>{t('chooseForm')}</label>
       <Select
         className="button basic gray"
         style={{ width: '280px' }}

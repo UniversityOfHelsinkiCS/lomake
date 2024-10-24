@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import YearSelector from 'Components/Generic/YearSelector'
@@ -67,16 +68,22 @@ const FilterTray = ({ filter, setFilter }) => {
   }
   return (
     <>
-      <YearSelector multiple size="small" label={t('comparison:selectYears')} />
-      <FormFilter />
+      <Menu secondary>
+        <Menu.Item>
+          <YearSelector multiple size="small" label={t('comparison:selectYears')} />
+        </Menu.Item>
+        <Menu.Item>
+          <FormFilter comparison />
+        </Menu.Item>
+      </Menu>
       {usersProgrammes && (
-        <>
+        <div style={{ paddingLeft: '1em' }}>
           {getFacultyFilter({ form, t })}
           {getLevelFilter({ form })}
           {getCompanionFilter({ faculty, level })}
           {getDoctoralSchoolFilter({ faculty, level })}
           {getProgrammeFilter({ form, filter, t, handleSearch, setFilter })}
-        </>
+        </div>
       )}
     </>
   )

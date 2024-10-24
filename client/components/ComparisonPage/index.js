@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Grid, Tab } from 'semantic-ui-react'
+import { Button, Menu, Tab } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
@@ -195,15 +195,14 @@ export default () => {
   return (
     <div key={filters.form} className="comparison">
       <div className="info-header noprint" />
-      <Grid doubling columns={2} padded="vertically" className="comparison filter-container">
-        <Grid.Column width={10}>
-          <Button as={Link} to="/yearly" icon labelPosition="left" size="small" style={{ marginBottom: '3em' }}>
-            <Icon name="arrow left" />
-            {t('backToFrontPage')}
-          </Button>
+      <Menu secondary>
+        <Menu.Item>
+          <Button as={Link} to="/yearly" icon="arrow left" size="small" />
+        </Menu.Item>
+        <Menu.Item>
           <h1>{t('comparison:compare')}</h1>
-        </Grid.Column>
-      </Grid>
+        </Menu.Item>
+      </Menu>
       <Tab className="comparison tab" menu={{ secondary: true, pointing: true }} panes={panes} />
     </div>
   )
