@@ -31,14 +31,13 @@ const LevelFilter = ({ comparison }) => {
   }
 
   return (
-    <div className="level-filter" style={{ display: 'flex', alignItems: 'center'}}>
-
+    <div className="level-filter" style={{ display: 'flex', alignItems: 'center' }}>
       <Form>
         <Form.Group inline>
-        <Form.Field>
-      <label>{comparison ? t('generic:compareLevel') : t('generic:levelFilter')}</label>
-        </Form.Field>
-        
+          <Form.Field>
+            <label>{comparison ? t('generic:compareLevel') : t('generic:levelFilter')}</label>
+          </Form.Field>
+
           <Form.Field>
             <Radio
               label={t('allProgrammes')}

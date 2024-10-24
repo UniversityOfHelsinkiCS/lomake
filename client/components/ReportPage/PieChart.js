@@ -124,8 +124,8 @@ export default ({
       ? { secondLabel: `overview:uniAnswerLevels:${level}` }
       : { secondLabel: faculty }
   return (
-    <div className="color-chart-area" key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
-      <div className="color-pie-header">
+    <div style={{ width: '400px', paddingBottom: '300px' }} key={`${chosenProgrammes}-${answers}-${showEmpty}`}>
+      <div>
         <p>
           {question.labelIndex}. {question.label.toUpperCase()}
         </p>
@@ -135,15 +135,15 @@ export default ({
         <p>
           <b>{amountOfResponses()}</b>
         </p>
-        <p className="noprint">
+        <p>
           <Link to={`/report#${question.labelIndex}`} onClick={() => showWritten(question.id)}>
             {t('report:clickToCheck')}
           </Link>
         </p>
       </div>
-      <div className="color-pie-chart" data-cy={`report-chart-${question.id}`}>
+      <div data-cy={`report-chart-${question.id}`} style={{ maxHeight: '150px' }}>
         {toolTipData && (
-          <span className="color-pie-tip">
+          <span>
             <p>
               <b>
                 {question.labelIndex} - {question.label}
@@ -162,21 +162,21 @@ export default ({
             ))}
           </span>
         )}
-        <Chart
-          center={[72, 65]}
-          key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
-          data={data()}
-          lengthAngle={360}
-          lineWidth={100}
-          label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
-          paddingAngle={0}
-          radius={50}
-          startAngle={270}
-          viewBoxSize={[145, 145]}
-          labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={112}
-          onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
-        />
+        <div>
+          <Chart
+            key={`${chosenProgrammes}-${answers}-${showEmpty}-${level}-${toolTipData}`}
+            data={data()}
+            lengthAngle={360}
+            lineWidth={100}
+            label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
+            paddingAngle={0}
+            radius={40}
+            startAngle={270}
+            labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
+            labelPosition={80}
+            onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
+          />
+        </div>
       </div>
     </div>
   )

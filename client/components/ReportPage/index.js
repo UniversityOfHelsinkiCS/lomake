@@ -12,6 +12,7 @@ import { setForm } from 'Utilities/redux/filterReducer'
 
 import QuestionList from 'Components/Generic/QuestionList'
 import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from 'Utilities/common'
+import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import useDebounce from 'Utilities/useDebounce'
 import YearSelector from 'Components/Generic/YearSelector'
 import FormFilter from 'Components/Generic/FormFilter'
@@ -48,6 +49,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getAllTempAnswersAction())
+    dispatch(getAnswersActionAll())
     document.title = `${t('report:reportPage')}`
   }, [lang])
 

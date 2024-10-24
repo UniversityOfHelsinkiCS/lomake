@@ -12,9 +12,7 @@ import {
   Loader,
   Icon,
   Radio,
-  Grid,
   Button,
-  Dropdown,
 } from 'semantic-ui-react'
 import { PieChart } from 'react-minimal-pie-chart'
 import { Link } from 'react-router-dom'
@@ -221,7 +219,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
           <h2>{t('facultymonitoring').toUpperCase()}</h2>
         </MenuItem>
         <MenuItem>
-          <Button data-cy="nav-report" as={Link} to={`/report?form=8`} secondary size="big">
+          <Button data-cy="nav-report" as={Link} to="/report?form=8" secondary size="big">
             {t('overview:readAnswers')}
           </Button>
         </MenuItem>

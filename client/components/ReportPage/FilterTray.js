@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Container } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import { useSelector } from 'react-redux'
 import CompanionFilter from 'Components/Generic/CompanionFilter'
 import DoctoralSchoolFilter from 'Components/Generic/DoctoralSchoolFilter'
@@ -38,7 +38,7 @@ const FilterTray = ({ filter, setFilter }) => {
   const filters = useSelector(state => state.filters)
   const usersProgrammes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const { faculty, level, form } = filters
- 
+
   const handleSearch = ({ target }) => {
     const { value } = target
     setFilter(value)
@@ -54,9 +54,9 @@ const FilterTray = ({ filter, setFilter }) => {
 
   return (
     <>
-        {form !== formKeys.EVALUATION_FACULTIES && form !== formKeys.FACULTY_MONITORING && (
-          <FacultyFilter size="large" label={t('report:facultyFilter')} />
-        )}
+      {form !== formKeys.EVALUATION_FACULTIES && form !== formKeys.FACULTY_MONITORING && (
+        <FacultyFilter size="large" label={t('report:facultyFilter')} />
+      )}
       <Menu secondary>
         <Menu.Item>{getLevelFilter({ filters })}</Menu.Item>
       </Menu>

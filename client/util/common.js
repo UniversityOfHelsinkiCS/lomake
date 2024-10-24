@@ -439,7 +439,8 @@ export const getFacultyMonitoringAnswer = (data, questionId, t) => {
 
   const actionTextKey = `${questionId}_actions_text`
   if (data[actionTextKey]) {
-    answer = cleanText(data[actionTextKey]) + '\n' + '\n'
+    // eslint-disable-next-line no-useless-concat
+    answer = `${cleanText(data[actionTextKey])}\n` + `\n`
   }
 
   const degreeRadioKey = `${questionId}_degree_radio`

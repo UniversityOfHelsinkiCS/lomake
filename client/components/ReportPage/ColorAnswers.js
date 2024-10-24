@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Radio } from 'semantic-ui-react'
+import { Radio, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { getLabel } from 'Utilities/common'
 import { formKeys } from '@root/config/data'
@@ -20,6 +20,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
   }
 
   const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
+
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">
@@ -31,68 +32,72 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
             <p className="report side-note-small">{t('report:pdfNotification')}</p>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Column width={4} className="left" />
+        <Grid.Column width={6} className="left" />
         <Grid.Column width={6} className="center">
           {year} - {t('trafficLights')}
         </Grid.Column>
-        <Grid.Column width={5} className="right" floated="right" />
       </Grid>
       <div className="ui divider" />
-      <Grid centered>
-        <Grid.Row textAlign="left">
-          <ColorLegend />
-        </Grid.Row>
-        <Grid.Row className="noprint">
-          <Radio
-            checked={showEmpty}
-            onChange={() => setShowEmpty(!showEmpty)}
-            label={
-              form === formKeys.EVALUATION_FACULTIES || formKeys.FACULTY_MONITORING
-                ? t('comparison:emptyFacultyAnswers')
-                : t('comparison:emptyAnswers')
-            }
-            toggle
-          />
+      <Grid columns={2}>
+        <Grid.Row textAlign="left" style={{ display: 'flex', alignItems: 'center' }}>
+          <Grid.Column>
+            <ColorLegend />
+          </Grid.Column>
+          <Grid.Column>
+            <Radio
+              checked={showEmpty}
+              onChange={() => setShowEmpty(!showEmpty)}
+              label={
+                form === formKeys.EVALUATION_FACULTIES || formKeys.FACULTY_MONITORING
+                  ? t('comparison:emptyFacultyAnswers')
+                  : t('comparison:emptyAnswers')
+              }
+              toggle
+            />
+          </Grid.Column>
         </Grid.Row>
       </Grid>
-      <div className="color-grid">
-        {questionsList.map(
-          question =>
-            allAnswers.get(question.id) &&
-            !question.no_color &&
-            questions.selected.includes(getLabel(question)) && (
-              <div key={question.id} style={{ margin: '1em' }}>
-                {showFacultyPie ? (
-                  <>
-                    {['bachelor', 'master', 'doctoral'].map(level => {
-                      return (
-                        <PieChart
-                          key={`${question.id}-${level}`}
-                          question={question}
-                          answers={allAnswers.get(question.id)}
-                          showEmpty={showEmpty}
-                          chosenProgrammes={chosenProgrammes}
-                          setActiveTab={setActiveTab}
-                          setShowing={setShowing}
-                          level={level}
-                          form={form}
-                        />
-                      )
-                    })}
-                  </>
-                ) : (
-                  <PieChart
-                    question={question}
-                    answers={allAnswers.get(question.id)}
-                    showEmpty={showEmpty}
-                    chosenProgrammes={chosenProgrammes}
-                    setActiveTab={setActiveTab}
-                    setShowing={setShowing}
-                  />
-                )}
-              </div>
-            ),
-        )}
+      <div className="ui divider" />
+      <div style={{ paddingTop: '2em' }}>
+        <Grid centered columns={3}>
+          {questionsList.map(
+            question =>
+              allAnswers.get(question.id) &&
+              !question.no_color &&
+              questions.selected.includes(getLabel(question)) && (
+                <div key={question.id}>
+                  {showFacultyPie ? (
+                    <>
+                      {['bachelor', 'master', 'doctoral'].map(level => {
+                        return (
+                          <PieChart
+                            key={`${question.id}-${level}`}
+                            question={question}
+                            answers={allAnswers.get(question.id)}
+                            showEmpty={showEmpty}
+                            chosenProgrammes={chosenProgrammes}
+                            setActiveTab={setActiveTab}
+                            setShowing={setShowing}
+                            level={level}
+                            form={form}
+                          />
+                        )
+                      })}
+                    </>
+                  ) : (
+                    <PieChart
+                      question={question}
+                      answers={allAnswers.get(question.id)}
+                      showEmpty={showEmpty}
+                      chosenProgrammes={chosenProgrammes}
+                      setActiveTab={setActiveTab}
+                      setShowing={setShowing}
+                    />
+                  )}
+                </div>
+              ),
+          )}
+        </Grid>
       </div>
     </div>
   )
