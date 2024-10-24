@@ -1,10 +1,36 @@
 import React from 'react'
 import { Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import './Generic.scss'
+import { formKeys } from '@root/config/data'
 
 const ColorLegend = () => {
   const { t } = useTranslation()
+  const form = useSelector(({ filters }) => filters.form)
+
+  if (form === formKeys.META_EVALUATION) {
+    return (
+      <Segment>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-red" />
+          {t('urgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-yellow" />
+          {t('semiUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-green" />
+          {t('nonUrgent')}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="big-circle-gray" />
+          {t('irrelevant')}
+        </div>
+      </Segment>
+    )
+  }
 
   return (
     <Segment compact textAlign="left">
