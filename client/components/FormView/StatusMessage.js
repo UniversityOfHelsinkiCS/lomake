@@ -21,7 +21,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
 
   if (deadlineObj.getUTCHours() === 0 && deadlineObj.getUTCMinutes() === 0) {
     // Subtract one minute
-    deadlineObj.setUTCHours(deadlineObj.getUTCHours() - 3)
+    deadlineObj.setUTCHours(deadlineObj.getUTCHours() - 2)
     deadlineObj.setUTCMinutes(deadlineObj.getUTCMinutes() - 1)
   }
 
