@@ -68,21 +68,21 @@ export default ({
       {
         color: colors.background_green,
         toolTipColor: 'green',
-        toolTipHeader: t('positive'),
+        toolTipHeader: form === formKeys.META_EVALUATION ? t('nonUrgent') : t('positive'),
         value: colorSums.green.value || 0,
         programmes: colorSums.green.programmes,
       },
       {
         color: colors.background_yellow,
         toolTipColor: 'yellow',
-        toolTipHeader: t('neutral'),
+        toolTipHeader: form === formKeys.META_EVALUATION ? t('semiUrgent') : t('neutral'),
         value: colorSums.yellow.value || 0,
         programmes: colorSums.yellow.programmes,
       },
       {
         color: colors.background_red,
         toolTipColor: 'red',
-        toolTipHeader: t('negative'),
+        toolTipHeader: form === formKeys.META_EVALUATION ? t('urgent') : t('negative'),
         value: colorSums.red.value || 0,
         programmes: colorSums.red.programmes,
       },
@@ -98,7 +98,7 @@ export default ({
       data.push({
         color: colors.gray,
         toolTipColor: 'gray',
-        toolTipHeader: t('gray'),
+        toolTipHeader: t('irrelevant'),
         value: colorSums.gray.value || 0,
         programmes: colorSums.gray.programmes,
       })
@@ -193,10 +193,10 @@ export default ({
           lineWidth={100}
           label={({ dataEntry }) => (dataEntry.percentage > 0.5 ? `${Math.round(dataEntry.percentage)} %` : null)}
           paddingAngle={0}
-          radius={40}
+          radius={35}
           startAngle={270}
           labelStyle={{ fontSize: '5px', fontWeight: 'bold' }}
-          labelPosition={80}
+          labelPosition={112}
           onClick={(e, segmentIndex) => toolTipText(segmentIndex)}
         />
       </div>

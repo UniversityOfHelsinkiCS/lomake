@@ -21,8 +21,6 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
 
   const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
 
-  console.log(form)
-
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">
