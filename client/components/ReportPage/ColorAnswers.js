@@ -21,6 +21,8 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
 
   const showFacultyPie = form === formKeys.EVALUATION_FACULTIES
 
+  console.log(form)
+
   return (
     <div className="tab-pane" ref={componentRef}>
       <Grid className="header">
@@ -48,7 +50,7 @@ const ColorAnswers = ({ year, allAnswers, questionsList, chosenProgrammes, setAc
               checked={showEmpty}
               onChange={() => setShowEmpty(!showEmpty)}
               label={
-                form === formKeys.EVALUATION_FACULTIES || formKeys.FACULTY_MONITORING
+                form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING
                   ? t('comparison:emptyFacultyAnswers')
                   : t('comparison:emptyAnswers')
               }
