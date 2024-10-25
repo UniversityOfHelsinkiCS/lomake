@@ -11,6 +11,13 @@ export const PageItem = ({ title, content }) => (
 
 export const DateItem = ({ timestamp, t }) => {
   const date = new Date(timestamp)
+
+  // Check if the time is 00:00
+  if (date.getUTCHours() === 0 && date.getUTCMinutes() === 0) {
+    // Subtract one minute
+    date.setUTCMinutes(date.getUTCMinutes() - 1)
+  }
+
   const year = date.getUTCFullYear()
   const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
   const day = date.getUTCDate()
