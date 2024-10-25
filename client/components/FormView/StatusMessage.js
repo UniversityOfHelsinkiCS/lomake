@@ -19,6 +19,12 @@ const StatusMessage = ({ form, writeAccess = false }) => {
   const viewOnly = useSelector(state => state.form.viewOnly)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
+  if (deadlineObj.getUTCHours() === 0 && deadlineObj.getUTCMinutes() === 0) {
+    // Subtract one minute
+    deadlineObj.setUTCHours(deadlineObj.getUTCHours() - 3)
+    deadlineObj.setUTCMinutes(deadlineObj.getUTCMinutes() - 1)
+  }
+
   const locale = 'fi'
 
   if (form !== 3 && !writeAccess) {
@@ -47,7 +53,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
         data-cy="locked-form-notice"
         icon="lock"
         header={`${t('formView:status:locked')} ${showMessageForOpenYear(draftYear, writeAccess, t)}`}
-        content={`${t('formView:status:canBeOpened')} ${deadlineObj.toLocaleDateString(locale)}.`}
+        content={`${t('formView:status:canBeOpened')} ${deadlineObj.toLocaleString(locale)}.`}
       />
     )
 
@@ -56,7 +62,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
       <Message
         data-cy="saving-answers-notice"
         icon="info"
-        header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleDateString(locale)}.`}
+        header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleString(locale)}.`}
         content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}`}
       />
       {/* form === 3 && formData.data && <LastFormSentMessage /> Deprecated since sending forms is not a thing */}
