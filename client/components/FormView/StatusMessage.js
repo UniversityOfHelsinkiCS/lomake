@@ -19,7 +19,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
   const viewOnly = useSelector(state => state.form.viewOnly)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
-  if (deadlineObj.getUTCHours() === 0 && deadlineObj.getUTCMinutes() === 0) {
+  if (deadlineObj && deadlineObj.getUTCHours() === 0 && deadlineObj.getUTCMinutes() === 0) {
     // Subtract one minute
     deadlineObj.setUTCHours(deadlineObj.getUTCHours() - 2)
     deadlineObj.setUTCMinutes(deadlineObj.getUTCMinutes() - 1)
