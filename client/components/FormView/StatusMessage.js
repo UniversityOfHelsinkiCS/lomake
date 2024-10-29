@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { formKeys } from '@root/config/data'
 
 const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   if (draftYear && writeAccess) {
@@ -19,7 +20,12 @@ const StatusMessage = ({ form, writeAccess = false }) => {
   const viewOnly = useSelector(state => state.form.viewOnly)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
 
-  if (deadlineObj && deadlineObj.getUTCHours() === 0 && deadlineObj.getUTCMinutes() === 0) {
+  if (
+    form === formKeys.META_EVALUATION &&
+    deadlineObj &&
+    deadlineObj.getUTCHours() === 0 &&
+    deadlineObj.getUTCMinutes() === 0
+  ) {
     // Subtract one minute
     deadlineObj.setUTCHours(deadlineObj.getUTCHours() - 2)
     deadlineObj.setUTCMinutes(deadlineObj.getUTCMinutes() - 1)
