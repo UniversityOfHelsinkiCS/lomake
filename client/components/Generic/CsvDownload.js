@@ -222,11 +222,12 @@ const CsvDownload = ({ wantedData, view, programme, form = 1 }) => {
   const oldAnswers = allOldAnswers?.data ? allOldAnswers?.data.filter(answer => answer.form === form) : []
 
   const getAnswers = () => {
-    if (formDeadline && year === draftYear.year && tempAnswers.length > 0) {
+    const currentDraftYear = draftYear?.year
+
+    if (formDeadline && currentDraftYear && year === currentDraftYear && tempAnswers.length > 0) {
       return tempAnswers.filter(answer => answer.year === year)
     }
-
-    if ((!draftYear || year !== draftYear.year) && oldAnswers && oldAnswers?.length > 0) {
+    if ((!currentDraftYear || year !== currentDraftYear) && oldAnswers && oldAnswers?.length > 0) {
       return oldAnswers.filter(answer => answer.year === year)
     }
     return []
