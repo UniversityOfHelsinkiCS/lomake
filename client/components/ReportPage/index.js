@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Accordion, Button, Icon, Grid, Tab, Menu } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
@@ -24,6 +24,7 @@ import './ReportPage.scss'
 export default () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const history = useHistory()
   const [openQuestions, setOpenQuestions] = useState(false)
   const [filter, setFilter] = useState('')
   const [picked, setPicked] = useState([])
@@ -155,7 +156,7 @@ export default () => {
       <div className="no-print">
         <Menu secondary>
           <Menu.Item>
-            <Button as={Link} to="/yearly" icon="arrow left" size="small" />
+            <Button onClick={() => history.goBack()} icon="arrow left" size="small" />
           </Menu.Item>
           <Menu.Item>
             <h1>{t('report:reportPage')}</h1>

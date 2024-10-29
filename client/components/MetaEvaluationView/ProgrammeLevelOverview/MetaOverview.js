@@ -104,6 +104,11 @@ const MetaOverview = ({
             {t('overview:readAnswers')}
           </Button>
         </MenuItem>
+        <MenuItem>
+          <Button data-cy="nav-comparison" as={Link} to="/report?form=7" size="big">
+            {t('overview:compareAnswers')}
+          </Button>
+        </MenuItem>
         <DegreeDropdown />
         <FacultyDropdown
           t={t}
