@@ -22,8 +22,6 @@ export const DateItem = ({ timestamp, t }) => {
   const month = date.getUTCMonth() + 1 // getUTCMonth() returns 0-11
   const day = date.getUTCDate()
 
-  console.log(date)
-
   let hours = date.getUTCHours()
   if (hours.toString().length === 1) hours = `0${hours.toString()}`
   let minutes = date.getUTCMinutes()
@@ -42,7 +40,6 @@ export const FormCard = ({ item, dl, t }) => (
       <div
         style={{
           width: '150px',
-          height: '100px',
           overflow: 'hidden',
           position: 'relative',
           marginRight: '10px',
