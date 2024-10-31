@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { Container, Header, Grid, Divider, Loader, List } from 'semantic-ui-react'
@@ -75,24 +76,23 @@ const Homepage = () => {
     {
       show: false,
       title: t('metaevaluation'),
-      content: (
-        <div>
-          <p>{t('metaevaluationText')}</p>
-        </div>
-      ),
       links: ['/meta-evaluation'],
       forms: [7],
       thumbnail: powerlineImage,
       parent: t('evaluation'),
     },
     {
-      hide: true,
       show: false,
       title: t('facultymonitoring'),
       content: (
-        <div>
-          <p>{t('facultymonitoringText')}</p>
-        </div>
+        <>
+          <span>
+            <Link to="meta-evaluation">{t('metaevaluation')}</Link>
+          </span>
+          <span>
+            <p>{t('facultymonitoringText')}</p>
+          </span>
+        </>
       ),
       links: ['/faculty-monitoring'],
       forms: [8],
@@ -140,7 +140,7 @@ const Homepage = () => {
               {deadlineInfo.length > 0 ? (
                 deadlineInfo.map(dl => {
                   const item = getItem(dl.form)
-                  return !item.hide && <FormCard key={dl.form} item={item} dl={dl} t={t} />
+                  return <FormCard key={dl.form} item={item} dl={dl} t={t} />
                 })
               ) : (
                 <Header as="h3">{t('noTimesensitive')}</Header>

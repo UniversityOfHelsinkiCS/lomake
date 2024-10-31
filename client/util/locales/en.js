@@ -120,6 +120,7 @@ export default {
     overview: 'Owerview',
     startDateEndDateError: 'The start time cannot be later than the estimated end time',
     modifyLights: 'Modify lights',
+    facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
   },
 
   aboutPage: {
