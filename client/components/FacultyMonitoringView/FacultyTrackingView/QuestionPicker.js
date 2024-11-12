@@ -9,7 +9,8 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector(state => state.language)
-  const allSelectedQuestions = useSelector(({ form }) => form.data.selectedQuestionIds || [])
+  const answers = useSelector(({ form }) => form.data)
+  const allSelectedQuestions = answers.selectedQuestionIds || []
   const [sectionQuestions, setSectionQuestions] = useState([])
 
   useEffect(() => {
@@ -31,9 +32,25 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
     updateAllSelectedQuestions(newQuestion)
   }
 
+  const isFilled = question => {
+    const questionKeys = Object.keys(answers).filter(
+      key => key.startsWith(`${question.id}_`) && !key.includes('degree_radio') && !key.includes('modal'),
+    )
+    if (questionKeys.some(key => answers[key] && answers[key].length > 0)) {
+      return (
+        <>
+          <span>{`${question.index}. ${question.label[lang]}-`}</span>
+          <span style={{ color: 'green' }}>{`(${t('common:filled')})`}</span>
+        </>
+      )
+    }
+
+    return <span>{`${question.index}. ${question.label[lang]}`}</span>
+  }
+
   const dropdownOptions = questionsList.map(question => ({
     key: question.id,
-    text: `${question.index}. ${question.label[lang]}`,
+    text: isFilled(question),
     value: question.id,
   }))
 

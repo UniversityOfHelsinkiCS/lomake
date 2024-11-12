@@ -62,6 +62,7 @@ export default {
     cancel: 'Avbryt',
     edit: 'Redigera',
     delete: 'Ta bort',
+    filled: 'ifylld',
 
     yearlyAssessment: 'Årlig uppföljning',
     evaluation: 'Översynen',

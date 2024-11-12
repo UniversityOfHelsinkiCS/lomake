@@ -58,6 +58,7 @@ export default {
     cancel: 'Cancel',
     edit: 'Edit',
     delete: 'Delete',
+    filled: 'filled',
 
     yearlyAssessment: 'Annual follow-up',
     evaluation: 'Review',

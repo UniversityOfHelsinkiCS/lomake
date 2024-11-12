@@ -65,6 +65,7 @@ export default {
     cancel: 'Peruuta',
     edit: 'Muokkaa',
     delete: 'Poista',
+    filled: 'täytetty',
 
     modifyLights: 'Muokkaa valoja',
 
