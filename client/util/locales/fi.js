@@ -66,6 +66,7 @@ export default {
     edit: 'Muokkaa',
     delete: 'Poista',
     filled: 'täytetty',
+    confirmDeselect: 'Haluatko varmasti poistaa valinnan?',
 
     modifyLights: 'Muokkaa valoja',
 

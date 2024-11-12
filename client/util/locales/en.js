@@ -59,6 +59,7 @@ export default {
     edit: 'Edit',
     delete: 'Delete',
     filled: 'filled',
+    confirmDeselect: 'Are you sure you want to deselect the question?',
 
     yearlyAssessment: 'Annual follow-up',
     evaluation: 'Review',

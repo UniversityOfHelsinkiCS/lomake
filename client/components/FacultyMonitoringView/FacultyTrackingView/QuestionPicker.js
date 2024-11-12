@@ -28,6 +28,13 @@ const QuestionPicker = ({ index, label, questionsList, form }) => {
   }
 
   const handleSelectionChange = (_, { value: newQuestion }) => {
+    const deselectedQuestions = sectionQuestions.filter(id => !newQuestion.includes(id))
+    if (deselectedQuestions.length > 0) {
+      const confirmDeselect = window.confirm(t('common:confirmDeselect'))
+      if (!confirmDeselect) {
+        return
+      }
+    }
     setSectionQuestions(newQuestion)
     updateAllSelectedQuestions(newQuestion)
   }

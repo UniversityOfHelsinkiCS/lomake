@@ -63,6 +63,7 @@ export default {
     edit: 'Redigera',
     delete: 'Ta bort',
     filled: 'ifylld',
+    confirmDeselect: 'Vill du ta bort svaret?',
 
     yearlyAssessment: 'Årlig uppföljning',
     evaluation: 'Översynen',
