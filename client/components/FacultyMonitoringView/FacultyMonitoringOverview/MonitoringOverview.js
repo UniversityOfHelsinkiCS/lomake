@@ -20,7 +20,6 @@ import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomModal from 'Components/Generic/CustomModal'
 import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
-import { getAnswersActionAll } from 'Utilities/redux/oldAnswersReducer'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import Square from 'Components/Generic/Square'
 import ModalAnswer from './ModalAnswer'
@@ -53,7 +52,6 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   useEffect(() => {
     setRadioFilter('all')
     dispatch(getAllTempAnswersAction())
-    dispatch(getAnswersActionAll())
   }, [selectedLevel])
 
   if (!answers) return <Loader active />
@@ -117,6 +115,8 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
 
   const getFacultySummarySectionData = (section, faculty) => {
     const answer = answers.find(a => a.programme === faculty)
+
+    console.log(answer)
 
     if (answer && answer.data.selectedQuestionIds) {
       const questionIds = section.parts.map(part => part.id)

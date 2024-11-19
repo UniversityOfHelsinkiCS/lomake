@@ -38,17 +38,19 @@ const getAllTempUserHasAccessTo = async (req, res) => {
     const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
 
     // normal user route
+    const awaitYear = await whereDraftYear()
     const anyAccess = hasAnyAccess(req.user)
     const data = await db.tempAnswer.findAll({
       where: {
-        year: await whereDraftYear(),
+        year: awaitYear,
         [Op.or]: [
           { programme: Object.keys(req.user.access).concat(finalCommitee) },
-          anyAccess ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES] } : {},
+          anyAccess
+            ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES, formKeys.FACULTY_MONITORING] }
+            : {},
         ],
       },
     })
-
     return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
