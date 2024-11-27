@@ -5,48 +5,45 @@ import { useSelector } from 'react-redux'
 import './Generic.scss'
 import { formKeys } from '@root/config/data'
 
+const LegendItem = ({ colorClass, text }) => (
+  <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className={colorClass} />
+    {text}
+  </div>
+)
+
 const ColorLegend = () => {
   const { t } = useTranslation()
   const form = useSelector(({ filters }) => filters.form)
 
-  if (form === formKeys.META_EVALUATION) {
-    return (
-      <Segment>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div className="big-circle-red" />
-          {t('urgent')}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div className="big-circle-yellow" />
-          {t('semiUrgent')}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div className="big-circle-green" />
-          {t('nonUrgent')}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div className="big-circle-gray" />
-          {t('irrelevant')}
-        </div>
-      </Segment>
-    )
+  const legends = {
+    [formKeys.FACULTY_MONITORING]: [
+      { colorClass: 'big-circle-red', text: t('facultyTracking:red') },
+      { colorClass: 'big-circle-yellow', text: t('facultyTracking:yellow') },
+      { colorClass: 'big-circle-green', text: t('facultyTracking:green') },
+    ],
+    [formKeys.META_EVALUATION]: [
+      { colorClass: 'big-circle-red', text: t('urgent') },
+      { colorClass: 'big-circle-yellow', text: t('semiUrgent') },
+      { colorClass: 'big-circle-green', text: t('nonUrgent') },
+      { colorClass: 'big-circle-gray', text: t('irrelevant') },
+    ],
+    default: [
+      { colorClass: 'big-circle-green', text: t('positive') },
+      { colorClass: 'big-circle-yellow', text: t('neutral') },
+      { colorClass: 'big-circle-red', text: t('negative') },
+      { colorClass: 'big-circle-gray', text: t('EMPTY') },
+    ],
   }
 
+  const selectedLegends = legends[form] || legends.default
+
   return (
-    <Segment compact textAlign="left">
-      <p>
-        <span className="answer-circle-green" /> {t('positive')}
-      </p>
-      <p>
-        <span className="answer-circle-yellow" /> {t('neutral')}
-      </p>
-      <p>
-        <span className="answer-circle-red" /> {t('negative')}
-      </p>
-      <p>
-        <span className="answer-circle-gray" /> {t('EMPTY')}
-      </p>
-      <p className="report-side-note">{t('noColors')}</p>
+    <Segment compact={form !== formKeys.FACULTY_MONITORING && form !== formKeys.META_EVALUATION} textAlign="left">
+      {selectedLegends.map(({ colorClass, text }) => (
+        <LegendItem colorClass={colorClass} text={text} />
+      ))}
+      {form === undefined && <p className="report-side-note">{t('noColors')}</p>}
     </Segment>
   )
 }
