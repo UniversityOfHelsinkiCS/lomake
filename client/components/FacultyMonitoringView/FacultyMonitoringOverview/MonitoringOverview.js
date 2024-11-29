@@ -116,8 +116,6 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   const getFacultySummarySectionData = (section, faculty) => {
     const answer = answers.find(a => a.programme === faculty)
 
-    console.log(answer)
-
     if (answer && answer.data.selectedQuestionIds) {
       const questionIds = section.parts.map(part => part.id)
 
