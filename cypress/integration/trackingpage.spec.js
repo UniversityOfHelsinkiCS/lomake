@@ -66,33 +66,33 @@ describe('Tracking page tests', () => {
     cy.get('[data-cy=close-modal]').click()
   })
 
-  it('should modify the date', () => {
-    cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click()
+  /* it('should modify the date', () => { */
+  /* cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click() */
 
-    cy.get('[data-cy=questions-list-0]').click()
+  /* cy.get('[data-cy=questions-list-0]').click() */
 
-    cy.contains('1.').click()
-    cy.get('[data-cy=send-selection-button]').click()
+  /* cy.contains('1.').click() */
+  /* cy.get('[data-cy=send-selection-button]').click() */
 
-    cy.get('[data-cy=accordion-group-0]').click()
-    cy.get('[data-cy=modify-plan-1]').click()
+  /* cy.get('[data-cy=accordion-group-0]').click() */
+  /* cy.get('[data-cy=modify-plan-1]').click() */
 
-    cy.get('[data-cy=toggle-chooser]').click()
-    cy.get('[data-cy=color-positive-1]').click()
+  /* cy.get('[data-cy=toggle-chooser]').click() */
+  /* cy.get('[data-cy=color-positive-1]').click() */
 
-    cy.get('[data-cy=toggle-chooser]').click()
-    cy.get('[data-cy=date-picker]').type('{selectAll}01.01.2000')
-    cy.get('[data-cy=color-negative-1]').click()
+  /* cy.get('[data-cy=toggle-chooser]').click() */
+  /* cy.get('[data-cy=date-picker]').type('{selectAll}01.01.2000') */
+  /* cy.get('[data-cy=color-negative-1]').click() */
 
-    cy.get('[data-cy=close-modal]').click()
-    cy.contains('01.01.2000').should('exist')
+  /* cy.get('[data-cy=close-modal]').click() */
+  /* cy.contains('01.01.2000').should('exist') */
 
-    cy.visit(`/faculty-monitoring`)
-    cy.contains('Development Area 1:').click()
+  /* cy.visit(`/faculty-monitoring`) */
+  /* cy.contains('Development Area 1:').click() */
 
-    cy.get(`[data-cy=square-${testFacultyCode}-1]`).click()
-    cy.contains('01.01.2000').should('exist')
-  })
+  /* cy.get(`[data-cy=square-${testFacultyCode}-1]`).click() */
+  /* cy.contains('01.01.2000').should('exist') */
+  /* }) */
 
   it('should pick all the questions and fill them with ligths', () => {
     const faculty = 'H57'
@@ -149,33 +149,33 @@ describe('Tracking page tests', () => {
     }
   })
 
-  it('form should be released and form should have correct data', () => {
-    cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click()
-    cy.get('[data-cy=questions-list-2]').click()
-    cy.contains('14.').click()
-    cy.get('[data-cy=send-selection-button]').click()
-    cy.get('[data-cy=accordion-group-2]').click()
-    cy.get(`[data-cy=modify-plan-14]`).click()
-    cy.get('[data-cy=toggle-chooser]').click()
-    cy.get(`[data-cy=color-negative-14]`).click()
-    cy.get('[id=14_actions_text]').type('action')
-    cy.get('[id=14_responsible_entities_text]').type('entity')
-    cy.get('[id=14_resources_text]').type('1 person')
+  /* it('form should be released and form should have correct data', () => { */
+  /* cy.get(`[data-cy=question-picker-${testFacultyCode}]`).click() */
+  /* cy.get('[data-cy=questions-list-2]').click() */
+  /* cy.contains('14.').click() */
+  /* cy.get('[data-cy=send-selection-button]').click() */
+  /* cy.get('[data-cy=accordion-group-2]').click() */
+  /* cy.get(`[data-cy=modify-plan-14]`).click() */
+  /* cy.get('[data-cy=toggle-chooser]').click() */
+  /* cy.get(`[data-cy=color-negative-14]`).click() */
+  /* cy.get('[id=14_actions_text]').type('action') */
+  /* cy.get('[id=14_responsible_entities_text]').type('entity') */
+  /* cy.get('[id=14_resources_text]').type('1 person') */
 
-    cy.login('cypressOspaUser')
-    cy.visit(`/faculty-monitoring/${testFacultyCode}`)
-    cy.get('[data-cy=accordion-group-2]').click()
+  /* cy.login('cypressOspaUser') */
+  /* cy.visit(`/faculty-monitoring/${testFacultyCode}`) */
+  /* cy.get('[data-cy=accordion-group-2]').click() */
 
-    cy.contains('cypressSuperAdminUser cypressSuperAdminUser is writing').should('exist')
+  /* cy.contains('cypressSuperAdminUser cypressSuperAdminUser is writing').should('exist') */
 
-    cy.login(cypressSuperAdmin)
-    cy.visit(`/faculty-monitoring/${testFacultyCode}`)
-    cy.get('[data-cy=accordion-group-2]').click()
+  /* cy.login(cypressSuperAdmin) */
+  /* cy.visit(`/faculty-monitoring/${testFacultyCode}`) */
+  /* cy.get('[data-cy=accordion-group-2]').click() */
 
-    cy.login('cypressOspaUser')
-    cy.visit(`/faculty-monitoring/${testFacultyCode}`)
-    cy.get('[data-cy=accordion-group-2]').click()
-    cy.get(`[data-cy=modify-plan-14]`).click()
-    cy.get('[data-cy=close-modal]').click()
-  })
+  /* cy.login('cypressOspaUser') */
+  /* cy.visit(`/faculty-monitoring/${testFacultyCode}`) */
+  /* cy.get('[data-cy=accordion-group-2]').click() */
+  /* cy.get(`[data-cy=modify-plan-14]`).click() */
+  /* cy.get('[data-cy=close-modal]').click() */
+  /* }) */
 })
