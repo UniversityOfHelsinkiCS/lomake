@@ -1,4 +1,4 @@
-import { testFacultyCode, testFacultyName } from '../../config/common'
+import { testFacultyCode, testFacultyName, defaultYears } from '../../config/common'
 
 describe('Tracking page tests', () => {
   const cypressSuperAdmin = 'cypressSuperAdminUser'
@@ -7,8 +7,8 @@ describe('Tracking page tests', () => {
     cy.login(cypressSuperAdmin)
     cy.visit(`/admin`)
     cy.contains('Deadline settings').click()
-    cy.createDeadline(2024, 'Toimenpiteiden toteutus ja seuranta tiedekunnissa')
-    cy.get('[data-cy=form-8-deadline]').contains('2024')
+    cy.createDeadline(defaultYears[0], 'Toimenpiteiden toteutus ja seuranta tiedekunnissa')
+    cy.get('[data-cy=form-8-deadline]').contains('14.')
     cy.visit(`/faculty-monitoring/${testFacultyCode}`)
   })
 

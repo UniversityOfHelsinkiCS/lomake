@@ -1,3 +1,5 @@
+import { defaultYears } from '../../config/common'
+
 describe('homepage tests', () => {
   beforeEach(() => {
     const ospaUser = 'cypressOspaUser'
@@ -18,8 +20,8 @@ describe('homepage tests', () => {
 
     cy.contains('Deadline settings').click()
 
-    cy.createDeadline(2024, 'Vuosiseuranta')
-    cy.get('[data-cy=form-1-deadline]').contains('2024')
+    cy.createDeadline(defaultYears[0], 'Vuosiseuranta')
+    cy.get('[data-cy=form-1-deadline]').contains('14.')
 
     cy.visit('/')
 

@@ -5,6 +5,7 @@ import {
   testProgrammeName,
   testProgrammeCodeDoctor,
   testProgrammeNameDoctor,
+  defaultYears,
 } from '../../config/common'
 
 describe('Meta evaluation form & overview tests', () => {
@@ -67,8 +68,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(2024, 'Katselmus - toimeenpano')
-      cy.get('[data-cy=form-7-deadline]').contains('2024')
+      cy.createDeadline(defaultYears[0], 'Katselmus - toimeenpano')
+      cy.get('[data-cy=form-7-deadline]').contains('14.')
 
       cy.login(cypressOspa)
       cy.visit('/')
@@ -115,8 +116,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get('[data-cy=nav-admin]').click()
       cy.contains('Deadline settings').click()
 
-      cy.createDeadline(2024, 'Katselmus - toimeenpano')
-      cy.get('[data-cy=form-7-deadline]').contains('2024')
+      cy.createDeadline(defaultYears[0], 'Katselmus - toimeenpano')
+      cy.get('[data-cy=form-7-deadline]').contains('14.')
 
       cy.visit(`/meta-evaluation/form/7/${testProgrammeCodeDoctor}`)
       cy.typeInEditor('T1', '2345')
