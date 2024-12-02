@@ -9,7 +9,7 @@ const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_
 
 const whereDraftYear = async () => {
   const draftYears = await db.draftYear.findAll({})
-  const draftYear = draftYears.length ? draftYears[0].year : null
+  const draftYear = draftYears.length ? draftYears[0].year : new Date().getFullYear()
   return draftYear || { [Op.is]: null }
 }
 
