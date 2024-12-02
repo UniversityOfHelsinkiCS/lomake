@@ -15,6 +15,7 @@ import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import './FacultyTrackingView.scss'
+import * as deadline from '@models/deadline'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
@@ -31,6 +32,8 @@ const FacultyTrackingView = ({ faculty }) => {
   const [activeAccordions, setActiveAccordions] = useState({})
   const viewOnly = useSelector(({ form }) => form.viewOnly)
   const selectedLevel = useSelector(({ filters }) => filters.level)
+  const { nextDeadline } = useSelector(state => state.deadlines)
+  const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
 
   const hasReadRights = user.access[faculty]?.read || user.specialGroup?.evaluationFaculty || isAdmin(user)
   const hasWriteRights = (user.access[faculty]?.write && user.specialGroup?.evaluationFaculty) || isAdmin(user)
@@ -44,7 +47,7 @@ const FacultyTrackingView = ({ faculty }) => {
     if (!faculty || !form || !hasReadRights) return
     dispatch(getTempAnswersByForm(form))
 
-    if (!hasWriteRights) {
+    if (!hasWriteRights || !formDeadline) {
       dispatch(wsJoinRoom(faculty, form))
       dispatch(setViewOnly(true))
       if (currentRoom) {
