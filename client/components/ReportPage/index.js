@@ -43,8 +43,16 @@ export default () => {
     year,
     tempAnswers: answers,
     oldAnswers,
-    draftYear: draftYear && draftYear.year,
-    deadline: nextDeadline,
+    ...(filters.form === formKeys.FACULTY_MONITORING
+      ? {
+          // faculty monitoring is designed to be always ongoing but the form may be closed at times, hence this current year fallback
+          draftYear: draftYear?.year ?? new Date().getFullYear(),
+          deadline: nextDeadline ?? new Date(),
+        }
+      : {
+          draftYear: draftYear?.year,
+          deadline: nextDeadline,
+        }),
     form: filters.form,
   })
 
