@@ -43,8 +43,8 @@ export default () => {
     year,
     tempAnswers: answers,
     oldAnswers,
-    draftYear: draftYear?.year ?? new Date().getFullYear(),
-    deadline: nextDeadline ?? new Date(),
+    draftYear: draftYear && draftYear.year,
+    deadline: nextDeadline,
     form: filters.form,
   })
 
