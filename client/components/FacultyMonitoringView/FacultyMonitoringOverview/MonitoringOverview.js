@@ -19,7 +19,8 @@ import { Link } from 'react-router-dom'
 import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomModal from 'Components/Generic/CustomModal'
-import { getAllTempAnswersAction } from 'Utilities/redux/tempAnswersReducer'
+import { formKeys } from '@root/config/data'
+import { getAllTempAnswersAction, getTempAnswersAfterDeadline } from 'Utilities/redux/tempAnswersReducer'
 import { facultyMonitoringQuestions as questions } from '@root/client/questionData/index'
 import Square from 'Components/Generic/Square'
 import ModalAnswer from './ModalAnswer'
@@ -33,6 +34,7 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   const [accordion, setAccordion] = useState(false)
   const selectedLevel = useSelector(({ filters }) => filters.level)
   const [showAll, setShowAll] = useState(false)
+  const year = 2024
 
   const questionLevel = selectedLevel === 'doctoral' ? 'doctoral' : 'kandimaisteri'
   const questionData = questions.filter(q => q.level === questionLevel)
@@ -52,6 +54,9 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
   useEffect(() => {
     setRadioFilter('all')
     dispatch(getAllTempAnswersAction())
+    if (!answers) {
+      dispatch(getTempAnswersAfterDeadline(formKeys.FACULTY_MONITORING, year))
+    }
   }, [selectedLevel])
 
   if (!answers) return <Loader active />
