@@ -8,6 +8,7 @@ import useDebounce from 'Utilities/useDebounce'
 import CsvDownload from 'Components/Generic/CsvDownload'
 import CustomModal from 'Components/Generic/CustomModal'
 import { basePath } from '@root/config/common'
+import YearSelector from 'Components/Generic/YearSelector'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
 import ProgramControlsContent from '../../OverviewPage/ProgramControlsContent'
@@ -108,6 +109,9 @@ const MetaOverview = ({
           <Button data-cy="nav-comparison" as={Link} to="/report?form=7" size="big">
             {t('overview:compareAnswers')}
           </Button>
+        </MenuItem>
+        <MenuItem>
+          <YearSelector size="extra-small" />
         </MenuItem>
         <DegreeDropdown />
         <FacultyDropdown

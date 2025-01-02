@@ -32,7 +32,7 @@ describe('Evaluation forms tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
-    cy.contains(`Review ${defaultYears[1]}`)
+    cy.contains(`Review ${defaultYears[2]}`)
   })
 
   it('User can navigate to evaluation faculty level form', () => {
@@ -41,7 +41,7 @@ describe('Evaluation forms tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testFacultyCode}]`).click()
 
     cy.contains(testFacultyName)
-    cy.contains(`Review ${defaultYears[1]}`)
+    cy.contains(`Review ${defaultYears[2]}`)
   })
 
   it("Programme level user can see summary of previous years' answers", () => {

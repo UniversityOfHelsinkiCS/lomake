@@ -27,13 +27,9 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     // admin route
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
-      const currentYear = await whereDraftYear()
-      const previousYear = currentYear - 1
       const data = await db.tempAnswer.findAll({
         where: {
-          year: {
-            [Op.or]: [currentYear, previousYear],
-          },
+          year: await whereDraftYear(),
         },
       })
       return res.send(data)

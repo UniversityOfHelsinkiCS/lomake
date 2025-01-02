@@ -28,7 +28,7 @@ const ProgrammeLevelForm = ({ room }) => {
   const user = useSelector(state => state.currentUser.data)
   const currentRoom = useSelector(state => state.room)
   const programme = useSelector(state => state.studyProgrammes.singleProgram)
-  const year = 2024
+  const year = useSelector(({ filters }) => filters.year)
   const { draftYear, nextDeadline } = useSelector(state => state.deadlines)
   const formDeadline = nextDeadline ? nextDeadline.find(d => d.form === form) : null
   const viewingOldAnswers = useSelector(state => state.form.viewingOldAnswers)

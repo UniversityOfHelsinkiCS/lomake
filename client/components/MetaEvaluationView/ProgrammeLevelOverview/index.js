@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useVisibleOverviewProgrammes } from 'Utilities/overview'
 import NoPermissions from 'Components/Generic/NoPermissions'
 import { formKeys } from '@root/config/data'
-import { setLevel, setYear } from 'Utilities/redux/filterReducer'
+import { setLevel } from 'Utilities/redux/filterReducer'
 import MetaOverview from './MetaOverview'
 
 const ProgrammeLevelOverview = () => {
@@ -38,7 +38,6 @@ const ProgrammeLevelOverview = () => {
 
   useEffect(() => {
     document.title = `${t('metaevaluation')}`
-    dispatch(setYear(2024))
     if (filteredProgrammes.length === 0 && selectedLevel !== 'doctoral') {
       dispatch(setLevel('doctoral'))
     }

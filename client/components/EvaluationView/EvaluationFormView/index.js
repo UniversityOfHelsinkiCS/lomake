@@ -39,10 +39,11 @@ const handleMeasures = (yearData, relatedQuestion) => {
 }
 
 const findAnswers = (allOldAnswers, relatedQuestion) => {
-  const years = [2021, 2022, 2023]
+  const years = [2021, 2022, 2023, 2024]
   const result = {}
+  const validOldAnswers = allOldAnswers.filter(a => a !== null)
   years.forEach(year => {
-    const yearData = allOldAnswers.find(a => a.year === year)
+    const yearData = validOldAnswers.find(a => a.year === year)
     if (!yearData) {
       result[year] = { text: null, light: null }
       if (relatedQuestion.includes('measure')) {
@@ -76,9 +77,9 @@ const EvaluationFormView = ({ room, formString }) => {
   const viewingOldAnswers = false // no old asnwers to watch
   const summaries = useSelector(state => state.summaries)
 
-  const formDeadline = nextDeadline ? nextDeadline.find(dl => dl.form === form) : null
+  const formDeadline = nextDeadline && Array.isArray(nextDeadline) ? nextDeadline.find(dl => dl.form === form) : null
 
-  const year = getYearToShow({ draftYear, nextDeadline, form })
+  const year = getYearToShow({ draftYear, nextDeadline, form }) || new Date().getFullYear()
 
   const faculty = programme?.primaryFaculty?.code || ''
   const summaryURL = `/evaluation/previous-years/${room}`

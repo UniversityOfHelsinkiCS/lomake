@@ -23,7 +23,7 @@ describe('Meta evaluation form & overview tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
-    cy.contains(`Review 2024`)
+    cy.contains(`Review ${defaultYears[0]}`)
   })
 
   it('should open meta evaluation form with doctoral degree', () => {
@@ -34,7 +34,7 @@ describe('Meta evaluation form & overview tests', () => {
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCodeDoctor}]`).click()
 
     cy.contains(testProgrammeNameDoctor)
-    cy.contains(`Review 2024`)
+    cy.contains(`Review ${defaultYears[0]}`)
   })
 
   it('should open dropdown and select faculty', () => {
