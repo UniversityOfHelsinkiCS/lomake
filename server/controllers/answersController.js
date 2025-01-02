@@ -27,9 +27,13 @@ const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     // admin route
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
+      const currentYear = await whereDraftYear()
+      const previousYear = currentYear - 1
       const data = await db.tempAnswer.findAll({
         where: {
-          year: await whereDraftYear(),
+          year: {
+            [Op.or]: [currentYear, previousYear],
+          },
         },
       })
       return res.send(data)
@@ -202,7 +206,7 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    let years = [2019, 2020, 2021, 2022, 2023, 2024]
+    let years = [2019, 2020, 2021, 2022, 2023, 2024, 2025]
     if (!req.path.endsWith('/all')) {
       years = [new Date().getFullYear()]
     }
