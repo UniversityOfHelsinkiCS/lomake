@@ -15,7 +15,6 @@ import Answer from './Answer'
 import QuestionPicker from './QuestionPicker'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import './FacultyTrackingView.scss'
-import * as deadline from '@models/deadline'
 
 const FacultyTrackingView = ({ faculty }) => {
   const { t } = useTranslation()
