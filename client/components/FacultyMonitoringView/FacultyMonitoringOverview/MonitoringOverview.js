@@ -51,15 +51,13 @@ const MonitoringOverview = ({ t, lang, faculties }) => {
     [faculties, lang],
   )
 
+  // hard coded for this form to get year 2024 answers
   useEffect(() => {
     setRadioFilter('all')
-    dispatch(getAllTempAnswersAction())
-    if (!answers) {
-      dispatch(getTempAnswersAfterDeadline(formKeys.FACULTY_MONITORING, year))
-    }
+    dispatch(getTempAnswersAfterDeadline(formKeys.FACULTY_MONITORING, year))
   }, [selectedLevel])
 
-  if (!answers) return <Loader active />
+  if (!answers || !faculties) return <Loader active />
 
   const getAnswer = (part, faculty) => {
     const answer = answers.find(a => a.programme === faculty)

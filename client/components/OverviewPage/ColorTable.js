@@ -123,7 +123,7 @@ const ColorTable = React.memo(
 
     useEffect(() => {
       dispatch(getAllTempAnswersAction())
-      if (form !== formKeys.META_EVALUATION) dispatch(getAnswersActionAll())
+      dispatch(getAnswersActionAll())
       if (isAdmin(currentUser)) dispatch(getProgrammeOwners())
     }, [])
 

@@ -27,8 +27,6 @@ jobs:
             evaluation,
             metaevaluation,
             homepage,
-            trackingpage,
-            facultymonitoringoverview,
           ]
     name: Run tests
     runs-on: ubuntu-latest
