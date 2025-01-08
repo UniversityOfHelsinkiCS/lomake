@@ -78,25 +78,25 @@ const deleteAllComments = async (req, res) => {
     }
 }
 
-const createMeasures = async (req, res) => {
+const createActions = async (req, res) => {
     try {
-        return res.status(200).json("Measures created successfully")
+        return res.status(200).json("Actions created successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const getMeasures = async (req, res) => {
+const getActions = async (req, res) => {
     try {
-        return res.status(200).json("Measures fetched successfully")
+        return res.status(200).json("Actions fetched successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const updateMeasures = async (req, res) => {
+const updateActions = async (req, res) => {
     try {
         return res.status(200).json("Comment updated successfully")
     } catch (error) {
@@ -105,7 +105,7 @@ const updateMeasures = async (req, res) => {
     }
 }
 
-const deleteMeasures = async (req, res) => {
+const deleteActions = async (req, res) => {
     try {
         return res.status(200).json("Comment deleted successfully")
     } catch (error) {
@@ -123,8 +123,8 @@ module.exports = {
     updateComment,
     deleteComment,
     deleteAllComments,
-    createMeasures,
-    getMeasures,
-    updateMeasures,
-    deleteMeasures
+    createActions,
+    getActions,
+    updateActions,
+    deleteActions
 }

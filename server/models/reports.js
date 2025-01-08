@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             studyprogrammeId: DataTypes.INTEGER,
             year: DataTypes.INTEGER,
             comments: DataTypes.JSONB,
-            measures: DataTypes.JSONB,
+            actions: DataTypes.JSONB,
         },
         {
             underscored: true,
