@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
         'comments',
         {
             studyprogrammeId: DataTypes.INTEGER,
-            keyMetric: DataTypes.STRING, // avainluku
             content: DataTypes.JSONB,
             lastEditedBy: DataTypes.INTEGER, // User id 
         },
