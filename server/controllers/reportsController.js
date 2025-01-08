@@ -33,6 +33,15 @@ const updateReport = async (req, res) => {
     }
 }
 
+const deleteReport = async (req, res) => {
+    try {
+        return res.status(200).json("Report deleted successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
+
 const createComments = async (req, res) => {
     try {
         return res.status(200).json("Comment created successfully")
@@ -109,6 +118,7 @@ module.exports = {
     createReport,
     getReport,
     updateReport,
+    deleteReport,
     createComments,
     getComments,
     updateComments,
