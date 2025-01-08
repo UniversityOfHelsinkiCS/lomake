@@ -33,7 +33,7 @@ const updateReport = async (req, res) => {
     }
 }
 
-const createComment = async (req, res) => {
+const createComments = async (req, res) => {
     try {
         return res.status(200).json("Comment created successfully")
     } catch (error) {
@@ -42,7 +42,7 @@ const createComment = async (req, res) => {
     }
 }
 
-const getComment = async (req, res) => {
+const getComments = async (req, res) => {
     try {
         return res.status(200).json("Comment fetched successfully")
     } catch (error) {
@@ -51,7 +51,7 @@ const getComment = async (req, res) => {
     }
 }
 
-const updateComment = async (req, res) => {
+const updateComments = async (req, res) => {
     try {
         return res.status(200).json("Comment updated successfully")
     } catch (error) {
@@ -60,18 +60,9 @@ const updateComment = async (req, res) => {
     }
 }
 
-const deleteComment = async (req, res) => {
+const deleteComments = async (req, res) => {
     try {
         return res.status(200).json("Comment deleted successfully")
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
-
-const deleteAllComments = async (req, res) => {
-    try {
-        return res.status(200).json("All comments deleted successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -118,11 +109,10 @@ module.exports = {
     createReport,
     getReport,
     updateReport,
-    createComment,
-    getComment,
-    updateComment,
-    deleteComment,
-    deleteAllComments,
+    createComments,
+    getComments,
+    updateComments,
+    deleteComments,
     createActions,
     getActions,
     updateActions,
