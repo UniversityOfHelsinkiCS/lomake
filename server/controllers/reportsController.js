@@ -5,28 +5,55 @@ const moment = require('moment')
 const { getFormType } = require('@util/common')
 const { seed } = require('../scripts/seed')
 
-const create = async (req, res) => {
+const createReport = async (req, res) => {
     try {
-        const data = await db.comments.create({})
-        return res.status(200).json(data)
+        // const data = await db.report.create({})
+        return res.status(200).json("Report created successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const get = async (_, res) => {
+const getReport = async (req, res) => {
     try {
-
+        return res.status(200).json("Report fetched successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const update = async (req, res) => {
+const getAllReports = async (req, res) => {
     try {
+        return res.status(200).json("Reports fetched successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
 
+const updateComment = async (req, res) => {
+    try {
+        return res.status(200).json("Comment updated successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
+
+const deleteComment = async (req, res) => {
+    try {
+        return res.status(200).json("Comment deleted successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
+
+const deleteAllComments = async (req, res) => {
+    try {
+        return res.status(200).json("All comments deleted successfully")
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -34,3 +61,20 @@ const update = async (req, res) => {
 }
 
 
+const updateMeasures = async (req, res) => {
+    try {
+        return res.status(200).json("Comment updated successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
+
+const deleteMeasures = async (req, res) => {
+    try {
+        return res.status(200).json("Comment deleted successfully")
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
