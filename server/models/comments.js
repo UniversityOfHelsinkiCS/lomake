@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
     comments.associate = models => {
         // sutdyprogramme has a set of comments
-        comments.belongsTo(models.studyprogram, {
+        comments.belongsTo(models.studyprogramme, {
             foreignKey: 'studyprogrammeId',
             as: 'associatedStudyprogramme',
         })
