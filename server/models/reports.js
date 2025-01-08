@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     )
 
     report.associate = models => {
-        // sutdyprogramme has a set of report
         report.belongsTo(models.studyprogramme, {
             foreignKey: 'studyprogrammeId',
             as: 'associatedStudyprogramme',
