@@ -7,6 +7,7 @@ const cypress = require('@controllers/cypressController')
 const faculties = require('@controllers/facultyController')
 const degreeReform = require('@controllers/degreeReformController')
 const locks = require('@controllers/lockController')
+const reports = require('@controllers/reportsController')
 const {
   checkAdmin,
   requireProgrammeRead,
@@ -65,6 +66,18 @@ router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)
 router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculties.getAll)
+
+router.post('/reports/:programme/', reports.createReport)
+router.get('/reports/:programme/', reports.getReport)
+router.put('/reports/:programme/', reports.updateReport)
+router.post('/reports/:programme/comments/', reports.createComment)
+router.get('/reports/:programme/comments/', reports.getComments)
+router.put('/reports/:programme/comments/', reports.updateComment)
+router.delete('/reports/:programme/comments/', reports.deleteComment)
+router.post('/reports/:programme/measures/', reports.createMeasures)
+router.get('/reports/:programme/measures/', reports.getMeasures)
+router.put('/reports/:programme/measures/', reports.updateMeasures)
+router.delete('/reports/:programme/measures/', reports.deleteMeasures)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
