@@ -489,6 +489,11 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
     return tempAnswers?.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
+  if (form === formKeys.FACULTY_MONITORING) {
+    console.log(tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form))
+    return tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
+  }
+
   // if viewing past years' answers
   if (draftYear !== year && oldAnswers && oldAnswers.data) {
     return oldAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
