@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         'report',
         {
             studyprogrammeId: DataTypes.INTEGER,
-            year: DataTypes.DATE,
+            year: DataTypes.INTEGER,
             comments: DataTypes.JSONB,
             measures: DataTypes.JSONB,
         },
