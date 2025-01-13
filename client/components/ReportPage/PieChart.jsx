@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { PieChart as Chart } from 'react-minimal-pie-chart'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useTranslation } from 'react-i18next'
-import { colors } from 'Utilities/common'
-import { formKeys } from '@root/config/data'
-import CustomModal from 'Components/Generic/CustomModal'
+import { colors } from '../../util/common'
+import { formKeys } from '../../config/data'
+import CustomModal from '../Generic/CustomModal'
 
 export default ({
   question,
