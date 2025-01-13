@@ -67,7 +67,7 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculties.getAll)
 
-router.post('/reports/:studyProgrammeId/', reports.createReport)
+router.post('/reports/', reports.createReport)
 router.get('/reports/:studyProgrammeId/', reports.getReport)
 router.put('/reports/:studyProgrammeId/', reports.updateReport)
 router.delete('/reports/:studyProgrammeId/', reports.deleteReport)
