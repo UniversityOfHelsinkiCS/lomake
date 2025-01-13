@@ -4,7 +4,7 @@ import { Loader, Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 import { sortedItems, answersByYear } from '../../../util/common'
-import { getTempAnswersAfterDeadline, getAllTempAnswersAction } from '../../util/redux/tempAnswersReducer'
+import { getTempAnswersAfterDeadline, getAllTempAnswersAction } from '../../../util/redux/tempAnswersReducer'
 import { setYear } from '../../../util/redux/filterReducer'
 import TableHeader from '../../OverviewPage/TableHeader'
 import TableRow from './FacultyTableRow'

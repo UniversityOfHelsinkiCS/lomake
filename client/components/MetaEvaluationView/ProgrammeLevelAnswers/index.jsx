@@ -9,14 +9,12 @@ import {
   answersByQuestions,
   filterFromUrl,
   filterUserProgrammes,
-  kludge,
   getLabel,
 } from '../../../util/common'
 import { setQuestions } from '../../../util/redux/filterReducer'
 import WrittenAnswers from '../../ReportPage/WrittenAnswers'
 import { formKeys } from '../../../../config/data'
 import useDebounce from '../../../util/useDebounce'
-import { setDoctoral } from '../../../util/redux/doctoralReducer'
 import { basePath } from '../../../../config/common'
 import FacultyDropdown from '../ProgrammeLevelOverview/FacultyDropdown'
 import DegreeDropdown from '../ProgrammeLevelOverview/DegreeDropdown'

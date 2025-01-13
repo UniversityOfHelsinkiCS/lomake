@@ -256,4 +256,4 @@ const createFacultyAnswers = async (req, res) => {
   }
 }
 
-export default { seed, createAnswers }
+export default { seed, createAnswers, createFacultyAnswers }

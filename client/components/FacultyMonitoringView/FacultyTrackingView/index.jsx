@@ -3,7 +3,7 @@ import { Menu, MenuItem, Button, Header, Accordion, Icon } from 'semantic-ui-rea
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { isAdmin } from '../../../config/common'
+import { isAdmin } from '../../../../config/common'
 import NoPermissions from '../../Generic/NoPermissions'
 import CustomModal from '../../Generic/CustomModal'
 import { facultyMonitoringQuestions as questions } from '../../../questionData/index'
