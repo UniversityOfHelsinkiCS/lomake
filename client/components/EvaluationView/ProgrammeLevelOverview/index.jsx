@@ -44,7 +44,7 @@ export default () => {
   useEffect(() => {
     document.title = `${t('evaluation')}`
   }, [lang])
-
+ 
   const handleFilterChange = ({ target }) => {
     const { value } = target
     setFilter(value)

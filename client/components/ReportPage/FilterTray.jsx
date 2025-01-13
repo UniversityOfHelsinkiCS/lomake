@@ -8,7 +8,7 @@ import FacultyFilter from '../../Generic/FacultyFilter'
 import ProgrammeFilter from '../../Generic/ProgrammeFilter'
 import { useTranslation } from 'react-i18next'
 import '../Generic/Generic.scss'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const getCompanionFilter = ({ faculty, level }) => {
   if (faculty[0] !== 'allFaculties' && (level === 'doctoral' || level === 'master' || level === 'bachelor'))

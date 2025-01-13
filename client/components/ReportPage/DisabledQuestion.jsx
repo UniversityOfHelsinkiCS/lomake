@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
 import { romanize } from '../../util/common'
 import { useSelector } from 'react-redux'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const DisabledQuestion = ({ question, chosenProgrammes }) => {
   const form = useSelector(({ filters }) => filters.form)

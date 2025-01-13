@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../../config/data'
 import { Loader } from 'semantic-ui-react'
-import { isAdmin } from '@root/config/common'
-import NoPermissions from 'Components/Generic/NoPermissions'
+import { isAdmin } from '../../../../config/common'
+import NoPermissions from '../../Generic/NoPermissions' 
 import MonitoringOverview from './MonitoringOverview'
 
 const FacultyMonitoringOverview = () => {

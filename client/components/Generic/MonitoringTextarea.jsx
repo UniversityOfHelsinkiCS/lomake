@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFormField } from 'Utilities/redux/formReducer'
+import { updateFormField } from '../../util/redux/formReducer'
 import { FormInput, FormTextArea } from 'semantic-ui-react'
 import './Generic.scss'
 

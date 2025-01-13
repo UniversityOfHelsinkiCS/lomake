@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const showMessageForOpenYear = (draftYear, writeAccess, t) => {
   if (draftYear && writeAccess) {

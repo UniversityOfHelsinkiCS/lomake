@@ -3,7 +3,7 @@ import { Segment } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import './Generic.scss'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
 
 const LegendItem = ({ colorClass, text }) => (
   <div style={{ display: 'flex', alignItems: 'center' }}>

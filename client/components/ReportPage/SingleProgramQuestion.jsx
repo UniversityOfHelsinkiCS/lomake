@@ -1,9 +1,9 @@
 import React from 'react'
 import { Accordion, Grid, Label } from 'semantic-ui-react'
-import { romanize } from 'Utilities/common'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { formKeys } from '@root/config/data'
+import { formKeys } from '../../../config/data'
+import { romanize } from '../../util/common'
 import QuestionTitle from './QuestionTitle'
 
 const SingleProgramQuestion = ({ answers, question }) => {
