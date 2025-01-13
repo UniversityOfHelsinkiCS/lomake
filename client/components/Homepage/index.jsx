@@ -6,11 +6,11 @@ import NoPermissions from 'Components/Generic/NoPermissions'
 import { useTranslation } from 'react-i18next'
 import { Container, Header, Grid, Divider, Loader, List } from 'semantic-ui-react'
 import { formKeys } from '@root/config/data'
-import rypsiImage from 'Assets/rypsi.jpg'
-import wheelImage from 'Assets/big_wheel.jpg'
-import calendarImage from 'Assets/calendar.jpg'
-import powerlineImage from 'Assets/APowerlineTower.jpg'
-import libraryImage from 'Assets/library.jpg'
+import rypsiImage from '../../assets/rypsi.jpg'
+import bigWheel from '../../assets/big_wheel.jpg'
+import calendarImage from '../../assets/calendar.jpg'
+import powerlineImage from '../../assets/APowerlineTower.jpg'
+import libraryImage from '../../assets/library.jpg'
 import { PageItem, FormCard } from '../Generic/Homepage'
 
 const Homepage = () => {
@@ -71,7 +71,7 @@ const Homepage = () => {
       content: listItem(t('landingPage:degreeReformSubtitles', { returnObjects: true })),
       links: [],
       forms: [2, 3],
-      thumbnail: wheelImage,
+      thumbnail: bigWheel,
     },
     {
       show: false,

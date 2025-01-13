@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '@root/config/data'
-import MonitoringTextarea from 'Components/Generic/MonitoringTextarea'
-import TrackingTrafficLight from 'Components/Generic/TrackingTrafficLight'
-import DatePickerField from 'Components/Generic/DatePickerField'
-import TrackingRadioButton from 'Components/Generic/TrackingRadioButton'
+import { formKeys } from '../../../config/data'
+import MonitoringTextarea from '../../Generic/MonitoringTextarea'
+import TrackingTrafficLight from '../../Generic/TrackingTrafficLight'
+import DatePickerField from '../../Generic/DatePickerField'
+import TrackingRadioButton from '../../Generic/TrackingRadioButton'
 
 const MonitoringQuestionForm = ({ question }) => {
   const { t } = useTranslation()
