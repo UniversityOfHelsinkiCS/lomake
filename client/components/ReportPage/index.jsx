@@ -9,7 +9,7 @@ import NoPermissions from '../Generic/NoPermissions'
 import { formKeys } from '../../../config/data'
 import { setForm } from '../../util/redux/filterReducer'
 
-import { answersByYear, filteredProgrammes, modifiedQuestions } from '../../util/common'
+import { answersByYear, filteredProgrammes, modifiedQuestions, answersByQuestions } from '../../util/common'
 import useDebounce from '../../util/useDebounce'
 import YearSelector from '../Generic/YearSelector'
 import ProgrammeList from '../Generic/ProgrammeList'

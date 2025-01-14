@@ -4,6 +4,7 @@ import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { testProgrammeCode, defaultYears } from '../util/common.js'
 import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
+import { facultyList } from '../../config/data.js'
 
 const getFakeYearlyAnswers = year => {
   const fields = [

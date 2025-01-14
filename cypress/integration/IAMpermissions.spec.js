@@ -151,7 +151,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', helpers.getTotalProgrammeCount())
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
 
     cy.hasAccess('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
     cy.hasAccessEvaluation('cypressDeanKatselmusUser', 'T920103', { read: true, write: false, admin: false })
@@ -169,7 +169,7 @@ describe('IAM permission tests', () => {
     cy.visit('/degree-reform')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
 
     cy.hasAccess('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
     cy.hasAccessEvaluation('cypressFacultyKatselmusUser', 'KH50_006', { read: true, write: true, admin: false })
@@ -208,13 +208,13 @@ describe('IAM permission tests', () => {
     const user = 'cypressKatselmusProjektiryhmaUser'
     cy.login(user)
     cy.visit('/yearly')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 130)
     cy.visit('/evaluation')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 130)
     cy.visit('/degree-reform')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 131)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 130)
     cy.visit('/evaluation-faculty')
-    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 13)
+    cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 12)
     cy.visit('/evaluation-university')
     cy.contains('University level')
 
