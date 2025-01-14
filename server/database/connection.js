@@ -11,7 +11,7 @@ export const sequelize = new Sequelize(DATABASE_URL, { logging: false })
 const umzug = new Umzug({
   migrations: { glob: 'server/database/migrations/*.js' },
   context: sequelize.getQueryInterface(),
-  storage: new SequelizeStorage({ sequelize }),
+  storage: new SequelizeStorage({ sequelize, modelName: 'sequelize_meta' }),
   logger: console,
 })
 
