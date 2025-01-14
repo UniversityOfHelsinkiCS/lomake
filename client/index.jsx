@@ -13,7 +13,6 @@ import { basePath } from '../config/common'
 
 import './util/i18n'
 import { initSentry } from './util/sentry'
-import se from './util/locales/se'
 
 if (process.env.NODE_ENV === 'production') {
   initSentry()
@@ -35,7 +34,7 @@ const refresh = () => {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  const newUser = 'cypressRandomRightsUser'
+  const newUser = 'superAdmin'
   const currentFakeUser = window.localStorage.getItem('fakeUser')
 
   if (!currentFakeUser || !cypressUids.includes(JSON.parse(currentFakeUser).uid)) {

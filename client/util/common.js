@@ -490,7 +490,6 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
   }
 
   if (form === formKeys.FACULTY_MONITORING) {
-    console.log(tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form))
     return tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
