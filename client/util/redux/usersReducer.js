@@ -1,4 +1,4 @@
-import { sortedItems } from 'Utilities/common'
+import { sortedItems } from '../common'
 import callBuilder from '../apiConnection'
 /**
  * Actions and reducers are in the same file for readability

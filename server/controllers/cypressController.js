@@ -1,10 +1,10 @@
-const db = require('@models/index')
-const { Op } = require('sequelize')
-const logger = require('@util/logger')
-const { testProgrammeCode, defaultYears } = require('@util/common')
-const moment = require('moment')
-const { facultyList } = require('@root/config/data')
-const { createDraftAnswers } = require('../scripts/draftAndFinalAnswers')
+import { Op } from 'sequelize'
+import moment from 'moment'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { testProgrammeCode, defaultYears } from '../util/common.js'
+import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
+import { facultyList } from '../../config/data.js'
 
 const getFakeYearlyAnswers = year => {
   const fields = [
@@ -257,8 +257,4 @@ const createFacultyAnswers = async (req, res) => {
   }
 }
 
-module.exports = {
-  seed,
-  createAnswers,
-  createFacultyAnswers,
-}
+export default { seed, createAnswers, createFacultyAnswers }

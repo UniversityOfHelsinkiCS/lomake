@@ -1,13 +1,14 @@
-const Router = require('express')
-const users = require('@controllers/usersController')
-const answers = require('@controllers/answersController')
-const studyprogrammes = require('@controllers/studyprogrammesController')
-const deadlines = require('@controllers/deadlineController')
-const cypress = require('@controllers/cypressController')
-const faculties = require('@controllers/facultyController')
-const degreeReform = require('@controllers/degreeReformController')
-const locks = require('@controllers/lockController')
-const {
+import Router from 'express'
+import users from '../controllers/usersController.js'
+import answers from '../controllers/answersController.js'
+import studyprogrammes from '../controllers/studyprogrammesController.js'
+import deadlines from '../controllers/deadlineController.js'
+import cypress from '../controllers/cypressController.js'
+import faculty from '../controllers/facultyController.js'
+import degreeReform from '../controllers/degreeReformController.js'
+import locks from '../controllers/lockController.js'
+
+import {
   checkAdmin,
   requireProgrammeRead,
   requireProgrammeWrite,
@@ -16,7 +17,9 @@ const {
   requireFacultyRead,
   checkAdminOrKatselmusryhma,
   requireUniFormRight,
-} = require('@middleware/accessControlMiddleware')
+} from '../middleware/accessControlMiddleware.js'
+
+import config from '../controllers/configController.js'
 
 const router = Router()
 
@@ -64,10 +67,12 @@ router.get('/deadlines', deadlines.get)
 router.post('/deadlines', checkAdmin, deadlines.createOrUpdate)
 router.delete('/deadlines', checkAdmin, deadlines.remove)
 
-router.get('/faculties', faculties.getAll)
+router.get('/faculties', faculty.getAll)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
 
-module.exports = router
+router.get('/config/data', config.getData)
+
+export default router

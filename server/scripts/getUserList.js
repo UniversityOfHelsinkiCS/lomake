@@ -1,6 +1,6 @@
-const db = require('@models/index')
-const logger = require('@util/logger')
-const fs = require('fs')
+import fs from 'fs'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
 
 const mapProgrammes = programmes => {
   const programmeMap = new Map()
@@ -48,6 +48,4 @@ const getUserList = async () => {
   }
 }
 
-module.exports = {
-  getUserList,
-}
+export default getUserList

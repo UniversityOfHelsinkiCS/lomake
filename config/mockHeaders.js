@@ -306,11 +306,4 @@ const clearHeaders = () => {
   localStorage.removeItem(ITEM_NAME)
 }
 
-module.exports = {
-  possibleUsers,
-  cypressUids,
-  setHeaders,
-  removeLoggedInUsersGroups,
-  getHeaders,
-  clearHeaders,
-}
+export { possibleUsers, cypressUids, setHeaders, removeLoggedInUsersGroups, getHeaders, clearHeaders }

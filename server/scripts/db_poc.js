@@ -1,6 +1,7 @@
+import 'module-alias/register'
+import db from '../models/index.js'
+
 require('dotenv').config()
-require('module-alias/register')
-const db = require('@models/index')
 
 const func = async () => {
   const start = new Date().valueOf()
