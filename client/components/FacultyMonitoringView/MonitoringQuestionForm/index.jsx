@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, FormGroup } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { formKeys } from '../../../config/data'
+import { formKeys } from '../../../../config/data'
 import MonitoringTextarea from '../../Generic/MonitoringTextarea'
 import TrackingTrafficLight from '../../Generic/TrackingTrafficLight'
 import DatePickerField from '../../Generic/DatePickerField'

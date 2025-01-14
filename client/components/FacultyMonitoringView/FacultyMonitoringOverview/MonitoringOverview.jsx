@@ -20,13 +20,13 @@ import './FacultyMonitoringOverview.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomModal from '../../Generic/CustomModal'
 import { formKeys } from '../../../../config/data'
-import { getTempAnswersByForm } from '../../util/redux/tempAnswersReducer'
+import { getTempAnswersByForm } from '../../../util/redux/tempAnswersReducer'
 import { facultyMonitoringQuestions as questions } from '../../../../client/questionData/index'
 import Square from '../../Generic/Square'
 import ModalAnswer from './ModalAnswer'
 import FacultyDegreeDropdown from '../FacultyDegreeDropdown'
 import DegreeLevelDropdown from '../DegreeLevelDropdown'
-import { updateFormField } from '../../util/redux/formReducer'
+import { updateFormField } from '../../../util/redux/formReducer'
 
 const MonitoringOverview = ({ t, lang, faculties }) => {
   const dispatch = useDispatch()

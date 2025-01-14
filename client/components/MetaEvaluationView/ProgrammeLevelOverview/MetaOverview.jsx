@@ -7,8 +7,6 @@ import useDebounce from '../../../util/useDebounce'
 
 import CsvDownload from '../../Generic/CsvDownload'
 import CustomModal from '../../Generic/CustomModal'
-import { useSelector } from 'react-redux'
-import { setDoctoral } from '../../../util/redux/doctoralReducer'
 import { basePath } from '../../../../config/common'
 import ColorTable from '../../OverviewPage/ColorTable'
 import StatsContent from '../../OverviewPage/StatsContent'
@@ -44,7 +42,7 @@ const MetaOverview = ({
   const filteredProgrammes = useMemo(() => {
     return filterUserProgrammes(programmes, lang, debouncedFilter)
   }, [programmes, lang, debouncedFilter])
-
+  
   const handleDropdownFilterChange = value => {
     window.history.pushState({}, '', `${basePath}meta-evaluation?filter=${value}`)
     setFilter(value)
