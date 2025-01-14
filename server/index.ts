@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express'
 import Sentry from '@sentry/node'
 import path from 'path'
@@ -33,7 +34,8 @@ dotenv.config()
 
 const app = express()
 
-const server = http.Server(app)
+// eslint-disable-next-line
+const server = new http.Server(app)
 
 createWebsocketServer(server)
 
@@ -78,14 +80,14 @@ initializeDatabaseConnection().then(async () => {
       case 'generateMissingTempAnswers':
         await createTempAnswers()
         return
-      default:
-        server.listen(PORT, async () => {
-          logger.info(`Server started on port ${PORT}`)
-          startBackupJob()
-          startDeadlineWatcher()
-        })
     }
   }
+  
+  server.listen(PORT, async () => {
+    logger.info(`Server started on port ${PORT}`)
+    startBackupJob()
+    startDeadlineWatcher()
+  })
 })
 
 export default app

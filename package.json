@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "docker compose up",
     "build": "vite build",
-    "start:prod": "cross-env NODE_ENV=production node ./server/index.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon esm ./server/index.js\" \"vite\"",
+    "start:prod": "cross-env NODE_ENV=production node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts",
+    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon --exec node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts\" \"vite\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
@@ -21,9 +21,9 @@
   "license": "ISC",
   "dependencies": {
     "@sentry/browser": "^7.102.1",
-    "@sentry/esbuild-plugin": "^2.14.2",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
+    "@sentry/vite-plugin": "^2.23.0",
     "@uiw/react-md-editor": "^4.0.4",
     "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.6.0",
@@ -80,10 +80,16 @@
     "winston-gelf-transporter": "^1.0.2"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/lodash": "^4.17.14",
+    "@types/node": "^22.10.6",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@types/react-router-dom": "^5.3.3",
     "concurrently": "^9.0.0",
     "cross-env": "^7.0.3",
     "cypress": "^13.6.6",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-babel": "^5.3.1",
@@ -99,6 +105,9 @@
     "nodemon": "^3.1.0",
     "prettier": "^3.0.3",
     "sequelize-cli": "^6.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
     "vite-plugin-eslint": "^1.8.1"
   },
   "husky": {
