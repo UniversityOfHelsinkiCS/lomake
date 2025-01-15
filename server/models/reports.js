@@ -2,10 +2,23 @@ module.exports = (sequelize, DataTypes) => {
     const report = sequelize.define(
         'report',
         {
-            studyprogrammeId: DataTypes.INTEGER,
-            year: DataTypes.INTEGER,
-            comments: DataTypes.JSONB,
-            actions: DataTypes.JSONB,
+            studyprogrammeId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            year: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            comments: {
+                type: DataTypes.JSONB,
+                defaultValue: null
+            },
+            actions: {
+
+                type: DataTypes.JSONB,
+                defaultValue: null
+            },
         },
         {
             underscored: true,
