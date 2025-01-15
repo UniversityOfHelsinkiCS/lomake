@@ -5,10 +5,71 @@ const moment = require('moment')
 const { getFormType } = require('@util/common')
 const { seed } = require('../scripts/seed')
 
+// TODO: VALIDATE BODY DATA
+
+// Report ---------------------------------------------------------------
 const createReport = async (req, res) => {
     try {
-        // const data = await db.report.create({})
-        return res.status(200).json("Report created successfully")
+        const { studyprogrammeId, year } = req.body
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        // Check that report does not already exist for this studyprogramme and year
+        const existingReport = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+        if (existingReport) {
+            return res.status(400).json({ error: 'Report already exists for this studyprogramme and year' })
+        }
+
+        const data = await db.report.create({
+            studyprogrammeId,
+            year
+        })
+
+        return res.status(201).json(data)
+    } catch (error) {
+        logger.error(`Database error: ${error}`)
+        return res.status(500).json({ error: 'Database error' })
+    }
+}
+
+const getReports = async (req, res) => {
+    try {
+        const { studyprogrammeId } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const data = await db.report.findAll({
+            where: {
+                studyprogrammeId,
+            }
+        })
+
+        return res.status(200).json(data)
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -17,16 +78,35 @@ const createReport = async (req, res) => {
 
 const getReport = async (req, res) => {
     try {
-        return res.status(200).json("Report fetched successfully")
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
+        const { studyprogrammeId, year } = req.params
 
-const updateReport = async (req, res) => {
-    try {
-        return res.status(200).json("Report updated successfully")
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const data = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!data) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        return res.status(200).json(data)
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -35,34 +115,126 @@ const updateReport = async (req, res) => {
 
 const deleteReport = async (req, res) => {
     try {
-        return res.status(200).json("Report deleted successfully")
+        const { studyprogrammeId, year } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const data = await db.report.destroy({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!data) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        return res.status(200).json({ message: 'Report deleted successfully' })
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const createComments = async (req, res) => {
-    try {
-        return res.status(200).json("Comment created successfully")
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
 
+
+
+// Comments ---------------------------------------------------------------
 const getComments = async (req, res) => {
     try {
-        return res.status(200).json("Comment fetched successfully")
+        const { studyprogrammeId, year } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        const data = report.comments
+
+        return res.status(201).json(data)
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const updateComments = async (req, res) => {
+const createOrUpdateComments = async (req, res) => {
     try {
-        return res.status(200).json("Comment updated successfully")
+        const { studyprogrammeId, year } = req.params
+        const comments = req.body
+
+        // TODO: validate body data
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        const data = await db.report.update({
+            comments,
+        }, {
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        return res.status(200).json(data)
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -71,34 +243,133 @@ const updateComments = async (req, res) => {
 
 const deleteComments = async (req, res) => {
     try {
-        return res.status(200).json("Comment deleted successfully")
+        const { studyprogrammeId, year } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        await db.report.update({
+            comments: null
+        }, {
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        return res.status(200).json({ message: 'Comments deleted successfully' })
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const createActions = async (req, res) => {
-    try {
-        return res.status(200).json("Actions created successfully")
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
 
+// Actions ---------------------------------------------------------------
 const getActions = async (req, res) => {
     try {
-        return res.status(200).json("Actions fetched successfully")
+        const { studyprogrammeId, year } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        const data = report.actions
+
+        return res.status(200).json(data)
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
     }
 }
 
-const updateActions = async (req, res) => {
+const createOrUpdateActions = async (req, res) => {
     try {
-        return res.status(200).json("Comment updated successfully")
+        const { studyprogrammeId, year } = req.params
+        const actions = req.body
+
+        // TODO: validate body data
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        const data = await db.report.update({
+            actions,
+        }, {
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        return res.status(200).json(data)
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -107,7 +378,44 @@ const updateActions = async (req, res) => {
 
 const deleteActions = async (req, res) => {
     try {
-        return res.status(200).json("Comment deleted successfully")
+        const { studyprogrammeId, year } = req.params
+
+        if (!studyprogrammeId) {
+            return res.status(400).json({ error: 'Studyprogramme is required' })
+        }
+
+        if (!year) {
+            return res.status(400).json({ error: 'Year is required' })
+        }
+
+        // Check that studyprogramme exists
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        if (!studyprogramme) {
+            return res.status(404).json({ error: 'Studyprogramme not found' })
+        }
+
+        const report = await db.report.findOne({
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        if (!report) {
+            return res.status(404).json({ error: 'No report was found' })
+        }
+
+        await db.report.update({
+            actions: null
+        }, {
+            where: {
+                studyprogrammeId,
+                year
+            }
+        })
+
+        return res.status(200).json({ message: 'Comments deleted successfully' })
+
     } catch (error) {
         logger.error(`Database error: ${error}`)
         return res.status(500).json({ error: 'Database error' })
@@ -116,15 +424,13 @@ const deleteActions = async (req, res) => {
 
 module.exports = {
     createReport,
+    getReports,
     getReport,
-    updateReport,
     deleteReport,
-    createComments,
     getComments,
-    updateComments,
+    createOrUpdateComments,
     deleteComments,
-    createActions,
     getActions,
-    updateActions,
+    createOrUpdateActions,
     deleteActions
 }
