@@ -12,7 +12,8 @@
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
     "cypress:run": "cypress run --headless",
-    "translations": "node ./scripts/analyzeTranslations.js"
+    "translations": "node ./scripts/analyzeTranslations.js",
+    "seed": "cross-env NODE_ENV=development node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts seed"
   },
   "engines": {
     "node": ">=20"
@@ -70,6 +71,8 @@
     "sequelize": "^6.6.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
     "umzug": "^3.3.1",
     "unfuck-spa-shibboleth-session": "^4.0.0",
     "uuid": "^8.3.2",

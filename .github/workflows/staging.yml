@@ -47,7 +47,7 @@ jobs:
         run: docker compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node server/index.ts seed"
+        run: docker exec lomake_dev bash -c "npm run seed"
 
       - name: Run cypress tests with retry
         uses: nick-fields/retry@v3
