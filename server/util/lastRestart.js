@@ -1,5 +1,5 @@
 const lastRestart = new Date()
 
-module.exports = {
+export default {
   getLastRestart: () => lastRestart,
 }

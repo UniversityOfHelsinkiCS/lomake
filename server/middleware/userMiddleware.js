@@ -1,7 +1,6 @@
-const logger = require('@util/logger')
-const db = require('@models/index')
-
-const { getUserByUid } = require('../services/userService')
+import logger from '../util/logger.js'
+import db from '../models/index.js'
+import getUserByUid from '../services/userService.js'
 
 const userMiddleware = async (req, res, next) => {
   if (req.path.includes('socket.io')) return next()
@@ -41,4 +40,4 @@ const userMiddleware = async (req, res, next) => {
   }
 }
 
-module.exports = userMiddleware
+export default userMiddleware

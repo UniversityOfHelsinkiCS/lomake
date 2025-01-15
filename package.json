@@ -2,40 +2,45 @@
   "name": "tilku",
   "version": "1.0.0",
   "description": "Opetushallinnon tilannekuvalomake",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "docker compose up",
-    "build": "node build.js",
-    "start:prod": "cross-env NODE_ENV=production node index.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon index.js\" \"node devProxy.js\"",
+    "build": "vite build",
+    "start:prod": "cross-env NODE_ENV=production node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts",
+    "start:dev": "cross-env NODE_ENV=development concurrently \"nodemon --exec node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts\" \"vite\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "cypress:open": "cypress open --e2e",
     "cypress:run": "cypress run --headless",
-    "translations": "node ./scripts/analyzeTranslations.js"
+    "translations": "node ./scripts/analyzeTranslations.js",
+    "seed": "cross-env NODE_ENV=development node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts seed"
   },
   "engines": {
     "node": ">=20"
   },
-  "author": "Jami Kousa",
+  "author": "Jami Kousa, Tuomas Huhtala, Venla Rantanen",
   "license": "ISC",
   "dependencies": {
     "@sentry/browser": "^7.102.1",
-    "@sentry/esbuild-plugin": "^2.14.2",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
+    "@sentry/vite-plugin": "^2.23.0",
+    "@uiw/react-md-editor": "^4.0.4",
+    "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.6.0",
-    "compression": "^1.7.4",
+    "compression": "^1.7.5",
+    "cookie-parser": "^1.4.6",
     "date-fns": "^4.0.0",
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
-    "esbuild": "^0.24.0",
     "esbuild-sass-plugin": "^3.2.0",
+    "esm": "^3.2.25",
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "highcharts": "^11.0.0",
     "highcharts-react-official": "^3.1.0",
     "i18next": "^23.0.0",
+    "js-cookie": "^3.0.5",
     "jsdom": "^25.0.0",
     "lodash": "^4.17.21",
     "lru-cache": "^11.0.0",
@@ -66,17 +71,28 @@
     "sequelize": "^6.6.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
-    "umzug": "^2.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "umzug": "^3.3.1",
     "unfuck-spa-shibboleth-session": "^4.0.0",
     "uuid": "^8.3.2",
+    "vite": "^5.4.0",
+    "vite-plugin-socket-io": "^1.0.2",
+    "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
     "winston-gelf-transporter": "^1.0.2"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/lodash": "^4.17.14",
+    "@types/node": "^22.10.6",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@types/react-router-dom": "^5.3.3",
     "concurrently": "^9.0.0",
     "cross-env": "^7.0.3",
     "cypress": "^13.6.6",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-babel": "^5.3.1",
@@ -91,23 +107,11 @@
     "minimist": "^1.2.8",
     "nodemon": "^3.1.0",
     "prettier": "^3.0.3",
-    "sequelize-cli": "^6.0.0"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "cypress/*",
-      "dev/*",
-      "client/*",
-      "node_modules/*"
-    ],
-    "delay": 1000
-  },
-  "_moduleAliases": {
-    "@root": ".",
-    "@controllers": "server/controllers",
-    "@middleware": "server/middleware",
-    "@models": "server/models",
-    "@util": "server/util"
+    "sequelize-cli": "^6.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "husky": {
     "hooks": {
@@ -125,5 +129,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "cypress/*",
+      "dev/*",
+      "client/*",
+      "node_modules/*"
+    ],
+    "watch": [
+      "server"
+    ],
+    "ext": "*.js,*.ts,*.json"
   }
 }

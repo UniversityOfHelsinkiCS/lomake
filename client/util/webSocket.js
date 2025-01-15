@@ -1,43 +1,45 @@
-import { basePath, inProduction } from 'Utilities/common'
-import { getHeaders } from '@root/config/mockHeaders'
 import io from 'socket.io-client'
+import Cookies from 'js-cookie'
+import { basePath, inProduction } from './common'
+import { getHeaders } from '../../config/mockHeaders'
+// eslint-disable-next-line import/no-cycle
 import store from './store'
 
 const connect = () => {
-  const defaultHeaders = !inProduction ? getHeaders() : {}
-  const headers = { ...defaultHeaders }
+  const headers = !inProduction ? { ...getHeaders() } : {}
 
-  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs') // uid
+  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs')
+
   if (adminLoggedInAs) headers['x-admin-logged-in-as'] = adminLoggedInAs
+
+  // Set the 'uid' cookie with a values
+  // when using websocket you have to pass uid as cookies to backend because extraHeaders are not supported
+  Cookies.set('uid', headers.uid, { expires: 7 }) // Expires in 7 days
+  Cookies.set('x-admin-logged-in-as', adminLoggedInAs, { expires: 7 })
 
   return io(window.origin, {
     path: `${basePath}socket.io`,
     transports: ['polling'],
-    transportOptions: {
-      polling: {
-        extraHeaders: headers,
-      },
-    },
+    extraHeaders: headers,
   })
+}
+const updateForm = store => event => {
+  store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
+}
+const updateEditors = store => event => {
+  store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
+}
+
+export const setupSocketListeners = socket => {
+  if (!window.location.href.endsWith('/individual')) {
+    socket.on('new_form_data', updateForm(store))
+    socket.on('update_editors', updateEditors(store))
+  }
 }
 
 const socketMiddleware = () => {
   let socket = null
   let isVisible = true
-
-  const updateForm = store => event => {
-    store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
-  }
-  const updateEditors = store => event => {
-    store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
-  }
-
-  const setupSocketListeners = socket => {
-    if (!window.location.href.endsWith('/individual')) {
-      socket.on('new_form_data', updateForm(store))
-      socket.on('update_editors', updateEditors(store))
-    }
-  }
 
   const handleVisibilityChange = () => {
     isVisible = !document.hidden

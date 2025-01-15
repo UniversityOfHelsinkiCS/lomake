@@ -1,5 +1,5 @@
-const logger = require('@util/logger')
-const { getLockForHttp } = require('../websocket')
+import logger from '../util/logger.js'
+import { getLockForHttp } from '../websocket.js'
 
 const getLock = async (req, res) => {
   try {
@@ -18,6 +18,4 @@ const getLock = async (req, res) => {
   }
 }
 
-module.exports = {
-  getLock,
-}
+export default { getLock }
