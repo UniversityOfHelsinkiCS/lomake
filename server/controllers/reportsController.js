@@ -1,9 +1,8 @@
-const db = require('@models/index')
-const { isAdmin, isSuperAdmin } = require('@util/common')
-const logger = require('@util/logger')
-const moment = require('moment')
-const { getFormType } = require('@util/common')
-const { seed } = require('../scripts/seed')
+import moment from 'moment'
+import db from '../models/index.js'
+import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'
+import logger from '../util/logger.js'
+import seed from '../scripts/seed.js'
 
 // TODO: VALIDATE BODY DATA
 
@@ -422,7 +421,20 @@ const deleteActions = async (req, res) => {
     }
 }
 
-module.exports = {
+// module.exports = {
+//     createReport,
+//     getReports,
+//     getReport,
+//     deleteReport,
+//     getComments,
+//     createOrUpdateComments,
+//     deleteComments,
+//     getActions,
+//     createOrUpdateActions,
+//     deleteActions
+// }
+
+export default {
     createReport,
     getReports,
     getReport,
