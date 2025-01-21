@@ -79,7 +79,13 @@ const seedFacultiesAndStudyprogrammes = async () => {
 // for this you have to have a data.xlsx file in the root of the project
 const seedKeyData = async () => {
   const __dirname = path.dirname(new URL(import.meta.url).pathname)
-  const workbook = xlsx.readFile(path.resolve(__dirname, '../../data.xlsx'))
+  let workbook
+  try {
+    workbook = xlsx.readFile(path.resolve(__dirname, '../../data.xlsx'))
+  } catch (error) {
+    logger.error('Workbook not found:', error)
+    return
+  }
 
   const jsonSheet = {}
 
