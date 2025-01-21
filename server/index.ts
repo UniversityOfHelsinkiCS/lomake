@@ -80,9 +80,11 @@ initializeDatabaseConnection().then(async () => {
       case 'generateMissingTempAnswers':
         await createTempAnswers()
         return
+      default:
+        break
     }
   }
-  
+
   server.listen(PORT, async () => {
     logger.info(`Server started on port ${PORT}`)
     startBackupJob()
