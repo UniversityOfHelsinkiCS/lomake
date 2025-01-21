@@ -7,6 +7,7 @@ import cypress from '../controllers/cypressController.js'
 import faculty from '../controllers/facultyController.js'
 import degreeReform from '../controllers/degreeReformController.js'
 import locks from '../controllers/lockController.js'
+import keyData from '../controllers/keyDataController.js'
 
 import {
   checkAdmin,
@@ -73,6 +74,6 @@ router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
 
-router.get('/config/data', config.getData)
+router.get('/keydata', checkAdmin, keyData.getKeyData)
 
 export default router
