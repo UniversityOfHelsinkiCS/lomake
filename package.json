@@ -21,6 +21,7 @@
   "author": "Jami Kousa, Tuomas Huhtala, Venla Rantanen",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "@sentry/browser": "^7.102.1",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
