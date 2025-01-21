@@ -80,7 +80,8 @@
     "vite-plugin-socket-io": "^1.0.2",
     "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
-    "winston-gelf-transporter": "^1.0.2"
+    "winston-gelf-transporter": "^1.0.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",

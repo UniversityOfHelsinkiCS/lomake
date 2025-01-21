@@ -1,6 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
+import xlsx from 'xlsx'
+import path from 'path'
 import db from '../models/index.js'
+import KeyData from '../models/keyData.js'
 
 import logger from '../util/logger.js'
 import { data, facultyMap } from '../../config/data.js'
@@ -73,9 +76,37 @@ const seedFacultiesAndStudyprogrammes = async () => {
   }
 }
 
+// for this you have to have a data.xlsx file in the root of the project
+const seedKeyData = async () => {
+  const __dirname = path.dirname(new URL(import.meta.url).pathname)
+  const workbook = xlsx.readFile(path.resolve(__dirname, '../../data.xlsx'))
+
+  const jsonSheet = {}
+
+  workbook.SheetNames.forEach((sheetName) => {
+    const worksheet = workbook.Sheets[sheetName]
+    const data = xlsx.utils.sheet_to_json(worksheet)
+    console.log(JSON.stringify(data, null, 2))
+    jsonSheet[sheetName] = data
+  })
+
+  // logger.info(JSON.stringify(jsonSheet, null, 2))
+
+  await KeyData.destroy({ where: {} })
+
+  try {
+    await KeyData.create({
+      data: jsonSheet,
+    })
+  } catch (error) {
+    logger.error(error)
+  }
+}
+
 const seed = async () => {
   logger.info('Seeding ...')
   await seedFacultiesAndStudyprogrammes()
+  await seedKeyData()
   logger.info('Seeding completed')
 }
 

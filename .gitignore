@@ -14,3 +14,4 @@ backups/*
 # Sentry Auth Token
 .env.sentry-build-plugin
 .idea/
+data.xlsx
