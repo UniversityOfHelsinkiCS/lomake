@@ -29,7 +29,7 @@ Use setHeaders() to select user for development purposes.
 
 When deploying Lomake to a production server for the first time, the database should be seeded.
 
-The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "node index.js seed"`
+The seeding should be performed only **once** by executing `docker exec -it lomake bash -c "npm run seed"`
 
 ### Running Cypress tests
 
