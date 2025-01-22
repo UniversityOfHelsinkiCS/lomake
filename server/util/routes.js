@@ -7,7 +7,7 @@ import cypress from '../controllers/cypressController.js'
 import faculty from '../controllers/facultyController.js'
 import degreeReform from '../controllers/degreeReformController.js'
 import locks from '../controllers/lockController.js'
-// import reports from '../controllers/reportsController.js'
+import reports from '../controllers/reportsController.js'
 
 import {
   checkAdmin,
@@ -75,11 +75,9 @@ router.get('/faculties', faculty.getAll)
 // router.get('/reports/:studyprogrammeId/:year', reports.getReport)
 // router.delete('/reports/:studyprogrammeId/:year', reports.deleteReport)
 // router.get('/reports/:studyprogrammeId/:year/comments/', reports.getComments)
-// router.put('/reports/:studyprogrammeId/:year/comments/', reports.createOrUpdateComments)
-// router.delete('/reports/:studyprogrammeId/:year/comments/', reports.deleteComments)
+// router.put('/reports/:studyprogrammeId/:year/comments/', reports.updateComments)
 // router.get('/reports/:studyprogrammeId/:year/actions/', reports.getActions)
-// router.put('/reports/:studyprogrammeId/:year/actions/', reports.createOrUpdateActions)
-// router.delete('/reports/:studyprogrammeId/:year/actions/', reports.deleteActions)
+// router.put('/reports/:studyprogrammeId/:year/actions/', reports.updateActions)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
