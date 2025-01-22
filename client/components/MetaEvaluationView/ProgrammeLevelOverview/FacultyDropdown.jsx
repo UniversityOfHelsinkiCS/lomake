@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dropdown, MenuItem } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 
-const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilter }) => {
+const FacultyDropdown = ({ faculties, debouncedFilter, lang, handleFilterChange }) => {
+  const { t } = useTranslation()
   const [dropdownText, setDropdownText] = useState(t('chooseFaculty'))
 
   useEffect(() => {
-    if (debouncedFilter === '') setDropdownText(t('chooseFaculty'))
-    else
-      setDropdownText(
-        faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
-          ? faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
-          : t('chooseFaculty'),
-      )
-  }, [debouncedFilter, lang])
+    setDropdownText(
+      faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
+        ? faculties?.data.find(f => f.code === debouncedFilter)?.name[lang]
+        : t('chooseFaculty'),
+    )
+  }, [debouncedFilter, lang, faculties, t])
 
   const handleDropdownFilter = faculty => {
     if (!faculty) {
@@ -39,7 +39,7 @@ const FacultyDropdown = ({ t, handleFilterChange, faculties, lang, debouncedFilt
             {t('report:all')}
           </Dropdown.Item>
           {!faculties.pending
-            ? faculties.data
+            ? [...faculties.data]
                 .sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
                 .map(faculty => (
                   <Dropdown.Item

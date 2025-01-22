@@ -12,8 +12,8 @@ const byNameInLang = lang => (p1, p2) => {
 
 const DropdownFilter = ({ size, handleFilterChange, selectedRadio, version }) => {
   const lang = useSelector(state => state.language)
-  const faculties = useSelector(state => state.faculties.data).sort(byNameInLang(lang))
-  const studyProgrammes = useSelector(state => state.studyProgrammes.data).sort(byNameInLang(lang))
+  const faculties = [...useSelector(state => state.faculties.data)].sort(byNameInLang(lang))
+  const studyProgrammes = [...useSelector(state => state.studyProgrammes.data)].sort(byNameInLang(lang))
 
   const { t } = useTranslation()
 

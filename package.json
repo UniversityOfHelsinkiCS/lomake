@@ -21,6 +21,7 @@
   "author": "Jami Kousa, Tuomas Huhtala, Venla Rantanen",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "@sentry/browser": "^7.102.1",
     "@sentry/node": "^7.102.1",
     "@sentry/tracing": "^7.102.1",
@@ -80,7 +81,8 @@
     "vite-plugin-socket-io": "^1.0.2",
     "vite-plugin-svgr": "^4.2.0",
     "winston": "^3.3.3",
-    "winston-gelf-transporter": "^1.0.2"
+    "winston-gelf-transporter": "^1.0.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
@@ -104,6 +106,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^9.1.4",
+    "immer": "^10.1.1",
     "minimist": "^1.2.8",
     "nodemon": "^3.1.0",
     "prettier": "^3.0.3",
