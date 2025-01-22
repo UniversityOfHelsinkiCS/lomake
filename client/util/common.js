@@ -77,7 +77,7 @@ const getUserGroupSortValue = ({ specialGroup }) => {
 export const sortedItems = (items, sorter, lang) => {
   if (!items) return []
   if (!sorter) return items
-  const sorted = items.sort((a, b) => {
+  const sorted = [...items].sort((a, b) => {
     if (sorter === 'name') {
       const aName = a.name[lang] ? a.name[lang] : a.name.en
       const bName = b.name[lang] ? b.name[lang] : b.name.en
@@ -306,7 +306,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
     return picked.includes(p)
   })
 
-  return { chosen: filteredByPick, all: filteredBySchool }
+  return { chosen: [...filteredByPick], all: [...filteredBySchool] }
 }
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
