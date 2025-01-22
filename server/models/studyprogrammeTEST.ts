@@ -14,7 +14,7 @@ import {
 } from 'sequelize'
 
 // Associated Models
-import Report from './reports'
+import Report from './reportsTEST'
 
 class Studyprogramme extends Model<InferAttributes<Studyprogramme>, InferCreationAttributes<Studyprogramme>> {
   declare id: CreationOptional<number>;
