@@ -1,12 +1,18 @@
 import logger from '../util/logger.js'
 
 // Models
-import Report from 'server/models/reports.js'
-import Studyprogramme from 'server/models/studyprogramme.js'
+import Report from '../models/reports.js'
+import Studyprogramme from '../models/studyprogramme.js'
+
+// Types
+import type { Request, Response } from 'express'
+
+// TODO: VALIDATE BODY DATA
+// TODO: Type the promise returns
+
 
 // Report ---------------------------------------------------------------
-const createReport = async (req, res) => {
-    console.log("haLLOOOO")
+const createReport = async (req: Request, res: Response) => {
 
     try {
         const { studyprogrammeId, year } = req.body
@@ -49,7 +55,7 @@ const createReport = async (req, res) => {
     }
 }
 
-const getReports = async (req, res) => {
+const getReports = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId } = req.params
 
@@ -77,7 +83,7 @@ const getReports = async (req, res) => {
     }
 }
 
-const getReport = async (req, res) => {
+const getReport = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -114,7 +120,7 @@ const getReport = async (req, res) => {
     }
 }
 
-const deleteReport = async (req, res) => {
+const deleteReport = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -151,8 +157,11 @@ const deleteReport = async (req, res) => {
     }
 }
 
+
+
+
 // Comments ---------------------------------------------------------------
-const getComments = async (req, res) => {
+const getComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -191,7 +200,7 @@ const getComments = async (req, res) => {
     }
 }
 
-const updateComments = async (req, res) => {
+const updateComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const comments = req.body
@@ -239,8 +248,9 @@ const updateComments = async (req, res) => {
     }
 }
 
+
 // Actions ---------------------------------------------------------------
-const getActions = async (req, res) => {
+const getActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -279,7 +289,7 @@ const getActions = async (req, res) => {
     }
 }
 
-const updateActions = async (req, res) => {
+const updateActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const actions = req.body
@@ -326,6 +336,8 @@ const updateActions = async (req, res) => {
         return res.status(500).json({ error: 'Database error' })
     }
 }
+
+
 
 export default {
     createReport,

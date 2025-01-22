@@ -1,4 +1,4 @@
-import { sequelize } from 'server/database/connection'
+import { sequelize } from '../database/connection'
 import {
   Model,
   INTEGER,
@@ -14,7 +14,8 @@ import {
 } from 'sequelize'
 
 // Associated Models
-import Report from './reportsTEST'
+import Report from './reports'
+import Faculty from './faculty'
 
 class Studyprogramme extends Model<InferAttributes<Studyprogramme>, InferCreationAttributes<Studyprogramme>> {
   declare id: CreationOptional<number>;
@@ -37,7 +38,7 @@ class Studyprogramme extends Model<InferAttributes<Studyprogramme>, InferCreatio
 Studyprogramme.init(
   {
     id: {
-      type: INTEGER.UNSIGNED,
+      type: INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
