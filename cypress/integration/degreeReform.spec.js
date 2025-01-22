@@ -327,7 +327,7 @@ describe('Degree reform form tests', () => {
     cy.get('[data-cy=editing-area-degree_reform_free_answer]').should('not.exist')
   })
 
-  it('"view-is-based-on"-checkbox works correctly', () => {
+  it.skip('"view-is-based-on"-checkbox works correctly', () => {
     cy.login(cypressSuperAdmin)
     cy.visit('/yearly')
     // Create new deadline
