@@ -1,13 +1,18 @@
-import moment from 'moment'
-import db from '../models/index.js'
-import { isAdmin, isSuperAdmin, getFormType } from '../util/common.js'
 import logger from '../util/logger.js'
-import seed from '../scripts/seed.js'
+
+// Models
+import Report from 'server/models/reports'
+import Studyprogramme from 'server/models/studyprogramme'
+
+// Types
+import type { Request, Response } from 'express'
 
 // TODO: VALIDATE BODY DATA
 
+
+
 // Report ---------------------------------------------------------------
-const createReport = async (req, res) => {
+const createReport = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.body
 
@@ -20,13 +25,14 @@ const createReport = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
+        
 
         // Check that report does not already exist for this studyprogramme and year
-        const existingReport = await db.report.findOne({
+        const existingReport = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -36,7 +42,7 @@ const createReport = async (req, res) => {
             return res.status(400).json({ error: 'Report already exists for this studyprogramme and year' })
         }
 
-        const data = await db.report.create({
+        const data = await Report.create({
             studyprogrammeId,
             year
         })
@@ -48,7 +54,7 @@ const createReport = async (req, res) => {
     }
 }
 
-const getReports = async (req, res) => {
+const getReports = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId } = req.params
 
@@ -57,12 +63,12 @@ const getReports = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const data = await db.report.findAll({
+        const data = await Report.findAll({
             where: {
                 studyprogrammeId,
             }
@@ -75,7 +81,7 @@ const getReports = async (req, res) => {
     }
 }
 
-const getReport = async (req, res) => {
+const getReport = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -88,12 +94,12 @@ const getReport = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const data = await db.report.findOne({
+        const data = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -112,7 +118,7 @@ const getReport = async (req, res) => {
     }
 }
 
-const deleteReport = async (req, res) => {
+const deleteReport = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -125,12 +131,12 @@ const deleteReport = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const data = await db.report.destroy({
+        const data = await Report.destroy({
             where: {
                 studyprogrammeId,
                 year
@@ -153,7 +159,7 @@ const deleteReport = async (req, res) => {
 
 
 // Comments ---------------------------------------------------------------
-const getComments = async (req, res) => {
+const getComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -166,12 +172,12 @@ const getComments = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -192,7 +198,7 @@ const getComments = async (req, res) => {
     }
 }
 
-const createOrUpdateComments = async (req, res) => {
+const createOrUpdateComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const comments = req.body
@@ -208,12 +214,12 @@ const createOrUpdateComments = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -224,7 +230,7 @@ const createOrUpdateComments = async (req, res) => {
             return res.status(404).json({ error: 'No report was found' })
         }
 
-        const data = await db.report.update({
+        const data = await Report.update({
             comments,
         }, {
             where: {
@@ -240,7 +246,7 @@ const createOrUpdateComments = async (req, res) => {
     }
 }
 
-const deleteComments = async (req, res) => {
+const deleteComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -253,12 +259,12 @@ const deleteComments = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -269,7 +275,7 @@ const deleteComments = async (req, res) => {
             return res.status(404).json({ error: 'No report was found' })
         }
 
-        await db.report.update({
+        await Report.update({
             comments: null
         }, {
             where: {
@@ -288,7 +294,7 @@ const deleteComments = async (req, res) => {
 
 
 // Actions ---------------------------------------------------------------
-const getActions = async (req, res) => {
+const getActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -301,12 +307,12 @@ const getActions = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -327,7 +333,7 @@ const getActions = async (req, res) => {
     }
 }
 
-const createOrUpdateActions = async (req, res) => {
+const createOrUpdateActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const actions = req.body
@@ -343,12 +349,12 @@ const createOrUpdateActions = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -359,7 +365,7 @@ const createOrUpdateActions = async (req, res) => {
             return res.status(404).json({ error: 'No report was found' })
         }
 
-        const data = await db.report.update({
+        const data = await Report.update({
             actions,
         }, {
             where: {
@@ -375,7 +381,7 @@ const createOrUpdateActions = async (req, res) => {
     }
 }
 
-const deleteActions = async (req, res) => {
+const deleteActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
 
@@ -388,12 +394,12 @@ const deleteActions = async (req, res) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
 
-        const report = await db.report.findOne({
+        const report = await Report.findOne({
             where: {
                 studyprogrammeId,
                 year
@@ -404,7 +410,7 @@ const deleteActions = async (req, res) => {
             return res.status(404).json({ error: 'No report was found' })
         }
 
-        await db.report.update({
+        await Report.update({
             actions: null
         }, {
             where: {
@@ -421,18 +427,6 @@ const deleteActions = async (req, res) => {
     }
 }
 
-// module.exports = {
-//     createReport,
-//     getReports,
-//     getReport,
-//     deleteReport,
-//     getComments,
-//     createOrUpdateComments,
-//     deleteComments,
-//     getActions,
-//     createOrUpdateActions,
-//     deleteActions
-// }
 
 export default {
     createReport,

@@ -1,44 +1,60 @@
-type ReportAttributes = {
-    studyprogrammeId: number
-    year: number
-    comments: any
-    actions: any
+import { sequelize } from 'server/database/connection'
+import {
+    Model,
+    INTEGER,
+    JSONB,
+    DATE,
+    InferAttributes,
+    InferCreationAttributes,
+    ForeignKey,
+    CreationOptional,
+} from 'sequelize'
+
+// Associated Models
+import Studyprogramme from './studyprogramme'
+
+class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Report>> {
+    declare id: CreationOptional<number>;
+    declare studyprogrammeId: ForeignKey<Studyprogramme['id']>;
+    declare year: number;
+    declare comments: any
+    declare actions: any
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
-export default (sequelize: any, DataTypes: any) => {
-    const report = sequelize.define(
-        'report',
-        {
-            studyprogrammeId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            year: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            comments: {
-                type: DataTypes.JSONB,
-                defaultValue: null
-            },
-            actions: {
 
-                type: DataTypes.JSONB,
-                defaultValue: null
-            },
+Report.init(
+    {
+        id: {
+            type: INTEGER.UNSIGNED,
+            autoIncrement: true,
+            primaryKey: true
         },
-        {
-            underscored: true,
-            tableName: 'reports',
+        studyprogrammeId: {
+            type: INTEGER,
+            allowNull: false,
         },
-    )
-
-    report.associate = (models: any) => {
-        report.belongsTo(models.studyprogramme, {
-            foreignKey: 'studyprogrammeId',
-            as: 'associatedStudyprogramme',
-        })
+        year: {
+            type: INTEGER,
+            allowNull: false,
+        },
+        comments: {
+            type: JSONB,
+            defaultValue: null
+        },
+        actions: {
+            type: JSONB,
+            defaultValue: null
+        },
+        createdAt: DATE,
+        updatedAt: DATE
+    },
+    {
+        sequelize,
+        underscored: true,
+        tableName: 'reports',
     }
+)
 
-    return report
-}
+export default Report
