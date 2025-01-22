@@ -13,6 +13,8 @@ import type { Request, Response } from 'express'
 
 // Report ---------------------------------------------------------------
 const createReport = async (req: Request, res: Response) => {
+    console.log("haLLOOOO")
+
     try {
         const { studyprogrammeId, year } = req.body
 
@@ -64,6 +66,7 @@ const getReports = async (req: Request, res: Response) => {
 
         // Check that studyprogramme exists
         const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -198,7 +201,7 @@ const getComments = async (req: Request, res: Response) => {
     }
 }
 
-const createOrUpdateComments = async (req: Request, res: Response) => {
+const updateComments = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const comments = req.body
@@ -246,52 +249,6 @@ const createOrUpdateComments = async (req: Request, res: Response) => {
     }
 }
 
-const deleteComments = async (req: Request, res: Response) => {
-    try {
-        const { studyprogrammeId, year } = req.params
-
-        if (!studyprogrammeId) {
-            return res.status(400).json({ error: 'Studyprogramme is required' })
-        }
-
-        if (!year) {
-            return res.status(400).json({ error: 'Year is required' })
-        }
-
-        // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
-        if (!studyprogramme) {
-            return res.status(404).json({ error: 'Studyprogramme not found' })
-        }
-
-        const report = await Report.findOne({
-            where: {
-                studyprogrammeId,
-                year
-            }
-        })
-
-        if (!report) {
-            return res.status(404).json({ error: 'No report was found' })
-        }
-
-        await Report.update({
-            comments: null
-        }, {
-            where: {
-                studyprogrammeId,
-                year
-            }
-        })
-
-        return res.status(200).json({ message: 'Comments deleted successfully' })
-
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
-
 
 // Actions ---------------------------------------------------------------
 const getActions = async (req: Request, res: Response) => {
@@ -333,7 +290,7 @@ const getActions = async (req: Request, res: Response) => {
     }
 }
 
-const createOrUpdateActions = async (req: Request, res: Response) => {
+const updateActions = async (req: Request, res: Response) => {
     try {
         const { studyprogrammeId, year } = req.params
         const actions = req.body
@@ -381,51 +338,6 @@ const createOrUpdateActions = async (req: Request, res: Response) => {
     }
 }
 
-const deleteActions = async (req: Request, res: Response) => {
-    try {
-        const { studyprogrammeId, year } = req.params
-
-        if (!studyprogrammeId) {
-            return res.status(400).json({ error: 'Studyprogramme is required' })
-        }
-
-        if (!year) {
-            return res.status(400).json({ error: 'Year is required' })
-        }
-
-        // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
-        if (!studyprogramme) {
-            return res.status(404).json({ error: 'Studyprogramme not found' })
-        }
-
-        const report = await Report.findOne({
-            where: {
-                studyprogrammeId,
-                year
-            }
-        })
-
-        if (!report) {
-            return res.status(404).json({ error: 'No report was found' })
-        }
-
-        await Report.update({
-            actions: null
-        }, {
-            where: {
-                studyprogrammeId,
-                year
-            }
-        })
-
-        return res.status(200).json({ message: 'Comments deleted successfully' })
-
-    } catch (error) {
-        logger.error(`Database error: ${error}`)
-        return res.status(500).json({ error: 'Database error' })
-    }
-}
 
 
 export default {
@@ -434,9 +346,7 @@ export default {
     getReport,
     deleteReport,
     getComments,
-    createOrUpdateComments,
-    deleteComments,
+    updateComments,
     getActions,
-    createOrUpdateActions,
-    deleteActions
+    updateActions,
 }
