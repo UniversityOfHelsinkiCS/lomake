@@ -1,4 +1,5 @@
 import logger from '../util/logger.js'
+import db from '../models/index.js'
 
 // Models
 import Report from '../models/reports.js'
@@ -26,7 +27,9 @@ const createReport = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -64,7 +67,9 @@ const getReports = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
 
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
@@ -96,7 +101,9 @@ const getReport = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -133,7 +140,9 @@ const deleteReport = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -174,7 +183,9 @@ const getComments = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -216,7 +227,9 @@ const updateComments = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -263,7 +276,9 @@ const getActions = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }
@@ -305,7 +320,9 @@ const updateActions = async (req: Request, res: Response) => {
         }
 
         // Check that studyprogramme exists
-        const studyprogramme = await Studyprogramme.findByPk(studyprogrammeId)
+        // @ts-ignore
+        // ignore db type error for now since it has not been typed
+        const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
         if (!studyprogramme) {
             return res.status(404).json({ error: 'Studyprogramme not found' })
         }

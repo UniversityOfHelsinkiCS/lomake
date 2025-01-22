@@ -10,12 +10,9 @@ import {
     CreationOptional,
 } from 'sequelize'
 
-// Associated Models
-import Studyprogramme from './studyprogramme'
-
 class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Report>> {
     declare id: CreationOptional<number>;
-    declare studyprogrammeId: ForeignKey<Studyprogramme['id']>;
+    declare studyprogrammeId: ForeignKey<number>;
     declare year: number;
     declare comments: any
     declare actions: any
