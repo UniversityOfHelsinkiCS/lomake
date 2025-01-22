@@ -1,3 +1,6 @@
+// Associated typescript models
+import Report from "./reports"
+
 export default (sequelize, DataTypes) => {
   const studyprogramme = sequelize.define(
     'studyprogramme',
@@ -29,6 +32,12 @@ export default (sequelize, DataTypes) => {
       through: 'companionFaculty',
       foreignKey: 'studyprogrammeId',
       as: 'companionFaculties',
+    })
+
+    // A studyprogramme has many yearly reports
+    studyprogramme.hasMany(Report, {
+      foreignKey: 'studyprogrammeId',
+      as: 'reports',
     })
   }
 
