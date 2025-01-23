@@ -1,4 +1,5 @@
 import useFetchKeyData from '../../hooks/useFetchKeyData'
+import DataComponent from './DataComponent'
 
 import TextFieldComponent from './Generic/TextFieldComponent'
 
@@ -17,6 +18,7 @@ const Page = () => {
         <h1>Testattava teksikenttä</h1>
         <TextFieldComponent />
       </div>
+      <DataComponent />
     </div>
   )
 }

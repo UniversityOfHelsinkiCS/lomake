@@ -3,9 +3,11 @@ import { handleRequest } from './apiConnection';
 import webSocketMiddleware from './webSocket';
 import combinedReducers from './redux';
 
-export interface RootState {
+export interface State {
   keyData: {
-    data: {}
+    data: {
+      [key: string]: any
+    }
   }
 }
 
