@@ -23,7 +23,7 @@ const CustomCard = ({ type, data }: CustomCardProps) => {
 const DataComponent = () => {
   const keyData = useFetchKeyData()
 
-  if (!keyData || keyData === 0 || !keyData[0].data) return <div>Loading...</div>
+  if (!keyData || keyData.length === 0 || !keyData[0].data) return <div>Loading...</div>
 
   const dataMap = keyData[0].data
 
