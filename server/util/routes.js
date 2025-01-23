@@ -79,6 +79,8 @@ router.get('/reports/:studyprogrammeId/:year/comments/', checkAdmin, reports.get
 router.put('/reports/:studyprogrammeId/:year/comments/', checkAdmin, reports.updateComments)
 router.get('/reports/:studyprogrammeId/:year/actions/', checkAdmin, reports.getActions)
 router.put('/reports/:studyprogrammeId/:year/actions/', checkAdmin, reports.updateActions)
+router.get('/reports/:studyprogrammeId/:year/facultyActions/', checkAdmin, reports.getFacultyActions)
+router.put('/reports/:studyprogrammeId/:year/facultyActions/', checkAdmin, reports.updateFacultyActions)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)

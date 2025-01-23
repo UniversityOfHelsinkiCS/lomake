@@ -16,6 +16,7 @@ class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Repo
     declare year: number;
     declare comments: any
     declare actions: any
+    declare facultyActions: any
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
@@ -41,6 +42,10 @@ Report.init(
             defaultValue: null
         },
         actions: {
+            type: JSONB,
+            defaultValue: null
+        },
+        facultyActions: {
             type: JSONB,
             defaultValue: null
         },
