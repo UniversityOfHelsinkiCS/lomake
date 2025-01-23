@@ -5,7 +5,7 @@ import { RootState } from '../util/store'
 
 const useFetchKeyData = () => {
   const dispatch = useDispatch()
-  const keyData = useSelector((state: RootState) => state.keyData.data)
+  const keyData = useSelector((state: RootState) => state.keyData)
 
   useEffect(() => {
     dispatch(fetchKeyData())

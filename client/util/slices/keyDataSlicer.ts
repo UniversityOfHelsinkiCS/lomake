@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import callBuilder from '../apiConnection'
+import { callApi } from '../apiConnection'
 
-export const fetchKeyData = createAsyncThunk('keyData/fetchKeyData', async () => {
-  const response = await callBuilder('/keydata', 'GET_KEYDATA')
+export const fetchKeyData = createAsyncThunk('keyData', async () => {
+  const response = await callApi('/keydata')
   return response.data
 })
 

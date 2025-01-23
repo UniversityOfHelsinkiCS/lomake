@@ -8,7 +8,7 @@ export const up = ({ context: queryInterface }) => {
       primaryKey: true,
       type: INTEGER,
     },
-    studyprogrammeId: {
+    studyprogramme_id: {
       type: INTEGER,
       allowNull: false,
     },
@@ -24,12 +24,12 @@ export const up = ({ context: queryInterface }) => {
       type: JSONB,
       defaultValue: null
     },
-    facultyActions: {
+    faculty_actions: {
       type: JSONB,
       defaultValue: null
     },
-    createdAt: DATE,
-    updatedAt: DATE
+    created_at: DATE,
+    updated_at: DATE
   })
 }
 
