@@ -3,6 +3,12 @@ import { handleRequest } from './apiConnection';
 import webSocketMiddleware from './webSocket';
 import combinedReducers from './redux';
 
+export interface RootState {
+  keyData: {
+    data: {}
+  }
+}
+
 const store = configureStore({
   reducer: combinedReducers,
   middleware: getDefaultMiddleware =>
