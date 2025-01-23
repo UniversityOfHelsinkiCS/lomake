@@ -7,9 +7,6 @@ import Report from '../models/reports.js'
 // Types
 import type { Request, Response } from 'express'
 
-
-    
-
 interface ValidateOperationResponse {
     success: boolean,
     error: string,
@@ -213,15 +210,15 @@ const updateComments = async (req: Request, res: Response) => {
 }
 
 
-// Actions ---------------------------------------------------------------
-const getActions = async (req: Request, res: Response) => {
+// Studyprogramme Measures ---------------------------------------------------------------
+const getStudyprogrammeMeasures = async (req: Request, res: Response) => {
     try {
         const result = await validateOperation(req)
         if (!result.success) return res.status(result.status).json({ error: result.error })
 
         const { report } = result
 
-        const data = report.actions
+        const data = report.studyprogrammeMeasures
 
         return res.status(200).json(data)
 
@@ -231,16 +228,16 @@ const getActions = async (req: Request, res: Response) => {
     }
 }
 
-const updateActions = async (req: Request, res: Response) => {
+const updateStudyprogrammeMeasures = async (req: Request, res: Response) => {
     try {
         const result = await validateOperation(req)
         if (!result.success) return res.status(result.status).json({ error: result.error })
 
         const { studyprogrammeId, year } = result
-        const actions = req.body
+        const studyprogrammeMeasures = req.body
         
         const data = await Report.update({
-            actions,
+            studyprogrammeMeasures,
         }, {
             where: {
                 studyprogrammeId,
@@ -257,7 +254,7 @@ const updateActions = async (req: Request, res: Response) => {
 
 
 // Faculty Actions ---------------------------------------------------------------
-const getFacultyActions = async (req: Request, res: Response) => {
+const getFacultyMeasures = async (req: Request, res: Response) => {
     try {
         
         const result = await validateOperation(req)
@@ -265,7 +262,7 @@ const getFacultyActions = async (req: Request, res: Response) => {
 
         const { report } = result
 
-        const data = report.facultyActions
+        const data = report.facultyMeasures
 
         return res.status(200).json(data)
 
@@ -276,16 +273,16 @@ const getFacultyActions = async (req: Request, res: Response) => {
 }
 
 
-const updateFacultyActions = async (req: Request, res: Response) => {
+const updateFacultyMeasures = async (req: Request, res: Response) => {
     try {
         const result = await validateOperation(req)
         if (!result.success) return res.status(result.status).json({ error: result.error })
 
         const { studyprogrammeId, year } = result
-        const facultyActions = req.body
+        const facultyMeasures = req.body
 
         const data = await Report.update({
-            facultyActions,
+            facultyMeasures,
         }, {
             where: {
                 studyprogrammeId,
@@ -307,10 +304,13 @@ export default {
     getReports,
     getReport,
     deleteReport,
+    
     getComments,
     updateComments,
-    getActions,
-    updateActions,
-    getFacultyActions,
-    updateFacultyActions
+    
+    getStudyprogrammeMeasures,
+    updateStudyprogrammeMeasures,
+
+    getFacultyMeasures,
+    updateFacultyMeasures
 }
