@@ -17,6 +17,7 @@ import faculties from './facultyReducer'
 import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
+import keyData from './keyDataReducer'
 
 export default combineReducers({
   form,
@@ -36,4 +37,5 @@ export default combineReducers({
   summaries,
   reformAnswers,
   monitoring,
+  keyData,
 })
