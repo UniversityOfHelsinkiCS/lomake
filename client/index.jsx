@@ -5,7 +5,8 @@ import ErrorBoundary from './components/ErrorBoundary'
 import UserFaker from './components/UserFaker'
 import App from './components/App'
 import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
-
+import { ThemeProvider } from '@mui/material/styles'
+import theme from '/theme'
 import './assets/custom.scss'
 
 import store from './util/store'
@@ -26,7 +27,9 @@ const refresh = () => {
       <BrowserRouter basename={basePath}>
         <ErrorBoundary>
           {process.env.NODE_ENV === 'development' && <UserFaker />}
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </Provider>,
