@@ -64,6 +64,7 @@ export default {
     email: 'Sähköpostiosoite',
     cancel: 'Peruuta',
     edit: 'Muokkaa',
+    stopEditing: "Lopeta muokkaaminen",
     delete: 'Poista',
     filled: 'täytetty',
     confirmDeselect: 'Haluatko varmasti poistaa valinnan?',

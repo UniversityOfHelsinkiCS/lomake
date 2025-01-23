@@ -415,6 +415,7 @@ export default {
     name: 'Namn',
     view: 'Läs',
     edit: 'Redigera',
+    stopEditing: "Sluta redigera",
     owner: 'Ägare',
     noUsers: 'Inga användare',
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',

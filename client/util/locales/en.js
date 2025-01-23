@@ -57,6 +57,7 @@ export default {
     email: 'Email',
     cancel: 'Cancel',
     edit: 'Edit',
+    stopEditing: "Stop editing",
     delete: 'Delete',
     filled: 'filled',
     confirmDeselect: 'Are you sure you want to deselect the question?',
