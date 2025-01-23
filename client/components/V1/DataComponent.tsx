@@ -1,8 +1,8 @@
 import useFetchKeyData from '../../hooks/useFetchKeyData'
 
 interface CustomCardProps {
-  type: string
-  data: any
+  type: string;
+  data: any;
 }
 
 const CustomCard = ({ type, data }: CustomCardProps) => {
@@ -20,15 +20,17 @@ const CustomCard = ({ type, data }: CustomCardProps) => {
   )
 }
 
+
 const DataComponent = () => {
   const keyData = useFetchKeyData()
 
-  if (!keyData || keyData.length === 0 || !keyData[0].data) return <div>Loading...</div>
+  if (!keyData || !keyData[0].data) return <div>Loading...</div>
 
   const dataMap = keyData[0].data
 
   return (
     <div>
+      <h1>Page</h1>
       <ul>
         {Object.keys(dataMap).map((key: string) => (
           <>
