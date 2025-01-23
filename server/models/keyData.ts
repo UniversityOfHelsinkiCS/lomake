@@ -1,9 +1,11 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB } from 'sequelize'
+import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB, DATE } from 'sequelize'
 import { sequelize } from '../database/connection.js'
 
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {
   declare id: CreationOptional<number>
   declare data: {}
+  declare createdAt: Date
+  declare updatedAt: Date
 }
 
 KeyData.init(
@@ -17,6 +19,8 @@ KeyData.init(
       type: JSONB,
       allowNull: false,
     },
+    createdAt: DATE,
+    updatedAt: DATE,
   },
   {
     sequelize,
