@@ -12,6 +12,9 @@ const Page = () => {
         <TextFieldComponent />
         
       </div>
+
+      <br />
+      <br />
       <DataComponent />
       <DataComponent />
     </div>
