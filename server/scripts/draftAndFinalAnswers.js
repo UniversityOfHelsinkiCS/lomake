@@ -4,6 +4,8 @@ import { Op } from 'sequelize'
 import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { formKeys, committeeList } from '../../config/data.js'
+import initReports from './initReports.js'
+import { log } from 'console'
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -107,6 +109,9 @@ const createDraftAnswers = async (newYear, form) => {
 
   if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     await handleNonProgrammeDraftAnswers(form)
+
+  } else if (form === 10) {
+    await initReports()
   } else {
     let toOpen = []
 

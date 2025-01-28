@@ -50,6 +50,11 @@ const forms = [
     name: 'Toimenpiteiden toteutus ja seuranta tiedekunnissa',
     type: 'evaluation',
   },
+  {
+    key: 10,
+    name: 'Vuosiseuranta - UUSI',
+    type: 'yearlyAssessment',
+  },
 ]
 
 const facultyList = [
