@@ -8,6 +8,7 @@ export default function SaveIndicator() {
   const { t } = useTranslation()
 
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
+  const date = lastSaveSuccess ? new Date(lastSaveSuccess) : null
 
   const lang = useSelector(state => state.language)
   const viewOnly = useSelector(state => state.form.viewOnly)
@@ -23,7 +24,7 @@ export default function SaveIndicator() {
         zIndex: 100,
       }}
     >
-      {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+      {t('lastSaved')} {date ? date.toLocaleTimeString(lang !== 'se' ? lang : 'sv') : ''}
     </Button>
   )
 }

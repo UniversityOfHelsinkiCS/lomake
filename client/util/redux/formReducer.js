@@ -115,7 +115,7 @@ export default (state = initialState, action) => {
     case 'UPDATE_FORM_FIELD':
       return {
         ...state,
-        lastSaveAttempt: new Date(),
+        lastSaveAttempt: new Date().toISOString(),
         data: {
           ...state.data,
           [action.field]: action.value,
@@ -125,7 +125,7 @@ export default (state = initialState, action) => {
     case 'UPDATE_FORM_FIELD_EXP':
       return {
         ...state,
-        lastSaveAttempt: new Date(),
+        lastSaveAttempt: new Date().toISOString(),
         data: {
           ...state.data,
           [action.field]: action.value,
@@ -178,7 +178,7 @@ export default (state = initialState, action) => {
     case 'UPDATE_CURRENT_EDITORS': {
       return {
         ...state,
-        lastSaveSuccess: new Date(),
+        lastSaveSuccess: new Date().toISOString(),
       }
     }
     case 'SET_ANSWER_LEVELS': {
@@ -223,7 +223,7 @@ export default (state = initialState, action) => {
     case 'POST_USER_PARTIAL_ANSWER_SUCCESS': {
       return {
         ...state,
-        lastSaveSuccess: new Date(),
+        lastSaveSuccess: new Date().toISOString(),
       }
     }
     case 'UPDATE_ANSWERS_READY_SUCCESS': {

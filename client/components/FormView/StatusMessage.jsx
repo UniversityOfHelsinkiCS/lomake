@@ -19,6 +19,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
   const lastSaved = useSelector(state => state.form.lastSaveSuccess)
   const viewOnly = useSelector(state => state.form.viewOnly)
   const deadlineObj = formDeadline && formDeadline.date ? new Date(formDeadline.date) : undefined
+  const date = lastSaved ? new Date(lastSaved) : null
 
   if (
     form === formKeys.META_EVALUATION &&
@@ -69,7 +70,7 @@ const StatusMessage = ({ form, writeAccess = false }) => {
         data-cy="saving-answers-notice"
         icon="info"
         header={`${t('formView:savingAnswers')} ${deadlineObj.toLocaleString(locale)}.`}
-        content={`${t('lastSaved')} ${lastSaved.toLocaleString(locale)}`}
+        content={`${t('lastSaved')} ${date ? date.toLocaleString(locale) : ''}`}
       />
       {/* form === 3 && formData.data && <LastFormSentMessage /> Deprecated since sending forms is not a thing */}
     </>
