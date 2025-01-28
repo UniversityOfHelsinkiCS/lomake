@@ -6,7 +6,7 @@ import { getYearsArray, LOMAKE_SINCE_YEAR } from '../../config/common.js'
 
 const initReports = async () => {
   const programmes = await (db as { studyprogramme: any }).studyprogramme.findAll({})
-  const years = getYearsArray(LOMAKE_SINCE_YEAR)
+  const years = [2025]
 
   years.forEach(async (currentYear: number) => {
     try {
