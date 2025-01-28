@@ -7,7 +7,6 @@ interface CustomCardProps {
 }
 
 const CustomCard = ({ type, data }: CustomCardProps) => {
-  if (type === 'metadata') return null
   return (
     <div className="custom-card">
       <h3>{type}</h3>
