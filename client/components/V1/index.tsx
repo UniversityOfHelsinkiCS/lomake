@@ -9,7 +9,7 @@ const Page = () => {
       <br />
       <div>
         <h1>Testattava teksikenttä</h1>
-        <TextFieldComponent />
+        <TextFieldComponent id={'test_1'}/>
         
       </div>
 

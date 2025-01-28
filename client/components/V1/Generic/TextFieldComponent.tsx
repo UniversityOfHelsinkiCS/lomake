@@ -1,52 +1,88 @@
+import { useState, useEffect } from 'react'
 import { TextField, Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
+import { getLockHttp } from '../../../util/redux/formReducer'
+import { RootState } from '../../../util/store'
+import { wsJoinRoom } from '../../../util/redux/websocketReducer'
+import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
+import { deepCheck } from '../../Generic/Textarea'
+import { updateFormHttp } from '../../../util/redux/reportsReducer'
 
-const TextFieldComponent = () => {
-    const { t } = useTranslation()
+const TextFieldComponent = ({ id }: { id: string }) => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
 
-    const [content, setContent] = useState<string>('')
-    const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [content, setContent] = useState<string>('')
+  const [hasLock, setHasLock] = useState<boolean>(true)
+  const [gettingLock, setGettingLock] = useState<boolean>(false)
 
-    const handleStopEditing = () => {
-        setIsEditing(false)
+  const room = useSelector((state: RootState) => state.room)
+  const dataFromRedux = useSelector(({ form }: { form: any }) => form.data[id] || '')
+  const currentEditors = useSelector(({ currentEditors }: { currentEditors: any }) => currentEditors.data, deepCheck)
+  const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
+  const form = 10
+
+  useEffect(() => {
+    dispatch(wsJoinRoom('KH50_005', form))
+  }, [])
+
+  useEffect(() => {
+    const gotTheLock = (currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid)
+    setHasLock(gotTheLock)
+    if (gettingLock && currentEditors[id]) {
+      setGettingLock(false)
     }
+  }, [currentEditors])
 
-    const handleStartEditing = () => {
-        setIsEditing(true)
+  useEffect(() => {
+    if (!hasLock) setContent(dataFromRedux)
+  }, [dataFromRedux, hasLock])
+
+  const handleStopEditing = () => {
+    setHasLock(false)
+    dispatch(releaseFieldLocally(id))
+    dispatch(updateFormHttp(room, 2025, id, content))
+  }
+
+  const askForLock = () => {
+    if (!hasLock && !gettingLock && currentEditors && !currentEditors[id]) {
+      setGettingLock(true)
+      dispatch(getLockHttp(id, room))
     }
+  }
 
-    return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
-            <TextField
-                disabled={!isEditing}
-                type='text'
-                defaultValue={content}
-                variant='outlined'
-                multiline
-                minRows={8}
-                fullWidth
-                label="Testattava tekstikenttä"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-            />
-            {
-                isEditing ?
-                    <Button
-                        variant='contained'
-                        onClick={handleStopEditing}>
-                        {t('stopEditing')}
-                    </Button>
-                    :
-                    <Button
-                        variant='contained'
-                        onClick={handleStartEditing}>
-                        {t('edit')}
-                    </Button>
-            }
-        </Box >
+  const handleStartEditing = () => {
+    askForLock()
+  }
 
-    )
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
+      <TextField
+        disabled={!hasLock}
+        type="text"
+        defaultValue={content}
+        variant="outlined"
+        multiline
+        minRows={8}
+        fullWidth
+        label="Testattava tekstikenttä"
+        value={content}
+        onChange={e => setContent(e.target.value)}
+      />
+      {hasLock ? (
+        <Button variant="contained" onClick={handleStopEditing}>
+          {t('stopEditing')}
+        </Button>
+      ) : (
+        <Button variant="contained" onClick={handleStartEditing}>
+          {t('edit')}
+        </Button>
+      )}
+      <ReactMarkdown>{content}</ReactMarkdown>
+    </Box>
+  )
 }
 
 export default TextFieldComponent

@@ -18,7 +18,9 @@ interface ValidateOperationResponse {
 
 // Helper functions ---------------------------------------------------------------
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
-    const { studyprogrammeId, year } = req.params
+    const { studyprogrammeKey, year } = req.params
+
+    console.log(req.body, req.params)
 
     // TODO: validate body data
 
@@ -31,8 +33,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
         year: null
     }
 
-    if (!studyprogrammeId) {
-        resultObject.error = 'StudyprogrammeId param is required'
+    if (!studyprogrammeKey) {
+        resultObject.error = 'StudyprogrammeKey param is required'
         resultObject.status = 400
         return resultObject
     }
@@ -45,7 +47,11 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
     // @ts-ignore
     // ignore db type error for now since it has not been typed
-    const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
+    const studyprogramme = await db.studyprogramme.findOne({
+        where: {
+            key: studyprogrammeKey
+        }
+    })
     if (!studyprogramme) {
         resultObject.error = 'Studyprogramme not found'
         resultObject.status = 404
@@ -54,7 +60,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
     const report: Report = await Report.findOne({
         where: {
-            studyprogrammeId,
+            studyprogrammeId: studyprogramme.id,
             year
         }
     })
@@ -66,7 +72,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
     resultObject.success = true
     resultObject.report = report
-    resultObject.studyprogrammeId = parseInt(studyprogrammeId)
+    resultObject.studyprogrammeId = parseInt(studyprogramme.id)
     resultObject.year = parseInt(year)
     resultObject.status = 200
 
