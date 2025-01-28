@@ -2,7 +2,7 @@ import { TextField, Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
-const TextFieldComponent = () => {
+const MeasuresTextField = () => {
     const { t } = useTranslation()
 
     const [content, setContent] = useState<string>('')
@@ -49,4 +49,4 @@ const TextFieldComponent = () => {
     )
 }
 
-export default TextFieldComponent
+export default MeasuresTextField
