@@ -100,8 +100,8 @@ const initialState = {
   data: {},
   viewOnly: false,
   viewingOldAnswers: false,
-  lastSaveAttempt: new Date(),
-  lastSaveSuccess: new Date(),
+  lastSaveAttempt: new Date().toISOString(),
+  lastSaveSuccess: new Date().toISOString(),
   oldIndividualAnswers: [],
   // (below) data from Finnish UNI-form to be used in other language versions
   finnishUniFormData: [],

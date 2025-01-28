@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../hooks/useFetchKeyData'
 
 interface CustomCardProps {
@@ -6,6 +7,7 @@ interface CustomCardProps {
 }
 
 const CustomCard = ({ type, data }: CustomCardProps) => {
+  if (type === 'metadata') return null
   return (
     <div className="custom-card">
       <h3>{type}</h3>
@@ -23,23 +25,20 @@ const CustomCard = ({ type, data }: CustomCardProps) => {
 const DataComponent = () => {
   const keyData = useFetchKeyData()
 
-  if (!keyData || keyData.length === 0 || !keyData[0].data) return <div>Loading...</div>
+  if (!keyData || keyData.length === 0 || !keyData[0].data) return <CircularProgress />
 
-  const dataMap = keyData[0].data
+  const { metadata, ...dataMap } = keyData[0].data
 
   return (
     <div>
       <ul>
         {Object.keys(dataMap).map((key: string) => (
           <>
-            <li key={key}>
-              <h2>{key}</h2>
-              {dataMap[key].map((value: any, index: number) => (
-                <div key={index}>
-                  <CustomCard type={key} data={value} />
-                </div>
-              ))}
-            </li>
+            {dataMap[key].map((value: any, index: number) => (
+              <div key={index}>
+                <CustomCard type={key} data={value} />
+              </div>
+            ))}
             <br />
           </>
         ))}
