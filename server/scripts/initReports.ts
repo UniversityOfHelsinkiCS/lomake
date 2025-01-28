@@ -21,6 +21,9 @@ const initReports = async () => {
           await Report.create({
             studyprogrammeId: id,
             year: currentYear,
+            comments: {},
+            studyprogrammeMeasures: {},
+            facultyMeasures: {},
           })
         }
       })
