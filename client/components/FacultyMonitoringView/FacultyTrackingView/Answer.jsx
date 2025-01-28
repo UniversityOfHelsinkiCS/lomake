@@ -29,6 +29,7 @@ const Answer = ({ question, faculty }) => {
   const isEditable = !viewOnly
   const isDoctoral = useSelector(({ filters }) => filters.isDoctoral)
   const lastSaveSuccess = useSelector(state => state.form.lastSaveSuccess)
+  const date = new Date(lastSaveSuccess) 
 
   // check if current user is the editor
   const currentEditors = useSelector(({ currentEditors }) => currentEditors.data, deepCheck)
@@ -222,7 +223,7 @@ const Answer = ({ question, faculty }) => {
           <MonitoringQuestionForm question={formModalData} faculty={faculty} />
           <Segment inverted color="green">
             <b>
-              {t('lastSaved')} {lastSaveSuccess.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
+              {t('lastSaved')} {date.toLocaleTimeString(lang !== 'se' ? lang : 'sv')}
             </b>
           </Segment>
         </CustomModal>
