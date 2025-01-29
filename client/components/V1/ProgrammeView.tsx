@@ -3,6 +3,7 @@ import { useFetchSingleKeyData } from '../../hooks/useFetchKeyData'
 import { useParams } from 'react-router'
 import { GroupKey, ProgrammeLevel } from './enums'
 import { TrafficLight } from './Generic/TrafficLightComponent'
+import { isInteger } from 'lodash'
 
 interface KeyDataCardData {
   title: string
@@ -26,33 +27,53 @@ interface CriteriaGroupProps {
 
 interface CriteriaCardProps {
   title: string
-  value: number
+  value: string
   color: string
 }
 
-const calculateColor = (value: number, threshold: string) => {
-  const [first, second] = threshold.split(';').map(Number)
+const calculateColor = (value: number, threshold: string, name: string) => {
+  const [first, second, third] = threshold
+    .split(';')
+    .map(str => str.replace(',', '.'))
+    .map(Number)
 
   if (!value) {
     return 'Harmaa'
   }
 
   if (first === 0) {
-    if (value === 0) {
+    if (value < second) {
       return 'Punainen'
-    } else if (value < second) {
+    } else if (value < third) {
       return 'Keltainen'
-    } else {
+    } else if (value >= third) {
       return 'Vihreä'
+    } else {
+      return 'Harmaa'
     }
   } else {
-    if (value > first) {
+    if (value >= first) {
       return 'Punainen'
-    } else if (value > second) {
+    } else if (value >= second) {
       return 'Keltainen'
-    } else {
+    } else if (value < second) {
       return 'Vihreä'
+    } else {
+      return 'Harmaa'
     }
+  }
+}
+
+const calculateValue = (value: number, unit?: string) => {
+  if (!value) {
+    return 'Ei dataa'
+  } else if (unit) {
+    return `${(value * 100).toFixed(0)} ${unit}`
+  } else {
+    if (isInteger(value)) {
+      return value.toString()
+    }
+    return value.toFixed(2)
   }
 }
 
@@ -69,9 +90,12 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       }}
     >
       {meta.map(data => {
+        const unit = data.yksikko
         const value = props.programme.values[data.kriteerinNimi]
-        const color = calculateColor(value, data.kynnysarvot)
-        return <CriteriaCard key={data.kriteerinNimi} title={data.kriteerinNimi} value={value} color={color} />
+        const color = calculateColor(value, data.kynnysarvot, data.kriteerinNimi)
+        const valueText = calculateValue(value, unit)
+
+        return <CriteriaCard key={data.kriteerinNimi} title={data.kriteerinNimi} value={valueText} color={color} />
       })}
     </Box>
   )
@@ -82,7 +106,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
     <Card>
       <TrafficLight color={props.color} />
       <p>{props.title}</p>
-      <p>{props.value?.toFixed(2) ?? 'Ei dataa'}</p>
+      <p>{props.value}</p>
       <br />
     </Card>
   )
