@@ -1,28 +1,32 @@
 import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-import useFetchKeyData, {
-  KeyDataKandiohjelmat,
-  KeyDataMaisteriohjelmat,
-  KeyDataMetadata,
-} from '../../hooks/useFetchKeyData'
-
-enum KandiOrMaisteri {
-  KANDI = 'kandi',
-  MAISTERI = 'maisteri',
-}
+import useFetchKeyData from '../../hooks/useFetchKeyData'
+import { Link } from 'react-router-dom'
+import { ProgrammeLevel } from './enums'
+import { TrafficLight } from './Generic/TrafficLightComponent'
 
 interface ProgrammeRowProps {
-  type: KandiOrMaisteri
-  data: KeyDataKandiohjelmat | KeyDataMaisteriohjelmat
+  type: ProgrammeLevel
+  data: KeyDataProgramme
   metaData: KeyDataMetadata[]
 }
 
 const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
+  const programmeId = data.koulutusohjelma.split(' ')[0]
+
   return (
     <TableRow key={data.koulutusohjelma}>
-      <TableCell>{data.koulutusohjelma}</TableCell>
-      <TableCell>{data.vetovoimaisuus}</TableCell>
-      <TableCell>{data.lapivirtaus}</TableCell>
-      <TableCell>{data.opiskelijapalaute}</TableCell>
+      <TableCell>
+        <Link to={`/v1/programmes/${programmeId}`}>{data.koulutusohjelma}</Link>
+      </TableCell>
+      <TableCell>
+        <TrafficLight color={data.vetovoimaisuus}></TrafficLight>
+      </TableCell>
+      <TableCell>
+        <TrafficLight color={data.lapivirtaus}></TrafficLight>
+      </TableCell>
+      <TableCell>
+        <TrafficLight color={data.opiskelijapalaute}></TrafficLight>
+      </TableCell>
     </TableRow>
   )
 }
@@ -52,7 +56,7 @@ const DataComponent = () => {
           {kandiohjelmat.map(kandiohjelma => (
             <ProgrammeRow
               key={kandiohjelma.koulutusohjelma}
-              type={KandiOrMaisteri.KANDI}
+              type={ProgrammeLevel.KANDI}
               data={kandiohjelma}
               metaData={metadata}
             />
@@ -74,7 +78,7 @@ const DataComponent = () => {
           {maisteriohjelmat.map(maisteriohjelma => (
             <ProgrammeRow
               key={maisteriohjelma.koulutusohjelma}
-              type={KandiOrMaisteri.MAISTERI}
+              type={ProgrammeLevel.MAISTERI}
               data={maisteriohjelma}
               metaData={metadata}
             />
