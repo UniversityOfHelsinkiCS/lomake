@@ -67,6 +67,10 @@ const useFetchKeyData = () => {
     dispatch(fetchKeyData())
   }, [dispatch])
 
+  if (!keyData) {
+    return null
+  }
+
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = keyData[0].data
 
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {

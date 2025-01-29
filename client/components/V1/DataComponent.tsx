@@ -30,6 +30,10 @@ const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
 const DataComponent = () => {
   const keyData = useFetchKeyData()
 
+  if (!keyData) {
+    return <CircularProgress />
+  }
+
   const { metadata, kandiohjelmat, maisteriohjelmat } = keyData.data
 
   return (
