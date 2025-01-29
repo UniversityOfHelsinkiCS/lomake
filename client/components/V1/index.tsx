@@ -9,13 +9,11 @@ const Page = () => {
       <br />
       <div>
         <h1>Testattava teksikenttä</h1>
-        <TextFieldComponent id={'test_1'}/>
-        
+        <TextFieldComponent id={'test_1'} />
       </div>
 
       <br />
       <br />
-      <DataComponent />
       <DataComponent />
     </div>
   )

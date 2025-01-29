@@ -1,49 +1,83 @@
-import { CircularProgress } from '@mui/material'
-import useFetchKeyData from '../../hooks/useFetchKeyData'
+import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import useFetchKeyData, {
+  KeyDataKandiohjelmat,
+  KeyDataMaisteriohjelmat,
+  KeyDataMetadata,
+} from '../../hooks/useFetchKeyData'
 
-interface CustomCardProps {
-  type: string
-  data: any
+enum KandiOrMaisteri {
+  KANDI = 'kandi',
+  MAISTERI = 'maisteri',
 }
 
-const CustomCard = ({ type, data }: CustomCardProps) => {
+interface ProgrammeRowProps {
+  type: KandiOrMaisteri
+  data: KeyDataKandiohjelmat | KeyDataMaisteriohjelmat
+  metaData: KeyDataMetadata[]
+}
+
+const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
   return (
-    <div className="custom-card">
-      <h3>{type}</h3>
-      <div className="custom-card-content">
-        {Object.entries(data).map(([key, value]) => (
-          <p key={key}>
-            <strong>{key}:</strong> {JSON.stringify(value)}
-          </p>
-        ))}
-      </div>
-    </div>
+    <TableRow key={data.koulutusohjelma}>
+      <TableCell>{data.koulutusohjelma}</TableCell>
+      <TableCell>{data.vetovoimaisuus}</TableCell>
+      <TableCell>{data.lapivirtaus}</TableCell>
+      <TableCell>{data.opiskelijapalaute}</TableCell>
+    </TableRow>
   )
 }
 
 const DataComponent = () => {
   const keyData = useFetchKeyData()
 
-  if (!keyData || keyData.length === 0 || !keyData[0].data) return <CircularProgress />
-
-  const { metadata, ...dataMap } = keyData[0].data
+  const { metadata, kandiohjelmat, maisteriohjelmat } = keyData.data
 
   return (
-    <div>
-      <ul>
-        {Object.keys(dataMap).map((key: string) => (
-          <>
-            {dataMap[key].map((value: any, index: number) => (
-              <div key={index}>
-                <CustomCard type={key} data={value} />
-              </div>
-            ))}
-            <br />
-          </>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h2>Kandiohjelmat</h2>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Koulutusohjelma</TableCell>
+            <TableCell>Vetovoimaisuus</TableCell>
+            <TableCell>Läpivirtaus ja Valmistuminen</TableCell>
+            <TableCell>Opiskelijapalaute ja Työllistyminen</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {kandiohjelmat.map(kandiohjelma => (
+            <ProgrammeRow
+              key={kandiohjelma.koulutusohjelma}
+              type={KandiOrMaisteri.KANDI}
+              data={kandiohjelma}
+              metaData={metadata}
+            />
+          ))}
+        </TableBody>
+      </Table>
+
+      <h2>Maisteriohjelmat</h2>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Koulutusohjelma</TableCell>
+            <TableCell>Vetovoimaisuus</TableCell>
+            <TableCell>Läpivirtaus ja Valmistuminen</TableCell>
+            <TableCell>Opiskelijapalaute ja Työllistyminen</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {maisteriohjelmat.map(maisteriohjelma => (
+            <ProgrammeRow
+              key={maisteriohjelma.koulutusohjelma}
+              type={KandiOrMaisteri.MAISTERI}
+              data={maisteriohjelma}
+              metaData={metadata}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </>
   )
 }
-
 export default DataComponent
