@@ -16,17 +16,8 @@ export const up = ({ context: queryInterface }) => {
       type: INTEGER,
       allowNull: false,
     },
-    comments: {
+    data: {
       type: JSONB,
-      defaultValue: null
-    },
-    actions: {
-      type: JSONB,
-      defaultValue: null
-    },
-    faculty_actions: {
-      type: JSONB,
-      defaultValue: null
     },
     created_at: DATE,
     updated_at: DATE

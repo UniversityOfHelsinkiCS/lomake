@@ -1,4 +1,4 @@
-import { INTEGER, JSONB } from 'sequelize'
+import { INTEGER, JSONB, DATE } from 'sequelize'
 
 export const up = ({ context: queryInterface }) => {
   return queryInterface.createTable('key_data', {
@@ -10,6 +10,12 @@ export const up = ({ context: queryInterface }) => {
     },
     data: {
       type: JSONB,
+    },
+    created_at: {
+      type: DATE,
+    },
+    updated_at: {
+      type: DATE,
     },
   })
 }
