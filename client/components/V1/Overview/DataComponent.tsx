@@ -44,15 +44,7 @@ const Table = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-interface ProgrammeData {
-  koulutusohjelmakoodi: string
-  koulutusohjelma: string
-  vetovoimaisuus: string
-  lapivirtaus: string
-  opiskelijapalaute: string
-}
-
-const DataComponent = ({ programLevel, faculty, year}: {programLevel: string, faculty: string, year: number}) => {
+const DataComponent = ({ programLevel, faculty, year}: {programLevel: string | null, faculty: string | null, year: number | null}) => {
   const fetchedKeyData = useFetchKeyData()
   const keyData = useMemo(() => fetchedKeyData, [fetchedKeyData])
 
@@ -61,9 +53,18 @@ const DataComponent = ({ programLevel, faculty, year}: {programLevel: string, fa
   }
 
   const { kandiohjelmat, maisteriohjelmat } = keyData.data
+  let programmeData: KeyDataProgramme[] = [...kandiohjelmat, ...maisteriohjelmat]
 
-  const programmeData: ProgrammeData[] = [...kandiohjelmat, ...maisteriohjelmat]
-
+  // TODO: Add filtering by faculty and year
+  programmeData = programmeData.filter((programmeData: KeyDataProgramme) => {
+    if (programLevel === ProgrammeLevel.KANDI) {
+      return programmeData.ohjelmataso === ProgrammeLevel.KANDI
+    } else if (programLevel === ProgrammeLevel.MAISTERI) {
+      return programmeData.ohjelmataso === ProgrammeLevel.MAISTERI
+    } else {
+      return true
+    }
+  });
 
   return (
     <>
@@ -78,7 +79,7 @@ const DataComponent = ({ programLevel, faculty, year}: {programLevel: string, fa
           <TableCell>Placeholder</TableCell>
         </TableRow>
 
-        {programmeData.map((programmeData: ProgrammeData) => (
+        {programmeData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell isKey={true}>
               <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>

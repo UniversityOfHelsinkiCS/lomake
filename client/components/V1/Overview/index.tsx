@@ -1,8 +1,13 @@
 import DataComponent from "./DataComponent"
-import { ProgrammeLevel } from "../enums"
+import { useLocation } from "react-router"
 
 const OverviewPage = () => {
-  
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+
+  const programLevel = searchParams.get("level")
+  const faculty = searchParams.get("faculty")
+  const year = searchParams.get("year")
 
   return (
     <div className="content">
@@ -15,7 +20,7 @@ const OverviewPage = () => {
         <span>filter</span>
       </div>
 
-      <DataComponent programLevel={"All"} faculty={"All"} year={123}/>
+      <DataComponent programLevel={programLevel} faculty={faculty} year={parseInt(year)}/>
     </div>
   )
 }
