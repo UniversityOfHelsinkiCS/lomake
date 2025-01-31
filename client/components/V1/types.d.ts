@@ -12,6 +12,7 @@ interface SingleKeyData {
 }
 
 interface KeyDataProgramme {
+  koulutusohjelmakoodi: string
   koulutusohjelma: string
   values: {
     [key: string]: number

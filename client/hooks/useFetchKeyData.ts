@@ -14,9 +14,9 @@ export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
   let programme: KeyDataProgramme
 
   if (programmeId.startsWith('K')) {
-    programme = kandiohjelmat.find(kandiohjelma => kandiohjelma.koulutusohjelma.startsWith(programmeId))
+    programme = kandiohjelmat.find(kandiohjelma => kandiohjelma.koulutusohjelmakoodi.includes(programmeId))
   } else {
-    programme = maisteriohjelmat.find(maisteriohjelma => maisteriohjelma.koulutusohjelma.startsWith(programmeId))
+    programme = maisteriohjelmat.find(maisteriohjelma => maisteriohjelma.koulutusohjelmakoodi.includes(programmeId))
   }
 
   return { programme, metadata }
@@ -38,7 +38,8 @@ const useFetchKeyData = () => {
 
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
     const obj: KeyDataProgramme = {
-      koulutusohjelma: kandiohjelma['Koulutusohjelma'],
+      koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
+      koulutusohjelma: kandiohjelma['Koulutusohjelman nimi'],
       values: kandiohjelma,
       vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
       lapivirtaus: kandiohjelma['Läpivirtaus ja valmistuminen'],
@@ -49,7 +50,8 @@ const useFetchKeyData = () => {
 
   const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
     const obj: KeyDataProgramme = {
-      koulutusohjelma: maisteriohjelma['Koulutusohjelma'],
+      koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
+      koulutusohjelma: maisteriohjelma['Koulutusohjelman nimi'],
       values: maisteriohjelma,
       vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
       lapivirtaus: maisteriohjelma['Läpivirtaus ja valmistuminen'],

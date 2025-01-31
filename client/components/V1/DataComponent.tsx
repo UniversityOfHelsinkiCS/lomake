@@ -11,10 +11,10 @@ interface ProgrammeRowProps {
 }
 
 const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
-  const programmeId = data.koulutusohjelma.split(' ')[0]
+  const programmeId = data.koulutusohjelmakoodi
 
   return (
-    <TableRow key={data.koulutusohjelma}>
+    <TableRow key={data.koulutusohjelmakoodi}>
       <TableCell>
         <Link to={`/v1/programmes/${programmeId}`}>{data.koulutusohjelma}</Link>
       </TableCell>
@@ -55,7 +55,7 @@ const DataComponent = () => {
         <TableBody>
           {kandiohjelmat.map(kandiohjelma => (
             <ProgrammeRow
-              key={kandiohjelma.koulutusohjelma}
+              key={kandiohjelma.koulutusohjelmakoodi}
               type={ProgrammeLevel.KANDI}
               data={kandiohjelma}
               metaData={metadata}
@@ -77,7 +77,7 @@ const DataComponent = () => {
         <TableBody>
           {maisteriohjelmat.map(maisteriohjelma => (
             <ProgrammeRow
-              key={maisteriohjelma.koulutusohjelma}
+              key={maisteriohjelma.koulutusohjelmakoodi}
               type={ProgrammeLevel.MAISTERI}
               data={maisteriohjelma}
               metaData={metadata}
