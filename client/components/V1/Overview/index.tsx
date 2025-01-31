@@ -1,5 +1,6 @@
-import DataComponent from "./DataComponent"
 import { useLocation } from "react-router"
+
+import DataComponent from "./DataComponent"
 
 const OverviewPage = () => {
   const location = useLocation()
@@ -10,14 +11,13 @@ const OverviewPage = () => {
   const year = searchParams.get("year")
 
   return (
-    <div className="content">
-      <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "100%" }}>
+    <div className="content" style={{padding: "2rem"}}>
+      <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "100%", marginBottom: "2.5rem" }}>
         {/* TODO: TRANSLATE */}
-        <h1>VUOSISEURANTA</h1>
+        {/* TODO: Check global stylings for h1 */}
+        <h1 style={{margin: 0}}>VUOSISEURANTA</h1>
 
-        <span>filter</span>
-        <span>filter</span>
-        <span>filter</span>
+        {/* Filters */}
       </div>
 
       <DataComponent programLevel={programLevel} faculty={faculty} year={parseInt(year)}/>
