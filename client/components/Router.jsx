@@ -31,6 +31,7 @@ import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
 import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/index'
 import Page from './V1'
+import Overview from './V1/Overview'
 import ProgrammeView from './V1/ProgrammeView'
 
 export default () => (
@@ -105,6 +106,7 @@ export default () => (
         />
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1" component={Page} />
+        <Route exact path="/v1/overview" component={Overview} />
         <Route exact path="/v1/programmes/:programme" component={ProgrammeView} />
       </Switch>
     </ErrorBoundary>
