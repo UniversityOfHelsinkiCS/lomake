@@ -4,7 +4,7 @@ import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { ProgrammeLevel } from '../enums'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 const TableCell = ({ children, isKey = false }: { children?: React.ReactNode, isKey?: boolean }) => {
   return (
@@ -20,7 +20,7 @@ const TableRow = ({ children, isHeader = false }: { children: React.ReactNode, i
     <div style={{
       display: "grid",
       gridTemplateRows: "1fr",
-      gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr 1fr 1fr",
+      gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr 1fr 1fr", // TODO: Make this dynamic
       boxShadow: isHeader ? "none" : "0px 1px 3px rgba(0,0,0,0.3)",
       borderRadius: "0.5rem"
     }}>
@@ -44,8 +44,17 @@ const Table = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const DataComponent = () => {
-  const keyData = useFetchKeyData()
+interface ProgrammeData {
+  koulutusohjelmakoodi: string
+  koulutusohjelma: string
+  vetovoimaisuus: string
+  lapivirtaus: string
+  opiskelijapalaute: string
+}
+
+const DataComponent = ({ programLevel, faculty, year}: {programLevel: string, faculty: string, year: number}) => {
+  const fetchedKeyData = useFetchKeyData()
+  const keyData = useMemo(() => fetchedKeyData, [fetchedKeyData])
 
   if (!keyData) {
     return <CircularProgress />
@@ -53,15 +62,8 @@ const DataComponent = () => {
 
   const { kandiohjelmat, maisteriohjelmat } = keyData.data
 
-  interface ProgrammeData {
-    koulutusohjelmakoodi: string
-    koulutusohjelma: string
-    vetovoimaisuus: string
-    lapivirtaus: string
-    opiskelijapalaute: string
-  }
-
   const programmeData: ProgrammeData[] = [...kandiohjelmat, ...maisteriohjelmat]
+
 
   return (
     <>
@@ -76,7 +78,7 @@ const DataComponent = () => {
           <TableCell>Placeholder</TableCell>
         </TableRow>
 
-        {programmeData.map(programmeData => (
+        {programmeData.map((programmeData: ProgrammeData) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell isKey={true}>
               <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
