@@ -1,33 +1,46 @@
-import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+// import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { ProgrammeLevel } from '../enums'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
+import React from 'react'
 
-interface ProgrammeRowProps {
-  type: ProgrammeLevel
-  data: KeyDataProgramme
-  metaData: KeyDataMetadata[]
+const TableCell = ({ children, isKey = false }: { children?: React.ReactNode, isKey?: boolean }) => {
+  return (
+    <div style={{
+      margin: !isKey && "0 auto",
+      textAlign: isKey ? "left" : "center",
+    }}>{children}</div>
+  )
 }
 
-const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
-  const programmeId = data.koulutusohjelmakoodi
-
+const TableRow = ({ children, isHeader = false }: { children: React.ReactNode, isHeader?: boolean }) => {
   return (
-    <TableRow key={data.koulutusohjelmakoodi}>
-      <TableCell>
-        <Link to={`/v1/programmes/${programmeId}`}>{data.koulutusohjelma}</Link>
-      </TableCell>
-      <TableCell>
-        <TrafficLight color={data.vetovoimaisuus}></TrafficLight>
-      </TableCell>
-      <TableCell>
-        <TrafficLight color={data.lapivirtaus}></TrafficLight>
-      </TableCell>
-      <TableCell>
-        <TrafficLight color={data.opiskelijapalaute}></TrafficLight>
-      </TableCell>
-    </TableRow>
+    <div style={{
+      display: "grid",
+      gridTemplateRows: "1fr",
+      gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr 1fr 1fr",
+      boxShadow: isHeader ? "none" : "0px 1px 3px rgba(0,0,0,0.3)",
+      borderRadius: "0.5rem"
+    }}>
+      {React.Children.map(children, (child, index) => (
+        <div style={{
+          borderRight: index < React.Children.count(children) - 1 && !isHeader ? '1px solid rgba(0,0,0,0.2)' : 'none',
+          display: "flex",
+          placeItems: "center",
+          padding: "1.5rem",
+        }}>
+          {child}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const Table = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "100%" }}>{children}</div>
   )
 }
 
@@ -38,52 +51,50 @@ const DataComponent = () => {
     return <CircularProgress />
   }
 
-  const { metadata, kandiohjelmat, maisteriohjelmat } = keyData.data
+  const { kandiohjelmat, maisteriohjelmat } = keyData.data
+
+  interface ProgrammeData {
+    koulutusohjelmakoodi: string
+    koulutusohjelma: string
+    vetovoimaisuus: string
+    lapivirtaus: string
+    opiskelijapalaute: string
+  }
+
+  const programmeData: ProgrammeData[] = [...kandiohjelmat, ...maisteriohjelmat]
 
   return (
     <>
-      <h2>Kandiohjelmat</h2>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Koulutusohjelma</TableCell>
-            <TableCell>Vetovoimaisuus</TableCell>
-            <TableCell>Läpivirtaus ja Valmistuminen</TableCell>
-            <TableCell>Opiskelijapalaute ja Työllistyminen</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {kandiohjelmat.map(kandiohjelma => (
-            <ProgrammeRow
-              key={kandiohjelma.koulutusohjelmakoodi}
-              type={ProgrammeLevel.KANDI}
-              data={kandiohjelma}
-              metaData={metadata}
-            />
-          ))}
-        </TableBody>
-      </Table>
+        <TableRow isHeader>
+          <TableCell>Programme</TableCell>
+          <TableCell>Attractiveness</TableCell>
+          <TableCell>Throughput and Graduation</TableCell>
+          <TableCell>Student Feedback and Employment</TableCell>
+          <TableCell>Placeholder</TableCell>
+          <TableCell>Placeholder</TableCell>
+          <TableCell>Placeholder</TableCell>
+        </TableRow>
 
-      <h2>Maisteriohjelmat</h2>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Koulutusohjelma</TableCell>
-            <TableCell>Vetovoimaisuus</TableCell>
-            <TableCell>Läpivirtaus ja Valmistuminen</TableCell>
-            <TableCell>Opiskelijapalaute ja Työllistyminen</TableCell>
+        {programmeData.map(programmeData => (
+          <TableRow key={programmeData.koulutusohjelmakoodi}>
+            <TableCell isKey={true}>
+              <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
+            </TableCell>
+            <TableCell>
+              <TrafficLight color={programmeData.vetovoimaisuus}></TrafficLight>
+            </TableCell>
+            <TableCell>
+              <TrafficLight color={programmeData.lapivirtaus}></TrafficLight>
+            </TableCell>
+            <TableCell>
+              <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
+            </TableCell>
+            <TableCell>Placeholder</TableCell>
+            <TableCell>Placeholder</TableCell>
+            <TableCell>Placeholder</TableCell>
           </TableRow>
-        </TableHead>
-        <TableBody>
-          {maisteriohjelmat.map(maisteriohjelma => (
-            <ProgrammeRow
-              key={maisteriohjelma.koulutusohjelmakoodi}
-              type={ProgrammeLevel.MAISTERI}
-              data={maisteriohjelma}
-              metaData={metadata}
-            />
-          ))}
-        </TableBody>
+        ))}
       </Table>
     </>
   )
