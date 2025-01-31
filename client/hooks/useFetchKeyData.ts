@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchKeyData } from '../util/redux/keyDataReducer'
 import { RootState } from '../util/store'
+// import { ProgrammeLevel } from 'client/components/V1/enums'
 
 export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
   const keyData = useFetchKeyData()
@@ -38,6 +39,8 @@ const useFetchKeyData = () => {
 
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
     const obj: KeyDataProgramme = {
+      // TODO: use ohjelemataso enum
+      ohjelmataso: "Kandi",
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: kandiohjelma['Koulutusohjelman nimi'],
       values: kandiohjelma,
@@ -50,6 +53,8 @@ const useFetchKeyData = () => {
 
   const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
     const obj: KeyDataProgramme = {
+      // TODO: use ohjelemataso enum
+      ohjelmataso: "Maisteri",
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: maisteriohjelma['Koulutusohjelman nimi'],
       values: maisteriohjelma,
