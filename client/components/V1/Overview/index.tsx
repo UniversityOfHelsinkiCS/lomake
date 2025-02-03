@@ -1,6 +1,9 @@
 import { useLocation } from "react-router"
 
 import DataComponent from "./DataComponent"
+import YearSelectComponent from "../Generic/YearSelectComponent"
+import FacultySelectComponent from "../Generic/FacultySelectComponent"
+import LevelSelectComponent from "../Generic/LevelSelectComponent"
 
 const OverviewPage = () => {
   const location = useLocation()
@@ -18,6 +21,9 @@ const OverviewPage = () => {
         <h1 style={{margin: 0}}>VUOSISEURANTA</h1>
 
         {/* Filters */}
+        <LevelSelectComponent />
+        <FacultySelectComponent />
+        <YearSelectComponent />
       </div>
 
       <DataComponent programLevel={programLevel} faculty={faculty} year={parseInt(year)}/>
