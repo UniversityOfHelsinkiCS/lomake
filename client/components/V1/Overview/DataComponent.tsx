@@ -46,7 +46,7 @@ const DataComponent = ({ programLevel, faculty, year }: { programLevel: string |
 
         {programmeData.map((programmeData: KeyDataProgramme) => (
           <TableRow>
-            <TableCell isKey>
+            <TableCell itemAlign='left'>
               <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
             </TableCell>
             <TableCell>

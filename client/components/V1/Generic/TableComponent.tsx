@@ -1,7 +1,7 @@
 import React from 'react'
 
 /*
-This component is a table for displaying data designed for this project.
+This component is a purpose built table for displaying key figure data.
 
 Example usage:
     <>
@@ -13,7 +13,7 @@ Example usage:
         </TableRow>
 
         <TableRow>
-            <TableCell isKey>Item 1</TableCell>
+            <TableCell itemAlign="left">Item 1</TableCell>
             <TableCell>Item 2</TableCell>
             <TableCell>Item 3</TableCell>
         </TableRow>
@@ -38,7 +38,7 @@ export const TableRow = ({ children, isHeader = false }: { children: React.React
         <div style={{
             display: "grid",
             gridTemplateRows: "1fr",
-            gridTemplateColumns: `2fr repeat(${React.Children.count(children)-1}, 1fr)`, // TODO: Make this dynamic
+            gridTemplateColumns: `2fr repeat(${React.Children.count(children) - 1}, 1fr)`, // TODO: Make this dynamic
             boxShadow: isHeader ? "none" : "0px 1px 3px rgba(0,0,0,0.3)",
             borderRadius: "0.5rem"
         }}>
@@ -57,11 +57,22 @@ export const TableRow = ({ children, isHeader = false }: { children: React.React
 }
 
 
-export const TableCell = ({ children, isKey = false }: { children?: React.ReactNode, isKey?: boolean }) => {
+export const TableCell = ({ children, itemAlign = "center" }: { children?: React.ReactNode, itemAlign?: "left" | "center" | "right" }) => {
+    let margin = "0 auto";
+
+    switch (itemAlign) {
+        case "left":
+            margin = "0 auto 0 0";
+            break;
+        case "right":
+            margin = "0 0 0 auto";
+            break;
+        case "center":
+            margin = "0 auto";
+            break;
+    }
+
     return (
-        <div style={{
-            margin: !isKey && "0 auto",
-            textAlign: isKey ? "left" : "center",
-        }}>{children}</div>
+        <div style={{ margin }}>{children}</div>
     )
 }
