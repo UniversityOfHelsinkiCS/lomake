@@ -22,7 +22,7 @@ export const TrafficLight = (props: TrafficLightProps) => {
   const colorHex = getColorHex(props.color)
   return (
     <div
-      style={{ backgroundColor: colorHex, minWidth: '25px', minHeight: '25px', borderRadius: '50%', ...props.style }}
+      style={{ backgroundColor: colorHex, width: '25px', height: '25px', borderRadius: '50%', ...props.style }}
     ></div>
   )
 }
