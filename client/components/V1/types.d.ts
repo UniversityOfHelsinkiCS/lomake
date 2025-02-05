@@ -32,3 +32,10 @@ interface KeyDataMetadata {
   kynnysarvot: string
   yksikko: string
 }
+
+interface KeyDataCardData {
+  title: string
+  groupKey: GroupKey
+  description: string
+  color: string
+}

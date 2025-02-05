@@ -31,7 +31,7 @@ import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
 import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/index'
 import Page from './V1'
-import ProgrammeView from './V1/ProgrammeView'
+import ProgrammeView from './V1/ProgrammeView/ProgrammeView'
 
 export default () => (
   <div className="content">
