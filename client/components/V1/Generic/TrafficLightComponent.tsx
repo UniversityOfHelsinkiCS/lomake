@@ -2,6 +2,7 @@ import { customColors } from '../../../../theme'
 
 interface TrafficLightProps {
   color: string
+  style?: any
 }
 
 const getColorHex = (color: string) => {
@@ -19,5 +20,9 @@ const getColorHex = (color: string) => {
 
 export const TrafficLight = (props: TrafficLightProps) => {
   const colorHex = getColorHex(props.color)
-  return <div style={{ backgroundColor: colorHex, width: '25px', height: '25px', borderRadius: '50%' }}></div>
+  return (
+    <div
+      style={{ backgroundColor: colorHex, minWidth: '25px', minHeight: '25px', borderRadius: '50%', ...props.style }}
+    ></div>
+  )
 }
