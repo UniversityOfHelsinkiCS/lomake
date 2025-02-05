@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import callBuilder from '../apiConnection'
 
 export const updateFormHttp = (studyprogrammeKey: string, year: number, field: string, content: string) => {
-  const route = `/reports/${studyprogrammeKey}/${year}/comments`
+  const route = `/reports/${studyprogrammeKey}/${year}`
   const prefix = 'UPDATE_FORM_FIELD'
   return callBuilder(route, prefix, 'put', { [field]: content })
 }

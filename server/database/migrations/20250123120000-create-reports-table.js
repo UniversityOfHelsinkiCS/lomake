@@ -20,7 +20,7 @@ export const up = ({ context: queryInterface }) => {
       type: JSONB,
     },
     created_at: DATE,
-    updated_at: DATE
+    updated_at: DATE,
   })
 }
 
