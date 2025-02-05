@@ -2,7 +2,6 @@ import { Op } from 'sequelize'
 import db from '../models/index.js'
 import Report from '../models/reports.js'
 import logger from '../util/logger.js'
-import { getYearsArray, LOMAKE_SINCE_YEAR } from '../../config/common.js'
 
 const initReports = async () => {
   const programmes = await (db as { studyprogramme: any }).studyprogramme.findAll({})
@@ -10,7 +9,7 @@ const initReports = async () => {
 
   years.forEach(async (currentYear: number) => {
     try {
-      programmes.forEach(async ({ id }: {id: number}) => {
+      programmes.forEach(async ({ id }: { id: number }) => {
         const report = await Report.findOne({
           where: {
             [Op.and]: [{ studyprogrammeId: id }, { year: currentYear }],
@@ -21,9 +20,7 @@ const initReports = async () => {
           await Report.create({
             studyprogrammeId: id,
             year: currentYear,
-            comments: {},
-            studyprogrammeMeasures: {},
-            facultyMeasures: {},
+            data: {},
           })
         }
       })

@@ -247,9 +247,16 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
+const updateWebsocketState = (currentUser, payload, io) => {
+  const { room, data } = payload
+
+  logAndEmitToRoom(io, room, 'new_form_data', data)
+}
+
 export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
+  updateWebsocketState,
 }

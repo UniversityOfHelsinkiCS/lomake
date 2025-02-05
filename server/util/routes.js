@@ -21,8 +21,6 @@ import {
   requireUniFormRight,
 } from '../middleware/accessControlMiddleware.js'
 
-import config from '../controllers/configController.js'
-
 const router = Router()
 
 router.post('/lock/:room', locks.getLock)
@@ -71,16 +69,10 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculty.getAll)
 
-router.post('/reports/', checkAdmin, reports.createReport)
-router.get('/reports/:studyprogrammeId/', checkAdmin, reports.getReports)
+router.get('/reports/:studyprogrammeId/', reports.getReports)
 router.get('/reports/:studyprogrammeId/:year', reports.getReport)
 router.delete('/reports/:studyprogrammeId/:year', reports.deleteReport)
-router.get('/reports/:studyprogrammeId/:year/comments/', checkAdmin, reports.getComments)
-router.put('/reports/:studyprogrammeKey/:year/comments/', checkAdmin, reports.updateComments)
-router.get('/reports/:studyprogrammeId/:year/studyprogrammeMeasures/', checkAdmin, reports.getStudyprogrammeMeasures)
-router.put('/reports/:studyprogrammeId/:year/studyprogrammeMeasures/', checkAdmin, reports.updateStudyprogrammeMeasures)
-router.get('/reports/:studyprogrammeId/:year/facultyMeasures/', checkAdmin, reports.getFacultyMeasures)
-router.put('/reports/:studyprogrammeId/:year/facultyMeasures/', checkAdmin, reports.updateFacultyMeasures)
+router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
