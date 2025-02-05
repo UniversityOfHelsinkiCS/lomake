@@ -5,22 +5,27 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+/*
+This is a purpose built component for filtering faculties.
+Most of the code for this component is taken straight from the MUI documentation of their Select component.
+*/
+
+const faculties = [
+    'Kaikki tiedekunnat',
+    'Matemaattis-luonnontieteellinen',
+    'Humanistinen',
+    'Oikeustieteellinen',
+];
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
         },
     },
 };
-
-const faculties = [
-    'Matemaattis-luonnontieteellinen',
-    'Humanistinen',
-    'Oikeustieteellinen',
-];
 
 const getStyles = (faculty: string, facultyName: readonly string[], theme: Theme) => {
     return {
@@ -30,42 +35,38 @@ const getStyles = (faculty: string, facultyName: readonly string[], theme: Theme
     };
 }
 
-const FacultySelectComponent = () => {
+const FacultySelectComponent = ({ isMultiSelect = false } : { isMultiSelect?: boolean }) => {
     const theme = useTheme();
-    const [facultyName, setPersonName] = React.useState<string[]>([]);
+    const [facultyName, setPersonName] = React.useState<string[]>(['Kaikki tiedekunnat']);
 
-    const handleChange = (event: SelectChangeEvent<typeof facultyName>) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
+    const handleSelect = (event: SelectChangeEvent<typeof facultyName>) => {
+        // On autofill we get a stringified selections.
+        const selections = event.target.value as string;
+
+        if (selections === null) {
+            setPersonName(["Kaikki tiedekunnat"]);
+        } else {
+            setPersonName(
+                typeof selections === 'string' ? selections.split(',') : selections,
+            );
+        }
     };
 
     return (
         <div>
             <FormControl sx={{ width: 250 }}>
                 <Select
-                    multiple
-                    displayEmpty
+                    label="Tiedekunta"
+                    multiple={isMultiSelect}
                     value={facultyName}
-                    onChange={handleChange}
+                    onChange={handleSelect}
                     input={<OutlinedInput />}
                     renderValue={(selected) => {
-                        if (selected.length === 0) {
-                            return <em>Placeholder</em>;
-                        }
-
                         return selected.join(', ');
                     }}
                     MenuProps={MenuProps}
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
-                    <MenuItem disabled value="">
-                        <em>Placeholder</em>
-                    </MenuItem>
                     {faculties.map((faculty) => (
                         <MenuItem
                             key={faculty}
