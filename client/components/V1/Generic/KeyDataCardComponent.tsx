@@ -2,6 +2,7 @@ import { Box, Card } from '@mui/material'
 import { GroupKey, ProgrammeLevel } from '../enums'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
+import './KeyDataCard.scss'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -30,7 +31,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       sx={{
         width: '100%',
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(min(200px, 100%), 1fr))',
+        gridTemplateColumns: 'repeat(2, 1fr)',
         gap: 2,
       }}
     >
@@ -48,10 +49,20 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 const CriteriaCard = (props: CriteriaCardProps) => {
   return (
     <Card>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', paddingBottom: '10px' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          padding: '15px',
+          flexWrap: 'nowrap',
+          width: '100%',
+          height: '100%',
+        }}
+      >
         <TrafficLight color={props.color} />
-        <p>{props.title}</p>
-        <p>{props.value}</p>
+        <i>{props.title}</i>
+        <i>{props.value}</i>
       </div>
     </Card>
   )
@@ -59,11 +70,12 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
 const KeyDataCard = (props: KeyDataCardProps) => {
   return (
-    <Box>
-      <div style={{ display: 'flex', padding: '10px', alignItems: 'baseline', gap: '5px' }}>
+    <Box sx={{ paddingBottom: '30px' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', paddingBottom: '10px' }}>
         <TrafficLight color={props.color} />
-        <h2>{props.title}</h2>
+        <h2>{props.title.toUpperCase()}</h2>
       </div>
+
       <p>{props.description}</p>
 
       <CriteriaGroup
