@@ -43,8 +43,10 @@ const FacultyFilterComponent = () => {
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
-    const value = event.target.value as string[];
     dispatch(clearLevelSpecificFilters())
+    
+    const value = event.target.value as string[];
+
     if (value.length < 1) {
       if (selectedFaculties[0] === 'allFaculties') {
         return
@@ -88,7 +90,7 @@ const FacultyFilterComponent = () => {
       <FormControl sx={{ m: 1, width: 350 }}>
         <Select
           id="faculty-filter"
-          data-cy="faculty-filter"
+          // data-cy="faculty-filter"
           multiple
           value={selectedFaculties}
           onChange={handleChange}
