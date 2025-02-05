@@ -15,4 +15,4 @@ backups/*
 .env.sentry-build-plugin
 .idea/
 data.xlsx
-.~lock*
+.~lock* 
