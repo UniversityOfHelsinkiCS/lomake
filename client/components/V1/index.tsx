@@ -1,4 +1,4 @@
-import DataComponent from './Overview/DataComponent'
+import DataComponent from './OverviewPage/DataComponent'
 
 import TextFieldComponent from './Generic/TextFieldComponent'
 
