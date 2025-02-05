@@ -39,8 +39,6 @@ const useFetchKeyData = () => {
 
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
     const obj: KeyDataProgramme = {
-      // TODO: use ohjelemataso enum
-      ohjelmataso: "Kandi",
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: kandiohjelma['Koulutusohjelman nimi'],
       values: kandiohjelma,
@@ -53,8 +51,6 @@ const useFetchKeyData = () => {
 
   const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
     const obj: KeyDataProgramme = {
-      // TODO: use ohjelemataso enum
-      ohjelmataso: "Maisteri",
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: maisteriohjelma['Koulutusohjelman nimi'],
       values: maisteriohjelma,
