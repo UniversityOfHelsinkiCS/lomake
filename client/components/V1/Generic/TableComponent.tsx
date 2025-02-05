@@ -9,13 +9,13 @@ Example usage:
         <TableRow isHeader>
             <TableCell>Header 1</TableCell>
             <TableCell>Header 2</TableCell>
-            <TableCell>Header 3</TableCell>
+            <TableCell disabled >Header 3</TableCell>
         </TableRow>
 
         <TableRow>
             <TableCell itemAlign="left">Item 1</TableCell>
             <TableCell>Item 2</TableCell>
-            <TableCell>Item 3</TableCell>
+            <TableCell disabled >Item 3</TableCell>
         </TableRow>
       </Table>
     </>
@@ -28,12 +28,21 @@ export const Table = ({ children }: { children: React.ReactNode }) => {
             flexDirection: "column",
             gap: "1rem",
             width: "100%"
-        }}>{children}</div>
+        }}>
+            {children}
+        </div>
     )
 }
 
 
-export const TableRow = ({ children, isHeader = false }: { children: React.ReactNode, isHeader?: boolean }) => {
+export const TableRow = ({
+    children,
+    isHeader = false
+}: {
+    children: React.ReactNode,
+    isHeader?: boolean
+}) => {
+
     return (
         <div style={{
             display: "grid",
@@ -57,7 +66,16 @@ export const TableRow = ({ children, isHeader = false }: { children: React.React
 }
 
 
-export const TableCell = ({ children, itemAlign = "center" }: { children?: React.ReactNode, itemAlign?: "left" | "center" | "right" }) => {
+export const TableCell = ({
+    children,
+    itemAlign = "center",
+    disabled = false
+}: {
+    children?: React.ReactNode,
+    itemAlign?: "left" | "center" | "right",
+    disabled?: boolean
+}) => {
+
     let margin = "0 auto";
 
     switch (itemAlign) {
@@ -73,6 +91,10 @@ export const TableCell = ({ children, itemAlign = "center" }: { children?: React
     }
 
     return (
-        <div style={{ margin }}>{children}</div>
+        <div style={{
+            margin,
+            opacity: disabled ? '0.5' : '1',
+            pointerEvents: disabled ? 'none' : 'auto'
+        }}>{children}</div>
     )
 }

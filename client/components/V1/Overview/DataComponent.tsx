@@ -39,9 +39,9 @@ const DataComponent = ({ programLevel, faculty, year }: { programLevel: string |
           <TableCell>Attractiveness</TableCell>
           <TableCell>Throughput and Graduation</TableCell>
           <TableCell>Student Feedback and Employment</TableCell>
-          <TableCell>Placeholder</TableCell>
-          <TableCell>Placeholder</TableCell>
-          <TableCell>Placeholder</TableCell>
+          <TableCell>Toimenpiteet</TableCell>
+          <TableCell disabled>Laadunhallinnan välineet</TableCell>
+          <TableCell>Tukiprosessi</TableCell>
         </TableRow>
 
         {programmeData.map((programmeData: KeyDataProgramme) => (
@@ -58,9 +58,9 @@ const DataComponent = ({ programLevel, faculty, year }: { programLevel: string |
             <TableCell>
               <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
             </TableCell>
-            <TableCell>Placeholder</TableCell>
-            <TableCell>Placeholder</TableCell>
-            <TableCell>Placeholder</TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         ))}
       </Table>
