@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import BaseSelectComponent from "./BaseSelectComponent";
 
 /*
 This is a purpose built component for selecting the years of interest.
@@ -15,11 +14,7 @@ const YearSelectComponent = () => {
 
   return (
     <div>
-      <BaseSelectComponent
-        options={years}
-        selected={selected}
-        setSelected={setSelected}
-      />
+      
     </div>
   );
 }

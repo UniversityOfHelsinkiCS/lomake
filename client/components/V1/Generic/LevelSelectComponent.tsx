@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import BaseSelectComponent from "./BaseSelectComponent";
 
 /*
 This is a purpose built component for filtering studyprogramme levels.
@@ -16,11 +15,6 @@ const LevelSelectComponent = () => {
 
     return (
       <div>
-        <BaseSelectComponent
-          options={studyprogrammeLevels}
-          selected={selected}
-          setSelected={setSelected}
-        />
       </div>
     );
 }

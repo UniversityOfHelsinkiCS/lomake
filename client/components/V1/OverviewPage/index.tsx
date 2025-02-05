@@ -2,7 +2,7 @@ import { useLocation } from "react-router"
 
 import DataComponent from "./DataComponent"
 import YearSelectComponent from "../Generic/YearSelectComponent"
-import FacultySelectComponent from "../Generic/FacultySelectComponent"
+import FacultyFilter from "../Generic/FacultyFilterComponent"
 import LevelSelectComponent from "../Generic/LevelSelectComponent"
 
 const OverviewPage = () => {
@@ -20,10 +20,9 @@ const OverviewPage = () => {
         {/* TODO: Check global stylings for h1 */}
         <h1 style={{margin: 0}}>VUOSISEURANTA</h1>
 
-        {/* Filters */}
-        <LevelSelectComponent />
-        <FacultySelectComponent />
-        <YearSelectComponent />
+        {/* <LevelSelectComponent /> */}
+        <FacultyFilter />
+        {/* <YearSelectComponent /> */}
       </div>
 
       <DataComponent programLevel={programLevel} faculty={faculty} year={parseInt(year)}/>
