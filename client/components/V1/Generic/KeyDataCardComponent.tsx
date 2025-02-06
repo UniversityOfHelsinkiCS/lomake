@@ -18,6 +18,7 @@ interface CriteriaGroupProps {
 
 interface CriteriaCardProps {
   title: string
+  description: string
   value: string
   color: string
 }
@@ -35,11 +36,24 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       }}
     >
       {meta.map(data => {
-        const value = props.programme.values[data.kriteerinNimi]
-        const color = calculateColor(value, data.kynnysarvot)
+        const value =
+          props.programme.values[
+            Object.keys(props.programme.values).find(
+              key => key.trim().toLowerCase() === data.kriteerinNimi.trim().toLowerCase(),
+            )
+          ] || null
+        const color = calculateColor(value, data.kynnysarvot, data.liikennevalo)
         const valueText = calculateValue(value, data.yksikko)
 
-        return <CriteriaCard key={data.kriteerinNimi} title={data.kriteerinNimi} value={valueText} color={color} />
+        return (
+          <CriteriaCard
+            key={data.kriteerinNimi}
+            title={data.kriteerinNimi}
+            description={data.maaritelma}
+            value={valueText}
+            color={color}
+          />
+        )
       })}
     </Box>
   )

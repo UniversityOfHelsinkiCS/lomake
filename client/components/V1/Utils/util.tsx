@@ -1,14 +1,16 @@
 import { isInteger } from 'lodash'
 
-export const calculateColor = (value: number, threshold: string) => {
+export const calculateColor = (value: number, threshold: string, liikennevalo: boolean) => {
+  if (!liikennevalo) {
+    return 'Tyhjä'
+  } else if (!value || !threshold) {
+    return 'Harmaa'
+  }
+
   const [first, second, third] = threshold
     .split(';')
     .map(str => str.replace(',', '.'))
     .map(Number)
-
-  if (!value) {
-    return 'Harmaa'
-  }
 
   if (first === 0) {
     if (value < second) {

@@ -20,9 +20,17 @@ const getColorHex = (color: string) => {
 
 export const TrafficLight = (props: TrafficLightProps) => {
   const colorHex = getColorHex(props.color)
+  const isDisplayed = props.color === 'Tyhjä' ? 'none' : 'block'
   return (
     <div
-      style={{ backgroundColor: colorHex, width: '25px', height: '25px', borderRadius: '50%', ...props.style }}
+      style={{
+        backgroundColor: colorHex,
+        display: isDisplayed,
+        width: '25px',
+        height: '25px',
+        borderRadius: '50%',
+        ...props.style,
+      }}
     ></div>
   )
 }

@@ -20,6 +20,7 @@ interface KeyDataProgramme {
   vetovoimaisuus: string
   lapivirtaus: string
   opiskelijapalaute: string
+  resurssit: string
 }
 
 interface KeyDataMetadata {
@@ -31,6 +32,7 @@ interface KeyDataMetadata {
   ohjelmanTaso: string
   kynnysarvot: string
   yksikko: string
+  liikennevalo: boolean
 }
 
 interface KeyDataCardData {

@@ -44,6 +44,7 @@ const useFetchKeyData = () => {
       vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
       lapivirtaus: kandiohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: kandiohjelma['Opiskelijapalaute ja työllistyminen'],
+      resurssit: kandiohjelma['Resurssit'],
     }
     return obj
   }) as KeyDataProgramme[]
@@ -56,31 +57,25 @@ const useFetchKeyData = () => {
       vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
       lapivirtaus: maisteriohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: maisteriohjelma['Opiskelijapalaute ja työllistyminen'],
+      resurssit: maisteriohjelma['Resurssit'],
     }
     return obj
   }) as KeyDataProgramme[]
 
-  const meta = metadata
-    // poistetaan ne metadata-objektit, joilla ei ole kynnysarvoja; poistetaan tää filtteri kun data on paremmassa muodossa
-    .filter((meta: any) => {
-      if (!meta['Kynnysarvot (punainen alaraja; keltaisen alaraja;vihreän alaraja)']) {
-        return false
-      }
-      return true
-    })
-    .map((meta: any) => {
-      const obj: KeyDataMetadata = {
-        avainluku: meta['Avainluku'],
-        kriteerinNimi: meta['Kriteerin nimi'],
-        kriteerinNimiEn: meta['Kriteerin nimi_en'],
-        kriteerinNimiSv: meta['Kriteerin nimi_sv'],
-        maaritelma: meta['Määritelmä'],
-        ohjelmanTaso: meta['Ohjelman taso'],
-        kynnysarvot: meta['Kynnysarvot (punainen alaraja; keltaisen alaraja;vihreän alaraja)'],
-        yksikko: meta['Yksikkö'],
-      }
-      return obj
-    }) as KeyDataMetadata[]
+  const meta = metadata.map((meta: any) => {
+    const obj: KeyDataMetadata = {
+      avainluku: meta['Avainluku'],
+      kriteerinNimi: meta['Kriteerin nimi'],
+      kriteerinNimiEn: meta['Kriteerin nimi_en'],
+      kriteerinNimiSv: meta['Kriteerin nimi_sv'],
+      maaritelma: meta['Määritelmä'],
+      ohjelmanTaso: meta['Ohjelman taso'],
+      kynnysarvot: meta['Kynnysarvot'],
+      yksikko: meta['Yksikkö'],
+      liikennevalo: meta['Liikennevalo'], // boolean-kenttä sille näytetäänkö liikennevalo vai pelkkä luku
+    }
+    return obj
+  }) as KeyDataMetadata[]
 
   return { data: { kandiohjelmat, maisteriohjelmat, metadata: meta } } as KeyData
 }
