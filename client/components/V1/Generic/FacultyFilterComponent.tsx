@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store';
 import { clearLevelSpecificFilters, setFaculty } from '../../../util/redux/filterReducer'
+import type { Faculty } from '../../../../shared/lib/types'
 
 import {
   MenuItem,
@@ -15,22 +16,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 /*
 This is a purpose built component for filtering faculties.
 */
-
-// TODO: Add to shared types
-interface Faculty {
-  id: number;
-  name: {
-    en: string;
-    fi: string;
-    se: string;
-  };
-  code: string;
-  companionStudyprogrammes: Array<{ [key: string]: any }>; // Replace with actual structure if known
-  ownedProgrammes: Array<{ [key: string]: any }>; // Replace with actual structure if known
-  createdAt: string;
-  updatedAt: string;
-}
-
 
 const FacultyFilterComponent = () => {
   const { t } = useTranslation()
