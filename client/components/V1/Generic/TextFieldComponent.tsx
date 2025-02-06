@@ -8,7 +8,7 @@ import { RootState } from '../../../util/store'
 import { wsJoinRoom } from '../../../util/redux/websocketReducer'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { updateFormHttp } from '../../../util/redux/reportsReducer'
+import { updateReportHttp, getReports } from '../../../util/redux/reportsReducer'
 
 const TextFieldComponent = ({ id }: { id: string }) => {
   const { t } = useTranslation()
@@ -25,6 +25,7 @@ const TextFieldComponent = ({ id }: { id: string }) => {
   const form = 10
 
   useEffect(() => {
+    dispatch(getReports('KH50_005'))
     dispatch(wsJoinRoom('KH50_005', form))
   }, [])
 
@@ -43,7 +44,7 @@ const TextFieldComponent = ({ id }: { id: string }) => {
   const handleStopEditing = () => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
-    dispatch(updateFormHttp(room, 2025, id, content))
+    dispatch(updateReportHttp(room, 2025, id, content))
   }
 
   const askForLock = () => {

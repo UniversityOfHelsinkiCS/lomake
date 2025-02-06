@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import callBuilder from '../apiConnection'
 
-export const updateFormHttp = (studyprogrammeKey: string, year: number, field: string, content: string) => {
+export const updateReportHttp = (studyprogrammeKey: string, year: number, field: string, content: string) => {
   const route = `/reports/${studyprogrammeKey}/${year}`
   const prefix = 'UPDATE_FORM_FIELD'
   return callBuilder(route, prefix, 'put', { [field]: content })
+}
+
+export const getReports = (studyprogrammeKey: string) => {
+  const route = `/reports/${studyprogrammeKey}`
+  const prefix = 'GET_FORM'
+  return callBuilder(route, prefix)
 }
 
 const initialState = {
@@ -17,15 +23,15 @@ const reportsReducer = createSlice({
   name: 'reports',
   initialState,
   reducers: {
-    [updateFormHttp.pending]: (state) => {
+    [updateReportHttp.pending]: (state) => {
       state.pending = true
       state.error = false
     },
-    [updateFormHttp.ready]: (state, action) => {
+    [updateReportHttp.ready]: (state, action) => {
       state.pending = false
       state.data = action.payload
     },
-    [updateFormHttp.error]: (state) => {
+    [updateReportHttp.error]: (state) => {
       state.pending = false
       state.error = true
     }

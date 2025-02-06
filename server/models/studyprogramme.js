@@ -1,5 +1,5 @@
 // Associated typescript models
-import Report from "./reports"
+import Report from './reports'
 
 export default (sequelize, DataTypes) => {
   const studyprogramme = sequelize.define(

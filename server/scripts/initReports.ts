@@ -9,7 +9,7 @@ const initReports = async () => {
 
   years.forEach(async (currentYear: number) => {
     try {
-      programmes.forEach(async ({ id }: { id: number }) => {
+      programmes.forEach(async ({ id, key }: { id: number, key: string }) => {
         const report = await Report.findOne({
           where: {
             [Op.and]: [{ studyprogrammeId: id }, { year: currentYear }],
@@ -19,6 +19,7 @@ const initReports = async () => {
         if (!report) {
           await Report.create({
             studyprogrammeId: id,
+            studyprogrammeKey: key,
             year: currentYear,
             data: {},
           })

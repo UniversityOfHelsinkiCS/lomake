@@ -19,6 +19,8 @@ interface ValidateOperationResponse {
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { studyprogrammeKey, year } = req.params
 
+  console.log(req.params)
+
   // TODO: validate body data
 
   const resultObject: ValidateOperationResponse = {
@@ -78,42 +80,15 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
 const getReports = async (req: Request, res: Response) => {
   try {
-    const { studyprogrammeId } = req.params
+    const { studyprogrammeKey } = req.params
 
-    if (!studyprogrammeId) {
-      return res.status(400).json({ error: 'Studyprogramme is required' })
-    }
-
-    // Check that studyprogramme exists
-    // @ts-ignore
-    // ignore db type error for now since it has not been typed
-    const studyprogramme = await db.studyprogramme.findByPk(studyprogrammeId)
-    if (!studyprogramme) {
-      return res.status(404).json({ error: 'Studyprogramme not found' })
-    }
-
-    const reports: Report[] = await Report.findAll({
+    const reports = await Report.findAll({
       where: {
-        studyprogrammeId,
+        studyprogrammeKey,
       }
     })
 
-    return res.status(200).json(reports)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-const getReport = async (req: Request, res: Response) => {
-  try {
-    const result = await validateOperation(req)
-    if (!result.success) return res.status(result.status).json({ error: result.error })
-
-    const { report } = result
-
-    return res.status(200).json(report)
-
+    return res.status(200).json(reports[0].data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -153,33 +128,6 @@ const updateReport = async (req: Request, res: Response) => {
   }
 }
 
-const deleteReport = async (req: Request, res: Response) => {
-  try {
-    const result = await validateOperation(req)
-    if (!result.success) return res.status(result.status).json({ error: result.error })
 
-    const { studyprogrammeId, year } = result
-
-    const data = await Report.destroy({
-      where: {
-        [Op.and]: [
-          { studyprogrammeId },
-          { year }
-        ]
-      }
-    })
-
-    if (!data) {
-      return res.status(404).json({ error: 'No report was found' })
-    }
-
-    return res.status(200).json({ message: 'Report deleted successfully' })
-
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
-export default { getReports, getReport, updateReport, deleteReport }
+export default { getReports, updateReport }
 

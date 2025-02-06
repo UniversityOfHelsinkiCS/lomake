@@ -4,6 +4,7 @@ import {
   INTEGER,
   JSONB,
   DATE,
+  STRING,
   InferAttributes,
   InferCreationAttributes,
   ForeignKey,
@@ -13,6 +14,7 @@ import {
 class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Report>> {
   declare id: CreationOptional<number>;
   declare studyprogrammeId: ForeignKey<number>;
+  declare studyprogrammeKey: string;
   declare year: number;
   declare data: any;
   declare createdAt: CreationOptional<Date>;
@@ -29,6 +31,10 @@ Report.init(
     },
     studyprogrammeId: {
       type: INTEGER,
+      allowNull: false,
+    },
+    studyprogrammeKey: {
+      type: STRING,
       allowNull: false,
     },
     year: {
