@@ -16,6 +16,7 @@ import { getAnswersAction } from '../util/redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterReducer'
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
+import { Box } from '@mui/material'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -127,10 +128,11 @@ export default () => {
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontFamily: 'Lato' }}>
       <NavBar />
+
       {showRouter ? <Router /> : <Loader active />}
       <Footer />
-    </div>
+    </Box>
   )
 }

@@ -5,6 +5,9 @@ const theme = createTheme({
     primary: { main: '#007bff' },
     secondary: { main: '#6c757d' },
   },
+  typography: {
+    fontFamily: 'Lato, sans-serif',
+  },
 })
 
 export default theme

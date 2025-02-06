@@ -26,7 +26,9 @@ export const TrafficLight = (props: TrafficLightProps) => {
       style={{
         backgroundColor: colorHex,
         display: isDisplayed,
+        minWidth: '25px',
         width: '25px',
+        minHeight: '25px',
         height: '25px',
         borderRadius: '50%',
         ...props.style,

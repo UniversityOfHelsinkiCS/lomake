@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CircularProgress } from '@mui/material'
+import { Box, CircularProgress, IconButton } from '@mui/material'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReports } from '../../../util/redux/reportsReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
@@ -9,6 +9,8 @@ import { GroupKey, ProgrammeLevel } from '../enums'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import { setViewOnly } from '../../../util/redux/formReducer'
+import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const ProgrammeView = () => {
   const dispatch = useDispatch()
@@ -17,8 +19,6 @@ const ProgrammeView = () => {
   const form = 10
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
-
-
 
   useEffect(() => {
     if (!programmeKey) return
@@ -60,13 +60,19 @@ const ProgrammeView = () => {
     },
   ]
   return (
-    <div>
-      <h2>{programme.koulutusohjelma}</h2>
+    <Box sx={{ width: '80%' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline' }}>
+        <IconButton component={Link} to="/v1" sx={{ marginRight: 2 }}>
+          <ArrowBackIcon />
+        </IconButton>
+
+        <h3>{programme.koulutusohjelma}</h3>
+      </div>
       {KeyDataPoints.map(data => (
         <KeyDataCard key={data.title} level={level} metadata={metadata} programme={programme} {...data} />
       ))}
-      <TextFieldComponent id='testing' />
-    </div>
+      <TextFieldComponent id="testing" />
+    </Box>
   )
 }
 

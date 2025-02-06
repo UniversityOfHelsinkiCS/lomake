@@ -1,7 +1,9 @@
-import { Box, Card } from '@mui/material'
+import { Box, Card, CardActionArea, Typography } from '@mui/material'
 import { GroupKey, ProgrammeLevel } from '../enums'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
+import { useState } from 'react'
+import { set } from 'lodash'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -60,23 +62,34 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 }
 
 const CriteriaCard = (props: CriteriaCardProps) => {
+  const [showDescription, setShowDescription] = useState(false)
+
+  const handleClick = () => {
+    setShowDescription(!showDescription)
+  }
+
   return (
-    <Card>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          padding: '15px',
-          flexWrap: 'nowrap',
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        <TrafficLight color={props.color} />
-        <i>{props.title}</i>
-        <i>{props.value}</i>
-      </div>
+    <Card sx={{ height: 'fit-content' }}>
+      <CardActionArea onClick={handleClick}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '15px',
+            flexWrap: 'nowrap',
+          }}
+        >
+          <TrafficLight color={props.color} />
+          <Typography fontStyle={'italic'}>{`${props.title} ${props.value}`}</Typography>
+        </div>
+
+        {showDescription && (
+          <Typography variant="body2" color="textSecondary" style={{ padding: '15px' }}>
+            {props.description}
+          </Typography>
+        )}
+      </CardActionArea>
     </Card>
   )
 }
@@ -84,11 +97,17 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 const KeyDataCard = (props: KeyDataCardProps) => {
   return (
     <Box sx={{ paddingBottom: '30px' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', paddingBottom: '10px' }}>
-        <TrafficLight color={props.color} />
+      <Box
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '20px',
+          paddingBottom: '10px',
+        }}
+      >
+        <TrafficLight color={props.color} style={{ minHeight: '28px', minWidth: '28px' }} />
         <h2>{props.title.toUpperCase()}</h2>
-      </div>
-
+      </Box>
       <p>{props.description}</p>
 
       <CriteriaGroup
