@@ -2,7 +2,7 @@ import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
-import type { KeyDataProgramme } from '../lib/types'
+import type { KeyDataProgramme } from '../../lib/types'
 
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 
