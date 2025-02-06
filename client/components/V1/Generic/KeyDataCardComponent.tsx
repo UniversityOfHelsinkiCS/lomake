@@ -81,7 +81,10 @@ const CriteriaCard = (props: CriteriaCardProps) => {
           }}
         >
           <TrafficLight color={props.color} />
-          <Typography fontStyle={'italic'}>{`${props.title} ${props.value}`}</Typography>
+          <Typography fontStyle={'italic'}>{props.title}</Typography>
+          <Typography fontStyle={'italic'} color={props.value === 'Ei dataa' ? 'textSecondary' : 'textPrimary'}>
+            {props.value}
+          </Typography>
         </div>
 
         {showDescription && (
