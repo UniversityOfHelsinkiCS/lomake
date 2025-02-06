@@ -17,9 +17,10 @@ const LevelFilterComponent = () => {
   const usersProgrammes = useSelector((state: RootState) => state.studyProgrammes.data)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
 
+  // 
   if (!usersProgrammes) return null
 
-  
+  // TODO: Where to get the official levels? Should it be hardcoded in here? Example taken from YearSelect component
   const levels = [
     { key: 0, value: 'allProgrammes', text: 'Kaikki ohjelmatasot' },
     { key: 1, value: 'bachelor', text: t('bachelor') },
@@ -28,17 +29,18 @@ const LevelFilterComponent = () => {
     { key: 4, value: 'international', text: t('international') },
   ]
   
-  // HMMM, WHATS THIS? CONSULT
-  // const levels = {
+  // TODO: Consult! Is this needed here?
+  // const levelsAllowed = {
   //   bachelor: false,
   //   master: false,
   //   doctoral: false,
   //   international: false,
   // }
-  // Disable levels from the filter that the user has no access to
-  // usersProgrammes.forEach(p => {
-  //   if (p.level === 'master' && p.international) levels.international = true
-  //   levels[p.level] = true
+
+  // // Disable levels from the filter that the user has no access to
+  // usersProgrammes.forEach((program: { level: 'bachelor' | 'master' | 'doctoral' | 'international'; international: boolean }) => {
+  //   if (program.level === 'master' && program.international) levelsAllowed.international = true
+  //   levelsAllowed[program.level] = true
   // })
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {

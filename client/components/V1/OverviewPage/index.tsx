@@ -6,9 +6,9 @@ import { RootState } from '../../../util/store';
 import { setFaculty, setYear, setLevel } from '../../../util/redux/filterReducer'
 
 import DataComponent from "./DataComponent"
-import YearFilter from "../Generic/YearSelectComponent"
+import YearFilter from "../Generic/YearFilterComponent"
 import FacultyFilter from "../Generic/FacultyFilterComponent"
-import LevelFilter from "../Generic/LevelSelectComponent"
+import LevelFilter from "../Generic/LevelFilterComponent"
 
 const OverviewPage = () => {
   const location = useLocation()
@@ -49,7 +49,7 @@ const OverviewPage = () => {
         <div style={{ display: "flex", gap: "1rem" }}>
           <LevelFilter />
           <FacultyFilter />
-          {/* <YearFilter /> */}
+          <YearFilter />
         </div>
       </div>
 
