@@ -49,7 +49,7 @@ const OverviewPage = () => {
   }, [lang])
 
   return (
-    <div className="content" style={{ padding: "2rem" }}>
+    <div style={{ padding: "2rem", width: "100%" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "100%", marginBottom: "2.5rem" }}>
         <h1 style={{ margin: 0 }}>{t('yearlyAssessment').toUpperCase()}</h1>
 
