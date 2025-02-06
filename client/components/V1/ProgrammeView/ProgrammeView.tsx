@@ -1,14 +1,31 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
+import { getReports } from '../../../util/redux/reportsReducer'
+import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { useParams } from 'react-router'
 import { GroupKey, ProgrammeLevel } from '../enums'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
+import TextFieldComponent from '../Generic/TextFieldComponent'
+import { setViewOnly } from '../../../util/redux/formReducer'
 
 const ProgrammeView = () => {
-  const { programme: programmeId } = useParams<{ programme: string }>()
-  const keyData = useFetchSingleKeyData(programmeId)
+  const dispatch = useDispatch()
+  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const keyData = useFetchSingleKeyData(programmeKey)
+  const form = 10
 
-  const level = programmeId.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+  const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
+
+
+  useEffect(() => {
+    if (!programmeKey) return
+    dispatch(getReports(programmeKey))
+    dispatch(wsJoinRoom(programmeKey, form))
+    dispatch(setViewOnly(false))
+  }, [programmeKey, form])
 
   if (!keyData) {
     return <CircularProgress />
@@ -48,6 +65,7 @@ const ProgrammeView = () => {
       {KeyDataPoints.map(data => (
         <KeyDataCard key={data.title} level={level} metadata={metadata} programme={programme} {...data} />
       ))}
+      <TextFieldComponent id='testing' />
     </div>
   )
 }
