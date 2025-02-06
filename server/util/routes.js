@@ -70,8 +70,6 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 router.get('/faculties', faculty.getAll)
 
 router.get('/reports/:studyprogrammeKey', reports.getReports)
-router.get('/reports/:studyprogrammeId/:year', reports.getReport)
-router.delete('/reports/:studyprogrammeId/:year', reports.deleteReport)
 router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
 
 router.get('/cypress/seed', notInProduction, cypress.seed)
