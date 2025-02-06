@@ -32,6 +32,11 @@ export const setMultipleYears = multipleYears => ({
   multipleYears,
 })
 
+export const setKeyDataYear = keyDataYear => ({
+  type: 'SET_KEY_DATA_YEAR',
+  keyDataYear,
+})
+
 export const setQuestions = questions => ({
   type: 'SET_QUESTIONS',
   questions,
@@ -53,6 +58,7 @@ const initialState = {
   level: 'allProgrammes',
   year: '',
   multipleYears: [],
+  keyDataYear: '',
   questions: { selected: [], open: [] },
   form: 1,
   colorBlindMode: false,
@@ -103,6 +109,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         multipleYears: action.multipleYears,
+      }
+    }
+    case 'SET_KEY_DATA_YEAR': {
+      return {
+        ...state,
+        keyDataYear: action.keyDataYear,
       }
     }
     case 'SET_QUESTIONS': {

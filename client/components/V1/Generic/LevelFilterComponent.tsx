@@ -14,13 +14,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 const LevelFilterComponent = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const usersProgrammes = useSelector((state: RootState) => state.studyProgrammes.data)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
 
-  // 
-  if (!usersProgrammes) return null
-
-  // TODO: Where to get the official levels? Should it be hardcoded in here? Example taken from YearSelect component
+  // Available levels hardcoded for now
   const levels = [
     { key: 0, value: 'allProgrammes', text: t('allProgrammes') },
     { key: 1, value: 'bachelor', text: t('bachelor') },
@@ -28,20 +24,6 @@ const LevelFilterComponent = () => {
     { key: 3, value: 'doctoral', text: t('doctoral') },
     { key: 4, value: 'international', text: t('international') },
   ]
-  
-  // TODO: Consult! Is this needed here?
-  // const levelsAllowed = {
-  //   bachelor: false,
-  //   master: false,
-  //   doctoral: false,
-  //   international: false,
-  // }
-
-  // // Disable levels from the filter that the user has no access to
-  // usersProgrammes.forEach((program: { level: 'bachelor' | 'master' | 'doctoral' | 'international'; international: boolean }) => {
-  //   if (program.level === 'master' && program.international) levelsAllowed.international = true
-  //   levelsAllowed[program.level] = true
-  // })
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     dispatch(clearLevelSpecificFilters())

@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store';
-import { setFaculty, setYear, setLevel } from '../../../util/redux/filterReducer'
+import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
 
 import DataComponent from "./DataComponent"
 import YearFilter from "../Generic/YearFilterComponent"
@@ -21,7 +21,7 @@ const OverviewPage = () => {
   const dispatch = useDispatch()
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
-  const selectedYear = useSelector((state: RootState) => state.filters.year)
+  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
@@ -31,16 +31,18 @@ const OverviewPage = () => {
 
     if (facultyParams.length > 0) dispatch(setFaculty(facultyParams))
     if (levelParam) dispatch(setLevel(levelParam))
-    if (yearParam) dispatch(setYear(yearParam))
+    if (yearParam) dispatch(setKeyDataYear(yearParam))
   }, [dispatch])
 
 
   useEffect(() => {
     // This is called whenever the filters change and sets the URL accordingly
-    history.push({
-      pathname: location.pathname,
-      search: `?faculties=${selectedFaculties.join(",")}&levels=${selectedLevel}&year=${selectedYear}`
-    })
+    if (selectedFaculties.length > 0 || selectedLevel || selectedYear) {
+      history.push({
+        pathname: location.pathname,
+        search: `?faculties=${selectedFaculties.join(",")}&levels=${selectedLevel}&year=${selectedYear}`
+      })
+    }
   }, [selectedFaculties, selectedLevel, selectedYear])
 
 
