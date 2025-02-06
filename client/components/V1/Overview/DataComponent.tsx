@@ -65,7 +65,7 @@ const KeyFigureTableComponent = ({
 
 
   return (
-    <>
+    <div>
       <Table>
         <TableRow isHeader>
           <TableCell></TableCell>
@@ -97,7 +97,7 @@ const KeyFigureTableComponent = ({
           </TableRow>
         ))}
       </Table>
-    </>
+    </div>
   )
 }
 export default KeyFigureTableComponent

@@ -57,6 +57,7 @@ export const TableRow = ({
                     display: "flex",
                     placeItems: "center",
                     padding: "1.5rem",
+                    fontWeight: isHeader ? "bold" : "normal",
                 }}>
                     {child}
                 </div>
