@@ -13,7 +13,7 @@ import { getStudyProgrammes, getUsersProgrammes } from '../util/redux/studyProgr
 import { getDeadlineAndDraftYear } from '../util/redux/deadlineReducer'
 import { getFaculties } from '../util/redux/facultyReducer'
 import { getAnswersAction } from '../util/redux/oldAnswersReducer'
-import { setYear, setMultipleYears } from '../util/redux/filterReducer'
+import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterReducer'
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
 
@@ -59,6 +59,9 @@ export default () => {
       dispatch(setLanguage(linkLang))
       i18n.changeLanguage(linkLang)
     }
+
+    // Set year for Annual Follow Up view (Vuosiseuranta näkymä) to default to current year
+    dispatch(setKeyDataYear(new Date().getFullYear().toString()))
   }, [])
 
   useEffect(() => {
@@ -117,6 +120,7 @@ export default () => {
   }, [oldAnswers, deadlines])
 
   if (!currentUser.data) return null
+  
 
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
