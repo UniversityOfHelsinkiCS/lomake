@@ -3,6 +3,7 @@ import useFetchKeyData from '../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { ProgrammeLevel } from './lib/enums'
 import { TrafficLight } from './Generic/TrafficLightComponent'
+import { KeyDataMetadata, KeyDataProgramme } from './lib/types'
 
 interface ProgrammeRowProps {
   type: ProgrammeLevel
@@ -53,7 +54,7 @@ const DataComponent = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {kandiohjelmat.map(kandiohjelma => (
+          {kandiohjelmat.map((kandiohjelma: any) => (
             <ProgrammeRow
               key={kandiohjelma.koulutusohjelmakoodi}
               type={ProgrammeLevel.KANDI}
@@ -75,7 +76,7 @@ const DataComponent = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {maisteriohjelmat.map(maisteriohjelma => (
+          {maisteriohjelmat.map((maisteriohjelma: any) => (
             <ProgrammeRow
               key={maisteriohjelma.koulutusohjelmakoodi}
               type={ProgrammeLevel.MAISTERI}
