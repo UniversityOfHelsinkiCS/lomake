@@ -16,10 +16,10 @@ const YearFilterComponent = () => {
   const dispatch = useDispatch()
   const selectedYear = useSelector((state: RootState) => state.filters.year)
   
+  // TODO: How do we handle years?
   const years = [
     { key: 0, value: '2025', text: '2025' },
   ]
-  
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     // TODO: Consult! What does this do?

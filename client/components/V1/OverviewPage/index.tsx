@@ -11,6 +11,9 @@ import FacultyFilter from "../Generic/FacultyFilterComponent"
 import LevelFilter from "../Generic/LevelFilterComponent"
 
 const OverviewPage = () => {
+  const { t } = useTranslation()
+  const lang = useSelector((state: RootState) => state.language)
+
   const location = useLocation()
   const history = useHistory()
   const searchParams = new URLSearchParams(location.search)
@@ -41,10 +44,14 @@ const OverviewPage = () => {
   }, [selectedFaculties, selectedLevel, selectedYear])
 
 
+  useEffect(() => {
+    document.title = `${t('overview:overviewPage')}`
+  }, [lang])
+
   return (
     <div className="content" style={{ padding: "2rem" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "100%", marginBottom: "2.5rem" }}>
-        <h1 style={{ margin: 0 }}>VUOSISEURANTA</h1>
+        <h1 style={{ margin: 0 }}>{t('yearlyAssessment').toUpperCase()}</h1>
 
         <div style={{ display: "flex", gap: "1rem" }}>
           <LevelFilter />

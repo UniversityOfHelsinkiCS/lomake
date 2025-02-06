@@ -22,7 +22,7 @@ const LevelFilterComponent = () => {
 
   // TODO: Where to get the official levels? Should it be hardcoded in here? Example taken from YearSelect component
   const levels = [
-    { key: 0, value: 'allProgrammes', text: 'Kaikki ohjelmatasot' },
+    { key: 0, value: 'allProgrammes', text: t('allProgrammes') },
     { key: 1, value: 'bachelor', text: t('bachelor') },
     { key: 2, value: 'master', text: t('master') },
     { key: 3, value: 'doctoral', text: t('doctoral') },
