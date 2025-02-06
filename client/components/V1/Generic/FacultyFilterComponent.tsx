@@ -16,7 +16,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 This is a purpose built component for filtering faculties.
 */
 
-// TODO: Check if this is infered or declared somewhere
+// TODO: Add to shared types
 interface Faculty {
   id: number;
   name: {

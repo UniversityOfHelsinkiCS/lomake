@@ -47,7 +47,7 @@ export const TableRow = ({
         <div style={{
             display: "grid",
             gridTemplateRows: "1fr",
-            gridTemplateColumns: `2fr repeat(${React.Children.count(children) - 1}, 1fr)`, // TODO: Make this dynamic
+            gridTemplateColumns: `2fr repeat(${React.Children.count(children) - 1}, 1fr)`,
             boxShadow: isHeader ? "none" : "0px 1px 3px rgba(0,0,0,0.3)",
             borderRadius: "0.5rem"
         }}>

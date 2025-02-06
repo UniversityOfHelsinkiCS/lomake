@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store';
-import { setYear, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
+import { setKeyDataYear, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
 
 import {
   MenuItem,
@@ -14,19 +14,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 const YearFilterComponent = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const selectedYear = useSelector((state: RootState) => state.filters.year)
+  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   
-  // TODO: How do we handle years?
+  // Available years hardcoded for now. 
   const years = [
     { key: 0, value: '2025', text: '2025' },
   ]
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
-    // TODO: Consult! What does this do?
     dispatch(clearLevelSpecificFilters())
 
     const value = event.target.value as string;
-    dispatch(setYear(value))
+    dispatch(setKeyDataYear(value))
   }
 
   return (
