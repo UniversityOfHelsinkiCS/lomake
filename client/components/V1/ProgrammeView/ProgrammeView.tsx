@@ -35,6 +35,12 @@ const ProgrammeView = () => {
       description: 'Avainluvun kuvaus',
       color: programme.opiskelijapalaute,
     },
+    {
+      title: 'Resurssit',
+      groupKey: GroupKey.RESURSSIT,
+      description: 'Avainluvun kuvaus',
+      color: programme.resurssit,
+    },
   ]
   return (
     <div>
