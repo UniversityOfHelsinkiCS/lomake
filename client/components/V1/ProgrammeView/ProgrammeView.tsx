@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { useParams } from 'react-router'
-import { GroupKey, ProgrammeLevel } from '../enums'
+import { GroupKey, ProgrammeLevel } from '../lib/enums'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 
 const ProgrammeView = () => {

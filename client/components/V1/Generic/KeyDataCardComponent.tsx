@@ -1,5 +1,5 @@
 import { Box, Card } from '@mui/material'
-import { GroupKey, ProgrammeLevel } from '../enums'
+import { GroupKey, ProgrammeLevel } from '../lib/enums'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
 
