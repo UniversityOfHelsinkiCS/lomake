@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store';
-import { clearLevelSpecificFilters, setFaculty } from '../../../util/redux/filterReducer'
-import type { Faculty } from '../../../../shared/lib/types'
+import { RootState } from '@/client/util/store';
+import { clearLevelSpecificFilters, setFaculty } from '@/client/util/redux/filterReducer'
+import type { Faculty } from '@/shared/lib/types'
 
 import {
   MenuItem,

@@ -1,4 +1,4 @@
-import { customColors } from '../../../../theme'
+import { customColors } from '@/theme'
 
 interface TrafficLightProps {
   color: string

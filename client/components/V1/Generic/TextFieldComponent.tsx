@@ -3,12 +3,12 @@ import { TextField, Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { getLockHttp } from '../../../util/redux/formReducer'
-import { RootState } from '../../../util/store'
-import { wsJoinRoom } from '../../../util/redux/websocketReducer'
-import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
-import { deepCheck } from '../../Generic/Textarea'
-import { updateReportHttp, getReports } from '../../../util/redux/reportsReducer'
+import { getLockHttp } from '@/client/util/redux/formReducer'
+import { RootState } from '@/client/util/store'
+import { wsJoinRoom } from '@/client/util/redux/websocketReducer'
+import { releaseFieldLocally } from '@/client/util/redux/currentEditorsReducer'
+import { updateReportHttp, getReports } from '@/client/util/redux/reportsReducer'
+import { deepCheck } from '@/client/components/Generic/Textarea'
 
 const TextFieldComponent = ({ id }: { id: string }) => {
   const { t } = useTranslation()

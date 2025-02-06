@@ -1,8 +1,8 @@
 import { Box, Card } from '@mui/material'
-import { GroupKey, ProgrammeLevel } from '../../../lib/enums'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
-import type { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '../../../lib/types'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import type { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel

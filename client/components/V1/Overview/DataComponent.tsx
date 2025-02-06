@@ -1,10 +1,10 @@
 import { CircularProgress } from '@mui/material'
-import useFetchKeyData from '../../../hooks/useFetchKeyData'
+import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { TrafficLight } from '../Generic/TrafficLightComponent'
-import type { KeyDataProgramme } from '../../../lib/types'
+import { TrafficLight } from '@/client/components/V1/Generic/TrafficLightComponent'
+import type { KeyDataProgramme } from '@/client/lib/types'
 
-import { Table, TableRow, TableCell } from '../Generic/TableComponent'
+import { Table, TableRow, TableCell } from '@/client/components/V1/Generic/TableComponent'
 
 interface KeyDataTableProps {
   facultyFilter: string[],

@@ -2,13 +2,13 @@ import { useLocation, useHistory, } from "react-router"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store';
-import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
+import { RootState } from '@/client/util/store';
+import { setFaculty, setKeyDataYear, setLevel } from '@/client/util/redux/filterReducer'
 
 import DataComponent from "./DataComponent"
-import YearFilter from "../Generic/YearFilterComponent"
-import FacultyFilter from "../Generic/FacultyFilterComponent"
-import LevelFilter from "../Generic/LevelFilterComponent"
+import YearFilter from "@/client/components/V1/Generic/YearFilterComponent"
+import FacultyFilter from "@/client/components/V1/Generic/FacultyFilterComponent"
+import LevelFilter from "@/client/components/V1/Generic/LevelFilterComponent"
 
 const OverviewPage = () => {
   const { t } = useTranslation()

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store';
-import { setLevel, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
+import { RootState } from '@/client/util/store';
+import { setLevel, clearLevelSpecificFilters } from '@/client/util/redux/filterReducer'
 
 import {
   MenuItem,
