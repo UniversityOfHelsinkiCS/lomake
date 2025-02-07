@@ -2,7 +2,6 @@ import { Box, Card, CardActionArea, Typography } from '@mui/material'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
 import { useState } from 'react'
-import { set } from 'lodash'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
@@ -101,19 +100,21 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
 const KeyDataCard = (props: KeyDataCardProps) => {
   return (
-    <Box sx={{ paddingBottom: '30px' }}>
+    <Box sx={{ padding: '50px 0' }}>
       <Box
         style={{
           display: 'flex',
-          alignItems: 'baseline',
+          alignItems: 'center',
           gap: '20px',
           paddingBottom: '10px',
         }}
       >
         <TrafficLight color={props.color} style={{ minHeight: '28px', minWidth: '28px' }} />
-        <h2>{props.title.toUpperCase()}</h2>
+        <h2 style={{ margin: 0 }}>{props.title.toUpperCase()}</h2>
       </Box>
-      <p>{props.description}</p>
+      <Typography variant="body1" color="textSecondary" style={{ padding: '20px 0 30px 0' }}>
+        {props.description}
+      </Typography>
 
       <CriteriaGroup
         groupKey={props.groupKey}
