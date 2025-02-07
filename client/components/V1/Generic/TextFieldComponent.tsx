@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { getLockHttp } from '../../../util/redux/formReducer'
+import { clearFormState, getLockHttp, updateFormField } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
-import { wsJoinRoom } from '../../../util/redux/websocketReducer'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { updateReportHttp, getReports } from '../../../util/redux/reportsReducer'
+import { updateReportHttp } from '../../../util/redux/reportsReducer'
 
-const TextFieldComponent = ({ id }: { id: string }) => {
+const TextFieldComponent = ({ id, type }: { id: string, type: string }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -22,12 +21,6 @@ const TextFieldComponent = ({ id }: { id: string }) => {
   const dataFromRedux = useSelector(({ form }: { form: any }) => form.data[id] || '')
   const currentEditors = useSelector(({ currentEditors }: { currentEditors: any }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
-  const form = 10
-
-  useEffect(() => {
-    dispatch(getReports('KH50_005'))
-    dispatch(wsJoinRoom('KH50_005', form))
-  }, [])
 
   useEffect(() => {
     const gotTheLock = (currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid)
@@ -54,34 +47,34 @@ const TextFieldComponent = ({ id }: { id: string }) => {
     }
   }
 
-  const handleStartEditing = () => {
-    askForLock()
-  }
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
-      <TextField
-        disabled={!hasLock}
-        type="text"
-        defaultValue={content}
-        variant="outlined"
-        multiline
-        minRows={8}
-        fullWidth
-        label="Testattava tekstikenttä"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-      />
       {hasLock ? (
-        <Button variant="contained" onClick={handleStopEditing}>
-          {t('stopEditing')}
-        </Button>
+        <>
+          <TextField
+            type="text"
+            defaultValue={content}
+            variant="outlined"
+            multiline
+            minRows={type === 'comment' ? 3 : 10}
+            fullWidth
+            label="Koulutusohjelman kommentti"
+            value={content}
+            onChange={e => setContent(e.target.value)}
+            onClick={askForLock}
+          />
+          <Button variant="outlined" onClick={handleStopEditing}>
+            {t('generic:kludgeButton')}
+          </Button>
+        </>
       ) : (
-        <Button variant="contained" onClick={handleStartEditing}>
-          {t('edit')}
-        </Button>
+        <>
+          <ReactMarkdown>{content}</ReactMarkdown>
+          <Button variant="outlined" onClick={askForLock}>
+            {t('edit')}
+          </Button>
+        </>
       )}
-      <ReactMarkdown>{content}</ReactMarkdown>
     </Box>
   )
 }

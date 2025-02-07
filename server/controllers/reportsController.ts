@@ -3,7 +3,7 @@ import db from '../models/index.js'
 
 import Report from '../models/reports.js'
 import { Op } from 'sequelize'
-import { updateWebsocketState } from '../websocket.js'
+import { updateWSAndClearEditors } from '../websocket.js'
 
 import type { Request, Response } from 'express'
 
@@ -18,8 +18,6 @@ interface ValidateOperationResponse {
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { studyprogrammeKey, year } = req.params
-
-  console.log(req.params)
 
   // TODO: validate body data
 
@@ -100,7 +98,7 @@ const updateReport = async (req: Request, res: Response) => {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
 
-    let data = req.body
+    const data = req.body
     const { report, studyprogrammeId, year } = result
 
     const [_, updatedReport] = await Report.update(
@@ -116,12 +114,13 @@ const updateReport = async (req: Request, res: Response) => {
       }
     )
 
-    data = updatedReport[0].data
+    const updatedData = updatedReport[0].data
+    const field = Object.keys(data)[0]
 
     // @ts-ignore
-    updateWebsocketState(req.user, { room: req.params.studyprogrammeKey, data })
+    updateWSAndClearEditors({ room: req.params.studyprogrammeKey, updatedData, field })
 
-    return res.status(200).json(updatedReport)
+    return res.status(200).json(updatedData)
   } catch (error) {
     logger.error(`Database error ${error}`)
     return res.status(500).json({ error: 'Database error' })

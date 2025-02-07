@@ -13,6 +13,6 @@ const createWebsocketServer = server => {
 }
 
 export const getLockForHttp = (cuser, room) => websocketHandlers.getLockHttp(cuser, room, io)
-export const updateWebsocketState = (cuser, room) => websocketHandlers.updateWebsocketState(cuser, room, io)
+export const updateWSAndClearEditors = payload => websocketHandlers.updateWSAndClearEditors(io, payload)
 
 export default createWebsocketServer

@@ -189,7 +189,6 @@ const updateField = async (socket, payload, io, uuid) => {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
-      logger.info('currentAnswer', currentAnswer)
       if (currentAnswer) {
         await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },
@@ -247,10 +246,19 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-const updateWebsocketState = (currentUser, payload, io) => {
-  const { room, data } = payload
+const updateWSAndClearEditors = (io, payload) => {
+  const { room, data, field } = payload
 
-  logAndEmitToRoom(io, room, 'new_form_data', data)
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: undefined,
+    },
+  }
+
+  emitCurrentEditorsTo(io, room, currentEditors)
+  // logAndEmitToRoom(io, room, 'new_form_data', data)
 }
 
 export default {
@@ -258,5 +266,5 @@ export default {
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
-  updateWebsocketState,
+  updateWSAndClearEditors,
 }
