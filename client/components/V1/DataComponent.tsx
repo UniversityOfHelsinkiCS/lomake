@@ -5,6 +5,7 @@ import { TrafficLight } from './Generic/TrafficLightComponent'
 
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataProgramme, KeyDataMetadata } from '@/client/lib/types'
+import { useTranslation } from 'react-i18next'
 
 interface ProgrammeRowProps {
   type: ProgrammeLevel
@@ -34,7 +35,10 @@ const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
 }
 
 const DataComponent = () => {
-  const keyData = useFetchKeyData()
+  const { i18n } = useTranslation()
+  const lang = i18n.language
+
+  const keyData = useFetchKeyData(lang)
 
   if (!keyData) {
     return <CircularProgress />

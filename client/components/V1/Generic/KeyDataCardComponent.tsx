@@ -42,7 +42,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
         const value =
           props.programme.values[
             Object.keys(props.programme.values).find(
-              key => key.trim().toLowerCase() === data.kriteerinNimi.trim().toLowerCase(),
+              key => key.trim().toLowerCase() === data.kriteerinArvo.trim().toLowerCase(),
             )
           ] || null
         const color = calculateColor(value, data.kynnysarvot, data.liikennevalo)
