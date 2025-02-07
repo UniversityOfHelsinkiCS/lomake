@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store';
 import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
 
-import DataComponent from "./DataComponent"
+import DataComponent from "./KeyDataComponent"
 import YearFilter from "../Generic/YearFilterComponent"
 import FacultyFilter from "../Generic/FacultyFilterComponent"
 import LevelFilter from "../Generic/LevelFilterComponent"
