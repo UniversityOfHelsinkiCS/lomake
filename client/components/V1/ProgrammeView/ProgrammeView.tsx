@@ -16,9 +16,12 @@ import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
 
 const ProgrammeView = () => {
+  const { i18n } = useTranslation()
+  const lang = i18n.language
+
   const dispatch = useDispatch()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-  const keyData = useFetchSingleKeyData(programmeKey)
+  const keyData = useFetchSingleKeyData(programmeKey, lang)
   const form = 10
   const { t } = useTranslation()
 

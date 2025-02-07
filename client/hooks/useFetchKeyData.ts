@@ -2,9 +2,10 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchKeyData } from '../util/redux/keyDataReducer'
 import { RootState } from '../util/store'
+import { KeyData, KeyDataMetadata, KeyDataProgramme, SingleKeyData } from '../lib/types'
 
-export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
-  const keyData = useFetchKeyData()
+export const useFetchSingleKeyData = (programmeId: string, lang: string): SingleKeyData => {
+  const keyData = useFetchKeyData(lang)
 
   if (!keyData) {
     return null
@@ -14,15 +15,19 @@ export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
   let programme: KeyDataProgramme
 
   if (programmeId.startsWith('K')) {
-    programme = kandiohjelmat.find(kandiohjelma => kandiohjelma.koulutusohjelmakoodi.includes(programmeId))
+    programme = kandiohjelmat.find((kandiohjelma: { koulutusohjelmakoodi: string | string[] }) =>
+      kandiohjelma.koulutusohjelmakoodi.includes(programmeId),
+    )
   } else {
-    programme = maisteriohjelmat.find(maisteriohjelma => maisteriohjelma.koulutusohjelmakoodi.includes(programmeId))
+    programme = maisteriohjelmat.find((maisteriohjelma: { koulutusohjelmakoodi: string | string[] }) =>
+      maisteriohjelma.koulutusohjelmakoodi.includes(programmeId),
+    )
   }
 
   return { programme, metadata }
 }
 
-const useFetchKeyData = () => {
+const useFetchKeyData = (lang: string) => {
   const dispatch = useDispatch()
   const keyData = useSelector((state: RootState) => state.keyData.data)
 
@@ -65,9 +70,8 @@ const useFetchKeyData = () => {
   const meta = metadata.map((meta: any) => {
     const obj: KeyDataMetadata = {
       avainluku: meta['Avainluku'],
-      kriteerinNimi: meta['Kriteerin nimi'],
-      kriteerinNimiEn: meta['Kriteerin nimi_en'],
-      kriteerinNimiSv: meta['Kriteerin nimi_sv'],
+      kriteerinArvo: meta['Kriteerin nimi_fi'],
+      kriteerinNimi: meta[`Kriteerin nimi_${lang}`],
       maaritelma: meta['Määritelmä'],
       ohjelmanTaso: meta['Ohjelman taso'],
       kynnysarvot: meta['Kynnysarvot'],
