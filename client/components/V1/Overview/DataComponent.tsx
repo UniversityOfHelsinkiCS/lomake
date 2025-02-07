@@ -5,21 +5,21 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import { KeyDataProgramme } from '@/client/lib/types'
+import { useSelector } from 'react-redux'
 
 interface KeyDataTableProps {
-  facultyFilter: string[],
-  programmeLevelFilter: string,
+  facultyFilter: string[]
+  programmeLevelFilter: string
   yearFilter: string
 }
 
 const KeyFigureTableComponent = ({
   facultyFilter = [],
-  programmeLevelFilter = "",
-  yearFilter = ""
+  programmeLevelFilter = '',
+  yearFilter = '',
 }: KeyDataTableProps) => {
-
-
-  const keyData = useFetchKeyData()
+  const lang = useSelector((state: { language: string }) => state.language)
+  const keyData = useFetchKeyData(lang)
 
   if (!keyData) {
     return <CircularProgress />
@@ -28,42 +28,40 @@ const KeyFigureTableComponent = ({
   const { kandiohjelmat, maisteriohjelmat } = keyData.data
   let programmeData: KeyDataProgramme[] = [...kandiohjelmat, ...maisteriohjelmat]
 
-
   // Convert to set for faster lookup
-  const allowedFacultiesSet = new Set(facultyFilter);
+  const allowedFacultiesSet = new Set(facultyFilter)
 
   const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
     // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
     // example: KH10_001, where K is the level, H10 is the faculty code
 
-    const code = programmeData.koulutusohjelmakoodi;
+    const code = programmeData.koulutusohjelmakoodi
 
-    let programmeLevelCode = "";
+    let programmeLevelCode = ''
     switch (code.charAt(0)) {
-      case "K":
-        programmeLevelCode = "bachelor";
-        break;
-      case "M":
-        programmeLevelCode = "master";
-        break;
-      case "D":
-        programmeLevelCode = "doctoral";
-        break;
-      case "I":
-        programmeLevelCode = "international";
-        break;
+      case 'K':
+        programmeLevelCode = 'bachelor'
+        break
+      case 'M':
+        programmeLevelCode = 'master'
+        break
+      case 'D':
+        programmeLevelCode = 'doctoral'
+        break
+      case 'I':
+        programmeLevelCode = 'international'
+        break
       default:
-        programmeLevelCode = "";
+        programmeLevelCode = ''
     }
 
-    const facultyCode = code.substring(1, 4);
+    const facultyCode = code.substring(1, 4)
 
-    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has("allFaculties");
-    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === "allProgrammes";
+    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
+    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
-    return facultyMatches && levelMatches;
-  });
-
+    return facultyMatches && levelMatches
+  })
 
   return (
     <div>
@@ -80,7 +78,7 @@ const KeyFigureTableComponent = ({
 
         {filteredData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
-            <TableCell itemAlign='left'>
+            <TableCell itemAlign="left">
               <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
             </TableCell>
             <TableCell>
