@@ -74,7 +74,10 @@ const ProgrammeView = () => {
         <h3>{programme.koulutusohjelma}</h3>
       </div>
       {KeyDataPoints.map(data => (
-        <KeyDataCard key={data.title} level={level} metadata={metadata} programme={programme} {...data} />
+        <>
+          <KeyDataCard key={data.title} level={level} metadata={metadata} programme={programme} {...data} />
+          <TextFieldComponent id={data.title} type="comment" />
+        </>
       ))}
       <TextFieldComponent id="testing" />
     </Box>
