@@ -10,7 +10,7 @@ export default defineConfig({
   base: inStaging ? '/tilannekuva' : '/',
   resolve: {
     alias: {
-      '@/*': root,
+      '@': root,
     } as AliasOptions,
   },
   server: {

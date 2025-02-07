@@ -1,9 +1,11 @@
 import { Box, Card, CardActionArea, Typography } from '@mui/material'
-import { GroupKey, ProgrammeLevel } from '../enums'
 import { TrafficLight } from './TrafficLightComponent'
 import { calculateColor, calculateValue } from '../Utils/util'
 import { useState } from 'react'
 import { set } from 'lodash'
+
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel

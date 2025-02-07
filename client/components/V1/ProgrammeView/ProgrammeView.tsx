@@ -5,12 +5,14 @@ import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReports } from '../../../util/redux/reportsReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { useParams } from 'react-router'
-import { GroupKey, ProgrammeLevel } from '../enums'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import { setViewOnly } from '../../../util/redux/formReducer'
 import { Link } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { KeyDataCardData } from '@/client/lib/types'
 
 const ProgrammeView = () => {
   const dispatch = useDispatch()

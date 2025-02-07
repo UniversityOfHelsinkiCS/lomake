@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
+import { KeyDataProgramme } from '@/client/lib/types'
 
 interface KeyDataTableProps {
   facultyFilter: string[],
