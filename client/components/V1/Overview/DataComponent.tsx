@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
+import _ from 'lodash'
 
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import { KeyDataProgramme } from '@/client/lib/types'
+import SearchInput from '../Generic/SearchInput'
 
 interface KeyDataTableProps {
   facultyFilter: string[],
@@ -20,6 +23,7 @@ const KeyFigureTableComponent = ({
 
 
   const keyData = useFetchKeyData()
+  const [searchValue, setSearchValue] = useState("")
 
   if (!keyData) {
     return <CircularProgress />
@@ -32,7 +36,11 @@ const KeyFigureTableComponent = ({
   // Convert to set for faster lookup
   const allowedFacultiesSet = new Set(facultyFilter);
 
-  const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
+  // Default sort by koulutusohjelma (ascending alphabetic order)
+  const sortedData = _.sortBy(programmeData, ['koulutusohjelma']);
+
+  // Filter by faculty, year and program level
+  const filteredData = sortedData.filter((programmeData: KeyDataProgramme) => {
     // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
     // example: KH10_001, where K is the level, H10 is the faculty code
 
@@ -64,12 +72,27 @@ const KeyFigureTableComponent = ({
     return facultyMatches && levelMatches;
   });
 
+  // Filter by search input
+  const searchFilteredData = filteredData.filter((programmeData: KeyDataProgramme) => {
+    return programmeData.koulutusohjelma.toLowerCase().startsWith(searchValue.toLowerCase()) || programmeData.koulutusohjelmakoodi.toLowerCase().startsWith(searchValue.toLowerCase());
+  })
 
   return (
     <div>
+      <div style={{ marginBottom: "1rem", marginTop: "4rem" }}>
+        <SearchInput
+          placeholder="Hae koulutusohjelmaa nimellä tai koodilla"
+          setSearchValue={setSearchValue} />
+      </div>
+
       <Table>
         <TableRow isHeader>
-          <TableCell></TableCell>
+          <TableCell>
+            <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+              <span>Koulutusohjelma</span>
+              <span style={{ paddingRight: "20px" }}>Koodi</span>
+            </div>
+          </TableCell>
           <TableCell>Attractiveness</TableCell>
           <TableCell>Throughput and Graduation</TableCell>
           <TableCell>Student Feedback and Employment</TableCell>
@@ -78,10 +101,13 @@ const KeyFigureTableComponent = ({
           <TableCell>Tukiprosessi</TableCell>
         </TableRow>
 
-        {filteredData.map((programmeData: KeyDataProgramme) => (
+        {searchFilteredData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell itemAlign='left'>
-              <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
+              <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "2rem" }}>
+                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
+                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelmakoodi}</Link>
+              </ div>
             </TableCell>
             <TableCell>
               <TrafficLight color={programmeData.vetovoimaisuus}></TrafficLight>
