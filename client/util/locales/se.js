@@ -586,9 +586,13 @@ export default {
 
   keyData: {
     title: 'Utbildnigsprogrammens vitalitet vid Helsingfors universitet',
-    keyData: 'Nyckeltal',
-    keyDataInfo:
-      'Nyckeltalen beskriver programmets verksamhet i förhållande till universitetets viktigaste mål. Syftet med nyckeltalen är att ge en så likvärdig bild som möjligt av utbildningsprogrammens vitalitet. Nyckeltalen kommer att användas för den årliga uppföljningen av utbildningsprogrammen från och med 2025. Nyckeltalen och deras kriterier kommer att definieras separat för kandidat-, master- och doktorandprogram.',
+    info1:
+      'Nyckeltalen beskriver programmets verksamhet i förhållande till universitetets viktigaste mål. Syftet med nyckeltalen är att ge en så likvärdig bild som möjligt av utbildningsprogrammens vitalitet.',
+    info2:
+      'Nyckeltalen kommer att användas för den årliga uppföljningen av utbildningsprogrammen från och med 2025. Nyckeltalen och deras kriterier kommer att definieras separat för kandidat-, master- och doktorandprogram.',
+    keyFigure: 'Nyckeltal',
+    keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
+
     vetovoima: 'Utbildningsprogrammets Attraktionskraft',
     vetovoimaInfo:
       'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek.',

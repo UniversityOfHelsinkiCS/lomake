@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, CircularProgress, IconButton } from '@mui/material'
+import { Alert, AlertTitle, Box, CircularProgress, IconButton, Typography } from '@mui/material'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReports } from '../../../util/redux/reportsReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
@@ -73,13 +73,30 @@ const ProgrammeView = () => {
 
         <h3>{programme.koulutusohjelma}</h3>
       </div>
+
+      <Alert severity="info" icon={false} sx={{ marginTop: 4 }}>
+        <Typography variant="h6">{t('keyData:title')}</Typography>
+        <br />
+        <Typography variant="body1">{t('keyData:info1')}</Typography>
+        <br />
+        <Typography variant="body1">{t('keyData:info2')}</Typography>
+        <br />
+        <Typography variant="body1">{t('keyData:keyFigureInfo')}</Typography>
+        <ul>
+          <li>{t('keyData:vetovoima')}</li>
+          <li>{t('keyData:lapivirtaus')}</li>
+          <li>{t('keyData:palaute')}</li>
+          <li>{t('keyData:resurssit')}</li>
+        </ul>
+        <Typography variant="body1">{t('keyData:criteriaInfo')}</Typography>
+      </Alert>
+
       {KeyDataPoints.map(data => (
         <>
           <KeyDataCard key={data.title} level={level} metadata={metadata} programme={programme} {...data} />
           <TextFieldComponent id={data.title} type="comment" />
         </>
       ))}
-      <TextFieldComponent id="testing" />
     </Box>
   )
 }
