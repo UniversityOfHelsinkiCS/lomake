@@ -10,6 +10,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import { setViewOnly } from '../../../util/redux/formReducer'
 import { Link } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { useTranslation } from 'react-i18next'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
@@ -19,6 +20,7 @@ const ProgrammeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
+  const { t } = useTranslation()
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
@@ -37,27 +39,27 @@ const ProgrammeView = () => {
 
   const KeyDataPoints: KeyDataCardData[] = [
     {
-      title: 'Vetovoimaisuus',
+      title: t('keyData:vetovoima'),
       groupKey: GroupKey.VETOVOIMAISUUS,
-      description: 'Avainluvun kuvaus',
+      description: t('keyData:vetovoimaInfo'),
       color: programme.vetovoimaisuus,
     },
     {
-      title: 'Läpivirtaus ja Valmistuminen',
+      title: t('keyData:lapivirtaus'),
       groupKey: GroupKey.LAPIVIRTAUS,
-      description: 'Avainluvun kuvaus',
+      description: t('keyData:lapivirtausInfo'),
       color: programme.lapivirtaus,
     },
     {
-      title: 'Opiskelijapalaute ja Työllistyminen',
+      title: t('keyData:palaute'),
       groupKey: GroupKey.OPISKELIJAPALAUTE,
-      description: 'Avainluvun kuvaus',
+      description: t('keyData:palauteInfo'),
       color: programme.opiskelijapalaute,
     },
     {
-      title: 'Resurssit',
+      title: t('keyData:resurssit'),
       groupKey: GroupKey.RESURSSIT,
-      description: 'Avainluvun kuvaus',
+      description: t('keyData:resurssitInfo'),
       color: programme.resurssit,
     },
   ]

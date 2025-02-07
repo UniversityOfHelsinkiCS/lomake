@@ -415,7 +415,7 @@ export default {
     name: 'Namn',
     view: 'Läs',
     edit: 'Redigera',
-    stopEditing: "Sluta redigera",
+    stopEditing: 'Sluta redigera',
     owner: 'Ägare',
     noUsers: 'Inga användare',
     userListJory: 'Ledningsgruppmedlemmar som har fått tillgång till blanketten',
@@ -582,5 +582,27 @@ export default {
     master: `Magisterprogram`,
     both: 'Kandidat- och magisterprogram',
     selectDegree: 'I vilken utsträckning påverkas åtgärden',
+  },
+
+  keyData: {
+    title: 'Utbildnigsprogrammens vitalitet vid Helsingfors universitet',
+    keyData: 'Nyckeltal',
+    keyDataInfo:
+      'Nyckeltalen beskriver programmets verksamhet i förhållande till universitetets viktigaste mål. Syftet med nyckeltalen är att ge en så likvärdig bild som möjligt av utbildningsprogrammens vitalitet. Nyckeltalen kommer att användas för den årliga uppföljningen av utbildningsprogrammen från och med 2025. Nyckeltalen och deras kriterier kommer att definieras separat för kandidat-, master- och doktorandprogram.',
+    vetovoima: 'Utbildningsprogrammets Attraktionskraft',
+    vetovoimaInfo:
+      'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek.',
+    lapivirtaus: 'Genomströmning Och Examen I Programmet',
+    lapivirtausInfo:
+      'Genomströmning gäller flödet av studier, både enligt Undervisnings- och kulturministeriets finansieringsmodell och, i allmänhet, på antalet examina och studiernas progression genom programmets olika stadier. Antalet examina och slutförandet av examina inom den målsatta tiden indikerar att det inte finns några hinder för studier i programmet. Antalet examina är en indikator på programmets storlek.',
+    palaute: 'Studentrespons Och Anställning Av Utexaminerade',
+    palauteInfo:
+      'Studentrespons används för att undersöka programmets feedbackkultur och den övergripande nivån på feedbackaktiviteten, samt studenternas tillfredsställelse med sina studier i programmet. Studenternas återkoppling återspeglar effektiviteten i programmets läroplan, vägledning och leverans.  Återkoppling om anställningsbarhet återspeglar programmets relevans för samhället.',
+    resurssit: 'Resurser För Utbildningsprogrammet',
+    resurssitInfo:
+      'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven.',
+    criteriaTitle: 'Kriterier För Nyckeltal',
+    criteriaInfo:
+      'Nyckeltalen består av 3-5 kriterier. Kriterierna omfattar information om utbildningsprogram för ett eller flera år. Nyckeltalskriterierna kommer att ändras varje år när ny information blir tillgänglig inom nyckeltalets innehållsområde.',
   },
 }

@@ -64,7 +64,7 @@ export default {
     email: 'Sähköpostiosoite',
     cancel: 'Peruuta',
     edit: 'Muokkaa',
-    stopEditing: "Lopeta muokkaaminen",
+    stopEditing: 'Lopeta muokkaaminen',
     delete: 'Poista',
     filled: 'täytetty',
     confirmDeselect: 'Haluatko varmasti poistaa valinnan?',
@@ -546,5 +546,27 @@ export default {
     master: 'Maisteriohjelmia',
     both: 'Kandi- ja maisteriohjelmia',
     selectDegree: 'Mitä asteita toimenpide koskee',
+  },
+
+  keyData: {
+    title: 'Koulutusohjelmien elinvoimaisuus Helsingin yliopistossa',
+    keyFigure: 'Avainluku',
+    keyFigureInfo:
+      'Avainluvut kuvaavat koulutusohjelman toimintaa yliopiston keskeisten tavoitteiden näkökulmasta. Avainlukujen tavoitteena on, että niiden avulla voidaan tarkastella koulutusohjelmien elinvoimaisuutta mahdollisimman yhdenvertaisesti. Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
+    vetovoima: 'Koulutusohjelman vetovoimaisuus',
+    vetovoimaInfo:
+      'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
+    lapivirtaus: 'Läpivirtaus ja valmistuminen koulutusohjelmassa',
+    lapivirtausInfo:
+      'Läpivirtauksessa tarkastellaan opintojen sujuvuutta sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa koulutusohjelman kokoa.',
+    palaute: 'Koulutusohjelman opiskelijapalaute ja työllistyminen',
+    palauteInfo:
+      'Opiskelijapalautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta.  Työllistymistä koskeva palaute kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
+    resurssit: 'Koulutusohjelman resurssit',
+    resurssitInfo:
+      'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssitarpeita.',
+    criteriaTitle: 'Avainluvun kriteerit',
+    criteriaInfo:
+      'Avainluvut muodostuvat 3-5 kriteeristä. Kriteerit sisältävät koulutusohjelmia koskevaa dataa yhdeltä tai useammalta vuodelta. Avainlukujen kriteerit muuttuvat vuosittain, kun avainluvun sisältöalueesta tulee uutta dataa käyttöön.',
   },
 }

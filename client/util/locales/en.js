@@ -57,7 +57,7 @@ export default {
     email: 'Email',
     cancel: 'Cancel',
     edit: 'Edit',
-    stopEditing: "Stop editing",
+    stopEditing: 'Stop editing',
     delete: 'Delete',
     filled: 'filled',
     confirmDeselect: 'Are you sure you want to deselect the question?',
@@ -548,5 +548,27 @@ export default {
     both: `Bachelor's and Master's programmes`,
     selectDegree: 'What is the degree of impact',
     confirmRemoveLight: 'Are you sure you want to delete?',
+  },
+
+  keyData: {
+    title: 'The vitality of degree programmes at the University of Helsinki',
+    keyFigure: 'Key Figure',
+    keyFigureInfo:
+      'The key figures describe the activities of the degree programme in relation to the key objectives of the University. The aim of the key figures is to provide as equal a view as possible of the vitality of the degree programmes. The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
+    vetovoima: 'Attractiveness Of The Degree Programme',
+    vetovoimaInfo:
+      'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',
+    lapivirtaus: 'The Rate Of Progression And Graduation Of The Degree Programme',
+    lapivirtausInfo:
+      'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme.',
+    palaute: 'Student Feedback And Employment Of The Degree Programme',
+    palauteInfo:
+      "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society.",
+    resurssit: 'Resources Of The Degree Programme',
+    resurssitInfo:
+      'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme.',
+    criteriaTitle: 'Key Figure Criteria',
+    criteriaInfo:
+      'Each key figure is composed of 3-5 criteria. The criteria include data on degree programmes for one or more years. The key figure criteria will change from year to year as new data becomes available in the key figure content area.',
   },
 }
