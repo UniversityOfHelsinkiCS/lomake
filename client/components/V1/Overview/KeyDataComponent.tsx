@@ -10,15 +10,15 @@ import { KeyDataProgramme } from '@/client/lib/types'
 import SearchInput from '../Generic/SearchInput'
 
 interface KeyDataTableProps {
-  facultyFilter: string[],
-  programmeLevelFilter: string,
+  facultyFilter: string[]
+  programmeLevelFilter: string
   yearFilter: string
 }
 
 const KeyFigureTableComponent = ({
   facultyFilter = [],
-  programmeLevelFilter = "",
-  yearFilter = ""
+  programmeLevelFilter = '',
+  yearFilter = '',
 }: KeyDataTableProps) => {
 
   const fetchedKeyData = useFetchKeyData()
@@ -43,30 +43,30 @@ const KeyFigureTableComponent = ({
     // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
     // example: KH10_001, where K is the level, H10 is the faculty code
 
-    const code = programmeData.koulutusohjelmakoodi;
+    const code = programmeData.koulutusohjelmakoodi
 
-    let programmeLevelCode = "";
+    let programmeLevelCode = ''
     switch (code.charAt(0)) {
-      case "K":
-        programmeLevelCode = "bachelor";
-        break;
-      case "M":
-        programmeLevelCode = "master";
-        break;
-      case "D":
-        programmeLevelCode = "doctoral";
-        break;
-      case "I":
-        programmeLevelCode = "international";
-        break;
+      case 'K':
+        programmeLevelCode = 'bachelor'
+        break
+      case 'M':
+        programmeLevelCode = 'master'
+        break
+      case 'D':
+        programmeLevelCode = 'doctoral'
+        break
+      case 'I':
+        programmeLevelCode = 'international'
+        break
       default:
-        programmeLevelCode = "";
+        programmeLevelCode = ''
     }
 
-    const facultyCode = code.substring(1, 4);
+    const facultyCode = code.substring(1, 4)
 
-    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has("allFaculties");
-    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === "allProgrammes";
+    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
+    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
     return facultyMatches && levelMatches;
   });
