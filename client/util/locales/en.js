@@ -552,9 +552,13 @@ export default {
 
   keyData: {
     title: 'The vitality of degree programmes at the University of Helsinki',
+    info1:
+      'The key figures describe the activities of the degree programme in relation to the key objectives of the University. The aim of the key figures is to provide as equal a view as possible of the vitality of the degree programmes. ',
+    info2:
+      'The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
     keyFigure: 'Key Figure',
-    keyFigureInfo:
-      'The key figures describe the activities of the degree programme in relation to the key objectives of the University. The aim of the key figures is to provide as equal a view as possible of the vitality of the degree programmes. The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
+    keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
+
     vetovoima: 'Attractiveness Of The Degree Programme',
     vetovoimaInfo:
       'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',

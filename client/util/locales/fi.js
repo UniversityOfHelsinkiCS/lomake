@@ -550,9 +550,13 @@ export default {
 
   keyData: {
     title: 'Koulutusohjelmien elinvoimaisuus Helsingin yliopistossa',
+    info1:
+      'Avainluvut kuvaavat koulutusohjelman toimintaa yliopiston keskeisten tavoitteiden näkökulmasta. Avainlukujen tavoitteena on, että niiden avulla voidaan tarkastella koulutusohjelmien elinvoimaisuutta mahdollisimman yhdenvertaisesti. ',
+    info2:
+      'Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
     keyFigure: 'Avainluku',
-    keyFigureInfo:
-      'Avainluvut kuvaavat koulutusohjelman toimintaa yliopiston keskeisten tavoitteiden näkökulmasta. Avainlukujen tavoitteena on, että niiden avulla voidaan tarkastella koulutusohjelmien elinvoimaisuutta mahdollisimman yhdenvertaisesti. Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
+    keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
+
     vetovoima: 'Koulutusohjelman vetovoimaisuus',
     vetovoimaInfo:
       'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
