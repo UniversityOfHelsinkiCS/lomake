@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
@@ -21,8 +21,8 @@ const KeyFigureTableComponent = ({
   yearFilter = ""
 }: KeyDataTableProps) => {
 
-
-  const keyData = useFetchKeyData()
+  const fetchedKeyData = useFetchKeyData()
+  const keyData = useMemo(() => fetchedKeyData, [fetchedKeyData])
   const [searchValue, setSearchValue] = useState("")
 
   if (!keyData) {
@@ -31,7 +31,6 @@ const KeyFigureTableComponent = ({
 
   const { kandiohjelmat, maisteriohjelmat } = keyData.data
   let programmeData: KeyDataProgramme[] = [...kandiohjelmat, ...maisteriohjelmat]
-
 
   // Convert to set for faster lookup
   const allowedFacultiesSet = new Set(facultyFilter);
@@ -104,7 +103,7 @@ const KeyFigureTableComponent = ({
         {searchFilteredData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell itemAlign='left'>
-              <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "2rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "1rem" }}>
                 <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
                 <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelmakoodi}</Link>
               </ div>
