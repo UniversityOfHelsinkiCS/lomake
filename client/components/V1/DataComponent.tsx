@@ -6,6 +6,7 @@ import { TrafficLight } from './Generic/TrafficLightComponent'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataProgramme, KeyDataMetadata } from '@/client/lib/types'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
 interface ProgrammeRowProps {
   type: ProgrammeLevel
@@ -35,9 +36,7 @@ const ProgrammeRow = ({ type, data, metaData }: ProgrammeRowProps) => {
 }
 
 const DataComponent = () => {
-  const { i18n } = useTranslation()
-  const lang = i18n.language
-
+  const lang = useSelector((state: { language: string }) => state.language)
   const keyData = useFetchKeyData(lang)
 
   if (!keyData) {
