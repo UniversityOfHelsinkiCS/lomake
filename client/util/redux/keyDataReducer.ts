@@ -1,4 +1,7 @@
+import axios from 'axios'
 import callBuilder from '../apiConnection'
+import { inProduction, basePath } from '../common'
+import { getHeaders } from '../../../config/mockHeaders'
 interface State {
   data: any;
   pending?: boolean;
@@ -16,6 +19,30 @@ export const fetchKeyData = () => {
   return callBuilder(route, prefix)
 }
 
+export const uploadKeyData = (file: any) => {
+  return async (dispatch: any) => {
+    const route = `${basePath}api/keydata`
+    const defaultHeaders = !inProduction ? getHeaders() : {}
+    const prefix = 'POST_KEY_DATA'
+    const formData = new FormData()
+    formData.append('file', file)
+
+    dispatch({ type: `${prefix}_ATTEMPT` })
+
+    try {
+      await axios.post(route, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...defaultHeaders,
+        },
+      })
+      dispatch({ type: `${prefix}_SUCCESS` })
+    } catch (error) {
+      console.error(error);
+      dispatch({ type: `${prefix}_FAILURE` })
+    }
+  };
+};
 export default (state: State = { data: null }, action: Action) => {
   switch (action.type) {
     case 'GET_KEY_DATA_ATTEMPT':

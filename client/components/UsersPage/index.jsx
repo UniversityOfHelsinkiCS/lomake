@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { getAllUsersAction } from '../../util/redux/usersReducer'
-import { isSuperAdmin } from '../../../config/common'
+import { basePath, isSuperAdmin } from '../../../config/common'
 import UserTable from './UserTable'
 import IamTable from './IamTable'
 import DeadlineInfo from './DeadlineInfo'
@@ -11,6 +12,7 @@ import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
 import Debug from './Debug'
+import { uploadKeyData } from '@/client/util/redux/keyDataReducer'
 
 export default () => {
   const { t } = useTranslation()
@@ -65,28 +67,44 @@ export default () => {
     panes = [
       ...panes,
       {
-        menuItem: t('users:updateStudyprogrammes'),
-        render: () => (
-          <Tab.Pane>
-            <UpdateStudyprogrammes />
-          </Tab.Pane>
-        ),
+      menuItem: t('users:updateStudyprogrammes'),
+      render: () => (
+        <Tab.Pane>
+        <UpdateStudyprogrammes />
+        </Tab.Pane>
+      ),
       },
       {
-        menuItem: t('users:deadlineSettings'),
-        render: () => (
-          <Tab.Pane>
-            <DeadlineSetting />
-          </Tab.Pane>
-        ),
+      menuItem: t('users:deadlineSettings'),
+      render: () => (
+        <Tab.Pane>
+        <DeadlineSetting />
+        </Tab.Pane>
+      ),
       },
       {
-        menuItem: 'Debug',
-        render: () => (
-          <Tab.Pane>
-            <Debug />
-          </Tab.Pane>
-        ),
+      menuItem: 'Debug',
+      render: () => (
+        <Tab.Pane>
+        <Debug />
+        </Tab.Pane>
+      ),
+      },
+      {
+      menuItem: t('users:uploadKeydata'),
+      render: () => (
+        <Tab.Pane>
+        <form
+          onSubmit={async e => {
+          e.preventDefault()
+          const file = e.target.elements.file.files[0]
+          dispatch(uploadKeyData(file))}}
+        >
+          <input type="file" name="file" />
+          <button type="submit">Upload</button>
+        </form>
+        </Tab.Pane>
+      ),
       },
     ]
   }
