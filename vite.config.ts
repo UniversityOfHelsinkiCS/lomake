@@ -1,13 +1,13 @@
 import react from '@vitejs/plugin-react'
 import { AliasOptions, defineConfig } from 'vite'
-import { inStaging } from './config/common'
+import { inProduction } from './config/common'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import path from "path";
 const root = path.resolve(__dirname, './');
 
 export default defineConfig({
   plugins: [react(), sentryVitePlugin()],
-  base: inStaging ? '/tilannekuva' : '/',
+  base: inProduction ? '/tilannekuva' : '/',
   resolve: {
     alias: {
       '@': root,
