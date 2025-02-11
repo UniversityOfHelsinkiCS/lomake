@@ -26,6 +26,7 @@ const connect = () => {
 const updateForm = store => event => {
   store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
 }
+
 const updateEditors = store => event => {
   store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
 }

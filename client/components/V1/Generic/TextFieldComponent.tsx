@@ -3,13 +3,13 @@ import { TextField, Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { clearFormState, getLockHttp, updateFormField } from '../../../util/redux/formReducer'
+import { getLockHttp, updateFormField } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { updateReportHttp } from '../../../util/redux/reportsReducer'
 
-const TextFieldComponent = ({ id, type }: { id: string, type: string }) => {
+const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const TextFieldComponent = ({ id, type }: { id: string, type: string }) => {
   const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
 
   useEffect(() => {
-    const gotTheLock = (currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid)
+    const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
     setHasLock(gotTheLock)
     if (gettingLock && currentEditors[id]) {
       setGettingLock(false)
@@ -38,6 +38,7 @@ const TextFieldComponent = ({ id, type }: { id: string, type: string }) => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
     dispatch(updateReportHttp(room, 2025, id, content))
+    dispatch(updateFormField(id, content, 10))
   }
 
   const askForLock = () => {

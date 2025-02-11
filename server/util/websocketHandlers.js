@@ -150,7 +150,8 @@ const isTrafficOrRadio = data => {
 const updateField = async (socket, payload, io, uuid) => {
   try {
     const { room, data, form } = payload
-    if (!form) return
+    // If form is 10, do nothing, this is called for form 10 but we don't want to save it
+    if (!form || form === 10) return
 
     const currentUser = await getCurrentUser(socket)
 
@@ -246,25 +247,25 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-const updateWSAndClearEditors = (io, payload) => {
-  const { room, data, field } = payload
+// const updateWSAndClearEditors = (io, payload) => {
+//   const { room, data, field } = payload
 
-  currentEditors = {
-    ...currentEditors,
-    [room]: {
-      ...currentEditors[room],
-      [field]: undefined,
-    },
-  }
+//   currentEditors = {
+//     ...currentEditors,
+//     [room]: {
+//       ...currentEditors[room],
+//       [field]: undefined,
+//     },
+//   }
 
-  emitCurrentEditorsTo(io, room, currentEditors)
-  // logAndEmitToRoom(io, room, 'new_form_data', data)
-}
+//   emitCurrentEditorsTo(io, room, currentEditors)
+//   logAndEmitToRoom(io, room, 'new_form_data', data)
+// }
 
 export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
-  updateWSAndClearEditors,
+  // updateWSAndClearEditors,
 }

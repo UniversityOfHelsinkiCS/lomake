@@ -3,7 +3,7 @@ import callBuilder from '../apiConnection'
 
 export const updateReportHttp = (studyprogrammeKey: string, year: number, field: string, content: string) => {
   const route = `/reports/${studyprogrammeKey}/${year}`
-  const prefix = 'UPDATE_FORM_FIELD'
+  const prefix = 'UPDATE_REPORTS_FIELD'
   return callBuilder(route, prefix, 'put', { [field]: content })
 }
 
@@ -34,7 +34,7 @@ const reportsReducer = createSlice({
     [updateReportHttp.error]: (state) => {
       state.pending = false
       state.error = true
-    }
+    },
   }
 })
 

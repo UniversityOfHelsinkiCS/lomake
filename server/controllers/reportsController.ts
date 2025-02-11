@@ -3,7 +3,7 @@ import db from '../models/index.js'
 
 import Report from '../models/reports.js'
 import { Op } from 'sequelize'
-import { updateWSAndClearEditors } from '../websocket.js'
+// import { updateWSAndClearEditors } from '../websocket.js'
 
 import type { Request, Response } from 'express'
 
@@ -118,7 +118,7 @@ const updateReport = async (req: Request, res: Response) => {
     const field = Object.keys(data)[0]
 
     // @ts-ignore
-    updateWSAndClearEditors({ room: req.params.studyprogrammeKey, updatedData, field })
+    // updateWSAndClearEditors({ room: req.params.studyprogrammeKey, updatedData, field })
 
     return res.status(200).json(updatedData)
   } catch (error) {
