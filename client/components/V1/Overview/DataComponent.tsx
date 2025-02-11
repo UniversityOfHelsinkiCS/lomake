@@ -6,6 +6,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import { KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -20,6 +21,7 @@ const KeyFigureTableComponent = ({
 }: KeyDataTableProps) => {
   const lang = useSelector((state: { language: string }) => state.language)
   const keyData = useFetchKeyData(lang)
+  const { t } = useTranslation()
 
   if (!keyData) {
     return <CircularProgress />
@@ -68,12 +70,12 @@ const KeyFigureTableComponent = ({
       <Table>
         <TableRow isHeader>
           <TableCell></TableCell>
-          <TableCell>Attractiveness</TableCell>
-          <TableCell>Throughput and Graduation</TableCell>
-          <TableCell>Student Feedback and Employment</TableCell>
-          <TableCell>Toimenpiteet</TableCell>
-          <TableCell disabled>Laadunhallinnan välineet</TableCell>
-          <TableCell>Tukiprosessi</TableCell>
+          <TableCell>{t('keyData:vetovoima')}</TableCell>
+          <TableCell>{t('keyData:lapivirtaus')}</TableCell>
+          <TableCell>{t('keyData:palaute')}</TableCell>
+          <TableCell>{t('keyData:resurssit')}</TableCell>
+          <TableCell disabled>{t('keyData:qualityControl')}</TableCell>
+          <TableCell>{t('keyData:actions')}</TableCell>
         </TableRow>
 
         {filteredData.map((programmeData: KeyDataProgramme) => (

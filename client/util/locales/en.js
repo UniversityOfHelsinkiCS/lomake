@@ -574,5 +574,7 @@ export default {
     criteriaTitle: 'Key Figure Criteria',
     criteriaInfo:
       'Each key figure is composed of 3-5 criteria. The criteria include data on degree programmes for one or more years. The key figure criteria will change from year to year as new data becomes available in the key figure content area.',
+    qualityControl: 'Quality control tools',
+    actions: 'Procedure of action',
   },
 }

@@ -20,6 +20,7 @@ const ProgrammeView = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
+
   const keyData = useFetchSingleKeyData(programmeKey, lang)
   const form = 10
 
