@@ -67,6 +67,11 @@ const FacultyFilterComponent = () => {
 
   const getOptions = () => {
     const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
+
+    if (!faculties || faculties.length < 1) {
+      return facultiesWithAll
+    }
+
     return facultiesWithAll.concat(
       faculties
         .filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
