@@ -30,7 +30,6 @@ import ReformAnswers from './ReformAnswers/index'
 import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
 import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/index'
-import Page from './V1'
 import OverviewPageV1 from './V1/Overview'
 import ProgrammeView from './V1/ProgrammeView/ProgrammeView'
 
@@ -105,7 +104,6 @@ export default () => (
           render={props => <ViewEvaluationAnswersForFaculty programmeKey={props.match.params.faculty} />}
         />
         <Route exact path="/reform-answers" component={ReformAnswers} />
-        <Route exact path="/v1" component={Page} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes/:programme" component={ProgrammeView} />
       </Switch>
