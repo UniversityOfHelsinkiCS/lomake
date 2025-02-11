@@ -18,6 +18,7 @@ const userMiddleware = async (req, res, next) => {
   }
 
   try {
+    logger.info('userMiddleware: ')
     const [user, created] = await db.user.findOrCreate({
       where: {
         uid: req.headers.uid,
