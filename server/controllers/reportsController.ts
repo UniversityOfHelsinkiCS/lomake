@@ -88,7 +88,7 @@ const getReports = async (req: Request, res: Response) => {
 
     return res.status(200).json(reports[0].data)
   } catch (error) {
-    logger.error(`Database error from getReports: ${error}`)
+    logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }

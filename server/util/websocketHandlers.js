@@ -132,7 +132,7 @@ const joinRoom = async (socket, room, form, io) => {
       logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {
-    logger.error(`Database error: ${error}`)
+    logger.error(`Database error in join room: ${error}`)
   }
 }
 

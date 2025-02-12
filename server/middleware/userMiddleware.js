@@ -35,7 +35,7 @@ const userMiddleware = async (req, res, next) => {
 
     return next()
   } catch (error) {
-    logger.error('Database error in userMiddleware:', error)
+    logger.error('Database error:', error)
     return undefined
   }
 }
