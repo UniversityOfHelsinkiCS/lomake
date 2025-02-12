@@ -47,7 +47,6 @@ const IAMmiddleware = async (req, _, next) => {
           uid: user.uid,
         },
       })
-      logger.info('IAMmiddleware', JSON.stringify(userFromDb, null, 2))
       userFromDb.specialGroup = specialGroup
       userFromDb.access = access
       userFromDb.iamGroups = iamGroups

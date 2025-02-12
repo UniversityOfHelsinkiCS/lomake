@@ -18,7 +18,6 @@ const userMiddleware = async (req, res, next) => {
   }
 
   try {
-    logger.info('userMiddleware: ')
     const [user, created] = await db.user.findOrCreate({
       where: {
         uid: req.headers.uid,
@@ -36,7 +35,7 @@ const userMiddleware = async (req, res, next) => {
 
     return next()
   } catch (error) {
-    logger.error('Database error:', error)
+    logger.error('Database error in userMiddleware:', error)
     return undefined
   }
 }
