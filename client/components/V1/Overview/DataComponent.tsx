@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
@@ -82,7 +82,7 @@ const KeyFigureTableComponent = ({
   })
 
   return (
-    <div>
+    <div style={{ minWidth: 1200 }}>
       <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
@@ -90,7 +90,7 @@ const KeyFigureTableComponent = ({
       <Table>
         <TableRow isHeader>
           <TableCell>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
               <span>{t('common:programmeHeader')}</span>
               <span style={{ paddingRight: '20px' }}>{t('common:code')}</span>
             </div>
