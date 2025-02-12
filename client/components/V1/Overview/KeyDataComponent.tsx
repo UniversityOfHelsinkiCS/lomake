@@ -3,6 +3,8 @@ import { CircularProgress } from '@mui/material'
 import useFetchKeyData from '../../../hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/client/util/store'
 import _ from 'lodash'
 
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
@@ -21,7 +23,8 @@ const KeyFigureTableComponent = ({
   yearFilter = '',
 }: KeyDataTableProps) => {
 
-  const fetchedKeyData = useFetchKeyData()
+  const lang = useSelector((state: RootState) => state.language)
+  const fetchedKeyData = useFetchKeyData(lang)
   const keyData = useMemo(() => fetchedKeyData, [fetchedKeyData])
   const [searchValue, setSearchValue] = useState("")
 
