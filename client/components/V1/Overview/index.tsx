@@ -26,7 +26,7 @@ const OverviewPage = () => {
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
     const facultyParams = searchParams.get('faculties')?.split(',') || []
-    const levelParam = searchParams.get('level')
+    const levelParam = searchParams.get('levels')
     const yearParam = searchParams.get('year')
 
     if (facultyParams.length > 0) dispatch(setFaculty(facultyParams))
