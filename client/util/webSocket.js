@@ -31,10 +31,15 @@ const updateEditors = store => event => {
   store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
 }
 
-export const setupSocketListeners = socket => {
+const updateReports = store => event => {
+  store.dispatch({ type: 'reports/putData/fulfilled', payload: event })
+}
+
+export const setupSocketListeners = (socket) => {
   if (!window.location.href.endsWith('/individual')) {
     socket.on('new_form_data', updateForm(store))
     socket.on('update_editors', updateEditors(store))
+    socket.on('new_reports_data', updateReports(store))
   }
 }
 
@@ -69,7 +74,7 @@ const socketMiddleware = () => {
         if (socket !== null) socket.close()
 
         socket = connect()
-        setupSocketListeners(socket)
+        setupSocketListeners(socket, action.room)
 
         break
       case 'WS_LEAVE_ROOM':

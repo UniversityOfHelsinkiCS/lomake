@@ -17,8 +17,9 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const [hasLock, setHasLock] = useState<boolean>(true)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
+  const year = 2025
   const room = useSelector((state: RootState) => state.room)
-  const dataFromRedux = useSelector(({ form }: { form: any }) => form.data[id] || '')
+  const dataFromRedux = useSelector(({ reports }: { reports: any }) => reports.data[id] || '')
   const currentEditors = useSelector(({ currentEditors }: { currentEditors: any }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
 
@@ -37,8 +38,7 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const handleStopEditing = () => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
-    dispatch(updateReportHttp(room, 2025, id, content))
-    dispatch(updateFormField(id, content, 10))
+    dispatch(updateReportHttp({room, year, id, content}))
   }
 
   const askForLock = () => {

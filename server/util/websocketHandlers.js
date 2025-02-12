@@ -243,7 +243,7 @@ const updateWSAndClearEditors = (io, payload) => {
   }
 
   emitCurrentEditorsTo(io, room, currentEditors)
-  logAndEmitToRoom(io, room, 'new_form_data', data)
+  logAndEmitToRoom(io, room, 'new_reports_data', data)
 }
 
 export default {
