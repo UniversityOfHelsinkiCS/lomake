@@ -1,30 +1,16 @@
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store'
-import { clearLevelSpecificFilters, setFaculty } from '../../../util/redux/filterReducer'
+import { RootState } from '@/client/util/store'
+import type { Faculty } from '@/shared/lib/types'
+import { clearLevelSpecificFilters, setFaculty } from '@/client/util/redux/filterReducer'
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
-
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 /*
 This is a purpose built component for filtering faculties.
 */
-
-// TODO: Add to shared types
-interface Faculty {
-  id: number
-  name: {
-    en: string
-    fi: string
-    se: string
-  }
-  code: string
-  companionStudyprogrammes: Array<{ [key: string]: any }> // Replace with actual structure if known
-  ownedProgrammes: Array<{ [key: string]: any }> // Replace with actual structure if known
-  createdAt: string
-  updatedAt: string
-}
 
 const FacultyFilterComponent = () => {
   const { t } = useTranslation()
@@ -32,6 +18,19 @@ const FacultyFilterComponent = () => {
   const lang = useSelector((state: RootState) => state.language)
   const faculties = useSelector((state: RootState) => state.faculties.data)
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
+  const allowedFaculties = faculties.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
+
+  // If selectedFaculties is not found in allowedFaculties, fallback to allFaculties
+  useEffect(() => {
+    const allowedFacultiesCodes = allowedFaculties.map((f: Faculty) => f.code)
+    const isValid =
+      selectedFaculties[0] === 'allFaculties' ||
+      selectedFaculties.every((f: Faculty) => allowedFacultiesCodes.includes(f))
+
+    if (!isValid) {
+      dispatch(setFaculty(['allFaculties']))
+    }
+  }, [selectedFaculties])
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     dispatch(clearLevelSpecificFilters())
@@ -62,25 +61,23 @@ const FacultyFilterComponent = () => {
   const getOptions = () => {
     const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
 
-    if (!faculties || faculties.length < 1) {
+    if (!allowedFaculties || allowedFaculties.length < 1) {
       return facultiesWithAll
     }
 
     return facultiesWithAll.concat(
-      faculties
-        .filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
-        .map((f: Faculty) => ({
-          key: f.code,
-          value: f.code,
-          // TODO: Make a global type of lang options
-          text: f.name[lang as 'en' | 'fi' | 'se'],
-        })),
+      allowedFaculties.map((f: Faculty) => ({
+        key: f.code,
+        value: f.code,
+        // TODO: Make a global type of lang options
+        text: f.name[lang as 'en' | 'fi' | 'se'],
+      })),
     )
   }
   const options = getOptions()
 
   const getFacultyName = (selected: string[]) =>
-    selected.map(value => options.find(option => option.value === value).text)
+    selected.map(value => options.find(option => option.value === value)?.text)
 
   return (
     <div>
