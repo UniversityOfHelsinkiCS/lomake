@@ -76,26 +76,14 @@ export const TableCell = ({
     itemAlign?: "left" | "center" | "right",
     disabled?: boolean
 }) => {
-
-    let margin = "0 auto";
-
-    switch (itemAlign) {
-        case "left":
-            margin = "0 auto 0 0";
-            break;
-        case "right":
-            margin = "0 0 0 auto";
-            break;
-        case "center":
-            margin = "0 auto";
-            break;
-    }
-
     return (
         <div style={{
-            margin,
             opacity: disabled ? '0.5' : '1',
-            pointerEvents: disabled ? 'none' : 'auto'
+            pointerEvents: disabled ? 'none' : 'auto',
+            display: "flex",
+            justifyContent: itemAlign,
+            textAlign: itemAlign,
+            width: "100%"
         }}>{children}</div>
     )
 }
