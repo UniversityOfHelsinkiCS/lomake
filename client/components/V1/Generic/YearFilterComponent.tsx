@@ -13,22 +13,29 @@ const YearFilterComponent = () => {
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
   // Available years hardcoded for now.
-  const years = [{ key: 0, value: '2025', text: '2025' }]
+  // If an invalid year is selected, the user will see the year greyed out for now and state will not be updated.
+  const allowedYears = ['2025']
 
-  const handleChange = (event: SelectChangeEvent<string[]>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())
 
     const value = event.target.value as string
-    dispatch(setKeyDataYear(value))
+    allowedYears.includes(value) && dispatch(setKeyDataYear(value))
   }
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
-        <Select id="level-filter" value={selectedYear} onChange={handleChange}>
-          {years.map(option => (
-            <MenuItem key={option.key} value={option.value}>
-              {option.text}
+        <Select
+          id="level-filter"
+          value={selectedYear}
+          onChange={handleChange}
+          displayEmpty
+          renderValue={value => (allowedYears.includes(value) ? value : <span style={{ opacity: 0.4 }}>{value}</span>)}
+        >
+          {allowedYears.map(option => (
+            <MenuItem key={option} value={option}>
+              {option}
             </MenuItem>
           ))}
         </Select>
