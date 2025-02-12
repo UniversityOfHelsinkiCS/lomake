@@ -1,16 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store';
+import { RootState } from '../../../util/store'
 import { clearLevelSpecificFilters, setFaculty } from '../../../util/redux/filterReducer'
 
-import {
-  MenuItem,
-  FormControl,
-  Checkbox,
-  ListItemText,
-} from '@mui/material';
+import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 /*
 This is a purpose built component for filtering faculties.
@@ -18,19 +13,18 @@ This is a purpose built component for filtering faculties.
 
 // TODO: Add to shared types
 interface Faculty {
-  id: number;
+  id: number
   name: {
-    en: string;
-    fi: string;
-    se: string;
-  };
-  code: string;
-  companionStudyprogrammes: Array<{ [key: string]: any }>; // Replace with actual structure if known
-  ownedProgrammes: Array<{ [key: string]: any }>; // Replace with actual structure if known
-  createdAt: string;
-  updatedAt: string;
+    en: string
+    fi: string
+    se: string
+  }
+  code: string
+  companionStudyprogrammes: Array<{ [key: string]: any }> // Replace with actual structure if known
+  ownedProgrammes: Array<{ [key: string]: any }> // Replace with actual structure if known
+  createdAt: string
+  updatedAt: string
 }
-
 
 const FacultyFilterComponent = () => {
   const { t } = useTranslation()
@@ -41,8 +35,8 @@ const FacultyFilterComponent = () => {
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     dispatch(clearLevelSpecificFilters())
-    
-    const value = event.target.value as string[];
+
+    const value = event.target.value as string[]
 
     if (value.length < 1) {
       if (selectedFaculties[0] === 'allFaculties') {
@@ -85,7 +79,8 @@ const FacultyFilterComponent = () => {
   }
   const options = getOptions()
 
-  const getFacultyName = (selected: string[]) => selected.map(value => options.find(option => option.value === value).text)
+  const getFacultyName = (selected: string[]) =>
+    selected.map(value => options.find(option => option.value === value).text)
 
   return (
     <div>
@@ -96,9 +91,9 @@ const FacultyFilterComponent = () => {
           multiple
           value={selectedFaculties}
           onChange={handleChange}
-          renderValue={(selected) => getFacultyName(selected).join(', ')}
+          renderValue={selected => getFacultyName(selected).join(', ')}
         >
-          {options?.map((option) => (
+          {options?.map(option => (
             <MenuItem key={option.key} value={option.value}>
               <Checkbox checked={selectedFaculties.includes(option.value)} />
               <ListItemText primary={option.text} />
@@ -107,8 +102,7 @@ const FacultyFilterComponent = () => {
         </Select>
       </FormControl>
     </div>
-  );
+  )
 }
 
 export default FacultyFilterComponent
-

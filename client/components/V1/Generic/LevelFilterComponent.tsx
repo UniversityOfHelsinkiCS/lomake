@@ -1,15 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { RootState } from '../../../util/store';
+import { RootState } from '../../../util/store'
 import { setLevel, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
 
-import {
-  MenuItem,
-  FormControl,
-} from '@mui/material';
+import { MenuItem, FormControl } from '@mui/material'
 
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 const LevelFilterComponent = () => {
   const { t } = useTranslation()
@@ -28,19 +24,15 @@ const LevelFilterComponent = () => {
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     dispatch(clearLevelSpecificFilters())
 
-    const value = event.target.value as string;
+    const value = event.target.value as string
     dispatch(setLevel(value))
   }
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
-        <Select
-          id="level-filter"
-          value={selectedLevel}
-          onChange={handleChange}
-        >
-          {levels.map((option) => (
+        <Select id="level-filter" value={selectedLevel} onChange={handleChange}>
+          {levels.map(option => (
             <MenuItem key={option.key} value={option.value}>
               {option.text}
             </MenuItem>
@@ -48,7 +40,7 @@ const LevelFilterComponent = () => {
         </Select>
       </FormControl>
     </div>
-  );
+  )
 }
 
 export default LevelFilterComponent
