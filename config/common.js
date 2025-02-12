@@ -99,7 +99,7 @@ const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_ye
 const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
 
 const hasSpecialGroup = (user, group) => {
-  if (user.specialGroup) {
+  if (user && user.specialGroup) {
     const groups = Object.keys(user.specialGroup)
     return groups.includes(group)
   }
