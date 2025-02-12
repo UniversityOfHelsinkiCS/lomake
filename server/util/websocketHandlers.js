@@ -78,24 +78,6 @@ const clearCurrentUser = user => {
   }, {})
 }
 
-// const uidParser = socket => {
-//   const cookieString = socket.request.headers.cookie
-
-//   const regexUid = /uid=([^;]+)/
-//   const regexLoggedInAs = /x-admin-logged-in-as=([^;]+)/
-
-//   const matchUid = cookieString.match(regexUid)
-//   const matchLoggedInAs = cookieString.match(regexLoggedInAs)
-
-//   // Extract uid value
-//   const uid = matchUid ? matchUid[1] : null
-
-//   // Extract loggedInAs value (with fallback to headers)
-//   const loggedInAs = matchLoggedInAs ? matchLoggedInAs[1] : socket.request.headers['x-admin-logged-in-as']
-
-//   return { uid, loggedInAs }
-// }
-
 const getCurrentUser = async socket => {
   const { uid } = socket.request.headers
 
@@ -249,25 +231,25 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-// const updateWSAndClearEditors = (io, payload) => {
-//   const { room, data, field } = payload
+const updateWSAndClearEditors = (io, payload) => {
+  const { room, data, field } = payload
 
-//   currentEditors = {
-//     ...currentEditors,
-//     [room]: {
-//       ...currentEditors[room],
-//       [field]: undefined,
-//     },
-//   }
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: undefined,
+    },
+  }
 
-//   emitCurrentEditorsTo(io, room, currentEditors)
-//   logAndEmitToRoom(io, room, 'new_form_data', data)
-// }
+  emitCurrentEditorsTo(io, room, currentEditors)
+  logAndEmitToRoom(io, room, 'new_form_data', data)
+}
 
 export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
-  // updateWSAndClearEditors,
+  updateWSAndClearEditors,
 }
