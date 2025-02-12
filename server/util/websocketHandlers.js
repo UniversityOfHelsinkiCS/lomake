@@ -78,30 +78,32 @@ const clearCurrentUser = user => {
   }, {})
 }
 
-const uidParser = socket => {
-  const cookieString = socket.request.headers.cookie
+// const uidParser = socket => {
+//   const cookieString = socket.request.headers.cookie
 
-  const regexUid = /uid=([^;]+)/
-  const regexLoggedInAs = /x-admin-logged-in-as=([^;]+)/
+//   const regexUid = /uid=([^;]+)/
+//   const regexLoggedInAs = /x-admin-logged-in-as=([^;]+)/
 
-  const matchUid = cookieString.match(regexUid)
-  const matchLoggedInAs = cookieString.match(regexLoggedInAs)
+//   const matchUid = cookieString.match(regexUid)
+//   const matchLoggedInAs = cookieString.match(regexLoggedInAs)
 
-  // Extract uid value
-  const uid = matchUid ? matchUid[1] : null
+//   // Extract uid value
+//   const uid = matchUid ? matchUid[1] : null
 
-  // Extract loggedInAs value (with fallback to headers)
-  const loggedInAs = matchLoggedInAs ? matchLoggedInAs[1] : socket.request.headers['x-admin-logged-in-as']
+//   // Extract loggedInAs value (with fallback to headers)
+//   const loggedInAs = matchLoggedInAs ? matchLoggedInAs[1] : socket.request.headers['x-admin-logged-in-as']
 
-  return { uid, loggedInAs }
-}
+//   return { uid, loggedInAs }
+// }
 
 const getCurrentUser = async socket => {
-  const { uid, loggedInAs } = uidParser(socket)
+  const { uid } = socket.request.headers
 
   if (!uid) return null
 
-  if (!inProduction && loggedInAs && isDevSuperAdminUid(uid)) {
+  const loggedInAs = socket.request.headers['x-admin-logged-in-as']
+
+  if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
     const user = await getUserByUid(loggedInAs)
     return user
   }
@@ -116,7 +118,7 @@ const joinRoom = async (socket, room, form, io) => {
     if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
-      (currentUser.access[room] && currentUser.access[room].read)
+      (currentUser?.access[room] && currentUser?.access[room].read)
     ) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
