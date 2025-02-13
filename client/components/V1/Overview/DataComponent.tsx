@@ -9,6 +9,7 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
+import DataModal from '../Generic/ModalTemplateComponent'
 import _ from 'lodash'
 
 interface KeyDataTableProps {
@@ -29,6 +30,7 @@ const KeyFigureTableComponent = ({
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -111,6 +113,10 @@ const KeyFigureTableComponent = ({
     }
   }
 
+  const openModal = () => {
+    setModalOpen(true)
+  }
+
   if (!keyData) {
     return <CircularProgress />
   }
@@ -156,16 +162,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={openModal}>
               <TrafficLight color={programmeData.vetovoimaisuus}></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={openModal}>
               <TrafficLight color={programmeData.lapivirtaus}></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={openModal}>
               <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={openModal}>
               <TrafficLight color={programmeData.resurssit}></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
@@ -174,6 +180,13 @@ const KeyFigureTableComponent = ({
           </TableRow>
         ))}
       </Table>
+
+      <DataModal open={modalOpen} setOpen={setModalOpen}>
+        <div>
+          <h2>Modal</h2>
+          <p>Modal content</p>
+        </div>
+      </DataModal>
     </div>
   )
 }

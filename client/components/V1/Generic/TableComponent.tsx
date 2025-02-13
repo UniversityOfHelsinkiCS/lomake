@@ -14,7 +14,7 @@ Example usage:
 
         <TableRow>
             <TableCell itemAlign="left">Item 1</TableCell>
-            <TableCell>Item 2</TableCell>
+            <TableCell onClick={handleClick}>Item 2</TableCell>
             <TableCell disabled >Item 3</TableCell>
         </TableRow>
       </Table>
@@ -68,19 +68,23 @@ export const TableCell = ({
   children,
   itemAlign = 'center',
   disabled = false,
+  onClick,
 }: {
   children?: React.ReactNode
   itemAlign?: 'left' | 'center' | 'right'
   disabled?: boolean
+  onClick?: () => void
 }) => {
   return (
     <div
+      onClick={onClick}
       style={{
         opacity: disabled ? '0.5' : '1',
         display: 'flex',
         justifyContent: itemAlign,
         textAlign: itemAlign,
         width: '100%',
+        cursor: onClick ? 'pointer' : 'default',
       }}
     >
       {children}
