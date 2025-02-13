@@ -75,7 +75,7 @@ const ProgrammeView = () => {
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ display: 'flex', alignItems: 'baseline' }}>
-        <IconButton component={Link} to="/v1/overview" sx={{ marginRight: 2 }}>
+        <IconButton component={Link} href="/v1/overview" sx={{ marginRight: 2 }}>
           <ArrowBackIcon />
         </IconButton>
 
