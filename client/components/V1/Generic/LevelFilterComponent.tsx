@@ -44,7 +44,7 @@ const LevelFilterComponent = () => {
       <FormControl sx={{ m: 1, width: 350 }}>
         <Select id="level-filter" value={selectedLevel} onChange={handleChange}>
           {allowedLevels.map(option => (
-            <MenuItem key={option.key} value={option.value}>
+            <MenuItem key={option.key} value={option.value} disabled={option.value === 'doctoral'}>
               {option.text}
             </MenuItem>
           ))}
