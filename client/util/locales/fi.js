@@ -555,7 +555,7 @@ export default {
     info2:
       'Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
     notUsed2025: 'Ei käytössä vuonna 2025',
-    keyFigure: 'Avainluku',
+    keyFigure: 'Avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
 
     vetovoima: 'Koulutusohjelman vetovoimaisuus',
@@ -576,5 +576,6 @@ export default {
     qualityControl: 'Laadunhallinnan välineet',
     supportProcess: 'Toimenpidemenettely',
     actions: 'Toimenpiteet',
+    moveToActions: 'Jatka toimenpiteisiin',
   },
 }

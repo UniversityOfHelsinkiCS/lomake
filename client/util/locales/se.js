@@ -612,5 +612,6 @@ export default {
     qualityControl: 'Kvalitetskontrollverktyg',
     supportProcess: 'Procedur för handling',
     actions: 'Åtgärder',
+    moveToActions: 'Gå till åtgärder',
   },
 }
