@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import { CircularProgress } from '@mui/material'
-import useFetchKeyData from '../../../hooks/useFetchKeyData'
+import { useState, useMemo } from 'react'
+import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { TrafficLight } from '../Generic/TrafficLightComponent'
-import SearchInput from '../Generic/SearchInputComponent'
-import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import { KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { CircularProgress } from '@mui/material'
+import SwapVertIcon from '@mui/icons-material/SwapVert'
+import SearchInput from '../Generic/SearchInputComponent'
+import { TrafficLight } from '../Generic/TrafficLightComponent'
+import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import _ from 'lodash'
 
 interface KeyDataTableProps {
@@ -26,6 +27,8 @@ const KeyFigureTableComponent = ({
   const { t } = useTranslation()
 
   const [searchValue, setSearchValue] = useState<string>('')
+  const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
   if (!keyData) {
     return <CircularProgress />
@@ -37,52 +40,81 @@ const KeyFigureTableComponent = ({
   // Convert to set for faster lookup
   const allowedFacultiesSet = new Set(facultyFilter)
 
-  // Default sort by koulutusohjelma (ascending alphabetic order)
-  const sortedData = _.sortBy(programmeData, ['koulutusohjelma'])
-
   // Filter by faculty, year and program level
-  const filteredData = sortedData.filter((programmeData: KeyDataProgramme) => {
-    // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
-    // example: KH10_001, where K is the level, H10 is the faculty code
+  const filteredData = useMemo(
+    () =>
+      programmeData.filter((programmeData: KeyDataProgramme) => {
+        // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
+        // example: KH10_001, where K is the level, H10 is the faculty code
 
-    const code = programmeData.koulutusohjelmakoodi
+        const code = programmeData.koulutusohjelmakoodi
 
-    let programmeLevelCode = ''
-    switch (code.charAt(0)) {
-      case 'K':
-        programmeLevelCode = 'bachelor'
-        break
-      case 'M':
-        programmeLevelCode = 'master'
-        break
-      case 'D':
-        programmeLevelCode = 'doctoral'
-        break
-      case 'I':
-        programmeLevelCode = 'international'
-        break
-      default:
-        programmeLevelCode = ''
-    }
+        let programmeLevelCode = ''
+        switch (code.charAt(0)) {
+          case 'K':
+            programmeLevelCode = 'bachelor'
+            break
+          case 'M':
+            programmeLevelCode = 'master'
+            break
+          case 'D':
+            programmeLevelCode = 'doctoral'
+            break
+          case 'I':
+            programmeLevelCode = 'international'
+            break
+          default:
+            programmeLevelCode = ''
+        }
 
-    const facultyCode = code.substring(1, 4)
+        const facultyCode = code.substring(1, 4)
 
-    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
-    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
+        const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
+        const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
-    return facultyMatches && levelMatches
-  })
+        return facultyMatches && levelMatches
+      }),
+    [facultyFilter, programmeLevelFilter, programmeData],
+  )
 
   // Filter by search input
-  const searchFilteredData = filteredData.filter((programmeData: KeyDataProgramme) => {
-    return (
-      programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
-      programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
-    )
-  })
+  const searchFilteredData = useMemo(
+    () =>
+      filteredData.filter((programmeData: KeyDataProgramme) => {
+        return (
+          programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
+          programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      }),
+    [filteredData, searchValue],
+  )
+
+  // Default sort by koulutusohjelma (ascending alphabetic order)
+  const sortedData = useMemo(
+    () => _.orderBy(searchFilteredData, [sortIdentity], [sortDirection]),
+    [searchFilteredData, sortIdentity, sortDirection],
+  )
+
+  const sortByProgrammeName = () => {
+    if (sortIdentity !== 'koulutusohjelma') {
+      setSortDirection('asc')
+      setSortIdentity('koulutusohjelma')
+    } else {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    }
+  }
+
+  const sortByProgrammeCode = () => {
+    if (sortIdentity !== 'koulutusohjelmakoodi') {
+      setSortDirection('asc')
+      setSortIdentity('koulutusohjelmakoodi')
+    } else {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    }
+  }
 
   return (
-    <div style={{ minWidth: 1200 }}>
+    <div style={{ minWidth: 1400 }}>
       <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
@@ -91,8 +123,12 @@ const KeyFigureTableComponent = ({
         <TableRow isHeader>
           <TableCell>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-              <span>{t('common:programmeHeader')}</span>
-              <span style={{ paddingRight: '20px' }}>{t('common:code')}</span>
+              <span onClick={sortByProgrammeName} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                {t('common:programmeHeader')} <SwapVertIcon />
+              </span>
+              <span onClick={sortByProgrammeCode} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                {t('common:code')} <SwapVertIcon />
+              </span>
             </div>
           </TableCell>
           <TableCell>{t('keyData:vetovoima')}</TableCell>
@@ -104,7 +140,7 @@ const KeyFigureTableComponent = ({
           <TableCell>{t('keyData:supportProcess')}</TableCell>
         </TableRow>
 
-        {searchFilteredData.map((programmeData: KeyDataProgramme) => (
+        {sortedData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell itemAlign="left">
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
