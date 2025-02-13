@@ -77,7 +77,6 @@ export const TableCell = ({
     <div
       style={{
         opacity: disabled ? '0.5' : '1',
-        pointerEvents: disabled ? 'none' : 'auto',
         display: 'flex',
         justifyContent: itemAlign,
         textAlign: itemAlign,
