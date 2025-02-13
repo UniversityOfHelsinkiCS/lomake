@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { KeyDataProgramme } from '@/client/lib/types'
@@ -30,59 +30,68 @@ const KeyFigureTableComponent = ({
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
-  if (!keyData) {
-    return <CircularProgress />
-  }
-
-  const { kandiohjelmat, maisteriohjelmat } = keyData.data
-  let programmeData: KeyDataProgramme[] = [...kandiohjelmat, ...maisteriohjelmat]
-
-  // Convert to set for faster lookup
-  const allowedFacultiesSet = new Set(facultyFilter)
+  const programmeData = useMemo(() => {
+    if (keyData) {
+      const { kandiohjelmat, maisteriohjelmat } = keyData.data
+      return [...kandiohjelmat, ...maisteriohjelmat]
+    }
+    return []
+  }, [keyData])
 
   // Filter by faculty, year and program level
-  const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
-    // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
-    // example: KH10_001, where K is the level, H10 is the faculty code
+  const filteredData = useMemo(() => {
+    // Convert to set for faster lookup
+    const allowedFacultiesSet = new Set(facultyFilter)
 
-    const code = programmeData.koulutusohjelmakoodi
+    return programmeData.filter((programmeData: KeyDataProgramme) => {
+      // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
+      // example: KH10_001, where K is the level, H10 is the faculty code
 
-    let programmeLevelCode = ''
-    switch (code.charAt(0)) {
-      case 'K':
-        programmeLevelCode = 'bachelor'
-        break
-      case 'M':
-        programmeLevelCode = 'master'
-        break
-      case 'D':
-        programmeLevelCode = 'doctoral'
-        break
-      case 'I':
-        programmeLevelCode = 'international'
-        break
-      default:
-        programmeLevelCode = ''
-    }
+      const code = programmeData.koulutusohjelmakoodi
 
-    const facultyCode = code.substring(1, 4)
+      let programmeLevelCode = ''
+      switch (code.charAt(0)) {
+        case 'K':
+          programmeLevelCode = 'bachelor'
+          break
+        case 'M':
+          programmeLevelCode = 'master'
+          break
+        case 'D':
+          programmeLevelCode = 'doctoral'
+          break
+        case 'I':
+          programmeLevelCode = 'international'
+          break
+        default:
+          programmeLevelCode = ''
+      }
 
-    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
-    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
+      const facultyCode = code.substring(1, 4)
 
-    return facultyMatches && levelMatches
-  })
+      const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
+      const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
+
+      return facultyMatches && levelMatches
+    })
+  }, [facultyFilter, programmeLevelFilter, programmeData])
 
   // Filter by search input
-  const searchFilteredData = filteredData.filter((programmeData: KeyDataProgramme) => {
-    return (
-      programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
-      programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
-    )
-  })
+  const searchFilteredData = useMemo(
+    () =>
+      filteredData.filter((programmeData: KeyDataProgramme) => {
+        return (
+          programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
+          programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      }),
+    [filteredData, searchValue],
+  )
 
   // Default sort by koulutusohjelma (ascending alphabetic order)
-  const sortedData = _.orderBy(searchFilteredData, [sortIdentity], [sortDirection])
+  const sortedData = useMemo(() => {
+    return _.orderBy(searchFilteredData, [sortIdentity], [sortDirection])
+  }, [searchFilteredData, sortIdentity, sortDirection])
 
   const sortByProgrammeName = () => {
     if (sortIdentity !== 'koulutusohjelma') {
@@ -100,6 +109,10 @@ const KeyFigureTableComponent = ({
     } else {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     }
+  }
+
+  if (!keyData) {
+    return <CircularProgress />
   }
 
   return (
