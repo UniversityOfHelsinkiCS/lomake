@@ -139,7 +139,7 @@ const KeyFigureTableComponent = ({
           <TableCell>{t('keyData:resurssit')}</TableCell>
           <TableCell>{t('keyData:actions')}</TableCell>
           <TableCell disabled>
-            <Tooltip title="llolo" placement="top" arrow>
+            <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
               <span>{t('keyData:qualityControl')}</span>
             </Tooltip>
           </TableCell>
