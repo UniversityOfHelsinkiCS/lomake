@@ -98,9 +98,10 @@ const KeyFigureTableComponent = ({
           <TableCell>{t('keyData:vetovoima')}</TableCell>
           <TableCell>{t('keyData:lapivirtaus')}</TableCell>
           <TableCell>{t('keyData:palaute')}</TableCell>
+          <TableCell>{t('keyData:actions')}</TableCell>
           <TableCell>{t('keyData:resurssit')}</TableCell>
           <TableCell disabled>{t('keyData:qualityControl')}</TableCell>
-          <TableCell>{t('keyData:actions')}</TableCell>
+          <TableCell>{t('keyData:supportProcess')}</TableCell>
         </TableRow>
 
         {searchFilteredData.map((programmeData: KeyDataProgramme) => (
@@ -122,6 +123,7 @@ const KeyFigureTableComponent = ({
             <TableCell>
               <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
             </TableCell>
+            <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
