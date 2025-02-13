@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { KeyDataProgramme } from '@/client/lib/types'
@@ -41,59 +41,48 @@ const KeyFigureTableComponent = ({
   const allowedFacultiesSet = new Set(facultyFilter)
 
   // Filter by faculty, year and program level
-  const filteredData = useMemo(
-    () =>
-      programmeData.filter((programmeData: KeyDataProgramme) => {
-        // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
-        // example: KH10_001, where K is the level, H10 is the faculty code
+  const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
+    // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
+    // example: KH10_001, where K is the level, H10 is the faculty code
 
-        const code = programmeData.koulutusohjelmakoodi
+    const code = programmeData.koulutusohjelmakoodi
 
-        let programmeLevelCode = ''
-        switch (code.charAt(0)) {
-          case 'K':
-            programmeLevelCode = 'bachelor'
-            break
-          case 'M':
-            programmeLevelCode = 'master'
-            break
-          case 'D':
-            programmeLevelCode = 'doctoral'
-            break
-          case 'I':
-            programmeLevelCode = 'international'
-            break
-          default:
-            programmeLevelCode = ''
-        }
+    let programmeLevelCode = ''
+    switch (code.charAt(0)) {
+      case 'K':
+        programmeLevelCode = 'bachelor'
+        break
+      case 'M':
+        programmeLevelCode = 'master'
+        break
+      case 'D':
+        programmeLevelCode = 'doctoral'
+        break
+      case 'I':
+        programmeLevelCode = 'international'
+        break
+      default:
+        programmeLevelCode = ''
+    }
 
-        const facultyCode = code.substring(1, 4)
+    const facultyCode = code.substring(1, 4)
 
-        const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
-        const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
+    const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
+    const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
-        return facultyMatches && levelMatches
-      }),
-    [facultyFilter, programmeLevelFilter, programmeData],
-  )
+    return facultyMatches && levelMatches
+  })
 
   // Filter by search input
-  const searchFilteredData = useMemo(
-    () =>
-      filteredData.filter((programmeData: KeyDataProgramme) => {
-        return (
-          programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
-          programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      }),
-    [filteredData, searchValue],
-  )
+  const searchFilteredData = filteredData.filter((programmeData: KeyDataProgramme) => {
+    return (
+      programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
+      programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
+    )
+  })
 
   // Default sort by koulutusohjelma (ascending alphabetic order)
-  const sortedData = useMemo(
-    () => _.orderBy(searchFilteredData, [sortIdentity], [sortDirection]),
-    [searchFilteredData, sortIdentity, sortDirection],
-  )
+  const sortedData = _.orderBy(searchFilteredData, [sortIdentity], [sortDirection])
 
   const sortByProgrammeName = () => {
     if (sortIdentity !== 'koulutusohjelma') {
@@ -134,8 +123,8 @@ const KeyFigureTableComponent = ({
           <TableCell>{t('keyData:vetovoima')}</TableCell>
           <TableCell>{t('keyData:lapivirtaus')}</TableCell>
           <TableCell>{t('keyData:palaute')}</TableCell>
-          <TableCell>{t('keyData:actions')}</TableCell>
           <TableCell>{t('keyData:resurssit')}</TableCell>
+          <TableCell>{t('keyData:actions')}</TableCell>
           <TableCell disabled>{t('keyData:qualityControl')}</TableCell>
           <TableCell>{t('keyData:supportProcess')}</TableCell>
         </TableRow>
@@ -159,7 +148,9 @@ const KeyFigureTableComponent = ({
             <TableCell>
               <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
             </TableCell>
-            <TableCell></TableCell>
+            <TableCell>
+              <TrafficLight color={programmeData.resurssit}></TrafficLight>
+            </TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
