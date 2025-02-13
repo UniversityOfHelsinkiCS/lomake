@@ -554,6 +554,7 @@ export default {
       'Avainluvut kuvaavat koulutusohjelman toimintaa yliopiston keskeisten tavoitteiden näkökulmasta. Avainlukujen tavoitteena on, että niiden avulla voidaan tarkastella koulutusohjelmien elinvoimaisuutta mahdollisimman yhdenvertaisesti. ',
     info2:
       'Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
+    notUsed2025: 'Ei käytössä vuonna 2025',
     keyFigure: 'Avainluku',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
 

@@ -556,6 +556,7 @@ export default {
       'The key figures describe the activities of the degree programme in relation to the key objectives of the University. The aim of the key figures is to provide as equal a view as possible of the vitality of the degree programmes. ',
     info2:
       'The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
+    notUsed2025: 'Not applicable in 2025',
     keyFigure: 'Key Figure',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
 

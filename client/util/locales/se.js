@@ -590,6 +590,7 @@ export default {
       'Nyckeltalen beskriver programmets verksamhet i förhållande till universitetets viktigaste mål. Syftet med nyckeltalen är att ge en så likvärdig bild som möjligt av utbildningsprogrammens vitalitet.',
     info2:
       'Nyckeltalen kommer att användas för den årliga uppföljningen av utbildningsprogrammen från och med 2025. Nyckeltalen och deras kriterier kommer att definieras separat för kandidat-, master- och doktorandprogram.',
+    notUsed2025: 'Ej använd 2025',
     keyFigure: 'Nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 

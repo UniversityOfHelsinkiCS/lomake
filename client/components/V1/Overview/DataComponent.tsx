@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, Tooltip } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
@@ -138,7 +138,11 @@ const KeyFigureTableComponent = ({
           <TableCell>{t('keyData:palaute')}</TableCell>
           <TableCell>{t('keyData:resurssit')}</TableCell>
           <TableCell>{t('keyData:actions')}</TableCell>
-          <TableCell disabled>{t('keyData:qualityControl')}</TableCell>
+          <TableCell disabled>
+            <Tooltip title="llolo" placement="top" arrow>
+              <span>{t('keyData:qualityControl')}</span>
+            </Tooltip>
+          </TableCell>
           <TableCell>{t('keyData:supportProcess')}</TableCell>
         </TableRow>
 
