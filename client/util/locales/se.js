@@ -609,6 +609,7 @@ export default {
     criteriaInfo:
       'Nyckeltalen består av 3-5 kriterier. Kriterierna omfattar information om utbildningsprogram för ett eller flera år. Nyckeltalskriterierna kommer att ändras varje år när ny information blir tillgänglig inom nyckeltalets innehållsområde.',
     qualityControl: 'Kvalitetskontrollverktyg',
-    actions: 'Procedur för handling',
+    supportProcess: 'Procedur för handling',
+    actions: 'Åtgärder',
   },
 }

@@ -573,6 +573,7 @@ export default {
     criteriaInfo:
       'Avainluvut muodostuvat 3-5 kriteeristä. Kriteerit sisältävät koulutusohjelmia koskevaa dataa yhdeltä tai useammalta vuodelta. Avainlukujen kriteerit muuttuvat vuosittain, kun avainluvun sisältöalueesta tulee uutta dataa käyttöön.',
     qualityControl: 'Laadunhallinnan välineet',
-    actions: 'Toimenpidemenettely',
+    supportProcess: 'Toimenpidemenettely',
+    actions: 'Toimenpiteet',
   },
 }
