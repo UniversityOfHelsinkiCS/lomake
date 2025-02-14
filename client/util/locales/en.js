@@ -579,5 +579,11 @@ export default {
     supportProcess: 'Procedure of action',
     actions: 'Actions',
     moveToActions: 'Continue to actions',
+    someoneElseEditing: 'is writing',
+    editComment: 'Edit comment',
+    saveComment: 'Save comment',
+    unsavedChanges: 'Unsaved changes',
+    programmesComment: 'Comment of the degree programme',
+    noComment: 'No comment',
   },
 }

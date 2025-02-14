@@ -613,5 +613,11 @@ export default {
     supportProcess: 'Procedur för handling',
     actions: 'Åtgärder',
     moveToActions: 'Gå till åtgärder',
+    someoneElseEditing: 'är redigering',
+    editComment: 'Redigera kommentar',
+    saveComment: 'Spara kommentar',
+    unsavedChanges: 'Du har osparade ändringar',
+    programmesComment: 'Kommentar till nyckeltalen för utbildningsprogram',
+    noComment: 'Ingen kommentar',
   },
 }

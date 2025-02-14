@@ -577,5 +577,11 @@ export default {
     supportProcess: 'Toimenpidemenettely',
     actions: 'Toimenpiteet',
     moveToActions: 'Jatka toimenpiteisiin',
+    someoneElseEditing: 'kirjoittaa',
+    editComment: 'Muokkaa kommenttia',
+    saveComment: 'Tallenna kommentti',
+    unsavedChanges: 'Tallentamaton muutos',
+    programmesComment: 'Koulutusohjelman kommentti',
+    noComment: 'Ei kommenttia',
   },
 }

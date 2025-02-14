@@ -61,7 +61,7 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
             multiline
             minRows={type === 'comment' ? 2.1 : 10}
             fullWidth
-            label={t('programmesComment')}
+            label={t('keyData:programmesComment')}
             value={content}
             onChange={e => setContent(e.target.value)}
             onClick={askForLock}
@@ -75,9 +75,9 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
           />
           <Box>
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
-              {t('saveComment')}
+              {t('keyData:saveComment')}
             </Button>
-            {dataFromRedux !== content && <span>{t('unsavedChanges')}</span>}
+            {dataFromRedux !== content && <span style={{ color: 'red'}}>{t('keyData:unsavedChanges')}</span>}
           </Box>
         </>
       ) : (
@@ -91,13 +91,13 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
               }
             />
             <CardContent>
-              <ReactMarkdown>{content ? content : t('noComment')}</ReactMarkdown>
+              <ReactMarkdown>{content ? content : t('keyData:noComment')}</ReactMarkdown>
             </CardContent>
           </Card>
           <Button variant="contained" disabled={someOneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
-            {t('editComment')}
+            {t('keyData:editComment')}
           </Button>
-          {someOneElseEditing && <span>{t('someoneElseEditing')}</span>}
+          {someOneElseEditing && <span>{t('keyData:someoneElseEditing')}</span>}
         </>
       )}
     </Box>
