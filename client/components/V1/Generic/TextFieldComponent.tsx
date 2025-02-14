@@ -11,7 +11,12 @@ import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { updateReportHttp } from '../../../util/redux/reportsSlicer'
 
-const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
+type TextFieldComponentProps = {
+  id: string
+  type: string
+}
+
+const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -21,9 +26,9 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
 
   const year = 2025
   const room = useSelector((state: RootState) => state.room)
-  const dataFromRedux = useSelector(({ reports }: { reports: any }) => reports.data[id] || '')
-  const currentEditors = useSelector(({ currentEditors }: { currentEditors: any }) => currentEditors.data, deepCheck)
-  const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
+  const dataFromRedux = useSelector(({reports}: {reports: Record<string, any>}) => reports.data[id] || '')
+  const currentEditors = useSelector(({ currentEditors }: { currentEditors: Record<string, any>}) => currentEditors.data, deepCheck)
+  const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any>}) => currentUser.data)
   const someOneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
 
   useEffect(() => {

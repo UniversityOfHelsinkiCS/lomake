@@ -12,13 +12,13 @@ import {
 } from 'sequelize'
 
 class Report extends Model<InferAttributes<Report>, InferCreationAttributes<Report>> {
-  declare id: CreationOptional<number>;
-  declare studyprogrammeId: ForeignKey<number>;
-  declare studyprogrammeKey: string;
-  declare year: number;
-  declare data: any;
-  declare createdAt: CreationOptional<Date>;
-  declare updatedAt: CreationOptional<Date>;
+  declare id: CreationOptional<number>
+  declare studyprogrammeId: ForeignKey<number>
+  declare studyprogrammeKey: string
+  declare year: number
+  declare data: Record<string, string>
+  declare createdAt: CreationOptional<Date>
+  declare updatedAt: CreationOptional<Date>
 }
 
 

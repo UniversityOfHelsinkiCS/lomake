@@ -3,7 +3,7 @@ import { sequelize } from '../database/connection.js'
 
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {
   declare id: CreationOptional<number>
-  declare data: {}
+  declare data: Record<string, any>
   declare createdAt: Date
   declare updatedAt: Date
 }
