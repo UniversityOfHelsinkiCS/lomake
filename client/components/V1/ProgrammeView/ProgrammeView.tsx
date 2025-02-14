@@ -109,7 +109,7 @@ const ProgrammeView = () => {
           {KeyDataPoints.map(data => (
             <React.Fragment key={data.title}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
-              <TextFieldComponent id={data.title} type="comment" />
+              <TextFieldComponent id={data.groupKey} type="comment" />
             </React.Fragment>
           ))}
 
