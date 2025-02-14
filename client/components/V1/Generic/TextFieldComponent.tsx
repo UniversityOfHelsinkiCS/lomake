@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
-import { TextField, Button, Box } from '@mui/material'
+import { useState, useEffect } from 'react'
+import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent } from '@mui/material'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
-import { getLockHttp, updateFormField } from '../../../util/redux/formReducer'
+import { getLockHttp } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
@@ -22,6 +23,7 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const dataFromRedux = useSelector(({ reports }: { reports: any }) => reports.data[id] || '')
   const currentEditors = useSelector(({ currentEditors }: { currentEditors: any }) => currentEditors.data, deepCheck)
   const currentUser = useSelector(({ currentUser }: { currentUser: any }) => currentUser.data)
+  const someOneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -38,7 +40,7 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const handleStopEditing = () => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
-    dispatch(updateReportHttp({room, year, id, content}))
+    dispatch(updateReportHttp({ room, year, id, content }))
   }
 
   const askForLock = () => {
@@ -57,23 +59,45 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
             defaultValue={content}
             variant="outlined"
             multiline
-            minRows={type === 'comment' ? 3 : 10}
+            minRows={type === 'comment' ? 2.1 : 10}
             fullWidth
-            label="Koulutusohjelman kommentti"
+            label={t('programmesComment')}
             value={content}
             onChange={e => setContent(e.target.value)}
             onClick={askForLock}
+            InputProps={{
+              startAdornment: (
+                <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
+                  <ChatBubbleIcon />
+                </Avatar>
+              ),
+            }}
           />
-          <Button variant="outlined" onClick={handleStopEditing}>
-            {t('generic:kludgeButton')}
-          </Button>
+          <Box>
+            <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
+              {t('saveComment')}
+            </Button>
+            {dataFromRedux !== content && <span>{t('unsavedChanges')}</span>}
+          </Box>
         </>
       ) : (
         <>
-          <ReactMarkdown>{content}</ReactMarkdown>
-          <Button variant="outlined" onClick={askForLock}>
-            {t('edit')}
+          <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
+                  <ChatBubbleIcon />
+                </Avatar>
+              }
+            />
+            <CardContent>
+              <ReactMarkdown>{content ? content : t('noComment')}</ReactMarkdown>
+            </CardContent>
+          </Card>
+          <Button variant="contained" disabled={someOneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
+            {t('editComment')}
           </Button>
+          {someOneElseEditing && <span>{t('someoneElseEditing')}</span>}
         </>
       )}
     </Box>
