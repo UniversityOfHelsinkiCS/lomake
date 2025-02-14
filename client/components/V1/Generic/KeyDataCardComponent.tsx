@@ -116,7 +116,7 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           paddingBottom: '10px',
         }}
       >
-        <TrafficLight color={props.color} style={{ minHeight: '28px', minWidth: '28px' }} />
+        <TrafficLight color={props.color} variant="large" />
         <h2 style={{ margin: 0 }}>{props.title.toUpperCase()}</h2>
       </Box>
       <Typography variant="body1" color="textSecondary" style={{ padding: '20px 0 30px 0' }}>

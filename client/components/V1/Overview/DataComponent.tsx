@@ -157,16 +157,16 @@ const KeyFigureTableComponent = ({
               </div>
             </TableCell>
             <TableCell>
-              <TrafficLight color={programmeData.vetovoimaisuus}></TrafficLight>
+              <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell>
-              <TrafficLight color={programmeData.lapivirtaus}></TrafficLight>
+              <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell>
-              <TrafficLight color={programmeData.opiskelijapalaute}></TrafficLight>
+              <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell>
-              <TrafficLight color={programmeData.resurssit}></TrafficLight>
+              <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>

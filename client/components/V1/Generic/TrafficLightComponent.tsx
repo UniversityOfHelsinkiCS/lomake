@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 interface TrafficLightProps {
   color: string
   style?: any
+  variant?: 'small' | 'medium' | 'large'
 }
 
 export const TrafficLight = (props: TrafficLightProps) => {
@@ -23,20 +24,35 @@ export const TrafficLight = (props: TrafficLightProps) => {
     }
   }
 
+  const getSize = (variant: 'small' | 'medium' | 'large' = 'small') => {
+    switch (variant) {
+      case 'small':
+        return '25px'
+      case 'medium':
+        return '32px'
+      case 'large':
+        return '38px'
+      default:
+        return '25px'
+    }
+  }
+
   const colorData = getColorData(props.color)
   const hex = colorData.hex
   const text = colorData.color
   const isDisplayed = props.color === 'Tyhjä' ? 'none' : 'block'
+  const size = getSize(props.variant)
+
   return (
     <Tooltip title={text} arrow>
       <div
         style={{
           backgroundColor: hex,
           display: isDisplayed,
-          minWidth: '25px',
-          width: '25px',
-          minHeight: '25px',
-          height: '25px',
+          minWidth: size,
+          width: size,
+          minHeight: size,
+          height: size,
           borderRadius: '50%',
           ...props.style,
         }}
