@@ -117,9 +117,7 @@ const updateReport = async (req: Request, res: Response) => {
     const updatedData = updatedReport[0].data
     const field = Object.keys(data)[0]
 
-    // @ts-ignore
     updateWSAndClearEditors({ room: req.params.studyprogrammeKey, data: updatedData, field })
-
     return res.status(200).json(updatedData)
   } catch (error) {
     logger.error(`Database error ${error}`)

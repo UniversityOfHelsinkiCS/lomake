@@ -2,33 +2,53 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { basePath, inProduction } from '../common'
 import { getHeaders as mockHeaders } from '../../../config/mockHeaders'
+import { Sentry } from '../sentry'
 
 const getHeaders = () => {
   return !inProduction ? mockHeaders() : {}
 }
 
-
-export const updateReportHttp = createAsyncThunk('reports/putData', async (payload: any) => {
-  const { room, year, id, content } = payload
-  const response = await axios.put(`${basePath}api/reports/${room}/${year}`, 
-    { 
-      [id]: content 
-    },
-    {
-    headers: {
-      ...getHeaders()
+const alertSentry = (err: any, route: string, method: string, data: any) => {
+  Sentry.captureException(err, {
+    tags: {
+      route,
+      method,
+      data,
     },
   })
-  return response.data
+}
+
+export const updateReportHttp = createAsyncThunk('reports/putData', async (payload: any, { rejectWithValue }) => {
+  const { room, year, id, content } = payload
+  try {
+    const response = await axios.put(`${basePath}api/reports/${room}/${year}`, 
+      { 
+        [id]: content 
+      },
+      {
+      headers: {
+        ...getHeaders()
+      },
+    })
+    return response.data
+  } catch (err) {
+    alertSentry(err, `${basePath}api/reports/${room}/${year}`, 'PUT', { [id]: content })
+    return rejectWithValue((err as any).response.data)
+  }
 })
 
-export const getReports = createAsyncThunk('reports/fetchData', async (studyprogrammeKey: string) => {
-  const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}`, {
-    headers: {
-      ...getHeaders()
-    }
-  })
-  return response.data
+export const getReports = createAsyncThunk('reports/fetchData', async (studyprogrammeKey: string, { rejectWithValue }) => {
+  try {
+    const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}`, {
+      headers: {
+        ...getHeaders()
+      }
+    })
+    return response.data
+  } catch (err) {
+    alertSentry(err, `${basePath}api/reports/${studyprogrammeKey}`, 'GET', {})
+    return rejectWithValue((err as any).response.data)
+  }
 })
 
 const initialState = {

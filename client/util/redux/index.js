@@ -18,7 +18,7 @@ import summaries from './summaryReducer'
 import reformAnswers from './reformAnswerReducer'
 import monitoring from './facultyMonitoringReducer'
 import keyData from './keyDataReducer'
-import reports from './reportsReducer'
+import reports from './reportsSlicer'
 
 export default combineReducers({
   form,

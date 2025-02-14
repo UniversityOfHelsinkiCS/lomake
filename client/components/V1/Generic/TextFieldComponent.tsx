@@ -9,7 +9,7 @@ import { getLockHttp } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { updateReportHttp } from '../../../util/redux/reportsReducer'
+import { updateReportHttp } from '../../../util/redux/reportsSlicer'
 
 const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
   const { t } = useTranslation()
