@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Alert, AlertTitle, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
+import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReports } from '../../../util/redux/reportsReducer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
@@ -109,7 +109,7 @@ const ProgrammeView = () => {
           {KeyDataPoints.map(data => (
             <React.Fragment key={data.title}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
-              <TextFieldComponent id={data.groupKey} type="comment" />
+              <TextFieldComponent id={data.groupKey} type="Comment" />
             </React.Fragment>
           ))}
 
@@ -127,9 +127,16 @@ const ProgrammeView = () => {
 
       {activeTab === 1 && (
         <Box sx={{ mt: 4 }}>
-          <Alert severity="info" icon={false}>
+          <Alert severity="info" icon={false} sx={{ mb: 4 }}>
             <Typography variant="h6">Toimenpiteet tulossa...</Typography>
           </Alert>
+          <h1>Toimenpiteet koulutusohjelmalle</h1>
+          <p>Lorem ipsum</p>
+          <TextFieldComponent id={'1'} type={'Programme'} />
+          <span style={{ display: 'block', height: '2em' }} />
+          <h1>Toimenpiteet tiedekunnalle</h1>
+          <p>Lorem ipsum</p>
+          <TextFieldComponent id={'2'} type={'Faculty'} />
         </Box>
       )}
     </Box>

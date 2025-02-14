@@ -60,43 +60,47 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
             defaultValue={content}
             variant="outlined"
             multiline
-            minRows={type === 'comment' ? 2.1 : 10}
+            minRows={type === 'Comment' ? 2.1 : 10}
             fullWidth
-            label={t('keyData:programmesComment')}
+            label={t(`keyData:${type}`)}
             value={content}
             onChange={e => setContent(e.target.value)}
             onClick={askForLock}
-            InputProps={{
-              startAdornment: (
-                <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
-                  <ChatBubbleIcon />
-                </Avatar>
-              ),
-            }}
+            InputProps={
+              type === 'Comment' && {
+                startAdornment: (
+                  <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
+                    <ChatBubbleIcon />
+                  </Avatar>
+                ),
+              }
+            }
           />
           <Box>
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
-              {t('keyData:saveComment')}
+              {t(`keyData:save${type}`)}
             </Button>
-            {dataFromRedux !== content && <span style={{ color: 'red'}}>{t('keyData:unsavedChanges')}</span>}
+            {dataFromRedux !== content && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
           </Box>
         </>
       ) : (
         <>
           <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                  <ChatBubbleIcon />
-                </Avatar>
-              }
-            />
+            {type === 'Comment' && (
+              <CardHeader
+                avatar={
+                  <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
+                    <ChatBubbleIcon />
+                  </Avatar>
+                }
+              />
+            )}
             <CardContent>
-              <ReactMarkdown>{content ? content : t('keyData:noComment')}</ReactMarkdown>
+              <ReactMarkdown>{content ? content : t(`keyData:no${type}`)}</ReactMarkdown>
             </CardContent>
           </Card>
           <Button variant="contained" disabled={someOneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
-            {t('keyData:editComment')}
+            {t(`keyData:edit${type}`)}
           </Button>
           <CurrentEditor fieldName={id} />
         </>
