@@ -4,6 +4,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
+import CurrentEditor from '../../Generic/CurrentEditor'
 import { getLockHttp } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
@@ -97,7 +98,7 @@ const TextFieldComponent = ({ id, type }: { id: string; type: string }) => {
           <Button variant="contained" disabled={someOneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
             {t('keyData:editComment')}
           </Button>
-          {someOneElseEditing && <span>{t('keyData:someoneElseEditing')}</span>}
+          <CurrentEditor fieldName={id} />
         </>
       )}
     </Box>
