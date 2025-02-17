@@ -18,7 +18,7 @@ const FacultyFilterComponent = () => {
   const lang = useSelector((state: RootState) => state.language)
   const faculties = useSelector((state: RootState) => state.faculties.data)
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
-  const allowedFaculties = faculties.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
+  const allowedFaculties = faculties?.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
 
   // If selectedFaculties is not found in allowedFaculties, fallback to allFaculties
   useEffect(() => {
