@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
 import React from 'react'
+import { basePath } from '@/config/common'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -75,7 +76,7 @@ const ProgrammeView = () => {
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ display: 'flex', alignItems: 'baseline' }}>
-        <IconButton component={Link} href="/v1/overview" sx={{ marginRight: 2 }}>
+        <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
           <ArrowBackIcon />
         </IconButton>
 
