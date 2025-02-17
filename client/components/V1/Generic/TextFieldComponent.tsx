@@ -26,10 +26,14 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   const year = 2025
   const room = useSelector((state: RootState) => state.room)
-  const dataFromRedux = useSelector(({reports}: {reports: Record<string, any>}) => reports.data[id] || '')
-  const currentEditors = useSelector(({ currentEditors }: { currentEditors: Record<string, any>}) => currentEditors.data, deepCheck)
-  const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any>}) => currentUser.data)
+  const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+  const currentEditors = useSelector(
+    ({ currentEditors }: { currentEditors: Record<string, any> }) => currentEditors.data,
+    deepCheck,
+  )
+  const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
   const someOneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
+  const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -54,6 +58,28 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       setGettingLock(true)
       dispatch(getLockHttp(id, room))
     }
+  }
+
+  if (viewOnly) {
+    return (
+      <>
+        <h3>{t(`keyData:${type}`)}</h3>
+        <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+          {type === 'Comment' && (
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
+                  <ChatBubbleIcon />
+                </Avatar>
+              }
+            />
+          )}
+          <CardContent>
+            <ReactMarkdown>{content ? content : t(`keyData:no${type}`)}</ReactMarkdown>
+          </CardContent>
+        </Card>
+      </>
+    )
   }
 
   return (

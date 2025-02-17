@@ -85,7 +85,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
+  if (!inProduction && loggedInAs && isDevSuperAdminUid(uid)) {
     const user = await getUserByUid(loggedInAs)
     return user
   }

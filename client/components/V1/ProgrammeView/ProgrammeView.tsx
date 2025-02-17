@@ -15,7 +15,8 @@ import { useTranslation } from 'react-i18next'
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
 import React from 'react'
-import { basePath } from '@/config/common'
+import { basePath, isAdmin } from '@/config/common'
+import { RootState } from '@/client/util/store'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -29,12 +30,36 @@ const ProgrammeView = () => {
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
+  const { nextDeadline } = useSelector((state: RootState) => state.deadlines)
+  const formDeadline = nextDeadline ? nextDeadline.find((d: Record<string, any>) => d.form === form) : null
+  const currentRoom = useSelector((state: RootState) => state.room)
+  const user = useSelector((state: RootState) => state.currentUser.data)
+
+  const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
+
+  useEffect(() => {
+    document.title = `${t('form')} - ${programmeKey}`
+    dispatch(getReports(programmeKey))
+  }, [lang, programmeKey])
+
   useEffect(() => {
     if (!programmeKey) return
-    dispatch(getReports(programmeKey))
-    dispatch(wsJoinRoom(programmeKey, form))
-    dispatch(setViewOnly(false))
+    if (formDeadline?.form !== form || !writeAccess) {
+      dispatch(setViewOnly(true))
+      if (currentRoom) {
+        dispatch(wsLeaveRoom(form))
+      }
+    } else {
+      dispatch(wsJoinRoom(programmeKey, form))
+      dispatch(setViewOnly(false))
+    }
   }, [programmeKey, form])
+
+  useEffect(() => {
+    return () => {
+      dispatch(wsLeaveRoom(form))
+    }
+  }, [])
 
   if (!keyData) {
     return <CircularProgress />
