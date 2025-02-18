@@ -186,8 +186,8 @@ const KeyFigureTableComponent = ({
         ))}
       </Table>
 
-      {/* Modal cdisplay for keyfigures */}
-      <DataModal open={modalOpen} setOpen={setModalOpen} keyFigureInfo={selectedKeyFigure} />
+      {/* Data Modal */}
+      {/* <DataModal open={modalOpen} setOpen={setModalOpen} keyFigureInfo={selectedKeyFigure} /> */}
     </div>
   )
 }

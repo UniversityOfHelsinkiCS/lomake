@@ -59,36 +59,36 @@ export default function KeyDataModalComponent({ keyFigureInfo, open, setOpen }: 
     return programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
   }
 
-  const { programme, metadata } = keyData
+  // const { programme, metadata } = keyData
 
-  const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
-    vetovoimaisuus: {
-      title: t('keyData:vetovoima'),
-      groupKey: GroupKey.VETOVOIMAISUUS,
-      description: t('keyData:vetovoimaInfo'),
-      color: programme.vetovoimaisuus,
-    },
-    lapivirtaus: {
-      title: t('keyData:lapivirtaus'),
-      groupKey: GroupKey.LAPIVIRTAUS,
-      description: t('keyData:lapivirtausInfo'),
-      color: programme.lapivirtaus,
-    },
-    opiskelijapalaute: {
-      title: t('keyData:palaute'),
-      groupKey: GroupKey.OPISKELIJAPALAUTE,
-      description: t('keyData:palauteInfo'),
-      color: programme.opiskelijapalaute,
-    },
-    resurssit: {
-      title: t('keyData:resurssit'),
-      groupKey: GroupKey.RESURSSIT,
-      description: t('keyData:resurssitInfo'),
-      color: programme.resurssit,
-    },
-  }
+  // const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
+  //   vetovoimaisuus: {
+  //     title: t('keyData:vetovoima'),
+  //     groupKey: GroupKey.VETOVOIMAISUUS,
+  //     description: t('keyData:vetovoimaInfo'),
+  //     color: programme.vetovoimaisuus,
+  //   },
+  //   lapivirtaus: {
+  //     title: t('keyData:lapivirtaus'),
+  //     groupKey: GroupKey.LAPIVIRTAUS,
+  //     description: t('keyData:lapivirtausInfo'),
+  //     color: programme.lapivirtaus,
+  //   },
+  //   opiskelijapalaute: {
+  //     title: t('keyData:palaute'),
+  //     groupKey: GroupKey.OPISKELIJAPALAUTE,
+  //     description: t('keyData:palauteInfo'),
+  //     color: programme.opiskelijapalaute,
+  //   },
+  //   resurssit: {
+  //     title: t('keyData:resurssit'),
+  //     groupKey: GroupKey.RESURSSIT,
+  //     description: t('keyData:resurssitInfo'),
+  //     color: programme.resurssit,
+  //   },
+  // }
 
-  const content = KeyDataPoints[keyFigureInfo.type]
+  // const content = KeyDataPoints[keyFigureInfo.type]
 
   if (!keyData) {
     return <CircularProgress />
@@ -96,13 +96,13 @@ export default function KeyDataModalComponent({ keyFigureInfo, open, setOpen }: 
 
   return (
     <ModalTemplate open={open} setOpen={setOpen}>
-      <KeyDataCard
+      {/* <KeyDataCard
         level={getLevel(keyFigureInfo.programmeKey)}
         metadata={metadata}
         programme={programme}
         {...content}
       />
-      <TextFieldComponent id={content.groupKey} type="Comment" />
+      <TextFieldComponent id={content.groupKey} type="Comment" /> */}
     </ModalTemplate>
   )
 }
