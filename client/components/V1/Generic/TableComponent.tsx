@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 /*
 This component is a purpose built table for displaying key figure data.
@@ -14,7 +14,7 @@ Example usage:
 
         <TableRow>
             <TableCell itemAlign="left">Item 1</TableCell>
-            <TableCell>Item 2</TableCell>
+            <TableCell onClick={handleClick}>Item 2</TableCell>
             <TableCell disabled >Item 3</TableCell>
         </TableRow>
       </Table>
@@ -51,9 +51,6 @@ export const TableRow = ({ children, isHeader = false }: { children: React.React
         <div
           style={{
             borderRight: index < React.Children.count(children) - 1 && !isHeader ? '1px solid rgba(0,0,0,0.2)' : 'none',
-            display: 'flex',
-            placeItems: 'center',
-            padding: '1.5rem',
             fontWeight: isHeader ? 'bold' : 'normal',
           }}
         >
@@ -68,19 +65,31 @@ export const TableCell = ({
   children,
   itemAlign = 'center',
   disabled = false,
+  onClick,
 }: {
   children?: React.ReactNode
   itemAlign?: 'left' | 'center' | 'right'
   disabled?: boolean
+  onClick?: () => void
 }) => {
+  const [isHovering, setIsHovering] = useState(false)
+
   return (
     <div
+      onClick={onClick}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       style={{
         opacity: disabled ? '0.5' : '1',
         display: 'flex',
         justifyContent: itemAlign,
         textAlign: itemAlign,
+        padding: '1.5rem',
         width: '100%',
+        height: '100%',
+        cursor: onClick ? 'pointer' : 'default',
+        transition: 'background-color 0.2s',
+        backgroundColor: onClick && isHovering ? 'rgba(0,0,0,0.06)' : 'transparent',
       }}
     >
       {children}
