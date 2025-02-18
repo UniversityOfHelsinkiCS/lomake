@@ -83,6 +83,7 @@ export const TableCell = ({
         opacity: disabled ? '0.5' : '1',
         display: 'flex',
         justifyContent: itemAlign,
+        alignItems: 'center',
         textAlign: itemAlign,
         padding: '1.5rem',
         width: '100%',
