@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
@@ -18,7 +18,22 @@ const FacultyFilterComponent = () => {
   const lang = useSelector((state: RootState) => state.language)
   const faculties = useSelector((state: RootState) => state.faculties.data)
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
-  const allowedFaculties = faculties?.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI')
+  const allowedFaculties = useMemo(() => {
+    return faculties ? faculties.filter((f: Faculty) => f.code !== 'HTEST' && f.code !== 'UNI') : []
+  }, [faculties])
+
+  const options = useMemo(() => {
+    const defaultOption = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
+
+    return [
+      ...defaultOption,
+      ...allowedFaculties.map((f: Faculty) => ({
+        key: f.code,
+        value: f.code,
+        text: f.name[lang as 'en' | 'fi' | 'se'],
+      })),
+    ]
+  }, [lang])
 
   // If selectedFaculties is not found in allowedFaculties, fallback to allFaculties
   useEffect(() => {
@@ -37,7 +52,7 @@ const FacultyFilterComponent = () => {
 
     const value = event.target.value as string[]
 
-    if (value.length < 1) {
+    if (value.length === 0) {
       if (selectedFaculties[0] === 'allFaculties') {
         return
       }
@@ -57,24 +72,6 @@ const FacultyFilterComponent = () => {
 
     dispatch(setFaculty(tempNewValue))
   }
-
-  const getOptions = () => {
-    const facultiesWithAll = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
-
-    if (!allowedFaculties || allowedFaculties.length < 1) {
-      return facultiesWithAll
-    }
-
-    return facultiesWithAll.concat(
-      allowedFaculties.map((f: Faculty) => ({
-        key: f.code,
-        value: f.code,
-        // TODO: Make a global type of lang options
-        text: f.name[lang as 'en' | 'fi' | 'se'],
-      })),
-    )
-  }
-  const options = getOptions()
 
   const getFacultyName = (selected: string[]) =>
     selected.map(value => options.find(option => option.value === value)?.text)
