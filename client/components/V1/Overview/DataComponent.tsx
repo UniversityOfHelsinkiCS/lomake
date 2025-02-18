@@ -6,9 +6,12 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Tooltip } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
+
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
+import DataModal from './KeyDataModalComponent'
+
 import _ from 'lodash'
 
 interface KeyDataTableProps {
@@ -29,6 +32,8 @@ const KeyFigureTableComponent = ({
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalProgrammeKey, setModalProgrammeKey] = useState('')
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -111,16 +116,23 @@ const KeyFigureTableComponent = ({
     }
   }
 
+  const handleModalOpen = (programmeKey: string) => {
+    setModalOpen(true)
+    setModalProgrammeKey(programmeKey)
+  }
+
   if (!keyData) {
     return <CircularProgress />
   }
 
   return (
     <div style={{ minWidth: 1400 }}>
+      {/* The search input */}
       <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
+      {/* Data Table */}
       <Table>
         <TableRow isHeader>
           <TableCell>
@@ -156,16 +168,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
               <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
               <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
               <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
               <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
@@ -174,6 +186,9 @@ const KeyFigureTableComponent = ({
           </TableRow>
         ))}
       </Table>
+
+      {/* Modal cdisplay for keyfigures */}
+      <DataModal open={modalOpen} setOpen={setModalOpen} programmeKey={modalProgrammeKey} />
     </div>
   )
 }
