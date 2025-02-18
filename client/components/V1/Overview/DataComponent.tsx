@@ -10,10 +10,9 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
-import DataModal from './KeyDataModalComponent'
+import DataModal, { type KeyFigureInfo, type KeyFigureTypes } from './KeyDataModalComponent'
 
 import _ from 'lodash'
-
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
@@ -33,7 +32,7 @@ const KeyFigureTableComponent = ({
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [modalOpen, setModalOpen] = useState(false)
-  const [modalProgrammeKey, setModalProgrammeKey] = useState('')
+  const [selectedKeyFigure, setSelectedKeyFigure] = useState<KeyFigureInfo | null>(null)
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -116,9 +115,9 @@ const KeyFigureTableComponent = ({
     }
   }
 
-  const handleModalOpen = (programmeKey: string) => {
+  const handleModalOpen = (programmeKey: string, type: KeyFigureTypes) => {
     setModalOpen(true)
-    setModalProgrammeKey(programmeKey)
+    setSelectedKeyFigure({ programmeKey, type })
   }
 
   if (!keyData) {
@@ -168,16 +167,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'vetovoimaisuus')}>
               <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'lapivirtaus')}>
               <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'opiskelijapalaute')}>
               <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi)}>
+            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'resurssit')}>
               <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
@@ -188,7 +187,7 @@ const KeyFigureTableComponent = ({
       </Table>
 
       {/* Modal cdisplay for keyfigures */}
-      <DataModal open={modalOpen} setOpen={setModalOpen} programmeKey={modalProgrammeKey} />
+      <DataModal open={modalOpen} setOpen={setModalOpen} keyFigureInfo={selectedKeyFigure} />
     </div>
   )
 }
