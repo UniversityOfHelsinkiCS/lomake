@@ -24,7 +24,6 @@ const FacultyFilterComponent = () => {
 
   const options = useMemo(() => {
     const defaultOption = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
-
     return [
       ...defaultOption,
       ...allowedFaculties.map((f: Faculty) => ({
@@ -33,7 +32,7 @@ const FacultyFilterComponent = () => {
         text: f.name[lang as 'en' | 'fi' | 'se'],
       })),
     ]
-  }, [lang])
+  }, [lang, allowedFaculties, faculties])
 
   // If selectedFaculties is not found in allowedFaculties, fallback to allFaculties
   useEffect(() => {
@@ -45,7 +44,7 @@ const FacultyFilterComponent = () => {
     if (!isValid) {
       dispatch(setFaculty(['allFaculties']))
     }
-  }, [selectedFaculties])
+  }, [selectedFaculties, allowedFaculties])
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     dispatch(clearLevelSpecificFilters())
