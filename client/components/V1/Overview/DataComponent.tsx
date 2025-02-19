@@ -121,6 +121,8 @@ const KeyFigureTableComponent = ({
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
+      <p>This should not be here</p>
+
       <Table>
         <TableRow isHeader>
           <TableCell>
