@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, CircularProgress } from '@mui/material'
-import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReports } from '../../../util/redux/reportsSlicer'
-import { wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
-import KeyDataCard from '../Generic/KeyDataCardComponent'
-import TextFieldComponent from '../Generic/TextFieldComponent'
-import { setViewOnly } from '../../../util/redux/formReducer'
 import { useTranslation } from 'react-i18next'
+
+import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
+
+import { RootState } from '@/client/util/store'
+import { getReports } from '@/client/util/redux/reportsSlicer'
+import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
+import { setViewOnly } from '@/client/util/redux/formReducer'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataCardData } from '@/client/lib/types'
-import { RootState } from '@/client/util/store'
+
+import { Box, CircularProgress, Typography } from '@mui/material'
+import TextFieldComponent from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
+import KeyDataCard from '../Generic/KeyDataCardComponent'
 
 // TODO: Move to client types
 export type KeyFigureTypes = 'vetovoimaisuus' | 'lapivirtaus' | 'opiskelijapalaute' | 'resurssit'
@@ -33,9 +36,11 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector((state: RootState) => state.language)
+
+  // TODO: When the year is coded into the key data itself, remove this
+  const year = useSelector((state: RootState) => state.filters.year)
   const currentRoom = useSelector((state: RootState) => state.room)
 
-  // TODO: Should maybe refactored
   const keyData = useFetchSingleKeyData(data.programmeKey, lang)
   const [content, setContent] = useState<KeyDataCardData | null>(null)
 
@@ -97,6 +102,9 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
         </Box>
       ) : (
         <>
+          <Typography variant="body1" color="textSecondary">
+            {keyData.programme.koulutusohjelma} - {year}
+          </Typography>
           <KeyDataCard
             level={getLevel(data.programmeKey)}
             metadata={keyData.metadata}

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { KeyDataProgramme } from '@/client/lib/types'
@@ -120,6 +120,12 @@ const KeyFigureTableComponent = ({
     setModalOpen(true)
     setSelectedModalData({ programmeKey, type })
   }
+
+  useEffect(() => {
+    if (!modalOpen) {
+      setSelectedModalData(null)
+    }
+  }, [modalOpen])
 
   if (!keyData) {
     return <CircularProgress />
