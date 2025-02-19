@@ -10,7 +10,7 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
-import DataModal, { type KeyFigureInfo, type KeyFigureTypes } from './KeyDataModalComponent'
+import KeyDataModal, { type KeyFigureTypes } from './KeyDataModalComponent'
 
 import _ from 'lodash'
 interface KeyDataTableProps {
@@ -31,8 +31,9 @@ const KeyFigureTableComponent = ({
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+
   const [modalOpen, setModalOpen] = useState(false)
-  const [selectedKeyFigure, setSelectedKeyFigure] = useState<KeyFigureInfo | null>(null)
+  const [selectedModalData, setSelectedModalData] = useState(null)
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -117,7 +118,7 @@ const KeyFigureTableComponent = ({
 
   const handleModalOpen = (programmeKey: string, type: KeyFigureTypes) => {
     setModalOpen(true)
-    setSelectedKeyFigure({ programmeKey, type })
+    setSelectedModalData({ programmeKey, type })
   }
 
   if (!keyData) {
@@ -126,12 +127,12 @@ const KeyFigureTableComponent = ({
 
   return (
     <div style={{ minWidth: 1400 }}>
-      {/* The search input */}
+      {/* Search input */}
       <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
-      {/* Data Table */}
+      {/* Key Figure Data Table */}
       <Table>
         <TableRow isHeader>
           <TableCell>
@@ -186,8 +187,8 @@ const KeyFigureTableComponent = ({
         ))}
       </Table>
 
-      {/* Data Modal */}
-      {/* <DataModal open={modalOpen} setOpen={setModalOpen} keyFigureInfo={selectedKeyFigure} /> */}
+      {/* Key Figure Data Modal */}
+      {selectedModalData && <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedModalData} />}
     </div>
   )
 }
