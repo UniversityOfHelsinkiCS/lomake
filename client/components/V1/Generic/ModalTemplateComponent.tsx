@@ -1,6 +1,5 @@
 import React from 'react'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import Clear from '@mui/icons-material/Clear'
 
@@ -10,9 +9,13 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: 'white',
-  minWidth: 400,
-  maxWidth: '60vw',
-  p: 4,
+  minWidth: 800,
+  minHeight: 300,
+  width: '65vw',
+  maxWidth: '65vw',
+  maxHeight: '90vh',
+  overflowY: 'auto',
+  padding: '4rem',
   outline: 'none',
 }
 
@@ -31,7 +34,7 @@ export default function ModalTemplateComponent({
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
-        <Clear onClick={handleClose} style={{ position: 'absolute', top: '1rem', right: '1rem', cursor: 'pointer' }} />
+        <Clear onClick={handleClose} style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer' }} />
         {children}
       </Box>
     </Modal>
