@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, CircularProgress } from '@mui/material'
@@ -19,33 +18,26 @@ import ModalTemplate from '../Generic/ModalTemplateComponent'
 export type KeyFigureTypes = 'vetovoimaisuus' | 'lapivirtaus' | 'opiskelijapalaute' | 'resurssit'
 
 // TODO: Move to client types
-export interface KeyFigureInfo {
+export interface ModalData {
   programmeKey: string
   type: KeyFigureTypes
 }
 interface DataModalProps {
-  keyFigureInfo: KeyFigureInfo
+  data: ModalData
   open: boolean
   setOpen: (open: boolean) => void
 }
 
-export default function KeyDataModalComponent({ keyFigureInfo, open, setOpen }: DataModalProps) {
-  const form = 10
+export default function KeyDataModalComponent({ data, open, setOpen }: DataModalProps) {
+  const form = 10 // TODO: Add an explenation for the magic number
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector((state: RootState) => state.language)
   const currentRoom = useSelector((state: RootState) => state.room)
-  const [keyData, setKeyData] = useState(null)
 
-  useEffect(() => {
-    if (!keyFigureInfo) return
-
-    const fetchedKeyData = useFetchSingleKeyData(keyFigureInfo.programmeKey, lang)
-    setKeyData(fetchedKeyData)
-
-    // TODO: NOT CURRENTLY WORKING
-    // dispatch(getReports(keyFigureInfo.programmeKey))
-  }, [lang, keyFigureInfo])
+  // TODO: Should maybe refactored
+  const keyData = useFetchSingleKeyData(data.programmeKey, lang)
+  const [content, setContent] = useState<KeyDataCardData | null>(null)
 
   useEffect(() => {
     // Make sure the modal is always view only
@@ -53,56 +45,67 @@ export default function KeyDataModalComponent({ keyFigureInfo, open, setOpen }: 
     if (currentRoom) {
       dispatch(wsLeaveRoom(form))
     }
-  }, [keyFigureInfo, form])
+  }, [data, form])
+
+  useEffect(() => {
+    if (!data || !keyData) return
+
+    // TODO: DISPATCHING GET REPORTS NOT CURRENTLY WORKING
+    // dispatch(getReports(data.programmeKey))
+
+    const { programme } = keyData
+
+    const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
+      vetovoimaisuus: {
+        title: t('keyData:vetovoima'),
+        groupKey: GroupKey.VETOVOIMAISUUS,
+        description: t('keyData:vetovoimaInfo'),
+        color: programme.vetovoimaisuus,
+      },
+      lapivirtaus: {
+        title: t('keyData:lapivirtaus'),
+        groupKey: GroupKey.LAPIVIRTAUS,
+        description: t('keyData:lapivirtausInfo'),
+        color: programme.lapivirtaus,
+      },
+      opiskelijapalaute: {
+        title: t('keyData:palaute'),
+        groupKey: GroupKey.OPISKELIJAPALAUTE,
+        description: t('keyData:palauteInfo'),
+        color: programme.opiskelijapalaute,
+      },
+      resurssit: {
+        title: t('keyData:resurssit'),
+        groupKey: GroupKey.RESURSSIT,
+        description: t('keyData:resurssitInfo'),
+        color: programme.resurssit,
+      },
+    }
+
+    setContent(KeyDataPoints[data.type])
+  }, [lang, data])
 
   const getLevel = (programmeKey: string) => {
     return programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
   }
 
-  // const { programme, metadata } = keyData
-
-  // const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
-  //   vetovoimaisuus: {
-  //     title: t('keyData:vetovoima'),
-  //     groupKey: GroupKey.VETOVOIMAISUUS,
-  //     description: t('keyData:vetovoimaInfo'),
-  //     color: programme.vetovoimaisuus,
-  //   },
-  //   lapivirtaus: {
-  //     title: t('keyData:lapivirtaus'),
-  //     groupKey: GroupKey.LAPIVIRTAUS,
-  //     description: t('keyData:lapivirtausInfo'),
-  //     color: programme.lapivirtaus,
-  //   },
-  //   opiskelijapalaute: {
-  //     title: t('keyData:palaute'),
-  //     groupKey: GroupKey.OPISKELIJAPALAUTE,
-  //     description: t('keyData:palauteInfo'),
-  //     color: programme.opiskelijapalaute,
-  //   },
-  //   resurssit: {
-  //     title: t('keyData:resurssit'),
-  //     groupKey: GroupKey.RESURSSIT,
-  //     description: t('keyData:resurssitInfo'),
-  //     color: programme.resurssit,
-  //   },
-  // }
-
-  // const content = KeyDataPoints[keyFigureInfo.type]
-
-  if (!keyData) {
-    return <CircularProgress />
-  }
-
   return (
     <ModalTemplate open={open} setOpen={setOpen}>
-      {/* <KeyDataCard
-        level={getLevel(keyFigureInfo.programmeKey)}
-        metadata={metadata}
-        programme={programme}
-        {...content}
-      />
-      <TextFieldComponent id={content.groupKey} type="Comment" /> */}
+      {!keyData || !data || !content ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <KeyDataCard
+            level={getLevel(data.programmeKey)}
+            metadata={keyData.metadata}
+            programme={keyData.programme}
+            {...content}
+          />
+          <TextFieldComponent id={content.groupKey} type="Comment" />
+        </>
+      )}
     </ModalTemplate>
   )
 }
