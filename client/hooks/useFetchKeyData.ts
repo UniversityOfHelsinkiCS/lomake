@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchKeyData } from '../util/redux/keyDataReducer'
 import { RootState } from '../util/store'
-import type { KeyData, KeyDataMetadata, KeyDataProgramme, SingleKeyData } from '../lib/types'
+import type { KeyData, KeyDataMetadata, KeyDataProgramme, SingleKeyData, StudyProgramme } from '../lib/types'
 
 export const useFetchSingleKeyData = (programmeId: string, lang: string): SingleKeyData => {
   const keyData = useFetchKeyData(lang)
@@ -30,39 +30,60 @@ export const useFetchSingleKeyData = (programmeId: string, lang: string): Single
 const useFetchKeyData = (lang: string) => {
   const dispatch = useDispatch()
   const keyData = useSelector((state: RootState) => state.keyData.data)
+  const programmeData = useSelector((state: RootState) => state.studyProgrammes.data)
 
   useEffect(() => {
     dispatch(fetchKeyData())
   }, [dispatch])
 
-  if (!keyData) {
+  if (!keyData || !programmeData) {
     return null
   }
 
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = keyData[0].data
 
+  const programmes = programmeData.map((programme: any) => {
+    const obj: StudyProgramme = {
+      key: programme.key,
+      name: programme.name[lang],
+      level: programme.level,
+      companionFaculties: programme.companionFaculties,
+      international: programme.international,
+    }
+    return obj
+  }) as StudyProgramme[]
+
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
+    const matchedProgramme = programmes.find(
+      programme => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
+    )
+
     const obj: KeyDataProgramme = {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: kandiohjelma['Koulutusohjelman nimi'],
+      koulutusohjelma: matchedProgramme ? matchedProgramme.name : kandiohjelma['Koulutusohjelman nimi'],
       values: kandiohjelma,
       vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
       lapivirtaus: kandiohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: kandiohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: kandiohjelma['Resurssit'],
+      international: matchedProgramme ? matchedProgramme.international : undefined,
     }
     return obj
   }) as KeyDataProgramme[]
 
   const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
+    const matchedProgramme = programmes.find(
+      programme => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
+    )
     const obj: KeyDataProgramme = {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: maisteriohjelma['Koulutusohjelman nimi'],
+      koulutusohjelma: matchedProgramme ? matchedProgramme.name : maisteriohjelma['Koulutusohjelman nimi'],
       values: maisteriohjelma,
       vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
       lapivirtaus: maisteriohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: maisteriohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: maisteriohjelma['Resurssit'],
+      international: matchedProgramme ? matchedProgramme.international : undefined,
     }
     return obj
   }) as KeyDataProgramme[]
