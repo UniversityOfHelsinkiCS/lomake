@@ -59,6 +59,7 @@ const useFetchKeyData = (lang: string) => {
       opiskelijapalaute: kandiohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: kandiohjelma['Resurssit'],
       international: matchedProgramme ? matchedProgramme.international : undefined,
+      level: matchedProgramme.level ? matchedProgramme.level : undefined,
     }
     return obj
   }) as KeyDataProgramme[]
@@ -76,6 +77,7 @@ const useFetchKeyData = (lang: string) => {
       opiskelijapalaute: maisteriohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: maisteriohjelma['Resurssit'],
       international: matchedProgramme ? matchedProgramme.international : undefined,
+      level: matchedProgramme.level ? matchedProgramme.level : undefined,
     }
     return obj
   }) as KeyDataProgramme[]
