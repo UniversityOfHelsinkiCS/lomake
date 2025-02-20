@@ -15,15 +15,12 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 
-// TODO: Move to client types
-export type KeyFigureTypes = 'vetovoimaisuus' | 'lapivirtaus' | 'opiskelijapalaute' | 'resurssit'
-
-// TODO: Move to somewhere global
-interface selectedKeyFigureData {
+export interface selectedKeyFigureData {
   programme: KeyDataProgramme
   metadata: KeyDataMetadata[]
-  type: KeyFigureTypes
+  type: GroupKey
 }
+
 interface DataModalProps {
   data: selectedKeyFigureData
   open: boolean
@@ -31,12 +28,12 @@ interface DataModalProps {
 }
 
 export default function KeyDataModalComponent({ data, open, setOpen }: DataModalProps) {
-  const form = 10 // TODO: Add an explenation for the magic number
+  const form = 10
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lang = useSelector((state: RootState) => state.language)
 
-  // TODO: When the year is coded into the key data itself, remove this
+  // TODO: When the year is coded into the key data itself, remove this and implement the year from that data
   const year = useSelector((state: RootState) => state.filters.year)
   const currentRoom = useSelector((state: RootState) => state.room)
 
@@ -45,43 +42,41 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   const [content, setContent] = useState<KeyDataCardData | null>(null)
 
   useEffect(() => {
-    if (!data) return
+    if (!data) {
+      setProgramme(null)
+      setMetadata(null)
+      setContent(null)
+      return
+    }
 
     // Make sure the modal is always view only
     dispatch(setViewOnly(true))
     if (currentRoom) {
       dispatch(wsLeaveRoom(form))
     }
-  }, [data, form])
-
-  useEffect(() => {
-    if (!data) return
-
-    // TODO: DISPATCHING GET REPORTS NOT CURRENTLY WORKING
-    // dispatch(getReports(data.programmeKey))
 
     const { programme, metadata } = data
 
-    const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
-      vetovoimaisuus: {
+    const KeyDataPoints: Record<GroupKey, KeyDataCardData> = {
+      [GroupKey.VETOVOIMAISUUS]: {
         title: t('keyData:vetovoima'),
         groupKey: GroupKey.VETOVOIMAISUUS,
         description: t('keyData:vetovoimaInfo'),
         color: programme.vetovoimaisuus,
       },
-      lapivirtaus: {
+      [GroupKey.LAPIVIRTAUS]: {
         title: t('keyData:lapivirtaus'),
         groupKey: GroupKey.LAPIVIRTAUS,
         description: t('keyData:lapivirtausInfo'),
         color: programme.lapivirtaus,
       },
-      opiskelijapalaute: {
+      [GroupKey.OPISKELIJAPALAUTE]: {
         title: t('keyData:palaute'),
         groupKey: GroupKey.OPISKELIJAPALAUTE,
         description: t('keyData:palauteInfo'),
         color: programme.opiskelijapalaute,
       },
-      resurssit: {
+      [GroupKey.RESURSSIT]: {
         title: t('keyData:resurssit'),
         groupKey: GroupKey.RESURSSIT,
         description: t('keyData:resurssitInfo'),
@@ -89,6 +84,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
       },
     }
 
+    dispatch(getReports(programme.koulutusohjelmakoodi))
     setProgramme(programme)
     setMetadata(metadata)
     setContent(KeyDataPoints[data.type])
