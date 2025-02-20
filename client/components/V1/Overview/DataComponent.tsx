@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { KeyDataProgramme } from '@/client/lib/types'
+import { KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Tooltip } from '@mui/material'
@@ -19,6 +19,12 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
+interface selectedKeyFigureData {
+  programme: KeyDataProgramme
+  metadata: KeyDataMetadata[]
+  type: KeyFigureTypes
+}
+
 const KeyFigureTableComponent = ({
   facultyFilter = [],
   programmeLevelFilter = '',
@@ -33,7 +39,7 @@ const KeyFigureTableComponent = ({
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
   const [modalOpen, setModalOpen] = useState(false)
-  const [selectedModalData, setSelectedModalData] = useState(null)
+  const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -116,14 +122,18 @@ const KeyFigureTableComponent = ({
     }
   }
 
-  const handleModalOpen = (programmeKey: string, type: KeyFigureTypes) => {
+  const handleModalOpen = (programme: KeyDataProgramme, type: KeyFigureTypes) => {
     setModalOpen(true)
-    setSelectedModalData({ programmeKey, type })
+    setSelecteKeyFigureData({
+      programme,
+      metadata: keyData.data.metadata,
+      type,
+    })
   }
 
   useEffect(() => {
     if (!modalOpen) {
-      setSelectedModalData(null)
+      setSelecteKeyFigureData(null)
     }
   }, [modalOpen])
 
@@ -174,16 +184,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'vetovoimaisuus')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, 'vetovoimaisuus')}>
               <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'lapivirtaus')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, 'lapivirtaus')}>
               <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'opiskelijapalaute')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, 'opiskelijapalaute')}>
               <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData.koulutusohjelmakoodi, 'resurssit')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, 'resurssit')}>
               <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
@@ -194,7 +204,7 @@ const KeyFigureTableComponent = ({
       </Table>
 
       {/* Key Figure Data Modal */}
-      {selectedModalData && <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedModalData} />}
+      <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
     </div>
   )
 }

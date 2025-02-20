@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
-import { useFetchSingleKeyData } from '@/client/hooks/useFetchKeyData'
-
 import { RootState } from '@/client/util/store'
 import { getReports } from '@/client/util/redux/reportsSlicer'
 import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import type { KeyDataCardData } from '@/client/lib/types'
+import type { KeyDataCardData, KeyDataProgramme, KeyDataMetadata } from '@/client/lib/types'
 
 import { Box, CircularProgress, Typography } from '@mui/material'
 import TextFieldComponent from '../Generic/TextFieldComponent'
@@ -20,13 +18,14 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 // TODO: Move to client types
 export type KeyFigureTypes = 'vetovoimaisuus' | 'lapivirtaus' | 'opiskelijapalaute' | 'resurssit'
 
-// TODO: Move to client types
-export interface ModalData {
-  programmeKey: string
+// TODO: Move to somewhere global
+interface selectedKeyFigureData {
+  programme: KeyDataProgramme
+  metadata: KeyDataMetadata[]
   type: KeyFigureTypes
 }
 interface DataModalProps {
-  data: ModalData
+  data: selectedKeyFigureData
   open: boolean
   setOpen: (open: boolean) => void
 }
@@ -41,10 +40,13 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   const year = useSelector((state: RootState) => state.filters.year)
   const currentRoom = useSelector((state: RootState) => state.room)
 
-  const keyData = useFetchSingleKeyData(data.programmeKey, lang)
+  const [programme, setProgramme] = useState<KeyDataProgramme | null>(null)
+  const [metadata, setMetadata] = useState<KeyDataMetadata[] | null>(null)
   const [content, setContent] = useState<KeyDataCardData | null>(null)
 
   useEffect(() => {
+    if (!data) return
+
     // Make sure the modal is always view only
     dispatch(setViewOnly(true))
     if (currentRoom) {
@@ -53,12 +55,12 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   }, [data, form])
 
   useEffect(() => {
-    if (!data || !keyData) return
+    if (!data) return
 
     // TODO: DISPATCHING GET REPORTS NOT CURRENTLY WORKING
     // dispatch(getReports(data.programmeKey))
 
-    const { programme } = keyData
+    const { programme, metadata } = data
 
     const KeyDataPoints: Record<KeyFigureTypes, KeyDataCardData> = {
       vetovoimaisuus: {
@@ -87,6 +89,8 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
       },
     }
 
+    setProgramme(programme)
+    setMetadata(metadata)
     setContent(KeyDataPoints[data.type])
   }, [lang, data])
 
@@ -96,19 +100,19 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
   return (
     <ModalTemplate open={open} setOpen={setOpen}>
-      {!keyData || !data || !content ? (
+      {!programme || !metadata || !content ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />
         </Box>
       ) : (
         <>
           <Typography variant="body1" color="textSecondary">
-            {keyData.programme.koulutusohjelma} - {year}
+            {programme.koulutusohjelma} - {year}
           </Typography>
           <KeyDataCard
-            level={getLevel(data.programmeKey)}
-            metadata={keyData.metadata}
-            programme={keyData.programme}
+            level={getLevel(programme.koulutusohjelmakoodi)}
+            metadata={metadata}
+            programme={programme}
             {...content}
           />
           <TextFieldComponent id={content.groupKey} type="Comment" />
