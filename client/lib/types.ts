@@ -23,6 +23,7 @@ export interface KeyDataProgramme {
   lapivirtaus: string
   opiskelijapalaute: string
   resurssit: string
+  international: boolean
 }
 
 export interface KeyDataMetadata {
@@ -41,4 +42,20 @@ export interface KeyDataCardData {
   groupKey: GroupKey
   description: string
   color: string
+}
+
+export interface StudyProgramme {
+  key: string
+  name: {
+    [lang: string]: string
+  }
+  level: StudyLevel
+  companionFaculties: string[]
+  international: boolean
+}
+
+export enum StudyLevel {
+  Bachelor = 'bachelor',
+  Master = 'master',
+  Doctor = 'doctor',
 }
