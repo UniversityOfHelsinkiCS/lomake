@@ -1,4 +1,4 @@
-import { GroupKey } from './enums'
+import { GroupKey, StudyLevel } from './enums'
 
 export interface KeyData {
   data: {
@@ -19,6 +19,7 @@ export interface KeyDataProgramme {
   values: {
     [key: string]: number
   }
+  level: StudyLevel
   vetovoimaisuus: string
   lapivirtaus: string
   opiskelijapalaute: string
@@ -52,10 +53,4 @@ export interface StudyProgramme {
   level: StudyLevel
   companionFaculties: string[]
   international: boolean
-}
-
-export enum StudyLevel {
-  Bachelor = 'bachelor',
-  Master = 'master',
-  Doctor = 'doctor',
 }
