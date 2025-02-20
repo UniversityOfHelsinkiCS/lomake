@@ -12,17 +12,9 @@ export const useFetchSingleKeyData = (programmeId: string, lang: string): Single
   }
 
   const { kandiohjelmat, maisteriohjelmat, metadata } = keyData.data
-  let programme: KeyDataProgramme
+  const allProgrammes = [...kandiohjelmat, ...maisteriohjelmat]
 
-  if (programmeId.startsWith('K')) {
-    programme = kandiohjelmat.find((kandiohjelma: { koulutusohjelmakoodi: string | string[] }) =>
-      kandiohjelma.koulutusohjelmakoodi.includes(programmeId),
-    )
-  } else {
-    programme = maisteriohjelmat.find((maisteriohjelma: { koulutusohjelmakoodi: string | string[] }) =>
-      maisteriohjelma.koulutusohjelmakoodi.includes(programmeId),
-    )
-  }
+  const programme = allProgrammes.find(p => p.koulutusohjelmakoodi.trim() === programmeId.trim())
 
   return { programme, metadata }
 }
