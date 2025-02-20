@@ -1,28 +1,24 @@
 import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Tooltip } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 
+import { GroupKey } from '@/client/lib/enums'
+import { KeyDataProgramme } from '@/client/lib/types'
+
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
-import KeyDataModal, { type KeyFigureTypes } from './KeyDataModalComponent'
+import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 
 import _ from 'lodash'
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
   yearFilter: string
-}
-
-interface selectedKeyFigureData {
-  programme: KeyDataProgramme
-  metadata: KeyDataMetadata[]
-  type: KeyFigureTypes
 }
 
 const KeyFigureTableComponent = ({
@@ -38,7 +34,7 @@ const KeyFigureTableComponent = ({
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
 
   const programmeData = useMemo(() => {
@@ -122,7 +118,7 @@ const KeyFigureTableComponent = ({
     }
   }
 
-  const handleModalOpen = (programme: KeyDataProgramme, type: KeyFigureTypes) => {
+  const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
     setModalOpen(true)
     setSelecteKeyFigureData({
       programme,
@@ -184,16 +180,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, 'vetovoimaisuus')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.VETOVOIMAISUUS)}>
               <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, 'lapivirtaus')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.LAPIVIRTAUS)}>
               <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, 'opiskelijapalaute')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.OPISKELIJAPALAUTE)}>
               <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, 'resurssit')}>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.RESURSSIT)}>
               <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
