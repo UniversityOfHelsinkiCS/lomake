@@ -57,7 +57,25 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     const { programme, metadata } = data
 
-    const KeyDataPoints: Record<GroupKey, KeyDataCardData> = {
+    const KeyDataPoints = Object.keys(GroupKey).map((key: string) => {
+      const lowerKey = key.toLowerCase(); // Make the key lowercase
+      return [
+        // Type-safe access to the enum value
+        GroupKey[key as keyof typeof GroupKey],
+        {
+          title: t(`keyData:${lowerKey}`),  // Translation for title
+          groupKey: GroupKey[key as keyof typeof GroupKey], // Keep original enum value
+          description: t(`keyData:${lowerKey}Info`),  // Translation for description
+          color: programme[lowerKey as keyof typeof programme], // Access color dynamically
+        },
+      ];
+    }).reduce((acc, [key, value]) => {
+      // @ts-ignore
+      acc[key] = value;  // Add to accumulator object
+      return acc;
+    }, {} as Record<string, any>);  // Type for the resulting object
+
+    const points: Record<GroupKey, KeyDataCardData> = {
       [GroupKey.VETOVOIMAISUUS]: {
         title: t('keyData:vetovoima'),
         groupKey: GroupKey.VETOVOIMAISUUS,
