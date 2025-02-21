@@ -54,30 +54,10 @@ const KeyFigureTableComponent = ({
       // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
       // example: KH10_001, where K is the level, H10 is the faculty code
 
-      const code = programmeData.koulutusohjelmakoodi
-
-      let programmeLevelCode = ''
-      switch (code.charAt(0)) {
-        case 'K':
-          programmeLevelCode = 'bachelor'
-          break
-        case 'M':
-          programmeLevelCode = 'master'
-          break
-        case 'D':
-          programmeLevelCode = 'doctoral'
-          break
-        case 'I':
-          programmeLevelCode = 'international'
-          break
-        default:
-          programmeLevelCode = ''
-      }
-
-      const facultyCode = code.substring(1, 4)
+      const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
-      const levelMatches = programmeLevelCode === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
+      const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
       return facultyMatches && levelMatches
     })
