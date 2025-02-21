@@ -1,16 +1,20 @@
 import { useState, useMemo } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { KeyDataProgramme } from '@/client/lib/types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Tooltip } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
+
+import { GroupKey } from '@/client/lib/enums'
+import { KeyDataProgramme } from '@/client/lib/types'
+
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
-import _ from 'lodash'
+import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 
+import _ from 'lodash'
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
@@ -29,6 +33,9 @@ const KeyFigureTableComponent = ({
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -111,16 +118,33 @@ const KeyFigureTableComponent = ({
     }
   }
 
+  const handleModalOpen = (programme: KeyDataProgramme, type: GroupKey) => {
+    setModalOpen(true)
+    setSelecteKeyFigureData({
+      programme,
+      metadata: keyData.data.metadata,
+      type,
+    })
+  }
+
+  useEffect(() => {
+    if (!modalOpen) {
+      setSelecteKeyFigureData(null)
+    }
+  }, [modalOpen])
+
   if (!keyData) {
     return <CircularProgress />
   }
 
   return (
     <div style={{ minWidth: 1400 }}>
+      {/* Search input */}
       <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
+      {/* Key Figure Data Table */}
       <Table>
         <TableRow isHeader>
           <TableCell>
@@ -156,16 +180,16 @@ const KeyFigureTableComponent = ({
                 </Link>
               </div>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.VETOVOIMAISUUS)}>
               <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.LAPIVIRTAUS)}>
               <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.OPISKELIJAPALAUTE)}>
               <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
             </TableCell>
-            <TableCell>
+            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.RESURSSIT)}>
               <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
             </TableCell>
             <TableCell></TableCell>
@@ -174,6 +198,9 @@ const KeyFigureTableComponent = ({
           </TableRow>
         ))}
       </Table>
+
+      {/* Key Figure Data Modal */}
+      <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
     </div>
   )
 }

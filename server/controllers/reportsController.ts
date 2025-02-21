@@ -6,14 +6,19 @@ import { Op } from 'sequelize'
 import { updateWSAndClearEditors } from '../websocket.js'
 
 import type { Request, Response } from 'express'
+import { GroupKey } from '../../shared/lib/enums.js'
 
 interface ValidateOperationResponse {
-  success: boolean,
-  error: string,
-  status: number,
-  report: Report | null,
-  studyprogrammeId: number | null,
+  success: boolean
+  error: string
+  status: number
+  report: Report | null
+  studyprogrammeId: number | null
   year: number | null
+}
+
+interface ReportData {
+  [GroupKey: string]: any
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
@@ -23,11 +28,11 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
 
   const resultObject: ValidateOperationResponse = {
     success: false,
-    error: "",
+    error: '',
     status: 0,
     report: null,
     studyprogrammeId: null,
-    year: null
+    year: null,
   }
 
   if (!studyprogrammeKey) {
@@ -46,8 +51,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   // ignore db type error for now since it has not been typed
   const studyprogramme = await db.studyprogramme.findOne({
     where: {
-      key: studyprogrammeKey
-    }
+      key: studyprogrammeKey,
+    },
   })
   if (!studyprogramme) {
     resultObject.error = 'Studyprogramme not found'
@@ -58,8 +63,8 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   const report: Report = await Report.findOne({
     where: {
       studyprogrammeId: studyprogramme.id,
-      year
-    }
+      year,
+    },
   })
   if (!report) {
     resultObject.error = 'No report for that year was found'
@@ -76,17 +81,27 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   return resultObject
 }
 
-const getReports = async (req: Request, res: Response) => {
+const getReports = async (req: Request, res: Response): Promise<ReportData> => {
   try {
     const { studyprogrammeKey } = req.params
 
     const reports = await Report.findAll({
       where: {
         studyprogrammeKey,
-      }
+      },
     })
 
-    return res.status(200).json(reports[0].data)
+    const defaultData = Object.values(GroupKey).reduce(
+      (acc, key) => {
+        acc[key] = ''
+        return acc
+      },
+      {} as Record<GroupKey, string>,
+    )
+
+    const data = reports?.[0]?.data || defaultData
+
+    return res.status(200).json(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
@@ -105,13 +120,10 @@ const updateReport = async (req: Request, res: Response) => {
       { data: { ...report.data, ...data } },
       {
         where: {
-          [Op.and]: [
-            { studyprogrammeId },
-            { year }
-          ]
+          [Op.and]: [{ studyprogrammeId }, { year }],
         },
-        returning: true
-      }
+        returning: true,
+      },
     )
 
     const updatedData = updatedReport[0].data
@@ -125,6 +137,4 @@ const updateReport = async (req: Request, res: Response) => {
   }
 }
 
-
 export default { getReports, updateReport }
-
