@@ -18,18 +18,18 @@ const alertSentry = (err: any, route: string, method: string, data: any) => {
   })
 }
 
-export const updateReportHttp = createAsyncThunk('reports/putData', async (payload: any, { rejectWithValue }) => {
+export const updateReportHttp = createAsyncThunk('reports/putData', async (payload: Record<string, any>, { rejectWithValue }) => {
   const { room, year, id, content } = payload
   try {
-    const response = await axios.put(`${basePath}api/reports/${room}/${year}`, 
-      { 
-        [id]: content 
+    const response = await axios.put(`${basePath}api/reports/${room}/${year}`,
+      {
+        [id]: content
       },
       {
-      headers: {
-        ...getHeaders()
-      },
-    })
+        headers: {
+          ...getHeaders()
+        },
+      })
     return response.data
   } catch (err) {
     alertSentry(err, `${basePath}api/reports/${room}/${year}`, 'PUT', { [id]: content })
@@ -37,7 +37,23 @@ export const updateReportHttp = createAsyncThunk('reports/putData', async (paylo
   }
 })
 
-export const getReports = createAsyncThunk('reports/fetchData', async (studyprogrammeKey: string, { rejectWithValue }) => {
+export const getReport = createAsyncThunk('reports/getReport', async (payload: Record<string, any>, { rejectWithValue }) => {
+  const { studyprogrammeKey, year } = payload
+  try {
+    const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}/${year}`, {
+      headers: {
+        ...getHeaders()
+      }
+    })
+    return response.data
+  } catch (err) {
+    alertSentry(err, `${basePath}api/report/${studyprogrammeKey}`, 'GET', {})
+    return rejectWithValue((err as any).response.data)
+  }
+})
+
+
+export const getReports = createAsyncThunk('reports/getReports', async (studyprogrammeKey: string, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}`, {
       headers: {
@@ -85,6 +101,17 @@ const reportsReducer = createSlice({
     builder.addCase(getReports.rejected, (state) => {
       state.status = 'failed'
     })
+    builder.addCase(getReport.pending, (state) => {
+      state.status = 'loading'
+    })
+    builder.addCase(getReport.fulfilled, (state, action) => {
+      state.data = action.payload
+      state.status = 'succeeded'
+    })
+    builder.addCase(getReport.rejected, (state) => {
+      state.status = 'failed'
+    })
+
   }
 })
 
