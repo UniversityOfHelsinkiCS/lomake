@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReports } from '../../../util/redux/reportsSlicer'
+import { getReport } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
 
@@ -42,7 +42,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
-    dispatch(getReports(programmeKey))
+    dispatch(getReport({ studyprogrammeKey: programmeKey, year: 2025 }))
   }, [lang, programmeKey])
 
   useEffect(() => {
