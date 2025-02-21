@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import { useParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
+
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { getReports } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
-import { useParams } from 'react-router'
+import { setViewOnly } from '../../../util/redux/formReducer'
+
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
-import { setViewOnly } from '../../../util/redux/formReducer'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useTranslation } from 'react-i18next'
+import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
-import React from 'react'
-import { basePath, isAdmin } from '@/config/common'
+import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
 import { RootState } from '@/client/util/store'
 
 const ProgrammeView = () => {
@@ -36,6 +38,7 @@ const ProgrammeView = () => {
   const user = useSelector((state: RootState) => state.currentUser.data)
 
   const writeAccess = (user.access[programmeKey] && user.access[programmeKey].write) || isAdmin(user)
+  const readAccess = hasSomeReadAccess(user) || isAdmin(user)
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
@@ -60,6 +63,8 @@ const ProgrammeView = () => {
       dispatch(wsLeaveRoom(form))
     }
   }, [])
+
+  if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
   if (!keyData) {
     return <CircularProgress />
