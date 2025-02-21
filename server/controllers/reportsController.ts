@@ -91,24 +91,14 @@ const getReports = async (req: Request, res: Response): Promise<ReportData> => {
       },
     })
 
-    const defaultData = Object.values(GroupKey).reduce(
-      (acc, key) => {
-        acc[key] = ''
-        return acc
-      },
-      {} as Record<GroupKey, string>,
-    )
-
-    const data = reports?.[0]?.data || defaultData
-
-    return res.status(200).json(data)
+    return res.status(200).json(reports)
   } catch (error) {
     logger.error(`Database error: ${error}`)
     return res.status(500).json({ error: 'Database error' })
   }
 }
 
-const getReport = async (req: Request, res: Response) => {
+const getReport = async (req: Request, res: Response): Promise<ReportData> => {
   try {
     const result = await validateOperation(req)
 
@@ -149,4 +139,4 @@ const updateReport = async (req: Request, res: Response) => {
   }
 }
 
-export default { getReports, updateReport }
+export default { getReports, getReport, updateReport }
