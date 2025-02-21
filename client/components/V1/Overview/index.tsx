@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
+import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
 import DataComponent from './DataComponent'
 import YearFilter from '../Generic/YearFilterComponent'
 import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
+import NoPermissions from '../../Generic/NoPermissions'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -22,6 +24,9 @@ const OverviewPage = () => {
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+
+  const currentUser = useSelector((state: RootState) => state.currentUser)
+  const programmes = useSelector(({ studyProgrammes }: Record<string, any>) => studyProgrammes.data)
 
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
@@ -47,6 +52,12 @@ const OverviewPage = () => {
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
+
+  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes: false, faculty: selectedFaculties, dropdownFilter: selectedLevel })
+  
+  if (usersProgrammes === null || usersProgrammes.length === 0) {
+    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  }
 
   return (
     <div style={{ padding: '2rem', width: '100%' }}>
