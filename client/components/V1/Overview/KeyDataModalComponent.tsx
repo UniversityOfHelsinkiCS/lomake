@@ -34,7 +34,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   const lang = useSelector((state: RootState) => state.language)
 
   // TODO: When the year is coded into the key data itself, remove this and implement the year from that data
-  const year = useSelector((state: RootState) => state.filters.year)
+  const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const currentRoom = useSelector((state: RootState) => state.room)
 
   const [programme, setProgramme] = useState<KeyDataProgramme | null>(null)

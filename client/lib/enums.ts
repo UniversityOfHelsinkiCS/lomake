@@ -1,3 +1,5 @@
+import { GroupKey } from '@/shared/lib/enums'
+
 export enum ProgrammeLevel {
   // levels in keydata & metadata
   KANDI = 'Kandi',
@@ -11,9 +13,4 @@ export enum StudyLevel {
   Doctor = 'doctoral',
 }
 
-export enum GroupKey {
-  VETOVOIMAISUUS = 'Vetovoimaisuus',
-  LAPIVIRTAUS = 'Läpivirtaus ja valmistuminen',
-  OPISKELIJAPALAUTE = 'Opiskelijapalaute ja työllistyminen',
-  RESURSSIT = 'Resurssit',
-}
+export { GroupKey }
