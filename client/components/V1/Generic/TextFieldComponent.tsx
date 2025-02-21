@@ -89,7 +89,6 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
         <>
           <TextField
             type="text"
-            defaultValue={content}
             variant="outlined"
             multiline
             minRows={type === 'Comment' ? 2.1 : 10}
