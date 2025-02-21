@@ -108,6 +108,18 @@ const getReports = async (req: Request, res: Response): Promise<ReportData> => {
   }
 }
 
+const getReport = async (req: Request, res: Response) => {
+  try {
+    const result = await validateOperation(req)
+
+    if (!result.success) return res.status(result.status).json({ error: result.error })
+
+    return res.status(200).json(result.report.data)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+  }
+}
+
 const updateReport = async (req: Request, res: Response) => {
   try {
     const result = await validateOperation(req)
