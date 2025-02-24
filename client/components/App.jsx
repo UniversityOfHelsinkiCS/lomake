@@ -121,14 +121,13 @@ export default () => {
   }, [oldAnswers, deadlines])
 
   if (!currentUser.data) return null
-  
 
   const isCommonDataReady = studyProgrammes?.data && oldAnswers?.data
   const isIndividualDataReady = studyProgrammes?.data && faculties?.data
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontFamily: 'Lato' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <NavBar />
 
       {showRouter ? <Router /> : <Loader active />}

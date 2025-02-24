@@ -9,6 +9,10 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from '/theme'
 import './assets/custom.scss'
 
+import '@fontsource/lato/300.css'
+import '@fontsource/lato/400.css'
+import '@fontsource/lato/700.css'
+
 import store from './util/store'
 import { basePath } from '../config/common'
 
