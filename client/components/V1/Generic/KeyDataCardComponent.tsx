@@ -1,7 +1,9 @@
-import { Box, Card, CardActionArea, Typography } from '@mui/material'
-import { TrafficLight } from './TrafficLightComponent'
-import { calculateColor, calculateValue } from '../Utils/util'
 import { useState } from 'react'
+import { Box, Card, CardActionArea, Typography } from '@mui/material'
+import { calculateColor, calculateValue } from '../Utils/util'
+
+import { TrafficLight } from './TrafficLightComponent'
+import ColorMeterComponent from './ColorMeterComponent'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
@@ -22,7 +24,10 @@ interface CriteriaGroupProps {
 interface CriteriaCardProps {
   title: string
   description: string
+  hasTrafficLight: boolean
   value: string
+  thresholds: string
+  unit: string
   color: string
 }
 
@@ -53,7 +58,10 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
             key={data.kriteerinNimi}
             title={data.kriteerinNimi}
             description={data.maaritelma}
+            hasTrafficLight={data.liikennevalo}
             value={valueText}
+            thresholds={data.kynnysarvot}
+            unit={data.yksikko}
             color={color}
           />
         )
@@ -96,9 +104,18 @@ const CriteriaCard = (props: CriteriaCardProps) => {
         </div>
 
         {showDescription && (
-          <Typography variant="body1" color="textSecondary" style={{ padding: '15px' }}>
-            {props.description}
-          </Typography>
+          <div style={{ padding: '15px' }}>
+            <Typography variant="body1" color="textSecondary">
+              {props.description}
+            </Typography>
+
+            <ColorMeterComponent
+              display={props.hasTrafficLight}
+              value={props.value}
+              thresholds={props.thresholds}
+              unit={props.unit}
+            />
+          </div>
         )}
       </CardActionArea>
     </Card>

@@ -40,33 +40,92 @@ const interpolateToMeter = (value: number, thresholds: number[]) => {
   }
 }
 
+/**
+ * Checks if the thresholds are either ascending or descending. If none, throws an error.
+ *
+ * @returns 'asc' | 'desc' | 'error'
+ */
+const checkOrdering = (thresholds: number[]) => {
+  let asc = true
+  let desc = true
+
+  for (let i = 1; i < thresholds.length; i++) {
+    if (thresholds[i] < thresholds[i - 1]) {
+      asc = false
+    } else if (thresholds[i] > thresholds[i - 1]) {
+      desc = false
+    }
+  }
+
+  if (asc) return 'asc'
+  if (desc) return 'desc'
+  return 'error'
+}
+
 export default function ColorMeterComponent({ display, value, thresholds, unit }: ColorMeterProps) {
   const { t } = useTranslation()
 
   const [lowerThreshold, setLowerThreshold] = useState<string>('')
   const [upperThreshold, setUpperThreshold] = useState<string>('')
   const [interpolatedValue, setInterpolatedValue] = useState<number>(50)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     if (!display) return
 
     const thresholdSplit = thresholds.split(';').map((t: string) => parseFloat(t.replace(',', '.')))
+    const order = checkOrdering(thresholdSplit)
 
-    const base = 0
+    if (order === 'error') {
+      console.error('Thresholds are not in order')
+      setError(true)
+      return
+    }
+
+    if (thresholdSplit.length !== 3) {
+      console.error('Thresholds are not in correct format')
+      setError(true)
+      return
+    }
+
+    if (order === 'desc') {
+      console.error('Descending thresholds are not supported')
+      setError(true)
+      return
+    }
+
+    const redThres = thresholdSplit[0]
     const yellowThres = unit === '%' ? thresholdSplit[1] * 100 : thresholdSplit[1]
     const greenThres = unit === '%' ? thresholdSplit[2] * 100 : thresholdSplit[2]
-    const max = unit === '%' ? 100 : 1000 // 1000 is an arbitrary adhoc solution for thresholds without maximum
+    const minmax = unit === '%' ? 100 : 1000 // 1000 is an arbitrary adhoc solution for thresholds without maximum
+
+    let thresholdsArr: number[] = []
+
+    if (order === 'asc') {
+      thresholdsArr = [redThres, yellowThres, greenThres, minmax]
+    } else if (order === 'desc') {
+      thresholdsArr = [minmax, redThres, yellowThres, greenThres]
+    }
 
     const parsedValue = parseFloat(value.replace(',', '.'))
-    const thresholdsArr = [base, yellowThres, greenThres, max]
-    const scaledValue = interpolateToMeter(parsedValue, thresholdsArr)
+    const meterValue = interpolateToMeter(parsedValue, thresholdsArr)
 
     setLowerThreshold(yellowThres.toString() + (unit === '%' ? '%' : ''))
     setUpperThreshold(greenThres.toString() + (unit === '%' ? '%' : ''))
-    setInterpolatedValue(scaledValue)
+    setInterpolatedValue(order === 'asc' ? meterValue : 100 - meterValue)
   }, [display])
 
   if (!display) return null
+
+  if (error) {
+    return (
+      <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="body1" color="error">
+          {t('keyData:colormeterError')}
+        </Typography>
+      </div>
+    )
+  }
 
   return (
     <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>

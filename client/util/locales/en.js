@@ -593,5 +593,6 @@ export default {
     saveFaculty: 'Save faculty actions',
     Faculty: 'Faculty actions',
     noFaculty: 'No response',
+    colormeterError: 'Error in the estimation of the traffic light sliding meter',
   },
 }
