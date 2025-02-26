@@ -18,9 +18,7 @@ interface ColorMeterProps {
  * @returns new value in the new range
  */
 const linScale = (value: number, a1: number, a2: number, b1: number, b2: number) => {
-  const ans = ((value - a1) / (a2 - a1)) * (b2 - b1) + b1
-  console.log('ans', ans)
-  return ans
+  return ((value - a1) / (a2 - a1)) * (b2 - b1) + b1
 }
 
 /**
