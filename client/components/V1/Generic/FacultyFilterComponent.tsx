@@ -7,6 +7,7 @@ import { clearLevelSpecificFilters, setFaculty } from '@/client/util/redux/filte
 
 import { MenuItem, FormControl, Checkbox, ListItemText } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
+import _ from 'lodash'
 
 /*
 This is a purpose built component for filtering faculties.
@@ -24,14 +25,14 @@ const FacultyFilterComponent = () => {
 
   const options = useMemo(() => {
     const defaultOption = [{ key: 'allFaculties', value: 'allFaculties', text: t('generic:allFaculties') }]
-    return [
-      ...defaultOption,
-      ...allowedFaculties.map((f: Faculty) => ({
-        key: f.code,
-        value: f.code,
-        text: f.name[lang as 'en' | 'fi' | 'se'],
-      })),
-    ]
+    const mappedFaculties = allowedFaculties.map((f: Faculty) => ({
+      key: f.code,
+      value: f.code,
+      text: f.name[lang as 'en' | 'fi' | 'se'],
+    }))
+    const sortedFaculties = _.orderBy(mappedFaculties, ['text'], ['asc'])
+
+    return [...defaultOption, ...sortedFaculties]
   }, [lang, allowedFaculties, faculties])
 
   // If selectedFaculties is not found in allowedFaculties, fallback to allFaculties
