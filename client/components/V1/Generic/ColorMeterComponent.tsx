@@ -88,6 +88,12 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
       return
     }
 
+    if (order === 'desc') {
+      console.error('Descending thresholds are not supported')
+      setError(true)
+      return
+    }
+
     const redThres = thresholdSplit[0]
     const yellowThres = unit === '%' ? thresholdSplit[1] * 100 : thresholdSplit[1]
     const greenThres = unit === '%' ? thresholdSplit[2] * 100 : thresholdSplit[2]
@@ -115,7 +121,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
     return (
       <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
         <Typography variant="body1" color="error">
-          {t('common:colorMeterError')}
+          {t('keyData:colormeterError')}
         </Typography>
       </div>
     )
