@@ -1,4 +1,5 @@
 import { isInteger } from 'lodash'
+import { TFunction } from 'i18next'
 import { GroupKey } from '@/client/lib/enums'
 import type { KeyDataProgramme } from '@/client/lib/types'
 
@@ -50,7 +51,7 @@ export const calculateValue = (value: number, unit?: string) => {
   }
 }
 
-export const getKeyDataPoints = (t: any, programme: KeyDataProgramme) => {
+export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
   const KeyDataPoints = Object.keys(GroupKey).map((key: string) => {
     const lowerKey = key.toLowerCase()
     return [
