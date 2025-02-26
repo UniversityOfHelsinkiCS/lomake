@@ -53,11 +53,18 @@ const OverviewPage = () => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
 
-  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes: false, faculty: selectedFaculties, dropdownFilter: selectedLevel })
-  
-  if (usersProgrammes === null || usersProgrammes.length === 0) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
+  const usersProgrammes = useVisibleOverviewProgrammes({
+    currentUser,
+    programmes,
+    showAllProgrammes: false,
+    faculty: selectedFaculties,
+    dropdownFilter: selectedLevel,
+  })
+
+  // TODO: Doesnt work, since programmes is always empty []
+  // if (usersProgrammes === null || usersProgrammes.length === 0) {
+  //   return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  // }
 
   return (
     <div style={{ padding: '2rem', width: '100%' }}>
