@@ -68,6 +68,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
   const [lowerThreshold, setLowerThreshold] = useState<string>('')
   const [upperThreshold, setUpperThreshold] = useState<string>('')
   const [interpolatedValue, setInterpolatedValue] = useState<number>(50)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     if (!display) return
@@ -77,6 +78,13 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
 
     if (order === 'error') {
       console.error('Thresholds are not in order')
+      setError(true)
+      return
+    }
+
+    if (thresholdSplit.length !== 3) {
+      console.error('Thresholds are not in correct format')
+      setError(true)
       return
     }
 
@@ -102,6 +110,16 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
   }, [display])
 
   if (!display) return null
+
+  if (error) {
+    return (
+      <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="body1" color="error">
+          {t('common:colorMeterError')}
+        </Typography>
+      </div>
+    )
+  }
 
   return (
     <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>

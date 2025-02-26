@@ -591,5 +591,6 @@ export default {
     saveFaculty: 'Tallenna tiedekunnan toimenpiteet',
     Faculty: 'Tiedekunnan toimenpiteet',
     noFaculty: 'Ei vastausta',
+    colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
   },
 }

@@ -627,5 +627,6 @@ export default {
     saveFaculty: 'Spara fakultetsåtgärder',
     Faculty: 'Fakultetsåtgärder',
     noFaculty: 'Inget svar',
+    colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
   },
 }
