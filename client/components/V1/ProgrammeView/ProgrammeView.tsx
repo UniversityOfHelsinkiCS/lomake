@@ -15,10 +15,11 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
 import { RootState } from '@/client/util/store'
+import { getKeyDataPoints } from '../Utils/util'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -76,32 +77,7 @@ const ProgrammeView = () => {
     setActiveTab(newValue)
   }
 
-  const KeyDataPoints: KeyDataCardData[] = [
-    {
-      title: t('keyData:vetovoima'),
-      groupKey: GroupKey.VETOVOIMAISUUS,
-      description: t('keyData:vetovoimaInfo'),
-      color: programme.vetovoimaisuus,
-    },
-    {
-      title: t('keyData:lapivirtaus'),
-      groupKey: GroupKey.LAPIVIRTAUS,
-      description: t('keyData:lapivirtausInfo'),
-      color: programme.lapivirtaus,
-    },
-    {
-      title: t('keyData:palaute'),
-      groupKey: GroupKey.OPISKELIJAPALAUTE,
-      description: t('keyData:palauteInfo'),
-      color: programme.opiskelijapalaute,
-    },
-    {
-      title: t('keyData:resurssit'),
-      groupKey: GroupKey.RESURSSIT,
-      description: t('keyData:resurssitInfo'),
-      color: programme.resurssit,
-    },
-  ]
+  const KeyDataPoints = getKeyDataPoints(t, programme)
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -137,12 +113,12 @@ const ProgrammeView = () => {
             <Typography variant="body1">{t('keyData:criteriaInfo')}</Typography>
           </Alert>
 
-          {KeyDataPoints.map(data => (
-            <React.Fragment key={data.title}>
+          {Object.values(KeyDataPoints).map((data: KeyDataCardData) => 
+            <React.Fragment key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
               <TextFieldComponent id={data.groupKey} type="Comment" />
             </React.Fragment>
-          ))}
+          )}
 
           <Link
             sx={{ textDecoration: 'none', cursor: 'pointer' }}

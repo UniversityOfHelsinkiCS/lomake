@@ -1,4 +1,6 @@
 import { isInteger } from 'lodash'
+import { GroupKey } from '@/client/lib/enums'
+import type { KeyDataProgramme } from '@/client/lib/types'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean) => {
   if (!liikennevalo) {
@@ -46,4 +48,25 @@ export const calculateValue = (value: number, unit?: string) => {
     }
     return value.toFixed(2)
   }
+}
+
+export const getKeyDataPoints = (t: any, programme: KeyDataProgramme) => {
+  const KeyDataPoints = Object.keys(GroupKey).map((key: string) => {
+    const lowerKey = key.toLowerCase()
+    return [
+      // Type-safe access to the enum value
+      GroupKey[key as keyof typeof GroupKey],
+      {
+        title: t(`keyData:${lowerKey}`),  // Translation for title
+        groupKey: GroupKey[key as keyof typeof GroupKey], // Keep original enum value
+        description: t(`keyData:${lowerKey}Info`),  // Translation for description
+        color: programme[lowerKey as keyof typeof programme], // Access color dynamically
+      },
+    ];
+  }).reduce((acc, [key, value]) => {
+    // @ts-ignore
+    acc[key] = value;  // Add to accumulator object
+    return acc;
+  }, {} as Record<string, any>) // Type for the resulting object
+  return KeyDataPoints
 }

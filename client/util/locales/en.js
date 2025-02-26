@@ -561,13 +561,13 @@ export default {
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
 
     vetovoima: 'Attractiveness Of The Degree Programme',
-    vetovoimaInfo:
+    vetovoimaisuusInfo:
       'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',
     lapivirtaus: 'The Rate Of Progression And Graduation Of The Degree Programme',
     lapivirtausInfo:
       'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme.',
     palaute: 'Student Feedback And Employment Of The Degree Programme',
-    palauteInfo:
+    opiskelijapalauteInfo:
       "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society.",
     resurssit: 'Resources Of The Degree Programme',
     resurssitInfo:

@@ -559,13 +559,13 @@ export default {
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
 
     vetovoima: 'Koulutusohjelman vetovoimaisuus',
-    vetovoimaInfo:
+    vetovoimaisuusInfo:
       'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
     lapivirtaus: 'Läpivirtaus ja valmistuminen koulutusohjelmassa',
     lapivirtausInfo:
       'Läpivirtauksessa tarkastellaan opintojen sujuvuutta sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa koulutusohjelman kokoa.',
     palaute: 'Koulutusohjelman opiskelijapalaute ja työllistyminen',
-    palauteInfo:
+    opiskelijapalauteInfo:
       'Opiskelijapalautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta.  Työllistymistä koskeva palaute kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
     resurssit: 'Koulutusohjelman resurssit',
     resurssitInfo:

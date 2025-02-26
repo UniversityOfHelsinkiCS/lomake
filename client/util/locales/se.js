@@ -595,13 +595,13 @@ export default {
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
     vetovoima: 'Utbildningsprogrammets Attraktionskraft',
-    vetovoimaInfo:
+    vetovoimaisuusInfo:
       'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek.',
     lapivirtaus: 'Genomströmning Och Examen I Programmet',
     lapivirtausInfo:
       'Genomströmning gäller flödet av studier, både enligt Undervisnings- och kulturministeriets finansieringsmodell och, i allmänhet, på antalet examina och studiernas progression genom programmets olika stadier. Antalet examina och slutförandet av examina inom den målsatta tiden indikerar att det inte finns några hinder för studier i programmet. Antalet examina är en indikator på programmets storlek.',
     palaute: 'Studentrespons Och Anställning Av Utexaminerade',
-    palauteInfo:
+    opiskelijapalauteInfo:
       'Studentrespons används för att undersöka programmets feedbackkultur och den övergripande nivån på feedbackaktiviteten, samt studenternas tillfredsställelse med sina studier i programmet. Studenternas återkoppling återspeglar effektiviteten i programmets läroplan, vägledning och leverans.  Återkoppling om anställningsbarhet återspeglar programmets relevans för samhället.',
     resurssit: 'Resurser För Utbildningsprogrammet',
     resurssitInfo:

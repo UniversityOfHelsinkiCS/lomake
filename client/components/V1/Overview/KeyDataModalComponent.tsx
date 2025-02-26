@@ -14,6 +14,7 @@ import { Box, CircularProgress, Typography } from '@mui/material'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
+import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
 
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme
@@ -57,50 +58,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     const { programme, metadata } = data
 
-    const KeyDataPoints = Object.keys(GroupKey).map((key: string) => {
-      const lowerKey = key.toLowerCase(); // Make the key lowercase
-      return [
-        // Type-safe access to the enum value
-        GroupKey[key as keyof typeof GroupKey],
-        {
-          title: t(`keyData:${lowerKey}`),  // Translation for title
-          groupKey: GroupKey[key as keyof typeof GroupKey], // Keep original enum value
-          description: t(`keyData:${lowerKey}Info`),  // Translation for description
-          color: programme[lowerKey as keyof typeof programme], // Access color dynamically
-        },
-      ];
-    }).reduce((acc, [key, value]) => {
-      // @ts-ignore
-      acc[key] = value;  // Add to accumulator object
-      return acc;
-    }, {} as Record<string, any>);  // Type for the resulting object
-
-    const points: Record<GroupKey, KeyDataCardData> = {
-      [GroupKey.VETOVOIMAISUUS]: {
-        title: t('keyData:vetovoima'),
-        groupKey: GroupKey.VETOVOIMAISUUS,
-        description: t('keyData:vetovoimaInfo'),
-        color: programme.vetovoimaisuus,
-      },
-      [GroupKey.LAPIVIRTAUS]: {
-        title: t('keyData:lapivirtaus'),
-        groupKey: GroupKey.LAPIVIRTAUS,
-        description: t('keyData:lapivirtausInfo'),
-        color: programme.lapivirtaus,
-      },
-      [GroupKey.OPISKELIJAPALAUTE]: {
-        title: t('keyData:palaute'),
-        groupKey: GroupKey.OPISKELIJAPALAUTE,
-        description: t('keyData:palauteInfo'),
-        color: programme.opiskelijapalaute,
-      },
-      [GroupKey.RESURSSIT]: {
-        title: t('keyData:resurssit'),
-        groupKey: GroupKey.RESURSSIT,
-        description: t('keyData:resurssitInfo'),
-        color: programme.resurssit,
-      },
-    }
+    const KeyDataPoints = getKeyDataPoints(t, programme)
 
     dispatch(getReports(programme.koulutusohjelmakoodi))
     setProgramme(programme)
