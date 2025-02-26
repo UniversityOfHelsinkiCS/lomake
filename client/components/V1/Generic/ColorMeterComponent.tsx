@@ -43,7 +43,7 @@ const interpolateToMeter = (value: number, thresholds: number[]) => {
  *
  * @returns 'asc' | 'desc' | 'error'
  */
-const checkOrdering = (thresholds: number[]) => {
+const checkOrdering = (thresholds: number[]): 'asc' | 'desc' | 'error' => {
   let asc = true
   let desc = true
 
@@ -87,6 +87,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
     }
 
     if (order === 'desc') {
+      // TODO: Delete this when keydata criteria thesholds are fixed in data.xlsx
       console.error('Descending thresholds are not supported')
       setError(true)
       return
