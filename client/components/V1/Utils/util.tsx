@@ -65,8 +65,7 @@ export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
       },
     ];
   }).reduce((acc, [key, value]) => {
-    // @ts-ignore
-    acc[key] = value;  // Add to accumulator object
+    acc[key as string] = value;  // Add to accumulator object
     return acc;
   }, {} as Record<string, any>) // Type for the resulting object
   return KeyDataPoints
