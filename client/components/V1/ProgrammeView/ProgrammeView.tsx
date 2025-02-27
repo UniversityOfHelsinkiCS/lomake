@@ -137,13 +137,7 @@ const ProgrammeView = () => {
           <Alert severity="info" icon={false} sx={{ mb: 4 }}>
             <Typography variant="h6">Toimenpiteet tulossa...</Typography>
           </Alert>
-          <h1>Toimenpiteet koulutusohjelmalle</h1>
-          <p>Lorem ipsum</p>
-          <TextFieldComponent id={'1'} type={'Programme'} />
-          <span style={{ display: 'block', height: '2em' }} />
-          <h1>Toimenpiteet tiedekunnalle</h1>
-          <p>Lorem ipsum</p>
-          <TextFieldComponent id={'2'} type={'Faculty'} />
+          <TextFieldComponent id={'1'} type={'Measure'} />
         </Box>
       )}
     </Box>
