@@ -43,7 +43,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     if (gettingLock && currentEditors[id]) {
       setGettingLock(false)
     }
-  }, [currentEditors, dataFromRedux, hasLock, currentUser])
+    // Do not add currentUser or dataFromRedux to the dependencies
+    // it will clear the field if lock is relesed by the server
+  }, [currentEditors]) 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
