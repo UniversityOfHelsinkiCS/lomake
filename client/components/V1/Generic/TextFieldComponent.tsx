@@ -37,8 +37,10 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
-  
+
   const hasUnsavedChanges = hasLock && dataFromRedux !== content
+
+  const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -48,7 +50,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     }
     // Do not add currentUser or dataFromRedux to the dependencies
     // it will clear the field if lock is relesed by the server
-  }, [currentEditors]) 
+  }, [currentEditors])
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
@@ -88,7 +90,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
     window.addEventListener('beforeunload', handleBeforeUnload)
     document.addEventListener('mousedown', handleClickOutside)
-    
+
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
@@ -123,8 +125,12 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             />
           )}
           <CardContent>
-              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography variant='light'>{t(`keyData:no${type}`)}</Typography>}
-            </CardContent>
+            {content ? (
+              <ReactMarkdown>{content}</ReactMarkdown>
+            ) : (
+              <Typography variant="light">{t(`keyData:no${type}`)}</Typography>
+            )}
+          </CardContent>
         </Card>
       </>
     )
@@ -143,7 +149,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             fullWidth
             inputRef={textFieldRef}
             value={content}
-            onChange={e => setContent(e.target.value)}
+            onChange={e => content.length < MAX_CONTENT_LENGTH && setContent(e.target.value)}
             slotProps={{
               input: {
                 ...(type === 'Comment' && {
@@ -156,12 +162,15 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               },
             }}
           />
-          <Box>
-            <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
-              {t(`keyData:save${type}`)}
-            </Button>
-            {hasUnsavedChanges && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
-          </Box>
+            <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+              <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
+                {t(`keyData:save${type}`)}
+              </Button>
+              {hasUnsavedChanges && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
+              <span style={{ color: 'gray', fontSize: '0.8rem' }}>
+                {content.length} / {MAX_CONTENT_LENGTH}
+              </span>
+            </div>
         </>
       ) : (
         <>
@@ -176,13 +185,22 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               />
             )}
             <CardContent>
-              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography variant='light'>{t(`keyData:no${type}`)}</Typography>}
+              {content ? (
+                <ReactMarkdown>{content}</ReactMarkdown>
+              ) : (
+                <Typography variant="light">{t(`keyData:no${type}`)}</Typography>
+              )}
             </CardContent>
           </Card>
-          <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
-            {t(`keyData:edit${type}`)}
-          </Button>
-          <CurrentEditor fieldName={id} />
+          <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+            <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
+              {t(`keyData:edit${type}`)}
+            </Button>
+            <CurrentEditor fieldName={id} />
+            <span style={{ color: 'gray', fontSize: '0.8rem' }}>
+              {content.length} / {MAX_CONTENT_LENGTH}
+            </span>
+          </div>
         </>
       )}
     </Box>
