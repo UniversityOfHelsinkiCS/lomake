@@ -21,7 +21,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   const dispatch = useDispatch()
 
   const [content, setContent] = useState<string>('')
-  const [hasLock, setHasLock] = useState<boolean>(true)
+  const [hasLock, setHasLock] = useState<boolean>(false)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
@@ -32,7 +32,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     deepCheck,
   )
   const currentUser = useSelector(({ currentUser }: { currentUser: Record<string, any> }) => currentUser.data)
-  const someOneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
+  const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
   const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     if (gettingLock && currentEditors[id]) {
       setGettingLock(false)
     }
-  }, [currentEditors])
+  }, [currentEditors, dataFromRedux, hasLock, currentUser])
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
@@ -54,7 +54,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   const askForLock = () => {
-    if (!hasLock && !gettingLock && currentEditors && !currentEditors[id]) {
+    if (!hasLock && !gettingLock && currentEditors && currentEditors[id] === undefined) {
       setGettingLock(true)
       dispatch(getLockHttp(id, room))
     }
@@ -96,16 +96,15 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             label={t(`keyData:${type}`)}
             value={content}
             onChange={e => setContent(e.target.value)}
-            onClick={askForLock}
-            InputProps={
-              type === 'Comment' && {
+            InputProps={{
+              ...(type === 'Comment' && {
                 startAdornment: (
                   <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
                     <ChatBubbleIcon />
                   </Avatar>
                 ),
-              }
-            }
+              }),
+            }}
           />
           <Box>
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
@@ -130,7 +129,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               <ReactMarkdown>{content ? content : t(`keyData:no${type}`)}</ReactMarkdown>
             </CardContent>
           </Card>
-          <Button variant="contained" disabled={someOneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
+          <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
             {t(`keyData:edit${type}`)}
           </Button>
           <CurrentEditor fieldName={id} />
