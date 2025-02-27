@@ -78,7 +78,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
         </Box>
       ) : (
         <>
-          <Typography variant="body1" color="textSecondary">
+          <Typography variant="h4" color="textSecondary">
             {programme.koulutusohjelma} - {year}
           </Typography>
           <KeyDataCard

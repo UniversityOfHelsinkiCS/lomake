@@ -180,17 +180,13 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
           }}
         >
           <Typography
-            variant="body1"
-            color="textSecondary"
-            fontSize="small"
+            variant="lightSmall"
             sx={{ position: 'absolute', left: `calc(100%/3)`, transform: 'translateX(-50%)' }}
           >
             {lowerThreshold}
           </Typography>
           <Typography
-            variant="body1"
-            color="textSecondary"
-            fontSize="small"
+            variant="lightSmall"
             sx={{ position: 'absolute', left: `calc((100%/3)*2)`, transform: 'translateX(-50%)' }}
           >
             {upperThreshold}

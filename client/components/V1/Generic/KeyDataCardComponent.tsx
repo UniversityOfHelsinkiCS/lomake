@@ -92,11 +92,11 @@ const CriteriaCard = (props: CriteriaCardProps) => {
           <TrafficLight color={props.color} />
 
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-            <Typography fontStyle={'italic'}>{props.title}</Typography>
+            <Typography variant="italic">{props.title}</Typography>
             <Typography
-              fontStyle={'italic'}
+              variant="italic"
               style={{ whiteSpace: 'nowrap' }}
-              color={props.value === 'Ei dataa' ? 'textSecondary' : 'textPrimary'}
+              color={props.value === 'Ei dataa' ? 'textSecondary' : ''}
             >
               {props.value}
             </Typography>
@@ -105,9 +105,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
         {showDescription && (
           <div style={{ padding: '15px' }}>
-            <Typography variant="body1" color="textSecondary">
-              {props.description}
-            </Typography>
+            <Typography variant="light">{props.description}</Typography>
 
             <ColorMeterComponent
               display={props.hasTrafficLight}
@@ -134,11 +132,14 @@ const KeyDataCard = (props: KeyDataCardProps) => {
         }}
       >
         <TrafficLight color={props.color} variant="large" />
-        <h2 style={{ margin: 0 }}>{props.title.toUpperCase()}</h2>
+        <Typography variant="h2" style={{ margin: 0 }}>
+          {props.title.toUpperCase()}
+        </Typography>
       </Box>
-      <Typography variant="body1" color="textSecondary" style={{ padding: '20px 0 30px 0' }}>
-        {props.description}
-      </Typography>
+
+      <Box sx={{ padding: '10px 0 30px 0' }}>
+        <Typography variant="light">{props.description}</Typography>
+      </Box>
 
       <CriteriaGroup
         groupKey={props.groupKey}

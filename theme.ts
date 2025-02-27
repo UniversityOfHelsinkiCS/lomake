@@ -8,7 +8,6 @@ declare module '@mui/material/styles' {
     italic: CSSProperties
     regularSmall: CSSProperties
     lightSmall: CSSProperties
-    small: CSSProperties
   }
 
   interface TypographyVariantsOptions {
@@ -17,7 +16,6 @@ declare module '@mui/material/styles' {
     italic?: CSSProperties
     regularSmall?: CSSProperties
     lightSmall?: CSSProperties
-    small?: CSSProperties
   }
 }
 
@@ -28,7 +26,6 @@ declare module '@mui/material/Typography' {
     italic: true
     regularSmall: true
     lightSmall: true
-    small: true
   }
 }
 
@@ -73,11 +70,13 @@ const themeOptions: ThemeOptions = {
     light: {
       fontWeight: 300, // Light 16px
       fontSize: '1.143rem',
+      color: '#000',
     },
     italic: {
+      fontWeight: 300,
       fontStyle: 'italic', // Italic 16px
-      fontWeight: 400,
       fontSize: '1.143rem',
+      color: '#000',
     },
     regularSmall: {
       fontWeight: 400, // Regular 14px
@@ -86,10 +85,7 @@ const themeOptions: ThemeOptions = {
     lightSmall: {
       fontWeight: 300, // Light 14px
       fontSize: '1rem',
-    },
-    small: {
-      fontWeight: 300, // Light 10px
-      fontSize: '0.714rem',
+      color: '#000',
     },
   },
   components: {
@@ -102,13 +98,25 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
-    MuiTextField: {
+    MuiAlert: {
       styleOverrides: {
         root: {
-          '& .MuiInputBase-input': {
-            fontWeight: 400, // Regular 16px
-            fontSize: '1.143rem',
-          },
+          padding: '1.25rem',
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          fontWeight: 400, // Bold 16px / H6
+          fontSize: '1.143rem',
+        },
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Lato',
         },
       },
     },

@@ -127,7 +127,7 @@ export default () => {
   const showRouter = isNotIndividualForm ? isCommonDataReady : isIndividualDataReady
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', fontSize: 16 }}>
       <NavBar />
 
       {showRouter ? <Router /> : <Loader active />}

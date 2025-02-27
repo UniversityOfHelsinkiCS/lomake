@@ -3,7 +3,7 @@ import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress, Tooltip } from '@mui/material'
+import { CircularProgress, Tooltip, Typography } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 
 import { GroupKey } from '@/client/lib/enums'
@@ -137,17 +137,30 @@ const KeyFigureTableComponent = ({
               </span>
             </div>
           </TableCell>
-          <TableCell>{t('keyData:vetovoima')}</TableCell>
-          <TableCell>{t('keyData:lapivirtaus')}</TableCell>
-          <TableCell>{t('keyData:palaute')}</TableCell>
-          <TableCell>{t('keyData:resurssit')}</TableCell>
-          <TableCell>{t('keyData:actions')}</TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:vetovoima')}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:lapivirtaus')}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:palaute')}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:resurssit')}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:actions')}</Typography>
+          </TableCell>
+
           <TableCell disabled>
             <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
-              <span>{t('keyData:qualityControl')}</span>
+              <Typography variant="regular">{t('keyData:qualityControl')}</Typography>
             </Tooltip>
           </TableCell>
-          <TableCell>{t('keyData:supportProcess')}</TableCell>
+          <TableCell>
+            <Typography variant="regular">{t('keyData:supportProcess')}</Typography>
+          </TableCell>
         </TableRow>
 
         {sortedData.map((programmeData: KeyDataProgramme) => (

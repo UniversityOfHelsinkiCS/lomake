@@ -20,6 +20,7 @@ import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
 import { RootState } from '@/client/util/store'
 import { getKeyDataPoints } from '../Utils/util'
+import {} from '../../../../theme'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -86,7 +87,9 @@ const ProgrammeView = () => {
           <ArrowBackIcon />
         </IconButton>
 
-        <h2>{programme.koulutusohjelma}</h2>
+        <Typography variant="h1" style={{ paddingTop: '2rem' }}>
+          {programme.koulutusohjelma}
+        </Typography>
       </div>
 
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
@@ -96,29 +99,32 @@ const ProgrammeView = () => {
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
-          <Alert severity="info" icon={false}>
-            <Typography variant="h6">{t('keyData:title')}</Typography>
+          <Alert severity="info">
+            <Typography variant="h5">{t('keyData:title')}</Typography>
             <br />
-            <Typography variant="body1">{t('keyData:info1')}</Typography>
+            <Typography variant="light">{t('keyData:info1')}</Typography>
             <br />
-            <Typography variant="body1">{t('keyData:info2')}</Typography>
             <br />
-            <Typography variant="body1">{t('keyData:keyFigureInfo')}</Typography>
-            <ul>
-              <li>{t('keyData:vetovoima')}</li>
-              <li>{t('keyData:lapivirtaus')}</li>
-              <li>{t('keyData:palaute')}</li>
-              <li>{t('keyData:resurssit')}</li>
-            </ul>
-            <Typography variant="body1">{t('keyData:criteriaInfo')}</Typography>
+            <Typography variant="light">{t('keyData:info2')}</Typography>
+            <br />
+            <Typography variant="light">{t('keyData:keyFigureInfo')}</Typography>
+            <Typography variant="light">
+              <ul>
+                <li>{t('keyData:vetovoima')}</li>
+                <li>{t('keyData:lapivirtaus')}</li>
+                <li>{t('keyData:palaute')}</li>
+                <li>{t('keyData:resurssit')}</li>
+              </ul>
+            </Typography>
+            <Typography variant="light">{t('keyData:criteriaInfo')}</Typography>
           </Alert>
 
-          {Object.values(KeyDataPoints).map((data: KeyDataCardData) => 
+          {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
             <React.Fragment key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
               <TextFieldComponent id={data.groupKey} type="Comment" />
             </React.Fragment>
-          )}
+          ))}
 
           <Link
             sx={{ textDecoration: 'none', cursor: 'pointer' }}
@@ -134,8 +140,8 @@ const ProgrammeView = () => {
 
       {activeTab === 1 && (
         <Box sx={{ mt: 4 }}>
-          <Alert severity="info" icon={false} sx={{ mb: 4 }}>
-            <Typography variant="h6">Toimenpiteet tulossa...</Typography>
+          <Alert severity="info" sx={{ mb: 4 }}>
+            <Typography variant="light">Toimenpiteiden ohjeistus tulossa...</Typography>
           </Alert>
           <TextFieldComponent id={'1'} type={'Measure'} />
         </Box>

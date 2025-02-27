@@ -11,6 +11,7 @@ import YearFilter from '../Generic/YearFilterComponent'
 import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
+import { Typography } from '@mui/material'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -53,8 +54,14 @@ const OverviewPage = () => {
     document.title = `${t('overview:overviewPage')}`
   }, [lang])
 
-  const usersProgrammes = useVisibleOverviewProgrammes({ currentUser, programmes, showAllProgrammes: false, faculty: selectedFaculties, dropdownFilter: selectedLevel })
-  
+  const usersProgrammes = useVisibleOverviewProgrammes({
+    currentUser,
+    programmes,
+    showAllProgrammes: false,
+    faculty: selectedFaculties,
+    dropdownFilter: selectedLevel,
+  })
+
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
@@ -62,7 +69,9 @@ const OverviewPage = () => {
   return (
     <div style={{ padding: '2rem', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
-        <h1 style={{ margin: 0 }}>{t('yearlyAssessment').toUpperCase()}</h1>
+        <Typography variant="h1" style={{ margin: 0 }}>
+          {t('yearlyAssessment').toUpperCase()}
+        </Typography>
 
         <div style={{ display: 'flex', gap: '1rem' }}>
           <LevelFilter />
