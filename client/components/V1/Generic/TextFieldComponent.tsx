@@ -113,7 +113,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   if (viewOnly) {
     return (
       <>
-        <Typography variant="lightSmall">{t(`keyData:${type}`)}</Typography>
+        <Typography variant="h5" color="textSecondary">
+          {t(`keyData:${type}`)}
+        </Typography>
         <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center', mt: 2 }}>
           {type === 'Comment' && (
             <CardHeader
@@ -143,7 +145,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
-      <Typography variant="lightSmall">{t(`keyData:${type}`)}</Typography>
+      <Typography variant="h5" color="textSecondary">
+        {t(`keyData:${type}`)}
+      </Typography>
       {hasLock ? (
         <>
           <TextField

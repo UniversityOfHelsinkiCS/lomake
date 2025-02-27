@@ -130,10 +130,10 @@ const ProgrammeView = () => {
             sx={{ textDecoration: 'none', cursor: 'pointer' }}
             onClick={() => setActiveTab(activeTab === 0 ? 1 : 0)}
           >
-            <h4 style={{ display: 'flex', justifyContent: 'flex-end', gap: 4, marginTop: '6em' }}>
+            <Typography variant="h4" style={{ display: 'flex', justifyContent: 'flex-end', gap: 4, marginTop: '6em' }}>
               {t('keyData:moveToActions')}
               <ArrowForwardIcon />
-            </h4>
+            </Typography>
           </Link>
         </Box>
       )}
