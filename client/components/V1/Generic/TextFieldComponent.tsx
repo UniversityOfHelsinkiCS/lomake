@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent } from '@mui/material'
+import { useState, useEffect, useRef } from 'react'
+import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,6 +35,8 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   const isSomeoneElseEditing = currentEditors && currentEditors[id] && currentEditors[id].uid !== currentUser.uid
   const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
+  const textFieldRef = useRef<HTMLInputElement>(null)
+
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
     setHasLock(gotTheLock)
@@ -46,6 +48,12 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
   }, [dataFromRedux, hasLock])
+
+  useEffect(() => {
+    if (hasLock && textFieldRef.current) {
+      textFieldRef.current.focus()
+    }
+  }, [hasLock])
 
   const handleStopEditing = () => {
     setHasLock(false)
@@ -93,17 +101,20 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             multiline
             minRows={type === 'Comment' ? 2.1 : 10}
             fullWidth
+            inputRef={textFieldRef}
             value={content}
             onChange={e => setContent(e.target.value)}
-            slotProps={{ input: {
-              ...(type === 'Comment' && {
-                startAdornment: (
-                  <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
-                    <ChatBubbleIcon />
-                  </Avatar>
-                ),
-              }),
-            }}}
+            slotProps={{
+              input: {
+                ...(type === 'Comment' && {
+                  startAdornment: (
+                    <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
+                      <ChatBubbleIcon />
+                    </Avatar>
+                  ),
+                }),
+              },
+            }}
           />
           <Box>
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
@@ -125,7 +136,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               />
             )}
             <CardContent>
-              <ReactMarkdown>{content ? content : t(`keyData:no${type}`)}</ReactMarkdown>
+              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography /*variant='light'*/>{t(`keyData:no${type}`)}</Typography>}
             </CardContent>
           </Card>
           <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
