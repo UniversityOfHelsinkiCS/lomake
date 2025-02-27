@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
@@ -113,22 +113,27 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   if (viewOnly) {
     return (
       <>
-        <p>{t(`keyData:${type}`)}</p>
+        <Typography variant="lightSmall">{t(`keyData:${type}`)}</Typography>
         <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
           {type === 'Comment' && (
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                  <ChatBubbleIcon />
+                  <ChatBubbleOutlineIcon />
                 </Avatar>
               }
+              sx={{
+                '& .MuiCardHeader-avatar': {
+                  marginRight: 0,
+                },
+              }}
             />
           )}
-          <CardContent>
+          <CardContent sx={{ paddingLeft: type === 'Comment' ? 0 : undefined }}>
             {content ? (
               <ReactMarkdown>{content}</ReactMarkdown>
             ) : (
-              <Typography variant="light">{t(`keyData:no${type}`)}</Typography>
+              <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
             )}
           </CardContent>
         </Card>
@@ -138,7 +143,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   return (
     <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
-      <p>{t(`keyData:${type}`)}</p>
+      <Typography variant="lightSmall">{t(`keyData:${type}`)}</Typography>
       {hasLock ? (
         <>
           <TextField
@@ -155,22 +160,28 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
                 ...(type === 'Comment' && {
                   startAdornment: (
                     <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
-                      <ChatBubbleIcon />
+                      <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
                     </Avatar>
                   ),
                 }),
               },
             }}
           />
-            <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+            <Box>
               <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
                 {t(`keyData:save${type}`)}
               </Button>
-              {hasUnsavedChanges && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
-              <span style={{ color: 'gray', fontSize: '0.8rem' }}>
-                {content.length} / {MAX_CONTENT_LENGTH}
-              </span>
-            </div>
+              {hasUnsavedChanges && (
+                <Typography variant="regular" style={{ color: 'red' }}>
+                  {t('keyData:unsavedChanges')}!
+                </Typography>
+              )}
+            </Box>
+            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+              {content.length} / {MAX_CONTENT_LENGTH}
+            </Typography>
+          </div>
         </>
       ) : (
         <>
@@ -179,16 +190,23 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                    <ChatBubbleIcon />
+                    <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
                   </Avatar>
                 }
+                sx={{
+                  '& .MuiCardHeader-avatar': {
+                    marginRight: 0,
+                  },
+                }}
               />
             )}
-            <CardContent>
+            <CardContent sx={{ paddingLeft: type === 'Comment' ? 0 : undefined }}>
               {content ? (
                 <ReactMarkdown>{content}</ReactMarkdown>
               ) : (
-                <Typography variant="light">{t(`keyData:no${type}`)}</Typography>
+                <Typography variant="italic" color="textSecondary">
+                  {t(`keyData:no${type}`)}
+                </Typography>
               )}
             </CardContent>
           </Card>
@@ -197,9 +215,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               {t(`keyData:edit${type}`)}
             </Button>
             <CurrentEditor fieldName={id} />
-            <span style={{ color: 'gray', fontSize: '0.8rem' }}>
+            <Typography variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
-            </span>
+            </Typography>
           </div>
         </>
       )}

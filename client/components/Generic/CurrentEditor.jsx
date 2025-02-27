@@ -15,9 +15,9 @@ export default ({ fieldName }) => {
   if (currentEditors[fieldName].uid === currentUserUid) return null
 
   return (
-    <span style={{ color: colors.blue, fontStyle: 'italic', marginLeft: '1em' }}>
+    <Typography variant="italic" style={{ color: colors.blue, marginLeft: '1em' }}>
       {`${currentEditors[fieldName].lastname}, ${currentEditors[fieldName].firstname} ${t('generic:isWriting')}`}
       <Icon style={{ marginLeft: '5px' }} name="pencil" />
-    </span>
+    </Typography>
   )
 }
