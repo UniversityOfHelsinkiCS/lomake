@@ -93,10 +93,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             multiline
             minRows={type === 'Comment' ? 2.1 : 10}
             fullWidth
-            label={t(`keyData:${type}`)}
             value={content}
             onChange={e => setContent(e.target.value)}
-            InputProps={{
+            slotProps={{ input: {
               ...(type === 'Comment' && {
                 startAdornment: (
                   <Avatar sx={{ bgcolor: 'white', color: 'gray', marginRight: 2, marginLeft: 0.4 }}>
@@ -104,7 +103,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
                   </Avatar>
                 ),
               }),
-            }}
+            }}}
           />
           <Box>
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
