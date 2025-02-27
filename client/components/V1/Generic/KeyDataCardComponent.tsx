@@ -85,11 +85,11 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            padding: '15px',
+            padding: '18px',
             flexWrap: 'nowrap',
           }}
         >
-          <TrafficLight color={props.color} />
+          <TrafficLight style={{ marginRight: '5px' }} color={props.color} />
 
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="italic">{props.title}</Typography>

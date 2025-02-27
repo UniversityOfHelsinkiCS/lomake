@@ -108,7 +108,7 @@ const themeOptions: ThemeOptions = {
     MuiTab: {
       styleOverrides: {
         root: {
-          fontWeight: 400, // Bold 16px / H6
+          fontWeight: 500, // Bold 16px / H6
           fontSize: '1.143rem',
         },
       },
