@@ -76,6 +76,7 @@ router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
 router.get('/cypress/seed', notInProduction, cypress.seed)
 router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswers)
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
+router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 
 router.get('/keydata', keyData.getKeyData)
 router.post('/keydata', checkAdmin, keyData.uploadKeyData)

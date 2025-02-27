@@ -12,6 +12,7 @@ import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Typography } from '@mui/material'
+import { isAdmin } from '@/config/common'
 
 const OverviewPage = () => {
   const { t } = useTranslation()

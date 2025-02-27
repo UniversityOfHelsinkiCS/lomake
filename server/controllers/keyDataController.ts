@@ -41,8 +41,8 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
         })
 
         await KeyData.create({
-                 data: jsonSheet,
-               })
+          data: jsonSheet,
+        })
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
       } catch (error) {
         resolve(res.status(500).json({ error: (error as Error).message }))
