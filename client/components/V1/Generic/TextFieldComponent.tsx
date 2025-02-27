@@ -83,8 +83,8 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             />
           )}
           <CardContent>
-            <ReactMarkdown>{content ? content : t(`keyData:no${type}`)}</ReactMarkdown>
-          </CardContent>
+              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography variant='light'>{t(`keyData:no${type}`)}</Typography>}
+            </CardContent>
         </Card>
       </>
     )
