@@ -136,7 +136,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               />
             )}
             <CardContent>
-              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography /*variant='light'*/>{t(`keyData:no${type}`)}</Typography>}
+              {content ? <ReactMarkdown>{content}</ReactMarkdown> : <Typography variant='light'>{t(`keyData:no${type}`)}</Typography>}
             </CardContent>
           </Card>
           <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
