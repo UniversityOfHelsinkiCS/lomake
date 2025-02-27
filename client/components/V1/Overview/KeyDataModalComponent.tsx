@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import { RootState } from '@/client/util/store'
-import { getReports } from '@/client/util/redux/reportsSlicer'
+import { getReport } from '@/client/util/redux/reportsSlicer'
 import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
 
@@ -60,7 +60,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
 
     const KeyDataPoints = getKeyDataPoints(t, programme)
 
-    dispatch(getReports(programme.koulutusohjelmakoodi))
+    dispatch(getReport({ studyprogrammeKey: programme.koulutusohjelmakoodi, year: year }))
     setProgramme(programme)
     setMetadata(metadata)
     setContent(KeyDataPoints[data.type])

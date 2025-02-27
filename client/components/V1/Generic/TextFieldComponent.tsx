@@ -24,7 +24,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   const [hasLock, setHasLock] = useState<boolean>(true)
   const [gettingLock, setGettingLock] = useState<boolean>(false)
 
-  const year = 2025
+  const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const room = useSelector((state: RootState) => state.room)
   const dataFromRedux = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
   const currentEditors = useSelector(
