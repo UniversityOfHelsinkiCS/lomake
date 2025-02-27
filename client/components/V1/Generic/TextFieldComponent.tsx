@@ -114,7 +114,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     return (
       <>
         <Typography variant="lightSmall">{t(`keyData:${type}`)}</Typography>
-        <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+        <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center', mt: 2 }}>
           {type === 'Comment' && (
             <CardHeader
               avatar={
