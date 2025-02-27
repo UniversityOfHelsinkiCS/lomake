@@ -624,5 +624,6 @@ export default {
     Measure: 'Programåtgärder',
     noMeasure: 'Inget svar',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
+    unsavedChangesWarning: 'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna.',
   },
 }

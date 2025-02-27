@@ -588,5 +588,6 @@ export default {
     Measure: 'Koulutusohjelman toimenpiteet',
     noMeasure: 'Ei vastausta',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
+    unsavedChangesWarning: 'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset',
   },
 }

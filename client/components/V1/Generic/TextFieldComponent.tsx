@@ -36,6 +36,9 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   const viewOnly = useSelector(({ form }: { form: Record<string, any> }) => form.viewOnly)
 
   const textFieldRef = useRef<HTMLInputElement>(null)
+  const componentRef = useRef<HTMLDivElement>(null)
+  
+  const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -56,6 +59,41 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       textFieldRef.current.focus()
     }
   }, [hasLock])
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault()
+        e.returnValue = ''
+      }
+    }
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        hasUnsavedChanges &&
+        componentRef.current &&
+        !componentRef.current.contains(e.target as Node) &&
+        document.body.contains(e.target as Node)
+      ) {
+        const confirm = window.confirm(t('keyData:unsavedChangesWarning'))
+        if (confirm) {
+          handleStopEditing()
+        } else {
+          e.preventDefault()
+          e.stopPropagation()
+          if (textFieldRef.current) textFieldRef.current.focus()
+        }
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    document.addEventListener('mousedown', handleClickOutside)
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [hasUnsavedChanges, t, content])
 
   const handleStopEditing = () => {
     setHasLock(false)
@@ -93,7 +131,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
+    <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
       <p>{t(`keyData:${type}`)}</p>
       {hasLock ? (
         <>
@@ -122,7 +160,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
               {t(`keyData:save${type}`)}
             </Button>
-            {dataFromRedux !== content && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
+            {hasUnsavedChanges && <span style={{ color: 'red' }}>{t('keyData:unsavedChanges')}</span>}
           </Box>
         </>
       ) : (
