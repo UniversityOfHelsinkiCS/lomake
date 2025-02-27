@@ -1,22 +1,34 @@
-import { createTheme, ThemeOptions } from '@mui/material/styles'
+import { createTheme, ThemeOptions, Theme } from '@mui/material/styles'
+import { CSSProperties } from '@mui/material/styles/createTypography'
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
-    regular: React.CSSProperties
-    light: React.CSSProperties
-    italic: React.CSSProperties
-    regularSmall: React.CSSProperties
-    lightSmall: React.CSSProperties
-    small: React.CSSProperties
+    regular: CSSProperties
+    light: CSSProperties
+    italic: CSSProperties
+    regularSmall: CSSProperties
+    lightSmall: CSSProperties
+    small: CSSProperties
   }
 
   interface TypographyVariantsOptions {
-    regular?: React.CSSProperties
-    light?: React.CSSProperties
-    italic?: React.CSSProperties
-    regularSmall?: React.CSSProperties
-    lightSmall?: React.CSSProperties
-    small?: React.CSSProperties
+    regular?: CSSProperties
+    light?: CSSProperties
+    italic?: CSSProperties
+    regularSmall?: CSSProperties
+    lightSmall?: CSSProperties
+    small?: CSSProperties
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    regular: true
+    light: true
+    italic: true
+    regularSmall: true
+    lightSmall: true
+    small: true
   }
 }
 
@@ -27,7 +39,9 @@ const themeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: 'Lato, sans-serif',
-    // rem values calculated based on 14px default font size
+    fontSize: 16,
+
+    // rem values calculated based on 14px default font size (comes from semantic)
     h1: {
       fontWeight: 700, // Bold 28px
       fontSize: '2rem',
@@ -78,9 +92,30 @@ const themeOptions: ThemeOptions = {
       fontSize: '0.714rem',
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontWeight: 700, // Bold 16px / H6
+          fontSize: '1.143rem',
+          textTransform: 'none',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiInputBase-input': {
+            fontWeight: 400, // Regular 16px
+            fontSize: '1.143rem',
+          },
+        },
+      },
+    },
+  },
 }
 
-const theme = createTheme(themeOptions)
+const theme = createTheme(themeOptions) as Theme
 
 export default theme
 
