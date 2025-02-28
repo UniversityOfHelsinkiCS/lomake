@@ -12,10 +12,11 @@ describe('Textfield tests', () => {
     cy.contains('Deadline settings').click()
     cy.createDeadline(defaultYears[0], 'Vuosiseuranta - UUSI')
     cy.get('[data-cy=form-10-deadline]').contains('14.')
-    cy.visit(`/v1/overview`)
+    cy.visit(`/v1/programmes/KH50_005`)
   })
 
   it('', () => {
-    
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    cy.typeInTextField(`Vetovoimaisuus-Comment`, 'Test comment')
   })
 })

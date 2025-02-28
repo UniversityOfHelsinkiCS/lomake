@@ -144,13 +144,14 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   return (
-    <Box ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
+    <Box data-cy={`${id}-${type}-box`} ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
       <Typography variant="h5" color="textSecondary">
         {t(`keyData:${type}`)}
       </Typography>
       {hasLock ? (
         <>
           <TextField
+            data-cy={`editor-${id}-${type}`}
             type="text"
             variant="outlined"
             multiline
@@ -173,7 +174,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
             <Box>
-              <Button variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
+              <Button data-cy={`save-${id}-${type}`} variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
                 {t(`keyData:save${type}`)}
               </Button>
               {hasUnsavedChanges && (
@@ -215,7 +216,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             </CardContent>
           </Card>
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Button variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
+            <Button data-cy={`edit-${id}-${type}`} variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
               {t(`keyData:edit${type}`)}
             </Button>
             <CurrentEditor fieldName={id} />
