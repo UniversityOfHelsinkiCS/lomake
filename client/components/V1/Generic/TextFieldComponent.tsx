@@ -10,7 +10,6 @@ import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { updateReportHttp } from '../../../util/redux/reportsSlicer'
-import { has } from 'lodash'
 
 type TextFieldComponentProps = {
   id: string
@@ -84,8 +83,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
         } else {
           e.preventDefault()
           e.stopPropagation()
-          setContent(dataFromRedux)
-          handleStopEditing()
+          componentRef.current.focus()
         }
       }
     }
@@ -97,7 +95,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [hasUnsavedChanges, t])
+  }, [hasUnsavedChanges, t, dataFromRedux])
 
   const handleStopEditing = () => {
     setHasLock(false)
