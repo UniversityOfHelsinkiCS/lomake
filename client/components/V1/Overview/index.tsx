@@ -6,7 +6,7 @@ import { RootState } from '../../../util/store'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
-import DataComponent from './DataComponent'
+import DataComponent from './KeyDataTableComponent'
 import YearFilter from '../Generic/YearFilterComponent'
 import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'

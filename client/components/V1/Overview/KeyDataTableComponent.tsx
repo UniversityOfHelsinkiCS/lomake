@@ -21,7 +21,7 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
-const KeyFigureTableComponent = ({
+const KeyDataTableComponent = ({
   facultyFilter = [],
   programmeLevelFilter = '',
   yearFilter = '',
@@ -197,4 +197,4 @@ const KeyFigureTableComponent = ({
     </div>
   )
 }
-export default KeyFigureTableComponent
+export default KeyDataTableComponent
