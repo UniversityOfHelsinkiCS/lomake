@@ -88,7 +88,7 @@ const ProgrammeView = () => {
         </IconButton>
 
         <Typography variant="h2" style={{ paddingTop: '2rem' }}>
-          {programme.koulutusohjelma.toUpperCase()} {selectedYear}
+          {programme.koulutusohjelma} {selectedYear}
         </Typography>
       </div>
 
