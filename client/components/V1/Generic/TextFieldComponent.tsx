@@ -83,7 +83,8 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
         } else {
           e.preventDefault()
           e.stopPropagation()
-          if (textFieldRef.current) textFieldRef.current.focus()
+          setContent(dataFromRedux)
+          handleStopEditing()
         }
       }
     }
@@ -95,7 +96,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [hasUnsavedChanges, t, content])
+  }, [hasUnsavedChanges, t])
 
   const handleStopEditing = () => {
     setHasLock(false)
@@ -144,7 +145,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   return (
-    <Box data-cy={`${id}-${type}-box`} ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
+    <Box data-cy={`box-${id}-${type}`} ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
       <Typography variant="h5" color="textSecondary">
         {t(`keyData:${type}`)}
       </Typography>

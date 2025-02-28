@@ -174,6 +174,4 @@ Cypress.Commands.add('typeInTextField', (id, textToBeTyped) => {
   
   cy.get(`[data-cy=editor-${id}]`)
     .type(textToBeTyped, { delay: 0 })
-
-  cy.get(`[data-cy=save-${id}]`).click()
 })
