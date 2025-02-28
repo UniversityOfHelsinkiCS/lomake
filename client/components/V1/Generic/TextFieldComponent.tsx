@@ -10,6 +10,7 @@ import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
 import { updateReportHttp } from '../../../util/redux/reportsSlicer'
+import { has } from 'lodash'
 
 type TextFieldComponentProps = {
   id: string
@@ -145,7 +146,11 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   return (
-    <Box data-cy={`box-${id}-${type}`} ref={componentRef} sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}>
+    <Box
+      data-cy={`box-${id}-${type}`}
+      ref={componentRef}
+      sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}
+    >
       <Typography variant="h5" color="textSecondary">
         {t(`keyData:${type}`)}
       </Typography>
@@ -160,7 +165,19 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             fullWidth
             inputRef={textFieldRef}
             value={content}
-            onChange={e => content.length < MAX_CONTENT_LENGTH && setContent(e.target.value)}
+            onChange={e => {
+              if (e.target.value.length <= MAX_CONTENT_LENGTH) {
+                setContent(e.target.value)
+              }
+            }}
+            onPaste={e => {
+              const paste = e.clipboardData.getData('text')
+              const newLength = content.length + paste.length
+              if (newLength > MAX_CONTENT_LENGTH) {
+                e.preventDefault()
+                alert(t('generic:tooLongPaste', { newLength, MAX_LENGTH: MAX_CONTENT_LENGTH }))
+              }
+            }}
             slotProps={{
               input: {
                 ...(type === 'Comment' && {
@@ -175,12 +192,22 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
             <Box>
-              <Button data-cy={`save-${id}-${type}`} variant="contained" onClick={handleStopEditing} sx={{ marginRight: 2 }}>
+              <Button
+                data-cy={`save-${id}-${type}`}
+                variant="contained"
+                onClick={handleStopEditing}
+                sx={{ marginRight: 2 }}
+              >
                 {t(`keyData:save${type}`)}
               </Button>
               {hasUnsavedChanges && (
                 <Typography variant="regular" style={{ color: 'red' }}>
                   {t('keyData:unsavedChanges')}!
+                </Typography>
+              )}
+              {hasLock && !hasUnsavedChanges && (
+                <Typography variant="regular" style={{ color: 'gray' }}>
+                  {t('generic:textUnsavedRelease')}
                 </Typography>
               )}
             </Box>
@@ -217,7 +244,13 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             </CardContent>
           </Card>
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Button data-cy={`edit-${id}-${type}`} variant="contained" disabled={isSomeoneElseEditing} onClick={askForLock} sx={{ marginRight: 2 }}>
+            <Button
+              data-cy={`edit-${id}-${type}`}
+              variant="contained"
+              disabled={isSomeoneElseEditing}
+              onClick={askForLock}
+              sx={{ marginRight: 2 }}
+            >
               {t(`keyData:edit${type}`)}
             </Button>
             <CurrentEditor fieldName={id} />

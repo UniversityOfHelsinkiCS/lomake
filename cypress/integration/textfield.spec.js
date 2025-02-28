@@ -16,6 +16,16 @@ describe('Textfield tests', () => {
     cy.visit(`/v1/programmes/KH50_005`)
   })
 
+  it('Should indicate that the field is locked to you', () => {
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    const id = `Vetovoimaisuus-Comment`
+    cy.get(`[data-cy=edit-${id}]`)
+      .click()
+      .wait(500)
+    cy.contains('Press the button to release the field for others to edit!').should('exist')
+    cy.get(`[data-cy=save-${id}]`).click()
+  })
+
   it('Should not allow user to write more than 500 characters', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     const id = `Vetovoimaisuus-Comment`
