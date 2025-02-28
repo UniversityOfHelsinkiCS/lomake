@@ -14,46 +14,55 @@ describe('Overview page test', () => {
 
   describe('Testing keydata table controls', () => {
 
-    it('Filters programmes by level', () => {
-      expect(true).to.equal(true)
+    describe('Test programme level filters', () => {
+
+      it('Displays all programme level options', () => {
+
+      })
+
+      it('Displays bachelor programmes only', () => {
+        cy.get('[data-cy="level-filter"]').click()
+        cy.get('[data-cy="level-filter-bachelor"]').click()
+        
+      })
     })
 
-    it.skip('Filters programmes by faculty', () => {
-      expect(true).to.equal(true)
-    })
-
-    // TODO: Implement this test when years are implemented
-    // it.skip('Filters programmes by year', () => {
+    // it.skip('Filters programmes by faculty', () => {
     //   expect(true).to.equal(true)
     // })
 
-    it.skip('Filters programmes by search input', () => {
-      expect(true).to.equal(true)
-    })
+    // TODO: Implement this test when years are implemented
+    // // it.skip('Filters programmes by year', () => {
+    // //   expect(true).to.equal(true)
+    // // })
 
-    it.skip('Sorts programmes by name', () => {
-      expect(true).to.equal(true)
-    })
+    // it.skip('Filters programmes by search input', () => {
+    //   expect(true).to.equal(true)
+    // })
 
-    it.skip('Sorts programmes by code', () => {
-      expect(true).to.equal(true)
-    })
+    // it.skip('Sorts programmes by name', () => {
+    //   expect(true).to.equal(true)
+    // })
+
+    // it.skip('Sorts programmes by code', () => {
+    //   expect(true).to.equal(true)
+    // })
 
   })
 
   describe('Testing keydata modals', () => {
 
-    it.skip('Modals open', () => {
-      expect(true).to.equal(true)
-    })
+    // it.skip('Modals open', () => {
+    //   expect(true).to.equal(true)
+    // })
 
-    it.skip('Modals close', () => {
-      expect(true).to.equal(true)
-    })
+    // it.skip('Modals close', () => {
+    //   expect(true).to.equal(true)
+    // })
 
-    it.skip('Modals contain', () => {
-      expect(true).to.equal(true)
-    })
+    // it.skip('Modals contain', () => {
+    //   expect(true).to.equal(true)
+    // })
 
   })
 })
