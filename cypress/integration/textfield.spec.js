@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import '../support/commands'
 import { defaultYears } from '../../config/common'
+import { possibleUsers } from '../../config/mockHeaders'
 
 const user = 'cypressUser'
 
@@ -27,20 +28,21 @@ describe('Textfield tests', () => {
       url: '/api/lock/KH50_005',
       body: { 
         field: "Vetovoimaisuus"},
-      headers: {
-        'Content-Type': 'application/json',
-          uid: 'cypressUser',
-          employeeNumber: 124,
-          givenName: 'user',
-          mail: 'cypress-user@helsinki.fi',
-          schacDateOfBirth: 19990100,
-          hyGroupCn: 'hy-mltdk-tkt-jory;hy-mltdk-kandi-kojot;hy-employees',
-          sn: 'nah',
+        headers: {
+          'Content-Type': 'application/json',
+          ...possibleUsers[7],
       },
     })
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
     cy.login(user)
     cy.visit(`/v1/programmes/KH50_005`)
     cy.typeInTextField(`Vetovoimaisuus-Comment`, 'Test comment')
+  })
+
+  it('Textfield is viewonly for user without write rights', () => {
+    cy.login('cypressPsykoUser')
+    cy.visit(`/v1/programmes/KH50_005`)
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })
 })
