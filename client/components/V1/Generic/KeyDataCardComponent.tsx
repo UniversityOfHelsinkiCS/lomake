@@ -105,7 +105,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
         {showDescription && (
           <div style={{ padding: '15px' }}>
-            <Typography variant="light">{props.description}</Typography>
+            <Typography variant="lightSmall">{props.description}</Typography>
 
             <ColorMeterComponent
               display={props.hasTrafficLight}
@@ -122,7 +122,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
 const KeyDataCard = (props: KeyDataCardProps) => {
   return (
-    <Box sx={{ padding: '50px 0' }}>
+    <Box sx={{ padding: '2rem 0' }}>
       <Box
         style={{
           display: 'flex',

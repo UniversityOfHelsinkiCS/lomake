@@ -114,12 +114,19 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
     setInterpolatedValue(order === 'asc' ? meterValue : 100 - meterValue)
   }, [display])
 
-  if (!display) return null
+  if (!display)
+    return (
+      <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="italic" color="textSecondary">
+          {t('keyData:colormeterNoDisplay')}
+        </Typography>
+      </div>
+    )
 
   if (error) {
     return (
-      <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="body1" color="error">
+      <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
+        <Typography variant="regular" color="error">
           {t('keyData:colormeterError')}
         </Typography>
       </div>

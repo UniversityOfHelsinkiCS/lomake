@@ -37,54 +37,58 @@ const themeOptions: ThemeOptions = {
   typography: {
     fontFamily: 'Lato, sans-serif',
     fontSize: 16,
-
     // rem values calculated based on 14px default font size (comes from semantic)
     h1: {
       fontWeight: 700, // Bold 28px
       fontSize: '2rem',
     },
     h2: {
-      fontWeight: 700, // Bold 24px
-      fontSize: '1.714rem',
+      fontWeight: 700, // Bold 25px
+      fontSize: '1.786rem',
     },
     h3: {
-      fontWeight: 700, // Bold 20px
-      fontSize: '1.429rem',
+      fontWeight: 700, // Bold 22px
+      fontSize: '1.571rem',
     },
     h4: {
-      fontWeight: 700, // Bold 18px
-      fontSize: '1.286rem',
+      fontWeight: 700, // Bold 18.5px
+      fontSize: '1.321rem',
     },
     h5: {
+      fontWeight: 700, // Bold 17px
+      fontSize: '1.214rem',
+    },
+    h6: {
       fontWeight: 700, // Bold 16px
       fontSize: '1.143rem',
     },
-    h6: {
-      fontWeight: 700, // Bold 14px
-      fontSize: '1rem',
-    },
     regular: {
-      fontWeight: 400, // Regular 16px
-      fontSize: '1.143rem',
+      lineHeight: 1.5,
+      fontWeight: 400, // Regular 17px
+      fontSize: '1.214rem',
     },
     light: {
-      fontWeight: 300, // Light 16px
-      fontSize: '1.143rem',
+      lineHeight: 1.5,
+      fontWeight: 300, // Light 17px
+      fontSize: '1.214rem',
       color: '#000',
     },
     italic: {
+      lineHeight: 1.5,
       fontWeight: 300,
-      fontStyle: 'italic', // Italic 16px
-      fontSize: '1.143rem',
+      fontStyle: 'italic', // Italic 17px
+      fontSize: '1.214rem',
       color: '#000',
     },
     regularSmall: {
-      fontWeight: 400, // Regular 14px
-      fontSize: '1rem',
+      lineHeight: 1.5,
+      fontWeight: 400, // Regular 16px
+      fontSize: '1.143rem',
     },
     lightSmall: {
-      fontWeight: 300, // Light 14px
-      fontSize: '1rem',
+      lineHeight: 1.5,
+      fontWeight: 300, // Light 16px
+      fontSize: '1.143rem',
       color: '#000',
     },
   },
@@ -92,8 +96,8 @@ const themeOptions: ThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
-          fontWeight: 700, // Bold 16px / H6
-          fontSize: '1.143rem',
+          fontWeight: 700, // Bold 17px / H5
+          fontSize: '1.214rem',
           textTransform: 'none',
         },
       },

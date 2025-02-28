@@ -78,8 +78,8 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
         </Box>
       ) : (
         <>
-          <Typography variant="h4" color="textSecondary">
-            {programme.koulutusohjelma} - {year}
+          <Typography variant="h5" color="textSecondary">
+            {programme.koulutusohjelma} {year}
           </Typography>
           <KeyDataCard
             level={getLevel(programme.koulutusohjelmakoodi)}

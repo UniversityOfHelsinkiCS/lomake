@@ -624,6 +624,8 @@ export default {
     Measure: 'Programåtgärder',
     noMeasure: 'Inget svar',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
-    unsavedChangesWarning: 'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" för att avsluta redigeringen.',
+    colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
+    unsavedChangesWarning:
+      'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" för att avsluta redigeringen.',
   },
 }

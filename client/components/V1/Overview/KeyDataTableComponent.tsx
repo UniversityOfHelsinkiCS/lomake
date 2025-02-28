@@ -120,7 +120,7 @@ const KeyDataTableComponent = ({
   return (
     <div style={{ minWidth: 1400 }}>
       {/* Search input */}
-      <div style={{ marginBottom: '1rem', marginTop: '4rem' }}>
+      <div style={{ marginBottom: '1rem', marginTop: '2rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
@@ -129,37 +129,45 @@ const KeyDataTableComponent = ({
         <TableRow isHeader>
           <TableCell>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-              <span onClick={sortByProgrammeName} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                onClick={sortByProgrammeName}
+                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              >
                 {t('common:programmeHeader')} <SwapVertIcon />
-              </span>
-              <span onClick={sortByProgrammeCode} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+              </Typography>
+              <Typography
+                variant="h6"
+                onClick={sortByProgrammeCode}
+                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              >
                 {t('common:code')} <SwapVertIcon />
-              </span>
+              </Typography>
             </div>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:vetovoima')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:vetovoimaisuus')}</Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:lapivirtaus')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:lapivirtaus')}</Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:palaute')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:resurssit')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:actions')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
           </TableCell>
 
           <TableCell disabled>
             <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
-              <Typography variant="regular">{t('keyData:qualityControl')}</Typography>
+              <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
             </Tooltip>
           </TableCell>
           <TableCell>
-            <Typography variant="regular">{t('keyData:supportProcess')}</Typography>
+            <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
           </TableCell>
         </TableRow>
 
@@ -167,9 +175,11 @@ const KeyDataTableComponent = ({
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell itemAlign="left">
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>{programmeData.koulutusohjelma}</Link>
                 <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
-                  {programmeData.koulutusohjelmakoodi}
+                  <Typography variant="regular">{programmeData.koulutusohjelma}</Typography>
+                </Link>
+                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+                  <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
                 </Link>
               </div>
             </TableCell>

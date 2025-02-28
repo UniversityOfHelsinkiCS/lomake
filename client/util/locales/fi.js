@@ -558,13 +558,13 @@ export default {
     keyFigure: 'Avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
 
-    vetovoima: 'Koulutusohjelman vetovoimaisuus',
+    vetovoimaisuus: 'Koulutusohjelman vetovoimaisuus',
     vetovoimaisuusInfo:
       'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
     lapivirtaus: 'Läpivirtaus ja valmistuminen koulutusohjelmassa',
     lapivirtausInfo:
       'Läpivirtauksessa tarkastellaan opintojen sujuvuutta sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa koulutusohjelman kokoa.',
-    palaute: 'Koulutusohjelman opiskelijapalaute ja työllistyminen',
+    opiskelijapalaute: 'Koulutusohjelman opiskelijapalaute ja työllistyminen',
     opiskelijapalauteInfo:
       'Opiskelijapalautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta.  Työllistymistä koskeva palaute kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
     resurssit: 'Koulutusohjelman resurssit',
@@ -588,6 +588,8 @@ export default {
     Measure: 'Koulutusohjelman toimenpiteet',
     noMeasure: 'Ei vastausta',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
-    unsavedChangesWarning: 'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" ja muutokset hylätään',
+    colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
+    unsavedChangesWarning:
+      'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" ja muutokset hylätään',
   },
 }

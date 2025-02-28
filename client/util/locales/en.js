@@ -590,6 +590,8 @@ export default {
     Measure: 'Programme actions',
     noMeasure: 'No response',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
-    unsavedChangesWarning: 'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" will discard the changes.',
+    colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    unsavedChangesWarning:
+      'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" will discard the changes.',
   },
 }

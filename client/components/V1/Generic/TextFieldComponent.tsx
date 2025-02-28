@@ -114,16 +114,19 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   if (viewOnly) {
     return (
-      <>
-        <Typography variant="h5" color="textSecondary">
+      <Box sx={{ mt: '1rem' }}>
+        <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
           {t(`keyData:${type}`)}
         </Typography>
-        <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center', mt: 2 }}>
+        <Card
+          variant="outlined"
+          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+        >
           {type === 'Comment' && (
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                  <ChatBubbleOutlineIcon />
+                  <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
                 </Avatar>
               }
               sx={{
@@ -133,15 +136,24 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               }}
             />
           )}
-          <CardContent sx={{ paddingLeft: type === 'Comment' ? 0 : undefined }}>
+          <CardContent
+            sx={{
+              paddingLeft: type === 'Comment' ? 0 : undefined,
+              minWidth: 0,
+              overflowWrap: 'break-word',
+              alignSelf: 'center',
+            }}
+          >
             {content ? (
-              <ReactMarkdown>{content}</ReactMarkdown>
+              <Typography variant="regular">
+                <ReactMarkdown>{content}</ReactMarkdown>
+              </Typography>
             ) : (
               <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
             )}
           </CardContent>
         </Card>
-      </>
+      </Box>
     )
   }
 
@@ -149,7 +161,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     <Box
       data-cy={`box-${id}-${type}`}
       ref={componentRef}
-      sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start' }}
+      sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start', mt: '1rem' }}
     >
       <Typography variant="h5" color="textSecondary">
         {t(`keyData:${type}`)}
@@ -157,11 +169,12 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       {hasLock ? (
         <>
           <TextField
+            style={{}}
             data-cy={`editor-${id}-${type}`}
             type="text"
             variant="outlined"
             multiline
-            minRows={type === 'Comment' ? 2.1 : 10}
+            minRows={type === 'Comment' ? 1 : 10}
             fullWidth
             inputRef={textFieldRef}
             value={content}
@@ -191,7 +204,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             }}
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Box>
+            <Box sx={{ mt: '2rem' }}>
               <Button
                 data-cy={`save-${id}-${type}`}
                 variant="contained"
@@ -218,7 +231,10 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
         </>
       ) : (
         <>
-          <Card variant="outlined" sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+          <Card
+            variant="outlined"
+            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+          >
             {type === 'Comment' && (
               <CardHeader
                 avatar={
@@ -233,7 +249,14 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
                 }}
               />
             )}
-            <CardContent sx={{ paddingLeft: type === 'Comment' ? 0 : undefined }}>
+            <CardContent
+              sx={{
+                paddingLeft: type === 'Comment' ? 0 : undefined,
+                minWidth: 0,
+                overflowWrap: 'break-word',
+                alignSelf: 'center',
+              }}
+            >
               {content ? (
                 <ReactMarkdown>{content}</ReactMarkdown>
               ) : (
@@ -243,10 +266,18 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               )}
             </CardContent>
           </Card>
-          <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              width: '100%',
+              justifyContent: 'space-between',
+              marginTop: '1rem',
+            }}
+          >
             <Button
               data-cy={`edit-${id}-${type}`}
-              variant="contained"
+              variant="outlined"
               disabled={isSomeoneElseEditing}
               onClick={askForLock}
               sx={{ marginRight: 2 }}

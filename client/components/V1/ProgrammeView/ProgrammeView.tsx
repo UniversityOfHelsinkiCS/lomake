@@ -120,7 +120,7 @@ const ProgrammeView = () => {
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
-            <Box sx={{ mb: 6 }} key={data.groupKey}>
+            <Box sx={{ p: '2.5rem 0' }} key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
               {data.textField && <TextFieldComponent id={data.groupKey} type="Comment" />}
             </Box>
