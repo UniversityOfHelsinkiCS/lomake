@@ -20,7 +20,6 @@ import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
 import { RootState } from '@/client/util/store'
 import { getKeyDataPoints } from '../Utils/util'
-import {} from '../../../../theme'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -28,6 +27,7 @@ const ProgrammeView = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const [activeTab, setActiveTab] = useState(0)
+  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
   const keyData = useFetchSingleKeyData(programmeKey, lang)
   const form = 10
@@ -87,8 +87,8 @@ const ProgrammeView = () => {
           <ArrowBackIcon />
         </IconButton>
 
-        <Typography variant="h1" style={{ paddingTop: '2rem' }}>
-          {programme.koulutusohjelma}
+        <Typography variant="h2" style={{ paddingTop: '2rem' }}>
+          {programme.koulutusohjelma.toUpperCase()} {selectedYear}
         </Typography>
       </div>
 
@@ -120,10 +120,10 @@ const ProgrammeView = () => {
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
-            <React.Fragment key={data.groupKey}>
+            <Box sx={{ mb: 6 }} key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
-              <TextFieldComponent id={data.groupKey} type="Comment" />
-            </React.Fragment>
+              {data.textField && <TextFieldComponent id={data.groupKey} type="Comment" />}
+            </Box>
           ))}
 
           <Link

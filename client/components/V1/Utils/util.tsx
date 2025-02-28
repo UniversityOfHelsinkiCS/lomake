@@ -55,21 +55,27 @@ export const calculateValue = (value: number, unit?: string) => {
 }
 
 export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
-  const KeyDataPoints = Object.keys(GroupKey).map((key: string) => {
-    const lowerKey = key.toLowerCase()
-    return [
-      // Type-safe access to the enum value
-      GroupKey[key as keyof typeof GroupKey],
-      {
-        title: t(`keyData:${lowerKey}`),
-        groupKey: GroupKey[key as keyof typeof GroupKey],
-        description: t(`keyData:${lowerKey}Info`),
-        color: programme[lowerKey as keyof typeof programme],
+  const KeyDataPoints = Object.keys(GroupKey)
+    .map((key: string) => {
+      const lowerKey = key.toLowerCase()
+      return [
+        // Type-safe access to the enum value
+        GroupKey[key as keyof typeof GroupKey],
+        {
+          title: t(`keyData:${lowerKey}`),
+          groupKey: GroupKey[key as keyof typeof GroupKey],
+          description: t(`keyData:${lowerKey}Info`),
+          color: programme[lowerKey as keyof typeof programme],
+          textField: lowerKey !== 'resurssit', // resurssit section not active in 2025 pilot, this should be removed later
+        },
+      ]
+    })
+    .reduce(
+      (acc, [key, value]) => {
+        acc[key as string] = value
+        return acc
       },
-    ]
-  }).reduce((acc, [key, value]) => {
-    acc[key as string] = value
-    return acc
-  }, {} as Record<string, any>)
+      {} as Record<string, any>,
+    )
   return KeyDataPoints
 }

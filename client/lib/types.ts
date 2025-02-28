@@ -43,6 +43,7 @@ export interface KeyDataCardData {
   groupKey: GroupKey
   description: string
   color: string
+  textField: boolean
 }
 
 export interface StudyProgramme {
