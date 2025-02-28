@@ -20,7 +20,7 @@ describe('Textfield tests', () => {
     cy.typeInTextField(`Vetovoimaisuus-Comment`, 'Test comment')
   })
 
-  it('Textfield is locked for another user if one user is typing', () => {
+  it('Textfield is locked for another user if one user is typing and releasing lock should open the field for all users', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     cy.request({
       method: 'POST',
@@ -38,6 +38,9 @@ describe('Textfield tests', () => {
           sn: 'nah',
       },
     })
-    
+    cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
+    cy.login(user)
+    cy.visit(`/v1/programmes/KH50_005`)
+    cy.typeInTextField(`Vetovoimaisuus-Comment`, 'Test comment')
   })
 })

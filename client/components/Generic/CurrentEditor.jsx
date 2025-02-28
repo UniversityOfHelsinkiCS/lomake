@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
+import { Typography } from '@mui/material'
 
 import { colors } from '../../util/common'
 import './Generic.scss'
