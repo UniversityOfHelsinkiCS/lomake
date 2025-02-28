@@ -16,35 +16,42 @@ describe('Textfield tests', () => {
     cy.visit(`/v1/programmes/KH50_005`)
   })
 
-    it('Should alert user if trying to leave without saving', () => {
-      cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
-      const id = `Vetovoimaisuus-Comment`
-      cy.typeInTextField(id, 'Test comment')
-      cy.contains('Unsaved changes!').should('exist')
+  it('Should not allow user to write more than 500 characters', () => {
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    const id = `Vetovoimaisuus-Comment`
+    cy.typeInTextField(id, 'a'.repeat(501))
+    cy.get(`[data-cy=save-${id}]`).click()
+    cy.get(`[data-cy=box-${id}]`).contains('a'.repeat(500))
+  })
 
-      cy.on('window:confirm', (message) => {
-        expect(message).to.equal('You have unsaved changes. By pressing the "OK" button, the changes will be saved.')
-        return true
-      })
-      cy.get(`[data-cy=box-Resurssit-Comment]`).click()
+  it('Should alert user if trying to leave without saving', () => {
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    const id = `Vetovoimaisuus-Comment`
+    cy.typeInTextField(id, 'Test comment')
+    cy.contains('Unsaved changes!').should('exist')
+    cy.on('window:confirm', (message) => {
+      expect(message).to.equal('You have unsaved changes. By pressing the "OK" button, the changes will be saved.')
+      return true
     })
+    cy.get(`[data-cy=box-Resurssit-Comment]`).click()
+  })
 
-    it('Should lose changes when cancel is pressed on window confirmation and field should be released', () => {
-      cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
-      const id = `Vetovoimaisuus-Comment`
-      cy.typeInTextField(id, 'Test comment to be lost')
-      cy.contains('Unsaved changes!').should('exist')
+  it('Should lose changes when cancel is pressed on window confirmation and field should be released', () => {
+    cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    const id = `Vetovoimaisuus-Comment`
+    cy.typeInTextField(id, 'Test comment to be lost')
+    cy.contains('Unsaved changes!').should('exist')
 
-      cy.on('window:confirm', () => false)
-      cy.get(`[data-cy=box-Resurssit-Comment]`).click()
-      cy.get(`[data-cy=box-Vetovoimaisuus-Comment]`).click()
-      cy.contains('Test comment to be lost').should('not.exist')
+    cy.on('window:confirm', () => false)
+    cy.get(`[data-cy=box-Resurssit-Comment]`).click()
+    cy.get(`[data-cy=box-Vetovoimaisuus-Comment]`).click()
+    cy.contains('Test comment to be lost').should('not.exist')
 
-      cy.login(user)
-      cy.visit(`/v1/programmes/KH50_005`)
-      cy.typeInTextField(id, 'Field is released')
-      cy.get(`[data-cy=save-${id}]`).click()
-    })
+    cy.login(user)
+    cy.visit(`/v1/programmes/KH50_005`)
+    cy.typeInTextField(id, 'Field is released')
+    cy.get(`[data-cy=save-${id}]`).click()
+  })
 
   it('User can type to the textfield', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
