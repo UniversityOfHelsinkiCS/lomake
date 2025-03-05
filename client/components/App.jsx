@@ -61,8 +61,9 @@ export default () => {
       i18n.changeLanguage(linkLang)
     }
 
-    // Set year for Annual Follow Up view (Vuosiseuranta näkymä) to default to current year
-    dispatch(setKeyDataYear(new Date().getFullYear().toString()))
+    // TODO: Define policy for default year
+    // Currently sets the default year to the previous year
+    dispatch(setKeyDataYear((new Date().getFullYear() - 1).toString()))
   }, [])
 
   useEffect(() => {
