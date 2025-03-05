@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next'
 import { RootState } from '../../../util/store'
 import { setKeyDataYear, clearLevelSpecificFilters } from '../../../util/redux/filterReducer'
 
@@ -8,13 +7,13 @@ import { MenuItem, FormControl } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 const YearFilterComponent = () => {
-  const { t } = useTranslation()
   const dispatch = useDispatch()
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
-  // Available years hardcoded for now.
-  // If an invalid year is selected, the user will see the year greyed out for now and state will not be updated.
-  const allowedYears = ['2025']
+  // TODO: figure out a policy how allowed years are determined
+
+  // If an invalid year is selected, the user will see the year as an greyed out option and state will not be updated.
+  const allowedYears = ['2025', '2024', '2023', '2022']
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())

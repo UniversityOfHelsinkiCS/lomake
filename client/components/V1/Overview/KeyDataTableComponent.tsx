@@ -21,11 +21,7 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
-const KeyDataTableComponent = ({
-  facultyFilter = [],
-  programmeLevelFilter = '',
-  yearFilter = '',
-}: KeyDataTableProps) => {
+const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useSelector((state: { language: string }) => state.language)
   const keyData = useFetchKeyData(lang)
   const { t } = useTranslation()
@@ -56,12 +52,13 @@ const KeyDataTableComponent = ({
 
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
+      const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter)
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
-      return facultyMatches && levelMatches
+      return yearMatches && facultyMatches && levelMatches
     })
-  }, [facultyFilter, programmeLevelFilter, programmeData])
+  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData])
 
   // Filter by search input
   const searchFilteredData = useMemo(
