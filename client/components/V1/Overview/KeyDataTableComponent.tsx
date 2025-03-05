@@ -164,35 +164,43 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
           </TableCell>
         </TableRow>
 
-        {keyFigureData.map((programmeData: KeyDataProgramme) => (
-          <TableRow key={programmeData.koulutusohjelmakoodi}>
-            <TableCell itemAlign="left">
-              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
-                  <Typography variant="regular">{programmeData.koulutusohjelma}</Typography>
-                </Link>
-                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
-                  <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
-                </Link>
-              </div>
-            </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.VETOVOIMAISUUS)}>
-              <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
-            </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.LAPIVIRTAUS)}>
-              <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
-            </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.OPISKELIJAPALAUTE)}>
-              <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
-            </TableCell>
-            <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.RESURSSIT)}>
-              <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
-            </TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
+        {keyFigureData.length > 0 ? (
+          keyFigureData.map((programmeData: KeyDataProgramme) => (
+            <TableRow key={programmeData.koulutusohjelmakoodi}>
+              <TableCell itemAlign="left">
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+                  <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+                    <Typography variant="regular">{programmeData.koulutusohjelma}</Typography>
+                  </Link>
+                  <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+                    <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
+                  </Link>
+                </div>
+              </TableCell>
+              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.VETOVOIMAISUUS)}>
+                <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
+              </TableCell>
+              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.LAPIVIRTAUS)}>
+                <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
+              </TableCell>
+              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.OPISKELIJAPALAUTE)}>
+                <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
+              </TableCell>
+              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.RESURSSIT)}>
+                <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
+              </TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5rem' }}>
+              <Typography variant="body1">{t('common:noData')}</Typography>
+            </div>
           </TableRow>
-        ))}
+        )}
       </Table>
 
       {/* Key Figure Data Modal */}
