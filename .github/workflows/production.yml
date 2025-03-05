@@ -27,6 +27,7 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=production
+            GIT_SHA=${{ github.sha }}
           extra-args: |
             --ulimit nofile=4096:4096
 
