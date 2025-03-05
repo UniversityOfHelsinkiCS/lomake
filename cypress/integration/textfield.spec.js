@@ -94,9 +94,16 @@ describe('Textfield tests', () => {
   })
 
   it('Textfield is viewonly for user without write rights', () => {
-    cy.login('cypressPsykoUser')
+    cy.login('cypressReadingRightsUser')
     cy.visit(`/v1/programmes/KH50_005`)
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
+    cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
+  })
+
+  it('Page thorws no access for user without read rights', () => {
+    cy.login('cypressNoRightsUser')
+    cy.visit(`/v1/programmes/KH50_005`)
+    cy.contains(`Bachelor's Programme in Computer Science`).should('not.exist')
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })
 })
