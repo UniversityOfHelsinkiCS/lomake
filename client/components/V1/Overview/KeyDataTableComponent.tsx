@@ -41,12 +41,12 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     return []
   }, [keyData])
 
-  // Filter by faculty, year and program level
-  const filteredData = useMemo(() => {
+  const keyFigureData = useMemo(() => {
     // Convert to set for faster lookup
     const allowedFacultiesSet = new Set(facultyFilter)
 
-    return programmeData.filter((programmeData: KeyDataProgramme) => {
+    // Filter by faculty, year and program level
+    const filteredData = programmeData.filter((programmeData: KeyDataProgramme) => {
       // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
       // example: KH10_001, where K is the level, H10 is the faculty code
 
@@ -58,24 +58,20 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
       return yearMatches && facultyMatches && levelMatches
     })
-  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData])
 
-  // Filter by search input
-  const searchFilteredData = useMemo(
-    () =>
-      filteredData.filter((programmeData: KeyDataProgramme) => {
-        return (
-          programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
-          programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      }),
-    [filteredData, searchValue],
-  )
+    // Sort by programme name or code
+    const sortedData = _.orderBy(filteredData, [sortIdentity], [sortDirection])
 
-  // Default sort by koulutusohjelma (ascending alphabetic order)
-  const sortedData = useMemo(() => {
-    return _.orderBy(searchFilteredData, [sortIdentity], [sortDirection])
-  }, [searchFilteredData, sortIdentity, sortDirection])
+    // Filter by search input
+    const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
+      return (
+        programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
+        programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    })
+
+    return searchedData
+  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData, searchValue, sortIdentity, sortDirection])
 
   const sortByProgrammeName = () => {
     if (sortIdentity !== 'koulutusohjelma') {
@@ -168,7 +164,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
           </TableCell>
         </TableRow>
 
-        {sortedData.map((programmeData: KeyDataProgramme) => (
+        {keyFigureData.map((programmeData: KeyDataProgramme) => (
           <TableRow key={programmeData.koulutusohjelmakoodi}>
             <TableCell itemAlign="left">
               <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
