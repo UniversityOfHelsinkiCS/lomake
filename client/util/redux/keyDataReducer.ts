@@ -13,8 +13,8 @@ interface Action {
   response?: any;
 }
 
-export const fetchKeyData = () => {
-  const route = '/keyData'
+export const fetchKeyData = (lang: string) => {
+  const route = `/keyData/${lang}`
   const prefix = 'GET_KEY_DATA'
   return callBuilder(route, prefix)
 }
