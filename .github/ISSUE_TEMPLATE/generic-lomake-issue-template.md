@@ -14,7 +14,7 @@ None
 None
 
 # Todo list (if epic or larger task)
-- [] None
+- [ ] None
 
 # Description of interactions with existing code
 None
