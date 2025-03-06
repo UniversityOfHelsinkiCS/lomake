@@ -58,6 +58,7 @@ const useFetchKeyData = (lang: string) => {
       lapivirtaus: kandiohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: kandiohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: kandiohjelma['Resurssit'],
+      year: kandiohjelma['Vuosi'],
       international: matchedProgramme ? matchedProgramme.international : undefined,
       level: matchedProgramme ? matchedProgramme.level : undefined,
     }
@@ -76,6 +77,7 @@ const useFetchKeyData = (lang: string) => {
       lapivirtaus: maisteriohjelma['Läpivirtaus ja valmistuminen'],
       opiskelijapalaute: maisteriohjelma['Opiskelijapalaute ja työllistyminen'],
       resurssit: maisteriohjelma['Resurssit'],
+      year: maisteriohjelma['Vuosi'],
       international: matchedProgramme ? matchedProgramme.international : undefined,
       level: matchedProgramme ? matchedProgramme.level : undefined,
     }
@@ -92,6 +94,7 @@ const useFetchKeyData = (lang: string) => {
       kynnysarvot: meta['Kynnysarvot'],
       yksikko: meta['Yksikkö'],
       liikennevalo: meta['Liikennevalo'], // boolean-kenttä sille näytetäänkö liikennevalo vai pelkkä luku
+      mittarinRajat: meta['Mittarin rajat'], 
     }
     return obj
   }) as KeyDataMetadata[]

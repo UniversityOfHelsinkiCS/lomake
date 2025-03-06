@@ -25,6 +25,7 @@ export interface KeyDataProgramme {
   opiskelijapalaute: string
   resurssit: string
   international: boolean
+  year: number
 }
 
 export interface KeyDataMetadata {
@@ -36,6 +37,7 @@ export interface KeyDataMetadata {
   kynnysarvot: string
   yksikko: string
   liikennevalo: boolean
+  mittarinRajat: string
 }
 
 export interface KeyDataCardData {
