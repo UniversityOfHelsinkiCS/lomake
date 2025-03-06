@@ -2,12 +2,27 @@ import type { Request, Response } from 'express'
 import multer from 'multer'
 import xlsx from 'xlsx'
 import KeyData from '../models/keyData.js'
+import db from '../models/index.js'
+import { formatKeyData } from '../services/keyDataService.js'
 
 
 const getKeyData = async (req: Request, res: Response): Promise<Response> => {
   try {
+    const lang = (req.query.lang as string) || 'fi'
     const keyData = await KeyData.findAll()
-    return res.status(200).json(keyData)
+    // @ts-ignore
+    const programmeData = await db.studyprogramme.findAll({
+      attributes: ['key', 'name', 'level', 'international'],
+      include: ['primaryFaculty', 'companionFaculties'],
+    })
+
+    if (!keyData.length) {
+      return res.status(404).json({ error: 'No key data found' })
+    }
+
+    const formattedKeyData = formatKeyData(keyData[0].data, programmeData, lang)
+
+    return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }

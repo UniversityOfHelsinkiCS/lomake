@@ -78,7 +78,7 @@ router.get('/cypress/createAnswers/:form', notInProduction, cypress.createAnswer
 router.get('/cypress/createFacultyAnswers/:form', notInProduction, cypress.createFacultyAnswers)
 router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 
-router.get('/keydata', keyData.getKeyData)
+router.get('/keydata/:lang', keyData.getKeyData)
 router.post('/keydata', checkAdmin, keyData.uploadKeyData)
 
 export default router
