@@ -26,14 +26,14 @@ const YearFilterComponent = () => {
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
         <Select
-          id="level-filter"
+          data-cy="year-filter"
           value={selectedYear}
           onChange={handleChange}
           displayEmpty
           renderValue={value => (allowedYears.includes(value) ? value : <span style={{ opacity: 0.4 }}>{value}</span>)}
         >
           {allowedYears.map(option => (
-            <MenuItem key={option} value={option}>
+            <MenuItem key={option} value={option} data-cy="year-filter-option">
               {option}
             </MenuItem>
           ))}

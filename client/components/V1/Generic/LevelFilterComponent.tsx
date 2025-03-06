@@ -41,13 +41,13 @@ const LevelFilterComponent = () => {
 
   return (
     <div>
-      <FormControl data-cy="level-filter" sx={{ m: 1, width: 350 }}>
-        <Select value={selectedLevel} onChange={handleChange}>
+      <FormControl sx={{ m: 1, width: 350 }}>
+        <Select data-cy="level-filter" value={selectedLevel} onChange={handleChange}>
           {allowedLevels.map(option => (
             <MenuItem
               key={option.key}
               value={option.value}
-              data-cy={`level-filter-${option.value}`}
+              data-cy="level-filter-option"
               disabled={option.value === 'doctoral'}
             >
               {option.text}

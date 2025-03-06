@@ -80,15 +80,14 @@ const FacultyFilterComponent = () => {
     <div>
       <FormControl sx={{ m: 1, width: 350 }}>
         <Select
-          id="faculty-filter"
-          // data-cy="faculty-filter"
+          data-cy="faculty-filter"
           multiple
           value={selectedFaculties}
           onChange={handleChange}
           renderValue={selected => getFacultyName(selected).join(', ')}
         >
           {options?.map(option => (
-            <MenuItem key={option.key} value={option.value}>
+            <MenuItem key={option.key} value={option.value} data-cy="faculty-filter-option">
               <Checkbox checked={selectedFaculties.includes(option.value)} />
               <ListItemText primary={option.text} />
             </MenuItem>
