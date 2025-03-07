@@ -34,13 +34,13 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
         return LightColors.Grey
       }
     } else {
-      if (value >= first) {
+      if (value > second) {
         return LightColors.Red
-      } else if (value >= second) {
+      } else if (value > third) {
         return LightColors.Yellow
-      } else if (value >= third) {
+      } else if (value < third && value > fourth) {
         return LightColors.LightGreen
-      } else if (value < third) {
+      } else if (value <= fourth) {
         return LightColors.DarkGreen
       } else {
         return LightColors.Grey

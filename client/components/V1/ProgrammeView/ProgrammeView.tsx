@@ -110,9 +110,9 @@ const ProgrammeView = () => {
             <Typography variant="light">{t('keyData:keyFigureInfo')}</Typography>
             <Typography variant="light">
               <ul>
-                <li>{t('keyData:vetovoima')}</li>
+                <li>{t('keyData:vetovoimaisuus')}</li>
                 <li>{t('keyData:lapivirtaus')}</li>
-                <li>{t('keyData:palaute')}</li>
+                <li>{t('keyData:opiskelijapalaute')}</li>
                 <li>{t('keyData:resurssit')}</li>
               </ul>
             </Typography>
