@@ -132,8 +132,8 @@ const theme = createTheme(themeOptions) as Theme
 export default theme
 
 export const customColors = {
-  lightGreenLight: '#7DD64D',
-  darkGreenLight: '#1C994A',
+  lightGreenLight: '#A2DA85',
+  darkGreenLight: '#189E4A',
   greenLight: '#22C55E',
   yellowLight: '#FFDA35',
   redLight: '#FF6C6C',
