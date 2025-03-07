@@ -62,14 +62,10 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     })
 
     // Sort by programme name or code
-    //const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
-
-    //console.log(sortedData)
-
-    console.log(filteredData)
+    const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
 
     // Filter by search input
-    const searchedData = filteredData.filter((programmeData: KeyDataProgramme) => {
+    const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
       if (typeof(programmeData.koulutusohjelma) === 'string') {
         return []
       } else if (typeof(programmeData.koulutusohjelma) === 'object' && !programmeData.koulutusohjelma[lang]) {
