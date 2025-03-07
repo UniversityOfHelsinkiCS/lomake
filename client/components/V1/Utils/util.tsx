@@ -1,41 +1,49 @@
 import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
-import { GroupKey } from '@/client/lib/enums'
+import { GroupKey, LightColors } from '@/client/lib/enums'
 import type { KeyDataProgramme } from '@/client/lib/types'
 import { useMemo } from 'react'
 
-export const calculateColor = (value: number, threshold: string, liikennevalo: boolean) => {
+export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   return useMemo(() => {
     if (!liikennevalo) {
-      return 'Tyhjä'
+      return LightColors.Empty
     } else if (!value || !threshold) {
-      return 'Harmaa'
+      return LightColors.Grey
     }
 
-    const [first, second, third] = threshold
+    if (unit) {
+      value = value * 100
+    }
+
+    const [first, second, third, fourth] = threshold
       .split(';')
       .map(str => str.replace(',', '.'))
       .map(Number)
 
     if (first === 0) {
       if (value < second) {
-        return 'Punainen'
+        return LightColors.Red
       } else if (value < third) {
-        return 'Keltainen'
-      } else if (value >= third) {
-        return 'Vihreä'
+        return LightColors.Yellow
+      } else if (value < fourth) {
+        return LightColors.LightGreen
+      } else if (value >= fourth) {
+        return LightColors.DarkGreen
       } else {
-        return 'Harmaa'
+        return LightColors.Grey
       }
     } else {
       if (value >= first) {
-        return 'Punainen'
+        return LightColors.Red
       } else if (value >= second) {
-        return 'Keltainen'
-      } else if (value < second) {
-        return 'Vihreä'
+        return LightColors.Yellow
+      } else if (value >= third) {
+        return LightColors.LightGreen
+      } else if (value < third) {
+        return LightColors.DarkGreen
       } else {
-        return 'Harmaa'
+        return LightColors.Grey
       }
     }
   }, [value, threshold, liikennevalo])
@@ -77,5 +85,6 @@ export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
       },
       {} as Record<string, any>,
     )
+
   return KeyDataPoints
 }

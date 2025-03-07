@@ -50,7 +50,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
               key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
             )
           ] || null
-        const color = calculateColor(value, data.kynnysarvot, data.liikennevalo)
+        const color = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
         const valueText = calculateValue(value, data.yksikko)
 
         return (

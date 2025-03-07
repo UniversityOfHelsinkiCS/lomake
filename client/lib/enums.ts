@@ -13,4 +13,13 @@ export enum StudyLevel {
   Doctor = 'doctoral',
 }
 
+export enum LightColors {
+  Red = 'Punainen',
+  Yellow = 'Keltainen',
+  LightGreen = 'Vaaleanvihreä',
+  DarkGreen = 'Tummanvihreä',
+  Grey = 'Harmaa',
+  Empty = 'Tyhjä',
+}
+
 export { GroupKey }

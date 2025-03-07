@@ -1,6 +1,7 @@
 import { Tooltip } from '@mui/material'
 import { customColors } from '../../../../theme'
 import { useTranslation } from 'react-i18next'
+import { LightColors } from '@/client/lib/enums'
 
 interface TrafficLightProps {
   color: string
@@ -13,13 +14,13 @@ export const TrafficLight = (props: TrafficLightProps) => {
 
   const getColorData = (color: string) => {
     switch (color) {
-      case 'Vaaleanvihreä':
+      case LightColors.LightGreen:
         return { hex: customColors.lightGreenLight, color: t('common:lightGreen') }
-      case 'Tummanvihreä':
+      case LightColors.DarkGreen:
         return { hex: customColors.darkGreenLight, color: t('common:darkGreen') }
-      case 'Keltainen':
+      case LightColors.Yellow:
         return { hex: customColors.yellowLight, color: t('common:yellow') }
-      case 'Punainen':
+      case LightColors.Red:
         return { hex: customColors.redLight, color: t('common:red') }
       default:
         return { hex: customColors.grayLight, color: t('common:gray') }
