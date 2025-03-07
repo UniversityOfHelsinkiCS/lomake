@@ -143,7 +143,7 @@ const ProgrammeView = () => {
           <Alert severity="info" sx={{ mb: 4 }}>
             <Typography variant="light">Toimenpiteiden ohjeistus tulossa...</Typography>
           </Alert>
-          <TextFieldComponent id={'1'} type={'Measure'} />
+          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'} />
         </Box>
       )}
     </Box>
