@@ -11,6 +11,8 @@ export default {
     neutral: 'Challenges identified and development underway',
     negative: 'Significant measures required/development areas not yet specified',
     noColors: '*Questions, without traffic lights are not shown here (e.g. 16 and 17)',
+    lightGreen: 'Light green',
+    darkGreen: 'Dark green',
     green: 'Green',
     yellow: 'Yellow',
     red: 'Red',

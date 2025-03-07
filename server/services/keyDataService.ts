@@ -11,16 +11,16 @@ export const formatKeyData = (data: any, programmeData: any, lang: string) => {
 
   const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
     const matchedProgramme = programmes.find(
-      (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim()
+      (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
     return {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme ? matchedProgramme.name : kandiohjelma['Koulutusohjelman nimi'],
       values: kandiohjelma,
       vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
-      lapivirtaus: kandiohjelma['Läpivirtaus ja valmistuminen'],
-      opiskelijapalaute: kandiohjelma['Opiskelijapalaute ja työllistyminen'],
-      resurssit: kandiohjelma['Resurssit'],
+      lapivirtaus: kandiohjelma['Opintojen sujuvuus ja valmistuminen'],
+      opiskelijapalaute: kandiohjelma['Palaute ja työllistyminen'],
+      resurssit: kandiohjelma['Resurssien käyttö'],
       year: kandiohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
@@ -29,16 +29,16 @@ export const formatKeyData = (data: any, programmeData: any, lang: string) => {
 
   const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
     const matchedProgramme = programmes.find(
-      (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim()
+      (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
     return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme ? matchedProgramme.name : maisteriohjelma['Koulutusohjelman nimi'],
       values: maisteriohjelma,
       vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
-      lapivirtaus: maisteriohjelma['Läpivirtaus ja valmistuminen'],
-      opiskelijapalaute: maisteriohjelma['Opiskelijapalaute ja työllistyminen'],
-      resurssit: maisteriohjelma['Resurssit'],
+      lapivirtaus: maisteriohjelma['Opintojen sujuvuus ja valmistuminen'],
+      opiskelijapalaute: maisteriohjelma['Palaute ja työllistyminen'],
+      resurssit: maisteriohjelma['Resurssien käyttö'],
       year: maisteriohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,

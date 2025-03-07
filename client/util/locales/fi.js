@@ -14,6 +14,8 @@ export default {
     neutral: 'Haasteet tiedossa ja niiden kehittäminen työn alla',
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
     noColors: '*Kysymyksiä, joille ei ole määritetty liikennevaloja, ei näytetä ollenkaan (esim. 16 ja 17)',
+    lightGreen: 'Vaaleanvihreä',
+    darkGreen: 'Tummanvihreä',
     green: 'Vihreä',
     yellow: 'Keltainen',
     red: 'Punainen',

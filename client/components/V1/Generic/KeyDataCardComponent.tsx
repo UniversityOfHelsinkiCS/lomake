@@ -32,7 +32,7 @@ interface CriteriaCardProps {
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
-  const meta = props.metadata.filter(data => data.avainluku === props.groupKey && data.ohjelmanTaso === props.level)
+  const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
 
   return (
     <Box
@@ -47,7 +47,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
         const value =
           props.programme.values[
             Object.keys(props.programme.values).find(
-              key => key.trim().toLowerCase() === data.kriteerinArvo.trim().toLowerCase(),
+              key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
             )
           ] || null
         const color = calculateColor(value, data.kynnysarvot, data.liikennevalo)
@@ -55,8 +55,8 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 
         return (
           <CriteriaCard
-            key={data.kriteerinNimi}
-            title={data.kriteerinNimi}
+            key={data.avainluvunNimi}
+            title={data.avainluvunNimi}
             description={data.maaritelma}
             hasTrafficLight={data.liikennevalo}
             value={valueText}
@@ -140,7 +140,6 @@ const KeyDataCard = (props: KeyDataCardProps) => {
       <Box sx={{ padding: '10px 0 30px 0' }}>
         <Typography variant="light">{props.description}</Typography>
       </Box>
-
       <CriteriaGroup
         groupKey={props.groupKey}
         level={props.level}

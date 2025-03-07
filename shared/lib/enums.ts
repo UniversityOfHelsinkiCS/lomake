@@ -1,6 +1,6 @@
 export enum GroupKey {
   VETOVOIMAISUUS = 'Vetovoimaisuus',
-  LAPIVIRTAUS = 'Läpivirtaus ja valmistuminen',
-  OPISKELIJAPALAUTE = 'Opiskelijapalaute ja työllistyminen',
-  RESURSSIT = 'Resurssit',
+  LAPIVIRTAUS = 'Opintojen sujuvuus ja valmistuminen',
+  OPISKELIJAPALAUTE = 'Palaute ja työllistyminen',
+  RESURSSIT = 'Resurssien käyttö',
 }

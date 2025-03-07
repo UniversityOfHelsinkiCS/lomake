@@ -11,6 +11,8 @@ export default {
     neutral: 'Utmaningarna är kända och utvecklingsarbete pågår',
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
     noColors: '*Frågor utan trafikljus visas inte alls (t.ex. 16 och 17)',
+    lightGreen: 'Ljusgrön',
+    darkGreen: 'Mörkgrön',
     green: 'Grön',
     yellow: 'Gul',
     red: 'Röd',

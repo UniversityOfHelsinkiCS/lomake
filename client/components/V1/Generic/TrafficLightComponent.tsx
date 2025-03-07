@@ -13,8 +13,10 @@ export const TrafficLight = (props: TrafficLightProps) => {
 
   const getColorData = (color: string) => {
     switch (color) {
-      case 'Vihreä':
-        return { hex: customColors.greenLight, color: t('common:green') }
+      case 'Vaaleanvihreä':
+        return { hex: customColors.lightGreenLight, color: t('common:lightGreen') }
+      case 'Tummanvihreä':
+        return { hex: customColors.darkGreenLight, color: t('common:darkGreen') }
       case 'Keltainen':
         return { hex: customColors.yellowLight, color: t('common:yellow') }
       case 'Punainen':

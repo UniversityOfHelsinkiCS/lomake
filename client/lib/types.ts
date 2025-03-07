@@ -29,9 +29,9 @@ export interface KeyDataProgramme {
 }
 
 export interface KeyDataMetadata {
-  avainluku: string
-  kriteerinNimi: string
-  kriteerinArvo: string
+  arviointialue: string
+  avainluvunArvo: string
+  avainluvunNimi: string
   maaritelma: string
   ohjelmanTaso: string
   kynnysarvot: string
