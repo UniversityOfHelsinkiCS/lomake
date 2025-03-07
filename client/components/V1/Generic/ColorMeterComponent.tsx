@@ -161,7 +161,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
           <Tooltip title={t('common:green')} arrow>
-            <div style={{ backgroundColor: customColors.greenLight, flex: 1 }} />
+            <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
 
           {/* Inset shadow */}

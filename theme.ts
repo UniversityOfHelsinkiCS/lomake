@@ -134,7 +134,6 @@ export default theme
 export const customColors = {
   lightGreenLight: '#A2DA85',
   darkGreenLight: '#189E4A',
-  greenLight: '#22C55E',
   yellowLight: '#FFDA35',
   redLight: '#FF6C6C',
   grayLight: '#D8D9DA',
