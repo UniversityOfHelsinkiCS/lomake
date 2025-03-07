@@ -11,3 +11,11 @@ export interface Faculty {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface ReportData {
+    Vetovoimaisuus?: string
+    'Opintojen sujuvuus ja valmistuminen'?: string
+    'Palaute ja työllistyminen'?: string
+    'Resurssien käyttö'?: string
+    Toimenpiteet?: string
+}

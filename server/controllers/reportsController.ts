@@ -6,8 +6,7 @@ import { Op } from 'sequelize'
 import { updateWSAndClearEditors } from '../websocket.js'
 
 import type { Request, Response } from 'express'
-import { GroupKey } from '../../shared/lib/enums.js'
-
+import type { ReportData } from '@/shared/lib/types.js'
 interface ValidateOperationResponse {
   success: boolean
   error: string
@@ -15,16 +14,18 @@ interface ValidateOperationResponse {
   report: Report | null
   studyprogrammeId: number | null
   year: number | null
+  data: ReportData
 }
-
-interface ReportData {
-  [GroupKey: string]: any
+interface ReportResponse {
+  error?: string
+  data?: ReportData
+  success?: boolean
+  statusCode?: number
 }
 
 const validateOperation = async (req: Request): Promise<ValidateOperationResponse> => {
   const { studyprogrammeKey, year } = req.params
-
-  // TODO: validate body data
+  const data = req.body
 
   const resultObject: ValidateOperationResponse = {
     success: false,
@@ -33,6 +34,7 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     report: null,
     studyprogrammeId: null,
     year: null,
+    data: {},
   }
 
   if (!studyprogrammeKey) {
@@ -72,16 +74,38 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
     return resultObject
   }
 
+  if (!data) {
+    resultObject.error = 'Data is required'
+    resultObject.status = 400
+    return resultObject
+  }
+
+  const allowedKeys: (keyof ReportData)[] = [
+    'Vetovoimaisuus',
+    'Opintojen sujuvuus ja valmistuminen',
+    'Palaute ja työllistyminen',
+    'Resurssien käyttö',
+    'Toimenpiteet',
+  ]
+
+  const invalidKeys = Object.keys(data).filter(key => !allowedKeys.includes(key as keyof ReportData))
+  if (invalidKeys.length > 0) {
+    resultObject.error = `Invalid field(s): ${invalidKeys.join(', ')}`
+    resultObject.status = 400
+    return resultObject
+  }
+
   resultObject.success = true
   resultObject.report = report
   resultObject.studyprogrammeId = parseInt(studyprogramme.id)
   resultObject.year = parseInt(year)
   resultObject.status = 200
+  resultObject.data = data
 
   return resultObject
 }
 
-const getReports = async (req: Request, res: Response): Promise<ReportData> => {
+const getReports = async (req: Request, res: Response): Promise<ReportResponse> => {
   try {
     const { studyprogrammeKey } = req.params
 
@@ -98,7 +122,7 @@ const getReports = async (req: Request, res: Response): Promise<ReportData> => {
   }
 }
 
-const getReport = async (req: Request, res: Response): Promise<ReportData> => {
+const getReport = async (req: Request, res: Response): Promise<ReportResponse> => {
   try {
     const result = await validateOperation(req)
 
@@ -110,13 +134,12 @@ const getReport = async (req: Request, res: Response): Promise<ReportData> => {
   }
 }
 
-const updateReport = async (req: Request, res: Response) => {
+const updateReport = async (req: Request, res: Response): Promise<ReportResponse> => {
   try {
     const result = await validateOperation(req)
     if (!result.success) return res.status(result.status).json({ error: result.error })
 
-    const data = req.body
-    const { report, studyprogrammeId, year } = result
+    const { report, studyprogrammeId, year, data } = result
 
     const [_, updatedReport] = await Report.update(
       { data: { ...report.data, ...data } },

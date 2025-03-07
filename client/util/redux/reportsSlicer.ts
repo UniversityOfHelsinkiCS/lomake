@@ -3,6 +3,7 @@ import axios from 'axios'
 import { basePath, inProduction } from '../common'
 import { getHeaders as mockHeaders } from '../../../config/mockHeaders'
 import { Sentry } from '../sentry'
+import type { ReportData } from '@/shared/lib/types'
 
 const getHeaders = () => {
   return !inProduction ? mockHeaders() : {}
@@ -18,7 +19,7 @@ const alertSentry = (err: any, route: string, method: string, data: any) => {
   })
 }
 
-export const updateReportHttp = createAsyncThunk('reports/putData', async (payload: Record<string, any>, { rejectWithValue }) => {
+export const updateReportHttp = createAsyncThunk<ReportData, Record<string, any>>('reports/putData', async (payload, { rejectWithValue }) => {
   const { room, year, id, content } = payload
   try {
     const response = await axios.put(`${basePath}api/reports/${room}/${year}`,
@@ -37,7 +38,7 @@ export const updateReportHttp = createAsyncThunk('reports/putData', async (paylo
   }
 })
 
-export const getReport = createAsyncThunk('reports/getReport', async (payload: Record<string, any>, { rejectWithValue }) => {
+export const getReport = createAsyncThunk<ReportData, Record<string, any>>('reports/getReport', async (payload: Record<string, any>, { rejectWithValue }) => {
   const { studyprogrammeKey, year } = payload
   try {
     const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}/${year}`, {
@@ -53,7 +54,8 @@ export const getReport = createAsyncThunk('reports/getReport', async (payload: R
 })
 
 
-export const getReports = createAsyncThunk('reports/getReports', async (studyprogrammeKey: string, { rejectWithValue }) => {
+export const getReports = createAsyncThunk<ReportData, Record<string, any>>('reports/getReports', async (payload, { rejectWithValue }) => {
+  const { studyprogrammeKey } = payload
   try {
     const response = await axios.get(`${basePath}api/reports/${studyprogrammeKey}`, {
       headers: {
