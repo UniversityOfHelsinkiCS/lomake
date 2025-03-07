@@ -1,9 +1,9 @@
-export const formatKeyData = (data: any, programmeData: any, lang: string) => {
+export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
 
   const programmes = programmeData.map((programme: any) => ({
     key: programme.key,
-    name: programme.name[lang],
+    name: programme.name,
     level: programme.level,
     companionFaculties: programme.companionFaculties,
     international: programme.international,
@@ -15,7 +15,7 @@ export const formatKeyData = (data: any, programmeData: any, lang: string) => {
     )
     return {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: matchedProgramme ? matchedProgramme.name : kandiohjelma['Koulutusohjelman nimi'],
+      koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: kandiohjelma,
       vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
       lapivirtaus: kandiohjelma['Opintojen sujuvuus ja valmistuminen'],
@@ -31,6 +31,7 @@ export const formatKeyData = (data: any, programmeData: any, lang: string) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
+    console.log(maisteriohjelma)
     return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme ? matchedProgramme.name : maisteriohjelma['Koulutusohjelman nimi'],
@@ -48,7 +49,9 @@ export const formatKeyData = (data: any, programmeData: any, lang: string) => {
   const meta = metadata.map((m: any) => ({
     arviointialue: m['Arviointialue'],
     avainluvunArvo: m['Avainluvun nimi_fi'],
-    avainluvunNimi: m[`Avainluvun nimi_${lang}`],
+    avainluvunNimiSE: m[`Avainluvun nimi_se`],
+    avainluvunNimiEN: m[`Avainluvun nimi_en`],
+    avainluvunNimiFI: m[`Avainluvun nimi_fi`],
     maaritelma: m['Määritelmä_fi'],
     ohjelmanTaso: m['Ohjelman taso'],
     kynnysarvot: m['Kynnysarvot'],

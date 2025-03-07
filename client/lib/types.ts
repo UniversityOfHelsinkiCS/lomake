@@ -15,7 +15,7 @@ export interface SingleKeyData {
 
 export interface KeyDataProgramme {
   koulutusohjelmakoodi: string
-  koulutusohjelma: string
+  koulutusohjelma: Record<string, string>
   values: {
     [key: string]: number
   }

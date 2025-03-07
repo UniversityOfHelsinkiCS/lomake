@@ -29,7 +29,7 @@ const ProgrammeView = () => {
   const [activeTab, setActiveTab] = useState(0)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
-  const keyData = useFetchSingleKeyData(programmeKey, lang)
+  const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
@@ -88,7 +88,7 @@ const ProgrammeView = () => {
         </IconButton>
 
         <Typography variant="h2" style={{ paddingTop: '2rem' }}>
-          {programme.koulutusohjelma} {selectedYear}
+          {programme.koulutusohjelma[lang as any]} {selectedYear}
         </Typography>
       </div>
 

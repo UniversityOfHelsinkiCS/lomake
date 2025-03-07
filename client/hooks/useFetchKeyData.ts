@@ -4,8 +4,8 @@ import { fetchKeyData } from '../util/redux/keyDataReducer'
 import { RootState } from '../util/store'
 import type { SingleKeyData } from '../lib/types'
 
-export const useFetchSingleKeyData = (programmeId: string, lang: string): SingleKeyData => {
-  const keyData = useFetchKeyData(lang)
+export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
+  const keyData = useFetchKeyData()
 
   if (!keyData) {
     return null
@@ -19,12 +19,12 @@ export const useFetchSingleKeyData = (programmeId: string, lang: string): Single
   return { programme, metadata }
 }
 
-const useFetchKeyData = (lang: string) => {
+const useFetchKeyData = () => {
   const dispatch = useDispatch()
   const keyData = useSelector((state: RootState) => state.keyData.data)
 
   useEffect(() => {
-    dispatch(fetchKeyData(lang))
+    dispatch(fetchKeyData())
   }, [dispatch])
 
   if (!keyData) {

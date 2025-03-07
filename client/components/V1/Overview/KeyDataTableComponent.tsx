@@ -14,7 +14,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 
-import _ from 'lodash'
+import { orderBy } from 'lodash'
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
@@ -23,7 +23,7 @@ interface KeyDataTableProps {
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useSelector((state: { language: string }) => state.language)
-  const keyData = useFetchKeyData(lang)
+  const keyData = useFetchKeyData()
   const { t } = useTranslation()
 
   const [searchValue, setSearchValue] = useState<string>('')
@@ -50,6 +50,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
       // example: KH10_001, where K is the level, H10 is the faculty code
 
+    
+
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
       const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter)
@@ -60,18 +62,27 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     })
 
     // Sort by programme name or code
-    const sortedData = _.orderBy(filteredData, [sortIdentity], [sortDirection])
+    //const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
+
+    //console.log(sortedData)
+
+    console.log(filteredData)
 
     // Filter by search input
-    const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
+    const searchedData = filteredData.filter((programmeData: KeyDataProgramme) => {
+      if (typeof(programmeData.koulutusohjelma) === 'string') {
+        return []
+      } else if (typeof(programmeData.koulutusohjelma) === 'object' && !programmeData.koulutusohjelma[lang]) {
+        return []
+      }
       return (
-        programmeData.koulutusohjelma.toLowerCase().includes(searchValue.toLowerCase()) ||
+        programmeData.koulutusohjelma?.[lang]?.toLowerCase()?.includes(searchValue.toLowerCase()) ||
         programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
       )
     })
 
     return searchedData
-  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData, searchValue, sortIdentity, sortDirection])
+  }, [facultyFilter, programmeLevelFilter, yearFilter, programmeData, searchValue, sortIdentity, sortDirection, lang])
 
   const sortByProgrammeName = () => {
     if (sortIdentity !== 'koulutusohjelma') {
@@ -170,7 +181,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
               <TableCell itemAlign="left">
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                   <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
-                    <Typography variant="regular">{programmeData.koulutusohjelma}</Typography>
+                    <Typography variant="regular">{programmeData.koulutusohjelma?.[lang]}</Typography>
                   </Link>
                   <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
                     <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>

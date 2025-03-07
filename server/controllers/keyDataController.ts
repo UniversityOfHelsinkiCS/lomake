@@ -8,9 +8,8 @@ import { formatKeyData } from '../services/keyDataService.js'
 
 const getKeyData = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const lang = (req.query.lang as string) || 'fi'
     const keyData = await KeyData.findAll()
-    // @ts-ignore
+    // @ts-expect-error
     const programmeData = await db.studyprogramme.findAll({
       attributes: ['key', 'name', 'level', 'international'],
       include: ['primaryFaculty', 'companionFaculties'],
@@ -20,7 +19,7 @@ const getKeyData = async (req: Request, res: Response): Promise<Response> => {
       return res.status(404).json({ error: 'No key data found' })
     }
 
-    const formattedKeyData = formatKeyData(keyData[0].data, programmeData, lang)
+    const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
