@@ -13,7 +13,7 @@ const YearFilterComponent = () => {
   // TODO: figure out a policy how allowed years are determined
 
   // If an invalid year is selected, the user will see the year as an greyed out option and state will not be updated.
-  const allowedYears = ['2025', '2024', '2023', '2022']
+  const allowedYears = ['2025', '2024', '2023']
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     dispatch(clearLevelSpecificFilters())

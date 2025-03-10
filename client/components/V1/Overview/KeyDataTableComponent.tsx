@@ -69,7 +69,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
-      const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter)
+      const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
 
