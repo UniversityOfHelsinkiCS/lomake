@@ -21,6 +21,24 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
+// 🚨 This function is totally an ad-hoc fix for handling two types of 'koulutusohjelma' key from keyData.
+// Right now it incorrectly returns objects, strings and undefined values. 💀
+// It should only return objects in form of {fi: string, en: string, se: string}
+// Should not be needed when keyData is properly formatted.
+const extractProgrammeName = (koulutusohjelma: any, lang: string) => {
+  if (typeof koulutusohjelma === 'string') {
+    // Handle strings
+    return koulutusohjelma
+    // Handle unefined values
+  } else if (!koulutusohjelma?.[lang]) {
+    console.log('koulutusohjelma is missing language key:', koulutusohjelma)
+    return 'Undefined'
+  } else {
+    // Handle objects
+    return koulutusohjelma[lang]
+  }
+}
+
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
   const lang = useSelector((state: { language: string }) => state.language)
   const keyData = useFetchKeyData()
@@ -50,8 +68,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       // This filter assumes that kouluohjelmakoodi is in the format <Level><FacultyCode>_xxx
       // example: KH10_001, where K is the level, H10 is the faculty code
 
-    
-
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
       const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter)
@@ -66,13 +82,8 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
     // Filter by search input
     const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
-      if (typeof(programmeData.koulutusohjelma) === 'string') {
-        return []
-      } else if (typeof(programmeData.koulutusohjelma) === 'object' && !programmeData.koulutusohjelma[lang]) {
-        return []
-      }
       return (
-        programmeData.koulutusohjelma?.[lang]?.toLowerCase()?.includes(searchValue.toLowerCase()) ||
+        extractProgrammeName(programmeData.koulutusohjelma, lang).toLowerCase()?.includes(searchValue.toLowerCase()) ||
         programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
       )
     })
@@ -125,6 +136,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       </div>
 
       {/* Key Figure Data Table */}
+      {/* Table Header */}
       <Table>
         <TableRow isHeader>
           <TableCell>
@@ -171,13 +183,16 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
           </TableCell>
         </TableRow>
 
+        {/* Table Body */}
         {keyFigureData.length > 0 ? (
           keyFigureData.map((programmeData: KeyDataProgramme) => (
             <TableRow key={programmeData.koulutusohjelmakoodi}>
               <TableCell itemAlign="left">
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                   <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
-                    <Typography variant="regular">{programmeData.koulutusohjelma?.[lang]}</Typography>
+                    <Typography variant="regular">
+                      {extractProgrammeName(programmeData.koulutusohjelma, lang)}
+                    </Typography>
                   </Link>
                   <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
                     <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
