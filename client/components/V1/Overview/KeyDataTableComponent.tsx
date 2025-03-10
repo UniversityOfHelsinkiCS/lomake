@@ -31,7 +31,6 @@ const extractProgrammeName = (koulutusohjelma: any, lang: string) => {
     return koulutusohjelma
     // Handle unefined values
   } else if (!koulutusohjelma?.[lang]) {
-    console.log('koulutusohjelma is missing language key:', koulutusohjelma)
     return 'Undefined'
   } else {
     // Handle objects
