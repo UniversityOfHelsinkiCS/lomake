@@ -31,7 +31,7 @@ export interface KeyDataProgramme {
 export interface KeyDataMetadata {
   arviointialue: string
   avainluvunArvo: string
-  avainluvunNimi: string
+  avainluvunNimi: Record<string, string>
   maaritelma: string
   ohjelmanTaso: string
   kynnysarvot: string

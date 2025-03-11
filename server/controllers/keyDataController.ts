@@ -6,7 +6,7 @@ import db from '../models/index.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
 
-const getKeyData = async (req: Request, res: Response): Promise<Response> => {
+const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll()
     // @ts-expect-error

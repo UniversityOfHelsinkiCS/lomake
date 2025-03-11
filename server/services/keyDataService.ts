@@ -48,9 +48,11 @@ export const formatKeyData = (data: any, programmeData: any) => {
   const meta = metadata.map((m: any) => ({
     arviointialue: m['Arviointialue'],
     avainluvunArvo: m['Avainluvun nimi_fi'],
-    avainluvunNimiSE: m[`Avainluvun nimi_se`],
-    avainluvunNimiEN: m[`Avainluvun nimi_en`],
-    avainluvunNimiFI: m[`Avainluvun nimi_fi`],
+    avainluvunNimi: {
+      fi: m[`Avainluvun nimi_fi`],
+      se: m[`Avainluvun nimi_se`],
+      en: m[`Avainluvun nimi_en`],
+    },
     maaritelma: m['Määritelmä_fi'],
     ohjelmanTaso: m['Ohjelman taso'],
     kynnysarvot: m['Kynnysarvot'],

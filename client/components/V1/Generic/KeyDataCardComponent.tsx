@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState} from 'react'
+import { useSelector } from 'react-redux'
 import { Box, Card, CardActionArea, Typography } from '@mui/material'
 import { calculateColor, calculateValue } from '../Utils/util'
 
@@ -32,8 +33,10 @@ interface CriteriaCardProps {
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
-  const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
+  const lang = useSelector((state: { language: string }) => state.language)
 
+  const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
+  console.log('CriteriaGroup', meta)
   return (
     <Box
       sx={{
@@ -55,8 +58,8 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 
         return (
           <CriteriaCard
-            key={data.avainluvunNimi}
-            title={data.avainluvunNimi}
+            key={data.avainluvunNimi[lang]}
+            title={data.avainluvunNimi[lang]}
             description={data.maaritelma}
             hasTrafficLight={data.liikennevalo}
             value={valueText}
@@ -121,6 +124,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
+  console.log('KeyDataCard', props)
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
