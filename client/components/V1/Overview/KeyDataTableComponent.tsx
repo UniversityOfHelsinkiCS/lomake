@@ -25,7 +25,7 @@ interface KeyDataTableProps {
 // Right now it incorrectly returns objects, strings and undefined values. 💀
 // It should only return objects in form of {fi: string, en: string, se: string}
 // Should not be needed when keyData is properly formatted.
-const extractProgrammeName = (koulutusohjelma: any, lang: string) => {
+export const extractProgrammeName = (koulutusohjelma: any, lang: string) => {
   if (typeof koulutusohjelma === 'string') {
     // Handle strings
     return koulutusohjelma
