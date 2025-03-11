@@ -383,6 +383,17 @@ const data = [
         international: false,
       },
       {
+        key: 'MH30_006',
+        name: {
+          fi: 'Terveydenhuollon kehittämisen maisteriohjelma',
+          en: 'Master’s Programme in Health Care Development',
+          se: 'Magisterprogrammet i hälsovårdsutveckling',
+        },
+        level: 'master',
+        companionFaculties: [],
+        international: false,
+      },
+      {
         key: 'MH30_002',
         name: {
           fi: 'Translationaalisen lääketieteen maisteriohjelma (Translational Medicine)',
