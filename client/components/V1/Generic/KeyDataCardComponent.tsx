@@ -73,7 +73,6 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 }
 
 const CriteriaCard = (props: CriteriaCardProps) => {
-  console.log(props)
   const [showDescription, setShowDescription] = useState(false)
 
   const handleClick = () => {
