@@ -9,7 +9,6 @@ import { formatKeyData } from '../services/keyDataService.js'
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll()
-    console.log(JSON.stringify(keyData, null, 2))
     // @ts-expect-error
     const programmeData = await db.studyprogramme.findAll({
       attributes: ['key', 'name', 'level', 'international'],
