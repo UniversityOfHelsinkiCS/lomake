@@ -91,7 +91,7 @@ describe('ReportPage tests', () => {
     cy.get('[data-cy=report-select-all-accordion]').click()
     cy.get('[data-cy=report-select-all]').should('contain', 'all')
     cy.get('[data-cy=report-select-all]').click()
-    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 65')
+    cy.get('[data-cy=answered-label-language_environment_text]').contains('/ 66')
   })
 
   it('Filtering works for faculty level', () => {
