@@ -3,7 +3,6 @@ import { customColors } from '@/theme'
 import { useTranslation } from 'react-i18next'
 import { Tooltip, Typography } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import { light } from '@mui/material/styles/createPalette'
 
 interface ColorMeterProps {
   display: boolean
