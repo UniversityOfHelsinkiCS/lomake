@@ -3,6 +3,7 @@ import { customColors } from '@/theme'
 import { useTranslation } from 'react-i18next'
 import { Tooltip, Typography } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import { light } from '@mui/material/styles/createPalette'
 
 interface ColorMeterProps {
   display: boolean
@@ -63,8 +64,7 @@ const checkOrdering = (thresholds: number[]): 'asc' | 'desc' | 'error' => {
 export default function ColorMeterComponent({ display, value, thresholds, unit }: ColorMeterProps) {
   const { t } = useTranslation()
 
-  const [lowerThreshold, setLowerThreshold] = useState<string>('')
-  const [upperThreshold, setUpperThreshold] = useState<string>('')
+  const [thresholdValues, setThresholdValues] = useState<string[]>(['', '', ''])
   const [interpolatedValue, setInterpolatedValue] = useState<number>(50)
   const [error, setError] = useState<boolean>(false)
 
@@ -80,7 +80,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
       return
     }
 
-    if (thresholdSplit.length !== 3) {
+    if (thresholdSplit.length !== 4) {
       console.error('Thresholds are not in correct format')
       setError(true)
       return
@@ -94,25 +94,29 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
     }
 
     const redThres = thresholdSplit[0]
-    const yellowThres = unit === '%' ? thresholdSplit[1] * 100 : thresholdSplit[1]
-    const greenThres = unit === '%' ? thresholdSplit[2] * 100 : thresholdSplit[2]
+    const yellowThres = unit === '%' ? thresholdSplit[1]: thresholdSplit[1]
+    const lightGreenThres = unit === '%' ? thresholdSplit[2]: thresholdSplit[2]
+    const greenThres = unit === '%' ? thresholdSplit[3]: thresholdSplit[3]
     const minmax = unit === '%' ? 100 : 1000 // 1000 is an arbitrary adhoc solution for thresholds without maximum
 
     let thresholdsArr: number[] = []
 
     if (order === 'asc') {
-      thresholdsArr = [redThres, yellowThres, greenThres, minmax]
+      thresholdsArr = [redThres, yellowThres, lightGreenThres,greenThres, minmax]
     } else if (order === 'desc') {
-      thresholdsArr = [minmax, redThres, yellowThres, greenThres]
+      thresholdsArr = [minmax, redThres, yellowThres, lightGreenThres,greenThres]
     }
 
     const parsedValue = parseFloat(value.replace(',', '.'))
     const meterValue = interpolateToMeter(parsedValue, thresholdsArr)
 
-    setLowerThreshold(yellowThres.toString() + (unit === '%' ? '%' : ''))
-    setUpperThreshold(greenThres.toString() + (unit === '%' ? '%' : ''))
+    setThresholdValues([
+      yellowThres.toString() + (unit === '%' ? '%' : ''),
+      lightGreenThres.toString() + (unit === '%' ? '%' : ''),
+      greenThres.toString() + (unit === '%' ? '%' : '')
+    ])
     setInterpolatedValue(order === 'asc' ? meterValue : 100 - meterValue)
-  }, [display])
+  }, [display, value, thresholds, unit])
 
   if (!display)
     return (
@@ -160,8 +164,11 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
           <Tooltip title={t('common:yellow')} arrow>
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip title={t('common:green')} arrow>
+          <Tooltip title={t('common:lightGreen')} arrow>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
+          </Tooltip>
+          <Tooltip title={t('common:green')} arrow>
+            <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
           {/* Inset shadow */}
@@ -188,15 +195,21 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
         >
           <Typography
             variant="lightSmall"
-            sx={{ position: 'absolute', left: `calc(100%/3)`, transform: 'translateX(-50%)' }}
+            sx={{ position: 'absolute', left: `calc(100%/4)`, transform: 'translateX(-50%)' }}
           >
-            {lowerThreshold}
+            {thresholdValues[0]}
           </Typography>
           <Typography
             variant="lightSmall"
-            sx={{ position: 'absolute', left: `calc((100%/3)*2)`, transform: 'translateX(-50%)' }}
+            sx={{ position: 'absolute', left: `calc((100%/4)*2)`, transform: 'translateX(-50%)' }}
           >
-            {upperThreshold}
+            {thresholdValues[1]}
+          </Typography>
+          <Typography
+            variant="lightSmall"
+            sx={{ position: 'absolute', left: `calc((100%/4)*3)`, transform: 'translateX(-50%)' }}
+          >
+            {thresholdValues[2]}
           </Typography>
         </div>
       </div>

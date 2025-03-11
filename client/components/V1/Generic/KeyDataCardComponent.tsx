@@ -36,7 +36,6 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
   const lang = useSelector((state: { language: string }) => state.language)
 
   const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
-  console.log('CriteriaGroup', meta)
   return (
     <Box
       sx={{
@@ -74,6 +73,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 }
 
 const CriteriaCard = (props: CriteriaCardProps) => {
+  console.log(props)
   const [showDescription, setShowDescription] = useState(false)
 
   const handleClick = () => {
@@ -124,7 +124,6 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
-  console.log('KeyDataCard', props)
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
