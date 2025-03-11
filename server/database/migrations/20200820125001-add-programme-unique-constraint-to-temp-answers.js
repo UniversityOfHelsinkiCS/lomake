@@ -1,5 +1,3 @@
-import { DataTypes } from 'sequelize'
-
 export const up = ({ context: queryInterface }) => {
   return queryInterface.addConstraint('temp_answers', {
     fields: ['programme'],

@@ -1,5 +1,6 @@
 import db from '../models/index.js'
 import logger from '../util/logger.js'
+// eslint-disable-next-line
 import { cypressUsers } from '../../config/common.js'
 
 const createCypressUsers = async () => {

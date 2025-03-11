@@ -38,7 +38,7 @@ describe('Textfield tests', () => {
   it('Should indicate that the field is locked to you', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     const id = `Vetovoimaisuus-Comment`
-    cy.get(`[data-cy=edit-${id}]`).click().wait(500)
+    cy.get(`[data-cy=edit-${id}]`).click()
     cy.contains('Press the button to release the field for others to edit!').should('exist')
     cy.get(`[data-cy=save-${id}]`).click()
   })

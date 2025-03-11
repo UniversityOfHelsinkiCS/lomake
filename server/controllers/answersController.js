@@ -38,8 +38,6 @@ const getAllTempUserHasAccessTo = async (req, res) => {
 
     const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
 
-    // normal user route
-    const awaitYear = await whereDraftYear()
     const anyAccess = hasAnyAccess(req.user)
     const data = await db.tempAnswer.findAll({
       where: {
@@ -641,7 +639,6 @@ const getFacultyTempAnswersByForm = async (req, res) => {
     return res.status(500).json({ error: 'Database error' })
   }
 }
-
 
 export default {
   getAll,

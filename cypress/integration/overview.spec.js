@@ -1,5 +1,4 @@
 describe('Overview page test', () => {
-  
   beforeEach(() => {
     cy.login('cypressSuperAdminUser')
     cy.request(`/api/cypress/initKeyData`)
@@ -7,68 +6,67 @@ describe('Overview page test', () => {
   })
 
   describe('Testing keydatatable filtering controls', () => {
-
     describe('Test programme level filters', () => {
-
       it('Displays correct programme level options', () => {
         cy.get('[data-cy="level-filter"]').click()
 
         const programmes = [
-          "All programmes",
+          'All programmes',
           "Bachelor's programmes",
           "Master's programmes",
-          "Doctoral programmes",
-          "International Master's programmes"
+          'Doctoral programmes',
+          "International Master's programmes",
         ]
 
-        cy.get('[data-cy="level-filter-option"]').should('have.length', programmes.length).then(($options) => {
-          $options.each((index, $option) => {
-            expect($option).to.contain(programmes[index])
+        cy.get('[data-cy="level-filter-option"]')
+          .should('have.length', programmes.length)
+          .then($options => {
+            $options.each((index, $option) => {
+              expect($option).to.contain(programmes[index])
+            })
           })
-        })
       })
 
       it('Displays correct faculty options', () => {
         cy.get('[data-cy="faculty-filter"]').click()
-        
+
         const faculties = [
-          "All faculties",
-          "Faculty of Agriculture and Forestry",
-          "Faculty of Arts",
-          "Faculty of Biological and Environmental Sciences",
-          "Faculty of Educational Sciences",
-          "Faculty of Law", 
-          "Faculty of Medicine", 
-          "Faculty of Pharmacy",
-          "Faculty of Science",
-          "Faculty of Social Sciences",
-          "Faculty of Theology", 
-          "Faculty of Veterinary Medicine",
-          "Swedish School of Social Science",
+          'All faculties',
+          'Faculty of Agriculture and Forestry',
+          'Faculty of Arts',
+          'Faculty of Biological and Environmental Sciences',
+          'Faculty of Educational Sciences',
+          'Faculty of Law',
+          'Faculty of Medicine',
+          'Faculty of Pharmacy',
+          'Faculty of Science',
+          'Faculty of Social Sciences',
+          'Faculty of Theology',
+          'Faculty of Veterinary Medicine',
+          'Swedish School of Social Science',
         ].sort()
 
-
-        cy.get('[data-cy="faculty-filter-option"]').should('have.length', faculties.length).then(($options) => {
-          $options.each((index, $option) => {
-            expect($option).to.contain(faculties[index])
+        cy.get('[data-cy="faculty-filter-option"]')
+          .should('have.length', faculties.length)
+          .then($options => {
+            $options.each((index, $option) => {
+              expect($option).to.contain(faculties[index])
+            })
           })
-        })
       })
 
       it('Displays correct year options', () => {
         cy.get('[data-cy="year-filter"]').click()
-        
-        const years = [
-          "2025",
-          "2024",
-          "2023",
-        ]
 
-        cy.get('[data-cy="year-filter-option"]').should('have.length', years.length).then(($options) => {
-          $options.each((index, $option) => {
-            expect($option).to.contain(years[index])
+        const years = ['2025', '2024', '2023']
+
+        cy.get('[data-cy="year-filter-option"]')
+          .should('have.length', years.length)
+          .then($options => {
+            $options.each((index, $option) => {
+              expect($option).to.contain(years[index])
+            })
           })
-        })
       })
     })
 
@@ -94,7 +92,6 @@ describe('Overview page test', () => {
     // it.skip('Sorts programmes by code', () => {
     //   expect(true).to.equal(true)
     // })
-
   })
 
   // describe('Testing keydata modals', () => {
@@ -113,4 +110,3 @@ describe('Overview page test', () => {
 
   // })
 })
-

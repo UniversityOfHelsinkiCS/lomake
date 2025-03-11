@@ -132,7 +132,7 @@ Cypress.Commands.add('typeInEditor', (questionId, textToBeTyped, flakyness = 24)
     .wait(500 * attempt)
     .find('[contenteditable]')
     .focus()
-    // TRUST ME THIS IS NEEDED
+  // TRUST ME THIS IS NEEDED
   cy.get(`[data-cy=textarea-${questionId}]`)
     .find('[contenteditable]')
     .click()
@@ -171,7 +171,6 @@ Cypress.Commands.add('typeInTextField', (id, textToBeTyped) => {
   cy.get(`[data-cy=edit-${id}]`)
     .click()
     .wait(500 * attempt)
-  
-  cy.get(`[data-cy=editor-${id}]`)
-    .type(textToBeTyped, { delay: 0 })
+
+  cy.get(`[data-cy=editor-${id}]`).type(textToBeTyped, { delay: 0 })
 })

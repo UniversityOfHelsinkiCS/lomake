@@ -35,7 +35,7 @@ const updateReports = store => event => {
   store.dispatch({ type: 'reports/putData/fulfilled', payload: event })
 }
 
-export const setupSocketListeners = (socket) => {
+export const setupSocketListeners = socket => {
   if (!window.location.href.endsWith('/individual')) {
     socket.on('new_form_data', updateForm(store))
     socket.on('update_editors', updateEditors(store))
