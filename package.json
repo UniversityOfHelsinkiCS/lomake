@@ -13,7 +13,8 @@
     "cypress:open": "cypress open --e2e",
     "cypress:run": "cypress run --headless",
     "translations": "node ./scripts/analyzeTranslations.js",
-    "seed": "cross-env NODE_ENV=development node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts seed"
+    "seed": "cross-env NODE_ENV=development node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm server/index.ts seed",
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=20"
@@ -112,7 +113,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^9.1.4",
+    "husky": "^8.0.0",
     "immer": "^10.1.1",
     "minimist": "^1.2.8",
     "nodemon": "^3.1.0",
