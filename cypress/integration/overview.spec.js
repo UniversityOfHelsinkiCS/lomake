@@ -62,7 +62,6 @@ describe('Overview page test', () => {
           "2025",
           "2024",
           "2023",
-          "2022",
         ]
 
         cy.get('[data-cy="year-filter-option"]').should('have.length', years.length).then(($options) => {
