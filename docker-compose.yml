@@ -13,7 +13,7 @@ services:
       - 8000:8000
     container_name: lomake_dev
   db:
-    image: postgres:13.19
+    image: postgres:13.20
     container_name: lomake_db
     environment:
       - PGDATA=/data
@@ -27,7 +27,7 @@ services:
     environment:
       - ADMINER_DESIGN=pepa-linha
       - ADMINER_DEFAULT_SERVER=lomake_db
-    image: adminer:4.8.1
+    image: adminer:4.17.1
     ports:
       - 8080:8080 # localhost:8080/?pgsql=db&username=postgres&db=postgres&ns=public
 
