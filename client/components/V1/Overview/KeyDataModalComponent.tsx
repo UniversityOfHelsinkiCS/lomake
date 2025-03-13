@@ -16,8 +16,6 @@ import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
 
-import { extractProgrammeName } from './KeyDataTableComponent'
-
 export interface selectedKeyFigureData {
   programme: KeyDataProgramme
   metadata: KeyDataMetadata[]
@@ -81,7 +79,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
       ) : (
         <>
           <Typography variant="h5" color="textSecondary">
-            {extractProgrammeName(programme.koulutusohjelma, lang)} {year}
+            {programme.koulutusohjelma[lang]} {year}
           </Typography>
           <KeyDataCard
             level={getLevel(programme.koulutusohjelmakoodi)}
