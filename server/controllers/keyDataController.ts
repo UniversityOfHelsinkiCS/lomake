@@ -7,7 +7,12 @@ import { formatKeyData } from '../services/keyDataService.js'
 
 // Validations
 import { ZodError } from 'zod'
-import { MetadataSchema, KandiohjelmatSchema, logZodError } from '../../shared/lib/validations.js'
+import {
+  MetadataSchema,
+  KandiohjelmatSchema,
+  MaisteriohjelmatSchema,
+  logZodError,
+} from '../../shared/lib/validations.js'
 
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
@@ -27,10 +32,7 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     try {
       KandiohjelmatSchema.parse(formattedKeyData.kandiohjelmat)
-
-      // 🚨 ERROR in maisteriohjelmat data.xslx format.
-      // Invalid keys in data.xlsx: Aloituspaikat', 'Opetuksen linjakkuus', 'Opintojen kiinnostavuus', 'Oppimista edistävä palaute', 'Valmistuminen tavoiteajan jälkeen'
-      // MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
+      MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
       MetadataSchema.parse(formattedKeyData.metadata)
     } catch (zodError) {
       logZodError(zodError as ZodError)

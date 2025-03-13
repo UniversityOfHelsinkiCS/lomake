@@ -2,15 +2,13 @@ import { z, ZodError } from 'zod'
 
 const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
-const DataValuesSchema = z
+const KandiohjelmatValuesSchema = z
   .object({
     // Perustiedot
     'Koulutusohjelman koodi': z.string(),
     'Koulutusohjelman nimi': z.string(),
 
-    // Avainluvut: 🚨 NONE OF THE 'Avainluvut' SHOULD BE OPTIONAL. BUT IT IS, BECAUSE DATA.XLSX IS MISSING SOME INFORMATION
-    // Eroavaisuus kandin ja maisteri ohjelmien välillä: Maisterin avaimet:
-    // Aloituspaikat', 'Opetuksen linjakkuus', 'Opintojen kiinnostavuus', 'Oppimista edistävä palaute', 'Valmistuminen tavoiteajan jälkeen'
+    // Kandiohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL MAYBE?
     Hakupaine: z.number().optional(),
     'Ensisijaiset hakijat': z.number().optional(),
     'Aloituspaikkojen täyttö': z.number().optional(),
@@ -34,6 +32,37 @@ const DataValuesSchema = z
   })
   .strict() // to disallow extra keys
 
+const MaisteriohjelmatValuesSchema = z
+  .object({
+    // Perustiedot
+    'Koulutusohjelman koodi': z.string(),
+    'Koulutusohjelman nimi': z.string(),
+
+    // Maisteriohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL MAYBE?
+    Hakijat: z.number().optional(),
+    Hakupaine: z.number().optional(),
+    Aloituspaikat: z.number().optional(),
+    'Opintonsa aloittaneet': z.number().optional(),
+    Tutkinnot: z.number().optional(),
+    'Tavoiteajassa valmistuminen': z.number().optional(),
+    'Valmistuminen tavoiteajan jälkeen': z.number().optional(),
+    'Läsnäolevien kasautuminen': z.number().optional(),
+    'Opetuksen linjakkuus': z.number().optional(),
+    'Oppimista edistävä palaute': z.number().optional(),
+    'Opintojen kiinnostavuus': z.number().optional(),
+    Työllistyminen: z.number().optional(),
+
+    // Liikennevalot
+    Vetovoimaisuus: LiikennevalotEnum,
+    'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
+    'Palaute ja työllistyminen': LiikennevalotEnum,
+    'Resurssien käyttö': LiikennevalotEnum,
+
+    // Muut
+    Vuosi: z.number().int(),
+  })
+  .strict() // to disallow extra keys
+
 export const KandiohjelmatSchema = z
   .object({
     koulutusohjelmakoodi: z.string().startsWith('K'),
@@ -43,16 +72,15 @@ export const KandiohjelmatSchema = z
         se: z.string(),
         en: z.string(),
       })
-      .strict()
-      .optional(), // this should NOT be optional, but is now to pass the validation
-    values: DataValuesSchema,
+      .strict(),
+    values: KandiohjelmatValuesSchema,
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
     resurssit: z.string(),
     year: z.number().int(),
-    international: z.boolean().optional(), // should these be optional?
-    level: z.string().optional(), // should these be optional?
+    international: z.boolean().optional(),
+    level: z.string().optional(),
   })
   .strict() // to disallow extra keys
   .array()
@@ -66,16 +94,15 @@ export const MaisteriohjelmatSchema = z
         se: z.string(),
         en: z.string(),
       })
-      .strict()
-      .optional(), // this should NOT be optional, but is now to pass the validation
-    values: DataValuesSchema,
+      .strict(),
+    values: MaisteriohjelmatValuesSchema,
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
     resurssit: z.string(),
     year: z.number().int(),
-    international: z.boolean().optional(), // should these be optional?
-    level: z.string().optional(), // should these be optional?
+    international: z.boolean().optional(),
+    level: z.string().optional(),
   })
   .strict() // to disallow extra keys
   .array()
@@ -91,12 +118,13 @@ export const MetadataSchema = z
       })
       .strict(),
     avainluvunArvo: z.string(),
-    maaritelma: z.string(), //🚨 SHOULD NOT BE FORMATTED LIKE THIS, but data.xlsx is not yet ready
-    // maaritelma: z.object({ //🚨 INSTEAD, maaritelma SHOULD BE FORMATTED LIKE THIS
-    //     fi: z.string(),
-    //     se: z.string(),
-    //     en: z.string(),
-    // }).strict(),
+    maaritelma: z
+      .object({
+        fi: z.string(),
+        se: z.string().optional(), // delete optional when updated
+        en: z.string().optional(), // delete optional when updated
+      })
+      .strict(),
     ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
     kynnysarvot: z
       .string()

@@ -33,7 +33,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     )
     return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
-      koulutusohjelma: matchedProgramme ? matchedProgramme.name : maisteriohjelma['Koulutusohjelman nimi'],
+      koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: maisteriohjelma,
       vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
       lapivirtaus: maisteriohjelma['Opintojen sujuvuus ja valmistuminen'],
@@ -53,7 +53,11 @@ export const formatKeyData = (data: any, programmeData: any) => {
       se: m[`Avainluvun nimi_se`],
       en: m[`Avainluvun nimi_en`],
     },
-    maaritelma: m['Määritelmä_fi'],
+    maaritelma: {
+      fi: m[`Määritelmä_fi`],
+      se: m[`Määritelmä_se`],
+      en: m[`Määritelmä_en`],
+    },
     ohjelmanTaso: m['Ohjelman taso'],
     kynnysarvot: m['Kynnysarvot'],
     yksikko: m['Yksikkö'],
