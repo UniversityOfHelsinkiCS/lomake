@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Card, CardActionArea, Typography } from '@mui/material'
 import { calculateColor, calculateValue } from '../Utils/util'
@@ -28,6 +28,7 @@ interface CriteriaCardProps {
   hasTrafficLight: boolean
   value: string
   thresholds: string
+  limits: string
   unit: string
   color: string
 }
@@ -63,6 +64,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
             hasTrafficLight={data.liikennevalo}
             value={valueText}
             thresholds={data.kynnysarvot}
+            limits={data.mittarinRajat}
             unit={data.yksikko}
             color={color}
           />
@@ -113,6 +115,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
               display={props.hasTrafficLight}
               value={props.value}
               thresholds={props.thresholds}
+              limits={props.limits}
               unit={props.unit}
             />
           </div>

@@ -8,6 +8,7 @@ interface ColorMeterProps {
   display: boolean
   value: string
   thresholds: string
+  limits: string
   unit: string | undefined
 }
 
@@ -17,7 +18,7 @@ interface ColorMeterProps {
  *
  * @returns new value in the new range
  */
-const linScale = (value: number, a1: number, a2: number, b1: number, b2: number) => {
+const linScale = (value: number, a1: number, a2: number, b1: number, b2: number): number => {
   return ((value - a1) / (a2 - a1)) * (b2 - b1) + b1
 }
 
@@ -27,15 +28,37 @@ const linScale = (value: number, a1: number, a2: number, b1: number, b2: number)
  * Thresholds is an array of the threshold values.
  * Returns a number between ranges 0-100%, to be used in positioning the arrow in meter
  *
- * @returns number between 0-100%, a position in the range meter
+ * @returns number between 0-100, a position in the color meter
  */
-const interpolateToMeter = (value: number, thresholds: number[]) => {
-  const meterFrac = 100 / (thresholds.length - 1) // size of each color in the meter
-  for (let i = 1; i < thresholds.length; i++) {
-    if (value >= thresholds[i - 1] && value <= thresholds[i]) {
-      return linScale(value, thresholds[i - 1], thresholds[i], meterFrac * (i - 1), meterFrac * i)
+const interpolateToMeter = (value: number, thresholds: number[], order: 'asc' | 'desc'): number => {
+  let meterValue: number | null = null
+
+  const min = thresholds[0]
+  const max = thresholds[thresholds.length - 1]
+
+  if (value <= (order === 'asc' ? min : max)) {
+    meterValue = 0
+  } else if (value >= (order === 'asc' ? max : min)) {
+    meterValue = 100
+  } else {
+    const meterFrac = 100 / (thresholds.length - 1) // size of each color in the meter
+
+    if (order === 'asc') {
+      for (let i = 1; i < thresholds.length; i++) {
+        if (value >= thresholds[i - 1] && value <= thresholds[i]) {
+          meterValue = linScale(value, thresholds[i - 1], thresholds[i], meterFrac * (i - 1), meterFrac * i)
+        }
+      }
+    } else {
+      for (let i = 1; i < thresholds.length; i++) {
+        if (value <= thresholds[i - 1] && value >= thresholds[i]) {
+          meterValue = linScale(value, thresholds[i - 1], thresholds[i], meterFrac * (i - 1), meterFrac * i)
+        }
+      }
     }
   }
+
+  return meterValue
 }
 
 /**
@@ -60,7 +83,7 @@ const checkOrdering = (thresholds: number[]): 'asc' | 'desc' | 'error' => {
   return 'error'
 }
 
-export default function ColorMeterComponent({ display, value, thresholds, unit }: ColorMeterProps) {
+export default function ColorMeterComponent({ display, value, thresholds, limits, unit }: ColorMeterProps) {
   const { t } = useTranslation()
 
   const [thresholdValues, setThresholdValues] = useState<string[]>(['', '', ''])
@@ -68,11 +91,12 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
   const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!display) return
+    if (!display || value == 'Ei dataa') return
 
     const thresholdSplit = thresholds.split(';').map((t: string) => parseFloat(t.replace(',', '.')))
     const order = checkOrdering(thresholdSplit)
 
+    // TODO: CHECKS ARE REDUNDANT AFTER ZOD VALIDATION IMPLEMENTATION
     if (order === 'error') {
       console.error('Thresholds are not in order')
       setError(true)
@@ -85,39 +109,35 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
       return
     }
 
-    if (order === 'desc') {
-      // TODO: Delete this when keydata criteria thesholds are fixed in data.xlsx
-      console.error('Descending thresholds are not supported')
-      setError(true)
-      return
-    }
-
     const redThres = thresholdSplit[0]
-    const yellowThres = unit === '%' ? thresholdSplit[1]: thresholdSplit[1]
-    const lightGreenThres = unit === '%' ? thresholdSplit[2]: thresholdSplit[2]
-    const greenThres = unit === '%' ? thresholdSplit[3]: thresholdSplit[3]
-    const minmax = unit === '%' ? 100 : 1000 // 1000 is an arbitrary adhoc solution for thresholds without maximum
+    const yellowThres = thresholdSplit[1]
+    const lightGreenThres = thresholdSplit[2]
+    const darkGreenThres = thresholdSplit[3]
+
+    const limitSplit = limits.split(';').map((t: string) => parseFloat(t.replace(',', '.')))
+    const min = limitSplit[0]
+    const max = limitSplit[1]
 
     let thresholdsArr: number[] = []
 
     if (order === 'asc') {
-      thresholdsArr = [redThres, yellowThres, lightGreenThres,greenThres, minmax]
+      thresholdsArr = [min, yellowThres, lightGreenThres, darkGreenThres, max]
     } else if (order === 'desc') {
-      thresholdsArr = [minmax, redThres, yellowThres, lightGreenThres,greenThres]
+      thresholdsArr = [max, yellowThres, lightGreenThres, darkGreenThres, min]
     }
 
     const parsedValue = parseFloat(value.replace(',', '.'))
-    const meterValue = interpolateToMeter(parsedValue, thresholdsArr)
+    const meterValue = interpolateToMeter(parsedValue, thresholdsArr, order)
 
     setThresholdValues([
       yellowThres.toString() + (unit === '%' ? '%' : ''),
       lightGreenThres.toString() + (unit === '%' ? '%' : ''),
-      greenThres.toString() + (unit === '%' ? '%' : '')
+      darkGreenThres.toString() + (unit === '%' ? '%' : ''),
     ])
-    setInterpolatedValue(order === 'asc' ? meterValue : 100 - meterValue)
+    setInterpolatedValue(meterValue)
   }, [display, value, thresholds, unit])
 
-  if (!display)
+  if (!display || value == 'Ei dataa')
     return (
       <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
         <Typography variant="italic" color="textSecondary">
@@ -129,7 +149,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
   if (error) {
     return (
       <div style={{ padding: '2.5rem 0', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="regular" color="error">
+        <Typography variant="lightSmall" color="error">
           {t('keyData:colormeterError')}
         </Typography>
       </div>
@@ -157,7 +177,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
             position: 'relative',
           }}
         >
-          <Tooltip title={t('common:red')} arrow>
+          <Tooltip title={`${t('common:red')} `} arrow>
             <div style={{ backgroundColor: customColors.redLight, flex: 1 }} />
           </Tooltip>
           <Tooltip title={t('common:yellow')} arrow>
@@ -166,7 +186,7 @@ export default function ColorMeterComponent({ display, value, thresholds, unit }
           <Tooltip title={t('common:lightGreen')} arrow>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip title={t('common:green')} arrow>
+          <Tooltip title={t('common:darkGreen')} arrow>
             <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
