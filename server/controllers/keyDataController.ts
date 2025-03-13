@@ -30,14 +30,14 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
-    try {
-      KandiohjelmatSchema.parse(formattedKeyData.kandiohjelmat)
-      MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
-      MetadataSchema.parse(formattedKeyData.metadata)
-    } catch (zodError) {
-      logZodError(zodError as ZodError)
-      throw new Error('Invalid KeyData format')
-    }
+    // try {
+    //   KandiohjelmatSchema.parse(formattedKeyData.kandiohjelmat)
+    //   MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
+    //   MetadataSchema.parse(formattedKeyData.metadata)
+    // } catch (zodError) {
+    //   logZodError(zodError as ZodError)
+    //   throw new Error('Invalid KeyData format')
+    // }
 
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
