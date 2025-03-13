@@ -32,7 +32,7 @@ export interface KeyDataMetadata {
   arviointialue: string
   avainluvunArvo: string
   avainluvunNimi: Record<string, string>
-  maaritelma: string
+  maaritelma: Record<string, string>
   ohjelmanTaso: string
   kynnysarvot: string
   yksikko: string
