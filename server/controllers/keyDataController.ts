@@ -9,8 +9,9 @@ import { formatKeyData } from '../services/keyDataService.js'
 import { ZodError } from 'zod'
 import {
   MetadataSchema,
-  KandiohjelmatSchema,
-  MaisteriohjelmatSchema,
+  KeyDataProgrammeSchema,
+  MaisteriohjelmatValuesSchema,
+  KandiohjelmatValuesSchema,
   logZodError,
 } from '../../shared/lib/validations.js'
 
@@ -30,10 +31,22 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
+    // TODO: uncomment when updated data.xlsx is in staging and production
+    // Validate formatted key data
     // try {
-    //   KandiohjelmatSchema.parse(formattedKeyData.kandiohjelmat)
-    //   MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
-    //   MetadataSchema.parse(formattedKeyData.metadata)
+    //   KeyDataProgrammeSchema.extend({
+    //     values: KandiohjelmatValuesSchema,
+    //   })
+    //     .array()
+    //     .parse(formattedKeyData.kandiohjelmat)
+
+    //   KeyDataProgrammeSchema.extend({
+    //     values: MaisteriohjelmatValuesSchema,
+    //   })
+    //     .array()
+    //     .parse(formattedKeyData.maisteriohjelmat)
+
+    //   MetadataSchema.array().parse(formattedKeyData.metadata)
     // } catch (zodError) {
     //   logZodError(zodError as ZodError)
     //   throw new Error('Invalid KeyData format')

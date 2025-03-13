@@ -73,7 +73,7 @@ export const KeyDataProgrammeSchema = z
         en: z.string(),
       })
       .strict(),
-    values: z.union([KandiohjelmatValuesSchema, MaisteriohjelmatValuesSchema]),
+    values: z.object({}),
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
@@ -83,7 +83,6 @@ export const KeyDataProgrammeSchema = z
     level: z.string().optional(),
   })
   .strict() // to disallow extra keys
-  .array()
 
 export const MetadataSchema = z
   .object({
@@ -116,7 +115,6 @@ export const MetadataSchema = z
     liikennevalo: z.boolean(),
   })
   .strict() // to disallow extra keys
-  .array()
 
 export const logZodError = (error: ZodError) => {
   let parsedErrors: any[] = []
