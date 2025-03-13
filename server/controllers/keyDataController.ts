@@ -5,10 +5,10 @@ import KeyData from '../models/keyData.js'
 import db from '../models/index.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
-
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll()
+
     // @ts-expect-error
     const programmeData = await db.studyprogramme.findAll({
       attributes: ['key', 'name', 'level', 'international'],
@@ -21,6 +21,18 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
+    try {
+      KandiohjelmatSchema.parse(formattedKeyData.kandiohjelmat)
+
+      // 🚨 ERROR in maisteriohjelmat data.xslx format.
+      // Invalid keys in data.xlsx: Aloituspaikat', 'Opetuksen linjakkuus', 'Opintojen kiinnostavuus', 'Oppimista edistävä palaute', 'Valmistuminen tavoiteajan jälkeen'
+      // MaisteriohjelmatSchema.parse(formattedKeyData.maisteriohjelmat)
+      MetadataSchema.parse(formattedKeyData.metadata)
+    } catch (zodError) {
+      logZodError(zodError as ZodError)
+      throw new Error('Invalid KeyData format')
+    }
+
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
@@ -30,7 +42,7 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 const upload = multer({ storage: multer.memoryStorage() }).single('file')
 
 const uploadKeyData = async (req: Request, res: Response): Promise<Response> => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     upload(req, res, async (err: any) => {
       if (err) {
         resolve(res.status(500).json({ error: err.message }))
@@ -48,7 +60,7 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
         const workbook = xlsx.read(file.buffer, { type: 'buffer' })
         const jsonSheet: { [key: string]: any[] } = {}
 
-        workbook.SheetNames.forEach((sheetName) => {
+        workbook.SheetNames.forEach(sheetName => {
           const worksheet = workbook.Sheets[sheetName]
           const data = xlsx.utils.sheet_to_json(worksheet)
           jsonSheet[sheetName] = data
