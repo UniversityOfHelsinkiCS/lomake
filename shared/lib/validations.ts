@@ -2,67 +2,6 @@ import { z, ZodError } from 'zod'
 
 const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
-const KandiohjelmatValuesSchema = z
-  .object({
-    // Perustiedot
-    'Koulutusohjelman koodi': z.string(),
-    'Koulutusohjelman nimi': z.string(),
-
-    // Kandiohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL MAYBE?
-    Hakupaine: z.number().optional(),
-    'Ensisijaiset hakijat': z.number().optional(),
-    'Aloituspaikkojen täyttö': z.number().optional(),
-    'Opintonsa aloittaneet': z.number().optional(),
-    Tutkinnot: z.number().optional(),
-    'Tavoiteajassa valmistuminen': z.number().optional(),
-    'Opintojen eteneminen': z.number().optional(),
-    'Läsnäolevien kasautuminen': z.number().optional(),
-    'Opiskelijoiden hyvinvointi': z.number().optional(),
-    'Opintojen ohjaus': z.number().optional(),
-    'Opetuksen laatu': z.number().optional(),
-
-    // Liikennevalot
-    Vetovoimaisuus: LiikennevalotEnum,
-    'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
-    'Palaute ja työllistyminen': LiikennevalotEnum,
-    'Resurssien käyttö': LiikennevalotEnum,
-
-    // Muut
-    Vuosi: z.number().int(),
-  })
-  .strict() // to disallow extra keys
-
-const MaisteriohjelmatValuesSchema = z
-  .object({
-    // Perustiedot
-    'Koulutusohjelman koodi': z.string(),
-    'Koulutusohjelman nimi': z.string(),
-
-    // Maisteriohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL MAYBE?
-    Hakijat: z.number().optional(),
-    Hakupaine: z.number().optional(),
-    Aloituspaikat: z.number().optional(),
-    'Opintonsa aloittaneet': z.number().optional(),
-    Tutkinnot: z.number().optional(),
-    'Tavoiteajassa valmistuminen': z.number().optional(),
-    'Valmistuminen tavoiteajan jälkeen': z.number().optional(),
-    'Läsnäolevien kasautuminen': z.number().optional(),
-    'Opetuksen linjakkuus': z.number().optional(),
-    'Oppimista edistävä palaute': z.number().optional(),
-    'Opintojen kiinnostavuus': z.number().optional(),
-    Työllistyminen: z.number().optional(),
-
-    // Liikennevalot
-    Vetovoimaisuus: LiikennevalotEnum,
-    'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
-    'Palaute ja työllistyminen': LiikennevalotEnum,
-    'Resurssien käyttö': LiikennevalotEnum,
-
-    // Muut
-    Vuosi: z.number().int(),
-  })
-  .strict() // to disallow extra keys
-
 export const KandiohjelmatSchema = z
   .object({
     koulutusohjelmakoodi: z.string().startsWith('K'),
@@ -73,7 +12,35 @@ export const KandiohjelmatSchema = z
         en: z.string(),
       })
       .strict(),
-    values: KandiohjelmatValuesSchema,
+    values: z
+      .object({
+        // Perustiedot
+        'Koulutusohjelman koodi': z.string(),
+        'Koulutusohjelman nimi': z.string(),
+
+        // Kandiohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
+        Hakupaine: z.number().optional(),
+        'Ensisijaiset hakijat': z.number().optional(),
+        'Aloituspaikkojen täyttö': z.number().optional(),
+        'Opintonsa aloittaneet': z.number().optional(),
+        Tutkinnot: z.number().optional(),
+        'Tavoiteajassa valmistuminen': z.number().optional(),
+        'Opintojen eteneminen': z.number().optional(),
+        'Läsnäolevien kasautuminen': z.number().optional(),
+        'Opiskelijoiden hyvinvointi': z.number().optional(),
+        'Opintojen ohjaus': z.number().optional(),
+        'Opetuksen laatu': z.number().optional(),
+
+        // Liikennevalot
+        Vetovoimaisuus: LiikennevalotEnum,
+        'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
+        'Palaute ja työllistyminen': LiikennevalotEnum,
+        'Resurssien käyttö': LiikennevalotEnum,
+
+        // Muut
+        Vuosi: z.number().int(),
+      })
+      .strict(), // to disallow extra keys,
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
@@ -95,7 +62,36 @@ export const MaisteriohjelmatSchema = z
         en: z.string(),
       })
       .strict(),
-    values: MaisteriohjelmatValuesSchema,
+    values: z
+      .object({
+        // Perustiedot
+        'Koulutusohjelman koodi': z.string(),
+        'Koulutusohjelman nimi': z.string(),
+
+        // Maisteriohjelman avainluvut: 🚨 NONE OF THE 'Avainlvut' SHOULD BE OPTIONAL, but data.xlsx is still not ready
+        Hakijat: z.number().optional(),
+        Hakupaine: z.number().optional(),
+        Aloituspaikat: z.number().optional(),
+        'Opintonsa aloittaneet': z.number().optional(),
+        Tutkinnot: z.number().optional(),
+        'Tavoiteajassa valmistuminen': z.number().optional(),
+        'Valmistuminen tavoiteajan jälkeen': z.number().optional(),
+        'Läsnäolevien kasautuminen': z.number().optional(),
+        'Opetuksen linjakkuus': z.number().optional(),
+        'Oppimista edistävä palaute': z.number().optional(),
+        'Opintojen kiinnostavuus': z.number().optional(),
+        Työllistyminen: z.number().optional(),
+
+        // Liikennevalot
+        Vetovoimaisuus: LiikennevalotEnum,
+        'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
+        'Palaute ja työllistyminen': LiikennevalotEnum,
+        'Resurssien käyttö': LiikennevalotEnum,
+
+        // Muut
+        Vuosi: z.number().int(),
+      })
+      .strict(), // to disallow extra keys,
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
