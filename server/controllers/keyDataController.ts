@@ -5,6 +5,10 @@ import KeyData from '../models/keyData.js'
 import db from '../models/index.js'
 import { formatKeyData } from '../services/keyDataService.js'
 
+// Validations
+import { ZodError } from 'zod'
+import { MetadataSchema, KandiohjelmatSchema, logZodError } from '../../shared/lib/validations.js'
+
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll()
