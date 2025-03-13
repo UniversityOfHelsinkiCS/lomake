@@ -1,20 +1,26 @@
 import { z } from 'zod'
-import { MaisteriohjelmatSchema, KandiohjelmatSchema, MetadataSchema } from './validations'
+import {
+  MaisteriohjelmatValuesSchema,
+  KandiohjelmatValuesSchema,
+  KeyDataProgrammeSchema,
+  MetadataSchema,
+} from './validations'
 
-export type Maisteriohjelmat = z.infer<typeof MaisteriohjelmatSchema>
-export type Kandiohjelmat = z.infer<typeof KandiohjelmatSchema>
+export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
+export type KandiohjelmatValues = z.infer<typeof KandiohjelmatValuesSchema>
+export type MaisteriohjelmatValues = z.infer<typeof MaisteriohjelmatValuesSchema>
 export type Metadata = z.infer<typeof MetadataSchema>
 
 export interface KeyData {
   data: {
-    kandiohjelmat: Kandiohjelmat[]
-    maisteriohjelmat: Maisteriohjelmat[]
+    kandiohjelmat: KeyDataProgramme[]
+    maisteriohjelmat: KeyDataProgramme[]
     metadata: Metadata[]
   }
 }
 
 export interface SingleKeyData {
-  programme: Kandiohjelmat | Maisteriohjelmat
+  programme: KeyDataProgramme
   metadata: Metadata[]
 }
 
