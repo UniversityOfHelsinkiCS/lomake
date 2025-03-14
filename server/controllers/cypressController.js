@@ -292,488 +292,488 @@ const createFacultyAnswers = async (req, res) => {
 const initData = {
   metadata: [
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Hakupaine",
-      "avainluvunNimi": {
-        "fi": "Hakupaine",
-        "se": "Ansökningstryck",
-        "en": "Application pressure"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Hakupaine',
+      avainluvunNimi: {
+        fi: 'Hakupaine',
+        se: 'Ansökningstryck',
+        en: 'Application pressure',
       },
-      "maaritelma": {
-        "fi": "Päähaun kakki hakemukset / Päähaun aloituspaikat"
+      maaritelma: {
+        fi: 'Päähaun kakki hakemukset / Päähaun aloituspaikat',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;3;6;9",
-      "liikennevalo": true,
-      "mittarinRajat": "0;20"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;3;6;9',
+      liikennevalo: true,
+      mittarinRajat: '0;20',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Ensisijaiset hakijat",
-      "avainluvunNimi": {
-        "fi": "Ensisijaiset hakijat",
-        "se": "Förstahandssökande",
-        "en": "Primary applicants"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Ensisijaiset hakijat',
+      avainluvunNimi: {
+        fi: 'Ensisijaiset hakijat',
+        se: 'Förstahandssökande',
+        en: 'Primary applicants',
       },
-      "maaritelma": {
-        "fi": "Päähaun ensisijaiset hakijat"
+      maaritelma: {
+        fi: 'Päähaun ensisijaiset hakijat',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;80;160;250",
-      "liikennevalo": true,
-      "mittarinRajat": "0;1000"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;80;160;250',
+      liikennevalo: true,
+      mittarinRajat: '0;1000',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Aloituspaikkojen täyttö",
-      "avainluvunNimi": {
-        "fi": "Aloituspaikkojen täyttö",
-        "se": "Fyllning av studieplatser",
-        "en": "Filling the starting places"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Aloituspaikkojen täyttö',
+      avainluvunNimi: {
+        fi: 'Aloituspaikkojen täyttö',
+        se: 'Fyllning av studieplatser',
+        en: 'Filling the starting places',
       },
-      "maaritelma": {
-        "fi": "Päähaun paikan vastaanottaneet / Päähaun aloituspaikat"
+      maaritelma: {
+        fi: 'Päähaun paikan vastaanottaneet / Päähaun aloituspaikat',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;75;95;99",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "60;105"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;75;95;99',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '60;105',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Opintonsa aloittaneet",
-      "avainluvunNimi": {
-        "fi": "Opintonsa aloittaneet",
-        "se": "Började studier",
-        "en": "Started students"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Opintonsa aloittaneet',
+      avainluvunNimi: {
+        fi: 'Opintonsa aloittaneet',
+        se: 'Började studier',
+        en: 'Started students',
       },
-      "maaritelma": {
-        "fi": "Opinnot aloittaneet"
+      maaritelma: {
+        fi: 'Opinnot aloittaneet',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;30;50;70",
-      "liikennevalo": true,
-      "mittarinRajat": "0;150"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;30;50;70',
+      liikennevalo: true,
+      mittarinRajat: '0;150',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Tutkinnot",
-      "avainluvunNimi": {
-        "fi": "Tutkinnot",
-        "se": "Examen",
-        "en": "Degrees"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Tutkinnot',
+      avainluvunNimi: {
+        fi: 'Tutkinnot',
+        se: 'Examen',
+        en: 'Degrees',
       },
-      "maaritelma": {
-        "fi": "Tutkinnot lukumäärä"
+      maaritelma: {
+        fi: 'Tutkinnot lukumäärä',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;20;35;50",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;20;35;50',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Tavoiteajassa valmistuminen",
-      "avainluvunNimi": {
-        "fi": "Tavoiteajassa valmistuminen",
-        "se": "Andel inom måltiden",
-        "en": "Proportion within target time"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Tavoiteajassa valmistuminen',
+      avainluvunNimi: {
+        fi: 'Tavoiteajassa valmistuminen',
+        se: 'Andel inom måltiden',
+        en: 'Proportion within target time',
       },
-      "maaritelma": {
-        "fi": "Tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan"
+      maaritelma: {
+        fi: 'Tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;30;45;60",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;30;45;60',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Opintojen eteneminen",
-      "avainluvunNimi": {
-        "fi": "Opintojen eteneminen",
-        "se": "Studiernas framsteg",
-        "en": "Progress of studies"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Opintojen eteneminen',
+      avainluvunNimi: {
+        fi: 'Opintojen eteneminen',
+        se: 'Studiernas framsteg',
+        en: 'Progress of studies',
       },
-      "maaritelma": {
-        "fi": "Osuus ensimmäisenä lukuvuonna yli 50op. (oikeuteen kytketyt op.) suorittaneista opiskelijoista "
+      maaritelma: {
+        fi: 'Osuus ensimmäisenä lukuvuonna yli 50op. (oikeuteen kytketyt op.) suorittaneista opiskelijoista ',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;30;45;60",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;30;45;60',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Läsnäolevien kasautuminen",
-      "avainluvunNimi": {
-        "fi": "Läsnäolevien kasautuminen",
-        "se": "Ansamling av studenter",
-        "en": "Accumalation of students"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Läsnäolevien kasautuminen',
+      avainluvunNimi: {
+        fi: 'Läsnäolevien kasautuminen',
+        se: 'Ansamling av studenter',
+        en: 'Accumalation of students',
       },
-      "maaritelma": {
-        "fi": "20.9 läsnäolevista yli kolme lukuvuotta opiskelleet. Siirtyneet eivät mukana"
+      maaritelma: {
+        fi: '20.9 läsnäolevista yli kolme lukuvuotta opiskelleet. Siirtyneet eivät mukana',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "100;25;20;15",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '100;25;20;15',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Opiskelijoiden hyvinvointi",
-      "avainluvunNimi": {
-        "fi": "Opiskelijoiden hyvinvointi",
-        "se": "Välmåendets indikator",
-        "en": "Well-being indicator"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Opiskelijoiden hyvinvointi',
+      avainluvunNimi: {
+        fi: 'Opiskelijoiden hyvinvointi',
+        se: 'Välmåendets indikator',
+        en: 'Well-being indicator',
       },
-      "maaritelma": {
-        "fi": "Osuus kandipalautteen \"voin hyvin yliopistossa\" vastauksista 4-5 "
+      maaritelma: {
+        fi: 'Osuus kandipalautteen "voin hyvin yliopistossa" vastauksista 4-5 ',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;40;60;75",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;40;60;75',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Opintojen ohjaus",
-      "avainluvunNimi": {
-        "fi": "Opintojen ohjaus",
-        "se": "Vägledningsindikator",
-        "en": "Guidance indicator"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Opintojen ohjaus',
+      avainluvunNimi: {
+        fi: 'Opintojen ohjaus',
+        se: 'Vägledningsindikator',
+        en: 'Guidance indicator',
       },
-      "maaritelma": {
-        "fi": "Osuus kandipalautteen \"sain tarpeeksi ohjausta\" vastauksista 4-5"
+      maaritelma: {
+        fi: 'Osuus kandipalautteen "sain tarpeeksi ohjausta" vastauksista 4-5',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;20;40;50",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;20;40;50',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Opetuksen laatu",
-      "avainluvunNimi": {
-        "fi": "Opetuksen laatu",
-        "se": "Kvaliteten på undervisningen",
-        "en": "Quality of teaching"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Opetuksen laatu',
+      avainluvunNimi: {
+        fi: 'Opetuksen laatu',
+        se: 'Kvaliteten på undervisningen',
+        en: 'Quality of teaching',
       },
-      "maaritelma": {
-        "fi": "Osuus kandipalautteen \"opetus pääosin laadukasta\" vastauksista 4-5"
+      maaritelma: {
+        fi: 'Osuus kandipalautteen "opetus pääosin laadukasta" vastauksista 4-5',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;40;60;80",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;40;60;80',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Palauteaktiivisuus",
-      "avainluvunNimi": {
-        "fi": "Palauteaktiivisuus",
-        "se": "Andel av respondenter",
-        "en": "Proportion of respondents"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Palauteaktiivisuus',
+      avainluvunNimi: {
+        fi: 'Palauteaktiivisuus',
+        se: 'Andel av respondenter',
+        en: 'Proportion of respondents',
       },
-      "maaritelma": {
-        "fi": "Kandipalautteeseen vastanneiden osuus"
+      maaritelma: {
+        fi: 'Kandipalautteeseen vastanneiden osuus',
       },
-      "ohjelmanTaso": "Kandi",
-      "kynnysarvot": "0;50;65;80",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Kandi',
+      kynnysarvot: '0;50;65;80',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Hakijat",
-      "avainluvunNimi": {
-        "fi": "Hakijat",
-        "se": "Behöriga sökande till magisteransökan",
-        "en": "Eligible applicants for Master's application"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Hakijat',
+      avainluvunNimi: {
+        fi: 'Hakijat',
+        se: 'Behöriga sökande till magisteransökan',
+        en: "Eligible applicants for Master's application",
       },
-      "maaritelma": {
-        "fi": "Hakukelpoiset hakijat (kv) tai kaikki hakijat (kotimaiset kielet)"
+      maaritelma: {
+        fi: 'Hakukelpoiset hakijat (kv) tai kaikki hakijat (kotimaiset kielet)',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;10;40;80",
-      "liikennevalo": true,
-      "mittarinRajat": "0;200"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;10;40;80',
+      liikennevalo: true,
+      mittarinRajat: '0;200',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Hakupaine",
-      "avainluvunNimi": {
-        "fi": "Hakupaine",
-        "se": "Magisteransökningstryck",
-        "en": "Master's application pressure"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Hakupaine',
+      avainluvunNimi: {
+        fi: 'Hakupaine',
+        se: 'Magisteransökningstryck',
+        en: "Master's application pressure",
       },
-      "maaritelma": {
-        "fi": "Maisterihaun hakukelpoiset hakijat/ aloituspaikat"
+      maaritelma: {
+        fi: 'Maisterihaun hakukelpoiset hakijat/ aloituspaikat',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;1;2;4",
-      "liikennevalo": true,
-      "mittarinRajat": "0;10"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;1;2;4',
+      liikennevalo: true,
+      mittarinRajat: '0;10',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Aloituspaikat",
-      "avainluvunNimi": {
-        "fi": "Aloituspaikat",
-        "se": "Totalt intag",
-        "en": "Total intake"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Aloituspaikat',
+      avainluvunNimi: {
+        fi: 'Aloituspaikat',
+        se: 'Totalt intag',
+        en: 'Total intake',
       },
-      "maaritelma": {
-        "fi": "Aloituspaikat (opiskelikavalinta + jatkavat)"
+      maaritelma: {
+        fi: 'Aloituspaikat (opiskelikavalinta + jatkavat)',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;20;30;40",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;20;30;40',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Opintonsa aloittaneet",
-      "avainluvunNimi": {
-        "fi": "Opintonsa aloittaneet",
-        "se": "Började studier",
-        "en": "Started students"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Opintonsa aloittaneet',
+      avainluvunNimi: {
+        fi: 'Opintonsa aloittaneet',
+        se: 'Började studier',
+        en: 'Started students',
       },
-      "maaritelma": {
-        "fi": "Opinnot aloittaneet"
+      maaritelma: {
+        fi: 'Opinnot aloittaneet',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;20;30;40",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;20;30;40',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Tutkinnot",
-      "avainluvunNimi": {
-        "fi": "Tutkinnot",
-        "se": "Examen",
-        "en": "Degrees"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Tutkinnot',
+      avainluvunNimi: {
+        fi: 'Tutkinnot',
+        se: 'Examen',
+        en: 'Degrees',
       },
-      "maaritelma": {
-        "fi": "Tutkinnot lukumäärä"
+      maaritelma: {
+        fi: 'Tutkinnot lukumäärä',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;15;25;35",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;15;25;35',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Tavoiteajassa valmistuminen",
-      "avainluvunNimi": {
-        "fi": "Tavoiteajassa valmistuminen",
-        "se": "Utexaminera inom målsatt tid",
-        "en": "Graduation within the target time"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Tavoiteajassa valmistuminen',
+      avainluvunNimi: {
+        fi: 'Tavoiteajassa valmistuminen',
+        se: 'Utexaminera inom målsatt tid',
+        en: 'Graduation within the target time',
       },
-      "maaritelma": {
-        "fi": "Tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan"
+      maaritelma: {
+        fi: 'Tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;15;30;40",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;15;30;40',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Valmistuminen tavoiteajan jälkeen",
-      "avainluvunNimi": {
-        "fi": "Valmistuminen tavoiteajan jälkeen",
-        "se": "Utexaminera efter målsatt tid",
-        "en": "Graduation after the target time"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Valmistuminen tavoiteajan jälkeen',
+      avainluvunNimi: {
+        fi: 'Valmistuminen tavoiteajan jälkeen',
+        se: 'Utexaminera efter målsatt tid',
+        en: 'Graduation after the target time',
       },
-      "maaritelma": {
-        "fi": "Yli vuosi tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan"
+      maaritelma: {
+        fi: 'Yli vuosi tavoiteajassa valmistuneiden osuus kaikista valmistuneista. OKM-rahoitusmallin määritelmän mukaan',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "100;60;40;20",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '100;60;40;20',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Läsnäolevien kasautuminen",
-      "avainluvunNimi": {
-        "fi": "Läsnäolevien kasautuminen",
-        "se": "Ansamling av studenter",
-        "en": "Accumalation of students"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Läsnäolevien kasautuminen',
+      avainluvunNimi: {
+        fi: 'Läsnäolevien kasautuminen',
+        se: 'Ansamling av studenter',
+        en: 'Accumalation of students',
       },
-      "maaritelma": {
-        "fi": "20.9 läsnäolevista yli viisi (kandi+maisteri) tai kaksi (maisteri) lukuvuotta opiskelleet. Siirtyneet eivät mukana"
+      maaritelma: {
+        fi: '20.9 läsnäolevista yli viisi (kandi+maisteri) tai kaksi (maisteri) lukuvuotta opiskelleet. Siirtyneet eivät mukana',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "100;35;25;15",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '100;35;25;15',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Opetuksen linjakkuus",
-      "avainluvunNimi": {
-        "fi": "Opetuksen linjakkuus",
-        "se": "HUL3 Konstruktivt samordnad undervisning",
-        "en": "HUL3 Constructive alignment of teaching"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Opetuksen linjakkuus',
+      avainluvunNimi: {
+        fi: 'Opetuksen linjakkuus',
+        se: 'HUL3 Konstruktivt samordnad undervisning',
+        en: 'HUL3 Constructive alignment of teaching',
       },
-      "maaritelma": {
-        "fi": "HUL3. Osuus ulottuvuuden arvoista välillä 4-5"
+      maaritelma: {
+        fi: 'HUL3. Osuus ulottuvuuden arvoista välillä 4-5',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;20;40;60",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;20;40;60',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Oppimista edistävä palaute",
-      "avainluvunNimi": {
-        "fi": "Oppimista edistävä palaute",
-        "se": "HUL3 Respons som stöd för lärande",
-        "en": "HUL3 Constructive feedback"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Oppimista edistävä palaute',
+      avainluvunNimi: {
+        fi: 'Oppimista edistävä palaute',
+        se: 'HUL3 Respons som stöd för lärande',
+        en: 'HUL3 Constructive feedback',
       },
-      "maaritelma": {
-        "fi": "HUL3. Osuus ulottuvuuden arvoista välillä 4-5"
+      maaritelma: {
+        fi: 'HUL3. Osuus ulottuvuuden arvoista välillä 4-5',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;15;30;50",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;15;30;50',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Opintojen kiinnostavuus",
-      "avainluvunNimi": {
-        "fi": "Opintojen kiinnostavuus",
-        "se": "HUL3 Hur engagerande är undervisningen?",
-        "en": "HUL3 Interest and relevance"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Opintojen kiinnostavuus',
+      avainluvunNimi: {
+        fi: 'Opintojen kiinnostavuus',
+        se: 'HUL3 Hur engagerande är undervisningen?',
+        en: 'HUL3 Interest and relevance',
       },
-      "maaritelma": {
-        "fi": "HUL3. Osuus ulottuvuuden arvoista välillä 4-5"
+      maaritelma: {
+        fi: 'HUL3. Osuus ulottuvuuden arvoista välillä 4-5',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;30;50;70",
-      "yksikko": "%",
-      "liikennevalo": true,
-      "mittarinRajat": "0;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;30;50;70',
+      yksikko: '%',
+      liikennevalo: true,
+      mittarinRajat: '0;100',
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Työllistyminen",
-      "avainluvunNimi": {
-        "fi": "Työllistyminen",
-        "se": "Sysselsättning",
-        "en": "Employment"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Työllistyminen',
+      avainluvunNimi: {
+        fi: 'Työllistyminen',
+        se: 'Sysselsättning',
+        en: 'Employment',
       },
-      "maaritelma": {
-        "fi": "Työllistyminen vuosi valmistumisen jälkeen osuus"
+      maaritelma: {
+        fi: 'Työllistyminen vuosi valmistumisen jälkeen osuus',
       },
-      "ohjelmanTaso": "Maisteri",
-      "kynnysarvot": "0;80;90;95",
-      "yksikko": "%",
-      "liikennevalo": false,
-      "mittarinRajat": "50;100"
+      ohjelmanTaso: 'Maisteri',
+      kynnysarvot: '0;80;90;95',
+      yksikko: '%',
+      liikennevalo: false,
+      mittarinRajat: '50;100',
     },
     {
-      "arviointialue": "Resurssien käyttö",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Resurssien käyttö',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Kandi",
-      "liikennevalo": false
+      ohjelmanTaso: 'Kandi',
+      liikennevalo: false,
     },
     {
-      "arviointialue": "Resurssien käyttö",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Resurssien käyttö',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Maisteri",
-      "liikennevalo": false
+      ohjelmanTaso: 'Maisteri',
+      liikennevalo: false,
     },
     {
-      "arviointialue": "Vetovoimaisuus",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Vetovoimaisuus',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Tohtori",
-      "liikennevalo": false
+      ohjelmanTaso: 'Tohtori',
+      liikennevalo: false,
     },
     {
-      "arviointialue": "Opintojen sujuvuus ja valmistuminen",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Opintojen sujuvuus ja valmistuminen',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Tohtori",
-      "liikennevalo": false
+      ohjelmanTaso: 'Tohtori',
+      liikennevalo: false,
     },
     {
-      "arviointialue": "Palaute ja työllistyminen",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Palaute ja työllistyminen',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Tohtori",
-      "liikennevalo": false
+      ohjelmanTaso: 'Tohtori',
+      liikennevalo: false,
     },
     {
-      "arviointialue": "Resurssien käyttö",
-      "avainluvunArvo": "Tulossa 2026",
-      "avainluvunNimi": {
-        "fi": "Tulossa 2026",
-        "se": "Kommer 2026",
-        "en": "Coming in 2026"
+      arviointialue: 'Resurssien käyttö',
+      avainluvunArvo: 'Tulossa 2026',
+      avainluvunNimi: {
+        fi: 'Tulossa 2026',
+        se: 'Kommer 2026',
+        en: 'Coming in 2026',
       },
-      "maaritelma": {
-        "fi": "Tulossa 2026"
+      maaritelma: {
+        fi: 'Tulossa 2026',
       },
-      "ohjelmanTaso": "Tohtori",
-      "liikennevalo": false
-    }
+      ohjelmanTaso: 'Tohtori',
+      liikennevalo: false,
+    },
   ],
   Kandiohjelmat: [
     {
@@ -795,11 +795,11 @@ const initData = {
       // 'Opiskelijapalaute ja työllistyminen': 'Punainen',
       // 'Norppa-palautteeseen vastanneiden osuus': 0.05,
       // 'Vuosikurssin 23-24 tavoiteajassa etenevät': 0.05,
-    
+
       // Perustiedot
       'Koulutusohjelman koodi': 'KH50_005',
       'Koulutusohjelman nimi': 'Tietojenkäsittelytieteen kandiohjelma',
-      
+
       // Kandiohjelman avainluvut
       Hakupaine: 3.0,
       'Ensisijaiset hakijat': 100,
@@ -812,13 +812,13 @@ const initData = {
       'Opiskelijoiden hyvinvointi': 0,
       'Opintojen ohjaus': 0,
       'Opetuksen laatu': 0,
-  
+
       // Liikennevalot
       Vetovoimaisuus: 'Punainen',
       'Opintojen sujuvuus ja valmistuminen': 'Punainen',
       'Palaute ja työllistyminen': 'Punainen',
       'Resurssien käyttö': 'Ei arviota',
-  
+
       // Muut
       Vuosi: 2024,
     },
@@ -844,7 +844,7 @@ const initData = {
       // 'HUL3 oppimista edistävä palaute': 0.1,
       // 'Maisterihaun hakukelpoiset hakijat': 5,
       // 'Opiskelijapalaute ja työllistyminen': 'Punainen',
-    
+
       // Perustiedot
       'Koulutusohjelman koodi': 'MH50_009',
       'Koulutusohjelman nimi': 'Tietojenkäsittelytieteen maisteriohjelma',
@@ -877,8 +877,8 @@ const initData = {
 
 const initKeyData = async (_req, res) => {
   try {
-
-    try { // Validate the data
+    try {
+      // Validate the data
       KandiohjelmatValuesSchema.array().parse(initData.Kandiohjelmat)
       MaisteriohjelmatValuesSchema.array().parse(initData.Maisteriohjelmat)
       MetadataSchema.array().parse(initData.metadata)
