@@ -1,6 +1,17 @@
 export const up = async ({ context: queryInterface }) => {
   const now = new Date()
   try {
+    const faculty = await queryInterface.sequelize.query(
+      `SELECT id FROM faculties WHERE code = 'H30'`,
+      { type: queryInterface.sequelize.QueryTypes.SELECT }
+    )
+    
+    const facultyId = faculty[0]?.id
+    
+    if (!facultyId) {
+      throw new Error('Faculty "Lääketieteellinen tiedekunta" not found');
+    }
+    
     await queryInterface.bulkInsert('studyprogrammes', [
       {
         key: 'KH30_003',
@@ -11,9 +22,9 @@ export const up = async ({ context: queryInterface }) => {
         }),
         level: 'bachelor',
         international: false,
-        locked: false,
+        locked_forms: JSON.stringify({ yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false }),
         claimed: false,
-        primary_faculty_id: 3,
+        primary_faculty_id: facultyId,
         created_at: now,
         updated_at: now,
       },
@@ -26,9 +37,9 @@ export const up = async ({ context: queryInterface }) => {
         }),
         level: 'master',
         international: false,
-        locked: false,
+        locked_forms: JSON.stringify({ yearly: false, 'degree-reform': false, evaluation: false, 'evaluation-faculty': false }),
         claimed: false,
-        primary_faculty_id: 3,
+        primary_faculty_id: facultyId,
         created_at: now,
         updated_at: now,
       },
