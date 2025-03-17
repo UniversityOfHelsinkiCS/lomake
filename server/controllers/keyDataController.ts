@@ -90,8 +90,17 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
           jsonSheet[sheetName] = data
         })
 
+        await KeyData.update({
+          active: false,
+        }, {
+          where: {
+            active: true,
+          }
+        })
+
         await KeyData.create({
           data: jsonSheet,
+          active: true,
         })
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
       } catch (error) {
