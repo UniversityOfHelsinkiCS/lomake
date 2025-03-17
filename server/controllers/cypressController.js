@@ -889,6 +889,7 @@ const initKeyData = async (_req, res) => {
 
     await KeyData.create({
       data: initData,
+      active: true,
     })
 
     return res.status(200).json({ message: 'Keydata initialized' })
