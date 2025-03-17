@@ -1,9 +1,10 @@
-import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB, DATE } from 'sequelize'
+import { InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER, JSONB, DATE, BOOLEAN } from 'sequelize'
 import { sequelize } from '../database/connection.js'
 
 class KeyData extends Model<InferAttributes<KeyData>, InferCreationAttributes<KeyData>> {
   declare id: CreationOptional<number>
   declare data: Record<string, any>
+  declare active: boolean
   declare createdAt: Date
   declare updatedAt: Date
 }
@@ -19,6 +20,7 @@ KeyData.init(
       type: JSONB,
       allowNull: false,
     },
+    active: BOOLEAN,
     createdAt: DATE,
     updatedAt: DATE,
   },
