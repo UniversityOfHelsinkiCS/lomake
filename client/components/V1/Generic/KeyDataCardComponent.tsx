@@ -5,6 +5,7 @@ import { calculateColor, calculateValue } from '../Utils/util'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
+import ColorHistoryComponent from './ColorHistoryComponent'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
@@ -67,6 +68,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
             limits={data.mittarinRajat}
             unit={data.yksikko}
             color={color}
+            {...props}
           />
         )
       })}
@@ -118,6 +120,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
               limits={props.limits}
               unit={props.unit}
             />
+            <ColorHistoryComponent {...props}/>
           </div>
         )}
       </CardActionArea>

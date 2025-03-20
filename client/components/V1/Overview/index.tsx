@@ -6,13 +6,12 @@ import { RootState } from '../../../util/store'
 import { setFaculty, setKeyDataYear, setLevel } from '../../../util/redux/filterReducer'
 import { useVisibleOverviewProgrammes } from '../../../util/overview'
 
-import DataComponent from './KeyDataTableComponent'
+import KeyDataTableComponent from './KeyDataTableComponent'
 import YearFilter from '../Generic/YearFilterComponent'
 import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Typography } from '@mui/material'
-import { isAdmin } from '@/config/common'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -81,7 +80,7 @@ const OverviewPage = () => {
         </div>
       </div>
 
-      <DataComponent yearFilter={selectedYear} facultyFilter={selectedFaculties} programmeLevelFilter={selectedLevel} />
+      <KeyDataTableComponent yearFilter={selectedYear} facultyFilter={selectedFaculties} programmeLevelFilter={selectedLevel} />
     </div>
   )
 }

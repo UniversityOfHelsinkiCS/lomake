@@ -593,5 +593,9 @@ export default {
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
     unsavedChangesWarning:
       'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" ja muutokset hylätään',
+    yearlyDevelopment: 'Avainluvun kehitys vuosittain',
+    year: 'vuosi',
+    value: 'arvo',
+    trafficLight: 'liikennevalo',
   },
 }

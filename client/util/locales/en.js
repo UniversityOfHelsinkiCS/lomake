@@ -595,5 +595,9 @@ export default {
     colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" will discard the changes.',
+    yearlyDevelopment: 'Annual development',
+    year: 'year',
+    value: 'value',
+    trafficLight: 'traffic light',
   },
 }

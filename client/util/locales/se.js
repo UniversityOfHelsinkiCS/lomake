@@ -629,5 +629,9 @@ export default {
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
     unsavedChangesWarning:
       'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" för att avsluta redigeringen.',
+    yearlyDevelopment: 'Årlig utveckling',
+      year: 'år',
+      value: 'värde',
+      trafficLight: 'trafikljus',
   },
 }
