@@ -65,7 +65,7 @@ describe('Evaluation forms tests', () => {
       cy.login(facultyUser)
       cy.visit('/yearly')
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
       cy.get(`[data-cy="deadline-passed-notice"]`).contains('The deadline to edit form has passed.')
@@ -84,7 +84,7 @@ describe('Evaluation forms tests', () => {
       cy.login(facultyUser)
       cy.visit('/yearly')
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
       cy.get(`[data-cy="saving-answers-notice"]`).contains(
@@ -99,7 +99,7 @@ describe('Evaluation forms tests', () => {
       cy.get("[data-cy='color-negative-student_admittance_faculty_doctoral']").click()
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
 
       cy.get('[data-cy=H50-student_admittance_faculty-bachelor]').should(
@@ -141,7 +141,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
 
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
@@ -177,7 +177,7 @@ describe('Evaluation forms tests', () => {
         'TINE: Doctoral is not doing so good',
       )
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 
       cy.get('[data-cy=UNI-student_admittance_university-university-master-single]').should(
@@ -212,7 +212,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
 
       cy.get("[data-cy='color-positive-student_admittance_university-university-bachelor']").click()
@@ -232,7 +232,7 @@ describe('Evaluation forms tests', () => {
       cy.typeInEditor('student_admittance_university-arviointi-doctoral', 'TINE: Doctoral is not doing so good')
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 
       // At start all levels are visible
@@ -274,7 +274,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
       cy.wait(100)
       cy.get("[data-cy='university_ease_of_study_actions-university-master-development-area-1']").type(
@@ -294,7 +294,7 @@ describe('Evaluation forms tests', () => {
       cy.wait(100)
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 
       cy.get('[data-cy=university_ease_of_study_actions-university-master]').click()

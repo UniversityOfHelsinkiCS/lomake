@@ -60,7 +60,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.login(cypressOspa)
       cy.visit('/')
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
@@ -79,7 +79,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.visit('/')
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
@@ -94,7 +94,7 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy="color-positive-2"]`).click()
 
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
 
       cy.get(`[data-cy=${testProgrammeCode}-1-single]`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
@@ -103,7 +103,7 @@ describe('Meta evaluation form & overview tests', () => {
 
       cy.visit('/')
       cy.get('[data-cy=nav-archive]').click()
-    cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
