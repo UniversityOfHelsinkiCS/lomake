@@ -85,6 +85,7 @@ describe('Degree reform form tests', () => {
 
     cy.login(cypressReadingRightsUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
