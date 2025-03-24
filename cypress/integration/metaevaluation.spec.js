@@ -18,6 +18,7 @@ describe('Meta evaluation form & overview tests', () => {
   })
 
   it('should open meta evaluation form', () => {
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -27,6 +28,7 @@ describe('Meta evaluation form & overview tests', () => {
   })
 
   it('should open meta evaluation form with doctoral degree', () => {
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
     cy.get('[data-cy=degreeDropdown]').click()
@@ -38,6 +40,7 @@ describe('Meta evaluation form & overview tests', () => {
   })
 
   it('should open dropdown and select faculty', () => {
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.get('[data-cy=nav-meta-evaluation]').click()
     cy.get('[data-cy=faculty-dropdown]').click()
@@ -56,7 +59,8 @@ describe('Meta evaluation form & overview tests', () => {
       const cypressOspa = 'cypressOspaUser'
       cy.login(cypressOspa)
       cy.visit('/')
-      cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-archive]').click()
+    cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
@@ -74,7 +78,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.login(cypressOspa)
       cy.visit('/')
 
-      cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-archive]').click()
+    cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
@@ -88,7 +93,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy="textarea-1"]`).should('not.exist')
       cy.get(`[data-cy="color-positive-2"]`).click()
 
-      cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-archive]').click()
+    cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
 
       cy.get(`[data-cy=${testProgrammeCode}-1-single]`).should('have.css', 'background-color', 'rgb(128, 128, 128)')
@@ -96,7 +102,8 @@ describe('Meta evaluation form & overview tests', () => {
       cy.get(`[data-cy=${testProgrammeCode}-2-single]`).should('have.css', 'background-color', 'rgb(157, 255, 157)')
 
       cy.visit('/')
-      cy.get('[data-cy=nav-evaluation]').click()
+      cy.get('[data-cy=nav-archive]').click()
+    cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-meta-evaluation]').click()
       cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 

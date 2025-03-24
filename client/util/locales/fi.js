@@ -131,6 +131,7 @@ export default {
     startDateEndDateError: 'Alkamisaika ei voi olla arvioitua päättymisaikaa myöhemmin',
     confirmRemoveLight: 'Haluatko varmasti poistaa',
     facultymonitoringText: 'Vastaukset ovat luettavissa / Lomakkeen täyttäminen päättyi 30.10.2024',
+    archive: 'Arkisto',
   },
 
   aboutPage: {

@@ -144,6 +144,7 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
+    archive: 'Archive',
   },
 
   landingPage: {
