@@ -15,7 +15,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 import { orderBy } from 'lodash'
-import { useNotificationUtils } from '../Utils/util'
+import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 
 interface KeyDataTableProps {
@@ -25,7 +25,7 @@ interface KeyDataTableProps {
 }
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
-  const { renderActionsBadge } = useNotificationUtils()
+  const { renderActionsBadge } = useNotificationBadge()
 
   const actionsBadgeData = useMemo(() => {
     return renderActionsBadge(programmeData, true)
@@ -50,7 +50,7 @@ const TrafficLightCell = ({
   colorKey: ColorKey
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
-  const { renderTrafficLightBadge } = useNotificationUtils()
+  const { renderTrafficLightBadge } = useNotificationBadge()
 
   const shouldRenderBadge = useMemo(() => {
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)

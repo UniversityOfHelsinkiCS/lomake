@@ -26,7 +26,6 @@ const OverviewPage = () => {
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
-  const reports = useSelector((state: RootState) => state.reports)
   const currentUser = useSelector((state: RootState) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }: Record<string, any>) => studyProgrammes.data)
 

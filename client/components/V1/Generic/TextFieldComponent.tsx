@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
@@ -9,14 +9,15 @@ import { getLockHttp } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { updateReportHttp } from '../../../util/redux/reportsSlicer'
+import { getReports, updateReportHttp } from '../../../util/redux/reportsSlicer'
 
 type TextFieldComponentProps = {
   id: string
   type: string
+  children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
+const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -101,6 +102,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
     dispatch(updateReportHttp({ room, year, id, content }))
+    dispatch(getReports({ year })) // temporary solution – todo: fix this
   }
 
   const askForLock = () => {
@@ -161,9 +163,12 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       ref={componentRef}
       sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start', mt: '1rem' }}
     >
-      <Typography variant="h5" color="textSecondary">
-        {t(`keyData:${type}`)}
-      </Typography>
+      <div style={{ display: 'flex', alignContent: 'center', gap: 10 }}>
+        <Typography variant="h5" color="textSecondary">
+          {t(`keyData:${type}`)}
+        </Typography>
+        {children}
+      </div>
       {hasLock ? (
         <>
           <TextField
@@ -282,6 +287,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             >
               {t(`keyData:edit${type}`)}
             </Button>
+
             <CurrentEditor fieldName={id} />
             <Typography variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}

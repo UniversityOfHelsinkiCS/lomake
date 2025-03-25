@@ -4,9 +4,10 @@ import React from 'react'
 interface NotificationBadgeProps {
   variant?: 'small' | 'medium'
   children?: React.ReactNode
+  style?: React.CSSProperties
 }
 
-const NotificationBadge = ({ variant = 'small', children }: NotificationBadgeProps) => {
+const NotificationBadge = ({ variant = 'small', children, style }: NotificationBadgeProps) => {
   return variant === 'small' ? (
     <Badge
       overlap="circular"
@@ -16,12 +17,16 @@ const NotificationBadge = ({ variant = 'small', children }: NotificationBadgePro
         vertical: 'top',
         horizontal: 'right',
       }}
-      style={{}}
+      style={{
+        ...style,
+        marginLeft: '0.25rem',
+        marginBottom: '2rem',
+      }}
     >
       {children}
     </Badge>
   ) : (
-    <Badge badgeContent="!" color="info">
+    <Badge badgeContent="!" color="info" style={{ ...style }}>
       {children}
     </Badge>
   )

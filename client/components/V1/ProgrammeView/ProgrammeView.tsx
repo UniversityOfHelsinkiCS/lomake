@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReport } from '../../../util/redux/reportsSlicer'
+import { getReport, getReports } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
 
@@ -15,11 +15,13 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
-import { ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataCardData } from '@/client/lib/types'
+import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { KeyDataCardData, KeyDataProgramme } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
 import { RootState } from '@/client/util/store'
 import { getKeyDataPoints } from '../Utils/util'
+import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import NotificationBadge from '../Generic/NotificationBadge'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: { language: string }) => state.language)
@@ -30,6 +32,7 @@ const ProgrammeView = () => {
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
 
   const keyData = useFetchSingleKeyData(programmeKey)
+  const reports = useSelector((state: RootState) => state.reports.dataForYear)
   const form = 10
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
@@ -61,6 +64,12 @@ const ProgrammeView = () => {
   }, [programmeKey, form])
 
   useEffect(() => {
+    if (selectedYear) {
+      dispatch(getReports({ year: selectedYear }))
+    }
+  }, [selectedYear])
+
+  useEffect(() => {
     return () => {
       dispatch(wsLeaveRoom(form))
     }
@@ -78,6 +87,37 @@ const ProgrammeView = () => {
     setActiveTab(newValue)
   }
 
+  const ActionsBadge = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
+    const { renderActionsBadge } = useNotificationBadge()
+
+    const actionsBadgeData = useMemo(() => {
+      return renderActionsBadge(programmeData, true)
+    }, [programmeData, reports])
+
+    return actionsBadgeData.showBadge && <NotificationBadge variant={'small'} style={{ marginLeft: 0 }} />
+  }
+
+  const TextFieldBadge = ({ programmeData, groupKey }: { programmeData: KeyDataProgramme; groupKey: GroupKey }) => {
+    const { renderTrafficLightBadge } = useNotificationBadge()
+
+    const shouldRenderBadge = useMemo(() => {
+      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
+    }, [programmeData, groupKey, reports])
+
+    return shouldRenderBadge && <NotificationBadge variant={'small'} />
+  }
+
+  const TabBadge = ({ programmeData, tab }: { programmeData: KeyDataProgramme; tab: 'lights' | 'actions' }) => {
+    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
+
+    const shouldRenderBadge = useMemo(() => {
+      if (tab === 'lights') return renderTabBadge(programmeData)
+      else return renderActionsBadge(programmeData).showBadge
+    }, [programmeData, reports])
+
+    return shouldRenderBadge && <NotificationBadge variant={'medium'} style={{ marginLeft: '1.5rem' }} />
+  }
+
   const KeyDataPoints = getKeyDataPoints(t, programme)
 
   return (
@@ -93,8 +133,16 @@ const ProgrammeView = () => {
       </div>
 
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
-        <Tab label={t('keyData:keyFigure')} />
-        <Tab label={t('keyData:actions')} />
+        <Tab
+          label={t('keyData:keyFigure')}
+          icon={<TabBadge tab="lights" programmeData={programme} />}
+          iconPosition="end"
+        />
+        <Tab
+          label={t('keyData:actions')}
+          icon={<TabBadge tab="actions" programmeData={programme} />}
+          iconPosition="end"
+        />
       </Tabs>
 
       {activeTab === 0 && (
@@ -122,7 +170,13 @@ const ProgrammeView = () => {
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
             <Box sx={{ p: '2.5rem 0' }} key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
-              {data.textField && <TextFieldComponent id={data.groupKey} type="Comment" />}
+              <Box sx={{ alignItems: 'center' }}>
+                {data.textField && (
+                  <TextFieldComponent id={data.groupKey} type="Comment">
+                    <TextFieldBadge programmeData={programme} groupKey={data.groupKey} />
+                  </TextFieldComponent>
+                )}
+              </Box>
             </Box>
           ))}
 
@@ -143,7 +197,9 @@ const ProgrammeView = () => {
           <Alert severity="info" sx={{ mb: 4 }}>
             <Typography variant="light">Toimenpiteiden ohjeistus tulossa...</Typography>
           </Alert>
-          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'} />
+          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
+            <ActionsBadge programmeData={programme} />
+          </TextFieldComponent>
         </Box>
       )}
     </Box>
