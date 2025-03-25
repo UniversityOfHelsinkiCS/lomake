@@ -13,6 +13,20 @@ export const formatKeyData = (data: any, programmeData: any) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
+    const redLights = [
+      'Vetovoimaisuus',
+      'Opintojen sujuvuus ja valmistuminen',
+      'Palaute ja työllistyminen',
+      'Resurssien käyttö',
+    ].filter(field => kandiohjelma[field] === 'Punainen')
+
+    const yellowLights = [
+      'Vetovoimaisuus',
+      'Opintojen sujuvuus ja valmistuminen',
+      'Palaute ja työllistyminen',
+      'Resurssien käyttö',
+    ].filter(field => kandiohjelma[field] === 'Keltainen')
+
     return {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
@@ -24,6 +38,8 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: kandiohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      redLights: redLights,
+      yellowLights: yellowLights,
     }
   })
 
@@ -31,6 +47,20 @@ export const formatKeyData = (data: any, programmeData: any) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
+    const redLights = [
+      'Vetovoimaisuus',
+      'Opintojen sujuvuus ja valmistuminen',
+      'Palaute ja työllistyminen',
+      'Resurssien käyttö',
+    ].filter(field => maisteriohjelma[field] === 'Punainen')
+
+    const yellowLights = [
+      'Vetovoimaisuus',
+      'Opintojen sujuvuus ja valmistuminen',
+      'Palaute ja työllistyminen',
+      'Resurssien käyttö',
+    ].filter(field => maisteriohjelma[field] === 'Keltainen')
+
     return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
@@ -42,6 +72,8 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: maisteriohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      redLights: redLights,
+      yellowLights: yellowLights,
     }
   })
 

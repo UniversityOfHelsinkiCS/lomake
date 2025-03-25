@@ -5,20 +5,63 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Tooltip, Typography } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
-import { GroupKey } from '@/client/lib/enums'
+import { ColorKey, GroupKey } from '@/client/lib/enums'
 import { KeyDataProgramme } from '@/client/lib/types'
 
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
-
 import { orderBy } from 'lodash'
+import { useNotificationUtils } from '../Utils/util'
+import NotificationBadge from '../Generic/NotificationBadge'
+
 interface KeyDataTableProps {
   facultyFilter: string[]
   programmeLevelFilter: string
   yearFilter: string
+}
+
+const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
+  const { renderActionsBadge } = useNotificationUtils()
+
+  const actionsBadgeData = useMemo(() => {
+    return renderActionsBadge(programmeData, true)
+  }, [programmeData, renderActionsBadge])
+
+  return (
+    <>
+      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
+      {actionsBadgeData.showIcon && <ChatBubbleOutlineIcon color="secondary" />}
+    </>
+  )
+}
+
+const TrafficLightCell = ({
+  programmeData,
+  groupKey,
+  colorKey,
+  handleModalOpen,
+}: {
+  programmeData: KeyDataProgramme
+  groupKey: GroupKey
+  colorKey: ColorKey
+  handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
+}) => {
+  const { renderTrafficLightBadge } = useNotificationUtils()
+
+  const shouldRenderBadge = useMemo(() => {
+    return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
+  }, [programmeData, groupKey, renderTrafficLightBadge])
+
+  return (
+    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
+      <TrafficLight color={programmeData[colorKey]} variant="medium" />
+      {shouldRenderBadge && <NotificationBadge />}
+    </TableCell>
+  )
 }
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
@@ -29,7 +72,6 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortIdentity, setSortIdentity] = useState<'koulutusohjelma' | 'koulutusohjelmakoodi'>('koulutusohjelma')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
-
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
 
@@ -55,13 +97,11 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
       const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
-
       return yearMatches && facultyMatches && levelMatches
     })
 
     // Sort by programme name or code
     const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
-
     // Filter by search input
     const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
       return (
@@ -179,19 +219,36 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                   </Link>
                 </div>
               </TableCell>
-              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.VETOVOIMAISUUS)}>
-                <TrafficLight color={programmeData.vetovoimaisuus} variant="medium"></TrafficLight>
+              <TrafficLightCell
+                programmeData={programmeData}
+                groupKey={GroupKey.VETOVOIMAISUUS}
+                colorKey={ColorKey.vetovoimaisuus}
+                handleModalOpen={handleModalOpen}
+              />
+
+              <TrafficLightCell
+                programmeData={programmeData}
+                groupKey={GroupKey.LAPIVIRTAUS}
+                colorKey={ColorKey.lapivirtaus}
+                handleModalOpen={handleModalOpen}
+              />
+
+              <TrafficLightCell
+                programmeData={programmeData}
+                groupKey={GroupKey.OPISKELIJAPALAUTE}
+                colorKey={ColorKey.opiskelijapalaute}
+                handleModalOpen={handleModalOpen}
+              />
+
+              <TrafficLightCell
+                programmeData={programmeData}
+                groupKey={GroupKey.RESURSSIT}
+                colorKey={ColorKey.resurssit}
+                handleModalOpen={handleModalOpen}
+              />
+              <TableCell>
+                <ActionsCell programmeData={programmeData} />
               </TableCell>
-              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.LAPIVIRTAUS)}>
-                <TrafficLight color={programmeData.lapivirtaus} variant="medium"></TrafficLight>
-              </TableCell>
-              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.OPISKELIJAPALAUTE)}>
-                <TrafficLight color={programmeData.opiskelijapalaute} variant="medium"></TrafficLight>
-              </TableCell>
-              <TableCell onClick={() => handleModalOpen(programmeData, GroupKey.RESURSSIT)}>
-                <TrafficLight color={programmeData.resurssit} variant="medium"></TrafficLight>
-              </TableCell>
-              <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>

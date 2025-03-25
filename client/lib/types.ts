@@ -26,6 +26,8 @@ export interface KeyDataProgramme {
   resurssit: string
   international: boolean
   year: number
+  redLights?: string[]
+  yellowLights?: string[]
 }
 
 export interface KeyDataMetadata {

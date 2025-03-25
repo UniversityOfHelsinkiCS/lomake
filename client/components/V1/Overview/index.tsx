@@ -12,6 +12,7 @@ import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Typography } from '@mui/material'
+import { getReports } from '@/client/util/redux/reportsSlicer'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -25,7 +26,7 @@ const OverviewPage = () => {
   const selectedFaculties = useSelector((state: RootState) => state.filters.faculty)
   const selectedLevel = useSelector((state: RootState) => state.filters.level)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
-
+  const reports = useSelector((state: RootState) => state.reports)
   const currentUser = useSelector((state: RootState) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }: Record<string, any>) => studyProgrammes.data)
 
@@ -49,6 +50,12 @@ const OverviewPage = () => {
       })
     }
   }, [selectedFaculties, selectedLevel, selectedYear])
+
+  useEffect(() => {
+    if (selectedYear) {
+      dispatch(getReports({ year: selectedYear }))
+    }
+  }, [selectedYear])
 
   useEffect(() => {
     document.title = `${t('overview:overviewPage')}`
@@ -80,7 +87,11 @@ const OverviewPage = () => {
         </div>
       </div>
 
-      <KeyDataTableComponent yearFilter={selectedYear} facultyFilter={selectedFaculties} programmeLevelFilter={selectedLevel} />
+      <KeyDataTableComponent
+        yearFilter={selectedYear}
+        facultyFilter={selectedFaculties}
+        programmeLevelFilter={selectedLevel}
+      />
     </div>
   )
 }

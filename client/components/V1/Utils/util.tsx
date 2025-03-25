@@ -3,6 +3,7 @@ import { TFunction } from 'i18next'
 import { GroupKey, LightColors } from '@/client/lib/enums'
 import type { KeyDataProgramme } from '@/client/lib/types'
 import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   return useMemo(() => {
@@ -87,4 +88,30 @@ export const getKeyDataPoints = (t: TFunction, programme: KeyDataProgramme) => {
     )
 
   return KeyDataPoints
+}
+
+export const useNotificationUtils = () => {
+  const reports = useSelector((state: { reports: any }) => state.reports.dataForYear)
+
+  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey) => {
+    const isRed = programmeData.redLights?.includes(groupKey)
+    const isYellow = programmeData.yellowLights?.includes(groupKey)
+    const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.[groupKey]?.length > 0
+
+    return (isRed || isYellow) && !hasReport
+  }
+  const renderActionsBadge = (programmeData: KeyDataProgramme, includeReport: boolean = false) => {
+    const hasRedLights = programmeData.redLights?.length > 0
+    const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.['Toimenpiteet']?.length > 0
+
+    return {
+      showBadge: hasRedLights && !hasReport,
+      showIcon: includeReport && hasReport,
+    }
+  }
+
+  return {
+    renderTrafficLightBadge,
+    renderActionsBadge,
+  }
 }
