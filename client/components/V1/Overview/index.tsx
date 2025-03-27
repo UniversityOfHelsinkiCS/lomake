@@ -13,7 +13,7 @@ import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Typography } from '@mui/material'
 import { getReports } from '@/client/util/redux/reportsSlicer'
-import { isAdmin } from '@/config/common'
+import { inProduction, isAdmin } from '@/config/common'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -69,7 +69,8 @@ const OverviewPage = () => {
     dropdownFilter: selectedLevel,
   })
 
-  if (!isAdmin(currentUser.data)) {
+  // we dont want show this to the users yet
+  if (!isAdmin(currentUser.data) && inProduction) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
 

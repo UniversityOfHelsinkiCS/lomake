@@ -17,7 +17,7 @@ import NoPermissions from '../../Generic/NoPermissions'
 
 import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataCardData, KeyDataProgramme } from '@/client/lib/types'
-import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
+import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { RootState } from '@/client/util/store'
 import { getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
@@ -76,7 +76,8 @@ const ProgrammeView = () => {
     }
   }, [])
 
-  if (!isAdmin(currentUser.data)) {
+  // we dont want to show this to the users yet
+  if (!isAdmin(currentUser.data) && inProduction) {
       return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
     }
 
