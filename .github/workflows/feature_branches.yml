@@ -26,7 +26,10 @@ jobs:
             yearselector,
             evaluation,
             metaevaluation,
-            homepage,
+            trackingpage,
+            facultymonitoringoverview,
+            textfield,
+            overview,
           ]
     name: Run tests
     runs-on: ubuntu-latest
