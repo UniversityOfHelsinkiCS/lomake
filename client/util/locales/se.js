@@ -159,6 +159,12 @@ export default {
     ],
     degreeReformTitle: 'Utvärdering av utbildningsreformen (Stora hjulet 2015)',
     degreeReformSubtitles: ['Utbildningens nuvarande tillstånd', 'Enkäten och sammanfattningar 2024'],
+    archive: 'Här kan du se svaren från åren 2019-2024',
+    yearly: 'Öppnas 15.4.2025',
+    toArchive: 'Gå till arkivet',
+    toYearly: 'Gå till årlig uppföljning',
+    contentTitleArchive: 'Arkiv (2019-2024)',
+    contentTitleYearly: 'Årlig uppföljning 2025',
   },
 
   comparison: {

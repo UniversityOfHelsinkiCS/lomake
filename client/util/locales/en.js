@@ -159,6 +159,12 @@ export default {
     ],
     degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
     degreeReformSubtitles: ['Current state of education survey and summaries 2024'],
+    archive: 'Here you can see responses from 2019-2024',
+    yearly: 'Opens on 15.4.2025',
+    toArchive: 'Go to archive',
+    toYearly: 'Go to annual follow-up',
+    contentTitleArchive: 'Archive (2019-2024)',
+    contentTitleYearly: 'Annual follow-up 2025',
   },
 
   comparison: {

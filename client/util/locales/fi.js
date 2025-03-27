@@ -163,6 +163,13 @@ export default {
     ],
     degreeReformTitle: 'Koulutusuudistuksen (Iso Pyörä 2015) arviointi',
     degreeReformSubtitles: ['Koulutuksen nykytila ja yhteenvedot 2024'],
+    archive: 'Täältä näet vuosien 2019-2024 vastaukset',
+    yearly: 'Aukeaa 15.4.2025',
+    toArchive: 'Siirry arkistoon',
+    toYearly: 'Siirry vuosiseurantaan',
+    contentTitleArchive: 'Arkisto (2019-2024)',
+    contentTitleYearly: 'Vuosiseuranta 2025',
+
   },
 
   comparison: {
