@@ -73,7 +73,7 @@ export const KeyDataProgrammeSchema = z
         en: z.string(),
       })
       .strict(),
-    values: z.object({}),
+    values: z.record(z.string(), z.any()),
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
