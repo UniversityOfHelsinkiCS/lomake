@@ -30,6 +30,7 @@ const ProgrammeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
+  const currentUser = useSelector((state: RootState) => state.currentUser)
 
   const keyData = useFetchSingleKeyData(programmeKey)
   const reports = useSelector((state: RootState) => state.reports.dataForYear)
@@ -74,6 +75,10 @@ const ProgrammeView = () => {
       dispatch(wsLeaveRoom(form))
     }
   }, [])
+
+  if (!isAdmin(currentUser.data)) {
+      return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+    }
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 

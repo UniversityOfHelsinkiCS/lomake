@@ -13,6 +13,7 @@ import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 import { Typography } from '@mui/material'
 import { getReports } from '@/client/util/redux/reportsSlicer'
+import { isAdmin } from '@/config/common'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -67,6 +68,10 @@ const OverviewPage = () => {
     faculty: selectedFaculties,
     dropdownFilter: selectedLevel,
   })
+
+  if (!isAdmin(currentUser.data)) {
+    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  }
 
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
