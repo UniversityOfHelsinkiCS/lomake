@@ -165,6 +165,7 @@ export default {
     toYearly: 'Go to annual follow-up',
     contentTitleArchive: 'Archive (2019-2024)',
     contentTitleYearly: 'Annual follow-up 2025',
+    feedback: 'Feedback on Tilannekuvalomake?',
   },
 
   comparison: {

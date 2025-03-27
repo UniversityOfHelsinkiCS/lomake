@@ -14,8 +14,7 @@ import {
 } from '@mui/material'
 import LibraryImage from '../../assets/library.jpg'
 import RypsiImage from '../../assets/rypsi.jpg'
-import { ArrowForward } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { ArrowForward, MailOutlined } from '@mui/icons-material'
 
 const Homepage = () => {
   const { t } = useTranslation()
@@ -39,7 +38,7 @@ const Homepage = () => {
         <Typography variant='h1' data-cy="landingpage-title" sx={{ textAlign: 'center' }}>
           {t('landingPage:title').toUpperCase()}
         </Typography>
-        <Typography variant='light' data-cy="landingpage-subtitle" sx={{ textAlign:'center', margin: '10rem'}}>
+        <Typography variant='light' data-cy="landingpage-subtitle" sx={{ textAlign: 'center', margin: '10rem' }}>
           {t('landingPage:subTitle')}
         </Typography>
       </Box>
@@ -82,6 +81,15 @@ const Homepage = () => {
             <Button size="small" href='/yearly'>{t('landingPage:toArchive')}{<ArrowForward />}</Button>
           </CardActions>
         </Card>
+      </Box>
+      <Box marginTop={10}>
+        <Typography alignItems={'center'} sx={{ textAlign: 'center' }}>
+          {t('landingPage:feedback')}
+        </Typography>
+        <a href="mailto:ospa@helsinki.fi" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <MailOutlined />
+          ospa@helsinki.fi
+        </a>
       </Box>
     </Container>
   )

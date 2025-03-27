@@ -165,6 +165,7 @@ export default {
     toYearly: 'Gå till årlig uppföljning',
     contentTitleArchive: 'Arkiv (2019-2024)',
     contentTitleYearly: 'Årlig uppföljning 2025',
+    feedback: 'Återkoppling om Tilannekuvalomake?',
   },
 
   comparison: {
