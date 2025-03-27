@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { LanguageSharp, Logout } from '@mui/icons-material'
 import { images } from '../util/common'
 import { logoutAction } from '../util/redux/currentUserReducer'
 import { setLanguage } from '../util/redux/languageReducer'
@@ -112,7 +113,8 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
       >
-        {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
+          <LanguageSharp />
+          {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
       </MenuItem>
       <Menu
         id="language-menu"
@@ -179,11 +181,13 @@ const NavBar = () => {
   )
 
   const renderLogOut = () => (
-    <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex'}}>
+    <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex' }}>
       <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
       <MenuItem data-cy="nav-logout" onClick={handleLogout}>
+      <Logout />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          
           {`${t('logOut')} (${user.uid})`}
           {isSuperAdmin(user) && (
             <Chip color='error' label={`Server running since ${new Date(user.lastRestart).toLocaleTimeString()}`} />
@@ -317,7 +321,7 @@ const NavBar = () => {
         <Toolbar disableGutters>
           {renderHome('/')}
           <Box marginLeft="auto">
-          {renderNavRoutes()}
+            {renderNavRoutes()}
           </Box>
           {renderLogOut()}
         </Toolbar>
