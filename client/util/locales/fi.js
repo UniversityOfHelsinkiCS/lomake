@@ -169,7 +169,6 @@ export default {
     toYearly: 'Siirry vuosiseurantaan',
     contentTitleArchive: 'Arkisto (2019-2024)',
     contentTitleYearly: 'Vuosiseuranta 2025',
-
   },
 
   comparison: {
