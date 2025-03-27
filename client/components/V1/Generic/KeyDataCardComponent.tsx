@@ -8,7 +8,9 @@ import ColorMeterComponent from './ColorMeterComponent'
 import ColorHistoryComponent from './ColorHistoryComponent'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
+import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { KeyDataCardData } from '@/client/lib/types'
+import { RootState } from '@/client/util/store'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -35,7 +37,7 @@ interface CriteriaCardProps {
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
 
   const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
   return (
@@ -120,7 +122,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
               limits={props.limits}
               unit={props.unit}
             />
-            <ColorHistoryComponent {...props}/>
+            <ColorHistoryComponent {...props} />
           </div>
         )}
       </CardActionArea>

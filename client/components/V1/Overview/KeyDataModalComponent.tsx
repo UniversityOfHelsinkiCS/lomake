@@ -8,7 +8,8 @@ import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import type { KeyDataCardData, KeyDataProgramme, KeyDataMetadata } from '@/client/lib/types'
+import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
+import type { KeyDataCardData } from '@/client/lib/types'
 
 import { Box, CircularProgress, Typography } from '@mui/material'
 import TextFieldComponent from '../Generic/TextFieldComponent'
@@ -32,7 +33,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   const form = 10
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const lang = useSelector((state: RootState) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
 
   // TODO: When the year is coded into the key data itself, remove this and implement the year from that data
   const year = useSelector((state: RootState) => state.filters.keyDataYear)

@@ -100,8 +100,8 @@ export const MetadataSchema = z
     maaritelma: z
       .object({
         fi: z.string(),
-        se: z.string().optional(), // delete optional when updated
-        en: z.string().optional(), // delete optional when updated
+        se: z.string().optional(), // delete optionality when updated
+        en: z.string().optional(), // delete optionality when updated
       })
       .strict(),
     ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),

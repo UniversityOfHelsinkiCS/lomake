@@ -16,15 +16,16 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataCardData, KeyDataProgramme } from '@/client/lib/types'
-import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { RootState } from '@/client/util/store'
+import { KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataCardData } from '@/client/lib/types'
+import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
 import { getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 
 const ProgrammeView = () => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
@@ -78,8 +79,8 @@ const ProgrammeView = () => {
 
   // we dont want to show this to the users yet
   if (!isAdmin(currentUser.data) && inProduction) {
-      return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-    }
+    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  }
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
@@ -134,7 +135,7 @@ const ProgrammeView = () => {
         </IconButton>
 
         <Typography variant="h2" style={{ paddingTop: '2rem' }}>
-          {programme.koulutusohjelma[lang as any]} {selectedYear}
+          {programme.koulutusohjelma[lang]} {selectedYear}
         </Typography>
       </div>
 

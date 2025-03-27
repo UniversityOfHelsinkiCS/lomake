@@ -8,7 +8,8 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 import { ColorKey, GroupKey } from '@/client/lib/enums'
-import { KeyDataProgramme } from '@/client/lib/types'
+import { KeyDataProgramme } from '@/shared/lib/types'
+import { RootState } from '@/client/util/store'
 
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
@@ -65,7 +66,7 @@ const TrafficLightCell = ({
 }
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
 
@@ -94,7 +95,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
-      const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter) - 1 // Always fetch previous year results
+      const yearMatches = programmeData.year === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
       return yearMatches && facultyMatches && levelMatches
@@ -105,7 +106,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     // Filter by search input
     const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
       return (
-        programmeData.koulutusohjelma[lang].toLowerCase()?.includes(searchValue.toLowerCase()) ||
+        programmeData.koulutusohjelma[lang]?.toLowerCase().includes(searchValue.toLowerCase()) ||
         programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
       )
     })
