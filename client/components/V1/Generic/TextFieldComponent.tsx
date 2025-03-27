@@ -227,7 +227,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 </Typography>
               )}
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '2rem' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
@@ -236,7 +236,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         <>
           <Card
             variant="outlined"
-            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '19rem' : undefined }}
+            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '18.75rem' : undefined }}
           >
             {type === 'Comment' && (
               <CardHeader
@@ -257,7 +257,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 paddingLeft: type === 'Comment' ? 0 : undefined,
                 minWidth: 0,
                 overflowWrap: 'break-word',
-                alignSelf: 'center',
+                alignSelf: type === 'Comment' ? 'center': undefined,
               }}
             >
               {content ? (
@@ -289,7 +289,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
             </Button>
 
             <CurrentEditor fieldName={id} />
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography  variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
