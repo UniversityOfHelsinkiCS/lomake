@@ -15,6 +15,7 @@ import {
 import LibraryImage from '../../assets/library.jpg'
 import RypsiImage from '../../assets/rypsi.jpg'
 import { ArrowForward, MailOutlined } from '@mui/icons-material'
+import { basePath } from '@/config/common'
 
 const Homepage = () => {
   const { t } = useTranslation()
@@ -78,7 +79,7 @@ const Homepage = () => {
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'right' }}>
-            <Button size="small" href='/yearly'>{t('landingPage:toArchive')}{<ArrowForward />}</Button>
+            <Button size="small" href={`${basePath}yearly`}>{t('landingPage:toArchive')}{<ArrowForward />}</Button>
           </CardActions>
         </Card>
       </Box>
