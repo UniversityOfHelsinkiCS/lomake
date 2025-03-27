@@ -141,9 +141,7 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
 
 const UnHijackButton = ({ handleUnhijack }) => (
   <MenuItem data-cy="sign-in-as" onClick={handleUnhijack}>
-    <Chip color="green" horizontal>
-      Unhijack
-    </Chip>
+    <Chip color='error' label='Unhijack' />
   </MenuItem>
 )
 
