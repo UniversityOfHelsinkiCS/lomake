@@ -20,8 +20,8 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll({
       where: {
-        active: true
-      }
+        active: true,
+      },
     })
 
     // @ts-expect-error
@@ -36,26 +36,24 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
-    // TODO: uncomment when updated data.xlsx is in staging and production
-    // Validate formatted key data
-    // try {
-    //   KeyDataProgrammeSchema.extend({
-    //     values: KandiohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.kandiohjelmat)
+    try {
+      KeyDataProgrammeSchema.extend({
+        values: KandiohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.kandiohjelmat)
 
-    //   KeyDataProgrammeSchema.extend({
-    //     values: MaisteriohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.maisteriohjelmat)
+      KeyDataProgrammeSchema.extend({
+        values: MaisteriohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.maisteriohjelmat)
 
-    //   MetadataSchema.array().parse(formattedKeyData.metadata)
-    // } catch (zodError) {
-    //   logZodError(zodError as ZodError)
-    //   throw new Error('Invalid KeyData format')
-    // }
+      MetadataSchema.array().parse(formattedKeyData.metadata)
+    } catch (zodError) {
+      logZodError(zodError as ZodError)
+      throw new Error('Invalid KeyData format')
+    }
 
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
@@ -90,13 +88,16 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
           jsonSheet[sheetName] = data
         })
 
-        await KeyData.update({
-          active: false,
-        }, {
-          where: {
-            active: true,
-          }
-        })
+        await KeyData.update(
+          {
+            active: false,
+          },
+          {
+            where: {
+              active: true,
+            },
+          },
+        )
 
         await KeyData.create({
           data: jsonSheet,
@@ -113,7 +114,7 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
 const getKeyDataMeta = async (_req: Request, res: Response): Promise<Response> => {
   try {
     const keyData = await KeyData.findAll({
-      attributes: ['id', 'active','createdAt'],
+      attributes: ['id', 'active', 'createdAt'],
     })
 
     if (!keyData.length) {
@@ -121,8 +122,7 @@ const getKeyDataMeta = async (_req: Request, res: Response): Promise<Response> =
     }
 
     return res.status(200).json(keyData)
-  }
-  catch (error) {
+  } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }
 }
@@ -138,8 +138,7 @@ const deleteKeyData = async (req: Request, res: Response): Promise<Response> => 
 
     await keyData.destroy()
     return res.status(204).json({ message: 'Key data deleted' })
-  }
-  catch (error) {
+  } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }
 }
@@ -153,19 +152,22 @@ const updateKeyData = async (req: Request, res: Response): Promise<Response> => 
       return res.status(404).json({ error: 'Key data not found' })
     }
 
-    await KeyData.update({
-      active: false,
-    }, {
-      where: {
-        active: true,
-      }
-    })
+    await KeyData.update(
+      {
+        active: false,
+      },
+      {
+        where: {
+          active: true,
+        },
+      },
+    )
 
     await keyData.update({
       active: true,
     })
 
-    return res.status(200).json(keyData)  
+    return res.status(200).json(keyData)
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
   }
