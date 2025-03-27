@@ -120,7 +120,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         </Typography>
         <Card
           variant="outlined"
-          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '19rem' : undefined }}
         >
           {type === 'Comment' && (
             <CardHeader
@@ -236,7 +236,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         <>
           <Card
             variant="outlined"
-            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '19rem' : undefined }}
           >
             {type === 'Comment' && (
               <CardHeader
@@ -275,7 +275,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               alignItems: 'center',
               width: '100%',
               justifyContent: 'space-between',
-              marginTop: '1rem',
+              marginTop: '2rem',
             }}
           >
             <Button
