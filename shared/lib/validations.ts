@@ -118,6 +118,23 @@ export const MetadataSchema = z
   })
   .strict() // to disallow extra keys
 
+export const MetadataRawSchema = z
+  .object({
+    Yksikkö: z.literal('%').optional(),
+    Kynnysarvot: z.string().optional(), // delete optionality when updated
+    Liikennevalo: z.boolean(),
+    Arviointialue: z.string(),
+    'Ohjelman taso': z.string(),
+    'Mittarin rajat': z.string().optional(), // delete optionality when updated
+    Määritelmä_fi: z.string(),
+    Määritelmä_se: z.string().optional(), // delete optionality when updated
+    Määritelmä_en: z.string().optional(), // delete optionality when updated
+    'Avainluvun nimi_en': z.string(),
+    'Avainluvun nimi_fi': z.string(),
+    'Avainluvun nimi_se': z.string(),
+  })
+  .strict() // to disallow extra keys
+
 export const logZodError = (error: ZodError) => {
   let parsedErrors: any[] = []
   let typesOfErrors: { [key: string]: number } = {}
