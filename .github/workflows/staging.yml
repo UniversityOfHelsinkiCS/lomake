@@ -5,12 +5,33 @@ on:
     branches: [master]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build project for linting
+        run: npm ci
+      - name: Run eslint and ts checks
+        run: npm run lint
+
+  translations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build project for translations
+        run: npm ci
+      - name: Analyse translations
+        run: npm run translations -- --lang fi,en,sv
+
   tests:
     strategy:
       fail-fast: false
       matrix:
         spec:
           [
+            comparison,
             degreeReform,
             form,
             formNotifications,
