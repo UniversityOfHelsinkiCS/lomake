@@ -49,6 +49,7 @@ const TRANSLATION_KEY_REFERENCE_MATCHER_2 = new RegExp(/\bt\(['"`]\w+(?::\w+)*['
 const DEFAULT_NAMESPACE = 'common'
 const LANGUAGES = ['fi', 'se', 'en']
 const NAMESPACE = 'translation'
+const IGNOREFILE_PATH = path.join('scripts', '.translationignore')
 
 /**
  * Imports a translation object from an ES module file.
@@ -95,6 +96,8 @@ const log = (...msg) => {
 
   const argLangs = args.lang ? args.lang.split(',') : LANGUAGES
 
+  const translationIgnores = await readTranslationIgnoreFile()
+
   const translationKeyReferences = new Map()
   let fileCount = 0
   log0(`Analyzing ${ROOT_PATH}...`)
@@ -114,6 +117,11 @@ const log = (...msg) => {
           const common = !match.includes(':')
           const location = new Location(file, lineNumber)
           const reference = `${common ? 'common:' : ''}${match.slice(t ? 3 : 1, match.length - 1)}`
+
+          if (translationIgnores.has(reference)) {
+            return
+          }
+
           if (translationKeyReferences.has(reference)) {
             translationKeyReferences.get(reference).push(location)
           } else {
@@ -198,6 +206,7 @@ const log = (...msg) => {
 
   if (missingCount > 0) {
     log(`\n${FgRed}${Bright}Error:${Reset} ${missingCount} translations missing\n`)
+    log(`For false positives, add key to ${FgCyan}${IGNOREFILE_PATH}${Reset}\n`)
     const langsOpt = args.lang ? `--lang ${argLangs.join(',')}` : ''
     const recommendedCmd = `${FgCyan}npm run translations -- --create ${langsOpt}${Reset}`
     log(`Run to populate missing translations now:\n> ${recommendedCmd}\n`)
@@ -235,7 +244,7 @@ const printMissing = (translationKey, referenceLocations, missingLangs, longestK
     msg += ' '
   }
 
-  msg += ['fi', 'en', 'sv']
+  msg += ['fi', 'en', 'se']
     .map(l => (missingLangs.includes(l) ? `${FgRed}${l}${Reset}` : `${FgGreen}${l}${Reset}`))
     .join(', ')
 
@@ -351,7 +360,7 @@ const createMissingTranslations = async missingByLang => {
  */
 function printHelp() {
   console.log('Usage:')
-  console.log('--lang fi,sv,en')
+  console.log('--lang fi,se,en')
   console.log('--unused: print all potentially unused translation fields')
   console.log('--detailed: Show usage locations')
   console.log('--quiet: Print less stuff')
@@ -382,5 +391,30 @@ class Location {
 
   toString() {
     return `${this.file}:${this.line}`
+  }
+}
+
+/**
+ * Reads the .translationignore file and returns a set of ignored translation keys.
+ * Lines starting with # are treated as comments and ignored.
+ * @returns {Promise<Set<string>>} A set of translation keys to ignore.
+ */
+async function readTranslationIgnoreFile() {
+  try {
+    const content = await fs.readFile(IGNOREFILE_PATH, 'utf8')
+    const ignoredKeys = new Set(
+      content
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line.length > 0 && !line.startsWith('#'))
+    )
+    log0(`Number of ignored keys in ${IGNOREFILE_PATH}: ${ignoredKeys.size}`)
+    return ignoredKeys
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      log0('No .translationignore file found, proceeding without ignored keys.')
+      return new Set()
+    }
+    throw err
   }
 }
