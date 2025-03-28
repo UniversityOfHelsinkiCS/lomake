@@ -39,7 +39,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
 
-  const hasUnsavedChanges = hasLock && dataFromRedux !== content
+  const hasUnsavedChanges = hasLock || dataFromRedux !== content
 
   const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
 
@@ -55,7 +55,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
-  }, [dataFromRedux, hasLock])
+  }, [dataFromRedux])
 
   useEffect(() => {
     if (hasLock && textFieldRef.current) {
@@ -169,7 +169,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         </Typography>
         {children}
       </div>
-      {hasLock ? (
+      {hasLock || content !== dataFromRedux ? (
         <>
           <TextField
             style={{}}
@@ -216,12 +216,12 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               >
                 {t(`keyData:save${type}`)}
               </Button>
-              {hasUnsavedChanges && (
+              {content !== dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'red' }}>
                   {t('keyData:unsavedChanges')}!
                 </Typography>
               )}
-              {hasLock && !hasUnsavedChanges && (
+              {hasLock && content === dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'gray' }}>
                   {t('generic:textUnsavedRelease')}
                 </Typography>
