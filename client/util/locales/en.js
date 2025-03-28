@@ -604,7 +604,7 @@ export default {
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
     colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
     unsavedChangesWarning:
-      'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" will discard the changes.',
+      'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
     yearlyDevelopment: 'Annual development',
     year: 'year',
     value: 'value',
