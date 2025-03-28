@@ -27,6 +27,7 @@ interface KeyDataTableProps {
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { renderActionsBadge } = useNotificationBadge()
+  const { t } = useTranslation()
 
   const actionsBadgeData = useMemo(() => {
     return renderActionsBadge(programmeData, true)
@@ -34,7 +35,7 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 
   return (
     <>
-      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
+      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" tooltip={t('keyData:missingMeasure')} />}
       {actionsBadgeData.showIcon && <ChatBubbleOutlineIcon color="secondary" />}
     </>
   )
@@ -52,6 +53,7 @@ const TrafficLightCell = ({
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
+  const { t } = useTranslation()
 
   const shouldRenderBadge = useMemo(() => {
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
@@ -60,7 +62,7 @@ const TrafficLightCell = ({
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
       <TrafficLight color={programmeData[colorKey]} variant="medium" />
-      {shouldRenderBadge && <NotificationBadge />}
+      {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
     </TableCell>
   )
 }
