@@ -77,10 +77,6 @@ const ProgrammeView = () => {
     }
   }, [])
 
-  // we dont want to show this to the users yet
-  if (!isAdmin(currentUser.data) && inProduction) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
 
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 

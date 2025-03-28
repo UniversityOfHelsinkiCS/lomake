@@ -69,11 +69,6 @@ const OverviewPage = () => {
     dropdownFilter: selectedLevel,
   })
 
-  // we dont want show this to the users yet
-  if (!isAdmin(currentUser.data) && inProduction) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
-
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
