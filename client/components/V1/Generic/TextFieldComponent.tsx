@@ -39,7 +39,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   const textFieldRef = useRef<HTMLInputElement>(null)
   const componentRef = useRef<HTMLDivElement>(null)
 
-  const hasUnsavedChanges = hasLock || dataFromRedux !== content
+  const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
   const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
 
@@ -96,7 +96,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [hasUnsavedChanges, t, dataFromRedux])
+  }, [hasUnsavedChanges, t, dataFromRedux, content])
 
   const handleStopEditing = () => {
     setHasLock(false)
