@@ -602,7 +602,7 @@ export default {
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
     unsavedChangesWarning:
-      'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" ja muutokset hylätään',
+      'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" jatkaaksesi muokkausta.',
     yearlyDevelopment: 'Avainluvun kehitys vuosittain',
     year: 'vuosi',
     value: 'arvo',
