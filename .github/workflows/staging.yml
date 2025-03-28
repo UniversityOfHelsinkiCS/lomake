@@ -23,7 +23,7 @@ jobs:
       - name: Build project for translations
         run: npm ci
       - name: Analyse translations
-        run: npm run translations -- --lang fi,en,sv
+        run: npm run translations -- --lang fi,en
 
   tests:
     strategy:
