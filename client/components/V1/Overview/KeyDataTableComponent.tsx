@@ -102,7 +102,9 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     })
 
     // Sort by programme name or code
-    const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
+    const sortCallback = (item: KeyDataProgramme) =>
+      sortIdentity === 'koulutusohjelma' ? item.koulutusohjelma[lang] : item.koulutusohjelmakoodi
+    const sortedData = orderBy(filteredData, item => sortCallback(item), [sortDirection])
     // Filter by search input
     const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
       return (
