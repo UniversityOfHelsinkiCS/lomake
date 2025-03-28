@@ -46,6 +46,7 @@ export default {
     clearSelection: 'Clear selection',
     responses: 'Responses:',
     writtenAnswers: 'Writte"all": "All" monitoring',
+    trafficLights: 'Traffic lights',
     chooseTrafficLight: 'Select a traffic light evaluation',
     noTrafficLight: 'No evaluations. Press the button to add a new traffic light evaluation.',
 
@@ -125,6 +126,7 @@ export default {
     overview: 'Owerview',
     startDateEndDateError: 'The start time cannot be later than the estimated end time',
     modifyLights: 'Modify lights',
+    confirmRemoveLight: 'Are you sure you want to delete?',
     facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
   },
 
@@ -478,6 +480,7 @@ export default {
     contactToska: 'If you wish to change the deadline, please contact Toska (grp-toska@helsinki.fi).',
     noDeadlineSet: 'No deadline has yet been set for this year or the deadline has already passed. ',
     selectNewDeadline: 'Select new deadline',
+    selectForm: 'Select form',
     selectDraftYear: 'Set which years answers will be opened: ',
     deadlineWarning:
       'Form is already open for another draft year. Please freeze the form first so all data is saved properly',
@@ -535,6 +538,7 @@ export default {
     endsIn: 'Until',
     confirm: 'Delete temporary access right of {{firstname}} {{lastname}} to programme {{progName}}?',
     openForms: 'The last dates for filling in open forms',
+    uploadKeydata: 'Upload key figures',
   },
   facultyTracking: {
     facultyInfoHeader: 'Selection and planning of faculty measures ',
@@ -557,7 +561,6 @@ export default {
     master: `Master's programmes`,
     both: `Bachelor's and Master's programmes`,
     selectDegree: 'What is the degree of impact',
-    confirmRemoveLight: 'Are you sure you want to delete?',
   },
 
   keyData: {
