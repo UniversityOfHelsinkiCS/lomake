@@ -207,19 +207,12 @@ const log = (...msg) => {
   if (missingCount > 0) {
     log(`\n${FgRed}${Bright}Error:${Reset} ${missingCount} translations missing\n`)
     log(`For false positives, add key to ${FgCyan}${IGNOREFILE_PATH}${Reset}\n`)
-    const langsOpt = args.lang ? `--lang ${argLangs.join(',')}` : ''
-    const recommendedCmd = `${FgCyan}npm run translations -- --create ${langsOpt}${Reset}`
-    log(`Run to populate missing translations now:\n> ${recommendedCmd}\n`)
   } else {
     log(`${FgGreen}${Bright}Success:${Reset} All translations found\n`)
   }
 
   if (args.unused) {
     printUnused(translationsNotUsed, numberOfTranslations)
-  }
-
-  if (args.create) {
-    await createMissingTranslations(missingByLang)
   }
 
   if (missingCount > 0) {
@@ -271,91 +264,6 @@ const printUnused = (translationsNotUsed, numberOfTranslations) => {
 }
 
 /**
- * Prompts the user to create missing translations and writes them to files.
- * @param {Object} missingByLang - Object mapping languages to missing keys.
- */
-const createMissingTranslations = async missingByLang => {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
-
-  const prompt = query => new Promise(resolve => rl.question(query, resolve))
-
-  rl.on('close', () => {
-    console.log('Cancelled')
-    process.exit(1)
-  })
-
-  const promptInfosByKeys = {}
-
-  // Group missing keys by language
-  Object.entries(missingByLang).forEach(([lang, missingKeys]) => {
-    missingKeys.forEach(k => {
-      if (!promptInfosByKeys[k]) {
-        promptInfosByKeys[k] = []
-      }
-
-      promptInfosByKeys[k].push({
-        lang,
-        value: '',
-      })
-    })
-  })
-
-  // Prompt user for translations
-  for (const [k, info] of Object.entries(promptInfosByKeys)) {
-    console.log(`\nAdd translations for ${FgYellow}${k}${Reset}`)
-    for (const i of info) {
-      const value = await prompt(`${FgCyan}${i.lang}${Reset}: `)
-      i.value = value
-    }
-  }
-
-  const newTranslationsByLang = {}
-
-  // Organize new translations into a nested structure
-  Object.entries(promptInfosByKeys).forEach(([k, info]) => {
-    info.forEach(i => {
-      if (!i.value) {
-        return
-      }
-
-      if (!newTranslationsByLang[i.lang]) {
-        newTranslationsByLang[i.lang] = {}
-      }
-
-      const parts = k.split(':')
-      let obj = newTranslationsByLang[i.lang]
-
-      for (let i = 0; i < parts.length - 1; i++) {
-        if (!obj[parts[i]]) {
-          obj[parts[i]] = {}
-        }
-        obj = obj[parts[i]]
-      }
-
-      obj[parts[parts.length - 1]] = i.value
-    })
-  })
-
-  // Write new translations to files
-  console.log('Writing new translations to files...')
-  await Promise.all(
-    Object.entries(newTranslationsByLang).map(async ([lang, translations]) => {
-      const filePath = path.join(LOCALES_PATH, lang, `${NAMESPACE}.json`)
-
-      const translationObject = require(`../${LOCALES_PATH}/${lang}/${NAMESPACE}.json`)
-
-      // Deep merge
-      const merged = merge(translationObject, translations)
-
-      await fs.writeFile(filePath, JSON.stringify(merged, null, 2))
-    })
-  )
-}
-
-/**
  * Prints help information for the script.
  */
 function printHelp() {
@@ -364,7 +272,6 @@ function printHelp() {
   console.log('--unused: print all potentially unused translation fields')
   console.log('--detailed: Show usage locations')
   console.log('--quiet: Print less stuff')
-  console.log('--create: Populate missing translations in translation files')
 }
 
 /**

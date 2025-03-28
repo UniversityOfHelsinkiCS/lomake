@@ -533,6 +533,7 @@ export default {
     writingRight: 'Kirjoitusoikeus',
     endsIn: 'Päättyy',
     confirm: 'Poista käyttäjän {{firstname}} {{lastname}} väliaikainen oikeus ohjelmaan {{progName}}?',
+    uploadKeydata: 'Lataa avainluvut',
   },
   facultyTracking: {
     facultyInfoHeader: 'Tiedekunnan toimenpiteiden valinta ja suunnittelu ',
