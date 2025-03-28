@@ -638,7 +638,7 @@ export default {
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
     unsavedChangesWarning:
-      'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" för att avsluta redigeringen.',
+      'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" kan du fortsätta redigera.',
     yearlyDevelopment: 'Årlig utveckling',
     year: 'år',
     value: 'värde',
