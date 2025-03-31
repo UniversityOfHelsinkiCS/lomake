@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress, Tooltip, Typography } from '@mui/material'
+import { CircularProgress, Tooltip, Typography, Button } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
@@ -15,9 +15,13 @@ import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
+import { getReport } from '@/client/util/redux/reportsSlicer'
+import Modal from '../Generic/ModalTemplateComponent'
+import TextFieldComponent from '../Generic/TextFieldComponent'
 import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { wsJoinRoom } from '@/client/util/redux/websocketReducer'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -27,16 +31,28 @@ interface KeyDataTableProps {
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { renderActionsBadge } = useNotificationBadge()
-  const { t } = useTranslation()
+  const year = useSelector((state: RootState) => state.filters.keyDataYear)
+  const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
 
   const actionsBadgeData = useMemo(() => {
     return renderActionsBadge(programmeData, true)
   }, [programmeData, renderActionsBadge])
 
+  const handleOpen = () => {
+    dispatch(getReport({studyprogrammeKey: programmeData.koulutusohjelmakoodi, year}))
+    dispatch(wsJoinRoom(programmeData.koulutusohjelmakoodi, 10))
+    return setOpen(true)
+  }
+
   return (
     <>
-      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" tooltip={t('keyData:missingMeasure')} />}
-      {actionsBadgeData.showIcon && <ChatBubbleOutlineIcon color="secondary" />}
+      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
+      {actionsBadgeData.showIcon && (<Button onClick={handleOpen}><ChatBubbleOutlineIcon color="secondary" /></Button>)}
+      <Modal open={open} setOpen={setOpen}>
+        <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
+        </TextFieldComponent>
+      </Modal>
     </>
   )
 }
@@ -53,7 +69,6 @@ const TrafficLightCell = ({
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
-  const { t } = useTranslation()
 
   const shouldRenderBadge = useMemo(() => {
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
@@ -62,7 +77,7 @@ const TrafficLightCell = ({
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
       <TrafficLight color={programmeData[colorKey]} variant="medium" />
-      {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
+      {shouldRenderBadge && <NotificationBadge />}
     </TableCell>
   )
 }
