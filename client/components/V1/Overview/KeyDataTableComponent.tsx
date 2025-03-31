@@ -31,6 +31,7 @@ interface KeyDataTableProps {
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { renderActionsBadge } = useNotificationBadge()
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
@@ -41,17 +42,21 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
-    dispatch(getReport({studyprogrammeKey: programmeData.koulutusohjelmakoodi, year}))
+    dispatch(getReport({ studyprogrammeKey: programmeData.koulutusohjelmakoodi, year }))
     return setOpen(true)
   }
 
   return (
     <>
       {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
-      {actionsBadgeData.showIcon && (<Button onClick={handleOpen}><ChatBubbleOutlineIcon color="secondary" /></Button>)}
+      {actionsBadgeData.showIcon && (
+        <Button onClick={handleOpen}>
+          <ChatBubbleOutlineIcon color="secondary" />
+        </Button>
+      )}
       <Modal open={open} setOpen={setOpen}>
-        <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-        </TextFieldComponent>
+        <Typography variant="h5">{programmeData.koulutusohjelma[lang]}</Typography>
+        <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}></TextFieldComponent>
       </Modal>
     </>
   )
