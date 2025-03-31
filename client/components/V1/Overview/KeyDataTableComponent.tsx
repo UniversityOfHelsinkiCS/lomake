@@ -21,7 +21,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
-import { wsJoinRoom } from '@/client/util/redux/websocketReducer'
+import { setViewOnly } from '@/client/util/redux/formReducer'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -40,8 +40,8 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   }, [programmeData, renderActionsBadge])
 
   const handleOpen = () => {
+    dispatch(setViewOnly(true))
     dispatch(getReport({studyprogrammeKey: programmeData.koulutusohjelmakoodi, year}))
-    dispatch(wsJoinRoom(programmeData.koulutusohjelmakoodi, 10))
     return setOpen(true)
   }
 
