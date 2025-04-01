@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { initShibbolethPinger } from 'unfuck-spa-shibboleth-session'
 import { Loader } from 'semantic-ui-react'
+import { Box } from '@mui/material'
 import NavBar from './NavBar'
 import Router from './Router'
 import { formKeys } from '../../config/data'
@@ -16,7 +17,6 @@ import { getAnswersAction } from '../util/redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterReducer'
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
-import { Box } from '@mui/material'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -90,6 +90,7 @@ export default () => {
     }
   }, [currentUser])
 
+  // TODO: deprecate this and set the year by form
   // When oldAnswers are ready, set default year based on deadline or most recent answers
   useEffect(() => {
     if (!oldAnswers.data) return
@@ -105,10 +106,15 @@ export default () => {
     if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
       year = deadlines.draftYear.year
     } else {
-      // Find the most recent year with data
+      // Find the most recent year with data but the max is 2024
       year = oldAnswers.data.reduce((latestYear, answer) => {
         const isRelevantForm = answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION
-        if (Object.entries(answer.data).length > 0 && answer.year > latestYear && isRelevantForm) {
+        if (
+          Object.entries(answer.data).length > 0 &&
+          answer.year > latestYear &&
+          answer.year <= 2024 &&
+          isRelevantForm
+        ) {
           return answer.year
         }
         return latestYear
