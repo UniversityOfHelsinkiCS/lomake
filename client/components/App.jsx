@@ -17,6 +17,7 @@ import { getAnswersAction } from '../util/redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterReducer'
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
+import { ARCHIVE_LAST_YEAR } from '../../config/common'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -61,7 +62,7 @@ const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, for
         if (
           Object.entries(answer.data).length > 0 &&
           answer.year > latestYear &&
-          answer.year <= 2024 &&
+          answer.year <= ARCHIVE_LAST_YEAR &&
           isRelevantForm
         ) {
           return answer.year
