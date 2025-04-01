@@ -123,6 +123,9 @@ const ProgrammeView = () => {
 
   const KeyDataPoints = getKeyDataPoints(t, programme)
 
+  // remove before pilot 
+  if (!isAdmin(user) && inProduction) return <NoPermissions />
+
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ display: 'flex', alignItems: 'baseline' }}>
