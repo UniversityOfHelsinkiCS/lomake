@@ -74,6 +74,7 @@ const TrafficLightCell = ({
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
+  const { t } = useTranslation()
 
   const shouldRenderBadge = useMemo(() => {
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
@@ -82,7 +83,7 @@ const TrafficLightCell = ({
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
       <TrafficLight color={programmeData[colorKey]} variant="medium" />
-      {shouldRenderBadge && <NotificationBadge />}
+      {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')}/>}
     </TableCell>
   )
 }
