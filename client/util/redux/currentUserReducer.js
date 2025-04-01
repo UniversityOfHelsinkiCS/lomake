@@ -24,7 +24,7 @@ export const getYearsUserHasAccessToAction = user => {
 
   // Set all the three answered years to be the options by default
   const allYears = defaultYears
-  const currentYear = new Date().getFullYear()
+  const currentYear = 2024
 
   // Add current year as the first one, if it does not exist
   if (!allYears.includes(currentYear)) allYears.unshift(currentYear)
