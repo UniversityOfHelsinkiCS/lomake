@@ -29,6 +29,7 @@ const OverviewPage = () => {
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const currentUser = useSelector((state: RootState) => state.currentUser)
   const programmes = useSelector(({ studyProgrammes }: Record<string, any>) => studyProgrammes.data)
+  const user = useSelector((state: RootState) => state.currentUser.data)
 
   useEffect(() => {
     // This checks the URL for query parameters and updates the redux store accordingly
@@ -72,6 +73,9 @@ const OverviewPage = () => {
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
+
+  // remove before pilot
+  if (!isAdmin(user) && inProduction) return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
 
   return (
     <div style={{ padding: '2rem', width: '100%' }}>
