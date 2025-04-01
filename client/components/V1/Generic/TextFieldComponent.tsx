@@ -41,7 +41,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
-  const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
+  const MAX_CONTENT_LENGTH = type === 'Comment' ? 1000 : 5000
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
