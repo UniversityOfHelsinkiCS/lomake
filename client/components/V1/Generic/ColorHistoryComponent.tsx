@@ -1,4 +1,4 @@
-import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Divider } from '@mui/material'
+import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Divider, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
@@ -35,19 +35,18 @@ const ColorHistoryComponent = (props: any) => {
       value: dataKey ? programme.values[dataKey] : null,
     }))
   return (
-    <>
-      <Divider sx={{ my: 2 }} />
-      <Typography variant="light">{t('keyData:yearlyDevelopment')}</Typography>
-      <Table key={data.year}>
+    <Box sx={{ mt: 4 }}>
+      <Typography variant="italic">{t('keyData:yearlyDevelopment')}</Typography>
+      <Table key={data.year} sx={{ mt: 2 }}>
         <TableHead>
           <TableCell align="center">
-            <Typography variant="light">{t('keyData:year')}</Typography>
+            <Typography variant="lightSmall">{t('keyData:year')}</Typography>
           </TableCell>
           <TableCell align="center">
-            <Typography variant="light">{t('keyData:value')}</Typography>
+            <Typography variant="lightSmall">{t('keyData:value')}</Typography>
           </TableCell>
           <TableCell align="center">
-            <Typography variant="light">{t('keyData:trafficLight')}</Typography>
+            <Typography variant="lightSmall">{t('keyData:trafficLight')}</Typography>
           </TableCell>
         </TableHead>
         <TableBody>
@@ -72,7 +71,7 @@ const ColorHistoryComponent = (props: any) => {
           })}
         </TableBody>
       </Table>
-    </>
+    </Box>
   )
 }
 

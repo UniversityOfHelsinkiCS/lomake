@@ -56,7 +56,9 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
         </Button>
       )}
       <Modal open={open} setOpen={setOpen}>
-        <Typography variant="h5">{programmeData.koulutusohjelma[lang]}</Typography>
+        <Typography variant="h3">
+          {programmeData.koulutusohjelma[lang]} {year}
+        </Typography>
         <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}></TextFieldComponent>
       </Modal>
     </>
