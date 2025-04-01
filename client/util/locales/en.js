@@ -567,7 +567,7 @@ export default {
     info2:
       'The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
     notUsed2025: 'Not applicable in 2025',
-    keyFigure: 'Key Figures',
+    keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
 
     vetovoimaisuus: 'Attractiveness Of The Degree Programme',

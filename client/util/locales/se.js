@@ -601,7 +601,7 @@ export default {
     info2:
       'Nyckeltalen kommer att användas för den årliga uppföljningen av utbildningsprogrammen från och med 2025. Nyckeltalen och deras kriterier kommer att definieras separat för kandidat-, master- och doktorandprogram.',
     notUsed2025: 'Ej använd 2025',
-    keyFigure: 'Nyckeltal',
+    keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
     vetovoimaisuus: 'Utbildningsprogrammets Attraktionskraft',
