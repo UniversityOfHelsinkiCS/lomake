@@ -9,19 +9,19 @@ import {
 export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
 export type KandiohjelmatValues = z.infer<typeof KandiohjelmatValuesSchema>
 export type MaisteriohjelmatValues = z.infer<typeof MaisteriohjelmatValuesSchema>
-export type Metadata = z.infer<typeof MetadataSchema>
+export type KeyDataMetadata = z.infer<typeof MetadataSchema>
 
 export interface KeyData {
   data: {
     kandiohjelmat: KeyDataProgramme[]
     maisteriohjelmat: KeyDataProgramme[]
-    metadata: Metadata[]
+    metadata: KeyDataMetadata[]
   }
 }
 
 export interface SingleKeyData {
   programme: KeyDataProgramme
-  metadata: Metadata[]
+  metadata: KeyDataMetadata[]
 }
 
 export interface Faculty {

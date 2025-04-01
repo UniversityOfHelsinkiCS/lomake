@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
-import { LanguageSharp, Logout } from '@mui/icons-material'
+import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { images } from '../util/common'
 import { logoutAction } from '../util/redux/currentUserReducer'
 import { setLanguage } from '../util/redux/languageReducer'
@@ -16,10 +16,11 @@ import {
 } from '../../config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'yearlyAssessment', path: '/v1/overview', access: ['admin'] },
+  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['admin'] },
   archive: {
     key: 'archive',
     label: 'archive',
+    path: ['/yearly', '/evaluation', '/evaluation-faculty', '/evaluation-university', '/meta-evaluation', '/faculty-monitoring', '/degree-reform', '/individual', '/reform-answers', '/report', '/comparison'],
     items: [{ key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },
     {
       key: 'evaluation',
@@ -113,8 +114,11 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
       >
-          <LanguageSharp />
+        <LanguageSharp />
+        <Typography variant="light" alignContent='center' sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
           {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
+          {open ? <ArrowDropUp /> : <ArrowDropDown />}
+        </Typography>
       </MenuItem>
       <Menu
         id="language-menu"
@@ -128,13 +132,19 @@ const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
         }}
       >
         <MenuItem data-cy="navBar-localeOption-fi" onClick={handleMenuItemClick('fi')}>
-          Suomi
+          <Typography variant="light" alignContent='center' sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            Suomi
+          </Typography>
         </MenuItem>
         <MenuItem data-cy="navBar-localeOption-se" onClick={handleMenuItemClick('se')}>
-          Svenska
+          <Typography variant="light" alignContent='center' sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            Svenska
+          </Typography>
         </MenuItem>
         <MenuItem data-cy="navBar-localeOption-en" onClick={handleMenuItemClick('en')}>
-          English
+          <Typography variant="light" alignContent='center' sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            English
+          </Typography>
         </MenuItem>
       </Menu>
     </Box>
@@ -185,9 +195,9 @@ const NavBar = () => {
       <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
       <MenuItem data-cy="nav-logout" onClick={handleLogout}>
-      <Logout />
+        <Logout />
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          
+
           {`${t('logOut')} (${user.uid})`}
           {isSuperAdmin(user) && (
             <Chip color='error' label={`Server running since ${new Date(user.lastRestart).toLocaleTimeString()}`} />
@@ -257,35 +267,52 @@ const NavBar = () => {
             setOpenMenus({ ...openMenus, [fullKey]: false })
           }
 
-          return (
+            return (
             <React.Fragment key={fullKey}>
               <MenuItem
-                data-cy={`nav-${key}`}
-                onClick={handleMenuClick}
-                aria-haspopup="true"
-                aria-expanded={isOpen ? 'true' : 'false'}
+              data-cy={`nav-${key}`}
+              onClick={handleMenuClick}
+              aria-haspopup="true"
+              aria-expanded={isOpen ? 'true' : 'false'}
+              sx={{
+                position: 'relative',
+                '&::after': (Array.isArray(path) 
+                  ? path.some(p => location.pathname.startsWith(p))
+                  : location.pathname.startsWith(path)) 
+                  ? {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  bottom: -4,
+                  width: '100%',
+                  height: '3px',
+                  backgroundColor: 'black',
+                  borderRadius: '1px'
+                  } : {}
+              }}
               >
-                <Typography >
-                  {t(label)}
-                </Typography>
+              <Typography sx={{ display: 'flex', flexDirection: 'row' }}>
+                {t(label)}
+                {isOpen ? <ArrowDropUp /> : <ArrowDropDown />}
+              </Typography>
               </MenuItem>
               <Menu
-                anchorEl={anchorEl[fullKey]}
-                open={isOpen}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
+              anchorEl={anchorEl[fullKey]}
+              open={isOpen}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
               >
-                {renderItems(subItems, fullKey)}
+              {renderItems(subItems, fullKey)}
               </Menu>
             </React.Fragment>
-          )
+            )
         }
 
         return (
@@ -295,6 +322,23 @@ const NavBar = () => {
             to={path}
             data-cy={`nav-${key}`}
             onClick={() => setOpenMenus({})}
+            sx={{
+              position: 'relative',
+              '&::after': (() => {
+                const pathMatch = path.match(/^\/[^/]+/);
+                const currentPathMatch = location.pathname.match(/^\/[^/]+/);
+                return pathMatch && currentPathMatch && pathMatch[0] === currentPathMatch[0] ? {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  bottom: -4,
+                  width: '100%',
+                  height: '3px',
+                  backgroundColor: 'black',
+                  borderRadius: '1px'
+                } : {}
+              })()
+            }}
           >
             <Typography>
               {t(label)}

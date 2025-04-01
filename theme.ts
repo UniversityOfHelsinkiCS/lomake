@@ -3,6 +3,7 @@ import { CSSProperties } from '@mui/material/styles/createTypography'
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
+    h4regular?: CSSProperties
     regular: CSSProperties
     light: CSSProperties
     italic: CSSProperties
@@ -11,6 +12,7 @@ declare module '@mui/material/styles' {
   }
 
   interface TypographyVariantsOptions {
+    h4regular?: CSSProperties
     regular?: CSSProperties
     light?: CSSProperties
     italic?: CSSProperties
@@ -21,6 +23,7 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
+    h4regular: CSSProperties
     regular: true
     light: true
     italic: true
@@ -52,6 +55,10 @@ const themeOptions: ThemeOptions = {
     },
     h4: {
       fontWeight: 700, // Bold 18.5px
+      fontSize: '1.321rem',
+    },
+    h4regular: {
+      fontWeight: 400, // Regular 18.5px – lighter variant of h4
       fontSize: '1.321rem',
     },
     h5: {

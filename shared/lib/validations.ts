@@ -73,7 +73,7 @@ export const KeyDataProgrammeSchema = z
         en: z.string(),
       })
       .strict(),
-    values: z.object({}),
+    values: z.record(z.string(), z.any()),
     vetovoimaisuus: z.string(),
     lapivirtaus: z.string(),
     opiskelijapalaute: z.string(),
@@ -100,8 +100,8 @@ export const MetadataSchema = z
     maaritelma: z
       .object({
         fi: z.string(),
-        se: z.string().optional(), // delete optional when updated
-        en: z.string().optional(), // delete optional when updated
+        se: z.string().optional(), // delete optionality when updated
+        en: z.string().optional(), // delete optionality when updated
       })
       .strict(),
     ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
@@ -115,6 +115,23 @@ export const MetadataSchema = z
       .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
     yksikko: z.literal('%').optional(),
     liikennevalo: z.boolean(),
+  })
+  .strict() // to disallow extra keys
+
+export const MetadataRawSchema = z
+  .object({
+    Yksikkö: z.literal('%').optional(),
+    Kynnysarvot: z.string().optional(), // delete optionality when updated
+    Liikennevalo: z.boolean(),
+    Arviointialue: z.string(),
+    'Ohjelman taso': z.string(),
+    'Mittarin rajat': z.string().optional(), // delete optionality when updated
+    Määritelmä_fi: z.string(),
+    Määritelmä_se: z.string().optional(), // delete optionality when updated
+    Määritelmä_en: z.string().optional(), // delete optionality when updated
+    'Avainluvun nimi_en': z.string(),
+    'Avainluvun nimi_fi': z.string(),
+    'Avainluvun nimi_se': z.string(),
   })
   .strict() // to disallow extra keys
 

@@ -1,22 +1,27 @@
 import { useState, useMemo, useEffect } from 'react'
 import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress, Tooltip, Typography } from '@mui/material'
+import { CircularProgress, Tooltip, Typography, Button } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
 import { ColorKey, GroupKey } from '@/client/lib/enums'
-import { KeyDataProgramme } from '@/client/lib/types'
+import { KeyDataProgramme } from '@/shared/lib/types'
+import { RootState } from '@/client/util/store'
 
 import SearchInput from '../Generic/SearchInputComponent'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
 import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
+import { getReport } from '@/client/util/redux/reportsSlicer'
+import Modal from '../Generic/ModalTemplateComponent'
+import TextFieldComponent from '../Generic/TextFieldComponent'
 import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
+import { setViewOnly } from '@/client/util/redux/formReducer'
 
 interface KeyDataTableProps {
   facultyFilter: string[]
@@ -26,15 +31,33 @@ interface KeyDataTableProps {
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { renderActionsBadge } = useNotificationBadge()
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+  const year = useSelector((state: RootState) => state.filters.keyDataYear)
+  const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
 
   const actionsBadgeData = useMemo(() => {
     return renderActionsBadge(programmeData, true)
   }, [programmeData, renderActionsBadge])
 
+  const handleOpen = () => {
+    dispatch(setViewOnly(true))
+    dispatch(getReport({ studyprogrammeKey: programmeData.koulutusohjelmakoodi, year }))
+    return setOpen(true)
+  }
+
   return (
     <>
       {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
-      {actionsBadgeData.showIcon && <ChatBubbleOutlineIcon color="secondary" />}
+      {actionsBadgeData.showIcon && (
+        <Button onClick={handleOpen}>
+          <ChatBubbleOutlineIcon color="secondary" />
+        </Button>
+      )}
+      <Modal open={open} setOpen={setOpen}>
+        <Typography variant="h5">{programmeData.koulutusohjelma[lang]}</Typography>
+        <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}></TextFieldComponent>
+      </Modal>
     </>
   )
 }
@@ -65,7 +88,7 @@ const TrafficLightCell = ({
 }
 
 const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', yearFilter }: KeyDataTableProps) => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const keyData = useFetchKeyData()
   const { t } = useTranslation()
 
@@ -94,18 +117,21 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
 
       const facultyCode = programmeData.koulutusohjelmakoodi.substring(1, 4)
 
-      const yearMatches = programmeData.values['Vuosi'] === parseInt(yearFilter) - 1 // Always fetch previous year results
+      const yearMatches = programmeData.year === parseInt(yearFilter) - 1 // Always fetch previous year results
       const facultyMatches = allowedFacultiesSet.has(facultyCode) || allowedFacultiesSet.has('allFaculties')
       const levelMatches = programmeData.level === programmeLevelFilter || programmeLevelFilter === 'allProgrammes'
       return yearMatches && facultyMatches && levelMatches
     })
 
     // Sort by programme name or code
-    const sortedData = orderBy(filteredData, [sortIdentity], [sortDirection])
+    const sortCallback = (item: KeyDataProgramme) =>
+      sortIdentity === 'koulutusohjelma' ? item.koulutusohjelma[lang] : item.koulutusohjelmakoodi
+    const sortedData = orderBy(filteredData, item => sortCallback(item), [sortDirection])
+
     // Filter by search input
     const searchedData = sortedData.filter((programmeData: KeyDataProgramme) => {
       return (
-        programmeData.koulutusohjelma[lang].toLowerCase()?.includes(searchValue.toLowerCase()) ||
+        programmeData.koulutusohjelma[lang]?.toLowerCase().includes(searchValue.toLowerCase()) ||
         programmeData.koulutusohjelmakoodi.toLowerCase().includes(searchValue.toLowerCase())
       )
     })

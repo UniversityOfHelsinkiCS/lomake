@@ -35,7 +35,9 @@ export default function YearSelector({ multiple, size, label }) {
   useEffect(() => {
     if (!previousYearsWithAnswers || !currentUser) return
     let years = getYearsUserHasAccessToAction(currentUser)
-    if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
+    if (form === formKeys.YEARLY_ASSESSMENT) {
+      years = [2023, 2022, 2021, 2020, 2019]
+    } else if (form === formKeys.EVALUATION_PROGRAMMES || form === formKeys.EVALUATION_FACULTIES) {
       years = [2023]
       handleYearChange(null, { value: 2023 })
     }

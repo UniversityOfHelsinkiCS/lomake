@@ -69,11 +69,6 @@ const OverviewPage = () => {
     dropdownFilter: selectedLevel,
   })
 
-  // we dont want show this to the users yet
-  if (!isAdmin(currentUser.data) && inProduction) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
-
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
@@ -82,7 +77,7 @@ const OverviewPage = () => {
     <div style={{ padding: '2rem', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
         <Typography variant="h1" style={{ margin: 0 }}>
-          {t('yearlyAssessment').toUpperCase()}
+          {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
         </Typography>
 
         <div style={{ display: 'flex', gap: '1rem' }}>

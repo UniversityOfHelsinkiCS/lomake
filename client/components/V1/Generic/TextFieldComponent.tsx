@@ -41,7 +41,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
-  const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
+  const MAX_CONTENT_LENGTH = type === 'Comment' ? 1000 : 5000
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -55,7 +55,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
-  }, [dataFromRedux, hasLock])
+  }, [dataFromRedux])
 
   useEffect(() => {
     if (hasLock && textFieldRef.current) {
@@ -96,7 +96,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [hasUnsavedChanges, t, dataFromRedux])
+  }, [hasUnsavedChanges, t, dataFromRedux, content])
 
   const handleStopEditing = () => {
     setHasLock(false)
@@ -120,7 +120,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         </Typography>
         <Card
           variant="outlined"
-          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '19rem' : undefined }}
         >
           {type === 'Comment' && (
             <CardHeader
@@ -169,7 +169,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         </Typography>
         {children}
       </div>
-      {hasLock ? (
+      {hasLock || content !== dataFromRedux ? (
         <>
           <TextField
             style={{}}
@@ -216,18 +216,18 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               >
                 {t(`keyData:save${type}`)}
               </Button>
-              {hasUnsavedChanges && (
+              {content !== dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'red' }}>
                   {t('keyData:unsavedChanges')}!
                 </Typography>
               )}
-              {hasLock && !hasUnsavedChanges && (
+              {hasLock && content === dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'gray' }}>
                   {t('generic:textUnsavedRelease')}
                 </Typography>
               )}
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '2rem' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
@@ -236,7 +236,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         <>
           <Card
             variant="outlined"
-            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '18.75rem' : undefined }}
           >
             {type === 'Comment' && (
               <CardHeader
@@ -257,7 +257,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 paddingLeft: type === 'Comment' ? 0 : undefined,
                 minWidth: 0,
                 overflowWrap: 'break-word',
-                alignSelf: 'center',
+                alignSelf: type === 'Comment' ? 'center': undefined,
               }}
             >
               {content ? (
@@ -275,7 +275,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               alignItems: 'center',
               width: '100%',
               justifyContent: 'space-between',
-              marginTop: '1rem',
+              marginTop: '2rem',
             }}
           >
             <Button
@@ -289,7 +289,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
             </Button>
 
             <CurrentEditor fieldName={id} />
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography  variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>

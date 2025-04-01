@@ -38,24 +38,22 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     // TODO: uncomment when updated data.xlsx is in staging and production
     // Validate formatted key data
-    // try {
-    //   KeyDataProgrammeSchema.extend({
-    //     values: KandiohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.kandiohjelmat)
-
-    //   KeyDataProgrammeSchema.extend({
-    //     values: MaisteriohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.maisteriohjelmat)
-
-    //   MetadataSchema.array().parse(formattedKeyData.metadata)
-    // } catch (zodError) {
-    //   logZodError(zodError as ZodError)
-    //   throw new Error('Invalid KeyData format')
-    // }
+    try {
+      KeyDataProgrammeSchema.extend({
+        values: KandiohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.kandiohjelmat)
+      KeyDataProgrammeSchema.extend({
+        values: MaisteriohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.maisteriohjelmat)
+      MetadataSchema.array().parse(formattedKeyData.metadata)
+    } catch (zodError) {
+      logZodError(zodError as ZodError)
+      throw new Error('Invalid KeyData format')
+    }
 
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
