@@ -16,7 +16,7 @@ import {
 } from '../../config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'yearlyAssessment', path: '/v1/overview', access: ['admin'] },
+  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['admin'] },
   archive: {
     key: 'archive',
     label: 'archive',

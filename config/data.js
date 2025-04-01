@@ -12,7 +12,7 @@ const formKeys = {
 const forms = [
   {
     key: 1,
-    name: 'Vuosiseuranta',
+    name: 'Vuosiseuranta 2019 - 2023',
     type: 'yearlyAssessment',
   },
   {

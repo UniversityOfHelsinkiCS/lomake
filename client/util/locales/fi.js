@@ -73,7 +73,7 @@ export default {
 
     modifyLights: 'Muokkaa valoja',
 
-    yearlyAssessment: 'Vuosiseuranta',
+    yearlyAssessment: 'Vuosiseuranta 2019-2023',
     evaluation: 'Katselmus',
     evaluationFaculty: 'Tiedekunnan katselmus',
     'degree-reform': 'Koulutuksen nykytila',
