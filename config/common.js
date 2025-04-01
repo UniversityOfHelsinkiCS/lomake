@@ -15,10 +15,11 @@ const iamsInUse = true
 const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
+const ARCHIVE_LAST_YEAR = 2024
 
-const getYearsArray = since => {
+const getYearsArray = (since, to = 2024) => {
   const years = []
-  for (let i = new Date().getFullYear(); i >= since; i--) {
+  for (let i = to; i >= since; i--) {
     const year = i
     years.push(year)
   }
@@ -228,6 +229,7 @@ export {
   testProgrammeNameDoctor,
   testIAM,
   LOMAKE_SINCE_YEAR,
+  ARCHIVE_LAST_YEAR,
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,

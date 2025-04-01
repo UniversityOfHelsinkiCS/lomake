@@ -120,7 +120,13 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         </Typography>
         <Card
           variant="outlined"
-          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '19rem' : undefined }}
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'flex-start',
+            flexDirection: 'row',
+            minHeight: type !== 'Comment' ? '19rem' : undefined,
+          }}
         >
           {type === 'Comment' && (
             <CardHeader
@@ -207,7 +213,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
             }}
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Box sx={{ mt: '2rem' }}>
+            <Box sx={{ mt: '1rem' }}>
               <Button
                 data-cy={`save-${id}-${type}`}
                 variant="contained"
@@ -227,7 +233,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 </Typography>
               )}
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '2rem' }}>
+            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '1rem' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
@@ -236,7 +242,13 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
         <>
           <Card
             variant="outlined"
-            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row', minHeight: type !== 'Comment' ? '18.75rem' : undefined }}
+            sx={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'flex-start',
+              flexDirection: 'row',
+              minHeight: type !== 'Comment' ? '18.75rem' : undefined,
+            }}
           >
             {type === 'Comment' && (
               <CardHeader
@@ -257,7 +269,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
                 paddingLeft: type === 'Comment' ? 0 : undefined,
                 minWidth: 0,
                 overflowWrap: 'break-word',
-                alignSelf: type === 'Comment' ? 'center': undefined,
+                alignSelf: type === 'Comment' ? 'center' : undefined,
               }}
             >
               {content ? (
@@ -275,21 +287,23 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
               alignItems: 'center',
               width: '100%',
               justifyContent: 'space-between',
-              marginTop: '2rem',
+              marginTop: '1rem',
             }}
           >
-            <Button
-              data-cy={`edit-${id}-${type}`}
-              variant="outlined"
-              disabled={isSomeoneElseEditing}
-              onClick={askForLock}
-              sx={{ marginRight: 2 }}
-            >
-              {t(`keyData:edit${type}`)}
-            </Button>
+            <Box sx={{}}>
+              <Button
+                data-cy={`edit-${id}-${type}`}
+                variant="outlined"
+                disabled={isSomeoneElseEditing}
+                onClick={askForLock}
+                sx={{ marginRight: 2 }}
+              >
+                {t(`keyData:edit${type}`)}
+              </Button>
 
-            <CurrentEditor fieldName={id} />
-            <Typography  variant="regularSmall" style={{ color: 'gray' }}>
+              <CurrentEditor fieldName={id} />
+            </Box>
+            <Typography variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>

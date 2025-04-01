@@ -1,4 +1,4 @@
-import { isAdmin, isSuperAdmin } from '../../../config/common'
+import { ARCHIVE_LAST_YEAR, isAdmin, isSuperAdmin } from '../../../config/common'
 import { Sentry } from '../sentry'
 import { defaultYears } from '../common'
 import callBuilder from '../apiConnection'
@@ -24,10 +24,9 @@ export const getYearsUserHasAccessToAction = user => {
 
   // Set all the three answered years to be the options by default
   const allYears = defaultYears
-  const currentYear = new Date().getFullYear()
 
   // Add current year as the first one, if it does not exist
-  if (!allYears.includes(currentYear)) allYears.unshift(currentYear)
+  if (!allYears.includes(ARCHIVE_LAST_YEAR)) allYears.unshift(ARCHIVE_LAST_YEAR)
 
   // eslint disabled as using for-loop is reasonable here
   // eslint-disable-next-line no-restricted-syntax

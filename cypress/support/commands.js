@@ -2,6 +2,7 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
 /// <reference types="cypress" />
 
+import { ARCHIVE_LAST_YEAR } from '../../config/common'
 import { setHeaders } from '../../config/mockHeaders'
 
 /**
@@ -53,18 +54,16 @@ Cypress.Commands.add('getEditorInputLength', editorName => {
 })
 
 Cypress.Commands.add('getYearSelector', () => {
-  const currentDate = new Date()
   cy.get('[data-cy=yearSelector]').click()
   cy.get('[data-cy=yearSelector]').then(newEl => {
-    expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
+    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
 })
 
 Cypress.Commands.add('selectYear', year => {
-  const currentDate = new Date()
   cy.get('[data-cy=yearSelector]').click()
   cy.get('[data-cy=yearSelector]').then(newEl => {
-    expect(newEl.find('.item')).to.have.length(currentDate.getFullYear() - 2018)
+    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
   cy.get('[data-cy=yearSelector]').contains(year).click()
 })

@@ -605,8 +605,8 @@ export default {
     unsavedChangesWarning:
       'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" jatkaaksesi muokkausta.',
     yearlyDevelopment: 'Avainluvun kehitys vuosittain',
-    year: 'vuosi',
-    value: 'arvo',
-    trafficLight: 'liikennevalo',
+    year: 'Vuosi',
+    value: 'Arvo',
+    trafficLight: 'Liikennevalo',
   },
 }

@@ -17,6 +17,7 @@ import { getAnswersAction } from '../util/redux/oldAnswersReducer'
 import { setYear, setMultipleYears, setKeyDataYear } from '../util/redux/filterReducer'
 import { setLanguage } from '../util/redux/languageReducer'
 import Footer from './Footer'
+import { ARCHIVE_LAST_YEAR } from '../../config/common'
 
 const languageFromUrl = () => {
   const url = window.location.href
@@ -36,6 +37,45 @@ const languageFromUrl = () => {
   }
 
   return undefined
+}
+
+const useSetupCurrentYear = ({ oldAnswers, deadlines, currentUser, dispatch, formKeys, setYear, setMultipleYears }) => {
+  // TODO: deprecate this and set the year by form
+  // When oldAnswers are ready, set default year based on deadline or most recent answers
+  useEffect(() => {
+    if (!oldAnswers.data) return
+
+    let year = 2019
+
+    // Check if there's an upcoming deadline for the yearly assessment
+    const hasUpcomingDeadline =
+      deadlines.draftYear &&
+      deadlines.nextDeadline?.length > 0 &&
+      new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
+
+    if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
+      year = deadlines.draftYear.year
+    } else {
+      // Find the most recent year with data but the max is 2024
+      year = oldAnswers.data.reduce((latestYear, answer) => {
+        const isRelevantForm = answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION
+        if (
+          Object.entries(answer.data).length > 0 &&
+          answer.year > latestYear &&
+          answer.year <= ARCHIVE_LAST_YEAR &&
+          isRelevantForm
+        ) {
+          return answer.year
+        }
+        return latestYear
+      }, 2019)
+    }
+
+    if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
+      dispatch(setYear(year))
+      dispatch(setMultipleYears([year]))
+    }
+  }, [oldAnswers, deadlines])
 }
 
 export default () => {
@@ -90,42 +130,15 @@ export default () => {
     }
   }, [currentUser])
 
-  // TODO: deprecate this and set the year by form
-  // When oldAnswers are ready, set default year based on deadline or most recent answers
-  useEffect(() => {
-    if (!oldAnswers.data) return
-
-    let year = 2019
-
-    // Check if there's an upcoming deadline for the yearly assessment
-    const hasUpcomingDeadline =
-      deadlines.draftYear &&
-      deadlines.nextDeadline?.length > 0 &&
-      new Date(deadlines.nextDeadline.find(d => d.form === formKeys.YEARLY_ASSESSMENT)?.date) >= new Date()
-
-    if (hasUpcomingDeadline && currentUser.data?.yearsUserHasAccessTo.includes(deadlines.draftYear.year)) {
-      year = deadlines.draftYear.year
-    } else {
-      // Find the most recent year with data but the max is 2024
-      year = oldAnswers.data.reduce((latestYear, answer) => {
-        const isRelevantForm = answer.form === formKeys.YEARLY_ASSESSMENT || answer.form === formKeys.META_EVALUATION
-        if (
-          Object.entries(answer.data).length > 0 &&
-          answer.year > latestYear &&
-          answer.year <= 2024 &&
-          isRelevantForm
-        ) {
-          return answer.year
-        }
-        return latestYear
-      }, 2019)
-    }
-
-    if (currentUser.data?.yearsUserHasAccessTo.includes(year)) {
-      dispatch(setYear(year))
-      dispatch(setMultipleYears([year]))
-    }
-  }, [oldAnswers, deadlines])
+  useSetupCurrentYear({
+    oldAnswers,
+    deadlines,
+    currentUser,
+    dispatch,
+    formKeys,
+    setYear,
+    setMultipleYears,
+  })
 
   if (!currentUser.data) return null
 

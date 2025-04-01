@@ -640,8 +640,8 @@ export default {
     unsavedChangesWarning:
       'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" kan du fortsätta redigera.',
     yearlyDevelopment: 'Årlig utveckling',
-    year: 'år',
-    value: 'värde',
-    trafficLight: 'trafikljus',
+    year: 'År',
+    value: 'Värde',
+    trafficLight: 'Trafikljus',
   },
 }

@@ -31,6 +31,7 @@ interface KeyDataTableProps {
 
 const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const { renderActionsBadge } = useNotificationBadge()
+  const { t } = useTranslation()
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const year = useSelector((state: RootState) => state.filters.keyDataYear)
   const [open, setOpen] = useState(false)
@@ -48,14 +49,16 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 
   return (
     <>
-      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" />}
+      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" tooltip={t('keyData:missingMeasure')} />}
       {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
           <ChatBubbleOutlineIcon color="secondary" />
         </Button>
       )}
       <Modal open={open} setOpen={setOpen}>
-        <Typography variant="h5">{programmeData.koulutusohjelma[lang]}</Typography>
+        <Typography variant="h3">
+          {programmeData.koulutusohjelma[lang]} {year}
+        </Typography>
         <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}></TextFieldComponent>
       </Modal>
     </>
@@ -74,6 +77,7 @@ const TrafficLightCell = ({
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
+  const { t } = useTranslation()
 
   const shouldRenderBadge = useMemo(() => {
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
@@ -82,7 +86,7 @@ const TrafficLightCell = ({
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
       <TrafficLight color={programmeData[colorKey]} variant="medium" />
-      {shouldRenderBadge && <NotificationBadge />}
+      {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
     </TableCell>
   )
 }
