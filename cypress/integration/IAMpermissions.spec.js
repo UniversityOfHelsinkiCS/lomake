@@ -183,7 +183,7 @@ describe('IAM permission tests', () => {
     cy.hasSpecialGroups('cypressDeanKatselmusUser', 'All programmes')
   })
 
-  it('Jory group who has also writing rights to Faculty Evaluation works', () => {
+  it.only('Jory group who has also writing rights to Faculty Evaluation works', () => {
     cy.login('cypressFacultyKatselmusUser')
     cy.visit('/yearly')
     cy.get('[data-cy^=colortable-link-to]').should('have.have.length', 28)

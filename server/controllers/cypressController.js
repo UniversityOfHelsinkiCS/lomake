@@ -7,6 +7,7 @@ import logger from '../util/logger.js'
 import { testProgrammeCode, defaultYears } from '../util/common.js'
 import { createDraftAnswers } from '../scripts/draftAndFinalAnswers.js'
 import { facultyList } from '../../config/data.js'
+import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
 
 // Validations
 import {
@@ -273,7 +274,7 @@ const createFacultyAnswers = async (req, res) => {
       const insertPromise = db.tempAnswer.create({
         programme: faculty.code,
         data: answerData,
-        year: 2024,
+        year: ARCHIVE_LAST_YEAR,
         form,
       })
 
