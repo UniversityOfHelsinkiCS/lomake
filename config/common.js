@@ -16,9 +16,9 @@ const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
 
-const getYearsArray = since => {
+const getYearsArray = (since, to = 2024) => {
   const years = []
-  for (let i = new Date().getFullYear(); i >= since; i--) {
+  for (let i = to; i >= since; i--) {
     const year = i
     years.push(year)
   }
