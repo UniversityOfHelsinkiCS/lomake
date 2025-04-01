@@ -125,11 +125,6 @@
     "typescript-eslint": "^8.20.0",
     "vite-plugin-eslint": "^1.8.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "./grep_is.sh && npm run lint"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
