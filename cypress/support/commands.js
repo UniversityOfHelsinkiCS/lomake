@@ -56,14 +56,14 @@ Cypress.Commands.add('getEditorInputLength', editorName => {
 Cypress.Commands.add('getYearSelector', () => {
   cy.get('[data-cy=yearSelector]').click()
   cy.get('[data-cy=yearSelector]').then(newEl => {
-    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR.getFullYear() - 2018)
+    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
 })
 
 Cypress.Commands.add('selectYear', year => {
   cy.get('[data-cy=yearSelector]').click()
   cy.get('[data-cy=yearSelector]').then(newEl => {
-    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR.getFullYear() - 2018)
+    expect(newEl.find('.item')).to.have.length(ARCHIVE_LAST_YEAR - 2018)
   })
   cy.get('[data-cy=yearSelector]').contains(year).click()
 })
