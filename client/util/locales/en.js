@@ -606,8 +606,8 @@ export default {
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
     yearlyDevelopment: 'Annual development',
-    year: 'year',
-    value: 'value',
-    trafficLight: 'traffic light',
+    year: 'Year',
+    value: 'Value',
+    trafficLight: 'Traffic light',
   },
 }
