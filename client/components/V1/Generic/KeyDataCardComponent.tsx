@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Card, CardActionArea, Typography } from '@mui/material'
-import { calculateColor, calculateValue, calculateKeyDataColor, extractValue } from '../Utils/util'
+import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../Utils/util'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
@@ -50,7 +50,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       }}
     >
       {meta.map(data => {
-        const value = extractValue(props.programme, data)
+        const value = extractKeyDataValue(props.programme, data)
         const color = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
         const valueText = calculateValue(value, data.yksikko)
 
@@ -126,8 +126,6 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
-  const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
-
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
@@ -138,7 +136,10 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           paddingBottom: '10px',
         }}
       >
-        <TrafficLight color={calculateKeyDataColor(meta, props.programme)} variant="large" />
+        <TrafficLight
+          color={calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)}
+          variant="large"
+        />
 
         <Typography variant="h2" style={{ margin: 0 }}>
           {props.title.toUpperCase()}

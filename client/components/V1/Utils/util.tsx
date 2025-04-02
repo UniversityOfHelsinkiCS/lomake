@@ -1,6 +1,6 @@
 import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
-import { GroupKey, LightColors } from '@/client/lib/enums'
+import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -50,7 +50,14 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
   }, [value, threshold, liikennevalo])
 }
 
-export const calculateKeyDataColor = (meta: KeyDataMetadata[], programme: KeyDataProgramme) => {
+export const calculateKeyDataColor = (
+  metadata: KeyDataMetadata[],
+  programme: KeyDataProgramme,
+  groupKey: GroupKey,
+  level: ProgrammeLevel,
+) => {
+  const evaluationArea = metadata.filter(data => data.arviointialue === groupKey && data.ohjelmanTaso === level)
+
   const colorsCount = {
     [LightColors.Red]: 0,
     [LightColors.Yellow]: 0,
@@ -60,13 +67,15 @@ export const calculateKeyDataColor = (meta: KeyDataMetadata[], programme: KeyDat
     [LightColors.Empty]: 0,
   }
 
-  meta.forEach(data => {
-    const value: number = extractValue(programme, data)
+  evaluationArea.forEach(data => {
+    const value: number = extractKeyDataValue(programme, data)
+    if (data.arviointialue === GroupKey.OPISKELIJAPALAUTE) {
+      console.log(data.avainluvunArvo, value)
+    }
+
     const color: LightColors = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
     colorsCount[color]++
   })
-
-  // console.log(colorsCount)
 
   switch (true) {
     // Darkgreen: at least 3 darkgreen + no red
@@ -87,11 +96,11 @@ export const calculateKeyDataColor = (meta: KeyDataMetadata[], programme: KeyDat
       return LightColors.Red
 
     default:
-      return LightColors.Empty
+      return LightColors.Grey
   }
 }
 
-export const extractValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
+export const extractKeyDataValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
   return (
     programme.values[
       Object.keys(programme.values).find(key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase())

@@ -7,8 +7,8 @@ import { CircularProgress, Tooltip, Typography, Button } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
-import { ColorKey, GroupKey } from '@/client/lib/enums'
-import { KeyDataProgramme } from '@/shared/lib/types'
+import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { RootState } from '@/client/util/store'
 
 import SearchInput from '../Generic/SearchInputComponent'
@@ -67,14 +67,14 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 }
 
 const TrafficLightCell = ({
+  metadata,
   programmeData,
   groupKey,
-  colorKey,
   handleModalOpen,
 }: {
+  metadata: KeyDataMetadata[]
   programmeData: KeyDataProgramme
   groupKey: GroupKey
-  colorKey: ColorKey
   handleModalOpen: (programme: KeyDataProgramme, type: GroupKey) => void
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
@@ -84,9 +84,11 @@ const TrafficLightCell = ({
     return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
   }, [programmeData, groupKey, renderTrafficLightBadge])
 
+  const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
-      <TrafficLight color={programmeData[colorKey]} variant="medium" />
+      <TrafficLight color={calculateKeyDataColor(metadata, programmeData, groupKey, level)} variant="medium" />
       {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
     </TableCell>
   )
@@ -102,6 +104,10 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedKeyFigureData, setSelecteKeyFigureData] = useState<selectedKeyFigureData | null>(null)
+
+  const metadata = useMemo(() => {
+    return keyData?.data ? keyData.data.metadata : []
+  }, [keyData])
 
   const programmeData = useMemo(() => {
     if (keyData) {
@@ -166,7 +172,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     setModalOpen(true)
     setSelecteKeyFigureData({
       programme,
-      metadata: keyData.data.metadata,
+      metadata,
       type,
     })
   }
@@ -251,30 +257,30 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 </div>
               </TableCell>
               <TrafficLightCell
+                metadata={metadata}
                 programmeData={programmeData}
                 groupKey={GroupKey.VETOVOIMAISUUS}
-                colorKey={ColorKey.vetovoimaisuus}
                 handleModalOpen={handleModalOpen}
               />
 
               <TrafficLightCell
+                metadata={metadata}
                 programmeData={programmeData}
                 groupKey={GroupKey.LAPIVIRTAUS}
-                colorKey={ColorKey.lapivirtaus}
                 handleModalOpen={handleModalOpen}
               />
 
               <TrafficLightCell
+                metadata={metadata}
                 programmeData={programmeData}
                 groupKey={GroupKey.OPISKELIJAPALAUTE}
-                colorKey={ColorKey.opiskelijapalaute}
                 handleModalOpen={handleModalOpen}
               />
 
               <TrafficLightCell
+                metadata={metadata}
                 programmeData={programmeData}
                 groupKey={GroupKey.RESURSSIT}
-                colorKey={ColorKey.resurssit}
                 handleModalOpen={handleModalOpen}
               />
               <TableCell>
