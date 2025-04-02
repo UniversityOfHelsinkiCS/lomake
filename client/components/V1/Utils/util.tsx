@@ -77,6 +77,7 @@ export const calculateKeyDataColor = (
     colorsCount[color]++
   })
 
+  // Order matters!
   switch (true) {
     // Red: atleast 2 reds
     case colorsCount[LightColors.Red] >= 2:
