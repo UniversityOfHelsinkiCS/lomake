@@ -78,6 +78,14 @@ export const calculateKeyDataColor = (
   })
 
   switch (true) {
+    // Red: atleast 2 reds
+    case colorsCount[LightColors.Red] >= 2:
+      return LightColors.Red
+
+    // Yellow: atleast 2 yellows or 1 red
+    case colorsCount[LightColors.Yellow] >= 2 || colorsCount[LightColors.Red] == 1:
+      return LightColors.Yellow
+
     // Darkgreen: at least 3 darkgreen + no red
     case colorsCount[LightColors.DarkGreen] >= 3 && colorsCount[LightColors.Red] === 0:
       return LightColors.DarkGreen
@@ -86,14 +94,6 @@ export const calculateKeyDataColor = (
     case colorsCount[LightColors.LightGreen] >= 3 ||
       (colorsCount[LightColors.DarkGreen] >= 1 && colorsCount[LightColors.Red] === 0):
       return LightColors.LightGreen
-
-    // Yellow: atleast 2 yellows or 1 red
-    case colorsCount[LightColors.Yellow] >= 2 || colorsCount[LightColors.Red] == 1:
-      return LightColors.Yellow
-
-    // Red: atleast 2 reds
-    case colorsCount[LightColors.Red] >= 2:
-      return LightColors.Red
 
     default:
       return LightColors.Grey
