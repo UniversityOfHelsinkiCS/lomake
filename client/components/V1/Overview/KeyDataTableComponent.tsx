@@ -22,6 +22,7 @@ import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { setViewOnly } from '@/client/util/redux/formReducer'
+import { calculateKeyDataColor } from '../Utils/util'
 
 interface KeyDataTableProps {
   facultyFilter: string[]

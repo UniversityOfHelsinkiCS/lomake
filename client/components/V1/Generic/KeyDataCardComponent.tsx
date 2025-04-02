@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Card, CardActionArea, Typography } from '@mui/material'
-import { calculateColor, calculateValue } from '../Utils/util'
+import { calculateColor, calculateValue, calculateKeyDataColor, extractValue } from '../Utils/util'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
 import ColorHistoryComponent from './ColorHistoryComponent'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel, LightColors } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 import { RootState } from '@/client/util/store'
@@ -50,12 +50,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       }}
     >
       {meta.map(data => {
-        const value =
-          props.programme.values[
-            Object.keys(props.programme.values).find(
-              key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
-            )
-          ] || null
+        const value = extractValue(props.programme, data)
         const color = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
         const valueText = calculateValue(value, data.yksikko)
 
@@ -131,6 +126,8 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
+  const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
+
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
@@ -141,7 +138,8 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           paddingBottom: '10px',
         }}
       >
-        <TrafficLight color={props.color} variant="large" />
+        <TrafficLight color={calculateKeyDataColor(meta, props.programme)} variant="large" />
+
         <Typography variant="h2" style={{ margin: 0 }}>
           {props.title.toUpperCase()}
         </Typography>

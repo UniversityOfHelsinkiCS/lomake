@@ -1,7 +1,7 @@
 import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors } from '@/client/lib/enums'
-import type { KeyDataProgramme } from '@/client/lib/types'
+import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -48,6 +48,55 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
       }
     }
   }, [value, threshold, liikennevalo])
+}
+
+export const calculateKeyDataColor = (meta: KeyDataMetadata[], programme: KeyDataProgramme) => {
+  const colorsCount = {
+    [LightColors.Red]: 0,
+    [LightColors.Yellow]: 0,
+    [LightColors.LightGreen]: 0,
+    [LightColors.DarkGreen]: 0,
+    [LightColors.Grey]: 0,
+    [LightColors.Empty]: 0,
+  }
+
+  meta.forEach(data => {
+    const value: number = extractValue(programme, data)
+    const color: LightColors = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
+    colorsCount[color]++
+  })
+
+  // console.log(colorsCount)
+
+  switch (true) {
+    // Darkgreen: at least 3 darkgreen + no red
+    case colorsCount[LightColors.DarkGreen] >= 3 && colorsCount[LightColors.Red] === 0:
+      return LightColors.DarkGreen
+
+    // Light green: at least 3 lightgreen or 1-2 darkgreen + no red
+    case colorsCount[LightColors.LightGreen] >= 3 ||
+      (colorsCount[LightColors.DarkGreen] >= 1 && colorsCount[LightColors.Red] === 0):
+      return LightColors.LightGreen
+
+    // Yellow: atleast 2 yellows or 1 red
+    case colorsCount[LightColors.Yellow] >= 2 || colorsCount[LightColors.Red] == 1:
+      return LightColors.Yellow
+
+    // Red: atleast 2 reds
+    case colorsCount[LightColors.Red] >= 2:
+      return LightColors.Red
+
+    default:
+      return LightColors.Empty
+  }
+}
+
+export const extractValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
+  return (
+    programme.values[
+      Object.keys(programme.values).find(key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase())
+    ] || null
+  )
 }
 
 export const calculateValue = (value: number, unit?: string) => {
