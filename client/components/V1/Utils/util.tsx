@@ -69,10 +69,6 @@ export const calculateKeyDataColor = (
 
   evaluationArea.forEach(data => {
     const value: number = extractKeyDataValue(programme, data)
-    if (data.arviointialue === GroupKey.OPISKELIJAPALAUTE) {
-      console.log(data.avainluvunArvo, value)
-    }
-
     const color: LightColors = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
     colorsCount[color]++
   })
