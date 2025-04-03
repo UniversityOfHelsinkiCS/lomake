@@ -8,17 +8,17 @@ describe('Overview page test', () => {
 
   describe('Testing keyDataTable interactions', () => {
     it('opens a modal on trafficlight cell click', () => {
-      cy.get('[data-cy="trafficlight-table-cell"]').first().should("exist").click()
+      cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
 
     it('directs to correct programme page on programme-name-cell click', () => {
-      cy.get('[data-cy="programme-name-table-cell"]').should("exist")
+      cy.get('[data-cy="programme-name-table-cell"]').should('exist')
     })
   })
 
 
-  describe.skip('Testing keyDataTable filtering controls', () => {
+  describe('Testing keyDataTable filtering controls', () => {
     describe('Test programme level filters', () => {
       it('Displays correct programme level options', () => {
         cy.get('[data-cy="level-filter"]').click()
