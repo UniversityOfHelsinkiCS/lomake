@@ -15,7 +15,7 @@ export default {
     negative: 'Vaatii merkittäviä toimenpiteitä / kehittämiskohteita ei ole tarkennettu',
     noColors: '*Kysymyksiä, joille ei ole määritetty liikennevaloja, ei näytetä ollenkaan (esim. 16 ja 17)',
     lightGreen: 'Vaaleanvihreä',
-    darkGreen: 'Tummanvihreä',
+    darkGreen: 'Vihreä',
     green: 'Vihreä',
     yellow: 'Keltainen',
     red: 'Punainen',
@@ -167,8 +167,15 @@ export default {
     yearly: 'Aukeaa 15.4.2025',
     toArchive: 'Siirry arkistoon',
     toYearly: 'Siirry vuosiseurantaan',
-    contentTitleArchive: 'Arkisto (2019-2024)',
-    contentTitleYearly: 'Vuosiseuranta 2025',
+    yearlyCardTitle: 'Vuosiseuranta 2025',
+    yearlyCardContent:
+      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
+    archiveCardTitle: 'Arkisto (2019-2024)',
+    archiveCardHeader: 'Täältä löydät:',
+    archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
+    archiveList2: '2023-2024 katselmuksen tulokset',
+    archiveList3: 'Koulutusuudistuksen',
+    archiveList4: 'Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
     feedback: 'Palautetta tilannekuvalomakkeesta?',
   },
 
@@ -562,28 +569,35 @@ export default {
   keyData: {
     title: 'Koulutusohjelmien elinvoimaisuus Helsingin yliopistossa',
     info1:
-      'Avainluvut kuvaavat koulutusohjelman toimintaa yliopiston keskeisten tavoitteiden näkökulmasta. Avainlukujen tavoitteena on, että niiden avulla voidaan tarkastella koulutusohjelmien elinvoimaisuutta mahdollisimman yhdenvertaisesti. ',
+      'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
     info2:
-      'Avainlukuja käytetään koulutusohjelmien vuosiseurannassa vuodesta 2025 lähtien. Avainluvut ja niiden kriteerit määritellään erikseen kandi- maisteri- ja tohtoriohjelmille.',
+      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
+    info3: 'Värimerkintöjen selitteet ovat: ',
+    darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
+    lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
+    yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
+    redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',
+    pilotHeader: 'Kevään 2025 pilotti',
+    pilotInfo1:
+      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
+    pilotInfo2:
+      '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
     notUsed2025: 'Ei käytössä vuonna 2025',
     keyFigure: 'Arviointialueet ja avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
 
-    vetovoimaisuus: 'Koulutusohjelman vetovoimaisuus',
+    vetovoimaisuus: 'Vetovoimaisuus',
     vetovoimaisuusInfo:
       'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
-    lapivirtaus: 'Läpivirtaus ja valmistuminen koulutusohjelmassa',
+    lapivirtaus: 'Opintojen sujuvuus ja valmistuminen',
     lapivirtausInfo:
-      'Läpivirtauksessa tarkastellaan opintojen sujuvuutta sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa koulutusohjelman kokoa.',
-    opiskelijapalaute: 'Koulutusohjelman opiskelijapalaute ja työllistyminen',
+      'Opintojen sujuvuutta tarkastellaan sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa lisäksi koulutusohjelman kokoa.',
+    opiskelijapalaute: 'Palaute ja työllistyminen',
     opiskelijapalauteInfo:
-      'Opiskelijapalautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta.  Työllistymistä koskeva palaute kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
-    resurssit: 'Koulutusohjelman resurssit',
+      'Palautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta. Työllistymistä koskeva tieto kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
+    resurssit: 'Resurssien käyttö',
     resurssitInfo:
-      'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssitarpeita.',
-    criteriaTitle: 'Avainluvun kriteerit',
-    criteriaInfo:
-      'Avainluvut muodostuvat 3-5 kriteeristä. Kriteerit sisältävät koulutusohjelmia koskevaa dataa yhdeltä tai useammalta vuodelta. Avainlukujen kriteerit muuttuvat vuosittain, kun avainluvun sisältöalueesta tulee uutta dataa käyttöön.',
+      'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssien käyttöä. Tämän arviointialueen määrittely ja kriteerit tarkennetaan myöhemmin, kun muun muassa resurssiryhmien työskentely tiedekunnissa on käynnistynyt.',
     qualityControl: 'Laadunhallinnan välineet',
     supportProcess: 'Toimenpidemenettely',
     actions: 'Kehittämissuunnitelma',
@@ -608,5 +622,11 @@ export default {
     year: 'Vuosi',
     value: 'Arvo',
     trafficLight: 'Liikennevalo',
+    actionsInfo1:
+      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+    actionsInfo2:
+      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+    actionsInfo3:
+      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
   },
 }

@@ -46,12 +46,12 @@ const Homepage = () => {
       <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: 5 }}>
         <Card sx={{ width: 400, marginTop: 5 }}>
           <CardMedia component="img" height="120" image={WritingImage} alt="rypsi" />
-          <CardContent>
-            <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2 }}>
-              {t('landingPage:contentTitleYearly')}
+          <CardContent sx={{ height: 200 }}>
+            <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2, pt: 1 }}>
+              {t('landingPage:yearlyCardTitle')}
             </Typography>
             <Typography variant="lightSmall" color="text.secondary">
-              {t('landingPage:yearly')}
+              {t('landingPage:yearlyCardContent')}
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'right', p: 2 }}>
@@ -63,12 +63,18 @@ const Homepage = () => {
         </Card>
         <Card sx={{ width: 400, marginTop: 5 }}>
           <CardMedia component="img" height="120" image={ArchiveImage} alt="library" />
-          <CardContent>
-            <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2 }}>
-              {t('landingPage:contentTitleArchive')}
+          <CardContent sx={{ height: 200 }}>
+            <Typography gutterBottom variant="h4regular" component="div" sx={{ pb: 2, pt: 1 }}>
+              {t('landingPage:archiveCardTitle')}
             </Typography>
-            <Typography variant="lightSmall" color="text.secondary">
-              {t('landingPage:archive')}
+            <Typography variant="lightSmall" color="text.secondary" sx={{ lineHeight: 1.3 }}>
+              {t('landingPage:archiveCardHeader')}
+              <ul>
+                <li>{t('landingPage:archiveList1')}</li>
+                <li>{t('landingPage:archiveList2')}</li>
+                <li>{t('landingPage:archiveList3')}</li>
+                <li>{t('landingPage:archiveList4')}</li>
+              </ul>
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'right', p: 2 }}>

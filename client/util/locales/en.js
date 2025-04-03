@@ -165,8 +165,15 @@ export default {
     yearly: 'Opens on 15.4.2025',
     toArchive: 'Go to archive',
     toYearly: 'Go to annual follow-up',
-    contentTitleArchive: 'Archive (2019-2024)',
-    contentTitleYearly: 'Annual follow-up 2025',
+    yearlyCardTitle: 'Annual follow-up 2025',
+    yearlyCardContent:
+      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
+    archiveCardTitle: 'Archive (2019-2024)',
+    archiveCardHeader: 'Täältä löydät:',
+    archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
+    archiveList2: '2023-2024 katselmuksen tulokset',
+    archiveList3: 'Koulutusuudistuksen',
+    archiveList4: 'Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
     feedback: 'Feedback on tilannekuvalomake?',
   },
 
@@ -566,9 +573,19 @@ export default {
   keyData: {
     title: 'The vitality of degree programmes at the University of Helsinki',
     info1:
-      'The key figures describe the activities of the degree programme in relation to the key objectives of the University. The aim of the key figures is to provide as equal a view as possible of the vitality of the degree programmes. ',
+      'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
     info2:
-      'The key figures are used for the annual follow-up of degree programmes from 2025 onwards. The key figures and their criteria will be defined separately for bachelor´s, master´s and doctoral programmes.',
+      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
+    info3: 'Värimerkintöjen selitteet ovat: ',
+    darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
+    lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
+    yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
+    redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',
+    pilotHeader: 'Kevään 2025 pilotti',
+    pilotInfo1:
+      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
+    pilotInfo2:
+      '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
     notUsed2025: 'Not applicable in 2025',
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
@@ -585,9 +602,6 @@ export default {
     resurssit: 'Resources Of The Degree Programme',
     resurssitInfo:
       'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme.',
-    criteriaTitle: 'Key Figure Criteria',
-    criteriaInfo:
-      'Each key figure is composed of 3-5 criteria. The criteria include data on degree programmes for one or more years. The key figure criteria will change from year to year as new data becomes available in the key figure content area.',
     qualityControl: 'Quality control tools',
     supportProcess: 'Procedure of action',
     actions: 'Development plan',
@@ -612,5 +626,11 @@ export default {
     year: 'Year',
     value: 'Value',
     trafficLight: 'Traffic light',
+    actionsInfo1:
+      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+    actionsInfo2:
+      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+    actionsInfo3:
+      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
   },
 }
