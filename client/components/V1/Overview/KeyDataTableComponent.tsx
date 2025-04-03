@@ -246,7 +246,11 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
         {keyFigureData.length > 0 ? (
           keyFigureData.map((programmeData: KeyDataProgramme) => (
             <TableRow key={programmeData.koulutusohjelmakoodi}>
-              <TableCell itemAlign="left" hoverEffect data-cy="programme-name-table-cell">
+              <TableCell
+                itemAlign="left"
+                hoverEffect
+                data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
+              >
                 <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                     <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>

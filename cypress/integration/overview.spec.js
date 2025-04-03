@@ -11,8 +11,10 @@ describe('Overview page test', () => {
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
 
-    it('directs to correct programme page on programme-name-cell click', () => {
-      cy.get('[data-cy="programme-name-table-cell"]').should('exist')
+    it('directs to correct programme page on programme name click', () => {
+      const programmeCode = 'KH50_005' // Computer science bachelor programme
+      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      cy.url().should('include', `/${programmeCode}`)
     })
   })
 
