@@ -172,8 +172,7 @@ export default {
     archiveCardHeader: 'Täältä löydät:',
     archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
     archiveList2: '2023-2024 katselmuksen tulokset',
-    archiveList3: 'Koulutusuudistuksen',
-    archiveList4: 'Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
+    archiveList3: 'Koulutusuudistuksen Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
     feedback: 'Feedback on tilannekuvalomake?',
   },
 

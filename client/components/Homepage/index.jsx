@@ -73,7 +73,6 @@ const Homepage = () => {
                 <li>{t('landingPage:archiveList1')}</li>
                 <li>{t('landingPage:archiveList2')}</li>
                 <li>{t('landingPage:archiveList3')}</li>
-                <li>{t('landingPage:archiveList4')}</li>
               </ul>
             </Typography>
           </CardContent>
