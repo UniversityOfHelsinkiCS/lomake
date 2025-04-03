@@ -26,7 +26,7 @@ describe('Evaluation forms tests', () => {
   // EDIT 'BEFORE EACH' AFTER FORM IS ACCESSIBLE TO ALL
   // ***
 
-  it.only('User can navigate to evaluation programme level form', () => {
+  it('User can navigate to evaluation programme level form', () => {
     cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.contains('Degree programme level').click()
@@ -36,7 +36,7 @@ describe('Evaluation forms tests', () => {
     cy.contains(`Review ${defaultYears[1]}`)
   })
 
-  it.only('User can navigate to evaluation faculty level form', () => {
+  it('User can navigate to evaluation faculty level form', () => {
     cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.contains('Faculty level').click()

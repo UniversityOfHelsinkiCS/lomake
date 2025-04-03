@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setDeadlineAndDraftYear, deleteDeadlineAndDraftYear } from '../../util/redux/deadlineReducer'
 import { fi, enGB, sv } from 'date-fns/locale'
 import { useTranslation } from 'react-i18next'
-import { getYearsUserHasAccessToAction } from '../../util/redux/currentUserReducer'
 import { colors } from '../../util/common'
-import { isSuperAdmin } from '../../../config/common'
+import { isSuperAdmin, LOMAKE_SINCE_YEAR } from '../../../config/common'
 import { forms } from '../../../config/data'
 
 const DeadlineSetting = () => {
@@ -32,7 +31,8 @@ const DeadlineSetting = () => {
   registerLocale('se', sv)
 
   useEffect(() => {
-    const years = getYearsUserHasAccessToAction(currentUser)
+    const years = [];
+    for (let i = new Date().getFullYear(); i >= LOMAKE_SINCE_YEAR; i--) years.push(i);
     const options = years.map(y => {
       return {
         key: y,
