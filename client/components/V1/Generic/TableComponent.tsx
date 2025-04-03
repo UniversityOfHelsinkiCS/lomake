@@ -13,7 +13,7 @@ Example usage:
         </TableRow>
 
         <TableRow>
-            <TableCell itemAlign="left">Item 1</TableCell>
+            <TableCell itemAlign="left" hoverEffect>Item 1</TableCell>
             <TableCell onClick={handleClick}>Item 2</TableCell>
             <TableCell disabled >Item 3</TableCell>
         </TableRow>
@@ -66,11 +66,15 @@ export const TableCell = ({
   itemAlign = 'center',
   disabled = false,
   onClick,
+  hoverEffect = false,
+  ...rest
 }: {
   children?: React.ReactNode
   itemAlign?: 'left' | 'center' | 'right'
   disabled?: boolean
   onClick?: () => void
+  hoverEffect?: boolean
+  rest?: any
 }) => {
   const [isHovering, setIsHovering] = useState(false)
 
@@ -88,10 +92,11 @@ export const TableCell = ({
         padding: '1.5rem',
         width: '100%',
         height: '100%',
-        cursor: onClick ? 'pointer' : 'default',
+        cursor: hoverEffect || onClick ? 'pointer' : 'default',
         transition: 'background-color 0.2s',
-        backgroundColor: onClick && isHovering ? 'rgba(0,0,0,0.06)' : 'transparent',
+        backgroundColor: (hoverEffect || onClick) && isHovering ? 'rgba(0,0,0,0.06)' : 'transparent',
       }}
+      {...rest}
     >
       {children}
     </div>

@@ -87,7 +87,7 @@ const TrafficLightCell = ({
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
   return (
-    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)}>
+    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)} data-cy="trafficlight-table-cell">
       <TrafficLight color={calculateKeyDataColor(metadata, programmeData, groupKey, level)} variant="medium" />
       {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
     </TableCell>
@@ -246,15 +246,13 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
         {keyFigureData.length > 0 ? (
           keyFigureData.map((programmeData: KeyDataProgramme) => (
             <TableRow key={programmeData.koulutusohjelmakoodi}>
-              <TableCell itemAlign="left">
-                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-                  <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+              <TableCell itemAlign="left" hoverEffect data-cy="programme-name-table-cell">
+                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                     <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>
-                  </Link>
-                  <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
                     <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </TableCell>
               <TrafficLightCell
                 metadata={metadata}

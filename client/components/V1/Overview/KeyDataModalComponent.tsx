@@ -72,7 +72,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
   }
 
   return (
-    <ModalTemplate open={open} setOpen={setOpen}>
+    <ModalTemplate open={open} setOpen={setOpen} data-cy="keydata-modal">
       {!programme || !metadata || !content ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />
