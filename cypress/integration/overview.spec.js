@@ -5,7 +5,6 @@ describe('Overview page test', () => {
     cy.visit('/v1/overview')
   })
 
-
   describe('Testing keyDataTable interactions', () => {
     it('opens a modal on trafficlight cell click', () => {
       cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
@@ -16,7 +15,6 @@ describe('Overview page test', () => {
       cy.get('[data-cy="programme-name-table-cell"]').should('exist')
     })
   })
-
 
   describe('Testing keyDataTable filtering controls', () => {
     describe('Test programme level filters', () => {
