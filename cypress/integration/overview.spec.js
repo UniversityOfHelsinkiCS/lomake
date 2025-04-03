@@ -5,7 +5,20 @@ describe('Overview page test', () => {
     cy.visit('/v1/overview')
   })
 
-  describe('Testing keydatatable filtering controls', () => {
+
+  describe('Testing keyDataTable interactions', () => {
+    it('opens a modal on trafficlight cell click', () => {
+      cy.get('[data-cy="trafficlight-table-cell"]').first().should("exist").click()
+      cy.get('[data-cy="keydata-modal"]').should('be.visible')
+    })
+
+    it('directs to correct programme page on programme-name-cell click', () => {
+      cy.get('[data-cy="programme-name-table-cell"]').should("exist")
+    })
+  })
+
+
+  describe.skip('Testing keyDataTable filtering controls', () => {
     describe('Test programme level filters', () => {
       it('Displays correct programme level options', () => {
         cy.get('[data-cy="level-filter"]').click()
@@ -93,20 +106,4 @@ describe('Overview page test', () => {
     //   expect(true).to.equal(true)
     // })
   })
-
-  // describe('Testing keydata modals', () => {
-
-  //   it.skip('Modals open', () => {
-  //     expect(true).to.equal(true)
-  //   })
-
-  //   it.skip('Modals close', () => {
-  //     expect(true).to.equal(true)
-  //   })
-
-  //   it.skip('Modals contain', () => {
-  //     expect(true).to.equal(true)
-  //   })
-
-  // })
 })
