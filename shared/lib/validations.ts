@@ -1,4 +1,5 @@
 import { z, ZodError } from 'zod'
+import logger from 'server/util/logger.js'
 
 const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
@@ -150,7 +151,7 @@ export const logZodError = (error: ZodError) => {
   })
 
   // Pretty formatted log message
-  console.log(`
+  logger.error(`
       ❌ Validation Error Report ❌
       --------------------------------
       🔹 Total Errors: ${error.errors.length}

@@ -14,7 +14,6 @@ import {
   KandiohjelmatValuesSchema,
   logZodError,
 } from '../../shared/lib/validations.js'
-import { update } from 'lodash'
 
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
