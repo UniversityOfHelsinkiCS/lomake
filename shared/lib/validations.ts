@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod'
-import logger from 'server/util/logger.js'
+import logger from '../../server/util/logger'
 
 const LiikennevalotEnum = z.enum(['Ei arviota', 'Punainen', 'Keltainen', 'Vaaleanvihreä', 'Tummanvihreä'])
 
