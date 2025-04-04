@@ -103,7 +103,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
       setGettingLock(false)
     }
     // Do not add currentUser or dataFromRedux to the dependencies
-    // it will clear the field if lock is relesed by the server
+    // it will clear the field if lock is released by the server
   }, [currentEditors])
 
   useEffect(() => {
@@ -113,6 +113,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   useEffect(() => {
     if (hasLock && textFieldRef.current) {
       textFieldRef.current.focus()
+      textFieldRef.current.selectionStart = content.length
     }
   }, [hasLock])
 
