@@ -30,7 +30,7 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
-const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
+const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[] }) => {
   const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -38,9 +38,7 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
 
-  const actionsBadgeData = useMemo(() => {
-    return renderActionsBadge(programmeData, true)
-  }, [programmeData, renderActionsBadge])
+  const actionsBadgeData = renderActionsBadge(programmeData, metadata, true)
 
   const handleOpen = () => {
     dispatch(setViewOnly(true))
@@ -50,7 +48,9 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
 
   return (
     <>
-      {actionsBadgeData.showBadge && <NotificationBadge variant="medium" tooltip={t('keyData:missingMeasure')} />}
+      {actionsBadgeData.showBadge && (
+        <NotificationBadge data-cy={`actionsCellBadge`} variant="medium" tooltip={t('keyData:missingMeasure')} />
+      )}
       {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
           <ChatBubbleOutlineIcon color="secondary" />
@@ -79,17 +79,16 @@ const TrafficLightCell = ({
 }) => {
   const { renderTrafficLightBadge } = useNotificationBadge()
   const { t } = useTranslation()
-
-  const shouldRenderBadge = useMemo(() => {
-    return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
-  }, [programmeData, groupKey, renderTrafficLightBadge])
-
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+  const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
+  const shouldRenderBadge = groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
 
   return (
     <TableCell onClick={() => handleModalOpen(programmeData, groupKey)} data-cy="trafficlight-table-cell">
-      <TrafficLight color={calculateKeyDataColor(metadata, programmeData, groupKey, level)} variant="medium" />
-      {shouldRenderBadge && <NotificationBadge tooltip={t('keyData:missingComment')} />}
+      <TrafficLight color={color} variant="medium" />
+      {shouldRenderBadge && (
+        <NotificationBadge data-cy={`lightCellBadge-${groupKey}`} tooltip={t('keyData:missingComment')} />
+      )}
     </TableCell>
   )
 }
@@ -286,7 +285,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 handleModalOpen={handleModalOpen}
               />
               <TableCell>
-                <ActionsCell programmeData={programmeData} />
+                <ActionsCell programmeData={programmeData} metadata={metadata} />
               </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>

@@ -2,52 +2,48 @@ import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
-  return useMemo(() => {
-    if (!liikennevalo) {
-      return LightColors.Empty
-    } else if (!value || !threshold) {
+  if (!liikennevalo) {
+    return LightColors.Empty
+  } else if (!value || !threshold) {
+    return LightColors.Grey
+  }
+
+  if (unit) {
+    value = value * 100
+  }
+
+  const [first, second, third, fourth] = threshold
+    .split(';')
+    .map(str => str.replace(',', '.'))
+    .map(Number)
+
+  if (first === 0) {
+    if (value < second) {
+      return LightColors.Red
+    } else if (value < third) {
+      return LightColors.Yellow
+    } else if (value < fourth) {
+      return LightColors.LightGreen
+    } else if (value >= fourth) {
+      return LightColors.DarkGreen
+    } else {
       return LightColors.Grey
     }
-
-    if (unit) {
-      value = value * 100
-    }
-
-    const [first, second, third, fourth] = threshold
-      .split(';')
-      .map(str => str.replace(',', '.'))
-      .map(Number)
-
-    if (first === 0) {
-      if (value < second) {
-        return LightColors.Red
-      } else if (value < third) {
-        return LightColors.Yellow
-      } else if (value < fourth) {
-        return LightColors.LightGreen
-      } else if (value >= fourth) {
-        return LightColors.DarkGreen
-      } else {
-        return LightColors.Grey
-      }
+  } else {
+    if (value > second) {
+      return LightColors.Red
+    } else if (value > third) {
+      return LightColors.Yellow
+    } else if (value < third && value > fourth) {
+      return LightColors.LightGreen
+    } else if (value <= fourth) {
+      return LightColors.DarkGreen
     } else {
-      if (value > second) {
-        return LightColors.Red
-      } else if (value > third) {
-        return LightColors.Yellow
-      } else if (value < third && value > fourth) {
-        return LightColors.LightGreen
-      } else if (value <= fourth) {
-        return LightColors.DarkGreen
-      } else {
-        return LightColors.Grey
-      }
+      return LightColors.Grey
     }
-  }, [value, threshold, liikennevalo])
+  }
 }
 
 export const calculateKeyDataColor = (

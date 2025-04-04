@@ -1,32 +1,50 @@
 import { useSelector } from 'react-redux'
-import { GroupKey } from '@/client/lib/enums'
-import { KeyDataProgramme } from '@/shared/lib/types'
+import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
+import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { calculateKeyDataColor } from '../components/V1/Utils/util'
 
 export const useNotificationBadge = () => {
   const reports = useSelector((state: { reports: any }) => state.reports.dataForYear)
 
-  const renderTabBadge = (programmeData: KeyDataProgramme) => {
+  const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {
+    const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
     for (const key of Object.keys(GroupKey)) {
       const groupKey = GroupKey[key as keyof typeof GroupKey]
-      if (renderTrafficLightBadge(programmeData, groupKey)) {
+
+      const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
+
+      if (renderTrafficLightBadge(programmeData, groupKey, color)) {
         return true
       }
     }
     return false
   }
 
-  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey) => {
-    const isRed = programmeData.redLights?.includes(groupKey)
-    const isYellow = programmeData.yellowLights?.includes(groupKey)
+  const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors) => {
     const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.[groupKey]?.length > 0
-    return (isRed || isYellow) && !hasReport
+    return (color == LightColors.Red || color == LightColors.Yellow) && !hasReport
   }
 
-  const renderActionsBadge = (programmeData: KeyDataProgramme, includeReport: boolean = false) => {
-    const hasRedLights = programmeData.redLights?.length > 0
+  const renderActionsBadge = (
+    programmeData: KeyDataProgramme,
+    metadata: KeyDataMetadata[],
+    includeReport: boolean = false,
+  ) => {
+    const redLights = []
+
+    for (const key of Object.keys(GroupKey)) {
+      const groupKey = GroupKey[key as keyof typeof GroupKey]
+      const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
+      const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
+      if (color == LightColors.Red) {
+        redLights.push(groupKey)
+      }
+    }
+
     const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.['Toimenpiteet']?.length > 0
     return {
-      showBadge: hasRedLights && !hasReport,
+      showBadge: redLights.length > 0 && !hasReport,
       showIcon: includeReport && hasReport,
     }
   }
