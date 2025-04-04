@@ -48,7 +48,7 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip }: Noti
 
   if (tooltip) {
     return (
-      <Tooltip title={tooltip} placement="top">
+      <Tooltip title={tooltip} placement="left" arrow>
         {badgeComponent}
       </Tooltip>
     )

@@ -47,7 +47,7 @@ export const TrafficLight = (props: TrafficLightProps) => {
   const size = getSize(props.variant)
 
   return (
-    <Tooltip title={text} arrow>
+    <Tooltip placement="top" title={text} arrow>
       <div
         style={{
           backgroundColor: hex,

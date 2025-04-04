@@ -53,7 +53,7 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
       )}
       {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
-          <ChatBubbleOutlineIcon color="secondary" />
+          <ChatBubbleOutlineIcon sx={{ fontSize: '28px' }} color="secondary" />
         </Button>
       )}
       <Modal open={open} setOpen={setOpen}>

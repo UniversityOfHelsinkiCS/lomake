@@ -12,7 +12,7 @@ export default {
     negative: 'Significant measures required/development areas not yet specified',
     noColors: '*Questions, without traffic lights are not shown here (e.g. 16 and 17)',
     lightGreen: 'Light green',
-    darkGreen: 'Dark green',
+    darkGreen: 'Green',
     green: 'Green',
     yellow: 'Yellow',
     red: 'Red',
@@ -619,6 +619,7 @@ export default {
     missingMeasure: 'Development plan is missing!',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
     colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    noHistory: 'No previous history',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
     yearlyDevelopment: 'Annual development',

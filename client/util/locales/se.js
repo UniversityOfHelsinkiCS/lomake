@@ -12,7 +12,7 @@ export default {
     negative: 'Kräver betydande åtgärder/utvecklingsobjekten har inte preciserats',
     noColors: '*Frågor utan trafikljus visas inte alls (t.ex. 16 och 17)',
     lightGreen: 'Ljusgrön',
-    darkGreen: 'Mörkgrön',
+    darkGreen: 'Grön',
     green: 'Grön',
     yellow: 'Gul',
     red: 'Röd',
@@ -650,6 +650,7 @@ export default {
     missingMeasure: 'Ingen utvecklingsplan!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
+    noHistory: 'Inga tidigare historia',
     unsavedChangesWarning:
       'Du har osparade ändringar. Genom att trycka på "OK"-knappen sparas ändringarna, "Avbryt" kan du fortsätta redigera.',
     yearlyDevelopment: 'Årlig utveckling',
