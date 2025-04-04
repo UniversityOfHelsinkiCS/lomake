@@ -177,16 +177,16 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
             position: 'relative',
           }}
         >
-          <Tooltip placement="top" title={`${t('common:red')} `} arrow>
+          <Tooltip placement="bottom" title={`${t('common:red')} `} arrow>
             <div style={{ backgroundColor: customColors.redLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="top" title={t('common:yellow')} arrow>
+          <Tooltip placement="bottom" title={t('common:yellow')} arrow>
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="top" title={t('common:lightGreen')} arrow>
+          <Tooltip placement="bottom" title={t('common:lightGreen')} arrow>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip placement="top" title={t('common:darkGreen')} arrow>
+          <Tooltip placement="bottom" title={t('common:darkGreen')} arrow>
             <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
