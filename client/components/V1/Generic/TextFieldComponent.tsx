@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
+import { TFunction } from 'i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
@@ -17,7 +18,7 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type }: { id: string, t: any, type: string,  }) => {
+export const TextFieldCard = ({ id, t, type }: { id: string, t: TFunction, type: string,  }) => {
   const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
   return (
     <Box sx={{ mt: '1rem' }}>
