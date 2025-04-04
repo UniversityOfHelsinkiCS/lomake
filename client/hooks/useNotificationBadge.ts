@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { GroupKey } from '@/client/lib/enums'
-import { KeyDataProgramme } from '@/client/lib/types'
+import { KeyDataProgramme } from '@/shared/lib/types'
 
 export const useNotificationBadge = () => {
   const reports = useSelector((state: { reports: any }) => state.reports.dataForYear)
