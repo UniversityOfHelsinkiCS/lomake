@@ -17,6 +17,58 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
+export const TextFieldCard = ({ id, t, type }: { id: string, t: any, type: string,  }) => {
+  const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+  return (
+    <Box sx={{ mt: '1rem' }}>
+      <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
+        {t(`keyData:${type}`)}
+      </Typography>
+      <Card
+        variant="outlined"
+        sx={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          minHeight: type !== 'Comment' ? '19rem' : undefined,
+        }}
+      >
+        {type === 'Comment' && (
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
+                <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
+              </Avatar>
+            }
+            sx={{
+              '& .MuiCardHeader-avatar': {
+                marginRight: 0,
+              },
+            }}
+          />
+        )}
+        <CardContent
+          sx={{
+            paddingLeft: type === 'Comment' ? 0 : undefined,
+            minWidth: 0,
+            overflowWrap: 'break-word',
+            alignSelf: 'center',
+          }}
+        >
+          {content ? (
+            <Typography variant="regular">
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </Typography>
+          ) : (
+            <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
+          )}
+        </CardContent>
+      </Card>
+    </Box>
+  )
+}
+
 const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -114,52 +166,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   if (viewOnly) {
     return (
-      <Box sx={{ mt: '1rem' }}>
-        <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
-          {t(`keyData:${type}`)}
-        </Typography>
-        <Card
-          variant="outlined"
-          sx={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'flex-start',
-            flexDirection: 'row',
-            minHeight: type !== 'Comment' ? '19rem' : undefined,
-          }}
-        >
-          {type === 'Comment' && (
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                  <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
-                </Avatar>
-              }
-              sx={{
-                '& .MuiCardHeader-avatar': {
-                  marginRight: 0,
-                },
-              }}
-            />
-          )}
-          <CardContent
-            sx={{
-              paddingLeft: type === 'Comment' ? 0 : undefined,
-              minWidth: 0,
-              overflowWrap: 'break-word',
-              alignSelf: 'center',
-            }}
-          >
-            {content ? (
-              <Typography variant="regular">
-                <ReactMarkdown>{content}</ReactMarkdown>
-              </Typography>
-            ) : (
-              <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
-            )}
-          </CardContent>
-        </Card>
-      </Box>
+      <TextFieldCard id={id} t={t} type={type} />
     )
   }
 

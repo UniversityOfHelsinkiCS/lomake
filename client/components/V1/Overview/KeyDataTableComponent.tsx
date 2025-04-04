@@ -7,7 +7,7 @@ import { CircularProgress, Tooltip, Typography, Button } from '@mui/material'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 
-import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { RootState } from '@/client/util/store'
 
@@ -17,7 +17,7 @@ import { Table, TableRow, TableCell } from '../Generic/TableComponent'
 import KeyDataModal, { type selectedKeyFigureData } from './KeyDataModalComponent'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import Modal from '../Generic/ModalTemplateComponent'
-import TextFieldComponent from '../Generic/TextFieldComponent'
+import { TextFieldCard } from '../Generic/TextFieldComponent'
 import { orderBy } from 'lodash'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
@@ -60,7 +60,7 @@ const ActionsCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => 
         <Typography variant="h3">
           {programmeData.koulutusohjelma[lang]} {year}
         </Typography>
-        <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}></TextFieldComponent>
+        <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'}></TextFieldCard>
       </Modal>
     </>
   )
