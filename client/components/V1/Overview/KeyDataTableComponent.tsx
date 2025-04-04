@@ -250,7 +250,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 hoverEffect
                 data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
               >
-                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`}>
+                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`} style={{ width: '100%' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
                     <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>
                     <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
