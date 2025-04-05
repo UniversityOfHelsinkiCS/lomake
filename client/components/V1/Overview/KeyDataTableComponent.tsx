@@ -187,121 +187,125 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   }
 
   return (
-    <div style={{ minWidth: 1750 }}>
+    <div style={{ width: '100%' }}>
       {/* Search input */}
-      <div style={{ marginBottom: '1rem', marginTop: '2rem' }}>
+      <div style={{ margin: '3rem 1rem 1rem 1rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
       </div>
 
       {/* Key Figure Data Table */}
-      {/* Table Header */}
-      <Table>
-        <TableRow isHeader>
-          <TableCell>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-              <Typography
-                variant="h6"
-                onClick={sortByProgrammeName}
-                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-              >
-                {t('common:programmeHeader')} <SwapVertIcon />
-              </Typography>
-              <Typography
-                variant="h6"
-                onClick={sortByProgrammeCode}
-                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-              >
-                {t('common:code')} <SwapVertIcon />
-              </Typography>
-            </div>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:vetovoimaisuus')}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:lapivirtaus')}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
-          </TableCell>
-
-          <TableCell disabled>
-            <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
-              <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
-            </Tooltip>
-          </TableCell>
-          <TableCell>
-            <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
-          </TableCell>
-        </TableRow>
-
-        {/* Table Body */}
-        {keyFigureData.length > 0 ? (
-          keyFigureData.map((programmeData: KeyDataProgramme) => (
-            <TableRow key={programmeData.koulutusohjelmakoodi}>
-              <TableCell
-                itemAlign="left"
-                hoverEffect
-                data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
-              >
-                <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`} style={{ width: '100%' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-                    <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>
-                    <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
-                  </div>
-                </Link>
-              </TableCell>
-              <TrafficLightCell
-                metadata={metadata}
-                programmeData={programmeData}
-                groupKey={GroupKey.VETOVOIMAISUUS}
-                handleModalOpen={handleModalOpen}
-              />
-
-              <TrafficLightCell
-                metadata={metadata}
-                programmeData={programmeData}
-                groupKey={GroupKey.LAPIVIRTAUS}
-                handleModalOpen={handleModalOpen}
-              />
-
-              <TrafficLightCell
-                metadata={metadata}
-                programmeData={programmeData}
-                groupKey={GroupKey.OPISKELIJAPALAUTE}
-                handleModalOpen={handleModalOpen}
-              />
-
-              <TrafficLightCell
-                metadata={metadata}
-                programmeData={programmeData}
-                groupKey={GroupKey.RESURSSIT}
-                handleModalOpen={handleModalOpen}
-              />
+      <div style={{ width: '100%', overflowX: 'auto', padding: '1rem' }}>
+        <div style={{ minWidth: 1750 }}>
+          {/* Table Header */}
+          <Table>
+            <TableRow isHeader>
               <TableCell>
-                <ActionsCell programmeData={programmeData} metadata={metadata} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+                  <Typography
+                    variant="h6"
+                    onClick={sortByProgrammeName}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  >
+                    {t('common:programmeHeader')} <SwapVertIcon />
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    onClick={sortByProgrammeCode}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  >
+                    {t('common:code')} <SwapVertIcon />
+                  </Typography>
+                </div>
               </TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          ))
-        ) : (
-          <TableRow>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5rem' }}>
-              <Typography variant="body1">{t('common:noData')}</Typography>
-            </div>
-          </TableRow>
-        )}
-      </Table>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:vetovoimaisuus')}</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:lapivirtaus')}</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:opiskelijapalaute')}</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:resurssit')}</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
+              </TableCell>
 
-      {/* Key Figure Data Modal */}
-      <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
+              <TableCell disabled>
+                <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
+                  <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
+                </Tooltip>
+              </TableCell>
+              <TableCell>
+                <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
+              </TableCell>
+            </TableRow>
+
+            {/* Table Body */}
+            {keyFigureData.length > 0 ? (
+              keyFigureData.map((programmeData: KeyDataProgramme) => (
+                <TableRow key={programmeData.koulutusohjelmakoodi}>
+                  <TableCell
+                    itemAlign="left"
+                    hoverEffect
+                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
+                  >
+                    <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`} style={{ width: '100%' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+                        <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>
+                        <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
+                      </div>
+                    </Link>
+                  </TableCell>
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.VETOVOIMAISUUS}
+                    handleModalOpen={handleModalOpen}
+                  />
+
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.LAPIVIRTAUS}
+                    handleModalOpen={handleModalOpen}
+                  />
+
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.OPISKELIJAPALAUTE}
+                    handleModalOpen={handleModalOpen}
+                  />
+
+                  <TrafficLightCell
+                    metadata={metadata}
+                    programmeData={programmeData}
+                    groupKey={GroupKey.RESURSSIT}
+                    handleModalOpen={handleModalOpen}
+                  />
+                  <TableCell>
+                    <ActionsCell programmeData={programmeData} metadata={metadata} />
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5rem' }}>
+                  <Typography variant="body1">{t('common:noData')}</Typography>
+                </div>
+              </TableRow>
+            )}
+          </Table>
+
+          {/* Key Figure Data Modal */}
+          <KeyDataModal open={modalOpen} setOpen={setModalOpen} data={selectedKeyFigureData} />
+        </div>
+      </div>
     </div>
   )
 }
