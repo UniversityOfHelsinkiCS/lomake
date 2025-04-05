@@ -187,7 +187,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
   }
 
   return (
-    <div style={{ minWidth: 1400 }}>
+    <div style={{ minWidth: 1750 }}>
       {/* Search input */}
       <div style={{ marginBottom: '1rem', marginTop: '2rem' }}>
         <SearchInput placeholder={t('common:programmeFilter')} setSearchValue={setSearchValue} />
