@@ -12,7 +12,7 @@ import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 
 import { Box, CircularProgress, Typography } from '@mui/material'
-import TextFieldComponent from '../Generic/TextFieldComponent'
+import TextFieldCard from '../Generic/TextFieldComponent'
 import ModalTemplate from '../Generic/ModalTemplateComponent'
 import KeyDataCard from '../Generic/KeyDataCardComponent'
 import { getKeyDataPoints } from '@/client/components/V1/Utils/util'
@@ -88,7 +88,7 @@ export default function KeyDataModalComponent({ data, open, setOpen }: DataModal
             programme={programme}
             {...content}
           />
-          <TextFieldComponent id={content.groupKey} type="Comment" />
+          <TextFieldCard id={content.groupKey} type="Comment" />
         </>
       )}
     </ModalTemplate>
