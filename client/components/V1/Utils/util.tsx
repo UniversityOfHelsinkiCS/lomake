@@ -63,11 +63,27 @@ export const calculateKeyDataColor = (
     [LightColors.Empty]: 0,
   }
 
+  let missingCount = 0;
+
   evaluationArea.forEach(data => {
     const value: number = extractKeyDataValue(programme, data)
+    if (value === null) {
+      missingCount++;
+      return;
+    }
     const color: LightColors = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
     colorsCount[color]++
   })
+
+  // If 2 or more key data points are missing, return Grey
+  if (missingCount >= 2) {
+    return LightColors.Grey;
+  }
+
+  // If exactly 1 key data point is missing, treat it as DarkGreen
+  if (missingCount === 1) {
+    colorsCount[LightColors.DarkGreen]++;
+  }
 
   // Order matters!
   switch (true) {
