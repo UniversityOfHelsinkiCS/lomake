@@ -1,5 +1,3 @@
-import fi from "@/client/util/locales/fi"
-
 export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
 
@@ -23,6 +21,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: kandiohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      additionalInfo: kandiohjelma['Uusi tai lakkautettu ohjelma'],
     }
   })
 
@@ -38,6 +37,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: maisteriohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      additionalInfo: maisteriohjelma['Uusi tai lakkautettu ohjelma'],
     }
   })
 

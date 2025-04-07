@@ -197,6 +197,11 @@ const ProgrammeView = () => {
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
+          {keyData.programme.additionalInfo && (
+            <Alert severity="warning" sx={{ mb: 4 }}>
+              <Typography variant="light">{keyData.programme.additionalInfo}</Typography>
+            </Alert>
+          )}
           <Alert severity="info">
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Typography variant="h5">{t('keyData:title')}</Typography>

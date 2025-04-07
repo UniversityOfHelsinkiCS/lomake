@@ -16,4 +16,5 @@ export interface StudyProgramme {
   level: StudyLevel
   companionFaculties: string[]
   international: boolean
+  additionalInfo?: string
 }

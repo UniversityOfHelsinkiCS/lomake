@@ -82,8 +82,7 @@ export const KeyDataProgrammeSchema = z
     year: z.number().int(),
     international: z.boolean().optional(),
     level: z.string().optional(),
-    redLights: z.array(z.string()).optional(),
-    yellowLights: z.array(z.string()).optional(),
+    additionalInfo: z.string().optional(),
   })
   .strict() // to disallow extra keys
 

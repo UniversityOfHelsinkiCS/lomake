@@ -30,6 +30,39 @@ interface KeyDataTableProps {
   yearFilter: string
 }
 
+const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
+  const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
+  const { t } = useTranslation()
+
+  const color = additionalInfo === 'Lakkautettu ohjelma' ? 'secondary' : ''
+  const tooltipText =
+    additionalInfo === 'Uusi ohjelma'
+      ? t('keyData:newProgramme')
+      : additionalInfo === 'Lakkautettu ohjelma'
+        ? t('keyData:discontinuedProgramme')
+        : additionalInfo === 'Puuttuva tieto'
+          ? t('keyData:missingInfo')
+          : ''
+
+  return (
+    <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
+      <Link to={`/v1/programmes/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
+        <Tooltip title={tooltipText} placement="top" arrow>
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+            <Typography variant="regular" color={color}>
+              {koulutusohjelma[lang]}
+            </Typography>
+            <Typography variant="regular" color={color}>
+              {koulutusohjelmakoodi}
+            </Typography>
+          </div>
+        </Tooltip>
+      </Link>
+    </TableCell>
+  )
+}
+
 const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgramme; metadata: KeyDataMetadata[] }) => {
   const { renderActionsBadge } = useNotificationBadge()
   const { t } = useTranslation()
@@ -247,18 +280,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
             {keyFigureData.length > 0 ? (
               keyFigureData.map((programmeData: KeyDataProgramme) => (
                 <TableRow key={programmeData.koulutusohjelmakoodi}>
-                  <TableCell
-                    itemAlign="left"
-                    hoverEffect
-                    data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}
-                  >
-                    <Link to={`/v1/programmes/${programmeData.koulutusohjelmakoodi}`} style={{ width: '100%' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
-                        <Typography variant="regular">{programmeData.koulutusohjelma[lang]}</Typography>
-                        <Typography variant="regular">{programmeData.koulutusohjelmakoodi}</Typography>
-                      </div>
-                    </Link>
-                  </TableCell>
+                  <ProgrammeInfoCell programmeData={programmeData} />
                   <TrafficLightCell
                     metadata={metadata}
                     programmeData={programmeData}
