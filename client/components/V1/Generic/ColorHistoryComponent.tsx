@@ -1,4 +1,4 @@
-import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Divider, Box } from '@mui/material'
+import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
@@ -40,15 +40,17 @@ const ColorHistoryComponent = (props: any) => {
       {history.length > 0 ? (
         <Table key={data.year} sx={{ mt: 2 }}>
           <TableHead>
-            <TableCell align="center">
-              <Typography variant="lightSmall">{t('keyData:year')}</Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="lightSmall">{t('keyData:value')}</Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="lightSmall">{t('keyData:trafficLight')}</Typography>
-            </TableCell>
+            <TableRow>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:year')}</Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:value')}</Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:trafficLight')}</Typography>
+              </TableCell>
+            </TableRow>
           </TableHead>
           <TableBody>
             {history.map((data: any) => {
