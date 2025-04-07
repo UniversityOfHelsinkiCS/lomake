@@ -627,5 +627,8 @@ export default {
       'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
     actionsInfo3:
       'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+    missingProgramme: 'Puuttuva tieto',
+    discontinuedProgramme: 'Lakkautettu ohjelma',
+    newProgramme: 'Uusi ohjelma',
   },
 }

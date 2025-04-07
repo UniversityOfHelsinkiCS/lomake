@@ -620,16 +620,16 @@ export default {
     keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
-    vetovoimaisuus: 'Utbildningsprogrammets Attraktionskraft',
+    vetovoimaisuus: 'Attraktionskraft',
     vetovoimaisuusInfo:
       'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek.',
-    lapivirtaus: 'Genomströmning Och Examen I Programmet',
+    lapivirtaus: 'Smidiga studier och utexaminering',
     lapivirtausInfo:
       'Genomströmning gäller flödet av studier, både enligt Undervisnings- och kulturministeriets finansieringsmodell och, i allmänhet, på antalet examina och studiernas progression genom programmets olika stadier. Antalet examina och slutförandet av examina inom den målsatta tiden indikerar att det inte finns några hinder för studier i programmet. Antalet examina är en indikator på programmets storlek.',
-    opiskelijapalaute: 'Studentrespons Och Anställning Av Utexaminerade',
+    opiskelijapalaute: 'Feedback och sysselsättning',
     opiskelijapalauteInfo:
       'Studentrespons används för att undersöka programmets feedbackkultur och den övergripande nivån på feedbackaktiviteten, samt studenternas tillfredsställelse med sina studier i programmet. Studenternas återkoppling återspeglar effektiviteten i programmets läroplan, vägledning och leverans.  Återkoppling om anställningsbarhet återspeglar programmets relevans för samhället.',
-    resurssit: 'Resurser För Utbildningsprogrammet',
+    resurssit: 'Resursanvändning',
     resurssitInfo:
       'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven.',
     qualityControl: 'Kvalitetskontrollverktyg',
@@ -663,5 +663,8 @@ export default {
       'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
     actionsInfo3:
       'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+    missingProgramme: 'Saknade uppgifter',
+    discontinuedProgramme: 'Avvecklat program',
+    newProgramme: 'Nytt program',
   },
 }
