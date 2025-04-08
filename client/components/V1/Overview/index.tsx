@@ -69,8 +69,6 @@ const OverviewPage = () => {
     dropdownFilter: selectedLevel,
   })
 
-  console.log('users', currentUser.data.uid)
-
   if (usersProgrammes === null || usersProgrammes.length === 0) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
