@@ -33,22 +33,12 @@ interface KeyDataTableProps {
 const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const { additionalInfo, koulutusohjelma, koulutusohjelmakoodi } = programmeData
-  const { t } = useTranslation()
-
-  const color = additionalInfo === 'Lakkautettu ohjelma' ? 'secondary' : ''
-  const tooltipText =
-    additionalInfo === 'Uusi ohjelma'
-      ? t('keyData:newProgramme')
-      : additionalInfo === 'Lakkautettu ohjelma'
-        ? t('keyData:discontinuedProgramme')
-        : additionalInfo === 'Puuttuva tieto'
-          ? t('keyData:missingInfo')
-          : ''
+  const color = additionalInfo.fi === 'Lakkautettu ohjelma' ? 'secondary' : ''
 
   return (
     <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
       <Link to={`/v1/programmes/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
-        <Tooltip title={tooltipText} placement="top" arrow>
+        <Tooltip title={additionalInfo[lang]} placement="top" arrow>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
             <Typography variant="regular" color={color}>
               {koulutusohjelma[lang]}

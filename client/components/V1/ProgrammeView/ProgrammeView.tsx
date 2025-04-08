@@ -200,15 +200,7 @@ const ProgrammeView = () => {
         <Box sx={{ mt: 4 }}>
           {keyData.programme.additionalInfo && (
             <Alert severity="warning" sx={{ mb: 4 }}>
-              <Typography variant="light">
-                {keyData.programme.additionalInfo === 'Uusi ohjelma'
-                  ? t('keyData:newProgramme')
-                  : keyData.programme.additionalInfo === 'Lakkautettu ohjelma'
-                    ? t('keyData:discontinuedProgramme')
-                    : keyData.programme.additionalInfo === 'Puuttuva tieto'
-                      ? t('keyData:missingInfo')
-                      : keyData.programme.additionalInfo}
-              </Typography>
+              <Typography variant="light">{keyData.programme.additionalInfo[lang]}</Typography>
             </Alert>
           )}
           <Alert severity="info">

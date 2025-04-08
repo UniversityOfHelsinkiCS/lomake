@@ -82,7 +82,13 @@ export const KeyDataProgrammeSchema = z
     year: z.number().int(),
     international: z.boolean().optional(),
     level: z.string().optional(),
-    additionalInfo: z.string().optional(),
+    additionalInfo: z
+      .object({
+        fi: z.string(),
+        se: z.string(),
+        en: z.string(),
+      })
+      .strict(),
   })
   .strict() // to disallow extra keys
 

@@ -21,7 +21,11 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: kandiohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
-      additionalInfo: kandiohjelma['Uusi tai lakkautettu ohjelma'],
+      additionalInfo: {
+        fi: kandiohjelma[`Lisätietoja_fi`],
+        se: kandiohjelma[`Lisätietoja_se`],
+        en: kandiohjelma[`Lisätietoja_en`],
+      },
     }
   })
 
@@ -37,7 +41,11 @@ export const formatKeyData = (data: any, programmeData: any) => {
       year: maisteriohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
-      additionalInfo: maisteriohjelma['Uusi tai lakkautettu ohjelma'],
+      additionalInfo: {
+        fi: maisteriohjelma[`Lisätietoja_fi`],
+        se: maisteriohjelma[`Lisätietoja_se`],
+        en: maisteriohjelma[`Lisätietoja_en`],
+      },
     }
   })
 
