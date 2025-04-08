@@ -243,7 +243,7 @@ const NavBar = () => {
         case 'special':
           return user.specialGroup && Object.keys(user.specialGroup).length > 0
         case 'admin':
-          return isAdmin(user)
+          return isAdmin(user) || user.uid === 'kotkajim'
         case 'evaluationFaculty':
           return isEvaluationFacultyUser(user)
         case 'evaluationUniversity':
