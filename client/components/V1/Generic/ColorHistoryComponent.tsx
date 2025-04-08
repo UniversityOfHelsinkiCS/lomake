@@ -31,7 +31,7 @@ const ColorHistoryComponent = (props: any) => {
       return isMatchingProgram && hasValue && isDifferentYear
     })
     .map((programme: any) => ({
-      year: programme.year + 1,
+      year: programme.year,
       value: dataKey ? programme.values[dataKey] : null,
     }))
   return (
