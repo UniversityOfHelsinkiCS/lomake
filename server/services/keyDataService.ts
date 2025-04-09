@@ -1,3 +1,5 @@
+import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
+
 export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
 
@@ -9,7 +11,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     international: programme.international,
   }))
 
-  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
+  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -29,7 +31,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
+  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
@@ -49,7 +51,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
     }
   })
 
-  const meta = metadata.map((m: any) => ({
+  const meta = metadata.map((m: KeyDataMetadataRaw) => ({
     yksikko: m['Yksikkö'],
     kynnysarvot: m['Kynnysarvot'],
     ohjelmanTaso: m['Ohjelman taso'],

@@ -21,15 +21,13 @@ export const KandiohjelmatValuesSchema = z
     'Opiskelijoiden hyvinvointi': z.number().optional(),
     'Opintojen ohjaus': z.number().optional(),
     'Opetuksen laatu': z.number().optional(),
-
-    // Liikennevalot
-    Vetovoimaisuus: LiikennevalotEnum,
-    'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
-    'Palaute ja työllistyminen': LiikennevalotEnum,
-    'Resurssien käyttö': LiikennevalotEnum,
+    Palauteaktiivisuus: z.number().optional(),
 
     // Muut
     Vuosi: z.number().int(),
+    Lisätietoja_fi: z.string().optional(),
+    Lisätietoja_en: z.string().optional(),
+    Lisätietoja_se: z.string().optional(),
   })
   .strict() // to disallow extra keys,
 
@@ -53,14 +51,11 @@ export const MaisteriohjelmatValuesSchema = z
     'Opintojen kiinnostavuus': z.number().optional(),
     Työllistyminen: z.number().optional(),
 
-    // Liikennevalot
-    Vetovoimaisuus: LiikennevalotEnum,
-    'Opintojen sujuvuus ja valmistuminen': LiikennevalotEnum,
-    'Palaute ja työllistyminen': LiikennevalotEnum,
-    'Resurssien käyttö': LiikennevalotEnum,
-
     // Muut
     Vuosi: z.number().int(),
+    Lisätietoja_fi: z.string().optional(),
+    Lisätietoja_en: z.string().optional(),
+    Lisätietoja_se: z.string().optional(),
   })
   .strict() // to disallow extra keys,
 
@@ -75,18 +70,14 @@ export const KeyDataProgrammeSchema = z
       })
       .strict(),
     values: z.record(z.string(), z.any()),
-    vetovoimaisuus: z.string(),
-    lapivirtaus: z.string(),
-    opiskelijapalaute: z.string(),
-    resurssit: z.string(),
     year: z.number().int(),
     international: z.boolean().optional(),
     level: z.string().optional(),
     additionalInfo: z
       .object({
-        fi: z.string(),
-        se: z.string(),
-        en: z.string(),
+        fi: z.string().optional(),
+        se: z.string().optional(),
+        en: z.string().optional(),
       })
       .strict(),
   })
@@ -94,6 +85,17 @@ export const KeyDataProgrammeSchema = z
 
 export const MetadataSchema = z
   .object({
+    yksikko: z.literal('%').optional(),
+    kynnysarvot: z
+      .string()
+      .regex(/^\d+;\d+;\d+;\d+$/, 'Should be in format number;number;number;number')
+      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
+    ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
+    liikennevalo: z.boolean(),
+    mittarinRajat: z
+      .string()
+      .regex(/^\d+;\d+$/, 'Should be in format number;number')
+      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
     arviointialue: z.string(),
     avainluvunNimi: z
       .object({
@@ -102,7 +104,6 @@ export const MetadataSchema = z
         en: z.string(),
       })
       .strict(),
-    avainluvunArvo: z.string(),
     maaritelma: z
       .object({
         fi: z.string(),
@@ -110,17 +111,7 @@ export const MetadataSchema = z
         en: z.string().optional(), // delete optionality when updated
       })
       .strict(),
-    ohjelmanTaso: z.enum(['Kandi', 'Maisteri', 'Tohtori']),
-    kynnysarvot: z
-      .string()
-      .regex(/^\d+;\d+;\d+;\d+$/, 'Should be in format number;number;number;number')
-      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
-    mittarinRajat: z
-      .string()
-      .regex(/^\d+;\d+$/, 'Should be in format number;number')
-      .optional(), //🚨 SHOULD NOT BE OPTIONAL, but data.xlsx is not yet ready
-    yksikko: z.literal('%').optional(),
-    liikennevalo: z.boolean(),
+    avainluvunArvo: z.string(),
   })
   .strict() // to disallow extra keys
 
@@ -128,10 +119,12 @@ export const MetadataRawSchema = z
   .object({
     Yksikkö: z.literal('%').optional(),
     Kynnysarvot: z.string().optional(), // delete optionality when updated
-    Liikennevalo: z.boolean(),
-    Arviointialue: z.string(),
     'Ohjelman taso': z.string(),
     'Mittarin rajat': z.string().optional(), // delete optionality when updated
+    Liikennevalo: z.boolean(),
+    Arviointialue_fi: z.string(),
+    Arviointialue_en: z.string(),
+    Arviointialue_se: z.string(),
     Määritelmä_fi: z.string(),
     Määritelmä_se: z.string().optional(), // delete optionality when updated
     Määritelmä_en: z.string().optional(), // delete optionality when updated
