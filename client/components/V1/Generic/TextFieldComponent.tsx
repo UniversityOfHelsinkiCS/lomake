@@ -18,10 +18,10 @@ type TextFieldComponentProps = {
   children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-export const TextFieldCard = ({ id, t, type }: { id: string, t: TFunction, type: string,  }) => {
+export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type: string }) => {
   const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
   return (
-    <Box sx={{ mt: '1rem' }}>
+    <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
       <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
         {t(`keyData:${type}`)}
       </Typography>
@@ -167,9 +167,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
   }
 
   if (viewOnly) {
-    return (
-      <TextFieldCard id={id} t={t} type={type} />
-    )
+    return <TextFieldCard id={id} t={t} type={type} />
   }
 
   return (

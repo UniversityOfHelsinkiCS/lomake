@@ -47,16 +47,22 @@ const socketMiddleware = () => {
   let socket = null
   let isVisible = true
 
+  // TODO: this is causing some sequelize errors because this tries to join room in every route
   const handleVisibilityChange = () => {
     isVisible = !document.hidden
+    const patterns = [/^\w{4}_\w{3}$/, /^T\d{6}$/]
     if (isVisible && !socket) {
       const pathParts = window.location.pathname.split('/')
       const room = pathParts[pathParts.length - 1]
       const form = pathParts[pathParts.length - 2]
 
-      socket = connect()
-      setupSocketListeners(socket)
-      socket.emit('join', room, form)
+      const matchesPattern = patterns.some(pattern => pattern.test(room))
+
+      if (matchesPattern) {
+        socket = connect()
+        setupSocketListeners(socket)
+        socket.emit('join', room, form)
+      }
     } else if (!isVisible && socket) {
       socket.close()
       socket = null

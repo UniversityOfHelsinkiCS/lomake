@@ -196,7 +196,7 @@ const NavBar = () => {
 
   const renderHome = route => (
     <MenuItem component={Link} to={route} data-cy="nav-home">
-      <Tooltip title={t('toFrontpage')}>
+      <Tooltip title={t('toFrontpage')} arrow>
         <Box display="flex" alignItems="center" sx={{ gap: 2 }}>
           <img style={{ width: '64px', height: 'auto', margin: '6px 0px' }} src={images.hy} alt="homepage" />
           <Typography variant="light">Tilannekuvalomake</Typography>
@@ -243,7 +243,7 @@ const NavBar = () => {
         case 'special':
           return user.specialGroup && Object.keys(user.specialGroup).length > 0
         case 'admin':
-          return isAdmin(user)
+          return isAdmin(user) || user.uid === 'kotkajim'
         case 'evaluationFaculty':
           return isEvaluationFacultyUser(user)
         case 'evaluationUniversity':

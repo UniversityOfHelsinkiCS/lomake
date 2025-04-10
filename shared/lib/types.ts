@@ -3,6 +3,7 @@ import {
   MaisteriohjelmatValuesSchema,
   KandiohjelmatValuesSchema,
   KeyDataProgrammeSchema,
+  MetadataRawSchema,
   MetadataSchema,
 } from './validations'
 
@@ -10,6 +11,7 @@ export type KeyDataProgramme = z.infer<typeof KeyDataProgrammeSchema>
 export type KandiohjelmatValues = z.infer<typeof KandiohjelmatValuesSchema>
 export type MaisteriohjelmatValues = z.infer<typeof MaisteriohjelmatValuesSchema>
 export type KeyDataMetadata = z.infer<typeof MetadataSchema>
+export type KeyDataMetadataRaw = z.infer<typeof MetadataRawSchema>
 
 export interface KeyData {
   data: {

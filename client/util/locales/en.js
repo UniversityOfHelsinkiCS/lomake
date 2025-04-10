@@ -12,7 +12,7 @@ export default {
     negative: 'Significant measures required/development areas not yet specified',
     noColors: '*Questions, without traffic lights are not shown here (e.g. 16 and 17)',
     lightGreen: 'Light green',
-    darkGreen: 'Dark green',
+    darkGreen: 'Green',
     green: 'Green',
     yellow: 'Yellow',
     red: 'Red',
@@ -589,16 +589,16 @@ export default {
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
 
-    vetovoimaisuus: 'Attractiveness Of The Degree Programme',
+    vetovoimaisuus: 'Attractiveness',
     vetovoimaisuusInfo:
       'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',
-    lapivirtaus: 'The Rate Of Progression And Graduation Of The Degree Programme',
+    lapivirtaus: 'Smooth progress of studies and graduation',
     lapivirtausInfo:
       'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme.',
-    opiskelijapalaute: 'Student Feedback And Employment Of The Degree Programme',
+    opiskelijapalaute: 'Feedback and employment',
     opiskelijapalauteInfo:
       "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society.",
-    resurssit: 'Resources Of The Degree Programme',
+    resurssit: 'Use of resources',
     resurssitInfo:
       'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme.',
     qualityControl: 'Quality control tools',
@@ -619,6 +619,7 @@ export default {
     missingMeasure: 'Development plan is missing!',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
     colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    noHistory: 'No previous history',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
     yearlyDevelopment: 'Annual development',

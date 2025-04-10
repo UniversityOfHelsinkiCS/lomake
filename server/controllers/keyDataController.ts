@@ -35,7 +35,6 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
-    // TODO: uncomment when updated data.xlsx is in staging and production
     // Validate formatted key data
     try {
       KeyDataProgrammeSchema.extend({

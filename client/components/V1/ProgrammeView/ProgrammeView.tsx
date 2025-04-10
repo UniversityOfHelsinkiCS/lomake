@@ -17,10 +17,10 @@ import NoPermissions from '../../Generic/NoPermissions'
 
 import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { RootState } from '@/client/util/store'
-import { KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
-import { getKeyDataPoints } from '../Utils/util'
+import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
 import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
 import NotificationBadge from '../Generic/NotificationBadge'
 import { TrafficLight } from '../Generic/TrafficLightComponent'
@@ -90,41 +90,86 @@ const ProgrammeView = () => {
     setActiveTab(newValue)
   }
 
-  const ActionsBadge = ({ programmeData }: { programmeData: KeyDataProgramme }) => {
+  const ActionsBadge = ({
+    programmeData,
+    metadata,
+    reports,
+  }: {
+    programmeData: KeyDataProgramme
+    metadata: KeyDataMetadata[]
+    reports: any // Add proper type
+  }) => {
     const { renderActionsBadge } = useNotificationBadge()
 
     const actionsBadgeData = useMemo(() => {
-      return renderActionsBadge(programmeData, true)
-    }, [programmeData, reports])
+      return renderActionsBadge(programmeData, metadata, true)
+    }, [programmeData, metadata, reports, renderActionsBadge])
 
-    return actionsBadgeData.showBadge && <NotificationBadge variant={'small'} style={{ marginLeft: 0 }} />
+    return (
+      actionsBadgeData.showBadge && (
+        <NotificationBadge data-cy={`actionsBadge`} variant={'small'} style={{ marginLeft: 0 }} />
+      )
+    )
   }
 
-  const TextFieldBadge = ({ programmeData, groupKey }: { programmeData: KeyDataProgramme; groupKey: GroupKey }) => {
+  const TextFieldBadge = ({
+    programmeData,
+    groupKey,
+    metadata,
+    reports,
+    level,
+  }: {
+    programmeData: KeyDataProgramme
+    groupKey: GroupKey
+    metadata: KeyDataMetadata[]
+    reports: any // Add proper type
+    level: ProgrammeLevel
+  }) => {
     const { renderTrafficLightBadge } = useNotificationBadge()
 
-    const shouldRenderBadge = useMemo(() => {
-      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey)
-    }, [programmeData, groupKey, reports])
+    // Calculate color outside of useMemo
+    const color = useMemo(
+      () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
+      [metadata, programmeData, groupKey, level],
+    )
 
-    return shouldRenderBadge && <NotificationBadge variant={'small'} />
+    const shouldRenderBadge = useMemo(() => {
+      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
+    }, [programmeData, groupKey, color, renderTrafficLightBadge, reports])
+
+    return shouldRenderBadge && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
   }
 
-  const TabBadge = ({ programmeData, tab }: { programmeData: KeyDataProgramme; tab: 'lights' | 'actions' }) => {
+  const TabBadge = ({
+    programmeData,
+    tab,
+    metadata,
+    reports,
+  }: {
+    programmeData: KeyDataProgramme
+    tab: 'lights' | 'actions'
+    metadata: KeyDataMetadata[]
+    reports: any // Add proper type
+  }) => {
     const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
 
     const shouldRenderBadge = useMemo(() => {
-      if (tab === 'lights') return renderTabBadge(programmeData)
-      else return renderActionsBadge(programmeData).showBadge
-    }, [programmeData, reports])
+      if (tab === 'lights') return renderTabBadge(programmeData, metadata)
+      else return renderActionsBadge(programmeData, metadata).showBadge
+    }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge, reports])
 
-    return shouldRenderBadge && <NotificationBadge variant={'medium'} style={{ marginLeft: '1.5rem' }} />
+    return (
+      shouldRenderBadge && (
+        <NotificationBadge data-cy={`tabBadge-${tab}`} variant={'medium'} style={{ marginLeft: '1.5rem' }} />
+      )
+    )
   }
 
   const KeyDataPoints = getKeyDataPoints(t, programme)
 
+  const kotka = currentUser.data.uid === 'kotkajim'
   // remove before pilot
-  if (!isAdmin(user) && inProduction) return <NoPermissions />
+  if (!(isAdmin(currentUser.data || kotka)) && inProduction) return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -141,18 +186,23 @@ const ProgrammeView = () => {
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
         <Tab
           label={t('keyData:keyFigure')}
-          icon={<TabBadge tab="lights" programmeData={programme} />}
+          icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} reports={reports} />}
           iconPosition="end"
         />
         <Tab
           label={t('keyData:actions')}
-          icon={<TabBadge tab="actions" programmeData={programme} />}
+          icon={<TabBadge tab="actions" programmeData={programme} metadata={metadata} reports={reports} />}
           iconPosition="end"
         />
       </Tabs>
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
+          {keyData.programme.additionalInfo && (
+            <Alert severity="warning" sx={{ mb: 4 }}>
+              <Typography variant="light">{keyData.programme.additionalInfo[lang]}</Typography>
+            </Alert>
+          )}
           <Alert severity="info">
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Typography variant="h5">{t('keyData:title')}</Typography>
@@ -202,7 +252,13 @@ const ProgrammeView = () => {
               <Box sx={{ alignItems: 'center' }}>
                 {data.textField && (
                   <TextFieldComponent id={data.groupKey} type="Comment">
-                    <TextFieldBadge programmeData={programme} groupKey={data.groupKey} />
+                    <TextFieldBadge
+                      programmeData={programme}
+                      groupKey={data.groupKey}
+                      metadata={metadata}
+                      reports={reports}
+                      level={level}
+                    />
                   </TextFieldComponent>
                 )}
               </Box>
@@ -233,7 +289,7 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
           <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge programmeData={programme} />
+            <ActionsBadge programmeData={programme} metadata={metadata} reports={reports} />{' '}
           </TextFieldComponent>
         </Box>
       )}

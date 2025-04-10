@@ -91,6 +91,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             padding: '18px',
             flexWrap: 'nowrap',
           }}
+          data-cy={`${props.title}-${props.color}`}
         >
           <TrafficLight style={{ marginRight: '5px' }} color={props.color} />
 
@@ -126,6 +127,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 }
 
 const KeyDataCard = (props: KeyDataCardProps) => {
+  const color = calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
@@ -136,10 +138,12 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           paddingBottom: '10px',
         }}
       >
+        <div data-cy={`${props.programme.koulutusohjelmakoodi}-${props.groupKey}-${color}`}>
         <TrafficLight
-          color={calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)}
+          color={color}
           variant="large"
         />
+        </div>
 
         <Typography variant="h2" style={{ margin: 0 }}>
           {props.title.toUpperCase()}

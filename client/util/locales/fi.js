@@ -584,7 +584,6 @@ export default {
     notUsed2025: 'Ei käytössä vuonna 2025',
     keyFigure: 'Arviointialueet ja avainluvut',
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
-
     vetovoimaisuus: 'Vetovoimaisuus',
     vetovoimaisuusInfo:
       'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
@@ -615,6 +614,7 @@ export default {
     missingMeasure: 'Kehittämisuunnitelma puuttuu!',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',
+    noHistory: 'Ei aiempia arvioita',
     unsavedChangesWarning:
       'Sinulla on tallentamattomia muutoksia, paina "OK" tallentaaksesi muutokset, "Peruuta" jatkaaksesi muokkausta.',
     yearlyDevelopment: 'Avainluvun kehitys vuosittain',

@@ -1,4 +1,4 @@
-import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Divider, Box } from '@mui/material'
+import { Typography, Table, TableBody, TableHead, TableCell, TableRow, Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { RootState } from '@/client/util/store'
@@ -31,46 +31,54 @@ const ColorHistoryComponent = (props: any) => {
       return isMatchingProgram && hasValue && isDifferentYear
     })
     .map((programme: any) => ({
-      year: programme.year + 1,
+      year: programme.year,
       value: dataKey ? programme.values[dataKey] : null,
     }))
   return (
-    <Box sx={{ mt: 4 }}>
+    <Box sx={{ mt: 4, mb: 2 }}>
       <Typography variant="italic">{t('keyData:yearlyDevelopment')}</Typography>
-      <Table key={data.year} sx={{ mt: 2 }}>
-        <TableHead>
-          <TableCell align="center">
-            <Typography variant="lightSmall">{t('keyData:year')}</Typography>
-          </TableCell>
-          <TableCell align="center">
-            <Typography variant="lightSmall">{t('keyData:value')}</Typography>
-          </TableCell>
-          <TableCell align="center">
-            <Typography variant="lightSmall">{t('keyData:trafficLight')}</Typography>
-          </TableCell>
-        </TableHead>
-        <TableBody>
-          {history.map((data: any) => {
-            const color = calculateColor(data.value, props.thresholds, props.color, props.unit)
-            const valueText = calculateValue(data.value, props?.unit)
-            return (
-              <TableRow key={data.year}>
-                <TableCell align="center">
-                  <Typography variant="lightSmall">{data.year}</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography variant="lightSmall">{valueText}</Typography>
-                </TableCell>
-                <TableCell align="center" sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Typography variant="lightSmall">
-                    <TrafficLight color={color} />
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
+      {history.length > 0 ? (
+        <Table key={data.year} sx={{ mt: 2 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:year')}</Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:value')}</Typography>
+              </TableCell>
+              <TableCell align="center">
+                <Typography variant="lightSmall">{t('keyData:trafficLight')}</Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {history.map((data: any) => {
+              const color = calculateColor(data.value, props.thresholds, props.color, props.unit)
+              const valueText = calculateValue(data.value, props?.unit)
+              return (
+                <TableRow key={data.year}>
+                  <TableCell align="center">
+                    <Typography variant="lightSmall">{data.year}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="lightSmall">{valueText}</Typography>
+                  </TableCell>
+                  <TableCell align="center" sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography variant="lightSmall">
+                      <TrafficLight color={color} />
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      ) : (
+        <Typography variant="italic" color="secondary" sx={{ mt: 4, justifyContent: 'center', display: 'flex' }}>
+          {t('keyData:noHistory')}
+        </Typography>
+      )}
     </Box>
   )
 }
