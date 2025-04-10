@@ -37,7 +37,7 @@ const ProgrammeInfoCell = ({ programmeData }: { programmeData: KeyDataProgramme 
 
   return (
     <TableCell itemAlign="left" hoverEffect data-cy={`keydatatable-programme-${programmeData.koulutusohjelmakoodi}`}>
-      <Link to={`/v1/programmes/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
+      <Link to={`/v1/programmes/10/${koulutusohjelmakoodi}`} style={{ width: '100%' }}>
         <Tooltip title={additionalInfo[lang]} placement="top" arrow>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
             <Typography variant="regular" color={color}>
