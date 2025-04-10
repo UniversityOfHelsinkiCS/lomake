@@ -12,7 +12,7 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
 
 
   if (unit) {
-    value = value * 100
+    value = Number((value * 100).toFixed(0))
   }
 
   const [first, second, third, fourth] = threshold
@@ -133,7 +133,7 @@ export const calculateValue = (value: number, unit?: string) => {
     if (isInteger(value as number)) {
       return (value as number).toString()
     }
-    return (value as number).toFixed(2)
+    return (value as number).toFixed(1)
   }
 }
 
