@@ -25,6 +25,11 @@ describe('Overview page test', () => {
     })
 
     // it('displays text in textfields')
+    it('directs to correct programme page on programme name click', () => {
+      const programmeCode = 'KH50_005'
+      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      cy.url().should('include', `/${programmeCode}`)
+    })
   })
 
   describe('Testing keyDataTable filtering controls', () => {
