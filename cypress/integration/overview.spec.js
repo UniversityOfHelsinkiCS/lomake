@@ -112,85 +112,93 @@ describe('Overview page test', () => {
     cy.get('[data-cy="Number of new students-Punainen"]').should('exist')
     cy.get('[data-cy="Intake-Keltainen"]').should('exist')
     cy.get('[data-cy="Applications per student place-Punainen"]').should('exist')
-    
+
     // Check if the specific element exists
-    cy.get('[data-cy="MH50_009-Vetovoimaisuus-Punainen"]').should('exist').then(() => {
-      // Count all elements with "Punainen" in their data-cy attribute
-      cy.get('[data-cy]').then($elements => {
-        let punainenCount = 0
+    cy.get('[data-cy="MH50_009-Vetovoimaisuus-Punainen"]')
+      .should('exist')
+      .then(() => {
+        // Count all elements with "Punainen" in their data-cy attribute
+        cy.get('[data-cy]').then($elements => {
+          let punainenCount = 0
 
-        $elements.each((index, element) => {
-          const dataCyValue = element.getAttribute('data-cy')
-          if (dataCyValue.includes('Punainen')) {
-            punainenCount++
-          }
+          $elements.each((index, element) => {
+            const dataCyValue = element.getAttribute('data-cy')
+            if (dataCyValue.includes('Punainen')) {
+              punainenCount++
+            }
+          })
+
+          // atleast 3 because the header has punainen also
+          expect(punainenCount).to.be.at.least(3)
         })
-
-        // atleast 3 because the header has punainen also
-        expect(punainenCount).to.be.at.least(3)
       })
-    })
   })
   it('Calculates correct values with one grey', () => {
     cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen"]').click()
-    
-    cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]').should('exist').then(() => {
-      cy.get('[data-cy]').then($elements => {
-        let punainenCount = 0
 
-        $elements.each((index, element) => {
-          const dataCyValue = element.getAttribute('data-cy')
-          if (dataCyValue.includes('Punainen')) {
-            punainenCount++
-          }
+    cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
+      .should('exist')
+      .then(() => {
+        cy.get('[data-cy]').then($elements => {
+          let punainenCount = 0
+
+          $elements.each((index, element) => {
+            const dataCyValue = element.getAttribute('data-cy')
+            if (dataCyValue.includes('Punainen')) {
+              punainenCount++
+            }
+          })
+
+          // atleast 3 because the header has punainen also
+          expect(punainenCount).to.be.at.least(3)
         })
-
-        // atleast 3 because the header has punainen also
-        expect(punainenCount).to.be.at.least(3)
       })
-    })
   })
   it('Calculates correct values with multiple grey', () => {
     cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen"]').click()
-    
-    cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Harmaa"]').should('exist').then(() => {
-      cy.get('[data-cy]').then($elements => {
-        let harmaaCount = 0
 
-        $elements.each((index, element) => {
-          const dataCyValue = element.getAttribute('data-cy')
-          if (dataCyValue.includes('Harmaa')) {
-            harmaaCount++
-          }
+    cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Harmaa"]')
+      .should('exist')
+      .then(() => {
+        cy.get('[data-cy]').then($elements => {
+          let harmaaCount = 0
+
+          $elements.each((index, element) => {
+            const dataCyValue = element.getAttribute('data-cy')
+            if (dataCyValue.includes('Harmaa')) {
+              harmaaCount++
+            }
+          })
+
+          // atleast 3 because the header has punainen also
+          expect(harmaaCount).to.be.at.least(3)
         })
-
-        // atleast 3 because the header has punainen also
-        expect(harmaaCount).to.be.at.least(3)
       })
-    })
   })
   it('Calculates correct values with two yellows and two reds', () => {
     cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').click()
-    
-    cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]').should('exist').then(() => {
-      cy.get('[data-cy]').then($elements => {
-        let punainenCount = 0
-        let keltainenCount = 0
 
-        $elements.each((index, element) => {
-          const dataCyValue = element.getAttribute('data-cy')
-          if (dataCyValue.includes('Punainen')) {
-            punainenCount++
-          if (dataCyValue.includes('Keltainen')) {
-            keltainenCount++
-          }
-          }
+    cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]')
+      .should('exist')
+      .then(() => {
+        cy.get('[data-cy]').then($elements => {
+          let punainenCount = 0
+          let keltainenCount = 0
+
+          $elements.each((index, element) => {
+            const dataCyValue = element.getAttribute('data-cy')
+            if (dataCyValue.includes('Punainen')) {
+              punainenCount++
+              if (dataCyValue.includes('Keltainen')) {
+                keltainenCount++
+              }
+            }
+          })
+
+          // atleast 3 because the header has punainen also
+          expect(punainenCount).to.be.at.least(3)
+          expect(keltainenCount).to.be.at.most(2)
         })
-
-        // atleast 3 because the header has punainen also
-        expect(punainenCount).to.be.at.least(3)
-        expect(keltainenCount).to.be.at.most(2)
       })
-    })
   })
 })
