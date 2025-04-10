@@ -6,16 +6,25 @@ describe('Overview page test', () => {
   })
 
   describe('Testing keyDataTable interactions', () => {
-    it('opens a modal on trafficlight cell click', () => {
+    it('should direct to correct programme page on programme name click', () => {
+      const programmeCode = 'KH50_005' // Computer science bachelor programme
+      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      cy.url().should('include', `/${programmeCode}`)
+    })
+  })
+
+  describe('Testing modals', () => {
+    it('Should open modal on trafficlight cell click', () => {
       cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
       cy.get('[data-cy="keydata-modal"]').should('be.visible')
     })
 
-    it('directs to correct programme page on programme name click', () => {
-      const programmeCode = 'KH50_005'
-      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
-      cy.url().should('include', `/${programmeCode}`)
+    it('Should have view only textfields', () => {
+      cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
+      cy.get('[data-cy="textfield-viewonly"]').should('exist')
     })
+
+    // it('displays text in textfields')
   })
 
   describe('Testing keyDataTable filtering controls', () => {
@@ -82,123 +91,106 @@ describe('Overview page test', () => {
           })
       })
     })
-
-    // TODO: Implement these tests when useFetchKeyData is updated
-
-    // it.skip('Filters programmes by faculty', () => {
-    //   expect(true).to.equal(true)
-    // })
-
-    // TODO: Implement this test when years are implemented
-    // // it.skip('Filters programmes by year', () => {
-    // //   expect(true).to.equal(true)
-    // // })
-
-    // it.skip('Filters programmes by search input', () => {
-    //   expect(true).to.equal(true)
-    // })
-
-    // it.skip('Sorts programmes by name', () => {
-    //   expect(true).to.equal(true)
-    // })
-
-    // it.skip('Sorts programmes by code', () => {
-    //   expect(true).to.equal(true)
-    // })
   })
-  it('Calculates correct values for evaluationarea', () => {
-    cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus"]').click()
-    cy.get(`[data-cy="Eligible applicants for Master's application-Punainen"]`).should('exist')
-    cy.get('[data-cy="Number of new students-Punainen"]').should('exist')
-    cy.get('[data-cy="Intake-Keltainen"]').should('exist')
-    cy.get('[data-cy="Applications per student place-Punainen"]').should('exist')
 
-    // Check if the specific element exists
-    cy.get('[data-cy="MH50_009-Vetovoimaisuus-Punainen"]')
-      .should('exist')
-      .then(() => {
-        // Count all elements with "Punainen" in their data-cy attribute
-        cy.get('[data-cy]').then($elements => {
-          let punainenCount = 0
+  describe('Testing trafficlights', () => {
+    it('Calculates correct values for evaluationarea', () => {
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Vetovoimaisuus"]').click()
+      cy.get(`[data-cy="Eligible applicants for Master's application-Punainen"]`).should('exist')
+      cy.get('[data-cy="Number of new students-Punainen"]').should('exist')
+      cy.get('[data-cy="Intake-Keltainen"]').should('exist')
+      cy.get('[data-cy="Applications per student place-Punainen"]').should('exist')
 
-          $elements.each((index, element) => {
-            const dataCyValue = element.getAttribute('data-cy')
-            if (dataCyValue.includes('Punainen')) {
-              punainenCount++
-            }
-          })
+      // Check if the specific element exists
+      cy.get('[data-cy="MH50_009-Vetovoimaisuus-Punainen"]')
+        .should('exist')
+        .then(() => {
+          // Count all elements with "Punainen" in their data-cy attribute
+          cy.get('[data-cy]').then($elements => {
+            let punainenCount = 0
 
-          // atleast 3 because the header has punainen also
-          expect(punainenCount).to.be.at.least(3)
-        })
-      })
-  })
-  it('Calculates correct values with one grey', () => {
-    cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen"]').click()
-
-    cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
-      .should('exist')
-      .then(() => {
-        cy.get('[data-cy]').then($elements => {
-          let punainenCount = 0
-
-          $elements.each((index, element) => {
-            const dataCyValue = element.getAttribute('data-cy')
-            if (dataCyValue.includes('Punainen')) {
-              punainenCount++
-            }
-          })
-
-          // atleast 3 because the header has punainen also
-          expect(punainenCount).to.be.at.least(3)
-        })
-      })
-  })
-  it('Calculates correct values with multiple grey', () => {
-    cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen"]').click()
-
-    cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Harmaa"]')
-      .should('exist')
-      .then(() => {
-        cy.get('[data-cy]').then($elements => {
-          let harmaaCount = 0
-
-          $elements.each((index, element) => {
-            const dataCyValue = element.getAttribute('data-cy')
-            if (dataCyValue.includes('Harmaa')) {
-              harmaaCount++
-            }
-          })
-
-          // atleast 3 because the header has punainen also
-          expect(harmaaCount).to.be.at.least(3)
-        })
-      })
-  })
-  it('Calculates correct values with two yellows and two reds', () => {
-    cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').click()
-
-    cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]')
-      .should('exist')
-      .then(() => {
-        cy.get('[data-cy]').then($elements => {
-          let punainenCount = 0
-          let keltainenCount = 0
-
-          $elements.each((index, element) => {
-            const dataCyValue = element.getAttribute('data-cy')
-            if (dataCyValue.includes('Punainen')) {
-              punainenCount++
-              if (dataCyValue.includes('Keltainen')) {
-                keltainenCount++
+            $elements.each((index, element) => {
+              const dataCyValue = element.getAttribute('data-cy')
+              if (dataCyValue.includes('Punainen')) {
+                punainenCount++
               }
-            }
-          })
+            })
 
-          // atleast 3 because the header has punainen also
-          expect(punainenCount).to.be.at.least(3)
-          expect(keltainenCount).to.be.at.most(2)
+            // atleast 3 because the header has punainen also
+            expect(punainenCount).to.be.at.least(3)
+          })
         })
-      })
+    })
+
+    it('Calculates correct values with one grey', () => {
+      cy.get('[data-cy="trafficlight-table-cell-MH50_009-Opintojen sujuvuus ja valmistuminen"]').click()
+
+      cy.get('[data-cy="MH50_009-Opintojen sujuvuus ja valmistuminen-Punainen"]')
+        .should('exist')
+        .then(() => {
+          cy.get('[data-cy]').then($elements => {
+            let punainenCount = 0
+
+            $elements.each((index, element) => {
+              const dataCyValue = element.getAttribute('data-cy')
+              if (dataCyValue.includes('Punainen')) {
+                punainenCount++
+              }
+            })
+
+            // atleast 3 because the header has punainen also
+            expect(punainenCount).to.be.at.least(3)
+          })
+        })
+    })
+
+    it('Calculates correct values with multiple grey', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen"]').click()
+
+      cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Harmaa"]')
+        .should('exist')
+        .then(() => {
+          cy.get('[data-cy]').then($elements => {
+            let harmaaCount = 0
+
+            $elements.each((index, element) => {
+              const dataCyValue = element.getAttribute('data-cy')
+              if (dataCyValue.includes('Harmaa')) {
+                harmaaCount++
+              }
+            })
+
+            // atleast 3 because the header has punainen also
+            expect(harmaaCount).to.be.at.least(3)
+          })
+        })
+    })
+
+    it('Calculates correct values with two yellows and two reds', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').click()
+
+      cy.get('[data-cy="KH50_005-Vetovoimaisuus-Punainen"]')
+        .should('exist')
+        .then(() => {
+          cy.get('[data-cy]').then($elements => {
+            let punainenCount = 0
+            let keltainenCount = 0
+
+            $elements.each((index, element) => {
+              const dataCyValue = element.getAttribute('data-cy')
+              if (dataCyValue.includes('Punainen')) {
+                punainenCount++
+                if (dataCyValue.includes('Keltainen')) {
+                  keltainenCount++
+                }
+              }
+            })
+
+            // atleast 3 because the header has punainen also
+            expect(punainenCount).to.be.at.least(3)
+            expect(keltainenCount).to.be.at.most(2)
+          })
+        })
+    })
   })
 })
