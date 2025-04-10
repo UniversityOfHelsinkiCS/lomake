@@ -149,24 +149,24 @@ describe('Overview page test', () => {
         })
     })
 
-    it('Calculates correct values with multiple grey', () => {
+    it('Calculates correct values when values are at 0', () => {
       cy.get('[data-cy="trafficlight-table-cell-KH50_005-Palaute ja työllistyminen"]').click()
 
-      cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Harmaa"]')
+      cy.get('[data-cy="KH50_005-Palaute ja työllistyminen-Punainen"]')
         .should('exist')
         .then(() => {
           cy.get('[data-cy]').then($elements => {
-            let harmaaCount = 0
+            let punainenCount = 0
 
             $elements.each((index, element) => {
               const dataCyValue = element.getAttribute('data-cy')
-              if (dataCyValue.includes('Harmaa')) {
-                harmaaCount++
+              if (dataCyValue.includes('Punainen')) {
+                punainenCount++
               }
             })
 
             // atleast 3 because the header has punainen also
-            expect(harmaaCount).to.be.at.least(3)
+            expect(punainenCount).to.be.at.least(4)
           })
         })
     })
