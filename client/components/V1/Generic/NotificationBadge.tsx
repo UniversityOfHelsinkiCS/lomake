@@ -8,7 +8,7 @@ interface NotificationBadgeProps {
   tooltip?: string | null
 }
 
-const NotificationBadge = ({ variant = 'small', children, style, tooltip }: NotificationBadgeProps) => {
+const NotificationBadge = ({ variant = 'small', children, style, tooltip, ...rest }: NotificationBadgeProps) => {
   const increasedSpacing = {
     // increase the "hitbox" of the tooltip on small badges
     content: '""',
@@ -37,11 +37,12 @@ const NotificationBadge = ({ variant = 'small', children, style, tooltip }: Noti
           position: 'relative',
           '&::before': increasedSpacing,
         }}
+        {...rest}
       >
         {children}
       </Badge>
     ) : (
-      <Badge badgeContent="!" color="info" style={{ ...style }}>
+      <Badge badgeContent="!" color="info" style={{ ...style }} {...rest}>
         {children}
       </Badge>
     )

@@ -70,9 +70,13 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
   }
 
   return (
-    <>
+    <TableCell>
       {actionsBadgeData.showBadge && (
-        <NotificationBadge data-cy={`actionsCellBadge`} variant="medium" tooltip={t('keyData:missingMeasure')} />
+        <NotificationBadge
+          data-cy={`actionsCellBadge-${programmeData.koulutusohjelmakoodi}`}
+          variant="medium"
+          tooltip={t('keyData:missingMeasure')}
+        />
       )}
       {actionsBadgeData.showIcon && (
         <Button onClick={handleOpen}>
@@ -85,7 +89,7 @@ const ActionsCell = ({ programmeData, metadata }: { programmeData: KeyDataProgra
         </Typography>
         <TextFieldCard id={'Toimenpiteet'} t={t} type={'Measure'}></TextFieldCard>
       </Modal>
-    </>
+    </TableCell>
   )
 }
 
@@ -105,12 +109,17 @@ const TrafficLightCell = ({
   const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
   const color = calculateKeyDataColor(metadata, programmeData, groupKey, level)
   const shouldRenderBadge = groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
-
   return (
-    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)} data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}>
+    <TableCell
+      onClick={() => handleModalOpen(programmeData, groupKey)}
+      data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
+    >
       <TrafficLight color={color} variant="medium" />
       {shouldRenderBadge && (
-        <NotificationBadge data-cy={`lightCellBadge-${groupKey}`} tooltip={t('keyData:missingComment')} />
+        <NotificationBadge
+          data-cy={`lightcellbadge-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
+          tooltip={t('keyData:missingComment')}
+        />
       )}
     </TableCell>
   )
@@ -256,13 +265,15 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                 <Typography variant="regularSmall">{t('keyData:actions')}</Typography>
               </TableCell>
 
-              <TableCell disabled>
+              <TableCell disabled isHeader>
                 <Tooltip title={t('keyData:notUsed2025')} placement="top" arrow>
                   <Typography variant="regularSmall">{t('keyData:qualityControl')}</Typography>
                 </Tooltip>
               </TableCell>
-              <TableCell>
-                <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
+              <TableCell disabled isHeader>
+                <Tooltip title={t('keyData:openingSoon')} placement="top" arrow>
+                  <Typography variant="regularSmall">{t('keyData:supportProcess')}</Typography>
+                </Tooltip>
               </TableCell>
             </TableRow>
 
@@ -298,11 +309,10 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
                     groupKey={GroupKey.RESURSSIT}
                     handleModalOpen={handleModalOpen}
                   />
-                  <TableCell>
-                    <ActionsCell programmeData={programmeData} metadata={metadata} />
-                  </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
+
+                  <ActionsCell programmeData={programmeData} metadata={metadata} />
+                  <TableCell disabled></TableCell>
+                  <TableCell disabled></TableCell>
                 </TableRow>
               ))
             ) : (

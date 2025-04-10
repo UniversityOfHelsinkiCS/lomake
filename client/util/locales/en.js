@@ -589,18 +589,18 @@ export default {
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
 
-    vetovoimaisuus: 'Attractiveness',
+    vetovoimaisuus: 'Traction',
     vetovoimaisuusInfo:
-      'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',
-    lapivirtaus: 'Smooth progress of studies and graduation',
+      'The traction of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme. Key figures are collected from the previous year.',
+    lapivirtaus: 'Study progress',
     lapivirtausInfo:
-      'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme.',
+      'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme. Key figures are collected from the previous year.',
     opiskelijapalaute: 'Feedback and employment',
     opiskelijapalauteInfo:
-      "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society.",
+      "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society. Key figures are collected from the previous year.",
     resurssit: 'Use of resources',
     resurssitInfo:
-      'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme.',
+      'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme. Key figures are collected from the previous year.',
     qualityControl: 'Quality control tools',
     supportProcess: 'Procedure of action',
     actions: 'Development plan',
@@ -632,5 +632,7 @@ export default {
       'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
     actionsInfo3:
       'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+    seeMore: 'Click to see more',
+    openingSoon: 'Under preparation, will open by the end of May',
   },
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Card, CardActionArea, Typography } from '@mui/material'
+import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
 import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../Utils/util'
 
 import { TrafficLight } from './TrafficLightComponent'
@@ -11,6 +11,7 @@ import { GroupKey, ProgrammeLevel, LightColors } from '@/client/lib/enums'
 import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import type { KeyDataCardData } from '@/client/lib/types'
 import { RootState } from '@/client/util/store'
+import { useTranslation } from 'react-i18next'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -75,12 +76,13 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 
 const CriteriaCard = (props: CriteriaCardProps) => {
   const [showDescription, setShowDescription] = useState(false)
+  const { t } = useTranslation()
 
   const handleClick = () => {
     setShowDescription(!showDescription)
   }
 
-  return (
+  const cardContent = (
     <Card sx={{ height: 'fit-content' }}>
       <CardActionArea onClick={handleClick}>
         <div
@@ -94,7 +96,6 @@ const CriteriaCard = (props: CriteriaCardProps) => {
           data-cy={`${props.title}-${props.color}`}
         >
           <TrafficLight style={{ marginRight: '5px' }} color={props.color} />
-
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="italic">{props.title}</Typography>
             <Typography
@@ -106,11 +107,9 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             </Typography>
           </div>
         </div>
-
         {showDescription && (
           <div style={{ padding: '15px' }}>
             <Typography variant="lightSmall">{props.description}</Typography>
-
             <ColorMeterComponent
               display={props.hasTrafficLight}
               value={props.value}
@@ -124,8 +123,15 @@ const CriteriaCard = (props: CriteriaCardProps) => {
       </CardActionArea>
     </Card>
   )
-}
 
+  return showDescription ? (
+    cardContent
+  ) : (
+    <Tooltip title={t('keyData:seeMore')} placement="top" arrow>
+      {cardContent}
+    </Tooltip>
+  )
+}
 const KeyDataCard = (props: KeyDataCardProps) => {
   const color = calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)
   return (
@@ -139,10 +145,7 @@ const KeyDataCard = (props: KeyDataCardProps) => {
         }}
       >
         <div data-cy={`${props.programme.koulutusohjelmakoodi}-${props.groupKey}-${color}`}>
-        <TrafficLight
-          color={color}
-          variant="large"
-        />
+          <TrafficLight color={color} variant="large" />
         </div>
 
         <Typography variant="h2" style={{ margin: 0 }}>

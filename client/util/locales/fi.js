@@ -586,16 +586,16 @@ export default {
     keyFigureInfo: 'Kandi- ja maisteriohjelmien avainlukuja ovat: ',
     vetovoimaisuus: 'Vetovoimaisuus',
     vetovoimaisuusInfo:
-      'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa.',
+      'Vetovoimaisuudessa tarkastellaan koulutusohjelman kiinnostavuutta hakijoiden näkökulmasta ja sitä että koulutusohjelman aloituspaikat täyttyvät ja koulutusohjelmassa opintonsa aloittaa alalle parhaiten sopivat opiskelijat. Aloituspaikkojen täyttyminen ja hakijamäärä kuvaavat myös koulutusohjelman kokoa. Avainluvut ovat kerätty edeltävältä vuodelta.',
     lapivirtaus: 'Opintojen sujuvuus ja valmistuminen',
     lapivirtausInfo:
-      'Opintojen sujuvuutta tarkastellaan sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa lisäksi koulutusohjelman kokoa.',
+      'Opintojen sujuvuutta tarkastellaan sekä kansallisen yliopistojen rahoitusmallin määrittelyn mukaisesti että yleisesti tutkintomääriä ja opintojen etenemistä opintojen eri vaiheissa. Tutkintomäärä ja tutkintojen valmistuminen tavoiteajassa kertovat siitä, että koulutusohjelmassa ei ole opiskelun esteitä. Tutkintomäärä kuvaa lisäksi koulutusohjelman kokoa. Avainluvut ovat kerätty edeltävältä vuodelta.',
     opiskelijapalaute: 'Palaute ja työllistyminen',
     opiskelijapalauteInfo:
-      'Palautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta. Työllistymistä koskeva tieto kertoo koulutusohjelman relevanssista yhteiskunnallisesti.',
+      'Palautteen perusteella tarkastellaan koulutusohjelman palautekulttuuria ja palautteiden antamisen aktiivisuutta yleensä sekä opiskelijoiden tyytyväisyyttä opiskeluun koulutusohjelmassa. Opiskelijapalaute kertoo koulutusohjelman opetussuunnitelman ja ohjauksen sekä opetuksen toteutuksen toimivuudesta. Työllistymistä koskeva tieto kertoo koulutusohjelman relevanssista yhteiskunnallisesti. Avainluvut ovat kerätty edeltävältä vuodelta.',
     resurssit: 'Resurssien käyttö',
     resurssitInfo:
-      'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssien käyttöä. Tämän arviointialueen määrittely ja kriteerit tarkennetaan myöhemmin, kun muun muassa resurssiryhmien työskentely tiedekunnissa on käynnistynyt.',
+      'Koulutusohjelman resurssien kohdalla tarkastellaan ohjelman käytettävissä olevan opetusresurssin määrää sekä resurssien käyttöä. Tämän arviointialueen määrittely ja kriteerit tarkennetaan myöhemmin, kun muun muassa resurssiryhmien työskentely tiedekunnissa on käynnistynyt. Avainluvut ovat kerätty edeltävältä vuodelta.',
     qualityControl: 'Laadunhallinnan välineet',
     supportProcess: 'Toimenpidemenettely',
     actions: 'Kehittämissuunnitelma',
@@ -627,5 +627,7 @@ export default {
       'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
     actionsInfo3:
       'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+    seeMore: 'Klikkaa nähdäksesi lisätietoja',
+    openingSoon: 'Valmistelun alla, avautuu toukokuun loppuun mennessä',
   },
 }
