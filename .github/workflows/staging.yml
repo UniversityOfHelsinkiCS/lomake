@@ -62,7 +62,7 @@ jobs:
           cache: 'npm'
 
       - name: npm ci
-        run: npm ci --no-audit --no-fund
+        run: npm i --no-audit --no-fund
 
       - name: docker compose up -d
         run: docker compose up -d
