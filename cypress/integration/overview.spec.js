@@ -14,8 +14,13 @@ describe('Overview page test', () => {
   })
 
   describe('Testing modals', () => {
+    it('Should open modal on trafficlight cell click', () => {
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Vetovoimaisuus"]').should('exist').click()
+      cy.get('[data-cy="keydata-modal"]').should('be.visible')
+    })
+
     it('Should have view only textfields', () => {
-      cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
+      cy.get('[data-cy="trafficlight-table-cell-KH50_005-Opintojen sujuvuus ja valmistuminen"]').should('exist').click()
       cy.get('[data-cy="textfield-viewonly"]').should('exist')
     })
 
