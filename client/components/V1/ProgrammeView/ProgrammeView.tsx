@@ -169,7 +169,8 @@ const ProgrammeView = () => {
 
   const kotka = currentUser.data.uid === 'kotkajim'
   // remove before pilot
-  if (!(isAdmin(currentUser.data || kotka)) && inProduction) return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  if (!isAdmin(currentUser.data || kotka) && inProduction)
+    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -198,7 +199,7 @@ const ProgrammeView = () => {
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
-          {keyData.programme.additionalInfo && (
+          {keyData.programme.additionalInfo && keyData.programme.additionalInfo[lang]?.length && (
             <Alert severity="warning" sx={{ mb: 4 }}>
               <Typography variant="light">{keyData.programme.additionalInfo[lang]}</Typography>
             </Alert>
