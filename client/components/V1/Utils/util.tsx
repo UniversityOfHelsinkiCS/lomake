@@ -6,9 +6,10 @@ import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   if (!liikennevalo) {
     return LightColors.Empty
-  } else if (!value || !threshold) {
+  } else if (value === null || !threshold) {
     return LightColors.Grey
   }
+
 
   if (unit) {
     value = value * 100
@@ -28,6 +29,8 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
       return LightColors.LightGreen
     } else if (value >= fourth) {
       return LightColors.DarkGreen
+    } else if (value === first) {
+      return LightColors.Red
     } else {
       return LightColors.Grey
     }
@@ -115,23 +118,22 @@ export const calculateKeyDataColor = (
 }
 
 export const extractKeyDataValue = (programme: KeyDataProgramme, data: KeyDataMetadata) => {
-  return (
-    programme.values[
-      Object.keys(programme.values).find(key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase())
-    ] || null
+  const key = Object.keys(programme.values).find(
+    key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase()
   )
+  return key !== undefined ? programme.values[key] : null
 }
 
 export const calculateValue = (value: number, unit?: string) => {
-  if (!value) {
+  if (value === null) {
     return 'Ei dataa'
   } else if (unit) {
-    return `${(value * 100).toFixed(0)} ${unit}`
+    return `${(value as number * 100).toFixed(0)} ${unit}`
   } else {
-    if (isInteger(value)) {
-      return value.toString()
+    if (isInteger(value as number)) {
+      return (value as number).toString()
     }
-    return value.toFixed(2)
+    return (value as number).toFixed(2)
   }
 }
 
