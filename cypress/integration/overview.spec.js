@@ -12,6 +12,21 @@ describe('Overview page test', () => {
       cy.url().should('include', `/${programmeCode}`)
     })
   })
+
+  describe('Testing modals', () => {
+    it('Should have view only textfields', () => {
+      cy.get('[data-cy="trafficlight-table-cell"]').first().should('exist').click()
+      cy.get('[data-cy="textfield-viewonly"]').should('exist')
+    })
+
+    // it('displays text in textfields')
+    it('directs to correct programme page on programme name click', () => {
+      const programmeCode = 'KH50_005'
+      cy.get(`[data-cy="keydatatable-programme-${programmeCode}"]`).should('exist').click()
+      cy.url().should('include', `/${programmeCode}`)
+    })
+  })
+
   describe('Testing keyDataTable filtering controls', () => {
     describe('Test programme level filters', () => {
       it('Displays correct programme level options', () => {
