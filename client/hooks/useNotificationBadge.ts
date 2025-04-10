@@ -8,6 +8,11 @@ export const useNotificationBadge = () => {
 
   const renderTabBadge = (programmeData: KeyDataProgramme, metadata: KeyDataMetadata[]) => {
     const level = programmeData.koulutusohjelmakoodi.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
+    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+      return false
+    }
+
     for (const key of Object.keys(GroupKey)) {
       const groupKey = GroupKey[key as keyof typeof GroupKey]
 
@@ -21,6 +26,10 @@ export const useNotificationBadge = () => {
   }
 
   const renderTrafficLightBadge = (programmeData: KeyDataProgramme, groupKey: GroupKey, color: LightColors) => {
+    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+      return false
+    }
+
     const hasReport = reports?.[programmeData.koulutusohjelmakoodi]?.[groupKey]?.length > 0
     return (color == LightColors.Red || color == LightColors.Yellow) && !hasReport
   }
@@ -31,6 +40,13 @@ export const useNotificationBadge = () => {
     includeReport: boolean = false,
   ) => {
     const redLights = []
+
+    if (programmeData.additionalInfo && programmeData.additionalInfo?.fi?.includes('Lakkautettu')) {
+      return {
+        showBadge: false,
+        showIcon: false,
+      }
+    }
 
     for (const key of Object.keys(GroupKey)) {
       const groupKey = GroupKey[key as keyof typeof GroupKey]
