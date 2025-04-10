@@ -107,7 +107,7 @@ const TrafficLightCell = ({
   const shouldRenderBadge = groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
 
   return (
-    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)} data-cy="trafficlight-table-cell">
+    <TableCell onClick={() => handleModalOpen(programmeData, groupKey)} data-cy={`trafficlight-table-cell-${programmeData.koulutusohjelmakoodi}-${groupKey}`}>
       <TrafficLight color={color} variant="medium" />
       {shouldRenderBadge && (
         <NotificationBadge data-cy={`lightCellBadge-${groupKey}`} tooltip={t('keyData:missingComment')} />
