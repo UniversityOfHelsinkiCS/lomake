@@ -32,8 +32,8 @@ export default defineConfig({
     port: 8000,
   },
   build: {
-    outDir: 'build/',
-    sourcemap: true,
+    outDir: 'build',
+    sourcemap: 'hidden',
   },
   define: {
     'process.env': process.env,
