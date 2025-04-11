@@ -165,7 +165,7 @@ export default {
     toYearly: 'Gå till årlig uppföljning',
     yearlyCardTitle: 'Årlig uppföljning 2025',
     yearlyCardContent:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
+      'Alla kandidat- och magisterprogram kommer att testa den reviderade årliga uppföljningen under våren 2025. Blanketten öppnas den 15.4.2025.',
     archiveCardTitle: 'Arkiv (2019-2024)',
     archiveCardHeader: 'Akrivet innehåller:',
     archiveList1: 'Årlig uppföljning för 2019 - 2023 ',
