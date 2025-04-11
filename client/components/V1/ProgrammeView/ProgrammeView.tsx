@@ -15,7 +15,7 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
-import { ColorKey, GroupKey, ProgrammeLevel } from '@/client/lib/enums'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { RootState } from '@/client/util/store'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
@@ -169,8 +169,9 @@ const ProgrammeView = () => {
 
   const kotka = currentUser.data.uid === 'kotkajim'
   // remove before pilot
-  if (!isAdmin(currentUser.data || kotka) && inProduction)
+  if (!(isAdmin(currentUser.data) || !kotka) && inProduction) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
+  }
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -189,6 +190,7 @@ const ProgrammeView = () => {
           label={t('keyData:keyFigure')}
           icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} reports={reports} />}
           iconPosition="end"
+          data-cy="keyDataTab"
         />
         <Tab
           label={t('keyData:actions')}
@@ -290,7 +292,12 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
           <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge programmeData={programme} metadata={metadata} reports={reports} />{' '}
+            <ActionsBadge
+              programmeData={programme}
+              metadata={metadata}
+              reports={reports}
+              data-cy="actionsFieldBadge"
+            />{' '}
           </TextFieldComponent>
         </Box>
       )}
