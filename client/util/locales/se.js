@@ -167,10 +167,10 @@ export default {
     yearlyCardContent:
       'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
     archiveCardTitle: 'Arkiv (2019-2024)',
-    archiveCardHeader: 'Täältä löydät:',
-    archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
-    archiveList2: '2023-2024 katselmuksen tulokset',
-    archiveList3: 'Koulutusuudistuksen Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
+    archiveCardHeader: 'Akrivet innehåller:',
+    archiveList1: 'Årlig uppföljning för 2019 - 2023 ',
+    archiveList2: 'Resultat av översynen 2023-2024',
+    archiveList3: 'Utvärdering av utbildningsreformen Stora hjulet 2023 (= Utbildningens nuvarande tillstånd)',
     feedback: 'Återkoppling om tilannekuvalomake?',
   },
 
@@ -603,19 +603,19 @@ export default {
   keyData: {
     title: 'Utbildnigsprogrammens vitalitet vid Helsingfors universitet',
     info1:
-      'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
+      '<strong>Utvärderingsområden</strong> som beskriver programmets vitalitet är: <i>a) attraktivitet, b) smidiga studier och graduering, c) feedback och sysselsättning, d) resursanvändning.</i> Utvärderingsområdena är desamma för kandidat-, magister- och doktorandprogram.',
     info2:
-      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
-    info3: 'Värimerkintöjen selitteet ovat: ',
-    darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
-    lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
-    yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
-    redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',
-    pilotHeader: 'Kevään 2025 pilotti',
+      'Inom varje utvärderingsområde används tre till fem <strong>nyckeltal</strong>, som definieras separat för olika examensnivåer. Varje nyckeltal tilldelas en färgkod baserat på individuellt överenskomna tröskelvärden. Färgkoden för hela utvärderingsområdet bestäms av nyckeltalens färgkod.',
+    info3: 'Förklaringarna till färgkoderna är följande: ',
+    darkGreenInfo: 'Grön - utbildningsprogrammets status är utmärkt',
+    lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
+    yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
+    redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',
+    pilotHeader: 'Spring 2025 pilot',
     pilotInfo1:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
+      'Den förnyade årliga uppföljningen av utbildningsprogram pilottestas våren 2025 i alla kandidat- och magisterprogram. Doktorandprogrammen deltar ännu inte i pilotfasen.',
     pilotInfo2:
-      '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
+      '15.4-30.5.2025 Utbildningsprogrammens ledningsgrupper går igenom sina egna utvärderingsområden och utarbetar sina utvecklingsplaner. De utbildningsprogram som inleder interventionsförfarandet diskuterar ärendet med prodekanen senast den 30 oktober 2025.',
     notUsed2025: 'Ej använd 2025',
     keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
