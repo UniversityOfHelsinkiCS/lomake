@@ -658,11 +658,11 @@ export default {
     value: 'Värde',
     trafficLight: 'Trafikljus',
     actionsInfo1:
-      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+      'Om ett av <strong>utvärderingsområdena</strong> är markerat med rött, inleder utbildningsprogrammet till interventionsförfarandet.',
     actionsInfo2:
-      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+      'Ledningsgrupper för utbildningsprogram som är i interventionsförfarande utarbetar en utvecklingsplan, vars sista inlämningsdag meddelas av prodekan. Utvecklingsplanen måste ta hänsyn till alla utvärderingsområden där utbildningsprogrammet är markerat med rött.',
     actionsInfo3:
-      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+      'Prodekanen kan också meddela att samtliga utbildningsprogram vid fakulteten ska upprätta en utvecklingsplan oavsett färgkod på utvärderingsområdet.',
     seeMore: 'Klicka för att se mer',
     openingSoon: 'Under förberedelse, öppnar i slutet av maj',
   },

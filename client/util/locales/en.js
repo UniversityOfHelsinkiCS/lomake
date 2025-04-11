@@ -627,11 +627,11 @@ export default {
     value: 'Value',
     trafficLight: 'Traffic light',
     actionsInfo1:
-      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+      'If one of the <strong>evaluation areas</strong> is marked with a red colour code, the degree programme will initiate an intervention procedure.',
     actionsInfo2:
-      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+      'The steering group of the degree programme under intervention prosedure draws up a development plan. The Vice-Dean will indicate the date by which the plan must be ready. The development plan must take into account all evaluation areas where the colour code of the degree programme is red.',
     actionsInfo3:
-      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+      'The Vice-Dean may also announce that all degree programmes of the Faculty will draw up a development plan regardless of the colour code of the evaluation area.',
     seeMore: 'Click to see more',
     openingSoon: 'Under preparation, will open by the end of May',
   },
