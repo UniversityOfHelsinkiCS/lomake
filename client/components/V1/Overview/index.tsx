@@ -76,7 +76,7 @@ const OverviewPage = () => {
   const kotka = currentUser.data.uid === 'kotkajim'
 
   // remove before pilot
-  if (!(isAdmin(currentUser.data) || !kotka) && inProduction) {
+  if (!(isAdmin(currentUser.data) || kotka) && inProduction) {
     return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
   }
 
