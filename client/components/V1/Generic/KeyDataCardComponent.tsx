@@ -35,6 +35,7 @@ interface CriteriaCardProps {
   limits: string
   unit: string
   color: string
+  programme: KeyDataProgramme
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
@@ -111,6 +112,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
           <div style={{ padding: '15px' }}>
             <Typography variant="lightSmall">{props.description}</Typography>
             <ColorMeterComponent
+              year={props.programme.year}
               display={props.hasTrafficLight}
               value={props.value}
               thresholds={props.thresholds}
