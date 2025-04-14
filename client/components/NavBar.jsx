@@ -16,7 +16,7 @@ import {
 } from '../../config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['admin'] },
+  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['programme', 'special'] },
   archive: {
     key: 'archive',
     label: 'archive',
@@ -243,7 +243,7 @@ const NavBar = () => {
         case 'special':
           return user.specialGroup && Object.keys(user.specialGroup).length > 0
         case 'admin':
-          return isAdmin(user) || user.uid === 'kotkajim'
+          return isAdmin(user)
         case 'evaluationFaculty':
           return isEvaluationFacultyUser(user)
         case 'evaluationUniversity':

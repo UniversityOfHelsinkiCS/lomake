@@ -55,7 +55,7 @@ const Homepage = () => {
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'right', p: 2 }}>
-            <Button size="small" disabled sx={{ gap: 1, p: 1 }}>
+            <Button size="small" href={`${basePath}v1/overview`} sx={{ gap: 1, p: 1 }}>
               <Typography variant="h6">{t('landingPage:toYearly')}</Typography>
               {<ArrowForward />}
             </Button>
