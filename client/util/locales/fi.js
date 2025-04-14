@@ -632,5 +632,6 @@ export default {
     openingSoon: 'Valmistelun alla, avautuu toukokuun loppuun mennessä',
     feedbackForm: 'Anna palautetta vuosiseurannan kehittämiseksi',
     feedbackFormButton: 'Siirry palautelomakkeeseen',
+    doctoralTooltip: 'Tohtoriohjelmat eivät ole mukana pilotointivaiheessa 2025',
   },
 }

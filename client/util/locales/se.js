@@ -632,8 +632,8 @@ export default {
     resurssit: 'Resursanvändning',
     resurssitInfo:
       'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven. Nyckeltal hämtas från föregående år.',
-    qualityControl: 'Kvalitetskontrollverktyg',
-    supportProcess: 'Procedur för handling',
+    qualityControl: 'Kvalitetsstyrningsverktyg',
+    supportProcess: 'Interventionsförfarande',
     actions: 'Utvecklingsplan',
     moveToActions: 'Flytta till utvecklingsplan',
     someoneElseEditing: 'är redigering',
@@ -668,5 +668,6 @@ export default {
     openingSoon: 'Under förberedelse, öppnar i slutet av maj',
     feedbackForm: 'Ge feedback för att vidareutveckla den årliga uppföljningen',
     feedbackFormButton: 'Gå till feedbackformuläret',
+    doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
   },
 }

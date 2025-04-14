@@ -596,8 +596,8 @@ export default {
     resurssit: 'Use of resources',
     resurssitInfo:
       'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme. Key figures are collected from the previous year.',
-    qualityControl: 'Quality control tools',
-    supportProcess: 'Procedure of action',
+    qualityControl: 'Quality management tools',
+    supportProcess: 'Intervention procedure',
     actions: 'Development plan',
     moveToActions: 'Continue to development plan',
     someoneElseEditing: 'is writing',
@@ -632,5 +632,6 @@ export default {
     openingSoon: 'Under preparation, will open by the end of May',
     feedbackForm: 'Give feedback for further development of the annual follow-up',
     feedbackFormButton: 'Go to feedback form',
+    doctoralTooltip: 'Doctoral programmes not included in the pilot phase 2025',
   },
 }
