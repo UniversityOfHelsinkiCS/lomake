@@ -2,7 +2,7 @@ import Sentry from '@sentry/node'
 
 const GIT_SHA = process.env.GIT_SHA || ''
 
-const initializeSentry = app => {
+const initializeSentry = () => {
   if (!(process.env.NODE_ENV === 'production')) return
 
   Sentry.init({
