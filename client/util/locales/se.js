@@ -126,6 +126,7 @@ export default {
     overview: 'Översikt',
     startDateEndDateError: 'Starttiden kan inte vara senare än det beräknade sluttiden',
     confirmRemoveLight: 'Är du säker på att du vill ta bort?',
+    archive: 'Arkiv',
   },
 
   aboutPage: {
@@ -143,7 +144,6 @@ export default {
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
     contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
     broughtBy: 'Förverkligad av',
-    archive: 'Arkiv',
   },
 
   landingPage: {
@@ -159,7 +159,6 @@ export default {
     ],
     degreeReformTitle: 'Utvärdering av utbildningsreformen (Stora hjulet 2015)',
     degreeReformSubtitles: ['Utbildningens nuvarande tillstånd', 'Enkäten och sammanfattningar 2024'],
-    archive: 'Här kan du se svaren från åren 2019-2024',
     yearly: 'Öppnas 15.4.2025',
     toArchive: 'Gå till arkivet',
     toYearly: 'Gå till årlig uppföljning',
