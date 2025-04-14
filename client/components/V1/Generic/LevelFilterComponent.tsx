@@ -19,7 +19,7 @@ const LevelFilterComponent = () => {
     { key: 1, value: 'bachelor', text: t('bachelor') },
     { key: 2, value: 'master', text: t('master') },
     { key: 3, value: 'doctoral', text: t('doctoral') },
-    { key: 4, value: 'international', text: t('international') },
+    // { key: 4, value: 'international', text: t('international') }, todo: fix this
   ]
 
   // If selectedLevel is not found in allowedLevels, fallback to allProgrammes
