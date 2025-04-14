@@ -152,12 +152,6 @@ const ProgrammeView = () => {
 
   const KeyDataPoints = getKeyDataPoints(t, programme)
 
-  const kotka = currentUser.data.uid === 'kotkajim'
-  // remove before pilot
-  if (!(isAdmin(currentUser.data) || kotka) && inProduction) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
-
   return (
     <Box sx={{ width: '75%' }}>
       <div style={{ display: 'flex', alignItems: 'baseline' }}>
