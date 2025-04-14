@@ -128,6 +128,7 @@ export default {
     modifyLights: 'Modify lights',
     confirmRemoveLight: 'Are you sure you want to delete?',
     facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
+    archive: 'Archive',
   },
 
   aboutPage: {
@@ -146,7 +147,6 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
-    archive: 'Archive',
   },
 
   landingPage: {
@@ -161,7 +161,6 @@ export default {
     ],
     degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
     degreeReformSubtitles: ['Current state of education survey and summaries 2024'],
-    archive: 'Here you can see responses from 2019-2024',
     yearly: 'Opens on 15.4.2025',
     toArchive: 'Go to archive',
     toYearly: 'Go to annual follow-up',
