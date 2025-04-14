@@ -1,5 +1,6 @@
 import Sentry from '@sentry/node'
-import Tracing from '@sentry/tracing'
+
+const GIT_SHA = process.env.GIT_SHA || ''
 
 const initializeSentry = app => {
   if (!(process.env.NODE_ENV === 'production')) return
@@ -7,8 +8,8 @@ const initializeSentry = app => {
   Sentry.init({
     dsn: 'https://a6ceb1539cbea12e147f5e73189a1d45@toska.cs.helsinki.fi/13',
     environment: process.env.SENTRY_ENVIRONMENT,
-    // release: sentryRelease,
-    integrations: [new Sentry.Integrations.Http({ tracing: true }), new Tracing.Integrations.Express({ app })],
+    release: GIT_SHA,
+    integrations: [Sentry.httpIntegration({ breadcrumbs: true }), Sentry.expressIntegration()],
     tracesSampleRate: 1.0,
   })
 }
