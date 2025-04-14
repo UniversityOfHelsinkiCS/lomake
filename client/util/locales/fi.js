@@ -611,6 +611,7 @@ export default {
     saveMeasure: 'Tallenna kehittämisuunnitelma',
     Measure: 'Koulutusohjelman kehittämisuunnitelma',
     noMeasure: 'Ei vastausta',
+    noData: 'Ei dataa',
     missingMeasure: 'Kehittämisuunnitelma puuttuu!',
     colormeterError: 'Virhe liikennevalojen liukuvan mittarin arviossa',
     colormeterNoDisplay: 'Tälle avainluvulle ei näytetä liikennevaloarviota.',

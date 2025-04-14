@@ -41,7 +41,7 @@ export default {
     find: 'Sök',
     facultymonitoringText: 'Svar finns tillgängliga / Sista dagen för att fylla i formuläret var 30.10.2024',
 
-    noData: 'Ingen data tillgänglig för dessa urval',
+    noData: 'Inga program eller svar hittades. Försök att ändra din sökning.',
     noDataForFaculty: 'Ingen data tillgänglig för vald fakultet',
     selectAll: 'Välj alla',
     clearSelection: 'Rensa urval',
@@ -647,6 +647,7 @@ export default {
     saveMeasure: 'Spara utvecklingsplanen',
     Measure: 'Utvecklingsplan för utbildningsprogrammet',
     noMeasure: 'Inget svar',
+    noData: 'Ingen data',
     missingMeasure: 'Ingen utvecklingsplan!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',

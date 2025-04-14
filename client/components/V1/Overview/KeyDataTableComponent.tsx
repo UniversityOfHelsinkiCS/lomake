@@ -318,7 +318,7 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
             ) : (
               <TableRow>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '5rem' }}>
-                  <Typography variant="body1">{t('common:noData')}</Typography>
+                  <Typography variant="light">{t('common:noData')}</Typography>
                 </div>
               </TableRow>
             )}

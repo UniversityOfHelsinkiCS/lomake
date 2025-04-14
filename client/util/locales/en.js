@@ -40,7 +40,7 @@ export default {
     facultyFilter: 'Search for faculties',
     find: 'Find',
 
-    noData: 'No data available for these choices',
+    noData: 'No programmes or answers were found. Try changing your search.',
     noDataForFaculty: 'No data available for this faculty',
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
@@ -611,9 +611,10 @@ export default {
     saveMeasure: 'Save the development plan',
     Measure: 'Development plan of the programme',
     noMeasure: 'No response',
+    noData: 'No data',
     missingMeasure: 'Development plan is missing!',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
-    colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    colormeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
     noHistory: 'No previous history',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
