@@ -631,6 +631,6 @@ export default {
     openingSoon: 'Under preparation, will open by the end of May',
     feedbackForm: 'Give feedback for further development of the annual follow-up',
     feedbackFormButton: 'Go to feedback form',
-    doctoralTooltip: 'Doctoral programmes not included in the pilot phase 2025',
+    doctoralTooltip: 'Doctoral programmes are not included in the pilot phase 2025',
   },
 }
