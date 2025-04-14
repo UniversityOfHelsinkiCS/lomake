@@ -580,7 +580,7 @@ export default {
     pilotInfo1: `The redesigned annual follow-up of degree programmes will be piloted in spring 2025 in all bachelor's and master's programmes. Doctoral programmes are not yet included in the pilot stage.`,
     pilotInfo2:
       'From 15 April to 30 May 2025, degree programme steering groups will review their evaluation areas and draw up their development plans. The degree programmes that initiate the intervention procedure will discuss the matter with the Vice-Dean by 30 October 2025.',
-    notUsed2025: 'Not applicable in 2025',
+    notUsed2025: 'Not used in 2025',
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
     vetovoimaisuus: 'Traction',
