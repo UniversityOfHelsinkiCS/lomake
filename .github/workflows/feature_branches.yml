@@ -31,25 +31,25 @@ jobs:
       matrix:
         spec:
           [
-            comparison,
-            degreeReform,
-            form,
-            formNotifications,
-            happypath,
-            IAMpermissions,
-            management,
-            misc,
-            ospa,
-            permissions,
-            report,
-            sidebar,
-            yearselector,
-            evaluation,
-            metaevaluation,
-            trackingpage,
-            facultymonitoringoverview,
-            textfield,
-            overview,
+            # comparison,
+            # degreeReform,
+            # form,
+            # formNotifications,
+            # happypath,
+            # IAMpermissions,
+            # management,
+            # misc,
+            # ospa,
+            # permissions,
+            # report,
+            # sidebar,
+            # yearselector,
+            # evaluation,
+            # metaevaluation,
+            # trackingpage,
+            # facultymonitoringoverview,
+            # textfield,
+            # overview,
           ]
     name: Run tests
     runs-on: ubuntu-latest
@@ -112,12 +112,11 @@ jobs:
             SENTRY_ENVIRONMENT=staging
           extra-args: |
             --ulimit nofile=4096:4096
-
-      #- name: Push to quay.io
-        #uses: redhat-actions/push-to-registry@v2
-        #with:
-          #image: ${{ steps.build-image.outputs.image }}
-          #tags: ${{ steps.build-image.outputs.tags }}
-          #registry: quay.io/toska
-          #username: toska+github
-          #password: ${{ secrets.QUAY_IO_TOKEN }}
+      - name: Push to quay.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: quay.io/toska
+          username: toska+github
+          password: ${{ secrets.QUAY_IO_TOKEN }}

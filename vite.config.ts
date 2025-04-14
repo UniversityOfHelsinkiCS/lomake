@@ -5,7 +5,11 @@ import path from "path";
 const root = path.resolve(__dirname, './');
 
 export default defineConfig({
-  plugins: [react(), sentryVitePlugin()],
+  plugins: [react(), sentryVitePlugin({
+    org: 'toska',
+    project: 'lomake',
+  })
+],
   base: process.env.NODE_ENV === 'production' ? '/tilannekuva' : '/',
   resolve: {
     alias: {
