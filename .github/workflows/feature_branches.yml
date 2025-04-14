@@ -28,9 +28,9 @@ jobs:
   tests:
     strategy:
       fail-fast: false
-      matrix:
-        spec:
-          [
+      # matrix:
+      #   spec:
+      #     [
             # comparison,
             # degreeReform,
             # form,
@@ -50,7 +50,7 @@ jobs:
             # facultymonitoringoverview,
             # textfield,
             # overview,
-          ]
+          # ]
     name: Run tests
     runs-on: ubuntu-latest
     steps:
