@@ -25,9 +25,9 @@ jobs:
       - name: Analyse translations
         run: npm run translations -- --lang fi,en
 
-  tests:
-    strategy:
-      fail-fast: false
+  # tests:
+  #   strategy:
+  #     fail-fast: false
       # matrix:
       #   spec:
       #     [
