@@ -665,5 +665,7 @@ export default {
       'Prodekanen kan också meddela att samtliga utbildningsprogram vid fakulteten ska upprätta en utvecklingsplan oavsett färgkod på utvärderingsområdet.',
     seeMore: 'Klicka för att se mer',
     openingSoon: 'Under förberedelse, öppnar i slutet av maj',
+    feedbackForm: 'Ge feedback för att vidareutveckla den årliga uppföljningen',
+    feedbackFormButton: 'Gå till feedbackformuläret',
   },
 }

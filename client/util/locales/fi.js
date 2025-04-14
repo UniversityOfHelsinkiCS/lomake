@@ -629,5 +629,7 @@ export default {
       'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
     seeMore: 'Klikkaa nähdäksesi lisätietoja',
     openingSoon: 'Valmistelun alla, avautuu toukokuun loppuun mennessä',
+    feedbackForm: 'Anna palautetta vuosiseurannan kehittämiseksi',
+    feedbackFormButton: 'Siirry palautelomakkeeseen',
   },
 }

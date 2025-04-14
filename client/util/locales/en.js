@@ -629,5 +629,7 @@ export default {
       'The Vice-Dean may also announce that all degree programmes of the Faculty will draw up a development plan regardless of the colour code of the evaluation area.',
     seeMore: 'Click to see more',
     openingSoon: 'Under preparation, will open by the end of May',
+    feedbackForm: 'Give feedback for further development of the annual follow-up',
+    feedbackFormButton: 'Go to feedback form',
   },
 }

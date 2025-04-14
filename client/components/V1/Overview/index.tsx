@@ -11,9 +11,10 @@ import YearFilter from '../Generic/YearFilterComponent'
 import FacultyFilter from '../Generic/FacultyFilterComponent'
 import LevelFilter from '../Generic/LevelFilterComponent'
 import NoPermissions from '../../Generic/NoPermissions'
-import { Typography } from '@mui/material'
+import { Alert, Button, Typography } from '@mui/material'
 import { getReports } from '@/client/util/redux/reportsSlicer'
 import { inProduction, isAdmin } from '@/config/common'
+import { ArrowForward } from '@mui/icons-material'
 
 const OverviewPage = () => {
   const { t } = useTranslation()
@@ -81,25 +82,57 @@ const OverviewPage = () => {
   }
 
   return (
-    <div style={{ padding: '2rem', width: '100%' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
-        <Typography variant="h1" style={{ margin: 0 }}>
-          {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
-        </Typography>
-
-        <div style={{ display: 'flex', gap: '1rem' }}>
-          <LevelFilter />
-          <FacultyFilter />
-          <YearFilter />
+    <>
+      <Alert
+        severity="info"
+        icon={false}
+        variant="standard"
+        sx={{
+          width: '97%',
+          margin: 0,
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+          }}
+        >
+          <Typography variant="light">{t('keyData:feedbackForm')}</Typography>
+          <Button
+            variant="text"
+            startIcon={<ArrowForward />}
+            href="https://www.lyyti.fi/questions/793407eccc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('keyData:feedbackFormButton')}
+          </Button>
         </div>
-      </div>
+      </Alert>
+      <div style={{ padding: '2rem', width: '100%' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', width: '100%', marginBottom: '2.5rem' }}>
+          <Typography variant="h1" style={{ margin: 0 }}>
+            {t('landingPage:yearlyAssessmentTitle').toUpperCase()}
+          </Typography>
 
-      <KeyDataTableComponent
-        yearFilter={selectedYear}
-        facultyFilter={selectedFaculties}
-        programmeLevelFilter={selectedLevel}
-      />
-    </div>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <LevelFilter />
+            <FacultyFilter />
+            <YearFilter />
+          </div>
+        </div>
+
+        <KeyDataTableComponent
+          yearFilter={selectedYear}
+          facultyFilter={selectedFaculties}
+          programmeLevelFilter={selectedLevel}
+        />
+      </div>
+    </>
   )
 }
 
