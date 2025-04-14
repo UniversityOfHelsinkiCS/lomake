@@ -90,4 +90,3 @@ jobs:
           set_commits: 'skip'
           sourcemaps: './build'
           url_prefix: '~/tilannekuva'
-          version: ${{ steps.extract_version.outputs.VERSION }}
