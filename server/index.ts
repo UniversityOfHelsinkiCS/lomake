@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express'
-import Sentry from '@sentry/node'
+import * as Sentry from '@sentry/node'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import http from 'http'
