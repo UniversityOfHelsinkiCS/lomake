@@ -35,6 +35,11 @@ export default defineConfig({
   build: {
     outDir: 'build',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        sourcemap: true,
+      },
+    },
   },
   define: {
     'process.env': process.env,
