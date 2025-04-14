@@ -19,30 +19,28 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
     .split(';')
     .map(str => str.replace(',', '.'))
     .map(Number)
-
+  
   if (first === 0) {
-    if (value < second) {
-      return LightColors.Red
-    } else if (value < third) {
-      return LightColors.Yellow
-    } else if (value < fourth) {
-      return LightColors.LightGreen
-    } else if (value >= fourth) {
+    if (value >= fourth) {
       return LightColors.DarkGreen
-    } else if (value === first) {
+    } else if (value >= third) {
+      return LightColors.LightGreen
+    } else if (value >= second) {
+      return LightColors.Yellow
+    } else if (value >= first) {
       return LightColors.Red
     } else {
       return LightColors.Grey
     }
   } else {
-    if (value > second) {
-      return LightColors.Red
-    } else if (value > third) {
-      return LightColors.Yellow
-    } else if (value < third && value > fourth) {
-      return LightColors.LightGreen
-    } else if (value <= fourth) {
+    if (value <= fourth) {
       return LightColors.DarkGreen
+    } else if (value <= third) {
+      return LightColors.LightGreen
+    } else if (value <= second) {
+      return LightColors.Yellow
+    } else if (value <= first) {
+      return LightColors.Red
     } else {
       return LightColors.Grey
     }
