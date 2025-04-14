@@ -96,6 +96,6 @@ jobs:
         with:
           environment: production
           set_commits: 'skip'
-          sourcemaps: './build/static/js'
-          url_prefix: '~/tilannekuva/static/js'
+          sourcemaps: './build'
+          url_prefix: '~/tilannekuva'
           version: ${{ steps.extract_version.outputs.VERSION }}
