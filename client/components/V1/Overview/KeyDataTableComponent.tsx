@@ -117,7 +117,7 @@ const TrafficLightCell = ({
       <TrafficLight color={color} variant="medium" />
       {shouldRenderBadge && (
         <NotificationBadge
-          data-cy={`lightcellbadge-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
+          data-cy={`lightCellBadge-${programmeData.koulutusohjelmakoodi}-${groupKey}`}
           tooltip={t('keyData:missingComment')}
         />
       )}
