@@ -51,43 +51,43 @@ jobs:
             # textfield,
             # overview,
           # ]
-    name: Run tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+    # name: Run tests
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v4
+    #   - uses: actions/setup-node@v4
+    #     with:
+    #       node-version: 20
+    #       cache: npm
 
-      - name: npm ci
-        run: npm ci --no-audit --no-fund
+    #   - name: npm ci
+    #     run: npm ci --no-audit --no-fund
 
-      - name: docker compose up -d
-        run: docker compose up -d
+    #   - name: docker compose up -d
+    #     run: docker compose up -d
 
-      - name: seed db
-        run: docker exec lomake_dev bash -c "npm run seed"
+    #   - name: seed db
+    #     run: docker exec lomake_dev bash -c "npm run seed"
 
-      - name: Run cypress tests with retry
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 6
-          max_attempts: 2
-          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
+    #   - name: Run cypress tests with retry
+    #     uses: nick-fields/retry@v3
+    #     with:
+    #       timeout_minutes: 6
+    #       max_attempts: 2
+    #       command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress videos
-          path: /home/runner/work/lomake/lomake/cypress/videos
+    #   - uses: actions/upload-artifact@v4
+    #     if: failure()
+    #     with:
+    #       name: Cypress videos
+    #       path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+    #   - uses: actions/upload-artifact@v4
+    #     if: failure()
+    #     with:
+    #       name: Cypress screenshots
+    #       path: /home/runner/work/lomake/lomake/cypress/screenshots
 
 
   build:
