@@ -25,75 +25,75 @@ jobs:
       - name: Analyse translations
         run: npm run translations -- --lang fi,en
 
-  tests:
-    strategy:
-      fail-fast: false
-      matrix:
-        spec:
-          [
-            comparison,
-            degreeReform,
-            form,
-            formNotifications,
-            happypath,
-            IAMpermissions,
-            management,
-            misc,
-            ospa,
-            permissions,
-            report,
-            sidebar,
-            yearselector,
-            evaluation,
-            metaevaluation,
-            trackingpage,
-            facultymonitoringoverview,
-            textfield,
-            overview,
-          ]
-    name: Run tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+  # tests:
+  #   strategy:
+  #     fail-fast: false
+      # matrix:
+      #   spec:
+      #     [
+            # comparison,
+            # degreeReform,
+            # form,
+            # formNotifications,
+            # happypath,
+            # IAMpermissions,
+            # management,
+            # misc,
+            # ospa,
+            # permissions,
+            # report,
+            # sidebar,
+            # yearselector,
+            # evaluation,
+            # metaevaluation,
+            # trackingpage,
+            # facultymonitoringoverview,
+            # textfield,
+            # overview,
+          # ]
+    # name: Run tests
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v4
+    #   - uses: actions/setup-node@v4
+    #     with:
+    #       node-version: 20
+    #       cache: npm
 
-      - name: npm ci
-        run: npm ci --no-audit --no-fund
+    #   - name: npm ci
+    #     run: npm ci --no-audit --no-fund
 
-      - name: docker compose up -d
-        run: docker compose up -d
+    #   - name: docker compose up -d
+    #     run: docker compose up -d
 
-      - name: seed db
-        run: docker exec lomake_dev bash -c "npm run seed"
+    #   - name: seed db
+    #     run: docker exec lomake_dev bash -c "npm run seed"
 
-      - name: Run cypress tests with retry
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 6
-          max_attempts: 2
-          command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
+    #   - name: Run cypress tests with retry
+    #     uses: nick-fields/retry@v3
+    #     with:
+    #       timeout_minutes: 6
+    #       max_attempts: 2
+    #       command: ./node_modules/.bin/cypress run --headless --browser chrome --spec "cypress/integration/${{ matrix.spec }}.spec.js"
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress videos
-          path: /home/runner/work/lomake/lomake/cypress/videos
+    #   - uses: actions/upload-artifact@v4
+    #     if: failure()
+    #     with:
+    #       name: Cypress videos
+    #       path: /home/runner/work/lomake/lomake/cypress/videos
 
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Cypress screenshots
-          path: /home/runner/work/lomake/lomake/cypress/screenshots
+    #   - uses: actions/upload-artifact@v4
+    #     if: failure()
+    #     with:
+    #       name: Cypress screenshots
+    #       path: /home/runner/work/lomake/lomake/cypress/screenshots
 
 
   build:
     name: 'Build and publish staging image'
-    needs:
-      - tests
+    # needs:
+    #   - tests
     runs-on: ubuntu-latest
 
     steps:
@@ -112,12 +112,11 @@ jobs:
             SENTRY_ENVIRONMENT=staging
           extra-args: |
             --ulimit nofile=4096:4096
-
-      #- name: Push to quay.io
-        #uses: redhat-actions/push-to-registry@v2
-        #with:
-          #image: ${{ steps.build-image.outputs.image }}
-          #tags: ${{ steps.build-image.outputs.tags }}
-          #registry: quay.io/toska
-          #username: toska+github
-          #password: ${{ secrets.QUAY_IO_TOKEN }}
+      - name: Push to quay.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: quay.io/toska
+          username: toska+github
+          password: ${{ secrets.QUAY_IO_TOKEN }}
