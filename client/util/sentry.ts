@@ -4,7 +4,7 @@ const GIT_SHA = process.env.GIT_SHA || ''
 
 const initSentry = () => {
   Sentry.init({
-    dsn: 'https://b41a87ca77fbe0da75b6c078381a66d4@toska.cs.helsinki.fi/15',
+    dsn: 'https://a6ceb1539cbea12e147f5e73189a1d45@toska.cs.helsinki.fi/13',
     environment: process.env.SENTRY_ENVIRONMENT,
     release: GIT_SHA,
     integrations: [Sentry.breadcrumbsIntegration(), Sentry.browserTracingIntegration()],
