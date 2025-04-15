@@ -20,6 +20,14 @@ export default (state = initialState, action) => {
         error: false,
       }
     }
+    case 'GET_FACULTIES_ATTEMPT': {
+      return {
+        ...state,
+        data: null,
+        pending: true,
+        error: false,
+      }
+    }
     default:
       return state
   }

@@ -2,7 +2,7 @@
  * Insert application wide common items here
  */
 
-const { data } = require('./data')
+import { data } from './data.js'
 
 const inProduction = process.env.NODE_ENV === 'production' && process.env.SENTRY_ENVIRONMENT === 'production'
 
@@ -15,10 +15,11 @@ const iamsInUse = true
 const basePath = process.env.BASE_PATH || '/'
 
 const LOMAKE_SINCE_YEAR = 2019
+const ARCHIVE_LAST_YEAR = 2024
 
-const getYearsArray = since => {
+const getYearsArray = (since, to = 2024) => {
   const years = []
-  for (let i = new Date().getFullYear(); i >= since; i--) {
+  for (let i = to; i >= since; i--) {
     const year = i
     years.push(year)
   }
@@ -99,7 +100,7 @@ const requiredDegreeReformIds = ['background_unit', 'primary_role', 'how_many_ye
 const DEV_SUPERADMINS = ['admin', 'cypressSuperAdminUser']
 
 const hasSpecialGroup = (user, group) => {
-  if (user.specialGroup) {
+  if (user && user.specialGroup) {
     const groups = Object.keys(user.specialGroup)
     return groups.includes(group)
   }
@@ -115,7 +116,7 @@ const isDevSuperAdminUid = uid => {
 }
 
 const isSuperAdmin = user => {
-  return hasSpecialGroup(user, 'superAdmin') || (!inProduction && isDevSuperAdminUid(user.uid))
+  return hasSpecialGroup(user, 'superAdmin') || (!inProduction && isDevSuperAdminUid(user?.uid))
 }
 
 const isAdmin = user => {
@@ -202,7 +203,7 @@ const testFacultyName = 'Faculty of Science'
 
 const testIAM = 'hy-mltdk-tkt-jory'
 
-module.exports = {
+export {
   iamsInUse,
   inProduction,
   inStaging,
@@ -228,6 +229,7 @@ module.exports = {
   testProgrammeNameDoctor,
   testIAM,
   LOMAKE_SINCE_YEAR,
+  ARCHIVE_LAST_YEAR,
   getYearsArray,
   mapToDegreeCode,
   requiredDegreeReformIds,

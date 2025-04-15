@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { data, facultyMap } = require('@root/config/data')
+import db from '../models/index.js'
+
+import logger from '../util/logger.js'
+import { data, facultyMap } from '../../config/data.js'
 
 const seedFacultiesAndStudyprogrammes = async () => {
   await db.companionFaculty.destroy({ where: {} })
@@ -78,4 +79,4 @@ const seed = async () => {
   logger.info('Seeding completed')
 }
 
-module.exports = { seed }
+export default seed

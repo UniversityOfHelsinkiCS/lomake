@@ -1,10 +1,6 @@
 name: Build production image
 
 on:
-  #workflow_run:
-  #  workflows: ["Test and build staging-image"]
-  #  branches: [master]
-  #  types: [completed]
   release:
     types: [published]
 
@@ -27,6 +23,7 @@ jobs:
           build-args: |
             BASE_PATH=/tilannekuva/
             SENTRY_ENVIRONMENT=production
+            GIT_SHA=${{ github.sha }}
           extra-args: |
             --ulimit nofile=4096:4096
 
@@ -75,10 +72,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extract release version
-        id: extract_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-
       - name: Pull image and create a container
         run: docker create --name lomake_sentry quay.io/toska/lomake:production
 
@@ -96,5 +89,4 @@ jobs:
           environment: production
           set_commits: 'skip'
           sourcemaps: './build'
-          url_prefix: '~/build'
-          version: ${{ steps.extract_version.outputs.VERSION }}
+          url_prefix: '~/tilannekuva'

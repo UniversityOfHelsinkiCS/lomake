@@ -1,8 +1,9 @@
-const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { whereDraftYear, isAdmin, isSuperAdmin } = require('@util/common')
-const { formKeys } = require('@root/config/data')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { whereDraftYear, isAdmin, isSuperAdmin } from '../util/common.js'
+import { formKeys } from '../../config/data.js'
+import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
 
 /**
  * The LINJAUS function: if user has ANY access, they can see all programmes' answers
@@ -13,7 +14,7 @@ const hasAnyAccess = user => {
   return accessibleProgrammes.length > 0
 }
 
-const getAll = async (_, res) => {
+const getAll = async (_req, res) => {
   try {
     const data = await db.answer.findAll({})
     return res.send(data)
@@ -23,32 +24,33 @@ const getAll = async (_, res) => {
   }
 }
 
+// getting all temp answers user has access to from every year
 const getAllTempUserHasAccessTo = async (req, res) => {
   try {
     // admin route
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
       const data = await db.tempAnswer.findAll({
-        where: {
-          year: await whereDraftYear(),
-        },
+        // where: {
+        //   year: await whereDraftYear(),
+        // },
       })
       return res.send(data)
     }
 
     const finalCommitee = ['UNI', 'UNI_EN', 'UNI_SE']
 
-    // normal user route
     const anyAccess = hasAnyAccess(req.user)
     const data = await db.tempAnswer.findAll({
       where: {
-        year: await whereDraftYear(),
+        // year: awaitYear,
         [Op.or]: [
           { programme: Object.keys(req.user.access).concat(finalCommitee) },
-          anyAccess ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES] } : {},
+          anyAccess
+            ? { form: [formKeys.YEARLY_ASSESSMENT, formKeys.EVALUATION_PROGRAMMES, formKeys.FACULTY_MONITORING] }
+            : {},
         ],
       },
     })
-
     return res.send(data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
@@ -200,9 +202,9 @@ const getAllIndividualAnswersForUser = async (req, res) => {
 
 const getAllUserHasAccessTo = async (req, res) => {
   try {
-    let years = [2019, 2020, 2021, 2022, 2023]
+    let years = [2019, 2020, 2021, 2022, 2023, 2024, 2025]
     if (!req.path.endsWith('/all')) {
-      years = [new Date().getFullYear(), new Date().getFullYear() - 1, new Date().getFullYear() - 2]
+      years = [new Date().getFullYear()]
     }
 
     if (isAdmin(req.user) || isSuperAdmin(req.user)) {
@@ -385,7 +387,7 @@ const getOldFacultySummaryData = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
           form: formKeys.YEARLY_ASSESSMENT,
-          year: 2024,
+          year: ARCHIVE_LAST_YEAR,
           programme: codes,
         },
       })
@@ -427,7 +429,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findAll({
         where: {
           form: formKeys.EVALUATION_PROGRAMMES,
-          year: 2024,
+          year: ARCHIVE_LAST_YEAR,
           programme: codes,
         },
       })
@@ -622,7 +624,24 @@ const getDataFromFinnishUniForm = async (req, res) => {
     return res.status(500).json({ error: 'Database error' })
   }
 }
-module.exports = {
+
+const getFacultyTempAnswersByForm = async (req, res) => {
+  const { form } = req.params
+
+  try {
+    const data = await db.tempAnswer.findAll({
+      where: {
+        form,
+      },
+    })
+    return res.send(data)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
+  }
+}
+
+export default {
   getAll,
   getPreviousYear,
   getAllTempUserHasAccessTo,
@@ -641,4 +660,5 @@ module.exports = {
   getCommitteeSummaryData,
   getFacultyTempAnswersAfterDeadline,
   getDataFromFinnishUniForm,
+  getFacultyTempAnswersByForm,
 }

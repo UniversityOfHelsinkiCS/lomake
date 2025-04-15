@@ -1,10 +1,9 @@
-const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { isAdmin, isSuperAdmin, isDevSuperAdminUid, isStagingSuperAdminUid } = require('@root/config/common')
-const { whereDraftYear, inProduction } = require('@util/common')
-const { v4: uuidv4 } = require('uuid')
-const { getUserByUid } = require('../services/userService')
+import { Op } from 'sequelize'
+import { v4 as uuidv4 } from 'uuid'
+import db from '../models/index.js'
+import logger from './logger.js'
+import { isAdmin, isSuperAdmin, isDevSuperAdminUid, inProduction, whereDraftYear } from './common.js'
+import getUserByUid from '../services/userService.js'
 
 let currentEditors = {}
 const SEC = 1000
@@ -86,7 +85,7 @@ const getCurrentUser = async socket => {
 
   const loggedInAs = socket.request.headers['x-admin-logged-in-as']
 
-  if (!inProduction && loggedInAs && (isDevSuperAdminUid(uid) || isStagingSuperAdminUid(uid))) {
+  if (!inProduction && loggedInAs && isDevSuperAdminUid(uid)) {
     const user = await getUserByUid(loggedInAs)
     return user
   }
@@ -98,11 +97,10 @@ const getCurrentUser = async socket => {
 const joinRoom = async (socket, room, form, io) => {
   try {
     const currentUser = await getCurrentUser(socket)
-
     if (
       isAdmin(currentUser) ||
       isSuperAdmin(currentUser) ||
-      (currentUser.access[room] && currentUser.access[room].read)
+      (currentUser?.access[room] && currentUser?.access[room].read)
     ) {
       const [answer] = await db.tempAnswer.findOrCreate({
         where: {
@@ -118,7 +116,7 @@ const joinRoom = async (socket, room, form, io) => {
       logAndEmit(socket, 'new_form_data', answer.data || {})
     }
   } catch (error) {
-    logger.error(`Database error: ${error}`)
+    logger.error(`Database error in join room: ${error}`)
   }
 }
 
@@ -136,7 +134,8 @@ const isTrafficOrRadio = data => {
 const updateField = async (socket, payload, io, uuid) => {
   try {
     const { room, data, form } = payload
-    if (!form) return
+    // If form is 10, do nothing, this is called for form 10 but we don't want to save it
+    if (!form || form === 10) return
 
     const currentUser = await getCurrentUser(socket)
 
@@ -175,7 +174,6 @@ const updateField = async (socket, payload, io, uuid) => {
           [Op.and]: [{ programme: room }, { year: await whereDraftYear() }, { form }],
         },
       })
-      logger.info('currentAnswer', currentAnswer)
       if (currentAnswer) {
         await db.tempAnswer.update(
           { data: { ...currentAnswer.data, ...data } },
@@ -233,9 +231,25 @@ const getLockHttp = (currentUser, payload, io) => {
   return stripTimeouts(currentEditors[room])
 }
 
-module.exports = {
+const updateWSAndClearEditors = (io, payload) => {
+  const { room, data, field } = payload
+
+  currentEditors = {
+    ...currentEditors,
+    [room]: {
+      ...currentEditors[room],
+      [field]: undefined,
+    },
+  }
+
+  emitCurrentEditorsTo(io, room, currentEditors)
+  logAndEmitToRoom(io, room, 'new_reports_data', data)
+}
+
+export default {
   joinRoom: withLogging(joinRoom),
   leaveRoom: withLogging(leaveRoom),
   updateField: withLogging(updateField),
   getLockHttp,
+  updateWSAndClearEditors,
 }

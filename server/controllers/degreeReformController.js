@@ -1,6 +1,6 @@
-const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
 
 const getAnswersFromDb = async () => {
   const existingDeadline = await db.deadline.findOne({
@@ -71,8 +71,4 @@ const getForUniversity = async (req, res) => {
   }
 }
 
-module.exports = {
-  getAllTemp,
-  getForFaculty,
-  getForUniversity,
-}
+export default { getAllTemp, getForFaculty, getForUniversity }

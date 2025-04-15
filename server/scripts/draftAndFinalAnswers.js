@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
-const { Op } = require('sequelize')
-const db = require('@models/index')
-const logger = require('@util/logger')
-const { formKeys, committeeList } = require('@root/config/data')
+import { Op } from 'sequelize'
+
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import { formKeys, committeeList } from '../../config/data.js'
+import initReports from './initReports.js'
 
 const handleNonProgrammeDraftAnswers = async form => {
   // here programme contains actually an uid
@@ -106,6 +108,8 @@ const createDraftAnswers = async (newYear, form) => {
 
   if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     await handleNonProgrammeDraftAnswers(form)
+  } else if (form === 10) {
+    await initReports()
   } else {
     let toOpen = []
 
@@ -155,11 +159,12 @@ const createFinalAnswers = async (newYear, form) => {
 
   if (form === formKeys.EVALUATION_FACULTIES) {
     await handleNonProgrammeFinalAnswers(form)
-  }
-  if (form === formKeys.EVALUATION_COMMTTEES) {
+  } else if (form === formKeys.EVALUATION_COMMTTEES) {
     await handleNonProgrammeFinalAnswers(form)
   } else if (form === formKeys.DEGREE_REFORM_INDIVIDUALS) {
     await handleIndividualFinalAnswers(form)
+  } else if (form === 10) {
+    logger.info('Reports do not have final answers')
   } else {
     const programmes = await db.studyprogramme.findAll({})
 
@@ -195,4 +200,4 @@ const createFinalAnswers = async (newYear, form) => {
   }
 }
 
-module.exports = { createDraftAnswers, createFinalAnswers }
+export { createDraftAnswers, createFinalAnswers }

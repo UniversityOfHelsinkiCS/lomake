@@ -6,12 +6,13 @@ const formKeys = {
   EVALUATION_FACULTIES: 5,
   EVALUATION_COMMTTEES: 6,
   META_EVALUATION: 7,
+  FACULTY_MONITORING: 8,
 }
 
 const forms = [
   {
     key: 1,
-    name: 'Vuosiseuranta',
+    name: 'Vuosiseuranta 2019 - 2023',
     type: 'yearlyAssessment',
   },
   {
@@ -43,6 +44,16 @@ const forms = [
     key: 7,
     name: 'Katselmus - toimeenpano',
     type: 'evaluation',
+  },
+  {
+    key: 8,
+    name: 'Toimenpiteiden toteutus ja seuranta tiedekunnissa',
+    type: 'evaluation',
+  },
+  {
+    key: 10,
+    name: 'Vuosiseuranta - UUSI',
+    type: 'yearlyAssessment',
   },
 ]
 
@@ -371,6 +382,17 @@ const data = [
         companionFaculties: [],
         international: false,
       },
+      // {
+      //   key: 'MH30_006',
+      //   name: {
+      //     fi: 'Terveydenhuollon kehittämisen maisteriohjelma',
+      //     en: 'Master’s Programme in Health Care Development',
+      //     se: 'Magisterprogrammet i hälsovårdsutveckling',
+      //   },
+      //   level: 'master',
+      //   companionFaculties: [],
+      //   international: false,
+      // },
       {
         key: 'MH30_002',
         name: {
@@ -549,9 +571,9 @@ const data = [
       {
         key: 'MH40_004',
         name: {
-          fi: 'Venäjän tutkimuksen maisteriohjelma',
-          en: "Master's Programme in Russian Studies",
-          se: 'Magisterprogrammet i ryska studier',
+          fi: 'Venäjän, Euraasian ja itäisen Euroopan tutkimuksen maisteriohjelma',
+          en: "Master's Programme in Russian, Eurasian and Eastern European Studies",
+          se: 'Magisterprogrammet i ryska, eurasiska och östeuropeiska studier',
         },
         level: 'master',
         companionFaculties: [],
@@ -1786,11 +1808,4 @@ const data = [
   },
 ]
 
-module.exports = {
-  forms,
-  formKeys,
-  data,
-  facultyMap,
-  committeeList,
-  facultyList,
-}
+export { forms, formKeys, data, facultyMap, committeeList, facultyList }

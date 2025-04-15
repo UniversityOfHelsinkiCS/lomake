@@ -9,9 +9,15 @@ export const getAllTempAnswersAction = () => {
   return callBuilder(route, prefix)
 }
 
-export const getTempAnswersByFormAndYear = (form, year) => {
+export const getTempAnswersAfterDeadline = (form, year) => {
   const route = `/answers/temp/${form}/${year}`
-  const prefix = 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR'
+  const prefix = 'GET_TEMP_ANSWERS_AFTER_DEADLINE'
+  return callBuilder(route, prefix)
+}
+
+export const getTempAnswersByForm = form => {
+  const route = `/answers/temp/${form}`
+  const prefix = 'GET_TEMP_ANSWERS_BY_FORM'
   return callBuilder(route, prefix)
 }
 
@@ -39,13 +45,26 @@ export default (state = { data: null }, action) => {
         pending: false,
         error: true,
       }
-    case 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR_ATTEMPT':
+    case 'GET_TEMP_ANSWERS_AFTER_DEADLINE_ATTEMPT':
       return {
         ...state,
         pending: true,
         error: false,
       }
-    case 'GET_TEMP_ANSWERS_BY_FORM_AND_YEAR_SUCCESS':
+    case 'GET_TEMP_ANSWERS_AFTER_DEADLINE_SUCCESS':
+      return {
+        ...state,
+        data: action.response,
+        pending: false,
+        error: false,
+      }
+    case 'GET_TEMP_ANSWERS_BY_FORM_ATTEMPT':
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      }
+    case 'GET_TEMP_ANSWERS_BY_FORM_SUCCESS':
       return {
         ...state,
         data: action.response,
