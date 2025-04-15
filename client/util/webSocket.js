@@ -49,13 +49,12 @@ const socketMiddleware = () => {
 
   const handleVisibilityChange = () => {
     isVisible = !document.hidden
-    const patterns = [/^\w{4}_\w{3}$/, /^T\d{6}$/]
     if (isVisible && !socket) {
       const pathParts = window.location.pathname.split('/')
       const room = pathParts[pathParts.length - 1]
       const form = pathParts[pathParts.length - 2]
 
-      const matchesPattern = patterns.some(pattern => pattern.test(room))
+      const matchesPattern = [/^\w{4}_\w{3}$/, /^T\d{6}$/, /^\w{3}$/].some(pattern => pattern.test(room))
 
       if (matchesPattern) {
         socket = connect()
