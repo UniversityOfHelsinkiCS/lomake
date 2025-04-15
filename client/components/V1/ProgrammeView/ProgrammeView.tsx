@@ -16,7 +16,7 @@ import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
 import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { RootState } from '@/client/util/store'
+import { RootState, AppDispatch } from '@/client/util/store'
 import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 import { KeyDataCardData } from '@/client/lib/types'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
@@ -27,7 +27,7 @@ import { TrafficLight } from '../Generic/TrafficLightComponent'
 
 const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const [activeTab, setActiveTab] = useState(0)
