@@ -41,7 +41,7 @@ export default {
     find: 'Sök',
     facultymonitoringText: 'Svar finns tillgängliga / Sista dagen för att fylla i formuläret var 30.10.2024',
 
-    noData: 'Ingen data tillgänglig för dessa urval',
+    noData: 'Inga program eller svar hittades. Försök att ändra din sökning.',
     noDataForFaculty: 'Ingen data tillgänglig för vald fakultet',
     selectAll: 'Välj alla',
     clearSelection: 'Rensa urval',
@@ -126,6 +126,7 @@ export default {
     overview: 'Översikt',
     startDateEndDateError: 'Starttiden kan inte vara senare än det beräknade sluttiden',
     confirmRemoveLight: 'Är du säker på att du vill ta bort?',
+    archive: 'Arkiv',
   },
 
   aboutPage: {
@@ -143,7 +144,6 @@ export default {
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
     contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
     broughtBy: 'Förverkligad av',
-    archive: 'Arkiv',
   },
 
   landingPage: {
@@ -159,7 +159,6 @@ export default {
     ],
     degreeReformTitle: 'Utvärdering av utbildningsreformen (Stora hjulet 2015)',
     degreeReformSubtitles: ['Utbildningens nuvarande tillstånd', 'Enkäten och sammanfattningar 2024'],
-    archive: 'Här kan du se svaren från åren 2019-2024',
     yearly: 'Öppnas 15.4.2025',
     toArchive: 'Gå till arkivet',
     toYearly: 'Gå till årlig uppföljning',
@@ -632,8 +631,8 @@ export default {
     resurssit: 'Resursanvändning',
     resurssitInfo:
       'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven. Nyckeltal hämtas från föregående år.',
-    qualityControl: 'Kvalitetskontrollverktyg',
-    supportProcess: 'Procedur för handling',
+    qualityControl: 'Kvalitetsstyrningsverktyg',
+    supportProcess: 'Interventionsförfarande',
     actions: 'Utvecklingsplan',
     moveToActions: 'Flytta till utvecklingsplan',
     someoneElseEditing: 'är redigering',
@@ -647,6 +646,7 @@ export default {
     saveMeasure: 'Spara utvecklingsplanen',
     Measure: 'Utvecklingsplan för utbildningsprogrammet',
     noMeasure: 'Inget svar',
+    noData: 'Ingen data',
     missingMeasure: 'Ingen utvecklingsplan!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
@@ -665,5 +665,8 @@ export default {
       'Prodekanen kan också meddela att samtliga utbildningsprogram vid fakulteten ska upprätta en utvecklingsplan oavsett färgkod på utvärderingsområdet.',
     seeMore: 'Klicka för att se mer',
     openingSoon: 'Under förberedelse, öppnar i slutet av maj',
+    feedbackForm: 'Ge feedback för att vidareutveckla den årliga uppföljningen',
+    feedbackFormButton: 'Gå till feedbackformuläret',
+    doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
   },
 }

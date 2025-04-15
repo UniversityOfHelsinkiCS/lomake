@@ -101,10 +101,9 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             <Typography variant="italic">{props.title}</Typography>
             <Typography
               variant="italic"
-              style={{ whiteSpace: 'nowrap' }}
-              color={props.value === 'Ei dataa' ? 'textSecondary' : ''}
+              style={{ whiteSpace: 'nowrap', color: props.value === 'Ei dataa' ? 'textSecondary' : undefined }}
             >
-              {props.value}
+              {props.value === 'Ei dataa' ? t('keyData:noData') : props.value}
             </Typography>
           </div>
         </div>

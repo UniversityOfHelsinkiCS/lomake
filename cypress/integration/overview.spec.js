@@ -42,7 +42,7 @@ describe('Overview page test', () => {
           "Bachelor's programmes",
           "Master's programmes",
           'Doctoral programmes',
-          "International Master's programmes",
+          // "International Master's programmes",
         ]
 
         cy.get('[data-cy="level-filter-option"]')

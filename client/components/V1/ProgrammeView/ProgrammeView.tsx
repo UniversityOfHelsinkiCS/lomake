@@ -33,9 +33,7 @@ const ProgrammeView = () => {
   const [activeTab, setActiveTab] = useState(0)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const currentUser = useSelector((state: RootState) => state.currentUser)
-
   const keyData = useFetchSingleKeyData(programmeKey)
-  const reports = useSelector((state: RootState) => state.reports.dataForYear)
   const form = 10
 
   const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
@@ -50,7 +48,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
-    dispatch(getReport({ studyprogrammeKey: programmeKey, year: 2025 }))
+    dispatch(getReport({ studyprogrammeKey: programmeKey, year: selectedYear }))
   }, [lang, programmeKey])
 
   useEffect(() => {
@@ -65,12 +63,6 @@ const ProgrammeView = () => {
       dispatch(setViewOnly(false))
     }
   }, [programmeKey, form])
-
-  useEffect(() => {
-    if (selectedYear) {
-      dispatch(getReports({ year: selectedYear }))
-    }
-  }, [selectedYear])
 
   useEffect(() => {
     return () => {
@@ -93,21 +85,19 @@ const ProgrammeView = () => {
   const ActionsBadge = ({
     programmeData,
     metadata,
-    reports,
   }: {
     programmeData: KeyDataProgramme
     metadata: KeyDataMetadata[]
-    reports: any // Add proper type
   }) => {
     const { renderActionsBadge } = useNotificationBadge()
 
     const actionsBadgeData = useMemo(() => {
       return renderActionsBadge(programmeData, metadata, true)
-    }, [programmeData, metadata, reports, renderActionsBadge])
+    }, [programmeData, metadata, renderActionsBadge])
 
     return (
       actionsBadgeData.showBadge && (
-        <NotificationBadge data-cy={`actionsBadge`} variant={'small'} style={{ marginLeft: 0 }} />
+        <NotificationBadge data-cy={`actionsfieldBadge`} variant={'small'} style={{ marginLeft: 0 }} />
       )
     )
   }
@@ -116,18 +106,15 @@ const ProgrammeView = () => {
     programmeData,
     groupKey,
     metadata,
-    reports,
     level,
   }: {
     programmeData: KeyDataProgramme
     groupKey: GroupKey
     metadata: KeyDataMetadata[]
-    reports: any // Add proper type
     level: ProgrammeLevel
   }) => {
     const { renderTrafficLightBadge } = useNotificationBadge()
 
-    // Calculate color outside of useMemo
     const color = useMemo(
       () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
       [metadata, programmeData, groupKey, level],
@@ -135,7 +122,7 @@ const ProgrammeView = () => {
 
     const shouldRenderBadge = useMemo(() => {
       return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
-    }, [programmeData, groupKey, color, renderTrafficLightBadge, reports])
+    }, [programmeData, groupKey, color, renderTrafficLightBadge])
 
     return shouldRenderBadge && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
   }
@@ -144,19 +131,17 @@ const ProgrammeView = () => {
     programmeData,
     tab,
     metadata,
-    reports,
   }: {
     programmeData: KeyDataProgramme
     tab: 'lights' | 'actions'
     metadata: KeyDataMetadata[]
-    reports: any // Add proper type
   }) => {
     const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
 
     const shouldRenderBadge = useMemo(() => {
       if (tab === 'lights') return renderTabBadge(programmeData, metadata)
       else return renderActionsBadge(programmeData, metadata).showBadge
-    }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge, reports])
+    }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge])
 
     return (
       shouldRenderBadge && (
@@ -166,12 +151,6 @@ const ProgrammeView = () => {
   }
 
   const KeyDataPoints = getKeyDataPoints(t, programme)
-
-  const kotka = currentUser.data.uid === 'kotkajim'
-  // remove before pilot
-  if (!(isAdmin(currentUser.data) || kotka) && inProduction) {
-    return <NoPermissions t={t} requestedForm={t('overview:overviewPage')} />
-  }
 
   return (
     <Box sx={{ width: '75%' }}>
@@ -188,14 +167,15 @@ const ProgrammeView = () => {
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
         <Tab
           label={t('keyData:keyFigure')}
-          icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} reports={reports} />}
+          icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} />}
           iconPosition="end"
           data-cy="keyDataTab"
         />
         <Tab
           label={t('keyData:actions')}
-          icon={<TabBadge tab="actions" programmeData={programme} metadata={metadata} reports={reports} />}
+          icon={<TabBadge tab="actions" programmeData={programme} metadata={metadata} />}
           iconPosition="end"
+          data-cy="actionsTab"
         />
       </Tabs>
 
@@ -259,7 +239,6 @@ const ProgrammeView = () => {
                       programmeData={programme}
                       groupKey={data.groupKey}
                       metadata={metadata}
-                      reports={reports}
                       level={level}
                     />
                   </TextFieldComponent>
@@ -292,12 +271,7 @@ const ProgrammeView = () => {
             </Box>
           </Alert>
           <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
-            <ActionsBadge
-              programmeData={programme}
-              metadata={metadata}
-              reports={reports}
-              data-cy="actionsFieldBadge"
-            />{' '}
+            <ActionsBadge programmeData={programme} metadata={metadata} />{' '}
           </TextFieldComponent>
         </Box>
       )}

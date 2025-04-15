@@ -40,7 +40,7 @@ export default {
     facultyFilter: 'Search for faculties',
     find: 'Find',
 
-    noData: 'No data available for these choices',
+    noData: 'No programmes or answers were found. Try changing your search.',
     noDataForFaculty: 'No data available for this faculty',
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
@@ -128,6 +128,7 @@ export default {
     modifyLights: 'Modify lights',
     confirmRemoveLight: 'Are you sure you want to delete?',
     facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
+    archive: 'Archive',
   },
 
   aboutPage: {
@@ -146,7 +147,6 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
-    archive: 'Archive',
   },
 
   landingPage: {
@@ -161,7 +161,6 @@ export default {
     ],
     degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
     degreeReformSubtitles: ['Current state of education survey and summaries 2024'],
-    archive: 'Here you can see responses from 2019-2024',
     yearly: 'Opens on 15.4.2025',
     toArchive: 'Go to archive',
     toYearly: 'Go to annual follow-up',
@@ -581,7 +580,7 @@ export default {
     pilotInfo1: `The redesigned annual follow-up of degree programmes will be piloted in spring 2025 in all bachelor's and master's programmes. Doctoral programmes are not yet included in the pilot stage.`,
     pilotInfo2:
       'From 15 April to 30 May 2025, degree programme steering groups will review their evaluation areas and draw up their development plans. The degree programmes that initiate the intervention procedure will discuss the matter with the Vice-Dean by 30 October 2025.',
-    notUsed2025: 'Not applicable in 2025',
+    notUsed2025: 'Not used in 2025',
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
     vetovoimaisuus: 'Traction',
@@ -596,8 +595,8 @@ export default {
     resurssit: 'Use of resources',
     resurssitInfo:
       'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme. Key figures are collected from the previous year.',
-    qualityControl: 'Quality control tools',
-    supportProcess: 'Procedure of action',
+    qualityControl: 'Quality management tools',
+    supportProcess: 'Intervention procedure',
     actions: 'Development plan',
     moveToActions: 'Continue to development plan',
     someoneElseEditing: 'is writing',
@@ -611,9 +610,10 @@ export default {
     saveMeasure: 'Save the development plan',
     Measure: 'Development plan of the programme',
     noMeasure: 'No response',
+    noData: 'No data',
     missingMeasure: 'Development plan is missing!',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
-    colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    colormeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
     noHistory: 'No previous history',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
@@ -629,5 +629,8 @@ export default {
       'The Vice-Dean may also announce that all degree programmes of the Faculty will draw up a development plan regardless of the colour code of the evaluation area.',
     seeMore: 'Click to see more',
     openingSoon: 'Under preparation, will open by the end of May',
+    feedbackForm: 'Give feedback for further development of the annual follow-up',
+    feedbackFormButton: 'Go to feedback form',
+    doctoralTooltip: 'Doctoral programmes are not included in the pilot phase 2025',
   },
 }
