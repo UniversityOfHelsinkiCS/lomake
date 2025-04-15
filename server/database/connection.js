@@ -1,23 +1,31 @@
-const { sequelize, Sequelize } = require('@models')
-const Umzug = require('umzug')
-const logger = require('@util/logger')
+import { Sequelize } from 'sequelize'
+import { Umzug, SequelizeStorage } from 'umzug'
 
-const DB_CONNECTION_RETRY_LIMIT = 60
+import logger from '../util/logger.js'
+import { DATABASE_URL } from '../util/common.js'
+
+const DB_CONNECTION_RETRY_LIMIT = 10
+
+export const sequelize = new Sequelize(DATABASE_URL, { logging: false })
+
+const umzug = new Umzug({
+  migrations: { glob: 'server/database/migrations/*.js' },
+  context: sequelize.getQueryInterface(),
+  storage: new SequelizeStorage({ sequelize, modelName: 'sequelize_meta' }),
+  logger: console,
+})
 
 const runMigrations = async () => {
-  const migrator = new Umzug({
-    storage: 'sequelize',
-    storageOptions: {
-      sequelize,
-    },
-    logging: msg => logger.info(msg),
-    migrations: {
-      params: [sequelize.getQueryInterface(), Sequelize],
-      path: `${process.cwd()}/migrations`,
-      pattern: /\.js$/,
-    },
+  const migrations = await umzug.up()
+
+  logger.info('Migrations up to date', {
+    migrations,
   })
-  return migrator.up()
+}
+
+const testConnection = async () => {
+  await sequelize.authenticate()
+  await runMigrations()
 }
 
 const sleep = ms =>
@@ -25,10 +33,9 @@ const sleep = ms =>
     setTimeout(resolve, ms)
   })
 
-const initializeDatabaseConnection = async (attempt = 1) => {
+export const initializeDatabaseConnection = async (attempt = 1) => {
   try {
-    await sequelize.authenticate()
-    await runMigrations()
+    await testConnection()
     return true
   } catch (e) {
     if (attempt === DB_CONNECTION_RETRY_LIMIT) {
@@ -36,9 +43,7 @@ const initializeDatabaseConnection = async (attempt = 1) => {
       process.exit(1)
     }
     logger.error(`Connection to database failed! Attempt ${attempt} of ${DB_CONNECTION_RETRY_LIMIT}`)
-    await sleep(1000)
+    await sleep(5000)
     return initializeDatabaseConnection(attempt + 1)
   }
 }
-
-module.exports = { initializeDatabaseConnection }

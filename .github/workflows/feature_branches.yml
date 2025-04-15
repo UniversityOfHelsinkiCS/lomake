@@ -5,6 +5,26 @@ on:
     branches-ignore: ['master']
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build project for linting
+        run: npm ci
+      - name: Run eslint and ts checks
+        run: npm run lint
+
+  translations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build project for translations
+        run: npm ci
+      - name: Analyse translations
+        run: npm run translations -- --lang fi,en
+
   tests:
     strategy:
       fail-fast: false
@@ -16,7 +36,8 @@ jobs:
             form,
             formNotifications,
             happypath,
-            IAMpermissions,
+            IAMpermissions1,
+            IAMpermissions2,
             management,
             misc,
             ospa,
@@ -26,7 +47,10 @@ jobs:
             yearselector,
             evaluation,
             metaevaluation,
-            homepage,
+            trackingpage,
+            facultymonitoringoverview,
+            textfield,
+            overview,
           ]
     name: Run tests
     runs-on: ubuntu-latest
@@ -45,7 +69,7 @@ jobs:
         run: docker compose up -d
 
       - name: seed db
-        run: docker exec lomake_dev bash -c "node index.js seed"
+        run: docker exec lomake_dev bash -c "npm run seed"
 
       - name: Run cypress tests with retry
         uses: nick-fields/retry@v3
@@ -65,3 +89,35 @@ jobs:
         with:
           name: Cypress screenshots
           path: /home/runner/work/lomake/lomake/cypress/screenshots
+
+
+  build:
+    name: 'Build and publish staging image'
+    needs:
+      - tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: lomake
+          tags: staging ${{ github.sha }}
+          containerfiles: |
+            ./Dockerfile
+          build-args: |
+            BASE_PATH=/tilannekuva/
+            SENTRY_ENVIRONMENT=staging
+          extra-args: |
+            --ulimit nofile=4096:4096
+      # - name: Push to quay.io
+      #   uses: redhat-actions/push-to-registry@v2
+      #   with:
+      #     image: ${{ steps.build-image.outputs.image }}
+      #     tags: ${{ steps.build-image.outputs.tags }}
+      #     registry: quay.io/toska
+      #     username: toska+github
+      #     password: ${{ secrets.QUAY_IO_TOKEN }}

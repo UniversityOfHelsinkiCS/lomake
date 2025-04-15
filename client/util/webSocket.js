@@ -1,54 +1,67 @@
-import { basePath, inProduction } from 'Utilities/common'
-import { getHeaders } from '@root/config/mockHeaders'
 import io from 'socket.io-client'
+import Cookies from 'js-cookie'
+import { basePath, inProduction } from './common'
+import { getHeaders } from '../../config/mockHeaders'
+// eslint-disable-next-line import/no-cycle
 import store from './store'
 
 const connect = () => {
-  const defaultHeaders = !inProduction ? getHeaders() : {}
-  const headers = { ...defaultHeaders }
+  const headers = !inProduction ? { ...getHeaders() } : {}
 
-  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs') // uid
+  const adminLoggedInAs = localStorage.getItem('adminLoggedInAs')
+
   if (adminLoggedInAs) headers['x-admin-logged-in-as'] = adminLoggedInAs
+
+  // Set the 'uid' cookie with a values
+  // when using websocket you have to pass uid as cookies to backend because extraHeaders are not supported
+  Cookies.set('uid', headers.uid, { expires: 7 }) // Expires in 7 days
+  Cookies.set('x-admin-logged-in-as', adminLoggedInAs, { expires: 7 })
 
   return io(window.origin, {
     path: `${basePath}socket.io`,
     transports: ['polling'],
-    transportOptions: {
-      polling: {
-        extraHeaders: headers,
-      },
-    },
+    extraHeaders: headers,
   })
+}
+const updateForm = store => event => {
+  store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
+}
+
+const updateEditors = store => event => {
+  store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
+}
+
+const updateReports = store => event => {
+  store.dispatch({ type: 'reports/putData/fulfilled', payload: event })
+}
+
+export const setupSocketListeners = socket => {
+  if (!window.location.href.endsWith('/individual')) {
+    socket.on('new_form_data', updateForm(store))
+    socket.on('update_editors', updateEditors(store))
+    socket.on('new_reports_data', updateReports(store))
+  }
 }
 
 const socketMiddleware = () => {
   let socket = null
   let isVisible = true
 
-  const updateForm = store => event => {
-    store.dispatch({ type: 'GET_FORM_SUCCESS', response: event })
-  }
-  const updateEditors = store => event => {
-    store.dispatch({ type: 'UPDATE_CURRENT_EDITORS', value: event })
-  }
-
-  const setupSocketListeners = socket => {
-    if (!window.location.href.endsWith('/individual')) {
-      socket.on('new_form_data', updateForm(store))
-      socket.on('update_editors', updateEditors(store))
-    }
-  }
-
   const handleVisibilityChange = () => {
     isVisible = !document.hidden
+    const patterns = [/^\w{4}_\w{3}$/, /^T\d{6}$/]
     if (isVisible && !socket) {
       const pathParts = window.location.pathname.split('/')
       const room = pathParts[pathParts.length - 1]
       const form = pathParts[pathParts.length - 2]
 
-      socket = connect()
-      setupSocketListeners(socket)
-      socket.emit('join', room, form)
+      const matchesPattern = patterns.some(pattern => pattern.test(room))
+
+      if (matchesPattern) {
+        socket = connect()
+        setupSocketListeners(socket)
+        socket.emit('join', room, form)
+      }
     } else if (!isVisible && socket) {
       socket.close()
       socket = null
@@ -66,7 +79,7 @@ const socketMiddleware = () => {
         if (socket !== null) socket.close()
 
         socket = connect()
-        setupSocketListeners(socket)
+        setupSocketListeners(socket, action.room)
 
         break
       case 'WS_LEAVE_ROOM':
@@ -75,7 +88,7 @@ const socketMiddleware = () => {
         socket.emit('leave', action.room)
         break
       case 'WS_JOIN_ROOM':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('join', action.room, action.form)
         break
@@ -85,7 +98,7 @@ const socketMiddleware = () => {
         socket = null
         break
       case 'UPDATE_FORM_FIELD':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('update_field', {
           data: { [action.field]: action.value },
@@ -94,7 +107,7 @@ const socketMiddleware = () => {
         })
         break
       case 'GET_LOCK':
-        if (!socket) socket = connect() // This really only happens when developing.
+        if (!socket) socket = connect()
 
         socket.emit('get_lock', {
           field: action.field,

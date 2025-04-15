@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="cypress" />
 
-import { defaultYears, testProgrammeCode } from '../../config/common'
+import { ARCHIVE_LAST_YEAR, defaultYears, testProgrammeCode } from '../../config/common'
 import '../support/commands'
 
 const form = 1 // yearly assessment
@@ -18,6 +18,7 @@ describe("Previous year's answers", () => {
     cy.reload()
 
     cy.selectYear(defaultYears[1])
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.get(`[data-cy=${testProgrammeCode}-review_of_last_years_situation_report-single]`).should(
       'have.class',
       'square-green',
@@ -55,7 +56,7 @@ describe("Previous year's answers", () => {
     cy.selectYear(defaultYears[2])
     cy.get('[data-cy=textarea-review_of_last_years_situation_report]').contains(`Hello from ${defaultYears[2]}`)
 
-    cy.selectYear(new Date().getFullYear())
+    cy.selectYear(ARCHIVE_LAST_YEAR)
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.typeInEditor('review_of_last_years_situation_report', 'koira')
 

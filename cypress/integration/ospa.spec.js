@@ -113,6 +113,8 @@ describe('SuperAdmin user tests', () => {
     cy.get('[data-cy=updateDeadline]').click()
     cy.get('[data-cy=form-1-deadline]').contains('14.')
 
+    cy.login('cypressOspaUser')
+
     // Visit the form page
     cy.visit('/yearly/form/1/KH50_004')
 
@@ -125,8 +127,9 @@ describe('SuperAdmin user tests', () => {
     cy.selectYear(defaultYears[1])
     cy.get('[data-cy=textarea-learning_outcomes]')
       .find('.editor-class')
-      .should('contain.text', `Hello from 2023, editing old year`)
+      .should('contain.text', `Hello from ${defaultYears[1]}, editing old year`)
 
+    cy.login('cypressSuperAdminUser')
     // Close the form
     cy.visit('/admin')
     cy.contains('Deadline settings').click()
@@ -143,8 +146,11 @@ describe('SuperAdmin user tests', () => {
     // Check that changes persisted and fields with no changes stay the same
     cy.visit('yearly/form/1/KH50_004')
     cy.selectYear(defaultYears[1])
-    cy.get('[data-cy=textarea-learning_outcomes]').should('contain.text', `Hello from 2023, editing old year`)
-    cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from 2023`)
+    cy.get('[data-cy=textarea-learning_outcomes]').should(
+      'contain.text',
+      `Hello from ${defaultYears[1]}, editing old year`,
+    )
+    cy.get('[data-cy=textarea-curriculum]').should('contain.text', `Hello from ${defaultYears[1]}`)
   })
 
   it('Can write to form and change from traffic light table to trends view', () => {

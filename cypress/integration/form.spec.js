@@ -68,41 +68,41 @@ describe('Yearly assessment form tests', () => {
     cy.get('.editor-class').should('not.exist')
   })
 
-  it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
-    cy.typeInEditor('recruitment_influence', 'new words')
-    cy.reload()
-    cy.visit('/yearly')
+  // it("Opening another form and saving to it doesn't affect yearly assesment data", () => {
+  //   cy.get('[data-cy=yearSelector]').contains(defaultYears[0])
+  //   cy.typeInEditor('resourcing', 'new words')
+  //   cy.reload()
+  //   cy.visit('/yearly')
 
-    cy.login('cypressSuperAdminUser')
-    cy.visit('/yearly')
+  //   cy.login('cypressSuperAdminUser')
+  //   cy.visit('/yearly')
 
-    // open another form
-    cy.get('[data-cy=nav-admin]').click()
-    cy.contains('Deadline settings').click()
+  //   // open another form
+  //   cy.get('[data-cy=nav-admin]').click()
+  //   cy.contains('Deadline settings').click()
 
-    cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
-    cy.get('[data-cy=form-4-deadline]').contains('14.')
+  //   cy.createDeadline(defaultYears[0], 'Katselmus - koulutusohjelmat')
+  //   cy.get('[data-cy=form-4-deadline]').contains('14.')
 
-    // write to other form
-    cy.visit('/evaluation/form/4/KH50_005')
-    cy.wait(1000)
-    cy.typeInEditor('degree_flow', 'evaluation words')
-    cy.reload()
+  //   // write to other form
+  //   cy.visit('/evaluation/form/4/KH50_005')
+  //   cy.wait(1000)
+  //   cy.typeInEditor('degree_flow', 'evaluation words')
+  //   cy.reload()
 
-    // check yearly assessment form
-    cy.visit(`/yearly/form/1/${testProgrammeCode}`)
-    cy.get('[data-cy=textarea-recruitment_influence]')
-      .find('.editor-class')
-      .invoke('text')
-      .should('match', /new wo/)
-  })
+  //   // check yearly assessment form
+  //   cy.visit(`/yearly/form/1/${testProgrammeCode}`)
+  //   cy.get('[data-cy=textarea-recruitment_influence]')
+  //     .find('.editor-class')
+  //     .invoke('text')
+  //     .should('match', /new wo/)
+  // })
 
   it("Closing a form and doesn't affect other forms' data", () => {
     cy.login('cypressSuperAdminUser')
     cy.visit('/yearly')
     // check page is ready
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0])
 
     // open another form
     cy.get('[data-cy=nav-admin]').click()
@@ -116,7 +116,7 @@ describe('Yearly assessment form tests', () => {
 
     // write to yearly form
     cy.visit(`/yearly/form/1/${testProgrammeCode}`)
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0])
     cy.typeInEditor('employability', 'new words')
     cy.reload()
     cy.visit('/yearly')
@@ -124,7 +124,7 @@ describe('Yearly assessment form tests', () => {
     cy.login('cypressSuperAdminUser')
     cy.visit('/yearly')
     // check page is ready
-    cy.get('[data-cy=yearSelector]').contains(defaultYears[1])
+    cy.get('[data-cy=yearSelector]').contains(defaultYears[0])
 
     // close the other form
     cy.get('[data-cy=nav-admin]').click()

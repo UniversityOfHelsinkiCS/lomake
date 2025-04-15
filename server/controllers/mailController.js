@@ -1,5 +1,5 @@
-const axios = require('axios')
-const { inProduction } = require('@util/common')
+import axios from 'axios'
+import { inProduction } from '../util/common.js'
 
 const pateToken = process.env.PATE_API_TOKEN || ''
 const pateUrl = process.env.PATE_URL || ''
@@ -56,6 +56,4 @@ const sendNewTempAccessNotification = (userFullName, programme, kojoEmail) =>
     },
   })
 
-module.exports = {
-  sendNewTempAccessNotification,
-}
+export default { sendNewTempAccessNotification }

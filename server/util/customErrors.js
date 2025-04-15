@@ -14,6 +14,6 @@ class ApplicationError extends Error {
   }
 }
 
-module.exports = {
+export default {
   ApplicationError,
 }

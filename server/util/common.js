@@ -1,15 +1,46 @@
-const { Op } = require('sequelize')
-const db = require('@models/index')
-const common = require('@root/config/common')
-const { formKeys } = require('@root/config/data')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import {
+  iamsInUse,
+  inProduction,
+  inStaging,
+  internationalAccess,
+  basePath,
+  defaultYears,
+  degreeLevels,
+  specialGroups,
+  requiredFormIds,
+  isSuperAdmin,
+  isDevSuperAdminUid,
+  isAdmin,
+  isBasicUser,
+  isSpecialGroupUser,
+  isInternationalUser,
+  isEvaluationFacultyUser,
+  hasSomeReadAccess,
+  testProgrammeCode,
+  testProgrammeName,
+  testFacultyCode,
+  testFacultyName,
+  testProgrammeCodeDoctor,
+  testProgrammeNameDoctor,
+  testIAM,
+  LOMAKE_SINCE_YEAR,
+  getYearsArray,
+  mapToDegreeCode,
+  requiredDegreeReformIds,
+  isKatselmusProjektiOrOhjausryhma,
+  isEvaluationUniversityUser,
+} from '../../config/common.js'
+import { formKeys } from '../../config/data.js'
 
-const DB_URL = process.env.DB_URL || ''
+const DATABASE_URL = process.env.DATABASE_URL || ''
 const PORT = process.env.PORT || 8001
 const AUTOMATIC_IAM_PERMISSIONS_ENABLED = process.env.AUTOMATIC_IAM_PERMISSIONS_ENABLED === 'true'
 
 const whereDraftYear = async () => {
   const draftYears = await db.draftYear.findAll({})
-  const draftYear = draftYears.length ? draftYears[0].year : null
+  const draftYear = draftYears.length ? draftYears[0].year : new Date().getFullYear()
   return draftYear || { [Op.is]: null }
 }
 
@@ -35,11 +66,40 @@ const getFormType = form => {
   return 'yearly'
 }
 
-module.exports = {
-  ...common,
-  DB_URL,
+export {
+  DATABASE_URL,
   PORT,
   AUTOMATIC_IAM_PERMISSIONS_ENABLED,
   whereDraftYear,
   getFormType,
+  iamsInUse,
+  inProduction,
+  inStaging,
+  internationalAccess,
+  basePath,
+  defaultYears,
+  degreeLevels,
+  specialGroups,
+  requiredFormIds,
+  isSuperAdmin,
+  isDevSuperAdminUid,
+  isAdmin,
+  isBasicUser,
+  isSpecialGroupUser,
+  isInternationalUser,
+  isEvaluationFacultyUser,
+  hasSomeReadAccess,
+  testProgrammeCode,
+  testProgrammeName,
+  testFacultyCode,
+  testFacultyName,
+  testProgrammeCodeDoctor,
+  testProgrammeNameDoctor,
+  testIAM,
+  LOMAKE_SINCE_YEAR,
+  getYearsArray,
+  mapToDegreeCode,
+  requiredDegreeReformIds,
+  isKatselmusProjektiOrOhjausryhma,
+  isEvaluationUniversityUser,
 }

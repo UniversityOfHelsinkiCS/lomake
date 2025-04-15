@@ -1,9 +1,11 @@
-const db = require('@models')
-const logger = require('@util/logger')
-const { Op } = require('sequelize')
-const { getLastRestart } = require('@util/lastRestart')
-const { isAdmin } = require('@util/common')
-const { sendNewTempAccessNotification } = require('./mailController')
+import { Op } from 'sequelize'
+import db from '../models/index.js'
+import logger from '../util/logger.js'
+import lastRestart from '../util/lastRestart.js'
+import { isAdmin } from '../util/common.js'
+import sendNewTempAccessNotification from './mailController.js'
+
+const { getLastRestart } = lastRestart
 
 const getCurrentUser = async (req, res) => {
   if (req.user && !req.headers['x-admin-logged-in-as']) {
@@ -168,11 +170,4 @@ const deleteTempAccess = async (req, res) => {
   }
 }
 
-module.exports = {
-  getCurrentUser,
-  getLogoutUrl,
-  getAllUsers,
-  getProgrammesUsers,
-  saveTempAccess,
-  deleteTempAccess,
-}
+export default { getCurrentUser, getLogoutUrl, getAllUsers, getProgrammesUsers, saveTempAccess, deleteTempAccess }

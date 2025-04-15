@@ -540,9 +540,9 @@
         "kludge": true,
         "type": "ENTITY_LEVELS",
         "shortLabel": {
-          "fi": "Arvioikaa tiedekunnan koulutuksen kokonaistilannetta viiden vuoden kuluttua.",
-          "se": "Bedöm den totala situationen för fakultetens utbildning om fem år.",
-          "en": "Evaluate the overall state of the faculty´s education in five years."
+          "fi": "Koulutuksen kokonaistilanne viiden vuoden kuluttua",
+          "se": "Totala situationen för fakultetens utbildning om fem år",
+          "en": "Overall state of the faculty´s education in five years"
         },
         "label": {
           "fi": "MISSÄ TIEDEKUNNAN KOULUTUKSESSA MENNÄÄN VIIDEN VUODEN KULUTTUA",

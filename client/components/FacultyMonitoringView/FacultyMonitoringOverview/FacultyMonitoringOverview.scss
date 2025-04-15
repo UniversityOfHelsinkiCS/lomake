@@ -1,0 +1,78 @@
+$base-cell-size: min(5vw, 80px);
+
+@mixin cell-scaling {
+  width: $base-cell-size;
+  min-width: $base-cell-size;
+  height: $base-cell-size;
+}
+
+.monitoring-overview {
+  width: 100%;
+
+  .filter-row .menu-item-header {
+    padding-left: 0;
+
+    h2 {
+      max-width: 16em;
+      font-size: 1.5em;
+    }
+  }
+
+  .monitoring-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .table-header-cell {
+    padding: 8px !important;
+    text-align: left;
+    word-wrap: break-word;
+
+    &:first-child {
+      width: 10vw;
+    }
+
+    &:not(:first-child) {
+      width: $base-cell-size;
+    }
+
+    .faculty-header {
+      font-size: 1em;
+      display: block;
+    }
+  }
+
+  .pie-chart-cell,
+  .square-cell {
+    @include cell-scaling;
+    padding: 5px;
+  }
+
+  .pie-chart-container,
+  .square-container {
+    @include cell-scaling;
+    margin: 0 auto;
+  }
+
+  h5.accordion-header {
+    cursor: pointer;
+    word-wrap: break-word;
+    hyphens: auto;
+    margin: 15px 0 !important;
+    font-size: 1.2em !important;
+    line-height: 1.2;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .question-text {
+    padding: 5px 0;
+    font-size: 1em;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+}

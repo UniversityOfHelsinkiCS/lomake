@@ -149,6 +149,7 @@ $QUESTION_COUNT: 6;
 }
 
 .table-container {
+  justify-content: center;
   @include container-basics;
   flex-direction: column;
   margin-right: auto;

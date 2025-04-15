@@ -2,11 +2,9 @@
  * Insert common items here
  */
 import capitalize from 'lodash/capitalize'
-
-import toscalogoColor from 'Assets/toscalogo_color.svg'
-import toscalogoGrayscale from 'Assets/toscalogo_grayscale.svg'
-import hy from 'Assets/hy_logo.svg'
-import { formKeys, facultyList } from '../../config/data'
+import toscalogoColor from '../assets/toscalogo_color.svg'
+import toscalogoGrayscale from '../assets/toscalogo_grayscale.svg'
+import hy from '../assets/hy_logo.svg'
 
 import {
   yearlyQuestions,
@@ -14,7 +12,10 @@ import {
   facultyEvaluationQuestions as evaluationFacultyQuestions,
   degreeReformIndividualQuestions as degreeQuestionData,
   metareviewQuestions,
+  facultyMonitoringQuestions,
 } from '../questionData'
+
+import { formKeys, facultyList } from '../../config/data'
 
 export const images = {
   toska_color: toscalogoColor,
@@ -76,7 +77,7 @@ const getUserGroupSortValue = ({ specialGroup }) => {
 export const sortedItems = (items, sorter, lang) => {
   if (!items) return []
   if (!sorter) return items
-  const sorted = items.sort((a, b) => {
+  const sorted = [...items].sort((a, b) => {
     if (sorter === 'name') {
       const aName = a.name[lang] ? a.name[lang] : a.name.en
       const bName = b.name[lang] ? b.name[lang] : b.name.en
@@ -147,6 +148,8 @@ export const modifiedQuestions = (lang, form) => {
     questions = evaluationFacultyQuestions
   } else if (form === formKeys.META_EVALUATION) {
     questions = metareviewQuestions
+  } else if (form === formKeys.FACULTY_MONITORING) {
+    questions = facultyMonitoringQuestions
   }
 
   questions.forEach(question => {
@@ -303,7 +306,7 @@ export const filteredProgrammes = (lang, usersProgrammes, picked, debouncedFilte
     return picked.includes(p)
   })
 
-  return { chosen: filteredByPick, all: filteredBySchool }
+  return { chosen: [...filteredByPick], all: [...filteredBySchool] }
 }
 
 export const programmeNameByKey = (studyProgrammes, programmeWithKey, lang) => {
@@ -424,6 +427,51 @@ export const getActionsAnswer = (data, id, t) => {
   return null
 }
 
+export const getFacultyMonitoringAnswer = (data, questionId, t) => {
+  let answer = ''
+  let color = 'emptyAnswer'
+
+  const lightHistoryKey = `${questionId}_lights_history`
+  if (data[lightHistoryKey] && data[lightHistoryKey].length > 0) {
+    const latestLight = data[lightHistoryKey][data[lightHistoryKey].length - 1]
+    color = latestLight.color
+  }
+
+  const actionTextKey = `${questionId}_actions_text`
+  if (data[actionTextKey]) {
+    // eslint-disable-next-line no-useless-concat
+    answer = `${cleanText(data[actionTextKey])}\n` + `\n`
+  }
+
+  const degreeRadioKey = `${questionId}_degree_radio`
+  if (data[degreeRadioKey]) {
+    answer += `${t('facultyTracking:selectDegree')}: ${t(`facultyTracking:${data[degreeRadioKey]}`)} \n`
+  }
+
+  const responsibleEntitiesKey = `${questionId}_responsible_entities_text`
+  if (data[responsibleEntitiesKey]) {
+    answer += `${t('formView:facultyEntitiesLabel')}: ${data[responsibleEntitiesKey]} \n`
+  }
+
+  const contactPersonKey = `${questionId}_contact_person_text`
+  if (data[contactPersonKey]) {
+    answer += `${t('formView:facultyContactLabel')}: ${data[contactPersonKey]} \n`
+  }
+
+  const resourcesKey = `${questionId}_resources_text`
+  if (data[resourcesKey]) {
+    answer += `${t('formView:facultyResourcesLabel')}: ${data[resourcesKey]} \n`
+  }
+
+  const startDateKey = `${questionId}_start_date_text`
+  const endDateKey = `${questionId}_end_date_text`
+  if (data[startDateKey] && data[endDateKey]) {
+    answer += ` ${t('formView:facultyStartLabel')}: ${new Date(data[startDateKey]).toLocaleDateString()} \n ${t('formView:facultyEndLabel')}: ${new Date(data[endDateKey]).toLocaleDateString()}`
+  }
+
+  return { answer, color }
+}
+
 export const allYears = oldAnswers => {
   let years = oldAnswers && oldAnswers.years ? [...oldAnswers.years] : []
   const currentYear = new Date().getFullYear()
@@ -439,6 +487,10 @@ export const answersByYear = ({ year, tempAnswers, oldAnswers, draftYear, deadli
       return tempAnswers.data
     }
     return tempAnswers?.data.filter(a => a.year === year).filter(a => !form || a.form === form)
+  }
+
+  if (form === formKeys.FACULTY_MONITORING) {
+    return tempAnswers.data.filter(a => a.year === year).filter(a => !form || a.form === form)
   }
 
   // if viewing past years' answers
@@ -614,6 +666,9 @@ export const getFormType = form => {
   if (form === formKeys.META_EVALUATION) {
     return 'evaluation-committee'
   }
+  if (form === formKeys.FACULTY_MONITORING) {
+    return 'faculty-monitoring'
+  }
 
   return 'yearly'
 }
@@ -708,11 +763,10 @@ export const answersByQuestions = ({
   if (!selectedAnswers) {
     return {}
   }
-
   const answerMap = new Map()
-
-  const chosenKeys = chosenProgrammes.map(p => p.key || (form === formKeys.EVALUATION_FACULTIES && p.code))
-
+  const chosenKeys = chosenProgrammes.map(
+    p => p.key || ((form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) && p.code),
+  )
   if (!selectedAnswers) return new Map()
   selectedAnswers.forEach(programme => {
     const key = programme.programme
@@ -725,25 +779,30 @@ export const answersByQuestions = ({
           const masterColor = data[question.color[1]] ? data[question.color[1]] : 'emptyAnswer'
           const doctoralColor = data[question.color[2]] ? data[question.color[2]] : 'emptyAnswer'
           color = { bachelor: bachelorColor, master: masterColor, doctoral: doctoralColor }
+        } else if (form === formKeys.FACULTY_MONITORING) {
+          const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
+          color = facultyMonitoringAnswer.color
         } else {
           color = data[question.color] ? data[question.color] : 'emptyAnswer'
         }
         let answersByProgramme = answerMap.get(question.id) ? answerMap.get(question.id) : []
         let name = programmeNameByKey(usersProgrammes, programme, lang)
-
-        if (form === formKeys.EVALUATION_FACULTIES) {
+        if (form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING) {
           name = facultyList.find(f => f.code === programme.programme).name[lang]
         }
         let answer = ''
-        if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
-        else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
-        else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
-        else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
-        else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
-
         let comment = ''
-        if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
-
+        if (form === formKeys.FACULTY_MONITORING) {
+          const facultyMonitoringAnswer = getFacultyMonitoringAnswer(data, question.id.replace('_text', ''), t)
+          answer = facultyMonitoringAnswer.answer
+        } else {
+          if (question.id.startsWith('measures')) answer = getMeasuresAnswer(data, question.id)
+          else if (question.id.endsWith('selection')) answer = getSelectionAnswer(data, question, lang)
+          else if (question.id.endsWith('_order')) answer = getOrderAnswer(data, question, lang)
+          else if (question.id.includes('actions')) answer = getActionsAnswer(data, question.id, t)
+          else if (!question.id.startsWith('meta')) answer = cleanText(data[question.id])
+          if (form === formKeys.META_EVALUATION) comment = cleanText(data[question.comment])
+        }
         answersByProgramme = [...answersByProgramme, { name, key, color, answer, comment }]
         answerMap.set(question.id, answersByProgramme)
       })
@@ -752,18 +811,37 @@ export const answersByQuestions = ({
   // if the programme has not yet been answered at all, it won't appear in the selectedAnswers.
   // So empty answers need to be added.
   answerMap.forEach((value, key) => {
-    const answeredProgrammes = value.map(p => (form === formKeys.EVALUATION_FACULTIES ? p.code : p.key))
+    const answeredProgrammes = value.map(p =>
+      form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key,
+    )
     const programmesMissing = chosenProgrammes.filter(p => !answeredProgrammes.includes(p.key))
     if (programmesMissing) {
       programmesMissing.forEach(p => {
         const earlierAnswers = answerMap.get(key)
-        const programmeCode = form === formKeys.EVALUATION_FACULTIES ? p.code : p.key
+        const programmeCode =
+          form === formKeys.EVALUATION_FACULTIES || form === formKeys.FACULTY_MONITORING ? p.code : p.key
         answerMap.set(key, [...earlierAnswers, { name: p.name[lang], key: programmeCode, color: 'emptyAnswer' }])
       })
     }
   })
-
   return answerMap
 }
 
-export * from '@root/config/common'
+export const filterUserProgrammes = (usersProgrammes, lang, debouncedFilter) => {
+  return usersProgrammes.filter(
+    prog =>
+      prog.name[lang].toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.key.toLowerCase().includes(debouncedFilter.toLowerCase()) ||
+      prog.primaryFaculty?.code?.toLowerCase().includes(debouncedFilter.toLowerCase()),
+  )
+}
+
+export const getLabel = question => {
+  if (!question) return ''
+  const index = question.labelIndex < 10 ? `0${question.labelIndex}` : question.labelIndex
+  return `${index}${question.label}`
+}
+
+export const kludge = true
+
+export * from '../../config/common'
