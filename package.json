@@ -24,8 +24,8 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.4",
-    "@mui/material": "^6.4.1",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
     "@reduxjs/toolkit": "^2.5.0",
     "@sentry/browser": "8.55.0",
     "@sentry/node": "8.55.0",
