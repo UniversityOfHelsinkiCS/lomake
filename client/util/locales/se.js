@@ -41,7 +41,7 @@ export default {
     find: 'Sök',
     facultymonitoringText: 'Svar finns tillgängliga / Sista dagen för att fylla i formuläret var 30.10.2024',
 
-    noData: 'Ingen data tillgänglig för dessa urval',
+    noData: 'Inga program eller svar hittades. Försök att ändra din sökning.',
     noDataForFaculty: 'Ingen data tillgänglig för vald fakultet',
     selectAll: 'Välj alla',
     clearSelection: 'Rensa urval',
@@ -126,6 +126,7 @@ export default {
     overview: 'Översikt',
     startDateEndDateError: 'Starttiden kan inte vara senare än det beräknade sluttiden',
     confirmRemoveLight: 'Är du säker på att du vill ta bort?',
+    archive: 'Arkiv',
   },
 
   aboutPage: {
@@ -143,7 +144,6 @@ export default {
       'Du kan läsa ditt egna och andra utbildningsprograms skriftliga dokumentationer. Med hjälp av rapporteringsverktygen kan du jämföra data från ditt eget utbildningsprogram med data från andra program. Du kan även skapa grafer utifrån datan.',
     contactInfo: 'Frågor? Kontakta ospa@helsinki.fi',
     broughtBy: 'Förverkligad av',
-    archive: 'Arkiv',
   },
 
   landingPage: {
@@ -159,18 +159,17 @@ export default {
     ],
     degreeReformTitle: 'Utvärdering av utbildningsreformen (Stora hjulet 2015)',
     degreeReformSubtitles: ['Utbildningens nuvarande tillstånd', 'Enkäten och sammanfattningar 2024'],
-    archive: 'Här kan du se svaren från åren 2019-2024',
     yearly: 'Öppnas 15.4.2025',
     toArchive: 'Gå till arkivet',
     toYearly: 'Gå till årlig uppföljning',
     yearlyCardTitle: 'Årlig uppföljning 2025',
     yearlyCardContent:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
+      'Alla kandidat- och magisterprogram kommer att testa den reviderade årliga uppföljningen under våren 2025. Blanketten öppnas den 15.4.2025.',
     archiveCardTitle: 'Arkiv (2019-2024)',
-    archiveCardHeader: 'Täältä löydät:',
-    archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
-    archiveList2: '2023-2024 katselmuksen tulokset',
-    archiveList3: 'Koulutusuudistuksen Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
+    archiveCardHeader: 'Akrivet innehåller:',
+    archiveList1: 'Årlig uppföljning för 2019 - 2023 ',
+    archiveList2: 'Resultat av översynen 2023-2024',
+    archiveList3: 'Utvärdering av utbildningsreformen Stora hjulet 2023 (= Utbildningens nuvarande tillstånd)',
     feedback: 'Återkoppling om tilannekuvalomake?',
   },
 
@@ -603,37 +602,37 @@ export default {
   keyData: {
     title: 'Utbildnigsprogrammens vitalitet vid Helsingfors universitet',
     info1:
-      'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
+      '<strong>Utvärderingsområden</strong> som beskriver programmets vitalitet är: <i>a) attraktivitet, b) smidiga studier och graduering, c) feedback och sysselsättning, d) resursanvändning.</i> Utvärderingsområdena är desamma för kandidat-, magister- och doktorandprogram.',
     info2:
-      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
-    info3: 'Värimerkintöjen selitteet ovat: ',
-    darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
-    lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
-    yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
-    redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',
-    pilotHeader: 'Kevään 2025 pilotti',
+      'Inom varje utvärderingsområde används tre till fem <strong>nyckeltal</strong>, som definieras separat för olika examensnivåer. Varje nyckeltal tilldelas en färgkod baserat på individuellt överenskomna tröskelvärden. Färgkoden för hela utvärderingsområdet bestäms av nyckeltalens färgkod.',
+    info3: 'Förklaringarna till färgkoderna är följande: ',
+    darkGreenInfo: 'Grön - utbildningsprogrammets status är utmärkt',
+    lightGreenInfo: 'Ljusgrön - utbildningsprogrammets status är god',
+    yellowInfo: 'Gul - utbildningsprogrammet står inför vissa utmaningar',
+    redInfo: 'Röd - utbildningsprogrammet har utmaningar som behöver åtgärdas',
+    pilotHeader: 'Spring 2025 pilot',
     pilotInfo1:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
+      'Den förnyade årliga uppföljningen av utbildningsprogram pilottestas våren 2025 i alla kandidat- och magisterprogram. Doktorandprogrammen deltar ännu inte i pilotfasen.',
     pilotInfo2:
-      '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
+      '15.4-30.5.2025 Utbildningsprogrammens ledningsgrupper går igenom sina egna utvärderingsområden och utarbetar sina utvecklingsplaner. De utbildningsprogram som inleder interventionsförfarandet diskuterar ärendet med prodekanen senast den 30 oktober 2025.',
     notUsed2025: 'Ej använd 2025',
     keyFigure: 'Utvärderingsområden och nyckeltal',
     keyFigureInfo: 'Nyckeltalen för kandidat- och magisterprogrammen är:  ',
 
     vetovoimaisuus: 'Attraktionskraft',
     vetovoimaisuusInfo:
-      'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek.',
+      'Attraktivitet beskriver förmågan att attrahera sökande studenter och hur man fyller platserna på programmet och attraherar de mest lämpade studenterna till programmet. Fyllnadsgraden och antalet sökande speglar också programmets storlek. Nyckeltal hämtas från föregående år',
     lapivirtaus: 'Smidiga studier och utexaminering',
     lapivirtausInfo:
-      'Genomströmning gäller flödet av studier, både enligt Undervisnings- och kulturministeriets finansieringsmodell och, i allmänhet, på antalet examina och studiernas progression genom programmets olika stadier. Antalet examina och slutförandet av examina inom den målsatta tiden indikerar att det inte finns några hinder för studier i programmet. Antalet examina är en indikator på programmets storlek.',
+      'Genomströmning gäller flödet av studier, både enligt Undervisnings- och kulturministeriets finansieringsmodell och, i allmänhet, på antalet examina och studiernas progression genom programmets olika stadier. Antalet examina och slutförandet av examina inom den målsatta tiden indikerar att det inte finns några hinder för studier i programmet. Antalet examina är en indikator på programmets storlek. Nyckeltal hämtas från föregående år.',
     opiskelijapalaute: 'Feedback och sysselsättning',
     opiskelijapalauteInfo:
-      'Studentrespons används för att undersöka programmets feedbackkultur och den övergripande nivån på feedbackaktiviteten, samt studenternas tillfredsställelse med sina studier i programmet. Studenternas återkoppling återspeglar effektiviteten i programmets läroplan, vägledning och leverans.  Återkoppling om anställningsbarhet återspeglar programmets relevans för samhället.',
+      'Studentrespons används för att undersöka programmets feedbackkultur och den övergripande nivån på feedbackaktiviteten, samt studenternas tillfredsställelse med sina studier i programmet. Studenternas återkoppling återspeglar effektiviteten i programmets läroplan, vägledning och leverans. Återkoppling om anställningsbarhet återspeglar programmets relevans för samhället. Nyckeltal hämtas från föregående år.',
     resurssit: 'Resursanvändning',
     resurssitInfo:
-      'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven.',
-    qualityControl: 'Kvalitetskontrollverktyg',
-    supportProcess: 'Procedur för handling',
+      'Utbildningsprogrammets resurser gäller både mängden av undervisningsresurser som är tillgängliga för programmet och resursbehoven. Nyckeltal hämtas från föregående år.',
+    qualityControl: 'Kvalitetsstyrningsverktyg',
+    supportProcess: 'Interventionsförfarande',
     actions: 'Utvecklingsplan',
     moveToActions: 'Flytta till utvecklingsplan',
     someoneElseEditing: 'är redigering',
@@ -647,6 +646,7 @@ export default {
     saveMeasure: 'Spara utvecklingsplanen',
     Measure: 'Utvecklingsplan för utbildningsprogrammet',
     noMeasure: 'Inget svar',
+    noData: 'Ingen data',
     missingMeasure: 'Ingen utvecklingsplan!',
     colormeterError: 'Fel i uppskattningen av trafikljusskjutmätaren',
     colormeterNoDisplay: 'Ingen trafikljusberäkning visas för detta nyckeltal.',
@@ -658,10 +658,15 @@ export default {
     value: 'Värde',
     trafficLight: 'Trafikljus',
     actionsInfo1:
-      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+      'Om ett av <strong>utvärderingsområdena</strong> är markerat med rött, inleder utbildningsprogrammet till interventionsförfarandet.',
     actionsInfo2:
-      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+      'Ledningsgrupper för utbildningsprogram som är i interventionsförfarande utarbetar en utvecklingsplan, vars sista inlämningsdag meddelas av prodekan. Utvecklingsplanen måste ta hänsyn till alla utvärderingsområden där utbildningsprogrammet är markerat med rött.',
     actionsInfo3:
-      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+      'Prodekanen kan också meddela att samtliga utbildningsprogram vid fakulteten ska upprätta en utvecklingsplan oavsett färgkod på utvärderingsområdet.',
+    seeMore: 'Klicka för att se mer',
+    openingSoon: 'Under förberedelse, öppnar i slutet av maj',
+    feedbackForm: 'Ge feedback för att vidareutveckla den årliga uppföljningen',
+    feedbackFormButton: 'Gå till feedbackformuläret',
+    doctoralTooltip: 'Doktorandprogram som inte ingår i pilotfasen 2025',
   },
 }

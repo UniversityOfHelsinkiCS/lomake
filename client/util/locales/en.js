@@ -40,7 +40,7 @@ export default {
     facultyFilter: 'Search for faculties',
     find: 'Find',
 
-    noData: 'No data available for these choices',
+    noData: 'No programmes or answers were found. Try changing your search.',
     noDataForFaculty: 'No data available for this faculty',
     selectAll: 'Select all',
     clearSelection: 'Clear selection',
@@ -128,6 +128,7 @@ export default {
     modifyLights: 'Modify lights',
     confirmRemoveLight: 'Are you sure you want to delete?',
     facultymonitoringText: 'The answers are available/ The deadline for filling in the form was October 30, 2024',
+    archive: 'Archive',
   },
 
   aboutPage: {
@@ -146,7 +147,6 @@ export default {
       "You can read the written documentation done by other programmes. With the reporting and comparison tools, you can also compare your assessments with the other programmes' assessments.",
     contactInfo: 'Questions? Contact ospa@helsinki.fi',
     broughtBy: 'Brought to you by:',
-    archive: 'Archive',
   },
 
   landingPage: {
@@ -161,18 +161,16 @@ export default {
     ],
     degreeReformTitle: 'Evaluation of the education reform (Big Wheel 2015)',
     degreeReformSubtitles: ['Current state of education survey and summaries 2024'],
-    archive: 'Here you can see responses from 2019-2024',
     yearly: 'Opens on 15.4.2025',
     toArchive: 'Go to archive',
     toYearly: 'Go to annual follow-up',
     yearlyCardTitle: 'Annual follow-up 2025',
-    yearlyCardContent:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Lomake avautuu 15.4.2025',
+    yearlyCardContent: `All Bachelor's and Master's programmes will pilot the revised annual follow-up in spring 2025. The form will open on 15.4.2025. `,
     archiveCardTitle: 'Archive (2019-2024)',
-    archiveCardHeader: 'Täältä löydät:',
-    archiveList1: 'Vuosien 2019 - 2023 vuosiseurannat',
-    archiveList2: '2023-2024 katselmuksen tulokset',
-    archiveList3: 'Koulutusuudistuksen Iso pyörä arviointi 2023 (=koulutuksen nykytila)',
+    archiveCardHeader: 'The archive contains:',
+    archiveList1: 'Annual follow-up for 2019-2023',
+    archiveList2: 'Results of the review in 2023-2024',
+    archiveList3: 'Evaluation of the degree reform Big wheel in 2023 (= Current state of education)',
     feedback: 'Feedback on tilannekuvalomake?',
   },
 
@@ -568,41 +566,37 @@ export default {
     both: `Bachelor's and Master's programmes`,
     selectDegree: 'What is the degree of impact',
   },
-
   keyData: {
     title: 'The vitality of degree programmes at the University of Helsinki',
-    info1:
-      'Koulutusohjelman elinvoimaisuutta kuvaavat <strong>arviointialueet</strong> ovat: <i>a) vetovoimaisuus, b) opintojen sujuvuus ja valmistuminen, c) palaute ja työllistyminen sekä d) resurssien käyttö.</i> Arviointialueet ovat samat kandi-, maisteri- ja tohtoriohjelmille.',
+    info1: `<strong>Evaluation areas</strong> describing the programme's vitality include: <i>a) traction, b) study progress and graduation, c) feedback and employment, and d) use of resources.</i> The evaluation areas are the same for bachelor's, master's and doctoral programmes.`,
     info2:
-      'Kullakin arviointialueella on käytössä 3-5 <strong>avainlukua</strong>, jotka on määritelty erikseen eri tutkintotasoille. Avainluvuille on sovittu raja-arvot, joiden perusteella koulutusohjelma saa tilannettaan kuvaavan värimerkinnän. Koko arviointialueen värimerkintä määräytyy avainlukujen värimerkintöjen perusteella',
-    info3: 'Värimerkintöjen selitteet ovat: ',
-    darkGreenInfo: 'Vihreä – koulutusohjelman tilanne on erinomainen',
-    lightGreenInfo: 'Vaaleanvihreä – koulutusohjelman tilanne on hyvä',
-    yellowInfo: 'Keltainen – koulutusohjelman tilanteessa on havaittavissa joitakin haasteita',
-    redInfo: 'Punainen – koulutusohjelman tilanteessa on ratkaisuja vaativia haasteita',
-    pilotHeader: 'Kevään 2025 pilotti',
-    pilotInfo1:
-      'Koulutusohjelmien uudistettua vuosiseurantaa pilotoidaan keväällä 2025 kaikissa kandi- ja maisteriohjelmissa. Tohtoriohjelmat eivät ole mukana vielä pilotointivaiheessa.',
+      'Each evaluation area uses three to five <strong>key figures</strong>, which are separately defined for different degree levels. Each key figure is assigned a colour code based on individually agreed thresholds. The colour code of the whole evaluation area is determined by the colour code of the key figures.',
+    info3: 'The explanations of the colour codes are: ',
+    darkGreenInfo: 'Green - the status of the degree programme is excellent',
+    lightGreenInfo: 'Light green - the status of the degree programme is good',
+    yellowInfo: 'Yellow - the degree programme is facing some challenges',
+    redInfo: 'Red - the degree programme presents challenges that need to be addressed',
+    pilotHeader: 'Spring 2025 pilot',
+    pilotInfo1: `The redesigned annual follow-up of degree programmes will be piloted in spring 2025 in all bachelor's and master's programmes. Doctoral programmes are not yet included in the pilot stage.`,
     pilotInfo2:
-      '15.4.-30.5.2025 Koulutusohjelmien johtoryhmät käyvät läpi omat arviointialueensa ja laativat kehittämissuunnitelmansa. Ne koulutusohjelmat, joissa käynnistyy toimenpidemenettely, käyvät keskustelun opetusvaradekaanin kanssa 30.10.2025 mennessä.',
-    notUsed2025: 'Not applicable in 2025',
+      'From 15 April to 30 May 2025, degree programme steering groups will review their evaluation areas and draw up their development plans. The degree programmes that initiate the intervention procedure will discuss the matter with the Vice-Dean by 30 October 2025.',
+    notUsed2025: 'Not used in 2025',
     keyFigure: 'Evaluation areas and Key figures',
     keyFigureInfo: `The key figures for bachelor's and master's programmes are: `,
-
-    vetovoimaisuus: 'Attractiveness',
+    vetovoimaisuus: 'Traction',
     vetovoimaisuusInfo:
-      'The attractiveness of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme.',
-    lapivirtaus: 'Smooth progress of studies and graduation',
+      'The traction of a programme is a measure of the point of view of applicants and of the fact that the programme is filled and that the most suitable students enter the programme. The filling of places and the number of applicants also reflect the size of the programme. Key figures are collected from the previous year.',
+    lapivirtaus: 'Study progress',
     lapivirtausInfo:
-      'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme.',
+      'The rate of progression looks at the flow of studies, both as defined by the Ministry of Education and Culture funding model and, in general, at the number of degrees and the progression of studies through the different stages of the degree programme. The number of degrees and the completion of degrees within the target time indicate that there are no obstacles to study in the degree programme. The number of degrees is an indicator of the size of the degree programme. Key figures are collected from the previous year.',
     opiskelijapalaute: 'Feedback and employment',
     opiskelijapalauteInfo:
-      "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society.",
+      "Student feedback is used to examine the degree programme's feedback culture and the overall level of feedback activity, as well as students' satisfaction with their studies in the degree programme. Student feedback reflects the effectiveness of the programme's curriculum, guidance and delivery.  Feedback on employability reflects the relevance of the degree programme to society. Key figures are collected from the previous year.",
     resurssit: 'Use of resources',
     resurssitInfo:
-      'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme.',
-    qualityControl: 'Quality control tools',
-    supportProcess: 'Procedure of action',
+      'The resources of the degree programme are measured in terms of the teaching resources available to the degree programme. Key figures are collected from the previous year.',
+    qualityControl: 'Quality management tools',
+    supportProcess: 'Intervention procedure',
     actions: 'Development plan',
     moveToActions: 'Continue to development plan',
     someoneElseEditing: 'is writing',
@@ -616,9 +610,10 @@ export default {
     saveMeasure: 'Save the development plan',
     Measure: 'Development plan of the programme',
     noMeasure: 'No response',
+    noData: 'No data',
     missingMeasure: 'Development plan is missing!',
     colormeterError: 'Error in the estimation of the traffic light sliding meter',
-    colorMeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
+    colormeterNoDisplay: 'No traffic light estimate is displayed for this key figure.',
     noHistory: 'No previous history',
     unsavedChangesWarning:
       'You have unsaved changes. By pressing the "OK" button, the changes will be saved, "Cancel" you can continue editing.',
@@ -627,10 +622,15 @@ export default {
     value: 'Value',
     trafficLight: 'Traffic light',
     actionsInfo1:
-      'Mikäli koulutusohjelman jokin <strong>arviointialue</strong> on merkitty punaisella värillä, koulutusohjelmalle käynnistyy toimenpidemenettely.',
+      'If one of the <strong>evaluation areas</strong> is marked with a red colour code, the degree programme will initiate an intervention procedure.',
     actionsInfo2:
-      'Toimenpidemenettelyssä olevan koulutusohjelman johtoryhmä laatii kehittämissuunnitelman, jonka palautusajankohdan opetusvaradekaani ilmoittaa. Kehittämissuunnitelmassa tulee huomioida kaikki arviointialueet, joissa koulutusohjelman värimerkintä on punainen.',
+      'The steering group of the degree programme under intervention prosedure draws up a development plan. The Vice-Dean will indicate the date by which the plan must be ready. The development plan must take into account all evaluation areas where the colour code of the degree programme is red.',
     actionsInfo3:
-      'Opetusvaradekaani voi myös ilmoittaa, että kaikki tiedekunnan koulutusohjelmat laativat kehittämissuunnitelman arviointialueen värimerkinnästä riippumatta.',
+      'The Vice-Dean may also announce that all degree programmes of the Faculty will draw up a development plan regardless of the colour code of the evaluation area.',
+    seeMore: 'Click to see more',
+    openingSoon: 'Under preparation, will open by the end of May',
+    feedbackForm: 'Give feedback for further development of the annual follow-up',
+    feedbackFormButton: 'Go to feedback form',
+    doctoralTooltip: 'Doctoral programmes are not included in the pilot phase 2025',
   },
 }

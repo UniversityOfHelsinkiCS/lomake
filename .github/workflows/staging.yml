@@ -36,7 +36,8 @@ jobs:
             form,
             formNotifications,
             happypath,
-            IAMpermissions,
+            IAMpermissions1,
+            IAMpermissions2,
             management,
             misc,
             ospa,
@@ -50,6 +51,7 @@ jobs:
             facultymonitoringoverview,
             textfield,
             overview,
+            notificationbadge,
           ]
     name: Run tests
     runs-on: ubuntu-latest

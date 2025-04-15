@@ -167,9 +167,9 @@ Cypress.Commands.add('closeDeadline', (draftYear, formName) => {
 
 Cypress.Commands.add('typeInTextField', (id, textToBeTyped) => {
   const attempt = Cypress.currentRetry + 1
-  cy.get(`[data-cy=edit-${id}]`)
+  cy.get(`[data-cy="edit-${id}"]`)
     .click()
     .wait(500 * attempt)
 
-  cy.get(`[data-cy=editor-${id}]`).type(textToBeTyped, { delay: 0 })
+  cy.get(`[data-cy="editor-${id}"]`).type(textToBeTyped, { delay: 0 })
 })

@@ -64,6 +64,7 @@ export const TableRow = ({ children, isHeader = false }: { children: React.React
 export const TableCell = ({
   children,
   itemAlign = 'center',
+  isHeader = false,
   disabled = false,
   onClick,
   hoverEffect = false,
@@ -71,6 +72,7 @@ export const TableCell = ({
 }: {
   children?: React.ReactNode
   itemAlign?: 'left' | 'center' | 'right'
+  isHeader?: boolean
   disabled?: boolean
   onClick?: () => void
   hoverEffect?: boolean
@@ -94,7 +96,12 @@ export const TableCell = ({
         height: '100%',
         cursor: hoverEffect || onClick ? 'pointer' : 'default',
         transition: 'background-color 0.2s',
-        backgroundColor: (hoverEffect || onClick) && isHovering ? 'rgba(0,0,0,0.06)' : 'transparent',
+        backgroundColor:
+          !isHeader && disabled
+            ? 'rgba(0,0,0,0.06)'
+            : (hoverEffect || onClick) && isHovering
+              ? 'rgba(0,0,0,0.06)'
+              : 'transparent',
       }}
       {...rest}
     >

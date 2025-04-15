@@ -108,6 +108,7 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
+    dispatch(getReports({ year }))
   }, [dataFromRedux])
 
   useEffect(() => {
@@ -156,7 +157,6 @@ const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => 
     setHasLock(false)
     dispatch(releaseFieldLocally(id))
     dispatch(updateReportHttp({ room, year, id, content }))
-    dispatch(getReports({ year })) // temporary solution – todo: fix this
   }
 
   const askForLock = () => {
