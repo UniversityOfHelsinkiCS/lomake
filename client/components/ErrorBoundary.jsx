@@ -1,7 +1,7 @@
-import { Button } from 'semantic-ui-react'
-import { Sentry } from '../util/sentry'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
+import { Sentry } from '../util/sentry'
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
