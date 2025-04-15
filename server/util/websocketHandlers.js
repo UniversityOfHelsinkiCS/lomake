@@ -96,6 +96,10 @@ const getCurrentUser = async socket => {
 
 const joinRoom = async (socket, room, form, io) => {
   try {
+    const match = [/^\w{4}_\w{3}$/, /^T\d{6}$/].some(pattern => pattern.test(room))
+    const num = /^([1-9]|10)$/.test(form)
+    if (!match || !num) throw new Error(`Invalid room format or form: ${room}, ${form}`)
+    
     const currentUser = await getCurrentUser(socket)
     if (
       isAdmin(currentUser) ||
