@@ -8,11 +8,7 @@ import { cypressUids, setHeaders, possibleUsers } from '../config/mockHeaders'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '/theme'
 import './assets/custom.scss'
-
-import '@fontsource/lato/300.css'
-import '@fontsource/lato/400.css'
-import '@fontsource/lato/700.css'
-import '@fontsource/lato/300-italic.css'
+import './assets/fonts/fonts.css'
 
 import store from './util/store'
 import { basePath } from '../config/common'

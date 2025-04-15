@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReport, getReports } from '../../../util/redux/reportsSlicer'
+import { getReport } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
 
@@ -32,7 +32,6 @@ const ProgrammeView = () => {
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
-  const currentUser = useSelector((state: RootState) => state.currentUser)
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
