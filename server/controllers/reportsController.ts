@@ -105,23 +105,6 @@ const validateOperation = async (req: Request): Promise<ValidateOperationRespons
   return resultObject
 }
 
-const getReports = async (req: Request, res: Response): Promise<ReportResponse> => {
-  try {
-    const { studyprogrammeKey } = req.params
-
-    const reports = await Report.findAll({
-      where: {
-        studyprogrammeKey,
-      },
-    })
-
-    return res.status(200).json(reports)
-  } catch (error) {
-    logger.error(`Database error: ${error}`)
-    return res.status(500).json({ error: 'Database error' })
-  }
-}
-
 const getReport = async (req: Request, res: Response): Promise<ReportResponse> => {
   try {
     const result = await validateOperation(req)
@@ -131,6 +114,30 @@ const getReport = async (req: Request, res: Response): Promise<ReportResponse> =
     return res.status(200).json(result.report.data)
   } catch (error) {
     logger.error(`Database error: ${error}`)
+  }
+}
+
+const getReports = async (req: Request, res: Response): Promise<ReportResponse> => {
+  try {
+    const { year } = req.params
+
+    if (!year) {
+      return res.status(400).json({ error: 'Year param is required' })
+    }
+
+    const reports = await Report.findAll({
+      where: { year },
+    })
+
+    const reportsByProgramme: Record<string, ReportData> = {}
+    reports.forEach(report => {
+      reportsByProgramme[report.studyprogrammeKey] = report.data
+    })
+
+    return res.status(200).json(reportsByProgramme)
+  } catch (error) {
+    logger.error(`Database error: ${error}`)
+    return res.status(500).json({ error: 'Database error' })
   }
 }
 

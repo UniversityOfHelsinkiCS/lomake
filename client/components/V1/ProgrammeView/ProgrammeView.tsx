@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert, Box, CircularProgress, IconButton, Link, Tabs, Tab, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { useParams } from 'react-router'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { getReport } from '../../../util/redux/reportsSlicer'
+import { getReport, getReports } from '../../../util/redux/reportsSlicer'
 import { wsJoinRoom, wsLeaveRoom } from '../../../util/redux/websocketReducer.js'
 import { setViewOnly } from '../../../util/redux/formReducer'
 
@@ -15,20 +15,24 @@ import KeyDataCard from '../Generic/KeyDataCardComponent'
 import TextFieldComponent from '../Generic/TextFieldComponent'
 import NoPermissions from '../../Generic/NoPermissions'
 
-import { ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataCardData } from '@/client/lib/types'
-import { basePath, isAdmin, hasSomeReadAccess } from '@/config/common'
+import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
 import { RootState } from '@/client/util/store'
-import { getKeyDataPoints } from '../Utils/util'
+import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import { KeyDataCardData } from '@/client/lib/types'
+import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
+import { calculateKeyDataColor, getKeyDataPoints } from '../Utils/util'
+import { useNotificationBadge } from '@/client/hooks/useNotificationBadge'
+import NotificationBadge from '../Generic/NotificationBadge'
+import { TrafficLight } from '../Generic/TrafficLightComponent'
 
 const ProgrammeView = () => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const [activeTab, setActiveTab] = useState(0)
   const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
-
+  const currentUser = useSelector((state: RootState) => state.currentUser)
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
@@ -44,7 +48,7 @@ const ProgrammeView = () => {
 
   useEffect(() => {
     document.title = `${t('form')} - ${programmeKey}`
-    dispatch(getReport({ studyprogrammeKey: programmeKey, year: 2025 }))
+    dispatch(getReport({ studyprogrammeKey: programmeKey, year: selectedYear }))
   }, [lang, programmeKey])
 
   useEffect(() => {
@@ -78,6 +82,74 @@ const ProgrammeView = () => {
     setActiveTab(newValue)
   }
 
+  const ActionsBadge = ({
+    programmeData,
+    metadata,
+  }: {
+    programmeData: KeyDataProgramme
+    metadata: KeyDataMetadata[]
+  }) => {
+    const { renderActionsBadge } = useNotificationBadge()
+
+    const actionsBadgeData = useMemo(() => {
+      return renderActionsBadge(programmeData, metadata, true)
+    }, [programmeData, metadata, renderActionsBadge])
+
+    return (
+      actionsBadgeData.showBadge && (
+        <NotificationBadge data-cy={`actionsfieldBadge`} variant={'small'} style={{ marginLeft: 0 }} />
+      )
+    )
+  }
+
+  const TextFieldBadge = ({
+    programmeData,
+    groupKey,
+    metadata,
+    level,
+  }: {
+    programmeData: KeyDataProgramme
+    groupKey: GroupKey
+    metadata: KeyDataMetadata[]
+    level: ProgrammeLevel
+  }) => {
+    const { renderTrafficLightBadge } = useNotificationBadge()
+
+    const color = useMemo(
+      () => calculateKeyDataColor(metadata, programmeData, groupKey, level),
+      [metadata, programmeData, groupKey, level],
+    )
+
+    const shouldRenderBadge = useMemo(() => {
+      return groupKey !== GroupKey.RESURSSIT && renderTrafficLightBadge(programmeData, groupKey, color)
+    }, [programmeData, groupKey, color, renderTrafficLightBadge])
+
+    return shouldRenderBadge && <NotificationBadge data-cy={`textfieldBadge-${groupKey}`} variant={'small'} />
+  }
+
+  const TabBadge = ({
+    programmeData,
+    tab,
+    metadata,
+  }: {
+    programmeData: KeyDataProgramme
+    tab: 'lights' | 'actions'
+    metadata: KeyDataMetadata[]
+  }) => {
+    const { renderTabBadge, renderActionsBadge } = useNotificationBadge()
+
+    const shouldRenderBadge = useMemo(() => {
+      if (tab === 'lights') return renderTabBadge(programmeData, metadata)
+      else return renderActionsBadge(programmeData, metadata).showBadge
+    }, [programmeData, metadata, tab, renderTabBadge, renderActionsBadge])
+
+    return (
+      shouldRenderBadge && (
+        <NotificationBadge data-cy={`tabBadge-${tab}`} variant={'medium'} style={{ marginLeft: '1.5rem' }} />
+      )
+    )
+  }
+
   const KeyDataPoints = getKeyDataPoints(t, programme)
 
   return (
@@ -88,41 +160,90 @@ const ProgrammeView = () => {
         </IconButton>
 
         <Typography variant="h2" style={{ paddingTop: '2rem' }}>
-          {programme.koulutusohjelma[lang as any]} {selectedYear}
+          {programme.koulutusohjelma[lang]} {selectedYear}
         </Typography>
       </div>
 
       <Tabs value={activeTab} onChange={handleTabChange} variant="fullWidth" sx={{ mt: 4 }}>
-        <Tab label={t('keyData:keyFigure')} />
-        <Tab label={t('keyData:actions')} />
+        <Tab
+          label={t('keyData:keyFigure')}
+          icon={<TabBadge tab="lights" programmeData={programme} metadata={metadata} />}
+          iconPosition="end"
+          data-cy="keyDataTab"
+        />
+        <Tab
+          label={t('keyData:actions')}
+          icon={<TabBadge tab="actions" programmeData={programme} metadata={metadata} />}
+          iconPosition="end"
+          data-cy="actionsTab"
+        />
       </Tabs>
 
       {activeTab === 0 && (
         <Box sx={{ mt: 4 }}>
+          {keyData.programme.additionalInfo && keyData.programme.additionalInfo[lang]?.length && (
+            <Alert severity="warning" sx={{ mb: 4 }}>
+              <Typography variant="light">{keyData.programme.additionalInfo[lang]}</Typography>
+            </Alert>
+          )}
           <Alert severity="info">
-            <Typography variant="h5">{t('keyData:title')}</Typography>
-            <br />
-            <Typography variant="light">{t('keyData:info1')}</Typography>
-            <br />
-            <br />
-            <Typography variant="light">{t('keyData:info2')}</Typography>
-            <br />
-            <Typography variant="light">{t('keyData:keyFigureInfo')}</Typography>
-            <Typography variant="light">
-              <ul>
-                <li>{t('keyData:vetovoimaisuus')}</li>
-                <li>{t('keyData:lapivirtaus')}</li>
-                <li>{t('keyData:opiskelijapalaute')}</li>
-                <li>{t('keyData:resurssit')}</li>
-              </ul>
-            </Typography>
-            <Typography variant="light">{t('keyData:criteriaInfo')}</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Typography variant="h5">{t('keyData:title')}</Typography>
+
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Typography variant="light">
+                  <Trans i18nKey={'keyData:info1'} />
+                </Typography>
+                <Typography variant="light">
+                  <Trans i18nKey={'keyData:info2'} />
+                </Typography>
+              </Box>
+
+              <Box>
+                <Typography variant="light">{t('keyData:info3')}</Typography>
+                <ul style={{ listStyleType: 'none', paddingLeft: 4 }}>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                    <TrafficLight color="Tummanvihreä" />
+                    <Typography variant="italic">{t('keyData:darkGreenInfo')}</Typography>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                    <TrafficLight color="Vaaleanvihreä" />
+                    <Typography variant="italic">{t('keyData:lightGreenInfo')}</Typography>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                    <TrafficLight color="Keltainen" />
+                    <Typography variant="italic">{t('keyData:yellowInfo')}</Typography>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <TrafficLight color="Punainen" />
+                    <Typography variant="italic">{t('keyData:redInfo')}</Typography>
+                  </li>
+                </ul>
+              </Box>
+
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Typography variant="h5">{t('keyData:pilotHeader')}</Typography>
+                <Typography variant="light">{t('keyData:pilotInfo1')}</Typography>
+                <Typography variant="light">{t('keyData:pilotInfo2')}</Typography>
+              </Box>
+            </Box>
           </Alert>
 
           {Object.values(KeyDataPoints).map((data: KeyDataCardData) => (
             <Box sx={{ p: '2.5rem 0' }} key={data.groupKey}>
               <KeyDataCard level={level} metadata={metadata} programme={programme} {...data} />
-              {data.textField && <TextFieldComponent id={data.groupKey} type="Comment" />}
+              <Box sx={{ alignItems: 'center' }}>
+                {data.textField && (
+                  <TextFieldComponent id={data.groupKey} type="Comment">
+                    <TextFieldBadge
+                      programmeData={programme}
+                      groupKey={data.groupKey}
+                      metadata={metadata}
+                      level={level}
+                    />
+                  </TextFieldComponent>
+                )}
+              </Box>
             </Box>
           ))}
 
@@ -141,9 +262,17 @@ const ProgrammeView = () => {
       {activeTab === 1 && (
         <Box sx={{ mt: 4 }}>
           <Alert severity="info" sx={{ mb: 4 }}>
-            <Typography variant="light">Toimenpiteiden ohjeistus tulossa...</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Typography variant="light">
+                <Trans i18nKey={'keyData:actionsInfo1'} />
+              </Typography>
+              <Typography variant="light">{t('keyData:actionsInfo2')}</Typography>
+              <Typography variant="light">{t('keyData:actionsInfo3')}</Typography>
+            </Box>
           </Alert>
-          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'} />
+          <TextFieldComponent id={'Toimenpiteet'} type={'Measure'}>
+            <ActionsBadge programmeData={programme} metadata={metadata} />{' '}
+          </TextFieldComponent>
         </Box>
       )}
     </Box>

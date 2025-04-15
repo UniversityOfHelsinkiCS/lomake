@@ -10,6 +10,7 @@ interface ColorMeterProps {
   thresholds: string
   limits: string
   unit: string | undefined
+  year: number
 }
 
 /**
@@ -83,7 +84,7 @@ const checkOrdering = (thresholds: number[]): 'asc' | 'desc' | 'error' => {
   return 'error'
 }
 
-export default function ColorMeterComponent({ display, value, thresholds, limits, unit }: ColorMeterProps) {
+export default function ColorMeterComponent({ display, value, thresholds, limits, unit, year }: ColorMeterProps) {
   const { t } = useTranslation()
 
   const [thresholdValues, setThresholdValues] = useState<string[]>(['', '', ''])
@@ -157,12 +158,23 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
   }
 
   return (
-    <div style={{ padding: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        padding: '3rem 0 2rem 0',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '2rem',
+      }}
+    >
+      {/* Year label */}
+      <Typography variant="lightSmall">{year}</Typography>
+
       {/* Meter container */}
-      <div style={{ width: '60%' }}>
+      <div style={{ width: '65%', position: 'relative' }}>
         {/* Meter pointer */}
         {/* Width of 0 is a trick to make the arrow point exactly to the value regardless of its dimensions */}
-        <div style={{ width: 0, height: 25, position: 'relative', left: `calc(${interpolatedValue}%)` }}>
+        <div style={{ width: 0, height: 25, position: 'absolute', top: -30, left: `calc(${interpolatedValue}%)` }}>
           <ArrowDropDownIcon fontSize="large" sx={{ transform: 'translateX(-50%)', position: 'absolute' }} />
         </div>
 
@@ -177,16 +189,16 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
             position: 'relative',
           }}
         >
-          <Tooltip title={`${t('common:red')} `} arrow>
+          <Tooltip placement="bottom" title={`${t('common:red')} `} arrow>
             <div style={{ backgroundColor: customColors.redLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip title={t('common:yellow')} arrow>
+          <Tooltip placement="bottom" title={t('common:yellow')} arrow>
             <div style={{ backgroundColor: customColors.yellowLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip title={t('common:lightGreen')} arrow>
+          <Tooltip placement="bottom" title={t('common:lightGreen')} arrow>
             <div style={{ backgroundColor: customColors.lightGreenLight, flex: 1 }} />
           </Tooltip>
-          <Tooltip title={t('common:darkGreen')} arrow>
+          <Tooltip placement="bottom" title={t('common:darkGreen')} arrow>
             <div style={{ backgroundColor: customColors.darkGreenLight, flex: 1 }} />
           </Tooltip>
 
@@ -207,9 +219,10 @@ export default function ColorMeterComponent({ display, value, thresholds, limits
             width: '100%',
             display: 'flex',
             justifyContent: 'space-around',
-            marginTop: 5,
             fontSize: '0.8rem',
-            position: 'relative',
+            position: 'absolute',
+            left: 0,
+            top: 30,
           }}
         >
           <Typography

@@ -13,27 +13,8 @@ describe('Textfield tests', () => {
     cy.contains('Deadline settings').click()
     cy.createDeadline(defaultYears[0], 'Vuosiseuranta - UUSI')
     cy.get('[data-cy=form-10-deadline]').contains('14.')
-    cy.visit(`/v1/programmes/KH50_005`)
+    cy.visit(`/v1/programmes/10/KH50_005`)
   })
-
-  // TODO: fix
-  // it('Should lose changes when cancel is pressed on window confirmation and field should be released', () => {
-  //   cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
-  //   const id = `Vetovoimaisuus-Comment`
-  //   cy.typeInTextField(id, 'Test comment to be lost')
-  //   cy.contains('Unsaved changes!').should('exist')
-
-  //   cy.on('window:confirm', () => false)
-  //   cy.get(`[data-cy=box-Resurssit-Comment]`).click()
-  //   cy.get(`[data-cy=box-Vetovoimaisuus-Comment]`).click()
-  //   cy.contains('Test comment to be lost').should('not.exist')
-  //   cy.get(`[data-cy=box-${id}]`).contains('No comment').should('exist')
-
-  //   cy.login(user)
-  //   cy.visit(`/v1/programmes/KH50_005`)
-  //   cy.typeInTextField(id, 'Field is released')
-  //   cy.get(`[data-cy=save-${id}]`).click()
-  // })
 
   it('Should indicate that the field is locked to you', () => {
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
@@ -60,8 +41,6 @@ describe('Textfield tests', () => {
       expect(message).to.equal('You have unsaved changes. By pressing the "OK" button, the changes will be saved.')
       return true
     })
-    // TODO: change to some other comment field, resurssit comment doesnt exist anymore
-    // cy.get(`[data-cy=box-Resurssit-Comment]`).click()
   })
 
   it('User can type to the textfield', () => {
@@ -87,7 +66,7 @@ describe('Textfield tests', () => {
     })
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
     cy.login(user)
-    cy.visit(`/v1/programmes/KH50_005`)
+    cy.visit(`/v1/programmes/10/KH50_005`)
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'Test comment')
     cy.get(`[data-cy=save-${id}]`).click()
@@ -95,14 +74,14 @@ describe('Textfield tests', () => {
 
   it('Textfield is viewonly for user without write rights', () => {
     cy.login('cypressReadingRightsUser')
-    cy.visit(`/v1/programmes/KH50_005`)
+    cy.visit(`/v1/programmes/10/KH50_005`)
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })
 
   it('Page thorws no access for user without read rights', () => {
     cy.login('cypressNoRightsUser')
-    cy.visit(`/v1/programmes/KH50_005`)
+    cy.visit(`/v1/programmes/10/KH50_005`)
     cy.contains(`Bachelor's Programme in Computer Science`).should('not.exist')
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })

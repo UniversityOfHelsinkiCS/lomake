@@ -21,6 +21,7 @@ describe('Degree reform form tests', () => {
   it('Reform form for programmes is accessible through links and loads', () => {
     cy.login(cypressUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -84,6 +85,7 @@ describe('Degree reform form tests', () => {
 
     cy.login(cypressReadingRightsUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click().wait(1000)
     cy.get(`[data-cy=colortable-link-to-KH10_001]`).click()
@@ -95,6 +97,7 @@ describe('Degree reform form tests', () => {
   it('Degree Reform - Programme - Bachelor - Sections are shown', () => {
     cy.login(cypressUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -123,6 +126,7 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Master's sections work
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
@@ -153,6 +157,7 @@ describe('Degree reform form tests', () => {
 
     // ----------------------------------------
     // Check that Doctoral sections work
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get('[data-cy=overviewpage-filter-button]').click()
@@ -185,6 +190,7 @@ describe('Degree reform form tests', () => {
     // Check that Status Message works and is closed
     cy.login(cypressUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -202,6 +208,7 @@ describe('Degree reform form tests', () => {
     // Start filling in the form
     cy.login(cypressUser)
     cy.visit('/yearly')
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-degreeReform]').click()
     cy.get('[data-cy=nav-group]').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()

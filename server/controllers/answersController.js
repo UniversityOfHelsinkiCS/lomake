@@ -3,6 +3,7 @@ import db from '../models/index.js'
 import logger from '../util/logger.js'
 import { whereDraftYear, isAdmin, isSuperAdmin } from '../util/common.js'
 import { formKeys } from '../../config/data.js'
+import { ARCHIVE_LAST_YEAR } from '../../config/common.js'
 
 /**
  * The LINJAUS function: if user has ANY access, they can see all programmes' answers
@@ -386,7 +387,7 @@ const getOldFacultySummaryData = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findOne({
         where: {
           form: formKeys.YEARLY_ASSESSMENT,
-          year: 2024,
+          year: ARCHIVE_LAST_YEAR,
           programme: codes,
         },
       })
@@ -428,7 +429,7 @@ const getEvaluationSummaryDataForFaculty = async (req, res) => {
       const latestAnswers = await db.tempAnswer.findAll({
         where: {
           form: formKeys.EVALUATION_PROGRAMMES,
-          year: 2024,
+          year: ARCHIVE_LAST_YEAR,
           programme: codes,
         },
       })

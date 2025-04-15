@@ -17,9 +17,11 @@ describe('ComparisonPage tests', () => {
 
     cy.visit('/comparison')
     cy.get('[data-cy=programme-filter]').click()
-    cy.get('span').contains(testProgrammeName).click()
-    cy.get('[data-cy=comparison-chart-review_of_last_years_situation_report_text')
-    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(249, 208, 59)')
+    cy.get('span').contains(testProgrammeName).as('programme')
+    cy.get('@programme').click({ force: true })
+    cy.get('[data-cy=comparison-chart-review_of_last_years_situation_report_text] > svg > path')
+      .should('have.css', 'stroke')
+      .and('eq', 'rgb(249, 208, 59)')
   })
 
   it('Admin should be able to see all the programmes on the comparison page', () => {
@@ -69,7 +71,8 @@ describe('ComparisonPage tests', () => {
     cy.get('[data-cy=nav-comparison]').click()
 
     cy.getYearSelector()
-    cy.get('[data-cy=comparison-chart-faculty-employability_text')
-    cy.get('path').should('have.css', 'stroke').and('eq', 'rgb(29, 185, 84)')
+    cy.get('[data-cy=comparison-chart-faculty-employability_text] > svg > path')
+      .should('have.css', 'stroke')
+      .and('eq', 'rgb(29, 185, 84)')
   })
 })

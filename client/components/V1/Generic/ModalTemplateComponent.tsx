@@ -23,16 +23,18 @@ export default function ModalTemplateComponent({
   children,
   open,
   setOpen,
+  ...rest
 }: {
   children?: React.ReactNode
   open: boolean
   setOpen: (open: boolean) => void
+  rest?: any
 }) {
   // const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleClose} {...rest}>
       <Box sx={style}>
         <Clear onClick={handleClose} style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer' }} />
         {children}

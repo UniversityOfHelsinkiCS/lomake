@@ -27,26 +27,29 @@ describe('Evaluation forms tests', () => {
   // ***
 
   it('User can navigate to evaluation programme level form', () => {
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.contains('Degree programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
 
     cy.contains(testProgrammeName)
-    cy.contains(`Review ${defaultYears[2]}`)
+    cy.contains(`Review ${defaultYears[1]}`)
   })
 
   it('User can navigate to evaluation faculty level form', () => {
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.contains('Faculty level').click()
     cy.get(`[data-cy=colortable-link-to-${testFacultyCode}]`).click()
 
     cy.contains(testFacultyName)
-    cy.contains(`Review ${defaultYears[2]}`)
+    cy.contains(`Review ${defaultYears[1]}`)
   })
 
   it("Programme level user can see summary of previous years' answers", () => {
     cy.request(`/api/cypress/createAnswers/1`)
     cy.reload()
+    cy.get('[data-cy=nav-archive]').click()
     cy.get('[data-cy=nav-evaluation]').click()
     cy.contains('Degree programme level').click()
     cy.get(`[data-cy=colortable-link-to-${testProgrammeCode}]`).click()
@@ -61,6 +64,7 @@ describe('Evaluation forms tests', () => {
       // Check corrent saves notice message
       cy.login(facultyUser)
       cy.visit('/yearly')
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
@@ -79,6 +83,7 @@ describe('Evaluation forms tests', () => {
       // Go to form and write answers
       cy.login(facultyUser)
       cy.visit('/yearly')
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
       cy.get(`[data-cy=colortable-link-to-H50]`).click()
@@ -93,6 +98,7 @@ describe('Evaluation forms tests', () => {
       cy.get("[data-cy='color-neutral-student_admittance_faculty_master']").click()
       cy.get("[data-cy='color-negative-student_admittance_faculty_doctoral']").click()
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.contains('Faculty level').click()
 
@@ -134,6 +140,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
 
@@ -169,6 +176,7 @@ describe('Evaluation forms tests', () => {
       cy.get("[data-cy='editing-area-student_admittance_university-university-doctoral']").contains(
         'TINE: Doctoral is not doing so good',
       )
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 
@@ -203,6 +211,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
 
@@ -222,6 +231,7 @@ describe('Evaluation forms tests', () => {
       cy.typeInEditor('student_admittance_university-arviointi-master', 'ONE: Master is doing okay')
       cy.typeInEditor('student_admittance_university-arviointi-doctoral', 'TINE: Doctoral is not doing so good')
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 
@@ -263,6 +273,7 @@ describe('Evaluation forms tests', () => {
       cy.get('[data-cy=navBar-localeDropdown]').click()
       cy.get('[data-cy=navBar-localeOption-fi]').click()
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university]').click()
       cy.wait(100)
@@ -282,6 +293,7 @@ describe('Evaluation forms tests', () => {
       )
       cy.wait(100)
 
+      cy.get('[data-cy=nav-archive]').click()
       cy.get('[data-cy=nav-evaluation]').click()
       cy.get('[data-cy=nav-university-overview]').click()
 

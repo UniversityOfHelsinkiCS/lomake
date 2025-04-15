@@ -1,4 +1,0 @@
-POST http://localhost:8000/api/access/magicurl
-uid: admin
-
-###

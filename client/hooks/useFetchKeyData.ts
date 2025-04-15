@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchKeyData } from '../util/redux/keyDataReducer'
 import { RootState } from '../util/store'
-import type { SingleKeyData } from '../lib/types'
+import type { SingleKeyData } from '@/shared/lib/types'
 
 export const useFetchSingleKeyData = (programmeId: string): SingleKeyData => {
   const keyData = useFetchKeyData()

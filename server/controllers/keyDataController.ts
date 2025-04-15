@@ -17,7 +17,11 @@ import {
 
 const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
   try {
-    const keyData = await KeyData.findAll()
+    const keyData = await KeyData.findAll({
+      where: {
+        active: true,
+      },
+    })
 
     // @ts-expect-error
     const programmeData = await db.studyprogramme.findAll({
@@ -31,26 +35,23 @@ const getKeyData = async (_req: Request, res: Response): Promise<Response> => {
 
     const formattedKeyData = formatKeyData(keyData[0].data, programmeData)
 
-    // TODO: uncomment when updated data.xlsx is in staging and production
     // Validate formatted key data
-    // try {
-    //   KeyDataProgrammeSchema.extend({
-    //     values: KandiohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.kandiohjelmat)
-
-    //   KeyDataProgrammeSchema.extend({
-    //     values: MaisteriohjelmatValuesSchema,
-    //   })
-    //     .array()
-    //     .parse(formattedKeyData.maisteriohjelmat)
-
-    //   MetadataSchema.array().parse(formattedKeyData.metadata)
-    // } catch (zodError) {
-    //   logZodError(zodError as ZodError)
-    //   throw new Error('Invalid KeyData format')
-    // }
+    try {
+      KeyDataProgrammeSchema.extend({
+        values: KandiohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.kandiohjelmat)
+      KeyDataProgrammeSchema.extend({
+        values: MaisteriohjelmatValuesSchema,
+      })
+        .array()
+        .parse(formattedKeyData.maisteriohjelmat)
+      MetadataSchema.array().parse(formattedKeyData.metadata)
+    } catch (zodError) {
+      logZodError(zodError as ZodError)
+      throw new Error('Invalid KeyData format')
+    }
 
     return res.status(200).json({ data: formattedKeyData })
   } catch (error) {
@@ -85,8 +86,20 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
           jsonSheet[sheetName] = data
         })
 
+        await KeyData.update(
+          {
+            active: false,
+          },
+          {
+            where: {
+              active: true,
+            },
+          },
+        )
+
         await KeyData.create({
           data: jsonSheet,
+          active: true,
         })
         resolve(res.status(201).json({ message: 'Key data uploaded' }))
       } catch (error) {
@@ -96,4 +109,66 @@ const uploadKeyData = async (req: Request, res: Response): Promise<Response> => 
   })
 }
 
-export default { getKeyData, uploadKeyData }
+const getKeyDataMeta = async (_req: Request, res: Response): Promise<Response> => {
+  try {
+    const keyData = await KeyData.findAll({
+      attributes: ['id', 'active', 'createdAt'],
+    })
+
+    if (!keyData.length) {
+      return res.status(404).json({ error: 'No key data found' })
+    }
+
+    return res.status(200).json(keyData)
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
+const deleteKeyData = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { id } = req.params
+    const keyData = await KeyData.findByPk(id)
+
+    if (!keyData) {
+      return res.status(404).json({ error: 'Key data not found' })
+    }
+
+    await keyData.destroy()
+    return res.status(204).json({ message: 'Key data deleted' })
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
+const updateKeyData = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { id } = req.params
+    const keyData = await KeyData.findByPk(id)
+
+    if (!keyData) {
+      return res.status(404).json({ error: 'Key data not found' })
+    }
+
+    await KeyData.update(
+      {
+        active: false,
+      },
+      {
+        where: {
+          active: true,
+        },
+      },
+    )
+
+    await keyData.update({
+      active: true,
+    })
+
+    return res.status(200).json(keyData)
+  } catch (error) {
+    return res.status(500).json({ error: (error as Error).message })
+  }
+}
+
+export default { getKeyData, uploadKeyData, getKeyDataMeta, deleteKeyData, updateKeyData }

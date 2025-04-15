@@ -1,3 +1,5 @@
+import type { KandiohjelmatValues, MaisteriohjelmatValues, KeyDataMetadataRaw } from '@/shared/lib/types'
+
 export const formatKeyData = (data: any, programmeData: any) => {
   const { Kandiohjelmat, Maisteriohjelmat, metadata } = data
 
@@ -9,45 +11,53 @@ export const formatKeyData = (data: any, programmeData: any) => {
     international: programme.international,
   }))
 
-  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: any) => {
+  const kandiohjelmat = Kandiohjelmat.map((kandiohjelma: KandiohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === kandiohjelma['Koulutusohjelman koodi'].trim(),
     )
+
     return {
       koulutusohjelmakoodi: kandiohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: kandiohjelma,
-      vetovoimaisuus: kandiohjelma['Vetovoimaisuus'],
-      lapivirtaus: kandiohjelma['Opintojen sujuvuus ja valmistuminen'],
-      opiskelijapalaute: kandiohjelma['Palaute ja työllistyminen'],
-      resurssit: kandiohjelma['Resurssien käyttö'],
       year: kandiohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      additionalInfo: {
+        fi: kandiohjelma[`Lisätietoja_fi`],
+        se: kandiohjelma[`Lisätietoja_se`],
+        en: kandiohjelma[`Lisätietoja_en`],
+      },
     }
   })
 
-  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: any) => {
+  const maisteriohjelmat = Maisteriohjelmat.map((maisteriohjelma: MaisteriohjelmatValues) => {
     const matchedProgramme = programmes.find(
       (programme: any) => programme.key === maisteriohjelma['Koulutusohjelman koodi'].trim(),
     )
+
     return {
       koulutusohjelmakoodi: maisteriohjelma['Koulutusohjelman koodi'],
       koulutusohjelma: matchedProgramme && matchedProgramme.name,
       values: maisteriohjelma,
-      vetovoimaisuus: maisteriohjelma['Vetovoimaisuus'],
-      lapivirtaus: maisteriohjelma['Opintojen sujuvuus ja valmistuminen'],
-      opiskelijapalaute: maisteriohjelma['Palaute ja työllistyminen'],
-      resurssit: maisteriohjelma['Resurssien käyttö'],
       year: maisteriohjelma['Vuosi'],
       international: matchedProgramme?.international,
       level: matchedProgramme?.level,
+      additionalInfo: {
+        fi: maisteriohjelma[`Lisätietoja_fi`],
+        se: maisteriohjelma[`Lisätietoja_se`],
+        en: maisteriohjelma[`Lisätietoja_en`],
+      },
     }
   })
 
-  const meta = metadata.map((m: any) => ({
-    arviointialue: m['Arviointialue'],
-    avainluvunArvo: m['Avainluvun nimi_fi'],
+  const meta = metadata.map((m: KeyDataMetadataRaw) => ({
+    yksikko: m['Yksikkö'],
+    kynnysarvot: m['Kynnysarvot'],
+    ohjelmanTaso: m['Ohjelman taso'],
+    liikennevalo: m['Liikennevalo'],
+    mittarinRajat: m['Mittarin rajat'],
+    arviointialue: m['Arviointialue_fi'],
     avainluvunNimi: {
       fi: m[`Avainluvun nimi_fi`],
       se: m[`Avainluvun nimi_se`],
@@ -58,11 +68,7 @@ export const formatKeyData = (data: any, programmeData: any) => {
       se: m[`Määritelmä_se`],
       en: m[`Määritelmä_en`],
     },
-    ohjelmanTaso: m['Ohjelman taso'],
-    kynnysarvot: m['Kynnysarvot'],
-    yksikko: m['Yksikkö'],
-    liikennevalo: m['Liikennevalo'],
-    mittarinRajat: m['Mittarin rajat'],
+    avainluvunArvo: m['Avainluvun nimi_fi'],
   }))
 
   return { kandiohjelmat, maisteriohjelmat, metadata: meta }

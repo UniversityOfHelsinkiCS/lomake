@@ -22,4 +22,11 @@ export enum LightColors {
   Empty = 'Tyhjä',
 }
 
+export enum ColorKey {
+  vetovoimaisuus = 'vetovoimaisuus',
+  lapivirtaus = 'lapivirtaus',
+  opiskelijapalaute = 'opiskelijapalaute',
+  resurssit = 'resurssit',
+}
+
 export { GroupKey }

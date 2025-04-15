@@ -27,7 +27,7 @@ services:
     environment:
       - ADMINER_DESIGN=pepa-linha
       - ADMINER_DEFAULT_SERVER=lomake_db
-    image: adminer:5.0.4
+    image: adminer:5.1.0
     ports:
       - 8080:8080 # localhost:8080/?pgsql=db&username=postgres&db=postgres&ns=public
 

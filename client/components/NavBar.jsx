@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import { Dropdown, Icon, Label, Menu, Popup, MenuItem } from 'semantic-ui-react'
+import { AppBar, Toolbar, Box, Container, Chip, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { LanguageSharp, Logout, ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { images } from '../util/common'
 import { logoutAction } from '../util/redux/currentUserReducer'
 import { setLanguage } from '../util/redux/languageReducer'
@@ -15,96 +16,160 @@ import {
 } from '../../config/common'
 
 const NavBarItems = {
-  yearly: { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },
-  evaluation: {
-    key: 'evaluation',
-    label: 'evaluation',
+  yearly: { key: 'yearly', label: 'landingPage:yearlyAssessmentTitle', path: '/v1/overview', access: ['programme', 'special'] },
+  archive: {
+    key: 'archive',
+    label: 'archive',
+    path: [
+      '/yearly',
+      '/evaluation',
+      '/evaluation-faculty',
+      '/evaluation-university',
+      '/meta-evaluation',
+      '/faculty-monitoring',
+      '/degree-reform',
+      '/individual',
+      '/reform-answers',
+      '/report',
+      '/comparison',
+    ],
     items: [
+      { key: 'yearly', label: 'yearlyAssessment', path: '/yearly', access: ['programme', 'special'] },
       {
-        key: 'programme',
-        label: 'generic:level:programmes',
-        path: '/evaluation',
-        access: ['programme', 'admin', 'evaluationFaculty'],
+        key: 'evaluation',
+        label: 'evaluation',
+        items: [
+          {
+            key: 'programme',
+            label: 'generic:level:programmes',
+            path: '/evaluation',
+            access: ['programme', 'admin', 'evaluationFaculty'],
+          },
+          {
+            key: 'faculty',
+            label: 'generic:level:faculties',
+            path: '/evaluation-faculty',
+            access: ['programme', 'admin', 'evaluationFaculty'],
+          },
+          {
+            key: 'university',
+            label: 'generic:level:university',
+            path: '/evaluation-university/form/6/UNI',
+            access: ['admin', 'evaluationUniversity'],
+          },
+          {
+            key: 'university-overview',
+            label: 'overview:universityOverview',
+            path: '/evaluation-university',
+            access: [],
+          },
+          {
+            key: 'meta-evaluation',
+            label: 'metaevaluation',
+            path: '/meta-evaluation',
+            access: ['programme', 'special'],
+          },
+          {
+            key: 'faculty-monitoring',
+            label: 'facultymonitoring',
+            path: '/faculty-monitoring',
+            access: ['admin', 'evaluationFaculty'],
+          },
+        ],
       },
       {
-        key: 'faculty',
-        label: 'generic:level:faculties',
-        path: '/evaluation-faculty',
-        access: ['programme', 'admin', 'evaluationFaculty'],
-      },
-      {
-        key: 'university',
-        label: 'generic:level:university',
-        path: '/evaluation-university/form/6/UNI',
-        access: ['admin', 'evaluationUniversity'],
-      },
-      {
-        key: 'university-overview',
-        label: 'overview:universityOverview',
-        path: '/evaluation-university',
-        access: [],
-      },
-      {
-        key: 'meta-evaluation',
-        label: 'metaevaluation',
-        path: '/meta-evaluation',
-        access: ['programme', 'special'],
-      },
-      {
-        key: 'faculty-monitoring',
-        label: 'facultymonitoring',
-        path: '/faculty-monitoring',
-        access: ['admin', 'evaluationFaculty'],
+        key: 'degreeReform',
+        label: 'degree-reform',
+        items: [
+          { key: 'group', label: 'degree-reform-group', path: '/degree-reform', access: ['programme', 'special'] },
+          {
+            key: 'individual',
+            label: 'degree-reform-individual',
+            path: '/individual',
+            access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
+          },
+          {
+            key: 'individual-answers',
+            label: 'generic:degreeReformIndividualAnswers',
+            path: '/reform-answers',
+            access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
+          },
+        ],
+        access: ['programme'],
       },
     ],
-  },
-  degreeReform: {
-    key: 'degreeReform',
-    label: 'degree-reform',
-    items: [
-      { key: 'group', label: 'degree-reform-group', path: '/degree-reform', access: ['programme', 'special'] },
-      {
-        key: 'individual',
-        label: 'degree-reform-individual',
-        path: '/individual',
-        access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
-      },
-      {
-        key: 'individual-answers',
-        label: 'generic:degreeReformIndividualAnswers',
-        path: '/reform-answers',
-        access: ['admin', 'katselmusProjektiOrOhjausryhma', 'universityForm'],
-      },
-    ],
-    access: ['programme'],
   },
   admin: { key: 'admin', label: 'adminPage', path: '/admin', access: ['admin'] },
 }
 
-const LanguageDropdown = ({ t, lang, handleLanguageChange }) => (
-  <Menu.Menu>
-    <Dropdown data-cy="navBar-localeDropdown" item text={`${t('chosenLanguage')} (${lang.toUpperCase()}) `}>
-      <Dropdown.Menu>
-        <Dropdown.Item data-cy="navBar-localeOption-fi" value="fi" onClick={handleLanguageChange}>
-          Suomi
-        </Dropdown.Item>
-        <Dropdown.Item data-cy="navBar-localeOption-se" value="se" onClick={handleLanguageChange}>
-          Svenska
-        </Dropdown.Item>
-        <Dropdown.Item data-cy="navBar-localeOption-en" value="en" onClick={handleLanguageChange}>
-          English
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  </Menu.Menu>
-)
+const LanguageDropdown = ({ t, lang, handleLanguageChange }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleMenuItemClick = value => event => {
+    handleLanguageChange(event, { value })
+    handleClose()
+  }
+
+  return (
+    <Box>
+      <MenuItem
+        data-cy="navBar-localeDropdown"
+        onClick={handleClick}
+        aria-controls={open ? 'language-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        sx={{ gap: 1 }}
+      >
+        <LanguageSharp />
+        <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+          {`${t('chosenLanguage')} (${lang.toUpperCase()}) `}
+          {open ? <ArrowDropUp /> : <ArrowDropDown />}
+        </Typography>
+      </MenuItem>
+      <Menu
+        id="language-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          list: {
+            'aria-labelledby': 'language-button',
+          },
+        }}
+      >
+        <MenuItem data-cy="navBar-localeOption-fi" onClick={handleMenuItemClick('fi')}>
+          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            Suomi
+          </Typography>
+        </MenuItem>
+        <MenuItem data-cy="navBar-localeOption-se" onClick={handleMenuItemClick('se')}>
+          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            Svenska
+          </Typography>
+        </MenuItem>
+        <MenuItem data-cy="navBar-localeOption-en" onClick={handleMenuItemClick('en')}>
+          <Typography variant="light" alignContent="center" sx={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            English
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
+  )
+}
 
 const UnHijackButton = ({ handleUnhijack }) => (
-  <Menu.Item data-cy="sign-in-as" onClick={handleUnhijack}>
-    <Label color="green" horizontal>
-      Unhijack
-    </Label>
-  </Menu.Item>
+  <MenuItem data-cy="sign-in-as" onClick={handleUnhijack}>
+    <Chip color="error" label="Unhijack" />
+  </MenuItem>
 )
 
 const NavBar = () => {
@@ -115,6 +180,7 @@ const NavBar = () => {
   const programmes = useSelector(state => state.studyProgrammes.usersProgrammes)
   const location = useLocation()
   const history = useHistory()
+  const [openMenus, setOpenMenus] = React.useState({})
 
   const setLanguageCode = code => {
     dispatch(setLanguage(code))
@@ -129,34 +195,30 @@ const NavBar = () => {
   }
 
   const renderHome = route => (
-    <Menu.Item as={Link} to={route}>
-      <Popup
-        content={t('toFrontpage')}
-        trigger={<img style={{ width: '70px', height: 'auto' }} src={images.hy} alt="homepage" />}
-      />
-    </Menu.Item>
+    <MenuItem component={Link} to={route} data-cy="nav-home">
+      <Tooltip title={t('toFrontpage')} arrow>
+        <Box display="flex" alignItems="center" sx={{ gap: 2 }}>
+          <img style={{ width: '64px', height: 'auto', margin: '6px 0px' }} src={images.hy} alt="homepage" />
+          <Typography variant="light">Tilannekuvalomake</Typography>
+        </Box>
+      </Tooltip>
+    </MenuItem>
   )
 
-  const renderContact = () => (
-    <Menu.Item>
-      <a href="mailto:ospa@helsinki.fi">
-        <Icon name="mail outline" />
-        ospa@helsinki.fi
-      </a>
-    </Menu.Item>
-  )
   const renderLogOut = () => (
-    <Menu.Menu position="right">
+    <Box sx={{ marginLeft: 'auto', alignItems: 'center', display: 'flex' }}>
+      <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
       {window.localStorage.getItem('adminLoggedInAs') && <UnHijackButton handleUnhijack={handleUnhijack} />}
-      <Menu.Item data-cy="nav-logout" name="log-out" onClick={handleLogout}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          {`${t('logOut')} (${user.uid})`}
+      <MenuItem data-cy="nav-logout" onClick={handleLogout} sx={{ gap: 1 }}>
+        <Logout />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <Typography variant="light">{`${t('logOut')} (${user.uid})`}</Typography>
           {isSuperAdmin(user) && (
-            <Label color="red">Server running since {new Date(user.lastRestart).toLocaleTimeString()}</Label>
+            <Chip color="error" label={`Server running since ${new Date(user.lastRestart).toLocaleTimeString()}`} />
           )}
-        </div>
-      </Menu.Item>
-    </Menu.Menu>
+        </Box>
+      </MenuItem>
+    </Box>
   )
 
   const handleLanguageChange = (e, { value }) => {
@@ -171,6 +233,7 @@ const NavBar = () => {
       history.push(`/evaluation-university/form/6/${uniFormCode}`)
     }
   }
+
   const hasAccess = accessRights => {
     if (!accessRights || accessRights.length === 0) return true // If no access rights specified, allow access
     return accessRights.some(right => {
@@ -197,46 +260,134 @@ const NavBar = () => {
     })
   }
 
-  const renderNavRoutes = () =>
-    Object.values(NavBarItems).map(({ items, key, label, path, access }) => {
-      if (!hasAccess(access)) return null
+  const [anchorEl, setAnchorEl] = useState({})
 
-      return items ? (
-        <MenuItem as={Dropdown} data-cy={`nav-${key}`} key={`menu-item-drop-${key}`} tabIndex="-1" text={t(label)}>
-          <Dropdown.Menu>
-            {items.map(item => {
-              if (!hasAccess(item.access)) return null
-              return (
-                <Dropdown.Item
-                  as={Link}
-                  data-cy={`nav-${item.key}`}
-                  key={`menu-item-${item.path}`}
-                  tabIndex="-1"
-                  to={item.path}
-                >
-                  {t(item.label)}
-                </Dropdown.Item>
-              )
-            })}
-          </Dropdown.Menu>
-        </MenuItem>
-      ) : (
-        <MenuItem as={Link} data-cy={`nav-${key}`} key={`menu-item-${path}`} tabIndex="-1" to={path}>
-          {t(label)}
-        </MenuItem>
-      )
-    })
+  const renderNavRoutes = () => {
+    const renderItems = (items, parentKey = null) => {
+      return items.map(({ key, label, path, access, items: subItems }) => {
+        if (!hasAccess(access)) return null
+
+        const fullKey = parentKey ? `${parentKey}-${key}` : key
+
+        if (subItems) {
+          const isOpen = openMenus[fullKey] || false
+
+          const handleMenuClick = event => {
+            setAnchorEl({ ...anchorEl, [fullKey]: event.currentTarget })
+            setOpenMenus({ ...openMenus, [fullKey]: !isOpen })
+          }
+
+          const handleClose = () => {
+            setOpenMenus({ ...openMenus, [fullKey]: false })
+          }
+
+          return (
+            <React.Fragment key={fullKey}>
+              <MenuItem
+                data-cy={`nav-${key}`}
+                onClick={handleMenuClick}
+                aria-haspopup="true"
+                aria-expanded={isOpen ? 'true' : 'false'}
+                sx={{
+                  position: 'relative',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    left: 0,
+                    bottom: -2,
+                    width: (
+                      Array.isArray(path)
+                        ? path.some(p => location.pathname.startsWith(p))
+                        : location.pathname.startsWith(path)
+                    )
+                      ? '100%'
+                      : '0%',
+                    height: '1.5px',
+                    backgroundColor: '#007bff',
+                    borderRadius: '60px',
+                  },
+                }}
+              >
+                <Typography sx={{ display: 'flex', flexDirection: 'row' }}>
+                  {t(label)}
+                  {isOpen ? <ArrowDropUp /> : <ArrowDropDown />}
+                </Typography>
+              </MenuItem>
+              <Menu
+                anchorEl={anchorEl[fullKey]}
+                open={isOpen}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+              >
+                {renderItems(subItems, fullKey)}
+              </Menu>
+            </React.Fragment>
+          )
+        }
+
+        return (
+          <MenuItem
+            key={fullKey}
+            component={Link}
+            to={path}
+            data-cy={`nav-${key}`}
+            onClick={() => setOpenMenus({})}
+            sx={{
+              position: 'relative',
+              '&::after': (() => {
+                const pathMatch = path.match(/^\/[^/]+/)
+                const currentPathMatch = location.pathname.match(/^\/[^/]+/)
+                return {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  bottom: -2,
+                  width: pathMatch && currentPathMatch && pathMatch[0] === currentPathMatch[0] ? '100%' : '0%',
+                  height: '1.5px',
+                  backgroundColor: '#007bff',
+                  borderRadius: '3px',
+                }
+              })(),
+            }}
+          >
+            <Typography variant="regularSmall">{t(label)}</Typography>
+          </MenuItem>
+        )
+      })
+    }
+
+    const navItems = Object.values(NavBarItems).filter(item => hasAccess(item.access))
+
+    return (
+      <Box display="flex" flexDirection="row" gap={5}>
+        {renderItems(navItems)}
+      </Box>
+    )
+  }
 
   if (location.pathname.startsWith('/evaluation-faculty/previous-years') || !user) return null
 
   return (
-    <Menu size="huge" fluid stackable>
-      {renderHome('/')}
-      {renderNavRoutes()}
-      {renderContact()}
-      <LanguageDropdown t={t} lang={lang} handleLanguageChange={handleLanguageChange} />
-      {renderLogOut()}
-    </Menu>
+    <AppBar
+      elevation={0}
+      position="relative"
+      sx={{ backgroundColor: 'white', color: 'black', borderBottom: '1px solid #e0e0e0' }}
+    >
+      <Container maxWidth={false}>
+        <Toolbar disableGutters>
+          {renderHome('/')}
+          <Box marginLeft="auto">{renderNavRoutes()}</Box>
+          {renderLogOut()}
+        </Toolbar>
+      </Container>
+    </AppBar>
   )
 }
 

@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Button, Box, Card, Avatar, CardHeader, CardContent, Typography } from '@mui/material'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { useTranslation } from 'react-i18next'
+import { TFunction } from 'i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import CurrentEditor from '../../Generic/CurrentEditor'
@@ -9,14 +10,67 @@ import { getLockHttp } from '../../../util/redux/formReducer'
 import { RootState } from '../../../util/store'
 import { releaseFieldLocally } from '../../../util/redux/currentEditorsReducer'
 import { deepCheck } from '../../Generic/Textarea'
-import { updateReportHttp } from '../../../util/redux/reportsSlicer'
+import { getReports, updateReportHttp } from '../../../util/redux/reportsSlicer'
 
 type TextFieldComponentProps = {
   id: string
   type: string
+  children?: React.ReactNode // for passing notification badges next to textfield title
 }
 
-const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
+export const TextFieldCard = ({ id, t, type }: { id: string; t: TFunction; type: string }) => {
+  const content = useSelector(({ reports }: { reports: Record<string, any> }) => reports.data[id] || '')
+  return (
+    <Box sx={{ mt: '1rem' }} data-cy="textfield-viewonly">
+      <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
+        {t(`keyData:${type}`)}
+      </Typography>
+      <Card
+        variant="outlined"
+        sx={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          minHeight: type !== 'Comment' ? '19rem' : undefined,
+        }}
+      >
+        {type === 'Comment' && (
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
+                <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
+              </Avatar>
+            }
+            sx={{
+              '& .MuiCardHeader-avatar': {
+                marginRight: 0,
+              },
+            }}
+          />
+        )}
+        <CardContent
+          sx={{
+            paddingLeft: type === 'Comment' ? 0 : undefined,
+            minWidth: 0,
+            overflowWrap: 'break-word',
+            alignSelf: 'center',
+          }}
+        >
+          {content ? (
+            <Typography variant="regular">
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </Typography>
+          ) : (
+            <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
+          )}
+        </CardContent>
+      </Card>
+    </Box>
+  )
+}
+
+const TextFieldComponent = ({ id, type, children }: TextFieldComponentProps) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -40,7 +94,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
 
   const hasUnsavedChanges = hasLock && dataFromRedux !== content
 
-  const MAX_CONTENT_LENGTH = type === 'Comment' ? 500 : 5000
+  const MAX_CONTENT_LENGTH = type === 'Comment' ? 1000 : 5000
 
   useEffect(() => {
     const gotTheLock = currentEditors && currentEditors[id] && currentEditors[id].uid === currentUser.uid
@@ -49,16 +103,18 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       setGettingLock(false)
     }
     // Do not add currentUser or dataFromRedux to the dependencies
-    // it will clear the field if lock is relesed by the server
+    // it will clear the field if lock is released by the server
   }, [currentEditors])
 
   useEffect(() => {
     if (!hasLock) setContent(dataFromRedux)
-  }, [dataFromRedux, hasLock])
+    dispatch(getReports({ year }))
+  }, [dataFromRedux])
 
   useEffect(() => {
     if (hasLock && textFieldRef.current) {
       textFieldRef.current.focus()
+      textFieldRef.current.selectionStart = content.length
     }
   }, [hasLock])
 
@@ -95,7 +151,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [hasUnsavedChanges, t, dataFromRedux])
+  }, [hasUnsavedChanges, t, dataFromRedux, content])
 
   const handleStopEditing = () => {
     setHasLock(false)
@@ -111,48 +167,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
   }
 
   if (viewOnly) {
-    return (
-      <Box sx={{ mt: '1rem' }}>
-        <Typography variant="h5" color="textSecondary" sx={{ mb: '1.5rem' }}>
-          {t(`keyData:${type}`)}
-        </Typography>
-        <Card
-          variant="outlined"
-          sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
-        >
-          {type === 'Comment' && (
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: 'white', color: 'gray' }}>
-                  <ChatBubbleOutlineIcon sx={{ fontSize: 30 }} />
-                </Avatar>
-              }
-              sx={{
-                '& .MuiCardHeader-avatar': {
-                  marginRight: 0,
-                },
-              }}
-            />
-          )}
-          <CardContent
-            sx={{
-              paddingLeft: type === 'Comment' ? 0 : undefined,
-              minWidth: 0,
-              overflowWrap: 'break-word',
-              alignSelf: 'center',
-            }}
-          >
-            {content ? (
-              <Typography variant="regular">
-                <ReactMarkdown>{content}</ReactMarkdown>
-              </Typography>
-            ) : (
-              <Typography variant="italic">{t(`keyData:no${type}`)}</Typography>
-            )}
-          </CardContent>
-        </Card>
-      </Box>
-    )
+    return <TextFieldCard id={id} t={t} type={type} />
   }
 
   return (
@@ -161,10 +176,13 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
       ref={componentRef}
       sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'start', mt: '1rem' }}
     >
-      <Typography variant="h5" color="textSecondary">
-        {t(`keyData:${type}`)}
-      </Typography>
-      {hasLock ? (
+      <div style={{ display: 'flex', alignContent: 'center', gap: 10 }}>
+        <Typography variant="h5" color="textSecondary">
+          {t(`keyData:${type}`)}
+        </Typography>
+        {children}
+      </div>
+      {hasLock || content !== dataFromRedux ? (
         <>
           <TextField
             style={{}}
@@ -202,7 +220,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
             }}
           />
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
-            <Box sx={{ mt: '2rem' }}>
+            <Box sx={{ mt: '1rem' }}>
               <Button
                 data-cy={`save-${id}-${type}`}
                 variant="contained"
@@ -211,18 +229,18 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               >
                 {t(`keyData:save${type}`)}
               </Button>
-              {hasUnsavedChanges && (
+              {content !== dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'red' }}>
                   {t('keyData:unsavedChanges')}!
                 </Typography>
               )}
-              {hasLock && !hasUnsavedChanges && (
+              {hasLock && content === dataFromRedux && (
                 <Typography variant="regular" style={{ color: 'gray' }}>
                   {t('generic:textUnsavedRelease')}
                 </Typography>
               )}
             </Box>
-            <Typography variant="regularSmall" style={{ color: 'gray' }}>
+            <Typography variant="regularSmall" style={{ color: 'gray', marginTop: '1rem' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>
           </div>
@@ -231,7 +249,13 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
         <>
           <Card
             variant="outlined"
-            sx={{ width: '100%', display: 'flex', alignItems: 'flex-start', flexDirection: 'row' }}
+            sx={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'flex-start',
+              flexDirection: 'row',
+              minHeight: type !== 'Comment' ? '18.75rem' : undefined,
+            }}
           >
             {type === 'Comment' && (
               <CardHeader
@@ -252,7 +276,7 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
                 paddingLeft: type === 'Comment' ? 0 : undefined,
                 minWidth: 0,
                 overflowWrap: 'break-word',
-                alignSelf: 'center',
+                alignSelf: type === 'Comment' ? 'center' : undefined,
               }}
             >
               {content ? (
@@ -273,16 +297,19 @@ const TextFieldComponent = ({ id, type }: TextFieldComponentProps) => {
               marginTop: '1rem',
             }}
           >
-            <Button
-              data-cy={`edit-${id}-${type}`}
-              variant="outlined"
-              disabled={isSomeoneElseEditing}
-              onClick={askForLock}
-              sx={{ marginRight: 2 }}
-            >
-              {t(`keyData:edit${type}`)}
-            </Button>
-            <CurrentEditor fieldName={id} />
+            <Box sx={{}}>
+              <Button
+                data-cy={`edit-${id}-${type}`}
+                variant="outlined"
+                disabled={isSomeoneElseEditing}
+                onClick={askForLock}
+                sx={{ marginRight: 2 }}
+              >
+                {t(`keyData:edit${type}`)}
+              </Button>
+
+              <CurrentEditor fieldName={id} />
+            </Box>
             <Typography variant="regularSmall" style={{ color: 'gray' }}>
               {content.length} / {MAX_CONTENT_LENGTH}
             </Typography>

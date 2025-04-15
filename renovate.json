@@ -13,6 +13,11 @@
       "matchPackageNames": ["node"],
       "versionCompatibility": "^(?<version>[^-]+)(?<compatibility>-.*)?$",
       "versioning": "node"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgres"],
+      "enabled": false
     }
   ],
   "vulnerabilityAlerts": {

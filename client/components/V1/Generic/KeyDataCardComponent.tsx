@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Card, CardActionArea, Typography } from '@mui/material'
-import { calculateColor, calculateValue } from '../Utils/util'
+import { Box, Card, CardActionArea, Tooltip, Typography } from '@mui/material'
+import { calculateColor, calculateValue, calculateKeyDataColor, extractKeyDataValue } from '../Utils/util'
 
 import { TrafficLight } from './TrafficLightComponent'
 import ColorMeterComponent from './ColorMeterComponent'
+import ColorHistoryComponent from './ColorHistoryComponent'
 
-import { GroupKey, ProgrammeLevel } from '@/client/lib/enums'
-import { KeyDataCardData, KeyDataMetadata, KeyDataProgramme } from '@/client/lib/types'
+import { GroupKey, ProgrammeLevel, LightColors } from '@/client/lib/enums'
+import type { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
+import type { KeyDataCardData } from '@/client/lib/types'
+import { RootState } from '@/client/util/store'
+import { useTranslation } from 'react-i18next'
 
 interface KeyDataCardProps extends KeyDataCardData {
   level: ProgrammeLevel
@@ -31,10 +35,11 @@ interface CriteriaCardProps {
   limits: string
   unit: string
   color: string
+  programme: KeyDataProgramme
 }
 
 const CriteriaGroup = (props: CriteriaGroupProps) => {
-  const lang = useSelector((state: { language: string }) => state.language)
+  const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
 
   const meta = props.metadata.filter(data => data.arviointialue === props.groupKey && data.ohjelmanTaso === props.level)
   return (
@@ -47,12 +52,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
       }}
     >
       {meta.map(data => {
-        const value =
-          props.programme.values[
-            Object.keys(props.programme.values).find(
-              key => key.trim().toLowerCase() === data.avainluvunArvo.trim().toLowerCase(),
-            )
-          ] || null
+        const value = extractKeyDataValue(props.programme, data)
         const color = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
         const valueText = calculateValue(value, data.yksikko)
 
@@ -67,6 +67,7 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
             limits={data.mittarinRajat}
             unit={data.yksikko}
             color={color}
+            {...props}
           />
         )
       })}
@@ -76,12 +77,13 @@ const CriteriaGroup = (props: CriteriaGroupProps) => {
 
 const CriteriaCard = (props: CriteriaCardProps) => {
   const [showDescription, setShowDescription] = useState(false)
+  const { t } = useTranslation()
 
   const handleClick = () => {
     setShowDescription(!showDescription)
   }
 
-  return (
+  const cardContent = (
     <Card sx={{ height: 'fit-content' }}>
       <CardActionArea onClick={handleClick}>
         <div
@@ -92,40 +94,47 @@ const CriteriaCard = (props: CriteriaCardProps) => {
             padding: '18px',
             flexWrap: 'nowrap',
           }}
+          data-cy={`${props.title}-${props.color}`}
         >
           <TrafficLight style={{ marginRight: '5px' }} color={props.color} />
-
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
             <Typography variant="italic">{props.title}</Typography>
             <Typography
               variant="italic"
-              style={{ whiteSpace: 'nowrap' }}
-              color={props.value === 'Ei dataa' ? 'textSecondary' : ''}
+              style={{ whiteSpace: 'nowrap', color: props.value === 'Ei dataa' ? 'textSecondary' : undefined }}
             >
-              {props.value}
+              {props.value === 'Ei dataa' ? t('keyData:noData') : props.value}
             </Typography>
           </div>
         </div>
-
         {showDescription && (
           <div style={{ padding: '15px' }}>
             <Typography variant="lightSmall">{props.description}</Typography>
-
             <ColorMeterComponent
+              year={props.programme.year}
               display={props.hasTrafficLight}
               value={props.value}
               thresholds={props.thresholds}
               limits={props.limits}
               unit={props.unit}
             />
+            <ColorHistoryComponent {...props} />
           </div>
         )}
       </CardActionArea>
     </Card>
   )
-}
 
+  return showDescription ? (
+    cardContent
+  ) : (
+    <Tooltip title={t('keyData:seeMore')} placement="top" arrow>
+      {cardContent}
+    </Tooltip>
+  )
+}
 const KeyDataCard = (props: KeyDataCardProps) => {
+  const color = calculateKeyDataColor(props.metadata, props.programme, props.groupKey, props.level)
   return (
     <Box sx={{ padding: '2rem 0' }}>
       <Box
@@ -136,7 +145,10 @@ const KeyDataCard = (props: KeyDataCardProps) => {
           paddingBottom: '10px',
         }}
       >
-        <TrafficLight color={props.color} variant="large" />
+        <div data-cy={`${props.programme.koulutusohjelmakoodi}-${props.groupKey}-${color}`}>
+          <TrafficLight color={color} variant="large" />
+        </div>
+
         <Typography variant="h2" style={{ margin: 0 }}>
           {props.title.toUpperCase()}
         </Typography>

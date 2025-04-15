@@ -12,7 +12,7 @@ import DeadlineSetting from './DeadlineSetting'
 import UpdateStudyprogrammes from './UpdateStudyprogrammes'
 import TempAccess from './TempAccess'
 import Debug from './Debug'
-import { uploadKeyData } from '@/client/util/redux/keyDataReducer'
+import KeyData from './KeyData'
 
 export default () => {
   const { t } = useTranslation()
@@ -94,15 +94,7 @@ export default () => {
       menuItem: t('users:uploadKeydata'),
       render: () => (
         <Tab.Pane>
-        <form
-          onSubmit={async e => {
-          e.preventDefault()
-          const file = e.target.elements.file.files[0]
-          dispatch(uploadKeyData(file))}}
-        >
-          <input type="file" name="file" />
-          <button type="submit">Upload</button>
-        </form>
+        <KeyData />
         </Tab.Pane>
       ),
       },

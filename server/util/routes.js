@@ -69,7 +69,7 @@ router.delete('/deadlines', checkAdmin, deadlines.remove)
 
 router.get('/faculties', faculty.getAll)
 
-router.get('/reports/:studyprogrammeKey', reports.getReports)
+router.get('/reports/:year', reports.getReports)
 router.get('/reports/:studyprogrammeKey/:year', reports.getReport)
 router.put('/reports/:studyprogrammeKey/:year', reports.updateReport)
 
@@ -80,5 +80,8 @@ router.get('/cypress/initKeydata', notInProduction, cypress.initKeyData)
 
 router.get('/keydata', keyData.getKeyData)
 router.post('/keydata', checkAdmin, keyData.uploadKeyData)
+router.get('/keydata/meta', checkAdmin, keyData.getKeyDataMeta)
+router.delete('/keydata/:id', checkAdmin, keyData.deleteKeyData)
+router.put('/keydata/:id', checkAdmin, keyData.updateKeyData)
 
 export default router
