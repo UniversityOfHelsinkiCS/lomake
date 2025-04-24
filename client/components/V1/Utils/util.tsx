@@ -2,6 +2,7 @@ import { isInteger } from 'lodash'
 import { TFunction } from 'i18next'
 import { GroupKey, LightColors, ProgrammeLevel } from '@/client/lib/enums'
 import type { KeyDataProgramme, KeyDataMetadata } from '@/shared/lib/types'
+import { useEffect } from 'react'
 
 export const calculateColor = (value: number, threshold: string, liikennevalo: boolean, unit?: string) => {
   if (!liikennevalo) {
@@ -19,7 +20,7 @@ export const calculateColor = (value: number, threshold: string, liikennevalo: b
     .split(';')
     .map(str => str.replace(',', '.'))
     .map(Number)
-  
+
   if (first === 0) {
     if (value >= fourth) {
       return LightColors.DarkGreen
@@ -53,10 +54,10 @@ export const calculateKeyDataColor = (
   groupKey: GroupKey,
   level: ProgrammeLevel,
 ) => {
-  const evaluationArea = metadata.filter(data => 
+  const evaluationArea = metadata.filter(data =>
     data.arviointialue === groupKey && data.ohjelmanTaso === level
   )
-  
+
   // Return Grey if not enough data points
   if (evaluationArea.length < 2) {
     return LightColors.Grey
@@ -73,14 +74,14 @@ export const calculateKeyDataColor = (
 
   // Count missing data points and collect color counts
   let missingCount = 0
-  
+
   evaluationArea.forEach(data => {
     const value = extractKeyDataValue(programme, data)
     if (value === null) {
       missingCount++
       return
     }
-    
+
     const color = calculateColor(value, data.kynnysarvot, data.liikennevalo, data.yksikko)
     colorsCount[color]++
   })
@@ -94,22 +95,22 @@ export const calculateKeyDataColor = (
   if (missingCount === 1) {
     colorsCount[LightColors.DarkGreen]++
   }
-  
+
   // Determine final color based on the distribution of colors
   switch (true) {
     case colorsCount[LightColors.Red] >= 2:
       return LightColors.Red
-    
+
     case colorsCount[LightColors.Yellow] >= 2 || colorsCount[LightColors.Red] === 1:
       return LightColors.Yellow
-    
+
     case colorsCount[LightColors.DarkGreen] >= 3 && colorsCount[LightColors.Red] === 0:
       return LightColors.DarkGreen
-    
-    case colorsCount[LightColors.LightGreen] >= 3 || 
-         (colorsCount[LightColors.DarkGreen] >= 1 && colorsCount[LightColors.Red] === 0):
+
+    case colorsCount[LightColors.LightGreen] >= 3 ||
+      (colorsCount[LightColors.DarkGreen] >= 1 && colorsCount[LightColors.Red] === 0):
       return LightColors.LightGreen
-    
+
     default:
       return LightColors.Grey
   }
