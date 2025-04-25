@@ -13,7 +13,7 @@ describe('Textfield tests', () => {
     cy.contains('Deadline settings').click()
     cy.createDeadline(defaultYears[0], 'Vuosiseuranta - UUSI')
     cy.get('[data-cy=form-10-deadline]').contains('14.')
-    cy.visit(`/v1/programmes/10/KH50_005/2024`)
+    cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)
   })
 
   it('Should indicate that the field is locked to you', () => {
@@ -66,7 +66,7 @@ describe('Textfield tests', () => {
     })
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('be.disabled')
     cy.login(user)
-    cy.visit(`/v1/programmes/10/KH50_005/2024`)
+    cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)
     const id = `Vetovoimaisuus-Comment`
     cy.typeInTextField(id, 'Test comment')
     cy.get(`[data-cy=save-${id}]`).click()
@@ -74,14 +74,14 @@ describe('Textfield tests', () => {
 
   it('Textfield is viewonly for user without write rights', () => {
     cy.login('cypressReadingRightsUser')
-    cy.visit(`/v1/programmes/10/KH50_005/2024`)
+    cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)
     cy.contains(`Bachelor's Programme in Computer Science`).should('exist')
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })
 
   it('Page thorws no access for user without read rights', () => {
     cy.login('cypressNoRightsUser')
-    cy.visit(`/v1/programmes/10/KH50_005/2024`)
+    cy.visit(`/v1/programmes/10/KH50_005/${defaultYears[0]}`)
     cy.contains(`Bachelor's Programme in Computer Science`).should('not.exist')
     cy.get('[data-cy=edit-Vetovoimaisuus-Comment]').should('not.exist')
   })
