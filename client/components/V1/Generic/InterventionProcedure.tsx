@@ -5,6 +5,10 @@ import { Add } from "@mui/icons-material"
 const InterventionProcedure = ({ lang, programme }: { lang: 'fi' | 'se' | 'en', programme: string }) => {
   const { t } = useTranslation()
 
+  const handleClick = () => {
+    
+  }
+
   return (
     <Box sx={{ alignContent: 'left', mt: '4rem' }}>
       <Typography variant="h1">{t('interventionProcedure')} </Typography>
@@ -19,3 +23,4 @@ const InterventionProcedure = ({ lang, programme }: { lang: 'fi' | 'se' | 'en', 
 }
 
 export default InterventionProcedure
+ 

@@ -29,9 +29,8 @@ const ProgrammeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
   const dispatch: AppDispatch = useDispatch()
   const { t } = useTranslation()
-  const { programme: programmeKey } = useParams<{ programme: string }>()
+  const { programme: programmeKey, year: selectedYear } = useParams<{ programme: string, year: string }>()
   const [activeTab, setActiveTab] = useState(0)
-  const selectedYear = useSelector((state: RootState) => state.filters.keyDataYear)
   const keyData = useFetchSingleKeyData(programmeKey)
   const form = 10
 
