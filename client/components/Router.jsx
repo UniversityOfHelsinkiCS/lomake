@@ -33,6 +33,7 @@ import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/ind
 import OverviewPageV1 from './V1/Overview'
 import ProgrammeHomeView from './V1/ProgrammeHomeView'
 import ProgrammeYearlyView from './V1/ProgrammeYearlyView'
+import InterventionProcedure from './V1/Generic/InterventionProcedure'
 
 export default () => (
   <div className="content">
@@ -107,6 +108,7 @@ export default () => (
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeHomeView} />
+        <Route exact path="/V1/programme/:form/:programme/docs" component={InterventionProcedure} />
         <Route exact path="/v1/programmes/:form/:programme/:year" component={ProgrammeYearlyView} />
       </Switch>
     </ErrorBoundary>
