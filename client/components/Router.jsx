@@ -106,7 +106,7 @@ export default () => (
         />
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
-        <Route exact path="/v1/programmes-home/" component={ProgrammeHomeView} />
+        <Route exact path="/v1/programmes-home/:programme" component={ProgrammeHomeView} />
         <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeYearlyView} />
       </Switch>
     </ErrorBoundary>
