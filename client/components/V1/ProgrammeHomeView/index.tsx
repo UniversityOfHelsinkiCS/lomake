@@ -17,7 +17,7 @@ const ProgrammeHomeView = () => {
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
   const keyData = useFetchSingleKeyData(programmeKey)
-  // const form = 10
+  const form = 10
   // const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
 
   if (!keyData) {
@@ -54,7 +54,7 @@ const ProgrammeHomeView = () => {
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
         </Box>
         <Box>
-          <Button variant="outlined"><Add />{t('newDocument')}</Button>
+          <Button component={Link} href={`${basePath}v1/programme/${form}/${programmeKey}/doc`} variant="outlined"><Add />{t('newDocument')}</Button>
         </Box>
       </Box>
     </Box>
