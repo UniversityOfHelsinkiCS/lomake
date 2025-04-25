@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
 import { ProgrammeLevel } from '@/client/lib/enums'
 import { RootState, AppDispatch } from '@/client/util/store'
+import InterventionProcedure from '../Generic/InterventionProcedure'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
@@ -19,7 +20,8 @@ const ProgrammeHomeView = () => {
 
   return (
     <div>
-      <h1>{programmeKey}</h1>
+      <h1></h1>
+      <InterventionProcedure lang={lang} programme={programmeKey} />
     </div>
   )
 }
