@@ -1,16 +1,20 @@
 import { useTranslation } from "react-i18next"
-import { Typography, Container, Button } from "@mui/material"
+import { Card, Typography, Box, Button } from "@mui/material"
 import { Add } from "@mui/icons-material"
 
 const InterventionProcedure = ({ lang, programme }: { lang: 'fi' | 'se' | 'en', programme: string }) => {
   const { t } = useTranslation()
 
   return (
-    <Container maxWidth="lg" sx={{ alignContent: 'left' }}>
+    <Box sx={{ alignContent: 'left', mt: '4rem' }}>
       <Typography variant="h1">{t('interventionProcedure')} </Typography>
-      <p>{lang}-{programme}</p>
-      <Button variant="outlined"><Add />{t('newDocument')}</Button>
-    </Container>
+      <Box sx={{ mt: "2rem", mb: "2rem" }}>
+        <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
+      </Box>
+      <Box>
+        <Button variant="outlined"><Add />{t('newDocument')}</Button>
+      </Box>
+    </Box>
   )
 }
 
