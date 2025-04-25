@@ -31,8 +31,8 @@ import ErrorBoundary from './ErrorBoundary'
 import Homepage from './Homepage'
 import FacultyTrackingView from './FacultyMonitoringView/FacultyTrackingView/index'
 import OverviewPageV1 from './V1/Overview'
-import ProgrammeView from './V1/ProgrammeView/ProgrammeView'
 import ProgrammeHomeView from './V1/ProgrammeHomeView'
+import ProgrammeYearlyView from './V1/ProgrammeYearlyView'
 
 export default () => (
   <div className="content">
@@ -107,7 +107,7 @@ export default () => (
         <Route exact path="/reform-answers" component={ReformAnswers} />
         <Route exact path="/v1/overview" component={OverviewPageV1} />
         <Route exact path="/v1/programmes-home/" component={ProgrammeHomeView} />
-        <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeView} />
+        <Route exact path="/v1/programmes/:form/:programme" component={ProgrammeYearlyView} />
       </Switch>
     </ErrorBoundary>
   </div>
