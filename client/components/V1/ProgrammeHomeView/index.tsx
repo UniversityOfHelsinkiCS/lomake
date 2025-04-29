@@ -48,15 +48,7 @@ const ProgrammeHomeView = () => {
         <ProgrammeKeyDataTable />
       </Box>
 
-      <Box sx={{ alignContent: 'left', mt: '4rem' }}>
-        <Typography variant="h1">{t('interventionProcedure')} </Typography>
-        <Box sx={{ mt: "2rem", mb: "2rem" }}>
-          <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
-        </Box>
-        <Box>
-          <Button component={Link} href={`${basePath}v1/programmes/${form}/${programmeKey}/doc`} variant="outlined"><Add />{t('newDocument')}</Button>
-        </Box>
-      </Box>
+      {/* <InterventionProcedure lang={lang} programme={programmeKey} /> */}
     </Box>
   )
 }

@@ -1,27 +1,23 @@
 import React, { useState } from 'react'
 
-/*
-This component is a purpose built table for displaying key figure data.
+export interface TableConfig {
+  columns: string[] // Array of widths for each column. Width can be specified with CSS grid units (e.g. '100px', '50%', '1fr')
+  body?: {
+    firstColumnStyle?: {
+      width?: string // Width of the first column. Width can be specified with CSS grid units (e.g. '100px', '50%', '1fr')a
+      boxed?: boolean // Whether to apply a boxed style to the first column
+    }
+  }
+}
 
-Example usage:
-    <>
-      <Table>
-        <TableRow isHeader>
-            <TableCell>Header 1</TableCell>
-            <TableCell>Header 2</TableCell>
-            <TableCell disabled >Header 3</TableCell>
-        </TableRow>
+export const Table = ({ children, config }: { children: React.ReactNode; config: TableConfig }) => {
+  const childrenWithConfig = React.Children.map(children, child => {
+    if (React.isValidElement<{ config?: TableConfig }>(child)) {
+      return React.cloneElement(child, { config })
+    }
+    return child
+  })
 
-        <TableRow>
-            <TableCell itemAlign="left" hoverEffect>Item 1</TableCell>
-            <TableCell onClick={handleClick}>Item 2</TableCell>
-            <TableCell disabled >Item 3</TableCell>
-        </TableRow>
-      </Table>
-    </>
-*/
-
-export const Table = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       style={{
@@ -31,32 +27,83 @@ export const Table = ({ children }: { children: React.ReactNode }) => {
         width: '100%',
       }}
     >
-      {children}
+      {childrenWithConfig}
     </div>
   )
 }
 
-export const TableRow = ({ children, isHeader = false }: { children: React.ReactNode; isHeader?: boolean }) => {
+export const TableHead = ({ children, config }: { children: React.ReactNode; config?: TableConfig }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {React.Children.map(children, child => {
+        if (React.isValidElement<{ config?: TableConfig; isHeader?: boolean }>(child)) {
+          return React.cloneElement(child, { config, isHeader: true })
+        }
+        return child
+      })}
+    </div>
+  )
+}
+
+export const TableBody = ({ children, config }: { children: React.ReactNode; config?: TableConfig }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {React.Children.map(children, child => {
+        if (React.isValidElement<{ config?: TableConfig; isHeader?: boolean }>(child)) {
+          return React.cloneElement(child, { config, isHeader: false })
+        }
+        return child
+      })}
+    </div>
+  )
+}
+
+export const TableRow = ({
+  children,
+  config,
+  isHeader,
+}: {
+  children: React.ReactNode
+  config?: TableConfig
+  isHeader?: boolean
+}) => {
   return (
     <div
       style={{
         display: 'grid',
         gridTemplateRows: '1fr',
-        gridTemplateColumns: `2fr repeat(${React.Children.count(children) - 1}, 1fr)`,
-        boxShadow: isHeader ? 'none' : '0px 1px 3px rgba(0,0,0,0.3)',
-        borderRadius: '0.5rem',
+        gridTemplateColumns: config?.columns?.join(' ') || 'repeat(auto-fill, 1fr)',
       }}
     >
-      {React.Children.map(children, (child, index) => (
-        <div
-          style={{
-            borderRight: index < React.Children.count(children) - 1 && !isHeader ? '1px solid rgba(0,0,0,0.2)' : 'none',
-            fontWeight: isHeader ? 'bold' : 'normal',
-          }}
-        >
-          {child}
-        </div>
-      ))}
+      {React.Children.map(children, (child, index) => {
+        if (isHeader) {
+          return <div>{child}</div>
+        }
+
+        let cellStyle = {
+          backgroundColor: 'white',
+          borderRight: index < React.Children.count(children) - 1 ? '1px solid rgba(0,0,0,0.1)' : 'none',
+          boxShadow: '0px 1px 3px rgba(0,0,0,0.3)',
+          borderRadius: '0px',
+          overflow: 'hidden',
+        }
+
+        const firstColBoxed = config?.body?.firstColumnStyle?.boxed
+
+        if (!firstColBoxed && index === 0) {
+          cellStyle = null
+        } else if (!firstColBoxed && index === 1) {
+          cellStyle['borderRadius'] = '0.5rem 0px 0px 0.5rem'
+        } else if (!firstColBoxed && index === React.Children.count(children) - 1) {
+          cellStyle['borderRadius'] = '0px 0.5rem 0.5rem 0px'
+        } else if (index === 0) {
+          cellStyle['borderRadius'] = '0.5rem 0px 0px 0.5rem'
+        } else if (index === React.Children.count(children) - 1) {
+          cellStyle['borderRadius'] = '0px 0.5rem 0.5rem 0px'
+        }
+
+        return <div style={cellStyle}>{child}</div>
+      })}
     </div>
   )
 }
