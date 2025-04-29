@@ -70,7 +70,7 @@ const ProgrammeView = () => {
     }
   }, [])
 
-  if (year !== selectedYear) return <Page404 />
+  if (year !== selectedYear && inProduction) return <Page404 />
   if (!readAccess && !writeAccess) return <NoPermissions t={t} requestedForm={t('form')} />
 
   if (!keyData) {
