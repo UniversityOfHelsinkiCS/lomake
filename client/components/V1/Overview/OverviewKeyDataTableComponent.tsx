@@ -143,6 +143,16 @@ const KeyDataTableComponent = ({ facultyFilter = [], programmeLevelFilter = '', 
     return <CircularProgress />
   }
 
+  const tableConfig: TableConfig = {
+    columns: ['2fr', 'repeat(7, 1fr)'],
+    body: {
+      firstColumnStyle: {
+        width: '2fr',
+        boxed: true,
+      },
+    },
+  }
+
   return (
     <div style={{ width: '100%' }}>
       {/* Search input */}
