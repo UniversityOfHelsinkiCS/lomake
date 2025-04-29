@@ -48,7 +48,7 @@ const ProgrammeHomeView = () => {
         <ProgrammeKeyDataTable />
       </Box>
 
-      <InterventionProcedure lang={lang} programme={programmeKey} />
+      {/* <InterventionProcedure lang={lang} programme={programmeKey} /> */}
     </Box>
   )
 }
