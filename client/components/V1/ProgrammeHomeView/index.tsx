@@ -1,39 +1,58 @@
+import { useMemo } from 'react'
+import useFetchKeyData from '@/client/hooks/useFetchKeyData'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { Alert, Box, CircularProgress, IconButton, Button, Link, Tabs, Tab, Typography } from '@mui/material'
+import { Box, CircularProgress, IconButton, Button, Link, Typography } from '@mui/material'
 import { Add, ArrowBack } from '@mui/icons-material'
 import { basePath, isAdmin, hasSomeReadAccess, inProduction } from '@/config/common'
+import { KeyDataMetadata, KeyDataProgramme } from '@/shared/lib/types'
 
-import { useFetchSingleKeyData } from '../../../hooks/useFetchKeyData'
-import { ProgrammeLevel } from '@/client/lib/enums'
 import { RootState, AppDispatch } from '@/client/util/store'
 import ProgrammeKeyDataTable from './ProgrammeKeyDataTableComponent'
 import InterventionProcedure from '../Generic/InterventionProcedure'
 
 const ProgrammeHomeView = () => {
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'en' | 'se'
-  const dispatch: AppDispatch = useDispatch()
   const { t } = useTranslation()
   const { programme: programmeKey } = useParams<{ programme: string }>()
-  const keyData = useFetchSingleKeyData(programmeKey)
+
+  const dispatch: AppDispatch = useDispatch()
   const form = 10
-  // const level = programmeKey.startsWith('K') ? ProgrammeLevel.KANDI : ProgrammeLevel.MAISTERI
+
+  const keyData = useFetchKeyData()
+
+  const metadata = useMemo(() => {
+    return keyData?.data ? keyData.data.metadata : []
+  }, [keyData])
+
+  const programmeData = useMemo(() => {
+    if (keyData) {
+      const { kandiohjelmat, maisteriohjelmat } = keyData.data
+      return [...kandiohjelmat, ...maisteriohjelmat]
+    }
+    return []
+  }, [keyData])
+
+  const keyFigureData = useMemo(() => {
+    const filteredData = programmeData.filter(
+      (programmeData: KeyDataProgramme) => programmeData.koulutusohjelmakoodi === programmeKey,
+    )
+    return filteredData
+  }, [programmeData])
 
   if (!keyData) {
     return <CircularProgress />
   }
 
-  const { programme, metadata } = keyData
-
   return (
     <Box sx={{ width: '75%' }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginTop: '4rem' }}>
+      <div style={{ display: 'flex', marginTop: '4rem' }}>
         <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
 
-        <Typography variant="h2">{programme.koulutusohjelma[lang]}</Typography>
+        <Typography variant="h2">{keyFigureData[0].koulutusohjelma[lang]}</Typography>
       </div>
 
       <Typography variant="h1" style={{ marginTop: '4rem' }}>
@@ -45,10 +64,10 @@ const ProgrammeHomeView = () => {
       </Typography>
 
       <Box sx={{ mt: '4rem' }}>
-        <ProgrammeKeyDataTable programme={programme} metadata={metadata} />
+        <ProgrammeKeyDataTable programmeData={keyFigureData} metadata={metadata} />
       </Box>
 
-      <Box sx={{ alignContent: 'left', mt: '4rem' }}>
+      <Box sx={{ mt: '8rem' }}>
         <Typography variant="h1">{t('interventionProcedure')} </Typography>
         <Box sx={{ mt: '2rem', mb: '2rem' }}>
           <Typography variant="light">LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem</Typography>
