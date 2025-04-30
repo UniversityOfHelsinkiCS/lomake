@@ -24,7 +24,7 @@ const InterventionProcedure = () => {
 
   const props = {
     title: 'Vetovoimaisuus',
-    groupKey: 'VETOVOIMA' as GroupKey,
+    groupKey: 'Vetovoimaisuus' as GroupKey,
     description: '',
     textField: true,
   }
