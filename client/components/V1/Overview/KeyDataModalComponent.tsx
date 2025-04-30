@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
-import { RootState } from '@/client/util/store'
+import { RootState, AppDispatch } from '@/client/util/store'
 import { getReport } from '@/client/util/redux/reportsSlicer'
 import { wsLeaveRoom } from '@/client/util/redux/websocketReducer.js'
 import { setViewOnly } from '@/client/util/redux/formReducer'
@@ -32,7 +32,7 @@ interface DataModalProps {
 export default function KeyDataModalComponent({ data, open, setOpen }: DataModalProps) {
   const form = 10
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const lang = useSelector((state: RootState) => state.language) as 'fi' | 'se' | 'en'
 
   // TODO: When the year is coded into the key data itself, remove this and implement the year from that data
