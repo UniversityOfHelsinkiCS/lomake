@@ -128,7 +128,7 @@ const programmeKeyDataTableComponent = ({
                     to={`/v1/programmes/10/${programmeData.koulutusohjelmakoodi}/${programmeData.year}`}
                     style={{ width: '100%' }}
                   >
-                    <Typography variant="regular">{programmeData.year}</Typography>
+                    <Typography variant="h5">{programmeData.year}</Typography>
                   </Link>
                 </TableCell>
 
