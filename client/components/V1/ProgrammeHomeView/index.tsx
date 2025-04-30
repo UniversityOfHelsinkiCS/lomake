@@ -47,7 +47,7 @@ const ProgrammeHomeView = () => {
 
   return (
     <Box sx={{ width: '75%' }}>
-      <div style={{ display: 'flex', marginTop: '4rem' }}>
+      <div style={{ display: 'flex', marginTop: '4rem', alignItems: 'center' }}>
         <IconButton component={Link} href={`${basePath}v1/overview`} sx={{ marginRight: 2 }}>
           <ArrowBack />
         </IconButton>
